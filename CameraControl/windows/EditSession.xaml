@@ -1,0 +1,85 @@
+<Controls:MetroWindow x:Class="CameraControl.windows.EditSession"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension SessionWindowTitle}" Height="484" Width="416" Loaded="Window_Loaded" ResizeMode="NoResize" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
+                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      WindowStartupLocation="CenterScreen" Topmost="True">
+    <!--<Window.DataContext>
+        <Classes:PhotoSession/>
+    </Window.DataContext>-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="232*" />
+            <RowDefinition Height="46*" />
+        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem Header="{T:TranslateExtension LabelGeneral}">
+                <StackPanel Margin="5" >
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Label Content="{T:TranslateExtension LabelSessonName}" Width="150" HorizontalContentAlignment="Right" />
+                        <TextBox Text="{Binding Path=Name}" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Label Content="{T:TranslateExtension LabelFolder}" Width="150" HorizontalContentAlignment="Right" />
+                        <TextBox Text="{Binding Path=Folder}" Width="200"/>
+                        <Button Name="btn_browse" Content=" ... " Click="btn_browse_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Label Content="{T:TranslateExtension LabelFileNameTemplate}" Width="150" HorizontalContentAlignment="Right" />
+                        <TextBox Text="{Binding Path=FileNameTemplate}" Width="200" ToolTip="{T:TranslateExtension LabelFileNameTemplateToolTip}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Label Content="{T:TranslateExtension LabelCounter}" Width="150" HorizontalContentAlignment="Right" />
+                        <Controls:NumericUpDown Value="{Binding Path=Counter}" Width="200" Minimum="0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Label Content="{T:TranslateExtension LabelLeadingZeros}" Width="150" HorizontalContentAlignment="Right" />
+                        <Controls:NumericUpDown Value="{Binding Path=LeadingZeros}" Width="200" Minimum="1" Maximum="10"/>
+                    </StackPanel>
+                    <CheckBox Content="{T:TranslateExtension LabelUseOriginal}" ToolTip="{T:TranslateExtension LabelUseOriginalToolTip}" IsChecked="{Binding Path=UseOriginalFilename}" Margin="2"/>
+                    <CheckBox Content="{T:TranslateExtension LabelAlowFolderChange}" IsChecked="{Binding Path=AlowFolderChange}" Margin="2"/>
+                    <CheckBox Content="{T:TranslateExtension LabelUseCameraCounter}" ToolTip="" IsChecked="{Binding Path=UseCameraCounter}" Margin="2"/>
+                    <CheckBox Content="{T:TranslateExtension LabelDownloadJpgOnly}" ToolTip="{T:TranslateExtension LabelDownloadJpgOnlyToolTip}" IsChecked="{Binding Path=DownloadOnlyJpg}" Margin="2"/>
+                    <CheckBox Content="{T:TranslateExtension LabelWriteComments}" IsChecked="{Binding Path=WriteComment}" Margin="2"/>
+                    <CheckBox Content="{T:TranslateExtension LabelAllowOverWrite}" IsChecked="{Binding Path=AllowOverWrite}" Margin="2"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelTags}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <ListBox Name="lst_tags" Margin="3" ItemsSource="{Binding Path=Tags}"/>
+                    <Button Content="{T:TranslateExtension ButtonAdd}" Grid.Column="1" Height="23" Margin="20,40,20,0" Name="btn_add_tag" VerticalAlignment="Top" Click="btn_add_tag_Click" />
+                    <Button Content="{T:TranslateExtension ButtonDelete}" Grid.Column="1" Height="23" Margin="20,80,20,0" Name="btn_del_tag" VerticalAlignment="Top" Click="btn_del_tag_Click" />
+                    <Button Content="{T:TranslateExtension ButtonEdit}" Grid.Column="1" Height="23" Margin="20,120,20,0" Name="btn_edit_tag" VerticalAlignment="Top" Click="btn_edit_tag_Click" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="{T:TranslateExtension ButtonOk}" Grid.Row="1" HorizontalAlignment="Left" Margin="12,0,0,12" Name="button1" Width="75" Height="23" VerticalAlignment="Bottom" Click="button1_Click" IsDefault="True" />
+        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Row="1" Margin="0,0,12,12" Name="button2" HorizontalAlignment="Right" Width="75" Height="23" VerticalAlignment="Bottom" Click="button2_Click" IsCancel="True" />
+    </Grid>
+</Controls:MetroWindow>

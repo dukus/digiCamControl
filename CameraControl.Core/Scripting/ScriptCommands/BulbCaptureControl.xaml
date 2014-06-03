@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="CameraControl.Core.Scripting.ScriptCommands.BulbCaptureControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:T="clr-namespace:CameraControl.Core.Translation" mc:Ignorable="d" 
+             d:DesignHeight="153" d:DesignWidth="450" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:Classes="clr-namespace:CameraControl.Core.Scripting.ScriptCommands"
+             xmlns:Core="clr-namespace:CameraControl.Core">
+    <UserControl.DataContext>
+        <Classes:BulbCapture/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="126*" />
+            <ColumnDefinition Width="322*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*" />
+            <RowDefinition Height="35*" />
+            <RowDefinition Height="35*" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <Label Content="{T:TranslateExtension LabelCaptureTime}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding Path=CaptureTime}" Margin="3" Minimum="1"/>
+
+        <Label Grid.Row="1" Content="{T:TranslateExtension Iso}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <ComboBox Grid.Column="1" Grid.Row="1" Margin="3" SelectedValue="{Binding Path=Iso}" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsoNumber.Values}"/>
+
+        <Label Grid.Row="2" Content="{T:TranslateExtension Aperture}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <ComboBox Grid.Column="1" Grid.Row="2" Margin="3" SelectedValue="{Binding Path=Aperture}" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.FNumber.Values}"/>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Typesafe.Mailgun</name>
+    </assembly>
+    <members>
+        <member name="T:Typesafe.Mailgun.IMailgunClient">
+            <summary>
+            Provides access to the Mailgun REST API.
+            </summary>
+        </member>
+        <member name="M:Typesafe.Mailgun.IMailgunClient.SendMail(System.Net.Mail.MailMessage)">
+            <summary>
+            Sends email through the mailgun client.
+            </summary>
+            <param name="mailMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Typesafe.Mailgun.CommandResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Typesafe.Mailgun.Http.AttachmentFormPart">
+            <summary>
+            Represents an multipart form part for a file attachment.
+            </summary>
+        </member>
+        <member name="T:Typesafe.Mailgun.Http.FormPart">
+            <summary>
+            Represents an multipart form part.
+            </summary>
+        </member>
+        <member name="T:Typesafe.Mailgun.MailgunClient">
+            <summary>
+            Provides access to the Mailgun REST API.
+            </summary>
+        </member>
+        <member name="M:Typesafe.Mailgun.MailgunClient.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new client for the specified domain and api key.
+            </summary>
+        </member>
+        <member name="T:Typesafe.Mailgun.Statistics.MailgunStatEntry">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

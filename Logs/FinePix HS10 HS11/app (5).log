@@ -1,0 +1,105 @@
+2013-02-13 00:28:27,562 [1]ERROR DCC [(null)] - Unhandled error 
+System.Runtime.InteropServices.COMException (0x80040154): Retrieving the COM class factory for component with CLSID {E1C5D730-7E97-4D8A-9E42-BBAE87C2059F} failed due to the following error: 80040154 Class not registered (Exception from HRESULT: 0x80040154 (REGDB_E_CLASSNOTREG)).
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipVisibilityChecks, Boolean skipCheckThis, Boolean fillCache)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   at System.Activator.CreateInstance(Type type)
+   at CameraControl.Devices.CameraDeviceManager..ctor() in d:\devel\vs2010\CameraControl\CameraControl.Devices\CameraDeviceManager.cs:line 111
+   at CameraControl.Core.ServiceProvider.Configure() in d:\devel\vs2010\CameraControl\CameraControl.Core\ServiceProvider.cs:line 36
+   at CameraControl.StartUpWindow.InitApplication() in d:\devel\vs2010\CameraControl\CameraControl\StartUpWindow.xaml.cs:line 52
+   at CameraControl.StartUpWindow.Window_Loaded(Object sender, RoutedEventArgs e) in d:\devel\vs2010\CameraControl\CameraControl\StartUpWindow.xaml.cs:line 44
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.Resize(ICompositionTarget resizedCompositionTarget)
+   at System.Windows.Interop.HwndTarget.OnResize()
+   at System.Windows.Interop.HwndTarget.HandleMessage(WindowMessage msg, IntPtr wparam, IntPtr lparam)
+   at System.Windows.Interop.HwndSource.HwndTargetFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at MS.Internal.Threading.ExceptionFilterHelper.TryCatchWhen(Object source, Delegate method, Object args, Int32 numArgs, Delegate catchHandler)
+2013-02-13 00:28:45,421 [1]DEBUG DCC [(null)] - --------------------------------===========================Application starting===========================--------------------------------
+2013-02-13 00:28:45,468 [1]DEBUG DCC [(null)] - Application version : 0.9.444.0
+2013-02-13 00:28:51,015 [1]DEBUG DCC [(null)] - LoadPlugins from:C:\Program Files\digiCamControl\Plugins\CameraControl.Plugins.dll
+2013-02-13 00:29:42,312 [1]DEBUG DCC [(null)] - Window command received :All_Close
+2013-02-16 20:38:19,296 [1]DEBUG DCC [(null)] - --------------------------------===========================Application starting===========================--------------------------------
+2013-02-16 20:38:19,500 [1]DEBUG DCC [(null)] - Application version : 0.9.444.0
+2013-02-16 20:38:28,625 [1]DEBUG DCC [(null)] - LoadPlugins from:C:\Program Files\digiCamControl\Plugins\CameraControl.Plugins.dll
+2013-02-16 20:41:36,468 [1]DEBUG DCC [(null)] - Window command received :All_Close
+2013-02-16 20:41:44,375 [1]DEBUG DCC [(null)] - --------------------------------===========================Application starting===========================--------------------------------
+2013-02-16 20:41:44,437 [1]DEBUG DCC [(null)] - Application version : 0.9.444.0
+2013-02-16 20:41:46,234 [1]DEBUG DCC [(null)] - LoadPlugins from:C:\Program Files\digiCamControl\Plugins\CameraControl.Plugins.dll
+2013-02-16 20:44:51,671 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Show
+2013-02-16 20:45:57,468 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Hide
+2013-02-16 20:46:00,015 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Show
+2013-02-16 20:46:06,843 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Hide
+2013-02-16 20:46:51,671 [1]DEBUG DCC [(null)] - Window command received :All_Close
+2013-02-16 20:46:59,187 [1]DEBUG DCC [(null)] - --------------------------------===========================Application starting===========================--------------------------------
+2013-02-16 20:46:59,250 [1]DEBUG DCC [(null)] - Application version : 0.9.444.0
+2013-02-16 20:47:01,062 [1]DEBUG DCC [(null)] - LoadPlugins from:C:\Program Files\digiCamControl\Plugins\CameraControl.Plugins.dll
+2013-02-16 20:47:25,031 [1]DEBUG DCC [(null)] - Window command received :BrowseWnd_Show
+2013-02-16 20:47:31,187 [1]DEBUG DCC [(null)] - Window command received :BrowseWnd_Hide
+2013-02-16 20:47:35,390 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Show
+2013-02-16 20:47:46,765 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Hide
+2013-02-16 20:57:35,500 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Show
+2013-02-16 20:58:27,031 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Hide
+2013-02-16 20:58:29,296 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Show
+2013-02-16 20:59:00,750 [1]DEBUG DCC [(null)] - Wia Camera Found: E-620
+2013-02-16 20:59:05,843 [1]DEBUG DCC [(null)] - Init error
+System.Runtime.InteropServices.COMException (0x8021006A): Exception from HRESULT: 0x8021006A
+   at WIA.IProperties.get_Item(Object& Index)
+   at CameraControl.Devices.Others.WiaCameraDevice.Init(DeviceDescriptor deviceDescriptor) in d:\devel\vs2010\CameraControl\CameraControl.Devices\Others\WiaCameraDevice.cs:line 179
+2013-02-16 20:59:06,546 [1]DEBUG DCC [(null)] - No translation for:|
+2013-02-16 20:59:06,546 [1]DEBUG DCC [(null)] - ===========Camera is connected==============
+2013-02-16 20:59:06,546 [1]DEBUG DCC [(null)] - Driver :WiaCameraDevice
+2013-02-16 20:59:06,546 [1]DEBUG DCC [(null)] - Name :E-620
+2013-02-16 20:59:06,546 [1]DEBUG DCC [(null)] - Manufacturer :Generic
+2013-02-16 21:01:18,375 [7]ERROR DCC [(null)] - System.NotImplementedException: The method or operation is not implemented.
+   at WIA.IDevice.ExecuteCommand(String CommandID)
+   at CameraControl.Devices.Others.WiaCameraDevice.CapturePhoto() in d:\devel\vs2010\CameraControl\CameraControl.Devices\Others\WiaCameraDevice.cs:line 636
+   at CameraControl.windows.MultipleCameraWnd.<>c__DisplayClass8.<CapturePhotos>b__6() in d:\devel\vs2010\CameraControl\CameraControl\windows\MultipleCameraWnd.xaml.cs:line 136
+2013-02-16 21:01:26,796 [1]DEBUG DCC [(null)] - Window command received :MultipleCameraWnd_Hide
+2013-02-16 21:01:41,656 [1]DEBUG DCC [(null)] - Main window capture started
+2013-02-16 21:01:41,656 [1]ERROR DCC [(null)] - Take photo
+System.NotImplementedException: The method or operation is not implemented.
+   at WIA.IDevice.ExecuteCommand(String CommandID)
+   at CameraControl.Devices.Others.WiaCameraDevice.CapturePhoto() in d:\devel\vs2010\CameraControl\CameraControl.Devices\Others\WiaCameraDevice.cs:line 636
+   at CameraControl.MainWindow.button3_Click(Object sender, RoutedEventArgs e) in d:\devel\vs2010\CameraControl\CameraControl\MainWindow.xaml.cs:line 232
+2013-02-16 21:01:46,796 [1]ERROR DCC [(null)] - Error loading file list
+System.NotImplementedException: The method or operation is not implemented.
+   at CameraControl.Devices.BaseCameraDevice.GetObjects(Object storageId) in d:\devel\vs2010\CameraControl\CameraControl.Devices\BaseCameraDevice.cs:line 406
+   at CameraControl.windows.DownloadPhotosWnd.PopulateImageList() in d:\devel\vs2010\CameraControl\CameraControl\windows\DownloadPhotosWnd.xaml.cs:line 129
+2013-02-16 21:01:46,875 [1]DEBUG DCC [(null)] - Window command received :DownloadPhotosWnd_Show
+2013-02-16 21:01:47,875 [1]DEBUG DCC [(null)] - Window command received :DownloadPhotosWnd_Hide
+2013-02-16 21:04:58,671 [1]DEBUG DCC [(null)] - Window command received :CameraPropertyWnd_Show
+2013-02-16 21:05:04,859 [1]DEBUG DCC [(null)] - Window command received :CameraPropertyWnd_Hide
+2013-02-16 21:06:36,484 [1]DEBUG DCC [(null)] - ===========Camera disconnected==============
+2013-02-16 21:06:36,484 [1]DEBUG DCC [(null)] - Name :E-620
+2013-02-16 21:08:44,937 [1]DEBUG DCC [(null)] - Wia Camera Found: FinePix HS10 HS11
+2013-02-16 21:08:53,171 [1]DEBUG DCC [(null)] - Init error
+System.Runtime.InteropServices.COMException (0x8021006A): Exception from HRESULT: 0x8021006A
+   at WIA.IProperties.get_Item(Object& Index)
+   at CameraControl.Devices.Others.WiaCameraDevice.Init(DeviceDescriptor deviceDescriptor) in d:\devel\vs2010\CameraControl\CameraControl.Devices\Others\WiaCameraDevice.cs:line 179
+2013-02-16 21:08:53,671 [1]DEBUG DCC [(null)] - No translation for:|
+2013-02-16 21:08:53,671 [1]DEBUG DCC [(null)] - ===========Camera is connected==============
+2013-02-16 21:08:53,671 [1]DEBUG DCC [(null)] - Driver :WiaCameraDevice
+2013-02-16 21:08:53,671 [1]DEBUG DCC [(null)] - Name :FinePix HS10 HS11
+2013-02-16 21:08:53,671 [1]DEBUG DCC [(null)] - Manufacturer :Generic
+2013-02-16 21:10:03,656 [1]DEBUG DCC [(null)] - Main window capture started
+2013-02-16 21:10:03,671 [1]ERROR DCC [(null)] - Take photo
+System.NotImplementedException: The method or operation is not implemented.
+   at WIA.IDevice.ExecuteCommand(String CommandID)
+   at CameraControl.Devices.Others.WiaCameraDevice.CapturePhoto() in d:\devel\vs2010\CameraControl\CameraControl.Devices\Others\WiaCameraDevice.cs:line 636
+   at CameraControl.MainWindow.button3_Click(Object sender, RoutedEventArgs e) in d:\devel\vs2010\CameraControl\CameraControl\MainWindow.xaml.cs:line 232
+2013-02-16 21:10:12,203 [1]DEBUG DCC [(null)] - Window command received :CameraPropertyWnd_Show
+2013-02-16 21:10:16,546 [1]DEBUG DCC [(null)] - Window command received :CameraPropertyWnd_Hide

@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="BURST_NUMBER">Seri çekim sayısı</string>
+  <string name="STILL_CAPTURE_MODE">Hala Çekim Modu</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Sürekli çekim</string>
+  <string name="AUTO_ISO">Otomatik ISO</string>
+  <string name="ON">Açık</string>
+  <string name="OFF">Kapalı</string>
+  <string name="FLASH">Flash</string>
+  <string name="NORMAL_SYNCHRONIZATION">Normal senkronizasyon</string>
+  <string name="LONG_EXP._NR">Aşırı pozlama gürültüsü azaltma</string>
+  <string name="HIGH_ISO_NR">Yüksek ISO gürültüsü azaltma</string>
+  <string name="NORMAL">Normal</string>
+  <string name="EXPOSURE_DELAY_MODE">Pozlama gecikme modu</string>
+  <string name="LOCK">Kilit</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Tekli çekim(tek kare çekimi)</string>
+  <string name="SELF_TIMER">Otomatik deklanşör</string>
+  <string name="QUICK_RESPONSE_REMOTE">Uzaktan hızlı yanıtlama</string>
+  <string name="2S_DELAYED_REMOTE">2sn gecikmeli</string>
+  <string name="QUIET_SHOOTING">Sessiz çekim</string>
+  <string name="FLASH_PROHIBITED">Flashı engelle</string>
+  <string name="RED_EYE_REDUCTION">Kırmızı göz düzeltimi</string>
+  <string name="SLOW_SYNCHRONIZATION">Yavaş senkronizasyon</string>
+  <string name="REAR_SYNCHRONIZATION">Normal senkronizasyon</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Yavaş senkronizasyonda kırmızı göz düzeltme</string>
+  <string name="NOT_PERFORMED">Gerçekleştirilmedi</string>
+  <string name="LOW">Düşük</string>
+  <string name="HIGH">Yüksek</string>
+  <string name="CENTER_WEIGHTED_METERING">Merkez ağırlıklı ölçüm</string>
+  <string name="MULTI_PATTERN_METERING">Çoklu desen ölçümü</string>
+  <string name="SPOT_METERING">Nokta ölçümü</string>
+  <string name="AUTO">Otomatik</string>
+  <string name="DAYLIGHT">Gün ışığı</string>
+  <string name="FLUORESCENT_">Floresan</string>
+  <string name="INCANDESCENT">Sarı ışıkta</string>
+  <string name="CLOUDY">Bulutlu</string>
+  <string name="SHADE">Gölgeli</string>
+  <string name="CUSTOM">Özel</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] AF servo modu otomatik değişimi</string>
+  <!--End Property values-->
+  <string name="Mode">Mod</string>
+  <string name="Iso">_Iso</string>
+  <string name="ShutterSpeed">_Enstantane</string>
+  <string name="Aperture">_Diyafram</string>
+  <string name="WhiteBalance">_Beyaz dengesi</string>
+  <string name="ExposureComp">_Pozlama telafisi</string>
+  <string name="Compression">_Sıkıştırma</string>
+  <string name="MeteringMode">_Ölçme Modu</string>
+  <string name="FocusMode">_Odaklama modu</string>
+  <string name="Battery">Pil</string>
+  <string name="SDRam">SD_Ram</string>
+  <string name="SDRamToolTip">Kart kullanmadan görüntüleri direkt olarak bilgisayara aktar</string>
+  <string name="CapturePhotoToolTip">Fotoğraf çek</string>
+  <string name="CapturePhotoNoAfToolTip">Otomatik odaklama olmadan fotoğraf çek</string>
+  <string name="BraketingToolTip">Basamaklama</string>
+  <string name="SettingsToolTip">Ayarlar</string>
+  <string name="TimeLapseToolTip">Aralıklı çekim</string>
+  <string name="FullscreenToolTip">Tam Ekran</string>
+  <string name="LiveViewToolTip">Canlı görünüm</string>
+  <string name="BrowseSessionsToolTip">Oturumları tara</string>
+  <string name="SelectTagsToolTip">Etiketleri seç</string>
+  <string name="AboutToolTip">Hakkında</string>
+  <string name="Session">Oturum</string>
+  <string name="SessionAdd">Ekle</string>
+  <string name="SessionEdit">Düzenle</string>
+  <string name="SessionDel">Sil</string>
+  <string name="MainWindowTitle">NCC- Çevrildi</string>
+  <string name="SettingsWindowTitle">Ayarlar</string>
+  <string name="SessionWindowTitle">Oturum[Ekle/Değiştir]</string>
+  <string name="LiveViewWindowTitle">Canlı Görünüm</string>
+  <string name="PresetEditWindowTitle">Ön Ayarı düzenle</string>
+  <string name="BraketingWindowTitle">Basamaklama</string>
+  <string name="EditTagWindowTitle">Etiket[Ekle/Düzenle]</string>
+  <string name="MultipleCameraWindowTitle">Çoklu kamera desteği</string>
+  <string name="SavePresetWindowTitle">Ön Ayarı Kaydet</string>
+  <string name="TimeLapseWindowTitle">Aralıklı Çekim</string>
+  <string name="ButtonOk">Tamam</string>
+  <string name="ButtonCancel">İptal</string>
+  <string name="ButtonAdd">Ekle</string>
+  <string name="ButtonDelete">Sil</string>
+  <string name="ButtonEdit">Düzenle</string>
+  <string name="ButtonAutoFocus">_Otomatik Odaklama</string>
+  <string name="ButtonCapture">_Çek</string>
+  <string name="ButtonRecordMovie">Video çek</string>
+  <string name="ButtonFreezeImage">Görüntüyü Dondur</string>
+  <string name="ButtonStart">Başla</string>
+  <string name="ButtonPreview">Önizleme</string>
+  <string name="ButtonStop">Dur</string>
+  <string name="ButtonDeletePreset">Ön Ayarı Sil</string>
+  <string name="ButtonDeleteProperty">Özelliği sil</string>
+  <string name="ButtonClose">Kapat</string>
+  <string name="ButtonSave">Kaydet</string>
+  <string name="ButtonCapturePhotos">Fotoğraf çek</string>
+  <string name="ButtonStartTimeLapse">Aralıklı Çekimi başlat</string>
+  <string name="ButtonStopTimeLapse">Aralıklı Çekimi durdur</string>
+  <string name="ButtonCreateMovie">Video oluştur</string>
+  <string name="ButtonLocateLogFile">log dosyasını konumla</string>
+  <string name="LabelInterfaceLanguage">Arayüz dili: </string>
+  <string name="LabelDisableDriver">Yerel sürücüleri devre dışı bırak(önerilmez)</string>
+  <string name="LabelTheme">Tema:</string>
+  <string name="LabelGeneral">Genel</string>
+  <string name="LabelPreview">Önizleme</string>
+  <string name="LabelPlaySound">Fotoğraf çekilirken ses çal</string>
+  <string name="LabelAutoPreview">Otomatik önizleme</string>
+  <string name="LabelPreviewAfterCapture">Çekim sonrası fotoğrafı tam ekranda önizleme</string>
+  <string name="LabelPreviewTime">Önizleme süresi(sn):</string>
+  <string name="LabelPreviewInLIveView">Çekim sonrası fotoğrafı canlı görünümde önizleme</string>
+  <string name="LabelLIveViewImageFreeze">Görüntü dondurma(sn):</string>
+  <string name="LabelRotateImage">Görüntüyü çevir</string>
+  <string name="LabelDontLoadThumbs">Küçük resimleri yükleme</string>
+  <string name="LabelFullscrenBack">Tam ekran penceresi arkaplanı:</string>
+  <string name="LabelTriggers">Deklanşörler</string>
+  <string name="LabelUseKeybordToTrigger">Deklanşör olarak klavyeyi kullan</string>
+  <string name="LabelWebserver">Web Sunucusu</string>
+  <string name="LabelUseWebserver">Web Sunucusu kullan</string>
+  <string name="LabelFocusAndLiveview">Odaklama ve Canlı görünüm</string>
+  <string name="LabelSmallFocusSstep">Küçük odaklama aşaması</string>
+  <string name="LabelMediumFocusStep">Orta odaklama aşaması</string>
+  <string name="LabelLargFocusStep">Büyük odaklama aşaması</string>
+  <string name="ReStartToolTip">Değişikliklerin uygulanması için programı tekrar başlatmanız gerekiyor</string>
+  <string name="LabelSessonName">Oturum adı:</string>
+  <string name="LabelFolder">Klasör:</string>
+  <string name="LabelFileNameTemplate">Dosya İsmi Şablonu:</string>
+  <string name="LabelCounter">Sayıcı:</string>
+  <string name="LabelUseOriginal">Kamera tarafından verilen orijinal dosya adını kullan</string>
+  <string name="LabelUseOriginalToolTip">Bu seçenek WIA sürücüsü ile çalışmıyor</string>
+  <string name="LabelDontDownloadPhotos">Fotoğrafları bilgisayara indirme</string>
+  <string name="LabelAlowFolderChange">Görüntü tarayıcısını kullanarak klasör değişimine izin ver</string>
+  <string name="LabelTags">Etiketler</string>
+  <string name="LabelManualFocus">Manuel odaklama</string>
+  <string name="LabelGrid">Listeleme</string>
+  <string name="LabelLvZoomRation">Lv zoom miktarı</string>
+  <string name="LabelFocusStacking">İstifleme Odak</string>
+  <string name="LabelNoOfPhots">Fotoğraf numaraları</string>
+  <string name="LabelFocusStep">Odak adımı</string>
+  <string name="LabelLuminosity">Parlaklık</string>
+  <string name="LabelExposureBracketing">Pozlama basamaklandırma</string>
+  <string name="LabelExposureBracketingToolTip">Kamerayı Diyafram moduna alın ve en sağlıklı sonuçlar için Otomatik ISO ve Otomatik Beyaz Dengesini kapatın.</string>
+  <string name="LabelManualExposureBracketing">Manuel Pozlama basamaklandırma</string>
+  <string name="LabelManualExposureBracketingToolTip">Kamerayı Manuel(M) moda alın ve en sağlıklı sonuçlar için Otomatik ISO ve Otomatik Beyaz Dengesini kapatın.</string>
+  <string name="LabelPresetBracketing">Pozlama basamaklandırma</string>
+  <string name="LabelTagDisplayValue">Değeri görüntüle</string>
+  <string name="LabelTagValue">Değer</string>
+  <string name="LabelTagIncludeInGroup1">Grup 1\'de dahil</string>
+  <string name="LabelTagIncludeInGroup2">Grup 2de dahil</string>
+  <string name="LabelTagIncludeInGroup3">Grup 3\'de dahil</string>
+  <string name="LabelTagIncludeInGroup4">Grup 4\'de dahil</string>
+  <string name="LabelDelay">Gecikme(ms)</string>
+  <string name="LabelNumberOfCaptures">Görüntü sayısı</string>
+  <string name="LabelWaitTime">Bekleme süresi(sn)</string>
+  <string name="LabelDisableAutofocus">Otomatik odaklama devre dışı</string>
+  <string name="LabelConnectedCameras">Kameralara bağlanıldı</string>
+  <string name="LabelPresetName">Ön ayar adı: </string>
+  <string name="LabelTimeLapse">Aralıklı çekim</string>
+  <string name="LabelSecondsBetweenShots">Çekimler arası saniyeler</string>
+  <string name="LabelNumberOfPhotos">Fotoğraf sayıları</string>
+  <string name="LabelDontAutofocusOnEveryCapture">Her çekimde otomatik odaklama kullanma</string>
+  <string name="LabelCaptureInterval">Çekim aralığı(sa:dk:sn)</string>
+  <string name="LabelMovieLenght">Video uzunluğu (sa:dk:sn)</string>
+  <string name="LabelMovieSettings">Video ayarları</string>
+  <string name="LabelVideoFormat">Video formatı</string>
+  <string name="LabelOutputFile">Çıktı dosyası</string>
+  <string name="LabelFps">Fps</string>
+  <string name="LabelFillImage">Görüntüyü doldur</string>
+  <string name="LabelCreateMovie">Video oluştur</string>
+  <string name="LabelAddVirtualMovingToVideo">Videoya sanal hareket ekle</string>
+  <string name="LabelMovingSurface">Arayüz taşınıyor (%):</string>
+  <string name="LabelMovingDirection">Hareket yönü:</string>
+  <string name="LabelMovingDirectionLeftToRight">Soldan Sağa</string>
+  <string name="LabelMovingDirectionRightToLeft">Sağdan Sola</string>
+  <string name="LabelMovingDirectionTopToBottom">Yukarıdan Aşağıya</string>
+  <string name="LabelMovingDirectionBottomToTop">Aşağıdan Yukarıya</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">Sol/Üstten Sağ/Alta</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">Sağ/Alttan Sol/Üste</string>
+  <string name="LabelImageAlignment">Görüntü hizzalama:</string>
+  <string name="LabelImageAlignmentLeftTop">Sol/Üst</string>
+  <string name="LabelImageAlignmentCenter">Merkez</string>
+  <string name="LabelImageAlignmentRightBottom">Sağ/Alt</string>
+  <string name="LabelVideoCodecProblem">Video codec problemi</string>
+  <string name="MsgPhotoTransferBegin">Fotoğraf aktarımı başladı</string>
+  <string name="MsgPhotoTransferDone">Fotoğraf aktarımı tamamlandı </string>
+  <string name="MsgPhotoTransferError">Aktarım başarısız ! \n Mesaj:{0}</string>
+  <string name="MsgBulbModeNotSupported">Bulb modu desteklenmiyor !</string>
+  <string name="MsgApplicationUpToDate">Yazılımınız güncellendi !</string>
+  <string name="MsgUseSessionEditorTags">Etiketleri tanımlamak için oturum düzenleyicisini kullanınız !</string>
+  <string name="MsgLastSessionCantBeDeleted">Son oturum silinemez</string>
+  <string name="MsgStopTimeLapse">Aralıklı çekim bitmedi! Durdurmak ister misiniz</string>
+  <string name="MsgInstallXvidCodec">Xvid codec yüklü değil ! \nİndirip yüklemek ister misiniz?</string>
+  <string name="MsgDeleteSessionQuestion">{0} oturumunu silmek istiyor musunuz? \n Hiçbir dosya silinmeyecek !</string>
+  <string name="MsgBracketingDone">Basamaklama tamamlandı</string>
+  <string name="MsgActionInProgress">Action in progress {0}/{1}</string>
+  <string name="MenuFile">_Dosya</string>
+  <string name="MenuReScan">Bağlı kameralar tekrar taranıyor</string>
+  <string name="MenuConnectedCameras">Kameralara bağlanıldı</string>
+  <string name="MenuExit">Çıkış</string>
+  <string name="MenuView">_Görünüm</string>
+  <string name="MenuMultipleCamera">Çoklu kamera kontrolü</string>
+  <string name="MenuSelectedCameraProperty">Seçili kamera özelliği</string>
+  <string name="MenuPresets">Ön ayarlar</string>
+  <string name="MenuPresetsLoad">Yükleme</string>
+  <string name="MenuPresetsSave">Kaydet</string>
+  <string name="MenuPresetsEdit">Düzenle</string>
+  <string name="MenuHelp">_Yardım</string>
+  <string name="MenuHomePage">Anasayfa</string>
+  <string name="MenuCheckForUpdate">Güncellemeleri kontrol et</string>
+  <string name="MenuDonate">Bağış yapın</string>
+  <string name="MenuAbout">Hakkında</string>
+  <string name="MenuLayout">Düzen</string>
+  <string name="MenuLayoutNormal">Normal</string>
+  <string name="MenuLayoutGridRight">Sağa dayalı listeleme</string>
+  <string name="MenuLayoutGrid">Listeleme</string>
+  <string name="MenuProperties">Özellikler</string>
+  <string name="MenuUseSelectedCameraPreset">Seçilen kamera ön ayarını kullan</string>
+  <!--15/10/2012-->
+  <string name="LabelExternalViewerPath">Harici görüntüleyici kullan</string>
+  <string name="LabelStayOnTop">Her zaman üstte</string>
+  <!--22/10/2012-->
+  <string name="LabelDisplay">Görünüm</string>
+  <string name="LabelMotionDetection">Hareket yakalama</string>
+  <string name="LabelActivateMotionDetection">Hareket algılama aktif</string>
+  <string name="LabelCaptureWhenMove">Hareket algılandığında çek</string>
+  <string name="LabelThreshold">Sınır (%)</string>
+  <string name="LabelWaitMoion">Bekleme süresi(sn)</string>
+  <!--25/10/2012-->
+  <string name="LabelAutofocusBeforeCapture">Çekimden önce otomatik odaklanma</string>
+  <!--26/10/2012-->
+  <string name="LabelOpacity">Şeffaflık</string>
+  <!--29/10/2012-->
+  <string name="LabelMotionDetectionType">Hareket algılama türü</string>
+  <string name="LabelTwoFramesDifferenceDetector">İki Çerçeveli Farklı Algılayıcı</string>
+  <string name="LabelSimpleBackgroundModelingDetector">Basit Arkaplan Modelleme Algılayıcısı</string>
+  <string name="LabelSmallestBlockSize">En küçük blok boyutu</string>
+  <string name="ButtonHelp">Yardım</string>
+  <!--31/10/2012-->
+  <string name="LabelMenu">Menü</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">Forum</string>
+  <!--07/11/2012-->
+  <string name="ButtonGetRawCodec">Ham codec\'i getir</string>
+  <!--08/11/2012-->
+  <string name="LabelErrorRecordMovie">Video kaydı başlatımında hata</string>
+  <string name="LabelNoCardInserted">Kart takılı değil</string>
+  <string name="LabelCardError">Kart hatası</string>
+  <string name="LabelCardNotFormatted">Kart formatlanmadı</string>
+  <string name="LabelNoFreeAreaInCard">Hafıza dolu</string>
+  <string name="LabelCardBufferNotEmpty">Tampon bellekte karta kaydetme yapan veri var.</string>
+  <string name="LabelPcBufferNotEmpty">Tampon bellekte bilgisayara kaydetme yapan veri var.</string>
+  <string name="LabelBufferNotEmpty">Bufferda video verisi var.</string>
+  <string name="LabelRecordInProgres">Video dosyası kaydetme anında</string>
+  <string name="LabelCardProtected">Kart korumalı</string>
+  <string name="LabelDuringEnlargedDisplayLiveView">Çekim esnasında canlı görüntünün genişletilmiş bir şekilde görüntülenmesi </string>
+  <string name="LabelWrongLiveViewType">Canlı görünüm seçicisi ayarı canlı görünüm fotoğrafçılığıdır.</string>
+  <string name="LabelNotInApplicationMode">Kamera uygulama modunda değil</string>
+  <string name="ButtonResetSettings">Ayarları sıfırla</string>
+  <!--14/11/2012-->
+  <string name="LabelUseExternalViewer">Harici görüntüleyici kullan</string>
+  <string name="LabelExternalPreViewerPath">Harici görüntüleyici yolu</string>
+  <string name="LabelExternalPreViewerArgs">Harici görüntüleyici argümanları</string>
+  <!--18/11/2012-->
+  <string name="LabelControl">Kontrol</string>
+  <!--20/11/2012-->
+  <string name="LabelExport">Dışa Aktar</string>
+  <!--21/11/2012-->
+  <string name="LabelDownload">İndir</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">Fotoğrafları indir</string>
+  <string name="LabelDeleteFilesAfterTransfer">Taşınma sonrasında dosyaları sil</string>
+  <string name="LabelAskForDelete">Taşınan dosyalar silinecek.\nDevam etmek istiyor musunuz?</string>
+  <!--26/11/2012-->
+  <string name="LabelErrorSetFocusPos">Odak pozisyonu ayarlama hatalı</string>
+  <string name="LabelErrorUnableFocus">Odaklanılamıyor</string>
+  <!--28/11/2012-->
+  <string name="LabelErrorLoadingFileList">Dosya listesi yüklenirken hata oluştu</string>
+  <!--30/11/2012-->
+  <string name="LabelTransfer">Aktarım</string>
+  <string name="LabelTransferItem1">1.Sadece bilgisayara kaydet</string>
+  <string name="LabelTransferItem2">2.Sadece kameraya kaydet</string>
+  <string name="LabelTransferItem3">3.Bilgisayar ve kameraya kaydet</string>
+  <!--05/12/2012-->
+  <string name="MsgDisabledDrivers">Yerel sürücüler devre dışı! Etkinleştirmek ister misiniz?</string>
+  <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">Odak noktalarını göster</string>
+  <string name="LabelMainWindow">Ana pencere</string>
+  <string name="LabelSelect">Seç</string>
+  <string name="TimeSelectWindowTitle">Pencere seç</string>
+  <!--16/12/2012-->
+  <string name="LabelRotateNone">Hiçbiri</string>
+  <string name="LabelRotate90">90 derece döndür</string>
+  <string name="LabelRotate180">180 derece döndür</string>
+  <string name="LabelRotate270">270 derece döndür</string>
+  <string name="LabelLowMemoryUsage">Düşük hafıza kullanımı</string>
+  <!--04/01/2013-->
+  <string name="LabelRawCodecNotInstalled">Ham codec yüklenmedi veya bilinmeyen dosya formatı</string>
+  <!--05/01/2013-->
+  <string name="LabelUseCameraCounter">Genel sayıcı yerine kamera sayıcısını kullan</string>
+  <string name="LabelResetCounters">Sayıcıları sıfırla</string>
+  <!--07/01/2013-->
+  <string name="LabelUnabletoDeleteSession">Oturum silme başarısız</string>
+  <!--12/01/2013-->
+  <string name="LabelWaitingForDevice">Cihaz için bekleniyor</string>
+  <string name="LabelAdvanced">Gelişmiş</string>
+  <string name="LabelUseParellelTransfer">Paralel dosya aktarımını kullan</string>
+  <!--19/01/2013-->
+  <string name="LabelUnHandledError">Uygulama hatası oluştu.\n Lütfen verilerinizin doğru olup olmadığını kontrol edin ve işlemi tekrarlayın. Eğer bu hata tekrar oluşursa, uygulamada daha ciddi bir bozunma var demektir ve en iyisi kapatın. \n\n Hata:{0}\n\n Devam etmek istiyor musunuz?\n(Eğer Evet\'e tıklarsanız işinize devam edeceksiniz, Eğer hayır\'a tıklarsanız uygulama kapatılacak)</string>
+  <string name="LabelApplicationError">Uygulama Hatası</string>
+  <string name="LabelWiaNotInstalled">WIA 2.0 yüklü değil</string>
+  <string name="LabelRestartTheApplication">Uygulamayı yeniden başlatın!</string>
+  <string name="LabelOutOfMemory">Uygulama hafızayı bitirdi. Uygulama kapatılacak!</string>
+  <string name="LabelApplicationAlreadyRunning">Uygulama zaten çalışıyor</string>
+  <string name="LabelDeleteSession">Oturumu sil</string>
+  <string name="LabelStartCapture">Çekime başla</string>
+  <string name="LabelStopCapture">Çekimi durdur</string>
+  <string name="LabelCaptureTime">Çekim süresi(sn)</string>
+  <string name="LabelTimeBetweenShots">Çekimler arası zaman</string>
+  <string name="LabelDontAutofocus">Otomatik odaklama yapma</string>
+  <string name="LabelShowUnTranslatedStringIds">Çevrilmemiş kelime numaralarını göster</string>
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <!--31/01/2013-->
+  <string name="LabelNone">Hiçbiri</string>
+  <string name="LabelComboGrid">Listeleme</string>
+  <!--13/03/2013-->
+  <!--17/03/2012-->
+  <!--28/03/2012-->
+  <string name="LabelCardProtectedError">Kart korumalı</string>
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+</resources>

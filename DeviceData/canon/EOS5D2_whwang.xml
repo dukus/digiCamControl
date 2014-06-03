@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<XmlDeviceData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AvaiableCommands>
+    <XmlCommandDescriptor Code="4116" Name="PTP_OC_GetDevicePropDesc" HexCode="1014" />
+    <XmlCommandDescriptor Code="4117" Name="PTP_OC_GetDevicePropValue" HexCode="1015" />
+    <XmlCommandDescriptor Code="4118" Name="PTP_OC_SetDevicePropValue" HexCode="1016" />
+    <XmlCommandDescriptor Code="4097" Name="PTP_OC_GetDeviceInfo" HexCode="1001" />
+    <XmlCommandDescriptor Code="4098" Name="PTP_OC_OpenSession" HexCode="1002" />
+    <XmlCommandDescriptor Code="4099" Name="PTP_OC_CloseSession" HexCode="1003" />
+    <XmlCommandDescriptor Code="4102" Name="PTP_OC_GetNumObjects" HexCode="1006" />
+    <XmlCommandDescriptor Code="4100" Name="PTP_OC_GetStorageIDs" HexCode="1004" />
+    <XmlCommandDescriptor Code="37121" Name="PTP_OC_CANON_EOS_GetStorageIDs" HexCode="9101" />
+    <XmlCommandDescriptor Code="4101" Name="PTP_OC_GetStorageInfo" HexCode="1005" />
+    <XmlCommandDescriptor Code="37122" Name="PTP_OC_CANON_EOS_GetStorageInfo" HexCode="9102" />
+    <XmlCommandDescriptor Code="4103" Name="PTP_OC_GetObjectHandles" HexCode="1007" />
+    <XmlCommandDescriptor Code="4104" Name="PTP_OC_GetObjectInfo" HexCode="1008" />
+    <XmlCommandDescriptor Code="37123" Name="PTP_OC_CANON_EOS_GetObjectInfo" HexCode="9103" />
+    <XmlCommandDescriptor Code="4105" Name="PTP_OC_GetObject" HexCode="1009" />
+    <XmlCommandDescriptor Code="37124" Name="PTP_OC_CANON_EOS_GetObject" HexCode="9104" />
+    <XmlCommandDescriptor Code="4106" Name="PTP_OC_GetThumb" HexCode="100A" />
+    <XmlCommandDescriptor Code="4123" Name="PTP_OC_GetPartialObject" HexCode="101B" />
+    <XmlCommandDescriptor Code="37127" Name="PTP_OC_CANON_EOS_GetPartialObject" HexCode="9107" />
+    <XmlCommandDescriptor Code="4108" Name="PTP_OC_SendObjectInfo" HexCode="100C" />
+    <XmlCommandDescriptor Code="4109" Name="PTP_OC_SendObject" HexCode="100D" />
+    <XmlCommandDescriptor Code="4107" Name="PTP_OC_DeleteObject" HexCode="100B" />
+    <XmlCommandDescriptor Code="37125" Name="PTP_OC_CANON_EOS_DeleteObject" HexCode="9105" />
+    <XmlCommandDescriptor Code="4111" Name="PTP_OC_FormatStore" HexCode="100F" />
+    <XmlCommandDescriptor Code="37126" Name="PTP_OC_CANON_EOS_FormatStore" HexCode="9106" />
+    <XmlCommandDescriptor Code="37136" Name="PTP_OC_CANON_EOS_SetDevicePropValueEx" HexCode="9110" />
+    <XmlCommandDescriptor Code="37159" Name="PTP_OC_CANON_EOS_RequestDevicePropValue" HexCode="9127" />
+    <XmlCommandDescriptor Code="37131" Name="PTP_OC_CANON_EOS_SendPartialObject" HexCode="910B" />
+    <XmlCommandDescriptor Code="37128" Name="PTP_OC_CANON_EOS_GetDeviceInfoEx" HexCode="9108" />
+    <XmlCommandDescriptor Code="37129" Name="PTP_OC_CANON_EOS_GetObjectInfoEx" HexCode="9109" />
+    <XmlCommandDescriptor Code="37132" Name="PTP_OC_CANON_EOS_SetObjectAttributes" HexCode="910C" />
+    <XmlCommandDescriptor Code="37134" Name="PTP_OC_CANON_EOS_SetObjectTime" HexCode="910E" />
+    <XmlCommandDescriptor Code="37135" Name="PTP_OC_CANON_EOS_RemoteRelease" HexCode="910F" />
+    <XmlCommandDescriptor Code="37157" Name="PTP_OC_CANON_EOS_BulbStart" HexCode="9125" />
+    <XmlCommandDescriptor Code="37158" Name="PTP_OC_CANON_EOS_BulbEnd" HexCode="9126" />
+    <XmlCommandDescriptor Code="37141" Name="PTP_OC_CANON_EOS_SetEventMode" HexCode="9115" />
+    <XmlCommandDescriptor Code="37140" Name="PTP_OC_CANON_EOS_SetRemoteMode" HexCode="9114" />
+    <XmlCommandDescriptor Code="37139" Name="PTP_OC_CANON_EOS_GetRemoteMode" HexCode="9113" />
+    <XmlCommandDescriptor Code="37142" Name="PTP_OC_CANON_EOS_GetEvent" HexCode="9116" />
+    <XmlCommandDescriptor Code="37143" Name="PTP_OC_CANON_EOS_TransferComplete" HexCode="9117" />
+    <XmlCommandDescriptor Code="37152" Name="PTP_OC_CANON_EOS_TransferCompleteDT" HexCode="9120" />
+    <XmlCommandDescriptor Code="37360" Name="" HexCode="91F0" />
+    <XmlCommandDescriptor Code="37144" Name="PTP_OC_CANON_EOS_CancelTransfer" HexCode="9118" />
+    <XmlCommandDescriptor Code="37153" Name="PTP_OC_CANON_EOS_CancelTransferDT" HexCode="9121" />
+    <XmlCommandDescriptor Code="37361" Name="" HexCode="91F1" />
+    <XmlCommandDescriptor Code="37149" Name="PTP_OC_CANON_EOS_KeepDeviceOn" HexCode="911D" />
+    <XmlCommandDescriptor Code="37130" Name="PTP_OC_CANON_EOS_GetThumbEx" HexCode="910A" />
+    <XmlCommandDescriptor Code="37147" Name="PTP_OC_CANON_EOS_SetUILock" HexCode="911B" />
+    <XmlCommandDescriptor Code="37148" Name="PTP_OC_CANON_EOS_ResetUILock" HexCode="911C" />
+    <XmlCommandDescriptor Code="37150" Name="PTP_OC_CANON_EOS_SetNullPacketMode" HexCode="911E" />
+    <XmlCommandDescriptor Code="37146" Name="PTP_OC_CANON_EOS_PCHDDCapacity" HexCode="911A" />
+    <XmlCommandDescriptor Code="37203" Name="PTP_OC_CANON_EOS_GetViewFinderData" HexCode="9153" />
+    <XmlCommandDescriptor Code="37204" Name="PTP_OC_CANON_EOS_DoAf" HexCode="9154" />
+    <XmlCommandDescriptor Code="37216" Name="PTP_OC_CANON_EOS_AfCancel" HexCode="9160" />
+    <XmlCommandDescriptor Code="37205" Name="PTP_OC_CANON_EOS_DriveLens" HexCode="9155" />
+    <XmlCommandDescriptor Code="37207" Name="PTP_OC_CANON_EOS_ClickWB" HexCode="9157" />
+    <XmlCommandDescriptor Code="37208" Name="PTP_OC_CANON_EOS_Zoom" HexCode="9158" />
+    <XmlCommandDescriptor Code="37209" Name="PTP_OC_CANON_EOS_ZoomPosition" HexCode="9159" />
+    <XmlCommandDescriptor Code="37210" Name="PTP_OC_CANON_EOS_SetLiveAfFrame" HexCode="915A" />
+    <XmlCommandDescriptor Code="37151" Name="PTP_OC_CANON_EOS_UpdateFirmware" HexCode="911F" />
+    <XmlCommandDescriptor Code="37374" Name="PTP_OC_CANON_EOS_FAPIMessageTX" HexCode="91FE" />
+    <XmlCommandDescriptor Code="37375" Name="PTP_OC_CANON_EOS_FAPIMessageRX" HexCode="91FF" />
+    <XmlCommandDescriptor Code="37160" Name="PTP_OC_CANON_EOS_RemoteReleaseOn" HexCode="9128" />
+    <XmlCommandDescriptor Code="37161" Name="PTP_OC_CANON_EOS_RemoteReleaseOff" HexCode="9129" />
+    <XmlCommandDescriptor Code="37165" Name="" HexCode="912D" />
+    <XmlCommandDescriptor Code="37166" Name="" HexCode="912E" />
+    <XmlCommandDescriptor Code="37167" Name="" HexCode="912F" />
+    <XmlCommandDescriptor Code="37164" Name="" HexCode="912C" />
+    <XmlCommandDescriptor Code="37168" Name="" HexCode="9130" />
+    <XmlCommandDescriptor Code="37169" Name="" HexCode="9131" />
+    <XmlCommandDescriptor Code="37170" Name="" HexCode="9132" />
+    <XmlCommandDescriptor Code="37171" Name="" HexCode="9133" />
+    <XmlCommandDescriptor Code="37172" Name="" HexCode="9134" />
+    <XmlCommandDescriptor Code="37163" Name="" HexCode="912B" />
+    <XmlCommandDescriptor Code="38913" Name="PTP_OC_MTP_GetObjectPropsSupported" HexCode="9801" />
+    <XmlCommandDescriptor Code="38914" Name="PTP_OC_MTP_GetObjectPropDesc" HexCode="9802" />
+    <XmlCommandDescriptor Code="38915" Name="PTP_OC_MTP_GetObjectPropValue" HexCode="9803" />
+    <XmlCommandDescriptor Code="38916" Name="PTP_OC_MTP_SetObjectPropValue" HexCode="9804" />
+    <XmlCommandDescriptor Code="38917" Name="PTP_OC_MTP_GetObjPropList" HexCode="9805" />
+    <XmlCommandDescriptor Code="37312" Name="" HexCode="91C0" />
+    <XmlCommandDescriptor Code="37313" Name="" HexCode="91C1" />
+    <XmlCommandDescriptor Code="37314" Name="" HexCode="91C2" />
+    <XmlCommandDescriptor Code="37315" Name="" HexCode="91C3" />
+    <XmlCommandDescriptor Code="37316" Name="" HexCode="91C4" />
+    <XmlCommandDescriptor Code="37317" Name="" HexCode="91C5" />
+    <XmlCommandDescriptor Code="37318" Name="" HexCode="91C6" />
+    <XmlCommandDescriptor Code="37319" Name="" HexCode="91C7" />
+    <XmlCommandDescriptor Code="37320" Name="" HexCode="91C8" />
+    <XmlCommandDescriptor Code="37321" Name="" HexCode="91C9" />
+    <XmlCommandDescriptor Code="37322" Name="" HexCode="91CA" />
+    <XmlCommandDescriptor Code="37323" Name="" HexCode="91CB" />
+    <XmlCommandDescriptor Code="37324" Name="" HexCode="91CC" />
+    <XmlCommandDescriptor Code="37326" Name="" HexCode="91CE" />
+    <XmlCommandDescriptor Code="37327" Name="" HexCode="91CF" />
+    <XmlCommandDescriptor Code="37328" Name="" HexCode="91D0" />
+    <XmlCommandDescriptor Code="37329" Name="" HexCode="91D1" />
+    <XmlCommandDescriptor Code="37330" Name="" HexCode="91D2" />
+    <XmlCommandDescriptor Code="37345" Name="" HexCode="91E1" />
+    <XmlCommandDescriptor Code="37346" Name="" HexCode="91E2" />
+    <XmlCommandDescriptor Code="37347" Name="" HexCode="91E3" />
+    <XmlCommandDescriptor Code="37348" Name="" HexCode="91E4" />
+    <XmlCommandDescriptor Code="37349" Name="" HexCode="91E5" />
+    <XmlCommandDescriptor Code="37350" Name="" HexCode="91E6" />
+    <XmlCommandDescriptor Code="37351" Name="" HexCode="91E7" />
+    <XmlCommandDescriptor Code="37352" Name="" HexCode="91E8" />
+    <XmlCommandDescriptor Code="37353" Name="" HexCode="91E9" />
+    <XmlCommandDescriptor Code="37354" Name="" HexCode="91EA" />
+    <XmlCommandDescriptor Code="37355" Name="" HexCode="91EB" />
+    <XmlCommandDescriptor Code="37356" Name="" HexCode="91EC" />
+    <XmlCommandDescriptor Code="37357" Name="" HexCode="91ED" />
+    <XmlCommandDescriptor Code="37358" Name="" HexCode="91EE" />
+    <XmlCommandDescriptor Code="37359" Name="" HexCode="91EF" />
+    <XmlCommandDescriptor Code="37368" Name="" HexCode="91F8" />
+    <XmlCommandDescriptor Code="37369" Name="" HexCode="91F9" />
+    <XmlCommandDescriptor Code="37362" Name="" HexCode="91F2" />
+    <XmlCommandDescriptor Code="37363" Name="" HexCode="91F3" />
+    <XmlCommandDescriptor Code="37364" Name="" HexCode="91F4" />
+    <XmlCommandDescriptor Code="37367" Name="" HexCode="91F7" />
+    <XmlCommandDescriptor Code="37154" Name="PTP_OC_CANON_EOS_SetWftProfile" HexCode="9122" />
+    <XmlCommandDescriptor Code="37155" Name="" HexCode="9123" />
+    <XmlCommandDescriptor Code="37156" Name="PTP_OC_CANON_EOS_SetProfileToWft" HexCode="9124" />
+    <XmlCommandDescriptor Code="37365" Name="" HexCode="91F5" />
+    <XmlCommandDescriptor Code="37366" Name="" HexCode="91F6" />
+    <XmlCommandDescriptor Code="36946" Name="" HexCode="9052" />
+    <XmlCommandDescriptor Code="36947" Name="" HexCode="9053" />
+    <XmlCommandDescriptor Code="36951" Name="" HexCode="9057" />
+    <XmlCommandDescriptor Code="36952" Name="" HexCode="9058" />
+    <XmlCommandDescriptor Code="36953" Name="" HexCode="9059" />
+    <XmlCommandDescriptor Code="36954" Name="" HexCode="905A" />
+    <XmlCommandDescriptor Code="36959" Name="" HexCode="905F" />
+  </AvaiableCommands>
+  <AvaiableEvents>
+    <XmlEventDescriptor Code="16393" Name="PTP_EC_RequestObjectTransfer" HexCode="4009" />
+    <XmlEventDescriptor Code="16388" Name="PTP_EC_StoreAdded" HexCode="4004" />
+    <XmlEventDescriptor Code="16389" Name="PTP_EC_StoreRemoved" HexCode="4005" />
+    <XmlEventDescriptor Code="16387" Name="PTP_EC_ObjectRemoved" HexCode="4003" />
+    <XmlEventDescriptor Code="16386" Name="PTP_EC_ObjectAdded" HexCode="4002" />
+    <XmlEventDescriptor Code="16391" Name="PTP_EC_ObjectInfoChanged" HexCode="4007" />
+    <XmlEventDescriptor Code="49409" Name="PTP_EC_CANON_EOS_RequestGetEvent" HexCode="C101" />
+  </AvaiableEvents>
+  <AvaiableProperties>
+    <XmlPropertyDescriptor Code="54274" Name="PTP_DPC_MTP_DeviceFriendlyName" DataType="65535" DataForm="0" HexCode="D402">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54279" Name="PTP_DPC_MTP_PerceivedDeviceType" DataType="6" DataForm="0" HexCode="D407">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54278" Name="PTP_DPC_MTP_SessionInitiatorInfo" DataType="65535" DataForm="0" HexCode="D406">
+      <Values />
+    </XmlPropertyDescriptor>
+  </AvaiableProperties>
+  <Model>Canon EOS 5D Mark II</Model>
+  <Manufacturer>Canon Inc.</Manufacturer>
+</XmlDeviceData>

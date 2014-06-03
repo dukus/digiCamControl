@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginInfo>
+  <Name>DeviceControlBox</Name>
+  <Author>Duka Istvan</Author>
+  <Id>{C387686D-4A70-4B59-88DE-2718ED81479D}</Id>
+  <Version>0.1</Version>
+  <Description>Plugin to control external digiCamControl device</Description>
+  <AssemblyFileName>Plugin.DeviceControlBox.dll</AssemblyFileName>
+</PluginInfo>

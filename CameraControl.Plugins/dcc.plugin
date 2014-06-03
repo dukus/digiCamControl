@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginInfo>
+  <Name>CameraControl.Plugins</Name>
+  <Id>{B00FA16D-01E4-4C2C-89DD-D4E5708CDFCA}</Id>
+  <Version>0.1</Version>
+  <Description></Description>
+  <LogoFile>logo.png</LogoFile>
+  <AssemblyFileName>CameraControl.Plugins.dll</AssemblyFileName>
+</PluginInfo>

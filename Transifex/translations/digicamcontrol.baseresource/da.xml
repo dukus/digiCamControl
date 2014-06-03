@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="BURST_NUMBER">Burst nummer</string>
+  <string name="STILL_CAPTURE_MODE">Enkeltbillede exporing modus</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Kontinuerlig exponering (kontinuerlig ekponering)</string>
+  <string name="AUTO_ISO">Auto iso</string>
+  <string name="ON">Tændt</string>
+  <string name="OFF">Slukket</string>
+  <string name="FLASH">Flash</string>
+  <string name="NORMAL_SYNCHRONIZATION">Normal synkronisation</string>
+  <string name="LONG_EXP._NR">Langtids exp. støjfjernelse</string>
+  <string name="HIGH_ISO_NR">Højt ISO tal</string>
+  <string name="NORMAL">Normal</string>
+  <string name="EXPOSURE_DELAY_MODE">Eksponerings delay mode</string>
+  <string name="LOCK">Lås</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Enkel exponering (Enkelt foto exponering)</string>
+  <string name="SELF_TIMER">Timer</string>
+  <string name="QUICK_RESPONSE_REMOTE">Hurtig fjernbetjening</string>
+  <string name="2S_DELAYED_REMOTE">2. sekunders timer</string>
+  <string name="QUIET_SHOOTING">Stille exponering</string>
+  <string name="FLASH_PROHIBITED">Uden flash</string>
+  <string name="RED_EYE_REDUCTION">Rød øje reduktion</string>
+  <string name="SLOW_SYNCHRONIZATION">Langsom synkronisering</string>
+  <string name="REAR_SYNCHRONIZATION">Baggardin synkronisering</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Rød øje langsom synkronisering</string>
+  <string name="NOT_PERFORMED">Ikke udført</string>
+  <string name="LOW">Lav</string>
+  <string name="HIGH">Høj</string>
+  <string name="CENTER_WEIGHTED_METERING">Centervægtet lysmåling</string>
+  <string name="MULTI_PATTERN_METERING">Evaluerende lysmåling</string>
+  <string name="SPOT_METERING">Spotlysmåling</string>
+  <string name="AUTO">Automatisk</string>
+  <string name="DAYLIGHT">Dagslys</string>
+  <string name="FLUORESCENT_">Lysstofrør</string>
+  <string name="INCANDESCENT">Glødepære</string>
+  <string name="CLOUDY">Overskyet</string>
+  <string name="SHADE">Skygge</string>
+  <string name="CUSTOM">Brugerdefineret</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] AF servo-funktion automatisk skift</string>
+  <string name="[S]_SINGLE_AF_SERVO">[S] Single AF servo</string>
+  <string name="[M]_MANUAL_FOCUS">[M] Manuel Fokus</string>
+  <string name="KELVIN">Kelvin</string>
+  <!--End Property values-->
+  <string name="Mode">Tilstand</string>
+  <string name="Iso">Iso</string>
+  <string name="ShutterSpeed">Lukketid</string>
+  <string name="Aperture">Blænde</string>
+  <string name="WhiteBalance">Hvidbalance</string>
+  <string name="ExposureComp">Eksponerings komp.</string>
+  <string name="Compression">Kompression</string>
+  <string name="MeteringMode">_Lysmålings modus</string>
+  <string name="FocusMode">_Fokus modus</string>
+  <string name="Battery">Batteri</string>
+  <string name="SDRam">SD_Ram</string>
+  <string name="SDRamToolTip">Tag billede direkte uden brug af kort</string>
+  <string name="CapturePhotoToolTip">Tag billede</string>
+  <string name="CapturePhotoNoAfToolTip">Tag billede uden autofokus</string>
+  <string name="BraketingToolTip">Bracketing</string>
+  <string name="SettingsToolTip">Indstillinger</string>
+  <string name="TimeLapseToolTip">Tidsforkortelse</string>
+  <string name="FullscreenToolTip">Fuldskærm</string>
+  <string name="LiveViewToolTip">LiveView</string>
+  <string name="BrowseSessionsToolTip">Gennemse sessioner</string>
+  <string name="SelectTagsToolTip">Vælg Tags</string>
+  <string name="AboutToolTip">Om</string>
+  <string name="Session">Sæssion</string>
+  <string name="SessionAdd">Tilføj</string>
+  <string name="SessionEdit">Rediger</string>
+  <string name="SessionDel">Slet</string>
+  <string name="MainWindowTitle">NNC - Oversat</string>
+  <string name="SettingsWindowTitle">Indstillinger</string>
+  <string name="SessionWindowTitle">Sæssion [Tilføj/Rediger]</string>
+  <string name="LiveViewWindowTitle">LiveView</string>
+  <string name="PresetEditWindowTitle">Rediger Preset</string>
+  <string name="BraketingWindowTitle">Braketing</string>
+  <string name="EditTagWindowTitle">Tag [Tilføj/Rediger]</string>
+  <string name="MultipleCameraWindowTitle">Multi kamera understøttelse</string>
+  <string name="SavePresetWindowTitle">Gem Preset</string>
+  <string name="TimeLapseWindowTitle">Time Lapse</string>
+  <string name="ButtonOk">Ok</string>
+  <string name="ButtonCancel">Fortryd</string>
+  <string name="ButtonAdd">Tilføj</string>
+  <string name="ButtonDelete">Slet</string>
+  <string name="ButtonEdit">Rediger</string>
+  <string name="ButtonAutoFocus">_Auto Fokus</string>
+  <string name="ButtonCapture">_Eksponere</string>
+  <string name="ButtonRecordMovie">Optag filmklip</string>
+  <string name="ButtonFreezeImage">Frys billede</string>
+  <string name="ButtonStart">Start</string>
+  <string name="ButtonPreview">Eksempel</string>
+  <string name="ButtonStop">Stop</string>
+  <string name="ButtonDeletePreset">Slet preset</string>
+  <string name="ButtonDeleteProperty">Slet attribut</string>
+  <string name="ButtonClose">Luk</string>
+  <string name="ButtonSave">Gem</string>
+  <string name="ButtonCapturePhotos">Eksponer billeder</string>
+  <string name="ButtonStartTimeLapse">Start TimeLapse</string>
+  <string name="ButtonStopTimeLapse">Stop TimeLapse</string>
+  <string name="ButtonCreateMovie">Opret film</string>
+  <string name="ButtonLocateLogFile">Lokaliser log fil</string>
+  <string name="LabelInterfaceLanguage">Interface sprog</string>
+  <string name="LabelDisableDriver">Deaktiver native drivere (Ikke anbefalet)</string>
+  <string name="LabelTheme">Tema:</string>
+  <string name="LabelGeneral">Generelt</string>
+  <string name="LabelPreview">Eksempel</string>
+  <string name="LabelPlaySound">Afspil lyd efter hver eksponering</string>
+  <string name="LabelAutoPreview">Auto eksempel</string>
+  <string name="LabelPreviewAfterCapture">Vis eksempel i fuldskærm efter hver eksponering</string>
+  <string name="LabelPreviewTime">Eksempel i sekunder</string>
+  <string name="LabelPreviewInLIveView">Vis billede efter eksponering i liveview</string>
+  <string name="LabelLIveViewImageFreeze">Frys billede i liveview i sekunder:</string>
+  <string name="LabelRotateImage">Roter billede:</string>
+  <string name="LabelDontLoadThumbs">Hent ikke miniature billeder</string>
+  <string name="LabelFullscrenBack">Fuldskærms vindue baggrund</string>
+  <string name="LabelTriggers">Triggere</string>
+  <string name="LabelUseKeybordToTrigger">Brug tastatur til at tage billede</string>
+  <string name="LabelWebserver">Webserver</string>
+  <string name="LabelUseWebserver">Brug webserver</string>
+  <string name="LabelFocusAndLiveview">Fokus og liveview</string>
+  <string name="LabelSmallFocusSstep">Lille fokus skridt</string>
+  <string name="LabelMediumFocusStep">Medium fokus skridt</string>
+  <string name="LabelLargFocusStep">Stort forkus skridt</string>
+  <string name="ReStartToolTip">Du skal genstarte applikationen for ændringerne tages i brug</string>
+  <string name="LabelSessonName">Sæssions navn:</string>
+  <string name="LabelFolder">Mappe: </string>
+  <string name="LabelFileNameTemplate">Filnavn skabelon:</string>
+  <string name="LabelCounter">Tæller</string>
+  <string name="LabelUseOriginal">Brug originale filnavn givet af kameraet</string>
+  <string name="LabelUseOriginalToolTip">Denne option virker ikke med WIA driver</string>
+  <string name="LabelDontDownloadPhotos">Donwload ikke fotos til PC</string>
+  <string name="LabelAlowFolderChange">Tillad skift af mappesti med billedbrowseren</string>
+  <string name="LabelTags">Tags</string>
+  <string name="LabelManualFocus">Manuel Fokus</string>
+  <string name="LabelGrid">Gitter</string>
+  <string name="LabelLvZoomRation">Liveview zoom ratio</string>
+  <string name="LabelFocusStacking">Focus stacking</string>
+  <string name="LabelNoOfPhots">Antal af fotos</string>
+  <string name="LabelFocusStep">Fokus trin</string>
+  <string name="LabelLuminosity">Luminans</string>
+  <string name="LabelExposureBracketing">Eksponerings bracketing</string>
+  <string name="LabelExposureBracketingToolTip">Sæt kamera til Blænde modus og slå Auto ISo og automatisk hvidbalnce fra</string>
+  <string name="LabelManualExposureBracketing">Manuel eksponerings bracketing</string>
+  <string name="LabelManualExposureBracketingToolTip">Sæt kamera til Manuel(M) modus og slå auto IS og auto hvidballance fra, for mest stabile resultater.</string>
+  <string name="LabelPresetBracketing">Preset bracketing</string>
+  <string name="LabelTagDisplayValue">Display værdi</string>
+  <string name="LabelTagValue">Værdi</string>
+  <string name="LabelTagIncludeInGroup1">Inkluder i gruppe 1</string>
+  <string name="LabelTagIncludeInGroup2">Inkluder i gruppe 2</string>
+  <string name="LabelTagIncludeInGroup3">Inkluder i gruppe 3</string>
+  <string name="LabelTagIncludeInGroup4">Inkluder i gruppe 4</string>
+  <string name="LabelDelay">Forsinkelse (Milisekunder)</string>
+  <string name="LabelNumberOfCaptures">Antal af eksponeringer</string>
+  <string name="LabelWaitTime">Pause (sekunder)</string>
+  <string name="LabelDisableAutofocus">Slå autofokus fra</string>
+  <string name="LabelConnectedCameras">Forbundne kameraer</string>
+  <string name="LabelPresetName">Preset navn:</string>
+  <string name="LabelTimeLapse">Timelapse</string>
+  <string name="LabelSecondsBetweenShots">Sekunder imellem eksponeringer</string>
+  <string name="LabelNumberOfPhotos">Antal fotos</string>
+  <string name="LabelDontAutofocusOnEveryCapture">fokuser ikke ved hver eksponering</string>
+  <string name="LabelCaptureInterval">Exponerings interval (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">Film længde (HH:MM:SS)</string>
+  <string name="LabelMovieSettings">Film indstillinger</string>
+  <string name="LabelVideoFormat">Video format</string>
+  <string name="LabelOutputFile">Output fil</string>
+  <string name="LabelFps">Fps</string>
+  <string name="LabelFillImage">Fyld billede</string>
+  <string name="LabelCreateMovie">Opret film</string>
+  <string name="LabelAddVirtualMovingToVideo">Tilføj virtuel bevægelse til video</string>
+  <string name="LabelMovingSurface">Bevægelses overflade (%):</string>
+  <string name="LabelMovingDirection">Bevælgelses retning:</string>
+  <string name="LabelMovingDirectionLeftToRight">Venstre til højre</string>
+  <string name="LabelMovingDirectionRightToLeft">Højre til venstre</string>
+  <string name="LabelMovingDirectionTopToBottom">Oppefra og ned</string>
+  <string name="LabelMovingDirectionBottomToTop">Nedefra og op</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">Øverst venstre til nederst højre</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">Nederst højre til øverst venstre</string>
+  <string name="LabelImageAlignment">Billed placering</string>
+  <string name="LabelImageAlignmentLeftTop">Venstre/øverst</string>
+  <string name="LabelImageAlignmentCenter">I midten</string>
+  <string name="LabelImageAlignmentRightBottom">Højre/nederst</string>
+  <string name="LabelVideoCodecProblem">Video codek problem</string>
+  <string name="MsgPhotoTransferBegin">Foto overførelse begyndt</string>
+  <string name="MsgPhotoTransferDone">Foto overførelse færdig</string>
+  <string name="MsgPhotoTransferError">Overførelses fejl !⏎ Fejl :{0}</string>
+  <string name="MsgBulbModeNotSupported">Bulb modus ikke understøttet</string>
+  <string name="MsgApplicationUpToDate">Applikationen er uptodate</string>
+  <string name="MsgUseSessionEditorTags">Brug sæssionseditor til at definere tags !</string>
+  <string name="MsgLastSessionCantBeDeleted">Sidst sæssion kan ikke slettes</string>
+  <string name="MsgStopTimeLapse">Timelapse er ikke færdig! Vil du stoppe denne timelapse ?</string>
+  <string name="MsgInstallXvidCodec">Xvid codec ikke installeret! ⏎ Ønsker du at downloade og installere det ? </string>
+  <string name="MsgDeleteSessionQuestion">Ønsker du at slette sæssion {0} ?⏎ Ingen filer vil blive slettet !</string>
+  <string name="MsgBracketingDone">Bracketing færdig</string>
+  <string name="MsgActionInProgress">Handling i gang {0} / {1}</string>
+  <string name="MenuFile">_Fil</string>
+  <string name="MenuReScan">Genskan tilsluttede kameraer</string>
+  <string name="MenuConnectedCameras">Forbundne kameraer</string>
+  <string name="MenuExit">Afslut</string>
+  <string name="MenuView">_Vis</string>
+  <string name="MenuMultipleCamera">_Multi kamera kontrol</string>
+  <string name="MenuSelectedCameraProperty">Vælg kamera indstilling</string>
+  <string name="MenuPresets">Presets</string>
+  <string name="MenuPresetsLoad">Hent</string>
+  <string name="MenuPresetsSave">Gem</string>
+  <string name="MenuPresetsEdit">Rediger</string>
+  <string name="MenuHelp">_Hjælp</string>
+  <string name="MenuHomePage">Hjemmeside</string>
+  <string name="MenuCheckForUpdate">Kig efter opdateringer</string>
+  <string name="MenuDonate">Donation</string>
+  <string name="MenuAbout">Om</string>
+  <string name="MenuLayout">Layout</string>
+  <string name="MenuLayoutNormal">Normal</string>
+  <string name="MenuLayoutGridRight">Gitter højre</string>
+  <string name="MenuLayoutGrid">Gitter</string>
+  <string name="MenuProperties">Egenskaber</string>
+  <string name="MenuUseSelectedCameraPreset">Brug valgte kamera preset</string>
+  <!--15/10/2012-->
+  <string name="LabelExternalViewerPath">Kontekstmenu ekstern fremviser</string>
+  <string name="LabelStayOnTop">Altid øverst</string>
+  <!--22/10/2012-->
+  <string name="LabelDisplay">Vis</string>
+  <string name="LabelMotionDetection">Bevælgelssensor</string>
+  <string name="LabelActivateMotionDetection">Aktiver Bevælgelssensor</string>
+  <string name="LabelCaptureWhenMove">Eksponer ved bevælgelse</string>
+  <string name="LabelThreshold">Tærskel (%)</string>
+  <string name="LabelWaitMoion">Vent (Sek)</string>
+  <!--25/10/2012-->
+  <string name="LabelAutofocusBeforeCapture">Autofokus før eksponering</string>
+  <!--26/10/2012-->
+  <string name="LabelOpacity">Gennemsigtighed</string>
+  <!--29/10/2012-->
+  <string name="LabelMotionDetectionType">Bevælgelssensor type</string>
+  <string name="LabelTwoFramesDifferenceDetector">Sammenlign to billeder</string>
+  <string name="LabelSimpleBackgroundModelingDetector">Simepl baggrund modelerings detektor</string>
+  <string name="LabelSmallestBlockSize">Mindste blokstørrelse</string>
+  <string name="ButtonHelp">Hjælp</string>
+  <!--31/10/2012-->
+  <string name="LabelMenu">Menu</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">Forum</string>
+  <!--07/11/2012-->
+  <string name="ButtonGetRawCodec">Hent raw codec</string>
+  <!--08/11/2012-->
+  <string name="LabelErrorRecordMovie">Fejl ved start af filmoptagelse</string>
+  <string name="LabelNoCardInserted">Intet kort isat</string>
+  <string name="LabelCardError">Fejl på kort</string>
+  <string name="LabelCardNotFormatted">Kort ikke formateret</string>
+  <string name="LabelNoFreeAreaInCard">Ingen fri hukomelse på kort</string>
+  <string name="LabelCardBufferNotEmpty">Der er data hvis optagelses destination er i kort bufferen</string>
+  <string name="LabelPcBufferNotEmpty">Der er data hvis optagelses destination er i PC bufferen</string>
+  <string name="LabelBufferNotEmpty">Der er filmdate i bufferen</string>
+  <string name="LabelRecordInProgres">Under film optagelse</string>
+  <string name="LabelCardProtected">Kort skrivebeskyttet</string>
+  <string name="LabelDuringEnlargedDisplayLiveView">Under forstørret visning af liveview</string>
+  <string name="LabelWrongLiveViewType">Forkert liveview type</string>
+  <string name="LabelNotInApplicationMode">Kameraet i ikke i program tilstand</string>
+  <string name="ButtonResetSettings">Nulstil indstillinger</string>
+  <!--14/11/2012-->
+  <string name="LabelUseExternalViewer">Brug ekstern fremviser</string>
+  <string name="LabelExternalPreViewerPath">Sti til extern fremviser</string>
+  <string name="LabelExternalPreViewerArgs">Parametre til ekstern fremviser</string>
+  <!--18/11/2012-->
+  <string name="LabelControl">Kontrol</string>
+  <!--20/11/2012-->
+  <string name="LabelExport">Eksporter</string>
+  <!--21/11/2012-->
+  <string name="LabelDownload">Hent</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">Hent fotos</string>
+  <string name="LabelDeleteFilesAfterTransfer">Slet efter overførelse</string>
+  <string name="LabelAskForDelete">Overførte filer vil blive slettet.⏎ Ønsker du at fortsætte ?</string>
+  <!--26/11/2012-->
+  <string name="LabelErrorSetFocusPos">Fejl ved instilling af fokusposition</string>
+  <string name="LabelErrorUnableFocus">Kunne ikke fokusere</string>
+  <!--28/11/2012-->
+  <string name="LabelErrorLoadingFileList">Fejl ved hentning af fil liste</string>
+  <!--30/11/2012-->
+  <string name="LabelTransfer">Overførelse</string>
+  <string name="LabelTransferItem1">1.Gem kun til PC</string>
+  <string name="LabelTransferItem2">2. Gem kun til Kamera</string>
+  <string name="LabelTransferItem3">3. Gem til PC og kamera</string>
+  <!--05/12/2012-->
+  <string name="MsgDisabledDrivers">Native drivere slået fra! Vil du slå dem til?</string>
+  <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">Vis fokuspunkter?</string>
+  <string name="LabelMainWindow">Hovedvindue</string>
+  <string name="LabelSelect">Vælg</string>
+  <string name="TimeSelectWindowTitle">Vælg vindue</string>
+  <!--16/12/2012-->
+  <string name="LabelRotateNone">Intet</string>
+  <string name="LabelRotate90">Roter 90 grader</string>
+  <string name="LabelRotate180">Roter 180 grader</string>
+  <string name="LabelRotate270">Roter 270 grader</string>
+  <string name="LabelLowMemoryUsage">Lav hukommelse</string>
+  <!--04/01/2013-->
+  <string name="LabelRawCodecNotInstalled">Raw codex ikke installet eller forkert fil format</string>
+  <!--05/01/2013-->
+  <string name="LabelUseCameraCounter">Brug kameraets tæller isteder for generisk</string>
+  <string name="LabelResetCounters">Nulstil tællere</string>
+  <!--07/01/2013-->
+  <string name="LabelUnabletoDeleteSession">Kunne ikke slette sæssion</string>
+  <!--12/01/2013-->
+  <string name="LabelWaitingForDevice">Venter på enhed bliver klar</string>
+  <string name="LabelAdvanced">Avanceret </string>
+  <string name="LabelUseParellelTransfer">Brug paralel filoverførelse</string>
+  <!--19/01/2013-->
+  <string name="LabelUnHandledError">Der er sket en fejl i programmet.⏎ Undersøg om dine data er i orden og prøv denne funktion igen. Gentager denne fejlmeddelse sig så tyder på en alvorlig fejl, og du bedes lukke programmet⏎ ⏎ Fejl:{0}⏎ ⏎ Ønsker du at fortsætte?⏎ (Hvis du klikker på Ja vil du forsætte med dit arbejde, hvis du vælger Nej vil programmet lukke)</string>
+  <string name="LabelApplicationError">Programfejl</string>
+  <string name="LabelWiaNotInstalled">WIA 2.0 ikke installeret</string>
+  <string name="LabelRestartTheApplication">Genstart programmet.</string>
+  <string name="LabelOutOfMemory">Programmet er løbet tør for hukommelse. Programmet vil blive lukket</string>
+  <string name="LabelApplicationAlreadyRunning">Programmet kører allerede</string>
+  <string name="LabelDeleteSession">Slet sæssion</string>
+  <string name="LabelStartCapture">Start eksponering</string>
+  <string name="LabelStopCapture">Stop eksponering</string>
+  <string name="LabelCaptureTime">Eksponerings tid (sek)</string>
+  <string name="LabelTimeBetweenShots">Tid imellem hver eksponering</string>
+  <string name="LabelDontAutofocus">Autofokus ikke</string>
+  <string name="LabelShowUnTranslatedStringIds">Hvis uoversatte streng id\'er</string>
+  <!--20/01/2013-->
+  <string name="LabelUseAsMaster">Brug som Master</string>
+  <!--29/01/2013-->
+  <string name="LabelCounterIncrementer">Forøg tæller</string>
+  <string name="LabelSelected">Valgt</string>
+  <!--31/01/2013-->
+  <string name="LabelNone">Intet</string>
+  <string name="LabelRuleOfThirds">Reglen om tredjedele</string>
+  <string name="LabelComboGrid">Gitter</string>
+  <string name="LabelDiagonal">Diagonal</string>
+  <string name="LabelSplit">Opdelt</string>
+  <!--13/03/2013-->
+  <string name="LabelTools">Værktøjer</string>
+  <!--17/03/2012-->
+  <string name="LabelMFError">Kamera er i MF fokus modus</string>
+  <string name="LabelNotAFSError">Kamera er ikke i AF-S fokus modus</string>
+  <!--28/03/2012-->
+  <string name="LabelSequenceError">sekvens fejl</string>
+  <string name="LabelFullyPressedButtonError">Fejl ved fuldt nedtrykket knap</string>
+  <string name="LabelApertureValueError">Blænden er sat via blænderingen</string>
+  <string name="LabelBulbError">Bulb fejl</string>
+  <string name="LabelDuringCleaningMirror">Under rensning af spejl</string>
+  <string name="LabelDuringInsufficiencyBattery">Under manglende batteri</string>
+  <string name="LabelTTLError">TTL fejl</string>
+  <string name="LabelNonCPULEnseError">Et ikke CPU objektiv er monteret og modus er ikke M</string>
+  <string name="LabelImageInRAM">Der er gemt et foto i SDRAM destinatinationen</string>
+  <string name="LabelNoCardInsertedError">Destinationen er både kort og SDRAM. Og kortet er ikke indsat uden lås af kort.</string>
+  <string name="LabelCommandProcesingError">Under bearbejdelse af shutter kommando</string>
+  <string name="LabelShoutingInProgress">Optagelsesmodus er EFFECTS</string>
+  <string name="LabelOverHeatedError">Liveview kan ikke startes når temperaturen er høj</string>
+  <string name="LabelCardProtectedError">Kort skrivebeskyttet</string>
+  <string name="LabelMirrorUpError">Der sat mirrorlockup og mirrorlockup bliver udført.</string>
+  <string name="LabelMirrorUpError2">Frigørelsesmodus er [Mirror-up]</string>
+  <string name="LabelDestinationCardError">Optagelsesdestinationen er kortet</string>
+  <string name="LabelLiveViewError">Fejl ved at starte Liveview.</string>
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+</resources>

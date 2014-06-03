@@ -1,0 +1,58 @@
+﻿<Controls:MetroWindow x:Class="CameraControl.windows.PresetEditWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension PresetEditWindowTitle}" Height="355" Width="520" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:CameraControl.windows"
+        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:PresetEditWnd, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="257*" />
+            <RowDefinition Height="39*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="150*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="230*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="1" Grid.Row="1" Name="lst_preset" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:PresetEditWnd, AncestorLevel=1}, Path=SelectedCameraPreset}"/>
+        <ListBox Grid.Column="3" Grid.Row="1" Name="lst_properties" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:PresetEditWnd, AncestorLevel=1}, Path=SelectedCameraPreset.Values}" >
+            <ListBox.ItemTemplate>
+                <HierarchicalDataTemplate>
+                    <WrapPanel>
+                        <Label Content="{Binding Path=Name}" FontStyle="Oblique" Margin="0,0,5,0" />
+                        <Label Content="{Binding Path=Value}"/>
+                    </WrapPanel>
+                </HierarchicalDataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Content="{T:TranslateExtension ButtonDeletePreset}" Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="0,14,0,0" Name="btn_del_preset" VerticalAlignment="Top" Width="110" Click="btn_del_preset_Click" />
+        <Button Content="{T:TranslateExtension ButtonDeleteProperty}" Grid.Column="3" Grid.Row="2" Height="23" Margin="0,14,1,0" Name="btn_del_prop" VerticalAlignment="Top" HorizontalAlignment="Right" Width="108" Click="btn_del_prop_Click" />
+    </Grid>
+</Controls:MetroWindow>

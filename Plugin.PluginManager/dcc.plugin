@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginInfo>
+  <Name>PluginManager</Name>
+  <Id>{1F007F28-46AE-418F-BDBB-154078204169}</Id>
+  <Version>0.1</Version>
+  <Description></Description>
+  <AssemblyFileName>Plugin.PluginManager.dll</AssemblyFileName>
+</PluginInfo>

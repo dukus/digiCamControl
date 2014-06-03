@@ -1,0 +1,72 @@
+﻿<ontrols:MetroWindow x:Class="CameraControl.windows.CameraPropertyWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Camera Property" Height="325" Width="388" Closing="Window_Closing" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:CameraControl.windows"
+                     xmlns:ontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                     xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                     xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" WindowStyle="ToolWindow" UseLayoutRounding="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="150*" />
+            <ColumnDefinition Width="140*" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="83.74*" />
+        </Grid.RowDefinitions>
+        <Label Content="Camera name" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right"/>
+        <TextBox Grid.Column="2" Grid.Row="1" Name="textBox1" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.DeviceName}" Margin="3"/>
+        <Label Content="Serial number" Grid.Column="1" HorizontalContentAlignment="Right"/>
+        <TextBox Grid.Column="2" Name="textBox2" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SerialNumber}" IsReadOnly="True" Margin="3"/>
+
+        <Label Content="Default session" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Right"/>
+        <ComboBox Grid.Column="2" Grid.Row="2" Name="comboBox1" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=PhotoSessionNames}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.PhotoSessionName}" Margin="3"/>
+
+        <Label Content="Default preset" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Right"/>
+        <ComboBox Grid.Column="2" Grid.Row="3" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraPresets}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.DefaultPresetName}" Margin="3"/>
+
+
+        <Label Content="{T:TranslateExtension LabelCounter}" Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Right" Height="29.955" VerticalAlignment="Top" />
+        <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.Counter}" Minimum="0" Grid.Row="4" Grid.Column="2" Margin="1,2,3,2"/>
+
+        <Label Content="{T:TranslateExtension LabelCounterIncrementer}" Grid.Row="5" Grid.Column="1" HorizontalContentAlignment="Right"/>
+        <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.CounterInc}" Minimum="1" Grid.Row="5" Grid.Column="2" Margin="2"/>
+
+        <Label Content="{T:TranslateExtension LabelUseExternalShutterRelease}" Grid.Column="1" Grid.Row="6" HorizontalContentAlignment="Right"/>
+        <CheckBox Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.UseExternalShutter}"/>
+        
+        <Label Content="{T:TranslateExtension LabelUseConfiguration}" Grid.Column="1" Grid.Row="7" HorizontalContentAlignment="Right"/>
+        <ComboBox Grid.Column="2" Grid.Row="7" Margin="3"  ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalShutters}" DisplayMemberPath="Name" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SelectedConfig}"/>
+
+        <Button Content="Save" Grid.Row="8" Name="btn_save" Click="btn_save_Click" Grid.Column="1" Margin="5"/>
+        <Button Content="Cancel" Grid.Row="8" Name="btn_cancel" Grid.Column="2" Click="btn_cancel_Click" Margin="5"/>
+
+    </Grid>
+</ontrols:MetroWindow>

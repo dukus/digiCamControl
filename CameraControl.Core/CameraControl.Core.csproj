@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{741A8DDA-4604-4CF4-8DAA-1F98A2767896}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CameraControl.Core</RootNamespace>
+    <AssemblyName>CameraControl.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging.Formats">
+      <HintPath>..\refs\AForge.Imaging.Formats.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Vision, Version=2.2.5.0, Culture=neutral, PublicKeyToken=b612fa915eefaa06, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AForge.Vision.2.2.5\lib\AForge.Vision.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeImageNET">
+      <HintPath>..\refs\FreeImageNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Griffin.Networking">
+      <HintPath>..\packages\Griffin.Networking.0.5.7\lib\net40\Griffin.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="Griffin.Networking.Protocol.Http">
+      <HintPath>..\packages\Griffin.Networking.Protocol.Http.0.5.2\lib\net40\Griffin.Networking.Protocol.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Griffin.WebServer">
+      <HintPath>..\packages\Griffin.WebServer.0.5.0\lib\net40\Griffin.WebServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=4.4.2.9744, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AvalonEdit.4.4.2.9744\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.PortableDeviceApiLib">
+      <HintPath>..\refs\Interop.PortableDeviceApiLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.PortableDeviceTypesLib">
+      <HintPath>..\refs\Interop.PortableDeviceTypesLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.WIA">
+      <HintPath>..\refs\Interop.WIA.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=0.14.0.57, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MahApps.Metro.0.14.0-ALPHA57\lib\net40\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.0.14.0-ALPHA57\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPF.Themes">
+      <HintPath>..\refs\WPF.Themes.dll</HintPath>
+    </Reference>
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.0.12.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\BitmapFile.cs" />
+    <Compile Include="Classes\BitmapLoader.cs" />
+    <Compile Include="Classes\BitmapLoaderOld.cs" />
+    <Compile Include="Classes\BraketingClass.cs" />
+    <Compile Include="Classes\Branding.cs" />
+    <Compile Include="Classes\CameraHelper.cs" />
+    <Compile Include="Classes\CameraPreset.cs" />
+    <Compile Include="Classes\CameraProperty.cs" />
+    <Compile Include="Classes\CameraPropertyEnumerator.cs" />
+    <Compile Include="Classes\CmdConsts.cs" />
+    <Compile Include="Classes\CustomConfigEnumerator.cs" />
+    <Compile Include="Classes\Exiv2Helper.cs" />
+    <Compile Include="Classes\ExternalDeviceManager.cs" />
+    <Compile Include="Classes\CustomConfig.cs" />
+    <Compile Include="Classes\FileInfo.cs" />
+    <Compile Include="Classes\FileItem.cs" />
+    <Compile Include="Classes\LiveviewSettings.cs" />
+    <Compile Include="Classes\MessageEventArgs.cs" />
+    <Compile Include="Classes\PhotoSession.cs" />
+    <Compile Include="Classes\PhotoUtils.cs" />
+    <Compile Include="Classes\PipeServerT.cs" />
+    <Compile Include="Classes\Queue\QueueItemFileItem.cs" />
+    <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Classes\SourceEnum.cs" />
+    <Compile Include="Classes\TagItem.cs" />
+    <Compile Include="Classes\TimeLapseClass.cs" />
+    <Compile Include="Classes\TriggerClass.cs" />
+    <Compile Include="Classes\ValuePairEnumerator.cs" />
+    <Compile Include="Classes\WebServer.cs" />
+    <Compile Include="Classes\WebServerModule.cs" />
+    <Compile Include="Classes\WebServerOld.cs" />
+    <Compile Include="Classes\WindowCommandItem.cs" />
+    <Compile Include="Classes\WindowsCmdConsts.cs" />
+    <Compile Include="Interfaces\IExportPlugin.cs" />
+    <Compile Include="Interfaces\IExternalDevice.cs" />
+    <Compile Include="Interfaces\IMainWindowPlugin.cs" />
+    <Compile Include="Interfaces\IPlugin.cs" />
+    <Compile Include="Classes\ActionEventArgs.cs" />
+    <Compile Include="Classes\ActionManager.cs" />
+    <Compile Include="Classes\BitmapSourceConvert.cs" />
+    <Compile Include="Classes\CheckedListItem.cs" />
+    <Compile Include="Classes\DictionaryItem.cs" />
+    <Compile Include="Classes\QueueManager.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
+    <Compile Include="Classes\ValuePair.cs" />
+    <Compile Include="Classes\VideoType.cs" />
+    <Compile Include="Classes\WindowsManager.cs" />
+    <Compile Include="Interfaces\IMenuAction.cs" />
+    <Compile Include="Interfaces\IQueueItem.cs" />
+    <Compile Include="Interfaces\IToolPlugin.cs" />
+    <Compile Include="Interfaces\IWindow.cs" />
+    <Compile Include="PluginManager.cs" />
+    <Compile Include="Plugin\PluginInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripting\IScriptCommand.cs" />
+    <Compile Include="Scripting\MyCompletionData .cs" />
+    <Compile Include="Scripting\ScriptCommands\Alert.cs" />
+    <Compile Include="Scripting\ScriptCommands\BaseScript.cs" />
+    <Compile Include="Scripting\ScriptCommands\BulbCapture.cs" />
+    <Compile Include="Scripting\ScriptCommands\BulbCaptureControl.xaml.cs">
+      <DependentUpon>BulbCaptureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scripting\ScriptCommands\Capture.cs" />
+    <Compile Include="Scripting\ScriptCommands\CaptureAll.cs" />
+    <Compile Include="Scripting\ScriptCommands\Echo.cs" />
+    <Compile Include="Scripting\ScriptCommands\ExitLoop.cs" />
+    <Compile Include="Scripting\ScriptCommands\IfCommand.cs" />
+    <Compile Include="Scripting\ScriptCommands\Loop.cs" />
+    <Compile Include="Scripting\ScriptCommands\PHDGuiding.cs" />
+    <Compile Include="Scripting\ScriptCommands\PHDGuidingControl.xaml.cs">
+      <DependentUpon>PHDGuidingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scripting\ScriptCommands\SelectCamera.cs" />
+    <Compile Include="Scripting\ScriptCommands\SetVariable .cs" />
+    <Compile Include="Scripting\ScriptCommands\SetCamera.cs" />
+    <Compile Include="Scripting\ScriptCommands\Stop.cs" />
+    <Compile Include="Scripting\ScriptCommands\WaitCommand.cs" />
+    <Compile Include="Scripting\ScriptCommands\WaitCommandControl.xaml.cs">
+      <DependentUpon>WaitCommandControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scripting\ScriptManager.cs" />
+    <Compile Include="Scripting\ScriptObject.cs" />
+    <Compile Include="ServiceProvider.cs" />
+    <Compile Include="Translation\TranslateConverter.cs" />
+    <Compile Include="Translation\TranslateExtension.cs" />
+    <Compile Include="Translation\TranslationLangDesc.cs" />
+    <Compile Include="Translation\TranslationManager.cs" />
+    <Compile Include="Translation\TranslationStrings.cs" />
+    <Compile Include="Wpf\AdvancedSlider.xaml.cs">
+      <DependentUpon>AdvancedSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\HeaderToImageConverter.cs" />
+    <Compile Include="Wpf\ListBoxBehavior.cs" />
+    <Compile Include="Wpf\ProgressWindow.xaml.cs">
+      <DependentUpon>ProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\SizeConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CameraControl.Devices\CameraControl.Devices.csproj">
+      <Project>{E8572D8B-C987-4D20-BD88-1F8925A64A82}</Project>
+      <Name>CameraControl.Devices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PortableDeviceLib\PortableDeviceLib.csproj">
+      <Project>{E9F048C1-C6A0-4CCD-BE57-4E76A7F8B32D}</Project>
+      <Name>PortableDeviceLib</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\Entypo.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scripting\ScriptCommands\BulbCaptureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scripting\ScriptCommands\PHDGuidingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scripting\ScriptCommands\WaitCommandControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\AdvancedSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\ProgressWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Classes\PipeServerCommands.txt" />
+    <Content Include="Resources\Entypo-license.txt" />
+    <Content Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

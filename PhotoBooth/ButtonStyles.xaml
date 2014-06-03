@@ -1,0 +1,92 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="ButtonOuterBorderBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="ButtonInnerBorderBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="ButtonHoverOuterBorderBrush" Color="#f1b543" />
+    <SolidColorBrush x:Key="ButtonHoverInnerBorderBrush" Color="#ffffff" />
+    <SolidColorBrush x:Key="ButtonPressedOuterBorderBrush" Color="#c2762b" />
+    <SolidColorBrush x:Key="ButtonPressedInnerBorderBrush" Color="#40c2762b" />
+    <SolidColorBrush x:Key="ButtonPressedFillBrush" Color="#ffe48a" />
+    <SolidColorBrush x:Key="ButtonDisabledFillBrush" Color="#80e1e9f0" />
+    <SolidColorBrush x:Key="ButtonSelectedOuterBorderBrush" Color="#c28a30" />
+
+    <LinearGradientBrush x:Key="ButtonHoverFillBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#fcecb3 " Offset="0" />
+        <GradientStop Color="#fae084" Offset="0.5" />
+        <GradientStop Color="#fef9d0" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ButtonSelectedFillBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#ffe67b " Offset="0" />
+        <GradientStop Color="#ffd86c" Offset="0.5" />
+        <GradientStop Color="#fff073" Offset="1" />
+    </LinearGradientBrush>
+
+    <Style x:Key="BigButtonStyle" TargetType="{x:Type ButtonBase}">
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource self}, Path=Command.Text}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True" Background="Transparent">
+
+                        <!-- Outer Rectangle with rounded corners. -->
+                        <Rectangle x:Name="outerRectangle" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch" Stroke="{DynamicResource ButtonOuterBorderBrush}" 
+                              RadiusX="2" RadiusY="2" StrokeThickness="1" Fill="Transparent" />
+
+                        <!-- Inner/bottom Rectangle with rounded corners. -->
+                        <Rectangle x:Name="innerRectangle" HorizontalAlignment="Stretch" Margin="1"
+                              VerticalAlignment="Stretch" Stroke="{DynamicResource ButtonInnerBorderBrush}" 
+                              RadiusX="2" RadiusY="2" StrokeThickness="1" Fill="Transparent" />
+
+                        <!-- Present content of the button. -->
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ContentPresenter x:Name="contentPresenter" MinHeight="16" MinWidth="16" Margin="4" Content="{TemplateBinding  Content}" />
+                        </Grid>
+
+                        <!-- Overlay rectangle with rounded corners. -->
+                        <Rectangle  x:Name="overlayRect" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="2"
+                              RadiusX="2" RadiusY="2" StrokeThickness="0" Opacity="0"
+                              Fill="{DynamicResource StatusBarBackground}" />
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Set properties when mouse pointer is over the button. -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Rectangle.Fill" TargetName="innerRectangle" Value="{DynamicResource ButtonHoverFillBrush}" />
+                            <Setter Property="Rectangle.Stroke" TargetName="innerRectangle" Value="{DynamicResource ButtonHoverInnerBorderBrush}" />
+                            <Setter Property="Rectangle.Stroke" TargetName="outerRectangle" Value="{DynamicResource ButtonHoverOuterBorderBrush}" />
+                            <Setter Property="TextBlock.Foreground" TargetName="contentPresenter" Value="Black" />
+                        </Trigger>
+
+                        <!-- Set properties when the button is pressed. -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Rectangle.Stroke" TargetName="outerRectangle" Value="{DynamicResource ButtonPressedOuterBorderBrush}" />
+                            <Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource ButtonPressedFillBrush}" />
+                            <Setter Property="Rectangle.StrokeThickness" TargetName="innerRectangle" Value="2" />
+                            <Setter Property="Rectangle.Stroke" TargetName="innerRectangle" Value="{DynamicResource ButtonPressedInnerBorderBrush}" />
+                            <Setter Property="TextBlock.Foreground" TargetName="contentPresenter" Value="Black" />
+                        </Trigger>
+
+                        <!-- Set properties when the (toggle) button is checked. -->
+                        <Trigger Property="ToggleButton.IsChecked" Value="True">
+                            <Setter Property="Rectangle.Stroke" TargetName="outerRectangle" Value="{DynamicResource ButtonSelectedOuterBorderBrush}" />
+                            <Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource ButtonSelectedFillBrush}" />
+                            <Setter Property="Rectangle.StrokeThickness" TargetName="innerRectangle" Value="0" />
+                        </Trigger>
+
+                        <!-- Set properties when the button is disabled. -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Rectangle.Opacity" TargetName="overlayRect" Value="0.75" />
+                            <Setter Property="Rectangle.Fill" TargetName="overlayRect" Value="Black" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

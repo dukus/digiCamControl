@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="BURST_NUMBER">突发数</string>
+  <string name="STILL_CAPTURE_MODE">静像拍摄模式</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">连续拍摄</string>
+  <string name="AUTO_ISO">自动 ISO</string>
+  <string name="ON">开</string>
+  <string name="OFF">关</string>
+  <string name="FLASH">闪光灯</string>
+  <string name="NORMAL_SYNCHRONIZATION">普通同步</string>
+  <string name="LONG_EXP._NR">长时曝光降噪</string>
+  <string name="HIGH_ISO_NR">高ISO降噪</string>
+  <string name="NORMAL">普通</string>
+  <string name="EXPOSURE_DELAY_MODE">延迟曝光模式</string>
+  <string name="LOCK">锁定</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">单张拍摄</string>
+  <string name="SELF_TIMER">自身定时器</string>
+  <string name="QUICK_RESPONSE_REMOTE">快速响应遥控</string>
+  <string name="2S_DELAYED_REMOTE">2秒延迟遥控</string>
+  <string name="QUIET_SHOOTING">静音拍摄</string>
+  <string name="FLASH_PROHIBITED">禁用闪光灯</string>
+  <string name="RED_EYE_REDUCTION">红眼消除</string>
+  <string name="SLOW_SYNCHRONIZATION">慢同步</string>
+  <string name="REAR_SYNCHRONIZATION">后帘同步</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">红眼消除慢闪光同步</string>
+  <string name="NOT_PERFORMED">无此功能</string>
+  <string name="LOW">低</string>
+  <string name="HIGH">高</string>
+  <string name="CENTER_WEIGHTED_METERING">中央重点测光</string>
+  <string name="MULTI_PATTERN_METERING">多区域测光</string>
+  <string name="SPOT_METERING">点测光</string>
+  <string name="AUTO">自动</string>
+  <string name="DAYLIGHT">日光</string>
+  <string name="FLUORESCENT_">荧光灯</string>
+  <string name="INCANDESCENT">白炽灯</string>
+  <string name="CLOUDY">多云</string>
+  <string name="SHADE">阴影</string>
+  <string name="CUSTOM">自定义</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] 自动切换AF伺服模式</string>
+  <string name="[S]_SINGLE_AF_SERVO">[S] 单次伺服AF</string>
+  <string name="[M]_MANUAL_FOCUS">[M]手动对焦</string>
+  <string name="KELVIN">凯氏</string>
+  <!--End Property values-->
+  <string name="Mode">拍摄模式</string>
+  <string name="Iso">ISO速率（_I）</string>
+  <string name="ShutterSpeed">快门速度（_S）</string>
+  <string name="Aperture">光圈（_A）</string>
+  <string name="WhiteBalance">白平衡（_W）</string>
+  <string name="ExposureComp">曝光补偿（_E）</string>
+  <string name="Compression">压缩（_C)</string>
+  <string name="MeteringMode">测光模式（_M）</string>
+  <string name="FocusMode">对焦模式（_F）</string>
+  <string name="Battery">电池电量</string>
+  <string name="SDRam">SD卡（_R）</string>
+  <string name="SDRamToolTip">照片直接传到电脑而不存在卡上</string>
+  <string name="CapturePhotoToolTip">拍摄</string>
+  <string name="CapturePhotoNoAfToolTip">拍摄（无自动对焦）</string>
+  <string name="BraketingToolTip">曝光包围拍摄</string>
+  <string name="SettingsToolTip">设置</string>
+  <string name="TimeLapseToolTip">延时摄影</string>
+  <string name="FullscreenToolTip">全屏</string>
+  <string name="LiveViewToolTip">实时取景</string>
+  <string name="BrowseSessionsToolTip">浏览会话</string>
+  <string name="SelectTagsToolTip">选择标签</string>
+  <string name="AboutToolTip">关于</string>
+  <string name="Session">会话</string>
+  <string name="SessionAdd">添加</string>
+  <string name="SessionEdit">编辑</string>
+  <string name="SessionDel">删除</string>
+  <string name="MainWindowTitle">NCC - 已翻译</string>
+  <string name="SettingsWindowTitle">设置</string>
+  <string name="SessionWindowTitle">添加或编辑会话</string>
+  <string name="LiveViewWindowTitle">实时取景</string>
+  <string name="PresetEditWindowTitle">编辑预设</string>
+  <string name="BraketingWindowTitle">曝光包围</string>
+  <string name="EditTagWindowTitle">添加或编辑标签</string>
+  <string name="MultipleCameraWindowTitle">多相机支持</string>
+  <string name="SavePresetWindowTitle">保存预设</string>
+  <string name="TimeLapseWindowTitle">延时摄影</string>
+  <string name="ButtonOk">确定</string>
+  <string name="ButtonCancel">取消</string>
+  <string name="ButtonAdd">添加</string>
+  <string name="ButtonDelete">删除</string>
+  <string name="ButtonEdit">编辑</string>
+  <string name="ButtonAutoFocus">自动对焦（_A）</string>
+  <string name="ButtonCapture">拍摄（_C）</string>
+  <string name="ButtonRecordMovie">记录影片</string>
+  <string name="ButtonFreezeImage">定格图像</string>
+  <string name="ButtonStart">开始</string>
+  <string name="ButtonPreview">预览</string>
+  <string name="ButtonStop">停止</string>
+  <string name="ButtonDeletePreset">删除预设</string>
+  <string name="ButtonDeleteProperty">删除属性</string>
+  <string name="ButtonClose">关闭</string>
+  <string name="ButtonSave">保存</string>
+  <string name="ButtonCapturePhotos">拍摄照片</string>
+  <string name="ButtonStartTimeLapse">开始延时摄影</string>
+  <string name="ButtonStopTimeLapse">停止延时摄影</string>
+  <string name="ButtonCreateMovie">创建影片</string>
+  <string name="ButtonLocateLogFile">定位日志文件</string>
+  <string name="LabelInterfaceLanguage">界面语言：</string>
+  <string name="LabelDisableDriver">禁用本地驱动（不推荐）</string>
+  <string name="LabelTheme">主题：</string>
+  <string name="LabelGeneral">常规</string>
+  <string name="LabelPreview">预览</string>
+  <string name="LabelPlaySound">拍摄后播放声音</string>
+  <string name="LabelAutoPreview">自动预览</string>
+  <string name="LabelPreviewAfterCapture">拍照后全屏预览</string>
+  <string name="LabelPreviewTime">预览时间 (秒)：</string>
+  <string name="LabelPreviewInLIveView">实时取景模式拍摄后预览图像</string>
+  <string name="LabelLIveViewImageFreeze">实时取景图像定格时间</string>
+  <string name="LabelRotateImage">旋转图像</string>
+  <string name="LabelDontLoadThumbs">不载入缩略图</string>
+  <string name="LabelFullscrenBack">全屏窗口背景：</string>
+  <string name="LabelTriggers">快门释放</string>
+  <string name="LabelUseKeybordToTrigger">使用快捷键触发快门释放</string>
+  <string name="LabelWebserver">Web 服务器</string>
+  <string name="LabelUseWebserver">使用 Web 服务器</string>
+  <string name="LabelFocusAndLiveview">对焦和实时取景</string>
+  <string name="LabelSmallFocusSstep">小对焦步长</string>
+  <string name="LabelMediumFocusStep">中对焦步长</string>
+  <string name="LabelLargFocusStep">大对焦步长</string>
+  <string name="ReStartToolTip">你需要重启本程序以使更改生效</string>
+  <string name="LabelSessonName">会话名称：</string>
+  <string name="LabelFolder">文件夹：</string>
+  <string name="LabelFileNameTemplate">文件名模板：</string>
+  <string name="LabelCounter">计数器：</string>
+  <string name="LabelUseOriginal">使用相机给出的原始文件名</string>
+  <string name="LabelUseOriginalToolTip">该选项无法在 WIA 驱动下工作</string>
+  <string name="LabelDontDownloadPhotos">不要下载照片到电脑</string>
+  <string name="LabelAlowFolderChange">使用图像浏览器时允许文件夹更改</string>
+  <string name="LabelTags">标签</string>
+  <string name="LabelManualFocus">手动对焦</string>
+  <string name="LabelGrid">网格</string>
+  <string name="LabelLvZoomRation">Lv 缩放率</string>
+  <string name="LabelFocusStacking">焦点合成</string>
+  <string name="LabelNoOfPhots">照片数量</string>
+  <string name="LabelFocusStep">对焦步长</string>
+  <string name="LabelLuminosity">亮度</string>
+  <string name="LabelExposureBracketing">曝光包围</string>
+  <string name="LabelExposureBracketingToolTip">为了获得最可靠的结果，请设置相机到光圈优先模式并关闭自动ISO和自动白平衡。</string>
+  <string name="LabelManualExposureBracketing">手动曝光包围</string>
+  <string name="LabelManualExposureBracketingToolTip">为获得最可靠的结果，请设置相机到手动模式 (M) 并关闭自动 ISO 和自动白平衡。</string>
+  <string name="LabelPresetBracketing">预设的包围</string>
+  <string name="LabelTagDisplayValue">显示值</string>
+  <string name="LabelTagValue">值</string>
+  <string name="LabelTagIncludeInGroup1">包含在组1</string>
+  <string name="LabelTagIncludeInGroup2">包含在组2</string>
+  <string name="LabelTagIncludeInGroup3">包含在组3</string>
+  <string name="LabelTagIncludeInGroup4">包含在组4</string>
+  <string name="LabelDelay">延迟 (毫秒)</string>
+  <string name="LabelNumberOfCaptures">照片拍摄数</string>
+  <string name="LabelWaitTime">等待时间 (秒)</string>
+  <string name="LabelDisableAutofocus">禁用自动对焦</string>
+  <string name="LabelConnectedCameras">已连接相机</string>
+  <string name="LabelPresetName">预设名称</string>
+  <string name="LabelTimeLapse">延时摄影</string>
+  <string name="LabelSecondsBetweenShots">两次拍摄间隔的秒数</string>
+  <string name="LabelNumberOfPhotos">照片数</string>
+  <string name="LabelDontAutofocusOnEveryCapture">取消每次拍摄的自动对焦</string>
+  <string name="LabelCaptureInterval">拍摄间隔 (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">影片长度 (HH:MM:SS)</string>
+  <string name="LabelMovieSettings">影片设置</string>
+  <string name="LabelVideoFormat">视频格式</string>
+  <string name="LabelOutputFile">输出文件名</string>
+  <string name="LabelFps">帧率</string>
+  <string name="LabelFillImage">填充图像</string>
+  <string name="LabelCreateMovie">新建影片</string>
+  <string name="LabelAddVirtualMovingToVideo">添加虚拟运动到影片</string>
+  <string name="LabelMovingSurface">移动量 (%)</string>
+  <string name="LabelMovingDirection">运动方向</string>
+  <string name="LabelMovingDirectionLeftToRight">从左到右</string>
+  <string name="LabelMovingDirectionRightToLeft">从右到左</string>
+  <string name="LabelMovingDirectionTopToBottom">从上到下</string>
+  <string name="LabelMovingDirectionBottomToTop">从下到上</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">左上到右下</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">右下到左上</string>
+  <string name="LabelImageAlignment">图片排列</string>
+  <string name="LabelImageAlignmentLeftTop">左上</string>
+  <string name="LabelImageAlignmentCenter">中央</string>
+  <string name="LabelImageAlignmentRightBottom">右下</string>
+  <string name="LabelVideoCodecProblem">视频编码器问题</string>
+  <string name="MsgPhotoTransferBegin">图片传输开始</string>
+  <string name="MsgPhotoTransferDone">图片传输完成</string>
+  <string name="MsgPhotoTransferError">传输错误！\n消息 :{0}</string>
+  <string name="MsgBulbModeNotSupported">不支持B门模式！</string>
+  <string name="MsgApplicationUpToDate">您的应用程序已是最新版！</string>
+  <string name="MsgUseSessionEditorTags">请使用会话编辑器定义标签！</string>
+  <string name="MsgLastSessionCantBeDeleted">仅有的一个会话不能被删除</string>
+  <string name="MsgStopTimeLapse">延时摄影仍在进行中！ 要停止吗？</string>
+  <string name="MsgInstallXvidCodec">Xvid 编码器未安装！\n下载并安装吗？</string>
+  <string name="MsgDeleteSessionQuestion">确定删除会话 {0} 吗？\n照片文件不会被删除！</string>
+  <string name="MsgBracketingDone">包围拍摄完成</string>
+  <string name="MsgActionInProgress">操作进度 {0}/{1}</string>
+  <string name="MenuFile">文件（_F）</string>
+  <string name="MenuReScan">重新扫描连接的相机</string>
+  <string name="MenuConnectedCameras">已连接的相机</string>
+  <string name="MenuExit">退出</string>
+  <string name="MenuView">查看（_V）</string>
+  <string name="MenuMultipleCamera">多相机控制</string>
+  <string name="MenuSelectedCameraProperty">相机属性</string>
+  <string name="MenuPresets">预设</string>
+  <string name="MenuPresetsLoad">载入</string>
+  <string name="MenuPresetsSave">保存</string>
+  <string name="MenuPresetsEdit">编辑</string>
+  <string name="MenuHelp">帮助（_H）</string>
+  <string name="MenuHomePage">主页</string>
+  <string name="MenuCheckForUpdate">检查更新</string>
+  <string name="MenuDonate">捐助</string>
+  <string name="MenuAbout">关于</string>
+  <string name="MenuLayout">界面布局</string>
+  <string name="MenuLayoutNormal">普通</string>
+  <string name="MenuLayoutGridRight">右侧缩略图</string>
+  <string name="MenuLayoutGrid">仅缩略图</string>
+  <string name="MenuProperties">属性</string>
+  <string name="MenuUseSelectedCameraPreset">使用选定的相机预设</string>
+  <!--15/10/2012-->
+  <string name="LabelExternalViewerPath">外部浏览器菜单</string>
+  <string name="LabelStayOnTop">窗口总在最上</string>
+  <!--22/10/2012-->
+  <string name="LabelDisplay">显示</string>
+  <string name="LabelMotionDetection">运动检测</string>
+  <string name="LabelActivateMotionDetection">启用运动检测</string>
+  <string name="LabelCaptureWhenMove">当检测到运动时拍照</string>
+  <string name="LabelThreshold">阈值 (%)</string>
+  <string name="LabelWaitMoion">等待时间 (秒)</string>
+  <!--25/10/2012-->
+  <string name="LabelAutofocusBeforeCapture">拍摄前自动对焦</string>
+  <!--26/10/2012-->
+  <string name="LabelOpacity">不透明度</string>
+  <!--29/10/2012-->
+  <string name="LabelMotionDetectionType">运动检测类型</string>
+  <string name="LabelTwoFramesDifferenceDetector">帧差异检测</string>
+  <string name="LabelSimpleBackgroundModelingDetector">简易背景建模检测</string>
+  <string name="LabelSmallestBlockSize">最小块大小</string>
+  <string name="ButtonHelp">帮助</string>
+  <!--31/10/2012-->
+  <string name="LabelMenu">菜单</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">论坛</string>
+  <!--07/11/2012-->
+  <string name="ButtonGetRawCodec">获取raw格式编码器</string>
+  <!--08/11/2012-->
+  <string name="LabelErrorRecordMovie">开始影片拍摄出错</string>
+  <string name="LabelNoCardInserted">未插储存卡</string>
+  <string name="LabelCardError">储存卡错误</string>
+  <string name="LabelCardNotFormatted">储存卡未格式化</string>
+  <string name="LabelNoFreeAreaInCard">储存卡空间不足</string>
+  <string name="LabelCardBufferNotEmpty">缓冲区中有未写入储存卡的数据。</string>
+  <string name="LabelPcBufferNotEmpty">缓冲区中有未写入电脑的数据。</string>
+  <string name="LabelBufferNotEmpty">缓冲区中有影片数据。</string>
+  <string name="LabelRecordInProgres">影片摄录中</string>
+  <string name="LabelCardProtected">储存卡被写保护</string>
+  <string name="LabelDuringEnlargedDisplayLiveView">实时取景扩大中</string>
+  <string name="LabelWrongLiveViewType">设置实时取景选择器为实时取景摄影。</string>
+  <string name="LabelNotInApplicationMode">相机不在应用模式</string>
+  <string name="ButtonResetSettings">复位设定</string>
+  <!--14/11/2012-->
+  <string name="LabelUseExternalViewer">使用外部浏览器</string>
+  <string name="LabelExternalPreViewerPath">外部浏览器路径</string>
+  <string name="LabelExternalPreViewerArgs">外部浏览器命令参数</string>
+  <!--18/11/2012-->
+  <string name="LabelControl">控制</string>
+  <!--20/11/2012-->
+  <string name="LabelExport">导出</string>
+  <!--21/11/2012-->
+  <string name="LabelDownload">下载</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">下载照片</string>
+  <string name="LabelDeleteFilesAfterTransfer">传输完成后删除原始文件</string>
+  <string name="LabelAskForDelete">已传输的文件将被删除。继续吗？</string>
+  <!--26/11/2012-->
+  <string name="LabelErrorSetFocusPos">设置对焦点出错</string>
+  <string name="LabelErrorUnableFocus">无法对焦</string>
+  <!--28/11/2012-->
+  <string name="LabelErrorLoadingFileList">载入文件列表出错</string>
+  <!--30/11/2012-->
+  <string name="LabelTransfer">传输</string>
+  <string name="LabelTransferItem1">1. 仅保存到电脑</string>
+  <string name="LabelTransferItem2">2. 仅保存到相机</string>
+  <string name="LabelTransferItem3">3. 保存到相机和电脑</string>
+  <!--05/12/2012-->
+  <string name="MsgDisabledDrivers">自带驱动被禁用！ 要启用吗？</string>
+  <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">显示对焦点</string>
+  <string name="LabelMainWindow">主窗口</string>
+  <string name="LabelSelect">选择</string>
+  <string name="TimeSelectWindowTitle">选择窗口</string>
+  <!--16/12/2012-->
+  <string name="LabelRotateNone">无</string>
+  <string name="LabelRotate90">旋转90度</string>
+  <string name="LabelRotate180">旋转180度</string>
+  <string name="LabelRotate270">旋转270度</string>
+  <string name="LabelLowMemoryUsage">低内存使用模式</string>
+  <!--04/01/2013-->
+  <string name="LabelRawCodecNotInstalled">Raw格式解码器未安装或未知的文件格式</string>
+  <!--05/01/2013-->
+  <string name="LabelUseCameraCounter">使用相机自带计数器而不是通用计数器</string>
+  <string name="LabelResetCounters">复位计数器</string>
+  <!--07/01/2013-->
+  <string name="LabelUnabletoDeleteSession">无法删除会话</string>
+  <!--12/01/2013-->
+  <string name="LabelWaitingForDevice">等待设备就绪</string>
+  <string name="LabelAdvanced">高级</string>
+  <string name="LabelUseParellelTransfer">使用并行文件传输器</string>
+  <!--19/01/2013-->
+  <string name="LabelUnHandledError">程序出错。\n请检查您的数据是否正确然后重试。若该问题再次出现那么意味着本程序有问题，你最好关闭本程序。\n\nError:{0}\n\n继续吗？\n(选”是“则继续工作，选”否“则程序会关闭)</string>
+  <string name="LabelApplicationError">程序错误</string>
+  <string name="LabelWiaNotInstalled">未安装 WIA 2.0</string>
+  <string name="LabelRestartTheApplication">重启本应用程序！</string>
+  <string name="LabelOutOfMemory">内存不足。程序将退出！</string>
+  <string name="LabelApplicationAlreadyRunning">程序已在运行</string>
+  <string name="LabelDeleteSession">删除会话</string>
+  <string name="LabelStartCapture">开始拍摄</string>
+  <string name="LabelStopCapture">停止拍摄</string>
+  <string name="LabelCaptureTime">拍摄时长 (秒)</string>
+  <string name="LabelTimeBetweenShots">拍摄间隔</string>
+  <string name="LabelDontAutofocus">取消自动对焦</string>
+  <string name="LabelShowUnTranslatedStringIds">显示未翻译的字符串 ID</string>
+  <!--20/01/2013-->
+  <string name="LabelUseAsMaster">设为主机</string>
+  <!--29/01/2013-->
+  <!--31/01/2013-->
+  <string name="LabelNone">无</string>
+  <string name="LabelComboGrid">仅缩略图</string>
+  <!--13/03/2013-->
+  <string name="LabelTools">工具</string>
+  <!--17/03/2012-->
+  <string name="LabelMFError">相机处在 MF 对焦模式</string>
+  <string name="LabelNotAFSError">相机不在 AF-S 对焦模式</string>
+  <!--28/03/2012-->
+  <string name="LabelApertureValueError">光圈值正在被镜头光圈环设置。</string>
+  <string name="LabelBulbError">B门错误</string>
+  <string name="LabelDuringInsufficiencyBattery">电池电量不足</string>
+  <string name="LabelNonCPULEnseError">使用的是非 CPU 镜头, 而曝光模式不是 M。</string>
+  <string name="LabelOverHeatedError">溫度过高, 无法启动实时取景模式。</string>
+  <string name="LabelCardProtectedError">储存卡被写保护</string>
+  <string name="LabelMirrorUpError">快门释放模式已设为反光镜抬起, 操作正在执行中.</string>
+  <string name="LabelDestinationCardError">储存介质是储存卡。</string>
+  <string name="LabelLiveViewError">启动实时取景出错</string>
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+</resources>

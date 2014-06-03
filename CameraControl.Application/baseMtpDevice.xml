@@ -1,0 +1,2215 @@
+<?xml version="1.0"?>
+<XmlDeviceData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AvaiableCommands>
+    <XmlCommandDescriptor Code="4096" Name="PTP_OC_Undefined" HexCode="1000" />
+    <XmlCommandDescriptor Code="4097" Name="PTP_OC_GetDeviceInfo" HexCode="1001" />
+    <XmlCommandDescriptor Code="4098" Name="PTP_OC_OpenSession" HexCode="1002" />
+    <XmlCommandDescriptor Code="4099" Name="PTP_OC_CloseSession" HexCode="1003" />
+    <XmlCommandDescriptor Code="4100" Name="PTP_OC_GetStorageIDs" HexCode="1004" />
+    <XmlCommandDescriptor Code="4101" Name="PTP_OC_GetStorageInfo" HexCode="1005" />
+    <XmlCommandDescriptor Code="4102" Name="PTP_OC_GetNumObjects" HexCode="1006" />
+    <XmlCommandDescriptor Code="4103" Name="PTP_OC_GetObjectHandles" HexCode="1007" />
+    <XmlCommandDescriptor Code="4104" Name="PTP_OC_GetObjectInfo" HexCode="1008" />
+    <XmlCommandDescriptor Code="4105" Name="PTP_OC_GetObject" HexCode="1009" />
+    <XmlCommandDescriptor Code="4106" Name="PTP_OC_GetThumb" HexCode="100A" />
+    <XmlCommandDescriptor Code="4107" Name="PTP_OC_DeleteObject" HexCode="100B" />
+    <XmlCommandDescriptor Code="4108" Name="PTP_OC_SendObjectInfo" HexCode="100C" />
+    <XmlCommandDescriptor Code="4109" Name="PTP_OC_SendObject" HexCode="100D" />
+    <XmlCommandDescriptor Code="4110" Name="PTP_OC_InitiateCapture" HexCode="100E" />
+    <XmlCommandDescriptor Code="4111" Name="PTP_OC_FormatStore" HexCode="100F" />
+    <XmlCommandDescriptor Code="4112" Name="PTP_OC_ResetDevice" HexCode="1010" />
+    <XmlCommandDescriptor Code="4113" Name="PTP_OC_SelfTest" HexCode="1011" />
+    <XmlCommandDescriptor Code="4114" Name="PTP_OC_SetObjectProtection" HexCode="1012" />
+    <XmlCommandDescriptor Code="4115" Name="PTP_OC_PowerDown" HexCode="1013" />
+    <XmlCommandDescriptor Code="4116" Name="PTP_OC_GetDevicePropDesc" HexCode="1014" />
+    <XmlCommandDescriptor Code="4117" Name="PTP_OC_GetDevicePropValue" HexCode="1015" />
+    <XmlCommandDescriptor Code="4118" Name="PTP_OC_SetDevicePropValue" HexCode="1016" />
+    <XmlCommandDescriptor Code="4119" Name="PTP_OC_ResetDevicePropValue" HexCode="1017" />
+    <XmlCommandDescriptor Code="4120" Name="PTP_OC_TerminateOpenCapture" HexCode="1018" />
+    <XmlCommandDescriptor Code="4121" Name="PTP_OC_MoveObject" HexCode="1019" />
+    <XmlCommandDescriptor Code="4122" Name="PTP_OC_CopyObject" HexCode="101A" />
+    <XmlCommandDescriptor Code="4123" Name="PTP_OC_GetPartialObject" HexCode="101B" />
+    <XmlCommandDescriptor Code="4124" Name="PTP_OC_InitiateOpenCapture" HexCode="101C" />
+    <XmlCommandDescriptor Code="4125" Name="PTP_OC_StartEnumHandles" HexCode="101D" />
+    <XmlCommandDescriptor Code="4126" Name="PTP_OC_EnumHandles" HexCode="101E" />
+    <XmlCommandDescriptor Code="4127" Name="PTP_OC_StopEnumHandles" HexCode="101F" />
+    <XmlCommandDescriptor Code="4128" Name="PTP_OC_GetVendorExtensionMaps" HexCode="1020" />
+    <XmlCommandDescriptor Code="4129" Name="PTP_OC_GetVendorDeviceInfo" HexCode="1021" />
+    <XmlCommandDescriptor Code="4130" Name="PTP_OC_GetResizedImageObject" HexCode="1022" />
+    <XmlCommandDescriptor Code="4131" Name="PTP_OC_GetFilesystemManifest" HexCode="1023" />
+    <XmlCommandDescriptor Code="4132" Name="PTP_OC_GetStreamInfo" HexCode="1024" />
+    <XmlCommandDescriptor Code="4133" Name="PTP_OC_GetStream" HexCode="1025" />
+    <XmlCommandDescriptor Code="36867" Name="PTP_OC_EK_GetSerial" HexCode="9003" />
+    <XmlCommandDescriptor Code="36868" Name="PTP_OC_EK_SetSerial" HexCode="9004" />
+    <XmlCommandDescriptor Code="36869" Name="PTP_OC_EK_SendFileObjectInfo" HexCode="9005" />
+    <XmlCommandDescriptor Code="36870" Name="PTP_OC_EK_SendFileObject" HexCode="9006" />
+    <XmlCommandDescriptor Code="36872" Name="PTP_OC_EK_SetText" HexCode="9008" />
+    <XmlCommandDescriptor Code="36865" Name="PTP_OC_CANON_GetPartialObjectInfo" HexCode="9001" />
+    <XmlCommandDescriptor Code="36866" Name="PTP_OC_CANON_SetObjectArchive" HexCode="9002" />
+    <XmlCommandDescriptor Code="36867" Name="PTP_OC_CANON_KeepDeviceOn" HexCode="9003" />
+    <XmlCommandDescriptor Code="36868" Name="PTP_OC_CANON_LockDeviceUI" HexCode="9004" />
+    <XmlCommandDescriptor Code="36869" Name="PTP_OC_CANON_UnlockDeviceUI" HexCode="9005" />
+    <XmlCommandDescriptor Code="36870" Name="PTP_OC_CANON_GetObjectHandleByName" HexCode="9006" />
+    <XmlCommandDescriptor Code="36872" Name="PTP_OC_CANON_InitiateReleaseControl" HexCode="9008" />
+    <XmlCommandDescriptor Code="36873" Name="PTP_OC_CANON_TerminateReleaseControl" HexCode="9009" />
+    <XmlCommandDescriptor Code="36874" Name="PTP_OC_CANON_TerminatePlaybackMode" HexCode="900A" />
+    <XmlCommandDescriptor Code="36875" Name="PTP_OC_CANON_ViewfinderOn" HexCode="900B" />
+    <XmlCommandDescriptor Code="36876" Name="PTP_OC_CANON_ViewfinderOff" HexCode="900C" />
+    <XmlCommandDescriptor Code="36877" Name="PTP_OC_CANON_DoAeAfAwb" HexCode="900D" />
+    <XmlCommandDescriptor Code="36878" Name="PTP_OC_CANON_GetCustomizeSpec" HexCode="900E" />
+    <XmlCommandDescriptor Code="36879" Name="PTP_OC_CANON_GetCustomizeItemInfo" HexCode="900F" />
+    <XmlCommandDescriptor Code="36880" Name="PTP_OC_CANON_GetCustomizeData" HexCode="9010" />
+    <XmlCommandDescriptor Code="36881" Name="PTP_OC_CANON_SetCustomizeData" HexCode="9011" />
+    <XmlCommandDescriptor Code="36882" Name="PTP_OC_CANON_GetCaptureStatus" HexCode="9012" />
+    <XmlCommandDescriptor Code="36883" Name="PTP_OC_CANON_CheckEvent" HexCode="9013" />
+    <XmlCommandDescriptor Code="36884" Name="PTP_OC_CANON_FocusLock" HexCode="9014" />
+    <XmlCommandDescriptor Code="36885" Name="PTP_OC_CANON_FocusUnlock" HexCode="9015" />
+    <XmlCommandDescriptor Code="36886" Name="PTP_OC_CANON_GetLocalReleaseParam" HexCode="9016" />
+    <XmlCommandDescriptor Code="36887" Name="PTP_OC_CANON_SetLocalReleaseParam" HexCode="9017" />
+    <XmlCommandDescriptor Code="36888" Name="PTP_OC_CANON_AskAboutPcEvf" HexCode="9018" />
+    <XmlCommandDescriptor Code="36889" Name="PTP_OC_CANON_SendPartialObject" HexCode="9019" />
+    <XmlCommandDescriptor Code="36890" Name="PTP_OC_CANON_InitiateCaptureInMemory" HexCode="901A" />
+    <XmlCommandDescriptor Code="36891" Name="PTP_OC_CANON_GetPartialObjectEx" HexCode="901B" />
+    <XmlCommandDescriptor Code="36892" Name="PTP_OC_CANON_SetObjectTime" HexCode="901C" />
+    <XmlCommandDescriptor Code="36893" Name="PTP_OC_CANON_GetViewfinderImage" HexCode="901D" />
+    <XmlCommandDescriptor Code="36894" Name="PTP_OC_CANON_GetObjectAttributes" HexCode="901E" />
+    <XmlCommandDescriptor Code="36895" Name="PTP_OC_CANON_ChangeUSBProtocol" HexCode="901F" />
+    <XmlCommandDescriptor Code="36896" Name="PTP_OC_CANON_GetChanges" HexCode="9020" />
+    <XmlCommandDescriptor Code="36897" Name="PTP_OC_CANON_GetObjectInfoEx" HexCode="9021" />
+    <XmlCommandDescriptor Code="36898" Name="PTP_OC_CANON_InitiateDirectTransfer" HexCode="9022" />
+    <XmlCommandDescriptor Code="36899" Name="PTP_OC_CANON_TerminateDirectTransfer" HexCode="9023" />
+    <XmlCommandDescriptor Code="36900" Name="PTP_OC_CANON_SendObjectInfoByPath" HexCode="9024" />
+    <XmlCommandDescriptor Code="36901" Name="PTP_OC_CANON_SendObjectByPath" HexCode="9025" />
+    <XmlCommandDescriptor Code="36902" Name="PTP_OC_CANON_InitiateDirectTansferEx" HexCode="9026" />
+    <XmlCommandDescriptor Code="36903" Name="PTP_OC_CANON_GetAncillaryObjectHandles" HexCode="9027" />
+    <XmlCommandDescriptor Code="36904" Name="PTP_OC_CANON_GetTreeInfo" HexCode="9028" />
+    <XmlCommandDescriptor Code="36905" Name="PTP_OC_CANON_GetTreeSize" HexCode="9029" />
+    <XmlCommandDescriptor Code="36906" Name="PTP_OC_CANON_NotifyProgress" HexCode="902A" />
+    <XmlCommandDescriptor Code="36907" Name="PTP_OC_CANON_NotifyCancelAccepted" HexCode="902B" />
+    <XmlCommandDescriptor Code="36908" Name="PTP_OC_CANON_902C" HexCode="902C" />
+    <XmlCommandDescriptor Code="36909" Name="PTP_OC_CANON_GetDirectory" HexCode="902D" />
+    <XmlCommandDescriptor Code="36912" Name="PTP_OC_CANON_SetPairingInfo" HexCode="9030" />
+    <XmlCommandDescriptor Code="36913" Name="PTP_OC_CANON_GetPairingInfo" HexCode="9031" />
+    <XmlCommandDescriptor Code="36914" Name="PTP_OC_CANON_DeletePairingInfo" HexCode="9032" />
+    <XmlCommandDescriptor Code="36915" Name="PTP_OC_CANON_GetMACAddress" HexCode="9033" />
+    <XmlCommandDescriptor Code="36916" Name="PTP_OC_CANON_SetDisplayMonitor" HexCode="9034" />
+    <XmlCommandDescriptor Code="36917" Name="PTP_OC_CANON_PairingComplete" HexCode="9035" />
+    <XmlCommandDescriptor Code="36918" Name="PTP_OC_CANON_GetWirelessMAXChannel" HexCode="9036" />
+    <XmlCommandDescriptor Code="37121" Name="PTP_OC_CANON_EOS_GetStorageIDs" HexCode="9101" />
+    <XmlCommandDescriptor Code="37122" Name="PTP_OC_CANON_EOS_GetStorageInfo" HexCode="9102" />
+    <XmlCommandDescriptor Code="37123" Name="PTP_OC_CANON_EOS_GetObjectInfo" HexCode="9103" />
+    <XmlCommandDescriptor Code="37124" Name="PTP_OC_CANON_EOS_GetObject" HexCode="9104" />
+    <XmlCommandDescriptor Code="37125" Name="PTP_OC_CANON_EOS_DeleteObject" HexCode="9105" />
+    <XmlCommandDescriptor Code="37126" Name="PTP_OC_CANON_EOS_FormatStore" HexCode="9106" />
+    <XmlCommandDescriptor Code="37127" Name="PTP_OC_CANON_EOS_GetPartialObject" HexCode="9107" />
+    <XmlCommandDescriptor Code="37128" Name="PTP_OC_CANON_EOS_GetDeviceInfoEx" HexCode="9108" />
+    <XmlCommandDescriptor Code="37129" Name="PTP_OC_CANON_EOS_GetObjectInfoEx" HexCode="9109" />
+    <XmlCommandDescriptor Code="37130" Name="PTP_OC_CANON_EOS_GetThumbEx" HexCode="910A" />
+    <XmlCommandDescriptor Code="37131" Name="PTP_OC_CANON_EOS_SendPartialObject" HexCode="910B" />
+    <XmlCommandDescriptor Code="37132" Name="PTP_OC_CANON_EOS_SetObjectAttributes" HexCode="910C" />
+    <XmlCommandDescriptor Code="37133" Name="PTP_OC_CANON_EOS_GetObjectTime" HexCode="910D" />
+    <XmlCommandDescriptor Code="37134" Name="PTP_OC_CANON_EOS_SetObjectTime" HexCode="910E" />
+    <XmlCommandDescriptor Code="37135" Name="PTP_OC_CANON_EOS_RemoteRelease" HexCode="910F" />
+    <XmlCommandDescriptor Code="37136" Name="PTP_OC_CANON_EOS_SetDevicePropValueEx" HexCode="9110" />
+    <XmlCommandDescriptor Code="37139" Name="PTP_OC_CANON_EOS_GetRemoteMode" HexCode="9113" />
+    <XmlCommandDescriptor Code="37140" Name="PTP_OC_CANON_EOS_SetRemoteMode" HexCode="9114" />
+    <XmlCommandDescriptor Code="37141" Name="PTP_OC_CANON_EOS_SetEventMode" HexCode="9115" />
+    <XmlCommandDescriptor Code="37142" Name="PTP_OC_CANON_EOS_GetEvent" HexCode="9116" />
+    <XmlCommandDescriptor Code="37143" Name="PTP_OC_CANON_EOS_TransferComplete" HexCode="9117" />
+    <XmlCommandDescriptor Code="37144" Name="PTP_OC_CANON_EOS_CancelTransfer" HexCode="9118" />
+    <XmlCommandDescriptor Code="37145" Name="PTP_OC_CANON_EOS_ResetTransfer" HexCode="9119" />
+    <XmlCommandDescriptor Code="37146" Name="PTP_OC_CANON_EOS_PCHDDCapacity" HexCode="911A" />
+    <XmlCommandDescriptor Code="37147" Name="PTP_OC_CANON_EOS_SetUILock" HexCode="911B" />
+    <XmlCommandDescriptor Code="37148" Name="PTP_OC_CANON_EOS_ResetUILock" HexCode="911C" />
+    <XmlCommandDescriptor Code="37149" Name="PTP_OC_CANON_EOS_KeepDeviceOn" HexCode="911D" />
+    <XmlCommandDescriptor Code="37150" Name="PTP_OC_CANON_EOS_SetNullPacketMode" HexCode="911E" />
+    <XmlCommandDescriptor Code="37151" Name="PTP_OC_CANON_EOS_UpdateFirmware" HexCode="911F" />
+    <XmlCommandDescriptor Code="37152" Name="PTP_OC_CANON_EOS_TransferCompleteDT" HexCode="9120" />
+    <XmlCommandDescriptor Code="37153" Name="PTP_OC_CANON_EOS_CancelTransferDT" HexCode="9121" />
+    <XmlCommandDescriptor Code="37154" Name="PTP_OC_CANON_EOS_SetWftProfile" HexCode="9122" />
+    <XmlCommandDescriptor Code="37154" Name="PTP_OC_CANON_EOS_GetWftProfile" HexCode="9122" />
+    <XmlCommandDescriptor Code="37156" Name="PTP_OC_CANON_EOS_SetProfileToWft" HexCode="9124" />
+    <XmlCommandDescriptor Code="37157" Name="PTP_OC_CANON_EOS_BulbStart" HexCode="9125" />
+    <XmlCommandDescriptor Code="37158" Name="PTP_OC_CANON_EOS_BulbEnd" HexCode="9126" />
+    <XmlCommandDescriptor Code="37159" Name="PTP_OC_CANON_EOS_RequestDevicePropValue" HexCode="9127" />
+    <XmlCommandDescriptor Code="37160" Name="PTP_OC_CANON_EOS_RemoteReleaseOn" HexCode="9128" />
+    <XmlCommandDescriptor Code="37161" Name="PTP_OC_CANON_EOS_RemoteReleaseOff" HexCode="9129" />
+    <XmlCommandDescriptor Code="37201" Name="PTP_OC_CANON_EOS_InitiateViewfinder" HexCode="9151" />
+    <XmlCommandDescriptor Code="37202" Name="PTP_OC_CANON_EOS_TerminateViewfinder" HexCode="9152" />
+    <XmlCommandDescriptor Code="37203" Name="PTP_OC_CANON_EOS_GetViewFinderData" HexCode="9153" />
+    <XmlCommandDescriptor Code="37204" Name="PTP_OC_CANON_EOS_DoAf" HexCode="9154" />
+    <XmlCommandDescriptor Code="37205" Name="PTP_OC_CANON_EOS_DriveLens" HexCode="9155" />
+    <XmlCommandDescriptor Code="37206" Name="PTP_OC_CANON_EOS_DepthOfFieldPreview" HexCode="9156" />
+    <XmlCommandDescriptor Code="37207" Name="PTP_OC_CANON_EOS_ClickWB" HexCode="9157" />
+    <XmlCommandDescriptor Code="37208" Name="PTP_OC_CANON_EOS_Zoom" HexCode="9158" />
+    <XmlCommandDescriptor Code="37209" Name="PTP_OC_CANON_EOS_ZoomPosition" HexCode="9159" />
+    <XmlCommandDescriptor Code="37210" Name="PTP_OC_CANON_EOS_SetLiveAfFrame" HexCode="915A" />
+    <XmlCommandDescriptor Code="37216" Name="PTP_OC_CANON_EOS_AfCancel" HexCode="9160" />
+    <XmlCommandDescriptor Code="37374" Name="PTP_OC_CANON_EOS_FAPIMessageTX" HexCode="91FE" />
+    <XmlCommandDescriptor Code="37375" Name="PTP_OC_CANON_EOS_FAPIMessageRX" HexCode="91FF" />
+    <XmlCommandDescriptor Code="36870" Name="PTP_OC_NIKON_GetProfileAllData" HexCode="9006" />
+    <XmlCommandDescriptor Code="36871" Name="PTP_OC_NIKON_SendProfileData" HexCode="9007" />
+    <XmlCommandDescriptor Code="36872" Name="PTP_OC_NIKON_DeleteProfile" HexCode="9008" />
+    <XmlCommandDescriptor Code="36873" Name="PTP_OC_NIKON_SetProfileData" HexCode="9009" />
+    <XmlCommandDescriptor Code="36880" Name="PTP_OC_NIKON_AdvancedTransfer" HexCode="9010" />
+    <XmlCommandDescriptor Code="36881" Name="PTP_OC_NIKON_GetFileInfoInBlock" HexCode="9011" />
+    <XmlCommandDescriptor Code="37056" Name="PTP_OC_NIKON_Capture" HexCode="90C0" />
+    <XmlCommandDescriptor Code="37057" Name="PTP_OC_NIKON_AfDrive" HexCode="90C1" />
+    <XmlCommandDescriptor Code="37058" Name="PTP_OC_NIKON_SetControlMode" HexCode="90C2" />
+    <XmlCommandDescriptor Code="37059" Name="PTP_OC_NIKON_DelImageSDRAM" HexCode="90C3" />
+    <XmlCommandDescriptor Code="37060" Name="PTP_OC_NIKON_GetLargeThumb" HexCode="90C4" />
+    <XmlCommandDescriptor Code="37061" Name="PTP_OC_NIKON_CurveDownload" HexCode="90C5" />
+    <XmlCommandDescriptor Code="37062" Name="PTP_OC_NIKON_CurveUpload" HexCode="90C6" />
+    <XmlCommandDescriptor Code="37063" Name="PTP_OC_NIKON_CheckEvent" HexCode="90C7" />
+    <XmlCommandDescriptor Code="37064" Name="PTP_OC_NIKON_DeviceReady" HexCode="90C8" />
+    <XmlCommandDescriptor Code="37065" Name="PTP_OC_NIKON_SetPreWBData" HexCode="90C9" />
+    <XmlCommandDescriptor Code="37066" Name="PTP_OC_NIKON_GetVendorPropCodes" HexCode="90CA" />
+    <XmlCommandDescriptor Code="37067" Name="PTP_OC_NIKON_AfCaptureSDRAM" HexCode="90CB" />
+    <XmlCommandDescriptor Code="37068" Name="PTP_OC_NIKON_GetPictCtrlData" HexCode="90CC" />
+    <XmlCommandDescriptor Code="37069" Name="PTP_OC_NIKON_SetPictCtrlData" HexCode="90CD" />
+    <XmlCommandDescriptor Code="37070" Name="PTP_OC_NIKON_DelCstPicCtrl" HexCode="90CE" />
+    <XmlCommandDescriptor Code="37071" Name="PTP_OC_NIKON_GetPicCtrlCapability" HexCode="90CF" />
+    <XmlCommandDescriptor Code="37376" Name="PTP_OC_NIKON_GetPreviewImg" HexCode="9200" />
+    <XmlCommandDescriptor Code="37377" Name="PTP_OC_NIKON_StartLiveView" HexCode="9201" />
+    <XmlCommandDescriptor Code="37378" Name="PTP_OC_NIKON_EndLiveView" HexCode="9202" />
+    <XmlCommandDescriptor Code="37379" Name="PTP_OC_NIKON_GetLiveViewImg" HexCode="9203" />
+    <XmlCommandDescriptor Code="37380" Name="PTP_OC_NIKON_MfDrive" HexCode="9204" />
+    <XmlCommandDescriptor Code="37381" Name="PTP_OC_NIKON_ChangeAfArea" HexCode="9205" />
+    <XmlCommandDescriptor Code="37382" Name="PTP_OC_NIKON_AfDriveCancel" HexCode="9206" />
+    <XmlCommandDescriptor Code="37088" Name="PTP_OC_NIKON_GetDevicePTPIPInfo" HexCode="90E0" />
+    <XmlCommandDescriptor Code="36865" Name="PTP_OC_CASIO_STILL_START" HexCode="9001" />
+    <XmlCommandDescriptor Code="36866" Name="PTP_OC_CASIO_STILL_STOP" HexCode="9002" />
+    <XmlCommandDescriptor Code="36871" Name="PTP_OC_CASIO_FOCUS" HexCode="9007" />
+    <XmlCommandDescriptor Code="36873" Name="PTP_OC_CASIO_CF_PRESS" HexCode="9009" />
+    <XmlCommandDescriptor Code="36874" Name="PTP_OC_CASIO_CF_RELEASE" HexCode="900A" />
+    <XmlCommandDescriptor Code="36876" Name="PTP_OC_CASIO_GET_OBJECT_INFO" HexCode="900C" />
+    <XmlCommandDescriptor Code="36900" Name="PTP_OC_CASIO_SHUTTER" HexCode="9024" />
+    <XmlCommandDescriptor Code="36903" Name="PTP_OC_CASIO_GET_STILL_HANDLES" HexCode="9027" />
+    <XmlCommandDescriptor Code="36904" Name="PTP_OC_CASIO_STILL_RESET" HexCode="9028" />
+    <XmlCommandDescriptor Code="36905" Name="PTP_OC_CASIO_HALF_PRESS" HexCode="9029" />
+    <XmlCommandDescriptor Code="36906" Name="PTP_OC_CASIO_HALF_RELEASE" HexCode="902A" />
+    <XmlCommandDescriptor Code="36907" Name="PTP_OC_CASIO_CS_PRESS" HexCode="902B" />
+    <XmlCommandDescriptor Code="36908" Name="PTP_OC_CASIO_CS_RELEASE" HexCode="902C" />
+    <XmlCommandDescriptor Code="36909" Name="PTP_OC_CASIO_ZOOM" HexCode="902D" />
+    <XmlCommandDescriptor Code="36910" Name="PTP_OC_CASIO_CZ_PRESS" HexCode="902E" />
+    <XmlCommandDescriptor Code="36911" Name="PTP_OC_CASIO_CZ_RELEASE" HexCode="902F" />
+    <XmlCommandDescriptor Code="36929" Name="PTP_OC_CASIO_MOVIE_START" HexCode="9041" />
+    <XmlCommandDescriptor Code="36930" Name="PTP_OC_CASIO_MOVIE_STOP" HexCode="9042" />
+    <XmlCommandDescriptor Code="36931" Name="PTP_OC_CASIO_MOVIE_PRESS" HexCode="9043" />
+    <XmlCommandDescriptor Code="36932" Name="PTP_OC_CASIO_MOVIE_RELEASE" HexCode="9044" />
+    <XmlCommandDescriptor Code="36933" Name="PTP_OC_CASIO_GET_MOVIE_HANDLES" HexCode="9045" />
+    <XmlCommandDescriptor Code="36934" Name="PTP_OC_CASIO_MOVIE_RESET" HexCode="9046" />
+    <XmlCommandDescriptor Code="36901" Name="PTP_OC_CASIO_GET_OBJECT" HexCode="9025" />
+    <XmlCommandDescriptor Code="36902" Name="PTP_OC_CASIO_GET_THUMBNAIL" HexCode="9026" />
+    <XmlCommandDescriptor Code="38913" Name="PTP_OC_MTP_GetObjectPropsSupported" HexCode="9801" />
+    <XmlCommandDescriptor Code="38914" Name="PTP_OC_MTP_GetObjectPropDesc" HexCode="9802" />
+    <XmlCommandDescriptor Code="38915" Name="PTP_OC_MTP_GetObjectPropValue" HexCode="9803" />
+    <XmlCommandDescriptor Code="38916" Name="PTP_OC_MTP_SetObjectPropValue" HexCode="9804" />
+    <XmlCommandDescriptor Code="38917" Name="PTP_OC_MTP_GetObjPropList" HexCode="9805" />
+    <XmlCommandDescriptor Code="38918" Name="PTP_OC_MTP_SetObjPropList" HexCode="9806" />
+    <XmlCommandDescriptor Code="38919" Name="PTP_OC_MTP_GetInterdependendPropdesc" HexCode="9807" />
+    <XmlCommandDescriptor Code="38920" Name="PTP_OC_MTP_SendObjectPropList" HexCode="9808" />
+    <XmlCommandDescriptor Code="38928" Name="PTP_OC_MTP_GetObjectReferences" HexCode="9810" />
+    <XmlCommandDescriptor Code="38929" Name="PTP_OC_MTP_SetObjectReferences" HexCode="9811" />
+    <XmlCommandDescriptor Code="38930" Name="PTP_OC_MTP_UpdateDeviceFirmware" HexCode="9812" />
+    <XmlCommandDescriptor Code="38944" Name="PTP_OC_MTP_Skip" HexCode="9820" />
+    <XmlCommandDescriptor Code="37121" Name="PTP_OC_MTP_WMDRMPD_GetSecureTimeChallenge" HexCode="9101" />
+    <XmlCommandDescriptor Code="37122" Name="PTP_OC_MTP_WMDRMPD_GetSecureTimeResponse" HexCode="9102" />
+    <XmlCommandDescriptor Code="37123" Name="PTP_OC_MTP_WMDRMPD_SetLicenseResponse" HexCode="9103" />
+    <XmlCommandDescriptor Code="37124" Name="PTP_OC_MTP_WMDRMPD_GetSyncList" HexCode="9104" />
+    <XmlCommandDescriptor Code="37125" Name="PTP_OC_MTP_WMDRMPD_SendMeterChallengeQuery" HexCode="9105" />
+    <XmlCommandDescriptor Code="37126" Name="PTP_OC_MTP_WMDRMPD_GetMeterChallenge" HexCode="9106" />
+    <XmlCommandDescriptor Code="37127" Name="PTP_OC_MTP_WMDRMPD_SetMeterResponse" HexCode="9107" />
+    <XmlCommandDescriptor Code="37128" Name="PTP_OC_MTP_WMDRMPD_CleanDataStore" HexCode="9108" />
+    <XmlCommandDescriptor Code="37129" Name="PTP_OC_MTP_WMDRMPD_GetLicenseState" HexCode="9109" />
+    <XmlCommandDescriptor Code="37130" Name="PTP_OC_MTP_WMDRMPD_SendWMDRMPDCommand" HexCode="910A" />
+    <XmlCommandDescriptor Code="37131" Name="PTP_OC_MTP_WMDRMPD_SendWMDRMPDRequest" HexCode="910B" />
+    <XmlCommandDescriptor Code="37394" Name="PTP_OC_MTP_WMDRMPD_SendWMDRMPDAppRequest" HexCode="9212" />
+    <XmlCommandDescriptor Code="37395" Name="PTP_OC_MTP_WMDRMPD_GetWMDRMPDAppResponse" HexCode="9213" />
+    <XmlCommandDescriptor Code="37396" Name="PTP_OC_MTP_WMDRMPD_EnableTrustedFilesOperations" HexCode="9214" />
+    <XmlCommandDescriptor Code="37397" Name="PTP_OC_MTP_WMDRMPD_DisableTrustedFilesOperations" HexCode="9215" />
+    <XmlCommandDescriptor Code="37398" Name="PTP_OC_MTP_WMDRMPD_EndTrustedAppSession" HexCode="9216" />
+    <XmlCommandDescriptor Code="37232" Name="PTP_OC_MTP_AAVT_OpenMediaSession" HexCode="9170" />
+    <XmlCommandDescriptor Code="37233" Name="PTP_OC_MTP_AAVT_CloseMediaSession" HexCode="9171" />
+    <XmlCommandDescriptor Code="37234" Name="PTP_OC_MTP_AAVT_GetNextDataBlock" HexCode="9172" />
+    <XmlCommandDescriptor Code="37235" Name="PTP_OC_MTP_AAVT_SetCurrentTimePosition" HexCode="9173" />
+    <XmlCommandDescriptor Code="37248" Name="PTP_OC_MTP_WMDRMND_SendRegistrationRequest" HexCode="9180" />
+    <XmlCommandDescriptor Code="37249" Name="PTP_OC_MTP_WMDRMND_GetRegistrationResponse" HexCode="9181" />
+    <XmlCommandDescriptor Code="37250" Name="PTP_OC_MTP_WMDRMND_GetProximityChallenge" HexCode="9182" />
+    <XmlCommandDescriptor Code="37251" Name="PTP_OC_MTP_WMDRMND_SendProximityResponse" HexCode="9183" />
+    <XmlCommandDescriptor Code="37252" Name="PTP_OC_MTP_WMDRMND_SendWMDRMNDLicenseRequest" HexCode="9184" />
+    <XmlCommandDescriptor Code="37253" Name="PTP_OC_MTP_WMDRMND_GetWMDRMNDLicenseResponse" HexCode="9185" />
+    <XmlCommandDescriptor Code="37377" Name="PTP_OC_MTP_WMPPD_ReportAddedDeletedItems" HexCode="9201" />
+    <XmlCommandDescriptor Code="37378" Name="PTP_OC_MTP_WMPPD_ReportAcquiredItems" HexCode="9202" />
+    <XmlCommandDescriptor Code="37379" Name="PTP_OC_MTP_WMPPD_PlaylistObjectPref" HexCode="9203" />
+    <XmlCommandDescriptor Code="37380" Name="PTP_OC_MTP_ZUNE_GETUNDEFINED001" HexCode="9204" />
+    <XmlCommandDescriptor Code="37154" Name="PTP_OC_MTP_WPDWCN_ProcessWFCObject" HexCode="9122" />
+    <XmlCommandDescriptor Code="37121" Name="PTP_OC_OLYMPUS_Capture" HexCode="9101" />
+    <XmlCommandDescriptor Code="37123" Name="PTP_OC_OLYMPUS_SelfCleaning" HexCode="9103" />
+    <XmlCommandDescriptor Code="37126" Name="PTP_OC_OLYMPUS_SetRGBGain" HexCode="9106" />
+    <XmlCommandDescriptor Code="37127" Name="PTP_OC_OLYMPUS_SetPresetMode" HexCode="9107" />
+    <XmlCommandDescriptor Code="37128" Name="PTP_OC_OLYMPUS_SetWBBiasAll" HexCode="9108" />
+    <XmlCommandDescriptor Code="37130" Name="PTP_OC_OLYMPUS_GetCameraControlMode" HexCode="910A" />
+    <XmlCommandDescriptor Code="37131" Name="PTP_OC_OLYMPUS_SetCameraControlMode" HexCode="910B" />
+    <XmlCommandDescriptor Code="37132" Name="PTP_OC_OLYMPUS_SetWBRGBGain" HexCode="910C" />
+    <XmlCommandDescriptor Code="37633" Name="PTP_OC_OLYMPUS_GetDeviceInfo" HexCode="9301" />
+    <XmlCommandDescriptor Code="37634" Name="PTP_OC_OLYMPUS_Init1" HexCode="9302" />
+    <XmlCommandDescriptor Code="37890" Name="PTP_OC_OLYMPUS_SetDateTime" HexCode="9402" />
+    <XmlCommandDescriptor Code="38018" Name="PTP_OC_OLYMPUS_GetDateTime" HexCode="9482" />
+    <XmlCommandDescriptor Code="38145" Name="PTP_OC_OLYMPUS_SetCameraID" HexCode="9501" />
+    <XmlCommandDescriptor Code="38273" Name="PTP_OC_OLYMPUS_GetCameraID" HexCode="9581" />
+    <XmlCommandDescriptor Code="38337" Name="PTP_OC_ANDROID_GetPartialObject64" HexCode="95C1" />
+    <XmlCommandDescriptor Code="38338" Name="PTP_OC_ANDROID_SendPartialObject" HexCode="95C2" />
+    <XmlCommandDescriptor Code="38339" Name="PTP_OC_ANDROID_TruncateObject" HexCode="95C3" />
+    <XmlCommandDescriptor Code="38340" Name="PTP_OC_ANDROID_BeginEditObject" HexCode="95C4" />
+    <XmlCommandDescriptor Code="38341" Name="PTP_OC_ANDROID_EndEditObject" HexCode="95C5" />
+  </AvaiableCommands>
+  <AvaiableEvents>
+    <XmlEventDescriptor Code="16384" Name="PTP_EC_Undefined" HexCode="4000" />
+    <XmlEventDescriptor Code="16385" Name="PTP_EC_CancelTransaction" HexCode="4001" />
+    <XmlEventDescriptor Code="16386" Name="PTP_EC_ObjectAdded" HexCode="4002" />
+    <XmlEventDescriptor Code="16387" Name="PTP_EC_ObjectRemoved" HexCode="4003" />
+    <XmlEventDescriptor Code="16388" Name="PTP_EC_StoreAdded" HexCode="4004" />
+    <XmlEventDescriptor Code="16389" Name="PTP_EC_StoreRemoved" HexCode="4005" />
+    <XmlEventDescriptor Code="16390" Name="PTP_EC_DevicePropChanged" HexCode="4006" />
+    <XmlEventDescriptor Code="16391" Name="PTP_EC_ObjectInfoChanged" HexCode="4007" />
+    <XmlEventDescriptor Code="16392" Name="PTP_EC_DeviceInfoChanged" HexCode="4008" />
+    <XmlEventDescriptor Code="16393" Name="PTP_EC_RequestObjectTransfer" HexCode="4009" />
+    <XmlEventDescriptor Code="16394" Name="PTP_EC_StoreFull" HexCode="400A" />
+    <XmlEventDescriptor Code="16395" Name="PTP_EC_DeviceReset" HexCode="400B" />
+    <XmlEventDescriptor Code="16396" Name="PTP_EC_StorageInfoChanged" HexCode="400C" />
+    <XmlEventDescriptor Code="16397" Name="PTP_EC_CaptureComplete" HexCode="400D" />
+    <XmlEventDescriptor Code="16398" Name="PTP_EC_UnreportedStatus" HexCode="400E" />
+    <XmlEventDescriptor Code="49157" Name="PTP_EC_CANON_ExtendedErrorcode" HexCode="C005" />
+    <XmlEventDescriptor Code="49160" Name="PTP_EC_CANON_ObjectInfoChanged" HexCode="C008" />
+    <XmlEventDescriptor Code="49161" Name="PTP_EC_CANON_RequestObjectTransfer" HexCode="C009" />
+    <XmlEventDescriptor Code="49163" Name="PTP_EC_CANON_ShutterButtonPressed0" HexCode="C00B" />
+    <XmlEventDescriptor Code="49164" Name="PTP_EC_CANON_CameraModeChanged" HexCode="C00C" />
+    <XmlEventDescriptor Code="49166" Name="PTP_EC_CANON_ShutterButtonPressed1" HexCode="C00E" />
+    <XmlEventDescriptor Code="49169" Name="PTP_EC_CANON_StartDirectTransfer" HexCode="C011" />
+    <XmlEventDescriptor Code="49171" Name="PTP_EC_CANON_StopDirectTransfer" HexCode="C013" />
+    <XmlEventDescriptor Code="49409" Name="PTP_EC_CANON_EOS_RequestGetEvent" HexCode="C101" />
+    <XmlEventDescriptor Code="49537" Name="PTP_EC_CANON_EOS_ObjectAddedEx" HexCode="C181" />
+    <XmlEventDescriptor Code="49538" Name="PTP_EC_CANON_EOS_ObjectRemoved" HexCode="C182" />
+    <XmlEventDescriptor Code="49539" Name="PTP_EC_CANON_EOS_RequestGetObjectInfoEx" HexCode="C183" />
+    <XmlEventDescriptor Code="49540" Name="PTP_EC_CANON_EOS_StorageStatusChanged" HexCode="C184" />
+    <XmlEventDescriptor Code="49541" Name="PTP_EC_CANON_EOS_StorageInfoChanged" HexCode="C185" />
+    <XmlEventDescriptor Code="49542" Name="PTP_EC_CANON_EOS_RequestObjectTransfer" HexCode="C186" />
+    <XmlEventDescriptor Code="49543" Name="PTP_EC_CANON_EOS_ObjectInfoChangedEx" HexCode="C187" />
+    <XmlEventDescriptor Code="49544" Name="PTP_EC_CANON_EOS_ObjectContentChanged" HexCode="C188" />
+    <XmlEventDescriptor Code="49545" Name="PTP_EC_CANON_EOS_PropValueChanged" HexCode="C189" />
+    <XmlEventDescriptor Code="49546" Name="PTP_EC_CANON_EOS_AvailListChanged" HexCode="C18A" />
+    <XmlEventDescriptor Code="49547" Name="PTP_EC_CANON_EOS_CameraStatusChanged" HexCode="C18B" />
+    <XmlEventDescriptor Code="49549" Name="PTP_EC_CANON_EOS_WillSoonShutdown" HexCode="C18D" />
+    <XmlEventDescriptor Code="49550" Name="PTP_EC_CANON_EOS_ShutdownTimerUpdated" HexCode="C18E" />
+    <XmlEventDescriptor Code="49551" Name="PTP_EC_CANON_EOS_RequestCancelTransfer" HexCode="C18F" />
+    <XmlEventDescriptor Code="49552" Name="PTP_EC_CANON_EOS_RequestObjectTransferDT" HexCode="C190" />
+    <XmlEventDescriptor Code="49553" Name="PTP_EC_CANON_EOS_RequestCancelTransferDT" HexCode="C191" />
+    <XmlEventDescriptor Code="49554" Name="PTP_EC_CANON_EOS_StoreAdded" HexCode="C192" />
+    <XmlEventDescriptor Code="49555" Name="PTP_EC_CANON_EOS_StoreRemoved" HexCode="C193" />
+    <XmlEventDescriptor Code="49556" Name="PTP_EC_CANON_EOS_BulbExposureTime" HexCode="C194" />
+    <XmlEventDescriptor Code="49557" Name="PTP_EC_CANON_EOS_RecordingTime" HexCode="C195" />
+    <XmlEventDescriptor Code="49570" Name="PTP_EC_CANON_EOS_RequestObjectTransferTS" HexCode="C1A2" />
+    <XmlEventDescriptor Code="49571" Name="PTP_EC_CANON_EOS_AfResult" HexCode="C1A3" />
+    <XmlEventDescriptor Code="49409" Name="PTP_EC_Nikon_ObjectAddedInSDRAM" HexCode="C101" />
+    <XmlEventDescriptor Code="49410" Name="PTP_EC_Nikon_CaptureCompleteRecInSdram" HexCode="C102" />
+    <XmlEventDescriptor Code="49411" Name="PTP_EC_Nikon_AdvancedTransfer" HexCode="C103" />
+    <XmlEventDescriptor Code="49412" Name="PTP_EC_Nikon_PreviewImageAdded" HexCode="C104" />
+    <XmlEventDescriptor Code="49410" Name="PTP_EC_Olympus_PropertyChanged" HexCode="C102" />
+    <XmlEventDescriptor Code="49411" Name="PTP_EC_Olympus_CaptureComplete" HexCode="C103" />
+    <XmlEventDescriptor Code="51201" Name="PTP_EC_MTP_ObjectPropChanged" HexCode="C801" />
+    <XmlEventDescriptor Code="51202" Name="PTP_EC_MTP_ObjectPropDescChanged" HexCode="C802" />
+    <XmlEventDescriptor Code="51203" Name="PTP_EC_MTP_ObjectReferencesChanged" HexCode="C803" />
+  </AvaiableEvents>
+  <AvaiableProperties>
+    <XmlPropertyDescriptor Code="20480" Name="PTP_DPC_Undefined" DataType="0" DataForm="0" HexCode="5000">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20481" Name="PTP_DPC_BatteryLevel" DataType="0" DataForm="0" HexCode="5001">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20482" Name="PTP_DPC_FunctionalMode" DataType="0" DataForm="0" HexCode="5002">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20483" Name="PTP_DPC_ImageSize" DataType="0" DataForm="0" HexCode="5003">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20484" Name="PTP_DPC_CompressionSetting" DataType="0" DataForm="0" HexCode="5004">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20485" Name="PTP_DPC_WhiteBalance" DataType="0" DataForm="0" HexCode="5005">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20486" Name="PTP_DPC_RGBGain" DataType="0" DataForm="0" HexCode="5006">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20487" Name="PTP_DPC_FNumber" DataType="0" DataForm="0" HexCode="5007">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20488" Name="PTP_DPC_FocalLength" DataType="0" DataForm="0" HexCode="5008">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20489" Name="PTP_DPC_FocusDistance" DataType="0" DataForm="0" HexCode="5009">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20490" Name="PTP_DPC_FocusMode" DataType="0" DataForm="0" HexCode="500A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20491" Name="PTP_DPC_ExposureMeteringMode" DataType="0" DataForm="0" HexCode="500B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20492" Name="PTP_DPC_FlashMode" DataType="0" DataForm="0" HexCode="500C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20493" Name="PTP_DPC_ExposureTime" DataType="0" DataForm="0" HexCode="500D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20494" Name="PTP_DPC_ExposureProgramMode" DataType="0" DataForm="0" HexCode="500E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20495" Name="PTP_DPC_ExposureIndex" DataType="0" DataForm="0" HexCode="500F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20496" Name="PTP_DPC_ExposureBiasCompensation" DataType="0" DataForm="0" HexCode="5010">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20497" Name="PTP_DPC_DateTime" DataType="0" DataForm="0" HexCode="5011">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20498" Name="PTP_DPC_CaptureDelay" DataType="0" DataForm="0" HexCode="5012">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20499" Name="PTP_DPC_StillCaptureMode" DataType="0" DataForm="0" HexCode="5013">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20500" Name="PTP_DPC_Contrast" DataType="0" DataForm="0" HexCode="5014">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20501" Name="PTP_DPC_Sharpness" DataType="0" DataForm="0" HexCode="5015">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20502" Name="PTP_DPC_DigitalZoom" DataType="0" DataForm="0" HexCode="5016">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20503" Name="PTP_DPC_EffectMode" DataType="0" DataForm="0" HexCode="5017">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20504" Name="PTP_DPC_BurstNumber" DataType="0" DataForm="0" HexCode="5018">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20505" Name="PTP_DPC_BurstInterval" DataType="0" DataForm="0" HexCode="5019">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20506" Name="PTP_DPC_TimelapseNumber" DataType="0" DataForm="0" HexCode="501A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20507" Name="PTP_DPC_TimelapseInterval" DataType="0" DataForm="0" HexCode="501B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20508" Name="PTP_DPC_FocusMeteringMode" DataType="0" DataForm="0" HexCode="501C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20509" Name="PTP_DPC_UploadURL" DataType="0" DataForm="0" HexCode="501D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20510" Name="PTP_DPC_Artist" DataType="0" DataForm="0" HexCode="501E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20511" Name="PTP_DPC_CopyrightInfo" DataType="0" DataForm="0" HexCode="501F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20512" Name="PTP_DPC_SupportedStreams" DataType="0" DataForm="0" HexCode="5020">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20513" Name="PTP_DPC_EnabledStreams" DataType="0" DataForm="0" HexCode="5021">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20514" Name="PTP_DPC_VideoFormat" DataType="0" DataForm="0" HexCode="5022">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20515" Name="PTP_DPC_VideoResolution" DataType="0" DataForm="0" HexCode="5023">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20516" Name="PTP_DPC_VideoQuality" DataType="0" DataForm="0" HexCode="5024">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20517" Name="PTP_DPC_VideoFrameRate" DataType="0" DataForm="0" HexCode="5025">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20518" Name="PTP_DPC_VideoContrast" DataType="0" DataForm="0" HexCode="5026">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20519" Name="PTP_DPC_VideoBrightness" DataType="0" DataForm="0" HexCode="5027">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20520" Name="PTP_DPC_AudioFormat" DataType="0" DataForm="0" HexCode="5028">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20521" Name="PTP_DPC_AudioBitrate" DataType="0" DataForm="0" HexCode="5029">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20522" Name="PTP_DPC_AudioSamplingRate" DataType="0" DataForm="0" HexCode="502A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20523" Name="PTP_DPC_AudioBitPerSample" DataType="0" DataForm="0" HexCode="502B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20524" Name="PTP_DPC_AudioVolume" DataType="0" DataForm="0" HexCode="502C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="61440" Name="PTP_DPC_EXTENSION_MASK" DataType="0" DataForm="0" HexCode="F000">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53248" Name="PTP_DPC_EXTENSION" DataType="0" DataForm="0" HexCode="D000">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53633" Name="PTP_DPC_MTP_ZUNE_UNKNOWN1" DataType="0" DataForm="0" HexCode="D181">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53554" Name="PTP_DPC_MTP_ZUNE_UNKNOWN2" DataType="0" DataForm="0" HexCode="D132">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53781" Name="PTP_DPC_MTP_ZUNE_UNKNOWN3" DataType="0" DataForm="0" HexCode="D215">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53782" Name="PTP_DPC_MTP_ZUNE_UNKNOWN4" DataType="0" DataForm="0" HexCode="D216">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53249" Name="PTP_DPC_EK_ColorTemperature" DataType="0" DataForm="0" HexCode="D001">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53250" Name="PTP_DPC_EK_DateTimeStampFormat" DataType="0" DataForm="0" HexCode="D002">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53251" Name="PTP_DPC_EK_BeepMode" DataType="0" DataForm="0" HexCode="D003">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53252" Name="PTP_DPC_EK_VideoOut" DataType="0" DataForm="0" HexCode="D004">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53253" Name="PTP_DPC_EK_PowerSaving" DataType="0" DataForm="0" HexCode="D005">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53254" Name="PTP_DPC_EK_UI_Language" DataType="0" DataForm="0" HexCode="D006">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53249" Name="PTP_DPC_CANON_BeepMode" DataType="0" DataForm="0" HexCode="D001">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53250" Name="PTP_DPC_CANON_BatteryKind" DataType="0" DataForm="0" HexCode="D002">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53251" Name="PTP_DPC_CANON_BatteryStatus" DataType="0" DataForm="0" HexCode="D003">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53252" Name="PTP_DPC_CANON_UILockType" DataType="0" DataForm="0" HexCode="D004">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53253" Name="PTP_DPC_CANON_CameraMode" DataType="0" DataForm="0" HexCode="D005">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53254" Name="PTP_DPC_CANON_ImageQuality" DataType="0" DataForm="0" HexCode="D006">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53255" Name="PTP_DPC_CANON_FullViewFileFormat" DataType="0" DataForm="0" HexCode="D007">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53256" Name="PTP_DPC_CANON_ImageSize" DataType="0" DataForm="0" HexCode="D008">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53257" Name="PTP_DPC_CANON_SelfTime" DataType="0" DataForm="0" HexCode="D009">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53258" Name="PTP_DPC_CANON_FlashMode" DataType="0" DataForm="0" HexCode="D00A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53259" Name="PTP_DPC_CANON_Beep" DataType="0" DataForm="0" HexCode="D00B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53260" Name="PTP_DPC_CANON_ShootingMode" DataType="0" DataForm="0" HexCode="D00C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53261" Name="PTP_DPC_CANON_ImageMode" DataType="0" DataForm="0" HexCode="D00D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53262" Name="PTP_DPC_CANON_DriveMode" DataType="0" DataForm="0" HexCode="D00E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53263" Name="PTP_DPC_CANON_EZoom" DataType="0" DataForm="0" HexCode="D00F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53264" Name="PTP_DPC_CANON_MeteringMode" DataType="0" DataForm="0" HexCode="D010">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53265" Name="PTP_DPC_CANON_AFDistance" DataType="0" DataForm="0" HexCode="D011">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53266" Name="PTP_DPC_CANON_FocusingPoint" DataType="0" DataForm="0" HexCode="D012">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53267" Name="PTP_DPC_CANON_WhiteBalance" DataType="0" DataForm="0" HexCode="D013">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53268" Name="PTP_DPC_CANON_SlowShutterSetting" DataType="0" DataForm="0" HexCode="D014">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53269" Name="PTP_DPC_CANON_AFMode" DataType="0" DataForm="0" HexCode="D015">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53270" Name="PTP_DPC_CANON_ImageStabilization" DataType="0" DataForm="0" HexCode="D016">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53271" Name="PTP_DPC_CANON_Contrast" DataType="0" DataForm="0" HexCode="D017">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53272" Name="PTP_DPC_CANON_ColorGain" DataType="0" DataForm="0" HexCode="D018">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53273" Name="PTP_DPC_CANON_Sharpness" DataType="0" DataForm="0" HexCode="D019">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53274" Name="PTP_DPC_CANON_Sensitivity" DataType="0" DataForm="0" HexCode="D01A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53275" Name="PTP_DPC_CANON_ParameterSet" DataType="0" DataForm="0" HexCode="D01B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53276" Name="PTP_DPC_CANON_ISOSpeed" DataType="0" DataForm="0" HexCode="D01C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53277" Name="PTP_DPC_CANON_Aperture" DataType="0" DataForm="0" HexCode="D01D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53278" Name="PTP_DPC_CANON_ShutterSpeed" DataType="0" DataForm="0" HexCode="D01E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53279" Name="PTP_DPC_CANON_ExpCompensation" DataType="0" DataForm="0" HexCode="D01F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53280" Name="PTP_DPC_CANON_FlashCompensation" DataType="0" DataForm="0" HexCode="D020">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53281" Name="PTP_DPC_CANON_AEBExposureCompensation" DataType="0" DataForm="0" HexCode="D021">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53283" Name="PTP_DPC_CANON_AvOpen" DataType="0" DataForm="0" HexCode="D023">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53284" Name="PTP_DPC_CANON_AvMax" DataType="0" DataForm="0" HexCode="D024">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53285" Name="PTP_DPC_CANON_FocalLength" DataType="0" DataForm="0" HexCode="D025">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53286" Name="PTP_DPC_CANON_FocalLengthTele" DataType="0" DataForm="0" HexCode="D026">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53287" Name="PTP_DPC_CANON_FocalLengthWide" DataType="0" DataForm="0" HexCode="D027">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53288" Name="PTP_DPC_CANON_FocalLengthDenominator" DataType="0" DataForm="0" HexCode="D028">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53289" Name="PTP_DPC_CANON_CaptureTransferMode" DataType="0" DataForm="0" HexCode="D029">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="2" Name="CANON_TRANSFER_ENTIRE_IMAGE_TO_PC" DataType="0" DataForm="0" HexCode="2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="4" Name="CANON_TRANSFER_SAVE_THUMBNAIL_TO_DEVICE" DataType="0" DataForm="0" HexCode="4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="8" Name="CANON_TRANSFER_SAVE_IMAGE_TO_DEVICE" DataType="0" DataForm="0" HexCode="8">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53290" Name="PTP_DPC_CANON_Zoom" DataType="0" DataForm="0" HexCode="D02A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53291" Name="PTP_DPC_CANON_NamePrefix" DataType="0" DataForm="0" HexCode="D02B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53292" Name="PTP_DPC_CANON_SizeQualityMode" DataType="0" DataForm="0" HexCode="D02C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53293" Name="PTP_DPC_CANON_SupportedThumbSize" DataType="0" DataForm="0" HexCode="D02D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53294" Name="PTP_DPC_CANON_SizeOfOutputDataFromCamera" DataType="0" DataForm="0" HexCode="D02E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53295" Name="PTP_DPC_CANON_SizeOfInputDataToCamera" DataType="0" DataForm="0" HexCode="D02F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53296" Name="PTP_DPC_CANON_RemoteAPIVersion" DataType="0" DataForm="0" HexCode="D030">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53297" Name="PTP_DPC_CANON_FirmwareVersion" DataType="0" DataForm="0" HexCode="D031">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53298" Name="PTP_DPC_CANON_CameraModel" DataType="0" DataForm="0" HexCode="D032">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53299" Name="PTP_DPC_CANON_CameraOwner" DataType="0" DataForm="0" HexCode="D033">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53300" Name="PTP_DPC_CANON_UnixTime" DataType="0" DataForm="0" HexCode="D034">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53301" Name="PTP_DPC_CANON_CameraBodyID" DataType="0" DataForm="0" HexCode="D035">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53302" Name="PTP_DPC_CANON_CameraOutput" DataType="0" DataForm="0" HexCode="D036">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53303" Name="PTP_DPC_CANON_DispAv" DataType="0" DataForm="0" HexCode="D037">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53304" Name="PTP_DPC_CANON_AvOpenApex" DataType="0" DataForm="0" HexCode="D038">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53305" Name="PTP_DPC_CANON_DZoomMagnification" DataType="0" DataForm="0" HexCode="D039">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53306" Name="PTP_DPC_CANON_MlSpotPos" DataType="0" DataForm="0" HexCode="D03A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53307" Name="PTP_DPC_CANON_DispAvMax" DataType="0" DataForm="0" HexCode="D03B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53308" Name="PTP_DPC_CANON_AvMaxApex" DataType="0" DataForm="0" HexCode="D03C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53309" Name="PTP_DPC_CANON_EZoomStartPosition" DataType="0" DataForm="0" HexCode="D03D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53310" Name="PTP_DPC_CANON_FocalLengthOfTele" DataType="0" DataForm="0" HexCode="D03E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53311" Name="PTP_DPC_CANON_EZoomSizeOfTele" DataType="0" DataForm="0" HexCode="D03F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53312" Name="PTP_DPC_CANON_PhotoEffect" DataType="0" DataForm="0" HexCode="D040">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53313" Name="PTP_DPC_CANON_AssistLight" DataType="0" DataForm="0" HexCode="D041">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53314" Name="PTP_DPC_CANON_FlashQuantityCount" DataType="0" DataForm="0" HexCode="D042">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53315" Name="PTP_DPC_CANON_RotationAngle" DataType="0" DataForm="0" HexCode="D043">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53316" Name="PTP_DPC_CANON_RotationScene" DataType="0" DataForm="0" HexCode="D044">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53317" Name="PTP_DPC_CANON_EventEmulateMode" DataType="0" DataForm="0" HexCode="D045">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53318" Name="PTP_DPC_CANON_DPOFVersion" DataType="0" DataForm="0" HexCode="D046">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53319" Name="PTP_DPC_CANON_TypeOfSupportedSlideShow" DataType="0" DataForm="0" HexCode="D047">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53320" Name="PTP_DPC_CANON_AverageFilesizes" DataType="0" DataForm="0" HexCode="D048">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53321" Name="PTP_DPC_CANON_ModelID" DataType="0" DataForm="0" HexCode="D049">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53505" Name="PTP_DPC_CANON_EOS_Aperture" DataType="0" DataForm="0" HexCode="D101">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53506" Name="PTP_DPC_CANON_EOS_ShutterSpeed" DataType="0" DataForm="0" HexCode="D102">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53507" Name="PTP_DPC_CANON_EOS_ISOSpeed" DataType="0" DataForm="0" HexCode="D103">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53508" Name="PTP_DPC_CANON_EOS_ExpCompensation" DataType="0" DataForm="0" HexCode="D104">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53509" Name="PTP_DPC_CANON_EOS_AutoExposureMode" DataType="0" DataForm="0" HexCode="D105">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53510" Name="PTP_DPC_CANON_EOS_DriveMode" DataType="0" DataForm="0" HexCode="D106">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53511" Name="PTP_DPC_CANON_EOS_MeteringMode" DataType="0" DataForm="0" HexCode="D107">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53512" Name="PTP_DPC_CANON_EOS_FocusMode" DataType="0" DataForm="0" HexCode="D108">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53513" Name="PTP_DPC_CANON_EOS_WhiteBalance" DataType="0" DataForm="0" HexCode="D109">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53514" Name="PTP_DPC_CANON_EOS_ColorTemperature" DataType="0" DataForm="0" HexCode="D10A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53515" Name="PTP_DPC_CANON_EOS_WhiteBalanceAdjustA" DataType="0" DataForm="0" HexCode="D10B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53516" Name="PTP_DPC_CANON_EOS_WhiteBalanceAdjustB" DataType="0" DataForm="0" HexCode="D10C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53517" Name="PTP_DPC_CANON_EOS_WhiteBalanceXA" DataType="0" DataForm="0" HexCode="D10D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53518" Name="PTP_DPC_CANON_EOS_WhiteBalanceXB" DataType="0" DataForm="0" HexCode="D10E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53519" Name="PTP_DPC_CANON_EOS_ColorSpace" DataType="0" DataForm="0" HexCode="D10F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53520" Name="PTP_DPC_CANON_EOS_PictureStyle" DataType="0" DataForm="0" HexCode="D110">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53521" Name="PTP_DPC_CANON_EOS_BatteryPower" DataType="0" DataForm="0" HexCode="D111">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53522" Name="PTP_DPC_CANON_EOS_BatterySelect" DataType="0" DataForm="0" HexCode="D112">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53523" Name="PTP_DPC_CANON_EOS_CameraTime" DataType="0" DataForm="0" HexCode="D113">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53524" Name="PTP_DPC_CANON_EOS_AutoPowerOff" DataType="0" DataForm="0" HexCode="D114">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53525" Name="PTP_DPC_CANON_EOS_Owner" DataType="0" DataForm="0" HexCode="D115">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53526" Name="PTP_DPC_CANON_EOS_ModelID" DataType="0" DataForm="0" HexCode="D116">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53529" Name="PTP_DPC_CANON_EOS_PTPExtensionVersion" DataType="0" DataForm="0" HexCode="D119">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53530" Name="PTP_DPC_CANON_EOS_DPOFVersion" DataType="0" DataForm="0" HexCode="D11A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53531" Name="PTP_DPC_CANON_EOS_AvailableShots" DataType="0" DataForm="0" HexCode="D11B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53532" Name="PTP_DPC_CANON_EOS_CaptureDestination" DataType="0" DataForm="0" HexCode="D11C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53533" Name="PTP_DPC_CANON_EOS_BracketMode" DataType="0" DataForm="0" HexCode="D11D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53534" Name="PTP_DPC_CANON_EOS_CurrentStorage" DataType="0" DataForm="0" HexCode="D11E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53535" Name="PTP_DPC_CANON_EOS_CurrentFolder" DataType="0" DataForm="0" HexCode="D11F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53536" Name="PTP_DPC_CANON_EOS_ImageFormat" DataType="0" DataForm="0" HexCode="D120">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53537" Name="PTP_DPC_CANON_EOS_ImageFormatCF" DataType="0" DataForm="0" HexCode="D121">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53538" Name="PTP_DPC_CANON_EOS_ImageFormatSD" DataType="0" DataForm="0" HexCode="D122">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53539" Name="PTP_DPC_CANON_EOS_ImageFormatExtHD" DataType="0" DataForm="0" HexCode="D123">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53552" Name="PTP_DPC_CANON_EOS_CompressionS" DataType="0" DataForm="0" HexCode="D130">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53553" Name="PTP_DPC_CANON_EOS_CompressionM1" DataType="0" DataForm="0" HexCode="D131">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53554" Name="PTP_DPC_CANON_EOS_CompressionM2" DataType="0" DataForm="0" HexCode="D132">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53555" Name="PTP_DPC_CANON_EOS_CompressionL" DataType="0" DataForm="0" HexCode="D133">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53568" Name="PTP_DPC_CANON_EOS_PCWhiteBalance1" DataType="0" DataForm="0" HexCode="D140">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53569" Name="PTP_DPC_CANON_EOS_PCWhiteBalance2" DataType="0" DataForm="0" HexCode="D141">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53570" Name="PTP_DPC_CANON_EOS_PCWhiteBalance3" DataType="0" DataForm="0" HexCode="D142">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53571" Name="PTP_DPC_CANON_EOS_PCWhiteBalance4" DataType="0" DataForm="0" HexCode="D143">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53572" Name="PTP_DPC_CANON_EOS_PCWhiteBalance5" DataType="0" DataForm="0" HexCode="D144">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53573" Name="PTP_DPC_CANON_EOS_MWhiteBalance" DataType="0" DataForm="0" HexCode="D145">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53584" Name="PTP_DPC_CANON_EOS_PictureStyleStandard" DataType="0" DataForm="0" HexCode="D150">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53585" Name="PTP_DPC_CANON_EOS_PictureStylePortrait" DataType="0" DataForm="0" HexCode="D151">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53586" Name="PTP_DPC_CANON_EOS_PictureStyleLandscape" DataType="0" DataForm="0" HexCode="D152">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53587" Name="PTP_DPC_CANON_EOS_PictureStyleNeutral" DataType="0" DataForm="0" HexCode="D153">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53588" Name="PTP_DPC_CANON_EOS_PictureStyleFaithful" DataType="0" DataForm="0" HexCode="D154">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53589" Name="PTP_DPC_CANON_EOS_PictureStyleBlackWhite" DataType="0" DataForm="0" HexCode="D155">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53600" Name="PTP_DPC_CANON_EOS_PictureStyleUserSet1" DataType="0" DataForm="0" HexCode="D160">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53601" Name="PTP_DPC_CANON_EOS_PictureStyleUserSet2" DataType="0" DataForm="0" HexCode="D161">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53602" Name="PTP_DPC_CANON_EOS_PictureStyleUserSet3" DataType="0" DataForm="0" HexCode="D162">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53616" Name="PTP_DPC_CANON_EOS_PictureStyleParam1" DataType="0" DataForm="0" HexCode="D170">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53617" Name="PTP_DPC_CANON_EOS_PictureStyleParam2" DataType="0" DataForm="0" HexCode="D171">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53618" Name="PTP_DPC_CANON_EOS_PictureStyleParam3" DataType="0" DataForm="0" HexCode="D172">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53631" Name="PTP_DPC_CANON_EOS_FlavorLUTParams" DataType="0" DataForm="0" HexCode="D17F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53632" Name="PTP_DPC_CANON_EOS_CustomFunc1" DataType="0" DataForm="0" HexCode="D180">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53633" Name="PTP_DPC_CANON_EOS_CustomFunc2" DataType="0" DataForm="0" HexCode="D181">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53634" Name="PTP_DPC_CANON_EOS_CustomFunc3" DataType="0" DataForm="0" HexCode="D182">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53635" Name="PTP_DPC_CANON_EOS_CustomFunc4" DataType="0" DataForm="0" HexCode="D183">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53636" Name="PTP_DPC_CANON_EOS_CustomFunc5" DataType="0" DataForm="0" HexCode="D184">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53637" Name="PTP_DPC_CANON_EOS_CustomFunc6" DataType="0" DataForm="0" HexCode="D185">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53638" Name="PTP_DPC_CANON_EOS_CustomFunc7" DataType="0" DataForm="0" HexCode="D186">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53639" Name="PTP_DPC_CANON_EOS_CustomFunc8" DataType="0" DataForm="0" HexCode="D187">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53640" Name="PTP_DPC_CANON_EOS_CustomFunc9" DataType="0" DataForm="0" HexCode="D188">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53641" Name="PTP_DPC_CANON_EOS_CustomFunc10" DataType="0" DataForm="0" HexCode="D189">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53642" Name="PTP_DPC_CANON_EOS_CustomFunc11" DataType="0" DataForm="0" HexCode="D18A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53643" Name="PTP_DPC_CANON_EOS_CustomFunc12" DataType="0" DataForm="0" HexCode="D18B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53644" Name="PTP_DPC_CANON_EOS_CustomFunc13" DataType="0" DataForm="0" HexCode="D18C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53645" Name="PTP_DPC_CANON_EOS_CustomFunc14" DataType="0" DataForm="0" HexCode="D18D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53646" Name="PTP_DPC_CANON_EOS_CustomFunc15" DataType="0" DataForm="0" HexCode="D18E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53647" Name="PTP_DPC_CANON_EOS_CustomFunc16" DataType="0" DataForm="0" HexCode="D18F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53648" Name="PTP_DPC_CANON_EOS_CustomFunc17" DataType="0" DataForm="0" HexCode="D190">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53649" Name="PTP_DPC_CANON_EOS_CustomFunc18" DataType="0" DataForm="0" HexCode="D191">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53650" Name="PTP_DPC_CANON_EOS_CustomFunc19" DataType="0" DataForm="0" HexCode="D192">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53650" Name="PTP_DPC_CANON_EOS_CustomFunc19" DataType="0" DataForm="0" HexCode="D192">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53664" Name="PTP_DPC_CANON_EOS_CustomFuncEx" DataType="0" DataForm="0" HexCode="D1A0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53665" Name="PTP_DPC_CANON_EOS_MyMenu" DataType="0" DataForm="0" HexCode="D1A1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53666" Name="PTP_DPC_CANON_EOS_MyMenuList" DataType="0" DataForm="0" HexCode="D1A2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53667" Name="PTP_DPC_CANON_EOS_WftStatus" DataType="0" DataForm="0" HexCode="D1A3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53668" Name="PTP_DPC_CANON_EOS_WftInputTransmission" DataType="0" DataForm="0" HexCode="D1A4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53669" Name="PTP_DPC_CANON_EOS_HDDirectoryStructure" DataType="0" DataForm="0" HexCode="D1A5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53670" Name="PTP_DPC_CANON_EOS_BatteryInfo" DataType="0" DataForm="0" HexCode="D1A6">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53671" Name="PTP_DPC_CANON_EOS_AdapterInfo" DataType="0" DataForm="0" HexCode="D1A7">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53672" Name="PTP_DPC_CANON_EOS_LensStatus" DataType="0" DataForm="0" HexCode="D1A8">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53673" Name="PTP_DPC_CANON_EOS_QuickReviewTime" DataType="0" DataForm="0" HexCode="D1A9">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53674" Name="PTP_DPC_CANON_EOS_CardExtension" DataType="0" DataForm="0" HexCode="D1AA">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53675" Name="PTP_DPC_CANON_EOS_TempStatus" DataType="0" DataForm="0" HexCode="D1AB">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53676" Name="PTP_DPC_CANON_EOS_ShutterCounter" DataType="0" DataForm="0" HexCode="D1AC">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53677" Name="PTP_DPC_CANON_EOS_SpecialOption" DataType="0" DataForm="0" HexCode="D1AD">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53678" Name="PTP_DPC_CANON_EOS_PhotoStudioMode" DataType="0" DataForm="0" HexCode="D1AE">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53679" Name="PTP_DPC_CANON_EOS_SerialNumber" DataType="0" DataForm="0" HexCode="D1AF">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53680" Name="PTP_DPC_CANON_EOS_EVFOutputDevice" DataType="0" DataForm="0" HexCode="D1B0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53681" Name="PTP_DPC_CANON_EOS_EVFMode" DataType="0" DataForm="0" HexCode="D1B1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53682" Name="PTP_DPC_CANON_EOS_DepthOfFieldPreview" DataType="0" DataForm="0" HexCode="D1B2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53683" Name="PTP_DPC_CANON_EOS_EVFSharpness" DataType="0" DataForm="0" HexCode="D1B3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53684" Name="PTP_DPC_CANON_EOS_EVFWBMode" DataType="0" DataForm="0" HexCode="D1B4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53685" Name="PTP_DPC_CANON_EOS_EVFClickWBCoeffs" DataType="0" DataForm="0" HexCode="D1B5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53686" Name="PTP_DPC_CANON_EOS_EVFColorTemp" DataType="0" DataForm="0" HexCode="D1B6">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53687" Name="PTP_DPC_CANON_EOS_ExposureSimMode" DataType="0" DataForm="0" HexCode="D1B7">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53688" Name="PTP_DPC_CANON_EOS_EVFRecordStatus" DataType="0" DataForm="0" HexCode="D1B8">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53690" Name="PTP_DPC_CANON_EOS_LvAfSystem" DataType="0" DataForm="0" HexCode="D1BA">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53691" Name="PTP_DPC_CANON_EOS_MovSize" DataType="0" DataForm="0" HexCode="D1BB">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53692" Name="PTP_DPC_CANON_EOS_LvViewTypeSelect" DataType="0" DataForm="0" HexCode="D1BC">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53712" Name="PTP_DPC_CANON_EOS_Artist" DataType="0" DataForm="0" HexCode="D1D0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53713" Name="PTP_DPC_CANON_EOS_Copyright" DataType="0" DataForm="0" HexCode="D1D1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53714" Name="PTP_DPC_CANON_EOS_BracketValue" DataType="0" DataForm="0" HexCode="D1D2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53715" Name="PTP_DPC_CANON_EOS_FocusInfoEx" DataType="0" DataForm="0" HexCode="D1D3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53716" Name="PTP_DPC_CANON_EOS_DepthOfField" DataType="0" DataForm="0" HexCode="D1D4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53717" Name="PTP_DPC_CANON_EOS_Brightness" DataType="0" DataForm="0" HexCode="D1D5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53718" Name="PTP_DPC_CANON_EOS_LensAdjustParams" DataType="0" DataForm="0" HexCode="D1D6">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53719" Name="PTP_DPC_CANON_EOS_EFComp" DataType="0" DataForm="0" HexCode="D1D7">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53720" Name="PTP_DPC_CANON_EOS_LensName" DataType="0" DataForm="0" HexCode="D1D8">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53721" Name="PTP_DPC_CANON_EOS_AEB" DataType="0" DataForm="0" HexCode="D1D9">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53722" Name="PTP_DPC_CANON_EOS_StroboSetting" DataType="0" DataForm="0" HexCode="D1DA">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53723" Name="PTP_DPC_CANON_EOS_StroboWirelessSetting" DataType="0" DataForm="0" HexCode="D1DB">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53724" Name="PTP_DPC_CANON_EOS_StroboFiring" DataType="0" DataForm="0" HexCode="D1DC">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53725" Name="PTP_DPC_CANON_EOS_LensID" DataType="0" DataForm="0" HexCode="D1DD">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53264" Name="PTP_DPC_NIKON_ShootingBank" DataType="0" DataForm="0" HexCode="D010">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53265" Name="PTP_DPC_NIKON_ShootingBankNameA" DataType="0" DataForm="0" HexCode="D011">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53266" Name="PTP_DPC_NIKON_ShootingBankNameB" DataType="0" DataForm="0" HexCode="D012">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53267" Name="PTP_DPC_NIKON_ShootingBankNameC" DataType="0" DataForm="0" HexCode="D013">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53268" Name="PTP_DPC_NIKON_ShootingBankNameD" DataType="0" DataForm="0" HexCode="D014">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53269" Name="PTP_DPC_NIKON_ResetBank0" DataType="0" DataForm="0" HexCode="D015">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53270" Name="PTP_DPC_NIKON_RawCompression" DataType="0" DataForm="0" HexCode="D016">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53271" Name="PTP_DPC_NIKON_WhiteBalanceAutoBias" DataType="0" DataForm="0" HexCode="D017">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53272" Name="PTP_DPC_NIKON_WhiteBalanceTungstenBias" DataType="0" DataForm="0" HexCode="D018">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53273" Name="PTP_DPC_NIKON_WhiteBalanceFluorescentBias" DataType="0" DataForm="0" HexCode="D019">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53274" Name="PTP_DPC_NIKON_WhiteBalanceDaylightBias" DataType="0" DataForm="0" HexCode="D01A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53275" Name="PTP_DPC_NIKON_WhiteBalanceFlashBias" DataType="0" DataForm="0" HexCode="D01B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53276" Name="PTP_DPC_NIKON_WhiteBalanceCloudyBias" DataType="0" DataForm="0" HexCode="D01C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53277" Name="PTP_DPC_NIKON_WhiteBalanceShadeBias" DataType="0" DataForm="0" HexCode="D01D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53278" Name="PTP_DPC_NIKON_WhiteBalanceColorTemperature" DataType="0" DataForm="0" HexCode="D01E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53279" Name="PTP_DPC_NIKON_WhiteBalancePresetNo" DataType="0" DataForm="0" HexCode="D01F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53280" Name="PTP_DPC_NIKON_WhiteBalancePresetName0" DataType="0" DataForm="0" HexCode="D020">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53281" Name="PTP_DPC_NIKON_WhiteBalancePresetName1" DataType="0" DataForm="0" HexCode="D021">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53282" Name="PTP_DPC_NIKON_WhiteBalancePresetName2" DataType="0" DataForm="0" HexCode="D022">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53283" Name="PTP_DPC_NIKON_WhiteBalancePresetName3" DataType="0" DataForm="0" HexCode="D023">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53284" Name="PTP_DPC_NIKON_WhiteBalancePresetName4" DataType="0" DataForm="0" HexCode="D024">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53285" Name="PTP_DPC_NIKON_WhiteBalancePresetVal0" DataType="0" DataForm="0" HexCode="D025">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53286" Name="PTP_DPC_NIKON_WhiteBalancePresetVal1" DataType="0" DataForm="0" HexCode="D026">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53287" Name="PTP_DPC_NIKON_WhiteBalancePresetVal2" DataType="0" DataForm="0" HexCode="D027">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53288" Name="PTP_DPC_NIKON_WhiteBalancePresetVal3" DataType="0" DataForm="0" HexCode="D028">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53289" Name="PTP_DPC_NIKON_WhiteBalancePresetVal4" DataType="0" DataForm="0" HexCode="D029">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53290" Name="PTP_DPC_NIKON_ImageSharpening" DataType="0" DataForm="0" HexCode="D02A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53291" Name="PTP_DPC_NIKON_ToneCompensation" DataType="0" DataForm="0" HexCode="D02B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53292" Name="PTP_DPC_NIKON_ColorModel" DataType="0" DataForm="0" HexCode="D02C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53293" Name="PTP_DPC_NIKON_HueAdjustment" DataType="0" DataForm="0" HexCode="D02D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53294" Name="PTP_DPC_NIKON_NonCPULensDataFocalLength" DataType="0" DataForm="0" HexCode="D02E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53295" Name="PTP_DPC_NIKON_NonCPULensDataMaximumAperture" DataType="0" DataForm="0" HexCode="D02F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53296" Name="PTP_DPC_NIKON_ShootingMode" DataType="0" DataForm="0" HexCode="D030">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53297" Name="PTP_DPC_NIKON_JPEG_Compression_Policy" DataType="0" DataForm="0" HexCode="D031">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53298" Name="PTP_DPC_NIKON_ColorSpace" DataType="0" DataForm="0" HexCode="D032">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53299" Name="PTP_DPC_NIKON_AutoDXCrop" DataType="0" DataForm="0" HexCode="D033">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53300" Name="PTP_DPC_NIKON_FlickerReduction" DataType="0" DataForm="0" HexCode="D034">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53301" Name="PTP_DPC_NIKON_RemoteMode" DataType="0" DataForm="0" HexCode="D035">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53302" Name="PTP_DPC_NIKON_VideoMode" DataType="0" DataForm="0" HexCode="D036">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53303" Name="PTP_DPC_NIKON_EffectMode" DataType="0" DataForm="0" HexCode="D037">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53312" Name="PTP_DPC_NIKON_CSMMenuBankSelect" DataType="0" DataForm="0" HexCode="D040">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53313" Name="PTP_DPC_NIKON_MenuBankNameA" DataType="0" DataForm="0" HexCode="D041">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53314" Name="PTP_DPC_NIKON_MenuBankNameB" DataType="0" DataForm="0" HexCode="D042">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53315" Name="PTP_DPC_NIKON_MenuBankNameC" DataType="0" DataForm="0" HexCode="D043">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53316" Name="PTP_DPC_NIKON_MenuBankNameD" DataType="0" DataForm="0" HexCode="D044">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53317" Name="PTP_DPC_NIKON_ResetBank" DataType="0" DataForm="0" HexCode="D045">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53320" Name="PTP_DPC_NIKON_A1AFCModePriority" DataType="0" DataForm="0" HexCode="D048">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53321" Name="PTP_DPC_NIKON_A2AFSModePriority" DataType="0" DataForm="0" HexCode="D049">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53322" Name="PTP_DPC_NIKON_A3GroupDynamicAF" DataType="0" DataForm="0" HexCode="D04A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53323" Name="PTP_DPC_NIKON_A4AFActivation" DataType="0" DataForm="0" HexCode="D04B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53324" Name="PTP_DPC_NIKON_FocusAreaIllumManualFocus" DataType="0" DataForm="0" HexCode="D04C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53325" Name="PTP_DPC_NIKON_FocusAreaIllumContinuous" DataType="0" DataForm="0" HexCode="D04D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53326" Name="PTP_DPC_NIKON_FocusAreaIllumWhenSelected" DataType="0" DataForm="0" HexCode="D04E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53327" Name="PTP_DPC_NIKON_FocusAreaWrap" DataType="0" DataForm="0" HexCode="D04F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53328" Name="PTP_DPC_NIKON_VerticalAFON" DataType="0" DataForm="0" HexCode="D050">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53329" Name="PTP_DPC_NIKON_AFLockOn" DataType="0" DataForm="0" HexCode="D051">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53330" Name="PTP_DPC_NIKON_FocusAreaZone" DataType="0" DataForm="0" HexCode="D052">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53331" Name="PTP_DPC_NIKON_EnableCopyright" DataType="0" DataForm="0" HexCode="D053">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53332" Name="PTP_DPC_NIKON_ISOAuto" DataType="0" DataForm="0" HexCode="D054">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53333" Name="PTP_DPC_NIKON_EVISOStep" DataType="0" DataForm="0" HexCode="D055">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53334" Name="PTP_DPC_NIKON_EVStep" DataType="0" DataForm="0" HexCode="D056">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53335" Name="PTP_DPC_NIKON_EVStepExposureComp" DataType="0" DataForm="0" HexCode="D057">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53336" Name="PTP_DPC_NIKON_ExposureCompensation" DataType="0" DataForm="0" HexCode="D058">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53337" Name="PTP_DPC_NIKON_CenterWeightArea" DataType="0" DataForm="0" HexCode="D059">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53338" Name="PTP_DPC_NIKON_ExposureBaseMatrix" DataType="0" DataForm="0" HexCode="D05A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53339" Name="PTP_DPC_NIKON_ExposureBaseCenter" DataType="0" DataForm="0" HexCode="D05B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53340" Name="PTP_DPC_NIKON_ExposureBaseSpot" DataType="0" DataForm="0" HexCode="D05C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53341" Name="PTP_DPC_NIKON_LiveViewAFArea" DataType="0" DataForm="0" HexCode="D05D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53342" Name="PTP_DPC_NIKON_AELockMode" DataType="0" DataForm="0" HexCode="D05E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53343" Name="PTP_DPC_NIKON_AELAFLMode" DataType="0" DataForm="0" HexCode="D05F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53345" Name="PTP_DPC_NIKON_LiveViewAFFocus" DataType="0" DataForm="0" HexCode="D061">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53346" Name="PTP_DPC_NIKON_MeterOff" DataType="0" DataForm="0" HexCode="D062">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53347" Name="PTP_DPC_NIKON_SelfTimer" DataType="0" DataForm="0" HexCode="D063">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53348" Name="PTP_DPC_NIKON_MonitorOff" DataType="0" DataForm="0" HexCode="D064">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53349" Name="PTP_DPC_NIKON_ImgConfTime" DataType="0" DataForm="0" HexCode="D065">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53350" Name="PTP_DPC_NIKON_AutoOffTimers" DataType="0" DataForm="0" HexCode="D066">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53351" Name="PTP_DPC_NIKON_AngleLevel" DataType="0" DataForm="0" HexCode="D067">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53352" Name="PTP_DPC_NIKON_D1ShootingSpeed" DataType="0" DataForm="0" HexCode="D068">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53353" Name="PTP_DPC_NIKON_D2MaximumShots" DataType="0" DataForm="0" HexCode="D069">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53354" Name="PTP_DPC_NIKON_ExposureDelayMode" DataType="0" DataForm="0" HexCode="D06A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53355" Name="PTP_DPC_NIKON_LongExposureNoiseReduction" DataType="0" DataForm="0" HexCode="D06B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53356" Name="PTP_DPC_NIKON_FileNumberSequence" DataType="0" DataForm="0" HexCode="D06C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53357" Name="PTP_DPC_NIKON_ControlPanelFinderRearControl" DataType="0" DataForm="0" HexCode="D06D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53358" Name="PTP_DPC_NIKON_ControlPanelFinderViewfinder" DataType="0" DataForm="0" HexCode="D06E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53359" Name="PTP_DPC_NIKON_D7Illumination" DataType="0" DataForm="0" HexCode="D06F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53360" Name="PTP_DPC_NIKON_NrHighISO" DataType="0" DataForm="0" HexCode="D070">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53361" Name="PTP_DPC_NIKON_SHSET_CH_GUID_DISP" DataType="0" DataForm="0" HexCode="D071">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53362" Name="PTP_DPC_NIKON_ArtistName" DataType="0" DataForm="0" HexCode="D072">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53363" Name="PTP_DPC_NIKON_CopyrightInfo" DataType="0" DataForm="0" HexCode="D073">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53364" Name="PTP_DPC_NIKON_FlashSyncSpeed" DataType="0" DataForm="0" HexCode="D074">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53365" Name="PTP_DPC_NIKON_FlashShutterSpeed" DataType="0" DataForm="0" HexCode="D075">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53366" Name="PTP_DPC_NIKON_E3AAFlashMode" DataType="0" DataForm="0" HexCode="D076">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53367" Name="PTP_DPC_NIKON_E4ModelingFlash" DataType="0" DataForm="0" HexCode="D077">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53368" Name="PTP_DPC_NIKON_BracketSet" DataType="0" DataForm="0" HexCode="D078">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53369" Name="PTP_DPC_NIKON_E6ManualModeBracketing" DataType="0" DataForm="0" HexCode="D079">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53370" Name="PTP_DPC_NIKON_BracketOrder" DataType="0" DataForm="0" HexCode="D07A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53371" Name="PTP_DPC_NIKON_E8AutoBracketSelection" DataType="0" DataForm="0" HexCode="D07B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53372" Name="PTP_DPC_NIKON_BracketingSet" DataType="0" DataForm="0" HexCode="D07C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53376" Name="PTP_DPC_NIKON_F1CenterButtonShootingMode" DataType="0" DataForm="0" HexCode="D080">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53377" Name="PTP_DPC_NIKON_CenterButtonPlaybackMode" DataType="0" DataForm="0" HexCode="D081">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53378" Name="PTP_DPC_NIKON_F2Multiselector" DataType="0" DataForm="0" HexCode="D082">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53379" Name="PTP_DPC_NIKON_F3PhotoInfoPlayback" DataType="0" DataForm="0" HexCode="D083">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53380" Name="PTP_DPC_NIKON_F4AssignFuncButton" DataType="0" DataForm="0" HexCode="D084">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53381" Name="PTP_DPC_NIKON_F5CustomizeCommDials" DataType="0" DataForm="0" HexCode="D085">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53382" Name="PTP_DPC_NIKON_ReverseCommandDial" DataType="0" DataForm="0" HexCode="D086">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53383" Name="PTP_DPC_NIKON_ApertureSetting" DataType="0" DataForm="0" HexCode="D087">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53384" Name="PTP_DPC_NIKON_MenusAndPlayback" DataType="0" DataForm="0" HexCode="D088">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53385" Name="PTP_DPC_NIKON_F6ButtonsAndDials" DataType="0" DataForm="0" HexCode="D089">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53386" Name="PTP_DPC_NIKON_NoCFCard" DataType="0" DataForm="0" HexCode="D08A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53387" Name="PTP_DPC_NIKON_CenterButtonZoomRatio" DataType="0" DataForm="0" HexCode="D08B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53388" Name="PTP_DPC_NIKON_FunctionButton2" DataType="0" DataForm="0" HexCode="D08C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53389" Name="PTP_DPC_NIKON_AFAreaPoint" DataType="0" DataForm="0" HexCode="D08D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53390" Name="PTP_DPC_NIKON_NormalAFOn" DataType="0" DataForm="0" HexCode="D08E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53391" Name="PTP_DPC_NIKON_CleanImageSensor" DataType="0" DataForm="0" HexCode="D08F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53392" Name="PTP_DPC_NIKON_ImageCommentString" DataType="0" DataForm="0" HexCode="D090">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53393" Name="PTP_DPC_NIKON_ImageCommentEnable" DataType="0" DataForm="0" HexCode="D091">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53394" Name="PTP_DPC_NIKON_ImageRotation" DataType="0" DataForm="0" HexCode="D092">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53395" Name="PTP_DPC_NIKON_ManualSetLensNo" DataType="0" DataForm="0" HexCode="D093">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53408" Name="PTP_DPC_NIKON_MovScreenSize" DataType="0" DataForm="0" HexCode="D0A0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53409" Name="PTP_DPC_NIKON_MovVoice" DataType="0" DataForm="0" HexCode="D0A1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53410" Name="PTP_DPC_NIKON_MovMicrophone" DataType="0" DataForm="0" HexCode="D0A2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53411" Name="PTP_DPC_NIKON_MovFileSlot" DataType="0" DataForm="0" HexCode="D0A3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53414" Name="PTP_DPC_NIKON_ManualMovieSetting" DataType="0" DataForm="0" HexCode="D0A6">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53427" Name="PTP_DPC_NIKON_MonitorOffDelay" DataType="0" DataForm="0" HexCode="D0B3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53440" Name="PTP_DPC_NIKON_Bracketing" DataType="0" DataForm="0" HexCode="D0C0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53441" Name="PTP_DPC_NIKON_AutoExposureBracketStep" DataType="0" DataForm="0" HexCode="D0C1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53442" Name="PTP_DPC_NIKON_AutoExposureBracketProgram" DataType="0" DataForm="0" HexCode="D0C2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53443" Name="PTP_DPC_NIKON_AutoExposureBracketCount" DataType="0" DataForm="0" HexCode="D0C3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53444" Name="PTP_DPC_NIKON_WhiteBalanceBracketStep" DataType="0" DataForm="0" HexCode="D0C4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53445" Name="PTP_DPC_NIKON_WhiteBalanceBracketProgram" DataType="0" DataForm="0" HexCode="D0C5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53472" Name="PTP_DPC_NIKON_LensID" DataType="0" DataForm="0" HexCode="D0E0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53473" Name="PTP_DPC_NIKON_LensSort" DataType="0" DataForm="0" HexCode="D0E1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53474" Name="PTP_DPC_NIKON_LensType" DataType="0" DataForm="0" HexCode="D0E2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53475" Name="PTP_DPC_NIKON_FocalLengthMin" DataType="0" DataForm="0" HexCode="D0E3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53476" Name="PTP_DPC_NIKON_FocalLengthMax" DataType="0" DataForm="0" HexCode="D0E4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53477" Name="PTP_DPC_NIKON_MaxApAtMinFocalLength" DataType="0" DataForm="0" HexCode="D0E5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53478" Name="PTP_DPC_NIKON_MaxApAtMaxFocalLength" DataType="0" DataForm="0" HexCode="D0E6">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53488" Name="PTP_DPC_NIKON_FinderISODisp" DataType="0" DataForm="0" HexCode="D0F0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53490" Name="PTP_DPC_NIKON_AutoOffPhoto" DataType="0" DataForm="0" HexCode="D0F2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53491" Name="PTP_DPC_NIKON_AutoOffMenu" DataType="0" DataForm="0" HexCode="D0F3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53492" Name="PTP_DPC_NIKON_AutoOffInfo" DataType="0" DataForm="0" HexCode="D0F4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53493" Name="PTP_DPC_NIKON_SelfTimerShootNum" DataType="0" DataForm="0" HexCode="D0F5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53495" Name="PTP_DPC_NIKON_VignetteCtrl" DataType="0" DataForm="0" HexCode="D0F7">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53496" Name="PTP_DPC_NIKON_AutoDistortionControl" DataType="0" DataForm="0" HexCode="D0F8">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53497" Name="PTP_DPC_NIKON_SceneMode" DataType="0" DataForm="0" HexCode="D0F9">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53504" Name="PTP_DPC_NIKON_ExposureTime" DataType="0" DataForm="0" HexCode="D100">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53505" Name="PTP_DPC_NIKON_ACPower" DataType="0" DataForm="0" HexCode="D101">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53506" Name="PTP_DPC_NIKON_WarningStatus" DataType="0" DataForm="0" HexCode="D102">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53507" Name="PTP_DPC_NIKON_MaximumShots" DataType="0" DataForm="0" HexCode="D103">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53508" Name="PTP_DPC_NIKON_AFLockStatus" DataType="0" DataForm="0" HexCode="D104">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53509" Name="PTP_DPC_NIKON_AELockStatus" DataType="0" DataForm="0" HexCode="D105">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53510" Name="PTP_DPC_NIKON_FVLockStatus" DataType="0" DataForm="0" HexCode="D106">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53511" Name="PTP_DPC_NIKON_AutofocusLCDTopMode2" DataType="0" DataForm="0" HexCode="D107">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53512" Name="PTP_DPC_NIKON_AutofocusArea" DataType="0" DataForm="0" HexCode="D108">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53513" Name="PTP_DPC_NIKON_FlexibleProgram" DataType="0" DataForm="0" HexCode="D109">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53514" Name="PTP_DPC_NIKON_LightMeter" DataType="0" DataForm="0" HexCode="D10A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53515" Name="PTP_DPC_NIKON_RecordingMedia" DataType="0" DataForm="0" HexCode="D10B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53516" Name="PTP_DPC_NIKON_USBSpeed" DataType="0" DataForm="0" HexCode="D10C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53517" Name="PTP_DPC_NIKON_CCDNumber" DataType="0" DataForm="0" HexCode="D10D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53518" Name="PTP_DPC_NIKON_CameraOrientation" DataType="0" DataForm="0" HexCode="D10E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53519" Name="PTP_DPC_NIKON_GroupPtnType" DataType="0" DataForm="0" HexCode="D10F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53520" Name="PTP_DPC_NIKON_FNumberLock" DataType="0" DataForm="0" HexCode="D110">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53521" Name="PTP_DPC_NIKON_ExposureApertureLock" DataType="0" DataForm="0" HexCode="D111">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53522" Name="PTP_DPC_NIKON_TVLockSetting" DataType="0" DataForm="0" HexCode="D112">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53523" Name="PTP_DPC_NIKON_AVLockSetting" DataType="0" DataForm="0" HexCode="D113">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53524" Name="PTP_DPC_NIKON_IllumSetting" DataType="0" DataForm="0" HexCode="D114">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53525" Name="PTP_DPC_NIKON_FocusPointBright" DataType="0" DataForm="0" HexCode="D115">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53536" Name="PTP_DPC_NIKON_ExternalFlashAttached" DataType="0" DataForm="0" HexCode="D120">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53537" Name="PTP_DPC_NIKON_ExternalFlashStatus" DataType="0" DataForm="0" HexCode="D121">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53538" Name="PTP_DPC_NIKON_ExternalFlashSort" DataType="0" DataForm="0" HexCode="D122">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53539" Name="PTP_DPC_NIKON_ExternalFlashMode" DataType="0" DataForm="0" HexCode="D123">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53540" Name="PTP_DPC_NIKON_ExternalFlashCompensation" DataType="0" DataForm="0" HexCode="D124">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53541" Name="PTP_DPC_NIKON_NewExternalFlashMode" DataType="0" DataForm="0" HexCode="D125">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53542" Name="PTP_DPC_NIKON_FlashExposureCompensation" DataType="0" DataForm="0" HexCode="D126">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53552" Name="PTP_DPC_NIKON_HDRMode" DataType="0" DataForm="0" HexCode="D130">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53553" Name="PTP_DPC_NIKON_HDRHighDynamic" DataType="0" DataForm="0" HexCode="D131">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53554" Name="PTP_DPC_NIKON_HDRSmoothing" DataType="0" DataForm="0" HexCode="D132">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53568" Name="PTP_DPC_NIKON_OptimizeImage" DataType="0" DataForm="0" HexCode="D140">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53570" Name="PTP_DPC_NIKON_Saturation" DataType="0" DataForm="0" HexCode="D142">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53571" Name="PTP_DPC_NIKON_BW_FillerEffect" DataType="0" DataForm="0" HexCode="D143">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53572" Name="PTP_DPC_NIKON_BW_Sharpness" DataType="0" DataForm="0" HexCode="D144">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53573" Name="PTP_DPC_NIKON_BW_Contrast" DataType="0" DataForm="0" HexCode="D145">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53574" Name="PTP_DPC_NIKON_BW_Setting_Type" DataType="0" DataForm="0" HexCode="D146">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53576" Name="PTP_DPC_NIKON_Slot2SaveMode" DataType="0" DataForm="0" HexCode="D148">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53577" Name="PTP_DPC_NIKON_RawBitMode" DataType="0" DataForm="0" HexCode="D149">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53582" Name="PTP_DPC_NIKON_ISOAutoTime" DataType="0" DataForm="0" HexCode="D14E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53583" Name="PTP_DPC_NIKON_FlourescentType" DataType="0" DataForm="0" HexCode="D14F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53584" Name="PTP_DPC_NIKON_TuneColourTemperature" DataType="0" DataForm="0" HexCode="D150">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53585" Name="PTP_DPC_NIKON_TunePreset0" DataType="0" DataForm="0" HexCode="D151">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53586" Name="PTP_DPC_NIKON_TunePreset1" DataType="0" DataForm="0" HexCode="D152">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53587" Name="PTP_DPC_NIKON_TunePreset2" DataType="0" DataForm="0" HexCode="D153">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53588" Name="PTP_DPC_NIKON_TunePreset3" DataType="0" DataForm="0" HexCode="D154">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53589" Name="PTP_DPC_NIKON_TunePreset4" DataType="0" DataForm="0" HexCode="D155">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53600" Name="PTP_DPC_NIKON_BeepOff" DataType="0" DataForm="0" HexCode="D160">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53601" Name="PTP_DPC_NIKON_AutofocusMode" DataType="0" DataForm="0" HexCode="D161">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53603" Name="PTP_DPC_NIKON_AFAssist" DataType="0" DataForm="0" HexCode="D163">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53604" Name="PTP_DPC_NIKON_PADVPMode" DataType="0" DataForm="0" HexCode="D164">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53605" Name="PTP_DPC_NIKON_ImageReview" DataType="0" DataForm="0" HexCode="D165">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53606" Name="PTP_DPC_NIKON_AFAreaIllumination" DataType="0" DataForm="0" HexCode="D166">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53607" Name="PTP_DPC_NIKON_FlashMode" DataType="0" DataForm="0" HexCode="D167">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53608" Name="PTP_DPC_NIKON_FlashCommanderMode" DataType="0" DataForm="0" HexCode="D168">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53609" Name="PTP_DPC_NIKON_FlashSign" DataType="0" DataForm="0" HexCode="D169">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53610" Name="PTP_DPC_NIKON_ISO_Auto" DataType="0" DataForm="0" HexCode="D16A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53611" Name="PTP_DPC_NIKON_RemoteTimeout" DataType="0" DataForm="0" HexCode="D16B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53612" Name="PTP_DPC_NIKON_GridDisplay" DataType="0" DataForm="0" HexCode="D16C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53613" Name="PTP_DPC_NIKON_FlashModeManualPower" DataType="0" DataForm="0" HexCode="D16D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53614" Name="PTP_DPC_NIKON_FlashModeCommanderPower" DataType="0" DataForm="0" HexCode="D16E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53615" Name="PTP_DPC_NIKON_AutoFP" DataType="0" DataForm="0" HexCode="D16F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53632" Name="PTP_DPC_NIKON_CSMMenu" DataType="0" DataForm="0" HexCode="D180">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53633" Name="PTP_DPC_NIKON_WarningDisplay" DataType="0" DataForm="0" HexCode="D181">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53634" Name="PTP_DPC_NIKON_BatteryCellKind" DataType="0" DataForm="0" HexCode="D182">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53635" Name="PTP_DPC_NIKON_ISOAutoHiLimit" DataType="0" DataForm="0" HexCode="D183">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53636" Name="PTP_DPC_NIKON_DynamicAFArea" DataType="0" DataForm="0" HexCode="D184">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53638" Name="PTP_DPC_NIKON_ContinuousSpeedHigh" DataType="0" DataForm="0" HexCode="D186">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53639" Name="PTP_DPC_NIKON_InfoDispSetting" DataType="0" DataForm="0" HexCode="D187">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53641" Name="PTP_DPC_NIKON_PreviewButton" DataType="0" DataForm="0" HexCode="D189">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53642" Name="PTP_DPC_NIKON_PreviewButton2" DataType="0" DataForm="0" HexCode="D18A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53643" Name="PTP_DPC_NIKON_AEAFLockButton2" DataType="0" DataForm="0" HexCode="D18B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53645" Name="PTP_DPC_NIKON_IndicatorDisp" DataType="0" DataForm="0" HexCode="D18D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53646" Name="PTP_DPC_NIKON_CellKindPriority" DataType="0" DataForm="0" HexCode="D18E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53648" Name="PTP_DPC_NIKON_BracketingFramesAndSteps" DataType="0" DataForm="0" HexCode="D190">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53664" Name="PTP_DPC_NIKON_LiveViewMode" DataType="0" DataForm="0" HexCode="D1A0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53665" Name="PTP_DPC_NIKON_LiveViewDriveMode" DataType="0" DataForm="0" HexCode="D1A1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53666" Name="PTP_DPC_NIKON_LiveViewStatus" DataType="0" DataForm="0" HexCode="D1A2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53667" Name="PTP_DPC_NIKON_LiveViewImageZoomRatio" DataType="0" DataForm="0" HexCode="D1A3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53668" Name="PTP_DPC_NIKON_LiveViewProhibitCondition" DataType="0" DataForm="0" HexCode="D1A4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53680" Name="PTP_DPC_NIKON_ExposureDisplayStatus" DataType="0" DataForm="0" HexCode="D1B0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53681" Name="PTP_DPC_NIKON_ExposureIndicateStatus" DataType="0" DataForm="0" HexCode="D1B1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53682" Name="PTP_DPC_NIKON_InfoDispErrStatus" DataType="0" DataForm="0" HexCode="D1B2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53683" Name="PTP_DPC_NIKON_ExposureIndicateLightup" DataType="0" DataForm="0" HexCode="D1B3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53696" Name="PTP_DPC_NIKON_FlashOpen" DataType="0" DataForm="0" HexCode="D1C0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53697" Name="PTP_DPC_NIKON_FlashCharged" DataType="0" DataForm="0" HexCode="D1C1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53712" Name="PTP_DPC_NIKON_FlashMRepeatValue" DataType="0" DataForm="0" HexCode="D1D0">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53713" Name="PTP_DPC_NIKON_FlashMRepeatCount" DataType="0" DataForm="0" HexCode="D1D1">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53714" Name="PTP_DPC_NIKON_FlashMRepeatInterval" DataType="0" DataForm="0" HexCode="D1D2">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53715" Name="PTP_DPC_NIKON_FlashCommandChannel" DataType="0" DataForm="0" HexCode="D1D3">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53716" Name="PTP_DPC_NIKON_FlashCommandSelfMode" DataType="0" DataForm="0" HexCode="D1D4">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53717" Name="PTP_DPC_NIKON_FlashCommandSelfCompensation" DataType="0" DataForm="0" HexCode="D1D5">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53718" Name="PTP_DPC_NIKON_FlashCommandSelfValue" DataType="0" DataForm="0" HexCode="D1D6">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53719" Name="PTP_DPC_NIKON_FlashCommandAMode" DataType="0" DataForm="0" HexCode="D1D7">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53720" Name="PTP_DPC_NIKON_FlashCommandACompensation" DataType="0" DataForm="0" HexCode="D1D8">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53721" Name="PTP_DPC_NIKON_FlashCommandAValue" DataType="0" DataForm="0" HexCode="D1D9">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53722" Name="PTP_DPC_NIKON_FlashCommandBMode" DataType="0" DataForm="0" HexCode="D1DA">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53723" Name="PTP_DPC_NIKON_FlashCommandBCompensation" DataType="0" DataForm="0" HexCode="D1DB">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53724" Name="PTP_DPC_NIKON_FlashCommandBValue" DataType="0" DataForm="0" HexCode="D1DC">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53760" Name="PTP_DPC_NIKON_ActivePicCtrlItem" DataType="0" DataForm="0" HexCode="D200">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53761" Name="PTP_DPC_NIKON_ChangePicCtrlItem" DataType="0" DataForm="0" HexCode="D201">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53271" Name="PTP_DPC_FUJI_ColorTemperature" DataType="0" DataForm="0" HexCode="D017">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53272" Name="PTP_DPC_FUJI_Quality" DataType="0" DataForm="0" HexCode="D018">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53761" Name="PTP_DPC_FUJI_ReleaseMode" DataType="0" DataForm="0" HexCode="D201">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53766" Name="PTP_DPC_FUJI_FocusAreas" DataType="0" DataForm="0" HexCode="D206">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53779" Name="PTP_DPC_FUJI_AELock" DataType="0" DataForm="0" HexCode="D213">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53784" Name="PTP_DPC_FUJI_Aperture" DataType="0" DataForm="0" HexCode="D218">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53785" Name="PTP_DPC_FUJI_ShutterSpeed" DataType="0" DataForm="0" HexCode="D219">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53505" Name="PTP_DPC_MTP_SecureTime" DataType="0" DataForm="0" HexCode="D101">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53506" Name="PTP_DPC_MTP_DeviceCertificate" DataType="0" DataForm="0" HexCode="D102">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53507" Name="PTP_DPC_MTP_RevocationInfo" DataType="0" DataForm="0" HexCode="D103">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54273" Name="PTP_DPC_MTP_SynchronizationPartner" DataType="0" DataForm="0" HexCode="D401">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54274" Name="PTP_DPC_MTP_DeviceFriendlyName" DataType="0" DataForm="0" HexCode="D402">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54275" Name="PTP_DPC_MTP_VolumeLevel" DataType="0" DataForm="0" HexCode="D403">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54277" Name="PTP_DPC_MTP_DeviceIcon" DataType="0" DataForm="0" HexCode="D405">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54278" Name="PTP_DPC_MTP_SessionInitiatorInfo" DataType="0" DataForm="0" HexCode="D406">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54279" Name="PTP_DPC_MTP_PerceivedDeviceType" DataType="0" DataForm="0" HexCode="D407">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54288" Name="PTP_DPC_MTP_PlaybackRate" DataType="0" DataForm="0" HexCode="D410">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54289" Name="PTP_DPC_MTP_PlaybackObject" DataType="0" DataForm="0" HexCode="D411">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54290" Name="PTP_DPC_MTP_PlaybackContainerIndex" DataType="0" DataForm="0" HexCode="D412">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54291" Name="PTP_DPC_MTP_PlaybackPosition" DataType="0" DataForm="0" HexCode="D413">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53553" Name="PTP_DPC_MTP_PlaysForSureID" DataType="0" DataForm="0" HexCode="D131">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53633" Name="PTP_DPC_MTP_Zune_UnknownVersion" DataType="0" DataForm="0" HexCode="D181">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53506" Name="PTP_DPC_OLYMPUS_ResolutionMode" DataType="0" DataForm="0" HexCode="D102">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53507" Name="PTP_DPC_OLYMPUS_FocusPriority" DataType="0" DataForm="0" HexCode="D103">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53508" Name="PTP_DPC_OLYMPUS_DriveMode" DataType="0" DataForm="0" HexCode="D104">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53509" Name="PTP_DPC_OLYMPUS_DateTimeFormat" DataType="0" DataForm="0" HexCode="D105">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53510" Name="PTP_DPC_OLYMPUS_ExposureBiasStep" DataType="0" DataForm="0" HexCode="D106">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53511" Name="PTP_DPC_OLYMPUS_WBMode" DataType="0" DataForm="0" HexCode="D107">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53512" Name="PTP_DPC_OLYMPUS_OneTouchWB" DataType="0" DataForm="0" HexCode="D108">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53513" Name="PTP_DPC_OLYMPUS_ManualWB" DataType="0" DataForm="0" HexCode="D109">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53514" Name="PTP_DPC_OLYMPUS_ManualWBRBBias" DataType="0" DataForm="0" HexCode="D10A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53515" Name="PTP_DPC_OLYMPUS_CustomWB" DataType="0" DataForm="0" HexCode="D10B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53516" Name="PTP_DPC_OLYMPUS_CustomWBValue" DataType="0" DataForm="0" HexCode="D10C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53517" Name="PTP_DPC_OLYMPUS_ExposureTimeEx" DataType="0" DataForm="0" HexCode="D10D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53518" Name="PTP_DPC_OLYMPUS_BulbMode" DataType="0" DataForm="0" HexCode="D10E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53519" Name="PTP_DPC_OLYMPUS_AntiMirrorMode" DataType="0" DataForm="0" HexCode="D10F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53520" Name="PTP_DPC_OLYMPUS_AEBracketingFrame" DataType="0" DataForm="0" HexCode="D110">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53521" Name="PTP_DPC_OLYMPUS_AEBracketingStep" DataType="0" DataForm="0" HexCode="D111">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53522" Name="PTP_DPC_OLYMPUS_WBBracketingFrame" DataType="0" DataForm="0" HexCode="D112">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53522" Name="PTP_DPC_OLYMPUS_WBBracketingRBFrame" DataType="0" DataForm="0" HexCode="D112">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53523" Name="PTP_DPC_OLYMPUS_WBBracketingRBRange" DataType="0" DataForm="0" HexCode="D113">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53524" Name="PTP_DPC_OLYMPUS_WBBracketingGMFrame" DataType="0" DataForm="0" HexCode="D114">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53525" Name="PTP_DPC_OLYMPUS_WBBracketingGMRange" DataType="0" DataForm="0" HexCode="D115">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53528" Name="PTP_DPC_OLYMPUS_FLBracketingFrame" DataType="0" DataForm="0" HexCode="D118">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53529" Name="PTP_DPC_OLYMPUS_FLBracketingStep" DataType="0" DataForm="0" HexCode="D119">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53530" Name="PTP_DPC_OLYMPUS_FlashBiasCompensation" DataType="0" DataForm="0" HexCode="D11A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53531" Name="PTP_DPC_OLYMPUS_ManualFocusMode" DataType="0" DataForm="0" HexCode="D11B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53533" Name="PTP_DPC_OLYMPUS_RawSaveMode" DataType="0" DataForm="0" HexCode="D11D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53534" Name="PTP_DPC_OLYMPUS_AUXLightMode" DataType="0" DataForm="0" HexCode="D11E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53535" Name="PTP_DPC_OLYMPUS_LensSinkMode" DataType="0" DataForm="0" HexCode="D11F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53536" Name="PTP_DPC_OLYMPUS_BeepStatus" DataType="0" DataForm="0" HexCode="D120">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53538" Name="PTP_DPC_OLYMPUS_ColorSpace" DataType="0" DataForm="0" HexCode="D122">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53539" Name="PTP_DPC_OLYMPUS_ColorMatching" DataType="0" DataForm="0" HexCode="D123">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53540" Name="PTP_DPC_OLYMPUS_Saturation" DataType="0" DataForm="0" HexCode="D124">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53542" Name="PTP_DPC_OLYMPUS_NoiseReductionPattern" DataType="0" DataForm="0" HexCode="D126">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53543" Name="PTP_DPC_OLYMPUS_NoiseReductionRandom" DataType="0" DataForm="0" HexCode="D127">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53545" Name="PTP_DPC_OLYMPUS_ShadingMode" DataType="0" DataForm="0" HexCode="D129">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53546" Name="PTP_DPC_OLYMPUS_ISOBoostMode" DataType="0" DataForm="0" HexCode="D12A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53547" Name="PTP_DPC_OLYMPUS_ExposureIndexBiasStep" DataType="0" DataForm="0" HexCode="D12B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53548" Name="PTP_DPC_OLYMPUS_FilterEffect" DataType="0" DataForm="0" HexCode="D12C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53549" Name="PTP_DPC_OLYMPUS_ColorTune" DataType="0" DataForm="0" HexCode="D12D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53550" Name="PTP_DPC_OLYMPUS_Language" DataType="0" DataForm="0" HexCode="D12E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53551" Name="PTP_DPC_OLYMPUS_LanguageCode" DataType="0" DataForm="0" HexCode="D12F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53552" Name="PTP_DPC_OLYMPUS_RecviewMode" DataType="0" DataForm="0" HexCode="D130">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53553" Name="PTP_DPC_OLYMPUS_SleepTime" DataType="0" DataForm="0" HexCode="D131">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53554" Name="PTP_DPC_OLYMPUS_ManualWBGMBias" DataType="0" DataForm="0" HexCode="D132">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53557" Name="PTP_DPC_OLYMPUS_AELAFLMode" DataType="0" DataForm="0" HexCode="D135">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53558" Name="PTP_DPC_OLYMPUS_AELButtonStatus" DataType="0" DataForm="0" HexCode="D136">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53559" Name="PTP_DPC_OLYMPUS_CompressionSettingEx" DataType="0" DataForm="0" HexCode="D137">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53561" Name="PTP_DPC_OLYMPUS_ToneMode" DataType="0" DataForm="0" HexCode="D139">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53562" Name="PTP_DPC_OLYMPUS_GradationMode" DataType="0" DataForm="0" HexCode="D13A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53563" Name="PTP_DPC_OLYMPUS_DevelopMode" DataType="0" DataForm="0" HexCode="D13B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53564" Name="PTP_DPC_OLYMPUS_ExtendInnerFlashMode" DataType="0" DataForm="0" HexCode="D13C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53565" Name="PTP_DPC_OLYMPUS_OutputDeviceMode" DataType="0" DataForm="0" HexCode="D13D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53566" Name="PTP_DPC_OLYMPUS_LiveViewMode" DataType="0" DataForm="0" HexCode="D13E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53568" Name="PTP_DPC_OLYMPUS_LCDBacklight" DataType="0" DataForm="0" HexCode="D140">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53569" Name="PTP_DPC_OLYMPUS_CustomDevelop" DataType="0" DataForm="0" HexCode="D141">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53570" Name="PTP_DPC_OLYMPUS_GradationAutoBias" DataType="0" DataForm="0" HexCode="D142">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53571" Name="PTP_DPC_OLYMPUS_FlashRCMode" DataType="0" DataForm="0" HexCode="D143">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53572" Name="PTP_DPC_OLYMPUS_FlashRCGroupValue" DataType="0" DataForm="0" HexCode="D144">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53573" Name="PTP_DPC_OLYMPUS_FlashRCChannelValue" DataType="0" DataForm="0" HexCode="D145">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53574" Name="PTP_DPC_OLYMPUS_FlashRCFPMode" DataType="0" DataForm="0" HexCode="D146">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53575" Name="PTP_DPC_OLYMPUS_FlashRCPhotoChromicMode" DataType="0" DataForm="0" HexCode="D147">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53576" Name="PTP_DPC_OLYMPUS_FlashRCPhotoChromicBias" DataType="0" DataForm="0" HexCode="D148">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53577" Name="PTP_DPC_OLYMPUS_FlashRCPhotoChromicManualBias" DataType="0" DataForm="0" HexCode="D149">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53578" Name="PTP_DPC_OLYMPUS_FlashRCQuantityLightLevel" DataType="0" DataForm="0" HexCode="D14A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53579" Name="PTP_DPC_OLYMPUS_FocusMeteringValue" DataType="0" DataForm="0" HexCode="D14B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53580" Name="PTP_DPC_OLYMPUS_ISOBracketingFrame" DataType="0" DataForm="0" HexCode="D14C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53581" Name="PTP_DPC_OLYMPUS_ISOBracketingStep" DataType="0" DataForm="0" HexCode="D14D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53582" Name="PTP_DPC_OLYMPUS_BulbMFMode" DataType="0" DataForm="0" HexCode="D14E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53583" Name="PTP_DPC_OLYMPUS_BurstFPSValue" DataType="0" DataForm="0" HexCode="D14F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53584" Name="PTP_DPC_OLYMPUS_ISOAutoBaseValue" DataType="0" DataForm="0" HexCode="D150">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53585" Name="PTP_DPC_OLYMPUS_ISOAutoMaxValue" DataType="0" DataForm="0" HexCode="D151">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53586" Name="PTP_DPC_OLYMPUS_BulbLimiterValue" DataType="0" DataForm="0" HexCode="D152">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53587" Name="PTP_DPC_OLYMPUS_DPIMode" DataType="0" DataForm="0" HexCode="D153">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53588" Name="PTP_DPC_OLYMPUS_DPICustomValue" DataType="0" DataForm="0" HexCode="D154">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53589" Name="PTP_DPC_OLYMPUS_ResolutionValueSetting" DataType="0" DataForm="0" HexCode="D155">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53591" Name="PTP_DPC_OLYMPUS_AFTargetSize" DataType="0" DataForm="0" HexCode="D157">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53592" Name="PTP_DPC_OLYMPUS_LightSensorMode" DataType="0" DataForm="0" HexCode="D158">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53593" Name="PTP_DPC_OLYMPUS_AEBracket" DataType="0" DataForm="0" HexCode="D159">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53594" Name="PTP_DPC_OLYMPUS_WBRBBracket" DataType="0" DataForm="0" HexCode="D15A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53595" Name="PTP_DPC_OLYMPUS_WBGMBracket" DataType="0" DataForm="0" HexCode="D15B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53596" Name="PTP_DPC_OLYMPUS_FlashBracket" DataType="0" DataForm="0" HexCode="D15C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53597" Name="PTP_DPC_OLYMPUS_ISOBracket" DataType="0" DataForm="0" HexCode="D15D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53598" Name="PTP_DPC_OLYMPUS_MyModeStatus" DataType="0" DataForm="0" HexCode="D15E">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53249" Name="PTP_DPC_CASIO_MONITOR" DataType="0" DataForm="0" HexCode="D001">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53250" Name="PTP_DPC_CASIO_STORAGE" DataType="0" DataForm="0" HexCode="D002">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53252" Name="PTP_DPC_CASIO_UNKNOWN_1" DataType="0" DataForm="0" HexCode="D004">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53253" Name="PTP_DPC_CASIO_UNKNOWN_2" DataType="0" DataForm="0" HexCode="D005">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53255" Name="PTP_DPC_CASIO_UNKNOWN_3" DataType="0" DataForm="0" HexCode="D007">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53256" Name="PTP_DPC_CASIO_RECORD_LIGHT" DataType="0" DataForm="0" HexCode="D008">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53257" Name="PTP_DPC_CASIO_UNKNOWN_4" DataType="0" DataForm="0" HexCode="D009">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53258" Name="PTP_DPC_CASIO_UNKNOWN_5" DataType="0" DataForm="0" HexCode="D00A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53259" Name="PTP_DPC_CASIO_MOVIE_MODE" DataType="0" DataForm="0" HexCode="D00B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53260" Name="PTP_DPC_CASIO_HD_SETTING" DataType="0" DataForm="0" HexCode="D00C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53261" Name="PTP_DPC_CASIO_HS_SETTING" DataType="0" DataForm="0" HexCode="D00D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53263" Name="PTP_DPC_CASIO_CS_HIGH_SPEED" DataType="0" DataForm="0" HexCode="D00F">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53264" Name="PTP_DPC_CASIO_CS_UPPER_LIMIT" DataType="0" DataForm="0" HexCode="D010">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53265" Name="PTP_DPC_CASIO_CS_SHOT" DataType="0" DataForm="0" HexCode="D011">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53266" Name="PTP_DPC_CASIO_UNKNOWN_6" DataType="0" DataForm="0" HexCode="D012">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53267" Name="PTP_DPC_CASIO_UNKNOWN_7" DataType="0" DataForm="0" HexCode="D013">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53269" Name="PTP_DPC_CASIO_UNKNOWN_8" DataType="0" DataForm="0" HexCode="D015">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53271" Name="PTP_DPC_CASIO_UNKNOWN_9" DataType="0" DataForm="0" HexCode="D017">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53272" Name="PTP_DPC_CASIO_UNKNOWN_10" DataType="0" DataForm="0" HexCode="D018">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53273" Name="PTP_DPC_CASIO_UNKNOWN_11" DataType="0" DataForm="0" HexCode="D019">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53274" Name="PTP_DPC_CASIO_UNKNOWN_12" DataType="0" DataForm="0" HexCode="D01A">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53275" Name="PTP_DPC_CASIO_UNKNOWN_13" DataType="0" DataForm="0" HexCode="D01B">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53276" Name="PTP_DPC_CASIO_UNKNOWN_14" DataType="0" DataForm="0" HexCode="D01C">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53277" Name="PTP_DPC_CASIO_UNKNOWN_15" DataType="0" DataForm="0" HexCode="D01D">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53280" Name="PTP_DPC_CASIO_UNKNOWN_16" DataType="0" DataForm="0" HexCode="D020">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53296" Name="PTP_DPC_CASIO_UNKNOWN_17" DataType="0" DataForm="0" HexCode="D030">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="53376" Name="PTP_DPC_CASIO_UNKNOWN_18" DataType="0" DataForm="0" HexCode="D080">
+      <Values />
+    </XmlPropertyDescriptor>
+  </AvaiableProperties>
+  <Model>D5100</Model>
+  <Manufacturer>Nikon Corporation</Manufacturer>
+</XmlDeviceData>

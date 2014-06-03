@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <?define ProductName="digiCamControl" ?>
+  <?define CompanyName="$(fileVersion.CompanyName($(var.CameraControl.TargetPath)))" ?>
+  <?define ProductVersion="$(fileVersion.ProductVersion($(var.CameraControl.TargetPath)))" ?>
+  <?define ProductUpgradeCode = "161DE505-11F1-4672-BD27-E7B70B37532A"?>
+  
+	<Product Id="*" Name="$(var.ProductName)"  Language="1033" Version="$(var.ProductVersion)" Manufacturer="Duka Istvan" UpgradeCode="$(var.ProductUpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed."
+                  Schedule="afterInstallValidate"
+                  />
+    
+    <Media Id="01" Cabinet="Product.cab" EmbedCab="yes" CompressionLevel="high"/>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="digiCamControl">
+
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuSubfolder" Name="$(var.ProductName)">
+          <Component Id="ApplicationShortcuts" Guid="DA5F3999-0017-45A3-B58D-7C76D010680C" >
+            <Shortcut Id="ApplicationShortcut1" Name="$(var.ProductName)" Target="[INSTALLFOLDER]CameraControl.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <Shortcut Id="ApplicationShortcut2" Name="MtpTester" Target="[INSTALLFOLDER]MtpTester.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <Shortcut Id="ApplicationShortcut3" Name="PhotoBooth" Target="[INSTALLFOLDER]PhotoBooth.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <Shortcut Id="ApplicationShortcut4" Name="PluginManager" Target="[INSTALLFOLDER]CameraControl.PluginManager.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <RegistryValue Root="HKCU" Key="Software\digiCamControl"
+                      Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" SourceName="Desktop" >
+        <Directory Id="MergeRedirectFolder">
+          <Component Id="DesktopShortcut" Guid="*">
+            <Shortcut
+                Id="DesktopShortcut"
+                Directory="DesktopFolder"
+                Name="$(var.ProductName)"
+                Target="[INSTALLFOLDER]CameraControl.exe"
+                WorkingDirectory="INSTALLFOLDER" />
+            <RegistryValue Root="HKCU" Key="Software\digiCamControl"
+                      Name="desktopIcon" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="MergeRedirectFolder" On="uninstall"/>
+          </Component>
+        </Directory>
+      </Directory>
+      
+      <!-- Shortcuts and Directories for Shortcuts go here -->
+    </Directory>
+
+  
+		<Feature Id="ProductFeature" Title="Main program" Level="1">
+      <ComponentGroupRef Id="SampleGroup"/>
+      <ComponentRef Id="ApplicationShortcuts"/>
+      <ComponentRef Id="DesktopShortcut"/>
+		</Feature>
+
+   
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.CameraControl.TargetDir)\Licenses\GPLv3LICENSE.rtf" />
+
+    <UI>
+      <UIRef Id="WixUI_Mondo" />
+      <UIRef Id="WixUI_ErrorProgressText" />
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch digiCamControl" />
+    <Property Id="WixShellExecTarget" Value="[#fil90C442D731CF499C8C02751563DFAB0D]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
+    
+    
+    <Icon Id="PracticeSharp.exe" SourceFile="$(var.CameraControl.TargetDir)\CameraControl.exe" />
+	</Product>
+</Wix>

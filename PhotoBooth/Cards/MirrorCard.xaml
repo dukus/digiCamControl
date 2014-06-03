@@ -1,0 +1,39 @@
+﻿<local:PhotoCard x:Class="PhotoBooth.Cards.MirrorCard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PhotoBooth"
+        Title="Mirror Card" Height="600" Width="900" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid Name="LayoutGrid" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Name="image1" Grid.Column="0" Grid.Row="0" Source="{Binding Path=Image}"></Image>
+
+        <Image Name="image2" Grid.Column="1" Grid.Row="0" Source="{Binding Path=Image}" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <ScaleTransform ScaleX="-1"/>
+            </Image.RenderTransform>
+        </Image>
+
+        <Image Name="image3" Grid.Column="0" Grid.Row="1" Source="{Binding Path=Image}"  RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <ScaleTransform ScaleY="-1"/>
+            </Image.RenderTransform>
+        </Image>
+
+        <Image Name="image4" Grid.Column="1" Grid.Row="1" Source="{Binding Path=Image}" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+            </Image.RenderTransform>
+        </Image>
+    </Grid>
+</local:PhotoCard>

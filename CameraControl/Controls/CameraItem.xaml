@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="CameraControl.Controls.CameraItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:my="clr-namespace:CameraControl"
+             mc:Ignorable="d" xmlns:my1="clr-namespace:CameraControl.Controls"
+             xmlns:Classes="clr-namespace:CameraControl.Classes">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
+  </UserControl.Resources>
+  <Grid>
+        <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black" Margin="3" Width="185" Padding="5">
+            <StackPanel Orientation="Vertical">
+                <Line />
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Fill="Red" Width="10" Height="10" Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}"/>
+                    <Label Content="{Binding Path=DeviceName}" ToolTip="{Binding Path=DisplayName}"/>
+                </StackPanel>
+                <TextBox ToolTip="{Binding Path=DisplayName}" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my1:CameraItem, AncestorLevel=1}, Path=CameraProperty.DeviceName}" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Height="23" Width="25" Command="{Binding Source={x:Static Member=Classes:WpfCommands.DevicePropertyCommand}}" CommandParameter="{Binding}">
+                        <Button.Content>
+                            <Image Source="/CameraControl;component/Images/Properties.png" />
+                        </Button.Content>
+                    </Button>
+                    <Button  Height="23" Width="25" Content="Lv" Command="{Binding Source={x:Static Member=Classes:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding}"/>
+                    <ProgressBar Value="{Binding Path=TransferProgress}" Width="125" Margin="3" Style="{x:Null}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

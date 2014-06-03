@@ -1,0 +1,78 @@
+﻿<Controls:MetroWindow x:Class="CameraControl.PluginManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:PluginManager="clr-namespace:CameraControl.PluginManager" Title="MainWindow" Height="600" Width="800" Closed="MetroWindow_Closed" ShowMaxRestoreButton="False" ShowMinButton="False" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type ListBox}">
+                <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
+           explains how to display an object of type BitmapImage. -->
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="Black" Margin="5">
+                            <PluginManager:PluginControl DataContext="{Binding Path=.}" />
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*" />
+            <RowDefinition Height="532*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*" />
+            <ColumnDefinition Width="250*" />
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" Grid.Row="1" />
+        <GroupBox Grid.Column="1" Header="Selected plugin" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" Margin="5,0,5,5" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />                    
+                    <RowDefinition Height="491*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*" />
+                    <ColumnDefinition Width="124*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Name"  />
+                <Label Content="{Binding Path=Name}" Grid.Column="1" FontStyle="Italic" Margin="1"/>
+                <Label Grid.Row="1" Content="Author"  />
+                <Label Grid.Row="1" Content="{Binding Path=Author}" Grid.Column="1" FontStyle="Italic" Margin="1"/>
+                <Label Grid.Row="2" Content="Version"  />
+                <Label Grid.Row="2" Content="{Binding Path=Version}" Grid.Column="1" FontStyle="Italic" Margin="1"/>
+
+            </Grid>
+        </GroupBox>
+        <Button Content="Check for updates" Grid.Column="1" Height="22" HorizontalAlignment="Left" Margin="110,4,0,0" Name="btn_check_updates" VerticalAlignment="Top" Width="145" Click="btn_check_updates_Click" />
+    </Grid>
+</Controls:MetroWindow>

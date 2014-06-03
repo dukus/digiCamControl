@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<LINK HREF="style.css" REL="stylesheet" TYPE="text/css">
+<title>digiCamControl</title>
+</head>
+<script src="Script.js"></script>
+<body>
+
+<div class="container">
+  <div class="header">digiCamControl</div>
+  <div class="content">
+    <h1></h1>
+    <p>.</p>
+    <table width="100%" border="0" cellspacing="25">
+      <tr>
+	  	<td>
+			<center>
+				<button class="buttonstyle" onclick="httpGet('/?CMD=Capture')">Capture photo</button>
+			</center>
+		</td>
+      </tr>
+      <tr>
+        <td class="actions"><a href="/browse.html">Browse</a></td>
+      </tr>
+	  <tr>
+        <td class="actions"><a href="/slide.html">Slide show</a></td>
+      </tr>
+      <tr>
+        <td class="actions"><a href="/liveview.html?CMD=LiveViewWnd_Show">Show live view</a></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

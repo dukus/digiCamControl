@@ -1,0 +1,26 @@
+New translations found for the following languages: ca
+Pulling translations for resource digicamcontrol.baseresource (source: None)
+ -> fr: translations\digicamcontrol.baseresource\fr.xml
+ -> vi: translations\digicamcontrol.baseresource\vi.xml
+ -> pt_PT: translations\digicamcontrol.baseresource\pt_PT.xml
+ -> de: translations\digicamcontrol.baseresource\de.xml
+ -> it: translations\digicamcontrol.baseresource\it.xml
+ -> nl_BE: translations\digicamcontrol.baseresource\nl_BE.xml
+ -> tr_TR: translations\digicamcontrol.baseresource\tr_TR.xml
+ -> el_GR: translations\digicamcontrol.baseresource\el_GR.xml
+ -> es_MX: translations\digicamcontrol.baseresource\es_MX.xml
+ -> hu: translations\digicamcontrol.baseresource\hu.xml
+ -> ja: translations\digicamcontrol.baseresource\ja.xml
+ -> uz@Latn: translations\digicamcontrol.baseresource\uz@Latn.xml
+ -> ru: translations\digicamcontrol.baseresource\ru.xml
+ -> nl: translations\digicamcontrol.baseresource\nl.xml
+ -> zh_CN: translations\digicamcontrol.baseresource\zh_CN.xml
+ -> sr: translations\digicamcontrol.baseresource\sr.xml
+ -> da: translations\digicamcontrol.baseresource\da.xml
+ -> uk: translations\digicamcontrol.baseresource\uk.xml
+ -> ro: translations\digicamcontrol.baseresource\ro.xml
+ -> gl_ES: translations\digicamcontrol.baseresource\gl_ES.xml
+ -> pl: translations\digicamcontrol.baseresource\pl.xml
+Pulling new translations for resource digicamcontrol.baseresource (source: None)
+ -> ca: translations\digicamcontrol.baseresource\ca.xml
+Done.

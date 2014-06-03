@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Disparo continuo</string>
+  <string name="AUTO_ISO">ISO automático</string>
+  <string name="ON">Ligar</string>
+  <string name="OFF">Desligar </string>
+  <string name="FLASH">Flash</string>
+  <string name="NORMAL_SYNCHRONIZATION">Sincronização normal </string>
+  <string name="LONG_EXP._NR">Longa Exposição NR</string>
+  <string name="HIGH_ISO_NR">ISO Alto NR</string>
+  <string name="NORMAL">Normal</string>
+  <string name="LOCK">Bloqueio</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Uma captura (captura de apenas um fotograma)</string>
+  <string name="QUIET_SHOOTING">Disparo silencioso </string>
+  <string name="FLASH_PROHIBITED">Flash proibido </string>
+  <string name="RED_EYE_REDUCTION">Redução de olhos vermelhos</string>
+  <string name="SLOW_SYNCHRONIZATION">Sincronização lenta </string>
+  <string name="REAR_SYNCHRONIZATION">Sincronização traseira </string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Sincronização lenta com redução olhos vermelhos </string>
+  <string name="LOW">Baixa</string>
+  <string name="HIGH">Alta</string>
+  <string name="AUTO">Automático </string>
+  <string name="DAYLIGHT">Luz dia</string>
+  <string name="FLUORESCENT_">Flurescente</string>
+  <string name="INCANDESCENT">Incandescente </string>
+  <string name="CLOUDY">Nublado </string>
+  <string name="SHADE">Sombra</string>
+  <string name="KELVIN">Kelvin</string>
+  <!--End Property values-->
+  <string name="Mode">Modo</string>
+  <string name="Iso">Iso</string>
+  <string name="ShutterSpeed">Obturador</string>
+  <string name="Aperture">Diafragma</string>
+  <string name="WhiteBalance">Balanço dos brancos</string>
+  <string name="ExposureComp">Compensação de exposição </string>
+  <string name="Compression">Compensação </string>
+  <string name="FocusMode">Modo de focagem </string>
+  <string name="Battery">Bateria</string>
+  <string name="SDRamToolTip">Capturar imagens directamente para o PC sem cartão de memória</string>
+  <string name="CapturePhotoToolTip">Captura </string>
+  <string name="CapturePhotoNoAfToolTip">Captura sem focagem</string>
+  <string name="BraketingToolTip">Braketing</string>
+  <string name="SettingsToolTip">Definições</string>
+  <string name="TimeLapseToolTip">Time lapse</string>
+  <string name="FullscreenToolTip">Ecrã inteiro</string>
+  <string name="SelectTagsToolTip">Seleccione tags </string>
+  <string name="AboutToolTip">Sobre</string>
+  <string name="SessionAdd">Adicione </string>
+  <string name="SessionEdit">Editar</string>
+  <string name="SessionDel">Eliminar </string>
+  <string name="SettingsWindowTitle">Definições </string>
+  <string name="BraketingWindowTitle">Braketing</string>
+  <string name="EditTagWindowTitle">Tag [adicionar/editar]</string>
+  <string name="MultipleCameraWindowTitle">Suporte multi-câmara </string>
+  <string name="SavePresetWindowTitle">salvar predefinições</string>
+  <string name="TimeLapseWindowTitle">Time Lapse</string>
+  <string name="ButtonOk">Ok</string>
+  <string name="ButtonCancel">Cancel</string>
+  <string name="ButtonAdd">Adicionar</string>
+  <string name="ButtonDelete">Eliminar </string>
+  <string name="ButtonEdit">Editar</string>
+  <string name="ButtonAutoFocus">_Focagem automática</string>
+  <string name="ButtonCapture">_Capturar</string>
+  <string name="ButtonRecordMovie">Gravar filme</string>
+  <string name="ButtonStart">Começar</string>
+  <string name="ButtonPreview">Pré-visualizar</string>
+  <string name="ButtonStop">Parar</string>
+  <string name="ButtonDeletePreset">Eliminar Predefinição </string>
+  <string name="ButtonClose">Fechar</string>
+  <string name="ButtonSave">Salvar</string>
+  <string name="ButtonCapturePhotos">Capturar fotografia </string>
+  <string name="ButtonStartTimeLapse">Começar Timelapse</string>
+  <string name="ButtonStopTimeLapse">Parar Tmelapse</string>
+  <string name="ButtonCreateMovie">Criar filme</string>
+  <string name="ButtonLocateLogFile">Localizar ficheiro log</string>
+  <string name="LabelInterfaceLanguage">Linguagem do interface : </string>
+  <string name="LabelDisableDriver">Desactivar drivers nativos (não recomendado) </string>
+  <string name="LabelTheme">Tema :</string>
+  <string name="LabelGeneral">Geral</string>
+  <string name="LabelPreview">Pré-visualizar </string>
+  <string name="LabelPlaySound">Tocar som após fotografia tirada</string>
+  <string name="LabelAutoPreview">Pré-visualização automática </string>
+  <string name="LabelPreviewTime">tempo de pré-visualização em seg :</string>
+  <string name="LabelRotateImage">Rodar imagem :</string>
+  <string name="LabelWebserver">Webserver </string>
+  <string name="LabelUseWebserver">Usar servidor web</string>
+  <string name="LabelFolder">Pasta :</string>
+  <string name="LabelFileNameTemplate">Nome do ficheiro do template :</string>
+  <string name="LabelCounter">Contagem:</string>
+  <string name="LabelTags">Metadatas</string>
+  <string name="LabelManualFocus">Focagem Manual</string>
+  <string name="LabelGrid">Grelha </string>
+  <string name="LabelNoOfPhots">No. de fotografias</string>
+  <string name="LabelFocusStep">Passos de focagem</string>
+  <string name="LabelLuminosity">Luminosidade </string>
+  <string name="LabelPresetBracketing">Predefinição de bracketing</string>
+  <string name="LabelTagDisplayValue">Valor do mostrador</string>
+  <string name="LabelTagValue">Valor</string>
+  <string name="LabelTagIncludeInGroup1">Incluído no grupo 1</string>
+  <string name="LabelTagIncludeInGroup2">Incluído no grupo 2</string>
+  <string name="LabelTagIncludeInGroup3">Incluído no grupo 3</string>
+  <string name="LabelTagIncludeInGroup4">Incluído no grupo 4</string>
+  <string name="LabelDelay">Atraso (mseg)</string>
+  <string name="LabelNumberOfCaptures">Número de capturas </string>
+  <string name="LabelWaitTime">Tempo de espera (seg)</string>
+  <string name="LabelDisableAutofocus">desactivar focagem automática </string>
+  <string name="LabelConnectedCameras">conectar câmaras </string>
+  <string name="LabelPresetName">Nome predefinição </string>
+  <string name="LabelTimeLapse">Timelapse</string>
+  <string name="LabelSecondsBetweenShots">Segundos entres disparos</string>
+  <string name="LabelNumberOfPhotos">Número de fotografias </string>
+  <string name="LabelDontAutofocusOnEveryCapture">Não focar em todos os disparos </string>
+  <string name="LabelCaptureInterval">Intervalo de captura (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">Duração do filme (HH:MM:SS)</string>
+  <string name="LabelMovieSettings">Definições do filme </string>
+  <string name="LabelVideoFormat">Formato de vídeo </string>
+  <string name="LabelOutputFile">Ficheiro de saída </string>
+  <string name="LabelFps">Fps</string>
+  <string name="LabelFillImage">Encher imagem</string>
+  <string name="LabelCreateMovie">Criar filme</string>
+  <string name="LabelAddVirtualMovingToVideo">Adicionar movimento virtual no video</string>
+  <string name="LabelMovingSurface">Superfície de movimento (%):</string>
+  <string name="LabelMovingDirection">Direcções de movimento:</string>
+  <string name="LabelMovingDirectionLeftToRight">Esquerda para Direita </string>
+  <string name="LabelMovingDirectionRightToLeft">Direita para Esquerda</string>
+  <string name="LabelMovingDirectionTopToBottom">Cima para Baixo</string>
+  <string name="LabelMovingDirectionBottomToTop">Baixo para Cima</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">Esquerda/Cima para Direita/Baixo</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">Direita/Baixo para Esquerda/Cima</string>
+  <string name="LabelImageAlignment">Alinhamento de imagem </string>
+  <string name="LabelImageAlignmentLeftTop">Esquerda/Cima</string>
+  <string name="LabelImageAlignmentCenter">Centro</string>
+  <string name="LabelImageAlignmentRightBottom">Diretia/baixo</string>
+  <string name="LabelVideoCodecProblem">Problema com o codec de vídeo </string>
+  <string name="MsgPhotoTransferBegin">Inicio de transferência de fotografias </string>
+  <string name="MsgPhotoTransferDone">Transferência de fotografias finalizada </string>
+  <string name="MsgPhotoTransferError">Erro de Transferência !⏎ Mensagem :{0}</string>
+  <string name="MsgBulbModeNotSupported">Modo Bulb não suportado </string>
+  <string name="MsgApplicationUpToDate">Aplicação está actualizada </string>
+  <string name="MsgLastSessionCantBeDeleted">Ultima sessão não pode ser apagada </string>
+  <string name="MsgStopTimeLapse">O Timelapse não acabou! Pretende parar o Timelapse ?</string>
+  <string name="MsgInstallXvidCodec">Codec Xvid não instalado !⏎ Pretende fazer o download e instalar ?</string>
+  <string name="MsgBracketingDone">Bracketing Finalizado</string>
+  <string name="MsgActionInProgress">Acção em progresso {0}/{1}</string>
+  <string name="MenuFile">_Ficheiro</string>
+  <string name="MenuReScan">Rescan câmaras conectadas</string>
+  <string name="MenuConnectedCameras">Câmaras Conectadas</string>
+  <string name="MenuExit">Sair</string>
+  <string name="MenuView">_Ver </string>
+  <string name="MenuMultipleCamera">Controlo Multi-câmara </string>
+  <string name="MenuSelectedCameraProperty">Propriedade de câmara seleccionada </string>
+  <string name="MenuPresets">Definições</string>
+  <string name="MenuPresetsLoad">Carregar </string>
+  <string name="MenuPresetsSave">Salvar </string>
+  <string name="MenuPresetsEdit">Editar</string>
+  <string name="MenuHelp">_Ajuda</string>
+  <string name="MenuHomePage">Casa</string>
+  <string name="MenuCheckForUpdate">Procurar actualizações </string>
+  <string name="MenuDonate">Doar </string>
+  <string name="MenuAbout">Sobre </string>
+  <string name="MenuLayout">Disposição</string>
+  <string name="MenuLayoutNormal">Normal </string>
+  <string name="MenuLayoutGridRight">Grelha direita</string>
+  <string name="MenuLayoutGrid">Grelha</string>
+  <string name="MenuProperties">Propriedades </string>
+  <string name="MenuUseSelectedCameraPreset">Usar predefinição de câmara seleccionada </string>
+  <!--15/10/2012-->
+  <string name="LabelStayOnTop">Sempre no Topo</string>
+  <!--22/10/2012-->
+  <string name="LabelDisplay">Monitor</string>
+  <string name="LabelMotionDetection">Detecção de movimento </string>
+  <string name="LabelActivateMotionDetection">Activar detenção de movimento </string>
+  <string name="LabelCaptureWhenMove">Capturar quando movimento é detectado </string>
+  <string name="LabelThreshold">Borda (%)</string>
+  <string name="LabelWaitMoion">Espero (seg)</string>
+  <!--25/10/2012-->
+  <string name="LabelAutofocusBeforeCapture">Focar antes de disparar</string>
+  <!--26/10/2012-->
+  <string name="LabelOpacity">Opacidade </string>
+  <!--29/10/2012-->
+  <string name="LabelMotionDetectionType">Tipo de detecção de movimento </string>
+  <string name="ButtonHelp">Ajuda </string>
+  <!--31/10/2012-->
+  <string name="LabelMenu">Menu</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">Forum</string>
+  <!--07/11/2012-->
+  <string name="ButtonGetRawCodec">Adquirir codec Raw</string>
+  <!--08/11/2012-->
+  <string name="LabelNoCardInserted">Cartão de memória não inserido </string>
+  <string name="LabelCardError">Erro de Cartão</string>
+  <string name="LabelCardNotFormatted">Cartão não formatado</string>
+  <string name="LabelNoFreeAreaInCard">Sem espaço no cartão</string>
+  <string name="LabelBufferNotEmpty">Existe data de filme no buffer</string>
+  <string name="LabelCardProtected">Cartão protegido </string>
+  <string name="ButtonResetSettings">Reiniciar definições </string>
+  <!--14/11/2012-->
+  <!--18/11/2012-->
+  <string name="LabelControl">Controlo </string>
+  <!--20/11/2012-->
+  <string name="LabelExport">Exportar</string>
+  <!--21/11/2012-->
+  <string name="LabelDownload">Download</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">Download de fotografias</string>
+  <string name="LabelDeleteFilesAfterTransfer">Eliminar ficheiros depois de transferidos </string>
+  <string name="LabelAskForDelete">Ficheiros transferidos  vão ser eliminados.⏎ Quer continuar ?</string>
+  <!--26/11/2012-->
+  <string name="LabelErrorSetFocusPos">Erro a configurar o ponto de foco </string>
+  <string name="LabelErrorUnableFocus">Incapaz de focar </string>
+  <!--28/11/2012-->
+  <string name="LabelErrorLoadingFileList">Erro a carregar lista de ficheiros </string>
+  <!--30/11/2012-->
+  <string name="LabelTransfer">Transferir </string>
+  <string name="LabelTransferItem1">1. Salvar apenas para o PC</string>
+  <string name="LabelTransferItem2">2. Salvar apenas para a câmara </string>
+  <string name="LabelTransferItem3">3.Salvar para câmara e PC</string>
+  <!--05/12/2012-->
+  <string name="MsgDisabledDrivers">Drivers nativos estão desactivados ! Queres activa-los ?</string>
+  <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">Mostrar pontos de foco </string>
+  <string name="LabelMainWindow">Janela Principal </string>
+  <string name="LabelSelect">Seleccionar </string>
+  <string name="TimeSelectWindowTitle">Seleccionar Janela </string>
+  <!--16/12/2012-->
+  <string name="LabelRotateNone">Nenhuma </string>
+  <string name="LabelRotate90">Rodar 90</string>
+  <string name="LabelRotate180">Rodar 180</string>
+  <string name="LabelRotate270">Rodar 270</string>
+  <string name="LabelLowMemoryUsage">Uso de memória baixa </string>
+  <!--04/01/2013-->
+  <string name="LabelRawCodecNotInstalled">Codec Raw não instalado ou formato de ficheiro desconhecido </string>
+  <!--05/01/2013-->
+  <string name="LabelUseCameraCounter">Usar contador da câmara invés do contador genérico </string>
+  <string name="LabelResetCounters">Reiniciar contador </string>
+  <!--07/01/2013-->
+  <!--12/01/2013-->
+  <string name="LabelWaitingForDevice">Esperar para o dispositivo ficar pronto </string>
+  <string name="LabelAdvanced">Avançado </string>
+  <string name="LabelUseParellelTransfer">Usar transferência de ficheiros em paralelo </string>
+  <!--19/01/2013-->
+  <string name="LabelApplicationError">Erro na Aplicação</string>
+  <string name="LabelWiaNotInstalled">WIA 2.0 não instalada</string>
+  <string name="LabelRestartTheApplication">Reiniciar a aplicação !</string>
+  <string name="LabelOutOfMemory">Aplicação sem memória. Aplicação irá encerrar!</string>
+  <string name="LabelApplicationAlreadyRunning">Aplicação já está a correr</string>
+  <string name="LabelStartCapture">Iniciar captura</string>
+  <string name="LabelStopCapture">Parar captura</string>
+  <string name="LabelCaptureTime">Tempo de captura (seg)</string>
+  <string name="LabelTimeBetweenShots">Tempo entre capturas</string>
+  <string name="LabelDontAutofocus">Não focar</string>
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <string name="LabelSelected">Seleccionado </string>
+  <!--31/01/2013-->
+  <string name="LabelNone">Nenhuma</string>
+  <string name="LabelRuleOfThirds">Regra dos terços</string>
+  <string name="LabelComboGrid">Grelha </string>
+  <string name="LabelDiagonal">Diagonal </string>
+  <string name="LabelSplit">Dividir </string>
+  <!--13/03/2013-->
+  <string name="LabelTools">Ferramentas</string>
+  <!--17/03/2012-->
+  <!--28/03/2012-->
+  <string name="LabelBulbError">Erro bulb  </string>
+  <string name="LabelTTLError">Erro TTL</string>
+  <string name="LabelCardProtectedError">Cartão protegido  </string>
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+</resources>

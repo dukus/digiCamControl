@@ -1,0 +1,43 @@
+﻿<Controls:MetroWindow x:Class="CameraControl.windows.AboutWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="About" Height="346" Width="433" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen"
+                      ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"> 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="220*" />
+            <RowDefinition Height="46*" />
+            <RowDefinition Height="41*" />
+        </Grid.RowDefinitions>
+        <Button Content="Close" Grid.Row="2" Height="23" Name="button2" VerticalAlignment="Top" Click="button2_Click" Margin="168,0" />
+        <TextBlock Height="27" HorizontalAlignment="Left" Margin="12,12,0,0" Name="textBlock1" Text="    digiCamControl - Copyright (C) 2013 by Duka István. " VerticalAlignment="Top" Width="387" />
+        <TextBlock Height="81" HorizontalAlignment="Left" Margin="12,37,0,0" Name="textBlock2" Text="    This program is free software: you can redistribute it and/or modify 
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+" VerticalAlignment="Top" Width="387" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+        <Button Content="Home page" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="12,9,0,0" Name="button1" VerticalAlignment="Top" Width="97" Click="button1_Click" />
+        <Button Content="License" Grid.Row="1" Height="23" Margin="168,9,168,0" Name="button3" VerticalAlignment="Top" Click="button3_Click" />
+        <TextBlock Height="88" HorizontalAlignment="Left" Margin="12,132,0,0" Name="textBlock3" Text="    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details." VerticalAlignment="Top" Width="387" TextWrapping="Wrap" />
+        <Button Content="Donate" Grid.Row="1" Height="23" HorizontalAlignment="Right" Margin="0,9,12,0" Name="btn_donate" VerticalAlignment="Top" Width="75" Click="btn_donate_Click" />
+    </Grid>
+</Controls:MetroWindow>

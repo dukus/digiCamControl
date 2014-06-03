@@ -1,0 +1,173 @@
+﻿<Controls:MetroWindow x:Class="CameraControl.windows.BulbWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bulb" Height="600" Width="800" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:my="clr-namespace:CameraControl.windows"
+        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
+                      Closed="Window_Closed" Closing="MetroWindow_Closing" Name="bulbwnd">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" VerticalAlignment="Center" VerticalContentAlignment="Center" Click="btn_stay_on_top_Click" />
+            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="300*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="36" />
+            <RowDefinition Height="36" />
+            <RowDefinition Height="36" />
+            <RowDefinition Height="36" />
+            <RowDefinition Height="36" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="86*" />
+            <RowDefinition Height="75*" />
+            <RowDefinition Height="120*" />
+            <RowDefinition Height="54*" />
+
+            <RowDefinition Height="35*" />
+        </Grid.RowDefinitions>
+        <Button Content="{T:TranslateExtension LabelStartCapture}" Name="btn_start" Click="btn_start_Click" Grid.Column="3" Grid.Row="1" Margin="5"/>
+        <Button Content="{T:TranslateExtension LabelStopCapture}" Name="btn_stop" Click="btn_stop_Click" Grid.Column="3" Grid.Row="3" Margin="5"/>
+        <xctk:IntegerUpDown Name="upd_time" Minimum="1" Maximum="6000" Value="{Binding Path=CaptureTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="1" Margin="5"/>
+        <Label Content="{T:TranslateExtension LabelCaptureTime}" Name="label1" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalContentAlignment="Right" />
+        <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" Name="lbl_status" Grid.Row="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="4" />
+        <xctk:IntegerUpDown Name="upd_num" Minimum="1" Maximum="10000" Value="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="2" Margin="5"/>
+        <Label Content="{T:TranslateExtension LabelNumberOfPhotos}" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right" />
+        <Label Content="{T:TranslateExtension LabelTimeBetweenShots}" Grid.Row="3" Grid.Column="1" Margin="4,4,6,6" HorizontalContentAlignment="Right" />
+        <Label Content="{T:TranslateExtension LabelPHDGuiding}" Grid.Row="4" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right" />
+        <Label Content="{T:TranslateExtension LabelWaitPHDGuiding}" Grid.Row="5" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right"/>
+        <xctk:IntegerUpDown Name="upd_waittime" Minimum="0" Maximum="6000" Value="{Binding Path=WaitTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="3" Margin="5"/>
+        <xctk:IntegerUpDown Name="upd_phdwaittime" Minimum="0" Maximum="30" Value="{Binding Path=PhdWait, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="5" Margin="5"/>
+        <Label Content="{Binding Path=Message, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" FontWeight="Bold" Margin="0,56,0,0" />
+        <GroupBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="9" Header="{T:TranslateExtension LabelExternalShutterRelease}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="152*" />
+                    <ColumnDefinition Width="296*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*" />
+                    <RowDefinition Height="30*" />
+                </Grid.RowDefinitions>
+                <Label Content="{T:TranslateExtension LabelEnable}" Margin="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <Label Content="{T:TranslateExtension LabelUseConfiguration}" Margin="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="1"/>
+                <ComboBox Grid.Column="1" Grid.Row="1" Margin="3" IsEnabled="{Binding Path=DefaultScript.UseExternal, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalShutters}" DisplayMemberPath="Name" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}, Path=DefaultScript.SelectedConfig}"/>
+                <CheckBox Grid.Column="1" Height="28" HorizontalAlignment="Left" Name="checkBox1" VerticalAlignment="Top" IsChecked="{Binding Path=DefaultScript.UseExternal, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Margin="4,1,0,0" Width="24" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="4" Grid.Row="1" Grid.RowSpan="8" Header="{T:TranslateExtension LabelScript}" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="27*" />
+                    <RowDefinition Height="155*" />
+                    <RowDefinition Height="32*" />
+                </Grid.RowDefinitions>
+                <Menu Name="menu1">
+                    <MenuItem Header="Add">
+                        <MenuItem Header="Commands" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ScriptManager}, Path=AvaiableCommands}" >
+                            <MenuItem.ItemTemplate>
+                                <DataTemplate>
+                                    <MenuItem Header="{Binding Path=Name}" 
+                                      Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}, Path=AddCommand}" 
+                                      CommandParameter="{Binding}" IsEnabled="{Binding Path=HaveEditControl}"/>
+                                </DataTemplate>
+                            </MenuItem.ItemTemplate>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Edit" 
+                              Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}, Path=EditCommand}" 
+                              CommandParameter="{Binding ElementName=lst_commands, Path=SelectedItem}"/>
+                    <MenuItem Header="Delete"                               
+                              Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}, Path=DelCommand}" 
+                              CommandParameter="{Binding ElementName=lst_commands, Path=SelectedItem}"/>
+                    <MenuItem Header="Save" Click="MenuItem_Click" />
+                    <MenuItem Header="Load" Click="MenuItem_Click_1" />
+                </Menu>
+                <ListBox Grid.Row="1" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}, Path=DefaultScript.Commands}" Name="lst_commands">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}" Name="lst_label" >
+                            </TextBlock>
+                            <DataTemplate.Triggers >
+                                <DataTrigger Binding="{Binding Executing}" Value="True">
+                                    <Setter TargetName="lst_label" Property="TextBlock.FontWeight" Value="Bold" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Executing}" Value="False">
+                                    <Setter TargetName="lst_label" Property="TextBlock.FontWeight" Value="Normal" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsExecuted}" Value="True">
+                                    <Setter TargetName="lst_label" Property="TextBlock.FontStyle" Value="Oblique" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsExecuted}" Value="False">
+                                    <Setter TargetName="lst_label" Property="TextBlock.FontStyle" Value="Normal" />
+                                </DataTrigger>                                
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Content="{T:TranslateExtension LabelStartScript}" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="6,4,0,0" Name="button1" VerticalAlignment="Top" Width="100" Click="button1_Click" />
+                <Button Content="{T:TranslateExtension LabelStopScript}" Grid.Row="2" Height="23" Margin="0,4,6,0" Name="btn_stop_script" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="btn_stop_script_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="9" Header="{T:TranslateExtension LabelCommands}" Grid.Column="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="293*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Name="btn_astrolv" Style="{DynamicResource MetroCircleButtonStyle}" FontSize="15" Click="btn_astrolv_Click" />
+            </Grid>
+        </GroupBox>
+        <ComboBox Grid.Column="2" Grid.Row="4" Margin="5" SelectedIndex="{Binding Path=PhdType, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}">
+            <ComboBoxItem Content="(None)" />
+            <ComboBoxItem Content="Move 1" />
+            <ComboBoxItem Content="Move 2" />
+            <ComboBoxItem Content="Move 3" />
+            <ComboBoxItem Content="Move 4" />
+            <ComboBoxItem Content="Move 5" />
+        </ComboBox>
+        <ListBox Grid.Column="4" Grid.Row="10" Grid.RowSpan="2" Name="lst_output" />
+        <GroupBox Grid.Column="1" Grid.Row="7" Header="{T:TranslateExtension LabelCountDown}">
+            <Grid>
+                <Label Content="{Binding Path=CountDown, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Padding="0"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Grid.Row="7" Header="{T:TranslateExtension LabelCurrentEvent}">
+            <Grid>
+                <Label Content="{Binding Path=Event, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Padding="0"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="3" Grid.Row="7" Header="{T:TranslateExtension LabelRemainingCaptures}">
+            <Grid>
+                <Label Content="{Binding Path=PhotoLeft, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Padding="0"/>
+            </Grid>
+        </GroupBox>
+        <CheckBox Content="{T:TranslateExtension LabelAutomaticallyGuiding}" Grid.Column="1" Grid.Row="6" Name="checkBox2" Grid.ColumnSpan="3" Margin="7,4,5,0" IsChecked="{Binding Path=AutomaticGuiding, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}"/>
+    </Grid>
+</Controls:MetroWindow>

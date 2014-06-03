@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="PhotoBooth.Cards.ThreeSmallOneLargeDesigner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300" MinHeight="30" MinWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Style="{StaticResource ResourceKey=DataEntryLabel}" Grid.Column="0" Grid.Row="0">Banner Text:</Label>
+        <TextBox Name="cardBannerText" Style="{StaticResource ResourceKey=DataEntryTextBox}" Grid.Column="1" Grid.Row="0" Text="{Binding Path=BannerText}" />
+    </Grid>
+</UserControl>

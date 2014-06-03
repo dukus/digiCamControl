@@ -1,0 +1,6 @@
+﻿:;request:session
+:;request:session;format:json
+:;request:cameras
+:;request:cameras;format:json
+:;command:capture;serial:<serial>
+ 

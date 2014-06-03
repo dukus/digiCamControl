@@ -1,0 +1,114 @@
+﻿<ontrols:MetroWindow x:Class="CameraControl.windows.PropertyWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                     xmlns:ontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                     xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                     xmlns:my1="clr-namespace:CameraControl.windows" Title="Image Propert" Height="353" Width="671" ShowInTaskbar="False" Topmost="True" WindowStyle="None" AllowsTransparency="True"   Background="Transparent" Closing="Window_Closing" ShowMaxRestoreButton="False">
+    <Window.DataContext>
+        <Core:ServiceProvider/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Menu.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+            <LinearGradientBrush x:Key="WindowFrameBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="CadetBlue" Offset="0.4"/>
+                <GradientStop Color="Gray" Offset="1"/>
+            </LinearGradientBrush>
+            <Style TargetType="{x:Type ListBox}">
+                <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
+           explains how to display an object of type BitmapImage. -->
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Label Content="{Binding Path=Name}" FontWeight="Bold" />
+                                <Label Content="{Binding Path=Value}"  />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <ontrols:MetroWindow.WindowCommands>
+        <ontrols:WindowCommands>
+            <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:PropertyWnd, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+        </ontrols:WindowCommands>
+    </ontrols:MetroWindow.WindowCommands>
+    <Border Background="#68000000" CornerRadius="5" BorderBrush="{StaticResource WindowFrameBrush}" BorderThickness="2,0,2,2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250*" />
+                <ColumnDefinition Width="250*" />
+                <ColumnDefinition Width="250*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150*" />
+                <RowDefinition Height="150*" />
+            </Grid.RowDefinitions>
+            <!--<TabControl Name="tabControl1" Background="{x:Null}" Grid.ColumnSpan="2">
+                <TabItem Header="Histogram" Name="tabItem1">-->
+            <GroupBox Grid.RowSpan="2" Header="{T:TranslateExtension LabelExif}">
+                <ListBox ItemsSource="{Binding Path=Settings.SelectedBitmap.Metadata}" Background="{x:Null}" Grid.RowSpan="2" Margin="2" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="Luminosity" BorderThickness="0">
+                <Border BorderThickness="1" BorderBrush="Black" Background="White">
+                    <Polygon Points="{Binding Path=Settings.SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="Black" Opacity="0.8" />
+                </Border>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Grid.Row="1" Header="Color" BorderThickness="0">
+                <Border BorderThickness="1" BorderBrush="Black" Background="White" Margin="4">
+                    <Grid>
+                        <Polygon Points="{Binding Path=Settings.SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" />
+                        <Polygon Points="{Binding Path=Settings.SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" />
+                        <Polygon Points="{Binding Path=Settings.SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" />
+                    </Grid>
+                </Border>
+            </GroupBox>
+            <CheckBox Grid.Column="1" Height="16" HorizontalAlignment="Left" Margin="12,39,0,0" IsChecked="{Binding Path=Settings.HighlightUnderExp}" VerticalAlignment="Top" />
+            <CheckBox Grid.Column="1" Height="16" Width="16" Margin="0,39,11,0"  IsChecked="{Binding Path=Settings.HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+            <GroupBox Grid.Column="2" Grid.RowSpan="2" Header="{T:TranslateExtension LabelImageProperties}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26*" />
+                        <RowDefinition Height="31*" />
+                        <RowDefinition Height="26*" />
+                        <RowDefinition Height="117*" />
+                        <RowDefinition Height="26*" />
+                        <RowDefinition Height="38*" />
+                    </Grid.RowDefinitions>
+                    <Label Content="{T:TranslateExtension LabelFileName}"/>
+                    <TextBox Grid.Row="1" Margin="2" Text="{Binding Path=Settings.SelectedBitmap.FileName}"/>
+                    <Button Content="{T:TranslateExtension LabelSet}" Grid.Row="5" Margin="4" Name="btn_set" Click="btn_set_Click" />
+                    <Label Content="{T:TranslateExtension LabelComment}" Grid.Row="2"  />
+                    <TextBox Grid.Row="3" Text="{Binding Path=Settings.SelectedBitmap.Comment}" />
+                    <CheckBox Content="{T:TranslateExtension LabelWriteSelectedTags}" Grid.Row="4" Name="chk_tags" />
+                </Grid>
+            </GroupBox>
+            <!--</TabItem>
+                <TabItem Header="Metadata" Name="tabItem2">-->
+            <!--</TabItem>
+            </TabControl>-->
+        </Grid>
+    </Border>
+</ontrols:MetroWindow>

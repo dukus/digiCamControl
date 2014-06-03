@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow x:Class="CameraControl.windows.ScriptWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      xmlns:windows="clr-namespace:CameraControl.windows" Title="Script Execution" Height="576" Width="935" Closing="MetroWindow_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=windows:ScriptWnd, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="268*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="142*" />
+        </Grid.RowDefinitions>
+        <Menu Name="menu2">
+            <MenuItem Header="File" >
+                <MenuItem Header="New" Name="mnu_new"/>
+                <MenuItem Header="Open ..." Click="MenuItem_Click"/>
+                <MenuItem Header="Save" Name="mnu_save" Click="mnu_save_Click" />
+                <MenuItem Header="Save as ..." Name="mnu_save_as" Click="mnu_save_as_Click" />
+            </MenuItem>
+            <MenuItem Header="Verify" Name="mnu_verify" Click="mnu_verify_Click" />
+            <MenuItem Header="Run"  Name="mnu_run" Click="mnu_run_Click" />
+            <MenuItem Header="Stop" Name="mnu_stop" Click="mnu_stop_Click" />
+        </Menu>
+        <GroupBox Grid.Row="1" Header="Code">
+            <Grid>
+                <avalonedit:TextEditor SyntaxHighlighting="XML" Background="White" Name="textEditor" ShowLineNumbers="True" FontSize="16" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="3" Header="Output">
+            <Grid>
+                <ListBox Name="lst_output" />
+            </Grid>
+        </GroupBox>
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter1" />
+    </Grid>
+</Controls:MetroWindow>

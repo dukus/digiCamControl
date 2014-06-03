@@ -1,0 +1,1598 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="dirB7FACCB87011F39229621A21779B86C5" Name="Data" />
+      <Directory Id="dir48CD582E8C906415D8DEC3D3B1ECD40E" Name="icc" />
+      <Directory Id="dirA7DABA45E6D954B286EDE84332EE4193" Name="Languages" />
+      <Directory Id="dirD9D25461613D53ECC73127337CA0332A" Name="Licenses" />
+      <Directory Id="dir8A34519E7F04FFF4BB95A3B5F71B2454" Name="Plugins" />
+      <Directory Id="dirEC6DAC54FCF6F69C3BDDFC46B3588792" Name="Tools" />
+      <Directory Id="dir85AF81D478E74BB81D6731D4A82737C0" Name="ufraw" />
+      <Directory Id="dir59E5CF3C962F57C3BE847008DA4083D3" Name="VirtualDub" />
+      <Directory Id="dirE7B6D7AF90AB6F75C854CC6CBB27636C" Name="WebServer" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="SampleGroup">
+      <Component Id="cmp6F9EB2D6F8733470B553D0E5CC8BE19E" Directory="INSTALLFOLDER" Guid="{6B7E98DD-C110-441B-867E-AF9A376C01B0}">
+        <File Id="fil90C442D731CF499C8C02751563DFAB0D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.exe">
+        </File>
+      </Component>
+
+      <Component Id="cmp4FF98B79CC01E2E3DBD298C3C7302D9B" Directory="INSTALLFOLDER" Guid="{10CC17A7-3E30-41E9-A3DF-62DA490B27AF}">
+        <File Id="fil9D789ABF66F6A98D467F2BFFA1C8A581" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\AForge.dll" />
+      </Component>
+      <Component Id="cmp5E8A9866586DA40100A100148EA05656" Directory="INSTALLFOLDER" Guid="{D1F31147-370B-4FA7-9B3B-A1D6970D34A6}">
+        <File Id="fil44C449A9933AEEAB2F93BBCB1C5C487E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\AForge.Imaging.dll" />
+      </Component>
+      <Component Id="cmp9905C3A601AF00387F35FD985154CECA" Directory="INSTALLFOLDER" Guid="{FA1AF4DB-73CB-4E92-A017-E5942B95A005}">
+        <File Id="fil05DE54228ADF4BF6DC8B4FBE449E21DF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\AForge.Imaging.Formats.dll" />
+      </Component>
+      <Component Id="cmp3C21EE19B28B461BC6700A6725542AF4" Directory="INSTALLFOLDER" Guid="{D4423C74-5B71-43B0-8AAA-D663FC9B8229}">
+        <File Id="filF0993C3D8FE42068DA32A70DFBE573C1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\AForge.Math.dll" />
+      </Component>
+      <Component Id="cmpD6C0A7C7CABEC31020C59D7EEF8A134F" Directory="INSTALLFOLDER" Guid="{CA132356-9613-470E-9528-95134E5FDC2D}">
+        <File Id="filE543AB52DB034563D61F70F9BDABC674" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\AForge.Vision.dll" />
+      </Component>
+      <Component Id="cmpE3F7A05D99EA6945282E2596CB8CCB19" Directory="INSTALLFOLDER" Guid="{3134BC22-5776-4ED5-9245-AD12F8B60E1C}">
+        <File Id="filF7F538E0602D65A992ACEDF173330DFF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\AForge.xml" />
+      </Component>
+      <Component Id="cmp613EEA1340F8D4393FEEBF38BA8B6EA6" Directory="INSTALLFOLDER" Guid="{2999F176-0C5D-494D-8626-B7194EC0E160}">
+        <File Id="fil37E63CF19495200B9A0DEAFAA58721F6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.Core.dll" />
+      </Component>
+      <Component Id="cmp3E4FA00424E35A9E483BE85E2A7BD5A0" Directory="INSTALLFOLDER" Guid="{0793CC26-FB22-4F7D-AAEA-72A622B25CD5}">
+        <File Id="fil2793FAE618B7256E2D64D924C27C9E49" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.Core.pdb" />
+      </Component>
+      <Component Id="cmp9F58189EAD9733DEBD256DED8D10EBE8" Directory="INSTALLFOLDER" Guid="{22B6ABBF-62F2-46C5-9AB8-8032B76263C3}">
+        <File Id="fil612A13332FE952B8512E877EB50DEEB4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.Devices.dll" />
+      </Component>
+      <Component Id="cmpAA324848F8490691844B3776508F80AB" Directory="INSTALLFOLDER" Guid="{8A70EED3-CE45-400A-9C84-CFD4944AB51A}">
+        <File Id="filEFF0ACA7AD9DAED8B519B48004CAE7A4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.Devices.pdb" />
+      </Component>
+      <Component Id="cmp970B7ADF69C824BF50A5124FA8148299" Directory="INSTALLFOLDER" Guid="{492819AB-4E2A-493B-A8DE-3C8D92F048FC}">
+        <File Id="filF0995CEBB265D751AF2DB99BF59EE18D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.pdb" />
+      </Component>
+      <Component Id="cmpB0FDDFDE3FEB32D972F0A36317484626" Directory="INSTALLFOLDER" Guid="{81602DA8-B129-410C-A1E5-AAF50EA7630B}">
+        <File Id="filADDDE28218A5F0BDA936A71C4F4C9799" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.PluginManager.exe" />
+      </Component>
+      <Component Id="cmp7B7EC120ADCA51A9A160440111934D53" Directory="INSTALLFOLDER" Guid="{C1E80360-FD97-4670-BD13-60633B2B6B8E}">
+        <File Id="filA6E658DB095EF5201884335A542FB965" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControl.PluginManager.pdb" />
+      </Component>
+      <Component Id="cmpEE8F629BEE3E6BE2B085132CDFD31F21" Directory="INSTALLFOLDER" Guid="{B6C210E0-044C-4C36-8244-45A895CC6391}">
+        <File Id="fil77A786CE2882D6409DE9A3139C5409B0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\CameraControlCmd.exe" />
+      </Component>
+      <Component Id="cmp9A0F2F1C7EA288EA847DA1500D859043" Directory="INSTALLFOLDER" Guid="{A41B8894-193A-4E84-80E1-BDC3527A2E36}">
+        <File Id="filE0B6B79679B3831EA2754C2A706BDB96" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Canon.Eos.Framework.dll" />
+      </Component>
+      <Component Id="cmpE4102D3FBFC2C51059677FFF9BFBB82D" Directory="INSTALLFOLDER" Guid="{705B0EBC-E2DB-4B76-8198-9D0E1E37BA20}">
+        <File Id="fil43043165B425040E87344F24316798B5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Canon.Eos.Framework.pdb" />
+      </Component>
+      <Component Id="cmp4AE2CD167FF4894E9076AF5FC612D713" Directory="INSTALLFOLDER" Guid="{0DA50B3E-7C1F-4E43-9612-51B556C7823F}">
+        <File Id="fil808D19806529ABA1617D818072819E54" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Castle.Core.dll" />
+      </Component>
+      <Component Id="cmp411FE5A920C764C74213292B8B691B01" Directory="INSTALLFOLDER" Guid="{3A33AD5B-ABC7-4FD3-B1C7-C692066FD891}">
+        <File Id="fil1639400B7CC6C6EE0EA06B5FFE9BD350" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\DPPDLL.dll" />
+      </Component>
+      <Component Id="cmpC3EFFD6C982E1079BA079BDD4D411DE7" Directory="INSTALLFOLDER" Guid="{D705E158-BA5B-432A-8F2F-AC401549476A}">
+        <File Id="fil54B4B2DDF90A8302629FA63483EFAF5A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\DPPLibCom.dll" />
+      </Component>
+      <Component Id="cmp8D1BF64F89ED6D8471C35FB96EB7A8C0" Directory="INSTALLFOLDER" Guid="{6CD329FE-3CD1-4DC5-B4B8-8BFEFCC7C522}">
+        <File Id="filCBA6296DF2FF012D7CF69CD2FA965D4F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\DPPRSC.dll" />
+      </Component>
+      <Component Id="cmpD6B2F99790D02D703B9B18014FA5DCE4" Directory="INSTALLFOLDER" Guid="{EC7BDFE5-C3C7-42F9-98AF-A8EED71B0665}">
+        <File Id="fil80ED8C1C68425ED221901A354127DD9C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\EDSDK.dll" />
+      </Component>
+      <Component Id="cmp00F6FA591E8382B4A4E0CA7569DA407B" Directory="INSTALLFOLDER" Guid="{9C6A575E-A82F-4D35-902A-67EA0AEB3C2F}">
+        <File Id="fil6CDF7D95707D2571C88F8595B15A1576" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\EdsImage.dll" />
+      </Component>
+      <Component Id="cmp09BDF06F69A825C06DD1AF5AF6744E98" Directory="INSTALLFOLDER" Guid="{FB285796-79C0-4490-8906-C87EFCDEB45B}">
+        <File Id="fil54284606B2D71181CE6864E7015C56CD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\FreeImage.dll" />
+      </Component>
+      <Component Id="cmpF6C0B9201C7350F7159FB60800F013F7" Directory="INSTALLFOLDER" Guid="{47F3ED30-1B29-435D-B9DC-0D5A6525ED6A}">
+        <File Id="fil3FEFCD410BB348DBC9CB9A1C96C25B8C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\FreeImageNET.dll" />
+      </Component>
+      <Component Id="cmpA21860E34D793B57DA6D7C471E28BC4E" Directory="INSTALLFOLDER" Guid="{066340F6-926C-4456-AA8F-C88F1F6A360E}">
+        <File Id="fil000264EDC28EBEB2032C6D876016EB22" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\FreeImageNET.pdb" />
+      </Component>
+      <Component Id="cmpD8196730736DECE1AF2CB329C4E70207" Directory="INSTALLFOLDER" Guid="{597A9A6D-1613-46FA-A8F1-2A308962E2D4}">
+        <File Id="fil6F048406362E55D040EEB925A4DADE9E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Gma.QrCodeNet.Encoding.dll" />
+      </Component>
+      <Component Id="cmp774048FD10A341D09BDE2075325A7806" Directory="INSTALLFOLDER" Guid="{027A1934-CC94-49AF-B241-52B9F876AA15}">
+        <File Id="filDCE1DF9F010CA1475D2E762ED38C641F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ICSharpCode.AvalonEdit.dll" />
+      </Component>
+      <Component Id="cmpB1D386DCB5416B5E0B55DD6D797B22A8" Directory="INSTALLFOLDER" Guid="{8877E247-627D-4C77-B3A7-2934FFB008CF}">
+        <File Id="filBCA245EFFC03C2247C916BBD1BB9AE1C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Interop.PortableDeviceApiLib.dll" />
+      </Component>
+      <Component Id="cmp35BD78BCC791615335405CB535C39B00" Directory="INSTALLFOLDER" Guid="{CAF58FB0-93F3-4279-A4EF-53897EBF9838}">
+        <File Id="fil3ECB8A94E16AEE02F8477BACE10831F5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Interop.PortableDeviceTypesLib.dll" />
+      </Component>
+      <Component Id="cmp8969F6AD3E2809E4755DC8DEAF1BDE8A" Directory="INSTALLFOLDER" Guid="{A51A59BD-C3C5-4E13-BE7F-8F6FD38E6D18}">
+        <File Id="filBFB76DFB4FF00C0FB15EDB6DDC3E4548" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Interop.WIA.dll" />
+      </Component>
+      <Component Id="cmp93D8B0B4A3E1743DC112AA33040A556E" Directory="INSTALLFOLDER" Guid="{BE67A3FE-446A-484E-8B3D-76DD8DB0318B}">
+        <File Id="fil26195892AC88FA7C68A5B3256E556D0A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Ionic.Zip.dll" />
+      </Component>
+      <Component Id="cmpDA6273219DE77D8F1174D14D97F75E3C" Directory="INSTALLFOLDER" Guid="{54B37853-2767-4BD7-A0F6-65FA6A5C071F}">
+        <File Id="fil14B93C88A6CC5F8CE92277020EF3EF53" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\libad4.dll" />
+      </Component>
+      <Component Id="cmpACB6CD6FFB2A84501BD9E8392459FA45" Directory="INSTALLFOLDER" Guid="{A94F20A4-917F-4CA3-BB3B-3EA99FB97C4C}">
+        <File Id="fil53CF67BC1F7314B08C1D64A6CEA223E4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\log4net.dll" />
+      </Component>
+      <Component Id="cmpEBCF0D0A4FC6E01EB62B28713DC91F16" Directory="INSTALLFOLDER" Guid="{4933CCED-7756-4EA3-8A05-4E71C05AE684}">
+        <File Id="fil0885A673E61C20CCCC217C83F1E1A4BD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\MahApps.Metro.dll" />
+      </Component>
+      <Component Id="cmp8D0173AA66ABD6B881B0B1C8B6C9E8C3" Directory="INSTALLFOLDER" Guid="{3BCF412B-3231-4804-A3A6-BC27A00B15D4}">
+        <File Id="fil61979E6CCDE4704E0588206ED110C695" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Mlib.dll" />
+      </Component>
+      <Component Id="cmpD82E9FADA89E4539B035216472D30F26" Directory="INSTALLFOLDER" Guid="{6640C452-39E4-407B-8ADF-AD3AEE9D6195}">
+        <File Id="fil9125CB863B6656ED947879225BEA702A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\MtpTester.exe" />
+      </Component>
+      <Component Id="cmpC1D888CF425F0A14572DD21FCF555299" Directory="INSTALLFOLDER" Guid="{80FB5C3D-2066-447E-9DA3-2BA81EA44FD8}">
+        <File Id="filCF1DAE0A05D8596016BDE9D8DF906E86" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\PhotoBooth.exe" />
+      </Component>
+      <Component Id="cmp8752AB689B37D1ACEE9FF6D11716FB4E" Directory="INSTALLFOLDER" Guid="{026B18C5-A17B-4A7B-974D-A9A66566F641}">
+        <File Id="fil36FBD5FED2DDB6ED234A5B35E8C603C6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\PhotoBooth.pdb" />
+      </Component>
+      <Component Id="cmp0BAF05C6B9B7BB452BF43D3A6A320B7E" Directory="INSTALLFOLDER" Guid="{786E0C33-79C7-4B18-948F-011486B74337}">
+        <File Id="fil8B1120AF296BD5DBC860E01BFBA227AD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\PortableDeviceLib.dll" />
+      </Component>
+      <Component Id="cmp3CCF0D9869EEEF40CD9C8020C83A2A2F" Directory="INSTALLFOLDER" Guid="{D039F20A-63DD-4964-94BA-5E2AD340E80A}">
+        <File Id="fil9AC34D4FF18C7E387BA6C096AC7A66D7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\PortableDeviceLib.pdb" />
+      </Component>
+      <Component Id="cmp78FBF5EB3CEDE50134495DB2E465F2AD" Directory="INSTALLFOLDER" Guid="{6462CEFF-55C5-4EBE-B9AD-BCF27F96ABC7}">
+        <File Id="filC1FDB130ED34D0D71A7566E16D406567" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\regwia.bat" />
+      </Component>
+      <Component Id="cmp72959D330CC52655F8FE1B9657967A28" Directory="INSTALLFOLDER" Guid="{D313D458-7AA1-444A-AF10-6A1170F48036}">
+        <File Id="fil3B9BD0661BA969A8B0CA5A705D57183D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ShoestringDSUSB_DLL.dll" />
+      </Component>
+      <Component Id="cmp6420500FF1ABC06969E348ACB0B55D77" Directory="INSTALLFOLDER" Guid="{D84A25F6-2F1E-4903-8CFF-257532DBC7FA}">
+        <File Id="filA545F6C5C51315B4671A7FE6553F80CE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\System.Windows.Interactivity.dll" />
+      </Component>
+      <Component Id="cmp0299A45EC4B30334ED8628C35A2EF905" Directory="INSTALLFOLDER" Guid="{E5C1FBF7-5F18-4F38-B6AF-A7B1745E0AC3}">
+        <File Id="fil061805F851AC59E0E1EB4E675B63000D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\TestStack.White.dll" />
+      </Component>
+      <Component Id="cmp0D10AC1A70044B3D7079C55D6132D291" Directory="INSTALLFOLDER" Guid="{A87B35CE-6615-4673-B3BB-75690A480C55}">
+        <File Id="filF5EAA02516596EF8E415C57BE0B830C4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\TestStack.White.pdb" />
+      </Component>
+      <Component Id="cmpED83BF49747FEE2D820D95F13752986F" Directory="INSTALLFOLDER" Guid="{6A7485AF-7812-43D0-AE27-CFEC6326D574}">
+        <File Id="filD486E25C5B155AD610BB21EF737EAC58" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Ucs32P.dll" />
+      </Component>
+      <Component Id="cmp3E6E389F4FB29576C444C7D56029E272" Directory="INSTALLFOLDER" Guid="{AB5EE618-8B6E-4133-B192-2C567AB08EE7}">
+        <File Id="fil17A7730D69074BD595F6D15886D596B1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub.script" />
+      </Component>
+      <Component Id="cmp2784BDB607389D97B34DB03C174DE2F5" Directory="INSTALLFOLDER" Guid="{873F4C00-4B93-412D-90D1-254725F63DD8}">
+        <File Id="filC96B56B716BB8DA2DA5D3E20A11D96C1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\wiaaut.dll" />
+      </Component>
+      <Component Id="cmpC51F775FD667300B7C41E5BEF2E634A3" Directory="INSTALLFOLDER" Guid="{2E08D042-B836-4746-B5BB-5D6EA3E0E07F}">
+        <File Id="fil1FF13993C0638F524F73D7832477BABE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\WriteableBitmapEx.Wpf.dll" />
+      </Component>
+      <Component Id="cmp89502181D9822710DB56EB9D262B6D52" Directory="INSTALLFOLDER" Guid="{99F5EE50-3045-466B-8F35-D46004FA1E43}">
+        <File Id="fil87A0AD646263967ABE08BB0FEEC548D6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\WriteableBitmapEx.Wpf.pdb" />
+      </Component>
+      <Component Id="cmp4859AD9A9980F9F497549C420EB6A257" Directory="INSTALLFOLDER" Guid="{29DD45C5-3FE0-4675-9EF6-0355B7C9FBA6}">
+        <File Id="filBF81426B5A31A52767A996A6EF7EEF70" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Xceed.Wpf.Toolkit.dll" />
+      </Component>
+      <Component Id="cmpDFB5510F9CCE9F7AD672B9D90CF05D36" Directory="dirB7FACCB87011F39229621A21779B86C5" Guid="{0781A1C8-E9B3-4182-A070-43E7A78E6610}">
+        <File Id="fil9F1A773A90858D92556B6D7D6D74B36E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Data\Branding.xml" />
+      </Component>
+      <Component Id="cmp2131A3750A53A8BCBF39484D8C9160D5" Directory="dirB7FACCB87011F39229621A21779B86C5" Guid="{9F55EB19-F0E0-481E-B850-E76DDD4E6994}">
+        <File Id="fil2ABA6F08F586999C97CE1B963513E685" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Data\takephoto.mp3" />
+      </Component>
+      <Component Id="cmp2F3C4F253C0D6FCF44B0D8CFCB59A9B8" Directory="dirB7FACCB87011F39229621A21779B86C5" Guid="{63DA6CF2-F9F4-494E-A9A1-8FE96CE1FDAA}">
+        <File Id="fil673CF1A207A2D2C7DAAB5338E3DA41DC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Data\takephoto.wav" />
+      </Component>
+      <Component Id="cmpF2537260CA59B66CDCC4C48293751844" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9A782581-11B6-48CD-9B5D-D13543EA934B}">
+        <File Id="filCADB731891868879B1E6DADC513228BA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_F.BIN" />
+      </Component>
+      <Component Id="cmpB1CA7ADC3D961B0A1100D6C394F6F110" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A82D6418-B649-4C2E-9B7F-522E4A73493C}">
+        <File Id="filD1918A1391AC9B924EDFC4D7F5B3D94E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_faf.BIN" />
+      </Component>
+      <Component Id="cmp171AF4E19C43084B2646AEFB2BC6DEC6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{328F3EF5-7C2C-46E6-9A72-255381BD7C36}">
+        <File Id="fil842A2B70D68A62D873587CC450FD9D64" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_L.BIN" />
+      </Component>
+      <Component Id="cmpC16F6B08E2482BB89DAB6A96A9BE5014" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{987276D2-1550-48A0-B9E6-8ED546D630D1}">
+        <File Id="fil22D13580E6675C9339EE1631FB374323" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_lnd.BIN" />
+      </Component>
+      <Component Id="cmpB5D82F4F95F1A4517446292F5EC0BD92" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C5CDC17F-06FF-434D-AE55-FB39AFD56505}">
+        <File Id="fil7FF874691A18E5454E83D14359BDB297" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_N.BIN" />
+      </Component>
+      <Component Id="cmpDDA936EB92BC82DA4FD162DD898709D0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{12B99641-7D2E-4AFD-91CB-FD57A0A893E0}">
+        <File Id="fil7443B7BFA13F3D7BC70F953D64C62E17" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_ntl.BIN" />
+      </Component>
+      <Component Id="cmpF1FF420CAB60FDAEF7C4ED27FB80B326" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3C269A5E-59D9-416F-B21C-B91DCA6437FE}">
+        <File Id="fil2F37DA0B25BD29DF6B698B018E62A88D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_P.BIN" />
+      </Component>
+      <Component Id="cmpCEB97B8C49737005C736B3ED31E75600" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E2A020AB-F84C-4A1A-A430-E5EFD5492958}">
+        <File Id="fil51DC7FAEECC1785174A52C031F1B6139" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_ptr.BIN" />
+      </Component>
+      <Component Id="cmp8EF8306235117FB4B94EA14205DFA905" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{22151BCA-DC66-4316-AF27-7A01FC9EE33B}">
+        <File Id="fil8F032A2E5BC774E558DB10A7C9548582" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_S.BIN" />
+      </Component>
+      <Component Id="cmp5EAD37893868FE572CD981ADADF7CB3C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0EA84A8C-3941-4E7A-B561-09B55509A4F9}">
+        <File Id="filEFAEC23E287AE746A4F44D40BAC90325" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1001_std.BIN" />
+      </Component>
+      <Component Id="cmp7FCAE6F15E7F09F794BA1D88EF4A9D6A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{02BA50B7-FB23-4D9D-B76F-7E1FF19120A3}">
+        <File Id="filC222E97610358C4BD3E84737303116A1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_F.BIN" />
+      </Component>
+      <Component Id="cmp001E605E1F4640BA3CCF63B64856AA58" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{65A5A909-6EDF-4E8A-BFC5-D7944F865C8D}">
+        <File Id="filDC32F8AF406C80CFDBA6D5354E16560E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_faf.BIN" />
+      </Component>
+      <Component Id="cmpE9CF50E8185CBE1C801E2F3D0695ACED" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{ECE664D7-6E4A-4F5D-B7F1-6FEE6E6CBF93}">
+        <File Id="fil62D8AFFB8893C6EA9FF0FCA0B45FEB64" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_L.BIN" />
+      </Component>
+      <Component Id="cmpD03DE83A55373753E40CBC256FA13948" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7AB3B80D-227E-410D-999C-01018FB96F54}">
+        <File Id="fil8FE8F48432E35905EACCEC1F256BC553" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_lnd.BIN" />
+      </Component>
+      <Component Id="cmpA141D673C36F925AB71E669E7ACD1240" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{6FA416EF-F8D3-40EF-B4B4-145DE06DD1B3}">
+        <File Id="fil9409D4EB15DA521962FE2AAEEF3A2AB3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_N.BIN" />
+      </Component>
+      <Component Id="cmp82E1B7BBC21E9F0508DAC5B6BB199F0E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E408933A-3775-487E-AEE9-36EAB4C48EF4}">
+        <File Id="fil353800775CB5D82A9BEBC91A8DD59F48" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_ntl.BIN" />
+      </Component>
+      <Component Id="cmp541BBBE4CDA07A7AE9392BA5ECADBE42" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{66BFF866-25EF-4B33-83EF-C0833C9989C3}">
+        <File Id="fil49D0FDA05E87A0CF791C477D1FE986CD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_P.BIN" />
+      </Component>
+      <Component Id="cmpCC2EFB25B9220C9DA2281857C860B5DA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BC8115E2-2E15-48C3-A256-4EAF3C8CB7A2}">
+        <File Id="fil3625B27017712867655E40921CE9BC4D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_ptr.BIN" />
+      </Component>
+      <Component Id="cmpA36467AF58941384534932863FAD652A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{809C79F8-3953-4AC7-AE89-E0CE867649FF}">
+        <File Id="filEBDCD0016406D86F48A97DF02984EB7F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_S.BIN" />
+      </Component>
+      <Component Id="cmp4D996D525F80AB7E3A8BDA7480A128FF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E3F125CD-8DCB-4775-AB57-0860208DD519}">
+        <File Id="fil164C1DDA1FACD9D933E36B827CED7BF5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1011_std.BIN" />
+      </Component>
+      <Component Id="cmp9B44089C7127A327B5FE05233A8F19EC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D66D0D50-347D-41ED-B719-81D75C54551A}">
+        <File Id="filBAF129BF22FB0DCE203EF2CD45B52FA4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_F.BIN" />
+      </Component>
+      <Component Id="cmpBECF27F26F5A96151D12C292DCA2DBE3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A0CAEC33-5297-41A3-97E3-28008C6E2E21}">
+        <File Id="filB8104A0B71C32C07C1B4596356AF5E27" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_fa.BIN" />
+      </Component>
+      <Component Id="cmp32E7C74CCABC7B791931939DB7AF51BA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C8111AFA-50B0-4532-929B-B7B0840EE113}">
+        <File Id="filB5A0236F6F06522C96A42E2FF7A0F73F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_faf.BIN" />
+      </Component>
+      <Component Id="cmp820C121EF434045F1F8894857F3BCF71" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D505DB92-18D5-4D23-9951-8CFAADC07983}">
+        <File Id="filD36DA4EA85B1990465164C49C1B4BCB3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_L.BIN" />
+      </Component>
+      <Component Id="cmp60F1A4E902FDA30E0AC1D80FBEEB4A94" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7E9D28DB-9F5E-434B-AC1F-2F25F604E304}">
+        <File Id="fil285703020D67066D6AE2ABAC7E837EB7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_lnd.BIN" />
+      </Component>
+      <Component Id="cmp20130729038BF62835090BFC3C291A72" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CDD27C5E-1A15-44CC-A19B-81FA88AF1C54}">
+        <File Id="filB5A967972EAE53224807364516261987" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_N.BIN" />
+      </Component>
+      <Component Id="cmpB689B5EB76F54708450FE5FCFDDE7F94" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{114D3388-97F4-4754-A89F-B97CC7CFE129}">
+        <File Id="fil2A958FA5098105D97D733EBBB39F943C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_ntl.BIN" />
+      </Component>
+      <Component Id="cmpCC34A839088D8798CF8F5A3C4BA5102F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3E26179B-1E3B-4C0C-BA59-A3A2A271C0AD}">
+        <File Id="filDD2D0BC516F40A6AB11E6D0AD125B26D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_P.BIN" />
+      </Component>
+      <Component Id="cmpDE5D3A9B2307173007B8A5A5B9504A5C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{841BFB08-A619-4987-8E6F-9DE7D2C774D8}">
+        <File Id="filD8ED032FCE5FB650D07DEDF839FA7E71" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_ptr.BIN" />
+      </Component>
+      <Component Id="cmp3D63FDC21D56ADC0B88BF8D7CE26A3BA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{20705F49-1175-4FB8-A5DF-027336CE818B}">
+        <File Id="fil1A959D364292B923ABC60F3A7704451E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_S.BIN" />
+      </Component>
+      <Component Id="cmp320C4BAF75F0F0503A2C9164128DD8CC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DFCED1BB-3927-4E24-B571-5D3D70DE9802}">
+        <File Id="filA60F3718864CCFC40307EB58311DF623" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\1021_std.BIN" />
+      </Component>
+      <Component Id="cmpC00A61FF3C693208F2C88D6F6FF28F9F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5C519871-9F71-4118-B797-6ABA101F25A8}">
+        <File Id="filB06E14B1B7BDD55B0D618955C72DF5F7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6000.ICC" />
+      </Component>
+      <Component Id="cmpEA79CB113225323D8C2EAB16D6A2AB91" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{90963FAE-C53D-4F0C-B9A9-F265C96FFB8E}">
+        <File Id="fil390694FFE446B70ABABC9D14DE36D2F6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_F.BIN" />
+      </Component>
+      <Component Id="cmpCF63992988876268DC2CCA1C99C6CC01" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A32CC345-C2D2-4ECF-B90E-F29DCE46D48C}">
+        <File Id="fil2EBE6F567FD591E28EDF47F337228552" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_faf.BIN" />
+      </Component>
+      <Component Id="cmp150D8068288B56067400DD21FFD90EE9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E76C52DF-B86A-45FA-9511-1B892CD9F6CE}">
+        <File Id="filD1698931B33C58B7A1EFDD7514A1718D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_L.BIN" />
+      </Component>
+      <Component Id="cmpB01CB09A2281F0146855B906DB9E89D7" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3AD75CD9-C2E2-4B79-A72D-110494D1BE10}">
+        <File Id="filEC67A973673223591E413F7BAD2BA939" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_lnd.BIN" />
+      </Component>
+      <Component Id="cmp585DA77AC40CC755EF087BB67E1C69BA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3B2A9742-92B2-4AA9-BCE5-EA6F3933F854}">
+        <File Id="filE0D8300D8BC3D38469F833F8BA21D2D4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_ntl.BIN" />
+      </Component>
+      <Component Id="cmp22D7ACF67CE2C7F538CC35F5188C3975" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9505B001-02D8-4E81-9BEB-92AECFABA485}">
+        <File Id="filD822B7B677B73C47CFF0225046AA4B1B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_P.BIN" />
+      </Component>
+      <Component Id="cmp02ECEBDB517D69051C5D85C61DD129DD" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A3250305-103C-4625-9736-0D23B3648889}">
+        <File Id="filD7FABDB90D52D1B72BC86D7DD6F0A220" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_ptr.BIN" />
+      </Component>
+      <Component Id="cmpFAA2B65360A41524BA030C97C12A4418" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9FF32120-CEAB-497C-BB00-2BA000936B95}">
+        <File Id="fil1565FB40A6FBA1F4565239C62562A0C1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_S.BIN" />
+      </Component>
+      <Component Id="cmpA0F09EDBFBE603CE8DD080186713679C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{05070A88-1B77-432B-9613-F8ED5E86660C}">
+        <File Id="fil0F2CB6CFD7755328BFB7ECD3A3C150E1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6001_std.BIN" />
+      </Component>
+      <Component Id="cmp5D6EE7A41305C600F0528D087BB9E592" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E080A7AE-F34D-4516-A789-86B4E5EC88CA}">
+        <File Id="filB0918C120AEA8DDA90D80EAC27908190" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_F.BIN" />
+      </Component>
+      <Component Id="cmp8B027F6D9BBDB8002078111ACE31419D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7108112A-140D-4539-AF3E-E65C52C6F40D}">
+        <File Id="filFCDC4D59C1DDAE7E4A57017E71EE4760" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_faf.BIN" />
+      </Component>
+      <Component Id="cmp680A6EDF6AF17A639AD509A22F0C91C8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{14FF6D11-85FF-4DC5-A565-38B4DB6F54B8}">
+        <File Id="filDB331790430443E0A8CCF73C7E1CF8C6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_L.BIN" />
+      </Component>
+      <Component Id="cmpBF0DB21C0B492D9E673285276F73FFC2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E4C690BF-DD4E-4FC2-AE50-B5F3FC2005EF}">
+        <File Id="fil56D168F8016BF3F1270821E042C1C190" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_lnd.BIN" />
+      </Component>
+      <Component Id="cmp9CD37763749FA288FB6F853F279038F0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4F279476-1D35-480F-8497-533B302C4666}">
+        <File Id="filB6D0F7695C037B39AE9617658CD558AE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_N.BIN" />
+      </Component>
+      <Component Id="cmp447805B9C74474416D90E1FC9F29800B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{49E1F2D1-9463-466C-B96D-AEDEAD979041}">
+        <File Id="fil3C3F9559A46BC4B37EA655BAABA10B8A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_ntl.BIN" />
+      </Component>
+      <Component Id="cmp2A0924A33E9CF16A5327A7BE1A50AFE4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{ED8B1D8C-A49D-4F96-9735-ADDD786CEA7F}">
+        <File Id="filBC4F134AB71C67E7C9AAC98DCD1D251A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_P.BIN" />
+      </Component>
+      <Component Id="cmpDDA35161B3623D39677BAE61777DE7D2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C95F3377-BC1F-47A4-BDD2-E02188F660FB}">
+        <File Id="filA36513820B6FA458E198FD628532D0D8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_ptr.BIN" />
+      </Component>
+      <Component Id="cmpF2632BCD297D299B44C73B08A7B36727" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{057A93EF-9681-4287-AAFF-F20BDFAC42DB}">
+        <File Id="fil2315B81838AA7579EE7A0ECA4587DE05" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6011_std.BIN" />
+      </Component>
+      <Component Id="cmp5ED377C131B2597C638A8CD50A7AFE7C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3883CDFE-4030-4F9F-9E14-506157BD43B6}">
+        <File Id="fil6ED039DBDA81433F975117F306BC2A80" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_F.BIN" />
+      </Component>
+      <Component Id="cmp8CB069869A531628147A3DB1E995117D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{6FA9F4E7-1B9B-42F3-87E3-328781E14547}">
+        <File Id="fil938BCCB50EA40734F0D84DAB5891993A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_faf.BIN" />
+      </Component>
+      <Component Id="cmpBE5DAAFF1AB712B077A11FEB17F527D3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4D35E965-1AA3-4B73-A8EC-C06B64F1FF1B}">
+        <File Id="filBDC3FB5146DB34A5848D3EEA81579453" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_L.BIN" />
+      </Component>
+      <Component Id="cmp449633B501791D448E0053AAB51160B1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3D34067F-74EA-431F-9212-D7E73F83B7A7}">
+        <File Id="filD2F577B281DDEECF3E75F2F72ACB8559" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_lnd.BIN" />
+      </Component>
+      <Component Id="cmpB455DAE1F8ADC8CEEFAAF80411B56AC9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FF408246-CE9B-4D76-A4E8-D36EAB5F03F4}">
+        <File Id="fil2BA5C913425172C1D1A60E60581D9E78" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_ntl.BIN" />
+      </Component>
+      <Component Id="cmp8B970F7731C51E9D21E614EA86CEBB4A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2B7902E8-482F-48C8-9590-D0084CF84669}">
+        <File Id="filB4E4C58D0157CF5CC69B17A80E9F152C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_P.BIN" />
+      </Component>
+      <Component Id="cmp971E375E2931FE0953222E79ED803453" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{753EA823-8249-40C0-ACA5-8C96D5F4030D}">
+        <File Id="filC2C66EB2B68048B48500A3671291A311" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_ptr.BIN" />
+      </Component>
+      <Component Id="cmp466EFE6EB6D3168C8649325F29E75964" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FEF9A59E-2DD7-44B9-B1A4-6ABF4354A9D7}">
+        <File Id="filA3D78B652FD4483AA3BB6DBB85C2A161" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_S.BIN" />
+      </Component>
+      <Component Id="cmp2D26435CC1744B5D0A536F6EFA50F76E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{567AF7B7-972D-4F8F-A559-0E5D40A606DC}">
+        <File Id="filF876C3550F3FA617561AD6F03C28A6C3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6021_std.BIN" />
+      </Component>
+      <Component Id="cmpC580693BCA545605C01FAFF3BD035D81" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{17AA02EE-5FCF-4FB5-8A0F-659EE08095D5}">
+        <File Id="fil9155AF89CFC38A4336687B9248A1E8EE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_F.BIN" />
+      </Component>
+      <Component Id="cmp0F47858D4C7C08969F3A405086CCFB88" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1329BC94-8597-4E86-99BB-C14CBC534CE8}">
+        <File Id="fil202B20FDF463473B1BF95D26B6522695" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_faf.BIN" />
+      </Component>
+      <Component Id="cmp9FABFD2E3263F5DFA85FA68C6FFCBBC4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1288DD38-4F5A-49F1-AD83-54F67FC0D5F4}">
+        <File Id="fil4AD4F6EA157125570C7EAE5F5D33A3FA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_L.BIN" />
+      </Component>
+      <Component Id="cmp121320FAE0419D72D66AD8A235B66453" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A7FD21BD-BD54-403C-9E32-FF6C0498534D}">
+        <File Id="fil0DE2CBFD7EC628686DF06B964BE35DB1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_lnd.BIN" />
+      </Component>
+      <Component Id="cmpDCF281B60BF40198487298F3FCDF6503" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{52B6C3FB-24C2-4AF6-A634-62953278D39E}">
+        <File Id="fil2130A98A8A6D4537B0624DACF9E749BE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_N.BIN" />
+      </Component>
+      <Component Id="cmp165330ABA253189448E61E714AF2E1D6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3202EF4F-DA74-4230-97BF-25BE5F22816D}">
+        <File Id="fil7616F421548B63A6B056AD0C1BC0562A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_ntl.BIN" />
+      </Component>
+      <Component Id="cmpC741733DDCF72EDB1FB5EE7257F8AAFE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{ED186E33-DF14-4BA9-8C23-1CE0E00E5A65}">
+        <File Id="filB70FBAA346C4196563AC01E6FDEF4699" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_P.BIN" />
+      </Component>
+      <Component Id="cmpE6FE6222242B92F17AAF5D5117356BA6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4546D505-4D41-48FE-8698-A695DAEF39F1}">
+        <File Id="fil2C3E21E43D439436CEDE155DC37D4465" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_ptr.BIN" />
+      </Component>
+      <Component Id="cmpE4172D512EB9455301589D6AA627FE2F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{283529A2-4A6E-4599-A572-4FCDD0095DE9}">
+        <File Id="fil6F4791D9DCBF15B449661DE4A02A7280" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6031_std.BIN" />
+      </Component>
+      <Component Id="cmpB9CB0F0182DDED3543473161EC238362" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DEB0829C-6545-4C4D-9BA9-41776376401D}">
+        <File Id="fil808290D223DAA3D8A843350EFF7A2F9C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_F.BIN" />
+      </Component>
+      <Component Id="cmpE15B9352E30521A3FBF8930250684B12" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9FF8CB81-7CEF-467D-B4A0-FA06EA5A624B}">
+        <File Id="filB3E2D1A5239F842CAA9ABEC2F1882B53" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_faf.BIN" />
+      </Component>
+      <Component Id="cmpBF16F1BF1F76DB4B033C5BC25AFCF364" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CEB98D2C-DC12-4160-998E-5926BB363E0E}">
+        <File Id="fil1A06DFE6561DD052AEBBB0DC3F745D68" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_L.BIN" />
+      </Component>
+      <Component Id="cmpC9D3817DFB322BD7227EAB9553A9530C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{62B09521-6380-47E8-B9B0-F09B372CB692}">
+        <File Id="fil0C209F78BF8A1C93B00EF1E16A0B60B8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_lnd.BIN" />
+      </Component>
+      <Component Id="cmpE5C138E03AE04C1842266F92D57A3D08" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{74ADB8EA-345E-434E-A04D-B2BB54D27126}">
+        <File Id="filCB436C4B390C8486BBCC2E37AD6F80C5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_N.BIN" />
+      </Component>
+      <Component Id="cmpE1D9C6626269B8C099C2C9F83CB7B197" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{55B76FD4-C5C0-44AA-A179-F07B81913643}">
+        <File Id="fil3F005BDEE5610283E6921D37131215D9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_ntl.BIN" />
+      </Component>
+      <Component Id="cmp03171C1D1200CD447F9C052537607EE1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{42233C72-C1F5-4704-B775-DF7687288E9C}">
+        <File Id="filEDC18B24F3F642ED5088C94DE612BBF4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_P.BIN" />
+      </Component>
+      <Component Id="cmpB4A908C41685CE8AD8B7CB1AAF14850D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F295FC8C-ABA6-4E62-AF7A-7EF40A896986}">
+        <File Id="fil975BDC8C7799F0167D4D93F5143BD407" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_ptr.BIN" />
+      </Component>
+      <Component Id="cmp098C169793EC389325DA8824639C7F37" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{239CD163-0DC5-47E9-B015-6867B30B25A9}">
+        <File Id="filD3A6C926CA9A7B32F14D2F04CCCBBA81" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6041_std.BIN" />
+      </Component>
+      <Component Id="cmp2C4D3CF7F4A2ECBADFD8C6180A7C7B67" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0F6C9573-1203-4424-8C78-85AFB1B8A9E1}">
+        <File Id="fil4FA3DB26A78644F0121D42E7B61AAAFB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_F.BIN" />
+      </Component>
+      <Component Id="cmp75FE8508F89F3C476E126E37D0147B76" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4F75507E-0E69-4CC9-9158-8699D678488B}">
+        <File Id="filEEC8AC9D06C2189742195EBA3DAA913B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_faf.BIN" />
+      </Component>
+      <Component Id="cmp84CE64DFB5FB29DFF87E6773AD0E165A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{EE66ADF9-D7D0-42B3-8170-F0443645B2F0}">
+        <File Id="fil28D2E5FE2D466AAA413FB1B3D1009282" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_L.BIN" />
+      </Component>
+      <Component Id="cmp4BDBB05D44711B623E386A6A88B4A002" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E3663434-DD78-484A-B0B3-DBE301BF6411}">
+        <File Id="fil078904CED6D1B73971B01F50841F43D0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_lnd.BIN" />
+      </Component>
+      <Component Id="cmpB87C1E95DE3AF92280D207775473FFE8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F7035D80-638A-4445-8274-A1C5447B2636}">
+        <File Id="fil018A574F319C157BD421C11EE95BCC93" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_ntl.BIN" />
+      </Component>
+      <Component Id="cmpD513B337AAF24CED18F87B2B6182268A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{58BC01F5-A347-4463-BB43-DB58C00ED208}">
+        <File Id="fil12BDCD31FE1CBB4BA167282FB80B40EE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_P.BIN" />
+      </Component>
+      <Component Id="cmp970F800A46B05A772663BD59AB4BC273" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{84D9D215-2811-41C6-BF78-23255A4DF2DD}">
+        <File Id="fil9E976C8E06E9748552DB751E68319343" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_ptr.BIN" />
+      </Component>
+      <Component Id="cmp5F8F94108B18CF7230AD07495527648D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C4BFE87F-0D31-4FD7-9B7E-2971B1DF294D}">
+        <File Id="fil1D3310B10D7FA1F663A39FF217B13031" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_S.BIN" />
+      </Component>
+      <Component Id="cmpC8346BAF47267860A28E1BAA8A4CB321" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B54FB146-822C-4F3B-8308-24E822838BBA}">
+        <File Id="filBA9FD3082D92CC1DCCAE10B9EE7FF10B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6051_std.BIN" />
+      </Component>
+      <Component Id="cmp95DE4BF11C05C61B0612F5483D98D925" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B2FB6041-F3C7-44D0-B0E1-C2D9F63DF8B5}">
+        <File Id="filACED789A7AB1D4DC924DFDD8A8046347" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_F.BIN" />
+      </Component>
+      <Component Id="cmpC737A092C031CC6F6B7FD629B62B2C8F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DDD8A7B1-3CCA-41A9-B2DD-797A3227EEFD}">
+        <File Id="filC9B73B9DDBECD385BAAFB87BBC688640" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_faf.BIN" />
+      </Component>
+      <Component Id="cmp11109866595215B3388D77F9D323232F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AB802D94-3BE4-4CE8-ABF9-C845B8682056}">
+        <File Id="filCE4092213BBB4F34F8A73119911714F3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_L.BIN" />
+      </Component>
+      <Component Id="cmpCA3DC1EB265BFCC63ED184BC9E3FEC0C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AC90A42E-B486-456A-AB23-9B2BADD6A50C}">
+        <File Id="fil92EEB47B9F28F0C0504F32407D052FCE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_lnd.BIN" />
+      </Component>
+      <Component Id="cmpB2B4B391AD334A9C284D024B03D92700" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FED00F81-4CD8-45E2-8828-D9A2DAF18F36}">
+        <File Id="fil56D1FC485E6C0C0812AB80EB53124494" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_N.BIN" />
+      </Component>
+      <Component Id="cmpE63EF78CF68999F2B697C733A981D673" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A0103625-F88D-49C0-84BF-193EDAEBF998}">
+        <File Id="fil652B4976E01C308411A44D26D38A08A0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_ntl.BIN" />
+      </Component>
+      <Component Id="cmp43986C05542D98A8C20ADD73B5806369" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{79FA1B25-9911-4981-81BC-A331489ED109}">
+        <File Id="fil6762D3BFA69CF128D78F4169120562CC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_P.BIN" />
+      </Component>
+      <Component Id="cmp9E709D74C313B54AF3BCA5D36FB30D62" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2AFA184F-2143-499D-ADC6-841BEA88A231}">
+        <File Id="fil302963ACBA3F1B723E13DF298A60FCC9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_ptr.BIN" />
+      </Component>
+      <Component Id="cmp67B15EE22D0C0E950C2F9887E6005B0A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5AE4C7B6-0065-4E8A-80D1-FABB4C158538}">
+        <File Id="fil45DF2E14C82A8174A1DF532E4DA80850" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6061_std.BIN" />
+      </Component>
+      <Component Id="cmpF6124C10698697BC8E1F18FDCCBCD5AE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D1DE2C0C-8220-45CB-8F5F-D74F38E3FACA}">
+        <File Id="fil2E05B0CE081B0CE02AA176EB28D273A6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_F.BIN" />
+      </Component>
+      <Component Id="cmpFCC5CC756FAAF34E1345B239DA277346" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{46F6207C-E91B-44B9-BE6D-D48B43DE4B25}">
+        <File Id="filA7F0B7ABC9DAC51806645243A7A84637" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_faf.BIN" />
+      </Component>
+      <Component Id="cmpC5B8BF797A834A4005DD0608AA635C45" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BD2A0187-8F15-44B0-B4A2-3D53FD990675}">
+        <File Id="filB77CBBD6676C07CAE669133FF3F05618" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_L.BIN" />
+      </Component>
+      <Component Id="cmp65678F1291B6D1B4B2C9C0048E7D2F46" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7016A3F1-AF20-4E23-A7E7-573FFA6DDE10}">
+        <File Id="filC05F00AD7A4BAE3A454BE88D2541103A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_lnd.BIN" />
+      </Component>
+      <Component Id="cmp2CC3CEBBAD906878F8AD2C8351D2E8C1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{04DFBD3E-CB47-4BCA-96D1-23455D14293D}">
+        <File Id="filC377ADE63A1DF88352C9AC838770A119" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_N.BIN" />
+      </Component>
+      <Component Id="cmp99D6BA2462CECF95DF173C6882F3253A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F52539D3-A5A5-47BA-B883-924BDE56FCA1}">
+        <File Id="fil29D9ED162E740D63EF18746F3521D1A2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_ntl.BIN" />
+      </Component>
+      <Component Id="cmp323479CD1173C9075DD1F1E9D2B15D61" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4DEB82A0-D61B-4EFD-980B-84B06806B521}">
+        <File Id="filE780A448A6DF3EA78B7C85A70B957BE1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_P.BIN" />
+      </Component>
+      <Component Id="cmp07C740A8F18D491FA90EA6184275F67D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{364136B3-C019-4489-A1F1-52DAB976C376}">
+        <File Id="fil74BFEC9E0A7DD21AFD81C63820BC27CC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_ptr.BIN" />
+      </Component>
+      <Component Id="cmp7110AB2D1E8796705D4DA78C3A27A72B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{112C3479-D98B-41ED-9F15-3EF506ED4C59}">
+        <File Id="fil6DF79FD70F64EF49D05E8226566B1C45" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6071_std.BIN" />
+      </Component>
+      <Component Id="cmp6F8051D4540BCBF322219FBEF9762D2D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BDD26219-830E-4239-8639-AB62E68B5865}">
+        <File Id="filDCE6CE4CD885CABF2D8CAB3B291F578A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_F.BIN" />
+      </Component>
+      <Component Id="cmp30BA06FDEC43DB10130DF0BE5BF86622" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{78F2076E-B5E2-477D-B334-EE75EE89F350}">
+        <File Id="filBFF2C01A0CD54989ED9117881468C9F8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_faf.BIN" />
+      </Component>
+      <Component Id="cmpF72109E53E92BDBFCAC2D577811E7E7C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AEACD4AE-1356-4B28-8B7E-4560B5C4DE7E}">
+        <File Id="fil38FE08C0C8484B946C7024F21EA0A6CA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_L.BIN" />
+      </Component>
+      <Component Id="cmp20B05FD34E009D12EF6F2F7E892993DC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{014F79E7-D1D7-4158-BBC2-E14E2BD6A055}">
+        <File Id="fil9B57D7EBECCFAA0F890255BA6E7B2EBD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_lnd.BIN" />
+      </Component>
+      <Component Id="cmpDDEFD80FF746C4A6C4763103FD0C1BD1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4FCCEE74-2245-4049-BE12-C10BEB700A98}">
+        <File Id="fil6E5AECEB2F0200D408693DE55B8FCF54" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_ntl.BIN" />
+      </Component>
+      <Component Id="cmpB5249EB905D0F290CB890798C0567DEF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{54EA7197-E33F-4F74-B5CA-087C4BC8F07C}">
+        <File Id="filF01CA6F085A76CEF1AAFE5B1A730DF2D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_P.BIN" />
+      </Component>
+      <Component Id="cmp86BBB3D03B13119A464E5AABC066C5A5" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E2EAB95A-610A-42B2-B96C-F21F6E9AF086}">
+        <File Id="filF2FC9B73CCB742155CEE56F15807A579" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_ptr.BIN" />
+      </Component>
+      <Component Id="cmpB2B99CDC095E7E359397FF1226435538" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{28D963E5-207A-4ACC-89E6-36724414EED3}">
+        <File Id="fil1E40149D2789F9A4B10661FF1E6F3D27" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_S.BIN" />
+      </Component>
+      <Component Id="cmp23AC481A59FDFAF827E2537B007DC873" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{927F8F54-B0EB-4AB9-A737-14AD27AF5F50}">
+        <File Id="filC9866C39BFC8A26429AF44F34851727C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6081_std.BIN" />
+      </Component>
+      <Component Id="cmp8B297A3211D07E9C00B674D42A21309B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E5E72B8C-41B8-488C-85BF-9C1D38BC15BE}">
+        <File Id="fil44F649E7978F1FB20C66200AB9E5BF9C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6101_faf.BIN" />
+      </Component>
+      <Component Id="cmp7967731A2B67ABEA139D02181A3B3D20" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9688C440-0B66-4EE9-A576-EBE803CF4BF1}">
+        <File Id="filB7F0C1D51D9B3C7445CD7DFB1E592A14" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6101_lnd.BIN" />
+      </Component>
+      <Component Id="cmpC8CF1667886EB4697E13403E440A7B3B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{53EEA8F9-6620-4843-A35D-45428790E518}">
+        <File Id="filA9917EA21ED87337B8BCFB3B63D93EC4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6101_ntl.BIN" />
+      </Component>
+      <Component Id="cmpE7355D2B1E820A7D2C7162C065FFC2D4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F2B3CCCD-1E5F-4CDD-8314-3AFEBF9DDA31}">
+        <File Id="fil674C35278E35753E5F6976AFC87B01C9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6101_ptr.BIN" />
+      </Component>
+      <Component Id="cmp4A7B576A89E8AC500B6EB6BD6DA7E8E5" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A4C86160-4359-46D8-BB2B-9B742F618CCE}">
+        <File Id="fil59E26F1D882B578A6E43261ACC130C0A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6101_std.BIN" />
+      </Component>
+      <Component Id="cmpF8E136CCFBE2942AD87CFC1A67727C18" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A0B9EE69-4003-4D1A-A721-EA38A582B4D8}">
+        <File Id="fil9E47033D92026C36F425EBDB10140F36" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6171_PA.BIN" />
+      </Component>
+      <Component Id="cmp52DEE21B5B2FEFC9D67AB87265BC6027" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{486F53B5-F7F4-4D6A-9FE9-E2BF957A8FCE}">
+        <File Id="fil58EFE6D919B130BEB421C242DFDD0EE3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6171_PS.BIN" />
+      </Component>
+      <Component Id="cmp22FD0317B9CED885C57D4DDDB865B5C0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{24A65BB8-6A80-41AA-8DCB-95A828E1FD37}">
+        <File Id="fil80068FC6966B2606AF4282543543B38F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6171_ptra.BIN" />
+      </Component>
+      <Component Id="cmp99B18AD644AD82DC828DB8275573EFFB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9F1DBE33-2A88-4CDB-8380-C190787A9497}">
+        <File Id="fil3DE7DDC30B143DF29B83D44E08EF4B2C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6171_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp25FA163DF4B5999C8007DFDA2A744D96" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{89F9D88B-4F27-4F93-AE62-13441DF1FEBC}">
+        <File Id="filAE0D6437A714FEEF001BDECA1AAD2E6B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_FA.BIN" />
+      </Component>
+      <Component Id="cmp42B5AC4137EF328C779E94D53DFB7A11" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A3C0F76B-E305-4341-831C-FBB16E4CB1CC}">
+        <File Id="fil605F5537AE3B15C6273EFCA89861BF7E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_fafa.BIN" />
+      </Component>
+      <Component Id="cmp1FB6CA1C9FDB03EEF2D63430D15D2711" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4715CAF5-B901-45D8-B976-9200A31224C1}">
+        <File Id="filD5AF694569466064904E26B00550CDF2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_fafs.BIN" />
+      </Component>
+      <Component Id="cmp8540934F78B93BC056502D48D720F3CC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{51170A15-3EF3-4828-8571-DB3FBCC28C46}">
+        <File Id="fil16A0ED9BA48275AAB8AF12F7C4548B36" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_FS.BIN" />
+      </Component>
+      <Component Id="cmpC6B1A74E388A26F41BEDEE9C0CB4B8C4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BF9B3568-A6EC-41FD-BF9E-83F4ABCA66AB}">
+        <File Id="fil98F813195695085D2E9A3AFD564D20CE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_NA.BIN" />
+      </Component>
+      <Component Id="cmpDC7752DA74C115660B184E3BE78950E1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9FEF318F-7969-443A-B55F-4EC329E1D5F3}">
+        <File Id="fil21AB4B3E056C4E1B4932EA450AB43568" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_ntla.BIN" />
+      </Component>
+      <Component Id="cmp73F0C156139AF5E50AC1052462FEBCDB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C44D2337-2401-4934-A11C-70973DD1613A}">
+        <File Id="filDC90CA9CE425196EFB96B3E8F701DC25" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_PA.BIN" />
+      </Component>
+      <Component Id="cmp1F8B4F5C449DC376A32EF0BE7C44928D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{920D2DD3-CF36-4D18-9C77-7E31BCDF1DC5}">
+        <File Id="filE4321AACC55A6EB25041DB6F6F0F2534" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_PS.BIN" />
+      </Component>
+      <Component Id="cmp5B2587499B614A13728962F03FD38B83" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1CDEB49D-5F06-4F0F-BE92-6B0A133AE311}">
+        <File Id="fil029B1C896742346DF751B5DAE5E898FB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_ptra.BIN" />
+      </Component>
+      <Component Id="cmp3AE94576F1BE52B01D6829A3D0A9462C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2C39D09C-DCDA-427F-80A5-25E6A4B1E620}">
+        <File Id="fil3EBD66B7F2CF2EE331E4400DAA3B9350" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_ptrs.BIN" />
+      </Component>
+      <Component Id="cmpC590B8F6CC065B86ED2523ACCAA258BF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{298BB25E-38CE-4097-B835-B5108AB19014}">
+        <File Id="fil3D9938AC752D22C02555A0AD2C0E337F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_SA.BIN" />
+      </Component>
+      <Component Id="cmpF62C38E1A4E863DAA043C720D7676499" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3965F9FE-3CB1-4C5A-B205-7C3C01411371}">
+        <File Id="filDA9DDE61DC7B9A057EA0EFAD1B60ACE1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6181_stda.BIN" />
+      </Component>
+      <Component Id="cmpCBD147DEA9C9AB0DB440625AB9545F9C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AB257EC1-5A09-4134-A4BF-687FCEBE9C52}">
+        <File Id="fil2D57FFD072F6C437D75D79F99CA289F2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_FA.BIN" />
+      </Component>
+      <Component Id="cmp850B4673243468C14C1CB3BC1A0CF461" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B2F64E41-E7EE-4F72-8EDF-A7E5A6770E10}">
+        <File Id="fil754796979DB44694B1A20EEDD2D1FD38" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_fafa.BIN" />
+      </Component>
+      <Component Id="cmp1A54138D3984D23CFCECC48D7A11BD10" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9D6B6F08-C5C9-4078-BACB-2B4DA3E06D7D}">
+        <File Id="fil729A8A3E8D0F3E19FAD086841EC4F383" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_fafs.BIN" />
+      </Component>
+      <Component Id="cmp4905867F68C4F3BF12817DACCC6447F9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BFAC8AAF-34A3-4152-9586-1814DB28FAA1}">
+        <File Id="filA1497EEF2DF0604ADEB16526C34E0017" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_FS.BIN" />
+      </Component>
+      <Component Id="cmpB85DEC7A24C5175613C3661062FB2BCB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{770F9FA4-B083-437F-A14E-D1100D17CEC4}">
+        <File Id="fil3D046F1BEA783018F8EF03B77F077581" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_LA.BIN" />
+      </Component>
+      <Component Id="cmpF5DE83811880E34DCFD351A1AFD6F303" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{57C57DD1-9CFD-4744-9770-AA53BBD74A13}">
+        <File Id="filEC4F2A926E7805A7DB26E8025A2C514C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_lnda.BIN" />
+      </Component>
+      <Component Id="cmp37A7D780AEFD7DA776473AE96FBF2A78" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AA8EBF11-6230-4434-AE71-D2E18A77C591}">
+        <File Id="filF63C2905F1AE618528160BB46FA51A95" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_lnds.BIN" />
+      </Component>
+      <Component Id="cmpA586248F42F0B3636BD5515D5FC0A80E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BC5DE349-2834-446D-ABB9-D5266D0DBDB7}">
+        <File Id="fil1765885DB55579253E8659D8C6C5D769" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_LS.BIN" />
+      </Component>
+      <Component Id="cmp1856122E017FDAAB15C7B8231E5C289D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{59ECD7CF-13D5-41E6-B197-D1A05CE54186}">
+        <File Id="fil743F5C86B50BA993DFD0882CF362BC5E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_NA.BIN" />
+      </Component>
+      <Component Id="cmp0E2E196318DF6AD14263301E56F286F1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{EACAC360-0C48-4D78-986F-B17AF592B765}">
+        <File Id="filC864F37109F0ED3D79BA4CC02F46D310" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_NS.BIN" />
+      </Component>
+      <Component Id="cmpCF5377BA3BA212DD8554BBE7088086D5" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A563FBF9-0B92-4AAB-8BDB-2556A6D80179}">
+        <File Id="fil69263F125466F392DAA4B3C9E0070171" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_ntla.BIN" />
+      </Component>
+      <Component Id="cmpC526F2A6B3B5B8AC3DD9D10D0784E380" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{966C59D2-D4FF-438E-96FF-A3091E7A9923}">
+        <File Id="fil2E340BE297D000D01A3D59C400281F33" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_ntls.BIN" />
+      </Component>
+      <Component Id="cmp9BEDA8F53E20BBE7FDC3F70B5CC7E0EE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B2FAC4FF-8FAA-47BC-87E6-B67396B2EC5A}">
+        <File Id="filD1B19D815E4B44DF9AF19D88AB0A6417" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_PA.BIN" />
+      </Component>
+      <Component Id="cmp5C47B2A79E504B8E91C50FD18E90D649" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2F3F8FCF-FDB9-4E15-BA57-FDB3A18A94F2}">
+        <File Id="fil870620C6CC567500F220DEA1DF354DDB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_PS.BIN" />
+      </Component>
+      <Component Id="cmpA4078F2AFB957DCA8AA73B84534A0EA7" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4D1D9B3F-3834-47AE-8AD4-B5FDF1924D01}">
+        <File Id="fil06C09065CB509C58BAC7020F0184CCFC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_ptra.BIN" />
+      </Component>
+      <Component Id="cmp0A42B084639E4B860781E4867CE3062C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9CE94B33-A1D5-4945-8E1A-D1B4491B01F3}">
+        <File Id="fil63B3E2EBD45EE5140BA6CB5710F6273E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp2D0317F4C8A7EB7A7A201E740D5F1A44" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{69EBD46D-9981-4239-99CD-EE56C76F49E9}">
+        <File Id="fil4CDEF910E1A6BFB94E6ABBD3CD7A592A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_SA.BIN" />
+      </Component>
+      <Component Id="cmp1C28B34537F6A8C39C4375F1D5E1B94F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{EAB4D936-84F4-43E5-94E5-A6CD8AC70F8B}">
+        <File Id="fil1B045C491259933A37320D9DFE4A85AB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_SS.BIN" />
+      </Component>
+      <Component Id="cmp18A4E82AC5F589FEB140D042D259BAD0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{71142D43-DDD0-41C1-9E1E-FAC4FA52ADBD}">
+        <File Id="fil0919032E8EB3B47C74937C0ECFD03775" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_stda.BIN" />
+      </Component>
+      <Component Id="cmpFB037E2A3172C8BE706DAA9C40DF3794" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F2118C3C-1106-4B07-A052-181E63879F9C}">
+        <File Id="fil36B9CBD3632326964B5A85DC25F4D645" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6191_stds.BIN" />
+      </Component>
+      <Component Id="cmp3C6DF6CD2AD3BA5B70461265F831B2C6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B59FAAC5-D11C-477C-9FCD-AB9CB303AAD8}">
+        <File Id="fil90EC3979E2FCD3EAB29E69E0951B0F39" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_FA.BIN" />
+      </Component>
+      <Component Id="cmp29DA20B93F6F34415C70C67D06A0F0D6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{97C61E55-FFB2-436F-B4F0-99280B4D8C11}">
+        <File Id="filC8BBC698035AA16106A2A632A13ED5EB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_fafa.BIN" />
+      </Component>
+      <Component Id="cmp398CEB0901DED10773A375185E9EC1B2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A29B1915-766F-47B4-A30D-B52687B592C3}">
+        <File Id="fil522139027A99D77BB62C255E13C022AA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_fafs.BIN" />
+      </Component>
+      <Component Id="cmpB6F24F3FA3F783A19B43BC0CFA3436F1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B6DEA58C-1A62-495C-B80A-7C797F719217}">
+        <File Id="fil47DCACB42FF547DA9D69F365ED478B42" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_FS.BIN" />
+      </Component>
+      <Component Id="cmp28FE0947EA57C198671F4B5542907335" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E1052F33-3808-4078-971F-289627D89593}">
+        <File Id="filDE5F3C542D0EDF27F2F61F48F982D2B6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_LA.BIN" />
+      </Component>
+      <Component Id="cmp5E9CA6CF9A05E4F39953F9CCDD64B60C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{8F1E8BC3-CC31-4916-B3CF-F7CA280FD56E}">
+        <File Id="filE4AFAA8B9355D98506100F54A5409B39" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_lnda.BIN" />
+      </Component>
+      <Component Id="cmpAEDE7B0557FB30ECA4658CFD87E1A193" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D1A05590-CA90-42D0-9FBC-A6453DD0CEE7}">
+        <File Id="filC542900E1A68BA89BDA002065B04BBC2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_lnds.BIN" />
+      </Component>
+      <Component Id="cmp25634A58CF22A62F07750CC5C0E90FB7" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A12CC5B6-8E66-4DD6-9F1C-8701B6BC0042}">
+        <File Id="filC7AB30A8FB6A8BE1B47BF8822AC67A85" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_LS.BIN" />
+      </Component>
+      <Component Id="cmpCCDA4B7C8D1F1FE3B93AB6A359FDE18A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BA2547A4-8E13-430C-80E7-8FEED9F540C0}">
+        <File Id="fil00599CA0C0DAB3F458CD0C1814258D84" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_NA.BIN" />
+      </Component>
+      <Component Id="cmp9AA69156BBF88EFC8344F02C1E7454B3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DDF6267A-9145-4330-9BB8-B727716E945D}">
+        <File Id="fil5F1A690D28FB6929601058928BBB2240" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_NS.BIN" />
+      </Component>
+      <Component Id="cmp691531FBACC177A1F327FEB461D270A9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7CA276EB-1DFE-4E99-8121-8263EB2EEDE6}">
+        <File Id="fil7B0F1589421FEF96F0378F157AA6E0BC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_ntla.BIN" />
+      </Component>
+      <Component Id="cmp92397AB161554B5E5D4D4B36414E632D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{674F241B-E8A1-4EA9-89CE-22B3AFA924D6}">
+        <File Id="fil7E5272C3493817892F91DA770475DC99" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_ntls.BIN" />
+      </Component>
+      <Component Id="cmpAE40451DAD2D7AEA02D4C982283D2378" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1A951525-8146-4F1D-B457-22050BC346AB}">
+        <File Id="fil10008AD7ABFE21807DD5A5B2595AA437" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_PA.BIN" />
+      </Component>
+      <Component Id="cmp3ED0B57FD9DEC3086AAEA135E82D13D1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E4B63EB6-EAB3-4A63-8500-CB929881E7C1}">
+        <File Id="fil1A542F63E0FEB5E2D070E4D26825E0F5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_PS.BIN" />
+      </Component>
+      <Component Id="cmpB1D39F109488AF5C46614EEDABCF0A4E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E8C9367A-0ED4-470E-92CE-2C115FAE48DC}">
+        <File Id="filE9CCD15565B0D48FBAEDAF8357F4945B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_ptra.BIN" />
+      </Component>
+      <Component Id="cmpDB7428002E1ADC595DEF2204608A6F9A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{11AFB0CC-7E29-455F-9DE5-8E0C85894D71}">
+        <File Id="filB94E314CCCA08AD9CC5E4854771049E4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_ptrs.BIN" />
+      </Component>
+      <Component Id="cmpC0EA5365F12BE138C8EC9C6E9CAEBF50" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{8D75001D-AC8B-4A06-A856-89ECF52DC6AD}">
+        <File Id="fil34B123DF53B5A8574CE2B8397DEB2C5F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_SA.BIN" />
+      </Component>
+      <Component Id="cmpD24EB0A86A8F4BE0A250BDB043BB3FF1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9A7AB68B-F0D1-49C9-9834-A0659B7F6A65}">
+        <File Id="fil2415170C8D442A92D83586EA90B5D70B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_SS.BIN" />
+      </Component>
+      <Component Id="cmp641CD7DB9F63872385675A3BA1742F8A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3C4D053F-F1A3-4263-BA72-C2CBD54AF94B}">
+        <File Id="filF50EBE5F9C2155BD471866D3D1D85888" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_stda.BIN" />
+      </Component>
+      <Component Id="cmpAEA318708864D7B5DFFF268B3A16F3D4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DF8E6256-1CF6-4F0C-A79B-3B183BDDE94B}">
+        <File Id="fil7502CADA5B3A8697251E03643D492A8C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6201_stds.BIN" />
+      </Component>
+      <Component Id="cmpF79DB987CB2DD0AF5AE3F51779BECE0A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F7BD1A1C-D58E-48F3-9110-71F06B1CEBE6}">
+        <File Id="filFFCB90FDF15306DA3E6C8359DF2D0C86" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_FA.BIN" />
+      </Component>
+      <Component Id="cmp68B59F3AB5345A132DDB825F2AD2D4FE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{800F8137-9C8F-4D41-82B0-9618325EDB34}">
+        <File Id="filACFE833C839A1F0023DFEF299CCF32D8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_fafa.BIN" />
+      </Component>
+      <Component Id="cmp536833242ADDE45380B7604A8E35F41A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2E07A0B2-0996-45C9-9DFC-A98415CB1F98}">
+        <File Id="fil6F6A93DCF80FFA3F46B3ADCEF86B0179" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_fafs.BIN" />
+      </Component>
+      <Component Id="cmp031DAAA4BAEF285CF3053793F5F6BD01" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{EF525A95-FF72-48B3-AF18-DD0C507B2C05}">
+        <File Id="filCB845D104E00DB4AA4ECD86126DD2A4B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_FS.BIN" />
+      </Component>
+      <Component Id="cmp3D08DC6E5246A6090BD34C0C3C9502CC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{39143DD2-5564-44B0-8220-5DB381ED66BA}">
+        <File Id="fil753EFEDEA4635C01D54B0F74E89D9300" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_LA.BIN" />
+      </Component>
+      <Component Id="cmpC2891E9A2A6DAC0DD6D78777AAB13A93" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0BBF893F-4B81-4A36-A439-604F5A2758B4}">
+        <File Id="filEE5E14C3FC3ECDA2192718230A496855" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_lnda.BIN" />
+      </Component>
+      <Component Id="cmp9ADEC80DC1F18807E5CB7525ED204B65" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D5994438-E9D0-47BF-A5A3-8CE9C8991A42}">
+        <File Id="filC124878BA84D39601755E20B67FAB870" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_lnds.BIN" />
+      </Component>
+      <Component Id="cmpED54AE74F65EC7C0F57D2742F14E1BF2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C9CE9C0B-DF78-46BB-A90D-B3438870BDF1}">
+        <File Id="fil3A3970E4D1382995FC62ED531EAB8DA0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_LS.BIN" />
+      </Component>
+      <Component Id="cmpF1168E205C7C4369CDC86A387C939B53" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4DDC62F6-30B5-4834-AA64-F70465A7B477}">
+        <File Id="filEFC07B524902D5EC5D14517F2F766318" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_NA.BIN" />
+      </Component>
+      <Component Id="cmp0B6D4C77B4D5C3B94D57AB52D085A4AE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{12F31670-39B7-436C-98A2-414D3E591702}">
+        <File Id="filEAC870D59D6331FB471207899E10DECE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_NS.BIN" />
+      </Component>
+      <Component Id="cmpE79B89507EFA7FCB478922CA9B7F0566" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{21A554CB-ADF3-4E99-AF19-20DC9216A3E7}">
+        <File Id="filF0FCF9C767D6802E0182F4250B33DF19" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_ntla.BIN" />
+      </Component>
+      <Component Id="cmp407C8CCC492180DB66061A191035BF3D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2BBB67D6-3432-4E96-90ED-13B1C0B016CE}">
+        <File Id="filE6A79AFD40FAD5B9266D4581E6433911" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_ntls.BIN" />
+      </Component>
+      <Component Id="cmp414A221158DB9BE998A665C2BFC06DF7" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7961804E-9D99-4E2B-8CEE-3FEC4E04D9E8}">
+        <File Id="fil1BAB19ACED46CA75EF8586FEC77AEF66" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_PA.BIN" />
+      </Component>
+      <Component Id="cmp82E1A92E9171E6FF345FB3ED7C840D08" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F0AAD057-E0DC-46E7-A905-9D16D3AC2192}">
+        <File Id="fil642A5548B77EFCD521704369B74EF7A6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_PS.BIN" />
+      </Component>
+      <Component Id="cmpAA8A6B1588BF51CEC5ED39AA53350916" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{21E0C83C-F938-41B9-B30A-1E62F66445A1}">
+        <File Id="fil333BE49FC6D40DB81EB7F23F60E72BEB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_ptra.BIN" />
+      </Component>
+      <Component Id="cmp4FB85965EB7D5A830502C178BB8BEB40" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{28C16C44-7A93-462E-9638-E3E9FDC1EFBA}">
+        <File Id="filE174B275D9E4E39BB589DF8EEA9B196F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp8D8B18F8FDFE696002EB53A361B97922" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C236117C-E594-421D-A436-BF5FDD14700B}">
+        <File Id="fil457D1F66DF49B846625A53D3AD2A2C67" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_SA.BIN" />
+      </Component>
+      <Component Id="cmp191A57BE7C136AE7C9D9ABC8C4C2A4EE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B56F9A19-A6BD-4A7C-B43D-306426AF7D43}">
+        <File Id="filE3B68E0EE444F8E48071E129145F2826" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_SS.BIN" />
+      </Component>
+      <Component Id="cmpFBF16EEDD42E8DE775C29A895F033D71" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DFB42E87-35FD-4D57-BB3C-4929A3D406A8}">
+        <File Id="filF93B07756A32285080F4B398DE4E66BD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_stda.BIN" />
+      </Component>
+      <Component Id="cmp05982ED24A778988CC850C995AC328F8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C39F253A-7FF2-4EA0-8694-EF71A779A06F}">
+        <File Id="fil526F3D7CD5875DEBA72594C8D7979A77" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6211_stds.BIN" />
+      </Component>
+      <Component Id="cmp69CF3E3B55B94E7688C6E153E30D7E25" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B47D7661-3CE2-4932-9BF6-87DAAE6D888B}">
+        <File Id="filF297A708BE37FA70B987490A4457B574" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_FA.BIN" />
+      </Component>
+      <Component Id="cmp6A941FBEB7AAD9EA7016A2234EE85A9F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{32EA9449-D899-4F2C-B923-9D6A1C700090}">
+        <File Id="fil3766641967DD9F7A7ED521260F5CE4C7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_fafa.BIN" />
+      </Component>
+      <Component Id="cmpA9A08508BF62DACE2E63E2E6E71746EA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FA74C651-9891-479E-AD37-506B270E4100}">
+        <File Id="fil12DDC4D54EC6BCDC00DCBB22DC6B8BA7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_fafs.BIN" />
+      </Component>
+      <Component Id="cmpEE7F6184B3703EB05FA990E018C88CC0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AED75901-CBB7-442D-A74B-22C2DFC9D034}">
+        <File Id="filBBD38A480039FBA4C7F03CC411A0EEBD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_FS.BIN" />
+      </Component>
+      <Component Id="cmp682A1DBBED1CD402BB9D743899E2631C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{64F54B6D-5CEC-4BCF-8161-6CFC844E28B6}">
+        <File Id="fil64798046897B217EEDD4E9CC24BEB487" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_LA.BIN" />
+      </Component>
+      <Component Id="cmp362220D99CC3F6CB8C57F0B5853EB480" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4A8F0837-6A41-47D7-8EC2-6BACFDB60D92}">
+        <File Id="filD5A98C9991FAF068BF2BF470334F73CC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_lnda.BIN" />
+      </Component>
+      <Component Id="cmp439E9E791E8D491A6D7839175EA06D6C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F999680A-BC34-4C93-8B7A-CB7B17523D46}">
+        <File Id="fil8CD7C3EC14FD55056CCDEE0A6A2D1FD1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_lnds.BIN" />
+      </Component>
+      <Component Id="cmp5936F1FCF15A94581E23ACF2F7C40A0D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F4474915-EF43-4294-A9D7-1499F1EA4202}">
+        <File Id="fil4640DF97B703367601EFD1C238C67222" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_LS.BIN" />
+      </Component>
+      <Component Id="cmpAB8E21B296C62423E60236D5F2E45DD0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2FF5EC36-7F1E-4EC5-9B15-9F3B342C6417}">
+        <File Id="fil2B72E73A64394A9658141A465DD7E685" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_NA.BIN" />
+      </Component>
+      <Component Id="cmp5FC3C2080B74898486B9A4234CF4D312" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C6E2B422-B9D3-4AAA-9684-34B0B3F46C41}">
+        <File Id="fil920F52E548A76C7A07A5705BFAF74EE3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_NS.BIN" />
+      </Component>
+      <Component Id="cmp375FF144A34BAEB4A2DF62773B97496F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{ACF010B9-2698-4454-975C-953C64C00872}">
+        <File Id="fil610372E534F20ADFD38196022E9EC67E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_ntla.BIN" />
+      </Component>
+      <Component Id="cmp92147FCD09E1F6B781498BEA50145D1B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2443BF06-5692-43FD-B172-46FB8E9B07AE}">
+        <File Id="fil795FDBBF77121433B488E38909EBB482" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_ntls.BIN" />
+      </Component>
+      <Component Id="cmpB2C420F23DA4A3B170C76634CF77B8CC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E43268F8-9208-45AC-9D48-EA7DA64ABE91}">
+        <File Id="fil7D6F98C639373E2256A588AE79E43346" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_PA.BIN" />
+      </Component>
+      <Component Id="cmp36AD2489AF3488194F4F42C12F013C5E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7B5B1B5B-580E-4A6B-B1FA-F65EBFDE322E}">
+        <File Id="filEF6C18DFC416C855437DC9B4C6CE4700" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_PS.BIN" />
+      </Component>
+      <Component Id="cmpF0F8088ABB9BA5E5905505416E6D863E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{22B6552D-06EF-4826-B727-B73BF43564EE}">
+        <File Id="filE5BC9079D59FA1AFAAB0C011BCDAC19F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_ptra.BIN" />
+      </Component>
+      <Component Id="cmp76F0472F205A9B4E00A1A9DCA936AD1B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2E714FA1-B388-4586-8D90-A7CFABA61085}">
+        <File Id="fil4BA35DA8FEA359B1EB6F6850F33F5BDE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_ptrs.BIN" />
+      </Component>
+      <Component Id="cmpB596C8FE94F74ABBF0B3B1FD767C7167" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{032134EA-C52B-43F0-B6B8-83C437D7F221}">
+        <File Id="filA498471D5359BCFE574369624536595D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_SA.BIN" />
+      </Component>
+      <Component Id="cmpF0A7CF41D993B59B78E8024BA24FE892" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2FC9A5DD-22BD-4249-B8AA-36C4251AD504}">
+        <File Id="fil1B58CC043090E054905D274E0A33F5B1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_SS.BIN" />
+      </Component>
+      <Component Id="cmp5300FF3E9FECC0349AC1094382C48E85" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{70B07256-E564-4CB0-967D-3E4B797B525A}">
+        <File Id="fil7F4641915646C48F94F94EEAA62EC5DB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_stda.BIN" />
+      </Component>
+      <Component Id="cmp5E16FFF6D3A4A2D89232FB51B50CC18B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{6EAD3D73-51E2-4B57-B1D0-2882662DFE8A}">
+        <File Id="filAAD98AFEEC792B4F77096D04D7C75544" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6221_stds.BIN" />
+      </Component>
+      <Component Id="cmpB37ABB2F6AC27C92DC63B619D50D94BB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A16A756B-4D19-403F-82ED-CBE5638C8B39}">
+        <File Id="fil1E2590D36E65088358FD0C3E0062D10F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_FA.BIN" />
+      </Component>
+      <Component Id="cmpDFCBF266B346956DD8941BDA8E556957" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7FA8539A-1F5A-4F9D-85A3-C69EC0969AB8}">
+        <File Id="filE8DBF57837D5C650AED10B45F66B8CFC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_fafa.BIN" />
+      </Component>
+      <Component Id="cmp154FA193BE405A643DFDBAC6D290E002" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5FBD4A9C-45BE-4C62-9ACB-C3372FD8FA29}">
+        <File Id="fil2439A97A6C675BBCD8383181E8864EF0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_fafs.BIN" />
+      </Component>
+      <Component Id="cmpC38FA2FA1CB5B8726A621339502CE487" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D4C8FC97-A914-4B36-9CBD-F880912F72F1}">
+        <File Id="fil2C6A50720AA44667A4E55F5F31335F57" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_FS.BIN" />
+      </Component>
+      <Component Id="cmp5ABA9A75E6CB60408D75DD08B4C28B05" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{59A7B8D6-D651-4AC4-BF22-7E6E00B420D6}">
+        <File Id="fil17CED192757BD3D433001D9E1E120197" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_LA.BIN" />
+      </Component>
+      <Component Id="cmpA867612B0240D999A2F38E743747A3C1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3429BE5F-EF06-496C-A001-B1E417D9C4DD}">
+        <File Id="filA9F8A1F34BFE87B5177BC2281BDDC4A7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_lnda.BIN" />
+      </Component>
+      <Component Id="cmp56F871EB1B31B6224CFB90FE0DF708A6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{088B5E81-CDE0-497C-AB9A-9F0658CB218D}">
+        <File Id="fil4651A48C200880E227347FB0634E0ED3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_lnds.BIN" />
+      </Component>
+      <Component Id="cmpF891E391A9C46B4A94871CFE7CE63346" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{58E42B97-B2AD-43B9-9848-99F804B8A888}">
+        <File Id="fil54FFF1CBF47409EEDC61C34F4EA27C6F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_LS.BIN" />
+      </Component>
+      <Component Id="cmp0B2E796A62062F4366C6766D27AE92AA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2D1B84A1-3D25-4C19-BE05-7617C10ABC1E}">
+        <File Id="fil263D50219D4045A6616DC4602348DB5E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_NA.BIN" />
+      </Component>
+      <Component Id="cmp768FF0A2C2E8915E9056F4A3500CB366" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{586D3CDF-806B-4AD2-88EA-2BDA2F40BA4F}">
+        <File Id="filA2D7BC6B526BF6DC40C795C35AAB04A0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_NS.BIN" />
+      </Component>
+      <Component Id="cmp60A436C9E2E24F0F99138B370A957471" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{505FAB53-1B3F-4465-A7A8-4D5C48F8CD19}">
+        <File Id="fil32DAD2CB1ECFD35F591E31C569D47386" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_ntla.BIN" />
+      </Component>
+      <Component Id="cmpFD77F586145CFE54D670895292642B4C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{12D280EB-A13C-4E11-805D-011233E2E74B}">
+        <File Id="fil5874C81646E5EB31D14D7504E5D7929D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_ntls.BIN" />
+      </Component>
+      <Component Id="cmp42B7D2C49D95B4F4F693B510036D4A04" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CF5AD4BE-174D-418D-BF84-0C702ED0366E}">
+        <File Id="fil76B00EDA76FA986069E84F6005A11673" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_PA.BIN" />
+      </Component>
+      <Component Id="cmp43DBE75A2E886C4C5598BB992803D4E0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{55FAB630-9E6B-4E32-AF4C-78AFA68CA807}">
+        <File Id="filF3F5C11574A5CB7749C27FE69D8EEF0C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_PS.BIN" />
+      </Component>
+      <Component Id="cmp61DE63A3AEE00600907EBF93B2288B38" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{258391B6-52A3-4B8D-AC4E-F2A2E408C81C}">
+        <File Id="fil929CDEA0A874963137A12E813F35EC62" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_ptra.BIN" />
+      </Component>
+      <Component Id="cmpFDB6882369C41077A8CD910AAC3D5316" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{51878040-84C0-4429-8856-F383985D4E17}">
+        <File Id="filFEC32126099620EEB6A3606800EA72ED" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp2FCC831D0A0B9143C8D90B7AECF928E4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{62BC5F2E-B241-47D4-8D53-D4BA26E7BBB3}">
+        <File Id="fil687B11297F7F78D00C10C17DEE3A2956" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_SA.BIN" />
+      </Component>
+      <Component Id="cmp12511B465B9170722A7B249A0AA3C3CF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{8A4166B4-932E-4046-A3B3-10E862EE26C5}">
+        <File Id="filF6F898FCFFADC20028F1C0E13B3BD5A6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_SS.BIN" />
+      </Component>
+      <Component Id="cmpCAAC925691EA73CE102D0F40A8B01E65" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{16CB0FF7-22E0-44E1-9AAD-433D369BD8FC}">
+        <File Id="fil4AD35009D9B6FEEE25A52A5A9C404A1F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_stda.BIN" />
+      </Component>
+      <Component Id="cmp2298DA8B4A8DD3B3CA026B56E12BBE3B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F89443AC-1EF2-4718-A2A5-D2B8DDC76BA5}">
+        <File Id="fil83F263C1F1DC2A42A23441EDBBEBCC36" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6231_stds.BIN" />
+      </Component>
+      <Component Id="cmpEA48C1B026E0F7BF5B535FD5B8BCD858" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E37CEC8F-B3F1-4107-BDB3-3F9145C9F492}">
+        <File Id="filE16835B9257F22A67B036F457236C8C0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_FA.BIN" />
+      </Component>
+      <Component Id="cmp868C599BBA809FA5C1BC376B29E82F45" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D854802F-AC7A-44AC-B1D6-568D9A42C050}">
+        <File Id="filE8CC544AE833AD8C03E49438847D3085" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_fafa.BIN" />
+      </Component>
+      <Component Id="cmpD2C796451A91181291CD2F51F4C623C9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0FC33BB8-C54A-4E25-AE3C-E3DD9DF42C57}">
+        <File Id="fil0492FB0341F502919B9332B48B09F254" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_fafs.BIN" />
+      </Component>
+      <Component Id="cmp830C9553698695AB11ACC1C333FAEF6D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A263ECC6-8D1D-4A23-9C35-2D332DFBE473}">
+        <File Id="fil4E9406F9A5F94D28A2E22CD3C091AF0D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_FS.BIN" />
+      </Component>
+      <Component Id="cmp25C118FE8E9D6A5FA9349E06DDEC0229" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E1322E46-A8B1-4AE3-B40E-D5C3E2C0B5ED}">
+        <File Id="fil28E822D7ADA52DCD7F4D690795D2DE55" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_LA.BIN" />
+      </Component>
+      <Component Id="cmp3260E93D8922FEE8E265F4D8B498490F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4F2E3FA4-3CF7-4388-91DB-CB52CD0DDAE6}">
+        <File Id="fil21322028F02A3751DEC8EB402A59393A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_lnda.BIN" />
+      </Component>
+      <Component Id="cmpA5EB4F2938796A717FD481FF912CDEB7" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3B87A461-4B88-4BE9-AD82-563E3284C2D1}">
+        <File Id="fil67AADAC3A9111FBD9CD344141DE0CFFE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_lnds.BIN" />
+      </Component>
+      <Component Id="cmpE94389E1CA199B83B97BAC604D496E02" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5BE60D9B-39B3-40EF-A05D-64BC9FF20C91}">
+        <File Id="fil51641DFBB20B0A7BFA7D9DFA67384C51" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_LS.BIN" />
+      </Component>
+      <Component Id="cmpA5E07C952299F05C8D399AD8DEE2FE16" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3772A3F7-A526-44AE-937F-9FE1E0695D4F}">
+        <File Id="fil01B19AB23C70E83C040332A14BBFFF3A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_NA.BIN" />
+      </Component>
+      <Component Id="cmp866DFEA540B7336A9C9D897A80D0816D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{6A3A9AE6-9C13-43C7-B0AA-9E61BAF8463D}">
+        <File Id="filC3C79AD26922B832E2BBC6932FF6289C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_NS.BIN" />
+      </Component>
+      <Component Id="cmpA0BA69FD16FCF78B5D5DF6A126335F5F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F7CDB9AD-66CF-4322-9D28-18A619BCEAE3}">
+        <File Id="filEECE700478E154549B429A1F1718E72A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_ntla.BIN" />
+      </Component>
+      <Component Id="cmp891155A847169B3763A3CB62BBB697A3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D53EFCE3-521F-4BA0-B6E2-5BA35ED93704}">
+        <File Id="fil8ADC264824A5167FD7BC79E46078834F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_ntls.BIN" />
+      </Component>
+      <Component Id="cmp62BBA566A091149B1F52A763B8B3BDFC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{78111578-2AF1-4A6D-9F67-C485534EA62F}">
+        <File Id="fil1DCDAEC4ED3E6A6BBD934270DD1CCE10" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_PA.BIN" />
+      </Component>
+      <Component Id="cmp0D3778841DB2B261B0B2B23B0647FE9C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DB5561B3-CF22-485E-BA12-952E3C732F8A}">
+        <File Id="fil353791427FC6445E41D8939B180D9255" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_PS.BIN" />
+      </Component>
+      <Component Id="cmpE5838EA7517A0EC8BA33E8F055FAF14F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9295707A-626C-4401-A4A7-B5B9F049FA25}">
+        <File Id="fil2B4B7467B306E8829F179E81CD50F3CC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_ptra.BIN" />
+      </Component>
+      <Component Id="cmp007D30C26E1CA1B41E689FE5AC1F2553" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E504B201-8BF6-4435-9600-919BE3413045}">
+        <File Id="fil78B5CBC79852CF94061E2BD952B5597E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp84BDE008263FB63ED7E2FC58EC5179A8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{01F61140-F9DB-4DDB-97C3-EBB3DF9B7337}">
+        <File Id="fil0DA0E655991CA7C3CA135899F7EA680D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_SA.BIN" />
+      </Component>
+      <Component Id="cmp6C325CB0F7ADAEFEAAB351779F08AA03" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B5BC7AC1-3E2E-49C0-9B73-46E892BD05EB}">
+        <File Id="fil2D3E687CDD6354F6AF6C46D967B69F0C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_SS.BIN" />
+      </Component>
+      <Component Id="cmpE5EE22AA75DE719F26B9B74679AEC9BD" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9DECAB58-6EB0-4A7B-A825-1788DE023690}">
+        <File Id="fil069A5449EF208B6C5589B753CB021F7E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_stda.BIN" />
+      </Component>
+      <Component Id="cmp373BE1E687A9ADA45F525D8B7A65A345" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5A2D2D28-9F13-49BA-A611-F0EF43A41255}">
+        <File Id="filD29C2AAADE29E7A51DBCEEBD411C8AAB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6241_stds.BIN" />
+      </Component>
+      <Component Id="cmp8C5CB1164141088FFBC3F50F72F1430D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BE7235B5-51B4-4D7C-BDE7-E7DB1D80F52C}">
+        <File Id="fil3D1CDBE7677BB22B345BFEBCCB24AD61" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_FA.BIN" />
+      </Component>
+      <Component Id="cmp94CBA7B12A229D3BB7AAB6B5D8F61B7D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{61F02E27-519C-4C0D-BC5F-E0AF7451C093}">
+        <File Id="fil2C187DA3353E10BE1F0CB9F09439C619" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_fafa.BIN" />
+      </Component>
+      <Component Id="cmp0B002B05E8964F658EA287376A77250C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{75A38B2E-3CC2-47E0-9AC7-CB34CAA94A65}">
+        <File Id="filD695FE2A82244F007713BEBF076DEDAC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_fafs.BIN" />
+      </Component>
+      <Component Id="cmp5280C3A5B2A745DF4CDAD00770738C06" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9756F20F-0260-4C4F-809C-9F49CA2F554D}">
+        <File Id="filE8AACCE01D66B8C9B7D971AD8DFB42D9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_FS.BIN" />
+      </Component>
+      <Component Id="cmpFBD5E4A8A4684C7BD421F8317F1BAB27" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BFA13E0B-3F1F-4B20-BDA2-7CCFE8FC3CCD}">
+        <File Id="fil41A2F1EEC80681F330AA61ACDEBB73CE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_LA.BIN" />
+      </Component>
+      <Component Id="cmpBF847DA70DA254062FB9BD73165AF522" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{05305A15-DC27-4041-B56F-B0401D87111C}">
+        <File Id="fil485DB6BFF6FA8AD5F15717BC84BA9695" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_lnda.BIN" />
+      </Component>
+      <Component Id="cmp90F9DC5963174C04D71AEC04BAF3F5A2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2FA3B793-E1A0-41DE-9464-B35C13C0AFB0}">
+        <File Id="fil6869256BAEA9B87A84BDE36F32573179" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_lnds.BIN" />
+      </Component>
+      <Component Id="cmp641EDBC77883C5F8946444AFDFAE2D6F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{61FD453A-2DA8-4657-87BC-579754945378}">
+        <File Id="fil0173944995620D84F8CD099766DF4389" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_LS.BIN" />
+      </Component>
+      <Component Id="cmpB7D5618237B8E9CA09B09716E1508C4F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FAC78C5A-8DD7-4263-877C-BF76C98B08B0}">
+        <File Id="filB50DE03DB82FEA53B5FA3C7176EC391B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_NA.BIN" />
+      </Component>
+      <Component Id="cmp62A9354D3F8843F32E21BEB32C4BA6EB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9CD3F6CA-930B-4AB1-A6D1-40A825B0CFD3}">
+        <File Id="fil35C401D362551AAA3E71F13B58169F3F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_NS.BIN" />
+      </Component>
+      <Component Id="cmp5DCA97D04B3947F9C8C28A96022DFEEE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2F7A9E30-2770-4839-B712-75ECBA34CDA8}">
+        <File Id="filCB88EA94661A4F2483A7600C3BD426A0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_ntla.BIN" />
+      </Component>
+      <Component Id="cmpD901B272AE4FE0C6F0F7FAD39132B6E1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3E8FD053-8667-47A2-8F13-CA47B1A00892}">
+        <File Id="filF2C248470907D3BB25D47A93A084F5BD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_ntls.BIN" />
+      </Component>
+      <Component Id="cmp58DC44F446526EADFEB5FFC3C09256E8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DE318474-3AEC-4452-8203-106D6B1482F5}">
+        <File Id="fil117D4F00726056739E37F558800D806D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_PA.BIN" />
+      </Component>
+      <Component Id="cmp5E9E19140F2AC8364FE8E35A9BE05A3B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{50521722-315B-473F-99D2-6EE3E98F2CFB}">
+        <File Id="fil52278D341CE652D9DADFFB0CBA300C92" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_PS.BIN" />
+      </Component>
+      <Component Id="cmp466F6D297D2332C259BD0B663E3A200A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B3EF3994-17B6-4BE4-84F2-6836F859D02C}">
+        <File Id="fil44E9CC663B07A82FF6D95627CCD5F46B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_ptra.BIN" />
+      </Component>
+      <Component Id="cmp49B9E0436B663B7A3960BE61BFFCDFFC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D2052873-23F9-4CA2-9BC1-96B6433C204D}">
+        <File Id="filE0C16931D46F43075EEB559DE2116BCF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp33838730E95906CBE29BD5956E65FBC5" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E10D59DB-3BE6-450D-B474-BBAEF5526740}">
+        <File Id="fil760D59D1813A1188783208A42B0ACDA0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_SA.BIN" />
+      </Component>
+      <Component Id="cmpFF3FE099611C14C1983F89B8D4830231" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DF175046-EC70-4D02-A929-B1BAB54B970A}">
+        <File Id="filD1CBD6AB8117218B2EFC3870CF8C3B5A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_SS.BIN" />
+      </Component>
+      <Component Id="cmp2C473060CE915E92431F7D5232B3CEA2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B5067AEB-A02A-4467-9322-3FABC73EE207}">
+        <File Id="filCC6B6FB6AABFB9772FB169ED06745241" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_stda.BIN" />
+      </Component>
+      <Component Id="cmp9135B931A32D7BAF504C5464C468246A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D2B917E7-445E-4AC8-A73C-0E1249325D51}">
+        <File Id="filF36995071ABFABB6F1AD30F821E80CDE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6251_stds.BIN" />
+      </Component>
+      <Component Id="cmp1845BCAB112F58605DD0EA725522CCB9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1599EB5D-26B9-41D1-AB60-C74463215012}">
+        <File Id="filA01D217268DF182ABA0B44A591CAA2BF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_FA.BIN" />
+      </Component>
+      <Component Id="cmp0A211C9FA4B5634BE5A3485CBB379DAA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D2CEBDA1-6BA4-4C4F-BDE9-6B59FC3EBFBB}">
+        <File Id="fil310E3E9BF51D94F286902FCEFA14A6C6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_fafa.BIN" />
+      </Component>
+      <Component Id="cmpA2138F04037DF256C5C54D3A55648269" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4CCAEB3D-F82E-4045-A561-70466CCF3C87}">
+        <File Id="fil5FBE2F05678AF7D634D980B5A4795D76" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_fafs.BIN" />
+      </Component>
+      <Component Id="cmpC8DCDEE00F996EF8D8FB1B61AAC3FD32" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1E96111F-D0AF-4DE8-BE9D-E28C68F8F66B}">
+        <File Id="filCDC3404A3D22596DB694229828FBC7DB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_FS.BIN" />
+      </Component>
+      <Component Id="cmp83322882199D51B8040C81C019C61A6A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AC3ADC8A-3A51-47F0-BEBC-1068D23D35E5}">
+        <File Id="fil2870740461F0F14835EB853C6E43B166" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_LA.BIN" />
+      </Component>
+      <Component Id="cmp91E5790BA1916E3BF3D8A4A1050447F3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{39292D66-20EE-4382-8D31-9F6141BCDF54}">
+        <File Id="filF73F2AB02272A23C0FF9795F34869ED5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_lnda.BIN" />
+      </Component>
+      <Component Id="cmpBDAF314F999BE166C19D8AD615AC3CD4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{03F54824-9C5D-46D9-8A6B-67F0496131A3}">
+        <File Id="filDDDC93FB29F23C3EC27C2B5B206A0CC9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_lnds.BIN" />
+      </Component>
+      <Component Id="cmpFC25F9A6904F4BD3B088FB801C3DB353" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{216EACC9-D159-4DD7-AB29-51F7163261AA}">
+        <File Id="fil5E959070A6AABF99FCF7D1FCA21C6E98" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_LS.BIN" />
+      </Component>
+      <Component Id="cmpDCD3B07C59D39037BEF74840CD3E8E26" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4B31F6EC-1FF7-4823-BE1D-EFAF20FC584B}">
+        <File Id="filA9959E0B9B7357839FA78C23B10B3A7F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_NA.BIN" />
+      </Component>
+      <Component Id="cmp45B5F2CB8A8D21EDB9B5F505EE88A2EB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C57D941F-E719-4095-B7A6-607D4A59DC3B}">
+        <File Id="filFFFF5990B19022A0E7FB2D78ADBEB352" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_NS.BIN" />
+      </Component>
+      <Component Id="cmpD1D2B99E818D5E6E189FC5CA792ABC57" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{22BCD97F-4394-46E3-BD47-CDF686286F56}">
+        <File Id="fil3F2CCC0849D5314BD42069FA01DFEEDA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_ntla.BIN" />
+      </Component>
+      <Component Id="cmp7E32D55BFB7C2DB0FA168DD5ECF6B8EA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2240A416-1AD8-49DD-8681-54BC92550539}">
+        <File Id="fil031CE9310279AE66BCFC77C865510231" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_ntls.BIN" />
+      </Component>
+      <Component Id="cmpEF16E8033AEF12629FB247721DC9F32F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BC021362-3C34-4CE5-867D-2FF21D922A3E}">
+        <File Id="filAF2775FC98D91A023D1C6A0EC6353884" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_PA.BIN" />
+      </Component>
+      <Component Id="cmp9DF672E7B20F0BABC71AABF87A046ADB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CB17689F-12FE-46D0-BA4A-107B8E8F623B}">
+        <File Id="filDD7E4F842068412E9711FFCBD2AF14F2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_PS.BIN" />
+      </Component>
+      <Component Id="cmp06F6B40B320C4694430822C120868F9B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2084798A-61FF-4BC1-81CF-450FFE4B3666}">
+        <File Id="fil4308AC43867473F6BEF6D29E09AB20BB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_ptra.BIN" />
+      </Component>
+      <Component Id="cmpD04664ECF301A2123E00A4F17A854FAB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A712B8CF-E674-490A-9F24-0F277B8D9475}">
+        <File Id="filD35644A88D9399F9A102464C332D7B22" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp113E2BA06549C7ED06399BD0314D4456" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C1F66C37-B78D-4753-9342-15E3912CAF71}">
+        <File Id="fil638673AB13934E4C18F2FACFAEF846A0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_SA.BIN" />
+      </Component>
+      <Component Id="cmp93A758E8D06BEDB285A83E52382520CF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DD62DBDA-73EC-43F0-984B-E0F7E2180D17}">
+        <File Id="fil4B4F71A0C25FC150D88E7CE66315BD1B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_SS.BIN" />
+      </Component>
+      <Component Id="cmp41148C43EAF142BABBCDAB454596A469" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2D1DB34A-76E3-46FF-9F94-4AF8E073A42B}">
+        <File Id="filA75BEBAADC7B3E1291107647F975EC2D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_stda.BIN" />
+      </Component>
+      <Component Id="cmp2FBB5FD1645CBAF2B2F5BE4E6C5144D5" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{672AA6A3-8D0B-4AFD-9DF3-EA176894A798}">
+        <File Id="fil35804146F7E698732B2A45C899F10B94" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6261_stds.BIN" />
+      </Component>
+      <Component Id="cmpF126DAA8DC26C96D25476F75F917B3F3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A63BC56A-3091-4B73-A125-C3056D3DDBF2}">
+        <File Id="filA4E71DE160A313F07CD230ABC8C4CD53" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_FA.BIN" />
+      </Component>
+      <Component Id="cmp66B9743B16F8C325FC16BEF4302B804B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F817BDE0-BF5C-430D-A85B-04B41D9BF8AF}">
+        <File Id="fil2B307A8A6D27622CACAB5B0EF5ADFE4F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_fafa.BIN" />
+      </Component>
+      <Component Id="cmp944AF4EA96D8EC40CC4B8B8EB94DAF84" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{67083297-2F1C-4E97-81FA-F61EBD6F208D}">
+        <File Id="fil164535C7405E0AB0A0A459F71E363302" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_fafs.BIN" />
+      </Component>
+      <Component Id="cmp7D46E95CD2EF4473A7ED222BD0606D49" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3E304DDF-CB1C-4261-945C-5A02875C8475}">
+        <File Id="fil0BB0B50D641E4C4F9EF288360117BDE4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_FS.BIN" />
+      </Component>
+      <Component Id="cmp104CD843854FB8870681EB19D91C8834" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B24DFC0B-8A15-4558-B6CB-CCD7068B8BC4}">
+        <File Id="fil63C208D265347B767DA8F4A3085B3267" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_LA.BIN" />
+      </Component>
+      <Component Id="cmpA567F2564BCF113CE986740609E3B1ED" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A6D19E6F-78AE-4F94-B6BC-D5F43394CF68}">
+        <File Id="filF81B6F0A259C5EF108A0277785518CE9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_lnda.BIN" />
+      </Component>
+      <Component Id="cmp2FC8ACD860B22857C99DDDD9BF87F1EB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{480F26DE-4E33-43DA-AB9F-743A3F7A21B0}">
+        <File Id="fil717093019A02C52DB553D3932DE6195C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_lnds.BIN" />
+      </Component>
+      <Component Id="cmp474E76B4BC702C4A60D30A192B37F40C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7BA83D34-27F7-40A0-BE7C-104B60AFAC65}">
+        <File Id="filC35EE5C2EDE70F1D1F99A014F23CE9D1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_LS.BIN" />
+      </Component>
+      <Component Id="cmpE52349B95962D272B80FE84C74724887" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0489A491-D1A1-442C-B970-3073CD227337}">
+        <File Id="fil422033BEE1FC82DC16279616DBDBE55C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_NA.BIN" />
+      </Component>
+      <Component Id="cmp957FDA3D701DFA25EC0221CB060A85B4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{746BAD90-080E-4B19-86AA-B8B494EBC60F}">
+        <File Id="fil1310E78FD9D64FFDE3531286C5C89448" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_NS.BIN" />
+      </Component>
+      <Component Id="cmpC2CBB642AA4B0EA90750CBE10A9BC919" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A6319B65-89CD-48CC-B4DC-7639C323B4D0}">
+        <File Id="fil0BE35D7C5B7C8DBAB850178F803864BF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_ntla.BIN" />
+      </Component>
+      <Component Id="cmpC617AD9C1D7CBC6D7DEA0EA186AF21B1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F085F388-0D9D-4838-B459-26DBC1074021}">
+        <File Id="filE512E6B88CFB604BA15AAF7D1D74977F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_ntls.BIN" />
+      </Component>
+      <Component Id="cmpB77415C997A2EF3CEFAAEC5C057905EF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A7E2D7DF-6FF6-460D-8354-B51466ECF477}">
+        <File Id="fil1AD66242988471F852F1F97F945291C3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_PA.BIN" />
+      </Component>
+      <Component Id="cmpE7BF321B62A3D9A9FEF7F3758CD704AB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{51A40AEF-00BB-422E-969A-924C09C920A5}">
+        <File Id="filE5FC1770081DB49DDA6B08051B62DF26" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_PS.BIN" />
+      </Component>
+      <Component Id="cmp3FACCDB1C67698D3B0FA3D63CCCE34DE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DDFECE9A-F30A-4355-9D84-3B99E1900BC7}">
+        <File Id="fil7772697D15F3AACF04E27C6AD3A593B9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_ptra.BIN" />
+      </Component>
+      <Component Id="cmp1219EADAFAB092ADDE0F95441992660F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D5D15429-A970-439B-874C-FA8A42F5B49E}">
+        <File Id="fil76D2A1DF13265B441164D5902B5D765D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp639F61BB8C83DF5F57D747E3A4DD4CBB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{10568AA0-2525-460C-AF8E-38DCCAD00AD3}">
+        <File Id="fil008132B12681C94EDD37BA8E9C30CC6D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_SA.BIN" />
+      </Component>
+      <Component Id="cmp51E22661950F81EE7E1DE81B7D49ED0A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A0BBD9A6-56C7-4C4C-9011-EFD880D02F32}">
+        <File Id="filF7D90F310B8EB90DB8CB17214C3B2400" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_SS.BIN" />
+      </Component>
+      <Component Id="cmp99165870D1B254BB3E29D2DC07CC2BE2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C80BEE2B-D933-4259-9A2A-1709ED705D1A}">
+        <File Id="fil170BC617792575B7141BE97D8FFAE07D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_stda.BIN" />
+      </Component>
+      <Component Id="cmpC2EEFD7EA4C00CB85110359C7A5A84DB" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{55DB6603-A77E-4E3C-86F1-3BC47DD184B0}">
+        <File Id="fil9B32657F5436927B5F28C1BB58500C15" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6271_stds.BIN" />
+      </Component>
+      <Component Id="cmp687B8DB43FD05BD6D6C3EC7FBE127D7B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{467E3DDC-B630-49BB-9E28-B5080DB275ED}">
+        <File Id="fil189C554C4A57E6C17DDF9DC5D57DDB5B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_FA.BIN" />
+      </Component>
+      <Component Id="cmp8D2A270C2EC41F0ED676E908122AA3F6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{991DD53F-A633-4D49-A9E7-9EB63810A23E}">
+        <File Id="filDBD370E040B462E7E757ECDC6C8516B7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_fafa.BIN" />
+      </Component>
+      <Component Id="cmpE39086C0A03C37C804CE31C80CCAC9D0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{8193288B-1940-4E56-94AB-0A9149096C2B}">
+        <File Id="fil52C0F2217D6BC493D6F68D22D26355BC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_fafs.BIN" />
+      </Component>
+      <Component Id="cmp3CC12262F173A1D41DD9E276CF9DBF62" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{501C775D-A99D-451F-8AA1-F4C8E6D28E99}">
+        <File Id="fil144DB219EBB2CEA4E60307C0777D339B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_FS.BIN" />
+      </Component>
+      <Component Id="cmpD5E9AF39C2F8E7343FC77427A23B8789" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9406628B-D6D3-417F-81D7-D9FC44121DC5}">
+        <File Id="fil4AF19B17FF84BB1FB9D67958C4FD422F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_LA.BIN" />
+      </Component>
+      <Component Id="cmp437A035243845432A914FB2D2B5B86C8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4292B00C-2FE6-427E-B158-360EF4674CC2}">
+        <File Id="fil7BB26CFEB6BEA1DA606B68F3454224BA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_lnda.BIN" />
+      </Component>
+      <Component Id="cmp16FE79218D33C6F5AE3165DA266F184C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{09C33A5C-DC8A-4859-8E90-3F503EE11827}">
+        <File Id="fil7F2223C7F0E9000B873301EF8991FA84" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_lnds.BIN" />
+      </Component>
+      <Component Id="cmp0062354439FF6611E176833BB28C501F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{EECD303A-9B97-42E3-B19C-67AB2FB151F8}">
+        <File Id="fil1A73D4B2A40BDC1F7F673DA5498B8634" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_LS.BIN" />
+      </Component>
+      <Component Id="cmp1BF7B62303C44304FE4154130B1B53E9" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{697E0469-63ED-465D-807B-A2FAE07F26D7}">
+        <File Id="fil875E5D96757E22BAF72AAD863DD3021D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_NA.BIN" />
+      </Component>
+      <Component Id="cmp7CE1AA0D4C761BA1D8EB894EC002CE74" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4F59F193-13C4-43B3-BFEF-7CE06066F43D}">
+        <File Id="fil245E0A24F37DFC57C735BBF3E33BC2E0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_NS.BIN" />
+      </Component>
+      <Component Id="cmp17E8ABCEA63F01A96EDAC053AA9E294F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0334FD9E-0B5C-4EB5-BF90-FE43000D2A1B}">
+        <File Id="fil731B127AD7C495633D40018AA33242E7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_ntla.BIN" />
+      </Component>
+      <Component Id="cmpF5FBEBD21744FFA032C3C40AFA4D6ECA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2DA8846F-0C81-4193-939A-340FDAA92DA9}">
+        <File Id="fil6B73ED79FD0BCC68BD2E03FA151CC598" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_ntls.BIN" />
+      </Component>
+      <Component Id="cmp4AEA2B1D24FC893564AC46213506C0C1" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DFF3782C-72D5-4F13-BFE6-AE337C8356A5}">
+        <File Id="fil85CF5078861968FFFBEEA661B226A10C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_PA.BIN" />
+      </Component>
+      <Component Id="cmpC7073E7A2816C1F60A30F0FDF36B798F" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{916A7583-66F8-44B8-9FB7-A05124DE9EEB}">
+        <File Id="filDEBC82F229F5AFC2FE18BF6CF2F307ED" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_PS.BIN" />
+      </Component>
+      <Component Id="cmp4BD0D47D07C95841F81260E74C15FB08" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{3AA6B41A-29FD-42BD-8EA3-FCAA1269414F}">
+        <File Id="filD181D470846034331F11873B57DEF83D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_ptra.BIN" />
+      </Component>
+      <Component Id="cmp803DDC4DF44846B70213BC8637DBD542" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{440E37D8-044B-480A-A07B-F75AB8E993A9}">
+        <File Id="filD88D181642CDB8F6F95A64762980DD86" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp1FDCF57FB68E1C2B498238FE3F3FB7EF" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{8A8615C3-10C5-4145-8E6A-F3C4AED1A60F}">
+        <File Id="filBC72D89FCC97A86F92CC2389DE73C067" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_SA.BIN" />
+      </Component>
+      <Component Id="cmpB4FC9823CF74CD7ED3C98800057F8138" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{D8E60711-3F29-443B-A050-1962B89C8CA0}">
+        <File Id="fil41C86D1701E7C75617D79F3ECB1A6DC0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_SS.BIN" />
+      </Component>
+      <Component Id="cmpC75FE95D671C92D76DB5DE0E5214DC84" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B8697BBA-A5E2-4AD0-953B-402D1C59B4BF}">
+        <File Id="filBF47C840F7CC361E8927B3ECF5C458AC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_stda.BIN" />
+      </Component>
+      <Component Id="cmp850F11752FD342464CEB27BF3CEBF5A6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9D88922C-3463-46DD-BD47-E674D76F9E18}">
+        <File Id="fil3D2AE7817AE85461AA767DDF11BC1C61" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6281_stds.BIN" />
+      </Component>
+      <Component Id="cmp2148E4AA47C540ABE02EE3A477376CDD" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{1CD7354E-9BB0-4A0C-9750-2A4F434FD741}">
+        <File Id="fil8DCF453B01D68827447A0C25040127F6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_FA.BIN" />
+      </Component>
+      <Component Id="cmpCCE1B4C0DB7E0C5D9DBF5A038F87400C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{312D7213-0437-4BF0-8C05-C1EBC548ED16}">
+        <File Id="fil54A45D12F73A55A8D3609E4F932FF449" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_fafa.BIN" />
+      </Component>
+      <Component Id="cmpF2D98017F1E44734AA15256F43BBF6BC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{0C2AD4B9-CBA3-4D71-917C-2896A62AAEA2}">
+        <File Id="fil4CB63D57D62F2F6C1D66D321E147FFFD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_fafs.BIN" />
+      </Component>
+      <Component Id="cmpAA1FCCE0903B5D2FAB153959AE607F79" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FB1805DD-89FA-40FF-BCDE-8058CBB22A60}">
+        <File Id="fil66D90083EF2DF073FFC34866BF5B3B4A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_FS.BIN" />
+      </Component>
+      <Component Id="cmpE2FFE8C6DF2EEFD735C1ADB6B42BE271" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{356DCFE0-EFB2-4298-9F76-1D2456FFD4B6}">
+        <File Id="fil4B3DD9516356FA1B3ED30641739092B1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_LA.BIN" />
+      </Component>
+      <Component Id="cmpAE8A287F9909B3166E7C73A645E71457" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A095E173-7903-48FC-85F6-4C8934268BB9}">
+        <File Id="fil2F6C548B805EBE50047B297CD1BABDFD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_lnda.BIN" />
+      </Component>
+      <Component Id="cmp5076DE666A0B6082F6B5C151A97B5E85" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{326E72CC-B5C4-422D-93A2-778FFD9505D5}">
+        <File Id="fil315C2909A0F2834D1F48452E26B8D9C2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_lnds.BIN" />
+      </Component>
+      <Component Id="cmp9E766F985578EA21A74CD93263994F02" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B78BFB8B-B171-46F5-B3B8-C33479A70C84}">
+        <File Id="filC666EADD60287213F104297E3A351116" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_LS.BIN" />
+      </Component>
+      <Component Id="cmp366A81BD087268673CF49515D88A4481" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2FDC42C8-0C13-4C18-87F0-D71CF82CCC18}">
+        <File Id="fil73BEAC31553FDF78A49BE8CB5476E213" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_NA.BIN" />
+      </Component>
+      <Component Id="cmp3E704B832AF4C5670A29D5292A4FA8E3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5E97E45D-2B5C-4BD7-85B9-20C3A54848C6}">
+        <File Id="fil4976D59F6F681371AE2BD518DCF45C18" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_NS.BIN" />
+      </Component>
+      <Component Id="cmp2B697A27EA3FA2D282901285DA007473" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{23D3699B-4AA0-4746-87C0-D03A656B485D}">
+        <File Id="fil806E127AF675B6B37DCDAEFCAC76D2F3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_ntla.BIN" />
+      </Component>
+      <Component Id="cmp14277975516299E591A76E796605714A" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BC161528-AE04-46B5-A6AA-D53BDE16CD6E}">
+        <File Id="filF2F0C679564414B1785B26214019DCC0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_ntls.BIN" />
+      </Component>
+      <Component Id="cmp21D413D000B5CD8EFE3D6ACE86186519" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A74A5641-E08F-4E89-B99E-95411A3FEFCF}">
+        <File Id="fil443AABD0FC14EFD960A827D54E8184D8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_PA.BIN" />
+      </Component>
+      <Component Id="cmpB98BC38C6A43601EC9D41162109D6770" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B1AEC164-982B-4749-99F5-A39A77070D7D}">
+        <File Id="fil8818AC9FAD10CC6C5127F3588278FB84" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_PS.BIN" />
+      </Component>
+      <Component Id="cmpADBE6F48AB3E3B6E110BD73E62973F37" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2DAC4F5D-F436-4CE8-AFEF-05A313715A8D}">
+        <File Id="fil1891795ADDF806BFA5E4649E17FB2810" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_ptra.BIN" />
+      </Component>
+      <Component Id="cmp8352903B2C3CBB47C83D63EE7DC6D6FC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{DC6AF6F8-1C8C-48DB-A64A-3347A7553B2D}">
+        <File Id="fil20C4017AA39ED19ED52DF4DE04F08003" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_ptrs.BIN" />
+      </Component>
+      <Component Id="cmpD097B2E5ECDAC5C298A9E872EC095784" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{9B837B66-7CD6-47E8-BB05-7A530B50D378}">
+        <File Id="filC6F10A63CC98D28BF50E4A080CF3E685" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_SA.BIN" />
+      </Component>
+      <Component Id="cmpF87572222B294F1085609161ED201012" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5F6E1919-C3BF-43FE-8EFD-D9ED88FDAFA7}">
+        <File Id="fil611AF24CA98B6E46D9946B95DB8E7468" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_SS.BIN" />
+      </Component>
+      <Component Id="cmp27A2A7822B316860359E2BFF4FBF0288" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FE7AEA1B-6C66-4DA9-A3FB-60DFD73C961A}">
+        <File Id="fil00C83BF6701E95180C94E14A8239E965" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_stda.BIN" />
+      </Component>
+      <Component Id="cmpB8C08178277BFCDA14DAD7F4E26B98EC" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A28C2207-EBF9-4170-A881-04EBC87A35E8}">
+        <File Id="fil0ECA55352DFED90DB5A12121830731DD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6291_stds.BIN" />
+      </Component>
+      <Component Id="cmpFF3F08D48BFCD5E58E972F3F948076BA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{68632A61-7A85-435D-8FA3-6259FFC1E925}">
+        <File Id="fil45F7D4751EE1C933D81A56711F550A3E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_FA.BIN" />
+      </Component>
+      <Component Id="cmp6D2F5AEFE0930198B7A7ACD5167B76D6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{529FEF9C-FDEA-4624-A923-530B4F05C11F}">
+        <File Id="fil38945625241CDAA116A305A124721DB9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_fafa.BIN" />
+      </Component>
+      <Component Id="cmp2BC5F13688BA41D4EF69D177A8288A3C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{37C4301C-186F-48F2-8BFC-E2F5CC6DD75C}">
+        <File Id="filE6D44D0478A537B34B7C8DF8E15061E5" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_fafs.BIN" />
+      </Component>
+      <Component Id="cmp76643BD7CC8E5C64C7DFD678ACC5A184" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{90C13B1D-C2EA-404F-8584-58FA7D59F0A1}">
+        <File Id="fil1BA9BB145F033DD94B85F3150ECA87B3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_FS.BIN" />
+      </Component>
+      <Component Id="cmp644F3DBB151984B9E2169B36D3EEE6FA" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{BDE28DAF-4B6C-4204-8078-554B5FD47473}">
+        <File Id="filD85B0FB54ECE31802CDEE95AF8478187" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_LA.BIN" />
+      </Component>
+      <Component Id="cmpC9BCEC2AED31A68C971F8F6DE1E2F966" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{72382546-76DE-43A2-80DA-E38A38BEBD78}">
+        <File Id="filCE0A4CE2943C035EB0C932465A660855" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_lnda.BIN" />
+      </Component>
+      <Component Id="cmp78EB303B7EE8A2C991B73990D246290D" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{AEAA3D23-F1E7-4A73-B92C-596F221A29FF}">
+        <File Id="fil6E8BFE7B40C6F5C1DB704088B5C4CCEC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_lnds.BIN" />
+      </Component>
+      <Component Id="cmp9A73C93383BA8C855A04A0C7B049AA95" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{F3698E47-2D7A-44B2-A447-8B18F8ACE672}">
+        <File Id="filB541D09960D7B623ABC79619FEDF108D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_LS.BIN" />
+      </Component>
+      <Component Id="cmpFFA3CDCEE01D8A52DD573D1915E7D445" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CC07EE37-1DCC-453A-B462-57998EE16EBB}">
+        <File Id="fil2912FDDB11BC1CBF4E64E2A6828D4742" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_NA.BIN" />
+      </Component>
+      <Component Id="cmp5665272E61E445DEC29FC0F62FD4DF16" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CF172833-44C8-464C-9D40-EF1BE487BEC5}">
+        <File Id="fil580D38A30C44048A91DE79E966BD4182" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_NS.BIN" />
+      </Component>
+      <Component Id="cmp04D31498560990D18E2BC6E3549454D8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4338CC4E-373B-4244-A511-67029808111B}">
+        <File Id="fil1F835E9E0629AA824F1CE4B6C45B4247" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_ntla.BIN" />
+      </Component>
+      <Component Id="cmpBB4E5718C6CFF2C8DF41B10114FDDF3E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{2AB6AB9D-DA23-466B-BA43-EDB92CDC91F9}">
+        <File Id="filB63E5E961E261D1DF39EF4F41C61C8F4" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_ntls.BIN" />
+      </Component>
+      <Component Id="cmp8AD6FFBED7D70513D55DA780033FAEAD" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{CFB72A19-7793-4466-90F7-FFA4B872CBD3}">
+        <File Id="filD184FB09BF101B8E7E0CE4E47C2F3A93" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_PA.BIN" />
+      </Component>
+      <Component Id="cmpC4D6032A4D3E1260B2B3B137582CE0F8" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{6E4B43E7-413A-4C65-945A-468EE889BCAB}">
+        <File Id="fil72FFBCBC35FDBA8BEAB44B9FB5A77F15" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_PS.BIN" />
+      </Component>
+      <Component Id="cmp722FC001250FAAC384EE3EDE622BADA4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{C2E0A103-05AD-44A6-81F9-B3C280781289}">
+        <File Id="filD30590AB0C623848D3B68AA220131A10" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_ptra.BIN" />
+      </Component>
+      <Component Id="cmp79EB9CD4CD26E43761784329DF3FC3E5" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{5AC63242-A350-405D-9C29-67793BF761E2}">
+        <File Id="fil79B5B170FBFCBBA35929A56DEDB21AD9" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_ptrs.BIN" />
+      </Component>
+      <Component Id="cmp37808C92BE1FFBD44F7E011B89F0BE1E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7D05A156-9DF6-434B-B4ED-1535DC2916F1}">
+        <File Id="fil6307475B5D1D62BD810291928204C833" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_SA.BIN" />
+      </Component>
+      <Component Id="cmp6A265F8D02976440E364252E6C94E1C6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{59FB3ADE-E7EE-4629-8049-7A4BEC0D0DFE}">
+        <File Id="filB77F3980A5EFF8220C1569347EF53371" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_SS.BIN" />
+      </Component>
+      <Component Id="cmp6B728B7B88CAA50A8B4AD24B6A3639F6" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{99022E73-F7D8-4EBD-AC89-00160053B931}">
+        <File Id="filEB1EDD5608EB0312ADADA5EDC59A46F1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_stda.BIN" />
+      </Component>
+      <Component Id="cmpE20720D92D77546465CF2533B71710A2" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{752ED7AA-12A4-486E-B4BA-DCDB8CACB4AE}">
+        <File Id="fil99549328B038FED43DC0AAC5A29BA57C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\6301_stds.BIN" />
+      </Component>
+      <Component Id="cmp204B731BE3AD3506906F470E952F4470" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{38EA1F15-4C2C-4145-9E11-01C6DFC1F692}">
+        <File Id="fil19EDD42621E170DCA88504D9245A9FFB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\AdobeRGB.icc" />
+      </Component>
+      <Component Id="cmp5FCDDA65208BA82E3A6D61C678B680B3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{6BB63AE8-19A7-4778-B980-41470623A4CA}">
+        <File Id="fil650B51DA9777B04E9EE761503D1F99DD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\AppleRGB.icc" />
+      </Component>
+      <Component Id="cmp489BEABF337490D55C1012719E16964B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{103233A6-7E05-4962-A17E-3F7690C5E6A3}">
+        <File Id="fil3EDBEB5917EC130DE54DDF9C1687B766" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\ColorMatchRGB.icc" />
+      </Component>
+      <Component Id="cmp3241FDB1BD889C47C268637E4AFD5C28" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{455B70E4-4BEB-4B86-AFD0-5C61BFB16AAC}">
+        <File Id="filBF9A8E749AE489A196CB61614FD5A8C6" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\FA.ICC" />
+      </Component>
+      <Component Id="cmp3B13A19C1114823EA0C7EC532B4271F4" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{40FB991B-E1E8-48E7-8A5A-CDF2E66639EC}">
+        <File Id="fil9C02D852A16946B66A8B5EF136C7DE6B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\FS.ICC" />
+      </Component>
+      <Component Id="cmp9FF84F3C1E59BEC3D60EA5BC0699748C" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{7483490A-5A6C-4D6E-87FF-EEB670AE681B}">
+        <File Id="filB57791AB39B722AD414C1D2A2C968FAB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\LA.ICC" />
+      </Component>
+      <Component Id="cmpD9D4C1850000835941A1FC9566B4A585" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{4F1B47BC-F4CC-4D43-AF83-231A1DF077EB}">
+        <File Id="filF14FD86B97CA4D807795F6EFE083E380" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\LS.ICC" />
+      </Component>
+      <Component Id="cmpAB178C3CDB479E22D1BD41D55FBEEB5E" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{8DA99BC9-B677-46C6-B9DD-EE0BDE818B26}">
+        <File Id="fil187104AA1A0E87461D5DE94CC71F3D4D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\NA.ICC" />
+      </Component>
+      <Component Id="cmp20BECB9CD80193142266F05B0DA5C8ED" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{354F4C8E-8492-48BA-ADA9-7C7BFD7A2D99}">
+        <File Id="fil0935C70ED28F1D580DC0C71246554EE8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\NS.ICC" />
+      </Component>
+      <Component Id="cmp9738901029B3E8F8172D3DDC3AB35645" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{A9775BA5-5054-42F7-85AA-04C618E179D5}">
+        <File Id="fil5377E9A18AD9AB8D73A9D3040DF0C6D0" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\PA.ICC" />
+      </Component>
+      <Component Id="cmp9CA95D9714149FCE6E56CA2DD7CE84C0" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B93D9EEB-5A52-42FE-8728-07DC22201F0F}">
+        <File Id="fil4918E4228332D769C579F6668A4D2927" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\PS.ICC" />
+      </Component>
+      <Component Id="cmpE0662BB2AE2E3DF99F683F1075B1DC66" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{FD5CA983-AACC-4EC0-90F8-2CD914B32A0D}">
+        <File Id="filD98A309BD30C161D059A2F9BF0E3B5B2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\SA.ICC" />
+      </Component>
+      <Component Id="cmpAA211DC64DC7A040268745499FDD04F3" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{E2DD6C46-1C2E-4CEE-B723-AF646F3A5A25}">
+        <File Id="fil13137CD998811F828D7B5CFF10CCA706" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\sRGB Color Space Profile.icm" />
+      </Component>
+      <Component Id="cmp403FF8B7E2123D0897D279164AA6F175" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{039D56D2-B869-490F-90AB-D6BCB40AB03A}">
+        <File Id="filE6BA10C5847AF9E1CD7064A4F349AEFE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\sRGB Profile.icc" />
+      </Component>
+      <Component Id="cmp83875457447E13DEA9848FE50BB8973B" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{B167C98E-4D24-4CC9-9E98-5E7800F65139}">
+        <File Id="filC4563A775EC403486C8018F085958B29" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\SS.ICC" />
+      </Component>
+      <Component Id="cmp0749DC73C7B1244BE5B458302AC2D8FE" Directory="dir48CD582E8C906415D8DEC3D3B1ECD40E" Guid="{173771AC-3AAE-46F0-A2C2-6ED520793941}">
+        <File Id="filBAC71397740B491087A9CC2B81B1A5FB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\icc\WideGamutRGB.icc" />
+      </Component>
+      <Component Id="cmpC1E6661A57075234C431220BDD62F665" Directory="dirC44FA0F45A796F65CA5777D90042F486" Guid="{3FECD97D-8DB5-4D75-8C61-5BB64C9A239D}">
+        <File Id="filD58A501B8BDCF9D30265DED4CFE91F52" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\da\strings.xml" />
+      </Component>
+      <Component Id="cmp3D7C4A25F032F0B58FC74F114E1CC243" Directory="dir355CF4CFB504613EE055EC094C26E1DA" Guid="{1FEA9B5B-03C8-421D-A428-38E8A4DA6C7E}">
+        <File Id="filC7F63611704646641707532F65A87CAD" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\de\strings.xml" />
+      </Component>
+      <Component Id="cmp3BDF7DBB8667EDE406EC34712D60CFAF" Directory="dirA21A6BBD9333F12011E855BC9BD6B441" Guid="{E0BB4CA9-6526-43A1-B7F9-83EA2B31EBEA}">
+        <File Id="fil952FDD6FD661140651D2A070CDA2032C" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\el-GR\strings.xml" />
+      </Component>
+      <Component Id="cmp3E77D3ECB9A3E608C73203555420DA3B" Directory="dir8407D3FB0785FB3DDEB5A53FC9A0D0F8" Guid="{D7CDE060-1401-4FB4-AD59-0A3FF9073D83}">
+        <File Id="filB9C97B566290721D734F6160511229C2" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\en-US\strings.xml" />
+      </Component>
+      <Component Id="cmpF6D5962273A03B6581A583A067897E7A" Directory="dir18C925AF160D8EF646F83BCD4C29A66C" Guid="{73A5B531-9B8D-4540-A5BE-DC01D7C5C72E}">
+        <File Id="filD5CB569CAAE5C789EFBDB2E5F56D8D51" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\fr\strings.xml" />
+      </Component>
+      <Component Id="cmpE2770DD893157E2CB709B5DC43F8894D" Directory="dir6E341268D57EE6990C2B07B8EBC4E149" Guid="{937C18B7-8239-418F-9426-F0A53B704272}">
+        <File Id="fil8CBC30F4D9FE387193A28B292869F614" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\ja\strings.xml" />
+      </Component>
+      <Component Id="cmp9804E321407ED221EC7C9FE08C1DDE41" Directory="dir3648DEFE00596F7BA66078A734775D90" Guid="{6FD913F2-D18D-4B7A-8DA9-0DC094FC5C12}">
+        <File Id="filCBF3B77837DD7B3CE7B4D84CCA8C5640" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\pl-Pl\strings.xml" />
+      </Component>
+      <Component Id="cmpBDB91BDCC333C26437C8DEAA67954EC0" Directory="dir3769DA5E38B19D282B589CB16739BF4D" Guid="{A36C0CD3-502D-4D5D-9C59-EBF0876F5DC1}">
+        <File Id="fil666AAE4CA2A5BBFCB8E3B9588FF24DBF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\tr-TR\strings.xml" />
+      </Component>
+      <Component Id="cmp6547BB9A84EF11CD22E2EA6AE547C8E2" Directory="dir49D93F818A22B9EB49C931BD879637BC" Guid="{E30DDA77-29DB-480D-8D96-BCC892DE9EC2}">
+        <File Id="filAFC43596ECD92251FCFB3687614C086A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Languages\zh-CN\strings.xml" />
+      </Component>
+      <Component Id="cmp752EA660546198284FAF5E6790A70C24" Directory="dirD9D25461613D53ECC73127337CA0332A" Guid="{BDE710FC-2D76-4C0A-83DD-7DF319287FFE}">
+        <File Id="filB76C12942CB003EF485E6FEC65E9A5D1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Licenses\AForge Copyright.txt" />
+      </Component>
+      <Component Id="cmpDA39C0FF5AEA5BF22C67B8AD9A219F2E" Directory="dirD9D25461613D53ECC73127337CA0332A" Guid="{69C0A7DA-8DF2-4FE2-9F5C-21F6A081EEF7}">
+        <File Id="filCE1AB5A7614C0B982ADB13BB686F2207" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Licenses\AForge License.txt" />
+      </Component>
+      <Component Id="cmp231E757F3A2B25DC1ABBCC9A3E33C441" Directory="dirD9D25461613D53ECC73127337CA0332A" Guid="{BA4FBCD6-3710-4F97-953B-481DE37FD0E8}">
+        <File Id="fil1CDCAE2BCD2AD9BE2C27DAAB8B43D1CF" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Licenses\gpl-3.0.txt" />
+      </Component>
+      <Component Id="cmp1317659E50F14D904B57B3A3DE517F81" Directory="dirD9D25461613D53ECC73127337CA0332A" Guid="{233749E8-0C95-40A0-B1F6-14F828F489FE}">
+        <File Id="fil81FB0A2B14DB2A98FC37A713C9E9A35A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Licenses\WPFSharp.Globalizer.Licence.txt" />
+      </Component>
+      <Component Id="cmp8B4A64C88D6635CC425955445EA6E6E5" Directory="dir3C5B6BF10398B261FE2CC253F691D063" Guid="{6932FE30-390A-4425-AB16-C24643A18D78}">
+        <File Id="fil11F335AFF0D46956133958DDE24CC9EB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Plugins\CameraControl.Plugins\CameraControl.Plugins.dll" />
+      </Component>
+      <Component Id="cmp41565D6BD35509E2E9D45EE6E802B04C" Directory="dir3C5B6BF10398B261FE2CC253F691D063" Guid="{3DF564D9-5DB2-4C81-A1AD-C0D7E99D9C86}">
+        <File Id="filBFD069C49C967E5C5F0231D30CC3B440" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Plugins\CameraControl.Plugins\CameraControl.Plugins.pdb" />
+      </Component>
+      <Component Id="cmpC4A492488DAEB1D61952A455841A07A2" Directory="dir3C5B6BF10398B261FE2CC253F691D063" Guid="{D3B6C558-BB74-47A5-BDE7-B76A180C2190}">
+        <File Id="filF04533FC82D10DB2B33426E57E3EB793" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Plugins\CameraControl.Plugins\dcc.plugin" />
+      </Component>
+      <Component Id="cmp734BBECE276E5814FBD1A0FD2ACAEB12" Directory="dir1F6AA75BD6AEF19C11606F13ADE49954" Guid="{DDCFCC25-8BA6-4B5F-A4A0-51E131F05BBC}">
+        <File Id="filC2431B6E65F938172D9FA9CD6C40A267" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Plugins\Plugin.DeviceControlBox\dcc.plugin" />
+      </Component>
+      <Component Id="cmpE12ADC1B45417B9962E7CA546381E2BC" Directory="dir1F6AA75BD6AEF19C11606F13ADE49954" Guid="{11F2C52C-4A28-4AE6-8996-70C98CAD0C0E}">
+        <File Id="filD0F630A1A8FFB3821C4361CCD4F2F2EA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Plugins\Plugin.DeviceControlBox\Plugin.DeviceControlBox.dll" />
+      </Component>
+      <Component Id="cmpBA8E7DB01B3046AB51347C7BDB80CC6E" Directory="dir1F6AA75BD6AEF19C11606F13ADE49954" Guid="{35196ACE-922F-4146-A393-942EC866F9D8}">
+        <File Id="fil50DBBF35CCBECDAD094466644E667228" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Plugins\Plugin.DeviceControlBox\Plugin.DeviceControlBox.pdb" />
+      </Component>
+      <Component Id="cmp2AB1D2EEB9AD1970A1F00AD2DF2CE202" Directory="dirEC6DAC54FCF6F69C3BDDFC46B3588792" Guid="{56A33A6F-4A04-47D8-906A-DA9041C45C42}">
+        <File Id="fil13ED9F787A1B30FF9406B829C9B53D08" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Tools\align_image_stack.exe" />
+      </Component>
+      <Component Id="cmp754EFAB3B9008493C3C18DD5D00A02C1" Directory="dirEC6DAC54FCF6F69C3BDDFC46B3588792" Guid="{7D45195E-978E-4A9A-A13E-40ECE1FC21EF}">
+        <File Id="fil0713662216756003578AD1C1AB39F234" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Tools\COPYING" />
+      </Component>
+      <Component Id="cmpD8FB47BEDB2E7C48BD34C0154BE05BF4" Directory="dirEC6DAC54FCF6F69C3BDDFC46B3588792" Guid="{1BF682BB-BC8F-4D8A-A155-AC257EB8125E}">
+        <File Id="filA013FE072DD25B40A9F6601AA8320C60" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Tools\enfuse.exe" />
+      </Component>
+      <Component Id="cmpCFE2A9ED0E187C2D16244F54A4AF3C21" Directory="dirEC6DAC54FCF6F69C3BDDFC46B3588792" Guid="{EC7E197C-4622-4919-BC70-CF23E546E333}">
+        <File Id="filBED6DC9D947B46D55A654D9D0FC9C359" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Tools\exiv2.exe" />
+      </Component>
+      <Component Id="cmp77EF24630AE25BA86FBD4E339C9B3B1F" Directory="dirEC6DAC54FCF6F69C3BDDFC46B3588792" Guid="{51B96C74-A1AD-4EBE-A76D-B58AF318D6E9}">
+        <File Id="fil38D69ED7434D282ADEFBEB6F43D62E62" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\Tools\libexpat.dll" />
+      </Component>
+      <Component Id="cmpA41B32CD63C6DF0A2FF90CD5C34A583C" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{63107779-0100-46E9-AF36-97499FBA7B5A}">
+        <File Id="filFBA9DB63A619808C74266AA328AB2E1E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\bzip2.dll" />
+      </Component>
+      <Component Id="cmp46609A81A2F5B81CEB42C629BAD1E015" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{7BA596E7-76CE-4954-8750-18769D919EF6}">
+        <File Id="fil04C613C87C865F582EC3B2129F1F66FE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\COPYING" />
+      </Component>
+      <Component Id="cmpEC054491F3CADF1A348A7F28258740AC" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{BCAFC27A-A73F-48ED-9A90-D18157A7F1D1}">
+        <File Id="fil47558D7D8F704BB7ADB2E9B46E4EBBB3" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\intl.dll" />
+      </Component>
+      <Component Id="cmp2FB786F4385893A7F947FCF8A192E54F" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{A2C2D470-3179-4F9B-B0CD-46B4039E7DBC}">
+        <File Id="filB3C64FC241229926984EDB4ADA445DE7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\jpeg62.dll" />
+      </Component>
+      <Component Id="cmp6E1F56E5130E17C034A7529DAFFC802F" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{12C9DB7F-426A-49EB-8918-D15F6D3F2C50}">
+        <File Id="filC701DFDBA83707E5F1AAEBCC5140BED8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\lensfun.dll" />
+      </Component>
+      <Component Id="cmpDFEFD2E05E07CE9CD9097B012BE46828" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{D96020DD-6EC7-4A4F-AD04-9692D59F3EC7}">
+        <File Id="fil22238A916B3D2E199659DE7C26051FAA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\libglib-2.0-0.dll" />
+      </Component>
+      <Component Id="cmpF6E031422ADFC480B0C14FD8EBBB1262" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{72E71140-44ED-47B0-87DA-48F116A19645}">
+        <File Id="fil17DE61560287BD0A07B2A441B53E8781" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\libgthread-2.0-0.dll" />
+      </Component>
+      <Component Id="cmpA148F690353C6BE12C1BF9FA187870A7" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{61D65741-E08E-4172-85D2-1D7401A55932}">
+        <File Id="fil6E42164A31F3A8E137AF165DF276EDD1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\libintl-8.dll" />
+      </Component>
+      <Component Id="cmp2D982F1F6CCED8AC0CB5A1490319C87F" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{1B500141-8CE9-4B48-AF5B-EB7EB97244C3}">
+        <File Id="fil77EE174A714D735143C8CAEE632F39FC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\libjpeg-7.dll" />
+      </Component>
+      <Component Id="cmp4ADDE988FD988099300217C1F34A8486" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{B42AD4E2-2AE9-45EC-8BE3-5FD30B15274B}">
+        <File Id="filAF2A9F4214924AD8AFC3DAFA8A717FC7" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\liblcms-1-ufraw.dll" />
+      </Component>
+      <Component Id="cmp7694C9AF0C1F920DA7B7823AE204ED35" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{7002000A-07D5-45F0-9174-6C4EE06B23B4}">
+        <File Id="fil55E53F1290916F4EFBD9CE5397C8FBAC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\libpng12-0.dll" />
+      </Component>
+      <Component Id="cmpAAB87C527200FDB2DC7C5B97CCEA7B1E" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{C87495D0-E131-47FD-BB92-B01ED8690405}">
+        <File Id="fil590922903C491CF0A993D21354BBAB4B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\libtiff-3.dll" />
+      </Component>
+      <Component Id="cmp4D1FAD6CEDCCC74729A6BAB123782078" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{D0F54820-3E02-4B07-8D0B-403AF68B0271}">
+        <File Id="fil241FDB94CDA03FE1721544246AEDDB7E" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\ufraw-batch.exe" />
+      </Component>
+      <Component Id="cmp341AC6ADA34CE49F35D24A0AFC16B697" Directory="dir85AF81D478E74BB81D6731D4A82737C0" Guid="{FF73F86D-89E3-4482-957C-9912E68F715D}">
+        <File Id="filFA5938703B530C5FAFE79832365CBF8D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\ufraw\zlib1.dll" />
+      </Component>
+      <Component Id="cmpF40974067F4BD94928856116BDB590BF" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{C44DB46C-6B9E-4B5F-A226-57C33BBE5249}">
+        <File Id="fil77AF0AC160B2B2B439AF5130BBC6D376" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\auxsetup.exe" />
+      </Component>
+      <Component Id="cmp202216022E95E794F7E2B0410722AD6E" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{55739E66-20C8-4E62-B8F2-DD2A431FEC10}">
+        <File Id="fil8D4149777CE06F593A55CDA11AE073E8" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\copying" />
+      </Component>
+      <Component Id="cmp48CE711B509C995187252EB0FCF70FEF" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{03FB92CF-CDA8-4B81-8B8D-FE0103EF099E}">
+        <File Id="fil66E0FCE33162FBC7D3B4302FE622ABDE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\vdicmdrv.dll" />
+      </Component>
+      <Component Id="cmp515DFF70F95BD632F1203391602B94A4" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{139C13A0-9C47-4AE8-8DBA-CF7BC3C1ACAB}">
+        <File Id="filC867EF2F6EC44F4FC4DBD33EAD68BBAE" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\vdlaunch.exe" />
+      </Component>
+      <Component Id="cmpB274D39A7063E7CA58A1E01DC707ECD2" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{5EA95976-DF76-4FA6-870D-510B5360B12B}">
+        <File Id="filAC31CFB4FAC8BD6F02092F14D2BC8A5D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\vdremote.dll" />
+      </Component>
+      <Component Id="cmpACEEBCE425035DAFABDBA1673D15136A" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{86DAA5E5-1299-4472-ABA4-E3B6629F84F8}">
+        <File Id="fil99EEBB665331E6F0BF0402349EC90EAA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\vdsvrlnk.dll" />
+      </Component>
+      <Component Id="cmpD9BAF47316B8B0171AEBF0660F9BB821" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{3BC41AE3-6668-4A8B-8A59-BA9809EA30D4}">
+        <File Id="fil76E3435F97656479D511B77E41E7739A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\vdub.exe" />
+      </Component>
+      <Component Id="cmp8BF2BA22731FB7D817E094A363806F9B" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{5004DE81-7D5B-4789-A6B4-750C48B0960D}">
+        <File Id="fil78E3F4AB138A996A845A4C4C407E06D1" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\VirtualDub.chm" />
+      </Component>
+      <Component Id="cmpBB498B5D1B0B605DCFC919102746314F" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{80929E45-3F8B-4CE3-8264-C9CF9BCE7BE1}">
+        <File Id="filEC416A2A272A3A6549903405F189E41D" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\VirtualDub.exe" />
+      </Component>
+      <Component Id="cmpE2132D734CEA95FD28DB08966F046E69" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{F17AE763-DD58-4B48-ADF9-C70765D5FEB1}">
+        <File Id="fil12B35C7894CD9A7F9FD5239F2A3C8ADC" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\VirtualDub.ini" />
+      </Component>
+      <Component Id="cmpFAC0464704D4EC717B2A5BD00D2BA95C" Directory="dir59E5CF3C962F57C3BE847008DA4083D3" Guid="{560E0355-DF56-41CE-8563-8ADCAEB82391}">
+        <File Id="fil5AA21F3E24D7FD767213084888F36975" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\VirtualDub.vdi" />
+      </Component>
+      <Component Id="cmpF48F4D3972AB8BBD2EDA27D6596F57A2" Directory="dirCAB12A18F13F8FB5ABF29BACE2206F2A" Guid="{4FE25EDB-006B-4C6D-872A-E2E7D63C708A}">
+        <File Id="filF3202C3FB1E987986C1837871DFB3287" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\aviproxy\proxyoff.reg" />
+      </Component>
+      <Component Id="cmp183784F3119EE8834B9B95FD5ECD0AED" Directory="dirCAB12A18F13F8FB5ABF29BACE2206F2A" Guid="{5173A736-624F-49AC-B8E5-B7DB81BBA7CC}">
+        <File Id="fil00ED1B0A79F264E2EE1FC1CFA18E1490" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\aviproxy\proxyon.reg" />
+      </Component>
+      <Component Id="cmp59F03025191248294F50D9EDB7183415" Directory="dirCAB12A18F13F8FB5ABF29BACE2206F2A" Guid="{0920AD52-ED57-4D23-917C-B7B2F423013B}">
+        <File Id="fil8B18340CD532423ED333338B3A3CB1FB" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\aviproxy\readme.txt" />
+      </Component>
+      <Component Id="cmp0EACF4611C7EA571E1574E557F864DFE" Directory="dir64D23785D55015250B6F222D2112CE28" Guid="{39271DE8-8D46-49E7-B5E6-25D738854C3D}">
+        <File Id="fil93802AE4548D14892F9984A65AC9FE3B" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\plugins\readme.txt" />
+      </Component>
+      <Component Id="cmp15CEAD9326BA23076EEEDB96BFD62568" Directory="dirA2F3DF0776AC5CC8C47A433D242348EE" Guid="{748C1A00-08F5-4266-BFF7-4CF4754B1B14}">
+        <File Id="fil7FDE2699E8C052B0D8F20E19F03CA581" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\VirtualDub\plugins32\readme.txt" />
+      </Component>
+      <Component Id="cmp3DAF580299F38E7D30CE20D635D62ACE" Directory="dirE7B6D7AF90AB6F75C854CC6CBB27636C" Guid="{E45F4622-3FEE-4EE5-B8BF-CA3FEABA7725}">
+        <File Id="filE8154FD9B07AC5DDD75D8C1EBFB46AEA" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\WebServer\fullscreen.html" />
+      </Component>
+      <Component Id="cmp793EC798A7DF607A5BA14F28025DC711" Directory="dirE7B6D7AF90AB6F75C854CC6CBB27636C" Guid="{1DDE8430-2116-4EAD-ABC4-F92B41DFA873}">
+        <File Id="fil08C612C82C8CCF0BD8416034955BB02A" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\WebServer\index.html" />
+      </Component>
+      <Component Id="cmpCC571F4DDB54DCFCBBA7DF0D43FCB0A7" Directory="dirE7B6D7AF90AB6F75C854CC6CBB27636C" Guid="{0C9B5EF2-661A-41E4-9948-AB7A617238C8}">
+        <File Id="filE8F589CF69CB572D9DE43BB61973F95F" KeyPath="yes" Source="$(var.CameraControl.TargetDir)\WebServer\liveview.html" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir18C925AF160D8EF646F83BCD4C29A66C" Name="fr" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir8A34519E7F04FFF4BB95A3B5F71B2454">
+      <Directory Id="dir1F6AA75BD6AEF19C11606F13ADE49954" Name="Plugin.DeviceControlBox" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir355CF4CFB504613EE055EC094C26E1DA" Name="de" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir3648DEFE00596F7BA66078A734775D90" Name="pl-Pl" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir3769DA5E38B19D282B589CB16739BF4D" Name="tr-TR" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir8A34519E7F04FFF4BB95A3B5F71B2454">
+      <Directory Id="dir3C5B6BF10398B261FE2CC253F691D063" Name="CameraControl.Plugins" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir49D93F818A22B9EB49C931BD879637BC" Name="zh-CN" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir59E5CF3C962F57C3BE847008DA4083D3">
+      <Directory Id="dir64D23785D55015250B6F222D2112CE28" Name="plugins" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir6E341268D57EE6990C2B07B8EBC4E149" Name="ja" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dir8407D3FB0785FB3DDEB5A53FC9A0D0F8" Name="en-US" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dirA21A6BBD9333F12011E855BC9BD6B441" Name="el-GR" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir59E5CF3C962F57C3BE847008DA4083D3">
+      <Directory Id="dirA2F3DF0776AC5CC8C47A433D242348EE" Name="plugins32" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dirA7DABA45E6D954B286EDE84332EE4193">
+      <Directory Id="dirC44FA0F45A796F65CA5777D90042F486" Name="da" />
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="dir59E5CF3C962F57C3BE847008DA4083D3">
+      <Directory Id="dirCAB12A18F13F8FB5ABF29BACE2206F2A" Name="aviproxy" />
+    </DirectoryRef>
+  </Fragment>
+</Wix>

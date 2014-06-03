@@ -1,0 +1,61 @@
+Item Name|Root|TrueFalse|UnspecifiedSubType|
+Full Item Name|0018\Root|TrueFalse|UnspecifiedSubType|
+Item Flags|76|TrueFalse|UnspecifiedSubType|
+Unique Device ID|{EEC5AD98-8080-425f-922A-DABF3DE3F69A}\0018|FalseFalse|UnspecifiedSubType|
+Manufacturer|Nikon Corporation|TrueFalse|UnspecifiedSubType|
+Description|D5100|TrueFalse|UnspecifiedSubType|
+Type|131072|TrueFalse|UnspecifiedSubType|
+Port|AUTO|TrueFalse|UnspecifiedSubType|
+Name|D5100|TrueFalse|UnspecifiedSubType|
+Server|local|FalseFalse|UnspecifiedSubType|
+Remote Device ID||FalseFalse|UnspecifiedSubType|
+UI Class ID|{00000000-0000-0000-0000-000000000000}|TrueFalse|UnspecifiedSubType|
+Hardware Configuration|0|TrueFalse|UnspecifiedSubType|
+BaudRate||TrueFalse|UnspecifiedSubType|
+STI Generic Capabilities|48|TrueFalse|UnspecifiedSubType|
+WIA Version|2.0|TrueFalse|UnspecifiedSubType|
+Driver Version|6.1.7600.16385|TrueFalse|UnspecifiedSubType|
+PnP ID String|\\?\usb#vid_04b0&pid_0429#000006319062#{6bdd1fc6-810f-11d0-bec7-08002be2092f}|TrueFalse|UnspecifiedSubType|
+              \\?\usb#vid_04b0&pid_0429#000006319062#{6ac27878-a6fa-4155-ba85-f98f491d4f33}
+STI Driver Version|2|TrueFalse|UnspecifiedSubType|
+Pictures Taken|132|TrueFalse|UnspecifiedSubType|
+Firmware Version|V1.01|TrueFalse|UnspecifiedSubType|
+Enable Legacy Behavior|1|FalseFalse|UnspecifiedSubType|
+Legacy Behavior Time between retries|500|FalseFalse|UnspecifiedSubType|
+Battery Status|100|TrueFalse|UnspecifiedSubType|
+Device Time|System.__ComObject|TrueTrue|UnspecifiedSubType|
+Compression Setting|2|FalseFalse|ListSubType|
+White Balance|2|FalseFalse|ListSubType|
+F Number|400|FalseFalse|ListSubType|
+Focus Length|5500|FalseFalse|RangeSubType|
+Focus Mode|32786|FalseFalse|ListSubType|
+Exposure Metering Mode|2|FalseFalse|ListSubType|
+Flash Mode|32784|FalseFalse|ListSubType|
+Exposure Time|25000|FalseFalse|ListSubType|
+Exposure Mode|2|FalseFalse|ListSubType|
+Exposure Index|125|FalseFalse|ListSubType|
+Exposure Compensation|0|FalseFalse|ListSubType|
+Capture Mode|1|FalseFalse|ListSubType|
+Burst Number|1|FalseFalse|RangeSubType|
+Focus Metering Mode|32785|FalseFalse|ListSubType|
+Format|{B96B3CA9-0728-11D3-9D7B-0000F81EF32E}|FalseFalse|UnspecifiedSubType|
+
+
+Exif:
+
+Exposure mode
+Exposure program
+Exposure time
+F number
+Lens focal length
+ISO speed rating
+Metering mode
+White balance
+Exposure bias
+
+Icon source : http://iconleak.com/
+
+WPD/MTP
+Events:
+400d0000-5738-4ff2-8445-be3126691059 - ?
+

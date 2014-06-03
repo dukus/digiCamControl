@@ -1,0 +1,38 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=WPD
+ClassGUID={EEC5AD98-8080-425f-922A-DABF3DE3F69A}
+Provider=%Provider%
+DriverVer=02/22/2006,5.2.5326.4762
+
+[Manufacturer]
+%MfgName%=Nikon
+
+[Nikon]
+%Nikon.DeviceDesc%=Nikon_MTP, USB\VID_04B0&PID_042a
+
+[Nikon_MTP]
+Include = wpdmtp.inf
+Needs   = WPD.MTP
+
+[Nikon_MTP.hw]
+Include = wpdmtp.inf
+Needs   = WPD.MTP.RegistrationBasic
+
+[Nikon_MTP.Services]
+Include = wpdmtp.inf
+Needs   = WPD.MTP.Services
+
+[Nikon_MTP.CoInstallers]
+Include = wpdmtp.inf
+Needs   = WPD.MTP.CoInstallers
+
+[Nikon_MTP.Wdf]
+Include = wpdmtp.inf
+Needs   = WPD.MTP.Wdf
+UmdfServiceOrder=WpdMtpDriver
+
+[Strings]
+Nikon.DeviceDesc       = "D800"
+MfgName                 = "Nikon"
+Provider                = "Nikon"

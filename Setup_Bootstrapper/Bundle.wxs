@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+  <?define ProductName="digiCamControl" ?>
+  <?define CompanyName="$(fileVersion.CompanyName($(var.CameraControl.TargetPath)))" ?>
+  <?define ProductVersion="$(fileVersion.ProductVersion($(var.CameraControl.TargetPath)))" ?>
+  <?define ProductUpgradeCode = "161DE505-11F1-4672-BD27-E7B70B37532A"?>
+	<Bundle Name="$(var.ProductName)" Version="$(var.ProductVersion)" Manufacturer="Duka Istvan" UpgradeCode="04b00c89-704c-4b85-b74f-7e968bf49818" >
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+            LicenseFile="$(var.CameraControl.TargetDir)\Licenses\GPLv3LICENSE.rtf"
+            LogoFile="$(var.CameraControl.ProjectDir)\logo.ico" 
+            />
+    </BootstrapperApplicationRef>
+    
+		<Chain>
+      <PackageGroupRef Id="NetFx40Web"/>
+      <RollbackBoundary/>
+      <!-- TODO: Define the list of chained packages. -->
+      <!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+      <MsiPackage
+          Id="MyProgramInstaller"
+          SourceFile="$(var.Setup_digiCamControl.TargetPath)"
+          EnableFeatureSelection="yes"
+          Visible="yes"
+          Vital="yes"
+          Compressed="yes"  >
+        <MsiProperty Name="INSTALLLOCATION" Value="[InstallFolder]" />
+      </MsiPackage>
+		</Chain>
+	</Bundle>
+</Wix>

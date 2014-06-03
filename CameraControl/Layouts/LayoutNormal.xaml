@@ -1,0 +1,141 @@
+﻿<Layouts:LayoutBase x:Class="CameraControl.Layouts.LayoutNormal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                    xmlns:Layouts="clr-namespace:CameraControl.Layouts"
+                    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
+                    xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"                    
+             d:DesignHeight="484" d:DesignWidth="689">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type ListBox}">
+                <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
+           explains how to display an object of type BitmapImage. -->
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid Width="130" Height="90">
+                                    <Rectangle Stroke="Black" Margin="0" />
+                                    <Rectangle Stroke="White" Margin="1" />
+                                    <Rectangle Stroke="Black" Margin="2" />
+                                    <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3">
+                                    </Image>
+                                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Margin="5">
+                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}"/>
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </StackPanel>
+                                    <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=Name}" Margin="3" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom"/>
+                                </Grid>
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="345*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="120" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+            <!--<xctk:MagnifierManager.Magnifier>
+                <xctk:Magnifier Radius="100" ZoomFactor=".4" Target="{Binding ElementName=image1}" />
+            </xctk:MagnifierManager.Magnifier>-->
+            <xctk:Zoombox x:Name="zoombox"
+                    ViewStackIndex="0"
+                    Grid.Column="1"
+                    Margin="20"
+                    Focusable="True"
+                    IsTabStop="True" MouseWheel="zoombox_MouseWheel" PreviewMouseWheel="zoombox_PreviewMouseWheel" ViewStackIndexChanged="zoombox_ViewStackIndexChanged">
+                <xctk:Zoombox.ViewStack>
+                    <xctk:ZoomboxView>Fit</xctk:ZoomboxView>
+                </xctk:Zoombox.ViewStack>
+
+                <Image Name="image1" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" >
+                    <Image.InputBindings>
+                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
+                    </Image.InputBindings>
+                </Image>
+            </xctk:Zoombox>
+            <!--</local:ZoomBorder>-->
+            <ProgressBar Height="20" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Value="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=LoadingProgress}" Opacity="0.5" Panel.ZIndex="1" IsIndeterminate="True" />
+            <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+                <ToggleButton  Height="60" Name="but_unlike" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                    <Rectangle Width="30" Height="30">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ToggleButton>
+                <ToggleButton  Height="60" Name="but_like" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                    <Rectangle Width="30" Height="30">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ToggleButton>
+
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1" Margin="0,0,265,0">
+            <StackPanel  Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Right">
+                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="0" />
+            </StackPanel>
+        </StackPanel>
+        <ProgressBar Height="20" Margin="0,0,87,3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="157" Value="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" ToolTip="File transfer progress" Style="{x:Null}" Grid.RowSpan="2" />
+            <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >
+                            <MenuItem.ItemTemplate>
+                                <DataTemplate>
+                                    <MenuItem Header="{Binding Path=Title}" 
+                                      Command="{Binding }" 
+                                      CommandParameter="{Binding}" />
+                                </DataTemplate>
+                            </MenuItem.ItemTemplate>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Delete File(s)" Name="mnu_delete_file" Command="{Binding Path=DeleteItemCommand}" />
+                        <MenuItem Header="Show in explorer" Name="mnu_show_explorer" Command="{Binding Path=OpenExplorerCommand}" />
+                        <MenuItem Header="Open in external viewer" Name="mnu_open" Command="{Binding Path=OpenViewerCommand}" />
+                        <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        
+    </Grid>
+</Layouts:LayoutBase>

@@ -1,0 +1,39 @@
+﻿<pb:PhotoCard x:Class="PhotoBooth.Cards.ThreeSmallOneLargeCard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:pb="clr-namespace:PhotoBooth"        
+        Title="Three By One Card" Height="600" Width="900" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <Style x:Key="HorizontalText" TargetType="Label">
+            <Setter Property="FontFamily" Value="Georgia"/>
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="LayoutGrid" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Name="image1" Grid.Column="0" Grid.Row="0" Source="{Binding Path=TopLeftImage}"></Image>
+
+        <Image Name="image2" Grid.Column="1" Grid.Row="0" Source="{Binding Path=TopMiddleImage}"></Image>
+
+        <Image Name="image3" Grid.Column="2" Grid.Row="0" Source="{Binding Path=TopRightImage}"></Image>
+
+        <Label Name="horizontalLabel" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource HorizontalText}"
+               Content="{Binding Path=BannerText}" />
+
+        <Image Name="image4" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Source="{Binding Path=BottomImage}"></Image>
+    </Grid>
+</pb:PhotoCard>

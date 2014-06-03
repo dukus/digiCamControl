@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="CameraControl.Controls.ExposureStatusControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Grid SnapsToDevicePixels="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="14"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Polygon Name="PosMax" Grid.Row="3" Grid.Column="0" Fill="#FFD1D1D1" Margin="1" Points="3,3 6,0 10,0 10,6 6,6" HorizontalAlignment="Right" VerticalAlignment="Center" SnapsToDevicePixels="True"/>                   
+        
+        <Rectangle Name="Pos6" Grid.Row="3" Grid.Column="1" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Pos5" Grid.Row="3" Grid.Column="2" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Pos4" Grid.Row="3" Grid.Column="3" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Pos3" Grid.Row="3" Grid.Column="4" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Pos2" Grid.Row="3" Grid.Column="5" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Pos1" Grid.Row="3" Grid.Column="6" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+
+        <Rectangle Grid.Row="2" Grid.Column="7" Grid.RowSpan="2" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+
+        <Rectangle Name="Neg1" Grid.Row="3" Grid.Column="8" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Neg2" Grid.Row="3" Grid.Column="9" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Neg3" Grid.Row="3" Grid.Column="10" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Neg4" Grid.Row="3" Grid.Column="11" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Neg5" Grid.Row="3" Grid.Column="12" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Name="Neg6" Grid.Row="3" Grid.Column="13" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+
+        <Polygon Name="NegMax" Grid.Row="3" Grid.Column="14" Fill="#FFD1D1D1" Margin="1" Points="0,0 4,0 7,3 4,6 0,6" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+
+
+
+        <TextBlock Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="5" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFD1D1D1">0</TextBlock>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="16" FontWeight="Black" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFD1D1D1" TextAlignment="Right">+</TextBlock>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="1" Grid.Column="14" FontSize="16" FontWeight="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFD1D1D1" TextAlignment="Left">-</TextBlock>
+        
+        
+        
+        <Rectangle Grid.Row="2" Grid.Column="1" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Grid.Row="2" Grid.Column="4" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Grid.Row="2" Grid.Column="10" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        <Rectangle Grid.Row="2" Grid.Column="13" Fill="#FFD1D1D1" Margin="1"></Rectangle>
+        
+        
+
+
+    </Grid>
+</UserControl>

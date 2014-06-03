@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <!--End Property values-->
+  <string name="Mode">Mod</string>
+  <string name="Iso">_Iso</string>
+  <string name="ShutterSpeed">Brzina zatvarača</string>
+  <string name="Aperture">_Otvor blende</string>
+  <string name="WhiteBalance">Balans Beloga</string>
+  <string name="Compression">Kompresija</string>
+  <string name="FocusMode">_Fokus Mod</string>
+  <string name="Battery">Baterija</string>
+  <string name="BraketingToolTip">Braketing</string>
+  <string name="SettingsToolTip">Podešavanja</string>
+  <string name="FullscreenToolTip">Pun ekran</string>
+  <string name="LiveViewToolTip">Živi prikaz</string>
+  <string name="Session">Sesija</string>
+  <string name="SessionAdd">Dodaj</string>
+  <string name="SessionEdit">Uredi</string>
+  <string name="SessionDel">Obrisi</string>
+  <string name="SettingsWindowTitle">Podešavanja</string>
+  <string name="SessionWindowTitle">Sesija [Dodaj/Uredi]</string>
+  <string name="LiveViewWindowTitle">Živi prikaz</string>
+  <string name="BraketingWindowTitle">Braketing</string>
+  <string name="MultipleCameraWindowTitle">Podrška za više uredjaja</string>
+  <string name="ButtonOk">Uredu</string>
+  <string name="ButtonCancel">Otkazi</string>
+  <string name="ButtonAdd">Dodaj</string>
+  <string name="ButtonDelete">Obriši</string>
+  <string name="ButtonEdit">Uredi</string>
+  <string name="ButtonAutoFocus">_Auto Fokus</string>
+  <string name="ButtonRecordMovie">Snimaj video</string>
+  <string name="ButtonFreezeImage">Zamrzni sliku</string>
+  <string name="ButtonStart">Start</string>
+  <string name="ButtonPreview">Pregled</string>
+  <string name="ButtonStop">Stop</string>
+  <string name="ButtonDeleteProperty">Obriši podešavanje</string>
+  <string name="ButtonClose">Zatvori</string>
+  <string name="ButtonSave">Snimi</string>
+  <string name="ButtonCapturePhotos">Snimi fotografiju</string>
+  <string name="ButtonCreateMovie">Kreiraj video</string>
+  <string name="ButtonLocateLogFile">Lociraj log datoteku</string>
+  <string name="LabelInterfaceLanguage">Jezik Interfejsa:</string>
+  <string name="LabelTheme">Izgled:</string>
+  <string name="LabelGeneral">Generalno</string>
+  <string name="LabelPreview">Pregled</string>
+  <string name="LabelAutoPreview">Auto pregled</string>
+  <string name="LabelRotateImage">Rotiraj fotografiju:</string>
+  <string name="LabelFocusAndLiveview">Živi prikaz</string>
+  <string name="ReStartToolTip">Morate restartovati program da bi promene bile primenjene</string>
+  <string name="LabelCounter">Brojač:</string>
+  <string name="LabelDisableAutofocus">Onemogući autofokus</string>
+  <string name="LabelCreateMovie">Kreiraj video</string>
+  <string name="MenuPresetsSave">Snimi</string>
+  <string name="MenuPresetsEdit">Uredi</string>
+  <!--15/10/2012-->
+  <!--22/10/2012-->
+  <!--25/10/2012-->
+  <!--26/10/2012-->
+  <!--29/10/2012-->
+  <string name="ButtonHelp">Pomoć</string>
+  <!--31/10/2012-->
+  <string name="LabelMenu">Meni</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">Forum</string>
+  <!--07/11/2012-->
+  <!--08/11/2012-->
+  <string name="ButtonResetSettings">Resetuj podešavanja</string>
+  <!--14/11/2012-->
+  <!--18/11/2012-->
+  <!--20/11/2012-->
+  <!--21/11/2012-->
+  <string name="LabelDownload">Preuzmi</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">Preuzmi fotografije</string>
+  <string name="LabelDeleteFilesAfterTransfer">Obriši datoteke posle prenosa</string>
+  <string name="LabelAskForDelete">Prenesene datoteke biće obrisane.⏎ Da li želite da nastavite ?</string>
+  <!--26/11/2012-->
+  <!--28/11/2012-->
+  <!--30/11/2012-->
+  <string name="LabelTransfer">Prenos</string>
+  <!--05/12/2012-->
+  <!--14/12/2012-->
+  <!--16/12/2012-->
+  <!--04/01/2013-->
+  <!--05/01/2013-->
+  <!--07/01/2013-->
+  <!--12/01/2013-->
+  <string name="LabelAdvanced">Napredno</string>
+  <!--19/01/2013-->
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <!--31/01/2013-->
+  <!--13/03/2013-->
+  <!--17/03/2012-->
+  <!--28/03/2012-->
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+</resources>

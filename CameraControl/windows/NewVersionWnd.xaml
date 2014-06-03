@@ -1,0 +1,13 @@
+﻿<Window x:Class="CameraControl.windows.NewVersionWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="New version" Height="424" Width="475" WindowStartupLocation="CenterScreen" ShowInTaskbar="False"  Loaded="MetroWindow_Loaded" Topmost="True" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="342*" />
+            <RowDefinition Height="43*" />
+        </Grid.RowDefinitions>
+        <Button Content="Close" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,12,12" Name="button1" Width="75" Height="25" VerticalAlignment="Bottom" Click="button1_Click" />
+        <Button Content="Download" Grid.Row="1" Height="23" HorizontalAlignment="Right" Margin="0,0,107,12" Name="button2" VerticalAlignment="Bottom" Width="95" Click="button2_Click" />
+        <WebBrowser Name="webBrowser" />
+    </Grid>
+</Window>

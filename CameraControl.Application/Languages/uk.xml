@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <!--End Property values-->
+  <string name="Battery">Акумулятор</string>
+  <string name="SettingsToolTip">Налаштування</string>
+  <string name="SessionAdd">Додати</string>
+  <string name="SessionEdit">Редагувати</string>
+  <string name="SettingsWindowTitle">Налаштування</string>
+  <string name="ButtonOk">Гаразд</string>
+  <string name="ButtonCancel">Скасувати</string>
+  <string name="ButtonAdd">Додати</string>
+  <string name="ButtonDelete">Вилучати</string>
+  <string name="ButtonEdit">Редагувати</string>
+  <string name="ButtonStop">Стоп</string>
+  <string name="ButtonClose">Зкрити</string>
+  <string name="ButtonSave">Зберегти</string>
+  <string name="LabelTheme">Тема:</string>
+  <string name="LabelFolder">Тека:</string>
+  <string name="LabelTags">Теґи</string>
+  <string name="MenuExit">Вихід</string>
+  <string name="MenuPresetsSave">Зберегти</string>
+  <string name="MenuPresetsEdit">Редагувати</string>
+  <!--15/10/2012-->
+  <!--22/10/2012-->
+  <!--25/10/2012-->
+  <!--26/10/2012-->
+  <!--29/10/2012-->
+  <!--31/10/2012-->
+  <string name="LabelMenu">Меню</string>
+  <!--03/11/2012-->
+  <!--07/11/2012-->
+  <!--08/11/2012-->
+  <!--14/11/2012-->
+  <!--18/11/2012-->
+  <!--20/11/2012-->
+  <!--21/11/2012-->
+  <string name="LabelDownload">Завантажити</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">Завантажити фотографії</string>
+  <string name="LabelDeleteFilesAfterTransfer">Видалити файли після передачі</string>
+  <!--26/11/2012-->
+  <!--28/11/2012-->
+  <!--30/11/2012-->
+  <!--05/12/2012-->
+  <!--14/12/2012-->
+  <!--16/12/2012-->
+  <!--04/01/2013-->
+  <!--05/01/2013-->
+  <!--07/01/2013-->
+  <!--12/01/2013-->
+  <!--19/01/2013-->
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <!--31/01/2013-->
+  <!--13/03/2013-->
+  <!--17/03/2012-->
+  <!--28/03/2012-->
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+</resources>

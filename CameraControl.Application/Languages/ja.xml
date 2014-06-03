@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="BURST_NUMBER">バースト番号</string>
+  <string name="STILL_CAPTURE_MODE">静止画キャプチャモード</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">連続撮影</string>
+  <string name="AUTO_ISO">自動ISO</string>
+  <string name="ON">オン</string>
+  <string name="OFF">オフ</string>
+  <string name="FLASH">フラッシュ</string>
+  <string name="NORMAL_SYNCHRONIZATION">通常シンクロ</string>
+  <string name="LONG_EXP._NR">長秒時ノイズ低減</string>
+  <string name="HIGH_ISO_NR">高ISOノイズ低減</string>
+  <string name="NORMAL">通常</string>
+  <string name="EXPOSURE_DELAY_MODE">露出ディレイモード</string>
+  <string name="LOCK">ロック</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">１コマ撮影</string>
+  <string name="SELF_TIMER">セルフタイマー</string>
+  <string name="QUICK_RESPONSE_REMOTE">瞬時リモコン</string>
+  <string name="2S_DELAYED_REMOTE">２秒リモコン</string>
+  <string name="QUIET_SHOOTING">静音撮影</string>
+  <string name="FLASH_PROHIBITED">フラッシュ発光禁止</string>
+  <string name="RED_EYE_REDUCTION">赤目軽減</string>
+  <string name="SLOW_SYNCHRONIZATION">スローシンクロ</string>
+  <string name="REAR_SYNCHRONIZATION">後幕シンクロ</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">赤目軽減スローシンクロ</string>
+  <string name="NOT_PERFORMED">作動しませんでした</string>
+  <string name="LOW">低速</string>
+  <string name="HIGH">高速</string>
+  <string name="CENTER_WEIGHTED_METERING">中央部重点測光</string>
+  <string name="MULTI_PATTERN_METERING">マルチパターン測光</string>
+  <string name="SPOT_METERING">スポット測光</string>
+  <string name="AUTO">自動</string>
+  <string name="DAYLIGHT">太陽光</string>
+  <string name="FLUORESCENT_">蛍光灯</string>
+  <string name="INCANDESCENT">電球</string>
+  <string name="CLOUDY">曇天</string>
+  <string name="SHADE">晴天日陰</string>
+  <string name="CUSTOM">カスタム</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] AFサーボモード自動切換え</string>
+  <string name="[S]_SINGLE_AF_SERVO">[S] シングルAFサーボ</string>
+  <string name="[M]_MANUAL_FOCUS">[M]マニュアルフォーカス</string>
+  <string name="KELVIN">ケルビン</string>
+  <string name="ADOBE_RGB">Adobe RGB</string>
+  <string name="COLOR_SPACE">色空間</string>
+  <string name="NEUTRAL">ニュートラル</string>
+  <string name="PICTURE_CONTROL">ピクチャーコントロール</string>
+  <string name="LOSSLESS_COMPRESSED_RAW">ロスレス圧縮RAW</string>
+  <string name="RAW_COMPRESSION">圧縮ＲＡＷ</string>
+  <!--End Property values-->
+  <string name="Mode">モード</string>
+  <string name="Iso">_ISO感度</string>
+  <string name="ShutterSpeed">_シャッター速度</string>
+  <string name="Aperture">_絞り</string>
+  <string name="WhiteBalance">_ホワイトバランス</string>
+  <string name="ExposureComp">_露出補正</string>
+  <string name="Compression">_圧縮</string>
+  <string name="MeteringMode">_測光モード</string>
+  <string name="FocusMode">_フォーカスモード</string>
+  <string name="Battery">バッテリー残量</string>
+  <string name="SDRam">SDカード</string>
+  <string name="SDRamToolTip">カード保存なしでPCにキャプチャ</string>
+  <string name="CapturePhotoToolTip">写真キャプチャ</string>
+  <string name="CapturePhotoNoAfToolTip">AFなしでキャプチャ</string>
+  <string name="BraketingToolTip">ブラケット撮影</string>
+  <string name="SettingsToolTip">設定</string>
+  <string name="TimeLapseToolTip">微速度撮影</string>
+  <string name="FullscreenToolTip">全画面</string>
+  <string name="LiveViewToolTip">ライブビュー</string>
+  <string name="BrowseSessionsToolTip">作業ブラウズ</string>
+  <string name="SelectTagsToolTip">タグ選択</string>
+  <string name="AboutToolTip">状況</string>
+  <string name="Session">作業</string>
+  <string name="SessionAdd">追加</string>
+  <string name="SessionEdit">編集</string>
+  <string name="SessionDel">削除</string>
+  <string name="MainWindowTitle">NCC-翻訳済み</string>
+  <string name="SettingsWindowTitle">設定</string>
+  <string name="SessionWindowTitle">作業[追加／編集]</string>
+  <string name="LiveViewWindowTitle">ライブビュー</string>
+  <string name="PresetEditWindowTitle">プリセット編集</string>
+  <string name="BraketingWindowTitle">ブラケット撮影</string>
+  <string name="EditTagWindowTitle">タグ[追加／編集]</string>
+  <string name="MultipleCameraWindowTitle">複数カメラ対応</string>
+  <string name="SavePresetWindowTitle">プリセット保存</string>
+  <string name="TimeLapseWindowTitle">微速度撮影</string>
+  <string name="ButtonOk">OK</string>
+  <string name="ButtonCancel">キャンセル</string>
+  <string name="ButtonAdd">追加</string>
+  <string name="ButtonDelete">削除</string>
+  <string name="ButtonEdit">編集</string>
+  <string name="ButtonAutoFocus">_オートフォーカス</string>
+  <string name="ButtonCapture">_撮影</string>
+  <string name="ButtonRecordMovie">動画記録</string>
+  <string name="ButtonFreezeImage">フリーズ</string>
+  <string name="ButtonStart">開始</string>
+  <string name="ButtonPreview">プレビュー</string>
+  <string name="ButtonStop">停止</string>
+  <string name="ButtonDeletePreset">プリセット削除</string>
+  <string name="ButtonDeleteProperty">プロパティ削除</string>
+  <string name="ButtonClose">閉じる</string>
+  <string name="ButtonSave">保存</string>
+  <string name="ButtonCapturePhotos">写真キャプチャ</string>
+  <string name="ButtonStartTimeLapse">微速度撮影開始</string>
+  <string name="ButtonStopTimeLapse">微速度撮影停止</string>
+  <string name="ButtonCreateMovie">動画作成</string>
+  <string name="ButtonLocateLogFile">ログファイル指定</string>
+  <string name="LabelInterfaceLanguage">表示言語</string>
+  <string name="LabelDisableDriver">元のドライバの無効化（推奨しません）</string>
+  <string name="LabelTheme">テーマ：</string>
+  <string name="LabelGeneral">一般</string>
+  <string name="LabelPreview">プレビュー</string>
+  <string name="LabelPlaySound">撮影音</string>
+  <string name="LabelAutoPreview">自動プレビュー</string>
+  <string name="LabelPreviewAfterCapture">全画面プレビュー</string>
+  <string name="LabelPreviewTime">プレビュー時間（秒）：</string>
+  <string name="LabelPreviewInLIveView">ライブビューで撮影後プレビュー</string>
+  <string name="LabelLIveViewImageFreeze">ライブビュー画像表示時間（秒）：</string>
+  <string name="LabelRotateImage">画像の回転</string>
+  <string name="LabelDontLoadThumbs">サムネール表示しない</string>
+  <string name="LabelFullscrenBack">フルスクリーンウィンドウの背景：</string>
+  <string name="LabelTriggers">トリガー</string>
+  <string name="LabelUseKeybordToTrigger">撮影トリガーにキーボードを使う</string>
+  <string name="LabelWebserver">Webサーバ</string>
+  <string name="LabelUseWebserver">Webサーバ使用</string>
+  <string name="LabelFocusAndLiveview">フォーカスとライブビュー</string>
+  <string name="LabelSmallFocusSstep">フォーカス送り：小</string>
+  <string name="LabelMediumFocusStep">フォーカス送り：中</string>
+  <string name="LabelLargFocusStep">フォーカス送り：大</string>
+  <string name="ReStartToolTip">変更はアプリケーションの再起動後に反映されます。</string>
+  <string name="LabelSessonName">作業名：</string>
+  <string name="LabelFolder">フォルダ：</string>
+  <string name="LabelFileNameTemplate">ファイル名テンプレート：</string>
+  <string name="LabelCounter">カウンター：</string>
+  <string name="LabelUseOriginal">カメラ設定のファイル名を使用する</string>
+  <string name="LabelUseOriginalToolTip">このオプションはWIAドライバでは利用できません</string>
+  <string name="LabelDontDownloadPhotos">PCに写真をダウンロードしない</string>
+  <string name="LabelAlowFolderChange">イメージブラウザでフォルダ変更を許可する</string>
+  <string name="LabelTags">タグ</string>
+  <string name="LabelManualFocus">マニュアルフォーカス</string>
+  <string name="LabelGrid">格子</string>
+  <string name="LabelLvZoomRation">ライブビューズーム量</string>
+  <string name="LabelFocusStacking">フォーカス送り</string>
+  <string name="LabelNoOfPhots">写真の番号</string>
+  <string name="LabelFocusStep">フォーカス送り量</string>
+  <string name="LabelLuminosity">明るさ</string>
+  <string name="LabelExposureBracketing">露出ブラケット撮影</string>
+  <string name="LabelExposureBracketingToolTip">失敗を避けるためにカメラを絞り優先モードに設定し、自動ISO感度と自動ホワイトバランスをOFFにします。</string>
+  <string name="LabelManualExposureBracketing">手動露出ブラケット撮影</string>
+  <string name="LabelManualExposureBracketingToolTip">失敗を避けるため、カメラをマニュアルモード（M)に設定し自動ISO感度設定と自動ホワイトバランスをOFFにして下さい。</string>
+  <string name="LabelPresetBracketing">ブラケット撮影プリセット</string>
+  <string name="LabelTagDisplayValue">値の表示</string>
+  <string name="LabelTagValue">値</string>
+  <string name="LabelTagIncludeInGroup1">グループ１を含む</string>
+  <string name="LabelTagIncludeInGroup2">グループ２を含む</string>
+  <string name="LabelTagIncludeInGroup3">グループ３を含む</string>
+  <string name="LabelTagIncludeInGroup4">グループ４を含む</string>
+  <string name="LabelDelay">遅延（ミリ秒）</string>
+  <string name="LabelNumberOfCaptures">キャプチャ数</string>
+  <string name="LabelWaitTime">待ち時間（秒）</string>
+  <string name="LabelDisableAutofocus">AFを無効にする</string>
+  <string name="LabelConnectedCameras">接続中のカメラ</string>
+  <string name="LabelPresetName">プリセット名：</string>
+  <string name="LabelTimeLapse">微速度撮影</string>
+  <string name="LabelSecondsBetweenShots">コマ間秒数</string>
+  <string name="LabelNumberOfPhotos">写真の数</string>
+  <string name="LabelDontAutofocusOnEveryCapture">キャプチャ時にAFしない</string>
+  <string name="LabelCaptureInterval">キャプチャ間隔</string>
+  <string name="LabelMovieLenght">録画時間</string>
+  <string name="LabelMovieSettings">動画設定</string>
+  <string name="LabelVideoFormat">ビデオ形式</string>
+  <string name="LabelOutputFile">出力ファイル</string>
+  <string name="LabelFps">Fps</string>
+  <string name="LabelFillImage">画像埋込</string>
+  <string name="LabelCreateMovie">動画の作成</string>
+  <string name="LabelAddVirtualMovingToVideo">動画に仮想移動を加える</string>
+  <string name="LabelMovingSurface">移動量（％）：</string>
+  <string name="LabelMovingDirection">移動方向</string>
+  <string name="LabelMovingDirectionLeftToRight">左から右へ</string>
+  <string name="LabelMovingDirectionRightToLeft">右から左へ</string>
+  <string name="LabelMovingDirectionTopToBottom">上から下へ</string>
+  <string name="LabelMovingDirectionBottomToTop">下から上へ</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">左／上から右／下へ</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">右／下から左／上へ</string>
+  <string name="LabelImageAlignment">画像位置調整</string>
+  <string name="LabelImageAlignmentLeftTop">左／上</string>
+  <string name="LabelImageAlignmentCenter">中央</string>
+  <string name="LabelImageAlignmentRightBottom">右／下</string>
+  <string name="LabelVideoCodecProblem">ビデオコーデックの問題</string>
+  <string name="MsgPhotoTransferBegin">写真転送開始</string>
+  <string name="MsgPhotoTransferDone">写真転送終了</string>
+  <string name="MsgPhotoTransferError">転送失敗！\nメッセージ：｛0｝</string>
+  <string name="MsgBulbModeNotSupported">バルブ撮影は未対応です</string>
+  <string name="MsgApplicationUpToDate">アプリケーションは最新です！</string>
+  <string name="MsgUseSessionEditorTags">タグ定義には作業エディタを使います！</string>
+  <string name="MsgLastSessionCantBeDeleted">最新の作業結果は削除されていません</string>
+  <string name="MsgStopTimeLapse">微速度撮影は終了していません！　微速度撮影を終了しますか？</string>
+  <string name="MsgInstallXvidCodec">Xvidコーデックがインストールされていません！\nダウンロードしてインストールしますか？</string>
+  <string name="MsgDeleteSessionQuestion">作業削除を続行しますか？　ファイルは何も削除されていません！</string>
+  <string name="MsgBracketingDone">ブラケット撮影終了</string>
+  <string name="MsgActionInProgress">実行中です {0}/{1}</string>
+  <string name="MenuFile">_ファイル</string>
+  <string name="MenuReScan">カメラ接続を再検索</string>
+  <string name="MenuConnectedCameras">接続中のカメラ</string>
+  <string name="MenuExit">終了</string>
+  <string name="MenuView">_ビュー</string>
+  <string name="MenuMultipleCamera">複数カメラ制御</string>
+  <string name="MenuSelectedCameraProperty">選択中のカメラのプロパティ</string>
+  <string name="MenuPresets">プリセット</string>
+  <string name="MenuPresetsLoad">読み込み</string>
+  <string name="MenuPresetsSave">保存</string>
+  <string name="MenuPresetsEdit">編集</string>
+  <string name="MenuHelp">ヘルプ</string>
+  <string name="MenuHomePage">ホームページ</string>
+  <string name="MenuCheckForUpdate">更新を確認</string>
+  <string name="MenuDonate">寄付</string>
+  <string name="MenuAbout">digiCamControl について</string>
+  <string name="MenuLayout">配置</string>
+  <string name="MenuLayoutNormal">通常</string>
+  <string name="MenuLayoutGridRight">右側にサムネイル</string>
+  <string name="MenuLayoutGrid">サムネイル</string>
+  <string name="MenuProperties">プロパティ</string>
+  <string name="MenuUseSelectedCameraPreset">選択したカメラのプリセットを使用</string>
+  <!--15/10/2012-->
+  <string name="LabelExternalViewerPath">外部ビュワーコンテキストメニュー</string>
+  <string name="LabelStayOnTop">常に前面</string>
+  <!--22/10/2012-->
+  <string name="LabelDisplay">表示</string>
+  <string name="LabelMotionDetection">動き検出</string>
+  <string name="LabelActivateMotionDetection">動き検出有効</string>
+  <string name="LabelCaptureWhenMove">動き検出時に撮影</string>
+  <string name="LabelThreshold">ｽﾚｯｼｮﾙﾄﾞ(%)</string>
+  <string name="LabelWaitMoion">待ち時間（秒）</string>
+  <!--25/10/2012-->
+  <string name="LabelAutofocusBeforeCapture">撮影前にAF</string>
+  <!--26/10/2012-->
+  <string name="LabelOpacity">不透明度</string>
+  <!--29/10/2012-->
+  <string name="LabelMotionDetectionType">動き検出タイプ</string>
+  <string name="LabelTwoFramesDifferenceDetector">フレーム間差分検出</string>
+  <string name="LabelSimpleBackgroundModelingDetector">単純背景モデリング検出</string>
+  <string name="LabelSmallestBlockSize">最小ブロックサイズ</string>
+  <string name="ButtonHelp">ヘルプ</string>
+  <!--31/10/2012-->
+  <string name="LabelMenu">メニュー</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">フォーラム</string>
+  <!--07/11/2012-->
+  <string name="ButtonGetRawCodec">RAWコ－デック取得</string>
+  <!--08/11/2012-->
+  <string name="LabelErrorRecordMovie">録画開始失敗</string>
+  <string name="LabelNoCardInserted">カードが挿入されていません</string>
+  <string name="LabelCardError">カード異常</string>
+  <string name="LabelCardNotFormatted">カードがフォーマットされていません</string>
+  <string name="LabelNoFreeAreaInCard">カード空き容量が不足しています</string>
+  <string name="LabelCardBufferNotEmpty">カード記録用のデータがバッファに残っています。</string>
+  <string name="LabelPcBufferNotEmpty">バッファにPCへ転送するデータが残っています。</string>
+  <string name="LabelBufferNotEmpty">バッファに動画データが残っています。</string>
+  <string name="LabelRecordInProgres">動画ファイルを記録中です。</string>
+  <string name="LabelCardProtected">カードが書き込み禁止です</string>
+  <string name="LabelDuringEnlargedDisplayLiveView">ライブビュー拡大表示中</string>
+  <string name="LabelWrongLiveViewType">ライブビュー選択が写真撮影になっています</string>
+  <string name="LabelNotInApplicationMode">カメラがアプリケーションモードになっていません</string>
+  <string name="ButtonResetSettings">設定をリセット</string>
+  <!--14/11/2012-->
+  <string name="LabelUseExternalViewer">外部ビュワーを使う</string>
+  <string name="LabelExternalPreViewerPath">外部ビュワーのパス</string>
+  <string name="LabelExternalPreViewerArgs">外部ビュワー引数</string>
+  <!--18/11/2012-->
+  <string name="LabelControl">制御</string>
+  <!--20/11/2012-->
+  <string name="LabelExport">書き出し</string>
+  <!--21/11/2012-->
+  <string name="LabelDownload">ダウンロード</string>
+  <!--25/11/2012-->
+  <string name="DownloadWindowTitle">写真のダウンロード</string>
+  <string name="LabelDeleteFilesAfterTransfer">転送後にファイルを削除</string>
+  <string name="LabelAskForDelete">転送したファイルは削除されます。　続けますか？</string>
+  <!--26/11/2012-->
+  <string name="LabelErrorSetFocusPos">フォーカス位置エラー</string>
+  <string name="LabelErrorUnableFocus">ピントが合いません</string>
+  <!--28/11/2012-->
+  <string name="LabelErrorLoadingFileList">フィアルリスト取得失敗</string>
+  <!--30/11/2012-->
+  <string name="LabelTransfer">転送</string>
+  <string name="LabelTransferItem1">１．PCのみに保存</string>
+  <string name="LabelTransferItem2">２．カメラのみに保存</string>
+  <string name="LabelTransferItem3">３．PCとカメラに保存</string>
+  <!--05/12/2012-->
+  <string name="MsgDisabledDrivers">ドライバーが無効です。　有効にしますか？</string>
+  <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">フォーカス位置の表示</string>
+  <string name="LabelMainWindow">メインウインドウ</string>
+  <string name="LabelSelect">選択</string>
+  <string name="TimeSelectWindowTitle">ウィンドウの選択</string>
+  <!--16/12/2012-->
+  <string name="LabelRotateNone">なし</string>
+  <string name="LabelRotate90">９０度回転</string>
+  <string name="LabelRotate180">１８０度回転</string>
+  <string name="LabelRotate270">２７０度回転</string>
+  <string name="LabelLowMemoryUsage">メモリ使用量小</string>
+  <!--04/01/2013-->
+  <string name="LabelRawCodecNotInstalled">RAWコーデックがインストールされていないか、又は不明の形式です</string>
+  <!--05/01/2013-->
+  <string name="LabelUseCameraCounter">汎用カウンターではなくカメラのカウンターを使って下さい</string>
+  <string name="LabelResetCounters">カウンターのリセット</string>
+  <!--07/01/2013-->
+  <string name="LabelUnabletoDeleteSession">作業内容を削除出来ません。</string>
+  <!--12/01/2013-->
+  <string name="LabelWaitingForDevice">機器の準備完了を待っています。</string>
+  <string name="LabelAdvanced">拡張</string>
+  <string name="LabelUseParellelTransfer">並列ファイル転送を使う</string>
+  <!--19/01/2013-->
+  <string name="LabelUnHandledError">アプリケーションエラーが発生しました。\nデータが正しいか確認して再試行して下さい。　このエラーが再発したりより深刻な故障と思われる場合はアプリケーションを終了して下さい。\nエラー：{0}\n\n続行しますか？\n（「はい」をクリックすると続行します。「いいえをクリックすると終了します」）</string>
+  <string name="LabelApplicationError">アプリケーションエラー</string>
+  <string name="LabelWiaNotInstalled">WIA 2.0 がインストールされていません。</string>
+  <string name="LabelRestartTheApplication">アプリケーションを再起動して下さい！</string>
+  <string name="LabelOutOfMemory">アプリケーションのメモリ不足です。　アプリケーションを停止します。</string>
+  <string name="LabelApplicationAlreadyRunning">アプリケーションは既に起動しています。</string>
+  <string name="LabelDeleteSession">作業の削除</string>
+  <string name="LabelStartCapture">キャプチャ開始</string>
+  <string name="LabelStopCapture">キャプチャ停止</string>
+  <string name="LabelCaptureTime">キャプチャ時間（秒）</string>
+  <string name="LabelTimeBetweenShots">撮影間隔</string>
+  <string name="LabelDontAutofocus">AFしない</string>
+  <string name="LabelShowUnTranslatedStringIds">翻訳せずに文字列IDを表示</string>
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <string name="LabelSelected">選択済</string>
+  <!--31/01/2013-->
+  <string name="LabelNone">なし</string>
+  <string name="LabelComboGrid">サムネイル</string>
+  <!--13/03/2013-->
+  <!--17/03/2012-->
+  <string name="LabelMFError">カメラはマニュアルフォーカスモードです</string>
+  <string name="LabelNotAFSError">フォーカスモードがシングルAFサーボモードではありません</string>
+  <!--28/03/2012-->
+  <string name="LabelApertureValueError">絞り値はレンズの絞りリングで設定されています</string>
+  <string name="LabelNonCPULEnseError">非CPUレンズが接続され、撮影モードがマニュアル（M）ではありません</string>
+  <string name="LabelOverHeatedError">CCDの温度が高いためライブビューが開始できません</string>
+  <string name="LabelCardProtectedError">カードが書き込み禁止です</string>
+  <string name="LabelMirrorUpError">レリーズモードがミラーアップ撮影に設定されており、現在、ミラーアップ中です</string>
+  <string name="LabelMirrorUpError2">レリーズモードは[ミラーアップ撮影]です</string>
+  <string name="LabelDestinationCardError">カードへ記録</string>
+  <string name="LabelLiveViewError">ライブビュー開始時にエラーが発生しました</string>
+  <!--07/05/2013-->
+  <string name="LabelDevices">デバイス</string>
+  <string name="LabelExternalShutterRelease">外部シャッター</string>
+  <string name="LabelConfigName">設定名</string>
+  <string name="LabelDriver">ドライバー</string>
+  <string name="LabelAstronomy">天体写真</string>
+  <string name="LabelEnable">可</string>
+  <string name="LabelUseConfiguration">設定を適用</string>
+  <string name="LabelNoExternalDeviceSelected">外部デバイスが選択されていません</string>
+  <string name="LabelScript">スクリプト</string>
+  <string name="LabelStartScript">スクリプト開始</string>
+  <string name="LabelStopScript">スクリプト停止</string>
+  <string name="LabelDeviceSettings">デバイス設定</string>
+  <string name="LabelAvailableDevices">使用可能デバイス</string>
+  <string name="LabelCommands">コマンド</string>
+  <string name="LabelStartLiveView">ライブビューを開始</string>
+  <string name="LabelStopLiveView">ライブビューを停止</string>
+  <string name="LabelBrightness">明るさ</string>
+  <string name="LabelUseExternalShutterRelease">外部シャッターを使用</string>
+  <string name="LabelDownloadJpgOnly">JPG画像のみダウンロード</string>
+  <string name="LabelSetCounters">カウンター・セット</string>
+  <!--04/07/2013-->
+  <string name="LabelEasyLiveViewControl">ライブビュー操作</string>
+  <string name="LabelExif">Exif</string>
+  <string name="LabelFileName">ファイル名</string>
+  <string name="LabelSet">セット</string>
+  <string name="LabelComment">コメント</string>
+  <string name="LabelStayOnTop2">前面に表示</string>
+  <string name="LabelClearCache">キャッシュをクリア</string>
+  <string name="LabelShowMagnifierInFullSccreen">拡大鏡をフルスクリーンに表示</string>
+  <string name="LabelPHDGuiding">PHDガイディング撮影</string>
+  <string name="LabelAutoRotate">自動回転</string>
+  <string name="LabelReset">リセット</string>
+  <string name="LabelFocus">ピント</string>
+  <!--17/11/2013-->
+  <string name="LabelBarcode">バーコード</string>
+  <string name="LabelSendTheLogFile">ログファイルを送信</string>
+  <string name="LabelAskSendLogFile">開発者へログファイルを送信しますか？</string>
+  <string name="LabelSyncCameraDate">接続カメラの日時と時間をPCと同期</string>
+  <string name="LabelSend">送信</string>
+  <string name="LabelLogMessage">開発者へメッセージを送る</string>
+  <string name="LabelLogText">ログファイルを今後の開発のために開発者へ送信する</string>
+  <string name="LabelFullscreen">全画面</string>
+  <string name="LabelSelection">選択</string>
+  <string name="LabelSelectAll">全選択</string>
+  <string name="LabelSelectNone">選択しない</string>
+</resources>

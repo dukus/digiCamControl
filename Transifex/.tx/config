@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[digicamcontrol.baseresource]
+file_filter = translations\digicamcontrol.baseresource\<lang>.xml
+source_lang = en
+

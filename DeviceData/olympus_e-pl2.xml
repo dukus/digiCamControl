@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<XmlDeviceData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AvaiableCommands>
+    <XmlCommandDescriptor Code="4097" Name="PTP_OC_GetDeviceInfo" HexCode="1001" />
+    <XmlCommandDescriptor Code="4098" Name="PTP_OC_OpenSession" HexCode="1002" />
+    <XmlCommandDescriptor Code="4099" Name="PTP_OC_CloseSession" HexCode="1003" />
+    <XmlCommandDescriptor Code="4100" Name="PTP_OC_GetStorageIDs" HexCode="1004" />
+    <XmlCommandDescriptor Code="4101" Name="PTP_OC_GetStorageInfo" HexCode="1005" />
+    <XmlCommandDescriptor Code="4102" Name="PTP_OC_GetNumObjects" HexCode="1006" />
+    <XmlCommandDescriptor Code="4103" Name="PTP_OC_GetObjectHandles" HexCode="1007" />
+    <XmlCommandDescriptor Code="4104" Name="PTP_OC_GetObjectInfo" HexCode="1008" />
+    <XmlCommandDescriptor Code="4105" Name="PTP_OC_GetObject" HexCode="1009" />
+    <XmlCommandDescriptor Code="4106" Name="PTP_OC_GetThumb" HexCode="100A" />
+    <XmlCommandDescriptor Code="4111" Name="PTP_OC_FormatStore" HexCode="100F" />
+    <XmlCommandDescriptor Code="4107" Name="PTP_OC_DeleteObject" HexCode="100B" />
+    <XmlCommandDescriptor Code="4123" Name="PTP_OC_GetPartialObject" HexCode="101B" />
+    <XmlCommandDescriptor Code="4116" Name="PTP_OC_GetDevicePropDesc" HexCode="1014" />
+    <XmlCommandDescriptor Code="4117" Name="PTP_OC_GetDevicePropValue" HexCode="1015" />
+    <XmlCommandDescriptor Code="4118" Name="PTP_OC_SetDevicePropValue" HexCode="1016" />
+    <XmlCommandDescriptor Code="38913" Name="PTP_OC_MTP_GetObjectPropsSupported" HexCode="9801" />
+    <XmlCommandDescriptor Code="38914" Name="PTP_OC_MTP_GetObjectPropDesc" HexCode="9802" />
+    <XmlCommandDescriptor Code="38915" Name="PTP_OC_MTP_GetObjectPropValue" HexCode="9803" />
+    <XmlCommandDescriptor Code="38917" Name="PTP_OC_MTP_GetObjPropList" HexCode="9805" />
+  </AvaiableCommands>
+  <AvaiableEvents>
+    <XmlEventDescriptor Code="16386" Name="PTP_EC_ObjectAdded" HexCode="4002" />
+    <XmlEventDescriptor Code="16393" Name="PTP_EC_RequestObjectTransfer" HexCode="4009" />
+    <XmlEventDescriptor Code="16388" Name="PTP_EC_StoreAdded" HexCode="4004" />
+    <XmlEventDescriptor Code="16389" Name="PTP_EC_StoreRemoved" HexCode="4005" />
+  </AvaiableEvents>
+  <AvaiableProperties>
+    <XmlPropertyDescriptor Code="54277" Name="PTP_DPC_MTP_DeviceIcon" DataType="0" DataForm="0" HexCode="D405">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54279" Name="PTP_DPC_MTP_PerceivedDeviceType" DataType="0" DataForm="0" HexCode="D407">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20481" Name="PTP_DPC_BatteryLevel" DataType="0" DataForm="0" HexCode="5001">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="20497" Name="PTP_DPC_DateTime" DataType="0" DataForm="0" HexCode="5011">
+      <Values />
+    </XmlPropertyDescriptor>
+    <XmlPropertyDescriptor Code="54278" Name="PTP_DPC_MTP_SessionInitiatorInfo" DataType="0" DataForm="0" HexCode="D406">
+      <Values />
+    </XmlPropertyDescriptor>
+  </AvaiableProperties>
+  <Model>E-PL2</Model>
+  <Manufacturer>OLYMPUS</Manufacturer>
+</XmlDeviceData>

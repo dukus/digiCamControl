@@ -1,0 +1,86 @@
+﻿<Controls:MetroWindow x:Class="CameraControl.windows.BraketingWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension BraketingWindowTitle}" Height="482" Width="715" Loaded="Window_Loaded" Closing="Window_Closing" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      ShowMaxRestoreButton="False" ShowMinButton="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands >
+            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="361*" />
+            <RowDefinition Height="33*" />
+            <RowDefinition Height="49*" />
+        </Grid.RowDefinitions>
+        <TabControl SelectionChanged="TabControl_SelectionChanged" TabStripPlacement="Left">
+            <TabItem Header="{T:TranslateExtension LabelExposureBracketing}" Name="tab_exposure" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="38*" />
+                        <RowDefinition Height="241*" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <ListBox Name="listBox1" Grid.Row="1">
+                        <ListBox.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <WrapPanel>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
+                                </WrapPanel>
+                            </HierarchicalDataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="{T:TranslateExtension LabelExposureBracketingToolTip}" TextWrapping="Wrap" Margin="0,0,0,215" Grid.RowSpan="2" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelManualExposureBracketing}" Name="tab_manual">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="41*" />
+                        <RowDefinition Height="238*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{T:TranslateExtension LabelManualExposureBracketingToolTip}" TextWrapping="Wrap" Margin="0,0,0,215" Grid.RowSpan="2" />
+                    <ListBox Name="lst_shutter" Grid.Row="1" Margin="3">
+                        <ListBox.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
+                            </HierarchicalDataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelPresetBracketing}" Name="tab_preset">
+                <Grid >
+                    <ListBox Name="lst_preset">
+                        <ListBox.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
+                            </HierarchicalDataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="2" HorizontalAlignment="Left" Margin="12,0,0,14" Name="btn_shot" Width="75" Height="23" VerticalAlignment="Bottom" Click="btn_shot_Click" />
+        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,12,14" Name="btn_close" Width="75" Click="btn_close_Click" Height="23" VerticalAlignment="Bottom" />
+        <Label Content="" Name="lbl_status" Grid.Row="1" />
+        <Button Content="{T:TranslateExtension LabelReset}" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="101,10,0,0" Name="btn_reset" VerticalAlignment="Top" Width="75" Click="btn_reset_Click" />
+    </Grid>
+</Controls:MetroWindow>
