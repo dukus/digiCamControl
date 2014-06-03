@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +41,8 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
+
+#endregion
 
 namespace CameraControl.Actions
 {
@@ -97,10 +129,11 @@ namespace CameraControl.Actions
         }
 
         #endregion
+
         private void OnProgressChange(string s)
         {
             if (ProgressChanged != null)
-                ProgressChanged(this, new ActionEventArgs() { Message = s });
+                ProgressChanged(this, new ActionEventArgs() {Message = s});
         }
 
         private void OnActionDone()
@@ -111,13 +144,14 @@ namespace CameraControl.Actions
             ServiceProvider.Settings.DefaultSession.SelectNone();
         }
 
-        void Exec(double br)
+        private void Exec(double br)
         {
             string _infile = ServiceProvider.Settings.SelectedBitmap.FileItem.FileName;
-            string _otfile = Path.Combine(Path.GetDirectoryName(_infile), Path.GetFileNameWithoutExtension(_infile) + (br > 0 ? "+" : "") + br + ".jpg");
+            string _otfile = Path.Combine(Path.GetDirectoryName(_infile),
+                                          Path.GetFileNameWithoutExtension(_infile) + (br > 0 ? "+" : "") + br + ".jpg");
             string _pathtoufraw =
-              Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "ufraw",
-                           "ufraw-batch.exe");
+                Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "ufraw",
+                             "ufraw-batch.exe");
             if (File.Exists(_pathtoufraw))
             {
                 if (PhotoUtils.RunAndWait(_pathtoufraw,

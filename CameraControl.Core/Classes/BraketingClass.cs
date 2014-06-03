@@ -1,7 +1,39 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Threading;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Core.Classes
 {
@@ -33,6 +65,7 @@ namespace CameraControl.Core.Classes
         public int Mode { get; set; }
 
         private AsyncObservableCollection<string> _exposureValues;
+
         public AsyncObservableCollection<string> ExposureValues
         {
             get { return _exposureValues; }
@@ -44,6 +77,7 @@ namespace CameraControl.Core.Classes
         }
 
         private AsyncObservableCollection<string> _shutterValues;
+
         public AsyncObservableCollection<string> ShutterValues
         {
             get { return _shutterValues; }
@@ -55,6 +89,7 @@ namespace CameraControl.Core.Classes
         }
 
         private AsyncObservableCollection<string> _presetValues;
+
         public AsyncObservableCollection<string> PresetValues
         {
             get { return _presetValues; }
@@ -146,13 +181,12 @@ namespace CameraControl.Core.Classes
                             Log.Error(exception);
                             StaticHelper.Instance.SystemMessage = exception.Message;
                         }
-
                     }
                     break;
             }
         }
 
-        void _cameraDevice_CaptureCompleted(object sender, EventArgs e)
+        private void _cameraDevice_CaptureCompleted(object sender, EventArgs e)
         {
             if (!IsBusy)
                 return;
@@ -260,7 +294,6 @@ namespace CameraControl.Core.Classes
                             Log.Error(exception);
                             StaticHelper.Instance.SystemMessage = exception.Message;
                         }
-
                     }
                     break;
             }
@@ -279,13 +312,13 @@ namespace CameraControl.Core.Classes
                 case 0:
                     {
                         thread = new Thread(() => _cameraDevice.
-                                                    ExposureCompensation.SetValue(_defec));
+                                                      ExposureCompensation.SetValue(_defec));
                     }
                     break;
                 case 1:
                     {
                         thread = new Thread(() => _cameraDevice.
-                                                    ShutterSpeed.SetValue(_defec));
+                                                      ShutterSpeed.SetValue(_defec));
                     }
                     break;
                 case 2:
@@ -298,6 +331,5 @@ namespace CameraControl.Core.Classes
             if (BracketingDone != null)
                 BracketingDone(this, new EventArgs());
         }
-
     }
 }

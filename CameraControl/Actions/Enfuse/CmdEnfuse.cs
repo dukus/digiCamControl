@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,9 +43,11 @@ using CameraControl.Devices.Classes;
 using CameraControl.windows;
 using CameraControl.Core;
 
+#endregion
+
 namespace CameraControl.Actions.Enfuse
 {
-    class CmdEnfuse : BaseFieldClass, IMenuAction, ICommand
+    internal class CmdEnfuse : BaseFieldClass, IMenuAction, ICommand
     {
         #region Implementation of IMenuAction
 
@@ -51,8 +83,12 @@ namespace CameraControl.Actions.Enfuse
         {
             IsBusy = true;
             _shouldStop = false;
-            _pathtoalign = Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Tools", "align_image_stack.exe");
-            _pathtoenfuse = Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Tools", "enfuse.exe");
+            _pathtoalign =
+                Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+                             "Tools", "align_image_stack.exe");
+            _pathtoenfuse =
+                Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+                             "Tools", "enfuse.exe");
             _files = ServiceProvider.Settings.DefaultSession.GetSelectedFiles();
             if (_files.Count < 2)
             {
@@ -109,7 +145,7 @@ namespace CameraControl.Actions.Enfuse
 
         public void Execute(object parameter)
         {
-            EnfuseSettingsWnd wnds = new EnfuseSettingsWnd { DataContext = _settings };
+            EnfuseSettingsWnd wnds = new EnfuseSettingsWnd {DataContext = _settings};
             if (wnds.ShowDialog() == true)
             {
                 IMenuAction action = parameter as IMenuAction;
@@ -135,6 +171,7 @@ namespace CameraControl.Actions.Enfuse
         }
 
         #endregion
+
         private void CopyFiles()
         {
             int counter = 0;
@@ -148,7 +185,8 @@ namespace CameraControl.Actions.Enfuse
                 {
                     string randomFile = Path.Combine(_tempdir, "image_" + counter.ToString("0000") + ".jpg");
                     OnProgressChange("Copying file " + fileItem.Name);
-                    PhotoUtils.CopyPhotoScale(fileItem.FileName, randomFile, _settings.Scale == 0 ? 1 : (double)1 / (_settings.Scale * 2));
+                    PhotoUtils.CopyPhotoScale(fileItem.FileName, randomFile,
+                                              _settings.Scale == 0 ? 1 : (double) 1/(_settings.Scale*2));
                     _filenames.Add(randomFile);
                     counter++;
                     if (_shouldStop)
@@ -169,7 +207,7 @@ namespace CameraControl.Actions.Enfuse
         private void OnProgressChange(string s)
         {
             if (ProgressChanged != null)
-                ProgressChanged(this, new ActionEventArgs() { Message = s });
+                ProgressChanged(this, new ActionEventArgs() {Message = s});
         }
 
         private void OnActionDone()
@@ -225,17 +263,17 @@ namespace CameraControl.Actions.Enfuse
                 OnProgressChange("This may take few minutes too");
                 _resulfile = Path.Combine(_tempdir, Path.GetFileName(_files[0].FileName) + _files.Count + "_enfuse.jpg");
                 _resulfile =
-                  StaticHelper.GetUniqueFilename(
-                    Path.GetDirectoryName(_files[0].FileName) + "\\" +
-                    Path.GetFileNameWithoutExtension(_files[0].FileName) + "_enfuse", 0, ".jpg");
+                    StaticHelper.GetUniqueFilename(
+                        Path.GetDirectoryName(_files[0].FileName) + "\\" +
+                        Path.GetFileNameWithoutExtension(_files[0].FileName) + "_enfuse", 0, ".jpg");
                 _resulfile = Path.Combine(_tempdir, Path.GetFileName(_resulfile));
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append(" -l 20 -o " + _resulfile);
-                stringBuilder.Append(" --exposure-weight=" + decimal.Round((decimal)(_settings.EnfuseExp / 100), 2));
-                stringBuilder.Append(" --saturation-weight=" + decimal.Round((decimal)(_settings.EnfuseSat / 100), 2));
-                stringBuilder.Append(" --contrast-weight=" + decimal.Round((decimal)(_settings.EnfuseCont / 100), 2));
-                stringBuilder.Append(" --entropy-weight=" + decimal.Round((decimal)(_settings.EnfuseEnt / 100), 2));
-                stringBuilder.Append(" --exposure-sigma=" + decimal.Round((decimal)(_settings.EnfuseSigma / 100), 2));
+                stringBuilder.Append(" --exposure-weight=" + decimal.Round((decimal) (_settings.EnfuseExp/100), 2));
+                stringBuilder.Append(" --saturation-weight=" + decimal.Round((decimal) (_settings.EnfuseSat/100), 2));
+                stringBuilder.Append(" --contrast-weight=" + decimal.Round((decimal) (_settings.EnfuseCont/100), 2));
+                stringBuilder.Append(" --entropy-weight=" + decimal.Round((decimal) (_settings.EnfuseEnt/100), 2));
+                stringBuilder.Append(" --exposure-sigma=" + decimal.Round((decimal) (_settings.EnfuseSigma/100), 2));
                 stringBuilder.Append(" --contrast-window-size=" + _settings.ContrasWindow);
                 if (_settings.HardMask)
                 {
@@ -253,7 +291,8 @@ namespace CameraControl.Actions.Enfuse
                 process.WaitForExit();
                 if (File.Exists(_resulfile))
                 {
-                    string localfile = Path.Combine(Path.GetDirectoryName(_files[0].FileName), Path.GetFileName(_resulfile));
+                    string localfile = Path.Combine(Path.GetDirectoryName(_files[0].FileName),
+                                                    Path.GetFileName(_resulfile));
                     File.Copy(_resulfile, localfile, true);
                     ServiceProvider.Settings.DefaultSession.AddFile(localfile);
                 }

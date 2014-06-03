@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Linq;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -26,6 +56,8 @@ using MessageBox = System.Windows.MessageBox;
 using Path = System.IO.Path;
 using Timer = System.Timers.Timer;
 
+#endregion
+
 namespace CameraControl
 {
     /// <summary>
@@ -33,7 +65,6 @@ namespace CameraControl
     /// </summary>
     public partial class MainWindow : MetroWindow, IMainWindowPlugin, INotifyPropertyChanged
     {
-
         public PropertyWnd PropertyWnd { get; set; }
         public string DisplayName { get; set; }
 
@@ -58,7 +89,8 @@ namespace CameraControl
             {
                 Title = ServiceProvider.Branding.ApplicationTitle;
             }
-            if (!string.IsNullOrEmpty(ServiceProvider.Branding.LogoImage) && File.Exists(ServiceProvider.Branding.LogoImage))
+            if (!string.IsNullOrEmpty(ServiceProvider.Branding.LogoImage) &&
+                File.Exists(ServiceProvider.Branding.LogoImage))
             {
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.
@@ -71,7 +103,7 @@ namespace CameraControl
             _selectiontimer.AutoReset = false;
         }
 
-        void _selectiontimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _selectiontimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (_selectedItem != null)
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Select_Image, _selectedItem);
@@ -102,7 +134,7 @@ namespace CameraControl
             }
         }
 
-        void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
+        private void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
         {
             Dispatcher.BeginInvoke(
                 new Action(
@@ -130,11 +162,11 @@ namespace CameraControl
 
         private void HideFlatOuts()
         {
-            ((Flyout)Flyouts.Items[0]).IsOpen = false;
-            ((Flyout)Flyouts.Items[1]).IsOpen = false;
+            ((Flyout) Flyouts.Items[0]).IsOpen = false;
+            ((Flyout) Flyouts.Items[1]).IsOpen = false;
         }
 
-        void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             if (ServiceProvider.Settings.UseParallelTransfer)
             {
@@ -149,7 +181,7 @@ namespace CameraControl
             }
         }
 
-        void PhotoCaptured(object o)
+        private void PhotoCaptured(object o)
         {
             PhotoCapturedEventArgs eventArgs = o as PhotoCapturedEventArgs;
             if (eventArgs == null)
@@ -159,7 +191,7 @@ namespace CameraControl
                 Log.Debug("Photo transfer begin.");
                 eventArgs.CameraDevice.IsBusy = true;
                 CameraProperty property = eventArgs.CameraDevice.LoadProperties();
-                PhotoSession session = (PhotoSession)eventArgs.CameraDevice.AttachedPhotoSession ??
+                PhotoSession session = (PhotoSession) eventArgs.CameraDevice.AttachedPhotoSession ??
                                        ServiceProvider.Settings.DefaultSession;
                 StaticHelper.Instance.SystemMessage = "";
                 if (!eventArgs.CameraDevice.CaptureInSdRam)
@@ -181,20 +213,21 @@ namespace CameraControl
                 if (!session.UseOriginalFilename || eventArgs.CameraDevice.CaptureInSdRam)
                 {
                     fileName =
-                      session.GetNextFileName(Path.GetExtension(eventArgs.FileName),
-                                              eventArgs.CameraDevice);
+                        session.GetNextFileName(Path.GetExtension(eventArgs.FileName),
+                                                eventArgs.CameraDevice);
                 }
                 else
                 {
                     fileName = Path.Combine(session.Folder, eventArgs.FileName);
                     if (File.Exists(fileName) && !session.AllowOverWrite)
                         fileName =
-                          StaticHelper.GetUniqueFilename(
-                            Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) + "_", 0,
-                            Path.GetExtension(fileName));
+                            StaticHelper.GetUniqueFilename(
+                                Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) +
+                                "_", 0,
+                                Path.GetExtension(fileName));
                 }
-                
-                if(session.AllowOverWrite && File.Exists(fileName))
+
+                if (session.AllowOverWrite && File.Exists(fileName))
                 {
                     File.Delete(fileName);
                 }
@@ -210,30 +243,34 @@ namespace CameraControl
                 //Log.Debug("[BENCHMARK]Speed :" +
                 //          (new FileInfo(fileName).Length / (DateTime.Now - startTIme).TotalSeconds / 1024 / 1024).ToString("0000.00"));
                 //Log.Debug("[BENCHMARK]Transfer time :" + ((DateTime.Now - startTIme).TotalSeconds).ToString("0000.000"));
-                
+
                 // write comment and tags directly in transferred file
                 if (ServiceProvider.Settings.DefaultSession.WriteComment)
                 {
                     if (!string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.Comment))
                         Exiv2Helper.SaveComment(fileName, ServiceProvider.Settings.DefaultSession.Comment);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag1!=null && !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag1.Value))
+                    if (ServiceProvider.Settings.DefaultSession.SelectedTag1 != null &&
+                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag1.Value))
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag1.Value);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag2 != null && !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag2.Value))
+                    if (ServiceProvider.Settings.DefaultSession.SelectedTag2 != null &&
+                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag2.Value))
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag2.Value);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag3 != null && !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag3.Value))
+                    if (ServiceProvider.Settings.DefaultSession.SelectedTag3 != null &&
+                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag3.Value))
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag3.Value);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag4 != null && !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag4.Value))
+                    if (ServiceProvider.Settings.DefaultSession.SelectedTag4 != null &&
+                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag4.Value))
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag4.Value);
                 }
                 _selectedItem = session.AddFile(fileName);
                 //select the new file only when the multiple camera support isn't used to prevent high CPU usage on raw files
                 if (ServiceProvider.Settings.AutoPreview &&
-                    !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
-                    !ServiceProvider.Settings.UseExternalViewer )
+                    !ServiceProvider.WindowsManager.Get(typeof (MultipleCameraWnd)).IsVisible &&
+                    !ServiceProvider.Settings.UseExternalViewer)
                 {
-                    if ((Path.GetExtension(fileName).ToLower() == ".jpg" && ServiceProvider.Settings.AutoPreviewJpgOnly) || !ServiceProvider.Settings.AutoPreviewJpgOnly)
+                    if ((Path.GetExtension(fileName).ToLower() == ".jpg" && ServiceProvider.Settings.AutoPreviewJpgOnly) ||
+                        !ServiceProvider.Settings.AutoPreviewJpgOnly)
                     {
-
                         if (ServiceProvider.Settings.DelayImageLoading &&
                             (DateTime.Now - _lastLoadTime).TotalSeconds < 4)
                         {
@@ -252,10 +289,11 @@ namespace CameraControl
                 eventArgs.CameraDevice.IsBusy = false;
                 //show fullscreen only when the multiple camera support isn't used
                 if (ServiceProvider.Settings.Preview &&
-                    !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
+                    !ServiceProvider.WindowsManager.Get(typeof (MultipleCameraWnd)).IsVisible &&
                     !ServiceProvider.Settings.UseExternalViewer)
                     ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_ShowTimed);
-                if (ServiceProvider.Settings.UseExternalViewer && File.Exists(ServiceProvider.Settings.ExternalViewerPath))
+                if (ServiceProvider.Settings.UseExternalViewer &&
+                    File.Exists(ServiceProvider.Settings.ExternalViewerPath))
                 {
                     string arg = ServiceProvider.Settings.ExternalViewerArgs;
                     arg = arg.Contains("%1") ? arg.Replace("%1", fileName) : arg + " " + fileName;
@@ -278,23 +316,11 @@ namespace CameraControl
             //GC.WaitForPendingFinalizers();
         }
 
-        public RelayCommand<CameraPreset> SelectPresetCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<CameraPreset> SelectPresetCommand { get; private set; }
 
-        public RelayCommand<IExportPlugin> ExecuteExportPluginCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<IExportPlugin> ExecuteExportPluginCommand { get; private set; }
 
-        public RelayCommand<IToolPlugin> ExecuteToolPluginCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<IToolPlugin> ExecuteToolPluginCommand { get; private set; }
 
         private void SelectPreset(CameraPreset preset)
         {
@@ -308,11 +334,14 @@ namespace CameraControl
             Log.Debug("Main window capture started");
             try
             {
-                if (ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed != null && ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed.Value == "Bulb")
+                if (ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed != null &&
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed.Value == "Bulb")
                 {
                     if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.Bulb))
                     {
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show, ServiceProvider.DeviceManager.SelectedCameraDevice); return;
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show,
+                                                                      ServiceProvider.DeviceManager.SelectedCameraDevice);
+                        return;
                     }
                     else
                     {
@@ -404,7 +433,6 @@ namespace CameraControl
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-
         }
 
         private void but_fullscreen_Click(object sender, RoutedEventArgs e)
@@ -419,13 +447,12 @@ namespace CameraControl
         }
 
 
-
         private void btn_br_Click(object sender, RoutedEventArgs e)
         {
-            BraketingWnd wnd = new BraketingWnd(ServiceProvider.DeviceManager.SelectedCameraDevice, ServiceProvider.Settings.DefaultSession);
+            BraketingWnd wnd = new BraketingWnd(ServiceProvider.DeviceManager.SelectedCameraDevice,
+                                                ServiceProvider.Settings.DefaultSession);
             wnd.ShowDialog();
         }
-
 
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -485,11 +512,14 @@ namespace CameraControl
             Log.Debug("Main window capture no af started");
             try
             {
-                if (ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed!=null && ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed.Value == "Bulb")
+                if (ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed != null &&
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed.Value == "Bulb")
                 {
                     if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.Bulb))
                     {
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show, ServiceProvider.DeviceManager.SelectedCameraDevice); return;
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show,
+                                                                      ServiceProvider.DeviceManager.SelectedCameraDevice);
+                        return;
                     }
                     else
                     {
@@ -511,17 +541,16 @@ namespace CameraControl
             }
         }
 
-        void SetLayout(string enumname)
+        private void SetLayout(string enumname)
         {
             LayoutTypeEnum type;
             if (Enum.TryParse(enumname, true, out type))
             {
-
             }
             SetLayout(type);
         }
 
-        void SetLayout(LayoutTypeEnum type)
+        private void SetLayout(LayoutTypeEnum type)
         {
             ServiceProvider.Settings.SelectedLayout = type.ToString();
             switch (type)
@@ -567,9 +596,10 @@ namespace CameraControl
 
         private void btn_Tags_Click(object sender, RoutedEventArgs e)
         {
-            ServiceProvider.WindowsManager.ExecuteCommand(ServiceProvider.WindowsManager.Get(typeof(TagSelectorWnd)).IsVisible
-                                                            ? WindowsCmdConsts.TagSelectorWnd_Hide
-                                                            : WindowsCmdConsts.TagSelectorWnd_Show);
+            ServiceProvider.WindowsManager.ExecuteCommand(
+                ServiceProvider.WindowsManager.Get(typeof (TagSelectorWnd)).IsVisible
+                    ? WindowsCmdConsts.TagSelectorWnd_Hide
+                    : WindowsCmdConsts.TagSelectorWnd_Show);
         }
 
         private void btn_del_Sesion_Click(object sender, RoutedEventArgs e)
@@ -578,7 +608,11 @@ namespace CameraControl
             {
                 try
                 {
-                    if (MessageBox.Show(string.Format(TranslationStrings.MsgDeleteSessionQuestion, ServiceProvider.Settings.DefaultSession.Name), TranslationStrings.LabelDeleteSession, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (
+                        MessageBox.Show(
+                            string.Format(TranslationStrings.MsgDeleteSessionQuestion,
+                                          ServiceProvider.Settings.DefaultSession.Name),
+                            TranslationStrings.LabelDeleteSession, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         PhotoSession session = ServiceProvider.Settings.DefaultSession;
                         if (!string.IsNullOrEmpty(session.ConfigFile) && File.Exists(session.ConfigFile))
@@ -612,8 +646,8 @@ namespace CameraControl
 
         private void btn_menu_Click(object sender, RoutedEventArgs e)
         {
-            ((Flyout)Flyouts.Items[0]).IsOpen = !((Flyout)Flyouts.Items[0]).IsOpen;
-            ((Flyout)Flyouts.Items[1]).IsOpen = !((Flyout)Flyouts.Items[1]).IsOpen;
+            ((Flyout) Flyouts.Items[0]).IsOpen = !((Flyout) Flyouts.Items[0]).IsOpen;
+            ((Flyout) Flyouts.Items[1]).IsOpen = !((Flyout) Flyouts.Items[1]).IsOpen;
         }
 
         private void mnu_forum_Click(object sender, RoutedEventArgs e)
@@ -638,7 +672,8 @@ namespace CameraControl
 
         private void but_download_Click(object sender, RoutedEventArgs e)
         {
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Show, ServiceProvider.DeviceManager.SelectedCameraDevice);
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Show,
+                                                          ServiceProvider.DeviceManager.SelectedCameraDevice);
         }
 
         private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -684,12 +719,12 @@ namespace CameraControl
                     new AsyncObservableCollection<ICameraDevice>(
                         ServiceProvider.DeviceManager.ConnectedDevices.OrderByDescending(x => x.DisplayName));
             }
-
         }
 
         private void but_star_Click(object sender, RoutedEventArgs e)
         {
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show, ServiceProvider.DeviceManager.SelectedCameraDevice);
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show,
+                                                          ServiceProvider.DeviceManager.SelectedCameraDevice);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -704,7 +739,7 @@ namespace CameraControl
             //    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
             //    e.Handled = true;
             //}
-            if(e.Key==Key.Delete)
+            if (e.Key == Key.Delete)
             {
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Del_Image);
                 e.Handled = true;
@@ -719,7 +754,6 @@ namespace CameraControl
             //    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Unlike_Image);
             //    e.Handled = true;
             //}
-
         }
 
         private void mnu_send_log_Click(object sender, RoutedEventArgs e)
@@ -746,6 +780,5 @@ namespace CameraControl
         }
 
         #endregion
-
     }
 }

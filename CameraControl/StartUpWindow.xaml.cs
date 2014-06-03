@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
@@ -22,6 +52,8 @@ using MessageBox = System.Windows.MessageBox;
 using Path = System.IO.Path;
 using Timer = System.Timers.Timer;
 
+#endregion
+
 namespace CameraControl
 {
     /// <summary>
@@ -31,6 +63,7 @@ namespace CameraControl
     {
         private IMainWindowPlugin _basemainwindow;
         private Timer _timer = new Timer(2000);
+
         public StartUpWindow()
         {
             InitializeComponent();
@@ -49,7 +82,7 @@ namespace CameraControl
             _timer.AutoReset = false;
         }
 
-        void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(InitApplication));
         }
@@ -67,13 +100,14 @@ namespace CameraControl
         {
             // prevent some application crash
             WpfCommands.DisableWpfTabletSupport();
-            
+
             ServiceProvider.Configure();
 
             ServiceProvider.Settings = new Settings();
             ServiceProvider.Settings = ServiceProvider.Settings.Load();
             ServiceProvider.Branding = ServiceProvider.Settings.LoadBranding();
-            if (!string.IsNullOrEmpty(ServiceProvider.Branding.StartupScreenImage) && File.Exists(ServiceProvider.Branding.StartupScreenImage))
+            if (!string.IsNullOrEmpty(ServiceProvider.Branding.StartupScreenImage) &&
+                File.Exists(ServiceProvider.Branding.StartupScreenImage))
             {
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.
@@ -83,14 +117,16 @@ namespace CameraControl
                 background.Source = bi;
             }
             ServiceProvider.ActionManager.Actions = new AsyncObservableCollection<IMenuAction>
-                                                {
-                                                  new CmdFocusStackingCombineZP(),
-                                                  new CmdEnfuse(),
-                                                  new CmdToJpg(),
-                                                  //new CmdExpJpg()
-                                                };
+                                                        {
+                                                            new CmdFocusStackingCombineZP(),
+                                                            new CmdEnfuse(),
+                                                            new CmdToJpg(),
+                                                            //new CmdExpJpg()
+                                                        };
 
-            if (ServiceProvider.Settings.DisableNativeDrivers && MessageBox.Show(TranslationStrings.MsgDisabledDrivers, "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (ServiceProvider.Settings.DisableNativeDrivers &&
+                MessageBox.Show(TranslationStrings.MsgDisabledDrivers, "", MessageBoxButton.YesNo) ==
+                MessageBoxResult.Yes)
                 ServiceProvider.Settings.DisableNativeDrivers = false;
             ServiceProvider.Settings.LoadSessionData();
             TranslationManager.LoadLanguage(ServiceProvider.Settings.SelectedLanguage);
@@ -113,7 +149,8 @@ namespace CameraControl
 
             ServiceProvider.Trigger.Start();
             ServiceProvider.PluginManager.CopyPlugins();
-            ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins"));
+            ServiceProvider.PluginManager.LoadPlugins(
+                Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins"));
             _basemainwindow = new MainWindow();
             ServiceProvider.PluginManager.MainWindowPlugins.Add(_basemainwindow);
             ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
@@ -124,7 +161,7 @@ namespace CameraControl
             ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
             //-------------------
             ServiceProvider.DeviceManager.DisableNativeDrivers = ServiceProvider.Settings.DisableNativeDrivers;
-            if(ServiceProvider.Settings.AddFakeCamera)
+            if (ServiceProvider.Settings.AddFakeCamera)
                 ServiceProvider.DeviceManager.AddFakeCamera();
             try
             {
@@ -145,14 +182,15 @@ namespace CameraControl
             StartApplication();
         }
 
-        void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
+        private void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
         {
             cameraDevice.CameraInitDone -= cameraDevice_CameraInitDone;
         }
 
         private void StartApplication()
         {
-            if (!string.IsNullOrEmpty(ServiceProvider.Settings.SelectedMainForm) && ServiceProvider.Settings.SelectedMainForm != _basemainwindow.DisplayName)
+            if (!string.IsNullOrEmpty(ServiceProvider.Settings.SelectedMainForm) &&
+                ServiceProvider.Settings.SelectedMainForm != _basemainwindow.DisplayName)
             {
                 SelectorWnd wnd = new SelectorWnd();
                 wnd.ShowDialog();
@@ -168,7 +206,7 @@ namespace CameraControl
                 ((Window) mainWindowPlugin).Activate();
         }
 
-        void WindowsManager_Event(string cmd, object o)
+        private void WindowsManager_Event(string cmd, object o)
         {
             Log.Debug("Window command received :" + cmd);
             if (cmd == CmdConsts.All_Close)
@@ -201,7 +239,7 @@ namespace CameraControl
                     break;
             }
             ICameraDevice device = ServiceProvider.DeviceManager.SelectedCameraDevice;
-            if(device!=null && device.IsConnected)
+            if (device != null && device.IsConnected)
             {
                 switch (cmd)
                 {
@@ -256,12 +294,13 @@ namespace CameraControl
         }
 
         #region eventhandlers
+
         /// <summary>
         /// Called when default session is assigned or changed
         /// </summary>
         /// <param name="oldvalue">The oldvalue.</param>
         /// <param name="newvalue">The newvalue.</param>
-        void Settings_SessionSelected(PhotoSession oldvalue, PhotoSession newvalue)
+        private void Settings_SessionSelected(PhotoSession oldvalue, PhotoSession newvalue)
         {
             // check if same session is used 
             if (oldvalue == newvalue)
@@ -273,30 +312,33 @@ namespace CameraControl
                 ServiceProvider.DeviceManager.SelectedCameraDevice.AttachedPhotoSession = newvalue;
         }
 
-        void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
+        private void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
         {
             if (newcameraDevice == null)
                 return;
             var thread = new Thread(delegate()
-                                               {
-                                                   CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(newcameraDevice);
-                                                   // load session data only if not session attached to the selected camera
-                                                   if (newcameraDevice.AttachedPhotoSession == null)
-                                                   {
-                                                       newcameraDevice.AttachedPhotoSession = ServiceProvider.Settings.GetSession(property.PhotoSessionName);
-                                                   }
-                                                   if (newcameraDevice.AttachedPhotoSession != null)
-                                                       ServiceProvider.Settings.DefaultSession = (PhotoSession)newcameraDevice.AttachedPhotoSession;
-                                               });
+                                        {
+                                            CameraProperty property =
+                                                ServiceProvider.Settings.CameraProperties.Get(newcameraDevice);
+                                            // load session data only if not session attached to the selected camera
+                                            if (newcameraDevice.AttachedPhotoSession == null)
+                                            {
+                                                newcameraDevice.AttachedPhotoSession =
+                                                    ServiceProvider.Settings.GetSession(property.PhotoSessionName);
+                                            }
+                                            if (newcameraDevice.AttachedPhotoSession != null)
+                                                ServiceProvider.Settings.DefaultSession =
+                                                    (PhotoSession) newcameraDevice.AttachedPhotoSession;
+                                        });
             thread.Start();
         }
 
-        void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
+        private void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
         {
             cameraDevice.CameraInitDone += cameraDevice_CameraInitDone;
         }
 
-        void cameraDevice_CameraInitDone(ICameraDevice cameraDevice)
+        private void cameraDevice_CameraInitDone(ICameraDevice cameraDevice)
         {
             var property = cameraDevice.LoadProperties();
 
@@ -304,19 +346,18 @@ namespace CameraControl
             if (preset != null)
             {
                 var thread = new Thread(delegate()
-                {
-                    try
-                    {
-                        Thread.Sleep(1500);
-                        cameraDevice.WaitForCamera(5000);
-                        preset.Set(cameraDevice);
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Error("Unable to load default preset", e);
-                    }
-
-                });
+                                            {
+                                                try
+                                                {
+                                                    Thread.Sleep(1500);
+                                                    cameraDevice.WaitForCamera(5000);
+                                                    preset.Set(cameraDevice);
+                                                }
+                                                catch (Exception e)
+                                                {
+                                                    Log.Error("Unable to load default preset", e);
+                                                }
+                                            });
                 thread.Start();
             }
 
@@ -330,7 +371,7 @@ namespace CameraControl
                 {
                     Log.Error("Unable to sysnc date time", exception);
                 }
-            }            
+            }
         }
 
         #endregion

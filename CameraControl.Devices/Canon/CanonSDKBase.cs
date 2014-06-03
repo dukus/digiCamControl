@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,6 +44,8 @@ using Canon.Eos.Framework.Internal.SDK;
 using PortableDeviceLib;
 using PortableDeviceLib.Model;
 
+#endregion
+
 namespace CameraControl.Devices.Canon
 {
     public class CanonSDKBase : BaseMTPCamera
@@ -23,82 +55,82 @@ namespace CameraControl.Devices.Canon
         public EosCamera Camera = null;
 
         protected Dictionary<uint, string> _shutterTable = new Dictionary<uint, string>
-                                                         {
-                                                           {0x0C, "Bulb"},
-                                                           {0x10, "30"},
-                                                           {0x13, "25"},
-                                                           {0x14, "20"},
-                                                           {0x15, "20 (1/3)"},
-                                                           {0x18, "15"},
-                                                           {0x1B, "13"},
-                                                           {0x1C, "10"},
-                                                           {0x1D, "20  (1/3)"},
-                                                           {0x20, "8"},
-                                                           {0x23, "6 (1/3)"},
-                                                           {0x24, "6"},
-                                                           {0x25, "5"},
-                                                           {0x28, "4"},
-                                                           {0x2B, "3.2"},
-                                                           {0x2C, "3"},
-                                                           {0x2D, "2.5"},
-                                                           {0x30, "2"},
-                                                           {0x33, "1.6"},
-                                                           {0x34, "1.5"},
-                                                           {0x35, "1.3"},
-                                                           {0x38, "1"},
-                                                           {0x3B, "0.8"},
-                                                           {0x3C, "0.7"},
-                                                           {0x3D, "0.6"},
-                                                           {0x40, "0.5"},
-                                                           {0x43, "0.4"},
-                                                           {0x44, "0.3"},
-                                                           {0x45, "0.3 (1/3)"},
-                                                           {0x48, "1/4"},
-                                                           {0x4B, "1/5"},
-                                                           {0x4C, "1/6"},
-                                                           {0x4D, "1/56 (1/3)"},
-                                                           {0x50, "1/8"},
-                                                           {0x53, "1/10 (1/3)"},
-                                                           {0x54, "1/10"},
-                                                           {0x55, "1/13"},
-                                                           {0x58 ,"1/15"},
-                                                           {0x5B ,"1/20 (1/3)"},
-                                                           {0x5C ,"1/20"},
-                                                           {0x5D ,"1/25"},
-                                                           {0x60 ,"1/30"},
-                                                           {0x63 ,"1/40"},
-                                                           {0x64 ,"1/45"},
-                                                           {0x65 ,"1/50"},
-                                                           {0x68 ,"1/60"},
-                                                           {0x6B ,"1/80"},
-                                                           {0x6C ,"1/90"},
-                                                           {0x6D ,"1/100"},
-                                                           {0x70 ,"1/125"},
-                                                           {0x73 ,"1/160"},
-                                                           {0x74 ,"1/180"},
-                                                           {0x75 ,"1/200"},
-                                                           {0x78 ,"1/250"},
-                                                           {0x7B ,"1/320"},
-                                                           {0x7C ,"1/350"},
-                                                           {0x7D ,"1/400"},
-                                                           {0x80 ,"1/500"},
-                                                           {0x83 ,"1/640"},
-                                                           {0x84 ,"1/750"},
-                                                           {0x85 ,"1/800"},
-                                                           {0x88 ,"1/1000"},
-                                                           {0x8B ,"1/1250"},
-                                                           {0x8C ,"1/1500"},
-                                                           {0x8D ,"1/1600"},
-                                                           {0x90 ,"1/2000"},
-                                                           {0x93 ,"1/2500"},
-                                                           {0x94 ,"1/3000"},
-                                                           {0x95 ,"1/3200"},
-                                                           {0x98 ,"1/4000"},
-                                                           {0x9B ,"1/5000"},
-                                                           {0x9C ,"1/6000"},
-                                                           {0x9D ,"1/6400"},
-                                                           {0xA0 ,"1/8000"},
-                                                         };
+                                                               {
+                                                                   {0x0C, "Bulb"},
+                                                                   {0x10, "30"},
+                                                                   {0x13, "25"},
+                                                                   {0x14, "20"},
+                                                                   {0x15, "20 (1/3)"},
+                                                                   {0x18, "15"},
+                                                                   {0x1B, "13"},
+                                                                   {0x1C, "10"},
+                                                                   {0x1D, "20  (1/3)"},
+                                                                   {0x20, "8"},
+                                                                   {0x23, "6 (1/3)"},
+                                                                   {0x24, "6"},
+                                                                   {0x25, "5"},
+                                                                   {0x28, "4"},
+                                                                   {0x2B, "3.2"},
+                                                                   {0x2C, "3"},
+                                                                   {0x2D, "2.5"},
+                                                                   {0x30, "2"},
+                                                                   {0x33, "1.6"},
+                                                                   {0x34, "1.5"},
+                                                                   {0x35, "1.3"},
+                                                                   {0x38, "1"},
+                                                                   {0x3B, "0.8"},
+                                                                   {0x3C, "0.7"},
+                                                                   {0x3D, "0.6"},
+                                                                   {0x40, "0.5"},
+                                                                   {0x43, "0.4"},
+                                                                   {0x44, "0.3"},
+                                                                   {0x45, "0.3 (1/3)"},
+                                                                   {0x48, "1/4"},
+                                                                   {0x4B, "1/5"},
+                                                                   {0x4C, "1/6"},
+                                                                   {0x4D, "1/56 (1/3)"},
+                                                                   {0x50, "1/8"},
+                                                                   {0x53, "1/10 (1/3)"},
+                                                                   {0x54, "1/10"},
+                                                                   {0x55, "1/13"},
+                                                                   {0x58, "1/15"},
+                                                                   {0x5B, "1/20 (1/3)"},
+                                                                   {0x5C, "1/20"},
+                                                                   {0x5D, "1/25"},
+                                                                   {0x60, "1/30"},
+                                                                   {0x63, "1/40"},
+                                                                   {0x64, "1/45"},
+                                                                   {0x65, "1/50"},
+                                                                   {0x68, "1/60"},
+                                                                   {0x6B, "1/80"},
+                                                                   {0x6C, "1/90"},
+                                                                   {0x6D, "1/100"},
+                                                                   {0x70, "1/125"},
+                                                                   {0x73, "1/160"},
+                                                                   {0x74, "1/180"},
+                                                                   {0x75, "1/200"},
+                                                                   {0x78, "1/250"},
+                                                                   {0x7B, "1/320"},
+                                                                   {0x7C, "1/350"},
+                                                                   {0x7D, "1/400"},
+                                                                   {0x80, "1/500"},
+                                                                   {0x83, "1/640"},
+                                                                   {0x84, "1/750"},
+                                                                   {0x85, "1/800"},
+                                                                   {0x88, "1/1000"},
+                                                                   {0x8B, "1/1250"},
+                                                                   {0x8C, "1/1500"},
+                                                                   {0x8D, "1/1600"},
+                                                                   {0x90, "1/2000"},
+                                                                   {0x93, "1/2500"},
+                                                                   {0x94, "1/3000"},
+                                                                   {0x95, "1/3200"},
+                                                                   {0x98, "1/4000"},
+                                                                   {0x9B, "1/5000"},
+                                                                   {0x9C, "1/6000"},
+                                                                   {0x9D, "1/6400"},
+                                                                   {0xA0, "1/8000"},
+                                                               };
 
         protected Dictionary<int, string> _apertureTable = new Dictionary<int, string>
                                                                {
@@ -158,124 +190,126 @@ namespace CameraControl.Devices.Canon
                                                                };
 
         protected Dictionary<uint, string> _exposureModeTable = new Dictionary<uint, string>()
-                            {
-                              {0, "P"},
-                              {1, "Tv"},
-                              {2, "Av"},
-                              {3, "M"},
-                              {4, "Bulb"},
-                              {5, "A-DEP"},
-                              {6, "DEP"},
-                              {7, "Camera settings registered"},
-                              {8, "Lock"},
-                              {9, "Auto"},
-                              {10, "Night scene Portrait"},
-                              {11, "Sport"},
-                              {12, "Portrait"},
-                              {13, "Landscape"},
-                              {14, "Close-Up"},
-                              {15, "Flash Off"},
-                              {19, "Creative Auto"},
-                              {21, "Photo in Movie"},
-                            };
+                                                                    {
+                                                                        {0, "P"},
+                                                                        {1, "Tv"},
+                                                                        {2, "Av"},
+                                                                        {3, "M"},
+                                                                        {4, "Bulb"},
+                                                                        {5, "A-DEP"},
+                                                                        {6, "DEP"},
+                                                                        {7, "Camera settings registered"},
+                                                                        {8, "Lock"},
+                                                                        {9, "Auto"},
+                                                                        {10, "Night scene Portrait"},
+                                                                        {11, "Sport"},
+                                                                        {12, "Portrait"},
+                                                                        {13, "Landscape"},
+                                                                        {14, "Close-Up"},
+                                                                        {15, "Flash Off"},
+                                                                        {19, "Creative Auto"},
+                                                                        {21, "Photo in Movie"},
+                                                                    };
 
         protected Dictionary<uint, string> _isoTable = new Dictionary<uint, string>()
-                                                  {
-                                                    {0x00000028, "6"},
-                                                    {0x00000030, "12"},
-                                                    {0x00000038, "25"},
-                                                    {0x00000040, "50"},
-                                                    {0x00000048, "100"},
-                                                    {0x0000004B, "125"},
-                                                    {0x0000004D, "160"},
-                                                    {0x00000050, "200"},
-                                                    {0x00000053, "250"},
-                                                    {0x00000055, "320"},
-                                                    {0x00000058, "400"},
-                                                    {0x0000005B, "500"},
-                                                    {0x0000005D, "640"},
-                                                    {0x00000060, "800"},
-                                                    {0x00000063, "1000"},
-                                                    {0x00000065, "1250"},
-                                                    {0x00000068, "1600"},
-                                                    {0x00000070, "3200"},
-                                                    {0x00000078, "6400"},
-                                                    {0x00000080, "12800"},
-                                                    {0x00000088, "25600"},
-                                                    {0x00000090, "51200"},
-                                                    {0x00000098, "102400"},
-                                                  };
+                                                           {
+                                                               {0x00000028, "6"},
+                                                               {0x00000030, "12"},
+                                                               {0x00000038, "25"},
+                                                               {0x00000040, "50"},
+                                                               {0x00000048, "100"},
+                                                               {0x0000004B, "125"},
+                                                               {0x0000004D, "160"},
+                                                               {0x00000050, "200"},
+                                                               {0x00000053, "250"},
+                                                               {0x00000055, "320"},
+                                                               {0x00000058, "400"},
+                                                               {0x0000005B, "500"},
+                                                               {0x0000005D, "640"},
+                                                               {0x00000060, "800"},
+                                                               {0x00000063, "1000"},
+                                                               {0x00000065, "1250"},
+                                                               {0x00000068, "1600"},
+                                                               {0x00000070, "3200"},
+                                                               {0x00000078, "6400"},
+                                                               {0x00000080, "12800"},
+                                                               {0x00000088, "25600"},
+                                                               {0x00000090, "51200"},
+                                                               {0x00000098, "102400"},
+                                                           };
 
         protected Dictionary<uint, string> _ec = new Dictionary<uint, string>()
                                                      {
-                                                         {0x18,"+3.0"},
-                                                         {0x15,"+2 2/3"},
-                                                         {0x14,"+2.5"},
-                                                         {0x13,"+2 1/3"},
-                                                         {0x10,"+2.0"},
-                                                         {0x0D,"+1 2/3"},
-                                                         {0x0C,"+1.5"},
-                                                         {0x0B,"+1 1/3"},
-                                                         {0x08,"+1"},
-                                                         {0x05,"+2/3"},
-                                                         {0x04,"+0.5"},
-                                                         {0x03,"+1/3"},
-                                                         {0x00,"0.0"},
-                                                         {0xFD,"-1/3"},
-                                                         {0xFC,"-0.5"},
-                                                         {0xFB,"-2/3"},
-                                                         {0xF8,"-1"},
-                                                         {0xF5,"-1 1/3"},
-                                                         {0xF4,"-1.5"},
-                                                         {0xF3,"-1 2/3"},
-                                                         {0xF0,"-2"},
-                                                         {0xED,"-2 1/3"},
-                                                         {0xEC,"-2.5"},
-                                                         {0xEB,"-3 2/3"},
-                                                         {0xE8,"-3"},
+                                                         {0x18, "+3.0"},
+                                                         {0x15, "+2 2/3"},
+                                                         {0x14, "+2.5"},
+                                                         {0x13, "+2 1/3"},
+                                                         {0x10, "+2.0"},
+                                                         {0x0D, "+1 2/3"},
+                                                         {0x0C, "+1.5"},
+                                                         {0x0B, "+1 1/3"},
+                                                         {0x08, "+1"},
+                                                         {0x05, "+2/3"},
+                                                         {0x04, "+0.5"},
+                                                         {0x03, "+1/3"},
+                                                         {0x00, "0.0"},
+                                                         {0xFD, "-1/3"},
+                                                         {0xFC, "-0.5"},
+                                                         {0xFB, "-2/3"},
+                                                         {0xF8, "-1"},
+                                                         {0xF5, "-1 1/3"},
+                                                         {0xF4, "-1.5"},
+                                                         {0xF3, "-1 2/3"},
+                                                         {0xF0, "-2"},
+                                                         {0xED, "-2 1/3"},
+                                                         {0xEC, "-2.5"},
+                                                         {0xEB, "-3 2/3"},
+                                                         {0xE8, "-3"},
                                                      };
+
         protected Dictionary<uint, string> _wbTable = new Dictionary<uint, string>()
-                  {
-                    {0, "Auto"},
-                    {1, "Daylight"},
-                    {2, "Cloudy"},
-                    {3, "Tungsten"},
-                    {4, "Fluorescent"},
-                    {5, "Flash"},
-                    {6, "Manual"},
-                    {8, "Shade"},
-                    {9, "Color temperature"},
-                    {10, "Custom white balance: PC-1"},
-                    {11, "Custom white balance: PC-2"},
-                    {12, "Custom white balance: PC-3"},
-                    {15, "Manual 2"},
-                    {16, "Manual 3"},
-                    {18, "Manual 4"},
-                    {19, "Manual 5"},
-                    {20, "Custom white balance: PC-4"},
-                    {21, "Custom white balance: PC-5"},
-                  };
+                                                          {
+                                                              {0, "Auto"},
+                                                              {1, "Daylight"},
+                                                              {2, "Cloudy"},
+                                                              {3, "Tungsten"},
+                                                              {4, "Fluorescent"},
+                                                              {5, "Flash"},
+                                                              {6, "Manual"},
+                                                              {8, "Shade"},
+                                                              {9, "Color temperature"},
+                                                              {10, "Custom white balance: PC-1"},
+                                                              {11, "Custom white balance: PC-2"},
+                                                              {12, "Custom white balance: PC-3"},
+                                                              {15, "Manual 2"},
+                                                              {16, "Manual 3"},
+                                                              {18, "Manual 4"},
+                                                              {19, "Manual 5"},
+                                                              {20, "Custom white balance: PC-4"},
+                                                              {21, "Custom white balance: PC-5"},
+                                                          };
 
         protected Dictionary<uint, string> _meteringTable = new Dictionary<uint, string>()
                                                                 {
-                                                                    {1,"Spot metering"},
-                                                                    {2,"Evaluative metering"},
-                                                                    {3,"Partial metering"},
-                                                                    {4,"Spot metering"},
-                                                                    {5,"Center-weighted averaging metering"},
-                                                                    {0xFFFFFFFF,"Not valid/no settings changes"},
+                                                                    {1, "Spot metering"},
+                                                                    {2, "Evaluative metering"},
+                                                                    {3, "Partial metering"},
+                                                                    {4, "Spot metering"},
+                                                                    {5, "Center-weighted averaging metering"},
+                                                                    {0xFFFFFFFF, "Not valid/no settings changes"},
                                                                 };
+
         protected Dictionary<uint, string> _focusModeTable = new Dictionary<uint, string>()
-                                                                {
-                                                                    {0,"One-Shot AF"},
-                                                                    {1,"AI Servo AF"},
-                                                                    {2,"AI Focus AF"},
-                                                                    {3,"Manual Focus"},
-                                                                    {0xFFFFFFFF,"Not valid/no settings changes"},
-                                                                };
+                                                                 {
+                                                                     {0, "One-Shot AF"},
+                                                                     {1, "AI Servo AF"},
+                                                                     {2, "AI Focus AF"},
+                                                                     {3, "Manual Focus"},
+                                                                     {0xFFFFFFFF, "Not valid/no settings changes"},
+                                                                 };
+
         public CanonSDKBase()
         {
-
         }
 
         public override bool CaptureInSdRam
@@ -335,7 +369,7 @@ namespace CameraControl.Devices.Canon
                 IsConnected = true;
                 LoadProperties();
                 OnCameraInitDone();
-                return true; 
+                return true;
             }
             catch (Exception exception)
             {
@@ -356,7 +390,7 @@ namespace CameraControl.Devices.Canon
             InitFocus();
             InitOther();
             InitCompression();
-            Battery = (int)Camera.BatteryLevel;
+            Battery = (int) Camera.BatteryLevel;
             IsBusy = false;
             CaptureInSdRam = true;
             Camera.PropertyChanged += Camera_PropertyChanged;
@@ -365,7 +399,7 @@ namespace CameraControl.Devices.Canon
 
         private void InitOther()
         {
-            LiveViewImageZoomRatio = new PropertyValue<int> { Name = "LiveViewImageZoomRatio" };
+            LiveViewImageZoomRatio = new PropertyValue<int> {Name = "LiveViewImageZoomRatio"};
             LiveViewImageZoomRatio.AddValues("All", 1);
             LiveViewImageZoomRatio.AddValues("5x", 5);
             LiveViewImageZoomRatio.AddValues("10x", 10);
@@ -376,20 +410,20 @@ namespace CameraControl.Devices.Canon
         private void InitCompression()
         {
             CompressionSetting = new PropertyValue<int>();
-            CompressionSetting.AddValues("Jpeg", (int)EosImageFormat.Jpeg);
+            CompressionSetting.AddValues("Jpeg", (int) EosImageFormat.Jpeg);
             CompressionSetting.AddValues("Crw", (int) EosImageFormat.Crw);
-            CompressionSetting.AddValues("Cr2", (int)EosImageFormat.Cr2);
-            CompressionSetting.SetValue((int)Camera.ImageQuality.PrimaryImageFormat);
-            CompressionSetting.ValueChanged += new PropertyValue<int>.ValueChangedEventHandler(CompressionSetting_ValueChanged);
+            CompressionSetting.AddValues("Cr2", (int) EosImageFormat.Cr2);
+            CompressionSetting.SetValue((int) Camera.ImageQuality.PrimaryImageFormat);
+            CompressionSetting.ValueChanged +=
+                new PropertyValue<int>.ValueChangedEventHandler(CompressionSetting_ValueChanged);
         }
 
-        void CompressionSetting_ValueChanged(object sender, string key, int val)
+        private void CompressionSetting_ValueChanged(object sender, string key, int val)
         {
-            
         }
 
 
-        void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
+        private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
         {
             try
             {
@@ -402,7 +436,7 @@ namespace CameraControl.Devices.Canon
         }
 
 
-        void Camera_PropertyChanged(object sender, EosPropertyEventArgs e)
+        private void Camera_PropertyChanged(object sender, EosPropertyEventArgs e)
         {
             try
             {
@@ -410,10 +444,10 @@ namespace CameraControl.Devices.Canon
                 switch (e.PropertyId)
                 {
                     case Edsdk.PropID_ExposureCompensation:
-                        ExposureCompensation.SetValue((int)Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
+                        ExposureCompensation.SetValue((int) Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
                         break;
                     case Edsdk.PropID_AEMode:
-                        Mode.SetValue((uint)Camera.GetProperty(Edsdk.PropID_AEMode), false);
+                        Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
                         ReInitFNumber(true);
                         ReInitShutterSpeed();
                         break;
@@ -427,13 +461,13 @@ namespace CameraControl.Devices.Canon
                         FNumber.SetValue((int) Camera.GetProperty(Edsdk.PropID_Av), false);
                         break;
                     case Edsdk.PropID_MeteringMode:
-                        ExposureMeteringMode.SetValue((int)Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
+                        ExposureMeteringMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
                         break;
                     case Edsdk.PropID_AFMode:
-                        FocusMode.SetValue((int)Camera.GetProperty(Edsdk.PropID_AFMode), false);
+                        FocusMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_AFMode), false);
                         break;
                     case Edsdk.PropID_ImageQuality:
-                        CompressionSetting.SetValue((int)Camera.ImageQuality.PrimaryImageFormat);
+                        CompressionSetting.SetValue((int) Camera.ImageQuality.PrimaryImageFormat);
                         break;
                     case Edsdk.PropID_BatteryLevel:
                         Battery = (int) Camera.BatteryLevel;
@@ -446,7 +480,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void Camera_PictureTaken(object sender, EosImageEventArgs e)
+        private void Camera_PictureTaken(object sender, EosImageEventArgs e)
         {
             try
             {
@@ -477,16 +511,15 @@ namespace CameraControl.Devices.Canon
                         args.FileName = Path.GetFileName(memory.FileName);
                 }
                 OnPhotoCapture(this, args);
-                OnCaptureCompleted(this,new EventArgs());
+                OnCaptureCompleted(this, new EventArgs());
             }
             catch (Exception exception)
             {
                 Log.Error("EOS Picture taken event error", exception);
             }
-
         }
 
-        void Camera_LiveViewUpdate(object sender, EosLiveImageEventArgs e)
+        private void Camera_LiveViewUpdate(object sender, EosLiveImageEventArgs e)
         {
             LiveViewData viewData = new LiveViewData();
             if (Monitor.TryEnter(Locker, 1))
@@ -504,10 +537,9 @@ namespace CameraControl.Devices.Canon
                     Monitor.Exit(Locker);
                 }
             }
-
         }
 
-        void Camera_LiveViewPaused(object sender, EventArgs e)
+        private void Camera_LiveViewPaused(object sender, EventArgs e)
         {
             try
             {
@@ -523,10 +555,10 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void _camera_Shutdown(object sender, EventArgs e)
+        private void _camera_Shutdown(object sender, EventArgs e)
         {
             IsConnected = false;
-            OnCameraDisconnected(this, new DisconnectCameraEventArgs { StillImageDevice = null,EosCamera = Camera});
+            OnCameraDisconnected(this, new DisconnectCameraEventArgs {StillImageDevice = null, EosCamera = Camera});
         }
 
         public override void Close()
@@ -543,7 +575,7 @@ namespace CameraControl.Devices.Canon
         }
 
 
-        void _camera_Error(object sender, EosExceptionEventArgs e)
+        private void _camera_Error(object sender, EosExceptionEventArgs e)
         {
             try
             {
@@ -562,7 +594,7 @@ namespace CameraControl.Devices.Canon
             //StillImageDevice.DeviceEvent += _stillImageDevice_DeviceEvent;
             Capabilities.Add(CapabilityEnum.Bulb);
             Capabilities.Add(CapabilityEnum.LiveView);
-            
+
             IsConnected = true;
             return true;
         }
@@ -596,7 +628,7 @@ namespace CameraControl.Devices.Canon
                             ShutterSpeed.AddValues(keyValuePair.Value, keyValuePair.Key);
                         }
                     }
-                    
+
                     long value = Camera.GetProperty(Edsdk.PropID_Tv);
                     if (value == 0)
                     {
@@ -615,7 +647,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void ShutterSpeed_ValueChanged(object sender, string key, long val)
+        private void ShutterSpeed_ValueChanged(object sender, string key, long val)
         {
             try
             {
@@ -626,15 +658,17 @@ namespace CameraControl.Devices.Canon
                 Log.Error("Error set property sP", exception);
             }
         }
-#region F number
+
+        #region F number
+
         private void InitFNumber()
         {
-            FNumber = new PropertyValue<int> { IsEnabled = true, Name = "FNumber" };
+            FNumber = new PropertyValue<int> {IsEnabled = true, Name = "FNumber"};
             FNumber.ValueChanged += FNumber_ValueChanged;
             ReInitFNumber(true);
         }
 
-        void FNumber_ValueChanged(object sender, string key, int val)
+        private void FNumber_ValueChanged(object sender, string key, int val)
         {
             try
             {
@@ -653,7 +687,7 @@ namespace CameraControl.Devices.Canon
                 var data = Camera.GetPropertyDescription(Edsdk.PropID_Av);
                 long value = Camera.GetProperty(Edsdk.PropID_Av);
                 bool shouldinit = FNumber.Values.Count == 0;
-                
+
                 if (data.NumElements > 0)
                     FNumber.Clear();
 
@@ -666,19 +700,22 @@ namespace CameraControl.Devices.Canon
                 }
                 else
                 {
-                    foreach (KeyValuePair<int, string> keyValuePair in _apertureTable.Where(keyValuePair => data.NumElements > 0).Where(keyValuePair => ArrayContainValue(data.PropDesc, keyValuePair.Key)))
+                    foreach (
+                        KeyValuePair<int, string> keyValuePair in
+                            _apertureTable.Where(keyValuePair => data.NumElements > 0).Where(
+                                keyValuePair => ArrayContainValue(data.PropDesc, keyValuePair.Key)))
                     {
                         FNumber.AddValues("ƒ/" + keyValuePair.Value, keyValuePair.Key);
                     }
                 }
 
-                if(value==0)
+                if (value == 0)
                 {
                     FNumber.IsEnabled = false;
                 }
                 else
                 {
-                    FNumber.SetValue((int)value, false);
+                    FNumber.SetValue((int) value, false);
                     FNumber.IsEnabled = true;
                 }
             }
@@ -687,7 +724,8 @@ namespace CameraControl.Devices.Canon
                 Log.Debug("Error set aperture ", ex);
             }
         }
-#endregion
+
+        #endregion
 
         private void InitIso()
         {
@@ -696,7 +734,7 @@ namespace CameraControl.Devices.Canon
             ReInitIso();
         }
 
-        void IsoNumber_ValueChanged(object sender, string key, int val)
+        private void IsoNumber_ValueChanged(object sender, string key, int val)
         {
             try
             {
@@ -728,7 +766,10 @@ namespace CameraControl.Devices.Canon
                 }
                 else
                 {
-                    foreach (KeyValuePair<uint, string> keyValuePair in _isoTable.Where(keyValuePair => data.NumElements > 0).Where(keyValuePair => ArrayContainValue(data.PropDesc, keyValuePair.Key)))
+                    foreach (
+                        KeyValuePair<uint, string> keyValuePair in
+                            _isoTable.Where(keyValuePair => data.NumElements > 0).Where(
+                                keyValuePair => ArrayContainValue(data.PropDesc, keyValuePair.Key)))
                     {
                         IsoNumber.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                     }
@@ -740,14 +781,14 @@ namespace CameraControl.Devices.Canon
                 }
                 else
                 {
-                    IsoNumber.SetValue((int)value, false);
+                    IsoNumber.SetValue((int) value, false);
                     IsoNumber.IsEnabled = true;
                 }
             }
             catch (Exception ex)
             {
                 Log.Debug("Error set iso ", ex);
-            }   
+            }
         }
 
         private void InitMode()
@@ -760,15 +801,13 @@ namespace CameraControl.Devices.Canon
                     Mode.AddValues(keyValuePair.Value, keyValuePair.Key);
                 }
 
-                Mode.SetValue((uint)Camera.GetProperty(Edsdk.PropID_AEMode), false);
+                Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
                 Mode.IsEnabled = false;
-
             }
             catch (Exception ex)
             {
                 Log.Debug("Error set aperture ", ex);
             }
-
         }
 
         private void InitEc()
@@ -782,7 +821,7 @@ namespace CameraControl.Devices.Canon
                     ExposureCompensation.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 ExposureCompensation.IsEnabled = true;
-                ExposureCompensation.SetValue((int)Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
+                ExposureCompensation.SetValue((int) Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
             }
             catch (Exception exception)
             {
@@ -798,10 +837,10 @@ namespace CameraControl.Devices.Canon
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _wbTable)
                 {
-                    WhiteBalance.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
+                    WhiteBalance.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 WhiteBalance.IsEnabled = true;
-                WhiteBalance.SetValue((long)Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
+                WhiteBalance.SetValue((long) Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
             }
             catch (Exception exception)
             {
@@ -809,7 +848,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void WhiteBalance_ValueChanged(object sender, string key, long val)
+        private void WhiteBalance_ValueChanged(object sender, string key, long val)
         {
             try
             {
@@ -818,7 +857,7 @@ namespace CameraControl.Devices.Canon
             catch (Exception exception)
             {
                 Log.Debug("Error set WB to camera", exception);
-            }            
+            }
         }
 
         private void InitMetering()
@@ -829,7 +868,7 @@ namespace CameraControl.Devices.Canon
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _meteringTable)
                 {
-                    ExposureMeteringMode.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
+                    ExposureMeteringMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 ExposureMeteringMode.IsEnabled = true;
                 ExposureMeteringMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
@@ -848,10 +887,10 @@ namespace CameraControl.Devices.Canon
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _focusModeTable)
                 {
-                    FocusMode.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
+                    FocusMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 FocusMode.IsEnabled = true;
-                FocusMode.SetValue((int)Camera.GetProperty(Edsdk.PropID_AFMode), false);
+                FocusMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_AFMode), false);
             }
             catch (Exception exception)
             {
@@ -859,7 +898,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void FocusMode_ValueChanged(object sender, string key, long val)
+        private void FocusMode_ValueChanged(object sender, string key, long val)
         {
             try
             {
@@ -871,7 +910,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
+        private void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
         {
             try
             {
@@ -883,7 +922,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void ExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void ExposureCompensation_ValueChanged(object sender, string key, int val)
         {
             try
             {
@@ -908,9 +947,8 @@ namespace CameraControl.Devices.Canon
                 }
                 else
                 {
-                    Camera.TakePicture();                    
+                    Camera.TakePicture();
                 }
-
             }
             catch (COMException comException)
             {
@@ -960,7 +998,6 @@ namespace CameraControl.Devices.Canon
                 Monitor.Exit(Locker);
             }
             Log.Debug("EOS capture end");
-
         }
 
         public override void StartBulbMode()
@@ -977,7 +1014,7 @@ namespace CameraControl.Devices.Canon
         {
             Camera.SetPropertyIntegerArrayData(Edsdk.PropID_Evf_ZoomPosition, new uint[] {(uint) x, (uint) y});
         }
-        
+
         public override LiveViewData GetLiveViewImage()
         {
             LiveViewData viewData = new LiveViewData();
@@ -1021,7 +1058,7 @@ namespace CameraControl.Devices.Canon
         {
             Camera.ResetShutterButton();
             //if (Camera.IsInLiveViewMode)
-                Camera.StopLiveView();
+            Camera.StopLiveView();
         }
 
         public override void AutoFocus()
@@ -1033,12 +1070,12 @@ namespace CameraControl.Devices.Canon
         public override void Focus(int step)
         {
             Camera.ResetShutterButton();
-            if(step<0)
+            if (step < 0)
             {
                 step = -step;
                 if (step < 50)
                     Camera.FocusInLiveView(Edsdk.EvfDriveLens_Near1);
-                else if (step >= 50 && step< 200)
+                else if (step >= 50 && step < 200)
                     Camera.FocusInLiveView(Edsdk.EvfDriveLens_Near2);
                 else
                     Camera.FocusInLiveView(Edsdk.EvfDriveLens_Near3);
@@ -1062,7 +1099,7 @@ namespace CameraControl.Devices.Canon
                 Log.Debug("File transfer started");
                 try
                 {
-                    if(File.Exists(file.ImageFilePath))
+                    if (File.Exists(file.ImageFilePath))
                     {
                         File.Copy(file.ImageFilePath, filename, true);
                         File.Delete(file.ImageFilePath);
@@ -1078,12 +1115,12 @@ namespace CameraControl.Devices.Canon
                 }
             }
             EosMemoryImageEventArgs memory = o as EosMemoryImageEventArgs;
-            if(memory!=null)
+            if (memory != null)
             {
                 Log.Debug("Memory file transfer started");
                 try
                 {
-                    using (FileStream fileStream = File.Create(filename, (int)memory.ImageData.Length))
+                    using (FileStream fileStream = File.Create(filename, (int) memory.ImageData.Length))
                     {
                         fileStream.Write(memory.ImageData, 0, memory.ImageData.Length);
                     }
@@ -1107,7 +1144,7 @@ namespace CameraControl.Devices.Canon
 
         private bool ArrayContainValue(IEnumerable<int> data, int value)
         {
-            return data.Any(i => i == (int)value);
+            return data.Any(i => i == (int) value);
         }
 
         public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId)
@@ -1150,7 +1187,7 @@ namespace CameraControl.Devices.Canon
                     Edsdk.EdsDirectoryItemInfo ChildInfo;
                     Edsdk.EdsGetDirectoryItemInfo(ChildPtr, out ChildInfo);
 
-                    if (ChildInfo.isFolder==0)
+                    if (ChildInfo.isFolder == 0)
                     {
                         //if it's not a folder, create thumbnail and safe it to the entry
                         IntPtr stream;
@@ -1192,18 +1229,19 @@ namespace CameraControl.Devices.Canon
             //calculate size, stride and buffersize
             outputSize.width = imageInfo.EffectiveRect.width;
             outputSize.height = imageInfo.EffectiveRect.height;
-            int Stride = ((outputSize.width * 3) + 3) & ~3;
-            uint bufferSize = (uint)(outputSize.height * Stride);
+            int Stride = ((outputSize.width*3) + 3) & ~3;
+            uint bufferSize = (uint) (outputSize.height*Stride);
 
             //Init buffer
             buffer = new Byte[bufferSize];
             //Create memory stream to buffer
             Edsdk.EdsCreateMemoryStreamFromPointer(buffer, bufferSize, out stream);
             //copy image into buffer
-            Edsdk.EdsGetImage(img_ref, imageSource, Edsdk.EdsTargetImageType.RGB, imageInfo.EffectiveRect, outputSize, stream);
+            Edsdk.EdsGetImage(img_ref, imageSource, Edsdk.EdsTargetImageType.RGB, imageInfo.EffectiveRect, outputSize,
+                              stream);
 
             //makes RGB out of BGR
-            if (outputSize.width % 4 == 0)
+            if (outputSize.width%4 == 0)
             {
                 for (int t = 0; t < bufferSize; t += 3)
                 {
@@ -1214,15 +1252,15 @@ namespace CameraControl.Devices.Canon
             }
             else
             {
-                int Padding = Stride - (outputSize.width * 3);
+                int Padding = Stride - (outputSize.width*3);
                 for (int y = outputSize.height - 1; y > -1; y--)
                 {
-                    int RowStart = (outputSize.width * 3) * y;
-                    int TargetStart = Stride * y;
+                    int RowStart = (outputSize.width*3)*y;
+                    int TargetStart = Stride*y;
 
-                    Array.Copy(buffer, RowStart, buffer, TargetStart, outputSize.width * 3);
+                    Array.Copy(buffer, RowStart, buffer, TargetStart, outputSize.width*3);
 
-                    for (int t = TargetStart; t < TargetStart + (outputSize.width * 3); t += 3)
+                    for (int t = TargetStart; t < TargetStart + (outputSize.width*3); t += 3)
                     {
                         temp = buffer[t];
                         buffer[t] = buffer[t + 2];

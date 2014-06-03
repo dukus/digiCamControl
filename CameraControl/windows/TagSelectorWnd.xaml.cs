@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +47,8 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices.Classes;
 
+#endregion
+
 namespace CameraControl.windows
 {
     /// <summary>
@@ -25,6 +57,7 @@ namespace CameraControl.windows
     public partial class TagSelectorWnd : IWindow, INotifyPropertyChanged
     {
         private AsyncObservableCollection<TagItem> _tags1;
+
         public AsyncObservableCollection<TagItem> Tags1
         {
             get { return _tags1; }
@@ -36,6 +69,7 @@ namespace CameraControl.windows
         }
 
         private AsyncObservableCollection<TagItem> _tags2;
+
         public AsyncObservableCollection<TagItem> Tags2
         {
             get { return _tags2; }
@@ -47,6 +81,7 @@ namespace CameraControl.windows
         }
 
         private AsyncObservableCollection<TagItem> _tags3;
+
         public AsyncObservableCollection<TagItem> Tags3
         {
             get { return _tags3; }
@@ -58,6 +93,7 @@ namespace CameraControl.windows
         }
 
         private AsyncObservableCollection<TagItem> _tags4;
+
         public AsyncObservableCollection<TagItem> Tags4
         {
             get { return _tags4; }
@@ -80,13 +116,17 @@ namespace CameraControl.windows
         private void LoadData()
         {
             Tags1 =
-              new AsyncObservableCollection<TagItem>(ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag1Checked));
+                new AsyncObservableCollection<TagItem>(
+                    ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag1Checked));
             Tags2 =
-              new AsyncObservableCollection<TagItem>(ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag2Checked));
+                new AsyncObservableCollection<TagItem>(
+                    ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag2Checked));
             Tags3 =
-              new AsyncObservableCollection<TagItem>(ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag3Checked));
+                new AsyncObservableCollection<TagItem>(
+                    ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag3Checked));
             Tags4 =
-              new AsyncObservableCollection<TagItem>(ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag4Checked));
+                new AsyncObservableCollection<TagItem>(
+                    ServiceProvider.Settings.DefaultSession.Tags.Where(x => x.Tag4Checked));
         }
 
         #region Implementation of IWindow
@@ -97,14 +137,15 @@ namespace CameraControl.windows
             {
                 case WindowsCmdConsts.TagSelectorWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        LoadData();
-                        Show();
-                        Activate();
-                        Topmost = true;
-                        Focus();
-                        ServiceProvider.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
-                    }));
+                                                     {
+                                                         LoadData();
+                                                         Show();
+                                                         Activate();
+                                                         Topmost = true;
+                                                         Focus();
+                                                         ServiceProvider.DeviceManager.PhotoCaptured +=
+                                                             DeviceManager_PhotoCaptured;
+                                                     }));
                     break;
                 case WindowsCmdConsts.TagSelectorWnd_Hide:
                     ServiceProvider.DeviceManager.PhotoCaptured -= DeviceManager_PhotoCaptured;
@@ -112,15 +153,15 @@ namespace CameraControl.windows
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        Hide();
-                        Close();
-                    }));
+                                                     {
+                                                         Hide();
+                                                         Close();
+                                                     }));
                     break;
             }
         }
 
-        void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             Dispatcher.Invoke(new Action(delegate
                                              {

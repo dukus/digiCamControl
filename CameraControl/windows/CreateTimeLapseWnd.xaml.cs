@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -16,6 +46,8 @@ using CameraControl.Devices;
 using FreeImageAPI;
 using Image = System.Drawing.Image;
 using MessageBox = System.Windows.Forms.MessageBox;
+
+#endregion
 
 namespace CameraControl.windows
 {
@@ -56,22 +88,22 @@ namespace CameraControl.windows
             ServiceProvider.Settings.ApplyTheme(this);
         }
 
-        void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             button1.Content = "Done";
             btn_paly.Visibility = Visibility.Visible;
             this.BringIntoView();
         }
 
-        void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<FileItem> _files = ServiceProvider.Settings.DefaultSession.Files.Where(fileItem => fileItem.IsChecked).ToList();
+            List<FileItem> _files =
+                ServiceProvider.Settings.DefaultSession.Files.Where(fileItem => fileItem.IsChecked).ToList();
             if (_files.Count == 0)
                 _files = ServiceProvider.Settings.DefaultSession.Files.ToList();
             _starTime = DateTime.Now;
             for (int i = 0; i < _files.Count; i++)
             {
-
                 //}
                 //foreach (FileItem fileItem in ServiceProvider.Settings.DefaultSession.Files)
                 //{
@@ -87,13 +119,15 @@ namespace CameraControl.windows
                 }
 
                 Dispatcher.BeginInvoke(new ThreadStart(delegate
-                                                         {
-                                                             progressBar1.Value++;
-                                                             image1.Source = item.Thumbnail;
-                                                             label1.Content = string.Format("{0}/{1} ({2})", _counter,
-                                                                                            _files.Count,
-                                                                                            (DateTime.Now - _starTime).ToString(@"hh\:mm\:ss"));
-                                                         }));
+                                                           {
+                                                               progressBar1.Value++;
+                                                               image1.Source = item.Thumbnail;
+                                                               label1.Content = string.Format("{0}/{1} ({2})", _counter,
+                                                                                              _files.Count,
+                                                                                              (DateTime.Now - _starTime)
+                                                                                                  .ToString(
+                                                                                                      @"hh\:mm\:ss"));
+                                                           }));
                 if (_backgroundWorker.CancellationPending)
                 {
                     return;
@@ -107,7 +141,8 @@ namespace CameraControl.windows
             script = script.Replace("$InFile$", Path.Combine(_tempFolder, "img000001.jpg").Replace(@"\", @"\\"));
             script = script.Replace("$FPS$", ServiceProvider.Settings.DefaultSession.TimeLapse.Fps.ToString());
             script = script.Replace("$Count$", _files.Count.ToString());
-            script = script.Replace("$OutFile$", ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName.Replace(@"\", @"\\"));
+            script = script.Replace("$OutFile$",
+                                    ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName.Replace(@"\", @"\\"));
             using (TextWriter writer = new StreamWriter(Path.Combine(_tempFolder, "VirtualDub.script")))
             {
                 writer.Write(script);
@@ -133,7 +168,9 @@ namespace CameraControl.windows
                 Close();
                 return;
             }
-            if (ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType == null || ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width == 0 || ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height == 0)
+            if (ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType == null ||
+                ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width == 0 ||
+                ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height == 0)
             {
                 MessageBox.Show("Wrong video settings !");
                 Close();
@@ -159,44 +196,45 @@ namespace CameraControl.windows
         {
             string newfile = Path.Combine(_tempFolder, "img" + _counter.ToString("000000") + ".jpg");
 
-            Bitmap image = (Bitmap)Image.FromFile(file);
+            Bitmap image = (Bitmap) Image.FromFile(file);
             // format image
             //AForge.Imaging.Image.FormatImage(ref image);
             //FIBITMAP dib = FreeImage.LoadEx(file);
 
 
-            int dw = (int)image.Width; //FreeImage.GetWidth(dib);
-            int dh = (int)image.Height; //FreeImage.GetHeight(dib);
+            int dw = (int) image.Width; //FreeImage.GetWidth(dib);
+            int dh = (int) image.Height; //FreeImage.GetHeight(dib);
             int tw = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width;
             int th = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height;
-            double movieaspectration = (double)th / tw;
-            double mouviesize = ((double)(ServiceProvider.Settings.DefaultSession.TimeLapse.MovePercent) / 100);
-            int frame_h = dh >= dw ? dh : (int)(dw * movieaspectration);
-            int frame_w = dw >= dh ? dw : (int)(dh * movieaspectration);
-            int frame_h_dif = (int)(dh * mouviesize);
-            int frame_w_dif = (int)(dw * mouviesize);
+            double movieaspectration = (double) th/tw;
+            double mouviesize = ((double) (ServiceProvider.Settings.DefaultSession.TimeLapse.MovePercent)/100);
+            int frame_h = dh >= dw ? dh : (int) (dw*movieaspectration);
+            int frame_w = dw >= dh ? dw : (int) (dh*movieaspectration);
+            int frame_h_dif = (int) (dh*mouviesize);
+            int frame_w_dif = (int) (dw*mouviesize);
             frame_h = frame_h - frame_h_dif;
             frame_w = frame_w - frame_w_dif;
-            double zw = (tw / (double)dw);
-            double zh = (th / (double)dh);
-            double z = ((zw <= zh) ? zw : zh); //!ServiceProvider.Settings.DefaultSession.TimeLapse.FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
+            double zw = (tw/(double) dw);
+            double zh = (th/(double) dh);
+            double z = ((zw <= zh) ? zw : zh);
+                //!ServiceProvider.Settings.DefaultSession.TimeLapse.FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
 
-            int crop_x = frame_h_dif / total * index;
+            int crop_x = frame_h_dif/total*index;
             int crop_y = 0;
 
             switch (ServiceProvider.Settings.DefaultSession.TimeLapse.MoveDirection)
             {
-                // left to right
+                    // left to right
                 case 0:
                     {
-                        crop_x = (int)((dw - frame_w) / (double)total * index);
+                        crop_x = (int) ((dw - frame_w)/(double) total*index);
                         switch (ServiceProvider.Settings.DefaultSession.TimeLapse.MoveAlignment)
                         {
                             case 0:
                                 crop_y = 0;
                                 break;
                             case 1:
-                                crop_y = (dh - frame_h) / 2;
+                                crop_y = (dh - frame_h)/2;
                                 break;
                             case 2:
                                 crop_y = (dh - frame_h);
@@ -204,17 +242,17 @@ namespace CameraControl.windows
                         }
                     }
                     break;
-                // right to left
+                    // right to left
                 case 1:
                     {
-                        crop_x = (int)((dw - frame_w) / (double)total * (total - index));
+                        crop_x = (int) ((dw - frame_w)/(double) total*(total - index));
                         switch (ServiceProvider.Settings.DefaultSession.TimeLapse.MoveAlignment)
                         {
                             case 0:
                                 crop_y = 0;
                                 break;
                             case 1:
-                                crop_y = (dh - frame_h) / 2;
+                                crop_y = (dh - frame_h)/2;
                                 break;
                             case 2:
                                 crop_y = (dh - frame_h);
@@ -222,17 +260,17 @@ namespace CameraControl.windows
                         }
                     }
                     break;
-                // top to bottom
+                    // top to bottom
                 case 2:
                     {
-                        crop_y = (int)((dh - frame_h) / (double)total * index);
+                        crop_y = (int) ((dh - frame_h)/(double) total*index);
                         switch (ServiceProvider.Settings.DefaultSession.TimeLapse.MoveAlignment)
                         {
                             case 0:
                                 crop_x = 0;
                                 break;
                             case 1:
-                                crop_x = (dw - frame_w) / 2;
+                                crop_x = (dw - frame_w)/2;
                                 break;
                             case 2:
                                 crop_x = (dw - frame_w);
@@ -240,17 +278,17 @@ namespace CameraControl.windows
                         }
                     }
                     break;
-                // bottom to top
+                    // bottom to top
                 case 3:
                     {
-                        crop_y = (int)((dh - frame_h) / (double)total * (total - index));
+                        crop_y = (int) ((dh - frame_h)/(double) total*(total - index));
                         switch (ServiceProvider.Settings.DefaultSession.TimeLapse.MoveAlignment)
                         {
                             case 0:
                                 crop_x = 0;
                                 break;
                             case 1:
-                                crop_x = (dw - frame_w) / 2;
+                                crop_x = (dw - frame_w)/2;
                                 break;
                             case 2:
                                 crop_x = (dw - frame_w);
@@ -259,12 +297,12 @@ namespace CameraControl.windows
                     }
                     break;
                 case 4:
-                    crop_x = (int)((dw - frame_w) / (double)total * index);
-                    crop_y = (int)((dh - frame_h) / (double)total * index);
+                    crop_x = (int) ((dw - frame_w)/(double) total*index);
+                    crop_y = (int) ((dh - frame_h)/(double) total*index);
                     break;
                 case 5:
-                    crop_x = (int)((dw - frame_w) / (double)total * (total - index));
-                    crop_y = (int)((dh - frame_h) / (double)total * (total - index));
+                    crop_x = (int) ((dw - frame_w)/(double) total*(total - index));
+                    crop_y = (int) ((dh - frame_h)/(double) total*(total - index));
                     break;
             }
 
@@ -286,19 +324,23 @@ namespace CameraControl.windows
             uint dh = FreeImage.GetHeight(dib);
             int tw = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width;
             int th = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height;
-            double zw = (tw / (double)dw);
-            double zh = (th / (double)dh);
+            double zw = (tw/(double) dw);
+            double zh = (th/(double) dh);
             double z = 0;
-            z = !ServiceProvider.Settings.DefaultSession.TimeLapse.FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
-            dw = (uint)(dw * z);
-            dh = (uint)(dh * z);
-            int difw = (int)(tw - dw);
-            int difh = (int)(th - dh);
+            z = !ServiceProvider.Settings.DefaultSession.TimeLapse.FillImage
+                    ? ((zw <= zh) ? zw : zh)
+                    : ((zw >= zh) ? zw : zh);
+            dw = (uint) (dw*z);
+            dh = (uint) (dh*z);
+            int difw = (int) (tw - dw);
+            int difh = (int) (th - dh);
             if (FreeImage.GetFileType(file, 0) == FREE_IMAGE_FORMAT.FIF_RAW)
             {
-                FIBITMAP bmp = FreeImage.ToneMapping(dib, FREE_IMAGE_TMO.FITMO_REINHARD05, 0, 0); // ConvertToType(dib, FREE_IMAGE_TYPE.FIT_BITMAP, false);
-                FIBITMAP resized = FreeImage.Rescale(bmp, (int)dw, (int)dh, FREE_IMAGE_FILTER.FILTER_BILINEAR);
-                FIBITMAP final = FreeImage.EnlargeCanvas<RGBQUAD>(resized, difw / 2, difh / 2, difw - (difw / 2), difh - (difh / 2),
+                FIBITMAP bmp = FreeImage.ToneMapping(dib, FREE_IMAGE_TMO.FITMO_REINHARD05, 0, 0);
+                    // ConvertToType(dib, FREE_IMAGE_TYPE.FIT_BITMAP, false);
+                FIBITMAP resized = FreeImage.Rescale(bmp, (int) dw, (int) dh, FREE_IMAGE_FILTER.FILTER_BILINEAR);
+                FIBITMAP final = FreeImage.EnlargeCanvas<RGBQUAD>(resized, difw/2, difh/2, difw - (difw/2),
+                                                                  difh - (difh/2),
                                                                   new RGBQUAD(System.Drawing.Color.Black),
                                                                   FREE_IMAGE_COLOR_OPTIONS.FICO_RGB);
                 FreeImage.SaveEx(final, newfile);
@@ -309,8 +351,9 @@ namespace CameraControl.windows
             }
             else
             {
-                FIBITMAP resized = FreeImage.Rescale(dib, (int)dw, (int)dh, FREE_IMAGE_FILTER.FILTER_BILINEAR);
-                FIBITMAP final = FreeImage.EnlargeCanvas<RGBQUAD>(resized, difw / 2, difh / 2, difw - (difw / 2), difh - (difh / 2),
+                FIBITMAP resized = FreeImage.Rescale(dib, (int) dw, (int) dh, FREE_IMAGE_FILTER.FILTER_BILINEAR);
+                FIBITMAP final = FreeImage.EnlargeCanvas<RGBQUAD>(resized, difw/2, difh/2, difw - (difw/2),
+                                                                  difh - (difh/2),
                                                                   new RGBQUAD(System.Drawing.Color.Black),
                                                                   FREE_IMAGE_COLOR_OPTIONS.FICO_RGB);
                 FreeImage.SaveEx(final, newfile);
@@ -331,7 +374,8 @@ namespace CameraControl.windows
         {
             if (_backgroundWorker.IsBusy)
             {
-                if (MessageBox.Show("A task is running !\n Do you want to cancel it ?", "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show("A task is running !\n Do you want to cancel it ?", "", MessageBoxButtons.YesNo) ==
+                    System.Windows.Forms.DialogResult.No)
                 {
                     e.Cancel = true;
                 }
@@ -350,6 +394,5 @@ namespace CameraControl.windows
             else
                 MessageBox.Show("Output file not found");
         }
-
     }
 }

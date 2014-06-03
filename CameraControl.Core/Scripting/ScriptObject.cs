@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +42,8 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Nikon;
 
+#endregion
+
 namespace CameraControl.Core.Scripting
 {
     public class ScriptObject : BaseFieldClass
@@ -21,6 +53,7 @@ namespace CameraControl.Core.Scripting
         public ValuePairEnumerator Variabiles { get; set; }
 
         private AsyncObservableCollection<IScriptCommand> _commands;
+
         public AsyncObservableCollection<IScriptCommand> Commands
         {
             get { return _commands; }
@@ -32,6 +65,7 @@ namespace CameraControl.Core.Scripting
         }
 
         private bool _useExternal;
+
         public bool UseExternal
         {
             get { return _useExternal; }
@@ -43,6 +77,7 @@ namespace CameraControl.Core.Scripting
         }
 
         private CustomConfig _selectedConfig;
+
         public CustomConfig SelectedConfig
         {
             get { return _selectedConfig; }
@@ -54,6 +89,7 @@ namespace CameraControl.Core.Scripting
         }
 
         private ICameraDevice _cameraDevice;
+
         public ICameraDevice CameraDevice
         {
             get { return _cameraDevice; }
@@ -74,7 +110,7 @@ namespace CameraControl.Core.Scripting
         public void StartCapture()
         {
             Thread thread = new Thread(StartCaptureThread);
-            thread.Start();   
+            thread.Start();
         }
 
         public void StopCapture()
@@ -128,7 +164,6 @@ namespace CameraControl.Core.Scripting
                         StaticHelper.Instance.SystemMessage = deviceException.Message;
                         Log.Error("Bulb done", deviceException);
                     }
-
                 }
                 catch (Exception exception)
                 {
@@ -138,7 +173,7 @@ namespace CameraControl.Core.Scripting
             } while (retry);
         }
 
-        void StartCaptureThread()
+        private void StartCaptureThread()
         {
             bool retry;
             do
@@ -215,39 +250,41 @@ namespace CameraControl.Core.Scripting
                 // grab details for this parse
                 varName = currMatch.Groups[1].Value;
 
-                if(varName.StartsWith("session."))
+                if (varName.StartsWith("session."))
                 {
-                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
                     foreach (PropertyInfo prop in props)
                     {
                         //object propValue = prop.GetValue(myObject, null);
-                        if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool))
+                        if (prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) ||
+                            prop.PropertyType == typeof (bool))
                         {
-                            if(varName.Split('.')[1].ToLower()==prop.Name.ToLower())
+                            if (varName.Split('.')[1].ToLower() == prop.Name.ToLower())
                             {
                                 value = prop.GetValue(ServiceProvider.Settings.DefaultSession, null).ToString();
                             }
                         }
                         // Do something with propValue
                     }
-                } if(varName.StartsWith("camera."))
+                }
+                if (varName.StartsWith("camera."))
                 {
-                    if(ServiceProvider.DeviceManager.SelectedCameraDevice!=null)
+                    if (ServiceProvider.DeviceManager.SelectedCameraDevice != null)
                     {
                         CameraPreset preset = new CameraPreset();
                         preset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
                         foreach (ValuePair pair in preset.Values)
                         {
-                            if (varName.Split('.')[1].ToLower() == pair.Name.Replace(" ","").ToLower())
+                            if (varName.Split('.')[1].ToLower() == pair.Name.Replace(" ", "").ToLower())
                                 value = pair.Value;
                         }
                     }
                 }
                 else
                 {
-                    value = Variabiles[varName];    
+                    value = Variabiles[varName];
                 }
-                
+
 
                 if (currMatch.Groups.Count >= 3)
                     modifier = currMatch.Groups[2].Value.ToLower();
@@ -298,7 +335,7 @@ namespace CameraControl.Core.Scripting
                 {
                     ServiceProvider.ScriptManager.OutPut("Error executing script command " + command.DisplayName +
                                                          " Exception:" + exception.Message);
-                    Log.Debug("Error executing commands",exception);
+                    Log.Debug("Error executing commands", exception);
                 }
             }
         }

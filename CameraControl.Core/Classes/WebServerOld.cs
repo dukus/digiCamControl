@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.IO;
 using System.Net;
@@ -6,7 +36,10 @@ using System.Text;
 using System.Threading;
 using CameraControl.Devices;
 
+#endregion
+
 // origin: http://www.codeproject.com/Articles/1505/Create-your-own-Web-Server-using-C
+
 namespace CameraControl.Core.Classes
 {
     public class WebServerOld
@@ -43,7 +76,6 @@ namespace CameraControl.Core.Classes
                 //start the thread which calls the method 'StartListen'
                 Thread th = new Thread(new ThreadStart(StartListen));
                 th.Start();
-
             }
             catch (Exception e)
             {
@@ -74,7 +106,6 @@ namespace CameraControl.Core.Classes
             else
                 return "";
         }
-
 
 
         /// <summary>
@@ -137,7 +168,6 @@ namespace CameraControl.Core.Classes
         }
 
 
-
         /// <summary>
         /// Returns the Physical Path
         /// </summary>
@@ -146,7 +176,6 @@ namespace CameraControl.Core.Classes
         /// <returns>Physical local Path</returns>
         public string GetLocalPath(string sMyWebServerRoot, string sDirName)
         {
-
             StreamReader sr;
             String sLine = "";
             String sVirtualDir = "";
@@ -156,7 +185,6 @@ namespace CameraControl.Core.Classes
 
             //Remove extra spaces
             sDirName.Trim();
-
 
 
             // Convert to lowercase
@@ -213,7 +241,6 @@ namespace CameraControl.Core.Classes
         }
 
 
-
         /// <summary>
         /// This function send the Header Information to the client (Browser)
         /// </summary>
@@ -225,7 +252,6 @@ namespace CameraControl.Core.Classes
         public void SendHeader(string sHttpVersion, string sMIMEHeader, int iTotBytes, string sStatusCode,
                                ref Socket mySocket)
         {
-
             String sBuffer = "";
 
             // if Mime type is not provided set default to text/html
@@ -245,9 +271,7 @@ namespace CameraControl.Core.Classes
             SendToBrowser(bSendData, ref mySocket);
 
             Console.WriteLine("Total Bytes : " + iTotBytes.ToString());
-
         }
-
 
 
         /// <summary>
@@ -260,7 +284,6 @@ namespace CameraControl.Core.Classes
         {
             SendToBrowser(Encoding.ASCII.GetBytes(sData), ref mySocket);
         }
-
 
 
         /// <summary>
@@ -289,7 +312,6 @@ namespace CameraControl.Core.Classes
             catch (Exception e)
             {
                 Console.WriteLine("Error Occurred : {0} ", e);
-
             }
         }
 
@@ -299,18 +321,18 @@ namespace CameraControl.Core.Classes
         //Then it sends the Current date time to the Client.
         public void StartListen()
         {
-
             int iStartPos = 0;
             String sRequest;
             String sDirName;
             String sRequestedFile;
             String sErrorMessage;
             String sLocalDir;
-            String sMyWebServerRoot = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "WebServer\\");
+            String sMyWebServerRoot =
+                Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                             "WebServer\\");
             String sPhysicalFilePath = "";
             String sFormattedMessage = "";
             String sResponse = "";
-
 
 
             while (true)
@@ -337,16 +359,13 @@ namespace CameraControl.Core.Classes
                     //                  mySocket.RemoteEndPoint);
 
 
-
                     //make a byte array and receive data from the client 
                     Byte[] bReceive = new Byte[1024];
                     int i = mySocket.Receive(bReceive, bReceive.Length, 0);
 
 
-
                     //Convert Byte to String
                     string sBuffer = Encoding.ASCII.GetString(bReceive);
-
 
 
                     //At present we will only deal with GET type
@@ -455,11 +474,8 @@ namespace CameraControl.Core.Classes
                             mySocket.Close();
 
                             continue;
-
                         }
                     }
-
-
 
 
                     /////////////////////////////////////////////////////////////////////
@@ -473,7 +489,6 @@ namespace CameraControl.Core.Classes
                     String sMimeType = GetMimeType(sRequestedFile);
 
 
-
                     //Build the physical path
                     sPhysicalFilePath = sLocalDir + sRequestedFile;
                     Console.WriteLine("File Requested : " + sPhysicalFilePath);
@@ -481,7 +496,6 @@ namespace CameraControl.Core.Classes
 
                     if (File.Exists(sPhysicalFilePath) == false)
                     {
-
                         sErrorMessage = "<H2>404 Error! File Does Not Exists...</H2>";
                         SendHeader(sHttpVersion, "", sErrorMessage.Length, " 404 Not Found", ref mySocket);
                         SendToBrowser(sErrorMessage, ref mySocket);
@@ -494,8 +508,6 @@ namespace CameraControl.Core.Classes
                         int iTotBytes = 0;
 
                         sResponse = "";
-
-
 
 
                         FileStream fs = new FileStream(sPhysicalFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -511,7 +523,6 @@ namespace CameraControl.Core.Classes
                             sResponse = sResponse + Encoding.ASCII.GetString(bytes, 0, read);
 
                             iTotBytes = iTotBytes + read;
-
                         }
                         reader.Close();
                         fs.Close();
@@ -521,7 +532,6 @@ namespace CameraControl.Core.Classes
                         SendToBrowser(bytes, ref mySocket);
 
                         //mySocket.Send(bytes, bytes.Length,0);
-
                     }
                     mySocket.Close();
                 }

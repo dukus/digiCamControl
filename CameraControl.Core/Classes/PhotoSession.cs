@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,21 +37,22 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Newtonsoft.Json;
 
+#endregion
+
 namespace CameraControl.Core.Classes
 {
     public class PhotoSession : BaseFieldClass
     {
         private object _locker = new object();
         private string _lastFilename = null;
-        
-        [JsonIgnore]
-        [XmlIgnore]
-        public List<string> SupportedExtensions = new List<string> { ".jpg", ".nef", ".tif", ".png", ".cr2" };
-        [JsonIgnore]
-        [XmlIgnore]
-        public List<string> RawExtensions = new List<string> { ".cr2", ".nef" };
+
+        [JsonIgnore] [XmlIgnore] public List<string> SupportedExtensions = new List<string>
+                                                                               {".jpg", ".nef", ".tif", ".png", ".cr2"};
+
+        [JsonIgnore] [XmlIgnore] public List<string> RawExtensions = new List<string> {".cr2", ".nef"};
 
         private string _name;
+
         public string Name
         {
             get { return _name; }
@@ -33,6 +64,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _alowFolderChange;
+
         public bool AlowFolderChange
         {
             get { return _alowFolderChange; }
@@ -45,6 +77,7 @@ namespace CameraControl.Core.Classes
 
 
         private string _folder;
+
         public string Folder
         {
             get { return _folder; }
@@ -60,7 +93,8 @@ namespace CameraControl.Core.Classes
                         }
                         catch (Exception exception)
                         {
-                            string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Name);
+                            string folder = Path.Combine(
+                                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Name);
                             if (value != folder)
                                 value = folder;
                             Log.Error("Error creating session folder", exception);
@@ -88,6 +122,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _counter;
+
         public int Counter
         {
             get { return _counter; }
@@ -99,6 +134,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _useOriginalFilename;
+
         public bool UseOriginalFilename
         {
             get { return _useOriginalFilename; }
@@ -123,6 +159,7 @@ namespace CameraControl.Core.Classes
         }
 
         private TimeLapseClass _timeLapse;
+
         public TimeLapseClass TimeLapse
         {
             get { return _timeLapse; }
@@ -134,6 +171,7 @@ namespace CameraControl.Core.Classes
         }
 
         private BraketingClass _braketing;
+
         public BraketingClass Braketing
         {
             get { return _braketing; }
@@ -145,6 +183,7 @@ namespace CameraControl.Core.Classes
         }
 
         private AsyncObservableCollection<TagItem> _tags;
+
         public AsyncObservableCollection<TagItem> Tags
         {
             get { return _tags; }
@@ -156,6 +195,7 @@ namespace CameraControl.Core.Classes
         }
 
         private TagItem _selectedTag1;
+
         public TagItem SelectedTag1
         {
             get { return _selectedTag1; }
@@ -167,6 +207,7 @@ namespace CameraControl.Core.Classes
         }
 
         private TagItem _selectedTag2;
+
         public TagItem SelectedTag2
         {
             get { return _selectedTag2; }
@@ -178,6 +219,7 @@ namespace CameraControl.Core.Classes
         }
 
         private TagItem _selectedTag3;
+
         public TagItem SelectedTag3
         {
             get { return _selectedTag3; }
@@ -189,6 +231,7 @@ namespace CameraControl.Core.Classes
         }
 
         private TagItem _selectedTag4;
+
         public TagItem SelectedTag4
         {
             get { return _selectedTag4; }
@@ -200,6 +243,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _comment;
+
         public string Comment
         {
             get { return _comment; }
@@ -211,6 +255,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _barcode;
+
         public string Barcode
         {
             get { return _barcode; }
@@ -223,6 +268,7 @@ namespace CameraControl.Core.Classes
 
 
         private bool _writeComment;
+
         public bool WriteComment
         {
             get { return _writeComment; }
@@ -234,6 +280,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _useCameraCounter;
+
         public bool UseCameraCounter
         {
             get { return _useCameraCounter; }
@@ -245,6 +292,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _downloadOnlyJpg;
+
         public bool DownloadOnlyJpg
         {
             get { return _downloadOnlyJpg; }
@@ -256,6 +304,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _leadingZeros;
+
         public int LeadingZeros
         {
             get { return _leadingZeros; }
@@ -267,12 +316,10 @@ namespace CameraControl.Core.Classes
         }
 
         private string _configFile;
+
         public string ConfigFile
         {
-            get
-            {
-                return _configFile;
-            }
+            get { return _configFile; }
             set { _configFile = value; }
         }
 
@@ -322,7 +369,7 @@ namespace CameraControl.Core.Classes
             AllowOverWrite = false;
         }
 
-        void _systemWatcher_Created(object sender, FileSystemEventArgs e)
+        private void _systemWatcher_Created(object sender, FileSystemEventArgs e)
         {
             try
             {
@@ -334,7 +381,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        void _systemWatcher_Deleted(object sender, FileSystemEventArgs e)
+        private void _systemWatcher_Deleted(object sender, FileSystemEventArgs e)
         {
             FileItem deletedItem = null;
             lock (this)
@@ -354,12 +401,11 @@ namespace CameraControl.Core.Classes
             }
             catch (Exception)
             {
-
-
             }
         }
 
         private bool _allowOverWrite;
+
         public bool AllowOverWrite
         {
             get { return _allowOverWrite; }
@@ -376,17 +422,19 @@ namespace CameraControl.Core.Classes
             {
                 if (string.IsNullOrEmpty(ext))
                     ext = ".nef";
-                if (!string.IsNullOrEmpty(_lastFilename) && RawExtensions.Contains(ext.ToLower()) && !RawExtensions.Contains(Path.GetExtension(_lastFilename).ToLower()))
+                if (!string.IsNullOrEmpty(_lastFilename) && RawExtensions.Contains(ext.ToLower()) &&
+                    !RawExtensions.Contains(Path.GetExtension(_lastFilename).ToLower()))
                 {
                     string rawfile = Path.Combine(Folder,
-                                                  FormatFileName(device, ext,false) + (!ext.StartsWith(".") ? "." : "") + ext);
+                                                  FormatFileName(device, ext, false) + (!ext.StartsWith(".") ? "." : "") +
+                                                  ext);
                     if (!File.Exists(rawfile))
                         return rawfile;
                 }
-                    
+
                 string fileName = Path.Combine(Folder,
                                                FormatFileName(device, ext) + (!ext.StartsWith(".") ? "." : "") + ext);
-                
+
                 if (File.Exists(fileName) && !AllowOverWrite)
                     return GetNextFileName(ext, device);
                 _lastFilename = fileName;
@@ -394,7 +442,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private string FormatFileName(ICameraDevice device, string ext, bool incremetCounter=true)
+        private string FormatFileName(ICameraDevice device, string ext, bool incremetCounter = true)
         {
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(device);
             string res = FileNameTemplate;
@@ -415,14 +463,15 @@ namespace CameraControl.Core.Classes
             }
             res = res.Replace("$N", Name.Trim());
             if (device.ExposureCompensation != null)
-                res = res.Replace("$E", device.ExposureCompensation.Value != "0" ? device.ExposureCompensation.Value : "");
+                res = res.Replace("$E",
+                                  device.ExposureCompensation.Value != "0" ? device.ExposureCompensation.Value : "");
             res = res.Replace("$D", DateTime.Now.ToString("yyyy-MM-dd"));
             res = res.Replace("$B", Barcode ?? "");
 
             var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTime.Now.Kind);
             var unixTimestamp = System.Convert.ToInt64((DateTime.Now - date).TotalSeconds);
             res = res.Replace("$UTime", unixTimestamp.ToString());
-            
+
             res = res.Replace("$Type", GetType(ext));
 
             res = res.Replace("$X", property.DeviceName.Replace(":", "_").Replace("?", "_").Replace("*", "_"));

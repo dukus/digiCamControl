@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +43,8 @@ using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using MahApps.Metro;
+
+#endregion
 
 namespace CameraControl.Core.Classes
 {
@@ -35,12 +67,12 @@ namespace CameraControl.Core.Classes
                     _defaultSession = value;
                     DefaultSessionName = _defaultSession.Name;
                     var thread = new Thread(new ThreadStart(delegate
-                                                                 {
-                                                                     if (SessionSelected != null)
-                                                                         SessionSelected(oldvalue, value);
-                                                                     LoadData(_defaultSession);
-                                                                     NotifyPropertyChanged("DefaultSession");
-                                                                 }));
+                                                                {
+                                                                    if (SessionSelected != null)
+                                                                        SessionSelected(oldvalue, value);
+                                                                    LoadData(_defaultSession);
+                                                                    NotifyPropertyChanged("DefaultSession");
+                                                                }));
                     thread.Start();
                 }
             }
@@ -66,6 +98,7 @@ namespace CameraControl.Core.Classes
         public ObservableCollection<VideoType> VideoTypes { get; set; }
 
         private bool _imageLoading;
+
         [XmlIgnore]
         public bool ImageLoading
         {
@@ -78,6 +111,7 @@ namespace CameraControl.Core.Classes
         }
 
         private AsyncObservableCollection<WindowCommandItem> _actions;
+
         public AsyncObservableCollection<WindowCommandItem> Actions
         {
             get { return _actions; }
@@ -89,6 +123,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _selectedLanguage;
+
         public string SelectedLanguage
         {
             get { return _selectedLanguage; }
@@ -100,6 +135,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _disableNativeDrivers;
+
         public bool DisableNativeDrivers
         {
             get { return _disableNativeDrivers; }
@@ -111,6 +147,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _currentThemeName;
+
         public string CurrentThemeName
         {
             get { return _currentThemeName; }
@@ -124,6 +161,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _liveViewFreezeTimeOut;
+
         public int LiveViewFreezeTimeOut
         {
             get { return _liveViewFreezeTimeOut; }
@@ -135,6 +173,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _previewLiveViewImage;
+
         public bool PreviewLiveViewImage
         {
             get { return _previewLiveViewImage; }
@@ -148,6 +187,7 @@ namespace CameraControl.Core.Classes
         public DateTime LastUpdateCheckDate { get; set; }
 
         private bool _useWebserver;
+
         public bool UseWebserver
         {
             get { return _useWebserver; }
@@ -159,6 +199,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _webserverPort;
+
         public int WebserverPort
         {
             get { return _webserverPort; }
@@ -171,6 +212,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _playSound;
+
         public bool PlaySound
         {
             get { return _playSound; }
@@ -182,6 +224,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _showFocusPoints;
+
         public bool ShowFocusPoints
         {
             get { return _showFocusPoints; }
@@ -193,6 +236,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _defaultSessionName;
+
         public string DefaultSessionName
         {
             get { return _defaultSessionName; }
@@ -229,6 +273,7 @@ namespace CameraControl.Core.Classes
 
 
         private string _webaddress;
+
         public string Webaddress
         {
             get
@@ -245,6 +290,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _preview;
+
         /// <summary>
         /// preview in full screen
         /// </summary>
@@ -259,6 +305,7 @@ namespace CameraControl.Core.Classes
         }
 
         private System.Windows.Media.Color _fullScreenColor;
+
         public System.Windows.Media.Color FullScreenColor
         {
             get { return _fullScreenColor; }
@@ -270,6 +317,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _previewSeconds;
+
         public int PreviewSeconds
         {
             get { return _previewSeconds; }
@@ -281,6 +329,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _autoPreview;
+
         public bool AutoPreview
         {
             get { return _autoPreview; }
@@ -292,6 +341,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _rotateIndex;
+
         public int RotateIndex
         {
             get { return _rotateIndex; }
@@ -303,6 +353,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _smalFocusStep;
+
         public int SmalFocusStep
         {
             get { return _smalFocusStep; }
@@ -314,6 +365,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _mediumFocusStep;
+
         public int MediumFocusStep
         {
             get { return _mediumFocusStep; }
@@ -325,6 +377,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _largeFocusStep;
+
         public int LargeFocusStep
         {
             get { return _largeFocusStep; }
@@ -336,6 +389,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _focusMoveStep;
+
         public int FocusMoveStep
         {
             get { return _focusMoveStep; }
@@ -347,6 +401,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _dontLoadThumbnails;
+
         public bool DontLoadThumbnails
         {
             get { return _dontLoadThumbnails; }
@@ -358,6 +413,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _externalViewer;
+
         public string ExternalViewer
         {
             get { return _externalViewer; }
@@ -369,6 +425,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _motionBlockSize;
+
         public int MotionBlockSize
         {
             get { return _motionBlockSize; }
@@ -380,6 +437,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _detectionType;
+
         public int DetectionType
         {
             get { return _detectionType; }
@@ -391,6 +449,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _useExternalViewer;
+
         public bool UseExternalViewer
         {
             get { return _useExternalViewer; }
@@ -402,6 +461,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _externalViewerPath;
+
         public string ExternalViewerPath
         {
             get { return _externalViewerPath; }
@@ -413,6 +473,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _externalViewerArgs;
+
         public string ExternalViewerArgs
         {
             get { return _externalViewerArgs; }
@@ -424,6 +485,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _selectedMainForm;
+
         public string SelectedMainForm
         {
             get { return _selectedMainForm; }
@@ -435,6 +497,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _lowMemoryUsage;
+
         public bool LowMemoryUsage
         {
             get { return _lowMemoryUsage; }
@@ -446,6 +509,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _useParallelTransfer;
+
         public bool UseParallelTransfer
         {
             get { return _useParallelTransfer; }
@@ -457,6 +521,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _showUntranslatedLabelId;
+
         public bool ShowUntranslatedLabelId
         {
             get { return _showUntranslatedLabelId; }
@@ -468,6 +533,7 @@ namespace CameraControl.Core.Classes
         }
 
         private CustomConfigEnumerator _deviceConfigs;
+
         public CustomConfigEnumerator DeviceConfigs
         {
             get { return _deviceConfigs; }
@@ -480,6 +546,7 @@ namespace CameraControl.Core.Classes
 
 
         private bool _highlightUnderExp;
+
         public bool HighlightUnderExp
         {
             get { return _highlightUnderExp; }
@@ -491,6 +558,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _highlightOverExp;
+
         public bool HighlightOverExp
         {
             get { return _highlightOverExp; }
@@ -502,6 +570,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _easyLiveViewControl;
+
         public bool EasyLiveViewControl
         {
             get { return _easyLiveViewControl; }
@@ -513,6 +582,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _showMagnifierInFullSccreen;
+
         public bool ShowMagnifierInFullSccreen
         {
             get { return _showMagnifierInFullSccreen; }
@@ -524,6 +594,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _delayImageLoading;
+
         public bool DelayImageLoading
         {
             get { return _delayImageLoading; }
@@ -535,6 +606,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _addFakeCamera;
+
         public bool AddFakeCamera
         {
             get { return _addFakeCamera; }
@@ -546,6 +618,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _syncCameraDateTime;
+
         public bool SyncCameraDateTime
         {
             get { return _syncCameraDateTime; }
@@ -557,6 +630,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _showThumbUpDown;
+
         public bool ShowThumbUpDown
         {
             get { return _showThumbUpDown; }
@@ -568,6 +642,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _autoPreviewJpgOnly;
+
         public bool AutoPreviewJpgOnly
         {
             get { return _autoPreviewJpgOnly; }
@@ -579,6 +654,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _clientId;
+
         public string ClientId
         {
             get { return _clientId; }
@@ -610,7 +686,8 @@ namespace CameraControl.Core.Classes
             get
             {
                 return Path.Combine(DataFolder,
-                                    "LiveViewOverlay"); ;
+                                    "LiveViewOverlay");
+                ;
             }
         }
 
@@ -618,7 +695,8 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName); ;
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName);
+                ;
             }
         }
 
@@ -626,10 +704,10 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                return Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "WebServer\\");
+                return Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                                    "WebServer\\");
             }
         }
-
 
 
         public Settings()
@@ -641,12 +719,12 @@ namespace CameraControl.Core.Classes
             SelectedBitmap = new BitmapFile();
             ImageLoading = false;
             VideoTypes = new ObservableCollection<VideoType>
-                     {
-                       new VideoType("HD 1080 16:9", 1920, 1080),
-                       new VideoType("UXGA 4:3", 1600, 1200),
-                       new VideoType("HD 720 16:9", 1280, 720),
-                       new VideoType("Super VGA 4:3", 800, 600),
-                     };
+                             {
+                                 new VideoType("HD 1080 16:9", 1920, 1080),
+                                 new VideoType("UXGA 4:3", 1600, 1200),
+                                 new VideoType("HD 720 16:9", 1280, 720),
+                                 new VideoType("Super VGA 4:3", 800, 600),
+                             };
             CameraProperties = new CameraPropertyEnumerator();
             DeviceConfigs = new CustomConfigEnumerator();
             ResetSettings();
@@ -697,9 +775,14 @@ namespace CameraControl.Core.Classes
         /// Add new WinddowssCommands from items
         /// </summary>
         /// <param name="items">The items.</param>
-        public void SyncActions(IEnumerable<WindowCommandItem>  items)
+        public void SyncActions(IEnumerable<WindowCommandItem> items)
         {
-            List<WindowCommandItem> itemsToAdd= (from windowCommandItem in items let found = Actions.Any(commandItem => windowCommandItem.Name == commandItem.Name) where !found select windowCommandItem).ToList();
+            List<WindowCommandItem> itemsToAdd = (from windowCommandItem in items
+                                                  let found =
+                                                      Actions.Any(
+                                                          commandItem => windowCommandItem.Name == commandItem.Name)
+                                                  where !found
+                                                  select windowCommandItem).ToList();
             foreach (WindowCommandItem item in itemsToAdd)
             {
                 Actions.Add(item);
@@ -759,7 +842,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 string filename = Path.Combine(DataFolder, "Sessions", session.Name + ".xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(PhotoSession));
+                XmlSerializer serializer = new XmlSerializer(typeof (PhotoSession));
                 // Create a FileStream to write with.
 
                 Stream writer = new FileStream(filename, FileMode.Create);
@@ -781,7 +864,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 string filename = Path.Combine(DataFolder, "Branding.xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(Branding));
+                XmlSerializer serializer = new XmlSerializer(typeof (Branding));
                 // Create a FileStream to write with.
 
                 Stream writer = new FileStream(filename, FileMode.Create);
@@ -803,9 +886,9 @@ namespace CameraControl.Core.Classes
                 if (File.Exists(filename))
                 {
                     XmlSerializer mySerializer =
-                      new XmlSerializer(typeof(PhotoSession));
+                        new XmlSerializer(typeof (PhotoSession));
                     FileStream myFileStream = new FileStream(filename, FileMode.Open);
-                    photoSession = (PhotoSession)mySerializer.Deserialize(myFileStream);
+                    photoSession = (PhotoSession) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                     photoSession.ConfigFile = filename;
                 }
@@ -820,15 +903,16 @@ namespace CameraControl.Core.Classes
         public Branding LoadBranding()
         {
             Branding branding = new Branding();
-            string filename = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Branding.xml");
+            string filename = Path.Combine(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Branding.xml");
             try
             {
                 if (File.Exists(filename))
                 {
                     XmlSerializer mySerializer =
-                      new XmlSerializer(typeof(Branding));
+                        new XmlSerializer(typeof (Branding));
                     FileStream myFileStream = new FileStream(filename, FileMode.Open);
-                    branding = (Branding)mySerializer.Deserialize(myFileStream);
+                    branding = (Branding) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }
             }
@@ -851,9 +935,9 @@ namespace CameraControl.Core.Classes
                 if (File.Exists(ConfigFile))
                 {
                     XmlSerializer mySerializer =
-                      new XmlSerializer(typeof(Settings));
+                        new XmlSerializer(typeof (Settings));
                     FileStream myFileStream = new FileStream(ConfigFile, FileMode.Open);
-                    settings = (Settings)mySerializer.Deserialize(myFileStream);
+                    settings = (Settings) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }
                 else
@@ -923,7 +1007,7 @@ namespace CameraControl.Core.Classes
 
         public void Save()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Settings));
+            XmlSerializer serializer = new XmlSerializer(typeof (Settings));
             // Create a FileStream to write with.
 
             Stream writer = new FileStream(ConfigFile, FileMode.Create);
@@ -954,14 +1038,24 @@ namespace CameraControl.Core.Classes
         {
             if (string.IsNullOrEmpty(CurrentThemeName) || !CurrentThemeName.Contains("\\"))
             {
-                ThemeManager.ChangeAppStyle(window, ThemeManager.Accents.First(a => a.Name == "Steel"), ThemeManager.GetAppTheme("BaseDark"));
+                ThemeManager.ChangeAppStyle(window, ThemeManager.Accents.First(a => a.Name == "Steel"),
+                                            ThemeManager.GetAppTheme("BaseDark"));
                 return;
             }
-            ThemeManager.ChangeAppStyle(window, ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]), ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark" ? "BaseDark" : "BaseLight"));
-            ThemeManager.ChangeAppStyle(Application.Current, ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]), ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark" ? "BaseDark" : "BaseLight"));
+            ThemeManager.ChangeAppStyle(window,
+                                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
+                                        ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
+                                                                     ? "BaseDark"
+                                                                     : "BaseLight"));
+            ThemeManager.ChangeAppStyle(Application.Current,
+                                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
+                                        ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
+                                                                     ? "BaseDark"
+                                                                     : "BaseLight"));
         }
 
         public delegate void SessionSelectedEventHandler(PhotoSession oldvalu, PhotoSession newvalue);
+
         public event SessionSelectedEventHandler SessionSelected;
     }
 }

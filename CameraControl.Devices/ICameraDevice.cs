@@ -1,5 +1,37 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Devices
 {
@@ -10,10 +42,12 @@ namespace CameraControl.Devices
         /// Should be handled by the user code
         /// </summary>
         bool IsBusy { get; set; }
+
         /// <summary>
         /// This property will be removed, replaced by GetCapability
         /// </summary>
         bool HaveLiveView { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether photos captured are captured in SDRam.
         /// </summary>
@@ -42,6 +76,7 @@ namespace CameraControl.Devices
         /// <c>true</c> if this instance is connected; otherwise, <c>false</c>.
         /// </value>
         bool IsConnected { get; set; }
+
         bool IsChecked { get; set; }
 
         /// <summary>
@@ -51,6 +86,7 @@ namespace CameraControl.Devices
         /// The attached photo session.
         /// </value>
         object AttachedPhotoSession { get; set; }
+
         string DeviceName { get; set; }
         string Manufacturer { get; set; }
         string SerialNumber { get; set; }
@@ -63,6 +99,7 @@ namespace CameraControl.Devices
         /// <param name="capabilityEnum">The capability enum.</param>
         /// <returns><c>true</c> if capability supported</returns>
         bool GetCapability(CapabilityEnum capabilityEnum);
+
         uint TransferProgress { get; set; }
 
         int Battery { get; set; }
@@ -80,10 +117,12 @@ namespace CameraControl.Devices
         void StartRecordMovie();
         void StopRecordMovie();
         string GetProhibitionCondition(OperationEnum operationEnum);
+
         /// <summary>
         /// Support only if capability Bulb is specified
         /// </summary>
         void EndBulbMode();
+
         /// <summary>
         /// Support only if capability Bulb is specified
         /// </summary>
@@ -104,12 +143,14 @@ namespace CameraControl.Devices
         /// Occurs when all capture images done.
         /// </summary>
         event EventHandler CaptureCompleted;
+
         /// <summary>
         /// Occurs when [camera disconnected].
         /// </summary>
         event CameraDisconnectedEventHandler CameraDisconnected;
 
         event CameraDeviceManager.CameraConnectedEventHandler CameraInitDone;
+
         /// <summary>
         /// Gets or sets the arbitrary number of advanced properties.
         /// </summary>
@@ -124,10 +165,10 @@ namespace CameraControl.Devices
         /// <param name="storageId">The storage id.</param>
         /// <returns></returns>
         AsyncObservableCollection<DeviceObject> GetObjects(object storageId);
+
         void FormatStorage(object storageId);
         bool DeleteObject(DeviceObject deviceObject);
 
         void SetCameraField(CameraFieldType cameraFieldType, string comment);
-
     }
 }

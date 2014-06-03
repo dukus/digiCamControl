@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +39,8 @@ using System.Windows.Media.Imaging;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 
+#endregion
+
 namespace CameraControl.Core.Classes
 {
     public class BitmapLoader : BaseFieldClass
@@ -18,6 +50,7 @@ namespace CameraControl.Core.Classes
         private const int SmallThumbSize = 255;
 
         private static BitmapLoader _instance;
+
         public static BitmapLoader Instance
         {
             get { return _instance ?? (_instance = new BitmapLoader()); }
@@ -25,6 +58,7 @@ namespace CameraControl.Core.Classes
         }
 
         private BitmapImage _defaultThumbnail;
+
         public BitmapImage DefaultThumbnail
         {
             get
@@ -81,7 +115,6 @@ namespace CameraControl.Core.Classes
         }
 
 
-
         public void GenerateCache(FileItem fileItem)
         {
             if (fileItem == null)
@@ -95,7 +128,6 @@ namespace CameraControl.Core.Classes
                                         Path.GetFileNameWithoutExtension(fileItem.FileName) + ".jpg");
                 if (File.Exists(s))
                 {
-
                     filename = s;
                 }
             }
@@ -163,8 +195,8 @@ namespace CameraControl.Core.Classes
             TransformedBitmap target = new TransformedBitmap(
                 photo,
                 new ScaleTransform(
-                    width / photo.Width * 96 / photo.DpiX,
-                    height / photo.Height * 96 / photo.DpiY,
+                    width/photo.Width*96/photo.DpiX,
+                    height/photo.Height*96/photo.DpiY,
                     0, 0));
             BitmapFrame thumbnail = BitmapFrame.Create(target);
             BitmapFrame newPhoto = Resize(thumbnail, width, height, mode);
@@ -176,7 +208,7 @@ namespace CameraControl.Core.Classes
         {
             TransformedBitmap target = new TransformedBitmap(
                 photo,
-                new RotateTransform(angle, photo.PixelWidth / 2, photo.PixelHeight / 2));
+                new RotateTransform(angle, photo.PixelWidth/2, photo.PixelHeight/2));
             BitmapFrame thumbnail = BitmapFrame.Create(target);
             BitmapFrame newPhoto = Resize(thumbnail, photo.PixelWidth, photo.PixelHeight, mode);
             return newPhoto;
@@ -223,7 +255,6 @@ namespace CameraControl.Core.Classes
             {
                 for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
                 {
-
                     int num1 = bitmapContext.Pixels[i];
                     byte a = (byte) (num1 >> 24);
                     int num2 = (int) a;
@@ -247,7 +278,7 @@ namespace CameraControl.Core.Classes
             fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
         }
 
-        public unsafe void Highlight(BitmapFile file, bool under , bool over)
+        public unsafe void Highlight(BitmapFile file, bool under, bool over)
         {
             if (!under && !over)
                 return;
@@ -259,23 +290,22 @@ namespace CameraControl.Core.Classes
             int treshold = 2;
             using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
             {
-                for (var i = 0; i < bitmapContext.Width * bitmapContext.Height; i++)
+                for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
                 {
-
                     int num1 = bitmapContext.Pixels[i];
-                    byte a = (byte)(num1 >> 24);
-                    int num2 = (int)a;
+                    byte a = (byte) (num1 >> 24);
+                    int num2 = (int) a;
                     if (num2 == 0)
                         num2 = 1;
-                    int num3 = 65280 / num2;
+                    int num3 = 65280/num2;
                     //Color col = Color.FromArgb(a, (byte)((num1 >> 16 & (int)byte.MaxValue) * num3 >> 8),
                     //                           (byte)((num1 >> 8 & (int)byte.MaxValue) * num3 >> 8),
                     //                           (byte)((num1 & (int)byte.MaxValue) * num3 >> 8));
-                    byte R = (byte)((num1 >> 16 & byte.MaxValue) * num3 >> 8);
-                    byte G = (byte)((num1 >> 8 & byte.MaxValue) * num3 >> 8);
-                    byte B = (byte)((num1 & byte.MaxValue) * num3 >> 8);
+                    byte R = (byte) ((num1 >> 16 & byte.MaxValue)*num3 >> 8);
+                    byte G = (byte) ((num1 >> 8 & byte.MaxValue)*num3 >> 8);
+                    byte B = (byte) ((num1 & byte.MaxValue)*num3 >> 8);
 
-                    if ( under && R < treshold && G < treshold && B < treshold)
+                    if (under && R < treshold && G < treshold && B < treshold)
                         bitmapContext.Pixels[i] = color1;
                     if (over && R > 255 - treshold && G > 255 - treshold && B > 255 - treshold)
                         bitmapContext.Pixels[i] = color2;
@@ -298,7 +328,7 @@ namespace CameraControl.Core.Classes
             file.Metadata.Clear();
             foreach (ValuePair item in fileItem.FileInfo.ExifTags.Items)
             {
-                file.Metadata.Add(new DictionaryItem(){Name = item.Name,Value = item.Value});
+                file.Metadata.Add(new DictionaryItem() {Name = item.Name, Value = item.Value});
             }
             file.BlueColorHistogramPoints = ConvertToPointCollection(fileItem.FileInfo.HistogramBlue);
             file.RedColorHistogramPoints = ConvertToPointCollection(fileItem.FileInfo.HistogramRed);
@@ -317,7 +347,6 @@ namespace CameraControl.Core.Classes
                 file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.ExposureBiasValue"];
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FocalLength"))
                 file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FocalLength"];
-
         }
 
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres)
@@ -341,14 +370,14 @@ namespace CameraControl.Core.Classes
                                                             BitmapCreateOptions.None,
                                                             BitmapCacheOption.OnLoad);
 
-                double dw = (double)MaxThumbSize / bmpDec.Frames[0].PixelWidth;
+                double dw = (double) MaxThumbSize/bmpDec.Frames[0].PixelWidth;
                 WriteableBitmap bitmap;
-                if(fullres)
-                bitmap =
-                    BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
-                                                                        (int)(bmpDec.Frames[0].PixelWidth * dw),
-                                                                        (int)(bmpDec.Frames[0].PixelHeight * dw),
-                                                                        BitmapScalingMode.NearestNeighbor));
+                if (fullres)
+                    bitmap =
+                        BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
+                                                                            (int) (bmpDec.Frames[0].PixelWidth*dw),
+                                                                            (int) (bmpDec.Frames[0].PixelHeight*dw),
+                                                                            BitmapScalingMode.NearestNeighbor));
                 else
                     bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
 
@@ -358,11 +387,11 @@ namespace CameraControl.Core.Classes
                 if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") && !fileItem.IsRaw)
                 {
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
-                        bitmap =  bitmap.Rotate(180);
+                        bitmap = bitmap.Rotate(180);
 
                     //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
                     //    bitmap = bitmap.Rotate(180);
-                    
+
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
                         bitmap = bitmap.Rotate(90);
 
@@ -434,19 +463,19 @@ namespace CameraControl.Core.Classes
         private void DrawFocusPoints(FileItem fileItem, WriteableBitmap bitmap)
         {
             bitmap.Lock();
-            double dw = (double)bitmap.PixelWidth / fileItem.FileInfo.Width;
-            double dh = (double)bitmap.PixelHeight / fileItem.FileInfo.Height;
+            double dw = (double) bitmap.PixelWidth/fileItem.FileInfo.Width;
+            double dh = (double) bitmap.PixelHeight/fileItem.FileInfo.Height;
 
             foreach (Rect focuspoint in fileItem.FileInfo.FocusPoints)
             {
                 DrawRect(bitmap, (int) (focuspoint.X*dw), (int) (focuspoint.Y*dh),
                          (int) ((focuspoint.X + focuspoint.Width)*dw),
-                         (int)((focuspoint.Y + focuspoint.Height) * dh), Colors.Aqua, fileItem.FileInfo.Width / 1000);
+                         (int) ((focuspoint.Y + focuspoint.Height)*dh), Colors.Aqua, fileItem.FileInfo.Width/1000);
             }
             bitmap.Unlock();
         }
 
-        void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
+        private void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
         {
             for (int i = 0; i < line; i++)
             {
@@ -485,16 +514,16 @@ namespace CameraControl.Core.Classes
         {
             int[] smoothedValues = new int[originalValues.Length];
 
-            double[] mask = new double[] { 0.25, 0.5, 0.25 };
+            double[] mask = new double[] {0.25, 0.5, 0.25};
 
             for (int bin = 1; bin < originalValues.Length - 1; bin++)
             {
                 double smoothedValue = 0;
                 for (int i = 0; i < mask.Length; i++)
                 {
-                    smoothedValue += originalValues[bin - 1 + i] * mask[i];
+                    smoothedValue += originalValues[bin - 1 + i]*mask[i];
                 }
-                smoothedValues[bin] = (int)smoothedValue;
+                smoothedValues[bin] = (int) smoothedValue;
             }
 
             return smoothedValues;
@@ -502,8 +531,9 @@ namespace CameraControl.Core.Classes
 
         private static int ConvertColor(Color color)
         {
-            int num = (int)color.A + 1;
-            return (int)color.A << 24 | (int)(byte)((int)color.R * num >> 8) << 16 | (int)(byte)((int)color.G * num >> 8) << 8 | (int)(byte)((int)color.B * num >> 8);
+            int num = (int) color.A + 1;
+            return (int) color.A << 24 | (int) (byte) ((int) color.R*num >> 8) << 16 |
+                   (int) (byte) ((int) color.G*num >> 8) << 8 | (int) (byte) ((int) color.B*num >> 8);
         }
     }
 }

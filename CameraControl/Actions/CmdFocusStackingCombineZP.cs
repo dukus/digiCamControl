@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +43,8 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
 using CameraControl.Core;
+
+#endregion
 
 namespace CameraControl.Actions
 {
@@ -33,7 +65,8 @@ namespace CameraControl.Actions
 
         public CmdFocusStackingCombineZP()
         {
-            _pathtoexe = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Alan Hadley\\CombineZP",
+            _pathtoexe = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                                      "Alan Hadley\\CombineZP",
                                       "CombineZP.exe");
         }
 
@@ -54,6 +87,7 @@ namespace CameraControl.Actions
         }
 
         private bool _isBusy;
+
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -104,9 +138,9 @@ namespace CameraControl.Actions
                 OnProgressChange("This may take few minutes");
                 _resulfile = Path.Combine(_tempdir, Path.GetFileName(_files[0].FileName) + _files.Count + "_enfuse.tif");
                 _resulfile =
-                  StaticHelper.GetUniqueFilename(
-                    Path.GetDirectoryName(_files[0].FileName) + "\\" +
-                    Path.GetFileNameWithoutExtension(_files[0].FileName) + "_enfuse", 0, ".jpg");
+                    StaticHelper.GetUniqueFilename(
+                        Path.GetDirectoryName(_files[0].FileName) + "\\" +
+                        Path.GetFileNameWithoutExtension(_files[0].FileName) + "_enfuse", 0, ".jpg");
                 //_resulfile = Path.Combine(_tempdir, Path.GetFileName(_resulfile));
 
                 string param = "\"" + _tempdir + "\" \"Do Stack\" \"" + _resulfile + "\" -q +j100";
@@ -118,7 +152,8 @@ namespace CameraControl.Actions
                 process.WaitForExit();
                 if (File.Exists(_resulfile))
                 {
-                    string localfile = Path.Combine(Path.GetDirectoryName(_files[0].FileName), Path.GetFileName(_resulfile));
+                    string localfile = Path.Combine(Path.GetDirectoryName(_files[0].FileName),
+                                                    Path.GetFileName(_resulfile));
                     //File.Copy(_resulfile, localfile, true);
                     ServiceProvider.Settings.DefaultSession.AddFile(localfile);
                     ServiceProvider.Settings.DefaultSession.SelectNone();
@@ -181,7 +216,7 @@ namespace CameraControl.Actions
         private void OnProgressChange(string s)
         {
             if (ProgressChanged != null)
-                ProgressChanged(this, new ActionEventArgs() { Message = s });
+                ProgressChanged(this, new ActionEventArgs() {Message = s});
         }
 
         private void OnActionDone()

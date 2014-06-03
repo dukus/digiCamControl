@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Threading;
 using System.Windows;
@@ -9,6 +39,8 @@ using CameraControl.Core.Translation;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Controls
 {
@@ -45,7 +77,7 @@ namespace CameraControl.Controls
             if (ServiceProvider.DeviceManager.SelectedCameraDevice == null)
                 return;
             CameraProperty property =
-              ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
             cmb_transfer.Items.Clear();
             if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
             {
@@ -63,9 +95,10 @@ namespace CameraControl.Controls
             {
                 cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem2);
                 cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem3);
-                cmb_transfer.SelectedItem = property.NoDownload ? TranslationStrings.LabelTransferItem2 : TranslationStrings.LabelTransferItem3;
+                cmb_transfer.SelectedItem = property.NoDownload
+                                                ? TranslationStrings.LabelTransferItem2
+                                                : TranslationStrings.LabelTransferItem3;
             }
-
         }
 
         private void cmb_shutter_GotFocus(object sender, RoutedEventArgs e)
@@ -88,15 +121,15 @@ namespace CameraControl.Controls
             if (ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy)
                 return;
             CameraProperty property =
-              ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
-            if ((string)cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem1)
+                ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+            if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem1)
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
-            if ((string)cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem2)
+            if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem2)
             {
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 property.NoDownload = true;
             }
-            if ((string)cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem3)
+            if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem3)
             {
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 property.NoDownload = false;
@@ -154,6 +187,5 @@ namespace CameraControl.Controls
             if (ServiceProvider.DeviceManager.SelectedCameraDevice != null)
                 ServiceProvider.DeviceManager.SelectedCameraDevice.DateTime = DateTime.Now;
         }
-
     }
 }

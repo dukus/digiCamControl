@@ -1,11 +1,44 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Core.Classes
 {
     public class CameraProperty : BaseFieldClass
     {
         private string _serialNumber;
+
         public string SerialNumber
         {
             get { return _serialNumber; }
@@ -17,6 +50,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _deviceName;
+
         public string DeviceName
         {
             get { return _deviceName; }
@@ -28,6 +62,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _profileNmae;
+
         public string PhotoSessionName
         {
             get { return _profileNmae; }
@@ -54,6 +89,7 @@ namespace CameraControl.Core.Classes
         public PhotoSession PhotoSession { get; set; }
 
         private bool _noDownload;
+
         public bool NoDownload
         {
             get { return _noDownload; }
@@ -65,6 +101,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _counterInc;
+
         public int CounterInc
         {
             get
@@ -81,6 +118,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _captureInSdRam;
+
         public bool CaptureInSdRam
         {
             get { return _captureInSdRam; }
@@ -92,6 +130,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _counter;
+
         public int Counter
         {
             get { return _counter; }
@@ -103,6 +142,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _useExternalShutter;
+
         public bool UseExternalShutter
         {
             get { return _useExternalShutter; }
@@ -114,6 +154,7 @@ namespace CameraControl.Core.Classes
         }
 
         private CustomConfig _selectedConfig;
+
         [XmlIgnore]
         public CustomConfig SelectedConfig
         {
@@ -135,6 +176,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _selectedConfigName;
+
         public string SelectedConfigName
         {
             get { return _selectedConfigName; }
@@ -164,6 +206,5 @@ namespace CameraControl.Core.Classes
             Counter = 0;
             LiveviewSettings = new LiveviewSettings();
         }
-
     }
 }

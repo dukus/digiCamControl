@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +40,16 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Timer = System.Timers.Timer;
 
+#endregion
+
 namespace CameraControl.Core.Scripting
 {
     public class ScriptManager : BaseFieldClass
     {
-
         public delegate void MessageEventHandler(object sender, MessageEventArgs e);
+
         public event MessageEventHandler OutPutMessageReceived;
-        private Timer _timer=new Timer(1000);
+        private Timer _timer = new Timer(1000);
 
         public ScriptObject CurrentScript { get; set; }
 
@@ -25,6 +57,7 @@ namespace CameraControl.Core.Scripting
         public bool ShouldStop = false;
 
         private bool _isBusy;
+
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -64,40 +97,42 @@ namespace CameraControl.Core.Scripting
             ServiceProvider.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
         }
 
-        void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
-            
         }
 
-        void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
-        {
-            if (CurrentScript != null)
-            {
-                CurrentScript.Variabiles["cameraccount"] = ServiceProvider.DeviceManager.ConnectedDevices.Count.ToString();
-            }            
-        }
-
-        void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
+        private void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
         {
             if (CurrentScript != null)
             {
-                CurrentScript.Variabiles["cameraccount"] = ServiceProvider.DeviceManager.ConnectedDevices.Count.ToString();
-            }            
+                CurrentScript.Variabiles["cameraccount"] =
+                    ServiceProvider.DeviceManager.ConnectedDevices.Count.ToString();
+            }
         }
 
-        void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
+        {
+            if (CurrentScript != null)
+            {
+                CurrentScript.Variabiles["cameraccount"] =
+                    ServiceProvider.DeviceManager.ConnectedDevices.Count.ToString();
+            }
+        }
+
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             GenerateVariabiles();
         }
 
-        void GenerateVariabiles()
+        private void GenerateVariabiles()
         {
             if (CurrentScript != null)
             {
                 CurrentScript.Variabiles["timelong"] = DateTime.Now.ToString("HH:mm:ss");
                 CurrentScript.Variabiles["time"] = DateTime.Now.ToString("HH:mm");
                 CurrentScript.Variabiles["day"] = DateTime.Now.Day.ToString();
-                CurrentScript.Variabiles["cameraccount"] = ServiceProvider.DeviceManager.ConnectedDevices.Count.ToString();
+                CurrentScript.Variabiles["cameraccount"] =
+                    ServiceProvider.DeviceManager.ConnectedDevices.Count.ToString();
             }
         }
 
@@ -128,7 +163,7 @@ namespace CameraControl.Core.Scripting
             XmlDocument doc = new XmlDocument();
             doc.Load(fileName);
             XmlNode rootNode = doc.SelectSingleNode("/dccscript");
-            if(rootNode==null)
+            if (rootNode == null)
                 throw new ArgumentException("Wrong start of script. Should use ScriptObject");
             if (GetValue(rootNode, "UseExternal") == "true")
                 res.UseExternal = true;
@@ -141,7 +176,7 @@ namespace CameraControl.Core.Scripting
                     foreach (var command in AvaiableCommands)
                     {
                         if (command.Name.ToLower() == node.Name.ToLower())
-                            res.Commands.Add(((IScriptCommand)Activator.CreateInstance(command.GetType())).Load(node));
+                            res.Commands.Add(((IScriptCommand) Activator.CreateInstance(command.GetType())).Load(node));
                     }
                 }
             }
@@ -229,6 +264,5 @@ namespace CameraControl.Core.Scripting
         {
             OnOutPutMessageReceived(new MessageEventArgs(text));
         }
-
     }
 }

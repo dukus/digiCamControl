@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +37,8 @@ using System.Windows.Controls;
 using System.Xml;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Core.Scripting.ScriptCommands
 {
@@ -34,7 +66,8 @@ namespace CameraControl.Core.Scripting.ScriptCommands
                 if (ServiceProvider.ScriptManager.ShouldStop)
                     break;
                 Thread.Sleep(1000);
-                ServiceProvider.ScriptManager.OutPut(string.Format("Bulb capture in progress .... {0}/{1}", i + 1, CaptureTime));
+                ServiceProvider.ScriptManager.OutPut(string.Format("Bulb capture in progress .... {0}/{1}", i + 1,
+                                                                   CaptureTime));
             }
             scriptObject.StopCapture();
             Thread.Sleep(200);
@@ -71,7 +104,7 @@ namespace CameraControl.Core.Scripting.ScriptCommands
 
         public override string DisplayName
         {
-            get { return string.Format("[{0}][CaptureTime={1}, Iso={2}, Aperture={3}]", Name, CaptureTime, Iso,Aperture); }
+            get { return string.Format("[{0}][CaptureTime={1}, Iso={2}, Aperture={3}]", Name, CaptureTime, Iso, Aperture); }
             set { }
         }
 
@@ -83,6 +116,7 @@ namespace CameraControl.Core.Scripting.ScriptCommands
         #endregion
 
         private int _captureTime;
+
         public int CaptureTime
         {
             get { return _captureTime; }
@@ -95,6 +129,7 @@ namespace CameraControl.Core.Scripting.ScriptCommands
         }
 
         private string _iso;
+
         public string Iso
         {
             get { return _iso; }
@@ -107,6 +142,7 @@ namespace CameraControl.Core.Scripting.ScriptCommands
         }
 
         private string _aperture;
+
         public string Aperture
         {
             get { return _aperture; }
@@ -121,13 +157,13 @@ namespace CameraControl.Core.Scripting.ScriptCommands
         public BulbCapture()
         {
             Name = "bulbcapture";
-            Description = "Start bulb capture camera should be set in manual mode with bulb.\nParameters: capturetime\niso\naperture";
+            Description =
+                "Start bulb capture camera should be set in manual mode with bulb.\nParameters: capturetime\niso\naperture";
             DefaultValue = "bulbcapture capturetime=\"10\" iso=\"100\"";
             IsExecuted = false;
             Executing = false;
             CaptureTime = 30;
             HaveEditControl = true;
         }
-
     }
 }

@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +52,8 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 using Microsoft.Win32;
 using MessageBox = System.Windows.Forms.MessageBox;
 
+#endregion
+
 namespace CameraControl.windows
 {
     /// <summary>
@@ -40,9 +72,9 @@ namespace CameraControl.windows
             NewScript();
         }
 
-        CompletionWindow completionWindow;
+        private CompletionWindow completionWindow;
 
-        void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+        private void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
         {
             if (e.Text == "<")
             {
@@ -55,34 +87,29 @@ namespace CameraControl.windows
                     data.Add(new MyCompletionData(command.DefaultValue, command.Description, command.Name.ToLower()));
                 }
                 completionWindow.Show();
-                completionWindow.Closed += delegate
-                                               {
-                                                   completionWindow = null;
-                                               };
+                completionWindow.Closed += delegate { completionWindow = null; };
             }
             if (e.Text == ".")
             {
                 string word = textEditor.GetWordBeforeDot();
                 if (word == "{session" || word == "session")
                 {
-                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
                     completionWindow = new CompletionWindow(textEditor.TextArea);
                     // provide AvalonEdit with the data:
                     IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                     foreach (PropertyInfo prop in props)
                     {
                         //object propValue = prop.GetValue(myObject, null);
-                        if(prop.PropertyType==typeof(string) || prop.PropertyType==typeof(int) || prop.PropertyType==typeof(bool))
+                        if (prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) ||
+                            prop.PropertyType == typeof (bool))
                         {
                             data.Add(new MyCompletionData(prop.Name.ToLower(), "", prop.Name.ToLower()));
                         }
                         // Do something with propValue
                     }
                     completionWindow.Show();
-                    completionWindow.Closed += delegate
-                    {
-                        completionWindow = null;
-                    };
+                    completionWindow.Closed += delegate { completionWindow = null; };
                 }
                 if (word == "{camera" && ServiceProvider.DeviceManager.SelectedCameraDevice != null)
                 {
@@ -93,19 +120,18 @@ namespace CameraControl.windows
                     preset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
                     foreach (ValuePair value in preset.Values)
                     {
-                        data.Add(new MyCompletionData(value.Name.Replace(" ", "").ToLower(), "Current value :" + value.Value, value.Name.Replace(" ", "").ToLower()));
+                        data.Add(new MyCompletionData(value.Name.Replace(" ", "").ToLower(),
+                                                      "Current value :" + value.Value,
+                                                      value.Name.Replace(" ", "").ToLower()));
                     }
                     completionWindow.Show();
-                    completionWindow.Closed += delegate
-                                                   {
-                                                       completionWindow = null;
-                                                   };
+                    completionWindow.Closed += delegate { completionWindow = null; };
                 }
             }
             if (e.Text == " ")
             {
                 string line = textEditor.GetLine();
-                
+
                 if (line.StartsWith("setcamera"))
                 {
                     if (!line.Contains("property") && !line.Contains("value"))
@@ -114,10 +140,7 @@ namespace CameraControl.windows
                         IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                         data.Add(new MyCompletionData("property", "", "property"));
                         completionWindow.Show();
-                        completionWindow.Closed += delegate
-                                                       {
-                                                           completionWindow = null;
-                                                       };
+                        completionWindow.Closed += delegate { completionWindow = null; };
                     }
                     if (line.Contains("property") && !line.Contains("value"))
                     {
@@ -125,10 +148,7 @@ namespace CameraControl.windows
                         IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                         data.Add(new MyCompletionData("value", "", "value"));
                         completionWindow.Show();
-                        completionWindow.Closed += delegate
-                        {
-                            completionWindow = null;
-                        };
+                        completionWindow.Closed += delegate { completionWindow = null; };
                     }
                 }
             }
@@ -151,14 +171,10 @@ namespace CameraControl.windows
                         data.Add(new MyCompletionData("\"" + "wb" + "\"", "White Balance", "wb"));
                         data.Add(new MyCompletionData("\"" + "cs" + "\"", "Compression Setting", "cs"));
                         completionWindow.Show();
-                        completionWindow.Closed += delegate
-                        {
-                            completionWindow = null;
-                        };
+                        completionWindow.Closed += delegate { completionWindow = null; };
                     }
                     if (word == "value")
                     {
-
                         if (line.Contains("property=\"aperture\"") &&
                             ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber != null)
                         {
@@ -170,10 +186,7 @@ namespace CameraControl.windows
                                 data.Add(new MyCompletionData("\"" + value + "\"", value, value));
                             }
                             completionWindow.Show();
-                            completionWindow.Closed += delegate
-                                                           {
-                                                               completionWindow = null;
-                                                           };
+                            completionWindow.Closed += delegate { completionWindow = null; };
                         }
                         if (line.Contains("property=\"iso\"") &&
                             ServiceProvider.DeviceManager.SelectedCameraDevice.IsoNumber != null)
@@ -187,10 +200,7 @@ namespace CameraControl.windows
                                 data.Add(new MyCompletionData("\"" + value + "\"", value, value));
                             }
                             completionWindow.Show();
-                            completionWindow.Closed += delegate
-                                                           {
-                                                               completionWindow = null;
-                                                           };
+                            completionWindow.Closed += delegate { completionWindow = null; };
                         }
                         if (line.Contains("property=\"shutter\"") &&
                             ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed != null)
@@ -204,10 +214,7 @@ namespace CameraControl.windows
                                 data.Add(new MyCompletionData("\"" + value + "\"", value, value));
                             }
                             completionWindow.Show();
-                            completionWindow.Closed += delegate
-                                                           {
-                                                               completionWindow = null;
-                                                           };
+                            completionWindow.Closed += delegate { completionWindow = null; };
                         }
                         if (line.Contains("property=\"ec\"") &&
                             ServiceProvider.DeviceManager.SelectedCameraDevice.ExposureCompensation != null)
@@ -222,13 +229,10 @@ namespace CameraControl.windows
                                 data.Add(new MyCompletionData("\"" + value + "\"", value, value));
                             }
                             completionWindow.Show();
-                            completionWindow.Closed += delegate
-                                                           {
-                                                               completionWindow = null;
-                                                           };
+                            completionWindow.Closed += delegate { completionWindow = null; };
                         }
                         if (line.Contains("property=\"wb\"") &&
-                             ServiceProvider.DeviceManager.SelectedCameraDevice.WhiteBalance != null)
+                            ServiceProvider.DeviceManager.SelectedCameraDevice.WhiteBalance != null)
                         {
                             completionWindow = new CompletionWindow(textEditor.TextArea);
                             IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
@@ -240,13 +244,10 @@ namespace CameraControl.windows
                                 data.Add(new MyCompletionData("\"" + value + "\"", value, value));
                             }
                             completionWindow.Show();
-                            completionWindow.Closed += delegate
-                                                           {
-                                                               completionWindow = null;
-                                                           };
+                            completionWindow.Closed += delegate { completionWindow = null; };
                         }
                         if (line.Contains("property=\"cs\"") &&
-                                ServiceProvider.DeviceManager.SelectedCameraDevice.CompressionSetting != null)
+                            ServiceProvider.DeviceManager.SelectedCameraDevice.CompressionSetting != null)
                         {
                             completionWindow = new CompletionWindow(textEditor.TextArea);
                             IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
@@ -258,17 +259,14 @@ namespace CameraControl.windows
                                 data.Add(new MyCompletionData("\"" + value + "\"", value, value));
                             }
                             completionWindow.Show();
-                            completionWindow.Closed += delegate
-                            {
-                                completionWindow = null;
-                            };
+                            completionWindow.Closed += delegate { completionWindow = null; };
                         }
                     }
                 }
             }
         }
 
-        void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
+        private void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
         {
             if (e.Text.Length > 0 && completionWindow != null)
             {
@@ -281,6 +279,7 @@ namespace CameraControl.windows
             }
             // do not set e.Handled=true - we still want to insert the character that was typed
         }
+
         #region Implementation of IWindow
 
         public void ExecuteCommand(string cmd, object param)
@@ -289,13 +288,14 @@ namespace CameraControl.windows
             {
                 case WindowsCmdConsts.ScriptWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        Show();
-                        Activate();
-                        Topmost = true;
-                        ServiceProvider.ScriptManager.OutPutMessageReceived += ScriptManager_OutPutMessageReceived;
-                        Focus();
-                    }));
+                                                     {
+                                                         Show();
+                                                         Activate();
+                                                         Topmost = true;
+                                                         ServiceProvider.ScriptManager.OutPutMessageReceived +=
+                                                             ScriptManager_OutPutMessageReceived;
+                                                         Focus();
+                                                     }));
                     break;
                 case WindowsCmdConsts.ScriptWnd_Hide:
                     ServiceProvider.ScriptManager.OutPutMessageReceived -= ScriptManager_OutPutMessageReceived;
@@ -303,16 +303,17 @@ namespace CameraControl.windows
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        ServiceProvider.ScriptManager.OutPutMessageReceived -= ScriptManager_OutPutMessageReceived;
-                        Hide();
-                        Close();
-                    }));
+                                                     {
+                                                         ServiceProvider.ScriptManager.OutPutMessageReceived -=
+                                                             ScriptManager_OutPutMessageReceived;
+                                                         Hide();
+                                                         Close();
+                                                     }));
                     break;
             }
         }
 
-        void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
+        private void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
         {
             AddOutput(e.Message);
         }
@@ -396,7 +397,7 @@ namespace CameraControl.windows
 
         private void mnu_verify_Click(object sender, RoutedEventArgs e)
         {
-            mnu_save_Click(null,null);
+            mnu_save_Click(null, null);
             ScriptObject scriptObject = null;
             try
             {
@@ -413,11 +414,11 @@ namespace CameraControl.windows
         private void NewScript()
         {
             textEditor.Text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                  "<dccscript> \n" +
-                  "   <commands>\n" +
-                  "     \n" +
-                  "   </commands>\n" +
-                  "</dccscript>";
+                              "<dccscript> \n" +
+                              "   <commands>\n" +
+                              "     \n" +
+                              "   </commands>\n" +
+                              "</dccscript>";
             ScriptFileName = null;
         }
 
@@ -459,6 +460,5 @@ namespace CameraControl.windows
         {
             ServiceProvider.ScriptManager.Stop();
         }
-
     }
 }

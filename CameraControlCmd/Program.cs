@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -10,19 +40,20 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControlCmd.Classes;
 
+#endregion
+
 namespace CameraControlCmd
 {
-    
-    class Program
+    internal class Program
     {
         //public static bool IsBusy { get; set; }
 
         private static string _outFilename = null;
 
         private static InputArguments _arguments;
-        
+
         //[STAThread]
-        static int  Main(string[] args)
+        private static int Main(string[] args)
         {
             Console.WriteLine("digiCamControl command line utility");
             Console.WriteLine();
@@ -50,17 +81,17 @@ namespace CameraControlCmd
                 Console.WriteLine("No connected device was found ! Exiting");
                 return 0;
             }
-            int exitCodes= ExecuteArgs();
+            int exitCodes = ExecuteArgs();
             Thread.Sleep(250);
             Thread thread = new Thread(WaitForCameras);
             thread.Start();
-            
+
             Dispatcher.Run();
 
             return exitCodes;
         }
 
-        static void WaitForCameras()
+        private static void WaitForCameras()
         {
             while (CamerasAreBusy())
             {
@@ -74,7 +105,7 @@ namespace CameraControlCmd
                 {
                     Dispatcher.CurrentDispatcher.Invoke(
                         new Action(() => Console.Write("Waiting {0} milliseconds", time)));
-                   
+
                     Thread.Sleep(time);
                 }
                 else
@@ -87,7 +118,7 @@ namespace CameraControlCmd
             System.Environment.Exit(0);
         }
 
-        static void RunScript(string filename)
+        private static void RunScript(string filename)
         {
             ScriptObject scriptObject = null;
             try
@@ -114,11 +145,10 @@ namespace CameraControlCmd
             }
         }
 
-        static int ExecuteArgs()
+        private static int ExecuteArgs()
         {
             try
             {
-
                 if (_arguments.Contains("export"))
                 {
                     if (string.IsNullOrEmpty(_arguments["export"]))
@@ -238,7 +268,8 @@ namespace CameraControlCmd
                     else
                     {
                         Thread.Sleep(200);
-                        ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber.SetValue("ƒ/" + _arguments["aperture"]);
+                        ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber.SetValue("ƒ/" +
+                                                                                            _arguments["aperture"]);
                     }
                 }
                 if (_arguments.Contains("shutter"))
@@ -262,26 +293,30 @@ namespace CameraControlCmd
                     else
                     {
                         Thread.Sleep(200);
-                        ServiceProvider.DeviceManager.SelectedCameraDevice.ExposureCompensation.SetValue( _arguments["ec"]);
+                        ServiceProvider.DeviceManager.SelectedCameraDevice.ExposureCompensation.SetValue(
+                            _arguments["ec"]);
                     }
                 }
-                
+
                 if (_arguments.Contains("comment"))
                 {
                     Thread.Sleep(200);
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.SetCameraField(CameraFieldType.Comment, _arguments["comment"]);
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.SetCameraField(CameraFieldType.Comment,
+                                                                                      _arguments["comment"]);
                     Console.WriteLine("Comment was set");
                 }
                 if (_arguments.Contains("artist"))
                 {
                     Thread.Sleep(200);
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.SetCameraField(CameraFieldType.Artist, _arguments["artist"]);
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.SetCameraField(CameraFieldType.Artist,
+                                                                                      _arguments["artist"]);
                     Console.WriteLine("Artist was set");
                 }
                 if (_arguments.Contains("copyright"))
                 {
                     Thread.Sleep(200);
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.SetCameraField(CameraFieldType.Copyright, _arguments["copyright"]);
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.SetCameraField(CameraFieldType.Copyright,
+                                                                                      _arguments["copyright"]);
                     Console.WriteLine("Copyright was set");
                 }
 
@@ -340,7 +375,7 @@ namespace CameraControlCmd
                 ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy = true;
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
                 // prevent use this mode if the camera not support it 
-                 if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+                if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
                     ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
             }
@@ -380,7 +415,6 @@ namespace CameraControlCmd
             Console.WriteLine(" /comment comment           - set in camera comment string");
             Console.WriteLine(" /copyright copyright       - set in camera copyright string");
             Console.WriteLine(" /artist artist             - set in camera artist string");
-
         }
 
         private static void InitApplication()
@@ -398,7 +432,8 @@ namespace CameraControlCmd
             ServiceProvider.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             if (ServiceProvider.DeviceManager.SelectedCameraDevice.AttachedPhotoSession != null)
                 ServiceProvider.Settings.DefaultSession = (PhotoSession)
-                  ServiceProvider.DeviceManager.SelectedCameraDevice.AttachedPhotoSession;
+                                                          ServiceProvider.DeviceManager.SelectedCameraDevice.
+                                                              AttachedPhotoSession;
             foreach (ICameraDevice cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
             {
                 cameraDevice.CaptureCompleted += SelectedCameraDevice_CaptureCompleted;
@@ -407,18 +442,18 @@ namespace CameraControlCmd
             //ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureCompleted += SelectedCameraDevice_CaptureCompleted;
         }
 
-        static void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
+        private static void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
         {
             Console.WriteLine(e.Message);
         }
 
-        static void SelectedCameraDevice_CaptureCompleted(object sender, EventArgs e)
+        private static void SelectedCameraDevice_CaptureCompleted(object sender, EventArgs e)
         {
             //ICameraDevice device = sender as ICameraDevice;
             //device.IsBusy = false; 
         }
 
-        static void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private static void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SystemMessage")
             {
@@ -426,7 +461,7 @@ namespace CameraControlCmd
             }
         }
 
-        static void DeviceManagerCameraConnected(ICameraDevice cameraDevice)
+        private static void DeviceManagerCameraConnected(ICameraDevice cameraDevice)
         {
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(cameraDevice);
             cameraDevice.DisplayName = property.DeviceName;
@@ -434,7 +469,7 @@ namespace CameraControlCmd
         }
 
 
-        static void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private static void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             Thread thread = new Thread(PhotoCaptured);
             thread.SetApartmentState(ApartmentState.STA);
@@ -443,7 +478,7 @@ namespace CameraControlCmd
         }
 
 
-        static void PhotoCaptured(object o)
+        private static void PhotoCaptured(object o)
         {
             PhotoCapturedEventArgs eventArgs = o as PhotoCapturedEventArgs;
             if (eventArgs == null)
@@ -483,7 +518,7 @@ namespace CameraControlCmd
                 }
                 else
                 {
-                    if(File.Exists(_outFilename))
+                    if (File.Exists(_outFilename))
                         File.Delete(_outFilename);
                     fileName = _outFilename;
                 }
@@ -513,8 +548,9 @@ namespace CameraControlCmd
 
         private static bool CamerasAreBusy()
         {
-            return ServiceProvider.DeviceManager.ConnectedDevices.Aggregate(false, (current, connectedDevice) => connectedDevice.IsBusy || current);
+            return ServiceProvider.DeviceManager.ConnectedDevices.Aggregate(false,
+                                                                            (current, connectedDevice) =>
+                                                                            connectedDevice.IsBusy || current);
         }
-
     }
 }

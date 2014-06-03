@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +37,8 @@ using System.Windows.Input;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices.Classes;
 
+#endregion
+
 namespace CameraControl.Core.Classes
 {
     public class WindowsManager
@@ -15,6 +47,7 @@ namespace CameraControl.Core.Classes
 
 
         public delegate void EventEventHandler(string cmd, object o);
+
         public virtual event EventEventHandler Event;
 
         private List<IWindow> WindowsList;
@@ -82,9 +115,9 @@ namespace CameraControl.Core.Classes
         /// </summary>
         public void RegisterKnowCommands()
         {
-            AddCommandsFromType(typeof(CmdConsts));
-            AddCommandsFromType(typeof(WindowsCmdConsts));
-            WindowCommands = new AsyncObservableCollection<WindowCommandItem>(WindowCommands.OrderBy(x => x.Name)); 
+            AddCommandsFromType(typeof (CmdConsts));
+            AddCommandsFromType(typeof (WindowsCmdConsts));
+            WindowCommands = new AsyncObservableCollection<WindowCommandItem>(WindowCommands.OrderBy(x => x.Name));
             foreach (WindowCommandItem item in WindowCommands)
             {
                 switch (item.Name)
@@ -111,10 +144,11 @@ namespace CameraControl.Core.Classes
         private void AddCommandsFromType(Type type)
         {
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static |
-               BindingFlags.FlattenHierarchy).Where(fi => fi.IsLiteral && !fi.IsInitOnly).ToList();
+                                        BindingFlags.FlattenHierarchy).Where(fi => fi.IsLiteral && !fi.IsInitOnly).
+                ToList();
             foreach (FieldInfo fieldInfo in fields)
             {
-                WindowCommands.Add(new WindowCommandItem() { Name = fieldInfo.GetValue(type).ToString() });
+                WindowCommands.Add(new WindowCommandItem() {Name = fieldInfo.GetValue(type).ToString()});
             }
         }
     }

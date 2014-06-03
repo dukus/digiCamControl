@@ -1,6 +1,38 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Core.Classes
 {
@@ -16,6 +48,7 @@ namespace CameraControl.Core.Classes
         public virtual event BitmapLoadedEventHandler BitmapLoaded;
 
         private FileItem _fileItem;
+
         public FileItem FileItem
         {
             get { return _fileItem; }
@@ -27,6 +60,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isLoaded;
+
         public bool IsLoaded
         {
             get { return _isLoaded; }
@@ -41,6 +75,7 @@ namespace CameraControl.Core.Classes
         public bool FullResLoaded { get; set; }
 
         private WriteableBitmap _displayImage;
+
         public WriteableBitmap DisplayImage
         {
             get { return _displayImage; }
@@ -57,15 +92,12 @@ namespace CameraControl.Core.Classes
 
         public PointCollection LuminanceHistogramPoints
         {
-            get
-            {
-                return this.luminanceHistogramPoints;
-            }
+            get { return luminanceHistogramPoints; }
             set
             {
-                if (this.luminanceHistogramPoints != value)
+                if (luminanceHistogramPoints != value)
                 {
-                    this.luminanceHistogramPoints = value;
+                    luminanceHistogramPoints = value;
                     NotifyPropertyChanged("LuminanceHistogramPoints");
                 }
             }
@@ -73,15 +105,12 @@ namespace CameraControl.Core.Classes
 
         public PointCollection RedColorHistogramPoints
         {
-            get
-            {
-                return this.redColorHistogramPoints;
-            }
+            get { return redColorHistogramPoints; }
             set
             {
-                if (this.redColorHistogramPoints != value)
+                if (redColorHistogramPoints != value)
                 {
-                    this.redColorHistogramPoints = value;
+                    redColorHistogramPoints = value;
                     NotifyPropertyChanged("RedColorHistogramPoints");
                 }
             }
@@ -89,15 +118,12 @@ namespace CameraControl.Core.Classes
 
         public PointCollection GreenColorHistogramPoints
         {
-            get
-            {
-                return this.greenColorHistogramPoints;
-            }
+            get { return greenColorHistogramPoints; }
             set
             {
-                if (this.greenColorHistogramPoints != value)
+                if (greenColorHistogramPoints != value)
                 {
-                    this.greenColorHistogramPoints = value;
+                    greenColorHistogramPoints = value;
                     NotifyPropertyChanged("GreenColorHistogramPoints");
                 }
             }
@@ -105,21 +131,19 @@ namespace CameraControl.Core.Classes
 
         public PointCollection BlueColorHistogramPoints
         {
-            get
-            {
-                return this.blueColorHistogramPoints;
-            }
+            get { return blueColorHistogramPoints; }
             set
             {
-                if (this.blueColorHistogramPoints != value)
+                if (blueColorHistogramPoints != value)
                 {
-                    this.blueColorHistogramPoints = value;
+                    blueColorHistogramPoints = value;
                     NotifyPropertyChanged("BlueColorHistogramPoints");
                 }
             }
         }
 
         private bool _rawCodecNeeded;
+
         public bool RawCodecNeeded
         {
             get { return _rawCodecNeeded; }
@@ -131,6 +155,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _infoLabel;
+
         public string InfoLabel
         {
             get { return _infoLabel; }
@@ -142,6 +167,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _fileName;
+
         public string FileName
         {
             get { return _fileName; }
@@ -153,6 +179,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _comment;
+
         public string Comment
         {
             get { return _comment; }
@@ -179,7 +206,7 @@ namespace CameraControl.Core.Classes
             IsLoaded = false;
             FullResLoaded = false;
             //if (DisplayImage == null)
-                DisplayImage = new WriteableBitmap(FileItem.Thumbnail);
+            DisplayImage = new WriteableBitmap(FileItem.Thumbnail);
         }
 
 
@@ -188,15 +215,15 @@ namespace CameraControl.Core.Classes
             IsLoaded = false;
             RawCodecNeeded = false;
             Metadata = new AsyncObservableCollection<DictionaryItem>();
-            Metadata.Add(new DictionaryItem() { Name = "Exposure mode" });
-            Metadata.Add(new DictionaryItem() { Name = "Exposure program" });
-            Metadata.Add(new DictionaryItem() { Name = "Exposure time" });
-            Metadata.Add(new DictionaryItem() { Name = "F number" });
-            Metadata.Add(new DictionaryItem() { Name = "Lens focal length" });
-            Metadata.Add(new DictionaryItem() { Name = "ISO speed rating" });
-            Metadata.Add(new DictionaryItem() { Name = "Metering mode" });
-            Metadata.Add(new DictionaryItem() { Name = "White balance" });
-            Metadata.Add(new DictionaryItem() { Name = "Exposure bias" });
+            Metadata.Add(new DictionaryItem() {Name = "Exposure mode"});
+            Metadata.Add(new DictionaryItem() {Name = "Exposure program"});
+            Metadata.Add(new DictionaryItem() {Name = "Exposure time"});
+            Metadata.Add(new DictionaryItem() {Name = "F number"});
+            Metadata.Add(new DictionaryItem() {Name = "Lens focal length"});
+            Metadata.Add(new DictionaryItem() {Name = "ISO speed rating"});
+            Metadata.Add(new DictionaryItem() {Name = "Metering mode"});
+            Metadata.Add(new DictionaryItem() {Name = "White balance"});
+            Metadata.Add(new DictionaryItem() {Name = "Exposure bias"});
         }
     }
 }

@@ -1,8 +1,35 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
 namespace CameraControl.Core.Translation
 {
     public class TranslationStrings
     {
-
         public static string Mode = "Mode";
         public static string Iso = "_Iso";
         public static string ShutterSpeed = "_Shutter speed";
@@ -91,7 +118,10 @@ namespace CameraControl.Core.Translation
         public static string LabelSessonName = "Session name ";
         public static string LabelFolder = "Folder ";
         public static string LabelFileNameTemplate = "File Name Template ";
-        public static string LabelFileNameTemplateToolTip = "$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4";
+
+        public static string LabelFileNameTemplateToolTip =
+            "$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4";
+
         public static string LabelCounter = "Counter";
         public static string LabelUseOriginal = "Use original filename gave by the camera";
         public static string LabelUseOriginalToolTip = "This option isn't works with WIA driver";
@@ -108,9 +138,15 @@ namespace CameraControl.Core.Translation
         public static string LabelLuminosity = "Luminosity";
 
         public static string LabelExposureBracketing = "Exposure bracketing";
-        public static string LabelExposureBracketingToolTip = "Set camera to Aperture mode and turn off Auto ISO and Auto White Balance for most reliable results.";
+
+        public static string LabelExposureBracketingToolTip =
+            "Set camera to Aperture mode and turn off Auto ISO and Auto White Balance for most reliable results.";
+
         public static string LabelManualExposureBracketing = "Manual Exposure bracketing";
-        public static string LabelManualExposureBracketingToolTip = "Set camera to Manual (M) mode and turn off Auto ISO and Auto White Balance for most reliable results.";
+
+        public static string LabelManualExposureBracketingToolTip =
+            "Set camera to Manual (M) mode and turn off Auto ISO and Auto White Balance for most reliable results.";
+
         public static string LabelPresetBracketing = "Preset bracketing";
 
         public static string LabelTagDisplayValue = "Display Value";
@@ -163,10 +199,12 @@ namespace CameraControl.Core.Translation
         public static string MsgUseSessionEditorTags = "Use session editor to define tags !";
         public static string MsgLastSessionCantBeDeleted = "Last session can't be deleted";
         public static string MsgStopTimeLapse = "The time lapse not finished! Do you want to stop the time lapse ?";
-        public static string MsgInstallXvidCodec = "Xvid codec not installed !\nDo you want to download and install it ? ";
+
+        public static string MsgInstallXvidCodec =
+            "Xvid codec not installed !\nDo you want to download and install it ? ";
 
         public static string MsgDeleteSessionQuestion =
-          "Do you want continue to deleting session {0} ?\nNo files will be deleted !";
+            "Do you want continue to deleting session {0} ?\nNo files will be deleted !";
 
         public static string MsgBracketingDone = "Bracketing done";
         public static string MsgActionInProgress = "Action in progress {0}/{1}";
@@ -227,8 +265,13 @@ namespace CameraControl.Core.Translation
         public static string LabelCardError = "Card Error";
         public static string LabelCardNotFormatted = "Card not formatted";
         public static string LabelNoFreeAreaInCard = "No free area in the card";
-        public static string LabelCardBufferNotEmpty = "There is data whose recording destination is a card in the buffer.";
-        public static string LabelPcBufferNotEmpty = "There is data whose recording destination is the PC in the buffer.";
+
+        public static string LabelCardBufferNotEmpty =
+            "There is data whose recording destination is a card in the buffer.";
+
+        public static string LabelPcBufferNotEmpty =
+            "There is data whose recording destination is the PC in the buffer.";
+
         public static string LabelBufferNotEmpty = "There is movie data in the buffer. ";
         public static string LabelRecordInProgres = "During movie file recording";
         public static string LabelCardProtected = "Card protected";
@@ -285,7 +328,9 @@ namespace CameraControl.Core.Translation
         public static string LabelAdvanced = "Advanced";
         public static string LabelUseParellelTransfer = "Use parallel file transfer";
         // 19/01/2013
-        public static string LabelUnHandledError = "An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError:{0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)";
+        public static string LabelUnHandledError =
+            "An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError:{0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)";
+
         public static string LabelApplicationError = "Application Error";
         public static string LabelWiaNotInstalled = "WIA 2.0 not installed";
         public static string LabelRestartTheApplication = "Restart the application !";
@@ -324,12 +369,18 @@ namespace CameraControl.Core.Translation
         public static string LabelTTLError = "TTL error";
         public static string LabelNonCPULEnseError = "A non-CPU lens is mounted and the exposure mode is not M.";
         public static string LabelImageInRAM = "There is an image whose recording destination is SDRAM.";
-        public static string LabelNoCardInsertedError = "The recording destination is the card or the card & SDRAM,\n and the card is not inserted with the release disabled without a card.";
+
+        public static string LabelNoCardInsertedError =
+            "The recording destination is the card or the card & SDRAM,\n and the card is not inserted with the release disabled without a card.";
+
         public static string LabelCommandProcesingError = "During processing by the shooting command";
         public static string LabelShoutingInProgress = "The shooting mode is EFFECTS.";
         public static string LabelOverHeatedError = "The Live view cannot be started when the temperature rises.";
         public static string LabelCardProtectedError = "Card protected";
-        public static string LabelMirrorUpError = "The release mode is set to Mirror-up and the mirror-up operation is being performed.";
+
+        public static string LabelMirrorUpError =
+            "The release mode is set to Mirror-up and the mirror-up operation is being performed.";
+
         public static string LabelMirrorUpError2 = "The release mode is [Mirror-up].";
         public static string LabelDestinationCardError = "The recording destination is the card.";
         public static string LabelLiveViewError = "Error stating live view ";
@@ -392,7 +443,10 @@ namespace CameraControl.Core.Translation
         public static string LabelShowThumbUpDown = "Show thumb up/down buttons";
         public static string LabelSend = "Send";
         public static string LabelLogMessage = "Message to the developers of digiCamControl :";
-        public static string LabelLogText = "The log file will be send to the digiCamcontrol developer team for improve application stability.";
+
+        public static string LabelLogText =
+            "The log file will be send to the digiCamcontrol developer team for improve application stability.";
+
         public static string LabelFullscreen = "Full screen";
         public static string LabelSelection = "Selection";
         public static string LabelSelectAll = "Select All";
@@ -409,14 +463,9 @@ namespace CameraControl.Core.Translation
         public static string LabelAutoPreviewJpgOnly = "Auto Preview Jpg Only";
         public static string LabelSettingsLiveView = "Live view";
         public static string LabelHostMode = "Host mode";
-<<<<<<< .mine
         //17.05.2014
         public static string LabelClear = "Clear";
         public static string LabelHistogram = "Histogram";
         public static string LabelMetadata = "Metadata";
-=======
-        //17.05.2014
-        public static string LabelClear = "Clear";
->>>>>>> .r796
     }
 }

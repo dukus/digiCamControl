@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -7,11 +37,12 @@ using CameraControl.Devices.Classes;
 using PortableDeviceLib;
 using PortableDeviceLib.Model;
 
+#endregion
+
 namespace CameraControl.Devices.Canon
 {
     public class CanonBase : BaseMTPCamera
     {
-        
         public const int CONST_CMD_CANON_EOS_RemoteRelease = 0x910F;
         public const int CONST_CMD_CANON_EOS_BulbStart = 0x9125;
         public const int CONST_CMD_CANON_EOS_BulbEnd = 0x9126;
@@ -28,77 +59,77 @@ namespace CameraControl.Devices.Canon
         public const int CONST_PROP_EOS_ShutterSpeed = 0xD102;
         public const int CONST_PROP_EOS_LiveView = 0xD1B0;
 
-        public const int CONST_Event_CANON_EOS_PropValueChanged = 0xc189 ;
+        public const int CONST_Event_CANON_EOS_PropValueChanged = 0xc189;
         public const int CONST_Event_CANON_EOS_ObjectAddedEx = 0xc181;
 
         //private bool _eventIsbusy = false;
 
         protected Dictionary<uint, string> _shutterTable = new Dictionary<uint, string>
-                                                         {
-                                                           {0, "30"},
-                                                           {1, "25"},
-                                                           {2, "20"},
-                                                           {3, "15"},
-                                                           {4, "13"},
-                                                           {5, "10"},
-                                                           {6, "8"},
-                                                           {7, "6"},
-                                                           {8, "5"},
-                                                           {9, "4"},
-                                                           {10, "3.2"},
-                                                           {11, "2.5"},
-                                                           {12, "2"},
-                                                           {13, "1.6"},
-                                                           {14, "1.3"},
-                                                           {15, "1"},
-                                                           {16, "0.8"},
-                                                           {17, "0.6"},
-                                                           {18, "0.5"},
-                                                           {19, "0.4"},
-                                                           {20, "0.3"},
-                                                           {21, "1/4"},
-                                                           {22, "1/5"},
-                                                           {23, "1/6"},
-                                                           {24, "1/8"},
-                                                           {25, "1/10"},
-                                                           {26, "1/13"},
-                                                           {27, "1/15"},
-                                                           {28, "1/20"},
-                                                           {29, "1/25"},
-                                                           {30, "1/30"},
-                                                           {31, "1/40"},
-                                                           {32, "1/50"},
-                                                           {33, "1/60"},
-                                                           {34, "1/80"},
-                                                           {35, "1/100"},
-                                                           {36, "1/125"},
-                                                           {37, "1/160"},
-                                                           {38, "1/200"},
-                                                           {39, "1/250"},
-                                                           {40, "1/320"},
-                                                           {41, "1/400"},
-                                                           {42, "1/500"},
-                                                           {43, "1/640"},
-                                                           {44, "1/800"},
-                                                           {45, "1/1000"},
-                                                           {46, "1/1250"},
-                                                           {47, "1/1600"},
-                                                           {48, "1/2000"},
-                                                           {49, "1/2500"},
-                                                           {50, "1/3200"},
-                                                           {51, "1/4000"},
-                                                           {52, "1/5000"},
-                                                           {53, "1/6400"},
-                                                           {54, "1/8000"}
-                                                         };
+                                                               {
+                                                                   {0, "30"},
+                                                                   {1, "25"},
+                                                                   {2, "20"},
+                                                                   {3, "15"},
+                                                                   {4, "13"},
+                                                                   {5, "10"},
+                                                                   {6, "8"},
+                                                                   {7, "6"},
+                                                                   {8, "5"},
+                                                                   {9, "4"},
+                                                                   {10, "3.2"},
+                                                                   {11, "2.5"},
+                                                                   {12, "2"},
+                                                                   {13, "1.6"},
+                                                                   {14, "1.3"},
+                                                                   {15, "1"},
+                                                                   {16, "0.8"},
+                                                                   {17, "0.6"},
+                                                                   {18, "0.5"},
+                                                                   {19, "0.4"},
+                                                                   {20, "0.3"},
+                                                                   {21, "1/4"},
+                                                                   {22, "1/5"},
+                                                                   {23, "1/6"},
+                                                                   {24, "1/8"},
+                                                                   {25, "1/10"},
+                                                                   {26, "1/13"},
+                                                                   {27, "1/15"},
+                                                                   {28, "1/20"},
+                                                                   {29, "1/25"},
+                                                                   {30, "1/30"},
+                                                                   {31, "1/40"},
+                                                                   {32, "1/50"},
+                                                                   {33, "1/60"},
+                                                                   {34, "1/80"},
+                                                                   {35, "1/100"},
+                                                                   {36, "1/125"},
+                                                                   {37, "1/160"},
+                                                                   {38, "1/200"},
+                                                                   {39, "1/250"},
+                                                                   {40, "1/320"},
+                                                                   {41, "1/400"},
+                                                                   {42, "1/500"},
+                                                                   {43, "1/640"},
+                                                                   {44, "1/800"},
+                                                                   {45, "1/1000"},
+                                                                   {46, "1/1250"},
+                                                                   {47, "1/1600"},
+                                                                   {48, "1/2000"},
+                                                                   {49, "1/2500"},
+                                                                   {50, "1/3200"},
+                                                                   {51, "1/4000"},
+                                                                   {52, "1/5000"},
+                                                                   {53, "1/6400"},
+                                                                   {54, "1/8000"}
+                                                               };
 
         public CanonBase()
         {
-                        _timer.AutoReset = true;
-                        _timer.Elapsed += _timer_Elapsed;
+            _timer.AutoReset = true;
+            _timer.Elapsed += _timer_Elapsed;
         }
 
-        void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timer.Stop();
             try
@@ -111,8 +142,6 @@ namespace CameraControl.Devices.Canon
             }
             catch (Exception)
             {
-
-
             }
             //
         }
@@ -142,9 +171,9 @@ namespace CameraControl.Devices.Canon
                     {
                         try
                         {
-                            uint eventCode = BitConverter.ToUInt16(response.Data, 6 * i + 2);
-                            ushort eventParam = BitConverter.ToUInt16(response.Data, 6 * i + 4);
-                            int longeventParam = BitConverter.ToInt32(response.Data, 6 * i + 4);
+                            uint eventCode = BitConverter.ToUInt16(response.Data, 6*i + 2);
+                            ushort eventParam = BitConverter.ToUInt16(response.Data, 6*i + 4);
+                            int longeventParam = BitConverter.ToInt32(response.Data, 6*i + 4);
                             switch (eventCode)
                             {
                                 case CONST_Event_CANON_EOS_PropValueChanged:
@@ -157,11 +186,13 @@ namespace CameraControl.Devices.Canon
                                     {
                                         try
                                         {
-                                            MTPDataResponse objectdata = ExecuteReadDataEx(CONST_CMD_CANON_EOS_GetObjectInfo, (uint)longeventParam);
+                                            MTPDataResponse objectdata =
+                                                ExecuteReadDataEx(CONST_CMD_CANON_EOS_GetObjectInfo,
+                                                                  (uint) longeventParam);
                                             string filename = "DSC_0000.JPG";
                                             if (objectdata.Data != null)
                                             {
-                                                filename = Encoding.Unicode.GetString(objectdata.Data, 53, 12 * 2);
+                                                filename = Encoding.Unicode.GetString(objectdata.Data, 53, 12*2);
                                                 if (filename.Contains("\0"))
                                                     filename = filename.Split('\0')[0];
                                             }
@@ -171,18 +202,23 @@ namespace CameraControl.Devices.Canon
                                             }
                                             Log.Debug("File transfer " + filename);
                                             PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
-                                            {
-                                                WiaImageItem = null,
-                                                EventArgs =
-                                                  new PortableDeviceEventArgs(new PortableDeviceEventType()
-                                                  {
-                                                      ObjectHandle =
-                                                        (uint)longeventParam
-                                                  }),
-                                                CameraDevice = this,
-                                                FileName = filename,
-                                                Handle = (uint)longeventParam
-                                            };
+                                                                              {
+                                                                                  WiaImageItem = null,
+                                                                                  EventArgs =
+                                                                                      new PortableDeviceEventArgs(new PortableDeviceEventType
+                                                                                                                      ()
+                                                                                                                      {
+                                                                                                                          ObjectHandle
+                                                                                                                              =
+                                                                                                                              (
+                                                                                                                              uint
+                                                                                                                              )
+                                                                                                                              longeventParam
+                                                                                                                      }),
+                                                                                  CameraDevice = this,
+                                                                                  FileName = filename,
+                                                                                  Handle = (uint) longeventParam
+                                                                              };
                                             OnPhotoCapture(this, args);
                                         }
                                         catch (Exception exception)
@@ -191,14 +227,14 @@ namespace CameraControl.Devices.Canon
                                         }
                                     }
                                     break;
-                                //case CONST_Event_CaptureComplete:
-                                //case CONST_Event_CaptureCompleteRecInSdram:
-                                //    {
-                                //        OnCaptureCompleted(this, new EventArgs());
-                                //    }
-                                //    break;
-                                //case CONST_Event_ObsoleteEvent:
-                                //    break;
+                                    //case CONST_Event_CaptureComplete:
+                                    //case CONST_Event_CaptureCompleteRecInSdram:
+                                    //    {
+                                    //        OnCaptureCompleted(this, new EventArgs());
+                                    //    }
+                                    //    break;
+                                    //case CONST_Event_ObsoleteEvent:
+                                    //    break;
                                 default:
                                     //Console.WriteLine("Unknown event code " + eventCode.ToString("X"));
                                     Log.Debug("Unknown event code :" + eventCode.ToString("X") + "|" +
@@ -280,10 +316,10 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void ShutterSpeed_ValueChanged(object sender, string key, long val)
+        private void ShutterSpeed_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_CANON_EOS_SetDevicePropValueEx, BitConverter.GetBytes(val),
-                                               CONST_PROP_EOS_ShutterSpeed, -1);
+                        CONST_PROP_EOS_ShutterSpeed, -1);
             SetEOSProperty(CONST_PROP_EOS_ShutterSpeed, (uint) val);
         }
 
@@ -311,7 +347,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        void _stillImageDevice_DeviceEvent(object sender, PortableDeviceEventArgs e)
+        private void _stillImageDevice_DeviceEvent(object sender, PortableDeviceEventArgs e)
         {
             if (e.EventType.EventGuid == PortableDeviceGuids.WPD_EVENT_DEVICE_REMOVED)
             {
@@ -319,7 +355,7 @@ namespace CameraControl.Devices.Canon
                 StillImageDevice.IsConnected = false;
                 IsConnected = false;
 
-                OnCameraDisconnected(this, new DisconnectCameraEventArgs { StillImageDevice = StillImageDevice });
+                OnCameraDisconnected(this, new DisconnectCameraEventArgs {StillImageDevice = StillImageDevice});
             }
             else
             {
@@ -373,15 +409,15 @@ namespace CameraControl.Devices.Canon
         public override void StartLiveView()
         {
             SetProperty(CONST_CMD_CANON_EOS_SetDevicePropValueEx, BitConverter.GetBytes(2),
-                                      CONST_PROP_EOS_LiveView, -1);
-            SetEOSProperty(CONST_PROP_EOS_LiveView, (uint)2);   
+                        CONST_PROP_EOS_LiveView, -1);
+            SetEOSProperty(CONST_PROP_EOS_LiveView, (uint) 2);
         }
 
         public override void StopLiveView()
         {
             SetProperty(CONST_CMD_CANON_EOS_SetDevicePropValueEx, BitConverter.GetBytes(0),
-                          CONST_PROP_EOS_LiveView, -1);
-            SetEOSProperty(CONST_PROP_EOS_LiveView, (uint)0);   
+                        CONST_PROP_EOS_LiveView, -1);
+            SetEOSProperty(CONST_PROP_EOS_LiveView, (uint) 0);
         }
 
 

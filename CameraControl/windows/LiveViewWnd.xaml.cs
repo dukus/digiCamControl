@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -30,12 +60,14 @@ using Point = System.Windows.Point;
 using Rectangle = System.Windows.Shapes.Rectangle;
 using Timer = System.Timers.Timer;
 
+#endregion
+
 namespace CameraControl.windows
 {
     /// <summary>
     /// Interaction logic for LiveViewWnd.xaml
     /// </summary>
-    public partial class LiveViewWnd :MetroWindow,  IWindow, INotifyPropertyChanged
+    public partial class LiveViewWnd : MetroWindow, IWindow, INotifyPropertyChanged
     {
         private const int DesiredFrameRate = 20;
 
@@ -70,6 +102,7 @@ namespace CameraControl.windows
         }
 
         private CameraProperty _cameraProperty;
+
         public CameraProperty CameraProperty
         {
             get { return _cameraProperty; }
@@ -106,6 +139,7 @@ namespace CameraControl.windows
         }
 
         private bool _showFocusRect;
+
         public bool ShowFocusRect
         {
             get { return _showFocusRect; }
@@ -171,7 +205,7 @@ namespace CameraControl.windows
             {
                 _focusStep = value;
                 NotifyPropertyChanged("FocusStep");
-                PhotoNo = Convert.ToInt32(Decimal.Round((decimal)FocusValue / FocusStep, MidpointRounding.AwayFromZero));
+                PhotoNo = Convert.ToInt32(Decimal.Round((decimal) FocusValue/FocusStep, MidpointRounding.AwayFromZero));
             }
         }
 
@@ -230,7 +264,7 @@ namespace CameraControl.windows
             set
             {
                 _focusValue = value;
-                PhotoNo = FocusValue / FocusStep;
+                PhotoNo = FocusValue/FocusStep;
                 NotifyPropertyChanged("FocusValue");
                 NotifyPropertyChanged("CounterMessage");
             }
@@ -307,24 +341,25 @@ namespace CameraControl.windows
                 if (_recording)
                 {
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       btn_record.Content = "Stop record movie";
-                                                       lbl_rec.Visibility = Visibility.Visible;
-                                                   }));
+                                                     {
+                                                         btn_record.Content = "Stop record movie";
+                                                         lbl_rec.Visibility = Visibility.Visible;
+                                                     }));
                 }
                 else
                 {
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       btn_record.Content = "Start record movie";
-                                                       lbl_rec.Visibility = Visibility.Hidden;
-                                                   }));
+                                                     {
+                                                         btn_record.Content = "Start record movie";
+                                                         lbl_rec.Visibility = Visibility.Hidden;
+                                                     }));
                 }
                 NotifyPropertyChanged("Recording");
             }
         }
 
         private int _gridType;
+
         public int GridType
         {
             get { return _gridType; }
@@ -336,6 +371,7 @@ namespace CameraControl.windows
         }
 
         private bool _edgeDetection;
+
         public bool EdgeDetection
         {
             get { return _edgeDetection; }
@@ -347,7 +383,7 @@ namespace CameraControl.windows
         }
 
 
-        private Timer _timer = new Timer(1000 / DesiredFrameRate);
+        private Timer _timer = new Timer(1000/DesiredFrameRate);
         private Timer _freezeTimer = new Timer();
 
         private bool oper_in_progress = false;
@@ -366,6 +402,7 @@ namespace CameraControl.windows
         }
 
         private bool _highlightUnderExp;
+
         public bool HighlightUnderExp
         {
             get { return _highlightUnderExp; }
@@ -377,6 +414,7 @@ namespace CameraControl.windows
         }
 
         private bool _highlightOverExp;
+
         public bool HighlightOverExp
         {
             get { return _highlightOverExp; }
@@ -406,10 +444,11 @@ namespace CameraControl.windows
             {
                 FreezeImage = true;
                 Dispatcher.Invoke(new Action(delegate
-                                               {
-                                                   ServiceProvider.Settings.SelectedBitmap.DisplayImage.Freeze();
-                                                   image1.Source = ServiceProvider.Settings.SelectedBitmap.DisplayImage;
-                                               }));
+                                                 {
+                                                     ServiceProvider.Settings.SelectedBitmap.DisplayImage.Freeze();
+                                                     image1.Source =
+                                                         ServiceProvider.Settings.SelectedBitmap.DisplayImage;
+                                                 }));
             }
         }
 
@@ -432,10 +471,10 @@ namespace CameraControl.windows
             _focusrect.Stroke = new SolidColorBrush(Colors.Green);
             canvas.Children.Add(_focusrect);
             _worker.DoWork += delegate
-                                {
-                                    if (!FreezeImage)
-                                        GetLiveImage();
-                                };
+                                  {
+                                      if (!FreezeImage)
+                                          GetLiveImage();
+                                  };
             if (Directory.Exists(ServiceProvider.Settings.OverlayFolder))
             {
                 string[] files = Directory.GetFiles(ServiceProvider.Settings.OverlayFolder, "*.png");
@@ -473,31 +512,32 @@ namespace CameraControl.windows
             try
             {
                 float movement = _detector.ProcessFrame(bmp);
-                lbl_motion.Content = Math.Round(movement * 100, 2);
-                if (movement > ((float)upd_threshold.Value / 100) && chk_tiggeronmotion.IsChecked == true &&
+                lbl_motion.Content = Math.Round(movement*100, 2);
+                if (movement > ((float) upd_threshold.Value/100) && chk_tiggeronmotion.IsChecked == true &&
                     (DateTime.Now - _photoCapturedTime).TotalSeconds > upd_movewait.Value)
                 {
                     if (chk_autofocus.IsChecked == true)
                     {
                         BlobCountingObjectsProcessing processing =
-                          _detector.MotionProcessingAlgorithm as BlobCountingObjectsProcessing;
-                        if (processing != null && processing.ObjectRectangles != null && processing.ObjectRectangles.Length > 0 &&
+                            _detector.MotionProcessingAlgorithm as BlobCountingObjectsProcessing;
+                        if (processing != null && processing.ObjectRectangles != null &&
+                            processing.ObjectRectangles.Length > 0 &&
                             LiveViewData.ImageData != null)
                         {
                             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle();
                             int surface = 0;
                             foreach (System.Drawing.Rectangle objectRectangle in processing.ObjectRectangles)
                             {
-                                if (surface < objectRectangle.Width * objectRectangle.Height)
+                                if (surface < objectRectangle.Width*objectRectangle.Height)
                                 {
-                                    surface = objectRectangle.Width * objectRectangle.Height;
+                                    surface = objectRectangle.Width*objectRectangle.Height;
                                     rectangle = objectRectangle;
                                 }
                             }
-                            double xt = LiveViewData.ImageWidth / (double)bmp.Width;
-                            double yt = LiveViewData.ImageHeight / (double)bmp.Height;
-                            int posx = (int)((rectangle.X + (rectangle.Width / 2)) * xt);
-                            int posy = (int)((rectangle.Y + (rectangle.Height / 2)) * yt);
+                            double xt = LiveViewData.ImageWidth/(double) bmp.Width;
+                            double yt = LiveViewData.ImageHeight/(double) bmp.Height;
+                            int posx = (int) ((rectangle.X + (rectangle.Width/2))*xt);
+                            int posy = (int) ((rectangle.Y + (rectangle.Height/2))*yt);
                             selectedPortableDevice.Focus(posx, posy);
                         }
                         AutoFocus();
@@ -520,7 +560,7 @@ namespace CameraControl.windows
             oper_in_progress = true;
             _totalframes++;
             if ((DateTime.Now - _framestart).TotalSeconds > 0)
-                Fps = (int)(_totalframes / (DateTime.Now - _framestart).TotalSeconds);
+                Fps = (int) (_totalframes/(DateTime.Now - _framestart).TotalSeconds);
             try
             {
                 LiveViewData = LiveViewManager.GetLiveViewImage(SelectedPortableDevice);
@@ -540,137 +580,140 @@ namespace CameraControl.windows
             }
             Recording = LiveViewData.MovieIsRecording;
             Dispatcher.Invoke(new Action(delegate
-                                           {
-                                               try
-                                               {
-                                                   WriteableBitmap preview;
-                                                   if (LiveViewData != null && LiveViewData.ImageData != null)
-                                                   {
+                                             {
+                                                 try
+                                                 {
+                                                     WriteableBitmap preview;
+                                                     if (LiveViewData != null && LiveViewData.ImageData != null)
+                                                     {
+                                                         MemoryStream stream = new MemoryStream(LiveViewData.ImageData,
+                                                                                                LiveViewData.
+                                                                                                    ImageDataPosition,
+                                                                                                LiveViewData.ImageData.
+                                                                                                    Length -
+                                                                                                LiveViewData.
+                                                                                                    ImageDataPosition);
 
-                                                       MemoryStream stream = new MemoryStream(LiveViewData.ImageData,
-                                                                                              LiveViewData.ImageDataPosition,
-                                                                                              LiveViewData.ImageData.Length -
-                                                                                              LiveViewData.ImageDataPosition);
+                                                         using (var bmp = new Bitmap(stream))
+                                                         {
+                                                             if (chk_motiondetect.IsChecked == true)
+                                                             {
+                                                                 ProcessMotionDetection(bmp);
+                                                             }
 
-                                                       using (var bmp = new Bitmap(stream))
-                                                       {
-                                                           if (chk_motiondetect.IsChecked == true)
-                                                           {
-                                                               ProcessMotionDetection(bmp);
-                                                           }
+                                                             if (_totalframes%DesiredFrameRate == 0)
+                                                             {
+                                                                 ImageStatisticsHSL hslStatistics =
+                                                                     new ImageStatisticsHSL(bmp);
+                                                                 this.LuminanceHistogramPoints =
+                                                                     ConvertToPointCollection(
+                                                                         hslStatistics.Luminance.Values);
+                                                             }
 
-                                                           if (_totalframes % DesiredFrameRate == 0)
-                                                           {
-                                                               ImageStatisticsHSL hslStatistics = new ImageStatisticsHSL(bmp);
-                                                               this.LuminanceHistogramPoints =
-                                                                   ConvertToPointCollection(
-                                                                       hslStatistics.Luminance.Values);
-                                                           }
+                                                             if (HighlightUnderExp)
+                                                             {
+                                                                 ColorFiltering filtering = new ColorFiltering();
+                                                                 filtering.Blue = new IntRange(0, 5);
+                                                                 filtering.Red = new IntRange(0, 5);
+                                                                 filtering.Green = new IntRange(0, 5);
+                                                                 filtering.FillOutsideRange = false;
+                                                                 filtering.FillColor = new RGB(System.Drawing.Color.Blue);
+                                                                 filtering.ApplyInPlace(bmp);
+                                                             }
 
-                                                           if (HighlightUnderExp)
-                                                           {
-                                                               ColorFiltering filtering = new ColorFiltering();
-                                                               filtering.Blue = new IntRange(0, 5);
-                                                               filtering.Red = new IntRange(0, 5);
-                                                               filtering.Green = new IntRange(0, 5);
-                                                               filtering.FillOutsideRange = false;
-                                                               filtering.FillColor = new RGB(System.Drawing.Color.Blue);
-                                                               filtering.ApplyInPlace(bmp);
-                                                           }
-
-                                                           if (HighlightOverExp)
-                                                           {
-                                                               ColorFiltering filtering = new ColorFiltering();
-                                                               filtering.Blue = new IntRange(250, 255);
-                                                               filtering.Red = new IntRange(250, 255);
-                                                               filtering.Green = new IntRange(250, 255);
-                                                               filtering.FillOutsideRange = false;
-                                                               filtering.FillColor = new RGB(System.Drawing.Color.Red);
-                                                               filtering.ApplyInPlace(bmp);
-                                                           }
-                                                           preview =
-                                                               BitmapFactory.ConvertToPbgra32Format(
-                                                                   BitmapSourceConvert.ToBitmapSource(bmp));
-
-                                                           Bitmap newbmp = bmp;
-                                                           if (EdgeDetection)
-                                                           {
-                                                               var filter = new FiltersSequence(
-                                                                   Grayscale.CommonAlgorithms.BT709,
-                                                                   new HomogenityEdgeDetector()
-                                                                   );
-                                                               newbmp = filter.Apply(bmp);
-                                                           }
-
-                                                           WriteableBitmap writeableBitmap;
-
-                                                           if (BlackAndWhite)
-                                                           {
-                                                               Grayscale filter = new Grayscale(0.299, 0.587, 0.114);
-                                                               writeableBitmap =
+                                                             if (HighlightOverExp)
+                                                             {
+                                                                 ColorFiltering filtering = new ColorFiltering();
+                                                                 filtering.Blue = new IntRange(250, 255);
+                                                                 filtering.Red = new IntRange(250, 255);
+                                                                 filtering.Green = new IntRange(250, 255);
+                                                                 filtering.FillOutsideRange = false;
+                                                                 filtering.FillColor = new RGB(System.Drawing.Color.Red);
+                                                                 filtering.ApplyInPlace(bmp);
+                                                             }
+                                                             preview =
                                                                  BitmapFactory.ConvertToPbgra32Format(
-                                                                   BitmapSourceConvert.ToBitmapSource(filter.Apply(newbmp)));
-                                                           }
-                                                           else
-                                                           {
-                                                               writeableBitmap =
-                                                                 BitmapFactory.ConvertToPbgra32Format(
-                                                                   BitmapSourceConvert.ToBitmapSource(newbmp));
-                                                           }
-                                                           DrawGrid(writeableBitmap);
-                                                           if (cmb_rotation.SelectedIndex != 0)
-                                                           {
-                                                               switch (cmb_rotation.SelectedIndex)
-                                                               {
-                                                                   case 1:
-                                                                       writeableBitmap = writeableBitmap.Rotate(90);
-                                                                       break;
-                                                                   case 2:
-                                                                       writeableBitmap = writeableBitmap.Rotate(180);
-                                                                       break;
-                                                                   case 3:
-                                                                       writeableBitmap = writeableBitmap.Rotate(270);
-                                                                       break;
-                                                                   case 4:
-                                                                       if (LiveViewData.Rotation != 0)
-                                                                           writeableBitmap =
-                                                                               writeableBitmap.RotateFree(
-                                                                                   LiveViewData.Rotation);
-                                                                       break;
-                                                               }
-                                                           }
-                                                           writeableBitmap.Freeze();
-                                                           image1.BeginInit();
-                                                           image1.Source = writeableBitmap;
-                                                           image1.EndInit();
+                                                                     BitmapSourceConvert.ToBitmapSource(bmp));
 
-                                                           ServiceProvider.DeviceManager.LiveViewImage[
-                                                               selectedPortableDevice] = SaveJpeg(writeableBitmap);
+                                                             Bitmap newbmp = bmp;
+                                                             if (EdgeDetection)
+                                                             {
+                                                                 var filter = new FiltersSequence(
+                                                                     Grayscale.CommonAlgorithms.BT709,
+                                                                     new HomogenityEdgeDetector()
+                                                                     );
+                                                                 newbmp = filter.Apply(bmp);
+                                                             }
 
-                                                       }
-                                                       if (SelectedPortableDevice.LiveViewImageZoomRatio.Value == "All")
-                                                       {
-                                                           ImageBrush ib = new ImageBrush { ImageSource = preview };
-                                                           canvas_image.BeginInit();
-                                                           canvas_image.Background = ib;
-                                                           canvas_image.EndInit();
-                                                       }
-                                                       stream.Close();
-                                                   }
-                                               }
-                                               catch (Exception exception)
-                                               {
-                                                   Log.Error(exception);
-                                                   _retries++;
-                                                   oper_in_progress = false;
-                                               }
+                                                             WriteableBitmap writeableBitmap;
 
-                                           }));
+                                                             if (BlackAndWhite)
+                                                             {
+                                                                 Grayscale filter = new Grayscale(0.299, 0.587, 0.114);
+                                                                 writeableBitmap =
+                                                                     BitmapFactory.ConvertToPbgra32Format(
+                                                                         BitmapSourceConvert.ToBitmapSource(
+                                                                             filter.Apply(newbmp)));
+                                                             }
+                                                             else
+                                                             {
+                                                                 writeableBitmap =
+                                                                     BitmapFactory.ConvertToPbgra32Format(
+                                                                         BitmapSourceConvert.ToBitmapSource(newbmp));
+                                                             }
+                                                             DrawGrid(writeableBitmap);
+                                                             if (cmb_rotation.SelectedIndex != 0)
+                                                             {
+                                                                 switch (cmb_rotation.SelectedIndex)
+                                                                 {
+                                                                     case 1:
+                                                                         writeableBitmap = writeableBitmap.Rotate(90);
+                                                                         break;
+                                                                     case 2:
+                                                                         writeableBitmap = writeableBitmap.Rotate(180);
+                                                                         break;
+                                                                     case 3:
+                                                                         writeableBitmap = writeableBitmap.Rotate(270);
+                                                                         break;
+                                                                     case 4:
+                                                                         if (LiveViewData.Rotation != 0)
+                                                                             writeableBitmap =
+                                                                                 writeableBitmap.RotateFree(
+                                                                                     LiveViewData.Rotation);
+                                                                         break;
+                                                                 }
+                                                             }
+                                                             writeableBitmap.Freeze();
+                                                             image1.BeginInit();
+                                                             image1.Source = writeableBitmap;
+                                                             image1.EndInit();
+
+                                                             ServiceProvider.DeviceManager.LiveViewImage[
+                                                                 selectedPortableDevice] = SaveJpeg(writeableBitmap);
+                                                         }
+                                                         if (SelectedPortableDevice.LiveViewImageZoomRatio.Value ==
+                                                             "All")
+                                                         {
+                                                             ImageBrush ib = new ImageBrush {ImageSource = preview};
+                                                             canvas_image.BeginInit();
+                                                             canvas_image.Background = ib;
+                                                             canvas_image.EndInit();
+                                                         }
+                                                         stream.Close();
+                                                     }
+                                                 }
+                                                 catch (Exception exception)
+                                                 {
+                                                     Log.Error(exception);
+                                                     _retries++;
+                                                     oper_in_progress = false;
+                                                 }
+                                             }));
             Dispatcher.BeginInvoke(new Action(delegate
-                                                {
-                                                    DrawLines();
-                                                    ;
-                                                }));
+                                                  {
+                                                      DrawLines();
+                                                      ;
+                                                  }));
             _retries = 0;
             oper_in_progress = false;
         }
@@ -769,8 +812,6 @@ namespace CameraControl.windows
                     }
                     catch (Exception)
                     {
-
-
                     }
                     break;
             }
@@ -791,12 +832,12 @@ namespace CameraControl.windows
                 //_focusrect.Visibility = selectedPortableDevice.LiveViewImageZoomRatio.Value == "All"
                 //                          ? Visibility.Visible
                 //                          : Visibility.Hidden;
-                double xt = image1.ActualWidth / LiveViewData.ImageWidth;
-                double yt = image1.ActualHeight / LiveViewData.ImageHeight;
-                _focusrect.Height = LiveViewData.FocusFrameXSize * xt;
-                _focusrect.Width = LiveViewData.FocusFrameYSize * yt;
-                double xx = (canvas.ActualWidth - image1.ActualWidth) / 2;
-                double yy = (canvas.ActualHeight - image1.ActualHeight) / 2;
+                double xt = image1.ActualWidth/LiveViewData.ImageWidth;
+                double yt = image1.ActualHeight/LiveViewData.ImageHeight;
+                _focusrect.Height = LiveViewData.FocusFrameXSize*xt;
+                _focusrect.Width = LiveViewData.FocusFrameYSize*yt;
+                double xx = (canvas.ActualWidth - image1.ActualWidth)/2;
+                double yy = (canvas.ActualHeight - image1.ActualHeight)/2;
                 //SetLinePos(_line11, (int) (xx + image1.ActualWidth/3), (int) yy, (int) (xx + image1.ActualWidth/3),
                 //           (int) (yy + image1.ActualHeight));
                 //SetLinePos(_line12, (int) (xx + (image1.ActualWidth/3)*2), (int) yy, (int) (xx + (image1.ActualWidth/3)*2),
@@ -807,8 +848,8 @@ namespace CameraControl.windows
                 //SetLinePos(_line22, (int) xx, (int) (yy + (image1.ActualHeight/3)*2), (int) (xx + image1.ActualWidth),
                 //           (int) (yy + (image1.ActualHeight/3)*2));
 
-                _focusrect.SetValue(Canvas.LeftProperty, LiveViewData.FocusX * xt - (_focusrect.Height / 2) + xx);
-                _focusrect.SetValue(Canvas.TopProperty, LiveViewData.FocusY * yt - (_focusrect.Width / 2) + yy);
+                _focusrect.SetValue(Canvas.LeftProperty, LiveViewData.FocusX*xt - (_focusrect.Height/2) + xx);
+                _focusrect.SetValue(Canvas.TopProperty, LiveViewData.FocusY*yt - (_focusrect.Width/2) + yy);
                 _focusrect.Stroke = new SolidColorBrush(LiveViewData.Focused ? Colors.Green : Colors.Red);
                 _focusrect.EndInit();
                 SmallFocusScreen();
@@ -821,15 +862,15 @@ namespace CameraControl.windows
 
         private void SmallFocusScreen()
         {
-            double aspect = image1.ActualHeight / image1.ActualWidth;
-            canvas_image.Height = canvas_image.Width * aspect;
+            double aspect = image1.ActualHeight/image1.ActualWidth;
+            canvas_image.Height = canvas_image.Width*aspect;
             small_focus_rect.Visibility = LiveViewData.HaveFocusData ? Visibility.Visible : Visibility.Hidden;
-            double xt = canvas_image.ActualWidth / LiveViewData.ImageWidth;
-            double yt = canvas_image.ActualHeight / LiveViewData.ImageHeight;
-            small_focus_rect.Height = LiveViewData.FocusFrameXSize * xt;
-            small_focus_rect.Width = LiveViewData.FocusFrameYSize * yt;
-            small_focus_rect.SetValue(Canvas.LeftProperty, LiveViewData.FocusX * xt - (_focusrect.Height / 2 * xt));
-            small_focus_rect.SetValue(Canvas.TopProperty, LiveViewData.FocusY * yt - (_focusrect.Width / 2 * yt));
+            double xt = canvas_image.ActualWidth/LiveViewData.ImageWidth;
+            double yt = canvas_image.ActualHeight/LiveViewData.ImageHeight;
+            small_focus_rect.Height = LiveViewData.FocusFrameXSize*xt;
+            small_focus_rect.Width = LiveViewData.FocusFrameYSize*yt;
+            small_focus_rect.SetValue(Canvas.LeftProperty, LiveViewData.FocusX*xt - (_focusrect.Height/2*xt));
+            small_focus_rect.SetValue(Canvas.TopProperty, LiveViewData.FocusY*yt - (_focusrect.Width/2*yt));
         }
 
 
@@ -839,10 +880,8 @@ namespace CameraControl.windows
         }
 
 
-
         private void Window_Closed(object sender, EventArgs e)
         {
-
         }
 
         private void AutoFocus()
@@ -889,7 +928,8 @@ namespace CameraControl.windows
                 {
                     if (SelectedPortableDevice.GetCapability(CapabilityEnum.Bulb))
                     {
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show, SelectedPortableDevice);
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show,
+                                                                      SelectedPortableDevice);
                         return;
                     }
                     else
@@ -970,7 +1010,6 @@ namespace CameraControl.windows
                             throw;
                         }
                     }
-
                 } while (retry && retryNum < 35);
                 if (IsVisible)
                 {
@@ -1028,7 +1067,6 @@ namespace CameraControl.windows
                             throw;
                         }
                     }
-
                 } while (retry && retryNum < 35);
             }
             catch (Exception exception)
@@ -1048,10 +1086,10 @@ namespace CameraControl.windows
                 try
                 {
                     Point initialPoint = e.MouseDevice.GetPosition(image1);
-                    double xt = LiveViewData.ImageWidth / image1.ActualWidth;
-                    double yt = LiveViewData.ImageHeight / image1.ActualHeight;
-                    int posx = (int)(initialPoint.X * xt);
-                    int posy = (int)(initialPoint.Y * yt);
+                    double xt = LiveViewData.ImageWidth/image1.ActualWidth;
+                    double yt = LiveViewData.ImageHeight/image1.ActualHeight;
+                    int posx = (int) (initialPoint.X*xt);
+                    int posy = (int) (initialPoint.Y*yt);
                     selectedPortableDevice.Focus(posx, posy);
                 }
                 catch (Exception exception)
@@ -1108,7 +1146,6 @@ namespace CameraControl.windows
                                                      {
                                                          try
                                                          {
-
                                                              ICameraDevice cameraparam = param as ICameraDevice;
                                                              if (cameraparam == SelectedPortableDevice && IsVisible)
                                                              {
@@ -1174,38 +1211,38 @@ namespace CameraControl.windows
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Hide:
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       Hide();
-                                                       try
-                                                       {
-                                                           _timer.Stop();
-                                                           selectedPortableDevice.CameraDisconnected -=
-                                                             selectedPortableDevice_CameraDisconnected;
-                                                           selectedPortableDevice.CaptureCompleted -=
-                                                             selectedPortableDevice_CaptureCompleted;
-                                                           ServiceProvider.Settings.SelectedBitmap.BitmapLoaded -=
-                                                             SelectedBitmap_BitmapLoaded;
-                                                           DataContext = null;
-                                                           Thread.Sleep(100);
-                                                           StopLiveView();
-                                                           Recording = false;
-                                                           LockA = false;
-                                                           LockB = false;
-                                                           LiveViewData = null;
-                                                       }
-                                                       catch (Exception exception)
-                                                       {
-                                                           Log.Error("Unable to stop live view", exception);
-                                                       }
-                                                       //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FocusStackingWnd_Hide);
-                                                   }));
+                                                     {
+                                                         Hide();
+                                                         try
+                                                         {
+                                                             _timer.Stop();
+                                                             selectedPortableDevice.CameraDisconnected -=
+                                                                 selectedPortableDevice_CameraDisconnected;
+                                                             selectedPortableDevice.CaptureCompleted -=
+                                                                 selectedPortableDevice_CaptureCompleted;
+                                                             ServiceProvider.Settings.SelectedBitmap.BitmapLoaded -=
+                                                                 SelectedBitmap_BitmapLoaded;
+                                                             DataContext = null;
+                                                             Thread.Sleep(100);
+                                                             StopLiveView();
+                                                             Recording = false;
+                                                             LockA = false;
+                                                             LockB = false;
+                                                             LiveViewData = null;
+                                                         }
+                                                         catch (Exception exception)
+                                                         {
+                                                             Log.Error("Unable to stop live view", exception);
+                                                         }
+                                                         //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FocusStackingWnd_Hide);
+                                                     }));
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       Hide();
-                                                       Close();
-                                                   }));
+                                                     {
+                                                         Hide();
+                                                         Close();
+                                                     }));
                     break;
                 case CmdConsts.LiveView_Zoom_All:
                     SelectedPortableDevice.LiveViewImageZoomRatio.SetValue(0);
@@ -1346,7 +1383,7 @@ namespace CameraControl.windows
         {
             if (_focusIProgress)
                 return;
-            int step = (int)ostep;
+            int step = (int) ostep;
             _focusIProgress = true;
             Console.WriteLine("Focus start");
             if (LockA)
@@ -1397,7 +1434,6 @@ namespace CameraControl.windows
             }
         }
 
-
         #region Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -1411,7 +1447,6 @@ namespace CameraControl.windows
         }
 
         #endregion
-
 
         private void btn_movea_Click(object sender, RoutedEventArgs e)
         {
@@ -1443,7 +1478,7 @@ namespace CameraControl.windows
                     }
                     PhotoCount++;
                     GetLiveImage();
-                    Thread.Sleep(WaitTime * 1000);
+                    Thread.Sleep(WaitTime*1000);
                     //ServiceProvider.DeviceManager.SelectedCameraDevice.Focus(FocusStep);
                     if (PhotoCount <= PhotoNo)
                     {
@@ -1499,7 +1534,7 @@ namespace CameraControl.windows
 
         private void btn_takephoto_Click(object sender, RoutedEventArgs e)
         {
-            if(!LockA || !LockB)
+            if (!LockA || !LockB)
             {
                 this.ShowMessageAsync(TranslationStrings.LabelError, TranslationStrings.LabelLockNearFar);
                 return;
@@ -1552,7 +1587,9 @@ namespace CameraControl.windows
                     }
                     else
                     {
-                        this.ShowMessageAsync(TranslationStrings.LabelError, TranslationStrings.LabelErrorRecordMovie + "\n" + TranslationManager.GetTranslation(resp));
+                        this.ShowMessageAsync(TranslationStrings.LabelError,
+                                              TranslationStrings.LabelErrorRecordMovie + "\n" +
+                                              TranslationManager.GetTranslation(resp));
                         return;
                     }
                 }
@@ -1567,7 +1604,6 @@ namespace CameraControl.windows
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-
         }
 
 
@@ -1596,7 +1632,6 @@ namespace CameraControl.windows
             {
                 ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Down);
             }
-
         }
 
         private void canvas_image_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1605,10 +1640,10 @@ namespace CameraControl.windows
                 LiveViewData.HaveFocusData)
             {
                 Point initialPoint = e.MouseDevice.GetPosition(canvas_image);
-                double xt = LiveViewData.ImageWidth / canvas_image.ActualWidth;
-                double yt = LiveViewData.ImageHeight / canvas_image.ActualHeight;
-                int posx = (int)(initialPoint.X * xt);
-                int posy = (int)(initialPoint.Y * yt);
+                double xt = LiveViewData.ImageWidth/canvas_image.ActualWidth;
+                double yt = LiveViewData.ImageHeight/canvas_image.ActualHeight;
+                int posx = (int) (initialPoint.X*xt);
+                int posy = (int) (initialPoint.Y*yt);
                 SetFocusPos(posx, posy);
             }
         }
@@ -1622,14 +1657,14 @@ namespace CameraControl.windows
         {
             if (Math.Abs(FocusCounter - e.NewValue) == 0)
                 return;
-            SetFocus((int)(e.NewValue - e.OldValue));
+            SetFocus((int) (e.NewValue - e.OldValue));
         }
 
         private void slider_transparent_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Dispatcher.Invoke(slider_transparent.Value == 1
-                                ? new Action(delegate { img_preview.Visibility = Visibility.Hidden; })
-                                : new Action(delegate { img_preview.Visibility = Visibility.Visible; }));
+                                  ? new Action(delegate { img_preview.Visibility = Visibility.Hidden; })
+                                  : new Action(delegate { img_preview.Visibility = Visibility.Visible; }));
         }
 
         private void MetroWindow_SizeChanged(object sender, SizeChangedEventArgs e)

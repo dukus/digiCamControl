@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
@@ -8,14 +38,16 @@ using System.Threading;
 using CameraControl.Devices;
 using Newtonsoft.Json;
 
+#endregion
+
 namespace CameraControl.Core.Classes
 {
     // Delegate for passing received message back to caller
     public delegate void DelegateMessage(string Reply);
 
-    class PipeServerT
+    internal class PipeServerT
     {
-        string _pipeName;
+        private string _pipeName;
 
         public void Listen(string PipeName)
         {
@@ -24,7 +56,9 @@ namespace CameraControl.Core.Classes
                 // Set to class level var so we can re-use in the async callback method
                 _pipeName = PipeName;
                 // Create the new async pipe 
-                NamedPipeServerStream pipeServer = new NamedPipeServerStream(PipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte,PipeOptions.Asynchronous);
+                NamedPipeServerStream pipeServer = new NamedPipeServerStream(PipeName, PipeDirection.InOut, 1,
+                                                                             PipeTransmissionMode.Byte,
+                                                                             PipeOptions.Asynchronous);
 
                 // Wait for a connection
                 pipeServer.BeginWaitForConnection(WaitForConnectionCallBack, pipeServer);
@@ -40,7 +74,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 // Get the pipe
-                NamedPipeServerStream pipeServer = (NamedPipeServerStream)iar.AsyncState;
+                NamedPipeServerStream pipeServer = (NamedPipeServerStream) iar.AsyncState;
                 // End waiting for the connection
                 pipeServer.EndWaitForConnection(iar);
 
@@ -57,7 +91,8 @@ namespace CameraControl.Core.Classes
                 pipeServer.Disconnect();
                 pipeServer.Close();
                 pipeServer = null;
-                pipeServer = new NamedPipeServerStream(_pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+                pipeServer = new NamedPipeServerStream(_pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte,
+                                                       PipeOptions.Asynchronous);
 
                 // Recursively wait for the connection again and again....
                 pipeServer.BeginWaitForConnection(WaitForConnectionCallBack, pipeServer);
@@ -74,7 +109,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 var lines = Pharse(query);
-                if(lines.ContainsKey("request"))
+                if (lines.ContainsKey("request"))
                 {
                     switch (lines["request"])
                     {
@@ -88,19 +123,18 @@ namespace CameraControl.Core.Classes
                             }
                         case "cameras":
                             {
-                                if(ServiceProvider.DeviceManager.ConnectedDevices.Count==0)
+                                if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
                                 {
                                     return ":;response:error;message:no camera is connected";
                                 }
                                 return lines.ContainsKey("format") && lines["format"] == "json"
                                            ? JsonConvert.SerializeObject(ServiceProvider.DeviceManager.ConnectedDevices,
                                                                          Formatting.Indented,
-                                                                         new JsonSerializerSettings() { })
+                                                                         new JsonSerializerSettings() {})
                                            : GetCamerasData();
                             }
                         default:
                             return ":;response:error;message:unknown request";
-
                     }
                 }
                 if (lines.ContainsKey("command"))
@@ -125,7 +159,7 @@ namespace CameraControl.Core.Classes
                                             return ":;response:ok;";
                                         }
                                     }
-                                    return ":;response:error;message:No camera was found" ;
+                                    return ":;response:error;message:No camera was found";
                                 }
                                 else
                                 {
@@ -169,10 +203,10 @@ namespace CameraControl.Core.Classes
                 return null;
             foreach (string line in lines)
             {
-                if(line.Contains(valueseparator))
+                if (line.Contains(valueseparator))
                 {
                     int seppos = line.IndexOf(valueseparator, StringComparison.Ordinal);
-                    res.Add(line.Substring(0, seppos), line.Substring(seppos+1));
+                    res.Add(line.Substring(0, seppos), line.Substring(seppos + 1));
                 }
                 else
                 {
@@ -185,10 +219,11 @@ namespace CameraControl.Core.Classes
         private string GetSessionData()
         {
             string res = ":;response:session";
-            IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+            IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
             foreach (PropertyInfo prop in props)
             {
-                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool))
+                if (prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) ||
+                    prop.PropertyType == typeof (bool))
                 {
                     var value = prop.GetValue(ServiceProvider.Settings.DefaultSession, null);
                     res += string.Format(";{0}:{1}", prop.Name.ToLower(), value);

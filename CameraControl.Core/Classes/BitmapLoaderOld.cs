@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,6 +40,8 @@ using AForge.Imaging;
 using CameraControl.Devices;
 using Color = System.Windows.Media.Color;
 
+#endregion
+
 namespace CameraControl.Core.Classes
 {
     public class BitmapLoaderOld
@@ -20,6 +52,7 @@ namespace CameraControl.Core.Classes
 
 
         private static BitmapLoaderOld _instance;
+
         public static BitmapLoaderOld Instance
         {
             get { return _instance ?? (_instance = new BitmapLoaderOld()); }
@@ -27,6 +60,7 @@ namespace CameraControl.Core.Classes
         }
 
         private BitmapImage _defaultThumbnail;
+
         public BitmapImage DefaultThumbnail
         {
             get
@@ -128,10 +162,11 @@ namespace CameraControl.Core.Classes
                             else
                             {
                                 writeableBitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-                                double dw = 2000 / writeableBitmap.Width;
-                                writeableBitmap = writeableBitmap.Resize((int)(writeableBitmap.PixelWidth * dw),
-                                                                         (int)(writeableBitmap.PixelHeight * dw),
-                                                                         WriteableBitmapExtensions.Interpolation.Bilinear);
+                                double dw = 2000/writeableBitmap.Width;
+                                writeableBitmap = writeableBitmap.Resize((int) (writeableBitmap.PixelWidth*dw),
+                                                                         (int) (writeableBitmap.PixelHeight*dw),
+                                                                         WriteableBitmapExtensions.Interpolation.
+                                                                             Bilinear);
                             }
                             bmpDec = null;
                         }
@@ -175,7 +210,6 @@ namespace CameraControl.Core.Classes
                     _currentfile.OnBitmapLoaded();
                     _currentfile = null;
                     _isworking = false;
-
                 }
                 else
                 {
@@ -206,7 +240,7 @@ namespace CameraControl.Core.Classes
         public static void Save2Jpg(BitmapSource source, string filename)
         {
             string dir = Path.GetDirectoryName(filename);
-            if(dir != null && !Directory.Exists(dir))
+            if (dir != null && !Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
@@ -245,7 +279,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
+        private void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
         {
             for (int i = 0; i < line; i++)
             {
@@ -262,15 +296,16 @@ namespace CameraControl.Core.Classes
                 file.Metadata.Clear();
                 foreach (var exiv2Data in exiv2Helper.Tags)
                 {
-                    file.Metadata.Add(new DictionaryItem() { Name = exiv2Data.Value.Tag, Value = exiv2Data.Value.Value });
+                    file.Metadata.Add(new DictionaryItem() {Name = exiv2Data.Value.Tag, Value = exiv2Data.Value.Value});
                 }
                 if (ServiceProvider.Settings.ShowFocusPoints)
                 {
                     writeableBitmap.Lock();
                     foreach (Rect focuspoint in exiv2Helper.Focuspoints)
                     {
-                        DrawRect(writeableBitmap, (int)focuspoint.X, (int)focuspoint.Y, (int)(focuspoint.X + focuspoint.Width),
-                                 (int)(focuspoint.Y + focuspoint.Height), Colors.Aqua,
+                        DrawRect(writeableBitmap, (int) focuspoint.X, (int) focuspoint.Y,
+                                 (int) (focuspoint.X + focuspoint.Width),
+                                 (int) (focuspoint.Y + focuspoint.Height), Colors.Aqua,
                                  ServiceProvider.Settings.LowMemoryUsage ? 2 : 7);
                     }
                     writeableBitmap.Unlock();
@@ -303,7 +338,6 @@ namespace CameraControl.Core.Classes
                             break;
                     }
                 }
-
             }
             catch (Exception exception)
             {
@@ -324,7 +358,6 @@ namespace CameraControl.Core.Classes
                 file.InfoLabel += " | " + exiv2Helper.Tags["Exif.Photo.ExposureBiasValue"].Value;
             if (exiv2Helper.Tags.ContainsKey("Exif.Photo.FocalLength"))
                 file.InfoLabel += " | " + exiv2Helper.Tags["Exif.Photo.FocalLength"].Value;
-
         }
 
 
@@ -352,21 +385,19 @@ namespace CameraControl.Core.Classes
         {
             int[] smoothedValues = new int[originalValues.Length];
 
-            double[] mask = new double[] { 0.25, 0.5, 0.25 };
+            double[] mask = new double[] {0.25, 0.5, 0.25};
 
             for (int bin = 1; bin < originalValues.Length - 1; bin++)
             {
                 double smoothedValue = 0;
                 for (int i = 0; i < mask.Length; i++)
                 {
-                    smoothedValue += originalValues[bin - 1 + i] * mask[i];
+                    smoothedValue += originalValues[bin - 1 + i]*mask[i];
                 }
-                smoothedValues[bin] = (int)smoothedValue;
+                smoothedValues[bin] = (int) smoothedValue;
             }
 
             return smoothedValues;
         }
-
-
     }
 }

@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -17,6 +47,8 @@ using CameraControl.Core;
 using HelpProvider = CameraControl.Classes.HelpProvider;
 using MessageBox = System.Windows.MessageBox;
 
+#endregion
+
 //using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CameraControl.windows
@@ -26,7 +58,6 @@ namespace CameraControl.windows
     /// </summary>
     public partial class SettingsWnd
     {
-
         public AsyncObservableCollection<RotateFlipType> RotateFlipTypesValues { get; set; }
         public AsyncObservableCollection<string> AvailableKeys { get; set; }
 
@@ -34,11 +65,13 @@ namespace CameraControl.windows
         {
             AvailableKeys = new AsyncObservableCollection<string>();
             InitializeComponent();
-            foreach (string key in Enum.GetNames(typeof(Key)))
+            foreach (string key in Enum.GetNames(typeof (Key)))
             {
                 AvailableKeys.Add(key);
             }
-            RotateFlipTypesValues = new AsyncObservableCollection<RotateFlipType>(Enum.GetValues(typeof(RotateFlipType)).Cast<RotateFlipType>().Distinct());
+            RotateFlipTypesValues =
+                new AsyncObservableCollection<RotateFlipType>(
+                    Enum.GetValues(typeof (RotateFlipType)).Cast<RotateFlipType>().Distinct());
             ServiceProvider.Settings.ApplyTheme(this);
             qrcode.Text = ServiceProvider.Settings.Webaddress;
             foreach (IMainWindowPlugin mainWindowPlugin in ServiceProvider.PluginManager.MainWindowPlugins)
@@ -52,7 +85,6 @@ namespace CameraControl.windows
         {
             //cmb_themes.ItemsSource = ThemeManager.GetThemes();
             ServiceProvider.Settings.BeginEdit();
-
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -92,7 +124,7 @@ namespace CameraControl.windows
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.FileName = ServiceProvider.Settings.ExternalViewer;
-            if (dialog.ShowDialog()==true)
+            if (dialog.ShowDialog() == true)
             {
                 ServiceProvider.Settings.ExternalViewer = dialog.FileName;
             }
@@ -138,7 +170,9 @@ namespace CameraControl.windows
         {
             if (lst_device.SelectedItem != null)
             {
-                if (MessageBox.Show("Do you want to delete the selected device configuration ?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (
+                    MessageBox.Show("Do you want to delete the selected device configuration ?", "Delete",
+                                    MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     CustomConfig config = lst_device.SelectedItem as CustomConfig;
                     ServiceProvider.Settings.DeviceConfigs.Items.Remove(config);
@@ -182,9 +216,5 @@ namespace CameraControl.windows
         {
             PhotoUtils.Run("https://www.transifex.com/projects/p/digicamcontrol/");
         }
-
-
-
-
     }
 }

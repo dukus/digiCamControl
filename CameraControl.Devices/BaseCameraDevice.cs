@@ -1,18 +1,52 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Devices
 {
     public class BaseCameraDevice : BaseFieldClass, ICameraDevice
     {
         #region Implementation of ICameraDevice
+
         protected List<CapabilityEnum> Capabilities = new List<CapabilityEnum>();
         protected object Locker = new object(); // object used to lock multi threaded methods 
 
         private bool _haveLiveView;
 
         private bool _isBusy;
+
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -34,6 +68,7 @@ namespace CameraControl.Devices
         }
 
         private bool _captureInSdRam;
+
         public virtual bool CaptureInSdRam
         {
             get { return _captureInSdRam; }
@@ -45,6 +80,7 @@ namespace CameraControl.Devices
         }
 
         private bool _hostMode;
+
         public bool HostMode
         {
             get { return _hostMode; }
@@ -56,6 +92,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<int> _isoNumber;
+
         public virtual PropertyValue<int> IsoNumber
         {
             get { return _isoNumber; }
@@ -67,6 +104,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<long> _shutterSpeed;
+
         public virtual PropertyValue<long> ShutterSpeed
         {
             get { return _shutterSpeed; }
@@ -78,6 +116,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<uint> _mode;
+
         public virtual PropertyValue<uint> Mode
         {
             get { return _mode; }
@@ -89,6 +128,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<int> _fNumber;
+
         public virtual PropertyValue<int> FNumber
         {
             get { return _fNumber; }
@@ -100,6 +140,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<long> _whiteBalance;
+
         public virtual PropertyValue<long> WhiteBalance
         {
             get { return _whiteBalance; }
@@ -111,6 +152,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<int> _exposureCompensation;
+
         public virtual PropertyValue<int> ExposureCompensation
         {
             get { return _exposureCompensation; }
@@ -122,6 +164,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<int> _compressionSetting;
+
         public virtual PropertyValue<int> CompressionSetting
         {
             get { return _compressionSetting; }
@@ -133,6 +176,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<int> _exposureMeteringMode;
+
         public virtual PropertyValue<int> ExposureMeteringMode
         {
             get { return _exposureMeteringMode; }
@@ -144,6 +188,7 @@ namespace CameraControl.Devices
         }
 
         private PropertyValue<long> _focusMode;
+
         public virtual PropertyValue<long> FocusMode
         {
             get { return _focusMode; }
@@ -155,6 +200,7 @@ namespace CameraControl.Devices
         }
 
         private DateTime _dateTime;
+
         public virtual DateTime DateTime
         {
             get { return _dateTime; }
@@ -168,6 +214,7 @@ namespace CameraControl.Devices
         private string _deviceName;
 
         private bool _isChecked;
+
         public virtual bool IsChecked
         {
             get { return _isChecked; }
@@ -179,6 +226,7 @@ namespace CameraControl.Devices
         }
 
         private object _attachedPhotoSession;
+
         public virtual object AttachedPhotoSession
         {
             get { return _attachedPhotoSession; }
@@ -200,6 +248,7 @@ namespace CameraControl.Devices
         }
 
         private string _manufacturer;
+
         public virtual string Manufacturer
         {
             get { return _manufacturer; }
@@ -211,6 +260,7 @@ namespace CameraControl.Devices
         }
 
         private string _serialNumber;
+
         public virtual string SerialNumber
         {
             get { return _serialNumber; }
@@ -222,6 +272,7 @@ namespace CameraControl.Devices
         }
 
         private string _displayName;
+
         public virtual string DisplayName
         {
             get
@@ -239,6 +290,7 @@ namespace CameraControl.Devices
 
 
         private int _exposureStatus;
+
         public virtual int ExposureStatus
         {
             get { return _exposureStatus; }
@@ -250,6 +302,7 @@ namespace CameraControl.Devices
         }
 
         private bool _isConnected;
+
         public virtual bool IsConnected
         {
             get { return _isConnected; }
@@ -262,6 +315,7 @@ namespace CameraControl.Devices
 
 
         private int _battery;
+
         public virtual int Battery
         {
             get { return _battery; }
@@ -273,6 +327,7 @@ namespace CameraControl.Devices
         }
 
         private uint _transferProgress;
+
         public uint TransferProgress
         {
             get { return _transferProgress; }
@@ -289,6 +344,7 @@ namespace CameraControl.Devices
         }
 
         public virtual PropertyValue<int> LiveViewImageZoomRatio { get; set; }
+
         public virtual bool Init(DeviceDescriptor deviceDescriptor)
         {
             return true;
@@ -296,12 +352,10 @@ namespace CameraControl.Devices
 
         public virtual void StartLiveView()
         {
-
         }
 
         public virtual void StopLiveView()
         {
-
         }
 
         public virtual LiveViewData GetLiveViewImage()
@@ -311,37 +365,30 @@ namespace CameraControl.Devices
 
         public virtual void AutoFocus()
         {
-
         }
 
         public virtual void Focus(int step)
         {
-
         }
 
         public virtual void Focus(int x, int y)
         {
-
         }
 
         public virtual void CapturePhotoNoAf()
         {
-
         }
 
         public virtual void CapturePhoto()
         {
-
         }
 
         public virtual void StartRecordMovie()
         {
-
         }
 
         public virtual void StopRecordMovie()
         {
-
         }
 
         public virtual string GetProhibitionCondition(OperationEnum operationEnum)
@@ -351,37 +398,30 @@ namespace CameraControl.Devices
 
         public virtual void EndBulbMode()
         {
-
         }
 
         public virtual void StartBulbMode()
         {
-
         }
 
         public virtual void LockCamera()
         {
-
         }
 
         public virtual void UnLockCamera()
         {
-
         }
 
         public virtual void Close()
         {
-
         }
 
         public virtual void ReadDeviceProperties(int prop)
         {
-
         }
 
         public virtual void TransferFile(object o, string filename)
         {
-
         }
 
         public void OnCaptureCompleted(object sender, EventArgs args)
@@ -420,6 +460,7 @@ namespace CameraControl.Devices
         }
 
         private AsyncObservableCollection<PropertyValue<long>> _advancedProperties;
+
         public AsyncObservableCollection<PropertyValue<long>> AdvancedProperties
         {
             get { return _advancedProperties; }
@@ -452,7 +493,6 @@ namespace CameraControl.Devices
         /// <param name="comment">The comment.</param>
         public virtual void SetCameraField(CameraFieldType cameraFieldType, string comment)
         {
-            
         }
 
         #endregion
@@ -468,6 +508,5 @@ namespace CameraControl.Devices
         {
             return DisplayName;
         }
-
     }
 }

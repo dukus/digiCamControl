@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net.Sockets;
@@ -18,12 +48,14 @@ using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using Timer = System.Timers.Timer;
 
+#endregion
+
 namespace CameraControl.windows
 {
     /// <summary>
     /// Interaction logic for BulbWnd.xaml
     /// </summary>
-    public partial class BulbWnd :MetroWindow, INotifyPropertyChanged, IWindow
+    public partial class BulbWnd : MetroWindow, INotifyPropertyChanged, IWindow
     {
         private Timer _captureTimer = new Timer(1000);
         private Timer _waitTimer = new Timer(1000);
@@ -34,6 +66,7 @@ namespace CameraControl.windows
 
         public ICameraDevice CameraDevice { get; set; }
         private bool _noAutofocus;
+
         public bool NoAutofocus
         {
             get { return _noAutofocus; }
@@ -45,6 +78,7 @@ namespace CameraControl.windows
         }
 
         private int _captureTime;
+
         public int CaptureTime
         {
             get { return _captureTime; }
@@ -57,6 +91,7 @@ namespace CameraControl.windows
 
 
         private int _numOfPhotos;
+
         public int NumOfPhotos
         {
             get { return _numOfPhotos; }
@@ -68,6 +103,7 @@ namespace CameraControl.windows
         }
 
         private int _waitTime;
+
         public int WaitTime
         {
             get { return _waitTime; }
@@ -79,6 +115,7 @@ namespace CameraControl.windows
         }
 
         private string _message;
+
         public string Message
         {
             get { return _message; }
@@ -91,6 +128,7 @@ namespace CameraControl.windows
 
 
         private ScriptObject _defaultScript;
+
         public ScriptObject DefaultScript
         {
             get { return _defaultScript; }
@@ -102,6 +140,7 @@ namespace CameraControl.windows
         }
 
         private int _phdType;
+
         public int PhdType
         {
             get { return _phdType; }
@@ -113,6 +152,7 @@ namespace CameraControl.windows
         }
 
         private int _phdWait;
+
         public int PhdWait
         {
             get { return _phdWait; }
@@ -124,6 +164,7 @@ namespace CameraControl.windows
         }
 
         private int _countDown;
+
         public int CountDown
         {
             get { return _countDown; }
@@ -135,6 +176,7 @@ namespace CameraControl.windows
         }
 
         private string _event;
+
         public string Event
         {
             get { return _event; }
@@ -146,6 +188,7 @@ namespace CameraControl.windows
         }
 
         private int _photoLeft;
+
         public int PhotoLeft
         {
             get { return _photoLeft; }
@@ -157,6 +200,7 @@ namespace CameraControl.windows
         }
 
         private bool _automaticGuiding;
+
         public bool AutomaticGuiding
         {
             get { return _automaticGuiding; }
@@ -220,7 +264,7 @@ namespace CameraControl.windows
         {
             if (command == null)
                 return;
-            if(!command.HaveEditControl)
+            if (!command.HaveEditControl)
             {
                 MessageBox.Show("Use script editor to edit this script");
                 return;
@@ -241,7 +285,7 @@ namespace CameraControl.windows
                 lst_commands.SelectedItem = DefaultScript.Commands[ind];
         }
 
-        void _waitTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _waitTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _waitSecs++;
             CountDown--;
@@ -254,7 +298,7 @@ namespace CameraControl.windows
             }
         }
 
-        void _captureTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _captureTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _captureSecs++;
             if (_captureSecs >= CaptureTime)
@@ -286,13 +330,13 @@ namespace CameraControl.windows
             StartCapture();
         }
 
-        void StartCapture()
+        private void StartCapture()
         {
             Thread thread = new Thread(StartCaptureThread);
             thread.Start();
         }
 
-        void StartCaptureThread()
+        private void StartCaptureThread()
         {
             bool retry;
             do
@@ -309,7 +353,7 @@ namespace CameraControl.windows
                         if (DefaultScript.SelectedConfig != null)
                         {
                             NikonBase nikonBase = CameraDevice as NikonBase;
-                            if(nikonBase!=null)
+                            if (nikonBase != null)
                                 nikonBase.StopEventTimer();
                             ServiceProvider.ExternalDeviceManager.OpenShutter(DefaultScript.SelectedConfig);
                         }
@@ -355,23 +399,11 @@ namespace CameraControl.windows
             _captureTimer.Start();
         }
 
-        public RelayCommand<IScriptCommand> AddCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<IScriptCommand> AddCommand { get; private set; }
 
-        public RelayCommand<IScriptCommand> EditCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<IScriptCommand> EditCommand { get; private set; }
 
-        public RelayCommand<IScriptCommand> DelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<IScriptCommand> DelCommand { get; private set; }
 
         #region Implementation of INotifyPropertyChanged
 
@@ -450,7 +482,6 @@ namespace CameraControl.windows
                         StaticHelper.Instance.SystemMessage = deviceException.Message;
                         Log.Error("Bulb done", deviceException);
                     }
-
                 }
                 catch (Exception exception)
                 {
@@ -462,7 +493,6 @@ namespace CameraControl.windows
 
         private void Window_Closed(object sender, EventArgs e)
         {
-
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
@@ -492,7 +522,7 @@ namespace CameraControl.windows
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = "Script file(*.dccscript)|*.dccscript|All files|*.*";
-            if(dlg.ShowDialog()==true)
+            if (dlg.ShowDialog() == true)
             {
                 try
                 {
@@ -559,17 +589,16 @@ namespace CameraControl.windows
             }
         }
 
-        void CameraDevice_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void CameraDevice_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             if (AutomaticGuiding && PhdType > 0)
             {
-
                 var thread = new Thread(() => PhdGuiding(PhdType));
                 thread.Start();
             }
         }
 
-        void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
+        private void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
         {
             AddOutput(e.Message);
         }
@@ -635,14 +664,14 @@ namespace CameraControl.windows
                 Log.Error("PHDGuiding error", exception);
             }
         }
-        
+
         public static int SendReceiveTest2(TcpClient server, byte opersEnum)
         {
             byte[] bytes = new byte[256];
             try
             {
                 // Blocks until send returns. 
-                int byteCount = server.Client.Send(new[] { opersEnum }, SocketFlags.None);
+                int byteCount = server.Client.Send(new[] {opersEnum}, SocketFlags.None);
                 //Console.WriteLine("Sent {0} bytes.", byteCount);
 
                 // Get reply from the server.
@@ -662,10 +691,10 @@ namespace CameraControl.windows
         public void AddOutput(string msg)
         {
             Dispatcher.Invoke(new Action(delegate
-            {
-                lst_output.Items.Add(msg);
-                lst_output.ScrollIntoView(lst_output.Items[lst_output.Items.Count - 1]);
-            }));
+                                             {
+                                                 lst_output.Items.Add(msg);
+                                                 lst_output.ScrollIntoView(lst_output.Items[lst_output.Items.Count - 1]);
+                                             }));
         }
 
 

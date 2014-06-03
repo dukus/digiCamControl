@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -17,6 +47,8 @@ using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
 
+#endregion
+
 namespace CameraControl.Layouts
 {
     public class LayoutBase : UserControl
@@ -27,16 +59,20 @@ namespace CameraControl.Layouts
 
         public LayoutBase()
         {
-            CopyNameClipboardCommand = new RelayCommand<object>(delegate { Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName); });
+            CopyNameClipboardCommand =
+                new RelayCommand<object>(
+                    delegate { Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName); });
             OpenExplorerCommand = new RelayCommand<object>(OpenInExplorer);
             OpenViewerCommand = new RelayCommand<object>(OpenViewer);
             DeleteItemCommand = new RelayCommand<object>(DeleteItem);
-            ImageDoubleClickCommand = new RelayCommand<object>(delegate { ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show); });
+            ImageDoubleClickCommand =
+                new RelayCommand<object>(
+                    delegate { ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show); });
             _worker.DoWork += worker_DoWork;
             _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
         }
 
-        void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (_selectedItem != ServiceProvider.Settings.SelectedBitmap.FileItem)
             {
@@ -46,40 +82,20 @@ namespace CameraControl.Layouts
         }
 
 
+        public RelayCommand<object> CopyNameClipboardCommand { get; private set; }
 
-        public RelayCommand<object> CopyNameClipboardCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<object> OpenExplorerCommand { get; private set; }
 
-        public RelayCommand<object> OpenExplorerCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<object> OpenViewerCommand { get; private set; }
 
-        public RelayCommand<object> OpenViewerCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<object> DeleteItemCommand { get; private set; }
 
-        public RelayCommand<object> DeleteItemCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<object> ImageDoubleClickCommand { get; private set; }
 
-        public RelayCommand<object> ImageDoubleClickCommand
+        private void OpenInExplorer(object o)
         {
-            get;
-            private set;
-        }
-
-        void OpenInExplorer(object o)
-        {
-            if (ServiceProvider.Settings.SelectedBitmap == null || ServiceProvider.Settings.SelectedBitmap.FileItem == null)
+            if (ServiceProvider.Settings.SelectedBitmap == null ||
+                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
             try
             {
@@ -97,13 +113,16 @@ namespace CameraControl.Layouts
             }
         }
 
-        void OpenViewer(object o)
+        private void OpenViewer(object o)
         {
-            if (ServiceProvider.Settings.SelectedBitmap == null || ServiceProvider.Settings.SelectedBitmap.FileItem == null)
+            if (ServiceProvider.Settings.SelectedBitmap == null ||
+                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
-            if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) && File.Exists(ServiceProvider.Settings.ExternalViewer))
+            if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) &&
+                File.Exists(ServiceProvider.Settings.ExternalViewer))
             {
-                Process.Start(ServiceProvider.Settings.ExternalViewer, ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
+                Process.Start(ServiceProvider.Settings.ExternalViewer,
+                              ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
             }
             else
             {
@@ -111,14 +130,17 @@ namespace CameraControl.Layouts
             }
         }
 
-        void DeleteItem(object o)
+        private void DeleteItem(object o)
         {
             List<FileItem> filestodelete = new List<FileItem>();
             try
             {
-                filestodelete.AddRange(ServiceProvider.Settings.DefaultSession.Files.Where(fileItem => fileItem.IsChecked || !File.Exists(fileItem.FileName)));
+                filestodelete.AddRange(
+                    ServiceProvider.Settings.DefaultSession.Files.Where(
+                        fileItem => fileItem.IsChecked || !File.Exists(fileItem.FileName)));
 
-                if (ServiceProvider.Settings.SelectedBitmap != null && ServiceProvider.Settings.SelectedBitmap.FileItem != null &&
+                if (ServiceProvider.Settings.SelectedBitmap != null &&
+                    ServiceProvider.Settings.SelectedBitmap.FileItem != null &&
                     filestodelete.Count == 0)
                     filestodelete.Add(ServiceProvider.Settings.SelectedBitmap.FileItem);
 
@@ -126,8 +148,9 @@ namespace CameraControl.Layouts
                     return;
                 int selectedindex = ImageLIst.Items.IndexOf(filestodelete[0]);
                 if (
-                  MessageBox.Show("Do you really want to delete selected file(s) ?", "Delete file", MessageBoxButton.YesNo) ==
-                  MessageBoxResult.Yes)
+                    MessageBox.Show("Do you really want to delete selected file(s) ?", "Delete file",
+                                    MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
                 {
                     foreach (FileItem fileItem in filestodelete)
                     {
@@ -142,14 +165,13 @@ namespace CameraControl.Layouts
                                                   RecycleOption.SendToRecycleBin);
                         fileItem.RemoveThumbs();
                         ServiceProvider.Settings.DefaultSession.Files.Remove(fileItem);
-
                     }
                     if (selectedindex < ImageLIst.Items.Count)
                     {
                         ImageLIst.SelectedIndex = selectedindex + 1;
                         ImageLIst.SelectedIndex = selectedindex - 1;
                         FileItem item = ImageLIst.SelectedItem as FileItem;
-                        
+
                         if (item != null)
                             ImageLIst.ScrollIntoView(item);
                     }
@@ -191,14 +213,16 @@ namespace CameraControl.Layouts
             if (ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
             bool fullres = e.Argument is bool && (bool) e.Argument;
-            ServiceProvider.Settings.ImageLoading = fullres || !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
+            ServiceProvider.Settings.ImageLoading = fullres ||
+                                                    !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
             BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
             BitmapLoader.Instance.Highlight(ServiceProvider.Settings.SelectedBitmap,
                                             ServiceProvider.Settings.HighlightUnderExp,
                                             ServiceProvider.Settings.HighlightOverExp);
-            BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap, ServiceProvider.Settings.SelectedBitmap.FileItem);
+            BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
+                                          ServiceProvider.Settings.SelectedBitmap.FileItem);
             ServiceProvider.Settings.SelectedBitmap.FullResLoaded = fullres;
             ServiceProvider.Settings.ImageLoading = false;
             OnImageLoaded();
@@ -207,7 +231,6 @@ namespace CameraControl.Layouts
 
         public virtual void OnImageLoaded()
         {
-            
         }
 
         public void LoadFullRes()
@@ -225,11 +248,11 @@ namespace CameraControl.Layouts
             {
                 Thread.Sleep(1000);
                 Dispatcher.Invoke(new Action(delegate
-                                               {
-                                                   ImageLIst.SelectedIndex = 0;
-                                                   if (ImageLIst.Items.Count == 0)
-                                                       ServiceProvider.Settings.SelectedBitmap.DisplayImage = null;
-                                               }));
+                                                 {
+                                                     ImageLIst.SelectedIndex = 0;
+                                                     if (ImageLIst.Items.Count == 0)
+                                                         ServiceProvider.Settings.SelectedBitmap.DisplayImage = null;
+                                                 }));
             }
             if (e.PropertyName == "HighlightOverExp")
             {
@@ -247,78 +270,80 @@ namespace CameraControl.Layouts
             }
         }
 
-        void Trigger_Event(string cmd, object o)
+        private void Trigger_Event(string cmd, object o)
         {
             ImageLIst.Dispatcher.Invoke(new Action(delegate
-            {
-                switch (cmd)
-                {
-                    case WindowsCmdConsts.Next_Image:
-                        if (ImageLIst.SelectedIndex < ImageLIst.Items.Count - 1)
-                        {
-                            FileItem item = ImageLIst.SelectedItem as FileItem;
-                            if (item != null)
-                            {
-                                int ind = ImageLIst.Items.IndexOf(item);
-                                ImageLIst.SelectedIndex = ind + 1;
-                            }
-                            item = ImageLIst.SelectedItem as FileItem;
-                            if (item != null)
-                                ImageLIst.ScrollIntoView(item);
-                        }
-                        break;
-                    case WindowsCmdConsts.Prev_Image:
-                        if (ImageLIst.SelectedIndex > 0)
-                        {
-                            FileItem item = ImageLIst.SelectedItem as FileItem;
-                            if (item != null)
-                            {
-                                int ind = ImageLIst.Items.IndexOf(item);
-                                ImageLIst.SelectedIndex = ind - 1;
-                            }
-                            item = ImageLIst.SelectedItem as FileItem;
-                            if (item != null)
-                                ImageLIst.ScrollIntoView(item);
-
-                        }
-                        break;
-                    case WindowsCmdConsts.Like_Image:
-                        if (ImageLIst.SelectedItem != null)
-                        {
-                            FileItem item = ImageLIst.SelectedItem as FileItem;
-                            if (item != null)
-                            {
-                                item.IsLiked = !item.IsLiked;
-                            }
-                        }
-                        break;
-                    case WindowsCmdConsts.Unlike_Image:
-                        if (ImageLIst.SelectedItem != null)
-                        {
-                            FileItem item = ImageLIst.SelectedItem as FileItem;
-                            if (item != null)
-                            {
-                                item.IsUnLiked = !item.IsUnLiked;
-                            }
-                        }
-                        break;
-                    case WindowsCmdConsts.Del_Image:
-                        {
-                            DeleteItem(null);
-                        }
-                        break;
-                    case WindowsCmdConsts.Select_Image:
-                        FileItem fileItem = o as FileItem;
-                        if (fileItem != null)
-                        {
-                            ImageLIst.SelectedValue = fileItem;
-                            ImageLIst.ScrollIntoView(fileItem);
-                        }
-                        break;
-                }
-            }));
+                                                       {
+                                                           switch (cmd)
+                                                           {
+                                                               case WindowsCmdConsts.Next_Image:
+                                                                   if (ImageLIst.SelectedIndex <
+                                                                       ImageLIst.Items.Count - 1)
+                                                                   {
+                                                                       FileItem item =
+                                                                           ImageLIst.SelectedItem as FileItem;
+                                                                       if (item != null)
+                                                                       {
+                                                                           int ind = ImageLIst.Items.IndexOf(item);
+                                                                           ImageLIst.SelectedIndex = ind + 1;
+                                                                       }
+                                                                       item = ImageLIst.SelectedItem as FileItem;
+                                                                       if (item != null)
+                                                                           ImageLIst.ScrollIntoView(item);
+                                                                   }
+                                                                   break;
+                                                               case WindowsCmdConsts.Prev_Image:
+                                                                   if (ImageLIst.SelectedIndex > 0)
+                                                                   {
+                                                                       FileItem item =
+                                                                           ImageLIst.SelectedItem as FileItem;
+                                                                       if (item != null)
+                                                                       {
+                                                                           int ind = ImageLIst.Items.IndexOf(item);
+                                                                           ImageLIst.SelectedIndex = ind - 1;
+                                                                       }
+                                                                       item = ImageLIst.SelectedItem as FileItem;
+                                                                       if (item != null)
+                                                                           ImageLIst.ScrollIntoView(item);
+                                                                   }
+                                                                   break;
+                                                               case WindowsCmdConsts.Like_Image:
+                                                                   if (ImageLIst.SelectedItem != null)
+                                                                   {
+                                                                       FileItem item =
+                                                                           ImageLIst.SelectedItem as FileItem;
+                                                                       if (item != null)
+                                                                       {
+                                                                           item.IsLiked = !item.IsLiked;
+                                                                       }
+                                                                   }
+                                                                   break;
+                                                               case WindowsCmdConsts.Unlike_Image:
+                                                                   if (ImageLIst.SelectedItem != null)
+                                                                   {
+                                                                       FileItem item =
+                                                                           ImageLIst.SelectedItem as FileItem;
+                                                                       if (item != null)
+                                                                       {
+                                                                           item.IsUnLiked = !item.IsUnLiked;
+                                                                       }
+                                                                   }
+                                                                   break;
+                                                               case WindowsCmdConsts.Del_Image:
+                                                                   {
+                                                                       DeleteItem(null);
+                                                                   }
+                                                                   break;
+                                                               case WindowsCmdConsts.Select_Image:
+                                                                   FileItem fileItem = o as FileItem;
+                                                                   if (fileItem != null)
+                                                                   {
+                                                                       ImageLIst.SelectedValue = fileItem;
+                                                                       ImageLIst.ScrollIntoView(fileItem);
+                                                                   }
+                                                                   break;
+                                                           }
+                                                       }));
         }
-
-   }
-
+    }
 }

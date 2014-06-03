@@ -1,8 +1,40 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System.IO;
 using System.Threading;
 using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+
+#endregion
 
 namespace CameraControl.Core.Classes
 {
@@ -31,12 +63,12 @@ namespace CameraControl.Core.Classes
             Add(GetFrom(camera.WhiteBalance, "WhiteBalance"));
             Add(GetFrom(camera.FocusMode, "FocusMode"));
             Add(GetFrom(camera.LiveViewImageZoomRatio, "LiveViewImageZoomRatio"));
-            Add(new ValuePair { Name = "CaptureInSdRam", Value = camera.CaptureInSdRam.ToString() });
-            Add(new ValuePair { Name = "HostMode", Value = camera.HostMode.ToString() });
+            Add(new ValuePair {Name = "CaptureInSdRam", Value = camera.CaptureInSdRam.ToString()});
+            Add(new ValuePair {Name = "HostMode", Value = camera.HostMode.ToString()});
             var property = ServiceProvider.Settings.CameraProperties.Get(camera);
             CameraProperty.NoDownload = property.NoDownload;
             CameraProperty.CaptureInSdRam = property.CaptureInSdRam;
-            if(camera.AdvancedProperties!=null)
+            if (camera.AdvancedProperties != null)
             {
                 foreach (PropertyValue<long> propertyValue in camera.AdvancedProperties)
                 {
@@ -123,7 +155,7 @@ namespace CameraControl.Core.Classes
             {
                 // set the value only if the value is different from current value 
                 if (valuePair.Name == name && value.IsEnabled && value.Value != valuePair.Value)
-                { 
+                {
                     value.SetValue(valuePair.Value);
                     return;
                 }
@@ -135,21 +167,21 @@ namespace CameraControl.Core.Classes
         {
             if (value == null)
                 return null;
-            return new ValuePair { Name = name, IsDisabled = value.IsEnabled, Value = value.Value };
+            return new ValuePair {Name = name, IsDisabled = value.IsEnabled, Value = value.Value};
         }
 
         private ValuePair GetFrom(PropertyValue<int> value, string name)
         {
             if (value == null)
                 return null;
-            return new ValuePair { Name = name, IsDisabled = value.IsEnabled, Value = value.Value };
+            return new ValuePair {Name = name, IsDisabled = value.IsEnabled, Value = value.Value};
         }
 
         private ValuePair GetFrom(PropertyValue<long> value, string name)
         {
             if (value == null)
                 return null;
-            return new ValuePair { Name = name, IsDisabled = value.IsEnabled, Value = value.Value };
+            return new ValuePair {Name = name, IsDisabled = value.IsEnabled, Value = value.Value};
         }
 
         public void Add(ValuePair pairParam)
@@ -188,25 +220,24 @@ namespace CameraControl.Core.Classes
 
         public void Save(string filename)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(CameraPreset));
+            XmlSerializer serializer = new XmlSerializer(typeof (CameraPreset));
             // Create a FileStream to write with.
 
             Stream writer = new FileStream(filename, FileMode.Create);
             // Serialize the object, and close the TextWriter
             serializer.Serialize(writer, this);
             writer.Close();
-
         }
 
-        static public CameraPreset Load(string filename)
+        public static CameraPreset Load(string filename)
         {
             CameraPreset cameraPreset = new CameraPreset();
             if (File.Exists(filename))
             {
                 XmlSerializer mySerializer =
-                  new XmlSerializer(typeof(CameraPreset));
+                    new XmlSerializer(typeof (CameraPreset));
                 FileStream myFileStream = new FileStream(filename, FileMode.Open);
-                cameraPreset = (CameraPreset)mySerializer.Deserialize(myFileStream);
+                cameraPreset = (CameraPreset) mySerializer.Deserialize(myFileStream);
                 myFileStream.Close();
             }
             return cameraPreset;

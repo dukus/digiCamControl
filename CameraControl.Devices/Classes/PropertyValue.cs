@@ -1,12 +1,45 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
+
+#endregion
 
 namespace CameraControl.Devices.Classes
 {
     public class PropertyValue<T> : BaseFieldClass
     {
         public delegate void ValueChangedEventHandler(object sender, string key, T val);
+
         public event ValueChangedEventHandler ValueChanged;
 
         private Dictionary<string, T> _valuesDictionary;
@@ -15,6 +48,7 @@ namespace CameraControl.Devices.Classes
         private bool _notifyValuChange = true;
 
         private ushort _code;
+
         public UInt16 Code
         {
             get { return _code; }
@@ -29,6 +63,7 @@ namespace CameraControl.Devices.Classes
         public bool DisableIfWrongValue { get; set; }
 
         private string _name;
+
         public string Name
         {
             get { return _name; }
@@ -53,7 +88,6 @@ namespace CameraControl.Devices.Classes
                 {
                     foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
                     {
-                        
                         if (keyValuePair.Key == _value)
                         {
                             OnValueChanged(this, _value, keyValuePair.Value);
@@ -66,6 +100,7 @@ namespace CameraControl.Devices.Classes
         }
 
         private T _numericValue;
+
         public T NumericValue
         {
             get { return _numericValue; }
@@ -105,7 +140,7 @@ namespace CameraControl.Devices.Classes
         public void OnValueChanged(object sender, string key, T val)
         {
             Thread thread = new Thread(OnValueChangedThread);
-            thread.Name = "SetProperty thread "+Name;
+            thread.Name = "SetProperty thread " + Name;
             thread.Start(new object[] {sender, key, val});
             thread.Join(200);
         }
@@ -122,7 +157,7 @@ namespace CameraControl.Devices.Classes
                 {
                     object sender = objparams[0];
                     string key = objparams[1] as string;
-                    T val = (T)objparams[2];
+                    T val = (T) objparams[2];
                     ValueChanged(sender, key, val);
                 }
                 catch (DeviceException exception)
@@ -139,6 +174,7 @@ namespace CameraControl.Devices.Classes
         }
 
         private bool _isEnabled;
+
         public bool IsEnabled
         {
             get
@@ -206,7 +242,7 @@ namespace CameraControl.Devices.Classes
         }
 
 
-        public void SetValue(string o, bool notifyValuChange=true)
+        public void SetValue(string o, bool notifyValuChange = true)
         {
             foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
             {
@@ -231,49 +267,49 @@ namespace CameraControl.Devices.Classes
         {
             if (ba == null || ba.Length < 1)
                 return;
-            if (typeof(T) == typeof(int))
+            if (typeof (T) == typeof (int))
             {
-                int val = ba.Length==1 ? ba[0] : BitConverter.ToInt16(ba, 0);
-                SetValue((T)((object)val));
+                int val = ba.Length == 1 ? ba[0] : BitConverter.ToInt16(ba, 0);
+                SetValue((T) ((object) val));
             }
-            if (typeof(T) == typeof(uint))
+            if (typeof (T) == typeof (uint))
             {
                 uint val = BitConverter.ToUInt16(ba, 0);
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
             }
-            if (typeof(T) == typeof(long) && ba.Length == 1)
+            if (typeof (T) == typeof (long) && ba.Length == 1)
             {
                 long val = ba[0];
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
                 return;
             }
-            if (typeof(T) == typeof(long) && ba.Length == 2 && SubType == typeof(UInt16))
+            if (typeof (T) == typeof (long) && ba.Length == 2 && SubType == typeof (UInt16))
             {
                 long val = BitConverter.ToUInt16(ba, 0);
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
                 return;
             }
-            if (typeof(T) == typeof(long) && ba.Length == 2)
+            if (typeof (T) == typeof (long) && ba.Length == 2)
             {
                 long val = BitConverter.ToInt16(ba, 0);
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
                 return;
             }
-            if (typeof(T) == typeof(long) && ba.Length == 4)
+            if (typeof (T) == typeof (long) && ba.Length == 4)
             {
                 long val = BitConverter.ToInt32(ba, 0);
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
                 return;
             }
-            if (typeof(T) == typeof(long))
+            if (typeof (T) == typeof (long))
             {
                 long val = BitConverter.ToInt32(ba, 0);
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
             }
-            if (typeof(T) == typeof(uint))
+            if (typeof (T) == typeof (uint))
             {
                 uint val = BitConverter.ToUInt16(ba, 0);
-                SetValue((T)((object)val));
+                SetValue((T) ((object) val));
             }
         }
 
@@ -290,6 +326,5 @@ namespace CameraControl.Devices.Classes
         {
             _valuesDictionary.Clear();
         }
-
     }
 }

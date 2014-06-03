@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,13 +48,14 @@ using CameraControl.Devices.Classes;
 using FileInfo = System.IO.FileInfo;
 using MessageBox = System.Windows.Forms.MessageBox;
 
+#endregion
+
 //using CameraControl.Classes;
 //using CameraControl.Translation;
 //using HelpProvider = CameraControl.Classes.HelpProvider;
 
 namespace CameraControl.windows
 {
-
     /// <summary>
     /// Interaction logic for DownloadPhotosWnd.xaml
     /// </summary>
@@ -34,12 +65,16 @@ namespace CameraControl.windows
         private bool format;
         private ProgressWindow dlg = new ProgressWindow();
         private Dictionary<ICameraDevice, int> _timeDif = new Dictionary<ICameraDevice, int>();
-        private Dictionary<ICameraDevice, AsyncObservableCollection<FileItem>> _itembycamera = new Dictionary<ICameraDevice, AsyncObservableCollection<FileItem>>();
+
+        private Dictionary<ICameraDevice, AsyncObservableCollection<FileItem>> _itembycamera =
+            new Dictionary<ICameraDevice, AsyncObservableCollection<FileItem>>();
+
         private List<DateTime> _timeTable = new List<DateTime>();
 
         public ObservableCollection<DownloadableItems> Groups { get; set; }
 
         private ICameraDevice _cameraDevice;
+
         public ICameraDevice CameraDevice
         {
             get { return _cameraDevice; }
@@ -51,6 +86,7 @@ namespace CameraControl.windows
         }
 
         private AsyncObservableCollection<FileItem> _items;
+
         public AsyncObservableCollection<FileItem> Items
         {
             get { return _items; }
@@ -95,35 +131,36 @@ namespace CameraControl.windows
             {
                 case WindowsCmdConsts.DownloadPhotosWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       if (dlg.IsVisible)
-                                                           return;
-                                                       CameraDevice = param as ICameraDevice;
-                                                       Title = TranslationStrings.DownloadWindowTitle + "-" +
-                                                               ServiceProvider.Settings.CameraProperties.Get(CameraDevice).
-                                                                 DeviceName;
-                                                       if (param == null)
-                                                           return;
-                                                       Show();
-                                                       Activate();
-                                                       Topmost = true;
-                                                       Topmost = false;
-                                                       Focus();
-                                                       dlg.Show();
-                                                       Items.Clear();
-                                                       Thread thread = new Thread(PopulateImageList);
-                                                       thread.Start();
-                                                   }));
+                                                     {
+                                                         if (dlg.IsVisible)
+                                                             return;
+                                                         CameraDevice = param as ICameraDevice;
+                                                         Title = TranslationStrings.DownloadWindowTitle + "-" +
+                                                                 ServiceProvider.Settings.CameraProperties.Get(
+                                                                     CameraDevice).
+                                                                     DeviceName;
+                                                         if (param == null)
+                                                             return;
+                                                         Show();
+                                                         Activate();
+                                                         Topmost = true;
+                                                         Topmost = false;
+                                                         Focus();
+                                                         dlg.Show();
+                                                         Items.Clear();
+                                                         Thread thread = new Thread(PopulateImageList);
+                                                         thread.Start();
+                                                     }));
                     break;
                 case WindowsCmdConsts.DownloadPhotosWnd_Hide:
                     Hide();
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        Hide();
-                        Close();
-                    }));
+                                                     {
+                                                         Hide();
+                                                         Close();
+                                                     }));
                     break;
             }
         }
@@ -182,7 +219,7 @@ namespace CameraControl.windows
                 Items.Add(fileItem);
             }
             CollectionView myView;
-            myView = (CollectionView)CollectionViewSource.GetDefaultView(Items);
+            myView = (CollectionView) CollectionViewSource.GetDefaultView(Items);
             if (myView.CanGroup == true)
             {
                 PropertyGroupDescription groupDescription
@@ -191,11 +228,11 @@ namespace CameraControl.windows
             }
             Dispatcher.Invoke(new Action(delegate
                                              {
-                                                 if (ServiceProvider.DeviceManager.ConnectedDevices.Count>1)
+                                                 if (ServiceProvider.DeviceManager.ConnectedDevices.Count > 1)
                                                  {
-                                                     lst_items.Visibility=Visibility.Visible;
-                                                     lst_items_simple.Visibility=Visibility.Collapsed;
-                                                     lst_items.ItemsSource = myView;                                                     
+                                                     lst_items.Visibility = Visibility.Visible;
+                                                     lst_items_simple.Visibility = Visibility.Collapsed;
+                                                     lst_items.ItemsSource = myView;
                                                  }
                                                  else
                                                  {
@@ -209,7 +246,9 @@ namespace CameraControl.windows
 
         private void btn_download_Click(object sender, RoutedEventArgs e)
         {
-            if ((chk_delete.IsChecked == true || chk_format.IsChecked == true) && MessageBox.Show(TranslationStrings.LabelAskForDelete, "", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+            if ((chk_delete.IsChecked == true || chk_format.IsChecked == true) &&
+                MessageBox.Show(TranslationStrings.LabelAskForDelete, "", MessageBoxButtons.YesNo) !=
+                System.Windows.Forms.DialogResult.Yes)
                 return;
             dlg.Show();
             delete = chk_delete.IsChecked == true;
@@ -219,12 +258,13 @@ namespace CameraControl.windows
             thread.Start();
         }
 
-        void TransferFiles()
+        private void TransferFiles()
         {
             DateTime starttime = DateTime.Now;
             long totalbytes = 0;
             bool somethingwrong = false;
-            AsyncObservableCollection<FileItem> itemstoExport = new AsyncObservableCollection<FileItem>(Items.Where(x => x.IsChecked));
+            AsyncObservableCollection<FileItem> itemstoExport =
+                new AsyncObservableCollection<FileItem>(Items.Where(x => x.IsChecked));
             dlg.MaxValue = itemstoExport.Count;
             dlg.Progress = 0;
             int i = 0;
@@ -234,23 +274,25 @@ namespace CameraControl.windows
                     continue;
                 dlg.Label = fileItem.FileName;
                 dlg.ImageSource = fileItem.Thumbnail;
-                PhotoSession session = (PhotoSession)fileItem.Device.AttachedPhotoSession ?? ServiceProvider.Settings.DefaultSession;
+                PhotoSession session = (PhotoSession) fileItem.Device.AttachedPhotoSession ??
+                                       ServiceProvider.Settings.DefaultSession;
                 string fileName = "";
 
                 if (!session.UseOriginalFilename)
                 {
                     fileName =
-                      session.GetNextFileName(Path.GetExtension(fileItem.FileName),
-                                              fileItem.Device);
+                        session.GetNextFileName(Path.GetExtension(fileItem.FileName),
+                                                fileItem.Device);
                 }
                 else
                 {
                     fileName = Path.Combine(session.Folder, fileItem.FileName);
                     if (File.Exists(fileName))
                         fileName =
-                          StaticHelper.GetUniqueFilename(
-                            Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) + "_", 0,
-                            Path.GetExtension(fileName));
+                            StaticHelper.GetUniqueFilename(
+                                Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) +
+                                "_", 0,
+                                Path.GetExtension(fileName));
                 }
 
                 string dir = Path.GetDirectoryName(fileName);
@@ -258,7 +300,7 @@ namespace CameraControl.windows
                 {
                     Directory.CreateDirectory(dir);
                 }
-                 try
+                try
                 {
                     fileItem.Device.TransferFile(fileItem.DeviceObject.Handle, fileName);
                 }
@@ -308,8 +350,9 @@ namespace CameraControl.windows
             }
             dlg.Hide();
             double transfersec = (DateTime.Now - starttime).TotalSeconds;
-            Log.Debug(string.Format("[BENCHMARK]Total byte transferred ;{0} Total seconds :{1} Speed : {2} Mbyte/sec ", totalbytes,
-                                          transfersec, (totalbytes / transfersec / 1024 / 1024).ToString("0000.00")));
+            Log.Debug(string.Format("[BENCHMARK]Total byte transferred ;{0} Total seconds :{1} Speed : {2} Mbyte/sec ",
+                                    totalbytes,
+                                    transfersec, (totalbytes/transfersec/1024/1024).ToString("0000.00")));
             ServiceProvider.Settings.Save();
         }
 
@@ -335,7 +378,6 @@ namespace CameraControl.windows
             {
                 fileItem.IsChecked = !fileItem.IsChecked;
             }
-
         }
 
         private void btn_select_Click(object sender, RoutedEventArgs e)
@@ -382,6 +424,4 @@ namespace CameraControl.windows
             Items = new AsyncObservableCollection<FileItem>();
         }
     }
-
 }
-

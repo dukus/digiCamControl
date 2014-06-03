@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +40,8 @@ using CameraControl.Devices.Others;
 using Canon.Eos.Framework;
 using PortableDeviceLib;
 using WIA;
+
+#endregion
 
 namespace CameraControl.Devices
 {
@@ -44,6 +76,7 @@ namespace CameraControl.Devices
         public Dictionary<string, Type> DeviceClass { get; set; }
 
         private ICameraDevice _selectedCameraDevice;
+
         /// <summary>
         /// Gets or sets the default selected camera device. When new camera connected this property set automatically to new device
         /// </summary>
@@ -67,6 +100,7 @@ namespace CameraControl.Devices
         }
 
         private AsyncObservableCollection<ICameraDevice> _connectedDevices;
+
         public AsyncObservableCollection<ICameraDevice> ConnectedDevices
         {
             get { return _connectedDevices; }
@@ -80,52 +114,50 @@ namespace CameraControl.Devices
         private void PopulateDeviceClass()
         {
             DeviceClass = new Dictionary<string, Type>
-                      {
-                        {"D200", typeof (NikonD40)},
-                        {"D3S", typeof (NikonD90)},
-                        {"D3X", typeof (NikonD3X)},
-                        {"D300", typeof (NikonD300)},
-                        {"D300s", typeof (NikonD300)},
-                        {"D300S", typeof (NikonD300)},
-                        {"D3200", typeof (NikonD3200)},
-                        {"D3300", typeof (NikonD3200)},
-                        {"D4", typeof (NikonD4)},
-                        {"D4s", typeof (NikonD4)},
-                        {"D4S", typeof (NikonD4)},
-                        {"D40", typeof (NikonD40)},
-                        {"D50", typeof (NikonD40)},
-                        {"D5300", typeof (NikonD5200)},
-                        {"D5200", typeof (NikonD5200)},
-                        {"D5100", typeof (NikonD5100)},
-                        {"D5000", typeof (NikonD90)},
-                        {"D60", typeof (NikonD60)},
-                        {"D610", typeof (NikonD600)},
-                        {"D600", typeof (NikonD600)},
-                        {"D70", typeof (NikonD40)},
-                        {"D70s", typeof (NikonD40)},
-                        {"D700", typeof (NikonD700)},
-                        {"D7000", typeof (NikonD7000)},
-                        {"D7100", typeof (NikonD7100)},
-                        {"D80", typeof (NikonD80)},
-                        {"D800", typeof (NikonD800)},
-                        {"D800E", typeof (NikonD800)},
-                        {"D800e", typeof (NikonD800)},
-                        {"D90", typeof (NikonD90)},
-                        {"V1", typeof (NikonD5100)},
-                        {"V2", typeof (NikonD5100)},
-                        {"Df", typeof (NikonD600)},
-                        //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},
-                        {"MTP Sim", typeof (BaseMTPCamera)},
-                        
-                        //{"D.*", typeof (NikonBase)},
-                        // for mtp simulator
-                       //{"Test Camera ", typeof (NikonBase)},
-                      };
+                              {
+                                  {"D200", typeof (NikonD40)},
+                                  {"D3S", typeof (NikonD90)},
+                                  {"D3X", typeof (NikonD3X)},
+                                  {"D300", typeof (NikonD300)},
+                                  {"D300s", typeof (NikonD300)},
+                                  {"D300S", typeof (NikonD300)},
+                                  {"D3200", typeof (NikonD3200)},
+                                  {"D3300", typeof (NikonD3200)},
+                                  {"D4", typeof (NikonD4)},
+                                  {"D4s", typeof (NikonD4)},
+                                  {"D4S", typeof (NikonD4)},
+                                  {"D40", typeof (NikonD40)},
+                                  {"D50", typeof (NikonD40)},
+                                  {"D5300", typeof (NikonD5200)},
+                                  {"D5200", typeof (NikonD5200)},
+                                  {"D5100", typeof (NikonD5100)},
+                                  {"D5000", typeof (NikonD90)},
+                                  {"D60", typeof (NikonD60)},
+                                  {"D610", typeof (NikonD600)},
+                                  {"D600", typeof (NikonD600)},
+                                  {"D70", typeof (NikonD40)},
+                                  {"D70s", typeof (NikonD40)},
+                                  {"D700", typeof (NikonD700)},
+                                  {"D7000", typeof (NikonD7000)},
+                                  {"D7100", typeof (NikonD7100)},
+                                  {"D80", typeof (NikonD80)},
+                                  {"D800", typeof (NikonD800)},
+                                  {"D800E", typeof (NikonD800)},
+                                  {"D800e", typeof (NikonD800)},
+                                  {"D90", typeof (NikonD90)},
+                                  {"V1", typeof (NikonD5100)},
+                                  {"V2", typeof (NikonD5100)},
+                                  {"Df", typeof (NikonD600)},
+                                  //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},
+                                  {"MTP Sim", typeof (BaseMTPCamera)},
+                                  //{"D.*", typeof (NikonBase)},
+                                  // for mtp simulator
+                                  //{"Test Camera ", typeof (NikonBase)},
+                              };
             //if(UseExperimentalDrivers)
             //{
             //  DeviceClass.Add("Canon EOS.*", typeof(CanonSDKBase));
             //}
-
         }
 
         public CameraDeviceManager()
@@ -186,7 +218,7 @@ namespace CameraControl.Devices
                 foreach (ICameraDevice device in ConnectedDevices)
                 {
                     CanonSDKBase camera = device as CanonSDKBase;
-                    if(camera!=null )
+                    if (camera != null)
                     {
                         if (camera.Camera == eosCamera)
                         {
@@ -217,7 +249,7 @@ namespace CameraControl.Devices
             if (_deviceEnumerator.GetByWiaId(devInfo.DeviceID) != null)
                 return _deviceEnumerator.GetByWiaId(devInfo.DeviceID).CameraDevice;
             _deviceEnumerator.RemoveDisconnected();
-            DeviceDescriptor descriptor = new DeviceDescriptor { WiaDeviceInfo = devInfo, WiaId = devInfo.DeviceID };
+            DeviceDescriptor descriptor = new DeviceDescriptor {WiaDeviceInfo = devInfo, WiaId = devInfo.DeviceID};
 
             ICameraDevice cameraDevice = new WiaCameraDevice();
             bool isConnected = cameraDevice.Init(descriptor);
@@ -235,7 +267,7 @@ namespace CameraControl.Devices
             return SelectedCameraDevice;
         }
 
-        void cameraDevice_CameraDisconnected(object sender, DisconnectCameraEventArgs e)
+        private void cameraDevice_CameraDisconnected(object sender, DisconnectCameraEventArgs e)
         {
             if (e.StillImageDevice != null)
             {
@@ -245,7 +277,7 @@ namespace CameraControl.Devices
             {
                 DisconnectCamera(e.EosCamera);
             }
-            OnCameraDisconnected((ICameraDevice)sender);
+            OnCameraDisconnected((ICameraDevice) sender);
         }
 
         /// <summary>
@@ -258,7 +290,7 @@ namespace CameraControl.Devices
                 CameraDisconnected(cameraDevice);
         }
 
-        void cameraDevice_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void cameraDevice_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             if (PhotoCaptured != null)
                 PhotoCaptured(sender, eventArgs);
@@ -266,7 +298,6 @@ namespace CameraControl.Devices
 
         private void ConnectDevices()
         {
-
             if (_connectionInProgress)
                 return;
             _connectionInProgress = true;
@@ -284,17 +315,19 @@ namespace CameraControl.Devices
             {
                 Log.Debug("Connection device " + portableDevice.DeviceId);
                 //TODO: avoid to load some mass storage in my computer need to find a general solution
-                if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") && !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
+                if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
+                    !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
                     continue;
                 // ignore some Canon cameras
                 if (!SupportedCanonCamera(portableDevice.DeviceId))
                     continue;
                 portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-                if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null && GetNativeDriver(portableDevice.Model) != null)
+                if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
+                    GetNativeDriver(portableDevice.Model) != null)
                 {
                     ICameraDevice cameraDevice;
-                    DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = portableDevice.DeviceId };
-                    cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
+                    DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
+                    cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
                     cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
                     NewCameraConnected(cameraDevice);
                     cameraDevice.Init(descriptor);
@@ -394,7 +427,9 @@ namespace CameraControl.Devices
                 device.IsConnected = false;
                 if (SelectedCameraDevice == descriptor.CameraDevice)
                 {
-                    SelectedCameraDevice = ConnectedDevices.Count > 0 ? ConnectedDevices[0] : new NotConnectedCameraDevice();
+                    SelectedCameraDevice = ConnectedDevices.Count > 0
+                                               ? ConnectedDevices[0]
+                                               : new NotConnectedCameraDevice();
                 }
                 descriptor.CameraDevice.Close();
                 _deviceEnumerator.Remove(descriptor);
@@ -416,7 +451,9 @@ namespace CameraControl.Devices
                 Log.Debug("Name :" + descriptor.CameraDevice.DeviceName);
                 if (SelectedCameraDevice == descriptor.CameraDevice)
                 {
-                    SelectedCameraDevice = ConnectedDevices.Count > 0 ? ConnectedDevices[0] : new NotConnectedCameraDevice();
+                    SelectedCameraDevice = ConnectedDevices.Count > 0
+                                               ? ConnectedDevices[0]
+                                               : new NotConnectedCameraDevice();
                 }
                 descriptor.CameraDevice.Close();
                 _deviceEnumerator.Remove(descriptor);
@@ -488,7 +525,7 @@ namespace CameraControl.Devices
                 Log.Debug("Native drivers are disabled !!!!");
             }
             // if canon camera is connected don't use wia driver
-            if (UseExperimentalDrivers && _framework!=null && _framework.GetCameraCollection().Count > 0)
+            if (UseExperimentalDrivers && _framework != null && _framework.GetCameraCollection().Count > 0)
                 return true;
 
             bool ret = false;
@@ -501,7 +538,8 @@ namespace CameraControl.Devices
                 // skip canon cameras 
                 //if (!string.IsNullOrEmpty(model) && model.Contains("Canon"))
                 //    continue;
-                if ((devInfo.Type == WiaDeviceType.CameraDeviceType || devInfo.Type == WiaDeviceType.VideoDeviceType) && (GetNativeDriver(model) == null || DisableNativeDrivers || noDriversDetected))
+                if ((devInfo.Type == WiaDeviceType.CameraDeviceType || devInfo.Type == WiaDeviceType.VideoDeviceType) &&
+                    (GetNativeDriver(model) == null || DisableNativeDrivers || noDriversDetected))
                 {
                     do
                     {
@@ -523,7 +561,7 @@ namespace CameraControl.Devices
                             else
                             {
                                 StaticHelper.Instance.SystemMessage =
-                                   "Unable to connect to the camera. Please reconnect your camera !";
+                                    "Unable to connect to the camera. Please reconnect your camera !";
                             }
                             Thread.Sleep(1000);
                         }
@@ -536,7 +574,8 @@ namespace CameraControl.Devices
 
         public void CloseAll()
         {
-            foreach (ICameraDevice connectedDevice in ConnectedDevices.Where(connectedDevice => connectedDevice.IsConnected))
+            foreach (
+                ICameraDevice connectedDevice in ConnectedDevices.Where(connectedDevice => connectedDevice.IsConnected))
             {
                 connectedDevice.Close();
             }
@@ -545,6 +584,7 @@ namespace CameraControl.Devices
         public event PhotoCapturedEventHandler PhotoCaptured;
 
         public delegate void CameraConnectedEventHandler(ICameraDevice cameraDevice);
+
         /// <summary>
         /// Occurs when a new camera is connected.
         /// </summary>
@@ -600,8 +640,5 @@ namespace CameraControl.Devices
             if (idx >= 0)
                 SelectedCameraDevice = ConnectedDevices[idx];
         }
-
-
     }
 }
-

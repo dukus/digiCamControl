@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,21 +41,21 @@ using CameraControl.Devices.Classes;
 using FreeImageAPI;
 using Newtonsoft.Json;
 
+#endregion
+
 namespace CameraControl.Core.Classes
 {
-
     public enum FileItemType
     {
         File,
         CameraObject,
         Missing
-
     }
 
     public class FileItem : BaseFieldClass
     {
-
         private string _fileName;
+
         public string FileName
         {
             get { return _fileName; }
@@ -62,6 +92,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isChecked;
+
         public bool IsChecked
         {
             get { return _isChecked; }
@@ -73,6 +104,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isLiked;
+
         public bool IsLiked
         {
             get { return _isLiked; }
@@ -86,6 +118,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isUnLiked;
+
         public bool IsUnLiked
         {
             get { return _isUnLiked; }
@@ -99,19 +132,16 @@ namespace CameraControl.Core.Classes
         }
 
         private BitmapImage _bitmapImage;
+
         [JsonIgnore]
         [XmlIgnore]
         public BitmapImage BitmapImage
         {
-            get
-            {
-                return _bitmapImage;
-            }
+            get { return _bitmapImage; }
             set
             {
                 if (value == null)
                 {
-
                 }
                 _bitmapImage = value;
                 NotifyPropertyChanged("BitmapImage");
@@ -119,6 +149,7 @@ namespace CameraControl.Core.Classes
         }
 
         private DeviceObject _deviceObject;
+
         [JsonIgnore]
         [XmlIgnore]
         public DeviceObject DeviceObject
@@ -132,6 +163,7 @@ namespace CameraControl.Core.Classes
         }
 
         private ICameraDevice _device;
+
         [JsonIgnore]
         [XmlIgnore]
         public ICameraDevice Device
@@ -145,6 +177,7 @@ namespace CameraControl.Core.Classes
         }
 
         private FileItemType _itemType;
+
         [JsonIgnore]
         [XmlIgnore]
         public FileItemType ItemType
@@ -213,11 +246,12 @@ namespace CameraControl.Core.Classes
         }
 
         private int _id;
+
         public int Id
         {
             get
             {
-                if(_id==0)
+                if (_id == 0)
                 {
                     if (!string.IsNullOrEmpty(FileName) && File.Exists(FileName))
                     {
@@ -232,7 +266,7 @@ namespace CameraControl.Core.Classes
         [JsonIgnore]
         [XmlIgnore]
         public bool IsLoaded { get; set; }
-        
+
         [JsonIgnore]
         [XmlIgnore]
         public FileInfo FileInfo { get; set; }
@@ -252,7 +286,7 @@ namespace CameraControl.Core.Classes
         {
             get { return Path.Combine(Settings.DataFolder, "Cache\\InfoFile", Id + ".xml"); }
         }
-        
+
         public void RemoveThumbs()
         {
             if (File.Exists(SmallThumb))
@@ -265,6 +299,7 @@ namespace CameraControl.Core.Classes
 
 
         private BitmapSource _thumbnail;
+
         [JsonIgnore]
         [XmlIgnore]
         public BitmapSource Thumbnail
@@ -277,7 +312,7 @@ namespace CameraControl.Core.Classes
                                      ? BitmapLoader.Instance.NoImageThumbnail
                                      : BitmapLoader.Instance.DefaultThumbnail;
                     if (!ServiceProvider.Settings.DontLoadThumbnails)
-                        ServiceProvider.QueueManager.Add(new QueueItemFileItem { FileItem = this });
+                        ServiceProvider.QueueManager.Add(new QueueItemFileItem {FileItem = this});
                 }
                 return _thumbnail;
             }
@@ -310,18 +345,18 @@ namespace CameraControl.Core.Classes
                     }
                     catch (Exception)
                     {
-
                     }
                 }
                 else
                 {
                     Image.GetThumbnailImageAbort myCallback = ThumbnailCallback;
-                    Stream fs = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); // or any stream
+                    Stream fs = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                        // or any stream
                     Image tempImage = Image.FromStream(fs, true, false);
 
                     Thumbnail =
-                      BitmapSourceConvert.ToBitmapSource(
-                        (Bitmap)tempImage.GetThumbnailImage(160, 120, myCallback, IntPtr.Zero));
+                        BitmapSourceConvert.ToBitmapSource(
+                            (Bitmap) tempImage.GetThumbnailImage(160, 120, myCallback, IntPtr.Zero));
                     tempImage.Dispose();
                     fs.Close();
                 }
@@ -346,7 +381,7 @@ namespace CameraControl.Core.Classes
                 if (!Directory.Exists(Path.GetDirectoryName(InfoFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(InfoFile));
 
-                XmlSerializer serializer = new XmlSerializer(typeof(FileInfo));
+                XmlSerializer serializer = new XmlSerializer(typeof (FileInfo));
                 // Create a FileStream to write with.
 
                 Stream writer = new FileStream(InfoFile, FileMode.Create);
@@ -364,13 +399,12 @@ namespace CameraControl.Core.Classes
         {
             try
             {
-                
                 if (File.Exists(InfoFile))
                 {
                     XmlSerializer mySerializer =
-                      new XmlSerializer(typeof(FileInfo));
+                        new XmlSerializer(typeof (FileInfo));
                     FileStream myFileStream = new FileStream(InfoFile, FileMode.Open);
-                    FileInfo = (FileInfo)mySerializer.Deserialize(myFileStream);
+                    FileInfo = (FileInfo) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }
             }
@@ -379,6 +413,5 @@ namespace CameraControl.Core.Classes
                 Log.Error(e);
             }
         }
-
     }
 }

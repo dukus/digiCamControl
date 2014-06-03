@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -10,6 +40,8 @@ using log4net;
 using log4net.Appender;
 using log4net.Config;
 using log4net.Layout;
+
+#endregion
 
 namespace CameraControl.Core
 {
@@ -39,7 +71,8 @@ namespace CameraControl.Core
             Configure(AppName);
             Log.LogDebug += Log_LogDebug;
             Log.LogError += Log_LogError;
-            Log.Debug("--------------------------------===========================Application starting===========================--------------------------------");
+            Log.Debug(
+                "--------------------------------===========================Application starting===========================--------------------------------");
             Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
             DeviceManager = new CameraDeviceManager();
             ExternalDeviceManager = new ExternalDeviceManager();
@@ -53,12 +86,12 @@ namespace CameraControl.Core
             _pipeServer.Listen("DCCPipe");
         }
 
-        static void Log_LogError(LogEventArgs e)
+        private static void Log_LogError(LogEventArgs e)
         {
             _log.Error(e.Message, e.Exception);
         }
 
-        static void Log_LogDebug(LogEventArgs e)
+        private static void Log_LogDebug(LogEventArgs e)
         {
             _log.Debug(e.Message, e.Exception);
         }
@@ -80,7 +113,7 @@ namespace CameraControl.Core
                                            AppendToFile = true,
                                            File = LogFile,
                                            ImmediateFlush = true,
-                                           LockingModel =new FileAppender.MinimalLock(),
+                                           LockingModel = new FileAppender.MinimalLock(),
                                            Name = "XXXRollingFileAppender"
                                        };
                 fileAppender.ActivateOptions(); // IMPORTANT, creates the file
@@ -91,9 +124,7 @@ namespace CameraControl.Core
                 ta.Layout = new PatternLayout("%d [%t]%-5p %c [%x] - %m%n");
                 BasicConfigurator.Configure(ta);
 #endif
-
             }
         }
-
     }
 }

@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +46,8 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 
+#endregion
+
 namespace CameraControl.windows
 {
     /// <summary>
@@ -24,20 +56,20 @@ namespace CameraControl.windows
     public partial class FullScreenWnd : IWindow
     {
         private Timer _timer = new Timer();
+
         public FullScreenWnd()
         {
             InitializeComponent();
             KeyDown += FullScreenWnd_KeyDown;
             _timer.Elapsed += _timer_Elapsed;
-
         }
 
-        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
         }
 
-        void FullScreenWnd_KeyDown(object sender, KeyEventArgs e)
+        private void FullScreenWnd_KeyDown(object sender, KeyEventArgs e)
         {
             //if (e.Key == Key.Right)
             //{
@@ -81,40 +113,40 @@ namespace CameraControl.windows
                                                                   ServiceProvider.Settings.ShowMagnifierInFullSccreen
                                                                       ? Visibility.Visible
                                                                       : Visibility.Hidden;
-                                                       Show();
-                                                       Activate();
-                                                       Topmost = true;
-                                                       Topmost = false;
-                                                       Focus();
-
-                                                   }));
+                                                              Show();
+                                                              Activate();
+                                                              Topmost = true;
+                                                              Topmost = false;
+                                                              Focus();
+                                                          }));
                     break;
                 case WindowsCmdConsts.FullScreenWnd_ShowTimed:
                     Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        Show();
-                        Activate();
-                        Topmost = true;
-                        Topmost = false;
-                        Focus();
-                        _timer.Stop();
-                        _timer.Interval = ServiceProvider.Settings.PreviewSeconds * 1000;
-                        _timer.Start();
-                    }));
+                                                          {
+                                                              Show();
+                                                              Activate();
+                                                              Topmost = true;
+                                                              Topmost = false;
+                                                              Focus();
+                                                              _timer.Stop();
+                                                              _timer.Interval = ServiceProvider.Settings.PreviewSeconds*
+                                                                                1000;
+                                                              _timer.Start();
+                                                          }));
                     break;
                 case WindowsCmdConsts.FullScreenWnd_Hide:
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       _timer.Stop();
-                                                       Hide();
-                                                   }));
+                                                     {
+                                                         _timer.Stop();
+                                                         Hide();
+                                                     }));
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                                                   {
-                                                       Hide();
-                                                       Close();
-                                                   }));
+                                                     {
+                                                         Hide();
+                                                         Close();
+                                                     }));
                     break;
             }
         }

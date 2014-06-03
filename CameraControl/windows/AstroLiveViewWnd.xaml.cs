@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -23,6 +53,8 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
+
+#endregion
 
 namespace CameraControl.windows
 {
@@ -53,7 +85,7 @@ namespace CameraControl.windows
             _liveviewtimer.AutoReset = true;
         }
 
-        void _liveviewtimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _liveviewtimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (_oper_in_progress)
                 return;
@@ -71,7 +103,7 @@ namespace CameraControl.windows
             _oper_in_progress = false;
         }
 
-        void DisplayLiveView()
+        private void DisplayLiveView()
         {
             if (LiveViewData == null || LiveViewData.ImageData == null)
                 return;
@@ -82,7 +114,7 @@ namespace CameraControl.windows
             using (var bmp = new Bitmap(stream))
             {
                 Bitmap res = bmp;
-                if(Brightness!=0)
+                if (Brightness != 0)
                 {
                     BrightnessCorrection filter = new BrightnessCorrection(Brightness);
                     res = filter.Apply(res);
@@ -106,13 +138,13 @@ namespace CameraControl.windows
                     if (CameraDevice == null)
                         return;
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        Show();
-                        Activate();
-                        Topmost = true;
-                        //Topmost = false;
-                        Focus();
-                    }));
+                                                     {
+                                                         Show();
+                                                         Activate();
+                                                         Topmost = true;
+                                                         //Topmost = false;
+                                                         Focus();
+                                                     }));
                     break;
                 case WindowsCmdConsts.AstroLiveViewWnd_Hide:
                     StopLiveView();
@@ -120,10 +152,10 @@ namespace CameraControl.windows
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        Hide();
-                        Close();
-                    }));
+                                                     {
+                                                         Hide();
+                                                         Close();
+                                                     }));
                     break;
             }
         }
@@ -193,7 +225,6 @@ namespace CameraControl.windows
                             throw;
                         }
                     }
-
                 } while (retry && retryNum < 35);
                 if (IsVisible)
                 {
@@ -232,7 +263,6 @@ namespace CameraControl.windows
                     }
                     catch (DeviceException deviceException)
                     {
-                        
                         if (deviceException.ErrorCode == ErrorCodes.ERROR_BUSY ||
                             deviceException.ErrorCode == ErrorCodes.MTP_Device_Busy)
                         {
@@ -246,7 +276,6 @@ namespace CameraControl.windows
                             throw;
                         }
                     }
-
                 } while (retry && retryNum < 35);
             }
             catch (Exception exception)
@@ -263,7 +292,8 @@ namespace CameraControl.windows
 
         private void live_view_image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && DisplayBitmap!=null)
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left &&
+                DisplayBitmap != null)
             {
                 Point point = e.MouseDevice.GetPosition(live_view_image);
                 double dw = DisplayBitmap.PixelWidth/live_view_image.ActualWidth;
@@ -274,7 +304,7 @@ namespace CameraControl.windows
 
         private void DrawGrid(WriteableBitmap bitmap)
         {
-            if(CentralPoint.X==0&& CentralPoint.Y==0)
+            if (CentralPoint.X == 0 && CentralPoint.Y == 0)
             {
                 CentralPoint = new Point(bitmap.PixelWidth/2, bitmap.PixelHeight/2);
             }
@@ -289,7 +319,7 @@ namespace CameraControl.windows
 
             bitmap.Blit(new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight), tempbitmap,
                         new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
-            
+
             DrawPreviewImage(bitmap);
         }
 
@@ -297,11 +327,12 @@ namespace CameraControl.windows
         {
             if (live_view_image.ActualWidth == 0 || panel_preview.ActualWidth == 0)
                 return;
-            double dw = panel_preview.ActualWidth / live_view_image.ActualWidth;
-            double dh = panel_preview.ActualHeight / live_view_image.ActualHeight;
+            double dw = panel_preview.ActualWidth/live_view_image.ActualWidth;
+            double dh = panel_preview.ActualHeight/live_view_image.ActualHeight;
             double d = bitmap.PixelWidth*dw/ZoomFactor;
             double h = bitmap.PixelHeight*dh/ZoomFactor;
-            WriteableBitmap tempbitmap = bitmap.Crop((int) (CentralPoint.X - (d/2)), (int) (CentralPoint.Y - (h/2)), (int) d, (int) h);
+            WriteableBitmap tempbitmap = bitmap.Crop((int) (CentralPoint.X - (d/2)), (int) (CentralPoint.Y - (h/2)),
+                                                     (int) d, (int) h);
             tempbitmap.Freeze();
             img_preview.Source = tempbitmap;
         }
@@ -310,6 +341,5 @@ namespace CameraControl.windows
         {
             Topmost = (btn_stay_on_top.IsChecked == true);
         }
-
     }
 }

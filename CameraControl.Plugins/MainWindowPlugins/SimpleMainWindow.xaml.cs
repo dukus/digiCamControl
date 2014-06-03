@@ -1,4 +1,34 @@
-﻿using System;
+﻿#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -22,6 +52,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using MessageBox = System.Windows.MessageBox;
 
+#endregion
 
 namespace CameraControl.Plugins.MainWindowPlugins
 {
@@ -33,6 +64,7 @@ namespace CameraControl.Plugins.MainWindowPlugins
         public string DisplayName { get; set; }
 
         private string _saveFolder;
+
         public string SaveFolder
         {
             get { return _saveFolder; }
@@ -58,7 +90,7 @@ namespace CameraControl.Plugins.MainWindowPlugins
         }
 
 
-        void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             PhotoCaptured(eventArgs);
             //Thread thread = new Thread(PhotoCaptured);
@@ -116,9 +148,9 @@ namespace CameraControl.Plugins.MainWindowPlugins
                 // This useful when camera is set to record in ram the the all file names are same.
                 if (File.Exists(fileName))
                     fileName =
-                      StaticHelper.GetUniqueFilename(
-                        Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) + "_", 0,
-                        Path.GetExtension(fileName));
+                        StaticHelper.GetUniqueFilename(
+                            Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) + "_", 0,
+                            Path.GetExtension(fileName));
 
                 // check the folder of filename, if not found create it
                 if (!Directory.Exists(Path.GetDirectoryName(fileName)))
@@ -159,6 +191,5 @@ namespace CameraControl.Plugins.MainWindowPlugins
         {
             Topmost = !Topmost;
         }
-
     }
 }

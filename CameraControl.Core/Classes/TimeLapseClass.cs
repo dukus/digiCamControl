@@ -1,3 +1,33 @@
+#region Licence
+
+// Distributed under MIT License
+// ===========================================================
+// 
+// digiCamControl - DSLR camera remote control open source software
+// Copyright (C) 2014 Duka Istvan
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+// MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#endregion
+
+#region
+
 using System;
 using System.Threading;
 using System.Timers;
@@ -5,6 +35,8 @@ using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Timer = System.Timers.Timer;
+
+#endregion
 
 namespace CameraControl.Core.Classes
 {
@@ -16,13 +48,14 @@ namespace CameraControl.Core.Classes
         private int _timecounter = 0;
 
         private int _period;
+
         public int Period
         {
             get { return _period; }
             set
             {
                 _period = value;
-                _timePeriod = new DateTime().AddSeconds(Period * NumberOfPhotos);
+                _timePeriod = new DateTime().AddSeconds(Period*NumberOfPhotos);
                 NotifyPropertyChanged("TimePeriod");
                 NotifyPropertyChanged("Period");
                 NotifyPropertyChanged("Message");
@@ -30,6 +63,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _numberOfPhotos;
+
         public int NumberOfPhotos
         {
             get
@@ -37,7 +71,7 @@ namespace CameraControl.Core.Classes
                 if (_numberOfPhotos < 1)
                     _numberOfPhotos = 0;
                 return
-                  _numberOfPhotos;
+                    _numberOfPhotos;
             }
             set
             {
@@ -45,10 +79,10 @@ namespace CameraControl.Core.Classes
                 // prevent argument error
                 if (_numberOfPhotos > 1000000 || _numberOfPhotos < 0)
                     _numberOfPhotos = 100;
-                _timePeriod = new DateTime().AddSeconds(Period * _numberOfPhotos);
+                _timePeriod = new DateTime().AddSeconds(Period*_numberOfPhotos);
                 if (Fps > 0)
                 {
-                    _movieLength = new DateTime().AddSeconds(_numberOfPhotos / _fps);
+                    _movieLength = new DateTime().AddSeconds(_numberOfPhotos/_fps);
                     NotifyPropertyChanged("MovieLength");
                 }
                 NotifyPropertyChanged("TimePeriod");
@@ -60,6 +94,7 @@ namespace CameraControl.Core.Classes
         private int _photosTaken;
 
         private VideoType _videoType;
+
         public VideoType VideoType
         {
             get
@@ -79,16 +114,17 @@ namespace CameraControl.Core.Classes
         }
 
         private DateTime _timePeriod;
+
         public DateTime TimePeriod
         {
             get { return _timePeriod; }
             set
             {
                 _timePeriod = value;
-                if ((_timePeriod.Ticks / TimeSpan.TicksPerSecond) > 1)
+                if ((_timePeriod.Ticks/TimeSpan.TicksPerSecond) > 1)
                 {
-                    double dd = (_timePeriod.Ticks / TimeSpan.TicksPerSecond);
-                    _numberOfPhotos = (int)((_timePeriod.Ticks / TimeSpan.TicksPerSecond) / Period);
+                    double dd = (_timePeriod.Ticks/TimeSpan.TicksPerSecond);
+                    _numberOfPhotos = (int) ((_timePeriod.Ticks/TimeSpan.TicksPerSecond)/Period);
                     NotifyPropertyChanged("TimePeriod");
                 }
                 NotifyPropertyChanged("NumberOfPhotos");
@@ -97,13 +133,14 @@ namespace CameraControl.Core.Classes
         }
 
         private DateTime _movieLength;
+
         public DateTime MovieLength
         {
             get { return _movieLength; }
             set
             {
                 _movieLength = value;
-                _numberOfPhotos = (int)((_movieLength.Ticks / TimeSpan.TicksPerSecond) * Fps);
+                _numberOfPhotos = (int) ((_movieLength.Ticks/TimeSpan.TicksPerSecond)*Fps);
                 NotifyPropertyChanged("NumberOfPhotos");
                 NotifyPropertyChanged("MovieLength");
             }
@@ -111,12 +148,10 @@ namespace CameraControl.Core.Classes
 
 
         private string _outputFIleName;
+
         public string OutputFIleName
         {
-            get
-            {
-                return _outputFIleName;
-            }
+            get { return _outputFIleName; }
             set
             {
                 _outputFIleName = value;
@@ -125,6 +160,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _fps;
+
         public int Fps
         {
             get { return _fps; }
@@ -133,7 +169,7 @@ namespace CameraControl.Core.Classes
                 _fps = value;
                 if (_fps > 0 && _numberOfPhotos > 0)
                 {
-                    _movieLength = new DateTime().AddSeconds(_numberOfPhotos / _fps);
+                    _movieLength = new DateTime().AddSeconds(_numberOfPhotos/_fps);
                     NotifyPropertyChanged("MovieLength");
                 }
 
@@ -143,6 +179,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _noAutofocus;
+
         public bool NoAutofocus
         {
             get { return _noAutofocus; }
@@ -158,8 +195,9 @@ namespace CameraControl.Core.Classes
             get
             {
                 string res =
-                    string.Format("Timelapse will run {0} \n Will end at {1} \n", PhotoUtils.DateTimeToString(TimePeriod),
-                                  DateTime.Now.AddSeconds(Period * (_numberOfPhotos - PhotosTaken)));
+                    string.Format("Timelapse will run {0} \n Will end at {1} \n",
+                                  PhotoUtils.DateTimeToString(TimePeriod),
+                                  DateTime.Now.AddSeconds(Period*(_numberOfPhotos - PhotosTaken)));
                 if (!IsDisabled)
                     res += PhotosTaken == 0
                                ? string.Format("Time Lapse will start in {0} second(s)",
@@ -196,6 +234,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _fillImage;
+
         public bool FillImage
         {
             get { return _fillImage; }
@@ -207,6 +246,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _virtualMove;
+
         public bool VirtualMove
         {
             get { return _virtualMove; }
@@ -218,6 +258,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _movePercent;
+
         public int MovePercent
         {
             get { return _movePercent; }
@@ -229,6 +270,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _moveDirection;
+
         public int MoveDirection
         {
             get { return _moveDirection; }
@@ -240,6 +282,7 @@ namespace CameraControl.Core.Classes
         }
 
         private int _moveAlignment;
+
         public int MoveAlignment
         {
             get { return _moveAlignment; }
@@ -256,7 +299,7 @@ namespace CameraControl.Core.Classes
             {
                 if (NumberOfPhotos != 0)
                 {
-                    return (int)((double)PhotosTaken / NumberOfPhotos * 100);
+                    return (int) ((double) PhotosTaken/NumberOfPhotos*100);
                 }
                 return 0;
             }
@@ -267,7 +310,7 @@ namespace CameraControl.Core.Classes
             get
             {
                 if (Period != 0)
-                    return (int)((double)_timecounter / Period * 100);
+                    return (int) ((double) _timecounter/Period*100);
                 return 0;
             }
         }
@@ -287,13 +330,13 @@ namespace CameraControl.Core.Classes
             _timer.Elapsed += _timer_Elapsed;
         }
 
-        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _timecounter++;
             // prevent counter underflow 
             if (_timecounter > Period)
                 _timecounter = Period;
-            
+
             if (_timecounter >= Period && !ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy)
             {
                 _timecounter = 0;
@@ -315,7 +358,8 @@ namespace CameraControl.Core.Classes
             try
             {
                 WaitForReady(ServiceProvider.DeviceManager.SelectedCameraDevice);
-                if (NoAutofocus && ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureNoAf))
+                if (NoAutofocus &&
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureNoAf))
                     CameraHelper.CaptureNoAf(ServiceProvider.DeviceManager.SelectedCameraDevice);
                 else
                     CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
@@ -344,7 +388,7 @@ namespace CameraControl.Core.Classes
             _timer.Start();
         }
 
-        void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             //if (!IsDisabled)
             //  _timer.Start();
@@ -364,9 +408,7 @@ namespace CameraControl.Core.Classes
         {
             while (device.IsBusy)
             {
-
             }
         }
-
     }
 }
