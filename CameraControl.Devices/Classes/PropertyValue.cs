@@ -46,6 +46,8 @@ namespace CameraControl.Devices.Classes
         private AsyncObservableCollection<T> _numericValues = new AsyncObservableCollection<T>();
         private AsyncObservableCollection<string> _values = new AsyncObservableCollection<string>();
         private bool _notifyValuChange = true;
+        private readonly object _syncRoot = new object();
+
 
         private ushort _code;
 
@@ -81,20 +83,20 @@ namespace CameraControl.Devices.Classes
             get { return _value; }
             set
             {
-                //if (_value != value)
-                //{
-                _value = value;
-                if (ValueChanged != null && _notifyValuChange)
+                lock (_syncRoot)
                 {
-                    foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
+                    _value = value;
+                    if (ValueChanged != null && _notifyValuChange)
                     {
-                        if (keyValuePair.Key == _value)
+                        foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
                         {
-                            OnValueChanged(this, _value, keyValuePair.Value);
+                            if (keyValuePair.Key == _value)
+                            {
+                                OnValueChanged(this, _value, keyValuePair.Value);
+                            }
                         }
                     }
                 }
-                //}
                 NotifyPropertyChanged("Value");
             }
         }
@@ -113,27 +115,33 @@ namespace CameraControl.Devices.Classes
 
         public void NextValue()
         {
-            if (Values == null || Values.Count == 0 || !IsEnabled)
-                return;
-            int ind = Values.IndexOf(Value);
-            if (ind < 0)
-                return;
-            ind++;
-            if (ind < Values.Count)
-                Value = Values[ind];
+            lock (_syncRoot)
+            {
+                if (Values == null || Values.Count == 0 || !IsEnabled)
+                    return;
+                int ind = Values.IndexOf(Value);
+                if (ind < 0)
+                    return;
+                ind++;
+                if (ind < Values.Count)
+                    Value = Values[ind];
+            }
         }
 
         public void PrevValue()
         {
-            if (Values == null || Values.Count == 0 || !IsEnabled)
-                return;
-            int ind = Values.IndexOf(Value);
-            ind--;
-            if (ind < 0)
-                return;
+            lock (_syncRoot)
+            {
+                if (Values == null || Values.Count == 0 || !IsEnabled)
+                    return;
+                int ind = Values.IndexOf(Value);
+                ind--;
+                if (ind < 0)
+                    return;
 
-            if (ind < Values.Count)
-                Value = Values[ind];
+                if (ind < Values.Count)
+                    Value = Values[ind];
+            }
         }
 
 
@@ -147,30 +155,33 @@ namespace CameraControl.Devices.Classes
 
         public void OnValueChangedThread(object obj)
         {
-            object[] objparams = obj as object[];
-            bool retry;
-            int retrynum = 5;
-            do
+            lock (_syncRoot)
             {
-                retry = false;
-                try
+                object[] objparams = obj as object[];
+                bool retry;
+                int retrynum = 5;
+                do
                 {
-                    object sender = objparams[0];
-                    string key = objparams[1] as string;
-                    T val = (T) objparams[2];
-                    ValueChanged(sender, key, val);
-                }
-                catch (DeviceException exception)
-                {
-                    if ((exception.ErrorCode == ErrorCodes.ERROR_BUSY ||
-                         exception.ErrorCode == ErrorCodes.MTP_Device_Busy) && retrynum > 0)
+                    retry = false;
+                    try
                     {
-                        retrynum--;
-                        retry = true;
-                        Thread.Sleep(100);
+                        object sender = objparams[0];
+                        string key = objparams[1] as string;
+                        T val = (T) objparams[2];
+                        ValueChanged(sender, key, val);
                     }
-                }
-            } while (retry);
+                    catch (DeviceException exception)
+                    {
+                        if ((exception.ErrorCode == ErrorCodes.ERROR_BUSY ||
+                             exception.ErrorCode == ErrorCodes.MTP_Device_Busy) && retrynum > 0)
+                        {
+                            retrynum--;
+                            retry = true;
+                            Thread.Sleep(100);
+                        }
+                    }
+                } while (retry);
+            }
         }
 
         private bool _isEnabled;
@@ -224,17 +235,21 @@ namespace CameraControl.Devices.Classes
 
         public void SetValue(T o)
         {
-            NumericValue = o;
-            foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
+            lock (_syncRoot)
             {
-                if (EqualityComparer<T>.Default.Equals(keyValuePair.Value, o)) //(keyValuePair.Value== o)
+                NumericValue = o;
+                foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
                 {
-                    Value = keyValuePair.Key;
-                    return;
+                    if (EqualityComparer<T>.Default.Equals(keyValuePair.Value, o))
+                        //(keyValuePair.Value== o)
+                    {
+                        Value = keyValuePair.Key;
+                        return;
+                    }
                 }
             }
-            //Console.WriteLine(string.Format("Value not found for property {0}, value {1} ", Name, o));
         }
+    
 
         public void SetValue()
         {
@@ -244,14 +259,17 @@ namespace CameraControl.Devices.Classes
 
         public void SetValue(string o, bool notifyValuChange = true)
         {
-            foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
+            lock (_syncRoot)
             {
-                if (keyValuePair.Key == o)
+                foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
                 {
-                    _notifyValuChange = notifyValuChange;
-                    Value = keyValuePair.Key;
-                    _notifyValuChange = true;
-                    return;
+                    if (keyValuePair.Key == o)
+                    {
+                        _notifyValuChange = notifyValuChange;
+                        Value = keyValuePair.Key;
+                        _notifyValuChange = true;
+                        return;
+                    }
                 }
             }
         }
@@ -315,11 +333,14 @@ namespace CameraControl.Devices.Classes
 
         public void AddValues(string key, T value)
         {
-            if (!_valuesDictionary.ContainsKey(key))
-                _valuesDictionary.Add(key, value);
-            _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
-            _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
-            NotifyPropertyChanged("Values");
+            lock (_syncRoot)
+            {
+                if (!_valuesDictionary.ContainsKey(key))
+                    _valuesDictionary.Add(key, value);
+                _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
+                _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
+                NotifyPropertyChanged("Values");
+            }
         }
 
         public void Clear()
