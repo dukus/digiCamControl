@@ -1130,6 +1130,11 @@ namespace CameraControl.Devices.Canon
                     Log.Error("Error transfer memory file", exception);
                 }
             }
+            string fil = o as string;
+            if (fil != null)
+            {
+                GetFile(fil, filename);
+            }
         }
 
         public override string GetProhibitionCondition(OperationEnum operationEnum)
@@ -1197,6 +1202,7 @@ namespace CameraControl.Devices.Canon
                                      {
                                          FileName = ChildInfo.szFileName,
                                          ThumbData = GetImage(stream, Edsdk.EdsImageSource.Thumbnail),
+                                         Handle = ChildInfo.szFileName
                                      });
                     }
                     else
@@ -1209,6 +1215,61 @@ namespace CameraControl.Devices.Canon
                 }
             }
             return list;
+        }
+
+        public void GetFile(string fileName,string outFileName)
+        {
+            int count = 0;
+            Edsdk.EdsGetChildCount(Camera.Handle, out count);
+            for (int i = 0; i < count; i++)
+            {
+                IntPtr volumePtr;
+                Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr);
+                Edsdk.EdsVolumeInfo vinfo;
+                Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo);
+                //ignore the HDD
+                if (vinfo.szVolumeLabel != "HDD")
+                {
+                    GetFile(volumePtr, fileName, outFileName);
+                }
+                Edsdk.EdsRelease(volumePtr);
+            }
+        }
+
+        private void GetFile(IntPtr ptr,string fileName, string outfileName)
+        {
+            int ChildCount;
+            //get children of first pointer
+            List<DeviceObject> list = new List<DeviceObject>();
+            Edsdk.EdsGetChildCount(ptr, out ChildCount);
+            if (ChildCount > 0)
+            {
+                //if it has children, create an array of entries
+                for (int i = 0; i < ChildCount; i++)
+                {
+                    IntPtr ChildPtr;
+                    //get children of children
+                    Edsdk.EdsGetChildAtIndex(ptr, i, out ChildPtr);
+                    //get the information about this children
+                    Edsdk.EdsDirectoryItemInfo ChildInfo;
+                    Edsdk.EdsGetDirectoryItemInfo(ChildPtr, out ChildInfo);
+
+                    if (ChildInfo.isFolder == 0)
+                    {
+                        if(ChildInfo.szFileName==fileName)
+                        {
+                            Camera._transporter.TransportAsFileName(ChildPtr, outfileName);
+                        }
+                    }
+                    else
+                    {
+                        //if it's a folder, check for children with recursion
+                        GetFile(ChildPtr, fileName, outfileName);
+                    }
+                    //release current children
+                    Edsdk.EdsRelease(ChildPtr);
+                }
+            }
         }
 
         private byte[] GetImage(IntPtr img_stream, Edsdk.EdsImageSource imageSource)
@@ -1286,6 +1347,25 @@ namespace CameraControl.Devices.Canon
                 byteArray = memostream.ToArray();
             }
             return byteArray;
+        }
+
+        public override void FormatStorage(object storageId)
+        {
+            int count = 0;
+            Edsdk.EdsGetChildCount(Camera.Handle, out count);
+            for (int i = 0; i < count; i++)
+            {
+                IntPtr volumePtr;
+                Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr);
+                Edsdk.EdsVolumeInfo vinfo;
+                Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo);
+                //ignore the HDD
+                if (vinfo.szVolumeLabel != "HDD")
+                {
+                    Edsdk.EdsFormatVolume(volumePtr);
+                }
+                Edsdk.EdsRelease(volumePtr);
+            }
         }
     }
 }

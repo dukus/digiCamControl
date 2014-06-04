@@ -8,7 +8,7 @@ namespace Canon.Eos.Framework
 {
     partial class EosCamera
     {
-        private readonly EosImageTransporter _transporter = new EosImageTransporter();
+        public readonly EosImageTransporter _transporter = new EosImageTransporter();
 
         private void OnPictureTaken(EosImageEventArgs eventArgs)
         {

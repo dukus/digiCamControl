@@ -7,7 +7,7 @@ using Canon.Eos.Framework.Internal.SDK;
 
 namespace Canon.Eos.Framework.Internal
 {
-    internal class EosImageTransporter : IEosAssertable
+    public class EosImageTransporter : IEosAssertable
     {
         private static Edsdk.EdsDirectoryItemInfo GetDirectoryItemInfo(IntPtr directoryItem)
         {
@@ -87,6 +87,15 @@ namespace Canon.Eos.Framework.Internal
             Transport(directoryItem, directoryItemInfo.Size, stream, true);            
 
             return new EosFileImageEventArgs(imageFilePath);
+        }
+
+        public EosImageEventArgs TransportAsFileName(IntPtr directoryItem, string imagePath)
+        {
+            var directoryItemInfo = GetDirectoryItemInfo(directoryItem);
+            var stream = CreateFileStream(imagePath);
+            Transport(directoryItem, directoryItemInfo.Size, stream, true);
+
+            return new EosFileImageEventArgs(imagePath);
         }
 
         public EosImageEventArgs TransportInMemory(IntPtr directoryItem)

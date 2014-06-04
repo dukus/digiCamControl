@@ -178,12 +178,12 @@ namespace CameraControl.windows
 
         private void PopulateImageList()
         {
-            if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
-                return;
             _timeDif.Clear();
             _itembycamera.Clear();
             Items.Clear();
             _timeTable.Clear();
+            if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
+                return;
             //int threshold = 0;
             //bool checkset = false;
 
@@ -272,6 +272,8 @@ namespace CameraControl.windows
             {
                 if (fileItem.ItemType == FileItemType.Missing)
                     continue;
+                if (!fileItem.IsChecked)
+                    continue;
                 dlg.Label = fileItem.FileName;
                 dlg.ImageSource = fileItem.Thumbnail;
                 PhotoSession session = (PhotoSession) fileItem.Device.AttachedPhotoSession ??
@@ -319,6 +321,11 @@ namespace CameraControl.windows
                 else
                 {
                     somethingwrong = true;
+                }
+                if (!File.Exists(fileName))
+                {
+                    MessageBox.Show("Unable download file. Aborting!");
+                    break;
                 }
                 totalbytes += new FileInfo(fileName).Length;
                 session.AddFile(fileName);
