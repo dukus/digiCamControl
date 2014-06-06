@@ -5,3 +5,5 @@ Obj
 _ReSharper.CameraControl
 _ReSharper.CameraControlDevices
 _ReSharper.CameraControl.ServerTest
+
+/nsis/*.exe

@@ -257,8 +257,15 @@
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_star_add}" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <!--<Image Margin="5" Source="/CameraControl;component/Images/Fullscreen.png" />-->
                 </Button>
+                <Button ToolTip="{T:TranslateExtension MenuMultipleCamera}" Height="50" Name="but_multiple" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_box_layered}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+
                 <StackPanel HorizontalAlignment="Right" IsEnabled="{Binding Path=DefaultSession.TimeLapse.IsDisabled}"></StackPanel>
             </WrapPanel>
         </Controls:MetroContentControl>
