@@ -384,32 +384,32 @@ namespace CameraControl
             }
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            if (button1.IsChecked == true)
-            {
-                if (PropertyWnd == null)
-                {
-                    PropertyWnd = new PropertyWnd();
-                }
-                PropertyWnd.IsVisibleChanged -= PropertyWnd_IsVisibleChanged;
-                PropertyWnd.Show();
-                PropertyWnd.IsVisibleChanged += PropertyWnd_IsVisibleChanged;
-            }
-            else
-            {
-                if (PropertyWnd != null && PropertyWnd.Visibility == Visibility.Visible)
-                {
-                    PropertyWnd.IsVisibleChanged -= PropertyWnd_IsVisibleChanged;
-                    PropertyWnd.Hide();
-                }
-            }
-        }
+        //private void button1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (button1.IsChecked == true)
+        //    {
+        //        if (PropertyWnd == null)
+        //        {
+        //            PropertyWnd = new PropertyWnd();
+        //        }
+        //        PropertyWnd.IsVisibleChanged -= PropertyWnd_IsVisibleChanged;
+        //        PropertyWnd.Show();
+        //        PropertyWnd.IsVisibleChanged += PropertyWnd_IsVisibleChanged;
+        //    }
+        //    else
+        //    {
+        //        if (PropertyWnd != null && PropertyWnd.Visibility == Visibility.Visible)
+        //        {
+        //            PropertyWnd.IsVisibleChanged -= PropertyWnd_IsVisibleChanged;
+        //            PropertyWnd.Hide();
+        //        }
+        //    }
+        //}
 
-        private void PropertyWnd_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            button1.IsChecked = !button1.IsChecked;
-        }
+        //private void PropertyWnd_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    button1.IsChecked = !button1.IsChecked;
+        //}
 
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -780,5 +780,6 @@ namespace CameraControl
         }
 
         #endregion
+
     }
 }

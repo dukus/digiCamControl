@@ -230,9 +230,9 @@
                 </Button>
 
                 <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="50"  Height="50" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Click="btn_br_Click" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <ToggleButton ToolTip="Image property" Height="50" Width="50" Name="button1"  Click="button1_Click" Margin="5">
+                <!--<ToggleButton ToolTip="Image property" Height="50" Width="50" Name="button1"  Click="button1_Click" Margin="5">
                     <Image Margin="5" Source="/CameraControl;component/Images/Properties.png"/>
-                </ToggleButton>
+                </ToggleButton>-->
                 <Button ToolTip="{T:TranslateExtension TimeLapseToolTip}" Height="50" Name="but_timelapse" Width="50" Margin="5" Click="but_timelapse_Click" Style="{DynamicResource MetroCircleButtonStyle}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -281,14 +281,34 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" Width="250" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" >
-                    <Grid Height="90" >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" />
                         <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" />
                         <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" />
                         <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" />
                         <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
-                        <!--<Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="0.8" />-->
                         <CheckBox Grid.Column="1" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
                         <CheckBox Grid.Column="1" Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                        <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                                <Rectangle Width="20" Height="20">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_crosshair}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </ToggleButton>
+                            <ToggleButton  ToolTip="{T:TranslateExtension LabelFullSize}" Height="35" Width="35" Margin="0" IsChecked="{Binding LowMemoryUsage}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                                <Rectangle Width="20" Height="20">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_camera_switch_invert}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </ToggleButton>                            
+                        </StackPanel>
                     </Grid>
                 </GroupBox>
                 <ScrollViewer PanningMode="VerticalOnly" VerticalScrollBarVisibility="Auto" Grid.Row="1">

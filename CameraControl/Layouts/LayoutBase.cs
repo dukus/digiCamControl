@@ -218,11 +218,11 @@ namespace CameraControl.Layouts
             BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
+            BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
+                              ServiceProvider.Settings.SelectedBitmap.FileItem);
             BitmapLoader.Instance.Highlight(ServiceProvider.Settings.SelectedBitmap,
                                             ServiceProvider.Settings.HighlightUnderExp,
                                             ServiceProvider.Settings.HighlightOverExp);
-            BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
-                                          ServiceProvider.Settings.SelectedBitmap.FileItem);
             ServiceProvider.Settings.SelectedBitmap.FullResLoaded = fullres;
             ServiceProvider.Settings.ImageLoading = false;
             OnImageLoaded();
@@ -262,6 +262,20 @@ namespace CameraControl.Layouts
                 }
             }
             if (e.PropertyName == "HighlightUnderExp")
+            {
+                if (!_worker.IsBusy)
+                {
+                    _worker.RunWorkerAsync(false);
+                }
+            }
+            if (e.PropertyName == "ShowFocusPoints")
+            {
+                if (!_worker.IsBusy)
+                {
+                    _worker.RunWorkerAsync(false);
+                }
+            }
+            if (e.PropertyName == "LowMemoryUsage")
             {
                 if (!_worker.IsBusy)
                 {
