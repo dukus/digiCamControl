@@ -55,12 +55,12 @@ namespace CameraControl.Devices.Nikon
                 byte datasize = 1;
                 CompressionSetting = new PropertyValue<int>();
                 CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
-                byte[] result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
+                var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
                                                                  CONST_PROP_CompressionSetting);
-                byte defval = result[datasize + 5];
-                for (int i = 0; i < result.Length - ((2*datasize) + 6 + 2); i += datasize)
+                byte defval = result.Data[datasize + 5];
+                for (int i = 0; i < result.Data.Length - ((2 * datasize) + 6 + 2); i += datasize)
                 {
-                    byte val = result[((2*datasize) + 6 + 2) + i];
+                    byte val = result.Data[((2 * datasize) + 6 + 2) + i];
                     CompressionSetting.AddValues(_csTable.ContainsKey(val) ? _csTable[val] : val.ToString(), val);
                 }
                 CompressionSetting.SetValue(defval);
@@ -82,7 +82,7 @@ namespace CameraControl.Devices.Nikon
             return res;
         }
 
-        public override void ReadDeviceProperties(int prop)
+        public override void ReadDeviceProperties(uint prop)
         {
             base.ReadDeviceProperties(prop);
             HaveLiveView = false;

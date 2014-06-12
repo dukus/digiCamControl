@@ -57,14 +57,14 @@ namespace CameraControl.Devices.Nikon
 
             const int headerSize = 128;
 
-            byte[] result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
-            if (result == null || result.Length <= headerSize)
+            var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+            if (result.Data == null || result.Data.Length <= headerSize)
                 return null;
-            int cbBytesRead = result.Length;
-            GetAditionalLIveViewData(viewData, result);
+            int cbBytesRead = result.Data.Length;
+            GetAditionalLIveViewData(viewData, result.Data);
 
             MemoryStream copy = new MemoryStream((int) cbBytesRead - headerSize);
-            copy.Write(result, headerSize, (int) cbBytesRead - headerSize);
+            copy.Write(result.Data, headerSize, (int)cbBytesRead - headerSize);
             copy.Close();
             viewData.ImageData = copy.GetBuffer();
 
@@ -82,8 +82,7 @@ namespace CameraControl.Devices.Nikon
                 try
                 {
                     IsBusy = true;
-                    MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus,
-                                                                 -1);
+                    MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus);
                     ErrorCodes.GetException(response.ErrorCode);
                     // test if live view is on 
                     if (response.Data != null && response.Data.Length > 0 && response.Data[0] > 0)
@@ -99,19 +98,18 @@ namespace CameraControl.Devices.Nikon
                     // the focus mode can be sett only in host mode
                     LockCamera();
                     byte oldval = 0;
-                    byte[] val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect,
-                                                                  -1);
-                    if (val != null && val.Length > 0)
-                        oldval = val[0];
+                    var val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect);
+                    if (val.Data != null && val.Data.Length > 0)
+                        oldval = val.Data[0];
 
-                    SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 4}, CONST_PROP_AFModeSelect, -1);
+                    SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 4}, CONST_PROP_AFModeSelect);
 
                     ErrorCodes.GetException(CaptureInSdRam
                                                 ? ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF)
                                                 : ExecuteWithNoData(CONST_CMD_InitiateCapture));
 
-                    if (val != null && val.Length > 0)
-                        SetProperty(CONST_CMD_SetDevicePropValue, new[] {oldval}, CONST_PROP_AFModeSelect, -1);
+                    if (val.Data != null && val.Data.Length > 0)
+                        SetProperty(CONST_CMD_SetDevicePropValue, new[] {oldval}, CONST_PROP_AFModeSelect);
 
                     UnLockCamera();
                 }

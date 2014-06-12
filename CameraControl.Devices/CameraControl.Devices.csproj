@@ -132,6 +132,7 @@
     <Compile Include="Others\WiaCameraDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticHelper.cs" />
+    <Compile Include="TransferProtocol\ITransferProtocol.cs" />
     <Compile Include="Xml\XmlCommandDescriptor.cs" />
     <Compile Include="Xml\XmlDataManager.cs" />
     <Compile Include="Xml\XmlDeviceData.cs" />

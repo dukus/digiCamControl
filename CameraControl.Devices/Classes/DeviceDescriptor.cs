@@ -29,6 +29,7 @@
 #region
 
 using Canon.Eos.Framework;
+using PortableDeviceLib;
 using WIA;
 
 #endregion
@@ -44,5 +45,6 @@ namespace CameraControl.Devices.Classes
         public IDeviceInfo WiaDeviceInfo { get; set; }
         public Device WiaDevice { get; set; }
         public EosCamera EosCamera { get; set; }
+        public StillImageDevice StillImageDevice { get; set; }
     }
 }

@@ -319,7 +319,7 @@ namespace CameraControl.Devices.Canon
         private void ShutterSpeed_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_CANON_EOS_SetDevicePropValueEx, BitConverter.GetBytes(val),
-                        CONST_PROP_EOS_ShutterSpeed, -1);
+                        CONST_PROP_EOS_ShutterSpeed);
             SetEOSProperty(CONST_PROP_EOS_ShutterSpeed, (uint) val);
         }
 
@@ -409,14 +409,14 @@ namespace CameraControl.Devices.Canon
         public override void StartLiveView()
         {
             SetProperty(CONST_CMD_CANON_EOS_SetDevicePropValueEx, BitConverter.GetBytes(2),
-                        CONST_PROP_EOS_LiveView, -1);
+                        CONST_PROP_EOS_LiveView);
             SetEOSProperty(CONST_PROP_EOS_LiveView, (uint) 2);
         }
 
         public override void StopLiveView()
         {
             SetProperty(CONST_CMD_CANON_EOS_SetDevicePropValueEx, BitConverter.GetBytes(0),
-                        CONST_PROP_EOS_LiveView, -1);
+                        CONST_PROP_EOS_LiveView);
             SetEOSProperty(CONST_PROP_EOS_LiveView, (uint) 0);
         }
 

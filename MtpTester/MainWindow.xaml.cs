@@ -390,7 +390,7 @@ namespace MtpTester
                 if (property != null)
                 {
                     MTPCamera.SetProperty(BaseMTPCamera.CONST_CMD_SetDevicePropValue,
-                                          BitConverter.GetBytes(property.Value), (int) propertyDescriptor.Code, -1);
+                                          BitConverter.GetBytes(property.Value), propertyDescriptor.Code);
                 }
             }
             catch (Exception exception)
@@ -422,7 +422,7 @@ namespace MtpTester
                 }
                 XmlPropertyDescriptor propertyDescriptor = lst_prop.SelectedItem as XmlPropertyDescriptor;
                 MTPDataResponse resp = MTPCamera.ExecuteReadDataEx(BaseMTPCamera.CONST_CMD_GetDevicePropValue,
-                                                                   (int) propertyDescriptor.Code, -1);
+                                                                    propertyDescriptor.Code);
                 long val = GetValue(resp, 0, GetDataLength(propertyDescriptor.DataType));
                 XmlPropertyValue selected = null;
                 foreach (XmlPropertyValue xmlPropertyValue in propertyDescriptor.Values)

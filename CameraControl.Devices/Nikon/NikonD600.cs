@@ -50,12 +50,12 @@ namespace CameraControl.Devices.Nikon
 
                     const int headerSize = 384;
 
-                    byte[] result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
-                    if (result == null || result.Length <= headerSize)
+                    var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+                    if (result.Data == null || result.Data.Length <= headerSize)
                         return null;
-                    GetAditionalLIveViewData(viewData, result);
+                    GetAditionalLIveViewData(viewData, result.Data);
                     viewData.ImageDataPosition = headerSize;
-                    viewData.ImageData = result;
+                    viewData.ImageData = result.Data;
                 }
                 finally
                 {
@@ -106,7 +106,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Remote control", 0x8017);
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
-                                                  res.Code, -1);
+                                                  res.Code);
             return res;
         }
     }

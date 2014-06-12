@@ -52,7 +52,7 @@ namespace CameraControl.Devices.Nikon
         public override void StartLiveView()
         {
             base.StartLiveView();
-            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_AfModeAtLiveView, -1);
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_AfModeAtLiveView );
         }
 
         public override void Focus(int step)

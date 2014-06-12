@@ -43,8 +43,8 @@ namespace CameraControl.Devices.Nikon
         public override void StartLiveView()
         {
             if (!CaptureInSdRam)
-                SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 1}, CONST_PROP_RecordingMedia, -1);
-            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 1}, CONST_PROP_LiveViewMode, -1);
+                SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 1}, CONST_PROP_RecordingMedia);
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 1}, CONST_PROP_LiveViewMode);
             base.StartLiveView();
         }
 
@@ -52,7 +52,7 @@ namespace CameraControl.Devices.Nikon
         {
             base.StopLiveView();
             if (!CaptureInSdRam)
-                SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_RecordingMedia, -1);
+                SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_RecordingMedia);
             DeviceReady();
         }
 
@@ -60,7 +60,7 @@ namespace CameraControl.Devices.Nikon
         {
             lock (Locker)
             {
-                MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus, -1);
+                MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus );
                 ErrorCodes.GetException(response.ErrorCode);
                 // test if live view is on 
                 if (response.Data != null && response.Data.Length > 0 && response.Data[0] > 0)
@@ -77,14 +77,14 @@ namespace CameraControl.Devices.Nikon
 
                 DeviceReady();
                 byte oldval = 0;
-                byte[] val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect, -1);
-                if (val != null && val.Length > 0)
-                    oldval = val[0];
-                SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 4}, CONST_PROP_AFModeSelect, -1);
+                var val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect );
+                if (val.Data != null && val.Data.Length > 0)
+                    oldval = val.Data[0];
+                SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 4}, CONST_PROP_AFModeSelect);
                 DeviceReady();
                 ErrorCodes.GetException(StillImageDevice.ExecuteWithNoData(CONST_CMD_InitiateCapture));
-                if (val != null && val.Length > 0)
-                    SetProperty(CONST_CMD_SetDevicePropValue, new[] {oldval}, CONST_PROP_AFModeSelect, -1);
+                if (val.Data != null && val.Data.Length > 0)
+                    SetProperty(CONST_CMD_SetDevicePropValue, new[] {oldval}, CONST_PROP_AFModeSelect);
             }
         }
 
@@ -105,7 +105,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Quiet shooting", 0x8016);
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
-                                                  res.Code, -1);
+                                                  res.Code);
             return res;
         }
     }

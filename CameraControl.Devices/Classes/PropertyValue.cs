@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using PortableDeviceLib;
 
 #endregion
 
@@ -49,9 +50,9 @@ namespace CameraControl.Devices.Classes
         private readonly object _syncRoot = new object();
 
 
-        private ushort _code;
+        private uint _code;
 
-        public UInt16 Code
+        public uint Code
         {
             get { return _code; }
             set
@@ -278,6 +279,13 @@ namespace CameraControl.Devices.Classes
         {
             _notifyValuChange = notifyValuChange;
             SetValue(ba);
+            _notifyValuChange = true;
+        }
+
+        public void SetValue(MTPDataResponse data, bool notifyValuChange)
+        {
+            _notifyValuChange = notifyValuChange;
+            SetValue(data.Data);
             _notifyValuChange = true;
         }
 

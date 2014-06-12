@@ -66,14 +66,14 @@ namespace CameraControl.Devices.Nikon
                 byte datasize = 1;
                 CompressionSetting = new PropertyValue<int>();
                 CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
-                byte[] result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
+                var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
                                                                  CONST_PROP_CompressionSetting);
-                int type = BitConverter.ToInt16(result, 2);
-                byte formFlag = result[(2*datasize) + 5];
-                byte defval = result[datasize + 5];
-                for (int i = 0; i < result.Length - ((2*datasize) + 6 + 2); i += datasize)
+                int type = BitConverter.ToInt16(result.Data, 2);
+                byte formFlag = result.Data[(2 * datasize) + 5];
+                byte defval = result.Data[datasize + 5];
+                for (int i = 0; i < result.Data.Length - ((2 * datasize) + 6 + 2); i += datasize)
                 {
-                    byte val = result[((2*datasize) + 6 + 2) + i];
+                    byte val = result.Data[((2 * datasize) + 6 + 2) + i];
                     CompressionSetting.AddValues(_csTable.ContainsKey(val) ? _csTable[val] : val.ToString(), val);
                 }
                 CompressionSetting.SetValue(defval);
@@ -83,7 +83,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        public override void ReadDeviceProperties(int prop)
+        public override void ReadDeviceProperties(uint prop)
         {
             base.ReadDeviceProperties(prop);
             HaveLiveView = false;
@@ -98,17 +98,17 @@ namespace CameraControl.Devices.Nikon
             lock (Locker)
             {
                 byte oldval = 0;
-                byte[] val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect, -1);
-                if (val != null && val.Length > 0)
-                    oldval = val[0];
+                var val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect);
+                if (val.Data != null && val.Data.Length > 0)
+                    oldval = val.Data[0];
 
                 ErrorCodes.GetException(StillImageDevice.ExecuteWriteData(CONST_CMD_SetDevicePropValue, new[] {(byte) 4},
-                                                                          CONST_PROP_AFModeSelect, -1));
+                                                                          CONST_PROP_AFModeSelect));
                 ErrorCodes.GetException(StillImageDevice.ExecuteWithNoData(CONST_CMD_InitiateCapture));
-                if (val != null && val.Length > 0)
+                if (val.Data != null && val.Data.Length > 0)
                     ErrorCodes.GetException(StillImageDevice.ExecuteWriteData(CONST_CMD_SetDevicePropValue,
                                                                               new[] {oldval},
-                                                                              CONST_PROP_AFModeSelect, -1));
+                                                                              CONST_PROP_AFModeSelect));
             }
         }
     }

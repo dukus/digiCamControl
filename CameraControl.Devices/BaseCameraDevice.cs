@@ -416,7 +416,7 @@ namespace CameraControl.Devices
         {
         }
 
-        public virtual void ReadDeviceProperties(int prop)
+        public virtual void ReadDeviceProperties(uint prop)
         {
         }
 

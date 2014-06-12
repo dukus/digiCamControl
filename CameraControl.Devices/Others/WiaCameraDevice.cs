@@ -676,7 +676,7 @@ namespace CameraControl.Devices.Others
                 DeviceManager.OnEvent -= DeviceManager_OnEvent;
         }
 
-        public override void ReadDeviceProperties(int o)
+        public override void ReadDeviceProperties(uint o)
         {
             HaveLiveView = true;
         }

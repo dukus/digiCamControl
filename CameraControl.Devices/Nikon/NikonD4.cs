@@ -56,9 +56,9 @@ namespace CameraControl.Devices.Nikon
             DeviceReady();
             StillImageDevice.ExecuteWithNoData(CONST_CMD_ChangeCameraMode, 1);
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt16) 0x0001),
-                        CONST_PROP_ExposureProgramMode, -1);
+                        CONST_PROP_ExposureProgramMode);
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt32) 0xFFFFFFFF),
-                        CONST_PROP_ExposureTime, -1);
+                        CONST_PROP_ExposureTime);
 
             ErrorCodes.GetException(CaptureInSdRam
                                         ? StillImageDevice.ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInMedia,
@@ -99,20 +99,20 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("One sec", 1);
             res.AddValues("OFF", 1);
             res.ValueChanged +=
-                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) val}, res.Code, -1);
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) val}, res.Code);
             return res;
         }
 
         public override void StartRecordMovie()
         {
-            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 1}, CONST_PROP_ApplicationMode, -1);
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 1}, CONST_PROP_ApplicationMode);
             base.StartRecordMovie();
         }
 
         public override void StopRecordMovie()
         {
             base.StopRecordMovie();
-            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_ApplicationMode, -1);
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_ApplicationMode);
         }
     }
 }

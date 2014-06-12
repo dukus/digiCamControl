@@ -1,5 +1,4 @@
-#region Licence
-
+﻿#region Licence
 // Distributed under MIT License
 // ===========================================================
 // 
@@ -23,34 +22,15 @@
 // CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 #endregion
-
-#region
-
-using CameraControl.Devices.Classes;
-
-#endregion
-
-namespace CameraControl.Devices.Nikon
+namespace CameraControl.Devices.TransferProtocol
 {
-    public class NikonD40 : NikonBase
+    public interface ITransferProtocol
     {
-        public override bool Init(DeviceDescriptor deviceDescriptor)
-        {
-            bool res = base.Init(deviceDescriptor);
-            Capabilities.Add(CapabilityEnum.CaptureInRam);
-            Capabilities.Clear();
-            HaveLiveView = false;
-            CaptureInSdRam = false;
+        string Model { get; }
+        string Manufacturer { get; }
+        string SerialNumber { get; }
+        uint ExecuteWithNoData(int code);
 
-            return res;
-        }
-
-        public override void ReadDeviceProperties(uint prop)
-        {
-            base.ReadDeviceProperties(prop);
-            HaveLiveView = false;
-        }
     }
 }

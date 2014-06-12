@@ -328,6 +328,9 @@ namespace CameraControl.Devices
                     ICameraDevice cameraDevice;
                     DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
                     cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
+                    descriptor.StillImageDevice = new StillImageDevice(descriptor.WpdId);
+                    descriptor.StillImageDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+
                     cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
                     NewCameraConnected(cameraDevice);
                     cameraDevice.Init(descriptor);

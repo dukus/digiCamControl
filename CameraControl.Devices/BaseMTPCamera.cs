@@ -64,19 +64,19 @@ namespace CameraControl.Devices
         protected const int AppMinorVersionNumber = 0;
 
         // common MTP commands
-        public const int CONST_CMD_GetDevicePropValue = 0x1015;
-        public const int CONST_CMD_SetDevicePropValue = 0x1016;
-        public const int CONST_CMD_GetDevicePropDesc = 0x1014;
-        public const int CONST_CMD_GetObject = 0x1009;
-        public const int CONST_CMD_GetObjectHandles = 0x1007;
-        public const int CONST_CMD_GetObjectInfo = 0x1008;
-        public const int CONST_CMD_GetThumb = 0x100A;
-        public const int CONST_CMD_DeleteObject = 0x100B;
-        public const int CONST_CMD_FormatStore = 0x100F;
-        public const int CONST_CMD_GetStorageIDs = 0x1004;
+        public const uint CONST_CMD_GetDevicePropValue = 0x1015;
+        public const uint CONST_CMD_SetDevicePropValue = 0x1016;
+        public const uint CONST_CMD_GetDevicePropDesc = 0x1014;
+        public const uint CONST_CMD_GetObject = 0x1009;
+        public const uint CONST_CMD_GetObjectHandles = 0x1007;
+        public const uint CONST_CMD_GetObjectInfo = 0x1008;
+        public const uint CONST_CMD_GetThumb = 0x100A;
+        public const uint CONST_CMD_DeleteObject = 0x100B;
+        public const uint CONST_CMD_FormatStore = 0x100F;
+        public const uint CONST_CMD_GetStorageIDs = 0x1004;
 
-        public const int CONST_Event_ObjectAdded = 0x4002;
-        public const int CONST_Event_ObjectAddedInSdram = 0xC101;
+        public const uint CONST_Event_ObjectAdded = 0x4002;
+        public const uint CONST_Event_ObjectAddedInSdram = 0xC101;
 
         private const int CONST_READY_TIME = 1;
         private const int CONST_LOOP_TIME = 100;
@@ -202,13 +202,12 @@ namespace CameraControl.Devices
                     try
                     {
                         result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetObject,
-                                                                     Convert.ToInt32(o), -1,
                                                                      (total, current) =>
                                                                          {
                                                                              double i = (double) current/total;
                                                                              TransferProgress =
                                                                                  Convert.ToUInt32(i*100);
-                                                                         });
+                                                                         },Convert.ToUInt32(o) );
                     }
                         // if not enough memory for transfer catch it and wait and try again
                     catch (OutOfMemoryException)
@@ -263,33 +262,33 @@ namespace CameraControl.Devices
             }
         }
 
-        public MTPDataResponse ExecuteReadDataEx(int code)
+        public MTPDataResponse ExecuteReadDataEx(uint code)
         {
-            return ExecuteReadDataEx(code, -1, -1, CONST_LOOP_TIME, 0);
+            return ExecuteReadDataEx(code, CONST_LOOP_TIME, 0);
         }
 
-        public MTPDataResponse ExecuteReadDataEx(int code, int param1, int param2)
+        public MTPDataResponse ExecuteReadDataEx(uint code, uint param1, uint param2)
         {
             return ExecuteReadDataEx(code, param1, param2, CONST_LOOP_TIME, 0);
         }
 
-        public uint ExecuteWithNoData(int code, uint param1)
+        public uint ExecuteWithNoData(uint code, uint param1)
         {
             return ExecuteWithNoData(code, param1, CONST_LOOP_TIME, 0);
         }
 
-        public uint ExecuteWithNoData(int code, uint param1, uint param2, uint param3)
+        public uint ExecuteWithNoData(uint code, uint param1, uint param2, uint param3)
         {
             return ExecuteWithNoData(code, param1, param2, param3, CONST_LOOP_TIME, 0);
         }
 
-        public uint ExecuteWithNoData(int code)
+        public uint ExecuteWithNoData(uint code)
         {
             return ExecuteWithNoData(code, CONST_LOOP_TIME, 0);
         }
 
 
-        public uint ExecuteWithNoData(int code, uint param1, int loop, int counter)
+        public uint ExecuteWithNoData(uint code, uint param1, int loop, int counter)
         {
             WaitForReady();
             uint res = 0;
@@ -308,7 +307,7 @@ namespace CameraControl.Devices
             return res;
         }
 
-        public uint ExecuteWithNoData(int code, uint param1, uint param2, uint param3, int loop, int counter)
+        public uint ExecuteWithNoData(uint code, uint param1, uint param2, uint param3, int loop, int counter)
         {
             WaitForReady();
             uint res = 0;
@@ -327,7 +326,7 @@ namespace CameraControl.Devices
             return res;
         }
 
-        public uint ExecuteWithNoData(int code, int loop, int counter)
+        public uint ExecuteWithNoData(uint code, int loop, int counter)
         {
             WaitForReady();
             uint res = 0;
@@ -346,13 +345,13 @@ namespace CameraControl.Devices
             return res;
         }
 
-        public uint ExecuteWithNoData(int code, uint param1, uint param2)
+        public uint ExecuteWithNoData(uint code, uint param1, uint param2)
         {
             uint res = StillImageDevice.ExecuteWithNoData(code, param1, param2);
             return res;
         }
 
-        public MTPDataResponse ExecuteReadDataEx(int code, int param1, int param2, int loop, int counter)
+        public MTPDataResponse ExecuteReadDataEx(uint code, uint param1,uint param2, int loop, int counter)
         {
             WaitForReady();
             DeviceIsBusy = true;
@@ -361,7 +360,7 @@ namespace CameraControl.Devices
             do
             {
                 allok = true;
-                res = StillImageDevice.ExecuteReadDataEx(code, param1, param2);
+                res = StillImageDevice.ExecuteReadData(code, param1, param2);
                 if ((res.ErrorCode == ErrorCodes.MTP_Device_Busy || res.ErrorCode == PortableDeviceErrorCodes.ERROR_BUSY) &&
                     counter < loop)
                 {
@@ -374,7 +373,7 @@ namespace CameraControl.Devices
             return res;
         }
 
-        public MTPDataResponse ExecuteReadDataEx(int code, uint param1, uint param2, uint param3, int loop, int counter)
+        public MTPDataResponse ExecuteReadDataEx(uint code, uint param1, uint param2, uint param3, int loop, int counter)
         {
             WaitForReady();
             DeviceIsBusy = true;
@@ -383,7 +382,7 @@ namespace CameraControl.Devices
             do
             {
                 allok = true;
-                res = StillImageDevice.ExecuteReadDataEx(code, param1, param2, param3);
+                res = StillImageDevice.ExecuteReadData(code, param1, param2, param3);
                 if ((res.ErrorCode == ErrorCodes.MTP_Device_Busy || res.ErrorCode == PortableDeviceErrorCodes.ERROR_BUSY) &&
                     counter < loop)
                 {
@@ -396,7 +395,7 @@ namespace CameraControl.Devices
             return res;
         }
 
-        public MTPDataResponse ExecuteReadDataEx(int code, uint param1)
+        public MTPDataResponse ExecuteReadDataEx(uint code, uint param1)
         {
             int counter = 0;
             WaitForReady();
@@ -405,7 +404,7 @@ namespace CameraControl.Devices
             bool allok;
             do
             {
-                res = StillImageDevice.ExecuteReadDataEx(code, param1);
+                res = StillImageDevice.ExecuteReadData(code, param1);
                 allok = true;
                 if ((res.ErrorCode == ErrorCodes.MTP_Device_Busy || res.ErrorCode == PortableDeviceErrorCodes.ERROR_BUSY) &&
                     counter < CONST_LOOP_TIME)
@@ -428,7 +427,48 @@ namespace CameraControl.Devices
             //}
         }
 
-        public void SetProperty(int code, byte[] data, int param1, int param2)
+        public void SetProperty(uint code, byte[] data, uint param1)
+        {
+            bool timerstate = _timer.Enabled;
+            _timer.Stop();
+            bool retry = false;
+            int retrynum = 0;
+            //DeviceReady();
+            do
+            {
+                if (retrynum > 5)
+                {
+                    return;
+                }
+                try
+                {
+                    retry = false;
+                    uint resp = StillImageDevice.ExecuteWriteData(code, data, param1);
+                    if (resp != 0 || resp != ErrorCodes.MTP_OK)
+                    {
+                        //Console.WriteLine("Retry ...." + resp.ToString("X"));
+                        if (resp == ErrorCodes.MTP_Device_Busy || resp == 0x800700AA)
+                        {
+                            Thread.Sleep(50);
+                            retry = true;
+                            retrynum++;
+                        }
+                        else
+                        {
+                            ErrorCodes.GetException(resp);
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Log.Debug("Error set property :" + param1.ToString("X"), exception);
+                }
+            } while (retry);
+            if (timerstate)
+                _timer.Start();
+        }
+
+        public void SetProperty(uint code, byte[] data, uint param1, uint param2)
         {
             bool timerstate = _timer.Enabled;
             _timer.Stop();
@@ -469,7 +509,7 @@ namespace CameraControl.Devices
                 _timer.Start();
         }
 
-        public void SetProperty(int code, byte[] data, uint param1, uint param2, uint param3)
+        public void SetProperty(uint code, byte[] data, uint param1, uint param2, uint param3)
         {
             bool timerstate = _timer.Enabled;
             _timer.Stop();
