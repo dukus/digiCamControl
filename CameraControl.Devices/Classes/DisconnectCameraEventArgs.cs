@@ -29,6 +29,7 @@
 #region
 
 using System;
+using CameraControl.Devices.TransferProtocol;
 using Canon.Eos.Framework;
 using PortableDeviceLib;
 
@@ -41,7 +42,7 @@ namespace CameraControl.Devices.Classes
     public class DisconnectCameraEventArgs : EventArgs
     {
         public string WiaId { get; set; }
-        public StillImageDevice StillImageDevice { get; set; }
+        public ITransferProtocol StillImageDevice { get; set; }
         public EosCamera EosCamera { get; set; }
     }
 }

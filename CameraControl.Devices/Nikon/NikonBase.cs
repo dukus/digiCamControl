@@ -338,7 +338,10 @@ namespace CameraControl.Devices.Nikon
                 Capabilities.Add(CapabilityEnum.CaptureInRam);
                 Capabilities.Add(CapabilityEnum.CaptureNoAf);
                 StillImageDevice = deviceDescriptor.StillImageDevice;
-                StillImageDevice.DeviceEvent += _stillImageDevice_DeviceEvent;
+                // check if is mtp device 
+                StillImageDevice imageDevice = StillImageDevice as StillImageDevice;
+                if (imageDevice != null)
+                    imageDevice.DeviceEvent += _stillImageDevice_DeviceEvent;
                 HaveLiveView = true;
                 DeviceReady();
                 DeviceName = StillImageDevice.Model;
@@ -1635,7 +1638,7 @@ namespace CameraControl.Devices.Nikon
             }
             catch (InvalidComObjectException)
             {
-                return;
+                //return;
             }
             catch (Exception)
             {

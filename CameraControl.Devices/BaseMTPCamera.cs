@@ -35,6 +35,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using CameraControl.Devices.Classes;
+using CameraControl.Devices.TransferProtocol;
 using PortableDeviceLib;
 using Timer = System.Timers.Timer;
 
@@ -81,7 +82,7 @@ namespace CameraControl.Devices
         private const int CONST_READY_TIME = 1;
         private const int CONST_LOOP_TIME = 100;
 
-        protected StillImageDevice StillImageDevice = null;
+        protected ITransferProtocol StillImageDevice = null;
         protected bool DeviceIsBusy = false;
 
         /// <summary>
@@ -96,9 +97,10 @@ namespace CameraControl.Devices
 
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
-            StillImageDevice = new StillImageDevice(deviceDescriptor.WpdId);
-            StillImageDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-            StillImageDevice.DeviceEvent += StillImageDevice_DeviceEvent;
+            StillImageDevice = deviceDescriptor.StillImageDevice;
+            StillImageDevice imageDevice = StillImageDevice as StillImageDevice;
+            if (imageDevice != null)
+                imageDevice.DeviceEvent += StillImageDevice_DeviceEvent;
             IsConnected = true;
             return true;
         }
@@ -262,11 +264,6 @@ namespace CameraControl.Devices
             }
         }
 
-        public MTPDataResponse ExecuteReadDataEx(uint code)
-        {
-            return ExecuteReadDataEx(code, CONST_LOOP_TIME, 0);
-        }
-
         public MTPDataResponse ExecuteReadDataEx(uint code, uint param1, uint param2)
         {
             return ExecuteReadDataEx(code, param1, param2, CONST_LOOP_TIME, 0);
@@ -418,6 +415,28 @@ namespace CameraControl.Devices
             return res;
         }
 
+        public MTPDataResponse ExecuteReadDataEx(uint code)
+        {
+            int counter = 0;
+            WaitForReady();
+            DeviceIsBusy = true;
+            MTPDataResponse res = new MTPDataResponse();
+            bool allok;
+            do
+            {
+                res = StillImageDevice.ExecuteReadData(code);
+                allok = true;
+                if ((res.ErrorCode == ErrorCodes.MTP_Device_Busy || res.ErrorCode == PortableDeviceErrorCodes.ERROR_BUSY) &&
+                    counter < CONST_LOOP_TIME)
+                {
+                    Thread.Sleep(CONST_READY_TIME);
+                    counter++;
+                    allok = false;
+                }
+            } while (!allok);
+            DeviceIsBusy = false;
+            return res;
+        }
 
         protected void WaitForReady()
         {

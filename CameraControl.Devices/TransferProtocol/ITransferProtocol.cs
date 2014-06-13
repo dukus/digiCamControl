@@ -23,6 +23,9 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
+
+using PortableDeviceLib;
+
 namespace CameraControl.Devices.TransferProtocol
 {
     public interface ITransferProtocol
@@ -30,7 +33,18 @@ namespace CameraControl.Devices.TransferProtocol
         string Model { get; }
         string Manufacturer { get; }
         string SerialNumber { get; }
-        uint ExecuteWithNoData(int code);
+        bool IsConnected { get; set; }
+        string DeviceId { get; }
+        
+
+        MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback,
+                                           params uint[] parameters);
+
+        MTPDataResponse ExecuteReadData(uint code, params uint[] parameters);
+        uint ExecuteWithNoData(uint code, params uint[] parameters);
+        uint ExecuteWriteData(uint code, byte[] data, params uint[] parameters);
+
+        void Disconnect();
 
     }
 }

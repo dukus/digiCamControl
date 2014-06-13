@@ -37,6 +37,7 @@ using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Nikon;
 using CameraControl.Devices.Others;
+using CameraControl.Devices.TransferProtocol;
 using Canon.Eos.Framework;
 using PortableDeviceLib;
 using WIA;
@@ -328,15 +329,18 @@ namespace CameraControl.Devices
                     ICameraDevice cameraDevice;
                     DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
                     cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
-                    descriptor.StillImageDevice = new StillImageDevice(descriptor.WpdId);
-                    descriptor.StillImageDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+                    MtpProtocol device = new MtpProtocol(descriptor.WpdId);
+                    device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+
+                    descriptor.StillImageDevice = device;
 
                     cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
-                    NewCameraConnected(cameraDevice);
                     cameraDevice.Init(descriptor);
+                    ConnectedDevices.Add(cameraDevice);
+                    NewCameraConnected(cameraDevice);
+
                     descriptor.CameraDevice = cameraDevice;
                     _deviceEnumerator.Add(descriptor);
-                    ConnectedDevices.Add(cameraDevice);
                 }
             }
             _connectionInProgress = false;
@@ -415,7 +419,7 @@ namespace CameraControl.Devices
             }
         }
 
-        private void DisconnectCamera(StillImageDevice device)
+        private void DisconnectCamera(ITransferProtocol device)
         {
             DeviceDescriptor descriptor = _deviceEnumerator.GetByWpdId(device.DeviceId);
             if (descriptor != null)

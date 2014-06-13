@@ -263,9 +263,9 @@ namespace CameraControl.Devices.Canon
 
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
-            StillImageDevice = new StillImageDevice(deviceDescriptor.WpdId);
-            StillImageDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-            StillImageDevice.DeviceEvent += _stillImageDevice_DeviceEvent;
+            StillImageDevice = deviceDescriptor.StillImageDevice;
+            //StillImageDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+            //StillImageDevice.DeviceEvent += _stillImageDevice_DeviceEvent;
             DeviceName = StillImageDevice.Model;
             Manufacturer = StillImageDevice.Manufacturer;
             Capabilities.Add(CapabilityEnum.Bulb);
