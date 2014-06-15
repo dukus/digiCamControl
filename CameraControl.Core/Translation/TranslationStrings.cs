@@ -468,5 +468,6 @@ namespace CameraControl.Core.Translation
         public static string LabelHistogram = "Histogram";
         public static string LabelMetadata = "Metadata";
         public static string LabelFullSize = "Full size image";
+        public static string LabelWifi = "Connect with DSLRDASHBOARDSERVER";
     }
 }

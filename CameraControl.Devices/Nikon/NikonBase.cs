@@ -530,7 +530,8 @@ namespace CameraControl.Devices.Nikon
                 return;
             List<byte> vals = new List<byte>() {10};
             vals.AddRange(Encoding.Unicode.GetBytes(key));
-            SetProperty(CONST_CMD_SetDevicePropValue, vals.ToArray(), CONST_PROP_ImageSize);
+            //TODO: Reenable it !!!!!!!!!!!!!!!!
+            //SetProperty(CONST_CMD_SetDevicePropValue, vals.ToArray(), CONST_PROP_ImageSize);
         }
 
         protected virtual PropertyValue<long> InitRawQuality()
@@ -665,8 +666,9 @@ namespace CameraControl.Devices.Nikon
         {
             if (e.PropertyName == "CaptureInSdRam")
             {
-                SetProperty(CONST_CMD_SetDevicePropValue, CaptureInSdRam ? new[] {(byte) 1} : new[] {(byte) 0},
-                            CONST_PROP_RecordingMedia);
+                //TODO: Reenable it !!!!!!!!!!!!!!!!
+                //SetProperty(CONST_CMD_SetDevicePropValue, CaptureInSdRam ? new[] {(byte) 1} : new[] {(byte) 0},
+                //            CONST_PROP_RecordingMedia);
                 ReadDeviceProperties(CONST_PROP_RecordingMedia);
             }
             if (e.PropertyName == "HostMode")

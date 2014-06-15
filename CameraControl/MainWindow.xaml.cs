@@ -48,6 +48,7 @@ using CameraControl.Devices.Classes;
 using CameraControl.Layouts;
 using CameraControl.windows;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using EditSession = CameraControl.windows.EditSession;
 using FileInfo = System.IO.FileInfo;
 using HelpProvider = CameraControl.Classes.HelpProvider;
@@ -780,6 +781,19 @@ namespace CameraControl
         }
 
         #endregion
+
+        private void but_wifi_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ServiceProvider.DeviceManager.ConnectDevicesDDServer("192.168.1.1");
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to connect DSLRDASHBOARDSERVER", exception);
+                this.ShowMessageAsync("Error", "Unable to connect DSLRDASHBOARDSERVER" + exception.Message);
+            }
+        }
 
     }
 }

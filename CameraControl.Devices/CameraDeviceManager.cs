@@ -38,6 +38,7 @@ using CameraControl.Devices.Classes;
 using CameraControl.Devices.Nikon;
 using CameraControl.Devices.Others;
 using CameraControl.Devices.TransferProtocol;
+using CameraControl.Devices.TransferProtocol.DDServer;
 using Canon.Eos.Framework;
 using PortableDeviceLib;
 using WIA;
@@ -54,6 +55,7 @@ namespace CameraControl.Devices
         private bool _connectionInProgress = false;
         private DeviceDescriptorEnumerator _deviceEnumerator;
         private EosFramework _framework;
+        private DdClient _client = new DdClient();
 
         public Dictionary<ICameraDevice, byte[]> LiveViewImage;
 
@@ -329,6 +331,71 @@ namespace CameraControl.Devices
                     ICameraDevice cameraDevice;
                     DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
                     cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
+                    MtpProtocol device = new MtpProtocol(descriptor.WpdId);
+                    device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+
+                    descriptor.StillImageDevice = device;
+
+                    cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                    cameraDevice.Init(descriptor);
+                    ConnectedDevices.Add(cameraDevice);
+                    NewCameraConnected(cameraDevice);
+
+                    descriptor.CameraDevice = cameraDevice;
+                    _deviceEnumerator.Add(descriptor);
+                }
+            }
+            _connectionInProgress = false;
+        }
+
+        public void ConnectDevicesDDServer(string ip)
+        {
+            if (_connectionInProgress)
+                return;
+            _connectionInProgress = true;
+            _deviceEnumerator.RemoveDisconnected();
+
+            DdClient client = new DdClient();
+            client.Open(ip, 4757);
+            var devices = client.GetDevices();
+            if (devices.Count == 0)
+                return;
+            client.Connect(devices[0]);
+            DdServerProtocol protocol = new DdServerProtocol(client);
+
+            if (GetNativeDriver(protocol.Model) != null)
+            {
+                ICameraDevice cameraDevice;
+                DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = "ddserver" };
+                cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(protocol.Model));
+                descriptor.StillImageDevice = protocol;
+
+                //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                cameraDevice.Init(descriptor);
+                ConnectedDevices.Add(cameraDevice);
+                NewCameraConnected(cameraDevice);
+
+                descriptor.CameraDevice = cameraDevice;
+                _deviceEnumerator.Add(descriptor);
+            }
+
+            foreach (PortableDevice portableDevice in PortableDeviceCollection.Instance.Devices)
+            {
+                Log.Debug("Connection device " + portableDevice.DeviceId);
+                //TODO: avoid to load some mass storage in my computer need to find a general solution
+                if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
+                    !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
+                    continue;
+                // ignore some Canon cameras
+                if (!SupportedCanonCamera(portableDevice.DeviceId))
+                    continue;
+                portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+                if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
+                    GetNativeDriver(portableDevice.Model) != null)
+                {
+                    ICameraDevice cameraDevice;
+                    DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = portableDevice.DeviceId };
+                    cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
                     MtpProtocol device = new MtpProtocol(descriptor.WpdId);
                     device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
 

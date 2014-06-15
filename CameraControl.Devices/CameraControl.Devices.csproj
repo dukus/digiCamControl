@@ -132,6 +132,17 @@
     <Compile Include="Others\WiaCameraDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticHelper.cs" />
+    <Compile Include="TransferProtocol\DdServerProtocol.cs" />
+    <Compile Include="TransferProtocol\DDServer\CommandBlockContainer.cs" />
+    <Compile Include="TransferProtocol\DDServer\Container.cs" />
+    <Compile Include="TransferProtocol\DDServer\ContainerHeader.cs" />
+    <Compile Include="TransferProtocol\DDServer\ContainerType.cs" />
+    <Compile Include="TransferProtocol\DDServer\DataBlockContainer.cs" />
+    <Compile Include="TransferProtocol\DDServer\DdClient.cs" />
+    <Compile Include="TransferProtocol\DDServer\DdServerDevice.cs" />
+    <Compile Include="TransferProtocol\DDServer\InvalidContainerException.cs" />
+    <Compile Include="TransferProtocol\DDServer\ParameterContainer.cs" />
+    <Compile Include="TransferProtocol\DDServer\ResponseBlockContainer.cs" />
     <Compile Include="TransferProtocol\ITransferProtocol.cs" />
     <Compile Include="TransferProtocol\MtpProtocol.cs" />
     <Compile Include="Xml\XmlCommandDescriptor.cs" />
