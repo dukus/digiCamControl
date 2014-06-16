@@ -16,6 +16,7 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
 
         public DataBlockContainer(int commandCode, byte[] data)
         {
+            Header = new ContainerHeader();
             Header.Code = commandCode;
             Header.ContainerType = ContainerType.DataBlock;
             Header.PayloadLength = data.Length;
@@ -24,7 +25,7 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
 
         public override void WritePayload(Stream s)
         {
-            s.Read(Payload, 0, Payload.Length);
+            s.Write(Payload, 0, Payload.Length);
         }
     }
 }

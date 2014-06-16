@@ -67,13 +67,16 @@ namespace CameraControl.Devices.TransferProtocol
             lock (_syncRoot)
             {
                 ReconnectIfNeeded();
-                _client.Write(new CommandBlockContainer((int) code, parameters));
+                _client.Write(new CommandBlockContainer((int)code, parameters), new DataBlockContainer((int)code, data));
                 int len = _client.ReadInt();
                 Container resp = _client.ReadContainer();
-                _client.Write(new DataBlockContainer((int) code, data));
-                int len1 = _client.ReadInt();
+                if (resp.Header.Length >= len - 4)
+                {
+                    return (uint)resp.Header.Code;
+                }
+
                 resp = _client.ReadContainer();
-                return (uint) resp.Header.Code;
+                return (uint)resp.Header.Code;
             }
         }
 

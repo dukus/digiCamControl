@@ -53,8 +53,31 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
         {
             using (var ms = new MemoryStream())
             {
+                int totalsize = container.Header.Length + 4;
+                Console.WriteLine("1 C" + totalsize);
+                ms.WriteByte((byte)(0xff & totalsize));
+                ms.WriteByte((byte)(0xff & (totalsize >> 8)));
+                ms.WriteByte((byte)(0xff & (totalsize >> 16)));
+                ms.WriteByte((byte)(0xff & (totalsize >> 24)));
                 container.Write(ms);
                 _inerStream.Write(ms.ToArray(), 0, (int) ms.Length);
+            }
+        }
+
+        public void Write(Container container1, Container container2)
+        {
+            using (var ms = new MemoryStream())
+            {
+                int totalsize = container1.Header.Length + container2.Header.Length + 4;
+                Console.WriteLine("2 C" + totalsize);
+                ms.WriteByte((byte)(0xff & totalsize));
+                ms.WriteByte((byte)(0xff & (totalsize >> 8)));
+                ms.WriteByte((byte)(0xff & (totalsize >> 16)));
+                ms.WriteByte((byte)(0xff & (totalsize >> 24)));
+                container1.Write(ms);
+                container2.Write(ms);
+                _inerStream.Write(ms.ToArray(), 0, (int)ms.Length);
+                _inerStream.Flush();
             }
         }
 

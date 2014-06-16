@@ -64,11 +64,6 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
 
         public void Write(Stream s)
         {
-            s.WriteByte((byte) (0xff & Length + 4));
-            s.WriteByte((byte) (0xff & (Length + 4 >> 8)));
-            s.WriteByte((byte) (0xff & (Length + 4 >> 16)));
-            s.WriteByte((byte) (0xff & (Length + 4 >> 24)));
-
             s.WriteByte((byte) (0xff & Length));
             s.WriteByte((byte) (0xff & (Length >> 8)));
             s.WriteByte((byte) (0xff & (Length >> 16)));
