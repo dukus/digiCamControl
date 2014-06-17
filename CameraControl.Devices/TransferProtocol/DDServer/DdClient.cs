@@ -54,7 +54,6 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
             using (var ms = new MemoryStream())
             {
                 int totalsize = container.Header.Length + 4;
-                Console.WriteLine("1 C" + totalsize);
                 ms.WriteByte((byte)(0xff & totalsize));
                 ms.WriteByte((byte)(0xff & (totalsize >> 8)));
                 ms.WriteByte((byte)(0xff & (totalsize >> 16)));
@@ -69,7 +68,6 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
             using (var ms = new MemoryStream())
             {
                 int totalsize = container1.Header.Length + container2.Header.Length + 4;
-                Console.WriteLine("2 C" + totalsize);
                 ms.WriteByte((byte)(0xff & totalsize));
                 ms.WriteByte((byte)(0xff & (totalsize >> 8)));
                 ms.WriteByte((byte)(0xff & (totalsize >> 16)));

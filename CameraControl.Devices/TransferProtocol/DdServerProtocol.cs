@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using CameraControl.Devices.TransferProtocol.DDServer;
 using PortableDeviceLib;
 using ddserverTest;
@@ -32,6 +33,8 @@ namespace CameraControl.Devices.TransferProtocol
                 var res = new MTPDataResponse();
                 _client.Write(new CommandBlockContainer((int) code, parameters));
                 int len = _client.ReadInt();
+                if (len > 500)
+                    Console.WriteLine("bIG DATA {0}", len);
                 Container resp = _client.ReadContainer();
                 if (resp.Header.Length >= len - 4)
                 {
@@ -40,7 +43,7 @@ namespace CameraControl.Devices.TransferProtocol
 
                 data = (DataBlockContainer) resp;
                 resp = _client.ReadContainer();
-                return new MTPDataResponse() {Data = data.Payload, ErrorCode = (uint) resp.Header.Code};
+                return new MTPDataResponse() {Data = data.Payload, ErrorCode = (uint) data.Header.Code};
             }
         }
 

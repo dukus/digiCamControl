@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Net.Sockets;
 using ddserverTest;
 
 namespace CameraControl.Devices.TransferProtocol.DDServer
@@ -11,8 +13,14 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
         {
             Header = header;
             Payload = new byte[Header.PayloadLength];
-            payload.Read(Payload, 0, Header.PayloadLength);
+//            int readnum = payload.Read(Payload, 0, Header.PayloadLength);
+            int numBytes = 0;
+            while (numBytes != Header.PayloadLength)
+            {
+                numBytes += payload.Read(Payload, numBytes, Header.PayloadLength - numBytes);
+            }
         }
+
 
         public DataBlockContainer(int commandCode, byte[] data)
         {
