@@ -6,8 +6,7 @@
                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                       xmlns:local="clr-namespace:CameraControl.Controls"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
-                      ShowMaxRestoreButton="False" ShowMinButton="False" Topmost="True" xmlns:my="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core">
+                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" Topmost="True" xmlns:my="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core" SaveWindowPosition="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -31,28 +30,42 @@
     </Controls:MetroWindow.WindowCommands>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="50*" />
-            <RowDefinition Height="35*" />
-            <RowDefinition Height="35*" />
-            <RowDefinition Height="27*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="32*" />
-            <RowDefinition Height="130" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="130" />
-            <ColumnDefinition Width="635*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Content="{T:TranslateExtension ButtonCapturePhotos}" Name="btn_shot" Click="btn_shot_Click" Grid.Row="1" Grid.ColumnSpan="2" Margin="5"/>
-        <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" Name="lbl_message" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="10" Grid.ColumnSpan="3" />
-        <CheckBox Content="{T:TranslateExtension LabelDisableAutofocus}" Height="27" HorizontalAlignment="Left" Margin="5,0,0,0" Name="chk_noautofocus" VerticalAlignment="Top" IsChecked="{Binding Path=DisbleAutofocus, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Grid.Row="4" Grid.ColumnSpan="2" Width="220" IsEnabled="False" />
-        <Button Content="{T:TranslateExtension ButtonStop}" Name="btn_stop" Click="btn_stop_Click" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
-        <ListBox Grid.Column="2" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Grid.RowSpan="8">
+        
+         <Expander Header="" ExpandDirection="Right">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="35*" />
+                    <RowDefinition Height="35*" />
+                    <RowDefinition Height="27*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="32*" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Button Content="{T:TranslateExtension ButtonCapturePhotos}" Name="btn_shot" Click="btn_shot_Click" Grid.Row="1" Grid.ColumnSpan="2" Margin="5"/>
+                <CheckBox Content="{T:TranslateExtension LabelDisableAutofocus}" Height="27" HorizontalAlignment="Left" Margin="5,0,0,0" Name="chk_noautofocus" VerticalAlignment="Top" IsChecked="{Binding Path=DisbleAutofocus, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Grid.Row="4" Grid.ColumnSpan="2" Width="220" IsEnabled="False" />
+                <Button Content="{T:TranslateExtension ButtonStop}" Name="btn_stop" Click="btn_stop_Click" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
+                <Button Content="{T:Translate LabelResetCounters}" Name="btn_resetCounters" Grid.Row="3" Click="btn_resetCounters_Click" Grid.ColumnSpan="2" Margin="5"/>
+                <my:AdvancedSlider Grid.ColumnSpan="2" Grid.Row="5"  Name="int_wait" Minimum="0" Maximum="10000"  Value="{Binding Path=DelaySec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Label="{T:TranslateExtension LabelDelay}" ToolTip="Wait beetven cameras shots in seconds " Margin="1"/>
+                <my:AdvancedSlider Grid.ColumnSpan="2" Grid.Row="6" Value="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Label="{T:TranslateExtension LabelNumberOfCaptures}" Maximum="1000" Minimum="1" Margin="1"/>
+                <my:AdvancedSlider Grid.ColumnSpan="2" Grid.Row="7" Value="{Binding Path=WaitSec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Label="{T:TranslateExtension LabelWaitTime}" Margin="1" Maximum="3600" Minimum="1"/>
+                <TextBox Grid.Row="8" Name="txt_counter" Margin="2"/>
+                <Button Content="{T:Translate LabelSetCounters}" Grid.Column="1" Grid.Row="8" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" />
+            </Grid>
+        </Expander>
+        <Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,424" />
+        <ListBox Grid.Column="1" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />
@@ -61,26 +74,21 @@
             </ListBox.ContextMenu>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <WrapPanel/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <HierarchicalDataTemplate>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top">
 
-                        <local:ControlerSimple DataContext="{Binding Path=.}" Width="115"/>
+                        <local:ControlerSimple DataContext="{Binding Path=.}" Width="115" Height="380"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="2" Padding="0" />
-        <Button Content="{T:Translate LabelResetCounters}" Name="btn_resetCounters" Grid.Row="3" Click="btn_resetCounters_Click" Grid.ColumnSpan="2" Margin="5"/>
-        <my:AdvancedSlider Grid.ColumnSpan="2" Grid.Row="5"  Name="int_wait" Minimum="0" Maximum="10000"  Value="{Binding Path=DelaySec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Label="{T:TranslateExtension LabelDelay}" ToolTip="Wait beetven cameras shots in seconds " Margin="1"/>
-        <my:AdvancedSlider Grid.ColumnSpan="2" Grid.Row="6" Value="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Label="{T:TranslateExtension LabelNumberOfCaptures}" Maximum="1000" Minimum="1" Margin="1"/>
-        <my:AdvancedSlider Grid.ColumnSpan="2" Grid.Row="7" Value="{Binding Path=WaitSec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Label="{T:TranslateExtension LabelWaitTime}" Margin="1" Maximum="3600" Minimum="1"/>
-        <TextBox Grid.Row="8" Name="txt_counter" Margin="2"/>
-        <Button Content="{T:Translate LabelSetCounters}" Grid.Column="1" Grid.Row="8" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" />
-        <GroupBox Grid.ColumnSpan="3" Grid.Row="9" Header="{T:TranslateExtension LabelExternalShutterRelease}" >
+
+     
+        <Expander Grid.ColumnSpan="2" Grid.Row="1" Header="{T:TranslateExtension LabelExternalShutterRelease}" ExpandDirection="Up" Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="216*" />
@@ -96,6 +104,7 @@
                 <Button Content="{T:TranslateExtension LabelFocus}" Grid.Column="1" Name="btn_focus" Margin="5" Click="btn_focus_Click" />
                 <Button Content="{T:TranslateExtension ButtonCapture}" Grid.Column="1" Grid.Row="1" Name="btn_capture" Margin="5" Click="btn_capture_Click" />
             </Grid>
-        </GroupBox>
+        </Expander>
+        <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" Name="lbl_message" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" />
     </Grid>
 </Controls:MetroWindow>

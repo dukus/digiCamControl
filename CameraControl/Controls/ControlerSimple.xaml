@@ -7,7 +7,7 @@
              xmlns:my="clr-namespace:CameraControl.Controls"
              xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
              xmlns:Classes="clr-namespace:CameraControl.Classes" mc:Ignorable="d"  
-             d:DesignHeight="443" d:DesignWidth="115">
+             d:DesignHeight="373" d:DesignWidth="115">
     <!--d:DataContext="{d:DesignInstance Type=Devices:BaseCameraDevice}"-->
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
