@@ -366,56 +366,28 @@ namespace CameraControl.Devices
         {
             if (_connectionInProgress)
                 return;
-            _connectionInProgress = true;
-            _deviceEnumerator.RemoveDisconnected();
-
-            DdClient client = new DdClient();
-            client.Open(ip, port);
-            var devices = client.GetDevices();
-            if (devices.Count == 0)
-                return;
-            client.Connect(devices[0]);
-            DdServerProtocol protocol = new DdServerProtocol(client);
-
-            if (GetNativeDriver(protocol.Model) != null)
+            try
             {
-                ICameraDevice cameraDevice;
-                DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = "ddserver" };
-                cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(protocol.Model));
-                descriptor.StillImageDevice = protocol;
+                _connectionInProgress = true;
+                _deviceEnumerator.RemoveDisconnected();
+                DdClient client = new DdClient();
+                if (!client.Open(ip, port))
+                    throw new Exception("No server was found!");
+                var devices = client.GetDevices();
+                if (devices.Count == 0)
+                    throw new Exception("No connected device was found!");
 
-                //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
-                cameraDevice.Init(descriptor);
-                ConnectedDevices.Add(cameraDevice);
-                NewCameraConnected(cameraDevice);
+                client.Connect(devices[0]);
+                DdServerProtocol protocol = new DdServerProtocol(client);
 
-                descriptor.CameraDevice = cameraDevice;
-                _deviceEnumerator.Add(descriptor);
-            }
-
-            foreach (PortableDevice portableDevice in PortableDeviceCollection.Instance.Devices)
-            {
-                Log.Debug("Connection device " + portableDevice.DeviceId);
-                //TODO: avoid to load some mass storage in my computer need to find a general solution
-                if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
-                    !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
-                    continue;
-                // ignore some Canon cameras
-                if (!SupportedCanonCamera(portableDevice.DeviceId))
-                    continue;
-                portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-                if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
-                    GetNativeDriver(portableDevice.Model) != null)
+                if (GetNativeDriver(protocol.Model) != null)
                 {
                     ICameraDevice cameraDevice;
-                    DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = portableDevice.DeviceId };
-                    cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
-                    MtpProtocol device = new MtpProtocol(descriptor.WpdId);
-                    device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+                    DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = "ddserver"};
+                    cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(protocol.Model));
+                    descriptor.StillImageDevice = protocol;
 
-                    descriptor.StillImageDevice = device;
-
-                    cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                    //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
                     cameraDevice.Init(descriptor);
                     ConnectedDevices.Add(cameraDevice);
                     NewCameraConnected(cameraDevice);
@@ -423,8 +395,43 @@ namespace CameraControl.Devices
                     descriptor.CameraDevice = cameraDevice;
                     _deviceEnumerator.Add(descriptor);
                 }
+
+                foreach (PortableDevice portableDevice in PortableDeviceCollection.Instance.Devices)
+                {
+                    Log.Debug("Connection device " + portableDevice.DeviceId);
+                    //TODO: avoid to load some mass storage in my computer need to find a general solution
+                    if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
+                        !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
+                        continue;
+                    // ignore some Canon cameras
+                    if (!SupportedCanonCamera(portableDevice.DeviceId))
+                        continue;
+                    portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+                    if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
+                        GetNativeDriver(portableDevice.Model) != null)
+                    {
+                        ICameraDevice cameraDevice;
+                        DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
+                        cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
+                        MtpProtocol device = new MtpProtocol(descriptor.WpdId);
+                        device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+
+                        descriptor.StillImageDevice = device;
+
+                        cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                        cameraDevice.Init(descriptor);
+                        ConnectedDevices.Add(cameraDevice);
+                        NewCameraConnected(cameraDevice);
+
+                        descriptor.CameraDevice = cameraDevice;
+                        _deviceEnumerator.Add(descriptor);
+                    }
+                }
             }
-            _connectionInProgress = false;
+            finally
+            {
+                _connectionInProgress = false;
+            }
         }
 
         private bool SupportedCanonCamera(string id)

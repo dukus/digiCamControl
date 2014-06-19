@@ -1,7 +1,7 @@
 ﻿<Controls:MetroWindow  x:Class="CameraControl.windows.GetIpWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="Connect" Height="157" Width="303" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen">
+                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="Connect" Height="157" Width="303" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowInTaskbar="False" ShowMinButton="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />

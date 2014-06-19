@@ -793,7 +793,7 @@ namespace CameraControl
             catch (Exception exception)
             {
                 Log.Error("Unable to connect DSLRDASHBOARDSERVER", exception);
-                this.ShowMessageAsync("Error", "Unable to connect DSLRDASHBOARDSERVER" + exception.Message);
+                this.ShowMessageAsync("Error", "Unable to connect DSLRDASHBOARDSERVER " + exception.Message);
             }
         }
 

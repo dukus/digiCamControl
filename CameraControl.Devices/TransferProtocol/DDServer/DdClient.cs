@@ -123,9 +123,9 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
                 {
                     res.Add(new DdServerDevice(dataBlockContainer.Payload, index + 2));
                 }
+                Container cc = ReadContainer();
+                _inerStream.Read(buff, 0, 4);
             }
-            Container cc = ReadContainer();
-            _inerStream.Read(buff, 0, 4);
             return res;
         }
 
@@ -150,5 +150,7 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
         {
             return _client.Connected;
         }
+       
+        
     }
 }
