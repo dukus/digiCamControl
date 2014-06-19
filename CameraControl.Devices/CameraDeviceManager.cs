@@ -348,7 +348,21 @@ namespace CameraControl.Devices
             _connectionInProgress = false;
         }
 
-        public void ConnectDevicesDDServer(string ip)
+        public void ConnectToServer(string s)
+        {
+            if(string.IsNullOrEmpty(s))
+                return;
+            int port = 4757;
+            string ip = s;
+            if(s.Contains(":"))
+            {
+                ip = s.Split(':')[0];
+                int.TryParse(s.Split(':')[1], out port);
+            }
+            ConnectDevicesDDServer(ip, port);
+        }
+
+        public void ConnectDevicesDDServer(string ip, int port)
         {
             if (_connectionInProgress)
                 return;
@@ -356,7 +370,7 @@ namespace CameraControl.Devices
             _deviceEnumerator.RemoveDisconnected();
 
             DdClient client = new DdClient();
-            client.Open(ip, 4757);
+            client.Open(ip, port);
             var devices = client.GetDevices();
             if (devices.Count == 0)
                 return;

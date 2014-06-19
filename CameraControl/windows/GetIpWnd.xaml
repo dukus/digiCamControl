@@ -1,0 +1,17 @@
+﻿<Controls:MetroWindow  x:Class="CameraControl.windows.GetIpWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="Connect" Height="157" Width="303" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ComboBox Margin="3" IsEditable="False" IsEnabled="False">
+            <ComboBoxItem Content="DSLRDASHBOARDSERVER" IsSelected="True" />
+        </ComboBox>
+        <TextBox Grid.Row="1" Margin="3" Name="txt_ip" Text="192.168.1.1:4757" FontSize="20"/>
+        <Button Content="Conect" Grid.Row="2" Name="btn_conect" Margin="3" Click="btn_conect_Click" />
+    </Grid>
+</Controls:MetroWindow >

@@ -786,7 +786,9 @@ namespace CameraControl
         {
             try
             {
-                ServiceProvider.DeviceManager.ConnectDevicesDDServer("192.168.1.1");
+                var wnd = new GetIpWnd { Ip = "192.168.1.1:4757" };
+                if (wnd.ShowDialog() == true)
+                    ServiceProvider.DeviceManager.ConnectToServer(wnd.Ip);
             }
             catch (Exception exception)
             {
