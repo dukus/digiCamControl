@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using PortableDeviceLib;
 using ddserverTest;
 
 namespace CameraControl.Devices.TransferProtocol.DDServer
@@ -79,20 +80,20 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
             }
         }
 
-        public virtual Container ReadContainer()
+        public virtual Container ReadContainer(StillImageDevice.TransferCallback callback = null)
         {
-            Container result = getContainer(false);
+            Container result = getContainer(false, callback);
             return result;
         }
 
-        protected Container getContainer(bool synchronized)
+        protected Container getContainer(bool synchronized, StillImageDevice.TransferCallback callback)
         {
             var header = new ContainerHeader(_inerStream);
 
             switch (header.ContainerType)
             {
                 case ContainerType.DataBlock:
-                    return new DataBlockContainer(header, _inerStream);
+                    return new DataBlockContainer(header, _inerStream, callback);
                 case ContainerType.ResponseBlock:
                     if (synchronized)
                         Monitor.Exit(_commandLock);

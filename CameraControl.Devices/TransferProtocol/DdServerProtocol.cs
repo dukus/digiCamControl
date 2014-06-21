@@ -19,9 +19,28 @@ namespace CameraControl.Devices.TransferProtocol
         public string SerialNumber { get; private set; }
         public bool IsConnected { get; set; }
         public string DeviceId { get; private set; }
+
+
         public MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback, params uint[] parameters)
         {
-            return ExecuteReadData(code, parameters);
+            lock (_syncRoot)
+            {
+                ReconnectIfNeeded();
+                DataBlockContainer data;
+                var res = new MTPDataResponse();
+                _client.Write(new CommandBlockContainer((int)code, parameters));
+                int len = _client.ReadInt();
+                Container resp = _client.ReadContainer(callback);
+                if (resp.Header.Length >= len - 4)
+                {
+                    return new MTPDataResponse() { ErrorCode = (uint)resp.Header.Code };
+                }
+
+                data = (DataBlockContainer)resp;
+                resp = _client.ReadContainer();
+                return new MTPDataResponse() { Data = data.Payload, ErrorCode = (uint)data.Header.Code };
+            }
+
         }
 
         public MTPDataResponse ExecuteReadData(uint code, params uint[] parameters)
@@ -33,8 +52,6 @@ namespace CameraControl.Devices.TransferProtocol
                 var res = new MTPDataResponse();
                 _client.Write(new CommandBlockContainer((int) code, parameters));
                 int len = _client.ReadInt();
-                if (len > 500)
-                    Console.WriteLine("bIG DATA {0}", len);
                 Container resp = _client.ReadContainer();
                 if (resp.Header.Length >= len - 4)
                 {

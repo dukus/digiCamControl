@@ -40,6 +40,13 @@ namespace CameraControl.Devices.Nikon
     {
         public const int CONST_PROP_LiveViewMode = 0xD1A0;
 
+        public override bool Init(DeviceDescriptor deviceDescriptor)
+        {
+            var res = base.Init(deviceDescriptor);
+            Capabilities.Remove(CapabilityEnum.CaptureNoAf);
+            return res;
+        }
+
         public override void StartLiveView()
         {
             if (!CaptureInSdRam)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using PortableDeviceLib;
 using ddserverTest;
 
 namespace CameraControl.Devices.TransferProtocol.DDServer
@@ -9,7 +10,7 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
     {
         public byte[] Payload;
 
-        public DataBlockContainer(ContainerHeader header, Stream payload)
+        public DataBlockContainer(ContainerHeader header, Stream payload, StillImageDevice.TransferCallback callback)
         {
             Header = header;
             Payload = new byte[Header.PayloadLength];
@@ -18,6 +19,8 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
             while (numBytes != Header.PayloadLength)
             {
                 numBytes += payload.Read(Payload, numBytes, Header.PayloadLength - numBytes);
+                if (callback != null)
+                    callback(Header.PayloadLength, numBytes);
             }
         }
 
