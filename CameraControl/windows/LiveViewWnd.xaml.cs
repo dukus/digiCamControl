@@ -953,7 +953,15 @@ namespace CameraControl.windows
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Capture, SelectedPortableDevice);
+            try
+            {
+                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Capture, SelectedPortableDevice);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error capture in live view",exception);
+                this.ShowMessageAsync(TranslationStrings.LabelError, exception.Message);
+            }
         }
 
         private void StartLiveView()
