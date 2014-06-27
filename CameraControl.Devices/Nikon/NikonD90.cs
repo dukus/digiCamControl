@@ -44,7 +44,6 @@ namespace CameraControl.Devices.Nikon
             bool res = base.Init(deviceDescriptor);
             Capabilities.Clear();
             Capabilities.Add(CapabilityEnum.LiveView);
-            Capabilities.Add(CapabilityEnum.RecordMovie);
             Capabilities.Add(CapabilityEnum.CaptureInRam);
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
             return res;
