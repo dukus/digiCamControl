@@ -469,5 +469,6 @@ namespace CameraControl.Core.Translation
         public static string LabelMetadata = "Metadata";
         public static string LabelFullSize = "Full size image";
         public static string LabelWifi = "Connect with DSLRDASHBOARDSERVER";
+        public static string ButtonRecordStopMovie = "Stop Record movie";
     }
 }

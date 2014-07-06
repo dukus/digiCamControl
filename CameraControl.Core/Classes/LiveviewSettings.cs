@@ -170,6 +170,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
+
         private bool _gridVisible;
 
         public bool GridVisible
@@ -182,9 +183,27 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string SelectedOverlay { get; set; }
+        public bool BlackAndWhite { get; set; }
+        public bool EdgeDetection { get; set; }
+        public bool HighlightOverExp { get; set; }
+        public bool HighlightUnderExp { get; set; }
+        public int RotationIndex { get; set; }
+        public int MotionThreshold { get; set; }
+        public int WaitForMotionSec { get; set; }
+        public bool MotionAutofocusBeforCapture { get; set; }
+        public bool DetectMotion { get; set; }
+
         public LiveviewSettings()
         {
             GridVisible = false;
+            BlackAndWhite = false;
+            EdgeDetection = false;
+            HighlightOverExp = false;
+            HighlightUnderExp = false;
+            MotionThreshold = 20;
         }
+
+
     }
 }
