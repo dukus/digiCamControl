@@ -858,7 +858,7 @@ namespace CameraControl.ViewModel
                         preview =
                             BitmapFactory.ConvertToPbgra32Format(
                                 BitmapSourceConvert.ToBitmapSource(bmp));
-
+                        DrawLines(preview);
                         Bitmap newbmp = bmp;
                         if (EdgeDetection)
                         {
@@ -907,6 +907,7 @@ namespace CameraControl.ViewModel
                                     break;
                             }
                         }
+                        DrawLines(writeableBitmap);
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
@@ -915,7 +916,9 @@ namespace CameraControl.ViewModel
                     if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
                     {
                         preview.Freeze();
-                        //Preview = new ImageBrush {ImageSource = preview};
+                        var p = new ImageBrush {ImageSource = preview};
+                        p.Freeze();
+                        Preview = p;
                     }
                     stream.Close();
                 }
@@ -926,8 +929,6 @@ namespace CameraControl.ViewModel
                 _retries++;
                 _operInProgress = false;
             }
-            //}));
-            DrawLines();
             _retries = 0;
             _operInProgress = false;
         }
@@ -1031,13 +1032,22 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void DrawLines()
+        private void DrawLines(WriteableBitmap bitmap)
         {
             try
             {
                 if (LiveViewData == null)
                     return;
+                double xt = bitmap.Width / LiveViewData.ImageWidth;
+                double yt = bitmap.Height / LiveViewData.ImageHeight;
+                //double xx = (canvas.ActualWidth - image1.ActualWidth) / 2;
+                //double yy = (canvas.ActualHeight - image1.ActualHeight) / 2;
 
+                bitmap.DrawRectangle((int) (LiveViewData.FocusX*xt - (LiveViewData.FocusFrameXSize*xt/2)),
+                    (int) (LiveViewData.FocusY*yt - (LiveViewData.FocusFrameYSize*yt/2)),
+                    (int) (LiveViewData.FocusX*xt + (LiveViewData.FocusFrameXSize*xt/2)),
+                    (int) (LiveViewData.FocusY*yt + (LiveViewData.FocusFrameYSize*yt/2)),
+                    LiveViewData.HaveFocusData ? Colors.Green : Colors.Red);
                 //_focusrect.BeginInit();
                 //_focusrect.Visibility = LiveViewData.HaveFocusData && ShowFocusRect &&
                 //                        selectedPortableDevice.LiveViewImageZoomRatio.Value == "All"
@@ -1046,8 +1056,7 @@ namespace CameraControl.ViewModel
                 ////_focusrect.Visibility = selectedPortableDevice.LiveViewImageZoomRatio.Value == "All"
                 ////                          ? Visibility.Visible
                 ////                          : Visibility.Hidden;
-                //double xt = image1.ActualWidth/LiveViewData.ImageWidth;
-                //double yt = image1.ActualHeight/LiveViewData.ImageHeight;
+
                 //_focusrect.Height = LiveViewData.FocusFrameXSize*xt;
                 //_focusrect.Width = LiveViewData.FocusFrameYSize*yt;
                 //double xx = (canvas.ActualWidth - image1.ActualWidth)/2;
