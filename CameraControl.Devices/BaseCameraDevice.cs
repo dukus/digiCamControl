@@ -367,8 +367,9 @@ namespace CameraControl.Devices
         {
         }
 
-        public virtual void Focus(int step)
+        public virtual int Focus(int step)
         {
+            return 0;
         }
 
         public virtual void Focus(int x, int y)

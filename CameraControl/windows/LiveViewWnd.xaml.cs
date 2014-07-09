@@ -99,19 +99,6 @@ namespace CameraControl.windows
 
 
 
-        private bool _showFocusRect;
-
-        public bool ShowFocusRect
-        {
-            get { return _showFocusRect; }
-            set
-            {
-                _showFocusRect = value;
-                NotifyPropertyChanged("ShowFocusRect");
-            }
-        }
-
-
 
         private bool oper_in_progress = false;
 
@@ -133,20 +120,6 @@ namespace CameraControl.windows
             SelectedPortableDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
             Init();
 
-        }
-
-        private void SelectedBitmap_BitmapLoaded(object sender)
-        {
-            //if (ServiceProvider.Settings.PreviewLiveViewImage && IsVisible)
-            //{
-            //    FreezeImage = true;
-            //    Dispatcher.Invoke(new Action(delegate
-            //                                     {
-            //                                         ServiceProvider.Settings.SelectedBitmap.DisplayImage.Freeze();
-            //                                         image1.Source =
-            //                                             ServiceProvider.Settings.SelectedBitmap.DisplayImage;
-            //                                     }));
-            //}
         }
 
         public LiveViewWnd(ICameraDevice device)
@@ -171,37 +144,18 @@ namespace CameraControl.windows
         {
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-      private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Capture, SelectedPortableDevice);
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Error capture in live view",exception);
-                this.ShowMessageAsync(TranslationStrings.LabelError, exception.Message);
-            }
-        }
 
         private void image1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && LiveViewData != null &&
-                LiveViewData.HaveFocusData && selectedPortableDevice.LiveViewImageZoomRatio.Value == "All")
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && 
+                selectedPortableDevice.LiveViewImageZoomRatio.Value == "All")
             {
                 try
                 {
-                    //Point initialPoint = e.MouseDevice.GetPosition(image1);
-                    //double xt = LiveViewData.ImageWidth/image1.ActualWidth;
-                    //double yt = LiveViewData.ImageHeight/image1.ActualHeight;
-                    //int posx = (int) (initialPoint.X*xt);
-                    //int posy = (int) (initialPoint.Y*yt);
-                    //selectedPortableDevice.Focus(posx, posy);
+                    ((LiveViewViewModel) DataContext).SetFocusPos(e.MouseDevice.GetPosition(_image), _image.ActualWidth,
+                        _image.ActualHeight);
+
                 }
                 catch (Exception exception)
                 {
@@ -332,16 +286,21 @@ namespace CameraControl.windows
 
         private void canvas_image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && LiveViewData != null &&
-            //    LiveViewData.HaveFocusData)
-            //{
-            //    Point initialPoint = e.MouseDevice.GetPosition(canvas_image);
-            //    double xt = LiveViewData.ImageWidth/canvas_image.ActualWidth;
-            //    double yt = LiveViewData.ImageHeight/canvas_image.ActualHeight;
-            //    int posx = (int) (initialPoint.X*xt);
-            //    int posy = (int) (initialPoint.Y*yt);
-            //    SetFocusPos(posx, posy);
-            //}
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left )
+            {
+                try
+                {
+                    ((LiveViewViewModel)DataContext).SetFocusPos(e.MouseDevice.GetPosition(_previeImage), _previeImage.ActualWidth,
+                        _previeImage.ActualHeight);
+
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Focus Error", exception);
+                    StaticHelper.Instance.SystemMessage = "Focus error: " + exception.Message;
+                }
+            }
+
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)

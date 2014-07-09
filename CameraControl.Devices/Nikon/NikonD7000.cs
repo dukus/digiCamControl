@@ -55,18 +55,5 @@ namespace CameraControl.Devices.Nikon
             SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_AfModeAtLiveView );
         }
 
-        public override void Focus(int step)
-        {
-            if (step == 0)
-                return;
-            lock (Locker)
-            {
-                //DeviceReady();
-                ErrorCodes.GetException(step > 0
-                                            ? ExecuteWithNoData(CONST_CMD_MfDrive, 0x00000001, (uint) step)
-                                            : ExecuteWithNoData(CONST_CMD_MfDrive, 0x00000002, (uint) -step));
-                DeviceReady();
-            }
-        }
     }
 }

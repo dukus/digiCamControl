@@ -4,10 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using AForge;
@@ -24,7 +22,6 @@ using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Color = System.Windows.Media.Color;
-using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
 
@@ -40,8 +37,8 @@ namespace CameraControl.ViewModel
         private int _retries = 0;
         private MotionDetector _detector;
         private DateTime _photoCapturedTime;
-        private System.Timers.Timer _timer = new System.Timers.Timer(1000/DesiredFrameRate);
-        private System.Timers.Timer _freezeTimer = new Timer();
+        private Timer _timer = new Timer(1000/DesiredFrameRate);
+        private Timer _freezeTimer = new Timer();
         private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
@@ -57,7 +54,7 @@ namespace CameraControl.ViewModel
         private double _currentMotionIndex;
         private bool _triggerOnMotion;
         private PointCollection _luminanceHistogramPoints = null;
-        private ImageBrush _preview;
+        private BitmapSource _preview;
         private bool _isBusy;
         private int _photoNo;
         private int _waitTime;
@@ -67,6 +64,9 @@ namespace CameraControl.ViewModel
         private int _focusCounter;
         private string _counterMessage;
         private bool _freezeImage;
+        private bool _lockA;
+        private bool _lockB;
+        private bool CameraProperty.LiveviewSettings.ShowFocusRect;
 
         public ICameraDevice CameraDevice
         {
@@ -310,6 +310,7 @@ namespace CameraControl.ViewModel
                 _isBusy = value;
                 RaisePropertyChanged(() => IsBusy);
                 RaisePropertyChanged(() => IsFree);
+                RaisePropertyChanged(() => FocusingEnabled);
             }
         }
 
@@ -406,8 +407,6 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private bool _lockA;
-
         public bool LockA
         {
             get { return _lockA; }
@@ -434,8 +433,6 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private bool _lockB;
-
         public bool LockB
         {
             get { return _lockB; }
@@ -446,14 +443,28 @@ namespace CameraControl.ViewModel
                 {
                     FocusValue = FocusCounter;
                 }
-                RaisePropertyChanged(() => LockA);
+                RaisePropertyChanged(() => LockB);
                 RaisePropertyChanged(() => CounterMessage);
             }
         }
 
+        public bool FocusingEnabled
+        {
+            get { return !IsBusy && !_focusIProgress; }
+        }
+
         #endregion
 
-        public ImageBrush Preview
+        #region view
+
+        public bool ShowFocusRect
+        {
+            get { return CameraProperty.LiveviewSettings.ShowFocusRect; }
+            set { CameraProperty.LiveviewSettings.ShowFocusRect = value; }
+        }
+
+        #endregion
+        public BitmapSource Preview
         {
             get { return _preview; }
             set
@@ -858,7 +869,7 @@ namespace CameraControl.ViewModel
                         preview =
                             BitmapFactory.ConvertToPbgra32Format(
                                 BitmapSourceConvert.ToBitmapSource(bmp));
-                        DrawLines(preview);
+                        DrawFocusPoint(preview);
                         Bitmap newbmp = bmp;
                         if (EdgeDetection)
                         {
@@ -907,7 +918,9 @@ namespace CameraControl.ViewModel
                                     break;
                             }
                         }
-                        DrawLines(writeableBitmap);
+                        if (ShowFocusRect)
+                            DrawFocusPoint(writeableBitmap);
+
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
@@ -916,9 +929,7 @@ namespace CameraControl.ViewModel
                     if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
                     {
                         preview.Freeze();
-                        var p = new ImageBrush {ImageSource = preview};
-                        p.Freeze();
-                        Preview = p;
+                        Preview = preview;
                     }
                     stream.Close();
                 }
@@ -1032,7 +1043,7 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void DrawLines(WriteableBitmap bitmap)
+        private void DrawFocusPoint(WriteableBitmap bitmap)
         {
             try
             {
@@ -1040,33 +1051,12 @@ namespace CameraControl.ViewModel
                     return;
                 double xt = bitmap.Width / LiveViewData.ImageWidth;
                 double yt = bitmap.Height / LiveViewData.ImageHeight;
-                //double xx = (canvas.ActualWidth - image1.ActualWidth) / 2;
-                //double yy = (canvas.ActualHeight - image1.ActualHeight) / 2;
 
                 bitmap.DrawRectangle((int) (LiveViewData.FocusX*xt - (LiveViewData.FocusFrameXSize*xt/2)),
                     (int) (LiveViewData.FocusY*yt - (LiveViewData.FocusFrameYSize*yt/2)),
                     (int) (LiveViewData.FocusX*xt + (LiveViewData.FocusFrameXSize*xt/2)),
                     (int) (LiveViewData.FocusY*yt + (LiveViewData.FocusFrameYSize*yt/2)),
                     LiveViewData.HaveFocusData ? Colors.Green : Colors.Red);
-                //_focusrect.BeginInit();
-                //_focusrect.Visibility = LiveViewData.HaveFocusData && ShowFocusRect &&
-                //                        selectedPortableDevice.LiveViewImageZoomRatio.Value == "All"
-                //                            ? Visibility.Visible
-                //                            : Visibility.Hidden;
-                ////_focusrect.Visibility = selectedPortableDevice.LiveViewImageZoomRatio.Value == "All"
-                ////                          ? Visibility.Visible
-                ////                          : Visibility.Hidden;
-
-                //_focusrect.Height = LiveViewData.FocusFrameXSize*xt;
-                //_focusrect.Width = LiveViewData.FocusFrameYSize*yt;
-                //double xx = (canvas.ActualWidth - image1.ActualWidth)/2;
-                //double yy = (canvas.ActualHeight - image1.ActualHeight)/2;
-
-                //_focusrect.SetValue(Canvas.LeftProperty, LiveViewData.FocusX*xt - (_focusrect.Height/2) + xx);
-                //_focusrect.SetValue(Canvas.TopProperty, LiveViewData.FocusY*yt - (_focusrect.Width/2) + yy);
-                //_focusrect.Stroke = new SolidColorBrush(LiveViewData.Focused ? Colors.Green : Colors.Red);
-                //_focusrect.EndInit();
-                SmallFocusScreen();
             }
             catch (Exception exception)
             {
@@ -1074,18 +1064,6 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void SmallFocusScreen()
-        {
-            ////double aspect = image1.ActualHeight/image1.ActualWidth;
-            ////canvas_image.Height = canvas_image.Width*aspect;
-            //small_focus_rect.Visibility = LiveViewData.HaveFocusData ? Visibility.Visible : Visibility.Hidden;
-            //double xt = canvas_image.ActualWidth/LiveViewData.ImageWidth;
-            //double yt = canvas_image.ActualHeight/LiveViewData.ImageHeight;
-            //small_focus_rect.Height = LiveViewData.FocusFrameXSize*xt;
-            //small_focus_rect.Width = LiveViewData.FocusFrameYSize*yt;
-            //small_focus_rect.SetValue(Canvas.LeftProperty, LiveViewData.FocusX*xt - (_focusrect.Height/2*xt));
-            //small_focus_rect.SetValue(Canvas.TopProperty, LiveViewData.FocusY*yt - (_focusrect.Width/2*yt));
-        }
 
         private void ProcessMotionDetection(Bitmap bmp)
         {
@@ -1153,6 +1131,22 @@ namespace CameraControl.ViewModel
 
         private void RecordMovie()
         {
+            string resp = Recording ? "" : CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
+            if (string.IsNullOrEmpty(resp))
+            {
+                var thread = new Thread(RecordMovieThread);
+                thread.Start();
+            }
+            else
+            {
+                MessageBox.Show(TranslationStrings.LabelError,
+                    TranslationStrings.LabelErrorRecordMovie + "\n" +
+                    TranslationManager.GetTranslation(resp));
+            }
+        }
+
+        private void RecordMovieThread()
+        {
             try
             {
                 if (Recording)
@@ -1161,20 +1155,8 @@ namespace CameraControl.ViewModel
                 }
                 else
                 {
-                    string resp = CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
-                    if (string.IsNullOrEmpty(resp))
-                    {
-                        CameraDevice.StartRecordMovie();
-                    }
-                    else
-                    {
-                        MessageBox.Show(TranslationStrings.LabelError,
-                            TranslationStrings.LabelErrorRecordMovie + "\n" +
-                            TranslationManager.GetTranslation(resp));
-                        return;
-                    }
+                    CameraDevice.StartRecordMovie();
                 }
-                //Recording = !Recording;
             }
             catch (Exception exception)
             {
@@ -1198,7 +1180,6 @@ namespace CameraControl.ViewModel
                 MessageBox.Show(TranslationStrings.LabelError,
                     TranslationStrings.LabelLiveViewError + "\n" +
                     TranslationManager.GetTranslation(resp));
-                return;
             }
         }
 
@@ -1321,6 +1302,8 @@ namespace CameraControl.ViewModel
                 return;
             int step = (int)ostep;
             _focusIProgress = true;
+            RaisePropertyChanged(() => FocusingEnabled);
+
             Console.WriteLine("Focus start");
             if (LockA)
             {
@@ -1379,6 +1362,18 @@ namespace CameraControl.ViewModel
             {
                 StaticHelper.Instance.SystemMessage = exception.Message;
                 Log.Error("Unable to take picture with no af", exception);
+            }
+        }
+
+        public void SetFocusPos(Point initialPoint, double refWidth, double refHeight)
+        {
+            if (LiveViewData != null)
+            {
+                double xt = LiveViewData.ImageWidth/refWidth;
+                double yt = LiveViewData.ImageHeight/refHeight;
+                int posx = (int) (initialPoint.X*xt);
+                int posy = (int) (initialPoint.Y*yt);
+                SetFocusPos(posx, posy);
             }
         }
 

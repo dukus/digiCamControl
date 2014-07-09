@@ -1067,9 +1067,10 @@ namespace CameraControl.Devices.Canon
             Camera.AutoFocus();
         }
 
-        public override void Focus(int step)
+        public override int Focus(int step)
         {
             Camera.ResetShutterButton();
+            
             if (step < 0)
             {
                 step = -step;
@@ -1089,6 +1090,7 @@ namespace CameraControl.Devices.Canon
                 else
                     Camera.FocusInLiveView(Edsdk.EvfDriveLens_Far3);
             }
+            return step;
         }
 
         public override void TransferFile(object o, string filename)

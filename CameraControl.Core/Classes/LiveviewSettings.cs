@@ -193,6 +193,7 @@ namespace CameraControl.Core.Classes
         public int WaitForMotionSec { get; set; }
         public bool MotionAutofocusBeforCapture { get; set; }
         public bool DetectMotion { get; set; }
+        public bool ShowFocusRect { get; set; }
 
         public LiveviewSettings()
         {
@@ -202,6 +203,7 @@ namespace CameraControl.Core.Classes
             HighlightOverExp = false;
             HighlightUnderExp = false;
             MotionThreshold = 20;
+            ShowFocusRect = true;
         }
 
 

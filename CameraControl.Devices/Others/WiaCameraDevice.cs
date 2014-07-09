@@ -624,9 +624,9 @@ namespace CameraControl.Devices.Others
             //throw new NotImplementedException();
         }
 
-        public override void Focus(int step)
+        public override int Focus(int step)
         {
-            //throw new NotImplementedException();
+            return 0;
         }
 
         public override void Focus(int x, int y)
