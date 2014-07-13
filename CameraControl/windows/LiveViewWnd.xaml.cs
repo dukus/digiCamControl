@@ -70,15 +70,8 @@ namespace CameraControl.windows
     /// </summary>
     public partial class LiveViewWnd : MetroWindow, IWindow, INotifyPropertyChanged
     {
-        private const int DesiredFrameRate = 20;
 
-        private int _retries = 0;
         private ICameraDevice selectedPortableDevice;
-        private Rectangle _focusrect = new Rectangle();
-
-        private int _totalframes = 0;
-        private DateTime _framestart;
-        private MotionDetector _detector;
         
         private DateTime _focusMoveTime = DateTime.Now;
 
@@ -95,12 +88,6 @@ namespace CameraControl.windows
                 NotifyPropertyChanged("CameraProperty");
             }
         }
-
-
-
-
-
-        private bool oper_in_progress = false;
 
         public ICameraDevice SelectedPortableDevice
         {
@@ -306,13 +293,6 @@ namespace CameraControl.windows
         private void btn_help_Click(object sender, RoutedEventArgs e)
         {
             HelpProvider.Run(HelpSections.LiveView);
-        }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //if (Math.Abs(FocusCounter - e.NewValue) == 0)
-            //    return;
-            //SetFocus((int) (e.NewValue - e.OldValue));
         }
 
         private void slider_transparent_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

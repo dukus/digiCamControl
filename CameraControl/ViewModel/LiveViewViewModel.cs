@@ -66,7 +66,7 @@ namespace CameraControl.ViewModel
         private bool _freezeImage;
         private bool _lockA;
         private bool _lockB;
-        private bool CameraProperty.LiveviewSettings.ShowFocusRect;
+        private int _selectedFocusValue;
 
         public ICameraDevice CameraDevice
         {
@@ -302,13 +302,13 @@ namespace CameraControl.ViewModel
 
         #region focus stacking
 
-        public bool IsBusy
+        public bool IsFocusStackingRunning
         {
             get { return _isBusy; }
             set
             {
                 _isBusy = value;
-                RaisePropertyChanged(() => IsBusy);
+                RaisePropertyChanged(() => IsFocusStackingRunning);
                 RaisePropertyChanged(() => IsFree);
                 RaisePropertyChanged(() => FocusingEnabled);
             }
@@ -365,28 +365,60 @@ namespace CameraControl.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets the current focus counter.
+        /// </summary>
+        /// <value>
+        /// The focus counter.
+        /// </value>
         public int FocusCounter
         {
             get { return _focusCounter; }
             set
             {
+                _selectedFocusValue = value;
                 _focusCounter = value;
+
                 RaisePropertyChanged(() => FocusCounter);
                 RaisePropertyChanged(() => CounterMessage);
+                RaisePropertyChanged(() => SelectedFocusValue);
             }
         }
 
+        /// <summary>
+        /// Gets or sets the maximum locked focus value.
+        /// </summary>
+        /// <value>
+        /// The focus value.
+        /// </value>
         public int FocusValue
         {
             get { return _focusValue; }
             set
             {
                 _focusValue = value;
-                PhotoNo = FocusValue/FocusStep;
+                if (FocusStep > 0)
+                    PhotoNo = FocusValue/FocusStep;
                 RaisePropertyChanged(() => FocusValue);
                 RaisePropertyChanged(() => CounterMessage);
             }
         }
+
+        public int SelectedFocusValue
+        {
+            get { return _selectedFocusValue; }
+            set
+            {
+                var newvalue = value;
+                if (_selectedFocusValue != newvalue)
+                {
+                    SetFocus(newvalue - _selectedFocusValue);
+                    _selectedFocusValue = value;
+                    RaisePropertyChanged(() => SelectedFocusValue);
+                }
+            }
+        }
+
 
         public string CounterMessage
         {
@@ -450,7 +482,7 @@ namespace CameraControl.ViewModel
 
         public bool FocusingEnabled
         {
-            get { return !IsBusy && !_focusIProgress; }
+            get { return !IsFocusStackingRunning && !_focusIProgress; }
         }
 
         #endregion
@@ -543,9 +575,10 @@ namespace CameraControl.ViewModel
             FocusPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.MediumFocusStep));
             FocusPPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.LargeFocusStep));
             MoveACommand = new RelayCommand(() => SetFocus(-FocusCounter));
-            MoveBCommand = new RelayCommand(() => SetFocus(FocusValue - FocusCounter));
+            MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
             PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking, () => LockB);
+            StopFocusStackingCommand=new RelayCommand(StopFocusStacking);
         }
 
         private void InitOverlay()
@@ -693,14 +726,14 @@ namespace CameraControl.ViewModel
         {
             _detector.Reset();
             _photoCapturedTime = DateTime.Now;
-            if (PhotoCount <= PhotoNo && IsBusy)
+            if (PhotoCount <= PhotoNo && IsFocusStackingRunning)
             {
                 var threadPhoto = new Thread(TakePhoto);
                 threadPhoto.Start();
             }
             else
             {
-                IsBusy = false;
+                IsFocusStackingRunning = false;
                 _timer.Start();
                 StartLiveView();
             }
@@ -744,7 +777,7 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                if (IsBusy)
+                if (IsFocusStackingRunning)
                 {
                     Log.Debug("LiveView: Stack photo capture started");
                     StartLiveView();
@@ -771,7 +804,7 @@ namespace CameraControl.ViewModel
                     {
                         StartLiveView();
                         FreezeImage = false;
-                        IsBusy = false;
+                        IsFocusStackingRunning = false;
                         PhotoCount = 0;
                         _timer.Start();
                     }
@@ -1273,6 +1306,16 @@ namespace CameraControl.ViewModel
 
         private void SetFocus(int step)
         {
+            if (step == 0)
+                return;
+
+            if (_focusIProgress)
+            {
+                SelectedFocusValue = FocusCounter;
+                return;
+            }
+            _focusIProgress = true;
+            RaisePropertyChanged(() => FocusingEnabled);
             try
             {
                 string resp = CameraDevice.GetProhibitionCondition(OperationEnum.ManualFocus);
@@ -1287,24 +1330,24 @@ namespace CameraControl.ViewModel
                     MessageBox.Show(TranslationStrings.LabelError,
                                           TranslationStrings.LabelErrorUnableFocus + "\n" +
                                           TranslationManager.GetTranslation(resp));
+                    _focusIProgress = false;
+                    RaisePropertyChanged(() => FocusingEnabled);
+                    SelectedFocusValue = FocusCounter;
                 }
             }
             catch (Exception exception)
             {
                 MessageBox.Show(TranslationStrings.LabelError, TranslationStrings.LabelErrorUnableFocus);
                 Log.Error("Unable to focus ", exception);
+                _focusIProgress = false;
+                RaisePropertyChanged(() => FocusingEnabled);
+                SelectedFocusValue = FocusCounter;
             }
         }
 
         private void SetFocusThread(object ostep)
         {
-            if (_focusIProgress)
-                return;
             int step = (int)ostep;
-            _focusIProgress = true;
-            RaisePropertyChanged(() => FocusingEnabled);
-
-            Console.WriteLine("Focus start");
             if (LockA)
             {
                 if (FocusCounter == 0 && step < 0)
@@ -1322,8 +1365,8 @@ namespace CameraControl.ViewModel
             {
                 _timer.Stop();
                 CameraDevice.StartLiveView();
-                CameraDevice.Focus(step);
-                FocusCounter += step;
+                int stepdone = CameraDevice.Focus(step);
+                FocusCounter += stepdone;
             }
             catch (DeviceException exception)
             {
@@ -1336,10 +1379,11 @@ namespace CameraControl.ViewModel
                 StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus;
             }
 
-            if (!IsBusy)
+            if (!IsFocusStackingRunning)
                 _timer.Start();
-            Console.WriteLine("Focus end");
+
             _focusIProgress = false;
+            RaisePropertyChanged(() => FocusingEnabled);
         }
 
         private void Capture()
@@ -1402,7 +1446,7 @@ namespace CameraControl.ViewModel
             SetFocus(-FocusCounter);
             GetLiveImage();
             PhotoCount = 0;
-            IsBusy = true;
+            IsFocusStackingRunning = true;
             _focusStackingPreview = false;
             Thread thread = new Thread(TakePhoto);
             thread.Start();
@@ -1414,7 +1458,7 @@ namespace CameraControl.ViewModel
             //FreezeImage = true;
             GetLiveImage();
             PhotoCount = 0;
-            IsBusy = true;
+            IsFocusStackingRunning = true;
             _focusStackingPreview = true;
             Thread thread = new Thread(TakePhoto);
             thread.Start();
@@ -1422,7 +1466,7 @@ namespace CameraControl.ViewModel
 
         private void StopFocusStacking()
         {
-            IsBusy = false;
+            IsFocusStackingRunning = false;
             _timer.Start();
         }
     }

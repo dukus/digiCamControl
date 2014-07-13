@@ -156,7 +156,7 @@
                     </Rectangle>
                 </ToggleButton>
             </StackPanel>
-            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" ValueChanged="Slider_ValueChanged" AutoToolTipPlacement="BottomRight" TickFrequency="50" Width="462" />
+            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="50" Width="462" />
         </StackPanel>
         <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}"
                 Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
@@ -173,29 +173,36 @@
                     <Expander.Content>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="50" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="40" />
                                 <RowDefinition Height="38" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="86" />
-                                <ColumnDefinition Width="5" />
-                                <ColumnDefinition Width="86*" />
-                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
-                            <Button Content="{T:TranslateExtension ButtonStart}" Command="{Binding StartFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3" Grid.ColumnSpan="2" Margin="5"/>
-                            <Button Content="{T:TranslateExtension ButtonPreview}" Command="{Binding PreviewFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3" Grid.Column="2" Margin="5"/>
-                            <Button Content="{T:TranslateExtension ButtonStop}" Command="{Binding StopFocusStackingCommand}" Grid.Column="2" IsEnabled="{Binding IsBusy}" Grid.Row="4" Margin="5"/>
+                            <Button Content="{T:TranslateExtension ButtonStart}" Command="{Binding StartFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3"  Margin="5"/>
+                            <Button Content="{T:TranslateExtension ButtonPreview}" Command="{Binding PreviewFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3" Grid.Column="1" Margin="5"/>
+                            <Button Content="{T:TranslateExtension ButtonStop}" Command="{Binding StopFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="4" Margin="5"/>
 
-                            <Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />
+                            <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelNoOfPhots}"/>
+                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="2" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                            
+                            <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
 
-                            <Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />
+                            <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
+                            <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="2" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                            
+                            <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
 
                             <Label Content="{Binding PhotoCount}" Height="28" HorizontalAlignment="Left" Margin="5,7,0,0" VerticalAlignment="Top" Width="75" Grid.Row="4" />
 
-                            <Controls1:AdvancedSlider Minimum="2" Maximum="60" Label="{T:TranslateExtension LabelWaitTime}" Grid.ColumnSpan="4" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Grid.Row="2" />
+                            <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
+                            <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
+
+                            <!--<Controls1:AdvancedSlider Minimum="2" Maximum="60" Label="{T:TranslateExtension LabelWaitTime}" Grid.ColumnSpan="4" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Grid.Row="2" />-->
                         </Grid>
                     </Expander.Content>
                 </Expander>
