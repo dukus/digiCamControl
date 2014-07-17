@@ -6,7 +6,7 @@
                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                       xmlns:local="clr-namespace:CameraControl.Controls"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" Topmost="True" xmlns:my="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core" SaveWindowPosition="True">
+                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" Topmost="True" xmlns:my="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

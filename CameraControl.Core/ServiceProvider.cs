@@ -25,11 +25,9 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
-
+// for testing in 64 bit enviroment see: http://social.msdn.microsoft.com/Forums/vstudio/en-US/2e29a4aa-e587-43ef-bf50-329b7cd3eefb/debugging-wcf-service-with-x86-dependencies-on-a-x64-bit-machine?forum=wcf
 #region
 
-using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using CameraControl.Core.Classes;
@@ -68,12 +66,22 @@ namespace CameraControl.Core
 
         public static void Configure()
         {
-            Configure(AppName);
+            Configure(LogFile);
+        }
+
+        public static void Configure(string logFile)
+        {
+            Configure(AppName, logFile);
             Log.LogDebug += Log_LogDebug;
             Log.LogError += Log_LogError;
             Log.Debug(
                 "--------------------------------===========================Application starting===========================--------------------------------");
-            Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
+            try
+            {
+                Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
+            }
+            catch {}
+
             DeviceManager = new CameraDeviceManager();
             ExternalDeviceManager = new ExternalDeviceManager();
             Trigger = new TriggerClass();
@@ -96,7 +104,7 @@ namespace CameraControl.Core
             _log.Debug(e.Message, e.Exception);
         }
 
-        public static void Configure(string appfolder)
+        public static void Configure(string appfolder, string logFile)
         {
             bool isConfigured = _log.Logger.Repository.Configured;
             if (!isConfigured)
@@ -111,7 +119,7 @@ namespace CameraControl.Core
                                            MaxSizeRollBackups = 5,
                                            RollingStyle = RollingFileAppender.RollingMode.Size,
                                            AppendToFile = true,
-                                           File = LogFile,
+                                           File = logFile,
                                            ImmediateFlush = true,
                                            LockingModel = new FileAppender.MinimalLock(),
                                            Name = "XXXRollingFileAppender"

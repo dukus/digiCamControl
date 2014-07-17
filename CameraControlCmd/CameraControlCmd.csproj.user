@@ -6,4 +6,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <StartArguments>/captureall /session Default /folder d:\ /filename valami.jpg /counter 9998 /wait</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>/capture</StartArguments>
+  </PropertyGroup>
 </Project>

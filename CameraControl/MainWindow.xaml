@@ -324,7 +324,7 @@
                         </Expander>
                         <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
                             <StackPanel>
-                                <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}"/>
+                                <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}" Margin="3"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="{T:TranslateExtension SessionAdd}" Grid.Column="3" Name="btn_add_Sesion" Margin="3" Click="btn_add_Sesion_Click" />
                                     <Button Content="{T:TranslateExtension SessionEdit}" Grid.Column="3" Name="btn_edit_Sesion" Margin="3" Click="btn_edit_Sesion_Click" />

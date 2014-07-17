@@ -29,6 +29,12 @@
                     <TextBox Grid.ColumnSpan="2" Grid.Row="3" Name="txt_resp" />
                 </Grid>
             </TabItem>
+            <TabItem Header="Service" >
+                <Grid>
+                    <Button Content="Connect" Height="23" Name="ButConnect" Width="75" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButConnect_Click" />
+                </Grid>
+            </TabItem>
+                     
         </TabControl>
     </Grid>
 </Window>
