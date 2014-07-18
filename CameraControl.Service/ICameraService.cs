@@ -22,6 +22,10 @@ namespace CameraControl.Service
         
         [OperationContract]
         void Capture();
+
+        [OperationContract]
+        string TakePhotoAsBase64String(int timeoutSeconds, int resizeWidth, int resizeHight, int rotation);
+
         // TODO: Add your service operations here
     }
 

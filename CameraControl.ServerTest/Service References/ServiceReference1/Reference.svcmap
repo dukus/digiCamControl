@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b6cdd1c9-9bf3-433d-98ee-459bc2f52c17" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3183f06d-26c9-4a7f-9de4-9c868b4296e9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,10 +21,10 @@
     <MetadataSource Address="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="22acb26b-2bf9-4764-b661-0e23b1b23f12" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3b656746-9dce-4c70-af06-400fe4b18096" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4f505451-3645-4a37-93cc-9954c1217a7f" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
-    <MetadataFile FileName="CameraControl.Service.xsd" MetadataType="Schema" ID="66c91b8e-1aec-498b-a06c-ed97f290609a" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4ee928d4-42a3-4621-a29d-6f882680a11a" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="87ac8d1d-3215-4dc1-b924-276698fd19b1" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2d6f3e0c-49f3-4553-9c81-b73973d4b054" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
+    <MetadataFile FileName="CameraControl.Service.xsd" MetadataType="Schema" ID="b52465c8-349f-4b74-a7b9-e9727bb97de1" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/CameraControl.Service/CameraService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

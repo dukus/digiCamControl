@@ -49,4 +49,21 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="TakePhotoAsBase64String">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="timeoutSeconds" type="xs:int" />
+        <xs:element minOccurs="0" name="resizeWidth" type="xs:int" />
+        <xs:element minOccurs="0" name="resizeHight" type="xs:int" />
+        <xs:element minOccurs="0" name="rotation" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TakePhotoAsBase64StringResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TakePhotoAsBase64StringResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

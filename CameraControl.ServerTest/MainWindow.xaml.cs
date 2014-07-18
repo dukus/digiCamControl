@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -39,9 +40,23 @@ namespace CameraControl.ServerTest
         {
             try
             {
-                _mProcessingServiceHost = new ServiceHost(typeof(CameraServiceClient));
-                    
-                _mProcessingServiceHost.Open();
+                CameraServiceClient client = new CameraServiceClient();
+                var base64String = client.TakePhotoAsBase64String(20, 200, 200, 0);
+
+                byte[] byteBuffer = Convert.FromBase64String(base64String);
+                File.WriteAllBytes("d:\\1\\test.jpg", byteBuffer);
+                MemoryStream memoryStream = new MemoryStream(byteBuffer);
+
+                memoryStream.Position = 0;
+               
+                imgPreview.BeginInit();
+                imgPreview.Source = BitmapFrame.Create(memoryStream,
+                                       BitmapCreateOptions.None,
+                                       BitmapCacheOption.OnLoad); ;
+                imgPreview.EndInit();
+                memoryStream.Close();
+                //memoryStream = null;
+                //byteBuffer = null;
             }
             catch (Exception exception)
             {

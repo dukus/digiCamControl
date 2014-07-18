@@ -89,6 +89,9 @@ namespace CameraControl.ServerTest.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICameraService/Capture", ReplyAction="http://tempuri.org/ICameraService/CaptureResponse")]
         void Capture();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICameraService/TakePhotoAsBase64String", ReplyAction="http://tempuri.org/ICameraService/TakePhotoAsBase64StringResponse")]
+        string TakePhotoAsBase64String(int timeoutSeconds, int resizeWidth, int resizeHight, int rotation);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -132,6 +135,10 @@ namespace CameraControl.ServerTest.ServiceReference1 {
         
         public void Capture() {
             base.Channel.Capture();
+        }
+        
+        public string TakePhotoAsBase64String(int timeoutSeconds, int resizeWidth, int resizeHight, int rotation) {
+            return base.Channel.TakePhotoAsBase64String(timeoutSeconds, resizeWidth, resizeHight, rotation);
         }
     }
 }

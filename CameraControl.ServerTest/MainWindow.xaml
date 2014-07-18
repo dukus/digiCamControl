@@ -31,7 +31,8 @@
             </TabItem>
             <TabItem Header="Service" >
                 <Grid>
-                    <Button Content="Connect" Height="23" Name="ButConnect" Width="75" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButConnect_Click" />
+                    <Button Content="Capture" Height="23" Name="ButConnect" Width="75" Margin="6" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButConnect_Click" />
+                    <Image Height="247" HorizontalAlignment="Left" Margin="157,18,0,0" Name="imgPreview" Stretch="Uniform" VerticalAlignment="Top" Width="330" />
                 </Grid>
             </TabItem>
                      
