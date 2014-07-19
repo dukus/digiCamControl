@@ -14,22 +14,22 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <WrapPanel>
-        <Button Grid.Row="0" Grid.Column="0" Margin="1"  Content="[-]" Command="{Binding Path=SelectNoneCommand}" ToolTip="{T:TranslateExtension LabelSelectNone}"/>
-        <Button Grid.Row="0" Grid.Column="1" Margin="1"  Content="[+]" Command="{Binding Path=SelectAllCommand}" ToolTip="{T:TranslateExtension LabelSelectAll}"/>
-        <Button Grid.Row="1" Grid.Column="0" Margin="1" Command="{Binding Path=SelectUnLiked}" ToolTip="{T:TranslateExtension LabelSelectUnLiked}">
+        <Button Margin="1"  Content="[-]" Command="{Binding Path=SelectNoneCommand}" ToolTip="{T:TranslateExtension LabelSelectNone}"/>
+        <Button Margin="1"  Content="[+]" Command="{Binding Path=SelectAllCommand}" ToolTip="{T:TranslateExtension LabelSelectAll}"/>
+        <Button Margin="1" Command="{Binding Path=SelectUnLiked}" ToolTip="{T:TranslateExtension LabelSelectUnLiked}">
             <Rectangle Width="15" Height="15">
                 <Rectangle.Fill>
                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}" />
                 </Rectangle.Fill>
             </Rectangle>
         </Button>
-        <Button Grid.Row="1" Grid.Column="1" Margin="1" Command="{Binding Path=SelectLiked}" ToolTip="{T:TranslateExtension LabelSelectLiked}">
+        <Button Margin="1" Command="{Binding Path=SelectLiked}" ToolTip="{T:TranslateExtension LabelSelectLiked}">
             <Rectangle Width="15" Height="15">
                 <Rectangle.Fill>
                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
                 </Rectangle.Fill>
             </Rectangle>
         </Button>
-        <Button Grid.Row="2" Grid.Column="0" Margin="2" Grid.ColumnSpan="2" Content="Invert" Command="{Binding Path=SelectInvertCommand}" />
+        <Button Margin="1" Content="Invert" Command="{Binding Path=SelectInvertCommand}" />
     </WrapPanel>
 </UserControl>

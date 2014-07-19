@@ -44,7 +44,7 @@ namespace CameraControl.ServerTest
                 var base64String = client.TakePhotoAsBase64String(20, 200, 200, 0);
 
                 byte[] byteBuffer = Convert.FromBase64String(base64String);
-                File.WriteAllBytes("d:\\1\\test.jpg", byteBuffer);
+               
                 MemoryStream memoryStream = new MemoryStream(byteBuffer);
 
                 memoryStream.Position = 0;

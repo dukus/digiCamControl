@@ -10,7 +10,7 @@
                     xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices" mc:Ignorable="d" 
              d:DesignHeight="426" d:DesignWidth="652">
     <UserControl.Resources>
-        <Style TargetType="{x:Type ListBox}">
+        <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
             <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
            explains how to display an object of type BitmapImage. -->
             <Setter Property="ItemTemplate">
