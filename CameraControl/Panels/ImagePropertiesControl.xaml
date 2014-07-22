@@ -15,10 +15,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Content="{T:TranslateExtension LabelFileName}"/>
-        <TextBox Grid.Row="1" Margin="2" Text="{Binding Path=SelectedBitmap.FileName}"/>
+        <TextBox Grid.Row="1" Margin="4" Text="{Binding Path=SelectedBitmap.FileName}"/>
         <Button Content="{T:TranslateExtension LabelSet}" Grid.Row="5" Margin="4" Name="btn_set" Click="btn_set_Click" />
-        <Label Content="{T:TranslateExtension LabelComment}" Grid.Row="2"  />
-        <TextBox Grid.Row="3" Text="{Binding Path=SelectedBitmap.Comment}" />
-        <CheckBox Content="{T:TranslateExtension LabelWriteSelectedTags}" Grid.Row="4" Name="chk_tags" />
+        <Label Content="{T:TranslateExtension LabelComment}" Grid.Row="2"/>
+        <TextBox Grid.Row="3" Text="{Binding Path=SelectedBitmap.Comment}" Margin="4"  />
+        <CheckBox Content="{T:TranslateExtension LabelWriteSelectedTags}" Margin="4"  Grid.Row="4" Name="chk_tags" />
     </Grid>
 </UserControl>

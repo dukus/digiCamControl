@@ -1,21 +1,18 @@
 ﻿<Controls:MetroWindow  x:Class="CameraControl.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="digiCamControl" Height="605" Width="1024" xmlns:my="clr-namespace:CameraControl"
+        Title="digiCamControl" Height="605" Width="987" xmlns:my="clr-namespace:CameraControl"
         xmlns:local="clr-namespace:CameraControl.Controls"
-        xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
-        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                        xmlns:myClasess="clr-namespace:CameraControl.Classes"
-                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"     
-                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                       xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                        xmlns:Panels="clr-namespace:CameraControl.Panels"
                        xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                        Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown">
-    <i:Interaction.Behaviors>
+    <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
-    </i:Interaction.Behaviors>
+    </i:Interaction.Behaviors>-->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -139,7 +136,7 @@
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="382*" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="270" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="65" />
@@ -227,113 +224,115 @@
         <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="25,24,30,0" Grid.Row="3" Height="78" Width="81" />
         <Button Content="{T:TranslateExtension ButtonGetRawCodec}" Grid.Row="3" Height="23" Name="btn_getRaw" VerticalAlignment="Top" Click="btn_getRaw_Click"  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.RawCodecNeeded, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}"/>
 
-        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.RowSpan="5" Padding="0" Margin="0"  Width="250">
-            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" Name="ElementRow" />
-                        <RowDefinition Height="25" />
-                    </Grid.RowDefinitions>
+        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.RowSpan="5" Padding="0" Margin="0" >
+            <!--<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <!--<RowDefinition Height="*" Name="ElementRow" />-->
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
 
-                    <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" >
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="90" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" />
-                            <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" />
-                            <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" />
-                            <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" />
-                            <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
-                            <CheckBox Grid.Column="1" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
-                            <CheckBox Grid.Column="1" Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-                            <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                                    <Rectangle Width="20" Height="20">
-                                        <Rectangle.Fill>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_crosshair}" />
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                </ToggleButton>
-                                <ToggleButton  ToolTip="{T:TranslateExtension LabelFullSize}" Height="35" Width="35" Margin="0" IsChecked="{Binding LowMemoryUsage}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                                    <Rectangle Width="20" Height="20">
-                                        <Rectangle.Fill>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_camera_switch_invert}" />
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                </ToggleButton>
-                            </StackPanel>
-                        </Grid>
-                    </GroupBox>
-
-
-                    <StackPanel Grid.Row="1">
-                        <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
-                            <Panels:SelectionControl HorizontalAlignment="Center"/>
-                        </Expander>
-                        <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" />
+                        <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" />
+                        <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" />
+                        <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" />
+                        <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
+                        <CheckBox Grid.Column="1" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
+                        <CheckBox Grid.Column="1" Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                        <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                                <Rectangle Width="20" Height="20">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_crosshair}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </ToggleButton>
+                            <ToggleButton  ToolTip="{T:TranslateExtension LabelFullSize}" Height="35" Width="35" Margin="0" IsChecked="{Binding LowMemoryUsage}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                                <Rectangle Width="20" Height="20">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_camera_switch_invert}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </ToggleButton>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+                <Grid Grid.Row="1" Margin="0" >
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                    <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                        <Panels:SelectionControl HorizontalAlignment="Center"/>
+                    </Expander>
+                    <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="{T:TranslateExtension MenuLayoutNormal}" Click="MenuItem_Click_6" Margin="2"/>
+                            <Button Content="{T:TranslateExtension MenuLayoutGridRight}" Click="MenuItem_Click_7" Margin="2"/>
+                            <Button Content="{T:TranslateExtension MenuLayoutGrid}" Click="MenuItem_Click_8" Margin="2"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                        <StackPanel>
+                            <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}" Margin="3"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="{T:TranslateExtension MenuLayoutNormal}" Click="MenuItem_Click_6" Margin="2"/>
-                                <Button Content="{T:TranslateExtension MenuLayoutGridRight}" Click="MenuItem_Click_7" Margin="2"/>
-                                <Button Content="{T:TranslateExtension MenuLayoutGrid}" Click="MenuItem_Click_8" Margin="2"/>
+                                <Button Content="{T:TranslateExtension SessionAdd}" Name="btn_add_Sesion" Margin="3" Click="btn_add_Sesion_Click" />
+                                <Button Content="{T:TranslateExtension SessionEdit}" Name="btn_edit_Sesion" Margin="3" Click="btn_edit_Sesion_Click" />
+                                <Button Content="{T:TranslateExtension SessionDel}" Name="btn_del_Sesion" Margin="3" Click="btn_del_Sesion_Click" />
                             </StackPanel>
-                        </Expander>
-                        <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
-                            <StackPanel>
-                                <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}" Margin="3"/>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="{T:TranslateExtension SessionAdd}" Name="btn_add_Sesion" Margin="3" Click="btn_add_Sesion_Click" />
-                                    <Button Content="{T:TranslateExtension SessionEdit}" Name="btn_edit_Sesion" Margin="3" Click="btn_edit_Sesion_Click" />
-                                    <Button Content="{T:TranslateExtension SessionDel}" Name="btn_del_Sesion" Margin="3" Click="btn_del_Sesion_Click" />
-                                </StackPanel>
-                            </StackPanel>
-                        </Expander>
-                        <Expander  Header="{T:TranslateExtension LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                            <Panels:MetadataControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Width="250" />
-                        </Expander>
-                        <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                            <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
-                        </Expander>
-                        <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0">
-                            <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ExportPlugins}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteExportPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </Expander>
-                        <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                            <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolPlugins}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteToolPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </Expander>
-                    </StackPanel>
+                        </StackPanel>
+                    </Expander>
+                    <Expander  Header="{T:TranslateExtension LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                        <Panels:MetadataControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Width="250" />
+                    </Expander>
+                    <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                        <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
+                    </Expander>
+                    <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0">
+                        <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ExportPlugins}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteExportPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </Expander>
+                    <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                        <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolPlugins}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteToolPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </Expander>
+                        </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="1" Grid.Row="2" Margin="3"/>
+            </Grid>
+            <!--</ScrollViewer>-->
 
-                    <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3"/>
-                </Grid>
-            </ScrollViewer>
         </Expander>
 
         <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Grid.Row="4"
