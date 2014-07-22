@@ -32,14 +32,29 @@
                     <Setter.Value>
                         <DataTemplate>
                             <StackPanel>
-                                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="6" >
-                                    <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Width="120" Height="80"  />
-                                </Border>
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox IsChecked="{Binding Path=IsChecked}"/>
-                                    <Label Content="{Binding Path=Name}" HorizontalAlignment="Center" />
-                                </StackPanel>
+                                <Grid Width="130" Height="90">
+                                    <Rectangle Stroke="Black" Margin="0"/>
+                                    <Rectangle Stroke="White" Margin="1" />
+                                    <Rectangle Stroke="Black" Margin="2" />
+                                    <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3"/>
+                                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Margin="5">
+                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}"/>
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </StackPanel>
+                                    <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=Name}" Margin="3" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
+                                </Grid>
                             </StackPanel>
+                            <DataTemplate.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
