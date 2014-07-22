@@ -143,6 +143,9 @@
     <None Include="Service References\ServiceReference1\CameraControl.ServerTest.ServiceReference1.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ServiceReference1\CameraControl.Service.Exceptions.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceReference1\CameraControl.Service.xsd">
       <SubType>Designer</SubType>
     </None>

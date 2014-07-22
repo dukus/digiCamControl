@@ -12,6 +12,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using CameraControl.Service.Exceptions;
 
 namespace CameraControl.Service
 {
@@ -64,7 +65,8 @@ namespace CameraControl.Service
                 InitApplication();
                 _autoEvent.Reset();
                 latestPicturePath = null;
-
+                if (ServiceProvider.DeviceManager.SelectedCameraDevice == null || !ServiceProvider.DeviceManager.SelectedCameraDevice.IsConnected)
+                    throw CreateFaultException("No camera connected!");
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
 
                 if (_autoEvent.WaitOne(TimeSpan.FromSeconds(timeoutSeconds), false))
@@ -83,7 +85,7 @@ namespace CameraControl.Service
                 }
                 else
                 {
-                    throw new Exception("Time out !");
+                    throw CreateFaultException("Time out !");
                 }
 
             }
@@ -132,12 +134,13 @@ namespace CameraControl.Service
 
                 if (!File.Exists(fileName))
                 {
-                    throw new Exception(string.Format("File {0} does not exist after transfer", fileName));
+                    throw CreateFaultException(string.Format("File {0} does not exist after transfer", fileName));
                 }
             }
             catch (Exception exception)
             {
                 eventArgs.CameraDevice.IsBusy = false;
+                throw CreateFaultException(exception.Message);
                 //MessageBox.Show( "Error download photo from camera :\n" + exception.Message );
             }
             finally
@@ -150,6 +153,12 @@ namespace CameraControl.Service
         private static void DeviceManagerCameraConnected(ICameraDevice cameradevice)
         {
 
+        }
+
+        private static Exception CreateFaultException(string message)
+        {
+            var ex = new CustomFaultException {Message = message};
+            return new FaultException<CustomFaultException>(ex, message);
         }
     }
 }

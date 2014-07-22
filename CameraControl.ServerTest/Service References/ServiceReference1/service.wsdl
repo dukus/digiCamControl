@@ -286,11 +286,31 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ICameraService_TakePhotoAsBase64String_CustomFaultExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/CameraControl.Service" />
+      <xsd:import namespace="urn:CameraControl.Service.Exceptions" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICameraService_GetData_InputMessage">
@@ -323,6 +343,9 @@
   <wsdl:message name="ICameraService_TakePhotoAsBase64String_OutputMessage">
     <wsdl:part name="parameters" element="tns:TakePhotoAsBase64StringResponse" />
   </wsdl:message>
+  <wsdl:message name="ICameraService_TakePhotoAsBase64String_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="urn:CameraControl.Service.Exceptions" name="detail" element="q1:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="ICameraService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/ICameraService/GetData" message="tns:ICameraService_GetData_InputMessage" />
@@ -343,6 +366,7 @@
     <wsdl:operation name="TakePhotoAsBase64String">
       <wsdl:input wsaw:Action="http://tempuri.org/ICameraService/TakePhotoAsBase64String" message="tns:ICameraService_TakePhotoAsBase64String_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICameraService/TakePhotoAsBase64StringResponse" message="tns:ICameraService_TakePhotoAsBase64String_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICameraService/TakePhotoAsBase64StringCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:ICameraService_TakePhotoAsBase64String_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_ICameraService" type="tns:ICameraService">
@@ -402,6 +426,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_ICameraService_TakePhotoAsBase64String_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_ICameraService_TakePhotoAsBase64String_CustomFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CameraService">

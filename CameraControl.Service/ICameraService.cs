@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using CameraControl.Service.Exceptions;
 
 namespace CameraControl.Service
 {
@@ -24,6 +25,7 @@ namespace CameraControl.Service
         void Capture();
 
         [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
         string TakePhotoAsBase64String(int timeoutSeconds, int resizeWidth, int resizeHight, int rotation);
 
         // TODO: Add your service operations here
