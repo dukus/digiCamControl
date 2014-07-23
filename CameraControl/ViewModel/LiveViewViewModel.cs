@@ -18,6 +18,7 @@ using CameraControl.Core.Translation;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Others;
+using CameraControl.Devices.TransferProtocol.DDServer;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -39,6 +40,8 @@ namespace CameraControl.ViewModel
         private DateTime _photoCapturedTime;
         private Timer _timer = new Timer(1000/DesiredFrameRate);
         private Timer _freezeTimer = new Timer();
+        private Timer _focusStackingTimer = new Timer(1000);
+        private int _focusStackingTick = 0;
         private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
@@ -331,6 +334,7 @@ namespace CameraControl.ViewModel
                     _focusStep =
                         Convert.ToInt32(Decimal.Round((decimal) FocusValue/PhotoNo, MidpointRounding.AwayFromZero));
                 RaisePropertyChanged(() => FocusStep);
+                RaisePropertyChanged(() => PhotoNo);
             }
         }
 
@@ -350,8 +354,9 @@ namespace CameraControl.ViewModel
             set
             {
                 _focusStep = value;
+                _photoNo = Convert.ToInt32(Decimal.Round((decimal) FocusValue/FocusStep, MidpointRounding.AwayFromZero));
                 RaisePropertyChanged(() => FocusStep);
-                PhotoNo = Convert.ToInt32(Decimal.Round((decimal) FocusValue/FocusStep, MidpointRounding.AwayFromZero));
+                RaisePropertyChanged(() => PhotoNo);
             }
         }
 
@@ -474,6 +479,7 @@ namespace CameraControl.ViewModel
                 if (_lockB)
                 {
                     FocusValue = FocusCounter;
+                    PhotoCount = 5;
                 }
                 RaisePropertyChanged(() => LockB);
                 RaisePropertyChanged(() => CounterMessage);
@@ -619,6 +625,8 @@ namespace CameraControl.ViewModel
                     GetLiveImage();
             };
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+            _focusStackingTimer.AutoReset = true;
+            _focusStackingTimer.Elapsed += _focusStackingTimer_Elapsed;
         }
 
         public void UnInit()
@@ -726,17 +734,12 @@ namespace CameraControl.ViewModel
         {
             _detector.Reset();
             _photoCapturedTime = DateTime.Now;
-            if (PhotoCount <= PhotoNo && IsFocusStackingRunning)
+            if (IsFocusStackingRunning)
             {
-                var threadPhoto = new Thread(TakePhoto);
-                threadPhoto.Start();
+                _focusStackingTimer.Start();
             }
-            else
-            {
-                IsFocusStackingRunning = false;
-                _timer.Start();
-                StartLiveView();
-            }
+            _timer.Start();
+            StartLiveView();
         }
 
         private void CameraDeviceCameraDisconnected(object sender, DisconnectCameraEventArgs eventArgs)
@@ -764,6 +767,8 @@ namespace CameraControl.ViewModel
         {
             try
             {
+                LockB = false;
+                LockA = false;
                 CameraDevice.AutoFocus();
             }
             catch (Exception exception)
@@ -773,56 +778,7 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void TakePhoto()
-        {
-            try
-            {
-                if (IsFocusStackingRunning)
-                {
-                    Log.Debug("LiveView: Stack photo capture started");
-                    StartLiveView();
-                    if (PhotoCount > 0)
-                    {
-                        SetFocus(FocusStep);
-                    }
-                    PhotoCount++;
-                    GetLiveImage();
-                    Thread.Sleep(WaitTime*1000);
-                    if (PhotoCount <= PhotoNo)
-                    {
-                        if (!_focusStackingPreview)
-                        {
-                            Recording = false;
-                            CameraDevice.CapturePhotoNoAf();
-                        }
-                        else
-                        {
-                            TakePhoto();
-                        }
-                    }
-                    else
-                    {
-                        StartLiveView();
-                        FreezeImage = false;
-                        IsFocusStackingRunning = false;
-                        PhotoCount = 0;
-                        _timer.Start();
-                    }
-                }
-                else
-                {
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.StartLiveView();
-                    FreezeImage = false;
-                }
-            }
-            catch (DeviceException exception)
-            {
-                StaticHelper.Instance.SystemMessage = exception.Message;
-                Log.Error("Live view. Unable to take photo", exception);
-            }
-        }
-
-
+   
         private void GetLiveImage()
         {
             if (_operInProgress)
@@ -1236,7 +1192,7 @@ namespace CameraControl.ViewModel
                         if (deviceException.ErrorCode == ErrorCodes.ERROR_BUSY ||
                             deviceException.ErrorCode == ErrorCodes.MTP_Device_Busy)
                         {
-                            Thread.Sleep(200);
+                            Thread.Sleep(100);
                             Log.Debug("Retry live view :" + deviceException.ErrorCode.ToString("X"));
                             retry = true;
                             retryNum++;
@@ -1365,6 +1321,7 @@ namespace CameraControl.ViewModel
             {
                 _timer.Stop();
                 CameraDevice.StartLiveView();
+                StaticHelper.Instance.SystemMessage = "Move focus " + step;
                 int stepdone = CameraDevice.Focus(step);
                 FocusCounter += stepdone;
             }
@@ -1441,6 +1398,7 @@ namespace CameraControl.ViewModel
                 MessageBox.Show(TranslationStrings.LabelError, TranslationStrings.LabelLockNearFar);
                 return;
             }
+            _focusStackingTick = 0;
             Thread.Sleep(500);
             _focusIProgress = false;
             SetFocus(-FocusCounter);
@@ -1448,8 +1406,9 @@ namespace CameraControl.ViewModel
             PhotoCount = 0;
             IsFocusStackingRunning = true;
             _focusStackingPreview = false;
-            Thread thread = new Thread(TakePhoto);
-            thread.Start();
+            _focusStackingTimer.Start();
+            //Thread thread = new Thread(TakePhoto);
+            //thread.Start();
         }
 
         private void PreviewFocusStacking()
@@ -1460,14 +1419,59 @@ namespace CameraControl.ViewModel
             PhotoCount = 0;
             IsFocusStackingRunning = true;
             _focusStackingPreview = true;
-            Thread thread = new Thread(TakePhoto);
-            thread.Start();
+            _focusStackingTimer.Start();
         }
 
         private void StopFocusStacking()
         {
             IsFocusStackingRunning = false;
+            _focusStackingTick = 0;
+            _focusStackingTimer.Stop();
             _timer.Start();
+        }
+
+
+        void _focusStackingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (!IsFocusStackingRunning)
+                return;
+            if (FocusCounter >= FocusValue)
+            {
+                IsFocusStackingRunning = false;
+            }
+            if (_focusStackingTick > WaitTime)
+            {
+                _focusStackingTimer.Stop();
+                StartLiveView();
+                if (PhotoCount > 0)
+                {
+                    SetFocus(FocusStep);
+                }
+                PhotoCount++;
+                GetLiveImage();
+                _focusStackingTick = 0;
+                if (!_focusStackingPreview)
+                {
+                    Recording = false;
+                    try
+                    {
+                        var thread = new Thread(Capture);
+                        thread.Start();
+                        thread.Join();
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error(exception);
+                        StaticHelper.Instance.SystemMessage = exception.Message;
+                        _focusStackingTimer.Start();
+                    }
+                }
+                else
+                {
+                    _focusStackingTimer.Start();
+                }
+            }
+            _focusStackingTick++;
         }
     }
 }
