@@ -55,7 +55,7 @@ namespace CameraControl.ViewModel
         private bool _recording;
         private string _recButtonText;
         private int _gridType;
-        private List<string> _overlays;
+        private AsyncObservableCollection<string> _overlays;
         private double _currentMotionIndex;
         private bool _triggerOnMotion;
         private PointCollection _luminanceHistogramPoints = null;
@@ -152,7 +152,7 @@ namespace CameraControl.ViewModel
             }
         }
 
-        public List<string> Overlays
+        public AsyncObservableCollection<string> Overlays
         {
             get { return _overlays; }
             set
@@ -612,14 +612,14 @@ namespace CameraControl.ViewModel
 
         private void InitOverlay()
         {
-            Overlays = new List<string>();
+            Overlays = new AsyncObservableCollection<string>();
+            Overlays.Add(TranslationStrings.LabelNone);
+            Overlays.Add(TranslationStrings.LabelRuleOfThirds);
+            Overlays.Add(TranslationStrings.LabelComboGrid);
+            Overlays.Add(TranslationStrings.LabelDiagonal);
+            Overlays.Add(TranslationStrings.LabelSplit);
             if (Directory.Exists(ServiceProvider.Settings.OverlayFolder))
             {
-                Overlays.Add(TranslationStrings.LabelNone);
-                Overlays.Add(TranslationStrings.LabelRuleOfThirds);
-                Overlays.Add(TranslationStrings.LabelComboGrid);
-                Overlays.Add(TranslationStrings.LabelDiagonal);
-                Overlays.Add(TranslationStrings.LabelSplit);
                 string[] files = Directory.GetFiles(ServiceProvider.Settings.OverlayFolder, "*.png");
                 foreach (string file in files)
                 {
@@ -668,6 +668,8 @@ namespace CameraControl.ViewModel
         public void UnInit()
         {
             _timer.Stop();
+            _focusStackingTimer.Stop();
+            _restartTimer.Stop();
             CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured; 
             Thread.Sleep(100);
             StopLiveView();
@@ -960,7 +962,7 @@ namespace CameraControl.ViewModel
                                     if (LiveViewData.Rotation != 0)
                                         writeableBitmap =
                                             writeableBitmap.RotateFree(
-                                                LiveViewData.Rotation);
+                                                LiveViewData.Rotation, false);
                                     break;
                             }
                         }

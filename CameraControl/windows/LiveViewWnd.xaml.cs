@@ -205,6 +205,7 @@ namespace CameraControl.windows
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
                                                      {
+                                                         ((LiveViewViewModel)DataContext).UnInit();
                                                          Hide();
                                                          Close();
                                                      }));

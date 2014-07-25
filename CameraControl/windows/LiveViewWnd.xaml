@@ -236,6 +236,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            
                             <Label Content="{T:TranslateExtension LabelOverlay}" Grid.Column="1" VerticalAlignment="Center"/>
                             <ComboBox Grid.Column="3" Margin="3" SelectedIndex="{Binding GridType}" ItemsSource="{Binding Overlays}" SelectedItem="{Binding SelectedOverlay}"/>
 
