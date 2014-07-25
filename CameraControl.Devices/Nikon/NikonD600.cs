@@ -51,6 +51,13 @@ namespace CameraControl.Devices.Nikon
                     const int headerSize = 384;
 
                     var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+                    if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
+                    {
+                        _timer.Start();
+                        viewData.IsLiveViewRunning = false;
+                        viewData.ImageData = null;
+                        return viewData;
+                    }
                     if (result.Data == null || result.Data.Length <= headerSize)
                         return null;
                     GetAditionalLIveViewData(viewData, result.Data);

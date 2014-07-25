@@ -57,13 +57,20 @@ namespace CameraControl.Devices.Nikon
             const int headerSize = 128;
 
             var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+            if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
+            {
+                _timer.Start();
+                viewData.IsLiveViewRunning = false;
+                viewData.ImageData = null;
+                return viewData;
+            }
             if (result.Data == null || result.Data.Length <= headerSize)
                 return null;
             int cbBytesRead = result.Data.Length;
             GetAditionalLIveViewData(viewData, result.Data);
 
-            MemoryStream copy = new MemoryStream((int) cbBytesRead - headerSize);
-            copy.Write(result.Data, headerSize, (int)cbBytesRead - headerSize);
+            MemoryStream copy = new MemoryStream(cbBytesRead - headerSize);
+            copy.Write(result.Data, headerSize, cbBytesRead - headerSize);
             copy.Close();
             viewData.ImageData = copy.GetBuffer();
 

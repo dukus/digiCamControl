@@ -33,26 +33,76 @@ namespace CameraControl.Devices.Classes
         public int LiveViewImageWidth { get; set; }
         public int LiveViewImageHeight { get; set; }
 
+        /// <summary>
+        /// Gets or sets the width of the captured image.
+        /// </summary>
+        /// <value>
+        /// The width of the image.
+        /// </value>
         public int ImageWidth { get; set; }
+        /// <summary>
+        /// Gets or sets the height of the captured image.
+        /// </summary>
+        /// <value>
+        /// The height of the image.
+        /// </value>
         public int ImageHeight { get; set; }
 
+        /// <summary>
+        /// Gets or sets the focus point x axis .
+        /// </summary>
+        /// <value>
+        /// The focus x.
+        /// </value>
         public int FocusX { get; set; }
+        /// <summary>
+        /// Gets or sets the focus point y axis.
+        /// </summary>
+        /// <value>
+        /// The focus y.
+        /// </value>
         public int FocusY { get; set; }
 
         public int FocusFrameXSize { get; set; }
         public int FocusFrameYSize { get; set; }
 
 
+        /// <summary>
+        /// Gets or sets a value indicating whether focussing info included.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [have focus data]; otherwise, <c>false</c>.
+        /// </value>
         public bool HaveFocusData { get; set; }
 
+        /// <summary>
+        /// Gets or sets the live view image data.
+        /// May contain additional information, use ImageDataPosition to get live view image 
+        /// </summary>
+        /// <value>
+        /// The image data.
+        /// </value>
         public byte[] ImageData { get; set; }
 
         public bool Focused { get; set; }
 
+        /// <summary>
+        /// Gets or sets the image data starting position in ImageData.
+        /// </summary>
+        /// <value>
+        /// The image data position.
+        /// </value>
         public int ImageDataPosition { get; set; }
 
         public int Rotation { get; set; }
 
         public bool MovieIsRecording { get; set; }
+
+        public bool IsLiveViewRunning { get; set; }
+
+        public LiveViewData()
+        {
+            IsLiveViewRunning = true;
+        }
     }
 }

@@ -41,6 +41,8 @@ namespace CameraControl.ViewModel
         private Timer _timer = new Timer(1000/DesiredFrameRate);
         private Timer _freezeTimer = new Timer();
         private Timer _focusStackingTimer = new Timer(1000);
+        private Timer _restartTimer = new Timer(1000);
+        private DateTime _restartTimerStartTime;
         private int _focusStackingTick = 0;
         private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
@@ -70,6 +72,7 @@ namespace CameraControl.ViewModel
         private bool _lockA;
         private bool _lockB;
         private int _selectedFocusValue;
+        private bool _delayedStart;
 
         public ICameraDevice CameraDevice
         {
@@ -498,7 +501,27 @@ namespace CameraControl.ViewModel
         public bool ShowFocusRect
         {
             get { return CameraProperty.LiveviewSettings.ShowFocusRect; }
-            set { CameraProperty.LiveviewSettings.ShowFocusRect = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.ShowFocusRect = value;
+                RaisePropertyChanged(() => ShowFocusRect);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating if restart timer is running.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [delayed start]; otherwise, <c>false</c>.
+        /// </value>
+        public bool DelayedStart
+        {
+            get { return _delayedStart; }
+            set
+            {
+                _delayedStart = value;
+                RaisePropertyChanged(() => DelayedStart);
+            }
         }
 
         #endregion
@@ -610,6 +633,7 @@ namespace CameraControl.ViewModel
             WaitTime = 2;
             PhotoNo = 2;
             FocusStep = 2;
+            DelayedStart = false;
             _timer.Stop();
             _timer.AutoReset = true;
             CameraDevice.CameraDisconnected += CameraDeviceCameraDisconnected;
@@ -627,6 +651,18 @@ namespace CameraControl.ViewModel
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
             _focusStackingTimer.AutoReset = true;
             _focusStackingTimer.Elapsed += _focusStackingTimer_Elapsed;
+            _restartTimer.AutoReset = true;
+            _restartTimer.Elapsed += _restartTimer_Elapsed;
+        }
+
+        private void _restartTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if ((DateTime.Now - _restartTimerStartTime).TotalSeconds > 2)
+            {
+                _restartTimer.Stop();
+                StartLiveView();
+                DelayedStart = false;
+            }
         }
 
         public void UnInit()
@@ -783,6 +819,10 @@ namespace CameraControl.ViewModel
         {
             if (_operInProgress)
                 return;
+            
+            if (DelayedStart)
+                return;
+
             _operInProgress = true;
             _totalframes++;
             if ((DateTime.Now - _framestart).TotalSeconds > 0)
@@ -798,12 +838,29 @@ namespace CameraControl.ViewModel
                 return;
             }
 
-            if (LiveViewData == null || LiveViewData.ImageData == null)
+            if (LiveViewData == null )
             {
                 _retries++;
                 _operInProgress = false;
                 return;
             }
+
+            if (!LiveViewData.IsLiveViewRunning)
+            {
+                DelayedStart = true;
+                _restartTimerStartTime = DateTime.Now;
+                _restartTimer. Start();
+                _operInProgress = false;
+                return;
+            }
+
+            if (LiveViewData.ImageData == null)
+            {
+                _retries++;
+                _operInProgress = false;
+                return;
+            }
+
             Recording = LiveViewData.MovieIsRecording;
             try
             {

@@ -315,10 +315,10 @@
         </Image>
         <!--<Image Name="img_preview" Margin="31,114,0,0" Height="{Binding ElementName=canvas_image, Path=Height}" HorizontalAlignment="Left" Width="{Binding ElementName=canvas_image, Path=Width}"/>-->
         <Label Content="{Binding Fps}" Margin="188,96,9,72" Grid.Row="1" Grid.Column="0" />
-        
-        <Grid Margin="92,0,83,0" Grid.Column="2" Grid.Row="2" Name="grid_wait" Visibility="Hidden">
+
+        <Grid Width="300" Grid.Column="2" Grid.Row="2" Name="grid_wait" Visibility="{Binding Path=DelayedStart, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}">
             <ProgressBar IsIndeterminate="True" Height="20"/>
-            <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" />
+            <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="3" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="5" />
