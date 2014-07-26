@@ -161,6 +161,7 @@ namespace CameraControl.Plugins.ToolPlugins
         public RelayCommand StartCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
         public RelayCommand PauseCommand { get; set; }
+        public RelayCommand CreateMovieCommand { get; set; }
 
         public ImageSequencerViewModel()
         {
@@ -173,7 +174,8 @@ namespace CameraControl.Plugins.ToolPlugins
             _window.Closed += _window_Closed;
             StartCommand = new RelayCommand(Start);
             StopCommand = new RelayCommand(Stop);
-            PauseCommand=new RelayCommand(Pause);
+            PauseCommand = new RelayCommand(Pause);
+            CreateMovieCommand = new RelayCommand(CreateMovie);
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
             _backgroundWorker.WorkerSupportsCancellation = true;
@@ -259,6 +261,17 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 _backgroundWorker.CancelAsync();
             }
+        }
+
+        private void CreateMovie()
+        {
+            GenMovieWindow window = new GenMovieWindow();
+            var viewmodel = new GenMovieViewModel(window);
+            viewmodel.Fps = Fps;
+            viewmodel.MinValue = MinValue;
+            viewmodel.MaxValue = MaxValue;
+            window.DataContext = viewmodel;
+            window.ShowDialog();   
         }
     }
 }

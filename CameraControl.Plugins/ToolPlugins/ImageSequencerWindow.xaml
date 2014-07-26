@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="400" Width="600" WindowStartupLocation="CenterScreen" ShowMinButton="False"
+             mc:Ignorable="d" Height="440" Width="700" WindowStartupLocation="CenterScreen" ShowMinButton="False"
                        Title="{T:TranslateExtension LabelImageSequencer}" Name="metrowindow">
     <Window.DataContext>
         <toolPlugins:ImageSequencerViewModel/>
@@ -36,6 +36,7 @@
             <ToggleButton Content="{T:TranslateExtension LabelPause}" Margin="3" IsChecked="{Binding IsPaused}"/>
             <CheckBox Content="{T:TranslateExtension LabelLoop}" IsChecked="{Binding Loop}" Margin="3"/>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" IsChecked="{Binding ElementName=metrowindow,Path=Topmost}" Margin="3"/>
+            <Button Content="{T:TranslateExtension LabelCreateMovie}" Margin="3" Command="{Binding CreateMovieCommand}" IsEnabled="{Binding IsFree}"/>
         </StackPanel>
         <Image Grid.Column="1" Height="100" Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap}"/>
         <Label Content="{Binding CounterText}" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

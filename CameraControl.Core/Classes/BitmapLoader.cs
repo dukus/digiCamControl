@@ -190,7 +190,7 @@ namespace CameraControl.Core.Classes
         }
 
 
-        private static BitmapFrame GetBitmapFrame(BitmapFrame photo, int width, int height, BitmapScalingMode mode)
+        public static BitmapFrame GetBitmapFrame(BitmapFrame photo, int width, int height, BitmapScalingMode mode)
         {
             TransformedBitmap target = new TransformedBitmap(
                 photo,

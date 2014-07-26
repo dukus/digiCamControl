@@ -141,8 +141,8 @@ namespace CameraControl.windows
             script = script.Replace("$InFile$", Path.Combine(_tempFolder, "img000001.jpg").Replace(@"\", @"\\"));
             script = script.Replace("$FPS$", ServiceProvider.Settings.DefaultSession.TimeLapse.Fps.ToString());
             script = script.Replace("$Count$", _files.Count.ToString());
-            script = script.Replace("$OutFile$",
-                                    ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName.Replace(@"\", @"\\"));
+            //script = script.Replace("$OutFile$",
+            //                        ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName.Replace(@"\", @"\\"));
             using (TextWriter writer = new StreamWriter(Path.Combine(_tempFolder, "VirtualDub.script")))
             {
                 writer.Write(script);
@@ -168,20 +168,7 @@ namespace CameraControl.windows
                 Close();
                 return;
             }
-            if (ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType == null ||
-                ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width == 0 ||
-                ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height == 0)
-            {
-                MessageBox.Show("Wrong video settings !");
-                Close();
-                return;
-            }
-            if (string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName))
-            {
-                MessageBox.Show("No output file defined !");
-                Close();
-                return;
-            }
+
             if (!File.Exists(_virtualdubdir))
             {
                 MessageBox.Show("VirtualDub not found. Reinstall the application ! !");
@@ -204,8 +191,10 @@ namespace CameraControl.windows
 
             int dw = (int) image.Width; //FreeImage.GetWidth(dib);
             int dh = (int) image.Height; //FreeImage.GetHeight(dib);
-            int tw = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width;
-            int th = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height;
+            //int tw = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width;
+            //int th = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height;
+            int tw = 0;
+            int th = 0;
             double movieaspectration = (double) th/tw;
             double mouviesize = ((double) (ServiceProvider.Settings.DefaultSession.TimeLapse.MovePercent)/100);
             int frame_h = dh >= dw ? dh : (int) (dw*movieaspectration);
@@ -322,8 +311,8 @@ namespace CameraControl.windows
 
             uint dw = FreeImage.GetWidth(dib);
             uint dh = FreeImage.GetHeight(dib);
-            int tw = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width;
-            int th = ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height;
+            int tw = 0;// ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Width;
+            int th = 0; //ServiceProvider.Settings.DefaultSession.TimeLapse.VideoType.Height;
             double zw = (tw/(double) dw);
             double zh = (th/(double) dh);
             double z = 0;
@@ -389,10 +378,10 @@ namespace CameraControl.windows
 
         private void btn_paly_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName))
-                System.Diagnostics.Process.Start(ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName);
-            else
-                MessageBox.Show("Output file not found");
+            //if (File.Exists(ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName))
+            //    System.Diagnostics.Process.Start(ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName);
+            //else
+            //    MessageBox.Show("Output file not found");
         }
     }
 }

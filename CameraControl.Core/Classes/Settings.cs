@@ -94,9 +94,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        [XmlIgnore]
-        public ObservableCollection<VideoType> VideoTypes { get; set; }
-
         private bool _imageLoading;
 
         [XmlIgnore]
@@ -709,6 +706,10 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public static string ApplicationFolder
+        {
+            get { return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); }
+        }
 
         public Settings()
         {
@@ -718,13 +719,6 @@ namespace CameraControl.Core.Classes
             PhotoSessions = new ObservableCollection<PhotoSession>();
             SelectedBitmap = new BitmapFile();
             ImageLoading = false;
-            VideoTypes = new ObservableCollection<VideoType>
-                             {
-                                 new VideoType("HD 1080 16:9", 1920, 1080),
-                                 new VideoType("UXGA 4:3", 1600, 1200),
-                                 new VideoType("HD 720 16:9", 1280, 720),
-                                 new VideoType("Super VGA 4:3", 800, 600),
-                             };
             CameraProperties = new CameraPropertyEnumerator();
             DeviceConfigs = new CustomConfigEnumerator();
             ResetSettings();

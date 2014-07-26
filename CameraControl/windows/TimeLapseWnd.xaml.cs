@@ -109,14 +109,7 @@ namespace CameraControl.windows
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Avi files (*.avi)|*.avi|All files (*.*)|*.*";
-            dialog.AddExtension = true;
-            dialog.FileName = ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName;
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                ServiceProvider.Settings.DefaultSession.TimeLapse.OutputFIleName = dialog.FileName;
-            }
+
         }
 
         private void Window_Closed(object sender, EventArgs e)

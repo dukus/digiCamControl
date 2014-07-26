@@ -93,26 +93,6 @@ namespace CameraControl.Core.Classes
 
         private int _photosTaken;
 
-        private VideoType _videoType;
-
-        public VideoType VideoType
-        {
-            get
-            {
-                if (_videoType == null || _videoType.Width == 0)
-                {
-                    if (ServiceProvider.Settings != null && ServiceProvider.Settings.VideoTypes.Count > 0)
-                        _videoType = ServiceProvider.Settings.VideoTypes[0];
-                }
-                return _videoType;
-            }
-            set
-            {
-                _videoType = value;
-                NotifyPropertyChanged("VideoType");
-            }
-        }
-
         private DateTime _timePeriod;
 
         public DateTime TimePeriod
@@ -146,18 +126,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-
-        private string _outputFIleName;
-
-        public string OutputFIleName
-        {
-            get { return _outputFIleName; }
-            set
-            {
-                _outputFIleName = value;
-                NotifyPropertyChanged("OutputFIleName");
-            }
-        }
 
         private int _fps;
 
@@ -321,7 +289,6 @@ namespace CameraControl.Core.Classes
             NumberOfPhotos = 100;
             PhotosTaken = 0;
             IsDisabled = true;
-            VideoType = new VideoType("", 0, 0);
             Fps = 15;
             FillImage = false;
             VirtualMove = false;

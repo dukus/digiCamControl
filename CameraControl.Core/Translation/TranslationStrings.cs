@@ -476,5 +476,9 @@ namespace CameraControl.Core.Translation
         public static string LabelPause = "Pause";
         public static string LabelImageSequencer = "Image Sequencer";
         public static string LabelLoop = "Loop";
+        public static string LabelProgress = "Progress";
+        public static string LabelStartImageFrame = "Start image frame";
+        public static string LabelStopImageFrame = "Stop image frame";
+        public static string LabelPlayVideo = "Play Video";
     }
 }

@@ -105,6 +105,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WriteableBitmapEx.Wpf">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Astro\PHDWnd.xaml.cs">
@@ -128,6 +131,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPortShutterReleaseConfig.xaml.cs">
       <DependentUpon>SerialPortShutterReleaseConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolPlugins\GenMoviePlugin.cs" />
+    <Compile Include="ToolPlugins\GenMovieViewModel.cs" />
+    <Compile Include="ToolPlugins\GenMovieWindow.xaml.cs">
+      <DependentUpon>GenMovieWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolPlugins\GenThumbPlugin.cs" />
     <Compile Include="ToolPlugins\GenThumbViewModel.cs" />
@@ -181,6 +189,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SerialPortShutterReleaseConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolPlugins\GenMovieWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

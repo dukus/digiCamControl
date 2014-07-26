@@ -5,7 +5,7 @@
                        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                        xmlns:Controls2="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core"
-                       Title="{T:TranslateExtension TimeLapseWindowTitle}" Height="445" Width="631" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ShowActivated="True" Closed="Window_Closed" Closing="Window_Closing"
+                       Title="{T:TranslateExtension TimeLapseWindowTitle}" Height="430" Width="400" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ShowActivated="True" Closed="Window_Closed" Closing="Window_Closing"
                        ShowMaxRestoreButton="False" ShowMinButton="False">
     <Window.Resources>
         <ResourceDictionary>
@@ -30,8 +30,8 @@
     </Controls:MetroWindow.WindowCommands>
 
     <Grid>
-        <TabControl Name="tabControl1" TabStripPlacement="Left">
-            <TabItem Header="{T:TranslateExtension LabelTimeLapse}" Name="tabItem1">
+        <!--<TabControl Name="tabControl1" TabStripPlacement="Left">
+            <TabItem Header="{T:TranslateExtension LabelTimeLapse}" Name="tabItem1">-->
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10" />
@@ -71,70 +71,9 @@
                     <ProgressBar Grid.ColumnSpan="2" Grid.Row="10" Grid.Column="1" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresTime,Mode=OneWay}" Margin="3"/>
                     <TextBox Text="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Message,Mode=OneWay}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2" Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" IsReadOnly="True"/>
                 </Grid>
-            </TabItem>
-          
-            <TabItem Header="{T:TranslateExtension LabelCreateMovie}" Name="tabItem3">
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="171" />
-                        <ColumnDefinition Width="238" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="182*" />
-                        <RowDefinition Height="38*" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{T:TranslateExtension LabelVideoFormat}" HorizontalAlignment="Right" Margin="3" Name="label3" VerticalAlignment="Center"/>
-                    <ComboBox  Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=VideoTypes}" SelectedValue="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.VideoType}" Margin="3"/>
-
-                    <Label Grid.Row="1" Content="{T:TranslateExtension LabelOutputFile}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.OutputFIleName}" Margin="3,3,50,3" IsReadOnly="True" />
-                    <Button Grid.Row="1" Grid.Column="1" Content="..." Width="40" Margin="3" Name="button3" VerticalAlignment="Center" Click="button3_Click" HorizontalAlignment="Right"/>
-
-                    <Label Grid.Row="2" Content="{T:TranslateExtension LabelFillImage}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
-                    <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.FillImage}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center" />
-                    
-                    <Expander  Grid.Row="3"  Header="" Height="170" Margin="6,6,6,0" VerticalAlignment="Top" IsExpanded="True" Width="397" Grid.ColumnSpan="2">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150*" />
-                                <ColumnDefinition Width="221*" />
-                            </Grid.ColumnDefinitions>
-                            <CheckBox Content="{T:TranslateExtension LabelAddVirtualMovingToVideo}" HorizontalAlignment="Left" Margin="5,6,0,0" Name="chk_video_move" VerticalAlignment="Top" Grid.ColumnSpan="2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.VirtualMove}"/>
-                            <Label Content="{T:TranslateExtension LabelMovingSurface}" Grid.Row="1" />
-                            <Controls:NumericUpDown Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="50" IsEnabled="{Binding ElementName=chk_video_move, Path=IsChecked}" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.MovePercent}" Margin="3"/>
-                            <Label Content="{T:TranslateExtension LabelMovingDirection}" Grid.Row="2" />
-                            <ComboBox Grid.Column="1" Grid.Row="2" IsEnabled="{Binding ElementName=chk_video_move, Path=IsChecked}" SelectedIndex="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.MoveDirection}" Margin="3">
-                                <ComboBoxItem Content="{T:TranslateExtension LabelMovingDirectionLeftToRight}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelMovingDirectionRightToLeft}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelMovingDirectionTopToBottom}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelMovingDirectionBottomToTop}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelMovingDirectionLeftTopToRightBottom}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelMovingDirectionRightBottomToLeftTop}" />
-                            </ComboBox>
-                            <Label  Grid.Row="3" Content="{T:TranslateExtension LabelImageAlignment}" />
-                            <ComboBox Grid.Column="1" Grid.Row="3" Name="comboBox3" IsEnabled="{Binding ElementName=chk_video_move, Path=IsChecked}" SelectedIndex="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.MoveAlignment}" Margin="3">
-                                <ComboBoxItem Content="{T:TranslateExtension LabelImageAlignmentLeftTop}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelImageAlignmentCenter}" />
-                                <ComboBoxItem Content="{T:TranslateExtension LabelImageAlignmentRightBottom}" />
-                            </ComboBox>
-                        </Grid>
-                    </Expander>
-                    <Button Content="{T:TranslateExtension ButtonCreateMovie}" Name="button1" Width="140" Click="button1_Click" Margin="134,10" Grid.Row="4" Grid.ColumnSpan="2" />
-                </Grid>
-            </TabItem>
-
-        </TabControl>
+            <!--</TabItem>
+         
+        
+        </TabControl>-->
     </Grid>
 </Controls:MetroWindow >
