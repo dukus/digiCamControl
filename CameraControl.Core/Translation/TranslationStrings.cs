@@ -472,5 +472,9 @@ namespace CameraControl.Core.Translation
         public static string ButtonRecordStopMovie = "Stop Record movie";
         public static string LabelOverlay = "Overlay";
         public static string LabelGenerateThumbs = "Generate Thumbnails";
+        public static string LabelPlay = "Play";
+        public static string LabelPause = "Pause";
+        public static string LabelImageSequencer = "Image Sequencer";
+        public static string LabelLoop = "Loop";
     }
 }

@@ -134,6 +134,11 @@
     <Compile Include="ToolPlugins\GenThumbWindow.xaml.cs">
       <DependentUpon>GenThumbWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ToolPlugins\ImageSequencerPlugin.cs" />
+    <Compile Include="ToolPlugins\ImageSequencerViewModel.cs" />
+    <Compile Include="ToolPlugins\ImageSequencerWindow.xaml.cs">
+      <DependentUpon>ImageSequencerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
@@ -180,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolPlugins\GenThumbWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolPlugins\ImageSequencerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
