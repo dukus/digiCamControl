@@ -7,12 +7,12 @@ Name digiCamControl
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.1.797
+!define VERSION 1.1.800
 !define COMPANY "Duka Istvan"
 !define URL http://www.digicamcontrol.com/
 
 # MUI Symbol Definitions
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\classic-install.ico"
+!define MUI_ICON "..\CameraControl\logo.ico"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE

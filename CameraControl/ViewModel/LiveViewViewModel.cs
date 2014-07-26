@@ -130,14 +130,9 @@ namespace CameraControl.ViewModel
             set
             {
                 _recording = value;
-                if (_recording)
-                {
-                    RecButtonText = TranslationStrings.ButtonRecordMovie;
-                }
-                else
-                {
-                    RecButtonText = TranslationStrings.ButtonRecordStopMovie;
-                }
+                RecButtonText = _recording
+                    ? TranslationStrings.ButtonRecordStopMovie
+                    : TranslationStrings.ButtonRecordMovie;
                 RaisePropertyChanged(() => Recording);
             }
         }
