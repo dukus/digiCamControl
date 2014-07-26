@@ -131,6 +131,12 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool HaveGeneratedThumbnail
+        {
+            get { return File.Exists(SmallThumb) && File.Exists(LargeThumb); } 
+        }
+
+
         private BitmapImage _bitmapImage;
 
         [JsonIgnore]
@@ -272,11 +278,23 @@ namespace CameraControl.Core.Classes
         public FileInfo FileInfo { get; set; }
 
 
+        /// <summary>
+        /// Gets the small thumb file name.
+        /// </summary>
+        /// <value>
+        /// The small thumb.
+        /// </value>
         public string SmallThumb
         {
             get { return Path.Combine(Settings.DataFolder, "Cache\\Small", Id + ".jpg"); }
         }
 
+        /// <summary>
+        /// Gets the large thumb file name.
+        /// </summary>
+        /// <value>
+        /// The large thumb.
+        /// </value>
         public string LargeThumb
         {
             get { return Path.Combine(Settings.DataFolder, "Cache\\Large", Id + ".jpg"); }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -18,7 +17,6 @@ using CameraControl.Core.Translation;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Others;
-using CameraControl.Devices.TransferProtocol.DDServer;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

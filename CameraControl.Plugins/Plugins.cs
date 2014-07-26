@@ -38,6 +38,7 @@ using CameraControl.Devices;
 using CameraControl.Plugins.ExportPlugins;
 using CameraControl.Plugins.ExternalDevices;
 using CameraControl.Plugins.MainWindowPlugins;
+using CameraControl.Plugins.ToolPlugins;
 
 #endregion
 
@@ -55,6 +56,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ExportPlugins.Add(new ExportToFolder());
                 ServiceProvider.PluginManager.MainWindowPlugins.Add(new SimpleMainWindow());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new PhdPlugin());
+                ServiceProvider.PluginManager.ToolPlugins.Add(new GenThumbPlugin());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new SerialPortShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DSUSBShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new MultiCameraBoxShutterRelease());

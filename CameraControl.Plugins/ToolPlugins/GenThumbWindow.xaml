@@ -1,0 +1,37 @@
+﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.GenThumbWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
+             xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+             mc:Ignorable="d" Height="200" Width="400" WindowStartupLocation="CenterScreen" ShowMinButton="False" ShowMaxRestoreButton="False"
+                      Title="{T:TranslateExtension LabelGenerateThumbs}">
+    <Window.DataContext>
+        <toolPlugins:GenThumbViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2"  Stretch="Uniform" Source="{Binding Bitmap}" Margin="5" />
+        <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Content="{Binding CounterText}" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ProgressBar Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" Height="20" Margin="2"/>
+        <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="1" Command="{Binding StartCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+        <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="1" Grid.Row="1" Command="{Binding StopCommand}" Margin="5" IsEnabled="{Binding IsBusy}"/>
+    </Grid>
+</controls:MetroWindow>

@@ -471,5 +471,6 @@ namespace CameraControl.Core.Translation
         public static string LabelWifi = "Connect with DSLRDASHBOARDSERVER";
         public static string ButtonRecordStopMovie = "Stop Record movie";
         public static string LabelOverlay = "Overlay";
+        public static string LabelGenerateThumbs = "Generate Thumbnails";
     }
 }
