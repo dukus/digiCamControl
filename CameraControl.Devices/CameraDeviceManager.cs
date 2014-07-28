@@ -102,6 +102,8 @@ namespace CameraControl.Devices
             }
         }
 
+        public bool StartInNewThread { get; set; }
+
         private AsyncObservableCollection<ICameraDevice> _connectedDevices;
 
         public AsyncObservableCollection<ICameraDevice> ConnectedDevices
@@ -167,6 +169,7 @@ namespace CameraControl.Devices
         public CameraDeviceManager()
         {
             UseExperimentalDrivers = true;
+            StartInNewThread = false;
             SelectedCameraDevice = new NotConnectedCameraDevice();
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
             _deviceEnumerator = new DeviceDescriptorEnumerator();
@@ -315,37 +318,47 @@ namespace CameraControl.Devices
             if (UseExperimentalDrivers)
                 InitCanon();
 
-            foreach (PortableDevice portableDevice in PortableDeviceCollection.Instance.Devices)
+            Log.Debug("Connection device start" );
+            try
             {
-                Log.Debug("Connection device " + portableDevice.DeviceId);
-                //TODO: avoid to load some mass storage in my computer need to find a general solution
-                if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
-                    !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
-                    continue;
-                // ignore some Canon cameras
-                if (!SupportedCanonCamera(portableDevice.DeviceId))
-                    continue;
-                portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-                if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
-                    GetNativeDriver(portableDevice.Model) != null)
+                var devices = PortableDeviceCollection.Instance.Devices;
+                foreach (PortableDevice portableDevice in devices)
                 {
-                    ICameraDevice cameraDevice;
-                    DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
-                    cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
-                    MtpProtocol device = new MtpProtocol(descriptor.WpdId);
-                    device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+                    Log.Debug("Connection device " + portableDevice.DeviceId);
+                    //TODO: avoid to load some mass storage in my computer need to find a general solution
+                    if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
+                        !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
+                        continue;
+                    // ignore some Canon cameras
+                    if (!SupportedCanonCamera(portableDevice.DeviceId))
+                        continue;
+                    portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+                    if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
+                        GetNativeDriver(portableDevice.Model) != null)
+                    {
+                        ICameraDevice cameraDevice;
+                        DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = portableDevice.DeviceId };
+                        cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
+                        MtpProtocol device = new MtpProtocol(descriptor.WpdId);
+                        device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
 
-                    descriptor.StillImageDevice = device;
+                        descriptor.StillImageDevice = device;
 
-                    cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
-                    cameraDevice.Init(descriptor);
-                    ConnectedDevices.Add(cameraDevice);
-                    NewCameraConnected(cameraDevice);
+                        cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                        cameraDevice.Init(descriptor);
+                        ConnectedDevices.Add(cameraDevice);
+                        NewCameraConnected(cameraDevice);
 
-                    descriptor.CameraDevice = cameraDevice;
-                    _deviceEnumerator.Add(descriptor);
+                        descriptor.CameraDevice = cameraDevice;
+                        _deviceEnumerator.Add(descriptor);
+                    }
                 }
             }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to connect to cameras ", exception);
+            }
+
             _connectionInProgress = false;
         }
 
@@ -582,7 +595,16 @@ namespace CameraControl.Devices
         {
             if (eventId == Conts.wiaEventDeviceConnected)
             {
-                ConnectToCamera();
+                if (StartInNewThread)
+                {
+                    Thread _thread = new Thread(() => ConnectToCamera());
+                    _thread.SetApartmentState(ApartmentState.MTA);
+                    _thread.Start();
+                }
+                else
+                {
+                    ConnectToCamera();                    
+                }
             }
             else if (eventId == Conts.wiaEventDeviceDisconnected)
             {

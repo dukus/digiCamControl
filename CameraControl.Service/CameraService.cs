@@ -101,6 +101,7 @@ namespace CameraControl.Service
             if (_isInitialized)
                 return;
             ServiceProvider.Configure(Path.Combine(Settings.DataFolder, "Log", "service.log"));
+            ServiceProvider.DeviceManager.StartInNewThread = true;
             Log.Debug("Command line utility started");
             ServiceProvider.Settings = new Settings();
             ServiceProvider.Settings = ServiceProvider.Settings.Load();
