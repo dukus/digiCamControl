@@ -1,21 +1,10 @@
-<Window x:Class="CameraControl.Core.Wpf.ProgressWindow"
+<controls:MetroWindow x:Class="CameraControl.Core.Wpf.ProgressWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ProgressWindow" Height="135" Width="380" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True">
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="ProgressWindow" Height="135" Width="380" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False" ShowCloseButton="False" ShowIconOnTitleBar="False">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Menu.xaml"/>-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
-            </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
     </Window.Resources>
@@ -33,4 +22,4 @@
         <Label Content="Label" Grid.Row="2" Name="lbl_label" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
         <Image Grid.Row="2" Name="image" Stretch="Uniform" Margin="3" />
     </Grid>
-</Window>
+</controls:MetroWindow>

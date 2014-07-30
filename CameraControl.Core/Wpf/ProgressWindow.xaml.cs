@@ -40,11 +40,12 @@ namespace CameraControl.Core.Wpf
     /// <summary>
     /// Interaction logic for ProgressWindow.xaml
     /// </summary>
-    public partial class ProgressWindow : Window
+    public partial class ProgressWindow 
     {
         public ProgressWindow()
         {
             InitializeComponent();
+            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         public string Label

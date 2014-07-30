@@ -480,5 +480,6 @@ namespace CameraControl.Core.Translation
         public static string LabelStartImageFrame = "Start image frame";
         public static string LabelStopImageFrame = "Stop image frame";
         public static string LabelPlayVideo = "Play Video";
+        public static string LabelLoadPresetAllCamera = "Load preset in all cameras";
     }
 }

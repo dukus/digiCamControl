@@ -43,6 +43,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Translation;
+using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Layouts;
@@ -85,6 +86,7 @@ namespace CameraControl
             SelectPresetCommand = new RelayCommand<CameraPreset>(SelectPreset);
             DeletePresetCommand = new RelayCommand<CameraPreset>(DeletePreset,
                 (o) => ServiceProvider.Settings.CameraPresets.Count > 0);
+            LoadInAllPresetCommand = new RelayCommand<CameraPreset>(LoadInAllPreset);
             ExecuteExportPluginCommand = new RelayCommand<IExportPlugin>(ExecuteExportPlugin);
             ExecuteToolPluginCommand = new RelayCommand<IToolPlugin>(ExecuteToolPlugin);
             InitializeComponent();
@@ -104,6 +106,44 @@ namespace CameraControl
             }
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
+        }
+
+        private void LoadInAllPreset(CameraPreset preset)
+        {
+            if (preset == null)
+                return;
+            var dlg = new ProgressWindow();
+            dlg.Show();
+            try
+            {
+                int i = 0;
+                dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+                foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+                {
+                    if (connectedDevice == null || !connectedDevice.IsConnected)
+                        continue;
+                    try
+                    {
+                        if (connectedDevice != ServiceProvider.DeviceManager.SelectedCameraDevice)
+                        {
+                            dlg.Label = connectedDevice.DisplayName;
+                            dlg.Progress = i;
+                            i++;
+                            preset.Set(connectedDevice);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Unable to set property ", exception);
+                    }
+                    Thread.Sleep(250);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to set property ", exception);
+            }
+            dlg.Hide();
         }
 
         private void DeletePreset(CameraPreset obj)
@@ -328,6 +368,7 @@ namespace CameraControl
 
         public RelayCommand<CameraPreset> SelectPresetCommand { get; private set; }
         public RelayCommand<CameraPreset> DeletePresetCommand { get; private set; }
+        public RelayCommand<CameraPreset> LoadInAllPresetCommand { get; private set; }
 
         public RelayCommand<IExportPlugin> ExecuteExportPluginCommand { get; private set; }
 

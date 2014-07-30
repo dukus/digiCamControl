@@ -297,6 +297,14 @@
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                         </Button>
+                                        <Button  ToolTip="{T:TranslateExtension LabelLoadPresetAllCamera}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}"  Command="{Binding Path=LoadInAllPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                        CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
+                                            <Rectangle Width="15" Height="15">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_elevator_up}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>                                        
                                     </StackPanel>
                                 </StackPanel>
                             </Expander>
