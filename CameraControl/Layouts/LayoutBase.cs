@@ -121,12 +121,13 @@ namespace CameraControl.Layouts
             if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) &&
                 File.Exists(ServiceProvider.Settings.ExternalViewer))
             {
-                Process.Start(ServiceProvider.Settings.ExternalViewer,
-                              ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
+                PhotoUtils.Run(ServiceProvider.Settings.ExternalViewer,
+                    ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, ProcessWindowStyle.Maximized);
             }
             else
             {
-                Process.Start(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
+                PhotoUtils.Run(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, "",
+                    ProcessWindowStyle.Maximized);
             }
         }
 

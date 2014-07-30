@@ -79,12 +79,14 @@ namespace CameraControl.Core.Classes
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo(exe);
                 startInfo.WindowStyle = processWindowStyle;
-                startInfo.Arguments = param;
+                if (!string.IsNullOrEmpty(param))
+                    startInfo.Arguments = param;
                 Process process = Process.Start(startInfo);
                 //process.WaitForExit();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Log.Error(exception);
                 return false;
             }
             return true;

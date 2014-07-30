@@ -83,7 +83,9 @@
     <Compile Include="ICameraService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CameraService.cs" />
-    <Compile Include="ServiceInstaller.cs" />
+    <Compile Include="ServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
