@@ -667,7 +667,7 @@ namespace CameraControl.Core.Classes
 
 
         private ObservableCollection<CameraPreset> _cameraPresets;
-
+        [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
         {
             get { return _cameraPresets; }
@@ -680,12 +680,7 @@ namespace CameraControl.Core.Classes
 
         public string OverlayFolder
         {
-            get
-            {
-                return Path.Combine(DataFolder,
-                                    "LiveViewOverlay");
-                ;
-            }
+            get { return Path.Combine(DataFolder, "LiveViewOverlay"); }
         }
 
         public static string DataFolder
@@ -693,17 +688,18 @@ namespace CameraControl.Core.Classes
             get
             {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName);
-                ;
             }
+        }
+
+
+        public static string PresetFolder
+        {
+            get { return Path.Combine(DataFolder, "Presets"); }
         }
 
         public static string WebServerFolder
         {
-            get
-            {
-                return Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
-                                    "WebServer\\");
-            }
+            get { return Path.Combine(ApplicationFolder, "WebServer\\"); }
         }
 
         public static string ApplicationFolder
@@ -851,6 +847,30 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public void Save(CameraPreset preset)
+        {
+            if (preset == null)
+                return;
+            try
+            {
+                if (!Directory.Exists(PresetFolder))
+                    Directory.CreateDirectory(PresetFolder);
+
+                string filename = Path.Combine(PresetFolder, preset.Name + ".xml");
+                XmlSerializer serializer = new XmlSerializer(typeof(CameraPreset));
+                // Create a FileStream to write with.
+
+                Stream writer = new FileStream(filename, FileMode.Create);
+                // Serialize the object, and close the TextWriter
+                serializer.Serialize(writer, preset);
+                writer.Close();
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to save preset " + preset.Name, exception);
+            }
+        }
+
         public void Save(Branding branding)
         {
             if (branding == null)
@@ -894,11 +914,32 @@ namespace CameraControl.Core.Classes
             return photoSession;
         }
 
+        public CameraPreset LoadPreset(string filename)
+        {
+            var preset = new CameraPreset();
+            try
+            {
+                if (File.Exists(filename))
+                {
+                    XmlSerializer mySerializer =
+                        new XmlSerializer(typeof(CameraPreset));
+                    FileStream myFileStream = new FileStream(filename, FileMode.Open);
+                    preset = (CameraPreset)mySerializer.Deserialize(myFileStream);
+                    myFileStream.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            return preset;
+        }
+
+
         public Branding LoadBranding()
         {
             Branding branding = new Branding();
-            string filename = Path.Combine(
-                Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Branding.xml");
+            string filename = Path.Combine(ApplicationFolder, "Branding.xml");
             try
             {
                 if (File.Exists(filename))
@@ -933,6 +974,7 @@ namespace CameraControl.Core.Classes
                     FileStream myFileStream = new FileStream(ConfigFile, FileMode.Open);
                     settings = (Settings) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
+                    settings.LoadPresetData();
                 }
                 else
                 {
@@ -959,14 +1001,7 @@ namespace CameraControl.Core.Classes
 
         public CameraPreset GetPreset(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                return null;
-            foreach (CameraPreset cameraPreset in CameraPresets)
-            {
-                if (cameraPreset.Name == name)
-                    return cameraPreset;
-            }
-            return null;
+            return string.IsNullOrEmpty(name) ? null : CameraPresets.FirstOrDefault(cameraPreset => cameraPreset.Name == name);
         }
 
         public void LoadSessionData()
@@ -999,15 +1034,50 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public void LoadPresetData()
+        {
+            if (!Directory.Exists(PresetFolder))
+            {
+                Directory.CreateDirectory(PresetFolder);
+            }
+
+            string[] presets = Directory.GetFiles(PresetFolder, "*.xml");
+            foreach (string presetname in presets)
+            {
+                try
+                {
+                    var preset = LoadPreset(presetname);
+                    if (preset != null)
+                        CameraPresets.Add(preset);
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Error loading preset :" + presetname, e);
+                }
+            }
+        }
+
         public void Save()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof (Settings));
-            // Create a FileStream to write with.
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof (Settings));
+                // Create a FileStream to write with.
 
-            Stream writer = new FileStream(ConfigFile, FileMode.Create);
-            // Serialize the object, and close the TextWriter
-            serializer.Serialize(writer, this);
-            writer.Close();
+                Stream writer = new FileStream(ConfigFile, FileMode.Create);
+                // Serialize the object, and close the TextWriter
+                serializer.Serialize(writer, this);
+                writer.Close();
+                // save preset in separated files
+                foreach (var cameraPreset in CameraPresets)
+                {
+                    Save(cameraPreset);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to save settings ", exception);
+            }
         }
 
 
