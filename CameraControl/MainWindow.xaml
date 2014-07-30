@@ -36,33 +36,6 @@
         <Controls:FlyoutsControl>
             <Controls:Flyout Header="{T:TranslateExtension LabelMenu}" Position="Right" Opacity="0.9" IsOpen="False">
                 <StackPanel>
-                    <Menu  VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <Menu.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </Menu.ItemsPanel>
-
-                        <MenuItem Header="{T:TranslateExtension MenuPresets}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}">
-                            <MenuItem.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </MenuItem.ItemsPanel>
-
-                            <MenuItem Header="{T:TranslateExtension MenuPresetsLoad}" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" >
-                                <MenuItem.ItemTemplate>
-                                    <DataTemplate>
-                                        <MenuItem Header="{Binding Path=Name}" 
-                                      Command="{Binding Path=SelectPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
-                                      CommandParameter="{Binding}"/>
-                                    </DataTemplate>
-                                </MenuItem.ItemTemplate>
-                            </MenuItem>
-                            <MenuItem Header="{T:TranslateExtension MenuPresetsSave}" Click="MenuItem_Click_4" />
-                            <MenuItem Header="{T:TranslateExtension MenuPresetsEdit}" Click="MenuItem_Click_5" />
-                        </MenuItem>
-                    </Menu>
 
                     <StackPanel Orientation="Vertical"  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}">
                         <Expander Header="{T:TranslateExtension MenuHelp}" IsExpanded="True">
@@ -153,7 +126,7 @@
             <!--<Controls:ProgressRing IsActive="True" Height="184" Width="214" IsLarge="False" />-->
         </Grid>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0">
             <Label Content="Model:" />
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
         </StackPanel>
@@ -267,68 +240,107 @@
                 </GroupBox>
                 <Grid Grid.Row="1" Margin="0" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                    <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
-                        <Panels:SelectionControl HorizontalAlignment="Center"/>
-                    </Expander>
-                    <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Content="{T:TranslateExtension MenuLayoutNormal}" Click="MenuItem_Click_6" Margin="2"/>
-                            <Button Content="{T:TranslateExtension MenuLayoutGridRight}" Click="MenuItem_Click_7" Margin="2"/>
-                            <Button Content="{T:TranslateExtension MenuLayoutGrid}" Click="MenuItem_Click_8" Margin="2"/>
-                        </StackPanel>
-                    </Expander>
-                    <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
                         <StackPanel>
-                            <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}" Margin="3"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="{T:TranslateExtension SessionAdd}" Name="btn_add_Sesion" Margin="3" Click="btn_add_Sesion_Click" />
-                                <Button Content="{T:TranslateExtension SessionEdit}" Name="btn_edit_Sesion" Margin="3" Click="btn_edit_Sesion_Click" />
-                                <Button Content="{T:TranslateExtension SessionDel}" Name="btn_del_Sesion" Margin="3" Click="btn_del_Sesion_Click" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Expander>
-                    <Expander  Header="{T:TranslateExtension LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                        <Panels:MetadataControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Width="250" />
-                    </Expander>
-                    <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                        <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
-                    </Expander>
-                    <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0">
-                        <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ExportPlugins}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteExportPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
+                            <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                                <Panels:SelectionControl HorizontalAlignment="Center"/>
+                            </Expander>
+                            <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="{T:TranslateExtension MenuLayoutNormal}" Click="MenuItem_Click_6" Margin="2"/>
+                                    <Button Content="{T:TranslateExtension MenuLayoutGridRight}" Click="MenuItem_Click_7" Margin="2"/>
+                                    <Button Content="{T:TranslateExtension MenuLayoutGrid}" Click="MenuItem_Click_8" Margin="2"/>
+                                </StackPanel>
+                            </Expander>
+                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                                <StackPanel>
+                                    <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}" Margin="3"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Content="{T:TranslateExtension SessionAdd}" Name="btn_add_Sesion" Margin="3" Click="btn_add_Sesion_Click" />
+                                        <Button Content="{T:TranslateExtension SessionEdit}" Name="btn_edit_Sesion" Margin="3" Click="btn_edit_Sesion_Click" />
+                                        <Button Content="{T:TranslateExtension SessionDel}" Name="btn_del_Sesion" Margin="3" Click="btn_del_Sesion_Click" />
                                     </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>
-                    </Expander>
-                    <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                        <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolPlugins}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteToolPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
+                                </StackPanel>
+                            </Expander>
+                            <Expander  Header="{T:TranslateExtension MenuPresets}" VerticalAlignment="Top" IsExpanded="False" Margin="0" Padding="0" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" >
+                                <StackPanel>
+                                    <ListBox MaxHeight="100" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" Name="PresetListBox" Margin="3">
+                                        
+                                    </ListBox>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button  ToolTip="{T:TranslateExtension SavePresetWindowTitle}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_1">
+                                            <Rectangle Width="15" Height="15">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                        <Button  ToolTip="{T:TranslateExtension MenuPresetsLoad}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Path=SelectPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                        CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
+                                            <Rectangle Width="15" Height="15">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_upload}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                        <Button  ToolTip="{T:TranslateExtension ButtonDeletePreset}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Path=DeletePresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                        CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
+                                            <Rectangle Width="15" Height="15">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                        <Button  ToolTip="{T:TranslateExtension SavePresetWindowTitle}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_2">
+                                            <Rectangle Width="15" Height="15">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
                                     </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>
-                    </Expander>
+                                </StackPanel>
+                            </Expander>
+                            <Expander  Header="{T:TranslateExtension LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                                <Panels:MetadataControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Width="250" />
+                            </Expander>
+                            <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                                <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
+                            </Expander>
+                            <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0">
+                                <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ExportPlugins}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteExportPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </Expander>
+                            <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                                <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolPlugins}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteToolPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </Expander>
                         </StackPanel>
-                        </ScrollViewer>
-                    </Grid>
+                    </ScrollViewer>
+                </Grid>
                 <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="1" Grid.Row="2" Margin="3"/>
             </Grid>
             <!--</ScrollViewer>-->

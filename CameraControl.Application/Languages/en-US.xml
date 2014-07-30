@@ -218,7 +218,7 @@
     <string name="MenuMultipleCamera">Multiple camera control</string> 
     <string name="MenuSelectedCameraProperty">Selected camera property</string> 
     <string name="MenuPresets">Presets</string> 
-    <string name="MenuPresetsLoad">Load</string> 
+    <string name="MenuPresetsLoad">Load preset in camera</string> 
     <string name="MenuPresetsSave">Save</string> 
     <string name="MenuPresetsEdit">Edit</string> 
     <string name="MenuHelp">_Help</string> 

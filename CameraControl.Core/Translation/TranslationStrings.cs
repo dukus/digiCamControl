@@ -217,7 +217,7 @@ namespace CameraControl.Core.Translation
         public static string MenuMultipleCamera = "Multiple camera control";
         public static string MenuSelectedCameraProperty = "Selected camera property";
         public static string MenuPresets = "Presets";
-        public static string MenuPresetsLoad = "Load";
+        public static string MenuPresetsLoad = "Load preset in camera";
         public static string MenuPresetsSave = "Save";
         public static string MenuPresetsEdit = "Edit";
         public static string MenuHelp = "_Help";

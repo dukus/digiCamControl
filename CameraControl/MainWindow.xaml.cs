@@ -83,6 +83,8 @@ namespace CameraControl
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, (sender1, args) => this.Close()));
 
             SelectPresetCommand = new RelayCommand<CameraPreset>(SelectPreset);
+            DeletePresetCommand = new RelayCommand<CameraPreset>(DeletePreset,
+                (o) => ServiceProvider.Settings.CameraPresets.Count > 0);
             ExecuteExportPluginCommand = new RelayCommand<IExportPlugin>(ExecuteExportPlugin);
             ExecuteToolPluginCommand = new RelayCommand<IToolPlugin>(ExecuteToolPlugin);
             InitializeComponent();
@@ -102,6 +104,13 @@ namespace CameraControl
             }
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
+        }
+
+        private void DeletePreset(CameraPreset obj)
+        {
+            if (obj == null)
+                return;
+            ServiceProvider.Settings.CameraPresets.Remove(obj);
         }
 
         private void _selectiontimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -318,6 +327,7 @@ namespace CameraControl
         }
 
         public RelayCommand<CameraPreset> SelectPresetCommand { get; private set; }
+        public RelayCommand<CameraPreset> DeletePresetCommand { get; private set; }
 
         public RelayCommand<IExportPlugin> ExecuteExportPluginCommand { get; private set; }
 
@@ -495,8 +505,7 @@ namespace CameraControl
 
         private void MenuItem_Click_5(object sender, RoutedEventArgs e)
         {
-            PresetEditWnd wnd = new PresetEditWnd();
-            wnd.ShowDialog();
+
         }
 
 
@@ -795,6 +804,33 @@ namespace CameraControl
                 Log.Error("Unable to connect DSLRDASHBOARDSERVER", exception);
                 this.ShowMessageAsync("Error", "Unable to connect DSLRDASHBOARDSERVER " + exception.Message);
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            CameraPreset cameraPreset = new CameraPreset();
+            SavePresetWnd wnd = new SavePresetWnd(cameraPreset);
+            if (wnd.ShowDialog() == true)
+            {
+                foreach (CameraPreset preset in ServiceProvider.Settings.CameraPresets)
+                {
+                    if (preset.Name == cameraPreset.Name)
+                    {
+                        cameraPreset = preset;
+                        break;
+                    }
+                }
+                cameraPreset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                if (!ServiceProvider.Settings.CameraPresets.Contains(cameraPreset))
+                    ServiceProvider.Settings.CameraPresets.Add(cameraPreset);
+                ServiceProvider.Settings.Save();
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            PresetEditWnd wnd = new PresetEditWnd();
+            wnd.ShowDialog();
         }
 
     }
