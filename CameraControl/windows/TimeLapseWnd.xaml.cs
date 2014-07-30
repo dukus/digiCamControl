@@ -29,14 +29,11 @@
 #region
 
 using System;
-using System.Linq;
-using System.Management;
 using System.Windows;
 using System.Windows.Forms;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Translation;
-using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using HelpProvider = CameraControl.Classes.HelpProvider;
 using MessageBox = System.Windows.Forms.MessageBox;
@@ -89,49 +86,10 @@ namespace CameraControl.windows
             Close();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            if (!CheckCodec())
-            {
-                if (
-                    MessageBox.Show(TranslationStrings.MsgInstallXvidCodec, TranslationStrings.LabelVideoCodecProblem,
-                                    MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start("http://www.xvid.org/Downloads.15.0.html");
-                }
-                return;
-            }
-            Hide();
-            CreateTimeLapseWnd wnd = new CreateTimeLapseWnd();
-            wnd.ShowDialog();
-            Show();
-        }
-
-        private void button3_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
-        }
-
-        private bool CheckCodec()
-        {
-            try
-            {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_CodecFile");
-                ManagementObjectCollection collection = searcher.Get();
-                return
-                    collection.Cast<ManagementObject>().Any(
-                        obj => (string) obj["Description"] == "Xvid MPEG-4 Video Codec");
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Check codec", exception);
-            }
-            return true;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
