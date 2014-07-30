@@ -857,13 +857,7 @@ namespace CameraControl.Core.Classes
                     Directory.CreateDirectory(PresetFolder);
 
                 string filename = Path.Combine(PresetFolder, preset.Name + ".xml");
-                XmlSerializer serializer = new XmlSerializer(typeof(CameraPreset));
-                // Create a FileStream to write with.
-
-                Stream writer = new FileStream(filename, FileMode.Create);
-                // Serialize the object, and close the TextWriter
-                serializer.Serialize(writer, preset);
-                writer.Close();
+                preset.Save(filename);
             }
             catch (Exception exception)
             {
@@ -913,28 +907,6 @@ namespace CameraControl.Core.Classes
             }
             return photoSession;
         }
-
-        public CameraPreset LoadPreset(string filename)
-        {
-            var preset = new CameraPreset();
-            try
-            {
-                if (File.Exists(filename))
-                {
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof(CameraPreset));
-                    FileStream myFileStream = new FileStream(filename, FileMode.Open);
-                    preset = (CameraPreset)mySerializer.Deserialize(myFileStream);
-                    myFileStream.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-            return preset;
-        }
-
 
         public Branding LoadBranding()
         {
@@ -1046,7 +1018,7 @@ namespace CameraControl.Core.Classes
             {
                 try
                 {
-                    var preset = LoadPreset(presetname);
+                    var preset = CameraPreset.Load(presetname);
                     if (preset != null)
                         CameraPresets.Add(preset);
                 }

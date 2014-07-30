@@ -43,12 +43,10 @@ namespace CameraControl.Core.Classes
         public string Name { get; set; }
 
         public AsyncObservableCollection<ValuePair> Values { get; set; }
-        public CameraProperty CameraProperty { get; set; }
 
         public CameraPreset()
         {
             Values = new AsyncObservableCollection<ValuePair>();
-            CameraProperty = new CameraProperty();
         }
 
         public void Get(ICameraDevice camera)
@@ -65,9 +63,8 @@ namespace CameraControl.Core.Classes
             Add(GetFrom(camera.LiveViewImageZoomRatio, "LiveViewImageZoomRatio"));
             Add(new ValuePair {Name = "CaptureInSdRam", Value = camera.CaptureInSdRam.ToString()});
             Add(new ValuePair {Name = "HostMode", Value = camera.HostMode.ToString()});
-            var property = ServiceProvider.Settings.CameraProperties.Get(camera);
-            CameraProperty.NoDownload = property.NoDownload;
-            CameraProperty.CaptureInSdRam = property.CaptureInSdRam;
+            var property = camera.LoadProperties();
+            Add(new ValuePair { Name = "NoDownload", Value = property.NoDownload.ToString() });
             if (camera.AdvancedProperties != null)
             {
                 foreach (PropertyValue<long> propertyValue in camera.AdvancedProperties)
@@ -97,15 +94,24 @@ namespace CameraControl.Core.Classes
             SetTo(camera.WhiteBalance, "WhiteBalance");
             SetTo(camera.FocusMode, "FocusMode");
             SetTo(camera.LiveViewImageZoomRatio, "LiveViewImageZoomRatio");
+            var property = camera.LoadProperties();
             if (!string.IsNullOrEmpty(GetValue("CaptureInSdRam")))
             {
                 bool val;
                 if (bool.TryParse(GetValue("CaptureInSdRam"), out val))
+                {
                     camera.CaptureInSdRam = val;
+                    property.CaptureInSdRam = val;
+                }
             }
-            var property = ServiceProvider.Settings.CameraProperties.Get(camera);
-            property.NoDownload = CameraProperty.NoDownload;
-            property.CaptureInSdRam = CameraProperty.CaptureInSdRam;
+            if (!string.IsNullOrEmpty(GetValue("NoDownload")))
+            {
+                bool val;
+                if (bool.TryParse(GetValue("NoDownload"), out val))
+                {
+                    property.NoDownload = val;
+                }
+            }
             if (camera.AdvancedProperties != null)
             {
                 foreach (PropertyValue<long> propertyValue in camera.AdvancedProperties)
