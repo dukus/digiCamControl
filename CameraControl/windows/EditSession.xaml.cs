@@ -113,5 +113,15 @@ namespace CameraControl.windows
         {
             HelpProvider.Run(HelpSections.Session);
         }
+
+        private void btn_browse_bk_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            dialog.SelectedPath = Session.BackUpPath;
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Session.BackUpPath = dialog.SelectedPath;
+            }
+        }
     }
 }

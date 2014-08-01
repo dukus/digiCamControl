@@ -145,6 +145,26 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string BackUpPath
+        {
+            get { return _backUpPath; }
+            set
+            {
+                _backUpPath = value;
+                NotifyPropertyChanged("BackUpPath");
+            }
+        }
+
+        public bool BackUp
+        {
+            get { return _backUp; }
+            set
+            {
+                _backUp = value;
+                NotifyPropertyChanged("BackUp");
+            }
+        }
+
 
         private AsyncObservableCollection<FileItem> _files;
 
@@ -393,6 +413,8 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _allowOverWrite;
+        private string _backUpPath;
+        private bool _backUp;
 
         public bool AllowOverWrite
         {
@@ -577,6 +599,21 @@ namespace CameraControl.Core.Classes
             {
                 fileItem.IsChecked = !fileItem.IsChecked;
             }
+        }
+
+        public void CopyBackUp(string source, string dest)
+        {
+            if (string.IsNullOrEmpty(BackUpPath))
+                return;
+            if (!Directory.Exists(BackUpPath))
+                Directory.CreateDirectory(BackUpPath);
+            string backupFile = Path.Combine(BackUpPath, Path.GetFileName(dest));
+            // if file already exist with same name generate a unique name
+            if (File.Exists(backupFile))
+            {
+                backupFile = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
+            }
+            File.Copy(source, backupFile);
         }
     }
 }

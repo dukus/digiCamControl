@@ -286,15 +286,24 @@ namespace CameraControl
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName));
                 }
-                Log.Debug("Transfer started :" + fileName);
-                //DateTime startTIme = DateTime.Now;
-                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, fileName);
-                //Log.Debug("Transfer done :" + fileName);
-                //Log.Debug("[BENCHMARK]Speed :" +
-                //          (new FileInfo(fileName).Length / (DateTime.Now - startTIme).TotalSeconds / 1024 / 1024).ToString("0000.00"));
-                //Log.Debug("[BENCHMARK]Transfer time :" + ((DateTime.Now - startTIme).TotalSeconds).ToString("0000.000"));
 
-                // write comment and tags directly in transferred file
+                Log.Debug("Transfer started :" + fileName);
+
+                string tempFile = Path.GetTempFileName();
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+
+                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+
+                File.Copy(tempFile, fileName);
+
+                if (session.BackUp)
+                    session.CopyBackUp(tempFile, fileName);
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+
                 if (ServiceProvider.Settings.DefaultSession.WriteComment)
                 {
                     if (!string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.Comment))

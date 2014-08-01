@@ -527,7 +527,22 @@ namespace CameraControlCmd
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName));
                 }
                 Console.WriteLine("Transfer started :" + fileName);
-                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, fileName);
+
+                string tempFile = Path.GetTempFileName();
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+
+                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+
+                File.Copy(tempFile, fileName);
+
+                if (ServiceProvider.Settings.DefaultSession.BackUp)
+                    ServiceProvider.Settings.DefaultSession.CopyBackUp(tempFile, fileName);
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+                
                 Console.WriteLine("Transfer done :" + fileName);
                 ServiceProvider.Settings.DefaultSession.AddFile(fileName);
                 ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
