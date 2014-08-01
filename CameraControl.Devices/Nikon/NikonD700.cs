@@ -131,5 +131,11 @@ namespace CameraControl.Devices.Nikon
 
             return viewData;
         }
+
+        protected override void InitFocusMode()
+        {
+            base.InitFocusMode();
+            FocusMode.IsEnabled = false;
+        }
     }
 }

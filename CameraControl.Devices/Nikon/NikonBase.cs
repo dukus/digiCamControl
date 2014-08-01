@@ -1035,7 +1035,7 @@ namespace CameraControl.Devices.Nikon
                         CONST_PROP_ExposureMeteringMode);
         }
 
-        private void InitFocusMode()
+        protected virtual void InitFocusMode()
         {
             try
             {

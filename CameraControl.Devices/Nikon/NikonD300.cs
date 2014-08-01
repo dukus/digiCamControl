@@ -115,5 +115,11 @@ namespace CameraControl.Devices.Nikon
                                                   res.Code);
             return res;
         }
+
+        protected override void InitFocusMode()
+        {
+            base.InitFocusMode();
+            FocusMode.IsEnabled = false;
+        }
     }
 }
