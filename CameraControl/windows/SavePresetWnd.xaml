@@ -5,7 +5,7 @@
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      Title="{T:TranslateExtension SavePresetWindowTitle}" Height="152" Width="377" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowMinButton="False" ShowInTaskbar="False">
+                      Title="{T:TranslateExtension SavePresetWindowTitle}" Height="152" Width="377" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowMinButton="False" ShowInTaskbar="False" Topmost="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

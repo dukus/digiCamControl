@@ -79,9 +79,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private bool _hostMode;
+        protected bool _hostMode;
 
-        public bool HostMode
+        public virtual bool HostMode
         {
             get { return _hostMode; }
             set

@@ -62,6 +62,29 @@ namespace CameraControl.Devices.Classes
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating the propertie 
+        /// settings wasn't errorless.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [have error]; otherwise, <c>false</c>.
+        /// </value>
+        public bool HaveError
+        {
+            get { return _haveError; }
+            set
+            {
+                _haveError = value;
+                NotifyPropertyChanged("HaveError");
+                NotifyPropertyChanged("ErrorColor");
+            }
+        }
+
+        public string ErrorColor
+        {
+            get { return HaveError ? "Red" : "Transparent"; }
+        }
+
         public Type SubType { get; set; }
         public bool DisableIfWrongValue { get; set; }
 
@@ -87,6 +110,7 @@ namespace CameraControl.Devices.Classes
                 lock (_syncRoot)
                 {
                     _value = value;
+                    HaveError = false;
                     if (ValueChanged != null && _notifyValuChange)
                     {
                         foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
@@ -186,6 +210,7 @@ namespace CameraControl.Devices.Classes
         }
 
         private bool _isEnabled;
+        private bool _haveError;
 
         public bool IsEnabled
         {

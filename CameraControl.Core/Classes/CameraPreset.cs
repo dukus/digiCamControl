@@ -29,6 +29,7 @@
 #region
 
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Xml.Serialization;
 using CameraControl.Devices;
@@ -74,6 +75,28 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public void Verify(ICameraDevice camera)
+        {
+            camera.Mode.HaveError = camera.Mode.Value != GetValue("Mode");
+            camera.CompressionSetting.HaveError = camera.CompressionSetting.Value != GetValue("CompressionSetting");
+            camera.ExposureCompensation.HaveError = camera.ExposureCompensation.Value != GetValue("ExposureCompensation");
+            camera.ExposureMeteringMode.HaveError = camera.ExposureMeteringMode.Value != GetValue("ExposureMeteringMode");
+            camera.FNumber.HaveError = camera.FNumber.Value != GetValue("FNumber");
+            camera.IsoNumber.HaveError = camera.IsoNumber.Value != GetValue("IsoNumber");
+            camera.ShutterSpeed.HaveError = camera.ShutterSpeed.Value != GetValue("ShutterSpeed");
+            camera.WhiteBalance.HaveError = camera.WhiteBalance.Value != GetValue("WhiteBalance");
+            camera.FocusMode.HaveError = camera.FocusMode.Value != GetValue("FocusMode");
+            if (camera.AdvancedProperties != null)
+            {
+                foreach (PropertyValue<long> propertyValue in camera.AdvancedProperties)
+                {
+                    propertyValue.HaveError = propertyValue.Value != GetValue(propertyValue.Name);
+                }
+            }
+
+
+        }
+        
         public void Set(ICameraDevice camera)
         {
             camera.IsBusy = true;
@@ -82,8 +105,8 @@ namespace CameraControl.Core.Classes
                 bool val;
                 if (bool.TryParse(GetValue("HostMode"), out val))
                     camera.HostMode = val;
-                Thread.Sleep(500);
             }
+
             SetTo(camera.Mode, "Mode");
             SetTo(camera.CompressionSetting, "CompressionSetting");
             SetTo(camera.ExposureCompensation, "ExposureCompensation");
@@ -119,7 +142,9 @@ namespace CameraControl.Core.Classes
                     SetTo(propertyValue, propertyValue.Name);
                 }
             }
+            
             camera.IsBusy = false;
+            Verify(camera);
         }
 
 
@@ -151,7 +176,8 @@ namespace CameraControl.Core.Classes
                 }
             }
             //Thread.Sleep(100);
-        }
+       }
+
 
         public void SetTo(PropertyValue<long> value, string name)
         {
@@ -214,14 +240,7 @@ namespace CameraControl.Core.Classes
 
         public string GetValue(string name)
         {
-            foreach (ValuePair valuePair in Values)
-            {
-                if (valuePair.Name == name)
-                {
-                    return valuePair.Value;
-                }
-            }
-            return null;
+            return (from valuePair in Values where valuePair.Name == name select valuePair.Value).FirstOrDefault();
         }
 
         public void Save(string filename)

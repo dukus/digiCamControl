@@ -49,7 +49,7 @@ namespace CameraControl.Controls
     /// </summary>
     public partial class Controler : UserControl
     {
-        private ProgressWindow dlg = new ProgressWindow();
+        private ProgressWindow dlg = null;
 
         public Controler()
         {
@@ -140,6 +140,8 @@ namespace CameraControl.Controls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Dispatcher.Invoke(new Action(() => btn_useasmaster.IsEnabled = false));
+            if (dlg == null)
+                dlg = new ProgressWindow();
             dlg.Show();
             Thread thread = new Thread(SetAsMaster);
             thread.Start();

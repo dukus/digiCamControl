@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
              xmlns:my="clr-namespace:CameraControl.Controls"
              xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
              xmlns:Classes="clr-namespace:CameraControl.Classes" mc:Ignorable="d"  
@@ -38,28 +37,39 @@
         </StackPanel>
         <StackPanel Margin="1">
             <Label Content="{T:TranslateExtension Mode}" Padding="0"/>
-            <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=Mode.IsEnabled}" ItemsSource="{Binding Path=Mode.Values}" SelectedValue="{Binding Path=Mode.Value}" />
+            <Border BorderThickness="1" BorderBrush="{Binding Path=Mode.ErrorColor}" >
+                <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=Mode.IsEnabled}" ItemsSource="{Binding Path=Mode.Values}" SelectedValue="{Binding Path=Mode.Value}" />
+            </Border>
         </StackPanel>
         <StackPanel Margin="1">
             <Label Content="{T:TranslateExtension Iso}" Target="{Binding ElementName=cmb_iso}" Padding="0"/>
-            <ComboBox Name="cmb_iso" IsEnabled="{Binding Path=IsoNumber.IsEnabled}" ItemsSource="{Binding Path=IsoNumber.Values}" SelectedValue="{Binding Path=IsoNumber.Value}"/>
+            <Border BorderThickness="1" BorderBrush="{Binding Path=IsoNumber.ErrorColor}" >
+                <ComboBox Name="cmb_iso" IsEnabled="{Binding Path=IsoNumber.IsEnabled}" ItemsSource="{Binding Path=IsoNumber.Values}" SelectedValue="{Binding Path=IsoNumber.Value}"/>
+            </Border>
         </StackPanel>
         <StackPanel Margin="1">
             <Label Content="{T:TranslateExtension ShutterSpeed}" Target="{Binding ElementName=cmb_shutter}" Padding="0"/>
-            <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=ShutterSpeed.Values}" SelectedValue="{Binding Path=ShutterSpeed.Value}"/>
+            <Border BorderThickness="1" BorderBrush="{Binding Path=ShutterSpeed.ErrorColor}" >
+                <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=ShutterSpeed.Values}" SelectedValue="{Binding Path=ShutterSpeed.Value}"/>
+            </Border>
         </StackPanel>
         <StackPanel Margin="1">
             <Label Content="{T:TranslateExtension Aperture}" Target="{Binding ElementName=cmb_aperture}" Padding="0"/>
-            <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=FNumber.IsEnabled}" ItemsSource="{Binding Path=FNumber.Values}" SelectedValue="{Binding Path=FNumber.Value}"/>
+            <Border BorderThickness="1" BorderBrush="{Binding Path=FNumber.ErrorColor}" >
+                <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=FNumber.IsEnabled}" ItemsSource="{Binding Path=FNumber.Values}" SelectedValue="{Binding Path=FNumber.Value}"/>
+            </Border>
         </StackPanel>
         <StackPanel Margin="1">
             <Label Content="{T:TranslateExtension WhiteBalance}" Target="{Binding ElementName=cmb_WB}" Padding="0"/>
-            <ComboBox Name="cmb_WB" IsEnabled="{Binding Path=WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=WhiteBalance.Values}" SelectedValue="{Binding Path=WhiteBalance.Value}" >
-            </ComboBox>
+            <Border BorderThickness="1" BorderBrush="{Binding Path=WhiteBalance.ErrorColor}" >
+                <ComboBox Name="cmb_WB" IsEnabled="{Binding Path=WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=WhiteBalance.Values}" SelectedValue="{Binding Path=WhiteBalance.Value}" />
+            </Border>
         </StackPanel>
         <StackPanel Margin="1">
             <Label Content="{T:TranslateExtension ExposureComp}" Target="{Binding ElementName=cmb_EComp}" Padding="0"/>
-            <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value}"/>
+            <Border BorderThickness="1" BorderBrush="{Binding Path=ExposureCompensation.ErrorColor}" >
+                <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value}"/>
+            </Border>
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -483,5 +483,6 @@ namespace CameraControl.Core.Translation
         public static string LabelLoadPresetAllCamera = "Load preset in all cameras";
         public static string LabelBackUpFolder = "Backup folder";
         public static string LabelBackUp = "Backup photos";
+        public static string LabelVerifyPreset = "Verify preset";
     }
 }

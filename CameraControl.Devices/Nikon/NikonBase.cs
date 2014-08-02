@@ -330,6 +330,22 @@ namespace CameraControl.Devices.Nikon
         {
         }
 
+        public override bool HostMode
+        {
+            get { return _hostMode; }
+            set
+            {
+                _hostMode = value;
+                ExecuteWithNoData(CONST_CMD_ChangeCameraMode, (uint) (HostMode ? 1 : 0));
+                if (Mode != null)
+                    Mode.IsEnabled = HostMode;
+                GetEvent(null);
+                ReadDeviceProperties(CONST_PROP_ExposureProgramMode);
+                NotifyPropertyChanged("HostMode");
+            }
+        }
+
+
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
             try
@@ -666,15 +682,19 @@ namespace CameraControl.Devices.Nikon
             if (e.PropertyName == "CaptureInSdRam")
             {
                 SetProperty(CONST_CMD_SetDevicePropValue, CaptureInSdRam ? new[] {(byte) 1} : new[] {(byte) 0},
-                            CONST_PROP_RecordingMedia);
+                    CONST_PROP_RecordingMedia);
                 ReadDeviceProperties(CONST_PROP_RecordingMedia);
             }
-            if (e.PropertyName == "HostMode")
-            {
-                ExecuteWithNoData(CONST_CMD_ChangeCameraMode, (uint) (HostMode ? 1 : 0));
-                if (Mode != null)
-                    Mode.IsEnabled = HostMode;
-            }
+            //if (e.PropertyName == "HostMode")
+            //{
+            //    Thread thread = new Thread(() =>
+            //    {
+            //        ExecuteWithNoData(CONST_CMD_ChangeCameraMode, (uint) (HostMode ? 1 : 0));
+            //        if (Mode != null)
+            //            Mode.IsEnabled = HostMode;
+            //    });
+            //    thread.Start();
+            //}
         }
 
         private void _stillImageDevice_DeviceEvent(object sender, PortableDeviceEventArgs e)
@@ -862,7 +882,7 @@ namespace CameraControl.Devices.Nikon
                     FNumber.IsEnabled = false;
                     break;
             }
-            if (Mode.IsEnabled)
+            //if (Mode.IsEnabled)
                 SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                             CONST_PROP_ExposureProgramMode);
         }
@@ -1520,6 +1540,7 @@ namespace CameraControl.Devices.Nikon
         }
 
         private DateTime _dateTime;
+        private bool _hostMode1;
 
         public override DateTime DateTime
         {

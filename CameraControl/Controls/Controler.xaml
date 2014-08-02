@@ -35,57 +35,75 @@
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension Mode}" />
-                    <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=SelectedCameraDevice.Mode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.Mode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.Mode.Value}" />
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.Mode.ErrorColor}" >
+                        <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=SelectedCameraDevice.Mode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.Mode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.Mode.Value}" />
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension Iso}" Target="{Binding ElementName=cmb_iso}" />
-                    <ComboBox Name="cmb_iso" IsEnabled="{Binding Path=SelectedCameraDevice.IsoNumber.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.IsoNumber.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.IsoNumber.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.IsoNumber.ErrorColor}" >
+                        <ComboBox Name="cmb_iso" IsEnabled="{Binding Path=SelectedCameraDevice.IsoNumber.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.IsoNumber.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.IsoNumber.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension ShutterSpeed}" Target="{Binding ElementName=cmb_shutter}"/>
-                    <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=SelectedCameraDevice.ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ShutterSpeed.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ShutterSpeed.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.ShutterSpeed.ErrorColor}" >
+                        <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=SelectedCameraDevice.ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ShutterSpeed.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ShutterSpeed.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension Aperture}" Target="{Binding ElementName=cmb_aperture}"/>
-                    <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=SelectedCameraDevice.FNumber.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.FNumber.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.FNumber.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.FNumber.ErrorColor}" >
+                        <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=SelectedCameraDevice.FNumber.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.FNumber.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.FNumber.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension WhiteBalance}" Target="{Binding ElementName=cmb_WB}"/>
-                    <ComboBox Name="cmb_WB" IsEnabled="{Binding Path=SelectedCameraDevice.WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.WhiteBalance.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.WhiteBalance.Value}" GotFocus="cmb_shutter_GotFocus" >
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Converter={StaticResource converter}}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.WhiteBalance.ErrorColor}" >
+                        <ComboBox Name="cmb_WB" IsEnabled="{Binding Path=SelectedCameraDevice.WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.WhiteBalance.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.WhiteBalance.Value}" GotFocus="cmb_shutter_GotFocus" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Converter={StaticResource converter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension ExposureComp}" Target="{Binding ElementName=cmb_EComp}"/>
-                    <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=SelectedCameraDevice.ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ExposureCompensation.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ExposureCompensation.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.ExposureCompensation.ErrorColor}" >
+                        <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=SelectedCameraDevice.ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ExposureCompensation.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ExposureCompensation.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension Compression}" Target="{Binding ElementName=cmb_com}"/>
-                    <ComboBox Name="cmb_com" IsEnabled="{Binding Path=SelectedCameraDevice.CompressionSetting.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.CompressionSetting.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.CompressionSetting.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.CompressionSetting.ErrorColor}" >
+                        <ComboBox Name="cmb_com" IsEnabled="{Binding Path=SelectedCameraDevice.CompressionSetting.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.CompressionSetting.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.CompressionSetting.Value}" GotFocus="cmb_shutter_GotFocus" />
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension MeteringMode}" Target="{Binding ElementName=cmb_meter}"/>
-                    <ComboBox Name="cmb_meter"  IsEnabled="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.Value}" GotFocus="cmb_shutter_GotFocus" >
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Converter={StaticResource converter}}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.ErrorColor}" >
+                        <ComboBox Name="cmb_meter"  IsEnabled="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ExposureMeteringMode.Value}" GotFocus="cmb_shutter_GotFocus" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Converter={StaticResource converter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension FocusMode}" Target="{Binding ElementName=cmb_focus}"/>
-                    <ComboBox Name="cmb_focus" IsEnabled="{Binding Path=SelectedCameraDevice.FocusMode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.FocusMode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.FocusMode.Value}" GotFocus="cmb_shutter_GotFocus" >
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Converter={StaticResource converter}}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.FocusMode.ErrorColor}" >
+                        <ComboBox Name="cmb_focus" IsEnabled="{Binding Path=SelectedCameraDevice.FocusMode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.FocusMode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.FocusMode.Value}" GotFocus="cmb_shutter_GotFocus" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Converter={StaticResource converter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Border>
                 </StackPanel>
                 <StackPanel Margin="1">
                     <Label Content="{T:TranslateExtension Battery}"  />
@@ -104,12 +122,12 @@
                 <StackPanel Margin="1" Orientation="Vertical">
                     <Button Content="{T:TranslateExtension LabelUseAsMaster}" Click="Button_Click" Name="btn_useasmaster" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Height="23" Name="button1" Width="25" Click="button1_Click" Margin="2">
-                        <Button.Content>
-                            <Image Source="/CameraControl;component/Images/Properties.png" />
-                        </Button.Content>
-                    </Button>
-                    <Button Content="Date" ToolTip="Sync camera date and time"  Name="btn_dateTime" Margin="2" Click="btn_dateTime_Click" />
+                        <Button Height="23" Name="button1" Width="25" Click="button1_Click" Margin="2">
+                            <Button.Content>
+                                <Image Source="/CameraControl;component/Images/Properties.png" />
+                            </Button.Content>
+                        </Button>
+                        <Button Content="Date" ToolTip="Sync camera date and time"  Name="btn_dateTime" Margin="2" Click="btn_dateTime_Click" />
                     </StackPanel>
                 </StackPanel>
             </WrapPanel>
@@ -121,13 +139,15 @@
                         <DataTemplate>
                             <StackPanel Margin="2" >
                                 <Label Content="{Binding Path=Name, Converter={StaticResource converter}}"/>
-                                <ComboBox IsEnabled="{Binding Path=IsEnabled}" ItemsSource="{Binding Path=Values}" SelectedValue="{Binding Path=Value}" Margin="3" Width="125">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding Converter={StaticResource converter}}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                <Border BorderThickness="1" BorderBrush="{Binding Path=ErrorColor}" >
+                                    <ComboBox IsEnabled="{Binding Path=IsEnabled}" ItemsSource="{Binding Path=Values}" SelectedValue="{Binding Path=Value}" Margin="3" Width="125">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Converter={StaticResource converter}}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Border>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
