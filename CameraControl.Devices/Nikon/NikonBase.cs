@@ -93,7 +93,7 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_ActivePicCtrlItem = 0xD200;
         public const uint CONST_PROP_ColorSpace = 0xD032;
         public const uint CONST_PROP_WbTuneFluorescentType = 0xD14F;
-
+        public const uint CONST_PROP_WbColorTemp = 0xD01E;
 
         public const uint CONST_Event_DevicePropChanged = 0x4006;
         public const uint CONST_Event_StoreFull = 0x400A;
@@ -425,6 +425,7 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitRawBit());
             AdvancedProperties.Add(InitColorSpace()); //12
             AdvancedProperties.Add(InitWbTuneFluorescentType());
+            AdvancedProperties.Add(InitWbColorTemp());
             AdvancedProperties.Add(InitOnOffProperty("Application mode", CONST_PROP_ApplicationMode));
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
@@ -468,6 +469,54 @@ namespace CameraControl.Devices.Nikon
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                                                   res.Code);
+            return res;
+        }
+
+        protected virtual PropertyValue<long> InitWbColorTemp()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Fluorescent light type",
+                IsEnabled = WhiteBalance.NumericValue == 32786,
+                Code = CONST_PROP_WbColorTemp,
+                SubType = typeof (byte),
+                DisableIfWrongValue = false
+            };
+            res.AddValues("2500 K", 0);
+            res.AddValues("2560 K", 1);
+            res.AddValues("2630 K", 2);
+            res.AddValues("2700 K", 3);
+            res.AddValues("2780 K", 4);
+            res.AddValues("2860 K", 5);
+            res.AddValues("2940 K", 6);
+            res.AddValues("3030 K", 7);
+            res.AddValues("3130 K", 8);
+            res.AddValues("3230 K", 9);
+            res.AddValues("3330 K", 10);
+            res.AddValues("3450 K", 11);
+            res.AddValues("3570 K", 12);
+            res.AddValues("3700 K", 13);
+            res.AddValues("3850 K", 14);
+            res.AddValues("4000 K", 15);
+            res.AddValues("4170 K", 16);
+            res.AddValues("4350 K", 17);
+            res.AddValues("4550 K", 18);
+            res.AddValues("4760 K", 19);
+            res.AddValues("5000 K", 20);
+            res.AddValues("5260 K", 21);
+            res.AddValues("5560 K", 22);
+            res.AddValues("5880 K", 23);
+            res.AddValues("6250 K", 24);
+            res.AddValues("6670 K", 25);
+            res.AddValues("7140 K", 26);
+            res.AddValues("7690 K", 27);
+            res.AddValues("8330 K", 28);
+            res.AddValues("9090 K", 29);
+            res.AddValues("10000 K", 30);
+
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                    res.Code);
             return res;
         }
 
@@ -964,6 +1013,8 @@ namespace CameraControl.Devices.Nikon
                         CONST_PROP_WhiteBalance);
             if (AdvancedProperties.Count > 13)
                 AdvancedProperties[13].IsEnabled = val == 5;
+            if (AdvancedProperties.Count > 14)
+                AdvancedProperties[14].IsEnabled = val == 32786;
         }
 
         public void InitExposureCompensation()
