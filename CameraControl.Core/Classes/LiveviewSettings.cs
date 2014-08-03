@@ -194,6 +194,7 @@ namespace CameraControl.Core.Classes
         public bool MotionAutofocusBeforCapture { get; set; }
         public bool DetectMotion { get; set; }
         public bool ShowFocusRect { get; set; }
+        public int Brightness { get; set; }
 
         public LiveviewSettings()
         {

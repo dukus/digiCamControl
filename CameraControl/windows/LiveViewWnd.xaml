@@ -242,16 +242,20 @@
 
                             <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}" Grid.Row="1" Grid.Column="3" Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
                             <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
+
                             <Label Content="{T:TranslateExtension LabelOpacity}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" />
                             <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged" />
 
-                            <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
-                            <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" Name="chk_top" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-                            <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-                            <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=GridVisible}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                            <Label Content="{T:TranslateExtension LabelBrightness}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" />
+                            <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" />
 
-                            <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" />
-                            <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="9" Grid.ColumnSpan="3" Grid.Column="1">
+                            <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
+                            <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" Name="chk_top" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                            <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                            <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=GridVisible}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+
+                            <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" />
+                            <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="11" Grid.ColumnSpan="3" Grid.Column="1">
                                 <ComboBoxItem Content="{T:TranslateExtension LabelRotateNone}" />
                                 <ComboBoxItem Content="{T:TranslateExtension LabelRotate90}" />
                                 <ComboBoxItem Content="{T:TranslateExtension LabelRotate180}" />

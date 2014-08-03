@@ -71,6 +71,7 @@ namespace CameraControl.ViewModel
         private bool _lockB;
         private int _selectedFocusValue;
         private bool _delayedStart;
+        private int _brightness;
 
         public ICameraDevice CameraDevice
         {
@@ -208,7 +209,15 @@ namespace CameraControl.ViewModel
             }
         }
 
-
+        public int Brightness
+        {
+            get { return CameraProperty.LiveviewSettings.Brightness; }
+            set
+            {
+                CameraProperty.LiveviewSettings.Brightness = value;
+                RaisePropertyChanged(() => Brightness);
+            }
+        }
 
         #region motion detection
 
@@ -870,8 +879,9 @@ namespace CameraControl.ViewModel
                         LiveViewData.
                             ImageDataPosition);
 
-                    using (var bmp = new Bitmap(stream))
+                    using (var res = new Bitmap(stream))
                     {
+                        Bitmap bmp = res;
                         if (DetectMotion)
                         {
                             ProcessMotionDetection(bmp);
@@ -907,6 +917,13 @@ namespace CameraControl.ViewModel
                             filtering.FillColor = new RGB(System.Drawing.Color.Red);
                             filtering.ApplyInPlace(bmp);
                         }
+
+                        if (Brightness != 0)
+                        {
+                            BrightnessCorrection filter = new BrightnessCorrection(Brightness);
+                            bmp = filter.Apply(bmp);
+                        }
+
                         preview =
                             BitmapFactory.ConvertToPbgra32Format(
                                 BitmapSourceConvert.ToBitmapSource(bmp));
@@ -959,18 +976,18 @@ namespace CameraControl.ViewModel
                                     break;
                             }
                         }
-                        if (ShowFocusRect)
-                            DrawFocusPoint(writeableBitmap);
+                        if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
+                        {
+                            preview.Freeze();
+                            Preview = preview;
+                            if (ShowFocusRect)
+                                DrawFocusPoint(writeableBitmap);
+                        }
 
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
                         ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
-                    }
-                    if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
-                    {
-                        preview.Freeze();
-                        Preview = preview;
                     }
                     stream.Close();
                 }
