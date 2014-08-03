@@ -308,5 +308,17 @@ namespace CameraControl.windows
             //CameraProperty.LiveviewSettings.CanvasHeight = slide_vert.ActualHeight;
             //CameraProperty.LiveviewSettings.CanvasWidt = slide_horiz.ActualWidth;
         }
+
+        private void _image_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.LiveViewImageZoomRatio.NextValue();
+            }
+            else
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.LiveViewImageZoomRatio.PrevValue();
+            }
+        }
     }
 }

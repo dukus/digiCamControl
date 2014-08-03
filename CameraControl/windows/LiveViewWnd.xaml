@@ -56,7 +56,7 @@
         </Grid.ColumnDefinitions>
         <Image Stretch="Uniform" Grid.Column="2" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}"  Grid.RowSpan="4" Name="img_preview" Grid.ColumnSpan="2" />
 
-        <Image Name="_image" Stretch="Uniform" Grid.Column="2" MouseDown="image1_MouseDown" Source="{Binding Bitmap}" Grid.Row="0" Grid.RowSpan="4" Opacity="{Binding ElementName=slider_transparent,Path=Value}" RenderTransformOrigin="0.5,0.5">
+        <Image Name="_image" Stretch="Uniform" Grid.Column="2" MouseDown="image1_MouseDown" Source="{Binding Bitmap}" Grid.Row="0" Grid.RowSpan="4" Opacity="{Binding ElementName=slider_transparent,Path=Value}" RenderTransformOrigin="0.5,0.5" MouseWheel="_image_MouseWheel">
             <Image.RenderTransform>
                 <RotateTransform Angle="{Binding ElementName=slider_rotation,Path=Value }"  />
             </Image.RenderTransform>
@@ -240,7 +240,7 @@
                             <Label Content="{T:TranslateExtension LabelOverlay}" Grid.Column="1" VerticalAlignment="Center"/>
                             <ComboBox Grid.Column="3" Margin="3" SelectedIndex="{Binding GridType}" ItemsSource="{Binding Overlays}" SelectedItem="{Binding SelectedOverlay}"/>
 
-                            <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}" Grid.Row="1" Grid.Column="3" Margin="3"/>
+                            <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}" Grid.Row="1" Grid.Column="3" Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
                             <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
                             <Label Content="{T:TranslateExtension LabelOpacity}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" />
                             <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged" />
