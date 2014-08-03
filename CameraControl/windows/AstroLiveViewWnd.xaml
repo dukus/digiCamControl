@@ -4,7 +4,11 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       Title="AstroLiveViewWnd" Height="455" Width="634" Closing="MetroWindow_Closing" xmlns:my="clr-namespace:CameraControl.Controls" xmlns:my1="clr-namespace:CameraControl.windows"
-                      xmlns:Controls1="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core">
+                      xmlns:Controls1="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core"
+                      xmlns:viewModel="clr-namespace:CameraControl.ViewModel">
+    <Window.DataContext>
+        <viewModel:AstroLiveViewViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="../Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -27,32 +32,56 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="438*" />
             <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="174*" />
+            <ColumnDefinition Width="175" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70*" />
-            <RowDefinition Height="111*" />
+            <RowDefinition Height="181*" />
             <RowDefinition Height="95*" />
             <RowDefinition Height="140" />
         </Grid.RowDefinitions>
-        <GridSplitter Grid.Column="1" Grid.RowSpan="4" HorizontalAlignment="Stretch" />
-        <Image Name="live_view_image" Stretch="Uniform" Margin="10" MouseDown="live_view_image_MouseDown" Grid.RowSpan="3" />
-        <GroupBox Grid.Row="3" Header="Camera" Height="125" HorizontalAlignment="Left" Margin="10,6,0,0" Name="groupBox1" VerticalAlignment="Top" Width="142">
+        <GridSplitter Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Stretch" />
+        <Image Source="{Binding Bitmap}" Stretch="Uniform" Margin="10" MouseDown="live_view_image_MouseDown" Grid.RowSpan="2" Name="live_view_image"/>
+        
+        <StackPanel VerticalAlignment="Bottom"  Grid.Row="1" IsEnabled="{Binding FocusingEnabled}" Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000">
+           
+            <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" ToolTip="-500" Style="{DynamicResource MetroCircleButtonStyle}"/>
+            <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" ToolTip="-100" Style="{DynamicResource MetroCircleButtonStyle}"/>
+            <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" ToolTip="-10" Style="{DynamicResource MetroCircleButtonStyle}"/>
+
+            <Button Margin="1" Width="40" Content=">" Command="{Binding FocusPCommand}" FontWeight="Bold" ToolTip="10" Style="{DynamicResource MetroCircleButtonStyle}"/>
+            <Button Margin="1" Width="40" Content=">>" Command="{Binding FocusPPCommand}" FontWeight="Bold" ToolTip="100" Style="{DynamicResource MetroCircleButtonStyle}"/>
+            <Button Margin="1" Width="40" Content=">>>" Command="{Binding FocusPPPCommand}" FontWeight="Bold" ToolTip="500" Style="{DynamicResource MetroCircleButtonStyle}"/>
+
+            <ToggleButton  ToolTip="{T:TranslateExtension LabelEdgeDetection}" Height="40" Width="40" Margin="0" IsChecked="{Binding EdgeDetection}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_contrast}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </ToggleButton>
+        </StackPanel>
+        <GroupBox Grid.Row="2" Header="Camera" Height="125" HorizontalAlignment="Left" Margin="10,6,0,0" Name="groupBox1" VerticalAlignment="Top" Width="142">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30*" />
-                    <RowDefinition Height="30*" />
-                    <RowDefinition Height="30*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Button Content="{T:TranslateExtension LabelStartLiveView}" Name="btn_start_lv" Margin="2" Click="btn_start_lv_Click" />
-                <Button Content="{T:TranslateExtension LabelStopLiveView}" Grid.Row="1" Name="btn_stop_lv" Margin="2" Click="btn_stop_lv_Click" />
-                <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Grid.Row="2" Margin="2" IsChecked="{Binding Path=Freeze, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:AstroLiveViewWnd, AncestorLevel=1}}" />
+                <Button Content="{T:TranslateExtension LabelStartLiveView}" Command="{Binding StartLiveViewCommand}" Margin="2"/>
+                <Button Content="{T:TranslateExtension LabelStopLiveView}" Grid.Row="1" Command="{Binding StopLiveViewCommand}" Margin="2"/>
+                <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Grid.Row="2" Margin="2" IsChecked="{Binding Path=FreezeImage}" />
             </Grid>
         </GroupBox>
-        <Controls1:AdvancedSlider Grid.Column="2" Height="52" Minimum="-255" Maximum="255" HorizontalAlignment="Left" Margin="4,9,0,0" x:Name="advancedSlider1" VerticalAlignment="Top" Width="164" Label="{T:TranslateExtension LabelBrightness}" Value="{Binding Path=Brightness, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:AstroLiveViewWnd, AncestorLevel=1}}" />
-        <StackPanel Grid.Column="2" Grid.Row="1" Name="panel_preview">
+        <StackPanel Grid.Column="2">
+            <Label Content="{T:TranslateExtension LabelBrightness}"/>
+            <Slider Minimum="-255" Maximum="255" Value="{Binding Brightness}"/>
+            <Label Content="Zoom X"/>
+            <Slider Minimum="1" Maximum="15" Value="{Binding ZoomFactor}"/>
+        </StackPanel>
+        
+        
+        <StackPanel Grid.Column="2" Name="panel_preview" Margin="0,70,0,0">
         <Image Name="img_preview" Stretch="Uniform"/>
         </StackPanel>
-        <Controls1:AdvancedSlider Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="2,2,2,2" Minimum="1" Maximum="15" VerticalAlignment="Top" Width="169" Label="Zomm X" Value="{Binding Path=ZoomFactor, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:AstroLiveViewWnd, AncestorLevel=1}}" />
     </Grid>
 </Controls:MetroWindow>

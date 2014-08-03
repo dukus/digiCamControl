@@ -556,7 +556,8 @@ namespace CameraControl.ViewModel
         public RelayCommand StartFocusStackingCommand { get; set; }
         public RelayCommand PreviewFocusStackingCommand { get; set; }
         public RelayCommand StopFocusStackingCommand { get; set; }
-        
+        public RelayCommand StartLiveViewCommand { get; set; }
+        public RelayCommand StopLiveViewCommand { get; set; }
         
         #endregion
 
@@ -609,7 +610,9 @@ namespace CameraControl.ViewModel
             MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
             PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking, () => LockB);
-            StopFocusStackingCommand=new RelayCommand(StopFocusStacking);
+            StopFocusStackingCommand = new RelayCommand(StopFocusStacking);
+            StartLiveViewCommand = new RelayCommand(StartLiveView);
+            StopLiveViewCommand = new RelayCommand(StopLiveView);
         }
 
         private void InitOverlay()
@@ -819,7 +822,7 @@ namespace CameraControl.ViewModel
         }
 
    
-        private void GetLiveImage()
+        public virtual void GetLiveImage()
         {
             if (_operInProgress)
                 return;
