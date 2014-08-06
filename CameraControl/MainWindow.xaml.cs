@@ -333,8 +333,9 @@ namespace CameraControl
 
                 File.Copy(tempFile, fileName);
 
+                string backupfile = null;
                 if (session.BackUp)
-                    session.CopyBackUp(tempFile, fileName);
+                    backupfile = session.CopyBackUp(tempFile, fileName);
 
                 if (File.Exists(tempFile))
                     File.Delete(tempFile);
@@ -357,6 +358,8 @@ namespace CameraControl
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag4.Value);
                 }
                 _selectedItem = session.AddFile(fileName);
+                _selectedItem.BackupFileName = backupfile;
+
                 //select the new file only when the multiple camera support isn't used to prevent high CPU usage on raw files
                 if (ServiceProvider.Settings.AutoPreview &&
                     !ServiceProvider.WindowsManager.Get(typeof (MultipleCameraWnd)).IsVisible &&

@@ -601,10 +601,10 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public void CopyBackUp(string source, string dest)
+        public string CopyBackUp(string source, string dest)
         {
             if (string.IsNullOrEmpty(BackUpPath))
-                return;
+                return null;
             if (!Directory.Exists(BackUpPath))
                 Directory.CreateDirectory(BackUpPath);
             string backupFile = Path.Combine(BackUpPath, Path.GetFileName(dest));
@@ -614,6 +614,7 @@ namespace CameraControl.Core.Classes
                 backupFile = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
             }
             File.Copy(source, backupFile);
+            return backupFile;
         }
     }
 }

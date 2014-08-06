@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
@@ -71,12 +72,22 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string BackupFileName
+        {
+            get { return _backupFileName; }
+            set
+            {
+                _backupFileName = value;
+                NotifyPropertyChanged("BackupFileName");
+            }
+        }
+
         public bool IsRaw
         {
             get
             {
                 var extension = Path.GetExtension(FileName);
-                return extension != null && (!string.IsNullOrEmpty(FileName) && extension.ToLower() == ".nef");
+                return extension != null && (!string.IsNullOrEmpty(FileName) && (extension.ToLower() == ".nef" || extension.ToLower() == ".cr2"));
             }
         }
 
@@ -317,6 +328,7 @@ namespace CameraControl.Core.Classes
 
 
         private BitmapSource _thumbnail;
+        private string _backupFileName;
 
         [JsonIgnore]
         [XmlIgnore]

@@ -17,7 +17,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Icons.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
@@ -198,6 +197,13 @@
         <Button Content="{T:TranslateExtension ButtonGetRawCodec}" Grid.Row="3" Height="23" Name="btn_getRaw" VerticalAlignment="Top" Click="btn_getRaw_Click"  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.RawCodecNeeded, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}"/>
 
         <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.RowSpan="5" Padding="0" Margin="0" >
+            <Expander.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+            </Expander.Resources>
             <!--<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">-->
             <Grid>
                 <Grid.RowDefinitions>
