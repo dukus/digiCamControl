@@ -919,5 +919,10 @@ namespace CameraControl
             wnd.ShowDialog();
         }
 
+        private void btn_refresh_Sesion_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.Settings.LoadData(ServiceProvider.Settings.DefaultSession);
+        }
+
     }
 }
