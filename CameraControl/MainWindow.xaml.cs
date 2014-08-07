@@ -210,12 +210,20 @@ namespace CameraControl
 
         private void CheckForUpdate()
         {
-            Thread.Sleep(2000);
             if ((DateTime.Now - ServiceProvider.Settings.LastUpdateCheckDate).TotalDays > 7)
             {
+                Thread.Sleep(2000);
                 ServiceProvider.Settings.LastUpdateCheckDate = DateTime.Now;
                 ServiceProvider.Settings.Save();
                 Dispatcher.Invoke(new Action(() => NewVersionWnd.CheckForUpdate(false)));
+            }
+            else
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    var wnd = new Welcome();
+                    wnd.ShowDialog();
+                }));
             }
         }
 
