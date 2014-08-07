@@ -283,7 +283,7 @@ namespace CameraControl.Devices.Nikon
             catch (Exception)
             {
             }
-            _timer.Start();
+            //_timer.Start();
         }
 
         public PictureControl GetPictureControl(byte slotnum)
@@ -931,7 +931,7 @@ namespace CameraControl.Devices.Nikon
                     FNumber.IsEnabled = false;
                     break;
             }
-            //if (Mode.IsEnabled)
+            if (Mode.IsEnabled)
                 SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                             CONST_PROP_ExposureProgramMode);
         }

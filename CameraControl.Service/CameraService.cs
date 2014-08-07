@@ -146,7 +146,7 @@ namespace CameraControl.Service
             }
             finally
             {
-                ServiceProvider.DeviceManager.PhotoCaptured -= DeviceManager_PhotoCaptured;
+                //ServiceProvider.DeviceManager.PhotoCaptured -= DeviceManager_PhotoCaptured;
                 _autoEvent.Set();
             }
         }
