@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="Welcome - Support Us" Height="202" Width="379" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="False" WindowStyle="None" TitlebarHeight="40" TitleCaps="False">
+        Title="Welcome - Support Us" Height="202" Width="502" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="True" WindowStyle="None" TitlebarHeight="40" TitleCaps="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -33,6 +33,16 @@
                     </Rectangle>
                 </Button>
                 <Label Content="Google+" HorizontalContentAlignment="Center" FontSize="17"/>
+            </StackPanel>
+            <StackPanel>
+                <Button  Height="120" Width="120" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_twitter_Click" Cursor="Hand">
+                    <Rectangle Width="80" Height="80">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_twitter_bird}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Label Content="Twitter" HorizontalContentAlignment="Center" FontSize="17"/>
             </StackPanel>
             <StackPanel>
                 <Button  Height="120" Width="120" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_donate_Click" Cursor="Hand">

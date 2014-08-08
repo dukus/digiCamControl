@@ -43,5 +43,11 @@ namespace CameraControl.windows
             PhotoUtils.Run("http://digicamcontrol.com/donate");
             Close();
         }
+
+        private void btn_twitter_Click(object sender, RoutedEventArgs e)
+        {
+            PhotoUtils.Run("https://twitter.com/digiCamControl");
+            Close();
+        }
     }
 }
