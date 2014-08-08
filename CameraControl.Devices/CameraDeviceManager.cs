@@ -92,7 +92,10 @@ namespace CameraControl.Devices
             set
             {
                 ICameraDevice device = _selectedCameraDevice;
-                _selectedCameraDevice = value;
+                _selectedCameraDevice = value ?? (ConnectedDevices.Count > 0
+                    ? ConnectedDevices[0]
+                    : new NotConnectedCameraDevice());
+
                 if (CameraSelected != null)
                 {
                     CameraSelected(device, _selectedCameraDevice);
@@ -227,6 +230,7 @@ namespace CameraControl.Devices
                     CanonSDKBase camera = device as CanonSDKBase;
                     if (camera != null)
                     {
+                        //if (camera.Camera.SerialNumber == eosCamera.SerialNumber)
                         if (camera.Camera == eosCamera)
                         {
                             shouldbeadded = false;
@@ -501,15 +505,7 @@ namespace CameraControl.Devices
                 StaticHelper.Instance.SystemMessage = "Camera disconnected :" + descriptor.CameraDevice.DeviceName;
                 Log.Debug("===========Camera disconnected==============");
                 Log.Debug("Name :" + descriptor.CameraDevice.DeviceName);
-                if (SelectedCameraDevice == descriptor.CameraDevice)
-                {
-                    if (ConnectedDevices.Count > 0)
-                        SelectedCameraDevice = ConnectedDevices[0];
-                    else
-                    {
-                        SelectedCameraDevice = new NotConnectedCameraDevice();
-                    }
-                }
+
                 _deviceEnumerator.Remove(descriptor);
                 descriptor.CameraDevice.Close();
                 var wiaCameraDevice = descriptor.CameraDevice as WiaCameraDevice;
@@ -528,18 +524,12 @@ namespace CameraControl.Devices
             {
                 descriptor.CameraDevice.PhotoCaptured -= cameraDevice_PhotoCaptured;
                 descriptor.CameraDevice.CameraDisconnected -= cameraDevice_CameraDisconnected;
-                ConnectedDevices.Remove(descriptor.CameraDevice);
                 StaticHelper.Instance.SystemMessage = "Camera disconnected :" + descriptor.CameraDevice.DeviceName;
                 Log.Debug("===========Camera disconnected==============");
                 Log.Debug("Name :" + descriptor.CameraDevice.DeviceName);
                 PortableDeviceCollection.Instance.RemoveDevice(device.DeviceId);
                 device.IsConnected = false;
-                if (SelectedCameraDevice == descriptor.CameraDevice)
-                {
-                    SelectedCameraDevice = ConnectedDevices.Count > 0
-                                               ? ConnectedDevices[0]
-                                               : new NotConnectedCameraDevice();
-                }
+                ConnectedDevices.Remove(descriptor.CameraDevice);
                 descriptor.CameraDevice.Close();
                 _deviceEnumerator.Remove(descriptor);
                 _deviceEnumerator.RemoveDisconnected();
@@ -554,16 +544,10 @@ namespace CameraControl.Devices
             {
                 descriptor.CameraDevice.PhotoCaptured -= cameraDevice_PhotoCaptured;
                 descriptor.CameraDevice.CameraDisconnected -= cameraDevice_CameraDisconnected;
-                ConnectedDevices.Remove(descriptor.CameraDevice);
                 StaticHelper.Instance.SystemMessage = "Camera disconnected :" + descriptor.CameraDevice.DeviceName;
                 Log.Debug("===========Camera disconnected==============");
                 Log.Debug("Name :" + descriptor.CameraDevice.DeviceName);
-                if (SelectedCameraDevice == descriptor.CameraDevice)
-                {
-                    SelectedCameraDevice = ConnectedDevices.Count > 0
-                                               ? ConnectedDevices[0]
-                                               : new NotConnectedCameraDevice();
-                }
+                ConnectedDevices.Remove(descriptor.CameraDevice);
                 descriptor.CameraDevice.Close();
                 _deviceEnumerator.Remove(descriptor);
                 _deviceEnumerator.RemoveDisconnected();
