@@ -34,6 +34,7 @@ using System.Timers;
 using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using MahApps.Metro;
 using Timer = System.Timers.Timer;
 
 #endregion
@@ -135,14 +136,9 @@ namespace CameraControl.Core.Classes
             set
             {
                 _fps = value;
-                if (_fps > 0 && _numberOfPhotos > 0)
-                {
-                    _movieLength = new DateTime().AddSeconds(_numberOfPhotos/_fps);
-                    NotifyPropertyChanged("MovieLength");
-                }
-
                 NotifyPropertyChanged("MovieLength");
                 NotifyPropertyChanged("Fps");
+                NotifyPropertyChanged("Message");
             }
         }
 
@@ -163,9 +159,10 @@ namespace CameraControl.Core.Classes
             get
             {
                 string res =
-                    string.Format("Timelapse will run {0} \n Will end at {1} \n",
+                    string.Format("Timelapse will run {0} \n Will end at {1} \n The generated movie length {2}",
                                   PhotoUtils.DateTimeToString(TimePeriod),
-                                  DateTime.Now.AddSeconds(Period*(_numberOfPhotos - PhotosTaken)));
+                                  DateTime.Now.AddSeconds(Period*(_numberOfPhotos - PhotosTaken)),
+                                  TimeSpan.FromSeconds(_numberOfPhotos / (_fps>0?_fps:1)).ToString(@"hh\:mm\:ss"));
                 if (!IsDisabled)
                     res += PhotosTaken == 0
                                ? string.Format("Time Lapse will start in {0} second(s)",

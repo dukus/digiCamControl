@@ -5,7 +5,7 @@
                        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                        xmlns:Controls2="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core"
-                       Title="{T:TranslateExtension TimeLapseWindowTitle}" Height="430" Width="400" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ShowActivated="True" Closed="Window_Closed" Closing="Window_Closing"
+                       Title="{T:TranslateExtension TimeLapseWindowTitle}" Height="359" Width="400" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ShowActivated="True" Closed="Window_Closed" Closing="Window_Closing"
                        ShowMaxRestoreButton="False" ShowMinButton="False">
     <Window.Resources>
         <ResourceDictionary>
@@ -32,46 +32,49 @@
     <Grid>
         <!--<TabControl Name="tabControl1" TabStripPlacement="Left">
             <TabItem Header="{T:TranslateExtension LabelTimeLapse}" Name="tabItem1">-->
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="227*" />
-                        <ColumnDefinition Width="162*" />
-                        <ColumnDefinition Width="10" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="35" />
-                        <RowDefinition Height="35" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="50*" />
-                    </Grid.RowDefinitions>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="35*" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="1" Grid.Column="1" Content="{T:TranslateExtension LabelSecondsBetweenShots}" HorizontalContentAlignment="Right"/>
+            <Controls:NumericUpDown Grid.Row="1" Grid.Column="2" Minimum="1" Maximum="3600" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Period}" Margin="3"/>
 
-                    <Controls2:AdvancedSlider Minimum="1" Maximum="3600" Label="{T:TranslateExtension LabelSecondsBetweenShots}" Grid.ColumnSpan="2" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Period}"  Grid.Row="1" Grid.Column="1"/>
-                    <Controls2:AdvancedSlider Minimum="1" Maximum="10000" Label="{T:TranslateExtension LabelNumberOfPhotos}" Grid.ColumnSpan="2" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.NumberOfPhotos}"  Grid.Row="2" Grid.Column="1"/>
-                    <Controls2:AdvancedSlider Minimum="5" Maximum="60" Label="{T:TranslateExtension LabelFps}" Grid.ColumnSpan="2" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Fps}"  Grid.Row="3" Grid.Column="1"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{T:TranslateExtension LabelNumberOfPhotos}" HorizontalContentAlignment="Right"/>
+            <Controls:NumericUpDown Grid.Row="2" Grid.Column="2" Minimum="1" Maximum="10000" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.NumberOfPhotos}" Margin="3"/>
 
-                    <Button Content="{T:TranslateExtension ButtonStartTimeLapse}" Name="btn_start" Click="btn_start_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Grid.Row="11" Grid.Column="2" Margin="13,3,3,3"/>
-                    <Label Content="{T:TranslateExtension LabelDontAutofocusOnEveryCapture}" HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center"/>
-                    
-                    <CheckBox Content="" ToolTip="This option work only if you use native drive, but isn't work for all cameras" Name="chk_noaf" IsChecked="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.NoAutofocus}" Grid.Row="6" Grid.Column="2"  VerticalAlignment="Center" Margin="12,2,2,2"/>
+            <Label Grid.Row="3" Grid.Column="1" Content="{T:TranslateExtension LabelFps}" HorizontalContentAlignment="Right"/>
+            <Controls:NumericUpDown Grid.Row="3" Grid.Column="2" Minimum="5" Maximum="60" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Fps}" Margin="3"/>
 
-                   
-                    <Button Content="{T:TranslateExtension ButtonClose}" HorizontalAlignment="Left"  Name="button2" Width="75" Click="button2_Click" Grid.Row="11" Grid.Column="1" Margin="3,3,0,3" />
-                    <xctk:TimePicker Grid.Column="2" Grid.Row="5" Margin="12,2,2,2" Background="White" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.MovieLength}" Format="LongTime" IsEnabled="False"/>
-                    <Label Content="{T:TranslateExtension LabelMovieLenght}" Grid.Column="1" Grid.Row="5" ToolTip="The lengt is calculated based on FPS " HorizontalContentAlignment="Right" />
-                    <ProgressBar Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresPictures,Mode=OneWay}" Margin="3"/>
-                    <ProgressBar Grid.ColumnSpan="2" Grid.Row="10" Grid.Column="1" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresTime,Mode=OneWay}" Margin="3"/>
-                    <TextBox Text="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Message,Mode=OneWay}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2" Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" IsReadOnly="True"/>
-                </Grid>
-            <!--</TabItem>
+            <Button Content="{T:TranslateExtension ButtonStartTimeLapse}" Name="btn_start" Click="btn_start_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Grid.Row="11" Grid.Column="2" Margin="13,3,3,3"/>
+            <Label Content="{T:TranslateExtension LabelDontAutofocusOnEveryCapture}" HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center"/>
+
+            <CheckBox Content="" ToolTip="This option work only if you use native drive, but isn't work for all cameras" Name="chk_noaf" IsChecked="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.NoAutofocus}" Grid.Row="6" Grid.Column="2"  VerticalAlignment="Center" Margin="12,2,2,2"/>
+
+
+            <Button Content="{T:TranslateExtension ButtonClose}" HorizontalAlignment="Left"  Name="button2" Width="75" Click="button2_Click" Grid.Row="11" Grid.Column="1" Margin="3,3,0,3" />
+            <ProgressBar Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresPictures,Mode=OneWay}" Margin="3"/>
+            <ProgressBar Grid.ColumnSpan="2" Grid.Row="10" Grid.Column="1" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresTime,Mode=OneWay}" Margin="3"/>
+            <TextBox Text="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Message,Mode=OneWay}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2" Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" IsReadOnly="True"/>
+        </Grid>
+        <!--</TabItem>
          
         
         </TabControl>-->
