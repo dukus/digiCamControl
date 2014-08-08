@@ -65,8 +65,8 @@
                 <ScrollViewer>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -132,8 +132,8 @@
             <TabItem Header="{T:TranslateExtension LabelFullscreen}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -221,8 +221,8 @@
             <TabItem Header="{T:TranslateExtension LabelSettingsLiveView}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -257,7 +257,7 @@
 
                     <Label Content="{T:TranslateExtension LabelEasyLiveViewControl}" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding EasyLiveViewControl}" Margin="3"/>
-                    <Button Content="{T:TranslateExtension LabelShowOverlayFolder}" Grid.Column="1" Grid.Row="7" Height="24" HorizontalAlignment="Left" Margin="3,3,0,0" Name="btn_showoverlay" VerticalAlignment="Top" Width="157" Click="button5_Click" />
+                    <Button Content="{T:TranslateExtension LabelShowOverlayFolder}" Grid.Column="1" Grid.Row="7" Name="btn_showoverlay" Click="button5_Click" Margin="3"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelDevices}">
@@ -289,18 +289,18 @@
                                 <ColumnDefinition Width="232*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="35" />
-                                <RowDefinition Height="35" />
-                                <RowDefinition Height="35" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="219*" />
                             </Grid.RowDefinitions>
                             <Label Content="{T:Translate LabelConfigName}" Name="label1" />
-                            <TextBox Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                            <TextBox Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="3"/>
                             <ContentControl  Name="config_stackpanel" Grid.ColumnSpan="2" Grid.Row="3" Content="{Binding Config}">
 
                             </ContentControl>
                             <Label Content="{T:Translate LabelDriver}" Grid.Row="1" />
-                            <ComboBox Grid.Column="1" Grid.Row="1" Margin="5" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalDeviceNames}" SelectedItem="{Binding DriverName}"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Margin="3" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalDeviceNames}" SelectedItem="{Binding DriverName}"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -309,8 +309,8 @@
             <TabItem Header="{T:TranslateExtension LabelAdvanced}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
