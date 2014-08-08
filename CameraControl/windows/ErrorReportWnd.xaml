@@ -6,15 +6,22 @@
                       Title="{T:TranslateExtension LabelSendTheLogFile}" Height="265" Width="480" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="56*" />
-            <RowDefinition Height="24*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="89*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="56*" />
         </Grid.RowDefinitions>
-        <Button Content="{T:TranslateExtension LabelSend}" Grid.Row="3" Height="23" Margin="0,0,105,12" Name="btn_send" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btn_send_Click" />
-        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Row="3" Height="23" Margin="0,0,12,12" Name="btn_cancel" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btn_cancel_Click" />
         <TextBox Grid.Row="2" Name="txt_message" Margin="5"/>
+        
         <Label Content="{T:TranslateExtension LabelLogMessage}" Grid.Row="1" Padding="0" Margin="2" />
         <TextBlock Text="{T:TranslateExtension LabelLogText}" TextWrapping="Wrap" Padding="5"/>
+
+        <Label Content="{T:TranslateExtension LabelErrorEmail}" Grid.Row="3" Padding="0" Margin="2" />
+        <TextBox Grid.Row="4" Padding="0" Name="txt_email" Margin="5"/>
+        
+        <Button Content="{T:TranslateExtension LabelSend}" Grid.Row="5" Height="23" Margin="0,0,105,12" Name="btn_send" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btn_send_Click" />
+        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Row="5" Height="23" Margin="0,0,12,12" Name="btn_cancel" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btn_cancel_Click" />
     </Grid>
 </Controls:MetroWindow>

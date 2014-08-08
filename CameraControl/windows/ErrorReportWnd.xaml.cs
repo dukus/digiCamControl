@@ -70,7 +70,7 @@ namespace CameraControl.windows
 
         private void btn_send_Click(object sender, RoutedEventArgs e)
         {
-            HelpProvider.SendCrashReport(txt_message.Text + _message, _type);
+            HelpProvider.SendCrashReport(txt_message.Text + Environment.NewLine + _message, _type, txt_email.Text);
             this.Close();
         }
     }

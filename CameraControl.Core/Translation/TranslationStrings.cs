@@ -485,5 +485,6 @@ namespace CameraControl.Core.Translation
         public static string LabelBackUp = "Backup photos";
         public static string LabelVerifyPreset = "Verify preset";
         public static string LabelRefreshSession = "Refresh file list";
+        public static string LabelErrorEmail = "Your email address (if you want get feedback)";
     }
 }

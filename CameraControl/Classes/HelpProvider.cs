@@ -89,7 +89,7 @@ namespace CameraControl.Classes
             PhotoUtils.Run(_helpData[sections], "");
         }
 
-        public static void SendCrashReport(string body, string type)
+        public static void SendCrashReport(string body, string type, string email=null)
         {
             try
             {
@@ -103,11 +103,13 @@ namespace CameraControl.Classes
                     zip.Save(destfile);
                 }
                 var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82");
-                var message = new MailMessage("error@digicamcontrol.mailgun.org", "error_report@digicamcontrol.com")
-                                  {
-                                      Subject = (type ?? "Log file"),
-                                      Body = "Client Id" + (ServiceProvider.Settings.ClientId ?? "") + "\n" + body,
-                                  };
+                var message = new MailMessage(email ?? "error@digicamcontrol.mailgun.org",
+                    "error_report@digicamcontrol.com")
+                {
+                    Subject = (type ?? "Log file"),
+                    Body = "Version :" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + "\n" +
+                           "Client Id" + (ServiceProvider.Settings.ClientId ?? "") + "\n" + body,
+                };
                 message.Attachments.Add(new Attachment(destfile));
 
                 client.SendMail(message);
