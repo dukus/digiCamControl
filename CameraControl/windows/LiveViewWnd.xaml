@@ -74,7 +74,7 @@
             <Label Canvas.Left="0" Canvas.Top="0" Content="REC" Height="41" FontSize="20" FontWeight="Bold" Foreground="Red" Width="52" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Canvas>
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}">
-            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000">
+            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000"  Grid.RowSpan="4">
                 <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">
