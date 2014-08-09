@@ -311,7 +311,8 @@ Global
 		{C962193A-09CD-496B-A9EF-C80F733B86A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C962193A-09CD-496B-A9EF-C80F733B86A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C962193A-09CD-496B-A9EF-C80F733B86A5}.Release|x64.ActiveCfg = Release|Any CPU
-		{C962193A-09CD-496B-A9EF-C80F733B86A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{C962193A-09CD-496B-A9EF-C80F733B86A5}.Release|x86.ActiveCfg = Release|x86
+		{C962193A-09CD-496B-A9EF-C80F733B86A5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
