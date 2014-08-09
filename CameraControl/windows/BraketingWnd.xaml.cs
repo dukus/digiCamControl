@@ -59,6 +59,9 @@ namespace CameraControl.windows
         private AsyncObservableCollection<CheckedListItem> presetcollection =
             new AsyncObservableCollection<CheckedListItem>();
 
+        private AsyncObservableCollection<CheckedListItem> aperturecollection =
+    new AsyncObservableCollection<CheckedListItem>();
+
         private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         public BraketingWnd(ICameraDevice device, PhotoSession session)
@@ -93,6 +96,9 @@ namespace CameraControl.windows
                     break;
                 case 2:
                     count = _photoSession.Braketing.PresetValues.Count;
+                    break;
+                case 3:
+                    count = _photoSession.Braketing.ApertureValues.Count;
                     break;
             }
             Dispatcher.Invoke(
@@ -203,6 +209,19 @@ namespace CameraControl.windows
             }
             lst_preset.ItemsSource = presetcollection;
 
+            foreach (string value in _device.FNumber.Values)
+            {
+                CheckedListItem item = new CheckedListItem()
+                {
+                    Name = value,
+                    IsChecked =
+                        _photoSession.Braketing.ApertureValues.Contains(value)
+                };
+                item.PropertyChanged += item_PropertyChanged;
+                aperturecollection.Add(item);
+            }
+            lst_aperture.ItemsSource = aperturecollection;
+
             if (_device.Mode.Value == "M")
             {
                 tab_exposure.Visibility = Visibility.Visible;
@@ -217,6 +236,16 @@ namespace CameraControl.windows
                 tab_manual.Visibility = Visibility.Collapsed;
                 tab_exposure.IsSelected = true;
             }
+
+            if (_device.Mode.Value == "M" || _device.Mode.Value == "A")
+            {
+                tab_aperture.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                tab_aperture.Visibility = Visibility.Collapsed;
+            }
+
             item_PropertyChanged(null, null);
         }
 
@@ -231,6 +260,7 @@ namespace CameraControl.windows
             {
                 _photoSession.Braketing.ExposureValues.Add(listItem.Name);
             }
+
             _photoSession.Braketing.ShutterValues.Clear();
             foreach (
                 CheckedListItem listItem in
@@ -240,6 +270,7 @@ namespace CameraControl.windows
             {
                 _photoSession.Braketing.ShutterValues.Add(listItem.Tag);
             }
+
             _photoSession.Braketing.PresetValues.Clear();
             foreach (
                 CheckedListItem listItem in
@@ -247,6 +278,15 @@ namespace CameraControl.windows
                         (item) => item.IsChecked && !_photoSession.Braketing.PresetValues.Contains(item.Name)))
             {
                 _photoSession.Braketing.PresetValues.Add(listItem.Name);
+            }
+
+            _photoSession.Braketing.ApertureValues.Clear();
+            foreach (
+                CheckedListItem listItem in
+                    aperturecollection.Where(
+                        (item) => item.IsChecked && !_photoSession.Braketing.ApertureValues.Contains(item.Name)))
+            {
+                _photoSession.Braketing.ApertureValues.Add(listItem.Name);
             }
         }
 
@@ -286,6 +326,10 @@ namespace CameraControl.windows
             if (e.AddedItems[0] == tab_preset)
             {
                 _photoSession.Braketing.Mode = 2;
+            }
+            if (e.AddedItems[0] == tab_aperture)
+            {
+                _photoSession.Braketing.Mode = 3;
             }
         }
 

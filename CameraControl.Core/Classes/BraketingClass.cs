@@ -89,6 +89,7 @@ namespace CameraControl.Core.Classes
         }
 
         private AsyncObservableCollection<string> _presetValues;
+        private AsyncObservableCollection<string> _apertureValues;
 
         public AsyncObservableCollection<string> PresetValues
         {
@@ -100,6 +101,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public AsyncObservableCollection<string> ApertureValues
+        {
+            get { return _apertureValues; }
+            set
+            {
+                _apertureValues = value;
+                NotifyPropertyChanged("ApertureValues");
+            }
+        }
+
 
         public BraketingClass()
         {
@@ -107,6 +118,7 @@ namespace CameraControl.Core.Classes
             ExposureValues = new AsyncObservableCollection<string>();
             ShutterValues = new AsyncObservableCollection<string>();
             PresetValues = new AsyncObservableCollection<string>();
+            ApertureValues = new AsyncObservableCollection<string>();
             Mode = 0;
         }
 
@@ -121,7 +133,10 @@ namespace CameraControl.Core.Classes
                 case 0:
                     {
                         if (ExposureValues.Count == 0)
+                        {
+                            Stop();
                             return;
+                        }
                         Index = 0;
                         try
                         {
@@ -142,7 +157,10 @@ namespace CameraControl.Core.Classes
                 case 1:
                     {
                         if (ShutterValues.Count == 0)
+                        {
+                            Stop();
                             return;
+                        }
                         Index = 0;
                         try
                         {
@@ -163,7 +181,10 @@ namespace CameraControl.Core.Classes
                 case 2:
                     {
                         if (PresetValues.Count == 0)
+                        {
+                            Stop();
                             return;
+                        }
                         Index = 0;
                         try
                         {
@@ -172,6 +193,30 @@ namespace CameraControl.Core.Classes
                             CameraPreset preset = ServiceProvider.Settings.GetPreset(PresetValues[Index]);
                             if (preset != null)
                                 preset.Set(_cameraDevice);
+                            Thread.Sleep(100);
+                            CameraHelper.Capture(_cameraDevice);
+                            Index++;
+                        }
+                        catch (DeviceException exception)
+                        {
+                            Log.Error(exception);
+                            StaticHelper.Instance.SystemMessage = exception.Message;
+                        }
+                    }
+                    break;
+                case 3:
+                    {
+                        if (ApertureValues.Count == 0)
+                        {
+                            Stop();
+                            return;
+                        }
+                        Index = 0;
+                        try
+                        {
+                            _defec = _cameraDevice.FNumber.Value;
+                            Thread.Sleep(100);
+                            _cameraDevice.FNumber.SetValue(ApertureValues[Index]);
                             Thread.Sleep(100);
                             CameraHelper.Capture(_cameraDevice);
                             Index++;
@@ -241,6 +286,18 @@ namespace CameraControl.Core.Classes
                         }
                     }
                     break;
+                case 3:
+                    {
+                        if (Index < ApertureValues.Count)
+                        {
+                            CaptureNextPhoto();
+                        }
+                        else
+                        {
+                            Stop();
+                        }
+                    }
+                    break;
             }
         }
 
@@ -296,6 +353,21 @@ namespace CameraControl.Core.Classes
                         }
                     }
                     break;
+                case 3:
+                    {
+                        try
+                        {
+                            _cameraDevice.FNumber.SetValue(ApertureValues[Index]);
+                            CameraHelper.Capture(_cameraDevice);
+                            Index++;
+                        }
+                        catch (DeviceException exception)
+                        {
+                            Log.Error(exception);
+                            StaticHelper.Instance.SystemMessage = exception.Message;
+                        }
+                    }
+                    break;
             }
         }
 
@@ -324,6 +396,12 @@ namespace CameraControl.Core.Classes
                 case 2:
                     {
                         thread = new Thread(() => _cameraPreset.Set(_cameraDevice));
+                    }
+                    break;
+                case 3:
+                    {
+                        thread = new Thread(() => _cameraDevice.
+                                                      FNumber.SetValue(_defec));
                     }
                     break;
             }

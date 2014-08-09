@@ -1387,8 +1387,8 @@ namespace CameraControl.Devices.Nikon
 
         public override void ReadDeviceProperties(uint prop)
         {
-            lock (Locker)
-            {
+            //lock (Locker)
+            //{
                 try
                 {
                     HaveLiveView = true;
@@ -1483,7 +1483,7 @@ namespace CameraControl.Devices.Nikon
                 catch (Exception)
                 {
                 }
-            }
+            //}
         }
 
         public override void LockCamera()

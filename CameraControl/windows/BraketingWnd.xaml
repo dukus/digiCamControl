@@ -42,7 +42,7 @@
                         <ListBox.ItemTemplate>
                             <HierarchicalDataTemplate>
                                 <WrapPanel>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
+                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
                                 </WrapPanel>
                             </HierarchicalDataTemplate>
                         </ListBox.ItemTemplate>
@@ -69,6 +69,17 @@
             <TabItem Header="{T:TranslateExtension LabelPresetBracketing}" Name="tab_preset">
                 <Grid >
                     <ListBox Name="lst_preset">
+                        <ListBox.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
+                            </HierarchicalDataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelApertureBracketing}" Name="tab_aperture">
+                <Grid >
+                    <ListBox Name="lst_aperture">
                         <ListBox.ItemTemplate>
                             <HierarchicalDataTemplate>
                                 <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
