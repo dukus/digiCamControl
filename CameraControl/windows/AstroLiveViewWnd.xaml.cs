@@ -136,11 +136,11 @@ namespace CameraControl.windows
 
         private void live_view_image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left &&((AstroLiveViewViewModel)DataContext).Bitmap!=null)
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left &&((AstroLiveViewViewModel)DataContext).Bitmap!=null && ((AstroLiveViewViewModel)DataContext).ZoomFactor==1)
             {
                 Point point = e.MouseDevice.GetPosition(live_view_image);
-                double dw = ((AstroLiveViewViewModel)DataContext).Bitmap.PixelWidth / live_view_image.ActualWidth;
-                double hw = ((AstroLiveViewViewModel)DataContext).Bitmap.PixelHeight / live_view_image.ActualHeight;
+                double dw = ((AstroLiveViewViewModel)DataContext).Preview.PixelWidth / live_view_image.ActualWidth;
+                double hw = ((AstroLiveViewViewModel)DataContext).Preview.PixelHeight / live_view_image.ActualHeight;
                 ((AstroLiveViewViewModel)DataContext).CentralPoint = new Point(point.X * dw, point.Y * hw);
             }
         }
@@ -148,6 +148,17 @@ namespace CameraControl.windows
         private void btn_stay_on_top_Click(object sender, RoutedEventArgs e)
         {
             Topmost = (btn_stay_on_top.IsChecked == true);
+        }
+
+        private void img_preview_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && ((AstroLiveViewViewModel)DataContext).Bitmap != null)
+            {
+                Point point = e.MouseDevice.GetPosition(img_preview);
+                double dw = ((AstroLiveViewViewModel)DataContext).Preview.PixelWidth / img_preview.ActualWidth;
+                double hw = ((AstroLiveViewViewModel)DataContext).Preview.PixelHeight / img_preview.ActualHeight;
+                ((AstroLiveViewViewModel)DataContext).CentralPoint = new Point(point.X * dw, point.Y * hw);
+            }
         }
     }
 }

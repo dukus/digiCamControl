@@ -18,6 +18,9 @@ namespace CameraControl.ViewModel
 {
     public class AstroLiveViewViewModel:LiveViewViewModel
     {
+        private Point _centralPoint;
+        private int _zoomFactor;
+
         public AstroLiveViewViewModel(ICameraDevice device)
             :base(device)
         {
@@ -30,8 +33,25 @@ namespace CameraControl.ViewModel
             
         }
 
-        public Point CentralPoint { get; set; }
-        public int ZoomFactor { get; set; }
+        public Point CentralPoint
+        {
+            get { return _centralPoint; }
+            set
+            {
+                _centralPoint = value;
+                RaisePropertyChanged(() => CentralPoint);
+            }
+        }
+
+        public int ZoomFactor
+        {
+            get { return _zoomFactor; }
+            set
+            {
+                _zoomFactor = value;
+                RaisePropertyChanged(() => ZoomFactor);
+            }
+        }
 
         public override void GetLiveImage()
         {
@@ -53,6 +73,11 @@ namespace CameraControl.ViewModel
             using (var bmp = new Bitmap(stream))
             {
                 Bitmap res = bmp;
+                var preview = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
+                preview.Freeze();
+                Preview = preview;
+
+
                 if (Brightness != 0)
                 {
                     BrightnessCorrection filter = new BrightnessCorrection(Brightness);
@@ -66,15 +91,22 @@ namespace CameraControl.ViewModel
                         );
                     res = filter.Apply(res);
                 }
+
                 var _bitmap = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
                 DrawGrid(_bitmap);
-                double d = _bitmap.PixelWidth / (double)ZoomFactor;
-                double h = _bitmap.PixelHeight / (double)ZoomFactor;
-                _bitmap = _bitmap.Crop((int)(CentralPoint.X - (d / 2)), (int)(CentralPoint.Y - (h / 2)),
-                                                         (int)d, (int)h);
+
+                if (ZoomFactor > 1)
+                {
+                    double d = _bitmap.PixelWidth/(double) ZoomFactor;
+                    double h = _bitmap.PixelHeight/(double) ZoomFactor;
+                    _bitmap = _bitmap.Crop((int) (CentralPoint.X - (d/2)), (int) (CentralPoint.Y - (h/2)),
+                        (int) d, (int) h);
+                }
+
                 _bitmap.Freeze();
                 Bitmap = _bitmap;
             }
+
         }
 
         private void DrawGrid(WriteableBitmap bitmap)

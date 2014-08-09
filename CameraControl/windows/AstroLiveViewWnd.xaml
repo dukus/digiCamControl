@@ -80,8 +80,8 @@
         </StackPanel>
         
         
-        <StackPanel Grid.Column="2" Name="panel_preview" Margin="0,70,0,0">
-        <Image Name="img_preview" Stretch="Uniform"/>
+        <StackPanel Grid.Row="2" Grid.Column="2" Name="panel_preview" >
+        <Image Name="img_preview" Stretch="Uniform" Source="{Binding Preview}" MouseDown="img_preview_MouseDown" />
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>
