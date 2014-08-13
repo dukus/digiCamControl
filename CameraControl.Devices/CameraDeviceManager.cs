@@ -56,6 +56,7 @@ namespace CameraControl.Devices
         private DeviceDescriptorEnumerator _deviceEnumerator;
         private EosFramework _framework;
         private DdClient _client = new DdClient();
+        private object _locker = new object();
 
         public Dictionary<ICameraDevice, byte[]> LiveViewImage;
 
@@ -211,7 +212,7 @@ namespace CameraControl.Devices
 
         private void _framework_CameraAdded(object sender, EventArgs e)
         {
-            //AddCanonCameras();
+            AddCanonCameras();
         }
 
         public IEnumerable<EosCamera> GetEosCameras()
@@ -222,36 +223,39 @@ namespace CameraControl.Devices
 
         private void AddCanonCameras()
         {
-            foreach (EosCamera eosCamera in GetEosCameras())
+            lock (_locker)
             {
-                bool shouldbeadded = true;
-                foreach (ICameraDevice device in ConnectedDevices)
+                foreach (EosCamera eosCamera in GetEosCameras())
                 {
-                    CanonSDKBase camera = device as CanonSDKBase;
-                    if (camera != null)
+                    bool shouldbeadded = true;
+                    foreach (ICameraDevice device in ConnectedDevices)
                     {
-                        //if (camera.Camera.SerialNumber == eosCamera.SerialNumber)
-                        if (camera.Camera == eosCamera)
+                        CanonSDKBase camera = device as CanonSDKBase;
+                        if (camera != null)
                         {
-                            shouldbeadded = false;
-                            break;
+                            //if (camera.Camera.SerialNumber == eosCamera.SerialNumber)
+                            if (camera.Camera == eosCamera)
+                            {
+                                shouldbeadded = false;
+                                break;
+                            }
                         }
                     }
-                }
 
-                if (shouldbeadded)
-                {
-                    Log.Debug("New canon camera found !");
-                    CanonSDKBase camera = new CanonSDKBase();
-                    DeviceDescriptor descriptor = new DeviceDescriptor {EosCamera = eosCamera};
-                    descriptor.CameraDevice = camera;
-                    NewCameraConnected(camera);
-                    camera.Init(eosCamera);
-                    ConnectedDevices.Add(camera);
-                    _deviceEnumerator.Add(descriptor);
+                    if (shouldbeadded)
+                    {
+                        Log.Debug("New canon camera found !");
+                        CanonSDKBase camera = new CanonSDKBase();
+                        DeviceDescriptor descriptor = new DeviceDescriptor {EosCamera = eosCamera};
+                        descriptor.CameraDevice = camera;
+                        camera.Init(eosCamera);
+                        ConnectedDevices.Add(camera);
+                        _deviceEnumerator.Add(descriptor);
+                        NewCameraConnected(camera);
+                    }
                 }
+                //Thread.Sleep(2500);
             }
-            Thread.Sleep(2500);
         }
 
         private ICameraDevice GetWiaIDevice(IDeviceInfo devInfo)
@@ -318,9 +322,6 @@ namespace CameraControl.Devices
                 PortableDeviceCollection.Instance.AutoConnectToPortableDevice = false;
             }
             _deviceEnumerator.RemoveDisconnected();
-
-            if (UseExperimentalDrivers)
-                InitCanon();
 
             Log.Debug("Connection device start" );
             try
@@ -581,13 +582,13 @@ namespace CameraControl.Devices
             {
                 if (StartInNewThread)
                 {
-                    Thread _thread = new Thread(() => ConnectToCamera());
+                    Thread _thread = new Thread(() => ConnectToCamera(true));
                     _thread.SetApartmentState(ApartmentState.MTA);
                     _thread.Start();
                 }
                 else
                 {
-                    ConnectToCamera();                    
+                    ConnectToCamera(true);
                 }
             }
             else if (eventId == Conts.wiaEventDeviceDisconnected)
@@ -597,12 +598,10 @@ namespace CameraControl.Devices
         }
 
 
-        /// <summary>
-        /// Populate the ConnectedDevices list with connected cameras. This method will be called automatically every time new devices will be connected 
-        /// </summary>
-        /// <returns></returns>
         public bool ConnectToCamera()
         {
+            if (UseExperimentalDrivers)
+                InitCanon();
             return ConnectToCamera(true);
         }
 
@@ -613,6 +612,11 @@ namespace CameraControl.Devices
             SelectedCameraDevice = device;
         }
 
+        /// <summary>
+        /// Populate the ConnectedDevices list with connected cameras. This method will be called automatically every time new devices will be connected 
+        /// Except Canon cameras that is handled by framework event handler
+        /// </summary>
+        /// <returns></returns>
         public bool ConnectToCamera(bool retry)
         {
             if (DeviceClass == null || DeviceClass.Count == 0)

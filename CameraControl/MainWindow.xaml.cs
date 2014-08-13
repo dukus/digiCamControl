@@ -573,79 +573,10 @@ namespace CameraControl
             NewVersionWnd.CheckForUpdate(true);
         }
 
-        private void mnu_reconnect_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceProvider.DeviceManager.DisableNativeDrivers = ServiceProvider.Settings.DisableNativeDrivers;
-            ServiceProvider.DeviceManager.ConnectToCamera();
-        }
-
-        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
-        {
-            CameraPreset cameraPreset = new CameraPreset();
-            SavePresetWnd wnd = new SavePresetWnd(cameraPreset);
-            if (wnd.ShowDialog() == true)
-            {
-                foreach (CameraPreset preset in ServiceProvider.Settings.CameraPresets)
-                {
-                    if (preset.Name == cameraPreset.Name)
-                    {
-                        cameraPreset = preset;
-                        break;
-                    }
-                }
-                cameraPreset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
-                if (!ServiceProvider.Settings.CameraPresets.Contains(cameraPreset))
-                    ServiceProvider.Settings.CameraPresets.Add(cameraPreset);
-                ServiceProvider.Settings.Save();
-            }
-        }
-
-        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
-        {
-
-        }
-
 
         private void btn_browse_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BrowseWnd_Show);
-        }
-
-        private void btn_capture_noaf_Click(object sender, RoutedEventArgs e)
-        {
-            if (ServiceProvider.DeviceManager.SelectedCameraDevice == null)
-                return;
-
-            Log.Debug("Main window capture no af started");
-            try
-            {
-                if (ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed != null &&
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed.Value == "Bulb")
-                {
-                    if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.Bulb))
-                    {
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BulbWnd_Show,
-                                                                      ServiceProvider.DeviceManager.SelectedCameraDevice);
-                        return;
-                    }
-                    else
-                    {
-                        StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
-                        return;
-                    }
-                }
-                CameraHelper.CaptureNoAf(ServiceProvider.DeviceManager.SelectedCameraDevice);
-            }
-            catch (DeviceException exception)
-            {
-                StaticHelper.Instance.SystemMessage = exception.Message;
-                Log.Error("Take photo", exception);
-            }
-            catch (Exception exception)
-            {
-                StaticHelper.Instance.SystemMessage = exception.Message;
-                Log.Error("Take photo", exception);
-            }
         }
 
         private void SetLayout(string enumname)
