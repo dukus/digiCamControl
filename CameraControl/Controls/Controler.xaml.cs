@@ -72,32 +72,39 @@ namespace CameraControl.Controls
 
         private void RefreshItems()
         {
-            if (ServiceProvider.Settings == null)
-                return;
-            if (ServiceProvider.DeviceManager.SelectedCameraDevice == null)
-                return;
-            CameraProperty property =
-                ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
-            cmb_transfer.Items.Clear();
-            if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+            try
             {
-                cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem1);
-                cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem2);
-                cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem3);
-                if (ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam)
-                    cmb_transfer.SelectedItem = TranslationStrings.LabelTransferItem1;
-                else if (!ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam && property.NoDownload)
-                    cmb_transfer.SelectedItem = TranslationStrings.LabelTransferItem2;
+                if (ServiceProvider.Settings == null)
+                    return;
+                if (ServiceProvider.DeviceManager.SelectedCameraDevice == null)
+                    return;
+                CameraProperty property =
+                    ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                cmb_transfer.Items.Clear();
+                if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+                {
+                    cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem1);
+                    cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem2);
+                    cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem3);
+                    if (ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam)
+                        cmb_transfer.SelectedItem = TranslationStrings.LabelTransferItem1;
+                    else if (!ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam && property.NoDownload)
+                        cmb_transfer.SelectedItem = TranslationStrings.LabelTransferItem2;
+                    else
+                        cmb_transfer.SelectedItem = TranslationStrings.LabelTransferItem3;
+                }
                 else
-                    cmb_transfer.SelectedItem = TranslationStrings.LabelTransferItem3;
+                {
+                    cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem2);
+                    cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem3);
+                    cmb_transfer.SelectedItem = property.NoDownload
+                                                    ? TranslationStrings.LabelTransferItem2
+                                                    : TranslationStrings.LabelTransferItem3;
+                }
             }
-            else
+            catch (Exception e)
             {
-                cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem2);
-                cmb_transfer.Items.Add(TranslationStrings.LabelTransferItem3);
-                cmb_transfer.SelectedItem = property.NoDownload
-                                                ? TranslationStrings.LabelTransferItem2
-                                                : TranslationStrings.LabelTransferItem3;
+                Log.Error("Error relod list ", e);
             }
         }
 

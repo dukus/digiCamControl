@@ -30,10 +30,13 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Application = System.Windows.Application;
 
 #endregion
 
@@ -93,6 +96,9 @@ namespace CameraControl.Core.Classes
         private static IntPtr HookCallback(
             int nCode, IntPtr wParam, IntPtr lParam)
         {
+            Console.WriteLine();
+            if (!Application.Current.Windows.Cast<Window>().Any((x) => x.IsActive))
+                return CallNextHookEx(_hookID, nCode, wParam, lParam);
             if (nCode >= 0 && (wParam == (IntPtr) WM_KEYDOWN || wParam == (IntPtr) WM_SYSKEYDOWN))
             {
                 int vkCode = Marshal.ReadInt32(lParam);
