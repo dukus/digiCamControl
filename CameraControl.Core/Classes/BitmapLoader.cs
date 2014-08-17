@@ -117,22 +117,48 @@ namespace CameraControl.Core.Classes
 
         public void GenerateCache(FileItem fileItem)
         {
+            bool deleteFile = false;
             if (fileItem == null)
                 return;
             if (!File.Exists(fileItem.FileName))
                 return;
+            
+            if ((File.Exists(fileItem.LargeThumb) && File.Exists(fileItem.SmallThumb)) && File.Exists(fileItem.InfoFile))
+                return;
+
             string filename = fileItem.FileName;
             if (fileItem.IsRaw)
             {
-                string s = Path.Combine(Path.GetFullPath(fileItem.FileName),
+                string s = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
                                         Path.GetFileNameWithoutExtension(fileItem.FileName) + ".jpg");
                 if (File.Exists(s))
                 {
                     filename = s;
                 }
+                else
+                {
+                    try
+                    {
+                        string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
+                        if (File.Exists(dcraw_exe))
+                        {
+                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e {0}", fileItem.FileName));
+                            string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
+                                        Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
+                            if (File.Exists(thumb))
+                            {
+                                deleteFile = true;
+                                filename = thumb;
+                            }
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Error get dcraw thumb", exception);
+                    }
+                }
             }
-            if ((File.Exists(fileItem.LargeThumb) && File.Exists(fileItem.SmallThumb)) && File.Exists(fileItem.InfoFile))
-                return;
+
             GetMetadata(fileItem);
             try
             {
@@ -181,6 +207,8 @@ namespace CameraControl.Core.Classes
                     fileItem.Thumbnail = LoadSmallImage(fileItem);
                     fileItem.IsLoaded = true;
                     fileItem.SaveInfo();
+                    if (deleteFile)
+                        File.Delete(filename);
                 }
             }
             catch (Exception exception)
