@@ -27,32 +27,41 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="150*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="113*" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="134*" />
-            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="178*" />
+            <ColumnDefinition Width="197*" />
         </Grid.ColumnDefinitions>
-        <Label Content="{T:TranslateExtension LabelTagDisplayValue}" Grid.Column="1" Grid.Row="1" />
-        <Label Content="{T:TranslateExtension LabelTagValue}" Grid.Column="1" Grid.Row="2" />
-        <TextBox Grid.Column="3" Grid.Row="1" Margin="2" Text="{Binding Path=DisplayValue}"/>
-        <TextBox Grid.Column="3" Grid.Row="2" Margin="2" Text="{Binding Path=Value}"/>
-        <CheckBox Content="{T:TranslateExtension LabelTagIncludeInGroup1}" Grid.Column="1" Grid.Row="3" Margin="3" IsChecked="{Binding Path=Tag1Checked}"/>
-        <CheckBox Content="{T:TranslateExtension LabelTagIncludeInGroup2}" Grid.Column="1" Grid.Row="4" Margin="3" IsChecked="{Binding Path=Tag2Checked}"/>
-        <CheckBox Content="{T:TranslateExtension LabelTagIncludeInGroup3}" Grid.Column="1" Grid.Row="5" Margin="3" IsChecked="{Binding Path=Tag3Checked}"/>
-        <CheckBox Content="{T:TranslateExtension LabelTagIncludeInGroup4}" Grid.Column="1" Grid.Row="6" Margin="3" IsChecked="{Binding Path=Tag4Checked}"/>
-        <Button Content="{T:TranslateExtension ButtonSave}" Grid.Column="1" Grid.Row="7" Height="23" HorizontalAlignment="Left" Margin="3,5,0,0" Name="btn_save" VerticalAlignment="Top" Width="75" Click="btn_save_Click" />
-        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Column="3" Grid.Row="7" Height="23" HorizontalAlignment="Right" Margin="0,5,2,0" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />
+        
+        <Label Content="{T:TranslateExtension LabelTagDisplayValue}" Grid.Row="1" Margin="2" HorizontalContentAlignment="Right"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=DisplayValue}" Margin="2" />
+
+        <Label Content="{T:TranslateExtension LabelTagValue}" Grid.Row="2" Margin="2" HorizontalContentAlignment="Right" />
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding Path=Value}" />
+
+        <Label Grid.Column="0" Grid.Row="3" Content="{T:TranslateExtension LabelTagIncludeInGroup1}" Margin="2" HorizontalContentAlignment="Right" />
+        <CheckBox Grid.Column="1"  Grid.Row="3" Margin="2" IsChecked="{Binding Path=Tag1Checked}"/>
+
+        <Label Grid.Column="0" Grid.Row="4" Content="{T:TranslateExtension LabelTagIncludeInGroup2}" Margin="2" HorizontalContentAlignment="Right" />
+        <CheckBox Grid.Column="1" Grid.Row="4" Margin="2" IsChecked="{Binding Path=Tag2Checked}"/>
+
+        <Label Grid.Column="0" Grid.Row="5" Content="{T:TranslateExtension LabelTagIncludeInGroup3}" Margin="2" HorizontalContentAlignment="Right" />
+        <CheckBox Grid.Column="1" Grid.Row="5" Margin="2" IsChecked="{Binding Path=Tag3Checked}"/>
+
+        <Label Grid.Column="0" Grid.Row="6" Content="{T:TranslateExtension LabelTagIncludeInGroup4}" Margin="2" HorizontalContentAlignment="Right" />
+        <CheckBox Grid.Column="1" Grid.Row="6" Margin="2" IsChecked="{Binding Path=Tag4Checked}"/>
+        
+        <Button Content="{T:TranslateExtension ButtonSave}" Grid.Row="8" Height="23" HorizontalAlignment="Left" Margin="3" Name="btn_save" VerticalAlignment="Top" Width="75" Click="btn_save_Click" />
+        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Column="1" Grid.Row="8" Height="23" HorizontalAlignment="Right" Margin="3" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />
     </Grid>
 </Controls:MetroWindow>
