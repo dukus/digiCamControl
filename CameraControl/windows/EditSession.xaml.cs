@@ -123,5 +123,12 @@ namespace CameraControl.windows
                 Session.BackUpPath = dialog.SelectedPath;
             }
         }
+
+        private void btn_template_Click(object sender, RoutedEventArgs e)
+        {
+            var wnd = new FileNameTemplateEditorWnd();
+            wnd.ShowDialog();
+        }
+
     }
 }

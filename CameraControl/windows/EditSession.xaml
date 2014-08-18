@@ -81,6 +81,7 @@
 
                     <Label Grid.Row="4" Grid.Column="0" Content="{T:TranslateExtension LabelFileNameTemplate}" HorizontalContentAlignment="Right" />
                     <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=FileNameTemplate}" ToolTip="{T:TranslateExtension LabelFileNameTemplateToolTip}" Margin="2"/>
+                    <Button Grid.Row="4" Grid.Column="2" Name="btn_template" Content=" ... " Width="40" Click="btn_template_Click" HorizontalAlignment="Left" Margin="2"/>
 
                     <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelCounter}" HorizontalContentAlignment="Right" />
                     <Controls:NumericUpDown  Grid.Row="5" Grid.Column="1" Value="{Binding Path=Counter}" Minimum="0" Margin="2"/>

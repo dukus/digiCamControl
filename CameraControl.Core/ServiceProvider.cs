@@ -61,6 +61,7 @@ namespace CameraControl.Core
         public static PluginManager PluginManager { get; set; }
         public static Branding Branding { get; set; }
         public static ScriptManager ScriptManager { get; set; }
+        public static FilenameTemplateManager FilenameTemplateManager { get; set; }
         public static ExternalDeviceManager ExternalDeviceManager { get; set; }
         public static string LogFile = Path.Combine(Settings.DataFolder, "Log", "app.log");
 
@@ -90,6 +91,7 @@ namespace CameraControl.Core
             Branding = new Branding();
             ScriptManager = new ScriptManager();
             PluginManager = new PluginManager();
+            FilenameTemplateManager = new FilenameTemplateManager();
             _pipeServer = new PipeServerT();
             _pipeServer.Listen("DCCPipe");
         }

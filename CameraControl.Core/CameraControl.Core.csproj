@@ -203,6 +203,8 @@
     <Compile Include="Classes\CustomConfig.cs" />
     <Compile Include="Classes\FileInfo.cs" />
     <Compile Include="Classes\FileItem.cs" />
+    <Compile Include="Classes\FilenameTemplate.cs" />
+    <Compile Include="Classes\FilenameTemplateManager.cs" />
     <Compile Include="Classes\LiveviewSettings.cs" />
     <Compile Include="Classes\MessageEventArgs.cs" />
     <Compile Include="Classes\PhotoSession.cs" />
@@ -222,6 +224,7 @@
     <Compile Include="Classes\WindowsCmdConsts.cs" />
     <Compile Include="Interfaces\IExportPlugin.cs" />
     <Compile Include="Interfaces\IExternalDevice.cs" />
+    <Compile Include="Interfaces\IFilenameTemplate.cs" />
     <Compile Include="Interfaces\IMainWindowPlugin.cs" />
     <Compile Include="Interfaces\IPlugin.cs" />
     <Compile Include="Classes\ActionEventArgs.cs" />
