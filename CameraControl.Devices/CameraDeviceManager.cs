@@ -351,6 +351,10 @@ namespace CameraControl.Devices
 
                         cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
                         cameraDevice.Init(descriptor);
+                        
+                        if (string.IsNullOrWhiteSpace(cameraDevice.SerialNumber))
+                            cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+
                         ConnectedDevices.Add(cameraDevice);
                         NewCameraConnected(cameraDevice);
 
