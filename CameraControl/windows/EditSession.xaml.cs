@@ -104,7 +104,7 @@ namespace CameraControl.windows
             TagItem item = lst_tags.SelectedItem as TagItem;
             if (item != null)
             {
-                EditTagWnd wnd = new EditTagWnd(item);
+                var wnd = new EditTagWnd(item);
                 wnd.ShowDialog();
             }
         }
@@ -127,7 +127,11 @@ namespace CameraControl.windows
         private void btn_template_Click(object sender, RoutedEventArgs e)
         {
             var wnd = new FileNameTemplateEditorWnd();
-            wnd.ShowDialog();
+            wnd.TemplateString = Session.FileNameTemplate;
+            if (wnd.ShowDialog() == true)
+            {
+                Session.FileNameTemplate = wnd.TemplateString;
+            }
         }
 
     }

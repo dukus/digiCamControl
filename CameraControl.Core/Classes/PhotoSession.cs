@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
@@ -456,39 +457,29 @@ namespace CameraControl.Core.Classes
         {
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(device);
             string res = FileNameTemplate;
-            if (!res.Contains("$C") && !AllowOverWrite)
-                res += "$C";
+            // the template should contain a counter type tag
+            if (!res.Contains("[Counter") && !AllowOverWrite)
+                res += "[Counter 4 digit]";
 
-            if (UseCameraCounter)
+            if (incremetCounter)
             {
-                if (incremetCounter)
-                    property.Counter = property.Counter + property.CounterInc;
-                res = res.Replace("$C", property.Counter.ToString(new string('0', LeadingZeros)));
+                property.Counter = property.Counter + property.CounterInc;
+                Counter++;
             }
-            else
+
+         
+            Regex regPattern = new Regex(@"\[(.*?)\]",RegexOptions.Singleline);
+            MatchCollection matchX = regPattern.Matches(res);
+            foreach (Match match in matchX)
             {
-                if (incremetCounter)
-                    Counter++;
-                res = res.Replace("$C", Counter.ToString(new string('0', LeadingZeros)));
+                if (ServiceProvider.FilenameTemplateManager.Templates.ContainsKey(match.Value))
+                {
+                    res = res.Replace(match.Value,
+                        ServiceProvider.FilenameTemplateManager.Templates[match.Value].Pharse(match.Value, this, device,
+                            ext));
+                }
             }
-            res = res.Replace("$N", Name.Trim());
-            if (device.ExposureCompensation != null)
-                res = res.Replace("$E",
-                                  device.ExposureCompensation.Value != "0" ? device.ExposureCompensation.Value : "");
-            res = res.Replace("$D", DateTime.Now.ToString("yyyy-MM-dd"));
-            res = res.Replace("$B", Barcode ?? "");
 
-            var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTime.Now.Kind);
-            var unixTimestamp = System.Convert.ToInt64((DateTime.Now - date).TotalSeconds);
-            res = res.Replace("$UTime", unixTimestamp.ToString());
-
-            res = res.Replace("$Type", GetType(ext));
-
-            res = res.Replace("$X", property.DeviceName.Replace(":", "_").Replace("?", "_").Replace("*", "_"));
-            res = res.Replace("$Tag1", SelectedTag1 != null ? SelectedTag1.Value.Trim() : "");
-            res = res.Replace("$Tag2", SelectedTag1 != null ? SelectedTag2.Value.Trim() : "");
-            res = res.Replace("$Tag3", SelectedTag1 != null ? SelectedTag3.Value.Trim() : "");
-            res = res.Replace("$Tag4", SelectedTag1 != null ? SelectedTag4.Value.Trim() : "");
             //prevent multiple \ if a tag is empty 
             while (res.Contains(@"\\"))
             {
@@ -500,24 +491,7 @@ namespace CameraControl.Core.Classes
             return res;
         }
 
-        private string GetType(string ext)
-        {
-            if (ext.StartsWith("."))
-                ext = ext.Substring(1);
-            switch (ext.ToLower())
-            {
-                case "jpg":
-                    return "Jpg";
-                case "nef":
-                    return "Raw";
-                case "cr2":
-                    return "Raw";
-                case "tif":
-                    return "Tif";
-            }
-            return ext;
-        }
-
+ 
         public FileItem AddFile(string fileName)
         {
             FileItem oitem = GetFile(fileName);

@@ -899,6 +899,20 @@ namespace CameraControl.Core.Classes
                     photoSession = (PhotoSession) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                     photoSession.ConfigFile = filename;
+                    // upgrade to new fie template
+                    var s = photoSession.FileNameTemplate;
+                    s = s.Replace("$C", "[Counter 4 digit]");
+                    s = s.Replace("$N", "[Session Name]");
+                    s = s.Replace("$E", "[Exposure Compensation]");
+                    s = s.Replace("$D", "[Date yyyy-MM-dd]");
+                    s = s.Replace("$B", "[Barcode]");
+                    s = s.Replace("$Type", "[File format]");
+                    s = s.Replace("$X", "[Camera Name]");
+                    s = s.Replace("$Tag1", "[Selected Tag1]");
+                    s = s.Replace("$Tag2", "[Selected Tag2]");
+                    s = s.Replace("$Tag3", "[Selected Tag3]");
+                    s = s.Replace("$Tag4", "[Selected Tag4]");
+                    photoSession.FileNameTemplate = s;
                 }
             }
             catch (Exception e)

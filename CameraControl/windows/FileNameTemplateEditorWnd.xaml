@@ -4,7 +4,7 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-        Title="File Name Template Editor" Height="364" Width="591" Topmost="True" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False">
+        Title="File Name Template Editor" Height="600" Width="600" Topmost="True" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" xmlns:my="clr-namespace:CameraControl.windows" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,18 +14,20 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="29*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="40*" />
             <RowDefinition Height="193*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Content="{translation:TranslateExtension LabelFileNameTemplate}"/>
-        <TextBox Grid.Row="1"  Margin="3"/>
+        
+        <TextBox Grid.Row="1" Margin="3" Name="txt_templateName" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=TemplateString}"/>
+        
         <ListBox Grid.Row="3" Margin="3" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.FilenameTemplateManager}, Path=Values}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding}" Margin="0,3,3,3"/>
+                    <Button Content="{Binding}" Margin="0,3,3,3" Click="Button_Click" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemsPanel>
@@ -35,7 +37,7 @@
             </ListBox.ItemsPanel>
         </ListBox>
        
-        <Button Content="{translation:TranslateExtension ButtonOk}" Grid.Row="4" HorizontalAlignment="Left" Margin="3" Name="btn_ok" VerticalAlignment="Top" Width="75" />
-        <Button Content="{translation:TranslateExtension ButtonCancel}" Grid.Row="4"  HorizontalAlignment="Right" Margin="3" Name="btn_cancel" VerticalAlignment="Top" Width="75" />
+        <Button Content="{translation:TranslateExtension ButtonOk}" Grid.Row="4" HorizontalAlignment="Left" Margin="3" Name="btn_ok" VerticalAlignment="Top" Width="75" Click="btn_ok_Click" />
+        <Button Content="{translation:TranslateExtension ButtonCancel}" Grid.Row="4"  HorizontalAlignment="Right" Margin="3" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />
     </Grid>
 </controls:MetroWindow>
