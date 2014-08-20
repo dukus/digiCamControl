@@ -85,19 +85,11 @@
 
                     <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelCounter}" HorizontalContentAlignment="Right" />
                     <Controls:NumericUpDown  Grid.Row="5" Grid.Column="1" Value="{Binding Path=Counter}" Minimum="0" Margin="2"/>
-
-                    <Label Grid.Row="6" Grid.Column="0" Content="{T:TranslateExtension LabelLeadingZeros}" HorizontalContentAlignment="Right" />
-                    <Controls:NumericUpDown Grid.Row="6" Grid.Column="1" Value="{Binding Path=LeadingZeros}" Minimum="1" Maximum="10" Margin="2"/>
-
                     <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelUseOriginal}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="7" Grid.Column="1" ToolTip="{T:TranslateExtension LabelUseOriginalToolTip}" IsChecked="{Binding Path=UseOriginalFilename}" Margin="2" />
 
                     <Label Grid.Row="8" Grid.Column="0" Content="{T:TranslateExtension LabelAlowFolderChange}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding Path=AlowFolderChange}" Margin="2" />
-
-                    <Label Grid.Row="9" Grid.Column="0" Content="{T:TranslateExtension LabelUseCameraCounter}" HorizontalContentAlignment="Right" />
-                    <CheckBox Grid.Row="9" Grid.Column="1" ToolTip="" IsChecked="{Binding Path=UseCameraCounter}" Margin="2"/>
-
                     <Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelDownloadJpgOnly}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="10" Grid.Column="1" ToolTip="{T:TranslateExtension LabelDownloadJpgOnlyToolTip}" IsChecked="{Binding Path=DownloadOnlyJpg}" Margin="2" />
 

@@ -22,6 +22,8 @@ namespace CameraControl.Core.Classes
                 case "[Counter 8 digit]":
                 case "[Counter 9 digit]":
                     return session.Counter.ToString(new string('0', Convert.ToInt16(template.Substring(9, 1))));
+                case "[Series 4 digit]":
+                    return session.Series.ToString(new string('0', 4));
                 case "[Camera Counter 3 digit]":
                 case "[Camera Counter 4 digit]":
                 case "[Camera Counter 5 digit]":
@@ -32,12 +34,24 @@ namespace CameraControl.Core.Classes
                     return property.Counter.ToString(new string('0', Convert.ToInt16(template.Substring(16, 1))));
                 case "[Session Name]":
                     return session.Name;
-                case "[Exposure Compensati":
-                    if (device.ExposureCompensation != null)
+                case "[Capture Name]":
+                    return session.CaptureName;
+                case "[Exposure Compensation]":
+                    if (device!=null && device.ExposureCompensation != null)
                         return device.ExposureCompensation.Value != "0" ? device.ExposureCompensation.Value : "";
+                    return "";
+                case "[FNumber]":
+                    if (device != null && device.FNumber != null)
+                        return device.FNumber.Value ?? "";
                     return "";
                 case "[Date yyyy-MM-dd]":
                     return DateTime.Now.ToString("yyyy-MM-dd");
+                case "[Date yyyy]":
+                    return DateTime.Now.ToString("yyyy");
+                case "[Date yyyy-MM]":
+                    return DateTime.Now.ToString("yyyy-MM");
+                case "[Date MMM]":
+                    return DateTime.Now.ToString("MMM");
                 case "[Barcode]":
                     return session.Barcode;
                 case "[File format]":

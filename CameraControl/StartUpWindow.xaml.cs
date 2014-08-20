@@ -120,7 +120,7 @@ namespace CameraControl
                                                         {
                                                             new CmdFocusStackingCombineZP(),
                                                             new CmdEnfuse(),
-                                                            new CmdToJpg(),
+                                                           // new CmdToJpg(),
                                                             //new CmdExpJpg()
                                                         };
 

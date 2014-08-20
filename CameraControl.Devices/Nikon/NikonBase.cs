@@ -366,6 +366,7 @@ namespace CameraControl.Devices.Nikon
                 CaptureInSdRam = true;
                 PropertyChanged += NikonBase_PropertyChanged;
                 var ser = StillImageDevice.SerialNumber;
+                Log.Debug("Serial number" + ser ?? "");
                 if (ser != null && ser.Length >= 7)
                 {
                     SerialNumber = StillImageDevice.SerialNumber.Substring(0, 7);

@@ -64,6 +64,26 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string CaptureName
+        {
+            get { return _captureName; }
+            set
+            {
+                _captureName = value;
+                NotifyPropertyChanged("CaptureName");
+            }
+        }
+
+        public int Series
+        {
+            get { return _series; }
+            set
+            {
+                _series = value;
+                NotifyPropertyChanged("Series");
+            }
+        }
+
         private bool _alowFolderChange;
 
         public bool AlowFolderChange
@@ -354,6 +374,7 @@ namespace CameraControl.Core.Classes
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
 
             Name = "Default";
+            CaptureName = "Capture";
             Braketing = new BraketingClass();
             try
             {
@@ -416,6 +437,8 @@ namespace CameraControl.Core.Classes
         private bool _allowOverWrite;
         private string _backUpPath;
         private bool _backUp;
+        private string _captureName;
+        private int _series;
 
         public bool AllowOverWrite
         {

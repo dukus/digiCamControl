@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CameraControl.Core;
+using CameraControl.Devices.Others;
 using GalaSoft.MvvmLight.Command;
 
 namespace CameraControl.windows
@@ -29,6 +31,23 @@ namespace CameraControl.windows
             {
                 _templateString = value;
                 NotifyPropertyChanged("TemplateString");
+                NotifyPropertyChanged("ExampleTemplateString");
+            }
+        }
+
+        public string ExampleTemplateString
+        {
+            get
+            {
+                try
+                {
+                    return ServiceProvider.FilenameTemplateManager.GetExample(TemplateString, ServiceProvider.Settings.DefaultSession, ServiceProvider.DeviceManager.SelectedCameraDevice ?? new FakeCameraDevice(), "filename.jpg");
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+                return "";
             }
         }
 
@@ -71,6 +90,7 @@ namespace CameraControl.windows
                     txt_templateName.SelectionLength = 0;
                 }
                 txt_templateName.Focus();
+                NotifyPropertyChanged("ExampleTemplateString");
             }
         }
 

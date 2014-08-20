@@ -487,5 +487,8 @@ namespace CameraControl.Core.Translation
         public static string LabelRefreshSession = "Refresh file list";
         public static string LabelErrorEmail = "Your email address (if you want get feedback)";
         public static string LabelApertureBracketing = "Aperture bracketing ";
+        //20/08/2014
+        public static string LabelCaptureName = "Capture Name";
+        public static string LabelSeries = "Series";
     }
 }
