@@ -386,7 +386,7 @@ namespace CameraControl.Core.Classes
                 Folder = "c:\\";
             }
             Files = new AsyncObservableCollection<FileItem>();
-            FileNameTemplate = "DSC_$C";
+            FileNameTemplate = "DSC_[Counter 4 digit]";
             TimeLapse = new TimeLapseClass();
             
             UseOriginalFilename = false;
