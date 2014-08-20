@@ -70,7 +70,7 @@
                 this.SecondaryImageSize, this.SecondaryImageFormat, this.SecondaryCompressLevel);
         }
 
-        internal static EosImageQuality Create(long bitMask)
+        public static EosImageQuality Create(long bitMask)
         {
             var quality = new EosImageQuality { 
                 PrimaryImageSize = (EosImageSize)((bitMask >> 24) & 0xFF),
@@ -83,7 +83,7 @@
             return quality;
         }
 
-        internal long ToBitMask()
+        public long ToBitMask()
         {
             return (uint)this.PrimaryImageSize << 24 |
                    (uint)this.PrimaryImageFormat << 20 |

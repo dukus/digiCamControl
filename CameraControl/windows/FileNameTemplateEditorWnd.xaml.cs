@@ -75,7 +75,7 @@ namespace CameraControl.windows
             Button s = sender as Button;
             if (s != null)
             {
-                var text = (string) s.Content;
+                var text = "_" + (string) s.Content;
                 if (txt_templateName.SelectionLength > 0)
                 {
                     txt_templateName.SelectedText = text;
