@@ -477,7 +477,7 @@ namespace CameraControl.Devices.Nikon
         {
             PropertyValue<long> res = new PropertyValue<long>()
             {
-                Name = "Fluorescent light type",
+                Name = "Temperature",
                 IsEnabled = WhiteBalance.NumericValue == 32786,
                 Code = CONST_PROP_WbColorTemp,
                 SubType = typeof (byte),

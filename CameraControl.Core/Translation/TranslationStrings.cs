@@ -490,5 +490,6 @@ namespace CameraControl.Core.Translation
         //20/08/2014
         public static string LabelCaptureName = "Capture Name";
         public static string LabelSeries = "Series";
+        public static string LabelAdvancedProperties = "Advanced Properties";
     }
 }

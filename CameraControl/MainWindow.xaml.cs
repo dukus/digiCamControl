@@ -693,11 +693,6 @@ namespace CameraControl
             PhotoUtils.Run("http://www.digicamcontrol.com/forum/", "");
         }
 
-        private void btn_getRaw_Click(object sender, RoutedEventArgs e)
-        {
-            PhotoUtils.Run("http://www.microsoft.com/en-us/download/details.aspx?id=26829", "");
-        }
-
         private void btn_donate_Click(object sender, RoutedEventArgs e)
         {
             PhotoUtils.Donate();

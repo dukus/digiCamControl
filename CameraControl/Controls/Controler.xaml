@@ -21,12 +21,18 @@
         <T:TranslateConverter x:Key="converter" />
     </UserControl.Resources>
     <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="115" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+            <Grid >
         <ScrollViewer VerticalScrollBarVisibility="Auto" >
-            <WrapPanel  HorizontalAlignment="Left"  Name="wrapPanel1" VerticalAlignment="Top" ItemWidth="100" >
+            <StackPanel  HorizontalAlignment="Left"  Name="wrapPanel1" VerticalAlignment="Top" >
                 <StackPanel>
                     <my:ExposureStatusControl x:Name="exposureStatusControl1" ExposureStatus="{Binding Path=SelectedCameraDevice.ExposureStatus, Mode=TwoWay}" />
                 </StackPanel>
@@ -105,42 +111,58 @@
                         </ComboBox>
                     </Border>
                 </StackPanel>
-                <StackPanel Margin="1">
-                    <Label Content="{T:TranslateExtension Battery}"  />
-                    <ProgressBar Minimum="0" Maximum="100" Height="20" Value="{Binding Path=SelectedCameraDevice.Battery}" ToolTip="{Binding Path=SelectedCameraDevice.Battery}" Style="{x:Null}" />
-                </StackPanel>
-                <StackPanel Margin="1">
-                    <Label Content="{T:TranslateExtension LabelTransfer}"  />
-                    <ComboBox Name="cmb_transfer" SelectionChanged="cmb_transfer_SelectionChanged" ToolTip="{Binding ElementName=cmb_transfer, Path=SelectedItem}">
-                        <!--<ComboBox.ItemTemplate>
+            </StackPanel>
+        </ScrollViewer>
+            </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <StackPanel Margin="1" >
+                <Label Content="{T:TranslateExtension Battery}"  Padding="1"/>
+                <ProgressBar Minimum="0" Maximum="100" Height="20" Value="{Binding Path=SelectedCameraDevice.Battery}" ToolTip="{Binding Path=SelectedCameraDevice.Battery}" Style="{x:Null}" />
+            </StackPanel>
+            <StackPanel Margin="1" Grid.RowSpan="2">
+                <Label Content="{T:TranslateExtension LabelTransfer}" Padding="1" />
+                <ComboBox Name="cmb_transfer" SelectionChanged="cmb_transfer_SelectionChanged" ToolTip="{Binding ElementName=cmb_transfer, Path=SelectedItem}" Margin="2">
+                    <!--<ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding Converter={StaticResource converter}}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>-->
-                    </ComboBox>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="1" Orientation="Vertical" Grid.RowSpan="2">
+                <Button Content="{T:TranslateExtension LabelUseAsMaster}" Click="Button_Click" Name="btn_useasmaster" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+                    <Button Height="23" Name="button1" Width="25" Click="button1_Click" Margin="2">
+                        <Button.Content>
+                            <Image Source="/CameraControl;component/Images/Properties.png" />
+                        </Button.Content>
+                    </Button>
+                    <Button Content="Date" ToolTip="Sync camera date and time"  Name="btn_dateTime" Margin="2" Click="btn_dateTime_Click" />
                 </StackPanel>
-                <StackPanel Margin="1" Orientation="Vertical">
-                    <Button Content="{T:TranslateExtension LabelUseAsMaster}" Click="Button_Click" Name="btn_useasmaster" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Height="23" Name="button1" Width="25" Click="button1_Click" Margin="2">
-                            <Button.Content>
-                                <Image Source="/CameraControl;component/Images/Properties.png" />
-                            </Button.Content>
-                        </Button>
-                        <Button Content="Date" ToolTip="Sync camera date and time"  Name="btn_dateTime" Margin="2" Click="btn_dateTime_Click" />
-                    </StackPanel>
-                </StackPanel>
-            </WrapPanel>
-        </ScrollViewer>
-        <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0,0,0,3">
+            </StackPanel>
+        </StackPanel>
+        <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0,0,0,3" Grid.RowSpan="2">
+            <Expander.Header>
+                <Label Content="{T:TranslateExtension LabelAdvancedProperties}" Padding="0">
+                    <Label.LayoutTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <TransformCollection>
+                                    <RotateTransform Angle="90" />
+                                </TransformCollection>
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Label.LayoutTransform>
+                </Label>
+            </Expander.Header>
             <Grid>
                 <ListBox Name="listBox1" ItemsSource="{Binding Path=SelectedCameraDevice.AdvancedProperties}" HorizontalAlignment="Left">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="2" >
-                                <Label Content="{Binding Path=Name, Converter={StaticResource converter}}"/>
+                                <Label Content="{Binding Path=Name, Converter={StaticResource converter}}" Padding="1"/>
                                 <Border BorderThickness="1" BorderBrush="{Binding Path=ErrorColor}" >
-                                    <ComboBox IsEnabled="{Binding Path=IsEnabled}" ItemsSource="{Binding Path=Values}" SelectedValue="{Binding Path=Value}" Margin="3" Width="125">
+                                    <ComboBox IsEnabled="{Binding Path=IsEnabled}" ItemsSource="{Binding Path=Values}" SelectedValue="{Binding Path=Value}" Margin="2" Width="125">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Label Content="{Binding Converter={StaticResource converter}}"/>

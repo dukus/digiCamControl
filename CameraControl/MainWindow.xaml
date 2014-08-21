@@ -51,54 +51,6 @@
                 </StackPanel>
             </Controls:Flyout>
             <Controls:Flyout Header="{T:TranslateExtension MenuConnectedCameras}" Background="#9f000000" Position="Left" Opacity="0.9">
-                <Grid Width="210" Height="{Binding ElementName=Window,Path=Height}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="70" />
-                    </Grid.RowDefinitions>
-                    <StackPanel>
-                        <Button Content="{T:TranslateExtension MenuMultipleCamera}" Click="Button_Click" Margin="3"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Height="30" Name="btn_sort" Width="30" Click="btn_sort_Click">
-                                <Button.Content>
-                                    <Rectangle Width="18" Height="18">
-                                        <Rectangle.Fill>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_sort_alphabetical_ascending}" />
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                </Button.Content>
-                            </Button>
-                            <Button Height="30" Name="btn_sort_desc" Width="30" Click="btn_sort_desc_Click">
-                                <Button.Content>
-                                    <Rectangle Width="18" Height="18">
-                                        <Rectangle.Fill>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_sort_alphabetical_descending}" />
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                </Button.Content>
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Visible" Margin="0" Grid.Row="1">
-                        <StackPanel >
-                            <StackPanel.ScrollOwner>
-                                <ScrollViewer />
-                            </StackPanel.ScrollOwner>
-
-                            <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <local:CameraItem CameraDevice="{Binding Path=.}"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </ScrollViewer>
-                    <StackPanel Height="70" Grid.Row="2">
-
-                    </StackPanel>
-                </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
@@ -125,18 +77,13 @@
             <!--<Controls:ProgressRing IsActive="True" Height="184" Width="214" IsLarge="False" />-->
         </Grid>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0">
-            <Label Content="Model:" />
-            <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
-        </StackPanel>
-
-
-
         <Controls:MetroContentControl Grid.ColumnSpan="4" Name="toolBar1">
             <WrapPanel >
                 <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Height="50" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}">
                     <Image Margin="5" Source="/CameraControl;component/Images/Camera.png"/>
                 </Button>
+                <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-55,5,5,5" Height="50" Width="50" />
+
                 <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="50" Name="but_download" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -191,10 +138,67 @@
                 <StackPanel HorizontalAlignment="Right" IsEnabled="{Binding Path=DefaultSession.TimeLapse.IsDisabled}"></StackPanel>
             </WrapPanel>
         </Controls:MetroContentControl>
-        <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Grid.Row="1"  Margin="3"/>
+        <StackPanel Grid.Row="1" Grid.RowSpan="3" Orientation="Horizontal">
+            <Expander ExpandDirection="Right">
+                <Expander.Header>
+                    <Label Content="{T:TranslateExtension LabelConnectedCameras}" Padding="0">
+                        <Label.LayoutTransform>
+                            <TransformGroup>
+                                <TransformGroup.Children>
+                                    <TransformCollection>
+                                        <RotateTransform Angle="90" />
+                                    </TransformCollection>
+                                </TransformGroup.Children>
+                            </TransformGroup>
+                        </Label.LayoutTransform>
+                    </Label>
+                </Expander.Header>
+                <Grid Width="210" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Height="40" Name="btn_sort" Width="40" Click="btn_sort_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                                <Button.Content>
+                                    <Rectangle Width="18" Height="18">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_sort_alphabetical_ascending}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                            <Button Height="40" Name="btn_sort_desc" Width="40" Click="btn_sort_desc_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                                <Button.Content>
+                                    <Rectangle Width="18" Height="18">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_sort_alphabetical_descending}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" Margin="0" Grid.Row="1">
+                        <StackPanel >
+                            <StackPanel.ScrollOwner>
+                                <ScrollViewer />
+                            </StackPanel.ScrollOwner>
 
-        <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="25,24,30,0" Grid.Row="3" Height="78" Width="81" />
-        <Button Content="{T:TranslateExtension ButtonGetRawCodec}" Grid.Row="3" Height="23" Name="btn_getRaw" VerticalAlignment="Top" Click="btn_getRaw_Click"  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.RawCodecNeeded, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}"/>
+                            <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:CameraItem CameraDevice="{Binding Path=.}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Expander>
+            <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="3"/>
+        </StackPanel>
 
         <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="5" Padding="0" Margin="0" >
             <Expander.Resources>
@@ -205,11 +209,12 @@
                 </ResourceDictionary>
             </Expander.Resources>
             <!--<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">-->
-            <Grid>
+            <Grid Width="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <!--<RowDefinition Height="*" Name="ElementRow" />-->
+                    <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
                 </Grid.RowDefinitions>
 
@@ -273,8 +278,8 @@
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
-                                                    <Label Content="{Binding Path=Name}"/>
-                                                    <Label Content="{Binding Path=Folder}"/>
+                                                    <Label Content="{Binding Path=Name}" Padding="1"/>
+                                                    <Label Content="{Binding Path=Folder}" Padding="1"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
@@ -415,7 +420,11 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="1" Grid.Row="2" Margin="3"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">
+                    <Label Content="Model:" />
+                    <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
+                </StackPanel>
+                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3"/>
             </Grid>
             <!--</ScrollViewer>-->
 
