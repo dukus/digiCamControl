@@ -450,10 +450,12 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public string GetNextFileName(string ext, ICameraDevice device)
+        public string GetNextFileName(string file, ICameraDevice device)
         {
             lock (_locker)
             {
+                var ext = Path.GetExtension(file);
+
                 if (string.IsNullOrEmpty(ext))
                     ext = ".nef";
                 if (!string.IsNullOrEmpty(_lastFilename) && RawExtensions.Contains(ext.ToLower()) &&
@@ -467,16 +469,16 @@ namespace CameraControl.Core.Classes
                 }
 
                 string fileName = Path.Combine(Folder,
-                                               FormatFileName(device, ext) + (!ext.StartsWith(".") ? "." : "") + ext);
+                                               FormatFileName(device, file) + (!ext.StartsWith(".") ? "." : "") + ext);
 
                 if (File.Exists(fileName) && !AllowOverWrite)
-                    return GetNextFileName(ext, device);
+                    return GetNextFileName(file, device);
                 _lastFilename = fileName;
                 return fileName;
             }
         }
 
-        private string FormatFileName(ICameraDevice device, string ext, bool incremetCounter = true)
+        private string FormatFileName(ICameraDevice device, string file, bool incremetCounter = true)
         {
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(device);
             string res = FileNameTemplate;
@@ -499,7 +501,7 @@ namespace CameraControl.Core.Classes
                 {
                     res = res.Replace(match.Value,
                         ServiceProvider.FilenameTemplateManager.Templates[match.Value].Pharse(match.Value, this, device,
-                            ext));
+                            file));
                 }
             }
 

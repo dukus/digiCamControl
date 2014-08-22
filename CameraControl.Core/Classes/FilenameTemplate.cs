@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using CameraControl.Core.Interfaces;
@@ -56,6 +57,8 @@ namespace CameraControl.Core.Classes
                     return session.Barcode;
                 case "[File format]":
                     return GetType(fileName);
+                case "[Original Filename]":
+                    return Path.GetFileNameWithoutExtension(fileName);
                 case "[Camera Name]":
                     return property.DeviceName.Replace(":", "_").Replace("?", "_").Replace("*", "_");
                 case "[Selected Tag1]":
@@ -75,8 +78,9 @@ namespace CameraControl.Core.Classes
             return "";
         }
 
-        private string GetType(string ext)
+        private string GetType(string file)
         {
+            var ext = Path.GetExtension(file);
             if (ext.StartsWith("."))
                 ext = ext.Substring(1);
             switch (ext.ToLower())

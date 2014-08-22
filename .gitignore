@@ -11,3 +11,4 @@ _ReSharper.CameraControl.ServerTest
 /ScreenShots/1.1.797
 *.tmp_proj
 /CameraControl.Core/*.user
+/*.suo

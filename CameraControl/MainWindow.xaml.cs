@@ -306,8 +306,7 @@ namespace CameraControl
                 if (!session.UseOriginalFilename || eventArgs.CameraDevice.CaptureInSdRam)
                 {
                     fileName =
-                        session.GetNextFileName(Path.GetExtension(eventArgs.FileName),
-                                                eventArgs.CameraDevice);
+                        session.GetNextFileName(eventArgs.FileName, eventArgs.CameraDevice);
                 }
                 else
                 {
