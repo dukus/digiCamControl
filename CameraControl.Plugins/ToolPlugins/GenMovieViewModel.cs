@@ -37,6 +37,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private VideoType _videoType;
         private string _outPutFile;
         private bool _fillImage;
+        private object _locker = new object();
 
         public BitmapSource Bitmap
         {
@@ -305,6 +306,7 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 string parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p {2}";
 
+                OutPut.Insert(0, "Generating video ..... ");
                 Process newprocess = new Process();
 
                 newprocess.StartInfo = new ProcessStartInfo()
@@ -323,6 +325,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 newprocess.BeginOutputReadLine();
                 newprocess.BeginErrorReadLine();
                 newprocess.WaitForExit();
+                OutPut.Insert(0, "DONE !!!");
             }
             catch (Exception exception)
             {
@@ -333,7 +336,10 @@ namespace CameraControl.Plugins.ToolPlugins
 
         private void newprocess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            OutPut.Insert(0, e.Data);
+            lock (_locker)
+            {
+                //OutPut.Insert(0, e.Data);
+            }
         }
 
 
