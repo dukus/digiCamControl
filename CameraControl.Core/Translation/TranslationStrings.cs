@@ -491,5 +491,11 @@ namespace CameraControl.Core.Translation
         public static string LabelCaptureName = "Capture Name";
         public static string LabelSeries = "Series";
         public static string LabelAdvancedProperties = "Advanced Properties";
+        public static string LabelDirection = "Direction";
+        public static string LabelFarNear = "Far -> Near";
+        public static string LabelNearFar = "Near -> Far";
+        public static string LabelStepSmall = "Small step";
+        public static string LabelStepMedium = "Medium step";
+        public static string LabelStepLarge = "Large step";
     }
 }

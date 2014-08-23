@@ -15,6 +15,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
+using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Others;
 using CameraControl.windows;
@@ -45,6 +46,7 @@ namespace CameraControl.ViewModel
         private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
+        private int _focusStackinMode = 0;
 
         private ICameraDevice _cameraDevice;
         private CameraProperty _cameraProperty;
@@ -72,6 +74,9 @@ namespace CameraControl.ViewModel
         private int _selectedFocusValue;
         private bool _delayedStart;
         private int _brightness;
+        private bool _simpleFocus;
+        private int _direction;
+        private int _photoNumber;
 
         public ICameraDevice CameraDevice
         {
@@ -219,6 +224,17 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool SimpleFocusStacking
+        {
+            get { return CameraDevice is CanonSDKBase; }
+        }
+
+        public bool AdvancexFocusStacking
+        {
+            get { return !SimpleFocusStacking; }
+        }
+
+
         #region motion detection
 
         public double CurrentMotionIndex
@@ -343,6 +359,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public int PhotoNumber
+        {
+            get { return _photoNumber; }
+            set
+            {
+                _photoNumber = value;
+                RaisePropertyChanged(()=>PhotoCount);
+            }
+        }
+
         public int WaitTime
         {
             get { return _waitTime; }
@@ -374,6 +400,17 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => PhotoCount);
             }
         }
+
+        public int Direction
+        {
+            get { return _direction; }
+            set
+            {
+                _direction = value;
+                RaisePropertyChanged(() => Direction);
+            }
+        }
+
 
         /// <summary>
         /// Gets or sets the current focus counter.
@@ -556,6 +593,11 @@ namespace CameraControl.ViewModel
         public RelayCommand StartFocusStackingCommand { get; set; }
         public RelayCommand PreviewFocusStackingCommand { get; set; }
         public RelayCommand StopFocusStackingCommand { get; set; }
+        
+        public RelayCommand StartSimpleFocusStackingCommand { get; set; }
+        public RelayCommand PreviewSimpleFocusStackingCommand { get; set; }
+        public RelayCommand StopSimpleFocusStackingCommand { get; set; }
+
         public RelayCommand StartLiveViewCommand { get; set; }
         public RelayCommand StopLiveViewCommand { get; set; }
         
@@ -613,6 +655,10 @@ namespace CameraControl.ViewModel
             StopFocusStackingCommand = new RelayCommand(StopFocusStacking);
             StartLiveViewCommand = new RelayCommand(StartLiveView);
             StopLiveViewCommand = new RelayCommand(StopLiveView);
+
+            StartSimpleFocusStackingCommand = new RelayCommand(StartSimpleFocusStacking);
+            PreviewSimpleFocusStackingCommand = new RelayCommand(PreviewSimpleFocusStacking);
+            StopSimpleFocusStackingCommand = new RelayCommand(StopFocusStacking);
         }
 
         private void InitOverlay()
@@ -638,6 +684,7 @@ namespace CameraControl.ViewModel
             WaitTime = 2;
             PhotoNo = 2;
             FocusStep = 2;
+            PhotoCount = 5;
             DelayedStart = false;
             _timer.Stop();
             _timer.AutoReset = true;
@@ -1463,6 +1510,20 @@ namespace CameraControl.ViewModel
             }
         }
 
+        private void StartSimpleFocusStacking()
+        {
+            _focusStackinMode = 1;
+            _focusStackingTick = 0;
+            _focusIProgress = false;
+            PhotoCount = 0;
+            IsFocusStackingRunning = true;
+            _focusStackingPreview = false;
+            _focusStackingTimer.Start();
+            //Thread thread = new Thread(TakePhoto);
+            //thread.Start();
+        }
+
+
         private void StartFocusStacking()
         {
             if (!LockA || !LockB)
@@ -1470,6 +1531,7 @@ namespace CameraControl.ViewModel
                 MessageBox.Show(TranslationStrings.LabelError, TranslationStrings.LabelLockNearFar);
                 return;
             }
+            _focusStackinMode = 0;
             _focusStackingTick = 0;
             Thread.Sleep(500);
             _focusIProgress = false;
@@ -1483,9 +1545,19 @@ namespace CameraControl.ViewModel
             //thread.Start();
         }
 
+        private void PreviewSimpleFocusStacking()
+        {
+            _focusStackinMode = 1;
+            PhotoCount = 0;
+            IsFocusStackingRunning = true;
+            _focusStackingPreview = true;
+            _focusStackingTimer.Start();
+        }
+
         private void PreviewFocusStacking()
         {
             SetFocus(-FocusCounter);
+            _focusStackinMode = 0;
             //FreezeImage = true;
             GetLiveImage();
             PhotoCount = 0;
@@ -1507,40 +1579,94 @@ namespace CameraControl.ViewModel
         {
             if (!IsFocusStackingRunning)
                 return;
-            if (FocusCounter >= FocusValue)
+            if (_focusStackinMode == 0)
             {
-                IsFocusStackingRunning = false;
-            }
-            if (_focusStackingTick > WaitTime)
-            {
-                _focusStackingTimer.Stop();
-                StartLiveView();
-                if (PhotoCount > 0)
+                if (FocusCounter >= FocusValue)
                 {
-                    SetFocus(FocusStep);
+                    IsFocusStackingRunning = false;
                 }
-                PhotoCount++;
-                GetLiveImage();
-                _focusStackingTick = 0;
-                if (!_focusStackingPreview)
+                if (_focusStackingTick > WaitTime)
                 {
-                    Recording = false;
-                    try
+                    _focusStackingTimer.Stop();
+                    StartLiveView();
+                    if (PhotoCount > 0)
                     {
-                        var thread = new Thread(Capture);
-                        thread.Start();
-                        thread.Join();
+                        SetFocus(FocusStep);
                     }
-                    catch (Exception exception)
+                    PhotoCount++;
+                    GetLiveImage();
+                    _focusStackingTick = 0;
+                    if (!_focusStackingPreview)
                     {
-                        Log.Error(exception);
-                        StaticHelper.Instance.SystemMessage = exception.Message;
+                        Recording = false;
+                        try
+                        {
+                            var thread = new Thread(Capture);
+                            thread.Start();
+                            thread.Join();
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Error(exception);
+                            StaticHelper.Instance.SystemMessage = exception.Message;
+                            _focusStackingTimer.Start();
+                        }
+                    }
+                    else
+                    {
                         _focusStackingTimer.Start();
                     }
                 }
-                else
+            }
+            else
+            {
+                if (PhotoCount >= PhotoNumber)
                 {
-                    _focusStackingTimer.Start();
+                    IsFocusStackingRunning = false;
+                }
+                if (_focusStackingTick > WaitTime)
+                {
+                    _focusStackingTimer.Stop();
+                    StartLiveView();
+                    if (PhotoCount > 0)
+                    {
+                        int dir = Direction == 0 ? -1 : 1;
+                        switch (FocusStep)
+                        {
+                            case 0:
+                                SetFocus(dir*ServiceProvider.Settings.SmalFocusStep);
+                                break;
+                            case 1:
+                                SetFocus(dir*ServiceProvider.Settings.MediumFocusStep);
+                                break;
+                            case 2:
+                                SetFocus(dir*ServiceProvider.Settings.LargeFocusStep);
+                                break;
+                        }
+                    }
+                    PhotoCount++;
+                    GetLiveImage();
+                    _focusStackingTick = 0;
+                    if (!_focusStackingPreview)
+                    {
+                        Recording = false;
+                        try
+                        {
+                            var thread = new Thread(Capture);
+                            thread.Start();
+                            thread.Join();
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Error(exception);
+                            StaticHelper.Instance.SystemMessage = exception.Message;
+                            _focusStackingTimer.Start();
+                        }
+                    }
+                    else
+                    {
+                        _focusStackingTimer.Start();
+                    }
                 }
             }
             _focusStackingTick++;
