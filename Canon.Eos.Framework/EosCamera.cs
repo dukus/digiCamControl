@@ -19,7 +19,8 @@ namespace Canon.Eos.Framework
         private string _picturePath;
         private Edsdk.EdsObjectEventHandler _edsObjectEventHandler;
         private Edsdk.EdsPropertyEventHandler _edsPropertyEventHandler;
-        private Edsdk.EdsStateEventHandler _edsStateEventHandler;        
+        private Edsdk.EdsStateEventHandler _edsStateEventHandler;
+        private int _photoCounter = 0;
 
         public event EventHandler LiveViewStarted;
         public event EventHandler LiveViewStopped;
@@ -603,9 +604,10 @@ namespace Canon.Eos.Framework
 
         public void TakePictureInLiveview()
         {
+            _photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             this._pauseLiveViewRequested = true;
-
         }
+
         public void ResumeLiveview()
         {
             //has to be called if Taking photo fails

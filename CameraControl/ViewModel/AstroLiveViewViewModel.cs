@@ -20,11 +20,21 @@ namespace CameraControl.ViewModel
     {
         private Point _centralPoint;
         private int _zoomFactor;
+        private BitmapSource _starWindow;
+
+        private int MaximumValue = 0;
+        private int MinimumValue = 0;
+        private int Threshold = 400;
+        private double StarSizeOld = 0;
+        private double K = 10;
+        private double _starSize;
+        private int _starWindowSize;
 
         public AstroLiveViewViewModel(ICameraDevice device)
             :base(device)
         {
             ZoomFactor = 1;
+            StarWindowSize = 30;
         }
 
         public AstroLiveViewViewModel()
@@ -32,6 +42,27 @@ namespace CameraControl.ViewModel
         {
             
         }
+
+        public int StarWindowSize
+        {
+            get { return _starWindowSize; }
+            set
+            {
+                _starWindowSize = value;
+                RaisePropertyChanged(() => StarWindowSize);
+            }
+        }
+
+        public double StarSize
+        {
+            get { return _starSize; }
+            set
+            {
+                _starSize = value;
+                RaisePropertyChanged(() => StarSize);
+            }
+        }
+
 
         public Point CentralPoint
         {
@@ -52,6 +83,47 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => ZoomFactor);
             }
         }
+
+        public BitmapSource StarWindow
+        {
+            get { return _starWindow; }
+            set
+            {
+                _starWindow = value;
+                RaisePropertyChanged(() => StarWindow);
+            }
+        }
+
+
+        public void CalculateStarSize(WriteableBitmap bitmap)
+        {
+            int Max = 0;
+            int Min = 800;
+            int Count = 0;
+            for (int i = 0; i < StarWindowSize-1; i++)
+            {
+
+                for (int j = 0; j < StarWindowSize-1; j++)
+                {
+                    var c = bitmap.GetPixel(i, j);
+                    var greyVal = c.R + c.G + c.B;
+                    if (greyVal > Threshold)
+                        Count = Count + 1;
+                    if (greyVal > Max)
+                        Max = greyVal;
+
+                    if (greyVal < Min)
+                        Min = greyVal;
+                }
+            }
+            MaximumValue = Max;
+            MinimumValue = Min;
+            Threshold = (Max + Min)/2;
+            StarSize = ((double) Count + K*StarSizeOld)/(K + 1);
+            StarSizeOld = StarSize;
+
+        }
+
 
         public override void GetLiveImage()
         {
@@ -74,6 +146,12 @@ namespace CameraControl.ViewModel
             {
                 Bitmap res = bmp;
                 var preview = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
+                var zoow = preview.Crop((int)(CentralPoint.X - (StarWindowSize / 2)), (int)(CentralPoint.Y - (StarWindowSize / 2)),
+                        StarWindowSize, StarWindowSize);
+                CalculateStarSize(zoow);
+                zoow.Freeze();
+                StarWindow = zoow;
+
                 preview.Freeze();
                 Preview = preview;
 
@@ -118,11 +196,11 @@ namespace CameraControl.ViewModel
             WriteableBitmap tempbitmap = new WriteableBitmap(bitmap.PixelWidth, bitmap.PixelHeight, bitmap.DpiX,
                                                              bitmap.DpiY, PixelFormats.Pbgra32, bitmap.Palette);
 
-            tempbitmap.DrawLine(0, (int)CentralPoint.Y - 5, bitmap.PixelWidth, (int)CentralPoint.Y - 5, Colors.White);
-            tempbitmap.DrawLine(0, (int)CentralPoint.Y + 5, bitmap.PixelWidth, (int)CentralPoint.Y + 5, Colors.White);
+            tempbitmap.DrawLine(0, (int)CentralPoint.Y - (StarWindowSize / 2), bitmap.PixelWidth, (int)CentralPoint.Y - (StarWindowSize / 2), Colors.White);
+            tempbitmap.DrawLine(0, (int)CentralPoint.Y + (StarWindowSize / 2), bitmap.PixelWidth, (int)CentralPoint.Y + (StarWindowSize / 2), Colors.White);
 
-            tempbitmap.DrawLine((int)CentralPoint.X - 5, 0, (int)CentralPoint.X - 5, bitmap.PixelHeight, Colors.White);
-            tempbitmap.DrawLine((int)CentralPoint.X + 5, 0, (int)CentralPoint.X + 5, bitmap.PixelHeight, Colors.White);
+            tempbitmap.DrawLine((int)CentralPoint.X - (StarWindowSize / 2), 0, (int)CentralPoint.X - (StarWindowSize / 2), bitmap.PixelHeight, Colors.White);
+            tempbitmap.DrawLine((int)CentralPoint.X + (StarWindowSize / 2), 0, (int)CentralPoint.X + (StarWindowSize / 2), bitmap.PixelHeight, Colors.White);
 
             bitmap.Blit(new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight), tempbitmap,
                         new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));

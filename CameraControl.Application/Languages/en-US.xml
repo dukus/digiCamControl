@@ -409,7 +409,7 @@
 	<string name="LabelStayOnTop2">Stay on top</string>
 	<string name="LabelWriteSelectedTags">Write tags from tag selector</string>
 	<string name="LabelClearCache">Clear cache</string>
-	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in fullSccreen</string>
+	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in fullscreen</string>
 	<string name="LabelDelayImageLoading">Delay image loading</string>
 	<string name="LabelShowOverlayFolder">Show overlay folder</string>
 	<string name="LabelPHDGuiding">PHD Guiding</string>

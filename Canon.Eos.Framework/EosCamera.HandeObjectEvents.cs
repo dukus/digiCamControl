@@ -12,9 +12,12 @@ namespace Canon.Eos.Framework
 
         private void OnPictureTaken(EosImageEventArgs eventArgs)
         {
+            _photoCounter++;
             if (this.PictureTaken != null)
                 this.PictureTaken(this, eventArgs);
-            _pauseLiveViewRequested = false;
+            // start live view if both photos is transfered 
+            if (_photoCounter == 2)
+                _pauseLiveViewRequested = false;
         }
 
         private void OnVolumeInfoChanged(EosVolumeInfoEventArgs eventArgs)
