@@ -141,9 +141,9 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0,0,0,3" Grid.RowSpan="2">
+        <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0" Grid.RowSpan="2" Padding="0">
             <Expander.Header>
-                <Label Content="{T:TranslateExtension LabelAdvancedProperties}" Padding="0">
+                <Label Content="{T:TranslateExtension LabelAdvancedProperties}">
                     <Label.LayoutTransform>
                         <TransformGroup>
                             <TransformGroup.Children>

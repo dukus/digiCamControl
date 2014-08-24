@@ -497,5 +497,6 @@ namespace CameraControl.Core.Translation
         public static string LabelStepSmall = "Small step";
         public static string LabelStepMedium = "Medium step";
         public static string LabelStepLarge = "Large step";
+        public static string LabelSessionOpenFolder = "Open session folder";
     }
 }

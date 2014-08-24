@@ -36,6 +36,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using CameraControl.Devices;
 using Application = System.Windows.Application;
 
 #endregion
@@ -67,9 +68,16 @@ namespace CameraControl.Core.Classes
         public void Start()
         {
             _hookID = SetHook(_proc);
-            if (ServiceProvider.Settings.UseWebserver)
+            try
             {
-                WebServer.Start(ServiceProvider.Settings.WebserverPort);
+                if (ServiceProvider.Settings.UseWebserver)
+                {
+                    WebServer.Start(ServiceProvider.Settings.WebserverPort);
+                }
+            }
+            catch (Exception)
+            {
+                Log.Error("Unable to start webserver");
             }
         }
 

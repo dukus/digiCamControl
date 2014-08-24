@@ -860,5 +860,10 @@ namespace CameraControl
             ServiceProvider.Settings.LoadData(ServiceProvider.Settings.DefaultSession);
         }
 
+        private void btn_open_folder_Sesion_Click(object sender, RoutedEventArgs e)
+        {
+            PhotoUtils.Run(ServiceProvider.Settings.DefaultSession.Folder);
+        }
+
     }
 }

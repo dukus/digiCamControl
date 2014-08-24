@@ -394,9 +394,34 @@ namespace CameraControl.Core.Classes
 
             try
             {
-                BitmapDecoder bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
-                                                            BitmapCreateOptions.None,
-                                                            BitmapCacheOption.OnLoad);
+                BitmapDecoder bmpDec = null;
+                if (fullres && fileItem.IsRaw)
+                {
+                    try
+                    {
+                        string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
+                        if (File.Exists(dcraw_exe))
+                        {
+                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e {0}", fileItem.FileName));
+                            string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
+                                Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
+                            if (File.Exists(thumb))
+                            {
+                                bmpDec = BitmapDecoder.Create(new Uri(thumb),BitmapCreateOptions.None,BitmapCacheOption.OnLoad);
+                                File.Delete(thumb);
+                            }
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Error get dcraw thumb", exception);
+                    }
+                }
+
+                if (bmpDec == null)
+                    bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
+                        BitmapCreateOptions.None,
+                        BitmapCacheOption.OnLoad);
 
                 double dw = (double) MaxThumbSize/bmpDec.Frames[0].PixelWidth;
                 WriteableBitmap bitmap;
@@ -412,7 +437,7 @@ namespace CameraControl.Core.Classes
                 if (ServiceProvider.Settings.ShowFocusPoints)
                     DrawFocusPoints(fileItem, bitmap);
 
-                if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") && !fileItem.IsRaw)
+                if (fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") && !fileItem.IsRaw)
                 {
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
                         bitmap = bitmap.Rotate(180);

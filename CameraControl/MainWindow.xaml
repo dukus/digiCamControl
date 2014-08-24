@@ -138,10 +138,10 @@
                 <StackPanel HorizontalAlignment="Right" IsEnabled="{Binding Path=DefaultSession.TimeLapse.IsDisabled}"></StackPanel>
             </WrapPanel>
         </Controls:MetroContentControl>
-        <StackPanel Grid.Row="1" Grid.RowSpan="3" Orientation="Horizontal">
-            <Expander ExpandDirection="Right">
+        <StackPanel Grid.Row="1" Grid.RowSpan="4" Orientation="Horizontal">
+            <Expander ExpandDirection="Right" Padding="0" Margin="0">
                 <Expander.Header>
-                    <Label Content="{T:TranslateExtension LabelConnectedCameras}" Padding="0">
+                    <Label Content="{T:TranslateExtension LabelConnectedCameras}">
                         <Label.LayoutTransform>
                             <TransformGroup>
                                 <TransformGroup.Children>
@@ -160,7 +160,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Height="40" Name="btn_sort" Width="40" Click="btn_sort_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                            <Button Height="35" Name="btn_sort" Width="35" Click="btn_sort_Click" Style="{DynamicResource MetroCircleButtonStyle}">
                                 <Button.Content>
                                     <Rectangle Width="18" Height="18">
                                         <Rectangle.Fill>
@@ -169,7 +169,7 @@
                                     </Rectangle>
                                 </Button.Content>
                             </Button>
-                            <Button Height="40" Name="btn_sort_desc" Width="40" Click="btn_sort_desc_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                            <Button Height="35" Name="btn_sort_desc" Width="35" Click="btn_sort_desc_Click" Style="{DynamicResource MetroCircleButtonStyle}">
                                 <Button.Content>
                                     <Rectangle Width="18" Height="18">
                                         <Rectangle.Fill>
@@ -197,7 +197,7 @@
                     </ScrollViewer>
                 </Grid>
             </Expander>
-            <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="3"/>
+            <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Padding="0"/>
         </StackPanel>
 
         <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="5" Padding="0" Margin="0" >
@@ -213,7 +213,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <!--<RowDefinition Height="*" Name="ElementRow" />-->
+                    <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
                 </Grid.RowDefinitions>
@@ -224,13 +224,27 @@
                             <RowDefinition Height="90" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" />
-                        <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" />
-                        <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" />
-                        <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" />
-                        <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
-                        <CheckBox Grid.Column="1" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
-                        <CheckBox Grid.Column="1" Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding ElementName=TgGray, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                        <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" Visibility="{Binding ElementName=TgRed, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}" />
+                        <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" Visibility="{Binding ElementName=TgGreen, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                        <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding ElementName=TgBlue, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                        <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" /> 
+                        <CheckBox Grid.Column="0" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
+                        <CheckBox Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                        <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgRed">
+                                <Ellipse Height="10" Width="10" Fill="Red"/>
+                            </ToggleButton>
+                            <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgGreen">
+                                <Ellipse Height="10" Width="10" Fill="Green"/>
+                            </ToggleButton>
+                            <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgBlue">
+                                <Ellipse Height="10" Width="10" Fill="Blue"/>
+                            </ToggleButton>
+                            <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" Name="TgGray">
+                                <Ellipse Height="10" Width="10" Fill="Gray"/>
+                            </ToggleButton>                            
+                        </StackPanel>
                         <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
                                 <Rectangle Width="20" Height="20">
@@ -311,6 +325,13 @@
                                             <Rectangle Width="15" Height="15">
                                                 <Rectangle.Fill>
                                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_refresh}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                        <Button  ToolTip="{T:TranslateExtension LabelSessionOpenFolder}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_open_folder_Sesion_Click">
+                                            <Rectangle Width="15" Height="15">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_folder_open}" />
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                         </Button>
@@ -424,13 +445,12 @@
                     <Label Content="Model:" />
                     <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
                 </StackPanel>
-                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3"/>
+                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
+                <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Grid.Row="4"
+                     Grid.Column="0" Margin="5,0,5,0"/>
             </Grid>
             <!--</ScrollViewer>-->
 
         </Expander>
-
-        <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Grid.Row="4"
-                     Grid.Column="0" Margin="5,0,5,0"/>
     </Grid>
 </Controls:MetroWindow >
