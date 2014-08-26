@@ -691,10 +691,9 @@ namespace CameraControl.windows
         public void AddOutput(string msg)
         {
             Dispatcher.Invoke(new Action(delegate
-                                             {
-                                                 lst_output.Items.Add(msg);
-                                                 lst_output.ScrollIntoView(lst_output.Items[lst_output.Items.Count - 1]);
-                                             }));
+            {
+                Message = msg;
+            }));
         }
 
 

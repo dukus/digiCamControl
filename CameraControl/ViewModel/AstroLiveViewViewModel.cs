@@ -35,6 +35,7 @@ namespace CameraControl.ViewModel
         {
             ZoomFactor = 1;
             StarWindowSize = 30;
+            StarSize = 123.11;
         }
 
         public AstroLiveViewViewModel()
@@ -53,6 +54,12 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public double DisplayStarSize
+        {
+            get { return Math.Round(StarSize,2); }
+        }
+
+
         public double StarSize
         {
             get { return _starSize; }
@@ -60,6 +67,7 @@ namespace CameraControl.ViewModel
             {
                 _starSize = value;
                 RaisePropertyChanged(() => StarSize);
+                RaisePropertyChanged(() => DisplayStarSize);
             }
         }
 

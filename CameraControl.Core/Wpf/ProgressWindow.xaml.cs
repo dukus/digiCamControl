@@ -29,7 +29,6 @@
 #region
 
 using System;
-using System.Windows;
 using System.Windows.Media;
 using CameraControl.Devices;
 

@@ -492,11 +492,12 @@ namespace CameraControl.Devices
             // first check if driver exist with same driver name
             if (DeviceClass.ContainsKey(model))
                 return DeviceClass[model];
-            // in driver not found will check with regex name
-            return (from keyValuePair in DeviceClass
-                    let regex = new Regex(keyValuePair.Key)
-                    where regex.IsMatch(model)
-                    select keyValuePair.Value).FirstOrDefault();
+            return null;
+            //// in driver not found will check with regex name
+            //return (from keyValuePair in DeviceClass
+            //        let regex = new Regex(keyValuePair.Key)
+            //        where regex.IsMatch(model)
+            //        select keyValuePair.Value).FirstOrDefault();
         }
 
         private void DisconnectCamera(string wiaId)
