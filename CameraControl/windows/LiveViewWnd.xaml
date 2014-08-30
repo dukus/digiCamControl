@@ -60,17 +60,11 @@
             </Image.RenderTransform>
         </Image>
 
-        <!--<Controls:RangeSlider Grid.Column="2" Margin="4" Grid.ColumnSpan="2" Name="slide_horiz" UpperValue="{Binding Path=GridHorizontalMax}"  LowerValue="{Binding Path=GridHorizontalMin}" SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=GridVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <Controls:RangeSlider Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" Margin="4" Orientation="Vertical" UpperValue="{Binding Path=GridVerticalMin}"  LowerValue="{Binding Path=GridVerticalMax}"  Name="slide_vert" SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=GridVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Controls:RangeSlider VerticalAlignment="Top" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4"  Margin="4" Width="{Binding ElementName=_image, Path=ActualWidth}" Orientation="Horizontal" UpperValue="{Binding Path=HorizontalMax}"  LowerValue="{Binding Path=HorizontalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Line Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Y1="0" X1="{Binding Path=GridHorizontalMinSize}" Y2="{Binding ElementName=slide_vert, Path=ActualHeight}" X2="{Binding Path=GridHorizontalMinSize}" StrokeThickness="1" Stroke="Black" Visibility="{Binding Path=GridVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <Line Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Y1="0" X1="{Binding Path=GridHorizontalMaxSize}" Y2="{Binding ElementName=slide_vert, Path=ActualHeight}" X2="{Binding Path=GridHorizontalMaxSize}" StrokeThickness="1" Stroke="Black" Visibility="{Binding Path=GridVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Controls:RangeSlider HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="4" Height="{Binding ElementName=_image, Path=ActualHeight}" Orientation="Vertical" UpperValue="{Binding Path=VerticalMax}"  LowerValue="{Binding Path= VerticalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Line Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" X1="0" Y1="{Binding Path=GridVerticalMinSize}" X2="{Binding ElementName=slide_horiz, Path=ActualWidth}" Y2="{Binding Path=GridVerticalMinSize}" StrokeThickness="1" Stroke="Black" Visibility="{Binding Path=GridVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <Line Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" X1="0" Y1="{Binding Path=GridVerticalMaxSize}" X2="{Binding ElementName=slide_horiz, Path=ActualWidth}" Y2="{Binding Path=GridVerticalMaxSize}" StrokeThickness="1" Stroke="Black" Visibility="{Binding Path=GridVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
-
-
-        <Canvas Grid.Column="2" Background="{x:Null}" Grid.RowSpan="4" >
+        <Canvas Grid.Column="2" Background="{x:Null}" Grid.Row="0" Grid.RowSpan="4" >
             <Label Canvas.Left="0" Canvas.Top="0" Content="REC" Height="41" FontSize="20" FontWeight="Bold" Foreground="Red" Width="52" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Canvas>
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" >
@@ -297,7 +291,7 @@
                             <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
                             <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" Name="chk_top" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                             <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-                            <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=GridVisible}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                            <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
 
                             <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" />
                             <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="11" Grid.ColumnSpan="3" Grid.Column="1">

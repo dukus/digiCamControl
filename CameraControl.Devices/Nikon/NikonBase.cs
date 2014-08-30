@@ -1290,7 +1290,7 @@ namespace CameraControl.Devices.Nikon
                     IsBusy = true;
                     DeviceReady();
                     MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus);
-                    ErrorCodes.GetException(response.ErrorCode);
+                    //ErrorCodes.GetException(response.ErrorCode);
                     // test if live view is on 
                     if (response.Data != null && response.Data.Length > 0 && response.Data[0] > 0)
                     {

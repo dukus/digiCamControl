@@ -418,37 +418,9 @@ namespace CameraControl.Devices
                     descriptor.CameraDevice = cameraDevice;
                     _deviceEnumerator.Add(descriptor);
                 }
-
-                foreach (PortableDevice portableDevice in PortableDeviceCollection.Instance.Devices)
+                else
                 {
-                    Log.Debug("Connection device " + portableDevice.DeviceId);
-                    //TODO: avoid to load some mass storage in my computer need to find a general solution
-                    if (!portableDevice.DeviceId.StartsWith("\\\\?\\usb") &&
-                        !portableDevice.DeviceId.StartsWith("\\\\?\\comp"))
-                        continue;
-                    // ignore some Canon cameras
-                    if (!SupportedCanonCamera(portableDevice.DeviceId))
-                        continue;
-                    portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-                    if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
-                        GetNativeDriver(portableDevice.Model) != null)
-                    {
-                        ICameraDevice cameraDevice;
-                        DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
-                        cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
-                        MtpProtocol device = new MtpProtocol(descriptor.WpdId);
-                        device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
-
-                        descriptor.StillImageDevice = device;
-
-                        cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
-                        cameraDevice.Init(descriptor);
-                        ConnectedDevices.Add(cameraDevice);
-                        NewCameraConnected(cameraDevice);
-
-                        descriptor.CameraDevice = cameraDevice;
-                        _deviceEnumerator.Add(descriptor);
-                    }
+                    throw new Exception("Not Supported device " + protocol.Model);
                 }
             }
             finally

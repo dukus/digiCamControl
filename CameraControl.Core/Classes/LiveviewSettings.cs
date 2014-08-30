@@ -196,6 +196,12 @@ namespace CameraControl.Core.Classes
         public bool ShowFocusRect { get; set; }
         public int Brightness { get; set; }
 
+        public int HorizontalMin { get; set; }
+        public int HorizontalMax { get; set; }
+        public int VerticalMin { get; set; }
+        public int VerticalMax { get; set; }
+        public bool ShowRuler { get; set; }
+
         public LiveviewSettings()
         {
             GridVisible = false;
@@ -205,6 +211,12 @@ namespace CameraControl.Core.Classes
             HighlightUnderExp = false;
             MotionThreshold = 20;
             ShowFocusRect = true;
+
+            HorizontalMin = 0;
+            HorizontalMax = 100;
+            VerticalMin = 0;
+            VerticalMax = 100;
+
         }
 
 
