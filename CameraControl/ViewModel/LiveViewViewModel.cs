@@ -77,6 +77,8 @@ namespace CameraControl.ViewModel
         private bool _simpleFocus;
         private int _direction;
         private int _photoNumber;
+        private bool _simpleManualFocus;
+        private int _focusStepSize;
 
         public ICameraDevice CameraDevice
         {
@@ -226,7 +228,7 @@ namespace CameraControl.ViewModel
 
         public bool SimpleFocusStacking
         {
-            get { return CameraDevice is CanonSDKBase; }
+            get { return false; }
         }
 
         public bool AdvancexFocusStacking
@@ -390,6 +392,17 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => PhotoNo);
             }
         }
+
+        public int FocusStepSize
+        {
+            get { return _focusStepSize; }
+            set
+            {
+                _focusStepSize = value;
+                RaisePropertyChanged(() => FocusStepSize);
+            }
+        }
+
 
         public int PhotoCount
         {
@@ -574,6 +587,15 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool SimpleManualFocus
+        {
+            get { return _simpleManualFocus; }
+            set
+            {
+                _simpleManualFocus = value;
+                RaisePropertyChanged(()=>SimpleManualFocus);
+            }
+        }
 
         public LiveViewData LiveViewData { get; set; }
 
@@ -614,6 +636,7 @@ namespace CameraControl.ViewModel
         {
             CameraDevice = device;
             CameraProperty = device.LoadProperties();
+            SimpleManualFocus = CameraDevice.GetCapability(CapabilityEnum.SimpleManualFocus);
             InitOverlay();
             InitCommands();
             if (ServiceProvider.Settings.DetectionType == 0)
@@ -642,12 +665,12 @@ namespace CameraControl.ViewModel
             RecordMovieCommand = new RelayCommand(RecordMovie,
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(Capture);
-            FocusMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.SmalFocusStep));
-            FocusMMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.MediumFocusStep));
-            FocusMMMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.LargeFocusStep));
-            FocusPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.SmalFocusStep));
-            FocusPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.MediumFocusStep));
-            FocusPPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.LargeFocusStep));
+            FocusMCommand = new RelayCommand(() => SetFocus( SimpleManualFocus? -1: -ServiceProvider.Settings.SmalFocusStep));
+            FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -5 : -ServiceProvider.Settings.MediumFocusStep));
+            FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -25 : -ServiceProvider.Settings.LargeFocusStep));
+            FocusPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 1 : ServiceProvider.Settings.SmalFocusStep));
+            FocusPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 5 : ServiceProvider.Settings.MediumFocusStep));
+            FocusPPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 25 : ServiceProvider.Settings.LargeFocusStep));
             MoveACommand = new RelayCommand(() => SetFocus(-FocusCounter));
             MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
@@ -1441,8 +1464,18 @@ namespace CameraControl.ViewModel
                 _timer.Stop();
                 CameraDevice.StartLiveView();
                 StaticHelper.Instance.SystemMessage = "Move focus " + step;
-                int stepdone = CameraDevice.Focus(step);
-                FocusCounter += stepdone;
+                if (SimpleManualFocus)
+                {
+                    for (var i = 0; i < Math.Abs(step); i++)
+                    {
+                        FocusCounter += CameraDevice.Focus(step);
+                        Thread.Sleep(2);
+                    }
+                }
+                else
+                {
+                    FocusCounter += CameraDevice.Focus(step);
+                }
             }
             catch (DeviceException exception)
             {
@@ -1631,16 +1664,16 @@ namespace CameraControl.ViewModel
                     if (PhotoCount > 0)
                     {
                         int dir = Direction == 0 ? -1 : 1;
-                        switch (FocusStep)
+                        switch (FocusStepSize)
                         {
                             case 0:
-                                SetFocus(dir*ServiceProvider.Settings.SmalFocusStep);
+                                SetFocus(dir*(SimpleManualFocus?1: ServiceProvider.Settings.SmalFocusStep));
                                 break;
                             case 1:
-                                SetFocus(dir*ServiceProvider.Settings.MediumFocusStep);
+                                SetFocus(dir*(SimpleManualFocus ? 5 : ServiceProvider.Settings.MediumFocusStep));
                                 break;
                             case 2:
-                                SetFocus(dir*ServiceProvider.Settings.LargeFocusStep);
+                                SetFocus(dir*(SimpleManualFocus ? 25 : ServiceProvider.Settings.LargeFocusStep));
                                 break;
                         }
                     }

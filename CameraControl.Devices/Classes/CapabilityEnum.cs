@@ -35,6 +35,7 @@ namespace CameraControl.Devices.Classes
         RecordMovie,
         CanLockFocus,
         CaptureInRam,
-        CaptureNoAf
+        CaptureNoAf,
+        SimpleManualFocus
     }
 }

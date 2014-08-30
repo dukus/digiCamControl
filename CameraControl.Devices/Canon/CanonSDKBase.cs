@@ -366,6 +366,7 @@ namespace CameraControl.Devices.Canon
                 Capabilities.Add(CapabilityEnum.Bulb);
                 Capabilities.Add(CapabilityEnum.LiveView);
                 Capabilities.Add(CapabilityEnum.CaptureInRam);
+                Capabilities.Add(CapabilityEnum.SimpleManualFocus);
                 IsConnected = true;
                 LoadProperties();
                 OnCameraInitDone();
@@ -390,7 +391,7 @@ namespace CameraControl.Devices.Canon
             InitFocus();
             InitOther();
             InitCompression();
-            Battery = (int) Camera.BatteryLevel;
+            Battery = (int) Camera.BatteryLevel + 20;
             IsBusy = false;
             CaptureInSdRam = true;
             Camera.PropertyChanged += Camera_PropertyChanged;
@@ -478,7 +479,7 @@ namespace CameraControl.Devices.Canon
                         CompressionSetting.SetValue((int) Camera.ImageQuality.ToBitMask(), false);
                         break;
                     case Edsdk.PropID_BatteryLevel:
-                        Battery = (int) Camera.BatteryLevel;
+                        Battery = (int) Camera.BatteryLevel + 20;
                         break;
                 }
             }
@@ -1078,27 +1079,9 @@ namespace CameraControl.Devices.Canon
         public override int Focus(int step)
         {
             Camera.ResetShutterButton();
-            
-            if (step < 0)
-            {
-                step = -step;
-                if (step < 50)
-                    Camera.FocusInLiveView(Edsdk.EvfDriveLens_Near1);
-                else if (step >= 50 && step < 200)
-                    Camera.FocusInLiveView(Edsdk.EvfDriveLens_Near2);
-                else
-                    Camera.FocusInLiveView(Edsdk.EvfDriveLens_Near3);
-            }
-            else
-            {
-                if (step < 50)
-                    Camera.FocusInLiveView(Edsdk.EvfDriveLens_Far1);
-                else if (step >= 50 && step < 200)
-                    Camera.FocusInLiveView(Edsdk.EvfDriveLens_Far2);
-                else
-                    Camera.FocusInLiveView(Edsdk.EvfDriveLens_Far3);
-            }
-            return step;
+
+            Camera.FocusInLiveView(step < 0 ? Edsdk.EvfDriveLens_Near2 : Edsdk.EvfDriveLens_Far2);
+            return step < 0 ? -1 : 1;
         }
 
         public override void TransferFile(object o, string filename)

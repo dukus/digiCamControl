@@ -235,7 +235,7 @@
                             </ComboBox>
                             
                             <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
-                            <ComboBox Grid.Row="2" Grid.Column="1"  SelectedIndex="{Binding Direction}" IsEnabled="{Binding IsFree}" Margin="2">
+                            <ComboBox Grid.Row="2" Grid.Column="1"  SelectedIndex="{Binding FocusStepSize}" IsEnabled="{Binding IsFree}" Margin="2">
                                 <ComboBoxItem Content="{T:TranslateExtension LabelStepSmall}" />
                                 <ComboBoxItem Content="{T:TranslateExtension LabelStepMedium}" />
                                 <ComboBoxItem Content="{T:TranslateExtension LabelStepLarge}" />
