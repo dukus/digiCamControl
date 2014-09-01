@@ -659,6 +659,8 @@ namespace CameraControl.ViewModel
 
         public RelayCommand StartLiveViewCommand { get; set; }
         public RelayCommand StopLiveViewCommand { get; set; }
+
+        public RelayCommand ResetBrigthnessCommand { get; set; }
         
         #endregion
 
@@ -715,6 +717,7 @@ namespace CameraControl.ViewModel
             StopFocusStackingCommand = new RelayCommand(StopFocusStacking);
             StartLiveViewCommand = new RelayCommand(StartLiveView);
             StopLiveViewCommand = new RelayCommand(StopLiveView);
+            ResetBrigthnessCommand = new RelayCommand(() => Brightness = 0);
 
             StartSimpleFocusStackingCommand = new RelayCommand(StartSimpleFocusStacking);
             PreviewSimpleFocusStackingCommand = new RelayCommand(PreviewSimpleFocusStacking);
@@ -1216,8 +1219,8 @@ namespace CameraControl.ViewModel
                 int y2 = writeableBitmap.PixelHeight*(100-VerticalMin)/100;
                 int y1 = writeableBitmap.PixelHeight*(100-VerticalMax)/100;
 
-                FillRectangle2(writeableBitmap, 0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, Color.FromArgb(30, 128, 128, 128));
-                FillRectangleDeBlend(writeableBitmap, x1, y1, x2, y2, Color.FromArgb(30, 128, 128, 128));
+                FillRectangle2(writeableBitmap, 0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, Color.FromArgb(128, 128, 128, 128));
+                FillRectangleDeBlend(writeableBitmap, x1, y1, x2, y2, Color.FromArgb(128, 128, 128, 128));
                 writeableBitmap.DrawRectangle( x1, y1, x2, y2, color);
 
             }

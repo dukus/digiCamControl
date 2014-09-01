@@ -283,11 +283,18 @@
                             <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
 
                             <Label Content="{T:TranslateExtension LabelOpacity}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" />
-                            <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged" />
+                            <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged"/>
+                                
+                                
 
                             <Label Content="{T:TranslateExtension LabelBrightness}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" />
-                            <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" />
-
+                            <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1">
+                                <Slider.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="{T:TranslateExtension LabelReset}" Command="{Binding Path=ResetBrigthnessCommand}" />
+                                    </ContextMenu>
+                                </Slider.ContextMenu>
+                            </Slider>
                             <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
                             <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" Name="chk_top" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                             <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
