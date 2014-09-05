@@ -79,6 +79,9 @@ namespace CameraControl.ViewModel
         private int _photoNumber;
         private bool _simpleManualFocus;
         private int _focusStepSize;
+        private PointCollection _redColorHistogramPoints;
+        private PointCollection _greenColorHistogramPoints;
+        private PointCollection _blueColorHistogramPoints;
 
         public ICameraDevice CameraDevice
         {
@@ -301,6 +304,37 @@ namespace CameraControl.ViewModel
                     _luminanceHistogramPoints = value;
                     RaisePropertyChanged(() => LuminanceHistogramPoints);
                 }
+            }
+        }
+
+
+        public PointCollection RedColorHistogramPoints
+        {
+            get { return _redColorHistogramPoints; }
+            set
+            {
+                _redColorHistogramPoints = value;
+                RaisePropertyChanged(()=>RedColorHistogramPoints);
+            }
+        }
+
+        public PointCollection GreenColorHistogramPoints
+        {
+            get { return _greenColorHistogramPoints; }
+            set
+            {
+                _greenColorHistogramPoints = value;
+                RaisePropertyChanged(()=>GreenColorHistogramPoints);
+            }
+        }
+
+        public PointCollection BlueColorHistogramPoints
+        {
+            get { return _blueColorHistogramPoints; }
+            set
+            {
+                _blueColorHistogramPoints = value;
+                RaisePropertyChanged(() => BlueColorHistogramPoints);
             }
         }
 
@@ -1007,6 +1041,13 @@ namespace CameraControl.ViewModel
                             LuminanceHistogramPoints =
                                 ConvertToPointCollection(
                                     hslStatistics.Luminance.Values);
+                            ImageStatistics statistics = new ImageStatistics(bmp);
+                            RedColorHistogramPoints = ConvertToPointCollection(
+                                statistics.Red.Values);
+                            GreenColorHistogramPoints = ConvertToPointCollection(
+                                statistics.Green.Values);
+                            BlueColorHistogramPoints = ConvertToPointCollection(
+                                statistics.Blue.Values);
                         }
 
                         if (HighlightUnderExp)

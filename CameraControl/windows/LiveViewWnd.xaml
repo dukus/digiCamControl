@@ -315,9 +315,24 @@
                 <Expander Header="{T:TranslateExtension LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="True">
                     <Expander.Content>
                         <Grid Height="75" >
-                            <Border BorderThickness="1" BorderBrush="Black" Background="White" HorizontalAlignment="Stretch">
-                                <Polygon Points="{Binding LuminanceHistogramPoints}" Stretch="Fill" Fill="Black" Opacity="0.8" />
-                            </Border>
+                            <Polygon Points="{Binding Path=LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding ElementName=TgGray, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                            <Polygon Points="{Binding Path=RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" Visibility="{Binding ElementName=TgRed, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}" />
+                            <Polygon Points="{Binding Path=GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" Visibility="{Binding ElementName=TgGreen, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                            <Polygon Points="{Binding Path=BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding ElementName=TgBlue, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                            <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgRed">
+                                    <Ellipse Height="10" Width="10" Fill="Red"/>
+                                </ToggleButton>
+                                <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgGreen">
+                                    <Ellipse Height="10" Width="10" Fill="Green"/>
+                                </ToggleButton>
+                                <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgBlue">
+                                    <Ellipse Height="10" Width="10" Fill="Blue"/>
+                                </ToggleButton>
+                                <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" Name="TgGray">
+                                    <Ellipse Height="10" Width="10" Fill="Gray"/>
+                                </ToggleButton>
+                            </StackPanel>
                             <CheckBox IsChecked="{Binding HighlightUnderExp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="16"/>
                             <CheckBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" IsChecked="{Binding HighlightOverExp}"/>
                         </Grid>
