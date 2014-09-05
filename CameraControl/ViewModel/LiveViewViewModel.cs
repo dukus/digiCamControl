@@ -21,6 +21,7 @@ using CameraControl.Devices.Others;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
@@ -47,6 +48,7 @@ namespace CameraControl.ViewModel
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
         private int _focusStackinMode = 0;
+        private WriteableBitmap _overlayImage = null;
 
         private ICameraDevice _cameraDevice;
         private CameraProperty _cameraProperty;
@@ -55,7 +57,7 @@ namespace CameraControl.ViewModel
         private bool _recording;
         private string _recButtonText;
         private int _gridType;
-        private AsyncObservableCollection<string> _overlays;
+        private AsyncObservableCollection<string> _grids;
         private double _currentMotionIndex;
         private bool _triggerOnMotion;
         private PointCollection _luminanceHistogramPoints = null;
@@ -82,6 +84,11 @@ namespace CameraControl.ViewModel
         private PointCollection _redColorHistogramPoints;
         private PointCollection _greenColorHistogramPoints;
         private PointCollection _blueColorHistogramPoints;
+        private AsyncObservableCollection<ValuePair> _overlays;
+        private bool _overlayActivated;
+        private int _overlayScale;
+        private int _overlayHorizontal;
+        private int _overlayVertical;
 
         public ICameraDevice CameraDevice
         {
@@ -156,7 +163,17 @@ namespace CameraControl.ViewModel
             }
         }
 
-        public AsyncObservableCollection<string> Overlays
+        public AsyncObservableCollection<string> Grids
+        {
+            get { return _grids; }
+            set
+            {
+                _grids = value;
+                RaisePropertyChanged(() => Grids);
+            }
+        }
+
+        public AsyncObservableCollection<ValuePair> Overlays
         {
             get { return _overlays; }
             set
@@ -172,7 +189,48 @@ namespace CameraControl.ViewModel
             set
             {
                 CameraProperty.LiveviewSettings.SelectedOverlay = value;
+                _overlayImage = null;
                 RaisePropertyChanged(() => SelectedOverlay);
+            }
+        }
+
+        public bool OverlayActivated
+        {
+            get { return _overlayActivated; }
+            set
+            {
+                _overlayActivated = value;
+                RaisePropertyChanged(() => OverlayActivated);
+            }
+        }
+
+        public int OverlayScale
+        {
+            get { return _overlayScale; }
+            set
+            {
+                _overlayScale = value;
+                RaisePropertyChanged(()=>OverlayScale);
+            }
+        }
+
+        public int OverlayHorizontal
+        {
+            get { return _overlayHorizontal; }
+            set
+            {
+                _overlayHorizontal = value;
+                RaisePropertyChanged(()=>OverlayHorizontal);
+            }
+        }
+
+        public int OverlayVertical
+        {
+            get { return _overlayVertical; }
+            set
+            {
+                _overlayVertical = value;
+                RaisePropertyChanged(()=>OverlayVertical);
             }
         }
 
@@ -695,6 +753,7 @@ namespace CameraControl.ViewModel
         public RelayCommand StopLiveViewCommand { get; set; }
 
         public RelayCommand ResetBrigthnessCommand { get; set; }
+        public RelayCommand BrowseOverlayCommand { get; set; }
         
         #endregion
 
@@ -756,22 +815,25 @@ namespace CameraControl.ViewModel
             StartSimpleFocusStackingCommand = new RelayCommand(StartSimpleFocusStacking);
             PreviewSimpleFocusStackingCommand = new RelayCommand(PreviewSimpleFocusStacking);
             StopSimpleFocusStackingCommand = new RelayCommand(StopFocusStacking);
+
+            BrowseOverlayCommand = new RelayCommand(BrowseOverlay);
         }
 
         private void InitOverlay()
         {
-            Overlays = new AsyncObservableCollection<string>();
-            Overlays.Add(TranslationStrings.LabelNone);
-            Overlays.Add(TranslationStrings.LabelRuleOfThirds);
-            Overlays.Add(TranslationStrings.LabelComboGrid);
-            Overlays.Add(TranslationStrings.LabelDiagonal);
-            Overlays.Add(TranslationStrings.LabelSplit);
+            Overlays = new AsyncObservableCollection<ValuePair>();
+            Grids = new AsyncObservableCollection<string>();
+            Grids.Add(TranslationStrings.LabelNone);
+            Grids.Add(TranslationStrings.LabelRuleOfThirds);
+            Grids.Add(TranslationStrings.LabelComboGrid);
+            Grids.Add(TranslationStrings.LabelDiagonal);
+            Grids.Add(TranslationStrings.LabelSplit);
             if (Directory.Exists(ServiceProvider.Settings.OverlayFolder))
             {
                 string[] files = Directory.GetFiles(ServiceProvider.Settings.OverlayFolder, "*.png");
                 foreach (string file in files)
                 {
-                    Overlays.Add(Path.GetFileNameWithoutExtension(file));
+                    Overlays.Add(new ValuePair() {Name = Path.GetFileNameWithoutExtension(file), Value = file});
                 }
             }
         }
@@ -827,6 +889,23 @@ namespace CameraControl.ViewModel
             LockB = false;
             LiveViewData = null;
         }
+
+        public void BrowseOverlay()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Png file(*.png)|*.png|All files|*.*";
+            dlg.FileName = SelectedOverlay;
+            if (dlg.ShowDialog() == true)
+            {
+                Overlays.Add(new ValuePair()
+                {
+                    Name = Path.GetFileNameWithoutExtension(dlg.FileName),
+                    Value = dlg.FileName
+                });
+                SelectedOverlay = dlg.FileName;
+            }   
+        }
+
 
         private void WindowsManager_Event(string cmd, object o)
         {
@@ -1173,6 +1252,33 @@ namespace CameraControl.ViewModel
         {
             Color color = Colors.White;
             color.A = 50;
+            
+            if (OverlayActivated)
+            {
+                if (SelectedOverlay != null && File.Exists(SelectedOverlay))
+                {
+                    if (_overlayImage == null)
+                    {
+                        BitmapImage bitmapSource = new BitmapImage();
+                        bitmapSource.DecodePixelWidth = writeableBitmap.PixelWidth;
+                        bitmapSource.BeginInit();
+                        bitmapSource.UriSource = new Uri(SelectedOverlay);
+                        bitmapSource.EndInit();
+                        _overlayImage = BitmapFactory.ConvertToPbgra32Format(bitmapSource);
+                        _overlayImage.Freeze();
+                    }
+                    int x = writeableBitmap.PixelWidth * OverlayScale / 100;
+                    int y = writeableBitmap.PixelHeight * OverlayScale / 100;
+                    int xx = writeableBitmap.PixelWidth * OverlayHorizontal / 100;
+                    int yy = writeableBitmap.PixelWidth * OverlayVertical / 100;
+                    writeableBitmap.Blit(
+                        new Rect(0 + (x / 2) + xx, 0 + (y / 2) + yy, writeableBitmap.PixelWidth - x,
+                            writeableBitmap.PixelHeight - y),
+                        _overlayImage,
+                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight));
+                }
+            }
+
             switch (GridType)
             {
                 case 1:
@@ -1228,31 +1334,9 @@ namespace CameraControl.ViewModel
                 }
                     break;
                 default:
-                    try
-                    {
-                        if (GridType > 4)
-                        {
-                            string filename = Path.Combine(ServiceProvider.Settings.OverlayFolder,
-                                SelectedOverlay + ".png");
-                            if (File.Exists(filename))
-                            {
-                                BitmapImage bitmapSource = new BitmapImage();
-                                bitmapSource.BeginInit();
-                                bitmapSource.UriSource = new Uri(filename);
-                                bitmapSource.EndInit();
-                                WriteableBitmap overlay = BitmapFactory.ConvertToPbgra32Format(bitmapSource);
-                                writeableBitmap.Blit(
-                                    new Rect(0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight),
-                                    overlay,
-                                    new Rect(0, 0, overlay.PixelWidth, overlay.PixelHeight));
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                    }
                     break;
             }
+
             if (ShowRuler)
             {
                 int x1 = writeableBitmap.PixelWidth*HorizontalMin/100;

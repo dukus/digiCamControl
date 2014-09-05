@@ -354,7 +354,7 @@ namespace CameraControl.Devices.Canon
             {
                 IsBusy = true;
                 Camera = camera;
-                Camera.IsErrorTolerantMode = true;
+                Camera.IsErrorTolerantMode = false;
                 DeviceName = Camera.DeviceDescription;
                 Manufacturer = "Canon Inc.";
                 Camera.SetEventHandlers();
@@ -589,10 +589,12 @@ namespace CameraControl.Devices.Canon
             try
             {
                 Log.Error("Canon error", e.Exception);
+                StaticHelper.Instance.SystemMessage = e.Exception.Message;
             }
             catch (Exception exception)
             {
                 Log.Error("Error get camera error", exception);
+                StaticHelper.Instance.SystemMessage = exception.Message;
             }
         }
 
@@ -1021,6 +1023,12 @@ namespace CameraControl.Devices.Canon
 
         public override void Focus(int x, int y)
         {
+            Camera.ResetShutterButton();
+            if (_liveViewImageData != null)
+            {
+                x -= (_liveViewImageData.ZommBounds.Width/2);
+                y -= (_liveViewImageData.ZommBounds.Height/2);
+            }
             Camera.SetPropertyIntegerArrayData(Edsdk.PropID_Evf_ZoomPosition, new uint[] {(uint) x, (uint) y});
         }
 
@@ -1065,6 +1073,8 @@ namespace CameraControl.Devices.Canon
 
         public override void StopLiveView()
         {
+            if (Camera == null)
+                return;
             Camera.ResetShutterButton();
             //if (Camera.IsInLiveViewMode)
             Camera.StopLiveView();

@@ -498,5 +498,9 @@ namespace CameraControl.Core.Translation
         public static string LabelStepMedium = "Medium step";
         public static string LabelStepLarge = "Large step";
         public static string LabelSessionOpenFolder = "Open session folder";
+        public static string LabelActivate = "Activate";
+        public static string LabelScaling = "Scaling";
+        public static string LabelHorizontal = "Horizontal";
+        public static string LabelVertical = "Vertical";
     }
 }

@@ -102,9 +102,9 @@
                 <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" ToolTip="-500" Style="{DynamicResource MetroCircleButtonStyle}"/>
                 <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" ToolTip="-100" Style="{DynamicResource MetroCircleButtonStyle}"/>
                 <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" ToolTip="-10" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                
+
                 <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                
+
                 <Button Margin="1" Width="40" Content=">" Command="{Binding FocusPCommand}" FontWeight="Bold" ToolTip="10" Style="{DynamicResource MetroCircleButtonStyle}"/>
                 <Button Margin="1" Width="40" Content=">>" Command="{Binding FocusPPCommand}" FontWeight="Bold" ToolTip="100" Style="{DynamicResource MetroCircleButtonStyle}"/>
                 <Button Margin="1" Width="40" Content=">>>" Command="{Binding FocusPPPCommand}" FontWeight="Bold" ToolTip="500" Style="{DynamicResource MetroCircleButtonStyle}"/>
@@ -152,10 +152,10 @@
         </StackPanel>
         <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}"
                 Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
-        
+
         <Button Content="{T:TranslateExtension ButtonCapture}" Height="23" Margin="0,12,9,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101"
               Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
-        
+
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
             <StackPanel>
                 <StackPanel.ScrollOwner>
@@ -181,12 +181,12 @@
 
                             <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelNoOfPhots}"/>
                             <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="2" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" Margin="2"/>
-                            
+
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
 
                             <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
                             <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="2" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
-                            
+
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
 
                             <Label Content="{Binding PhotoCount}" Grid.Row="4" Margin="5"/>
@@ -227,7 +227,7 @@
                                 <ComboBoxItem Content="{T:TranslateExtension LabelFarNear}" />
                                 <ComboBoxItem Content="{T:TranslateExtension LabelNearFar}" />
                             </ComboBox>
-                            
+
                             <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
                             <ComboBox Grid.Row="2" Grid.Column="1"  SelectedIndex="{Binding FocusStepSize}" IsEnabled="{Binding IsFree}" Margin="2">
                                 <ComboBoxItem Content="{T:TranslateExtension LabelStepSmall}" />
@@ -275,17 +275,17 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            
-                            <Label Content="{T:TranslateExtension LabelOverlay}" Grid.Column="1" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Column="3" Margin="3" SelectedIndex="{Binding GridType}" ItemsSource="{Binding Overlays}" SelectedItem="{Binding SelectedOverlay}"/>
+
+                            <Label Content="{T:TranslateExtension LabelGrid}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <ComboBox Grid.Row="0" Grid.Column="3" Margin="3" SelectedIndex="{Binding GridType}" ItemsSource="{Binding Grids}"/>
 
                             <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}" Grid.Row="1" Grid.Column="3" Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
-                            <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
+                            <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
 
                             <Label Content="{T:TranslateExtension LabelOpacity}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" />
                             <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged"/>
-                                
-                                
+
+
 
                             <Label Content="{T:TranslateExtension LabelBrightness}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" />
                             <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1">
@@ -312,6 +312,46 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
+                <Expander Header="{T:TranslateExtension LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3">
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <ComboBox Margin="2"  SelectedValue ="{Binding SelectedOverlay}" SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding Overlays}"/>
+                            <Button Grid.Row="0" Grid.Column="1" Content="..." Margin="2" Command="{Binding BrowseOverlayCommand}"/>
+                            
+                            <CheckBox Grid.Row="1" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelActivate}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayActivated}"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelScaling}" />
+                            <Slider Grid.Row="3" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayScale}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" />
+
+                            <Label Grid.Row="4" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelHorizontal}" />
+                            <Slider Grid.Row="5" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayHorizontal}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" />
+
+                            <Label Grid.Row="6" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelVertical}" />
+                            <Slider Grid.Row="7" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayVertical}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" />
+
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
                 <Expander Header="{T:TranslateExtension LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="True">
                     <Expander.Content>
                         <Grid Height="75" >
@@ -333,8 +373,8 @@
                                     <Ellipse Height="10" Width="10" Fill="Gray"/>
                                 </ToggleButton>
                             </StackPanel>
-                            <CheckBox IsChecked="{Binding HighlightUnderExp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="16"/>
-                            <CheckBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" IsChecked="{Binding HighlightOverExp}"/>
+                            <CheckBox IsChecked="{Binding HighlightUnderExp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="18"/>
+                            <CheckBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="18" IsChecked="{Binding HighlightOverExp}"/>
                         </Grid>
                     </Expander.Content>
                 </Expander>
