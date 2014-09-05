@@ -28,6 +28,8 @@
 
 #region
 
+using System;
+using System.IO;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -53,6 +55,8 @@ namespace CameraControl.Devices.Others
 
         #endregion
 
+        private LiveViewData _liveViewData = new LiveViewData();
+
         public FakeCameraDevice()
         {
             HaveLiveView = false;
@@ -73,6 +77,42 @@ namespace CameraControl.Devices.Others
             ExposureMeteringMode = new PropertyValue<int> {IsEnabled = false};
             Battery = 100;
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
+            Capabilities.Add(CapabilityEnum.LiveView);
+            LiveViewImageZoomRatio=new PropertyValue<int>();
+            LiveViewImageZoomRatio.AddValues("All",0);
+            LiveViewImageZoomRatio.Value = "All";
+        }
+
+        public override void StartLiveView()
+        {
+            _liveViewData.ImageData = File.ReadAllBytes("logo_big.jpg");
+            _liveViewData.FocusFrameXSize = 100;
+            _liveViewData.FocusFrameYSize = 100;
+            _liveViewData.HaveFocusData = true;
+            _liveViewData.IsLiveViewRunning = true;
+            _liveViewData.LiveViewImageHeight = 639;
+            _liveViewData.LiveViewImageWidth = 639;
+            _liveViewData.ImageWidth = 639;
+            _liveViewData.ImageHeight = 639;
+            _liveViewData.FocusX = 639/2;
+            _liveViewData.FocusY = 639 / 2;
+        }
+
+        public override void StopLiveView()
+        {
+            
+        }
+
+
+        public override LiveViewData GetLiveViewImage()
+        {
+            return _liveViewData;
+        }
+
+        public override void Focus(int x, int y)
+        {
+            _liveViewData.FocusX = x;
+            _liveViewData.FocusY = y;
         }
     }
 }
