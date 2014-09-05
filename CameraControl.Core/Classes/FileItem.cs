@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
@@ -410,11 +411,11 @@ namespace CameraControl.Core.Classes
             {
                 if (!Directory.Exists(Path.GetDirectoryName(InfoFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(InfoFile));
-
+                FileInfo.ValidateValues();
                 XmlSerializer serializer = new XmlSerializer(typeof (FileInfo));
                 // Create a FileStream to write with.
-
-                Stream writer = new FileStream(InfoFile, FileMode.Create);
+                System.Text.Encoding code = Encoding.GetEncoding("UTF-8");
+                StreamWriter writer = new StreamWriter(InfoFile, false, code);
                 // Serialize the object, and close the TextWriter
                 serializer.Serialize(writer, FileInfo);
                 writer.Close();

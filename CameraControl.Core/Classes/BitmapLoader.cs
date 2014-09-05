@@ -188,7 +188,7 @@ namespace CameraControl.Core.Classes
                                                              (int) (writeableBitmap.PixelHeight*dw),
                                                              WriteableBitmapExtensions.Interpolation.Bilinear);
 
-                    if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") && !fileItem.IsRaw)
+                    if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
                     {
                         if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
                             writeableBitmap = writeableBitmap.Rotate(180);
@@ -437,7 +437,7 @@ namespace CameraControl.Core.Classes
                 if (ServiceProvider.Settings.ShowFocusPoints)
                     DrawFocusPoints(fileItem, bitmap);
 
-                if (fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") && !fileItem.IsRaw)
+                if (fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
                 {
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
                         bitmap = bitmap.Rotate(180);

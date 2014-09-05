@@ -56,5 +56,13 @@ namespace CameraControl.Core.Classes
             ExifTags = new ValuePairEnumerator();
             FocusPoints = new List<Rect>();
         }
+
+        public void ValidateValues()
+        {
+            foreach (var exifTag in ExifTags.Items )
+            {
+                exifTag.Value = exifTag.Value.Replace('\0', ' ');
+            }
+        }
     }
 }
