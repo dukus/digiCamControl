@@ -356,11 +356,11 @@ namespace PortableDeviceLib
 
             IntPtr tmpPtr = new IntPtr(Marshal.ReadInt64(ptr));
             resp.Data = new byte[(int)cbBytesRead];
-            //Marshal.Copy(tmpPtr, resp.Data, 0, (int)cbBytesRead);
-            for (int i = 0; i < cbBytesRead; i++)
-            {
-                resp.Data[i] = Marshal.ReadByte(tmpPtr, i);
-            }
+            Marshal.Copy(tmpPtr, resp.Data, 0, (int)cbBytesRead);
+            //for (int i = 0; i < cbBytesRead; i++)
+            //{
+            //    resp.Data[i] = Marshal.ReadByte(tmpPtr, i);
+            //}
 
             Marshal.FreeHGlobal(tmpPtr);
             pinnedArray.Free();

@@ -71,7 +71,7 @@ namespace CameraControl.windows
     public partial class LiveViewWnd : MetroWindow, IWindow, INotifyPropertyChanged
     {
 
-        private ICameraDevice selectedPortableDevice;
+        private ICameraDevice _selectedPortableDevice;
         
         private DateTime _focusMoveTime = DateTime.Now;
 
@@ -91,12 +91,12 @@ namespace CameraControl.windows
 
         public ICameraDevice SelectedPortableDevice
         {
-            get { return this.selectedPortableDevice; }
+            get { return this._selectedPortableDevice; }
             set
             {
-                if (this.selectedPortableDevice != value)
+                if (this._selectedPortableDevice != value)
                 {
-                    this.selectedPortableDevice = value;
+                    this._selectedPortableDevice = value;
                     NotifyPropertyChanged("SelectedPortableDevice");
                 }
             }
@@ -136,7 +136,7 @@ namespace CameraControl.windows
         private void image1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && 
-                selectedPortableDevice.LiveViewImageZoomRatio.Value == "All")
+                _selectedPortableDevice.LiveViewImageZoomRatio.Value == "All")
             {
                 try
                 {

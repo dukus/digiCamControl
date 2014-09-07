@@ -31,6 +31,7 @@ namespace CameraControl.ViewModel
     public class LiveViewViewModel : ViewModelBase
     {
         private const int DesiredFrameRate = 20;
+        private const int DesiredWebFrameRate = 5;
 
         private bool _operInProgress = false;
         private int _totalframes = 0;
@@ -297,6 +298,7 @@ namespace CameraControl.ViewModel
             get { return !SimpleFocusStacking; }
         }
 
+        public bool ShowHistogram { get; set; }
 
         #region motion detection
 
@@ -987,8 +989,9 @@ namespace CameraControl.ViewModel
 
         void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (!_worker.IsBusy)
-                _worker.RunWorkerAsync();
+            //if (!_worker.IsBusy)
+            //    _worker.RunWorkerAsync();
+            ThreadPool.QueueUserWorkItem(GetLiveImage);
         }
 
         void _freezeTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -1044,7 +1047,12 @@ namespace CameraControl.ViewModel
             }
         }
 
-   
+
+        public virtual void GetLiveImage(object o)
+        {
+            GetLiveImage();
+        }
+
         public virtual void GetLiveImage()
         {
             if (_operInProgress)
@@ -1113,7 +1121,7 @@ namespace CameraControl.ViewModel
                             ProcessMotionDetection(bmp);
                         }
 
-                        if (_totalframes%DesiredFrameRate == 0)
+                        if (_totalframes % DesiredFrameRate == 0 && ShowHistogram)
                         {
                             ImageStatisticsHSL hslStatistics =
                                 new ImageStatisticsHSL(bmp);
@@ -1220,7 +1228,8 @@ namespace CameraControl.ViewModel
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
-                        ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
+                        if (_totalframes%DesiredWebFrameRate == 0)
+                            ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
                     }
                     stream.Close();
                 }
@@ -1238,7 +1247,7 @@ namespace CameraControl.ViewModel
         public byte[] SaveJpeg(WriteableBitmap image)
         {
             var enc = new JpegBitmapEncoder();
-            enc.QualityLevel = 90;
+            enc.QualityLevel = 50;
             enc.Frames.Add(BitmapFrame.Create(image));
 
             using (MemoryStream stm = new MemoryStream())
