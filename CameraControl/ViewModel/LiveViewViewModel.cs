@@ -90,6 +90,7 @@ namespace CameraControl.ViewModel
         private int _overlayScale;
         private int _overlayHorizontal;
         private int _overlayVertical;
+        private bool _stayOnTop;
 
         public ICameraDevice CameraDevice
         {
@@ -690,6 +691,17 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(()=>SimpleManualFocus);
             }
         }
+
+        public bool StayOnTop
+        {
+            get { return _stayOnTop; }
+            set
+            {
+                _stayOnTop = value;
+                RaisePropertyChanged(() => StayOnTop);
+            }
+        }
+
 
         public LiveViewData LiveViewData { get; set; }
 

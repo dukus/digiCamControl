@@ -50,8 +50,6 @@
                     </StackPanel>
                 </StackPanel>
             </Controls:Flyout>
-            <Controls:Flyout Header="{T:TranslateExtension MenuConnectedCameras}" Background="#9f000000" Position="Left" Opacity="0.9">
-            </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 

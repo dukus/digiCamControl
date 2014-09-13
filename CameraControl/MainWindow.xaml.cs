@@ -256,7 +256,6 @@ namespace CameraControl
         private void HideFlatOuts()
         {
             ((Flyout) Flyouts.Items[0]).IsOpen = false;
-            ((Flyout) Flyouts.Items[1]).IsOpen = false;
         }
 
         private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
@@ -684,7 +683,6 @@ namespace CameraControl
         private void btn_menu_Click(object sender, RoutedEventArgs e)
         {
             ((Flyout) Flyouts.Items[0]).IsOpen = !((Flyout) Flyouts.Items[0]).IsOpen;
-            ((Flyout) Flyouts.Items[1]).IsOpen = !((Flyout) Flyouts.Items[1]).IsOpen;
         }
 
         private void mnu_forum_Click(object sender, RoutedEventArgs e)

@@ -10,7 +10,7 @@
                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:ViewModel="clr-namespace:CameraControl.ViewModel"
-                      mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding ElementName=chk_top,Path=IsChecked}"
+                      mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}"
                       ShowMinButton="False" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged">
     <Window.DataContext>
@@ -148,7 +148,7 @@
                     </Rectangle>
                 </ToggleButton>
             </StackPanel>
-            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="50" Width="462" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="1" Width="462" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" />
         </StackPanel>
         <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}"
                 Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
@@ -283,12 +283,12 @@
                             <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
 
                             <Label Content="{T:TranslateExtension LabelOpacity}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" />
-                            <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged"/>
+                            <Slider Name="slider_transparent" Maximum="1" Value="1" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" ValueChanged="slider_transparent_ValueChanged" TickFrequency="0.5" TickPlacement="BottomRight" />
 
 
 
                             <Label Content="{T:TranslateExtension LabelBrightness}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" />
-                            <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1">
+                            <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" TickFrequency="255" TickPlacement="BottomRight">
                                 <Slider.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="{T:TranslateExtension LabelReset}" Command="{Binding Path=ResetBrigthnessCommand}" />
@@ -296,7 +296,7 @@
                                 </Slider.ContextMenu>
                             </Slider>
                             <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
-                            <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" Name="chk_top" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                            <!--<CheckBox Content="{T:TranslateExtension LabelStayOnTop}" IsChecked="{Binding Path=StayOnTop}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>-->
                             <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                             <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
 
@@ -341,13 +341,13 @@
                             <CheckBox Grid.Row="1" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelActivate}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayActivated}"/>
 
                             <Label Grid.Row="2" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelScaling}" />
-                            <Slider Grid.Row="3" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayScale}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" />
+                            <Slider Grid.Row="3" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayScale}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" />
 
                             <Label Grid.Row="4" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelHorizontal}" />
-                            <Slider Grid.Row="5" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayHorizontal}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" />
+                            <Slider Grid.Row="5" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayHorizontal}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" />
 
                             <Label Grid.Row="6" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelVertical}" />
-                            <Slider Grid.Row="7" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayVertical}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" />
+                            <Slider Grid.Row="7" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayVertical}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" />
 
                         </Grid>
                     </Expander.Content>

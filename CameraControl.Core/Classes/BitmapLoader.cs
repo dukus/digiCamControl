@@ -515,6 +515,8 @@ namespace CameraControl.Core.Classes
 
         private void DrawFocusPoints(FileItem fileItem, WriteableBitmap bitmap)
         {
+            if (fileItem.FileInfo == null || fileItem.FileInfo.Width == 0 || fileItem.FileInfo.Height == 0)
+                return;
             bitmap.Lock();
             double dw = (double) bitmap.PixelWidth/fileItem.FileInfo.Width;
             double dh = (double) bitmap.PixelHeight/fileItem.FileInfo.Height;

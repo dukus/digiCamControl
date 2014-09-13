@@ -7,12 +7,12 @@ Name digiCamControl
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.1.809
+!define VERSION 1.1.814
 !define COMPANY "Duka Istvan"
 !define URL http://www.digicamcontrol.com/
 
 # MUI Symbol Definitions
-!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\classic-install.ico"
+!define MUI_ICON "..\CameraControl\logo.ico"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE
@@ -163,8 +163,7 @@ Function .onInit
 
  uninstold:
   ClearErrors
-  ExecWait '$R0' ;Do not copy the uninstaller to a temp file
- 
+  ExecWait '$R0 _?=$INSTDIR' ;Do not copy the uninstaller to a temp file
   IfErrors no_remove_uninstaller done
 
 nextun:  

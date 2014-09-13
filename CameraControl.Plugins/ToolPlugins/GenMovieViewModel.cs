@@ -293,13 +293,12 @@ namespace CameraControl.Plugins.ToolPlugins
                     string outfile = Path.Combine(tempFolder, "img" + counter.ToString("000000") + ".jpg");
                     CopyFile(item.FileName, outfile);
                     OutPut.Insert(0,"Procesing file " + item.Name);
-
+                    counter++;
                 }
                 catch (Exception exception)
                 {
                     OutPut.Add(exception.Message);
                 }
-                counter++;
             }
 
             try
@@ -325,13 +324,22 @@ namespace CameraControl.Plugins.ToolPlugins
                 newprocess.BeginOutputReadLine();
                 newprocess.BeginErrorReadLine();
                 newprocess.WaitForExit();
-                OutPut.Insert(0, "DONE !!!");
             }
             catch (Exception exception)
             {
                 OutPut.Insert(0, "Converting error :" + exception.Message);
             }
 
+            try
+            {
+                OutPut.Insert(0, "Removing temporary folder ..");
+                Directory.Delete(tempFolder);
+            }
+            catch (Exception ex)
+            {
+                OutPut.Insert(0, "Error :" + ex.Message);
+            }
+            OutPut.Insert(0, "DONE !!!");
         }
 
         private void newprocess_OutputDataReceived(object sender, DataReceivedEventArgs e)
