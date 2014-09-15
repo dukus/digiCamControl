@@ -135,7 +135,18 @@
   <string name="LabelSessonName">Имя сессии:</string>
   <string name="LabelFolder">Папка:</string>
   <string name="LabelFileNameTemplate">Имя шаблона:</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Имя сессии\n$C - Счётчик\n$E - Поправка экспозиции\n$X - Имя камеры\n$D - Текущая дата\n$UTime - Штамп времени\n$Type - Тип файла (Raw/Jpg)\n$B - Штрих-код\n$Tag1 - Выбрать метку 1\n$Tag2 - Выбрать метку 2\n$Tag3 - Выбрать метку 3\n$Tag4 - Выбрать метку 4</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Имя сессии
+$C - Счётчик
+$E - Поправка экспозиции
+$X - Имя камеры
+$D - Текущая дата
+$UTime - Штамп времени
+$Type - Тип файла (Raw/Jpg)
+$B - Штрих-код
+$Tag1 - Выбрать метку 1
+$Tag2 - Выбрать метку 2
+$Tag3 - Выбрать метку 3
+$Tag4 - Выбрать метку 4</string>
   <string name="LabelCounter">Счетчик:</string>
   <string name="LabelUseOriginal">Используйте исходное имя файла данное камерой</string>
   <string name="LabelUseOriginalToolTip">Эта опция не работает с драйвером WIA</string>
@@ -193,14 +204,11 @@
   <string name="LabelVideoCodecProblem">Проблема с видеокодеком</string>
   <string name="MsgPhotoTransferBegin">Передача фото началась</string>
   <string name="MsgPhotoTransferDone">Передача фото закончена</string>
-  <string name="MsgPhotoTransferError">Ошибка передачи!\nСообщение: {0}</string>
   <string name="MsgBulbModeNotSupported">Выдержка от руки не поддерживается !</string>
   <string name="MsgApplicationUpToDate">Ваша программа имеет последнею версию !</string>
   <string name="MsgUseSessionEditorTags">Используйте редактор сеанса для определения меток!</string>
   <string name="MsgLastSessionCantBeDeleted">Последняя сессия не может быть удалена</string>
   <string name="MsgStopTimeLapse">Замедленная киносъёмка не завершена! Желаете остановит замедленную киносъёмку?</string>
-  <string name="MsgInstallXvidCodec">Xvid кодек не установлен!\nЖелаете скачать и установить его?</string>
-  <string name="MsgDeleteSessionQuestion">Вы желаете продолжить удаление сессии {0} ?\nФайлы не будут удалены !</string>
   <string name="MsgBracketingDone">Брекетинг закончен</string>
   <string name="MsgActionInProgress">Действие выполняется {0}/{1}</string>
   <string name="MenuFile">Файл</string>
@@ -278,7 +286,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Загрузить фотографии</string>
   <string name="LabelDeleteFilesAfterTransfer">Удалить файлы после передачи</string>
-  <string name="LabelAskForDelete">Передаваемые файлы будут удалены.\nВы желаете продолжить?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Ошибка выбранной позиции фокуса</string>
   <string name="LabelErrorUnableFocus">Не возможно сфокусировать</string>
@@ -314,7 +321,6 @@
   <string name="LabelAdvanced">Дополнительно</string>
   <string name="LabelUseParellelTransfer">Использовать параллельный перенос файлов</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Возникла ошибка приложения.\nПожалуйста проверьте ваши данные верны и повторите действие. Если эта ошибка возникает снова, тогда это более серьезный сбой в приложении и вам лучше закрыть его.\n\nОшибка:{0}\n\nВы желаете продолжить?\n(Если вы нажмёте Да вы продолжите вашу работу, если вы нажмёте Нет тогда приложение закроется)</string>
   <string name="LabelApplicationError">Ошибка приложения</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 не установлен</string>
   <string name="LabelRestartTheApplication">Перезапустить приложение !</string>
@@ -419,4 +425,8 @@
   <string name="LabelSelectNone">Отменить выбор</string>
   <string name="LabelSelectLiked">Выбрать понравившиеся</string>
   <string name="LabelSelectUnLiked">Выбрать не понравившиеся</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Live view</string>
+  <!--17.05.2014-->
 </resources>

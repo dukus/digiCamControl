@@ -136,7 +136,18 @@
   <string name="LabelSessonName">Nombre de Sesión :</string>
   <string name="LabelFolder">Carpeta :</string>
   <string name="LabelFileNameTemplate">Plantilla para nombre de archivo :</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Nombre sesión\n$C - Contador\n$E - Compensación exposición\n$X - Nombre cámara\n$D - Fecha actual\n$UTime - Unidad marca de tiempo\n$Type - Tipo de archivo (Raw|Jpg)\n$B - Código de barras\n$Tag1 - Seleccionada etiqueta 1\n$Tag2 - Seleccionada etiqueta 2\n$Tag3 - Seleccionada etiqueta 3\n$Tag4 - Seleccionada etiqueta 4</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Nombre sesión
+$C - Contador
+$E - Compensación exposición
+$X - Nombre cámara
+$D - Fecha actual
+$UTime - Unidad marca de tiempo
+$Type - Tipo de archivo (Raw|Jpg)
+$B - Código de barras
+$Tag1 - Seleccionada etiqueta 1
+$Tag2 - Seleccionada etiqueta 2
+$Tag3 - Seleccionada etiqueta 3
+$Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelCounter">Contador :</string>
   <string name="LabelUseOriginal">Usar el nombre de archivo original dado por la cámara</string>
   <string name="LabelUseOriginalToolTip">Esta opción no funciona con el controlador WIA</string>
@@ -195,14 +206,11 @@
   <string name="LabelVideoCodecProblem">Problema con codec de video</string>
   <string name="MsgPhotoTransferBegin">Comenzar transferencia de fotos</string>
   <string name="MsgPhotoTransferDone">Transferencia de fotos completada</string>
-  <string name="MsgPhotoTransferError">Error de transferencia !\nMensaje :{0}</string>
   <string name="MsgBulbModeNotSupported">Modo Bulb no soportado !</string>
   <string name="MsgApplicationUpToDate">Su aplicación está al día !</string>
   <string name="MsgUseSessionEditorTags">Use el editor de sesiones para definir etiquetas !</string>
   <string name="MsgLastSessionCantBeDeleted">La última sesión no puede ser borrada</string>
   <string name="MsgStopTimeLapse">La secuencia de tomas no ha terminado! ¿Quiere detener la secuencia de tomas?</string>
-  <string name="MsgInstallXvidCodec">El Codec de Xvid no está instalado !\n¿Quiere descargarlo e instalarlo?</string>
-  <string name="MsgDeleteSessionQuestion">¿Quiere continuar borrando la sesión {0} ? \nNo se borrarán archivos !</string>
   <string name="MsgBracketingDone">Horquillado efectuado</string>
   <string name="MsgActionInProgress">Acción llevándose acabo {0}/{1}</string>
   <string name="MenuFile">_Archivo</string>
@@ -281,7 +289,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Descargar fotos</string>
   <string name="LabelDeleteFilesAfterTransfer">Borrar archivos después de transferir</string>
-  <string name="LabelAskForDelete">Los archivos transferidos serán borrados.\n¿Desea continuar?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Error de posición de ajustar enfoque</string>
   <string name="LabelErrorUnableFocus">Imposible enfocar</string>
@@ -317,7 +324,6 @@
   <string name="LabelAdvanced">Avanzado</string>
   <string name="LabelUseParellelTransfer">Usar transferencia de archivos en paralelo</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Ocurrió un error en la aplicación.\nPor favor verifique si los datos son correctos y repita la acción. Si este error ocurre de nuevo parecerá que se trata de un defecto serio de la aplicación, y mejor ciérrela.\n\nError:{0}\n\n¿Desea continuar?\n(Si elige Si continuará con su trabajo, si presiona No la aplicación se cerrará)</string>
   <string name="LabelApplicationError">Error de aplicación</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 no instalado</string>
   <string name="LabelRestartTheApplication">Reinicie la aplicación !</string>
@@ -356,7 +362,6 @@
   <string name="LabelTTLError">Error de TTL</string>
   <string name="LabelNonCPULEnseError">Un lente sin CPU está montado y el modo de exposición no es M.</string>
   <string name="LabelImageInRAM">Existe una imagen cuyo destino de grabación es la SDRAM.</string>
-  <string name="LabelNoCardInsertedError">El destino de grabación es la tarjeta o la tarjeta y la SDRAM,\ny la tarjeta no está insertada con el liberador deshabilitado sin tarjeta.</string>
   <string name="LabelCommandProcesingError">Durante el procesado por el comando de disparo</string>
   <string name="LabelShoutingInProgress">El modo de disparo está en EFECTOS.</string>
   <string name="LabelOverHeatedError">Live view no puede ser activado cuando la temperatura se eleva.</string>
@@ -431,4 +436,8 @@
   <string name="LabelSelectNone">Elija nada</string>
   <string name="LabelSelectLiked">Elija la que le gusta</string>
   <string name="LabelSelectUnLiked">Elija la que no le gusta</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Live View</string>
+  <!--17.05.2014-->
 </resources>

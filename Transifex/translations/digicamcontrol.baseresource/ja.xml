@@ -189,14 +189,11 @@
   <string name="LabelVideoCodecProblem">ビデオコーデックの問題</string>
   <string name="MsgPhotoTransferBegin">写真転送開始</string>
   <string name="MsgPhotoTransferDone">写真転送終了</string>
-  <string name="MsgPhotoTransferError">転送失敗！\nメッセージ：｛0｝</string>
   <string name="MsgBulbModeNotSupported">バルブ撮影は未対応です</string>
   <string name="MsgApplicationUpToDate">アプリケーションは最新です！</string>
   <string name="MsgUseSessionEditorTags">タグ定義には作業エディタを使います！</string>
   <string name="MsgLastSessionCantBeDeleted">最新の作業結果は削除されていません</string>
   <string name="MsgStopTimeLapse">微速度撮影は終了していません！　微速度撮影を終了しますか？</string>
-  <string name="MsgInstallXvidCodec">Xvidコーデックがインストールされていません！\nダウンロードしてインストールしますか？</string>
-  <string name="MsgDeleteSessionQuestion">作業削除を続行しますか？　ファイルは何も削除されていません！</string>
   <string name="MsgBracketingDone">ブラケット撮影終了</string>
   <string name="MsgActionInProgress">実行中です {0}/{1}</string>
   <string name="MenuFile">_ファイル</string>
@@ -275,7 +272,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">写真のダウンロード</string>
   <string name="LabelDeleteFilesAfterTransfer">転送後にファイルを削除</string>
-  <string name="LabelAskForDelete">転送したファイルは削除されます。　続けますか？</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">フォーカス位置エラー</string>
   <string name="LabelErrorUnableFocus">ピントが合いません</string>
@@ -311,7 +307,6 @@
   <string name="LabelAdvanced">拡張</string>
   <string name="LabelUseParellelTransfer">並列ファイル転送を使う</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">アプリケーションエラーが発生しました。\nデータが正しいか確認して再試行して下さい。　このエラーが再発したりより深刻な故障と思われる場合はアプリケーションを終了して下さい。\nエラー：{0}\n\n続行しますか？\n（「はい」をクリックすると続行します。「いいえをクリックすると終了します」）</string>
   <string name="LabelApplicationError">アプリケーションエラー</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 がインストールされていません。</string>
   <string name="LabelRestartTheApplication">アプリケーションを再起動して下さい！</string>
@@ -389,4 +384,8 @@
   <string name="LabelSelection">選択</string>
   <string name="LabelSelectAll">全選択</string>
   <string name="LabelSelectNone">選択しない</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">ライブビュー</string>
+  <!--17.05.2014-->
 </resources>

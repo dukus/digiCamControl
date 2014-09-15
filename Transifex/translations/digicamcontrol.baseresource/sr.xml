@@ -74,7 +74,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Preuzmi fotografije</string>
   <string name="LabelDeleteFilesAfterTransfer">Obriši datoteke posle prenosa</string>
-  <string name="LabelAskForDelete">Prenesene datoteke biće obrisane.⏎ Da li želite da nastavite ?</string>
   <!--26/11/2012-->
   <!--28/11/2012-->
   <!--30/11/2012-->
@@ -97,4 +96,8 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Živi prikaz</string>
+  <!--17.05.2014-->
 </resources>

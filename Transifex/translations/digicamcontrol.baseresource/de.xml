@@ -194,14 +194,11 @@
   <string name="LabelVideoCodecProblem">Filmkodierungsproblem</string>
   <string name="MsgPhotoTransferBegin">Fotoübertragung starten</string>
   <string name="MsgPhotoTransferDone">Fotoübertragung abgeschlossen</string>
-  <string name="MsgPhotoTransferError">Übertragungsfehler!\nMeldung :{0}</string>
   <string name="MsgBulbModeNotSupported">Langzeitbelichtungsmodus nicht unterstützt!</string>
   <string name="MsgApplicationUpToDate">Ihr Programm ist aktuell!</string>
   <string name="MsgUseSessionEditorTags">Verwenden Sie den Sitzungeditor um Einträge zu erstellen!</string>
   <string name="MsgLastSessionCantBeDeleted">Letzte Sitzung kann nicht gelöscht werden</string>
   <string name="MsgStopTimeLapse">Der Zeitraffer ist nicht fertig! Soll der Zeitraffer abgebrochen werden?</string>
-  <string name="MsgInstallXvidCodec">Xvid Kodierung ist nicht installiert!\nXvid herunterladen und installieren? </string>
-  <string name="MsgDeleteSessionQuestion">Wollen Sie diese Sizung löschen {0}?\nEs werden keine Dateien gelöscht!</string>
   <string name="MsgBracketingDone">Belichtungsreihe fertig</string>
   <string name="MsgActionInProgress">Aktion wird ausgeführt {0}/{1}</string>
   <string name="MenuFile">Datei</string>
@@ -280,7 +277,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Bilder herunterladen</string>
   <string name="LabelDeleteFilesAfterTransfer">Dateien nach der Übertragung löschen</string>
-  <string name="LabelAskForDelete">Übertragene Datein werden gelöscht.\nWollen Sie die Daten löschen?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Fehler bei der Fokusierung</string>
   <string name="LabelErrorUnableFocus">Fokusierung nicht möglich</string>
@@ -316,7 +312,6 @@
   <string name="LabelAdvanced">Erweitert</string>
   <string name="LabelUseParellelTransfer">Benutze parallele Datenübertragung</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Es ist ein Programmfehler aufgetreten!\nBitte überprüfen Sie, ob Ihre Daten korrekt sind und wiederholen Sie die Aktion. Wenn dieser Fehler erneut auftritt scheint eine ernsthafte Störung in der Anwendung vorzuliegen. Es wird empfohlen die Anwendung zu schließen.\n\nError:{0}\n\nWollen Sie trotzdem fortfahren?\n(Wenn Sie auf \"Ja\" klicken, werden Sie mit Ihrer Arbeit fortfahren, wenn Sie auf \"Nein\" klicken, wird die Anwendung geschlossen.)</string>
   <string name="LabelApplicationError">Anwendungsfehler</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 ist nicht installiert</string>
   <string name="LabelRestartTheApplication">Programm neu starten!</string>
@@ -355,7 +350,6 @@
   <string name="LabelTTLError">TTL-Fehler</string>
   <string name="LabelNonCPULEnseError">Ein Objektiv ohne CPU ist montiert und die Belichtung ist nicht M.</string>
   <string name="LabelImageInRAM">Es ist ein Bild, dessen Aufnahme Ziel SDRAM ist.</string>
-  <string name="LabelNoCardInsertedError">Das Aufnahmeziel ist die Karte oder die Karte und das SDRAM,⏎\ndie Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt.</string>
   <string name="LabelCommandProcesingError">Während der Verarbeitung durch den Dreharbeiten-Befehl</string>
   <string name="LabelShoutingInProgress">Der Aufnahmemodus ist Effects.</string>
   <string name="LabelOverHeatedError">Die Live-Ansicht kann nicht gestartet werden wenn die Temperatur ansteigt.</string>
@@ -426,4 +420,8 @@
   <string name="LabelSelectNone">Nichts auswählen</string>
   <string name="LabelSelectLiked">Favoriten auswählen</string>
   <string name="LabelSelectUnLiked">Abgewiesene auswählen</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Live-Ansicht</string>
+  <!--17.05.2014-->
 </resources>

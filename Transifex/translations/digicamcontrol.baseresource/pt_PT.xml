@@ -135,12 +135,10 @@
   <string name="LabelVideoCodecProblem">Problema com o codec de vídeo </string>
   <string name="MsgPhotoTransferBegin">Inicio de transferência de fotografias </string>
   <string name="MsgPhotoTransferDone">Transferência de fotografias finalizada </string>
-  <string name="MsgPhotoTransferError">Erro de Transferência !⏎ Mensagem :{0}</string>
   <string name="MsgBulbModeNotSupported">Modo Bulb não suportado </string>
   <string name="MsgApplicationUpToDate">Aplicação está actualizada </string>
   <string name="MsgLastSessionCantBeDeleted">Ultima sessão não pode ser apagada </string>
   <string name="MsgStopTimeLapse">O Timelapse não acabou! Pretende parar o Timelapse ?</string>
-  <string name="MsgInstallXvidCodec">Codec Xvid não instalado !⏎ Pretende fazer o download e instalar ?</string>
   <string name="MsgBracketingDone">Bracketing Finalizado</string>
   <string name="MsgActionInProgress">Acção em progresso {0}/{1}</string>
   <string name="MenuFile">_Ficheiro</string>
@@ -205,7 +203,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Download de fotografias</string>
   <string name="LabelDeleteFilesAfterTransfer">Eliminar ficheiros depois de transferidos </string>
-  <string name="LabelAskForDelete">Ficheiros transferidos  vão ser eliminados.⏎ Quer continuar ?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Erro a configurar o ponto de foco </string>
   <string name="LabelErrorUnableFocus">Incapaz de focar </string>
@@ -269,4 +266,7 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <!--17.05.2014-->
 </resources>

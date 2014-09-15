@@ -483,4 +483,19 @@
 	<string name="LabelRefreshSession">Refresh file list</string>
 	<string name="LabelErrorEmail">Your email address (if you want get feedback)</string>
 	<string name="LabelApertureBracketing">Aperture bracketing </string>
+<!-- 	        //20/08/2014 -->
+        <string name="LabelCaptureName">Capture Name"</string>
+        <string name="LabelSeries">Series"</string>
+        <string name="LabelAdvancedProperties">Advanced Properties"</string>
+        <string name="LabelDirection">Direction"</string>
+        <string name="LabelFarNear">Far -> Near"</string>
+        <string name="LabelNearFar">Near -> Far"</string>
+        <string name="LabelStepSmall">Small step"</string>
+        <string name="LabelStepMedium">Medium step"</string>
+        <string name="LabelStepLarge">Large step"</string>
+        <string name="LabelSessionOpenFolder">Open session folder"</string>
+        <string name="LabelActivate">Activate"</string>
+        <string name="LabelScaling">Scaling"</string>
+        <string name="LabelHorizontal">Horizontal"</string>
+        <string name="LabelVertical">Vertical"</string>
 </resources>

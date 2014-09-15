@@ -180,14 +180,11 @@
   <string name="LabelVideoCodecProblem">Video codec problemi</string>
   <string name="MsgPhotoTransferBegin">Fotoğraf aktarımı başladı</string>
   <string name="MsgPhotoTransferDone">Fotoğraf aktarımı tamamlandı </string>
-  <string name="MsgPhotoTransferError">Aktarım başarısız ! \n Mesaj:{0}</string>
   <string name="MsgBulbModeNotSupported">Bulb modu desteklenmiyor !</string>
   <string name="MsgApplicationUpToDate">Yazılımınız güncellendi !</string>
   <string name="MsgUseSessionEditorTags">Etiketleri tanımlamak için oturum düzenleyicisini kullanınız !</string>
   <string name="MsgLastSessionCantBeDeleted">Son oturum silinemez</string>
   <string name="MsgStopTimeLapse">Aralıklı çekim bitmedi! Durdurmak ister misiniz</string>
-  <string name="MsgInstallXvidCodec">Xvid codec yüklü değil ! \nİndirip yüklemek ister misiniz?</string>
-  <string name="MsgDeleteSessionQuestion">{0} oturumunu silmek istiyor musunuz? \n Hiçbir dosya silinmeyecek !</string>
   <string name="MsgBracketingDone">Basamaklama tamamlandı</string>
   <string name="MsgActionInProgress">Action in progress {0}/{1}</string>
   <string name="MenuFile">_Dosya</string>
@@ -266,7 +263,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Fotoğrafları indir</string>
   <string name="LabelDeleteFilesAfterTransfer">Taşınma sonrasında dosyaları sil</string>
-  <string name="LabelAskForDelete">Taşınan dosyalar silinecek.\nDevam etmek istiyor musunuz?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Odak pozisyonu ayarlama hatalı</string>
   <string name="LabelErrorUnableFocus">Odaklanılamıyor</string>
@@ -302,7 +298,6 @@
   <string name="LabelAdvanced">Gelişmiş</string>
   <string name="LabelUseParellelTransfer">Paralel dosya aktarımını kullan</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Uygulama hatası oluştu.\n Lütfen verilerinizin doğru olup olmadığını kontrol edin ve işlemi tekrarlayın. Eğer bu hata tekrar oluşursa, uygulamada daha ciddi bir bozunma var demektir ve en iyisi kapatın. \n\n Hata:{0}\n\n Devam etmek istiyor musunuz?\n(Eğer Evet\'e tıklarsanız işinize devam edeceksiniz, Eğer hayır\'a tıklarsanız uygulama kapatılacak)</string>
   <string name="LabelApplicationError">Uygulama Hatası</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 yüklü değil</string>
   <string name="LabelRestartTheApplication">Uygulamayı yeniden başlatın!</string>
@@ -327,4 +322,8 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Canlı Görünüm</string>
+  <!--17.05.2014-->
 </resources>

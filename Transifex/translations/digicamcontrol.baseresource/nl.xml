@@ -136,7 +136,18 @@
   <string name="LabelSessonName">Sessie naam:</string>
   <string name="LabelFolder">Map:</string>
   <string name="LabelFileNameTemplate">Bestandsnaam Template:</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Sessie naam\n$C - Teller\n$E - Belichtings correctie\n$X - Camera naam\n$D - Actuele datum\n$UTime - Unix tijdnotatie\n$Type - Bestandstype (RAW|Jpg)\n$B - Streepjescode\n$Tag1 - Geselecteerde label 1\n$Tag2 - Geselecteerde label 2\n$Tag3 - Geselecteerde tabel 3\n$Tag4 - Geselecteerde tabel 4</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Sessie naam
+$C - Teller
+$E - Belichtings correctie
+$X - Camera naam
+$D - Actuele datum
+$UTime - Unix tijdnotatie
+$Type - Bestandstype (RAW|Jpg)
+$B - Streepjescode
+$Tag1 - Geselecteerde label 1
+$Tag2 - Geselecteerde label 2
+$Tag3 - Geselecteerde tabel 3
+$Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelCounter">Teller:</string>
   <string name="LabelUseOriginal">Gebruik originele camera bestandsnaam</string>
   <string name="LabelUseOriginalToolTip">De optie werkt niet via de WIA driver</string>
@@ -195,14 +206,11 @@
   <string name="LabelVideoCodecProblem">Video codec probleem</string>
   <string name="MsgPhotoTransferBegin">Begin foto overdracht</string>
   <string name="MsgPhotoTransferDone">Foto overdracht uitgevoerd</string>
-  <string name="MsgPhotoTransferError">Overdracht fout !⏎ Melding :{0}</string>
   <string name="MsgBulbModeNotSupported">Bulb-modus niet ondersteund!</string>
   <string name="MsgApplicationUpToDate">Dit programma is bijgewerkt!</string>
   <string name="MsgUseSessionEditorTags">Gebruik de sessie editor om de tags te definiëren!</string>
   <string name="MsgLastSessionCantBeDeleted">Laatste sessie kan niet worden verwijderd</string>
   <string name="MsgStopTimeLapse">De time-lapse is niet beëindigd! Wilt u de time-lapse afbreken?</string>
-  <string name="MsgInstallXvidCodec">Xvid codec niet geïnstalleerd!⏎ Wilt u deze downloaden en installeren?</string>
-  <string name="MsgDeleteSessionQuestion">Wilt U doorgaan met het verwijderen van sessie {0} ?⏎ Er worden geen bestanden gewist!</string>
   <string name="MsgBracketingDone">Bracketing uitgevoerd</string>
   <string name="MsgActionInProgress">Actie wordt uitgevoerd {0}/{1}</string>
   <string name="MenuFile">_Bestand</string>
@@ -281,7 +289,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Download foto\'s</string>
   <string name="LabelDeleteFilesAfterTransfer">Verwijder bestanden na overdracht</string>
-  <string name="LabelAskForDelete">Overgedragen bestanden zullen worden verwijderd.\nWil je verder gaan?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Fout bij instelling focus positie</string>
   <string name="LabelErrorUnableFocus">Scherpstellen niet mogelijk</string>
@@ -317,7 +324,6 @@
   <string name="LabelAdvanced">Geavanceerd</string>
   <string name="LabelUseParellelTransfer">Gebruik parallele bestandsoverdracht</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Een programmafout is opgetreden.⏎ Controleer of uw data correct is en herhaal de actie. Als de fout blijft optreden dan is dit waarschijnlijk het gevolg van een ernstige storing in het programma en kunt U het beter afsluiten.⏎ ⏎ Error:{0}⏎ ⏎ Wilt U doorgaan?⏎ (Als U Ja kiest dan kunt U door gaan met U werk, Kiest U Nee dan wordt het programma afgesloten)</string>
   <string name="LabelApplicationError">Applicatie fout</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 is niet geïnstalleerd</string>
   <string name="LabelRestartTheApplication">Herstart het programma!</string>
@@ -356,7 +362,6 @@
   <string name="LabelTTLError">TTL fout</string>
   <string name="LabelNonCPULEnseError">Er is een niet-CPU objectief aangebracht en de diafragmavoorkeuze is niet ingesteld op M.</string>
   <string name="LabelImageInRAM">Er is een afbeelding met de opnamebestemming SDRAM.</string>
-  <string name="LabelNoCardInsertedError">De bestemming van de opname is de geheugenkaart of de kaart en het SDRAM-geheugen,\nen de kaart is niet geplaatst terwijl de modus is uitgeschakeld zonder een kaart.</string>
   <string name="LabelCommandProcesingError">Tijdens de verwerking van het opnamecommando</string>
   <string name="LabelShoutingInProgress">De programmakeuze is EFFECTEN.</string>
   <string name="LabelOverHeatedError">De Livebeeld modus kan niet gebruikt worden bij te hoge temperaturen.</string>
@@ -423,4 +428,8 @@
   <string name="LabelSelectNone">Niets Selecteren</string>
   <string name="LabelSelectLiked">Selecteer Liked</string>
   <string name="LabelSelectUnLiked">Selecteer Unliked</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Livebeeld</string>
+  <!--17.05.2014-->
 </resources>

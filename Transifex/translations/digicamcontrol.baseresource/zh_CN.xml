@@ -183,14 +183,11 @@
   <string name="LabelVideoCodecProblem">视频编码器问题</string>
   <string name="MsgPhotoTransferBegin">图片传输开始</string>
   <string name="MsgPhotoTransferDone">图片传输完成</string>
-  <string name="MsgPhotoTransferError">传输错误！\n消息 :{0}</string>
   <string name="MsgBulbModeNotSupported">不支持B门模式！</string>
   <string name="MsgApplicationUpToDate">您的应用程序已是最新版！</string>
   <string name="MsgUseSessionEditorTags">请使用会话编辑器定义标签！</string>
   <string name="MsgLastSessionCantBeDeleted">仅有的一个会话不能被删除</string>
   <string name="MsgStopTimeLapse">延时摄影仍在进行中！ 要停止吗？</string>
-  <string name="MsgInstallXvidCodec">Xvid 编码器未安装！\n下载并安装吗？</string>
-  <string name="MsgDeleteSessionQuestion">确定删除会话 {0} 吗？\n照片文件不会被删除！</string>
   <string name="MsgBracketingDone">包围拍摄完成</string>
   <string name="MsgActionInProgress">操作进度 {0}/{1}</string>
   <string name="MenuFile">文件（_F）</string>
@@ -269,7 +266,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">下载照片</string>
   <string name="LabelDeleteFilesAfterTransfer">传输完成后删除原始文件</string>
-  <string name="LabelAskForDelete">已传输的文件将被删除。继续吗？</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">设置对焦点出错</string>
   <string name="LabelErrorUnableFocus">无法对焦</string>
@@ -305,7 +301,6 @@
   <string name="LabelAdvanced">高级</string>
   <string name="LabelUseParellelTransfer">使用并行文件传输器</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">程序出错。\n请检查您的数据是否正确然后重试。若该问题再次出现那么意味着本程序有问题，你最好关闭本程序。\n\nError:{0}\n\n继续吗？\n(选”是“则继续工作，选”否“则程序会关闭)</string>
   <string name="LabelApplicationError">程序错误</string>
   <string name="LabelWiaNotInstalled">未安装 WIA 2.0</string>
   <string name="LabelRestartTheApplication">重启本应用程序！</string>
@@ -342,4 +337,8 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">实时取景</string>
+  <!--17.05.2014-->
 </resources>

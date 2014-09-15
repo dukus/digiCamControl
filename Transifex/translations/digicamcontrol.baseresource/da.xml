@@ -183,14 +183,11 @@
   <string name="LabelVideoCodecProblem">Video codek problem</string>
   <string name="MsgPhotoTransferBegin">Foto overførelse begyndt</string>
   <string name="MsgPhotoTransferDone">Foto overførelse færdig</string>
-  <string name="MsgPhotoTransferError">Overførelses fejl !⏎ Fejl :{0}</string>
   <string name="MsgBulbModeNotSupported">Bulb modus ikke understøttet</string>
   <string name="MsgApplicationUpToDate">Applikationen er uptodate</string>
   <string name="MsgUseSessionEditorTags">Brug sæssionseditor til at definere tags !</string>
   <string name="MsgLastSessionCantBeDeleted">Sidst sæssion kan ikke slettes</string>
   <string name="MsgStopTimeLapse">Timelapse er ikke færdig! Vil du stoppe denne timelapse ?</string>
-  <string name="MsgInstallXvidCodec">Xvid codec ikke installeret! ⏎ Ønsker du at downloade og installere det ? </string>
-  <string name="MsgDeleteSessionQuestion">Ønsker du at slette sæssion {0} ?⏎ Ingen filer vil blive slettet !</string>
   <string name="MsgBracketingDone">Bracketing færdig</string>
   <string name="MsgActionInProgress">Handling i gang {0} / {1}</string>
   <string name="MenuFile">_Fil</string>
@@ -269,7 +266,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Hent fotos</string>
   <string name="LabelDeleteFilesAfterTransfer">Slet efter overførelse</string>
-  <string name="LabelAskForDelete">Overførte filer vil blive slettet.⏎ Ønsker du at fortsætte ?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Fejl ved instilling af fokusposition</string>
   <string name="LabelErrorUnableFocus">Kunne ikke fokusere</string>
@@ -305,7 +301,6 @@
   <string name="LabelAdvanced">Avanceret </string>
   <string name="LabelUseParellelTransfer">Brug paralel filoverførelse</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Der er sket en fejl i programmet.⏎ Undersøg om dine data er i orden og prøv denne funktion igen. Gentager denne fejlmeddelse sig så tyder på en alvorlig fejl, og du bedes lukke programmet⏎ ⏎ Fejl:{0}⏎ ⏎ Ønsker du at fortsætte?⏎ (Hvis du klikker på Ja vil du forsætte med dit arbejde, hvis du vælger Nej vil programmet lukke)</string>
   <string name="LabelApplicationError">Programfejl</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 ikke installeret</string>
   <string name="LabelRestartTheApplication">Genstart programmet.</string>
@@ -344,7 +339,6 @@
   <string name="LabelTTLError">TTL fejl</string>
   <string name="LabelNonCPULEnseError">Et ikke CPU objektiv er monteret og modus er ikke M</string>
   <string name="LabelImageInRAM">Der er gemt et foto i SDRAM destinatinationen</string>
-  <string name="LabelNoCardInsertedError">Destinationen er både kort og SDRAM. Og kortet er ikke indsat uden lås af kort.</string>
   <string name="LabelCommandProcesingError">Under bearbejdelse af shutter kommando</string>
   <string name="LabelShoutingInProgress">Optagelsesmodus er EFFECTS</string>
   <string name="LabelOverHeatedError">Liveview kan ikke startes når temperaturen er høj</string>
@@ -356,4 +350,8 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">LiveView</string>
+  <!--17.05.2014-->
 </resources>

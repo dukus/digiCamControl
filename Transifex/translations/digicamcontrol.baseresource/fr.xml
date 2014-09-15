@@ -183,14 +183,11 @@
   <string name="LabelVideoCodecProblem">Problème de codec vidéo</string>
   <string name="MsgPhotoTransferBegin">Début du transfert des photos</string>
   <string name="MsgPhotoTransferDone">Transfert des photos terminé</string>
-  <string name="MsgPhotoTransferError">Erreur de transfert !⏎ Message :{0}</string>
   <string name="MsgBulbModeNotSupported">Le mode Bulb n\'est pas supporté !</string>
   <string name="MsgApplicationUpToDate">Votre application est à jour !</string>
   <string name="MsgUseSessionEditorTags">Utiliser l\'éditeur de session pour définir des étiquettes !</string>
   <string name="MsgLastSessionCantBeDeleted">La dernière session ne peut pas être supprimée</string>
   <string name="MsgStopTimeLapse">Le laps de temps n\'est pas terminé ! Voulez vous l\'arrêter ?</string>
-  <string name="MsgInstallXvidCodec">Le codec Xvid n\'est pas installé !⏎ Voulez vous l\'installer ?</string>
-  <string name="MsgDeleteSessionQuestion">Voulez vous continuer à supprimer la session {0} ?⏎ Aucun fichier ne sera supprimé !</string>
   <string name="MsgBracketingDone">Bracketing terminé</string>
   <string name="MsgActionInProgress">Action en cours {0}/{1}</string>
   <string name="MenuFile">_Fichier</string>
@@ -269,7 +266,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Télécharger les photos</string>
   <string name="LabelDeleteFilesAfterTransfer">Supprimer les images à la fin du transfert</string>
-  <string name="LabelAskForDelete">Les images transférées seront supprimées.⏎ Voulez-vous continuer ?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Erreur de réglage de la mise au point</string>
   <string name="LabelErrorUnableFocus">Incapable de faire la mise au point</string>
@@ -305,7 +301,6 @@
   <string name="LabelAdvanced">Avancé</string>
   <string name="LabelUseParellelTransfer">Utilisé le transfert de fichier parallèle</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Une erreur d\'application s\'est produite. ⏎\nVeuillez vérifier si vos données sont correctes et répéter l\'action. Si cette erreur se produit à nouveau, il y a probablement un dysfonctionnement dans l\'application et vous feriez mieux de la fermer. ⏎\n⏎\nErreur: {0} ⏎\n⏎\nVoulez-vous continuer? ⏎\n(si vous cliquez sur Oui, vous continuerez avec votre travail, si vous cliquez sur Non, l\'application se fermera).</string>
   <string name="LabelApplicationError">Erreur d\'application</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 non installé</string>
   <string name="LabelRestartTheApplication">Redémarrez l\'application !</string>
@@ -344,7 +339,6 @@
   <string name="LabelTTLError">Erreur TTL</string>
   <string name="LabelNonCPULEnseError">Un objectif sans CPU est monté et le mode d\'exposition n\'est pas M</string>
   <string name="LabelImageInRAM">Il y a une image dont la destination d\'enregistrement est la SDRAM.</string>
-  <string name="LabelNoCardInsertedError">La destination de l\'enregistrement est la carte ou de la carte et la SDRAM, ⏎\net la carte n\'est pas insérée avec la sortie désactivée sans carte présente.</string>
   <string name="LabelCommandProcesingError">Pendant le traitement de la commande de prise de vue</string>
   <string name="LabelShoutingInProgress">Mode de prise de vue est Effects</string>
   <string name="LabelOverHeatedError">Le mode Live View ne peut pas démarrer car la température du capteur est trop élevée</string>
@@ -393,4 +387,8 @@
   <string name="LabelFullscreen">Plein écran</string>
   <string name="LabelSelection">Sélection</string>
   <string name="LabelSelectAll">Sélectionner tout</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Mise au point Live View</string>
+  <!--17.05.2014-->
 </resources>
