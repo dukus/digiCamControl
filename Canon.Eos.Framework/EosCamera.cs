@@ -488,7 +488,7 @@ namespace Canon.Eos.Framework
         /// </summary>
         public void StopLiveView()
         {
-            this._cancelLiveViewRequested = true;
+            this.LiveViewDevice = EosLiveViewDevice.None;
         }
 
         /// <summary>
