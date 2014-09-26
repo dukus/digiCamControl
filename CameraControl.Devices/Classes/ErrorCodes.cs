@@ -29,6 +29,7 @@
 #region
 
 using System.Runtime.InteropServices;
+using Canon.Eos.Framework.Internal.SDK;
 
 #endregion
 
@@ -71,6 +72,18 @@ namespace CameraControl.Devices.Classes
         public static void GetException(int code)
         {
             GetException((uint) code);
+        }
+
+        public static void GetCanonException(uint code)
+        {
+            if (code != 0 && code != Edsdk.EDS_ERR_OK)
+            {
+                switch (code)
+                {
+                    default:
+                        throw new DeviceException("Canon error code: " + code.ToString("X"), code);  
+                }
+            }
         }
 
         public static void GetException(uint code)

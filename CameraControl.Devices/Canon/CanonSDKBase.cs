@@ -978,6 +978,12 @@ namespace CameraControl.Devices.Canon
             Log.Debug("EOS capture end");
         }
 
+        private uint ResetShutterButton()
+        {
+            return Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF);
+        }
+
         public override void CapturePhotoNoAf()
         {
             Log.Debug("EOS capture start");
@@ -985,14 +991,18 @@ namespace CameraControl.Devices.Canon
             try
             {
                 IsBusy = true;
-                if (Camera.IsInHostLiveViewMode)
-                {
-                    Camera.TakePictureInLiveview();
-                }
-                else
-                {
-                    Camera.TakePicture();
-                }
+                ErrorCodes.GetCanonException(ResetShutterButton());
+                ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely_NonAF));
+                ResetShutterButton();
+
+                //if (Camera.IsInHostLiveViewMode)
+                //{
+                //    Camera.TakePictureInLiveview();
+                //}
+                //else
+                //{
+                //    Camera.TakePicture();
+                //}
             }
             catch (COMException comException)
             {
@@ -1039,6 +1049,7 @@ namespace CameraControl.Devices.Canon
             {
                 try
                 {
+                    Camera.DownloadEvf();
                     //DeviceReady();
                     viewData.HaveFocusData = true;
                     viewData.ImageDataPosition = 0;
@@ -1089,9 +1100,12 @@ namespace CameraControl.Devices.Canon
         public override int Focus(int step)
         {
             Camera.ResetShutterButton();
-
-            Camera.FocusInLiveView(step < 0 ? Edsdk.EvfDriveLens_Near2 : Edsdk.EvfDriveLens_Far2);
-            return step < 0 ? -1 : 1;
+            var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
+                (int) (step < 0 ? Edsdk.EvfDriveLens_Near2 : Edsdk.EvfDriveLens_Far2));
+            if (res == Edsdk.EDS_ERR_OK)
+                return step < 0 ? -1 : 1;
+            else
+                return 0;
         }
 
         public override void TransferFile(object o, string filename)
