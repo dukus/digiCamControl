@@ -430,9 +430,9 @@ namespace Canon.Eos.Framework
                 Directory.CreateDirectory(_picturePath);
 
             this.ChangePicturesSaveLocation(saveLocation | SaveLocation.Host);
-        }        
+        }
 
-        private uint SendCommand(uint command, int parameter = 0)
+        public uint SendCommand(uint command, int parameter = 0)
         {
             lock (_locker)
             {
@@ -488,7 +488,7 @@ namespace Canon.Eos.Framework
         /// </summary>
         public void StopLiveView()
         {
-            this._cancelLiveViewRequested = true;
+            this.LiveViewDevice = EosLiveViewDevice.None;
         }
 
         /// <summary>

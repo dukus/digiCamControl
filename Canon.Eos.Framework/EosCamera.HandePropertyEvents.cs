@@ -38,7 +38,7 @@ namespace Canon.Eos.Framework
                 this.LiveViewUpdate(this, eventArgs);            
         }
 
-        private bool DownloadEvf()
+        public bool DownloadEvf()
         {
             // Do not download if pauseUpdate requested
             if (_pauseLiveViewRequested)
@@ -117,7 +117,7 @@ namespace Canon.Eos.Framework
             {
                 _liveMode = true;
                 this.OnLiveViewStarted(EventArgs.Empty);
-                this.StartDownloadEvfInBackGround();
+                //this.StartDownloadEvfInBackGround();
             }
             else if (_liveMode && (this.LiveViewDevice & EosLiveViewDevice.Host) == EosLiveViewDevice.None)
             {

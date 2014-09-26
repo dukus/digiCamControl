@@ -1767,7 +1767,7 @@ namespace CameraControl.ViewModel
                 {
                     Thread thread = new Thread(SetFocusThread);
                     thread.Start(step);
-                    thread.Join();
+                    //thread.Join();
                 }
                 else
                 {
@@ -1814,8 +1814,9 @@ namespace CameraControl.ViewModel
                 {
                     for (var i = 0; i < Math.Abs(step); i++)
                     {
+                        Thread.Sleep(1000/DesiredFrameRate);
+                        GetLiveImage();
                         FocusCounter += CameraDevice.Focus(step);
-                        Thread.Sleep(2);
                     }
                 }
                 else

@@ -448,7 +448,7 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
-                //Log.Debug("Property changed " + e.PropertyId.ToString("X"));
+               // Log.Debug("Property changed " + e.PropertyId.ToString("X"));
                 switch (e.PropertyId)
                 {
                     case Edsdk.PropID_ExposureCompensation:
@@ -483,6 +483,9 @@ namespace CameraControl.Devices.Canon
                         break;
                     case Edsdk.PropID_BatteryLevel:
                         Battery = (int) Camera.BatteryLevel + 20;
+                        break;
+                    case Edsdk.PropID_FocusInfo:
+                        ResetShutterButton();
                         break;
                 }
             }
@@ -555,9 +558,9 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
-                Camera.ResetShutterButton();
-                Camera.TakePictureNoAf();
-                Camera.ResetShutterButton();
+                //Camera.ResetShutterButton();
+                //Camera.TakePictureNoAf();
+                //Camera.ResetShutterButton();
                 //Camera.ResumeLiveview();
             }
             catch (Exception exception)
@@ -981,6 +984,13 @@ namespace CameraControl.Devices.Canon
             Log.Debug("EOS capture end");
         }
 
+        private uint ResetShutterButton()
+        {
+            //ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0));
+            return Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF);
+        }
+
         public override void CapturePhotoNoAf()
         {
             Log.Debug("EOS capture start");
@@ -988,14 +998,18 @@ namespace CameraControl.Devices.Canon
             try
             {
                 IsBusy = true;
-                if (Camera.IsInHostLiveViewMode)
-                {
-                    Camera.TakePictureInLiveview();
-                }
-                else
-                {
-                    Camera.TakePicture();
-                }
+                ErrorCodes.GetCanonException(ResetShutterButton());
+                ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely_NonAF));
+                ResetShutterButton();
+
+                //if (Camera.IsInHostLiveViewMode)
+                //{
+                //    Camera.TakePictureInLiveview();
+                //}
+                //else
+                //{
+                //    Camera.TakePicture();
+                //}
             }
             catch (COMException comException)
             {
@@ -1026,7 +1040,7 @@ namespace CameraControl.Devices.Canon
 
         public override void Focus(int x, int y)
         {
-            Camera.ResetShutterButton();
+            ResetShutterButton();
             if (_liveViewImageData != null)
             {
                 x -= (_liveViewImageData.ZommBounds.Width/2);
@@ -1042,6 +1056,7 @@ namespace CameraControl.Devices.Canon
             {
                 try
                 {
+                    Camera.DownloadEvf();
                     //DeviceReady();
                     viewData.HaveFocusData = true;
                     viewData.ImageDataPosition = 0;
@@ -1069,7 +1084,7 @@ namespace CameraControl.Devices.Canon
 
         public override void StartLiveView()
         {
-            Camera.ResetShutterButton();
+            ResetShutterButton();
             //if (!Camera.IsInLiveViewMode) 
             Camera.StartLiveView(EosLiveViewAutoFocus.LiveMode);
         }
@@ -1078,23 +1093,36 @@ namespace CameraControl.Devices.Canon
         {
             if (Camera == null)
                 return;
-            Camera.ResetShutterButton();
+            ResetShutterButton();
             //if (Camera.IsInLiveViewMode)
             Camera.StopLiveView();
         }
 
         public override void AutoFocus()
         {
-            Camera.ResetShutterButton();
-            Camera.AutoFocus();
+            ResetShutterButton();
+            //ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 1));
+            
+           ErrorCodes.GetCanonException(
+                    Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                                     (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
+            ErrorCodes.GetCanonException(
+                Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                    (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Halfway));
+            ErrorCodes.GetCanonException(
+                     Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                                      (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
         }
 
         public override int Focus(int step)
         {
-            Camera.ResetShutterButton();
-
-            Camera.FocusInLiveView(step < 0 ? Edsdk.EvfDriveLens_Near2 : Edsdk.EvfDriveLens_Far2);
-            return step < 0 ? -1 : 1;
+            ResetShutterButton();
+            var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
+                (int) (step < 0 ? Edsdk.EvfDriveLens_Near2 : Edsdk.EvfDriveLens_Far2));
+            if (res == Edsdk.EDS_ERR_OK)
+                return step < 0 ? -1 : 1;
+            else
+                return 0;
         }
 
         public override void TransferFile(object o, string filename)

@@ -42,8 +42,9 @@ namespace CameraControl.Devices.Nikon
             Capabilities.Clear();
             Capabilities.Add(CapabilityEnum.LiveView);
             Capabilities.Add(CapabilityEnum.RecordMovie);
+            Capabilities.Add(CapabilityEnum.CaptureInRam);
             CaptureInSdRam = false;
-            PropertyChanged -= NikonBase_PropertyChanged;
+            //PropertyChanged -= NikonBase_PropertyChanged;
             return res;
         }
 
