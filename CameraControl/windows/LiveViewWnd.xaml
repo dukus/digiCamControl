@@ -180,12 +180,12 @@
                             <Button Content="{T:TranslateExtension ButtonStop}" Command="{Binding StopFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="4" Margin="5"/>
 
                             <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelNoOfPhots}"/>
-                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="2" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
 
                             <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
-                            <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="2" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                            <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="1" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
 
@@ -218,7 +218,7 @@
                             <Button Content="{T:TranslateExtension ButtonStop}" Command="{Binding StopSimpleFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="5" Margin="5"/>
 
                             <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelNoOfPhots}"/>
-                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="2" Value="{Binding PhotoNumber}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding PhotoNumber}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
 
@@ -247,7 +247,7 @@
                 </Expander>
                 <Expander Header="{T:TranslateExtension LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3">
                     <Expander.Content>
-                        <local:ControlerSimple Width="150" DataContext="{Binding Path=CameraDevice}" Margin="3"/>
+                        <local:LiveViewControlerSimple DataContext="{Binding Path=CameraDevice}" Margin="20,3"/>
                     </Expander.Content>
                 </Expander>
                 <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3">

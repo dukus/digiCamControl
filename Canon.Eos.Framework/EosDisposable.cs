@@ -36,7 +36,7 @@ namespace Canon.Eos.Framework
         public void Dispose()
         {
             this.Dispose(true);
-            GC.SuppressFinalize(this);
+            //GC.SuppressFinalize(this);
         }
     }
 }

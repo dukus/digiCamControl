@@ -52,11 +52,10 @@ namespace Canon.Eos.Framework
                 var memoryStream = IntPtr.Zero;
                 try
                 {
-                    Util.Assert(Edsdk.EdsCreateMemoryStream(0, out memoryStream), "Failed to create memory stream.");
+                    Edsdk.EdsCreateMemoryStream(0, out memoryStream);
                     using (var image = EosLiveImage.CreateFromStream(memoryStream))
                     {
-                        Util.Assert(Edsdk.EdsDownloadEvfImage(this.Handle, image.Handle),
-                                    "Failed to download evf image.");
+                        Edsdk.EdsDownloadEvfImage(this.Handle, image.Handle);
 
                         var converter = new EosConverter();
                         this.OnLiveViewUpdate(

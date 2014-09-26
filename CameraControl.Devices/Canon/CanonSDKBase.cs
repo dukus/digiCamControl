@@ -354,7 +354,7 @@ namespace CameraControl.Devices.Canon
             {
                 IsBusy = true;
                 Camera = camera;
-                Camera.IsErrorTolerantMode = false;
+                Camera.IsErrorTolerantMode = true;
                 DeviceName = Camera.DeviceDescription;
                 Manufacturer = "Canon Inc.";
                 Camera.SetEventHandlers();

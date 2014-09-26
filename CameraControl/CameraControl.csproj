@@ -241,6 +241,9 @@
     <Compile Include="Controls\ControlerSimple.xaml.cs">
       <DependentUpon>ControlerSimple.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LiveViewControlerSimple.xaml.cs">
+      <DependentUpon>LiveViewControlerSimple.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ExposureStatusControl.xaml.cs">
       <DependentUpon>ExposureStatusControl.xaml</DependentUpon>
     </Compile>
@@ -384,6 +387,10 @@
     <Page Include="Controls\ControlerSimple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LiveViewControlerSimple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ExposureStatusControl.xaml">
       <Generator>MSBuild:Compile</Generator>

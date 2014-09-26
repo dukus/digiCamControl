@@ -30,6 +30,8 @@ namespace CameraControl.ViewModel
 {
     public class LiveViewViewModel : ViewModelBase
     {
+        public static event EventHandler FocuseDone;
+
         private const int DesiredFrameRate = 20;
         private const int DesiredWebFrameRate = 5;
 
@@ -831,6 +833,7 @@ namespace CameraControl.ViewModel
             StopSimpleFocusStackingCommand = new RelayCommand(StopFocusStacking);
 
             BrowseOverlayCommand = new RelayCommand(BrowseOverlay);
+            FocuseDone += LiveViewViewModel_FocuseDone;
         }
 
         private void InitOverlay()
@@ -1814,7 +1817,7 @@ namespace CameraControl.ViewModel
                 {
                     for (var i = 0; i < Math.Abs(step); i++)
                     {
-                        Thread.Sleep(1000/DesiredFrameRate);
+                        Thread.Sleep(1000/DesiredFrameRate/2);
                         GetLiveImage();
                         FocusCounter += CameraDevice.Focus(step);
                     }
@@ -1839,6 +1842,7 @@ namespace CameraControl.ViewModel
                 _timer.Start();
 
             _focusIProgress = false;
+            OnFocuseDone();
             RaisePropertyChanged(() => FocusingEnabled);
         }
 
@@ -1961,10 +1965,6 @@ namespace CameraControl.ViewModel
                 return;
             if (_focusStackinMode == 0)
             {
-                if (FocusCounter >= FocusValue)
-                {
-                    IsFocusStackingRunning = false;
-                }
                 if (_focusStackingTick > WaitTime)
                 {
                     _focusStackingTimer.Stop();
@@ -1973,37 +1973,14 @@ namespace CameraControl.ViewModel
                     {
                         SetFocus(FocusStep);
                     }
-                    PhotoCount++;
-                    GetLiveImage();
-                    _focusStackingTick = 0;
-                    if (!_focusStackingPreview)
-                    {
-                        Recording = false;
-                        try
-                        {
-                            var thread = new Thread(Capture);
-                            thread.Start();
-                            thread.Join();
-                        }
-                        catch (Exception exception)
-                        {
-                            Log.Error(exception);
-                            StaticHelper.Instance.SystemMessage = exception.Message;
-                            _focusStackingTimer.Start();
-                        }
-                    }
                     else
                     {
-                        _focusStackingTimer.Start();
+                        LiveViewViewModel_FocuseDone(null, null);
                     }
                 }
             }
             else
             {
-                if (PhotoCount >= PhotoNumber)
-                {
-                    IsFocusStackingRunning = false;
-                }
                 if (_focusStackingTick > WaitTime)
                 {
                     _focusStackingTimer.Stop();
@@ -2014,7 +1991,7 @@ namespace CameraControl.ViewModel
                         switch (FocusStepSize)
                         {
                             case 0:
-                                SetFocus(dir*(SimpleManualFocus?1: ServiceProvider.Settings.SmalFocusStep));
+                                SetFocus(dir*(SimpleManualFocus ? 1 : ServiceProvider.Settings.SmalFocusStep));
                                 break;
                             case 1:
                                 SetFocus(dir*(SimpleManualFocus ? 5 : ServiceProvider.Settings.MediumFocusStep));
@@ -2024,32 +2001,68 @@ namespace CameraControl.ViewModel
                                 break;
                         }
                     }
+                }
+            }
+            _focusStackingTick++;
+        }
+
+        private void CaptureInThread()
+        {
+            var thread = new Thread(Capture);
+            thread.Start();
+            thread.Join();
+        }
+
+        void LiveViewViewModel_FocuseDone(object sender, EventArgs e)
+        {
+            if (!_focusStackingPreview && IsFocusStackingRunning)
+            {
+                Recording = false;
+                try
+                {
+                    CaptureInThread();
+                }
+                catch (Exception exception)
+                {
+                    Log.Error(exception);
+                    StaticHelper.Instance.SystemMessage = exception.Message;
+                    _focusStackingTimer.Start();
+                }
+                if (_focusStackinMode == 0)
+                {
                     PhotoCount++;
                     GetLiveImage();
                     _focusStackingTick = 0;
-                    if (!_focusStackingPreview)
+                    if (_focusStackingPreview)
                     {
-                        Recording = false;
-                        try
-                        {
-                            var thread = new Thread(Capture);
-                            thread.Start();
-                            thread.Join();
-                        }
-                        catch (Exception exception)
-                        {
-                            Log.Error(exception);
-                            StaticHelper.Instance.SystemMessage = exception.Message;
-                            _focusStackingTimer.Start();
-                        }
+                        _focusStackingTimer.Start();
                     }
-                    else
+                    if (FocusCounter >= FocusValue)
+                    {
+                        IsFocusStackingRunning = false;
+                    }
+                }
+                else
+                {
+                    PhotoCount++;
+                    if (PhotoCount >= PhotoNumber)
+                    {
+                        IsFocusStackingRunning = false;
+                    }
+                    GetLiveImage();
+                    _focusStackingTick = 0;
+                    if (_focusStackingPreview)
                     {
                         _focusStackingTimer.Start();
                     }
                 }
             }
-            _focusStackingTick++;
+        }
+
+        private static void OnFocuseDone()
+        {
+            EventHandler handler = FocuseDone;
+            if (handler != null) handler(null, EventArgs.Empty);
         }
     }
 }
