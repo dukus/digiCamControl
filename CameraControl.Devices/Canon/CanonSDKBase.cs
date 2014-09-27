@@ -1370,17 +1370,23 @@ namespace CameraControl.Devices.Canon
             Edsdk.EdsRelease(img_stream);
             Edsdk.EdsRelease(img_ref);
             Edsdk.EdsRelease(stream);
-            var bitmap = new Bitmap(outputSize.width, outputSize.height, Stride, PixelFormat.Format24bppRgb,
-                                    streamPointer);
-            byte[] byteArray = new byte[0];
-            using (MemoryStream memostream = new MemoryStream())
+            try
             {
-                bitmap.Save(memostream, ImageFormat.Bmp);
-                memostream.Close();
+                var bitmap = new Bitmap(outputSize.width, outputSize.height, Stride, PixelFormat.Format24bppRgb,
+                                        streamPointer);
+                using (MemoryStream memostream = new MemoryStream())
+                {
+                    bitmap.Save(memostream, ImageFormat.Bmp);
+                    memostream.Close();
 
-                byteArray = memostream.ToArray();
+                    return memostream.ToArray();
+                }
             }
-            return byteArray;
+            catch (Exception exception)
+            {
+                Log.Error("Error loading image ", exception);
+            }
+            return new byte[0];
         }
 
         public override void FormatStorage(object storageId)

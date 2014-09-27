@@ -12,12 +12,6 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
     </UserControl.Resources>
     <StackPanel>
-        <StackPanel Orientation="Vertical" >
-            <StackPanel Orientation="Horizontal">
-                <Label Content="{Binding Path=DisplayName}" Padding="0"/>
-            </StackPanel>
-            <Label Content="{Binding Path=DeviceName}"  Padding="0"/>
-        </StackPanel>
         <my:ExposureStatusControl ExposureStatus="{Binding Path=ExposureStatus, Mode=TwoWay}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"></StackPanel>
         <StackPanel Margin="1">

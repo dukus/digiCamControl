@@ -189,7 +189,7 @@ namespace CameraControl.windows
 
             foreach (ICameraDevice cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
             {
-                CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(cameraDevice);
+                CameraProperty property = cameraDevice.LoadProperties();
                 cameraDevice.DisplayName = property.DeviceName;
                 dlg.Label = cameraDevice.DisplayName;
                 try
@@ -211,6 +211,7 @@ namespace CameraControl.windows
                     StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorLoadingFileList;
                     Log.Error("Error loading file list", exception);
                 }
+                Thread.Sleep(500);
             }
 
 
