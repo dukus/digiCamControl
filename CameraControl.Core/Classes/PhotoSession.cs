@@ -544,6 +544,17 @@ namespace CameraControl.Core.Classes
             return null;
         }
 
+        /// <summary>
+        /// Gets a file item by the original name and  captured camera serial.
+        /// </summary>
+        /// <param name="fileName">Original file name.</param>
+        /// <param name="serial">The camera serial number serial.</param>
+        /// <returns></returns>
+        public FileItem GetFile(string fileName, string serial)
+        {
+            return Files.FirstOrDefault(fileItem => fileItem.OriginalName == fileName && fileItem.CameraSerial == serial);
+        }
+
         public override string ToString()
         {
             return Name;

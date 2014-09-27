@@ -83,6 +83,13 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        [XmlAttribute]
+        public string CameraSerial{ get; set; }
+
+        [XmlAttribute]
+        public string OriginalName { get; set; }
+
+
         public bool IsRaw
         {
             get
@@ -92,8 +99,10 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        [XmlAttribute]
         public DateTime FileDate { get; set; }
-
+        
+        [XmlAttribute]
         public string Name { get; set; }
 
         [JsonIgnore]

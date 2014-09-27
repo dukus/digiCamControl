@@ -26,6 +26,8 @@
 
 #endregion
 
+using CameraControl.Core.Scripting.ScriptCommands;
+
 #region
 
 using System;
@@ -97,11 +99,45 @@ namespace CameraControl.windows
             }
         }
 
+        public RelayCommand<string> SelectAllCommand { get; set; }
+        public RelayCommand<string> SelectNoneCommand { get; set; }
+        public RelayCommand<string> SelectInvertCommand { get; set; }
+
         public DownloadPhotosWnd()
         {
             Groups = new ObservableCollection<DownloadableItems>();
             Items = new AsyncObservableCollection<FileItem>();
+            SelectAllCommand = new RelayCommand<string>(SelectAll);
+            SelectNoneCommand = new RelayCommand<string>(SelectNone);
+            SelectInvertCommand = new RelayCommand<string>(SelectInvert);
             InitializeComponent();
+        }
+
+        private void SelectAll(string serial)
+        {
+            foreach (FileItem fileItem in Items)
+            {
+                if (fileItem.Device.SerialNumber == serial)
+                    fileItem.IsChecked = true;
+            }
+        }
+
+        private void SelectNone(string serial)
+        {
+            foreach (FileItem fileItem in Items)
+            {
+                if (fileItem.Device.SerialNumber == serial)
+                    fileItem.IsChecked = false;
+            }
+        }
+
+        private void SelectInvert(string serial)
+        {
+            foreach (FileItem fileItem in Items)
+            {
+                if (fileItem.Device.SerialNumber == serial)
+                    fileItem.IsChecked = !fileItem.IsChecked;
+            }
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
@@ -201,7 +237,15 @@ namespace CameraControl.windows
                         {
                             if (!_itembycamera.ContainsKey(cameraDevice))
                                 _itembycamera.Add(cameraDevice, new AsyncObservableCollection<FileItem>());
-                            _itembycamera[cameraDevice].Add(new FileItem(deviceObject, cameraDevice));
+                            var fileitem = new FileItem(deviceObject, cameraDevice);
+
+                            PhotoSession session = (PhotoSession)cameraDevice.AttachedPhotoSession ??
+                                       ServiceProvider.Settings.DefaultSession;
+                            // check if file exist with same name from this camera
+                            fileitem.IsChecked = session.GetFile(deviceObject.FileName, cameraDevice.SerialNumber) ==
+                                                 null;
+
+                            _itembycamera[cameraDevice].Add(fileitem);
                             //Items.Add(new FileItem(deviceObject, cameraDevice));
                         }
                     }
@@ -214,34 +258,36 @@ namespace CameraControl.windows
                 Thread.Sleep(500);
             }
 
-
-            foreach (var fileItem in _itembycamera.Values.SelectMany(lists => lists))
-            {
-                Items.Add(fileItem);
-            }
-            CollectionView myView;
-            myView = (CollectionView) CollectionViewSource.GetDefaultView(Items);
-            if (myView.CanGroup == true)
-            {
-                PropertyGroupDescription groupDescription
-                    = new PropertyGroupDescription("Device");
-                myView.GroupDescriptions.Add(groupDescription);
-            }
             Dispatcher.Invoke(new Action(delegate
-                                             {
-                                                 if (ServiceProvider.DeviceManager.ConnectedDevices.Count > 1)
-                                                 {
-                                                     lst_items.Visibility = Visibility.Visible;
-                                                     lst_items_simple.Visibility = Visibility.Collapsed;
-                                                     lst_items.ItemsSource = myView;
-                                                 }
-                                                 else
-                                                 {
-                                                     lst_items.Visibility = Visibility.Collapsed;
-                                                     lst_items_simple.Visibility = Visibility.Visible;
-                                                     lst_items_simple.ItemsSource = Items;
-                                                 }
-                                             }));
+            {
+                foreach (var fileItem in _itembycamera.Values.SelectMany(lists => lists))
+                {
+                    Items.Add(fileItem);
+                }
+                CollectionView myView;
+                myView = (CollectionView) CollectionViewSource.GetDefaultView(Items);
+                myView.GroupDescriptions.Clear();
+
+                if (myView.CanGroup == true)
+                {
+                    PropertyGroupDescription groupDescription
+                        = new PropertyGroupDescription("Device");
+                    myView.GroupDescriptions.Add(groupDescription);
+                }
+
+                if (ServiceProvider.DeviceManager.ConnectedDevices.Count > 1)
+                {
+                    lst_items.Visibility = Visibility.Visible;
+                    lst_items_simple.Visibility = Visibility.Collapsed;
+                    lst_items.ItemsSource = myView;
+                }
+                else
+                {
+                    lst_items.Visibility = Visibility.Collapsed;
+                    lst_items_simple.Visibility = Visibility.Visible;
+                    lst_items_simple.ItemsSource = Items;
+                }
+            }));
             dlg.Hide();
         }
 
@@ -329,7 +375,9 @@ namespace CameraControl.windows
                     break;
                 }
                 totalbytes += new FileInfo(fileName).Length;
-                session.AddFile(fileName);
+                var item = session.AddFile(fileName);
+                item.CameraSerial = fileItem.Device.SerialNumber;
+                item.OriginalName = fileItem.FileName;
                 i++;
                 dlg.Progress = i;
             }
@@ -390,11 +438,7 @@ namespace CameraControl.windows
 
         private void btn_select_Click(object sender, RoutedEventArgs e)
         {
-            int selectedidx = 0;
-            if (int.TryParse(txt_indx.Text, out selectedidx))
-            {
-                SetIndex(selectedidx);
-            }
+            SetIndex((int)txt_indx.Value);
         }
 
         private void SetIndex(int selectedidx)
