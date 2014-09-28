@@ -50,11 +50,11 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <ontrols:MetroWindow.LeftWindowCommands>
+    <ontrols:MetroWindow.RightWindowCommands>
         <ontrols:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:PropertyWnd, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
         </ontrols:WindowCommands>
-    </ontrols:MetroWindow.LeftWindowCommands>
+    </ontrols:MetroWindow.RightWindowCommands>
     <Border Background="#68000000" CornerRadius="5" BorderBrush="{StaticResource WindowFrameBrush}" BorderThickness="2,0,2,2">
         <Grid>
             <Grid.ColumnDefinitions>

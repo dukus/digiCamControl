@@ -21,7 +21,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
             <Button Content="{T:TranslateExtension SettingsToolTip}" Name="btn_settings" Click="btn_settings_Click" />
@@ -29,7 +29,7 @@
             <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="{T:TranslateExtension MenuDonate}" Name="btn_donate" Click="btn_donate_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
@@ -262,7 +262,7 @@
                     </Grid>
                 </GroupBox>
                 <Grid Grid.Row="1" Margin="0" >
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                         <StackPanel>
                             <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
                                 <Panels:SelectionControl HorizontalAlignment="Center"/>

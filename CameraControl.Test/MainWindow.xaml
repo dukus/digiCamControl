@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />
             <Button>
@@ -31,7 +31,7 @@
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="376*" />

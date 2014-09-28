@@ -10,12 +10,28 @@
                        xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance Type=Classes:Settings, IsDesignTimeCreatable=True}" xmlns:my1="clr-namespace:CameraControl.windows">
-    <Controls:MetroWindow.LeftWindowCommands>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" VerticalAlignment="Center" VerticalContentAlignment="Center" Click="btn_stay_on_top_Click" />
             <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="220*" />
@@ -125,7 +141,7 @@
 
                         <Label Grid.Row="12" Grid.Column="0" Content="{T:TranslateExtension LabelExternalViewerPath}" HorizontalContentAlignment="Right"/>
                         <TextBox Grid.Row="12" Grid.Column="1" Margin="3" Text="{Binding ExternalViewer}" />
-                        <Button Grid.Row="12" Grid.Column="2" Content="..." HorizontalAlignment="Left" Margin="2" Name="btn_browse_file" VerticalAlignment="Center" Width="29" Click="btn_browse_file_Click" />
+                        <Button Grid.Row="12" Grid.Column="2" Content="..." HorizontalAlignment="Left" Margin="3" Name="btn_browse_file" VerticalAlignment="Center" Width="29" Click="btn_browse_file_Click" />
                     </Grid>
                 </ScrollViewer>
             </TabItem>
@@ -180,7 +196,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Keyboard" VerticalAlignment="Top">
+                    <GroupBox Header="Keyboard">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -200,7 +216,7 @@
                             </ListBox>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="{T:TranslateExtension LabelWebserver}" Margin="0,0,0,6" Grid.Row="1">
+                    <GroupBox Header="{T:TranslateExtension LabelWebserver}" Grid.Row="1">
                         <Grid ToolTip="{T:TranslateExtension ReStartToolTip}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="300" />
@@ -277,8 +293,8 @@
                                 <RowDefinition Height="35" />
                             </Grid.RowDefinitions>
                             <ListBox Name="lst_device" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding DeviceConfigs.Items}" DisplayMemberPath="Name" Margin="0,-1,0,1" />
-                            <Button Content="{T:Translate ButtonAdd}" Height="23" Margin="6,4,192,0" Name="btn_add_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_add_device_Click" />
-                            <Button Content="{T:Translate ButtonDelete}" Height="23" Margin="190,4,8,0" Name="btn_del_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_del_device_Click" />
+                            <Button Content="{T:Translate ButtonAdd}" Height="30" Margin="2" Name="btn_add_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_add_device_Click" HorizontalAlignment="Left" Width="53" />
+                            <Button Content="{T:Translate ButtonDelete}" Height="30" Margin="2" Name="btn_del_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_del_device_Click" HorizontalAlignment="Right" Width="53" />
                         </Grid>
                     </GroupBox>
 
@@ -344,6 +360,6 @@
         <Button Content="{T:TranslateExtension ButtonOk}" IsDefault="True" Name="button1" Width="75" Margin="12,12,0,16" Grid.Row="1" HorizontalAlignment="Left" Click="button1_Click" />
         <Button Content="{T:TranslateExtension ButtonCancel}" IsCancel="True" Name="button2" Width="75" Margin="0,12,12,16" Grid.Row="1" Click="button2_Click" HorizontalAlignment="Right" />
         <Button Content="{T:TranslateExtension ButtonLocateLogFile}" Name="button3" Click="button3_Click" Grid.Row="1" Margin="115,12,0,16" HorizontalAlignment="Left" Width="125" />
-        <Button Content="{T:TranslateExtension ButtonResetSettings}" Grid.Row="1" Name="btn_reset" Click="btn_reset_Click" Margin="0,12,113,16" HorizontalAlignment="Right" Width="97" />
+        <Button Content="{T:TranslateExtension ButtonResetSettings}" Grid.Row="1" Name="btn_reset" Click="btn_reset_Click" Margin="0,12,113,16" HorizontalAlignment="Right" Width="140" />
     </Grid>
 </Controls:MetroWindow >

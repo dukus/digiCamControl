@@ -43,11 +43,11 @@
         </Style>
         </ResourceDictionary>            
     </Window.Resources>
-    <Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="128*" />

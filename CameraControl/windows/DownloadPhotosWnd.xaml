@@ -65,11 +65,11 @@
     </Window.Resources>
 
 
-    <Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="Help" Name="btn_help" Click="btn_help_Click" />
         </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -145,7 +145,7 @@
                 <Button Content="Invert" Name="btn_invert" Click="btn_invert_Click" Grid.Column="2" Margin="3"  />
                 <Label Content="Index:" Height="28" HorizontalAlignment="Left" Margin="27,7,0,0" Name="label1" VerticalAlignment="Top" Grid.Row="1" />
                 <Button Content="Select" Grid.Column="2" Name="btn_select" Click="btn_select_Click" Margin="3" Grid.Row="1" />
-                <Controls:NumericUpDown Grid.Column="1" Name="txt_indx" Value="1" HorizontalContentAlignment="Right" Margin="3" Grid.Row="1" />
+                <Controls:NumericUpDown Grid.Column="1" Name="txt_indx" Value="1" HorizontalContentAlignment="Right" Margin="3" Grid.Row="1" Minimum="0"/>
             </Grid>
         </GroupBox>
         <Button Content="Reload" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,118,11" Name="button1" VerticalAlignment="Bottom" Width="100" Click="button1_Click" Grid.Column="1" />

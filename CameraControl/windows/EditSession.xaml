@@ -25,11 +25,11 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.LeftWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
         </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
