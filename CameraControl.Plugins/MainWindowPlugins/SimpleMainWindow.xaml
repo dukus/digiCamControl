@@ -189,11 +189,11 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.WindowCommands>
+    <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
             <Button Content="Toggle always in top" Name="btn_top" Click="btn_top_Click" />
         </Controls:WindowCommands>
-    </Controls:MetroWindow.WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="37*" />

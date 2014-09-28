@@ -23,9 +23,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <i:Interaction.Behaviors>
-        <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" />
-    </i:Interaction.Behaviors>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="52*" />

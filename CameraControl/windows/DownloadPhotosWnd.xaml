@@ -63,16 +63,13 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <i:Interaction.Behaviors>
-        <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" />
-    </i:Interaction.Behaviors>
-    
-    <Controls:MetroWindow.WindowCommands>
+
+
+    <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
             <Button Content="Help" Name="btn_help" Click="btn_help_Click" />
         </Controls:WindowCommands>
-    </Controls:MetroWindow.WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
