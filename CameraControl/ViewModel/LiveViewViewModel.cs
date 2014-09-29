@@ -46,7 +46,7 @@ namespace CameraControl.ViewModel
         private Timer _focusStackingTimer = new Timer(1000);
         private Timer _restartTimer = new Timer(1000);
         private DateTime _restartTimerStartTime;
-        private int _focusStackingTick = 0;
+
         private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
@@ -93,6 +93,7 @@ namespace CameraControl.ViewModel
         private int _overlayHorizontal;
         private int _overlayVertical;
         private bool _stayOnTop;
+        private int _focusStackingTick;
 
         public ICameraDevice CameraDevice
         {
@@ -288,6 +289,16 @@ namespace CameraControl.ViewModel
             {
                 CameraProperty.LiveviewSettings.Brightness = value;
                 RaisePropertyChanged(() => Brightness);
+            }
+        }
+
+        public int FocusStackingTick
+        {
+            get { return _focusStackingTick; }
+            set
+            {
+                _focusStackingTick = value;
+                RaisePropertyChanged(() => FocusStackingTick);
             }
         }
 
@@ -1897,7 +1908,7 @@ namespace CameraControl.ViewModel
         private void StartSimpleFocusStacking()
         {
             _focusStackinMode = 1;
-            _focusStackingTick = 0;
+            FocusStackingTick = 0;
             _focusIProgress = false;
             PhotoCount = 0;
             IsFocusStackingRunning = true;
@@ -1916,7 +1927,7 @@ namespace CameraControl.ViewModel
                 return;
             }
             _focusStackinMode = 0;
-            _focusStackingTick = 0;
+            FocusStackingTick = 0;
             Thread.Sleep(500);
             _focusIProgress = false;
             SetFocus(-FocusCounter);
@@ -1953,7 +1964,7 @@ namespace CameraControl.ViewModel
         private void StopFocusStacking()
         {
             IsFocusStackingRunning = false;
-            _focusStackingTick = 0;
+            FocusStackingTick = 0;
             _focusStackingTimer.Stop();
             _timer.Start();
         }
@@ -1965,7 +1976,7 @@ namespace CameraControl.ViewModel
                 return;
             if (_focusStackinMode == 0)
             {
-                if (_focusStackingTick > WaitTime)
+                if (FocusStackingTick > WaitTime)
                 {
                     _focusStackingTimer.Stop();
                     StartLiveView();
@@ -1981,7 +1992,7 @@ namespace CameraControl.ViewModel
             }
             else
             {
-                if (_focusStackingTick > WaitTime)
+                if (FocusStackingTick > WaitTime)
                 {
                     _focusStackingTimer.Stop();
                     StartLiveView();
@@ -2001,9 +2012,13 @@ namespace CameraControl.ViewModel
                                 break;
                         }
                     }
+                    else
+                    {
+                        LiveViewViewModel_FocuseDone(null, null);
+                    }
                 }
             }
-            _focusStackingTick++;
+            FocusStackingTick++;
         }
 
         private void CaptureInThread()
@@ -2032,7 +2047,7 @@ namespace CameraControl.ViewModel
                 {
                     PhotoCount++;
                     GetLiveImage();
-                    _focusStackingTick = 0;
+                    FocusStackingTick = 0;
                     if (_focusStackingPreview)
                     {
                         _focusStackingTimer.Start();
@@ -2050,7 +2065,7 @@ namespace CameraControl.ViewModel
                         IsFocusStackingRunning = false;
                     }
                     GetLiveImage();
-                    _focusStackingTick = 0;
+                    FocusStackingTick = 0;
                     if (_focusStackingPreview)
                     {
                         _focusStackingTimer.Start();

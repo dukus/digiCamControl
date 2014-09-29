@@ -188,7 +188,7 @@
                             <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="1" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
-
+                            <ProgressBar  Grid.Row="5" Margin="5" Value="{Binding FocusStackingTick}" Maximum="{Binding WaitTime}" VerticalAlignment="Bottom"/>
                             <Label Content="{Binding PhotoCount}" Grid.Row="4" Margin="5"/>
 
                             <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
@@ -236,6 +236,7 @@
                             </ComboBox>
                             <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
 
+                            <ProgressBar  Grid.Row="5" Margin="5" Value="{Binding FocusStackingTick}" Maximum="{Binding WaitTime}" VerticalAlignment="Bottom"/>
                             <Label Content="{Binding PhotoCount}" Grid.Row="5" Margin="5"/>
 
                             <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
