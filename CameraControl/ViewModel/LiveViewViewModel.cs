@@ -1812,7 +1812,7 @@ namespace CameraControl.ViewModel
             {
                 _timer.Stop();
                 CameraDevice.StartLiveView();
-                StaticHelper.Instance.SystemMessage = "Move focus " + step;
+                //StaticHelper.Instance.SystemMessage = "Move focus " + step;
                 if (SimpleManualFocus)
                 {
                     for (var i = 0; i < Math.Abs(step); i++)
