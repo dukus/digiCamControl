@@ -147,6 +147,7 @@ namespace CameraControl.Devices
                                   {"D70", typeof (NikonD40)},
                                   {"D70s", typeof (NikonD40)},
                                   {"D700", typeof (NikonD700)},
+                                  {"D750", typeof (NikonD800)},
                                   {"D7000", typeof (NikonD7000)},
                                   {"D7100", typeof (NikonD7100)},
                                   {"D80", typeof (NikonD80)},
