@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -1459,12 +1460,13 @@ namespace CameraControl.Devices.Nikon
                             }
                             break;
                         default:
-                            foreach (PropertyValue<long> advancedProperty in AdvancedProperties)
+                            // imrovements from: http://digicamcontrol.com/forum/testingbug-reports/buglet-nikonbasecs
+                            foreach (PropertyValue<long> advancedProperty in AdvancedProperties.Where(advancedProperty => advancedProperty.Code == prop))
                             {
                                 if (advancedProperty.Name == "Image Size")
                                 {
                                     var val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
-                                                                               advancedProperty.Code);
+                                        advancedProperty.Code);
                                     if (val.Data != null && val.Data.Length > 0)
                                     {
                                         advancedProperty.SetValue(
@@ -1475,7 +1477,7 @@ namespace CameraControl.Devices.Nikon
                                 {
                                     advancedProperty.SetValue(
                                         StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
-                                                                         advancedProperty.Code), false);
+                                            advancedProperty.Code), false);
                                 }
                             }
                             break;
