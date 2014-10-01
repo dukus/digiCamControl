@@ -69,7 +69,7 @@ namespace CameraControl.Classes
                                 {HelpSections.Bracketig, "http://www.digicamcontrol.com/manual/bracketing"},
                                 {
                                     HelpSections.FocusStacking,
-                                    "http://nccsoftware.blogspot.ro/2012/06/how-to-focus-stacking.html"
+                                    "http://digicamcontrol.com/manual/focus-stacking"
                                     },
                                 {HelpSections.Settings, "http://www.digicamcontrol.com/manual/settings"},
                                 {HelpSections.TimeLapse, "http://www.digicamcontrol.com/manual/time-lapse"},

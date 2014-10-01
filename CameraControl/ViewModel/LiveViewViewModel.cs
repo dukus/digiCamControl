@@ -5,12 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using AForge;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Vision.Motion;
+using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Translation;
@@ -21,8 +23,9 @@ using CameraControl.Devices.Others;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.Win32;
 using Color = System.Windows.Media.Color;
+using HelpProvider = CameraControl.Classes.HelpProvider;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
 
@@ -638,6 +641,11 @@ namespace CameraControl.ViewModel
             get { return _lockB; }
             set
             {
+                if (FocusCounter == 0 && value)
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorFarPoit);
+                    return;
+                }
                 _lockB = value;
                 if (_lockB)
                 {
@@ -781,6 +789,7 @@ namespace CameraControl.ViewModel
 
         public RelayCommand ResetBrigthnessCommand { get; set; }
         public RelayCommand BrowseOverlayCommand { get; set; }
+        public RelayCommand HelpFocusStackingCommand { get; set; }
         
         #endregion
 
@@ -842,6 +851,7 @@ namespace CameraControl.ViewModel
             StartSimpleFocusStackingCommand = new RelayCommand(StartSimpleFocusStacking);
             PreviewSimpleFocusStackingCommand = new RelayCommand(PreviewSimpleFocusStacking);
             StopSimpleFocusStackingCommand = new RelayCommand(StopFocusStacking);
+            HelpFocusStackingCommand = new RelayCommand(()=> HelpProvider.Run(HelpSections.FocusStacking));
 
             BrowseOverlayCommand = new RelayCommand(BrowseOverlay);
             FocuseDone += LiveViewViewModel_FocuseDone;
@@ -1044,6 +1054,11 @@ namespace CameraControl.ViewModel
 
         private void AutoFocus()
         {
+            if (LockA || LockB)
+            {
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorAutoFocusLock);
+                return;
+            }
             string resp = CameraDevice.GetProhibitionCondition(OperationEnum.AutoFocus);
             if (string.IsNullOrEmpty(resp))
             {
@@ -1052,7 +1067,7 @@ namespace CameraControl.ViewModel
             }
             else
             {
-                MessageBox.Show(TranslationStrings.LabelError,
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
                     TranslationStrings.LabelErrorUnableFocus + "\n" +
                     TranslationManager.GetTranslation(resp));
             }
@@ -1109,7 +1124,7 @@ namespace CameraControl.ViewModel
                 return;
             }
 
-            if (!LiveViewData.IsLiveViewRunning)
+            if (!LiveViewData.IsLiveViewRunning && !IsFocusStackingRunning)
             {
                 DelayedStart = true;
                 _restartTimerStartTime = DateTime.Now;
@@ -1630,7 +1645,7 @@ namespace CameraControl.ViewModel
             }
             else
             {
-                MessageBox.Show(TranslationStrings.LabelError,
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
                     TranslationStrings.LabelErrorRecordMovie + "\n" +
                     TranslationManager.GetTranslation(resp));
             }
@@ -1668,7 +1683,7 @@ namespace CameraControl.ViewModel
             else
             {
                 Log.Error("Error starting live view " + resp);
-                MessageBox.Show(TranslationStrings.LabelError,
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
                     TranslationStrings.LabelLiveViewError + "\n" +
                     TranslationManager.GetTranslation(resp));
             }
@@ -1769,7 +1784,7 @@ namespace CameraControl.ViewModel
 
             if (_focusIProgress)
             {
-                SelectedFocusValue = FocusCounter;
+                //SelectedFocusValue = FocusCounter;
                 return;
             }
             _focusIProgress = true;
@@ -1785,7 +1800,7 @@ namespace CameraControl.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show(TranslationStrings.LabelError,
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
                                           TranslationStrings.LabelErrorUnableFocus + "\n" +
                                           TranslationManager.GetTranslation(resp));
                     _focusIProgress = false;
@@ -1795,7 +1810,7 @@ namespace CameraControl.ViewModel
             }
             catch (Exception exception)
             {
-                MessageBox.Show(TranslationStrings.LabelError, TranslationStrings.LabelErrorUnableFocus);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorUnableFocus);
                 Log.Error("Unable to focus ", exception);
                 _focusIProgress = false;
                 RaisePropertyChanged(() => FocusingEnabled);
@@ -1867,7 +1882,7 @@ namespace CameraControl.ViewModel
                 if (CameraDevice.ShutterSpeed != null && CameraDevice.ShutterSpeed.Value == "Bulb")
                 {
                     StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
-                    MessageBox.Show(TranslationStrings.LabelError, TranslationStrings.MsgBulbModeNotSupported);
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.MsgBulbModeNotSupported);
                     return;
                 }
                 CameraDevice.CapturePhotoNoAf();
@@ -1907,6 +1922,12 @@ namespace CameraControl.ViewModel
 
         private void StartSimpleFocusStacking()
         {
+            if (LockA || LockB)
+            {
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorSimpleStackingFocusLock);
+                return;
+            }
+            LockA = false;
             _focusStackinMode = 1;
             FocusStackingTick = 0;
             _focusIProgress = false;
@@ -1923,25 +1944,25 @@ namespace CameraControl.ViewModel
         {
             if (!LockA || !LockB)
             {
-                MessageBox.Show(TranslationStrings.LabelError, TranslationStrings.LabelLockNearFar);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelLockNearFar);
                 return;
             }
             _focusStackinMode = 0;
             FocusStackingTick = 0;
-            Thread.Sleep(500);
             _focusIProgress = false;
-            SetFocus(-FocusCounter);
             GetLiveImage();
             PhotoCount = 0;
             IsFocusStackingRunning = true;
             _focusStackingPreview = false;
-            _focusStackingTimer.Start();
+            SetFocus(-FocusCounter);
+            //_focusStackingTimer.Start();
             //Thread thread = new Thread(TakePhoto);
             //thread.Start();
         }
 
         private void PreviewSimpleFocusStacking()
         {
+            LockA = false;
             _focusStackinMode = 1;
             PhotoCount = 0;
             IsFocusStackingRunning = true;
@@ -1951,14 +1972,14 @@ namespace CameraControl.ViewModel
 
         private void PreviewFocusStacking()
         {
-            SetFocus(-FocusCounter);
             _focusStackinMode = 0;
             //FreezeImage = true;
             GetLiveImage();
             PhotoCount = 0;
             IsFocusStackingRunning = true;
             _focusStackingPreview = true;
-            _focusStackingTimer.Start();
+            SetFocus(-FocusCounter);
+            //_focusStackingTimer.Start();
         }
 
         private void StopFocusStacking()
@@ -1983,10 +2004,6 @@ namespace CameraControl.ViewModel
                     if (PhotoCount > 0)
                     {
                         SetFocus(FocusStep);
-                    }
-                    else
-                    {
-                        LiveViewViewModel_FocuseDone(null, null);
                     }
                 }
             }
@@ -2030,6 +2047,7 @@ namespace CameraControl.ViewModel
 
         void LiveViewViewModel_FocuseDone(object sender, EventArgs e)
         {
+            StaticHelper.Instance.SystemMessage = "";
             if (!_focusStackingPreview && IsFocusStackingRunning)
             {
                 Recording = false;
@@ -2042,6 +2060,7 @@ namespace CameraControl.ViewModel
                     Log.Error(exception);
                     StaticHelper.Instance.SystemMessage = exception.Message;
                     _focusStackingTimer.Start();
+                    return;
                 }
                 if (_focusStackinMode == 0)
                 {

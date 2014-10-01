@@ -165,6 +165,8 @@ namespace CameraControl.windows
 
         public static void StopLiveView(ICameraDevice device)
         {
+            if (device == null || !device.IsConnected)
+                return;
             device.StopLiveView();
             if (device is NikonBase)
             {

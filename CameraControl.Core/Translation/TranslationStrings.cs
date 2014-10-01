@@ -502,5 +502,22 @@ namespace CameraControl.Core.Translation
         public static string LabelScaling = "Scaling";
         public static string LabelHorizontal = "Horizontal";
         public static string LabelVertical = "Vertical";
+        //20/08/2014
+        public static string LabelLockNear = "Lock nearest point";
+        public static string LabelLockFar = "Lock farthest point";
+        public static string LabelGoNear = "Go to nearest focusing point";
+        public static string LabelGoFar = "Go to farthest focusing point";
+        public static string LabelMoveSmallToCamera = "Move small step to camera";
+        public static string LabelMoveMediumToCamera = "Move medium step to camera";
+        public static string LabelMoveLargeToCamera = "Move large step to camera";
+        public static string LabelMoveSmallToInfinity = "Move small step to infinity";
+        public static string LabelMoveMediumToInfinity = "Move medium step to infinity";
+        public static string LabelMoveLargeToInfinity = "Move large step to infinity";
+        public static string LabelDistantFromPoints = "Distance between the nearest and farthest locked in focus points";
+        public static string LabelFocusStackingSimple = "Focus Stacking Simple";
+        public static string LabelFocusStackingAdvanced = "Focus Stacking Advanced";
+        public static string LabelErrorFarPoit = "First set the farthest focus point";
+        public static string LabelErrorAutoFocusLock = "The focus is locked, unlock first to autofocus";
+        public static string LabelErrorSimpleStackingFocusLock = "The focus is locked, simple focus stacking no required focus lock, unlock first to start";
     }
 }

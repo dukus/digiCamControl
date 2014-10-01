@@ -69,7 +69,7 @@
         </Canvas>
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" >
             <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000">
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockNear}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">
                             <Rectangle.Fill>
@@ -97,22 +97,22 @@
                         </Style>
                     </ToggleButton.Style>
                 </ToggleButton>
-                <Button Margin="1" Width="40" Content="|&lt;" Command="{Binding MoveACommand}" IsEnabled="{Binding LockA}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button Margin="1" Width="40" Content="|&lt;" Command="{Binding MoveACommand}" IsEnabled="{Binding LockA}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelGoNear}"/>
 
-                <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" ToolTip="-500" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" ToolTip="-100" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" ToolTip="-10" Style="{DynamicResource MetroCircleButtonStyle}"/>
+                <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveLargeToCamera}"/>
+                <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveMediumToCamera}"/>
+                <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveSmallToCamera}"/>
 
-                <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="{T:TranslateExtension LabelDistantFromPoints}"/>
 
-                <Button Margin="1" Width="40" Content=">" Command="{Binding FocusPCommand}" FontWeight="Bold" ToolTip="10" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button Margin="1" Width="40" Content=">>" Command="{Binding FocusPPCommand}" FontWeight="Bold" ToolTip="100" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button Margin="1" Width="40" Content=">>>" Command="{Binding FocusPPPCommand}" FontWeight="Bold" ToolTip="500" Style="{DynamicResource MetroCircleButtonStyle}"/>
+                <Button Margin="1" Width="40" Content=">" Command="{Binding FocusPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveSmallToInfinity}"/>
+                <Button Margin="1" Width="40" Content=">>" Command="{Binding FocusPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveMediumToInfinity}"/>
+                <Button Margin="1" Width="40" Content=">>>" Command="{Binding FocusPPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveLargeToInfinity}"/>
 
-                <Button Margin="1" Width="40" Content=">|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button Margin="1" Width="40" Content=">|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelGoFar}"/>
 
 
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" IsEnabled="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" IsEnabled="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockFar}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">
                             <Rectangle.Fill>
@@ -148,7 +148,7 @@
                     </Rectangle>
                 </ToggleButton>
             </StackPanel>
-            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="1" Width="462" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" />
+            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="10" Width="462" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" />
         </StackPanel>
         <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}"
                 Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
@@ -161,10 +161,11 @@
                 <StackPanel.ScrollOwner>
                     <ScrollViewer />
                 </StackPanel.ScrollOwner>
-                <Expander Header="{T:TranslateExtension LabelFocusStacking}" BorderThickness="1" BorderBrush="Black" Margin="3" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <Expander Header="{T:TranslateExtension LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -194,14 +195,21 @@
                             <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
                             <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
-                            <!--<Controls1:AdvancedSlider Minimum="2" Maximum="60" Label="{T:TranslateExtension LabelWaitTime}" Grid.ColumnSpan="4" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Grid.Row="2" />-->
+                            <Button Grid.Row="5" Grid.Column="1" ToolTip="{T:TranslateExtension SessionAdd}" Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding HelpFocusStackingCommand}">
+                                <Rectangle Width="10" Height="10">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_question}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelFocusStacking}" BorderThickness="1" BorderBrush="Black" Margin="3" >
+                <Expander Header="{T:TranslateExtension LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" >
                     <Expander.Content>
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -241,8 +249,6 @@
 
                             <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
                             <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
-
-                            <!--<Controls1:AdvancedSlider Minimum="2" Maximum="60" Label="{T:TranslateExtension LabelWaitTime}" Grid.ColumnSpan="4" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Grid.Row="2" />-->
                         </Grid>
                     </Expander.Content>
                 </Expander>

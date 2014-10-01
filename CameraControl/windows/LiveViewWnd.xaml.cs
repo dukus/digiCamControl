@@ -202,6 +202,11 @@ namespace CameraControl.windows
                                                          //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FocusStackingWnd_Hide);
                                                      }));
                     break;
+                case WindowsCmdConsts.LiveViewWnd_Message:
+                {
+                    this.ShowMessageAsync("", (string) param);
+                }
+                    break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
                                                      {
