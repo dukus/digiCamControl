@@ -204,7 +204,12 @@ namespace CameraControl.windows
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Message:
                 {
+                    if(this.IsLoaded)
                     this.ShowMessageAsync("", (string) param);
+                    else
+                    {
+                        MessageBox.Show((string) param);
+                    }
                 }
                     break;
                 case CmdConsts.All_Close:
@@ -299,13 +304,6 @@ namespace CameraControl.windows
         private void btn_help_Click(object sender, RoutedEventArgs e)
         {
             HelpProvider.Run(HelpSections.LiveView);
-        }
-
-        private void slider_transparent_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            Dispatcher.Invoke(slider_transparent.Value == 1
-                                  ? new Action(delegate { img_preview.Visibility = Visibility.Hidden; })
-                                  : new Action(delegate { img_preview.Visibility = Visibility.Visible; }));
         }
 
         private void MetroWindow_SizeChanged(object sender, SizeChangedEventArgs e)

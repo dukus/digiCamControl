@@ -520,6 +520,8 @@ namespace CameraControl.Core.Translation
         public static string LabelErrorAutoFocusLock = "The focus is locked, unlock first to autofocus";
         public static string LabelErrorSimpleStackingFocusLock = "The focus is locked, simple focus stacking no required focus lock, unlock first to start";
         public static string LabelLowerCaseExtension = "Lower case extension";
+        public static string LabelOverlayTransparency = "Transparency";
+        public static string LabelOverlayUseLastCaptured = "Use last captured";
         
     }
 }

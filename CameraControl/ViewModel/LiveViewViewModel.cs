@@ -49,6 +49,7 @@ namespace CameraControl.ViewModel
         private Timer _focusStackingTimer = new Timer(1000);
         private Timer _restartTimer = new Timer(1000);
         private DateTime _restartTimerStartTime;
+        private string _lastOverlay = string.Empty;
 
         private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
@@ -97,6 +98,8 @@ namespace CameraControl.ViewModel
         private int _overlayVertical;
         private bool _stayOnTop;
         private int _focusStackingTick;
+        private int _overlayTransparency;
+        private bool _overlayUseLastCaptured;
 
         public ICameraDevice CameraDevice
         {
@@ -241,6 +244,27 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(()=>OverlayVertical);
             }
         }
+
+        public int OverlayTransparency
+        {
+            get { return _overlayTransparency; }
+            set
+            {
+                _overlayTransparency = value;
+                RaisePropertyChanged(()=>OverlayTransparency);
+            }
+        }
+
+        public bool OverlayUseLastCaptured
+        {
+            get { return _overlayUseLastCaptured; }
+            set
+            {
+                _overlayUseLastCaptured = value;
+                RaisePropertyChanged(() => OverlayUseLastCaptured);
+            }
+        }
+
 
         public bool BlackAndWhite
         {
@@ -790,6 +814,8 @@ namespace CameraControl.ViewModel
         public RelayCommand ResetBrigthnessCommand { get; set; }
         public RelayCommand BrowseOverlayCommand { get; set; }
         public RelayCommand HelpFocusStackingCommand { get; set; }
+
+        public RelayCommand ResetOverlayCommand { get; set; }
         
         #endregion
 
@@ -854,6 +880,8 @@ namespace CameraControl.ViewModel
             HelpFocusStackingCommand = new RelayCommand(()=> HelpProvider.Run(HelpSections.FocusStacking));
 
             BrowseOverlayCommand = new RelayCommand(BrowseOverlay);
+            ResetOverlayCommand = new RelayCommand(ResetOverlay);
+
             FocuseDone += LiveViewViewModel_FocuseDone;
         }
 
@@ -874,6 +902,8 @@ namespace CameraControl.ViewModel
                     Overlays.Add(new ValuePair() {Name = Path.GetFileNameWithoutExtension(file), Value = file});
                 }
             }
+            OverlayTransparency = 100;
+            OverlayUseLastCaptured = false;
         }
 
         private void Init()
@@ -926,6 +956,14 @@ namespace CameraControl.ViewModel
             LockA = false;
             LockB = false;
             LiveViewData = null;
+        }
+
+        private void ResetOverlay()
+        {
+            OverlayHorizontal = 0;
+            OverlayScale = 1;
+            OverlayTransparency = 100;
+            OverlayVertical = 0;
         }
 
         public void BrowseOverlay()
@@ -1305,14 +1343,24 @@ namespace CameraControl.ViewModel
             
             if (OverlayActivated)
             {
-                if (SelectedOverlay != null && File.Exists(SelectedOverlay))
+                if ((SelectedOverlay != null && File.Exists(SelectedOverlay) )|| OverlayUseLastCaptured)
                 {
+                    if (OverlayUseLastCaptured)
+                    {
+                        if (File.Exists(ServiceProvider.Settings.SelectedBitmap.FileItem.LargeThumb) &&
+                            _lastOverlay != ServiceProvider.Settings.SelectedBitmap.FileItem.LargeThumb)
+                        {
+                            _lastOverlay = ServiceProvider.Settings.SelectedBitmap.FileItem.LargeThumb;
+                            _overlayImage = null;
+                        }
+                    }
+
                     if (_overlayImage == null)
                     {
                         BitmapImage bitmapSource = new BitmapImage();
                         bitmapSource.DecodePixelWidth = writeableBitmap.PixelWidth;
                         bitmapSource.BeginInit();
-                        bitmapSource.UriSource = new Uri(SelectedOverlay);
+                        bitmapSource.UriSource = new Uri(OverlayUseLastCaptured ? _lastOverlay : SelectedOverlay);
                         bitmapSource.EndInit();
                         _overlayImage = BitmapFactory.ConvertToPbgra32Format(bitmapSource);
                         _overlayImage.Freeze();
@@ -1321,11 +1369,17 @@ namespace CameraControl.ViewModel
                     int y = writeableBitmap.PixelHeight * OverlayScale / 100;
                     int xx = writeableBitmap.PixelWidth * OverlayHorizontal / 100;
                     int yy = writeableBitmap.PixelWidth * OverlayVertical / 100;
+                    Color transpColor = Colors.White;
+
+                    //set color transparency for blit only the alpha chanel is used from transpColor
+                    if (OverlayTransparency < 100)
+                        transpColor = Color.FromArgb((byte) (0xff*OverlayTransparency/100d), 0xff, 0xff, 0xff);
+                    
                     writeableBitmap.Blit(
                         new Rect(0 + (x / 2) + xx, 0 + (y / 2) + yy, writeableBitmap.PixelWidth - x,
                             writeableBitmap.PixelHeight - y),
                         _overlayImage,
-                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight));
+                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight),transpColor,WriteableBitmapExtensions.BlendMode.Alpha);
                 }
             }
 
