@@ -356,6 +356,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool LowerCaseExtension
+        {
+            get { return _lowerCaseExtension; }
+            set
+            {
+                _lowerCaseExtension = value;
+                NotifyPropertyChanged("LowerCaseExtension");
+            }
+        }
+
         private string _configFile;
 
         public string ConfigFile
@@ -397,6 +407,7 @@ namespace CameraControl.Core.Classes
             LeadingZeros = 4;
             WriteComment = false;
             AllowOverWrite = false;
+            LowerCaseExtension = true;
         }
 
         private void _systemWatcher_Created(object sender, FileSystemEventArgs e)
@@ -439,6 +450,7 @@ namespace CameraControl.Core.Classes
         private bool _backUp;
         private string _captureName;
         private int _series;
+        private bool _lowerCaseExtension;
 
         public bool AllowOverWrite
         {

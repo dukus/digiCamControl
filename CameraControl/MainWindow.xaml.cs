@@ -322,6 +322,13 @@ namespace CameraControl
                     File.Delete(fileName);
                 }
 
+                // make lower case extension 
+                if (session.LowerCaseExtension && !string.IsNullOrEmpty(Path.GetExtension(fileName)))
+                {
+                    fileName = Path.Combine(Path.GetDirectoryName(fileName),
+                        Path.GetFileNameWithoutExtension(fileName) + Path.GetExtension(fileName).ToLower());
+                }
+
                 if (!Directory.Exists(Path.GetDirectoryName(fileName)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName));
