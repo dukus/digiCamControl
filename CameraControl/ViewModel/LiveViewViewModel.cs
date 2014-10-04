@@ -1892,7 +1892,7 @@ namespace CameraControl.ViewModel
             {
                 _timer.Stop();
                 CameraDevice.StartLiveView();
-                //StaticHelper.Instance.SystemMessage = "Move focus " + step;
+                StaticHelper.Instance.SystemMessage = "Move focus " + step;
                 if (SimpleManualFocus)
                 {
                     for (var i = 0; i < Math.Abs(step); i++)
@@ -1922,8 +1922,10 @@ namespace CameraControl.ViewModel
                 _timer.Start();
 
             _focusIProgress = false;
+            _selectedFocusValue = FocusCounter;
             OnFocuseDone();
             RaisePropertyChanged(() => FocusingEnabled);
+            RaisePropertyChanged(() => SelectedFocusValue);
         }
 
         private void Capture()
