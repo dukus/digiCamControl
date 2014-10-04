@@ -59,6 +59,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ToolPlugins.Add(new GenThumbPlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ImageSequencerPlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new GenMoviePlugin());
+                ServiceProvider.PluginManager.ToolPlugins.Add(new TurntablePlugin());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new SerialPortShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DSUSBShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new MultiCameraBoxShutterRelease());

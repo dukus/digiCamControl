@@ -80,6 +80,12 @@
       <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Gif.Components">
+      <HintPath>..\packages\Photomechanics.StepMotor\Gif.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\Photomechanics.StepMotor\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
@@ -94,6 +100,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Model">
+      <HintPath>..\packages\Photomechanics.StepMotor\Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Photomechanics.StepMotor">
+      <HintPath>..\packages\Photomechanics.StepMotor\Photomechanics.StepMotor.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -111,6 +123,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Utility">
+      <HintPath>..\packages\Photomechanics.StepMotor\Utility.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WriteableBitmapEx.Wpf">
       <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
@@ -155,6 +170,11 @@
     <Compile Include="ToolPlugins\ImageSequencerWindow.xaml.cs">
       <DependentUpon>ImageSequencerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ToolPlugins\TurntablePlugin.cs" />
+    <Compile Include="ToolPlugins\TurntableWindow.xaml.cs">
+      <DependentUpon>TurntableWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolPlugins\TurntableViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
@@ -209,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolPlugins\ImageSequencerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolPlugins\TurntableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
