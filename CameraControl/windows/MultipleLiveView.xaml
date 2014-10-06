@@ -1,0 +1,19 @@
+﻿<controls:MetroWindow x:Class="CameraControl.windows.MultipleLiveView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+        Title="MultipleLiveView" Height="426" Width="632">
+    <Window.DataContext>
+        <viewModel:MultipleLiveViewViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="315*" />
+            <RowDefinition Height="72*" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="1" Header="groupBox1" Name="groupBox1">
+            <Grid />
+        </GroupBox>
+    </Grid>
+</controls:MetroWindow>

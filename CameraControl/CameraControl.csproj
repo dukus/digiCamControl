@@ -278,6 +278,7 @@
     <Compile Include="ViewModel\AstroLiveViewViewModel.cs" />
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MultipleLiveViewViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="windows\AboutWnd.xaml.cs">
       <DependentUpon>AboutWnd.xaml</DependentUpon>
@@ -333,6 +334,9 @@
     </Compile>
     <Compile Include="windows\MultipleCameraWnd.xaml.cs">
       <DependentUpon>MultipleCameraWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\MultipleLiveView.xaml.cs">
+      <DependentUpon>MultipleLiveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\NewVersionWnd.xaml.cs">
       <DependentUpon>NewVersionWnd.xaml</DependentUpon>
@@ -520,6 +524,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\MultipleCameraWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\MultipleLiveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

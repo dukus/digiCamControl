@@ -287,5 +287,10 @@ namespace CameraControl.windows
         {
             Topmost = (btn_stay_on_top.IsChecked == true);
         }
+
+        private void btn_liveview_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
