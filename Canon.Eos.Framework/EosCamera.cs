@@ -465,6 +465,7 @@ namespace Canon.Eos.Framework
             if (!this.IsInLiveViewMode)
                 this.IsInLiveViewMode = true;
             this._cancelLiveViewRequested = false;
+            this._pauseLiveViewRequested = false;
             var device = this.LiveViewDevice;
             device = device | EosLiveViewDevice.Host;
             this.LiveViewDevice = device;
@@ -497,6 +498,7 @@ namespace Canon.Eos.Framework
 
         public void TakePicture()
         {
+            _photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             lock (_locker)
             {
                 if (this.IsLegacy && !this.IsLocked)
@@ -512,6 +514,7 @@ namespace Canon.Eos.Framework
 
         public void TakePictureNoAf()
         {
+            _photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             if (this.IsLegacy && !this.IsLocked)
             {
                 this.LockAndExceute(this.TakePictureNoAf);
@@ -613,6 +616,16 @@ namespace Canon.Eos.Framework
             //has to be called if Taking photo fails
             this._pauseLiveViewRequested = false;
 
+        }
+
+        public void PauseLiveview()
+        {
+            //has to be called if Taking photo fails
+            this._pauseLiveViewRequested = true;
+            while (_liveViewRunning)
+            {
+                
+            }
         }
 
         public override string ToString()

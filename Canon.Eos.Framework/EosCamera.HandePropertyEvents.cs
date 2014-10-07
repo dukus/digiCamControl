@@ -13,6 +13,7 @@ namespace Canon.Eos.Framework
         private bool _liveMode;
         private bool _cancelLiveViewRequested;
         private bool _pauseLiveViewRequested;
+        private bool _liveViewRunning = false;
 
         private void OnLiveViewStarted(EventArgs eventArgs)
         {
@@ -47,41 +48,43 @@ namespace Canon.Eos.Framework
             if ((this.LiveViewDevice & EosLiveViewDevice.Host) == EosLiveViewDevice.None || _cancelLiveViewRequested)
                 return false;
 
-            lock (_locker)
+            //lock (_locker)
+            //{
+            _liveViewRunning = true;
+            var memoryStream = IntPtr.Zero;
+            try
             {
-                var memoryStream = IntPtr.Zero;
-                try
+                Edsdk.EdsCreateMemoryStream(0, out memoryStream);
+                using (var image = EosLiveImage.CreateFromStream(memoryStream))
                 {
-                    Edsdk.EdsCreateMemoryStream(0, out memoryStream);
-                    using (var image = EosLiveImage.CreateFromStream(memoryStream))
-                    {
-                        Edsdk.EdsDownloadEvfImage(this.Handle, image.Handle);
+                    Edsdk.EdsDownloadEvfImage(this.Handle, image.Handle);
 
-                        var converter = new EosConverter();
-                        this.OnLiveViewUpdate(
-                            new EosLiveImageEventArgs(converter.ConvertImageStreamToBytes(memoryStream))
-                                {
-                                    Zoom = image.Zoom,
-                                    ZommBounds = image.ZoomBounds,
-                                    ImagePosition = image.ImagePosition,
-                                    ImageSize = image.Size
-                                    //Histogram = image.Histogram,
+                    var converter = new EosConverter();
+                    this.OnLiveViewUpdate(
+                        new EosLiveImageEventArgs(converter.ConvertImageStreamToBytes(memoryStream))
+                        {
+                            Zoom = image.Zoom,
+                            ZommBounds = image.ZoomBounds,
+                            ImagePosition = image.ImagePosition,
+                            ImageSize = image.Size
+                            //Histogram = image.Histogram,
 
-                                });
+                        });
 
-                    }
-                }
-                catch (EosException eosEx)
-                {
-                    //if (eosEx.EosErrorCode != EosErrorCode.DeviceBusy && eosEx.EosErrorCode != EosErrorCode.ObjectNotReady)
-                    //    throw;
-                }
-                finally
-                {
-                    if (memoryStream != IntPtr.Zero)
-                        Edsdk.EdsRelease(memoryStream);
                 }
             }
+            catch (EosException eosEx)
+            {
+                //if (eosEx.EosErrorCode != EosErrorCode.DeviceBusy && eosEx.EosErrorCode != EosErrorCode.ObjectNotReady)
+                //    throw;
+            }
+            finally
+            {
+                if (memoryStream != IntPtr.Zero)
+                    Edsdk.EdsRelease(memoryStream);
+            }
+            _liveViewRunning = false;
+            //}
             return true;
         }
 

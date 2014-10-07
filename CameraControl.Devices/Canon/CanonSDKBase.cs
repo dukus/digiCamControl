@@ -213,6 +213,7 @@ namespace CameraControl.Devices.Canon
 
         protected Dictionary<uint, string> _isoTable = new Dictionary<uint, string>()
                                                            {
+                                                               {0x00000000, "Auto"},
                                                                {0x00000028, "6"},
                                                                {0x00000030, "12"},
                                                                {0x00000038, "25"},
@@ -960,7 +961,10 @@ namespace CameraControl.Devices.Canon
                 IsBusy = true;
                 if (Camera.IsInHostLiveViewMode)
                 {
-                    Camera.TakePictureInLiveview();
+                    Camera.PauseLiveview();
+                    Camera.ResetShutterButton();
+                    Camera.TakePicture();
+                    Camera.ResetShutterButton();
                 }
                 else
                 {
@@ -998,6 +1002,7 @@ namespace CameraControl.Devices.Canon
             try
             {
                 IsBusy = true;
+                Camera.PauseLiveview();
                 ErrorCodes.GetCanonException(ResetShutterButton());
                 ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely_NonAF));
                 ResetShutterButton();

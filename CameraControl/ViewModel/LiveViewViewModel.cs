@@ -2035,7 +2035,7 @@ namespace CameraControl.ViewModel
             IsFocusStackingRunning = true;
             _focusStackingPreview = true;
             SetFocus(-FocusCounter);
-            //_focusStackingTimer.Start();
+            _focusStackingTimer.Start();
         }
 
         private void StopFocusStacking()
