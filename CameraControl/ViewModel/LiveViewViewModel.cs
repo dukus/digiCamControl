@@ -1833,8 +1833,8 @@ namespace CameraControl.ViewModel
 
         private void SetFocus(int step)
         {
-            if (step == 0)
-                return;
+            //if (step == 0)
+            //    return;
 
             if (_focusIProgress)
             {
@@ -1875,57 +1875,62 @@ namespace CameraControl.ViewModel
         private void SetFocusThread(object ostep)
         {
             int step = (int)ostep;
-            if (LockA)
+            if (step != 0)
             {
-                if (FocusCounter == 0 && step < 0)
-                    return;
-                if (FocusCounter + step < 0)
-                    step = -FocusCounter;
-            }
-            if (LockB)
-            {
-                if (FocusCounter + step > FocusValue)
-                    step = FocusValue - FocusCounter;
-            }
-
-            try
-            {
-                _timer.Stop();
-                CameraDevice.StartLiveView();
-                StaticHelper.Instance.SystemMessage = "Move focus " + step;
-                if (SimpleManualFocus)
+                if (LockA)
                 {
-                    for (var i = 0; i < Math.Abs(step); i++)
+                    if (FocusCounter == 0 && step < 0)
+                        return;
+                    if (FocusCounter + step < 0)
+                        step = -FocusCounter;
+                }
+                if (LockB)
+                {
+                    if (FocusCounter + step > FocusValue)
+                        step = FocusValue - FocusCounter;
+                }
+
+                try
+                {
+                    _timer.Stop();
+                    CameraDevice.StartLiveView();
+                    StaticHelper.Instance.SystemMessage = "Move focus " + step;
+                    if (SimpleManualFocus)
                     {
-                        Thread.Sleep(1000/DesiredFrameRate/2);
-                        GetLiveImage();
+                        for (var i = 0; i < Math.Abs(step); i++)
+                        {
+                            Thread.Sleep(1000/DesiredFrameRate/2);
+                            GetLiveImage();
+                            FocusCounter += CameraDevice.Focus(step);
+                        }
+                    }
+                    else
+                    {
                         FocusCounter += CameraDevice.Focus(step);
                     }
                 }
-                else
+                catch (DeviceException exception)
                 {
-                    FocusCounter += CameraDevice.Focus(step);
+                    Log.Error("Unable to focus", exception);
+                    StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus + " " +
+                                                          exception.Message;
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Unable to focus", exception);
+                    StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus;
                 }
             }
-            catch (DeviceException exception)
-            {
-                Log.Error("Unable to focus", exception);
-                StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus + " " + exception.Message;
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Unable to focus", exception);
-                StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus;
-            }
-
-            if (!IsFocusStackingRunning)
-                _timer.Start();
 
             _focusIProgress = false;
             _selectedFocusValue = FocusCounter;
             OnFocuseDone();
             RaisePropertyChanged(() => FocusingEnabled);
             RaisePropertyChanged(() => SelectedFocusValue);
+
+            if (!IsFocusStackingRunning)
+                _timer.Start();
+
         }
 
         private void Capture()

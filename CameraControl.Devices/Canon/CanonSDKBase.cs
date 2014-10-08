@@ -436,7 +436,9 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
+                Camera.PauseLiveview();
                 Camera.SetProperty(Edsdk.PropID_Evf_Zoom, val);
+                Camera.ResumeLiveview();
             }
             catch (Exception exception)
             {
@@ -756,7 +758,9 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
+                Camera.PauseLiveview();
                 Camera.SetProperty(Edsdk.PropID_ISOSpeed, val);
+                Camera.ResumeLiveview();
             }
             catch (Exception exception)
             {
@@ -1045,13 +1049,22 @@ namespace CameraControl.Devices.Canon
 
         public override void Focus(int x, int y)
         {
-            ResetShutterButton();
-            if (_liveViewImageData != null)
+            lock (Locker)
             {
-                x -= (_liveViewImageData.ZommBounds.Width/2);
-                y -= (_liveViewImageData.ZommBounds.Height/2);
+                ResetShutterButton();
+                Camera.PauseLiveview();
+                if (_liveViewImageData != null)
+                {
+                    x -= (_liveViewImageData.ZommBounds.Width/2);
+                    y -= (_liveViewImageData.ZommBounds.Height/2);
+                }
+                if (x < 0)
+                    x = 0;
+                if (y < 0)
+                    y = 0;
+                Camera.SetPropertyIntegerArrayData(Edsdk.PropID_Evf_ZoomPosition, new uint[] {(uint) x, (uint) y});
+                Camera.ResumeLiveview();
             }
-            Camera.SetPropertyIntegerArrayData(Edsdk.PropID_Evf_ZoomPosition, new uint[] {(uint) x, (uint) y});
         }
 
         public override LiveViewData GetLiveViewImage()
@@ -1106,17 +1119,26 @@ namespace CameraControl.Devices.Canon
         public override void AutoFocus()
         {
             ResetShutterButton();
-            //ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 1));
+            Camera.PauseLiveview();
             
-           ErrorCodes.GetCanonException(
+            try
+            {
+                //ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 1));
+                ErrorCodes.GetCanonException(
+         Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                          (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
+                ErrorCodes.GetCanonException(
                     Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
-                                     (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
-            ErrorCodes.GetCanonException(
-                Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
-                    (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Halfway));
-            ErrorCodes.GetCanonException(
-                     Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
-                                      (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
+                        (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Halfway));
+                ErrorCodes.GetCanonException(
+                         Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+                                          (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
+
+            }
+            finally
+            {
+                Camera.ResumeLiveview();                
+            }
         }
 
         public override int Focus(int step)
