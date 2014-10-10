@@ -64,6 +64,12 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />                        
                     </Grid.RowDefinitions>
 
                     <Label Content="{T:TranslateExtension LabelTheme}" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
@@ -75,6 +81,16 @@
                     <Label Content="{T:TranslateExtension LabelInterfaceLanguage}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"/>
                     <ComboBox  ItemsSource="{Binding Source={x:Static Member=T:TranslationManager.AvailableLangs}}" DisplayMemberPath="Name" SelectedValuePath="Value"  SelectedValue="{Binding SelectedLanguage}" Grid.Row="4" Grid.Column="3" Margin="2"/>
                     <TextBlock Grid.Row="5" Grid.Column="3" Text="Improve interface localization" Cursor="Hand" FontStyle="Italic" HorizontalAlignment="Right" MouseDown="TextBlock_MouseDown"><TextBlock.TextDecorations><TextDecoration><TextDecoration.Pen><Pen /></TextDecoration.Pen></TextDecoration></TextBlock.TextDecorations></TextBlock>
+
+                    <Label Content="{T:TranslateExtension LabelMinimizeToTryIcon}" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                    <CheckBox Grid.Row="6" Grid.Column="3" IsChecked="{Binding MinimizeToTrayIcon}"/>
+
+                    <Label Content="{T:TranslateExtension LabelStartMinimized}" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                    <CheckBox Grid.Row="7" Grid.Column="3" IsChecked="{Binding StartMinimized}"/>
+
+                    <Label Content="{T:TranslateExtension LabelStartupWithWindows}" Grid.Row="8" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                    <CheckBox Grid.Row="8" Grid.Column="3" IsChecked="{Binding StartupWithWindows}"/>
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelPreview}">

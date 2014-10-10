@@ -48,8 +48,10 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Layouts;
 using CameraControl.windows;
+using Hardcodet.Wpf.TaskbarNotification;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
 using EditSession = CameraControl.windows.EditSession;
 using FileInfo = System.IO.FileInfo;
 using HelpProvider = CameraControl.Classes.HelpProvider;
@@ -67,7 +69,6 @@ namespace CameraControl
     /// </summary>
     public partial class MainWindow :  IMainWindowPlugin, INotifyPropertyChanged
     {
-        public PropertyWnd PropertyWnd { get; set; }
         public string DisplayName { get; set; }
 
         private object _locker = new object();
@@ -92,6 +93,8 @@ namespace CameraControl
             ExecuteExportPluginCommand = new RelayCommand<IExportPlugin>(ExecuteExportPlugin);
             ExecuteToolPluginCommand = new RelayCommand<IToolPlugin>(ExecuteToolPlugin);
             InitializeComponent();
+
+
             if (!string.IsNullOrEmpty(ServiceProvider.Branding.ApplicationTitle))
             {
                 Title = ServiceProvider.Branding.ApplicationTitle;
@@ -202,10 +205,25 @@ namespace CameraControl
 
             DataContext = ServiceProvider.Settings;
             ServiceProvider.DeviceManager.CameraSelected += DeviceManager_CameraSelected;
+            ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
+            ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
             SetLayout(ServiceProvider.Settings.SelectedLayout);
-            //ServiceProvider.Settings.ApplyTheme(this);
             var thread = new Thread(CheckForUpdate);
             thread.Start();
+            if (ServiceProvider.Settings.StartMinimized)
+                this.WindowState = WindowState.Minimized;
+        }
+
+        void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
+        {
+            MyNotifyIcon.HideBalloonTip();
+            MyNotifyIcon.ShowBalloonTip("Camera disconnected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
+        }
+
+        void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
+        {
+            MyNotifyIcon.HideBalloonTip();
+            MyNotifyIcon.ShowBalloonTip("Camera connected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
         }
 
         private void CheckForUpdate()
@@ -219,11 +237,15 @@ namespace CameraControl
             }
             else
             {
-                Dispatcher.Invoke(new Action(() =>
+                // show welcome screen only if not start minimized
+                if (!ServiceProvider.Settings.StartMinimized)
                 {
-                    var wnd = new Welcome();
-                    wnd.ShowDialog();
-                }));
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        var wnd = new Welcome();
+                        wnd.ShowDialog();
+                    }));
+                }
             }
         }
 
@@ -371,6 +393,12 @@ namespace CameraControl
                 }
                 _selectedItem = session.AddFile(fileName);
                 _selectedItem.BackupFileName = backupfile;
+
+                if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
+                {
+                    MyNotifyIcon.HideBalloonTip();
+                    MyNotifyIcon.ShowBalloonTip("Photo transfered", fileName, BalloonIcon.Info);
+                }
 
                 //select the new file only when the multiple camera support isn't used to prevent high CPU usage on raw files
                 if (ServiceProvider.Settings.AutoPreview &&
@@ -525,22 +553,13 @@ namespace CameraControl
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (PropertyWnd != null)
-            {
-                PropertyWnd.Hide();
-                PropertyWnd.Close();
-            }
             ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.All_Close);
         }
 
         private void but_timelapse_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyWnd != null && PropertyWnd.IsVisible)
-                PropertyWnd.Topmost = false;
             TimeLapseWnd wnd = new TimeLapseWnd();
             wnd.ShowDialog();
-            if (PropertyWnd != null && PropertyWnd.IsVisible)
-                PropertyWnd.Topmost = true;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -678,12 +697,22 @@ namespace CameraControl
 
         private void btn_settings_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyWnd != null && PropertyWnd.IsVisible)
-                PropertyWnd.Topmost = false;
             SettingsWnd wnd = new SettingsWnd();
             wnd.ShowDialog();
-            if (PropertyWnd != null && PropertyWnd.IsVisible)
-                PropertyWnd.Topmost = true;
+            try
+            {
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+                if (ServiceProvider.Settings.StartupWithWindows)
+                    rk.SetValue(Settings.AppName, System.Reflection.Assembly.GetExecutingAssembly().Location);
+                else
+                    rk.DeleteValue(Settings.AppName, false);            
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessageAsync("Usable to set startup", ex.Message);
+                Log.Error("Usable to set startup", ex);
+            }
         }
 
         private void btn_menu_Click(object sender, RoutedEventArgs e)
@@ -867,6 +896,18 @@ namespace CameraControl
         private void btn_open_folder_Sesion_Click(object sender, RoutedEventArgs e)
         {
             PhotoUtils.Run(ServiceProvider.Settings.DefaultSession.Folder);
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon)
+                this.Hide();
+        }
+
+        private void MyNotifyIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            this.Show();
+            this.WindowState = WindowState.Normal;
         }
 
     }

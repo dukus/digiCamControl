@@ -37,6 +37,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Serialization;
@@ -667,6 +668,10 @@ namespace CameraControl.Core.Classes
 
 
         private ObservableCollection<CameraPreset> _cameraPresets;
+        private bool _minimizeToTrayIcon;
+        private bool _startMinimized;
+        private bool _startupWithWindows;
+
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
         {
@@ -675,6 +680,36 @@ namespace CameraControl.Core.Classes
             {
                 _cameraPresets = value;
                 NotifyPropertyChanged("CameraPresets");
+            }
+        }
+
+        public bool MinimizeToTrayIcon
+        {
+            get { return _minimizeToTrayIcon; }
+            set
+            {
+                _minimizeToTrayIcon = value;
+                NotifyPropertyChanged("MinimizeToTrayIcon");
+            }
+        }
+
+        public bool StartMinimized
+        {
+            get { return _startMinimized; }
+            set
+            {
+                _startMinimized = value;
+                NotifyPropertyChanged("StartMinimized");
+            }
+        }
+
+        public bool StartupWithWindows
+        {
+            get { return _startupWithWindows; }
+            set
+            {
+                _startupWithWindows = value;
+                NotifyPropertyChanged("StartupWithWindows");
             }
         }
 
@@ -758,6 +793,9 @@ namespace CameraControl.Core.Classes
             ClientId = Guid.NewGuid().ToString();
             if (ServiceProvider.WindowsManager != null)
                 SyncActions(ServiceProvider.WindowsManager.WindowCommands);
+            MinimizeToTrayIcon = true;
+            StartMinimized = false;
+            StartupWithWindows = false;
         }
 
 

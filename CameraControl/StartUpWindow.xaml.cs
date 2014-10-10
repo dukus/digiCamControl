@@ -99,7 +99,7 @@ namespace CameraControl
         private void InitApplication()
         {
             // prevent some application crash
-            WpfCommands.DisableWpfTabletSupport();
+            //WpfCommands.DisableWpfTabletSupport();
 
             ServiceProvider.Configure();
 
@@ -177,7 +177,7 @@ namespace CameraControl
                     Application.Current.Shutdown(1);
                 }
             }
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             Dispatcher.Invoke(new Action(Hide));
             StartApplication();
         }

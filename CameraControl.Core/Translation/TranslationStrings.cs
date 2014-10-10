@@ -11,7 +11,7 @@
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// furnished to do so, subject to the following conditions
 // 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
@@ -91,20 +91,20 @@ namespace CameraControl.Core.Translation
 
         public static string ButtonLocateLogFile = "Locate log file";
 
-        public static string LabelInterfaceLanguage = "Interface language :";
+        public static string LabelInterfaceLanguage = "Interface language ";
         public static string LabelDisableDriver = "Disable native drivers (not recommended)";
-        public static string LabelTheme = "Theme :";
+        public static string LabelTheme = "Theme ";
         public static string LabelGeneral = "General";
         public static string LabelPreview = "Preview";
         public static string LabelPlaySound = "Play sound after photo taken";
         public static string LabelAutoPreview = "Auto preview";
         public static string LabelPreviewAfterCapture = "Preview image after capture in fullscreen";
-        public static string LabelPreviewTime = "Preview time in sec : ";
+        public static string LabelPreviewTime = "Preview time in sec  ";
         public static string LabelPreviewInLIveView = "Preview image after shot in live view";
-        public static string LabelLIveViewImageFreeze = "Live view image freeze in sec : ";
-        public static string LabelRotateImage = "Rotate image :";
+        public static string LabelLIveViewImageFreeze = "Live view image freeze in sec  ";
+        public static string LabelRotateImage = "Rotate image ";
         public static string LabelDontLoadThumbs = "Don't load thumbnails";
-        public static string LabelFullscrenBack = "Full screen window background : ";
+        public static string LabelFullscrenBack = "Full screen window background  ";
         public static string LabelTriggers = "Triggers";
         public static string LabelUseKeybordToTrigger = "Use keyboard to trigger take photo";
         public static string LabelWebserver = "Webserver";
@@ -162,14 +162,14 @@ namespace CameraControl.Core.Translation
         public static string LabelDisableAutofocus = "Disable autofocus";
         public static string LabelConnectedCameras = "Connected cameras";
 
-        public static string LabelPresetName = "Preset name:";
+        public static string LabelPresetName = "Preset name";
 
         public static string LabelTimeLapse = "TimeLapse";
         public static string LabelSecondsBetweenShots = "Seconds between shots";
         public static string LabelNumberOfPhotos = "Number of photos";
         public static string LabelDontAutofocusOnEveryCapture = "Don't autofocus on every capture";
-        public static string LabelCaptureInterval = "Capture interval (HH:MM:SS)";
-        public static string LabelMovieLenght = "Movie length (HH:MM:SS)";
+        public static string LabelCaptureInterval = "Capture interval (HHMMSS)";
+        public static string LabelMovieLenght = "Movie length (HHMMSS)";
         public static string LabelMovieSettings = "Movie settings";
         public static string LabelVideoFormat = "Video format";
         public static string LabelOutputFile = "Output file";
@@ -177,15 +177,15 @@ namespace CameraControl.Core.Translation
         public static string LabelFillImage = "Fill image";
         public static string LabelCreateMovie = "Create movie";
         public static string LabelAddVirtualMovingToVideo = "Add virtual moving to video";
-        public static string LabelMovingSurface = "Moving surface (%):";
-        public static string LabelMovingDirection = "Moving direction:";
+        public static string LabelMovingSurface = "Moving surface (%)";
+        public static string LabelMovingDirection = "Moving direction";
         public static string LabelMovingDirectionLeftToRight = "Left to Right";
         public static string LabelMovingDirectionRightToLeft = "Right to Left";
         public static string LabelMovingDirectionTopToBottom = "Top to Bottom";
         public static string LabelMovingDirectionBottomToTop = "Bottom to Top";
         public static string LabelMovingDirectionLeftTopToRightBottom = "Left/Top to Right/Bottom";
         public static string LabelMovingDirectionRightBottomToLeftTop = "Right/Bottom to Left/Top";
-        public static string LabelImageAlignment = "Image alignment:";
+        public static string LabelImageAlignment = "Image alignment";
         public static string LabelImageAlignmentLeftTop = "Left/Top";
         public static string LabelImageAlignmentCenter = "Center";
         public static string LabelImageAlignmentRightBottom = "Right/Bottom";
@@ -193,7 +193,7 @@ namespace CameraControl.Core.Translation
 
         public static string MsgPhotoTransferBegin = "Photo transfer begin";
         public static string MsgPhotoTransferDone = "Photo transfer done";
-        public static string MsgPhotoTransferError = "Transfer error !\nMessage :{0}";
+        public static string MsgPhotoTransferError = "Transfer error !\nMessage {0}";
         public static string MsgBulbModeNotSupported = "Bulb mode not supported !";
         public static string MsgApplicationUpToDate = "Your application is up to date !";
         public static string MsgUseSessionEditorTags = "Use session editor to define tags !";
@@ -329,7 +329,7 @@ namespace CameraControl.Core.Translation
         public static string LabelUseParellelTransfer = "Use parallel file transfer";
         // 19/01/2013
         public static string LabelUnHandledError =
-            "An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError:{0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)";
+            "An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError{0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)";
 
         public static string LabelApplicationError = "Application Error";
         public static string LabelWiaNotInstalled = "WIA 2.0 not installed";
@@ -442,7 +442,7 @@ namespace CameraControl.Core.Translation
         public static string LabelSyncCameraDate = "Sync camera date time on camera connect";
         public static string LabelShowThumbUpDown = "Show thumb up/down buttons";
         public static string LabelSend = "Send";
-        public static string LabelLogMessage = "Message to the developers of digiCamControl :";
+        public static string LabelLogMessage = "Message to the developers of digiCamControl ";
 
         public static string LabelLogText =
             "The log file will be send to the digiCamcontrol developer team for improve application stability.";
@@ -522,6 +522,9 @@ namespace CameraControl.Core.Translation
         public static string LabelLowerCaseExtension = "Lower case extension";
         public static string LabelOverlayTransparency = "Transparency";
         public static string LabelOverlayUseLastCaptured = "Use last captured";
+        public static string LabelMinimizeToTryIcon = "Minimize to try icon";
+        public static string LabelStartMinimized = "Start minimized";
+        public static string LabelStartupWithWindows = "Start when Windows start ";
         
     }
 }
