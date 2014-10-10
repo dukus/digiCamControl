@@ -12,12 +12,8 @@ namespace Canon.Eos.Framework
 
         private void OnPictureTaken(EosImageEventArgs eventArgs)
         {
-            _photoCounter++;
             if (this.PictureTaken != null)
                 this.PictureTaken(this, eventArgs);
-            // start live view if both photos is transfered 
-            if (_photoCounter == 2)
-                _pauseLiveViewRequested = false;
         }
 
         private void OnVolumeInfoChanged(EosVolumeInfoEventArgs eventArgs)
@@ -51,7 +47,9 @@ namespace Canon.Eos.Framework
         
         private void OnObjectEventDirItemCreated(IntPtr sender, IntPtr context)
         {
+            PauseLiveview();
             this.OnPictureTaken(_transporter.TransportInMemory(sender));
+            ResumeLiveview();
         }
         
         private void OnObjectEventDirItemRemoved(IntPtr sender, IntPtr context)
@@ -68,7 +66,9 @@ namespace Canon.Eos.Framework
         
         private void OnObjectEventDirItemRequestTransfer(IntPtr sender)
         {
+            PauseLiveview();
             this.OnPictureTaken(_transporter.TransportAsFile(sender, _picturePath));
+            ResumeLiveview();
         }
         
         private void OnObjectEventDirItemRequestTransferDt(IntPtr sender, IntPtr context)

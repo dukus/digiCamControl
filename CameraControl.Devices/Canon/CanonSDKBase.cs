@@ -978,10 +978,12 @@ namespace CameraControl.Devices.Canon
             catch (COMException comException)
             {
                 IsBusy = false;
+                Camera.ResumeLiveview();
                 ErrorCodes.GetException(comException);
             }
             catch
             {
+                Camera.ResumeLiveview();
                 IsBusy = false;
                 throw;
             }
