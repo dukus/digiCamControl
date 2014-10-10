@@ -2040,7 +2040,7 @@ namespace CameraControl.ViewModel
             IsFocusStackingRunning = true;
             _focusStackingPreview = true;
             SetFocus(-FocusCounter);
-            _focusStackingTimer.Start();
+            //_focusStackingTimer.Start();
         }
 
         private void StopFocusStacking()
@@ -2106,15 +2106,16 @@ namespace CameraControl.ViewModel
             thread.Join();
         }
 
-        void LiveViewViewModel_FocuseDone(object sender, EventArgs e)
+        private void LiveViewViewModel_FocuseDone(object sender, EventArgs e)
         {
             StaticHelper.Instance.SystemMessage = "";
-            if (!_focusStackingPreview && IsFocusStackingRunning)
+            if (IsFocusStackingRunning)
             {
                 Recording = false;
                 try
                 {
-                    CaptureInThread();
+                    if (!_focusStackingPreview)
+                        CaptureInThread();
                 }
                 catch (Exception exception)
                 {
@@ -2128,10 +2129,6 @@ namespace CameraControl.ViewModel
                     PhotoCount++;
                     GetLiveImage();
                     FocusStackingTick = 0;
-                    if (_focusStackingPreview)
-                    {
-                        _focusStackingTimer.Start();
-                    }
                     if (FocusCounter >= FocusValue)
                     {
                         IsFocusStackingRunning = false;
@@ -2146,10 +2143,11 @@ namespace CameraControl.ViewModel
                     }
                     GetLiveImage();
                     FocusStackingTick = 0;
-                    if (_focusStackingPreview)
-                    {
-                        _focusStackingTimer.Start();
-                    }
+                }
+
+                if (_focusStackingPreview && IsFocusStackingRunning)
+                {
+                    _focusStackingTimer.Start();
                 }
             }
         }
