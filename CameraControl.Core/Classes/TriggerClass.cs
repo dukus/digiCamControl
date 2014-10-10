@@ -38,6 +38,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using CameraControl.Devices;
 using Application = System.Windows.Application;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 #endregion
 
@@ -88,6 +89,15 @@ namespace CameraControl.Core.Classes
             WebServer.Stop();
         }
 
+        public static void KeyDown(KeyEventArgs e)
+        {
+            foreach (var item in ServiceProvider.Settings.Actions)
+            {
+                if (item.Alt == _altpressed && item.Ctrl == _ctrlpressed && item.KeyEnum == e.Key)
+                    ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
+            }
+        }
+
         private static IntPtr SetHook(LowLevelKeyboardProc proc)
         {
             using (Process curProcess = Process.GetCurrentProcess())
@@ -104,9 +114,6 @@ namespace CameraControl.Core.Classes
         private static IntPtr HookCallback(
             int nCode, IntPtr wParam, IntPtr lParam)
         {
-            Console.WriteLine();
-            if (!Application.Current.Windows.Cast<Window>().Any((x) => x.IsActive))
-                return CallNextHookEx(_hookID, nCode, wParam, lParam);
             if (nCode >= 0 && (wParam == (IntPtr) WM_KEYDOWN || wParam == (IntPtr) WM_SYSKEYDOWN))
             {
                 int vkCode = Marshal.ReadInt32(lParam);
@@ -119,6 +126,8 @@ namespace CameraControl.Core.Classes
 
                 foreach (var item in ServiceProvider.Settings.Actions)
                 {
+                    if (!item.Global)
+                        continue;
                     Key inputKey = KeyInterop.KeyFromVirtualKey(vkCode);
                     if (item.Alt == _altpressed && item.Ctrl == _ctrlpressed && item.KeyEnum == inputKey)
                         ServiceProvider.WindowsManager.ExecuteCommand(item.Name);

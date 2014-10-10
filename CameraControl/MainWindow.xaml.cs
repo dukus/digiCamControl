@@ -743,6 +743,7 @@ namespace CameraControl
 
         private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            TriggerClass.KeyDown(e);
             if (e.Key == Key.Escape)
             {
                 HideFlatOuts();

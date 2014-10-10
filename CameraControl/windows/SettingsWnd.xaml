@@ -225,7 +225,8 @@
                                             <Label Content="{Binding Path=Name}" Margin="2" Width="200"/>
                                             <CheckBox IsChecked="{Binding Path=Alt}" Content="Alt" Margin="5"/>
                                             <CheckBox IsChecked="{Binding Path=Ctrl}" Content="Ctrl" Margin="5"/>
-                                            <ComboBox SelectedItem="{Binding Path=Key}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my1:SettingsWnd, AncestorLevel=1}, Path=AvailableKeys}" Width="150"/>
+                                            <ComboBox SelectedItem="{Binding Path=Key}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my1:SettingsWnd, AncestorLevel=1}, Path=AvailableKeys}" Width="150" Margin="2"/>
+                                            <CheckBox IsChecked="{Binding Path=Global}" Content="Global" Margin="5" ToolTip="System wide available"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

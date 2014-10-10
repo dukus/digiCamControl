@@ -63,6 +63,8 @@ namespace CameraControl.Core.Classes
 
         public bool Ctrl { get; set; }
 
+        public bool Global { get; set; }
+
         public WindowCommandItem()
         {
             Key = "None";
