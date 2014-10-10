@@ -27,7 +27,7 @@
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
@@ -40,8 +40,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="18" />
-            <RowDefinition Height="206" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="46*" />
             <RowDefinition Height="303*" />
             <RowDefinition Height="20*" />
@@ -52,17 +52,17 @@
             <ColumnDefinition Width="464*" />
         </Grid.ColumnDefinitions>
 
-        <Image Name="_image" Stretch="Uniform" Grid.Column="2" MouseDown="image1_MouseDown" Source="{Binding Bitmap}" Grid.Row="0" Grid.RowSpan="4" Opacity="{Binding ElementName=slider_transparent,Path=Value}" RenderTransformOrigin="0.5,0.5" MouseWheel="_image_MouseWheel">
+        <Image Name="_image" Stretch="Uniform" Grid.Column="2" MouseDown="image1_MouseDown" Source="{Binding Bitmap}" Grid.RowSpan="4" Opacity="{Binding ElementName=slider_transparent,Path=Value}" RenderTransformOrigin="0.5,0.5" MouseWheel="_image_MouseWheel">
             <Image.RenderTransform>
                 <RotateTransform Angle="{Binding ElementName=slider_rotation,Path=Value }"  />
             </Image.RenderTransform>
         </Image>
 
-        <Controls:RangeSlider VerticalAlignment="Top" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4"  Margin="4" Width="{Binding ElementName=_image, Path=ActualWidth}" Orientation="Horizontal" UpperValue="{Binding Path=HorizontalMax}"  LowerValue="{Binding Path=HorizontalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Controls:RangeSlider VerticalAlignment="Top" Grid.Column="2" Margin="4" Padding="20,0" Width="{Binding ElementName=_image, Path=ActualWidth}" Orientation="Horizontal" UpperValue="{Binding Path=HorizontalMax}"  LowerValue="{Binding Path=HorizontalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Controls:RangeSlider HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="4" Height="{Binding ElementName=_image, Path=ActualHeight}" Orientation="Vertical" UpperValue="{Binding Path=VerticalMax}"  LowerValue="{Binding Path= VerticalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Controls:RangeSlider HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="4" Padding="0,40" Height="{Binding ElementName=_image, Path=ActualHeight}" Orientation="Vertical" UpperValue="{Binding Path=VerticalMax}"  LowerValue="{Binding Path= VerticalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Canvas Grid.Column="2" Background="{x:Null}" Grid.Row="0" Grid.RowSpan="4" >
+        <Canvas Grid.Column="2" Background="{x:Null}" Grid.RowSpan="4" >
             <Label Canvas.Left="0" Canvas.Top="0" Content="REC" Height="41" FontSize="20" FontWeight="Bold" Foreground="Red" Width="52" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Canvas>
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" >
@@ -148,11 +148,9 @@
             </StackPanel>
             <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="{Binding FocusStep}" Width="475" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" LargeChange="100" IsMoveToPointEnabled="True" />
         </StackPanel>
-        <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}"
-                Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
+        <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" />
 
-        <Button Content="{T:TranslateExtension ButtonCapture}" Height="23" Margin="0,12,9,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101"
-              Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" />
+        <Button Content="{T:TranslateExtension ButtonCapture}" Height="30" Margin="0,12,9,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" />
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
             <StackPanel>
@@ -424,22 +422,19 @@
                 </Expander>
             </StackPanel>
         </ScrollViewer>
-        <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Height="23" Margin="12,65,9,0" VerticalAlignment="Top" IsChecked="{Binding FreezeImage}" Checked="ToggleButton_Checked" Grid.Row="1"
-                      Grid.Column="0" />
-        <Button Content="{Binding RecButtonText}" Height="23" Margin="12,33,9,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" Grid.Row="1"
-                Grid.Column="0" />
-        <Image Height="104" Margin="10,96,0,0" VerticalAlignment="Top" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Width="150" Grid.Row="1" Stretch="Uniform"
-                Grid.Column="0">
+        <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Height="30" Margin="12,88,9,0" VerticalAlignment="Top" IsChecked="{Binding FreezeImage}" Checked="ToggleButton_Checked" />
+        <Button Content="{Binding RecButtonText}" Height="30" Margin="12,51,9,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" />
+        <Image Height="100" Margin="12,0,0,0" VerticalAlignment="Top" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Width="150" Stretch="Uniform" Grid.Row="1">
             <!--<Controls:ProgressRing IsActive="{Binding Path=SelectedPortableDevice.IsBusy, RelativeSource={RelativeSource FindAncestor, AncestorType=my:LiveViewWnd, AncestorLevel=1}}" Height="78" Width="81" Canvas.Left="21" Canvas.Top="20" />-->
         </Image>
         <!--<Image Name="img_preview" Margin="31,114,0,0" Height="{Binding ElementName=canvas_image, Path=Height}" HorizontalAlignment="Left" Width="{Binding ElementName=canvas_image, Path=Width}"/>-->
-        <Label Content="{Binding Fps}" Margin="188,96,9,72" Grid.Row="1" Grid.Column="0" />
+        <Label Content="{Binding Fps}" Margin="0,8,9,0" Grid.Row="1" HorizontalAlignment="Right" Width="53" Height="54" VerticalAlignment="Top" />
 
         <Grid Width="300" Grid.Column="2" Grid.Row="2" Name="grid_wait" Visibility="{Binding Path=DelayedStart, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}">
             <ProgressBar IsIndeterminate="True" Height="20"/>
             <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="3" />
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="5" />
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />
     </Grid>
 </Controls:MetroWindow>
