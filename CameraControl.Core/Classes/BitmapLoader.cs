@@ -425,6 +425,7 @@ namespace CameraControl.Core.Classes
 
                 double dw = (double) MaxThumbSize/bmpDec.Frames[0].PixelWidth;
                 WriteableBitmap bitmap;
+                /*
                 if (fullres)
                     bitmap =
                         BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
@@ -433,6 +434,8 @@ namespace CameraControl.Core.Classes
                                                                             BitmapScalingMode.NearestNeighbor));
                 else
                     bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
+                */
+                bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
 
                 if (ServiceProvider.Settings.ShowFocusPoints)
                     DrawFocusPoints(fileItem, bitmap);
