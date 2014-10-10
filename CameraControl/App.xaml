@@ -7,7 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />-->
       </ResourceDictionary.MergedDictionaries>
       <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:CameraControl.ViewModel" />
