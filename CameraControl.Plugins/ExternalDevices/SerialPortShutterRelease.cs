@@ -94,12 +94,14 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public bool AssertFocus(CustomConfig config)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return true;
         }
 
         public bool DeassertFocus(CustomConfig config)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return true;
         }
 
         #endregion
