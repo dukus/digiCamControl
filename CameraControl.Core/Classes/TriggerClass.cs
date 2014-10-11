@@ -119,7 +119,7 @@ namespace CameraControl.Core.Classes
                 int vkCode = Marshal.ReadInt32(lParam);
                 if (((Keys) vkCode) == Keys.Alt || ((Keys) vkCode) == Keys.RMenu || ((Keys) vkCode) == Keys.LMenu)
                     _altpressed = true;
-                if (((Keys) vkCode) == Keys.Control)
+                if (((Keys)vkCode) == Keys.Control || ((Keys)vkCode) == Keys.LControlKey || ((Keys)vkCode) == Keys.RControlKey || ((Keys)vkCode) == Keys.ControlKey)
                     _ctrlpressed = true;
                 if (((Keys) vkCode) == Keys.RShiftKey || ((Keys) vkCode) == Keys.LShiftKey)
                     _shiftpressed = true;
@@ -130,7 +130,7 @@ namespace CameraControl.Core.Classes
                         continue;
                     Key inputKey = KeyInterop.KeyFromVirtualKey(vkCode);
                     if (item.Alt == _altpressed && item.Ctrl == _ctrlpressed && item.KeyEnum == inputKey)
-                        ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
+                         ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
                 }
             }
             if (nCode >= 0 && (wParam == (IntPtr) WM_KEYUP || wParam == (IntPtr) WM_SYSKEYUP))
@@ -139,7 +139,7 @@ namespace CameraControl.Core.Classes
 
                 if (((Keys) vkCode) == Keys.Alt || ((Keys) vkCode) == Keys.RMenu || ((Keys) vkCode) == Keys.LMenu)
                     _altpressed = false;
-                if (((Keys) vkCode) == Keys.Control)
+                if (((Keys)vkCode) == Keys.Control || ((Keys)vkCode) == Keys.LControlKey || ((Keys)vkCode) == Keys.RControlKey || ((Keys)vkCode) == Keys.ControlKey)
                     _ctrlpressed = false;
                 if (((Keys) vkCode) == Keys.RShiftKey || ((Keys) vkCode) == Keys.LShiftKey)
                     _shiftpressed = false;
