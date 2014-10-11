@@ -257,29 +257,31 @@ namespace CameraControl.windows
 
         private void MetroWindow_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Right || e.Key == Key.Left || e.Key == Key.Up || e.Key == Key.Down)
-            {
-                e.Handled = true;
-            }
             if ((DateTime.Now - _focusMoveTime).TotalMilliseconds < 200)
                 return;
             _focusMoveTime = DateTime.Now;
-            if (e.Key == Key.Right)
-            {
-                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Right);
-            }
-            if (e.Key == Key.Left)
-            {
-                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Left);
-            }
-            if (e.Key == Key.Up)
-            {
-                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Up);
-            }
-            if (e.Key == Key.Down)
-            {
-                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Down);
-            }
+            TriggerClass.KeyDown(e);
+
+            //if (e.Key == Key.Right || e.Key == Key.Left || e.Key == Key.Up || e.Key == Key.Down)
+            //{
+            //    e.Handled = true;
+            //}
+            //if (e.Key == Key.Right)
+            //{
+            //    ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Right);
+            //}
+            //if (e.Key == Key.Left)
+            //{
+            //    ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Left);
+            //}
+            //if (e.Key == Key.Up)
+            //{
+            //    ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Up);
+            //}
+            //if (e.Key == Key.Down)
+            //{
+            //    ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_Focus_Move_Down);
+            //}
         }
 
         private void canvas_image_MouseDown(object sender, MouseButtonEventArgs e)

@@ -94,6 +94,15 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public void ApplyKeyHanding()
+        {
+            foreach (Window win in WindowsList.OfType<Window>())
+            {
+                win.PreviewKeyDown += (sender, args) => TriggerClass.KeyDown(args);
+            }
+        }
+
+
         public IWindow Get(Type t)
         {
             return WindowsList.FirstOrDefault(window => window.GetType() == t);

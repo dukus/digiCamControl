@@ -94,7 +94,10 @@ namespace CameraControl.Core.Classes
             foreach (var item in ServiceProvider.Settings.Actions)
             {
                 if (item.Alt == _altpressed && item.Ctrl == _ctrlpressed && item.KeyEnum == e.Key)
+                {
                     ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
+                    e.Handled = true;
+                }
             }
         }
 
