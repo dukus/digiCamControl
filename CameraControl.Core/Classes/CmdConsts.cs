@@ -73,5 +73,6 @@ namespace CameraControl.Core.Classes
         public const string PrevExposureCompensation = "PrevExposureCompensation";
         public const string NextCamera = "NextCamera";
         public const string PrevCamera = "PrevCamera";
+        public const string NextSeries = "NextSeries";
     }
 }

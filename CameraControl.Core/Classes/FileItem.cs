@@ -89,6 +89,8 @@ namespace CameraControl.Core.Classes
         [XmlAttribute]
         public string OriginalName { get; set; }
 
+        [XmlAttribute]
+        public int Series { get; set; }
 
         public bool IsRaw
         {

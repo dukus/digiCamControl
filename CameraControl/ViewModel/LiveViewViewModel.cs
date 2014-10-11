@@ -1995,6 +1995,7 @@ namespace CameraControl.ViewModel
             PhotoCount = 0;
             IsFocusStackingRunning = true;
             _focusStackingPreview = false;
+            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.NextSeries);
             _focusStackingTimer.Start();
             //Thread thread = new Thread(TakePhoto);
             //thread.Start();
@@ -2015,6 +2016,8 @@ namespace CameraControl.ViewModel
             PhotoCount = 0;
             IsFocusStackingRunning = true;
             _focusStackingPreview = false;
+            // increment defauls session series counter
+            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.NextSeries);
             SetFocus(-FocusCounter);
             //_focusStackingTimer.Start();
             //Thread thread = new Thread(TakePhoto);

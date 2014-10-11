@@ -391,8 +391,10 @@ namespace CameraControl
                         !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag4.Value))
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag4.Value);
                 }
+
                 _selectedItem = session.AddFile(fileName);
                 _selectedItem.BackupFileName = backupfile;
+                _selectedItem.Series = session.Series;
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
                 {

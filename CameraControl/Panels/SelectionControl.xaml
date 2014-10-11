@@ -30,6 +30,13 @@
                 </Rectangle.Fill>
             </Rectangle>
         </Button>
+        <Button Margin="1" Command="{Binding Path=SelectSeries}" ToolTip="{T:TranslateExtension LabelSelectSeries}">
+            <Rectangle Width="15" Height="15">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_box_layered}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Button>
         <Button Margin="1" Content="Invert" Command="{Binding Path=SelectInvertCommand}" />
     </WrapPanel>
 </UserControl>

@@ -64,6 +64,8 @@ namespace CameraControl.Panels
                 new RelayCommand<object>(delegate { ServiceProvider.Settings.DefaultSession.SelectUnLiked(); });
             SelectInvertCommand =
                 new RelayCommand<object>(delegate { ServiceProvider.Settings.DefaultSession.SelectInver(); });
+            SelectSeries =
+                new RelayCommand<object>(delegate { ServiceProvider.Settings.DefaultSession.SelectSameSeries(ServiceProvider.Settings.SelectedBitmap.FileItem.Series); });
             InitializeComponent();
         }
 
@@ -77,5 +79,7 @@ namespace CameraControl.Panels
         public RelayCommand<object> SelectNoneCommand { get; private set; }
 
         public RelayCommand<object> SelectInvertCommand { get; private set; }
+
+        public RelayCommand<object> SelectSeries { get; private set; }
     }
 }

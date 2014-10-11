@@ -290,6 +290,9 @@ namespace CameraControl
                     case CmdConsts.PrevCamera:
                         ServiceProvider.DeviceManager.SelectPrevCamera();
                         break;
+                    case CmdConsts.NextSeries:
+                        ServiceProvider.Settings.DefaultSession.Series++;
+                        break;
                 }
             }
         }

@@ -623,6 +623,14 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public void SelectSameSeries(int s)
+        {
+            foreach (FileItem fileItem in Files)
+            {
+                fileItem.IsChecked = fileItem.Series == s;
+            }
+        }
+
         public string CopyBackUp(string source, string dest)
         {
             if (string.IsNullOrEmpty(BackUpPath))
