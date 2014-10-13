@@ -100,6 +100,10 @@ namespace CameraControl.ViewModel
         private int _focusStackingTick;
         private int _overlayTransparency;
         private bool _overlayUseLastCaptured;
+        private int _captureDelay;
+        private int _countDown;
+        private bool _countDownVisible;
+        private bool _captureInProgress;
 
         public ICameraDevice CameraDevice
         {
@@ -477,7 +481,7 @@ namespace CameraControl.ViewModel
 
         public bool IsFree
         {
-            get { return !_isBusy; }
+            get { return !_isBusy && !CaptureInProgress; }
         }
 
 
@@ -747,6 +751,47 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public int CaptureDelay
+        {
+            get { return _captureDelay; }
+            set
+            {
+                _captureDelay = value;
+                RaisePropertyChanged(() => CaptureDelay);
+            }
+        }
+
+        public int CountDown
+        {
+            get { return _countDown; }
+            set
+            {
+                _countDown = value;
+                RaisePropertyChanged(() => CountDown);
+            }
+        }
+
+        public bool CountDownVisible
+        {
+            get { return _countDownVisible; }
+            set
+            {
+                _countDownVisible = value;
+                RaisePropertyChanged(()=>CountDownVisible);
+            }
+        }
+
+        public bool CaptureInProgress
+        {
+            get { return _captureInProgress; }
+            set
+            {
+                _captureInProgress = value;
+                RaisePropertyChanged(() => CaptureInProgress);
+                RaisePropertyChanged(() => IsFree);
+            }
+        }
+
 
         public LiveViewData LiveViewData { get; set; }
 
@@ -858,7 +903,7 @@ namespace CameraControl.ViewModel
             AutoFocusCommand = new RelayCommand(AutoFocus);
             RecordMovieCommand = new RelayCommand(RecordMovie,
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
-            CaptureCommand = new RelayCommand(Capture);
+            CaptureCommand = new RelayCommand(CaptureInThread);
             FocusMCommand = new RelayCommand(() => SetFocus( SimpleManualFocus? -1: -ServiceProvider.Settings.SmalFocusStep));
             FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -5 : -ServiceProvider.Settings.MediumFocusStep));
             FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -25 : -ServiceProvider.Settings.LargeFocusStep));
@@ -992,7 +1037,7 @@ namespace CameraControl.ViewModel
             switch (cmd)
             {
                 case CmdConsts.LiveView_Capture:
-                    Capture();
+                    CaptureInThread();
                     break;
                 case CmdConsts.LiveView_Focus_Move_Right:
                     if (LiveViewData != null && LiveViewData.ImageData != null)
@@ -1935,7 +1980,20 @@ namespace CameraControl.ViewModel
 
         private void Capture()
         {
+            CaptureInProgress = true;
             Log.Debug("LiveView: Capture started");
+            if (CaptureDelay > 0)
+            {
+                Log.Debug("LiveView: Capture delayed");
+                CountDown = CaptureDelay;
+                CountDownVisible = true;
+                while (CountDown>0)
+                {
+                    Thread.Sleep(1000);
+                    CountDown--;
+                }
+                CountDownVisible = false;
+            }
             _timer.Stop();
             Thread.Sleep(300);
             try
@@ -1944,6 +2002,7 @@ namespace CameraControl.ViewModel
                 {
                     StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
                     ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.MsgBulbModeNotSupported);
+                    CaptureInProgress = false;
                     return;
                 }
                 CameraDevice.CapturePhotoNoAf();
@@ -1954,6 +2013,7 @@ namespace CameraControl.ViewModel
                 StaticHelper.Instance.SystemMessage = exception.Message;
                 Log.Error("Unable to take picture with no af", exception);
             }
+            CaptureInProgress = false;
         }
 
         public void SetFocusPos(Point initialPoint, double refWidth, double refHeight)
@@ -2106,7 +2166,7 @@ namespace CameraControl.ViewModel
         {
             var thread = new Thread(Capture);
             thread.Start();
-            thread.Join();
+            //thread.Join();
         }
 
         private void LiveViewViewModel_FocuseDone(object sender, EventArgs e)
@@ -2118,7 +2178,7 @@ namespace CameraControl.ViewModel
                 try
                 {
                     if (!_focusStackingPreview)
-                        CaptureInThread();
+                        Capture();
                 }
                 catch (Exception exception)
                 {
@@ -2153,6 +2213,7 @@ namespace CameraControl.ViewModel
                     _focusStackingTimer.Start();
                 }
             }
+
         }
 
         private static void OnFocuseDone()

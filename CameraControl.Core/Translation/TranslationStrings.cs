@@ -526,5 +526,6 @@ namespace CameraControl.Core.Translation
         public static string LabelStartMinimized = "Start minimized";
         public static string LabelStartupWithWindows = "Start when Windows start ";
         public static string LabelSelectSeries = "Select photos in same series";
+        public static string LabelCaptureDelay = "Capture delay";
     }
 }

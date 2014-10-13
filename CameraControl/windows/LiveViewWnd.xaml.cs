@@ -204,12 +204,15 @@ namespace CameraControl.windows
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Message:
                 {
-                    if(this.IsLoaded)
-                    this.ShowMessageAsync("", (string) param);
-                    else
+                    Dispatcher.Invoke(new Action(delegate
                     {
-                        MessageBox.Show((string) param);
-                    }
+                        if (this.IsLoaded)
+                            this.ShowMessageAsync("", (string) param);
+                        else
+                        {
+                            MessageBox.Show((string) param);
+                        }
+                    }));
                 }
                     break;
                 case CmdConsts.All_Close:

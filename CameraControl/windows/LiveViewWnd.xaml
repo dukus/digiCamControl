@@ -150,7 +150,7 @@
         </StackPanel>
         <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" />
 
-        <Button Content="{T:TranslateExtension ButtonCapture}" Height="30" Margin="0,12,9,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" />
+        <Button Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension ButtonCapture}" Height="30" Margin="0,12,9,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
             <StackPanel>
@@ -249,9 +249,11 @@
                     </Expander.Content>
                 </Expander>
                 <Expander Header="{T:TranslateExtension LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3">
-                    <Expander.Content>
+                    <StackPanel>
+                        <Label Content="{T:TranslateExtension LabelCaptureDelay}" Margin="20,0"/>
+                        <Controls:NumericUpDown Minimum="0" Value="{Binding CaptureDelay}" IsEnabled="{Binding IsFree}" Margin="20,3"/>
                         <local:LiveViewControlerSimple DataContext="{Binding Path=CameraDevice}" Margin="20,3"/>
-                    </Expander.Content>
+                    </StackPanel>
                 </Expander>
                 <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3">
                     <Expander.Content>
@@ -423,7 +425,7 @@
             </StackPanel>
         </ScrollViewer>
         <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Height="30" Margin="12,88,9,0" VerticalAlignment="Top" IsChecked="{Binding FreezeImage}" Checked="ToggleButton_Checked" />
-        <Button Content="{Binding RecButtonText}" Height="30" Margin="12,51,9,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" />
+        <Button Content="{Binding RecButtonText}" Height="30" Margin="12,51,9,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}"/>
         <Image Height="100" Margin="12,0,0,0" VerticalAlignment="Top" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Width="150" Stretch="Uniform" Grid.Row="1">
             <!--<Controls:ProgressRing IsActive="{Binding Path=SelectedPortableDevice.IsBusy, RelativeSource={RelativeSource FindAncestor, AncestorType=my:LiveViewWnd, AncestorLevel=1}}" Height="78" Width="81" Canvas.Left="21" Canvas.Top="20" />-->
         </Image>
@@ -434,6 +436,9 @@
             <ProgressBar IsIndeterminate="True" Height="20"/>
             <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
+
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#82000000" />
+        
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="3" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />
     </Grid>
