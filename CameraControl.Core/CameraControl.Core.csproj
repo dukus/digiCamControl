@@ -182,6 +182,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AutoExportPluginConfig.cs" />
     <Compile Include="Classes\BitmapFile.cs" />
     <Compile Include="Classes\BitmapLoader.cs" />
     <Compile Include="Classes\BitmapLoaderOld.cs" />
@@ -217,9 +218,11 @@
     <Compile Include="Classes\WebServerOld.cs" />
     <Compile Include="Classes\WindowCommandItem.cs" />
     <Compile Include="Classes\WindowsCmdConsts.cs" />
+    <Compile Include="Interfaces\IAutoExportPlugin.cs" />
     <Compile Include="Interfaces\IExportPlugin.cs" />
     <Compile Include="Interfaces\IExternalDevice.cs" />
     <Compile Include="Interfaces\IFilenameTemplate.cs" />
+    <Compile Include="Interfaces\IImageTransformPlugin.cs" />
     <Compile Include="Interfaces\IMainWindowPlugin.cs" />
     <Compile Include="Interfaces\IPlugin.cs" />
     <Compile Include="Classes\ActionEventArgs.cs" />

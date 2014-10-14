@@ -35,6 +35,7 @@ using System.Text;
 using CameraControl.Core;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
+using CameraControl.Plugins.AutoExportPlugins;
 using CameraControl.Plugins.ExportPlugins;
 using CameraControl.Plugins.ExternalDevices;
 using CameraControl.Plugins.MainWindowPlugins;
@@ -60,10 +61,13 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ImageSequencerPlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new GenMoviePlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new TurntablePlugin());
+
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new SerialPortShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DSUSBShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new MultiCameraBoxShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DCCUSBShutterRelease());
+                
+                ServiceProvider.PluginManager.AutoExportPlugins.Add(new CopyFilePlugin());
             }
             catch (Exception exception)
             {

@@ -86,6 +86,8 @@ namespace CameraControl.Core
         }
 
         private AsyncObservableCollection<IToolPlugin> _toolPlugins;
+        private AsyncObservableCollection<IAutoExportPlugin> _autoExportPlugins;
+        private AsyncObservableCollection<IImageTransformPlugin> _imageTransformPlugins;
 
         public AsyncObservableCollection<IToolPlugin> ToolPlugins
         {
@@ -94,6 +96,26 @@ namespace CameraControl.Core
             {
                 _toolPlugins = value;
                 NotifyPropertyChanged("ToolPlugins");
+            }
+        }
+
+        public AsyncObservableCollection<IAutoExportPlugin> AutoExportPlugins
+        {
+            get { return _autoExportPlugins; }
+            set
+            {
+                _autoExportPlugins = value;
+                NotifyPropertyChanged("AutoExportPlugins");
+            }
+        }
+
+        public AsyncObservableCollection<IImageTransformPlugin> ImageTransformPlugins
+        {
+            get { return _imageTransformPlugins; }
+            set
+            {
+                _imageTransformPlugins = value;
+                NotifyPropertyChanged("ImageTransformPlugins");
             }
         }
 
@@ -115,6 +137,8 @@ namespace CameraControl.Core
             ToolPlugins = new AsyncObservableCollection<IToolPlugin>();
             MainWindowPlugins = new AsyncObservableCollection<IMainWindowPlugin>();
             AvaiablePlugins = new AsyncObservableCollection<PluginInfo>();
+            AutoExportPlugins = new AsyncObservableCollection<IAutoExportPlugin>();
+            ImageTransformPlugins = new AsyncObservableCollection<IImageTransformPlugin>();
         }
 
 

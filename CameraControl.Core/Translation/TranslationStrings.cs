@@ -527,5 +527,7 @@ namespace CameraControl.Core.Translation
         public static string LabelStartupWithWindows = "Start when Windows start ";
         public static string LabelSelectSeries = "Select photos in same series";
         public static string LabelCaptureDelay = "Capture delay";
+        public static string LabelAutoExportPlugins = "Auto Export Plugins";
+        public static string LabelAddPlugin = "Add plugion";
     }
 }

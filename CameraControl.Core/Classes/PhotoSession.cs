@@ -408,6 +408,8 @@ namespace CameraControl.Core.Classes
             WriteComment = false;
             AllowOverWrite = false;
             LowerCaseExtension = true;
+            AutoExportPluginConfigs = new AsyncObservableCollection<AutoExportPluginConfig>();
+
         }
 
         private void _systemWatcher_Created(object sender, FileSystemEventArgs e)
@@ -646,5 +648,7 @@ namespace CameraControl.Core.Classes
             File.Copy(source, backupFile);
             return backupFile;
         }
+
+        public AsyncObservableCollection<AutoExportPluginConfig> AutoExportPluginConfigs { get; set; }
     }
 }

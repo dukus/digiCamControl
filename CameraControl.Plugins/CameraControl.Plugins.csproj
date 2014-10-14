@@ -134,6 +134,7 @@
     <Compile Include="Astro\PHDWnd.xaml.cs">
       <DependentUpon>PHDWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AutoExportPlugins\CopyFilePlugin.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DCCUSBShutterReleaseConfig.xaml.cs">
       <DependentUpon>DCCUSBShutterReleaseConfig.xaml</DependentUpon>
