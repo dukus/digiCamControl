@@ -913,5 +913,6 @@ namespace CameraControl
             this.WindowState = WindowState.Normal;
         }
 
+
     }
 }

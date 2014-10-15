@@ -70,7 +70,7 @@
             <RowDefinition Height="23" />
 
         </Grid.RowDefinitions>
-        
+
         <tb:TaskbarIcon Name="MyNotifyIcon"
                   IconSource="/CameraControl;component/logo.ico"
                   ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" />
@@ -233,7 +233,7 @@
                         <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" Visibility="{Binding ElementName=TgRed, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}" />
                         <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" Visibility="{Binding ElementName=TgGreen, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
                         <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding ElementName=TgBlue, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                        <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" /> 
+                        <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
                         <CheckBox Grid.Column="0" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
                         <CheckBox Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
                         <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
@@ -248,7 +248,7 @@
                             </ToggleButton>
                             <ToggleButton  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" Name="TgGray">
                                 <Ellipse Height="10" Width="10" Fill="Gray"/>
-                            </ToggleButton>                            
+                            </ToggleButton>
                         </StackPanel>
                         <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
@@ -350,13 +350,53 @@
 
                                 </Grid>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="False" Margin="0">
+                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="False" Margin="0"  Padding="0">
                                 <StackPanel Orientation="Vertical">
                                     <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200">
-                                        
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <CheckBox Content="{Binding Type}" IsChecked="{Binding IsEnabled}"/>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                        <Rectangle Width="10" Height="10">
+                                                            <Rectangle.Fill>
+                                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_noentry}" />
+                                                            </Rectangle.Fill>
+                                                        </Rectangle>
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_stamp}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
                                     </ListBox>
                                     <Controls:DropDownButton Name="DownButton" Padding="0" Margin="0" VerticalContentAlignment="Center" Content="{T:TranslateExtension LabelAddPlugin}" DisplayMemberPath="Name" 
                                                              ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=AutoExportPlugins}">
+                                        <Controls:DropDownButton.ItemContainerStyle>
+                                            <Style TargetType="MenuItem">
+                                                <Setter Property="Command" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AddPluginCommand}"/>
+                                                <Setter Property="CommandParameter" Value="{Binding}"/>
+                                            </Style>
+                                        </Controls:DropDownButton.ItemContainerStyle>
                                         <Controls:DropDownButton.Icon>
                                             <Rectangle Width="20" Height="20">
                                                 <Rectangle.Fill>

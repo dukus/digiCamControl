@@ -34,6 +34,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
+using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Newtonsoft.Json;
@@ -376,12 +377,17 @@ namespace CameraControl.Core.Classes
 
         private FileSystemWatcher _systemWatcher;
 
+        [XmlIgnore]
+        [JsonIgnore]
+        public RelayCommand<IAutoExportPlugin> AddPluginCommand  { get; set; }
+
         public PhotoSession()
         {
             _systemWatcher = new FileSystemWatcher();
             _systemWatcher.EnableRaisingEvents = false;
             //_systemWatcher.Deleted += _systemWatcher_Deleted;
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
+            AddPluginCommand = new RelayCommand<IAutoExportPlugin>(AddPlugin);
 
             Name = "Default";
             CaptureName = "Capture";
@@ -410,6 +416,11 @@ namespace CameraControl.Core.Classes
             LowerCaseExtension = true;
             AutoExportPluginConfigs = new AsyncObservableCollection<AutoExportPluginConfig>();
 
+        }
+
+        private void AddPlugin(IAutoExportPlugin plugin)
+        {
+            AutoExportPluginConfigs.Add(new AutoExportPluginConfig(plugin));
         }
 
         private void _systemWatcher_Created(object sender, FileSystemEventArgs e)
