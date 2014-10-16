@@ -363,14 +363,14 @@
                                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_noentry}" />
                                                             </Rectangle.Fill>
                                                         </Rectangle>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.RemovePluginCommand}" CommandParameter="{Binding}">
                                                             <Rectangle Width="10" Height="10">
                                                                 <Rectangle.Fill>
                                                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
                                                                 </Rectangle.Fill>
                                                             </Rectangle>
                                                         </Button>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ConfigurePluginCommand}" CommandParameter="{Binding}">
                                                             <Rectangle Width="10" Height="10">
                                                                 <Rectangle.Fill>
                                                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />

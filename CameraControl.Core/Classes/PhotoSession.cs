@@ -381,6 +381,14 @@ namespace CameraControl.Core.Classes
         [JsonIgnore]
         public RelayCommand<IAutoExportPlugin> AddPluginCommand  { get; set; }
 
+        [XmlIgnore]
+        [JsonIgnore]
+        public RelayCommand<AutoExportPluginConfig> RemovePluginCommand { get; set; }
+
+        [XmlIgnore]
+        [JsonIgnore]
+        public RelayCommand<AutoExportPluginConfig> ConfigurePluginCommand { get; set; }
+
         public PhotoSession()
         {
             _systemWatcher = new FileSystemWatcher();
@@ -388,6 +396,8 @@ namespace CameraControl.Core.Classes
             //_systemWatcher.Deleted += _systemWatcher_Deleted;
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
             AddPluginCommand = new RelayCommand<IAutoExportPlugin>(AddPlugin);
+            RemovePluginCommand = new RelayCommand<AutoExportPluginConfig>(RemovePlugin);
+            ConfigurePluginCommand=new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
 
             Name = "Default";
             CaptureName = "Capture";
@@ -418,9 +428,23 @@ namespace CameraControl.Core.Classes
 
         }
 
+        private void ConfigurePlugin(AutoExportPluginConfig plugin)
+        {
+            var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
+            if (pl != null)
+            {
+                pl.Configure(plugin);
+            }
+        }
+
         private void AddPlugin(IAutoExportPlugin plugin)
         {
             AutoExportPluginConfigs.Add(new AutoExportPluginConfig(plugin));
+        }
+
+        private void RemovePlugin(AutoExportPluginConfig plugin)
+        {
+            AutoExportPluginConfigs.Remove(plugin);
         }
 
         private void _systemWatcher_Created(object sender, FileSystemEventArgs e)

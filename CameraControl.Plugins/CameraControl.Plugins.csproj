@@ -135,6 +135,10 @@
       <DependentUpon>PHDWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="AutoExportPlugins\CopyFilePlugin.cs" />
+    <Compile Include="AutoExportPlugins\CopyFilePluginViewModel.cs" />
+    <Compile Include="AutoExportPlugins\CopyFilePluginConfig.xaml.cs">
+      <DependentUpon>CopyFilePluginConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="DCCUSBShutterReleaseConfig.xaml.cs">
       <DependentUpon>DCCUSBShutterReleaseConfig.xaml</DependentUpon>
@@ -144,6 +148,8 @@
     <Compile Include="ExternalDevices\DSUSBShutterRelease.cs" />
     <Compile Include="ExternalDevices\MultiCameraBoxShutterRelease.cs" />
     <Compile Include="ExternalDevices\SerialPortShutterRelease.cs" />
+    <Compile Include="ImageTransformPlugins\NoTransform.cs" />
+    <Compile Include="ImageTransformPlugins\ResizeTransform.cs" />
     <Compile Include="MainWindowPlugins\SimpleMainWindow.xaml.cs">
       <DependentUpon>SimpleMainWindow.xaml</DependentUpon>
     </Compile>
@@ -200,6 +206,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Astro\PHDWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutoExportPlugins\CopyFilePluginConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

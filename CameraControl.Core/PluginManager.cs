@@ -141,6 +141,15 @@ namespace CameraControl.Core
             ImageTransformPlugins = new AsyncObservableCollection<IImageTransformPlugin>();
         }
 
+        public IAutoExportPlugin GetAutoExportPlugin(string type)
+        {
+            return AutoExportPlugins.FirstOrDefault(x => x.Name == type);
+        }
+
+        public IImageTransformPlugin GetImageTransformPlugin(string type)
+        {
+            return ImageTransformPlugins.FirstOrDefault(x => x.Name == type);
+        }
 
         /// <summary>
         /// Copies the plugins folders from program files to programdata folder.

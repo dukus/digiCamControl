@@ -38,6 +38,7 @@ using CameraControl.Devices;
 using CameraControl.Plugins.AutoExportPlugins;
 using CameraControl.Plugins.ExportPlugins;
 using CameraControl.Plugins.ExternalDevices;
+using CameraControl.Plugins.ImageTransformPlugins;
 using CameraControl.Plugins.MainWindowPlugins;
 using CameraControl.Plugins.ToolPlugins;
 
@@ -68,6 +69,10 @@ namespace CameraControl.Plugins
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DCCUSBShutterRelease());
                 
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new CopyFilePlugin());
+
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new NoTransform());
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ResizeTransform());
+
             }
             catch (Exception exception)
             {
