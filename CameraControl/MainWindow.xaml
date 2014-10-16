@@ -356,7 +356,7 @@
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
-                                                    <CheckBox Content="{Binding Type}" IsChecked="{Binding IsEnabled}"/>
+                                                    <CheckBox Content="{Binding DisplayName}" IsChecked="{Binding IsEnabled}"/>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                                         <Rectangle Width="10" Height="10">
                                                             <Rectangle.Fill>

@@ -150,6 +150,10 @@
     <Compile Include="ExternalDevices\SerialPortShutterRelease.cs" />
     <Compile Include="ImageTransformPlugins\NoTransform.cs" />
     <Compile Include="ImageTransformPlugins\ResizeTransform.cs" />
+    <Compile Include="ImageTransformPlugins\ResizeTransformView.xaml.cs">
+      <DependentUpon>ResizeTransformView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\ResizeTransformViewModel.cs" />
     <Compile Include="MainWindowPlugins\SimpleMainWindow.xaml.cs">
       <DependentUpon>SimpleMainWindow.xaml</DependentUpon>
     </Compile>
@@ -216,6 +220,10 @@
     <Page Include="DCCUSBShutterReleaseConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageTransformPlugins\ResizeTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindowPlugins\SimpleMainWindow.xaml">
       <SubType>Designer</SubType>

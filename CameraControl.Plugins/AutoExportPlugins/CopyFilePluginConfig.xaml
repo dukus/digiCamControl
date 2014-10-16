@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+             xmlns:autoExportPlugins="clr-namespace:CameraControl.Plugins.AutoExportPlugins"
              mc:Ignorable="d" 
              Height="300" Width="500" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <autoExportPlugins:CopyFilePluginViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="222*" />
@@ -16,9 +20,35 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="1" Header="groupBox1" Name="groupBox1" Margin="5" Grid.RowSpan="2">
-            <Grid />
+        <GroupBox Grid.Column="1" Header="Image transformation"  Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="183*" />
+                </Grid.RowDefinitions>
+                <ComboBox Margin="2" ItemsSource="{Binding ImageTransformPlugins}" SelectedItem="{Binding TransformPlugin}"/>
+            </Grid>
         </GroupBox>
         <Button Content="{translation:TranslateExtension ButtonClose}" Grid.Row="1"  HorizontalAlignment="Left" Margin="3" Name="btn_close" VerticalAlignment="Top" Width="75" Click="btn_close_Click" />
+        
+        <GroupBox Header="Properties" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <Label Content="Name"/>
+                <TextBox Grid.Row="1" Text="{Binding Name}" Margin="2"/>
+                
+                <Label Grid.Row="2" Content="Export path"/>
+                <TextBox Grid.Row="3" Text="{Binding Path}" Margin="2" />
+                <Button Grid.Row="4" Content="Browse" Margin="2"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </controls:MetroWindow>

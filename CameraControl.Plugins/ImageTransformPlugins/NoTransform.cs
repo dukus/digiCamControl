@@ -9,7 +9,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 {
     public class NoTransform : IImageTransformPlugin
     {
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return "NoTransform"; } 
+        }
+
         public bool Execute(string source, string dest, ValuePairEnumerator configData)
         {
             return true;
