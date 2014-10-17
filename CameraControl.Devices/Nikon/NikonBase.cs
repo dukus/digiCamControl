@@ -1639,6 +1639,7 @@ namespace CameraControl.Devices.Nikon
                 if (response.Data == null || response.Data.Length == 0)
                 {
                     Log.Debug("Get event error :" + response.ErrorCode.ToString("X"));
+                    _eventIsbusy = false;
                     return;
                 }
                 int eventCount = BitConverter.ToInt16(response.Data, 0);
