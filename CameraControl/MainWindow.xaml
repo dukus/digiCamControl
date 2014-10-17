@@ -355,10 +355,10 @@
                                     <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid IsEnabled="{Binding IsRedy}" Margin="2">
                                                     <CheckBox Content="{Binding DisplayName}" IsChecked="{Binding IsEnabled}"/>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                        <Rectangle Width="10" Height="10">
+                                                        <Rectangle Width="10" Height="10" Visibility="{Binding Path=IsError,  Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{Binding Error}">
                                                             <Rectangle.Fill>
                                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_noentry}" />
                                                             </Rectangle.Fill>
@@ -377,7 +377,7 @@
                                                                 </Rectangle.Fill>
                                                             </Rectangle>
                                                         </Button>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ApplyPluginCommand}" CommandParameter="{Binding}">
                                                             <Rectangle Width="10" Height="10">
                                                                 <Rectangle.Fill>
                                                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_stamp}" />

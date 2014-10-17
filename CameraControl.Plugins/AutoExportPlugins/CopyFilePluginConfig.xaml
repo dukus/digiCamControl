@@ -7,10 +7,17 @@
              xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
              xmlns:autoExportPlugins="clr-namespace:CameraControl.Plugins.AutoExportPlugins"
              mc:Ignorable="d" 
-             Height="300" Width="500" WindowStartupLocation="CenterScreen">
+             Height="300" Width="500" WindowStartupLocation="CenterScreen" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False">
     <Window.DataContext>
         <autoExportPlugins:CopyFilePluginViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="222*" />
@@ -27,6 +34,7 @@
                     <RowDefinition Height="183*" />
                 </Grid.RowDefinitions>
                 <ComboBox Margin="2" ItemsSource="{Binding ImageTransformPlugins}" SelectedItem="{Binding TransformPlugin}"/>
+                <ContentControl Grid.Row="1" Content="{Binding ConfigControl}"/>
             </Grid>
         </GroupBox>
         <Button Content="{translation:TranslateExtension ButtonClose}" Grid.Row="1"  HorizontalAlignment="Left" Margin="3" Name="btn_close" VerticalAlignment="Top" Width="75" Click="btn_close_Click" />
@@ -46,8 +54,8 @@
                 <TextBox Grid.Row="1" Text="{Binding Name}" Margin="2"/>
                 
                 <Label Grid.Row="2" Content="Export path"/>
-                <TextBox Grid.Row="3" Text="{Binding Path}" Margin="2" />
-                <Button Grid.Row="4" Content="Browse" Margin="2"/>
+                <TextBox Grid.Row="3" Text="{Binding Path}" Margin="2" IsReadOnly="True"/>
+                <Button Grid.Row="4" Content="Browse" Margin="2" Command="{Binding BrowseCommand}"/>
             </Grid>
         </GroupBox>
     </Grid>

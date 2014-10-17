@@ -2,9 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:imageTransformPlugins="clr-namespace:CameraControl.Plugins.ImageTransformPlugins"
              mc:Ignorable="d" 
              d:DesignHeight="148" d:DesignWidth="276">
+    <UserControl.DataContext>
+        <imageTransformPlugins:ResizeTransformViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -13,9 +18,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="84*" />
         </Grid.RowDefinitions>
         <Label Content="Width" HorizontalAlignment="Right"/>
+        <controls:NumericUpDown Grid.Row="0" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding Width}"/>
+        
         <Label Grid.Row="1" Grid.Column="0" Content="Height" HorizontalAlignment="Right"/>
+        <controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding Height}"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Keep aspect" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="2" Grid.Column="1" IsChecked=""/>
     </Grid>
 </UserControl>

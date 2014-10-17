@@ -48,10 +48,13 @@ namespace CameraControl.Core.Classes
         private object _locker = new object();
         private string _lastFilename = null;
 
-        [JsonIgnore] [XmlIgnore] public List<string> SupportedExtensions = new List<string>
-                                                                               {".jpg", ".nef", ".tif", ".png", ".cr2"};
+        [JsonIgnore]
+        [XmlIgnore]
+        public List<string> SupportedExtensions = new List<string> { ".jpg", ".nef", ".tif", ".png", ".cr2" };
 
-        [JsonIgnore] [XmlIgnore] public List<string> RawExtensions = new List<string> {".cr2", ".nef"};
+        [JsonIgnore]
+        [XmlIgnore]
+        public List<string> RawExtensions = new List<string> { ".cr2", ".nef" };
 
         private string _name;
 
@@ -379,7 +382,7 @@ namespace CameraControl.Core.Classes
 
         [XmlIgnore]
         [JsonIgnore]
-        public RelayCommand<IAutoExportPlugin> AddPluginCommand  { get; set; }
+        public RelayCommand<IAutoExportPlugin> AddPluginCommand { get; set; }
 
         [XmlIgnore]
         [JsonIgnore]
@@ -389,6 +392,10 @@ namespace CameraControl.Core.Classes
         [JsonIgnore]
         public RelayCommand<AutoExportPluginConfig> ConfigurePluginCommand { get; set; }
 
+        [XmlIgnore]
+        [JsonIgnore]
+        public RelayCommand<AutoExportPluginConfig> ApplyPluginCommand { get; set; }
+
         public PhotoSession()
         {
             _systemWatcher = new FileSystemWatcher();
@@ -397,7 +404,8 @@ namespace CameraControl.Core.Classes
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
             AddPluginCommand = new RelayCommand<IAutoExportPlugin>(AddPlugin);
             RemovePluginCommand = new RelayCommand<AutoExportPluginConfig>(RemovePlugin);
-            ConfigurePluginCommand=new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
+            ConfigurePluginCommand = new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
+            ApplyPluginCommand=new RelayCommand<AutoExportPluginConfig>(ApplyPlugin);
 
             Name = "Default";
             CaptureName = "Capture";
@@ -414,7 +422,7 @@ namespace CameraControl.Core.Classes
             Files = new AsyncObservableCollection<FileItem>();
             FileNameTemplate = "DSC_[Counter 4 digit]";
             TimeLapse = new TimeLapseClass();
-            
+
             UseOriginalFilename = false;
             AlowFolderChange = false;
             Tags = new AsyncObservableCollection<TagItem>();
@@ -445,6 +453,22 @@ namespace CameraControl.Core.Classes
         private void RemovePlugin(AutoExportPluginConfig plugin)
         {
             AutoExportPluginConfigs.Remove(plugin);
+        }
+
+        private void ApplyPlugin(AutoExportPluginConfig plugin)
+        {
+            var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
+            try
+            {
+                pl.Execute(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, plugin);
+            }
+            catch (Exception ex)
+            {
+                plugin.IsError = true;
+                plugin.Error = ex.Message;
+                plugin.IsRedy = true;
+                Log.Error("Error to apply plugin", ex);
+            }
         }
 
         private void _systemWatcher_Created(object sender, FileSystemEventArgs e)
@@ -541,8 +565,8 @@ namespace CameraControl.Core.Classes
                 Counter++;
             }
 
-         
-            Regex regPattern = new Regex(@"\[(.*?)\]",RegexOptions.Singleline);
+
+            Regex regPattern = new Regex(@"\[(.*?)\]", RegexOptions.Singleline);
             MatchCollection matchX = regPattern.Matches(res);
             foreach (Match match in matchX)
             {
@@ -565,7 +589,7 @@ namespace CameraControl.Core.Classes
             return res;
         }
 
- 
+
         public FileItem AddFile(string fileName)
         {
             FileItem oitem = GetFile(fileName);

@@ -528,6 +528,6 @@ namespace CameraControl.Core.Translation
         public static string LabelSelectSeries = "Select photos in same series";
         public static string LabelCaptureDelay = "Capture delay";
         public static string LabelAutoExportPlugins = "Auto Export Plugins";
-        public static string LabelAddPlugin = "Add plugion";
+        public static string LabelAddPlugin = "Add plugin";
     }
 }
