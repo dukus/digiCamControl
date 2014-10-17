@@ -396,6 +396,24 @@ namespace CameraControl
                 _selectedItem.BackupFileName = backupfile;
                 _selectedItem.Series = session.Series;
 
+                foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
+                {
+                    if(!plugin.IsEnabled)
+                        continue;
+                    var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
+                    try
+                    {
+                        pl.Execute(fileName, plugin);
+                    }
+                    catch (Exception ex)
+                    {
+                        plugin.IsError = true;
+                        plugin.Error = ex.Message;
+                        plugin.IsRedy = true;
+                        Log.Error("Error to apply plugin", ex);
+                    }
+                }
+
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
                 {
                     MyNotifyIcon.HideBalloonTip();

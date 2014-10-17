@@ -28,6 +28,6 @@
         <controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding Height}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Keep aspect" HorizontalAlignment="Right"/>
-        <CheckBox Grid.Row="2" Grid.Column="1" IsChecked=""/>
+        <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding KeepAspect}" Margin="2"/>
     </Grid>
 </UserControl>

@@ -54,16 +54,23 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
                     BitmapCreateOptions.PreservePixelFormat,
                     BitmapCacheOption.OnLoad);
+                WriteableBitmap writeableBitmap ;
+                if (conf.KeepAspect)
+                {
+                    double dw = (double)conf.Width / bmpDec.Frames[0].PixelWidth;
+                    writeableBitmap =
+                        BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],
+                            (int)(bmpDec.Frames[0].PixelWidth * dw),
+                            (int)(bmpDec.Frames[0].PixelHeight * dw),
+                            BitmapScalingMode.Linear));
+                }
+                else
+                {
+                    writeableBitmap =
+                        BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0], conf.Width, conf.Height, BitmapScalingMode.Linear));
+                   
+                }
 
-                //double dw = (double) LargeThumbSize/bmpDec.Frames[0].PixelWidth;
-                //WriteableBitmap writeableBitmap =
-                //    BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],
-                //        (int) (bmpDec.Frames[0].PixelWidth*dw),
-                //        (int) (bmpDec.Frames[0].PixelHeight*dw),
-                //        BitmapScalingMode.Linear));
-
-                WriteableBitmap writeableBitmap =
-                    BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],conf.Width,conf.Height,BitmapScalingMode.Linear));
                 BitmapLoader.Save2Jpg(writeableBitmap, dest);
 
                 // remove temporally file created by dcraw
