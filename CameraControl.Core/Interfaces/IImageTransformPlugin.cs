@@ -7,7 +7,7 @@ namespace CameraControl.Core.Interfaces
     public interface IImageTransformPlugin
     {
         string Name { get; }
-        bool Execute(string source, string dest, ValuePairEnumerator configData);
+        string Execute(string source, string dest, ValuePairEnumerator configData);
         UserControl GetConfig(ValuePairEnumerator configData);
     }
 }

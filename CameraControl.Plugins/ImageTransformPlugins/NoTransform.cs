@@ -17,10 +17,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "NoTransform"; } 
         }
 
-        public bool Execute(string source, string dest, ValuePairEnumerator configData)
+        public string Execute(string source, string dest, ValuePairEnumerator configData)
         {
             File.Copy(source, dest, true);
-            return true;
+            return dest;
         }
 
         public UserControl GetConfig(ValuePairEnumerator configData)

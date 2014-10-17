@@ -19,7 +19,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "Resize"; }
         }
 
-        public bool Execute(string filename, string dest, ValuePairEnumerator configData)
+        public string Execute(string filename, string dest, ValuePairEnumerator configData)
         {
             var conf = new ResizeTransformViewModel(configData);
             bool deleteFile = false;
@@ -77,7 +77,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 if (deleteFile)
                     File.Delete(filename);
             }
-            return true;
+            return dest;
         }
 
         public UserControl GetConfig(ValuePairEnumerator configData)

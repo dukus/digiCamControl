@@ -12,9 +12,8 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace CameraControl.Plugins.AutoExportPlugins
 {
-    public class CopyFilePluginViewModel : ViewModelBase
+    public class CopyFilePluginViewModel : BasePluginViewModel
     {
-        private AutoExportPluginConfig _config = new AutoExportPluginConfig();
 
         public RelayCommand BrowseCommand { get; set; }
 
@@ -34,7 +33,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         public CopyFilePluginViewModel()
         {
-            
+
         }
 
         public string Path
@@ -44,48 +43,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
             {
                 _config.ConfigData["Path"] = value;
                 RaisePropertyChanged(() => Path);
-            }
-        }
-
-        public string TransformPlugin
-        {
-            get
-            {
-                var pl = _config.ConfigData["TransformPlugin"];
-                return string.IsNullOrEmpty(pl) ? "NoTransform" : pl;
-            }
-            set
-            {
-                _config.ConfigData["TransformPlugin"] = value;
-                RaisePropertyChanged(() => ConfigControl);
-            }
-        }
-
-        public string Name
-        {
-            get { return _config.Name; }
-            set { _config.Name = value; }
-        }
-
-        public List<string> ImageTransformPlugins
-        {
-            get
-            {
-                var l = ServiceProvider.PluginManager.ImageTransformPlugins.Select(x => x.Name).ToList();
-                return l;
-            }
-        }
-
-        public UserControl ConfigControl
-        {
-            get
-            {
-                var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(TransformPlugin);
-                if (tp != null)
-                {
-                    return tp.GetConfig(_config.ConfigData);
-                }
-                return null;
             }
         }
 
