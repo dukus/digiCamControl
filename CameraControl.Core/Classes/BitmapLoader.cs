@@ -213,7 +213,7 @@ namespace CameraControl.Core.Classes
             }
             catch (Exception exception)
             {
-                Log.Error("Error generating cache", exception);
+                Log.Error("Error generating cache " + fileItem.FileName, exception);
             }
         }
 

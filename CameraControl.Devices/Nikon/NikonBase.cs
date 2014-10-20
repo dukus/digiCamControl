@@ -400,6 +400,7 @@ namespace CameraControl.Devices.Nikon
                 ReadDeviceProperties(CONST_PROP_BatteryLevel);
                 ReadDeviceProperties(CONST_PROP_ExposureIndicateStatus);
                 AddAditionalProps();
+                ReInitShutterSpeed();
                 HostMode = false;
                 _timer.Start();
                 OnCameraInitDone();
@@ -542,32 +543,36 @@ namespace CameraControl.Devices.Nikon
         protected virtual PropertyValue<long> InitPictControl()
         {
             var res = new PropertyValue<long>()
-                          {
-                              Name = "Picture control",
-                              IsEnabled = true,
-                              Code = CONST_PROP_ActivePicCtrlItem,
-                              SubType = typeof (UInt16)
-                          };
+            {
+                Name = "Picture control",
+                IsEnabled = true,
+                Code = CONST_PROP_ActivePicCtrlItem,
+                SubType = typeof(UInt16)
+            };
             res.AddValues("Standard", 1);
             res.AddValues("Neutral", 2);
             res.AddValues("Vivid", 3);
             res.AddValues("Monochrome", 4);
             res.AddValues("Portrait", 5);
             res.AddValues("Landscape", 6);
-            //res.AddValues("Option picture control 1", 101);
-            //res.AddValues("Option picture control 2", 102);
-            //res.AddValues("Option picture control 3", 103);
-            //res.AddValues("Option picture control 4", 104);
-            for (byte i = 201; i < 210; i++)
-            {
-                PictureControl control = GetPictureControl(i);
-                if (control != null && (control.IsLoaded && !string.IsNullOrWhiteSpace(control.RegistrationName)))
-                    res.AddValues(control.RegistrationName, i);
-                else
-                    res.AddValues("Custom picture control " + (i - 200), i);
-            }
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+
+            try
+            {
+                for (byte i = 201; i < 210; i++)
+                {
+                    PictureControl control = GetPictureControl(i);
+                    if (control != null && (control.IsLoaded && !string.IsNullOrWhiteSpace(control.RegistrationName)))
+                        res.AddValues(control.RegistrationName, i);
+                    else
+                        res.AddValues("Custom picture control " + (i - 200), i);
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
             return res;
         }
 
@@ -851,11 +856,11 @@ namespace CameraControl.Devices.Nikon
                 try
                 {
                     byte datasize = 4;
-                    ShutterSpeed.Clear();
                     var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
                                                                      CONST_PROP_ExposureTime);
                     if (result.Data == null)
                         return;
+                    ShutterSpeed.Clear();
                     int type = BitConverter.ToInt16(result.Data, 2);
                     byte formFlag = result.Data[(2 * datasize) + 5];
                     UInt32 defval = BitConverter.ToUInt32(result.Data, datasize + 5);
@@ -865,7 +870,7 @@ namespace CameraControl.Devices.Nikon
                         ShutterSpeed.AddValues(_shutterTable.ContainsKey(val) ? _shutterTable[val] : val.ToString(), val);
                     }
                     // force to add Bulb mode for some cameras which not support it
-                    if ((Mode.Value == "S" || Mode.Value == "M") && !ShutterSpeed.Values.Contains("Bulb"))
+                    if (Mode!=null && (Mode.Value == "S" || Mode.Value == "M") && !ShutterSpeed.Values.Contains("Bulb"))
                         ShutterSpeed.AddValues("Bulb", 0xFFFFFFFF);
 
                     ShutterSpeed.SetValue(defval, false);
@@ -918,7 +923,7 @@ namespace CameraControl.Devices.Nikon
                 case "M":
                     ShutterSpeed.IsEnabled = true;
                     FNumber.IsEnabled = true;
-                    ReInitShutterSpeed();
+                    //ReInitShutterSpeed();
                     break;
                 case "P":
                     ShutterSpeed.IsEnabled = false;
@@ -931,7 +936,7 @@ namespace CameraControl.Devices.Nikon
                 case "S":
                     ShutterSpeed.IsEnabled = true;
                     FNumber.IsEnabled = false;
-                    ReInitShutterSpeed();
+                    //ReInitShutterSpeed();
                     break;
                 default:
                     ShutterSpeed.IsEnabled = false;
@@ -955,9 +960,11 @@ namespace CameraControl.Devices.Nikon
             try
             {
                 DeviceReady();
-                FNumber.Clear();
                 const byte datasize = 2;
                 var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc, CONST_PROP_Fnumber);
+                if (result.Data == null)
+                    return;
+                FNumber.Clear();
                 int type = BitConverter.ToInt16(result.Data, 2);
                 byte formFlag = result.Data[(2 * datasize) + 5];
                 UInt16 defval = BitConverter.ToUInt16(result.Data, datasize + 5);
@@ -1756,7 +1763,7 @@ namespace CameraControl.Devices.Nikon
             ulong cod = (ulong) ExecuteWithNoData(CONST_CMD_DeviceReady);
             if (cod != 0 && cod != ErrorCodes.MTP_OK)
             {
-                if (cod == ErrorCodes.MTP_Device_Busy)
+                if (cod == ErrorCodes.MTP_Device_Busy || cod == 0x800700AA)
                 {
                     //Console.WriteLine("Device not ready");
                     //Thread.Sleep(50);

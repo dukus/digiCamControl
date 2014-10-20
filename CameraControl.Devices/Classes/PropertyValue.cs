@@ -348,13 +348,13 @@ namespace CameraControl.Devices.Classes
             }
             if (typeof (T) == typeof (long) && ba.Length == 4)
             {
-                long val = BitConverter.ToInt32(ba, 0);
+                long val = BitConverter.ToUInt32(ba, 0);
                 SetValue((T) ((object) val));
                 return;
             }
             if (typeof (T) == typeof (long))
             {
-                long val = BitConverter.ToInt32(ba, 0);
+                long val = BitConverter.ToInt64(ba, 0);
                 SetValue((T) ((object) val));
             }
             if (typeof (T) == typeof (uint))
@@ -379,6 +379,9 @@ namespace CameraControl.Devices.Classes
         public void Clear()
         {
             _valuesDictionary.Clear();
+            _values.Clear();
+            _numericValues.Clear();
+            NotifyPropertyChanged("Values");
         }
     }
 }
