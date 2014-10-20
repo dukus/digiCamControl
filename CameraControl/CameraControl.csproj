@@ -284,6 +284,7 @@
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultipleLiveViewViewModel.cs" />
+    <Compile Include="ViewModel\SimpleLiveViewViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="windows\AboutWnd.xaml.cs">
       <DependentUpon>AboutWnd.xaml</DependentUpon>

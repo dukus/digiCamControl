@@ -12,6 +12,20 @@
             <RowDefinition Height="315*" />
             <RowDefinition Height="72*" />
         </Grid.RowDefinitions>
+        <ItemsControl ItemsSource="{Binding Cameras}" >
+            <ItemsControl.ItemsPanel>
+                <!-- specify the panel that is the container for the items -->
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="10" Columns="10" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!-- specify the template used to render each item -->
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModel:SimpleLiveViewViewModel}">
+                    <Label Content="{Binding CameraDevice.DisplayName}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <GroupBox Grid.Row="1" Header="groupBox1" Name="groupBox1">
             <Grid />
         </GroupBox>

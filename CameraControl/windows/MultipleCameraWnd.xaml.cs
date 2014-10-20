@@ -290,7 +290,8 @@ namespace CameraControl.windows
 
         private void btn_liveview_Click(object sender, RoutedEventArgs e)
         {
-
+            MultipleLiveView view=new MultipleLiveView();
+            view.Show();
         }
     }
 }
