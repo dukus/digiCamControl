@@ -142,7 +142,7 @@ namespace CameraControl.Core.Classes
                         string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
                         if (File.Exists(dcraw_exe))
                         {
-                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e {0}", fileItem.FileName));
+                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e \"{0}\"", fileItem.FileName));
                             string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
                                         Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
                             if (File.Exists(thumb))
@@ -402,7 +402,7 @@ namespace CameraControl.Core.Classes
                         string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
                         if (File.Exists(dcraw_exe))
                         {
-                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e {0}", fileItem.FileName));
+                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e \"{0}\"", fileItem.FileName));
                             string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
                                 Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
                             if (File.Exists(thumb))
