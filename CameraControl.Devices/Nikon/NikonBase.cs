@@ -864,6 +864,10 @@ namespace CameraControl.Devices.Nikon
                         UInt32 val = BitConverter.ToUInt32(result.Data, ((2 * datasize) + 6 + 2) + i);
                         ShutterSpeed.AddValues(_shutterTable.ContainsKey(val) ? _shutterTable[val] : val.ToString(), val);
                     }
+                    // force to add Bulb mode for some cameras which not support it
+                    if ((Mode.Value == "S" || Mode.Value == "M") && !ShutterSpeed.Values.Contains("Bulb"))
+                        ShutterSpeed.AddValues("Bulb", 0xFFFFFFFF);
+
                     ShutterSpeed.SetValue(defval, false);
                 }
                 catch (Exception)
@@ -927,6 +931,7 @@ namespace CameraControl.Devices.Nikon
                 case "S":
                     ShutterSpeed.IsEnabled = true;
                     FNumber.IsEnabled = false;
+                    ReInitShutterSpeed();
                     break;
                 default:
                     ShutterSpeed.IsEnabled = false;

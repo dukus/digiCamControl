@@ -62,7 +62,7 @@
         <Label Content="{T:TranslateExtension LabelPHDGuiding}" Grid.Row="4" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right" />
         <Label Content="{T:TranslateExtension LabelWaitPHDGuiding}" Grid.Row="5" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right"/>
         <Controls:NumericUpDown Name="upd_waittime" Minimum="0" Maximum="6000" Value="{Binding Path=WaitTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="3" Margin="5"/>
-        <Controls:NumericUpDown Name="upd_phdwaittime" Minimum="0" Maximum="30" Value="{Binding Path=PhdWait, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="5" Margin="5"/>
+        <Controls:NumericUpDown Name="upd_phdwaittime" Minimum="0" Maximum="300" Value="{Binding Path=PhdWait, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="5" Margin="5"/>
         <Label Content="{Binding Path=Message, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="4" Grid.Row="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" FontWeight="Bold" />
         <GroupBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Header="{T:TranslateExtension LabelExternalShutterRelease}" Margin="5">
             <Grid>
