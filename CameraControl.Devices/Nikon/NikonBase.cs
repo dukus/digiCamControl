@@ -74,6 +74,7 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_Fnumber = 0x5007;
         public const uint CONST_PROP_ExposureIndex = 0x500F;
         public const uint CONST_PROP_ExposureTime = 0x500D;
+        public const uint CONST_PROP_ShutterSpeed = 0xD100;
         public const uint CONST_PROP_WhiteBalance = 0x5005;
         public const uint CONST_PROP_ExposureProgramMode = 0x500E;
         public const uint CONST_PROP_ExposureBiasCompensation = 0x5010;
@@ -884,8 +885,12 @@ namespace CameraControl.Devices.Nikon
         private void ShutterSpeed_ValueChanged(object sender, string key, long val)
         {
             if (Mode != null && (Mode.Value == "M" || Mode.Value == "S"))
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
-                            CONST_PROP_ExposureTime);
+                if (key == "Bulb")
+                    SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(0xFFFFFFFF),
+                        CONST_PROP_ShutterSpeed);
+                else
+                    SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                        CONST_PROP_ExposureTime);
         }
 
         private void InitMode()
