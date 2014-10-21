@@ -53,8 +53,6 @@
 	<string name="LOSSLESS_COMPRESSED_RAW">Lossless compressed RAW</string> 
 	<string name="RAW_COMPRESSION">Raw Compression</string> 
 	<string name="MF__HARD_">MF (hard)</string> 
-	<string name="CENTER_WEIGHTED_METERING">Center-weighted metering</string> 
-	<string name="DAYLIGHT">Daylight</string> 
     <!-- End Property values -->	
     <string name="Mode">Mode</string> 
     <string name="Iso">_Iso</string> 

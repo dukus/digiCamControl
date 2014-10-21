@@ -41,7 +41,18 @@
 	<string name="[S]_SINGLE_AF_SERVO">[S] Single AF servo</string> 
 	<string name="[M]_MANUAL_FOCUS">[M] Manual focus</string> 
 	<string name="KELVIN">Kelvin</string> 
-	
+	<string name="APPLICATION_MODE">Application mode</string> 
+	<string name="WHITE_FLUORESCENT_LAMP">White fluorescent lamp</string> 
+	<string name="FLUORESCENT_LIGHT_TYPE">Fluorescent light type</string> 
+	<string name="ADOBE_RGB">Adobe RGB</string> 
+	<string name="COLOR_SPACE">Color space</string> 
+	<string name="14_BIT_RECORDING">14-bit recording</string> 
+	<string name="RAW_RECORDING_BIT_MODE">Raw Recording bit mode</string> 
+	<string name="NEUTRAL">Neutral</string> 
+	<string name="PICTURE_CONTROL">Picture control</string> 
+	<string name="LOSSLESS_COMPRESSED_RAW">Lossless compressed RAW</string> 
+	<string name="RAW_COMPRESSION">Raw Compression</string> 
+	<string name="MF__HARD_">MF (hard)</string> 
     <!-- End Property values -->	
     <string name="Mode">Mode</string> 
     <string name="Iso">_Iso</string> 
@@ -218,7 +229,7 @@
     <string name="MenuMultipleCamera">Multiple camera control</string> 
     <string name="MenuSelectedCameraProperty">Selected camera property</string> 
     <string name="MenuPresets">Presets</string> 
-    <string name="MenuPresetsLoad">Load preset in camera</string> 
+    <string name="MenuPresetsLoad">Load</string> 
     <string name="MenuPresetsSave">Save</string> 
     <string name="MenuPresetsEdit">Edit</string> 
     <string name="MenuHelp">_Help</string> 
@@ -409,7 +420,7 @@
 	<string name="LabelStayOnTop2">Stay on top</string>
 	<string name="LabelWriteSelectedTags">Write tags from tag selector</string>
 	<string name="LabelClearCache">Clear cache</string>
-	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in fullscreen</string>
+	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in fullSccreen</string>
 	<string name="LabelDelayImageLoading">Delay image loading</string>
 	<string name="LabelShowOverlayFolder">Show overlay folder</string>
 	<string name="LabelPHDGuiding">PHD Guiding</string>
@@ -438,4 +449,53 @@
     <string name="LabelSelectNone">Select None</string>
     <string name="LabelSelectLiked">Select Liked</string>
     <string name="LabelSelectUnLiked">Select UnLiked</string>
+	<!--19/01/2014-->        
+	<string name="LabelLockNearFar">Please lock nerest and farest focus points</string>
+	<string name="LabelError">Error</string>
+	<string name="LabelChangelog">Change Log</string>
+	<!--27/02/2014-->        
+	<string name="LabelAllowOverWrite">Allow overwrite</string>
+	<string name="LabelShowRuler">Show Ruler</string>
+	<string name="LabelAutoPreviewJpgOnly">Auto Preview Jpg Only</string>
+	<string name="LabelSettingsLiveView">Live view</string>
+	<string name="LabelHostMode">Host mode</string>
+	<!--17.05.2014-->        
+	<string name="LabelClear">Clear</string>
+	<string name="LabelHistogram">Histogram</string>
+	<string name="LabelMetadata">Metadata</string>
+	<string name="LabelFullSize">Full size image</string>
+	<string name="LabelWifi">Connect with DSLRDASHBOARDSERVER</string>
+	<string name="ButtonRecordStopMovie">Stop Record movie</string>
+	<string name="LabelOverlay">Overlay</string>
+	<string name="LabelGenerateThumbs">Generate Thumbnails</string>
+	<string name="LabelPlay">Play</string>
+	<string name="LabelPause">Pause</string>
+	<string name="LabelImageSequencer">Image Sequencer</string>
+	<string name="LabelLoop">Loop</string>
+	<string name="LabelProgress">Progress</string>
+	<string name="LabelStartImageFrame">Start image frame</string>
+	<string name="LabelStopImageFrame">Stop image frame</string>
+	<string name="LabelPlayVideo">Play Video</string>
+	<string name="LabelLoadPresetAllCamera">Load preset in all cameras</string>
+	<string name="LabelBackUpFolder">Backup folder</string>
+	<string name="LabelBackUp">Backup photos</string>
+	<string name="LabelVerifyPreset">Verify preset</string>
+	<string name="LabelRefreshSession">Refresh file list</string>
+	<string name="LabelErrorEmail">Your email address (if you want get feedback)</string>
+	<string name="LabelApertureBracketing">Aperture bracketing </string>
+<!-- 	        //20/08/2014 -->
+        <string name="LabelCaptureName">Capture Name"</string>
+        <string name="LabelSeries">Series"</string>
+        <string name="LabelAdvancedProperties">Advanced Properties"</string>
+        <string name="LabelDirection">Direction"</string>
+        <string name="LabelFarNear">Far -> Near"</string>
+        <string name="LabelNearFar">Near -> Far"</string>
+        <string name="LabelStepSmall">Small step"</string>
+        <string name="LabelStepMedium">Medium step"</string>
+        <string name="LabelStepLarge">Large step"</string>
+        <string name="LabelSessionOpenFolder">Open session folder"</string>
+        <string name="LabelActivate">Activate"</string>
+        <string name="LabelScaling">Scaling"</string>
+        <string name="LabelHorizontal">Horizontal"</string>
+        <string name="LabelVertical">Vertical"</string>
 </resources>
