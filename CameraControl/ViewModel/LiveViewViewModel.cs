@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -1110,7 +1111,8 @@ namespace CameraControl.ViewModel
         {
             //if (!_worker.IsBusy)
             //    _worker.RunWorkerAsync();
-            ThreadPool.QueueUserWorkItem(GetLiveImage);
+            //ThreadPool.QueueUserWorkItem(GetLiveImage);
+            Task.Factory.StartNew(GetLiveImage);
         }
 
         void _freezeTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -1177,6 +1179,7 @@ namespace CameraControl.ViewModel
             GetLiveImage();
         }
 
+        
         public virtual void GetLiveImage()
         {
             if (_operInProgress)
@@ -2024,7 +2027,7 @@ namespace CameraControl.ViewModel
                 double yt = LiveViewData.ImageHeight/refHeight;
                 int posx = (int) (initialPoint.X*xt);
                 int posy = (int) (initialPoint.Y*yt);
-                SetFocusPos(posx, posy);
+                Task.Factory.StartNew(() => SetFocusPos(posx, posy));
             }
         }
 
