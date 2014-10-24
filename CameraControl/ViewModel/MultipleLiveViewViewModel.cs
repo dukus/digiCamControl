@@ -3,15 +3,57 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using CameraControl.Core;
+using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Timer = System.Timers.Timer;
 
 namespace CameraControl.ViewModel
 {
     public class MultipleLiveViewViewModel : ViewModelBase
     {
+        private Timer _timer = new Timer(1000/15);
+
+        private bool _operInProgress;
+        private int _rows;
+        private int _cols;
         public ObservableCollection<SimpleLiveViewViewModel> Cameras { get; set; }
+        public RelayCommand StartLiveViewCommand { get; set; }
+        public RelayCommand StopLiveViewCommand { get; set; }
+
+        public bool OperInProgress
+        {
+            get { return _operInProgress; }
+            set
+            {
+                _operInProgress = value;
+                RaisePropertyChanged(() => OperInProgress);
+            }
+        }
+
+        public int Rows
+        {
+            get { return _rows; }
+            set
+            {
+                _rows = value;
+                RaisePropertyChanged(()=>Rows);
+            }
+        }
+
+        public int Cols
+        {
+            get { return _cols; }
+            set
+            {
+                _cols = value;
+                RaisePropertyChanged(() => Cols);
+            }
+        }
+
 
         public MultipleLiveViewViewModel()
         {
@@ -20,11 +62,71 @@ namespace CameraControl.ViewModel
 
         private void InitCameras()
         {
+            Rows = 2;
+            Cols = 2;
+
+            StartLiveViewCommand = new RelayCommand(StartLiveView);
+            StopLiveViewCommand=new RelayCommand(StopLiveView);
+
             Cameras = new ObservableCollection<SimpleLiveViewViewModel>();
-            foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
+            if (ServiceProvider.DeviceManager != null)
             {
-                Cameras.Add(new SimpleLiveViewViewModel(device));
+                foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
+                {
+                    Cameras.Add(new SimpleLiveViewViewModel(device));
+                }
             }
+            _timer.Elapsed += _timer_Elapsed;
+        }
+
+        void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            Thread thread = new Thread(GetLiveViewThread);
+            thread.Start();
+        }
+
+        private void GetLiveViewThread()
+        {
+            foreach (SimpleLiveViewViewModel camera in Cameras)
+            {
+                camera.Get();
+            }
+            _timer.Start();
+        }
+
+        private void StartLiveView()
+        {
+            OperInProgress = true;
+            Thread thread=new Thread(StartLiveViewThread);
+            thread.Start();
+        }
+
+        private void StartLiveViewThread()
+        {
+            foreach (SimpleLiveViewViewModel camera in Cameras)
+            {
+                camera.Star();
+            }
+            OperInProgress = false;
+            _timer.Start();
+        }
+
+        private void StopLiveView()
+        {
+            OperInProgress = true;
+            Thread thread = new Thread(StopLiveViewThread);
+            thread.Start();
+        }
+
+        private void StopLiveViewThread()
+        {
+            _timer.Stop();
+            foreach (SimpleLiveViewViewModel camera in Cameras)
+            {
+                camera.Stop();
+            }
+            OperInProgress = false;
         }
 
     }

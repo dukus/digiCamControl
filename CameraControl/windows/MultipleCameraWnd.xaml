@@ -102,7 +102,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <CheckBox Content="{T:TranslateExtension LabelUseConfiguration}" IsChecked="{Binding Path=UseExternal, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" />
+                <CheckBox Content="{T:TranslateExtension LabelUseConfiguration}" IsChecked="{Binding Path=UseExternal, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Margin="5"/>
                 <ComboBox Grid.Row="1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalShutters}" DisplayMemberPath="Name" Name="cmb_external" Margin="5" SelectedItem="{Binding Path=SelectedConfig, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}"/>
                 <Button Content="{T:TranslateExtension LabelFocus}" Grid.Column="1" Name="btn_focus" Margin="5" Click="btn_focus_Click" />
                 <Button Content="{T:TranslateExtension ButtonCapture}" Grid.Column="1" Grid.Row="1" Name="btn_capture" Margin="5" Click="btn_capture_Click" />

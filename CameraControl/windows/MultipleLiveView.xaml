@@ -10,24 +10,45 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="315*" />
-            <RowDefinition Height="72*" />
+            <RowDefinition Height="120" />
         </Grid.RowDefinitions>
         <ItemsControl ItemsSource="{Binding Cameras}" >
             <ItemsControl.ItemsPanel>
                 <!-- specify the panel that is the container for the items -->
                 <ItemsPanelTemplate>
-                    <UniformGrid Rows="10" Columns="10" />
+                    <UniformGrid Rows="{Binding Rows}" Columns="{Binding Cols}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <!-- specify the template used to render each item -->
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModel:SimpleLiveViewViewModel}">
-                    <Label Content="{Binding CameraDevice.DisplayName}"/>
+                    <Grid Background="Black" Margin="5">
+                        <Image Source="{Binding Bitmap}" Stretch="Uniform"/>
+                        <Label Content="{Binding CameraDevice.DisplayName}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <GroupBox Grid.Row="1" Header="groupBox1" Name="groupBox1">
-            <Grid />
+        <GroupBox Grid.Row="1" Header="Control">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Start Live view" Margin="3" Command="{Binding StartLiveViewCommand}"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="Stop Live view" Margin="3" Command="{Binding StopLiveViewCommand}"/>
+                <controls:NumericUpDown Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Minimum="1" Value="{Binding Cols}" Maximum="10"/>
+                <controls:NumericUpDown Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Minimum="1" Value="{Binding Rows}" Maximum="10"/>
+                <Label Content="Columns" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                <Label Content="Rows" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"/>
+            </Grid>
         </GroupBox>
     </Grid>
 </controls:MetroWindow>
