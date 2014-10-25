@@ -28,10 +28,14 @@
 
 #region
 
+using System;
 using System.Windows;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.Translation;
+using CameraControl.Devices;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -55,11 +59,19 @@ namespace CameraControl.windows
 
         private void btn_browse_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new System.Windows.Forms.FolderBrowserDialog();
-            dialog.SelectedPath = Session.Folder;
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            try
             {
-                Session.Folder = dialog.SelectedPath;
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.SelectedPath = Session.Folder;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Session.Folder = dialog.SelectedPath;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessageAsync(TranslationStrings.LabelError, TranslationStrings.LabelErrorSetFolder);
+                Log.Error("Error set folder ", ex);
             }
         }
 
