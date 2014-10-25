@@ -11,6 +11,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace CameraControl.ViewModel
 {
@@ -39,6 +40,8 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public RelayCommand FocusCommand { get; set; }
+
         public SimpleLiveViewViewModel()
         {
             
@@ -47,6 +50,7 @@ namespace CameraControl.ViewModel
         public SimpleLiveViewViewModel(ICameraDevice device)
         {
             CameraDevice = device;
+            FocusCommand = new RelayCommand(Focus);
         }
 
         public void Star()
@@ -134,6 +138,24 @@ namespace CameraControl.ViewModel
                 
             }
         }
-        
+
+        public void Focus()
+        {
+            Thread thread = new Thread(AutoFocusThread);
+            thread.Start();
+        }
+
+        private void AutoFocusThread()
+        {
+            try
+            {
+                CameraDevice.AutoFocus();
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to autofocus", exception);
+                StaticHelper.Instance.SystemMessage = exception.Message;
+            }
+        }
     }
 }

@@ -7,6 +7,15 @@
     <Window.DataContext>
         <viewModel:MultipleLiveViewViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <ResourceDictionary Source="../Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="315*" />
@@ -24,7 +33,16 @@
                 <DataTemplate DataType="{x:Type viewModel:SimpleLiveViewViewModel}">
                     <Grid Background="Black" Margin="5">
                         <Image Source="{Binding Bitmap}" Stretch="Uniform"/>
-                        <Label Content="{Binding CameraDevice.DisplayName}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                        <Label Content="{Binding CameraDevice.DisplayName}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                            <Button Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding FocusCommand}">
+                                <Rectangle Width="15" Height="15">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_focus}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -170,7 +170,7 @@ namespace CameraControl.Core.Classes
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(cameraDevice);
             cameraDevice.DisplayName = property.DeviceName;
             cameraDevice.AttachedPhotoSession = ServiceProvider.Settings.GetSession(property.PhotoSessionName);
-            if (cameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+            if (cameraDevice!=null && cameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
                 cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
             return property;
         }
