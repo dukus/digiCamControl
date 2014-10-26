@@ -92,6 +92,7 @@ namespace Canon.Eos.Framework
             try
             {
                 EosFramework.LogInstance.Debug("HandleObjectEvent fired: " + objectEvent);
+                Console.WriteLine("Canon event {0}", objectEvent);
                 switch (objectEvent)
                 {
                     case Edsdk.ObjectEvent_VolumeInfoChanged:

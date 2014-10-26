@@ -1111,8 +1111,8 @@ namespace CameraControl.ViewModel
         {
             //if (!_worker.IsBusy)
             //    _worker.RunWorkerAsync();
-            ThreadPool.QueueUserWorkItem(GetLiveImage);
-            //Task.Factory.StartNew(GetLiveImage);
+            //ThreadPool.QueueUserWorkItem(GetLiveImage);
+            Task.Factory.StartNew(GetLiveImage);
         }
 
         void _freezeTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -2011,7 +2011,7 @@ namespace CameraControl.ViewModel
                 CameraDevice.CapturePhotoNoAf();
                 Log.Debug("LiveView: Capture Initialization Done");
             }
-            catch (DeviceException exception)
+            catch (Exception exception)
             {
                 StaticHelper.Instance.SystemMessage = exception.Message;
                 Log.Error("Unable to take picture with no af", exception);

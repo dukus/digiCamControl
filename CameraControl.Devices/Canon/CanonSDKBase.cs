@@ -407,7 +407,7 @@ namespace CameraControl.Devices.Canon
             LiveViewImageZoomRatio = new PropertyValue<int> {Name = "LiveViewImageZoomRatio"};
             LiveViewImageZoomRatio.AddValues("All", 1);
             LiveViewImageZoomRatio.AddValues("5x", 5);
-            LiveViewImageZoomRatio.AddValues("10x", 10);
+            //LiveViewImageZoomRatio.AddValues("10x", 10);
             LiveViewImageZoomRatio.SetValue("All");
             LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
         }
@@ -542,22 +542,7 @@ namespace CameraControl.Devices.Canon
 
         private void Camera_LiveViewUpdate(object sender, EosLiveImageEventArgs e)
         {
-            LiveViewData viewData = new LiveViewData();
-            if (Monitor.TryEnter(Locker, 1))
-            {
-                try
-                {
-                    _liveViewImageData = e;
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Error get live view image event", exception);
-                }
-                finally
-                {
-                    Monitor.Exit(Locker);
-                }
-            }
+            _liveViewImageData = e;
         }
 
         private void Camera_LiveViewPaused(object sender, EventArgs e)
@@ -800,15 +785,9 @@ namespace CameraControl.Devices.Canon
                     }
                 }
 
-                if (value == 0)
-                {
-                    IsoNumber.IsEnabled = false;
-                }
-                else
-                {
-                    IsoNumber.SetValue((int) value, false);
-                    IsoNumber.IsEnabled = true;
-                }
+                IsoNumber.SetValue((int)value, false);
+                IsoNumber.IsEnabled = true;
+
             }
             catch (Exception ex)
             {
@@ -968,6 +947,10 @@ namespace CameraControl.Devices.Canon
                 IsBusy = true;
                 if (Camera.IsInHostLiveViewMode)
                 {
+                    if (Camera.ImageQuality.SecondaryImageFormat != EosImageFormat.Unknown)
+                    {
+                        throw new Exception("RAW+JPG capture in live view not supported");
+                    }
                     Camera.PauseLiveview();
                     Camera.ResetShutterButton();
                     ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_TakePicture));
@@ -1010,6 +993,10 @@ namespace CameraControl.Devices.Canon
             Monitor.Enter(Locker);
             try
             {
+                if (Camera.IsInHostLiveViewMode && Camera.ImageQuality.SecondaryImageFormat != EosImageFormat.Unknown)
+                {
+                    throw new Exception("RAW+JPG capture in live view not supported");
+                }
                 IsBusy = true;
                 Camera.PauseLiveview();
                 ErrorCodes.GetCanonException(ResetShutterButton());

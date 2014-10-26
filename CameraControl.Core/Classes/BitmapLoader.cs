@@ -527,8 +527,8 @@ namespace CameraControl.Core.Classes
             foreach (Rect focuspoint in fileItem.FileInfo.FocusPoints)
             {
                 DrawRect(bitmap, (int) (focuspoint.X*dw), (int) (focuspoint.Y*dh),
-                         (int) ((focuspoint.X + focuspoint.Width)*dw),
-                         (int)((focuspoint.Y + focuspoint.Height) * dh), Colors.Aqua, bitmap.PixelWidth / 1000);
+                    (int) ((focuspoint.X + focuspoint.Width)*dw),
+                    (int) ((focuspoint.Y + focuspoint.Height)*dh), Colors.Aqua, (bitmap.PixelWidth/1000) + 1);
             }
             bitmap.Unlock();
         }
