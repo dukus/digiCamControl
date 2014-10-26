@@ -230,7 +230,8 @@ namespace CameraControl
             switch (cmd)
             {
                 case CmdConsts.Capture:
-                    CameraHelper.Capture();
+                    Thread thread = new Thread(new ThreadStart(CameraHelper.Capture));
+                    thread.Start();
                     break;
                 case CmdConsts.CaptureNoAf:
                     CameraHelper.CaptureNoAf();

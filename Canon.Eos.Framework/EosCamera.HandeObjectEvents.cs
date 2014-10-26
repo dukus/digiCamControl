@@ -47,9 +47,9 @@ namespace Canon.Eos.Framework
         
         private void OnObjectEventDirItemCreated(IntPtr sender, IntPtr context)
         {
-            PauseLiveview();
-            this.OnPictureTaken(_transporter.TransportInMemory(sender));
-            ResumeLiveview();
+            //PauseLiveview();
+            //this.OnPictureTaken(_transporter.TransportInMemory(sender));
+            //ResumeLiveview();
         }
         
         private void OnObjectEventDirItemRemoved(IntPtr sender, IntPtr context)

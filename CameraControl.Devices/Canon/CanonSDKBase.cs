@@ -970,7 +970,7 @@ namespace CameraControl.Devices.Canon
                 {
                     Camera.PauseLiveview();
                     Camera.ResetShutterButton();
-                    Camera.TakePicture();
+                    ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_TakePicture));
                     Camera.ResetShutterButton();
                 }
                 else
@@ -1080,18 +1080,21 @@ namespace CameraControl.Devices.Canon
                 try
                 {
                     Camera.DownloadEvf();
-                    //DeviceReady();
-                    viewData.HaveFocusData = true;
-                    viewData.ImageDataPosition = 0;
-                    viewData.ImageData = _liveViewImageData.ImageData;
-                    viewData.ImageHeight = _liveViewImageData.ImageSize.Height;
-                    viewData.ImageWidth = _liveViewImageData.ImageSize.Width;
-                    viewData.LiveViewImageHeight = 100;
-                    viewData.LiveViewImageWidth = 100;
-                    viewData.FocusX = _liveViewImageData.ZommBounds.X + (_liveViewImageData.ZommBounds.Width/2);
-                    viewData.FocusY = _liveViewImageData.ZommBounds.Y + (_liveViewImageData.ZommBounds.Height/2);
-                    viewData.FocusFrameXSize = _liveViewImageData.ZommBounds.Width;
-                    viewData.FocusFrameYSize = _liveViewImageData.ZommBounds.Height;
+                    if (_liveViewImageData != null)
+                    {
+                        //DeviceReady();
+                        viewData.HaveFocusData = true;
+                        viewData.ImageDataPosition = 0;
+                        viewData.ImageData = _liveViewImageData.ImageData;
+                        viewData.ImageHeight = _liveViewImageData.ImageSize.Height;
+                        viewData.ImageWidth = _liveViewImageData.ImageSize.Width;
+                        viewData.LiveViewImageHeight = 100;
+                        viewData.LiveViewImageWidth = 100;
+                        viewData.FocusX = _liveViewImageData.ZommBounds.X + (_liveViewImageData.ZommBounds.Width/2);
+                        viewData.FocusY = _liveViewImageData.ZommBounds.Y + (_liveViewImageData.ZommBounds.Height/2);
+                        viewData.FocusFrameXSize = _liveViewImageData.ZommBounds.Width;
+                        viewData.FocusFrameYSize = _liveViewImageData.ZommBounds.Height;
+                    }
                 }
                 catch (Exception)
                 {

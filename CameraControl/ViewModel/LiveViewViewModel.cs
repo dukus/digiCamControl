@@ -1111,8 +1111,8 @@ namespace CameraControl.ViewModel
         {
             //if (!_worker.IsBusy)
             //    _worker.RunWorkerAsync();
-            //ThreadPool.QueueUserWorkItem(GetLiveImage);
-            Task.Factory.StartNew(GetLiveImage);
+            ThreadPool.QueueUserWorkItem(GetLiveImage);
+            //Task.Factory.StartNew(GetLiveImage);
         }
 
         void _freezeTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
