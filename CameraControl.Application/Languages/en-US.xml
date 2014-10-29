@@ -128,7 +128,7 @@
     <string name="LabelLIveViewImageFreeze">Live view image freeze in sec : </string> 
     <string name="LabelRotateImage">Rotate image :</string> 
     <string name="LabelDontLoadThumbs">Don't load thumbnails</string> 
-    <string name="LabelFullscrenBack">Fullscreen window background : </string> 
+    <string name="LabelFullscrenBack">Full screen window background : </string> 
     <string name="LabelTriggers">Triggers</string> 
     <string name="LabelUseKeybordToTrigger">Use keyboard to trigger take photo</string> 
     <string name="LabelWebserver">Webserver</string> 
@@ -420,7 +420,7 @@
 	<string name="LabelStayOnTop2">Stay on top</string>
 	<string name="LabelWriteSelectedTags">Write tags from tag selector</string>
 	<string name="LabelClearCache">Clear cache</string>
-	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in fullSccreen</string>
+	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in full screen</string>
 	<string name="LabelDelayImageLoading">Delay image loading</string>
 	<string name="LabelShowOverlayFolder">Show overlay folder</string>
 	<string name="LabelPHDGuiding">PHD Guiding</string>
@@ -450,7 +450,7 @@
     <string name="LabelSelectLiked">Select Liked</string>
     <string name="LabelSelectUnLiked">Select UnLiked</string>
 	<!--19/01/2014-->        
-	<string name="LabelLockNearFar">Please lock nerest and farest focus points</string>
+	<string name="LabelLockNearFar">Please lock nearest and farest focus points</string>
 	<string name="LabelError">Error</string>
 	<string name="LabelChangelog">Change Log</string>
 	<!--27/02/2014-->        

@@ -484,7 +484,16 @@ namespace CameraControl
 
         private void SelectPreset(CameraPreset preset)
         {
-            preset.Set(ServiceProvider.DeviceManager.SelectedCameraDevice);
+            if (preset == null)
+                return;
+            try
+            {
+                preset.Set(ServiceProvider.DeviceManager.SelectedCameraDevice);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error set preset", exception);
+            }
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)

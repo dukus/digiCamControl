@@ -186,7 +186,7 @@
                     <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowMagnifierInFullSccreen}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox  Grid.Row="0" Grid.Column="1" Margin="3" IsChecked="{Binding ShowMagnifierInFullSccreen}"/>
 
-                    <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowMagnifierInFullSccreen}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelFullscrenBack}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <xctk:ColorPicker Grid.Row="1" Grid.Column="1" Margin="3" SelectedColor="{Binding FullScreenColor}"/>
 
                     <Label Grid.Row="2" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelPreviewAfterCapture}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>

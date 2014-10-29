@@ -19,7 +19,7 @@
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -130,8 +130,8 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Content="{T:TranslateExtension LabelStartScript}" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="6,4,0,0" Name="button1" VerticalAlignment="Top" Width="100" Click="button1_Click" />
-                <Button Content="{T:TranslateExtension LabelStopScript}" Grid.Row="2" Height="23" Margin="0,4,6,0" Name="btn_stop_script" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="btn_stop_script_Click" />
+                <Button Content="{T:TranslateExtension LabelStartScript}" Grid.Row="2"  HorizontalAlignment="Left" Margin="5" Name="button1" Width="100" Click="button1_Click" Height="29" VerticalAlignment="Bottom" />
+                <Button Content="{T:TranslateExtension LabelStopScript}" Grid.Row="2" Margin="5" Name="btn_stop_script" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="btn_stop_script_Click" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="8" Header="{T:TranslateExtension LabelCommands}" Grid.Column="3">

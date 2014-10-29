@@ -421,7 +421,7 @@ namespace CameraControl.Core.Translation
         public static string LabelStayOnTop2 = "Stay on top";
         public static string LabelWriteSelectedTags = "Write tags from tag selector";
         public static string LabelClearCache = "Clear cache";
-        public static string LabelShowMagnifierInFullSccreen = "Show magnifier in fullSccreen";
+        public static string LabelShowMagnifierInFullSccreen = "Show magnifier in full screen";
         public static string LabelDelayImageLoading = "Delay image loading";
         public static string LabelShowOverlayFolder = "Show overlay folder";
         public static string LabelPHDGuiding = "PHD Guiding";
