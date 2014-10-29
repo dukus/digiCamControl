@@ -49,6 +49,7 @@ namespace CameraControl.Core.Scripting.ScriptCommands
         public override bool Execute(ScriptObject scriptObject)
         {
             ServiceProvider.ScriptManager.OutPut("Bulb capture started");
+            Log.Debug("Script Bulb capture started");
             Executing = true;
             if (scriptObject.CameraDevice != null)
             {
@@ -74,6 +75,7 @@ namespace CameraControl.Core.Scripting.ScriptCommands
             Executing = false;
             IsExecuted = true;
             ServiceProvider.ScriptManager.OutPut("Bulb capture done");
+            Log.Debug("Script Bulb capture done");
             return true;
         }
 

@@ -36,6 +36,7 @@ using System.Text;
 using System.Windows.Controls;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 
 #endregion
 
@@ -71,24 +72,40 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public bool OpenShutter(CustomConfig config)
         {
-            if (config.AttachedObject != null)
-                CloseShutter(config);
-            SerialPort serialPort = new SerialPort(config.Get("Port"));
-            serialPort.Open();
-            serialPort.RtsEnable = true;
-            config.AttachedObject = serialPort;
+            try
+            {
+                if (config.AttachedObject != null)
+                    CloseShutter(config);
+                SerialPort serialPort = new SerialPort(config.Get("Port"));
+                serialPort.Open();
+                serialPort.RtsEnable = true;
+                config.AttachedObject = serialPort;
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Comm OpenShutter", ex);
+                StaticHelper.Instance.SystemMessage = "Error Shutter " + ex.Message;
+            }
             return true;
         }
 
         public bool CloseShutter(CustomConfig config)
         {
-            if (config.AttachedObject == null)
-                return false;
-            SerialPort serialPort = config.AttachedObject as SerialPort;
-            if (serialPort == null) throw new ArgumentNullException("serialPort");
-            serialPort.RtsEnable = false;
-            serialPort.Close();
-            config.AttachedObject = null;
+            try
+            {
+                if (config.AttachedObject == null)
+                    return false;
+                SerialPort serialPort = config.AttachedObject as SerialPort;
+                if (serialPort == null) throw new ArgumentNullException("serialPort");
+                serialPort.RtsEnable = false;
+                serialPort.Close();
+                config.AttachedObject = null;
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Comm CloseShutter", ex);
+                StaticHelper.Instance.SystemMessage = "Error Shutter " + ex.Message;
+            }
             return true;
         }
 
