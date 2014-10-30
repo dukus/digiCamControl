@@ -373,7 +373,12 @@ namespace CameraControl.Devices.Canon
                 Capabilities.Add(CapabilityEnum.SimpleManualFocus);
                 IsConnected = true;
                 LoadProperties();
-                OnCameraInitDone();
+                Thread thread = new Thread(() =>
+                {
+                    Thread.Sleep(200);
+                    OnCameraInitDone();
+                });
+                thread.Start();
                 return true;
             }
             catch (Exception exception)

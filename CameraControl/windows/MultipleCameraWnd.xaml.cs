@@ -38,6 +38,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -281,6 +282,11 @@ namespace CameraControl.windows
         {
             MultipleLiveView view=new MultipleLiveView();
             view.Show();
+        }
+
+        private void chk_noautofocus_Checked(object sender, RoutedEventArgs e)
+        {
+            this.ShowMessageAsync("Warning", "This feature not working reliable ");
         }
     }
 }
