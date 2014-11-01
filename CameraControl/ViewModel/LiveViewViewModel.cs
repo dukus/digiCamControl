@@ -397,7 +397,12 @@ namespace CameraControl.ViewModel
         public bool DetectMotionArea
         {
             get { return CameraProperty.LiveviewSettings.DetectMotionArea; }
-            set { CameraProperty.LiveviewSettings.DetectMotionArea = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.DetectMotionArea = value;
+                if(_detector!=null)
+                    _detector.Reset();
+            }
         }
 
         #endregion
@@ -1689,11 +1694,16 @@ namespace CameraControl.ViewModel
                     int x2 = bmp.Width * HorizontalMax / 100;
                     int y2 = bmp.Height * (100 - VerticalMin) / 100;
                     int y1 = bmp.Height * (100 - VerticalMax) / 100;
-                    var cropbmp = bmp.Clone(new Rectangle(x1, y1, (x2 - x1), (y2 - y1)), bmp.PixelFormat);
-                    movement = _detector.ProcessFrame(cropbmp);
-                    using (var currentTileGraphics = Graphics.FromImage(bmp))
+                    using (
+                        var cropbmp = new Bitmap(bmp.Clone(new Rectangle(x1, y1, (x2 - x1), (y2 - y1)), bmp.PixelFormat))
+                        )
                     {
-                        currentTileGraphics.DrawImage(cropbmp, x1, y1);
+                        movement = _detector.ProcessFrame(cropbmp);
+
+                        using (var currentTileGraphics = Graphics.FromImage(bmp))
+                        {
+                            currentTileGraphics.DrawImage(cropbmp, x1, y1);
+                        }
                     }
                 }
                 else
