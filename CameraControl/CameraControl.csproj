@@ -131,6 +131,9 @@
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\refs\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
+    <Reference Include="GongSolutions.Wpf.DragDrop">
+      <HintPath>..\packages\gong-wpf-dragdrop.0.1.4.3\lib\net40\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
     <Reference Include="Griffin.Networking">
       <HintPath>..\packages\Griffin.Networking.0.5.7\lib\net40\Griffin.Networking.dll</HintPath>
     </Reference>

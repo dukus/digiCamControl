@@ -10,6 +10,7 @@
                        xmlns:Panels="clr-namespace:CameraControl.Panels"
                        xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                        xmlns:tb="http://www.hardcodet.net/taskbar"
+                       xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                        Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged">
     <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
@@ -352,7 +353,7 @@
                             </Expander>
                             <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="False" Margin="0"  Padding="0">
                                 <StackPanel Orientation="Vertical">
-                                    <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200">
+                                    <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid IsEnabled="{Binding IsRedy}" Margin="2">
