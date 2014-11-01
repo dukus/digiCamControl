@@ -402,6 +402,8 @@ namespace CameraControl.ViewModel
                 CameraProperty.LiveviewSettings.DetectMotionArea = value;
                 if(_detector!=null)
                     _detector.Reset();
+                if (value)
+                    ShowRuler = true;
             }
         }
 
@@ -1698,6 +1700,7 @@ namespace CameraControl.ViewModel
                         var cropbmp = new Bitmap(bmp.Clone(new Rectangle(x1, y1, (x2 - x1), (y2 - y1)), bmp.PixelFormat))
                         )
                     {
+                        cropbmp.SetResolution(bmp.HorizontalResolution, bmp.VerticalResolution);
                         movement = _detector.ProcessFrame(cropbmp);
 
                         using (var currentTileGraphics = Graphics.FromImage(bmp))

@@ -30,6 +30,7 @@
 
 using System;
 using System.IO;
+using System.Timers;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -39,6 +40,10 @@ namespace CameraControl.Devices
     public class StaticHelper : BaseFieldClass
     {
         private static StaticHelper _instance;
+
+        private Timer _timer = new Timer(60*1000);
+
+        public AsyncObservableCollection<string> Messages { get; set; }
 
         public static StaticHelper Instance
         {
@@ -53,7 +58,15 @@ namespace CameraControl.Devices
 
         public StaticHelper()
         {
-            SystemMessage = "System message";
+            SystemMessage = "";
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
+            Messages = new AsyncObservableCollection<string>();
+        }
+
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            SystemMessage = "";
         }
 
         private string _systemMessage;
@@ -65,6 +78,10 @@ namespace CameraControl.Devices
             {
                 _systemMessage = value;
                 NotifyPropertyChanged("SystemMessage");
+                if (!string.IsNullOrWhiteSpace(_systemMessage))
+                    Messages.Add(DateTime.Now.ToShortTimeString() + " - " + _systemMessage);
+                _timer.Stop();
+                _timer.Start();
             }
         }
 

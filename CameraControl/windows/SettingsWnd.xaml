@@ -9,7 +9,8 @@
                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                        mc:Ignorable="d"
-                       d:DataContext="{d:DesignInstance Type=Classes:Settings, IsDesignTimeCreatable=True}" xmlns:my1="clr-namespace:CameraControl.windows">
+                       d:DataContext="{d:DesignInstance Type=Classes:Settings, IsDesignTimeCreatable=True}" xmlns:my1="clr-namespace:CameraControl.windows"
+                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -371,6 +372,11 @@
                     <CheckBox Grid.Row="5" IsChecked="{Binding SyncCameraDateTime}" Margin="3" Grid.Column="1"/>
                     
                     <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="6" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelMessagesLog}">
+                <Grid Margin="5">
+                    <ListBox ItemsSource="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=Messages}" />
                 </Grid>
             </TabItem>
         </Controls:MetroAnimatedSingleRowTabControl>
