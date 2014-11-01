@@ -129,8 +129,10 @@ namespace CameraControl.Controls
                 return;
             CameraProperty property =
                 ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
-            if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem1)
+            if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem1 &&
+                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam != true)
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
+
             if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem2)
             {
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;

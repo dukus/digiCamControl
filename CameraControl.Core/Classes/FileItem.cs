@@ -84,7 +84,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlAttribute]
-        public string CameraSerial{ get; set; }
+        public string CameraSerial { get; set; }
 
         [XmlAttribute]
         public string OriginalName { get; set; }
@@ -103,7 +103,7 @@ namespace CameraControl.Core.Classes
 
         [XmlAttribute]
         public DateTime FileDate { get; set; }
-        
+
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -156,7 +156,7 @@ namespace CameraControl.Core.Classes
 
         public bool HaveGeneratedThumbnail
         {
-            get { return File.Exists(SmallThumb) && File.Exists(LargeThumb); } 
+            get { return File.Exists(SmallThumb) && File.Exists(LargeThumb); }
         }
 
 
@@ -235,23 +235,7 @@ namespace CameraControl.Core.Classes
             IsChecked = true;
             IsLiked = false;
             IsUnLiked = false;
-            if (deviceObject.ThumbData != null && deviceObject.ThumbData.Length > 4)
-            {
-                try
-                {
-                    var stream = new MemoryStream(deviceObject.ThumbData, 0, deviceObject.ThumbData.Length);
-
-                    using (var bmp = new Bitmap(stream))
-                    {
-                        Thumbnail = BitmapSourceConvert.ToBitmapSource(bmp);
-                    }
-                    stream.Close();
-                }
-                catch (Exception exception)
-                {
-                    Log.Debug("Error loading device thumb ", exception);
-                }
-            }
+            ThumbData = deviceObject.ThumbData;
         }
 
 
@@ -350,11 +334,42 @@ namespace CameraControl.Core.Classes
             {
                 if (_thumbnail == null)
                 {
-                    _thumbnail = ItemType == FileItemType.Missing
-                                     ? BitmapLoader.Instance.NoImageThumbnail
-                                     : BitmapLoader.Instance.DefaultThumbnail;
-                    if (!ServiceProvider.Settings.DontLoadThumbnails)
-                        ServiceProvider.QueueManager.Add(new QueueItemFileItem {FileItem = this});
+                    if (ItemType == FileItemType.CameraObject)
+                    {
+                        if (ThumbData != null && ThumbData.Length > 4)
+                        {
+                            try
+                            {
+                                using (var stream = new MemoryStream(ThumbData, 0, ThumbData.Length))
+                                {
+                                    var image = new BitmapImage();
+                                    image.BeginInit();
+                                    // for better memory usage 
+                                    image.DecodePixelWidth = 90;
+                                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                                    image.CacheOption = BitmapCacheOption.OnLoad;
+                                    image.UriSource = null;
+                                    image.StreamSource = stream;
+                                    image.EndInit();
+                                    image.Freeze();
+                                    Thumbnail = image;
+                                }
+                            }
+                            catch (Exception exception)
+                            {
+                                Log.Debug("Error loading device thumb ", exception);
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        _thumbnail = ItemType == FileItemType.Missing
+                            ? BitmapLoader.Instance.NoImageThumbnail
+                            : BitmapLoader.Instance.DefaultThumbnail;
+                        if (!ServiceProvider.Settings.DontLoadThumbnails)
+                            ServiceProvider.QueueManager.Add(new QueueItemFileItem { FileItem = this });
+                    }
                 }
                 return _thumbnail;
             }
@@ -364,6 +379,8 @@ namespace CameraControl.Core.Classes
                 NotifyPropertyChanged("Thumbnail");
             }
         }
+
+        public byte[] ThumbData { get; set; }
 
         public void GetExtendedThumb()
         {
@@ -393,12 +410,12 @@ namespace CameraControl.Core.Classes
                 {
                     Image.GetThumbnailImageAbort myCallback = ThumbnailCallback;
                     Stream fs = new FileStream(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                        // or any stream
+                    // or any stream
                     Image tempImage = Image.FromStream(fs, true, false);
 
                     Thumbnail =
                         BitmapSourceConvert.ToBitmapSource(
-                            (Bitmap) tempImage.GetThumbnailImage(160, 120, myCallback, IntPtr.Zero));
+                            (Bitmap)tempImage.GetThumbnailImage(160, 120, myCallback, IntPtr.Zero));
                     tempImage.Dispose();
                     fs.Close();
                 }
@@ -423,7 +440,7 @@ namespace CameraControl.Core.Classes
                 if (!Directory.Exists(Path.GetDirectoryName(InfoFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(InfoFile));
                 FileInfo.ValidateValues();
-                XmlSerializer serializer = new XmlSerializer(typeof (FileInfo));
+                XmlSerializer serializer = new XmlSerializer(typeof(FileInfo));
                 // Create a FileStream to write with.
                 System.Text.Encoding code = Encoding.GetEncoding("UTF-8");
                 StreamWriter writer = new StreamWriter(InfoFile, false, code);
@@ -444,9 +461,9 @@ namespace CameraControl.Core.Classes
                 if (File.Exists(InfoFile))
                 {
                     XmlSerializer mySerializer =
-                        new XmlSerializer(typeof (FileInfo));
+                        new XmlSerializer(typeof(FileInfo));
                     FileStream myFileStream = new FileStream(InfoFile, FileMode.Open);
-                    FileInfo = (FileInfo) mySerializer.Deserialize(myFileStream);
+                    FileInfo = (FileInfo)mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }
             }

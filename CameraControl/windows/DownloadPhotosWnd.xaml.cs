@@ -391,6 +391,7 @@ namespace CameraControl.windows
                         try
                         {
                             connectedDevice.FormatStorage(null);
+                            Thread.Sleep(200);
                         }
                         catch (Exception exception)
                         {

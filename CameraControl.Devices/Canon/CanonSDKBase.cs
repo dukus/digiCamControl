@@ -318,24 +318,27 @@ namespace CameraControl.Devices.Canon
             get { return base.CaptureInSdRam; }
             set
             {
-                base.CaptureInSdRam = value;
-                try
+                lock (Locker)
                 {
-                    if (IsConnected && Camera != null)
+                    base.CaptureInSdRam = value;
+                    try
                     {
-                        if (!base.CaptureInSdRam)
+                        if (IsConnected && Camera != null)
                         {
-                            Camera.SavePicturesToCamera();
-                        }
-                        else
-                        {
-                            Camera.SavePicturesToHost(Path.GetTempPath());
+                            if (!base.CaptureInSdRam)
+                            {
+                                Camera.SavePicturesToCamera();
+                            }
+                            else
+                            {
+                                Camera.SavePicturesToHost(Path.GetTempPath());
+                            }
                         }
                     }
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Error set CaptureInSdram", exception);
+                    catch (Exception exception)
+                    {
+                        Log.Error("Error set CaptureInSdram", exception);
+                    }
                 }
             }
         }
@@ -1418,21 +1421,26 @@ namespace CameraControl.Devices.Canon
 
         public override void FormatStorage(object storageId)
         {
-            int count = 0;
-            Edsdk.EdsGetChildCount(Camera.Handle, out count);
-            for (int i = 0; i < count; i++)
+            lock (Locker)
             {
-                IntPtr volumePtr;
-                Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr);
-                Edsdk.EdsVolumeInfo vinfo;
-                Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo);
-                //ignore the HDD
-                if (vinfo.szVolumeLabel != "HDD")
+                int count = 0;
+                Edsdk.EdsGetChildCount(Camera.Handle, out count);
+                for (int i = 0; i < count; i++)
                 {
-                    Edsdk.EdsFormatVolume(volumePtr);
+                    IntPtr volumePtr;
+                    Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr);
+                    Edsdk.EdsVolumeInfo vinfo;
+                    Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo);
+                    //ignore the HDD
+                    if (vinfo.szVolumeLabel != "HDD")
+                    {
+                        Edsdk.EdsFormatVolume(volumePtr);
+                    }
+                    Edsdk.EdsRelease(volumePtr);
                 }
-                Edsdk.EdsRelease(volumePtr);
             }
         }
+
+
     }
 }
