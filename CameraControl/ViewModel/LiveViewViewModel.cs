@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using AForge;
@@ -18,7 +17,6 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
-using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Others;
 using CameraControl.windows;
@@ -394,6 +392,12 @@ namespace CameraControl.ViewModel
         {
             get { return CameraProperty.LiveviewSettings.DetectMotion; }
             set { CameraProperty.LiveviewSettings.DetectMotion = value; }
+        }
+
+        public bool DetectMotionArea
+        {
+            get { return CameraProperty.LiveviewSettings.DetectMotionArea; }
+            set { CameraProperty.LiveviewSettings.DetectMotionArea = value; }
         }
 
         #endregion
@@ -895,6 +899,7 @@ namespace CameraControl.ViewModel
                         ServiceProvider.Settings.MotionBlockSize,
                         ServiceProvider.Settings.MotionBlockSize, true));
             }
+            
             TriggerOnMotion = false;
             Init();
         }
@@ -1677,7 +1682,25 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                float movement = _detector.ProcessFrame(bmp);
+                float movement = 0;
+                if (DetectMotionArea)
+                {
+                    int x1 = bmp.Width * HorizontalMin / 100;
+                    int x2 = bmp.Width * HorizontalMax / 100;
+                    int y2 = bmp.Height * (100 - VerticalMin) / 100;
+                    int y1 = bmp.Height * (100 - VerticalMax) / 100;
+                    var cropbmp = bmp.Clone(new Rectangle(x1, y1, (x2 - x1), (y2 - y1)), bmp.PixelFormat);
+                    movement = _detector.ProcessFrame(cropbmp);
+                    using (var currentTileGraphics = Graphics.FromImage(bmp))
+                    {
+                        currentTileGraphics.DrawImage(cropbmp, x1, y1);
+                    }
+                }
+                else
+                {
+                    movement = _detector.ProcessFrame(bmp);    
+                }
+               
                 CurrentMotionIndex = Math.Round(movement*100, 2);
                 if (movement > ((float) MotionThreshold/100) && TriggerOnMotion &&
                     (DateTime.Now - _photoCapturedTime).TotalSeconds > WaitForMotionSec)

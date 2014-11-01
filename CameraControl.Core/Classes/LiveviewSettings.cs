@@ -193,6 +193,7 @@ namespace CameraControl.Core.Classes
         public int WaitForMotionSec { get; set; }
         public bool MotionAutofocusBeforCapture { get; set; }
         public bool DetectMotion { get; set; }
+        public bool DetectMotionArea { get; set; }
         public bool ShowFocusRect { get; set; }
         public int Brightness { get; set; }
 
