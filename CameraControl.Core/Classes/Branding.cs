@@ -54,10 +54,16 @@ namespace CameraControl.Core.Classes
 
         public bool OnlineReference { get; set; }
 
+        public bool ShowStartupScreen { get; set; }
+
+        public bool CheckForUpdate { get; set; }
+
         public Branding()
         {
             ShowAboutWindow = true;
             OnlineReference = true;
+            ShowStartupScreen = true;
+            CheckForUpdate = true;
         }
     }
 }

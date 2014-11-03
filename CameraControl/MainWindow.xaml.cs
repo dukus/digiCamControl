@@ -230,6 +230,9 @@ namespace CameraControl
         {
             if ((DateTime.Now - ServiceProvider.Settings.LastUpdateCheckDate).TotalDays > 7)
             {
+                if (!ServiceProvider.Branding.CheckForUpdate)
+                    return;
+
                 Thread.Sleep(2000);
                 ServiceProvider.Settings.LastUpdateCheckDate = DateTime.Now;
                 ServiceProvider.Settings.Save();
@@ -237,6 +240,9 @@ namespace CameraControl
             }
             else
             {
+                if (!ServiceProvider.Branding.ShowStartupScreen)
+                    return;
+
                 // show welcome screen only if not start minimized
                 if (!ServiceProvider.Settings.StartMinimized)
                 {

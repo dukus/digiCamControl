@@ -89,7 +89,12 @@ namespace CameraControl
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ServiceProvider.Settings = new Settings();
+            ServiceProvider.Branding = ServiceProvider.Settings.LoadBranding();
+            if (!ServiceProvider.Branding.ShowStartupScreen)
+                this.Hide();
             _timer.Start();
+
             //InitApplication();
             //Thread thread = new Thread(InitApplication);
             //thread.SetApartmentState(ApartmentState.STA);
