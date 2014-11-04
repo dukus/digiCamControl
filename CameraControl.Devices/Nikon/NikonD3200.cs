@@ -28,6 +28,8 @@
 
 #region
 
+using System.Runtime.InteropServices;
+using System.Threading;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -48,6 +50,33 @@ namespace CameraControl.Devices.Nikon
             return res;
         }
 
+
+        public override void CapturePhoto()
+        {
+            Monitor.Enter(Locker);
+            try
+            {
+                IsBusy = true;
+                DeviceReady();
+                ErrorCodes.GetException(CaptureInSdRam
+                                            ? ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF)
+                                            : ExecuteWithNoData(CONST_CMD_InitiateCapture));
+            }
+            catch (COMException comException)
+            {
+                IsBusy = false;
+                ErrorCodes.GetException(comException);
+            }
+            catch
+            {
+                IsBusy = false;
+                throw;
+            }
+            finally
+            {
+                Monitor.Exit(Locker);
+            }
+        }
 
         protected override void GetAditionalLIveViewData(LiveViewData viewData, byte[] result)
         {
