@@ -532,5 +532,6 @@ namespace CameraControl.Core.Translation
         public static string LabelErrorSetFolder = "Error set folder";
         public static string LabelDetectArea = "Detect only in ruler area";
         public static string LabelMessagesLog = "Messages log";
+        public static string LabelRefreshCameraList = "Refresh camera list";
     }
 }

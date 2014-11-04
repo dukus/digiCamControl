@@ -90,6 +90,14 @@
                 </Button>
                 <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-55,5,5,5" Height="50" Width="50" />
 
+                <Button ToolTip="{T:TranslateExtension LabelRefreshCameraList}" Height="50" Name="but_refresh" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_refresh_Click">
+                    <Rectangle Width="30" Height="30">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_refresh}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+
                 <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="50" Name="but_download" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>

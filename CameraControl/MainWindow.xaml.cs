@@ -946,6 +946,19 @@ namespace CameraControl
             this.WindowState = WindowState.Normal;
         }
 
+        private void but_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ServiceProvider.DeviceManager.ConnectToCamera();
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error to connect", exception);
+                this.ShowMessageAsync("Error", "Unable to connect " + exception.Message);
+            }
+        }
+
 
     }
 }

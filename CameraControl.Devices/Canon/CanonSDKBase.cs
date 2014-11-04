@@ -318,29 +318,27 @@ namespace CameraControl.Devices.Canon
             get { return base.CaptureInSdRam; }
             set
             {
-                lock (Locker)
+                base.CaptureInSdRam = value;
+                try
                 {
-                    base.CaptureInSdRam = value;
-                    try
+                    if (IsConnected && Camera != null)
                     {
-                        if (IsConnected && Camera != null)
+                        if (!base.CaptureInSdRam)
                         {
-                            if (!base.CaptureInSdRam)
-                            {
-                                Camera.SavePicturesToCamera();
-                            }
-                            else
-                            {
-                                Camera.SavePicturesToHost(Path.GetTempPath());
-                            }
+                            Camera.SavePicturesToCamera();
+                        }
+                        else
+                        {
+                            Camera.SavePicturesToHost(Path.GetTempPath());
                         }
                     }
-                    catch (Exception exception)
-                    {
-                        Log.Error("Error set CaptureInSdram", exception);
-                    }
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Error set CaptureInSdram", exception);
                 }
             }
+
         }
 
         private DateTime _dateTime;
