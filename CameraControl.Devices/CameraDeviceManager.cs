@@ -228,20 +228,8 @@ namespace CameraControl.Devices
             {
                 foreach (EosCamera eosCamera in GetEosCameras())
                 {
-                    bool shouldbeadded = true;
-                    foreach (ICameraDevice device in ConnectedDevices)
-                    {
-                        CanonSDKBase camera = device as CanonSDKBase;
-                        if (camera != null)
-                        {
-                            //if (camera.Camera.SerialNumber == eosCamera.SerialNumber)
-                            if (camera.Camera == eosCamera)
-                            {
-                                shouldbeadded = false;
-                                break;
-                            }
-                        }
-                    }
+                    bool shouldbeadded =
+                        ConnectedDevices.OfType<CanonSDKBase>().All(camera => camera.PortName != eosCamera.PortName);
 
                     if (shouldbeadded)
                     {

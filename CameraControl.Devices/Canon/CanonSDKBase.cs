@@ -361,8 +361,10 @@ namespace CameraControl.Devices.Canon
                 Camera = camera;
                 Camera.IsErrorTolerantMode = true;
                 DeviceName = Camera.DeviceDescription;
+                PortName = camera.PortName;
                 Manufacturer = "Canon Inc.";
                 Camera.SetEventHandlers();
+                Camera.EnsureOpenSession();
                 Camera.Error += _camera_Error;
                 Camera.Shutdown += _camera_Shutdown;
                 Camera.LiveViewPaused += Camera_LiveViewPaused;

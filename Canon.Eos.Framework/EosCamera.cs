@@ -39,7 +39,7 @@ namespace Canon.Eos.Framework
             Util.Assert(Edsdk.EdsGetDeviceInfo(this.Handle, out _deviceInfo), 
                 "Failed to get device info.");                  
             //this.SetEventHandlers();
-            this.EnsureOpenSession();
+            //this.EnsureOpenSession();
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Canon.Eos.Framework
             base.DisposeUnmanaged();
         }
 
-        private void EnsureOpenSession()
+        public void EnsureOpenSession()
         {
             this.CheckDisposed();
             if (!this.IsSessionOpen)

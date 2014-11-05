@@ -68,6 +68,13 @@ namespace CameraControl.Devices
         PropertyValue<int> ExposureMeteringMode { get; set; }
         PropertyValue<long> FocusMode { get; set; }
         DateTime DateTime { get; set; }
+        /// <summary>
+        /// Gets or sets a unique indentifier for device based on connection mode.
+        /// </summary>
+        /// <value>
+        /// The name of the port.
+        /// </value>
+        string PortName { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the camera is connected.

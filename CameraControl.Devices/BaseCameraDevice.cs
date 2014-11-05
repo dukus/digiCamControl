@@ -211,6 +211,8 @@ namespace CameraControl.Devices
             }
         }
 
+        public string PortName { get; set; }
+
         private string _deviceName;
 
         private bool _isChecked;
