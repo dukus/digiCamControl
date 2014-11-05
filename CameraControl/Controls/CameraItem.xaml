@@ -9,7 +9,7 @@
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
   </UserControl.Resources>
   <Grid>
-        <Border BorderThickness="1" CornerRadius="10" BorderBrush="Black" Margin="3" Width="185" Padding="5">
+        <Border BorderThickness="1" BorderBrush="Black" Margin="3" Width="185" Padding="5">
             <StackPanel Orientation="Vertical">
                 <Line />
                 <StackPanel Orientation="Horizontal">

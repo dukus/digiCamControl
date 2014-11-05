@@ -28,6 +28,7 @@
 
 #region
 
+using System.Net.NetworkInformation;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 
@@ -188,6 +189,7 @@ namespace CameraControl.Core.Classes
         }
 
         private LiveviewSettings _liveviewSettings;
+        private int _sortOrder;
 
         public LiveviewSettings LiveviewSettings
         {
@@ -196,6 +198,16 @@ namespace CameraControl.Core.Classes
             {
                 _liveviewSettings = value;
                 NotifyPropertyChanged("LiveviewSettings");
+            }
+        }
+
+        public int SortOrder
+        {
+            get { return _sortOrder; }
+            set
+            {
+                _sortOrder = value;
+                NotifyPropertyChanged("SortOrder");
             }
         }
 

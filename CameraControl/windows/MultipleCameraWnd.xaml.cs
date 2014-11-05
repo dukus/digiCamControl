@@ -288,5 +288,14 @@ namespace CameraControl.windows
         {
             this.ShowMessageAsync("Warning", "This feature not working reliable ");
         }
+
+        private void btn_saveOrder_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < ServiceProvider.DeviceManager.ConnectedDevices.Count; i++)
+            {
+                ServiceProvider.DeviceManager.ConnectedDevices[i].LoadProperties().SortOrder = i;
+            }
+            ServiceProvider.Settings.Save();
+        }
     }
 }

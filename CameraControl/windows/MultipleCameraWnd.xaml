@@ -6,6 +6,7 @@
                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                       xmlns:local="clr-namespace:CameraControl.Controls"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                       WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" Topmost="True" >
     <Window.Resources>
         <ResourceDictionary>
@@ -56,6 +57,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="32*" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
@@ -74,12 +76,14 @@
                 <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Value="{Binding Path=WaitSec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Margin="1" Maximum="3600" Minimum="1"/>
                 
                 <Button Content="{T:Translate LabelSettingsLiveView}" Grid.Row="8" Name="btn_liveview" Margin="2" Click="btn_liveview_Click" Grid.ColumnSpan="2" />
-                <TextBox Grid.Row="10" Name="txt_counter" Margin="2" Grid.ColumnSpan="2" />
-                <Button Content="{T:Translate LabelSetCounters}" Grid.Row="9" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" Grid.ColumnSpan="2" />
+                <Button Content="{T:Translate LabelSaveOrder}" Grid.Row="9" Name="btn_saveOrder" Margin="2" Click="btn_saveOrder_Click" Grid.ColumnSpan="2" />
+                
+                <Button Content="{T:Translate LabelSetCounters}" Grid.Row="10" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="11" Name="txt_counter" Margin="2" Grid.ColumnSpan="2" />
             </Grid>
         </Expander>
         <Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />
-        <ListBox Grid.Column="1" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0" Grid.RowSpan="2">
+        <ListBox Grid.Column="1" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0" Grid.RowSpan="2" dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />

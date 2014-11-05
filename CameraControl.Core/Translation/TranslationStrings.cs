@@ -533,5 +533,7 @@ namespace CameraControl.Core.Translation
         public static string LabelDetectArea = "Detect only in ruler area";
         public static string LabelMessagesLog = "Messages log";
         public static string LabelRefreshCameraList = "Refresh camera list";
+        public static string LabelSortOrder = "Sort order";
+        public static string LabelSaveOrder = "Save sort order";
     }
 }

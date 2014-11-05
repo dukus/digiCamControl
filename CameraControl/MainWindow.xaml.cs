@@ -76,6 +76,8 @@ namespace CameraControl
         private Timer _selectiontimer = new Timer(4000);
         private DateTime _lastLoadTime = DateTime.Now;
 
+        private bool _sortCameraOreder = true;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
@@ -224,6 +226,7 @@ namespace CameraControl
         {
             MyNotifyIcon.HideBalloonTip();
             MyNotifyIcon.ShowBalloonTip("Camera connected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
+            SortCameras();
         }
 
         private void CheckForUpdate()
@@ -801,8 +804,15 @@ namespace CameraControl
             SortCameras(false);
         }
 
+        private void SortCameras()
+        {
+            SortCameras(_sortCameraOreder);
+        }
+
         private void SortCameras(bool asc)
         {
+            _sortCameraOreder = asc;
+
             // making sure the camera names are refreshed from properties
             foreach (var device in ServiceProvider.DeviceManager.ConnectedDevices)
             {
@@ -812,13 +822,13 @@ namespace CameraControl
             {
                 ServiceProvider.DeviceManager.ConnectedDevices =
                     new AsyncObservableCollection<ICameraDevice>(
-                        ServiceProvider.DeviceManager.ConnectedDevices.OrderBy(x => x.DisplayName));
+                        ServiceProvider.DeviceManager.ConnectedDevices.OrderBy(x => x.LoadProperties().SortOrder).ThenBy(x=>x.DisplayName));
             }
             else
             {
                 ServiceProvider.DeviceManager.ConnectedDevices =
                     new AsyncObservableCollection<ICameraDevice>(
-                        ServiceProvider.DeviceManager.ConnectedDevices.OrderByDescending(x => x.DisplayName));
+                        ServiceProvider.DeviceManager.ConnectedDevices.OrderByDescending(x => x.LoadProperties().SortOrder).ThenByDescending(x => x.DisplayName));
             }
         }
 

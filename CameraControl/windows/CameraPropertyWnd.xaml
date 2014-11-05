@@ -1,7 +1,7 @@
 ﻿<ontrols:MetroWindow x:Class="CameraControl.windows.CameraPropertyWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Camera Property" Height="325" Width="388" Closing="Window_Closing" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:CameraControl.windows"
+        Title="Camera Property" Height="355" Width="388" Closing="Window_Closing" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:CameraControl.windows"
                      xmlns:ontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
@@ -39,6 +39,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="83.74*" />
         </Grid.RowDefinitions>
         <Label Content="Camera name" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right"/>
@@ -65,8 +66,11 @@
         <Label Content="{T:TranslateExtension LabelUseConfiguration}" Grid.Column="1" Grid.Row="7" HorizontalContentAlignment="Right"/>
         <ComboBox Grid.Column="2" Grid.Row="7" Margin="3"  ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalShutters}" DisplayMemberPath="Name" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SelectedConfig}"/>
 
-        <Button Content="Save" Grid.Row="8" Name="btn_save" Click="btn_save_Click" Grid.Column="1" Margin="5"/>
-        <Button Content="Cancel" Grid.Row="8" Name="btn_cancel" Grid.Column="2" Click="btn_cancel_Click" Margin="5"/>
+        <Label Content="{T:TranslateExtension LabelSortOrder}" Grid.Row="8" Grid.Column="1" HorizontalContentAlignment="Right"/>
+        <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SortOrder}" Minimum="0" Grid.Row="8" Grid.Column="2" Margin="2"/>
+
+        <Button Content="Save" Grid.Row="9" Name="btn_save" Click="btn_save_Click" Grid.Column="1" Margin="5"/>
+        <Button Content="Cancel" Grid.Row="9" Name="btn_cancel" Grid.Column="2" Click="btn_cancel_Click" Margin="5"/>
 
     </Grid>
 </ontrols:MetroWindow>
