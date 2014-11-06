@@ -303,6 +303,10 @@ namespace CameraControl
             }
         }
 
+        /// <summary>
+        /// Photoes the captured.
+        /// </summary>
+        /// <param name="o">The o.</param>
         private void PhotoCaptured(object o)
         {
             PhotoCapturedEventArgs eventArgs = o as PhotoCapturedEventArgs;
@@ -401,9 +405,13 @@ namespace CameraControl
                         Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag4.Value);
                 }
 
-                _selectedItem = session.AddFile(fileName);
-                _selectedItem.BackupFileName = backupfile;
-                _selectedItem.Series = session.Series;
+                // prevent crash og GUI when item count updated
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    _selectedItem = session.AddFile(fileName);
+                    _selectedItem.BackupFileName = backupfile;
+                    _selectedItem.Series = session.Series;
+                }));
 
                 foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
                 {
