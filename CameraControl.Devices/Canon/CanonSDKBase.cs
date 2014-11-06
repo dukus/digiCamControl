@@ -1421,8 +1421,8 @@ namespace CameraControl.Devices.Canon
 
         public override void FormatStorage(object storageId)
         {
-            lock (Locker)
-            {
+            //lock (Locker)
+            //{
                 int count = 0;
                 Edsdk.EdsGetChildCount(Camera.Handle, out count);
                 for (int i = 0; i < count; i++)
@@ -1438,7 +1438,7 @@ namespace CameraControl.Devices.Canon
                     }
                     Edsdk.EdsRelease(volumePtr);
                 }
-            }
+            //}
         }
 
 

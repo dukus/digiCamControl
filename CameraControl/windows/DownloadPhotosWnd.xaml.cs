@@ -382,6 +382,8 @@ namespace CameraControl.windows
                 dlg.Progress = i;
             }
 
+            Log.Debug("File transfer done");
+
             if (format)
             {
                 if (!somethingwrong)
@@ -390,8 +392,10 @@ namespace CameraControl.windows
                     {
                         try
                         {
+                            Log.Debug("Start format");
                             connectedDevice.FormatStorage(null);
                             Thread.Sleep(200);
+                            Log.Debug("Format done");
                         }
                         catch (Exception exception)
                         {
