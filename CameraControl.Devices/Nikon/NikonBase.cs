@@ -1900,10 +1900,10 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId)
+        public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
         {
             DeviceReady();
-            return base.GetObjects(storageId);
+            return base.GetObjects(storageId, loadThumbs);
         }
     }
 }

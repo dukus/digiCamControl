@@ -330,7 +330,7 @@ namespace PhotoBooth
                 {
                     try
                     {
-                        AsyncObservableCollection<DeviceObject> devObjs = cameraDev.GetObjects(eventArgs.Handle);
+                        AsyncObservableCollection<DeviceObject> devObjs = cameraDev.GetObjects(eventArgs.Handle, true);
                         if (devObjs.Count == 1)
                         {
                             Debug.WriteLine("delete {0}", devObjs[0].FileName);

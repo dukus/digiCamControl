@@ -142,7 +142,7 @@ namespace CameraControl.Devices
             return res == 0 || res == ErrorCodes.MTP_OK;
         }
 
-        public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId)
+        public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
         {
             AsyncObservableCollection<DeviceObject> res = new AsyncObservableCollection<DeviceObject>();
             MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetObjectHandles, 0xFFFFFFFF);
@@ -182,8 +182,11 @@ namespace CameraControl.Devices
                         {
                         }
 
-                        MTPDataResponse thumbdata = ExecuteReadDataEx(CONST_CMD_GetThumb, handle);
-                        deviceObject.ThumbData = thumbdata.Data;
+                        if (loadThumbs)
+                        {
+                            MTPDataResponse thumbdata = ExecuteReadDataEx(CONST_CMD_GetThumb, handle);
+                            deviceObject.ThumbData = thumbdata.Data;
+                        }
                         res.Add(deviceObject);
                     }
                 }

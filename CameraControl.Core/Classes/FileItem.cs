@@ -360,6 +360,10 @@ namespace CameraControl.Core.Classes
                                 Log.Debug("Error loading device thumb ", exception);
                             }
                         }
+                        else
+                        {
+                            _thumbnail = BitmapLoader.Instance.DefaultThumbnail;
+                        }
 
                     }
                     else

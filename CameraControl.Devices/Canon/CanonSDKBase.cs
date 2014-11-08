@@ -1216,7 +1216,7 @@ namespace CameraControl.Devices.Canon
             return data.Any(i => i == (int) value);
         }
 
-        public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId)
+        public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
         {
             List<DeviceObject> list = new List<DeviceObject>();
             int count = 0;
@@ -1231,14 +1231,14 @@ namespace CameraControl.Devices.Canon
                 if (vinfo.szVolumeLabel != "HDD")
                 {
                     //get all child entries on this volume
-                    list.AddRange(GetChildren(volumePtr));
+                    list.AddRange(GetChildren(volumePtr, loadThumbs));
                 }
                 Edsdk.EdsRelease(volumePtr);
             }
             return new AsyncObservableCollection<DeviceObject>(list);
         }
 
-        private List<DeviceObject> GetChildren(IntPtr ptr)
+        private List<DeviceObject> GetChildren(IntPtr ptr, bool loadThumbs)
         {
             int ChildCount;
             //get children of first pointer
@@ -1263,16 +1263,16 @@ namespace CameraControl.Devices.Canon
                         Edsdk.EdsCreateMemoryStream(0, out stream);
                         Edsdk.EdsDownloadThumbnail(ChildPtr, stream);
                         list.Add(new DeviceObject()
-                                     {
-                                         FileName = ChildInfo.szFileName,
-                                         ThumbData = GetImage(stream, Edsdk.EdsImageSource.Thumbnail),
-                                         Handle = ChildInfo.szFileName
-                                     });
+                        {
+                            FileName = ChildInfo.szFileName,
+                            ThumbData = loadThumbs ? GetImage(stream, Edsdk.EdsImageSource.Thumbnail) : null,
+                            Handle = ChildInfo.szFileName
+                        });
                     }
                     else
                     {
                         //if it's a folder, check for children with recursion
-                        list.AddRange(GetChildren(ChildPtr));
+                        list.AddRange(GetChildren(ChildPtr, loadThumbs));
                     }
                     //release current children
                     Edsdk.EdsRelease(ChildPtr);

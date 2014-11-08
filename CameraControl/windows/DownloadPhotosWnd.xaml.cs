@@ -230,7 +230,7 @@ namespace CameraControl.windows
                 dlg.Label = cameraDevice.DisplayName;
                 try
                 {
-                    var images = cameraDevice.GetObjects(null);
+                    var images = cameraDevice.GetObjects(null, ServiceProvider.Settings.LoadThumbsDownload);
                     if (images.Count > 0)
                     {
                         foreach (DeviceObject deviceObject in images)

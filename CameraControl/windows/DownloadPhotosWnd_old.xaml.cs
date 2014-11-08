@@ -163,7 +163,7 @@ namespace CameraControl.windows
             Items.Clear();
             try
             {
-                var images = CameraDevice.GetObjects(null);
+                var images = CameraDevice.GetObjects(null, true);
                 foreach (DeviceObject deviceObject in images)
                 {
                     Items.Add(new FileItem(deviceObject, CameraDevice));

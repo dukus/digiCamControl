@@ -170,8 +170,9 @@ namespace CameraControl.Devices
         /// Gets files stored in card.
         /// </summary>
         /// <param name="storageId">The storage id.</param>
+        /// <param name="loadThumbs">Load thumbnail atached to object</param>
         /// <returns></returns>
-        AsyncObservableCollection<DeviceObject> GetObjects(object storageId);
+        AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs);
 
         void FormatStorage(object storageId);
         bool DeleteObject(DeviceObject deviceObject);

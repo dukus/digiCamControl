@@ -355,6 +355,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Content="{T:TranslateExtension LabelUseParellelTransfer}"  Margin="3" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
@@ -370,8 +371,11 @@
 
                     <Label Content="{T:TranslateExtension LabelSyncCameraDate}"  Margin="3" Grid.Column="0" Grid.Row="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="5" IsChecked="{Binding SyncCameraDateTime}" Margin="3" Grid.Column="1"/>
+
+                    <Label Content="{T:TranslateExtension LabelLoadThumbDownload}"  Margin="3" Grid.Column="0" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox Grid.Row="6" IsChecked="{Binding LoadThumbsDownload}" Margin="3" Grid.Column="1"/>
                     
-                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="6" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
+                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="7" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelMessagesLog}">

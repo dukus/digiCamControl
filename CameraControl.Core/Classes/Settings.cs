@@ -663,6 +663,17 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool LoadThumbsDownload
+        {
+            get { return _loadThumbsDownload; }
+            set
+            {
+                _loadThumbsDownload = value;
+                NotifyPropertyChanged("LoadThumbsDownload");
+            }
+        }
+
+
         public CameraPropertyEnumerator CameraProperties { get; set; }
         public string SelectedLayout { get; set; }
 
@@ -671,6 +682,7 @@ namespace CameraControl.Core.Classes
         private bool _minimizeToTrayIcon;
         private bool _startMinimized;
         private bool _startupWithWindows;
+        private bool _loadThumbsDownload;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -796,6 +808,7 @@ namespace CameraControl.Core.Classes
             MinimizeToTrayIcon = true;
             StartMinimized = false;
             StartupWithWindows = false;
+            LoadThumbsDownload = true;
         }
 
 

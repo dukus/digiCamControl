@@ -474,7 +474,7 @@ namespace CameraControl.Devices
             }
         }
 
-        public virtual AsyncObservableCollection<DeviceObject> GetObjects(object storageId)
+        public virtual AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
         {
             throw new NotImplementedException();
         }
