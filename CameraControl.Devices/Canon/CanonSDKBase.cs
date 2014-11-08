@@ -1424,19 +1424,29 @@ namespace CameraControl.Devices.Canon
             //lock (Locker)
             //{
                 int count = 0;
-                Edsdk.EdsGetChildCount(Camera.Handle, out count);
+                Log.Debug("EdsGetChildCount");
+                if (Edsdk.EdsGetChildCount(Camera.Handle, out count) != Edsdk.EDS_ERR_OK)
+                    throw new DeviceException("Error EdsGetChildCount");
                 for (int i = 0; i < count; i++)
                 {
                     IntPtr volumePtr;
-                    Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr);
+                    Log.Debug("EdsGetChildAtIndex");
+                    if (Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr) != Edsdk.EDS_ERR_OK)
+                        throw new DeviceException("Error EdsGetChildAtIndex");
                     Edsdk.EdsVolumeInfo vinfo;
-                    Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo);
+                    Log.Debug("EdsGetVolumeInfo");
+                    if (Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo) != Edsdk.EDS_ERR_OK)
+                        throw new DeviceException("Error EdsGetVolumeInfo");
                     //ignore the HDD
                     if (vinfo.szVolumeLabel != "HDD")
                     {
-                        Edsdk.EdsFormatVolume(volumePtr);
+                        Log.Debug("EdsFormatVolume");
+                        if (Edsdk.EdsFormatVolume(volumePtr) != Edsdk.EDS_ERR_OK)
+                            throw new DeviceException("Error EdsFormatVolume");
                     }
-                    Edsdk.EdsRelease(volumePtr);
+                    Log.Debug("EdsRelease");
+                    if (Edsdk.EdsRelease(volumePtr) != Edsdk.EDS_ERR_OK)
+                        throw new DeviceException("Error EdsRelease");
                 }
             //}
         }

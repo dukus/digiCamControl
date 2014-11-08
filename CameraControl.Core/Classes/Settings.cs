@@ -1093,7 +1093,7 @@ namespace CameraControl.Core.Classes
                 serializer.Serialize(writer, this);
                 writer.Close();
                 // save preset in separated files
-                foreach (var cameraPreset in CameraPresets)
+                foreach (var cameraPreset in this.CameraPresets)
                 {
                     Save(cameraPreset);
                 }

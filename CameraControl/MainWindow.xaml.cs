@@ -214,6 +214,7 @@ namespace CameraControl
             thread.Start();
             if (ServiceProvider.Settings.StartMinimized)
                 this.WindowState = WindowState.Minimized;
+            SortCameras();
         }
 
         void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)

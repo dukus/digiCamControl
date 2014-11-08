@@ -386,13 +386,20 @@ namespace CameraControl.windows
 
             if (format)
             {
+                dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+                dlg.Progress = 0;
+                int ii = 0;
                 if (!somethingwrong)
                 {
                     foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
                     {
                         try
                         {
+                            dlg.Label = connectedDevice.DisplayName;
+                            ii++;
+                            dlg.Progress = ii;
                             Log.Debug("Start format");
+                            Log.Debug(connectedDevice.PortName);
                             connectedDevice.FormatStorage(null);
                             Thread.Sleep(200);
                             Log.Debug("Format done");
