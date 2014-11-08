@@ -57,6 +57,38 @@ namespace CameraControl.Core.Classes
         public bool ShowStartupScreen { get; set; }
 
         public bool CheckForUpdate { get; set; }
+        
+        public bool ShowRefreshButtonMainWindow { get; set; }
+
+        public bool ShowDownloadButtonMainWindow { get; set; }
+       
+        public bool ShowBracketingButtonMainWindow { get; set; }
+
+        public bool ShowTimelapseButtonMainWindow { get; set; }
+
+        public bool ShowFullScreenButtonMainWindow { get; set; }
+
+        public bool ShowLiveViewButtonMainWindow { get; set; }
+
+        public bool ShowBrowseButtonMainWindow { get; set; }
+
+        public bool ShowTagsButtonMainWindow { get; set; }
+
+        public bool ShowAstronomyButtonMainWindow { get; set; }
+
+        public bool ShowMulyiCameraButtonMainWindow { get; set; }
+        
+        public bool ShowWifiCameraButtonMainWindow { get; set; }
+
+        public bool ShowSettingMenuMainWindow { get; set; }
+
+        public bool ShowMenuMenuMainWindow { get; set; }
+
+        public bool ShowCameraSelectorMainWindow { get; set; }
+
+        public bool ShowRightPanelMainWindow { get; set; }
+
+        public bool ShowCameraPropertiesMainWindow { get; set; }
 
         public Branding()
         {
@@ -64,6 +96,22 @@ namespace CameraControl.Core.Classes
             OnlineReference = true;
             ShowStartupScreen = true;
             CheckForUpdate = true;
+            ShowRefreshButtonMainWindow = true;
+            ShowDownloadButtonMainWindow = true;
+            ShowBracketingButtonMainWindow = true;
+            ShowTimelapseButtonMainWindow = true;
+            ShowFullScreenButtonMainWindow = true;
+            ShowLiveViewButtonMainWindow = true;
+            ShowBrowseButtonMainWindow = true;
+            ShowTagsButtonMainWindow = true;
+            ShowAstronomyButtonMainWindow = true;
+            ShowMulyiCameraButtonMainWindow = true;
+            ShowWifiCameraButtonMainWindow = true;
+            ShowSettingMenuMainWindow = true;
+            ShowMenuMenuMainWindow = true;
+            ShowCameraSelectorMainWindow = true;
+            ShowRightPanelMainWindow = true;
+            ShowCameraPropertiesMainWindow = true;
         }
     }
 }

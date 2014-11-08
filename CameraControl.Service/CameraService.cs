@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
@@ -100,6 +101,8 @@ namespace CameraControl.Service
         {
             if (_isInitialized)
                 return;
+            Thread thread=new Thread(Application.Run);
+            thread.Start();
             ServiceProvider.Configure(Path.Combine(Settings.DataFolder, "Log", "service.log"));
             ServiceProvider.DeviceManager.StartInNewThread = true;
             Log.Debug("Command line utility started");

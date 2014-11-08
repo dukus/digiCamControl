@@ -8,6 +8,24 @@
   <DefaultMissingThumbImage />
   <!-- hide all link buttons to DCC home page --> 
   <OnlineReference>false</OnlineReference>
-   <!-- true and false are case sensitive  -->  
+   <!-- false and false are case sensitive  -->  
   <ShowStartupScreen>false</ShowStartupScreen>
+  <CheckForUpdate>false</CheckForUpdate>
+  
+  <ShowRefreshButtonMainWindow>false</ShowRefreshButtonMainWindow>
+  <ShowDownloadButtonMainWindow>false</ShowDownloadButtonMainWindow>
+  <ShowBracketingButtonMainWindow>false</ShowBracketingButtonMainWindow>
+  <ShowTimelapseButtonMainWindow>false</ShowTimelapseButtonMainWindow>
+  <ShowFullScreenButtonMainWindow>false</ShowFullScreenButtonMainWindow>
+  <ShowLiveViewButtonMainWindow>false</ShowLiveViewButtonMainWindow>
+  <ShowBrowseButtonMainWindow>false</ShowBrowseButtonMainWindow>
+  <ShowTagsButtonMainWindow>false</ShowTagsButtonMainWindow>
+  <ShowAstronomyButtonMainWindow>false</ShowAstronomyButtonMainWindow>
+  <ShowMulyiCameraButtonMainWindow>false</ShowMulyiCameraButtonMainWindow>
+  <ShowWifiCameraButtonMainWindow>false</ShowWifiCameraButtonMainWindow>
+  <ShowSettingMenuMainWindow>false</ShowSettingMenuMainWindow>
+  <ShowMenuMenuMainWindow>false</ShowMenuMenuMainWindow>
+  <ShowCameraSelectorMainWindow>false</ShowCameraSelectorMainWindow>
+  <ShowRightPanelMainWindow>false</ShowRightPanelMainWindow>
+  <ShowCameraPropertiesMainWindow>false</ShowCameraPropertiesMainWindow>
 </Branding>

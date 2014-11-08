@@ -27,8 +27,8 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Content="{T:TranslateExtension SettingsToolTip}" Name="btn_settings" Click="btn_settings_Click" />
-            <Button Content="{T:TranslateExtension LabelMenu}" Name="btn_menu" Click="btn_menu_Click" />
+            <Button Content="{T:TranslateExtension SettingsToolTip}" Name="btn_settings" Click="btn_settings_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSettingMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+            <Button Content="{T:TranslateExtension LabelMenu}" Name="btn_menu" Click="btn_menu_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMenuMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="{T:TranslateExtension MenuDonate}" Name="btn_donate" Click="btn_donate_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Controls:WindowCommands>
@@ -90,7 +90,8 @@
                 </Button>
                 <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-55,5,5,5" Height="50" Width="50" />
 
-                <Button ToolTip="{T:TranslateExtension LabelRefreshCameraList}" Height="50" Name="but_refresh" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_refresh_Click">
+                <Button ToolTip="{T:TranslateExtension LabelRefreshCameraList}" Height="50" Name="but_refresh" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_refresh_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRefreshButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="30" Height="30">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_refresh}" />
@@ -98,7 +99,8 @@
                     </Rectangle>
                 </Button>
 
-                <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="50" Name="but_download" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click">
+                <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="50" Name="but_download" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDownloadButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_download}" />
@@ -106,18 +108,21 @@
                     </Rectangle>
                 </Button>
 
-                <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="50"  Height="50" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Click="btn_br_Click" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"/>
+                <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="50"  Height="50" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Click="btn_br_Click" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBracketingButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
                 <!--<ToggleButton ToolTip="Image property" Height="50" Width="50" Name="button1"  Click="button1_Click" Margin="5">
                     <Image Margin="5" Source="/CameraControl;component/Images/Properties.png"/>
                 </ToggleButton>-->
-                <Button ToolTip="{T:TranslateExtension TimeLapseToolTip}" Height="50" Name="but_timelapse" Width="50" Margin="5" Click="but_timelapse_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                <Button ToolTip="{T:TranslateExtension TimeLapseToolTip}" Height="50" Name="but_timelapse" Width="50" Margin="5" Click="but_timelapse_Click" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowTimelapseButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_movie_clapper}" />
                         </Rectangle.Fill>
                     </Rectangle>
                 </Button>
-                <Button ToolTip="{T:TranslateExtension FullscreenToolTip}" Height="50" Name="but_fullscreen" Width="50" Margin="5" Click="but_fullscreen_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                <Button ToolTip="{T:TranslateExtension FullscreenToolTip}" Height="50" Name="but_fullscreen" Width="50" Margin="5" Click="but_fullscreen_Click" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFullScreenButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new_window}" />
@@ -125,24 +130,30 @@
                     </Rectangle>
                     <!--<Image Margin="5" Source="/CameraControl;component/Images/Fullscreen.png" />-->
                 </Button>
-                <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Height="50" Name="btn_liveview" Width="50" Margin="5" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button Content="B" ToolTip="{T:TranslateExtension BrowseSessionsToolTip}" Height="50" Name="btn_browse" Width="50" Margin="5"  FontSize="15" Click="btn_browse_Click" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button Content="Tags" ToolTip="{T:TranslateExtension SelectTagsToolTip}" Height="50" Name="btn_Tags" Width="50" Margin="5"  FontSize="15" Click="btn_Tags_Click" Style="{DynamicResource MetroCircleButtonStyle}"/>
-                <Button ToolTip="{T:TranslateExtension LabelAstronomy}" Height="50" Name="but_star" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_star_Click">
+                <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Height="50" Name="btn_liveview" Width="50" Margin="5" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLiveViewButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button Content="B" ToolTip="{T:TranslateExtension BrowseSessionsToolTip}" Height="50" Name="btn_browse" Width="50" Margin="5"  FontSize="15" Click="btn_browse_Click" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBrowseButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button Content="Tags" ToolTip="{T:TranslateExtension SelectTagsToolTip}" Height="50" Name="btn_Tags" Width="50" Margin="5"  FontSize="15" Click="btn_Tags_Click" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowTagsButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button ToolTip="{T:TranslateExtension LabelAstronomy}" Height="50" Name="but_star" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_star_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAstronomyButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_star_add}" />
                         </Rectangle.Fill>
                     </Rectangle>
                 </Button>
-                <Button ToolTip="{T:TranslateExtension MenuMultipleCamera}" Height="50" Name="but_multiple" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
+                <Button ToolTip="{T:TranslateExtension MenuMultipleCamera}" Height="50" Name="but_multiple" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMulyiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_box_layered}" />
                         </Rectangle.Fill>
                     </Rectangle>
                 </Button>
-                <Button ToolTip="{T:TranslateExtension LabelWifi}" Height="50" Name="but_wifi" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_wifi_Click">
+                <Button ToolTip="{T:TranslateExtension LabelWifi}" Height="50" Name="but_wifi" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_wifi_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_connection_wifi_variant}" />
@@ -153,7 +164,7 @@
             </WrapPanel>
         </Controls:MetroContentControl>
         <StackPanel Grid.Row="1" Grid.RowSpan="4" Orientation="Horizontal">
-            <Expander ExpandDirection="Right" Padding="0" Margin="0">
+            <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <Expander.Header>
                     <Label Content="{T:TranslateExtension LabelConnectedCameras}">
                         <Label.LayoutTransform>
@@ -211,10 +222,12 @@
                     </ScrollViewer>
                 </Grid>
             </Expander>
-            <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Padding="0"/>
+            <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Padding="0" 
+                             Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowCameraPropertiesMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </StackPanel>
 
-        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="5" Padding="0" Margin="0" >
+        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="5" Padding="0" Margin="0" 
+                  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRightPanelMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <Expander.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
