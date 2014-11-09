@@ -9,6 +9,7 @@
                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:ViewModel="clr-namespace:CameraControl.ViewModel"
+                      xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}"
                       ShowMinButton="False" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged">
@@ -65,7 +66,8 @@
         <Canvas Grid.Column="2" Background="{x:Null}" Grid.RowSpan="4" >
             <Label Canvas.Left="0" Canvas.Top="0" Content="REC" Height="41" FontSize="20" FontWeight="Bold" Foreground="Red" Width="52" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Canvas>
-        <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" >
+        <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" 
+                    Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000">
                 <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockNear}">
                     <ToggleButton.Resources>
@@ -157,7 +159,8 @@
                 <StackPanel.ScrollOwner>
                     <ScrollViewer />
                 </StackPanel.ScrollOwner>
-                <Expander Header="{T:TranslateExtension LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <Expander Header="{T:TranslateExtension LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" 
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -201,7 +204,8 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" >
+                <Expander Header="{T:TranslateExtension LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" 
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -248,14 +252,16 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3">
+                <Expander Header="{T:TranslateExtension LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <StackPanel>
                         <Label Content="{T:TranslateExtension LabelCaptureDelay}" Margin="20,0"/>
                         <Controls:NumericUpDown Minimum="0" Value="{Binding CaptureDelay}" IsEnabled="{Binding IsFree}" Margin="20,3"/>
                         <local:LiveViewControlerSimple DataContext="{Binding Path=CameraDevice}" Margin="20,3"/>
                     </StackPanel>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3">
+                <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -312,7 +318,8 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3">
+                <Expander Header="{T:TranslateExtension LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowOverlayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -365,7 +372,8 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="{Binding ShowHistogram}">
+                <Expander Header="{T:TranslateExtension LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="{Binding ShowHistogram}"
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLuminosityLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid Height="75" >
                             <Polygon Points="{Binding Path=LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding ElementName=TgGray, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}"/>
@@ -391,7 +399,8 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Expander Header="{T:TranslateExtension LabelMotionDetection}" BorderThickness="1"  BorderBrush="Black"  Margin="3">
+                <Expander Header="{T:TranslateExtension LabelMotionDetection}" BorderThickness="1"  BorderBrush="Black"  Margin="3"
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMotionDetectionLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Expander.Content>
                         <Grid>
                             <Grid.ColumnDefinitions>

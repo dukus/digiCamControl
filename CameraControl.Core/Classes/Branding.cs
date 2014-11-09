@@ -30,9 +30,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using CameraControl.Devices;
 
 #endregion
 
@@ -40,6 +42,8 @@ namespace CameraControl.Core.Classes
 {
     public class Branding
     {
+        public string ApplicationDataFolder { get; set; }
+        
         public string ApplicationTitle { get; set; }
 
         public string StartupScreenImage { get; set; }
@@ -49,6 +53,8 @@ namespace CameraControl.Core.Classes
         public string DefaultThumbImage { get; set; }
 
         public string DefaultMissingThumbImage { get; set; }
+
+        public bool ResetSettingsOnLoad { get; set; }
 
         public bool ShowAboutWindow { get; set; }
 
@@ -90,8 +96,29 @@ namespace CameraControl.Core.Classes
 
         public bool ShowCameraPropertiesMainWindow { get; set; }
 
+        public bool ShowFocusControlLiveView { get; set; }
+        
+        public bool ShowFocusStackingLiveView { get; set; }
+
+        public bool ShowControlLiveView { get; set; }
+
+        public bool ShowOverlayLiveView { get; set; }
+
+        public bool ShowDisplayLiveView { get; set; }
+
+        public bool ShowLuminosityLiveView { get; set; }
+
+        public bool ShowMotionDetectionLiveView { get; set; }
+
+        public string DefaultSettings
+        {
+            get { return Path.Combine(Settings.ApplicationFolder, "default_settings.xml"); }
+        }
+
         public Branding()
         {
+            ApplicationDataFolder = String.Empty;
+            ResetSettingsOnLoad = false;
             ShowAboutWindow = true;
             OnlineReference = true;
             ShowStartupScreen = true;
@@ -112,6 +139,34 @@ namespace CameraControl.Core.Classes
             ShowCameraSelectorMainWindow = true;
             ShowRightPanelMainWindow = true;
             ShowCameraPropertiesMainWindow = true;
+            ShowFocusControlLiveView = true;
+            ShowFocusStackingLiveView = true;
+            ShowControlLiveView = true;
+            ShowOverlayLiveView = true;
+            ShowDisplayLiveView = true;
+            ShowMotionDetectionLiveView = true;
+        }
+
+        public static Branding LoadBranding()
+        {
+            Branding branding = new Branding();
+            string filename = Path.Combine(Settings.ApplicationFolder, "Branding.xml");
+            try
+            {
+                if (File.Exists(filename))
+                {
+                    XmlSerializer mySerializer =
+                        new XmlSerializer(typeof (Branding));
+                    FileStream myFileStream = new FileStream(filename, FileMode.Open);
+                    branding = (Branding) mySerializer.Deserialize(myFileStream);
+                    myFileStream.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            return branding;
         }
     }
 }

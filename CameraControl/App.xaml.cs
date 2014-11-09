@@ -81,8 +81,8 @@ namespace CameraControl
                 Shutdown(-1);
                 return;
             }
-            ServiceProvider.Settings = new Settings();
-            ServiceProvider.Branding = ServiceProvider.Settings.LoadBranding();
+
+            ServiceProvider.Branding = Branding.LoadBranding();
             if (ServiceProvider.Branding.ShowStartupScreen)
             {
                 _startUpWindow=new StartUpWindow();
@@ -102,7 +102,7 @@ namespace CameraControl
 
             ServiceProvider.Settings = new Settings();
             ServiceProvider.Settings = ServiceProvider.Settings.Load();
-            ServiceProvider.Branding = ServiceProvider.Settings.LoadBranding();
+            ServiceProvider.Branding = Branding.LoadBranding();
 
             ServiceProvider.ActionManager.Actions = new AsyncObservableCollection<IMenuAction>
                                                         {

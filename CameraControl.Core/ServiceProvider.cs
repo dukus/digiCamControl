@@ -63,10 +63,11 @@ namespace CameraControl.Core
         public static ScriptManager ScriptManager { get; set; }
         public static FilenameTemplateManager FilenameTemplateManager { get; set; }
         public static ExternalDeviceManager ExternalDeviceManager { get; set; }
-        public static string LogFile = Path.Combine(Settings.DataFolder, "Log", "app.log");
+        public static string LogFile;
 
         public static void Configure()
         {
+            LogFile = Path.Combine(Settings.DataFolder, "Log", "app.log");
             Configure(LogFile);
         }
 

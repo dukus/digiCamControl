@@ -734,7 +734,7 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName);
+                return !string.IsNullOrEmpty(ServiceProvider.Branding.ApplicationDataFolder) ? Path.GetFullPath(ServiceProvider.Branding.ApplicationDataFolder) : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName);
             }
         }
 
@@ -973,31 +973,15 @@ namespace CameraControl.Core.Classes
             return photoSession;
         }
 
-        public Branding LoadBranding()
-        {
-            Branding branding = new Branding();
-            string filename = Path.Combine(ApplicationFolder, "Branding.xml");
-            try
-            {
-                if (File.Exists(filename))
-                {
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof (Branding));
-                    FileStream myFileStream = new FileStream(filename, FileMode.Open);
-                    branding = (Branding) mySerializer.Deserialize(myFileStream);
-                    myFileStream.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-            return branding;
-        }
-
         public Settings Load()
         {
             Settings settings = new Settings();
+            if (File.Exists(ServiceProvider.Branding.DefaultSettings))
+                settings = LoadSettings(ServiceProvider.Branding.DefaultSettings, settings);
+
+            if (ServiceProvider.Branding.ResetSettingsOnLoad)
+                return settings;
+
             try
             {
                 if (!Directory.Exists(Path.GetDirectoryName(ConfigFile)))
@@ -1006,12 +990,7 @@ namespace CameraControl.Core.Classes
                 }
                 if (File.Exists(ConfigFile))
                 {
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof (Settings));
-                    FileStream myFileStream = new FileStream(ConfigFile, FileMode.Open);
-                    settings = (Settings) mySerializer.Deserialize(myFileStream);
-                    myFileStream.Close();
-                    settings.LoadPresetData();
+                    settings = LoadSettings(ConfigFile, settings);
                 }
                 else
                 {
@@ -1023,6 +1002,26 @@ namespace CameraControl.Core.Classes
                 Log.Error("Error loading config file ", exception);
             }
             return settings;
+        }
+
+        public Settings LoadSettings(string fileName, Settings defaultSettings)
+        {
+            try
+            {
+                if (File.Exists(ConfigFile))
+                {
+                    XmlSerializer mySerializer =
+                        new XmlSerializer(typeof (Settings));
+                    FileStream myFileStream = new FileStream(ConfigFile, FileMode.Open);
+                    defaultSettings = (Settings) mySerializer.Deserialize(myFileStream);
+                    myFileStream.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error loading config file ", exception);
+            }
+            return defaultSettings;
         }
 
         public PhotoSession GetSession(string name)
