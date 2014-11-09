@@ -584,7 +584,8 @@ namespace CameraControl.Devices.Canon
             Camera.LiveViewUpdate -= Camera_LiveViewUpdate;
             Camera.PictureTaken -= Camera_PictureTaken;
             Camera.PropertyChanged -= Camera_PropertyChanged;
-            Camera.Dispose();
+            // this block the application
+            //Camera.Dispose();
             Camera = null;
         }
 
@@ -1074,6 +1075,8 @@ namespace CameraControl.Devices.Canon
             {
                 try
                 {
+                    if (Camera == null)
+                        return viewData;
                     Camera.DownloadEvf();
                     if (_liveViewImageData != null)
                     {

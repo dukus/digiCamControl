@@ -40,6 +40,7 @@ using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Nikon;
+using CameraControl.ViewModel;
 
 #endregion
 
@@ -98,7 +99,7 @@ namespace CameraControl.windows
                                 if (nikonBase.ShutterSpeed.Value == "Bulb")
                                 {
                                     nikonBase.ShutterSpeed.Value =
-                                        nikonBase.ShutterSpeed.Values[nikonBase.ShutterSpeed.Values.Count/2];
+                                        nikonBase.ShutterSpeed.Values[nikonBase.ShutterSpeed.Values.Count / 2];
                                 }
                                 nikonBase.FocusMode.Value = nikonBase.FocusMode.Values[0];
                                 nikonBase.FNumber.Value = nikonBase.FNumber.Values[0];
@@ -109,7 +110,8 @@ namespace CameraControl.windows
                     case WindowsCmdConsts.LiveViewWnd_Hide:
                         {
                             if (_register.ContainsKey(param))
-                                _register[param].ExecuteCommand(cmd, param);
+                                ((LiveViewViewModel)(_register[param].DataContext)).WindowsManager_Event(cmd, param);
+                            _register[param].ExecuteCommand(cmd, param);
                             var nikonBase = param as NikonBase;
                             if (ServiceProvider.Settings.EasyLiveViewControl)
                             {
@@ -126,13 +128,17 @@ namespace CameraControl.windows
                         foreach (var liveViewWnd in _register)
                         {
                             liveViewWnd.Value.ExecuteCommand(cmd, param);
+                            ((LiveViewViewModel)(liveViewWnd.Value.DataContext)).WindowsManager_Event(cmd, param);
                         }
                         break;
                     default:
                         foreach (var liveViewWnd in _register)
                         {
                             if (cmd.StartsWith("LiveView"))
+                            {
                                 liveViewWnd.Value.ExecuteCommand(cmd, param);
+                                ((LiveViewViewModel)(liveViewWnd.Value.DataContext)).WindowsManager_Event(cmd, param);
+                            }
                         }
                         break;
                 }

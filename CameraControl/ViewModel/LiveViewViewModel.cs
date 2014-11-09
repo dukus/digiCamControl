@@ -1041,7 +1041,7 @@ namespace CameraControl.ViewModel
         }
 
 
-        private void WindowsManager_Event(string cmd, object o)
+        public void WindowsManager_Event(string cmd, object o)
         {
             ICameraDevice device = o as ICameraDevice ?? ServiceProvider.DeviceManager.SelectedCameraDevice;
             if (device != CameraDevice)
