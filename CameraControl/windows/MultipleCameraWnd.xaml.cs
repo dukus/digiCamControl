@@ -33,12 +33,17 @@ using System.Linq;
 using System.Threading;
 using System.Timers;
 using System.Windows;
+using System.Windows.Forms;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Core.Translation;
+using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using MahApps.Metro.Controls.Dialogs;
+using HelpProvider = CameraControl.Classes.HelpProvider;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 #endregion
 
@@ -53,6 +58,7 @@ namespace CameraControl.windows
         public int DelaySec { get; set; }
         public int WaitSec { get; set; }
         public int NumOfPhotos { get; set; }
+        ProgressWindow dlg = new ProgressWindow();
 
         private System.Timers.Timer _timer = new System.Timers.Timer(1000);
         private int _secounter = 0;
@@ -296,6 +302,52 @@ namespace CameraControl.windows
                 ServiceProvider.DeviceManager.ConnectedDevices[i].LoadProperties().SortOrder = i;
             }
             ServiceProvider.Settings.Save();
+        }
+
+        private void btn_format_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show(TranslationStrings.LabelAskForDelete, "", MessageBoxButtons.YesNo) !=
+                System.Windows.Forms.DialogResult.Yes)
+                return;
+            dlg.Show();
+            Thread thread = new Thread(Format);
+            thread.Start();
+            Log.Debug("Start format multiple cameras");
+            //thread.Join();
+        }
+
+        private void Format()
+        {
+            //Dispatcher.Invoke(new Action(dlg.Show));
+            for (int i = 0; i < ServiceProvider.DeviceManager.ConnectedDevices.Count; i++)
+            {
+                dlg.Label = ServiceProvider.DeviceManager.ConnectedDevices[i].DisplayName;
+                dlg.Progress = i;
+                Thread thread = new Thread(new ThreadStart(delegate
+                {
+                    FormatCard(ServiceProvider.DeviceManager.ConnectedDevices[i]);
+                }));
+                thread.Start();
+                thread.Join(15 * 1000);
+            }
+            Dispatcher.Invoke(new Action(dlg.Hide));
+           
+        }
+
+        private void FormatCard(ICameraDevice connectedDevice)
+        {
+            try
+            {
+                Log.Debug("Start format");
+                Log.Debug(connectedDevice.PortName);
+                connectedDevice.FormatStorage(null);
+                Thread.Sleep(200);
+                Log.Debug("Format done");
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to format device ", exception);
+            }
         }
     }
 }

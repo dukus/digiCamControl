@@ -58,6 +58,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="32*" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
@@ -77,9 +78,11 @@
                 
                 <Button Content="{T:Translate LabelSettingsLiveView}" Grid.Row="8" Name="btn_liveview" Margin="2" Click="btn_liveview_Click" Grid.ColumnSpan="2" />
                 <Button Content="{T:Translate LabelSaveOrder}" Grid.Row="9" Name="btn_saveOrder" Margin="2" Click="btn_saveOrder_Click" Grid.ColumnSpan="2" />
+                <Button Content="{T:Translate LabelFormatAllCards}" Grid.Row="10" Name="btn_format" Margin="2" Click="btn_format_Click" Grid.ColumnSpan="2" />
                 
-                <Button Content="{T:Translate LabelSetCounters}" Grid.Row="10" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" Grid.ColumnSpan="2" />
-                <TextBox Grid.Row="11" Name="txt_counter" Margin="2" Grid.ColumnSpan="2" />
+                
+                <Button Content="{T:Translate LabelSetCounters}" Grid.Row="11" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" Grid.ColumnSpan="2" />
+                <TextBox Grid.Row="12" Name="txt_counter" Margin="2" Grid.ColumnSpan="2" />
             </Grid>
         </Expander>
         <Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />

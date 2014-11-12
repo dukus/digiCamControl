@@ -184,11 +184,13 @@ namespace CameraControl.windows
                                                          Focus();
                                                          dlg.Show();
                                                          Items.Clear();
+                                                         FreeResources();
                                                          Thread thread = new Thread(PopulateImageList);
                                                          thread.Start();
                                                      }));
                     break;
                 case WindowsCmdConsts.DownloadPhotosWnd_Hide:
+                    FreeResources();
                     Hide();
                     break;
                 case CmdConsts.All_Close:
@@ -202,6 +204,20 @@ namespace CameraControl.windows
         }
 
         #endregion
+
+        private void FreeResources()
+        {
+            lst_items_simple.ItemsSource = null;
+            lst_items.ItemsSource = null;
+
+            foreach (FileItem fileItem in Items)
+            {
+                fileItem.Dispose();
+            }
+            Items.Clear();
+            Items = null;
+            Items = new AsyncObservableCollection<FileItem>();
+        }
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
@@ -222,12 +238,17 @@ namespace CameraControl.windows
                 return;
             //int threshold = 0;
             //bool checkset = false;
-
+            int counter = 0;
+            dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
             foreach (ICameraDevice cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
             {
+                counter++;
+                dlg.Progress = counter;
                 CameraProperty property = cameraDevice.LoadProperties();
                 cameraDevice.DisplayName = property.DeviceName;
                 dlg.Label = cameraDevice.DisplayName;
+                dlg.Label2 = "";
+
                 try
                 {
                     var images = cameraDevice.GetObjects(null, ServiceProvider.Settings.LoadThumbsDownload);
@@ -237,10 +258,14 @@ namespace CameraControl.windows
                         {
                             if (!_itembycamera.ContainsKey(cameraDevice))
                                 _itembycamera.Add(cameraDevice, new AsyncObservableCollection<FileItem>());
+
                             var fileitem = new FileItem(deviceObject, cameraDevice);
+
+                            dlg.Label2 = fileitem.FileName;
 
                             PhotoSession session = (PhotoSession)cameraDevice.AttachedPhotoSession ??
                                        ServiceProvider.Settings.DefaultSession;
+
                             // check if file exist with same name from this camera
                             fileitem.IsChecked = session.GetFile(deviceObject.FileName, cameraDevice.SerialNumber) ==
                                                  null;

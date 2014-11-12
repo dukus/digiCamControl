@@ -54,7 +54,7 @@ namespace CameraControl.Core.Classes
         Missing
     }
 
-    public class FileItem : BaseFieldClass
+    public class FileItem : BaseFieldClass, IDisposable
     {
         private string _fileName;
 
@@ -231,6 +231,7 @@ namespace CameraControl.Core.Classes
             DeviceObject = deviceObject;
             ItemType = FileItemType.CameraObject;
             FileName = deviceObject.FileName;
+            Name = FileName;
             FileDate = deviceObject.FileDate;
             IsChecked = true;
             IsLiked = false;
@@ -362,7 +363,7 @@ namespace CameraControl.Core.Classes
                         }
                         else
                         {
-                            _thumbnail = BitmapLoader.Instance.DefaultThumbnail;
+                           // _thumbnail = BitmapLoader.Instance.DefaultThumbnail;
                         }
 
                     }
@@ -475,6 +476,11 @@ namespace CameraControl.Core.Classes
             {
                 Log.Error(e);
             }
+        }
+
+        public void Dispose()
+        {
+            Thumbnail = null;
         }
     }
 }

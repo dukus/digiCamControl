@@ -53,6 +53,11 @@ namespace CameraControl.Core.Wpf
             set { Dispatcher.Invoke(new Action(delegate { lbl_label.Content = value; })); }
         }
 
+        public string Label2
+        {
+            get { return (string)lbl_label2.Content; }
+            set { Dispatcher.Invoke(new Action(delegate { lbl_label2.Content = value; })); }
+        }
         public double Progress
         {
             get { return progressBar.Value; }

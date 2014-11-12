@@ -28,4 +28,11 @@
   <ShowCameraSelectorMainWindow>false</ShowCameraSelectorMainWindow>
   <ShowRightPanelMainWindow>false</ShowRightPanelMainWindow>
   <ShowCameraPropertiesMainWindow>false</ShowCameraPropertiesMainWindow>
+  
+  <ShowFocusControlLiveView>true</ShowFocusControlLiveView>
+  <ShowFocusStackingLiveView>true</ShowFocusStackingLiveView>
+  <ShowControlLiveView>true</ShowControlLiveView>
+  <ShowOverlayLiveView>true</ShowOverlayLiveView>
+  <ShowDisplayLiveView>true</ShowDisplayLiveView>
+  <ShowMotionDetectionLiveView>true</ShowMotionDetectionLiveView>
 </Branding>

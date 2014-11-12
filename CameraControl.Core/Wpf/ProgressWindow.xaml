@@ -16,10 +16,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
             <RowDefinition Height="30" />
-            <RowDefinition Height="51*" />
+            <RowDefinition Height="28*" />
+            <RowDefinition Height="28*" />
         </Grid.RowDefinitions>
-        <ProgressBar Name="progressBar" Grid.Row="1" Grid.ColumnSpan="2" />
-        <Label Content="Label" Grid.Row="2" Name="lbl_label" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
-        <Image Grid.Row="2" Name="image" Stretch="Uniform" Margin="3" />
+        <ProgressBar Name="progressBar" Grid.Row="1" Grid.ColumnSpan="2" Height="27"/>
+        <Label Content="Label" Grid.Row="2" Name="lbl_label" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"  />
+        <Label Content="" Grid.Row="3" Name="lbl_label2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1"  />
+        <Image Grid.Row="2" Name="image" Stretch="Uniform" Margin="3" Grid.RowSpan="2" Grid.Column="0" />
     </Grid>
 </controls:MetroWindow>

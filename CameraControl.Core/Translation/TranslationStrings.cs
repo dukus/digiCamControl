@@ -536,5 +536,6 @@ namespace CameraControl.Core.Translation
         public static string LabelSortOrder = "Sort order";
         public static string LabelSaveOrder = "Save sort order";
         public static string LabelLoadThumbDownload = "Load thumbs in download window";
+        public static string LabelFormatAllCards = "Format all cards";
     }
 }

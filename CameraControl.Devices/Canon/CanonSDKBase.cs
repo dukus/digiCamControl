@@ -1262,15 +1262,28 @@ namespace CameraControl.Devices.Canon
                     if (ChildInfo.isFolder == 0)
                     {
                         //if it's not a folder, create thumbnail and safe it to the entry
-                        IntPtr stream;
-                        Edsdk.EdsCreateMemoryStream(0, out stream);
-                        Edsdk.EdsDownloadThumbnail(ChildPtr, stream);
-                        list.Add(new DeviceObject()
+                        if (loadThumbs)
                         {
-                            FileName = ChildInfo.szFileName,
-                            ThumbData = loadThumbs ? GetImage(stream, Edsdk.EdsImageSource.Thumbnail) : null,
-                            Handle = ChildInfo.szFileName
-                        });
+                            IntPtr stream;
+                            Edsdk.EdsCreateMemoryStream(0, out stream);
+                            Edsdk.EdsDownloadThumbnail(ChildPtr, stream);
+                            list.Add(new DeviceObject()
+                            {
+                                FileName = ChildInfo.szFileName,
+                                ThumbData = GetImage(stream, Edsdk.EdsImageSource.Thumbnail),
+                                Handle = ChildInfo.szFileName
+                            });
+                            if (stream != IntPtr.Zero)
+                                Edsdk.EdsRelease(stream);
+                        }
+                        else
+                        {
+                            list.Add(new DeviceObject()
+                            {
+                                FileName = ChildInfo.szFileName,
+                                Handle = ChildInfo.szFileName
+                            });
+                        }
                     }
                     else
                     {
