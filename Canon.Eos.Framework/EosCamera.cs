@@ -333,7 +333,7 @@ namespace Canon.Eos.Framework
             }
         }
 
-        private void Lock()
+        public void Lock()
         {
             lock (_locker)
             {
@@ -634,7 +634,7 @@ namespace Canon.Eos.Framework
             return this.DeviceDescription ?? string.Empty;
         }
         
-        private void Unlock()
+        public void Unlock()
         {
             lock (_locker)
             {

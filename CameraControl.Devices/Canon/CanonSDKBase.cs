@@ -1437,8 +1437,9 @@ namespace CameraControl.Devices.Canon
 
         public override void FormatStorage(object storageId)
         {
-            //lock (Locker)
-            //{
+            try
+            {
+                Camera.Lock();
                 int count = 0;
                 Log.Debug("EdsGetChildCount");
                 if (Edsdk.EdsGetChildCount(Camera.Handle, out count) != Edsdk.EDS_ERR_OK)
@@ -1464,7 +1465,11 @@ namespace CameraControl.Devices.Canon
                     if (Edsdk.EdsRelease(volumePtr) != Edsdk.EDS_ERR_OK)
                         throw new DeviceException("Error EdsRelease");
                 }
-            //}
+            }
+            finally
+            {
+                Camera.Unlock();
+            }
         }
 
 

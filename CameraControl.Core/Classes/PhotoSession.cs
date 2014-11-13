@@ -555,6 +555,7 @@ namespace CameraControl.Core.Classes
         {
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(device);
             string res = FileNameTemplate;
+
             // the template should contain a counter type tag
             if (!res.Contains("[Counter") && !AllowOverWrite)
                 res += "[Counter 4 digit]";

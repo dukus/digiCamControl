@@ -321,14 +321,14 @@ namespace CameraControl.windows
             //Dispatcher.Invoke(new Action(dlg.Show));
             for (int i = 0; i < ServiceProvider.DeviceManager.ConnectedDevices.Count; i++)
             {
-                dlg.Label = ServiceProvider.DeviceManager.ConnectedDevices[i].DisplayName;
+                ICameraDevice device = ServiceProvider.DeviceManager.ConnectedDevices[i];
+                if (!device.IsChecked)
+                    continue;
+                dlg.Label = device.DisplayName;
                 dlg.Progress = i;
-                Thread thread = new Thread(new ThreadStart(delegate
-                {
-                    FormatCard(ServiceProvider.DeviceManager.ConnectedDevices[i]);
-                }));
+                Thread thread = new Thread(() => FormatCard(device));
                 thread.Start();
-                thread.Join(15 * 1000);
+                thread.Join(5 * 1000);
             }
             Dispatcher.Invoke(new Action(dlg.Hide));
            
@@ -338,11 +338,13 @@ namespace CameraControl.windows
         {
             try
             {
+                connectedDevice.IsBusy = true;
                 Log.Debug("Start format");
                 Log.Debug(connectedDevice.PortName);
                 connectedDevice.FormatStorage(null);
                 Thread.Sleep(200);
                 Log.Debug("Format done");
+                connectedDevice.IsBusy = false;
             }
             catch (Exception exception)
             {

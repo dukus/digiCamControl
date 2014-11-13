@@ -190,8 +190,11 @@ namespace CameraControl.windows
                                                      }));
                     break;
                 case WindowsCmdConsts.DownloadPhotosWnd_Hide:
-                    FreeResources();
-                    Hide();
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        FreeResources();
+                        Hide();
+                    }));
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
@@ -325,7 +328,6 @@ namespace CameraControl.windows
             dlg.Show();
             delete = chk_delete.IsChecked == true;
             format = chk_format.IsChecked == true;
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Hide);
             Thread thread = new Thread(TransferFiles);
             thread.Start();
         }
@@ -356,7 +358,7 @@ namespace CameraControl.windows
                 {
                     fileName =
                         session.GetNextFileName(Path.GetExtension(fileItem.FileName),
-                                                fileItem.Device);
+                            fileItem.Device);
                 }
                 else
                 {
@@ -400,9 +402,13 @@ namespace CameraControl.windows
                     break;
                 }
                 totalbytes += new FileInfo(fileName).Length;
-                var item = session.AddFile(fileName);
-                item.CameraSerial = fileItem.Device.SerialNumber;
-                item.OriginalName = fileItem.FileName;
+                FileItem item1 = fileItem;
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    var item = session.AddFile(fileName);
+                    item.CameraSerial = item1.Device.SerialNumber;
+                    item.OriginalName = item1.FileName;
+                }));
                 i++;
                 dlg.Progress = i;
             }
@@ -447,6 +453,7 @@ namespace CameraControl.windows
                                     totalbytes,
                                     transfersec, (totalbytes/transfersec/1024/1024).ToString("0000.00")));
             ServiceProvider.Settings.Save();
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Hide);
         }
 
         private void btn_all_Click(object sender, RoutedEventArgs e)

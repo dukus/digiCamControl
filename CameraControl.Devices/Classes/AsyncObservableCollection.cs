@@ -29,11 +29,15 @@
 #region
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows.Data;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
+using System.Windows.Threading;
 
 #endregion
 
@@ -45,27 +49,16 @@ namespace CameraControl.Devices.Classes
 
         public AsyncObservableCollection()
         {
+            enableCollectionSynchronization(this, _syncLock);
         }
 
         public AsyncObservableCollection(IEnumerable<T> list)
             : base(list)
         {
+            enableCollectionSynchronization(this, _syncLock);
         }
 
-        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        {
-            if (SynchronizationContext.Current == _synchronizationContext)
-            {
-                // Execute the CollectionChanged event on the current thread
-                RaiseCollectionChanged(e);
-            }
-            else
-            {
-                // Post the CollectionChanged event on the creator thread
-                if (_synchronizationContext != null)
-                    _synchronizationContext.Post(RaiseCollectionChanged, e);
-            }
-        }
+
 
         private void RaiseCollectionChanged(object param)
         {
@@ -98,6 +91,45 @@ namespace CameraControl.Devices.Classes
         {
             // We are in the creator thread, call the base implementation directly
             base.OnPropertyChanged((PropertyChangedEventArgs) param);
+        }
+
+        public override event NotifyCollectionChangedEventHandler CollectionChanged;
+        private static object _syncLock = new object();
+
+
+        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            using (BlockReentrancy())
+            {
+                var eh = CollectionChanged;
+                if (eh == null) return;
+
+                var dispatcher = (from NotifyCollectionChangedEventHandler nh in eh.GetInvocationList()
+                                  let dpo = nh.Target as DispatcherObject
+                                  where dpo != null
+                                  select dpo.Dispatcher).FirstOrDefault();
+
+                if (dispatcher != null && dispatcher.CheckAccess() == false)
+                {
+                    dispatcher.Invoke(DispatcherPriority.DataBind, (Action)(() => OnCollectionChanged(e)));
+                }
+                else
+                {
+                    foreach (NotifyCollectionChangedEventHandler nh in eh.GetInvocationList())
+                        nh.Invoke(this, e);
+                }
+            }
+        }
+
+        private static void enableCollectionSynchronization(IEnumerable collection, object lockObject)
+        {
+            var method = typeof(BindingOperations).GetMethod("EnableCollectionSynchronization",
+                                    new Type[] { typeof(IEnumerable), typeof(object) });
+            if (method != null)
+            {
+                // It's .NET 4.5
+                method.Invoke(null, new object[] { collection, lockObject });
+            }
         }
     }
 }
