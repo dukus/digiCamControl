@@ -805,7 +805,7 @@ namespace CameraControl.Core.Classes
             ClientId = Guid.NewGuid().ToString();
             if (ServiceProvider.WindowsManager != null)
                 SyncActions(ServiceProvider.WindowsManager.WindowCommands);
-            MinimizeToTrayIcon = true;
+            MinimizeToTrayIcon = false;
             StartMinimized = false;
             StartupWithWindows = false;
             LoadThumbsDownload = true;
