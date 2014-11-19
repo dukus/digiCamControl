@@ -241,6 +241,7 @@ namespace CameraControl.windows
             _defaultScriptFile = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), Settings.AppName,
                 "default.dccscript");
+            btn_astrolv.IsEnabled = CameraDevice.HaveLiveView;
             try
             {
                 if (File.Exists(_defaultScriptFile))
