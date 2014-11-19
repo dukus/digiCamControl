@@ -996,6 +996,7 @@ namespace CameraControl.Core.Classes
                 {
                     settings.Save();
                 }
+                settings.LoadPresetData();
             }
             catch (Exception exception)
             {

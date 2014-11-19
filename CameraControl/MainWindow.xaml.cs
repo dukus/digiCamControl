@@ -748,12 +748,17 @@ namespace CameraControl
             wnd.ShowDialog();
             try
             {
-                RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+                    true);
+
+                if (rk == null) return;
 
                 if (ServiceProvider.Settings.StartupWithWindows)
+                {
                     rk.SetValue(Settings.AppName, System.Reflection.Assembly.GetExecutingAssembly().Location);
+                }
                 else
-                    rk.DeleteValue(Settings.AppName, false);            
+                    rk.DeleteValue(Settings.AppName, false);
             }
             catch (Exception ex)
             {

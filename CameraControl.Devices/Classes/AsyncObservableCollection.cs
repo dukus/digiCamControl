@@ -101,22 +101,30 @@ namespace CameraControl.Devices.Classes
         {
             using (BlockReentrancy())
             {
-                var eh = CollectionChanged;
-                if (eh == null) return;
-
-                var dispatcher = (from NotifyCollectionChangedEventHandler nh in eh.GetInvocationList()
-                                  let dpo = nh.Target as DispatcherObject
-                                  where dpo != null
-                                  select dpo.Dispatcher).FirstOrDefault();
-
-                if (dispatcher != null && dispatcher.CheckAccess() == false)
+                try
                 {
-                    dispatcher.Invoke(DispatcherPriority.DataBind, (Action)(() => OnCollectionChanged(e)));
+                    var eh = CollectionChanged;
+                    if (eh == null) return;
+
+                    var dispatcher = (from NotifyCollectionChangedEventHandler nh in eh.GetInvocationList()
+                                      let dpo = nh.Target as DispatcherObject
+                                      where dpo != null
+                                      select dpo.Dispatcher).FirstOrDefault();
+
+                    if (dispatcher != null && dispatcher.CheckAccess() == false)
+                    {
+                        dispatcher.Invoke(DispatcherPriority.DataBind, (Action)(() => OnCollectionChanged(e)));
+                    }
+                    else
+                    {
+                        foreach (NotifyCollectionChangedEventHandler nh in eh.GetInvocationList())
+                            nh.Invoke(this, e);
+                    }
+
                 }
-                else
+                catch (Exception)
                 {
-                    foreach (NotifyCollectionChangedEventHandler nh in eh.GetInvocationList())
-                        nh.Invoke(this, e);
+                    
                 }
             }
         }
