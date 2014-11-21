@@ -499,7 +499,7 @@ namespace CameraControl.Devices.Canon
                         Battery = (int) Camera.BatteryLevel + 20;
                         break;
                     case Edsdk.PropID_FocusInfo:
-                        ResetShutterButton();
+                        //ResetShutterButton();
                         break;
                 }
             }
@@ -991,6 +991,7 @@ namespace CameraControl.Devices.Canon
 
         private uint ResetShutterButton()
         {
+            Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
             //ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0));
             return Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
                 (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF);
@@ -1129,16 +1130,16 @@ namespace CameraControl.Devices.Canon
             
             try
             {
-                //ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 1));
-                ErrorCodes.GetCanonException(
-         Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
-                          (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
-                ErrorCodes.GetCanonException(
-                    Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
-                        (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Halfway));
-                ErrorCodes.GetCanonException(
-                         Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
-                                          (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
+                ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 1));
+         //       ErrorCodes.GetCanonException(
+         //Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+         //                 (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
+         //       ErrorCodes.GetCanonException(
+         //           Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+         //               (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Halfway));
+         //       ErrorCodes.GetCanonException(
+         //                Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,
+         //                                 (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF));
 
             }
             finally
@@ -1150,12 +1151,19 @@ namespace CameraControl.Devices.Canon
         public override int Focus(int step)
         {
             ResetShutterButton();
-            var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
-                (int) (step < 0 ? Edsdk.EvfDriveLens_Near2 : Edsdk.EvfDriveLens_Far2));
-            if (res == Edsdk.EDS_ERR_OK)
-                return step < 0 ? -1 : 1;
-            else
-                return 0;
+            
+            int focus = 0;
+            for (var i = 0; i < Math.Abs(step); i++)
+            {
+                //Thread.Sleep(1);
+                var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
+                    (int) (step < 0 ? Edsdk.EvfDriveLens_Near1 : Edsdk.EvfDriveLens_Far1));
+                if (res == Edsdk.EDS_ERR_OK)
+                    focus += step < 0 ? -1 : 1;
+
+            }
+            //Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
+            return focus;
         }
 
         public override void TransferFile(object o, string filename)

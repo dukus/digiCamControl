@@ -917,12 +917,12 @@ namespace CameraControl.ViewModel
             RecordMovieCommand = new RelayCommand(RecordMovie,
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(CaptureInThread);
-            FocusMCommand = new RelayCommand(() => SetFocus( SimpleManualFocus? -1: -ServiceProvider.Settings.SmalFocusStep));
-            FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -5 : -ServiceProvider.Settings.MediumFocusStep));
-            FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -25 : -ServiceProvider.Settings.LargeFocusStep));
-            FocusPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 1 : ServiceProvider.Settings.SmalFocusStep));
-            FocusPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 5 : ServiceProvider.Settings.MediumFocusStep));
-            FocusPPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 25 : ServiceProvider.Settings.LargeFocusStep));
+            FocusMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.SmalFocusStep));
+            FocusMMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.MediumFocusStep));
+            FocusMMMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.LargeFocusStep));
+            FocusPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.SmalFocusStep));
+            FocusPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.MediumFocusStep));
+            FocusPPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.LargeFocusStep));
             MoveACommand = new RelayCommand(() => SetFocus(-FocusCounter));
             MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
@@ -1979,16 +1979,17 @@ namespace CameraControl.ViewModel
                     _timer.Stop();
                     CameraDevice.StartLiveView();
                     StaticHelper.Instance.SystemMessage = "Move focus " + step;
-                    if (SimpleManualFocus)
-                    {
-                        for (var i = 0; i < Math.Abs(step); i++)
-                        {
-                            Thread.Sleep(1000/DesiredFrameRate/2);
-                            GetLiveImage();
-                            FocusCounter += CameraDevice.Focus(step);
-                        }
-                    }
-                    else
+                    //if (SimpleManualFocus)
+                    //{
+                    //    for (var i = 0; i < Math.Abs(step); i++)
+                    //    {
+                    //        Thread.Sleep(15);
+                    //        if (i % 10 == 0)  
+                    //            GetLiveImage();
+                    //        FocusCounter += CameraDevice.Focus(step);
+                    //    }
+                    //}
+                    //else
                     {
                         FocusCounter += CameraDevice.Focus(step);
                     }

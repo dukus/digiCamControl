@@ -110,7 +110,7 @@ namespace CameraControl.windows
                     case WindowsCmdConsts.LiveViewWnd_Hide:
                         {
                             if (_register.ContainsKey(param))
-                                ((LiveViewViewModel)(_register[param].DataContext)).WindowsManager_Event(cmd, param);
+                                 ((LiveViewViewModel)(_register[param].DataContext)).WindowsManager_Event(cmd, param);
                             _register[param].ExecuteCommand(cmd, param);
                             var nikonBase = param as NikonBase;
                             if (ServiceProvider.Settings.EasyLiveViewControl)
