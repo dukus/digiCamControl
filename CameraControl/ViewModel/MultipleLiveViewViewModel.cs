@@ -7,6 +7,7 @@ using System.Threading;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
+using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Timer = System.Timers.Timer;
@@ -71,7 +72,7 @@ namespace CameraControl.ViewModel
             Cameras = new ObservableCollection<SimpleLiveViewViewModel>();
             if (ServiceProvider.DeviceManager != null)
             {
-                foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
+                foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices.Where(device => device.GetCapability(CapabilityEnum.LiveView)))
                 {
                     Cameras.Add(new SimpleLiveViewViewModel(device));
                 }
