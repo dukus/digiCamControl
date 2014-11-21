@@ -558,7 +558,7 @@ namespace CameraControl.Core.Classes
                     };
 
             var process = Process.Start(startInfo);
-            process.OutputDataReceived += new DataReceivedEventHandler(process_OutputDataReceived);
+            process.OutputDataReceived += process_OutputDataReceived;
             process.BeginOutputReadLine();
             //string outstr = process.StandardOutput.ReadToEnd();
 
@@ -753,15 +753,23 @@ namespace CameraControl.Core.Classes
 
         private void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            if (e.Data != null && !Tags.ContainsKey(e.Data.Substring(0, 45).Trim()))
-                Tags.Add(e.Data.Substring(0, 45).Trim(),
-                         new Exiv2Data()
-                             {
-                                 Tag = e.Data.Substring(0, 45).Trim(),
-                                 Type = e.Data.Substring(45, 11),
-                                 Length = e.Data.Substring(45 + 11, 4),
-                                 Value = e.Data.Substring(45 + 11 + 4).Trim()
-                             });
+            // prevent crash if wrong data is received 
+            try
+            {
+                if (e.Data != null && !Tags.ContainsKey(e.Data.Substring(0, 45).Trim()) && e.Data.Length > 60)
+                    Tags.Add(e.Data.Substring(0, 45).Trim(),
+                        new Exiv2Data()
+                        {
+                            Tag = e.Data.Substring(0, 45).Trim(),
+                            Type = e.Data.Substring(45, 11),
+                            Length = e.Data.Substring(45 + 11, 4),
+                            Value = e.Data.Substring(45 + 11 + 4).Trim()
+                        });
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Unable to procces exif data", ex);
+            }
         }
 
         private int ToSize(string s)
