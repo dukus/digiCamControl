@@ -35,6 +35,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -72,7 +73,15 @@ namespace CameraControl.Core.Classes
         {
             foreach (IWindow window in WindowsList)
             {
-                window.ExecuteCommand(cmd, o);
+                try
+                {
+                    window.ExecuteCommand(cmd, o);
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Error to procces command " + cmd, exception);
+                }
+
             }
             if (Event != null)
                 Event(cmd, o);

@@ -51,6 +51,14 @@ namespace Canon.Eos.Framework
             //lock (_locker)
             //{
             _liveViewRunning = true;
+            DownloadEvfInternal();
+            _liveViewRunning = false;
+            //}
+            return true;
+        }
+
+        public bool DownloadEvfInternal()
+        {
             var memoryStream = IntPtr.Zero;
             try
             {
@@ -83,10 +91,9 @@ namespace Canon.Eos.Framework
                 if (memoryStream != IntPtr.Zero)
                     Edsdk.EdsRelease(memoryStream);
             }
-            _liveViewRunning = false;
-            //}
             return true;
         }
+
 
         private void StartDownloadEvfInBackGround()
         {

@@ -408,6 +408,41 @@ namespace CameraControl.Devices.Canon
             CaptureInSdRam = true;
             Camera.PropertyChanged += Camera_PropertyChanged;
             SerialNumber = Camera.SerialNumber;
+            AddAditionalProps();
+        }
+
+        public virtual void AddAditionalProps()
+        {
+            AdvancedProperties.Add(InitDriveMode());
+            foreach (PropertyValue<long> value in AdvancedProperties)
+            {
+                value.SetValue((long)Camera.GetProperty(value.Code), false);
+            }
+        }
+
+        private PropertyValue<long> InitDriveMode()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Drive Mode",
+                IsEnabled = true,
+                Code = Edsdk.PropID_DriveMode,
+                SubType = typeof (UInt32),
+                DisableIfWrongValue = true
+            };
+            res.AddValues("Single-Frame Shooting", 0);
+            res.AddValues("Continuous Shooting", 1);
+            res.AddValues("Video", 2);
+            //res.AddValues("Not used", 3);
+            res.AddValues("High-Speed Continuous Shooting", 4);
+            res.AddValues("Low-Speed Continuous Shooting", 5);
+            res.AddValues("Silent single shooting", 6);
+            res.AddValues("10-Sec Self-Timer plus continuous shots", 7);
+            res.AddValues("10-Sec Self-Timer", 10);
+            res.AddValues("2-Sec Self-Timer", 11);
+            res.ValueChanged +=
+                (sender, key, val) => Camera.SetProperty(res.Code, val); 
+            return res;
         }
 
         private void InitOther()
@@ -501,6 +536,12 @@ namespace CameraControl.Devices.Canon
                     case Edsdk.PropID_FocusInfo:
                         //ResetShutterButton();
                         break;
+                }
+                foreach (
+                    PropertyValue<long> advancedProperty in
+                        AdvancedProperties.Where(advancedProperty => advancedProperty.Code == e.PropertyId))
+                {
+                    advancedProperty.SetValue((long) Camera.GetProperty(advancedProperty.Code), false);
                 }
             }
             catch (Exception exception)
@@ -1155,9 +1196,11 @@ namespace CameraControl.Devices.Canon
             int focus = 0;
             for (var i = 0; i < Math.Abs(step); i++)
             {
-                //Thread.Sleep(1);
+                Thread.Sleep(1);
                 var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
                     (int) (step < 0 ? Edsdk.EvfDriveLens_Near1 : Edsdk.EvfDriveLens_Far1));
+                //if (i%10 == 0)
+                //    Camera.DownloadEvfInternal();
                 if (res == Edsdk.EDS_ERR_OK)
                     focus += step < 0 ? -1 : 1;
 
