@@ -414,6 +414,7 @@ namespace CameraControl.Devices.Canon
         public virtual void AddAditionalProps()
         {
             AdvancedProperties.Add(InitDriveMode());
+            AdvancedProperties.Add(InitFlash());
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 value.SetValue((long)Camera.GetProperty(value.Code), false);
@@ -442,6 +443,23 @@ namespace CameraControl.Devices.Canon
             res.AddValues("2-Sec Self-Timer", 11);
             res.ValueChanged +=
                 (sender, key, val) => Camera.SetProperty(res.Code, val); 
+            return res;
+        }
+
+        private PropertyValue<long> InitFlash()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Flash",
+                IsEnabled = true,
+                Code = Edsdk.PropID_FlashOn,
+                SubType = typeof(UInt32),
+                DisableIfWrongValue = true
+            };
+            res.AddValues("No flash", 0);
+            res.AddValues("Flash", 1);
+            res.ValueChanged +=
+                (sender, key, val) => Camera.SetProperty(res.Code, val);
             return res;
         }
 
