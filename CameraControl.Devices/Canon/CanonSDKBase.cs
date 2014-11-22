@@ -1192,19 +1192,15 @@ namespace CameraControl.Devices.Canon
         public override int Focus(int step)
         {
             ResetShutterButton();
-            
-            int focus = 0;
-            for (var i = 0; i < Math.Abs(step); i++)
-            {
-                Thread.Sleep(1);
-                var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
-                    (int) (step < 0 ? Edsdk.EvfDriveLens_Near1 : Edsdk.EvfDriveLens_Far1));
-                //if (i%10 == 0)
-                //    Camera.DownloadEvfInternal();
-                if (res == Edsdk.EDS_ERR_OK)
-                    focus += step < 0 ? -1 : 1;
 
-            }
+            int focus = 0;
+            var res = Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf,
+                (int) (step < 0 ? Edsdk.EvfDriveLens_Near1 : Edsdk.EvfDriveLens_Far1));
+            //if (i%10 == 0)
+            //    Camera.DownloadEvfInternal();
+            if (res == Edsdk.EDS_ERR_OK)
+                focus += step < 0 ? -1 : 1;
+
             //Camera.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
             return focus;
         }

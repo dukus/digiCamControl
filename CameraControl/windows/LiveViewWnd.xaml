@@ -68,7 +68,8 @@
         </Canvas>
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" 
                     Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
-            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000">
+            <ProgressBar Width="{Binding ElementName=StackPanel, Path=ActualWidth}" Height="5" Visibility="{Binding FocusProgressVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" Value="{Binding FocusProgressValue}" Maximum="{Binding FocusProgressMax}"/>
+            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000" Name="StackPanel">
                 <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockNear}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">

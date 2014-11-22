@@ -103,6 +103,9 @@ namespace CameraControl.ViewModel
         private int _countDown;
         private bool _countDownVisible;
         private bool _captureInProgress;
+        private bool _focusProgressVisible;
+        private int _focusProgressMax;
+        private int _focusProgressValue;
 
         public ICameraDevice CameraDevice
         {
@@ -844,6 +847,40 @@ namespace CameraControl.ViewModel
         }
 
         #endregion
+
+        #region focus progress
+
+        public bool FocusProgressVisible
+        {
+            get { return _focusProgressVisible; }
+            set
+            {
+                _focusProgressVisible = value; 
+                RaisePropertyChanged(()=>FocusProgressVisible);
+            }
+        }
+
+        public int FocusProgressMax
+        {
+            get { return _focusProgressMax; }
+            set
+            {
+                _focusProgressMax = value;
+                RaisePropertyChanged(() => FocusProgressMax);
+            }
+        }
+
+        public int FocusProgressValue
+        {
+            get { return _focusProgressValue; }
+            set
+            {
+                _focusProgressValue = value;
+                RaisePropertyChanged(() => FocusProgressValue);
+            }
+        }
+
+        #endregion
         #region Commands
 
         public RelayCommand AutoFocusCommand { get; set; }
@@ -917,12 +954,12 @@ namespace CameraControl.ViewModel
             RecordMovieCommand = new RelayCommand(RecordMovie,
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(CaptureInThread);
-            FocusMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.SmalFocusStep));
-            FocusMMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.MediumFocusStep));
-            FocusMMMCommand = new RelayCommand(() => SetFocus(-ServiceProvider.Settings.LargeFocusStep));
-            FocusPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.SmalFocusStep));
-            FocusPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.MediumFocusStep));
-            FocusPPPCommand = new RelayCommand(() => SetFocus(ServiceProvider.Settings.LargeFocusStep));
+            FocusMCommand = new RelayCommand(() => SetFocus( SimpleManualFocus? -1: -ServiceProvider.Settings.SmalFocusStep));
+            FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -25 : -ServiceProvider.Settings.MediumFocusStep));
+            FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -100 : -ServiceProvider.Settings.LargeFocusStep));
+            FocusPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 1 : ServiceProvider.Settings.SmalFocusStep));
+            FocusPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 25 : ServiceProvider.Settings.MediumFocusStep));
+            FocusPPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 100 : ServiceProvider.Settings.LargeFocusStep));
             MoveACommand = new RelayCommand(() => SetFocus(-FocusCounter));
             MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
@@ -1979,17 +2016,22 @@ namespace CameraControl.ViewModel
                     _timer.Stop();
                     CameraDevice.StartLiveView();
                     StaticHelper.Instance.SystemMessage = "Move focus " + step;
-                    //if (SimpleManualFocus)
-                    //{
-                    //    for (var i = 0; i < Math.Abs(step); i++)
-                    //    {
-                    //        Thread.Sleep(15);
-                    //        if (i % 10 == 0)  
-                    //            GetLiveImage();
-                    //        FocusCounter += CameraDevice.Focus(step);
-                    //    }
-                    //}
-                    //else
+                    if (SimpleManualFocus)
+                    {
+                        FocusProgressMax = Math.Abs(step);
+                        FocusProgressValue = 0;
+                        FocusProgressVisible = true;
+
+                        for (var i = 0; i < Math.Abs(step); i++)
+                        {
+                            FocusProgressValue ++;
+                            FocusCounter += CameraDevice.Focus(step);
+                            GetLiveImage();
+                            Thread.Sleep(1000/DesiredFrameRate/2);
+                        }
+                        FocusProgressVisible = false;
+                    }
+                    else
                     {
                         FocusCounter += CameraDevice.Focus(step);
                     }
