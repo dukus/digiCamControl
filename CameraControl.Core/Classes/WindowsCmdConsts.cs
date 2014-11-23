@@ -54,6 +54,8 @@ namespace CameraControl.Core.Classes
         public const string LiveViewWnd_Message = "LiveViewWnd_Message";
         public const string AstroLiveViewWnd_Show = "AstroLiveViewWnd_Show";
         public const string AstroLiveViewWnd_Hide = "AstroLiveViewWnd_Hide";
+        public const string PrintWnd_Show = "PrintWnd_Show";
+        public const string PrintWnd_Hide = "PrintWnd_Hide";
         public const string Prev_Image = "Prev_Image";
         public const string Next_Image = "Next_Image";
         public const string Select_Image = "Select_Image";

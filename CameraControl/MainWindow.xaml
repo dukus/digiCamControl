@@ -64,7 +64,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="65" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="463*" />
             <RowDefinition Height="54" />
             <RowDefinition Height="102" />
@@ -83,8 +83,8 @@
             <!--<Controls:ProgressRing IsActive="True" Height="184" Width="214" IsLarge="False" />-->
         </Grid>
 
-        <Controls:MetroContentControl Grid.ColumnSpan="4" Name="toolBar1">
-            <WrapPanel >
+        <!--<Controls:MetroContentControl Grid.ColumnSpan="4">-->
+            <WrapPanel Grid.Row="0"  Grid.ColumnSpan="3">
                 <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Height="50" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}">
                     <Image Margin="5" Source="/CameraControl;component/Images/Camera.png"/>
                 </Button>
@@ -160,9 +160,17 @@
                         </Rectangle.Fill>
                     </Rectangle>
                 </Button>
-                <StackPanel HorizontalAlignment="Right" IsEnabled="{Binding Path=DefaultSession.TimeLapse.IsDisabled}"></StackPanel>
-            </WrapPanel>
-        </Controls:MetroContentControl>
+            <Button ToolTip="{T:TranslateExtension LabelPrint}" Height="50" Name="but_print" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_print_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPrintButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_printer}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+        </WrapPanel>
+        <!--</Controls:MetroContentControl>-->
         <StackPanel Grid.Row="1" Grid.RowSpan="4" Orientation="Horizontal">
             <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <Expander.Header>

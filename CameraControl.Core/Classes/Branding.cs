@@ -85,6 +85,8 @@ namespace CameraControl.Core.Classes
         public bool ShowMulyiCameraButtonMainWindow { get; set; }
         
         public bool ShowWifiCameraButtonMainWindow { get; set; }
+        
+        public bool ShowPrintButtonMainWindow { get; set; }
 
         public bool ShowSettingMenuMainWindow { get; set; }
 
@@ -134,6 +136,7 @@ namespace CameraControl.Core.Classes
             ShowAstronomyButtonMainWindow = true;
             ShowMulyiCameraButtonMainWindow = true;
             ShowWifiCameraButtonMainWindow = true;
+            ShowPrintButtonMainWindow = true;
             ShowSettingMenuMainWindow = true;
             ShowMenuMenuMainWindow = true;
             ShowCameraSelectorMainWindow = true;

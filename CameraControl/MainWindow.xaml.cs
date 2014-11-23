@@ -983,6 +983,11 @@ namespace CameraControl
             }
         }
 
+        private void but_print_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.PrintWnd_Show);
+        }
+
 
     }
 }

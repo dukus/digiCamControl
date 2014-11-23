@@ -377,7 +377,13 @@ namespace CameraControl.Core.Classes
                 file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FocalLength"];
         }
 
+
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres)
+        {
+            return LoadImage(fileItem, fullres, ServiceProvider.Settings.ShowFocusPoints);
+        }
+        
+        public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
             if (ServiceProvider.Settings.LowMemoryUsage)
                 fullres = false;
@@ -437,7 +443,7 @@ namespace CameraControl.Core.Classes
                 */
                 bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
 
-                if (ServiceProvider.Settings.ShowFocusPoints)
+                if (showfocuspoints)
                     DrawFocusPoints(fileItem, bitmap);
 
                 if (fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
