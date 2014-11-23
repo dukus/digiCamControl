@@ -1,4 +1,4 @@
-[digiCamControl http://digicamcontrol.com/]
+[digiCamControl](http://digicamcontrol.com/)
 ==============
 
 DSLR camera remote control open source software
