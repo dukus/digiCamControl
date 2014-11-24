@@ -108,27 +108,25 @@ namespace CameraControl.windows
                         }
                         break;
                     case WindowsCmdConsts.LiveViewWnd_Hide:
-                        {
-                            if (_register.ContainsKey(param))
-                                 ((LiveViewViewModel)(_register[param].DataContext)).WindowsManager_Event(cmd, param);
+                    {
+                        if (_register.ContainsKey(param))
                             _register[param].ExecuteCommand(cmd, param);
-                            var nikonBase = param as NikonBase;
-                            if (ServiceProvider.Settings.EasyLiveViewControl)
+                        var nikonBase = param as NikonBase;
+                        if (ServiceProvider.Settings.EasyLiveViewControl)
+                        {
+                            if (nikonBase != null && _presets.ContainsKey(nikonBase))
                             {
-                                if (nikonBase != null && _presets.ContainsKey(nikonBase))
-                                {
-                                    nikonBase.ShutterSpeed.Value = _presets[nikonBase].GetValue("ShutterSpeed");
-                                    nikonBase.FNumber.Value = _presets[nikonBase].GetValue("FNumber");
-                                    nikonBase.FocusMode.Value = _presets[nikonBase].GetValue("FocusMode");
-                                }
+                                nikonBase.ShutterSpeed.Value = _presets[nikonBase].GetValue("ShutterSpeed");
+                                nikonBase.FNumber.Value = _presets[nikonBase].GetValue("FNumber");
+                                nikonBase.FocusMode.Value = _presets[nikonBase].GetValue("FocusMode");
                             }
                         }
+                    }
                         break;
                     case CmdConsts.All_Close:
                         foreach (var liveViewWnd in _register)
                         {
                             liveViewWnd.Value.ExecuteCommand(cmd, param);
-                            ((LiveViewViewModel)(liveViewWnd.Value.DataContext)).WindowsManager_Event(cmd, param);
                         }
                         break;
                     default:
@@ -137,7 +135,6 @@ namespace CameraControl.windows
                             if (cmd.StartsWith("LiveView"))
                             {
                                 liveViewWnd.Value.ExecuteCommand(cmd, param);
-                                ((LiveViewViewModel)(liveViewWnd.Value.DataContext)).WindowsManager_Event(cmd, param);
                             }
                         }
                         break;

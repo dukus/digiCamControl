@@ -157,6 +157,20 @@ namespace CameraControl.windows
 
         public void ExecuteCommand(string cmd, object param)
         {
+
+            Dispatcher.Invoke(new Action(delegate
+            {
+                try
+                {
+                    if (DataContext != null)
+                        ((LiveViewViewModel) (DataContext)).WindowsManager_Event(cmd, param);
+                }
+                catch (Exception)
+                {
+                    
+                    
+                }
+            }));
             switch (cmd)
             {
                 case WindowsCmdConsts.LiveViewWnd_Show:

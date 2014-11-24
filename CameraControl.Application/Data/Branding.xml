@@ -8,10 +8,10 @@
   <DefaultMissingThumbImage />
   <!-- hide all link buttons to DCC home page --> 
   <OnlineReference>false</OnlineReference>
-   <!-- false and false are case sensitive  -->  
+   <!-- true and false are case sensitive  -->  
   <ShowStartupScreen>false</ShowStartupScreen>
   <CheckForUpdate>false</CheckForUpdate>
-  
+   <!-- main screen top bar button   -->  
   <ShowRefreshButtonMainWindow>false</ShowRefreshButtonMainWindow>
   <ShowDownloadButtonMainWindow>false</ShowDownloadButtonMainWindow>
   <ShowBracketingButtonMainWindow>false</ShowBracketingButtonMainWindow>
@@ -24,12 +24,14 @@
   <ShowMulyiCameraButtonMainWindow>false</ShowMulyiCameraButtonMainWindow>
   <ShowWifiCameraButtonMainWindow>false</ShowWifiCameraButtonMainWindow>
   <ShowPrintButtonMainWindow/>false</ShowPrintButtonMainWindow>
+  
   <ShowSettingMenuMainWindow>false</ShowSettingMenuMainWindow>
   <ShowMenuMenuMainWindow>false</ShowMenuMenuMainWindow>
   <ShowCameraSelectorMainWindow>false</ShowCameraSelectorMainWindow>
   <ShowRightPanelMainWindow>false</ShowRightPanelMainWindow>
   <ShowCameraPropertiesMainWindow>false</ShowCameraPropertiesMainWindow>
   
+   <!-- live view left panel group boxes  -->  
   <ShowFocusControlLiveView>true</ShowFocusControlLiveView>
   <ShowFocusStackingLiveView>true</ShowFocusStackingLiveView>
   <ShowControlLiveView>true</ShowControlLiveView>
