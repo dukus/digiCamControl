@@ -23,7 +23,7 @@
   <ShowAstronomyButtonMainWindow>false</ShowAstronomyButtonMainWindow>
   <ShowMulyiCameraButtonMainWindow>false</ShowMulyiCameraButtonMainWindow>
   <ShowWifiCameraButtonMainWindow>false</ShowWifiCameraButtonMainWindow>
-  <ShowPrintButtonMainWindow/>false</ShowPrintButtonMainWindow>
+  <ShowPrintButtonMainWindow>false</ShowPrintButtonMainWindow>
   
   <ShowSettingMenuMainWindow>false</ShowSettingMenuMainWindow>
   <ShowMenuMenuMainWindow>false</ShowMenuMenuMainWindow>
