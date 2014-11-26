@@ -40,5 +40,31 @@ namespace CameraControl.Devices.Nikon
 {
     public class NikonD7100 : NikonD600
     {
+        protected override void GetAditionalLIveViewData(LiveViewData viewData, byte[] result)
+        {
+            viewData.LiveViewImageWidth = ToInt16(result, 8);
+            viewData.LiveViewImageHeight = ToInt16(result, 10);
+
+            viewData.ImageWidth = ToInt16(result, 12);
+            viewData.ImageHeight = ToInt16(result, 14);
+
+            viewData.FocusFrameXSize = ToInt16(result, 24);
+            viewData.FocusFrameYSize = ToInt16(result, 26);
+
+            viewData.FocusX = ToInt16(result, 28);
+            viewData.FocusY = ToInt16(result, 30);
+
+            viewData.Focused = result[48] != 1;
+            viewData.MovieIsRecording = result[70] == 1;
+
+            if (result[37] == 1)
+                viewData.Rotation = -90;
+            if (result[37] == 2)
+                viewData.Rotation = 90;
+
+            viewData.HaveLevelAngleData = true;
+            viewData.LevelAngleRolling = ToInt16(result, 52);
+
+        }
     }
 }

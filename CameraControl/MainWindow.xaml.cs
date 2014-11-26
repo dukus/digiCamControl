@@ -961,7 +961,11 @@ namespace CameraControl
         private void Window_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon)
+            {
                 this.Hide();
+                MyNotifyIcon.HideBalloonTip();
+                MyNotifyIcon.ShowBalloonTip("digiCamControl", "Application was minimized \n Double click to restore", BalloonIcon.Info);
+            }
         }
 
         private void MyNotifyIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)

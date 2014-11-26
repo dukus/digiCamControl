@@ -100,9 +100,14 @@ namespace CameraControl.Devices.Classes
 
         public bool IsLiveViewRunning { get; set; }
 
+        public bool HaveLevelAngleData { get; set; }
+
+        public decimal LevelAngleRolling { get; set; }
+
         public LiveViewData()
         {
             IsLiveViewRunning = true;
+            HaveLevelAngleData = false;
         }
     }
 }

@@ -106,6 +106,8 @@ namespace CameraControl.ViewModel
         private bool _focusProgressVisible;
         private int _focusProgressMax;
         private int _focusProgressValue;
+        private int _levelAngle;
+        private string _levelAngleColor;
 
         public ICameraDevice CameraDevice
         {
@@ -134,6 +136,27 @@ namespace CameraControl.ViewModel
             {
                 _bitmap = value;
                 RaisePropertyChanged(() => Bitmap);
+            }
+        }
+
+        public int LevelAngle
+        {
+            get { return _levelAngle; }
+            set
+            {
+                _levelAngle = value;
+                RaisePropertyChanged(()=>LevelAngle);
+                LevelAngleColor = _levelAngle % 90 <= 1 || _levelAngle % 90 >= 89 ? "Green" : "Red";
+            }
+        }
+
+        public string LevelAngleColor
+        {
+            get { return _levelAngleColor; }
+            set
+            {
+                _levelAngleColor = value;
+                RaisePropertyChanged(() => LevelAngleColor);
             }
         }
 
@@ -1404,6 +1427,8 @@ namespace CameraControl.ViewModel
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
+                        LevelAngle = (int) LiveViewData.LevelAngleRolling;
+
                         if (_totalframes%DesiredWebFrameRate == 0)
                             ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
                     }
@@ -1431,6 +1456,11 @@ namespace CameraControl.ViewModel
                 enc.Save(stm);
                 return stm.ToArray();
             }
+        }
+
+        private void DrawAngle(WriteableBitmap writeableBitmap)
+        {
+            int y = writeableBitmap.PixelHeight;
         }
 
         private void DrawGrid(WriteableBitmap writeableBitmap)

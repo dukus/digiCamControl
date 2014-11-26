@@ -160,7 +160,7 @@ namespace CameraControl.Core.Classes
                 {
                     XmlSerializer mySerializer =
                         new XmlSerializer(typeof (Branding));
-                    FileStream myFileStream = new FileStream(filename, FileMode.Open);
+                    FileStream myFileStream = new FileStream(filename, FileMode.Open,FileAccess.Read,FileShare.Read);
                     branding = (Branding) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }

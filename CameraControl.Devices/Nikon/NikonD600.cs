@@ -95,6 +95,7 @@ namespace CameraControl.Devices.Nikon
                 viewData.Rotation = 90;
         }
 
+
         protected override PropertyValue<long> InitStillCaptureMode()
         {
             PropertyValue<long> res = new PropertyValue<long>()
