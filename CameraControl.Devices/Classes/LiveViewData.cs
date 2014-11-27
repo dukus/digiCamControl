@@ -104,6 +104,8 @@ namespace CameraControl.Devices.Classes
 
         public decimal LevelAngleRolling { get; set; }
 
+        public decimal MovieTimeRemain { get; set; }
+
         public LiveViewData()
         {
             IsLiveViewRunning = true;

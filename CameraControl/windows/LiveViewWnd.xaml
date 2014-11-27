@@ -64,7 +64,10 @@
         <Controls:RangeSlider HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="4" Padding="0,40" Height="{Binding ElementName=_image, Path=ActualHeight}" Orientation="Vertical" UpperValue="{Binding Path=VerticalMax}"  LowerValue="{Binding Path= VerticalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <Canvas Grid.Column="2" Background="{x:Null}" Grid.RowSpan="4" >
-            <Label Canvas.Left="0" Canvas.Top="0" Content="REC" Height="41" FontSize="20" FontWeight="Bold" Foreground="Red" Width="52" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+            <StackPanel Canvas.Left="0" Canvas.Top="0" Orientation="Horizontal" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}">
+            <Label  Content="REC" Height="41" FontSize="20" FontWeight="Bold" Foreground="Red" Width="52"/>
+            <Label  Content="{Binding MovieTimeRemain}" Height="41" FontSize="20" FontWeight="Bold" Margin="5,0" />
+            </StackPanel>
         </Canvas>
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" 
                     Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">

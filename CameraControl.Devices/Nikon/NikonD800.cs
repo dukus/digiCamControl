@@ -114,5 +114,33 @@ namespace CameraControl.Devices.Nikon
             base.StopRecordMovie();
             SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_ApplicationMode);
         }
+
+        protected override void GetAditionalLIveViewData(LiveViewData viewData, byte[] result)
+        {
+            viewData.LiveViewImageWidth = ToInt16(result, 8);
+            viewData.LiveViewImageHeight = ToInt16(result, 10);
+
+            viewData.ImageWidth = ToInt16(result, 12);
+            viewData.ImageHeight = ToInt16(result, 14);
+
+            viewData.FocusFrameXSize = ToInt16(result, 16);
+            viewData.FocusFrameYSize = ToInt16(result, 18);
+
+            viewData.FocusX = ToInt16(result, 20);
+            viewData.FocusY = ToInt16(result, 22);
+
+            viewData.Focused = result[40] != 1;
+            viewData.MovieIsRecording = result[60] == 1;
+            viewData.MovieTimeRemain = ToDeciaml(result, 56);
+
+            if (result[29] == 1)
+                viewData.Rotation = -90;
+            if (result[29] == 2)
+                viewData.Rotation = 90;
+
+            viewData.HaveLevelAngleData = true;
+            viewData.LevelAngleRolling = ToInt16(result, 44);
+
+        }
     }
 }

@@ -108,6 +108,7 @@ namespace CameraControl.ViewModel
         private int _focusProgressValue;
         private int _levelAngle;
         private string _levelAngleColor;
+        private decimal _movieTimeRemain;
 
         public ICameraDevice CameraDevice
         {
@@ -192,6 +193,17 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => Recording);
             }
         }
+
+        public decimal MovieTimeRemain
+        {
+            get { return _movieTimeRemain; }
+            set
+            {
+                _movieTimeRemain = value;
+                RaisePropertyChanged(() => MovieTimeRemain);
+            }
+        }
+
 
         public int GridType
         {
@@ -1428,7 +1440,7 @@ namespace CameraControl.ViewModel
                         Bitmap = writeableBitmap;
 
                         LevelAngle = (int) LiveViewData.LevelAngleRolling;
-
+                        MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
                         if (_totalframes%DesiredWebFrameRate == 0)
                             ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
                     }

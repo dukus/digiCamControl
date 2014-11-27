@@ -55,7 +55,8 @@ namespace CameraControl.Devices.Nikon
             viewData.FocusY = ToInt16(result, 30);
 
             viewData.Focused = result[48] != 1;
-            viewData.MovieIsRecording = result[70] == 1;
+            viewData.MovieIsRecording = result[68] == 1;
+            viewData.MovieTimeRemain = ToDeciaml(result, 64);
 
             if (result[37] == 1)
                 viewData.Rotation = -90;
@@ -64,7 +65,7 @@ namespace CameraControl.Devices.Nikon
 
             viewData.HaveLevelAngleData = true;
             viewData.LevelAngleRolling = ToInt16(result, 52);
-
+            
         }
     }
 }

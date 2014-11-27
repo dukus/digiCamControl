@@ -578,5 +578,27 @@ namespace CameraControl.Devices
             return (short) (i);
             //return System.BitConverter.ToInt16(value.Reverse().ToArray(), value.Length - sizeof(Int16) - startIndex);
         }
+
+        public static UInt16 ToUInt16(byte[] value, int startIndex)
+        {
+            uint i = (uint)(value[startIndex] << 8 | value[startIndex + 1]);
+            return (UInt16)(i);
+            //return System.BitConverter.ToInt16(value.Reverse().ToArray(), value.Length - sizeof(Int16) - startIndex);
+        }
+
+        public static int ToInt32(byte[] value, int startIndex)
+        {
+            int i = (value[startIndex] << 24 |value[startIndex+1] << 16 | value[startIndex+2] << 8 | value[startIndex + 3]);
+            return i;
+            //return System.BitConverter.ToInt16(value.Reverse().ToArray(), value.Length - sizeof(Int16) - startIndex);
+        }
+
+        public decimal ToDeciaml(byte[] value, int startIndex)
+        {
+            int i = ToUInt16(value, startIndex);
+            int d = ToUInt16(value, startIndex+2);
+            string s = i + "." + d;
+            return Convert.ToDecimal(s);
+        }
     }
 }
