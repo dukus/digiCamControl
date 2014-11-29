@@ -56,5 +56,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 return null;
             }
         }
+
+        public int ToInt(string name)
+        {
+            int i = 0;
+            int.TryParse(_config.ConfigData[name], out i);
+            return i;
+        }
     }
 }

@@ -378,6 +378,22 @@ namespace CameraControl.Core.Classes
         }
 
 
+        public ImageSource LoadImage(string filename, int width, int rotateAngle)
+        {
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            bi.DecodePixelWidth = width;
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.UriSource = new Uri(filename);
+            bi.EndInit();
+
+            var bitmap = BitmapFactory.ConvertToPbgra32Format(bi);
+            if (rotateAngle != 0)
+                bitmap = bitmap.Rotate(rotateAngle);
+            bitmap.Freeze();
+            return bitmap;
+        }
+
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres)
         {
             return LoadImage(fileItem, fullres, ServiceProvider.Settings.ShowFocusPoints);

@@ -109,9 +109,11 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
@@ -146,6 +148,11 @@
     </Compile>
     <Compile Include="AutoExportPlugins\ExecuteFilePlugin.cs" />
     <Compile Include="AutoExportPlugins\ExecuteFilePluginViewModel.cs" />
+    <Compile Include="AutoExportPlugins\PrintPlugin.cs" />
+    <Compile Include="AutoExportPlugins\PrintPluginConfig.xaml.cs">
+      <DependentUpon>PrintPluginConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoExportPlugins\PrintPluginViewModel.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DCCUSBShutterReleaseConfig.xaml.cs">
       <DependentUpon>DCCUSBShutterReleaseConfig.xaml</DependentUpon>
@@ -225,6 +232,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AutoExportPlugins\CopyFilePluginConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutoExportPlugins\PrintPluginConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

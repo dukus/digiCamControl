@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CameraControl.Core;
+﻿using System.Windows.Forms;
 using CameraControl.Core.Classes;
-using CameraControl.Core.Interfaces;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using UserControl = System.Windows.Controls.UserControl;
 
 namespace CameraControl.Plugins.AutoExportPlugins
 {
