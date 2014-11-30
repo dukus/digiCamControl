@@ -19,8 +19,8 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         public bool Execute(string filename, AutoExportPluginConfig configData)
         {
-            if (!configData.IsRedy)
-                return false;
+            //if (!configData.IsRedy)
+            //    return false;
             //Print(filename, configData);
             Thread thread = new Thread(() => Print(filename, configData));
             thread.SetApartmentState(ApartmentState.STA);

@@ -543,5 +543,6 @@ namespace CameraControl.Core.Translation
         public static string LabelMarginBetweenImages = "Margin";
         public static string LabelRotate = "Rotate";
         public static string LabelRepeatImages = "Repeat images";
+        public static string LabelWaitBetweenSteps = "Wait between steps (ms)";
     }
 }

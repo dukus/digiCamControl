@@ -350,6 +350,47 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public int SmallFocusStepCanon
+        {
+            get { return _smallFocusStepCanon; }
+            set
+            {
+                _smallFocusStepCanon = value;
+                NotifyPropertyChanged("SmallFocusStepCanon");
+            }
+        }
+
+        public int MediumFocusStepCanon
+        {
+            get { return _mediumFocusStepCanon; }
+            set
+            {
+                _mediumFocusStepCanon = value;
+                NotifyPropertyChanged("MediumFocusStepCanon");
+            }
+        }
+
+        public int LargeFocusStepCanon
+        {
+            get { return _largeFocusStepCanon; }
+            set
+            {
+                _largeFocusStepCanon = value;
+                NotifyPropertyChanged("LargeFocusStepCanon");
+            }
+        }
+
+        public int CanonFocusStepWait
+        {
+            get { return _canonFocusStepWait; }
+            set
+            {
+                _canonFocusStepWait = value;
+                NotifyPropertyChanged("CanonFocusStepWait");
+            }
+        }
+
+
         private int _smalFocusStep;
 
         public int SmalFocusStep
@@ -683,6 +724,10 @@ namespace CameraControl.Core.Classes
         private bool _startMinimized;
         private bool _startupWithWindows;
         private bool _loadThumbsDownload;
+        private int _smallFocusStepCanon;
+        private int _mediumFocusStepCanon;
+        private int _largeFocusStepCanon;
+        private int _canonFocusStepWait;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -783,6 +828,10 @@ namespace CameraControl.Core.Classes
             SmalFocusStep = 10;
             MediumFocusStep = 100;
             LargeFocusStep = 500;
+            SmallFocusStepCanon = 1;
+            MediumFocusStepCanon = 25;
+            LargeFocusStepCanon = 100;
+            CanonFocusStepWait = 400;
             RotateIndex = 0;
             FullScreenColor = Colors.Black;
             SelectedLanguage = Thread.CurrentThread.CurrentCulture.Name;

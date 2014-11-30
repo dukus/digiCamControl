@@ -270,16 +270,64 @@
                         <RowDefinition Height="35" />
                         <RowDefinition Height="67*" />
                     </Grid.RowDefinitions>
+                    <GroupBox Header="Nikon">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
 
-                    <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
-                    <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding SmalFocusStep}" Margin="3"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding SmalFocusStep}" Margin="3"/>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
-                    <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="{Binding SmalFocusStep}" Maximum="250" Value="{Binding MediumFocusStep}" Margin="3"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="{Binding SmalFocusStep}" Maximum="250" Value="{Binding MediumFocusStep}" Margin="3"/>
 
-                    <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
-                    <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="{Binding MediumFocusStep}" Maximum="1500" Value="{Binding LargeFocusStep}" Margin="3"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="{Binding MediumFocusStep}" Maximum="1500" Value="{Binding LargeFocusStep}" Margin="3"/>
+                        </Grid>
+                    </GroupBox>
 
+                    <GroupBox Grid.Row="0" Grid.Column="1" Header="Canon">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding SmallFocusStepCanon}" Margin="3"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="{Binding SmallFocusStepCanon}" Maximum="250" Value="{Binding MediumFocusStepCanon}" Margin="3"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="{Binding MediumFocusStepCanon}" Maximum="1500" Value="{Binding LargeFocusStepCanon}" Margin="3"/>
+
+                            <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelWaitBetweenSteps}" HorizontalContentAlignment="Right"/>
+                            <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="5" Maximum="1500" Value="{Binding CanonFocusStepWait}" Margin="3"/>
+
+                        </Grid>
+                    </GroupBox>
+                    
                     <Label Content="{T:TranslateExtension LabelMotionDetectionType}" Grid.Row="4" HorizontalContentAlignment="Right" />
                     <ComboBox Grid.Column="1" Grid.Row="4" Margin="3" ItemsSource="{Binding}" SelectedIndex="{Binding DetectionType}">
                         <ComboBoxItem Content="{T:TranslateExtension LabelTwoFramesDifferenceDetector}"/>

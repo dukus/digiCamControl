@@ -989,12 +989,12 @@ namespace CameraControl.ViewModel
             RecordMovieCommand = new RelayCommand(RecordMovie,
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(CaptureInThread);
-            FocusMCommand = new RelayCommand(() => SetFocus( SimpleManualFocus? -1: -ServiceProvider.Settings.SmalFocusStep));
-            FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -25 : -ServiceProvider.Settings.MediumFocusStep));
-            FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -100 : -ServiceProvider.Settings.LargeFocusStep));
-            FocusPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 1 : ServiceProvider.Settings.SmalFocusStep));
-            FocusPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 25 : ServiceProvider.Settings.MediumFocusStep));
-            FocusPPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? 100 : ServiceProvider.Settings.LargeFocusStep));
+            FocusMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.SmallFocusStepCanon : -ServiceProvider.Settings.SmalFocusStep));
+            FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.MediumFocusStepCanon : -ServiceProvider.Settings.MediumFocusStep));
+            FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.LargeFocusStepCanon : -ServiceProvider.Settings.LargeFocusStep));
+            FocusPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? ServiceProvider.Settings.SmallFocusStepCanon : ServiceProvider.Settings.SmalFocusStep));
+            FocusPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? ServiceProvider.Settings.MediumFocusStepCanon : ServiceProvider.Settings.MediumFocusStep));
+            FocusPPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? ServiceProvider.Settings.LargeFocusStepCanon : ServiceProvider.Settings.LargeFocusStep));
             MoveACommand = new RelayCommand(() => SetFocus(-FocusCounter));
             MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
@@ -2069,7 +2069,7 @@ namespace CameraControl.ViewModel
                             FocusProgressValue ++;
                             FocusCounter += CameraDevice.Focus(step);
                             GetLiveImage();
-                            Thread.Sleep(1000/DesiredFrameRate/2);
+                            Thread.Sleep(ServiceProvider.Settings.CanonFocusStepWait);
                         }
                         FocusProgressVisible = false;
                     }
