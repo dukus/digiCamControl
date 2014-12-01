@@ -2267,13 +2267,13 @@ namespace CameraControl.ViewModel
                         switch (FocusStepSize)
                         {
                             case 0:
-                                SetFocus(dir*(SimpleManualFocus ? 1 : ServiceProvider.Settings.SmalFocusStep));
+                                SetFocus(dir * (SimpleManualFocus ? ServiceProvider.Settings.SmallFocusStepCanon : ServiceProvider.Settings.SmalFocusStep));
                                 break;
                             case 1:
-                                SetFocus(dir*(SimpleManualFocus ? 5 : ServiceProvider.Settings.MediumFocusStep));
+                                SetFocus(dir * (SimpleManualFocus ? ServiceProvider.Settings.MediumFocusStepCanon : ServiceProvider.Settings.MediumFocusStep));
                                 break;
                             case 2:
-                                SetFocus(dir*(SimpleManualFocus ? 25 : ServiceProvider.Settings.LargeFocusStep));
+                                SetFocus(dir * (SimpleManualFocus ? ServiceProvider.Settings.LargeFocusStepCanon : ServiceProvider.Settings.LargeFocusStep));
                                 break;
                         }
                     }
