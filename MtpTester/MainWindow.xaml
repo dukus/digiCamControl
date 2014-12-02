@@ -18,7 +18,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="334*" />
         </Grid.RowDefinitions>
         <Menu Name="menu1">

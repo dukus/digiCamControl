@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using CameraControl.Devices.TransferProtocol;
 using CameraControl.Devices.Xml;
 using Microsoft.Win32;
 using PortableDeviceLib;
@@ -52,10 +53,13 @@ namespace MtpTester
                 {
                     SelectedDevice = wnd.SelectedDevice;
                     DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = SelectedDevice.DeviceId};
+                    MtpProtocol device = new MtpProtocol(descriptor.WpdId);
+                    device.ConnectToDevice("MTPTester", 1, 0);
+                    descriptor.StillImageDevice = device;
                     MTPCamera = new BaseMTPCamera();
                     MTPCamera.Init(descriptor);
                     LoadDeviceData(MTPCamera.ExecuteReadDataEx(0x1001));
-                    LoadDeviceData(MTPCamera.ExecuteReadDataEx(0x9108));
+                    //LoadDeviceData(MTPCamera.ExecuteReadDataEx(0x9108));
      
                     PopulateProperties();
                 }
