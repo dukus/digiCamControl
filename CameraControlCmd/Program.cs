@@ -419,6 +419,7 @@ namespace CameraControlCmd
 
         private static void InitApplication()
         {
+            ServiceProvider.Branding = Branding.LoadBranding(); 
             ServiceProvider.Configure();
             Log.Debug("Command line utility started");
             ServiceProvider.Settings = new Settings();
