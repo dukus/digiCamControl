@@ -19,6 +19,8 @@ namespace CameraControl.windows
     public partial class GetIpWnd 
     {
         public string Ip { get; set; }
+        public int Type { get; set; }
+        
 
         public GetIpWnd()
         {
@@ -34,6 +36,7 @@ namespace CameraControl.windows
         {
             DialogResult = true;
             Ip = txt_ip.Text;
+            Type = cmb_type.SelectedIndex;
         }
 
     }

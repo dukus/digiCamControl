@@ -8,8 +8,9 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <ComboBox Margin="3" IsEditable="False" IsEnabled="False">
-            <ComboBoxItem Content="DSLRDASHBOARDSERVER" IsSelected="True" />
+        <ComboBox Margin="3" IsEditable="False" Name="cmb_type" >
+            <ComboBoxItem Content="WU 1a/1b" IsSelected="True" />
+            <ComboBoxItem Content="DSLRDASHBOARDSERVER" IsSelected="False" />
         </ComboBox>
         <TextBox Grid.Row="1" Margin="3" Name="txt_ip" Text="192.168.1.1:4757" FontSize="20"/>
         <Button Content="Conect" Grid.Row="2" Name="btn_conect" Margin="3" Click="btn_conect_Click" />

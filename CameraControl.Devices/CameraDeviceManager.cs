@@ -39,6 +39,7 @@ using CameraControl.Devices.Nikon;
 using CameraControl.Devices.Others;
 using CameraControl.Devices.TransferProtocol;
 using CameraControl.Devices.TransferProtocol.DDServer;
+using CameraControl.Devices.TransferProtocol.PtpIp;
 using Canon.Eos.Framework;
 using PortableDeviceLib;
 using WIA;
@@ -360,18 +361,34 @@ namespace CameraControl.Devices
             _connectionInProgress = false;
         }
 
-        public void ConnectToServer(string s)
+        public void ConnectToServer(string s, int type)
         {
             if(string.IsNullOrEmpty(s))
                 return;
-            int port = 4757;
-            string ip = s;
-            if(s.Contains(":"))
+            
+            if (type == 0)
             {
-                ip = s.Split(':')[0];
-                int.TryParse(s.Split(':')[1], out port);
+                int port = 4757;
+                string ip = s;
+                if (s.Contains(":"))
+                {
+                    ip = s.Split(':')[0];
+                    int.TryParse(s.Split(':')[1], out port);
+                }
+                ConnectDevicesPtpIp(ip, port);
             }
-            ConnectDevicesDDServer(ip, port);
+
+            if (type == 0)
+            {
+                int port = 4757;
+                string ip = s;
+                if (s.Contains(":"))
+                {
+                    ip = s.Split(':')[0];
+                    int.TryParse(s.Split(':')[1], out port);
+                }
+                ConnectDevicesDDServer(ip, port);
+            }
         }
 
         public void ConnectDevicesDDServer(string ip, int port)
@@ -397,6 +414,47 @@ namespace CameraControl.Devices
                     ICameraDevice cameraDevice;
                     DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = "ddserver"};
                     cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(protocol.Model));
+                    descriptor.StillImageDevice = protocol;
+
+                    //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                    cameraDevice.Init(descriptor);
+                    ConnectedDevices.Add(cameraDevice);
+                    NewCameraConnected(cameraDevice);
+
+                    descriptor.CameraDevice = cameraDevice;
+                    _deviceEnumerator.Add(descriptor);
+                }
+                else
+                {
+                    throw new Exception("Not Supported device " + protocol.Model);
+                }
+            }
+            finally
+            {
+                _connectionInProgress = false;
+            }
+        }
+
+        public void ConnectDevicesPtpIp(string ip, int port)
+        {
+            if (_connectionInProgress)
+                return;
+            try
+            {
+                _connectionInProgress = true;
+                _deviceEnumerator.RemoveDisconnected();
+
+                PtpIpClient client = new PtpIpClient();
+                if (!client.Open(ip, 15740))
+                    throw new Exception("No server was found!");
+                PtpIpProtocol protocol = new PtpIpProtocol(client);
+                protocol.ExecuteWithNoData(0x1002, 1);
+
+                if (GetNativeDriver(protocol.Model) != null)
+                {
+                    ICameraDevice cameraDevice;
+                    DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = "ptpip" };
+                    cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(protocol.Model));
                     descriptor.StillImageDevice = protocol;
 
                     //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);

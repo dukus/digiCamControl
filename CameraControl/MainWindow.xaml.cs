@@ -909,15 +909,16 @@ namespace CameraControl
         private void but_wifi_Click(object sender, RoutedEventArgs e)
         {
             try
+
             {
-                var wnd = new GetIpWnd { Ip = "192.168.1.1:4757" };
+                var wnd = new GetIpWnd { Ip = "192.168.1.1" };
                 if (wnd.ShowDialog() == true)
-                    ServiceProvider.DeviceManager.ConnectToServer(wnd.Ip);
+                    ServiceProvider.DeviceManager.ConnectToServer(wnd.Ip, wnd.Type);
             }
             catch (Exception exception)
             {
-                Log.Error("Unable to connect DSLRDASHBOARDSERVER", exception);
-                this.ShowMessageAsync("Error", "Unable to connect DSLRDASHBOARDSERVER " + exception.Message);
+                Log.Error("Unable to connect to WiFi device", exception);
+                this.ShowMessageAsync("Error", "Unable to connect to WiFi device " + exception.Message);
             }
         }
 
