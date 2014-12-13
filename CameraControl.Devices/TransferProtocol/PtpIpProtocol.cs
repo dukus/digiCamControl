@@ -141,7 +141,23 @@ namespace CameraControl.Devices.TransferProtocol
 
         public uint ExecuteWriteData(uint code, byte[] data, params uint[] parameters)
         {
+            //6->
+            //9->
+            //7<-
+            lock (_locker)
+            {
+                var cmd = new CmdRequest(code,2) {Parameters = parameters};
+                _client.Write(cmd);
+                _client.Write(new StartDataPacket() {Data = data, TransactionID = cmd.TransactionID});
 
+                var res1 = _client.Read();
+
+                var response = res1 as CmdResponse;
+                if (response != null)
+                {
+                    return (uint) response.Code;
+                }
+            }
             return 0;
         }
 

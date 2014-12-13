@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Drawing.Design;
+using System.IO;
 
 namespace CameraControl.Devices.TransferProtocol.PtpIp
 {
@@ -7,13 +8,15 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
         public uint Code { get; set; }
         public uint TransactionID { get; set; }
         public uint[] Parameters { get; set; }
+        public uint DataType { get; set; }
 
-        public CmdRequest(uint code)
+        public CmdRequest(uint code, uint datatype = 1)
         {
             TransactionID = PtpIpProtocol.TransactionId++;
             Header = new PtpIpHeader();
             Header.Type = (uint) PtpIpContainerType.Cmd_Request;
             Code = code;
+            DataType = datatype;
         }
 
         public override void Write(Stream s)
@@ -21,8 +24,8 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
             Header.Length = (uint) (8 + 4 + 2 + 4 + (Parameters != null ? (Parameters.Length*4) : 0));
             Header.Write(s);
             // 4 byte unknown. set to 1 currently.
-            s.Write(new byte[] {1, 0, 0, 0}, 0, 4);
-
+            //s.Write(new byte[] {1, 0, 0, 0}, 0, 4);
+            WriteInt(DataType,s);
             s.WriteByte((byte) (0xff & this.Code));
             s.WriteByte((byte) (0xff & (this.Code >> 8)));
 

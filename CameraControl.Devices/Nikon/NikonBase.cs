@@ -591,7 +591,7 @@ namespace CameraControl.Devices.Nikon
                 res.AddValues(Encoding.Unicode.GetString(result.Data, 51, 20), 0);
                 res.AddValues(Encoding.Unicode.GetString(result.Data, 72, 20), 0);
                 res.AddValues(Encoding.Unicode.GetString(result.Data, 93, 20), 0);
-                res.SetValue(Encoding.Unicode.GetString(result.Data, 27, 20));
+                res.SetValue(Encoding.Unicode.GetString(result.Data, 27, 20), false);
             }
             return res;
         }

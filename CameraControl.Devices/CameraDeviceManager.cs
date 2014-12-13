@@ -368,7 +368,7 @@ namespace CameraControl.Devices
             
             if (type == 0)
             {
-                int port = 4757;
+                int port = 15740;
                 string ip = s;
                 if (s.Contains(":"))
                 {
@@ -378,7 +378,7 @@ namespace CameraControl.Devices
                 ConnectDevicesPtpIp(ip, port);
             }
 
-            if (type == 0)
+            if (type == 1)
             {
                 int port = 4757;
                 string ip = s;

@@ -72,8 +72,8 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
             {
                 container.Write(ms);
                 _inerStream.Write(ms.ToArray(), 0, (int)ms.Length);
-                if(container.Header.Length!=ms.Length)
-                    throw new Exception("Wrong length");
+                //if(container.Header.Length!=ms.Length)
+                //    throw new Exception("Wrong length");
                 _inerStream.Flush();
             }
         }
