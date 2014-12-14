@@ -92,7 +92,28 @@ namespace CameraControl.Devices.TransferProtocol
 
         public MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback, params uint[] parameters)
         {
-            return ExecuteReadData(code, parameters);
+            lock (_locker)
+            {
+                var cmd = new CmdRequest(code) { Parameters = parameters };
+                _client.Write(cmd);
+
+                var res1 = _client.Read();
+
+
+                var response = res1 as CmdResponse;
+                if (response != null)
+                {
+                    return new MTPDataResponse() { ErrorCode = (uint)response.Code };
+                }
+
+                var response1 = res1 as StartDataPacket;
+                var res2 = _client.Read(callback);
+                var res3 = (EndDataPacket)res2;
+
+                var res4 = _client.Read();
+                return new MTPDataResponse() { Data = res3.Data };
+            }
+
         }
 
         public MTPDataResponse ExecuteReadData(uint code, params uint[] parameters)

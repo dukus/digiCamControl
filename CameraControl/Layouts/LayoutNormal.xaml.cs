@@ -85,5 +85,16 @@ namespace CameraControl.Layouts
         {
             Dispatcher.Invoke(new Action(() => zoombox.FitToBounds()));
         }
+
+        private void ButtonNext_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image);
+        }
+
+        private void ButtonPrev_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
+        }
+
     }
 }

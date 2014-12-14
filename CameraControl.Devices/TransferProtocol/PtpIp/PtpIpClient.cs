@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 using ddserverTest;
+using PortableDeviceLib;
 
 namespace CameraControl.Devices.TransferProtocol.PtpIp
 {
@@ -78,7 +79,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
             }
         }
 
-        public IPtpIpCommand Read()
+        public IPtpIpCommand Read(StillImageDevice.TransferCallback callback=null)
         {
             var header = new PtpIpHeader();
             header.Read(_inerStream);
@@ -116,7 +117,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
                     break;
                 case PtpIpContainerType.End_Data_Packet:
                     var enddata = new EndDataPacket() {Header = header};
-                    enddata.Read(_inerStream);
+                    enddata.Read(_inerStream, callback);
                     return enddata;
                 case PtpIpContainerType.Ping:
                     break;

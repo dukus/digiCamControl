@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:CameraControl.Controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" ShowIconOnTitleBar="False" ShowTitleBar="False"
                        xmlns:Controls1="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Title="FullScreenWnd" Height="460" Width="472" WindowState="Maximized" WindowStyle="None" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" Topmost="True" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False" IgnoreTaskbarOnMaximize="True">
+                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Title="FullScreenWnd" Height="460" Width="472" WindowStyle="None" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" Topmost="True" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False" IgnoreTaskbarOnMaximize="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -58,7 +58,25 @@
                 </Rectangle>
             </ToggleButton>
         </StackPanel>
-        <ProgressBar Height="20" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" IsIndeterminate="True" Opacity="0.5" UseLayoutRounding="True" />
+
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="5"  Background="Transparent">
+            <Path Width="50" Height="40"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
+        </Button>
+        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="5" Background="Transparent">
+            <Path Width="50" Height="40"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
+        </Button>
+
+        <ProgressBar Height="10" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" IsIndeterminate="True" Opacity="0.5" UseLayoutRounding="True" />
         <!--</Controls:ZoomBorder>-->
         <!--<Controls1:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center" IsLarge="False" />-->
     </Grid>

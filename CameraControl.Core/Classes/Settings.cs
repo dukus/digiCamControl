@@ -770,6 +770,8 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool FullScreenInSecondaryMonitor { get; set; }
+
         public string OverlayFolder
         {
             get { return Path.Combine(DataFolder, "LiveViewOverlay"); }
@@ -858,6 +860,7 @@ namespace CameraControl.Core.Classes
             StartMinimized = false;
             StartupWithWindows = false;
             LoadThumbsDownload = true;
+            FullScreenInSecondaryMonitor = false;
         }
 
 

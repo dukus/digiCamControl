@@ -182,6 +182,8 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowMagnifierInFullSccreen}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
@@ -205,6 +207,9 @@
 
                     <Label Grid.Row="6" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelExternalPreViewerArgs}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding ExternalViewerArgs}" />
+
+                    <Label Grid.Row="7" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowSecondary}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox Grid.Row="7" Grid.Column="1" Margin="3" IsChecked="{Binding FullScreenInSecondaryMonitor}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelTriggers}">

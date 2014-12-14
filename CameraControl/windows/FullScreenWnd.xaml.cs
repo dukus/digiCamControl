@@ -118,6 +118,22 @@ namespace CameraControl.windows
                                                               Topmost = true;
                                                               Topmost = false;
                                                               Focus();
+                                                              if (ServiceProvider.Settings.FullScreenInSecondaryMonitor)
+                                                              {
+                                                                  var allScreens =
+                                                                      System.Windows.Forms.Screen.AllScreens.ToList();
+                                                                  foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
+                                                                  {
+                                                                      Left = r1.Left;
+                                                                      Top = r1.Top;
+                                                                      Width = r1.Width;
+                                                                      Height = r1.Height;
+                                                                      Topmost = true;
+                                                                      break;
+                                                                  }
+                                                              }
+                                                              WindowState = WindowState.Maximized;
+                                                              WindowStyle = WindowStyle.None;
                                                           }));
                     break;
                 case WindowsCmdConsts.FullScreenWnd_ShowTimed:
@@ -160,6 +176,16 @@ namespace CameraControl.windows
                 e.Cancel = true;
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
             }
+        }
+
+        private void ButtonPrev_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
+        }
+
+        private void ButtonNext_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image);
         }
     }
 }

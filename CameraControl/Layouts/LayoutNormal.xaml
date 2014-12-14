@@ -86,6 +86,24 @@
                     </Image.InputBindings>
                 </Image>
             </xctk:Zoombox>
+
+            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="5"  Background="Transparent">
+                <Path Width="50" Height="40"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
+            </Button>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="5" Background="Transparent">
+                <Path Width="50" Height="40"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
+            </Button>
+
             <!--</local:ZoomBorder>-->
             <ProgressBar Height="10" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Value="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=LoadingProgress}" Opacity="0.5" Panel.ZIndex="1" IsIndeterminate="True" />
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
