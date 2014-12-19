@@ -124,7 +124,7 @@ namespace CameraControl
 
 
             ServiceProvider.Trigger.Start();
-
+            ServiceProvider.Analytics.Start();
 
             Dispatcher.Invoke(new Action(delegate
             {
@@ -183,7 +183,6 @@ namespace CameraControl
             _basemainwindow = new MainWindow();
             ServiceProvider.PluginManager.MainWindowPlugins.Add(_basemainwindow);
             ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
-
         }
 
         private void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
@@ -213,8 +212,10 @@ namespace CameraControl
         private void WindowsManager_Event(string cmd, object o)
         {
             Log.Debug("Window command received :" + cmd);
+            ServiceProvider.Analytics.Command(cmd);
             if (cmd == CmdConsts.All_Close)
             {
+                ServiceProvider.Analytics.Stop();
                 ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
                 if (ServiceProvider.Settings != null)
                 {
@@ -380,6 +381,7 @@ namespace CameraControl
                     Log.Error("Unable to sysnc date time", exception);
                 }
             }
+            ServiceProvider.Analytics.CameraConnected(cameraDevice);
         }
 
         #endregion

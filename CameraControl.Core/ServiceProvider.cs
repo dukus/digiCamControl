@@ -63,6 +63,7 @@ namespace CameraControl.Core
         public static ScriptManager ScriptManager { get; set; }
         public static FilenameTemplateManager FilenameTemplateManager { get; set; }
         public static ExternalDeviceManager ExternalDeviceManager { get; set; }
+        public static Analytics Analytics { get; set; }
         public static string LogFile;
 
         public static void Configure()
@@ -83,7 +84,7 @@ namespace CameraControl.Core
                 Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
             }
             catch {}
-
+            Analytics = new Analytics();
             DeviceManager = new CameraDeviceManager();
             ExternalDeviceManager = new ExternalDeviceManager();
             Trigger = new TriggerClass();

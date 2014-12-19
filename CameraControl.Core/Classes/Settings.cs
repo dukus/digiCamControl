@@ -704,6 +704,8 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string ClientTrackId { get; set; }
+
         public bool LoadThumbsDownload
         {
             get { return _loadThumbsDownload; }
@@ -854,6 +856,11 @@ namespace CameraControl.Core.Classes
             ShowThumbUpDown = false;
             AutoPreviewJpgOnly = false;
             ClientId = Guid.NewGuid().ToString();
+            ClientTrackId = string.Format("{0}{1}", new object[]
+            {
+                new Random((int) DateTime.UtcNow.Ticks).Next(100000000, 999999999),
+                "00145214523"
+            });
             if (ServiceProvider.WindowsManager != null)
                 SyncActions(ServiceProvider.WindowsManager.WindowCommands);
             MinimizeToTrayIcon = false;
