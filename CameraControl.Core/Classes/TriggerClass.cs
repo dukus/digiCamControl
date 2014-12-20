@@ -46,35 +46,28 @@ namespace CameraControl.Core.Classes
 {
     public class TriggerClass
     {
-        private const int WH_KEYBOARD_LL = 13;
-        private const int WM_KEYDOWN = 0x0100;
-        private const int WM_SYSKEYDOWN = 0x0104;
-        private const int WM_KEYUP = 0x0101;
-        private const int WM_SYSKEYUP = 0x0105;
-
-        private static LowLevelKeyboardProc _proc = HookCallback;
-        private static IntPtr _hookID = IntPtr.Zero;
-        private static bool _altpressed = false;
-        private static bool _ctrlpressed = false;
-        private static bool _shiftpressed = false;
-
         public WebServer WebServer { get; set; }
-
+        public KeyboardHook KeyboardHook { get; set; }
+        private static bool _altPressed = false;
+        private static bool _ctrlPressed = false;
 
         public TriggerClass()
         {
             WebServer = new WebServer();
+            KeyboardHook = new KeyboardHook("DCC");
         }
 
         public void Start()
         {
-            _hookID = SetHook(_proc);
+            //_hookID = SetHook(_proc);
             try
             {
                 if (ServiceProvider.Settings.UseWebserver)
                 {
                     WebServer.Start(ServiceProvider.Settings.WebserverPort);
                 }
+                KeyboardHook.KeyDownEvent += KeyDown;
+                KeyboardHook.KeyUpEvent += KeyUp;
             }
             catch (Exception)
             {
@@ -82,10 +75,45 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        private void KeyUp(KeyboardHookEventArgs e)
+        {
+            _altPressed = e.isAltPressed;
+            _ctrlPressed = e.isCtrlPressed;
+
+        }
+
+        private void KeyDown(KeyboardHookEventArgs e)
+        {
+            _altPressed = e.isAltPressed;
+            _ctrlPressed = e.isCtrlPressed;
+
+            Key inputKey = KeyInterop.KeyFromVirtualKey((int) e.Key);
+            foreach (var item in ServiceProvider.Settings.Actions)
+            {
+                if (!item.Global)
+                    continue;
+                if (item.Alt == e.isAltPressed && item.Ctrl == e.isCtrlPressed && item.KeyEnum == inputKey)
+                    ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
+            }
+            try
+            {
+                foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
+                {
+                    CameraProperty property = device.LoadProperties();
+                    if (property.KeyTrigger.Alt == e.isAltPressed && property.KeyTrigger.Ctrl == e.isCtrlPressed &&
+                        property.KeyTrigger.KeyEnum == inputKey)
+                        CameraHelper.Capture(device);
+                }
+            }
+            catch (Exception exception)
+            {
+                StaticHelper.Instance.SystemMessage = exception.Message;
+                Log.Error("Key trigger ", exception);
+            }
+        }
+
         public void Stop()
         {
-            if (_hookID != IntPtr.Zero)
-                UnhookWindowsHookEx(_hookID);
             WebServer.Stop();
         }
 
@@ -93,77 +121,14 @@ namespace CameraControl.Core.Classes
         {
             foreach (var item in ServiceProvider.Settings.Actions)
             {
-                if (item.Alt == _altpressed && item.Ctrl == _ctrlpressed && item.KeyEnum == e.Key)
+                if (item.KeyEnum == e.Key && item.Alt == _altPressed && item.Ctrl == _ctrlPressed)
                 {
                     ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
                     e.Handled = true;
                 }
             }
+
         }
 
-        private static IntPtr SetHook(LowLevelKeyboardProc proc)
-        {
-            using (Process curProcess = Process.GetCurrentProcess())
-            using (ProcessModule curModule = curProcess.MainModule)
-            {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc,
-                                        GetModuleHandle(curModule.ModuleName), 0);
-            }
-        }
-
-        private delegate IntPtr LowLevelKeyboardProc(
-            int nCode, IntPtr wParam, IntPtr lParam);
-
-        private static IntPtr HookCallback(
-            int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            if (nCode >= 0 && (wParam == (IntPtr) WM_KEYDOWN || wParam == (IntPtr) WM_SYSKEYDOWN))
-            {
-                int vkCode = Marshal.ReadInt32(lParam);
-                if (((Keys) vkCode) == Keys.Alt || ((Keys) vkCode) == Keys.RMenu || ((Keys) vkCode) == Keys.LMenu)
-                    _altpressed = true;
-                if (((Keys)vkCode) == Keys.Control || ((Keys)vkCode) == Keys.LControlKey || ((Keys)vkCode) == Keys.RControlKey || ((Keys)vkCode) == Keys.ControlKey)
-                    _ctrlpressed = true;
-                if (((Keys) vkCode) == Keys.RShiftKey || ((Keys) vkCode) == Keys.LShiftKey)
-                    _shiftpressed = true;
-
-                foreach (var item in ServiceProvider.Settings.Actions)
-                {
-                    if (!item.Global)
-                        continue;
-                    Key inputKey = KeyInterop.KeyFromVirtualKey(vkCode);
-                    if (item.Alt == _altpressed && item.Ctrl == _ctrlpressed && item.KeyEnum == inputKey)
-                         ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
-                }
-            }
-            if (nCode >= 0 && (wParam == (IntPtr) WM_KEYUP || wParam == (IntPtr) WM_SYSKEYUP))
-            {
-                int vkCode = Marshal.ReadInt32(lParam);
-
-                if (((Keys) vkCode) == Keys.Alt || ((Keys) vkCode) == Keys.RMenu || ((Keys) vkCode) == Keys.LMenu)
-                    _altpressed = false;
-                if (((Keys)vkCode) == Keys.Control || ((Keys)vkCode) == Keys.LControlKey || ((Keys)vkCode) == Keys.RControlKey || ((Keys)vkCode) == Keys.ControlKey)
-                    _ctrlpressed = false;
-                if (((Keys) vkCode) == Keys.RShiftKey || ((Keys) vkCode) == Keys.LShiftKey)
-                    _shiftpressed = false;
-            }
-            return CallNextHookEx(_hookID, nCode, wParam, lParam);
-        }
-
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook,
-                                                      LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode,
-                                                    IntPtr wParam, IntPtr lParam);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
     }
 }

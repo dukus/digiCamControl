@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Input;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -16,6 +17,8 @@ namespace CameraControl.windows
     /// </summary>
     public partial class CameraPropertyWnd : IWindow, INotifyPropertyChanged
     {
+        public AsyncObservableCollection<string> AvailableKeys { get; set; }
+
         private ICameraDevice _cameraDevice;
 
         private CameraProperty _cameraProperty;
@@ -53,7 +56,12 @@ namespace CameraControl.windows
 
         public CameraPropertyWnd()
         {
+            AvailableKeys = new AsyncObservableCollection<string>();
             InitializeComponent();
+            foreach (string key in Enum.GetNames(typeof(Key)))
+            {
+                AvailableKeys.Add(key);
+            }
             PhotoSessionNames = new AsyncObservableCollection<string>();
             CameraPresets = new AsyncObservableCollection<string>();
         }

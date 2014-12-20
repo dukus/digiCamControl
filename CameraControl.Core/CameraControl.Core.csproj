@@ -205,6 +205,7 @@
     <Compile Include="Classes\FileItem.cs" />
     <Compile Include="Classes\FilenameTemplate.cs" />
     <Compile Include="Classes\FilenameTemplateManager.cs" />
+    <Compile Include="Classes\KeyboardHook.cs" />
     <Compile Include="Classes\LiveviewSettings.cs" />
     <Compile Include="Classes\MessageEventArgs.cs" />
     <Compile Include="Classes\PhotoSession.cs" />

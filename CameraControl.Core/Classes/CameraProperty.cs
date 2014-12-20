@@ -190,6 +190,7 @@ namespace CameraControl.Core.Classes
 
         private LiveviewSettings _liveviewSettings;
         private int _sortOrder;
+        private WindowCommandItem _keyTrigger;
 
         public LiveviewSettings LiveviewSettings
         {
@@ -211,12 +212,23 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public WindowCommandItem KeyTrigger
+        {
+            get { return _keyTrigger; }
+            set
+            {
+                _keyTrigger = value;
+                NotifyPropertyChanged("KeyTrigger");
+            }
+        }
+
         public CameraProperty()
         {
             NoDownload = false;
             CaptureInSdRam = true;
             Counter = 0;
             LiveviewSettings = new LiveviewSettings();
+            KeyTrigger = new WindowCommandItem();
         }
     }
 }
