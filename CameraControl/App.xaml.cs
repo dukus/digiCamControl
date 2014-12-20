@@ -161,28 +161,37 @@ namespace CameraControl
         private void InitWindowManager()
         {
             ServiceProvider.WindowsManager = new WindowsManager();
-            ServiceProvider.WindowsManager.Add(new FullScreenWnd());
-            ServiceProvider.WindowsManager.Add(new LiveViewManager());
-            ServiceProvider.WindowsManager.Add(new MultipleCameraWnd());
-            ServiceProvider.WindowsManager.Add(new CameraPropertyWnd());
-            ServiceProvider.WindowsManager.Add(new BrowseWnd());
-            ServiceProvider.WindowsManager.Add(new TagSelectorWnd());
-            ServiceProvider.WindowsManager.Add(new DownloadPhotosWnd());
-            ServiceProvider.WindowsManager.Add(new BulbWnd());
-            ServiceProvider.WindowsManager.Add(new AstroLiveViewWnd());
-            ServiceProvider.WindowsManager.Add(new ScriptWnd());
-            ServiceProvider.WindowsManager.Add(new PrintWnd());
-            ServiceProvider.WindowsManager.Event += WindowsManager_Event;
-            ServiceProvider.WindowsManager.ApplyTheme();
-            ServiceProvider.WindowsManager.ApplyKeyHanding();
-            ServiceProvider.WindowsManager.RegisterKnowCommands();
-            ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
-
-            ServiceProvider.PluginManager.LoadPlugins(
-                Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins"));
             _basemainwindow = new MainWindow();
             ServiceProvider.PluginManager.MainWindowPlugins.Add(_basemainwindow);
-            ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
+
+            try
+            {
+                ServiceProvider.WindowsManager.Add(new FullScreenWnd());
+                ServiceProvider.WindowsManager.Add(new LiveViewManager());
+                ServiceProvider.WindowsManager.Add(new MultipleCameraWnd());
+                ServiceProvider.WindowsManager.Add(new CameraPropertyWnd());
+                ServiceProvider.WindowsManager.Add(new BrowseWnd());
+                ServiceProvider.WindowsManager.Add(new TagSelectorWnd());
+                ServiceProvider.WindowsManager.Add(new DownloadPhotosWnd());
+                ServiceProvider.WindowsManager.Add(new BulbWnd());
+                ServiceProvider.WindowsManager.Add(new AstroLiveViewWnd());
+                ServiceProvider.WindowsManager.Add(new ScriptWnd());
+                ServiceProvider.WindowsManager.Add(new PrintWnd());
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+                ServiceProvider.WindowsManager.ApplyTheme();
+                ServiceProvider.WindowsManager.ApplyKeyHanding();
+                ServiceProvider.WindowsManager.RegisterKnowCommands();
+                ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
+
+                ServiceProvider.PluginManager.LoadPlugins(
+                    Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins"));
+
+                ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error to load plugins ", exception);
+            }
         }
 
         private void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)

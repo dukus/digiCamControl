@@ -68,10 +68,10 @@
     <string name="SDRamToolTip">Capture images direct to PC without using card</string> 
     <string name="CapturePhotoToolTip">Capture photo</string> 
     <string name="CapturePhotoNoAfToolTip">Capture photo no auto focus</string> 
-    <string name="BraketingToolTip">Braketing</string> 
+    <string name="BraketingToolTip">Bracketing</string> 
     <string name="SettingsToolTip">Settings</string> 
     <string name="TimeLapseToolTip">Time lapse</string> 
-    <string name="FullscreenToolTip">Fullscreen</string> 
+    <string name="FullscreenToolTip">Full screen</string> 
     <string name="LiveViewToolTip">Live view</string> 
     <string name="BrowseSessionsToolTip">Browse sessions</string> 
     <string name="SelectTagsToolTip">Select Tags</string> 
@@ -86,7 +86,7 @@
     <string name="SessionWindowTitle">Session [Add/Edit]</string> 
     <string name="LiveViewWindowTitle">Live view</string> 
     <string name="PresetEditWindowTitle">Preset Edit</string> 
-    <string name="BraketingWindowTitle">Braketing</string> 
+    <string name="BraketingWindowTitle">Bracketing</string> 
     <string name="EditTagWindowTitle">Tag [Add/Edit]</string> 
     <string name="MultipleCameraWindowTitle">Multiple camera support</string> 
     <string name="SavePresetWindowTitle">Save Preset</string> 
@@ -116,7 +116,7 @@
     <string name="ButtonLocateLogFile">Locate log file</string> 
 
     <string name="LabelInterfaceLanguage">Interface language :</string> 
-    <string name="LabelDisableDriver">Disable native drivers (not recomanded)</string> 
+    <string name="LabelDisableDriver">Disable native drivers (not recommended)</string> 
     <string name="LabelTheme">Theme :</string> 
     <string name="LabelGeneral">General</string> 
     <string name="LabelPreview">Preview</string> 
@@ -139,7 +139,7 @@
     <string name="LabelLargFocusStep">Larg focus step</string> 
     <string name="ReStartToolTip">You need to restart the application for this changes to take affect</string> 
 
-    <string name="LabelSessonName">Sesson name :</string> 
+    <string name="LabelSessonName">Session name :</string> 
     <string name="LabelFolder">Folder :</string> 
     <string name="LabelFileNameTemplate">File Name Template :</string> 
     <string name="LabelFileNameTemplateToolTip">$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4</string> 
@@ -147,14 +147,14 @@
     <string name="LabelUseOriginal">Use original filename gave by the camera</string> 
     <string name="LabelUseOriginalToolTip">This option isn't works with WIA driver</string> 
     <string name="LabelDontDownloadPhotos">Don't download photos to PC</string> 
-    <string name="LabelAlowFolderChange">Alow folder change using image browser</string> 
+    <string name="LabelAlowFolderChange">Allow folder change using image browser</string> 
     <string name="LabelTags">Tags</string> 
 
     <string name="LabelManualFocus">Manual Focus</string> 
     <string name="LabelGrid">Grid</string> 
     <string name="LabelLvZoomRation">Lv zoom ration</string> 
     <string name="LabelFocusStacking">Focus Stacking</string> 
-    <string name="LabelNoOfPhots">No. of phots</string> 
+    <string name="LabelNoOfPhots">No. of photos</string> 
     <string name="LabelFocusStep">Focus step</string> 
     <string name="LabelLuminosity">Luminosity</string> 
 
@@ -184,7 +184,7 @@
     <string name="LabelNumberOfPhotos">Number of photos</string> 
     <string name="LabelDontAutofocusOnEveryCapture">Don't autofocus on every capture</string> 
     <string name="LabelCaptureInterval">Capture interval (HH:MM:SS)</string> 
-    <string name="LabelMovieLenght">Movie lenght (HH:MM:SS)</string> 
+    <string name="LabelMovieLenght">Movie length (HH:MM:SS)</string> 
     <string name="LabelMovieSettings">Movie settings</string> 
     <string name="LabelVideoFormat">Video format</string> 
     <string name="LabelOutputFile">Output file</string> 
@@ -212,11 +212,11 @@
     <string name="MsgBulbModeNotSupported">Bulb mode not supported !</string> 
     <string name="MsgApplicationUpToDate">Your application is up to date !</string> 
     <string name="MsgUseSessionEditorTags">Use session editor to define tags !</string> 
-    <string name="MsgLastSessionCantBeDeleted">Last sesion can't be deleted</string> 
+    <string name="MsgLastSessionCantBeDeleted">Last session can't be deleted</string> 
     <string name="MsgStopTimeLapse">The time lapse not finished! Do you want to stop the time lapse ?</string> 
-    <string name="MsgInstallXvidCodec">Xvid codec not instaled !\nDo you want to download and install it ? </string> 
+    <string name="MsgInstallXvidCodec">Xvid codec not installed !\nDo you want to download and install it ? </string> 
 
-    <string name="MsgDeleteSessionQuestion">Do you want continue to deleting sesion {0} ?\nNo files will be deleted !</string> 
+    <string name="MsgDeleteSessionQuestion">Do you want continue to deleting session {0} ?\nNo files will be deleted !</string> 
 
     <string name="MsgBracketingDone">Bracketing done</string> 
     <string name="MsgActionInProgress">Action in progress {0}/{1}</string> 
@@ -262,7 +262,7 @@
     <!-- 29/10/2012 -->
      <string name="LabelMotionDetectionType">Motion detection type</string>
      <string name="LabelTwoFramesDifferenceDetector">Two Frames Difference Detector</string>
-     <string name="LabelSimpleBackgroundModelingDetector">Simple Background Modeling Detector</string>
+     <string name="LabelSimpleBackgroundModelingDetector">Simple Background Modelling Detector</string>
      <string name="LabelSmallestBlockSize">Smallest block size</string>
      <string name="ButtonHelp">Help</string>
     <!-- 31/10/2012 -->
@@ -484,18 +484,61 @@
 	<string name="LabelErrorEmail">Your email address (if you want get feedback)</string>
 	<string name="LabelApertureBracketing">Aperture bracketing </string>
 <!-- 	        //20/08/2014 -->
-        <string name="LabelCaptureName">Capture Name"</string>
-        <string name="LabelSeries">Series"</string>
-        <string name="LabelAdvancedProperties">Advanced Properties"</string>
-        <string name="LabelDirection">Direction"</string>
-        <string name="LabelFarNear">Far -> Near"</string>
-        <string name="LabelNearFar">Near -> Far"</string>
-        <string name="LabelStepSmall">Small step"</string>
-        <string name="LabelStepMedium">Medium step"</string>
-        <string name="LabelStepLarge">Large step"</string>
-        <string name="LabelSessionOpenFolder">Open session folder"</string>
-        <string name="LabelActivate">Activate"</string>
-        <string name="LabelScaling">Scaling"</string>
-        <string name="LabelHorizontal">Horizontal"</string>
-        <string name="LabelVertical">Vertical"</string>
+	<string name="LabelCaptureName">Capture Name</string>
+	<string name="LabelSeries">Series</string>
+	<string name="LabelAdvancedProperties">Advanced Properties</string>
+	<string name="LabelDirection">Direction</string>
+	<string name="LabelFarNear">Far -> Near</string>
+	<string name="LabelNearFar">Near -> Far</string>
+	<string name="LabelStepSmall">Small step</string>
+	<string name="LabelStepMedium">Medium step</string>
+	<string name="LabelStepLarge">Large step</string>
+	<string name="LabelSessionOpenFolder">Open session folder</string>
+	<string name="LabelActivate">Activate</string>
+	<string name="LabelScaling">Scaling</string>
+	<string name="LabelHorizontal">Horizontal</string>
+	<string name="LabelVertical">Vertical</string>
+	        <!-- 20/08/2014 -->
+        <string name="LabelLockNear">Lock nearest point</string>
+        <string name="LabelLockFar">Lock farthest point</string>
+        <string name="LabelGoNear">Go to nearest focusing point</string>
+        <string name="LabelGoFar">Go to farthest focusing point</string>
+        <string name="LabelMoveSmallToCamera">Move small step to camera</string>
+        <string name="LabelMoveMediumToCamera">Move medium step to camera</string>
+        <string name="LabelMoveLargeToCamera">Move large step to camera</string>
+        <string name="LabelMoveSmallToInfinity">Move small step to infinity</string>
+        <string name="LabelMoveMediumToInfinity">Move medium step to infinity</string>
+        <string name="LabelMoveLargeToInfinity">Move large step to infinity</string>
+        <string name="LabelDistantFromPoints">Distance between the nearest and farthest locked in focus points</string>
+        <string name="LabelFocusStackingSimple">Focus Stacking Simple</string>
+        <string name="LabelFocusStackingAdvanced">Focus Stacking Advanced</string>
+        <string name="LabelErrorFarPoit">First set the farthest focus point</string>
+        <string name="LabelErrorAutoFocusLock">The focus is locked, unlock first to autofocus</string>
+        <string name="LabelErrorSimpleStackingFocusLock">The focus is locked, simple focus stacking no required focus lock, unlock first to start</string>
+        <string name="LabelLowerCaseExtension">Lower case extension</string>
+        <string name="LabelOverlayTransparency">Transparency</string>
+        <string name="LabelOverlayUseLastCaptured">Use last captured</string>
+        <string name="LabelMinimizeToTryIcon">Minimize to try icon</string>
+        <string name="LabelStartMinimized">Start minimized</string>
+        <string name="LabelStartupWithWindows">Start when Windows start </string>
+        <string name="LabelSelectSeries">Select photos in same series</string>
+        <string name="LabelCaptureDelay">Capture delay</string>
+        <string name="LabelAutoExportPlugins">Auto Export Plugins</string>
+        <string name="LabelAddPlugin">Add plugin</string>
+        <string name="LabelErrorSetFolder">Error set folder</string>
+        <string name="LabelDetectArea">Detect only in ruler area</string>
+        <string name="LabelMessagesLog">Messages log</string>
+        <string name="LabelRefreshCameraList">Refresh camera list</string>
+        <string name="LabelSortOrder">Sort order</string>
+        <string name="LabelSaveOrder">Save sort order</string>
+        <string name="LabelLoadThumbDownload">Load thumbs in download window</string>
+        <string name="LabelFormatAllCards">Format all cards</string>
+        <string name="LabelPrint">Print</string>
+        <string name="LabelPrintSetup">Print setup</string>
+        <string name="LabelPageSetup">Page setup</string>
+        <string name="LabelMarginBetweenImages">Margin</string>
+        <string name="LabelRotate">Rotate</string>
+        <string name="LabelRepeatImages">Repeat images</string>
+        <string name="LabelWaitBetweenSteps">Wait between steps (ms)</string>
+        <string name="LabelShowSecondary ">Show in secondary window</string>
 </resources>

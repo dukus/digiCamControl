@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Devices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -188,10 +190,18 @@ namespace CameraControl.ViewModel
 
         private void LoadPrinterSettings()
         {
-            PrinterName = dlg.PrintQueue.Name;
-            System.Printing.PrintCapabilities capabilities = dlg.PrintQueue.GetPrintCapabilities(dlg.PrintTicket);
-            PageWidth = (int)capabilities.PageImageableArea.ExtentWidth;
-            PageHeight = (int)capabilities.PageImageableArea.ExtentHeight;
+            try
+            {
+                PrinterName = dlg.PrintQueue.Name;
+                System.Printing.PrintCapabilities capabilities = dlg.PrintQueue.GetPrintCapabilities(dlg.PrintTicket);
+                PageWidth = (int) capabilities.PageImageableArea.ExtentWidth;
+                PageHeight = (int) capabilities.PageImageableArea.ExtentHeight;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Unable to load settings " + exception.Message);
+                Log.Error("Unable to load settings", exception);
+            }
         }
 
         private void PageSetup()

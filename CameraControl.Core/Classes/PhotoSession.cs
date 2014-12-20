@@ -603,19 +603,12 @@ namespace CameraControl.Core.Classes
 
         public bool ContainFile(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName))
-                return false;
-            return Files.Any(fileItem => fileItem.FileName.ToUpper() == fileName.ToUpper());
+            return !string.IsNullOrEmpty(fileName) && Files.Any(fileItem => fileItem.FileName.ToUpper() == fileName.ToUpper());
         }
 
         public FileItem GetFile(string fileName)
         {
-            foreach (FileItem fileItem in Files)
-            {
-                if (fileItem.FileName.ToUpper() == fileName.ToUpper())
-                    return fileItem;
-            }
-            return null;
+            return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.FileName, fileName, StringComparison.CurrentCultureIgnoreCase));
         }
 
         /// <summary>
