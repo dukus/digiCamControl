@@ -29,7 +29,7 @@ namespace CameraControl.Core.Classes
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 _applicationVersion = FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
-                _userAgent = string.Format("dslrBooth/{0} (Windows NT {1}.{2}) ",FileVersionInfo.GetVersionInfo(assembly.Location).ProductMajorPart + "." +
+                _userAgent = string.Format("digiCamControl/{0} (Windows NT {1}.{2}) ",FileVersionInfo.GetVersionInfo(assembly.Location).ProductMajorPart + "." +
                                          FileVersionInfo.GetVersionInfo(assembly.Location).ProductMinorPart,
                     Environment.OSVersion.Version.Major, Environment.OSVersion.Version.Minor);
 
