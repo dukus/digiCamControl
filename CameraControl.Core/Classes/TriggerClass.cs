@@ -33,6 +33,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -48,6 +49,7 @@ namespace CameraControl.Core.Classes
     {
         public WebServer WebServer { get; set; }
         public KeyboardHook KeyboardHook { get; set; }
+        private static bool _eventIsBusy = false;
         private static bool _altPressed = false;
         private static bool _ctrlPressed = false;
 
@@ -86,19 +88,28 @@ namespace CameraControl.Core.Classes
         {
             _altPressed = e.isAltPressed;
             _ctrlPressed = e.isCtrlPressed;
+            if (_eventIsBusy)
+                return;
+            Task.Factory.StartNew(() => KeyDownThread(e));
+        }
 
-            Key inputKey = KeyInterop.KeyFromVirtualKey((int) e.Key);
-            foreach (var item in ServiceProvider.Settings.Actions)
-            {
-                if (!item.Global)
-                    continue;
-                if (item.Alt == e.isAltPressed && item.Ctrl == e.isCtrlPressed && item.KeyEnum == inputKey)
-                    ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
-            }
+        private void KeyDownThread(KeyboardHookEventArgs e)
+        {
+            _eventIsBusy = true;
             try
             {
+                Key inputKey = KeyInterop.KeyFromVirtualKey((int)e.Key);
+                foreach (var item in ServiceProvider.Settings.Actions)
+                {
+                    if (!item.Global)
+                        continue;
+                    if (item.Alt == e.isAltPressed && item.Ctrl == e.isCtrlPressed && item.KeyEnum == inputKey)
+                        ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
+                }
                 foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
                 {
+                    if (device.IsBusy)
+                        continue;
                     CameraProperty property = device.LoadProperties();
                     if (property.KeyTrigger.Alt == e.isAltPressed && property.KeyTrigger.Ctrl == e.isCtrlPressed &&
                         property.KeyTrigger.KeyEnum == inputKey)
@@ -110,6 +121,7 @@ namespace CameraControl.Core.Classes
                 StaticHelper.Instance.SystemMessage = exception.Message;
                 Log.Error("Key trigger ", exception);
             }
+            _eventIsBusy = false;
         }
 
         public void Stop()

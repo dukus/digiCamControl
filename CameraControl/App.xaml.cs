@@ -221,7 +221,11 @@ namespace CameraControl
         private void WindowsManager_Event(string cmd, object o)
         {
             Log.Debug("Window command received :" + cmd);
-            ServiceProvider.Analytics.Command(cmd);
+            
+            if (cmd != WindowsCmdConsts.Next_Image && cmd != WindowsCmdConsts.Prev_Image &&
+                cmd != WindowsCmdConsts.Select_Image)
+                ServiceProvider.Analytics.Command(cmd);
+
             if (cmd == CmdConsts.All_Close)
             {
                 ServiceProvider.Analytics.Stop();
