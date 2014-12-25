@@ -945,6 +945,9 @@ namespace CameraControl.ViewModel
         public RelayCommand HelpFocusStackingCommand { get; set; }
 
         public RelayCommand ResetOverlayCommand { get; set; }
+
+        public RelayCommand ZoomOutCommand { get; set; }
+        public RelayCommand ZoomInCommand { get; set; }
         
         #endregion
 
@@ -1011,7 +1014,8 @@ namespace CameraControl.ViewModel
 
             BrowseOverlayCommand = new RelayCommand(BrowseOverlay);
             ResetOverlayCommand = new RelayCommand(ResetOverlay);
-
+            ZoomInCommand = new RelayCommand(() => CameraDevice.LiveViewImageZoomRatio.NextValue());
+            ZoomOutCommand = new RelayCommand(() => CameraDevice.LiveViewImageZoomRatio.PrevValue());
             FocuseDone += LiveViewViewModel_FocuseDone;
         }
 
