@@ -1,0 +1,16 @@
+﻿<Window x:Class="DccObsPlugin.DccObsConfigurationDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="287" Width="289">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="225*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Configuration" HorizontalAlignment="Left" Margin="95,100,0,0" VerticalAlignment="Top"/>
+        <Button Content="Ok" Name="btn_ok"  HorizontalAlignment="Left" Margin="5" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btn_ok_Click"/>
+
+    </Grid>
+</Window>

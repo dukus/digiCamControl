@@ -540,5 +540,5 @@
         <string name="LabelRotate">Rotate</string>
         <string name="LabelRepeatImages">Repeat images</string>
         <string name="LabelWaitBetweenSteps">Wait between steps (ms)</string>
-        <string name="LabelShowSecondary ">Show in secondary window</string>
+        <string name="LabelShowSecondary ">Show in secondary monitor</string>
 </resources>
