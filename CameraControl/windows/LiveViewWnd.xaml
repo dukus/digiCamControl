@@ -70,14 +70,7 @@
                 <Label  Content="{Binding MovieTimeRemain}" Height="41" FontSize="20" FontWeight="Bold" Margin="5,0" />
             </StackPanel>
         </Canvas>
-        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" >
-            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ZoomInCommand}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_in}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
+        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" Grid.RowSpan="3">
             <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ZoomOutCommand}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
@@ -85,7 +78,21 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-
+            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ZoomInCommand}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_in}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Content="100" Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ZoomIn100}"/>
+            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ToggleGridCommand}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_grid}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
         </StackPanel>
 
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" 
@@ -174,7 +181,7 @@
             <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="{Binding FocusStep}" Width="475" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" LargeChange="100" IsMoveToPointEnabled="True" />
         </StackPanel>
 
-        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="True" Margin="0" Padding="0" >
+        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" >
             <Grid MinWidth="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="140" />
@@ -486,7 +493,7 @@
         </Expander>
 
 
-        
+
         <!--<Controls:ProgressRing IsActive="{Binding Path=SelectedPortableDevice.IsBusy, RelativeSource={RelativeSource FindAncestor, AncestorType=my:LiveViewWnd, AncestorLevel=1}}" Height="78" Width="81" Canvas.Left="21" Canvas.Top="20" />-->
 
         <!--<Image Name="img_preview" Margin="31,114,0,0" Height="{Binding ElementName=canvas_image, Path=Height}" HorizontalAlignment="Left" Width="{Binding ElementName=canvas_image, Path=Width}"/>-->

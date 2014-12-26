@@ -109,6 +109,7 @@ namespace CameraControl.ViewModel
         private int _levelAngle;
         private string _levelAngleColor;
         private decimal _movieTimeRemain;
+        private bool _showLeftTab;
 
         public ICameraDevice CameraDevice
         {
@@ -754,6 +755,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool ShowLeftTab
+        {
+            get { return CameraProperty.LiveviewSettings.ShowLeftTab; }
+            set
+            {
+                CameraProperty.LiveviewSettings.ShowLeftTab = value;
+                RaisePropertyChanged(() => ShowLeftTab);
+            }
+        }
+
         /// <summary>
         /// Gets or sets a value indicating if restart timer is running.
         /// </summary>
@@ -948,6 +959,8 @@ namespace CameraControl.ViewModel
 
         public RelayCommand ZoomOutCommand { get; set; }
         public RelayCommand ZoomInCommand { get; set; }
+        public RelayCommand ZoomIn100 { get; set; }
+        public RelayCommand ToggleGridCommand { get; set; }
         
         #endregion
 
@@ -1016,7 +1029,37 @@ namespace CameraControl.ViewModel
             ResetOverlayCommand = new RelayCommand(ResetOverlay);
             ZoomInCommand = new RelayCommand(() => CameraDevice.LiveViewImageZoomRatio.NextValue());
             ZoomOutCommand = new RelayCommand(() => CameraDevice.LiveViewImageZoomRatio.PrevValue());
+            ZoomIn100 = new RelayCommand(ToggleZoom);
+            ToggleGridCommand = new RelayCommand(ToggleGrid);
             FocuseDone += LiveViewViewModel_FocuseDone;
+            
+        }
+
+        private void ToggleGrid()
+        {
+            var i = GridType;
+            i++;
+            if (i >= Grids.Count)
+                i = 0;
+            GridType = i;
+        }
+
+        private void ToggleZoom()
+        {
+            try
+            {
+                if (CameraDevice.LiveViewImageZoomRatio == null || CameraDevice.LiveViewImageZoomRatio.Values == null ||
+                    CameraDevice.LiveViewImageZoomRatio.Values.Count < 2)
+                    return;
+                CameraDevice.LiveViewImageZoomRatio.Value = CameraDevice.LiveViewImageZoomRatio.Value ==
+                                                            CameraDevice.LiveViewImageZoomRatio.Values[0]
+                    ? CameraDevice.LiveViewImageZoomRatio.Values[CameraDevice.LiveViewImageZoomRatio.Values.Count - 2]
+                    : CameraDevice.LiveViewImageZoomRatio.Values[0];
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to set zoom", ex);
+            }
         }
 
         private void InitOverlay()

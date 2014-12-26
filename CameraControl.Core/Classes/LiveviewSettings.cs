@@ -195,6 +195,7 @@ namespace CameraControl.Core.Classes
         public bool DetectMotion { get; set; }
         public bool DetectMotionArea { get; set; }
         public bool ShowFocusRect { get; set; }
+        public bool ShowLeftTab { get; set; }
         public int Brightness { get; set; }
 
         public int HorizontalMin { get; set; }
@@ -212,6 +213,7 @@ namespace CameraControl.Core.Classes
             HighlightUnderExp = false;
             MotionThreshold = 20;
             ShowFocusRect = true;
+            ShowLeftTab = true;
 
             HorizontalMin = 0;
             HorizontalMax = 100;
