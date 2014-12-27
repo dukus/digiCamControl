@@ -315,7 +315,7 @@
                             </StackPanel>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}" >
                             <Expander.Content>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -326,6 +326,8 @@
                                         <ColumnDefinition Width="5"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -359,9 +361,11 @@
                                     <!--<CheckBox Content="{T:TranslateExtension LabelStayOnTop}" IsChecked="{Binding Path=StayOnTop}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>-->
                                     <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                                     <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-
-                                    <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="3" />
-                                    <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="11" Grid.ColumnSpan="3" Grid.Column="1">
+                                    <Rectangle Fill="{Binding NoProcessingWarnColor}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" />
+                                    <CheckBox Content="{T:TranslateExtension LabelNoProccesing}" ToolTip="{T:TranslateExtension LabelNoProccesingTooltip}" IsChecked="{Binding Path=NoProcessing}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
+                                    
+                                    <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="3" />
+                                    <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="12" Grid.ColumnSpan="3" Grid.Column="1">
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotateNone}" />
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotate90}" />
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotate180}" />

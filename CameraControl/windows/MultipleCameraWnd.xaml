@@ -86,7 +86,8 @@
             </Grid>
         </Expander>
         <Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />
-        <ListBox Grid.Column="1" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0" Grid.RowSpan="2" dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
+        <ListBox Grid.Column="1" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0"
+                 Grid.Row="0" Grid.RowSpan="2" dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" >
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />

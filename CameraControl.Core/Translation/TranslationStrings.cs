@@ -547,5 +547,7 @@ namespace CameraControl.Core.Translation
         public static string LabelShowSecondary  = "Show in secondary monitor";
         // 20/12/2014
         public static string LabelKeyboardTrigger = "Keyboard trigger";
+        public static string LabelNoProccesing = "No procesing";
+        public static string LabelNoProccesingTooltip = "Most of functionality are disabled";
     }
 }

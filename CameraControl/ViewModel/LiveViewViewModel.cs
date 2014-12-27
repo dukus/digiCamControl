@@ -110,6 +110,7 @@ namespace CameraControl.ViewModel
         private string _levelAngleColor;
         private decimal _movieTimeRemain;
         private bool _showLeftTab;
+        private bool _noProcessing;
 
         public ICameraDevice CameraDevice
         {
@@ -765,6 +766,23 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool NoProcessing
+        {
+            get { return CameraProperty.LiveviewSettings.NoProcessing; }
+            set
+            {
+                CameraProperty.LiveviewSettings.NoProcessing = value;
+                RaisePropertyChanged(() => NoProcessing);
+                RaisePropertyChanged(() => NoProcessingWarnColor);
+            }
+        }
+
+        public string NoProcessingWarnColor
+        {
+            get { return CameraProperty.LiveviewSettings.NoProcessing ? "Red" : "Transparent"; }
+        }
+
+
         /// <summary>
         /// Gets or sets a value indicating if restart timer is running.
         /// </summary>
@@ -1370,6 +1388,22 @@ namespace CameraControl.ViewModel
                             Length -
                         LiveViewData.
                             ImageDataPosition);
+                    LevelAngle = (int)LiveViewData.LevelAngleRolling;
+                    MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
+
+                    if (NoProcessing)
+                    {
+                        BitmapImage bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.CacheOption=BitmapCacheOption.OnLoad;
+                        bi.StreamSource = stream;
+                        bi.EndInit();
+                        bi.Freeze();
+                        Bitmap = bi;
+                        ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = stream.ToArray();
+                        _operInProgress = false;
+                        return;
+                    }
 
                     using (var res = new Bitmap(stream))
                     {
@@ -1486,9 +1520,7 @@ namespace CameraControl.ViewModel
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
-                        LevelAngle = (int) LiveViewData.LevelAngleRolling;
-                        MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
-                        if (_totalframes%DesiredWebFrameRate == 0)
+                        //if (_totalframes%DesiredWebFrameRate == 0)
                             ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
                     }
                     stream.Close();
