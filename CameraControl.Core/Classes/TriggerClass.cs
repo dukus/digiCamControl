@@ -106,8 +106,12 @@ namespace CameraControl.Core.Classes
                     if (item.Alt == e.isAltPressed && item.Ctrl == e.isCtrlPressed && item.KeyEnum == inputKey)
                         ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
                 }
+
                 foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
                 {
+                    // wait for camera to finish last transfer with timeot of 1.5 sec
+                    device.WaitForCamera(1500);
+                    // skip camera is camera is still busy
                     if (device.IsBusy)
                         continue;
                     CameraProperty property = device.LoadProperties();

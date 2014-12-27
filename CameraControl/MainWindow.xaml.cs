@@ -113,6 +113,17 @@ namespace CameraControl
             }
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
+            ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+        }
+
+        private void WindowsManager_Event(string cmd, object o)
+        {
+            switch (cmd)
+            {
+                case CmdConsts.SortCameras:
+                    SortCameras();
+                    break;
+            }
         }
 
         private void LoadInAllPreset(CameraPreset preset)

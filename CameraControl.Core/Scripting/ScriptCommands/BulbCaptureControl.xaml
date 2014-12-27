@@ -6,7 +6,8 @@
              xmlns:T="clr-namespace:CameraControl.Core.Translation" mc:Ignorable="d" 
              d:DesignHeight="153" d:DesignWidth="450" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:Classes="clr-namespace:CameraControl.Core.Scripting.ScriptCommands"
-             xmlns:Core="clr-namespace:CameraControl.Core">
+             xmlns:Core="clr-namespace:CameraControl.Core"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
     <UserControl.DataContext>
         <Classes:BulbCapture/>
     </UserControl.DataContext>
@@ -22,7 +23,7 @@
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
         <Label Content="{T:TranslateExtension LabelCaptureTime}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding Path=CaptureTime}" Margin="3" Minimum="1"/>
+        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=CaptureTime}" Margin="3" Minimum="1"/>
 
         <Label Grid.Row="1" Content="{T:TranslateExtension Iso}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         <ComboBox Grid.Column="1" Grid.Row="1" Margin="3" SelectedValue="{Binding Path=Iso}" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsoNumber.Values}"/>

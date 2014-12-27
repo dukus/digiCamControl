@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:T="clr-namespace:CameraControl.Core.Translation"
-             xmlns:Classes="clr-namespace:CameraControl.Core.Scripting.ScriptCommands" mc:Ignorable="d" 
+             xmlns:Classes="clr-namespace:CameraControl.Core.Scripting.ScriptCommands"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
              d:DesignHeight="152" d:DesignWidth="336">
     <UserControl.DataContext>
         <Classes:WaitCommand/>
@@ -16,10 +18,10 @@
             <ColumnDefinition Width="300*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
         <Label Content="{T:TranslateExtension LabelCaptureTime}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <xctk:IntegerUpDown Grid.Column="1" Value="{Binding Path=WaitTime}" Margin="3" Minimum="1"/>
+        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=WaitTime}" Margin="3" Minimum="1"/>
     </Grid>
 </UserControl>

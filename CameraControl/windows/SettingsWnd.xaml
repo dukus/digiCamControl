@@ -1,7 +1,7 @@
 ﻿<Controls:MetroWindow  x:Class="CameraControl.windows.SettingsWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{T:TranslateExtension SettingsWindowTitle}" Height="500" Width="800" Loaded="Window_Loaded" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="{T:TranslateExtension SettingsWindowTitle}" Height="500" Width="800" Loaded="Window_Loaded" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" 
                        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" ShowMaxRestoreButton="False" ShowMinButton="False"
                        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:my="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding"
                        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
@@ -10,7 +10,8 @@
                        xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance Type=Classes:Settings, IsDesignTimeCreatable=True}" xmlns:my1="clr-namespace:CameraControl.windows"
-                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices">
+                       xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
+                       xmlns:controls="clr-namespace:CameraControl.Controls">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -190,7 +191,7 @@
                     <CheckBox  Grid.Row="0" Grid.Column="1" Margin="3" IsChecked="{Binding ShowMagnifierInFullSccreen}"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelFullscrenBack}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                    <xctk:ColorPicker Grid.Row="1" Grid.Column="1" Margin="3" SelectedColor="{Binding FullScreenColor}"/>
+                    <controls:Colorpicker Grid.Row="1" Grid.Column="1" Margin="3" SelectedColor="{Binding FullScreenColor, Mode=TwoWay}" />
 
                     <Label Grid.Row="2" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelPreviewAfterCapture}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="2" Grid.Column="1" Margin="3" IsChecked="{Binding Preview}"/>

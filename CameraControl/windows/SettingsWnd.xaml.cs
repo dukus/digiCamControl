@@ -26,6 +26,8 @@
 
 #endregion
 
+using System.Windows.Media;
+
 #region
 
 using System;
@@ -216,5 +218,6 @@ namespace CameraControl.windows
         {
             PhotoUtils.Run("https://www.transifex.com/projects/p/digicamcontrol/");
         }
+
     }
 }

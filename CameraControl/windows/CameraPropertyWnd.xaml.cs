@@ -144,6 +144,7 @@ namespace CameraControl.windows
             ServiceProvider.Settings.Save();
             _cameraDevice.LoadProperties(); 
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.CameraPropertyWnd_Hide);
+            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.SortCameras);
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)

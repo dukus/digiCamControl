@@ -74,5 +74,6 @@ namespace CameraControl.Core.Classes
         public const string NextCamera = "NextCamera";
         public const string PrevCamera = "PrevCamera";
         public const string NextSeries = "NextSeries";
+        public const string SortCameras = "SortCameras";
     }
 }

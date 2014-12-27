@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -73,7 +73,7 @@
         <Button Content="Save" Grid.Row="9" Name="btn_save" Click="btn_save_Click" Grid.Column="1" Margin="5"/>
         <Button Content="Cancel" Grid.Row="9" Name="btn_cancel" Grid.Column="2" Click="btn_cancel_Click" Margin="5"/>
 
-        <GroupBox Grid.Column="3" Header="{T:TranslateExtension LabelKeyboardTrigger}" Grid.Row="0" Grid.RowSpan="4">
+        <GroupBox Grid.Column="3" Header="{T:TranslateExtension LabelKeyboardTrigger}" Grid.Row="0" Grid.RowSpan="4" Margin="0">
             <StackPanel Orientation="Vertical">
                 <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.KeyTrigger.Alt}" Content="Alt" Margin="5"/>
                 <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.KeyTrigger.Ctrl}" Content="Ctrl" Margin="5"/>
