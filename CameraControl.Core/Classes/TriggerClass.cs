@@ -106,9 +106,12 @@ namespace CameraControl.Core.Classes
                     if (item.Alt == e.isAltPressed && item.Ctrl == e.isCtrlPressed && item.KeyEnum == inputKey)
                         ServiceProvider.WindowsManager.ExecuteCommand(item.Name);
                 }
-
+                ICameraDevice lastDevice = null;
                 foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
                 {
+                    if (lastDevice != null)
+                        lastDevice.WaitForCamera(1500);
+
                     // wait for camera to finish last transfer with timeot of 1.5 sec
                     device.WaitForCamera(1500);
                     // skip camera is camera is still busy
@@ -117,7 +120,10 @@ namespace CameraControl.Core.Classes
                     CameraProperty property = device.LoadProperties();
                     if (property.KeyTrigger.Alt == e.isAltPressed && property.KeyTrigger.Ctrl == e.isCtrlPressed &&
                         property.KeyTrigger.KeyEnum == inputKey)
+                    {
                         CameraHelper.Capture(device);
+                        lastDevice = device;
+                    }
                 }
             }
             catch (Exception exception)
