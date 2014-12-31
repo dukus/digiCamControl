@@ -410,6 +410,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Content="{T:TranslateExtension LabelUseParellelTransfer}"  Margin="3" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
@@ -417,9 +418,10 @@
 
                     <Label Content="{T:TranslateExtension LabelShowUnTranslatedStringIds}"  Margin="3" Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox IsChecked="{Binding ShowUntranslatedLabelId}" Margin="3" Grid.Column="1" Grid.Row="2" />
-                    
-                    <Controls:ToggleSwitch Header="{T:TranslateExtension LabelDisableDriver}" Grid.Row="3" Grid.Column="1" IsChecked="{Binding DisableNativeDrivers}" ToolTip="This option disable special handig of some cameras. Use this if you experience some problem" Margin="3" Grid.ColumnSpan="2" />
 
+                    <Label Content="{T:TranslateExtension LabelDisableDriver}"  Margin="3" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox IsChecked="{Binding DisableNativeDrivers}" Margin="3" Grid.Column="1" Grid.Row="3" ToolTip="This option disable special handig of some cameras. Use this if you experience some problem" />
+                    
                     <Label Content="{T:TranslateExtension LabelAddFakeCamera}"  Margin="3" Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="4" IsChecked="{Binding AddFakeCamera}" Margin="3" Grid.Column="1"/>
 
@@ -427,9 +429,12 @@
                     <CheckBox Grid.Row="5" IsChecked="{Binding SyncCameraDateTime}" Margin="3" Grid.Column="1"/>
 
                     <Label Content="{T:TranslateExtension LabelLoadThumbDownload}"  Margin="3" Grid.Column="0" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                    <CheckBox Grid.Row="6" IsChecked="{Binding LoadThumbsDownload}" Margin="3" Grid.Column="1"/>
-                    
-                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="7" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
+                    <CheckBox Grid.Row="6" IsChecked="{Binding LoadThumbsDownload}" Margin="2,1,4,5" Grid.Column="1"/>
+
+                    <Label Content="{T:TranslateExtension LabelSendUsage}"  Margin="3" Grid.Column="0" Grid.Row="7" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox Grid.Row="7" IsChecked="{Binding SendUsageStatistics}" Margin="2" Grid.Column="1"/>
+
+                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="8" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelMessagesLog}">

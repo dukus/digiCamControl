@@ -25,6 +25,8 @@ namespace CameraControl.Core.Classes
 
         public void Start()
         {
+            if (!ServiceProvider.Settings.SendUsageStatistics)
+                return;
             try
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
@@ -52,9 +54,11 @@ namespace CameraControl.Core.Classes
 
         public void Stop()
         {
+            if (!ServiceProvider.Settings.SendUsageStatistics)
+                return;
             try
             {
-
+                
                 var tracker = new PageviewTracker(TrackId, ServiceProvider.Settings.ClientId);
                 tracker.UseSsl = true;
                 tracker.UserAgent = _userAgent;
@@ -69,12 +73,38 @@ namespace CameraControl.Core.Classes
             }
             catch (Exception exception)
             {
-                Log.Error("Analytics", exception);
+                //Log.Error("Analytics", exception);
+            }
+        }
+
+        public void SendView(string viewname)
+        {
+            if (!ServiceProvider.Settings.SendUsageStatistics)
+                return;
+            Task.Factory.StartNew(() => SendViewThread(viewname));
+        }
+
+        public void SendViewThread(string viewname)
+        {
+            try
+            {
+                var eventTrack = new ScreenTracker(TrackId, ServiceProvider.Settings.ClientId);
+                eventTrack.UseSsl = true;
+                eventTrack.UserAgent = _userAgent;
+                SetParams(eventTrack.Parameters);
+                eventTrack.Send();
+            }
+            catch (Exception)
+            {
+               
+                
             }
         }
 
         private void SendEvent(string cat, string action, string label)
         {
+            if (!ServiceProvider.Settings.SendUsageStatistics)
+                return;
             Task.Factory.StartNew(() => SendEventThread(cat, action, label));
         }
 
@@ -93,7 +123,7 @@ namespace CameraControl.Core.Classes
             }
             catch (Exception exception)
             {
-                Log.Error("Analytics", exception);    
+              //  Log.Error("Analytics", exception);    
             }
             
         }

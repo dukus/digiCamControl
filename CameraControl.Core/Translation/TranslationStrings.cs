@@ -549,5 +549,6 @@ namespace CameraControl.Core.Translation
         public static string LabelKeyboardTrigger = "Keyboard trigger";
         public static string LabelNoProccesing = "No procesing";
         public static string LabelNoProccesingTooltip = "Most of functionality are disabled";
+        public static string LabelSendUsage = "Automatically send usage statistics";
     }
 }

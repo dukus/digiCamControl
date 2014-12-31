@@ -35,6 +35,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
@@ -730,6 +731,7 @@ namespace CameraControl.Core.Classes
         private int _mediumFocusStepCanon;
         private int _largeFocusStepCanon;
         private int _canonFocusStepWait;
+        private bool _sendUsageStatistics;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -769,6 +771,16 @@ namespace CameraControl.Core.Classes
             {
                 _startupWithWindows = value;
                 NotifyPropertyChanged("StartupWithWindows");
+            }
+        }
+
+        public bool SendUsageStatistics
+        {
+            get { return _sendUsageStatistics; }
+            set
+            {
+                _sendUsageStatistics = value;
+                NotifyPropertyChanged("SendUsageStatistics");
             }
         }
 
@@ -868,6 +880,7 @@ namespace CameraControl.Core.Classes
             StartupWithWindows = false;
             LoadThumbsDownload = true;
             FullScreenInSecondaryMonitor = false;
+            SendUsageStatistics = true;
         }
 
 
