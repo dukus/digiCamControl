@@ -1332,10 +1332,16 @@ namespace CameraControl.ViewModel
         public virtual void GetLiveImage()
         {
             if (_operInProgress)
+            {
+                Log.Error("OperInProgress");
                 return;
-            
+            }
+
             if (DelayedStart)
+            {
+                Log.Error("Start is delayed");
                 return;
+            }
 
             _operInProgress = true;
             _totalframes++;
@@ -1345,8 +1351,9 @@ namespace CameraControl.ViewModel
             {
                 LiveViewData = LiveViewManager.GetLiveViewImage(CameraDevice);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error("Error geting lv", ex);
                 _retries++;
                 _operInProgress = false;
                 return;
@@ -1370,6 +1377,7 @@ namespace CameraControl.ViewModel
 
             if (LiveViewData.ImageData == null)
             {
+                Log.Error("LV image data is null !");
                 _retries++;
                 _operInProgress = false;
                 return;
@@ -1388,14 +1396,14 @@ namespace CameraControl.ViewModel
                             Length -
                         LiveViewData.
                             ImageDataPosition);
-                    LevelAngle = (int)LiveViewData.LevelAngleRolling;
+                    LevelAngle = (int) LiveViewData.LevelAngleRolling;
                     MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
 
                     if (NoProcessing)
                     {
                         BitmapImage bi = new BitmapImage();
                         bi.BeginInit();
-                        bi.CacheOption=BitmapCacheOption.OnLoad;
+                        bi.CacheOption = BitmapCacheOption.OnLoad;
                         bi.StreamSource = stream;
                         bi.EndInit();
                         bi.Freeze();
@@ -1413,7 +1421,7 @@ namespace CameraControl.ViewModel
                             ProcessMotionDetection(bmp);
                         }
 
-                        if (_totalframes % DesiredFrameRate == 0 && ShowHistogram)
+                        if (_totalframes%DesiredFrameRate == 0 && ShowHistogram)
                         {
                             ImageStatisticsHSL hslStatistics =
                                 new ImageStatisticsHSL(bmp);
@@ -1521,7 +1529,8 @@ namespace CameraControl.ViewModel
                         Bitmap = writeableBitmap;
 
                         //if (_totalframes%DesiredWebFrameRate == 0)
-                            ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
+                        ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
+                        Log.Debug("Live view draw done");
                     }
                     stream.Close();
                 }
@@ -1530,6 +1539,10 @@ namespace CameraControl.ViewModel
             {
                 Log.Error(exception);
                 _retries++;
+                _operInProgress = false;
+            }
+            finally
+            {
                 _operInProgress = false;
             }
             _retries = 0;

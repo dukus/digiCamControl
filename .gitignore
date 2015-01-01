@@ -12,3 +12,5 @@ _ReSharper.CameraControl.ServerTest
 *.tmp_proj
 /CameraControl.Core/*.user
 /*.suo
+/Setup/*.msi
+/Setup/*.wxs

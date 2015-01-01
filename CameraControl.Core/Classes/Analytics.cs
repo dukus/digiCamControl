@@ -77,30 +77,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public void SendView(string viewname)
-        {
-            if (!ServiceProvider.Settings.SendUsageStatistics)
-                return;
-            Task.Factory.StartNew(() => SendViewThread(viewname));
-        }
-
-        public void SendViewThread(string viewname)
-        {
-            try
-            {
-                var eventTrack = new ScreenTracker(TrackId, ServiceProvider.Settings.ClientId);
-                eventTrack.UseSsl = true;
-                eventTrack.UserAgent = _userAgent;
-                SetParams(eventTrack.Parameters);
-                eventTrack.Send();
-            }
-            catch (Exception)
-            {
-               
-                
-            }
-        }
-
         private void SendEvent(string cat, string action, string label)
         {
             if (!ServiceProvider.Settings.SendUsageStatistics)
