@@ -597,8 +597,10 @@ namespace CameraControl.Devices
         {
             int i = ToUInt16(value, startIndex);
             int d = ToUInt16(value, startIndex+2);
+            if (d == 0 && i == 0)
+                return 0;
             string s = i + "." + d;
-            return Convert.ToDecimal(s);
+            return Convert.ToDecimal(s, new CultureInfo("en-US"));
         }
     }
 }

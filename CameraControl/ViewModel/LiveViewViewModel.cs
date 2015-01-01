@@ -1530,7 +1530,6 @@ namespace CameraControl.ViewModel
 
                         //if (_totalframes%DesiredWebFrameRate == 0)
                         ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
-                        Log.Debug("Live view draw done");
                     }
                     stream.Close();
                 }
