@@ -340,8 +340,7 @@ namespace CameraControl
                 return;
             var thread = new Thread(delegate()
             {
-                CameraProperty property =
-                    ServiceProvider.Settings.CameraProperties.Get(newcameraDevice);
+                CameraProperty property = newcameraDevice.LoadProperties();
                 // load session data only if not session attached to the selected camera
                 if (newcameraDevice.AttachedPhotoSession == null)
                 {
@@ -363,7 +362,7 @@ namespace CameraControl
         private void cameraDevice_CameraInitDone(ICameraDevice cameraDevice)
         {
             var property = cameraDevice.LoadProperties();
-
+            cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
             CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
             if (preset != null)
             {

@@ -50,6 +50,7 @@ namespace CameraControl.Controls
     public partial class Controler : UserControl
     {
         private ProgressWindow dlg = null;
+        private bool _loading = false;
 
         public Controler()
         {
@@ -67,19 +68,32 @@ namespace CameraControl.Controls
             if (e.PropertyName == "SelectedCameraDevice")
             {
                 Dispatcher.Invoke(new Action(RefreshItems));
+                var device = ServiceProvider.DeviceManager.SelectedCameraDevice as BaseCameraDevice;
+                if (device != null) device.PropertyChanged += device_PropertyChanged;
+            }
+        }
+
+        private void device_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (_loading)
+                return;
+            if (sender == ServiceProvider.DeviceManager.SelectedCameraDevice && e.PropertyName == "CaptureInSdRam")
+            {
+                Dispatcher.Invoke(new Action(RefreshItems));
             }
         }
 
         private void RefreshItems()
         {
+            _loading = true;
             try
             {
                 if (ServiceProvider.Settings == null)
                     return;
                 if (ServiceProvider.DeviceManager.SelectedCameraDevice == null)
                     return;
-                CameraProperty property =
-                    ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+
                 cmb_transfer.Items.Clear();
                 if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
                 {
@@ -106,6 +120,7 @@ namespace CameraControl.Controls
             {
                 Log.Error("Error relod list ", e);
             }
+            _loading = false;
         }
 
         private void cmb_shutter_GotFocus(object sender, RoutedEventArgs e)
@@ -125,23 +140,25 @@ namespace CameraControl.Controls
 
         private void cmb_transfer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_loading)
+                return;
             if (ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy)
                 return;
-            CameraProperty property =
-                ServiceProvider.Settings.CameraProperties.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+            CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+
             if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem1 &&
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam != true)
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
 
             if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem2)
             {
-                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 property.NoDownload = true;
+                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
             }
             if ((string) cmb_transfer.SelectedItem == TranslationStrings.LabelTransferItem3)
             {
-                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 property.NoDownload = false;
+                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
             }
             property.CaptureInSdRam = ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam;
         }
