@@ -14,3 +14,5 @@ _ReSharper.CameraControl.ServerTest
 /*.suo
 /Setup/*.msi
 /Setup/*.wxs
+/Setup/Setup.exe
+/Setup/Setup.pdb
