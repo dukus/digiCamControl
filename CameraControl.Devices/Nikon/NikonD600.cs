@@ -80,8 +80,8 @@ namespace CameraControl.Devices.Nikon
             viewData.ImageWidth = ToInt16(result, 12);
             viewData.ImageHeight = ToInt16(result, 14);
 
-            viewData.FocusFrameXSize = ToInt16(result, 16);
-            viewData.FocusFrameYSize = ToInt16(result, 18);
+            viewData.FocusFrameXSize = ToInt16(result, 24);
+            viewData.FocusFrameYSize = ToInt16(result, 26);
 
             viewData.FocusX = ToInt16(result, 28);
             viewData.FocusY = ToInt16(result, 30);

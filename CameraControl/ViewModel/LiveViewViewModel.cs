@@ -1333,13 +1333,13 @@ namespace CameraControl.ViewModel
         {
             if (_operInProgress)
             {
-                Log.Error("OperInProgress");
+                //Log.Error("OperInProgress");
                 return;
             }
 
             if (DelayedStart)
             {
-                Log.Error("Start is delayed");
+                //Log.Error("Start is delayed");
                 return;
             }
 
@@ -1377,7 +1377,7 @@ namespace CameraControl.ViewModel
 
             if (LiveViewData.ImageData == null)
             {
-                Log.Error("LV image data is null !");
+                //Log.Error("LV image data is null !");
                 _retries++;
                 _operInProgress = false;
                 return;

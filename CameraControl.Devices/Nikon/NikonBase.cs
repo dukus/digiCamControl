@@ -1238,6 +1238,8 @@ namespace CameraControl.Devices.Nikon
 
             viewData.FocusX = ToInt16(result, 20);
             viewData.FocusY = ToInt16(result, 22);
+            
+            viewData.MovieTimeRemain = ToDeciaml(result, 56);
 
             viewData.Focused = result[40] != 1;
             if (result[29] == 1)
