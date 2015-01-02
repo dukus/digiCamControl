@@ -96,6 +96,7 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_ColorSpace = 0xD032;
         public const uint CONST_PROP_WbTuneFluorescentType = 0xD14F;
         public const uint CONST_PROP_WbColorTemp = 0xD01E;
+        public const uint CONST_PROP_ISOAutoHighLimit = 0xD183;
 
         public const uint CONST_Event_DevicePropChanged = 0x4006;
         public const uint CONST_Event_StoreFull = 0x400A;
@@ -129,6 +130,18 @@ namespace CameraControl.Devices.Nikon
                                                                {0x2710, "Hi 0.7"},
                                                                {0x3200, "Hi 1"},
                                                                {0x6400, "Hi 2"},
+                                                           };
+
+        public  Dictionary<byte, string> _autoIsoTable = new Dictionary<byte, string>()
+                                                           {
+                                                               {0, "200"},
+                                                               {1, "400"},
+                                                               {2, "800"},
+                                                               {3, "1600"},
+                                                               {4, "3200"},
+                                                               {5, "6400"},
+                                                               {6, "Hi 1.7"},
+                                                               {7, "Hi 2"},
                                                            };
 
         protected Dictionary<uint, string> _shutterTable = new Dictionary<uint, string>
@@ -431,11 +444,46 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitWbTuneFluorescentType());
             AdvancedProperties.Add(InitWbColorTemp());
             AdvancedProperties.Add(InitOnOffProperty("Application mode", CONST_PROP_ApplicationMode));
+            AdvancedProperties.Add(InitAutoIsoHight());
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
         }
+
+        public virtual PropertyValue<long> InitAutoIsoHight()
+        {
+            var res = new PropertyValue<long>();
+            try
+            {
+                DeviceReady();
+                byte datasize = 1;
+                res.Name = "ISO Auto High Limit";
+                res.SubType = typeof (byte);
+                res.Code = CONST_PROP_ISOAutoHighLimit;
+                res.ValueChanged +=
+                    (sender, key, val) =>
+                        SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+
+                var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
+                    CONST_PROP_ISOAutoHighLimit);
+                int type = BitConverter.ToInt16(result.Data, 2);
+                byte formFlag = result.Data[(2*datasize) + 5];
+                byte defval = result.Data[datasize + 5];
+
+                foreach (KeyValuePair<byte, string> pair in _autoIsoTable)
+                {
+                    res.AddValues(pair.Value, pair.Key);
+                }
+                res.SetValue(defval, false);
+            }
+            catch (Exception)
+            {
+            }
+            return res;
+        }
+
+
 
         protected virtual PropertyValue<long> InitColorSpace()
         {

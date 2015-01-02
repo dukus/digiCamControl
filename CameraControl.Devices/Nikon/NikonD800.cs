@@ -29,6 +29,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -37,6 +38,40 @@ namespace CameraControl.Devices.Nikon
 {
     public class NikonD800 : NikonBase
     {
+
+        public NikonD800()
+        {
+            _autoIsoTable = new Dictionary<byte, string>()
+                                                           {
+                                                               {0, "200"},
+                                                               {1, "250"},
+                                                             //  {2, "280"},
+                                                               {3, "320"},
+                                                               {4, "400"},
+                                                               {5, "500"},
+                                                             //  {6, "560"},
+                                                               {7, "640"},
+                                                               {8, "800"},
+                                                               {9, "1000"},
+                                                            //   {10, "1100"},
+                                                               {11, "1250"},
+                                                               {12, "1600"},
+                                                               {13, "2000"},
+                                                             //  {14, "2200"},
+                                                               {15, "2500"},
+                                                               {16, "3200"},
+                                                               {17, "4000"},
+                                                               {18, "4500"},
+                                                               {19, "5000"},
+                                                               {20, "6400"},
+                                                               {21, "Hi 0.3"},
+                                                          //     {22, "Hi 0.5"},
+                                                               {23, "Hi 0.7"},
+                                                               {24, "Hi 1"},
+                                                               {25, "Hi 2"},
+                                                           };
+        }
+
         public const int CONST_CMD_TerminateCapture = 0x920C;
 
         public override bool Init(DeviceDescriptor deviceDescriptor)
