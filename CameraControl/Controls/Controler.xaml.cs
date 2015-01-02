@@ -79,7 +79,7 @@ namespace CameraControl.Controls
                 return;
             if (sender == ServiceProvider.DeviceManager.SelectedCameraDevice && e.PropertyName == "CaptureInSdRam")
             {
-                Dispatcher.Invoke(new Action(RefreshItems));
+                Dispatcher.BeginInvoke(new Action(RefreshItems));
             }
         }
 

@@ -123,6 +123,12 @@ namespace CameraControl
                 case CmdConsts.SortCameras:
                     SortCameras();
                     break;
+                case CmdConsts.All_Minimize:
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        WindowState = WindowState.Minimized;
+                    }));
+                    break;
             }
         }
 

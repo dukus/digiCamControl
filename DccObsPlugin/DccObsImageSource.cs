@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -21,6 +22,8 @@ namespace DccObsPlugin
         public DccObsImageSource(XElement config)
         {
             ExecuteCmd("LiveViewWnd_Show");
+            Thread.Sleep(1000);
+            ExecuteCmd("All_Minimize");
             this.config = config;
             UpdateSettings();
         }

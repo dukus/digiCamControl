@@ -237,6 +237,13 @@ namespace CameraControl.windows
                                                          Close();
                                                      }));
                     break;
+                case CmdConsts.All_Minimize:
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        WindowState=WindowState.Minimized;
+                    }));
+                    break;
+
             }
         }
 

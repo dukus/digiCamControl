@@ -123,6 +123,7 @@ namespace CameraControl.windows
                         }
                     }
                         break;
+                    case CmdConsts.All_Minimize:
                     case CmdConsts.All_Close:
                         foreach (var liveViewWnd in _register)
                         {

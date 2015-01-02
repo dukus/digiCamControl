@@ -57,6 +57,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DccObsPlugin", "DccObsPlugi
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Setup", "Setup\Setup.csproj", "{4E4062B9-6833-4DEB-8642-18AF128BDBC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CD20011B-67C3-45A4-B69D-C7A9E8481550} = {CD20011B-67C3-45A4-B69D-C7A9E8481550}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

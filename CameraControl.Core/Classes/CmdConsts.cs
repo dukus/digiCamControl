@@ -58,6 +58,7 @@ namespace CameraControl.Core.Classes
         public const string LiveView_Focus = "LiveView_Focus";
         public const string LiveView_Capture = "LiveView_Capture";
         public const string All_Close = "All_Close";
+        public const string All_Minimize = "All_Minimize";
         public const string Capture = "Capture";
         public const string CaptureNoAf = "CaptureNoAf";
         public const string CaptureAll = "CaptureAll";
