@@ -64,6 +64,7 @@ namespace CameraControl.Core.Classes
                         return;
                     }
                     camera.CapturePhoto();
+                    ServiceProvider.Analytics.CameraCapture(camera);
                 }
             }
         }

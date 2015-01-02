@@ -66,6 +66,8 @@
                 <controls:NumericUpDown Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Minimum="1" Value="{Binding Rows}" Maximum="10"/>
                 <Label Content="Columns" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"/>
                 <Label Content="Rows" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"/>
+                
+                <Button Grid.Row="0" Grid.Column="3" Content="Autofocus all" Margin="3" Command="{Binding AutoFocusCommand}"/>
             </Grid>
         </GroupBox>
     </Grid>

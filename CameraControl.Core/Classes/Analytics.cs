@@ -109,6 +109,11 @@ namespace CameraControl.Core.Classes
             SendEvent("Camera", "Connected", device.DeviceName);
         }
 
+        public void CameraCapture(ICameraDevice device)
+        {
+            SendEvent("Camera", "Capture", device.DeviceName);
+        }
+
         public void Command(string command)
         {
             SendEvent("Command", command, null);

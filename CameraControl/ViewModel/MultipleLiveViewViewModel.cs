@@ -24,6 +24,7 @@ namespace CameraControl.ViewModel
         public ObservableCollection<SimpleLiveViewViewModel> Cameras { get; set; }
         public RelayCommand StartLiveViewCommand { get; set; }
         public RelayCommand StopLiveViewCommand { get; set; }
+        public RelayCommand AutoFocusCommand { get; set; }
 
         public bool OperInProgress
         {
@@ -67,12 +68,16 @@ namespace CameraControl.ViewModel
             Cols = 2;
 
             StartLiveViewCommand = new RelayCommand(StartLiveView);
-            StopLiveViewCommand=new RelayCommand(StopLiveView);
+            StopLiveViewCommand = new RelayCommand(StopLiveView);
+            AutoFocusCommand = new RelayCommand(AutoFocus);
 
             Cameras = new ObservableCollection<SimpleLiveViewViewModel>();
             if (ServiceProvider.DeviceManager != null)
             {
-                foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices.Where(device => device.GetCapability(CapabilityEnum.LiveView)))
+                foreach (
+                    ICameraDevice device in
+                        ServiceProvider.DeviceManager.ConnectedDevices.Where(
+                            device => device.GetCapability(CapabilityEnum.LiveView)))
                 {
                     Cameras.Add(new SimpleLiveViewViewModel(device));
                 }
@@ -85,6 +90,14 @@ namespace CameraControl.ViewModel
             _timer.Stop();
             Thread thread = new Thread(GetLiveViewThread);
             thread.Start();
+        }
+
+        private void AutoFocus()
+        {
+            foreach (SimpleLiveViewViewModel camera in Cameras)
+            {
+                camera.Focus();
+            }
         }
 
         private void GetLiveViewThread()
