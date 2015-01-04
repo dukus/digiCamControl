@@ -458,8 +458,15 @@ namespace CameraControl.Devices
 
         public void OnCameraInitDone()
         {
-            CameraDeviceManager.CameraConnectedEventHandler handler = CameraInitDone;
-            if (handler != null) handler(this);
+            try
+            {
+                CameraDeviceManager.CameraConnectedEventHandler handler = CameraInitDone;
+                if (handler != null) handler(this);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("OnCameraInitDone", ex);
+            }
         }
 
         private AsyncObservableCollection<PropertyValue<long>> _advancedProperties;

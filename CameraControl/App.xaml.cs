@@ -309,7 +309,7 @@ namespace CameraControl
                         ServiceProvider.DeviceManager.SelectPrevCamera();
                         break;
                     case CmdConsts.NextSeries:
-                        ServiceProvider.Settings.DefaultSession.Series++;
+                        if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
                         break;
                 }
             }
@@ -364,6 +364,18 @@ namespace CameraControl
             var property = cameraDevice.LoadProperties();
             cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
             CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
+            if (ServiceProvider.Settings.SyncCameraDateTime)
+            {
+                try
+                {
+                    cameraDevice.DateTime = DateTime.Now;
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Unable to sysnc date time", exception);
+                }
+            }
+
             if (preset != null)
             {
                 var thread = new Thread(delegate()
@@ -382,17 +394,6 @@ namespace CameraControl
                 thread.Start();
             }
 
-            if (ServiceProvider.Settings.SyncCameraDateTime)
-            {
-                try
-                {
-                    cameraDevice.DateTime = DateTime.Now;
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Unable to sysnc date time", exception);
-                }
-            }
             ServiceProvider.Analytics.CameraConnected(cameraDevice);
         }
 

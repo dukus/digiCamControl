@@ -8,18 +8,30 @@ using GalaSoft.MvvmLight;
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
-    public class ResizeTransformViewModel : ViewModelBase
+    public class CropTransformViewModel : ViewModelBase
     {
         private ValuePairEnumerator _config = new ValuePairEnumerator();
 
-        public ResizeTransformViewModel()
+        public CropTransformViewModel()
         {
-            
+
         }
 
-        public ResizeTransformViewModel(ValuePairEnumerator config)
+        public CropTransformViewModel(ValuePairEnumerator config)
         {
             _config = config;
+        }
+
+        public int Left
+        {
+            get { return GetInt(_config["Left"]); }
+            set { _config["Left"] = value.ToString(CultureInfo.InvariantCulture); }
+        }
+
+        public int Top
+        {
+            get { return GetInt(_config["Top"]); }
+            set { _config["Top"] = value.ToString(CultureInfo.InvariantCulture); }
         }
 
         public int Width
@@ -34,12 +46,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             set { _config["Height"] = value.ToString(CultureInfo.InvariantCulture); }
         }
 
-        public bool KeepAspect
+        public bool FromLiveView
         {
-            get { return _config["KeepAspect"]=="true"; }
-            set { _config["KeepAspect"] = value.ToString(); }
+            get { return _config["FromLiveView"] == "True"; }
+            set { _config["FromLiveView"] = value.ToString(); }
         }
-
 
         private int GetInt(string s)
         {

@@ -164,6 +164,11 @@
     <Compile Include="ExternalDevices\DSUSBShutterRelease.cs" />
     <Compile Include="ExternalDevices\MultiCameraBoxShutterRelease.cs" />
     <Compile Include="ExternalDevices\SerialPortShutterRelease.cs" />
+    <Compile Include="ImageTransformPlugins\CropTransform.cs" />
+    <Compile Include="ImageTransformPlugins\CropTransformView.xaml.cs">
+      <DependentUpon>CropTransformView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\CropTransformViewModel.cs" />
     <Compile Include="ImageTransformPlugins\NoTransform.cs" />
     <Compile Include="ImageTransformPlugins\ResizeTransform.cs" />
     <Compile Include="ImageTransformPlugins\ResizeTransformView.xaml.cs">
@@ -244,6 +249,10 @@
     <Page Include="DCCUSBShutterReleaseConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageTransformPlugins\CropTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\ResizeTransformView.xaml">
       <SubType>Designer</SubType>

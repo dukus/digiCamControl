@@ -74,6 +74,7 @@ namespace CameraControl.Plugins
 
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new NoTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ResizeTransform());
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new CropTransform());
 
             }
             catch (Exception exception)
