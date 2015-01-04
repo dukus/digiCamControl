@@ -38,5 +38,14 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
         }
 
+        public string FileName
+        {
+            get { return _config.ConfigData["FileName"]; }
+            set
+            {
+                _config.ConfigData["FileName"] = value;
+                RaisePropertyChanged(() => Path);
+            }
+        }
     }
 }

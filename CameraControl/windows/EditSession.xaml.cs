@@ -139,6 +139,7 @@ namespace CameraControl.windows
         private void btn_template_Click(object sender, RoutedEventArgs e)
         {
             var wnd = new FileNameTemplateEditorWnd();
+            wnd.Owner = this;
             wnd.TemplateString = Session.FileNameTemplate;
             if (wnd.ShowDialog() == true)
             {

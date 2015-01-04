@@ -7,7 +7,7 @@
              xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
              xmlns:autoExportPlugins="clr-namespace:CameraControl.Plugins.AutoExportPlugins"
              mc:Ignorable="d" 
-             Height="300" Width="500" WindowStartupLocation="CenterScreen" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False">
+             Height="350" Width="500" WindowStartupLocation="CenterScreen" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False">
     <Window.DataContext>
         <autoExportPlugins:CopyFilePluginViewModel/>
     </Window.DataContext>
@@ -47,6 +47,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
@@ -56,6 +58,11 @@
                 <Label Grid.Row="2" Content="Export path"/>
                 <TextBox Grid.Row="3" Text="{Binding Path}" Margin="2" IsReadOnly="True"/>
                 <Button Grid.Row="4" Content="Browse" Margin="2" Command="{Binding BrowseCommand}"/>
+
+                <Label Grid.Row="5" Content="File name"/>
+                <TextBox Grid.Row="6" Text="{Binding FileName}" Margin="2"/>
+                <TextBlock Grid.Row="7" TextWrapping="Wrap" > Use %1 for original filename the extension will be appended automaticaly<LineBreak/> Ex: %1_small=DSC_0125_small.jpg</TextBlock>
+
             </Grid>
         </GroupBox>
     </Grid>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -26,7 +27,18 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
             if (!Directory.Exists(conf.Path))
                 Directory.CreateDirectory(conf.Path);
-            var outfile = Path.Combine(conf.Path, Path.GetFileName(filename));
+            string name = Path.GetFileName(filename);
+
+            if (!string.IsNullOrEmpty(conf.FileName))
+            {
+                name = conf.FileName;
+                if (name.Contains("%1"))
+                    name = name.Replace("%1", Path.GetFileNameWithoutExtension(filename));
+                if (!name.Contains("."))
+                    name = name + Path.GetExtension(filename);
+            }
+
+            var outfile = Path.Combine(conf.Path, name);
             var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
             if (tp != null)
             {
@@ -40,6 +52,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             CopyFilePluginConfig wnd = new CopyFilePluginConfig();
             wnd.DataContext = new CopyFilePluginViewModel(config);
+            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
             wnd.ShowDialog();
             return true;
         }

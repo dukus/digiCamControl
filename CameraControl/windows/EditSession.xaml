@@ -4,7 +4,7 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      WindowStartupLocation="CenterScreen" Topmost="True">
+                      WindowStartupLocation="CenterScreen">
     <!--<Window.DataContext>
         <Classes:PhotoSession/>
     </Window.DataContext>-->

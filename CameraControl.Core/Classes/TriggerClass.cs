@@ -118,7 +118,8 @@ namespace CameraControl.Core.Classes
                     if (device.IsBusy)
                         continue;
                     CameraProperty property = device.LoadProperties();
-                    if (property.KeyTrigger.Alt == e.isAltPressed && property.KeyTrigger.Ctrl == e.isCtrlPressed &&
+                    if (property.KeyTrigger.KeyEnum != Key.None && property.KeyTrigger.Alt == e.isAltPressed &&
+                        property.KeyTrigger.Ctrl == e.isCtrlPressed &&
                         property.KeyTrigger.KeyEnum == inputKey)
                     {
                         CameraHelper.Capture(device);

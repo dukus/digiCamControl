@@ -569,11 +569,13 @@ namespace CameraControl
 
         private void btn_edit_Sesion_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(ServiceProvider.Settings.DefaultSession.ConfigFile))
-            {
-                File.Delete(ServiceProvider.Settings.DefaultSession.ConfigFile);
-            }
+            //if (File.Exists(ServiceProvider.Settings.DefaultSession.ConfigFile))
+            //{
+            //    File.Delete(ServiceProvider.Settings.DefaultSession.ConfigFile);
+            //}
             EditSession editSession = new EditSession(ServiceProvider.Settings.DefaultSession);
+            editSession.Owner = this;
+            ServiceProvider.Settings.ApplyTheme(editSession);
             editSession.ShowDialog();
             ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
         }
@@ -581,6 +583,8 @@ namespace CameraControl
         private void btn_add_Sesion_Click(object sender, RoutedEventArgs e)
         {
             EditSession editSession = new EditSession(new PhotoSession());
+            editSession.Owner = this;
+            ServiceProvider.Settings.ApplyTheme(editSession);
             if (editSession.ShowDialog() == true)
             {
                 ServiceProvider.Settings.Add(editSession.Session);
@@ -588,32 +592,6 @@ namespace CameraControl
             }
         }
 
-        //private void button1_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (button1.IsChecked == true)
-        //    {
-        //        if (PropertyWnd == null)
-        //        {
-        //            PropertyWnd = new PropertyWnd();
-        //        }
-        //        PropertyWnd.IsVisibleChanged -= PropertyWnd_IsVisibleChanged;
-        //        PropertyWnd.Show();
-        //        PropertyWnd.IsVisibleChanged += PropertyWnd_IsVisibleChanged;
-        //    }
-        //    else
-        //    {
-        //        if (PropertyWnd != null && PropertyWnd.Visibility == Visibility.Visible)
-        //        {
-        //            PropertyWnd.IsVisibleChanged -= PropertyWnd_IsVisibleChanged;
-        //            PropertyWnd.Hide();
-        //        }
-        //    }
-        //}
-
-        //private void PropertyWnd_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //    button1.IsChecked = !button1.IsChecked;
-        //}
 
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -623,6 +601,7 @@ namespace CameraControl
         private void but_timelapse_Click(object sender, RoutedEventArgs e)
         {
             TimeLapseWnd wnd = new TimeLapseWnd();
+            wnd.Owner = this;
             wnd.ShowDialog();
         }
 
@@ -929,6 +908,7 @@ namespace CameraControl
 
             {
                 var wnd = new GetIpWnd { Ip = "192.168.1.1" };
+                wnd.Owner = this;
                 if (wnd.ShowDialog() == true)
                     ServiceProvider.DeviceManager.ConnectToServer(wnd.Ip, wnd.Type);
             }
@@ -943,6 +923,7 @@ namespace CameraControl
         {
             CameraPreset cameraPreset = new CameraPreset();
             SavePresetWnd wnd = new SavePresetWnd(cameraPreset);
+            wnd.Owner = this;
             if (wnd.ShowDialog() == true)
             {
                 foreach (CameraPreset preset in ServiceProvider.Settings.CameraPresets)
@@ -963,6 +944,7 @@ namespace CameraControl
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             PresetEditWnd wnd = new PresetEditWnd();
+            wnd.Owner = this;
             wnd.ShowDialog();
         }
 

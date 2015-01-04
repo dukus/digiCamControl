@@ -85,6 +85,8 @@ namespace CameraControl.Core
             }
         }
 
+        public IMainWindowPlugin SelectedWindow { get; set; }
+        
         private AsyncObservableCollection<IToolPlugin> _toolPlugins;
         private AsyncObservableCollection<IAutoExportPlugin> _autoExportPlugins;
         private AsyncObservableCollection<IImageTransformPlugin> _imageTransformPlugins;

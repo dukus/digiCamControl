@@ -213,6 +213,7 @@ namespace CameraControl
                 if (windowPlugin.DisplayName == ServiceProvider.Settings.SelectedMainForm)
                     mainWindowPlugin = windowPlugin;
             }
+            ServiceProvider.PluginManager.SelectedWindow = mainWindowPlugin;
             mainWindowPlugin.Show();
             if (mainWindowPlugin is Window)
                 ((Window)mainWindowPlugin).Activate();

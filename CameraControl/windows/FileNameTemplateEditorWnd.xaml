@@ -4,7 +4,7 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-        Title="File Name Template Editor" Height="600" Width="600" Topmost="True" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" xmlns:my="clr-namespace:CameraControl.windows" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
+        Title="File Name Template Editor" Height="600" Width="600" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" xmlns:my="clr-namespace:CameraControl.windows" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

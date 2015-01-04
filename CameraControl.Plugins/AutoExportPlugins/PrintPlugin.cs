@@ -85,6 +85,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             PrintPluginConfig wnd = new PrintPluginConfig();
             wnd.DataContext = new PrintPluginViewModel(config);
+            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
             wnd.ShowDialog();
             return true;
         }

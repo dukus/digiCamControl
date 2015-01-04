@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -49,6 +50,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             ExecuteFilePluginConfig wnd = new ExecuteFilePluginConfig();
             wnd.DataContext = new ExecuteFilePluginViewModel(config);
+            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
             wnd.ShowDialog();
             return true;
         }

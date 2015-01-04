@@ -78,14 +78,12 @@ namespace CameraControl.windows
                             if (!_register.ContainsKey(param))
                             {
                                 Application.Current.Dispatcher.Invoke(new Action(delegate
-                                                                                     {
-                                                                                         LiveViewWnd wnd =
-                                                                                             new LiveViewWnd();
-                                                                                         ServiceProvider.Settings.
-                                                                                             ApplyTheme
-                                                                                             (wnd);
-                                                                                         _register.Add(param, wnd);
-                                                                                     }));
+                                {
+                                    LiveViewWnd wnd = new LiveViewWnd();
+                                    ServiceProvider.Settings.ApplyTheme(wnd);
+                                    _register.Add(param, wnd);
+                                    wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+                                }));
                             }
                             NikonBase nikonBase = param as NikonBase;
                             if (nikonBase != null && ServiceProvider.Settings.EasyLiveViewControl)
