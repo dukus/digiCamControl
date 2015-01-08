@@ -545,7 +545,12 @@ namespace CameraControl.Core.Classes
                                                FormatFileName(device, file) + (!ext.StartsWith(".") ? "." : "") + ext);
 
                 if (File.Exists(fileName) && !AllowOverWrite)
+                {
+                    // the template should contain a counter type tag
+                    if (!FileNameTemplate.Contains("[Counter") && !AllowOverWrite)
+                        FileNameTemplate += "[Counter 4 digit]";
                     return GetNextFileName(file, device);
+                }
                 _lastFilename = fileName;
                 return fileName;
             }
@@ -556,16 +561,11 @@ namespace CameraControl.Core.Classes
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(device);
             string res = FileNameTemplate;
 
-            // the template should contain a counter type tag
-            if (!res.Contains("[Counter") && !AllowOverWrite)
-                res += "[Counter 4 digit]";
-
             if (incremetCounter)
             {
                 property.Counter = property.Counter + property.CounterInc;
                 Counter++;
             }
-
 
             Regex regPattern = new Regex(@"\[(.*?)\]", RegexOptions.Singleline);
             MatchCollection matchX = regPattern.Matches(res);
