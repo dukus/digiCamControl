@@ -12,7 +12,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
         public override void Write(Stream s)
         {
             Guid = Guid.NewGuid();
-            Name = "qDslrDashboard V1.00";
+            Name = "DCC V1.00";
 
             Header = new PtpIpHeader();
             Header.Type = 1;
