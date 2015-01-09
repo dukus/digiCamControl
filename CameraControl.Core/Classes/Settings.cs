@@ -36,6 +36,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
@@ -253,14 +254,17 @@ namespace CameraControl.Core.Classes
                 var res = new List<string>();
                 try
                 {
-                    IPAddress localAddr = IPAddress.Parse("127.0.0.1");
-                    var hostEntry = Dns.GetHostEntry(localAddr);
-                    var ips = (
-                                  from addr in hostEntry.AddressList
-                                  where addr.AddressFamily.ToString() == "InterNetwork"
-                                  select addr.ToString()
-                              ).ToList();
-                    res.AddRange(ips.Select(ip => string.Format("http://{0}:{1}", ip, WebserverPort)));
+                    //IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+                    //var hostEntry = Dns.GetHostEntry(localAddr);
+                    //var ips = (
+                    //              from addr in hostEntry.AddressList
+                    //              where addr.AddressFamily.ToString() == "InterNetwork"
+                    //              select addr.ToString()
+                    //          ).ToList();
+                    string sHostName = Dns.GetHostName();
+                    IPAddress[] ipA =
+                        Dns.GetHostAddresses(sHostName).Where(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToArray();
+                    res.AddRange(ipA.Select(ip => string.Format("http://{0}:{1}", ip, WebserverPort)));
                 }
                 catch (Exception exception)
                 {

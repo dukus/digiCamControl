@@ -71,7 +71,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />                        
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <Label Content="{T:TranslateExtension LabelTheme}" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
@@ -82,7 +82,14 @@
 
                     <Label Content="{T:TranslateExtension LabelInterfaceLanguage}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right"/>
                     <ComboBox  ItemsSource="{Binding Source={x:Static Member=T:TranslationManager.AvailableLangs}}" DisplayMemberPath="Name" SelectedValuePath="Value"  SelectedValue="{Binding SelectedLanguage}" Grid.Row="4" Grid.Column="3" Margin="2"/>
-                    <TextBlock Grid.Row="5" Grid.Column="3" Text="Improve interface localization" Cursor="Hand" FontStyle="Italic" HorizontalAlignment="Right" MouseDown="TextBlock_MouseDown"><TextBlock.TextDecorations><TextDecoration><TextDecoration.Pen><Pen /></TextDecoration.Pen></TextDecoration></TextBlock.TextDecorations></TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="3" Text="Improve interface localization" Cursor="Hand" FontStyle="Italic" HorizontalAlignment="Right" MouseDown="TextBlock_MouseDown">
+                        <TextBlock.TextDecorations>
+                            <TextDecoration>
+                                <TextDecoration.Pen>
+                                    <Pen />
+                                </TextDecoration.Pen>
+                            </TextDecoration>
+                        </TextBlock.TextDecorations></TextBlock>
 
                     <Label Content="{T:TranslateExtension LabelMinimizeToTryIcon}" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
                     <CheckBox Grid.Row="6" Grid.Column="3" IsChecked="{Binding MinimizeToTrayIcon}"/>
@@ -92,7 +99,7 @@
 
                     <Label Content="{T:TranslateExtension LabelStartupWithWindows}" Grid.Row="8" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
                     <CheckBox Grid.Row="8" Grid.Column="3" IsChecked="{Binding StartupWithWindows}"/>
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelPreview}">
@@ -243,16 +250,16 @@
                     <GroupBox Header="{T:TranslateExtension LabelWebserver}" Grid.Row="1">
                         <Grid ToolTip="{T:TranslateExtension ReStartToolTip}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="300" />
-                                <ColumnDefinition Width="326" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="32*" />
-                                <RowDefinition Height="37*" />
-                                <RowDefinition Height="141*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" Height="25" HorizontalAlignment="Left" Margin="10,5,0,0" Name="checkBox1" VerticalAlignment="Top" IsChecked="{Binding UseWebserver}" Width="220" />
-                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="8,5,0,0" Name="textBox1" VerticalAlignment="Top" Width="290" IsReadOnly="True" ItemsSource="{Binding AvaiableWebAddresses, Mode=OneTime}" SelectedItem="{Binding Webaddress}" IsEditable="False" SelectionChanged="textBox1_SelectionChanged" Grid.Row="1" />
+                            <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" Name="checkBox1" IsChecked="{Binding UseWebserver}" Margin="2"/>
+                            <ComboBox Name="textBox1" IsReadOnly="True" ItemsSource="{Binding AvaiableWebAddresses, Mode=OneTime}" SelectedItem="{Binding Webaddress}" IsEditable="False" SelectionChanged="textBox1_SelectionChanged" Grid.Row="1" Margin="2" />
                             <my:QrCodeImgControl Height="129" HorizontalAlignment="Left" Margin="7,3,0,0" Stretch="Uniform" VerticalAlignment="Top" Width="132" Name="qrcode" Grid.Column="1" Grid.RowSpan="3" />
                         </Grid>
                     </GroupBox>
@@ -333,7 +340,7 @@
 
                         </Grid>
                     </GroupBox>
-                    
+
                     <Label Content="{T:TranslateExtension LabelMotionDetectionType}" Grid.Row="4" HorizontalContentAlignment="Right" />
                     <ComboBox Grid.Column="1" Grid.Row="4" Margin="3" ItemsSource="{Binding}" SelectedIndex="{Binding DetectionType}">
                         <ComboBoxItem Content="{T:TranslateExtension LabelTwoFramesDifferenceDetector}"/>
@@ -421,7 +428,7 @@
 
                     <Label Content="{T:TranslateExtension LabelDisableDriver}"  Margin="3" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox IsChecked="{Binding DisableNativeDrivers}" Margin="3" Grid.Column="1" Grid.Row="3" ToolTip="This option disable special handig of some cameras. Use this if you experience some problem" />
-                    
+
                     <Label Content="{T:TranslateExtension LabelAddFakeCamera}"  Margin="3" Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="4" IsChecked="{Binding AddFakeCamera}" Margin="3" Grid.Column="1"/>
 
