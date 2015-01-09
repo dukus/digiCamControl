@@ -293,9 +293,8 @@ namespace CameraControl.Devices.Canon
         protected Dictionary<uint, string> _meteringTable = new Dictionary<uint, string>()
                                                                 {
                                                                     {1, "Spot metering"},
-                                                                    {2, "Evaluative metering"},
-                                                                    {3, "Partial metering"},
-                                                                    {4, "Spot metering"},
+                                                                    {3, "Evaluative metering"},
+                                                                    {4, "Partial metering"},
                                                                     {5, "Center-weighted averaging metering"},
                                                                     {0xFFFFFFFF, "Not valid/no settings changes"},
                                                                 };
