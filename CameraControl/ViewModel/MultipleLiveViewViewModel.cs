@@ -25,6 +25,9 @@ namespace CameraControl.ViewModel
         public RelayCommand StartLiveViewCommand { get; set; }
         public RelayCommand StopLiveViewCommand { get; set; }
         public RelayCommand AutoFocusCommand { get; set; }
+        public RelayCommand StartRecordCommand { get; set; }
+        public RelayCommand StopRecordCommand { get; set; }
+
 
         public bool OperInProgress
         {
@@ -70,6 +73,8 @@ namespace CameraControl.ViewModel
             StartLiveViewCommand = new RelayCommand(StartLiveView);
             StopLiveViewCommand = new RelayCommand(StopLiveView);
             AutoFocusCommand = new RelayCommand(AutoFocus);
+            StartRecordCommand = new RelayCommand(StartRecord);
+            StopRecordCommand = new RelayCommand(StopRecord);
 
             Cameras = new ObservableCollection<SimpleLiveViewViewModel>();
             if (ServiceProvider.DeviceManager != null)
@@ -143,5 +148,38 @@ namespace CameraControl.ViewModel
             OperInProgress = false;
         }
 
+        private void StartRecord()
+        {
+            OperInProgress = true;
+            Thread thread = new Thread(StartRecordThread);
+            thread.Start();
+        }
+
+        private void StartRecordThread()
+        {
+            foreach (SimpleLiveViewViewModel camera in Cameras)
+            {
+                camera.RecordMovie();
+            }
+            OperInProgress = false;
+            _timer.Start();
+        }
+
+        private void StopRecord()
+        {
+            OperInProgress = true;
+            Thread thread = new Thread(StopRecordThread);
+            thread.Start();
+        }
+
+        private void StopRecordThread()
+        {
+            _timer.Stop();
+            foreach (SimpleLiveViewViewModel camera in Cameras)
+            {
+                camera.StopRecordMovie();
+            }
+            OperInProgress = false;
+        }
     }
 }

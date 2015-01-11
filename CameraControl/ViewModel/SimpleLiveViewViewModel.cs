@@ -19,6 +19,7 @@ namespace CameraControl.ViewModel
     {
         private ICameraDevice _cameraDevice;
         private BitmapSource _bitmap;
+        private bool _isMovieRecording;
 
         public ICameraDevice CameraDevice
         {
@@ -40,11 +41,22 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool IsMovieRecording
+        {
+            get { return _isMovieRecording; }
+            set
+            {
+                _isMovieRecording = value;
+                RaisePropertyChanged(() => IsMovieRecording);
+            }
+        }
+
+
         public RelayCommand FocusCommand { get; set; }
 
         public SimpleLiveViewViewModel()
         {
-            
+
         }
 
         public SimpleLiveViewViewModel(ICameraDevice device)
@@ -124,18 +136,19 @@ namespace CameraControl.ViewModel
 
                     using (var res = new Bitmap(stream))
                     {
-                       var writeableBitmap =
-                                BitmapFactory.ConvertToPbgra32Format(
-                                    BitmapSourceConvert.ToBitmapSource(res));
+                        var writeableBitmap =
+                            BitmapFactory.ConvertToPbgra32Format(
+                                BitmapSourceConvert.ToBitmapSource(res));
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
+                        IsMovieRecording = LiveViewData.MovieIsRecording;
                     }
                 }
             }
             catch (Exception)
             {
-                
-                
+
+
             }
         }
 
@@ -157,5 +170,48 @@ namespace CameraControl.ViewModel
                 StaticHelper.Instance.SystemMessage = exception.Message;
             }
         }
+
+        public void RecordMovie()
+        {
+            string resp = CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
+            if (string.IsNullOrEmpty(resp))
+            {
+                var thread = new Thread(RecordMovieThread);
+                thread.Start();
+            }
+        }
+
+        private void RecordMovieThread()
+        {
+            try
+            {
+                CameraDevice.StartRecordMovie();
+            }
+            catch (Exception exception)
+            {
+                StaticHelper.Instance.SystemMessage = exception.Message;
+                Log.Error("Recording error", exception);
+            }
+        }
+
+        public void StopRecordMovie()
+        {
+            var thread = new Thread(StopRecordMovieThread);
+            thread.Start();
+        }
+
+        private void StopRecordMovieThread()
+        {
+            try
+            {
+                CameraDevice.StopRecordMovie();
+            }
+            catch (Exception exception)
+            {
+                StaticHelper.Instance.SystemMessage = exception.Message;
+                Log.Error("Recording error", exception);
+            }
+        }
+
     }
 }
