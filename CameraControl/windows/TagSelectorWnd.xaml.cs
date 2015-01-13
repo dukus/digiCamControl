@@ -138,10 +138,10 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.TagSelectorWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
                                                      {
+                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          LoadData();
                                                          Show();
                                                          Activate();
-                                                         Topmost = true;
                                                          Focus();
                                                          ServiceProvider.DeviceManager.PhotoCaptured +=
                                                              DeviceManager_PhotoCaptured;

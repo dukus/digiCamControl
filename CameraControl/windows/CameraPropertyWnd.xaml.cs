@@ -93,10 +93,9 @@ namespace CameraControl.windows
                     CameraProperty.BeginEdit();
                     Dispatcher.Invoke(new Action(delegate
                     {
+                        Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                         Show();
                         Activate();
-                        Topmost = true;
-                        //Topmost = false;
                         Focus();
                     }));
                     break;

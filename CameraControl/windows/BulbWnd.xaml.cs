@@ -558,10 +558,9 @@ namespace CameraControl.windows
                     ServiceProvider.ScriptManager.OutPutMessageReceived += ScriptManager_OutPutMessageReceived;
                     Dispatcher.Invoke(new Action(delegate
                                                      {
+                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          Show();
                                                          Activate();
-                                                         //Topmost = true;
-                                                         //Topmost = false;
                                                          Focus();
                                                      }));
                     break;
@@ -695,12 +694,6 @@ namespace CameraControl.windows
             {
                 Message = msg;
             }));
-        }
-
-
-        private void btn_stay_on_top_Click(object sender, RoutedEventArgs e)
-        {
-            Topmost = (btn_stay_on_top.IsChecked == true);
         }
     }
 }

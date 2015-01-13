@@ -41,6 +41,6 @@
         <Image Grid.Column="1" Height="100" Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap}"/>
         <Label Content="{Binding CounterText}" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <ProgressBar Grid.Row="1" Grid.Column="0" Margin="3" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" />
-        <controls:RangeSlider Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" LowerValue="{Binding MinValue}" UpperValue="{Binding MaxValue}" Margin="5" ExtendedMode="True" MoveWholeRange="True" />
+        <controls:RangeSlider Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" LowerValue="{Binding MinValue}" UpperValue="{Binding MaxValue}" Margin="5" ExtendedMode="True" MoveWholeRange="True" IsMoveToPointEnabled="True" />
     </Grid>
 </controls:MetroWindow>

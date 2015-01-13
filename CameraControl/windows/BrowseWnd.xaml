@@ -78,11 +78,6 @@
             <StatusBarItem Content="(" />            
             <StatusBarItem Content="{Binding ElementName=lst_files,Path=Items.Count}" />
             <StatusBarItem Content=")" />
-            <StatusBarItem HorizontalAlignment="Right">
-                <StatusBarItem.Content>
-                    <CheckBox Content="Stay on top" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type windows:BrowseWnd}}, Path=Topmost}"/>
-                </StatusBarItem.Content>
-            </StatusBarItem>
         </StatusBar>
         <GridSplitter Grid.Column="2" Grid.Row="1" Name="gridSplitter1" ResizeDirection="Columns" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>

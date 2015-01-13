@@ -36,6 +36,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Timers;
+using System.Web.UI.WebControls.WebParts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -94,11 +95,10 @@ namespace CameraControl.windows
                         return;
                     Dispatcher.Invoke(new Action(delegate
                                                      {
-                                                         DataContext = new AstroLiveViewViewModel(CameraDevice);                    
+                                                         DataContext = new AstroLiveViewViewModel(CameraDevice);
+                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          Show();
                                                          Activate();
-                                                         Topmost = true;
-                                                         //Topmost = false;
                                                          Focus();
                                                      }));
                     break;
@@ -143,11 +143,6 @@ namespace CameraControl.windows
                 double hw = ((AstroLiveViewViewModel)DataContext).Preview.PixelHeight / live_view_image.ActualHeight;
                 ((AstroLiveViewViewModel)DataContext).CentralPoint = new Point(point.X * dw, point.Y * hw);
             }
-        }
-
-        private void btn_stay_on_top_Click(object sender, RoutedEventArgs e)
-        {
-            Topmost = (btn_stay_on_top.IsChecked == true);
         }
 
         private void img_preview_MouseDown(object sender, MouseButtonEventArgs e)

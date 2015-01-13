@@ -100,10 +100,9 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.MultipleCameraWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
                                                      {
+                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          Show();
                                                          Activate();
-                                                         //Topmost = true;
-                                                         //Topmost = false;
                                                          Focus();
                                                      }));
                     break;
@@ -279,14 +278,9 @@ namespace CameraControl.windows
                 ServiceProvider.ExternalDeviceManager.Capture(SelectedConfig);
         }
 
-        private void btn_stay_on_top_Click(object sender, RoutedEventArgs e)
-        {
-            Topmost = (btn_stay_on_top.IsChecked == true);
-        }
-
         private void btn_liveview_Click(object sender, RoutedEventArgs e)
         {
-            MultipleLiveView view=new MultipleLiveView();
+            MultipleLiveView view = new MultipleLiveView();
             view.Owner = this;
             view.Show();
         }

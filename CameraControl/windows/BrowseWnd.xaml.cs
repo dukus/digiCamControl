@@ -30,6 +30,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using CameraControl.Classes;
 using CameraControl.Core;
@@ -86,10 +87,10 @@ namespace CameraControl.windows
                     ServiceProvider.Settings.PropertyChanged += Settings_PropertyChanged;
                     Dispatcher.Invoke(new Action(delegate
                                                      {
+                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          SelectedPhotoSession = ServiceProvider.Settings.DefaultSession;
                                                          Show();
                                                          Activate();
-                                                         Topmost = true;
                                                          Focus();
                                                      }));
                     break;

@@ -170,6 +170,7 @@ namespace CameraControl.windows
                                                      {
                                                          if (dlg.IsVisible)
                                                              return;
+                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          CameraDevice = param as ICameraDevice;
                                                          Title = TranslationStrings.DownloadWindowTitle + "-" +
                                                                  ServiceProvider.Settings.CameraProperties.Get(
@@ -179,8 +180,6 @@ namespace CameraControl.windows
                                                              return;
                                                          Show();
                                                          Activate();
-                                                         Topmost = true;
-                                                         Topmost = false;
                                                          Focus();
                                                          dlg.Show();
                                                          Items.Clear();

@@ -4,7 +4,7 @@
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      Title="{T:TranslateExtension EditTagWindowTitle}" Height="340" Width="397" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" Topmost="True">
+                      Title="{T:TranslateExtension EditTagWindowTitle}" Height="340" Width="397" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <Classes:TagItem/>
     </Window.DataContext>
