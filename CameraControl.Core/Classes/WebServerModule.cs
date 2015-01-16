@@ -33,9 +33,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using CameraControl.Devices;
 using Griffin.WebServer;
 using Griffin.WebServer.Files;
 using Griffin.WebServer.Modules;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -43,8 +45,8 @@ namespace CameraControl.Core.Classes
 {
     public class WebServerModule : IWorkerModule
     {
-/*        private string _lineFormat =
-            "{image : '@image@', title : 'Image Credit: Maria Kazvan', thumb : '@image_thumb@', url : '@image_url@'},";*/
+        /*        private string _lineFormat =
+                    "{image : '@image@', title : 'Image Credit: Maria Kazvan', thumb : '@image_thumb@', url : '@image_url@'},";*/
 
         private string _lineFormat =
             "            <div>  <img u=\"image\" src=\"@image@\" /><img u=\"thumb\" src=\"@image_thumb@\" /></div>";
@@ -68,120 +70,137 @@ namespace CameraControl.Core.Classes
 
         public ModuleResult HandleRequest(IHttpContext context)
         {
-            if (string.IsNullOrEmpty(context.Request.Uri.AbsolutePath) || context.Request.Uri.AbsolutePath == "/")
+            try
             {
-                string str = context.Request.Uri.Scheme + "://" + context.Request.Uri.Host;
-                if (context.Request.Uri.Port != 80)
-                    str = str + (object) ":" + context.Request.Uri.Port.ToString();
-                string uriString = str + context.Request.Uri.AbsolutePath + "index.html";
-                if (!string.IsNullOrEmpty(context.Request.Uri.Query))
-                    uriString = uriString + "?" + context.Request.Uri.Query;
-                context.Request.Uri = new Uri(uriString);
-            }
-
-            if (context.Request.Uri.AbsolutePath.StartsWith("/thumb/large"))
-            {
-                foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
+                if (string.IsNullOrEmpty(context.Request.Uri.AbsolutePath) || context.Request.Uri.AbsolutePath == "/")
                 {
-                    if (Path.GetFileName(item.LargeThumb) ==
-                        Path.GetFileName(context.Request.Uri.AbsolutePath.Replace("/", "\\")))
-                    {
-                        //if (!File.Exists(item.LargeThumb) && !item.IsRaw)
-                        //{
-                        //    BitmapLoader.Instance.GenerateCache(item);
-                        //}
-                        SendFile(context,
-                                 !File.Exists(item.LargeThumb)
-                                     ? Path.Combine(Settings.WebServerFolder, "logo.png")
-                                     : item.LargeThumb);
-                        SendFile(context, item.LargeThumb);
-                        return ModuleResult.Continue;
-                    }
+                    string str = context.Request.Uri.Scheme + "://" + context.Request.Uri.Host;
+                    if (context.Request.Uri.Port != 80)
+                        str = str + (object) ":" + context.Request.Uri.Port;
+                    string uriString = str + context.Request.Uri.AbsolutePath + "index.html";
+                    if (!string.IsNullOrEmpty(context.Request.Uri.Query))
+                        uriString = uriString + "?" + context.Request.Uri.Query;
+                    context.Request.Uri = new Uri(uriString);
                 }
-            }
 
-            if (context.Request.Uri.AbsolutePath.StartsWith("/thumb/small"))
-            {
-                foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
+                if (context.Request.Uri.AbsolutePath.StartsWith("/thumb/large"))
                 {
-                    if (Path.GetFileName(item.SmallThumb) ==
-                        Path.GetFileName(context.Request.Uri.AbsolutePath.Replace("/", "\\")))
-                    {
-                        SendFile(context,
-                                 !File.Exists(item.SmallThumb)
-                                     ? Path.Combine(Settings.WebServerFolder, "logo.png")
-                                     : item.SmallThumb);
-                        return ModuleResult.Continue;
-                    }
-                }
-            }
-
-            if (context.Request.Uri.AbsolutePath.StartsWith("/preview.jpg"))
-            {
-                SendFile(context, ServiceProvider.Settings.SelectedBitmap.FileItem.LargeThumb);
-            }
-
-            if (context.Request.Uri.AbsolutePath.StartsWith("/liveview.jpg") &&
-                ServiceProvider.DeviceManager.SelectedCameraDevice != null &&
-                ServiceProvider.DeviceManager.LiveViewImage.ContainsKey(
-                    ServiceProvider.DeviceManager.SelectedCameraDevice))
-            {
-                SendData(context,
-                         ServiceProvider.DeviceManager.LiveViewImage[ServiceProvider.DeviceManager.SelectedCameraDevice]);
-            }
-
-            if (context.Request.Uri.AbsolutePath.StartsWith("/image/"))
-            {
-                foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
-                {
-                    if (Path.GetFileName(item.FileName) ==
-                        Path.GetFileName(context.Request.Uri.AbsolutePath.Replace("/", "\\")))
-                    {
-                        SendFile(context, item.FileName);
-                        return ModuleResult.Continue;
-                    }
-                }
-            }
-            string fullpath = GetFullPath(context.Request.Uri);
-            if (!string.IsNullOrEmpty(fullpath) && File.Exists(fullpath))
-            {
-                if (Path.GetFileName(fullpath) == "slide.html")
-                {
-                    string file = File.ReadAllText(fullpath);
-
-                    StringBuilder builder = new StringBuilder();
+                    string requestFile = Path.GetFileName(context.Request.Uri.AbsolutePath.Replace("/", "\\"));
                     foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
                     {
-                        string tempStr = _lineFormat.Replace("@image@",
-                                                             "/thumb/large/" + Path.GetFileName(item.LargeThumb));
-                        tempStr = tempStr.Replace("@image_thumb@", "/thumb/small/" + Path.GetFileName(item.SmallThumb));
-                        tempStr = tempStr.Replace("@image_url@", "/image/" + Path.GetFileName(item.FileName));
-                        tempStr = tempStr.Replace("@title@", item.Name);
-                        tempStr = tempStr.Replace("@desc@", item.FileInfo != null ? (item.FileInfo.InfoLabel ?? "") : "");
-                        builder.AppendLine(tempStr);
+                        if (Path.GetFileName(item.LargeThumb) ==requestFile || item.Name == requestFile)
+                        {
+                            SendFile(context,
+                                !File.Exists(item.LargeThumb)
+                                    ? Path.Combine(Settings.WebServerFolder, "logo.png")
+                                    : item.LargeThumb);
+                            SendFile(context, item.LargeThumb);
+                            return ModuleResult.Continue;
+                        }
                     }
-
-                    file = file.Replace("@@image_list@@", builder.ToString());
-
-                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(file);
-
-                    //response.ContentLength64 = buffer.Length;
-                    context.Response.AddHeader("Content-Length", buffer.Length.ToString());
-
-                    context.Response.Body = new MemoryStream();
-
-                    context.Response.Body.Write(buffer, 0, buffer.Length);
-                    context.Response.Body.Position = 0;
                 }
-                else
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/thumb/small"))
                 {
-                    SendFile(context, fullpath);
+                    string requestFile = Path.GetFileName(context.Request.Uri.AbsolutePath.Replace("/", "\\"));
+                    foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
+                    {
+                        if (Path.GetFileName(item.SmallThumb) == requestFile || item.Name == requestFile)
+                        {
+                            SendFile(context,
+                                !File.Exists(item.SmallThumb)
+                                    ? Path.Combine(Settings.WebServerFolder, "logo.png")
+                                    : item.SmallThumb);
+                            return ModuleResult.Continue;
+                        }
+                    }
                 }
-            }
-            string cmd = context.Request.QueryString["CMD"];
-            if (!string.IsNullOrEmpty(cmd))
-                ServiceProvider.WindowsManager.ExecuteCommand(cmd);
 
+                if (context.Request.Uri.AbsolutePath.StartsWith("/preview.jpg"))
+                {
+                    SendFile(context, ServiceProvider.Settings.SelectedBitmap.FileItem.LargeThumb);
+                }
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/session.json"))
+                {
+                    var s = JsonConvert.SerializeObject(ServiceProvider.Settings.DefaultSession, Formatting.Indented);
+                    SendData(context, Encoding.ASCII.GetBytes(s));
+                }
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/settings.json"))
+                {
+                    var s = JsonConvert.SerializeObject(ServiceProvider.Settings, Formatting.Indented);
+                    SendData(context, Encoding.ASCII.GetBytes(s));
+                }
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/liveview.jpg") &&
+                    ServiceProvider.DeviceManager.SelectedCameraDevice != null &&
+                    ServiceProvider.DeviceManager.LiveViewImage.ContainsKey(
+                        ServiceProvider.DeviceManager.SelectedCameraDevice))
+                {
+                    SendData(context,
+                        ServiceProvider.DeviceManager.LiveViewImage[ServiceProvider.DeviceManager.SelectedCameraDevice]);
+                }
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/image/"))
+                {
+                    foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
+                    {
+                        if (Path.GetFileName(item.FileName) ==
+                            Path.GetFileName(context.Request.Uri.AbsolutePath.Replace("/", "\\")))
+                        {
+                            SendFile(context, item.FileName);
+                            return ModuleResult.Continue;
+                        }
+                    }
+                }
+                string fullpath = GetFullPath(context.Request.Uri);
+                if (!string.IsNullOrEmpty(fullpath) && File.Exists(fullpath))
+                {
+                    if (Path.GetFileName(fullpath) == "slide.html")
+                    {
+                        string file = File.ReadAllText(fullpath);
+
+                        StringBuilder builder = new StringBuilder();
+                        foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
+                        {
+                            string tempStr = _lineFormat.Replace("@image@",
+                                "/thumb/large/" + Path.GetFileName(item.LargeThumb));
+                            tempStr = tempStr.Replace("@image_thumb@",
+                                "/thumb/small/" + Path.GetFileName(item.SmallThumb));
+                            tempStr = tempStr.Replace("@image_url@", "/image/" + Path.GetFileName(item.FileName));
+                            tempStr = tempStr.Replace("@title@", item.Name);
+                            tempStr = tempStr.Replace("@desc@",
+                                item.FileInfo != null ? (item.FileInfo.InfoLabel ?? "") : "");
+                            builder.AppendLine(tempStr);
+                        }
+
+                        file = file.Replace("@@image_list@@", builder.ToString());
+
+                        byte[] buffer = Encoding.UTF8.GetBytes(file);
+
+                        //response.ContentLength64 = buffer.Length;
+                        context.Response.AddHeader("Content-Length", buffer.Length.ToString());
+
+                        context.Response.Body = new MemoryStream();
+
+                        context.Response.Body.Write(buffer, 0, buffer.Length);
+                        context.Response.Body.Position = 0;
+                    }
+                    else
+                    {
+                        SendFile(context, fullpath);
+                    }
+                }
+                string cmd = context.Request.QueryString["CMD"];
+                if (!string.IsNullOrEmpty(cmd))
+                    ServiceProvider.WindowsManager.ExecuteCommand(cmd);
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Web server error", ex);
+            }
             return ModuleResult.Continue;
         }
 
@@ -196,7 +215,7 @@ namespace CameraControl.Core.Classes
             context.Response.AddHeader("Content-Disposition",
                                        "inline;filename=\"" + Path.GetFileName(fullpath) + "\"");
             context.Response.ContentType = str;
-            context.Response.ContentLength = (int) fileStream.Length;
+            context.Response.ContentLength = (int)fileStream.Length;
             context.Response.Body = fileStream;
         }
 
@@ -205,7 +224,7 @@ namespace CameraControl.Core.Classes
             if (data == null)
                 return;
             MemoryStream stream = new MemoryStream(data);
-//            context.Response.AddHeader("Content-Disposition",
+            //            context.Response.AddHeader("Content-Disposition",
             //"inline;filename=\"" + Path.GetFileName(fullpath) + "\"");
             context.Response.ContentType = "image/jpg";
             context.Response.ContentLength = data.Length;
