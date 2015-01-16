@@ -46,6 +46,7 @@ using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using MahApps.Metro;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -59,6 +60,7 @@ namespace CameraControl.Core.Classes
         private PhotoSession _defaultSession;
 
         [XmlIgnore]
+        [JsonIgnore]
         public PhotoSession DefaultSession
         {
             get { return _defaultSession; }
@@ -82,11 +84,13 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public ObservableCollection<PhotoSession> PhotoSessions { get; set; }
 
         private BitmapFile _selectedBitmap;
 
         [XmlIgnore]
+        [JsonIgnore]
         public BitmapFile SelectedBitmap
         {
             get { return _selectedBitmap; }
@@ -100,6 +104,7 @@ namespace CameraControl.Core.Classes
         private bool _imageLoading;
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool ImageLoading
         {
             get { return _imageLoading; }
