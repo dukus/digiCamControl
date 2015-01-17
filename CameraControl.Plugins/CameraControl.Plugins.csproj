@@ -116,6 +116,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.FtpClient">
+      <HintPath>..\packages\System.Net.FtpClient.1.0.5281.14359\lib\net40\System.Net.FtpClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -151,6 +154,11 @@
     </Compile>
     <Compile Include="AutoExportPlugins\ExecuteFilePlugin.cs" />
     <Compile Include="AutoExportPlugins\ExecuteFilePluginViewModel.cs" />
+    <Compile Include="AutoExportPlugins\FtpPlugin.cs" />
+    <Compile Include="AutoExportPlugins\FtpPluginConfig.xaml.cs">
+      <DependentUpon>FtpPluginConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoExportPlugins\FtpPluginViewModel.cs" />
     <Compile Include="AutoExportPlugins\PrintPlugin.cs" />
     <Compile Include="AutoExportPlugins\PrintPluginConfig.xaml.cs">
       <DependentUpon>PrintPluginConfig.xaml</DependentUpon>
@@ -240,6 +248,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AutoExportPlugins\CopyFilePluginConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutoExportPlugins\FtpPluginConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
