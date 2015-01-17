@@ -16,7 +16,7 @@ namespace Setup
         public static void Main(string[] args)
         {
 
-            Feature appFeature = new Feature("Application files");
+            Feature appFeature = new Feature("Application files", "Main application files", true, false, @"INSTALLDIR");
             Feature obsPlugin = new Feature("Obs Plugin");
 
             var appDir = new Dir(@"digiCamControl",
@@ -57,7 +57,7 @@ namespace Setup
                     ));
 
             var baseDir = new Dir(@"%ProgramFiles%",
-                appDir,
+                appDir ,
                 obsDir
                 );
 
@@ -73,7 +73,7 @@ namespace Setup
 
             project.UI = WUI.WixUI_FeatureTree;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
-
+            
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Debug\"));
 
