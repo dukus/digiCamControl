@@ -28,6 +28,12 @@ namespace CameraControl.Plugins.ToolPlugins
         private bool _loop;
         private bool _isPaused;
         private BitmapSource _previewBitmap;
+        private BitmapSource _previewBitmap10;
+        private BitmapSource _previewBitmap11;
+        private BitmapSource _previewBitmap12;
+        private BitmapSource _previewBitmap20;
+        private BitmapSource _previewBitmap21;
+        private BitmapSource _previewBitmap22;
 
 
         public BitmapSource Bitmap
@@ -50,6 +56,65 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public BitmapSource PreviewBitmap10
+        {
+            get { return _previewBitmap10; }
+            set
+            {
+                _previewBitmap10 = value;
+                RaisePropertyChanged(() => PreviewBitmap10);
+            }
+        }
+
+        public BitmapSource PreviewBitmap11
+        {
+            get { return _previewBitmap11; }
+            set
+            {
+                _previewBitmap11 = value;
+                RaisePropertyChanged(() => PreviewBitmap11);
+            }
+        }
+
+        public BitmapSource PreviewBitmap12
+        {
+            get { return _previewBitmap12; }
+            set
+            {
+                _previewBitmap12 = value;
+                RaisePropertyChanged(() => PreviewBitmap12);
+            }
+        }
+
+        public BitmapSource PreviewBitmap20
+        {
+            get { return _previewBitmap20; }
+            set
+            {
+                _previewBitmap20 = value;
+                RaisePropertyChanged(() => PreviewBitmap20);
+            }
+        }
+
+        public BitmapSource PreviewBitmap21
+        {
+            get { return _previewBitmap21; }
+            set
+            {
+                _previewBitmap21 = value;
+                RaisePropertyChanged(() => PreviewBitmap21);
+            }
+        }
+
+        public BitmapSource PreviewBitmap22
+        {
+            get { return _previewBitmap22; }
+            set
+            {
+                _previewBitmap22 = value;
+                RaisePropertyChanged(() => PreviewBitmap22);
+            }
+        }
 
         public int TotalImages
         {
@@ -109,7 +174,7 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public string CounterText
         {
-            get { return string.Format("{0}/{1}", CurrentImages, TotalImages); }
+            get { return string.Format("[{0}] {1}/{2} [{3}]", MinValue, CurrentImages-MinValue, MaxValue - MinValue, MaxValue); }
         }
 
         public int MinValue
@@ -121,7 +186,11 @@ namespace CameraControl.Plugins.ToolPlugins
                 if (CurrentImages < MinValue)
                     CurrentImages = MinValue;
                 PreviewBitmap = GetThubnail(MinValue);
+                PreviewBitmap10 = GetThubnail(MinValue-1);
+                PreviewBitmap11 = GetThubnail(MinValue);
+                PreviewBitmap12 = GetThubnail(MinValue + 1);
                 RaisePropertyChanged(() => MinValue);
+                RaisePropertyChanged(() => CounterText);
             }
         }
 
@@ -134,7 +203,11 @@ namespace CameraControl.Plugins.ToolPlugins
                 if (CurrentImages > MaxValue)
                     CurrentImages = MaxValue;
                 PreviewBitmap = GetThubnail(MaxValue);
+                PreviewBitmap20 = GetThubnail(MaxValue - 1);
+                PreviewBitmap21 = GetThubnail(MaxValue);
+                PreviewBitmap22 = GetThubnail(MaxValue + 1);
                 RaisePropertyChanged(() => MaxValue);
+                RaisePropertyChanged(() => CounterText);
             }
         }
 
@@ -163,6 +236,12 @@ namespace CameraControl.Plugins.ToolPlugins
         public RelayCommand PauseCommand { get; set; }
         public RelayCommand CreateMovieCommand { get; set; }
 
+        public RelayCommand PrevImageCommand1 { get; set; }
+        public RelayCommand NextImageCommand1 { get; set; }
+
+        public RelayCommand PrevImageCommand2 { get; set; }
+        public RelayCommand NextImageCommand2 { get; set; }
+
         public ImageSequencerViewModel()
         {
             
@@ -175,14 +254,20 @@ namespace CameraControl.Plugins.ToolPlugins
             StartCommand = new RelayCommand(Start);
             StopCommand = new RelayCommand(Stop);
             PauseCommand = new RelayCommand(Pause);
+            PrevImageCommand1 = new RelayCommand(() => MinValue--);
+            PrevImageCommand2 = new RelayCommand(() => MaxValue--);
+            NextImageCommand1 = new RelayCommand(() => MinValue++);
+            NextImageCommand2 = new RelayCommand(() => MaxValue++);
+
             CreateMovieCommand = new RelayCommand(CreateMovie);
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
             _backgroundWorker.WorkerSupportsCancellation = true;
             Fps = 15;
-            TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count;
+            TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count - 1;
             MinValue = 0;
             MaxValue = TotalImages;
+            CurrentImages = MinValue;
             ServiceProvider.Settings.DefaultSession.Files.CollectionChanged += Files_CollectionChanged;
         }
 
@@ -191,12 +276,12 @@ namespace CameraControl.Plugins.ToolPlugins
             // if no max value set the play the newlly captured image too
             if (TotalImages == MaxValue)
             {
-                TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count;
+                TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count - 1;
                 MaxValue = TotalImages;
             }
             else
             {
-                TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count;
+                TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count - 1;
             }
         }
 
@@ -204,6 +289,10 @@ namespace CameraControl.Plugins.ToolPlugins
         {
             try
             {
+                if (i < 0)
+                    return null;
+                if (i >= ServiceProvider.Settings.DefaultSession.Files.Count)
+                    return null;
                 return ServiceProvider.Settings.DefaultSession.Files[i].Thumbnail;
             }
             catch (Exception)

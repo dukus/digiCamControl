@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="440" Width="700" WindowStartupLocation="CenterScreen" ShowMinButton="False"
+             mc:Ignorable="d" Height="540" Width="780" WindowStartupLocation="CenterScreen" ShowMinButton="False"
                        Title="{T:TranslateExtension LabelImageSequencer}" Name="metrowindow">
     <Window.DataContext>
         <toolPlugins:ImageSequencerViewModel/>
@@ -25,7 +25,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Image Stretch="Uniform" Source="{Binding Bitmap}"/>
         <StackPanel Grid.Column="1" >
@@ -38,9 +40,33 @@
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop}" IsChecked="{Binding ElementName=metrowindow,Path=Topmost}" Margin="3"/>
             <Button Content="{T:TranslateExtension LabelCreateMovie}" Margin="3" Command="{Binding CreateMovieCommand}" IsEnabled="{Binding IsFree}"/>
         </StackPanel>
-        <Image Grid.Column="1" Height="100" Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap}"/>
+        <Image Grid.Row="0" Grid.Column="1" Height="100" Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap}"/>
         <Label Content="{Binding CounterText}" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <ProgressBar Grid.Row="1" Grid.Column="0" Margin="3" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" />
-        <controls:RangeSlider Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" LowerValue="{Binding MinValue}" UpperValue="{Binding MaxValue}" Margin="5" ExtendedMode="True" MoveWholeRange="True" IsMoveToPointEnabled="True" />
+        <ProgressBar Grid.Row="3" Grid.Column="0" Margin="3" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" />
+        <Slider Grid.Row="1" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Value="{Binding CurrentImages}" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" Margin="3"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Cursor="Hand">
+            <Button Command="{Binding PrevImageCommand1}" Padding="0">
+                <Image  Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap10}"/>
+            </Button>
+            <Border BorderThickness="2" BorderBrush="Red">
+                <Image  Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap11}"/>
+            </Border>
+            <Button Command="{Binding NextImageCommand1}" Padding="0">
+                <Image Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap12}" Cursor="Hand"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Command="{Binding PrevImageCommand2}" Padding="0">
+                <Image Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap20}" Cursor="Hand"/>
+            </Button>
+            <Border BorderThickness="2" BorderBrush="Red">
+                <Image Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap21}"/>
+            </Border>
+            <Button Command="{Binding NextImageCommand2}" Padding="0">
+                <Image Stretch="Uniform" Margin="3" VerticalAlignment="Bottom" Source="{Binding PreviewBitmap22}" Cursor="Hand"/>
+            </Button>
+        </StackPanel>
+        <controls:RangeSlider Grid.Row="3" Grid.Column="0" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" LowerValue="{Binding MinValue}" UpperValue="{Binding MaxValue}" Margin="5" ExtendedMode="True" MoveWholeRange="False" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True" />
     </Grid>
 </controls:MetroWindow>
