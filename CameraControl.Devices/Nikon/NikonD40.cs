@@ -28,6 +28,7 @@
 
 #region
 
+using System;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -39,7 +40,7 @@ namespace CameraControl.Devices.Nikon
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
             bool res = base.Init(deviceDescriptor);
-            Capabilities.Add(CapabilityEnum.CaptureInRam);
+            //Capabilities.Add(CapabilityEnum.CaptureInRam);
             Capabilities.Clear();
             HaveLiveView = false;
             CaptureInSdRam = false;
@@ -51,6 +52,18 @@ namespace CameraControl.Devices.Nikon
         {
             base.ReadDeviceProperties(prop);
             HaveLiveView = false;
+        }
+
+        protected override PropertyValue<long> InitPictControl()
+        {
+            var res = new PropertyValue<long>()
+            {
+                Name = "Picture control",
+                IsEnabled = false,
+                Code = CONST_PROP_ActivePicCtrlItem,
+                SubType = typeof(UInt16)
+            };
+            return res;
         }
     }
 }
