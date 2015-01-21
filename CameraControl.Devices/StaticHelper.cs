@@ -86,19 +86,8 @@ namespace CameraControl.Devices
         }
 
 
-        public string CameraIcon
-        {
-            get { return _cameraIcon; }
-            set
-            {
-                _cameraIcon = value;
-                NotifyPropertyChanged("CameraIcon");
-            }
-        }
-
 
         private int _loadingProgress;
-        private string _cameraIcon;
 
         public int LoadingProgress
         {

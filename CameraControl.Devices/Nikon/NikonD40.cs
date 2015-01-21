@@ -29,6 +29,8 @@
 #region
 
 using System;
+using System.Runtime.InteropServices;
+using System.Threading;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -52,6 +54,31 @@ namespace CameraControl.Devices.Nikon
         {
             base.ReadDeviceProperties(prop);
             HaveLiveView = false;
+        }
+
+        public override void CapturePhoto()
+        {
+            Monitor.Enter(Locker);
+            try
+            {
+                IsBusy = true;
+                DeviceReady();
+                ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_InitiateCapture));
+            }
+            catch (COMException comException)
+            {
+                IsBusy = false;
+                ErrorCodes.GetException(comException);
+            }
+            catch
+            {
+                IsBusy = false;
+                throw;
+            }
+            finally
+            {
+                Monitor.Exit(Locker);
+            }
         }
 
         protected override PropertyValue<long> InitPictControl()

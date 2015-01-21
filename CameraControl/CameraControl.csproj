@@ -252,6 +252,7 @@
     <Compile Include="Controls\CameraItem.xaml.cs">
       <DependentUpon>CameraItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CameraToImageSourceConverter .cs" />
     <Compile Include="Controls\Colorpicker.xaml.cs">
       <DependentUpon>Colorpicker.xaml</DependentUpon>
     </Compile>
@@ -261,6 +262,7 @@
     <Compile Include="Controls\ControlerSimple.xaml.cs">
       <DependentUpon>ControlerSimple.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageEx.cs" />
     <Compile Include="Controls\LiveViewControlerSimple.xaml.cs">
       <DependentUpon>LiveViewControlerSimple.xaml</DependentUpon>
     </Compile>

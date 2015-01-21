@@ -536,7 +536,6 @@
                 <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
                 <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Grid.Row="4"
                      Grid.Column="0" Margin="5,0,5,0"/>
-                <Image HorizontalAlignment="Left" Width= "50" Margin="3" Grid.Row="2" Grid.RowSpan="2" VerticalAlignment="Bottom" Source="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=CameraIcon}"/>
             </Grid>
             <!--</ScrollViewer>-->
 

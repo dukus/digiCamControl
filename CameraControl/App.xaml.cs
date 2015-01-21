@@ -351,16 +351,10 @@ namespace CameraControl
                 if (newcameraDevice.AttachedPhotoSession != null)
                     ServiceProvider.Settings.DefaultSession =
                         (PhotoSession)newcameraDevice.AttachedPhotoSession;
-                SetCameraIcon(newcameraDevice);
             });
             thread.Start();
         }
 
-        private void SetCameraIcon(ICameraDevice device)
-        {
-            string icon = Path.Combine(Settings.ApplicationFolder, "Data", "Camera", device.DeviceName)+".png";
-            StaticHelper.Instance.CameraIcon = File.Exists(icon) ? icon : "";
-        }
 
         private void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
         {
