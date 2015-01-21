@@ -379,7 +379,26 @@ namespace Canon.Eos.Framework
         {
             lock (_locker)
             {
-                this.SetPropertyIntegerData(propertyId, val);
+                bool retry = false;
+                int retrynum = 0;
+                //DeviceReady();
+                do
+                {
+                    if (retrynum > 10)
+                    {
+                        return;
+                    }
+                    try
+                    {
+                        this.SetPropertyIntegerData(propertyId, val);
+                    }
+                    catch (EosPropertyException)
+                    {
+                        Thread.Sleep(50);
+                        retry = true;
+                        retrynum++;
+                    }
+                } while (retry);
             }
         }
 
