@@ -73,6 +73,9 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -198,6 +201,7 @@
     <Compile Include="Classes\SourceEnum.cs" />
     <Compile Include="Classes\TagItem.cs" />
     <Compile Include="Classes\TimeLapseClass.cs" />
+    <Compile Include="Classes\TimeLapseSettings.cs" />
     <Compile Include="Classes\TriggerClass.cs" />
     <Compile Include="Classes\ValuePairEnumerator.cs" />
     <Compile Include="Classes\WebServer.cs" />

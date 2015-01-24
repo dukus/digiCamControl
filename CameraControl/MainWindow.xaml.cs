@@ -600,9 +600,7 @@ namespace CameraControl
 
         private void but_timelapse_Click(object sender, RoutedEventArgs e)
         {
-            TimeLapseWnd wnd = new TimeLapseWnd();
-            wnd.Owner = this;
-            wnd.ShowDialog();
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.TimeLapseWnd_Show);
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

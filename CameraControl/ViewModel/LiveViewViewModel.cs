@@ -2134,7 +2134,14 @@ namespace CameraControl.ViewModel
                 if (LockA)
                 {
                     if (FocusCounter == 0 && step < 0)
+                    {
+                        _focusIProgress = false;
+                        _selectedFocusValue = FocusCounter;
+                        OnFocuseDone();
+                        RaisePropertyChanged(() => FocusingEnabled);
+                        RaisePropertyChanged(() => SelectedFocusValue);
                         return;
+                    }
                     if (FocusCounter + step < 0)
                         step = -FocusCounter;
                 }

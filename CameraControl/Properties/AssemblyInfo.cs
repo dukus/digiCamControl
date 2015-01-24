@@ -45,7 +45,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("digiCameraControl")]
-[assembly: AssemblyCopyright("Copyright ©  2014 Duka Istvan")]
+[assembly: AssemblyCopyright("Copyright ©  2015 Duka Istvan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -86,5 +86,5 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.2.54.0")]
-[assembly: AssemblyFileVersion("1.2.54.0")]
+[assembly: AssemblyVersion("1.2.56.0")]
+[assembly: AssemblyFileVersion("1.2.56.0")]

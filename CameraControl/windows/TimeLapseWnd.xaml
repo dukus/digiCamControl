@@ -1,81 +1,104 @@
-﻿<Controls:MetroWindow  x:Class="CameraControl.windows.TimeLapseWnd"
+﻿<controls:MetroWindow x:Class="CameraControl.windows.TimeLapseWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                       Title="{T:TranslateExtension TimeLapseWindowTitle}" Height="359" Width="400" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ShowActivated="True" Closed="Window_Closed" Closing="Window_Closing"
-                       ShowMaxRestoreButton="False" ShowMinButton="False">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
-
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        xmlns:controls1="clr-namespace:CameraControl.Controls"
+        Title="{translation:TranslateExtension TimeLapseWindowTitle}" Height="550" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowMaxRestoreButton="False">
+    <Window.DataContext>
+        <viewModel:TimelapseViewModel/>
+    </Window.DataContext>
     <Grid>
-        <!--<TabControl Name="tabControl1" TabStripPlacement="Left">
-            <TabItem Header="{T:TranslateExtension LabelTimeLapse}" Name="tabItem1">-->
-        <Grid >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="10" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="35*" />
-                <RowDefinition Height="35" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            
-            <Label Grid.Row="1" Grid.Column="1" Content="{T:TranslateExtension LabelSecondsBetweenShots}" HorizontalContentAlignment="Right"/>
-            <Controls:NumericUpDown Grid.Row="1" Grid.Column="2" Minimum="1" Maximum="3600" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Period}" Margin="3"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="325*"/>
+            <ColumnDefinition Width="71*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="{translation:TranslateExtension LabelSheduleStart}" IsEnabled="{Binding IsFree}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="28*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72*"/>
+                    <ColumnDefinition Width="313*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel VerticalAlignment="Center" Margin="0" Grid.RowSpan="2">
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseNow}" Margin="3" GroupName="START" IsChecked="{Binding StartNow}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseIn}" Margin="3" GroupName="START" IsChecked="{Binding StartIn}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseAt}" Margin="3" GroupName="START" IsChecked="{Binding StartAt}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseDaily}" Margin="3" GroupName="START" IsChecked="{Binding StartDaily}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >
+                    <Label Content="{translation:TranslateExtension LabelDate}" Margin="2" Visibility="{Binding DateVisibility}"/>
+                    <DatePicker Margin="2" SelectedDate="{Binding StartDate}" Visibility="{Binding DateVisibility}"/>
+                    <Label Content="{translation:TranslateExtension LabelTime}" Margin="2" Visibility="{Binding TimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StartHour}" Minimum="0" Maximum="23" Visibility="{Binding TimeVisibility}"/>
+                    <TextBlock Text=" : " FontWeight="Bold" FontSize="20" Visibility="{Binding TimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StartMinute}" Minimum="0" Maximum="59" Visibility="{Binding TimeVisibility}"/>
+                    <TextBlock Text=" : " FontWeight="Bold" FontSize="20" Visibility="{Binding TimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StartSecond}" Minimum="0" Maximum="59" Visibility="{Binding TimeVisibility}"/>
+                </StackPanel>
+                <WrapPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding DayVisibility}" HorizontalAlignment="Center" Margin="4">
+                    <CheckBox Content="{translation:TranslateExtension LabelSunday}" IsChecked="{Binding StartDay0}" Margin="2"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelMonday}" IsChecked="{Binding StartDay1}"  Margin="2"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelTuesday}" IsChecked="{Binding StartDay2}"  Margin="2"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelWednesday}" IsChecked="{Binding StartDay3}"  Margin="2"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelThursday}" IsChecked="{Binding StartDay4}" Margin="2"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelFriday}" IsChecked="{Binding StartDay5}" Margin="2"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelSaturday}" IsChecked="{Binding StartDay6}" Margin="2"/>
+                </WrapPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="{translation:TranslateExtension LabelTimeLapseSettings}" Grid.Row="1" IsEnabled="{Binding IsFree}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="92*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" >
+                    <Label Content="{translation:TranslateExtension LabelTimeLapseWaitBetweenCaptures}" Margin="2"/>
+                    <controls:NumericUpDown Value="{Binding TimeBetweenShots}" Minimum="1" Maximum="3600" Margin="2"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="{translation:TranslateExtension LabelSheduleStop}" Grid.Row="2" IsEnabled="{Binding IsFree}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72*"/>
+                    <ColumnDefinition Width="328*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel VerticalAlignment="Center" Margin="3" Grid.Row="0" Grid.RowSpan="3">
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStop}" Margin="3" GroupName="STOP" IsChecked="{Binding StopAtPhotos}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStopIn}" Margin="3" GroupName="STOP" IsChecked="{Binding StopIn}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStopAt}" Margin="3" GroupName="STOP" IsChecked="{Binding StopAt}"/>
+                    <!--<RadioButton Content="{translation:TranslateExtension LabelTimeLapseDaily}" Margin="3" GroupName="STOP" IsChecked="{Binding StartDaily}"/>-->
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Visibility="{Binding StopCountVisibility}" VerticalAlignment="Center">
+                    <Label Content="{translation:TranslateExtension LabelTimeLapseStopPhotoCount}" Margin="2" Visibility="{Binding TimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StopCaptureCount}" Minimum="1" Maximum="100000000" Margin="2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="{translation:TranslateExtension LabelDate}" Margin="2" Visibility="{Binding StopDateVisibility}"/>
+                    <DatePicker Margin="2" SelectedDate="{Binding StopDate}" Visibility="{Binding StopDateVisibility}"/>
+                    <Label Content="{translation:TranslateExtension LabelTime}" Margin="2" Visibility="{Binding StopTimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StopHour}" Minimum="0" Maximum="23" Visibility="{Binding StopTimeVisibility}"/>
+                    <TextBlock Text=" : " FontWeight="Bold" FontSize="20" Visibility="{Binding StopTimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StopMinute}" Minimum="0" Maximum="59" Visibility="{Binding StopTimeVisibility}"/>
+                    <TextBlock Text=" : " FontWeight="Bold" FontSize="20" Visibility="{Binding StopTimeVisibility}"/>
+                    <controls:NumericUpDown Value="{Binding StopSecond}" Minimum="0" Maximum="59" Visibility="{Binding StopTimeVisibility}"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <Button Content="{Binding StartText}" Grid.Row="0" Grid.Column="1" Margin="3" Command="{Binding StartCommand}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding StatusText}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 
-            <Label Grid.Row="2" Grid.Column="1" Content="{T:TranslateExtension LabelNumberOfPhotos}" HorizontalContentAlignment="Right"/>
-            <Controls:NumericUpDown Grid.Row="2" Grid.Column="2" Minimum="1" Maximum="10000" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.NumberOfPhotos}" Margin="3"/>
-
-            <Label Grid.Row="3" Grid.Column="1" Content="{T:TranslateExtension LabelFps}" HorizontalContentAlignment="Right"/>
-            <Controls:NumericUpDown Grid.Row="3" Grid.Column="2" Minimum="5" Maximum="60" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Fps}" Margin="3"/>
-
-            <Label Content="{T:TranslateExtension LabelDontAutofocusOnEveryCapture}" HorizontalContentAlignment="Right" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center"/>
-
-            <CheckBox Content="" ToolTip="This option work only if you use native drive, but isn't work for all cameras" Name="chk_noaf" IsChecked="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.NoAutofocus}" Grid.Row="6" Grid.Column="2"  VerticalAlignment="Center" Margin="12,2,2,2"/>
-
-
-            <Button Content="{T:TranslateExtension ButtonClose}" HorizontalAlignment="Left"  Name="button2" Width="75" Click="button2_Click" Grid.Row="11" Grid.Column="1" Margin="3" />
-            <Button Content="{T:TranslateExtension ButtonStartTimeLapse}" Name="btn_start" Click="btn_start_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Grid.Row="11" Grid.Column="2" Margin="3"/>
-            
-            <ProgressBar Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresPictures,Mode=OneWay}" Margin="3"/>
-            <ProgressBar Grid.ColumnSpan="2" Grid.Row="10" Grid.Column="1" Value="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.ProgresTime,Mode=OneWay}" Margin="3"/>
-            <TextBox Text="{Binding Source={x:Static Core:ServiceProvider.Settings}, Path=DefaultSession.TimeLapse.Message,Mode=OneWay}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2" Margin="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" IsReadOnly="True"/>
-        </Grid>
-        <!--</TabItem>
-         
-        
-        </TabControl>-->
     </Grid>
-</Controls:MetroWindow >
+</controls:MetroWindow>

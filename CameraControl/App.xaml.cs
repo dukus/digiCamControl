@@ -177,6 +177,7 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.Add(new AstroLiveViewWnd());
                 ServiceProvider.WindowsManager.Add(new ScriptWnd());
                 ServiceProvider.WindowsManager.Add(new PrintWnd());
+                ServiceProvider.WindowsManager.Add(new TimeLapseWnd());
                 ServiceProvider.WindowsManager.Event += WindowsManager_Event;
                 ServiceProvider.WindowsManager.ApplyTheme();
                 ServiceProvider.WindowsManager.ApplyKeyHanding();

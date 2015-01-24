@@ -275,6 +275,9 @@
     <Compile Include="Controls\FolderBrowserComboBox.xaml.cs">
       <DependentUpon>FolderBrowserComboBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TimeControl.xaml.cs">
+      <DependentUpon>TimeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ZoomAndPanControl.cs" />
     <Compile Include="Controls\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Controls\ZoomBorder.cs" />
@@ -311,6 +314,7 @@
     <Compile Include="ViewModel\PrintItemViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\SimpleLiveViewViewModel.cs" />
+    <Compile Include="ViewModel\TimelapseViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="windows\AboutWnd.xaml.cs">
       <DependentUpon>AboutWnd.xaml</DependentUpon>
@@ -403,6 +407,9 @@
     <Compile Include="windows\TimeLapseWnd.xaml.cs">
       <DependentUpon>TimeLapseWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\TimeLapseWnd_Old.xaml.cs">
+      <DependentUpon>TimeLapseWnd_Old.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
@@ -439,6 +446,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FolderBrowserComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -619,6 +630,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\TimeLapseWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\TimeLapseWnd_Old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

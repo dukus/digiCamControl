@@ -62,5 +62,8 @@ namespace CameraControl.Core.Classes
         public const string Del_Image = "Del_Image";
         public const string Like_Image = "Like_Image";
         public const string Unlike_Image = "Unlike_Image";
+        public const string TimeLapseWnd_Show = "TimeLapseWnd_Show";
+        public const string TimeLapseWnd_Hide = "TimeLapseWnd_Hide";
+
     }
 }

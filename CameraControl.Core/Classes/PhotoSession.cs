@@ -378,6 +378,8 @@ namespace CameraControl.Core.Classes
             set { _configFile = value; }
         }
 
+        public TimeLapseSettings TimeLapseSettings { get; set; }
+        
         private FileSystemWatcher _systemWatcher;
 
         [XmlIgnore]
@@ -433,7 +435,7 @@ namespace CameraControl.Core.Classes
             AllowOverWrite = false;
             LowerCaseExtension = true;
             AutoExportPluginConfigs = new AsyncObservableCollection<AutoExportPluginConfig>();
-
+            TimeLapseSettings = new TimeLapseSettings();
         }
 
         private void ConfigurePlugin(AutoExportPluginConfig plugin)

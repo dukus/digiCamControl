@@ -550,5 +550,27 @@ namespace CameraControl.Core.Translation
         public static string LabelNoProccesing = "No procesing";
         public static string LabelNoProccesingTooltip = "Most of functionality are disabled";
         public static string LabelSendUsage = "Automatically send usage statistics";
+        public static string LabelSheduleStart = "Start schedule";
+        public static string LabelSheduleStop = "Stop schedule";
+        public static string LabelTimeLapseSettings = "Timelapse settings";
+        public static string LabelTimeLapseNow = "Start now";
+        public static string LabelTimeLapseIn = "Start in";
+        public static string LabelTimeLapseAt = "Start at";
+        public static string LabelTimeLapseDaily = "Start Daily";
+        public static string LabelDate = "Date";
+        public static string LabelTime = "Time";
+        public static string LabelSunday = "Sunday";
+        public static string LabelMonday = "Monday";
+        public static string LabelTuesday = "Tuesday";
+        public static string LabelWednesday = "Wednesday";
+        public static string LabelThursday = "Thursday";
+        public static string LabelFriday = "Friday";
+        public static string LabelSaturday = "Saturday";
+        public static string LabelTimeLapseStop = "Stop ";
+        public static string LabelTimeLapseStopIn = "Stop in";
+        public static string LabelTimeLapseStopAt = "Stop at";
+        public static string LabelTimeLapseStopPhotoCount = "After capture count";
+        public static string LabelTimeLapseWaitBetweenCaptures = "Time to wait between captures (sec)";
+        //public static string LabelTimeLapseDaily = "Start Daily";
     }
 }
