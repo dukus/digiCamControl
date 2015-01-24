@@ -558,7 +558,7 @@ namespace CameraControl.windows
                     ServiceProvider.ScriptManager.OutPutMessageReceived += ScriptManager_OutPutMessageReceived;
                     Dispatcher.Invoke(new Action(delegate
                                                      {
-                                                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+                                                         //Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          Show();
                                                          Activate();
                                                          Focus();

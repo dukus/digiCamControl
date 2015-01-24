@@ -166,6 +166,7 @@ namespace CameraControl.windows
                                                                          ServiceProvider.ExternalDeviceManager.
                                                                          ExternalDeviceNames[0]
                                                                  });
+            ServiceProvider.ExternalDeviceManager.RefreshDeviceLists();
         }
 
         private void btn_del_device_Click(object sender, RoutedEventArgs e)
@@ -178,6 +179,7 @@ namespace CameraControl.windows
                 {
                     CustomConfig config = lst_device.SelectedItem as CustomConfig;
                     ServiceProvider.Settings.DeviceConfigs.Items.Remove(config);
+                    ServiceProvider.ExternalDeviceManager.RefreshDeviceLists();
                 }
             }
         }

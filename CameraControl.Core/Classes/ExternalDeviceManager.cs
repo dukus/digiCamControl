@@ -64,9 +64,17 @@ namespace CameraControl.Core.Classes
             {
                 _externalDevices = value;
                 NotifyPropertyChanged("ExternalDevices");
+                NotifyPropertyChanged("ExternalDeviceNames");
+                NotifyPropertyChanged("ExternalShutters");
             }
         }
 
+        public void RefreshDeviceLists()
+        {
+            NotifyPropertyChanged("ExternalDeviceNames");
+            NotifyPropertyChanged("ExternalShutters");
+        }
+        
         public AsyncObservableCollection<string> ExternalDeviceNames
         {
             get
