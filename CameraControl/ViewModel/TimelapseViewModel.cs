@@ -10,6 +10,7 @@ using CameraControl.Core.Translation;
 using CameraControl.Devices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 
 namespace CameraControl.ViewModel
 {
@@ -21,6 +22,10 @@ namespace CameraControl.ViewModel
         private int _totalCaptures;
         private DateTime _lastCaptureTime = DateTime.Now;
         private DateTime _timeLapseStartTime = DateTime.Now;
+        private bool _capture;
+        private bool _captureAll;
+        private bool _captureScript;
+        private string _scriptFile;
         public TimeLapseSettings TimeLapseSettings { get; set; }
 
         public bool StartNow
@@ -81,8 +86,8 @@ namespace CameraControl.ViewModel
             set
             {
                 var d = TimeLapseSettings.StartDate;
-                TimeLapseSettings.StartDate = TimeLapseSettings.StartDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute,d.Second); ;
-                RaisePropertyChanged(()=>StartDate);
+                TimeLapseSettings.StartDate = TimeLapseSettings.StartDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second); ;
+                RaisePropertyChanged(() => StartDate);
             }
         }
 
@@ -108,7 +113,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => StartHour);
             }
         }
-        
+
         public int StartMinute
         {
             get { return TimeLapseSettings.StartDate.Minute; }
@@ -137,7 +142,7 @@ namespace CameraControl.ViewModel
             set
             {
                 TimeLapseSettings.StartDay0 = value;
-                RaisePropertyChanged(()=>StartDay0);
+                RaisePropertyChanged(() => StartDay0);
             }
         }
 
@@ -160,7 +165,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => StartDay2);
             }
         }
-        
+
         public bool StartDay3
         {
             get { return TimeLapseSettings.StartDay3; }
@@ -180,7 +185,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => StartDay4);
             }
         }
-        
+
         public bool StartDay5
         {
             get { return TimeLapseSettings.StartDay5; }
@@ -207,7 +212,7 @@ namespace CameraControl.ViewModel
             set
             {
                 TimeLapseSettings.StopAtPhotos = value;
-                RaisePropertyChanged(()=>StopAtPhotos);
+                RaisePropertyChanged(() => StopAtPhotos);
                 RaisePropertyChanged(() => StopDateVisibility);
                 RaisePropertyChanged(() => StopTimeVisibility);
                 RaisePropertyChanged(() => StopCountVisibility);
@@ -246,7 +251,7 @@ namespace CameraControl.ViewModel
             set
             {
                 TimeLapseSettings.StopCaptureCount = value;
-                RaisePropertyChanged(()=>StopCaptureCount);
+                RaisePropertyChanged(() => StopCaptureCount);
             }
         }
 
@@ -256,7 +261,7 @@ namespace CameraControl.ViewModel
             set
             {
                 var d = TimeLapseSettings.StopDate;
-                TimeLapseSettings.StopDate = TimeLapseSettings.StopDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second); 
+                TimeLapseSettings.StopDate = TimeLapseSettings.StopDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second);
                 RaisePropertyChanged(() => StopDate);
             }
         }
@@ -312,9 +317,53 @@ namespace CameraControl.ViewModel
             set
             {
                 TimeLapseSettings.TimeBetweenShots = value;
-                RaisePropertyChanged(()=>TimeBetweenShots);
+                RaisePropertyChanged(() => TimeBetweenShots);
             }
         }
+
+        public bool Capture
+        {
+            get { return TimeLapseSettings.Capture; }
+            set
+            {
+                TimeLapseSettings.Capture = value;
+                RaisePropertyChanged(() => Capture);
+                RaisePropertyChanged(() => ScriptVisibility);
+            }
+        }
+
+        public bool CaptureAll
+        {
+            get { return TimeLapseSettings.CaptureAll; }
+            set
+            {
+                TimeLapseSettings.CaptureAll = value;
+                RaisePropertyChanged(() => CaptureAll);
+                RaisePropertyChanged(() => ScriptVisibility);
+            }
+        }
+
+        public bool CaptureScript
+        {
+            get { return TimeLapseSettings.CaptureScript; }
+            set
+            {
+                TimeLapseSettings.CaptureScript = value;
+                RaisePropertyChanged(() => CaptureScript);
+                RaisePropertyChanged(() => ScriptVisibility);
+            }
+        }
+
+        public string ScriptFile
+        {
+            get { return TimeLapseSettings.ScriptFile; }
+            set
+            {
+                TimeLapseSettings.ScriptFile = value;
+                RaisePropertyChanged(() => ScriptFile);
+            }
+        }
+
 
         public Visibility DateVisibility
         {
@@ -323,7 +372,7 @@ namespace CameraControl.ViewModel
 
         public Visibility TimeVisibility
         {
-            get { return StartIn|| StartAt || StartDaily ? Visibility.Visible : Visibility.Collapsed; }
+            get { return StartIn || StartAt || StartDaily ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public Visibility DayVisibility
@@ -346,6 +395,10 @@ namespace CameraControl.ViewModel
             get { return StopAtPhotos ? Visibility.Visible : Visibility.Collapsed; }
         }
 
+        public Visibility ScriptVisibility
+        {
+            get { return CaptureScript ? Visibility.Visible : Visibility.Collapsed; }
+        }
 
         public bool IsFree
         {
@@ -379,7 +432,7 @@ namespace CameraControl.ViewModel
 
         public string StartText
         {
-            get {return !IsRunning?TranslationStrings.ButtonStartTimeLapse:TranslationStrings.ButtonStopTimeLapse; }
+            get { return !IsRunning ? TranslationStrings.ButtonStartTimeLapse : TranslationStrings.ButtonStopTimeLapse; }
         }
 
         public string StatusText
@@ -398,7 +451,7 @@ namespace CameraControl.ViewModel
                     }
                     if (StartAt)
                     {
-                        return string.Format("The timlapse will start in {0} ", StartDate-DateTime.Now);
+                        return string.Format("The timlapse will start in {0} ", StartDate - DateTime.Now);
                     }
                     return "Waiting for shedule";
                 }
@@ -408,10 +461,12 @@ namespace CameraControl.ViewModel
         }
 
         public RelayCommand StartCommand { get; set; }
+        public RelayCommand BrowsCommand { get; set; }
 
         public TimelapseViewModel()
         {
             StartCommand = new RelayCommand(Start);
+            BrowsCommand = new RelayCommand(Browse);
             if (IsInDesignMode)
             {
                 TimeLapseSettings = new TimeLapseSettings();
@@ -426,6 +481,16 @@ namespace CameraControl.ViewModel
             _timer.Elapsed += _timer_Elapsed;
         }
 
+        public void Browse()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Script file(*.dccscript)|*.dccscript|All files|*.*";
+            if (dlg.ShowDialog() == true)
+            {
+                ScriptFile = dlg.FileName;
+            }
+        }
+
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!IsActive)
@@ -435,11 +500,28 @@ namespace CameraControl.ViewModel
                 return;
             if (IsActive)
             {
-                if(Math.Round((DateTime.Now-_lastCaptureTime).TotalSeconds)>=TimeBetweenShots)
+                if (Math.Round((DateTime.Now - _lastCaptureTime).TotalSeconds) >= TimeBetweenShots)
                 {
                     _lastCaptureTime = DateTime.Now;
                     _totalCaptures++;
-                    ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);
+                    try
+                    {
+                        if (Capture)
+                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);
+                        if (CaptureAll)
+                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.CaptureAll);
+                        if (CaptureScript)
+                        {
+                            var script = ServiceProvider.ScriptManager.Load(ScriptFile);
+                            script.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                            ServiceProvider.ScriptManager.Execute(script);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Timelapse error ", exception);
+                        StaticHelper.Instance.SystemMessage = "Capture error";
+                    }
                 }
                 if (CheckStop())
                 {
@@ -472,7 +554,7 @@ namespace CameraControl.ViewModel
             {
                 if (_timeLapseStartTime > DateTime.Now)
                     return false;
-                int day = (int) DateTime.Now.DayOfWeek;
+                int day = (int)DateTime.Now.DayOfWeek;
                 bool shoulContinue = (StartDay0 && day == 0) || (StartDay1 && day == 1) || (StartDay2 && day == 2) ||
                                      (StartDay3 && day == 3) || (StartDay4 && day == 4) || (StartDay5 && day == 5) ||
                                      (StartDay6 && day == 6);
@@ -488,7 +570,7 @@ namespace CameraControl.ViewModel
         {
             var res = false;
             if (StopAtPhotos)
-                res= _totalCaptures >= StopCaptureCount;
+                res = _totalCaptures >= StopCaptureCount;
             if (StopIn)
             {
                 var t = new TimeSpan(StopHour, StopMinute, StopSecond);

@@ -571,6 +571,10 @@ namespace CameraControl.Core.Translation
         public static string LabelTimeLapseStopAt = "Stop at";
         public static string LabelTimeLapseStopPhotoCount = "After capture count";
         public static string LabelTimeLapseWaitBetweenCaptures = "Time to wait between captures (sec)";
-        //public static string LabelTimeLapseDaily = "Start Daily";
+        public static string LabelTimeLapseCapture = "Capture with selected camera";
+        public static string LabelTimeLapseCaptureAll = "Capture with all camera";
+        public static string LabelTimeLapseCaptureScript = "Execute script";
+        public static string LabelTimeLapseScriptFile = "Script file";
+        public static string LabelBrowse = "Browse";
     }
 }

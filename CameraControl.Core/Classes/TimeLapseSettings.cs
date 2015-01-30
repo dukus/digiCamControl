@@ -27,7 +27,12 @@ namespace CameraControl.Core.Classes
         public int StopCaptureCount { get; set; }
         public DateTime StopDate { get; set; }
         public int TimeBetweenShots { get; set; }
-        
+
+        public bool Capture { get; set; }
+        public bool CaptureAll { get; set; }
+        public bool CaptureScript { get; set; }
+        public string ScriptFile { get; set; }
+
         public TimeLapseSettings()
         {
             StartNow = true;
@@ -35,6 +40,7 @@ namespace CameraControl.Core.Classes
             StopAtPhotos = true;
             StopDate = DateTime.Now.AddHours(1);
             TimeBetweenShots = 15;
+            Capture = true;
         }
     }
 }

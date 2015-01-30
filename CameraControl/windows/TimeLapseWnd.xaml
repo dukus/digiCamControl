@@ -59,13 +59,28 @@
         </GroupBox>
         <GroupBox Header="{translation:TranslateExtension LabelTimeLapseSettings}" Grid.Row="1" IsEnabled="{Binding IsFree}">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150*"/>
+                    <ColumnDefinition Width="300*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="92*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" >
+                <StackPanel VerticalAlignment="Center" Margin="3" Grid.Row="0" Grid.RowSpan="3">
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseCapture}" Margin="3" GroupName="CAPTURE" IsChecked="{Binding Capture}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseCaptureAll}" Margin="3" GroupName="CAPTURE" IsChecked="{Binding CaptureAll}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseCaptureScript}" Margin="3" GroupName="CAPTURE" IsChecked="{Binding CaptureScript}"/>
+                    <!--<RadioButton Content="{translation:TranslateExtension LabelTimeLapseDaily}" Margin="3" GroupName="STOP" IsChecked="{Binding StartDaily}"/>-->
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" >
                     <Label Content="{translation:TranslateExtension LabelTimeLapseWaitBetweenCaptures}" Margin="2"/>
                     <controls:NumericUpDown Value="{Binding TimeBetweenShots}" Minimum="1" Maximum="3600" Margin="2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding ScriptVisibility}">
+                    <Label Content="{translation:TranslateExtension LabelTimeLapseScriptFile}" Margin="2"/>
+                    <TextBox Text="{Binding ScriptFile}" Margin="2"/>
+                    <Button Content="{translation:TranslateExtension LabelBrowse}" Margin="2" Command="{Binding BrowsCommand}"/>
                 </StackPanel>
             </Grid>
         </GroupBox>
