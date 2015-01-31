@@ -67,6 +67,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DSUSBShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new MultiCameraBoxShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DCCUSBShutterRelease());
+                //ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new UsbRelayRelease());
                 
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new CopyFilePlugin());
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new ExecuteFilePlugin());
