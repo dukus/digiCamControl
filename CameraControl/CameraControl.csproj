@@ -151,6 +151,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AvalonEdit.5.0.1-pre\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.VHMediaCOMLib">
+      <HintPath>..\packages\XSplit\Interop.VHMediaCOMLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
@@ -413,6 +417,8 @@
     <Compile Include="windows\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XSplit\BroadcasterPlugin.cs" />
+    <Compile Include="XSplit\TimedBroadcasterPlugin.cs" />
     <Page Include="Actions\Enfuse\EnfuseSettingsWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

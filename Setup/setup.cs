@@ -34,6 +34,8 @@ namespace Setup
                 new File(appFeature, "logo.ico"),
                 new File(appFeature, "logo_big.jpg"),
                 new File(appFeature, "baseMtpDevice.xml"),
+                new DirFiles(appFeature, @"*.png"),
+                new File(appFeature, "DigiCamControl.xbs"),
                 new Dir(appFeature, "Data",
                     new Files(appFeature, @"Data\*.*")),
                 new Dir(appFeature, "Plugins",

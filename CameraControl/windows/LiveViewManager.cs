@@ -41,6 +41,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Nikon;
 using CameraControl.ViewModel;
+using CameraControl.XSplit;
 
 #endregion
 
@@ -61,6 +62,20 @@ namespace CameraControl.windows
             _recordtoRam = new Dictionary<ICameraDevice, bool>();
             _hostMode = new Dictionary<ICameraDevice, bool>();
             _presets = new Dictionary<ICameraDevice, CameraPreset>();
+            try
+            {
+                var plugin = TimedBroadcasterPlugin.CreateInstance(
+                    "F752DC1B-438E-4014-914B-48F249D4C8F1", null, 1380, 112, 50);
+
+                if (plugin != null)
+                {
+                    plugin.StartTimer();
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to start XSplit ", exception);
+            }
         }
 
         #region Implementation of IWindow

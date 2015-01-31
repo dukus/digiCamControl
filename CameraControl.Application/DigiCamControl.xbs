@@ -1,0 +1,4 @@
+<configuration id="F752DC1B-438E-4014-914B-48F249D4C8F1" name="DigiCamControl">
+	<app imagename="CameraControl.exe" />
+	<event notloaded="notloaded.png" noconn="noconn.png" nosignal="nosignal.png" nosignaltimeout="2000" />
+</configuration>
