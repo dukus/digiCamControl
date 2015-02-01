@@ -1,4 +1,11 @@
-
+<!doctype html>
+<html>
+    <head>
+		<script src="jquery.min.js"></script>
+		<script src="jssor.slider.mini.js"></script>
+    <script type="text/javascript" src="../js/jssor.core.js"></script>
+    <script type="text/javascript" src="../js/jssor.utils.js"></script>
+    <script type="text/javascript" src="../js/jssor.slider.js"></script>
     <script>
 
         jQuery(document).ready(function ($) {
@@ -123,23 +130,95 @@
         });
     </script>
 
+    </head>
+<body style="background: #191919;">
 <center>				
-<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden;">
+<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px; height: 456px; background: #191919; overflow: hidden;">
     <!-- Slides Container -->
     <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
 			@@image_list@@ 
     </div>
+        <style>
+            /* jssor slider direction navigator skin 05 css */
+            /*
+            .jssord05l              (normal)
+            .jssord05r              (normal)
+            .jssord05l:hover        (normal mouseover)
+            .jssord05r:hover        (normal mouseover)
+            .jssord05ldn            (mousedown)
+            .jssord05rdn            (mousedown)
+            */
+            .jssord05l, .jssord05r, .jssord05ldn, .jssord05rdn
+            {
+            	position: absolute;
+            	cursor: pointer;
+            	display: block;
+                background: url(../img/d17.png) no-repeat;
+                overflow:hidden;
+            }
+            .jssord05l { background-position: -10px -40px; }
+            .jssord05r { background-position: -70px -40px; }
+            .jssord05l:hover { background-position: -130px -40px; }
+            .jssord05r:hover { background-position: -190px -40px; }
+            .jssord05ldn { background-position: -250px -40px; }
+            .jssord05rdn { background-position: -310px -40px; }
+        </style>
         <!-- Arrow Left -->
         <span u="arrowleft" class="jssord05l" style="width: 40px; height: 40px; top: 158px; left: 8px;">
         </span>
         <!-- Arrow Right -->
-        <span u="arrowright" class="jssord05r" style="width: 40px; height: 40px; top: 158px; right: 7px">
+        <span u="arrowright" class="jssord05r" style="width: 40px; height: 40px; top: 158px; right: 8px">
         </span>
         <!-- Direction Navigator Skin End -->
         
         <!-- Thumbnail Navigator Skin Begin -->
         <div u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
         
+            <!-- Thumbnail Item Skin Begin -->
+            <style>
+                /* jssor slider thumbnail navigator skin 01 css */
+                /*
+                .jssort01 .p           (normal)
+                .jssort01 .p:hover     (normal mouseover)
+                .jssort01 .pav           (active)
+                .jssort01 .pav:hover     (active mouseover)
+                .jssort01 .pdn           (mousedown)
+                */
+                .jssort01 .w
+                {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+                }
+                .jssort01 .c
+                {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 105px;
+                    height: 70px;
+                    border: #000 2px solid;
+                }
+                .jssort01 .p:hover .c, .jssort01 .pav:hover .c, .jssort01 .pav .c 
+                {
+                	background: url(../img/t01.png) center center;
+                	border-width: 0px;
+                    top: 2px;
+                    left: 2px;
+                    width: 105px;
+                    height: 70px;
+                }
+                .jssort01 .p:hover .c, .jssort01 .pav:hover .c
+                {
+                    top: 0px;
+                    left: 0px;
+                    width: 107px;
+                    height: 72px;
+                    border: #fff 1px solid;
+                }
+            </style>
             <div u="slides" style="cursor: move;">
                 <div u="prototype" class="p" style="position: absolute; width: 109px; height: 74px; top: 0; left: 0;">
                     <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
@@ -154,5 +233,7 @@
     </div>
     <!-- Jssor Slider End -->
 <img width=0 height=0 />
-
+<center>
 <!--<div id="debuginfo" style="width:300px;height:300px;background-color:Red;color:White;Padding:5px;"></div>-->
+    </body>
+</html>

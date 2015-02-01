@@ -1,69 +1,46 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>digiCamControl</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<div class="submenu">
+  <button action="/?CMD=FullScreenWnd_Show">Show full screen</button>
+  <button action="/?CMD=FullScreenWnd_Hide">Hide full screen</button>
+  <button action="/?CMD=Prev_Image">Prev. Image</button>
+  <button action="/?CMD=Next_Image">Next. Image</button>
+  <button action="/?CMD=Like_Image">Like Image</button>
+  <button action="/?CMD=Unlike_Image">Unlike Image</button>
+</div>
+<img id="browseimg" class="centered" src="/preview.jpg" />
 <script type="text/javascript">
-refreshImage = function()
-{
-img = document.getElementById("cam");
-img.src="/preview.jpg?rand=" + Math.random();
-}
+   window.setInterval(function(){
+      $("#browseimg").attr("src","/preview.jpg?rand=" + Math.random());
+   }, 1000);
+
+  $(".submenu button:first").button({
+      icons: {
+	primary: "ui-icon-arrow-4-diag"
+	},
+      text: true
+    }).next().button({
+      icons: {
+	primary: "ui-icon-arrowthickstop-1-s"
+	},
+      text: true
+    }).next().button({
+      icons: {
+	primary: "ui-icon-carat-1-w"
+	},
+      text: true
+    }).next().button({
+      icons: {
+	primary: "ui-icon-carat-1-e"
+	},
+      text: true
+    }).next().button({
+      icons: {
+	primary: "ui-icon-heart"
+	},
+      text: true
+    }).next().button({
+      icons: {
+	primary: "ui-icon-cancel"
+	},
+      text: true
+  });
 </script>
-</head>
-
-<script src="Script.js"></script>
-
-<body onload="window.setInterval(refreshImage, 1*1000);">
-
-<div class="container">
-  <div class="header">digiCamControl - Browse<!-- end .header --></div>
-  <div class="content">
-    <h1></h1>
-    <p>.</p>
-   <center>
-	<img id="cam" src="/preview.jpg" />
-  </center>
-    <table width="100%" border="0" cellspacing="25">
-      <tr>
-		<td>
-			<center>
-				<button class="buttonstyle" onclick="httpGet('/?CMD=FullScreenWnd_Show')">Show full screen</button>
-			</center>
-		</td>
-		<td>
-			<center>
-				<button class="buttonstyle" onclick="httpGet('/?CMD=FullScreenWnd_Hide')">Hide full screen</button>
-			</center>
-		</td>
-      </tr>
-      <tr>
-		<td>
-			<center>
-				<button class="buttonstyle" onclick="httpGet('/?CMD=Prev_Image')">Prev. Image</button>
-			</center>
-		</td>
-		<td>
-			<center>
-				<button class="buttonstyle" onclick="httpGet('/?CMD=Next_Image')">Next. Image</button>
-			</center>
-		</td>
-      </tr>
-
-      <tr>
-		<td>
-			<center>
-				<button class="buttonstyle" onclick="httpGet('/?CMD=Unlike_Image')">Unlike Image</button>
-			</center>
-		</td>
-		<td>
-			<center>
-				<button class="buttonstyle" onclick="httpGet('/?CMD=Like_Image')">Like Image</button>
-			</center>
-		</td>
-      </tr>
-  </table>
-  </div>
-</body>
-</html>

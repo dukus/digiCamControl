@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using CameraControl.Devices;
+using CameraControl.Devices.Others;
 using MeasurementProtocolClient;
 
 namespace CameraControl.Core.Classes
@@ -77,14 +78,14 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private void SendEvent(string cat, string action, string label)
+        private void SendEvent(string cat, string action, string label, int value = 0)
         {
             if (!ServiceProvider.Settings.SendUsageStatistics)
                 return;
-            Task.Factory.StartNew(() => SendEventThread(cat, action, label));
+            Task.Factory.StartNew(() => SendEventThread(cat, action, label, value));
         }
 
-        private void SendEventThread(string cat, string action, string label)
+        private void SendEventThread(string cat, string action, string label, int value=0)
         {
             try
             {
@@ -94,6 +95,8 @@ namespace CameraControl.Core.Classes
                 eventTrack.Parameters.EventCategory = cat;
                 eventTrack.Parameters.EventAction = action;
                 eventTrack.Parameters.EventLabel = label;
+                if (value > 0)
+                    eventTrack.Parameters.EventValue = value.ToString();
                 SetParams(eventTrack.Parameters);
                 eventTrack.Send();
             }
@@ -106,7 +109,10 @@ namespace CameraControl.Core.Classes
 
         public void CameraConnected(ICameraDevice device)
         {
-            SendEvent("Camera", "Connected", device.DeviceName);
+            if (device is FakeCameraDevice)
+                return;
+            SendEvent("Camera", "Connected", device.DeviceName,
+                ServiceProvider.DeviceManager.ConnectedDevices.Count - (ServiceProvider.Settings.AddFakeCamera ? 1 : 0));
         }
 
         public void CameraCapture(ICameraDevice device)

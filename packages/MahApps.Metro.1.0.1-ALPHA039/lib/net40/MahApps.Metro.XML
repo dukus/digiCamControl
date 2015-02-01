@@ -36,11 +36,6 @@
             With this class we can make custom window styles.
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Behaviours.BorderlessWindowBehavior.AdjustWorkingAreaForAutoHide(System.IntPtr,MahApps.Metro.Native.MINMAXINFO)">
-            <summary>
-            This method handles the window size if the taskbar is set to auto-hide.
-            </summary>
-        </member>
         <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.Update">
             <summary>
             Updates all glow windows (visible, hidden, collapsed)
@@ -2561,6 +2556,11 @@
         <member name="F:Standard.MARGINS.cyBottomHeight">
             <summary>Height of bottom border that retains its size.</summary>
         </member>
+        <member name="F:Standard.APPBARDATA.cbSize">
+            <summary>
+            initialize this field using: Marshal.SizeOf(typeof(APPBARDATA));
+            </summary>
+        </member>
         <member name="T:Standard.WndProc">
             <summary>Delegate declaration that matches native WndProc signatures.</summary>
         </member>
@@ -3308,6 +3308,11 @@
         <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._chromeInfo">
             <summary>Object that describes the current modifications being made to the chrome.</summary>
         </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker.AdjustWorkingAreaForAutoHide(System.IntPtr,Standard.RECT)">
+            <summary>
+            This method handles the window size if the taskbar is set to auto-hide.
+            </summary>
+        </member>
         <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._ModifyStyle(Standard.WS,Standard.WS)">
             <summary>Add and remove a native WindowStyle from the HWND.</summary>
             <param name="removeStyle">The styles to be removed.  These can be bitwise combined.</param>
@@ -3349,6 +3354,9 @@
             There are a few specific bugs in Window in 3.5SP1 and below that require workarounds
             when handling WM_NCCALCSIZE on the HWND.
             </remarks>
+        </member>
+        <member name="P:Microsoft.Windows.Shell.WindowChromeWorker._MinimizeAnimation">
+            A borderless window lost his animation, with this we bring it back.
         </member>
         <member name="T:MahApps.Metro.Models.Win32.WM">
             <summary>
@@ -4753,6 +4761,46 @@
         <member name="F:MahApps.Metro.Native.Constants.ShowWindowCommands.SW_RESTORE">
             <summary>
                    Activates and displays the window. If the window is minimized or maximized, the system restores it to its original size and position. An application should specify this flag when restoring a minimized window.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.Invalidate">
+            <summary>
+            Invalidates the rectangle or region that you specify in lprcUpdate or hrgnUpdate.
+            You can set only one of these parameters to a non-NULL value. If both are NULL, RDW_INVALIDATE invalidates the entire window.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.InternalPaint">
+            <summary>Causes the OS to post a WM_PAINT message to the window regardless of whether a portion of the window is invalid.</summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.Erase">
+            <summary>
+            Causes the window to receive a WM_ERASEBKGND message when the window is repainted.
+            Specify this value in combination with the RDW_INVALIDATE value; otherwise, RDW_ERASE has no effect.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.Validate">
+            <summary>
+            Validates the rectangle or region that you specify in lprcUpdate or hrgnUpdate.
+            You can set only one of these parameters to a non-NULL value. If both are NULL, RDW_VALIDATE validates the entire window.
+            This value does not affect internal WM_PAINT messages.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.NoErase">
+            <summary>Suppresses any pending WM_ERASEBKGND messages.</summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.NoChildren">
+            <summary>Excludes child windows, if any, from the repainting operation.</summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.AllChildren">
+            <summary>Includes child windows, if any, in the repainting operation.</summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.UpdateNow">
+            <summary>Causes the affected windows, which you specify by setting the RDW_ALLCHILDREN and RDW_NOCHILDREN values, to receive WM_ERASEBKGND and WM_PAINT messages before the RedrawWindow returns, if necessary.</summary>
+        </member>
+        <member name="F:MahApps.Metro.Native.Constants.RedrawWindowFlags.EraseNow">
+            <summary>
+            Causes the affected windows, which you specify by setting the RDW_ALLCHILDREN and RDW_NOCHILDREN values, to receive WM_ERASEBKGND messages before RedrawWindow returns, if necessary.
+            The affected windows receive WM_PAINT messages at the ordinary time.
             </summary>
         </member>
         <member name="M:MahApps.Metro.Native.RECT.Equals(System.Object)">
