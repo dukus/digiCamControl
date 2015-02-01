@@ -69,7 +69,7 @@
                 <Label  Content="{Binding MovieTimeRemain}" Height="41" FontSize="20" FontWeight="Bold" Margin="5,0" />
             </StackPanel>
         </Canvas>
-        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" Grid.RowSpan="3">
+        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" Grid.RowSpan="3" Margin="10,40,10,10">
             <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ZoomOutCommand}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
@@ -340,6 +340,8 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
                                     <Label Content="{T:TranslateExtension LabelGrid}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -362,9 +364,10 @@
                                     <CheckBox Content="{T:TranslateExtension LabelShowRuler}" IsChecked="{Binding Path=ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                                     <Rectangle Fill="{Binding NoProcessingWarnColor}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" />
                                     <CheckBox Content="{T:TranslateExtension LabelNoProccesing}" ToolTip="{T:TranslateExtension LabelNoProccesingTooltip}" IsChecked="{Binding Path=NoProcessing}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
+                                    <CheckBox Content="{T:TranslateExtension LabelFlip}" IsChecked="{Binding Path=FlipImage}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
                                     
-                                    <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="3" />
-                                    <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="12" Grid.ColumnSpan="3" Grid.Column="1">
+                                    <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="3" />
+                                    <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="13" Grid.ColumnSpan="3" Grid.Column="1">
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotateNone}" />
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotate90}" />
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotate180}" />

@@ -111,6 +111,7 @@ namespace CameraControl.ViewModel
         private decimal _movieTimeRemain;
         private bool _showLeftTab;
         private bool _noProcessing;
+        private bool _flipImage;
 
         public ICameraDevice CameraDevice
         {
@@ -445,6 +446,12 @@ namespace CameraControl.ViewModel
                 if (value)
                     ShowRuler = true;
             }
+        }
+
+        public bool FlipImage
+        {
+            get { return CameraProperty.LiveviewSettings.FlipImage; }
+            set { CameraProperty.LiveviewSettings.FlipImage = value; }
         }
 
         #endregion
@@ -1516,6 +1523,10 @@ namespace CameraControl.ViewModel
                                                 LiveViewData.Rotation, false);
                                     break;
                             }
+                        }
+                        if (FlipImage)
+                        {
+                            writeableBitmap = writeableBitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
                         }
                         if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
                         {

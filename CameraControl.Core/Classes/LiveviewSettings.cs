@@ -204,6 +204,7 @@ namespace CameraControl.Core.Classes
         public int VerticalMin { get; set; }
         public int VerticalMax { get; set; }
         public bool ShowRuler { get; set; }
+        public bool FlipImage { get; set; }
 
         public LiveviewSettings()
         {
@@ -221,7 +222,7 @@ namespace CameraControl.Core.Classes
             HorizontalMax = 100;
             VerticalMin = 0;
             VerticalMax = 100;
-
+            FlipImage = false;
         }
 
 
