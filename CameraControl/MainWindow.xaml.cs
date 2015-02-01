@@ -990,6 +990,13 @@ namespace CameraControl
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.PrintWnd_Show);
         }
 
+        private void but_qr_Click(object sender, RoutedEventArgs e)
+        {
+            QrCodeWnd wnd = new QrCodeWnd();
+            wnd.Owner = this;
+            wnd.Show();
+        }
+
 
     }
 }
