@@ -168,7 +168,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <Button ToolTip="{T:TranslateExtension LabelPrint}" Height="50" Name="but_qr" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_qr_Click"
+            <Button ToolTip="{T:TranslateExtension LabelWebserver}" Height="50" Name="but_qr" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_qr_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=UseWebserver, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <Rectangle Width="25" Height="25">
                     <Rectangle.Fill>

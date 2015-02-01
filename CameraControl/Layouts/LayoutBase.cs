@@ -137,8 +137,7 @@ namespace CameraControl.Layouts
             try
             {
                 filestodelete.AddRange(
-                    ServiceProvider.Settings.DefaultSession.Files.Where(
-                        fileItem => fileItem.IsChecked || !File.Exists(fileItem.FileName)));
+                    ServiceProvider.Settings.DefaultSession.Files.Where(fileItem => fileItem.IsChecked));
 
                 if (ServiceProvider.Settings.SelectedBitmap != null &&
                     ServiceProvider.Settings.SelectedBitmap.FileItem != null &&
@@ -150,8 +149,7 @@ namespace CameraControl.Layouts
                 int selectedindex = ImageLIst.Items.IndexOf(filestodelete[0]);
                 if (
                     MessageBox.Show("Do you really want to delete selected file(s) ?", "Delete file",
-                                    MessageBoxButton.YesNo) ==
-                    MessageBoxResult.Yes)
+                                    MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     foreach (FileItem fileItem in filestodelete)
                     {
