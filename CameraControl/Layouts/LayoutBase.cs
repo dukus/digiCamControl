@@ -276,6 +276,13 @@ namespace CameraControl.Layouts
                     _worker.RunWorkerAsync(false);
                 }
             }
+            if (e.PropertyName == "FlipPreview")
+            {
+                if (!_worker.IsBusy)
+                {
+                    _worker.RunWorkerAsync(false);
+                }
+            }
             if (e.PropertyName == "LowMemoryUsage")
             {
                 if (!_worker.IsBusy)

@@ -493,6 +493,11 @@ namespace CameraControl.Core.Classes
                     }
                 }
 
+                if (ServiceProvider.Settings.FlipPreview)
+                {
+                    bitmap = bitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
+                }
+
                 bitmap.Freeze();
                 return bitmap;
             }

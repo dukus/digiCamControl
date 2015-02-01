@@ -576,6 +576,6 @@ namespace CameraControl.Core.Translation
         public static string LabelTimeLapseCaptureScript = "Execute script";
         public static string LabelTimeLapseScriptFile = "Script file";
         public static string LabelBrowse = "Browse";
-        public static string LabelFlip = "Flip";
+        public static string LabelFlip = "Flip horizontally";
     }
 }

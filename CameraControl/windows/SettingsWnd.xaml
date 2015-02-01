@@ -124,6 +124,9 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelPlaySound}" HorizontalContentAlignment="Right"/>
@@ -158,15 +161,18 @@
                             <ComboBoxItem Content="{T:TranslateExtension LabelRotate270}" />
                         </ComboBox>
 
-                        <Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelPreviewInLIveView}" HorizontalContentAlignment="Right"/>
-                        <CheckBox Grid.Row="10" Grid.Column="1" Margin="3" IsChecked="{Binding PreviewLiveViewImage}"/>
+                        <Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelFlip}" HorizontalContentAlignment="Right"/>
+                        <CheckBox Grid.Row="10" Grid.Column="1" Margin="3" IsChecked="{Binding FlipPreview}"/>
 
-                        <Label Grid.Row="11" Grid.Column="0" Content="{T:TranslateExtension LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
-                        <Controls:NumericUpDown Grid.Row="11" Grid.Column="1" Margin="3" Minimum="2" Maximum="120" Value="{Binding LiveViewFreezeTimeOut}"/>
+                        <Label Grid.Row="11" Grid.Column="0" Content="{T:TranslateExtension LabelPreviewInLIveView}" HorizontalContentAlignment="Right"/>
+                        <CheckBox Grid.Row="11" Grid.Column="1" Margin="3" IsChecked="{Binding PreviewLiveViewImage}"/>
 
-                        <Label Grid.Row="12" Grid.Column="0" Content="{T:TranslateExtension LabelExternalViewerPath}" HorizontalContentAlignment="Right"/>
-                        <TextBox Grid.Row="12" Grid.Column="1" Margin="3" Text="{Binding ExternalViewer}" />
-                        <Button Grid.Row="12" Grid.Column="2" Content="..." HorizontalAlignment="Left" Margin="3" Name="btn_browse_file" VerticalAlignment="Center" Width="29" Click="btn_browse_file_Click" />
+                        <Label Grid.Row="12" Grid.Column="0" Content="{T:TranslateExtension LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
+                        <Controls:NumericUpDown Grid.Row="12" Grid.Column="1" Margin="3" Minimum="2" Maximum="120" Value="{Binding LiveViewFreezeTimeOut}"/>
+
+                        <Label Grid.Row="13" Grid.Column="0" Content="{T:TranslateExtension LabelExternalViewerPath}" HorizontalContentAlignment="Right"/>
+                        <TextBox Grid.Row="13" Grid.Column="1" Margin="3" Text="{Binding ExternalViewer}" />
+                        <Button Grid.Row="13" Grid.Column="2" Content="..." HorizontalAlignment="Left" Margin="3" Name="btn_browse_file" VerticalAlignment="Center" Width="29" Click="btn_browse_file_Click" />
                     </Grid>
                 </ScrollViewer>
             </TabItem>

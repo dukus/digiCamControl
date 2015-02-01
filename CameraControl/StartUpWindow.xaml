@@ -9,7 +9,7 @@
 				<EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
 				<EasingPointKeyFrame KeyTime="0:0:2" Value="0.5,0.5"/>
 			</PointAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="background">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="background" AutoReverse="True">
 				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:1" Value="-1"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="1"/>

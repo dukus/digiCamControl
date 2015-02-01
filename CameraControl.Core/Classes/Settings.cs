@@ -741,6 +741,7 @@ namespace CameraControl.Core.Classes
         private int _largeFocusStepCanon;
         private int _canonFocusStepWait;
         private bool _sendUsageStatistics;
+        private bool _flipPreview;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -793,6 +794,17 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool FlipPreview
+        {
+            get { return _flipPreview; }
+            set
+            {
+                _flipPreview = value;
+                NotifyPropertyChanged("FlipPreview");
+            }
+        }
+
+
         public bool FullScreenInSecondaryMonitor { get; set; }
 
         public string OverlayFolder
@@ -804,7 +816,7 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                return !string.IsNullOrEmpty(ServiceProvider.Branding.ApplicationDataFolder) ? Path.GetFullPath(ServiceProvider.Branding.ApplicationDataFolder) : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName);
+                return ServiceProvider.Branding !=null && !string.IsNullOrEmpty(ServiceProvider.Branding.ApplicationDataFolder) ? Path.GetFullPath(ServiceProvider.Branding.ApplicationDataFolder) : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), AppName);
             }
         }
 

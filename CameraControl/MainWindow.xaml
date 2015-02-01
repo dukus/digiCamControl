@@ -277,7 +277,14 @@
                             </ToggleButton>
                         </StackPanel>
                         <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                            <ToggleButton  ToolTip="{T:TranslateExtension LabelFlip}" Height="35" Width="35" Margin="0" IsChecked="{Binding FlipPreview}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+                                <Rectangle Width="17" Height="14">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_transform_flip_horizontal}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </ToggleButton>                            
+                            <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" Padding="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
                                 <Rectangle Width="20" Height="20">
                                     <Rectangle.Fill>
                                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_crosshair}" />
