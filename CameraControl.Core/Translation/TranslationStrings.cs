@@ -577,5 +577,6 @@ namespace CameraControl.Core.Translation
         public static string LabelTimeLapseScriptFile = "Script file";
         public static string LabelBrowse = "Browse";
         public static string LabelFlip = "Flip horizontally";
+        public static string LabelLiveViewPreviewTime = "Preview captured photo time";
     }
 }

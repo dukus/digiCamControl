@@ -75,7 +75,6 @@ namespace CameraControl.windows
                 new AsyncObservableCollection<RotateFlipType>(
                     Enum.GetValues(typeof (RotateFlipType)).Cast<RotateFlipType>().Distinct());
             ServiceProvider.Settings.ApplyTheme(this);
-            qrcode.Text = ServiceProvider.Settings.Webaddress;
             foreach (IMainWindowPlugin mainWindowPlugin in ServiceProvider.PluginManager.MainWindowPlugins)
             {
                 cmb_mainwindow.Items.Add(mainWindowPlugin.DisplayName);
@@ -208,12 +207,6 @@ namespace CameraControl.windows
         private void btn_stay_on_top_Click(object sender, RoutedEventArgs e)
         {
             Topmost = (btn_stay_on_top.IsChecked == true);
-        }
-
-        private void textBox1_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (qrcode != null)
-                qrcode.Text = ServiceProvider.Settings.Webaddress;
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)

@@ -182,7 +182,7 @@ namespace CameraControl.Core.Classes
                 NotifyPropertyChanged("GridVisible");
             }
         }
-
+        
         public string SelectedOverlay { get; set; }
         public bool BlackAndWhite { get; set; }
         public bool EdgeDetection { get; set; }
@@ -205,6 +205,7 @@ namespace CameraControl.Core.Classes
         public int VerticalMax { get; set; }
         public bool ShowRuler { get; set; }
         public bool FlipImage { get; set; }
+        public int PreviewTime { get; set; }
 
         public LiveviewSettings()
         {

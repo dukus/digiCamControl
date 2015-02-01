@@ -365,7 +365,7 @@
                                     <Rectangle Fill="{Binding NoProcessingWarnColor}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" />
                                     <CheckBox Content="{T:TranslateExtension LabelNoProccesing}" ToolTip="{T:TranslateExtension LabelNoProccesingTooltip}" IsChecked="{Binding Path=NoProcessing}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
                                     <CheckBox Content="{T:TranslateExtension LabelFlip}" IsChecked="{Binding Path=FlipImage}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
-                                    
+
                                     <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="3" />
                                     <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="13" Grid.ColumnSpan="3" Grid.Column="1">
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotateNone}" />
@@ -374,7 +374,8 @@
                                         <ComboBoxItem Content="{T:TranslateExtension LabelRotate270}" />
                                         <ComboBoxItem Content="{T:TranslateExtension LabelAutoRotate}" />
                                     </ComboBox>
-
+                                    <Label Content="{T:TranslateExtension LabelLiveViewPreviewTime}" Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="3"/>
+                                    <Controls:NumericUpDown Minimum="0" Value="{Binding PreviewTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="3"/>
                                 </Grid>
                             </Expander.Content>
                         </Expander>

@@ -257,7 +257,6 @@
                         <Grid ToolTip="{T:TranslateExtension ReStartToolTip}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -265,8 +264,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" Name="checkBox1" IsChecked="{Binding UseWebserver}" Margin="2"/>
-                            <ComboBox Name="textBox1" IsReadOnly="True" ItemsSource="{Binding AvaiableWebAddresses, Mode=OneTime}" SelectedItem="{Binding Webaddress}" IsEditable="False" SelectionChanged="textBox1_SelectionChanged" Grid.Row="1" Margin="2" />
-                            <my:QrCodeImgControl Height="129" HorizontalAlignment="Left" Margin="7,3,0,0" Stretch="Uniform" VerticalAlignment="Top" Width="132" Name="qrcode" Grid.Column="1" Grid.RowSpan="3" />
+                            <Label Grid.Row="2" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

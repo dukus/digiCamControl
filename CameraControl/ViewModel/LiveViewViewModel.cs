@@ -35,15 +35,13 @@ namespace CameraControl.ViewModel
         public static event EventHandler FocuseDone;
 
         private const int DesiredFrameRate = 20;
-        private const int DesiredWebFrameRate = 5;
 
         private bool _operInProgress = false;
         private int _totalframes = 0;
         private DateTime _framestart;
-        private int _retries = 0;
         private MotionDetector _detector;
-        private DateTime _photoCapturedTime;
-        private Timer _timer = new Timer(1000/DesiredFrameRate);
+        private DateTime _photoCapturedTime = DateTime.MinValue;
+        private Timer _timer = new Timer(1000 / DesiredFrameRate);
         private Timer _freezeTimer = new Timer();
         private Timer _focusStackingTimer = new Timer(1000);
         private Timer _restartTimer = new Timer(1000);
@@ -81,8 +79,6 @@ namespace CameraControl.ViewModel
         private bool _lockB;
         private int _selectedFocusValue;
         private bool _delayedStart;
-        private int _brightness;
-        private bool _simpleFocus;
         private int _direction;
         private int _photoNumber;
         private bool _simpleManualFocus;
@@ -109,9 +105,7 @@ namespace CameraControl.ViewModel
         private int _levelAngle;
         private string _levelAngleColor;
         private decimal _movieTimeRemain;
-        private bool _showLeftTab;
-        private bool _noProcessing;
-        private bool _flipImage;
+
 
         public ICameraDevice CameraDevice
         {
@@ -149,7 +143,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _levelAngle = value;
-                RaisePropertyChanged(()=>LevelAngle);
+                RaisePropertyChanged(() => LevelAngle);
                 LevelAngleColor = _levelAngle % 90 <= 1 || _levelAngle % 90 >= 89 ? "Green" : "Red";
             }
         }
@@ -265,7 +259,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _overlayScale = value;
-                RaisePropertyChanged(()=>OverlayScale);
+                RaisePropertyChanged(() => OverlayScale);
             }
         }
 
@@ -275,7 +269,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _overlayHorizontal = value;
-                RaisePropertyChanged(()=>OverlayHorizontal);
+                RaisePropertyChanged(() => OverlayHorizontal);
             }
         }
 
@@ -285,7 +279,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _overlayVertical = value;
-                RaisePropertyChanged(()=>OverlayVertical);
+                RaisePropertyChanged(() => OverlayVertical);
             }
         }
 
@@ -295,7 +289,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _overlayTransparency = value;
-                RaisePropertyChanged(()=>OverlayTransparency);
+                RaisePropertyChanged(() => OverlayTransparency);
             }
         }
 
@@ -350,6 +344,16 @@ namespace CameraControl.ViewModel
                     _freezeTimer.Start();
                 RaisePropertyChanged(() => FreezeImage);
 
+            }
+        }
+
+        public int PreviewTime
+        {
+            get { return CameraProperty.LiveviewSettings.PreviewTime; }
+            set
+            {
+                CameraProperty.LiveviewSettings.PreviewTime = value;
+                RaisePropertyChanged(() => PreviewTime);
             }
         }
 
@@ -441,7 +445,7 @@ namespace CameraControl.ViewModel
             set
             {
                 CameraProperty.LiveviewSettings.DetectMotionArea = value;
-                if(_detector!=null)
+                if (_detector != null)
                     _detector.Reset();
                 if (value)
                     ShowRuler = true;
@@ -478,7 +482,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _redColorHistogramPoints = value;
-                RaisePropertyChanged(()=>RedColorHistogramPoints);
+                RaisePropertyChanged(() => RedColorHistogramPoints);
             }
         }
 
@@ -488,7 +492,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _greenColorHistogramPoints = value;
-                RaisePropertyChanged(()=>GreenColorHistogramPoints);
+                RaisePropertyChanged(() => GreenColorHistogramPoints);
             }
         }
 
@@ -553,7 +557,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => PhotoNo);
                 if (PhotoNo > 0)
                     _focusStep =
-                        Convert.ToInt32(Decimal.Round((decimal) FocusValue/PhotoNo, MidpointRounding.AwayFromZero));
+                        Convert.ToInt32(Decimal.Round((decimal)FocusValue / PhotoNo, MidpointRounding.AwayFromZero));
                 RaisePropertyChanged(() => FocusStep);
                 RaisePropertyChanged(() => PhotoNo);
             }
@@ -565,7 +569,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _photoNumber = value;
-                RaisePropertyChanged(()=>PhotoCount);
+                RaisePropertyChanged(() => PhotoCount);
             }
         }
 
@@ -585,7 +589,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _focusStep = value;
-                _photoNo = Convert.ToInt32(Decimal.Round((decimal) FocusValue/FocusStep, MidpointRounding.AwayFromZero));
+                _photoNo = Convert.ToInt32(Decimal.Round((decimal)FocusValue / FocusStep, MidpointRounding.AwayFromZero));
                 RaisePropertyChanged(() => FocusStep);
                 RaisePropertyChanged(() => PhotoNo);
             }
@@ -656,7 +660,7 @@ namespace CameraControl.ViewModel
             {
                 _focusValue = value;
                 if (FocusStep > 0)
-                    PhotoNo = FocusValue/FocusStep;
+                    PhotoNo = FocusValue / FocusStep;
                 RaisePropertyChanged(() => FocusValue);
                 RaisePropertyChanged(() => CounterMessage);
             }
@@ -823,7 +827,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _simpleManualFocus = value;
-                RaisePropertyChanged(()=>SimpleManualFocus);
+                RaisePropertyChanged(() => SimpleManualFocus);
             }
         }
 
@@ -863,7 +867,7 @@ namespace CameraControl.ViewModel
             set
             {
                 _countDownVisible = value;
-                RaisePropertyChanged(()=>CountDownVisible);
+                RaisePropertyChanged(() => CountDownVisible);
             }
         }
 
@@ -891,20 +895,20 @@ namespace CameraControl.ViewModel
 
         public int HorizontalMax
         {
-            get { return  CameraProperty.LiveviewSettings.HorizontalMax; }
-            set {  CameraProperty.LiveviewSettings.HorizontalMax = value; }
+            get { return CameraProperty.LiveviewSettings.HorizontalMax; }
+            set { CameraProperty.LiveviewSettings.HorizontalMax = value; }
         }
 
         public int VerticalMin
         {
-            get { return  CameraProperty.LiveviewSettings.VerticalMin; }
-            set {  CameraProperty.LiveviewSettings.VerticalMin = value; }
+            get { return CameraProperty.LiveviewSettings.VerticalMin; }
+            set { CameraProperty.LiveviewSettings.VerticalMin = value; }
         }
 
         public int VerticalMax
         {
-            get { return  CameraProperty.LiveviewSettings.VerticalMax; }
-            set {  CameraProperty.LiveviewSettings.VerticalMax = value; }
+            get { return CameraProperty.LiveviewSettings.VerticalMax; }
+            set { CameraProperty.LiveviewSettings.VerticalMax = value; }
         }
 
         public bool ShowRuler
@@ -926,8 +930,8 @@ namespace CameraControl.ViewModel
             get { return _focusProgressVisible; }
             set
             {
-                _focusProgressVisible = value; 
-                RaisePropertyChanged(()=>FocusProgressVisible);
+                _focusProgressVisible = value;
+                RaisePropertyChanged(() => FocusProgressVisible);
             }
         }
 
@@ -968,7 +972,7 @@ namespace CameraControl.ViewModel
         public RelayCommand StartFocusStackingCommand { get; set; }
         public RelayCommand PreviewFocusStackingCommand { get; set; }
         public RelayCommand StopFocusStackingCommand { get; set; }
-        
+
         public RelayCommand StartSimpleFocusStackingCommand { get; set; }
         public RelayCommand PreviewSimpleFocusStackingCommand { get; set; }
         public RelayCommand StopSimpleFocusStackingCommand { get; set; }
@@ -986,7 +990,7 @@ namespace CameraControl.ViewModel
         public RelayCommand ZoomInCommand { get; set; }
         public RelayCommand ZoomIn100 { get; set; }
         public RelayCommand ToggleGridCommand { get; set; }
-        
+
         #endregion
 
         public LiveViewViewModel()
@@ -1019,7 +1023,7 @@ namespace CameraControl.ViewModel
                         ServiceProvider.Settings.MotionBlockSize,
                         ServiceProvider.Settings.MotionBlockSize, true));
             }
-            
+
             TriggerOnMotion = false;
             Init();
         }
@@ -1048,7 +1052,7 @@ namespace CameraControl.ViewModel
             StartSimpleFocusStackingCommand = new RelayCommand(StartSimpleFocusStacking);
             PreviewSimpleFocusStackingCommand = new RelayCommand(PreviewSimpleFocusStacking);
             StopSimpleFocusStackingCommand = new RelayCommand(StopFocusStacking);
-            HelpFocusStackingCommand = new RelayCommand(()=> HelpProvider.Run(HelpSections.FocusStacking));
+            HelpFocusStackingCommand = new RelayCommand(() => HelpProvider.Run(HelpSections.FocusStacking));
 
             BrowseOverlayCommand = new RelayCommand(BrowseOverlay);
             ResetOverlayCommand = new RelayCommand(ResetOverlay);
@@ -1057,7 +1061,7 @@ namespace CameraControl.ViewModel
             ZoomIn100 = new RelayCommand(ToggleZoom);
             ToggleGridCommand = new RelayCommand(ToggleGrid);
             FocuseDone += LiveViewViewModel_FocuseDone;
-            
+
         }
 
         private void ToggleGrid()
@@ -1101,7 +1105,7 @@ namespace CameraControl.ViewModel
                 string[] files = Directory.GetFiles(ServiceProvider.Settings.OverlayFolder, "*.png");
                 foreach (string file in files)
                 {
-                    Overlays.Add(new ValuePair() {Name = Path.GetFileNameWithoutExtension(file), Value = file});
+                    Overlays.Add(new ValuePair { Name = Path.GetFileNameWithoutExtension(file), Value = file });
                 }
             }
             OverlayTransparency = 100;
@@ -1118,10 +1122,10 @@ namespace CameraControl.ViewModel
             _timer.Stop();
             _timer.AutoReset = true;
             CameraDevice.CameraDisconnected += CameraDeviceCameraDisconnected;
-            _photoCapturedTime = DateTime.Now;
+            _photoCapturedTime = DateTime.MinValue;
             CameraDevice.PhotoCaptured += CameraDevicePhotoCaptured;
             StartLiveView();
-            _freezeTimer.Interval = ServiceProvider.Settings.LiveViewFreezeTimeOut*1000;
+            _freezeTimer.Interval = ServiceProvider.Settings.LiveViewFreezeTimeOut * 1000;
             _freezeTimer.Elapsed += _freezeTimer_Elapsed;
             _timer.Elapsed += _timer_Elapsed;
             _worker.DoWork += delegate
@@ -1129,7 +1133,7 @@ namespace CameraControl.ViewModel
                 if (!FreezeImage)
                     GetLiveImage();
             };
-            ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+            //ServiceProvider.WindowsManager.Event += WindowsManager_Event;
             _focusStackingTimer.AutoReset = true;
             _focusStackingTimer.Elapsed += _focusStackingTimer_Elapsed;
             _restartTimer.AutoReset = true;
@@ -1151,7 +1155,7 @@ namespace CameraControl.ViewModel
             _timer.Stop();
             _focusStackingTimer.Stop();
             _restartTimer.Stop();
-            CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured; 
+            CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured;
             Thread.Sleep(100);
             StopLiveView();
             Recording = false;
@@ -1175,13 +1179,13 @@ namespace CameraControl.ViewModel
             dlg.FileName = SelectedOverlay;
             if (dlg.ShowDialog() == true)
             {
-                Overlays.Add(new ValuePair()
+                Overlays.Add(new ValuePair
                 {
                     Name = Path.GetFileNameWithoutExtension(dlg.FileName),
                     Value = dlg.FileName
                 });
                 SelectedOverlay = dlg.FileName;
-            }   
+            }
         }
 
 
@@ -1308,7 +1312,7 @@ namespace CameraControl.ViewModel
             }
             else
             {
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
                     TranslationStrings.LabelErrorUnableFocus + "\n" +
                     TranslationManager.GetTranslation(resp));
             }
@@ -1335,7 +1339,7 @@ namespace CameraControl.ViewModel
             GetLiveImage();
         }
 
-        
+
         public virtual void GetLiveImage()
         {
             if (_operInProgress)
@@ -1353,7 +1357,7 @@ namespace CameraControl.ViewModel
             _operInProgress = true;
             _totalframes++;
             if ((DateTime.Now - _framestart).TotalSeconds > 0)
-                Fps = (int) (_totalframes/(DateTime.Now - _framestart).TotalSeconds);
+                Fps = (int)(_totalframes / (DateTime.Now - _framestart).TotalSeconds);
             try
             {
                 LiveViewData = LiveViewManager.GetLiveViewImage(CameraDevice);
@@ -1361,14 +1365,12 @@ namespace CameraControl.ViewModel
             catch (Exception ex)
             {
                 Log.Error("Error geting lv", ex);
-                _retries++;
                 _operInProgress = false;
                 return;
             }
 
-            if (LiveViewData == null )
+            if (LiveViewData == null)
             {
-                _retries++;
                 _operInProgress = false;
                 return;
             }
@@ -1377,7 +1379,7 @@ namespace CameraControl.ViewModel
             {
                 DelayedStart = true;
                 _restartTimerStartTime = DateTime.Now;
-                _restartTimer. Start();
+                _restartTimer.Start();
                 _operInProgress = false;
                 return;
             }
@@ -1385,7 +1387,6 @@ namespace CameraControl.ViewModel
             if (LiveViewData.ImageData == null)
             {
                 //Log.Error("LV image data is null !");
-                _retries++;
                 _operInProgress = false;
                 return;
             }
@@ -1403,7 +1404,7 @@ namespace CameraControl.ViewModel
                             Length -
                         LiveViewData.
                             ImageDataPosition);
-                    LevelAngle = (int) LiveViewData.LevelAngleRolling;
+                    LevelAngle = (int)LiveViewData.LevelAngleRolling;
                     MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
 
                     if (NoProcessing)
@@ -1423,12 +1424,26 @@ namespace CameraControl.ViewModel
                     using (var res = new Bitmap(stream))
                     {
                         Bitmap bmp = res;
+                        if (PreviewTime > 0 && (DateTime.Now - _photoCapturedTime).TotalSeconds <= PreviewTime)
+                        {
+                            var bitmap = ServiceProvider.Settings.SelectedBitmap.DisplayImage;
+                            var dw = (double)bmp.Width / bitmap.PixelWidth;
+                            bitmap = bitmap.Resize((int)(bitmap.PixelWidth * dw), (int)(bitmap.PixelHeight * dw),
+                                WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+                            // flip image only if the prview not fliped 
+                            if (FlipImage && !ServiceProvider.Settings.FlipPreview)
+                                bitmap = bitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
+                            bitmap.Freeze();
+                            ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(bitmap);
+                            Bitmap = bitmap;
+                            return;
+                        }
                         if (DetectMotion)
                         {
                             ProcessMotionDetection(bmp);
                         }
 
-                        if (_totalframes%DesiredFrameRate == 0 && ShowHistogram)
+                        if (_totalframes % DesiredFrameRate == 0 && ShowHistogram)
                         {
                             ImageStatisticsHSL hslStatistics =
                                 new ImageStatisticsHSL(bmp);
@@ -1548,14 +1563,12 @@ namespace CameraControl.ViewModel
             catch (Exception exception)
             {
                 Log.Error(exception);
-                _retries++;
                 _operInProgress = false;
             }
             finally
             {
                 _operInProgress = false;
             }
-            _retries = 0;
             _operInProgress = false;
         }
 
@@ -1572,19 +1585,14 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void DrawAngle(WriteableBitmap writeableBitmap)
-        {
-            int y = writeableBitmap.PixelHeight;
-        }
-
         private void DrawGrid(WriteableBitmap writeableBitmap)
         {
             Color color = Colors.White;
             color.A = 50;
-            
+
             if (OverlayActivated)
             {
-                if ((SelectedOverlay != null && File.Exists(SelectedOverlay) )|| OverlayUseLastCaptured)
+                if ((SelectedOverlay != null && File.Exists(SelectedOverlay)) || OverlayUseLastCaptured)
                 {
                     if (OverlayUseLastCaptured)
                     {
@@ -1614,69 +1622,69 @@ namespace CameraControl.ViewModel
 
                     //set color transparency for blit only the alpha chanel is used from transpColor
                     if (OverlayTransparency < 100)
-                        transpColor = Color.FromArgb((byte) (0xff*OverlayTransparency/100d), 0xff, 0xff, 0xff);
-                    
+                        transpColor = Color.FromArgb((byte)(0xff * OverlayTransparency / 100d), 0xff, 0xff, 0xff);
+
                     writeableBitmap.Blit(
                         new Rect(0 + (x / 2) + xx, 0 + (y / 2) + yy, writeableBitmap.PixelWidth - x,
                             writeableBitmap.PixelHeight - y),
                         _overlayImage,
-                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight),transpColor,WriteableBitmapExtensions.BlendMode.Alpha);
+                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight), transpColor, WriteableBitmapExtensions.BlendMode.Alpha);
                 }
             }
 
             switch (GridType)
             {
                 case 1:
-                {
-                    for (int i = 1; i < 3; i++)
                     {
-                        writeableBitmap.DrawLine(0, (int) ((writeableBitmap.Height/3)*i),
-                            (int) writeableBitmap.Width,
-                            (int) ((writeableBitmap.Height/3)*i), color);
-                        writeableBitmap.DrawLine((int) ((writeableBitmap.Width/3)*i), 0,
-                            (int) ((writeableBitmap.Width/3)*i),
-                            (int) writeableBitmap.Height, color);
+                        for (int i = 1; i < 3; i++)
+                        {
+                            writeableBitmap.DrawLine(0, (int)((writeableBitmap.Height / 3) * i),
+                                (int)writeableBitmap.Width,
+                                (int)((writeableBitmap.Height / 3) * i), color);
+                            writeableBitmap.DrawLine((int)((writeableBitmap.Width / 3) * i), 0,
+                                (int)((writeableBitmap.Width / 3) * i),
+                                (int)writeableBitmap.Height, color);
+                        }
+                        writeableBitmap.SetPixel((int)(writeableBitmap.Width / 2), (int)(writeableBitmap.Height / 2), 128,
+                            Colors.Red);
                     }
-                    writeableBitmap.SetPixel((int) (writeableBitmap.Width/2), (int) (writeableBitmap.Height/2), 128,
-                        Colors.Red);
-                }
                     break;
                 case 2:
-                {
-                    for (int i = 1; i < 10; i++)
                     {
-                        writeableBitmap.DrawLine(0, (int) ((writeableBitmap.Height/10)*i),
-                            (int) writeableBitmap.Width,
-                            (int) ((writeableBitmap.Height/10)*i), color);
-                        writeableBitmap.DrawLine((int) ((writeableBitmap.Width/10)*i), 0,
-                            (int) ((writeableBitmap.Width/10)*i),
-                            (int) writeableBitmap.Height, color);
+                        for (int i = 1; i < 10; i++)
+                        {
+                            writeableBitmap.DrawLine(0, (int)((writeableBitmap.Height / 10) * i),
+                                (int)writeableBitmap.Width,
+                                (int)((writeableBitmap.Height / 10) * i), color);
+                            writeableBitmap.DrawLine((int)((writeableBitmap.Width / 10) * i), 0,
+                                (int)((writeableBitmap.Width / 10) * i),
+                                (int)writeableBitmap.Height, color);
+                        }
+                        writeableBitmap.SetPixel((int)(writeableBitmap.Width / 2), (int)(writeableBitmap.Height / 2), 128,
+                            Colors.Red);
                     }
-                    writeableBitmap.SetPixel((int) (writeableBitmap.Width/2), (int) (writeableBitmap.Height/2), 128,
-                        Colors.Red);
-                }
                     break;
                 case 3:
-                {
-                    writeableBitmap.DrawLineDDA(0, 0, (int) writeableBitmap.Width,
-                        (int) writeableBitmap.Height, color);
+                    {
+                        writeableBitmap.DrawLineDDA(0, 0, (int)writeableBitmap.Width,
+                            (int)writeableBitmap.Height, color);
 
-                    writeableBitmap.DrawLineDDA(0, (int) writeableBitmap.Height,
-                        (int) writeableBitmap.Width, 0, color);
-                    writeableBitmap.SetPixel((int) (writeableBitmap.Width/2), (int) (writeableBitmap.Height/2), 128,
-                        Colors.Red);
-                }
+                        writeableBitmap.DrawLineDDA(0, (int)writeableBitmap.Height,
+                            (int)writeableBitmap.Width, 0, color);
+                        writeableBitmap.SetPixel((int)(writeableBitmap.Width / 2), (int)(writeableBitmap.Height / 2), 128,
+                            Colors.Red);
+                    }
                     break;
                 case 4:
-                {
-                    writeableBitmap.DrawLineDDA(0, (int) (writeableBitmap.Height/2), (int) writeableBitmap.Width,
-                        (int) (writeableBitmap.Height/2), color);
+                    {
+                        writeableBitmap.DrawLineDDA(0, (int)(writeableBitmap.Height / 2), (int)writeableBitmap.Width,
+                            (int)(writeableBitmap.Height / 2), color);
 
-                    writeableBitmap.DrawLineDDA((int) (writeableBitmap.Width/2), 0,
-                        (int) (writeableBitmap.Width/2), (int) writeableBitmap.Height, color);
-                    writeableBitmap.SetPixel((int) (writeableBitmap.Width/2), (int) (writeableBitmap.Height/2), 128,
-                        Colors.Red);
-                }
+                        writeableBitmap.DrawLineDDA((int)(writeableBitmap.Width / 2), 0,
+                            (int)(writeableBitmap.Width / 2), (int)writeableBitmap.Height, color);
+                        writeableBitmap.SetPixel((int)(writeableBitmap.Width / 2), (int)(writeableBitmap.Height / 2), 128,
+                            Colors.Red);
+                    }
                     break;
                 default:
                     break;
@@ -1684,14 +1692,14 @@ namespace CameraControl.ViewModel
 
             if (ShowRuler)
             {
-                int x1 = writeableBitmap.PixelWidth*HorizontalMin/100;
-                int x2 = writeableBitmap.PixelWidth*HorizontalMax/100;
-                int y2 = writeableBitmap.PixelHeight*(100-VerticalMin)/100;
-                int y1 = writeableBitmap.PixelHeight*(100-VerticalMax)/100;
+                int x1 = writeableBitmap.PixelWidth * HorizontalMin / 100;
+                int x2 = writeableBitmap.PixelWidth * HorizontalMax / 100;
+                int y2 = writeableBitmap.PixelHeight * (100 - VerticalMin) / 100;
+                int y1 = writeableBitmap.PixelHeight * (100 - VerticalMax) / 100;
 
                 FillRectangle2(writeableBitmap, 0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, Color.FromArgb(128, 128, 128, 128));
                 FillRectangleDeBlend(writeableBitmap, x1, y1, x2, y2, Color.FromArgb(128, 128, 128, 128));
-                writeableBitmap.DrawRectangle( x1, y1, x2, y2, color);
+                writeableBitmap.DrawRectangle(x1, y1, x2, y2, color);
 
             }
 
@@ -1749,14 +1757,14 @@ namespace CameraControl.ViewModel
                     {
                         for (int y = y1; y <= y2; y++)
                         {
-                            for (int i = y*w + x1; i < y*w + x2; i++)
+                            for (int i = y * w + x1; i < y * w + x2; i++)
                             {
-                                byte oneOverAlpha = (byte) (255 - color.A);
+                                byte oneOverAlpha = (byte)(255 - color.A);
                                 int c = pixels[i];
 
-                                int r = (((byte) (c >> 16) << 8)/oneOverAlpha);
-                                int g = (((byte) (c >> 8) << 8)/oneOverAlpha);
-                                int b = (((byte) (c >> 0) << 8)/oneOverAlpha);
+                                int r = (((byte)(c >> 16) << 8) / oneOverAlpha);
+                                int g = (((byte)(c >> 8) << 8) / oneOverAlpha);
+                                int b = (((byte)(c >> 0) << 8) / oneOverAlpha);
 
                                 pixels[i] = 255 << 24 | r << 16 | g << 8 | b;
 
@@ -1818,14 +1826,14 @@ namespace CameraControl.ViewModel
                     {
                         for (int y = y1; y <= y2; y++)
                         {
-                            for (int i = y*w + x1; i <= y*w + x2; i++)
+                            for (int i = y * w + x1; i <= y * w + x2; i++)
                             {
-                                byte oneOverAlpha = (byte) (255 - color.A);
+                                byte oneOverAlpha = (byte)(255 - color.A);
                                 int c = pixels[i];
 
-                                int r = ((byte) (c >> 16)*oneOverAlpha ) >> 8;
-                                int g = ((byte) (c >> 8)*oneOverAlpha ) >> 8;
-                                int b = ((byte) (c >> 0)*oneOverAlpha ) >> 8;
+                                int r = ((byte)(c >> 16) * oneOverAlpha) >> 8;
+                                int g = ((byte)(c >> 8) * oneOverAlpha) >> 8;
+                                int b = ((byte)(c >> 0) * oneOverAlpha) >> 8;
 
                                 pixels[i] = 255 << 24 | r << 16 | g << 8 | b;
                             }
@@ -1833,14 +1841,6 @@ namespace CameraControl.ViewModel
                     }
                 }
             }
-        }
-
-        private Color IncreaseColor(Color c, byte inc)
-        {
-            c.R += inc;
-            c.G += inc;
-            c.B += inc;
-            return c;
         }
 
 
@@ -1853,10 +1853,10 @@ namespace CameraControl.ViewModel
                 double xt = bitmap.Width / LiveViewData.ImageWidth;
                 double yt = bitmap.Height / LiveViewData.ImageHeight;
 
-                bitmap.DrawRectangle((int) (LiveViewData.FocusX*xt - (LiveViewData.FocusFrameXSize*xt/2)),
-                    (int) (LiveViewData.FocusY*yt - (LiveViewData.FocusFrameYSize*yt/2)),
-                    (int) (LiveViewData.FocusX*xt + (LiveViewData.FocusFrameXSize*xt/2)),
-                    (int) (LiveViewData.FocusY*yt + (LiveViewData.FocusFrameYSize*yt/2)),
+                bitmap.DrawRectangle((int)(LiveViewData.FocusX * xt - (LiveViewData.FocusFrameXSize * xt / 2)),
+                    (int)(LiveViewData.FocusY * yt - (LiveViewData.FocusFrameYSize * yt / 2)),
+                    (int)(LiveViewData.FocusX * xt + (LiveViewData.FocusFrameXSize * xt / 2)),
+                    (int)(LiveViewData.FocusY * yt + (LiveViewData.FocusFrameYSize * yt / 2)),
                     LiveViewData.HaveFocusData ? Colors.Green : Colors.Red);
             }
             catch (Exception exception)
@@ -1892,35 +1892,34 @@ namespace CameraControl.ViewModel
                 }
                 else
                 {
-                    movement = _detector.ProcessFrame(bmp);    
+                    movement = _detector.ProcessFrame(bmp);
                 }
-               
-                CurrentMotionIndex = Math.Round(movement*100, 2);
-                if (movement > ((float) MotionThreshold/100) && TriggerOnMotion &&
+
+                CurrentMotionIndex = Math.Round(movement * 100, 2);
+                if (movement > ((float)MotionThreshold / 100) && TriggerOnMotion &&
                     (DateTime.Now - _photoCapturedTime).TotalSeconds > WaitForMotionSec)
                 {
                     if (MotionAutofocusBeforCapture)
                     {
-                        BlobCountingObjectsProcessing processing =
-                            _detector.MotionProcessingAlgorithm as BlobCountingObjectsProcessing;
+                        var processing = _detector.MotionProcessingAlgorithm as BlobCountingObjectsProcessing;
                         if (processing != null && processing.ObjectRectangles != null &&
                             processing.ObjectRectangles.Length > 0 &&
                             LiveViewData.ImageData != null)
                         {
-                            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle();
+                            var rectangle = new Rectangle();
                             int surface = 0;
-                            foreach (System.Drawing.Rectangle objectRectangle in processing.ObjectRectangles)
+                            foreach (Rectangle objectRectangle in processing.ObjectRectangles)
                             {
-                                if (surface < objectRectangle.Width*objectRectangle.Height)
+                                if (surface < objectRectangle.Width * objectRectangle.Height)
                                 {
-                                    surface = objectRectangle.Width*objectRectangle.Height;
+                                    surface = objectRectangle.Width * objectRectangle.Height;
                                     rectangle = objectRectangle;
                                 }
                             }
-                            double xt = LiveViewData.ImageWidth/(double) bmp.Width;
-                            double yt = LiveViewData.ImageHeight/(double) bmp.Height;
-                            int posx = (int) ((rectangle.X + (rectangle.Width/2))*xt);
-                            int posy = (int) ((rectangle.Y + (rectangle.Height/2))*yt);
+                            double xt = LiveViewData.ImageWidth / (double)bmp.Width;
+                            double yt = LiveViewData.ImageHeight / (double)bmp.Height;
+                            int posx = (int)((rectangle.X + (rectangle.Width / 2)) * xt);
+                            int posy = (int)((rectangle.Y + (rectangle.Height / 2)) * yt);
                             CameraDevice.Focus(posx, posy);
                         }
                         AutoFocus();
@@ -1964,7 +1963,7 @@ namespace CameraControl.ViewModel
             }
             else
             {
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
                     TranslationStrings.LabelErrorRecordMovie + "\n" +
                     TranslationManager.GetTranslation(resp));
             }
@@ -2002,9 +2001,12 @@ namespace CameraControl.ViewModel
             else
             {
                 Log.Error("Error starting live view " + resp);
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
-                    TranslationStrings.LabelLiveViewError + "\n" +
-                    TranslationManager.GetTranslation(resp));
+                // in nikon case no show error message
+                // if the images not transferd yet from SDRam
+                if (resp != "LabelImageInRAM")
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
+                        TranslationStrings.LabelLiveViewError + "\n" +
+                        TranslationManager.GetTranslation(resp));
             }
         }
 
@@ -2041,7 +2043,6 @@ namespace CameraControl.ViewModel
                 } while (retry && retryNum < 35);
                 _timer.Start();
                 _operInProgress = false;
-                _retries = 0;
                 Log.Debug("LiveView: Liveview start done");
             }
             catch (Exception exception)
@@ -2119,7 +2120,7 @@ namespace CameraControl.ViewModel
                 }
                 else
                 {
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, 
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
                                           TranslationStrings.LabelErrorUnableFocus + "\n" +
                                           TranslationManager.GetTranslation(resp));
                     _focusIProgress = false;
@@ -2175,7 +2176,7 @@ namespace CameraControl.ViewModel
 
                         for (var i = 0; i < Math.Abs(step); i++)
                         {
-                            FocusProgressValue ++;
+                            FocusProgressValue++;
                             FocusCounter += CameraDevice.Focus(step);
                             GetLiveImage();
                             Thread.Sleep(ServiceProvider.Settings.CanonFocusStepWait);
@@ -2220,7 +2221,7 @@ namespace CameraControl.ViewModel
                 Log.Debug("LiveView: Capture delayed");
                 CountDown = CaptureDelay;
                 CountDownVisible = true;
-                while (CountDown>0)
+                while (CountDown > 0)
                 {
                     Thread.Sleep(1000);
                     CountDown--;
@@ -2253,10 +2254,10 @@ namespace CameraControl.ViewModel
         {
             if (LiveViewData != null)
             {
-                double xt = LiveViewData.ImageWidth/refWidth;
-                double yt = LiveViewData.ImageHeight/refHeight;
-                int posx = (int) (initialPoint.X*xt);
-                int posy = (int) (initialPoint.Y*yt);
+                double xt = LiveViewData.ImageWidth / refWidth;
+                double yt = LiveViewData.ImageHeight / refHeight;
+                int posx = (int)(initialPoint.X * xt);
+                int posy = (int)(initialPoint.Y * yt);
                 Task.Factory.StartNew(() => SetFocusPos(posx, posy));
             }
         }
