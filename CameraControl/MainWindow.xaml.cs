@@ -291,13 +291,11 @@ namespace CameraControl
 
         private void ExecuteExportPlugin(IExportPlugin obj)
         {
-            HideFlatOuts();
             obj.Execute();
         }
 
         private void ExecuteToolPlugin(IToolPlugin obj)
         {
-            HideFlatOuts();
             obj.Execute();
         }
 
