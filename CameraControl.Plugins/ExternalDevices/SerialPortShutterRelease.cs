@@ -65,7 +65,15 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public UserControl GetConfig(CustomConfig config)
         {
-            return new SerialPortShutterReleaseConfig(config);
+            try
+            {
+                return new SerialPortShutterReleaseConfig(config);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("", exception);
+            }
+            return null;
         }
 
         public SourceEnum DeviceType { get; set; }

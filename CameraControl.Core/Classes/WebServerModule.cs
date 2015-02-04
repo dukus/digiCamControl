@@ -226,7 +226,7 @@ namespace CameraControl.Core.Classes
             MemoryStream stream = new MemoryStream(data);
             //            context.Response.AddHeader("Content-Disposition",
             //"inline;filename=\"" + Path.GetFileName(fullpath) + "\"");
-            context.Response.ContentType = "image/jpg";
+            context.Response.ContentType = "application/json";
             context.Response.ContentLength = data.Length;
             context.Response.Body = stream;
         }

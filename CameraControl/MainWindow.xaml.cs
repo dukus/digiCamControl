@@ -995,6 +995,14 @@ namespace CameraControl
             wnd.Show();
         }
 
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if(e.Delta>0)
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image);
+            else
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
+        }
+
 
     }
 }
