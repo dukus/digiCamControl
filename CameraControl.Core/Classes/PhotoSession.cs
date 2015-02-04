@@ -613,6 +613,13 @@ namespace CameraControl.Core.Classes
             return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.FileName, fileName, StringComparison.CurrentCultureIgnoreCase));
         }
 
+        public FileItem GetByName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return null;
+            return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.Name, name, StringComparison.CurrentCultureIgnoreCase));
+        }
+
         /// <summary>
         /// Gets a file item by the original name and  captured camera serial.
         /// </summary>

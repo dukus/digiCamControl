@@ -3,8 +3,6 @@
   <button action="/?CMD=FullScreenWnd_Hide">Hide full screen</button>
   <button action="/?CMD=Prev_Image">Prev. Image</button>
   <button action="/?CMD=Next_Image">Next. Image</button>
-  <button action="/?CMD=Like_Image">Like Image</button>
-  <button action="/?CMD=Unlike_Image">Unlike Image</button>
 </div>
 <img id="browseimg" class="centered" src="/preview.jpg" />
 <script type="text/javascript">
@@ -32,15 +30,5 @@
 	primary: "ui-icon-carat-1-e"
 	},
       text: true
-    }).next().button({
-      icons: {
-	primary: "ui-icon-heart"
-	},
-      text: true
-    }).next().button({
-      icons: {
-	primary: "ui-icon-cancel"
-	},
-      text: true
-  });
+    });
 </script>

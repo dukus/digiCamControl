@@ -193,8 +193,9 @@ namespace CameraControl.Core.Classes
                     }
                 }
                 string cmd = context.Request.QueryString["CMD"];
+                string param = context.Request.QueryString["PARAM"];
                 if (!string.IsNullOrEmpty(cmd))
-                    ServiceProvider.WindowsManager.ExecuteCommand(cmd);
+                    ServiceProvider.WindowsManager.ExecuteCommand(cmd, param);
 
             }
             catch (Exception ex)

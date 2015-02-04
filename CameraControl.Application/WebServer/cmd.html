@@ -1,0 +1,34 @@
+<div class="submenu">
+   <ul>
+      <li>
+	 <fieldset><legend>Control</legend>
+	 <button action="/?CMD=LiveView_Focus">Auto focus</button>
+	 <button action="/?CMD=LiveView_Capture">Take photo</button>
+	 <button action="/?CMD=LiveViewWnd_Hide">Close</button>
+	 </fieldset>
+      </li>
+      <li>
+	 <fieldset><legend>Zoom Percentage</legend>
+	    <button action="/?CMD=LiveView_Zoom_25">25</button>
+	    <button action="/?CMD=LiveView_Zoom_33">33</button>
+	    <button action="/?CMD=LiveView_Zoom_50">50</button>
+	    <button action="/?CMD=LiveView_Zoom_100">100</button>
+	    <button action="/?CMD=LiveView_Zoom_All">All</button>
+	 </fieldset>
+      </li>
+      <li>
+	 <fieldset><legend>Focus</legend>
+	    <button action="/?CMD=LiveView_Focus_MMM">---</button>
+	    <button action="/?CMD=LiveView_Focus_MM">--</button>
+	    <button action="/?CMD=LiveView_Focus_M">-</button>
+	    <button action="/?CMD=LiveView_Focus_P">+</button>
+	    <button action="/?CMD=LiveView_Focus_PP">++</button>
+	    <button action="/?CMD=LiveView_Focus_PPP">+++</button>
+	 </fieldset>
+      </li>
+   </ul>
+   <div style="clear: left"></div>
+</div>
+<script type="text/javascript">
+   $(".submenu button").button();
+</script>

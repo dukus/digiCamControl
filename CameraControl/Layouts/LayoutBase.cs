@@ -330,8 +330,15 @@ namespace CameraControl.Layouts
                                                                case WindowsCmdConsts.Like_Image:
                                                                    if (ImageLIst.SelectedItem != null)
                                                                    {
-                                                                       FileItem item =
-                                                                           ImageLIst.SelectedItem as FileItem;
+                                                                       FileItem item = null;
+                                                                       if (o != null)
+                                                                       {
+                                                                           item = ServiceProvider.Settings.DefaultSession.GetByName(o as string);
+                                                                       }
+                                                                       else
+                                                                       {
+                                                                           item = ImageLIst.SelectedItem as FileItem;
+                                                                       }
                                                                        if (item != null)
                                                                        {
                                                                            item.IsLiked = !item.IsLiked;
@@ -341,8 +348,17 @@ namespace CameraControl.Layouts
                                                                case WindowsCmdConsts.Unlike_Image:
                                                                    if (ImageLIst.SelectedItem != null)
                                                                    {
-                                                                       FileItem item =
-                                                                           ImageLIst.SelectedItem as FileItem;
+                                                                       FileItem item = null;
+                                                                       if (o != null)
+                                                                       {
+                                                                           item =
+                                                                               ServiceProvider.Settings.DefaultSession
+                                                                                   .GetByName(o as string);
+                                                                       }
+                                                                       else
+                                                                       {
+                                                                           item = ImageLIst.SelectedItem as FileItem;
+                                                                       }
                                                                        if (item != null)
                                                                        {
                                                                            item.IsUnLiked = !item.IsUnLiked;
