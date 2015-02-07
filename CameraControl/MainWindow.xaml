@@ -327,7 +327,7 @@
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_portrait}" />
                                             </Rectangle.Fill>
                                         </Rectangle>
-                                        <Slider Minimum="80" Maximum="400" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="18,3,30,3" SmallChange="1" TickFrequency="10" IsMoveToPointEnabled="True" BorderThickness="1"/>
+                                        <Slider Minimum="80" Maximum="400" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="20,3,30,3" SmallChange="1" TickFrequency="10" IsMoveToPointEnabled="True" BorderThickness="1"/>
                                         <Rectangle Width="22" Height="16" HorizontalAlignment="Right" Margin="2">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_portrait}" />

@@ -1,36 +1,33 @@
 <div class="submenu submenu1">
-  <button action="/?CMD=FullScreenWnd_Show">Show full screen</button>
-  <button action="/?CMD=FullScreenWnd_Hide">Hide full screen</button>
-  <button action="/?CMD=Prev_Image">Prev. Image</button>
-  <button action="/?CMD=Next_Image">Next. Image</button>
 </div>
 <img id="browseimg" class="centeredsmall" src="/preview.jpg" />
 <div class="submenu submenu2">
    <ul>
       <li>
-		<fieldset><legend>Control</legend>
-		<button action="/?CMD=LiveView_Focus">Auto focus</button>
-		<button action="/?CMD=LiveView_Capture">Take photo</button>
-		<button action="/?CMD=LiveViewWnd_Hide">Close</button>
+		<fieldset><legend>Navigation</legend>
+		  <button action="/?CMD=Prev_Image">Prev. Image</button>
+		 <button action="/?CMD=FullScreenWnd_Show">Show full screen</button>
+		  <button action="/?CMD=FullScreenWnd_Hide">Hide full screen</button>
+		  <button action="/?CMD=Next_Image">Next. Image</button>
 		</fieldset>
       </li>
       <li>
-		<fieldset><legend>Zoom Percentage</legend>
-		   <button action="/?CMD=LiveView_Zoom_25">25</button>
-		   <button action="/?CMD=LiveView_Zoom_33">33</button>
-		   <button action="/?CMD=LiveView_Zoom_50">50</button>
-		   <button action="/?CMD=LiveView_Zoom_100">100</button>
-		   <button action="/?CMD=LiveView_Zoom_All">All</button>
+		<fieldset><legend>Capture</legend>
+		<button action="/?CMD=Capture">Capture</button>
+		<button action="/?CMD=CaptureAll">Capture All</button>
+	    <button action="/?CMD=NextSeries">Next Series</button>
 		</fieldset>
       </li>
       <li>
-		<fieldset><legend>Focus</legend>
-		   <button action="/?CMD=LiveView_Focus_MMM">---</button>
-		   <button action="/?CMD=LiveView_Focus_MM">--</button>
-		   <button action="/?CMD=LiveView_Focus_M">-</button>
-		   <button action="/?CMD=LiveView_Focus_P">+</button>
-		   <button action="/?CMD=LiveView_Focus_PP">++</button>
-		   <button action="/?CMD=LiveView_Focus_PPP">+++</button>
+		<fieldset><legend>Multiple camera </legend>
+		   <button action="/?CMD=NextCamera">Next Camera</button>
+		   <button action="/?CMD=PrevCamera">Prev. Camera</button>
+		</fieldset>
+      </li>
+	   <li>
+		<fieldset><legend>Window Control</legend>
+		   <button action="/?CMD=All_Minimize">Minimize All</button>
+		   <button action="/?CMD=All_Close">Close Application</button>
 		</fieldset>
       </li>
    </ul>
