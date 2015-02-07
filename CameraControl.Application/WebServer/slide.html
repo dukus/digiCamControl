@@ -5,7 +5,8 @@
   <button id="like">Like</button>
   <button id="unlike">Unlike</button>
 </div>
-<div class="content" id="slideshowimages" style="margin: 0 auto;"></div>
+<div style="position:relative;margin:0 auto" id="likebox"><span class="IsLiked"></span><span class="IsUnLiked"></span></div>
+<div class="content" id="slideshowimages" style="margin:3px auto;"></div>
 <script>
 $(function(){
 	var playing = false;
@@ -36,8 +37,15 @@ $(function(){
 		text: true
 	});
 	$("#like").click(function(){
-		var image=$("#slideshowimages .centered").filter(":visible").attr("src").split("/");
+		var imgobj = $("#slideshowimages .centered").filter(":visible");
+		var image = imgobj.attr("src").split("/");
 		if (image[3]!="") {
+			var status = imgobj.attr("alt");
+			if (status=="Isliked") {
+				imgobj.attr("alt","");
+			}else{
+				imgobj.attr("alt","Isliked");
+			}
 			$.ajax({
 			  method: "GET",
 			  url: "/?CMD=Like_Image&Param="+image[3]
@@ -45,8 +53,15 @@ $(function(){
 		}
 	});
 	$("#unlike").click(function(){
-		var image=$("#slideshowimages .centered").filter(":visible").attr("src").split("/");
+		var imgobj = $("#slideshowimages .centered").filter(":visible");
+		var image = imgobj.attr("src").split("/");
 		if (image[3]!="") {
+			var status = imgobj.attr("alt");
+			if (status=="IsUnliked") {
+				imgobj.attr("alt","");
+			}else{
+				imgobj.attr("alt","IsUnliked");
+			}
 			$.ajax({
 			  method: "GET",
 			  url: "/?CMD=Unlike_Image&Param="+image[3]
@@ -59,19 +74,36 @@ $(function(){
       url: "/session.json",
 	  success: function(data){
 		for (i=0;i<data.Files.length;i++) {
-			$("#slideshowimages").append('<img src="/thumb/large/'+data.Files[i].Name+'" class="centered" style="margin:0 auto"/>');
+			var class_="";
+			if (data.Files[i].IsLiked==true) {
+				class_="IsLiked";
+			}
+			if (data.Files[i].IsUnLiked==true) {
+				class_="IsUnLiked";
+			}
+			$("#slideshowimages").append('<img src="/thumb/large/'+data.Files[i].Name+'" class="centered" alt="'+class_+'" style="margin:0 auto"/>');
 		}
 		$("#slideshowimages").cycle({
 			fx: "fade",
 			speed: "fast",
 			timeout: 3000,  
 			prev:   '#prev2',
-			next:   '#next2'
+			next:   '#next2', 
+			after:   onAfter 
 		});
 		playing = true;
 		$(window).trigger('resize');
-		var w = $(".centered:first").width();
-		$("#slideshowimages").css({width: w});
+		var w = 0;
+		$(".centered").each(function(){
+			if ($(this).width()>w) {
+				w=$(this).width();
+			}
+		});
+		var top = $('header').height();
+		var top2 = $('.submenu:first').height();
+		var remaining_height = parseInt($(window).height() - top -top2); 
+		$("#slideshowimages").css({height: remaining_height, width: w});
+		$("#likebox").css({width: w});
 	  }
     });
 	$("#playpause").click(function(){
@@ -89,5 +121,15 @@ $(function(){
 			obj.find(".ui-button-icon-primary").removeClass("ui-icon-play").addClass("ui-icon-pause");
 		}
 	});
+	function onAfter() {
+		$("span.IsLiked, span.IsUnLiked").hide();
+		var status = $("#slideshowimages img").filter(":visible").attr("alt");
+		if (status=="IsLiked") {
+			$("span.IsLiked").show();
+		}
+		if (this.alt=="IsUnLiked") {
+			$("span.IsUnLiked").show();
+		}
+	}
 });
 </script>

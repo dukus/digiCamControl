@@ -18,15 +18,14 @@
 		  <td><span id="browse">Browse</span></td>
 		  <td><span id="slideshow">Slideshow</span></td>
 		  <td><span id="live">Live</span></td>
-		  <td><span id="cmd">Cmd</span></td>
 		</tr>
       </table>
     </div>
   </header>
   <div style="clear: both"></div>
   <div id="contentwrapper">
-	<div id="content" style="padding:5px">
-	  <div>Welcome to <i>remote</i> digiCamControl</div>
+	<div id="content">
+	  <div style="padding:20px">Welcome to <i>remote</i> digiCamControl</div>
 	</div>
   </div>
 
@@ -54,13 +53,7 @@ $(document).ready(function(){
     $("#content").load("/browse.html", function(){
       $(this).removeClass("loading");
     });
-  });  
-  $("#cmd").click(function(){
-    $("#content").children().remove().addClass("loading");
-    $("#content").load("/cmd.html", function(){
-      $(this).removeClass("loading");
-    });
-  });  
+  });   
   $("#slideshow").click(function(){
     $(".showmenu").click();
     $("#content").children().remove().addClass("loading");
