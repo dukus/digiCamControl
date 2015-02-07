@@ -653,6 +653,12 @@ namespace CameraControl
         private void SetLayout(LayoutTypeEnum type)
         {
             ServiceProvider.Settings.SelectedLayout = type.ToString();
+            if (StackLayout.Children.Count > 0)
+            {
+                var cnt = StackLayout.Children[0] as LayoutBase;
+                if (cnt != null)
+                    cnt.UnInit();
+            }
             switch (type)
             {
                 case LayoutTypeEnum.Normal:

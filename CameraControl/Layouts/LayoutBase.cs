@@ -72,6 +72,15 @@ namespace CameraControl.Layouts
             _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
         }
 
+        public void UnInit()
+        {
+            _worker.DoWork -= worker_DoWork;
+            _worker.RunWorkerCompleted -= _worker_RunWorkerCompleted;
+            ServiceProvider.Settings.PropertyChanged -= Settings_PropertyChanged;
+            ServiceProvider.WindowsManager.Event -= Trigger_Event;
+            ImageLIst.SelectionChanged -= ImageLIst_SelectionChanged;
+        }
+
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (_selectedItem != ServiceProvider.Settings.SelectedBitmap.FileItem)

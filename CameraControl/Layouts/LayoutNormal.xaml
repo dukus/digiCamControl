@@ -13,57 +13,16 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
+                <ResourceDictionary Source="LayoutBaseResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
-                <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
-           explains how to display an object of type BitmapImage. -->
-                <Setter Property="ItemTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Grid Width="130" Height="90">
-                                    <Rectangle Stroke="Black" Margin="0"/>
-                                    <Rectangle Stroke="White" Margin="1" />
-                                    <Rectangle Stroke="Black" Margin="2" />
-                                    <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3"/>
-                                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Margin="5">
-                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}"/>
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </StackPanel>
-                                    <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=Name}" Margin="3" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
-                                </Grid>
-                            </StackPanel>
-                            <DataTemplate.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
-                            </DataTemplate.Triggers>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <Setter Property="ItemsPanel">
-                    <Setter.Value>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal" VerticalAlignment="Top"/>
-                        </ItemsPanelTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            
         </ResourceDictionary>
 
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="364*" />
-            <RowDefinition Height="105" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" Panel.ZIndex="2" />
@@ -80,10 +39,13 @@
                     <xctk:ZoomboxView>Fit</xctk:ZoomboxView>
                 </xctk:Zoombox.ViewStack>
 
-                <Image Name="image1" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" >
+                <Image Name="image1" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" Margin="15" >
                     <Image.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
                     </Image.InputBindings>
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
+                    </Image.Effect>
                 </Image>
             </xctk:Zoombox>
 

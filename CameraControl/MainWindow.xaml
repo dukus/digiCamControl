@@ -315,10 +315,25 @@
                                 <Panels:SelectionControl HorizontalAlignment="Center"/>
                             </Expander>
                             <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                                <StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="{T:TranslateExtension MenuLayoutNormal}" Click="MenuItem_Click_6" Margin="2"/>
+                                    <Button Content="{T:TranslateExtension MenuLayoutDefault}" Click="MenuItem_Click_6" Margin="2"/>
                                     <Button Content="{T:TranslateExtension MenuLayoutGridRight}" Click="MenuItem_Click_7" Margin="2"/>
                                     <Button Content="{T:TranslateExtension MenuLayoutGrid}" Click="MenuItem_Click_8" Margin="2"/>
+                                </StackPanel>
+                                    <Grid>
+                                        <Rectangle Width="14" Height="10" HorizontalAlignment="Left" Margin="2">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_portrait}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                        <Slider Minimum="80" Maximum="400" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="18,3,30,3" SmallChange="1" TickFrequency="10" IsMoveToPointEnabled="True" BorderThickness="1"/>
+                                        <Rectangle Width="22" Height="16" HorizontalAlignment="Right" Margin="2">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_portrait}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </Grid>
                                 </StackPanel>
                             </Expander>
                             <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">

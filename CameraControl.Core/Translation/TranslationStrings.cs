@@ -226,6 +226,7 @@ namespace CameraControl.Core.Translation
         public static string MenuDonate = "Donate";
         public static string MenuAbout = "About";
         public static string MenuLayout = "Layout";
+        public static string MenuLayoutDefault = "Default";
         public static string MenuLayoutNormal = "Normal";
         public static string MenuLayoutGridRight = "Grid right";
         public static string MenuLayoutGrid = "Grid";

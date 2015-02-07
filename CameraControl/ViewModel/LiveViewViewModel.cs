@@ -1386,7 +1386,7 @@ namespace CameraControl.ViewModel
 
             if (LiveViewData.ImageData == null)
             {
-                //Log.Error("LV image data is null !");
+                Log.Error("LV image data is null !");
                 _operInProgress = false;
                 return;
             }

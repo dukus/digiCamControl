@@ -13,63 +13,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />-->
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Menu.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
-
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+                <ResourceDictionary Source="LayoutBaseResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
-                <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
-           explains how to display an object of type BitmapImage. -->
-                <Setter Property="ItemTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Grid Width="130" Height="90">
-                                    <Rectangle Stroke="Black" Margin="0"/>
-                                    <Rectangle Stroke="White" Margin="1" />
-                                    <Rectangle Stroke="Black" Margin="2" />
-                                    <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3"/>
-                                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Margin="5">
-                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}"/>
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                        <Rectangle Width="20" Height="20" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </StackPanel>
-                                    <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=Name}" Margin="3" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
-                                </Grid>
-                            </StackPanel>
-                            <DataTemplate.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
-                            </DataTemplate.Triggers>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <Setter Property="ItemsPanel">
-                    <Setter.Value>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"   Value="Disabled"  />
-            </Style>
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -77,7 +23,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300*" />
             <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="200*" />
+            <ColumnDefinition Width="250*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -103,9 +49,12 @@
                     <Image.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
                     </Image.InputBindings>
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
+                    </Image.Effect>
                 </Image>
             </xctk:Zoombox>
-            <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
                 <ToggleButton  Height="50" Name="but_unlike" Width="50" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -125,7 +74,7 @@
         </Grid>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="2" Margin="0,0,0,25" Background="{DynamicResource ControlBackgroundBrush}"/>
 
-        <ListBox  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}"  Grid.Column="2" Grid.Row="1" BorderThickness="0" Margin="0,0,0,25">
+        <ListBox  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}"  Grid.Column="2" Grid.Row="1" BorderThickness="0" Margin="0,0,0,25" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
             </ListBox.InputBindings>
@@ -152,7 +101,12 @@
                     <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
-        <local:FolderBrowserComboBox x:Name="folderBrowserComboBox1" Grid.Column="2" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" ValueChanged="folderBrowserComboBox1_ValueChanged" />
+        <local:FolderBrowserComboBox x:Name="folderBrowserComboBox1" Grid.Column="2" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" ValueChanged="folderBrowserComboBox1_ValueChanged" />
     </Grid>
 </Layouts:LayoutBase>

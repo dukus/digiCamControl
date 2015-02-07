@@ -726,6 +726,15 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public int ThumbHeigh
+        {
+            get { return _thumbHeigh; }
+            set
+            {
+                _thumbHeigh = value;
+                NotifyPropertyChanged("ThumbHeigh");
+            }
+        }
 
         public CameraPropertyEnumerator CameraProperties { get; set; }
         public string SelectedLayout { get; set; }
@@ -742,6 +751,7 @@ namespace CameraControl.Core.Classes
         private int _canonFocusStepWait;
         private bool _sendUsageStatistics;
         private bool _flipPreview;
+        private int _thumbHeigh;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -902,6 +912,7 @@ namespace CameraControl.Core.Classes
             LoadThumbsDownload = true;
             FullScreenInSecondaryMonitor = false;
             SendUsageStatistics = true;
+            ThumbHeigh = 100;
         }
 
 
