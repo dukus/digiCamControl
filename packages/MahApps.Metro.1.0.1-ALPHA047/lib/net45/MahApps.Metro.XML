@@ -1559,6 +1559,11 @@
             hit testing.</param>
             <param name="point">The position to be evaluated on the origin.</param>
         </member>
+        <member name="P:MahApps.Metro.Controls.WindowCommands.ShowSeparators">
+            <summary>
+            Gets or sets the value indicating whether to show the separators.
+            </summary>
+        </member>
         <member name="F:Standard.IID.ApplicationAssociationRegistration">
             <summary>IID_IApplicationAssociationRegistration</summary>
         </member>
@@ -4724,9 +4729,34 @@
             Specifies that a window has a border with a raised edge.
             </summary>
         </member>
+        <member name="M:MahApps.Metro.Controls.IWindowPlacementSettings.Reload">
+            <summary>
+            Refreshes the application settings property values from persistent storage.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.IWindowPlacementSettings.Upgrade">
+            <summary>
+            Updates application settings to reflect a more recent installation of the application.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.IWindowPlacementSettings.Save">
+            <summary>
+            Stores the current values of the settings properties.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.IWindowPlacementSettings.UpgradeSettings">
+            <summary>
+            Upgrades the application settings on loading.
+            </summary>
+        </member>
         <member name="T:MahApps.Metro.Controls.WindowApplicationSettings">
             <summary>
             this settings class is the default way to save the placement of the window
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.WindowApplicationSettings.UpgradeSettings">
+            <summary>
+            Upgrades the application settings on loading.
             </summary>
         </member>
         <member name="F:MahApps.Metro.Native.Constants.ShowWindowCommands.SW_HIDE">

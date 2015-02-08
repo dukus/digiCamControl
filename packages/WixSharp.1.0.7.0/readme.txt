@@ -5,7 +5,6 @@ After building the project the corresponding .msi file can be found in the root 
 Description:
 This sample builds MSI for installing Manial.txt and MyApp.exe files.
 
-
 Tips and Hints:
 If you are implementing managed CA you may want to set "Target Framework" to "v3.5" as the lower CLR version will help avoid potential conflicts during the installation (e.g. target system has .NET v3.5 only).
 
