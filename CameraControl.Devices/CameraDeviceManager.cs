@@ -669,8 +669,7 @@ namespace CameraControl.Devices
                 // skip canon cameras 
                 //if (!string.IsNullOrEmpty(model) && model.Contains("Canon"))
                 //    continue;
-                if ((devInfo.Type == WiaDeviceType.CameraDeviceType || devInfo.Type == WiaDeviceType.VideoDeviceType) &&
-                    (GetNativeDriver(model) == null || DisableNativeDrivers || noDriversDetected))
+                if ((devInfo.Type == WiaDeviceType.CameraDeviceType || devInfo.Type == WiaDeviceType.VideoDeviceType))
                 {
                     do
                     {
@@ -696,7 +695,7 @@ namespace CameraControl.Devices
                             }
                             Thread.Sleep(1000);
                         }
-                    } while (retries < 3);
+                    } while ((GetNativeDriver(model) == null || DisableNativeDrivers || noDriversDetected) && retries < 3);
                     ret = true;
                 }
             }
