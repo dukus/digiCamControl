@@ -363,16 +363,17 @@ namespace CameraControl.Core.Classes
             file.GreenColorHistogramPoints = ConvertToPointCollection(fileItem.FileInfo.HistogramGreen);
             file.LuminanceHistogramPoints = ConvertToPointCollection(fileItem.FileInfo.HistogramLuminance);
 
-            file.InfoLabel = Path.GetFileName(file.FileItem.FileName);
-            file.InfoLabel += String.Format(" | {0}x{1}", fileItem.FileInfo.Width, fileItem.FileInfo.Height);
+            // file.InfoLabel = Path.GetFileName(file.FileItem.FileName);
+            file.InfoLabel = "";
+            //file.InfoLabel += String.Format(" | {0}x{1}", fileItem.FileInfo.Width, fileItem.FileInfo.Height);
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ExposureTime"))
-                file.InfoLabel += " | E " + fileItem.FileInfo.ExifTags["Exif.Photo.ExposureTime"];
+                file.InfoLabel += "E " + fileItem.FileInfo.ExifTags["Exif.Photo.ExposureTime"];
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FNumber"))
                 file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FNumber"];
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ISOSpeedRatings"))
                 file.InfoLabel += " | ISO " + fileItem.FileInfo.ExifTags["Exif.Photo.ISOSpeedRatings"];
-            if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ExposureBiasValue"))
-                file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.ExposureBiasValue"];
+            //if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ExposureBiasValue"))
+            //    file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.ExposureBiasValue"];
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FocalLength"))
                 file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FocalLength"];
         }

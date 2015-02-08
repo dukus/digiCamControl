@@ -30,7 +30,6 @@
             <RowDefinition Height="401*" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Margin="0,0,0,0">
-            <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" FontWeight="Bold" />
             <!--<xctk:MagnifierManager.Magnifier>
                 <xctk:Magnifier Radius="100" ZoomFactor=".4"/>
             </xctk:MagnifierManager.Magnifier>-->

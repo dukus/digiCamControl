@@ -261,6 +261,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="90" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding ElementName=TgGray, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}"/>
                         <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" Visibility="{Binding ElementName=TgRed, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}" />
@@ -283,7 +284,8 @@
                                 <Ellipse Height="10" Width="10" Fill="Gray"/>
                             </ToggleButton>
                         </StackPanel>
-                        <StackPanel  Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Grid.Row="1" Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Margin="0" Padding="0" HorizontalAlignment="Center" />
+                        <StackPanel  Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <ToggleButton  ToolTip="{T:TranslateExtension LabelFlip}" Height="35" Width="35" Margin="0" IsChecked="{Binding FlipPreview}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
                                 <Rectangle Width="17" Height="14">
                                     <Rectangle.Fill>
