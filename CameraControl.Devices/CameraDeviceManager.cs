@@ -700,7 +700,7 @@ namespace CameraControl.Devices
                             }
                             Thread.Sleep(1000);
                         }
-                    } while ((GetNativeDriver(model) == null || DisableNativeDrivers || noDriversDetected) && retries < 3);
+                    } while (retries < 3);
                 }
             }
             return ret;
