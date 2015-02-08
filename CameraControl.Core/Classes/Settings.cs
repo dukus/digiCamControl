@@ -913,6 +913,7 @@ namespace CameraControl.Core.Classes
             FullScreenInSecondaryMonitor = false;
             SendUsageStatistics = true;
             ThumbHeigh = 100;
+            CurrentThemeName = "Dark\\Steel";
         }
 
 
