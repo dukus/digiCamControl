@@ -120,14 +120,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\refs\FreeImageNET.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.0.0.21536, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+    <Reference Include="GalaSoft.MvvmLight, Version=5.1.0.21498, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.1.0.1\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.0.2.32240, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.1.0.21499, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\MvvmLightLibs.5.1.0.1\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\refs\Gma.QrCodeNet.Encoding.dll</HintPath>
@@ -149,7 +148,7 @@
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.1.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AvalonEdit.5.0.1-pre\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <HintPath>..\packages\AvalonEdit.5.0.2\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="Interop.VHMediaCOMLib">
       <HintPath>..\packages\XSplit\Interop.VHMediaCOMLib.dll</HintPath>
@@ -163,9 +162,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.0.1.47, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MahApps.Metro.1.0.1-ALPHA047\lib\net40\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.0.1-ALPHA048\lib\net40\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -189,7 +188,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.0.1-ALPHA047\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.1.0.1\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
