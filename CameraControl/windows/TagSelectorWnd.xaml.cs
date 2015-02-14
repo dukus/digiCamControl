@@ -196,5 +196,26 @@ namespace CameraControl.windows
         }
 
         #endregion
+
+        private void btn_clear_tag1(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.Settings.DefaultSession.SelectedTag1 = null;
+        }
+
+        private void btn_clear_tag2(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.Settings.DefaultSession.SelectedTag2 = null;
+        }
+
+        private void btn_clear_tag3(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.Settings.DefaultSession.SelectedTag3 = null;
+        }
+
+        private void btn_clear_tag4(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.Settings.DefaultSession.SelectedTag4 = null;
+        }
+
     }
 }

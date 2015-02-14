@@ -33,7 +33,7 @@
         </Grid.ColumnDefinitions>
         <Grid >
             <ScrollViewer VerticalScrollBarVisibility="Auto" >
-                <StackPanel  HorizontalAlignment="Left"  Name="wrapPanel1" VerticalAlignment="Top" >
+                <StackPanel  HorizontalAlignment="Stretch"  Name="wrapPanel1" VerticalAlignment="Top" >
                     <StackPanel>
                         <my:ExposureStatusControl x:Name="exposureStatusControl1" ExposureStatus="{Binding Path=SelectedCameraDevice.ExposureStatus, Mode=TwoWay}" />
                     </StackPanel>

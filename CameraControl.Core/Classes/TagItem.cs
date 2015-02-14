@@ -97,6 +97,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _tag4Checked;
+        private string _color;
 
         public bool Tag4Checked
         {
@@ -108,6 +109,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string Color
+        {
+            get { return _color; }
+            set
+            {
+                _color = value;
+                NotifyPropertyChanged("Color");
+            }
+        }
+
         public TagItem()
         {
             Value = "";
@@ -116,6 +127,7 @@ namespace CameraControl.Core.Classes
             Tag2Checked = false;
             Tag3Checked = false;
             Tag4Checked = false;
+            Color = "White";
         }
 
         public override string ToString()

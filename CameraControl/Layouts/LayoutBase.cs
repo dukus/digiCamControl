@@ -196,8 +196,17 @@ namespace CameraControl.Layouts
             ServiceProvider.Settings.PropertyChanged += Settings_PropertyChanged;
             ServiceProvider.WindowsManager.Event += Trigger_Event;
             ImageLIst.SelectionChanged += ImageLIst_SelectionChanged;
-            if (ServiceProvider.Settings.DefaultSession.Files.Count > 0)
-                ImageLIst.SelectedIndex = 0;
+            if (ServiceProvider.Settings.SelectedBitmap != null &&
+                ServiceProvider.Settings.SelectedBitmap.FileItem != null)
+            {
+                ImageLIst.SelectedItem = ServiceProvider.Settings.SelectedBitmap.FileItem;
+                ImageLIst.ScrollIntoView(ImageLIst.SelectedItem);
+            }
+            else
+            {
+                if (ServiceProvider.Settings.DefaultSession.Files.Count > 0)
+                    ImageLIst.SelectedIndex = 0;
+            }
         }
 
         private void ImageLIst_SelectionChanged(object sender, SelectionChangedEventArgs e)

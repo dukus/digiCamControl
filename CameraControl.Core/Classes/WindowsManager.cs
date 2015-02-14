@@ -107,7 +107,7 @@ namespace CameraControl.Core.Classes
         {
             foreach (Window win in WindowsList.OfType<Window>())
             {
-                win.PreviewKeyDown += (sender, args) => TriggerClass.KeyDown(args);
+                win.KeyDown += (sender, args) => TriggerClass.KeyDown(args);
             }
         }
 

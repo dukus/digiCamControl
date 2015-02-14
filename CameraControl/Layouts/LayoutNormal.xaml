@@ -7,6 +7,7 @@
                     xmlns:Layouts="clr-namespace:CameraControl.Layouts"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"                    
              d:DesignHeight="484" d:DesignWidth="689">
     <UserControl.Resources>
@@ -38,7 +39,6 @@
                 <xctk:Zoombox.ViewStack>
                     <xctk:ZoomboxView>Fit</xctk:ZoomboxView>
                 </xctk:Zoombox.ViewStack>
-
                 <Image Name="image1" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" Margin="15" >
                     <Image.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />

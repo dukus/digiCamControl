@@ -20,33 +20,34 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
-        <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource  {x:Type ListBox}}">
-            <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
+            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource  {x:Type ListBox}}">
+                <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
            explains how to display an object of type BitmapImage. -->
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Label Content="{Binding Path=DisplayValue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold" Height="40" Padding="15,2" Margin="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Label Content="{Binding Path=DisplayValue}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold" Height="40" Padding="15,2" Margin="2,6,6,6" MinWidth="80" Background="{Binding Color}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
 
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <WrapPanel VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        </ResourceDictionary>            
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="128*" />
-            <ColumnDefinition Width="619*" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60*" />
@@ -54,19 +55,27 @@
             <RowDefinition Height="60*" />
             <RowDefinition Height="60*" />
             <RowDefinition Height="60*" />
-            <RowDefinition Height="25" />
-            <RowDefinition Height="25" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ListBox Name="lst_tag1" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}, Path=Tags1}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag1}" Background="{DynamicResource WindowBackgroundBrush}" Grid.ColumnSpan="2" />
+        <Button Grid.Row="0" Grid.Column="2" Content="X" Style="{DynamicResource ChromelessButtonStyle}" FontSize="20" Click="btn_clear_tag1" Margin="3"/>
+
         <ListBox Grid.Row="1" Name="lst_tag2" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}, Path=Tags2}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag2}" Background="{DynamicResource WindowBackgroundBrush}" Grid.ColumnSpan="2" />
-        <ListBox Grid.Row="2" Name="lst_tag3" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}, Path=Tags3}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag3}" Background="{DynamicResource WindowBackgroundBrush}" Grid.ColumnSpan="2" />
-        <ListBox Grid.Row="3" Name="lst_tag4" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}, Path=Tags4}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag4}" Background="{DynamicResource WindowBackgroundBrush}" Grid.ColumnSpan="2" />
-        <Label Content="{T:TranslateExtension LabelComment}" Grid.Row="4"/>
-        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Comment}" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" />
+        <Button Grid.Row="1" Grid.Column="2" Content="X" Style="{DynamicResource ChromelessButtonStyle}" FontSize="20" Click="btn_clear_tag2" Margin="3"/>
         
+        <ListBox Grid.Row="2" Name="lst_tag3" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}, Path=Tags3}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag3}" Background="{DynamicResource WindowBackgroundBrush}" Grid.ColumnSpan="2" />
+        <Button Grid.Row="2" Grid.Column="2" Content="X" Style="{DynamicResource ChromelessButtonStyle}" FontSize="20" Click="btn_clear_tag3" Margin="3"/>
+        
+        <ListBox Grid.Row="3" Name="lst_tag4" Margin="5" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TagSelectorWnd, AncestorLevel=1}, Path=Tags4}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag4}" Background="{DynamicResource WindowBackgroundBrush}" Grid.ColumnSpan="2" />
+        <Button Grid.Row="3" Grid.Column="2" Content="X" Style="{DynamicResource ChromelessButtonStyle}" FontSize="20" Click="btn_clear_tag4" Margin="3"/>
+        <Label Content="{T:TranslateExtension LabelComment}" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,0,21"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Comment, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" FontSize="15" 
+                 Controls:TextBoxHelper.ClearTextButton="True" Grid.ColumnSpan="2" />
+
         <Label Content="{T:TranslateExtension LabelBarcode}" Grid.Row="5"/>
-        <TextBox Name="txt_barcode" Grid.Column="1" Grid.Row="5" Text="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Barcode, UpdateSourceTrigger=PropertyChanged}" Margin="5,0" />
-        <StackPanel Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="2">
+        <TextBox Name="txt_barcode" Grid.Column="1" Grid.Row="5" Text="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Barcode, UpdateSourceTrigger=PropertyChanged}" Margin="5" Grid.ColumnSpan="2" />
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="3">
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag1.DisplayValue}" />
             <Label Content="/"/>
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag2.DisplayValue}" />
@@ -74,6 +83,6 @@
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag3.DisplayValue}" />
             <Label Content="/"/>
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag4.DisplayValue}" />
-        </StackPanel>        
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>
