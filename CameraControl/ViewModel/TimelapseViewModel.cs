@@ -22,6 +22,7 @@ namespace CameraControl.ViewModel
         private int _totalCaptures;
         private DateTime _lastCaptureTime = DateTime.Now;
         private DateTime _timeLapseStartTime = DateTime.Now;
+        private DateTime _firstLapseStartTime = DateTime.Now;
         private bool _capture;
         private bool _captureAll;
         private bool _captureScript;
@@ -38,6 +39,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => DateVisibility);
                 RaisePropertyChanged(() => TimeVisibility);
                 RaisePropertyChanged(() => DayVisibility);
+                RaisePropertyChanged(() => StopAtEnable);
             }
         }
 
@@ -51,6 +53,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => DateVisibility);
                 RaisePropertyChanged(() => TimeVisibility);
                 RaisePropertyChanged(() => DayVisibility);
+                RaisePropertyChanged(() => StopAtEnable);
             }
         }
 
@@ -64,6 +67,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => TimeVisibility);
                 RaisePropertyChanged(() => StartIn);
                 RaisePropertyChanged(() => DayVisibility);
+                RaisePropertyChanged(() => StopAtEnable);
             }
         }
 
@@ -73,10 +77,16 @@ namespace CameraControl.ViewModel
             set
             {
                 TimeLapseSettings.StartDaily = value;
+                if (StopAt)
+                {
+                    StopAt = false;
+                    StopIn = true;
+                }
                 RaisePropertyChanged(() => StartDaily);
                 RaisePropertyChanged(() => DateVisibility);
                 RaisePropertyChanged(() => TimeVisibility);
                 RaisePropertyChanged(() => DayVisibility);
+                RaisePropertyChanged(() => StopAtEnable);
             }
         }
 
@@ -252,6 +262,14 @@ namespace CameraControl.ViewModel
             {
                 TimeLapseSettings.StopCaptureCount = value;
                 RaisePropertyChanged(() => StopCaptureCount);
+            }
+        }
+
+        public bool StopAtEnable
+        {
+            get
+            {
+                return !StartDaily;
             }
         }
 
@@ -494,7 +512,11 @@ namespace CameraControl.ViewModel
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!IsActive)
+            {
                 IsActive = CheckStart();
+                if (IsActive)
+                    _firstLapseStartTime = DateTime.Now;
+            }
             RaisePropertyChanged(() => StatusText);
             if (!IsActive)
                 return;
@@ -574,7 +596,7 @@ namespace CameraControl.ViewModel
             if (StopIn)
             {
                 var t = new TimeSpan(StopHour, StopMinute, StopSecond);
-                if ((DateTime.Now - _timeLapseStartTime).TotalSeconds > t.TotalSeconds)
+                if ((DateTime.Now - _firstLapseStartTime).TotalSeconds > t.TotalSeconds)
                     res = true;
             }
             if (StopAt)
@@ -583,7 +605,10 @@ namespace CameraControl.ViewModel
                     res = true;
             }
             if (IsActive && res && StartDaily)
+            {
                 _timeLapseStartTime = _timeLapseStartTime.AddDays(1);
+                _totalCaptures = 0;
+            }
             return res;
         }
 

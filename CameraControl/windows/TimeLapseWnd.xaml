@@ -93,7 +93,7 @@
                 <StackPanel VerticalAlignment="Center" Margin="3" Grid.Row="0" Grid.RowSpan="3">
                     <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStop}" Margin="3" GroupName="STOP" IsChecked="{Binding StopAtPhotos}"/>
                     <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStopIn}" Margin="3" GroupName="STOP" IsChecked="{Binding StopIn}"/>
-                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStopAt}" Margin="3" GroupName="STOP" IsChecked="{Binding StopAt}"/>
+                    <RadioButton Content="{translation:TranslateExtension LabelTimeLapseStopAt}" Margin="3" GroupName="STOP" IsChecked="{Binding StopAt}" IsEnabled="{Binding StopAtEnable}"/>
                     <!--<RadioButton Content="{translation:TranslateExtension LabelTimeLapseDaily}" Margin="3" GroupName="STOP" IsChecked="{Binding StartDaily}"/>-->
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Visibility="{Binding StopCountVisibility}" VerticalAlignment="Center">
