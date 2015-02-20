@@ -237,12 +237,18 @@ namespace CameraControl.Devices
                     {
                         Log.Debug("New canon camera found !");
                         CanonSDKBase camera = new CanonSDKBase();
+                        Log.Debug("Pas 1");
                         DeviceDescriptor descriptor = new DeviceDescriptor {EosCamera = eosCamera};
                         descriptor.CameraDevice = camera;
+                        Log.Debug("Pas 2");
                         camera.Init(eosCamera);
+                        Log.Debug("Pas 3");
                         ConnectedDevices.Add(camera);
+                        Log.Debug("Pas 4");
                         _deviceEnumerator.Add(descriptor);
+                        Log.Debug("Pas 5");
                         NewCameraConnected(camera);
+                        Log.Debug("New canon camera found done!");
                     }
                 }
                 //Thread.Sleep(2500);

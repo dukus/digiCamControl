@@ -64,6 +64,8 @@ namespace CameraControl.Core.Classes
         public const string Unlike_Image = "Unlike_Image";
         public const string TimeLapseWnd_Show = "TimeLapseWnd_Show";
         public const string TimeLapseWnd_Hide = "TimeLapseWnd_Hide";
+        public const string BarcodeWnd_Show = "BarcodeWnd_Show";
+        public const string BarcodeWnd_Hide = "BarcodeWnd_Hide";
 
     }
 }

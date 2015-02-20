@@ -183,6 +183,7 @@
     <Compile Include="Classes\CmdConsts.cs" />
     <Compile Include="Classes\CustomConfigEnumerator.cs" />
     <Compile Include="Classes\Exiv2Helper.cs" />
+    <Compile Include="Classes\ExternalData.cs" />
     <Compile Include="Classes\ExternalDeviceManager.cs" />
     <Compile Include="Classes\CustomConfig.cs" />
     <Compile Include="Classes\FileInfo.cs" />

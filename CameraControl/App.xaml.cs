@@ -178,6 +178,7 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.Add(new ScriptWnd());
                 ServiceProvider.WindowsManager.Add(new PrintWnd());
                 ServiceProvider.WindowsManager.Add(new TimeLapseWnd());
+                ServiceProvider.WindowsManager.Add(new BarcodeWnd());
                 ServiceProvider.WindowsManager.Event += WindowsManager_Event;
                 ServiceProvider.WindowsManager.ApplyTheme();
                 ServiceProvider.WindowsManager.ApplyKeyHanding();
@@ -340,6 +341,7 @@ namespace CameraControl
         {
             if (newcameraDevice == null)
                 return;
+            Log.Debug("DeviceManager_CameraSelected 1");
             var thread = new Thread(delegate()
             {
                 CameraProperty property = newcameraDevice.LoadProperties();
@@ -354,6 +356,7 @@ namespace CameraControl
                         (PhotoSession)newcameraDevice.AttachedPhotoSession;
             });
             thread.Start();
+            Log.Debug("DeviceManager_CameraSelected 2");
         }
 
 
@@ -364,6 +367,7 @@ namespace CameraControl
 
         private void cameraDevice_CameraInitDone(ICameraDevice cameraDevice)
         {
+            Log.Debug("cameraDevice_CameraInitDone 1");
             var property = cameraDevice.LoadProperties();
             cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
             CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
@@ -378,7 +382,7 @@ namespace CameraControl
                     Log.Error("Unable to sysnc date time", exception);
                 }
             }
-
+            Log.Debug("cameraDevice_CameraInitDone 2");
             if (preset != null)
             {
                 var thread = new Thread(delegate()
@@ -396,7 +400,7 @@ namespace CameraControl
                 });
                 thread.Start();
             }
-
+            Log.Debug("cameraDevice_CameraInitDone 3");
             ServiceProvider.Analytics.CameraConnected(cameraDevice);
         }
 

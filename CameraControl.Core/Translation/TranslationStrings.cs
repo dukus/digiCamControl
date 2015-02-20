@@ -580,5 +580,9 @@ namespace CameraControl.Core.Translation
         public static string LabelFlip = "Flip horizontally";
         public static string LabelLiveViewPreviewTime = "Preview captured photo time";
         public static string LabelColor = "Color";
+        public static string LabelImportData = "Import Data";
+        public static string LabelExportData = "Export Data";
+        public static string LabelData = "Data";
+        public static string LabelScanBarcode = "Scan Barcode";
     }
 }

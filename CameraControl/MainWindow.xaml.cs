@@ -991,7 +991,7 @@ namespace CameraControl
 
         private void btn_barcode_Click(object sender, RoutedEventArgs e)
         {
-
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BarcodeWnd_Show);
         }
 
 

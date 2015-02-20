@@ -1,0 +1,47 @@
+﻿<controls:MetroWindow x:Class="CameraControl.windows.BarcodeWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        Title="BarcodeWnd" Height="600" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False">
+    <Window.DataContext>
+        <viewModel:BarcodeViewModel/>
+    </Window.DataContext>    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="{translation:TranslateExtension LabelScanBarcode}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox TextWrapping="NoWrap" Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="40" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.SelectAllOnFocus="True" Margin="3" />
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="{translation:TranslateExtension LabelData}" Grid.Row="1">
+            <DataGrid ItemsSource="{Binding Data}"/>
+        </GroupBox>
+        <GroupBox Header="{translation:TranslateExtension SettingsToolTip}" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Button Margin="3" Content="{translation:TranslateExtension LabelImportData}" Command="{Binding ImportCommand}"/>
+                    <Button Margin="3" Content="{translation:TranslateExtension LabelExportData}" Command="{Binding ExportCommand}"/>
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</controls:MetroWindow>
