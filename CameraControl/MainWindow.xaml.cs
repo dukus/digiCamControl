@@ -403,31 +403,22 @@ namespace CameraControl
                 if (File.Exists(tempFile))
                     File.Delete(tempFile);
 
-                if (ServiceProvider.Settings.DefaultSession.WriteComment)
+                if (session.WriteComment)
                 {
-                    if (!string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.Comment))
-                        Exiv2Helper.SaveComment(fileName, ServiceProvider.Settings.DefaultSession.Comment);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag1 != null &&
-                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag1.Value))
-                        Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag1.Value);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag2 != null &&
-                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag2.Value))
-                        Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag2.Value);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag3 != null &&
-                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag3.Value))
-                        Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag3.Value);
-                    if (ServiceProvider.Settings.DefaultSession.SelectedTag4 != null &&
-                        !string.IsNullOrEmpty(ServiceProvider.Settings.DefaultSession.SelectedTag4.Value))
-                        Exiv2Helper.AddKeyword(fileName, ServiceProvider.Settings.DefaultSession.SelectedTag4.Value);
+                    if (!string.IsNullOrEmpty(session.Comment))
+                        Exiv2Helper.SaveComment(fileName, session.Comment);
+                    if (session.SelectedTag1 != null && !string.IsNullOrEmpty(session.SelectedTag1.Value))
+                        Exiv2Helper.AddKeyword(fileName, session.SelectedTag1.Value);
+                    if (session.SelectedTag2 != null && !string.IsNullOrEmpty(session.SelectedTag2.Value))
+                        Exiv2Helper.AddKeyword(fileName, session.SelectedTag2.Value);
+                    if (session.SelectedTag3 != null && !string.IsNullOrEmpty(session.SelectedTag3.Value))
+                        Exiv2Helper.AddKeyword(fileName, session.SelectedTag3.Value);
+                    if (session.SelectedTag4 != null &&  !string.IsNullOrEmpty(session.SelectedTag4.Value))
+                        Exiv2Helper.AddKeyword(fileName, session.SelectedTag4.Value);
                 }
 
-                // prevent crash og GUI when item count updated
-                Dispatcher.Invoke(new Action(delegate
-                {
-                    _selectedItem = session.AddFile(fileName);
-                    _selectedItem.BackupFileName = backupfile;
-                    _selectedItem.Series = session.Series;
-                }));
+                if (session.ExternalData != null)
+                    session.ExternalData.FileName = fileName;
 
                 foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
                 {
@@ -446,6 +437,15 @@ namespace CameraControl
                         Log.Error("Error to apply plugin", ex);
                     }
                 }
+
+                // prevent crash og GUI when item count updated
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    _selectedItem = session.AddFile(fileName);
+                    _selectedItem.BackupFileName = backupfile;
+                    _selectedItem.Series = session.Series;
+                }));
+
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
                 {

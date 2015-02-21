@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,9 +23,33 @@ namespace CameraControl.windows
     /// </summary>
     public partial class BarcodeWnd : IWindow
     {
+        private Timer _timer = new Timer(1000);
         public BarcodeWnd()
         {
             InitializeComponent();
+            _timer.AutoReset = true;
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
+        }
+
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (!IsVisible)
+                return;
+            Dispatcher.Invoke(new Action(SetFocus));
+        }
+
+        private void SetFocus()
+        {
+            if (!((BarcodeViewModel) DataContext).KeepActive)
+                return;
+
+            if (!TextBox.IsFocused || !IsActive)
+            {
+                Activate();
+                TextBox.Focus();
+                TextBox.SelectAll();
+            }
         }
 
         public void ExecuteCommand(string cmd, object param)
@@ -61,6 +86,15 @@ namespace CameraControl.windows
             {
                 e.Cancel = true;
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BarcodeWnd_Hide);
+            }
+        }
+
+        private void TextBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox.SelectAll();
+                ((BarcodeViewModel) DataContext).EnterPressed();
             }
         }
     }

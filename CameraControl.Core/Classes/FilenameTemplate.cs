@@ -73,7 +73,42 @@ namespace CameraControl.Core.Classes
                     var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTime.Now.Kind);
                     var unixTimestamp = System.Convert.ToInt64((DateTime.Now - date).TotalSeconds);
                     return unixTimestamp.ToString();
-
+                case "[DB Row 1]":
+                    return (session.ExternalData != null && session.ExternalData.Row1 != null)
+                        ? session.ExternalData.Row1
+                        : "";
+                case "[DB Row 2]":
+                    return (session.ExternalData != null && session.ExternalData.Row2 != null)
+                        ? session.ExternalData.Row2
+                        : "";
+                case "[DB Row 3]":
+                    return (session.ExternalData != null && session.ExternalData.Row3 != null)
+                        ? session.ExternalData.Row3
+                        : "";
+                case "[DB Row 4]":
+                    return (session.ExternalData != null && session.ExternalData.Row4 != null)
+                        ? session.ExternalData.Row4
+                        : "";
+                case "[DB Row 5]":
+                    return (session.ExternalData != null && session.ExternalData.Row5 != null)
+                        ? session.ExternalData.Row5
+                        : "";
+                case "[DB Row 6]":
+                    return (session.ExternalData != null && session.ExternalData.Row6 != null)
+                        ? session.ExternalData.Row6
+                        : "";
+                case "[DB Row 7]":
+                    return (session.ExternalData != null && session.ExternalData.Row7 != null)
+                        ? session.ExternalData.Row7
+                        : "";
+                case "[DB Row 8]":
+                    return (session.ExternalData != null && session.ExternalData.Row8 != null)
+                        ? session.ExternalData.Row8
+                        : "";
+                case "[DB Row 9]":
+                    return (session.ExternalData != null && session.ExternalData.Row9 != null)
+                        ? session.ExternalData.Row9
+                        : "";
             }
             return "";
         }

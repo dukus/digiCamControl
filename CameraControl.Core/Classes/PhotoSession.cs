@@ -301,15 +301,11 @@ namespace CameraControl.Core.Classes
 
         private string _barcode;
 
-        public string Barcode
-        {
-            get { return _barcode; }
-            set
-            {
-                _barcode = value;
-                NotifyPropertyChanged("Barcode");
-            }
-        }
+        public string Barcode { get; set; }
+
+        [XmlIgnore]
+        [JsonIgnore]
+        public ExternalData ExternalData { get; set; }
 
 
         private bool _writeComment;

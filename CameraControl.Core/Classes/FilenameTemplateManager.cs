@@ -58,6 +58,15 @@ namespace CameraControl.Core.Classes
             Templates.Add("[Date yyyy]", templatePharser);
             Templates.Add("[Date yyyy-MM]", templatePharser);
             Templates.Add("[Date MMM]", templatePharser);
+            Templates.Add("[DB Row 1]", templatePharser);
+            Templates.Add("[DB Row 2]", templatePharser);
+            Templates.Add("[DB Row 3]", templatePharser);
+            Templates.Add("[DB Row 4]", templatePharser);
+            Templates.Add("[DB Row 5]", templatePharser);
+            Templates.Add("[DB Row 6]", templatePharser);
+            Templates.Add("[DB Row 7]", templatePharser);
+            Templates.Add("[DB Row 8]", templatePharser);
+            Templates.Add("[DB Row 9]", templatePharser);
         }
 
         public string GetExample(string res, PhotoSession session, ICameraDevice device, string fileName)

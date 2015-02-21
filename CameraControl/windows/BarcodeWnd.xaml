@@ -20,13 +20,17 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox TextWrapping="NoWrap" Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="40" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.SelectAllOnFocus="True" Margin="3" />
+                <TextBox Name="TextBox"  TextWrapping="NoWrap" Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="40" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.SelectAllOnFocus="True" Margin="3"  KeyDown="TextBox_OnKeyDown"/>
+                <StackPanel Grid.Column="1">
+                    <CheckBox Content="{translation:TranslateExtension LabelCaptureAfterScan}" Margin="3" IsChecked="{Binding CaptureOnEnter}"/>
+                    <CheckBox Content="{translation:TranslateExtension LabelKeepWindowActive}" Margin="3" IsChecked="{Binding KeepActive}"/>
+                </StackPanel>
 
             </Grid>
         </GroupBox>
 
         <GroupBox Header="{translation:TranslateExtension LabelData}" Grid.Row="1">
-            <DataGrid ItemsSource="{Binding Data}"/>
+            <DataGrid ItemsSource="{Binding Data}" SelectedItem="{Binding SelectedRowData}"/>
         </GroupBox>
         <GroupBox Header="{translation:TranslateExtension SettingsToolTip}" Grid.Row="2">
             <Grid>
