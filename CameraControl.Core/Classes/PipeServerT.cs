@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using CameraControl.Devices;
@@ -74,7 +75,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 // Get the pipe
-                NamedPipeServerStream pipeServer = (NamedPipeServerStream) iar.AsyncState;
+                NamedPipeServerStream pipeServer = (NamedPipeServerStream)iar.AsyncState;
                 // End waiting for the connection
                 pipeServer.EndWaitForConnection(iar);
 
@@ -118,7 +119,7 @@ namespace CameraControl.Core.Classes
                                 return lines.ContainsKey("format") && lines["format"] == "json"
                                            ? JsonConvert.SerializeObject(ServiceProvider.Settings.DefaultSession,
                                                                          Formatting.Indented,
-                                                                         new JsonSerializerSettings() {})
+                                                                         new JsonSerializerSettings() { })
                                            : GetSessionData();
                             }
                         case "cameras":
@@ -130,7 +131,7 @@ namespace CameraControl.Core.Classes
                                 return lines.ContainsKey("format") && lines["format"] == "json"
                                            ? JsonConvert.SerializeObject(ServiceProvider.DeviceManager.ConnectedDevices,
                                                                          Formatting.Indented,
-                                                                         new JsonSerializerSettings() {})
+                                                                         new JsonSerializerSettings() { })
                                            : GetCamerasData();
                             }
                         default:
@@ -139,32 +140,55 @@ namespace CameraControl.Core.Classes
                 }
                 if (lines.ContainsKey("command"))
                 {
+                    if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
+                    {
+                        return ":;response:error;message:no camera is connected";
+                    }
+                    if (!lines.ContainsKey("serial"))
+                    {
+                        return ":;response:error;message:no serial as parameter";
+                    }
+                    var device = GetDevice(lines["serial"]);
+                    if (device == null)
+                    {
+                        return ":;response:error;message:No camera was found";
+                    }
                     switch (lines["command"])
                     {
                         case "capture":
                             {
-                                if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
-                                {
-                                    return ":;response:error;message:no camera is connected";
-                                }
-                                if (lines.ContainsKey("serial"))
-                                {
-                                    foreach (ICameraDevice device in ServiceProvider.DeviceManager.ConnectedDevices)
-                                    {
-                                        if (device.SerialNumber == lines["serial"])
-                                        {
-                                            Log.Debug("Start capture: " + device.SerialNumber);
-                                            var thread = new Thread(StartCapture);
-                                            thread.Start(device);
-                                            return ":;response:ok;";
-                                        }
-                                    }
-                                    return ":;response:error;message:No camera was found";
-                                }
-                                else
-                                {
-                                    return ":;response:error;message:no serial as parameter";
-                                }
+                                var thread = new Thread(StartCapture);
+                                thread.Start(device);
+                                return ":;response:ok;";
+                            }
+                            break;
+                        case "starliveview":
+                            {
+                                ServiceProvider.WindowsManager.ExecuteCommand(
+                                    WindowsCmdConsts.LiveViewWnd_Show, device);
+                                return ":;response:ok;";
+                            }
+                            break;
+                        case "captureliveview":
+                            {
+                                ServiceProvider.WindowsManager.ExecuteCommand(
+                                    CmdConsts.LiveView_Capture, device); 
+                                return ":;response:ok;";
+                            }
+                            break;
+                        case "manualfocus":
+                            {
+                                ServiceProvider.WindowsManager.ExecuteCommand(
+                                    CmdConsts.LiveView_ManualFocus + lines["step"], device); 
+                                return ":;response:ok;";
+                            }
+                            break;
+
+                        case "stopliveview":
+                            {
+                                ServiceProvider.WindowsManager.ExecuteCommand(
+                                    WindowsCmdConsts.LiveViewWnd_Hide, device);
+                                return ":;response:ok;";
                             }
                             break;
                     }
@@ -175,6 +199,11 @@ namespace CameraControl.Core.Classes
                 res = ":;response:error;message:" + exception.Message;
             }
             return res;
+        }
+
+        private ICameraDevice GetDevice(string serial)
+        {
+            return ServiceProvider.DeviceManager.ConnectedDevices.FirstOrDefault(device => device.SerialNumber == serial);
         }
 
         private void StartCapture(object o)
@@ -219,11 +248,11 @@ namespace CameraControl.Core.Classes
         private string GetSessionData()
         {
             string res = ":;response:session";
-            IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
+            IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
             foreach (PropertyInfo prop in props)
             {
-                if (prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) ||
-                    prop.PropertyType == typeof (bool))
+                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                    prop.PropertyType == typeof(bool))
                 {
                     var value = prop.GetValue(ServiceProvider.Settings.DefaultSession, null);
                     res += string.Format(";{0}:{1}", prop.Name.ToLower(), value);

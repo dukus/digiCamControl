@@ -1263,7 +1263,17 @@ namespace CameraControl.ViewModel
                 case CmdConsts.LiveView_Focus:
                     AutoFocus();
                     break;
-
+            }
+            if (cmd.StartsWith(CmdConsts.LiveView_ManualFocus))
+            {
+                try
+                {
+                    string step = cmd.Substring(CmdConsts.LiveView_ManualFocus.Length);
+                    SetFocus(Convert.ToInt32(step));
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
