@@ -67,7 +67,6 @@
   <string name="SDRamToolTip">Robienie zdjęć bezpośrednio do komputera bez korzystania z karty</string>
   <string name="CapturePhotoToolTip">Zrób zdjęcie</string>
   <string name="CapturePhotoNoAfToolTip">Zrób zdjęcie bez autofokusa</string>
-  <string name="BraketingToolTip">Ekspozycja</string>
   <string name="SettingsToolTip">Ustawienia</string>
   <string name="TimeLapseToolTip">Film poklatkowy</string>
   <string name="FullscreenToolTip">Pełny Ekran</string>
@@ -84,7 +83,6 @@
   <string name="SessionWindowTitle">Sesja [Dodaj/Usuń]</string>
   <string name="LiveViewWindowTitle">Podgląd na żywo</string>
   <string name="PresetEditWindowTitle">Edycja ustawień</string>
-  <string name="BraketingWindowTitle">Ekspozycja</string>
   <string name="EditTagWindowTitle">Tag [Dodaj/Usuń]</string>
   <string name="MultipleCameraWindowTitle">Obsługa wielu aparatów</string>
   <string name="SavePresetWindowTitle">Zapisz ustawienia</string>
@@ -111,7 +109,6 @@
   <string name="ButtonCreateMovie">Utwórz film</string>
   <string name="ButtonLocateLogFile">Lokalizacja pliku Log</string>
   <string name="LabelInterfaceLanguage">Jezyk programu:</string>
-  <string name="LabelDisableDriver">Wyłącz natywne sterowniki (nie zalecane)</string>
   <string name="LabelTheme">Motyw:</string>
   <string name="LabelGeneral">Ogólne</string>
   <string name="LabelPreview">Podgląd</string>
@@ -123,7 +120,6 @@
   <string name="LabelLIveViewImageFreeze">Podgląd na żywo zamrożenie obrazu w sek:</string>
   <string name="LabelRotateImage">Obróć obraz:</string>
   <string name="LabelDontLoadThumbs">Nie ładuj miniturek</string>
-  <string name="LabelFullscrenBack">Tło okna pełnego ekranu:</string>
   <string name="LabelTriggers">Wyzwalacze</string>
   <string name="LabelUseKeybordToTrigger">Użyj klawiatury, aby wyzwolić zdjęcie</string>
   <string name="LabelWebserver">Webserwer</string>
@@ -133,21 +129,29 @@
   <string name="LabelMediumFocusStep">Średni krok fokusa</string>
   <string name="LabelLargFocusStep">Duży krok fokusa</string>
   <string name="ReStartToolTip">Musisz ponownie uruchomić aplikację, dla tego, aby zmiany przyniosły efekt</string>
-  <string name="LabelSessonName">Nazwa sesji:</string>
   <string name="LabelFolder">Folder:</string>
   <string name="LabelFileNameTemplate">Nazwa pliku szablonu:</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Nazwa sesji\n$C - Licznik \n$E - Ekspozycja \n$X - Nazwa aparatu\n$D - Bieżąca data\n$UTime - Sygnatura czasu\n$Type - Typ pliku (Raw|Jpg) \n$B - Kod kreskowy\n$Tag1 - Zaznaczony tag 1\n$Tag2 - Zaznaczony tag 2\n$Tag3 - Zaznaczony tag 3\n$Tag4 - Zaznaczony tag 4</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Nazwa sesji
+$C - Licznik 
+$E - Ekspozycja 
+$X - Nazwa aparatu
+$D - Bieżąca data
+$UTime - Sygnatura czasu
+$Type - Typ pliku (Raw|Jpg) 
+$B - Kod kreskowy
+$Tag1 - Zaznaczony tag 1
+$Tag2 - Zaznaczony tag 2
+$Tag3 - Zaznaczony tag 3
+$Tag4 - Zaznaczony tag 4</string>
   <string name="LabelCounter">Licznik:</string>
   <string name="LabelUseOriginal">Użyj oryginalnej nazwy pliku danej przez aparat</string>
   <string name="LabelUseOriginalToolTip">Ta opcja jest współpracuje z sterownika WIA</string>
   <string name="LabelDontDownloadPhotos">Nie pobieraj zdjęć na PC</string>
-  <string name="LabelAlowFolderChange">Umożliwić zmianę folderu przy użyciu przeglądarki zdjęć</string>
   <string name="LabelTags">Tagi</string>
   <string name="LabelManualFocus">Ręczny fokus</string>
   <string name="LabelGrid">Siatka</string>
   <string name="LabelLvZoomRation">Powiększenie podglądu na żywo</string>
   <string name="LabelFocusStacking">Stosowanie fokusa</string>
-  <string name="LabelNoOfPhots">Liczba zdjęć</string>
   <string name="LabelFocusStep">Krok fokusa</string>
   <string name="LabelLuminosity">Światło</string>
   <string name="LabelExposureBracketing">Korekcja ekspozycji</string>
@@ -172,7 +176,6 @@
   <string name="LabelNumberOfPhotos">Ilość zdjęć</string>
   <string name="LabelDontAutofocusOnEveryCapture">Brak autofokusa w każdym przechwytywaniu</string>
   <string name="LabelCaptureInterval">Przedział zrzutu (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Długość filmu (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Ustawienia filmu</string>
   <string name="LabelVideoFormat">Format wideo</string>
   <string name="LabelOutputFile">Plik wynikowy</string>
@@ -195,14 +198,10 @@
   <string name="LabelVideoCodecProblem">Problem kodeka wideo</string>
   <string name="MsgPhotoTransferBegin">Przesyłanie zdjęć rozpoczęte</string>
   <string name="MsgPhotoTransferDone">Przesyłanie zdjęć wykonane</string>
-  <string name="MsgPhotoTransferError">Błąd transferu !\nWiadomość :{0}</string>
   <string name="MsgBulbModeNotSupported">Tryb Bulb nie obsługiwany!</string>
   <string name="MsgApplicationUpToDate">Aplikacja jest aktualna!</string>
   <string name="MsgUseSessionEditorTags">Użyj edytora sesji by określić tagi!</string>
-  <string name="MsgLastSessionCantBeDeleted">Ostatnia sesja nie może być usunięta</string>
   <string name="MsgStopTimeLapse">Film poklatkowy nie zakończony! Czy chcesz, zatrzymać film?</string>
-  <string name="MsgInstallXvidCodec">Kodeki Xvid nie zainstalowane! ⏎ Czy chcesz pobrać i zainstalować?</string>
-  <string name="MsgDeleteSessionQuestion">Czy chcesz kontynuować usuwanie sesji {0}? ⏎ Żadne pliki nie zostaną skasowane!</string>
   <string name="MsgBracketingDone">Ekspozycja zrobiona</string>
   <string name="MsgActionInProgress">Działanie w trakcie {0} / {1}</string>
   <string name="MenuFile">Plik</string>
@@ -244,7 +243,6 @@
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Typ detekcji ruchu</string>
   <string name="LabelTwoFramesDifferenceDetector">Detector różnicy dwóch ramek</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Prosty detektor modelowania tła</string>
   <string name="LabelSmallestBlockSize">Najmniejszy rozmiar bloku</string>
   <string name="ButtonHelp">Pomoc</string>
   <!--31/10/2012-->
@@ -281,7 +279,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Pobierz zdjęcia</string>
   <string name="LabelDeleteFilesAfterTransfer">Usuń pliki po przeniesieniu</string>
-  <string name="LabelAskForDelete">Przesłane pliki zostaną usunięte. ⏎ Czy chcesz kontynuować?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Błąd ustawienia pozycji ostrości</string>
   <string name="LabelErrorUnableFocus">Brak ostrości</string>
@@ -317,7 +314,6 @@
   <string name="LabelAdvanced">Zaawansowane</string>
   <string name="LabelUseParellelTransfer">Użyj równoległego transferu plików</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Wystąpił błąd aplikacji. ⏎ Proszę sprawdzić, czy dane są poprawne i powtórzyć czynność. Jeśli błąd wystąpi ponownie, nie wydaje się być bardziej poważna usterka w aplikacji, i lepiej go zamknąć ⏎ Błąd ⏎:. {0} ⏎ ⏎ Czy chcesz kontynuować ⏎ (jeśli przycisk Tak będzie kontynuować swojej pracy? jeśli klikniesz przycisk Nie aplikacja zostanie zamknięta)</string>
   <string name="LabelApplicationError">Błąd aplikacji</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 nie zainstalowany</string>
   <string name="LabelRestartTheApplication">Uruchom ponownie aplikację!</string>
@@ -356,7 +352,6 @@
   <string name="LabelTTLError">Błąd TTL</string>
   <string name="LabelNonCPULEnseError">Obiektyw bez procesora jest zamontowany i tryb ekspozycji nie jest ręczny</string>
   <string name="LabelImageInRAM">Jest obraz, którego nagranie docelowe to SDRAM.</string>
-  <string name="LabelNoCardInsertedError">Miejsce zapisu jest karta lub karta i SDRAM, ⏎ a karta nie jest włożona z uwalnianiem wyłączonia bez karty.</string>
   <string name="LabelCommandProcesingError">W trakcie przetwarzania polecenia fotografowania</string>
   <string name="LabelShoutingInProgress">Tryb fotografowania jest efektami.</string>
   <string name="LabelOverHeatedError">Podglądu na żywo nie można uruchomić, gdy temperatura wzrasta.</string>
@@ -402,7 +397,6 @@
   <string name="LabelStayOnTop2">Zawsze na wierzchu</string>
   <string name="LabelWriteSelectedTags">Zapisz tagi z selektora tagu</string>
   <string name="LabelClearCache">Wyczyść cache</string>
-  <string name="LabelShowMagnifierInFullSccreen">Pokaż powiększenie w pełnym ekranie</string>
   <string name="LabelDelayImageLoading">Opóźnienie ładowania obrazu</string>
   <string name="LabelShowOverlayFolder">Pokaż nakładkę folderu</string>
   <string name="LabelPHDGuiding">Przewodnik PHD</string>
@@ -431,4 +425,10 @@
   <string name="LabelSelectNone">Brak zaznaczenia</string>
   <string name="LabelSelectLiked">Zaznacz Polubione</string>
   <string name="LabelSelectUnLiked">Zaznacz niepolubione</string>
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Podgląd na żywo</string>
+  <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

@@ -100,18 +100,6 @@ namespace CameraControl.Panels
                         PhotoUtils.WaitForFile(filename);
                         File.Move(filename, newfilename);
                         ServiceProvider.Settings.SelectedBitmap.FileItem.SetFile(newfilename);
-                        //File.Copy(filename, newfilename);
-                        //File.Delete(filename);
-                        //Thread.Sleep(200);
-                        //int i =
-                        //    ServiceProvider.Settings.DefaultSession.Files.IndexOf(
-                        //        ServiceProvider.Settings.SelectedBitmap.FileItem);
-                        //FileItem item = new FileItem(newfilename);
-                        //ServiceProvider.Settings.DefaultSession.Files.Remove(
-                        //    ServiceProvider.Settings.SelectedBitmap.FileItem);
-                        //ServiceProvider.Settings.SelectedBitmap.FileItem.RemoveThumbs();
-                        //ServiceProvider.Settings.DefaultSession.Files.Insert(i, item);
-                        //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Select_Image, item);
                     }
                     catch (Exception exception)
                     {

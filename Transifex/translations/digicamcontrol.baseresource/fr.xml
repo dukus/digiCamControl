@@ -41,6 +41,13 @@
   <string name="[S]_SINGLE_AF_SERVO">[S] Single AF servo</string>
   <string name="[M]_MANUAL_FOCUS">[M] Mise au point manuelle</string>
   <string name="KELVIN">Kelvin</string>
+  <string name="ADOBE_RGB">Adobe RGB</string>
+  <string name="COLOR_SPACE">Espace colorimétrique</string>
+  <string name="14_BIT_RECORDING">Enregistrement 14 bits</string>
+  <string name="NEUTRAL">Neutre</string>
+  <string name="PICTURE_CONTROL">Contrôle de l\'image</string>
+  <string name="LOSSLESS_COMPRESSED_RAW">Compression RAW sans perte</string>
+  <string name="RAW_COMPRESSION">Compression raw</string>
   <!--End Property values-->
   <string name="Mode">Mode</string>
   <string name="Iso">_ISO</string>
@@ -112,7 +119,7 @@
   <string name="LabelLIveViewImageFreeze">Gel des images Live View en secondes :</string>
   <string name="LabelRotateImage">Pivoter l\'image :</string>
   <string name="LabelDontLoadThumbs">Ne pas charger les vignettes</string>
-  <string name="LabelFullscrenBack">Arrière-plan de la fenêtre en plein écran</string>
+  <string name="LabelFullscrenBack">Arrière-plan de la fenêtre plein écran :</string>
   <string name="LabelTriggers">Déclencheur</string>
   <string name="LabelUseKeybordToTrigger">Utiliser le clavier pour déclencher</string>
   <string name="LabelWebserver">Serveur Web</string>
@@ -122,20 +129,30 @@
   <string name="LabelMediumFocusStep">Incrément moyen de mise au point</string>
   <string name="LabelLargFocusStep">Grand incrément de mise au point</string>
   <string name="ReStartToolTip">Vous devez redémarrer l\'application pour que les changements soient effectifs</string>
-  <string name="LabelSessonName">Nom de la session :</string>
+  <string name="LabelSessonName">Nom de la session</string>
   <string name="LabelFolder">Répertoire :</string>
   <string name="LabelFileNameTemplate">Modèle du nom de fichier :</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Nom de la session 
+$C - Compteur 
+$E - Compensation de l\'exposition 
+$X - Nom de l\'appareil
+$D - Date courante
+$UTime - Unix time stamp
+$Type - Type de fichier (Raw/Jpg) 
+$B - Code barre
+$Tag1 - Tag sélectionné 1
+$Tag2 - Tag sélectionné 2
+$Tag3 - Tag sélectionné 3
+$Tag4 - Tag sélectionné 4</string>
   <string name="LabelCounter">Compteur</string>
   <string name="LabelUseOriginal">Utiliser le nom de fichier original défini par le boîtier</string>
   <string name="LabelUseOriginalToolTip">Cette option ne fonctionne pas avec le pilote WIA</string>
   <string name="LabelDontDownloadPhotos">Ne pas télécharger les photo sur l\'ordinateur</string>
-  <string name="LabelAlowFolderChange">Permettre de changer de répertoire avec le navigateur d\'image</string>
   <string name="LabelTags">Étiquettes</string>
   <string name="LabelManualFocus">Mise au point manuelle</string>
   <string name="LabelGrid">Grille</string>
   <string name="LabelLvZoomRation">Facteur de zoom Live View</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
-  <string name="LabelNoOfPhots">Nombre de photos</string>
   <string name="LabelFocusStep">Incrément de mise au point</string>
   <string name="LabelLuminosity">Luminosité</string>
   <string name="LabelExposureBracketing">Bracketing d\'exposition</string>
@@ -160,7 +177,6 @@
   <string name="LabelNumberOfPhotos">Nombre de photos</string>
   <string name="LabelDontAutofocusOnEveryCapture">Pas d\'autofocus à chaque prise de vue</string>
   <string name="LabelCaptureInterval">Intervalle des prises de vues (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Durée de la vidéo</string>
   <string name="LabelMovieSettings">Ajustements vidéo</string>
   <string name="LabelVideoFormat">Format vidéo</string>
   <string name="LabelOutputFile">Fichier de sortie</string>
@@ -186,7 +202,6 @@
   <string name="MsgBulbModeNotSupported">Le mode Bulb n\'est pas supporté !</string>
   <string name="MsgApplicationUpToDate">Votre application est à jour !</string>
   <string name="MsgUseSessionEditorTags">Utiliser l\'éditeur de session pour définir des étiquettes !</string>
-  <string name="MsgLastSessionCantBeDeleted">La dernière session ne peut pas être supprimée</string>
   <string name="MsgStopTimeLapse">Le laps de temps n\'est pas terminé ! Voulez vous l\'arrêter ?</string>
   <string name="MsgBracketingDone">Bracketing terminé</string>
   <string name="MsgActionInProgress">Action en cours {0}/{1}</string>
@@ -229,7 +244,6 @@
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Type de détection de mouvement</string>
   <string name="LabelTwoFramesDifferenceDetector">Détection de différence entre deux images</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Détection Simple modélisation de l\'arrière plan</string>
   <string name="LabelSmallestBlockSize">Plus petite taille de bloc</string>
   <string name="ButtonHelp">Aide</string>
   <!--31/10/2012-->
@@ -370,7 +384,6 @@
   <string name="LabelFileName">Nom du fichier</string>
   <string name="LabelSet">Paramétrer</string>
   <string name="LabelTagSelector">Sélecteur de tag</string>
-  <string name="LabelShowMagnifierInFullSccreen">Mettre la loupe en plein écran</string>
   <string name="LabelPHDGuiding">Guidage PHD</string>
   <string name="LabelAutomaticallyGuiding">Guidage PHD automatique après prise de vue</string>
   <string name="LabelAutoRotate">Rotation automatique</string>
@@ -391,4 +404,6 @@
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">Mise au point Live View</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

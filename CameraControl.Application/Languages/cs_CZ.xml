@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Seriové snímání</string>
+  <string name="AUTO_ISO">Auto ISO</string>
+  <string name="ON">ON</string>
+  <string name="OFF">OFF</string>
+  <string name="FLASH">Blesk</string>
+  <string name="NORMAL">Normální</string>
+  <string name="SELF_TIMER">Časovač (samospoušť)</string>
+  <string name="QUICK_RESPONSE_REMOTE">Okamžitá odezda spouště</string>
+  <string name="2S_DELAYED_REMOTE">Dvouvteřinové spoždění</string>
+  <string name="QUIET_SHOOTING">Potiché snímání</string>
+  <string name="FLASH_PROHIBITED">Zakázat blesk</string>
+  <string name="RED_EYE_REDUCTION">Redukce červených očí</string>
+  <string name="AUTO">Auto</string>
+  <string name="DAYLIGHT">Denní světlo</string>
+  <string name="FLUORESCENT_">Fluorescentní</string>
+  <string name="CLOUDY">Oblačno</string>
+  <string name="SHADE">Stín</string>
+  <string name="CUSTOM">Vlastní</string>
+  <string name="[M]_MANUAL_FOCUS">[M] Manuální ostření</string>
+  <string name="KELVIN">Kelvin</string>
+  <string name="WHITE_FLUORESCENT_LAMP">Bílá fluorescentní lampa</string>
+  <string name="ADOBE_RGB">Adobe RGB</string>
+  <string name="COLOR_SPACE">Barevný prostor</string>
+  <string name="14_BIT_RECORDING">14-ti bitový záznam</string>
+  <string name="NEUTRAL">Neutrální</string>
+  <string name="LOSSLESS_COMPRESSED_RAW">Bezeztrátová komprese RAW</string>
+  <string name="RAW_COMPRESSION">Komprese RAW</string>
+  <!--End Property values-->
+  <string name="Mode">Mód</string>
+  <string name="Iso">_ISO</string>
+  <string name="ShutterSpeed">_Rychlost závěrky</string>
+  <string name="Aperture">_Clona</string>
+  <string name="WhiteBalance">_Vyvážení bílé</string>
+  <string name="Compression">_Komprese</string>
+  <string name="FocusMode">_</string>
+  <string name="Battery">Baterie</string>
+  <string name="SDRamToolTip">Ukládat fotografie přímo do PC bez použití SD karty</string>
+  <string name="SettingsToolTip">Nastavení</string>
+  <string name="TimeLapseToolTip">TimeLapse</string>
+  <string name="FullscreenToolTip">Celá obrazovka</string>
+  <string name="LiveViewToolTip">Živý náhled</string>
+  <string name="SessionAdd">Přidat</string>
+  <string name="SessionEdit">Upravit</string>
+  <string name="SessionDel">Vymazat</string>
+  <string name="SettingsWindowTitle">Nastavení</string>
+  <string name="LiveViewWindowTitle">Živý náhled</string>
+  <string name="MultipleCameraWindowTitle">Podpora více fotoaparátů</string>
+  <string name="ButtonOk">OK</string>
+  <string name="ButtonCancel">Zrušit</string>
+  <string name="ButtonAdd">Přidat</string>
+  <string name="ButtonDelete">Vymazat</string>
+  <string name="ButtonEdit">Upravit</string>
+  <string name="ButtonAutoFocus">_Automatické ostření</string>
+  <string name="ButtonStart">Start</string>
+  <string name="ButtonPreview">Náhled</string>
+  <string name="ButtonStop">Stop</string>
+  <string name="ButtonClose">Zavřít</string>
+  <string name="ButtonSave">Uložit</string>
+  <string name="LabelPreview">Náhled</string>
+  <string name="LabelPlaySound">Přehrát zvuk po </string>
+  <string name="LabelAutoPreview">Automatický náhled</string>
+  <string name="LabelPreviewTime">Čas náhledu ve vteřinách:</string>
+  <string name="LabelRotateImage">Rotovat obrázek:</string>
+  <string name="LabelDontLoadThumbs">Nenahrávat náhledy</string>
+  <string name="LabelTriggers">Spouště</string>
+  <string name="LabelFocusAndLiveview">Živý náhled</string>
+  <string name="LabelSmallFocusSstep">Malý krok zaostření</string>
+  <string name="LabelMediumFocusStep">Střední krok zaostření</string>
+  <string name="LabelLargFocusStep">Velký krok zaostření</string>
+  <string name="ReStartToolTip">Po změně tohoto nastavení je potřeba restartovat program</string>
+  <string name="LabelFolder">Složka:</string>
+  <string name="LabelDontDownloadPhotos">Nestahovat fotografie do PC</string>
+  <string name="LabelManualFocus">Manuální ostření</string>
+  <string name="LabelGrid">Mřížka</string>
+  <string name="LabelNoOfPhots">Číslo fotografie</string>
+  <string name="LabelFocusStep">Krok zaostření</string>
+  <string name="LabelExposureBracketing">Expoziční bracketing</string>
+  <string name="LabelDelay">Zpoždění (msec)</string>
+  <string name="LabelConnectedCameras">Připojené fotoaparáty</string>
+  <string name="LabelTimeLapse">TimeLapse</string>
+  <string name="LabelNumberOfPhotos">Počet fotografií</string>
+  <string name="LabelCaptureInterval">Interval snímání (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">Délka videa (HH:MM:SS)</string>
+  <string name="LabelMovieSettings">Nastavení videa</string>
+  <string name="LabelVideoFormat">Formát videa</string>
+  <string name="LabelFps">Fps</string>
+  <string name="MsgBulbModeNotSupported">BULB není podporován!</string>
+  <string name="MsgApplicationUpToDate">Váš program je zcela aktuální!</string>
+  <string name="MenuFile">_Soubor</string>
+  <string name="MenuConnectedCameras">Připojené fotoaparáty</string>
+  <string name="MenuExit">Exit</string>
+  <string name="MenuMultipleCamera">Podpora více fotoaparátů</string>
+  <string name="MenuPresetsLoad">Nahrát</string>
+  <string name="MenuPresetsSave">Uložit</string>
+  <string name="MenuPresetsEdit">Upravit</string>
+  <string name="MenuCheckForUpdate">Zkontrolovat nové aktualizace</string>
+  <string name="MenuLayoutNormal">Normální</string>
+  <string name="MenuLayoutGrid">Mřížka</string>
+  <string name="MenuProperties">Valstnosti</string>
+  <!--15/10/2012-->
+  <!--22/10/2012-->
+  <!--25/10/2012-->
+  <!--26/10/2012-->
+  <!--29/10/2012-->
+  <!--31/10/2012-->
+  <string name="LabelMenu">Menu</string>
+  <!--03/11/2012-->
+  <string name="MenuForum">Forum</string>
+  <!--07/11/2012-->
+  <!--08/11/2012-->
+  <string name="LabelCardProtected">Paměťová karta je chráněna před zápisem</string>
+  <!--14/11/2012-->
+  <!--18/11/2012-->
+  <!--20/11/2012-->
+  <string name="LabelExport">Export</string>
+  <!--21/11/2012-->
+  <!--25/11/2012-->
+  <!--26/11/2012-->
+  <!--28/11/2012-->
+  <!--30/11/2012-->
+  <string name="LabelTransferItem1">1. Uložit pouze do PC</string>
+  <string name="LabelTransferItem2">2. Uložit pouze do fotoaparátu</string>
+  <string name="LabelTransferItem3">3. Uložit do PC i do fotoaparátu</string>
+  <!--05/12/2012-->
+  <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">Zobrazit ostřící body</string>
+  <string name="LabelSelect">Vybrat</string>
+  <!--16/12/2012-->
+  <string name="LabelRotate90">Rotovat o 90 stupňů</string>
+  <string name="LabelRotate180">Rotovat o 180 stupňů</string>
+  <string name="LabelRotate270">Rotovat o 270 stupňů</string>
+  <!--04/01/2013-->
+  <!--05/01/2013-->
+  <!--07/01/2013-->
+  <!--12/01/2013-->
+  <string name="LabelAdvanced">Pokročilé</string>
+  <!--19/01/2013-->
+  <string name="LabelRestartTheApplication">Restartujte aplikaci!</string>
+  <string name="LabelApplicationAlreadyRunning">Aplikace je již spuštěná</string>
+  <string name="LabelStartCapture">Zahájit snímání</string>
+  <string name="LabelStopCapture">Zastavit snímání</string>
+  <string name="LabelCaptureTime">Snímací čas (sec)</string>
+  <string name="LabelTimeBetweenShots">Prodleva mezi snímky</string>
+  <string name="LabelDontAutofocus">Nepoužít automatické zaostření</string>
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <string name="LabelSelected">Vybrané</string>
+  <!--31/01/2013-->
+  <string name="LabelRuleOfThirds">Pravidlo třetin</string>
+  <string name="LabelComboGrid">Mřížka</string>
+  <string name="LabelDiagonal">Diagonály</string>
+  <!--13/03/2013-->
+  <string name="LabelTools">Nástroje</string>
+  <!--17/03/2012-->
+  <string name="LabelMFError">Fotoaparát je nastaven na manuální ostření MF</string>
+  <!--28/03/2012-->
+  <string name="LabelBulbError">Bulb error</string>
+  <string name="LabelTTLError">TTL error</string>
+  <string name="LabelCardProtectedError">Paměťová karta je chráněna před zápisem</string>
+  <!--07/05/2013-->
+  <string name="LabelDevices">Zařízení</string>
+  <string name="LabelDeviceSettings">Nastavení zařízení</string>
+  <string name="LabelAvailableDevices">Dostupná zařízení</string>
+  <string name="LabelStartLiveView">Spustit živý náhled</string>
+  <string name="LabelBrightness">Jas</string>
+  <!--04/07/2013-->
+  <string name="LabelExif">Exif</string>
+  <string name="LabelImageProperties">Vlastnosti obrázku</string>
+  <string name="LabelFileName">Název souboru</string>
+  <string name="LabelComment">Komentář</string>
+  <string name="LabelClearCache">Vyčistit cache</string>
+  <string name="LabelCountDown">Odpočet</string>
+  <string name="LabelLiveViewRotation">Rotace živého náhledu</string>
+  <string name="LabelAutoRotate">Automatická rotace</string>
+  <string name="LabelReset">Reset</string>
+  <!--17/11/2013-->
+  <string name="LabelSend">Odeslat</string>
+  <string name="LabelLogMessage">Zpráva vývojářům digiCamControl:</string>
+  <string name="LabelFullscreen">Celá obrazovka</string>
+  <string name="LabelSelection">Výběr</string>
+  <string name="LabelSelectAll">Vybrat vše</string>
+  <!--19/01/2014-->
+  <string name="LabelError">Error</string>
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Živý náhled</string>
+  <!--17.05.2014-->
+  <string name="LabelHistogram">Histogram</string>
+  <string name="LabelMetadata">Metadata</string>
+  <string name="LabelPlay">Přehrát</string>
+  <string name="LabelPause">Pozastavit</string>
+  <string name="LabelLoop">Smyčka</string>
+  <string name="LabelPlayVideo">Přehrát video</string>
+  <string name="LabelErrorEmail">Váše emailová adresa (pokud chcete dostat zpětnou vazbu)</string>
+  <!--//20/08/2014-->
+  <string name="LabelStepSmall">Malý krok</string>
+  <string name="LabelStepMedium">Střední krok</string>
+  <string name="LabelStepLarge">Velký krok</string>
+  <string name="LabelActivate">Aktivovat</string>
+  <!--20/08/2014-->
+  <string name="LabelOverlayTransparency">Průhlednost</string>
+  <string name="LabelPrint">Tisk</string>
+  <string name="LabelMarginBetweenImages">Okraj</string>
+  <string name="LabelRotate">Rotovat</string>
+  <string name="LabelShowSecondary ">Zobrazit na druhém monitoru</string>
+</resources>

@@ -40,17 +40,14 @@
   <string name="SDRamToolTip">Capturar imagens directamente para o PC sem cartão de memória</string>
   <string name="CapturePhotoToolTip">Captura </string>
   <string name="CapturePhotoNoAfToolTip">Captura sem focagem</string>
-  <string name="BraketingToolTip">Braketing</string>
   <string name="SettingsToolTip">Definições</string>
   <string name="TimeLapseToolTip">Time lapse</string>
-  <string name="FullscreenToolTip">Ecrã inteiro</string>
   <string name="SelectTagsToolTip">Seleccione tags </string>
   <string name="AboutToolTip">Sobre</string>
   <string name="SessionAdd">Adicione </string>
   <string name="SessionEdit">Editar</string>
   <string name="SessionDel">Eliminar </string>
   <string name="SettingsWindowTitle">Definições </string>
-  <string name="BraketingWindowTitle">Braketing</string>
   <string name="EditTagWindowTitle">Tag [adicionar/editar]</string>
   <string name="MultipleCameraWindowTitle">Suporte multi-câmara </string>
   <string name="SavePresetWindowTitle">salvar predefinições</string>
@@ -75,7 +72,6 @@
   <string name="ButtonCreateMovie">Criar filme</string>
   <string name="ButtonLocateLogFile">Localizar ficheiro log</string>
   <string name="LabelInterfaceLanguage">Linguagem do interface : </string>
-  <string name="LabelDisableDriver">Desactivar drivers nativos (não recomendado) </string>
   <string name="LabelTheme">Tema :</string>
   <string name="LabelGeneral">Geral</string>
   <string name="LabelPreview">Pré-visualizar </string>
@@ -91,7 +87,6 @@
   <string name="LabelTags">Metadatas</string>
   <string name="LabelManualFocus">Focagem Manual</string>
   <string name="LabelGrid">Grelha </string>
-  <string name="LabelNoOfPhots">No. de fotografias</string>
   <string name="LabelFocusStep">Passos de focagem</string>
   <string name="LabelLuminosity">Luminosidade </string>
   <string name="LabelPresetBracketing">Predefinição de bracketing</string>
@@ -112,7 +107,6 @@
   <string name="LabelNumberOfPhotos">Número de fotografias </string>
   <string name="LabelDontAutofocusOnEveryCapture">Não focar em todos os disparos </string>
   <string name="LabelCaptureInterval">Intervalo de captura (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Duração do filme (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Definições do filme </string>
   <string name="LabelVideoFormat">Formato de vídeo </string>
   <string name="LabelOutputFile">Ficheiro de saída </string>
@@ -135,12 +129,9 @@
   <string name="LabelVideoCodecProblem">Problema com o codec de vídeo </string>
   <string name="MsgPhotoTransferBegin">Inicio de transferência de fotografias </string>
   <string name="MsgPhotoTransferDone">Transferência de fotografias finalizada </string>
-  <string name="MsgPhotoTransferError">Erro de Transferência !⏎ Mensagem :{0}</string>
   <string name="MsgBulbModeNotSupported">Modo Bulb não suportado </string>
   <string name="MsgApplicationUpToDate">Aplicação está actualizada </string>
-  <string name="MsgLastSessionCantBeDeleted">Ultima sessão não pode ser apagada </string>
   <string name="MsgStopTimeLapse">O Timelapse não acabou! Pretende parar o Timelapse ?</string>
-  <string name="MsgInstallXvidCodec">Codec Xvid não instalado !⏎ Pretende fazer o download e instalar ?</string>
   <string name="MsgBracketingDone">Bracketing Finalizado</string>
   <string name="MsgActionInProgress">Acção em progresso {0}/{1}</string>
   <string name="MenuFile">_Ficheiro</string>
@@ -205,7 +196,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Download de fotografias</string>
   <string name="LabelDeleteFilesAfterTransfer">Eliminar ficheiros depois de transferidos </string>
-  <string name="LabelAskForDelete">Ficheiros transferidos  vão ser eliminados.⏎ Quer continuar ?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Erro a configurar o ponto de foco </string>
   <string name="LabelErrorUnableFocus">Incapaz de focar </string>
@@ -269,4 +259,9 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

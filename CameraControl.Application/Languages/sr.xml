@@ -10,9 +10,7 @@
   <string name="Compression">Kompresija</string>
   <string name="FocusMode">_Fokus Mod</string>
   <string name="Battery">Baterija</string>
-  <string name="BraketingToolTip">Braketing</string>
   <string name="SettingsToolTip">Podešavanja</string>
-  <string name="FullscreenToolTip">Pun ekran</string>
   <string name="LiveViewToolTip">Živi prikaz</string>
   <string name="Session">Sesija</string>
   <string name="SessionAdd">Dodaj</string>
@@ -21,7 +19,6 @@
   <string name="SettingsWindowTitle">Podešavanja</string>
   <string name="SessionWindowTitle">Sesija [Dodaj/Uredi]</string>
   <string name="LiveViewWindowTitle">Živi prikaz</string>
-  <string name="BraketingWindowTitle">Braketing</string>
   <string name="MultipleCameraWindowTitle">Podrška za više uredjaja</string>
   <string name="ButtonOk">Uredu</string>
   <string name="ButtonCancel">Otkazi</string>
@@ -74,7 +71,6 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Preuzmi fotografije</string>
   <string name="LabelDeleteFilesAfterTransfer">Obriši datoteke posle prenosa</string>
-  <string name="LabelAskForDelete">Prenesene datoteke biće obrisane.⏎ Da li želite da nastavite ?</string>
   <!--26/11/2012-->
   <!--28/11/2012-->
   <!--30/11/2012-->
@@ -97,4 +93,10 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <string name="LabelSettingsLiveView">Živi prikaz</string>
+  <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

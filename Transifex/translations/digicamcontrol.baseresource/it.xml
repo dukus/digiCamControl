@@ -67,7 +67,6 @@
   <string name="SDRamToolTip">Cattura le immagini direttamente sul PC senza usare la scheda di memoria</string>
   <string name="CapturePhotoToolTip">Scatta foto</string>
   <string name="CapturePhotoNoAfToolTip">Scatta foto senza autofocus</string>
-  <string name="BraketingToolTip">Bracketing</string>
   <string name="SettingsToolTip">Impostazioni</string>
   <string name="TimeLapseToolTip">Time lapse</string>
   <string name="FullscreenToolTip">Schermo intero</string>
@@ -84,7 +83,6 @@
   <string name="SessionWindowTitle">Sessione [Agg./Mod.]</string>
   <string name="LiveViewWindowTitle">Live View</string>
   <string name="PresetEditWindowTitle">Modifica Preset</string>
-  <string name="BraketingWindowTitle">Bracketing</string>
   <string name="EditTagWindowTitle">Tag [Agg./Mod.]</string>
   <string name="MultipleCameraWindowTitle">Supporto fotocamera multipla</string>
   <string name="SavePresetWindowTitle">Salva Preset</string>
@@ -123,7 +121,6 @@
   <string name="LabelLIveViewImageFreeze">Permanenza immagine Live View in sec:</string>
   <string name="LabelRotateImage">Ruota immagine:</string>
   <string name="LabelDontLoadThumbs">Non caricare le anteprime</string>
-  <string name="LabelFullscrenBack">Sfondo finestra schermo intero :</string>
   <string name="LabelTriggers">Trigger</string>
   <string name="LabelUseKeybordToTrigger">Usa la tastiera come comando di scatto</string>
   <string name="LabelWebserver">Server web</string>
@@ -163,13 +160,13 @@ $Tag4 - Tag 4 selezionato</string>
   <string name="LabelUseOriginal">Usa il nome file originale dato dalla fotocamera</string>
   <string name="LabelUseOriginalToolTip">Questa opzione non funziona con il driver WIA</string>
   <string name="LabelDontDownloadPhotos">Non scaricare le foto sul PC</string>
-  <string name="LabelAlowFolderChange">Consenti modifica cartella utilizzando il browser immagini</string>
+  <string name="LabelAlowFolderChange">Consenti di cambiare cartella usando il browser immagini</string>
   <string name="LabelTags">Tag</string>
   <string name="LabelManualFocus">Messa a fuoco manuale</string>
   <string name="LabelGrid">Griglia</string>
   <string name="LabelLvZoomRation">Rapporto zoom Lv</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
-  <string name="LabelNoOfPhots">Num. di foto</string>
+  <string name="LabelNoOfPhots">N. di foto</string>
   <string name="LabelFocusStep">Passo di messa a fuoco</string>
   <string name="LabelLuminosity">Luminosità</string>
   <string name="LabelExposureBracketing">Raggruppamento esposizione</string>
@@ -194,7 +191,7 @@ $Tag4 - Tag 4 selezionato</string>
   <string name="LabelNumberOfPhotos">Numero di fotografie</string>
   <string name="LabelDontAutofocusOnEveryCapture">Non mettere a fuoco ad ogni scatto</string>
   <string name="LabelCaptureInterval">Intervallo di scatto (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Lunghezza filmato (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">Durata del video (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Impostazioni filmato</string>
   <string name="LabelVideoFormat">Formato video</string>
   <string name="LabelOutputFile">File di output</string>
@@ -223,8 +220,8 @@ $Tag4 - Tag 4 selezionato</string>
   <string name="MsgUseSessionEditorTags">Utilizzare l\'editor di sessione per definire i Tag!</string>
   <string name="MsgLastSessionCantBeDeleted">L\'ultima sessione non può essere eliminata</string>
   <string name="MsgStopTimeLapse">Il TimeLapse non è finito! Vuoi terminare il TimeLapse?</string>
-  <string name="MsgInstallXvidCodec">Codec Xvid non installato!\nVuoi scaricarlo ed installarlo?</string>
-  <string name="MsgDeleteSessionQuestion">Vuoi proseguire a cancellare la sessione {0} ?\nNessun file verrà eliminato!</string>
+  <string name="MsgInstallXvidCodec">Xvid codec non è istallata!\nVuoi scaricarlo ed installarlo?</string>
+  <string name="MsgDeleteSessionQuestion">Vuoi proseguire a cancellare la sessione {0} ?\nNessun file verrà eliminato !</string>
   <string name="MsgBracketingDone">Bracketing fatto</string>
   <string name="MsgActionInProgress">Attività in progresso {0}/{1}</string>
   <string name="MenuFile">_File</string>
@@ -266,7 +263,6 @@ $Tag4 - Tag 4 selezionato</string>
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Tipo rilevazione di movimento</string>
   <string name="LabelTwoFramesDifferenceDetector">Rilevatore differenza tra due fotogrammi</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Rilevatore di semplice modello di sfondo</string>
   <string name="LabelSmallestBlockSize">Dimensione minima blocco</string>
   <string name="ButtonHelp">Aiuto</string>
   <!--31/10/2012-->
@@ -454,7 +450,6 @@ $Tag4 - Tag 4 selezionato</string>
   <string name="LabelSelectLiked">Seleziona i Preferiti</string>
   <string name="LabelSelectUnLiked">Seleziona i Non preferiti</string>
   <!--19/01/2014-->
-  <string name="LabelLockNearFar">Individuare il punto di messa a fuoco più vicino e quello più lontano</string>
   <string name="LabelError">Errore</string>
   <string name="LabelChangelog">Log modifiche</string>
   <!--27/02/2014-->
@@ -487,4 +482,6 @@ $Tag4 - Tag 4 selezionato</string>
   <string name="LabelRefreshSession">Aggiorna l\'elenco dei file</string>
   <string name="LabelErrorEmail">Il tuo indirizzo di email (se vuoi ricevere risposta)</string>
   <string name="LabelApertureBracketing">Bracketing mediante diaframma</string>
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

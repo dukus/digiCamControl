@@ -56,10 +56,8 @@
   <string name="SDRamToolTip">Tag billede direkte uden brug af kort</string>
   <string name="CapturePhotoToolTip">Tag billede</string>
   <string name="CapturePhotoNoAfToolTip">Tag billede uden autofokus</string>
-  <string name="BraketingToolTip">Bracketing</string>
   <string name="SettingsToolTip">Indstillinger</string>
   <string name="TimeLapseToolTip">Tidsforkortelse</string>
-  <string name="FullscreenToolTip">Fuldskærm</string>
   <string name="LiveViewToolTip">LiveView</string>
   <string name="BrowseSessionsToolTip">Gennemse sessioner</string>
   <string name="SelectTagsToolTip">Vælg Tags</string>
@@ -73,7 +71,6 @@
   <string name="SessionWindowTitle">Sæssion [Tilføj/Rediger]</string>
   <string name="LiveViewWindowTitle">LiveView</string>
   <string name="PresetEditWindowTitle">Rediger Preset</string>
-  <string name="BraketingWindowTitle">Braketing</string>
   <string name="EditTagWindowTitle">Tag [Tilføj/Rediger]</string>
   <string name="MultipleCameraWindowTitle">Multi kamera understøttelse</string>
   <string name="SavePresetWindowTitle">Gem Preset</string>
@@ -100,7 +97,6 @@
   <string name="ButtonCreateMovie">Opret film</string>
   <string name="ButtonLocateLogFile">Lokaliser log fil</string>
   <string name="LabelInterfaceLanguage">Interface sprog</string>
-  <string name="LabelDisableDriver">Deaktiver native drivere (Ikke anbefalet)</string>
   <string name="LabelTheme">Tema:</string>
   <string name="LabelGeneral">Generelt</string>
   <string name="LabelPreview">Eksempel</string>
@@ -112,7 +108,6 @@
   <string name="LabelLIveViewImageFreeze">Frys billede i liveview i sekunder:</string>
   <string name="LabelRotateImage">Roter billede:</string>
   <string name="LabelDontLoadThumbs">Hent ikke miniature billeder</string>
-  <string name="LabelFullscrenBack">Fuldskærms vindue baggrund</string>
   <string name="LabelTriggers">Triggere</string>
   <string name="LabelUseKeybordToTrigger">Brug tastatur til at tage billede</string>
   <string name="LabelWebserver">Webserver</string>
@@ -122,20 +117,17 @@
   <string name="LabelMediumFocusStep">Medium fokus skridt</string>
   <string name="LabelLargFocusStep">Stort forkus skridt</string>
   <string name="ReStartToolTip">Du skal genstarte applikationen for ændringerne tages i brug</string>
-  <string name="LabelSessonName">Sæssions navn:</string>
   <string name="LabelFolder">Mappe: </string>
   <string name="LabelFileNameTemplate">Filnavn skabelon:</string>
   <string name="LabelCounter">Tæller</string>
   <string name="LabelUseOriginal">Brug originale filnavn givet af kameraet</string>
   <string name="LabelUseOriginalToolTip">Denne option virker ikke med WIA driver</string>
   <string name="LabelDontDownloadPhotos">Donwload ikke fotos til PC</string>
-  <string name="LabelAlowFolderChange">Tillad skift af mappesti med billedbrowseren</string>
   <string name="LabelTags">Tags</string>
   <string name="LabelManualFocus">Manuel Fokus</string>
   <string name="LabelGrid">Gitter</string>
   <string name="LabelLvZoomRation">Liveview zoom ratio</string>
   <string name="LabelFocusStacking">Focus stacking</string>
-  <string name="LabelNoOfPhots">Antal af fotos</string>
   <string name="LabelFocusStep">Fokus trin</string>
   <string name="LabelLuminosity">Luminans</string>
   <string name="LabelExposureBracketing">Eksponerings bracketing</string>
@@ -160,7 +152,6 @@
   <string name="LabelNumberOfPhotos">Antal fotos</string>
   <string name="LabelDontAutofocusOnEveryCapture">fokuser ikke ved hver eksponering</string>
   <string name="LabelCaptureInterval">Exponerings interval (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Film længde (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Film indstillinger</string>
   <string name="LabelVideoFormat">Video format</string>
   <string name="LabelOutputFile">Output fil</string>
@@ -186,7 +177,6 @@
   <string name="MsgBulbModeNotSupported">Bulb modus ikke understøttet</string>
   <string name="MsgApplicationUpToDate">Applikationen er uptodate</string>
   <string name="MsgUseSessionEditorTags">Brug sæssionseditor til at definere tags !</string>
-  <string name="MsgLastSessionCantBeDeleted">Sidst sæssion kan ikke slettes</string>
   <string name="MsgStopTimeLapse">Timelapse er ikke færdig! Vil du stoppe denne timelapse ?</string>
   <string name="MsgBracketingDone">Bracketing færdig</string>
   <string name="MsgActionInProgress">Handling i gang {0} / {1}</string>
@@ -229,7 +219,6 @@
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Bevælgelssensor type</string>
   <string name="LabelTwoFramesDifferenceDetector">Sammenlign to billeder</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Simepl baggrund modelerings detektor</string>
   <string name="LabelSmallestBlockSize">Mindste blokstørrelse</string>
   <string name="ButtonHelp">Hjælp</string>
   <!--31/10/2012-->
@@ -354,4 +343,6 @@
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">LiveView</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

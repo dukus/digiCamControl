@@ -16,10 +16,8 @@
   <string name="SDRamToolTip">Ghi hình ảnh trực tiếp vào máy tính mà không cần sử dụng thẻ nhớ</string>
   <string name="CapturePhotoToolTip">Ghi hình hình chụp</string>
   <string name="CapturePhotoNoAfToolTip">Ghi hình hình chụp không có phần tập trung tự động</string>
-  <string name="BraketingToolTip">Braketing</string>
   <string name="SettingsToolTip">Thiết lập</string>
   <string name="TimeLapseToolTip">Thời gian trôi qua</string>
-  <string name="FullscreenToolTip">Toàn màn hình</string>
   <string name="LiveViewToolTip">Xem trực tiếp</string>
   <string name="BrowseSessionsToolTip">Duyệt phiên làm việc</string>
   <string name="SelectTagsToolTip">Chọn thẻ đánh dấu</string>
@@ -32,7 +30,6 @@
   <string name="SettingsWindowTitle">Thiết lập</string>
   <string name="SessionWindowTitle">Phiên làm việc [Thêm/Sửa]ư</string>
   <string name="LiveViewWindowTitle">Xem trực tiếp</string>
-  <string name="BraketingWindowTitle">Braketing</string>
   <string name="ButtonAdd">Thêm </string>
   <string name="ButtonEdit">Chỉnh sửa </string>
   <string name="LabelFocusAndLiveview">Xem trực tiếp</string>
@@ -76,4 +73,6 @@
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">Xem trực tiếp</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

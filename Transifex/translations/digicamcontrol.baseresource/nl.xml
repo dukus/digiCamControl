@@ -67,7 +67,6 @@
   <string name="SDRamToolTip">Afbeeldingen direct op de computer opslaan.</string>
   <string name="CapturePhotoToolTip">Foto maken</string>
   <string name="CapturePhotoNoAfToolTip">Foto maken zonder auto focus</string>
-  <string name="BraketingToolTip">Bracketing (Belichting, Flits of Witbalans) reeks </string>
   <string name="SettingsToolTip">Instellingen</string>
   <string name="TimeLapseToolTip">Time-Lapse</string>
   <string name="FullscreenToolTip">Volledig scherm</string>
@@ -84,7 +83,6 @@
   <string name="SessionWindowTitle">Sessie  [toevoegen/bewerken]</string>
   <string name="LiveViewWindowTitle">Livebeeld</string>
   <string name="PresetEditWindowTitle">Instelling aanpassen</string>
-  <string name="BraketingWindowTitle">Braketing</string>
   <string name="EditTagWindowTitle">Label [toevoegen/bewerken]</string>
   <string name="MultipleCameraWindowTitle">Multi-camera besturing</string>
   <string name="SavePresetWindowTitle">Vooraf ingestelde waarden opslaan</string>
@@ -111,7 +109,6 @@
   <string name="ButtonCreateMovie">Film maken</string>
   <string name="ButtonLocateLogFile">Lokaliseren log-bestand</string>
   <string name="LabelInterfaceLanguage">Taalinstellingen</string>
-  <string name="LabelDisableDriver">Native drivers uitschakelen (niet aan te raden)</string>
   <string name="LabelTheme">Thema:</string>
   <string name="LabelGeneral">Algemeen</string>
   <string name="LabelPreview">Voorbeeld</string>
@@ -123,7 +120,6 @@
   <string name="LabelLIveViewImageFreeze">Live beeld bevriezen in sec:</string>
   <string name="LabelRotateImage">Afbeelding roteren:</string>
   <string name="LabelDontLoadThumbs">Geen miniaturen laden</string>
-  <string name="LabelFullscrenBack">Volledig scherm achtergrond:</string>
   <string name="LabelTriggers">Triggers</string>
   <string name="LabelUseKeybordToTrigger">Gebruik toetsenbord als trigger bij het maken van foto</string>
   <string name="LabelWebserver">Webserver</string>
@@ -133,7 +129,6 @@
   <string name="LabelMediumFocusStep">Gemiddelde scherpstel stap</string>
   <string name="LabelLargFocusStep">Grote scherpstel stap</string>
   <string name="ReStartToolTip">U moet de applciation afsluiten en opnieuw opstarten om de wijzigingen door te voeren.</string>
-  <string name="LabelSessonName">Sessie naam:</string>
   <string name="LabelFolder">Map:</string>
   <string name="LabelFileNameTemplate">Bestandsnaam Template:</string>
   <string name="LabelFileNameTemplateToolTip">$N - Sessie naam
@@ -152,13 +147,11 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelUseOriginal">Gebruik originele camera bestandsnaam</string>
   <string name="LabelUseOriginalToolTip">De optie werkt niet via de WIA driver</string>
   <string name="LabelDontDownloadPhotos">Geen foto\'s verzenden naar de PC</string>
-  <string name="LabelAlowFolderChange">Toestaan om map te veranderen bij gebruik van afbeelding verkenner</string>
   <string name="LabelTags">Tags</string>
   <string name="LabelManualFocus">Handmatig scherpstellen</string>
   <string name="LabelGrid">Raster</string>
   <string name="LabelLvZoomRation">Lv zoom ratio</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
-  <string name="LabelNoOfPhots">Aantal foto\'s</string>
   <string name="LabelFocusStep">Scherpstel stap</string>
   <string name="LabelLuminosity">Helderheid</string>
   <string name="LabelExposureBracketing">Belichtings bracketing</string>
@@ -183,7 +176,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelNumberOfPhotos">Aantal foto\'s</string>
   <string name="LabelDontAutofocusOnEveryCapture">Niet automatisch scherpstellen tussen opnamen</string>
   <string name="LabelCaptureInterval">Opname interval (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">FIlm lengte (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Film instellingen</string>
   <string name="LabelVideoFormat">Video formaat</string>
   <string name="LabelOutputFile">Output bestand</string>
@@ -209,7 +201,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="MsgBulbModeNotSupported">Bulb-modus niet ondersteund!</string>
   <string name="MsgApplicationUpToDate">Dit programma is bijgewerkt!</string>
   <string name="MsgUseSessionEditorTags">Gebruik de sessie editor om de tags te definiëren!</string>
-  <string name="MsgLastSessionCantBeDeleted">Laatste sessie kan niet worden verwijderd</string>
   <string name="MsgStopTimeLapse">De time-lapse is niet beëindigd! Wilt u de time-lapse afbreken?</string>
   <string name="MsgBracketingDone">Bracketing uitgevoerd</string>
   <string name="MsgActionInProgress">Actie wordt uitgevoerd {0}/{1}</string>
@@ -252,7 +243,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Bewegingsdetectie type</string>
   <string name="LabelTwoFramesDifferenceDetector">Twee-Frame verschil-detector</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Eenvoudige Background-Modeling detector</string>
   <string name="LabelSmallestBlockSize">Kleinste datablok grootte</string>
   <string name="ButtonHelp">Help</string>
   <!--31/10/2012-->
@@ -403,7 +393,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelStayOnTop2">Blijf bovenaan</string>
   <string name="LabelWriteSelectedTags">Neem labels over van selector</string>
   <string name="LabelClearCache">Wis tussengeheugen</string>
-  <string name="LabelShowMagnifierInFullSccreen">Toon zoomfunctie in volbeeldmodus</string>
   <string name="LabelDelayImageLoading">Vertraging beeldopbouw</string>
   <string name="LabelPHDGuiding">Push Here Dummy Guiding</string>
   <string name="LabelWaitPHDGuiding">Wachten op PHD (sec)</string>
@@ -432,4 +421,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">Livebeeld</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

@@ -56,10 +56,8 @@
   <string name="SDRamToolTip">Απευθείας λήψη εικόνων στον υπολογιστή χωρίς χρήση κάρτας μνήμης</string>
   <string name="CapturePhotoToolTip">Λήψη φωτογραφίας</string>
   <string name="CapturePhotoNoAfToolTip">Λήψη φωτογραφίας χωρίς αυτόματη εστίαση</string>
-  <string name="BraketingToolTip">Bracketing</string>
   <string name="SettingsToolTip">Ρυθμίσεις</string>
   <string name="TimeLapseToolTip">Time lapse</string>
-  <string name="FullscreenToolTip">Πλήρης οθόνη</string>
   <string name="LiveViewToolTip">Ζωντανή προβολή</string>
   <string name="BrowseSessionsToolTip">Περιήγηση στις εργασίες</string>
   <string name="SelectTagsToolTip">Επιλογή ετικετών</string>
@@ -73,7 +71,6 @@
   <string name="SessionWindowTitle">Εργασία [Προσθήκη/Επεξεργασία]</string>
   <string name="LiveViewWindowTitle">Ζωντανή προβολή</string>
   <string name="PresetEditWindowTitle">Επεξεργασία προκαθορισμένων επιλογών</string>
-  <string name="BraketingWindowTitle">Bracketing</string>
   <string name="EditTagWindowTitle">Ετικέτα [Προσθήκη/Επεξεργασία]</string>
   <string name="MultipleCameraWindowTitle">Υποστήριξη πολλαπλών καμερών</string>
   <string name="SavePresetWindowTitle">Αποθήκευση προκαθορισμένης επιλογής</string>
@@ -100,7 +97,6 @@
   <string name="ButtonCreateMovie">Δημιουργία ταινίας</string>
   <string name="ButtonLocateLogFile">Εντοπισμός αρχείου καταγραφής</string>
   <string name="LabelInterfaceLanguage">Γλώσσα διεπαφής</string>
-  <string name="LabelDisableDriver">Απενεργοποίηση τοπικών drivers (δεν προτείνεται)</string>
   <string name="LabelTheme">Θέμα</string>
   <string name="LabelGeneral">Γενικά</string>
   <string name="LabelPreview">Προεπισκόπηση</string>
@@ -112,7 +108,6 @@
   <string name="LabelLIveViewImageFreeze">Πάγωμα εικόνας ζωντανής προβολής σε δευτερόλεπτα:</string>
   <string name="LabelRotateImage">Περιστροφή εικόνας :</string>
   <string name="LabelDontLoadThumbs">Μην φορτώσεις μικρογραφίες</string>
-  <string name="LabelFullscrenBack">Φόντο παραθύρου πλήρους οθόνης</string>
   <string name="LabelTriggers">Ενέργειες</string>
   <string name="LabelUseKeybordToTrigger">Χρήση πληκτρολογίου για λήψη φωτογραφίας</string>
   <string name="LabelWebserver">Διακομιστής</string>
@@ -122,20 +117,17 @@
   <string name="LabelMediumFocusStep">Μέτριο βήμα εστίασης</string>
   <string name="LabelLargFocusStep">Μεγάλο βήμα εστίασης</string>
   <string name="ReStartToolTip">Θα πρέπει να επανεκκινήσετε την εφαρμογή για να ενεργοποιηθούν οι αλλαγές</string>
-  <string name="LabelSessonName">Όνομα εργασίας :</string>
   <string name="LabelFolder">Φάκελος :</string>
   <string name="LabelFileNameTemplate">Όνομα προτύπου :</string>
   <string name="LabelCounter">Μετρητής :</string>
   <string name="LabelUseOriginal">Χρήση ονόματος αρχείου από την κάμερα</string>
   <string name="LabelUseOriginalToolTip">Αυτή η επιλογή δεν θα δουλέψει με τον WIA driver</string>
   <string name="LabelDontDownloadPhotos">Μην κατεβάσεις τις φωτογραφίες στον υπολογιστή</string>
-  <string name="LabelAlowFolderChange">Να επιτρέπεται η αλλαγή φακέλων με τη χρήση του προγράμματος περιήγησης εικόνων</string>
   <string name="LabelTags">Ετικέτες</string>
   <string name="LabelManualFocus">Χειροκίνητη Εστίαση</string>
   <string name="LabelGrid">Πλέγμα</string>
   <string name="LabelLvZoomRation">Αναλογία ζουμ Ζωντανής προβολής</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
-  <string name="LabelNoOfPhots">Αριθμός φωτογραφιών</string>
   <string name="LabelFocusStep">Βήμα εστίασης</string>
   <string name="LabelLuminosity">Φωτεινότητα</string>
   <string name="LabelExposureBracketing">Bracketing έκθεσης</string>
@@ -160,7 +152,6 @@
   <string name="LabelNumberOfPhotos">Αριθμός φωτογραφιών</string>
   <string name="LabelDontAutofocusOnEveryCapture">Μην εστιάζεις αυτόματα σε κάθε λήψη</string>
   <string name="LabelCaptureInterval">Χρονικό διάστημα μεταξύ των λήψεων (ΩΩ:ΛΛ:ΔΔ)</string>
-  <string name="LabelMovieLenght">Μήκος ταινίας (ΩΩ:ΛΛ:ΔΔ)</string>
   <string name="LabelMovieSettings">Ρυθμίσεις ταινίας</string>
   <string name="LabelVideoFormat">Φορμά βίντεο</string>
   <string name="LabelOutputFile">Εξαγωγή αρχείου</string>
@@ -186,7 +177,6 @@
   <string name="MsgBulbModeNotSupported">Η λειτουργία λάμπας δεν υποστηρίζεται!</string>
   <string name="MsgApplicationUpToDate">Η εφαρμογή δεν είναι ενημερωμένη!</string>
   <string name="MsgUseSessionEditorTags">Χρησιμοποιήστε τον επεξεργαστή εργασιών για να καθορίσετε ετικέτες!</string>
-  <string name="MsgLastSessionCantBeDeleted">Η τελευταία εργασία δεν μπορεί να διαγραφεί</string>
   <string name="MsgStopTimeLapse">Η εργασία time lapse δεν ολοκληρώθηκε! Θέλετε να την τερματίσετε;</string>
   <string name="MsgBracketingDone">Η λειτουργία bracketing ολοκληρώθηκε</string>
   <string name="MsgActionInProgress">Εργασία σε εξέλιξη {0}/{1}</string>
@@ -229,7 +219,6 @@
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Τύπος ανίχνευσης κίνησης</string>
   <string name="LabelTwoFramesDifferenceDetector">Ανιχνευτής διαφορών ανάμεσα σε δύο καρέ</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Ανιχνευτής μοντελοποίησης απλού φόντου</string>
   <string name="LabelSmallestBlockSize">Το μικρότερο μέγεθος κομματιού</string>
   <string name="ButtonHelp">Βοήθεια</string>
   <!--31/10/2012-->
@@ -377,4 +366,6 @@
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">Ζωντανή προβολή</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

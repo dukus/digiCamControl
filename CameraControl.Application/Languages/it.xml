@@ -67,7 +67,6 @@
   <string name="SDRamToolTip">Cattura le immagini direttamente sul PC senza usare la scheda di memoria</string>
   <string name="CapturePhotoToolTip">Scatta foto</string>
   <string name="CapturePhotoNoAfToolTip">Scatta foto senza autofocus</string>
-  <string name="BraketingToolTip">Bracketing</string>
   <string name="SettingsToolTip">Impostazioni</string>
   <string name="TimeLapseToolTip">Time lapse</string>
   <string name="FullscreenToolTip">Schermo intero</string>
@@ -84,7 +83,6 @@
   <string name="SessionWindowTitle">Sessione [Agg./Mod.]</string>
   <string name="LiveViewWindowTitle">Live View</string>
   <string name="PresetEditWindowTitle">Modifica Preset</string>
-  <string name="BraketingWindowTitle">Bracketing</string>
   <string name="EditTagWindowTitle">Tag [Agg./Mod.]</string>
   <string name="MultipleCameraWindowTitle">Supporto fotocamera multipla</string>
   <string name="SavePresetWindowTitle">Salva Preset</string>
@@ -123,7 +121,6 @@
   <string name="LabelLIveViewImageFreeze">Permanenza immagine Live View in sec:</string>
   <string name="LabelRotateImage">Ruota immagine:</string>
   <string name="LabelDontLoadThumbs">Non caricare le anteprime</string>
-  <string name="LabelFullscrenBack">Sfondo finestra schermo intero :</string>
   <string name="LabelTriggers">Trigger</string>
   <string name="LabelUseKeybordToTrigger">Usa la tastiera come comando di scatto</string>
   <string name="LabelWebserver">Server web</string>
@@ -136,18 +133,40 @@
   <string name="LabelSessonName">Nome sessione:</string>
   <string name="LabelFolder">Cartella:</string>
   <string name="LabelFileNameTemplate">Nome file del Template :</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Nome sessione\n\n$C - Contatore\n\n$E - Compensazione esp.\n\n$X - Nome fotocamera\n\n$D - Data corrente\n\n$UTime - Data e ora Unix\n\n$Type - Tipo di file (Raw|Jpg) \n\n$B - Codice a barre\n\n$Tag1 - Tag 1 selezionato\n\n$Tag2 - Tag 2 selezionato\n\n$Tag3 - Tag 3 selezionato\n\n$Tag4 - Tag 4 selezionato</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Nome sessione
+
+$C - Contatore
+
+$E - Compensazione esp.
+
+$X - Nome fotocamera
+
+$D - Data corrente
+
+$UTime - Data e ora Unix
+
+$Type - Tipo di file (Raw|Jpg) 
+
+$B - Codice a barre
+
+$Tag1 - Tag 1 selezionato
+
+$Tag2 - Tag 2 selezionato
+
+$Tag3 - Tag 3 selezionato
+
+$Tag4 - Tag 4 selezionato</string>
   <string name="LabelCounter">Contatore:</string>
   <string name="LabelUseOriginal">Usa il nome file originale dato dalla fotocamera</string>
   <string name="LabelUseOriginalToolTip">Questa opzione non funziona con il driver WIA</string>
   <string name="LabelDontDownloadPhotos">Non scaricare le foto sul PC</string>
-  <string name="LabelAlowFolderChange">Consenti modifica cartella utilizzando il browser immagini</string>
+  <string name="LabelAlowFolderChange">Consenti di cambiare cartella usando il browser immagini</string>
   <string name="LabelTags">Tag</string>
   <string name="LabelManualFocus">Messa a fuoco manuale</string>
   <string name="LabelGrid">Griglia</string>
   <string name="LabelLvZoomRation">Rapporto zoom Lv</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
-  <string name="LabelNoOfPhots">Num. di foto</string>
+  <string name="LabelNoOfPhots">N. di foto</string>
   <string name="LabelFocusStep">Passo di messa a fuoco</string>
   <string name="LabelLuminosity">Luminosità</string>
   <string name="LabelExposureBracketing">Raggruppamento esposizione</string>
@@ -172,7 +191,7 @@
   <string name="LabelNumberOfPhotos">Numero di fotografie</string>
   <string name="LabelDontAutofocusOnEveryCapture">Non mettere a fuoco ad ogni scatto</string>
   <string name="LabelCaptureInterval">Intervallo di scatto (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Lunghezza filmato (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">Durata del video (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Impostazioni filmato</string>
   <string name="LabelVideoFormat">Formato video</string>
   <string name="LabelOutputFile">File di output</string>
@@ -195,14 +214,14 @@
   <string name="LabelVideoCodecProblem">Problema con il codec video</string>
   <string name="MsgPhotoTransferBegin">Inizio trasferimento immagine</string>
   <string name="MsgPhotoTransferDone">Trasferimento immagine completato</string>
-  <string name="MsgPhotoTransferError">Errore trasferimento!⏎\nMessaggio :{0}</string>
+  <string name="MsgPhotoTransferError">Errore di trasmissione!\nMessage :{0}</string>
   <string name="MsgBulbModeNotSupported">Modalità posa non supportata!</string>
   <string name="MsgApplicationUpToDate">La tua applicazione è già aggiornata!</string>
   <string name="MsgUseSessionEditorTags">Utilizzare l\'editor di sessione per definire i Tag!</string>
   <string name="MsgLastSessionCantBeDeleted">L\'ultima sessione non può essere eliminata</string>
   <string name="MsgStopTimeLapse">Il TimeLapse non è finito! Vuoi terminare il TimeLapse?</string>
-  <string name="MsgInstallXvidCodec">Il codec Xvid non è installato!⏎\nVuoi scaricarlo ed installaralo? </string>
-  <string name="MsgDeleteSessionQuestion">Vuoi proseguire a cancellare la sessione {0}?⏎\nNessun file verrà cancellato!</string>
+  <string name="MsgInstallXvidCodec">Xvid codec non è istallata!\nVuoi scaricarlo ed installarlo?</string>
+  <string name="MsgDeleteSessionQuestion">Vuoi proseguire a cancellare la sessione {0} ?\nNessun file verrà eliminato !</string>
   <string name="MsgBracketingDone">Bracketing fatto</string>
   <string name="MsgActionInProgress">Attività in progresso {0}/{1}</string>
   <string name="MenuFile">_File</string>
@@ -244,7 +263,6 @@
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Tipo rilevazione di movimento</string>
   <string name="LabelTwoFramesDifferenceDetector">Rilevatore differenza tra due fotogrammi</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Rilevatore di semplice modello di sfondo</string>
   <string name="LabelSmallestBlockSize">Dimensione minima blocco</string>
   <string name="ButtonHelp">Aiuto</string>
   <!--31/10/2012-->
@@ -281,7 +299,7 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Scarica fotografie</string>
   <string name="LabelDeleteFilesAfterTransfer">Cancella i files dopo il trasferimento</string>
-  <string name="LabelAskForDelete">I file trasferiti verranno cancellati.⏎\nVuoi continuare?</string>
+  <string name="LabelAskForDelete">I file trasferiti verranno cancellati.\nVuoi continuare?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Errore impostazione posizione messa a fuoco</string>
   <string name="LabelErrorUnableFocus">Impossibile mettere a fuoco</string>
@@ -317,7 +335,7 @@
   <string name="LabelAdvanced">Avanzato</string>
   <string name="LabelUseParellelTransfer">Usa il trasferimento file in parallelo</string>
   <!--19/01/2013-->
-  <string name="LabelUnHandledError">Si è verificato un errore dell\'applicazione.⏎\nPer favore controlla se i tuoi dati sono corretti e ripeti l\'azione. Se l\'errore si verifica nuovamente potrebbe esserci un malfunzionamento più serio dell\'applicazione e sarebbe meglio chiuderla.⏎\n⏎\nErrore:{0}⏎\n⏎\nVuoi continuare?⏎\n(se clicchi Si continuerai il tuo lavoro, se clicchi No l\'applicazione verrà chiusa)</string>
+  <string name="LabelUnHandledError">Si è verificato un errore nell\'applicazione.\nVerificare che i dati siano corretti e ripetere l\'operazione. Se si verifica nuovamente questo errore sembra essere dovuto ad un malfunzionamento più grave dell\'applicazione, è meglio chiuderla.\n\nError:{0}\n\nVuoi continuare?\n(se selezioni Yes continuerai con il tuo lavoro, se selezioni No l\'applicazione verrà chiusa)</string>
   <string name="LabelApplicationError">Errore applicazione</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 non installato</string>
   <string name="LabelRestartTheApplication">Riavvia l\'applicazione!</string>
@@ -356,7 +374,7 @@
   <string name="LabelTTLError">Errore TTL</string>
   <string name="LabelNonCPULEnseError">E\' montata una lente senza CPU e la modalità di esposizione non è M.</string>
   <string name="LabelImageInRAM">C\'è un\'immagine la cui destinazione di salvataggio è la SDRAM.</string>
-  <string name="LabelNoCardInsertedError">La destinazione di registrazione è la scheda o la scheda e la SDRAM,⏎\ne la scheda non è inserita con il rilascio disattivato senza una scheda.</string>
+  <string name="LabelNoCardInsertedError">La destinazione di registrazione è la scheda o la scheda e la SDRAM, \ n ma la scheda non è inserita con il blocco per la rimozione senza una scheda.</string>
   <string name="LabelCommandProcesingError">Durante l\'elaborazione del comando di scatto</string>
   <string name="LabelShoutingInProgress">La modalità di scatto è EFFECTS.</string>
   <string name="LabelOverHeatedError">Il visualizzazione dal vivo non può essere attivata quando la temperatura aumenta.</string>
@@ -431,4 +449,39 @@
   <string name="LabelSelectNone">Elimina selezione</string>
   <string name="LabelSelectLiked">Seleziona i Preferiti</string>
   <string name="LabelSelectUnLiked">Seleziona i Non preferiti</string>
+  <!--19/01/2014-->
+  <string name="LabelError">Errore</string>
+  <string name="LabelChangelog">Log modifiche</string>
+  <!--27/02/2014-->
+  <string name="LabelAllowOverWrite">Permetti la sovrascrittura</string>
+  <string name="LabelShowRuler">Mostra i righelli</string>
+  <string name="LabelAutoPreviewJpgOnly">Previsualizzazione solo Jpeg</string>
+  <string name="LabelSettingsLiveView">Visualizzazione dal vivo</string>
+  <string name="LabelHostMode">Modalità host</string>
+  <!--17.05.2014-->
+  <string name="LabelClear">Pulisci</string>
+  <string name="LabelHistogram">Istogramma</string>
+  <string name="LabelMetadata">Metadati</string>
+  <string name="LabelFullSize">Immagine a dimensione intera</string>
+  <string name="LabelWifi">Connetti con DSLRDASHBOARDSERVER</string>
+  <string name="ButtonRecordStopMovie">Interrompi la registrazione del video</string>
+  <string name="LabelOverlay">Sovrapposizione</string>
+  <string name="LabelGenerateThumbs">Genera i thumbnail</string>
+  <string name="LabelPlay">Riproduci</string>
+  <string name="LabelPause">Pausa</string>
+  <string name="LabelImageSequencer">Sequencer immagini</string>
+  <string name="LabelLoop">Anello</string>
+  <string name="LabelProgress">Avanzamento</string>
+  <string name="LabelStartImageFrame">Fotogramma di inizio immagine</string>
+  <string name="LabelStopImageFrame">Fotogramma di fine immagine</string>
+  <string name="LabelPlayVideo">Riproduci video</string>
+  <string name="LabelLoadPresetAllCamera">Carica le impostazioni in tutte le fotocamere</string>
+  <string name="LabelBackUpFolder">Cartella di backup</string>
+  <string name="LabelBackUp">Fai il backup delle foto</string>
+  <string name="LabelVerifyPreset">Verifica le impostazioni</string>
+  <string name="LabelRefreshSession">Aggiorna l\'elenco dei file</string>
+  <string name="LabelErrorEmail">Il tuo indirizzo di email (se vuoi ricevere risposta)</string>
+  <string name="LabelApertureBracketing">Bracketing mediante diaframma</string>
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

@@ -66,10 +66,9 @@
   <string name="SDRamToolTip">Захват изображений непосредственно на ПК без использования карты</string>
   <string name="CapturePhotoToolTip">Захват фото</string>
   <string name="CapturePhotoNoAfToolTip">Захват фото без авто фокуса</string>
-  <string name="BraketingToolTip">Серия кадров с разной экспозицией</string>
   <string name="SettingsToolTip">Настройки</string>
   <string name="TimeLapseToolTip">Замедленная киносъёмка</string>
-  <string name="FullscreenToolTip">Во весь экран</string>
+  <string name="FullscreenToolTip">Полный экран</string>
   <string name="LiveViewToolTip">Live view</string>
   <string name="BrowseSessionsToolTip">Обзор сессий</string>
   <string name="SelectTagsToolTip">Выбор метки</string>
@@ -83,7 +82,6 @@
   <string name="SessionWindowTitle">Сессия [добавить/редактировать]</string>
   <string name="LiveViewWindowTitle">Live view</string>
   <string name="PresetEditWindowTitle">Редактировать предустановки</string>
-  <string name="BraketingWindowTitle">Серия кадров с разной экспозицией</string>
   <string name="EditTagWindowTitle">Метки [добавить/редактировать]</string>
   <string name="MultipleCameraWindowTitle">Поддержка нескольких камер</string>
   <string name="SavePresetWindowTitle">Сохранить предустановку</string>
@@ -110,7 +108,6 @@
   <string name="ButtonCreateMovie">Создать фильм</string>
   <string name="ButtonLocateLogFile">Открыть папку с log-файлом</string>
   <string name="LabelInterfaceLanguage">Язык интерфейса:</string>
-  <string name="LabelDisableDriver">Отключить системный драйвер (не рекомендуется)</string>
   <string name="LabelTheme">Тема оформления:</string>
   <string name="LabelGeneral">Основные</string>
   <string name="LabelPreview">Просмотр</string>
@@ -122,7 +119,6 @@
   <string name="LabelLIveViewImageFreeze">Просмотр снимка в Live view секунд:</string>
   <string name="LabelRotateImage">Повернуть снимок:</string>
   <string name="LabelDontLoadThumbs">Не загружать эскизы</string>
-  <string name="LabelFullscrenBack">Фон окна полного экрана</string>
   <string name="LabelTriggers">Тригеры</string>
   <string name="LabelUseKeybordToTrigger">Использовать комбинацию клавиш для спуска затвора</string>
   <string name="LabelWebserver">Вэб-сервер</string>
@@ -132,7 +128,6 @@
   <string name="LabelMediumFocusStep">Средний шаг фокусировки</string>
   <string name="LabelLargFocusStep">Большой шаг фокусировки</string>
   <string name="ReStartToolTip">Вы должны перезапустить приложение, чтобы изменения вступили в силу</string>
-  <string name="LabelSessonName">Имя сессии:</string>
   <string name="LabelFolder">Папка:</string>
   <string name="LabelFileNameTemplate">Имя шаблона:</string>
   <string name="LabelFileNameTemplateToolTip">$N - Имя сессии
@@ -156,7 +151,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelGrid">Сетка</string>
   <string name="LabelLvZoomRation">Коэффициент масштабирования Lv</string>
   <string name="LabelFocusStacking">Фокусировок</string>
-  <string name="LabelNoOfPhots">Кол-во фотографий</string>
   <string name="LabelFocusStep">Шаг фокусировки</string>
   <string name="LabelLuminosity">Светосила</string>
   <string name="LabelExposureBracketing">Брекетинг по экспозиции</string>
@@ -181,7 +175,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelNumberOfPhotos">Количество фотографий</string>
   <string name="LabelDontAutofocusOnEveryCapture">Не автофокусировать на каждом снимке</string>
   <string name="LabelCaptureInterval">Интервал снимков (час:мин:сек)</string>
-  <string name="LabelMovieLenght">Длина фильма (час:мин:сек)</string>
   <string name="LabelMovieSettings">Настройки фильма</string>
   <string name="LabelVideoFormat">Видео формат</string>
   <string name="LabelOutputFile">Исходный файл</string>
@@ -207,7 +200,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="MsgBulbModeNotSupported">Выдержка от руки не поддерживается !</string>
   <string name="MsgApplicationUpToDate">Ваша программа имеет последнею версию !</string>
   <string name="MsgUseSessionEditorTags">Используйте редактор сеанса для определения меток!</string>
-  <string name="MsgLastSessionCantBeDeleted">Последняя сессия не может быть удалена</string>
   <string name="MsgStopTimeLapse">Замедленная киносъёмка не завершена! Желаете остановит замедленную киносъёмку?</string>
   <string name="MsgBracketingDone">Брекетинг закончен</string>
   <string name="MsgActionInProgress">Действие выполняется {0}/{1}</string>
@@ -250,7 +242,6 @@ $Tag4 - Выбрать метку 4</string>
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Типа обнаружения движения</string>
   <string name="LabelTwoFramesDifferenceDetector">Два кадра с разным детектором</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Простой фон моделирования детектора</string>
   <string name="LabelSmallestBlockSize">Наименьший размер блока</string>
   <string name="ButtonHelp">Помощь</string>
   <!--31/10/2012-->
@@ -397,7 +388,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelStayOnTop2">Поверх</string>
   <string name="LabelWriteSelectedTags">Написать метку для селектора меток</string>
   <string name="LabelClearCache">Очистить кэш</string>
-  <string name="LabelShowMagnifierInFullSccreen">Показать лупу в полном экране</string>
   <string name="LabelDelayImageLoading">Задержка загрузки изображений</string>
   <string name="LabelPHDGuiding">PHD Guiding</string>
   <string name="LabelWaitPHDGuiding">Ждать PHD (сек)</string>
@@ -429,4 +419,6 @@ $Tag4 - Выбрать метку 4</string>
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">Live view</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

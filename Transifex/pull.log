@@ -1,3 +1,4 @@
+New translations found for the following languages: zh_TW, pt_BR, ko_KR, cs_CZ, hu_HU, ja_JP, sk_SK, sl, cs, es
 Pulling translations for resource digicamcontrol.baseresource (source: None)
  -> fr: translations\digicamcontrol.baseresource\fr.xml
  -> vi: translations\digicamcontrol.baseresource\vi.xml
@@ -21,4 +22,15 @@ Pulling translations for resource digicamcontrol.baseresource (source: None)
  -> ro: translations\digicamcontrol.baseresource\ro.xml
  -> gl_ES: translations\digicamcontrol.baseresource\gl_ES.xml
  -> pl: translations\digicamcontrol.baseresource\pl.xml
+Pulling new translations for resource digicamcontrol.baseresource (source: None)
+ -> zh_TW: translations\digicamcontrol.baseresource\zh_TW.xml
+ -> pt_BR: translations\digicamcontrol.baseresource\pt_BR.xml
+ -> ko_KR: translations\digicamcontrol.baseresource\ko_KR.xml
+ -> cs_CZ: translations\digicamcontrol.baseresource\cs_CZ.xml
+ -> hu_HU: translations\digicamcontrol.baseresource\hu_HU.xml
+ -> ja_JP: translations\digicamcontrol.baseresource\ja_JP.xml
+ -> sk_SK: translations\digicamcontrol.baseresource\sk_SK.xml
+ -> sl: translations\digicamcontrol.baseresource\sl.xml
+ -> cs: translations\digicamcontrol.baseresource\cs.xml
+ -> es: translations\digicamcontrol.baseresource\es.xml
 Done.

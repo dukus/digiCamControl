@@ -56,10 +56,8 @@
   <string name="SDRamToolTip">照片直接传到电脑而不存在卡上</string>
   <string name="CapturePhotoToolTip">拍摄</string>
   <string name="CapturePhotoNoAfToolTip">拍摄（无自动对焦）</string>
-  <string name="BraketingToolTip">曝光包围拍摄</string>
   <string name="SettingsToolTip">设置</string>
   <string name="TimeLapseToolTip">延时摄影</string>
-  <string name="FullscreenToolTip">全屏</string>
   <string name="LiveViewToolTip">实时取景</string>
   <string name="BrowseSessionsToolTip">浏览会话</string>
   <string name="SelectTagsToolTip">选择标签</string>
@@ -73,7 +71,6 @@
   <string name="SessionWindowTitle">添加或编辑会话</string>
   <string name="LiveViewWindowTitle">实时取景</string>
   <string name="PresetEditWindowTitle">编辑预设</string>
-  <string name="BraketingWindowTitle">曝光包围</string>
   <string name="EditTagWindowTitle">添加或编辑标签</string>
   <string name="MultipleCameraWindowTitle">多相机支持</string>
   <string name="SavePresetWindowTitle">保存预设</string>
@@ -100,7 +97,6 @@
   <string name="ButtonCreateMovie">创建影片</string>
   <string name="ButtonLocateLogFile">定位日志文件</string>
   <string name="LabelInterfaceLanguage">界面语言：</string>
-  <string name="LabelDisableDriver">禁用本地驱动（不推荐）</string>
   <string name="LabelTheme">主题：</string>
   <string name="LabelGeneral">常规</string>
   <string name="LabelPreview">预览</string>
@@ -112,7 +108,6 @@
   <string name="LabelLIveViewImageFreeze">实时取景图像定格时间</string>
   <string name="LabelRotateImage">旋转图像</string>
   <string name="LabelDontLoadThumbs">不载入缩略图</string>
-  <string name="LabelFullscrenBack">全屏窗口背景：</string>
   <string name="LabelTriggers">快门释放</string>
   <string name="LabelUseKeybordToTrigger">使用快捷键触发快门释放</string>
   <string name="LabelWebserver">Web 服务器</string>
@@ -122,20 +117,17 @@
   <string name="LabelMediumFocusStep">中对焦步长</string>
   <string name="LabelLargFocusStep">大对焦步长</string>
   <string name="ReStartToolTip">你需要重启本程序以使更改生效</string>
-  <string name="LabelSessonName">会话名称：</string>
   <string name="LabelFolder">文件夹：</string>
   <string name="LabelFileNameTemplate">文件名模板：</string>
   <string name="LabelCounter">计数器：</string>
   <string name="LabelUseOriginal">使用相机给出的原始文件名</string>
   <string name="LabelUseOriginalToolTip">该选项无法在 WIA 驱动下工作</string>
   <string name="LabelDontDownloadPhotos">不要下载照片到电脑</string>
-  <string name="LabelAlowFolderChange">使用图像浏览器时允许文件夹更改</string>
   <string name="LabelTags">标签</string>
   <string name="LabelManualFocus">手动对焦</string>
   <string name="LabelGrid">网格</string>
   <string name="LabelLvZoomRation">Lv 缩放率</string>
   <string name="LabelFocusStacking">焦点合成</string>
-  <string name="LabelNoOfPhots">照片数量</string>
   <string name="LabelFocusStep">对焦步长</string>
   <string name="LabelLuminosity">亮度</string>
   <string name="LabelExposureBracketing">曝光包围</string>
@@ -160,7 +152,6 @@
   <string name="LabelNumberOfPhotos">照片数</string>
   <string name="LabelDontAutofocusOnEveryCapture">取消每次拍摄的自动对焦</string>
   <string name="LabelCaptureInterval">拍摄间隔 (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">影片长度 (HH:MM:SS)</string>
   <string name="LabelMovieSettings">影片设置</string>
   <string name="LabelVideoFormat">视频格式</string>
   <string name="LabelOutputFile">输出文件名</string>
@@ -186,7 +177,6 @@
   <string name="MsgBulbModeNotSupported">不支持B门模式！</string>
   <string name="MsgApplicationUpToDate">您的应用程序已是最新版！</string>
   <string name="MsgUseSessionEditorTags">请使用会话编辑器定义标签！</string>
-  <string name="MsgLastSessionCantBeDeleted">仅有的一个会话不能被删除</string>
   <string name="MsgStopTimeLapse">延时摄影仍在进行中！ 要停止吗？</string>
   <string name="MsgBracketingDone">包围拍摄完成</string>
   <string name="MsgActionInProgress">操作进度 {0}/{1}</string>
@@ -229,7 +219,6 @@
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">运动检测类型</string>
   <string name="LabelTwoFramesDifferenceDetector">帧差异检测</string>
-  <string name="LabelSimpleBackgroundModelingDetector">简易背景建模检测</string>
   <string name="LabelSmallestBlockSize">最小块大小</string>
   <string name="ButtonHelp">帮助</string>
   <!--31/10/2012-->
@@ -341,4 +330,6 @@
   <!--27/02/2014-->
   <string name="LabelSettingsLiveView">实时取景</string>
   <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>

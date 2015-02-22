@@ -7,9 +7,6 @@
   <string name="ShutterSpeed">sluitertijd</string>
   <string name="Aperture">Diafragma</string>
   <string name="WhiteBalance">witbalans</string>
-  <string name="BraketingToolTip">Belichtingsreeksen</string>
-  <string name="FullscreenToolTip">Schermvullende weergave</string>
-  <string name="BraketingWindowTitle">Belichtingsreeksen</string>
   <string name="ButtonDelete">Wissen</string>
   <string name="LabelManualFocus">Handmatige scherpstelling</string>
   <string name="LabelGrid">Raster</string>
@@ -50,4 +47,9 @@
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
 </resources>
