@@ -203,18 +203,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private TimeLapseClass _timeLapse;
-
-        public TimeLapseClass TimeLapse
-        {
-            get { return _timeLapse; }
-            set
-            {
-                _timeLapse = value;
-                NotifyPropertyChanged("TimeLapse");
-            }
-        }
-
         private BraketingClass _braketing;
 
         public BraketingClass Braketing
@@ -419,7 +407,6 @@ namespace CameraControl.Core.Classes
             }
             Files = new AsyncObservableCollection<FileItem>();
             FileNameTemplate = "DSC_[Counter 4 digit]";
-            TimeLapse = new TimeLapseClass();
 
             UseOriginalFilename = false;
             AlowFolderChange = false;

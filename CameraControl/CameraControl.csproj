@@ -344,9 +344,6 @@
     <Compile Include="windows\CameraPropertyWnd.xaml.cs">
       <DependentUpon>CameraPropertyWnd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="windows\CreateTimeLapseWnd.xaml.cs">
-      <DependentUpon>CreateTimeLapseWnd.xaml</DependentUpon>
-    </Compile>
     <Compile Include="windows\DownloadPhotosWnd_old.xaml.cs">
       <DependentUpon>DownloadPhotosWnd_old.xaml</DependentUpon>
     </Compile>
@@ -416,9 +413,6 @@
     </Compile>
     <Compile Include="windows\TimeLapseWnd.xaml.cs">
       <DependentUpon>TimeLapseWnd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="windows\TimeLapseWnd_Old.xaml.cs">
-      <DependentUpon>TimeLapseWnd_Old.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
@@ -561,10 +555,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="windows\CreateTimeLapseWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="windows\DownloadPhotosWnd_old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -654,10 +644,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\TimeLapseWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="windows\TimeLapseWnd_Old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

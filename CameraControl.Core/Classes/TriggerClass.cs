@@ -89,7 +89,10 @@ namespace CameraControl.Core.Classes
             _altPressed = e.isAltPressed;
             _ctrlPressed = e.isCtrlPressed;
             if (_eventIsBusy)
+            {
+                Log.Debug("Evcent busy !");
                 return;
+            }
             Task.Factory.StartNew(() => KeyDownThread(e));
         }
 

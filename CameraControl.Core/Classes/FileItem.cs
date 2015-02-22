@@ -249,6 +249,16 @@ namespace CameraControl.Core.Classes
             //FileInfo = new FileInfo();
         }
 
+        public void SetFile(string file)
+        {
+            IsLoaded = false;
+            FileName = file;
+            Name = Path.GetFileName(file);
+            ItemType = FileItemType.File;
+            //FileInfo = new FileInfo();
+        }
+        
+
         public FileItem(ICameraDevice device, DateTime time)
         {
             Device = device;
@@ -315,12 +325,19 @@ namespace CameraControl.Core.Classes
 
         public void RemoveThumbs()
         {
-            if (File.Exists(SmallThumb))
-                File.Delete(SmallThumb);
-            if (File.Exists(LargeThumb))
-                File.Delete(LargeThumb);
-            if (File.Exists(InfoFile))
-                File.Delete(InfoFile);
+            try
+            {
+                if (File.Exists(SmallThumb))
+                    File.Delete(SmallThumb);
+                if (File.Exists(LargeThumb))
+                    File.Delete(LargeThumb);
+                if (File.Exists(InfoFile))
+                    File.Delete(InfoFile);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to remove thumb data", ex);
+            }
         }
 
 

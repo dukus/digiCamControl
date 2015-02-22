@@ -35,6 +35,7 @@ using System.IO;
 using System.Media;
 using System.Net;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using CameraControl.Devices;
@@ -164,16 +165,42 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public static string DateTimeToString(DateTime time)
-        {
-            TimeSpan span = time - DateTime.MinValue;
-            return string.Format("{0} days {1} hours {2} minutes {3} seconds", span.Days, span.Hours, span.Minutes,
-                                 span.Seconds);
-        }
-
         public static void Donate()
         {
             Run("http://www.digicamcontrol.com/donate/");
         }
+
+        public static bool IsFileLocked(string file)
+        {
+            FileStream stream = null;
+
+            try
+            {
+                stream = File.Open(file,FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            //file is not locked
+            return false;
+        }
+
+        public static void WaitForFile(string file)
+        {
+            int retry = 10;
+            while (IsFileLocked(file) && retry>0 )
+            {
+                Thread.Sleep(100);
+                retry--;
+            }
+        }
+
     }
 }
