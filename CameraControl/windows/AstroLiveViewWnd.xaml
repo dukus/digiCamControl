@@ -77,11 +77,16 @@
             <Label Content="Star window size" Padding="1"/>
             <Slider Minimum="5" Maximum="45" Value="{Binding StarWindowSize}" Margin="3"/>
             <StackPanel Orientation="Horizontal">
+                <Label Content="{T:TranslateExtension LabelLvZoomRation}" HorizontalAlignment="Right" />
+                <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}"
+                          Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Label Content="Star Size" HorizontalContentAlignment="Center" FontSize="20"/>
                 <Label Content="{Binding StringFormat=\{0.FN\}, Path=DisplayStarSize}" HorizontalContentAlignment="Center" FontSize="20"/>
             </StackPanel>
-            <Image Stretch="Uniform" HorizontalAlignment="Center" Source="{Binding StarWindow}" Height="80"/>
-            <Image Grid.Row="3" Grid.Column="2" Stretch="Uniform" Source="{Binding Preview}" MouseDown="img_preview_MouseDown" Name="img_preview"/>
+            <Image Stretch="Uniform" HorizontalAlignment="Center" Source="{Binding StarWindow}" Height="80" Margin="5"/>
+            <Image Stretch="Uniform" Source="{Binding Preview}" MouseDown="img_preview_MouseDown" Name="img_preview" Margin="5"/>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -102,6 +99,11 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool IsFullImage
+        {
+            get { return CameraDevice.LiveViewImageZoomRatio.Value == "All"; }
+        }
+
 
         public void CalculateStarSize(WriteableBitmap bitmap)
         {
@@ -159,9 +161,11 @@ namespace CameraControl.ViewModel
                 CalculateStarSize(zoow);
                 zoow.Freeze();
                 StarWindow = zoow;
-
-                preview.Freeze();
-                Preview = preview;
+                if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
+                {
+                    preview.Freeze();
+                    Preview = preview;
+                }
 
 
                 if (Brightness != 0)

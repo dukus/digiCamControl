@@ -142,6 +142,10 @@ namespace CameraControl.windows
                 double dw = ((AstroLiveViewViewModel)DataContext).Preview.PixelWidth / live_view_image.ActualWidth;
                 double hw = ((AstroLiveViewViewModel)DataContext).Preview.PixelHeight / live_view_image.ActualHeight;
                 ((AstroLiveViewViewModel)DataContext).CentralPoint = new Point(point.X * dw, point.Y * hw);
+                if (((AstroLiveViewViewModel) DataContext).IsFullImage)
+                {
+                    ((LiveViewViewModel)DataContext).SetFocusPos(point, live_view_image.ActualWidth, live_view_image.ActualHeight);
+                }
             }
         }
 
@@ -150,9 +154,22 @@ namespace CameraControl.windows
             if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && ((AstroLiveViewViewModel)DataContext).Bitmap != null)
             {
                 Point point = e.MouseDevice.GetPosition(img_preview);
-                double dw = ((AstroLiveViewViewModel)DataContext).Preview.PixelWidth / img_preview.ActualWidth;
-                double hw = ((AstroLiveViewViewModel)DataContext).Preview.PixelHeight / img_preview.ActualHeight;
-                ((AstroLiveViewViewModel)DataContext).CentralPoint = new Point(point.X * dw, point.Y * hw);
+                if (((AstroLiveViewViewModel) DataContext).IsFullImage)
+                {
+                    double dw = ((AstroLiveViewViewModel) DataContext).Preview.PixelWidth/img_preview.ActualWidth;
+                    double hw = ((AstroLiveViewViewModel) DataContext).Preview.PixelHeight/img_preview.ActualHeight;
+                    ((AstroLiveViewViewModel) DataContext).CentralPoint = new Point(point.X*dw, point.Y*hw);
+                }
+                try
+                {
+                    ((LiveViewViewModel)DataContext).SetFocusPos(point, img_preview.ActualWidth,img_preview.ActualHeight);
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Focus Error", exception);
+                    StaticHelper.Instance.SystemMessage = "Focus error: " + exception.Message;
+                }
+
             }
         }
     }
