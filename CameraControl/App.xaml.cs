@@ -47,6 +47,7 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
+using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
 using Application = System.Windows.Application;
@@ -369,13 +370,19 @@ namespace CameraControl
         {
             Log.Debug("cameraDevice_CameraInitDone 1");
             var property = cameraDevice.LoadProperties();
-            cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
             CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
+            // multiple canon cameras block with this settings
+            if (!(cameraDevice is CanonSDKBase))
+                cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
+
+            Log.Debug("cameraDevice_CameraInitDone 1a");
             if (ServiceProvider.Settings.SyncCameraDateTime)
             {
                 try
                 {
+                    Log.Debug("set time 1");
                     cameraDevice.DateTime = DateTime.Now;
+                    Log.Debug("set time 2");
                 }
                 catch (Exception exception)
                 {
