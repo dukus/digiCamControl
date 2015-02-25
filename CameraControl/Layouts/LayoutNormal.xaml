@@ -44,7 +44,7 @@
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
                     </Image.InputBindings>
                     <Image.Effect>
-                        <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
+                        <DropShadowEffect ShadowDepth="10" Color="Black" BlurRadius="20" />
                     </Image.Effect>
                 </Image>
             </xctk:Zoombox>

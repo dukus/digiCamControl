@@ -24,6 +24,29 @@ namespace CameraControl.Plugins.ExternalDevices
         public CustomConfig CustomConfig { get; set; }
         private SerialPort sp = new SerialPort();
 
+        public string Port
+        {
+            get { return CustomConfig.Get("Port"); }
+            set { CustomConfig.Set("Port", value); }
+        }
+
+        public string Init
+        {
+            get { return CustomConfig.Get("Init"); }
+            set { CustomConfig.Set("Init", value); }
+        }
+
+        public string CaptureOn
+        {
+            get { return CustomConfig.Get("CaptureOn"); }
+            set { CustomConfig.Set("CaptureOn", value); }
+        }
+
+        public string CaptureOff
+        {
+            get { return CustomConfig.Get("CaptureOff"); }
+            set { CustomConfig.Set("CaptureOff", value); }
+        }
 
         public UsbRelayReleaseConfig()
         {

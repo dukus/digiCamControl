@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:externalDevices="clr-namespace:CameraControl.Plugins.ExternalDevices"
              mc:Ignorable="d" 
-             d:DesignHeight="120" d:DesignWidth="368" >
+             d:DesignHeight="200" d:DesignWidth="300" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -13,9 +13,19 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="53*" />
         </Grid.RowDefinitions>
         <Label Content="Com port"  />
-        <ComboBox Grid.Column="1" Margin="2" Name="cmb_ports" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=externalDevices:UsbRelayReleaseConfig, AncestorLevel=1}, Path=Port}"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="2" Name="cmb_ports" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=externalDevices:UsbRelayReleaseConfig, AncestorLevel=1}, Path=Port}"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Init sequence" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="2" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=externalDevices:UsbRelayReleaseConfig, AncestorLevel=1}, Path=Init}"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Shutter On" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="2" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=externalDevices:UsbRelayReleaseConfig, AncestorLevel=1}, Path=CaptureOn}"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Shutter Off" />
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="2" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=externalDevices:UsbRelayReleaseConfig, AncestorLevel=1}, Path=CaptureOff}"/>
+        <Label Grid.ColumnSpan="2" Content="All values are hexadecimal values ex. 50AB" Grid.Row="4"/>
     </Grid>
 </UserControl>
