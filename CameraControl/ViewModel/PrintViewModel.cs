@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -31,53 +32,54 @@ namespace CameraControl.ViewModel
         private bool _rotate;
         private bool _repeat;
 
+        public PrintSettings PrintSettings { get; set; }
 
         public string PrinterName
         {
-            get { return _printerName; }
+            get { return PrintSettings.PrinterName; }
             set
             {
-                _printerName = value;
+                PrintSettings.PrinterName = value;
                 RaisePropertyChanged(() => PrinterName);
             }
         }
 
         public string PaperName
         {
-            get { return _paperName; }
+            get { return PrintSettings.PaperName; }
             set
             {
-                _paperName = value;
+                PrintSettings.PaperName = value;
                 RaisePropertyChanged(() => PaperName);
             }
         }
 
         public int PageWidth
         {
-            get { return _pageWidth; }
+            get { return PrintSettings.PageWidth; }
             set
             {
-                _pageWidth = value;
+                PrintSettings.PageWidth = value;
                 RaisePropertyChanged(()=>PageWidth);
             }
         }
 
         public int PageHeight
         {
-            get { return _pageHeight; }
+            get { return PrintSettings.PageHeight; }
             set
             {
-                _pageHeight = value;
+                PrintSettings.PageHeight = value;
                 RaisePropertyChanged(() => PageHeight);
             }
         }
 
         public int Rows
         {
-            get { return _rows; }
+            get { return PrintSettings.Rows; }
             set
             {
-                _rows = value;
+                PrintSettings.Rows = value;
                 RaisePropertyChanged(() => Rows);
                 InitItems();
             }
@@ -85,10 +87,10 @@ namespace CameraControl.ViewModel
 
         public int Cols
         {
-            get { return _cols; }
+            get { return PrintSettings.Cols; }
             set
             {
-                _cols = value;
+                PrintSettings.Cols = value;
                 RaisePropertyChanged(() => Cols);
                 InitItems();
             }
@@ -96,20 +98,20 @@ namespace CameraControl.ViewModel
 
         public int MarginBetweenImages
         {
-            get { return _marginBetweenImages; }
+            get { return PrintSettings.MarginBetweenImages; }
             set
             {
-                _marginBetweenImages = value;
+                PrintSettings.MarginBetweenImages = value;
                 RaisePropertyChanged(() => MarginBetweenImages);
             }
         }
 
         public bool Repeat
         {
-            get { return _repeat; }
+            get { return PrintSettings.Repeat; }
             set
             {
-                _repeat = value;
+                PrintSettings.Repeat = value;
                 RaisePropertyChanged(()=>Repeat);
                 InitItems();
             }
@@ -127,10 +129,10 @@ namespace CameraControl.ViewModel
 
         public bool Rotate
         {
-            get { return _rotate; }
+            get { return PrintSettings.Rotate; }
             set
             {
-                _rotate = value;
+                PrintSettings.Rotate = value;
                 RaisePropertyChanged(() => Rotate);
                 InitItems();
             }
@@ -139,17 +141,16 @@ namespace CameraControl.ViewModel
 
         public PrintViewModel()
         {
+            PrintSettings = ServiceProvider.Settings.DefaultSession.PrintSettings;
             PrintSetupCommand = new RelayCommand(PrintSetup);
             PageSetupCommand = new RelayCommand(PageSetup);
             PrintCommand = new RelayCommand(Print);
             if (!IsInDesignMode)
             {
                 Items = new ObservableCollection<PrintItemViewModel>();
-                Rows = 1;
-                Cols = 1;
-                MarginBetweenImages = 0;
             }
             LoadPrinterSettings();
+            InitItems();
         }
 
         private void Print()

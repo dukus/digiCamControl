@@ -15,12 +15,11 @@ namespace CameraControl.ViewModel
 {
     public class AstroLiveViewViewModel:LiveViewViewModel
     {
+        private object _locker = new object();
         private Point _centralPoint;
         private int _zoomFactor;
         private BitmapSource _starWindow;
 
-        private int MaximumValue = 0;
-        private int MinimumValue = 0;
         private int Threshold = 400;
         private double StarSizeOld = 0;
         private double K = 10;
@@ -126,8 +125,6 @@ namespace CameraControl.ViewModel
                         Min = greyVal;
                 }
             }
-            MaximumValue = Max;
-            MinimumValue = Min;
             Threshold = (Max + Min)/2;
             StarSize = ((double) Count + K*StarSizeOld)/(K + 1);
             StarSizeOld = StarSize;
@@ -137,73 +134,85 @@ namespace CameraControl.ViewModel
 
         public override void GetLiveImage()
         {
-            try
+            lock (_locker)
             {
-                LiveViewData = LiveViewManager.GetLiveViewImage(CameraDevice);
-            }
-            catch (Exception)
-            {
-                return;
-            }
+                try
+                {
+                    LiveViewData = LiveViewManager.GetLiveViewImage(CameraDevice);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
 
-            if (LiveViewData == null || LiveViewData.ImageData == null)
-                return;
-            MemoryStream stream = new MemoryStream(LiveViewData.ImageData,
-                                                   LiveViewData.ImageDataPosition,
-                                                   LiveViewData.ImageData.Length -
-                                                   LiveViewData.ImageDataPosition);
-            using (var bmp = new Bitmap(stream))
-            {
-                Bitmap res = bmp;
-                var preview = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
-                var zoow = preview.Crop((int)(CentralPoint.X - (StarWindowSize / 2)), (int)(CentralPoint.Y - (StarWindowSize / 2)),
+                if (LiveViewData == null || LiveViewData.ImageData == null)
+                    return;
+                MemoryStream stream = new MemoryStream(LiveViewData.ImageData,
+                    LiveViewData.ImageDataPosition,
+                    LiveViewData.ImageData.Length -
+                    LiveViewData.ImageDataPosition);
+                using (var bmp = new Bitmap(stream))
+                {
+                    Bitmap res = bmp;
+                    var preview = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
+                    var zoow = preview.Crop((int) (CentralPoint.X - (StarWindowSize/2)),
+                        (int) (CentralPoint.Y - (StarWindowSize/2)),
                         StarWindowSize, StarWindowSize);
-                CalculateStarSize(zoow);
-                zoow.Freeze();
-                StarWindow = zoow;
-                if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
-                {
-                    preview.Freeze();
-                    Preview = preview;
+                    CalculateStarSize(zoow);
+                    zoow.Freeze();
+                    StarWindow = zoow;
+                    if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
+                    {
+                        preview.Freeze();
+                        Preview = preview;
+                    }
+
+
+                    if (Brightness != 0)
+                    {
+                        BrightnessCorrection filter = new BrightnessCorrection(Brightness);
+                        res = filter.Apply(res);
+                    }
+                    if (EdgeDetection)
+                    {
+                        var filter = new FiltersSequence(
+                            Grayscale.CommonAlgorithms.BT709,
+                            new HomogenityEdgeDetector()
+                            );
+                        res = filter.Apply(res);
+                    }
+
+                    var _bitmap = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
+                    DrawGrid(_bitmap);
+
+                    if (ZoomFactor > 1)
+                    {
+                        double d = _bitmap.PixelWidth/(double) ZoomFactor;
+                        double h = _bitmap.PixelHeight/(double) ZoomFactor;
+                        _bitmap = _bitmap.Crop((int) (CentralPoint.X - (d/2)), (int) (CentralPoint.Y - (h/2)),
+                            (int) d, (int) h);
+                    }
+
+                    _bitmap.Freeze();
+                    Bitmap = _bitmap;
                 }
 
-
-                if (Brightness != 0)
-                {
-                    BrightnessCorrection filter = new BrightnessCorrection(Brightness);
-                    res = filter.Apply(res);
-                }
-                if (EdgeDetection)
-                {
-                    var filter = new FiltersSequence(
-                        Grayscale.CommonAlgorithms.BT709,
-                        new HomogenityEdgeDetector()
-                        );
-                    res = filter.Apply(res);
-                }
-
-                var _bitmap = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
-                DrawGrid(_bitmap);
-
-                if (ZoomFactor > 1)
-                {
-                    double d = _bitmap.PixelWidth/(double) ZoomFactor;
-                    double h = _bitmap.PixelHeight/(double) ZoomFactor;
-                    _bitmap = _bitmap.Crop((int) (CentralPoint.X - (d/2)), (int) (CentralPoint.Y - (h/2)),
-                        (int) d, (int) h);
-                }
-
-                _bitmap.Freeze();
-                Bitmap = _bitmap;
             }
+        }
 
+        public override void SetFocusPos(int x, int y)
+        {
+            lock (_locker)
+            {
+                base.SetFocusPos(x, y);                
+            }
         }
 
         private void DrawGrid(WriteableBitmap bitmap)
         {
             if (CentralPoint.X == 0 && CentralPoint.Y == 0)
             {
-                CentralPoint = new System.Windows.Point(bitmap.PixelWidth / 2, bitmap.PixelHeight / 2);
+                CentralPoint = new Point(bitmap.PixelWidth / 2, bitmap.PixelHeight / 2);
             }
             WriteableBitmap tempbitmap = new WriteableBitmap(bitmap.PixelWidth, bitmap.PixelHeight, bitmap.DpiX,
                                                              bitmap.DpiY, PixelFormats.Pbgra32, bitmap.Palette);

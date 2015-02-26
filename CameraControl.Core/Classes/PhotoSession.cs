@@ -363,6 +363,7 @@ namespace CameraControl.Core.Classes
         }
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
+        public PrintSettings PrintSettings { get; set; }
         
         private FileSystemWatcher _systemWatcher;
 
@@ -419,6 +420,7 @@ namespace CameraControl.Core.Classes
             LowerCaseExtension = true;
             AutoExportPluginConfigs = new AsyncObservableCollection<AutoExportPluginConfig>();
             TimeLapseSettings = new TimeLapseSettings();
+            PrintSettings = new PrintSettings();
         }
 
         private void ConfigurePlugin(AutoExportPluginConfig plugin)

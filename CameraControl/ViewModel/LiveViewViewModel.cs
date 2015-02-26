@@ -2272,7 +2272,7 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void SetFocusPos(int x, int y)
+        public virtual void SetFocusPos(int x, int y)
         {
             try
             {

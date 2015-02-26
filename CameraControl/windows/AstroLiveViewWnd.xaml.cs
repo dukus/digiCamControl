@@ -139,8 +139,8 @@ namespace CameraControl.windows
             if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left &&((AstroLiveViewViewModel)DataContext).Bitmap!=null && ((AstroLiveViewViewModel)DataContext).ZoomFactor==1)
             {
                 Point point = e.MouseDevice.GetPosition(live_view_image);
-                double dw = ((AstroLiveViewViewModel)DataContext).Preview.PixelWidth / live_view_image.ActualWidth;
-                double hw = ((AstroLiveViewViewModel)DataContext).Preview.PixelHeight / live_view_image.ActualHeight;
+                double dw = ((AstroLiveViewViewModel)DataContext).Bitmap.PixelWidth / live_view_image.ActualWidth;
+                double hw = ((AstroLiveViewViewModel)DataContext).Bitmap.PixelHeight / live_view_image.ActualHeight;
                 ((AstroLiveViewViewModel)DataContext).CentralPoint = new Point(point.X * dw, point.Y * hw);
                 if (((AstroLiveViewViewModel) DataContext).IsFullImage)
                 {
