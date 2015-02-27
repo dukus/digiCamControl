@@ -20,10 +20,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "Crop"; }
         }
 
-        public string Execute(string source, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem item, string dest, ValuePairEnumerator configData)
         {
             var conf = new CropTransformViewModel(configData);
-            using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(source)))
+            using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(item.FileName)))
             {
                 BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
                     BitmapCreateOptions.PreservePixelFormat,

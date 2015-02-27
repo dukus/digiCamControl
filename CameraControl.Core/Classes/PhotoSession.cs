@@ -447,7 +447,7 @@ namespace CameraControl.Core.Classes
             var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
             try
             {
-                pl.Execute(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, plugin);
+                pl.Execute(ServiceProvider.Settings.SelectedBitmap.FileItem, plugin);
             }
             catch (Exception ex)
             {

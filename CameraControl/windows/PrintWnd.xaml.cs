@@ -68,7 +68,7 @@ namespace CameraControl.windows
         {
             try
             {
-                ((PrintViewModel)DataContext).dlg.PrintVisual(ItemsControl, "");
+                ((PrintViewModel)DataContext).Dlg.PrintVisual(ItemsControl, "");
             }
             catch (Exception exception)
             {

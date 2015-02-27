@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.FtpClient;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using CameraControl.Core;
@@ -16,17 +13,18 @@ namespace CameraControl.Plugins.AutoExportPlugins
 {
     public class FtpPlugin : IAutoExportPlugin
     {
-        public bool Execute(string filename, AutoExportPluginConfig configData)
+        public bool Execute(FileItem item, AutoExportPluginConfig configData)
         {
-            Thread thread = new Thread(() => Send(filename, configData));
+            Thread thread = new Thread(() => Send(item, configData));
             thread.Start();
             return true;
         }
 
-        private void Send(string filename, AutoExportPluginConfig configData)
+        private void Send(FileItem item, AutoExportPluginConfig configData)
         {
             try
             {
+                var filename = item.FileName;
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new FtpPluginViewModel(configData);
@@ -34,7 +32,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
 
                 outfile = tp != null && conf.TransformPlugin != BasePluginViewModel.EmptyTransformFilter
-                    ? tp.Execute(filename, outfile, configData.ConfigData)
+                    ? tp.Execute(item, outfile, configData.ConfigData)
                     : filename;
                 using (FtpClient conn = new FtpClient())
                 {

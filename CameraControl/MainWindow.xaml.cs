@@ -420,6 +420,14 @@ namespace CameraControl
                 if (session.ExternalData != null)
                     session.ExternalData.FileName = fileName;
 
+                // prevent crash og GUI when item count updated
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    _selectedItem = session.AddFile(fileName);
+                    _selectedItem.BackupFileName = backupfile;
+                    _selectedItem.Series = session.Series;
+                }));
+
                 foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
                 {
                     if(!plugin.IsEnabled)
@@ -427,7 +435,7 @@ namespace CameraControl
                     var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
                     try
                     {
-                        pl.Execute(fileName, plugin);
+                        pl.Execute(_selectedItem, plugin);
                     }
                     catch (Exception ex)
                     {
@@ -437,14 +445,6 @@ namespace CameraControl
                         Log.Error("Error to apply plugin", ex);
                     }
                 }
-
-                // prevent crash og GUI when item count updated
-                Dispatcher.Invoke(new Action(delegate
-                {
-                    _selectedItem = session.AddFile(fileName);
-                    _selectedItem.BackupFileName = backupfile;
-                    _selectedItem.Series = session.Series;
-                }));
 
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)

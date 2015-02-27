@@ -13,10 +13,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
 {
     public class ExecuteFilePlugin : IAutoExportPlugin
     {
-        public bool Execute(string filename, AutoExportPluginConfig configData)
+        public bool Execute(FileItem item, AutoExportPluginConfig configData)
         {
             configData.IsRedy = false;
             configData.IsError = false;
+            var filename = item.FileName;
             var conf = new ExecuteFilePluginViewModel(configData);
             if (string.IsNullOrEmpty(conf.PathToExe) || !File.Exists(conf.PathToExe))
             {
@@ -29,7 +30,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
 
             outfile = tp != null && conf.TransformPlugin != BasePluginViewModel.EmptyTransformFilter
-                ? tp.Execute(filename, outfile, configData.ConfigData)
+                ? tp.Execute(item, outfile, configData.ConfigData)
                 : filename;
 
             if (File.Exists(outfile))

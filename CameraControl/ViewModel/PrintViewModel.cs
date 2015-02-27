@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using CameraControl.Core;
@@ -16,21 +12,12 @@ namespace CameraControl.ViewModel
 {
     public class PrintViewModel : ViewModelBase
     {
-        private string _printerName;
-        private string _paperName;
-        private int _pageWidth;
-        private int _pageHeight;
-        private int _rows;
-        private int _cols;
         private ObservableCollection<PrintItemViewModel> _items;
         public RelayCommand PrintSetupCommand { get; set; }
         public RelayCommand PageSetupCommand { get; set; }
         public RelayCommand PrintCommand { get; set; }
 
-        public PrintDialog dlg = new PrintDialog();
-        private int _marginBetweenImages;
-        private bool _rotate;
-        private bool _repeat;
+        public readonly PrintDialog Dlg = new PrintDialog();
 
         public PrintSettings PrintSettings { get; set; }
 
@@ -176,14 +163,14 @@ namespace CameraControl.ViewModel
                     if (i < files.Count)
                     file = files[i];
                 }
-                Items.Add(new PrintItemViewModel() {FileItem = file, Parent = this});
+                Items.Add(new PrintItemViewModel {FileItem = file, Parent = this});
             }
         }
 
         private void PrintSetup()
         {
 
-            if (dlg.ShowDialog() == true)
+            if (Dlg.ShowDialog() == true)
             {
                 LoadPrinterSettings();
             }
@@ -193,10 +180,13 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                PrinterName = dlg.PrintQueue.Name;
-                System.Printing.PrintCapabilities capabilities = dlg.PrintQueue.GetPrintCapabilities(dlg.PrintTicket);
-                PageWidth = (int) capabilities.PageImageableArea.ExtentWidth;
-                PageHeight = (int) capabilities.PageImageableArea.ExtentHeight;
+                PrinterName = Dlg.PrintQueue.Name;
+                System.Printing.PrintCapabilities capabilities = Dlg.PrintQueue.GetPrintCapabilities(Dlg.PrintTicket);
+                if (capabilities.PageImageableArea != null)
+                {
+                    PageWidth = (int) capabilities.PageImageableArea.ExtentWidth;
+                    PageHeight = (int) capabilities.PageImageableArea.ExtentHeight;
+                }
             }
             catch (Exception exception)
             {

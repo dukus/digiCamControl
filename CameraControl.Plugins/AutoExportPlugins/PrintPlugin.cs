@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,18 +14,18 @@ namespace CameraControl.Plugins.AutoExportPlugins
     public class PrintPlugin : IAutoExportPlugin
     {
 
-        public bool Execute(string filename, AutoExportPluginConfig configData)
+        public bool Execute(FileItem item, AutoExportPluginConfig configData)
         {
             //if (!configData.IsRedy)
             //    return false;
             //Print(filename, configData);
-            Thread thread = new Thread(() => Print(filename, configData));
+            Thread thread = new Thread(() => Print(item, configData));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
             return true;
         }
 
-        private void Print(string filename, AutoExportPluginConfig configData)
+        private void Print(FileItem item, AutoExportPluginConfig configData)
         {
             try
             {
@@ -36,12 +33,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new PrintPluginViewModel(configData);
-                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
+                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(item.FileName));
                 var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
 
                 outfile = tp != null && conf.TransformPlugin != BasePluginViewModel.EmptyTransformFilter
-                    ? tp.Execute(filename, outfile, configData.ConfigData)
-                    : filename;
+                    ? tp.Execute(item, outfile, configData.ConfigData)
+                    : item.FileName;
 
                 System.Printing.PrintCapabilities capabilities = dlg.PrintQueue.GetPrintCapabilities(dlg.PrintTicket);
                 var PageWidth = (int)capabilities.PageImageableArea.ExtentWidth;
@@ -66,7 +63,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 panel.Measure(new Size(PageWidth, PageHeight));
                 panel.Arrange(new Rect(new Point(0, 0), panel.DesiredSize));
                 panel.UpdateLayout();
-                dlg.PrintVisual(panel, filename);
+                dlg.PrintVisual(panel, item.Name);
                 image.Source = null;
                 panel.Children.Clear();
             }

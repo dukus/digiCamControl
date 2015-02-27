@@ -17,9 +17,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "NoTransform"; } 
         }
 
-        public string Execute(string source, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem item, string dest, ValuePairEnumerator configData)
         {
-            File.Copy(source, dest, true);
+            if (item.FileName != dest)
+                File.Copy(item.FileName, dest, true);
             return dest;
         }
 

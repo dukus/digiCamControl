@@ -13,10 +13,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
     public class CopyFilePlugin: IAutoExportPlugin
     {
 
-        public bool Execute(string filename, AutoExportPluginConfig configData)
+        public bool Execute(FileItem item, AutoExportPluginConfig configData)
         {
             configData.IsRedy = false;
             configData.IsError = false;
+            var filename = item.FileName;
             var conf = new CopyFilePluginViewModel(configData);
             if (string.IsNullOrEmpty(conf.Path))
             {
@@ -42,7 +43,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
             if (tp != null)
             {
-                tp.Execute(filename, outfile, configData.ConfigData);
+                tp.Execute(item, outfile, configData.ConfigData);
             }
             configData.IsRedy = true;
             return true;            
