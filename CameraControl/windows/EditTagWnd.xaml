@@ -5,6 +5,7 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:controls="clr-namespace:CameraControl.Controls"
+                      xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                       Title="{T:TranslateExtension EditTagWindowTitle}" Height="340" Width="397" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" IsMaxRestoreButtonEnabled="False" IsMinButtonEnabled="False" >
     <Window.DataContext>
         <Classes:TagItem/>
@@ -64,7 +65,7 @@
         <CheckBox Grid.Column="1" Grid.Row="6" Margin="2" IsChecked="{Binding Path=Tag4Checked}"/>
 
         <Label Grid.Column="0" Grid.Row="7" Content="{T:TranslateExtension LabelColor}" Margin="2" HorizontalContentAlignment="Right" />
-        <controls:Colorpicker Grid.Row="7" Grid.Column="1" Margin="3" SelectedColor="{Binding Color, Mode=TwoWay}" />
+        <wpf:Colorpicker Grid.Row="7" Grid.Column="1" Margin="3" SelectedColor="{Binding Color, Mode=TwoWay}" />
         
         <Button Content="{T:TranslateExtension ButtonSave}" Grid.Row="9" Height="23" HorizontalAlignment="Left" Margin="3" Name="btn_save" VerticalAlignment="Top" Width="75" Click="btn_save_Click" />
         <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Column="1" Grid.Row="9" Height="23" HorizontalAlignment="Right" Margin="3" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />

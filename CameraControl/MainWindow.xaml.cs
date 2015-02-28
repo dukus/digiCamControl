@@ -426,6 +426,7 @@ namespace CameraControl
                     _selectedItem = session.AddFile(fileName);
                     _selectedItem.BackupFileName = backupfile;
                     _selectedItem.Series = session.Series;
+                    _selectedItem.AddTemplates(eventArgs.CameraDevice,session);
                 }));
 
                 foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)

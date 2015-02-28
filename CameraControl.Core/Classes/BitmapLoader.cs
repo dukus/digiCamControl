@@ -257,6 +257,40 @@ namespace CameraControl.Core.Classes
             return targetFrame;
         }
 
+
+        public static BitmapSource SaveImageSource(FrameworkElement obj, int width, int height)
+        {
+            // Save current canvas transform
+            Transform transform = obj.LayoutTransform;
+            obj.LayoutTransform = null;
+            obj.Width = width;
+            obj.Height = height;
+            obj.UpdateLayout();
+            obj.UpdateLayout();
+            // fix margin offset as well
+            Thickness margin = obj.Margin;
+            obj.Margin = new Thickness(0, 0,
+                 margin.Right - margin.Left, margin.Bottom - margin.Top);
+
+            // Get the size of canvas
+            Size size = new Size(width, height);
+
+            // force control to Update
+            obj.Measure(size);
+            obj.Arrange(new Rect(size));
+
+            RenderTargetBitmap bmp = new RenderTargetBitmap(
+                width, height, 96, 96, PixelFormats.Pbgra32);
+
+            bmp.Render(obj);
+
+            // return values as they were before
+            obj.LayoutTransform = transform;
+            obj.Margin = margin;
+            return bmp;
+        }
+
+
         public static void Save2Jpg(BitmapSource source, string filename)
         {
             string dir = Path.GetDirectoryName(filename);
@@ -268,6 +302,7 @@ namespace CameraControl.Core.Classes
             {
                 JpegBitmapEncoder encoder = new JpegBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(source));
+                encoder.QualityLevel = 90;
                 encoder.Save(stream);
                 stream.Close();
             }

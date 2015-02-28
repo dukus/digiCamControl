@@ -11,7 +11,8 @@
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance Type=Classes:Settings, IsDesignTimeCreatable=True}" xmlns:my1="clr-namespace:CameraControl.windows"
                        xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
-                       xmlns:controls="clr-namespace:CameraControl.Controls">
+                       xmlns:controls="clr-namespace:CameraControl.Controls"
+                       xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -201,7 +202,7 @@
                     <CheckBox  Grid.Row="0" Grid.Column="1" Margin="3" IsChecked="{Binding ShowMagnifierInFullSccreen}"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelFullscrenBack}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                    <controls:Colorpicker Grid.Row="1" Grid.Column="1" Margin="3" SelectedColor="{Binding FullScreenColor, Mode=TwoWay}" />
+                    <wpf:Colorpicker Grid.Row="1" Grid.Column="1" Margin="3" SelectedColor="{Binding FullScreenColor, Mode=TwoWay}" />
 
                     <Label Grid.Row="2" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelPreviewAfterCapture}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="2" Grid.Column="1" Margin="3" IsChecked="{Binding Preview}"/>

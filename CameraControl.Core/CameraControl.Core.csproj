@@ -271,6 +271,9 @@
     <Compile Include="Wpf\AdvancedSlider.xaml.cs">
       <DependentUpon>AdvancedSlider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\Colorpicker.xaml.cs">
+      <DependentUpon>Colorpicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\HeaderToImageConverter.cs" />
     <Compile Include="Wpf\ListBoxBehavior.cs" />
     <Compile Include="Wpf\ProgressWindow.xaml.cs">
@@ -312,6 +315,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wpf\AdvancedSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\Colorpicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -219,6 +219,8 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public AsyncObservableCollection<ValuePair> FileNameTemplates { get; set; }
+
         public FileItem()
         {
             IsLoaded = false;
@@ -247,6 +249,7 @@ namespace CameraControl.Core.Classes
             Name = Path.GetFileName(file);
             ItemType = FileItemType.File;
             //FileInfo = new FileInfo();
+            FileNameTemplates = new AsyncObservableCollection<ValuePair>();
         }
 
         public void SetFile(string file)
@@ -257,7 +260,25 @@ namespace CameraControl.Core.Classes
             ItemType = FileItemType.File;
             //FileInfo = new FileInfo();
         }
-        
+
+        public void AddTemplates(ICameraDevice device,PhotoSession session)
+        {
+            string[] skipItems =
+            {
+                "[Session Name]", "[Counter 3 digit]", "[Counter 4 digit]", "[Counter 5 digit]",
+                "[Counter 6 digit]", "[Counter 7 digit]", "[Counter 8 digit]", "[Counter 9 digit]",
+                "[Camera Counter 3 digit]","[Camera Counter 4 digit]","[Camera Counter 5 digit]","[Camera Counter 6 digit]",
+                "[Camera Counter 7 digit]","[Camera Counter 8 digit]","[Camera Counter 9 digit]"
+            };
+            foreach (var template in ServiceProvider.FilenameTemplateManager.Templates)
+            {
+                if(skipItems.Contains(template.Key))
+                    continue;
+                var val = template.Value.Pharse(template.Key, session, device, FileName);
+                if (!string.IsNullOrWhiteSpace(val))
+                    FileNameTemplates.Add(new ValuePair() {Name = template.Key, Value = val});
+            }
+        }
 
         public FileItem(ICameraDevice device, DateTime time)
         {

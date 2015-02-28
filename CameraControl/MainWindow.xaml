@@ -421,7 +421,7 @@
                                     </StackPanel>
                                 </Grid>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="False" Margin="0"  Padding="0">
+                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0">
                                 <StackPanel Orientation="Vertical">
                                     <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
                                         <ListBox.ItemTemplate>

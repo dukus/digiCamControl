@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -51,9 +47,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         public bool Configure(AutoExportPluginConfig config)
         {
-            CopyFilePluginConfig wnd = new CopyFilePluginConfig();
-            wnd.DataContext = new CopyFilePluginViewModel(config);
-            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+            var wnd = new CopyFilePluginConfig
+            {
+                DataContext = new CopyFilePluginViewModel(config),
+                Owner = ServiceProvider.PluginManager.SelectedWindow as Window
+            };
             wnd.ShowDialog();
             return true;
         }

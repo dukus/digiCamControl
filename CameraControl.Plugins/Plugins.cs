@@ -67,7 +67,8 @@ namespace CameraControl.Plugins
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new MultiCameraBoxShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DCCUSBShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new UsbRelayRelease());
-                
+
+                ServiceProvider.PluginManager.AutoExportPlugins.Add(new TransformPlugin());
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new CopyFilePlugin());
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new ExecuteFilePlugin());
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new PrintPlugin());
@@ -76,7 +77,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new NoTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ResizeTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new CropTransform());
-
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new OverlayTransform());
             }
             catch (Exception exception)
             {

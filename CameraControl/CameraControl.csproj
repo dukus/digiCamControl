@@ -256,9 +256,6 @@
       <DependentUpon>CameraItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CameraToImageSourceConverter .cs" />
-    <Compile Include="Controls\Colorpicker.xaml.cs">
-      <DependentUpon>Colorpicker.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Controler.xaml.cs">
       <DependentUpon>Controler.xaml</DependentUpon>
     </Compile>
@@ -424,10 +421,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CameraItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Colorpicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

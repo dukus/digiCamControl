@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace CameraControl.Controls
+namespace CameraControl.Core.Wpf
 {
     /// <summary>
     /// Colorpicker user control

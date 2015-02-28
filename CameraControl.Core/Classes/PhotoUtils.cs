@@ -194,7 +194,7 @@ namespace CameraControl.Core.Classes
 
         public static void WaitForFile(string file)
         {
-            int retry = 10;
+            int retry = 15;
             while (IsFileLocked(file) && retry>0 )
             {
                 Thread.Sleep(100);

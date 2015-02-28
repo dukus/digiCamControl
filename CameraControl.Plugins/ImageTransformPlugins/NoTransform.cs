@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.IO;
 using System.Windows.Controls;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;

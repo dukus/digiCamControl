@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using CameraControl.Core.Classes;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
@@ -58,5 +57,6 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 return 0;
             return Convert.ToInt32(s,CultureInfo.InvariantCulture);
         }
+
     }
 }

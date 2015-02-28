@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using CameraControl.Core.Classes;
 using GalaSoft.MvvmLight;
 
@@ -36,7 +33,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public bool KeepAspect
         {
-            get { return _config["KeepAspect"]=="true"; }
+            get { return _config["KeepAspect"]=="True"; }
             set { _config["KeepAspect"] = value.ToString(); }
         }
 

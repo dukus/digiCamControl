@@ -151,6 +151,11 @@
       <DependentUpon>PrintPluginConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="AutoExportPlugins\PrintPluginViewModel.cs" />
+    <Compile Include="AutoExportPlugins\TransformPlugin.cs" />
+    <Compile Include="AutoExportPlugins\TransformPluginConfig.xaml.cs">
+      <DependentUpon>TransformPluginConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoExportPlugins\TransformPluginViewModel.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="ExportPlugins\ExportToZip.cs" />
     <Compile Include="ExternalDevices\DCCUSBShutterRelease.cs" />
@@ -173,6 +178,11 @@
     </Compile>
     <Compile Include="ImageTransformPlugins\CropTransformViewModel.cs" />
     <Compile Include="ImageTransformPlugins\NoTransform.cs" />
+    <Compile Include="ImageTransformPlugins\OverlayTransform.cs" />
+    <Compile Include="ImageTransformPlugins\OverlayTransformViewModel.cs" />
+    <Compile Include="ImageTransformPlugins\OverlayTransformView.xaml.cs">
+      <DependentUpon>OverlayTransformView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageTransformPlugins\ResizeTransform.cs" />
     <Compile Include="ImageTransformPlugins\ResizeTransformView.xaml.cs">
       <DependentUpon>ResizeTransformView.xaml</DependentUpon>
@@ -245,6 +255,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AutoExportPlugins\TransformPluginConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExternalDevices\DCCUSBShutterReleaseConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -258,6 +272,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\CropTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\OverlayTransformView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
