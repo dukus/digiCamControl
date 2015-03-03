@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -7,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 
@@ -147,8 +145,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public UserControl GetConfig(ValuePairEnumerator configData)
         {
-            var control = new OverlayTransformView();
-            control.DataContext = new OverlayTransformViewModel(configData);
+            var control = new OverlayTransformView {DataContext = new OverlayTransformViewModel(configData)};
             return control;
         }
     }

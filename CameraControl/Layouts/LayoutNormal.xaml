@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="LayoutBaseResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
         </ResourceDictionary>
 
     </UserControl.Resources>
@@ -24,9 +24,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="364*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
-            
+
             <!--<xctk:MagnifierManager.Magnifier>
                 <xctk:Magnifier Radius="100" ZoomFactor=".4" Target="{Binding ElementName=image1}" />
             </xctk:MagnifierManager.Magnifier>-->
@@ -48,25 +49,8 @@
                     </Image.Effect>
                 </Image>
             </xctk:Zoombox>
-
-            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="5"  Background="Transparent">
-                <Path Width="50" Height="40"
-                                  Canvas.Left="15.9063"
-                                  Canvas.Top="14.75"
-                                  Stretch="Fill"
-                                  Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
-            </Button>
-            <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="5" Background="Transparent">
-                <Path Width="50" Height="40"
-                                  Canvas.Left="15.9063"
-                                  Canvas.Top="14.75"
-                                  Stretch="Fill"
-                                  Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
-            </Button>
-
             <!--</local:ZoomBorder>-->
+            <!--
             <ProgressBar Height="10" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Value="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=LoadingProgress}" Opacity="0.5" Panel.ZIndex="1" IsIndeterminate="True" />
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
                 <ToggleButton  Height="60" Name="but_unlike" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
@@ -84,29 +68,74 @@
                     </Rectangle>
                 </ToggleButton>
 
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
 
-        <ListBox Grid.Row="1" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False">
-                <ListBox.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >
-                            <MenuItem.ItemTemplate>
-                                <DataTemplate>
-                                    <MenuItem Header="{Binding Path=Title}" 
+        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5">
+            <StatusBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="{DynamicResource AccentColor}" Offset="1"/>
+                    <GradientStop Color="{DynamicResource AccentColor4}"/>
+                </LinearGradientBrush>
+            </StatusBar.Background>
+            <!--<Grid>-->
+            <Button Height="40" Width="40" Margin="5,-2" Style="{DynamicResource MetroCircleButtonStyle}" Click="ButtonPrev_Click">
+                <Path Width="20" Height="20"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />            
+            </Button>
+            <Button Height="40" Width="40" Margin="5,-2" VerticalAlignment="Center" HorizontalAlignment="Right"  Click="ButtonNext_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+                <Path Width="20" Height="20"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
+            </Button>
+            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+                <ToggleButton Height="40"  Width="40" Margin="5,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_down}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ToggleButton>
+                <ToggleButton  Height="40"  Width="40" Margin="5,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_up}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ToggleButton>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
+                <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Width="30" />
+            </StackPanel>
+            <!--</Grid>-->
+        </StatusBar>
+        <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >
+                        <MenuItem.ItemTemplate>
+                            <DataTemplate>
+                                <MenuItem Header="{Binding Path=Title}" 
                                       Command="{Binding }" 
                                       CommandParameter="{Binding}" />
-                                </DataTemplate>
-                            </MenuItem.ItemTemplate>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem Header="Delete File(s)" Name="mnu_delete_file" Command="{Binding Path=DeleteItemCommand}" />
-                        <MenuItem Header="Show in explorer" Name="mnu_show_explorer" Command="{Binding Path=OpenExplorerCommand}" />
-                        <MenuItem Header="Open in external viewer" Name="mnu_open" Command="{Binding Path=OpenViewerCommand}" />
-                        <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
-                    </ContextMenu>
-                </ListBox.ContextMenu>
-            </ListBox>
-        
+                            </DataTemplate>
+                        </MenuItem.ItemTemplate>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Delete File(s)" Name="mnu_delete_file" Command="{Binding Path=DeleteItemCommand}" />
+                    <MenuItem Header="Show in explorer" Name="mnu_show_explorer" Command="{Binding Path=OpenExplorerCommand}" />
+                    <MenuItem Header="Open in external viewer" Name="mnu_open" Command="{Binding Path=OpenViewerCommand}" />
+                    <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
     </Grid>
 </Layouts:LayoutBase>
