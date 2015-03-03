@@ -112,6 +112,8 @@ namespace CameraControl.Core.Classes
 
         public bool ShowMotionDetectionLiveView { get; set; }
 
+        public bool ShowAnimation { get; set; }
+
         public string DefaultSettings
         {
             get { return Path.Combine(Settings.ApplicationFolder, "default_settings.xml"); }

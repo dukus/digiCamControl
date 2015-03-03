@@ -180,7 +180,8 @@
                     <Button Content="Date" ToolTip="Sync camera date and time"  Name="btn_dateTime" Margin="2" Click="btn_dateTime_Click" />
                 </StackPanel>
             </StackPanel>
-            <my:ImageEx VerticalAlignment="Top" Source="{Binding Path=SelectedCameraDevice.DeviceName, Converter={StaticResource CameraToImageSourceConverter}}" x:Name="IcoImage" RenderTransformOrigin="0,1" Canvas.ZIndex="100">
+            <my:ImageEx VerticalAlignment="Top" Source="{Binding Path=SelectedCameraDevice.DeviceName, Converter={StaticResource CameraToImageSourceConverter}}" x:Name="IcoImage" RenderTransformOrigin="0,1" Canvas.ZIndex="100"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAnimation, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <my:ImageEx.RenderTransform>
                     <ScaleTransform ScaleX="7" ScaleY="7"/>
                 </my:ImageEx.RenderTransform>

@@ -38,4 +38,6 @@
   <ShowOverlayLiveView>true</ShowOverlayLiveView>
   <ShowDisplayLiveView>true</ShowDisplayLiveView>
   <ShowMotionDetectionLiveView>true</ShowMotionDetectionLiveView>
+  <!-- show animation when a camera is selected-->
+  <ShowAnimation>false</ShowAnimation>
 </Branding>
