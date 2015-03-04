@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -191,9 +192,9 @@ namespace CameraControl.Core.Classes
         }
 
 
-        private AsyncObservableCollection<FileItem> _files;
+        private ObservableCollection<FileItem> _files;
 
-        public AsyncObservableCollection<FileItem> Files
+        public ObservableCollection<FileItem> Files
         {
             get { return _files; }
             set
@@ -406,7 +407,7 @@ namespace CameraControl.Core.Classes
                 Log.Error("Error set My pictures folder", exception);
                 Folder = "c:\\";
             }
-            Files = new AsyncObservableCollection<FileItem>();
+            Files = new ObservableCollection<FileItem>();
             FileNameTemplate = "DSC_[Counter 4 digit]";
 
             UseOriginalFilename = false;

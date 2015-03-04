@@ -586,5 +586,9 @@ namespace CameraControl.Core.Translation
         public static string LabelScanBarcode = "Scan Barcode";
         public static string LabelCaptureAfterScan = "Capture after scan";
         public static string LabelKeepWindowActive = "Keep window active";
+        public static string LabelDeleteFiles = "Delete selected files";
+        public static string LabelShowInExplorer = "Show in explorer";
+        public static string LabelOpenInExternalViewer = "Open in external viewer";
+        
     }
 }

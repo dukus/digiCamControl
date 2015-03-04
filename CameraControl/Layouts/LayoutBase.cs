@@ -156,10 +156,21 @@ namespace CameraControl.Layouts
                 if (filestodelete.Count == 0)
                     return;
                 int selectedindex = ImageLIst.Items.IndexOf(filestodelete[0]);
-                if (
-                    MessageBox.Show("Do you really want to delete selected file(s) ?", "Delete file",
-                                    MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+
+                bool delete = false;
+                if (filestodelete.Count > 1)
                 {
+                    delete = MessageBox.Show("Multile files are selected !! Do you really want to delete selected files ?", "Delete files",
+                        MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+                }
+                else
+                {
+                    delete = MessageBox.Show("Do you really want to delete selected file ?", "Delete file",
+                        MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+
+                }
+                if (delete)
+                                    {
                     foreach (FileItem fileItem in filestodelete)
                     {
                         if ((ServiceProvider.Settings.SelectedBitmap != null &&

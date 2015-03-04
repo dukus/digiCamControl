@@ -6,8 +6,8 @@
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                     xmlns:Layouts="clr-namespace:CameraControl.Layouts"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                     mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"                    
              d:DesignHeight="484" d:DesignWidth="689">
     <UserControl.Resources>
@@ -79,7 +79,7 @@
                 </LinearGradientBrush>
             </StatusBar.Background>
             <!--<Grid>-->
-            <Button Height="40" Width="40" Margin="5,-2" Style="{DynamicResource MetroCircleButtonStyle}" Click="ButtonPrev_Click">
+            <Button Height="40" Width="40" Margin="2,-2" Style="{DynamicResource MetroCircleButtonStyle}" Click="ButtonPrev_Click">
                 <Path Width="20" Height="20"
                                   Canvas.Left="15.9063"
                                   Canvas.Top="14.75"
@@ -87,7 +87,7 @@
                                   Fill="{DynamicResource BlackBrush}"
                                   Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />            
             </Button>
-            <Button Height="40" Width="40" Margin="5,-2" VerticalAlignment="Center" HorizontalAlignment="Right"  Click="ButtonNext_Click" Style="{DynamicResource MetroCircleButtonStyle}">
+            <Button Height="40" Width="40" Margin="2,-2" VerticalAlignment="Center" HorizontalAlignment="Right"  Click="ButtonNext_Click" Style="{DynamicResource MetroCircleButtonStyle}">
                 <Path Width="20" Height="20"
                                   Canvas.Left="15.9063"
                                   Canvas.Top="14.75"
@@ -96,14 +96,14 @@
                                   Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
             </Button>
             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
-                <ToggleButton Height="40"  Width="40" Margin="5,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                <ToggleButton Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_down}" />
                         </Rectangle.Fill>
                     </Rectangle>
                 </ToggleButton>
-                <ToggleButton  Height="40"  Width="40" Margin="5,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                <ToggleButton  Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_up}" />
@@ -111,6 +111,27 @@
                     </Rectangle>
                 </ToggleButton>
             </StackPanel>
+            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_folder_open}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_image_select}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
             <StackPanel HorizontalAlignment="Right">
                 <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Width="30" />
             </StackPanel>
@@ -129,9 +150,6 @@
                         </MenuItem.ItemTemplate>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="Delete File(s)" Name="mnu_delete_file" Command="{Binding Path=DeleteItemCommand}" />
-                    <MenuItem Header="Show in explorer" Name="mnu_show_explorer" Command="{Binding Path=OpenExplorerCommand}" />
-                    <MenuItem Header="Open in external viewer" Name="mnu_open" Command="{Binding Path=OpenViewerCommand}" />
                     <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
