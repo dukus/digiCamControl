@@ -254,7 +254,8 @@
                     <RowDefinition Height="25" />
                 </Grid.RowDefinitions>
 
-                <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" >
+                <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" 
+                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowHistogram, Converter={StaticResource BooleanToVisibilityConverter1}}">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="90" />
@@ -311,10 +312,12 @@
                 <Grid Grid.Row="1" Margin="0" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                         <StackPanel>
-                            <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                            <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSelectionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:SelectionControl HorizontalAlignment="Center"/>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                            <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLayoutPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Button Content="{T:TranslateExtension MenuLayoutDefault}" Click="MenuItem_Click_6" Margin="2"/>
@@ -336,7 +339,8 @@
                                     </Grid>
                                 </StackPanel>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0">
+                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*" />
@@ -421,7 +425,8 @@
                                     </StackPanel>
                                 </Grid>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0">
+                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0"
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel Orientation="Vertical">
                                     <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
                                         <ListBox.ItemTemplate>
@@ -478,7 +483,8 @@
                                     </Controls:DropDownButton>
                                 </StackPanel>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension MenuPresets}" VerticalAlignment="Top" IsExpanded="False" Margin="0" Padding="0" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" >
+                            <Expander  Header="{T:TranslateExtension MenuPresets}" VerticalAlignment="Top" IsExpanded="False" Margin="0" Padding="0" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" 
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPresetPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel>
                                     <ListBox MaxHeight="100" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" Name="PresetListBox" Margin="3">
 
@@ -533,13 +539,16 @@
                                     </StackPanel>
                                 </StackPanel>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
-                                <Panels:MetadataControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Width="250" />
-                            </Expander>
-                            <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                            <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
+                                Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowImagePropertiesPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
                             </Expander>
-                            <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0">
+                            <Expander  Header="{T:Translate LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMetadataPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                                <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" Width="250" />
+                            </Expander>
+                            <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0"
+                                      Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ExportPlugins}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -555,7 +564,8 @@
                                     </ListBox.ItemsPanel>
                                 </ListBox>
                             </Expander>
-                            <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0">
+                            <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
+                                      Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowToolsPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolPlugins}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>

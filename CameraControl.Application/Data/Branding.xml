@@ -28,9 +28,19 @@
   <ShowSettingMenuMainWindow>false</ShowSettingMenuMainWindow>
   <ShowMenuMenuMainWindow>false</ShowMenuMenuMainWindow>
   <ShowCameraSelectorMainWindow>false</ShowCameraSelectorMainWindow>
-  <ShowRightPanelMainWindow>false</ShowRightPanelMainWindow>
+  <ShowRightPanelMainWindow>true</ShowRightPanelMainWindow>
   <ShowCameraPropertiesMainWindow>false</ShowCameraPropertiesMainWindow>
-  
+  <!-- Main window right panel customization  -->  
+  <ShowHistogram>false</ShowHistogram>
+  <ShowSelectionPanel>false</ShowSelectionPanel>
+  <ShowLayoutPanel>false</ShowLayoutPanel>
+  <ShowSessionPanel>true</ShowSessionPanel>
+  <ShowAutoExportPanel>false</ShowAutoExportPanel>
+  <ShowPresetPanel>false</ShowPresetPanel>  
+  <ShowImagePropertiesPanel>false</ShowImagePropertiesPanel>
+  <ShowMetadataPanel>false</ShowMetadataPanel>
+  <ShowExportPanel>false</ShowExportPanel>
+  <ShowToolsPanel>false</ShowToolsPanel>
    <!-- live view left panel group boxes  -->  
   <ShowFocusControlLiveView>true</ShowFocusControlLiveView>
   <ShowFocusStackingLiveView>true</ShowFocusStackingLiveView>
@@ -40,4 +50,5 @@
   <ShowMotionDetectionLiveView>true</ShowMotionDetectionLiveView>
   <!-- show animation when a camera is selected-->
   <ShowAnimation>false</ShowAnimation>
+ 
 </Branding>

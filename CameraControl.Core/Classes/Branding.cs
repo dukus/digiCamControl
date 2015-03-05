@@ -114,6 +114,26 @@ namespace CameraControl.Core.Classes
 
         public bool ShowAnimation { get; set; }
 
+        public bool ShowHistogram { get; set; }
+        
+        public bool ShowSelectionPanel { get; set; }
+
+        public bool ShowLayoutPanel { get; set; }
+
+        public bool ShowSessionPanel { get; set; }
+        
+        public bool ShowAutoExportPanel { get; set; }
+        
+        public bool ShowPresetPanel { get; set; }
+
+        public bool ShowImagePropertiesPanel { get; set; }
+
+        public bool ShowMetadataPanel { get; set; }
+
+        public bool ShowExportPanel { get; set; }
+
+        public bool ShowToolsPanel { get; set; }
+
         public string DefaultSettings
         {
             get { return Path.Combine(Settings.ApplicationFolder, "default_settings.xml"); }
@@ -150,6 +170,16 @@ namespace CameraControl.Core.Classes
             ShowOverlayLiveView = true;
             ShowDisplayLiveView = true;
             ShowMotionDetectionLiveView = true;
+            ShowHistogram = true;
+            ShowSelectionPanel = true;
+            ShowLayoutPanel = true;
+            ShowSessionPanel = true;
+            ShowAutoExportPanel = true;
+            ShowPresetPanel = true;
+            ShowImagePropertiesPanel = true;
+            ShowMetadataPanel = true;
+            ShowExportPanel = true;
+            ShowToolsPanel = true;
         }
 
         public static Branding LoadBranding()
