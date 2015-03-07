@@ -36,10 +36,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
+using GalaSoft.MvvmLight.Command;
 using Microsoft.VisualBasic.FileIO;
 using System.Windows.Controls;
 using Clipboard = System.Windows.Clipboard;
@@ -60,14 +60,15 @@ namespace CameraControl.Layouts
         public LayoutBase()
         {
             CopyNameClipboardCommand =
-                new RelayCommand<object>(
+                new RelayCommand(
                     delegate { Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName); });
-            OpenExplorerCommand = new RelayCommand<object>(OpenInExplorer);
-            OpenViewerCommand = new RelayCommand<object>(OpenViewer);
-            DeleteItemCommand = new RelayCommand<object>(DeleteItem);
+            OpenExplorerCommand = new RelayCommand(OpenInExplorer);
+            OpenViewerCommand = new RelayCommand(OpenViewer);
+            DeleteItemCommand = new RelayCommand(DeleteItem);
+            RestoreCommand = new RelayCommand(Restore);
             ImageDoubleClickCommand =
-                new RelayCommand<object>(
-                    delegate { ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show); });
+                new RelayCommand(
+                    () => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show));
             _worker.DoWork += worker_DoWork;
             _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
         }
@@ -81,6 +82,30 @@ namespace CameraControl.Layouts
             ImageLIst.SelectionChanged -= ImageLIst_SelectionChanged;
         }
 
+        private void Restore()
+        {
+            if (ServiceProvider.Settings.SelectedBitmap == null ||
+                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
+                return;
+            var item = ServiceProvider.Settings.SelectedBitmap.FileItem;
+            if (File.Exists(item.BackupFileName))
+            {
+                try
+                {
+                    PhotoUtils.WaitForFile(item.FileName);
+                    File.Copy(item.BackupFileName, item.FileName, true);
+                    item.RemoveThumbs();
+                    item.IsLoaded = false;
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Refresh_Image);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Error restore", ex);
+                }
+              
+            }
+        }
+
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (_selectedItem != ServiceProvider.Settings.SelectedBitmap.FileItem)
@@ -91,17 +116,19 @@ namespace CameraControl.Layouts
         }
 
 
-        public RelayCommand<object> CopyNameClipboardCommand { get; private set; }
+        public RelayCommand CopyNameClipboardCommand { get; private set; }
 
-        public RelayCommand<object> OpenExplorerCommand { get; private set; }
+        public RelayCommand OpenExplorerCommand { get; private set; }
 
-        public RelayCommand<object> OpenViewerCommand { get; private set; }
+        public RelayCommand OpenViewerCommand { get; private set; }
 
-        public RelayCommand<object> DeleteItemCommand { get; private set; }
+        public RelayCommand DeleteItemCommand { get; private set; }
+        
+        public RelayCommand RestoreCommand { get; private set; }
 
-        public RelayCommand<object> ImageDoubleClickCommand { get; private set; }
+        public RelayCommand ImageDoubleClickCommand { get; private set; }
 
-        private void OpenInExplorer(object o)
+        private void OpenInExplorer()
         {
             if (ServiceProvider.Settings.SelectedBitmap == null ||
                 ServiceProvider.Settings.SelectedBitmap.FileItem == null)
@@ -122,7 +149,7 @@ namespace CameraControl.Layouts
             }
         }
 
-        private void OpenViewer(object o)
+        private void OpenViewer()
         {
             if (ServiceProvider.Settings.SelectedBitmap == null ||
                 ServiceProvider.Settings.SelectedBitmap.FileItem == null)
@@ -140,7 +167,7 @@ namespace CameraControl.Layouts
             }
         }
 
-        private void DeleteItem(object o)
+        private void DeleteItem()
         {
             List<FileItem> filestodelete = new List<FileItem>();
             try
@@ -396,7 +423,7 @@ namespace CameraControl.Layouts
                                                                    break;
                                                                case WindowsCmdConsts.Del_Image:
                                                                    {
-                                                                       DeleteItem(null);
+                                                                       DeleteItem();
                                                                    }
                                                                    break;
                                                                case WindowsCmdConsts.Select_Image:
@@ -405,6 +432,12 @@ namespace CameraControl.Layouts
                                                                    {
                                                                        ImageLIst.SelectedValue = fileItem;
                                                                        ImageLIst.ScrollIntoView(fileItem);
+                                                                   }
+                                                                   break;
+                                                               case WindowsCmdConsts.Refresh_Image:
+                                                                   if (!_worker.IsBusy)
+                                                                   {
+                                                                       _worker.RunWorkerAsync(false);
                                                                    }
                                                                    break;
                                                            }

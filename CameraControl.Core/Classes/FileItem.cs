@@ -83,6 +83,11 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool HaveBackupFile
+        {
+            get { return File.Exists(BackupFileName); }
+        }
+
         [XmlAttribute]
         public string CameraSerial { get; set; }
 
@@ -111,7 +116,7 @@ namespace CameraControl.Core.Classes
         [XmlIgnore]
         public string ToolTip
         {
-            get { return string.Format("File name: {0}\nFile date :{1}", FileName, FileDate.ToString()); }
+            get { return string.Format("File name: {0}\nFile date :{1}", FileName, FileDate); }
         }
 
         private bool _isChecked;

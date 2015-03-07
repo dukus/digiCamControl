@@ -449,6 +449,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 pl.Execute(ServiceProvider.Settings.SelectedBitmap.FileItem, plugin);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Refresh_Image);
             }
             catch (Exception ex)
             {

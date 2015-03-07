@@ -59,6 +59,7 @@ namespace CameraControl.Core.Classes
         public const string Prev_Image = "Prev_Image";
         public const string Next_Image = "Next_Image";
         public const string Select_Image = "Select_Image";
+        public const string Refresh_Image = "Refresh_Image";
         public const string Del_Image = "Del_Image";
         public const string Like_Image = "Like_Image";
         public const string Unlike_Image = "Unlike_Image";

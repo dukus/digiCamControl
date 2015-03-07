@@ -589,6 +589,7 @@ namespace CameraControl.Core.Translation
         public static string LabelDeleteFiles = "Delete selected files";
         public static string LabelShowInExplorer = "Show in explorer";
         public static string LabelOpenInExternalViewer = "Open in external viewer";
+        public static string LabelRestoreFromBackup = "Restore from backup copy";
         
     }
 }

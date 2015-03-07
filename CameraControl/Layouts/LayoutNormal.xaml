@@ -132,6 +132,14 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
+            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MetroCircleButtonStyle}"
+                    IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.HaveBackupFile}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_reset}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
             <StackPanel HorizontalAlignment="Right">
                 <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Width="30" />
             </StackPanel>
