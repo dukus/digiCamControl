@@ -38,7 +38,6 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Scripting;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
-using CameraControlCmd.Classes;
 
 #endregion
 
