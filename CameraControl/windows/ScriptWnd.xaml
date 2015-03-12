@@ -29,9 +29,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
-            <RowDefinition Height="268*" />
-            <RowDefinition Height="5" />
-            <RowDefinition Height="142*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Name="menu2">
             <MenuItem Header="File" >
@@ -44,16 +42,66 @@
             <MenuItem Header="Run"  Name="mnu_run" Click="mnu_run_Click" />
             <MenuItem Header="Stop" Name="mnu_stop" Click="mnu_stop_Click" />
         </Menu>
-        <GroupBox Grid.Row="1" Header="Code">
-            <Grid>
-                <avalonedit:TextEditor SyntaxHighlighting="XML" Background="White" Name="textEditor" ShowLineNumbers="True" FontSize="16" />
-            </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="3" Header="Output">
-            <Grid>
-                <ListBox Name="lst_output" />
-            </Grid>
-        </GroupBox>
-        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter1" />
+        <TabControl Grid.Row="1">
+            <TabItem Header="Xml Script">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0" />
+                        <RowDefinition Height="268*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="142*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="1" Header="Code">
+                        <Grid>
+                            <avalonedit:TextEditor SyntaxHighlighting="XML" Background="White" Name="textEditor" ShowLineNumbers="True" FontSize="16" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="3" Header="Output">
+                        <Grid>
+                            <ListBox Name="lst_output" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter1" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Single line command">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="698*"/>
+                        <ColumnDefinition Width="225*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="323*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TextBoxCmd" Margin="3"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="Execute" Click="Button_Click" Margin="3"/>
+                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="" Name="TextBlockError"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Tcl script">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0" />
+                        <RowDefinition Height="268*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="142*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="1" Header="Code">
+                        <Grid>
+                            <avalonedit:TextEditor SyntaxHighlighting="Tcl" Background="White" Name="textEditorTcl" ShowLineNumbers="True" FontSize="16" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="3" Header="Output">
+                        <Grid>
+                            <ListBox Name="lst_outputTcl" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"  />
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Controls:MetroWindow>

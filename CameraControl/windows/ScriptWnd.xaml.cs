@@ -460,5 +460,19 @@ namespace CameraControl.windows
         {
             ServiceProvider.ScriptManager.Stop();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var processor = new CommandLineProcessor();
+                processor.Pharse(TextBoxCmd.Text.Split(' '));
+                TextBlockError.Text = "Ok";
+            }
+            catch (Exception ex)
+            {
+                TextBlockError.Text = ex.Message;
+            }
+        }
     }
 }
