@@ -150,7 +150,7 @@ namespace CameraControl.Devices.Nikon
             SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_ApplicationMode);
         }
 
-        protected override void GetAditionalLIveViewData(LiveViewData viewData, byte[] result)
+        protected override void GetAdditionalLiveViewData(LiveViewData viewData, byte[] result)
         {
             viewData.LiveViewImageWidth = ToInt16(result, 8);
             viewData.LiveViewImageHeight = ToInt16(result, 10);

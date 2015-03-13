@@ -1260,7 +1260,7 @@ namespace CameraControl.Devices.Nikon
                         return viewData;
                     }
                     int cbBytesRead = result.Data.Length;
-                    GetAditionalLIveViewData(viewData, result.Data);
+                    GetAdditionalLiveViewData(viewData, result.Data);
                     viewData.ImageDataPosition = 384;
                     viewData.ImageData = result.Data;
                 }
@@ -1273,7 +1273,13 @@ namespace CameraControl.Devices.Nikon
             return viewData;
         }
 
+        [Obsolete("Use GetAdditionalLiveViewData instead.", false)]
         protected virtual void GetAditionalLIveViewData(LiveViewData viewData, byte[] result)
+        {
+            GetAdditionalLiveViewData(viewData, result);
+        }
+
+        protected virtual void GetAdditionalLiveViewData(LiveViewData viewData, byte[] result)
         {
             viewData.LiveViewImageWidth = ToInt16(result, 0);
             viewData.LiveViewImageHeight = ToInt16(result, 2);
