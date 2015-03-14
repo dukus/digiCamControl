@@ -42,8 +42,8 @@
             <MenuItem Header="Run"  Name="mnu_run" Click="mnu_run_Click" />
             <MenuItem Header="Stop" Name="mnu_stop" Click="mnu_stop_Click" />
         </Menu>
-        <TabControl Grid.Row="1">
-            <TabItem Header="Xml Script">
+        <TabControl Grid.Row="1" Name="TabControl">
+            <TabItem Header="Xml Script" Name="XmTabItem">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0" />

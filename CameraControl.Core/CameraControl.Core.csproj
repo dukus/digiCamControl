@@ -12,7 +12,7 @@
     <AssemblyName>CameraControl.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>7d48c2bd</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>20f3d77e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -266,6 +266,10 @@
     <Compile Include="Scripting\ScriptManager.cs" />
     <Compile Include="Scripting\ScriptObject.cs" />
     <Compile Include="ServiceProvider.cs" />
+    <Compile Include="TclScripting\ConsoleRedirect.cs" />
+    <Compile Include="TclScripting\DccCommand.cs" />
+    <Compile Include="TclScripting\EchoCommand.cs" />
+    <Compile Include="TclScripting\TclScripManager.cs" />
     <Compile Include="Translation\TranslateConverter.cs" />
     <Compile Include="Translation\TranslateExtension.cs" />
     <Compile Include="Translation\TranslationLangDesc.cs" />

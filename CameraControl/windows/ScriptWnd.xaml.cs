@@ -47,6 +47,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Scripting;
+using CameraControl.Core.TclScripting;
 using CameraControl.Devices;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using Microsoft.Win32;
@@ -433,27 +434,55 @@ namespace CameraControl.windows
 
         private void mnu_run_Click(object sender, RoutedEventArgs e)
         {
-            mnu_save_Click(null, null);
-            ScriptObject scriptObject = null;
-            try
+            if (TabControl.SelectedItem == XmTabItem)
             {
-                lst_output.Items.Clear();
-                scriptObject = ServiceProvider.ScriptManager.Load(ScriptFileName);
-                scriptObject.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
-            }
-            catch (Exception exception)
-            {
-                AddOutput("Loading error :" + exception.Message);
-                return;
-            }
-            if (ServiceProvider.ScriptManager.Verify(scriptObject))
-            {
-                ServiceProvider.ScriptManager.Execute(scriptObject);
+                mnu_save_Click(null, null);
+                ScriptObject scriptObject = null;
+                try
+                {
+                    lst_output.Items.Clear();
+                    scriptObject = ServiceProvider.ScriptManager.Load(ScriptFileName);
+                    scriptObject.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                }
+                catch (Exception exception)
+                {
+                    AddOutput("Loading error :" + exception.Message);
+                    return;
+                }
+                if (ServiceProvider.ScriptManager.Verify(scriptObject))
+                {
+                    ServiceProvider.ScriptManager.Execute(scriptObject);
+                }
+                else
+                {
+                    AddOutput("Error in script. Running aborted ! ");
+                }
             }
             else
             {
-                AddOutput("Error in script. Running aborted ! ");
+                try
+                {
+                    TclScripManager manager = new TclScripManager();
+                    lst_outputTcl.Items.Clear();
+                    manager.Output += manager_Output;
+                    manager.Execute(textEditorTcl.Text);
+                    manager.Output -= manager_Output;
+                }
+                catch (Exception exception)
+                {
+                    AddOutput("Error in script. Running aborted ! ");
+                }
             }
+        }
+
+        void manager_Output(string message, bool newline)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                lst_outputTcl.Items.Add(message);
+                lst_outputTcl.SelectedItem = message;
+                lst_outputTcl.ScrollIntoView(message);
+            }));
         }
 
         private void mnu_stop_Click(object sender, RoutedEventArgs e)

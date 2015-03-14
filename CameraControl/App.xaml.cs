@@ -182,7 +182,7 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.Add(new BarcodeWnd());
                 ServiceProvider.WindowsManager.Event += WindowsManager_Event;
                 ServiceProvider.WindowsManager.ApplyTheme();
-                ServiceProvider.WindowsManager.ApplyKeyHanding();
+                //ServiceProvider.WindowsManager.ApplyKeyHanding();
                 ServiceProvider.WindowsManager.RegisterKnowCommands();
                 ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
 
