@@ -61,7 +61,7 @@ namespace CameraControl.Devices.Nikon
                     }
                     if (result.Data == null || result.Data.Length <= headerSize)
                         return null;
-                    GetAditionalLIveViewData(viewData, result.Data);
+                    GetAdditionalLiveViewData(viewData, result.Data);
                     viewData.ImageDataPosition = headerSize;
                     viewData.ImageData = result.Data;
                 }
@@ -73,7 +73,7 @@ namespace CameraControl.Devices.Nikon
             return viewData;
         }
 
-        protected override void GetAditionalLIveViewData(LiveViewData viewData, byte[] result)
+        protected override void GetAdditionalLiveViewData(LiveViewData viewData, byte[] result)
         {
             viewData.LiveViewImageWidth = ToInt16(result, 8);
             viewData.LiveViewImageHeight = ToInt16(result, 10);
