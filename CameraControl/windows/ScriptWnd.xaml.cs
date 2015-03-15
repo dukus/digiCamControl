@@ -38,6 +38,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -52,6 +53,7 @@ using CameraControl.Devices;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using Microsoft.Win32;
 using MessageBox = System.Windows.Forms.MessageBox;
+using Path = System.IO.Path;
 
 #endregion
 
@@ -62,6 +64,8 @@ namespace CameraControl.windows
     /// </summary>
     public partial class ScriptWnd : IWindow, IToolPlugin
     {
+        readonly TclScripManager _manager = new TclScripManager();
+
         public string ScriptFileName { get; set; }
 
         public ScriptWnd()
@@ -343,7 +347,7 @@ namespace CameraControl.windows
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Script file(*.dccscript)|*.dccscript|All files|*.*";
+            dlg.Filter = "Tcl Script file(*.tcl)|*.tcl|Script file(*.dccscript)|*.dccscript|All files|*.*";
             if (dlg.ShowDialog() == true)
             {
                 try
@@ -361,18 +365,30 @@ namespace CameraControl.windows
 
         public void LoadScriptFile()
         {
-            textEditor.Load(ScriptFileName);
+            if (Path.GetExtension(ScriptFileName) == ".tcl")
+            {
+                textEditorTcl.Load(ScriptFileName);
+                TabControl.SelectedItem = TclTabItem;
+            }
+            else
+            {
+                textEditor.Load(ScriptFileName);
+                TabControl.SelectedItem = XmTabItem;
+            }
         }
 
         public void SaveScriptFile()
         {
-            textEditor.Save(ScriptFileName);
+            if (IsXmlActive())
+                textEditor.Save(ScriptFileName);
+            else
+                textEditorTcl.Save(ScriptFileName);
         }
 
         private void mnu_save_as_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "Script file(*.dccscript)|*.dccscript|All files|*.*";
+            dlg.Filter = IsXmlActive() ? "Script file(*.dccscript)|*.dccscript|All files|*.*" : "Tcl Script file(*.tcl)|*.tcl|All files|*.*";
             if (dlg.ShowDialog() == true)
             {
                 try
@@ -398,6 +414,9 @@ namespace CameraControl.windows
 
         private void mnu_verify_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsXmlActive())
+                return;
+
             mnu_save_Click(null, null);
             ScriptObject scriptObject = null;
             try
@@ -434,7 +453,7 @@ namespace CameraControl.windows
 
         private void mnu_run_Click(object sender, RoutedEventArgs e)
         {
-            if (TabControl.SelectedItem == XmTabItem)
+            if (IsXmlActive())
             {
                 mnu_save_Click(null, null);
                 ScriptObject scriptObject = null;
@@ -462,17 +481,21 @@ namespace CameraControl.windows
             {
                 try
                 {
-                    TclScripManager manager = new TclScripManager();
                     lst_outputTcl.Items.Clear();
-                    manager.Output += manager_Output;
-                    manager.Execute(textEditorTcl.Text);
-                    manager.Output -= manager_Output;
+                    _manager.Output += manager_Output;
+                    _manager.Execute(textEditorTcl.Text);
+                    _manager.Output -= manager_Output;
                 }
                 catch (Exception exception)
                 {
                     AddOutput("Error in script. Running aborted ! ");
                 }
             }
+        }
+
+        private bool IsXmlActive()
+        {
+            return TabControl.SelectedItem == XmTabItem;
         }
 
         void manager_Output(string message, bool newline)
@@ -487,7 +510,10 @@ namespace CameraControl.windows
 
         private void mnu_stop_Click(object sender, RoutedEventArgs e)
         {
-            ServiceProvider.ScriptManager.Stop();
+            if (IsXmlActive())
+                ServiceProvider.ScriptManager.Stop();
+            else
+                _manager.Stop();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

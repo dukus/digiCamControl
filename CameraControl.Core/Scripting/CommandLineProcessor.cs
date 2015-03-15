@@ -15,6 +15,10 @@ namespace CameraControl.Core.Scripting
                 case "capture":
                     CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
                     return null;
+                //case "startbulb":
+                //    CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                //    return null;
+                //case "stopbulb":
                 case "set":
                     Set(args.Skip(1).ToArray());
                     return null;
@@ -47,6 +51,10 @@ namespace CameraControl.Core.Scripting
                     return device.FocusMode.Values;
                 case "whitebalance":
                     return device.WhiteBalance.Values;
+                case "mode":
+                    return device.Mode.Values;
+                case "compressionsetting":
+                    return device.CompressionSetting.Values;
                 default:
                     throw new Exception("Unknow parameter");
             }
@@ -71,6 +79,10 @@ namespace CameraControl.Core.Scripting
                     return device.FocusMode.Value;
                 case "whitebalance":
                     return device.WhiteBalance.Value;
+                case "mode":
+                    return device.Mode.Value;
+                case "compressionsetting":
+                    return device.CompressionSetting.Value;
                 default:
                     throw new Exception("Unknow parameter");
             }
@@ -81,11 +93,20 @@ namespace CameraControl.Core.Scripting
         {
             var device = GetDevice();
             var arg = args[0].ToLower().Trim();
-             
+
             switch (arg)
             {
                 case "shutterspeed":
-                    device.ShutterSpeed.SetValue(args[1]);
+                    var val = args[1];
+                    if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
+                    {
+                        val += "s";
+                    }
+                    if (val.Equals("bulb"))
+                    {
+                        val = "Bulb";
+                    }
+                    device.ShutterSpeed.SetValue(val);
                     break;
                 case "iso":
                     device.IsoNumber.SetValue(args[1]);
@@ -101,6 +122,12 @@ namespace CameraControl.Core.Scripting
                     break;
                 case "whitebalance":
                     device.WhiteBalance.SetValue(args[1]);
+                    break;
+                case "mode":
+                    device.Mode.SetValue(args[1]);
+                    break;
+                case "compressionsetting":
+                    device.CompressionSetting.SetValue(args[1]);
                     break;
                 default:
                     throw new Exception("Unknow parameter");

@@ -11,6 +11,7 @@ namespace CameraControl.Core.TclScripting
     public class TclScripManager
     {
         public event OutputEventHandler Output;
+        private Interpreter _interpreter = null;
 
         public TclScripManager()
         {
@@ -30,8 +31,8 @@ namespace CameraControl.Core.TclScripting
             var old_out = Console.Out;
             Console.SetOut(c);
             c.Output += c_Output;
-            using (Interpreter interpreter = Interpreter.Create(ref result))
-            {
+            _interpreter = Interpreter.Create(ref result);
+           
 
                 ICommand command = new DccCommand(new CommandData(
                     "dcc", null, null, null, typeof(DccCommand).FullName,
@@ -40,39 +41,38 @@ namespace CameraControl.Core.TclScripting
                 ReturnCode code;
                 long token = 0;
 
-                code = interpreter.AddCommand(
+                code = _interpreter.AddCommand(
                     command, null, ref token, ref result);
 
-                code = interpreter.AddCommand(new EchoCommand(new CommandData(
+                code = _interpreter.AddCommand(new EchoCommand(new CommandData(
                     "echo", null, null, null, typeof(EchoCommand).FullName,
                     CommandFlags.None, null, 0)), null, ref token, ref result);
 
-                var lines = commands.Split('\n');
                 if (code == ReturnCode.Ok)
                 {
                     int errorLine = 0;
-                    int linenr = 1;
 
-                        code = interpreter.EvaluateScript(commands,
-                            ref result, ref errorLine);
-                        interpreter.Host.WriteResult(code, result, errorLine, true);
-
-                    //foreach (string line in lines)
-                    //{
-                    //    code = interpreter.EvaluateScript(line,
-                    //        ref result, ref errorLine);
-                    //    interpreter.Host.WriteResult(code, result, linenr, true);
-                    //    linenr++;
-                    //}
-                    return (int)interpreter.ExitCode;
+                    code = _interpreter.EvaluateScript(commands,
+                        ref result, ref errorLine);
+                    _interpreter.Host.WriteResult(code, result, errorLine, true);
+                    return (int) _interpreter.ExitCode;
                 }
                 else
                 {
-                    interpreter.Host.WriteResult(code, result, true);
+                    _interpreter.Host.WriteResult(code, result, true);
                 }
-            }
+            _interpreter.Dispose();
+            _interpreter = null;
             Console.SetOut(old_out);
             return 0;
+        }
+
+        public void Stop()
+        {
+            Result result = null;
+            if (_interpreter != null)
+                _interpreter.CancelAnyEvaluate(true, true, ReturnCode.Ok, ref result);
+
         }
 
         void c_Output(string message, bool newline)

@@ -80,7 +80,7 @@
                     <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="" Name="TextBlockError"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tcl script">
+            <TabItem Header="Tcl script"  Name="TclTabItem">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0" />
