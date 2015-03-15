@@ -326,6 +326,15 @@ namespace CameraControlCmd
                     return 0;
                 }
 
+                if (_arguments.Contains("format"))
+                {
+                    Console.WriteLine("Card format in progress...");
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.FormatStorage(null);
+                    Thread.Sleep(200);
+                    Console.WriteLine("Card format done");
+                    return 0;
+                }
+
                 if (_arguments.Contains("capturenoaf"))
                 {
                     try
@@ -394,6 +403,7 @@ namespace CameraControlCmd
             Console.WriteLine(" /capturenoaf               - capture photo without autofocus");
             Console.WriteLine(" /captureall                - capture photo with all connected devices");
             Console.WriteLine(" /captureallnoaf            - capture photo without autofocus with all connected devices");
+            Console.WriteLine(" /format                    - format camera card(s)");
             Console.WriteLine(" /session session_name      - use session [session_name]");
             Console.WriteLine(" /preset preset_name        - use preset [session_name]");
             Console.WriteLine(" /folder path               - set the photo save folder");
@@ -408,9 +418,9 @@ namespace CameraControlCmd
             Console.WriteLine(" /aperture aperture         - set the aperture number ex. 9,5 8,0");
             Console.WriteLine(" /shutter shutter speed     - set the shutter speed ex. \"1/50\" \"1/250\" 1s 3s");
             Console.WriteLine(" /ec compensation           - set the exposure comp. -1,5 +2");
-            Console.WriteLine("----------------------------------------------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------------------------");
             Console.WriteLine("For Nikon camera only :");
-            Console.WriteLine("----------------------------------------------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------------------------5");
             Console.WriteLine(" /comment comment           - set in camera comment string");
             Console.WriteLine(" /copyright copyright       - set in camera copyright string");
             Console.WriteLine(" /artist artist             - set in camera artist string");
