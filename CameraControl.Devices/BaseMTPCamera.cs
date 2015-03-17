@@ -50,6 +50,11 @@ namespace CameraControl.Devices
 
     public class BaseMTPCamera : BaseCameraDevice
     {
+        /// <summary>
+        /// The number of times to retry failed transfers.
+        /// </summary>
+        public const int TransferRetries = 10;
+
         public delegate void DeviceEventHandler(object sender, DeviceEventArgs eventArgs);
 
         public event DeviceEventHandler DeviceEvent;
@@ -194,9 +199,31 @@ namespace CameraControl.Devices
             return res;
         }
 
+        /// <summary>
+        /// Transfers the file and saves it to the specified filename.
+        /// </summary>
+        /// <param name="o">The object handle.</param>
+        /// <param name="filename">The filename.</param>
         public override void TransferFile(object o, string filename)
         {
-            int retryes = 10;
+            using (var fs = File.Open(filename, FileMode.Create))
+            {
+                TransferFile(o, fs);
+            }
+        }
+
+        /// <summary>
+        /// Transfers the file and writes it to the specified stream.
+        /// </summary>
+        /// <param name="o">The object handle.</param>
+        /// <param name="stream">The stream.</param>
+        public override void TransferFile(object o, Stream stream)
+        {
+            // Sanity checks.
+            if (!stream.CanWrite)
+                throw new ArgumentException("Specified stream is not writable.", "stream");
+
+            int retryes = TransferRetries;
             lock (Locker)
             {
                 _timer.Stop();
@@ -221,12 +248,10 @@ namespace CameraControl.Devices
                     catch (COMException)
                     {
                     }
+
                     if (result != null && result.Data != null)
                     {
-                        using (BinaryWriter writer = new BinaryWriter(File.Open(filename, FileMode.Create)))
-                        {
-                            writer.Write(result.Data);
-                        }
+                        stream.Write(result.Data, 0, result.Data.Length);
                     }
                     else
                     {
