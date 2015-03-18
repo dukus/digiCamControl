@@ -8,6 +8,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
+using Eagle._Containers.Public;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
@@ -465,15 +466,18 @@ namespace CameraControl.ViewModel
                     {
                         var t = new TimeSpan(StartHour, StartMinute, StartSecond);
                         var sec = t.TotalSeconds - (DateTime.Now - _timeLapseStartTime).TotalSeconds;
-                        return string.Format("The timlapse will start in {0} seconds", Math.Round(sec, 0));
+
+                        return sec < 0
+                            ? ""
+                            : string.Format("The timlapse will start in {0} seconds", Math.Round(sec, 0));
                     }
                     if (StartAt)
                     {
-                        return string.Format("The timlapse will start in {0} ", StartDate - DateTime.Now);
+                        return StartDate < DateTime.Now ? "" : string.Format("The timlapse will start in {0:dd\\.hh\\:mm\\:ss}", (StartDate - DateTime.Now));
                     }
                     return "Waiting for shedule";
                 }
-                return string.Format("Next capture in {0} seconds\n Total captured photos {1}",
+                return string.Format("Timelapse in progress.\nNext capture in {0} seconds\nTotal captured photos {1}",
                     Math.Round(TimeBetweenShots - (DateTime.Now - _lastCaptureTime).TotalSeconds, 0), _totalCaptures);
             }
         }
@@ -596,8 +600,18 @@ namespace CameraControl.ViewModel
             if (StopIn)
             {
                 var t = new TimeSpan(StopHour, StopMinute, StopSecond);
-                if ((DateTime.Now - _firstLapseStartTime).TotalSeconds > t.TotalSeconds)
-                    res = true;
+                var now = DateTime.Now;
+                var endt = new DateTime(now.Year, now.Month, now.Day, StartHour, StartMinute, StartSecond);
+                if (StartDaily)
+                {
+                    if ((DateTime.Now - endt).TotalSeconds > t.TotalSeconds)
+                        res = true;
+                }
+                else
+                {
+                    if ((DateTime.Now - _firstLapseStartTime).TotalSeconds > t.TotalSeconds)
+                        res = true;
+                }
             }
             if (StopAt)
             {
@@ -616,9 +630,10 @@ namespace CameraControl.ViewModel
         {
             if (!IsRunning)
             {
-                _timeLapseStartTime = DateTime.Now;
-                Log.Debug("Timelapse start");
                 IsRunning = true;
+                _timeLapseStartTime = DateTime.Now;
+                _lastCaptureTime = DateTime.Now;
+                Log.Debug("Timelapse start");
                 _totalCaptures = 0;
                 _timer.Start();
             }

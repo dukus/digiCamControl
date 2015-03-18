@@ -75,7 +75,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" >
                     <Label Content="{translation:TranslateExtension LabelTimeLapseWaitBetweenCaptures}" Margin="2"/>
-                    <controls:NumericUpDown Value="{Binding TimeBetweenShots}" Minimum="1" Maximum="3600" Margin="2"/>
+                    <controls:NumericUpDown Value="{Binding TimeBetweenShots}" Minimum="1" Maximum="3600" Margin="2" Width="100"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Visibility="{Binding ScriptVisibility}">
                     <Label Content="{translation:TranslateExtension LabelTimeLapseScriptFile}" Margin="2"/>
@@ -98,7 +98,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Visibility="{Binding StopCountVisibility}" VerticalAlignment="Center">
                     <Label Content="{translation:TranslateExtension LabelTimeLapseStopPhotoCount}" Margin="2" Visibility="{Binding TimeVisibility}"/>
-                    <controls:NumericUpDown Value="{Binding StopCaptureCount}" Minimum="1" Maximum="100000000" Margin="2"/>
+                    <controls:NumericUpDown Value="{Binding StopCaptureCount}" Minimum="1" Maximum="100000000" Margin="2" Width="100"/>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="{translation:TranslateExtension LabelDate}" Margin="2" Visibility="{Binding StopDateVisibility}"/>
