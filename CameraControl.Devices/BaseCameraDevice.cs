@@ -427,6 +427,10 @@ namespace CameraControl.Devices
         {
         }
 
+        public virtual void TransferFile(object o, System.IO.Stream stream)
+        {
+        }
+
         public void OnCaptureCompleted(object sender, EventArgs args)
         {
             if (CaptureCompleted != null)

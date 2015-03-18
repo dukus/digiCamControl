@@ -140,6 +140,7 @@ namespace CameraControl.Devices
         void Close();
 
         void TransferFile(object o, string filename);
+        void TransferFile(object o, System.IO.Stream stream);
 
         /// <summary>
         /// Occurs when photo captured.
