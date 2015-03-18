@@ -107,8 +107,8 @@ namespace CameraControl
 
             ServiceProvider.ActionManager.Actions = new AsyncObservableCollection<IMenuAction>
                                                         {
-                                                            new CmdFocusStackingCombineZP(),
-                                                            new CmdEnfuse(),
+                                                            //new CmdFocusStackingCombineZP(),
+                                                            //new CmdEnfuse(),
                                                            // new CmdToJpg(),
                                                             //new CmdExpJpg()
                                                         };

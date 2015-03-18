@@ -29,18 +29,15 @@
 #region
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 using CameraControl.Core.Classes.Queue;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
-using FreeImageAPI;
 using Newtonsoft.Json;
 
 #endregion

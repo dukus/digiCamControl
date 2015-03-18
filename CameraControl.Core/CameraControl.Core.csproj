@@ -100,9 +100,6 @@
     <Reference Include="Eagle">
       <HintPath>..\packages\Eagle.1.0.5542.25903\lib\Eagle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeImageNET">
-      <HintPath>..\refs\FreeImageNET.dll</HintPath>
-    </Reference>
     <Reference Include="Griffin.Networking">
       <HintPath>..\packages\Griffin.Networking.0.5.7\lib\net40\Griffin.Networking.dll</HintPath>
     </Reference>
