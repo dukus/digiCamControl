@@ -581,7 +581,15 @@ namespace CameraControl
 
         private void btn_add_Sesion_Click(object sender, RoutedEventArgs e)
         {
-            EditSession editSession = new EditSession(new PhotoSession());
+            var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.xml");
+            var session = new PhotoSession();
+            // copy session with default name
+            if (File.Exists(defaultsessionfile))
+            {
+                session = ServiceProvider.Settings.LoadSession(defaultsessionfile);
+                session.Files.Clear();
+            }
+            var editSession = new EditSession(session);
             editSession.Owner = this;
             ServiceProvider.Settings.ApplyTheme(editSession);
             if (editSession.ShowDialog() == true)

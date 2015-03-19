@@ -830,6 +830,13 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public static string SessionFolder
+        {
+            get
+            {
+                return Path.Combine(DataFolder, "Sessions"); 
+            }
+        }
 
         public static string PresetFolder
         {
@@ -987,7 +994,7 @@ namespace CameraControl.Core.Classes
                 return;
             try
             {
-                string filename = Path.Combine(DataFolder, "Sessions", session.Name + ".xml");
+                string filename = Path.Combine(SessionFolder, session.Name + ".xml");
                 XmlSerializer serializer = new XmlSerializer(typeof (PhotoSession));
                 // Create a FileStream to write with.
 
@@ -1042,7 +1049,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public PhotoSession Load(string filename)
+        public PhotoSession LoadSession(string filename)
         {
             PhotoSession photoSession = new PhotoSession();
             try
@@ -1146,9 +1153,12 @@ namespace CameraControl.Core.Classes
             return string.IsNullOrEmpty(name) ? null : CameraPresets.FirstOrDefault(cameraPreset => cameraPreset.Name == name);
         }
 
+        /// <summary>
+        /// Loads al saved sessions 
+        /// </summary>
         public void LoadSessionData()
         {
-            string sesionFolder = Path.Combine(DataFolder, "Sessions");
+            string sesionFolder = SessionFolder;
             if (!Directory.Exists(sesionFolder))
             {
                 Directory.CreateDirectory(sesionFolder);
@@ -1159,7 +1169,7 @@ namespace CameraControl.Core.Classes
             {
                 try
                 {
-                    Add(Load(sesion));
+                    Add(LoadSession(sesion));
                 }
                 catch (Exception e)
                 {
