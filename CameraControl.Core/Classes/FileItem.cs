@@ -63,7 +63,7 @@ namespace CameraControl.Core.Classes
                 _fileName = value;
                 if (File.Exists(_fileName))
                 {
-                    FileDate = File.GetCreationTimeUtc(_fileName);
+                    FileDate = File.GetCreationTime(_fileName);
                 }
                 NotifyPropertyChanged("FileName");
                 NotifyPropertyChanged("ToolTip");
