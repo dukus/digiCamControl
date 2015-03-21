@@ -126,6 +126,7 @@ namespace CameraControl.Devices
             DeviceClass = new Dictionary<string, Type>
                               {
                                   {"D200", typeof (NikonD40)},
+                                  {"D3", typeof (NikonD90)},
                                   {"D3S", typeof (NikonD90)},
                                   {"D3X", typeof (NikonD3X)},
                                   {"D300", typeof (NikonD300)},
