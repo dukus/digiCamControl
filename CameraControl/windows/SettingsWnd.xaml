@@ -162,11 +162,8 @@
                             <ComboBoxItem Content="{T:TranslateExtension LabelRotate270}" />
                         </ComboBox>
 
-                        <Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelFlip}" HorizontalContentAlignment="Right"/>
-                        <CheckBox Grid.Row="10" Grid.Column="1" Margin="3" IsChecked="{Binding FlipPreview}"/>
-
-                        <Label Grid.Row="12" Grid.Column="0" Content="{T:TranslateExtension LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
-                        <Controls:NumericUpDown Grid.Row="12" Grid.Column="1" Margin="3" Minimum="2" Maximum="120" Value="{Binding LiveViewFreezeTimeOut}"/>
+                        <!--<Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelFlip}" HorizontalContentAlignment="Right"/>
+                        <CheckBox Grid.Row="10" Grid.Column="1" Margin="3" IsChecked="{Binding FlipPreview}"/>-->
 
                         <Label Grid.Row="13" Grid.Column="0" Content="{T:TranslateExtension LabelExternalViewerPath}" HorizontalContentAlignment="Right"/>
                         <TextBox Grid.Row="13" Grid.Column="1" Margin="3" Text="{Binding ExternalViewer}" />
@@ -282,7 +279,8 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="35" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />                        
                         <RowDefinition Height="67*" />
                     </Grid.RowDefinitions>
                     <GroupBox Header="Nikon">
@@ -326,7 +324,6 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
                             <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding SmallFocusStepCanon}" Margin="3"/>
@@ -354,7 +351,11 @@
 
                     <Label Content="{T:TranslateExtension LabelEasyLiveViewControl}" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding EasyLiveViewControl}" Margin="3"/>
-                    <Button Content="{T:TranslateExtension LabelShowOverlayFolder}" Grid.Column="1" Grid.Row="7" Name="btn_showoverlay" Click="button5_Click" Margin="3"/>
+
+                    <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
+                    <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Margin="3" Minimum="2" Maximum="120" Value="{Binding LiveViewFreezeTimeOut}"/>
+                    
+                    <Button Content="{T:TranslateExtension LabelShowOverlayFolder}" Grid.Column="1" Grid.Row="8" Name="btn_showoverlay" Click="button5_Click" Margin="3"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelDevices}">
