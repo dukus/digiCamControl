@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="urn:CameraControl.Service.Exceptions" elementFormDefault="qualified" targetNamespace="urn:CameraControl.Service.Exceptions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="CustomFaultException">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="CustomFaultException" nillable="true" type="tns:CustomFaultException" />
-</xs:schema>

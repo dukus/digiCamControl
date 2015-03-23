@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CameraControl.ServerTest.ServiceReference1;
+
 
 namespace CameraControl.ServerTest
 {
@@ -40,23 +40,7 @@ namespace CameraControl.ServerTest
         {
             try
             {
-                CameraServiceClient client = new CameraServiceClient();
-                var base64String = client.TakePhotoAsBase64String(20, 200, 200, 0);
 
-                byte[] byteBuffer = Convert.FromBase64String(base64String);
-               
-                MemoryStream memoryStream = new MemoryStream(byteBuffer);
-
-                memoryStream.Position = 0;
-               
-                imgPreview.BeginInit();
-                imgPreview.Source = BitmapFrame.Create(memoryStream,
-                                       BitmapCreateOptions.None,
-                                       BitmapCacheOption.OnLoad); ;
-                imgPreview.EndInit();
-                memoryStream.Close();
-                //memoryStream = null;
-                //byteBuffer = null;
             }
             catch (Exception exception)
             {
