@@ -65,7 +65,7 @@ namespace CameraControl.windows
     /// </summary>
     public partial class ScriptWnd : IWindow, IToolPlugin
     {
-        readonly TclScripManager _manager = new TclScripManager();
+        private readonly TclScripManager _manager = new TclScripManager();
 
         public string ScriptFileName { get; set; }
 
@@ -127,8 +127,8 @@ namespace CameraControl.windows
                     foreach (ValuePair value in preset.Values)
                     {
                         data.Add(new MyCompletionData(value.Name.Replace(" ", "").ToLower(),
-                                                      "Current value :" + value.Value,
-                                                      value.Name.Replace(" ", "").ToLower()));
+                            "Current value :" + value.Value,
+                            value.Name.Replace(" ", "").ToLower()));
                     }
                     completionWindow.Show();
                     completionWindow.Closed += delegate { completionWindow = null; };
@@ -294,14 +294,15 @@ namespace CameraControl.windows
             {
                 case WindowsCmdConsts.ScriptWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
-                                                     {
-                                                         Show();
-                                                         Activate();
-                                                         Topmost = true;
-                                                         ServiceProvider.ScriptManager.OutPutMessageReceived +=
-                                                             ScriptManager_OutPutMessageReceived;
-                                                         Focus();
-                                                     }));
+                    {
+                        Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+                        Show();
+                        Activate();
+                        Topmost = true;
+                        ServiceProvider.ScriptManager.OutPutMessageReceived +=
+                            ScriptManager_OutPutMessageReceived;
+                        Focus();
+                    }));
                     break;
                 case WindowsCmdConsts.ScriptWnd_Hide:
                     ServiceProvider.ScriptManager.OutPutMessageReceived -= ScriptManager_OutPutMessageReceived;
@@ -309,12 +310,12 @@ namespace CameraControl.windows
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                                                     {
-                                                         ServiceProvider.ScriptManager.OutPutMessageReceived -=
-                                                             ScriptManager_OutPutMessageReceived;
-                                                         Hide();
-                                                         Close();
-                                                     }));
+                    {
+                        ServiceProvider.ScriptManager.OutPutMessageReceived -=
+                            ScriptManager_OutPutMessageReceived;
+                        Hide();
+                        Close();
+                    }));
                     break;
             }
         }
@@ -389,7 +390,9 @@ namespace CameraControl.windows
         private void mnu_save_as_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = IsXmlActive() ? "Script file(*.dccscript)|*.dccscript|All files|*.*" : "Tcl Script file(*.tcl)|*.tcl|All files|*.*";
+            dlg.Filter = IsXmlActive()
+                ? "Script file(*.dccscript)|*.dccscript|All files|*.*"
+                : "Tcl Script file(*.tcl)|*.tcl|All files|*.*";
             if (dlg.ShowDialog() == true)
             {
                 try
@@ -446,10 +449,10 @@ namespace CameraControl.windows
         public void AddOutput(string msg)
         {
             Dispatcher.Invoke(new Action(delegate
-                                             {
-                                                 lst_output.Items.Add(msg);
-                                                 lst_output.ScrollIntoView(lst_output.Items[lst_output.Items.Count - 1]);
-                                             }));
+            {
+                lst_output.Items.Add(msg);
+                lst_output.ScrollIntoView(lst_output.Items[lst_output.Items.Count - 1]);
+            }));
         }
 
         private void mnu_run_Click(object sender, RoutedEventArgs e)
@@ -499,7 +502,7 @@ namespace CameraControl.windows
             return TabControl.SelectedItem == XmTabItem;
         }
 
-        void manager_Output(string message, bool newline)
+        private void manager_Output(string message, bool newline)
         {
             Dispatcher.Invoke(new Action(delegate
             {
@@ -523,18 +526,19 @@ namespace CameraControl.windows
             {
                 var processor = new CommandLineProcessor();
                 var resp = processor.Pharse(TextBoxCmd.Text.Split(' '));
-                var list = resp as IEnumerable;
+                var list = resp as IEnumerable<string>;
                 if (list != null)
                 {
                     TextBlockError.Text = "";
                     foreach (var o in list)
                     {
-                        TextBlockError.Text += o.ToString() + "\n";
+                        TextBlockError.Text += o + "\n";
                     }
                 }
                 else
                 {
-                    TextBlockError.Text = resp.ToString();    
+                    if (resp != null)
+                        TextBlockError.Text = resp.ToString();
                 }
                 lst_cmd.Items.Add(TextBoxCmd.Text);
             }
@@ -542,6 +546,19 @@ namespace CameraControl.windows
             {
                 TextBlockError.Text = ex.Message;
             }
+        }
+
+        private void lst_cmd_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lst_cmd.SelectedItem != null)
+                TextBoxCmd.Text = lst_cmd.SelectedItem.ToString();
+        }
+
+        private void TextBoxCmd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Button_Click(null, null);
+
         }
     }
 }

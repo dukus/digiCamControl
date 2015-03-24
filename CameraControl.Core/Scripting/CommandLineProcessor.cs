@@ -24,6 +24,9 @@ namespace CameraControl.Core.Scripting
                 case "set":
                     Set(args.Skip(1).ToArray());
                     return null;
+                case "do":
+                    DoCmd(args.Skip(1).ToArray());
+                    return null;
                 case "get":
                     return Get(args.Skip(1).ToArray());
                 case "list":
@@ -33,6 +36,10 @@ namespace CameraControl.Core.Scripting
             }
         }
 
+        private void DoCmd(string[] args)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(args[0]);
+        }
 
         private object List(string[] args)
         {
@@ -57,19 +64,14 @@ namespace CameraControl.Core.Scripting
                     return device.Mode.Values;
                 case "compressionsetting":
                     return device.CompressionSetting.Values;
+                case "sessions":
+                    return ServiceProvider.Settings.PhotoSessions.Select(x => x.Name).ToArray();
+                case "cmds":
+                    return ServiceProvider.WindowsManager.WindowCommands.Select(x => x.Name).ToArray();
                 case "session":
                 {
-                    List<string> vals=new List<string>();
                     IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
-                    foreach (PropertyInfo prop in props)
-                    {
-                        if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
-                            prop.PropertyType == typeof(bool))
-                        {
-                            vals.Add("session." + prop.Name.ToLower() + "=" + prop.GetValue(ServiceProvider.Settings.DefaultSession, null));
-                        }
-                    }
-                    return vals;
+                    return (from prop in props where prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) || prop.PropertyType == typeof (bool) select "session." + prop.Name.ToLower() + "=" + prop.GetValue(ServiceProvider.Settings.DefaultSession, null)).ToList();
                 }
                 default:
                     throw new Exception("Unknow parameter");
@@ -99,6 +101,8 @@ namespace CameraControl.Core.Scripting
                     return device.Mode.Value;
                 case "compressionsetting":
                     return device.CompressionSetting.Value;
+                case "session":
+                    return ServiceProvider.Settings.DefaultSession.Name;
                 default:
                     if (arg.StartsWith("session."))
                     {
@@ -174,6 +178,17 @@ namespace CameraControl.Core.Scripting
                 case "compressionsetting":
                     device.CompressionSetting.SetValue(args[1]);
                     break;
+                case "session":
+                    device.CompressionSetting.SetValue(args[1]);
+                    foreach (var session in ServiceProvider.Settings.PhotoSessions)
+                    {
+                        if (session.Name.ToLower()==args[1].ToLower().Trim())
+                        {
+                            ServiceProvider.Settings.DefaultSession = session;
+                            return;
+                        }
+                    }
+                    throw new Exception("Unknow session name");
                 default:
                     if (arg.StartsWith("session."))
                     {
