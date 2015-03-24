@@ -29,6 +29,7 @@
 #region
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -521,8 +522,21 @@ namespace CameraControl.windows
             try
             {
                 var processor = new CommandLineProcessor();
-                processor.Pharse(TextBoxCmd.Text.Split(' '));
-                TextBlockError.Text = "Ok";
+                var resp = processor.Pharse(TextBoxCmd.Text.Split(' '));
+                var list = resp as IEnumerable;
+                if (list != null)
+                {
+                    TextBlockError.Text = "";
+                    foreach (var o in list)
+                    {
+                        TextBlockError.Text += o.ToString() + "\n";
+                    }
+                }
+                else
+                {
+                    TextBlockError.Text = resp.ToString();    
+                }
+                lst_cmd.Items.Add(TextBoxCmd.Text);
             }
             catch (Exception ex)
             {

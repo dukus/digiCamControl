@@ -36,6 +36,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using CameraControl.Core.Scripting;
 using CameraControl.Devices;
 using Newtonsoft.Json;
 
@@ -46,7 +47,7 @@ namespace CameraControl.Core.Classes
     // Delegate for passing received message back to caller
     public delegate void DelegateMessage(string Reply);
 
-    internal class PipeServerT
+    public class PipeServerT
     {
         private string _pipeName;
 
@@ -115,81 +116,102 @@ namespace CameraControl.Core.Classes
                     switch (lines["request"])
                     {
                         case "session":
-                            {
-                                return lines.ContainsKey("format") && lines["format"] == "json"
-                                           ? JsonConvert.SerializeObject(ServiceProvider.Settings.DefaultSession,
-                                                                         Formatting.Indented,
-                                                                         new JsonSerializerSettings() { })
-                                           : GetSessionData();
-                            }
+                        {
+                            return lines.ContainsKey("format") && lines["format"] == "json"
+                                ? JsonConvert.SerializeObject(ServiceProvider.Settings.DefaultSession,
+                                    Formatting.Indented,
+                                    new JsonSerializerSettings() {})
+                                : GetSessionData();
+                        }
                         case "cameras":
+                        {
+                            if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
                             {
-                                if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
-                                {
-                                    return ":;response:error;message:no camera is connected";
-                                }
-                                return lines.ContainsKey("format") && lines["format"] == "json"
-                                           ? JsonConvert.SerializeObject(ServiceProvider.DeviceManager.ConnectedDevices,
-                                                                         Formatting.Indented,
-                                                                         new JsonSerializerSettings() { })
-                                           : GetCamerasData();
+                                return ":;response:error;message:no camera is connected";
                             }
+                            return lines.ContainsKey("format") && lines["format"] == "json"
+                                ? JsonConvert.SerializeObject(ServiceProvider.DeviceManager.ConnectedDevices,
+                                    Formatting.Indented,
+                                    new JsonSerializerSettings() {})
+                                : GetCamerasData();
+                        }
                         default:
                             return ":;response:error;message:unknown request";
                     }
                 }
                 if (lines.ContainsKey("command"))
                 {
+                    ICameraDevice device = null;
                     if (ServiceProvider.DeviceManager.ConnectedDevices.Count == 0)
                     {
                         return ":;response:error;message:no camera is connected";
                     }
-                    if (!lines.ContainsKey("serial"))
+                    if (lines.ContainsKey("serial"))
                     {
-                        return ":;response:error;message:no serial as parameter";
+                        device = GetDevice(lines["serial"]);
                     }
-                    var device = GetDevice(lines["serial"]);
+
                     if (device == null)
                     {
-                        return ":;response:error;message:No camera was found";
+                        if (ServiceProvider.DeviceManager.SelectedCameraDevice == null)
+                            return ":;response:error;message:No camera was found";
+                        device = ServiceProvider.DeviceManager.SelectedCameraDevice;
                     }
                     switch (lines["command"])
                     {
                         case "capture":
-                            {
-                                var thread = new Thread(StartCapture);
-                                thread.Start(device);
-                                return ":;response:ok;";
-                            }
+                        {
+                            var thread = new Thread(StartCapture);
+                            thread.Start(device);
+                            return ":;response:ok;";
+                        }
                             break;
                         case "starliveview":
-                            {
-                                ServiceProvider.WindowsManager.ExecuteCommand(
-                                    WindowsCmdConsts.LiveViewWnd_Show, device);
-                                return ":;response:ok;";
-                            }
+                        {
+                            ServiceProvider.WindowsManager.ExecuteCommand(
+                                WindowsCmdConsts.LiveViewWnd_Show, device);
+                            return ":;response:ok;";
+                        }
                             break;
                         case "captureliveview":
-                            {
-                                ServiceProvider.WindowsManager.ExecuteCommand(
-                                    CmdConsts.LiveView_Capture, device); 
-                                return ":;response:ok;";
-                            }
+                        {
+                            ServiceProvider.WindowsManager.ExecuteCommand(
+                                CmdConsts.LiveView_Capture, device);
+                            return ":;response:ok;";
+                        }
                             break;
                         case "manualfocus":
-                            {
-                                ServiceProvider.WindowsManager.ExecuteCommand(
-                                    CmdConsts.LiveView_ManualFocus + lines["step"], device); 
-                                return ":;response:ok;";
-                            }
+                        {
+                            ServiceProvider.WindowsManager.ExecuteCommand(
+                                CmdConsts.LiveView_ManualFocus + lines["step"], device);
+                            return ":;response:ok;";
+                        }
                             break;
 
                         case "stopliveview":
+                        {
+                            ServiceProvider.WindowsManager.ExecuteCommand(
+                                WindowsCmdConsts.LiveViewWnd_Hide, device);
+                            return ":;response:ok;";
+                        }
+                            break;
+                        case "dcc":
+                        {
+                            try
                             {
-                                ServiceProvider.WindowsManager.ExecuteCommand(
-                                    WindowsCmdConsts.LiveViewWnd_Hide, device);
-                                return ":;response:ok;";
+                                if (!lines.ContainsKey("param"))
+                                {
+                                    return ":;response:error;No parameters are specified";
+                                }
+                                var processor = new CommandLineProcessor();
+                                var resp = processor.Pharse(lines["param"].Split(' '));
+                                return string.Format(":;response:{0};", JsonConvert.SerializeObject(resp));
                             }
+                            catch (Exception ex)
+                            {
+                                return ":;response:error;message:" + ex.Message;
+                            }
+                        }
                             break;
                     }
                 }
@@ -219,7 +241,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private Dictionary<string, string> Pharse(string data)
+        public static Dictionary<string, string> Pharse(string data)
         {
             var res = new Dictionary<string, string>();
             //the data length not enough 

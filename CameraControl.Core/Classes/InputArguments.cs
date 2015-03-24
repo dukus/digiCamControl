@@ -69,15 +69,23 @@ namespace CameraControl.Core.Classes
 
         #region public methods
 
-        public InputArguments(string[] args, string keyLeadingPattern)
+        public InputArguments(string[] args, string keyLeadingPattern, bool multi = false)
         {
             _keyLeadingPattern = !string.IsNullOrEmpty(keyLeadingPattern)
-                                     ? keyLeadingPattern
-                                     : DEFAULT_KEY_LEADING_PATTERN;
+                ? keyLeadingPattern
+                : DEFAULT_KEY_LEADING_PATTERN;
 
             if (args != null && args.Length > 0)
-                Parse(args);
-        }
+                if (multi)
+                {
+                    ParseMulti(args);
+                }
+                else
+                {
+                    Parse(args);    
+                }
+                
+       }
 
         public InputArguments(string[] args)
             : this(args, null)
@@ -138,6 +146,41 @@ namespace CameraControl.Core.Classes
                     val = null;
                 }
                 _parsedArguments[key] = val;
+            }
+        }
+
+        protected virtual void ParseMulti(string[] args)
+        {
+            string key = null;
+            string val = null;
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == null) continue;
+
+                if (IsKey(args[i]))
+                {
+                    key = args[i];
+
+                    if (i + 1 < args.Length && !IsKey(args[i + 1]))
+                    {
+                        val = args[i + 1];
+                        i++;
+                    }
+                }
+                else
+                    val = args[i];
+
+                // adjustment
+                if (key == null)
+                {
+                    key = val;
+                    val = null;
+                }
+                if (!_parsedArguments.ContainsKey(key))
+                    _parsedArguments[key] = "";
+                
+                _parsedArguments[key] += val+" ";
             }
         }
 

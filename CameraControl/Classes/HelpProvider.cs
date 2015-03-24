@@ -71,7 +71,7 @@ namespace CameraControl.Classes
                                     HelpSections.FocusStacking,
                                     "http://digicamcontrol.com/manual/focus-stacking"
                                     },
-                                {HelpSections.Settings, "http://www.digicamcontrol.com/manual/settings"},
+                                {HelpSections.Settings, "http://digicamcontrol.com/wiki/index.php/Settings"},
                                 {HelpSections.TimeLapse, "http://www.digicamcontrol.com/manual/time-lapse"},
                                 {HelpSections.LiveView, "http://www.digicamcontrol.com/manual/live-view"},
                                 {HelpSections.Session, "http://www.digicamcontrol.com/manual/session"},

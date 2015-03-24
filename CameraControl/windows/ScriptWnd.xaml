@@ -73,11 +73,13 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="323*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <TextBox Name="TextBoxCmd" Margin="3"/>
                     <Button Grid.Row="0" Grid.Column="1" Content="Execute" Click="Button_Click" Margin="3"/>
-                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="" Name="TextBlockError"/>
+                    <ListBox Grid.Row="1" Name="lst_cmd"/>
+                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="" Name="TextBlockError"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tcl script"  Name="TclTabItem">

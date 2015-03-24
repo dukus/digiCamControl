@@ -204,10 +204,6 @@ namespace CameraControl.windows
             PhotoUtils.Run("explorer", ServiceProvider.Settings.OverlayFolder, ProcessWindowStyle.Normal);
         }
 
-        private void btn_stay_on_top_Click(object sender, RoutedEventArgs e)
-        {
-            Topmost = (btn_stay_on_top.IsChecked == true);
-        }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 
@@ -55,6 +57,20 @@ namespace CameraControl.Core.Scripting
                     return device.Mode.Values;
                 case "compressionsetting":
                     return device.CompressionSetting.Values;
+                case "session":
+                {
+                    List<string> vals=new List<string>();
+                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+                    foreach (PropertyInfo prop in props)
+                    {
+                        if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                            prop.PropertyType == typeof(bool))
+                        {
+                            vals.Add("session." + prop.Name.ToLower() + "=" + prop.GetValue(ServiceProvider.Settings.DefaultSession, null));
+                        }
+                    }
+                    return vals;
+                }
                 default:
                     throw new Exception("Unknow parameter");
             }
@@ -84,6 +100,21 @@ namespace CameraControl.Core.Scripting
                 case "compressionsetting":
                     return device.CompressionSetting.Value;
                 default:
+                    if (arg.StartsWith("session."))
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+                        foreach (PropertyInfo prop in props)
+                        {
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                prop.PropertyType == typeof(bool))
+                            {
+                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                {
+                                    return prop.GetValue(ServiceProvider.Settings.DefaultSession, null);
+                                }
+                            }
+                        }
+                    }
                     throw new Exception("Unknow parameter");
             }
         }
@@ -97,7 +128,8 @@ namespace CameraControl.Core.Scripting
             switch (arg)
             {
                 case "shutterspeed":
-                    var val = args[1];
+                {
+                    var val = args[1].Trim();
                     if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
                     {
                         val += "s";
@@ -107,6 +139,7 @@ namespace CameraControl.Core.Scripting
                         val = "Bulb";
                     }
                     device.ShutterSpeed.SetValue(val);
+                }
                     break;
                 case "iso":
                     device.IsoNumber.SetValue(args[1]);
@@ -115,7 +148,19 @@ namespace CameraControl.Core.Scripting
                     device.ExposureCompensation.SetValue(args[1]);
                     break;
                 case "aperture":
+                {
+                    var val = args[1].Trim();
+                    val = val.Replace("f", "ƒ");
+                    if (!val.Contains("/"))
+                    {
+                        val = "ƒ/" + val;
+                    }
+                    if (!val.Contains("."))
+                        val = val + ".0";
+                    if (!device.FNumber.Values.Contains(val))
+                        throw new Exception(string.Format("Wrong value {0} for property aperture", val));
                     device.FNumber.SetValue(args[1]);
+                }
                     break;
                 case "focusmode":
                     device.FocusMode.SetValue(args[1]);
@@ -130,6 +175,36 @@ namespace CameraControl.Core.Scripting
                     device.CompressionSetting.SetValue(args[1]);
                     break;
                 default:
+                    if (arg.StartsWith("session."))
+                    {
+                        var val = args[1].Trim();
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
+                        foreach (PropertyInfo prop in props)
+                        {
+                            if (prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) ||
+                                prop.PropertyType == typeof (bool))
+                            {
+                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                {
+                                    if (prop.PropertyType == typeof (string))
+                                    {
+                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, val, null);
+                                    }
+                                    if (prop.PropertyType == typeof (bool))
+                                    {
+                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, val == "true", null);
+                                    }
+                                    if (prop.PropertyType == typeof (int))
+                                    {
+                                        int i = 0;
+                                        if (int.TryParse(val, out i))
+                                            prop.SetValue(ServiceProvider.Settings.DefaultSession, i, null);
+                                    }
+                                }
+                            }
+                        }
+                        return;
+                    }
                     throw new Exception("Unknow parameter");
             }
         }
