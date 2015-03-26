@@ -67,6 +67,7 @@ namespace CameraControl.Core.Classes
         public const string TimeLapseWnd_Hide = "TimeLapseWnd_Hide";
         public const string BarcodeWnd_Show = "BarcodeWnd_Show";
         public const string BarcodeWnd_Hide = "BarcodeWnd_Hide";
-
+        public const string TimeLapse_Start = "TimeLapse_Start";
+        public const string TimeLapse_Stop = "TimeLapse_Stop";
     }
 }

@@ -33,7 +33,7 @@ namespace CameraControl.windows
                     }));
                     break;
                 case WindowsCmdConsts.TimeLapseWnd_Hide:
-                    Hide();
+                    Dispatcher.Invoke(new Action(Hide));
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate

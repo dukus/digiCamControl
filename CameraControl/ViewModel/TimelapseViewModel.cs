@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Timers;
 using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
-using Eagle._Containers.Public;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
@@ -498,9 +494,23 @@ namespace CameraControl.ViewModel
             else
             {
                 TimeLapseSettings = ServiceProvider.Settings.DefaultSession.TimeLapseSettings;
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
             }
             _timer.AutoReset = true;
             _timer.Elapsed += _timer_Elapsed;
+        }
+
+        void WindowsManager_Event(string cmd, object o)
+        {
+            switch (cmd)
+            {
+                case WindowsCmdConsts.TimeLapse_Start:
+                    StartL();
+                    break;
+                case WindowsCmdConsts.TimeLapse_Stop:
+                    StopL();
+                    break;
+            }
         }
 
         public void Browse()
@@ -630,20 +640,34 @@ namespace CameraControl.ViewModel
         {
             if (!IsRunning)
             {
-                IsRunning = true;
-                _timeLapseStartTime = DateTime.Now;
-                _lastCaptureTime = DateTime.Now;
-                Log.Debug("Timelapse start");
-                _totalCaptures = 0;
-                _timer.Start();
+                StartL();
             }
             else
             {
-                Log.Debug("Timelapse stop");
-                IsActive = false;
-                IsRunning = false;
-                _timer.Stop();
+                StopL();
             }
+        }
+
+        private void StartL()
+        {
+            if (IsRunning)
+                return;
+            IsRunning = true;
+            _timeLapseStartTime = DateTime.Now;
+            _lastCaptureTime = DateTime.Now;
+            Log.Debug("Timelapse start");
+            _totalCaptures = 0;
+            _timer.Start();
+        }
+
+        private void StopL()
+        {
+            if (!IsRunning)
+                return;
+            Log.Debug("Timelapse stop");
+            IsActive = false;
+            IsRunning = false;
+            _timer.Stop();            
         }
     }
 }
