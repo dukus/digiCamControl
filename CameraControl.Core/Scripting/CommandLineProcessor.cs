@@ -68,6 +68,11 @@ namespace CameraControl.Core.Scripting
                     return ServiceProvider.Settings.PhotoSessions.Select(x => x.Name).ToArray();
                 case "cmds":
                     return ServiceProvider.WindowsManager.WindowCommands.Select(x => x.Name).ToArray();
+                case "cameras":
+                    return
+                        ServiceProvider.DeviceManager.ConnectedDevices.Where(x => x.IsConnected)
+                            .Select(x => x.SerialNumber)
+                            .ToArray();
                 case "session":
                 {
                     IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
@@ -103,6 +108,8 @@ namespace CameraControl.Core.Scripting
                     return device.CompressionSetting.Value;
                 case "session":
                     return ServiceProvider.Settings.DefaultSession.Name;
+                case "camera":
+                    return ServiceProvider.DeviceManager.SelectedCameraDevice.SerialNumber;
                 default:
                     if (arg.StartsWith("session."))
                     {
@@ -177,6 +184,18 @@ namespace CameraControl.Core.Scripting
                     break;
                 case "compressionsetting":
                     device.CompressionSetting.SetValue(args[1]);
+                    break;
+                case "camera":
+                {
+                    foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+                    {
+                        if (cameraDevice.SerialNumber == args[1])
+                        {
+                            ServiceProvider.DeviceManager.SelectedCameraDevice = cameraDevice;
+                            break;
+                        }
+                    }
+                }
                     break;
                 case "session":
                     device.CompressionSetting.SetValue(args[1]);

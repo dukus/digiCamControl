@@ -298,7 +298,6 @@ namespace CameraControl.windows
                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                         Show();
                         Activate();
-                        Topmost = true;
                         ServiceProvider.ScriptManager.OutPutMessageReceived +=
                             ScriptManager_OutPutMessageReceived;
                         Focus();
