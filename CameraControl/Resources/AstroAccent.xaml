@@ -5,15 +5,15 @@
     <SolidColorBrush x:Key="FlatButtonForegroundBrush" Color="#880000"/>
     
     <!--ACCENT COLORS-->
-    <Color x:Key="HighlightColor">#FF880000</Color>
+    <Color x:Key="HighlightColor">#FF550000</Color>
     <!--80%-->
-    <Color x:Key="AccentColor">#CC880000</Color>
+    <Color x:Key="AccentColor">#CC550000</Color>
     <!--60%-->
-    <Color x:Key="AccentColor2">#99880000</Color>
+    <Color x:Key="AccentColor2">#99550000</Color>
     <!--40%-->
-    <Color x:Key="AccentColor3">#66880000</Color>
+    <Color x:Key="AccentColor3">#66550000</Color>
     <!--20%-->
-    <Color x:Key="AccentColor4">#33880000</Color>
+    <Color x:Key="AccentColor4">#33550000</Color>
     
     <!-- re-set brushes too -->
     <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource HighlightColor}" />

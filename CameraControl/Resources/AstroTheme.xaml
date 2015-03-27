@@ -4,7 +4,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="options">
 
-    <Color x:Key="BlackColor">#FFAA0000</Color>
+    <Color x:Key="BlackColor">#FF880000</Color>
     <Color x:Key="WhiteColor">#FF000000</Color>
 
     <Color x:Key="Gray1">#FF999999</Color>
