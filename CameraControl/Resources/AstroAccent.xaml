@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="FlatButtonBackgroundBrush" Color="#656565" />
+    <SolidColorBrush x:Key="FlatButtonForegroundBrush" Color="#880000"/>
+    
+    <!--ACCENT COLORS-->
+    <Color x:Key="HighlightColor">#FF880000</Color>
+    <!--80%-->
+    <Color x:Key="AccentColor">#CC880000</Color>
+    <!--60%-->
+    <Color x:Key="AccentColor2">#99880000</Color>
+    <!--40%-->
+    <Color x:Key="AccentColor3">#66880000</Color>
+    <!--20%-->
+    <Color x:Key="AccentColor4">#33880000</Color>
+    
+    <!-- re-set brushes too -->
+    <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource HighlightColor}" />
+    <SolidColorBrush x:Key="AccentColorBrush" Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush x:Key="AccentColorBrush2" Color="{StaticResource AccentColor2}"/>
+    <SolidColorBrush x:Key="AccentColorBrush3" Color="{StaticResource AccentColor3}"/>
+    <SolidColorBrush x:Key="AccentColorBrush4" Color="{StaticResource AccentColor4}"/>
+
+    <SolidColorBrush x:Key="WindowTitleColorBrush" Color="{StaticResource AccentColor}" />
+
+    <SolidColorBrush x:Key="AccentSelectedColorBrush" Color="#FFAAAAAA" />
+
+    <LinearGradientBrush x:Key="ProgressBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
+        <GradientStop Color="{StaticResource HighlightColor}" Offset="0" />
+        <GradientStop Color="{StaticResource AccentColor3}" Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="CheckmarkFill" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="RightArrowFill" Color="{StaticResource AccentColor}" />
+
+    <Color x:Key="IdealForegroundColor">#FFAAAAAA</Color>
+    <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{StaticResource IdealForegroundColor}"/>
+</ResourceDictionary>

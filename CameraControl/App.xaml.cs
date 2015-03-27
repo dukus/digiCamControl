@@ -50,6 +50,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
+using MahApps.Metro;
 using Application = System.Windows.Application;
 using HelpProvider = CameraControl.Classes.HelpProvider;
 using MessageBox = System.Windows.MessageBox;
@@ -82,6 +83,9 @@ namespace CameraControl
                 Shutdown(-1);
                 return;
             }
+
+            ThemeManager.AddAccent("Astro", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroAccent.xaml"));
+            ThemeManager.AddAppTheme("Black", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroTheme.xaml"));
 
             ServiceProvider.Branding = Branding.LoadBranding();
             if (ServiceProvider.Branding.ShowStartupScreen)

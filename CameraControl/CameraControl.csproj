@@ -456,6 +456,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\AstroAccent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\AstroTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -695,6 +703,14 @@
     <ProjectReference Include="..\CameraControl.Devices\CameraControl.Devices.csproj">
       <Project>{E8572D8B-C987-4D20-BD88-1F8925A64A82}</Project>
       <Name>CameraControl.Devices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CameraControlCmd\CameraControlCmd.csproj">
+      <Project>{e8f26bbc-4795-47b3-b89b-2296862a976c}</Project>
+      <Name>CameraControlCmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CameraControlRemoteCmd\CameraControlRemoteCmd.csproj">
+      <Project>{3f9a3d8c-6325-4317-b7c3-4f04ef554c9e}</Project>
+      <Name>CameraControlRemoteCmd</Name>
     </ProjectReference>
     <ProjectReference Include="..\PortableDeviceLib\PortableDeviceLib.csproj">
       <Project>{E9F048C1-C6A0-4CCD-BE57-4E76A7F8B32D}</Project>
