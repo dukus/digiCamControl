@@ -187,5 +187,10 @@ namespace CameraControl.windows
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image);
         }
+
+        private void MetroWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TriggerClass.KeyDown(e);
+        }
     }
 }
