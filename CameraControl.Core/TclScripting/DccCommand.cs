@@ -38,11 +38,11 @@ namespace CameraControl.Core.TclScripting
             {
                 var processor = new CommandLineProcessor();
                 var o = processor.Pharse(arguments.Select(argument => (string) argument).Skip(1).ToArray());
-                if (o is IEnumerable)
+                if (!(o is string) && o is IEnumerable)
                     result = new StringList(o);
                 else
                 {
-                    result = o == null ? "" : o.ToString();
+                    result = o == null ? "" : new Variant(o).ToString();
                 }
             }
             catch (Exception exception)
