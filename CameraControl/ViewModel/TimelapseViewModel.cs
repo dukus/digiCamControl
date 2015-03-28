@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Timers;
 using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.TclScripting;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
 using GalaSoft.MvvmLight;
@@ -516,7 +518,7 @@ namespace CameraControl.ViewModel
         public void Browse()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Script file(*.dccscript)|*.dccscript|All files|*.*";
+            dlg.Filter = "Tcl Script file(*.tcl)|*.tcl|Script file(*.dccscript)|*.dccscript|All files|*.*";
             if (dlg.ShowDialog() == true)
             {
                 ScriptFile = dlg.FileName;
@@ -548,9 +550,25 @@ namespace CameraControl.ViewModel
                             ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.CaptureAll);
                         if (CaptureScript)
                         {
-                            var script = ServiceProvider.ScriptManager.Load(ScriptFile);
-                            script.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
-                            ServiceProvider.ScriptManager.Execute(script);
+                            if (Path.GetExtension(ScriptFile.ToLower()) == ".tcl")
+                            {
+                                try
+                                {
+                                    var manager = new TclScripManager();
+                                    manager.Execute(File.ReadAllText(ScriptFile));
+                                }
+                                catch (Exception exception)
+                                {
+                                    Log.Error("Script error", exception);
+                                    StaticHelper.Instance.SystemMessage = "Script error :" + exception.Message;
+                                }
+                            }
+                            else
+                            {
+                                var script = ServiceProvider.ScriptManager.Load(ScriptFile);
+                                script.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                                ServiceProvider.ScriptManager.Execute(script);
+                            }
                         }
                     }
                     catch (Exception exception)

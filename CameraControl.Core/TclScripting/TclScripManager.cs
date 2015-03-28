@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Eagle._Components.Public;
 using Eagle._Containers.Public;
 using Eagle._Interfaces.Public;
@@ -25,6 +26,12 @@ namespace CameraControl.Core.TclScripting
         }
 
         public int Execute(string commands)
+        {
+            Task.Factory.StartNew(() => ExecuteThread(commands));
+            return 0;
+        }
+
+        private int ExecuteThread(string commands)
         {
             Result result = null;
             var c = new ConsoleRedirect();

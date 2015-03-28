@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 
@@ -15,7 +17,10 @@ namespace CameraControl.Core.Scripting
             switch (cmd)
             {
                 case "capture":
-                    CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                    //Task.Factory.StartNew(CameraHelper.Capture);
+                    //Thread.Sleep(200);
+                    CameraHelper.Capture();
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
                     return null;
                 //case "startbulb":
                 //    CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
@@ -23,6 +28,7 @@ namespace CameraControl.Core.Scripting
                 //case "stopbulb":
                 case "set":
                     Set(args.Skip(1).ToArray());
+                    Thread.Sleep(200);
                     return null;
                 case "do":
                     DoCmd(args.Skip(1).ToArray());

@@ -300,11 +300,13 @@ namespace CameraControl.windows
                         Activate();
                         ServiceProvider.ScriptManager.OutPutMessageReceived +=
                             ScriptManager_OutPutMessageReceived;
+                        _manager.Output += manager_Output;
                         Focus();
                     }));
                     break;
                 case WindowsCmdConsts.ScriptWnd_Hide:
                     ServiceProvider.ScriptManager.OutPutMessageReceived -= ScriptManager_OutPutMessageReceived;
+                    _manager.Output -= manager_Output;
                     Hide();
                     break;
                 case CmdConsts.All_Close:
@@ -485,9 +487,7 @@ namespace CameraControl.windows
                 try
                 {
                     lst_outputTcl.Items.Clear();
-                    _manager.Output += manager_Output;
                     _manager.Execute(textEditorTcl.Text);
-                    _manager.Output -= manager_Output;
                 }
                 catch (Exception exception)
                 {

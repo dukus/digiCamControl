@@ -180,6 +180,7 @@ namespace CameraControl.Core.Classes
             ShowMetadataPanel = true;
             ShowExportPanel = true;
             ShowToolsPanel = true;
+            ShowAnimation = true;
         }
 
         public static Branding LoadBranding()

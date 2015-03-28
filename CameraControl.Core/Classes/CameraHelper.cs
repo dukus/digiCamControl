@@ -158,6 +158,7 @@ namespace CameraControl.Core.Classes
             {
                 if ((DateTime.Now - startTime).TotalMilliseconds > timeout)
                     break;
+                Thread.Sleep(50);
             }
         }
 
