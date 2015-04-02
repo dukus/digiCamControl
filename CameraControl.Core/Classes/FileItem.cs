@@ -53,8 +53,69 @@ namespace CameraControl.Core.Classes
 
     public class FileItem : BaseFieldClass, IDisposable
     {
-        private string _fileName;
+        private string _f;
+        private string _iso;
+        private string _e;
 
+        [XmlAttribute]
+        public string F
+        {
+            get
+            {
+                return _f;
+            }
+            set
+            {
+                _f = value;
+                NotifyPropertyChanged("F");
+            }
+        }
+        
+        [XmlAttribute]
+        public string Iso
+        {
+            get { return _iso; }
+            set
+            {
+                _iso = value;
+                NotifyPropertyChanged("Iso");
+            }
+        }
+
+        [XmlAttribute]
+        public string E
+        {
+            get { return _e; }
+            set
+            {
+                _e = value;
+                NotifyPropertyChanged("E");
+            }
+        }
+
+        [XmlAttribute]
+        public string FocalLength
+        {
+            get { return _focalLength; }
+            set
+            {
+                _focalLength = value;
+                NotifyPropertyChanged("FocalLength");
+            }
+        }
+
+        [XmlAttribute]
+        public string ExposureBias
+        {
+            get { return _exposureBias; }
+            set
+            {
+                _exposureBias = value;
+                NotifyPropertyChanged("ExposureBias");
+            }
+        }
+
+        private string _fileName;
         public string FileName
         {
             get { return _fileName; }
@@ -366,6 +427,8 @@ namespace CameraControl.Core.Classes
 
         private BitmapSource _thumbnail;
         private string _backupFileName;
+        private string _focalLength;
+        private string _exposureBias;
 
         [JsonIgnore]
         [XmlIgnore]

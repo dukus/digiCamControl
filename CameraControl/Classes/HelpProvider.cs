@@ -74,7 +74,7 @@ namespace CameraControl.Classes
                                 {HelpSections.Settings, "http://digicamcontrol.com/wiki/index.php/Settings"},
                                 {HelpSections.TimeLapse, "http://www.digicamcontrol.com/manual/time-lapse"},
                                 {HelpSections.LiveView, "http://www.digicamcontrol.com/manual/live-view"},
-                                {HelpSections.Session, "http://www.digicamcontrol.com/manual/session"},
+                                {HelpSections.Session, "http://digicamcontrol.com/wiki/index.php/Session"},
                                 {HelpSections.Bulb, "http://www.digicamcontrol.com/manual/bulb-mode"},
                                 {HelpSections.MultipleCamera, "http://www.digicamcontrol.com/manual/multiple-cameras"},
                                 {HelpSections.DownloadPhotos, "http://www.digicamcontrol.com/manual/download-photos"},

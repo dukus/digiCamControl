@@ -34,17 +34,22 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using CameraControl.Devices.Classes;
 
 #endregion
 
 namespace CameraControl.Core.Classes
 {
-    public class FileInfo
+    public class FileInfo : BaseFieldClass
     {
         public string InfoLabel { get; set; }
         public int Orientation { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+
+
+
+        
         public ValuePairEnumerator ExifTags { get; set; }
         public List<Rect> FocusPoints { get; set; }
         public int[] HistogramRed { get; set; }

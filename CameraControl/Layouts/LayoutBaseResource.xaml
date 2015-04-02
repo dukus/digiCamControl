@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core">
+                    xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                    xmlns:classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -9,9 +10,8 @@
            explains how to display an object of type BitmapImage. -->
         <Setter Property="ItemTemplate">
             <Setter.Value>
-                <DataTemplate>
-
-                    <StackPanel>
+                <DataTemplate DataType="classes:FileItem">
+                    <StackPanel Orientation="Horizontal">
                         <Grid Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="0,4,4,4">
                             <!--<Rectangle Stroke="Black" Margin="0"/>
                             <Rectangle Stroke="Black" Margin="2" />-->
@@ -33,6 +33,28 @@
                             </Rectangle>
                             <CheckBox IsChecked="{Binding Path=IsChecked}" Margin="3,3,3,5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
                         </Grid>
+                        <StackPanel Width="75" Margin="5">
+                            <StackPanel Orientation="Horizontal" ToolTip="Aperture value">
+                                <Label Content="F : f/" Padding="0" />
+                                <Label Content="{Binding F}" Padding="0" FontStyle="Italic"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <Label Content="Iso : " Padding="0"/>
+                                <Label Content="{Binding Iso}" Padding="0" FontStyle="Italic"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" ToolTip="Exposure time">
+                                <Label Content="E : " Padding="0"/>
+                                <Label Content="{Binding E}" Padding="0" FontStyle="Italic"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" ToolTip="Focal Length">
+                                <Label Content="FL : " Padding="0"/>
+                                <Label Content="{Binding FocalLength}" Padding="0" FontStyle="Italic"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" ToolTip="Exposure Bias value">
+                                <Label Content="EB : " Padding="0"/>
+                                <Label Content="{Binding ExposureBias}" Padding="0" FontStyle="Italic"/>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                     <DataTemplate.Triggers>
                         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
@@ -54,5 +76,5 @@
         </Setter>
     </Style>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    
+
 </ResourceDictionary>
