@@ -141,7 +141,8 @@ namespace CameraControl.Core.Scripting
         {
             var device = GetDevice();
             var arg = args[0].ToLower().Trim();
-
+            var param = args.Skip(1).ToArray().Aggregate("", (current, s) => current + s+ " ");
+            args[1] = param.Trim();
             switch (arg)
             {
                 case "shutterspeed":

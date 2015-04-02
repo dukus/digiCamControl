@@ -283,6 +283,21 @@ namespace CameraControlCmd
                         ServiceProvider.DeviceManager.SelectedCameraDevice.ShutterSpeed.SetValue(_arguments["shutter"]);
                     }
                 }
+
+                if (_arguments.Contains("compression"))
+                {
+                    if (string.IsNullOrEmpty(_arguments["compression"]))
+                    {
+                        Console.WriteLine("No compression !!!");
+                    }
+                    else
+                    {
+                        Thread.Sleep(200);
+                        ServiceProvider.DeviceManager.SelectedCameraDevice.CompressionSetting.SetValue(
+                            _arguments["compression"].Replace('_',' '));
+                    }
+                }
+
                 if (_arguments.Contains("ec"))
                 {
                     if (string.IsNullOrEmpty(_arguments["ec"]))
@@ -418,6 +433,7 @@ namespace CameraControlCmd
             Console.WriteLine(" /aperture aperture         - set the aperture number ex. 9,5 8,0");
             Console.WriteLine(" /shutter shutter speed     - set the shutter speed ex. \"1/50\" \"1/250\" 1s 3s");
             Console.WriteLine(" /ec compensation           - set the exposure comp. -1,5 +2");
+            Console.WriteLine(" /compression compression   - set the compression Ex: JPEG_(NORMAL) RAW_+_JPEG_(FINE)");
             Console.WriteLine("---------------------------------------------------------------------------------");
             Console.WriteLine("For Nikon camera only :");
             Console.WriteLine("---------------------------------------------------------------------------------5");
