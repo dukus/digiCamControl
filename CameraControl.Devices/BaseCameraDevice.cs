@@ -509,6 +509,11 @@ namespace CameraControl.Devices
         {
         }
 
+        public virtual void WaitForReady()
+        {
+            
+        }
+
         #endregion
 
         public BaseCameraDevice()

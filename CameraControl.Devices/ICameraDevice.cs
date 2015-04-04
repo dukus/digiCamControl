@@ -179,5 +179,7 @@ namespace CameraControl.Devices
         bool DeleteObject(DeviceObject deviceObject);
 
         void SetCameraField(CameraFieldType cameraFieldType, string comment);
+
+        void WaitForReady();
     }
 }

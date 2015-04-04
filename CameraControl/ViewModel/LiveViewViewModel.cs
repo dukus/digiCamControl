@@ -1026,6 +1026,25 @@ namespace CameraControl.ViewModel
 
             TriggerOnMotion = false;
             Init();
+            ServiceProvider.WindowsManager.Event += WindowsManagerEvent;
+        }
+
+        private void WindowsManagerEvent(string cmd, object o)
+        {
+            ICameraDevice device = o as ICameraDevice ?? ServiceProvider.DeviceManager.SelectedCameraDevice;
+            if (device != CameraDevice)
+                return;
+            if (cmd.StartsWith(CmdConsts.LiveView_ManualFocus))
+            {
+                try
+                {
+                    string step = cmd.Substring(CmdConsts.LiveView_ManualFocus.Length);
+                    SetFocusThread(Convert.ToInt32(step));
+                }
+                catch (Exception)
+                {
+                }
+            }
         }
 
         private void InitCommands()
@@ -1263,17 +1282,6 @@ namespace CameraControl.ViewModel
                 case CmdConsts.LiveView_Focus:
                     AutoFocus();
                     break;
-            }
-            if (cmd.StartsWith(CmdConsts.LiveView_ManualFocus))
-            {
-                try
-                {
-                    string step = cmd.Substring(CmdConsts.LiveView_ManualFocus.Length);
-                    SetFocus(Convert.ToInt32(step));
-                }
-                catch (Exception)
-                {
-                }
             }
         }
 

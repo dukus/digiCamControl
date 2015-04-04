@@ -38,6 +38,28 @@
 		   <button action="/?CMD=TimeLapse_Stop">Stop</button>
 		</fieldset>
       </li>	  
+	  <li>	  
+	   <fieldset><legend>Single line command</legend>
+	   <form id="Form" action="/">
+  		 <select name="slc">
+		  <option value="get" selected="selected">get</option>
+		  <option value="set">set</option>
+		  <option value="list">list</option>
+		  <option value="capture">capture</option>
+		  <option value="do">do</option>
+  		 </select>
+		 <input type="text" name="param1" />
+		 <input type="text" name="param2" />
+		 <input type="submit" value="Execute" id="execute">
+		 </form>
+		 <a href="http://digicamcontrol.com/wiki/index.php/Single_Command_System" target="_blank">Help</a>
+	   </fieldset>
+	  </li>	 
+	   <li>
+		<fieldset><legend>Command result</legend>
+          <textarea id="result" rows="7" cols="100"></textarea>
+		</fieldset>
+      </li>	  
    </ul>
    <div style="clear: left"></div>
 </div>
@@ -45,7 +67,23 @@
    window.setInterval(function(){
       $("#browseimg").attr("src","/preview.jpg?rand=" + Math.random());
    }, 1000);
+  
+$("#execute").click(function(){
+  $.ajax({
+    type: 'GET', 
+    url: '/', 
+    data: $('#Form').serialize(),
+    success: function (x) {                
+      $("#result").html(x);
+    },
+    beforeSend:function(){
+      $("#result").html("Loading...")
+    }
+  });
+  return false;
+});
 
+   
   $(".submenu1 button:first").button({
       icons: {
 	primary: "ui-icon-arrow-4-diag"

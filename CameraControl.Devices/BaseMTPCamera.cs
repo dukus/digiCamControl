@@ -315,7 +315,6 @@ namespace CameraControl.Devices
 
         public uint ExecuteWithNoData(uint code, uint param1, int loop, int counter)
         {
-            WaitForReady();
             uint res = 0;
             bool allok;
             do
@@ -334,7 +333,6 @@ namespace CameraControl.Devices
 
         public uint ExecuteWithNoData(uint code, uint param1, uint param2, uint param3, int loop, int counter)
         {
-            WaitForReady();
             uint res = 0;
             bool allok;
             do
@@ -353,7 +351,6 @@ namespace CameraControl.Devices
 
         public uint ExecuteWithNoData(uint code, int loop, int counter)
         {
-            WaitForReady();
             uint res = 0;
             bool allok;
             do
@@ -378,7 +375,6 @@ namespace CameraControl.Devices
 
         public MTPDataResponse ExecuteReadDataEx(uint code, uint param1,uint param2, int loop, int counter)
         {
-            WaitForReady();
             DeviceIsBusy = true;
             MTPDataResponse res = new MTPDataResponse();
             bool allok;
@@ -400,7 +396,6 @@ namespace CameraControl.Devices
 
         public MTPDataResponse ExecuteReadDataEx(uint code, uint param1, uint param2, uint param3, int loop, int counter)
         {
-            WaitForReady();
             DeviceIsBusy = true;
             MTPDataResponse res = new MTPDataResponse();
             bool allok;
@@ -423,7 +418,6 @@ namespace CameraControl.Devices
         public MTPDataResponse ExecuteReadDataEx(uint code, uint param1)
         {
             int counter = 0;
-            WaitForReady();
             DeviceIsBusy = true;
             MTPDataResponse res = new MTPDataResponse();
             bool allok;
@@ -446,7 +440,6 @@ namespace CameraControl.Devices
         public MTPDataResponse ExecuteReadDataEx(uint code)
         {
             int counter = 0;
-            WaitForReady();
             DeviceIsBusy = true;
             MTPDataResponse res = new MTPDataResponse();
             bool allok;
@@ -466,13 +459,6 @@ namespace CameraControl.Devices
             return res;
         }
 
-        protected void WaitForReady()
-        {
-            //while (DeviceIsBusy)
-            //{
-            //  Thread.Sleep(1);
-            //}
-        }
 
         public void SetProperty(uint code, byte[] data, uint param1)
         {

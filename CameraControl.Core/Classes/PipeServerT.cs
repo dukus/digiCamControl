@@ -182,9 +182,10 @@ namespace CameraControl.Core.Classes
                             break;
                         case "manualfocus":
                         {
+                            var time = DateTime.Now;
                             ServiceProvider.WindowsManager.ExecuteCommand(
                                 CmdConsts.LiveView_ManualFocus + lines["step"], device);
-                            return ":;response:ok;";
+                            return ":;response:ok;executiontime:" + (DateTime.Now - time);
                         }
                             break;
 

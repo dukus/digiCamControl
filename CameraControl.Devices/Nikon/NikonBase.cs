@@ -1819,7 +1819,6 @@ namespace CameraControl.Devices.Nikon
         {
             if (retrynum > 50)
                 return;
-            WaitForReady();
             //uint cod = Convert.ToUInt32(_stillImageDevice.ExecuteWithNoData(CONST_CMD_DeviceReady));
             ulong cod = (ulong) ExecuteWithNoData(CONST_CMD_DeviceReady);
             if (cod != 0 && cod != ErrorCodes.MTP_OK)

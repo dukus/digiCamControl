@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using CameraControl.Core.Scripting;
 using CameraControl.Devices;
 using Griffin.WebServer;
 using Griffin.WebServer.Files;
@@ -154,6 +155,47 @@ namespace CameraControl.Core.Classes
                         }
                     }
                 }
+
+                var slc = context.Request.QueryString["slc"];
+                if (!string.IsNullOrEmpty(slc))
+                {
+                    string response = "";
+                    try
+                    {
+                        var processor = new CommandLineProcessor();
+                        var resp = processor.Pharse(new[] { context.Request.QueryString["slc"], context.Request.QueryString["param1"], context.Request.QueryString["param2"] });
+                        var list = resp as IEnumerable<string>;
+                        if (list != null)
+                        {
+                            foreach (var o in list)
+                            {
+                                response += o + "\n";
+                            }
+                        }
+                        else
+                        {
+                            if (resp != null)
+                                response = resp.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response = ex.Message;
+                    }
+
+                    byte[] buffer = Encoding.UTF8.GetBytes(response);
+
+                    //response.ContentLength64 = buffer.Length;
+                    context.Response.AddHeader("Content-Length", buffer.Length.ToString());
+
+                    context.Response.Body = new MemoryStream();
+
+                    context.Response.Body.Write(buffer, 0, buffer.Length);
+                    context.Response.Body.Position = 0;
+                    return ModuleResult.Continue;
+                }
+
+
                 string fullpath = GetFullPath(context.Request.Uri);
                 if (!string.IsNullOrEmpty(fullpath) && File.Exists(fullpath))
                 {
@@ -196,7 +238,6 @@ namespace CameraControl.Core.Classes
                 string param = context.Request.QueryString["PARAM"];
                 if (!string.IsNullOrEmpty(cmd))
                     ServiceProvider.WindowsManager.ExecuteCommand(cmd, param);
-
             }
             catch (Exception ex)
             {
