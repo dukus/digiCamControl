@@ -103,7 +103,7 @@ namespace CameraControl.Classes
                     zip.Save(destfile);
                 }
                 var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82");
-                var message = new MailMessage(email ?? "error@digicamcontrol.mailgun.org",
+                var message = new MailMessage(string.IsNullOrWhiteSpace(email) ? "error_report@digicamcontrol.com":email,
                     "error_report@digicamcontrol.com")
                 {
                     Subject = (type ?? "Log file"),
