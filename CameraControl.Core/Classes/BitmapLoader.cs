@@ -129,35 +129,28 @@ namespace CameraControl.Core.Classes
             string filename = fileItem.FileName;
             if (fileItem.IsRaw)
             {
-                string s = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
-                                        Path.GetFileNameWithoutExtension(fileItem.FileName) + ".jpg");
-                if (File.Exists(s))
+
+                try
                 {
-                    filename = s;
-                }
-                else
-                {
-                    try
+                    string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
+                    if (File.Exists(dcraw_exe))
                     {
-                        string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
-                        if (File.Exists(dcraw_exe))
+                        PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e \"{0}\"", fileItem.FileName));
+                        string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
+                            Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
+                        if (File.Exists(thumb))
                         {
-                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e \"{0}\"", fileItem.FileName));
-                            string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
-                                        Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
-                            if (File.Exists(thumb))
-                            {
-                                deleteFile = true;
-                                filename = thumb;
-                            }
+                            deleteFile = true;
+                            filename = thumb;
                         }
                     }
-                    catch (Exception exception)
-                    {
-                        Log.Error("Error get dcraw thumb", exception);
-                    }
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Error get dcraw thumb", exception);
                 }
             }
+
 
             GetMetadata(fileItem);
             try
@@ -404,27 +397,45 @@ namespace CameraControl.Core.Classes
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ExposureTime"))
             {
                 file.InfoLabel += "E " + fileItem.FileInfo.ExifTags["Exif.Photo.ExposureTime"];
-                fileItem.E = fileItem.FileInfo.ExifTags["Exif.Photo.ExposureTime"];
             }
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FNumber"))
             {
                 file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FNumber"];
-                fileItem.F = fileItem.FileInfo.ExifTags["Exif.Photo.FNumber"].Replace("F", "");
             }
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ISOSpeedRatings"))
             {
                 file.InfoLabel += " | ISO " + fileItem.FileInfo.ExifTags["Exif.Photo.ISOSpeedRatings"];
+            }
+            if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FocalLength"))
+            {
+                file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FocalLength"];
+            }
+            SetImageInfo(fileItem);
+        }
+
+        public void SetImageInfo(FileItem fileItem)
+        {
+            if (fileItem == null || fileItem.FileInfo == null)
+                return;
+            if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ExposureTime"))
+            {
+                fileItem.E = fileItem.FileInfo.ExifTags["Exif.Photo.ExposureTime"];
+            }
+            if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FNumber"))
+            {
+                fileItem.F = fileItem.FileInfo.ExifTags["Exif.Photo.FNumber"].Replace("F", "");
+            }
+            if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ISOSpeedRatings"))
+            {
                 fileItem.Iso = fileItem.FileInfo.ExifTags["Exif.Photo.ISOSpeedRatings"];
             }
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.ExposureBiasValue"))
                 fileItem.ExposureBias = fileItem.FileInfo.ExifTags["Exif.Photo.ExposureBiasValue"];
             if (fileItem.FileInfo.ExifTags.ContainName("Exif.Photo.FocalLength"))
             {
-                file.InfoLabel += " | " + fileItem.FileInfo.ExifTags["Exif.Photo.FocalLength"];
                 fileItem.FocalLength = fileItem.FileInfo.ExifTags["Exif.Photo.FocalLength"];
             }
         }
-
 
         public ImageSource LoadImage(string filename, int width, int rotateAngle)
         {

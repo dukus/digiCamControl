@@ -54,6 +54,12 @@
                                 <Label Content="EB : " Padding="0"/>
                                 <Label Content="{Binding ExposureBias}" Padding="0" FontStyle="Italic"/>
                             </StackPanel>
+                            <!--<StackPanel Orientation="Horizontal" ToolTip="File name">
+                                <Label Content="{Binding ShortName}" Padding="0" FontStyle="Italic"/>
+                            </StackPanel>-->
+                            <StackPanel Orientation="Horizontal" ToolTip="File format">
+                                <Label Content="{Binding Format}" Padding="0" />
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                     <DataTemplate.Triggers>

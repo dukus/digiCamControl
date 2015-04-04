@@ -115,6 +115,17 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string ShortName
+        {
+            get { return FileName == null ? "" : Path.GetFileNameWithoutExtension(FileName); }
+        }
+
+        public string Format
+        {
+            get { return IsRaw ? "RAW" : "JPG"; }
+        }
+
+
         private string _fileName;
         public string FileName
         {
@@ -429,6 +440,7 @@ namespace CameraControl.Core.Classes
         private string _backupFileName;
         private string _focalLength;
         private string _exposureBias;
+        private string _shortName;
 
         [JsonIgnore]
         [XmlIgnore]

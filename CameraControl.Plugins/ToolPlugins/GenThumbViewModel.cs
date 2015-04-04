@@ -119,6 +119,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 if (!item.HaveGeneratedThumbnail)
                 {
                     BitmapLoader.Instance.GenerateCache(item);
+                    BitmapLoader.Instance.SetImageInfo(item);
                 }
                 Bitmap = item.Thumbnail;
             }
