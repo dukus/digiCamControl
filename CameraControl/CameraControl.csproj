@@ -249,6 +249,8 @@
       <DependentUpon>EnfuseSettingsWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\HelpProvider.cs" />
+    <Compile Include="Classes\HorizontalScrollBehavior.cs" />
+    <Compile Include="Classes\VisualTreeHelpers.cs" />
     <Compile Include="Classes\WpfCommands.cs" />
     <Compile Include="Controls\AnimationHelper.cs" />
     <Compile Include="Controls\AvalonEditExtensions.cs" />

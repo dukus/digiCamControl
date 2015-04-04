@@ -8,6 +8,8 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:classes="clr-namespace:CameraControl.Classes"
                     mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"                    
              d:DesignHeight="484" d:DesignWidth="689">
     <UserControl.Resources>
@@ -146,6 +148,9 @@
             <!--</Grid>-->
         </StatusBar>
         <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False">
+                <i:Interaction.Behaviors>
+                    <classes:HorizontalScrollBehavior />
+                </i:Interaction.Behaviors>
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >
