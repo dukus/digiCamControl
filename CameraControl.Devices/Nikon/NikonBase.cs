@@ -82,10 +82,12 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_BatteryLevel = 0x5001;
         public const uint CONST_PROP_LiveViewImageZoomRatio = 0xD1A3;
         public const uint CONST_PROP_AFModeSelect = 0xD161;
+        public const uint CONST_PROP_AfModeAtLiveView = 0xD061;
         public const uint CONST_PROP_CompressionSetting = 0x5004;
         public const uint CONST_PROP_ExposureMeteringMode = 0x500B;
         public const uint CONST_PROP_FocusMode = 0x500A;
         public const uint CONST_PROP_LiveViewStatus = 0xD1A2;
+        public const uint CONST_PROP_LiveViewSelector = 0xD1A6;
         public const uint CONST_PROP_ExposureIndicateStatus = 0xD1B1;
         public const uint CONST_PROP_RecordingMedia = 0xD10B;
         public const uint CONST_PROP_NoiseReduction = 0xD06B;
@@ -267,6 +269,21 @@ namespace CameraControl.Devices.Nikon
                                                             {0x8013, "[F] Constant AF servo"},
                                                         };
 
+        public bool LiveViewOn
+        {
+            get { return _liveViewOn; }
+            set
+            {
+                _liveViewOn = value;
+                FocusMode = LiveViewOn ? LiveViewFocusMode : NormalFocusMode;
+            }
+        }
+
+        public bool LiveViewMovieOn { get; set; }
+
+        public PropertyValue<long> LiveViewFocusMode { get; set; }
+        public PropertyValue<long> NormalFocusMode { get; set; }
+
         public NikonBase()
         {
             _timer.AutoReset = true;
@@ -416,6 +433,7 @@ namespace CameraControl.Devices.Nikon
                 AddAditionalProps();
                 ReInitShutterSpeed();
                 HostMode = false;
+                ReadDeviceProperties(CONST_PROP_LiveViewStatus);
                 _timer.Start();
                 OnCameraInitDone();
             }
@@ -1178,24 +1196,40 @@ namespace CameraControl.Devices.Nikon
             try
             {
                 DeviceReady();
-                FocusMode = new PropertyValue<long>();
-                FocusMode.Name = "FocusMode";
-                FocusMode.Code = CONST_PROP_AFModeSelect;
-                FocusMode.IsEnabled = true;
-                FocusMode.AddValues("AF-S", 0);
-                FocusMode.AddValues("AF-C", 1);
-                FocusMode.AddValues("AF-A", 2);
-                FocusMode.AddValues("MF (hard)", 3);
-                FocusMode.AddValues("MF (soft)", 4);
-                FocusMode.ValueChanged += FocusMode_ValueChanged;
-                ReadDeviceProperties(FocusMode.Code);
+                NormalFocusMode = new PropertyValue<long>();
+                NormalFocusMode.Name = "FocusMode";
+                NormalFocusMode.Code = CONST_PROP_AFModeSelect;
+                NormalFocusMode.IsEnabled = true;
+                NormalFocusMode.AddValues("AF-S", 0);
+                NormalFocusMode.AddValues("AF-C", 1);
+                NormalFocusMode.AddValues("AF-A", 2);
+                NormalFocusMode.AddValues("MF (hard)", 3);
+                NormalFocusMode.AddValues("MF (soft)", 4);
+                NormalFocusMode.ValueChanged += NormalFocusMode_ValueChanged;
+                ReadDeviceProperties(NormalFocusMode.Code);
+                LiveViewFocusMode = new PropertyValue<long>();
+                LiveViewFocusMode.Name = "FocusMode";
+                LiveViewFocusMode.Code = CONST_PROP_AfModeAtLiveView;
+                LiveViewFocusMode.IsEnabled = true;
+                LiveViewFocusMode.AddValues("AF-S", 0);
+                LiveViewFocusMode.AddValues("AF-F", 2);
+                LiveViewFocusMode.AddValues("MF (hard)", 3);
+                LiveViewFocusMode.AddValues("MF (soft)", 4);
+                LiveViewFocusMode.ValueChanged += LiveViewFocusMode_ValueChanged;
+                ReadDeviceProperties(LiveViewFocusMode.Code);
             }
             catch (Exception)
             {
             }
         }
 
-        private void FocusMode_ValueChanged(object sender, string key, long val)
+        void LiveViewFocusMode_ValueChanged(object sender, string key, long val)
+        {
+            SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((sbyte)val),
+                        CONST_PROP_AfModeAtLiveView);            
+        }
+
+        private void NormalFocusMode_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((sbyte) val),
                         CONST_PROP_AFModeSelect);
@@ -1505,10 +1539,16 @@ namespace CameraControl.Devices.Nikon
                                                           false);
                             break;
                         case CONST_PROP_AFModeSelect:
-                            FocusMode.SetValue(
+                            NormalFocusMode.SetValue(
                                 StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect),
                                 false);
-                            FocusMode.IsEnabled = FocusMode.NumericValue != 3;
+                            NormalFocusMode.IsEnabled = NormalFocusMode.NumericValue != 3;
+                            break;
+                        case CONST_PROP_AfModeAtLiveView:
+                            LiveViewFocusMode.SetValue(
+                                StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AfModeAtLiveView),
+                                false);
+                            LiveViewFocusMode.IsEnabled = LiveViewFocusMode.NumericValue != 3;
                             break;
                         case CONST_PROP_BatteryLevel:
                             {
@@ -1532,6 +1572,24 @@ namespace CameraControl.Devices.Nikon
                                 }
                             }
                             break;
+                        case CONST_PROP_LiveViewStatus:
+                        {
+                            MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus);
+                            if (response.Data != null && response.Data.Length > 0 )
+                            {
+                                LiveViewOn = response.Data[0] == 1;
+                            }
+                            break;
+                        }
+                        case CONST_PROP_LiveViewSelector:
+                        {
+                            MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewSelector);
+                            if (response.Data != null && response.Data.Length > 0)
+                            {
+                                LiveViewMovieOn = response.Data[0] == 1;
+                            }
+                            break;
+                        }
                         default:
                             // imrovements from: http://digicamcontrol.com/forum/testingbug-reports/buglet-nikonbasecs
                             foreach (PropertyValue<long> advancedProperty in AdvancedProperties.Where(advancedProperty => advancedProperty.Code == prop))
@@ -1668,6 +1726,7 @@ namespace CameraControl.Devices.Nikon
 
         private DateTime _dateTime;
         private bool _hostMode1;
+        private bool _liveViewOn;
 
         public override DateTime DateTime
         {
