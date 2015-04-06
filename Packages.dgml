@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="CameraControlRemoteCmd" Label="CameraControlRemoteCmd" Category="Project" />
+    <Node Id="Newtonsoft.Json 7.0.1-beta1" Label="Newtonsoft.Json 7.0.1-beta1" Category="Package" />
+    <Node Id="Setup" Label="Setup" Category="Project" />
+    <Node Id="WixSharp 1.0.8.0" Label="WixSharp 1.0.8.0" Category="Package" />
+    <Node Id="CameraControl.ServerTest" Label="CameraControl.ServerTest" Category="Project" />
+    <Node Id="WriteableBitmapEx 1.0.14.0" Label="WriteableBitmapEx 1.0.14.0" Category="Package" />
+    <Node Id="CameraControl.PluginManager" Label="CameraControl.PluginManager" Category="Project" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="Plugin.DeviceControlBox" Label="Plugin.DeviceControlBox" Category="Project" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="MtpTester" Label="MtpTester" Category="Project" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="MahApps.Metro.Resources 0.4.0.0" Label="MahApps.Metro.Resources 0.4.0.0" Category="Package" />
+    <Node Id="CameraControl.Plugins" Label="CameraControl.Plugins" Category="Project" />
+    <Node Id="CommonServiceLocator 1.3" Label="CommonServiceLocator 1.3" Category="Package" />
+    <Node Id="DotNetZip 1.9.3" Label="DotNetZip 1.9.3" Category="Package" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="MahApps.Metro.Resources 0.4.0.0" Label="MahApps.Metro.Resources 0.4.0.0" Category="Package" />
+    <Node Id="MvvmLight 5.1.0.2" Label="MvvmLight 5.1.0.2" Category="Package" />
+    <Node Id="MvvmLightLibs 5.1.1.0" Label="MvvmLightLibs 5.1.1.0" Category="Package" />
+    <Node Id="System.Net.FtpClient 1.0.5281.14359" Label="System.Net.FtpClient 1.0.5281.14359" Category="Package" />
+    <Node Id="WriteableBitmapEx 1.0.14.0" Label="WriteableBitmapEx 1.0.14.0" Category="Package" />
+    <Node Id="CameraControl.Test" Label="CameraControl.Test" Category="Project" />
+    <Node Id="AForge 2.2.5" Label="AForge 2.2.5" Category="Package" />
+    <Node Id="AForge.Imaging 2.2.5" Label="AForge.Imaging 2.2.5" Category="Package" />
+    <Node Id="AForge.Math 2.2.5" Label="AForge.Math 2.2.5" Category="Package" />
+    <Node Id="AForge.Vision 2.2.5" Label="AForge.Vision 2.2.5" Category="Package" />
+    <Node Id="DotNetZip 1.9.3" Label="DotNetZip 1.9.3" Category="Package" />
+    <Node Id="log4net 2.0.3" Label="log4net 2.0.3" Category="Package" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="MahApps.Metro.Resources 0.4.0.0" Label="MahApps.Metro.Resources 0.4.0.0" Category="Package" />
+    <Node Id="CameraControlCmd" Label="CameraControlCmd" Category="Project" />
+    <Node Id="DotNetZip 1.9.3" Label="DotNetZip 1.9.3" Category="Package" />
+    <Node Id="log4net 2.0.3" Label="log4net 2.0.3" Category="Package" />
+    <Node Id="CameraControl.Core" Label="CameraControl.Core" Category="Project" />
+    <Node Id="AForge 2.2.5" Label="AForge 2.2.5" Category="Package" />
+    <Node Id="AForge.Imaging 2.2.5" Label="AForge.Imaging 2.2.5" Category="Package" />
+    <Node Id="AForge.Math 2.2.5" Label="AForge.Math 2.2.5" Category="Package" />
+    <Node Id="AForge.Vision 2.2.5" Label="AForge.Vision 2.2.5" Category="Package" />
+    <Node Id="AvalonEdit 5.0.2" Label="AvalonEdit 5.0.2" Category="Package" />
+    <Node Id="DotNetZip 1.9.3" Label="DotNetZip 1.9.3" Category="Package" />
+    <Node Id="Eagle 1.0.5542.25903" Label="Eagle 1.0.5542.25903" Category="Package" />
+    <Node Id="Griffin.Networking 0.5.7" Label="Griffin.Networking 0.5.7" Category="Package" />
+    <Node Id="Griffin.Networking.Protocol.Http 0.5.2" Label="Griffin.Networking.Protocol.Http 0.5.2" Category="Package" />
+    <Node Id="Griffin.WebServer 0.5.0" Label="Griffin.WebServer 0.5.0" Category="Package" />
+    <Node Id="log4net 2.0.3" Label="log4net 2.0.3" Category="Package" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="MahApps.Metro.Resources 0.4.0.0" Label="MahApps.Metro.Resources 0.4.0.0" Category="Package" />
+    <Node Id="MeasurementProtocolClient 1.0.0.0" Label="MeasurementProtocolClient 1.0.0.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 7.0.1-beta1" Label="Newtonsoft.Json 7.0.1-beta1" Category="Package" />
+    <Node Id="WriteableBitmapEx 1.0.14.0" Label="WriteableBitmapEx 1.0.14.0" Category="Package" />
+    <Node Id="CameraControl" Label="CameraControl" Category="Project" />
+    <Node Id="AForge 2.2.5" Label="AForge 2.2.5" Category="Package" />
+    <Node Id="AForge.Imaging 2.2.5" Label="AForge.Imaging 2.2.5" Category="Package" />
+    <Node Id="AForge.Math 2.2.5" Label="AForge.Math 2.2.5" Category="Package" />
+    <Node Id="AForge.Vision 2.2.5" Label="AForge.Vision 2.2.5" Category="Package" />
+    <Node Id="AvalonEdit 5.0.2" Label="AvalonEdit 5.0.2" Category="Package" />
+    <Node Id="CommonServiceLocator 1.3" Label="CommonServiceLocator 1.3" Category="Package" />
+    <Node Id="DotNetZip 1.9.3" Label="DotNetZip 1.9.3" Category="Package" />
+    <Node Id="Eagle 1.0.5542.25903" Label="Eagle 1.0.5542.25903" Category="Package" />
+    <Node Id="Extended.Wpf.Toolkit 2.3" Label="Extended.Wpf.Toolkit 2.3" Category="Package" />
+    <Node Id="gong-wpf-dragdrop 0.1.4.3" Label="gong-wpf-dragdrop 0.1.4.3" Category="Package" />
+    <Node Id="Griffin.Networking 0.5.7" Label="Griffin.Networking 0.5.7" Category="Package" />
+    <Node Id="Griffin.Networking.Protocol.Http 0.5.2" Label="Griffin.Networking.Protocol.Http 0.5.2" Category="Package" />
+    <Node Id="Griffin.WebServer 0.5.0" Label="Griffin.WebServer 0.5.0" Category="Package" />
+    <Node Id="Hardcodet.NotifyIcon.Wpf 1.0.5" Label="Hardcodet.NotifyIcon.Wpf 1.0.5" Category="Package" />
+    <Node Id="log4net 2.0.3" Label="log4net 2.0.3" Category="Package" />
+    <Node Id="MahApps.Metro 1.1.3-ALPHA002" Label="MahApps.Metro 1.1.3-ALPHA002" Category="Package" />
+    <Node Id="MahApps.Metro.Resources 0.4.0.0" Label="MahApps.Metro.Resources 0.4.0.0" Category="Package" />
+    <Node Id="mnailgun 0.7.0" Label="mnailgun 0.7.0" Category="Package" />
+    <Node Id="MvvmLight 5.1.0.2" Label="MvvmLight 5.1.0.2" Category="Package" />
+    <Node Id="MvvmLightLibs 5.1.1.0" Label="MvvmLightLibs 5.1.1.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 7.0.1-beta1" Label="Newtonsoft.Json 7.0.1-beta1" Category="Package" />
+    <Node Id="System.Net.FtpClient 1.0.5281.14359" Label="System.Net.FtpClient 1.0.5281.14359" Category="Package" />
+    <Node Id="WriteableBitmapEx 1.0.14.0" Label="WriteableBitmapEx 1.0.14.0" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="CameraControlRemoteCmd" Target="Newtonsoft.Json 7.0.1-beta1" Category="Installed Package" />
+    <Link Source="Setup" Target="WixSharp 1.0.8.0" Category="Installed Package" />
+    <Link Source="CameraControl.ServerTest" Target="WriteableBitmapEx 1.0.14.0" Category="Installed Package" />
+    <Link Source="CameraControl.PluginManager" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Installed Package" />
+    <Link Source="Plugin.DeviceControlBox" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Installed Package" />
+    <Link Source="MahApps.Metro.Resources 0.4.0.0" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Package Dependency" />
+    <Link Source="MtpTester" Target="MahApps.Metro.Resources 0.4.0.0" Category="Installed Package" />
+    <Link Source="MahApps.Metro.Resources 0.4.0.0" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="CameraControl.Plugins" Target="DotNetZip 1.9.3" Category="Installed Package" />
+    <Link Source="CameraControl.Plugins" Target="MahApps.Metro.Resources 0.4.0.0" Category="Installed Package" />
+    <Link Source="CameraControl.Plugins" Target="MvvmLight 5.1.0.2" Category="Installed Package" />
+    <Link Source="CameraControl.Plugins" Target="System.Net.FtpClient 1.0.5281.14359" Category="Installed Package" />
+    <Link Source="CameraControl.Plugins" Target="WriteableBitmapEx 1.0.14.0" Category="Installed Package" />
+    <Link Source="AForge.Imaging 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Imaging 2.2.5" Target="AForge.Math 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Math 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Vision 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Vision 2.2.5" Target="AForge.Imaging 2.2.5" Category="Package Dependency" />
+    <Link Source="MahApps.Metro.Resources 0.4.0.0" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Package Dependency" />
+    <Link Source="CameraControl.Test" Target="AForge.Vision 2.2.5" Category="Installed Package" />
+    <Link Source="CameraControl.Test" Target="DotNetZip 1.9.3" Category="Installed Package" />
+    <Link Source="CameraControl.Test" Target="log4net 2.0.3" Category="Installed Package" />
+    <Link Source="CameraControl.Test" Target="MahApps.Metro.Resources 0.4.0.0" Category="Installed Package" />
+    <Link Source="CameraControlCmd" Target="DotNetZip 1.9.3" Category="Installed Package" />
+    <Link Source="CameraControlCmd" Target="log4net 2.0.3" Category="Installed Package" />
+    <Link Source="AForge.Imaging 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Imaging 2.2.5" Target="AForge.Math 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Math 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Vision 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Vision 2.2.5" Target="AForge.Imaging 2.2.5" Category="Package Dependency" />
+    <Link Source="Griffin.Networking.Protocol.Http 0.5.2" Target="Griffin.Networking 0.5.7" Category="Package Dependency" />
+    <Link Source="Griffin.WebServer 0.5.0" Target="Griffin.Networking.Protocol.Http 0.5.2" Category="Package Dependency" />
+    <Link Source="MahApps.Metro.Resources 0.4.0.0" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Package Dependency" />
+    <Link Source="CameraControl.Core" Target="AForge.Vision 2.2.5" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="AvalonEdit 5.0.2" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="DotNetZip 1.9.3" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="Eagle 1.0.5542.25903" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="Griffin.WebServer 0.5.0" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="log4net 2.0.3" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="MahApps.Metro.Resources 0.4.0.0" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="MeasurementProtocolClient 1.0.0.0" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="Newtonsoft.Json 7.0.1-beta1" Category="Installed Package" />
+    <Link Source="CameraControl.Core" Target="WriteableBitmapEx 1.0.14.0" Category="Installed Package" />
+    <Link Source="AForge.Imaging 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Imaging 2.2.5" Target="AForge.Math 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Math 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Vision 2.2.5" Target="AForge 2.2.5" Category="Package Dependency" />
+    <Link Source="AForge.Vision 2.2.5" Target="AForge.Imaging 2.2.5" Category="Package Dependency" />
+    <Link Source="Griffin.Networking.Protocol.Http 0.5.2" Target="Griffin.Networking 0.5.7" Category="Package Dependency" />
+    <Link Source="Griffin.WebServer 0.5.0" Target="Griffin.Networking.Protocol.Http 0.5.2" Category="Package Dependency" />
+    <Link Source="MahApps.Metro.Resources 0.4.0.0" Target="MahApps.Metro 1.1.3-ALPHA002" Category="Package Dependency" />
+    <Link Source="mnailgun 0.7.0" Target="Newtonsoft.Json 7.0.1-beta1" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLight 5.1.0.2" Target="MvvmLightLibs 5.1.1.0" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="MvvmLightLibs 5.1.1.0" Target="CommonServiceLocator 1.3" Category="Package Dependency" />
+    <Link Source="CameraControl" Target="AForge.Vision 2.2.5" Category="Installed Package" />
+    <Link Source="CameraControl" Target="AvalonEdit 5.0.2" Category="Installed Package" />
+    <Link Source="CameraControl" Target="DotNetZip 1.9.3" Category="Installed Package" />
+    <Link Source="CameraControl" Target="Eagle 1.0.5542.25903" Category="Installed Package" />
+    <Link Source="CameraControl" Target="Extended.Wpf.Toolkit 2.3" Category="Installed Package" />
+    <Link Source="CameraControl" Target="gong-wpf-dragdrop 0.1.4.3" Category="Installed Package" />
+    <Link Source="CameraControl" Target="Griffin.WebServer 0.5.0" Category="Installed Package" />
+    <Link Source="CameraControl" Target="Hardcodet.NotifyIcon.Wpf 1.0.5" Category="Installed Package" />
+    <Link Source="CameraControl" Target="log4net 2.0.3" Category="Installed Package" />
+    <Link Source="CameraControl" Target="MahApps.Metro.Resources 0.4.0.0" Category="Installed Package" />
+    <Link Source="CameraControl" Target="mnailgun 0.7.0" Category="Installed Package" />
+    <Link Source="CameraControl" Target="MvvmLight 5.1.0.2" Category="Installed Package" />
+    <Link Source="CameraControl" Target="System.Net.FtpClient 1.0.5281.14359" Category="Installed Package" />
+    <Link Source="CameraControl" Target="WriteableBitmapEx 1.0.14.0" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>
