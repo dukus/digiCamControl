@@ -67,5 +67,11 @@ namespace CameraControl.Devices.Nikon
             viewData.LevelAngleRolling = ToInt16(result, 52);
             
         }
+
+        protected override void InitFNumber()
+        {
+            base.InitFNumber();
+            MovieFNumber.IsEnabled = false;
+        }
     }
 }
