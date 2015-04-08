@@ -591,5 +591,6 @@ namespace CameraControl.Core.Translation
         public static string LabelOpenInExternalViewer = "Open in external viewer";
         public static string LabelRestoreFromBackup = "Restore from backup copy";
         // 11/03/2015
+        public static string LabelAllowWebCommands = "Allow interaction via webserver";
     }
 }

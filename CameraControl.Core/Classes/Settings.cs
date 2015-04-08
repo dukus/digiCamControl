@@ -216,6 +216,17 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool AllowWebserverActions
+        {
+            get { return _allowWebserverActions; }
+            set
+            {
+                _allowWebserverActions = value;
+                NotifyPropertyChanged("AllowWebserverActions");
+            }
+        }
+
+
         private bool _playSound;
 
         public bool PlaySound
@@ -752,6 +763,7 @@ namespace CameraControl.Core.Classes
         private bool _sendUsageStatistics;
         private bool _flipPreview;
         private int _thumbHeigh;
+        private bool _allowWebserverActions;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -920,7 +932,8 @@ namespace CameraControl.Core.Classes
             FullScreenInSecondaryMonitor = false;
             SendUsageStatistics = true;
             ThumbHeigh = 100;
-            CurrentThemeName = "Dark\\Steel";
+            CurrentThemeName = "Dark\\Blue";
+            AllowWebserverActions = true;
         }
 
 

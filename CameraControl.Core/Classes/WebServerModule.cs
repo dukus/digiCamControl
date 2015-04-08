@@ -157,7 +157,7 @@ namespace CameraControl.Core.Classes
                 }
 
                 var slc = context.Request.QueryString["slc"];
-                if (!string.IsNullOrEmpty(slc))
+                if (ServiceProvider.Settings.AllowWebserverActions && !string.IsNullOrEmpty(slc))
                 {
                     string response = "";
                     try
@@ -236,7 +236,7 @@ namespace CameraControl.Core.Classes
                 }
                 string cmd = context.Request.QueryString["CMD"];
                 string param = context.Request.QueryString["PARAM"];
-                if (!string.IsNullOrEmpty(cmd))
+                if (ServiceProvider.Settings.AllowWebserverActions && !string.IsNullOrEmpty(cmd))
                     ServiceProvider.WindowsManager.ExecuteCommand(cmd, param);
             }
             catch (Exception ex)
@@ -276,14 +276,8 @@ namespace CameraControl.Core.Classes
         private string GetFullPath(Uri uri)
         {
             return Path.Combine(Settings.WebServerFolder,
-                                Uri.UnescapeDataString(uri.AbsolutePath.Remove(0, 1)).TrimStart(new char
-                                                                                                    [
-                                                                                                    1
-                                                                                                    ]
-                                                                                                    {
-                                                                                                        '/'
-                                                                                                    })
-                                    .Replace('/', '\\'));
+                Uri.UnescapeDataString(uri.AbsolutePath.Remove(0, 1)).TrimStart(new[] {'/'})
+                    .Replace('/', '\\'));
         }
     }
 }

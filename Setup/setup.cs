@@ -25,6 +25,7 @@ namespace Setup
                     new FileShortcut(appFeature, "digiCamControl", @"%Desktop%")),
                 new File(appFeature, "CameraControl.PluginManager.exe"),
                 new File(appFeature, "CameraControlCmd.exe"),
+                new File(appFeature, "CameraControlRemoteCmd.exe"),
                 new File(appFeature, "dcraw.exe"),
                 new File(appFeature, "ffmpeg.exe"),
                 new File(appFeature, "MtpTester.exe"),
