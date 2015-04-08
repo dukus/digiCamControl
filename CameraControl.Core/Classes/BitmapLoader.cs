@@ -460,9 +460,6 @@ namespace CameraControl.Core.Classes
         
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
-            if (ServiceProvider.Settings.LowMemoryUsage)
-                fullres = false;
-
             if (fileItem == null)
                 return null;
             if (!File.Exists(fileItem.LargeThumb) && !fullres)

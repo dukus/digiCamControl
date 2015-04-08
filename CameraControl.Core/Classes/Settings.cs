@@ -556,18 +556,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private bool _lowMemoryUsage;
-
-        public bool LowMemoryUsage
-        {
-            get { return _lowMemoryUsage; }
-            set
-            {
-                _lowMemoryUsage = value;
-                NotifyPropertyChanged("LowMemoryUsage");
-            }
-        }
-
         private bool _useParallelTransfer;
 
         public bool UseParallelTransfer
@@ -906,7 +894,7 @@ namespace CameraControl.Core.Classes
             UseExternalViewer = false;
             ExternalViewerArgs = string.Empty;
             ShowFocusPoints = true;
-            LowMemoryUsage = true;
+
             UseParallelTransfer = false;
             ShowUntranslatedLabelId = false;
             HighlightOverExp = false;

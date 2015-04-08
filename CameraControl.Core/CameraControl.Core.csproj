@@ -171,7 +171,6 @@
     <Compile Include="Classes\AutoExportPluginConfig.cs" />
     <Compile Include="Classes\BitmapFile.cs" />
     <Compile Include="Classes\BitmapLoader.cs" />
-    <Compile Include="Classes\BitmapLoaderOld.cs" />
     <Compile Include="Classes\BraketingClass.cs" />
     <Compile Include="Classes\Branding.cs" />
     <Compile Include="Classes\CameraHelper.cs" />

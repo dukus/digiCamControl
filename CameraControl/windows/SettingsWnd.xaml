@@ -147,9 +147,6 @@
                         <Label Grid.Row="6" Grid.Column="0" Content="{T:TranslateExtension LabelShowFocusPoints}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="6" Grid.Column="1" Margin="3" IsChecked="{Binding ShowFocusPoints}"/>
 
-                        <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelLowMemoryUsage}" HorizontalContentAlignment="Right"/>
-                        <CheckBox Grid.Row="7" Grid.Column="1" Margin="3" IsChecked="{Binding LowMemoryUsage}"/>
-
                         <Label Grid.Row="8" Grid.Column="0" Content="{T:TranslateExtension LabelDontLoadThumbs}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="8" Grid.Column="1" Margin="3" IsChecked="{Binding DontLoadThumbnails}" />
 

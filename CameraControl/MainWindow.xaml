@@ -299,13 +299,6 @@
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </ToggleButton>
-                            <ToggleButton  ToolTip="{T:TranslateExtension LabelFullSize}" Height="35" Width="35" Margin="0" IsChecked="{Binding LowMemoryUsage}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                                <Rectangle Width="20" Height="20">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_camera_switch_invert}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </ToggleButton>
                         </StackPanel>
                     </Grid>
                 </GroupBox>
