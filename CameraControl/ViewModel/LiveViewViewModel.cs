@@ -1039,7 +1039,11 @@ namespace CameraControl.ViewModel
                 try
                 {
                     string step = cmd.Substring(CmdConsts.LiveView_ManualFocus.Length);
-                    SetFocusThread(Convert.ToInt32(step));
+                    SetFocus(Convert.ToInt32(step));
+                    while (_focusIProgress)
+                    {
+                        Thread.Sleep(5);
+                    }
                 }
                 catch (Exception)
                 {
