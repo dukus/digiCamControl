@@ -1,135 +1,102 @@
-<div class="submenu">
-  <button id="prev2">Prev. Image</button>
-  <button id="playpause">Pause</button>
-  <button id="next2">Next. Image</button>
-  <button id="like">Like</button>
-  <button id="unlike">Unlike</button>
-</div>
-<div style="position:relative;margin:0 auto" id="likebox"><span class="IsLiked"></span><span class="IsUnLiked"></span></div>
-<div class="content" id="slideshowimages" style="margin:3px auto;"></div>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="js/jquery-ui-1.11.2.custom/jquery-ui.min.css" type="text/css" media="all">
+  <title>digiCamControl slide show</title>
+</head>
+<body>
+<style>
+#progress { position: absolute; height: 2px; width: 0px; background: #c00; z-index: 500; }
+#caption { position: absolute; z-index: 500; }
+</style>
+
+<!-- include jQuery -->
+<script src="js/jquery-1.11.2.min.js"></script>
+<!-- include Cycle2 -->
+<script src="js/jquery.cycle2.min.js"></script>
+<script src="js/jquery.cycle2.swipe.min.js"></script>
+<script src="js/jquery.cycle2.center.js"></script>
 <script>
-$(function(){
-	var playing = false;
-	$(".submenu button:first").button({
-		icons: {
-		primary: "ui-icon-carat-1-w"
-	  },
-		text: true
-	  }).next().button({
-		icons: {
-		primary: "ui-icon-pause"
-	  },
-		text: true
-	  }).next().button({
-		icons: {
-		primary: "ui-icon-carat-1-e"
-	  },
-		text: true
-	  }).next().button({
-		icons: {
-		primary: "ui-icon-heart"
-	  },
-		text: true
-	  }).next().button({
-		icons: {
-		primary: "ui-icon-cancel"
-	  },
-		text: true
-	});
-	$("#like").click(function(){
-		var imgobj = $("#slideshowimages .centered").filter(":visible");
-		var image = imgobj.attr("src").split("/");
-		if (image[3]!="") {
-			var status = imgobj.attr("alt");
-			if (status=="Isliked") {
-				imgobj.attr("alt","");
-			}else{
-				imgobj.attr("alt","Isliked");
-			}
-			$.ajax({
-			  method: "GET",
-			  url: "/?CMD=Like_Image&Param="+image[3]
-			});
-		}
-	});
-	$("#unlike").click(function(){
-		var imgobj = $("#slideshowimages .centered").filter(":visible");
-		var image = imgobj.attr("src").split("/");
-		if (image[3]!="") {
-			var status = imgobj.attr("alt");
-			if (status=="IsUnliked") {
-				imgobj.attr("alt","");
-			}else{
-				imgobj.attr("alt","IsUnliked");
-			}
-			$.ajax({
-			  method: "GET",
-			  url: "/?CMD=Unlike_Image&Param="+image[3]
-			});
-		}
-	});
-    $.ajax({
-      method: "GET",
-	  dataType: "json",
-      url: "/session.json",
-	  success: function(data){
-		for (i=0;i<data.Files.length;i++) {
-			var class_="";
-			if (data.Files[i].IsLiked==true) {
-				class_="IsLiked";
-			}
-			if (data.Files[i].IsUnLiked==true) {
-				class_="IsUnLiked";
-			}
-			$("#slideshowimages").append('<img src="/thumb/large/'+data.Files[i].Name+'" class="centered" alt="'+class_+'" style="margin:0 auto"/>');
-		}
-		$("#slideshowimages").cycle({
-			fx: "fade",
-			speed: "fast",
-			timeout: 3000,  
-			prev:   '#prev2',
-			next:   '#next2', 
-			after:   onAfter 
-		});
-		playing = true;
-		$(window).trigger('resize');
-		var w = 0;
-		$(".centered").each(function(){
-			if ($(this).width()>w) {
-				w=$(this).width();
-			}
-		});
-		var top = $('header').height();
-		var top2 = $('.submenu:first').height();
-		var remaining_height = parseInt($(window).height() - top -top2); 
-		$("#slideshowimages").css({height: remaining_height, width: w});
-		$("#likebox").css({width: w});
-	  }
-    });
-	$("#playpause").click(function(){
-		var obj = $(this);
-		var now = obj.find(".ui-button-text").html();
-		if (now=="Pause") {
-			playing=false;
-			obj.find(".ui-button-text").html("Play");
-			obj.find(".ui-button-icon-primary").removeClass("ui-icon-pause").addClass("ui-icon-play");
-			$("#slideshowimages").cycle("pause");
-		}else{
-			playing=true;
-			obj.find(".ui-button-text").html("Pause");
-			$("#slideshowimages").cycle("resume");
-			obj.find(".ui-button-icon-primary").removeClass("ui-icon-play").addClass("ui-icon-pause");
-		}
-	});
-	function onAfter() {
-		$("span.IsLiked, span.IsUnLiked").hide();
-		var status = $("#slideshowimages img").filter(":visible").attr("alt");
-		if (status=="IsLiked") {
-			$("span.IsLiked").show();
-		}
-		if (this.alt=="IsUnLiked") {
-			$("span.IsUnLiked").show();
-		}
-	}
-});
+function toggleFullScreen(elem) {
+    // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+    if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+        if (elem.requestFullScreen) {
+            elem.requestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    } else {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+}
 </script>
+<div class="submenu submenu2">
+   <ul>
+      <li>
+		<fieldset><legend>Navigation</legend>
+		  <input type="button" value="Full screen" onclick="toggleFullScreen(document.body)">
+		  <button data-cycle-cmd="pause">Pause</button>
+		  <button data-cycle-cmd="resume">Resume</button>
+		  <button data-cycle-cmd="prev">Prev</button>
+		  <button data-cycle-cmd="next">Next</button>
+          <button data-cycle-cmd="reinit">Reinit</button>
+		</fieldset>
+      </li>
+	 </ul>
+</div>
+
+    
+	
+<div class="cycle-slideshow" 
+    data-cycle-swipe=true
+    data-cycle-swipe-fx=scrollHorz
+    data-cycle-timeout=4000
+	data-cycle-fx=scrollHorz
+	data-cycle-center-horz=true
+    data-cycle-center-vert=true
+	data-cycle-auto-height="4:3"
+    >
+	<div id="progress"></div>	
+	<div id="caption" class="cycle-caption" style="z-index: 500;"></div>
+	@@image_list@@
+</div>
+
+		<script>
+			var progress = $('#progress'),
+				slideshow = $( '.cycle-slideshow' );
+
+			slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
+				progress.stop(true).css( 'width', 0 );
+			});
+
+			slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
+				if ( ! slideshow.is('.cycle-paused') )
+					progress.animate({ width: '100%' }, opts.timeout, 'linear' );
+			});
+
+			slideshow.on( 'cycle-paused', function( e, opts ) {
+			   progress.stop(); 
+			});
+
+			slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
+				progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
+			});
+		</script>
+
+</body>
+</html>

@@ -49,9 +49,11 @@ namespace CameraControl.Core.Classes
         /*        private string _lineFormat =
                     "{image : '@image@', title : 'Image Credit: Maria Kazvan', thumb : '@image_thumb@', url : '@image_url@'},";*/
 
-        private string _lineFormat =
-            "            <div>  <img u=\"image\" src=\"@image@\" /><img u=\"thumb\" src=\"@image_thumb@\" /></div>";
+        //private string _lineFormat =
+        //    "            <div>  <img u=\"image\" src=\"@image@\" /><img u=\"thumb\" src=\"@image_thumb@\" /></div>";
 
+        private string _lineFormat =
+    "            <img u=\"image\" src=\"@image@\" />";
         #region Implementation of IHttpModule
 
         public void BeginRequest(IHttpContext context)

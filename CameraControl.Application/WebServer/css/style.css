@@ -47,3 +47,6 @@ span#logo{display: none}
 div.submenu{width:98%}
 }
 
+
+.cycle-slideshow { width: 70%; margin: auto;  }
+.cycle-slideshow img { width: 100%; height: auto  }

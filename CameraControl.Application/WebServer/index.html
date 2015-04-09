@@ -56,10 +56,7 @@ $(document).ready(function(){
   });   
   $("#slideshow").click(function(){
     $(".showmenu").click();
-    $("#content").children().remove().addClass("loading");
-    $("#content").load("/slide.html", function(){
-      $(this).removeClass("loading");
-    });
+    window.open("slide.html");  
   });
   $("body").delegate("button","click", function(){
     var action = $(this).attr("action");
