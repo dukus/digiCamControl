@@ -56,7 +56,7 @@ namespace CameraControl.Classes
 
         private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var newOffset = IsInverted ?
+            var newOffset = !IsInverted ?
                 ScrollViewer.HorizontalOffset + e.Delta/100 :
                 ScrollViewer.HorizontalOffset - e.Delta/100;
 

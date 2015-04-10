@@ -929,6 +929,7 @@ namespace CameraControl.Devices.Nikon
                         NormalIsoNumber.AddValues(_isoTable.ContainsKey(val) ? _isoTable[val] : val.ToString(), val);
                     }
                     NormalIsoNumber.SetValue(defval, false);
+                    IsoNumber = NormalIsoNumber;
                 }
                 catch (Exception)
                 {
@@ -1035,6 +1036,7 @@ namespace CameraControl.Devices.Nikon
                         NormalShutterSpeed.AddValues("Bulb", 0xFFFFFFFF);
 
                     NormalShutterSpeed.SetValue(defval, false);
+                    ShutterSpeed = NormalShutterSpeed;
                 }
                 catch (Exception)
                 {
@@ -1044,7 +1046,7 @@ namespace CameraControl.Devices.Nikon
                     byte datasize = 4;
                     var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
                                                                      CONST_PROP_MovieShutterSpeed);
-                    if (result.Data == null)
+                    if (result.Data == null || result.Data.Length==0)
                         return;
                     MovieShutterSpeed.Clear();
                     int type = BitConverter.ToInt16(result.Data, 2);
@@ -1097,34 +1099,41 @@ namespace CameraControl.Devices.Nikon
 
         private void Mode_ValueChanged(object sender, string key, uint val)
         {
-            switch (key)
+            try
             {
-                case "M":
-                    ShutterSpeed.IsEnabled = true;
-                    NormalFNumber.IsEnabled = true;
-                    //ReInitShutterSpeed();
-                    break;
-                case "P":
-                    ShutterSpeed.IsEnabled = false;
-                    FNumber.IsEnabled = false;
-                    break;
-                case "A":
-                    ShutterSpeed.IsEnabled = false;
-                    NormalFNumber.IsEnabled = true;
-                    break;
-                case "S":
-                    ShutterSpeed.IsEnabled = true;
-                    FNumber.IsEnabled = false;
-                    //ReInitShutterSpeed();
-                    break;
-                default:
-                    ShutterSpeed.IsEnabled = false;
-                    FNumber.IsEnabled = false;
-                    break;
+                switch (key)
+                {
+                    case "M":
+                        ShutterSpeed.IsEnabled = true;
+                        NormalFNumber.IsEnabled = true;
+                        //ReInitShutterSpeed();
+                        break;
+                    case "P":
+                        ShutterSpeed.IsEnabled = false;
+                        FNumber.IsEnabled = false;
+                        break;
+                    case "A":
+                        ShutterSpeed.IsEnabled = false;
+                        NormalFNumber.IsEnabled = true;
+                        break;
+                    case "S":
+                        ShutterSpeed.IsEnabled = true;
+                        FNumber.IsEnabled = false;
+                        //ReInitShutterSpeed();
+                        break;
+                    default:
+                        ShutterSpeed.IsEnabled = false;
+                        FNumber.IsEnabled = false;
+                        break;
+                }
+                if (Mode.IsEnabled)
+                    SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                        CONST_PROP_ExposureProgramMode);
             }
-            if (Mode.IsEnabled)
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
-                            CONST_PROP_ExposureProgramMode);
+            catch (Exception ex)
+            {
+                Log.Error("Usable to set camera mode", ex);
+            }
         }
 
         protected virtual void InitFNumber()
@@ -1171,9 +1180,10 @@ namespace CameraControl.Devices.Nikon
                         NormalFNumber.AddValues(s, val);
                     }
                     NormalFNumber.SetValue(defval, trigervaluchange);
+                    FNumber = NormalFNumber;
                 }
                 result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc, CONST_PROP_MovieFnumber);
-                if (result.Data != null)
+                if (result.Data != null && result.Data.Length > 0)
                 {
                     MovieFNumber.Clear();
                     int type = BitConverter.ToInt16(result.Data, 2);
@@ -1257,6 +1267,7 @@ namespace CameraControl.Devices.Nikon
                     NormalExposureCompensation.AddValues(s, val);
                 }
                 NormalExposureCompensation.SetValue(defval, false);
+                ExposureCompensation = NormalExposureCompensation;
             }
             catch (Exception)
             {
@@ -1383,6 +1394,7 @@ namespace CameraControl.Devices.Nikon
                 NormalFocusMode.AddValues("MF (hard)", 3);
                 NormalFocusMode.AddValues("MF (soft)", 4);
                 NormalFocusMode.ValueChanged += NormalFocusMode_ValueChanged;
+                FocusMode = NormalFocusMode;
                 ReadDeviceProperties(NormalFocusMode.Code);
                 LiveViewFocusMode = new PropertyValue<long>();
                 LiveViewFocusMode.Name = "FocusMode";
