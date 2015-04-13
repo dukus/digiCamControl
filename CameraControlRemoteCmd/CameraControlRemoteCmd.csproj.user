@@ -7,4 +7,7 @@
     <StartArguments>
     </StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <StartArguments>/c set aperture 1.4</StartArguments>
+  </PropertyGroup>
 </Project>
