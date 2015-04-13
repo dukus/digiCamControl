@@ -11,7 +11,7 @@
     <AssemblyName>Setup</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>64df411a</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>e2aba65f</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,14 +62,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WixSharp, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WixSharp, Version=1.0.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WixSharp.1.0.8.0\lib\net35\WixSharp.dll</HintPath>
+      <HintPath>..\packages\WixSharp.1.0.12.0\lib\WixSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="setup.cs" />
+    <None Include="wix\$(ProjectName).g.wxs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -84,12 +85,12 @@
     <PostBuildEvent>cd ..\..\
 $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\WixSharp.1.0.8.0\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.0.8.0\build\WixSharp.targets')" />
+  <Import Project="..\packages\WixSharp.1.0.12.0\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.0.12.0\build\WixSharp.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WixSharp.1.0.8.0\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.0.8.0\build\WixSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\WixSharp.1.0.12.0\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.0.12.0\build\WixSharp.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -98,4 +99,5 @@ $(TargetPath)</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
+  <UsingTask AssemblyFile="packages\WixSharp.1.0.12.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
 </Project>

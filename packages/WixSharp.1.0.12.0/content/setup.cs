@@ -1,7 +1,7 @@
 using System;
 using WixSharp;
 
-class Script
+public class Script
 {
     static public void Main(string[] args)
     {

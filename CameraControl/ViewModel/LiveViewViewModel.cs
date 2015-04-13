@@ -1890,6 +1890,8 @@ namespace CameraControl.ViewModel
 
         private void ProcessMotionDetection(Bitmap bmp)
         {
+            if (CountDownVisible)
+                return;
             try
             {
                 float movement = 0;
@@ -1918,8 +1920,9 @@ namespace CameraControl.ViewModel
                 }
 
                 CurrentMotionIndex = Math.Round(movement * 100, 2);
-                if (movement > ((float)MotionThreshold / 100) && TriggerOnMotion &&
-                    (DateTime.Now - _photoCapturedTime).TotalSeconds > WaitForMotionSec)
+                if (movement > ((float) MotionThreshold/100) && TriggerOnMotion &&
+                    (DateTime.Now - _photoCapturedTime).TotalSeconds > WaitForMotionSec &&
+                    _totalframes > 10)
                 {
                     if (MotionAutofocusBeforCapture)
                     {
@@ -1932,23 +1935,24 @@ namespace CameraControl.ViewModel
                             int surface = 0;
                             foreach (Rectangle objectRectangle in processing.ObjectRectangles)
                             {
-                                if (surface < objectRectangle.Width * objectRectangle.Height)
+                                if (surface < objectRectangle.Width*objectRectangle.Height)
                                 {
-                                    surface = objectRectangle.Width * objectRectangle.Height;
+                                    surface = objectRectangle.Width*objectRectangle.Height;
                                     rectangle = objectRectangle;
                                 }
                             }
-                            double xt = LiveViewData.ImageWidth / (double)bmp.Width;
-                            double yt = LiveViewData.ImageHeight / (double)bmp.Height;
-                            int posx = (int)((rectangle.X + (rectangle.Width / 2)) * xt);
-                            int posy = (int)((rectangle.Y + (rectangle.Height / 2)) * yt);
+                            double xt = LiveViewData.ImageWidth/(double) bmp.Width;
+                            double yt = LiveViewData.ImageHeight/(double) bmp.Height;
+                            int posx = (int) ((rectangle.X + (rectangle.Width/2))*xt);
+                            int posy = (int) ((rectangle.Y + (rectangle.Height/2))*yt);
                             CameraDevice.Focus(posx, posy);
                         }
-                        AutoFocus();
+                        AutoFocusThread();
                     }
-                    CameraDevice.CapturePhotoNoAf();
+                    CaptureInThread();
                     _detector.Reset();
                     _photoCapturedTime = DateTime.Now;
+                    _totalframes = 0;
                 }
             }
             catch (Exception exception)
