@@ -111,8 +111,11 @@ namespace CameraControl.Core.Classes
         {
             if (device is FakeCameraDevice)
                 return;
-            SendEvent("Camera", "Connected", device.DeviceName,
-                ServiceProvider.DeviceManager.ConnectedDevices.Count - (ServiceProvider.Settings.AddFakeCamera ? 1 : 0));
+            var cameracount = ServiceProvider.DeviceManager.ConnectedDevices.Count -
+                              (ServiceProvider.Settings.AddFakeCamera ? 1 : 0);
+            SendEvent("Camera", "Connected", device.DeviceName,cameracount);
+            if (cameracount > 1)
+                SendEvent("MultipleCamera", "Connected_" + cameracount, device.DeviceName);
         }
 
         public void CameraCapture(ICameraDevice device)

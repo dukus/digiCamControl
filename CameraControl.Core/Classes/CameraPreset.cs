@@ -28,6 +28,7 @@
 
 #region
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -77,24 +78,29 @@ namespace CameraControl.Core.Classes
 
         public void Verify(ICameraDevice camera)
         {
-            camera.Mode.HaveError = camera.Mode.Value != GetValue("Mode");
-            camera.CompressionSetting.HaveError = camera.CompressionSetting.Value != GetValue("CompressionSetting");
-            camera.ExposureCompensation.HaveError = camera.ExposureCompensation.Value != GetValue("ExposureCompensation");
-            camera.ExposureMeteringMode.HaveError = camera.ExposureMeteringMode.Value != GetValue("ExposureMeteringMode");
-            camera.FNumber.HaveError = camera.FNumber.Value != GetValue("FNumber");
-            camera.IsoNumber.HaveError = camera.IsoNumber.Value != GetValue("IsoNumber");
-            camera.ShutterSpeed.HaveError = camera.ShutterSpeed.Value != GetValue("ShutterSpeed");
-            camera.WhiteBalance.HaveError = camera.WhiteBalance.Value != GetValue("WhiteBalance");
-            camera.FocusMode.HaveError = camera.FocusMode.Value != GetValue("FocusMode");
-            if (camera.AdvancedProperties != null)
+            try
             {
-                foreach (PropertyValue<long> propertyValue in camera.AdvancedProperties)
+                camera.Mode.HaveError = camera.Mode.Value != GetValue("Mode");
+                camera.CompressionSetting.HaveError = camera.CompressionSetting.Value != GetValue("CompressionSetting");
+                camera.ExposureCompensation.HaveError = camera.ExposureCompensation.Value != GetValue("ExposureCompensation");
+                camera.ExposureMeteringMode.HaveError = camera.ExposureMeteringMode.Value != GetValue("ExposureMeteringMode");
+                camera.FNumber.HaveError = camera.FNumber.Value != GetValue("FNumber");
+                camera.IsoNumber.HaveError = camera.IsoNumber.Value != GetValue("IsoNumber");
+                camera.ShutterSpeed.HaveError = camera.ShutterSpeed.Value != GetValue("ShutterSpeed");
+                camera.WhiteBalance.HaveError = camera.WhiteBalance.Value != GetValue("WhiteBalance");
+                camera.FocusMode.HaveError = camera.FocusMode.Value != GetValue("FocusMode");
+                if (camera.AdvancedProperties != null)
                 {
-                    propertyValue.HaveError = propertyValue.Value != GetValue(propertyValue.Name);
+                    foreach (PropertyValue<long> propertyValue in camera.AdvancedProperties)
+                    {
+                        propertyValue.HaveError = propertyValue.Value != GetValue(propertyValue.Name);
+                    }
                 }
             }
-
-
+            catch (Exception ex)
+            {
+                Log.Error("Unable to verify the preset " + Name, ex);
+            }
         }
         
         public void Set(ICameraDevice camera)

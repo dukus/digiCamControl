@@ -169,6 +169,7 @@ namespace CameraControl.Core.Classes
             ShowControlLiveView = true;
             ShowOverlayLiveView = true;
             ShowDisplayLiveView = true;
+            ShowLuminosityLiveView = true;
             ShowMotionDetectionLiveView = true;
             ShowHistogram = true;
             ShowSelectionPanel = true;

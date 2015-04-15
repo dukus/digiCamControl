@@ -352,9 +352,9 @@ namespace CameraControl.Devices.Nikon
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            _timer.Stop();
             try
             {
+                _timer.Stop();
                 lock (Locker)
                 {
                     ThreadPool.QueueUserWorkItem(GetEvent);
@@ -1383,6 +1383,7 @@ namespace CameraControl.Devices.Nikon
         {
             try
             {
+                Log.Debug("InitFocusMode 1");
                 DeviceReady();
                 NormalFocusMode = new PropertyValue<long>();
                 NormalFocusMode.Name = "FocusMode";
@@ -1396,6 +1397,7 @@ namespace CameraControl.Devices.Nikon
                 NormalFocusMode.ValueChanged += NormalFocusMode_ValueChanged;
                 FocusMode = NormalFocusMode;
                 ReadDeviceProperties(NormalFocusMode.Code);
+                Log.Debug("InitFocusMode 2");
                 LiveViewFocusMode = new PropertyValue<long>();
                 LiveViewFocusMode.Name = "FocusMode";
                 LiveViewFocusMode.Code = CONST_PROP_AfModeAtLiveView;
@@ -1406,9 +1408,11 @@ namespace CameraControl.Devices.Nikon
                 LiveViewFocusMode.AddValues("MF (soft)", 4);
                 LiveViewFocusMode.ValueChanged += LiveViewFocusMode_ValueChanged;
                 ReadDeviceProperties(LiveViewFocusMode.Code);
+                Log.Debug("InitFocusMode 3");
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Log.Error("Unable to init focus mode property", exception);
             }
         }
 
@@ -1786,6 +1790,10 @@ namespace CameraControl.Devices.Nikon
                             {
                                 LiveViewOn = response.Data[0] == 1;
                             }
+                            else
+                            {
+                                LiveViewOn = false;
+                            }
                             break;
                         }
                         case CONST_PROP_LiveViewSelector:
@@ -1794,6 +1802,10 @@ namespace CameraControl.Devices.Nikon
                             if (response.Data != null && response.Data.Length > 0)
                             {
                                 LiveViewMovieOn = response.Data[0] == 1;
+                            }
+                            else
+                            {
+                                LiveViewMovieOn = false;
                             }
                             break;
                         }
@@ -1821,8 +1833,9 @@ namespace CameraControl.Devices.Nikon
                             break;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Log.Error("ReadDeviceProperties error", ex);
                 }
             //}
         }

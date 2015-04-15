@@ -191,7 +191,12 @@ namespace CameraControl.Devices
 
         public virtual PropertyValue<long> FocusMode
         {
-            get { return _focusMode; }
+            get
+            {
+                if (_focusMode == null)
+                    Log.Debug("FocusMode Null");
+                return _focusMode;
+            }
             set
             {
                 _focusMode = value;

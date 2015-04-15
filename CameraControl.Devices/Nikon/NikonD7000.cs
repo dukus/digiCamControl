@@ -36,8 +36,6 @@ namespace CameraControl.Devices.Nikon
 {
     public class NikonD7000 : NikonBase
     {
-        public const int CONST_PROP_AfModeAtLiveView = 0xD061;
-
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
             bool res = base.Init(deviceDescriptor);
