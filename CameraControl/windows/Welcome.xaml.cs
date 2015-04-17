@@ -49,5 +49,11 @@ namespace CameraControl.windows
             PhotoUtils.Run("https://twitter.com/digiCamControl");
             Close();
         }
+
+        private void btn_flickr_Click(object sender, RoutedEventArgs e)
+        {
+            PhotoUtils.Run("https://www.flickr.com/groups/2224376@N22/");
+            Close();
+        }
     }
 }

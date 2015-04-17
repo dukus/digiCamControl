@@ -792,6 +792,9 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Flickr-Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)PostBuild.Bat $(SolutionDir) $(ConfigurationName)</PostBuildEvent>
