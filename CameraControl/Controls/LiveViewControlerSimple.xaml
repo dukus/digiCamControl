@@ -9,7 +9,11 @@
              d:DesignHeight="373" d:DesignWidth="115">
     <!--d:DataContext="{d:DesignInstance Type=Devices:BaseCameraDevice}"-->
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Styles/CustomControls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
         <my:ExposureStatusControl ExposureStatus="{Binding Path=ExposureStatus, Mode=TwoWay}" />

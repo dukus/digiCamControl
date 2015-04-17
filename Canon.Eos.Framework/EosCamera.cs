@@ -16,11 +16,9 @@ namespace Canon.Eos.Framework
         const int MaximumOwnerNameLengthInBytes = 32;
 
         private Edsdk.EdsDeviceInfo _deviceInfo;
-        private string _picturePath;
         private Edsdk.EdsObjectEventHandler _edsObjectEventHandler;
         private Edsdk.EdsPropertyEventHandler _edsPropertyEventHandler;
         private Edsdk.EdsStateEventHandler _edsStateEventHandler;
-        private int _photoCounter = 0;
 
         public event EventHandler LiveViewStarted;
         public event EventHandler LiveViewStopped;
@@ -415,7 +413,6 @@ namespace Canon.Eos.Framework
         public void SavePicturesToCamera()
         {
             this.CheckDisposed();
-            _picturePath = null;
             this.ChangePicturesSaveLocation(SaveLocation.Camera);
         }
 
@@ -443,10 +440,6 @@ namespace Canon.Eos.Framework
                 throw new ArgumentException("Cannot be null or white space.", "pathFolder");
 
             this.CheckDisposed();
-
-            _picturePath = pathFolder;
-            if (!Directory.Exists(_picturePath))
-                Directory.CreateDirectory(_picturePath);
 
             this.ChangePicturesSaveLocation(saveLocation | SaveLocation.Host);
         }
@@ -517,7 +510,7 @@ namespace Canon.Eos.Framework
 
         public void TakePicture()
         {
-            _photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
+            //_photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             lock (_locker)
             {
                 if (this.IsLegacy && !this.IsLocked)
@@ -533,7 +526,7 @@ namespace Canon.Eos.Framework
 
         public void TakePictureNoAf()
         {
-            _photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
+            //_photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             if (this.IsLegacy && !this.IsLocked)
             {
                 this.LockAndExceute(this.TakePictureNoAf);
@@ -626,7 +619,7 @@ namespace Canon.Eos.Framework
 
         public void TakePictureInLiveview()
         {
-            _photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
+            //_photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             this._pauseLiveViewRequested = true;
         }
 

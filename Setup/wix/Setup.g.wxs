@@ -6,7 +6,7 @@
 </auto-generated> 
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a34f6677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.87.0" Manufacturer="Duka Istvan" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676">
+  <Product Id="19d12628-7654-4354-a305-9ab0a34f7677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.88.0" Manufacturer="Duka Istvan" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Manufacturer="Duka Istvan" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -17,7 +17,7 @@
         <Directory Id="INSTALLDIR" Name="digiCamControl">
 
           <Component Id="Component.CameraControl.exe" Guid="19d12628-7654-4354-a305-9ab0ea60ab71">
-            <File Id="File.CameraControl.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.exe">
+            <File Id="CameraControl.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.exe">
               <Shortcut Id="Shortcut.CameraControl.exe.digiCamControl" WorkingDirectory="ProgramMenuFolder.digiCamControl" Directory="ProgramMenuFolder.digiCamControl" Name="digiCamControl.lnk" />
               <Shortcut Id="Shortcut.CameraControl.exe.digiCamControl.1" WorkingDirectory="DesktopFolder" Directory="DesktopFolder" Name="digiCamControl.lnk" />
             </File>
@@ -28,445 +28,431 @@
           </Component>
 
           <Component Id="Component.CameraControl.PluginManager.exe" Guid="19d12628-7654-4354-a305-9ab0d83ea3d7">
-            <File Id="File.CameraControl.PluginManager.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.PluginManager.exe" />
+            <File Id="CameraControl.PluginManager.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.PluginManager.exe" />
           </Component>
 
           <Component Id="Component.CameraControlCmd.exe" Guid="19d12628-7654-4354-a305-9ab0c0c3d9ff">
-            <File Id="File.CameraControlCmd.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControlCmd.exe" />
+            <File Id="CameraControlCmd.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControlCmd.exe" />
           </Component>
 
           <Component Id="Component.CameraControlRemoteCmd.exe" Guid="19d12628-7654-4354-a305-9ab0eee9dfa9">
-            <File Id="File.CameraControlRemoteCmd.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControlRemoteCmd.exe" />
+            <File Id="CameraControlRemoteCmd.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControlRemoteCmd.exe" />
           </Component>
 
           <Component Id="Component.dcraw.exe" Guid="19d12628-7654-4354-a305-9ab07d82ef31">
-            <File Id="File.dcraw.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\dcraw.exe" />
+            <File Id="dcraw.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\dcraw.exe" />
           </Component>
 
           <Component Id="Component.ffmpeg.exe" Guid="19d12628-7654-4354-a305-9ab067aa2ebe">
-            <File Id="File.ffmpeg.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ffmpeg.exe" />
+            <File Id="ffmpeg.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ffmpeg.exe" />
           </Component>
 
           <Component Id="Component.MtpTester.exe" Guid="19d12628-7654-4354-a305-9ab089364a46">
-            <File Id="File.MtpTester.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\MtpTester.exe" />
-          </Component>
-
-          <Component Id="Component.PhotoBooth.exe" Guid="19d12628-7654-4354-a305-9ab050799a91">
-            <File Id="File.PhotoBooth.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\PhotoBooth.exe">
-              <Shortcut Id="Shortcut.PhotoBooth.exe.PhotoBooth" WorkingDirectory="ProgramMenuFolder.digiCamControl" Directory="ProgramMenuFolder.digiCamControl" Name="PhotoBooth.lnk" />
-            </File>
-
-            <RegistryKey Root="HKCU" Key="Software\WixSharp\Used">
-              <RegistryValue Value="0" Type="string" KeyPath="yes" />
-            </RegistryKey>
+            <File Id="MtpTester.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\MtpTester.exe" />
           </Component>
 
           <Component Id="Component.regwia.bat" Guid="19d12628-7654-4354-a305-9ab0002d4d13">
-            <File Id="File.regwia.bat" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\regwia.bat" />
+            <File Id="regwia.bat" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\regwia.bat" />
           </Component>
 
           <Component Id="Component.logo.ico" Guid="19d12628-7654-4354-a305-9ab055df15f1">
-            <File Id="File.logo.ico" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\logo.ico" />
+            <File Id="logo.ico" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\logo.ico" />
           </Component>
 
           <Component Id="Component.logo_big.jpg" Guid="19d12628-7654-4354-a305-9ab097120c3c">
-            <File Id="File.logo_big.jpg" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\logo_big.jpg" />
+            <File Id="logo_big.jpg" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\logo_big.jpg" />
           </Component>
 
           <Component Id="Component.baseMtpDevice.xml" Guid="19d12628-7654-4354-a305-9ab03b568f31">
-            <File Id="File.baseMtpDevice.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\baseMtpDevice.xml" />
+            <File Id="baseMtpDevice.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\baseMtpDevice.xml" />
           </Component>
 
           <Component Id="Component.DigiCamControl.xbs" Guid="19d12628-7654-4354-a305-9ab08fb8314d">
-            <File Id="File.DigiCamControl.xbs" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DigiCamControl.xbs" />
-          </Component>
-
-          <Component Id="Component._this_.CA.dll" Guid="19d12628-7654-4354-a305-9ab025bf455e">
-            <File Id="File._this_.CA.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\%this%.CA.dll" />
+            <File Id="DigiCamControl.xbs" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DigiCamControl.xbs" />
           </Component>
 
           <Component Id="Component.AForge.dll" Guid="19d12628-7654-4354-a305-9ab0d997c732">
-            <File Id="File.AForge.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.dll" />
+            <File Id="AForge.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.dll" />
           </Component>
 
           <Component Id="Component.AForge.Imaging.dll" Guid="19d12628-7654-4354-a305-9ab0b4a391e2">
-            <File Id="File.AForge.Imaging.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Imaging.dll" />
+            <File Id="AForge.Imaging.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Imaging.dll" />
           </Component>
 
           <Component Id="Component.AForge.Imaging.Formats.dll" Guid="19d12628-7654-4354-a305-9ab02d4621bd">
-            <File Id="File.AForge.Imaging.Formats.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Imaging.Formats.dll" />
+            <File Id="AForge.Imaging.Formats.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Imaging.Formats.dll" />
           </Component>
 
           <Component Id="Component.AForge.Math.dll" Guid="19d12628-7654-4354-a305-9ab033ddf5e9">
-            <File Id="File.AForge.Math.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Math.dll" />
+            <File Id="AForge.Math.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Math.dll" />
           </Component>
 
           <Component Id="Component.AForge.Vision.dll" Guid="19d12628-7654-4354-a305-9ab06ddb123e">
-            <File Id="File.AForge.Vision.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Vision.dll" />
+            <File Id="AForge.Vision.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\AForge.Vision.dll" />
           </Component>
 
           <Component Id="Component.CameraControl.Core.dll" Guid="19d12628-7654-4354-a305-9ab0e933f2da">
-            <File Id="File.CameraControl.Core.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.Core.dll" />
+            <File Id="CameraControl.Core.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.Core.dll" />
           </Component>
 
           <Component Id="Component.CameraControl.Devices.dll" Guid="19d12628-7654-4354-a305-9ab011d44da9">
-            <File Id="File.CameraControl.Devices.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.Devices.dll" />
+            <File Id="CameraControl.Devices.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\CameraControl.Devices.dll" />
           </Component>
 
           <Component Id="Component.Canon.Eos.Framework.dll" Guid="19d12628-7654-4354-a305-9ab0a539823a">
-            <File Id="File.Canon.Eos.Framework.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Canon.Eos.Framework.dll" />
+            <File Id="Canon.Eos.Framework.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Canon.Eos.Framework.dll" />
           </Component>
 
           <Component Id="Component.DPPDLL.dll" Guid="19d12628-7654-4354-a305-9ab01c8288a9">
-            <File Id="File.DPPDLL.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DPPDLL.dll" />
+            <File Id="DPPDLL.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DPPDLL.dll" />
           </Component>
 
           <Component Id="Component.DPPLibCom.dll" Guid="19d12628-7654-4354-a305-9ab07964ad2e">
-            <File Id="File.DPPLibCom.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DPPLibCom.dll" />
+            <File Id="DPPLibCom.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DPPLibCom.dll" />
           </Component>
 
           <Component Id="Component.DPPRSC.dll" Guid="19d12628-7654-4354-a305-9ab0a1dcc2be">
-            <File Id="File.DPPRSC.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DPPRSC.dll" />
+            <File Id="DPPRSC.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\DPPRSC.dll" />
           </Component>
 
           <Component Id="Component.Eagle.dll" Guid="19d12628-7654-4354-a305-9ab099e2f8b9">
-            <File Id="File.Eagle.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Eagle.dll" />
+            <File Id="Eagle.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Eagle.dll" />
           </Component>
 
           <Component Id="Component.EDSDK.dll" Guid="19d12628-7654-4354-a305-9ab0b11baf34">
-            <File Id="File.EDSDK.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\EDSDK.dll" />
+            <File Id="EDSDK.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\EDSDK.dll" />
           </Component>
 
           <Component Id="Component.EdsImage.dll" Guid="19d12628-7654-4354-a305-9ab019e4d8f1">
-            <File Id="File.EdsImage.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\EdsImage.dll" />
+            <File Id="EdsImage.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\EdsImage.dll" />
           </Component>
 
           <Component Id="Component.GalaSoft.MvvmLight.dll" Guid="19d12628-7654-4354-a305-9ab0a4f9d066">
-            <File Id="File.GalaSoft.MvvmLight.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\GalaSoft.MvvmLight.dll" />
+            <File Id="GalaSoft.MvvmLight.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\GalaSoft.MvvmLight.dll" />
           </Component>
 
           <Component Id="Component.GalaSoft.MvvmLight.Extras.dll" Guid="19d12628-7654-4354-a305-9ab0007b87cb">
-            <File Id="File.GalaSoft.MvvmLight.Extras.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\GalaSoft.MvvmLight.Extras.dll" />
+            <File Id="GalaSoft.MvvmLight.Extras.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\GalaSoft.MvvmLight.Extras.dll" />
           </Component>
 
           <Component Id="Component.Gma.QrCodeNet.Encoding.dll" Guid="19d12628-7654-4354-a305-9ab00931e039">
-            <File Id="File.Gma.QrCodeNet.Encoding.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Gma.QrCodeNet.Encoding.dll" />
+            <File Id="Gma.QrCodeNet.Encoding.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Gma.QrCodeNet.Encoding.dll" />
           </Component>
 
           <Component Id="Component.GongSolutions.Wpf.DragDrop.dll" Guid="19d12628-7654-4354-a305-9ab03944d330">
-            <File Id="File.GongSolutions.Wpf.DragDrop.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\GongSolutions.Wpf.DragDrop.dll" />
+            <File Id="GongSolutions.Wpf.DragDrop.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\GongSolutions.Wpf.DragDrop.dll" />
           </Component>
 
           <Component Id="Component.Griffin.Networking.dll" Guid="19d12628-7654-4354-a305-9ab01f4c1795">
-            <File Id="File.Griffin.Networking.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Griffin.Networking.dll" />
+            <File Id="Griffin.Networking.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Griffin.Networking.dll" />
           </Component>
 
           <Component Id="Component.Griffin.Networking.Protocol.Http.dll" Guid="19d12628-7654-4354-a305-9ab0bfe79c52">
-            <File Id="File.Griffin.Networking.Protocol.Http.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Griffin.Networking.Protocol.Http.dll" />
+            <File Id="Griffin.Networking.Protocol.Http.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Griffin.Networking.Protocol.Http.dll" />
           </Component>
 
           <Component Id="Component.Griffin.WebServer.dll" Guid="19d12628-7654-4354-a305-9ab031fa0b3f">
-            <File Id="File.Griffin.WebServer.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Griffin.WebServer.dll" />
+            <File Id="Griffin.WebServer.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Griffin.WebServer.dll" />
           </Component>
 
           <Component Id="Component.Hardcodet.Wpf.TaskbarNotification.dll" Guid="19d12628-7654-4354-a305-9ab0ffaa7380">
-            <File Id="File.Hardcodet.Wpf.TaskbarNotification.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll" />
+            <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll" />
           </Component>
 
           <Component Id="Component.ICSharpCode.AvalonEdit.dll" Guid="19d12628-7654-4354-a305-9ab0a0f62a7c">
-            <File Id="File.ICSharpCode.AvalonEdit.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ICSharpCode.AvalonEdit.dll" />
+            <File Id="ICSharpCode.AvalonEdit.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ICSharpCode.AvalonEdit.dll" />
           </Component>
 
           <Component Id="Component.Interop.PortableDeviceApiLib.dll" Guid="19d12628-7654-4354-a305-9ab0582089f2">
-            <File Id="File.Interop.PortableDeviceApiLib.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Interop.PortableDeviceApiLib.dll" />
+            <File Id="Interop.PortableDeviceApiLib.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Interop.PortableDeviceApiLib.dll" />
           </Component>
 
           <Component Id="Component.Interop.PortableDeviceTypesLib.dll" Guid="19d12628-7654-4354-a305-9ab0cbede652">
-            <File Id="File.Interop.PortableDeviceTypesLib.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Interop.PortableDeviceTypesLib.dll" />
+            <File Id="Interop.PortableDeviceTypesLib.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Interop.PortableDeviceTypesLib.dll" />
           </Component>
 
           <Component Id="Component.Ionic.Zip.dll" Guid="19d12628-7654-4354-a305-9ab0d900c227">
-            <File Id="File.Ionic.Zip.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Ionic.Zip.dll" />
+            <File Id="Ionic.Zip.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Ionic.Zip.dll" />
           </Component>
 
           <Component Id="Component.log4net.dll" Guid="19d12628-7654-4354-a305-9ab0724d083b">
-            <File Id="File.log4net.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\log4net.dll" />
+            <File Id="log4net.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\log4net.dll" />
           </Component>
 
           <Component Id="Component.MahApps.Metro.dll" Guid="19d12628-7654-4354-a305-9ab0ccc23c4d">
-            <File Id="File.MahApps.Metro.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\MahApps.Metro.dll" />
+            <File Id="MahApps.Metro.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\MahApps.Metro.dll" />
           </Component>
 
           <Component Id="Component.MeasurementProtocolClient.dll" Guid="19d12628-7654-4354-a305-9ab08654d6b6">
-            <File Id="File.MeasurementProtocolClient.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\MeasurementProtocolClient.dll" />
+            <File Id="MeasurementProtocolClient.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\MeasurementProtocolClient.dll" />
           </Component>
 
           <Component Id="Component.Microsoft.Practices.ServiceLocation.dll" Guid="19d12628-7654-4354-a305-9ab0d34f01e0">
-            <File Id="File.Microsoft.Practices.ServiceLocation.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
+            <File Id="Microsoft.Practices.ServiceLocation.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
           </Component>
 
           <Component Id="Component.Mlib.dll" Guid="19d12628-7654-4354-a305-9ab066c41d95">
-            <File Id="File.Mlib.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Mlib.dll" />
+            <File Id="Mlib.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Mlib.dll" />
           </Component>
 
           <Component Id="Component.Newtonsoft.Json.dll" Guid="19d12628-7654-4354-a305-9ab021847151">
-            <File Id="File.Newtonsoft.Json.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Newtonsoft.Json.dll" />
+            <File Id="Newtonsoft.Json.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Newtonsoft.Json.dll" />
           </Component>
 
           <Component Id="Component.PortableDeviceLib.dll" Guid="19d12628-7654-4354-a305-9ab073d5a6a3">
-            <File Id="File.PortableDeviceLib.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\PortableDeviceLib.dll" />
+            <File Id="PortableDeviceLib.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\PortableDeviceLib.dll" />
           </Component>
 
           <Component Id="Component.ShoestringDSUSB_DLL.dll" Guid="19d12628-7654-4354-a305-9ab0e26f7067">
-            <File Id="File.ShoestringDSUSB_DLL.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ShoestringDSUSB_DLL.dll" />
+            <File Id="ShoestringDSUSB_DLL.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ShoestringDSUSB_DLL.dll" />
           </Component>
 
           <Component Id="Component.System.Net.FtpClient.dll" Guid="19d12628-7654-4354-a305-9ab02236f5dd">
-            <File Id="File.System.Net.FtpClient.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\System.Net.FtpClient.dll" />
+            <File Id="System.Net.FtpClient.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\System.Net.FtpClient.dll" />
           </Component>
 
           <Component Id="Component.System.Windows.Interactivity.dll" Guid="19d12628-7654-4354-a305-9ab09de1ce92">
-            <File Id="File.System.Windows.Interactivity.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\System.Windows.Interactivity.dll" />
+            <File Id="System.Windows.Interactivity.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\System.Windows.Interactivity.dll" />
           </Component>
 
           <Component Id="Component.Typesafe.Mailgun.dll" Guid="19d12628-7654-4354-a305-9ab0fd78f3bf">
-            <File Id="File.Typesafe.Mailgun.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Typesafe.Mailgun.dll" />
+            <File Id="Typesafe.Mailgun.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Typesafe.Mailgun.dll" />
           </Component>
 
           <Component Id="Component.Ucs32P.dll" Guid="19d12628-7654-4354-a305-9ab0a637e154">
-            <File Id="File.Ucs32P.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Ucs32P.dll" />
+            <File Id="Ucs32P.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Ucs32P.dll" />
           </Component>
 
           <Component Id="Component.wiaaut.dll" Guid="19d12628-7654-4354-a305-9ab06f0f0ff3">
-            <File Id="File.wiaaut.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\wiaaut.dll" />
+            <File Id="wiaaut.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\wiaaut.dll" />
           </Component>
 
           <Component Id="Component.WriteableBitmapEx.Wpf.dll" Guid="19d12628-7654-4354-a305-9ab061a87355">
-            <File Id="File.WriteableBitmapEx.Wpf.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WriteableBitmapEx.Wpf.dll" />
+            <File Id="WriteableBitmapEx.Wpf.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WriteableBitmapEx.Wpf.dll" />
           </Component>
 
           <Component Id="Component.Xceed.Wpf.AvalonDock.dll" Guid="19d12628-7654-4354-a305-9ab07ef0dd88">
-            <File Id="File.Xceed.Wpf.AvalonDock.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.dll" />
+            <File Id="Xceed.Wpf.AvalonDock.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.dll" />
           </Component>
 
           <Component Id="Component.Xceed.Wpf.AvalonDock.Themes.Aero.dll" Guid="19d12628-7654-4354-a305-9ab07fcd7706">
-            <File Id="File.Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+            <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
           </Component>
 
           <Component Id="Component.Xceed.Wpf.AvalonDock.Themes.Metro.dll" Guid="19d12628-7654-4354-a305-9ab027f414be">
-            <File Id="File.Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+            <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
           </Component>
 
           <Component Id="Component.Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Guid="19d12628-7654-4354-a305-9ab0c5ad62bf">
-            <File Id="File.Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+            <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
           </Component>
 
           <Component Id="Component.Xceed.Wpf.DataGrid.dll" Guid="19d12628-7654-4354-a305-9ab0a6a8b6e6">
-            <File Id="File.Xceed.Wpf.DataGrid.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.DataGrid.dll" />
+            <File Id="Xceed.Wpf.DataGrid.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.DataGrid.dll" />
           </Component>
 
           <Component Id="Component.Xceed.Wpf.Toolkit.dll" Guid="19d12628-7654-4354-a305-9ab041e7d8a8">
-            <File Id="File.Xceed.Wpf.Toolkit.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.Toolkit.dll" />
+            <File Id="Xceed.Wpf.Toolkit.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Xceed.Wpf.Toolkit.dll" />
           </Component>
 
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
-            <File Id="File.noconn.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\noconn.png" />
+            <File Id="noconn.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\noconn.png" />
           </Component>
 
           <Component Id="Component.nosignal.png" Guid="19d12628-7654-4354-a305-9ab023c64d04">
-            <File Id="File.nosignal.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\nosignal.png" />
+            <File Id="nosignal.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\nosignal.png" />
           </Component>
 
           <Component Id="Component.notloaded.png" Guid="19d12628-7654-4354-a305-9ab019fe5786">
-            <File Id="File.notloaded.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\notloaded.png" />
+            <File Id="notloaded.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\notloaded.png" />
           </Component>
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
 
             <Component Id="Component.Branding.xml" Guid="19d12628-7654-4354-a305-9ab01c7f982c">
-              <File Id="File.Branding.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Branding.xml" />
+              <File Id="Branding.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Branding.xml" />
             </Component>
 
             <Component Id="Component.takephoto.mp3" Guid="19d12628-7654-4354-a305-9ab01991f333">
-              <File Id="File.takephoto.mp3" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\takephoto.mp3" />
+              <File Id="takephoto.mp3" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\takephoto.mp3" />
             </Component>
 
             <Component Id="Component.takephoto.wav" Guid="19d12628-7654-4354-a305-9ab0f0c36100">
-              <File Id="File.takephoto.wav" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\takephoto.wav" />
+              <File Id="takephoto.wav" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\takephoto.wav" />
             </Component>
 
             <Directory Id="INSTALLDIR.Data.Camera" Name="Camera">
 
               <Component Id="Component.Canon_EOS_100D.png" Guid="19d12628-7654-4354-a305-9ab0378a50ae">
-                <File Id="File.Canon_EOS_100D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 100D.png" />
+                <File Id="Canon_EOS_100D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 100D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_1100D.png" Guid="19d12628-7654-4354-a305-9ab09ac1bd74">
-                <File Id="File.Canon_EOS_1100D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 1100D.png" />
+                <File Id="Canon_EOS_1100D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 1100D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_1200D.png" Guid="19d12628-7654-4354-a305-9ab0963ebd74">
-                <File Id="File.Canon_EOS_1200D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 1200D.png" />
+                <File Id="Canon_EOS_1200D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 1200D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_450D.png" Guid="19d12628-7654-4354-a305-9ab03707504d">
-                <File Id="File.Canon_EOS_450D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 450D.png" />
+                <File Id="Canon_EOS_450D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 450D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_500D.png" Guid="19d12628-7654-4354-a305-9ab0378a518a">
-                <File Id="File.Canon_EOS_500D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 500D.png" />
+                <File Id="Canon_EOS_500D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 500D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_550D.png" Guid="19d12628-7654-4354-a305-9ab03707518a">
-                <File Id="File.Canon_EOS_550D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 550D.png" />
+                <File Id="Canon_EOS_550D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 550D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_5D_Mark_II.png" Guid="19d12628-7654-4354-a305-9ab058e64533">
-                <File Id="File.Canon_EOS_5D_Mark_II.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 5D Mark II.png" />
+                <File Id="Canon_EOS_5D_Mark_II.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 5D Mark II.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_600D.png" Guid="19d12628-7654-4354-a305-9ab0378a500f">
-                <File Id="File.Canon_EOS_600D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 600D.png" />
+                <File Id="Canon_EOS_600D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 600D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_60D.png" Guid="19d12628-7654-4354-a305-9ab05074d202">
-                <File Id="File.Canon_EOS_60D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 60D.png" />
+                <File Id="Canon_EOS_60D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 60D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_700D.png" Guid="19d12628-7654-4354-a305-9ab0378a50ec">
-                <File Id="File.Canon_EOS_700D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 700D.png" />
+                <File Id="Canon_EOS_700D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 700D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_7D.png" Guid="19d12628-7654-4354-a305-9ab0fb8e1a71">
-                <File Id="File.Canon_EOS_7D.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 7D.png" />
+                <File Id="Canon_EOS_7D.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS 7D.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_Kiss_Digital_X.png" Guid="19d12628-7654-4354-a305-9ab0c4a15b53">
-                <File Id="File.Canon_EOS_Kiss_Digital_X.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS Kiss Digital X.png" />
+                <File Id="Canon_EOS_Kiss_Digital_X.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS Kiss Digital X.png" />
               </Component>
 
               <Component Id="Component.Canon_EOS_T3i_REBEL.png" Guid="19d12628-7654-4354-a305-9ab06ac9d554">
-                <File Id="File.Canon_EOS_T3i_REBEL.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS T3i REBEL.png" />
+                <File Id="Canon_EOS_T3i_REBEL.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\Canon EOS T3i REBEL.png" />
               </Component>
 
               <Component Id="Component.D200.png" Guid="19d12628-7654-4354-a305-9ab0deb73847">
-                <File Id="File.D200.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D200.png" />
+                <File Id="D200.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D200.png" />
               </Component>
 
               <Component Id="Component.D300.png" Guid="19d12628-7654-4354-a305-9ab0fd7c3847">
-                <File Id="File.D300.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D300.png" />
+                <File Id="D300.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D300.png" />
               </Component>
 
               <Component Id="Component.D300S.png" Guid="19d12628-7654-4354-a305-9ab01bbea1a0">
-                <File Id="File.D300S.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D300S.png" />
+                <File Id="D300S.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D300S.png" />
               </Component>
 
               <Component Id="Component.D3200.png" Guid="19d12628-7654-4354-a305-9ab0b2b5f8ff">
-                <File Id="File.D3200.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D3200.png" />
+                <File Id="D3200.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D3200.png" />
               </Component>
 
               <Component Id="Component.D3300.png" Guid="19d12628-7654-4354-a305-9ab0b2b5f9e0">
-                <File Id="File.D3300.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D3300.png" />
+                <File Id="D3300.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D3300.png" />
               </Component>
 
               <Component Id="Component.D3X.png" Guid="19d12628-7654-4354-a305-9ab09ee7a36e">
-                <File Id="File.D3X.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D3X.png" />
+                <File Id="D3X.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D3X.png" />
               </Component>
 
               <Component Id="Component.D4.png" Guid="19d12628-7654-4354-a305-9ab0d6d4a4b3">
-                <File Id="File.D4.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D4.png" />
+                <File Id="D4.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D4.png" />
               </Component>
 
               <Component Id="Component.D40.png" Guid="19d12628-7654-4354-a305-9ab038c0b116">
-                <File Id="File.D40.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D40.png" />
+                <File Id="D40.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D40.png" />
               </Component>
 
               <Component Id="Component.D4S.png" Guid="19d12628-7654-4354-a305-9ab038c0a597">
-                <File Id="File.D4S.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D4S.png" />
+                <File Id="D4S.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D4S.png" />
               </Component>
 
               <Component Id="Component.D50.png" Guid="19d12628-7654-4354-a305-9ab08ef1b116">
-                <File Id="File.D50.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D50.png" />
+                <File Id="D50.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D50.png" />
               </Component>
 
               <Component Id="Component.D5000.png" Guid="19d12628-7654-4354-a305-9ab0a17ff9c1">
-                <File Id="File.D5000.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5000.png" />
+                <File Id="D5000.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5000.png" />
               </Component>
 
               <Component Id="Component.D5100.png" Guid="19d12628-7654-4354-a305-9ab0a17ff9a2">
-                <File Id="File.D5100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5100.png" />
+                <File Id="D5100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5100.png" />
               </Component>
 
               <Component Id="Component.D5200.png" Guid="19d12628-7654-4354-a305-9ab0a17ff8ff">
-                <File Id="File.D5200.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5200.png" />
+                <File Id="D5200.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5200.png" />
               </Component>
 
               <Component Id="Component.D5300.png" Guid="19d12628-7654-4354-a305-9ab0a17ff9e0">
-                <File Id="File.D5300.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5300.png" />
+                <File Id="D5300.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5300.png" />
               </Component>
 
               <Component Id="Component.D5500.png" Guid="19d12628-7654-4354-a305-9ab0a17ff81e">
-                <File Id="File.D5500.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5500.png" />
+                <File Id="D5500.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D5500.png" />
               </Component>
 
               <Component Id="Component.D60.png" Guid="19d12628-7654-4354-a305-9ab028cab116">
-                <File Id="File.D60.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D60.png" />
+                <File Id="D60.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D60.png" />
               </Component>
 
               <Component Id="Component.D600.png" Guid="19d12628-7654-4354-a305-9ab0fea33847">
-                <File Id="File.D600.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D600.png" />
+                <File Id="D600.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D600.png" />
               </Component>
 
               <Component Id="Component.D610.png" Guid="19d12628-7654-4354-a305-9ab0fea33828">
-                <File Id="File.D610.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D610.png" />
+                <File Id="D610.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D610.png" />
               </Component>
 
               <Component Id="Component.D70.png" Guid="19d12628-7654-4354-a305-9ab019fbb116">
-                <File Id="File.D70.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D70.png" />
+                <File Id="D70.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D70.png" />
               </Component>
 
               <Component Id="Component.D700.png" Guid="19d12628-7654-4354-a305-9ab01d683847">
-                <File Id="File.D700.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D700.png" />
+                <File Id="D700.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D700.png" />
               </Component>
 
               <Component Id="Component.D7000.png" Guid="19d12628-7654-4354-a305-9ab0eda18426">
-                <File Id="File.D7000.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D7000.png" />
+                <File Id="D7000.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D7000.png" />
               </Component>
 
               <Component Id="Component.D70s.png" Guid="19d12628-7654-4354-a305-9ab025c53847">
-                <File Id="File.D70s.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D70s.png" />
+                <File Id="D70s.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D70s.png" />
               </Component>
 
               <Component Id="Component.D7100.png" Guid="19d12628-7654-4354-a305-9ab0eda18407">
-                <File Id="File.D7100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D7100.png" />
+                <File Id="D7100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D7100.png" />
               </Component>
 
               <Component Id="Component.D750.png" Guid="19d12628-7654-4354-a305-9ab01d6838ac">
-                <File Id="File.D750.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D750.png" />
+                <File Id="D750.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D750.png" />
               </Component>
 
               <Component Id="Component.D80.png" Guid="19d12628-7654-4354-a305-9ab0b3d4b116">
-                <File Id="File.D80.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D80.png" />
+                <File Id="D80.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D80.png" />
               </Component>
 
               <Component Id="Component.D800.png" Guid="19d12628-7654-4354-a305-9ab05b193847">
-                <File Id="File.D800.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D800.png" />
+                <File Id="D800.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D800.png" />
               </Component>
 
               <Component Id="Component.D800E.png" Guid="19d12628-7654-4354-a305-9ab0b5d89cbf">
-                <File Id="File.D800E.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D800E.png" />
+                <File Id="D800E.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D800E.png" />
               </Component>
 
               <Component Id="Component.D810.png" Guid="19d12628-7654-4354-a305-9ab05b193828">
-                <File Id="File.D810.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D810.png" />
+                <File Id="D810.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D810.png" />
               </Component>
 
               <Component Id="Component.D90.png" Guid="19d12628-7654-4354-a305-9ab00905b116">
-                <File Id="File.D90.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D90.png" />
+                <File Id="D90.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\D90.png" />
               </Component>
 
               <Component Id="Component.DF.png" Guid="19d12628-7654-4354-a305-9ab095eea4b3">
-                <File Id="File.DF.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\DF.png" />
+                <File Id="DF.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Data\Camera\DF.png" />
               </Component>
 
             </Directory>
@@ -476,11 +462,11 @@
             <Directory Id="INSTALLDIR.Plugins.CameraControl.Plugins" Name="CameraControl.Plugins">
 
               <Component Id="Component.CameraControl.Plugins.dll" Guid="19d12628-7654-4354-a305-9ab036c1c93d">
-                <File Id="File.CameraControl.Plugins.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\CameraControl.Plugins\CameraControl.Plugins.dll" />
+                <File Id="CameraControl.Plugins.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\CameraControl.Plugins\CameraControl.Plugins.dll" />
               </Component>
 
               <Component Id="Component.dcc.plugin" Guid="19d12628-7654-4354-a305-9ab04cea2181">
-                <File Id="File.dcc.plugin" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\CameraControl.Plugins\dcc.plugin" />
+                <File Id="dcc.plugin" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\CameraControl.Plugins\dcc.plugin" />
               </Component>
 
             </Directory>
@@ -488,11 +474,11 @@
             <Directory Id="INSTALLDIR.Plugins.Plugin.DeviceControlBox" Name="Plugin.DeviceControlBox">
 
               <Component Id="Component.Plugin.DeviceControlBox.dll" Guid="19d12628-7654-4354-a305-9ab093dd4c23">
-                <File Id="File.Plugin.DeviceControlBox.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\Plugin.DeviceControlBox\Plugin.DeviceControlBox.dll" />
+                <File Id="Plugin.DeviceControlBox.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\Plugin.DeviceControlBox\Plugin.DeviceControlBox.dll" />
               </Component>
 
               <Component Id="Component.dcc.plugin.1" Guid="19d12628-7654-4354-a305-9ab0bdbf76ef">
-                <File Id="File.dcc.plugin.1" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\Plugin.DeviceControlBox\dcc.plugin" />
+                <File Id="dcc.plugin.1" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Plugins\Plugin.DeviceControlBox\dcc.plugin" />
               </Component>
 
             </Directory>
@@ -501,99 +487,99 @@
           <Directory Id="INSTALLDIR.Languages" Name="Languages">
 
             <Component Id="Component.ca.xml" Guid="19d12628-7654-4354-a305-9ab07fd22707">
-              <File Id="File.ca.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ca.xml" />
+              <File Id="ca.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ca.xml" />
             </Component>
 
             <Component Id="Component.cs_CZ.xml" Guid="19d12628-7654-4354-a305-9ab02fae43f5">
-              <File Id="File.cs_CZ.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\cs_CZ.xml" />
+              <File Id="cs_CZ.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\cs_CZ.xml" />
             </Component>
 
             <Component Id="Component.da.xml" Guid="19d12628-7654-4354-a305-9ab06b655778">
-              <File Id="File.da.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\da.xml" />
+              <File Id="da.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\da.xml" />
             </Component>
 
             <Component Id="Component.de.xml" Guid="19d12628-7654-4354-a305-9ab0e6795778">
-              <File Id="File.de.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\de.xml" />
+              <File Id="de.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\de.xml" />
             </Component>
 
             <Component Id="Component.el_GR.xml" Guid="19d12628-7654-4354-a305-9ab000c5a402">
-              <File Id="File.el_GR.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\el_GR.xml" />
+              <File Id="el_GR.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\el_GR.xml" />
             </Component>
 
             <Component Id="Component.en_US.xml" Guid="19d12628-7654-4354-a305-9ab011f3cd9f">
-              <File Id="File.en_US.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\en-US.xml" />
+              <File Id="en_US.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\en-US.xml" />
             </Component>
 
             <Component Id="Component.es_MX.xml" Guid="19d12628-7654-4354-a305-9ab0eb261401">
-              <File Id="File.es_MX.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\es_MX.xml" />
+              <File Id="es_MX.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\es_MX.xml" />
             </Component>
 
             <Component Id="Component.fr.xml" Guid="19d12628-7654-4354-a305-9ab047c019ee">
-              <File Id="File.fr.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\fr.xml" />
+              <File Id="fr.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\fr.xml" />
             </Component>
 
             <Component Id="Component.gl_ES.xml" Guid="19d12628-7654-4354-a305-9ab0e273b9e9">
-              <File Id="File.gl_ES.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\gl_ES.xml" />
+              <File Id="gl_ES.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\gl_ES.xml" />
             </Component>
 
             <Component Id="Component.hu.xml" Guid="19d12628-7654-4354-a305-9ab0c46cdb64">
-              <File Id="File.hu.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\hu.xml" />
+              <File Id="hu.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\hu.xml" />
             </Component>
 
             <Component Id="Component.it.xml" Guid="19d12628-7654-4354-a305-9ab0ad11d369">
-              <File Id="File.it.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\it.xml" />
+              <File Id="it.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\it.xml" />
             </Component>
 
             <Component Id="Component.ja.xml" Guid="19d12628-7654-4354-a305-9ab03dba9eda">
-              <File Id="File.ja.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ja.xml" />
+              <File Id="ja.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ja.xml" />
             </Component>
 
             <Component Id="Component.nl.xml" Guid="19d12628-7654-4354-a305-9ab05a7523c6">
-              <File Id="File.nl.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\nl.xml" />
+              <File Id="nl.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\nl.xml" />
             </Component>
 
             <Component Id="Component.nl_BE.xml" Guid="19d12628-7654-4354-a305-9ab0638a863e">
-              <File Id="File.nl_BE.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\nl_BE.xml" />
+              <File Id="nl_BE.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\nl_BE.xml" />
             </Component>
 
             <Component Id="Component.pl.xml" Guid="19d12628-7654-4354-a305-9ab0e9dc2b7c">
-              <File Id="File.pl.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\pl.xml" />
+              <File Id="pl.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\pl.xml" />
             </Component>
 
             <Component Id="Component.pt_PT.xml" Guid="19d12628-7654-4354-a305-9ab023b209be">
-              <File Id="File.pt_PT.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\pt_PT.xml" />
+              <File Id="pt_PT.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\pt_PT.xml" />
             </Component>
 
             <Component Id="Component.ro.xml" Guid="19d12628-7654-4354-a305-9ab0a8fd88f2">
-              <File Id="File.ro.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ro.xml" />
+              <File Id="ro.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ro.xml" />
             </Component>
 
             <Component Id="Component.ru.xml" Guid="19d12628-7654-4354-a305-9ab0680f88f2">
-              <File Id="File.ru.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ru.xml" />
+              <File Id="ru.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\ru.xml" />
             </Component>
 
             <Component Id="Component.sl.xml" Guid="19d12628-7654-4354-a305-9ab0352c80f7">
-              <File Id="File.sl.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\sl.xml" />
+              <File Id="sl.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\sl.xml" />
             </Component>
 
             <Component Id="Component.sr.xml" Guid="19d12628-7654-4354-a305-9ab0903e80f7">
-              <File Id="File.sr.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\sr.xml" />
+              <File Id="sr.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\sr.xml" />
             </Component>
 
             <Component Id="Component.tr_TR.xml" Guid="19d12628-7654-4354-a305-9ab005d1ceb4">
-              <File Id="File.tr_TR.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\tr_TR.xml" />
+              <File Id="tr_TR.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\tr_TR.xml" />
             </Component>
 
             <Component Id="Component.uk.xml" Guid="19d12628-7654-4354-a305-9ab096f0a76d">
-              <File Id="File.uk.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\uk.xml" />
+              <File Id="uk.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\uk.xml" />
             </Component>
 
             <Component Id="Component.vi.xml" Guid="19d12628-7654-4354-a305-9ab073f70dde">
-              <File Id="File.vi.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\vi.xml" />
+              <File Id="vi.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\vi.xml" />
             </Component>
 
             <Component Id="Component.zh_CN.xml" Guid="19d12628-7654-4354-a305-9ab065c9b169">
-              <File Id="File.zh_CN.xml" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\zh_CN.xml" />
+              <File Id="zh_CN.xml" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Languages\zh_CN.xml" />
             </Component>
 
           </Directory>
@@ -601,35 +587,31 @@
           <Directory Id="INSTALLDIR.Licenses" Name="Licenses">
 
             <Component Id="Component.AForge_Copyright.txt" Guid="19d12628-7654-4354-a305-9ab0d56acb3a">
-              <File Id="File.AForge_Copyright.txt" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\AForge Copyright.txt" />
+              <File Id="AForge_Copyright.txt" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\AForge Copyright.txt" />
             </Component>
 
             <Component Id="Component.AForge_License.txt" Guid="19d12628-7654-4354-a305-9ab09da8f4ba">
-              <File Id="File.AForge_License.txt" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\AForge License.txt" />
+              <File Id="AForge_License.txt" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\AForge License.txt" />
             </Component>
 
             <Component Id="Component.DigiCamControlLicence.rtf" Guid="19d12628-7654-4354-a305-9ab0c6e8c620">
-              <File Id="File.DigiCamControlLicence.rtf" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
+              <File Id="DigiCamControlLicence.rtf" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
             </Component>
 
             <Component Id="Component.DigiCamControlLicence.txt" Guid="19d12628-7654-4354-a305-9ab0e1cc66a4">
-              <File Id="File.DigiCamControlLicence.txt" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.txt" />
+              <File Id="DigiCamControlLicence.txt" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.txt" />
             </Component>
 
             <Component Id="Component.gpl_3.0.txt" Guid="19d12628-7654-4354-a305-9ab0a16b437d">
-              <File Id="File.gpl_3.0.txt" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\gpl-3.0.txt" />
+              <File Id="gpl_3.0.txt" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\gpl-3.0.txt" />
             </Component>
 
             <Component Id="Component.GPLv3LICENSE.rtf" Guid="19d12628-7654-4354-a305-9ab0fc4ba316">
-              <File Id="File.GPLv3LICENSE.rtf" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\GPLv3LICENSE.rtf" />
-            </Component>
-
-            <Component Id="Component.License.txt" Guid="19d12628-7654-4354-a305-9ab05d8ee6f7">
-              <File Id="File.License.txt" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\License.txt" />
+              <File Id="GPLv3LICENSE.rtf" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\GPLv3LICENSE.rtf" />
             </Component>
 
             <Component Id="Component.WPFSharp.Globalizer.Licence.txt" Guid="19d12628-7654-4354-a305-9ab09fef7fdc">
-              <File Id="File.WPFSharp.Globalizer.Licence.txt" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\WPFSharp.Globalizer.Licence.txt" />
+              <File Id="WPFSharp.Globalizer.Licence.txt" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\WPFSharp.Globalizer.Licence.txt" />
             </Component>
 
           </Directory>
@@ -637,23 +619,23 @@
           <Directory Id="INSTALLDIR.Tools" Name="Tools">
 
             <Component Id="Component.align_image_stack.exe" Guid="19d12628-7654-4354-a305-9ab0e987b4e0">
-              <File Id="File.align_image_stack.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\align_image_stack.exe" />
+              <File Id="align_image_stack.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\align_image_stack.exe" />
             </Component>
 
             <Component Id="Component.COPYING" Guid="19d12628-7654-4354-a305-9ab0af38c790">
-              <File Id="File.COPYING" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\COPYING" />
+              <File Id="COPYING" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\COPYING" />
             </Component>
 
             <Component Id="Component.enfuse.exe" Guid="19d12628-7654-4354-a305-9ab00d176310">
-              <File Id="File.enfuse.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\enfuse.exe" />
+              <File Id="enfuse.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\enfuse.exe" />
             </Component>
 
             <Component Id="Component.exiv2.exe" Guid="19d12628-7654-4354-a305-9ab03dac4e66">
-              <File Id="File.exiv2.exe" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\exiv2.exe" />
+              <File Id="exiv2.exe" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\exiv2.exe" />
             </Component>
 
             <Component Id="Component.libexpat.dll" Guid="19d12628-7654-4354-a305-9ab0c04e3368">
-              <File Id="File.libexpat.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\libexpat.dll" />
+              <File Id="libexpat.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Tools\libexpat.dll" />
             </Component>
 
           </Directory>
@@ -661,188 +643,232 @@
           <Directory Id="INSTALLDIR.WebServer" Name="WebServer">
 
             <Component Id="Component.browse.html" Guid="19d12628-7654-4354-a305-9ab0cd361020">
-              <File Id="File.browse.html" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\browse.html" />
+              <File Id="browse.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\browse.html" />
             </Component>
 
             <Component Id="Component.cmd.html" Guid="19d12628-7654-4354-a305-9ab02366d5b9">
-              <File Id="File.cmd.html" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\cmd.html" />
+              <File Id="cmd.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\cmd.html" />
+            </Component>
+
+            <Component Id="Component.demo.html" Guid="19d12628-7654-4354-a305-9ab0fa66d8d1">
+              <File Id="demo.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\demo.html" />
+            </Component>
+
+            <Component Id="Component.fade.html" Guid="19d12628-7654-4354-a305-9ab0543ec7a2">
+              <File Id="fade.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\fade.html" />
             </Component>
 
             <Component Id="Component.index.html" Guid="19d12628-7654-4354-a305-9ab09d53bdec">
-              <File Id="File.index.html" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\index.html" />
+              <File Id="index.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\index.html" />
+            </Component>
+
+            <Component Id="Component.jquery.min.js" Guid="19d12628-7654-4354-a305-9ab02d438edd">
+              <File Id="jquery.min.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\jquery.min.js" />
+            </Component>
+
+            <Component Id="Component.jssor.slider.mini.js" Guid="19d12628-7654-4354-a305-9ab026539236">
+              <File Id="jssor.slider.mini.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\jssor.slider.mini.js" />
             </Component>
 
             <Component Id="Component.liveview.html" Guid="19d12628-7654-4354-a305-9ab015050ab9">
-              <File Id="File.liveview.html" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\liveview.html" />
+              <File Id="liveview.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\liveview.html" />
+            </Component>
+
+            <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+              <File Id="logo.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\logo.png" />
+            </Component>
+
+            <Component Id="Component.logo_big.png" Guid="19d12628-7654-4354-a305-9ab092c00c32">
+              <File Id="logo_big.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\logo_big.png" />
+            </Component>
+
+            <Component Id="Component.Script.js" Guid="19d12628-7654-4354-a305-9ab0ba50e5ec">
+              <File Id="Script.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\Script.js" />
             </Component>
 
             <Component Id="Component.slide.html" Guid="19d12628-7654-4354-a305-9ab06a6a9c5a">
-              <File Id="File.slide.html" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\slide.html" />
+              <File Id="slide.html" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\slide.html" />
+            </Component>
+
+            <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
+              <File Id="style.css" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\style.css" />
             </Component>
 
             <Directory Id="INSTALLDIR.WebServer.css" Name="css">
 
-              <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
-                <File Id="File.style.css" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\style.css" />
+              <Component Id="Component.style.css.1" Guid="19d12628-7654-4354-a305-9ab00b5fa9e0">
+                <File Id="style.css.1" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\style.css" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.css.img" Name="img">
 
                 <Component Id="Component.ajax_loader.gif" Guid="19d12628-7654-4354-a305-9ab018eca467">
-                  <File Id="File.ajax_loader.gif" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\ajax-loader.gif" />
+                  <File Id="ajax_loader.gif" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\ajax-loader.gif" />
                 </Component>
 
                 <Component Id="Component.browse.png" Guid="19d12628-7654-4354-a305-9ab0a845df91">
-                  <File Id="File.browse.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\browse.png" />
+                  <File Id="browse.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\browse.png" />
                 </Component>
 
                 <Component Id="Component.capture.png" Guid="19d12628-7654-4354-a305-9ab062d27b7d">
-                  <File Id="File.capture.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\capture.png" />
+                  <File Id="capture.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\capture.png" />
                 </Component>
 
                 <Component Id="Component.cmd.png" Guid="19d12628-7654-4354-a305-9ab0e63d30d7">
-                  <File Id="File.cmd.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\cmd.png" />
+                  <File Id="cmd.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\cmd.png" />
                 </Component>
 
                 <Component Id="Component.d17.png" Guid="19d12628-7654-4354-a305-9ab0caf9d80b">
-                  <File Id="File.d17.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\d17.png" />
+                  <File Id="d17.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\d17.png" />
                 </Component>
 
                 <Component Id="Component.IsLiked.png" Guid="19d12628-7654-4354-a305-9ab0fd1671b3">
-                  <File Id="File.IsLiked.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\IsLiked.png" />
+                  <File Id="IsLiked.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\IsLiked.png" />
                 </Component>
 
                 <Component Id="Component.IsUnLiked.png" Guid="19d12628-7654-4354-a305-9ab0c59b3235">
-                  <File Id="File.IsUnLiked.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\IsUnLiked.png" />
+                  <File Id="IsUnLiked.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\IsUnLiked.png" />
                 </Component>
 
                 <Component Id="Component.live.png" Guid="19d12628-7654-4354-a305-9ab0f2221305">
-                  <File Id="File.live.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\live.png" />
+                  <File Id="live.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-                  <File Id="File.logo.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
+                  <File Id="logo.png.1" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
-                  <File Id="File.slideshow.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\slideshow.png" />
+                  <File Id="slideshow.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\slideshow.png" />
                 </Component>
 
                 <Component Id="Component.t01.png" Guid="19d12628-7654-4354-a305-9ab0993ac5a5">
-                  <File Id="File.t01.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\t01.png" />
+                  <File Id="t01.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\css\img\t01.png" />
                 </Component>
 
               </Directory>
             </Directory>
 
+            <Directory Id="INSTALLDIR.WebServer.img" Name="img">
+
+              <Component Id="Component.d17.png.1" Guid="19d12628-7654-4354-a305-9ab093c7f24f">
+                <File Id="d17.png.1" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\img\d17.png" />
+              </Component>
+
+              <Component Id="Component.t01.png.1" Guid="19d12628-7654-4354-a305-9ab07e15fc49">
+                <File Id="t01.png.1" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\img\t01.png" />
+              </Component>
+
+            </Directory>
+
             <Directory Id="INSTALLDIR.WebServer.js" Name="js">
 
               <Component Id="Component.jquery_1.11.2.min.js" Guid="19d12628-7654-4354-a305-9ab00285491d">
-                <File Id="File.jquery_1.11.2.min.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-1.11.2.min.js" />
+                <File Id="jquery_1.11.2.min.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-1.11.2.min.js" />
               </Component>
 
               <Component Id="Component.jquery.cycle.all.js" Guid="19d12628-7654-4354-a305-9ab015bc4583">
-                <File Id="File.jquery.cycle.all.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle.all.js" />
+                <File Id="jquery.cycle.all.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle.all.js" />
               </Component>
 
               <Component Id="Component.jquery.cycle2.center.min.js" Guid="19d12628-7654-4354-a305-9ab0500c61d1">
-                <File Id="File.jquery.cycle2.center.min.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle2.center.min.js" />
+                <File Id="jquery.cycle2.center.min.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle2.center.min.js" />
               </Component>
 
               <Component Id="Component.jquery.cycle2.min.js" Guid="19d12628-7654-4354-a305-9ab05288c071">
-                <File Id="File.jquery.cycle2.min.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle2.min.js" />
+                <File Id="jquery.cycle2.min.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle2.min.js" />
               </Component>
 
               <Component Id="Component.jquery.cycle2.swipe.min.js" Guid="19d12628-7654-4354-a305-9ab0186618d6">
-                <File Id="File.jquery.cycle2.swipe.min.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle2.swipe.min.js" />
+                <File Id="jquery.cycle2.swipe.min.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery.cycle2.swipe.min.js" />
               </Component>
 
-              <Component Id="Component.jssor.slider.mini.js" Guid="19d12628-7654-4354-a305-9ab026539236">
-                <File Id="File.jssor.slider.mini.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jssor.slider.mini.js" />
+              <Component Id="Component.jssor.slider.mini.js.1" Guid="19d12628-7654-4354-a305-9ab0fc7a9218">
+                <File Id="jssor.slider.mini.js.1" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jssor.slider.mini.js" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.js.jquery_ui_1.11.2.custom" Name="jquery-ui-1.11.2.custom">
 
                 <Component Id="Component.jquery_ui.min.css" Guid="19d12628-7654-4354-a305-9ab0c411455c">
-                  <File Id="File.jquery_ui.min.css" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.min.css" />
+                  <File Id="jquery_ui.min.css" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.min.css" />
                 </Component>
 
                 <Component Id="Component.jquery_ui.min.js" Guid="19d12628-7654-4354-a305-9ab0b96aa771">
-                  <File Id="File.jquery_ui.min.js" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.min.js" />
+                  <File Id="jquery_ui.min.js" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.min.js" />
                 </Component>
 
                 <Component Id="Component.jquery_ui.structure.min.css" Guid="19d12628-7654-4354-a305-9ab0ca419a65">
-                  <File Id="File.jquery_ui.structure.min.css" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.structure.min.css" />
+                  <File Id="jquery_ui.structure.min.css" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.structure.min.css" />
                 </Component>
 
                 <Component Id="Component.jquery_ui.theme.min.css" Guid="19d12628-7654-4354-a305-9ab087d99f04">
-                  <File Id="File.jquery_ui.theme.min.css" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.theme.min.css" />
+                  <File Id="jquery_ui.theme.min.css" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.theme.min.css" />
                 </Component>
 
                 <Directory Id="INSTALLDIR.WebServer.js.jquery_ui_1.11.2.custom.images" Name="images">
 
                   <Component Id="Component.ui_bg_flat_100_fcfdfd_40x100.png" Guid="19d12628-7654-4354-a305-9ab025300a13">
-                    <File Id="File.ui_bg_flat_100_fcfdfd_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_100_fcfdfd_40x100.png" />
+                    <File Id="ui_bg_flat_100_fcfdfd_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_100_fcfdfd_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_45_0078ae_40x100.png" Guid="19d12628-7654-4354-a305-9ab09f3af1f6">
-                    <File Id="File.ui_bg_flat_45_0078ae_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_45_0078ae_40x100.png" />
+                    <File Id="ui_bg_flat_45_0078ae_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_45_0078ae_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_50_6eac2c_40x100.png" Guid="19d12628-7654-4354-a305-9ab046df0c96">
-                    <File Id="File.ui_bg_flat_50_6eac2c_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_50_6eac2c_40x100.png" />
+                    <File Id="ui_bg_flat_50_6eac2c_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_50_6eac2c_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_55_999999_40x100.png" Guid="19d12628-7654-4354-a305-9ab0ea5d919e">
-                    <File Id="File.ui_bg_flat_55_999999_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_55_999999_40x100.png" />
+                    <File Id="ui_bg_flat_55_999999_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_55_999999_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_55_f8da4e_40x100.png" Guid="19d12628-7654-4354-a305-9ab0a92026f7">
-                    <File Id="File.ui_bg_flat_55_f8da4e_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_55_f8da4e_40x100.png" />
+                    <File Id="ui_bg_flat_55_f8da4e_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_55_f8da4e_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_75_2191c0_40x100.png" Guid="19d12628-7654-4354-a305-9ab0f67cca6b">
-                    <File Id="File.ui_bg_flat_75_2191c0_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_75_2191c0_40x100.png" />
+                    <File Id="ui_bg_flat_75_2191c0_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_75_2191c0_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_75_79c9ec_40x100.png" Guid="19d12628-7654-4354-a305-9ab09cc8bf3c">
-                    <File Id="File.ui_bg_flat_75_79c9ec_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_75_79c9ec_40x100.png" />
+                    <File Id="ui_bg_flat_75_79c9ec_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_75_79c9ec_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_flat_75_aaaaaa_40x100.png" Guid="19d12628-7654-4354-a305-9ab0ee2776ee">
-                    <File Id="File.ui_bg_flat_75_aaaaaa_40x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+                    <File Id="ui_bg_flat_75_aaaaaa_40x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_75_aaaaaa_40x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_bg_gloss_wave_45_e14f1c_500x100.png" Guid="19d12628-7654-4354-a305-9ab0ab7b2af0">
-                    <File Id="File.ui_bg_gloss_wave_45_e14f1c_500x100.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+                    <File Id="ui_bg_gloss_wave_45_e14f1c_500x100.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_0078ae_256x240.png" Guid="19d12628-7654-4354-a305-9ab023a34188">
-                    <File Id="File.ui_icons_0078ae_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_0078ae_256x240.png" />
+                    <File Id="ui_icons_0078ae_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_0078ae_256x240.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_056b93_256x240.png" Guid="19d12628-7654-4354-a305-9ab0df93dbd5">
-                    <File Id="File.ui_icons_056b93_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_056b93_256x240.png" />
+                    <File Id="ui_icons_056b93_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_056b93_256x240.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_d8e7f3_256x240.png" Guid="19d12628-7654-4354-a305-9ab0f11b7708">
-                    <File Id="File.ui_icons_d8e7f3_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_d8e7f3_256x240.png" />
+                    <File Id="ui_icons_d8e7f3_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_d8e7f3_256x240.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_e0fdff_256x240.png" Guid="19d12628-7654-4354-a305-9ab0472d3516">
-                    <File Id="File.ui_icons_e0fdff_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_e0fdff_256x240.png" />
+                    <File Id="ui_icons_e0fdff_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_e0fdff_256x240.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_f5e175_256x240.png" Guid="19d12628-7654-4354-a305-9ab0b7bfbbe9">
-                    <File Id="File.ui_icons_f5e175_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_f5e175_256x240.png" />
+                    <File Id="ui_icons_f5e175_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_f5e175_256x240.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_f7a50d_256x240.png" Guid="19d12628-7654-4354-a305-9ab0da5a7d81">
-                    <File Id="File.ui_icons_f7a50d_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_f7a50d_256x240.png" />
+                    <File Id="ui_icons_f7a50d_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_f7a50d_256x240.png" />
                   </Component>
 
                   <Component Id="Component.ui_icons_fcd113_256x240.png" Guid="19d12628-7654-4354-a305-9ab0e4eeedbe">
-                    <File Id="File.ui_icons_fcd113_256x240.png" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_fcd113_256x240.png" />
+                    <File Id="ui_icons_fcd113_256x240.png" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\WebServer\js\jquery-ui-1.11.2.custom\images\ui-icons_fcd113_256x240.png" />
                   </Component>
 
                 </Directory>
@@ -855,21 +881,17 @@
           <Directory Id="ProgramFilesFolder.OBS.plugins" Name="plugins">
 
             <Component Id="Component.CLRHostPlugin.dll" Guid="19d12628-7654-4354-a305-9ab0e225050a">
-              <File Id="File.CLRHostPlugin.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin.dll" />
+              <File Id="CLRHostPlugin.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin.dll" />
             </Component>
 
             <Directory Id="ProgramFilesFolder.OBS.plugins.CLRHostPlugin" Name="CLRHostPlugin">
 
               <Component Id="Component.CLRHost.Interop.dll" Guid="19d12628-7654-4354-a305-9ab033d1b9f4">
-                <File Id="File.CLRHost.Interop.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin\CLRHost.Interop.dll" />
+                <File Id="CLRHost.Interop.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin\CLRHost.Interop.dll" />
               </Component>
 
               <Component Id="Component.DccObsPlugin.dll" Guid="19d12628-7654-4354-a305-9ab09076de6c">
-                <File Id="File.DccObsPlugin.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
-              </Component>
-
-              <Component Id="Component.DccObsPlugin.pdb" Guid="19d12628-7654-4354-a305-9ab01940de64">
-                <File Id="File.DccObsPlugin.pdb" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin\DccObsPlugin.pdb" />
+                <File Id="DccObsPlugin.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
               </Component>
 
             </Directory>
@@ -925,17 +947,17 @@
 
     <Property Id="ARPPRODUCTICON" Value="MainIcon"  />
 
-    <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
+    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.87.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.87.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.88.0" IncludeMaximum="yes" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.2.88.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
     <CustomAction Id="PreventDowngrading" Error="Newer version already installed"  />
 
-    <Binary Id="Action1_MyAction_File" SourceFile="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\%this%.CA.dll"  />
+    <Binary Id="Action1_MyAction_File" SourceFile="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\%this%.CA.dll"  />
 
     <UIRef Id="WixUI_FeatureTree"  />
 
@@ -947,13 +969,11 @@
       <ComponentRef Id="Component.dcraw.exe" />
       <ComponentRef Id="Component.ffmpeg.exe" />
       <ComponentRef Id="Component.MtpTester.exe" />
-      <ComponentRef Id="Component.PhotoBooth.exe" />
       <ComponentRef Id="Component.regwia.bat" />
       <ComponentRef Id="Component.logo.ico" />
       <ComponentRef Id="Component.logo_big.jpg" />
       <ComponentRef Id="Component.baseMtpDevice.xml" />
       <ComponentRef Id="Component.DigiCamControl.xbs" />
-      <ComponentRef Id="Component._this_.CA.dll" />
       <ComponentRef Id="Component.AForge.dll" />
       <ComponentRef Id="Component.AForge.Imaging.dll" />
       <ComponentRef Id="Component.AForge.Imaging.Formats.dll" />
@@ -1083,7 +1103,6 @@
       <ComponentRef Id="Component.DigiCamControlLicence.txt" />
       <ComponentRef Id="Component.gpl_3.0.txt" />
       <ComponentRef Id="Component.GPLv3LICENSE.rtf" />
-      <ComponentRef Id="Component.License.txt" />
       <ComponentRef Id="Component.WPFSharp.Globalizer.Licence.txt" />
       <ComponentRef Id="Component.align_image_stack.exe" />
       <ComponentRef Id="Component.COPYING" />
@@ -1092,10 +1111,18 @@
       <ComponentRef Id="Component.libexpat.dll" />
       <ComponentRef Id="Component.browse.html" />
       <ComponentRef Id="Component.cmd.html" />
+      <ComponentRef Id="Component.demo.html" />
+      <ComponentRef Id="Component.fade.html" />
       <ComponentRef Id="Component.index.html" />
+      <ComponentRef Id="Component.jquery.min.js" />
+      <ComponentRef Id="Component.jssor.slider.mini.js" />
       <ComponentRef Id="Component.liveview.html" />
+      <ComponentRef Id="Component.logo.png" />
+      <ComponentRef Id="Component.logo_big.png" />
+      <ComponentRef Id="Component.Script.js" />
       <ComponentRef Id="Component.slide.html" />
       <ComponentRef Id="Component.style.css" />
+      <ComponentRef Id="Component.style.css.1" />
       <ComponentRef Id="Component.ajax_loader.gif" />
       <ComponentRef Id="Component.browse.png" />
       <ComponentRef Id="Component.capture.png" />
@@ -1104,15 +1131,17 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png" />
+      <ComponentRef Id="Component.logo.png.1" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
+      <ComponentRef Id="Component.d17.png.1" />
+      <ComponentRef Id="Component.t01.png.1" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
       <ComponentRef Id="Component.jquery.cycle.all.js" />
       <ComponentRef Id="Component.jquery.cycle2.center.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.swipe.min.js" />
-      <ComponentRef Id="Component.jssor.slider.mini.js" />
+      <ComponentRef Id="Component.jssor.slider.mini.js.1" />
       <ComponentRef Id="Component.jquery_ui.min.css" />
       <ComponentRef Id="Component.jquery_ui.min.js" />
       <ComponentRef Id="Component.jquery_ui.structure.min.css" />
@@ -1142,7 +1171,6 @@
       <ComponentRef Id="Component.CLRHostPlugin.dll" />
       <ComponentRef Id="Component.CLRHost.Interop.dll" />
       <ComponentRef Id="Component.DccObsPlugin.dll" />
-      <ComponentRef Id="Component.DccObsPlugin.pdb" />
       <ComponentRef Id="ProgramMenuFolder" />
     </Feature>
 
@@ -1154,7 +1182,7 @@
     <InstallExecuteSequence >
       <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
 
-      <RemoveExistingProducts After="InstallFinalize" />
+      <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
 
   </Product>

@@ -351,6 +351,16 @@
             determine if the file should be installed on the target system.
             </summary>
         </member>
+        <member name="P:WixSharp.File.NeverOverwrite">
+            <summary>
+            Gets or sets the NeverOverwrite attribute of the associated WiX component.
+            <para>If this attribute is set to 'true', the installer does not install or reinstall the component
+             if a key path file for the component already exists. </para>
+            </summary>
+            <value>
+            The never overwrite.
+            </value>
+        </member>
         <member name="M:WixSharp.Assembly.#ctor">
             <summary>
             Default constructor. Creates instance of the <see cref="T:WixSharp.Assembly"></see> class.
@@ -1382,13 +1392,28 @@
             <param name="element">Element to add.</param>
             <returns>Added <see cref="T:System.Xml.Linq.XElement"/>.</returns>
         </member>
+        <member name="M:WixSharp.Extensions.AddElement(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Adds the element to a given XML element. It is a Fluent version of <see cref="T:System.Xml.Linq.XElement.Add"/>.
+            <para>
+            <c>elementName</c> can be either the name of the element to be added or the sequence of the elements specified by path (e.g. <c>AddElement("Product/Package")</c>).
+            </para>
+            </summary>
+            <param name="obj">The instance of the <see cref="T:System.Xml.Linq.XElement"/>.</param>
+            <param name="elementName">Element to add.</param>
+            <returns>Added <see cref="T:System.Xml.Linq.XElement"/>.</returns>
+        </member>
         <member name="M:WixSharp.Extensions.AddElement(System.Xml.Linq.XElement,System.String,System.String)">
             <summary>
-            Adds the element.
+            Adds the element to a given XML element and sets the attributes of the newly created element.
+            <para>
+            <c>elementName</c> can be either the name of the element to be added or the sequence of the elements specified by path (e.g. <c>AddElement("Product/Package")</c>).
+            </para>
             </summary>
             <param name="obj">The object.</param>
             <param name="elementName">The element.</param>
-            <param name="attributesDefinition">The attributes definition.</param>
+            <param name="attributesDefinition">The attributes definition. Rules of the composing the
+            definition are the same as for <see cref="P:WixSharp.WixEntity.AttributesDefinition"/>.</param>
             <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.ToDictionary(System.String)">
@@ -3232,6 +3257,11 @@
             <param name="name">The name of the shortcut to be installed.</param>
             <param name="location">The directory where the shortcut should be installed.</param>
         </member>
+        <member name="P:WixSharp.FileShortcut.Condition">
+            <summary>
+            Inherited member, which you should not use as the WiX Shortcut element doesn't support Condition.
+            </summary>
+        </member>
         <member name="T:WixSharp.LaunchCondition">
             <summary>
             Defines WiX <c>Condition</c>. <c>Condition</c> is normally associated with <c>CustomActions</c> or WiX elements (e.g. <c>Shortcut</c>). 
@@ -4062,7 +4092,7 @@
         </member>
         <member name="F:WixSharp.Dir.Shortcuts">
             <summary>
-            Collection of the contained <see cref="T:WixSharp.Shortcut"/>s. 
+            Collection of the contained <see cref="T:WixSharp.ExeFileShortcut"/>s. 
             </summary>
         </member>
         <member name="F:WixSharp.Dir.Feature">
@@ -4186,7 +4216,7 @@
         </member>
         <member name="F:WixSharp.Files.ExcludeMasks">
             <summary>
-            Wildcard patterns for files to be excluded from MSI.
+            Wildcard patterns for files to be excluded from MSI. Note, the mask is applied for the whole path not file name only.
             </summary>
         </member>
         <member name="M:WixSharp.Files.GetAllItems(System.String)">
@@ -4479,7 +4509,7 @@
         </member>
         <member name="F:WixSharp.DirFiles.ExcludeMasks">
             <summary>
-            Wildcard patterns for files to be excluded from MSI.
+            Wildcard patterns for files to be excluded from MSI. Note, the mask is applied for the whole path not file name only.
             </summary>
         </member>
         <member name="M:WixSharp.DirFiles.GetFiles(System.String)">
@@ -4997,18 +5027,18 @@
             Path to the file containing the image (e.g. bmp) setup dialogs background. If not specified default image will be used.
             </summary>
         </member>
-        <member name="M:WixSharp.Project.ResolveWildCards">
+        <member name="M:WixSharp.Project.ResolveWildCards(System.Boolean)">
             <summary>
-            Resolves all wild card specifications if any. 
+            Resolves all wild card specifications if any.
             <para>
-            This method is called by <see cref="T:WixSharp.Compiler"/> during the compilation. However it might be convenient 
-            to call it before the compilation if any files matching the wild card mask need to be handled in special  
+            This method is called by <see cref="T:WixSharp.Compiler"/> during the compilation. However it might be convenient
+            to call it before the compilation if any files matching the wild card mask need to be handled in special
             way (e.g. shortcuts created). See <c>WildCard Files</c> example.
-            </para>
-            <remarks>
-            <see cref="M:WixSharp.Project.ResolveWildCards"/> should be called only after <see cref="P:WixSharp.Project.SourceBaseDir"/> is set. 
-            Otherwise wild card pathes may not be resolved correctly.</remarks>
+            </para><remarks><see cref="M:WixSharp.Project.ResolveWildCards(System.Boolean)"/> should be called only after <see cref="P:WixSharp.Project.SourceBaseDir"/> is set.
+            Otherwise wild card paths may not be resolved correctly.</remarks>
             </summary>
+            <param name="ignoreEmptyDirectories">if set to <c>true</c> empty directories are ignored and not added to the project.</param>
+            <returns></returns>
         </member>
         <member name="M:WixSharp.Project.FindFile(System.Predicate{WixSharp.File})">
             <summary>
@@ -5900,6 +5930,13 @@
             <para>
             Set this member to <c>null</c> if you don't want to remove the service at any stage of the installation.
             </para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.ServiceInstaller.DependsOn">
+            <summary>
+            Semicolon separated list of the names of the external service the service being installed depends on. 
+            It supposed to be names (not the display names) of a previously installed services.
+            <para>For example: DependsOn = "Dnscache;Dhcp"</para>
             </summary>
         </member>
         <member name="T:WixSharp.SvcEvent">
