@@ -490,6 +490,7 @@
                                     <Controls:NumericUpDown Grid.Column="3" Grid.Row="4" Maximum="99" Minimum="1" Value="{Binding MotionThreshold}" Margin="3"/>
                                     <Label Content="{T:TranslateExtension LabelWaitMoion}" Grid.Column="1" Grid.Row="5" />
                                     <Controls:NumericUpDown Grid.Column="3" Grid.Row="5" Margin="3" Minimum="1" Maximum="3600" Value="{Binding WaitForMotionSec}"/>
+                                    <Label Content="{T:TranslateExtension LabelCurrentMotion}" Grid.Column="1" Grid.Row="6" />
                                     <Label Grid.Column="3" Grid.Row="6" Content="{Binding CurrentMotionIndex}" />
                                 </Grid>
                             </Expander.Content>
