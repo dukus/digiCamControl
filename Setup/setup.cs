@@ -29,7 +29,7 @@ namespace Setup
                 new File(appFeature, "dcraw.exe"),
                 new File(appFeature, "ffmpeg.exe"),
                 new File(appFeature, "MtpTester.exe"),
-                new File(appFeature, "PhotoBooth.exe",new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
+                //new File(appFeature, "PhotoBooth.exe",new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
                 new File(appFeature, "regwia.bat"),
                 new File(appFeature, "logo.ico"),
@@ -84,6 +84,7 @@ namespace Setup
 
             project.UI = WUI.WixUI_FeatureTree;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
+
             
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Debug\"));
@@ -96,11 +97,16 @@ namespace Setup
             project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
             
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
-            project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
+            project.MajorUpgradeStrategy = new MajorUpgradeStrategy()
+            {
+                UpgradeVersions = VersionRange.OlderThanThis,
+                PreventDowngradingVersions = VersionRange.NewerThanThis,
+                NewerProductInstalledErrorMessage = "Newer version already installed",RemoveExistingProductAfter = Step.InstallInitialize
+            };
             project.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.AddRemoveProgramsIcon = "logo.ico";
-            Compiler.PreserveTempFiles = true;
+            Compiler.PreserveTempFiles = false;
             Compiler.BuildMsi(project);
 
         }
