@@ -99,7 +99,7 @@ namespace Setup
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
             project.MajorUpgradeStrategy = new MajorUpgradeStrategy()
             {
-                UpgradeVersions = VersionRange.OlderThanThis,
+                UpgradeVersions = VersionRange.ThisAndOlder,
                 PreventDowngradingVersions = VersionRange.NewerThanThis,
                 NewerProductInstalledErrorMessage = "Newer version already installed",RemoveExistingProductAfter = Step.InstallInitialize
             };
