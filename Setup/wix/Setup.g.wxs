@@ -6,7 +6,7 @@
 </auto-generated> 
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a34f5677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.86.0" Manufacturer="Duka Istvan" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676">
+  <Product Id="19d12628-7654-4354-a305-9ab0a34f7677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.88.0" Manufacturer="Duka Istvan" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Manufacturer="Duka Istvan" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -125,10 +125,6 @@
 
           <Component Id="Component.EdsImage.dll" Guid="19d12628-7654-4354-a305-9ab019e4d8f1">
             <File Id="EdsImage.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\EdsImage.dll" />
-          </Component>
-
-          <Component Id="Component.FreeImage.dll" Guid="19d12628-7654-4354-a305-9ab086c0471a">
-            <File Id="FreeImage.dll" Source="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\FreeImage.dll" />
           </Component>
 
           <Component Id="Component.GalaSoft.MvvmLight.dll" Guid="19d12628-7654-4354-a305-9ab0a4f9d066">
@@ -954,8 +950,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.86.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.86.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.88.0" IncludeMaximum="yes" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.2.88.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -992,7 +988,6 @@
       <ComponentRef Id="Component.Eagle.dll" />
       <ComponentRef Id="Component.EDSDK.dll" />
       <ComponentRef Id="Component.EdsImage.dll" />
-      <ComponentRef Id="Component.FreeImage.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.dll" />
       <ComponentRef Id="Component.Gma.QrCodeNet.Encoding.dll" />
