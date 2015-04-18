@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.FtpClient;
 using System.Threading;
-using System.Windows;
+using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -29,11 +29,9 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsError = false;
                 var conf = new FtpPluginViewModel(configData);
                 var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
-                var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
+                
+                outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
-                outfile = tp != null && conf.TransformPlugin != BasePluginViewModel.EmptyTransformFilter
-                    ? tp.Execute(item, outfile, configData.ConfigData)
-                    : filename;
                 using (FtpClient conn = new FtpClient())
                 {
                     conn.Host = conf.Server;
@@ -53,6 +51,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
                         }
                     }
                 }
+                // remove unused file
+                if (outfile != item.FileName)
+                {
+                    PhotoUtils.WaitForFile(outfile);
+                    File.Delete(outfile);
+                }
             }
             catch (Exception exception)
             {
@@ -63,18 +67,18 @@ namespace CameraControl.Plugins.AutoExportPlugins
             configData.IsRedy = true;   
         }
 
-        public bool Configure(AutoExportPluginConfig config)
-        {
-            FtpPluginConfig wnd = new FtpPluginConfig();
-            wnd.DataContext = new FtpPluginViewModel(config);
-            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-            wnd.ShowDialog();
-            return true;
-        }
-
         public string Name
         {
             get { return "Ftp"; }
+        }
+
+        public UserControl GetConfig(AutoExportPluginConfig configData)
+        {
+            var cnt = new FtpPluginConfig()
+            {
+                DataContext = new FtpPluginViewModel(configData)
+            };
+            return cnt;
         }
     }
 }

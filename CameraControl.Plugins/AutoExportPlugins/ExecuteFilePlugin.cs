@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows;
+using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -27,11 +23,8 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 return false;
             }
             var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
-            var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
 
-            outfile = tp != null && conf.TransformPlugin != BasePluginViewModel.EmptyTransformFilter
-                ? tp.Execute(item, outfile, configData.ConfigData)
-                : filename;
+            outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
             if (File.Exists(outfile))
             {
@@ -43,22 +36,23 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsError = true;
                 configData.Error = "Output file not found !";
             }
+
             configData.IsRedy = true;
             return true;  
-        }
-
-        public bool Configure(AutoExportPluginConfig config)
-        {
-            ExecuteFilePluginConfig wnd = new ExecuteFilePluginConfig();
-            wnd.DataContext = new ExecuteFilePluginViewModel(config);
-            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-            wnd.ShowDialog();
-            return true;
         }
 
         public string Name
         {
             get { return "Execute File"; }
+        }
+
+        public UserControl GetConfig(AutoExportPluginConfig configData)
+        {
+            var cntr = new ExecuteFilePluginConfig()
+            {
+                DataContext = new ExecuteFilePluginViewModel(configData)
+            };
+            return cntr;
         }
     }
 }

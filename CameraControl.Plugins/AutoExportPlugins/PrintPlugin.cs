@@ -34,11 +34,8 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsError = false;
                 var conf = new PrintPluginViewModel(configData);
                 var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(item.FileName));
-                var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
 
-                outfile = tp != null && conf.TransformPlugin != BasePluginViewModel.EmptyTransformFilter
-                    ? tp.Execute(item, outfile, configData.ConfigData)
-                    : item.FileName;
+                outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
                 System.Printing.PrintCapabilities capabilities = dlg.PrintQueue.GetPrintCapabilities(dlg.PrintTicket);
                 var PageWidth = (int)capabilities.PageImageableArea.ExtentWidth;
@@ -57,7 +54,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                     Stretch = Stretch.Uniform,
                 };
 
-                
+               
                 panel.Children.Add(image);
                 panel.UpdateLayout();
                 panel.Measure(new Size(PageWidth, PageHeight));
@@ -66,6 +63,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 dlg.PrintVisual(panel, item.Name);
                 image.Source = null;
                 panel.Children.Clear();
+                // remove unused file
+                if (outfile != item.FileName)
+                {
+                    PhotoUtils.WaitForFile(outfile);
+                    File.Delete(outfile);
+                }
             }
             catch (Exception exception)
             {
@@ -77,19 +80,18 @@ namespace CameraControl.Plugins.AutoExportPlugins
             configData.IsRedy = true;            
         }
         
-
-        public bool Configure(AutoExportPluginConfig config)
-        {
-            PrintPluginConfig wnd = new PrintPluginConfig();
-            wnd.DataContext = new PrintPluginViewModel(config);
-            wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-            wnd.ShowDialog();
-            return true;
-        }
-
         public string Name
         {
             get { return "Print File"; }
+        }
+
+        public UserControl GetConfig(AutoExportPluginConfig configData)
+        {
+            var cntr = new PrintPluginConfig()
+            {
+                DataContext = new PrintPluginViewModel(configData)
+            };
+            return cntr;
         }
     }
 }

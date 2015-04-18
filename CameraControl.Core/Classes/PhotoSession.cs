@@ -376,9 +376,6 @@ namespace CameraControl.Core.Classes
         [JsonIgnore]
         public RelayCommand<AutoExportPluginConfig> RemovePluginCommand { get; set; }
 
-        [XmlIgnore]
-        [JsonIgnore]
-        public RelayCommand<AutoExportPluginConfig> ConfigurePluginCommand { get; set; }
 
         [XmlIgnore]
         [JsonIgnore]
@@ -392,7 +389,6 @@ namespace CameraControl.Core.Classes
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
             AddPluginCommand = new RelayCommand<IAutoExportPlugin>(AddPlugin);
             RemovePluginCommand = new RelayCommand<AutoExportPluginConfig>(RemovePlugin);
-            ConfigurePluginCommand = new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
             ApplyPluginCommand=new RelayCommand<AutoExportPluginConfig>(ApplyPlugin);
 
             Name = "Default";
@@ -424,14 +420,6 @@ namespace CameraControl.Core.Classes
             PrintSettings = new PrintSettings();
         }
 
-        private void ConfigurePlugin(AutoExportPluginConfig plugin)
-        {
-            var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
-            if (pl != null)
-            {
-                pl.Configure(plugin);
-            }
-        }
 
         private void AddPlugin(IAutoExportPlugin plugin)
         {

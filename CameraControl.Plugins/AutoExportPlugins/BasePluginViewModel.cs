@@ -12,6 +12,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
 {
     public class BasePluginViewModel : ViewModelBase
     {
+
         protected AutoExportPluginConfig _config = new AutoExportPluginConfig();
         public const string EmptyTransformFilter = "NoTransform";
 
@@ -33,15 +34,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             get { return _config.Name; }
             set { _config.Name = value; }
-        }
-
-        public List<string> ImageTransformPlugins
-        {
-            get
-            {
-                var l = ServiceProvider.PluginManager.ImageTransformPlugins.Select(x => x.Name).ToList();
-                return l;
-            }
         }
 
         public UserControl ConfigControl

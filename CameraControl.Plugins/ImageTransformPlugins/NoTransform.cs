@@ -12,10 +12,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "NoTransform"; } 
         }
 
-        public string Execute(FileItem item, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem item,string infile, string dest, ValuePairEnumerator configData)
         {
-            if (item.FileName != dest)
-                File.Copy(item.FileName, dest, true);
+            if (infile != dest)
+                File.Copy(infile, dest, true);
             return dest;
         }
 

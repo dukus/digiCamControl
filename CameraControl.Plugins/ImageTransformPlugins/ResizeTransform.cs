@@ -19,11 +19,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "Resize"; }
         }
 
-        public string Execute(FileItem fileItem, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem fileItem,string infile, string dest, ValuePairEnumerator configData)
         {
             var conf = new ResizeTransformViewModel(configData);
             bool deleteFile = false;
-            var filename = fileItem.FileName;
+            var filename = infile;
             if (fileItem.IsRaw)
             {
                 string s = Path.Combine(Path.GetDirectoryName(fileItem.FileName),

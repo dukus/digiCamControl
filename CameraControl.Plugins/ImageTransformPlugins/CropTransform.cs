@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -20,10 +14,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "Crop"; }
         }
 
-        public string Execute(FileItem item, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem item,string infile, string dest, ValuePairEnumerator configData)
         {
             var conf = new CropTransformViewModel(configData);
-            using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(item.FileName)))
+            using (var fileStream = new MemoryStream(File.ReadAllBytes(infile)))
             {
                 BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
                     BitmapCreateOptions.PreservePixelFormat,
@@ -51,8 +45,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public UserControl GetConfig(ValuePairEnumerator configData)
         {
-            var control = new CropTransformView();
-            control.DataContext = new CropTransformViewModel(configData);
+            var control = new CropTransformView {DataContext = new CropTransformViewModel(configData)};
             return control;
         }
     }

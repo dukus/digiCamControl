@@ -311,6 +311,7 @@
       <DependentUpon>StartUpWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AstroLiveViewViewModel.cs" />
+    <Compile Include="ViewModel\AutoExportPluginEditViewModel.cs" />
     <Compile Include="ViewModel\BarcodeViewModel.cs" />
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\SimpleLiveViewViewModel.cs" />
     <Compile Include="ViewModel\TimelapseViewModel.cs" />
+    <Compile Include="ViewModel\TransformPluginItem.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="windows\AboutWnd.xaml.cs">
       <DependentUpon>AboutWnd.xaml</DependentUpon>
@@ -328,6 +330,9 @@
     </Compile>
     <Compile Include="windows\AstroLiveViewWnd.xaml.cs">
       <DependentUpon>AstroLiveViewWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\AutoExportPluginEdit.xaml.cs">
+      <DependentUpon>AutoExportPluginEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\BarcodeWnd.xaml.cs">
       <DependentUpon>BarcodeWnd.xaml</DependentUpon>
@@ -540,6 +545,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\AstroLiveViewWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\AutoExportPluginEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

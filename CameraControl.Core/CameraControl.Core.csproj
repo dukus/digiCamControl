@@ -169,6 +169,7 @@
   <ItemGroup>
     <Compile Include="Classes\Analytics.cs" />
     <Compile Include="Classes\AutoExportPluginConfig.cs" />
+    <Compile Include="Classes\AutoExportPluginHelper.cs" />
     <Compile Include="Classes\BitmapFile.cs" />
     <Compile Include="Classes\BitmapLoader.cs" />
     <Compile Include="Classes\BraketingClass.cs" />

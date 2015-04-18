@@ -47,6 +47,7 @@ using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Layouts;
+using CameraControl.ViewModel;
 using CameraControl.windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using MahApps.Metro.Controls;
@@ -78,6 +79,7 @@ namespace CameraControl
 
         private bool _sortCameraOreder = true;
 
+        public RelayCommand<AutoExportPluginConfig> ConfigurePluginCommand { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
@@ -94,6 +96,8 @@ namespace CameraControl
 
             ExecuteExportPluginCommand = new RelayCommand<IExportPlugin>(ExecuteExportPlugin);
             ExecuteToolPluginCommand = new RelayCommand<IToolPlugin>(ExecuteToolPlugin);
+            ConfigurePluginCommand = new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
+
             InitializeComponent();
 
 
@@ -114,6 +118,16 @@ namespace CameraControl
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+        }
+
+        private void ConfigurePlugin(AutoExportPluginConfig plugin)
+        {
+            var pluginEdit = new AutoExportPluginEdit
+            {
+                DataContext = new AutoExportPluginEditViewModel(plugin),
+                Owner = this
+            };
+            pluginEdit.ShowDialog();
         }
 
         private void WindowsManager_Event(string cmd, object o)

@@ -9,10 +9,5 @@
         {
             InitializeComponent();
         }
-
-        private void btn_close_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

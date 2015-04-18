@@ -439,7 +439,7 @@
                                                                 </Rectangle.Fill>
                                                             </Rectangle>
                                                         </Button>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ConfigurePluginCommand}" CommandParameter="{Binding}">
+                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding ConfigurePluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}" CommandParameter="{Binding}">
                                                             <Rectangle Width="10" Height="10">
                                                                 <Rectangle.Fill>
                                                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />

@@ -18,19 +18,19 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "Overlay"; }
         }
 
-        public string Execute(FileItem item, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem item, string infile, string dest, ValuePairEnumerator configData)
         {
-            Thread thread=new Thread(()=>ExecuteThread( item, dest,configData));
+            Thread thread = new Thread(() => ExecuteThread(item, infile, dest, configData));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
             thread.Join();
             return dest;
         }
 
-        public string ExecuteThread(FileItem item, string dest, ValuePairEnumerator configData)
+        public string ExecuteThread(FileItem item,string infile, string dest, ValuePairEnumerator configData)
         {
             var conf = new OverlayTransformViewModel(configData);
-            using (var fileStream = new MemoryStream(File.ReadAllBytes(item.FileName)))
+            using (var fileStream = new MemoryStream(File.ReadAllBytes(infile)))
             {
                 BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
                     BitmapCreateOptions.PreservePixelFormat,

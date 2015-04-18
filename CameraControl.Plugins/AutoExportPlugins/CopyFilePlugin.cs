@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -36,29 +37,24 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
 
             var outfile = Path.Combine(conf.Path, name);
-            var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(conf.TransformPlugin);
-            if (tp != null)
-            {
-                tp.Execute(item, outfile, configData.ConfigData);
-            }
+            AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile); 
+            
             configData.IsRedy = true;
             return true;            
-        }
-
-        public bool Configure(AutoExportPluginConfig config)
-        {
-            var wnd = new CopyFilePluginConfig
-            {
-                DataContext = new CopyFilePluginViewModel(config),
-                Owner = ServiceProvider.PluginManager.SelectedWindow as Window
-            };
-            wnd.ShowDialog();
-            return true;
         }
 
         public string Name
         {
             get { return "Copy File"; } 
+        }
+
+        public UserControl GetConfig(AutoExportPluginConfig configData)
+        {
+            var cntr = new CopyFilePluginConfig()
+            {
+                DataContext = new CopyFilePluginViewModel(configData)
+            };
+            return cntr;
         }
     }
 }

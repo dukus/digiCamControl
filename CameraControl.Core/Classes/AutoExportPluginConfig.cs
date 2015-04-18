@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices.Classes;
@@ -13,14 +10,56 @@ namespace CameraControl.Core.Classes
         private bool _isError;
         private string _error;
         private bool _isRedy;
+        private ObservableCollection<ValuePairEnumerator> _configDataCollection;
+        private bool _isEnabled;
+        private string _name;
 
         [XmlAttribute]
         public string Type { get; set; }
         public ValuePairEnumerator ConfigData { get; set; }
+
+        public ObservableCollection<ValuePairEnumerator> ConfigDataCollection
+        {
+            get
+            {
+                if (_configDataCollection.Count == 0)
+                {
+                    // for compatibility for older versions
+                    var pl = ConfigData["TransformPlugin"];
+                    if (!string.IsNullOrEmpty(pl))
+                    {
+                        ConfigDataCollection.Add(ConfigData);
+                    }
+                }
+                return _configDataCollection;
+            }
+            set
+            {
+                _configDataCollection = value;
+            }
+        }
+
         [XmlAttribute]
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                _isEnabled = value;
+                NotifyPropertyChanged("IsEnabled");
+            }
+        }
+
         [XmlAttribute]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
 
         [XmlIgnore]
         public bool IsError
@@ -69,11 +108,13 @@ namespace CameraControl.Core.Classes
             IsError = false;
             IsRedy = true;
             ConfigData = new ValuePairEnumerator();
+            ConfigDataCollection = new ObservableCollection<ValuePairEnumerator>();
         }
 
         public AutoExportPluginConfig()
         {
             ConfigData = new ValuePairEnumerator();
+            ConfigDataCollection = new ObservableCollection<ValuePairEnumerator>();
             IsError = false;
             IsRedy = true;
         }

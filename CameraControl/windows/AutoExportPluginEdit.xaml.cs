@@ -9,20 +9,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CameraControl.Plugins.AutoExportPlugins
+namespace CameraControl.windows
 {
     /// <summary>
-    /// Interaction logic for CopyFilePluginConfig.xaml
+    /// Interaction logic for AutoExportPluginEdit.xaml
     /// </summary>
-    public partial class CopyFilePluginConfig 
+    public partial class AutoExportPluginEdit 
     {
-        public CopyFilePluginConfig()
+        public AutoExportPluginEdit()
         {
             InitializeComponent();
         }
-
     }
 }
