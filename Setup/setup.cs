@@ -100,9 +100,11 @@ namespace Setup
             project.MajorUpgradeStrategy = new MajorUpgradeStrategy()
             {
                 UpgradeVersions = VersionRange.ThisAndOlder,
-                PreventDowngradingVersions = VersionRange.NewerThanThis,
-                NewerProductInstalledErrorMessage = "Newer version already installed",RemoveExistingProductAfter = Step.InstallInitialize
+                PreventDowngradingVersions = VersionRange.ThisAndNewer,
+                NewerProductInstalledErrorMessage = "Newer version already installed",
+                RemoveExistingProductAfter = Step.InstallInitialize
             };
+            project.MajorUpgradeStrategy.UpgradeVersions.MigrateFeatures = true;
             project.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.AddRemoveProgramsIcon = "logo.ico";

@@ -451,6 +451,7 @@ namespace CameraControl
                     try
                     {
                         pl.Execute(_selectedItem, plugin);
+                        ServiceProvider.Analytics.PluginExecute(plugin.Type);
                     }
                     catch (Exception ex)
                     {
