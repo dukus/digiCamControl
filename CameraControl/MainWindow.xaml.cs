@@ -911,12 +911,13 @@ namespace CameraControl
         private void but_wifi_Click(object sender, RoutedEventArgs e)
         {
             try
-
             {
-                var wnd = new GetIpWnd { Ip = "192.168.1.1" };
+                if (string.IsNullOrEmpty(ServiceProvider.Settings.WifiIp))
+                    ServiceProvider.Settings.WifiIp = "192.168.1.1";
+                var wnd = new GetIpWnd();
                 wnd.Owner = this;
                 if (wnd.ShowDialog() == true)
-                    ServiceProvider.DeviceManager.ConnectToServer(wnd.Ip, wnd.Type);
+                    ServiceProvider.DeviceManager.ConnectToServer(ServiceProvider.Settings.WifiIp, ServiceProvider.Settings.SelectedWifi);
             }
             catch (Exception exception)
             {

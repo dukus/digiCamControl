@@ -29,14 +29,14 @@ namespace CameraControl.windows
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            txt_ip.Text = Ip;
+            //txt_ip.Text = Ip;
         }
 
         private void btn_conect_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            Ip = txt_ip.Text;
-            Type = cmb_type.SelectedIndex;
+            //Ip = txt_ip.Text;
+            //Type = cmb_type.SelectedIndex;
         }
 
     }

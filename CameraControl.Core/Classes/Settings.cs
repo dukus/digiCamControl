@@ -752,6 +752,8 @@ namespace CameraControl.Core.Classes
         private bool _flipPreview;
         private int _thumbHeigh;
         private bool _allowWebserverActions;
+        private int _selectedWifi;
+        private string _wifiIp;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -814,6 +816,25 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public int SelectedWifi
+        {
+            get { return _selectedWifi; }
+            set
+            {
+                _selectedWifi = value;
+                NotifyPropertyChanged("SelectedWifi");
+            }
+        }
+
+        public string WifiIp
+        {
+            get { return _wifiIp; }
+            set
+            {
+                _wifiIp = value;
+                NotifyPropertyChanged("WifiIp");
+            }
+        }
 
         public bool FullScreenInSecondaryMonitor { get; set; }
 
