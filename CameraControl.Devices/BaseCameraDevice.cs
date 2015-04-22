@@ -193,8 +193,6 @@ namespace CameraControl.Devices
         {
             get
             {
-                if (_focusMode == null)
-                    Log.Debug("FocusMode Null");
                 return _focusMode;
             }
             set
