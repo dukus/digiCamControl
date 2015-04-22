@@ -109,27 +109,28 @@ namespace CameraControl.Core.Classes
             get { return _folder; }
             set
             {
-                if (_folder != value)
-                {
-                    if (!Directory.Exists(value))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(value);
-                        }
-                        catch (Exception exception)
-                        {
-                            string folder = Path.Combine(
-                                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Name);
-                            if (value != folder)
-                                value = folder;
-                            Log.Error("Error creating session folder", exception);
-                        }
-                    }
-                    _systemWatcher.Path = value;
-                    _systemWatcher.EnableRaisingEvents = true;
-                    _systemWatcher.IncludeSubdirectories = true;
-                }
+                //if (_folder != value)
+                //{
+                    
+                //    if (!Directory.Exists(value))
+                //    {
+                //        try
+                //        {
+                //            Directory.CreateDirectory(value);
+                //        }
+                //        catch (Exception exception)
+                //        {
+                //            string folder = Path.Combine(
+                //                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Name);
+                //            if (value != folder)
+                //                value = folder;
+                //            Log.Error("Error creating session folder", exception);
+                //        }
+                //    }
+                //    _systemWatcher.Path = value;
+                //    _systemWatcher.EnableRaisingEvents = true;
+                //    _systemWatcher.IncludeSubdirectories = true;
+                //}
                 _folder = value;
                 NotifyPropertyChanged("Folder");
             }
@@ -672,18 +673,26 @@ namespace CameraControl.Core.Classes
 
         public string CopyBackUp(string source, string dest)
         {
-            if (string.IsNullOrEmpty(BackUpPath))
-                return null;
-            if (!Directory.Exists(BackUpPath))
-                Directory.CreateDirectory(BackUpPath);
-            string backupFile = Path.Combine(BackUpPath, Path.GetFileName(dest));
-            // if file already exist with same name generate a unique name
-            if (File.Exists(backupFile))
+            try
             {
-                backupFile = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
+                if (string.IsNullOrEmpty(BackUpPath))
+                    return null;
+                if (!Directory.Exists(BackUpPath))
+                    Directory.CreateDirectory(BackUpPath);
+                string backupFile = Path.Combine(BackUpPath, Path.GetFileName(dest));
+                // if file already exist with same name generate a unique name
+                if (File.Exists(backupFile))
+                {
+                    backupFile = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
+                }
+                File.Copy(source, backupFile);
+                return backupFile;
             }
-            File.Copy(source, backupFile);
-            return backupFile;
+            catch (Exception ex)
+            {
+                Log.Error("Unable to make backup ", ex);
+                return "";
+            }
         }
 
         public AsyncObservableCollection<AutoExportPluginConfig> AutoExportPluginConfigs { get; set; }

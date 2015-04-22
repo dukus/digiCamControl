@@ -30,7 +30,7 @@
                 </Grid.RowDefinitions>
                
                 <Label Grid.Row="2" Content="Path to executable"/>
-                <TextBox Grid.Row="3" Text="{Binding PathToExe}" Margin="2" IsReadOnly="True"/>
+                <TextBox Grid.Row="3" Text="{Binding PathToExe}" Margin="2" />
                 <Button Grid.Row="4" Content="Browse" Margin="2" Command="{Binding BrowseCommand}"/>
 
                 <Label Grid.Row="5" Content="Parameters"/>

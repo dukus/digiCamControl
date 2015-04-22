@@ -364,7 +364,16 @@ namespace CameraControl
                         return;
                     }
                 }
+
                 StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferBegin;
+
+                string tempFile = Path.GetTempFileName();
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+
+                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+
                 string fileName = "";
                 if (!session.UseOriginalFilename || eventArgs.CameraDevice.CaptureInSdRam)
                 {
@@ -399,20 +408,16 @@ namespace CameraControl
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName));
                 }
 
-                Log.Debug("Transfer started :" + fileName);
-
-                string tempFile = Path.GetTempFileName();
-
-                if (File.Exists(tempFile))
-                    File.Delete(tempFile);
-
-                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
-
                 File.Copy(tempFile, fileName);
 
                 string backupfile = null;
                 if (session.BackUp)
+                {
                     backupfile = session.CopyBackUp(tempFile, fileName);
+                    if (string.IsNullOrEmpty(backupfile))
+                        StaticHelper.Instance.SystemMessage = "Unable to save the backup";
+                }
+
 
                 if (File.Exists(tempFile))
                     File.Delete(tempFile);
@@ -509,14 +514,14 @@ namespace CameraControl
                 {
                     PhotoUtils.PlayCaptureSound();
                 }
+                Log.Debug("Photo transfer done.");
             }
             catch (Exception ex)
             {
                 eventArgs.CameraDevice.IsBusy = false;
-                StaticHelper.Instance.SystemMessage = string.Format(TranslationStrings.MsgPhotoTransferError, ex.Message);
+                StaticHelper.Instance.SystemMessage =TranslationStrings.MsgPhotoTransferError+" "+ ex.Message;
                 Log.Error("Transfer error !", ex);
             }
-            Log.Debug("Photo transfer done.");
             // not indicated to be used 
             GC.Collect();
             //GC.WaitForPendingFinalizers();

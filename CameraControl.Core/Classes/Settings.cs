@@ -980,13 +980,16 @@ namespace CameraControl.Core.Classes
             {
                 if (session == null)
                     return;
+                if (!Directory.Exists(session.Folder))
+                    return;
+
                 FileItem[] fileItems = new FileItem[session.Files.Count];
                 session.Files.CopyTo(fileItems, 0);
-                //session.Files.Clear();
-                if (!Directory.Exists(session.Folder))
-                {
-                    Directory.CreateDirectory(session.Folder);
-                }
+                ////session.Files.Clear();
+                //if (!Directory.Exists(session.Folder))
+                //{
+                //    Directory.CreateDirectory(session.Folder);
+                //}
                 string[] files = Directory.GetFiles(session.Folder);
                 foreach (string file in files)
                 {
