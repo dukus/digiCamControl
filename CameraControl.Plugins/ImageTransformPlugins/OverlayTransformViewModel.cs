@@ -220,6 +220,18 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             set { _config["FontSize"] = value.ToString(CultureInfo.InvariantCulture); }
         }
 
+        public int Transparency
+        {
+            get
+            {
+                var val = GetInt(_config["Transparency"]);
+                if (val == 0)
+                    val = 100;
+                return val;
+            }
+            set { _config["Transparency"] = value.ToString(CultureInfo.InvariantCulture); }
+        }
+
         public string Font
         {
             get { return _config["Font"]??"Arial"; }

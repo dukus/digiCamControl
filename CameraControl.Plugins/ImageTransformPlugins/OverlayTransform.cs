@@ -36,7 +36,8 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     BitmapCreateOptions.PreservePixelFormat,
                     BitmapCacheOption.OnLoad);
                 WriteableBitmap writeableBitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-
+                writeableBitmap.Freeze();
+                
                 Grid grid = new Grid
                 {
                     Width = writeableBitmap.PixelWidth,
@@ -48,7 +49,8 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 var size = new Size(writeableBitmap.PixelWidth, writeableBitmap.PixelWidth);
                 grid.Measure(size);
                 grid.Arrange(new Rect(size));
-
+                
+                Image overlay = new Image();
                 Image image = new Image { Width = writeableBitmap.PixelWidth, Height = writeableBitmap.PixelHeight };
                 image.BeginInit();
                 image.Source = writeableBitmap;
@@ -66,7 +68,8 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     Text = text,
                     Foreground = (SolidColorBrush) new BrushConverter().ConvertFromString(conf.FontColor),
                     FontFamily = (FontFamily) new FontFamilyConverter().ConvertFromString(conf.Font),
-                    FontSize = conf.FontSize
+                    FontSize = conf.FontSize,
+                    Opacity = conf.Transparency/100.00
                 };
                 if (conf.A11)
                 {
@@ -117,8 +120,8 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 textBlock.Margin = new Thickness(conf.Margins);
                 if (File.Exists(conf.OverlayFile))
                 {
-                    Image overlay = new Image();
                     overlay.Source = BitmapLoader.Instance.LoadImage(conf.OverlayFile, 0, 0);
+                    overlay.Opacity = textBlock.Opacity;
                     if (!conf.StrechOverlay)
                     {
                         overlay.HorizontalAlignment = textBlock.HorizontalAlignment;
@@ -134,9 +137,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     grid.Children.Add(overlay);
                     grid.UpdateLayout();
                 }
+               
                 grid.Children.Add(textBlock);
                 grid.UpdateLayout();
-
+  
                 BitmapLoader.Save2Jpg(
                     BitmapLoader.SaveImageSource(grid, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight), dest);
             }

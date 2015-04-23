@@ -23,6 +23,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
@@ -78,5 +79,7 @@
         <TextBox Grid.Row="6" Margin="2" Text="{Binding OverlayFile}"/>
         <Button Grid.Row="7" Content="Browse" Margin="2" Command="{Binding BrowseCommand}"/>
         <CheckBox Grid.Row="8" Content="Strech overlay image" Margin="2" IsChecked="{Binding StrechOverlay}"/>
+        <Label Grid.Row="9" Content="Transparency" Padding="1" />
+        <Slider Grid.Row="10" Value="{Binding Transparency}" Minimum="1" Maximum="100"/>
     </Grid>
 </UserControl>

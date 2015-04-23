@@ -254,7 +254,6 @@ namespace CameraControl.Core.Classes
         public static BitmapSource SaveImageSource(FrameworkElement obj, int width, int height)
         {
             // Save current canvas transform
-            Transform transform = obj.LayoutTransform;
             obj.LayoutTransform = null;
             obj.Width = width;
             obj.Height = height;
@@ -271,15 +270,15 @@ namespace CameraControl.Core.Classes
             // force control to Update
             obj.Measure(size);
             obj.Arrange(new Rect(size));
-
             RenderTargetBitmap bmp = new RenderTargetBitmap(
                 width, height, 96, 96, PixelFormats.Pbgra32);
 
             bmp.Render(obj);
 
-            // return values as they were before
-            obj.LayoutTransform = transform;
-            obj.Margin = margin;
+            //// return values as they were before
+            //obj.LayoutTransform = transform;
+            //obj.Margin = margin;
+            obj = null;
             return bmp;
         }
 
