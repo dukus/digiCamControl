@@ -73,13 +73,15 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="200"/>
                     </Grid.RowDefinitions>
                     <TextBox Name="TextBoxCmd" Margin="3" KeyDown="TextBoxCmd_KeyDown"/>
                     <Button Grid.Row="0" Grid.Column="1" Content="Execute" Click="Button_Click" Margin="3"/>
-                    <ListBox Grid.Row="1" Name="lst_cmd" MouseDoubleClick="lst_cmd_MouseDoubleClick" Grid.ColumnSpan="2"/>
-                    <TextBox Grid.Row="2" TextWrapping="Wrap" Text="" Name="TextBlockError" Grid.ColumnSpan="2"/>
+                    <Label Grid.Row="1" Content="More help" FontStyle="Italic" Cursor="Hand" MouseDown="Label_MouseDown"/>
+                    <ListBox Grid.Row="3" Name="lst_cmd" MouseDoubleClick="lst_cmd_MouseDoubleClick" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="4" TextWrapping="Wrap" Text="" Name="TextBlockError" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tcl script"  Name="TclTabItem">

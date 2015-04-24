@@ -22,6 +22,12 @@ namespace CameraControl.Core.Scripting
                     CameraHelper.Capture();
                     ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
                     return null;
+                case "capturenoaf":
+                    //Task.Factory.StartNew(CameraHelper.Capture);
+                    //Thread.Sleep(200);
+                    CameraHelper.CaptureNoAf();
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
+                    return null;
                 //case "startbulb":
                 //    CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
                 //    return null;

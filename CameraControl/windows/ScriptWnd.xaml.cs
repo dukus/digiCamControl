@@ -559,5 +559,10 @@ namespace CameraControl.windows
                 Button_Click(null, null);
 
         }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PhotoUtils.Run("http://digicamcontrol.com/wiki/index.php/Single_Command_System");
+        }
     }
 }
