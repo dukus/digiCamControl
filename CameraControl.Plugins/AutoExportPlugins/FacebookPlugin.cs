@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.FtpClient;
+using System.Text;
 using System.Threading;
 using System.Windows.Controls;
-using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 
 namespace CameraControl.Plugins.AutoExportPlugins
 {
-    public class FtpPlugin : IAutoExportPlugin
+    public class FacebookPlugin : IAutoExportPlugin
     {
         public bool Execute(FileItem item, AutoExportPluginConfig configData)
         {
@@ -20,37 +22,19 @@ namespace CameraControl.Plugins.AutoExportPlugins
             return true;
         }
 
-        private void Send(FileItem item, AutoExportPluginConfig configData)
+        public void Send(FileItem item, AutoExportPluginConfig configData)
         {
             try
             {
                 var filename = item.FileName;
                 configData.IsRedy = false;
                 configData.IsError = false;
-                var conf = new FtpPluginViewModel(configData);
+                var conf = new FacebookPluginViewModel(configData);
 
                 var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
-                using (FtpClient conn = new FtpClient())
-                {
-                    conn.Host = conf.Server;
-                    conn.Credentials = new NetworkCredential(conf.User, conf.Pass);
-                    if (!string.IsNullOrWhiteSpace(conf.ServerPath))
-                        conn.SetWorkingDirectory(conf.ServerPath);
-                    using (Stream ostream = conn.OpenWrite(Path.GetFileName(outfile)))
-                    {
-                        try
-                        {
-                            var data = File.ReadAllBytes(outfile);
-                            ostream.Write(data, 0, data.Length);
-                        }
-                        finally
-                        {
-                            ostream.Close();
-                        }
-                    }
-                }
+
                 // remove unused file
                 if (outfile != item.FileName)
                 {
@@ -60,23 +44,23 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
             catch (Exception exception)
             {
-                Log.Error("Error senf ftp file", exception);
+                Log.Error("Error send facebook file", exception);
                 configData.IsError = true;
                 configData.Error = exception.Message;
             }
-            configData.IsRedy = true;   
+            configData.IsRedy = true;
         }
 
         public string Name
         {
-            get { return "Ftp"; }
+            get { return "Facebook"; }
         }
 
         public UserControl GetConfig(AutoExportPluginConfig configData)
         {
-            var cnt = new FtpPluginConfig()
+            var cnt = new FacebookPluginConfig()
             {
-                DataContext = new FtpPluginViewModel(configData)
+                DataContext = new FacebookPluginViewModel()
             };
             return cnt;
         }

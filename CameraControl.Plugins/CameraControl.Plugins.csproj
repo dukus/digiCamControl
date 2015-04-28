@@ -72,6 +72,9 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net40-client\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.1.1.35051, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
@@ -135,6 +138,11 @@
     </Compile>
     <Compile Include="AutoExportPlugins\ExecuteFilePlugin.cs" />
     <Compile Include="AutoExportPlugins\ExecuteFilePluginViewModel.cs" />
+    <Compile Include="AutoExportPlugins\FacebookPlugin.cs" />
+    <Compile Include="AutoExportPlugins\FacebookPluginConfig.xaml.cs">
+      <DependentUpon>FacebookPluginConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoExportPlugins\FacebookPluginViewModel.cs" />
     <Compile Include="AutoExportPlugins\FtpPlugin.cs" />
     <Compile Include="AutoExportPlugins\FtpPluginConfig.xaml.cs">
       <DependentUpon>FtpPluginConfig.xaml</DependentUpon>
@@ -238,6 +246,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AutoExportPlugins\CopyFilePluginConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutoExportPlugins\FacebookPluginConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

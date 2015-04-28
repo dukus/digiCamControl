@@ -73,6 +73,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new ExecuteFilePlugin());
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new PrintPlugin());
                 ServiceProvider.PluginManager.AutoExportPlugins.Add(new FtpPlugin());
+                ServiceProvider.PluginManager.AutoExportPlugins.Add(new FacebookPlugin());
 
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new NoTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ResizeTransform());
