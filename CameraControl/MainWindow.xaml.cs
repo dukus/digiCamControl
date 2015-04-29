@@ -922,7 +922,10 @@ namespace CameraControl
                 var wnd = new GetIpWnd();
                 wnd.Owner = this;
                 if (wnd.ShowDialog() == true)
-                    ServiceProvider.DeviceManager.ConnectToServer(ServiceProvider.Settings.WifiIp, ServiceProvider.Settings.SelectedWifi);
+                {
+                    ServiceProvider.DeviceManager.ConnectToServer(ServiceProvider.Settings.WifiIp,
+                        ServiceProvider.Settings.SelectedWifi);
+                }
             }
             catch (Exception exception)
             {

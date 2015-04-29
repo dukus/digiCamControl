@@ -6,7 +6,7 @@
 </auto-generated> 
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a34fa677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.91.0" Manufacturer="Duka Istvan" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676">
+  <Product Id="19d12628-7654-4354-a305-9ab0a34fb677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.92.0" Manufacturer="Duka Istvan" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Manufacturer="Duka Istvan" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -125,6 +125,10 @@
 
           <Component Id="Component.EdsImage.dll" Guid="19d12628-7654-4354-a305-9ab019e4d8f1">
             <File Id="EdsImage.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\EdsImage.dll" />
+          </Component>
+
+          <Component Id="Component.Facebook.dll" Guid="19d12628-7654-4354-a305-9ab0d400b85d">
+            <File Id="Facebook.dll" Source="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Facebook.dll" />
           </Component>
 
           <Component Id="Component.GalaSoft.MvvmLight.dll" Guid="19d12628-7654-4354-a305-9ab0a4f9d066">
@@ -910,8 +914,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.91.0" IncludeMaximum="yes" Property="UPGRADEFOUND" MigrateFeatures="yes" />
-      <UpgradeVersion Minimum="1.2.91.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.92.0" IncludeMaximum="yes" Property="UPGRADEFOUND" MigrateFeatures="yes" />
+      <UpgradeVersion Minimum="1.2.92.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -948,6 +952,7 @@
       <ComponentRef Id="Component.Eagle.dll" />
       <ComponentRef Id="Component.EDSDK.dll" />
       <ComponentRef Id="Component.EdsImage.dll" />
+      <ComponentRef Id="Component.Facebook.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.dll" />
       <ComponentRef Id="Component.Gma.QrCodeNet.Encoding.dll" />

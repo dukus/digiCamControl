@@ -56,7 +56,6 @@ namespace CameraControl.Devices
         private bool _connectionInProgress = false;
         private DeviceDescriptorEnumerator _deviceEnumerator;
         private EosFramework _framework;
-        private DdClient _client = new DdClient();
         private object _locker = new object();
 
         public Dictionary<ICameraDevice, byte[]> LiveViewImage;
@@ -158,7 +157,7 @@ namespace CameraControl.Devices
                                   {"D800", typeof (NikonD800)},
                                   {"D800E", typeof (NikonD800)},
                                   {"D800e", typeof (NikonD800)},
-                                  {"D810", typeof (NikonD800)},
+                                  {"D810", typeof (NikonD600)},
                                   {"D90", typeof (NikonD90)},
                                   {"V1", typeof (NikonD5100)},
                                   {"V2", typeof (NikonD5100)},
