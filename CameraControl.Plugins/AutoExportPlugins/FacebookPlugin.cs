@@ -29,11 +29,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 var filename = item.FileName;
                 configData.IsRedy = false;
                 configData.IsError = false;
-                var conf = new FacebookPluginViewModel(configData);
+                var conf = new FacebookPluginViewModel(configData, false);
 
                 var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
+                conf.UploadFile(outfile);
 
                 // remove unused file
                 if (outfile != item.FileName)
@@ -60,7 +61,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             var cnt = new FacebookPluginConfig()
             {
-                DataContext = new FacebookPluginViewModel()
+                DataContext = new FacebookPluginViewModel(configData)
             };
             return cnt;
         }

@@ -192,6 +192,7 @@
     <Compile Include="Classes\KeyboardHook.cs" />
     <Compile Include="Classes\LiveviewSettings.cs" />
     <Compile Include="Classes\MessageEventArgs.cs" />
+    <Compile Include="Classes\MiniWebServer.cs" />
     <Compile Include="Classes\PhotoSession.cs" />
     <Compile Include="Classes\PhotoUtils.cs" />
     <Compile Include="Classes\PipeServerT.cs" />

@@ -8,12 +8,26 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
         <autoExportPlugins:FacebookPluginViewModel/>
-    </UserControl.DataContext>    
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="13*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Content="Login" Command="{Binding LoginCommand}"/>
+        <Button Content="Login" Command="{Binding LoginCommand}" Visibility="{Binding IsLogedOut, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Button Content="Logout" Command="{Binding LogoutCommand}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <StackPanel Grid.Row="1" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical">
+            <Label Content="{Binding UserName}"/>
+            <Label Content="User pages"/>
+            <ComboBox ItemsSource="{Binding Pages}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedPage}"/>
+            <Label Content="Albums"/>
+            <ComboBox ItemsSource="{Binding Albums}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedAlbum}"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>
