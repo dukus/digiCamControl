@@ -27,7 +27,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Grid Background="LightGray">
@@ -62,7 +62,7 @@
 
             </Viewbox>
         </Grid>
-        <Expander Grid.Column="1" ExpandDirection="Right" IsExpanded="True">
+        <Expander Grid.Column="1" ExpandDirection="Left" IsExpanded="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
