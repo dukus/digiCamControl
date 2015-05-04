@@ -58,6 +58,7 @@ namespace CameraControl.Core.Classes
             {
                 _name = value;
                 NotifyPropertyChanged("Name");
+                NotifyPropertyChanged("DisplayName");
             }
         }
 

@@ -586,7 +586,13 @@ namespace CameraControl.Core.Classes
 
         public FileItem GetFile(string fileName)
         {
-            return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.FileName, fileName, StringComparison.CurrentCultureIgnoreCase));
+            if (string.IsNullOrEmpty(fileName))
+                return null;
+            return
+                Files.FirstOrDefault(
+                    fileItem =>
+                        fileItem != null && !string.IsNullOrEmpty(fileItem.FileName) &&
+                        String.Equals(fileItem.FileName, fileName, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public FileItem GetByName(string name)
