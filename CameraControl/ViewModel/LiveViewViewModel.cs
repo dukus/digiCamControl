@@ -436,7 +436,11 @@ namespace CameraControl.ViewModel
         public bool DetectMotion
         {
             get { return CameraProperty.LiveviewSettings.DetectMotion; }
-            set { CameraProperty.LiveviewSettings.DetectMotion = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.DetectMotion = value;
+                RaisePropertyChanged(()=>DetectMotion);
+            }
         }
 
         public bool DetectMotionArea
@@ -1100,13 +1104,22 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                if (CameraDevice.LiveViewImageZoomRatio == null || CameraDevice.LiveViewImageZoomRatio.Values == null ||
-                    CameraDevice.LiveViewImageZoomRatio.Values.Count < 2)
+                if (CameraDevice.LiveViewImageZoomRatio == null || CameraDevice.LiveViewImageZoomRatio.Values == null)
                     return;
-                CameraDevice.LiveViewImageZoomRatio.Value = CameraDevice.LiveViewImageZoomRatio.Value ==
-                                                            CameraDevice.LiveViewImageZoomRatio.Values[0]
-                    ? CameraDevice.LiveViewImageZoomRatio.Values[CameraDevice.LiveViewImageZoomRatio.Values.Count - 2]
-                    : CameraDevice.LiveViewImageZoomRatio.Values[0];
+                if (CameraDevice.LiveViewImageZoomRatio.Values.Count == 1)
+                {
+                    CameraDevice.LiveViewImageZoomRatio.Value = CameraDevice.LiveViewImageZoomRatio.Value ==
+                                                                CameraDevice.LiveViewImageZoomRatio.Values[0]
+                        ? CameraDevice.LiveViewImageZoomRatio.Values[1]
+                        : CameraDevice.LiveViewImageZoomRatio.Values[0];                    
+                }
+                else
+                {
+                    CameraDevice.LiveViewImageZoomRatio.Value = CameraDevice.LiveViewImageZoomRatio.Value ==
+                                                                CameraDevice.LiveViewImageZoomRatio.Values[0]
+                        ? CameraDevice.LiveViewImageZoomRatio.Values[CameraDevice.LiveViewImageZoomRatio.Values.Count - 2]
+                        : CameraDevice.LiveViewImageZoomRatio.Values[0];
+                }
             }
             catch (Exception ex)
             {
@@ -1117,12 +1130,14 @@ namespace CameraControl.ViewModel
         private void InitOverlay()
         {
             Overlays = new AsyncObservableCollection<ValuePair>();
-            Grids = new AsyncObservableCollection<string>();
-            Grids.Add(TranslationStrings.LabelNone);
-            Grids.Add(TranslationStrings.LabelRuleOfThirds);
-            Grids.Add(TranslationStrings.LabelComboGrid);
-            Grids.Add(TranslationStrings.LabelDiagonal);
-            Grids.Add(TranslationStrings.LabelSplit);
+            Grids = new AsyncObservableCollection<string>
+            {
+                TranslationStrings.LabelNone,
+                TranslationStrings.LabelRuleOfThirds,
+                TranslationStrings.LabelComboGrid,
+                TranslationStrings.LabelDiagonal,
+                TranslationStrings.LabelSplit
+            };
             if (Directory.Exists(ServiceProvider.Settings.OverlayFolder))
             {
                 string[] files = Directory.GetFiles(ServiceProvider.Settings.OverlayFolder, "*.png");

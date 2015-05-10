@@ -305,12 +305,12 @@
                                 </Grid>
                             </Expander.Content>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                        <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                          Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
                             <StackPanel>
-                                <Label Content="{T:TranslateExtension LabelCaptureDelay}" Margin="20,0"/>
+                                <Label Content="{T:Translate LabelCaptureDelay}" Margin="20,0"/>
                                 <Controls:NumericUpDown Minimum="0" Value="{Binding CaptureDelay}" IsEnabled="{Binding IsFree}" Margin="20,3"/>
-                                <local:LiveViewControlerSimple DataContext="{Binding Path=CameraDevice}" Margin="20,3"/>
+                                <local:LiveViewControlerSimple DataContext="{Binding CameraDevice}" Margin="20,3"/>
                             </StackPanel>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
@@ -482,14 +482,14 @@
 
                                     </Grid.RowDefinitions>
                                     <CheckBox Content="{T:TranslateExtension LabelActivateMotionDetection}" Grid.Column="1" IsChecked="{Binding DetectMotion}" Grid.ColumnSpan="3" Margin="3" VerticalAlignment="Center"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelCaptureWhenMove}" Grid.Column="1" Grid.Row="2" IsChecked="{Binding TriggerOnMotion}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelAutofocusBeforeCapture}" Grid.Column="1" Grid.Row="1" IsChecked="{Binding MotionAutofocusBeforCapture}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelDetectArea}" Grid.Column="1" Grid.Row="3" IsChecked="{Binding DetectMotionArea}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center"/>
+                                    <CheckBox Content="{T:TranslateExtension LabelCaptureWhenMove}" Grid.Column="1" Grid.Row="2" IsChecked="{Binding TriggerOnMotion}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
+                                    <CheckBox Content="{T:TranslateExtension LabelAutofocusBeforeCapture}" Grid.Column="1" Grid.Row="1" IsChecked="{Binding MotionAutofocusBeforCapture}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
+                                    <CheckBox Content="{T:TranslateExtension LabelDetectArea}" Grid.Column="1" Grid.Row="3" IsChecked="{Binding DetectMotionArea}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
 
                                     <Label Content="{T:TranslateExtension LabelThreshold}" Grid.Column="1" Grid.Row="4" />
-                                    <Controls:NumericUpDown Grid.Column="3" Grid.Row="4" Maximum="99" Minimum="1" Value="{Binding MotionThreshold}" Margin="3"/>
+                                    <Controls:NumericUpDown Grid.Column="3" Grid.Row="4" Maximum="99" Minimum="1" Value="{Binding MotionThreshold}" Margin="3" IsEnabled="{Binding DetectMotion}"/>
                                     <Label Content="{T:TranslateExtension LabelWaitMoion}" Grid.Column="1" Grid.Row="5" />
-                                    <Controls:NumericUpDown Grid.Column="3" Grid.Row="5" Margin="3" Minimum="1" Maximum="3600" Value="{Binding WaitForMotionSec}"/>
+                                    <Controls:NumericUpDown Grid.Column="3" Grid.Row="5" Margin="3" Minimum="1" Maximum="3600" Value="{Binding WaitForMotionSec}" IsEnabled="{Binding DetectMotion}"/>
                                     <Label Content="{T:TranslateExtension LabelCurrentMotion}" Grid.Column="1" Grid.Row="6" />
                                     <Label Grid.Column="3" Grid.Row="6" Content="{Binding CurrentMotionIndex}" />
                                 </Grid>
