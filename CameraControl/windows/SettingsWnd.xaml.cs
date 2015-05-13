@@ -210,5 +210,16 @@ namespace CameraControl.windows
             PhotoUtils.Run("https://www.transifex.com/projects/p/digicamcontrol/");
         }
 
+        private void btn_browse_scriptfile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Tcl Script file(*.tcl)|*.tcl|All files|*.*";
+            dialog.FileName = ServiceProvider.Settings.ExternalViewer;
+            if (dialog.ShowDialog() == true)
+            {
+                ServiceProvider.Settings.StartupScript = dialog.FileName;
+            }
+        }
+
     }
 }

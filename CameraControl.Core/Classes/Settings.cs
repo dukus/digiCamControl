@@ -754,6 +754,7 @@ namespace CameraControl.Core.Classes
         private bool _allowWebserverActions;
         private int _selectedWifi;
         private string _wifiIp;
+        private string _startupScript;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -793,6 +794,16 @@ namespace CameraControl.Core.Classes
             {
                 _startupWithWindows = value;
                 NotifyPropertyChanged("StartupWithWindows");
+            }
+        }
+
+        public string StartupScript
+        {
+            get { return _startupScript; }
+            set
+            {
+                _startupScript = value;
+                NotifyPropertyChanged("StartupScript");
             }
         }
 

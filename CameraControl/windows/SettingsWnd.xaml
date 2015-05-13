@@ -100,6 +100,10 @@
                     <Label Content="{T:TranslateExtension LabelStartupWithWindows}" Grid.Row="8" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
                     <CheckBox Grid.Row="8" Grid.Column="3" IsChecked="{Binding StartupWithWindows}"/>
 
+                    <Label Content="{T:TranslateExtension LabelStartupScript}" Grid.Row="9" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="9" Grid.Column="3" Margin="3" Text="{Binding StartupScript}" />
+                    <Button Grid.Row="9" Grid.Column="4" Content="..." HorizontalAlignment="Left" Margin="2" Name="btn_browse_scriptfile" VerticalAlignment="Center" Click="btn_browse_scriptfile_Click" />
+
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelPreview}">

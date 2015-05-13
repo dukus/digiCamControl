@@ -593,5 +593,6 @@ namespace CameraControl.Core.Translation
         // 11/03/2015
         public static string LabelAllowWebCommands = "Allow interaction via webserver";
         public static string LabelCurrentMotion = "Detected motion";
+        public static string LabelStartupScript = "Execute script on startup";
     }
 }

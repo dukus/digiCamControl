@@ -42,6 +42,7 @@ using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Core.TclScripting;
 using CameraControl.Core.Translation;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
@@ -263,6 +264,29 @@ namespace CameraControl
 
         private void CheckForUpdate()
         {
+            var scriptFile = ServiceProvider.Settings.StartupScript;
+            if (scriptFile != null && File.Exists(scriptFile))
+            {
+                if (Path.GetExtension(scriptFile.ToLower()) == ".tcl")
+                {
+                    try
+                    {
+                        var manager = new TclScripManager();
+                        manager.Execute(File.ReadAllText(scriptFile));
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Script error", exception);
+                        StaticHelper.Instance.SystemMessage = "Script error :" + exception.Message;
+                    }
+                }
+                else
+                {
+                    var script = ServiceProvider.ScriptManager.Load(scriptFile);
+                    script.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                    ServiceProvider.ScriptManager.Execute(script);
+                }
+            }
             if ((DateTime.Now - ServiceProvider.Settings.LastUpdateCheckDate).TotalDays > 7)
             {
                 if (!ServiceProvider.Branding.CheckForUpdate)
