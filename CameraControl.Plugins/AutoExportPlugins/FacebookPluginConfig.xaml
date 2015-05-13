@@ -27,6 +27,7 @@
             <ComboBox ItemsSource="{Binding Pages}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedPage}"/>
             <Label Content="Albums"/>
             <ComboBox ItemsSource="{Binding Albums}" DisplayMemberPath="Name" SelectedValuePath="Value" SelectedValue="{Binding SelectedAlbum}"/>
+            <Button Content="Show album" Command="{Binding ShowAlbumCommand}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="2"/>
         </StackPanel>
 
     </Grid>

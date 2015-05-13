@@ -31,6 +31,8 @@ namespace CameraControl.Plugins.AutoExportPlugins
         private AsyncObservableCollection<ValuePair> _albums;
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand LogoutCommand { get; set; }
+        public RelayCommand ShowAlbumCommand { get; set; }
+
 
 
         public AsyncObservableCollection<ValuePair> Pages
@@ -113,6 +115,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
         public FacebookPluginViewModel()
         {
             _config = new AutoExportPluginConfig();
+            IsLogedIn = true;
             Init();
         }
 
@@ -129,9 +132,19 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         private void Init()
         {
+            ShowAlbumCommand = new RelayCommand(ShowAlbum);
             LoginCommand = new RelayCommand(Login);
             LogoutCommand = new RelayCommand(Logout);
             Pages = new AsyncObservableCollection<ValuePair>();
+        }
+
+        private void ShowAlbum()
+        {
+            if (!string.IsNullOrEmpty(SelectedAlbum) && SelectedAlbum.Contains("||"))
+            {
+                string id = SelectedAlbum.Split(new[] {"||"}, StringSplitOptions.RemoveEmptyEntries)[0];
+                PhotoUtils.Run("https://www.facebook.com/" + id);
+            }
         }
 
         private void Login()
@@ -143,7 +156,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             _miniWebServer = new MiniWebServer(SendResponse, Server);
             _miniWebServer.Run();
             PhotoUtils.Run(
-                GenerateLoginUrl(client.AppId, "publish_actions,manage_pages,user_photos,publish_stream").ToString());
+                GenerateLoginUrl(client.AppId, "publish_actions,manage_pages,user_photos,publish_pages").ToString());
         }
 
         private void Logout()

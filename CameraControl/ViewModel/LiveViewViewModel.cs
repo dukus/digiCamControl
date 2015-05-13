@@ -997,6 +997,8 @@ namespace CameraControl.ViewModel
 
         #endregion
 
+        public bool IsActive { get; set; }
+
         public LiveViewViewModel()
         {
             CameraProperty = new CameraProperty();
@@ -1057,6 +1059,7 @@ namespace CameraControl.ViewModel
             {
                 case WindowsCmdConsts.LiveViewWnd_StartMotionDetection:
                     DetectMotion = true;
+                    TriggerOnMotion = true;
                     break;
                 case WindowsCmdConsts.LiveViewWnd_StopMotionDetection:
                     DetectMotion = false;
@@ -1164,11 +1167,13 @@ namespace CameraControl.ViewModel
 
         private void Init()
         {
+            IsActive = true;
             WaitTime = 2;
             PhotoNo = 2;
             FocusStep = 2;
             PhotoCount = 5;
             DelayedStart = false;
+
             _timer.Stop();
             _timer.AutoReset = true;
             CameraDevice.CameraDisconnected += CameraDeviceCameraDisconnected;
@@ -1212,6 +1217,7 @@ namespace CameraControl.ViewModel
             LockA = false;
             LockB = false;
             LiveViewData = null;
+            IsActive = false;
         }
 
         private void ResetOverlay()
@@ -2044,6 +2050,9 @@ namespace CameraControl.ViewModel
 
         private void StartLiveView()
         {
+            if(!IsActive)
+                return;
+            
             string resp = CameraDevice.GetProhibitionCondition(OperationEnum.LiveView);
             if (string.IsNullOrEmpty(resp))
             {

@@ -205,7 +205,6 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.LiveViewWnd_Hide:
                     Dispatcher.Invoke(new Action(delegate
                     {
-                        Hide();
                         try
                         {
                             ((LiveViewViewModel) DataContext).UnInit();
@@ -214,6 +213,7 @@ namespace CameraControl.windows
                         {
                             Log.Error("Unable to stop live view", exception);
                         }
+                        Hide();
                         //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FocusStackingWnd_Hide);
                     }));
                     break;
