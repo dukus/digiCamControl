@@ -131,6 +131,8 @@ namespace CameraControl
             ServiceProvider.Trigger.Start();
             ServiceProvider.Analytics.Start();
 
+
+
             Dispatcher.Invoke(new Action(delegate
             {
                 try
