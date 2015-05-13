@@ -52,6 +52,9 @@ namespace CameraControl.Core.Classes
         public const string LiveViewWnd_Show = "LiveViewWnd_Show";
         public const string LiveViewWnd_Hide = "LiveViewWnd_Hide";
         public const string LiveViewWnd_Message = "LiveViewWnd_Message";
+        public const string LiveViewWnd_StartMotionDetection = "LiveViewWnd_StartMotionDetection";
+        public const string LiveViewWnd_StopMotionDetection = "LiveViewWnd_StopMotionDetection";
+        public const string LiveViewWnd_Maximize = "LiveViewWnd_Maximize";
         public const string AstroLiveViewWnd_Show = "AstroLiveViewWnd_Show";
         public const string AstroLiveViewWnd_Hide = "AstroLiveViewWnd_Hide";
         public const string PrintWnd_Show = "PrintWnd_Show";

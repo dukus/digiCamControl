@@ -1053,6 +1053,18 @@ namespace CameraControl.ViewModel
                 {
                 }
             }
+            switch (cmd)
+            {
+                case WindowsCmdConsts.LiveViewWnd_StartMotionDetection:
+                    DetectMotion = true;
+                    break;
+                case WindowsCmdConsts.LiveViewWnd_StopMotionDetection:
+                    DetectMotion = false;
+                    break;
+                case WindowsCmdConsts.LiveViewWnd_Maximize:
+                    ShowLeftTab = false;
+                    break;
+            }
         }
 
         private void InitCommands()

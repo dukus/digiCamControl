@@ -176,46 +176,46 @@ namespace CameraControl.windows
             {
                 case WindowsCmdConsts.LiveViewWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
-                                                     {
-                                                         try
-                                                         {
-                                                             ICameraDevice cameraparam = param as ICameraDevice;
-                                                             if (cameraparam == SelectedPortableDevice && IsVisible)
-                                                             {
-                                                                 Activate();
-                                                                 Focus();
-                                                                 return;
-                                                             }
-                                                             DataContext = new LiveViewViewModel(cameraparam);
-                                                             
-        
-                                                             SelectedPortableDevice = cameraparam;
+                    {
+                        try
+                        {
+                            ICameraDevice cameraparam = param as ICameraDevice;
+                            if (cameraparam == SelectedPortableDevice && IsVisible)
+                            {
+                                Activate();
+                                Focus();
+                                return;
+                            }
+                            DataContext = new LiveViewViewModel(cameraparam);
 
-                                                             Show();
-                                                             Activate();
-                                                             Focus();
-                                                         }
-                                                         catch (Exception exception)
-                                                         {
-                                                             Log.Error("Error initialize live view window ", exception);
-                                                         }
-                                                     }
-                                          ));
+
+                            SelectedPortableDevice = cameraparam;
+
+                            Show();
+                            Activate();
+                            Focus();
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Error("Error initialize live view window ", exception);
+                        }
+                    }
+                        ));
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Hide:
                     Dispatcher.Invoke(new Action(delegate
-                                                     {
-                                                         Hide();
-                                                         try
-                                                         {
-                                                             ((LiveViewViewModel) DataContext).UnInit();
-                                                         }
-                                                         catch (Exception exception)
-                                                         {
-                                                             Log.Error("Unable to stop live view", exception);
-                                                         }
-                                                         //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FocusStackingWnd_Hide);
-                                                     }));
+                    {
+                        Hide();
+                        try
+                        {
+                            ((LiveViewViewModel) DataContext).UnInit();
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Error("Unable to stop live view", exception);
+                        }
+                        //ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FocusStackingWnd_Hide);
+                    }));
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Message:
                 {
@@ -232,19 +232,27 @@ namespace CameraControl.windows
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
-                                                     {
-                                                         ((LiveViewViewModel)DataContext).UnInit();
-                                                         Hide();
-                                                         Close();
-                                                     }));
+                    {
+                        if (DataContext != null)
+                        {
+                            ((LiveViewViewModel) DataContext).UnInit();
+                            Hide();
+                            Close();
+                        }
+                    }));
                     break;
                 case CmdConsts.All_Minimize:
                     Dispatcher.Invoke(new Action(delegate
                     {
-                        WindowState=WindowState.Minimized;
+                        WindowState = WindowState.Minimized;
                     }));
                     break;
-
+                case WindowsCmdConsts.LiveViewWnd_Maximize:
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        WindowState = WindowState.Maximized;
+                    }));
+                    break;
             }
         }
 
