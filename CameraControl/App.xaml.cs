@@ -230,98 +230,106 @@ namespace CameraControl
 
         private void WindowsManager_Event(string cmd, object o)
         {
-            Log.Debug("Window command received :" + cmd);
-            
-            if (cmd != WindowsCmdConsts.Next_Image && cmd != WindowsCmdConsts.Prev_Image &&
-                cmd != WindowsCmdConsts.Select_Image)
-                ServiceProvider.Analytics.Command(cmd);
+            try
+            {
 
-            if (cmd == CmdConsts.All_Close)
-            {
-                ServiceProvider.Analytics.Stop();
-                ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
-                if (ServiceProvider.Settings != null)
+                Log.Debug("Window command received :" + cmd);
+
+                if (cmd != WindowsCmdConsts.Next_Image && cmd != WindowsCmdConsts.Prev_Image &&
+                    cmd != WindowsCmdConsts.Select_Image)
+                    ServiceProvider.Analytics.Command(cmd);
+
+                if (cmd == CmdConsts.All_Close)
                 {
-                    ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
-                    ServiceProvider.Settings.Save();
-                    if (ServiceProvider.Trigger != null)
+                    ServiceProvider.Analytics.Stop();
+                    ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
+                    if (ServiceProvider.Settings != null)
                     {
-                        ServiceProvider.Trigger.Stop();
+                        ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
+                        ServiceProvider.Settings.Save();
+                        if (ServiceProvider.Trigger != null)
+                        {
+                            ServiceProvider.Trigger.Stop();
+                        }
                     }
+                    ServiceProvider.ScriptManager.Stop();
+                    ServiceProvider.DeviceManager.CloseAll();
+                    Thread.Sleep(1000);
+                    Dispatcher.Invoke(new Action(() => Current.Shutdown()));
                 }
-                ServiceProvider.ScriptManager.Stop();
-                ServiceProvider.DeviceManager.CloseAll();
-                Thread.Sleep(1000);
-                Dispatcher.Invoke(new Action(()=> Current.Shutdown()));
-            }
-            switch (cmd)
-            {
-                case CmdConsts.Capture:
-                    Thread thread = new Thread(new ThreadStart(CameraHelper.Capture));
-                    thread.Start();
-                    break;
-                case CmdConsts.CaptureNoAf:
-                    CameraHelper.CaptureNoAf();
-                    break;
-                case CmdConsts.CaptureAll:
-                    CameraHelper.CaptureAll(0);
-                    break;
-            }
-            ICameraDevice device = ServiceProvider.DeviceManager.SelectedCameraDevice;
-            if (device != null && device.IsConnected)
-            {
                 switch (cmd)
                 {
-                    case CmdConsts.NextAperture:
-                        if (device.FNumber != null)
-                            device.FNumber.NextValue();
+                    case CmdConsts.Capture:
+                        Thread thread = new Thread(new ThreadStart(CameraHelper.Capture));
+                        thread.Start();
                         break;
-                    case CmdConsts.PrevAperture:
-                        if (device.FNumber != null)
-                            device.FNumber.PrevValue();
+                    case CmdConsts.CaptureNoAf:
+                        CameraHelper.CaptureNoAf();
                         break;
-                    case CmdConsts.NextIso:
-                        if (device.IsoNumber != null)
-                            device.IsoNumber.NextValue();
-                        break;
-                    case CmdConsts.PrevIso:
-                        if (device.IsoNumber != null)
-                            device.IsoNumber.PrevValue();
-                        break;
-                    case CmdConsts.NextShutter:
-                        if (device.ShutterSpeed != null)
-                            device.ShutterSpeed.NextValue();
-                        break;
-                    case CmdConsts.PrevShutter:
-                        if (device.ShutterSpeed != null)
-                            device.ShutterSpeed.PrevValue();
-                        break;
-                    case CmdConsts.NextWhiteBalance:
-                        if (device.WhiteBalance != null)
-                            device.WhiteBalance.NextValue();
-                        break;
-                    case CmdConsts.PrevWhiteBalance:
-                        if (device.WhiteBalance != null)
-                            device.WhiteBalance.PrevValue();
-                        break;
-                    case CmdConsts.NextExposureCompensation:
-                        if (device.ExposureCompensation != null)
-                            device.ExposureCompensation.NextValue();
-                        break;
-                    case CmdConsts.PrevExposureCompensation:
-                        if (device.ExposureCompensation != null)
-                            device.ExposureCompensation.PrevValue();
-                        break;
-                    case CmdConsts.NextCamera:
-                        ServiceProvider.DeviceManager.SelectNextCamera();
-                        break;
-                    case CmdConsts.PrevCamera:
-                        ServiceProvider.DeviceManager.SelectPrevCamera();
-                        break;
-                    case CmdConsts.NextSeries:
-                        if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
+                    case CmdConsts.CaptureAll:
+                        CameraHelper.CaptureAll(0);
                         break;
                 }
+                ICameraDevice device = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                if (device != null && device.IsConnected)
+                {
+                    switch (cmd)
+                    {
+                        case CmdConsts.NextAperture:
+                            if (device.FNumber != null)
+                                device.FNumber.NextValue();
+                            break;
+                        case CmdConsts.PrevAperture:
+                            if (device.FNumber != null)
+                                device.FNumber.PrevValue();
+                            break;
+                        case CmdConsts.NextIso:
+                            if (device.IsoNumber != null)
+                                device.IsoNumber.NextValue();
+                            break;
+                        case CmdConsts.PrevIso:
+                            if (device.IsoNumber != null)
+                                device.IsoNumber.PrevValue();
+                            break;
+                        case CmdConsts.NextShutter:
+                            if (device.ShutterSpeed != null)
+                                device.ShutterSpeed.NextValue();
+                            break;
+                        case CmdConsts.PrevShutter:
+                            if (device.ShutterSpeed != null)
+                                device.ShutterSpeed.PrevValue();
+                            break;
+                        case CmdConsts.NextWhiteBalance:
+                            if (device.WhiteBalance != null)
+                                device.WhiteBalance.NextValue();
+                            break;
+                        case CmdConsts.PrevWhiteBalance:
+                            if (device.WhiteBalance != null)
+                                device.WhiteBalance.PrevValue();
+                            break;
+                        case CmdConsts.NextExposureCompensation:
+                            if (device.ExposureCompensation != null)
+                                device.ExposureCompensation.NextValue();
+                            break;
+                        case CmdConsts.PrevExposureCompensation:
+                            if (device.ExposureCompensation != null)
+                                device.ExposureCompensation.PrevValue();
+                            break;
+                        case CmdConsts.NextCamera:
+                            ServiceProvider.DeviceManager.SelectNextCamera();
+                            break;
+                        case CmdConsts.PrevCamera:
+                            ServiceProvider.DeviceManager.SelectPrevCamera();
+                            break;
+                        case CmdConsts.NextSeries:
+                            if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error processing comand", ex);
             }
         }
 

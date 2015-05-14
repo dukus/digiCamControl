@@ -104,20 +104,40 @@ namespace CameraControl.windows
 
         public LiveViewWnd()
         {
-            SelectedPortableDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+            try
+            {
+                SelectedPortableDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Live view init error ", ex);
+            }
             Init();
-
         }
 
         public LiveViewWnd(ICameraDevice device)
         {
-            SelectedPortableDevice = device;
+            try
+            {
+                SelectedPortableDevice = device;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Live view init error ",ex);
+            }
             Init();
         }
 
         public void Init()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Live view init error ", ex);
+            }
         }
 
 

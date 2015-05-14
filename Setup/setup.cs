@@ -31,6 +31,9 @@ namespace Setup
                 new File(appFeature, "MtpTester.exe"),
                 //new File(appFeature, "PhotoBooth.exe",new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
+#if DEBUG
+                new DirFiles(appFeature, @"*.pdb"),
+#endif
                 new File(appFeature, "regwia.bat"),
                 new File(appFeature, "logo.ico"),
                 new File(appFeature, "logo_big.jpg"),
@@ -85,10 +88,13 @@ namespace Setup
             project.UI = WUI.WixUI_FeatureTree;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
 
-            
+#if DEBUG            
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Debug\"));
-
+#else
+            project.SourceBaseDir =
+                Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Release\"));
+#endif
             project.ResolveWildCards();
 
             FileVersionInfo ver =

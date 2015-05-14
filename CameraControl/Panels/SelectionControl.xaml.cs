@@ -43,6 +43,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Devices;
 
 #endregion
 
@@ -65,7 +66,18 @@ namespace CameraControl.Panels
             SelectInvertCommand =
                 new RelayCommand<object>(delegate { ServiceProvider.Settings.DefaultSession.SelectInver(); });
             SelectSeries =
-                new RelayCommand<object>(delegate { ServiceProvider.Settings.DefaultSession.SelectSameSeries(ServiceProvider.Settings.SelectedBitmap.FileItem.Series); });
+                new RelayCommand<object>(delegate
+                {
+                    try
+                    {
+                        ServiceProvider.Settings.DefaultSession.SelectSameSeries(
+                            ServiceProvider.Settings.SelectedBitmap.FileItem.Series);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("SelectSeries", ex);
+                    }
+                });
             InitializeComponent();
         }
 
