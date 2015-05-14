@@ -32,16 +32,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using CameraControl.Actions;
-using CameraControl.Actions.Enfuse;
-using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -52,7 +46,6 @@ using CameraControl.Devices.Classes;
 using CameraControl.windows;
 using MahApps.Metro;
 using Application = System.Windows.Application;
-using HelpProvider = CameraControl.Classes.HelpProvider;
 using MessageBox = System.Windows.MessageBox;
 
 #endregion
@@ -453,15 +446,15 @@ namespace CameraControl
             // isn't a clean way
             if (errorMessage.Contains("{E1C5D730-7E97-4D8A-9E42-BBAE87C2059F}"))
             {
-                System.Windows.Forms.MessageBox.Show(TranslationStrings.LabelWiaNotInstalled);
+                MessageBox.Show(TranslationStrings.LabelWiaNotInstalled);
                 PhotoUtils.RunAndWait("regwia.bat", "");
-                System.Windows.Forms.MessageBox.Show(TranslationStrings.LabelRestartTheApplication);
+                MessageBox.Show(TranslationStrings.LabelRestartTheApplication);
                 Application.Current.Shutdown();
             }
             else if (e.Exception.GetType() == typeof (OutOfMemoryException))
             {
                 Log.Error("Out of memory. Application exiting ");
-                System.Windows.Forms.MessageBox.Show(TranslationStrings.LabelOutOfMemory);
+                MessageBox.Show(TranslationStrings.LabelOutOfMemory);
                 if (Current != null)
                     Current.Shutdown();
             }

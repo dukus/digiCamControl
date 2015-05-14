@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -54,6 +56,14 @@ namespace CameraControl.Plugins.AutoExportPlugins
             int i = 0;
             int.TryParse(_config.ConfigData[name], out i);
             return i;
+        }
+
+        public string TransformTemplate(FileItem item, string text)
+        {
+            Regex regPattern = new Regex(@"\[(.*?)\]", RegexOptions.Singleline);
+            MatchCollection matchX = regPattern.Matches(text);
+            return matchX.Cast<Match>().Aggregate(text, (current1, match) => item.FileNameTemplates.Where(template => System.String.Compare(template.Name, match.Value, System.StringComparison.InvariantCultureIgnoreCase) == 0).Aggregate(current1, (current, template) => current.Replace(match.Value, template.Value)));
+
         }
     }
 }

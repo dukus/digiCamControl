@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="CameraControl.Plugins.AutoExportPlugins.SendEmailPluginConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:autoExportPlugins="clr-namespace:CameraControl.Plugins.AutoExportPlugins"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <autoExportPlugins:SendEmailPluginViewModel/>
+    </UserControl.DataContext>    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Label Content="To"/>
+        <TextBox Grid.Row="1" Text="{Binding To}" Margin="2"/>
+        <Label Grid.Row="2" Content="From"/>
+        <TextBox Grid.Row="3" Text="{Binding From}" Margin="2"/>
+        <Label Grid.Row="4" Content="Subject"/>
+        <TextBox Grid.Row="5" Text="{Binding Subject}" Margin="2"/>
+        <Label Grid.Row="6" Content="Message"/>
+        <TextBox Grid.Row="7" Text="{Binding Message}" Margin="2" AcceptsReturn="True" TextWrapping="Wrap" />
+
+    </Grid>
+</UserControl>
