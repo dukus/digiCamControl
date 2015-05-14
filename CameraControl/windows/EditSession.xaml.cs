@@ -50,11 +50,18 @@ namespace CameraControl.windows
 
         public EditSession(PhotoSession session)
         {
-            Session = session;
-            Session.BeginEdit();
-            InitializeComponent();
-            DataContext = Session;
-            ServiceProvider.Settings.ApplyTheme(this);
+            try
+            {
+                Session = session;
+                Session.BeginEdit();
+                InitializeComponent();
+                DataContext = Session;
+                ServiceProvider.Settings.ApplyTheme(this);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("EditSession init", ex);
+            }
         }
 
         private void btn_browse_Click(object sender, RoutedEventArgs e)

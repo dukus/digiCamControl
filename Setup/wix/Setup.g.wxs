@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a34fd677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.94.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka">
+  <Product Id="19d12628-7654-4354-a305-9ab0a34fe677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.95.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Dukus">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -259,6 +259,78 @@
             <File Id="Xceed.Wpf.Toolkit.dll" Source="Xceed.Wpf.Toolkit.dll" />
           </Component>
 
+          <Component Id="Component.CameraControl.Core.pdb" Guid="19d12628-7654-4354-a305-9ab042b997b2">
+            <File Id="CameraControl.Core.pdb" Source="CameraControl.Core.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControl.Devices.pdb" Guid="19d12628-7654-4354-a305-9ab02cb3ec1b">
+            <File Id="CameraControl.Devices.pdb" Source="CameraControl.Devices.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControl.pdb" Guid="19d12628-7654-4354-a305-9ab077c07b47">
+            <File Id="CameraControl.pdb" Source="CameraControl.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControl.PluginManager.pdb" Guid="19d12628-7654-4354-a305-9ab0b954a685">
+            <File Id="CameraControl.PluginManager.pdb" Source="CameraControl.PluginManager.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControlCmd.pdb" Guid="19d12628-7654-4354-a305-9ab02f11d90b">
+            <File Id="CameraControlCmd.pdb" Source="CameraControlCmd.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControlRemoteCmd.pdb" Guid="19d12628-7654-4354-a305-9ab01885fbc5">
+            <File Id="CameraControlRemoteCmd.pdb" Source="CameraControlRemoteCmd.pdb" />
+          </Component>
+
+          <Component Id="Component.Canon.Eos.Framework.pdb" Guid="19d12628-7654-4354-a305-9ab04b4c6624">
+            <File Id="Canon.Eos.Framework.pdb" Source="Canon.Eos.Framework.pdb" />
+          </Component>
+
+          <Component Id="Component.GalaSoft.MvvmLight.Extras.pdb" Guid="19d12628-7654-4354-a305-9ab045d2700d">
+            <File Id="GalaSoft.MvvmLight.Extras.pdb" Source="GalaSoft.MvvmLight.Extras.pdb" />
+          </Component>
+
+          <Component Id="Component.GalaSoft.MvvmLight.pdb" Guid="19d12628-7654-4354-a305-9ab001c42c8e">
+            <File Id="GalaSoft.MvvmLight.pdb" Source="GalaSoft.MvvmLight.pdb" />
+          </Component>
+
+          <Component Id="Component.GongSolutions.Wpf.DragDrop.pdb" Guid="19d12628-7654-4354-a305-9ab0b1032e58">
+            <File Id="GongSolutions.Wpf.DragDrop.pdb" Source="GongSolutions.Wpf.DragDrop.pdb" />
+          </Component>
+
+          <Component Id="Component.Griffin.Networking.pdb" Guid="19d12628-7654-4354-a305-9ab06a7e72bd">
+            <File Id="Griffin.Networking.pdb" Source="Griffin.Networking.pdb" />
+          </Component>
+
+          <Component Id="Component.Griffin.Networking.Protocol.Http.pdb" Guid="19d12628-7654-4354-a305-9ab0489d9c4a">
+            <File Id="Griffin.Networking.Protocol.Http.pdb" Source="Griffin.Networking.Protocol.Http.pdb" />
+          </Component>
+
+          <Component Id="Component.Griffin.WebServer.pdb" Guid="19d12628-7654-4354-a305-9ab0d7677d3d">
+            <File Id="Griffin.WebServer.pdb" Source="Griffin.WebServer.pdb" />
+          </Component>
+
+          <Component Id="Component.Hardcodet.Wpf.TaskbarNotification.pdb" Guid="19d12628-7654-4354-a305-9ab0e4cad306">
+            <File Id="Hardcodet.Wpf.TaskbarNotification.pdb" Source="Hardcodet.Wpf.TaskbarNotification.pdb" />
+          </Component>
+
+          <Component Id="Component.Microsoft.Practices.ServiceLocation.pdb" Guid="19d12628-7654-4354-a305-9ab01700782e">
+            <File Id="Microsoft.Practices.ServiceLocation.pdb" Source="Microsoft.Practices.ServiceLocation.pdb" />
+          </Component>
+
+          <Component Id="Component.PhotoBooth.pdb" Guid="19d12628-7654-4354-a305-9ab08f5a5b85">
+            <File Id="PhotoBooth.pdb" Source="PhotoBooth.pdb" />
+          </Component>
+
+          <Component Id="Component.PortableDeviceLib.pdb" Guid="19d12628-7654-4354-a305-9ab08eb54515">
+            <File Id="PortableDeviceLib.pdb" Source="PortableDeviceLib.pdb" />
+          </Component>
+
+          <Component Id="Component.WriteableBitmapEx.Wpf.pdb" Guid="19d12628-7654-4354-a305-9ab091b3b8bf">
+            <File Id="WriteableBitmapEx.Wpf.pdb" Source="WriteableBitmapEx.Wpf.pdb" />
+          </Component>
+
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
             <File Id="noconn.png" Source="noconn.png" />
           </Component>
@@ -272,6 +344,10 @@
           </Component>
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
+
+            <Component Id="Component.Branding.xml" Guid="19d12628-7654-4354-a305-9ab01c7f982c">
+              <File Id="Branding.xml" Source="Data\Branding.xml" />
+            </Component>
 
             <Component Id="Component.takephoto.mp3" Guid="19d12628-7654-4354-a305-9ab01991f333">
               <File Id="takephoto.mp3" Source="Data\takephoto.mp3" />
@@ -610,10 +686,6 @@
               <File Id="GPLv3LICENSE.rtf" Source="Licenses\GPLv3LICENSE.rtf" />
             </Component>
 
-            <Component Id="Component.License.txt" Guid="19d12628-7654-4354-a305-9ab05d8ee6f7">
-              <File Id="License.txt" Source="Licenses\License.txt" />
-            </Component>
-
             <Component Id="Component.WPFSharp.Globalizer.Licence.txt" Guid="19d12628-7654-4354-a305-9ab09fef7fdc">
               <File Id="WPFSharp.Globalizer.Licence.txt" Source="Licenses\WPFSharp.Globalizer.Licence.txt" />
             </Component>
@@ -654,22 +726,54 @@
               <File Id="cmd.html" Source="WebServer\cmd.html" />
             </Component>
 
+            <Component Id="Component.demo.html" Guid="19d12628-7654-4354-a305-9ab0fa66d8d1">
+              <File Id="demo.html" Source="WebServer\demo.html" />
+            </Component>
+
+            <Component Id="Component.fade.html" Guid="19d12628-7654-4354-a305-9ab0543ec7a2">
+              <File Id="fade.html" Source="WebServer\fade.html" />
+            </Component>
+
             <Component Id="Component.index.html" Guid="19d12628-7654-4354-a305-9ab09d53bdec">
               <File Id="index.html" Source="WebServer\index.html" />
+            </Component>
+
+            <Component Id="Component.jquery.min.js" Guid="19d12628-7654-4354-a305-9ab02d438edd">
+              <File Id="jquery.min.js" Source="WebServer\jquery.min.js" />
+            </Component>
+
+            <Component Id="Component.jssor.slider.mini.js" Guid="19d12628-7654-4354-a305-9ab026539236">
+              <File Id="jssor.slider.mini.js" Source="WebServer\jssor.slider.mini.js" />
             </Component>
 
             <Component Id="Component.liveview.html" Guid="19d12628-7654-4354-a305-9ab015050ab9">
               <File Id="liveview.html" Source="WebServer\liveview.html" />
             </Component>
 
+            <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+              <File Id="logo.png" Source="WebServer\logo.png" />
+            </Component>
+
+            <Component Id="Component.logo_big.png" Guid="19d12628-7654-4354-a305-9ab092c00c32">
+              <File Id="logo_big.png" Source="WebServer\logo_big.png" />
+            </Component>
+
+            <Component Id="Component.Script.js" Guid="19d12628-7654-4354-a305-9ab0ba50e5ec">
+              <File Id="Script.js" Source="WebServer\Script.js" />
+            </Component>
+
             <Component Id="Component.slide.html" Guid="19d12628-7654-4354-a305-9ab06a6a9c5a">
               <File Id="slide.html" Source="WebServer\slide.html" />
             </Component>
 
+            <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
+              <File Id="style.css" Source="WebServer\style.css" />
+            </Component>
+
             <Directory Id="INSTALLDIR.WebServer.css" Name="css">
 
-              <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
-                <File Id="style.css" Source="WebServer\css\style.css" />
+              <Component Id="Component.style.css.1" Guid="19d12628-7654-4354-a305-9ab00b5fa9e0">
+                <File Id="style.css.1" Source="WebServer\css\style.css" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.css.img" Name="img">
@@ -706,8 +810,8 @@
                   <File Id="live.png" Source="WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-                  <File Id="logo.png" Source="WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
+                  <File Id="logo.png.1" Source="WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
@@ -719,6 +823,18 @@
                 </Component>
 
               </Directory>
+            </Directory>
+
+            <Directory Id="INSTALLDIR.WebServer.img" Name="img">
+
+              <Component Id="Component.d17.png.1" Guid="19d12628-7654-4354-a305-9ab093c7f24f">
+                <File Id="d17.png.1" Source="WebServer\img\d17.png" />
+              </Component>
+
+              <Component Id="Component.t01.png.1" Guid="19d12628-7654-4354-a305-9ab07e15fc49">
+                <File Id="t01.png.1" Source="WebServer\img\t01.png" />
+              </Component>
+
             </Directory>
 
             <Directory Id="INSTALLDIR.WebServer.js" Name="js">
@@ -743,8 +859,8 @@
                 <File Id="jquery.cycle2.swipe.min.js" Source="WebServer\js\jquery.cycle2.swipe.min.js" />
               </Component>
 
-              <Component Id="Component.jssor.slider.mini.js" Guid="19d12628-7654-4354-a305-9ab026539236">
-                <File Id="jssor.slider.mini.js" Source="WebServer\js\jssor.slider.mini.js" />
+              <Component Id="Component.jssor.slider.mini.js.1" Guid="19d12628-7654-4354-a305-9ab0fc7a9218">
+                <File Id="jssor.slider.mini.js.1" Source="WebServer\js\jssor.slider.mini.js" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.js.jquery_ui_1.11.2.custom" Name="jquery-ui-1.11.2.custom">
@@ -854,10 +970,6 @@
                 <File Id="DccObsPlugin.dll" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
               </Component>
 
-              <Component Id="Component.DccObsPlugin.pdb" Guid="19d12628-7654-4354-a305-9ab01940de64">
-                <File Id="DccObsPlugin.pdb" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.pdb" />
-              </Component>
-
             </Directory>
           </Directory>
         </Directory>
@@ -911,8 +1023,16 @@
 
     <Property Id="ARPPRODUCTICON" Value="MainIcon"  />
 
-    <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
+    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
+<<<<<<< HEAD
+=======
+    <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.95.0" IncludeMaximum="yes" Property="UPGRADEFOUND" MigrateFeatures="yes" />
+      <UpgradeVersion Minimum="1.2.95.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+    </Upgrade>
+
+>>>>>>> c1394429848bba35d065c069357270abec107498
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
 
     <Binary Id="Action1_MyAction_File" SourceFile="..\..\..\Setup\%this%.CA.dll"  />
@@ -979,9 +1099,28 @@
       <ComponentRef Id="Component.Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.DataGrid.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.Toolkit.dll" />
+      <ComponentRef Id="Component.CameraControl.Core.pdb" />
+      <ComponentRef Id="Component.CameraControl.Devices.pdb" />
+      <ComponentRef Id="Component.CameraControl.pdb" />
+      <ComponentRef Id="Component.CameraControl.PluginManager.pdb" />
+      <ComponentRef Id="Component.CameraControlCmd.pdb" />
+      <ComponentRef Id="Component.CameraControlRemoteCmd.pdb" />
+      <ComponentRef Id="Component.Canon.Eos.Framework.pdb" />
+      <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.pdb" />
+      <ComponentRef Id="Component.GalaSoft.MvvmLight.pdb" />
+      <ComponentRef Id="Component.GongSolutions.Wpf.DragDrop.pdb" />
+      <ComponentRef Id="Component.Griffin.Networking.pdb" />
+      <ComponentRef Id="Component.Griffin.Networking.Protocol.Http.pdb" />
+      <ComponentRef Id="Component.Griffin.WebServer.pdb" />
+      <ComponentRef Id="Component.Hardcodet.Wpf.TaskbarNotification.pdb" />
+      <ComponentRef Id="Component.Microsoft.Practices.ServiceLocation.pdb" />
+      <ComponentRef Id="Component.PhotoBooth.pdb" />
+      <ComponentRef Id="Component.PortableDeviceLib.pdb" />
+      <ComponentRef Id="Component.WriteableBitmapEx.Wpf.pdb" />
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
+      <ComponentRef Id="Component.Branding.xml" />
       <ComponentRef Id="Component.takephoto.mp3" />
       <ComponentRef Id="Component.takephoto.wav" />
       <ComponentRef Id="Component.Canon_EOS_100D.png" />
@@ -1061,7 +1200,6 @@
       <ComponentRef Id="Component.DigiCamControlLicence.txt" />
       <ComponentRef Id="Component.gpl_3.0.txt" />
       <ComponentRef Id="Component.GPLv3LICENSE.rtf" />
-      <ComponentRef Id="Component.License.txt" />
       <ComponentRef Id="Component.WPFSharp.Globalizer.Licence.txt" />
       <ComponentRef Id="Component.align_image_stack.exe" />
       <ComponentRef Id="Component.COPYING" />
@@ -1070,10 +1208,18 @@
       <ComponentRef Id="Component.libexpat.dll" />
       <ComponentRef Id="Component.browse.html" />
       <ComponentRef Id="Component.cmd.html" />
+      <ComponentRef Id="Component.demo.html" />
+      <ComponentRef Id="Component.fade.html" />
       <ComponentRef Id="Component.index.html" />
+      <ComponentRef Id="Component.jquery.min.js" />
+      <ComponentRef Id="Component.jssor.slider.mini.js" />
       <ComponentRef Id="Component.liveview.html" />
+      <ComponentRef Id="Component.logo.png" />
+      <ComponentRef Id="Component.logo_big.png" />
+      <ComponentRef Id="Component.Script.js" />
       <ComponentRef Id="Component.slide.html" />
       <ComponentRef Id="Component.style.css" />
+      <ComponentRef Id="Component.style.css.1" />
       <ComponentRef Id="Component.ajax_loader.gif" />
       <ComponentRef Id="Component.browse.png" />
       <ComponentRef Id="Component.capture.png" />
@@ -1082,15 +1228,17 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png" />
+      <ComponentRef Id="Component.logo.png.1" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
+      <ComponentRef Id="Component.d17.png.1" />
+      <ComponentRef Id="Component.t01.png.1" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
       <ComponentRef Id="Component.jquery.cycle.all.js" />
       <ComponentRef Id="Component.jquery.cycle2.center.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.swipe.min.js" />
-      <ComponentRef Id="Component.jssor.slider.mini.js" />
+      <ComponentRef Id="Component.jssor.slider.mini.js.1" />
       <ComponentRef Id="Component.jquery_ui.min.css" />
       <ComponentRef Id="Component.jquery_ui.min.js" />
       <ComponentRef Id="Component.jquery_ui.structure.min.css" />
@@ -1120,7 +1268,6 @@
       <ComponentRef Id="Component.CLRHostPlugin.dll" />
       <ComponentRef Id="Component.CLRHost.Interop.dll" />
       <ComponentRef Id="Component.DccObsPlugin.dll" />
-      <ComponentRef Id="Component.DccObsPlugin.pdb" />
       <ComponentRef Id="ProgramMenuFolder" />
     </Feature>
 
