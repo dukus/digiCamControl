@@ -282,7 +282,8 @@ namespace CameraControl.Plugins.AutoExportPlugins
             parameters.source = new FacebookMediaObject
             {
                 ContentType = "image/jpeg",
-                FileName = Path.GetFileName(file)
+                FileName = Path.GetFileName(file),
+
             }.SetValue(File.ReadAllBytes(file));
             
             client.Post(id+"/photos", parameters);

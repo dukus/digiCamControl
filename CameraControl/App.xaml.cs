@@ -380,7 +380,7 @@ namespace CameraControl
             CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
             // multiple canon cameras block with this settings
             Console.WriteLine(ServiceProvider.DeviceManager.ConnectedDevices.Count);
-            if (!(cameraDevice is CanonSDKBase) || ServiceProvider.DeviceManager.ConnectedDevices.Count < 3)
+            if (!(cameraDevice is CanonSDKBase) || ServiceProvider.DeviceManager.ConnectedDevices.Count < 2)
                 cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
 
             Log.Debug("cameraDevice_CameraInitDone 1a");
