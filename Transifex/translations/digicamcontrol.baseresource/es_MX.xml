@@ -490,4 +490,5 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelRepeatImages">Repetir imágenes</string>
   <string name="LabelWaitBetweenSteps">Pausa entre pasos (ms)</string>
   <string name="LabelShowSecondary ">Mostrar en monitor secundario</string>
+  <!--20/12/2014-->
 </resources>

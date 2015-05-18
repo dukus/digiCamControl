@@ -1,7 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <!--Property values-->
+  <string name="BURST_NUMBER">Sorozatszam</string>
+  <string name="STILL_CAPTURE_MODE">Mozdulatlan cel fenykepezesi mod</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">folyamatos fenykepezes (egymasutani fenykepezes)</string>
+  <string name="AUTO_ISO">Auto Iso</string>
+  <string name="ON">BE</string>
+  <string name="OFF">KI</string>
+  <string name="FLASH">Feny</string>
+  <string name="NORMAL_SYNCHRONIZATION">Normalis szinkronizalas</string>
+  <string name="LONG_EXP._NR">Hosszu exponalas</string>
+  <string name="HIGH_ISO_NR">Magas ISO</string>
+  <string name="NORMAL">Normalis</string>
+  <string name="EXPOSURE_DELAY_MODE">Exponalas kesleltetesi mod</string>
+  <string name="LOCK">Bezar</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Egy fenykep (egy keretes fenykepezes)</string>
+  <string name="SELF_TIMER">Onidozito</string>
+  <string name="QUIET_SHOOTING">Csendes fenykepezes</string>
+  <string name="FLASH_PROHIBITED">Feny letiltas</string>
+  <string name="RED_EYE_REDUCTION">Voros szem redukalas</string>
+  <string name="SLOW_SYNCHRONIZATION">Lassu szinkrozinalas</string>
+  <string name="REAR_SYNCHRONIZATION">Utolagos szinkrozinalas</string>
+  <string name="LOW">Alacsony</string>
+  <string name="HIGH">Magas</string>
   <!--End Property values-->
+  <string name="MenuLayoutNormal">Normalis</string>
   <!--15/10/2012-->
   <!--22/10/2012-->
   <!--25/10/2012-->
@@ -41,4 +64,5 @@
   <!--17.05.2014-->
   <!--//20/08/2014-->
   <!--20/08/2014-->
+  <!--20/12/2014-->
 </resources>

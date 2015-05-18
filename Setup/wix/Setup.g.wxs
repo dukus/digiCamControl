@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a350f677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.96.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka">
+  <Product Id="19d12628-7654-4354-a305-9ab0a3500677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.97.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -259,6 +259,78 @@
             <File Id="Xceed.Wpf.Toolkit.dll" Source="Xceed.Wpf.Toolkit.dll" />
           </Component>
 
+          <Component Id="Component.CameraControl.Core.pdb" Guid="19d12628-7654-4354-a305-9ab042b997b2">
+            <File Id="CameraControl.Core.pdb" Source="CameraControl.Core.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControl.Devices.pdb" Guid="19d12628-7654-4354-a305-9ab02cb3ec1b">
+            <File Id="CameraControl.Devices.pdb" Source="CameraControl.Devices.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControl.pdb" Guid="19d12628-7654-4354-a305-9ab077c07b47">
+            <File Id="CameraControl.pdb" Source="CameraControl.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControl.PluginManager.pdb" Guid="19d12628-7654-4354-a305-9ab0b954a685">
+            <File Id="CameraControl.PluginManager.pdb" Source="CameraControl.PluginManager.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControlCmd.pdb" Guid="19d12628-7654-4354-a305-9ab02f11d90b">
+            <File Id="CameraControlCmd.pdb" Source="CameraControlCmd.pdb" />
+          </Component>
+
+          <Component Id="Component.CameraControlRemoteCmd.pdb" Guid="19d12628-7654-4354-a305-9ab01885fbc5">
+            <File Id="CameraControlRemoteCmd.pdb" Source="CameraControlRemoteCmd.pdb" />
+          </Component>
+
+          <Component Id="Component.Canon.Eos.Framework.pdb" Guid="19d12628-7654-4354-a305-9ab04b4c6624">
+            <File Id="Canon.Eos.Framework.pdb" Source="Canon.Eos.Framework.pdb" />
+          </Component>
+
+          <Component Id="Component.GalaSoft.MvvmLight.Extras.pdb" Guid="19d12628-7654-4354-a305-9ab045d2700d">
+            <File Id="GalaSoft.MvvmLight.Extras.pdb" Source="GalaSoft.MvvmLight.Extras.pdb" />
+          </Component>
+
+          <Component Id="Component.GalaSoft.MvvmLight.pdb" Guid="19d12628-7654-4354-a305-9ab001c42c8e">
+            <File Id="GalaSoft.MvvmLight.pdb" Source="GalaSoft.MvvmLight.pdb" />
+          </Component>
+
+          <Component Id="Component.GongSolutions.Wpf.DragDrop.pdb" Guid="19d12628-7654-4354-a305-9ab0b1032e58">
+            <File Id="GongSolutions.Wpf.DragDrop.pdb" Source="GongSolutions.Wpf.DragDrop.pdb" />
+          </Component>
+
+          <Component Id="Component.Griffin.Networking.pdb" Guid="19d12628-7654-4354-a305-9ab06a7e72bd">
+            <File Id="Griffin.Networking.pdb" Source="Griffin.Networking.pdb" />
+          </Component>
+
+          <Component Id="Component.Griffin.Networking.Protocol.Http.pdb" Guid="19d12628-7654-4354-a305-9ab0489d9c4a">
+            <File Id="Griffin.Networking.Protocol.Http.pdb" Source="Griffin.Networking.Protocol.Http.pdb" />
+          </Component>
+
+          <Component Id="Component.Griffin.WebServer.pdb" Guid="19d12628-7654-4354-a305-9ab0d7677d3d">
+            <File Id="Griffin.WebServer.pdb" Source="Griffin.WebServer.pdb" />
+          </Component>
+
+          <Component Id="Component.Hardcodet.Wpf.TaskbarNotification.pdb" Guid="19d12628-7654-4354-a305-9ab0e4cad306">
+            <File Id="Hardcodet.Wpf.TaskbarNotification.pdb" Source="Hardcodet.Wpf.TaskbarNotification.pdb" />
+          </Component>
+
+          <Component Id="Component.Microsoft.Practices.ServiceLocation.pdb" Guid="19d12628-7654-4354-a305-9ab01700782e">
+            <File Id="Microsoft.Practices.ServiceLocation.pdb" Source="Microsoft.Practices.ServiceLocation.pdb" />
+          </Component>
+
+          <Component Id="Component.PhotoBooth.pdb" Guid="19d12628-7654-4354-a305-9ab08f5a5b85">
+            <File Id="PhotoBooth.pdb" Source="PhotoBooth.pdb" />
+          </Component>
+
+          <Component Id="Component.PortableDeviceLib.pdb" Guid="19d12628-7654-4354-a305-9ab08eb54515">
+            <File Id="PortableDeviceLib.pdb" Source="PortableDeviceLib.pdb" />
+          </Component>
+
+          <Component Id="Component.WriteableBitmapEx.Wpf.pdb" Guid="19d12628-7654-4354-a305-9ab091b3b8bf">
+            <File Id="WriteableBitmapEx.Wpf.pdb" Source="WriteableBitmapEx.Wpf.pdb" />
+          </Component>
+
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
             <File Id="noconn.png" Source="noconn.png" />
           </Component>
@@ -486,10 +558,6 @@
 
           <Directory Id="INSTALLDIR.Languages" Name="Languages">
 
-            <Component Id="Component.ca.xml" Guid="19d12628-7654-4354-a305-9ab07fd22707">
-              <File Id="ca.xml" Source="Languages\ca.xml" />
-            </Component>
-
             <Component Id="Component.cs_CZ.xml" Guid="19d12628-7654-4354-a305-9ab02fae43f5">
               <File Id="cs_CZ.xml" Source="Languages\cs_CZ.xml" />
             </Component>
@@ -506,20 +574,12 @@
               <File Id="el_GR.xml" Source="Languages\el_GR.xml" />
             </Component>
 
-            <Component Id="Component.en_US.xml" Guid="19d12628-7654-4354-a305-9ab011f3cd9f">
-              <File Id="en_US.xml" Source="Languages\en-US.xml" />
-            </Component>
-
             <Component Id="Component.es_MX.xml" Guid="19d12628-7654-4354-a305-9ab0eb261401">
               <File Id="es_MX.xml" Source="Languages\es_MX.xml" />
             </Component>
 
             <Component Id="Component.fr.xml" Guid="19d12628-7654-4354-a305-9ab047c019ee">
               <File Id="fr.xml" Source="Languages\fr.xml" />
-            </Component>
-
-            <Component Id="Component.gl_ES.xml" Guid="19d12628-7654-4354-a305-9ab0e273b9e9">
-              <File Id="gl_ES.xml" Source="Languages\gl_ES.xml" />
             </Component>
 
             <Component Id="Component.hu.xml" Guid="19d12628-7654-4354-a305-9ab0c46cdb64">
@@ -538,20 +598,12 @@
               <File Id="nl.xml" Source="Languages\nl.xml" />
             </Component>
 
-            <Component Id="Component.nl_BE.xml" Guid="19d12628-7654-4354-a305-9ab0638a863e">
-              <File Id="nl_BE.xml" Source="Languages\nl_BE.xml" />
-            </Component>
-
             <Component Id="Component.pl.xml" Guid="19d12628-7654-4354-a305-9ab0e9dc2b7c">
               <File Id="pl.xml" Source="Languages\pl.xml" />
             </Component>
 
             <Component Id="Component.pt_PT.xml" Guid="19d12628-7654-4354-a305-9ab023b209be">
               <File Id="pt_PT.xml" Source="Languages\pt_PT.xml" />
-            </Component>
-
-            <Component Id="Component.ro.xml" Guid="19d12628-7654-4354-a305-9ab0a8fd88f2">
-              <File Id="ro.xml" Source="Languages\ro.xml" />
             </Component>
 
             <Component Id="Component.ru.xml" Guid="19d12628-7654-4354-a305-9ab0680f88f2">
@@ -903,7 +955,7 @@
 
     <Property Id="ARPPRODUCTICON" Value="MainIcon"  />
 
-    <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Release\Licenses\DigiCamControlLicence.rtf"  />
+    <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
 
@@ -971,6 +1023,24 @@
       <ComponentRef Id="Component.Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.DataGrid.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.Toolkit.dll" />
+      <ComponentRef Id="Component.CameraControl.Core.pdb" />
+      <ComponentRef Id="Component.CameraControl.Devices.pdb" />
+      <ComponentRef Id="Component.CameraControl.pdb" />
+      <ComponentRef Id="Component.CameraControl.PluginManager.pdb" />
+      <ComponentRef Id="Component.CameraControlCmd.pdb" />
+      <ComponentRef Id="Component.CameraControlRemoteCmd.pdb" />
+      <ComponentRef Id="Component.Canon.Eos.Framework.pdb" />
+      <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.pdb" />
+      <ComponentRef Id="Component.GalaSoft.MvvmLight.pdb" />
+      <ComponentRef Id="Component.GongSolutions.Wpf.DragDrop.pdb" />
+      <ComponentRef Id="Component.Griffin.Networking.pdb" />
+      <ComponentRef Id="Component.Griffin.Networking.Protocol.Http.pdb" />
+      <ComponentRef Id="Component.Griffin.WebServer.pdb" />
+      <ComponentRef Id="Component.Hardcodet.Wpf.TaskbarNotification.pdb" />
+      <ComponentRef Id="Component.Microsoft.Practices.ServiceLocation.pdb" />
+      <ComponentRef Id="Component.PhotoBooth.pdb" />
+      <ComponentRef Id="Component.PortableDeviceLib.pdb" />
+      <ComponentRef Id="Component.WriteableBitmapEx.Wpf.pdb" />
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
@@ -1023,23 +1093,18 @@
       <ComponentRef Id="Component.dcc.plugin" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />
       <ComponentRef Id="Component.dcc.plugin.1" />
-      <ComponentRef Id="Component.ca.xml" />
       <ComponentRef Id="Component.cs_CZ.xml" />
       <ComponentRef Id="Component.da.xml" />
       <ComponentRef Id="Component.de.xml" />
       <ComponentRef Id="Component.el_GR.xml" />
-      <ComponentRef Id="Component.en_US.xml" />
       <ComponentRef Id="Component.es_MX.xml" />
       <ComponentRef Id="Component.fr.xml" />
-      <ComponentRef Id="Component.gl_ES.xml" />
       <ComponentRef Id="Component.hu.xml" />
       <ComponentRef Id="Component.it.xml" />
       <ComponentRef Id="Component.ja.xml" />
       <ComponentRef Id="Component.nl.xml" />
-      <ComponentRef Id="Component.nl_BE.xml" />
       <ComponentRef Id="Component.pl.xml" />
       <ComponentRef Id="Component.pt_PT.xml" />
-      <ComponentRef Id="Component.ro.xml" />
       <ComponentRef Id="Component.ru.xml" />
       <ComponentRef Id="Component.sl.xml" />
       <ComponentRef Id="Component.sr.xml" />
