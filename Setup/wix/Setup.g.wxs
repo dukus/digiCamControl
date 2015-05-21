@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a34fe677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.95.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Dukus">
+  <Product Id="19d12628-7654-4354-a305-9ab0a3500677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.97.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -345,10 +345,6 @@
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
 
-            <Component Id="Component.Branding.xml" Guid="19d12628-7654-4354-a305-9ab01c7f982c">
-              <File Id="Branding.xml" Source="Data\Branding.xml" />
-            </Component>
-
             <Component Id="Component.takephoto.mp3" Guid="19d12628-7654-4354-a305-9ab01991f333">
               <File Id="takephoto.mp3" Source="Data\takephoto.mp3" />
             </Component>
@@ -562,10 +558,6 @@
 
           <Directory Id="INSTALLDIR.Languages" Name="Languages">
 
-            <Component Id="Component.ca.xml" Guid="19d12628-7654-4354-a305-9ab07fd22707">
-              <File Id="ca.xml" Source="Languages\ca.xml" />
-            </Component>
-
             <Component Id="Component.cs_CZ.xml" Guid="19d12628-7654-4354-a305-9ab02fae43f5">
               <File Id="cs_CZ.xml" Source="Languages\cs_CZ.xml" />
             </Component>
@@ -582,20 +574,12 @@
               <File Id="el_GR.xml" Source="Languages\el_GR.xml" />
             </Component>
 
-            <Component Id="Component.en_US.xml" Guid="19d12628-7654-4354-a305-9ab011f3cd9f">
-              <File Id="en_US.xml" Source="Languages\en-US.xml" />
-            </Component>
-
             <Component Id="Component.es_MX.xml" Guid="19d12628-7654-4354-a305-9ab0eb261401">
               <File Id="es_MX.xml" Source="Languages\es_MX.xml" />
             </Component>
 
             <Component Id="Component.fr.xml" Guid="19d12628-7654-4354-a305-9ab047c019ee">
               <File Id="fr.xml" Source="Languages\fr.xml" />
-            </Component>
-
-            <Component Id="Component.gl_ES.xml" Guid="19d12628-7654-4354-a305-9ab0e273b9e9">
-              <File Id="gl_ES.xml" Source="Languages\gl_ES.xml" />
             </Component>
 
             <Component Id="Component.hu.xml" Guid="19d12628-7654-4354-a305-9ab0c46cdb64">
@@ -614,20 +598,12 @@
               <File Id="nl.xml" Source="Languages\nl.xml" />
             </Component>
 
-            <Component Id="Component.nl_BE.xml" Guid="19d12628-7654-4354-a305-9ab0638a863e">
-              <File Id="nl_BE.xml" Source="Languages\nl_BE.xml" />
-            </Component>
-
             <Component Id="Component.pl.xml" Guid="19d12628-7654-4354-a305-9ab0e9dc2b7c">
               <File Id="pl.xml" Source="Languages\pl.xml" />
             </Component>
 
             <Component Id="Component.pt_PT.xml" Guid="19d12628-7654-4354-a305-9ab023b209be">
               <File Id="pt_PT.xml" Source="Languages\pt_PT.xml" />
-            </Component>
-
-            <Component Id="Component.ro.xml" Guid="19d12628-7654-4354-a305-9ab0a8fd88f2">
-              <File Id="ro.xml" Source="Languages\ro.xml" />
             </Component>
 
             <Component Id="Component.ru.xml" Guid="19d12628-7654-4354-a305-9ab0680f88f2">
@@ -726,54 +702,22 @@
               <File Id="cmd.html" Source="WebServer\cmd.html" />
             </Component>
 
-            <Component Id="Component.demo.html" Guid="19d12628-7654-4354-a305-9ab0fa66d8d1">
-              <File Id="demo.html" Source="WebServer\demo.html" />
-            </Component>
-
-            <Component Id="Component.fade.html" Guid="19d12628-7654-4354-a305-9ab0543ec7a2">
-              <File Id="fade.html" Source="WebServer\fade.html" />
-            </Component>
-
             <Component Id="Component.index.html" Guid="19d12628-7654-4354-a305-9ab09d53bdec">
               <File Id="index.html" Source="WebServer\index.html" />
-            </Component>
-
-            <Component Id="Component.jquery.min.js" Guid="19d12628-7654-4354-a305-9ab02d438edd">
-              <File Id="jquery.min.js" Source="WebServer\jquery.min.js" />
-            </Component>
-
-            <Component Id="Component.jssor.slider.mini.js" Guid="19d12628-7654-4354-a305-9ab026539236">
-              <File Id="jssor.slider.mini.js" Source="WebServer\jssor.slider.mini.js" />
             </Component>
 
             <Component Id="Component.liveview.html" Guid="19d12628-7654-4354-a305-9ab015050ab9">
               <File Id="liveview.html" Source="WebServer\liveview.html" />
             </Component>
 
-            <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-              <File Id="logo.png" Source="WebServer\logo.png" />
-            </Component>
-
-            <Component Id="Component.logo_big.png" Guid="19d12628-7654-4354-a305-9ab092c00c32">
-              <File Id="logo_big.png" Source="WebServer\logo_big.png" />
-            </Component>
-
-            <Component Id="Component.Script.js" Guid="19d12628-7654-4354-a305-9ab0ba50e5ec">
-              <File Id="Script.js" Source="WebServer\Script.js" />
-            </Component>
-
             <Component Id="Component.slide.html" Guid="19d12628-7654-4354-a305-9ab06a6a9c5a">
               <File Id="slide.html" Source="WebServer\slide.html" />
             </Component>
 
-            <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
-              <File Id="style.css" Source="WebServer\style.css" />
-            </Component>
-
             <Directory Id="INSTALLDIR.WebServer.css" Name="css">
 
-              <Component Id="Component.style.css.1" Guid="19d12628-7654-4354-a305-9ab00b5fa9e0">
-                <File Id="style.css.1" Source="WebServer\css\style.css" />
+              <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
+                <File Id="style.css" Source="WebServer\css\style.css" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.css.img" Name="img">
@@ -810,8 +754,8 @@
                   <File Id="live.png" Source="WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
-                  <File Id="logo.png.1" Source="WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+                  <File Id="logo.png" Source="WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
@@ -823,18 +767,6 @@
                 </Component>
 
               </Directory>
-            </Directory>
-
-            <Directory Id="INSTALLDIR.WebServer.img" Name="img">
-
-              <Component Id="Component.d17.png.1" Guid="19d12628-7654-4354-a305-9ab093c7f24f">
-                <File Id="d17.png.1" Source="WebServer\img\d17.png" />
-              </Component>
-
-              <Component Id="Component.t01.png.1" Guid="19d12628-7654-4354-a305-9ab07e15fc49">
-                <File Id="t01.png.1" Source="WebServer\img\t01.png" />
-              </Component>
-
             </Directory>
 
             <Directory Id="INSTALLDIR.WebServer.js" Name="js">
@@ -859,8 +791,8 @@
                 <File Id="jquery.cycle2.swipe.min.js" Source="WebServer\js\jquery.cycle2.swipe.min.js" />
               </Component>
 
-              <Component Id="Component.jssor.slider.mini.js.1" Guid="19d12628-7654-4354-a305-9ab0fc7a9218">
-                <File Id="jssor.slider.mini.js.1" Source="WebServer\js\jssor.slider.mini.js" />
+              <Component Id="Component.jssor.slider.mini.js" Guid="19d12628-7654-4354-a305-9ab026539236">
+                <File Id="jssor.slider.mini.js" Source="WebServer\js\jssor.slider.mini.js" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.js.jquery_ui_1.11.2.custom" Name="jquery-ui-1.11.2.custom">
@@ -1023,15 +955,9 @@
 
     <Property Id="ARPPRODUCTICON" Value="MainIcon"  />
 
-    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
-
-    <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.95.0" IncludeMaximum="yes" Property="UPGRADEFOUND" MigrateFeatures="yes" />
-      <UpgradeVersion Minimum="1.2.95.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
-    </Upgrade>
+    <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
-    <CustomAction Id="PreventDowngrading" Error="Newer version already installed"  />
 
     <Binary Id="Action1_MyAction_File" SourceFile="..\..\..\Setup\%this%.CA.dll"  />
 
@@ -1118,7 +1044,6 @@
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
-      <ComponentRef Id="Component.Branding.xml" />
       <ComponentRef Id="Component.takephoto.mp3" />
       <ComponentRef Id="Component.takephoto.wav" />
       <ComponentRef Id="Component.Canon_EOS_100D.png" />
@@ -1168,23 +1093,18 @@
       <ComponentRef Id="Component.dcc.plugin" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />
       <ComponentRef Id="Component.dcc.plugin.1" />
-      <ComponentRef Id="Component.ca.xml" />
       <ComponentRef Id="Component.cs_CZ.xml" />
       <ComponentRef Id="Component.da.xml" />
       <ComponentRef Id="Component.de.xml" />
       <ComponentRef Id="Component.el_GR.xml" />
-      <ComponentRef Id="Component.en_US.xml" />
       <ComponentRef Id="Component.es_MX.xml" />
       <ComponentRef Id="Component.fr.xml" />
-      <ComponentRef Id="Component.gl_ES.xml" />
       <ComponentRef Id="Component.hu.xml" />
       <ComponentRef Id="Component.it.xml" />
       <ComponentRef Id="Component.ja.xml" />
       <ComponentRef Id="Component.nl.xml" />
-      <ComponentRef Id="Component.nl_BE.xml" />
       <ComponentRef Id="Component.pl.xml" />
       <ComponentRef Id="Component.pt_PT.xml" />
-      <ComponentRef Id="Component.ro.xml" />
       <ComponentRef Id="Component.ru.xml" />
       <ComponentRef Id="Component.sl.xml" />
       <ComponentRef Id="Component.sr.xml" />
@@ -1206,18 +1126,10 @@
       <ComponentRef Id="Component.libexpat.dll" />
       <ComponentRef Id="Component.browse.html" />
       <ComponentRef Id="Component.cmd.html" />
-      <ComponentRef Id="Component.demo.html" />
-      <ComponentRef Id="Component.fade.html" />
       <ComponentRef Id="Component.index.html" />
-      <ComponentRef Id="Component.jquery.min.js" />
-      <ComponentRef Id="Component.jssor.slider.mini.js" />
       <ComponentRef Id="Component.liveview.html" />
-      <ComponentRef Id="Component.logo.png" />
-      <ComponentRef Id="Component.logo_big.png" />
-      <ComponentRef Id="Component.Script.js" />
       <ComponentRef Id="Component.slide.html" />
       <ComponentRef Id="Component.style.css" />
-      <ComponentRef Id="Component.style.css.1" />
       <ComponentRef Id="Component.ajax_loader.gif" />
       <ComponentRef Id="Component.browse.png" />
       <ComponentRef Id="Component.capture.png" />
@@ -1226,17 +1138,15 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png.1" />
+      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
-      <ComponentRef Id="Component.d17.png.1" />
-      <ComponentRef Id="Component.t01.png.1" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
       <ComponentRef Id="Component.jquery.cycle.all.js" />
       <ComponentRef Id="Component.jquery.cycle2.center.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.swipe.min.js" />
-      <ComponentRef Id="Component.jssor.slider.mini.js.1" />
+      <ComponentRef Id="Component.jssor.slider.mini.js" />
       <ComponentRef Id="Component.jquery_ui.min.css" />
       <ComponentRef Id="Component.jquery_ui.min.js" />
       <ComponentRef Id="Component.jquery_ui.structure.min.css" />
@@ -1271,14 +1181,7 @@
 
     <InstallUISequence >
       <Custom Action="Action1_MyAction" Before="LaunchConditions"> (NOT Installed) </Custom>
-      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
-
-    <InstallExecuteSequence >
-      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-
-      <RemoveExistingProducts After="InstallInitialize" />
-    </InstallExecuteSequence>
 
   </Product>
 </Wix>

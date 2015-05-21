@@ -52,6 +52,7 @@
   <string name="PICTURE_CONTROL">Picture control</string>
   <string name="LOSSLESS_COMPRESSED_RAW">Verlustlose RAW-Kompression</string>
   <string name="RAW_COMPRESSION">RAW-Kompression</string>
+  <string name="MF__HARD_">MF (hart)</string>
   <!--End Property values-->
   <string name="Mode">Modus</string>
   <string name="Iso">_ISO</string>
@@ -67,6 +68,7 @@
   <string name="SDRamToolTip">Bilder direkt auf den PC übertragen, ohne die Karte zu benutzen</string>
   <string name="CapturePhotoToolTip">Bild aufnehmen</string>
   <string name="CapturePhotoNoAfToolTip">Bild ohne Autofokus aufnehmen</string>
+  <string name="BraketingToolTip">Belichtungsreihe </string>
   <string name="SettingsToolTip">Einstellungen</string>
   <string name="TimeLapseToolTip">Zeitraffer</string>
   <string name="FullscreenToolTip">Vollbild</string>
@@ -83,6 +85,7 @@
   <string name="SessionWindowTitle">Sitzung [Hinzuf./ändern]</string>
   <string name="LiveViewWindowTitle">Live-Ansicht</string>
   <string name="PresetEditWindowTitle">Voreinst. ändern</string>
+  <string name="BraketingWindowTitle">Belichtungsreihe</string>
   <string name="EditTagWindowTitle">Eintrag [Hinzuf./ändern]</string>
   <string name="MultipleCameraWindowTitle">Mehrfach-Kamera-Unterstützung</string>
   <string name="SavePresetWindowTitle">Speichere Einstellungen</string>
@@ -210,6 +213,8 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="MsgUseSessionEditorTags">Verwenden Sie den Sitzungeditor um Einträge zu erstellen!</string>
   <string name="MsgLastSessionCantBeDeleted">Letzte Sitzung kann nicht gelöscht werden</string>
   <string name="MsgStopTimeLapse">Zeitrafferaufnahmen laufen noch. Sollen die Zeitrafferaufnahmen trotzdem abgebrochen werden?</string>
+  <string name="MsgInstallXvidCodec">Xvid-Codec ist nicht installiert!\nMöchten Sie ihn herunterladen und installieren? </string>
+  <string name="MsgDeleteSessionQuestion">Möchten Sie mit dem Löschen der Sitzung {0} fortfahren?\nEs werden keine Dateien gelöscht!</string>
   <string name="MsgBracketingDone">Belichtungsreihe fertig</string>
   <string name="MsgActionInProgress">Aktion wird ausgeführt {0}/{1}</string>
   <string name="MenuFile">_Datei</string>
@@ -251,6 +256,7 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Art der Bewegungserkennung</string>
   <string name="LabelTwoFramesDifferenceDetector">Unterschiedsdetektor für 2 Bereiche</string>
+  <string name="LabelSimpleBackgroundModelingDetector">einfacher Hintergrund Detektor</string>
   <string name="LabelSmallestBlockSize">Kleinste Blockgröße</string>
   <string name="ButtonHelp">Hilfe</string>
   <!--31/10/2012-->
@@ -362,6 +368,8 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelTTLError">TTL-Fehler</string>
   <string name="LabelNonCPULEnseError">Ein Objektiv ohne CPU ist montiert und die Belichtung ist nicht M.</string>
   <string name="LabelImageInRAM">Es ist ein Bild, dessen Aufnahme Ziel SDRAM ist.</string>
+  <string name="LabelNoCardInsertedError">Das Aufnahmeziel ist die Karte oder die Karte und das SDRAM,
+die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt.</string>
   <string name="LabelCommandProcesingError">Während der Verarbeitung durch den Dreharbeiten-Befehl</string>
   <string name="LabelShoutingInProgress">Der Aufnahmemodus ist EFFEKTE.</string>
   <string name="LabelOverHeatedError">Die Live-Ansicht kann nicht gestartet werden, wenn die Temperatur ansteigt.</string>
@@ -410,10 +418,13 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelShowMagnifierInFullSccreen">Vergrößerungsglas in Vollbildansicht anzeigen</string>
   <string name="LabelDelayImageLoading">Übertragen der Bilder bei Serienbildervorschau verzögern</string>
   <string name="LabelShowOverlayFolder">Eingeblendeten Ordner anzeigen</string>
+  <string name="LabelPHDGuiding">PHD Leitung</string>
+  <string name="LabelWaitPHDGuiding">Warten auf PHD (sek)</string>
   <string name="LabelCountDown">Countdown</string>
   <string name="LabelCurrentEvent">Aktuelles Ereignis</string>
   <string name="LabelRemainingCaptures">Verbleibende Aufnahmen</string>
   <string name="LabelLiveViewRotation">Live-Ansicht drehen</string>
+  <string name="LabelAutomaticallyGuiding">Automatisch PHD Guiding nach Foto erfassen</string>
   <string name="LabelAutoRotate">Automatisch ausrichten</string>
   <string name="LabelReset">Zurücksetzen</string>
   <string name="LabelFocus">Fokussieren</string>
@@ -454,16 +465,19 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelGenerateThumbs">Vorschaubilder erzeugen</string>
   <string name="LabelPlay">Wiedergabe</string>
   <string name="LabelPause">Pause</string>
+  <string name="LabelImageSequencer">Bild Sequenzer</string>
   <string name="LabelLoop">Schleife</string>
   <string name="LabelProgress">Fortschritt</string>
   <string name="LabelStartImageFrame">Einzelbild starten</string>
   <string name="LabelStopImageFrame">Einzelbild stoppen</string>
   <string name="LabelPlayVideo">Video wiedergeben</string>
+  <string name="LabelLoadPresetAllCamera">Preset laden in alle Kameras</string>
   <string name="LabelBackUpFolder">Ordner sichern</string>
   <string name="LabelBackUp">Fotos sichern</string>
   <string name="LabelVerifyPreset">Einstellung prüfen</string>
   <string name="LabelRefreshSession">Dateiliste aktualisieren</string>
   <string name="LabelErrorEmail">Ihre E-Mail-Adresse (falls Sie Rückmeldungen bekommen möchten)</string>
+  <string name="LabelApertureBracketing">Blende Belichtungsreihe</string>
   <!--//20/08/2014-->
   <string name="LabelCaptureName">Aufnahmenname</string>
   <string name="LabelSeries">Serie</string>
@@ -480,14 +494,39 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelHorizontal">Horizontal</string>
   <string name="LabelVertical">Vertikal</string>
   <!--20/08/2014-->
+  <string name="LabelLockNear">Sperren nächstgelegener Punkt</string>
+  <string name="LabelLockFar">Sperren entferntester Punkt</string>
+  <string name="LabelGoNear">Zum nächsten Fokussierungspunkt</string>
+  <string name="LabelGoFar">Zum weitesten Fokussierungspunkt</string>
+  <string name="LabelMoveSmallToCamera">Bewegen kleiner Schritt zur Kamera</string>
+  <string name="LabelMoveMediumToCamera">Bewegen Medium Schritt zur Kamera</string>
+  <string name="LabelMoveLargeToCamera">Bewegen großer Schritt zur Kamera</string>
+  <string name="LabelMoveSmallToInfinity">Bewegen kleiner Schritt bis ins Unendliche</string>
+  <string name="LabelMoveMediumToInfinity">Bewegen Mittelstufe bis ins Unendliche</string>
+  <string name="LabelMoveLargeToInfinity">Bewegen großer Schritt bis ins Unendliche</string>
+  <string name="LabelDistantFromPoints">Die Entfernung zwischen den nächsten und weitesten in Schwerpunkte gesperrt</string>
+  <string name="LabelFocusStackingSimple">Fokus Stapel Einfach</string>
+  <string name="LabelFocusStackingAdvanced">Fokus Stapel Erweitert</string>
+  <string name="LabelErrorFarPoit">Stellen Sie zuerst die weitesten Fokuspunkt</string>
+  <string name="LabelErrorAutoFocusLock">Der Schwerpunkt, entsperren erster Autofokus-</string>
+  <string name="LabelErrorSimpleStackingFocusLock">Der Fokus wird gespeichert, einfache Fokus Stapel keine erforderliche Fokus zu schließen, öffnen zuerst zu starten</string>
+  <string name="LabelLowerCaseExtension">Kleinschreibung</string>
   <string name="LabelOverlayTransparency">Transparenz</string>
+  <string name="LabelOverlayUseLastCaptured">Letzte Aufnahme benutzen</string>
+  <string name="LabelMinimizeToTryIcon">Minimieren in den Try</string>
   <string name="LabelStartMinimized">Minimiert starten</string>
   <string name="LabelStartupWithWindows">Mit Windows starten</string>
+  <string name="LabelSelectSeries">Wählen Sie Fotos der gleichen Serie</string>
   <string name="LabelCaptureDelay">Aufnahmeverzögerung</string>
+  <string name="LabelAutoExportPlugins">Auto Export Plugins</string>
+  <string name="LabelAddPlugin">Plugin hinzufügen</string>
+  <string name="LabelErrorSetFolder">Fehler Satz Ordner</string>
+  <string name="LabelDetectArea">Nur Erkennung im Lineal</string>
   <string name="LabelMessagesLog">Nachrichtenprotokoll</string>
   <string name="LabelRefreshCameraList">Kameraliste aktualisieren</string>
   <string name="LabelSortOrder">Sortierreihenfolge</string>
   <string name="LabelSaveOrder">Sortierreihenfolge speichern</string>
+  <string name="LabelLoadThumbDownload">Laden Sie thumbs in Download-Fenster</string>
   <string name="LabelFormatAllCards">Alle Karten formatieren</string>
   <string name="LabelPrint">Drucken</string>
   <string name="LabelPrintSetup">Druckeinrichtung</string>
@@ -495,4 +534,50 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelMarginBetweenImages">Rand</string>
   <string name="LabelRotate">Drehen</string>
   <string name="LabelRepeatImages">Bilder wiederholen</string>
+  <string name="LabelWaitBetweenSteps">Warten Sie zwischen den Schritten (ms)</string>
+  <string name="LabelShowSecondary ">Im zweiten Monitor anzeigen</string>
+  <!--20/12/2014-->
+  <string name="LabelKeyboardTrigger">Tastatur zum Auslösen</string>
+  <string name="LabelNoProccesing">Keine Verarbeitung</string>
+  <string name="LabelNoProccesingTooltip">Die meisten Funktionen sind gesperrt</string>
+  <string name="LabelSendUsage">Nutzungsstatistiken automatisch senden</string>
+  <string name="LabelSheduleStart">Zeitplan starten</string>
+  <string name="LabelSheduleStop">Zeitplan anhalten</string>
+  <string name="LabelTimeLapseSettings">Zeitraffer Einstellungen</string>
+  <string name="LabelTimeLapseNow">Jetzt starten</string>
+  <string name="LabelTimeLapseIn">Starten in</string>
+  <string name="LabelTimeLapseAt">Starten um</string>
+  <string name="LabelTimeLapseDaily">Täglich starten</string>
+  <string name="LabelDate">Datum</string>
+  <string name="LabelTime">Zeit</string>
+  <string name="LabelSunday">Sonntag</string>
+  <string name="LabelMonday">Montag</string>
+  <string name="LabelTuesday">Dienstag</string>
+  <string name="LabelWednesday">Mittwoch</string>
+  <string name="LabelThursday">Donnerstag</string>
+  <string name="LabelFriday">Freitag</string>
+  <string name="LabelSaturday">Samstag</string>
+  <string name="LabelTimeLapseStop">Anhalten</string>
+  <string name="LabelTimeLapseStopIn">Anhalten in</string>
+  <string name="LabelTimeLapseStopAt">Anhalten um</string>
+  <string name="LabelTimeLapseStopPhotoCount">Nach Erfassungszahl</string>
+  <string name="LabelTimeLapseWaitBetweenCaptures">Wartezeit zwischen den Aufnahmen (sek)</string>
+  <string name="LabelTimeLapseCapture">Mit ausgewählter Kamera aufnehmen</string>
+  <string name="LabelTimeLapseCaptureAll">Erfassen mit allen Kameras</string>
+  <string name="LabelTimeLapseCaptureScript">Skript ausführen</string>
+  <string name="LabelTimeLapseScriptFile">Skriptdatei</string>
+  <string name="LabelBrowse">Durchsuchen</string>
+  <string name="LabelFlip">Horizontal spiegeln</string>
+  <string name="LabelLiveViewPreviewTime">Vorschau aufgenommenes Foto </string>
+  <string name="LabelColor">Farbe</string>
+  <string name="LabelImportData">Daten importieren</string>
+  <string name="LabelExportData">Daten exportieren</string>
+  <string name="LabelData">Daten</string>
+  <string name="LabelScanBarcode">Strichcode scannen</string>
+  <string name="LabelCaptureAfterScan">Erfassung nach dem Scan</string>
+  <string name="LabelKeepWindowActive">Behalten Fenster aktiv</string>
+  <string name="LabelDeleteFiles">Ausgewählte Dateien löschen</string>
+  <string name="LabelShowInExplorer">Im Explorer anzeigen</string>
+  <string name="LabelOpenInExternalViewer">In externem Betrachter öffnen</string>
+  <string name="LabelRestoreFromBackup">Aus Sicherungskopie wiederherstellen</string>
 </resources>
