@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -8,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
@@ -29,6 +31,9 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public string ExecuteThread(FileItem item,string infile, string dest, ValuePairEnumerator configData)
         {
+            try
+            {
+
             var conf = new OverlayTransformViewModel(configData);
             using (var fileStream = new MemoryStream(File.ReadAllBytes(infile)))
             {
@@ -59,10 +64,20 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 grid.Children.Add(image);
                 grid.UpdateLayout();
 
-                Regex regPattern = new Regex(@"\[(.*?)\]", RegexOptions.Singleline);
-                MatchCollection matchX = regPattern.Matches(conf.Text);
-                var text = matchX.Cast<Match>().Aggregate(conf.Text, (current1, match) => item.FileNameTemplates.Where(template => System.String.Compare(template.Name, match.Value, System.StringComparison.InvariantCultureIgnoreCase) == 0).Aggregate(current1, (current, template) => current.Replace(match.Value, template.Value)));
-
+                string text = "";
+                if (!string.IsNullOrEmpty(conf.Text))
+                {
+                    Regex regPattern = new Regex(@"\[(.*?)\]", RegexOptions.Singleline);
+                    MatchCollection matchX = regPattern.Matches(conf.Text);
+                    text = matchX.Cast<Match>()
+                        .Aggregate(conf.Text,
+                            (current1, match) =>
+                                item.FileNameTemplates.Where(
+                                    template =>
+                                        String.Compare(template.Name, match.Value,
+                                            StringComparison.InvariantCultureIgnoreCase) == 0).Aggregate(current1,
+                                                (current, template) => current.Replace(match.Value, template.Value)));
+                }
                 TextBlock textBlock = new TextBlock
                 {
                     Text = text,
@@ -143,6 +158,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
   
                 BitmapLoader.Save2Jpg(
                     BitmapLoader.SaveImageSource(grid, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight), dest);
+            }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Overlay Transform Plugin error ", ex);
             }
             return dest;
         }
