@@ -61,7 +61,18 @@ namespace CameraControl.Layouts
         {
             CopyNameClipboardCommand =
                 new RelayCommand(
-                    delegate { Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName); });
+                    delegate
+                    {
+                        try
+                        {
+                            Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
+                        }
+                        catch (Exception exception)
+                        {
+                         Log.Error("Copy to Clipboard fail ", exception);
+                            StaticHelper.Instance.SystemMessage = "Copy to Clipboard fail";
+                        }
+                    });
             OpenExplorerCommand = new RelayCommand(OpenInExplorer);
             OpenViewerCommand = new RelayCommand(OpenViewer);
             DeleteItemCommand = new RelayCommand(DeleteItem);
