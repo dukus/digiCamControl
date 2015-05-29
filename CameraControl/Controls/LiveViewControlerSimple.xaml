@@ -54,5 +54,13 @@
                 <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value}"/>
             </Border>
         </StackPanel>
+        <StackPanel Margin="1">
+            <Label Content="{T:TranslateExtension FocusMode}" Target="{Binding ElementName=cmb_focus}"/>
+            <Border BorderThickness="1" BorderBrush="{Binding Path=FocusMode.ErrorColor}" >
+                <ComboBox Name="cmb_focus" IsEnabled="{Binding Path=FocusMode.IsEnabled}" ItemsSource="{Binding Path=FocusMode.Values}" SelectedValue="{Binding Path=FocusMode.Value}" ToolTip="{Binding Path=FocusMode.Value}">
+                </ComboBox>
+            </Border>
+        </StackPanel>
+        
     </StackPanel>
 </UserControl>

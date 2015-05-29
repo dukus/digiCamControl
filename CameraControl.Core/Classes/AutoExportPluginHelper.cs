@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using CameraControl.Devices;
 
 namespace CameraControl.Core.Classes
 {
@@ -11,10 +13,17 @@ namespace CameraControl.Core.Classes
                 return outfile;
             foreach (var enumerator in configData.ConfigDataCollection)
             {
-                var plugin = enumerator["TransformPlugin"];
-                var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(plugin);
-                if (tp != null)
-                    outfile = tp.Execute(item, outfile, outfile, enumerator);
+                try
+                {
+                    var plugin = enumerator["TransformPlugin"];
+                    var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(plugin);
+                    if (tp != null)
+                        outfile = tp.Execute(item, outfile, outfile, enumerator);
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Error execute transform olugin ", exception);
+                }
             }
             return outfile;
         }
