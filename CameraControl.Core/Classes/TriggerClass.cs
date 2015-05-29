@@ -30,7 +30,9 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +54,7 @@ namespace CameraControl.Core.Classes
         private static bool _eventIsBusy = false;
         private static bool _altPressed = false;
         private static bool _ctrlPressed = false;
-
+        private Process _ngrok_process = null;
         public TriggerClass()
         {
             WebServer = new WebServer();
@@ -64,12 +66,30 @@ namespace CameraControl.Core.Classes
             //_hookID = SetHook(_proc);
             try
             {
+                KeyboardHook.KeyDownEvent += KeyDown;
+                KeyboardHook.KeyUpEvent += KeyUp;
                 if (ServiceProvider.Settings.UseWebserver)
                 {
                     WebServer.Start(ServiceProvider.Settings.WebserverPort);
+                    string file = Path.Combine(Settings.ApplicationFolder, "ngrok.exe");
+                    _ngrok_process = PhotoUtils.Run(file, "http " + ServiceProvider.Settings.WebserverPort,
+                        ProcessWindowStyle.Hidden);
+                    if (_ngrok_process == null)
+                        return;
+                    Thread.Sleep(2000);
+                    using (var client = new WebClient())
+                    {
+                        string data = client.DownloadString("http://127.0.0.1:4040/api/tunnels");
+                        dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
+                        string url = json.tunnels[0].public_url;
+                        if (!string.IsNullOrEmpty(url))
+                        {
+                            client.DownloadString(
+                                string.Format("http://digicamcontrol.com/remote/submit.php?id={0}&url={1}",
+                                    ServiceProvider.Settings.ClientId, url));
+                        }
+                    }
                 }
-                KeyboardHook.KeyDownEvent += KeyDown;
-                KeyboardHook.KeyUpEvent += KeyUp;
             }
             catch (Exception)
             {
@@ -141,6 +161,10 @@ namespace CameraControl.Core.Classes
         public void Stop()
         {
             WebServer.Stop();
+            if (_ngrok_process!=null)
+            {
+                _ngrok_process.Kill();
+            }
         }
 
         public static void KeyDown(KeyEventArgs e)

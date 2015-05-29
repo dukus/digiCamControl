@@ -257,11 +257,14 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />                                
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="2"/>
                             <CheckBox Grid.Row="1" Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
-                            <Label Grid.Row="2" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
+                            <CheckBox Grid.Row="2" Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
+                            <Label Grid.Row="3" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

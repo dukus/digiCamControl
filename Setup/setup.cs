@@ -103,14 +103,9 @@ namespace Setup
             project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
             
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
-            //project.MajorUpgradeStrategy = new MajorUpgradeStrategy()
-            //{
-            //    UpgradeVersions = VersionRange.ThisAndOlder,
-            //    PreventDowngradingVersions = VersionRange.ThisAndNewer,
-            //    NewerProductInstalledErrorMessage = "Newer version already installed",
-            //    RemoveExistingProductAfter = Step.InstallInitialize
-            //};
-            ///project.MajorUpgradeStrategy.UpgradeVersions.MigrateFeatures = true;
+            project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
+            project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
+
             project.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.AddRemoveProgramsIcon = "logo.ico";

@@ -61,31 +61,32 @@ namespace CameraControl.Core.Classes
 
         public static bool Run(string exe)
         {
-            return Run(exe, "", ProcessWindowStyle.Minimized);
+            return Run(exe, "", ProcessWindowStyle.Minimized) != null;
         }
 
         public static bool Run(string exe, string param)
         {
-            return Run(exe, param, ProcessWindowStyle.Minimized);
+            return Run(exe, param, ProcessWindowStyle.Minimized) != null;
         }
 
-        public static bool Run(string exe, string param, ProcessWindowStyle processWindowStyle)
+        public static Process Run(string exe, string param, ProcessWindowStyle processWindowStyle)
         {
+            Process process = null;
             try
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo(exe);
                 startInfo.WindowStyle = processWindowStyle;
                 if (!string.IsNullOrEmpty(param))
                     startInfo.Arguments = param;
-                Process process = Process.Start(startInfo);
+                process = Process.Start(startInfo);
                 //process.WaitForExit();
             }
             catch (Exception exception)
             {
                 Log.Error(exception);
-                return false;
+                return null;
             }
-            return true;
+            return process;
         }
 
         [Obsolete("Not used anymore", false)]

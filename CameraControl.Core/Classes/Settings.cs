@@ -226,6 +226,15 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool PublicWebserver
+        {
+            get { return _publicWebserver; }
+            set
+            {
+                _publicWebserver = value;
+                NotifyPropertyChanged("PublicWebserver");
+            }
+        }
 
         private bool _playSound;
 
@@ -281,6 +290,10 @@ namespace CameraControl.Core.Classes
                     IPAddress[] ipA =
                         Dns.GetHostAddresses(sHostName).Where(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToArray();
                     res.AddRange(ipA.Select(ip => string.Format("http://{0}:{1}", ip, WebserverPort)));
+                    if (PublicWebserver)
+                    {
+                        res.Add("http://digicamcontrol.com/remote/"+ClientId);
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -755,6 +768,7 @@ namespace CameraControl.Core.Classes
         private int _selectedWifi;
         private string _wifiIp;
         private string _startupScript;
+        private bool _publicWebserver;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -954,6 +968,7 @@ namespace CameraControl.Core.Classes
             ThumbHeigh = 100;
             CurrentThemeName = "Dark\\Blue";
             AllowWebserverActions = true;
+            PublicWebserver = false;
         }
 
 
