@@ -426,6 +426,8 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Content="{T:TranslateExtension LabelUseParellelTransfer}"  Margin="3" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
@@ -449,7 +451,10 @@
                     <Label Content="{T:TranslateExtension LabelSendUsage}"  Margin="3" Grid.Column="0" Grid.Row="7" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="7" IsChecked="{Binding SendUsageStatistics}" Margin="2" Grid.Column="1"/>
 
-                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="8" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
+                    <Label Content="{T:TranslateExtension LabelLoadCanonTransferMode}"  Margin="3" Grid.Column="0" Grid.Row="8" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox Grid.Row="8" IsChecked="{Binding LoadCanonTransferMode}" Margin="2" Grid.Column="1"/>
+
+                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="9" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelMessagesLog}">

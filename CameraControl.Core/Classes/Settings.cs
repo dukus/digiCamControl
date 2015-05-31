@@ -769,6 +769,7 @@ namespace CameraControl.Core.Classes
         private string _wifiIp;
         private string _startupScript;
         private bool _publicWebserver;
+        private bool _loadCanonTransferMode;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -858,6 +859,16 @@ namespace CameraControl.Core.Classes
             {
                 _wifiIp = value;
                 NotifyPropertyChanged("WifiIp");
+            }
+        }
+
+        public bool LoadCanonTransferMode
+        {
+            get { return _loadCanonTransferMode; }
+            set
+            {
+                _loadCanonTransferMode = value;
+                NotifyPropertyChanged("LoadCanonTransferMode");
             }
         }
 
@@ -969,6 +980,7 @@ namespace CameraControl.Core.Classes
             CurrentThemeName = "Dark\\Blue";
             AllowWebserverActions = true;
             PublicWebserver = false;
+            LoadCanonTransferMode = true;
         }
 
 

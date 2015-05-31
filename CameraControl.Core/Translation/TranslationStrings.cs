@@ -595,5 +595,6 @@ namespace CameraControl.Core.Translation
         public static string LabelCurrentMotion = "Detected motion";
         public static string LabelStartupScript = "Execute script on startup";
         public static string LabelPublicWebserver = "Allow public access";
+        public static string LabelLoadCanonTransferMode = "Load Canon transfer mode";
     }
 }
