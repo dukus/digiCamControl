@@ -8,6 +8,7 @@ using System.Diagnostics;
 using File = WixSharp.File;
 using System.Windows.Forms;
 using Microsoft.Deployment.WindowsInstaller;
+using System.Security.AccessControl; 
 
 namespace Setup
 {
@@ -28,6 +29,7 @@ namespace Setup
                 new File(appFeature, "CameraControlRemoteCmd.exe"),
                 new File(appFeature, "dcraw.exe"),
                 new File(appFeature, "ffmpeg.exe"),
+                new File(appFeature, "ngrok.exe"),
                 new File(appFeature, "MtpTester.exe"),
                 //new File(appFeature, "PhotoBooth.exe",new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
@@ -82,9 +84,11 @@ namespace Setup
                 new RegValueProperty("NET40", RegistryHive.LocalMachine,
                     @"Software\Microsoft\NET Framework Setup\NDP\v4\Full", "Install", "0"),
                 new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.LaunchConditions,
-                    Condition.NOT_Installed, Sequence.InstallUISequence)
+                    Condition.NOT_Installed, Sequence.InstallUISequence),
+                new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
+                    Condition.Always, Sequence.InstallExecuteSequence)
                 );
-
+            
             project.UI = WUI.WixUI_FeatureTree;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
 
@@ -143,6 +147,30 @@ namespace Setup
 
 
                 }
+            }
+            return ActionResult.Success;
+        }
+
+        [CustomAction]
+        public static ActionResult SetRightAction(Session session)
+        {
+            try
+            {
+                string folder = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "digiCamControl");
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+                DirectoryInfo dInfo = new DirectoryInfo(folder);
+                DirectorySecurity dSecurity = dInfo.GetAccessControl();
+                dSecurity.AddAccessRule(new FileSystemAccessRule("everyone", FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+                dInfo.SetAccessControl(dSecurity);    
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Set right error"+ex.Message);
             }
             return ActionResult.Success;
         }
