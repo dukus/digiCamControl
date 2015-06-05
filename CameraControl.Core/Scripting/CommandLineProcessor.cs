@@ -90,6 +90,11 @@ namespace CameraControl.Core.Scripting
                     IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
                     return (from prop in props where prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) || prop.PropertyType == typeof (bool) select "session." + prop.Name.ToLower() + "=" + prop.GetValue(ServiceProvider.Settings.DefaultSession, null)).ToList();
                 }
+                case "property":
+                {
+                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
+                    return (from prop in props where prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool) select "property." + prop.Name.ToLower() + "=" + prop.GetValue(device.LoadProperties(), null)).ToList();
+                }
                 default:
                     throw new Exception("Unknow parameter");
             }
@@ -134,6 +139,21 @@ namespace CameraControl.Core.Scripting
                                 if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
                                 {
                                     return prop.GetValue(ServiceProvider.Settings.DefaultSession, null);
+                                }
+                            }
+                        }
+                    }
+                    if (arg.StartsWith("property."))
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
+                        foreach (PropertyInfo prop in props)
+                        {
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                prop.PropertyType == typeof(bool))
+                            {
+                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                {
+                                    return prop.GetValue(device.LoadProperties(), null);
                                 }
                             }
                         }
@@ -246,6 +266,36 @@ namespace CameraControl.Core.Scripting
                                         int i = 0;
                                         if (int.TryParse(val, out i))
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, i, null);
+                                    }
+                                }
+                            }
+                        }
+                        return;
+                    }
+                    if (arg.StartsWith("property."))
+                    {
+                        var val = args[1].Trim();
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
+                        foreach (PropertyInfo prop in props)
+                        {
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                prop.PropertyType == typeof(bool))
+                            {
+                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                {
+                                    if (prop.PropertyType == typeof(string))
+                                    {
+                                        prop.SetValue(device.LoadProperties(), val, null);
+                                    }
+                                    if (prop.PropertyType == typeof(bool))
+                                    {
+                                        prop.SetValue(device.LoadProperties(), val == "true", null);
+                                    }
+                                    if (prop.PropertyType == typeof(int))
+                                    {
+                                        int i = 0;
+                                        if (int.TryParse(val, out i))
+                                            prop.SetValue(device.LoadProperties(), i, null);
                                     }
                                 }
                             }
