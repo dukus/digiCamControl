@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
+using CameraControl.Devices.Classes;
 
 namespace CameraControl.Core.Scripting
 {
@@ -86,16 +87,61 @@ namespace CameraControl.Core.Scripting
                             .Select(x => x.SerialNumber)
                             .ToArray();
                 case "session":
-                {
-                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
-                    return (from prop in props where prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) || prop.PropertyType == typeof (bool) select "session." + prop.Name.ToLower() + "=" + prop.GetValue(ServiceProvider.Settings.DefaultSession, null)).ToList();
-                }
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+                        return (from prop in props where prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool) select "session." + prop.Name.ToLower() + "=" + prop.GetValue(ServiceProvider.Settings.DefaultSession, null)).ToList();
+                    }
                 case "property":
-                {
-                    IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
-                    return (from prop in props where prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool) select "property." + prop.Name.ToLower() + "=" + prop.GetValue(device.LoadProperties(), null)).ToList();
-                }
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
+                        return (from prop in props where prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool) select "property." + prop.Name.ToLower() + "=" + prop.GetValue(device.LoadProperties(), null)).ToList();
+                    }
+                case "camera":
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
+                        List<string> res = new List<string>();
+                        foreach (PropertyInfo info in props)
+                        {
+                            if (info.PropertyType.Name.StartsWith("PropertyValue"))
+                            {
+                                dynamic valp = info.GetValue(device, null);
+                                object val = valp.Value;
+                                if (val != null)
+                                {
+                                    res.Add("camera." + info.Name.ToLower() + "=" + val);
+                                }
+                            }
+                        }
+                        foreach (PropertyValue<long> property in device.AdvancedProperties)
+                        {
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null)
+                            {
+                                res.Add("camera." + property.Name.ToLower() + "=" + property.Value);
+                            }
+                        }
+                        return res;
+                    }
                 default:
+                    if (arg.StartsWith("camera."))
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
+                        foreach (PropertyInfo info in props)
+                        {
+                            if (info.PropertyType.Name.StartsWith("PropertyValue") &&
+                                (arg.Split('.')[1].ToLower() == info.Name.ToLower()))
+                            {
+                                dynamic valp = info.GetValue(device, null);
+                                return valp.Values;
+                            }
+                        }
+                        foreach (PropertyValue<long> property in device.AdvancedProperties)
+                        {
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            {
+                                return property.Values;
+                            }
+                        }
+                    }
                     throw new Exception("Unknow parameter");
             }
         }
@@ -158,6 +204,31 @@ namespace CameraControl.Core.Scripting
                             }
                         }
                     }
+                    if (arg.StartsWith("camera."))
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
+                        foreach (PropertyInfo info in props)
+                        {
+                            if (info.PropertyType.Name.StartsWith("PropertyValue") &&
+                                (arg.Split('.')[1].ToLower() == info.Name.ToLower())
+                                )
+                            {
+                                dynamic valp = info.GetValue(device, null);
+                                object val = valp.Value;
+                                if (val != null)
+                                {
+                                    return val;
+                                }
+                            }
+                        }
+                        foreach (PropertyValue<long> property in device.AdvancedProperties)
+                        {
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            {
+                                return property.Value;
+                            }
+                        }
+                    }
                     throw new Exception("Unknow parameter");
             }
         }
@@ -167,23 +238,23 @@ namespace CameraControl.Core.Scripting
         {
             var device = GetDevice();
             var arg = args[0].ToLower().Trim();
-            var param = args.Skip(1).ToArray().Aggregate("", (current, s) => current + s+ " ");
+            var param = args.Skip(1).ToArray().Aggregate("", (current, s) => current + s + " ");
             args[1] = param.Trim();
             switch (arg)
             {
                 case "shutterspeed":
-                {
-                    var val = args[1].Trim();
-                    if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
                     {
-                        val += "s";
+                        var val = args[1].Trim();
+                        if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
+                        {
+                            val += "s";
+                        }
+                        if (val.Equals("bulb"))
+                        {
+                            val = "Bulb";
+                        }
+                        device.ShutterSpeed.SetValue(val);
                     }
-                    if (val.Equals("bulb"))
-                    {
-                        val = "Bulb";
-                    }
-                    device.ShutterSpeed.SetValue(val);
-                }
                     break;
                 case "iso":
                     device.IsoNumber.SetValue(args[1]);
@@ -192,19 +263,19 @@ namespace CameraControl.Core.Scripting
                     device.ExposureCompensation.SetValue(args[1]);
                     break;
                 case "aperture":
-                {
-                    var val = args[1].Trim();
-                    val = val.Replace("f", "ƒ");
-                    if (!val.Contains("/"))
                     {
-                        val = "ƒ/" + val;
+                        var val = args[1].Trim();
+                        val = val.Replace("f", "ƒ");
+                        if (!val.Contains("/"))
+                        {
+                            val = "ƒ/" + val;
+                        }
+                        if (!val.Contains("."))
+                            val = val + ".0";
+                        if (!device.FNumber.Values.Contains(val))
+                            throw new Exception(string.Format("Wrong value {0} for property aperture", val));
+                        device.FNumber.SetValue(args[1]);
                     }
-                    if (!val.Contains("."))
-                        val = val + ".0";
-                    if (!device.FNumber.Values.Contains(val))
-                        throw new Exception(string.Format("Wrong value {0} for property aperture", val));
-                    device.FNumber.SetValue(args[1]);
-                }
                     break;
                 case "focusmode":
                     device.FocusMode.SetValue(args[1]);
@@ -219,22 +290,22 @@ namespace CameraControl.Core.Scripting
                     device.CompressionSetting.SetValue(args[1]);
                     break;
                 case "camera":
-                {
-                    foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
                     {
-                        if (cameraDevice.SerialNumber == args[1])
+                        foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
                         {
-                            ServiceProvider.DeviceManager.SelectedCameraDevice = cameraDevice;
-                            break;
+                            if (cameraDevice.SerialNumber == args[1])
+                            {
+                                ServiceProvider.DeviceManager.SelectedCameraDevice = cameraDevice;
+                                break;
+                            }
                         }
                     }
-                }
                     break;
                 case "session":
                     device.CompressionSetting.SetValue(args[1]);
                     foreach (var session in ServiceProvider.Settings.PhotoSessions)
                     {
-                        if (session.Name.ToLower()==args[1].ToLower().Trim())
+                        if (session.Name.ToLower() == args[1].ToLower().Trim())
                         {
                             ServiceProvider.Settings.DefaultSession = session;
                             return;
@@ -245,23 +316,23 @@ namespace CameraControl.Core.Scripting
                     if (arg.StartsWith("session."))
                     {
                         var val = args[1].Trim();
-                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
                         foreach (PropertyInfo prop in props)
                         {
-                            if (prop.PropertyType == typeof (string) || prop.PropertyType == typeof (int) ||
-                                prop.PropertyType == typeof (bool))
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                prop.PropertyType == typeof(bool))
                             {
                                 if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
                                 {
-                                    if (prop.PropertyType == typeof (string))
+                                    if (prop.PropertyType == typeof(string))
                                     {
                                         prop.SetValue(ServiceProvider.Settings.DefaultSession, val, null);
                                     }
-                                    if (prop.PropertyType == typeof (bool))
+                                    if (prop.PropertyType == typeof(bool))
                                     {
                                         prop.SetValue(ServiceProvider.Settings.DefaultSession, val == "true", null);
                                     }
-                                    if (prop.PropertyType == typeof (int))
+                                    if (prop.PropertyType == typeof(int))
                                     {
                                         int i = 0;
                                         if (int.TryParse(val, out i))
@@ -298,6 +369,28 @@ namespace CameraControl.Core.Scripting
                                             prop.SetValue(device.LoadProperties(), i, null);
                                     }
                                 }
+                            }
+                        }
+                        return;
+                    }
+                    if (arg.StartsWith("camera."))
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
+                        foreach (PropertyInfo info in props)
+                        {
+                            if (info.PropertyType.Name.StartsWith("PropertyValue") &&
+                                (arg.Split('.')[1].ToLower() == info.Name.ToLower())
+                                )
+                            {
+                                dynamic valp = info.GetValue(device, null);
+                                valp.Value = args[1];
+                            }
+                        }
+                        foreach (PropertyValue<long> property in device.AdvancedProperties)
+                        {
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            {
+                                property.Value = args[1];
                             }
                         }
                         return;
