@@ -60,13 +60,13 @@ namespace CameraControl.Devices.Canon
                                                                    {0x10, "30"},
                                                                    {0x13, "25"},
                                                                    {0x14, "20"},
-                                                                   {0x15, "20 (1/3)"},
+                                                                   {0x15, "20"},
                                                                    {0x18, "15"},
                                                                    {0x1B, "13"},
                                                                    {0x1C, "10"},
-                                                                   {0x1D, "20  (1/3)"},
+                                                                   {0x1D, "10"},
                                                                    {0x20, "8"},
-                                                                   {0x23, "6 (1/3)"},
+                                                                   {0x23, "6"},
                                                                    {0x24, "6"},
                                                                    {0x25, "5"},
                                                                    {0x28, "4"},
@@ -84,17 +84,17 @@ namespace CameraControl.Devices.Canon
                                                                    {0x40, "0.5"},
                                                                    {0x43, "0.4"},
                                                                    {0x44, "0.3"},
-                                                                   {0x45, "0.3 (1/3)"},
+                                                                   {0x45, "0.3"},
                                                                    {0x48, "1/4"},
                                                                    {0x4B, "1/5"},
                                                                    {0x4C, "1/6"},
-                                                                   {0x4D, "1/56 (1/3)"},
+                                                                   {0x4D, "1/56"},
                                                                    {0x50, "1/8"},
-                                                                   {0x53, "1/10 (1/3)"},
+                                                                   {0x53, "1/10"},
                                                                    {0x54, "1/10"},
                                                                    {0x55, "1/13"},
                                                                    {0x58, "1/15"},
-                                                                   {0x5B, "1/20 (1/3)"},
+                                                                   {0x5B, "1/20"},
                                                                    {0x5C, "1/20"},
                                                                    {0x5D, "1/25"},
                                                                    {0x60, "1/30"},
@@ -137,19 +137,19 @@ namespace CameraControl.Devices.Canon
                                                                    {0x08, "1.0"},
                                                                    {0x0B, "1.1"},
                                                                    {0x0C, "1.2"},
-                                                                   {0x0D, "1.0 (1/3)"},
+                                                                   {0x0D, "1.0"},
                                                                    {0x10, "1.4"},
                                                                    {0x13, "1.6"},
                                                                    {0x14, "1.8"},
-                                                                   {0x15, "1.8 (1/3)"},
+                                                                   {0x15, "1.8"},
                                                                    {0x18, "2.0"},
                                                                    {0x1B, "2.2"},
                                                                    {0x1C, "2.5"},
-                                                                   {0x1D, "2.5 (1/3)"},
+                                                                   {0x1D, "2.5"},
                                                                    {0x20, "2.8"},
                                                                    {0x23, "3.2"},
                                                                    {0x24, "3.5"},
-                                                                   {0x25, "3.5 (1/3)"},
+                                                                   {0x25, "3.5"},
                                                                    {0x28, "4.0"},
                                                                    {0x2B, "4.5"},
                                                                    {0x2C, "4.5"},
@@ -163,7 +163,7 @@ namespace CameraControl.Devices.Canon
                                                                    {0x3C, "9.5"},
                                                                    {0x3D, "10.0"},
                                                                    {0x40, "11.0"},
-                                                                   {0x43, "13.0 (1/3)"},
+                                                                   {0x43, "13.0"},
                                                                    {0x44, "13.0"},
                                                                    {0x45, "14.0"},
                                                                    {0x48, "16.0"},
@@ -474,6 +474,7 @@ namespace CameraControl.Devices.Canon
 
         private void InitCompression()
         {
+            var data = GetSettingsList(Edsdk.PropID_ImageQuality);
             CompressionSetting = new PropertyValue<int>();
             CompressionSetting.AddValues("Large Fine JPEG", (int) new EosImageQuality(){PrimaryCompressLevel = EosCompressLevel.Fine,PrimaryImageFormat = EosImageFormat.Jpeg,PrimaryImageSize = EosImageSize.Large,SecondaryCompressLevel = EosCompressLevel.Unknown,SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown}.ToBitMask());
             CompressionSetting.AddValues("Large Normal JPEG", (int)new EosImageQuality() { PrimaryCompressLevel = EosCompressLevel.Normal, PrimaryImageFormat = EosImageFormat.Jpeg, PrimaryImageSize = EosImageSize.Large, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown }.ToBitMask());
@@ -485,6 +486,7 @@ namespace CameraControl.Devices.Canon
             CompressionSetting.AddValues("Tiny JPEG", (int)new EosImageQuality() { PrimaryCompressLevel = EosCompressLevel.Fine, PrimaryImageFormat = EosImageFormat.Jpeg, PrimaryImageSize = EosImageSize.Small4, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown }.ToBitMask());
             CompressionSetting.AddValues("RAW + Large Fine JPEG", (int)new EosImageQuality() {PrimaryImageFormat =EosImageFormat.Cr2,PrimaryCompressLevel = EosCompressLevel.Lossless, PrimaryImageSize = EosImageSize.Large, SecondaryImageSize =EosImageSize.Large,SecondaryCompressLevel = EosCompressLevel.Fine, SecondaryImageFormat = EosImageFormat.Jpeg }.ToBitMask());
             CompressionSetting.AddValues("RAW", (int)new EosImageQuality() { PrimaryImageFormat = EosImageFormat.Cr2, PrimaryCompressLevel = EosCompressLevel.Lossless, PrimaryImageSize = EosImageSize.Large, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown}.ToBitMask());
+            CompressionSetting.Filter(data);
             CompressionSetting.SetValue((int) Camera.ImageQuality.ToBitMask());
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
         }
@@ -690,12 +692,12 @@ namespace CameraControl.Devices.Canon
                 try
                 {
                     ShutterSpeed.Clear();
-                    var data = Camera.GetPropertyDescription(Edsdk.PropID_Tv);
+                    var data = GetSettingsList(Edsdk.PropID_Tv);
                     foreach (KeyValuePair<uint, string> keyValuePair in _shutterTable)
                     {
-                        if (data.NumElements > 0)
+                        if (data.Count > 0)
                         {
-                            if (ArrayContainValue(data.PropDesc, keyValuePair.Key))
+                            if (data.Contains((int) keyValuePair.Key))
                                 ShutterSpeed.AddValues(keyValuePair.Value, keyValuePair.Key);
                         }
                         else
@@ -759,14 +761,14 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
-                var data = Camera.GetPropertyDescription(Edsdk.PropID_Av);
+                var data = GetSettingsList(Edsdk.PropID_Av);
                 long value = Camera.GetProperty(Edsdk.PropID_Av);
                 bool shouldinit = FNumber.Values.Count == 0;
 
-                if (data.NumElements > 0)
+                if (data.Count > 0)
                     FNumber.Clear();
 
-                if (shouldinit && data.NumElements == 0)
+                if (shouldinit && data.Count == 0)
                 {
                     foreach (KeyValuePair<int, string> keyValuePair in _apertureTable)
                     {
@@ -777,8 +779,8 @@ namespace CameraControl.Devices.Canon
                 {
                     foreach (
                         KeyValuePair<int, string> keyValuePair in
-                            _apertureTable.Where(keyValuePair => data.NumElements > 0).Where(
-                                keyValuePair => ArrayContainValue(data.PropDesc, keyValuePair.Key)))
+                            _apertureTable.Where(keyValuePair => data.Count > 0).Where(
+                                keyValuePair => data.Contains(keyValuePair.Key)))
                     {
                         FNumber.AddValues("ƒ/" + keyValuePair.Value, keyValuePair.Key);
                     }
@@ -823,18 +825,30 @@ namespace CameraControl.Devices.Canon
             }
         }
 
+        public List<int> GetSettingsList(uint PropID)
+        {
+            if (Camera.Handle!= IntPtr.Zero)
+            {
+                    //get the list of possible values
+                    Edsdk.EdsPropertyDesc des = new Edsdk.EdsPropertyDesc();
+                    var Error = Edsdk.EdsGetPropertyDesc(Camera.Handle, PropID, out des);
+                    return des.PropDesc.Take(des.NumElements).ToList();
+            }
+            return new List<int>();
+        }
+
         private void ReInitIso()
         {
             try
             {
-                var data = Camera.GetPropertyDescription(Edsdk.PropID_ISOSpeed);
+                var data = GetSettingsList(Edsdk.PropID_ISOSpeed);
                 long value = Camera.GetProperty(Edsdk.PropID_ISOSpeed);
                 bool shouldinit = IsoNumber.Values.Count == 0;
-
-                if (data.NumElements > 0)
+               
+                if (data.Count > 0)
                     IsoNumber.Clear();
 
-                if (shouldinit && data.NumElements == 0)
+                if (shouldinit && data.Count == 0)
                 {
                     foreach (KeyValuePair<uint, string> keyValuePair in _isoTable)
                     {
@@ -845,8 +859,8 @@ namespace CameraControl.Devices.Canon
                 {
                     foreach (
                         KeyValuePair<uint, string> keyValuePair in
-                            _isoTable.Where(keyValuePair => data.NumElements > 0).Where(
-                                keyValuePair => ArrayContainValue(data.PropDesc, keyValuePair.Key)))
+                            _isoTable.Where(keyValuePair => data.Count > 0).Where(
+                                keyValuePair => data.Contains((int) keyValuePair.Key)))
                     {
                         IsoNumber.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                     }
@@ -864,7 +878,7 @@ namespace CameraControl.Devices.Canon
 
         private void InitMode()
         {
-            Mode = new PropertyValue<uint>();
+           Mode = new PropertyValue<uint>();
             try
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _exposureModeTable)
@@ -883,13 +897,22 @@ namespace CameraControl.Devices.Canon
 
         private void InitEc()
         {
+            var data = GetSettingsList(Edsdk.PropID_ExposureCompensation);
             ExposureCompensation = new PropertyValue<int>();
             ExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
             try
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _ec)
                 {
-                    ExposureCompensation.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
+                    if (data.Count == 0)
+                    {
+                        ExposureCompensation.AddValues(keyValuePair.Value, (int)keyValuePair.Key);                        
+                    }
+                    else
+                    {
+                        if (data.Contains((int)keyValuePair.Key))
+                            ExposureCompensation.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
+                    }
                 }
                 ExposureCompensation.IsEnabled = true;
                 ExposureCompensation.SetValue((int) Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
@@ -902,13 +925,15 @@ namespace CameraControl.Devices.Canon
 
         private void InitWb()
         {
+            var data = GetSettingsList(Edsdk.PropID_WhiteBalance);
             WhiteBalance = new PropertyValue<long>();
             WhiteBalance.ValueChanged += WhiteBalance_ValueChanged;
             try
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _wbTable)
                 {
-                    WhiteBalance.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
+                    if (data.Count > 0 && data.Contains((int) keyValuePair.Key))
+                        WhiteBalance.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 WhiteBalance.IsEnabled = true;
                 WhiteBalance.SetValue((long) Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
@@ -933,13 +958,15 @@ namespace CameraControl.Devices.Canon
 
         private void InitMetering()
         {
+            var data = GetSettingsList(Edsdk.PropID_MeteringMode);
             ExposureMeteringMode = new PropertyValue<int>();
             ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
             try
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _meteringTable)
                 {
-                    ExposureMeteringMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
+                    if (data.Contains((int) keyValuePair.Key))
+                        ExposureMeteringMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 ExposureMeteringMode.IsEnabled = true;
                 ExposureMeteringMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
@@ -952,13 +979,15 @@ namespace CameraControl.Devices.Canon
 
         private void InitFocus()
         {
+            var data = GetSettingsList(Edsdk.PropID_AFMode);
             FocusMode = new PropertyValue<long>();
             FocusMode.ValueChanged += FocusMode_ValueChanged;
             try
             {
                 foreach (KeyValuePair<uint, string> keyValuePair in _focusModeTable)
                 {
-                    FocusMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
+                    if (data.Contains((int) keyValuePair.Key))
+                        FocusMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
                 FocusMode.IsEnabled = true;
                 FocusMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_AFMode), false);
@@ -1273,15 +1302,15 @@ namespace CameraControl.Devices.Canon
             return "";
         }
 
-        private bool ArrayContainValue(IEnumerable<int> data, uint value)
-        {
-            return ArrayContainValue(data, (int) value);
-        }
+        //private bool ArrayContainValue(IEnumerable<int> data, uint value)
+        //{
+        //    return ArrayContainValue(data, (int) value);
+        //}
 
-        private bool ArrayContainValue(IEnumerable<int> data, int value)
-        {
-            return data.Any(i => i == (int) value);
-        }
+        //private bool ArrayContainValue(IEnumerable<int> data, int value)
+        //{
+        //    return data.Any(i => i == (int) value);
+        //}
 
         public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
         {

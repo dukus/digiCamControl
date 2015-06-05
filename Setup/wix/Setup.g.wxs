@@ -107,18 +107,6 @@
             <File Id="Canon.Eos.Framework.dll" Source="Canon.Eos.Framework.dll" />
           </Component>
 
-          <Component Id="Component.DPPDLL.dll" Guid="19d12628-7654-4354-a305-9ab01c8288a9">
-            <File Id="DPPDLL.dll" Source="DPPDLL.dll" />
-          </Component>
-
-          <Component Id="Component.DPPLibCom.dll" Guid="19d12628-7654-4354-a305-9ab07964ad2e">
-            <File Id="DPPLibCom.dll" Source="DPPLibCom.dll" />
-          </Component>
-
-          <Component Id="Component.DPPRSC.dll" Guid="19d12628-7654-4354-a305-9ab0a1dcc2be">
-            <File Id="DPPRSC.dll" Source="DPPRSC.dll" />
-          </Component>
-
           <Component Id="Component.Eagle.dll" Guid="19d12628-7654-4354-a305-9ab099e2f8b9">
             <File Id="Eagle.dll" Source="Eagle.dll" />
           </Component>
@@ -199,10 +187,6 @@
             <File Id="Microsoft.Practices.ServiceLocation.dll" Source="Microsoft.Practices.ServiceLocation.dll" />
           </Component>
 
-          <Component Id="Component.Mlib.dll" Guid="19d12628-7654-4354-a305-9ab066c41d95">
-            <File Id="Mlib.dll" Source="Mlib.dll" />
-          </Component>
-
           <Component Id="Component.Newtonsoft.Json.dll" Guid="19d12628-7654-4354-a305-9ab021847151">
             <File Id="Newtonsoft.Json.dll" Source="Newtonsoft.Json.dll" />
           </Component>
@@ -225,10 +209,6 @@
 
           <Component Id="Component.Typesafe.Mailgun.dll" Guid="19d12628-7654-4354-a305-9ab0fd78f3bf">
             <File Id="Typesafe.Mailgun.dll" Source="Typesafe.Mailgun.dll" />
-          </Component>
-
-          <Component Id="Component.Ucs32P.dll" Guid="19d12628-7654-4354-a305-9ab0a637e154">
-            <File Id="Ucs32P.dll" Source="Ucs32P.dll" />
           </Component>
 
           <Component Id="Component.wiaaut.dll" Guid="19d12628-7654-4354-a305-9ab06f0f0ff3">
@@ -996,9 +976,6 @@
       <ComponentRef Id="Component.CameraControl.Core.dll" />
       <ComponentRef Id="Component.CameraControl.Devices.dll" />
       <ComponentRef Id="Component.Canon.Eos.Framework.dll" />
-      <ComponentRef Id="Component.DPPDLL.dll" />
-      <ComponentRef Id="Component.DPPLibCom.dll" />
-      <ComponentRef Id="Component.DPPRSC.dll" />
       <ComponentRef Id="Component.Eagle.dll" />
       <ComponentRef Id="Component.EDSDK.dll" />
       <ComponentRef Id="Component.EdsImage.dll" />
@@ -1019,14 +996,12 @@
       <ComponentRef Id="Component.MahApps.Metro.dll" />
       <ComponentRef Id="Component.MeasurementProtocolClient.dll" />
       <ComponentRef Id="Component.Microsoft.Practices.ServiceLocation.dll" />
-      <ComponentRef Id="Component.Mlib.dll" />
       <ComponentRef Id="Component.Newtonsoft.Json.dll" />
       <ComponentRef Id="Component.PortableDeviceLib.dll" />
       <ComponentRef Id="Component.ShoestringDSUSB_DLL.dll" />
       <ComponentRef Id="Component.System.Net.FtpClient.dll" />
       <ComponentRef Id="Component.System.Windows.Interactivity.dll" />
       <ComponentRef Id="Component.Typesafe.Mailgun.dll" />
-      <ComponentRef Id="Component.Ucs32P.dll" />
       <ComponentRef Id="Component.wiaaut.dll" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.AvalonDock.dll" />

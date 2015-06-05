@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using PortableDeviceLib;
 
@@ -275,7 +276,19 @@ namespace CameraControl.Devices.Classes
                 }
             }
         }
-    
+
+        public void Filter(List<T> values)
+        {
+            var old = new Dictionary<string, T>(_valuesDictionary);
+            _valuesDictionary.Clear();
+            foreach (var val in old)
+            {
+                if (values.Contains(val.Value))
+                    _valuesDictionary.Add(val.Key, val.Value);
+            }
+            _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
+            _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
+        }
 
         public void SetValue()
         {
