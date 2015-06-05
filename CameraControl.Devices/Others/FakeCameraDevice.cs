@@ -73,14 +73,26 @@ namespace CameraControl.Devices.Others
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
             FocusMode = new PropertyValue<long> {IsEnabled = false};
             CompressionSetting = new PropertyValue<int> {IsEnabled = false};
-            IsoNumber = new PropertyValue<int> {IsEnabled = false};
+            IsoNumber = new PropertyValue<int> {IsEnabled = true};
             ExposureMeteringMode = new PropertyValue<int> {IsEnabled = false};
             Battery = 100;
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
             Capabilities.Add(CapabilityEnum.LiveView);
-            LiveViewImageZoomRatio=new PropertyValue<int>();
-            LiveViewImageZoomRatio.AddValues("All",0);
+            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.Value = "All";
+
+            IsoNumber.AddValues("100", 100);
+            IsoNumber.AddValues("200", 200);
+            IsoNumber.AddValues("300", 300);
+            IsoNumber.Value = "100";
+
+            var val = new PropertyValue<long>() {Name = "Test"};
+            val.AddValues("Val 1", 1);
+            val.AddValues("Val 2", 2);
+            val.AddValues("Val 3", 3);
+            val.Value = "Val 1";
+            AdvancedProperties.Add(val);
         }
 
         public override void StartLiveView()
