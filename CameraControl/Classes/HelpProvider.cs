@@ -65,19 +65,19 @@ namespace CameraControl.Classes
         {
             _helpData = new Dictionary<HelpSections, string>
                             {
-                                {HelpSections.MainMenu, "http://www.digicamcontrol.com/manual"},
-                                {HelpSections.Bracketig, "http://www.digicamcontrol.com/manual/bracketing"},
+                                {HelpSections.MainMenu, "http://digicamcontrol.com/wiki/index.php/User_Guide"},
+                                {HelpSections.Bracketig, "http://digicamcontrol.com/wiki/index.php/Bracketing"},
                                 {
                                     HelpSections.FocusStacking,
-                                    "http://digicamcontrol.com/manual/focus-stacking"
+                                    "http://digicamcontrol.com/wiki/index.php/Live_view#Focus_stacking"
                                     },
                                 {HelpSections.Settings, "http://digicamcontrol.com/wiki/index.php/Settings"},
-                                {HelpSections.TimeLapse, "http://www.digicamcontrol.com/manual/time-lapse"},
-                                {HelpSections.LiveView, "http://www.digicamcontrol.com/manual/live-view"},
+                                {HelpSections.TimeLapse, "http://digicamcontrol.com/wiki/index.php/Time_lapse"},
+                                {HelpSections.LiveView, "http://digicamcontrol.com/wiki/index.php/Live_view"},
                                 {HelpSections.Session, "http://digicamcontrol.com/wiki/index.php/Session"},
-                                {HelpSections.Bulb, "http://www.digicamcontrol.com/manual/bulb-mode"},
-                                {HelpSections.MultipleCamera, "http://www.digicamcontrol.com/manual/multiple-cameras"},
-                                {HelpSections.DownloadPhotos, "http://www.digicamcontrol.com/manual/download-photos"},
+                                {HelpSections.Bulb, "http://digicamcontrol.com/wiki/index.php/Bulb_mode_(Astro_module)"},
+                                {HelpSections.MultipleCamera, "http://digicamcontrol.com/wiki/index.php/Multiple_cameras"},
+                                {HelpSections.DownloadPhotos, "http://digicamcontrol.com/wiki/index.php/Download_photos"},
                             };
         }
 
