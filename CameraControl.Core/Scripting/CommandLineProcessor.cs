@@ -116,7 +116,7 @@ namespace CameraControl.Core.Scripting
                         {
                             if (!string.IsNullOrEmpty(property.Name) && property.Value != null)
                             {
-                                res.Add("camera." + property.Name.ToLower() + "=" + property.Value);
+                                res.Add("camera." + property.Name.ToLower().Replace(" ", "_") + "=" + property.Value);
                             }
                         }
                         return res;
@@ -128,7 +128,7 @@ namespace CameraControl.Core.Scripting
                         foreach (PropertyInfo info in props)
                         {
                             if (info.PropertyType.Name.StartsWith("PropertyValue") &&
-                                (arg.Split('.')[1].ToLower() == info.Name.ToLower()))
+                                (arg.Split('.')[1].ToLower().Replace(" ", "_") == info.Name.ToLower()))
                             {
                                 dynamic valp = info.GetValue(device, null);
                                 return valp.Values;
@@ -136,7 +136,7 @@ namespace CameraControl.Core.Scripting
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)
                         {
-                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower().Replace(" ","_")))
                             {
                                 return property.Values;
                             }

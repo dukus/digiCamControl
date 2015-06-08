@@ -87,7 +87,7 @@ namespace CameraControl.Devices.Others
             IsoNumber.AddValues("300", 300);
             IsoNumber.Value = "100";
 
-            var val = new PropertyValue<long>() {Name = "Test"};
+            var val = new PropertyValue<long>() {Name = "Test Test"};
             val.AddValues("Val 1", 1);
             val.AddValues("Val 2", 2);
             val.AddValues("Val 3", 3);
