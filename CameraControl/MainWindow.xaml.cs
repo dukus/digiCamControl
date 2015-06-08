@@ -592,11 +592,12 @@ namespace CameraControl
                     }
                     else
                     {
-                        StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
+                        this.ShowMessageAsync("Error", TranslationStrings.MsgBulbModeNotSupported);
                         return;
                     }
                 }
-                CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                //CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);
             }
             catch (DeviceException exception)
             {
