@@ -1067,13 +1067,26 @@ namespace CameraControl.ViewModel
                 case WindowsCmdConsts.LiveViewWnd_Maximize:
                     ShowLeftTab = false;
                     break;
+                case WindowsCmdConsts.LiveViewWnd_StartRecord:
+                    RecordMovie();
+                    break;
+                case WindowsCmdConsts.LiveViewWnd_StopRecord:
+                    StopRecordMovie();
+                    break;
+
             }
         }
 
         private void InitCommands()
         {
             AutoFocusCommand = new RelayCommand(AutoFocus);
-            RecordMovieCommand = new RelayCommand(RecordMovie,
+            RecordMovieCommand = new RelayCommand(delegate
+            {
+                if (Recording)
+                    StopRecordMovie();
+                else
+                    RecordMovie();
+            },
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(CaptureInThread);
             FocusMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.SmallFocusStepCanon : -ServiceProvider.Settings.SmalFocusStep));
@@ -2012,6 +2025,7 @@ namespace CameraControl.ViewModel
             return points;
         }
 
+
         private void RecordMovie()
         {
             string resp = Recording ? "" : CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
@@ -2032,14 +2046,7 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                if (Recording)
-                {
-                    CameraDevice.StopRecordMovie();
-                }
-                else
-                {
-                    CameraDevice.StartRecordMovie();
-                }
+                CameraDevice.StartRecordMovie();
             }
             catch (Exception exception)
             {
@@ -2047,6 +2054,26 @@ namespace CameraControl.ViewModel
                 Log.Error("Recording error", exception);
             }
         }
+
+        private void StopRecordMovie()
+        {
+            var thread = new Thread(StopRecordMovieThread);
+            thread.Start();
+        }
+
+        private void StopRecordMovieThread()
+        {
+            try
+            {
+                CameraDevice.StopRecordMovie();
+            }
+            catch (Exception exception)
+            {
+                StaticHelper.Instance.SystemMessage = exception.Message;
+                Log.Error("Recording error", exception);
+            }
+        }
+
 
         private void StartLiveView()
         {

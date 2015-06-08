@@ -207,8 +207,6 @@ namespace CameraControl.windows
                                 return;
                             }
                             DataContext = new LiveViewViewModel(cameraparam);
-
-
                             SelectedPortableDevice = cameraparam;
 
                             Show();
