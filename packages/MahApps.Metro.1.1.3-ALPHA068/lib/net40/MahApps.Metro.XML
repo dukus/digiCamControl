@@ -36,6 +36,89 @@
             With this class we can make custom window styles.
             </summary>
         </member>
+        <member name="T:MahApps.Metro.Controls.Dialogs.IDialogCoordinator">
+            <summary>
+            Use the dialog coordinator to help you interfact with dialogs from a view model.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.ShowInputAsync(System.Object,System.String,System.String,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)">
+            <summary>
+            Shows the input dialog.
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+            <param name="title">The title of the MessageDialog.</param>
+            <param name="message">The message contained within the MessageDialog.</param>
+            <param name="settings">Optional settings that override the global metro dialog settings.</param>
+            <returns>The text that was entered or null (Nothing in Visual Basic) if the user cancelled the operation.</returns>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.ShowLoginAsync(System.Object,System.String,System.String,MahApps.Metro.Controls.Dialogs.MessageDialogStyle,MahApps.Metro.Controls.Dialogs.LoginDialogSettings)">
+            <summary>
+            Creates a LoginDialog inside of the current window.
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+            <param name="title">The title of the LoginDialog.</param>
+            <param name="message">The message contained within the LoginDialog.</param>
+            <param name="style"></param>
+            <param name="settings">Optional settings that override the global metro dialog settings.</param>
+            <returns>The text that was entered or null (Nothing in Visual Basic) if the user cancelled the operation.</returns>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.ShowMessageAsync(System.Object,System.String,System.String,MahApps.Metro.Controls.Dialogs.MessageDialogStyle,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)">
+            <summary>
+            Creates a MessageDialog inside of the current window.
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+            <param name="title">The title of the MessageDialog.</param>
+            <param name="message">The message contained within the MessageDialog.</param>
+            <param name="style">The type of buttons to use.</param>
+            <param name="settings">Optional settings that override the global metro dialog settings.</param>
+            <returns>A task promising the result of which button was pressed.</returns>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.ShowProgressAsync(System.Object,System.String,System.String,System.Boolean,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)">
+            <summary>
+            Creates a ProgressDialog inside of the current window.
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+            <param name="title">The title of the ProgressDialog.</param>
+            <param name="message">The message within the ProgressDialog.</param>
+            <param name="isCancelable">Determines if the cancel button is visible.</param>
+            <param name="settings">Optional Settings that override the global metro dialog settings.</param>
+            <returns>A task promising the instance of ProgressDialogController for this operation.</returns>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.ShowMetroDialogAsync(System.Object,MahApps.Metro.Controls.Dialogs.BaseMetroDialog,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)">
+            <summary>
+            Adds a Metro Dialog instance to the specified window and makes it visible asynchronously.        
+            <para>You have to close the resulting dialog yourself with <see cref="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.HideMetroDialogAsync(System.Object,MahApps.Metro.Controls.Dialogs.BaseMetroDialog,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)"/>.</para>
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+            <param name="dialog">The dialog instance itself.</param>
+            <param name="settings">An optional pre-defined settings instance.</param>
+            <returns>A task representing the operation.</returns>
+            <exception cref="T:System.InvalidOperationException">The <paramref name="dialog"/> is already visible in the window.</exception>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.HideMetroDialogAsync(System.Object,MahApps.Metro.Controls.Dialogs.BaseMetroDialog,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)">
+            <summary>
+            Hides a visible Metro Dialog instance.
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+            <param name="dialog">The dialog instance to hide.</param>
+            <param name="settings">An optional pre-defined settings instance.</param>
+            <returns>A task representing the operation.</returns>
+            <exception cref="T:System.InvalidOperationException">
+            The <paramref name="dialog"/> is not visible in the window.
+            This happens if <see cref="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.ShowMetroDialogAsync(System.Object,MahApps.Metro.Controls.Dialogs.BaseMetroDialog,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)"/> hasn't been called before.
+            </exception>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.IDialogCoordinator.GetCurrentDialogAsync``1(System.Object)">
+            <summary>
+            Gets the current shown dialog.
+            </summary>
+            <param name="context">Typically this should be the view model, which you register in XAML using <see cref="M:MahApps.Metro.Controls.Dialogs.DialogParticipation.SetRegister(System.Windows.DependencyObject,System.Object)"/>.</param>
+        </member>
+        <member name="F:MahApps.Metro.Controls.Dialogs.DialogCoordinator.Instance">
+            <summary>
+            Gets the default instance if the dialog coordinator, which can be injected into a view model.
+            </summary>
+        </member>
         <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.Update">
             <summary>
             Updates all glow windows (visible, hidden, collapsed)
@@ -358,6 +441,66 @@
             An implementation of BaseMetroDialog allowing arbitrary content.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.Content">
+            <summary>
+            Gets or sets the Content of this control..
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.CommandParameter">
+            <summary>
+            Reflects the parameter to pass to the CommandProperty upon execution. 
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.CommandTarget">
+            <summary>
+            Gets or sets the target element on which to fire the command.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.Command">
+            <summary>
+            Get or sets the Command property. 
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.ExtraTag">
+            <summary>
+            Gets or sets an extra tag.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.Orientation">
+            <summary>
+            Gets or sets the dimension of children stacking.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.Icon">
+            <summary>
+             Gets or sets the Content used to generate the icon part.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.IconTemplate">
+            <summary> 
+            Gets or sets the ContentTemplate used to display the content of the icon part. 
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.ButtonStyle">
+            <summary>
+            Gets/sets the button style.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.MenuStyle">
+            <summary>
+            Gets/sets the menu style.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.ArrowBrush">
+            <summary>
+            Gets/sets the brush of the button arrow icon.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.DropDownButton.ArrowVisibility">
+            <summary>
+            Gets/sets the visibility of the button arrow icon.
+            </summary>
+        </member>
         <member name="T:MahApps.Metro.Controls.FlipView">
             <summary>
             A control that imitate a slideshow with back/forward buttons.
@@ -597,6 +740,26 @@
             <see cref="T:System.Windows.Controls.ComboBox"/>
             </summary>
         </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.GetMaxLength(System.Windows.UIElement)">
+            <summary>
+            Gets the Maximum number of characters the TextBox can accept.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.SetMaxLength(System.Windows.UIElement,System.Int32)">
+            <summary>
+            Sets the Maximum number of characters the TextBox can accept.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.GetCharacterCasing(System.Windows.UIElement)">
+            <summary>
+            Gets the Character casing of the TextBox.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.SetCharacterCasing(System.Windows.UIElement,System.Windows.Controls.CharacterCasing)">
+            <summary>
+            Sets the Character casing of the TextBox.
+            </summary>
+        </member>
         <member name="T:MahApps.Metro.Controls.ControlsHelper">
             <summary>
             A helper class that provides various controls.
@@ -779,6 +942,19 @@
             <summary>
             Initializes a new instance of the MahApps.Metro.Controls.MetroWindow class.
             </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.MetroWindow.GetPart``1(System.String)">
+            <summary>
+            Gets the template child with the given name.
+            </summary>
+            <typeparam name="T">The interface type inheirted from DependencyObject.</typeparam>
+            <param name="name">The name of the template child.</param>
+        </member>
+        <member name="M:MahApps.Metro.Controls.MetroWindow.GetPart(System.String)">
+            <summary>
+            Gets the template child with the given name.
+            </summary>
+            <param name="name">The name of the template child.</param>
         </member>
         <member name="P:MahApps.Metro.Controls.MetroWindow.OverrideDefaultWindowCommandsBrush">
             <summary>
@@ -1150,8 +1326,16 @@
             <summary>
             Sets the IsHitTestVisibleInChromeProperty to a MetroWindow template child
             </summary>
-            <param name="window">The MetroWindow</param>
-            <param name="name">The name of the template child</param>
+            <param name="window">The MetroWindow.</param>
+            <param name="name">The name of the template child.</param>
+        </member>
+        <member name="M:MahApps.Metro.Controls.MetroWindowHelpers.SetWindowChromeResizeGripDirection(MahApps.Metro.Controls.MetroWindow,System.String,Microsoft.Windows.Shell.ResizeGripDirection)">
+            <summary>
+            Sets the WindowChrome ResizeGripDirection to a MetroWindow template child.
+            </summary>
+            <param name="window">The MetroWindow.</param>
+            <param name="name">The name of the template child.</param>
+            <param name="direction">The direction.</param>
         </member>
         <member name="M:MahApps.Metro.Controls.MetroWindowHelpers.HandleWindowCommandsForFlyouts(MahApps.Metro.Controls.MetroWindow,System.Collections.Generic.IEnumerable{MahApps.Metro.Controls.Flyout},System.Windows.Media.Brush)">
             <summary>
@@ -1164,6 +1348,11 @@
         <member name="T:MahApps.Metro.Controls.NumericUpDown">
             <summary>
                 Represents a Windows spin box (also known as an up-down control) that displays numeric values.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.NumericUpDown.OnGotFocus(System.Object,System.Windows.RoutedEventArgs)">
+            <summary> 
+                Called when this element or any below gets focus.
             </summary>
         </member>
         <member name="M:MahApps.Metro.Controls.NumericUpDown.OnApplyTemplate">
@@ -1464,6 +1653,31 @@
         <member name="P:MahApps.Metro.Controls.ToggleSwitchButton.SwitchForeground">
             <summary>
             Gets/sets the brush used for the control's foreground.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitchButton.OnSwitchBrush">
+            <summary>
+            Gets/sets the brush used for the on-switch's foreground.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitchButton.OffSwitchBrush">
+            <summary>
+            Gets/sets the brush used for the off-switch's foreground.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitchButton.ThumbIndicatorBrush">
+            <summary>
+            Gets/sets the brush used for the thumb indicator.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitchButton.ThumbIndicatorDisabledBrush">
+            <summary>
+            Gets/sets the brush used for the thumb indicator.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitchButton.ThumbIndicatorWidth">
+            <summary>
+            Gets/sets the width of the thumb indicator.
             </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.TransitionType">
@@ -4976,14 +5190,74 @@
             Gets/sets the brush used for the switch's foreground.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.OnSwitchBrush">
+            <summary>
+            Gets/sets the brush used for the on-switch's foreground.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.OffSwitchBrush">
+            <summary>
+            Gets/sets the brush used for the off-switch's foreground.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.ThumbIndicatorBrush">
+            <summary>
+            Gets/sets the brush used for the thumb indicator.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.ThumbIndicatorDisabledBrush">
+            <summary>
+            Gets/sets the brush used for the thumb indicator.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.ThumbIndicatorWidth">
+            <summary>
+            Gets/sets the width of the thumb indicator.
+            </summary>
+        </member>
         <member name="P:MahApps.Metro.Controls.ToggleSwitch.ContentDirection">
             <summary>
             Gets/sets the control's content flow direction.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.ToggleSwitchButtonStyle">
+            <summary>
+            Gets/sets the control's toggle switch button style.
+            </summary>
+        </member>
         <member name="P:MahApps.Metro.Controls.ToggleSwitch.IsChecked">
             <summary>
             Gets/sets whether the control is Checked (On) or not (Off).
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.CheckChangedCommand">
+            <summary>
+            Gets/sets the command which will be executed if the IsChecked property was changed.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.CheckedCommand">
+            <summary>
+            Gets/sets the command which will be executed if the checked event of the control is fired.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.UnCheckedCommand">
+            <summary>
+            Gets/sets the command which will be executed if the checked event of the control is fired.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.CheckChangedCommandParameter">
+            <summary>
+            Gets/sets the command parameter which will be passed by the CheckChangedCommand.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.CheckedCommandParameter">
+            <summary>
+            Gets/sets the command parameter which will be passed by the CheckedCommand.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.ToggleSwitch.UnCheckedCommandParameter">
+            <summary>
+            Gets/sets the command parameter which will be passed by the UnCheckedCommand.
             </summary>
         </member>
         <member name="E:MahApps.Metro.Controls.ToggleSwitch.IsCheckedChanged">
