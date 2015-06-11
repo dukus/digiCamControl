@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a3502677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka">
+  <Product Id="19d12628-7654-4354-a305-9ab0a3502681" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.10" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -183,6 +183,10 @@
             <File Id="MeasurementProtocolClient.dll" Source="MeasurementProtocolClient.dll" />
           </Component>
 
+          <Component Id="Component.Microsoft.Deployment.WindowsInstaller.dll" Guid="19d12628-7654-4354-a305-9ab0e69557a1">
+            <File Id="Microsoft.Deployment.WindowsInstaller.dll" Source="Microsoft.Deployment.WindowsInstaller.dll" />
+          </Component>
+
           <Component Id="Component.Microsoft.Practices.ServiceLocation.dll" Guid="19d12628-7654-4354-a305-9ab0d34f01e0">
             <File Id="Microsoft.Practices.ServiceLocation.dll" Source="Microsoft.Practices.ServiceLocation.dll" />
           </Component>
@@ -213,6 +217,14 @@
 
           <Component Id="Component.wiaaut.dll" Guid="19d12628-7654-4354-a305-9ab06f0f0ff3">
             <File Id="wiaaut.dll" Source="wiaaut.dll" />
+          </Component>
+
+          <Component Id="Component.WixSharp.dll" Guid="19d12628-7654-4354-a305-9ab038bd1f01">
+            <File Id="WixSharp.dll" Source="WixSharp.dll" />
+          </Component>
+
+          <Component Id="Component.WixSharp.UI.dll" Guid="19d12628-7654-4354-a305-9ab0ac00ab49">
+            <File Id="WixSharp.UI.dll" Source="WixSharp.UI.dll" />
           </Component>
 
           <Component Id="Component.WriteableBitmapEx.Wpf.dll" Guid="19d12628-7654-4354-a305-9ab061a87355">
@@ -942,8 +954,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.99.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.10" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.2.99.10" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -995,6 +1007,7 @@
       <ComponentRef Id="Component.log4net.dll" />
       <ComponentRef Id="Component.MahApps.Metro.dll" />
       <ComponentRef Id="Component.MeasurementProtocolClient.dll" />
+      <ComponentRef Id="Component.Microsoft.Deployment.WindowsInstaller.dll" />
       <ComponentRef Id="Component.Microsoft.Practices.ServiceLocation.dll" />
       <ComponentRef Id="Component.Newtonsoft.Json.dll" />
       <ComponentRef Id="Component.PortableDeviceLib.dll" />
@@ -1003,6 +1016,8 @@
       <ComponentRef Id="Component.System.Windows.Interactivity.dll" />
       <ComponentRef Id="Component.Typesafe.Mailgun.dll" />
       <ComponentRef Id="Component.wiaaut.dll" />
+      <ComponentRef Id="Component.WixSharp.dll" />
+      <ComponentRef Id="Component.WixSharp.UI.dll" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.AvalonDock.dll" />
       <ComponentRef Id="Component.Xceed.Wpf.AvalonDock.Themes.Aero.dll" />

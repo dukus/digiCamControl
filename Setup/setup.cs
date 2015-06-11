@@ -72,7 +72,7 @@ namespace Setup
                     new DirFiles(obsPlugin, @"ObsPlugin\CLRHostPlugin\*.*")
                     ));
 
-            var baseDir = new Dir(@"%ProgramFiles%",
+            var baseDir = new Dir(@"%ProgramFiles%\",
                 appDir ,
                 obsDir
                 );
@@ -113,7 +113,7 @@ namespace Setup
             project.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.AddRemoveProgramsIcon = "logo.ico";
-            Compiler.PreserveTempFiles = false;
+            Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);
 
         }

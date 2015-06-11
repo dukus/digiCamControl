@@ -4,16 +4,6 @@
         <name>WixSharp.UI</name>
     </assembly>
     <members>
-        <member name="T:Microsoft.Deployment.Samples.EmbeddedUI.InstallProgressCounter">
-            <summary>
-            Tracks MSI progress messages and converts them to usable progress.
-            </summary>
-        </member>
-        <member name="F:Microsoft.Deployment.Samples.EmbeddedUI.InstallProgressCounter.Progress">
-            <summary>
-            Gets a number between 0 and 1 that indicates the overall installation progress.
-            </summary>
-        </member>
         <member name="T:WixSharp.ShowClrDialogAction">
              <summary>
              Defines WiX Managed CustomAction.
@@ -104,35 +94,6 @@
             <param name="name">Name of the CustomAction. The name should match the method implementing the custom action functionality.</param>
             <param name="actionAssembly">Path to the assembly containing the CustomAction implementation. Specify <c>"%this%"</c> if the assembly
             is in the Wix# script.</param>
-        </member>
-        <member name="M:WixSharp.ResourcesData.InitFromWxl(System.Byte[])">
-            <summary>
-            Initializes from WiX localization data (*.wxl).
-            </summary>
-            <param name="wxlData">The WXL file bytes.</param>
-            <returns></returns>
-        </member>
-        <member name="F:WixSharp.UIShell.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:WixSharp.UIShell.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:WixSharp.UIShell.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:WixSharp.Win32">
-            <summary>
-            Set of Win32 API wrappers
-            </summary>
         </member>
         <member name="T:WixSharp.WixCLRDialog">
             <summary>

@@ -33,11 +33,5 @@ $usingTask.Attributes.Append($attr)
 
 $xml.Project.AppendChild($usingTask)
 
-#delete the bundled program.cs file.
-$prog = $xml.Project.SelectSingleNode("//a:Compile[@Include='Program.cs']", $nsmgr)
-if($prog -ne $null)
-{
-    $prog.SelectSingleNode("..").RemoveChild($prog)
-}
 #save the changes.
 $xml.Save($project.FullName)

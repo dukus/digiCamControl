@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WixSharp.UI</name>
+    </assembly>
+    <members>
+        <member name="T:WixSharp.ShowClrDialogAction">
+             <summary>
+             Defines WiX Managed CustomAction.
+             <para>
+             Managed CustomAction can be defined either in the Wix# script or in the external assembly or C# file.
+             The only requirements for any C# method to be qualified for being Managed CustomAcyion is to
+             have DTF Action signature <c>public static ActionResult MyManagedAction(Session session)</c>, and be
+             marked with <c>[CustomAction]</c> attribute.
+             </para>
+             <para>
+             If Managed CustomAction depends on any assembly, which will not be registered with GAC on the
+             target system such assembly needs to be listed in the <see cref="F:WixSharp.ManagedAction.RefAssemblies"/>.
+             </para>
+             <remarks>
+             <see cref="T:WixSharp.ManagedAction"/> often needs to be executed with the elevated privileges. Thus after instantiation it will have
+             <see cref="F:WixSharp.Action.Impersonate"/> set to <c>false</c> and <see cref="F:WixSharp.Action.Execute"/> set to <c>Execute.deferred</c> to allow elevating.
+             </remarks>
+             </summary>
+             <example>The following is an example of using <c>MyManagedAction</c> method of the class
+             <c>CustomActions</c> as a Managed CustomAction.
+             <code>
+             class Script
+             {
+                 static public void Main(string[] args)
+                 {
+                     var project =
+                         new Project("My Product",
+            
+                             new Dir(@"%ProgramFiles%\My Company\My Product",
+            
+                                 new File(@"AppFiles\MyApp.exe",
+                                     new WixSharp.Shortcut("MyApp", @"%ProgramMenu%\My Company\My Product"),
+                                     new WixSharp.Shortcut("MyApp", @"%Desktop%")),
+            
+                                 new File(@"AppFiles\Readme.txt"),
+            
+                             new ManagedAction(@"MyManagedAction"),
+            
+                             ...
+            
+                     Compiler.BuildMsi(project);
+                 }
+             }
+            
+             public class CustomActions
+             {
+                 [CustomAction]
+                 public static ActionResult MyManagedAction(Session session)
+                 {
+                     MessageBox.Show("Hello World!", "Managed CA");
+                     return ActionResult.Success;
+                 }
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:WixSharp.ShowClrDialogAction.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.ShowClrDialogAction"/> class.
+            </summary>
+        </member>
+        <member name="M:WixSharp.ShowClrDialogAction.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.ShowClrDialogAction"/> class with properties/fields initialized with specified parameters.
+            </summary>
+            <param name="name">Name of the CustomAction. The name should match the method implementing the custom action functionality.</param>
+        </member>
+        <member name="M:WixSharp.ShowClrDialogAction.#ctor(WixSharp.Id,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.ShowClrDialogAction"/> class with properties/fields initialized with specified parameters.
+            </summary>
+            <param name="id">The explicit <see cref="T:WixSharp.Id"></see> to be associated with <see cref="T:WixSharp.ShowClrDialogAction"/> instance.</param>
+            <param name="name">Name of the CustomAction. The name should match the method implementing the custom action functionality.</param>
+        </member>
+        <member name="M:WixSharp.ShowClrDialogAction.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.ShowClrDialogAction"/> class with properties/fields initialized with specified parameters.
+            </summary>
+            <param name="name">Name of the CustomAction. The name should match the method implementing the custom action functionality.</param>
+            <param name="actionAssembly">Path to the assembly containing the CustomAction implementation. Specify <c>"%this%"</c> if the assembly
+            is in the Wix# script.</param>
+        </member>
+        <member name="M:WixSharp.ShowClrDialogAction.#ctor(WixSharp.Id,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.ShowClrDialogAction"/> class with properties/fields initialized with specified parameters.
+            </summary>
+            <param name="id">The explicit <see cref="T:WixSharp.Id"></see> to be associated with <see cref="T:WixSharp.ShowClrDialogAction"/> instance.</param>
+            <param name="name">Name of the CustomAction. The name should match the method implementing the custom action functionality.</param>
+            <param name="actionAssembly">Path to the assembly containing the CustomAction implementation. Specify <c>"%this%"</c> if the assembly
+            is in the Wix# script.</param>
+        </member>
+        <member name="T:WixSharp.WixCLRDialog">
+            <summary>
+            Defines System.Windows.Forms.<see cref="T:System.Windows.Forms.Form" />, which is to be used as the  for custom MSI dialog.
+            <para>
+            As opposite to the WixSharp.<see cref="T:WixSharp.WixForm" /> based custom dialogs <c>WixCLRDialog</c> is instantiated not at 
+            compile but at run time. Thus it is possible to implement comprehensive deployment algorithms in any of the available Form event handlers.
+            </para>
+            <para>
+            The usual usability scenario is the injection of the managed Custom Action (for displaying the <c>WixCLRDialog</c>) 
+            into the sequence of the standard dialogs (WixSharp.<see cref="T:WixSharp.CustomUI"/>). 
+            </para>
+            <para>
+            While it is possible to construct <see cref="T:WixSharp.CustomUI"/> instance manually it is preferred to use 
+            Factory methods of  <see cref="T:WixSharp.CustomUIBuilder"/> (e.g. InjectPostLicenseClrDialog) for this.
+            </para>
+            <code>
+            static public void Main()
+            {
+                ManagedAction showDialog;
+            
+                var project = new Project("CustomDialogTest",
+                                            showDialog = new ShowClrDialogAction("ShowProductActivationDialog"));
+            
+                project.UI = WUI.WixUI_Common;
+                project.CustomUI = CustomUIBuilder.InjectPostLicenseClrDialog(showDialog.Id, " LicenseAccepted = \"1\"");
+                
+                Compiler.BuildMsi(project);
+            }
+            ...
+            public class CustomActions
+            {
+                [CustomAction]
+                public static ActionResult ShowProductActivationDialog(Session session)
+                {
+                    return WixCLRDialog.ShowAsMsiDialog(new CustomDialog(session));
+                }
+            }
+            ...
+            public partial class CustomDialog : WixCLRDialog
+            {
+                private GroupBox groupBox1;
+                private Button cancelBtn;
+                ... 
+            </code>
+            <para>
+            The all communications with the installation in progress are to be done by modifying the MSI properties or executing MSI actions 
+            via <c>Session</c> object.</para>
+            <para>
+            When closing the dialog make sure you set the DeialogResul properly. <c>WixCLRDialog</c> offers three predefined routines for setting the 
+            DialogResult:
+            <para>- MSINext</para>
+            <para>- MSIBack</para>
+            <para>- MSICancel</para>
+            By invoking these routines from the corresponding event handlers you can control your MSI UI sequence:
+            <code>
+            void cancelBtn_Click(object sender, EventArgs e)
+            {
+                MSICancel();
+            }
+            
+            void nextBtn_Click(object sender, EventArgs e)
+            {
+                MSINext();
+            }
+            
+            void backBtn_Click(object sender, EventArgs e)
+            {
+                MSIBack();
+            }
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.WixCLRDialog.session">
+            <summary>
+            The MSI session
+            </summary>
+        </member>
+        <member name="F:WixSharp.WixCLRDialog.hostWindow">
+            <summary>
+            The WIN32 handle to the host window (parent MSI dialog).
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.WixCLRDialog"/> class.
+            <remarks>
+            This constructor is to be used by the Visual Studio Form designer only. 
+            You should always use <c>WixCLRDialog(Session session)</c> constructor instead.
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.#ctor(Microsoft.Deployment.WindowsInstaller.Session)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WixSharp.WixCLRDialog"/> class.
+            </summary>
+            <param name="session">The session.</param>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.Init">
+            <summary>
+            Inits this instance.
+            </summary>
+        </member>
+        <member name="F:WixSharp.WixCLRDialog.delta">
+            <summary>
+            There is some strange resizing artefact (at least on Win7) when MoveWindow does not resize the window accurately.
+            Thus special adjustment ('delta') is needed to fix the problem.
+            <para>
+            The delta value is used in the ReplaceHost method.</para>
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.ReplaceHost">
+            <summary>
+            'Replaces' the current step dialog with the "itself".
+            <para>It uses WIN32 API to hide the parent native MSI dialog and place managed form dialog (itself)
+            at the same desktop location and with the same size as the parent.</para>
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.RestoreHost">
+            <summary>
+            Restores parent native MSI dialog after the previous <c>ReplaceHost</c> call.
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.MSICancel">
+            <summary>
+            Closes the dialog and sets the <c>this.DialogResult</c> to the 'DialogResult.Cancel' value ensuring the 
+            setup is cancelled.
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.MSIBack">
+            <summary>
+            Closes the dialog and sets the <c>this.DialogResult</c> to the 'DialogResult.Retry' value ensuring the 
+            setup is resumed with the previous UI sequence dialog is displayed.
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.MSINext">
+            <summary>
+            Closes the dialog and sets the <c>this.DialogResult</c> to the 'DialogResult.OK' value ensuring the 
+            setup is resumed and the UI sequence advanced to the next step.
+            </summary>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.ShowAsMsiDialog(WixSharp.WixCLRDialog)">
+            <summary>
+            Shows as specified managed dialog.
+            <para>It uses WIN32 API to hide the parent native MSI dialog and place managed form dialog
+            at the same desktop location and with the same size as the parent.</para>
+            <para>It also ensures that after the managed dialog is closed the proper ActionResult is returned.</para>
+            </summary>
+            <param name="dialog">The dialog.</param>
+            <returns>ActionResult value</returns>
+        </member>
+        <member name="M:WixSharp.WixCLRDialog.GetMSIBinaryStream(System.String)">
+            <summary>
+            Gets the embedded MSI binary stream.
+            </summary>
+            <param name="binaryId">The binary id.</param>
+            <returns>Stream instance</returns>
+        </member>
+    </members>
+</doc>

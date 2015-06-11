@@ -31,7 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>35f2b248</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>e35a6907</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -172,6 +172,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA068\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
+      <HintPath>..\packages\WixSharp.bin.1.0.17.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -211,6 +214,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WixSharp">
+      <HintPath>..\packages\WixSharp.bin.1.0.17.0\lib\WixSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WixSharp.UI">
+      <HintPath>..\packages\WixSharp.bin.1.0.17.0\lib\WixSharp.UI.dll</HintPath>
+    </Reference>
     <Reference Include="WriteableBitmapEx.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
@@ -820,6 +829,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Eagle.1.0.5633.18513\build\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.1.0.5633.18513\build\Eagle.targets'))" />
+    <Error Condition="!Exists('..\packages\WixSharp.bin.1.0.17.0\build\WixSharp.bin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.bin.1.0.17.0\build\WixSharp.bin.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -828,4 +838,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\packages\WixSharp.bin.1.0.17.0\build\WixSharp.bin.targets" Condition="Exists('..\packages\WixSharp.bin.1.0.17.0\build\WixSharp.bin.targets')" />
+  <UsingTask AssemblyFile="packages\WixSharp.bin.1.0.17.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
 </Project>

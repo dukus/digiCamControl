@@ -85,7 +85,7 @@
         </member>
         <member name="P:WixSharp.WixEntity.AttributesDefinition">
             <summary>
-            Optional attributes of the <c>WiX Element</c> (e.g. Secure:YesNoPath) expressed as a string KeyValue pairs (e.g. "StartOnInstall=Yes; Sequence=1"). 
+            Optional attributes of the <c>WiX Element</c> (e.g. Secure:YesNoPath). 
             <para>OptionalAttributes just redirects all access calls to the <see cref="T:WixEntity.Attributes"/> member.</para>
             <para>You can also use <see cref="T:WixEntity.AttributesDefinition"/> to keep the code cleaner.</para>
             </summary>
@@ -484,7 +484,6 @@
             The disable automatic insertion of <c>CreateFolder</c> element.
             Required for: NativeBootstrapper, EmbeddedMultipleActions,  EmptyDirectories, InstallDir, Properties,
             ReleaseFolder, Shortcuts and WildCardFiles samples.
-            <para>Can also be managed by disabling ICE validation via Light.exe command line arguments.</para>
             </summary>
         </member>
         <member name="F:WixSharp.AutoElements.DisableAutoUserProfileRegistry">
@@ -492,480 +491,12 @@
             The disable automatic insertion of user profile registry elements.
             Required for: AllInOne, ConditionalInstallation, CustomAttributes, ReleaseFolder, Shortcuts,
             Shortcuts (advertised), Shortcuts-2, WildCardFiles samples.
-            <para>Can also be managed by disabling ICE validation via Light.exe command line arguments.</para>
             </summary>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.Bundle">
-            <summary>
-            Class for defining a WiX standard Burn-based bootstrapper.
-            </summary>
-        </member>
-        <member name="F:WixSharp.WixProject.WixNamespaces">
-            <summary>
-            Collection of XML namespaces (e.g. <c>xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension"</c>) to be declared in the XML (WiX project) root.
-            </summary>
-        </member>
-        <member name="F:WixSharp.WixProject.WixExtensions">
-            <summary>
-            Collection of paths to the WiX extensions.
-            </summary>
-        </member>
-        <member name="F:WixSharp.WixProject.Language">
-            <summary>
-            Installation UI Language. If not specified <c>"en-US"</c> will be used.
-            </summary>
-        </member>
-        <member name="F:WixSharp.WixProject.LightOptions">
-            <summary>
-            WiX linker <c>Light.exe</c> options.
-            <para>The default value is "-sw1076 -sw1079" (disable warning 1076 and 1079).</para>
-            </summary>
-        </member>
-        <member name="F:WixSharp.WixProject.CandleOptions">
-            <summary>
-            WiX compiler <c>Candle.exe</c> options.
-            <para>The default value is "-sw1076" (disable warning 1026).</para>
-            </summary>
-        </member>
-        <member name="F:WixSharp.WixProject.PreserveTempFiles">
-            <summary>
-            Forces <see cref="T:WixSharp.Compiler"/> to preserve all temporary build files (e.g. *.wxs).
-            <para>The default value is <c>false</c>: all temporary files are deleted at the end of the build/compilation.</para>
-            <para>Note: if <see cref="T:WixSharp.Compiler"/> fails to build MSI the <c>PreserveTempFiles</c>
-            value is ignored and all temporary files are preserved.</para>
-            </summary>
-        </member>
-        <member name="P:WixSharp.WixProject.SourceBaseDir">
-            <summary>
-            Base directory for the relative paths of the bootstrapper items (e.g. <see cref="!:MsiPackage"></see>).
-            </summary>
-        </member>
-        <member name="P:WixSharp.WixProject.OutFileName">
-            <summary>
-            Name of the MSI/MSM file (without extension) to be build.
-            </summary>
-        </member>
-        <member name="P:WixSharp.WixProject.OutDir">
-            <summary>
-            The output directory. The directory where all msi and temporary files should be assembled. The <c>CurrentDirectory</c> will be used if <see cref="P:WixSharp.WixProject.OutDir"/> is left unassigned.
-            </summary>
-        </member>
-        <member name="E:WixSharp.WixProject.WixSourceGenerated">
-            <summary>
-            Occurs when WiX source code generated. Use this event if you need to modify generated XML (XDocument)
-            before it is compiled into MSI.
-            </summary>
-        </member>
-        <member name="E:WixSharp.WixProject.WixSourceSaved">
-            <summary>
-            Occurs when WiX source file is saved. Use this event if you need to do any post-processing of the generated/saved file.
-            </summary>
-        </member>
-        <member name="E:WixSharp.WixProject.WixSourceFormated">
-            <summary>
-            Occurs when WiX source file is formatted and ready to be saved. Use this event if you need to do any custom formatting of the XML content before
-            it is saved by the compiler.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.Bundle.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="N:WixSharp.Bootstrapper"/> class.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.Bundle.#ctor(System.String,WixSharp.Bootstrapper.ChainItem[])">
-            <summary>
-            Initializes a new instance of the <see cref="N:WixSharp.Bootstrapper"/> class.
-            </summary>
-            <param name="name">The name of the project. Typically it is the name of the product to be installed.</param>
-            <param name="items">The project installable items (e.g. directories, files, registry keys, Custom Actions).</param>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.DisableRollback">
-            <summary>
-            The disable rollbackSpecifies whether the bundle will attempt to rollback packages executed in the chain.
-            If "yes" is specified then when a vital package fails to install only that package will rollback and the chain will stop with the error.
-            The default is "no" which indicates all packages executed during the chain will be rolldback to their previous state when a vital package fails.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.DisableSystemRestore">
-            <summary>
-            Specifies whether the bundle will attempt to create a system restore point when executing the chain. If "yes" is specified then a system restore point will not be created. The default is "no" which indicates a system restore point will be created when the bundle is installed, uninstalled, repaired, modified, etc. If the system restore point cannot be created, the bundle will log the issue and continue.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Copyright">
-            <summary>
-            The legal copyright found in the version resources of final bundle executable.
-            If this attribute is not provided the copyright will be set to "Copyright (c) [Bundle/@Manufacturer]. All rights reserved.".
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.AboutUrl">
-            <summary>
-            A URL for more information about the bundle to display in Programs and Features (also known as Add/Remove Programs).
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Compressed">
-            <summary>
-            Whether Packages and Payloads not assigned to a container should be added to the default attached container or if they
-            should be external. The default is yes.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Condition">
-            <summary>
-            The condition of the bundle. If the condition is not met, the bundle will refuse to run. Conditions are checked before the
-            bootstrapper application is loaded (before detect), and thus can only reference built-in variables such as variables which
-            indicate the version of the OS.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.DisableRemove">
-            <summary>
-            Determines whether the bundle can be removed via the Programs and Features (also known as Add/Remove Programs). If the value is
-            "yes" then the "Uninstall" button will not be displayed. The default is "no" which ensures there is an "Uninstall" button to remove
-            the bundle. If the "DisableModify" attribute is also "yes" or "button" then the bundle will not be displayed in Progams and
-            Features and another mechanism (such as registering as a related bundle addon) must be used to ensure the bundle can be removed.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.DisableModify">
-            <summary>
-            Determines whether the bundle can be modified via the Programs and Features (also known as Add/Remove Programs). If the value is
-            "button" then Programs and Features will show a single "Uninstall/Change" button. If the value is "yes" then Programs and Features
-            will only show the "Uninstall" button". If the value is "no", the default, then a "Change" button is shown. See the DisableRemove
-            attribute for information how to not display the bundle in Programs and Features.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.HelpTelephone">
-            <summary>
-            A telephone number for help to display in Programs and Features (also known as Add/Remove Programs).
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.HelpUrl">
-            <summary>
-            A URL to the help for the bundle to display in Programs and Features (also known as Add/Remove Programs).
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.IconFile">
-            <summary>
-            Path to an icon that will replace the default icon in the final Bundle executable. This icon will also be displayed in Programs and Features (also known as Add/Remove Programs).
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Manufacturer">
-            <summary>
-            The publisher of the bundle to display in Programs and Features (also known as Add/Remove Programs).
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.ParentName">
-            <summary>
-            The name of the parent bundle to display in Installed Updates (also known as Add/Remove Programs). This name is used to nest or group bundles that will appear as updates. If the
-            parent name does not actually exist, a virtual parent is created automatically.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.SplashScreenSource">
-            <summary>
-            Path to a bitmap that will be shown as the bootstrapper application is being loaded. If this attribute is not specified, no splash screen will be displayed.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Tag">
-            <summary>
-            Set this string to uniquely identify this bundle to its own BA, and to related bundles. The value of this string only matters to the BA, and its value has no direct
-            effect on engine functionality.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.UpdateUrl">
-            <summary>
-            A URL for updates of the bundle to display in Programs and Features (also known as Add/Remove Programs).
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.UpgradeCode">
-            <summary>
-            Unique identifier for a family of bundles. If two bundles have the same UpgradeCode the bundle with the highest version will be installed.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Version">
-            <summary>
-            The version of the bundle. Newer versions upgrade earlier versions of the bundles with matching UpgradeCodes. If the bundle is registered in Programs and Features then this attribute will be displayed in the Programs and Features user interface.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Chain">
-            <summary>
-            The sequence of the packages to be installed
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Bundle.Application">
-            <summary>
-            The instance of the Bootstrapper application class application. By default it is a LicenseBootstrapperApplication object.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.Bundle.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.Bundle.Build(System.String)">
-            <summary>
-            Builds WiX Bootstrapper application from the specified <see cref="T:WixSharp.Bootstrapper.Bundle"/> project instance.
-            </summary>
-            <param name="path">The path to the bootstrapper to be build.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.Bundle.BuildCmd(System.String)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            WiX/MSI bootstrapper with WiX toolset.
-            </summary>
-            <param name="path">The path to the batch file to be created.</param>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.WixStandardBootstrapperApplication">
-            <summary>
-            Container class for common members of the Bootstrapper standard applications.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.WixStandardBootstrapperApplication.License">
-            <summary>
-            The predefined instance of the License-based bootstrapper application.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.WixStandardBootstrapperApplication.LicensePath">
-            <summary>
-            Source file of the RTF license file or URL target of the license link.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.WixStandardBootstrapperApplication.LogoFile">
-            <summary>
-            Source file of the logo graphic.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.WixStandardBootstrapperApplication.LocalizationFile">
-            <summary>
-            Source file of the theme localization .wxl file.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.WixStandardBootstrapperApplication.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.LicenseBootstrapperApplication">
-            <summary>
-            Generic License-based WiX bootstrapper application. 
-            <para>Depending on the value of LicensePath compiler will resolve the application in either <c>WixStandardBootstrapperApplication.RtfLicense</c>
-            or <c>WixStandardBootstrapperApplication.HyperlinkLicense</c> standard application.</para>
-            <para>Note: empty LicensePath will suppress displaying the license completely</para>
-            </summary>
-            <example>The following is an example of defining a simple bootstrapper displaying the license as an 
-            embedded HTML file.
-            <code>
-            var bootstrapper = new Bundle("My Product",
-                                    new PackageGroupRef("NetFx40Web"),
-                                    new MsiPackage(productMsi) { DisplayInternalUI = true });
-                                    
-            bootstrapper.AboutUrl = "https://wixsharp.codeplex.com/";
-            bootstrapper.IconFile = "app_icon.ico";
-            bootstrapper.Version = new Version("1.0.0.0");
-            bootstrapper.UpgradeCode = new Guid("6f330b47-2577-43ad-9095-1861bb25889b");
-            bootstrapper.Application.LogoFile = "logo.png";
-            bootstrapper.Application.LicensePath = "licence.html"; 
-            
-            bootstrapper.Build();
-            </code>
-            </example>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.LicenseBootstrapperApplication.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.Packages">
-            <summary>
-            Container class for common members of the Bootstrapper packages
-            </summary>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.ChainItem">
-            <summary>
-            Container class for common members of the Bootstrapper chained items
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.ChainItem.Vital">
-            <summary>
-            Specifies whether the package/item must succeed for the chain to continue. 
-            The default "yes" (true) indicates that if the package fails then the chain will fail and rollback or stop. 
-            If "no" is specified then the chain will continue even if the package reports failure.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.ChainItem.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.Permanent">
-            <summary>
-            Specifies whether the package can be uninstalled.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.SourceFile">
-            <summary>
-            Location of the package to add to the bundle. The default value is the Name attribute, if provided. At a minimum, the SourceFile or Name attribute must be specified.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.Description">
-            <summary>
-            Specifies the description to place in the bootstrapper application data manifest for the package. By default,
-            ExePackages use the FileName field from the version information, MsiPackages use the ARPCOMMENTS property, and MspPackages
-            use the Description patch metadata property. Other package types must use this attribute to define a description in the
-            bootstrapper application data manifest.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.PerMachine">
-            <summary>
-            Indicates the package must be executed elevated.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.DownloadUrl">
-            <summary>
-            The URL to use to download the package. The following substitutions are supported:
-            <para>{0} is replaced by the package Id.</para>
-            <para>{1} is replaced by the payload Id.</para>
-            <para>{2} is replaced by the payload file name.</para>
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.InstallCondition">
-            <summary>
-            A condition to evaluate before installing the package. The package will only be installed if the condition evaluates to true.
-            If the condition evaluates to false and the bundle is being installed, repaired, or modified, the package will be uninstalled.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.Packages.Payloads">
-            <summary>
-            Collection of paths to the package dependencies.
-            </summary>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.ExePackage">
-            <summary>
-            Standard WiX ExePackage.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.ExePackage.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.Bootstrapper.ExePackage"/> class.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.ExePackage.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.Bootstrapper.ExePackage"/> class.
-            </summary>
-            <param name="path">The path.</param>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.ExePackage.InstallCommand">
-            <summary>
-            The command-line arguments provided to the ExePackage during install. If this attribute 
-            is absent the executable will be launched with no command-line arguments
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.ExePackage.RepairCommand">
-            <summary>
-            The command-line arguments to specify to indicate a repair. If the executable package can be repaired but does not require any 
-            special command-line arguments to do so then set the attribute's value to blank. To indicate that the package does not support repair,
-            omit this attribute.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.ExePackage.UninstallCommand">
-            <summary>
-            The command-line arguments provided to the ExePackage during uninstall. If this attribute is absent the executable will be launched 
-            with no command-line arguments. To prevent an ExePackage from being uninstalled set the Permanent attribute to "yes".
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.ExePackage.DetectCondition">
-            <summary>
-            A condition that determines if the package is present on the target system.
-            This condition can use built-in variables and variables returned by searches.
-            This condition is necessary because Windows doesn't provide a method to detect the presence of an ExePackage.
-            Burn uses this condition to determine how to treat this package during a bundle action; for example, if this condition
-            is false or omitted and the bundle is being installed, Burn will install this package.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.ExePackage.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.MsiPackage">
-            <summary>
-            Standard WiX MsiPackage.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.MsiPackage.EnableFeatureSelection">
-            <summary>
-            Specifies whether the bundle will allow individual control over the installation state of Features inside the msi package. Managing 
-            feature selection requires special care to ensure the install, modify, update and uninstall behavior of the package is always correct.
-            The default is "no".
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.MsiPackage.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.Bootstrapper.MsiPackage"/> class.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.MsiPackage.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.Bootstrapper.MsiPackage"/> class.
-            </summary>
-            <param name="path">The path.</param>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.MsiPackage.DisplayInternalUI">
-            <summary>
-            Specifies whether the bundle will show the UI authored into the msi package. The default is "no" which means all information is routed to 
-            the bootstrapper application to provide a unified installation experience. If "yes" is specified the UI authored into the msi package will be 
-            displayed on top of any bootstrapper application UI.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Bootstrapper.MsiPackage.MsiProperties">
-            <summary>
-            MSI properties to be set based on the value of a burn engine expression. This is a KeyValue mapping expression of the following format:
-            <para>&lt;key&gt;=&lt;value&gt;[;&lt;key&gt;=&lt;value&gt;]</para>
-            <para><c>Example:</c> "COMMANDARGS=[CommandArgs];GLOBAL=yes""</para>
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.MsiPackage.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.PackageGroupRef">
-            <summary>
-            Standard WiX PackageGroupRef.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.PackageGroupRef.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.Bootstrapper.PackageGroupRef"/> class.
-            </summary>
-            <param name="name">The name.</param>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.PackageGroupRef.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.Bootstrapper.RollbackBoundary">
-            <summary>
-            Standard WiX RollbackBoundary.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Bootstrapper.RollbackBoundary.ToXml">
-            <summary>
-            Emits WiX XML.
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:WixSharp.CommonTasks.Tasks">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:WixSharp.CommonTasks.Tasks.BuildBootstrapper(System.String,System.String,System.String,System.String,System.Boolean,System.String)">
              <summary>
@@ -1190,7 +721,6 @@
             <summary>
             Adds the assembly reference.
             </summary>
-            <param name="action">The action.</param>
             <param name="files">The files.</param>
             <returns></returns>
         </member>
@@ -1342,7 +872,6 @@
             <para>The typical conditions are:</para>
             <para>   NETFRAMEWORK20="#1"</para>
             <para>   NETFRAMEWORK40FULL="#1"</para>
-            <para>   NETFRAMEWORK35="#1"</para>
             <para>   NETFRAMEWORK30_SP_LEVEL and NOT NETFRAMEWORK30_SP_LEVEL='#0'</para>
             <para>   ...</para>
             The full list of names and values can be found here http://wixtoolset.org/documentation/manual/v3/customactions/wixnetfxextension.html
@@ -1431,358 +960,6 @@
             <value>
             The latest framework directory.
             </value>
-        </member>
-        <member name="T:WixSharp.Compiler">
-             <summary>
-             Represents Wix# compiler. This class is responsible for conversion of CLR object <see cref="T:WixSharp.Project"/> into WiX XML source file.
-             <see cref="T:WixSharp.Compiler"/> allows building complete MSI or WiX source file. It also can prepare WiX source file and generate corresponding batch file
-             for building MSI WiX way: <c>candle.exe</c> + <c>light.exe</c>.
-             <para>
-             This class contains only static members as it is to be used only for the actual MSI/WXS building operations:
-             </para>
-             </summary>
-            
-             <example>
-            
-             <list type="bullet">
-            
-             <item>
-             <description>Building MSI file
-             <code>
-             var project = new Project();
-             ...
-             Compiler.BuildMsi(project);
-             </code>
-             </description>
-             </item>
-            
-             <item>
-             <description>Building WiX source file only:
-             <code>
-             var project = new Project();
-             ...
-             Compiler.BuildWxs(project);
-             </code>
-             </description>
-             </item>
-            
-             <item>
-             <description>Preparing batch file for building MSI with WiX toolset:
-             <code>
-             var project = new Project();
-             ...
-             Compiler.BuildWxsCmd(project);
-             </code>
-             </description>
-             </item>
-            
-             </list>
-            
-             </example>
-        </member>
-        <member name="M:WixSharp.Compiler.Build(WixSharp.Bootstrapper.Bundle,System.String)">
-            <summary>
-            Builds WiX Bootstrapper application from the specified <see cref="T:WixSharp.Bootstrapper.Bundle"/> project instance.
-            </summary>
-            <param name="project">The project.</param>
-            <param name="path">The path.</param>
-            <exception cref="T:System.ApplicationException">Wix compiler/linker cannot be found</exception>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildCmd(WixSharp.Bootstrapper.Bundle,System.String)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            WiX/MSI bootstrapper with WiX toolset.
-            </summary>
-            <param name="project">The project.</param>
-            <param name="path">The path to the batch file to be created.</param>
-            <exception cref="T:System.ApplicationException">Wix compiler/linker cannot be found</exception>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Bootstrapper.Bundle)">
-            <summary>
-            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Bootstrapper.Bundle"/> instance.
-            </summary>
-            <param name="project">The project.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Compiler.Build(WixSharp.Bootstrapper.Bundle)">
-            <summary>
-            Builds WiX Bootstrapper application from the specified <see cref="T:WixSharp.Bootstrapper.Bundle"/> project instance.
-            </summary>
-            <param name="project">The project.</param>
-            <returns></returns>
-        </member>
-        <member name="F:WixSharp.Compiler.AutoGeneration">
-            <summary>
-            Contains settings for XML auto-generation.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Compiler.LightOptions">
-            <summary>
-            WiX linker <c>Light.exe</c> options.
-            <para>The default value is "-sw1076 -sw1079" (disable warning 1076 and 1079).</para>
-            </summary>
-        </member>
-        <member name="F:WixSharp.Compiler.CandleOptions">
-            <summary>
-            WiX compiler <c>Candle.exe</c> options.
-            <para>The default value is "-sw1076" (disable warning 1026).</para>
-            </summary>
-        </member>
-        <member name="F:WixSharp.Compiler.PreserveTempFiles">
-            <summary>
-            Forces <see cref="T:WixSharp.Compiler"/> to preserve all temporary build files (e.g. *.wxs).
-            <para>The default value is <c>false</c>: all temporary files are deleted at the end of the build/compilation.</para>
-            <para>Note: if <see cref="T:WixSharp.Compiler"/> fails to build MSI the <c>PreserveTempFiles</c>
-            value is ignored and all temporary files are preserved.</para>
-            </summary>
-        </member>
-        <member name="F:WixSharp.Compiler.EmitRelativePaths">
-            <summary>
-            Indicates whether compiler should emit relative or absolute paths in the WiX XML source.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsi(WixSharp.Project)">
-            <summary>
-            Builds the MSI file from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <returns>Path to the built MSI file. Returns <c>null</c> if <c>MSI</c> cannot be built.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsiCmd(WixSharp.Project)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            MSI with WiX toolset.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <returns>Path to the batch file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsmCmd(WixSharp.Project)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            MSM with WiX toolset.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <returns>Path to the batch file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsiCmd(WixSharp.Project,System.String)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            MSI with WiX toolset.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <param name="path">The path to the batch file to be build.</param>
-            <returns>Path to the batch file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsmCmd(WixSharp.Project,System.String)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            MSM with WiX toolset.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <param name="path">The path to the batch file to be build.</param>
-            <returns>Path to the batch file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsi(WixSharp.Project,System.String)">
-            <summary>
-            Builds the MSI file from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <param name="path">The path to the MSI file to be build.</param>
-            <returns>Path to the built MSI file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsm(WixSharp.Project)">
-            <summary>
-            Builds the MSM file from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <returns>Path to the built MSM file. Returns <c>null</c> if <c>msm</c> cannot be built.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildMsm(WixSharp.Project,System.String)">
-            <summary>
-            Builds the MSM file from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <param name="path">The path to the MSM file to be build.</param>
-            <returns>Path to the built MSM file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Project)">
-            <summary>
-            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance for further compiling into MSI file.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <returns>Path to the built WXS file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Project,WixSharp.Compiler.OutputType)">
-            <summary>
-            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <param name="type">The type (<see cref="T:WixSharp.Compiler.OutputType"/>) of the setup file to be defined in the source file (MSI vs. MSM).</param>
-            <returns>Path to the built WXS file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Project,System.String,WixSharp.Compiler.OutputType)">
-            <summary>
-            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <param name="path">The path to the WXS file to be build.</param>
-            <param name="type">The type (<see cref="T:WixSharp.Compiler.OutputType"/>) of the setup file to be defined in the source file (MSI vs. MSM).</param>
-            <returns>Path to the built WXS file.</returns>
-        </member>
-        <member name="M:WixSharp.Compiler.DefaultWixSourceGeneratedHandler(System.Xml.Linq.XDocument)">
-            <summary>
-            The default <see cref="E:WixSharp.Compiler.WixSourceGenerated"/> event handler.
-            </summary>
-            <param name="doc">The XDocument object representing WiX XML source code.</param>
-        </member>
-        <member name="M:WixSharp.Compiler.DefaultWixSourceFormatedHandler(System.String@)">
-            <summary>
-            The default <see cref="E:WixSharp.Compiler.WixSourceFormated"/> event handler.
-            </summary>
-            <param name="xml">The XML text string representing WiX XML source code.</param>
-        </member>
-        <member name="M:WixSharp.Compiler.GenerateWixProj(WixSharp.Project)">
-            <summary>
-            Generates WiX XML source file the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
-            <returns>Instance of XDocument class representing in-memory WiX XML source file.</returns>
-        </member>
-        <member name="F:WixSharp.Compiler.AllowNonRtfLicense">
-            <summary>
-            Defines if license file can be have non RTF extension.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Compiler.ProcessCustomActions(WixSharp.Project,System.Xml.Linq.XElement)">
-            <summary>
-            Processes the custom actions.
-            </summary>
-            <param name="wProject">The w project.</param>
-            <param name="product">The product.</param>
-            <exception cref="T:System.Exception">Step.PreviousAction is specified for the very first 'Custom Action'.\nThere cannot be any previous action as it is the very first one in the sequence.</exception>
-        </member>
-        <member name="F:WixSharp.Compiler.IgnoreClientAssemblyPDB">
-            <summary>
-            Flag indicating whether to include PDB file of the assembly implementing ManagedCustomAction into MSI.  Default value is <c>False</c>.
-            <para>If set to <c>false</c> PDB file will not be included and debugging of such CustomAction will not be possible.</para>
-            </summary>
-        </member>
-        <member name="E:WixSharp.Compiler.WixSourceGenerated">
-            <summary>
-            Occurs when WiX source code generated. Use this event if you need to modify generated XML (XDocument)
-            before it is compiled into MSI.
-            </summary>
-        </member>
-        <member name="E:WixSharp.Compiler.WixSourceSaved">
-            <summary>
-            Occurs when WiX source file is saved. Use this event if you need to do any post-processing of the generated/saved file.
-            </summary>
-        </member>
-        <member name="E:WixSharp.Compiler.WixSourceFormated">
-            <summary>
-            Occurs when WiX source file is formatted and ready to be saved. Use this event if you need to do any custom formatting of the XML content before
-            it is saved by the compiler.
-            </summary>
-        </member>
-        <member name="P:WixSharp.Compiler.WixLocation">
-            <summary>
-            Gets or sets the location of WiX binaries (compiler/linker/dlls).
-            The default value is the content of environment variable <c>WIXSHARP_WIXDIR</c>.
-            <para>If user does not set this property explicitly and WIXSHARP_WIXDIR is not defined
-            <see cref="T:WixSharp.Compiler"/> will try to locate WiX binaries in <c>Program Files\Windows Installer XML v&lt;max_of 3*&gt;\bin</c>
-            </para>
-            </summary>
-            <value>The WiX binaries' location.</value>
-        </member>
-        <member name="P:WixSharp.Compiler.WixSdkLocation">
-            <summary>
-            Gets or sets the location of WiX SDK binaries (e.g. MakeSfxCA.exe).
-            The default value is the 'SDK' sub-directory of WixSharp.Compiler.WixLocation directory.
-            <para>
-            If for whatever reason the default location is invalid, you can always set this property to the location of your choice.
-            </para>
-            </summary>
-            <value>
-            The WiX SDK location.
-            </value>
-            <exception cref="T:System.Exception">WiX SDK binaries cannot be found. Please set WixSharp.Compiler.WixSdkLocation to valid path to the Wix SDK binaries.</exception>
-        </member>
-        <member name="P:WixSharp.Compiler.GuidGenerator">
-             <summary>
-             Gets or sets the GUID generator algorithm. You can use either one of the built-in algorithms or define your own.
-             The default value is <see cref="M:WixSharp.GuidGenerators.Default(System.Object)"/>.
-             <description>Possible WiX source file only:
-             <code>
-             //default built-in seeded GUID generator
-             Compiler.GuidGenerator = GuidGenerators.Default;
-            
-             //sequential built-in GUID generator
-             Compiler.GuidGenerator = GuidGenerators.Sequential;
-            
-             //Custom 'aways-same' GUID generator
-             Compiler.GuidGenerator = (seed) =&gt; Guid.Parse("9e2974a1-9539-4c5c-bef7-80fc35b9d7b0");
-            
-             //Custom random GUID generator
-             Compiler.GuidGenerator = (seed) =&gt; Guid.NewGuid();
-             </code>
-             </description>
-             </summary>
-             <value>
-             The GUID generator algorithm.
-             </value>
-        </member>
-        <member name="P:WixSharp.Compiler.ClientAssembly">
-            <summary>
-            Path to the <c>WixSharp.dll</c> client assembly. Typically it is the Wix# setup script assembly.
-            <para>This value is used to resolve <c>%this%</c> of the <see cref="T:WixSharp.ManagedAction"/>. If this value is not specified
-            <see cref="T:WixSharp.Compiler"/> will set it to the caller of its <c>Build</c> method.</para>
-            </summary>
-        </member>
-        <member name="T:WixSharp.Compiler.OutputType">
-            <summary>
-            Specifies the type of the setup binaries to build.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Compiler.OutputType.MSI">
-            <summary>
-            MSI file.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Compiler.OutputType.MSM">
-            <summary>
-            Merge Module (MSM) file.
-            </summary>
-        </member>
-        <member name="T:WixSharp.Compiler.Wildcard">
-            <summary>
-            Represents a wildcard running on the
-            <see cref="T:System.Text.RegularExpressions"/> engine.
-            </summary>
-            <remarks>
-            This class was developed and described by <c>reinux</c> in "Converting Wildcards to Regexes"
-            on CodeProject (<c>http://www.codeproject.com/KB/recipes/wildcardtoregex.aspx</c>).
-            </remarks>
-        </member>
-        <member name="M:WixSharp.Compiler.Wildcard.#ctor(System.String)">
-            <summary>
-            Initializes a wildcard with the given search pattern.
-            </summary>
-            <param name="pattern">The wildcard pattern to match.</param>
-        </member>
-        <member name="M:WixSharp.Compiler.Wildcard.#ctor(System.String,System.Text.RegularExpressions.RegexOptions)">
-            <summary>
-            Initializes a wildcard with the given search pattern and options.
-            </summary>
-            <param name="pattern">The wildcard pattern to match.</param>
-            <param name="options">A combination of one or more
-            <see cref="T:System.Text.RegexOptions"/>.</param>
-        </member>
-        <member name="M:WixSharp.Compiler.Wildcard.WildcardToRegex(System.String)">
-            <summary>
-            Converts a wildcard to a regex.
-            </summary>
-            <param name="pattern">The wildcard pattern to convert.</param>
-            <returns>A regex equivalent of the given wildcard.</returns>
         </member>
         <member name="T:WixSharp.Control">
             <summary>
@@ -2371,13 +1548,6 @@
             
             </summary>
         </member>
-        <member name="M:WixSharp.Extensions.IsAdmin(System.Security.Principal.WindowsIdentity)">
-            <summary>
-            Determines whether the current user is administrator.
-            </summary>
-            <param name="identity">The identity.</param>
-            <returns></returns>
-        </member>
         <member name="F:WixSharp.Extensions.WixScalingFactor">
             <summary>
             The WiX UI scaling factor.
@@ -2454,7 +1624,7 @@
         </member>
         <member name="M:WixSharp.Extensions.SetAttribute(System.Xml.Linq.XElement,System.String,System.Object)">
             <summary>
-            Sets the value of the attribute. This is a fluent version of XElement.SetAttributeValue. 
+            Sets the vaule of the attribute. This is a fluent version of XElement.SetAttributeValue. 
             </summary>
             <param name="obj">The object.</param>
             <param name="name">The name.</param>
@@ -2508,14 +1678,6 @@
             <param name="attributeName">Name of the source attribute to copy.</param>
             <returns>The instance of the <see cref="T:System.Xml.Linq.XElement"/> to copy the attribute to.</returns>
         </member>
-        <member name="M:WixSharp.Extensions.ReadAttribute(System.Xml.Linq.XElement,System.String)">
-            <summary>
-            Reads the attribute value. Returns null if attribute doesn't exist.
-            </summary>
-            <param name="e">The e.</param>
-            <param name="attributeName">Name of the attribute.</param>
-            <returns></returns>
-        </member>
         <member name="M:WixSharp.Extensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
             A generic LINQ equivalent of C# foreach loop.
@@ -2553,12 +1715,11 @@
             <param name="path">The Wix# directory path.</param>
             <returns>Replacement/conversion result.</returns>
         </member>
-        <member name="M:WixSharp.Extensions.ToInt(System.String,System.Int32)">
+        <member name="M:WixSharp.Extensions.ToInt(System.String)">
             <summary>
             Safely converts string to int.
             </summary>
             <param name="value">The value.</param>
-            <param name="defaultValue">The default value.</param>
             <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.ToIntPtr(System.String)">
@@ -2608,7 +1769,7 @@
             <param name="path">The path.</param>
             <returns></returns>
         </member>
-        <member name="M:WixSharp.Extensions.FormatInline(System.String,System.Object[])">
+        <member name="M:WixSharp.Extensions.Format(System.String,System.Object[])">
             <summary>
             Formats the specified string.
             </summary>
@@ -2636,25 +1797,10 @@
             </code>
             </example>
             </para>
-            For the list of supported constants analyses <c>WixSharp.Compiler.EnvironmentConstantsMapping.Keys</c>.
+            For the list of supported constants analyse <c>WixSharp.Compiler.EnvironmentConstantsMapping.Keys</c>.
             </summary>
             <param name="path">The Wix# directory path.</param>
             <returns>Replacement result.</returns>
-        </member>
-        <member name="M:WixSharp.Extensions.ContainsWixConstants(System.String)">
-            <summary>
-            Determines whether the string contains WiX constants (values enclosed into square brackets).
-            </summary>
-            <param name="data">The data.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Extensions.Map64Dirs(System.String)">
-            <summary>
-            Maps the Wix# constants included in path into their x64 equivalents.
-            <para>For example %ProgramFiles%\My Company\My Product should be preprocessed into %ProgramFiles64%\My Company\My Product</para>
-            </summary>
-            <param name="path">The path.</param>
-            <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.ExpandWixEnvConsts(System.String)">
             <summary>
@@ -2722,7 +1868,7 @@
             <param name="delimiter">The delimiter.</param>
             <returns></returns>
         </member>
-        <member name="M:WixSharp.Extensions.Select(System.Xml.Linq.XContainer,System.String)">
+        <member name="M:WixSharp.Extensions.Select(System.Xml.Linq.XElement,System.String)">
             <summary>
             Selects from the given element the first child element matching the specified path (e.g. <c>Select("Product/Package")</c>).
             </summary>
@@ -2740,35 +1886,11 @@
         </member>
         <member name="M:WixSharp.Extensions.AllElements(System.Xml.Linq.XElement,System.String)">
             <summary>
-            Flattened "view" of all elements with a given name (LocalName).
+            Flattened "view" of all elements with a given name.
             </summary>
             <param name="element">The element to be searched.</param>
             <param name="elementName">The element name.</param>
             <returns>The elements matching the name.</returns>
-        </member>
-        <member name="M:WixSharp.Extensions.FindSingle(System.Xml.Linq.XContainer,System.String)">
-            <summary>
-            Selects single descendant element with a given name (LocalName). Throws if no or more then one match found
-            </summary>
-            <param name="container">The element to be searched.</param>
-            <param name="elementName">The element local name.</param>
-            <returns>The elements matching the name.</returns>
-        </member>
-        <member name="M:WixSharp.Extensions.FindAll(System.Xml.Linq.XContainer,System.String)">
-            <summary>
-            Selects all descendant elements with a given name (LocalName). Throws if no or more then one match found
-            </summary>
-            <param name="element">The element to be searched.</param>
-            <param name="elementName">The element local name.</param>
-            <returns>The elements matching the name.</returns>
-        </member>
-        <member name="M:WixSharp.Extensions.MoveTo(System.Xml.Linq.XElement,System.Xml.Linq.XElement)">
-            <summary>
-            Removes the element from its current parent and inserts it into another element.
-            </summary>
-            <param name="element">The element.</param>
-            <param name="newParent">The new parent.</param>
-            <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.SelectOrCreate(System.Xml.Linq.XElement,System.String)">
             <summary>
@@ -2836,7 +1958,6 @@
             Adds/combines given <see cref="T:System.Array"/> object with the specified item.
             </summary>
             <typeparam name="T1">The type of the elements of <c>obj</c>.</typeparam>
-            <typeparam name="T2">The type of the elements of the items being added.</typeparam>
             <param name="obj">The instance of the <see cref="T:System.Array"/>.</param>
             <param name="item">The item to be added.</param>
             <returns>Combined <see cref="T:System.Array"/> object.</returns>
@@ -2845,8 +1966,7 @@
             <summary>
             Adds/combines given <see cref="T:System.Array"/> object with the specified items.
             </summary>
-            <typeparam name="T1">The type of the elements of <c>obj</c>.</typeparam>
-            <typeparam name="T2">The type of the elements of the items being added.</typeparam>
+            <typeparam name="T">The type of the elements of <c>obj</c>.</typeparam>
             <param name="obj">The instance of the <see cref="T:System.Array"/>.</param>
             <param name="items">The items to be added.</param>
             <returns>Combined <see cref="T:System.Array"/> object.</returns>
@@ -2876,38 +1996,6 @@
             <param name="session">The session.</param>
             <returns></returns>
         </member>
-        <member name="M:WixSharp.Extensions.IsInstalled(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Determines whether the product associated with the session is installed.
-            </summary>
-            <param name="session">The session.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Extensions.IsInstalling(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Gets a value indicating whether the product is being installed.
-            </summary>
-            <value>
-            <c>true</c> if installing; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="M:WixSharp.Extensions.IsRepairing(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Gets a value indicating whether the product is being repaired.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Extensions.IsUninstalling(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Gets a value indicating whether the product is being uninstalled.
-            </summary>
-        </member>
-        <member name="M:WixSharp.Extensions.IsBasic(Microsoft.Deployment.WindowsInstaller.InstallUIOptions)">
-            <summary>
-            Determines whether this is basic UI level.
-            </summary>
-            <param name="level">The level.</param>
-            <returns></returns>
-        </member>
         <member name="M:WixSharp.Extensions.Property(Microsoft.Deployment.WindowsInstaller.Session,System.String)">
             <summary>
             Returns the value of the named property of the specified <see cref="T:Microsoft.Deployment.WindowsInstaller.Session"/> object.
@@ -2917,30 +2005,6 @@
             </summary>
             <param name="session">The session.</param>
             <param name="name">The name.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Extensions.SaveBinary(Microsoft.Deployment.WindowsInstaller.Session,System.String,System.String)">
-            <summary>
-            Saves the binary (from the Binary table) into the file.
-            </summary>
-            <param name="session">The session.</param>
-            <param name="binary">The binary.</param>
-            <param name="file">The file.</param>
-        </member>
-        <member name="M:WixSharp.Extensions.TryReadBinary(Microsoft.Deployment.WindowsInstaller.Session,System.String)">
-            <summary>
-            Tries the read the binary (from the Binary table) into the byte array.
-            </summary>
-            <param name="session">The session.</param>
-            <param name="binary">The binary.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.Extensions.ReadBinary(Microsoft.Deployment.WindowsInstaller.Session,System.String)">
-            <summary>
-            Read the binary (from the Binary table) into the byte array.
-            </summary>
-            <param name="session">The session.</param>
-            <param name="binary">The binary.</param>
             <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.HandleErrors(Microsoft.Deployment.WindowsInstaller.Session,System.Action)">
@@ -4513,44 +3577,6 @@
             The message to be displayed during the installation if <see cref="T:WixSharp.LaunchCondition"/> evaluated as <c>False</c>.
             </summary>
         </member>
-        <member name="T:WixSharp.ManagedProjectActions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:WixSharp.ManagedProjectActions.WixSharp_InitRuntime_Action(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Internal ManagedProject action. It must be public for the DTF accessibility but it is not to be used by the user/developer. 
-            </summary>
-            <param name="session">The session.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.ManagedProjectActions.WixSharp_Load_Action(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Internal ManagedProject action. It must be public for the DTF accessibility but it is not to be used by the user/developer. 
-            </summary>
-            <param name="session">The session.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.ManagedProjectActions.WixSharp_BeforeInstall_Action(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Internal ManagedProject action. It must be public for the DTF accessibility but it is not to be used by the user/developer. 
-            </summary>
-            <param name="session">The session.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.ManagedProjectActions.WixSharp_AfterInstall_Action(Microsoft.Deployment.WindowsInstaller.Session)">
-            <summary>
-            Internal ManagedProject action. It must be public for the DTF accessibility but it is not to be used by the user/developer. 
-            </summary>
-            <param name="session">The session.</param>
-            <returns></returns>
-        </member>
-        <member name="T:WixSharp.ManagedProject">
-             <summary>
-            
-             </summary>
-        </member>
         <member name="T:WixSharp.Project">
             <summary>
             Represents Wix# project. This class defines the WiX/MSI entities and their relationships.
@@ -4583,7 +3609,7 @@
             Initializes a new instance of the <see cref="T:WixSharp.Project"/> class.
             </summary>
             <param name="name">The name of the project. Typically it is the name of the product to be installed.</param>
-            <param name="items">The project installable items (e.g. directories, files, registry keys, Custom Actions).</param>
+            <param name="items">The project installable items (e.g. directories, files, registrty keys, Custom Actions).</param>
         </member>
         <member name="F:WixSharp.Project.Manufacturer">
             <summary>
@@ -4667,11 +3693,6 @@
             <summary>
             Type of the MSI User Interface. This value is assigned to the <c>UIRef</c> WiX element during the compilation.
             If specified <see cref="F:WixSharp.WUI.WixUI_Minimal"/> will used.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Project.EmbeddedUI">
-            <summary>
-            The Binary (assembly) implemening WiX embedded UI
             </summary>
         </member>
         <member name="F:WixSharp.Project.CustomUI">
@@ -4838,6 +3859,16 @@
             Collection of paths to the assemblies referenced by <see cref="T:WixSharp.ManagedAction"/>s.
             </summary>
         </member>
+        <member name="F:WixSharp.Project.WixExtensions">
+            <summary>
+            Collection of paths to the WiX extensions. 
+            </summary>
+        </member>
+        <member name="F:WixSharp.Project.WixNamespaces">
+            <summary>
+            Collection of XML namespaces (e.g. <c>xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension"</c>) to be declared in the XML (WiX project) root. 
+            </summary>
+        </member>
         <member name="F:WixSharp.Project.LaunchConditions">
             <summary>
             Collection of the <see cref="T:WixSharp.LaunchCondition"/>s associated with the setup.
@@ -4865,7 +3896,7 @@
             This method is called by <see cref="T:WixSharp.Compiler"/> during the compilation. However it might be convenient
             to call it before the compilation if any files matching the wild card mask need to be handled in special
             way (e.g. shortcuts created). See <c>WildCard Files</c> example.
-            </para><remarks><see cref="M:WixSharp.Project.ResolveWildCards(System.Boolean)"/> should be called only after <see cref="!:SourceBaseDir"/> is set.
+            </para><remarks><see cref="M:WixSharp.Project.ResolveWildCards(System.Boolean)"/> should be called only after <see cref="P:WixSharp.Project.SourceBaseDir"/> is set.
             Otherwise wild card paths may not be resolved correctly.</remarks>
             </summary>
             <param name="ignoreEmptyDirectories">if set to <c>true</c> empty directories are ignored and not added to the project.</param>
@@ -4900,43 +3931,15 @@
             Name (path) of the directory which was assigned <see cref="T:WixSharp.Compiler.AutoGeneration.InstallDirDefaultId"/> ID as part of XML auto-generation (see <see cref="T:WixSharp.AutoGenerationOptions"/>).
             </summary>
         </member>
-        <member name="M:WixSharp.Project.BuildMsi(System.String)">
+        <member name="P:WixSharp.Project.SourceBaseDir">
             <summary>
-            Builds the MSI file from the specified <see cref="T:WixSharp.Project"/> instance.
+            Base directory for the relative paths of the project items (e.g. <see cref="T:WixSharp.File"></see>). 
             </summary>
-            <param name="path">The path to the MSI file to be build.</param>
-            <returns>Path to the built MSI file.</returns>
         </member>
-        <member name="M:WixSharp.Project.BuildMsiCmd(System.String)">
+        <member name="P:WixSharp.Project.OutDir">
             <summary>
-            Builds the WiX source file and generates batch file capable of building
-            MSI with WiX toolset.
+            The output directory. The directory where all msi and temporary files should be assembled. The <c>CurrentDirectory</c> will be used if <see cref="P:WixSharp.Project.OutDir"/> is left unassigned.
             </summary>
-            <param name="path">The path to the batch file to be build.</param>
-            <returns>Path to the batch file.</returns>
-        </member>
-        <member name="M:WixSharp.Project.BuildWxs(WixSharp.Compiler.OutputType,System.String)">
-            <summary>
-            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="path">The path to the WXS file to be build.</param>
-            <param name="type">The type (<see cref="T:WixSharp.Compiler.OutputType"/>) of the setup file to be defined in the source file (MSI vs. MSM).</param>
-            <returns>Path to the built WXS file.</returns>
-        </member>
-        <member name="M:WixSharp.Project.BuildMsm(System.String)">
-            <summary>
-            Builds the MSM file from the specified <see cref="T:WixSharp.Project"/> instance.
-            </summary>
-            <param name="path">The path to the MSM file to be build.</param>
-            <returns>Path to the built MSM file.</returns>
-        </member>
-        <member name="M:WixSharp.Project.BuildMsmCmd(System.String)">
-            <summary>
-            Builds the WiX source file and generates batch file capable of building
-            MSM with WiX toolset.
-            </summary>
-            <param name="path">The path to the batch file to be build.</param>
-            <returns>Path to the batch file.</returns>
         </member>
         <member name="P:WixSharp.Project.MSIFileName">
             <summary>
@@ -4992,79 +3995,14 @@
             </para>
             </summary>
         </member>
-        <member name="M:WixSharp.ManagedProject.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.ManagedProject"/> class.
-            </summary>
-        </member>
-        <member name="M:WixSharp.ManagedProject.#ctor(System.String,WixSharp.WixObject[])">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.ManagedProject"/> class.
-            </summary>
-            <param name="name">The name of the project. Typically it is the name of the product to be installed.</param>
-            <param name="items">The project installable items (e.g. directories, files, registrty keys, Custom Actions).</param>
-        </member>
-        <member name="F:WixSharp.ManagedProject.DefaultDeferredProperties">
-            <summary>
-            The default properties mapped for use with the deferred custom actions. See <see cref="F:WixSharp.ManagedAction.UsesProperties"/> for the details.
-            <para>The default value is "INSTALLDIR,UILevel"</para>
-            </summary>
-        </member>
-        <member name="E:WixSharp.ManagedProject.Load">
-            <summary>
-            Occurs before AppSearch standard action.
-            </summary>
-        </member>
-        <member name="E:WixSharp.ManagedProject.BeforeInstall">
-            <summary>
-            Occurs before InstallFiles standard action.
-            </summary>
-        </member>
-        <member name="E:WixSharp.ManagedProject.AfterInstall">
-            <summary>
-            Occurs after InstallFiles standard action. The event is fired from the elevated execution.
-            </summary>
-        </member>
-        <member name="T:WixSharp.ManagedProject.SetupEventHandler">
-            <summary>
-            Event handler of the ManagedSetup for the MSI runtime events.
-            </summary>
-            <param name="e">The <see cref="T:WixSharp.SetupEventArgs"/> instance containing the event data.</param>
-        </member>
-        <member name="T:WixSharp.Resources.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:WixSharp.Resources.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:WixSharp.Resources.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="P:WixSharp.Resources.Resources.WixUI_en_us">
-            <summary>
-              Looks up a localized resource of type System.Byte[].
-            </summary>
-        </member>
         <member name="T:WixSharp.SetupEventArgs">
-             <summary>
+            <summary>
             
-             </summary>
+            </summary>
         </member>
         <member name="M:WixSharp.SetupEventArgs.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WixSharp.SetupEventArgs"/> class.
-            </summary>
-        </member>
-        <member name="M:WixSharp.SetupEventArgs.SaveData">
-            <summary>
-            Saves the user data.
             </summary>
         </member>
         <member name="M:WixSharp.SetupEventArgs.ToString">
@@ -5091,134 +4029,14 @@
             The result.
             </value>
         </member>
-        <member name="P:WixSharp.SetupEventArgs.IsUISupressed">
-            <summary>
-            Gets a value indicating whether Authored UI and wizard dialog boxes suppressed.
-            </summary>
-            <value>
-            <c>true</c> if UI is suppressed; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.UILevel">
-            <summary>
-            Gets the UIlevel.
-            <para>UILevel > 4 lead to displaying modal dialogs. See https://msdn.microsoft.com/en-us/library/aa369487(v=vs.85).aspx. </para>
-            </summary>
-            <value>
-            The UI level.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.IsElevated">
-            <summary>
-            Gets a value indicating whether the event handler is executed from the elevated context.
-            </summary>
-            <value>
-            <c>true</c> if the execution context is elevated; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.IsInstalled">
-            <summary>
-            Gets a value indicating whether the product is installed.
-            </summary>
-            <value>
-            <c>true</c> if the product is installed; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.IsInstalling">
-            <summary>
-            Gets a value indicating whether the product is being installed.
-            </summary>
-            <value>
-            <c>true</c> if installing; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.IsRepairing">
-            <summary>
-            Gets a value indicating whether the product is being repaired.
-            </summary>
-            <value>
-            <c>true</c> if repairing; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.IsUninstalling">
-            <summary>
-            Gets a value indicating whether the product is being uninstalled.
-            </summary>
-            <value>
-            <c>true</c> if uninstalling; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.MsiFile">
-            <summary>
-            Gets the msi file location.
-            </summary>
-            <value>
-            The msi file.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.Mode">
-            <summary>
-            Gets the setup mode.
-            </summary>
-            <value>
-            The mode.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.InstallDir">
-            <summary>
-            Gets or sets the install directory.
-            </summary>
-            <value>
-            The install dir.
-            </value>
-        </member>
-        <member name="P:WixSharp.SetupEventArgs.Data">
-            <summary>
-            Gets or sets the Data.
-            </summary>
-            <value>
-            The data.
-            </value>
-        </member>
-        <member name="T:WixSharp.SetupEventArgs.SetupMode">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:WixSharp.SetupEventArgs.SetupMode.Installing">
-            <summary>
-            The installing mode
-            </summary>
-        </member>
-        <member name="F:WixSharp.SetupEventArgs.SetupMode.Repairing">
-            <summary>
-            The repairing mode
-            </summary>
-        </member>
-        <member name="F:WixSharp.SetupEventArgs.SetupMode.Uninstalling">
-            <summary>
-            The uninstalling mode
-            </summary>
-        </member>
-        <member name="F:WixSharp.SetupEventArgs.SetupMode.Unknown">
-            <summary>
-            The unknown mode
-            </summary>
-        </member>
         <member name="T:WixSharp.SetupEventArgs.AppData">
-             <summary>
-            Class that encapsulated parsing of the CustomActionData content
-             </summary>
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:WixSharp.SetupEventArgs.AppData.InitFrom(System.String)">
             <summary>
-            Initializes from string.
-            </summary>
-            <param name="data">The data.</param>
-        </member>
-        <member name="M:WixSharp.SetupEventArgs.AppData.InitFrom(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Initializes from dictionary.
+            Initializes from.
             </summary>
             <param name="data">The data.</param>
         </member>
@@ -5478,11 +4296,11 @@
             var project = new Project("MyProduct",
                 
                     new Dir(@"%ProgramFiles%\My Company\My Product",
-                        new File("readme.txt")),
+                        new File(@"readme.txt")),
                         ...
                         
-                    new Binary("CRTSetup.msi"),
-                    new ManagedAction("InstallCRTAction",
+                    new Binary(@"CRTSetup.msi"),
+                    new ManagedAction(@"InstallCRTAction",
                     ... 
                                         
             </code>
@@ -5497,68 +4315,14 @@
             <summary>
             Initializes a new instance of the <see cref="T:WixSharp.Binary"/> class with properties initialized with specified parameters.
             </summary>
-            <param name="sourcePath">Relative path to the file to be taken for building the MSI.</param>
+            <param name="sourcePath">Relative path to the assembly file to be taken for building the MSI.</param>
         </member>
         <member name="M:WixSharp.Binary.#ctor(WixSharp.Id,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:WixSharp.Binary"/> class.
             </summary>
             <param name="id">The explicit <see cref="T:WixSharp.Id"></see> to be associated with <see cref="T:WixSharp.Binary"/> instance.</param>
-            <param name="sourcePath">Relative path to the file to be taken for building the MSI.</param>
-        </member>
-        <member name="F:WixSharp.Binary.IsAssembly">
-            <summary>
-            The flag that indicates if the binary file is a .NET assembly.
-            </summary>
-        </member>
-        <member name="T:WixSharp.EmbeddedAssembly">
-            <summary>
-            Defines assembly file to be embedded into MSI (<c>Binary</c> table).
-            <para>
-            You can use this class to embed any .NET assembly to be used during the installation. 
-            Note that none of the binary files are installed on the target system. They are just available at installation time
-            for using <c>CustomActions</c>.
-            </para>
-            </summary>
-            
-            <example>The following is an example of embedding <c>CRTSetup.msi</c> file into MSI for further use in 
-            <c>InstallCRTAction</c>  <see cref="T:WixSharp.ManagedAction"/>.
-            <code>
-            var project = new Project("MyProduct",
-                
-                    new Dir(@"%ProgramFiles%\My Company\My Product",
-                        new File(@"readme.txt")),
-                        ...
-                        
-                    new EmbeddedAssembly("config.exe") { RefAssemblies = new [] { "utils.dll" }},
-                    new ManagedAction("InstallCRTAction",
-                    ... 
-                                        
-            </code>
-            </example>
-        </member>
-        <member name="M:WixSharp.EmbeddedAssembly.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.EmbeddedAssembly"/> class.
-            </summary>
-        </member>
-        <member name="M:WixSharp.EmbeddedAssembly.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.EmbeddedAssembly"/> class with properties initialized with specified parameters.
-            </summary>
             <param name="sourcePath">Relative path to the assembly file to be taken for building the MSI.</param>
-        </member>
-        <member name="M:WixSharp.EmbeddedAssembly.#ctor(WixSharp.Id,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.EmbeddedAssembly"/> class.
-            </summary>
-            <param name="id">The explicit <see cref="T:WixSharp.Id"></see> to be associated with <see cref="T:WixSharp.EmbeddedAssembly"/> instance.</param>
-            <param name="sourcePath">Relative path to the assembly file to be taken for building the MSI.</param>
-        </member>
-        <member name="F:WixSharp.EmbeddedAssembly.RefAssemblies">
-            <summary>
-            The referenced assemblies the EmbeddedAssembly depends on.
-            </summary>
         </member>
         <member name="T:WixSharp.AutoGenerationOptions">
             <summary>
@@ -5569,12 +4333,6 @@
         <member name="F:WixSharp.AutoGenerationOptions.InstallDirDefaultId">
             <summary>
             directories specified indirectly (e.g. by Shortcut working directory)
-            </summary>
-        </member>
-        <member name="F:WixSharp.AutoGenerationOptions.Map64InstallDirs">
-            <summary>
-            Flag indicating if all system folders (e.g. %ProgramFiles%) should be auto-mapped into their x64 equivalents
-            when 'project.Platform = Platform.x64'
             </summary>
         </member>
         <member name="T:WixSharp.XDocumentGeneratedDlgt">
@@ -5591,6 +4349,319 @@
             <summary>
             Delegate for  <see cref="T:WixSharp.Compiler"/> event <c>WixSourceFormated</c>
             </summary>
+        </member>
+        <member name="T:WixSharp.Compiler">
+             <summary>
+             Represents Wix# compiler. This class is responsible for conversion of CLR object <see cref="T:WixSharp.Project"/> into WiX XML source file.
+             <see cref="T:WixSharp.Compiler"/> allows building complete MSI or WiX source file. It also can prepare WiX source file and generate corresponding batch file
+             for building MSI WiX way: <c>candle.exe</c> + <c>light.exe</c>.
+             <para>
+             This class contains only static members as it is to be used only for the actual MSI/WXS building operations:
+             </para>
+             </summary>
+            
+             <example>
+            
+             <list type="bullet">
+            
+             <item>
+             <description>Building MSI file
+             <code>
+             var project = new Project();
+             ...
+             Compiler.BuildMsi(project);
+             </code>
+             </description>
+             </item>
+            
+             <item>
+             <description>Building WiX source file only:
+             <code>
+             var project = new Project();
+             ...
+             Compiler.BuildWxs(project);
+             </code>
+             </description>
+             </item>
+            
+             <item>
+             <description>Preparing batch file for building MSI with WiX toolset:
+             <code>
+             var project = new Project();
+             ...
+             Compiler.BuildWxsCmd(project);
+             </code>
+             </description>
+             </item>
+            
+             </list>
+            
+             </example>
+        </member>
+        <member name="F:WixSharp.Compiler.AutoGeneration">
+            <summary>
+            Contains settings for XML auto-generation.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.LightOptions">
+            <summary>
+            WiX linker <c>Light.exe</c> options.
+            <para>The default value is "-sw1076 -sw1079" (disable warning 1076 and 1079).</para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.CandleOptions">
+            <summary>
+            WiX compiler <c>Candle.exe</c> options.
+            <para>The default value is "-sw1076" (disable warning 1026).</para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.PreserveTempFiles">
+            <summary>
+            Forces <see cref="T:WixSharp.Compiler"/> to preserve all temporary build files (e.g. *.wxs).
+            <para>The default value is <c>false</c>: all temporary files are deleted at the end of the build/compilation.</para>
+            <para>Note: if <see cref="T:WixSharp.Compiler"/> fails to build MSI the <c>PreserveTempFiles</c>
+            value is ignored and all temporary files are preserved.</para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.EmitRelativePaths">
+            <summary>
+            Indicates whether compiler should emit relative or absolute paths in the WiX XML source.
+            </summary>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsi(WixSharp.Project)">
+            <summary>
+            Builds the MSI file from the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <returns>Path to the built MSI file. Returns <c>null</c> if <c>MSI</c> cannot be built.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsm(WixSharp.Project)">
+            <summary>
+            Builds the MSM file from the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <returns>Path to the built MSM file. Returns <c>null</c> if <c>msm</c> cannot be built.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsiCmd(WixSharp.Project)">
+            <summary>
+            Builds the WiX source file and generates batch file capable of building
+            MSI with WiX toolset.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <returns>Path to the batch file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsmCmd(WixSharp.Project)">
+            <summary>
+            Builds the WiX source file and generates batch file capable of building
+            MSM with WiX toolset.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <returns>Path to the batch file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsiCmd(WixSharp.Project,System.String)">
+            <summary>
+            Builds the WiX source file and generates batch file capable of building
+            MSI with WiX toolset.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <param name="path">The path to the batch file to be build.</param>
+            <returns>Path to the batch file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsmCmd(WixSharp.Project,System.String)">
+            <summary>
+            Builds the WiX source file and generates batch file capable of building
+            MSM with WiX toolset.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <param name="path">The path to the batch file to be build.</param>
+            <returns>Path to the batch file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsi(WixSharp.Project,System.String)">
+            <summary>
+            Builds the MSI file from the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <param name="path">The path to the MSI file to be build.</param>
+            <returns>Path to the built MSI file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildMsm(WixSharp.Project,System.String)">
+            <summary>
+            Builds the MSM file from the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <param name="path">The path to the MSM file to be build.</param>
+            <returns>Path to the built MSM file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Project)">
+            <summary>
+            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance for further compiling into MSI file.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <returns>Path to the built WXS file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Project,WixSharp.Compiler.OutputType)">
+            <summary>
+            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <param name="type">The type (<see cref="T:WixSharp.Compiler.OutputType"/>) of the setup file to be defined in the source file (MSI vs. MSM).</param>
+            <returns>Path to the built WXS file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.BuildWxs(WixSharp.Project,System.String,WixSharp.Compiler.OutputType)">
+            <summary>
+            Builds the WiX source file (*.wxs) from the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <param name="path">The path to the WXS file to be build.</param>
+            <param name="type">The type (<see cref="T:WixSharp.Compiler.OutputType"/>) of the setup file to be defined in the source file (MSI vs. MSM).</param>
+            <returns>Path to the built WXS file.</returns>
+        </member>
+        <member name="M:WixSharp.Compiler.DefaultWixSourceGeneratedHandler(System.Xml.Linq.XDocument)">
+            <summary>
+            The default <see cref="E:WixSharp.Compiler.WixSourceGenerated"/> event handler.
+            </summary>
+            <param name="doc">The XDocument object representing WiX XML source code.</param>
+        </member>
+        <member name="M:WixSharp.Compiler.DefaultWixSourceFormatedHandler(System.String@)">
+            <summary>
+            The default <see cref="E:WixSharp.Compiler.WixSourceFormated"/> event handler.
+            </summary>
+            <param name="xml">The XML text string representing WiX XML source code.</param>
+        </member>
+        <member name="M:WixSharp.Compiler.GenerateWixProj(WixSharp.Project)">
+            <summary>
+            Generates WiX XML source file the specified <see cref="T:WixSharp.Project"/> instance.
+            </summary>
+            <param name="project">The <see cref="T:WixSharp.Project"/> instance.</param>
+            <returns>Instance of XDocument class representing in-memory WiX XML source file.</returns>
+        </member>
+        <member name="F:WixSharp.Compiler.AllowNonRtfLicense">
+            <summary>
+            Defines if license file can be have non RTF extension.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.IgnoreClientAssemblyPDB">
+            <summary>
+            Flag indicating whether to include PDB file of the assembly implementing ManagedCustomAction into MSI.  Default value is <c>False</c>.
+            <para>If set to <c>false</c> PDB file will not be included and debugging of such CustomAction will not be possible.</para>
+            </summary>
+        </member>
+        <member name="E:WixSharp.Compiler.WixSourceGenerated">
+            <summary>
+            Occurs when WiX source code generated. Use this event if you need to modify generated XML (XDocument)
+            before it is compiled into MSI.
+            </summary>
+        </member>
+        <member name="E:WixSharp.Compiler.WixSourceSaved">
+            <summary>
+            Occurs when WiX source file is saved. Use this event if you need to do any post-processing of the generated/saved file.
+            </summary>
+        </member>
+        <member name="E:WixSharp.Compiler.WixSourceFormated">
+            <summary>
+            Occurs when WiX source file is formatted and ready to be saved. Use this event if you need to do any custom formatting of the XML content before
+            it is saved by the compiler.
+            </summary>
+        </member>
+        <member name="P:WixSharp.Compiler.WixLocation">
+            <summary>
+            Gets or sets the location of WiX binaries (compiler/linker/dlls).
+            The default value is the content of environment variable <c>WIXSHARP_WIXDIR</c>.
+            <para>If user does not set this property explicitly and WIXSHARP_WIXDIR is not defined
+            <see cref="T:WixSharp.Compiler"/> will try to locate WiX binaries in <c>Program Files\Windows Installer XML v&lt;max_of 3*&gt;\bin</c>
+            </para>
+            </summary>
+            <value>The WiX binaries' location.</value>
+        </member>
+        <member name="P:WixSharp.Compiler.WixSdkLocation">
+            <summary>
+            Gets or sets the location of WiX SDK binaries (e.g. MakeSfxCA.exe).
+            The default value is the 'SDK' sub-directory of WixSharp.Compiler.WixLocation directory.
+            <para>
+            If for whatever reason the default location is invalid, you can always set this property to the location of your choice.
+            </para>
+            </summary>
+            <value>
+            The WiX SDK location.
+            </value>
+            <exception cref="T:System.Exception">WiX SDK binaries cannot be found. Please set WixSharp.Compiler.WixSdkLocation to valid path to the Wix SDK binaries.</exception>
+        </member>
+        <member name="P:WixSharp.Compiler.GuidGenerator">
+             <summary>
+             Gets or sets the GUID generator algorithm. You can use either one of the built-in algorithms or define your own.
+             The default value is <see cref="M:WixSharp.GuidGenerators.Default(System.Object)"/>.
+             <description>Possible WiX source file only:
+             <code>
+             //default built-in seeded GUID generator
+             Compiler.GuidGenerator = GuidGenerators.Default;
+            
+             //sequential built-in GUID generator
+             Compiler.GuidGenerator = GuidGenerators.Sequential;
+            
+             //Custom 'aways-same' GUID generator
+             Compiler.GuidGenerator = (seed) =&gt; Guid.Parse("9e2974a1-9539-4c5c-bef7-80fc35b9d7b0");
+            
+             //Custom random GUID generator
+             Compiler.GuidGenerator = (seed) =&gt; Guid.NewGuid();
+             </code>
+             </description>
+             </summary>
+             <value>
+             The GUID generator algorithm.
+             </value>
+        </member>
+        <member name="P:WixSharp.Compiler.ClientAssembly">
+            <summary>
+            Path to the <c>WixSharp.dll</c> client assembly. Typically it is the Wix# setup script assembly.
+            <para>This value is used to resolve <c>%this%</c> of the <see cref="T:WixSharp.ManagedAction"/>. If this value is not specified
+            <see cref="T:WixSharp.Compiler"/> will set it to the caller of its <c>Build</c> method.</para>
+            </summary>
+        </member>
+        <member name="T:WixSharp.Compiler.OutputType">
+            <summary>
+            Specifies the typr of the setup binaries to build.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.OutputType.MSI">
+            <summary>
+            MSI file.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Compiler.OutputType.MSM">
+            <summary>
+            Merge Module (MSM) file.
+            </summary>
+        </member>
+        <member name="T:WixSharp.Compiler.Wildcard">
+            <summary>
+            Represents a wildcard running on the
+            <see cref="T:System.Text.RegularExpressions"/> engine.
+            </summary>
+            <remarks>
+            This class was developed and described by <c>reinux</c> in "Converting Wildcards to Regexes"
+            on CodeProject (<c>http://www.codeproject.com/KB/recipes/wildcardtoregex.aspx</c>).
+            </remarks>
+        </member>
+        <member name="M:WixSharp.Compiler.Wildcard.#ctor(System.String)">
+            <summary>
+            Initializes a wildcard with the given search pattern.
+            </summary>
+            <param name="pattern">The wildcard pattern to match.</param>
+        </member>
+        <member name="M:WixSharp.Compiler.Wildcard.#ctor(System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Initializes a wildcard with the given search pattern and options.
+            </summary>
+            <param name="pattern">The wildcard pattern to match.</param>
+            <param name="options">A combination of one or more
+            <see cref="T:System.Text.RegexOptions"/>.</param>
+        </member>
+        <member name="M:WixSharp.Compiler.Wildcard.WildcardToRegex(System.String)">
+            <summary>
+            Converts a wildcard to a regex.
+            </summary>
+            <param name="pattern">The wildcard pattern to convert.</param>
+            <returns>A regex equivalent of the given wildcard.</returns>
         </member>
         <member name="T:WixSharp.Condition">
             <summary>
@@ -5690,11 +4761,6 @@
             String representation of the <c>Installed</c> condition of the WiX <c>Condition</c>.
             </summary>
         </member>
-        <member name="F:WixSharp.Condition.Always">
-            <summary>
-            String representation of "always true" condition of the WiX <c>Condition</c>.
-            </summary>
-        </member>
         <member name="F:WixSharp.Condition.NOT_BeingRemoved">
             <summary>
             String representation of the <c>NOT (REMOVE="ALL")</c> condition of the WiX <c>Condition</c>.
@@ -5718,11 +4784,6 @@
         <member name="F:WixSharp.Condition.Net20_Installed">
             <summary>
             The .NET2.0 installed. This condition is to be used in Project.SetNetFxPrerequisite.
-            </summary>
-        </member>
-        <member name="F:WixSharp.Condition.Net35_Installed">
-            <summary>
-            The .NET3.5 installed. This condition is to be used in Project.SetNetFxPrerequisite.
             </summary>
         </member>
         <member name="F:WixSharp.Condition.Net45_Installed">
@@ -6003,41 +5064,6 @@
             <param name="baseDirectory">The base directory for file analysis. It is used in conjunction with
             relative <see cref="F:WixSharp.Files.Directory"/>. Though <see cref="F:WixSharp.Files.Directory"/> takes precedence if it is an absolute path.</param>
             <returns>Array of <see cref="T:WixSharp.WixEntity"/> instances, which are either <see cref="T:WixSharp.File"/> or/and <see cref="T:WixSharp.Dir"/> objects.</returns>
-        </member>
-        <member name="T:WixSharp.SerializingExtensions">
-            <summary>
-            'Byte array to string' serialization methods.
-            </summary>
-        </member>
-        <member name="M:WixSharp.SerializingExtensions.DecodeFromHex(System.String)">
-            <summary>
-            Decodes hexadecimal string representation into the byte array.
-            </summary>
-            <param name="obj">The object.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.SerializingExtensions.EncodeToHex(System.Byte[])">
-            <summary>
-            Encodes byte array into its hexadecimal string representation.
-            </summary>
-            <param name="data">The data.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.SerializingExtensions.GetString(System.Byte[],System.Text.Encoding)">
-            <summary>
-            Converts bytes into text according the specified Encoding..
-            </summary>
-            <param name="obj">The object.</param>
-            <param name="encoding">The encoding.</param>
-            <returns></returns>
-        </member>
-        <member name="M:WixSharp.SerializingExtensions.GetBytes(System.String,System.Text.Encoding)">
-            <summary>
-            Gets the bytes of the text according the specified Encoding.
-            </summary>
-            <param name="obj">The text.</param>
-            <param name="encoding">The encoding.</param>
-            <returns></returns>
         </member>
         <member name="T:WixSharp.Feature">
              <summary>

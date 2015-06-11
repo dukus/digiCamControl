@@ -16,3 +16,5 @@ _ReSharper.CameraControl.ServerTest
 /Setup/*.wxs
 /Setup/Setup.exe
 /Setup/Setup.pdb
+/Setup/*.config
+/Setup/*.dll
