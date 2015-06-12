@@ -4,6 +4,7 @@ using System.Windows;
 using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using CameraControl.Devices.Custom;
 using CameraControl.Devices.TransferProtocol;
 using CameraControl.Devices.Xml;
 using Microsoft.Win32;
@@ -428,6 +429,47 @@ namespace MtpTester
             catch (Exception exception)
             {
                 MessageBox.Show("Error to get value " + exception.Message);
+            }
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Xml file (*.xml)|*.xml";
+            if (dialog.ShowDialog() == true)
+            {
+                SaveData(dialog.FileName);
+            }
+        }
+
+        public void SaveData(string filename)
+        {
+            try
+            {
+                DeviceDescription description = new DeviceDescription();
+                description.Model = DeviceInfo.Model;
+                description.Manufacturer = DeviceInfo.Manufacturer;
+                foreach (var property in DeviceInfo.AvaiableProperties)
+                {
+                    var prop = new DeviceProperty {Code = property.Code};
+                    foreach (var propertyValue in property.Values)
+                    {
+                        prop.Values.Add(new DevicePropertyValue() {Value = propertyValue.Value});
+                    }
+                    description.Properties.Add(prop);
+                }
+
+                XmlSerializer serializer = new XmlSerializer(typeof (DeviceDescription));
+                // Create a FileStream to write with.
+
+                Stream writer = new FileStream(filename, FileMode.Create);
+                // Serialize the object, and close the TextWriter
+                serializer.Serialize(writer, description);
+                writer.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Unable to save data " + exception.Message);
             }
         }
 

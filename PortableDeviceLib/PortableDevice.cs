@@ -458,7 +458,7 @@ namespace PortableDeviceLib
         /// </summary>
         /// <param name="deviceObject"></param>
         /// <param name="fileName"></param>
-        public void SaveFile(PortableDeviceObject deviceObject, string fileName)
+        public void SaveFile(string id, Stream targetStream)
         {
           IPortableDeviceContent content;
           portableDeviceClass.Content(out content);
@@ -473,7 +473,7 @@ namespace PortableDeviceLib
           
           try
           {
-            resources.GetStream(deviceObject.ID, ref property, 0, ref optimalTransferSize,
+            resources.GetStream(id, ref property, 0, ref optimalTransferSize,
                     out wpdStream);
           }
           catch (COMException comException)
@@ -482,7 +482,7 @@ namespace PortableDeviceLib
             if ((uint)comException.ErrorCode == PortableDeviceErrorCodes.ERROR_BUSY)
             {
               Thread.Sleep(500);
-              SaveFile(deviceObject, fileName);
+              SaveFile(id, targetStream);
               return;
             }
             throw comException;
@@ -490,9 +490,6 @@ namespace PortableDeviceLib
 
           System.Runtime.InteropServices.ComTypes.IStream sourceStream =
               (System.Runtime.InteropServices.ComTypes.IStream)wpdStream;
-
-          FileStream targetStream = new FileStream(fileName,
-              FileMode.Create, FileAccess.Write);
 
           unsafe
           {
