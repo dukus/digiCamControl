@@ -76,6 +76,16 @@ namespace CameraControl.Devices.Xml
 
         [XmlAttribute]
         public uint DataForm { get; set; }
+        
+        [XmlAttribute]
+        public long MinVal { get; set; }
+        
+        [XmlAttribute]
+        public long MaxVal { get; set; }
+        
+        [XmlAttribute]
+        public long Inc { get; set; }
+
 
         private string _hexCode;
 

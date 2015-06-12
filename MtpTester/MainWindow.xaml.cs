@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
@@ -19,7 +8,6 @@ using CameraControl.Devices.TransferProtocol;
 using CameraControl.Devices.Xml;
 using Microsoft.Win32;
 using PortableDeviceLib;
-using Path = System.Windows.Shapes.Path;
 
 namespace MtpTester
 {
@@ -182,15 +170,11 @@ namespace MtpTester
                     }
                     if (formFlag == 1)
                     {
-                        long min = GetValue(result, index, dataLength);
+                        xmlPropertyDescriptor.MinVal = GetValue(result, index, dataLength);
                         index += dataLength;
-                        long max = GetValue(result, index, dataLength);
+                        xmlPropertyDescriptor.MaxVal = GetValue(result, index, dataLength);
                         index += dataLength;
-                        long inc = GetValue(result, index, dataLength);
-                        for (long i = min; i < max; i += inc)
-                        {
-                            xmlPropertyDescriptor.Values.Add(new XmlPropertyValue() {Value = i});
-                        }
+                        xmlPropertyDescriptor.Inc = GetValue(result, index, dataLength);
                     }
                 }
                 catch (Exception exception)

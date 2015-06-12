@@ -110,9 +110,9 @@ namespace Setup
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
             project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
 
-            project.Manufacturer = "Duka Istvan";
+            project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
-            project.AddRemoveProgramsIcon = "logo.ico";
+            project.ControlPanelInfo.ProductIcon = "logo.ico";
             Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);
 
