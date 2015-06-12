@@ -7,21 +7,11 @@
              xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core">
-    <!--<UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>        
-    </UserControl.Resources>-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Styles/CustomControls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <T:TranslateConverter x:Key="converter" />
         </ResourceDictionary>
@@ -165,7 +155,7 @@
                 <ProgressBar Minimum="0" Maximum="100" Height="20" Value="{Binding Path=SelectedCameraDevice.Battery}" ToolTip="{Binding Path=SelectedCameraDevice.Battery}" Style="{x:Null}" Margin="2" />
             </StackPanel>
             <StackPanel Margin="1" Grid.RowSpan="2">
-                <Label Content="{T:TranslateExtension LabelTransfer}" Padding="1" />
+                <Label Content="{T:TranslateExtension LabelTransfer}" Padding="1" Margin="2"/>
                 <ComboBox Name="cmb_transfer" SelectionChanged="cmb_transfer_SelectionChanged" ToolTip="{Binding ElementName=cmb_transfer, Path=SelectedItem}" Margin="2">
                     <!--<ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -174,16 +164,13 @@
                         </ComboBox.ItemTemplate>-->
                 </ComboBox>
             </StackPanel>
-            <StackPanel Margin="1" Orientation="Vertical" Grid.RowSpan="2">
-                <Button Content="{T:TranslateExtension LabelUseAsMaster}" Click="Button_Click" Name="btn_useasmaster" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
-                    <Button Height="23" Name="button1" Width="25" Click="button1_Click" Margin="2">
-                        <Button.Content>
-                            <Image Source="/CameraControl;component/Images/Properties.png" />
-                        </Button.Content>
-                    </Button>
-                    <Button Content="Date" ToolTip="Sync camera date and time"  Name="btn_dateTime" Margin="2" Click="btn_dateTime_Click" />
-                </StackPanel>
+            <StackPanel Margin="1" Orientation="Horizontal" Grid.RowSpan="2" HorizontalAlignment="Center">
+                <Button Content="{T:TranslateExtension LabelUseAsMaster}" Click="Button_Click" Name="btn_useasmaster" Margin="2" Padding="3"/>
+                <Button  Name="button1" Width="25" Click="button1_Click" Margin="2" Padding="1">
+                    <Button.Content>
+                        <Image Source="/CameraControl;component/Images/Properties.png" />
+                    </Button.Content>
+                </Button>
             </StackPanel>
             <my:ImageEx VerticalAlignment="Top" Source="{Binding Path=SelectedCameraDevice.DeviceName, Converter={StaticResource CameraToImageSourceConverter}}" x:Name="IcoImage" RenderTransformOrigin="0,1" Canvas.ZIndex="100"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAnimation, Converter={StaticResource BooleanToVisibilityConverter}}">

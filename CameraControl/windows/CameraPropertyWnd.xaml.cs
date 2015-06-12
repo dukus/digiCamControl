@@ -167,6 +167,12 @@ namespace CameraControl.windows
             thread.Start();
         }
 
+        private void btn_dateTime_Click(object sender, RoutedEventArgs e)
+        {
+            if (ServiceProvider.DeviceManager.SelectedCameraDevice != null)
+                ServiceProvider.DeviceManager.SelectedCameraDevice.DateTime = DateTime.Now;
+        }
+
 
     }
 }
