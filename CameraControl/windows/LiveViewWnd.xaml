@@ -35,7 +35,7 @@
     </Window.Resources>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
+            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 

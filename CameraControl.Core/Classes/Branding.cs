@@ -61,6 +61,8 @@ namespace CameraControl.Core.Classes
         public bool OnlineReference { get; set; }
 
         public bool ShowStartupScreen { get; set; }
+        
+        public bool ShowWelcomeScreen { get; set; }
 
         public bool CheckForUpdate { get; set; }
         
@@ -146,6 +148,7 @@ namespace CameraControl.Core.Classes
             ShowAboutWindow = true;
             OnlineReference = true;
             ShowStartupScreen = true;
+            ShowWelcomeScreen = true;
             CheckForUpdate = true;
             ShowRefreshButtonMainWindow = true;
             ShowDownloadButtonMainWindow = true;

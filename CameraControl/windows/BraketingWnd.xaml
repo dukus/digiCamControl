@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension BraketingWindowTitle}" Height="476" Width="574" Loaded="Window_Loaded" Closing="Window_Closing" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       ShowMaxRestoreButton="False" ShowMinButton="False">
     <Window.Resources>
         <ResourceDictionary>
@@ -21,7 +22,7 @@
     </Window.Resources>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands >
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
+            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>

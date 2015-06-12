@@ -299,7 +299,7 @@ namespace CameraControl
             }
             else
             {
-                if (!ServiceProvider.Branding.ShowStartupScreen)
+                if (!ServiceProvider.Branding.ShowWelcomeScreen || !ServiceProvider.Branding.OnlineReference)
                     return;
 
                 // show welcome screen only if not start minimized

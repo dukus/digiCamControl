@@ -6,7 +6,8 @@
                       xmlns:Translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:my="clr-namespace:CameraControl.windows">
+                      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:my="clr-namespace:CameraControl.windows"
+                      xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -67,7 +68,7 @@
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="Help" Name="btn_help" Click="btn_help_Click" />
+            <Button Content="Help" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>

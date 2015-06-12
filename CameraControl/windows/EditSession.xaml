@@ -4,6 +4,7 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                      xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       WindowStartupLocation="CenterScreen">
     <!--<Window.DataContext>
         <Classes:PhotoSession/>
@@ -27,7 +28,7 @@
     </Window.Resources>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" />
+            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid >
