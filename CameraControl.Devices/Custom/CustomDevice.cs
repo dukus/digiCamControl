@@ -25,7 +25,42 @@ namespace CameraControl.Devices.Custom
             StillImageDevice imageDevice = StillImageDevice as StillImageDevice;
             if (imageDevice != null)
                 imageDevice.DeviceEvent += StillImageDevice_DeviceEvent;
+            foreach (var property in description.Properties)
+            {
+                if (!string.IsNullOrEmpty(property.Name))
+                {
+                    try
+                    {
+                        MTPDataResponse result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc, property.Code);
+
+                        ErrorCodes.GetException(result.ErrorCode);
+                        uint dataType = BitConverter.ToUInt16(result.Data, 2);
+                        int dataLength = StaticHelper.GetDataLength(dataType);
+
+                        var value = new PropertyValue<long> { Code = property.Code, Name = property.Name };
+                        foreach (var propertyValue in property.Values)
+                        {
+                            value.AddValues(propertyValue.Name, propertyValue.Value);
+                        }
+                        value.ValueChanged += value_ValueChanged;
+                        
+                        AdvancedProperties.Add(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Error ger property ", ex);
+                    }
+                }
+            }
             return true;
+        }
+
+        void value_ValueChanged(object sender, string key, long val)
+        {
+            PropertyValue<long> res = sender as PropertyValue<long>;
+            if (res != null)
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                    res.Code);
         }
 
         private void StillImageDevice_DeviceEvent(object sender, PortableDeviceEventArgs e)

@@ -142,7 +142,7 @@ namespace MtpTester
                     ErrorCodes.GetException(result.ErrorCode);
                     uint dataType = BitConverter.ToUInt16(result.Data, 2);
                     xmlPropertyDescriptor.DataType = dataType;
-                    int dataLength = GetDataLength(dataType);
+                    int dataLength = StaticHelper.GetDataLength(dataType);
                     if (dataLength < 1)
                         continue;
                     index += 4;
@@ -163,7 +163,7 @@ namespace MtpTester
                         index += 2;
                         for (int i = 0; i < length; i++)
                         {
-                            long val = GetValue(result, index, dataLength);
+                            long val = StaticHelper.GetValue(result, index, dataLength);
                             ;
                             xmlPropertyDescriptor.Values.Add(new XmlPropertyValue() {Value = val});
                             index += dataLength;
@@ -171,11 +171,11 @@ namespace MtpTester
                     }
                     if (formFlag == 1)
                     {
-                        xmlPropertyDescriptor.MinVal = GetValue(result, index, dataLength);
+                        xmlPropertyDescriptor.MinVal = StaticHelper.GetValue(result, index, dataLength);
                         index += dataLength;
-                        xmlPropertyDescriptor.MaxVal = GetValue(result, index, dataLength);
+                        xmlPropertyDescriptor.MaxVal = StaticHelper.GetValue(result, index, dataLength);
                         index += dataLength;
-                        xmlPropertyDescriptor.Inc = GetValue(result, index, dataLength);
+                        xmlPropertyDescriptor.Inc = StaticHelper.GetValue(result, index, dataLength);
                     }
                 }
                 catch (Exception exception)
@@ -183,120 +183,6 @@ namespace MtpTester
                     MessageBox.Show("Error process property " + exception.Message);
                 }
             }
-        }
-
-        private int GetDataLength(uint dataType)
-        {
-            int dataLength = 0;
-            switch (dataType)
-            {
-                    //0x0001	INT8	Signed 8-bit integer
-                case 0x0001:
-                    dataLength = 1;
-                    break;
-                    //0x0002	UINT8	Unsigned 8-bit integer
-                case 0x0002:
-                    dataLength = 1;
-                    break;
-                    //0x0003	INT16	Signed 16-bit integer
-                case 0x0003:
-                    dataLength = 2;
-                    break;
-                    //0x0004	UINT16	Unsigned 16-bit integer
-                case 0x0004:
-                    dataLength = 2;
-                    break;
-                    //0x0005	INT32	Signed 32-bit integer
-                case 0x0005:
-                    dataLength = 4;
-                    break;
-                    //0x0006	UINT32	Unsigned 32-bit integer
-                case 0x0006:
-                    dataLength = 4;
-                    break;
-                    //0x0007	INT64	Signed 64-bit integer
-                case 0x0007:
-                    dataLength = 8;
-                    break;
-                    //0x0008	UINT64	Unsigned 64-bit integer
-                case 0x0008:
-                    dataLength = 8;
-                    break;
-                    //0x0009	INT128	Signed 128-bit integer
-                case 0x0009:
-                    dataLength = 16;
-                    break;
-                    //0x000A	UINT128	Unsigned 128-bit integer
-                case 0x000A:
-                    dataLength = 16;
-                    break;
-                    //0x4001	AINT8	Signed 8-bit integer array
-                case 0x4001:
-                    dataLength = 1;
-                    break;
-                    //0x4002	AUINT8	Unsigned 8-bit integer array
-                case 0x4002:
-                    dataLength = 1;
-                    break;
-                    //0x4003	AINT16	Signed 16-bit integer array
-                case 0x4003:
-                    dataLength = 2;
-                    break;
-                    //0x4004	AUINT16	Unsigned 16-bit integer array
-                case 0x4004:
-                    dataLength = 2;
-                    break;
-                    //0x4005	AINT32	Signed 32-bit integer array
-                case 0x4005:
-                    dataLength = 4;
-                    break;
-                    //0x4006	AUINT32	Unsigned 32-bit integer array
-                case 0x4006:
-                    dataLength = 4;
-                    break;
-                    //0x4007	AINT64	Signed 64-bit integer array
-                case 0x4007:
-                    dataLength = 8;
-                    break;
-                    //0x4008	AUINT64	Unsigned 64-bit integer array
-                case 0x4008:
-                    dataLength = 8;
-                    break;
-                    //0x4009	AINT128	Signed 128-bit integer array
-                case 0x4009:
-                    dataLength = 16;
-                    break;
-                    //0x400A	AUINT128	Unsigned 128-bit integer array
-                case 0x400A:
-                    dataLength = 16;
-                    break;
-                    //0xFFFF	STR	Variable length Unicode character string
-                case 0xFFFF:
-                    dataLength = -1;
-                    break;
-            }
-            return dataLength;
-        }
-
-        private long GetValue(MTPDataResponse result, int index, int dataLength)
-        {
-            long val = 0;
-            switch (dataLength)
-            {
-                case 1:
-                    val = result.Data[index];
-                    break;
-                case 2:
-                    val = BitConverter.ToUInt16(result.Data, index);
-                    break;
-                case 4:
-                    val = BitConverter.ToUInt32(result.Data, index);
-                    break;
-                default:
-                    val = (long) BitConverter.ToUInt64(result.Data, index);
-                    break;
-            }
-            return val;
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -412,7 +298,7 @@ namespace MtpTester
                 XmlPropertyDescriptor propertyDescriptor = lst_prop.SelectedItem as XmlPropertyDescriptor;
                 MTPDataResponse resp = MTPCamera.ExecuteReadDataEx(BaseMTPCamera.CONST_CMD_GetDevicePropValue,
                                                                     propertyDescriptor.Code);
-                long val = GetValue(resp, 0, GetDataLength(propertyDescriptor.DataType));
+                long val = StaticHelper.GetValue(resp, 0, StaticHelper.GetDataLength(propertyDescriptor.DataType));
                 XmlPropertyValue selected = null;
                 foreach (XmlPropertyValue xmlPropertyValue in propertyDescriptor.Values)
                 {
