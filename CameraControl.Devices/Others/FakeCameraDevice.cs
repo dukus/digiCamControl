@@ -118,6 +118,14 @@ namespace CameraControl.Devices.Others
 
         public override LiveViewData GetLiveViewImage()
         {
+            _liveViewData.SoundL++;
+            if (_liveViewData.SoundL > 99)
+                _liveViewData.SoundL = 0;
+             
+            _liveViewData.SoundR++;
+            if (_liveViewData.SoundR > 99)
+                _liveViewData.SoundR = 0;
+
             return _liveViewData;
         }
 

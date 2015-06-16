@@ -105,6 +105,8 @@ namespace CameraControl.ViewModel
         private int _levelAngle;
         private string _levelAngleColor;
         private decimal _movieTimeRemain;
+        private int _soundL;
+        private int _soundR;
 
 
         public ICameraDevice CameraDevice
@@ -155,6 +157,26 @@ namespace CameraControl.ViewModel
             {
                 _levelAngleColor = value;
                 RaisePropertyChanged(() => LevelAngleColor);
+            }
+        }
+
+        public int SoundL
+        {
+            get { return _soundL; }
+            set
+            {
+                _soundL = value;
+                RaisePropertyChanged(()=>SoundL);
+            }
+        }
+
+        public int SoundR
+        {
+            get { return _soundR; }
+            set
+            {
+                _soundR = value;
+                RaisePropertyChanged(() => SoundR);
             }
         }
 
@@ -1473,6 +1495,8 @@ namespace CameraControl.ViewModel
                         LiveViewData.
                             ImageDataPosition);
                     LevelAngle = (int)LiveViewData.LevelAngleRolling;
+                    SoundL = LiveViewData.SoundL;
+                    SoundR = LiveViewData.SoundR;
                     MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
 
                     if (NoProcessing)

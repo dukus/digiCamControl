@@ -69,6 +69,16 @@
                 <Label  Content="{Binding MovieTimeRemain}" Height="41" FontSize="20" FontWeight="Bold" Margin="5,0" />
             </StackPanel>
         </Canvas>
+        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"  Grid.Row="0" Margin="10,40,10,10" Orientation="Horizontal">
+            <StackPanel>
+                <local:VUMeterControl Value="{Binding SoundL}" Width="10" Height="70" Margin="2"  MaxValue="100" BlockCount="20" HighLevel="17" MiddleLevel="13"  />
+                <Label Content="L" Padding="0" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+            <StackPanel>
+                <local:VUMeterControl Value="{Binding SoundR}" Width="10" Height="70" Margin="2"  MaxValue="100" BlockCount="20" HighLevel="17" MiddleLevel="13" />
+                <Label Content="R" Padding="0" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
         <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" Grid.RowSpan="3" Margin="10,40,10,10">
             <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding ZoomOutCommand}">
                 <Rectangle Width="20" Height="20">
@@ -510,7 +520,7 @@
             <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#82000000" />
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#82000000" Margin="0,10,0,19" />
 
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="3" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />

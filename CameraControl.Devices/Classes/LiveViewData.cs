@@ -106,10 +106,16 @@ namespace CameraControl.Devices.Classes
 
         public decimal MovieTimeRemain { get; set; }
 
+        public int SoundL { get; set; }
+        
+        public int SoundR { get; set; }
+        
         public LiveViewData()
         {
             IsLiveViewRunning = true;
             HaveLevelAngleData = false;
+            SoundL = 30;
+            SoundR = 30;
         }
     }
 }
