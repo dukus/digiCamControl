@@ -204,6 +204,11 @@
       <DependentUpon>ResizeTransformView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageTransformPlugins\ResizeTransformViewModel.cs" />
+    <Compile Include="ImageTransformPlugins\RotateTransform.cs" />
+    <Compile Include="ImageTransformPlugins\RotateTransformView.xaml.cs">
+      <DependentUpon>RotateTransformView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\RotateTransformViewModel.cs" />
     <Compile Include="MainWindowPlugins\SimpleMainWindow.xaml.cs">
       <DependentUpon>SimpleMainWindow.xaml</DependentUpon>
     </Compile>
@@ -304,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\ResizeTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\RotateTransformView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
