@@ -8,7 +8,8 @@ using System.Diagnostics;
 using File = WixSharp.File;
 using System.Windows.Forms;
 using Microsoft.Deployment.WindowsInstaller;
-using System.Security.AccessControl; 
+using System.Security.AccessControl;
+using System.Security.Principal;
 
 namespace Setup
 {
@@ -164,13 +165,14 @@ namespace Setup
                 }
                 DirectoryInfo dInfo = new DirectoryInfo(folder);
                 DirectorySecurity dSecurity = dInfo.GetAccessControl();
-                dSecurity.AddAccessRule(new FileSystemAccessRule("everyone", FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+                SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+                dSecurity.AddAccessRule(new FileSystemAccessRule( everyone, FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
                 dInfo.SetAccessControl(dSecurity);    
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Set right error"+ex.Message);
+                MessageBox.Show("Set right error "+ex.Message);
             }
             return ActionResult.Success;
         }
