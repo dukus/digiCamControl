@@ -107,6 +107,9 @@ namespace CameraControl.ViewModel
         private decimal _movieTimeRemain;
         private int _soundL;
         private int _soundR;
+        private int _peakSoundL;
+        private int _peakSoundR;
+        private bool _haveSoundData;
 
 
         public ICameraDevice CameraDevice
@@ -177,6 +180,36 @@ namespace CameraControl.ViewModel
             {
                 _soundR = value;
                 RaisePropertyChanged(() => SoundR);
+            }
+        }
+
+        public int PeakSoundL
+        {
+            get { return _peakSoundL; }
+            set
+            {
+                _peakSoundL = value;
+                RaisePropertyChanged(() => PeakSoundL);
+            }
+        }
+
+        public int PeakSoundR
+        {
+            get { return _peakSoundR; }
+            set
+            {
+                _peakSoundR = value;
+                RaisePropertyChanged(() => PeakSoundR);
+            }
+        }
+
+        public bool HaveSoundData
+        {
+            get { return _haveSoundData; }
+            set
+            {
+                _haveSoundData = value;
+                RaisePropertyChanged(() => HaveSoundData);
             }
         }
 
@@ -1497,6 +1530,10 @@ namespace CameraControl.ViewModel
                     LevelAngle = (int)LiveViewData.LevelAngleRolling;
                     SoundL = LiveViewData.SoundL;
                     SoundR = LiveViewData.SoundR;
+                    PeakSoundL = LiveViewData.PeakSoundL;
+                    PeakSoundR = LiveViewData.PeakSoundR;
+                    HaveSoundData = LiveViewData.HaveSoundData;
+
                     MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
 
                     if (NoProcessing)

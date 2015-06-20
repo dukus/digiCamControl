@@ -105,7 +105,29 @@ namespace CameraControl.Controls
           })
         );
 
-    #endregion
+    public int PeakValue
+    {
+        get { return (int)GetValue(PeakValueProperty); }
+        set { SetValue(PeakValueProperty, value); }
+    }
+
+      public static readonly DependencyProperty PeakValueProperty =
+          DependencyProperty.Register("PeakValue", typeof (int), typeof (VUMeterControl), new UIPropertyMetadata(0,
+              (sender, e) =>
+              {
+                  VUMeterControl control = (VUMeterControl) sender;
+                  int value = (int) e.NewValue;
+                  int i = value/(control.MaxValue/control.BlockCount);
+                  FrameworkElement element =
+                      (FrameworkElement) control.PART_ItemsPresenter.ItemContainerGenerator.ContainerFromIndex(i);
+                  if (element != null)
+                  {
+                      element.Visibility = Visibility.Visible;
+                  }
+              })
+              );
+
+      #endregion
 
   }
 }

@@ -4,7 +4,7 @@
     xmlns:l="clr-namespace:CameraControl.Controls">
   <UserControl.Resources>
     <DataTemplate DataType="{x:Type l:VUMeterControl+Block}">
-      <Rectangle x:Name="cell" Margin="1,0" MinHeight="1"/>
+      <Rectangle x:Name="cell" Margin="1" MinHeight="1"/>
       <DataTemplate.Triggers>
         <DataTrigger Binding="{Binding Level}" Value="1">
           <Setter TargetName="cell" Property="Fill" Value="Red"/>

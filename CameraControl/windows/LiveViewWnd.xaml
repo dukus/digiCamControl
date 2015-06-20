@@ -69,13 +69,13 @@
                 <Label  Content="{Binding MovieTimeRemain}" Height="41" FontSize="20" FontWeight="Bold" Margin="5,0" />
             </StackPanel>
         </Canvas>
-        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"  Grid.Row="0" Margin="10,40,10,10" Orientation="Horizontal">
+        <StackPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"  Grid.Row="0" Margin="5,20,5,5" Orientation="Horizontal" Visibility="{Binding Path=HaveSoundData, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel>
-                <local:VUMeterControl Value="{Binding SoundL}" Width="10" Height="70" Margin="2"  MaxValue="100" BlockCount="20" HighLevel="17" MiddleLevel="13"  />
+                <local:VUMeterControl Value="{Binding SoundL}" Width="10" Height="50" Margin="2"  MaxValue="100" BlockCount="14" HighLevel="13" MiddleLevel="10" PeakValue="{Binding PeakSoundL}" />
                 <Label Content="L" Padding="0" HorizontalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel>
-                <local:VUMeterControl Value="{Binding SoundR}" Width="10" Height="70" Margin="2"  MaxValue="100" BlockCount="20" HighLevel="17" MiddleLevel="13" />
+                <local:VUMeterControl Value="{Binding SoundR}" Width="10" Height="50" Margin="2"  MaxValue="100" BlockCount="14" HighLevel="13" MiddleLevel="10" PeakValue="{Binding PeakSoundL}"/>
                 <Label Content="R" Padding="0" HorizontalContentAlignment="Center"/>
             </StackPanel>
         </StackPanel>

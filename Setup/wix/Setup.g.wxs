@@ -175,6 +175,18 @@
             <File Id="log4net.dll" Source="log4net.dll" />
           </Component>
 
+          <Component Id="Component.Magick.NET_x86.dll" Guid="19d12628-7654-4354-a305-9ab084cd5c61">
+            <File Id="Magick.NET_x86.dll" Source="Magick.NET-x86.dll" />
+          </Component>
+
+          <Component Id="Component.Magick.NET.Core.dll" Guid="19d12628-7654-4354-a305-9ab01593c30a">
+            <File Id="Magick.NET.Core.dll" Source="Magick.NET.Core.dll" />
+          </Component>
+
+          <Component Id="Component.Magick.NET.Wrapper_x86.dll" Guid="19d12628-7654-4354-a305-9ab03d086fe4">
+            <File Id="Magick.NET.Wrapper_x86.dll" Source="Magick.NET.Wrapper-x86.dll" />
+          </Component>
+
           <Component Id="Component.MahApps.Metro.dll" Guid="19d12628-7654-4354-a305-9ab0ccc23c4d">
             <File Id="MahApps.Metro.dll" Source="MahApps.Metro.dll" />
           </Component>
@@ -971,6 +983,9 @@
       <ComponentRef Id="Component.Interop.PortableDeviceTypesLib.dll" />
       <ComponentRef Id="Component.Ionic.Zip.dll" />
       <ComponentRef Id="Component.log4net.dll" />
+      <ComponentRef Id="Component.Magick.NET_x86.dll" />
+      <ComponentRef Id="Component.Magick.NET.Core.dll" />
+      <ComponentRef Id="Component.Magick.NET.Wrapper_x86.dll" />
       <ComponentRef Id="Component.MahApps.Metro.dll" />
       <ComponentRef Id="Component.MeasurementProtocolClient.dll" />
       <ComponentRef Id="Component.Microsoft.Practices.ServiceLocation.dll" />
