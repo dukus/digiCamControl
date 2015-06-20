@@ -51,6 +51,11 @@ namespace CameraControl.Core.Classes
             Values = new AsyncObservableCollection<ValuePair>();
         }
 
+        public string FileName
+        {
+            get { return Path.Combine(Settings.PresetFolder, Name + ".xml"); }
+        }
+
         public void Get(ICameraDevice camera)
         {
             Add(GetFrom(camera.Mode, "Mode"));

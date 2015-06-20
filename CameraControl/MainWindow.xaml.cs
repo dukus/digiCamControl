@@ -223,6 +223,14 @@ namespace CameraControl
             if (obj == null)
                 return;
             ServiceProvider.Settings.CameraPresets.Remove(obj);
+            try
+            {
+                File.Delete(obj.FileName);
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         private void _selectiontimer_Elapsed(object sender, ElapsedEventArgs e)

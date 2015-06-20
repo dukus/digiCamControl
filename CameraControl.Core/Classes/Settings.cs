@@ -1082,8 +1082,7 @@ namespace CameraControl.Core.Classes
                 if (!Directory.Exists(PresetFolder))
                     Directory.CreateDirectory(PresetFolder);
 
-                string filename = Path.Combine(PresetFolder, preset.Name + ".xml");
-                preset.Save(filename);
+                preset.Save(preset.FileName);
             }
             catch (Exception exception)
             {
