@@ -2,10 +2,41 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:imageTransformPlugins="clr-namespace:CameraControl.Plugins.ImageTransformPlugins"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <imageTransformPlugins:RotateTransformViewModel/>
+    </UserControl.DataContext>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="84*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Angle" HorizontalAlignment="Right"/>
+        <controls:NumericUpDown Grid.Row="0" Grid.Column="1" Margin="3" Minimum="0" Maximum="359" Value="{Binding Angle}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Auto rotate" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="1" Grid.Column="1" Margin="3" IsChecked="{Binding AutoRotate}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Flip horizontally" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="2" Grid.Column="1" Margin="3" IsChecked="{Binding FlipHorizontal}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Flip vertically" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="3" Grid.Column="1" Margin="3" IsChecked="{Binding FlipVertical}" VerticalAlignment="Center"/>
+
     </Grid>
 </UserControl>
