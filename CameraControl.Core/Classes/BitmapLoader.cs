@@ -617,37 +617,32 @@ namespace CameraControl.Core.Classes
 
         private void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
         {
-            for (int i = 0; i < line; i++)
-            {
-                //bmp.DrawRectangle(x1 + i, y1 + i, x2 - i, y2 - i, color);
-                DrawFocusRect(bmp, x1 + i, y1 + i, x2 - i, y2 - i, color);
-            }
+            DrawFocusRect(bmp, x1 , y1, x2 , y2 , color, line);
         }
 
-        private void DrawFocusRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color)
+        private void DrawFocusRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int tick)
         {
             int width = (x2 - x1)/4;
             int height = (y2 - y1)/4;
+            DrawLineEx(bmp, x1 - (tick / 2), y1, width, 0, color, tick);
+            DrawLineEx(bmp, x1, y1, 0, height, color, tick);
 
-            DrawLineEx(bmp, x1, y1, width, 0, color);
-            DrawLineEx(bmp, x1, y1, 0, height, color);
-
-            DrawLineEx(bmp, x1, y2, width, 0, color);
-            DrawLineEx(bmp, x1, y2, 0, -height, color);
+            DrawLineEx(bmp, x1 , y2, width, 0, color, tick);
+            DrawLineEx(bmp, x1 + (tick / 2), y2, 0, -height, color, tick);
 
 
-            DrawLineEx(bmp, x2, y1, -width, 0, color);
-            DrawLineEx(bmp, x2, y1, 0, height, color);
+            DrawLineEx(bmp, x2, y1, -width, 0, color, tick);
+            DrawLineEx(bmp, x2 - (tick / 2), y1, 0, height, color, tick);
 
-            DrawLineEx(bmp, x2, y2, -width, 0, color);
-            DrawLineEx(bmp, x2, y2, 0, -height, color);
+            DrawLineEx(bmp, x2 + (tick / 2), y2, -width, 0, color, tick);
+            DrawLineEx(bmp, x2, y2, 0, -height, color, tick);
 
 
         }
 
-        public void DrawLineEx(WriteableBitmap bmp, int x, int y, int width, int height, Color color)
+        public void DrawLineEx(WriteableBitmap bmp, int x, int y, int width, int height, Color color, int tick)
         {
-            bmp.DrawLineAa(x, y, x + width, y + height, color);
+            bmp.DrawLineAa(x, y, x + width, y + height, color,tick);
         }
 
         private PointCollection ConvertToPointCollection(int[] values)
