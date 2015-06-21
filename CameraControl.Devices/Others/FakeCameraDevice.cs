@@ -134,5 +134,10 @@ namespace CameraControl.Devices.Others
             _liveViewData.FocusX = x;
             _liveViewData.FocusY = y;
         }
+
+        public override int Focus(int step)
+        {
+            return step;
+        }
     }
 }

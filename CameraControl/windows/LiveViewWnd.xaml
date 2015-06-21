@@ -151,7 +151,7 @@
                 <Button Margin="1" Width="40" Content=">|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelGoFar}"/>
 
 
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" IsEnabled="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockFar}">
+                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockFar}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">
                             <Rectangle.Fill>

@@ -749,7 +749,7 @@ namespace CameraControl.ViewModel
                     return "?";
                 if (LockA && !LockB)
                     return FocusCounter.ToString();
-                if (LockB)
+                if (LockB )
                     return FocusCounter + "/" + FocusValue;
                 return _counterMessage;
             }
@@ -772,15 +772,15 @@ namespace CameraControl.ViewModel
                     FocusValue = 0;
                     LockB = false;
                 }
-                if (_lockA && LockB)
-                {
-                    FocusValue = FocusValue - FocusCounter;
-                    FocusCounter = 0;
-                }
-                if (!_lockA)
-                {
-                    LockB = false;
-                }
+                //if (_lockA && LockB)
+                //{
+                //    FocusValue = FocusValue - FocusCounter;
+                //    FocusCounter = 0;
+                //}
+                //if (!_lockA)
+                //{
+                //    LockB = false;
+                //}
                 RaisePropertyChanged(() => LockA);
                 RaisePropertyChanged(() => CounterMessage);
             }
@@ -791,17 +791,23 @@ namespace CameraControl.ViewModel
             get { return _lockB; }
             set
             {
-                if (FocusCounter == 0 && value)
-                {
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorFarPoit);
-                    return;
-                }
+                //if (FocusCounter == 0 && value)
+                //{
+                //    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorFarPoit);
+                //    return;
+                //}
                 _lockB = value;
-                if (_lockB)
+                if (_lockB && LockA)
                 {
                     FocusValue = FocusCounter;
                     PhotoCount = 5;
                 }
+                if (!_lockA && LockB)
+                {
+                    FocusCounter = 0;
+                    FocusValue = 0;
+                }
+
                 RaisePropertyChanged(() => LockB);
                 RaisePropertyChanged(() => CounterMessage);
             }
@@ -2315,6 +2321,7 @@ namespace CameraControl.ViewModel
 
                 try
                 {
+                    var focusStep = 0;
                     _timer.Stop();
                     CameraDevice.StartLiveView();
                     StaticHelper.Instance.SystemMessage = "Move focus " + step;
@@ -2327,7 +2334,7 @@ namespace CameraControl.ViewModel
                         for (var i = 0; i < Math.Abs(step); i++)
                         {
                             FocusProgressValue++;
-                            FocusCounter += CameraDevice.Focus(step);
+                            focusStep += CameraDevice.Focus(step);
                             GetLiveImage();
                             Thread.Sleep(ServiceProvider.Settings.CanonFocusStepWait);
                         }
@@ -2335,7 +2342,14 @@ namespace CameraControl.ViewModel
                     }
                     else
                     {
-                        FocusCounter += CameraDevice.Focus(step);
+                        focusStep += CameraDevice.Focus(step);
+                    }
+                    
+                    FocusCounter += focusStep;
+                    if (!LockA && LockB &&FocusCounter<0)
+                    {
+                        FocusValue += (FocusCounter*-1);
+                        FocusCounter = 0;
                     }
                 }
                 catch (DeviceException exception)
