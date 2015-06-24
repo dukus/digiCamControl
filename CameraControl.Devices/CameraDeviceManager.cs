@@ -158,6 +158,8 @@ namespace CameraControl.Devices
                                   {"D800E", typeof (NikonD800)},
                                   {"D800e", typeof (NikonD800)},
                                   {"D810", typeof (NikonD600)},
+                                  {"D810A", typeof (NikonD600)},
+                                  {"D810a", typeof (NikonD600)},
                                   {"D90", typeof (NikonD90)},
                                   {"V1", typeof (NikonD5100)},
                                   {"V2", typeof (NikonD5100)},
