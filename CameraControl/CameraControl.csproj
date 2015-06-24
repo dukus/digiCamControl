@@ -348,9 +348,6 @@
     <Compile Include="windows\CameraPropertyWnd.xaml.cs">
       <DependentUpon>CameraPropertyWnd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="windows\DownloadPhotosWnd_old.xaml.cs">
-      <DependentUpon>DownloadPhotosWnd_old.xaml</DependentUpon>
-    </Compile>
     <Compile Include="windows\EditSession.xaml.cs">
       <DependentUpon>EditSession.xaml</DependentUpon>
     </Compile>
@@ -572,10 +569,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\CameraPropertyWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="windows\DownloadPhotosWnd_old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
