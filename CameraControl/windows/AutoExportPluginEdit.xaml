@@ -76,7 +76,7 @@
                         </Rectangle>
                     </controls:DropDownButton.Icon>
                 </controls:DropDownButton>
-                <Button Grid.Row="2" Content="{translation:TranslateExtension ButtonPreview}" Margin="3"/>
+                <Button Grid.Row="2" Content="{translation:TranslateExtension ButtonPreview}" Margin="3" Command="{Binding PreviewCommand}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="2" Header="Transform plugins properties" Margin="0">

@@ -385,6 +385,9 @@
     <Compile Include="windows\PresetEditWnd.xaml.cs">
       <DependentUpon>PresetEditWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\PreviewWnd.xaml.cs">
+      <DependentUpon>PreviewWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\PrintWnd.xaml.cs">
       <DependentUpon>PrintWnd.xaml</DependentUpon>
     </Compile>
@@ -617,6 +620,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\PresetEditWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\PreviewWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
