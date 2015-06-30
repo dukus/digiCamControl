@@ -35,6 +35,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CameraControl.Actions;
@@ -61,27 +62,15 @@ namespace CameraControl
     /// </summary>
     public partial class StartUpWindow : Window
     {
-        private Timer _timer = new Timer(2000);
-
         public StartUpWindow()
         {
             InitializeComponent();
             lbl_vers.Content = "V." + Assembly.GetExecutingAssembly().GetName().Version;
-
-            _timer.Elapsed += _timer_Elapsed;
-            _timer.AutoReset = false;
         }
 
-        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            //this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(InitApplication));
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            _timer.Start();
-
             if (!string.IsNullOrEmpty(ServiceProvider.Branding.StartupScreenImage) &&
                 File.Exists(ServiceProvider.Branding.StartupScreenImage))
             {
@@ -92,10 +81,15 @@ namespace CameraControl
                 bi.EndInit();
                 background.Source = bi;
             }
-            //InitApplication();
-            //Thread thread = new Thread(InitApplication);
-            //thread.SetApartmentState(ApartmentState.STA);
-            //thread.Start();
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            if (ServiceProvider.Branding.ShowStartupScreenAnimation)
+            {
+                Storyboard storyBoard = this.Resources["OnLoaded1"] as Storyboard;
+                if (storyBoard != null) storyBoard.Begin(background);
+            }
         }
 
 

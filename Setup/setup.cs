@@ -114,6 +114,8 @@ namespace Setup
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.ControlPanelInfo.ProductIcon = "logo.ico";
+
+
             Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);
 
