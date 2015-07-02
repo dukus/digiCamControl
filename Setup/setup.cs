@@ -1,10 +1,12 @@
 using System;
 using System.IO;
+using System.Xml;
 using WixSharp;
 using System;
 using System.IO;
 using Microsoft.Win32;
 using System.Diagnostics;
+using WixSharp.CommonTasks;
 using File = WixSharp.File;
 using System.Windows.Forms;
 using Microsoft.Deployment.WindowsInstaller;
@@ -114,7 +116,18 @@ namespace Setup
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.ControlPanelInfo.ProductIcon = "logo.ico";
-
+            
+            string branding = Path.Combine(project.SourceBaseDir, "branding.xml");
+            if (System.IO.File.Exists(branding))
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(System.IO.File.ReadAllText(branding));
+                string name = doc.DocumentElement.SelectSingleNode("/Branding/ApplicationTitle").InnerText;
+                project.ControlPanelInfo.Manufacturer = name;
+                project.OutFileName = string.Format(name+"_{0}", ver.FileVersion);
+                appDir.AddFile(new File(appFeature, "branding.xml"));
+                project.Name = name;
+            }
 
             Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);

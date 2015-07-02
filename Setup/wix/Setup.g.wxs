@@ -6,9 +6,9 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a3502685" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.14" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a3502686" Name="MetroLens" Language="1033" Codepage="Windows-1252" Version="1.2.99.15" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="MetroLens">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
-    <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
+    <Media Id="1" Cabinet="MetroLens.cab" EmbedCab="yes" />
 
     <Condition Message="Please install .NET 4.0 first." ><![CDATA[NET40="#1"]]></Condition>
 
@@ -307,6 +307,10 @@
             <File Id="WriteableBitmapEx.Wpf.pdb" Source="WriteableBitmapEx.Wpf.pdb" />
           </Component>
 
+          <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+            <File Id="logo.png" Source="logo.png" />
+          </Component>
+
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
             <File Id="noconn.png" Source="noconn.png" />
           </Component>
@@ -317,6 +321,10 @@
 
           <Component Id="Component.notloaded.png" Guid="19d12628-7654-4354-a305-9ab019fe5786">
             <File Id="notloaded.png" Source="notloaded.png" />
+          </Component>
+
+          <Component Id="Component.branding.xml" Guid="19d12628-7654-4354-a305-9ab0773b8acc">
+            <File Id="branding.xml" Source="branding.xml" />
           </Component>
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
@@ -730,8 +738,8 @@
                   <File Id="live.png" Source="WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-                  <File Id="logo.png" Source="WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
+                  <File Id="logo.png.1" Source="WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
@@ -932,8 +940,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="e:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.14" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.99.14" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.15" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.2.99.15" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -1016,9 +1024,11 @@
       <ComponentRef Id="Component.PhotoBooth.pdb" />
       <ComponentRef Id="Component.PortableDeviceLib.pdb" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.pdb" />
+      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
+      <ComponentRef Id="Component.branding.xml" />
       <ComponentRef Id="Component.takephoto.mp3" />
       <ComponentRef Id="Component.takephoto.wav" />
       <ComponentRef Id="Component.Canon_EOS_100D.png" />
@@ -1113,7 +1123,7 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png" />
+      <ComponentRef Id="Component.logo.png.1" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />

@@ -53,20 +53,25 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                return !_startupScreenImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _startupScreenImage) : _startupScreenImage;
+                return _startupScreenImage!=null && !_startupScreenImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _startupScreenImage) : _startupScreenImage;
             }
             set { _startupScreenImage = value; }
         }
 
         public string LogoImage
         {
-            get { return !_logoImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _logoImage) : _logoImage;}
+            get { return _logoImage!=null && !_logoImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _logoImage) : _logoImage;}
             set { _logoImage = value; }
         }
 
         public string DefaultThumbImage
         {
-            get { return !_defaultThumbImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _defaultThumbImage) : _defaultThumbImage; }
+            get
+            {
+                return _defaultThumbImage != null && !_defaultThumbImage.Contains("\\")
+                    ? Path.Combine(Settings.ApplicationFolder, _defaultThumbImage)
+                    : _defaultThumbImage;
+            }
             set { _defaultThumbImage = value; }
         }
 
