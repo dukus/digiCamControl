@@ -20,7 +20,7 @@ namespace CameraControl.Core.Scripting
                 case "capture":
                     //Task.Factory.StartNew(CameraHelper.Capture);
                     //Thread.Sleep(200);
-                    CameraHelper.Capture();
+                    CameraHelper.CaptureWithError();
                     ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
                     return null;
                 case "capturenoaf":
