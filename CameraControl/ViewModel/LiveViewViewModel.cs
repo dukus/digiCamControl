@@ -1473,13 +1473,13 @@ namespace CameraControl.ViewModel
         {
             if (_operInProgress)
             {
-                //Log.Error("OperInProgress");
+                Log.Error("OperInProgress");
                 return;
             }
 
             if (DelayedStart)
             {
-                //Log.Error("Start is delayed");
+                Log.Error("Start is delayed");
                 return;
             }
 
@@ -1539,7 +1539,7 @@ namespace CameraControl.ViewModel
                     PeakSoundL = LiveViewData.PeakSoundL;
                     PeakSoundR = LiveViewData.PeakSoundR;
                     HaveSoundData = LiveViewData.HaveSoundData;
-
+                    Log.Error("Sound data " + SoundL);
                     MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
 
                     if (NoProcessing)
