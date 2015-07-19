@@ -506,6 +506,8 @@ namespace CameraControl
                     MyNotifyIcon.ShowBalloonTip("Photo transfered", fileName, BalloonIcon.Info);
                 }
 
+                ServiceProvider.DeviceManager.LastCapturedImage[eventArgs.CameraDevice] = fileName;
+
                 //select the new file only when the multiple camera support isn't used to prevent high CPU usage on raw files
                 if (ServiceProvider.Settings.AutoPreview &&
                     !ServiceProvider.WindowsManager.Get(typeof (MultipleCameraWnd)).IsVisible &&

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ namespace CameraControl.Core.Scripting
                     return null;
                 case "do":
                     DoCmd(args.Skip(1).ToArray());
+
                     return null;
                 case "get":
                     return Get(args.Skip(1).ToArray());
@@ -169,6 +171,10 @@ namespace CameraControl.Core.Scripting
                     return device.Mode.Value;
                 case "compressionsetting":
                     return device.CompressionSetting.Value;
+                case "lastcaptured":
+                    if (!ServiceProvider.DeviceManager.LastCapturedImage.ContainsKey(device) || string.IsNullOrEmpty(ServiceProvider.DeviceManager.LastCapturedImage[device]))
+                        return "-";
+                    return Path.GetFileName(ServiceProvider.DeviceManager.LastCapturedImage[device]);
                 case "session":
                     return ServiceProvider.Settings.DefaultSession.Name;
                 case "camera":

@@ -59,6 +59,7 @@ namespace CameraControl.Devices
         private object _locker = new object();
 
         public Dictionary<ICameraDevice, byte[]> LiveViewImage;
+        public Dictionary<ICameraDevice, string> LastCapturedImage;
 
         /// <summary>
         /// Gets or sets a value indicating whether use experimental drivers.
@@ -185,6 +186,7 @@ namespace CameraControl.Devices
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
             _deviceEnumerator = new DeviceDescriptorEnumerator();
             LiveViewImage = new Dictionary<ICameraDevice, byte[]>();
+            LastCapturedImage = new Dictionary<ICameraDevice, string>();
 
             // prevent program crash in something wrong with wia
             try

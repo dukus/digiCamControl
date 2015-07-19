@@ -53,6 +53,7 @@ namespace CameraControl.Core.Classes
                 var camera = o as ICameraDevice;
                 if (camera != null)
                 {
+                    ServiceProvider.DeviceManager.LastCapturedImage[camera] = "";
                     CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
                     if (property.UseExternalShutter && property.SelectedConfig != null)
                     {
