@@ -418,6 +418,10 @@
                                     </StackPanel>
                                 </Grid>
                             </Expander>
+                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" MaxHeight="200"
+                                       Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                                <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" />
+                            </Expander>                            
                             <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel Orientation="Vertical">

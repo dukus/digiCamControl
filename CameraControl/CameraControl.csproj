@@ -299,6 +299,9 @@
       <DependentUpon>LayoutNormal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layouts\LayoutTypeEnum.cs" />
+    <Compile Include="Panels\DirectorySelectorControl.xaml.cs">
+      <DependentUpon>DirectorySelectorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\ImagePropertiesControl.xaml.cs">
       <DependentUpon>ImagePropertiesControl.xaml</DependentUpon>
     </Compile>
@@ -469,6 +472,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Layouts\LayoutBaseResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\DirectorySelectorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
