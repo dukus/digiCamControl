@@ -190,8 +190,7 @@ namespace CameraControl.ViewModel
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Unable to load settings " + exception.Message);
-                Log.Error("Unable to load settings", exception);
+                Log.Error("Unable to load printer settings", exception);
             }
         }
 
