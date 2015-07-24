@@ -138,14 +138,6 @@ namespace CameraControl.windows
             }
         }
 
-        private void folderBrowser1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ServiceProvider.Settings.DefaultSession.Folder = folderBrowser1.SelectedImagePath;
-            ServiceProvider.QueueManager.Clear();
-            ServiceProvider.Settings.DefaultSession.Files.Clear();
-            ServiceProvider.Settings.LoadData(ServiceProvider.Settings.DefaultSession);
-        }
-
         private void lst_files_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
         }

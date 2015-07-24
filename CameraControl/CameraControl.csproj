@@ -273,12 +273,6 @@
     <Compile Include="Controls\ExposureStatusControl.xaml.cs">
       <DependentUpon>ExposureStatusControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FolderBrowser.xaml.cs">
-      <DependentUpon>FolderBrowser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FolderBrowserComboBox.xaml.cs">
-      <DependentUpon>FolderBrowserComboBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
@@ -454,14 +448,6 @@
     <Page Include="Controls\ExposureStatusControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\FolderBrowser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\FolderBrowserComboBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimeControl.xaml">
       <SubType>Designer</SubType>

@@ -597,5 +597,7 @@ namespace CameraControl.Core.Translation
         public static string LabelPublicWebserver = "Allow public access";
         public static string LabelLoadCanonTransferMode = "Load Canon transfer mode";
         public static string LabelFolderSelector = "Folder selector";
+        public static string LabelReloadOnFolderChange = "Reload files on folder change";
+        
     }
 }

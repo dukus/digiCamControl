@@ -20,10 +20,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="1" Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}"  Background="{DynamicResource WindowBackgroundBrush}"  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}"  Background="{DynamicResource WindowBackgroundBrush}"  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
             </ListBox.InputBindings>
@@ -56,6 +55,5 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <local:FolderBrowserComboBox x:Name="folderBrowserComboBox1"  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" ValueChanged="folderBrowserComboBox1_ValueChanged" />
     </Grid>
 </Layouts:LayoutBase>

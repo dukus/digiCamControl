@@ -98,7 +98,7 @@ namespace CameraControl.Panels
 
             if (temp == null)
                 return;
-            SelectedPath = "";
+            var _selectedPath = "";
             string temp1 = "";
             string temp2 = "";
             while (true)
@@ -108,14 +108,15 @@ namespace CameraControl.Panels
                 {
                     temp2 = "";
                 }
-                SelectedPath = temp1 + temp2 + SelectedPath;
-                if (temp.Parent.GetType().Equals(typeof (TreeView)))
+                _selectedPath = temp1 + temp2 + _selectedPath;
+                if (temp.Parent.GetType() == typeof (TreeView))
                 {
                     break;
                 }
                 temp = ((TreeViewItem) temp.Parent);
                 temp2 = @"\";
             }
+            SelectedPath = _selectedPath;
         }
 
         /// <summary>

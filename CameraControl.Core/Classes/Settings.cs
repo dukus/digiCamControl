@@ -1020,6 +1020,10 @@ namespace CameraControl.Core.Classes
                     return;
                 if (!Directory.Exists(session.Folder))
                     return;
+                if (session.AlowFolderChange && session.ReloadOnFolderChange)
+                {
+                    session.Files.Clear();
+                }
 
                 FileItem[] fileItems = new FileItem[session.Files.Count];
                 session.Files.CopyTo(fileItems, 0);

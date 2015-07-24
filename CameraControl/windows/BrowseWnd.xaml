@@ -72,7 +72,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <my:FolderBrowser Grid.Column="1" x:Name="folderBrowser1" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Grid.Row="1" MouseDoubleClick="folderBrowser1_MouseDoubleClick" BorderThickness="1"/>
         <StatusBar Grid.ColumnSpan="5" Grid.Row="3" Name="statusBar1" Background="{DynamicResource WindowBackgroundBrush}">
             <StatusBarItem Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Folder}" />
             <StatusBarItem Content="(" />            

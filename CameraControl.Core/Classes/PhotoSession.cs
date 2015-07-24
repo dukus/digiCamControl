@@ -101,6 +101,15 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool ReloadOnFolderChange
+        {
+            get { return _reloadOnFolderChange; }
+            set
+            {
+                _reloadOnFolderChange = value;
+                NotifyPropertyChanged("ReloadOnFolderChange");
+            }
+        }
 
         private string _folder;
 
@@ -131,6 +140,13 @@ namespace CameraControl.Core.Classes
                 //    _systemWatcher.EnableRaisingEvents = true;
                 //    _systemWatcher.IncludeSubdirectories = true;
                 //}
+                if (AlowFolderChange && ReloadOnFolderChange && _folder != value)
+                {
+                    _folder = value;
+                    ServiceProvider.QueueManager.Clear();
+                    Files.Clear();
+                    ServiceProvider.Settings.LoadData(this);
+                }
                 _folder = value;
                 NotifyPropertyChanged("Folder");
             }
@@ -490,6 +506,7 @@ namespace CameraControl.Core.Classes
         private string _captureName;
         private int _series;
         private bool _lowerCaseExtension;
+        private bool _reloadOnFolderChange;
 
         public bool AllowOverWrite
         {

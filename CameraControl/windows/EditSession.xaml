@@ -91,6 +91,10 @@
 
                     <Label Grid.Row="8" Grid.Column="0" Content="{T:TranslateExtension LabelAlowFolderChange}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding Path=AlowFolderChange}" Margin="2" />
+
+                    <Label Grid.Row="9" Grid.Column="0" Content="{T:TranslateExtension LabelReloadOnFolderChange}" HorizontalContentAlignment="Right" />
+                    <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding Path=ReloadOnFolderChange}" Margin="2" IsEnabled="{Binding AlowFolderChange}" />
+                    
                     <Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelDownloadJpgOnly}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="10" Grid.Column="1" ToolTip="{T:TranslateExtension LabelDownloadJpgOnlyToolTip}" IsChecked="{Binding Path=DownloadOnlyJpg}" Margin="2" />
 
