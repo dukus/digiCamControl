@@ -40,7 +40,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
-         <Expander Header="" ExpandDirection="Right" Margin="5" Grid.RowSpan="2">
+         <Expander Header="" ExpandDirection="Right" Margin="0" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -109,7 +109,7 @@
         </ListBox>
 
      
-        <Expander Grid.ColumnSpan="2" Grid.Row="2" Header="{T:TranslateExtension LabelExternalShutterRelease}" ExpandDirection="Up" Margin="5">
+        <Expander Grid.ColumnSpan="2" Grid.Row="2" Header="{T:TranslateExtension LabelExternalShutterRelease}" ExpandDirection="Up" Margin="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="216*" />

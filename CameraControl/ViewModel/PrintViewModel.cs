@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Printing;
 using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -181,7 +181,7 @@ namespace CameraControl.ViewModel
             try
             {
                 PrinterName = Dlg.PrintQueue.Name;
-                System.Printing.PrintCapabilities capabilities = Dlg.PrintQueue.GetPrintCapabilities(Dlg.PrintTicket);
+                PrintCapabilities capabilities = Dlg.PrintQueue.GetPrintCapabilities(Dlg.PrintTicket);
                 if (capabilities.PageImageableArea != null)
                 {
                     PageWidth = (int) capabilities.PageImageableArea.ExtentWidth;
