@@ -64,6 +64,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="463*" />
             <RowDefinition Height="54" />
@@ -74,17 +75,17 @@
 
         <tb:TaskbarIcon Name="MyNotifyIcon"
                   IconSource="/CameraControl;component/logo.ico"
-                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" />
+                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" Grid.Row="1" />
 
 
-        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ShowGridLines="False" Margin="0">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ShowGridLines="False" Margin="0">
             <DockPanel   Name="StackLayout">
             </DockPanel>
             <!--<Controls:ProgressRing IsActive="True" Height="184" Width="214" IsLarge="False" />-->
         </Grid>
 
         <!--<Controls:MetroContentControl Grid.ColumnSpan="4">-->
-        <WrapPanel Grid.Row="0"  Grid.ColumnSpan="3">
+        <WrapPanel Grid.Row="1"  Grid.ColumnSpan="3">
             <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Height="50" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}">
                 <Image Margin="5" Source="/CameraControl;component/Images/Camera.png"/>
             </Button>
@@ -176,7 +177,7 @@
             </Button>
         </WrapPanel>
         <!--</Controls:MetroContentControl>-->
-        <StackPanel Grid.Row="1" Grid.RowSpan="4" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.RowSpan="4" Orientation="Horizontal">
             <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
                 <Expander.Header>
                     <Label Content="{T:Translate LabelConnectedCameras}">
@@ -235,7 +236,7 @@
                              Visibility="{Binding ShowCameraPropertiesMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
         </StackPanel>
 
-        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="5" Padding="0" Margin="0" 
+        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="1" Grid.RowSpan="5" Padding="0" Margin="0" 
                   Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRightPanelMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <Expander.Resources>
                 <ResourceDictionary>
@@ -421,7 +422,7 @@
                             <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" MaxHeight="200"
                                        Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" />
-                            </Expander>                            
+                            </Expander>
                             <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel Orientation="Vertical">
@@ -592,5 +593,12 @@
             <!--</ScrollViewer>-->
 
         </Expander>
+        <Menu Grid.ColumnSpan="4">
+            <MenuItem Header="File"/>
+            <MenuItem Header="View"/>
+            <MenuItem Header="Session"/>
+            <MenuItem Header="Camera"/>
+            <MenuItem Header="Help"/>
+        </Menu>
     </Grid>
 </Controls:MetroWindow >
