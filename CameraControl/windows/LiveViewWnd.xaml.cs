@@ -199,6 +199,8 @@ namespace CameraControl.windows
                     {
                         try
                         {
+                            this.WindowState = ((Window) ServiceProvider.PluginManager.SelectedWindow).WindowState;
+
                             ICameraDevice cameraparam = param as ICameraDevice;
                             if (cameraparam == SelectedPortableDevice && IsVisible)
                             {
