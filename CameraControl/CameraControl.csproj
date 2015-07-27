@@ -249,6 +249,7 @@
     <Compile Include="Actions\Enfuse\EnfuseSettingsWnd.xaml.cs">
       <DependentUpon>EnfuseSettingsWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\CommandShortcutExtensioncs.cs" />
     <Compile Include="Classes\HelpProvider.cs" />
     <Compile Include="Classes\HorizontalScrollBehavior.cs" />
     <Compile Include="Classes\VisualTreeHelpers.cs" />
@@ -315,6 +316,7 @@
     <Compile Include="ViewModel\AutoExportPluginEditViewModel.cs" />
     <Compile Include="ViewModel\BarcodeViewModel.cs" />
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
+    <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultipleLiveViewViewModel.cs" />
     <Compile Include="ViewModel\PrintItemViewModel.cs" />

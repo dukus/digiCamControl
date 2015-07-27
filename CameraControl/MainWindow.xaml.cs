@@ -138,6 +138,12 @@ namespace CameraControl
                 case CmdConsts.SortCameras:
                     SortCameras();
                     break;
+                case WindowsCmdConsts.MainWnd_Message:
+                    this.ShowMessageAsync("", o.ToString());
+                    break;
+                case WindowsCmdConsts.SetLayout:
+                    SetLayout(o.ToString());
+                    break;
                 case CmdConsts.All_Minimize:
                     Dispatcher.Invoke(new Action(delegate
                     {
@@ -710,8 +716,8 @@ namespace CameraControl
             LayoutTypeEnum type;
             if (Enum.TryParse(enumname, true, out type))
             {
+                SetLayout(type);
             }
-            SetLayout(type);
         }
 
         private void SetLayout(LayoutTypeEnum type)
@@ -801,31 +807,6 @@ namespace CameraControl
             else
             {
                 MessageBox.Show(TranslationStrings.MsgLastSessionCantBeDeleted);
-            }
-        }
-
-        private void btn_settings_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsWnd wnd = new SettingsWnd();
-            wnd.ShowDialog();
-            try
-            {
-                RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-                    true);
-
-                if (rk == null) return;
-
-                if (ServiceProvider.Settings.StartupWithWindows)
-                {
-                    rk.SetValue(Settings.AppName, System.Reflection.Assembly.GetExecutingAssembly().Location);
-                }
-                else
-                    rk.DeleteValue(Settings.AppName, false);
-            }
-            catch (Exception ex)
-            {
-                this.ShowMessageAsync("Usable to set startup", ex.Message);
-                Log.Error("Usable to set startup", ex);
             }
         }
 

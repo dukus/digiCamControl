@@ -59,6 +59,7 @@ namespace CameraControl.Core.Classes
         public const string LiveViewWnd_StopRecord = "LiveViewWnd_StopRecord";
         public const string AstroLiveViewWnd_Show = "AstroLiveViewWnd_Show";
         public const string AstroLiveViewWnd_Hide = "AstroLiveViewWnd_Hide";
+        public const string MainWnd_Message = "MainWnd_Message";
         public const string PrintWnd_Show = "PrintWnd_Show";
         public const string PrintWnd_Hide = "PrintWnd_Hide";
         public const string Prev_Image = "Prev_Image";
@@ -74,5 +75,6 @@ namespace CameraControl.Core.Classes
         public const string BarcodeWnd_Hide = "BarcodeWnd_Hide";
         public const string TimeLapse_Start = "TimeLapse_Start";
         public const string TimeLapse_Stop = "TimeLapse_Stop";
+        public const string SetLayout = "SetLayout";
     }
 }

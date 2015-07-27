@@ -598,6 +598,9 @@ namespace CameraControl.Core.Translation
         public static string LabelLoadCanonTransferMode = "Load Canon transfer mode";
         public static string LabelFolderSelector = "Folder selector";
         public static string LabelReloadOnFolderChange = "Reload files on folder change";
-        
+        public static string MenuSession = "Session";
+        public static string MenuCamera = "Camera";
+        public static string MenuThumbnailSize = "Thumbnail Size";
+        public static string MenuInver = "Invert selection";
     }
 }

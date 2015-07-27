@@ -11,6 +11,7 @@
                        xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
                        xmlns:tb="http://www.hardcodet.net/taskbar"
                        xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+                       xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
                        Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel">
     <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
@@ -27,7 +28,6 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Content="{T:TranslateExtension SettingsToolTip}" Name="btn_settings" Click="btn_settings_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSettingMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="{T:TranslateExtension LabelMenu}" Name="btn_menu" Click="btn_menu_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMenuMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="{T:TranslateExtension MenuDonate}" Name="btn_donate" Click="btn_donate_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
@@ -306,33 +306,6 @@
                 <Grid Grid.Row="1" Margin="0" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                         <StackPanel>
-                            <Expander  Header="{T:TranslateExtension LabelSelection}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
-                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSelectionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:SelectionControl HorizontalAlignment="Center"/>
-                            </Expander>
-                            <Expander  Header="{T:TranslateExtension MenuLayout}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
-                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLayoutPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <Button Content="{T:TranslateExtension MenuLayoutDefault}" Click="MenuItem_Click_6" Margin="2"/>
-                                        <Button Content="{T:TranslateExtension MenuLayoutGridRight}" Click="MenuItem_Click_7" Margin="2"/>
-                                        <Button Content="{T:TranslateExtension MenuLayoutGrid}" Click="MenuItem_Click_8" Margin="2"/>
-                                    </StackPanel>
-                                    <Grid>
-                                        <Rectangle Width="14" Height="10" HorizontalAlignment="Left" Margin="2">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_portrait}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                        <Slider Minimum="80" Maximum="400" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="20,3,30,3" SmallChange="1" TickFrequency="10" IsMoveToPointEnabled="True" BorderThickness="1"/>
-                                        <Rectangle Width="22" Height="16" HorizontalAlignment="Right" Margin="2">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_portrait}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </Grid>
-                                </StackPanel>
-                            </Expander>
                             <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Grid>
@@ -593,12 +566,40 @@
             <!--</ScrollViewer>-->
 
         </Expander>
-        <Menu Grid.ColumnSpan="4">
-            <MenuItem Header="File"/>
-            <MenuItem Header="View"/>
-            <MenuItem Header="Session"/>
-            <MenuItem Header="Camera"/>
-            <MenuItem Header="Help"/>
+        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0">
+            <Menu.DataContext>
+                <viewModel:MainMenuViewModel/>
+            </Menu.DataContext>
+            <MenuItem Header="{T:TranslateExtension MenuFile}">
+                <MenuItem Header="{T:TranslateExtension SettingsToolTip}" Command="{Binding SettingsCommand}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuView}">
+                <MenuItem Header="{T:TranslateExtension MenuLayout}">
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutDefault}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutGridRight}" Command="{Binding SetLayoutCommand}" CommandParameter="GridRight"/>
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutGrid}" Command="{Binding SetLayoutCommand}" CommandParameter="Grid"/>
+                </MenuItem>
+                <MenuItem Header="{T:TranslateExtension MenuThumbnailSize}">
+                    <MenuItem Header="80 %" Command="{Binding ThumbSizeCommand}" CommandParameter="80"/>
+                    <MenuItem Header="100 %" Command="{Binding ThumbSizeCommand}" CommandParameter="100"/>
+                    <MenuItem Header="200 %" Command="{Binding ThumbSizeCommand}" CommandParameter="200"/>
+                    <MenuItem Header="300 %" Command="{Binding ThumbSizeCommand}" CommandParameter="300"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuSession}">
+                <MenuItem Header="{T:TranslateExtension LabelSelection}">
+                    <MenuItem Header="{T:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectUnLiked}" Command="{Binding Path=SelectUnLiked}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>
+                    <MenuItem Header="{T:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuCamera}"/>
+            <MenuItem Header="{T:TranslateExtension MenuHelp}"/>
         </Menu>
     </Grid>
 </Controls:MetroWindow >
