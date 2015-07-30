@@ -2123,6 +2123,15 @@ namespace CameraControl.Devices.Nikon
             base.FormatStorage(storageId);
         }
 
+        public override void ResetDevice()
+        {
+            StillImageDevice imageDevice = StillImageDevice as StillImageDevice;
+            if (imageDevice != null)
+            {
+              var resp=  imageDevice.ResetDevice();
+                Console.WriteLine(resp.ToString("X"));
+            }
+        }
 
         public override string GetProhibitionCondition(OperationEnum operationEnum)
         {

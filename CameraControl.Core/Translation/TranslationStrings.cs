@@ -602,5 +602,12 @@ namespace CameraControl.Core.Translation
         public static string MenuCamera = "Camera";
         public static string MenuThumbnailSize = "Thumbnail Size";
         public static string MenuInver = "Invert selection";
+        public static string MenuResetDevice = "Reset device";
+        public static string MenuSessionAdd = "Add new session ...";
+        public static string MenuSessionEdit = "Edit current session ...";
+        public static string MenuSessionDel = "Remove current session";
+        public static string MenuIncrementSeries = "Increment series";
+        public static string MenuWindows = "Windows";
+        public static string MenuOnlineManual = "Online manual";
     }
 }

@@ -19,6 +19,36 @@ namespace PortableDeviceLib
 
         }
 
+        public uint ResetDevice()
+        {
+            IPortableDeviceValues commandValues =
+                (IPortableDeviceValues) new PortableDeviceTypesLib.PortableDeviceValuesClass();
+            IPortableDeviceValues results;
+
+            commandValues.SetGuidValue(PortableDevicePKeys.WPD_PROPERTY_COMMON_COMMAND_CATEGORY,
+                PortableDevicePKeys.WPD_COMMAND_COMMON_RESET_DEVICE.fmtid);
+            commandValues.SetUnsignedIntegerValue(PortableDevicePKeys.WPD_PROPERTY_COMMON_COMMAND_ID,
+                PortableDevicePKeys.WPD_COMMAND_COMMON_RESET_DEVICE.pid);
+
+            this.portableDeviceClass.SendCommand(0, commandValues, out results);
+
+            try
+            {
+                int iValue = 0;
+                results.GetErrorValue(PortableDevicePKeys.WPD_PROPERTY_COMMON_HRESULT, out iValue);
+                if (iValue != 0)
+                    return (uint)iValue;
+                uint pValue = 0;
+                results.GetUnsignedIntegerValue(ref PortableDevicePKeys.WPD_PROPERTY_MTP_EXT_RESPONSE_CODE, out pValue);
+                if (pValue != 0)
+                    return pValue;
+            }
+            catch (Exception)
+            {
+            }
+            return 0;
+        }
+
         public uint ExecuteWithNoData(uint code, params uint[] parameters)
         {
             IPortableDeviceValues commandValues =

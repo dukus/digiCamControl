@@ -28,34 +28,8 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Content="{T:TranslateExtension LabelMenu}" Name="btn_menu" Click="btn_menu_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMenuMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-            <Button Content="{T:TranslateExtension MenuDonate}" Name="btn_donate" Click="btn_donate_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
-
-    <Controls:MetroWindow.Flyouts>
-        <Controls:FlyoutsControl>
-            <Controls:Flyout Header="{T:TranslateExtension LabelMenu}" Position="Right" Opacity="0.9" IsOpen="False">
-                <StackPanel>
-
-                    <StackPanel Orientation="Vertical"  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                        <Expander Header="{T:TranslateExtension MenuHelp}" IsExpanded="True">
-                            <StackPanel>
-                                <Button Content="{T:TranslateExtension MenuHomePage}" Click="MenuItem_Click" Margin="2"/>
-                                <Button Content="{T:TranslateExtension MenuCheckForUpdate}" Click="MenuItem_Click_1" Margin="2"/>
-                                <Button Content="{T:TranslateExtension MenuForum}" Click="mnu_forum_Click" Margin="2"/>
-                                <Button Content="{T:TranslateExtension LabelSendTheLogFile}" Click="mnu_send_log_Click" Margin="2"/>
-                                <Button Content="{T:TranslateExtension LabelChangelog}" Click="btn_changelog_Click" Margin="2"/>
-                                <Button Content="{T:TranslateExtension MenuAbout}" Click="btn_about_Click" Margin="2"/>
-                            </StackPanel>
-                        </Expander>
-                    </StackPanel>
-                </StackPanel>
-            </Controls:Flyout>
-        </Controls:FlyoutsControl>
-    </Controls:MetroWindow.Flyouts>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -90,15 +64,6 @@
                 <Image Margin="5" Source="/CameraControl;component/Images/Camera.png"/>
             </Button>
             <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-55,5,5,5" Height="50" Width="50" />
-
-            <Button ToolTip="{T:TranslateExtension LabelRefreshCameraList}" Height="50" Name="but_refresh" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_refresh_Click"
-                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRefreshButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="25" Height="25">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_refresh}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
 
             <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="50" Name="but_download" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDownloadButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
@@ -285,22 +250,6 @@
                             </ToggleButton>
                         </StackPanel>
                         <Label Grid.Row="1" Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Margin="0" Padding="0" HorizontalAlignment="Center" />
-                        <StackPanel  Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <ToggleButton  ToolTip="{T:TranslateExtension LabelFlip}" Height="35" Width="35" Margin="0" IsChecked="{Binding FlipPreview}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                                <Rectangle Width="17" Height="14">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_transform_flip_horizontal}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </ToggleButton>
-                            <ToggleButton  ToolTip="{T:TranslateExtension LabelShowFocusPoints}" Height="35" Width="35" Margin="0" Padding="0" IsChecked="{Binding ShowFocusPoints}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                                <Rectangle Width="20" Height="20">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_crosshair}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </ToggleButton>
-                        </StackPanel>
                     </Grid>
                 </GroupBox>
                 <Grid Grid.Row="1" Margin="0" >
@@ -332,64 +281,12 @@
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
-                                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" Grid.ColumnSpan="2"
-                                                Grid.Column="0">
-                                        <Button  ToolTip="{T:TranslateExtension SessionAdd}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_add_Sesion_Click">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension SessionEdit}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_edit_Sesion_Click">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension SessionDel}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_del_Sesion_Click">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension LabelRefreshSession}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_refresh_Sesion_Click">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_refresh}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension LabelSessionOpenFolder}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_open_folder_Sesion_Click">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_folder_open}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                    </StackPanel>
 
                                     <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right"/>
                                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
 
                                     <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right"/>
                                     <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" Minimum="0" Maximum="100000" Value="{Binding Path=DefaultSession.Series}"/>
-
-                                    <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
-
-                                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                                        <Button Content="Tag" ToolTip="{T:TranslateExtension SelectTagsToolTip}" Height="35" Name="btn_Tags" Width="35" Click="btn_Tags_Click" Style="{DynamicResource MetroCircleButtonStyle}"
-                                      Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowTagsButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}" FontSize="10"/>
-                                        <Button  ToolTip="{T:TranslateExtension LabelBarcode}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_barcode_Click">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_barcode}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                    </StackPanel>
                                 </Grid>
                             </Expander>
                             <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" MaxHeight="200"
@@ -576,6 +473,9 @@
                 <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuView}">
+                <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints}" Command="{Binding ToggleFocusCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
+                <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuLayout}">
                     <MenuItem Header="{T:TranslateExtension MenuLayoutDefault}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
                     <MenuItem Header="{T:TranslateExtension MenuLayoutGridRight}" Command="{Binding SetLayoutCommand}" CommandParameter="GridRight"/>
@@ -587,8 +487,20 @@
                     <MenuItem Header="200 %" Command="{Binding ThumbSizeCommand}" CommandParameter="200"/>
                     <MenuItem Header="300 %" Command="{Binding ThumbSizeCommand}" CommandParameter="300"/>
                 </MenuItem>
+                <MenuItem Header="{T:TranslateExtension MenuWindows}">
+                    <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuSession}">
+                <MenuItem Header="{T:TranslateExtension MenuSessionAdd}" Command="{Binding NewSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuSessionEdit}" Command="{Binding EditSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuSessionDel}" Command="{Binding DelSessionCommand}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelRefreshSession}" Command="{Binding RefreshSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelSessionOpenFolder}" Command="{Binding ShowSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuIncrementSeries}" Command="{Binding SendCommand}" CommandParameter="NextSeries" InputGestureText="{myClasess:CommandShortcutExtensioncs NextSeries}"/>
+                <Separator/>
                 <MenuItem Header="{T:TranslateExtension LabelSelection}">
                     <MenuItem Header="{T:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
                     <MenuItem Header="{T:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
@@ -598,8 +510,21 @@
                     <MenuItem Header="{T:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuCamera}"/>
-            <MenuItem Header="{T:TranslateExtension MenuHelp}"/>
+            <MenuItem Header="{T:TranslateExtension MenuCamera}">
+                <MenuItem Header="{T:TranslateExtension LabelRefreshCameraList}" Command="{Binding Path=RefreshCommand}"/>
+
+                <!--<MenuItem Header="{T:TranslateExtension MenuResetDevice}" Command="{Binding SendCommand}" CommandParameter="ResetDevice" InputGestureText="{myClasess:CommandShortcutExtensioncs ResetDevice}"/>-->
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuHelp}" Visibility="{Binding Branding.OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <MenuItem Header="{T:TranslateExtension MenuOnlineManual}" Command="{Binding ManualPageCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuForum}" Command="{Binding ForumCommand}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelSendTheLogFile}" Command="{Binding SendLogFileCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuCheckForUpdate}" Command="{Binding CheckUpdateCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelChangelog}" Command="{Binding ShowChangeLogCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuAbout}" Command="{Binding AboutCommand}"/>
+            </MenuItem>
         </Menu>
     </Grid>
 </Controls:MetroWindow >

@@ -627,39 +627,6 @@ namespace CameraControl
             }
         }
 
-        private void btn_edit_Sesion_Click(object sender, RoutedEventArgs e)
-        {
-            //if (File.Exists(ServiceProvider.Settings.DefaultSession.ConfigFile))
-            //{
-            //    File.Delete(ServiceProvider.Settings.DefaultSession.ConfigFile);
-            //}
-            EditSession editSession = new EditSession(ServiceProvider.Settings.DefaultSession);
-            editSession.Owner = this;
-            ServiceProvider.Settings.ApplyTheme(editSession);
-            editSession.ShowDialog();
-            ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
-        }
-
-        private void btn_add_Sesion_Click(object sender, RoutedEventArgs e)
-        {
-            var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.xml");
-            var session = new PhotoSession();
-            // copy session with default name
-            if (File.Exists(defaultsessionfile))
-            {
-                session = ServiceProvider.Settings.LoadSession(defaultsessionfile);
-                session.Files.Clear();
-            }
-            var editSession = new EditSession(session);
-            editSession.Owner = this;
-            ServiceProvider.Settings.ApplyTheme(editSession);
-            if (editSession.ShowDialog() == true)
-            {
-                ServiceProvider.Settings.Add(editSession.Session);
-                ServiceProvider.Settings.DefaultSession = editSession.Session;
-            }
-        }
-
 
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -680,32 +647,13 @@ namespace CameraControl
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show);
         }
 
-        private void btn_about_Click(object sender, RoutedEventArgs e)
-        {
-            AboutWnd wnd = new AboutWnd();
-            wnd.ShowDialog();
-        }
-
-
         private void btn_br_Click(object sender, RoutedEventArgs e)
         {
             BraketingWnd wnd = new BraketingWnd(ServiceProvider.DeviceManager.SelectedCameraDevice,
                                                 ServiceProvider.Settings.DefaultSession);
             wnd.ShowDialog();
         }
-
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            PhotoUtils.Run("http://www.digicamcontrol.com/", "");
-        }
-
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            NewVersionWnd.CheckForUpdate(true);
-        }
-
-
+        
         private void btn_browse_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BrowseWnd_Show);
@@ -755,71 +703,6 @@ namespace CameraControl
             }
         }
 
-        private void MenuItem_Click_6(object sender, RoutedEventArgs e)
-        {
-            SetLayout(LayoutTypeEnum.Normal);
-        }
-
-        private void MenuItem_Click_7(object sender, RoutedEventArgs e)
-        {
-            SetLayout(LayoutTypeEnum.GridRight);
-        }
-
-        private void MenuItem_Click_8(object sender, RoutedEventArgs e)
-        {
-            SetLayout(LayoutTypeEnum.Grid);
-        }
-
-        private void btn_Tags_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceProvider.WindowsManager.ExecuteCommand(
-                ServiceProvider.WindowsManager.Get(typeof (TagSelectorWnd)).IsVisible
-                    ? WindowsCmdConsts.TagSelectorWnd_Hide
-                    : WindowsCmdConsts.TagSelectorWnd_Show);
-        }
-
-        private void btn_del_Sesion_Click(object sender, RoutedEventArgs e)
-        {
-            if (ServiceProvider.Settings.PhotoSessions.Count > 1)
-            {
-                try
-                {
-                    if (
-                        MessageBox.Show(
-                            string.Format(TranslationStrings.MsgDeleteSessionQuestion,
-                                          ServiceProvider.Settings.DefaultSession.Name),
-                            TranslationStrings.LabelDeleteSession, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    {
-                        PhotoSession session = ServiceProvider.Settings.DefaultSession;
-                        if (!string.IsNullOrEmpty(session.ConfigFile) && File.Exists(session.ConfigFile))
-                            File.Delete(session.ConfigFile);
-                        ServiceProvider.Settings.PhotoSessions.Remove(session);
-                        ServiceProvider.Settings.DefaultSession = ServiceProvider.Settings.PhotoSessions[0];
-                        ServiceProvider.Settings.Save();
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Unable to remove session", exception);
-                    MessageBox.Show(TranslationStrings.LabelUnabletoDeleteSession + exception.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show(TranslationStrings.MsgLastSessionCantBeDeleted);
-            }
-        }
-
-        private void btn_menu_Click(object sender, RoutedEventArgs e)
-        {
-            ((Flyout) Flyouts.Items[0]).IsOpen = !((Flyout) Flyouts.Items[0]).IsOpen;
-        }
-
-        private void mnu_forum_Click(object sender, RoutedEventArgs e)
-        {
-            PhotoUtils.Run("http://www.digicamcontrol.com/forum/", "");
-        }
-
         private void btn_donate_Click(object sender, RoutedEventArgs e)
         {
             PhotoUtils.Donate();
@@ -827,7 +710,7 @@ namespace CameraControl
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
         {
-            HelpProvider.Run(HelpSections.MainMenu);
+            
         }
 
         private void but_download_Click(object sender, RoutedEventArgs e)
@@ -904,16 +787,6 @@ namespace CameraControl
             }
         }
 
-        private void mnu_send_log_Click(object sender, RoutedEventArgs e)
-        {
-            var wnd = new ErrorReportWnd("Log file");
-            wnd.ShowDialog();
-        }
-
-        private void btn_changelog_Click(object sender, RoutedEventArgs e)
-        {
-            NewVersionWnd.ShowChangeLog();
-        }
 
         #region Implementation of INotifyPropertyChanged
 
@@ -979,15 +852,6 @@ namespace CameraControl
             wnd.ShowDialog();
         }
 
-        private void btn_refresh_Sesion_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceProvider.Settings.LoadData(ServiceProvider.Settings.DefaultSession);
-        }
-
-        private void btn_open_folder_Sesion_Click(object sender, RoutedEventArgs e)
-        {
-            PhotoUtils.Run(ServiceProvider.Settings.DefaultSession.Folder);
-        }
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
@@ -1003,19 +867,6 @@ namespace CameraControl
         {
             this.Show();
             this.WindowState = WindowState.Normal;
-        }
-
-        private void but_refresh_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ServiceProvider.DeviceManager.ConnectToCamera();
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Error to connect", exception);
-                this.ShowMessageAsync("Error", "Unable to connect " + exception.Message);
-            }
         }
 
         private void but_print_Click(object sender, RoutedEventArgs e)
@@ -1037,12 +888,6 @@ namespace CameraControl
             else
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
         }
-
-        private void btn_barcode_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BarcodeWnd_Show);
-        }
-
 
     }
 }
