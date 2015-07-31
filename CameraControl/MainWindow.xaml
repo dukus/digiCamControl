@@ -477,8 +477,10 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuCamera}">
+                <MenuItem Header="{T:TranslateExtension MenuCameraProperty}" Command="{Binding Path=CameraPropertyCommand}" IsEnabled="{Binding CameraConnected}"/>
+                <MenuItem Header="{T:TranslateExtension LabelUseAsMaster}" Command="{Binding Path=UseAsMasterCommand}" IsEnabled="{Binding CameraConnected}"/>
+                <Separator/>
                 <MenuItem Header="{T:TranslateExtension LabelRefreshCameraList}" Command="{Binding Path=RefreshCommand}"/>
-
                 <!--<MenuItem Header="{T:TranslateExtension MenuResetDevice}" Command="{Binding SendCommand}" CommandParameter="ResetDevice" InputGestureText="{myClasess:CommandShortcutExtensioncs ResetDevice}"/>-->
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuPlugins}">

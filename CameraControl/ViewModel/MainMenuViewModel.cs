@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Translation;
+using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
@@ -19,10 +21,13 @@ namespace CameraControl.ViewModel
 {
     public class MainMenuViewModel : ViewModelBase
     {
+        ProgressWindow dlg;
+
         private bool _showFocusPoints;
         private bool _flipPreview;
         private Branding _branding;
         private List<IExportPlugin> _exportPlugins;
+        private bool _cameraConnected;
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<int> ThumbSizeCommand { get; set; }
@@ -45,6 +50,9 @@ namespace CameraControl.ViewModel
         public RelayCommand SelectAllCommand { get; private set; }
         
         public RelayCommand RefreshCommand { get; private set; }
+        public RelayCommand CameraPropertyCommand { get; private set; }
+        public RelayCommand UseAsMasterCommand { get; private set; }
+        
         public RelayCommand FlipPreviewCommand { get; set; }
 
         public RelayCommand ManualPageCommand { get; set; }
@@ -94,6 +102,12 @@ namespace CameraControl.ViewModel
             get { return ServiceProvider.Branding; }
         }
 
+        public bool CameraConnected
+        {
+            get { return ServiceProvider.DeviceManager.SelectedCameraDevice != null && ServiceProvider.DeviceManager.SelectedCameraDevice.IsConnected; }
+        }
+
+
         public MainMenuViewModel()
         {
             SendCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(Send);
@@ -124,6 +138,11 @@ namespace CameraControl.ViewModel
             RefreshSessionCommand = new RelayCommand(RefreshSession);
             ShowSessionCommand = new RelayCommand(ShowSession);
             RefreshCommand = new RelayCommand(Refresh);
+            CameraPropertyCommand =
+                new RelayCommand(
+                    () => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.CameraPropertyWnd_Show,
+                        ServiceProvider.DeviceManager.SelectedCameraDevice));
+            UseAsMasterCommand = new RelayCommand(UseAsMaster);
 
             ToggleFocusCommand = new RelayCommand(() => ShowFocusPoints = !ShowFocusPoints);
             FlipPreviewCommand = new RelayCommand(() => FlipPreview = !FlipPreview);
@@ -137,6 +156,16 @@ namespace CameraControl.ViewModel
 
             ExecuteExportPluginCommand = new GalaSoft.MvvmLight.Command.RelayCommand<IExportPlugin>(ExecuteExportPlugin);
             ExecuteToolPluginCommand = new GalaSoft.MvvmLight.Command.RelayCommand<IToolPlugin>(ExecuteToolPlugin);
+            if (ServiceProvider.DeviceManager != null)
+            {
+                ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
+                ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraConnected;
+            }
+        }
+
+        void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
+        {
+            RaisePropertyChanged(() => CameraConnected);
         }
 
         private void NewSession()
@@ -240,6 +269,51 @@ namespace CameraControl.ViewModel
                 Log.Error("Error refresh session ", ex);
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MainWnd_Message, ex.Message);
             }
+        }
+
+        private void UseAsMaster()
+        {
+            if (dlg == null)
+                dlg = new ProgressWindow();
+            dlg.Show();
+            Thread thread = new Thread(SetAsMaster);
+            thread.Start();
+        }
+
+        public void SetAsMaster()
+        {
+            try
+            {
+                int i = 0;
+                dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+                var preset = new CameraPreset();
+                preset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+                {
+                    if (connectedDevice == null || !connectedDevice.IsConnected)
+                        continue;
+                    try
+                    {
+                        if (connectedDevice != ServiceProvider.DeviceManager.SelectedCameraDevice)
+                        {
+                            dlg.Label = connectedDevice.DisplayName;
+                            dlg.Progress = i;
+                            i++;
+                            preset.Set(connectedDevice);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Unable to set property ", exception);
+                    }
+                    Thread.Sleep(250);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to set as master ", exception);
+            }
+            dlg.Hide();
         }
 
         private void Refresh()

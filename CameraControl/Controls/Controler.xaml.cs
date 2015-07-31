@@ -132,12 +132,6 @@ namespace CameraControl.Controls
             }
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.CameraPropertyWnd_Show,
-                                                          ServiceProvider.DeviceManager.SelectedCameraDevice);
-        }
-
         private void cmb_transfer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_loading)
@@ -162,52 +156,6 @@ namespace CameraControl.Controls
             }
             property.CaptureInSdRam = ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Dispatcher.Invoke(new Action(() => btn_useasmaster.IsEnabled = false));
-            if (dlg == null)
-                dlg = new ProgressWindow();
-            dlg.Show();
-            Thread thread = new Thread(SetAsMaster);
-            thread.Start();
-        }
-
-        public void SetAsMaster()
-        {
-            try
-            {
-                int i = 0;
-                dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
-                var preset = new CameraPreset();
-                preset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
-                foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
-                {
-                    if (connectedDevice == null || !connectedDevice.IsConnected)
-                        continue;
-                    try
-                    {
-                        if (connectedDevice != ServiceProvider.DeviceManager.SelectedCameraDevice)
-                        {
-                            dlg.Label = connectedDevice.DisplayName;
-                            dlg.Progress = i;
-                            i++;
-                            preset.Set(connectedDevice);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        Log.Error("Unable to set property ", exception);
-                    }
-                    Thread.Sleep(250);
-                }
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Unable to set as master ", exception);
-            }
-            dlg.Hide();
-            Dispatcher.Invoke(new Action(() => btn_useasmaster.IsEnabled = true));
-        }
+        
     }
 }

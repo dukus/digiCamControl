@@ -331,8 +331,6 @@ namespace CameraControl
                 new Action(
                     delegate
                         {
-                            //btn_capture_noaf.IsEnabled = newcameraDevice != null && newcameraDevice.GetCapability(CapabilityEnum.CaptureNoAf);
-                            ((Flyout) Flyouts.Items[0]).IsOpen = false;
                             Title = (ServiceProvider.Branding.ApplicationTitle ?? "digiCamControl") + " - " +
                                     (newcameraDevice == null ? "" : newcameraDevice.DisplayName);
                         }));
