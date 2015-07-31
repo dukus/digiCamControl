@@ -609,5 +609,6 @@ namespace CameraControl.Core.Translation
         public static string MenuIncrementSeries = "Increment series";
         public static string MenuWindows = "Windows";
         public static string MenuOnlineManual = "Online manual";
+        public static string MenuPlugins = "Plugins";
     }
 }

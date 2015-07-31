@@ -94,9 +94,6 @@ namespace CameraControl
                 (o) => ServiceProvider.Settings.CameraPresets.Count > 0);
             LoadInAllPresetCommand = new RelayCommand<CameraPreset>(LoadInAllPreset);
             VerifyPresetCommand = new RelayCommand<CameraPreset>(VerifyPreset);
-
-            ExecuteExportPluginCommand = new RelayCommand<IExportPlugin>(ExecuteExportPlugin);
-            ExecuteToolPluginCommand = new RelayCommand<IToolPlugin>(ExecuteToolPlugin);
             ConfigurePluginCommand = new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
 
             InitializeComponent();
@@ -341,20 +338,6 @@ namespace CameraControl
                         }));
         }
 
-        private void ExecuteExportPlugin(IExportPlugin obj)
-        {
-            obj.Execute();
-        }
-
-        private void ExecuteToolPlugin(IToolPlugin obj)
-        {
-            obj.Execute();
-        }
-
-        private void HideFlatOuts()
-        {
-            ((Flyout) Flyouts.Items[0]).IsOpen = false;
-        }
 
         private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
@@ -572,10 +555,7 @@ namespace CameraControl
         public RelayCommand<CameraPreset> LoadInAllPresetCommand { get; private set; }
         public RelayCommand<CameraPreset> VerifyPresetCommand { get; private set; }
 
-        public RelayCommand<IExportPlugin> ExecuteExportPluginCommand { get; private set; }
-
-        public RelayCommand<IToolPlugin> ExecuteToolPluginCommand { get; private set; }
-
+        
         private void SelectPreset(CameraPreset preset)
         {
             if (preset == null)
@@ -722,16 +702,11 @@ namespace CameraControl
         private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             TriggerClass.KeyDown(e);
-            if (e.Key == Key.Escape)
-            {
-                HideFlatOuts();
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MultipleCameraWnd_Show);
-            HideFlatOuts();
         }
 
         private void btn_sort_Click(object sender, RoutedEventArgs e)

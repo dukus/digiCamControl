@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.Interfaces;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
+using CameraControl.Devices.Classes;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -19,6 +22,7 @@ namespace CameraControl.ViewModel
         private bool _showFocusPoints;
         private bool _flipPreview;
         private Branding _branding;
+        private List<IExportPlugin> _exportPlugins;
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<int> ThumbSizeCommand { get; set; }
@@ -50,6 +54,20 @@ namespace CameraControl.ViewModel
         public RelayCommand SendLogFileCommand { get; set; }
         public RelayCommand ShowChangeLogCommand { get; set; }
         public RelayCommand AboutCommand { get; set; }
+
+        public AsyncObservableCollection<IExportPlugin> ExportPlugins
+        {
+            get { return ServiceProvider.PluginManager.ExportPlugins; }
+        }
+
+        public AsyncObservableCollection<IToolPlugin> ToolsPlugins
+        {
+            get { return ServiceProvider.PluginManager.ToolPlugins; }
+        }
+
+
+        public GalaSoft.MvvmLight.Command.RelayCommand<IExportPlugin> ExecuteExportPluginCommand { get; private set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand<IToolPlugin> ExecuteToolPluginCommand { get; private set; }
 
         public bool ShowFocusPoints
         {
@@ -116,6 +134,9 @@ namespace CameraControl.ViewModel
             ShowChangeLogCommand = new RelayCommand(NewVersionWnd.ShowChangeLog);
             AboutCommand = new RelayCommand(() => new AboutWnd().ShowDialog());
             ManualPageCommand = new RelayCommand(() => HelpProvider.Run(HelpSections.MainMenu));
+
+            ExecuteExportPluginCommand = new GalaSoft.MvvmLight.Command.RelayCommand<IExportPlugin>(ExecuteExportPlugin);
+            ExecuteToolPluginCommand = new GalaSoft.MvvmLight.Command.RelayCommand<IToolPlugin>(ExecuteToolPlugin);
         }
 
         private void NewSession()
@@ -274,5 +295,32 @@ namespace CameraControl.ViewModel
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.SetLayout, type);
         }
+
+        private void ExecuteExportPlugin(IExportPlugin obj)
+        {
+            try
+            {
+                obj.Execute();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error refresh session ", ex);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MainWnd_Message, ex.Message);
+            }
+        }
+
+        private void ExecuteToolPlugin(IToolPlugin obj)
+        {
+            try
+            {
+                obj.Execute();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error refresh session ", ex);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MainWnd_Message, ex.Message);
+            }
+        }
+
     }
 }

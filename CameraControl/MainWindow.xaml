@@ -415,40 +415,6 @@
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMetadataPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" Width="250" />
                             </Expander>
-                            <Expander Header="{T:TranslateExtension LabelExport}" IsExpanded="False" Margin="0" Padding="0"
-                                      Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ExportPlugins}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteExportPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </Expander>
-                            <Expander Header="{T:TranslateExtension LabelTools}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
-                                      Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowToolsPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <ListBox ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolPlugins}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button Width="200" HorizontalAlignment="Center" Content="{Binding Path=Title}" Command="{Binding Path=ExecuteToolPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" CommandParameter="{Binding}" Margin="2"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </Expander>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -514,6 +480,24 @@
                 <MenuItem Header="{T:TranslateExtension LabelRefreshCameraList}" Command="{Binding Path=RefreshCommand}"/>
 
                 <!--<MenuItem Header="{T:TranslateExtension MenuResetDevice}" Command="{Binding SendCommand}" CommandParameter="ResetDevice" InputGestureText="{myClasess:CommandShortcutExtensioncs ResetDevice}"/>-->
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuPlugins}">
+                <MenuItem Header="{T:TranslateExtension LabelExport}" ItemsSource="{Binding ExportPlugins}">
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <MenuItem Header="{Binding Title}" Command="{Binding Path=DataContext.ExecuteExportPluginCommand, 
+                        RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Menu}} }" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                </MenuItem>
+                <MenuItem Header="{T:TranslateExtension LabelTools}" ItemsSource="{Binding ToolsPlugins}">
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <MenuItem Header="{Binding Title}" Command="{Binding Path=DataContext.ExecuteToolPluginCommand, 
+                        RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Menu}} }" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuHelp}" Visibility="{Binding Branding.OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension MenuOnlineManual}" Command="{Binding ManualPageCommand}"/>
