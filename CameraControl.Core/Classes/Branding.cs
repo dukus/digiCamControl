@@ -161,6 +161,8 @@ namespace CameraControl.Core.Classes
 
         public bool ShowToolsPanel { get; set; }
 
+        public bool ShowMainMenu { get; set; }
+
         public string DefaultSettings
         {
             get { return Path.Combine(Settings.ApplicationFolder, "default_settings.xml"); }
@@ -211,6 +213,7 @@ namespace CameraControl.Core.Classes
             ShowExportPanel = true;
             ShowToolsPanel = true;
             ShowAnimation = true;
+            ShowMainMenu = true;
         }
 
         public static Branding LoadBranding()

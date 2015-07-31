@@ -429,12 +429,12 @@
             <!--</ScrollViewer>-->
 
         </Expander>
-        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0">
+        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Visibility="{Binding Branding.ShowMainMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Menu.DataContext>
                 <viewModel:MainMenuViewModel/>
             </Menu.DataContext>
             <MenuItem Header="{T:TranslateExtension MenuFile}">
-                <MenuItem Header="{T:TranslateExtension SettingsToolTip}" Command="{Binding SettingsCommand}"/>
+                <MenuItem Header="{T:TranslateExtension SettingsToolTip}" Command="{Binding SettingsCommand}" Visibility="{Binding Branding.ShowSettingMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
             </MenuItem>
@@ -460,7 +460,7 @@
                     <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuSession}">
+            <MenuItem Header="{T:TranslateExtension MenuSession}" Visibility="{Binding Branding.ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension MenuSessionAdd}" Command="{Binding NewSessionCommand}"/>
                 <MenuItem Header="{T:TranslateExtension MenuSessionEdit}" Command="{Binding EditSessionCommand}"/>
                 <MenuItem Header="{T:TranslateExtension MenuSessionDel}" Command="{Binding DelSessionCommand}"/>
