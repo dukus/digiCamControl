@@ -33,7 +33,7 @@
                             </Rectangle>
                             <CheckBox IsChecked="{Binding Path=IsChecked}" Margin="3,3,3,5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
                         </Grid>
-                        <StackPanel Width="75" Margin="5">
+                        <StackPanel Width="75" Margin="5" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel Orientation="Horizontal" ToolTip="Aperture value">
                                 <Label Content="F : f/" Padding="0" />
                                 <Label Content="{Binding F}" Padding="0" FontStyle="Italic"/>

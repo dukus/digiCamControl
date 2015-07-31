@@ -770,6 +770,7 @@ namespace CameraControl.Core.Classes
         private string _startupScript;
         private bool _publicWebserver;
         private bool _loadCanonTransferMode;
+        private bool _showThumbInfo;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -874,6 +875,16 @@ namespace CameraControl.Core.Classes
 
         public bool FullScreenInSecondaryMonitor { get; set; }
         public bool Autorotate { get; set; }
+
+        public bool ShowThumbInfo
+        {
+            get { return _showThumbInfo; }
+            set
+            {
+                _showThumbInfo = value;
+                NotifyPropertyChanged("ShowThumbInfo");
+            }
+        }
 
         public string OverlayFolder
         {
@@ -983,6 +994,7 @@ namespace CameraControl.Core.Classes
             PublicWebserver = false;
             LoadCanonTransferMode = true;
             Autorotate = true;
+            ShowThumbInfo = true;
         }
 
 

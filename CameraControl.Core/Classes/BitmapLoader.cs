@@ -47,7 +47,7 @@ namespace CameraControl.Core.Classes
     {
         private const int MaxThumbSize = 1920*2;
         private const int LargeThumbSize = 1600;
-        private const int SmallThumbSize = 255;
+        private const int SmallThumbSize = 512;
 
         private static BitmapLoader _instance;
 

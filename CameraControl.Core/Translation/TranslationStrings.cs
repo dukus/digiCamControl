@@ -612,5 +612,6 @@ namespace CameraControl.Core.Translation
         public static string MenuPlugins = "Plugins";
         public static string LabelAutorotate = "Auto rotate image";
         public static string MenuCameraProperty = "Camera property";
+        public static string LabelShowThumbInfo = "Show info next to thubnail";
     }
 }

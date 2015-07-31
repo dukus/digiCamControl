@@ -151,6 +151,9 @@
                         <Label Grid.Row="6" Grid.Column="0" Content="{T:TranslateExtension LabelAutorotate}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="6" Grid.Column="1" Margin="3" IsChecked="{Binding Autorotate}" />
 
+                        <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelShowThumbInfo}" HorizontalContentAlignment="Right"/>
+                        <CheckBox Grid.Row="7" Grid.Column="1" Margin="3" IsChecked="{Binding ShowThumbInfo}" />
+
                         <Label Grid.Row="8" Grid.Column="0" Content="{T:TranslateExtension LabelDontLoadThumbs}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="8" Grid.Column="1" Margin="3" IsChecked="{Binding DontLoadThumbnails}" />
 
