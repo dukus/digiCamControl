@@ -517,7 +517,7 @@ namespace CameraControl.Core.Classes
                 if (showfocuspoints)
                     DrawFocusPoints(fileItem, bitmap);
 
-                if (fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
+                if (ServiceProvider.Settings.Autorotate && fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
                 {
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
                         bitmap = bitmap.Rotate(180);

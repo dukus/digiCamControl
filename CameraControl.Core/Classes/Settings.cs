@@ -873,6 +873,7 @@ namespace CameraControl.Core.Classes
         }
 
         public bool FullScreenInSecondaryMonitor { get; set; }
+        public bool Autorotate { get; set; }
 
         public string OverlayFolder
         {
@@ -981,6 +982,7 @@ namespace CameraControl.Core.Classes
             AllowWebserverActions = true;
             PublicWebserver = false;
             LoadCanonTransferMode = true;
+            Autorotate = true;
         }
 
 

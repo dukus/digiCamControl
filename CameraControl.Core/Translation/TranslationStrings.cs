@@ -610,5 +610,6 @@ namespace CameraControl.Core.Translation
         public static string MenuWindows = "Windows";
         public static string MenuOnlineManual = "Online manual";
         public static string MenuPlugins = "Plugins";
+        public static string LabelAutorotate = "Auto rotate image";
     }
 }
