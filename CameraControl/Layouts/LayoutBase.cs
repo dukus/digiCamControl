@@ -42,6 +42,9 @@ using CameraControl.Devices;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.VisualBasic.FileIO;
 using System.Windows.Controls;
+using System.Windows.Input;
+using CameraControl.Controls.ZoomAndPan;
+using CameraControl.ViewModel;
 using Clipboard = System.Windows.Clipboard;
 using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
@@ -53,33 +56,52 @@ namespace CameraControl.Layouts
 {
     public class LayoutBase : UserControl
     {
+        /// <summary>
+        /// Specifies the current state of the mouse handling logic.
+        /// </summary>
+        protected MouseHandlingMode mouseHandlingMode = MouseHandlingMode.None;
+
+        /// <summary>
+        /// The point that was clicked relative to the ZoomAndPanControl.
+        /// </summary>
+        protected Point origZoomAndPanControlMouseDownPoint;
+
+        /// <summary>
+        /// The point that was clicked relative to the content that is contained within the ZoomAndPanControl.
+        /// </summary>
+        protected Point origContentMouseDownPoint;
+
+        /// <summary>
+        /// Records which mouse button clicked during mouse dragging.
+        /// </summary>
+        protected MouseButton mouseButtonDown;
+
+        /// <summary>
+        /// Saves the previous zoom rectangle, pressing the backspace key jumps back to this zoom rectangle.
+        /// </summary>
+        protected Rect prevZoomRect;
+
+        /// <summary>
+        /// Save the previous content scale, pressing the backspace key jumps back to this scale.
+        /// </summary>
+        protected double prevZoomScale;
+
+        /// <summary>
+        /// Set to 'true' when the previous zoom rect is saved.
+        /// </summary>
+        protected bool prevZoomRectSet = false;
+
         public ListBox ImageLIst { get; set; }
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private FileItem _selectedItem = null;
+        public ZoomAndPanControl ZoomAndPanControl { get; set; }
+        public  UIElement content { get; set; }
+
+        public LayoutViewModel LayoutViewModel { get; set; }
 
         public LayoutBase()
         {
-            CopyNameClipboardCommand =
-                new RelayCommand(
-                    delegate
-                    {
-                        try
-                        {
-                            Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
-                        }
-                        catch (Exception exception)
-                        {
-                         Log.Error("Copy to Clipboard fail ", exception);
-                            StaticHelper.Instance.SystemMessage = "Copy to Clipboard fail";
-                        }
-                    });
-            OpenExplorerCommand = new RelayCommand(OpenInExplorer);
-            OpenViewerCommand = new RelayCommand(OpenViewer);
-            DeleteItemCommand = new RelayCommand(DeleteItem);
-            RestoreCommand = new RelayCommand(Restore);
-            ImageDoubleClickCommand =
-                new RelayCommand(
-                    () => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show));
+            LayoutViewModel = new LayoutViewModel();
             _worker.DoWork += worker_DoWork;
             _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
         }
@@ -93,29 +115,6 @@ namespace CameraControl.Layouts
             ImageLIst.SelectionChanged -= ImageLIst_SelectionChanged;
         }
 
-        private void Restore()
-        {
-            if (ServiceProvider.Settings.SelectedBitmap == null ||
-                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            var item = ServiceProvider.Settings.SelectedBitmap.FileItem;
-            if (File.Exists(item.BackupFileName))
-            {
-                try
-                {
-                    PhotoUtils.WaitForFile(item.FileName);
-                    File.Copy(item.BackupFileName, item.FileName, true);
-                    item.RemoveThumbs();
-                    item.IsLoaded = false;
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Refresh_Image);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Error restore", ex);
-                }
-              
-            }
-        }
 
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -123,58 +122,6 @@ namespace CameraControl.Layouts
             {
                 ServiceProvider.Settings.SelectedBitmap.FileItem = _selectedItem;
                 _worker.RunWorkerAsync(_selectedItem);
-            }
-        }
-
-
-        public RelayCommand CopyNameClipboardCommand { get; private set; }
-
-        public RelayCommand OpenExplorerCommand { get; private set; }
-
-        public RelayCommand OpenViewerCommand { get; private set; }
-
-        public RelayCommand DeleteItemCommand { get; private set; }
-        
-        public RelayCommand RestoreCommand { get; private set; }
-
-        public RelayCommand ImageDoubleClickCommand { get; private set; }
-
-        private void OpenInExplorer()
-        {
-            if (ServiceProvider.Settings.SelectedBitmap == null ||
-                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            try
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer";
-                processStartInfo.UseShellExecute = true;
-                processStartInfo.WindowStyle = ProcessWindowStyle.Normal;
-                processStartInfo.Arguments =
-                    string.Format("/e,/select,\"{0}\"", ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
-                Process.Start(processStartInfo);
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Error to show file in explorer", exception);
-            }
-        }
-
-        private void OpenViewer()
-        {
-            if (ServiceProvider.Settings.SelectedBitmap == null ||
-                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) &&
-                File.Exists(ServiceProvider.Settings.ExternalViewer))
-            {
-                PhotoUtils.Run(ServiceProvider.Settings.ExternalViewer,
-                    ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, ProcessWindowStyle.Maximized);
-            }
-            else
-            {
-                PhotoUtils.Run(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, "",
-                    ProcessWindowStyle.Maximized);
             }
         }
 
@@ -278,7 +225,9 @@ namespace CameraControl.Layouts
         {
             if (ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
-            bool fullres = e.Argument is bool && (bool) e.Argument;
+            //bool fullres = e.Argument is bool && (bool) e.Argument ||LayoutViewModel.ZoomFit
+            bool fullres = !LayoutViewModel.ZoomFit;
+
             ServiceProvider.Settings.ImageLoading = fullres ||
                                                     !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
             BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
@@ -291,12 +240,17 @@ namespace CameraControl.Layouts
                                             ServiceProvider.Settings.HighlightOverExp);
             ServiceProvider.Settings.SelectedBitmap.FullResLoaded = fullres;
             ServiceProvider.Settings.ImageLoading = false;
-            OnImageLoaded();
+
+            Dispatcher.BeginInvoke(new Action(OnImageLoaded));
             GC.Collect();
         }
 
         public virtual void OnImageLoaded()
         {
+            if (LayoutViewModel.ZoomFit)
+            {
+                ZoomAndPanControl.AnimatedScaleToFit();
+            }
         }
 
         public void LoadFullRes()
@@ -451,8 +405,176 @@ namespace CameraControl.Layouts
                                                                        _worker.RunWorkerAsync(false);
                                                                    }
                                                                    break;
+                                                               case WindowsCmdConsts.Zoom_Image_Fit:
+                                                                   ZoomAndPanControl.AnimatedScaleToFit();
+                                                                   break;
+                                                               case WindowsCmdConsts.Zoom_Image_100:
+                                                                   LoadFullRes();
+                                                                   ZoomAndPanControl.AnimatedZoomTo(1.0);
+                                                                   break;
+                                                               case WindowsCmdConsts.Zoom_Image_200:
+                                                                   LoadFullRes();
+                                                                   ZoomAndPanControl.AnimatedZoomTo(2.0);
+                                                                   break;
+                                                           }
+                                                           if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))
+                                                           {
+                                                               if (cmd.Contains("_"))
+                                                               {
+                                                                   var vals = cmd.Split('_');
+                                                                   if (vals.Count() == 3)
+                                                                   {
+                                                                       double x;
+                                                                       double y;
+                                                                       double.TryParse(vals[1], out x);
+                                                                       double.TryParse(vals[2], out y);
+                                                                       ZoomAndPanControl.AnimatedSnapToRation(x, y);
+                                                                   }
+                                                               }
                                                            }
                                                        }));
+        }
+
+        protected void zoomAndPanControl_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+            LayoutViewModel.FreeZoom = true;
+            if (e.Delta > 0)
+            {
+                Point curContentMousePoint = e.GetPosition(content);
+                ZoomIn(curContentMousePoint);
+            }
+            else if (e.Delta < 0)
+            {
+                Point curContentMousePoint = e.GetPosition(content);
+                ZoomOut(curContentMousePoint);
+            }
+            LoadFullRes();
+        }
+
+        /// <summary>
+        /// Event raised on mouse down in the ZoomAndPanControl.
+        /// </summary>
+        protected void zoomAndPanControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            content.Focus();
+            Keyboard.Focus(content);
+
+            mouseButtonDown = e.ChangedButton;
+            origZoomAndPanControlMouseDownPoint = e.GetPosition(ZoomAndPanControl);
+            origContentMouseDownPoint = e.GetPosition(content);
+
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
+                (e.ChangedButton == MouseButton.Left ||
+                 e.ChangedButton == MouseButton.Right))
+            {
+                // Shift + left- or right-down initiates zooming mode.
+                mouseHandlingMode = MouseHandlingMode.Zooming;
+            }
+            else if (mouseButtonDown == MouseButton.Left)
+            {
+                // Just a plain old left-down initiates panning mode.
+                mouseHandlingMode = MouseHandlingMode.Panning;
+            }
+
+            if (mouseHandlingMode != MouseHandlingMode.None)
+            {
+                // Capture the mouse so that we eventually receive the mouse up event.
+                ZoomAndPanControl.CaptureMouse();
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Event raised on mouse up in the ZoomAndPanControl.
+        /// </summary>
+        protected void zoomAndPanControl_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (mouseHandlingMode != MouseHandlingMode.None)
+            {
+                if (mouseHandlingMode == MouseHandlingMode.Zooming)
+                {
+                    if (mouseButtonDown == MouseButton.Left)
+                    {
+                        // Shift + left-click zooms in on the content.
+                        ZoomIn(origContentMouseDownPoint);
+                    }
+                    else if (mouseButtonDown == MouseButton.Right)
+                    {
+                        // Shift + left-click zooms out from the content.
+                        ZoomOut(origContentMouseDownPoint);
+                    }
+                }
+                else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
+                {
+                }
+
+                ZoomAndPanControl.ReleaseMouseCapture();
+                mouseHandlingMode = MouseHandlingMode.None;
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Event raised on mouse move in the ZoomAndPanControl.
+        /// </summary>
+        protected void zoomAndPanControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseHandlingMode == MouseHandlingMode.Panning)
+            {
+                //
+                // The user is left-dragging the mouse.
+                // Pan the viewport by the appropriate amount.
+                //
+                Point curContentMousePoint = e.GetPosition(content);
+                Vector dragOffset = curContentMousePoint - origContentMouseDownPoint;
+
+                ZoomAndPanControl.ContentOffsetX -= dragOffset.X;
+                ZoomAndPanControl.ContentOffsetY -= dragOffset.Y;
+
+                e.Handled = true;
+            }
+            else if (mouseHandlingMode == MouseHandlingMode.Zooming)
+            {
+                Point curZoomAndPanControlMousePoint = e.GetPosition(ZoomAndPanControl);
+                Vector dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
+                double dragThreshold = 10;
+                if (mouseButtonDown == MouseButton.Left &&
+                    (Math.Abs(dragOffset.X) > dragThreshold ||
+                     Math.Abs(dragOffset.Y) > dragThreshold))
+                {
+                    //
+                    // When Shift + left-down zooming mode and the user drags beyond the drag threshold,
+                    // initiate drag zooming mode where the user can drag out a rectangle to select the area
+                    // to zoom in on.
+                    //
+                    mouseHandlingMode = MouseHandlingMode.DragZooming;
+
+                }
+
+                e.Handled = true;
+            }
+            else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
+            {
+
+            }
+        }
+
+
+        /// <summary>
+        /// Zoom the viewport out, centering on the specified point (in content coordinates).
+        /// </summary>
+        private void ZoomOut(Point contentZoomCenter)
+        {
+            ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
+        }
+
+        /// <summary>
+        /// Zoom the viewport in, centering on the specified point (in content coordinates).
+        /// </summary>
+        private void ZoomIn(Point contentZoomCenter)
+        {
+            ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace CameraControl.Controls
+namespace CameraControl.Controls.ZoomAndPan
 {
     /// <summary>
     /// A class that wraps up zooming and panning of it's content.
@@ -440,6 +440,16 @@ namespace CameraControl.Controls
 
             this.ContentOffsetX = contentPoint.X - (this.ContentViewportWidth / 2);
             this.ContentOffsetY = contentPoint.Y - (this.ContentViewportHeight / 2);
+        }
+
+        /// <summary>
+        /// Use animation to center the view on the specified point (in rations 0.0-1.0).
+        /// </summary>
+        public void AnimatedSnapToRation(double x, double y)
+        {
+            double newX = unScaledExtent.Width * x;
+            double newY = unScaledExtent.Height * y;
+            AnimatedSnapTo(new Point(newX, newY));
         }
 
         /// <summary>
@@ -1016,8 +1026,7 @@ namespace CameraControl.Controls
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
             Size size = base.ArrangeOverride(this.DesiredSize);
-            //if (content == null)
-            //    return size;
+
             if (content.DesiredSize != unScaledExtent)
             {
                 //

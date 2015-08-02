@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace CameraControl.Controls
+namespace CameraControl.Controls.ZoomAndPan
 {
     /// <summary>
     /// This is an extension to the ZoomAndPanControol class that implements

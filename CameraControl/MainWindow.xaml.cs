@@ -862,5 +862,13 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
         }
 
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var res = e.GetPosition(PrviewImage);
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
+                                                          (res.X/PrviewImage.ActualWidth) + "_" +
+                                                          (res.Y/PrviewImage.ActualHeight));
+        }
+
     }
 }

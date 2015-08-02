@@ -280,9 +280,10 @@
     <Compile Include="Controls\VUMeterControl.xaml.cs">
       <DependentUpon>VUMeterControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ZoomAndPanControl.cs" />
-    <Compile Include="Controls\ZoomAndPanControl_IScrollInfo.cs" />
-    <Compile Include="Controls\ZoomBorder.cs" />
+    <Compile Include="Controls\ZoomAndPan\AnimationHelper.cs" />
+    <Compile Include="Controls\ZoomAndPan\MouseHandlingMode.cs" />
+    <Compile Include="Controls\ZoomAndPan\ZoomAndPanControl.cs" />
+    <Compile Include="Controls\ZoomAndPan\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Layouts\LayoutGrid.xaml.cs">
       <DependentUpon>LayoutGrid.xaml</DependentUpon>
     </Compile>
@@ -315,6 +316,7 @@
     <Compile Include="ViewModel\AstroLiveViewViewModel.cs" />
     <Compile Include="ViewModel\AutoExportPluginEditViewModel.cs" />
     <Compile Include="ViewModel\BarcodeViewModel.cs" />
+    <Compile Include="ViewModel\LayoutViewModel.cs" />
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -482,10 +484,6 @@
     <Page Include="Styles\CustomControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Layouts\LayoutGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -807,6 +805,7 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)PostBuild.Bat $(SolutionDir) $(ConfigurationName)</PostBuildEvent>
