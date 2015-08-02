@@ -44,9 +44,9 @@ namespace CameraControl.Layouts
             InitializeComponent();
             ImageLIst = ImageLIstBox;
             ZoomAndPanControl = zoomAndPanControl;
-            InitServices();
-            LayoutViewModel = (LayoutViewModel) ZoomAndPanControl.DataContext;
+            LayoutViewModel = (LayoutViewModel)ZoomAndPanControl.DataContext;
             content = Image;
+            InitServices();
             //zoombox.RelativeZoomModifiers.Clear();
             //zoombox.RelativeZoomModifiers.Add(KeyModifier.None);
             //zoombox.DragModifiers.Clear();

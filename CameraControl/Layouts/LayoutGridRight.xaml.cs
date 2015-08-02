@@ -42,6 +42,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CameraControl.Core;
+using CameraControl.ViewModel;
 using Xceed.Wpf.Toolkit.Core.Input;
 
 #endregion
@@ -56,23 +57,13 @@ namespace CameraControl.Layouts
         public LayoutGridRight()
         {
             InitializeComponent();
-            zoombox.RelativeZoomModifiers.Clear();
-            zoombox.RelativeZoomModifiers.Add(KeyModifier.None);
-            zoombox.DragModifiers.Clear();
-            zoombox.DragModifiers.Add(KeyModifier.None);
             ImageLIst = ImageLIstBox;
+            ZoomAndPanControl = zoomAndPanControl;
+            LayoutViewModel = (LayoutViewModel)ZoomAndPanControl.DataContext;
+            content = Image;
             InitServices();
         }
 
-        
-        public override void OnImageLoaded()
-        {
-            Dispatcher.Invoke(new Action(() => zoombox.FitToBounds()));
-        }
-
-        private void zoombox_ViewStackIndexChanged(object sender, Xceed.Wpf.Toolkit.Core.IndexChangedEventArgs e)
-        {
-            LoadFullRes();
-        }
+       
     }
 }

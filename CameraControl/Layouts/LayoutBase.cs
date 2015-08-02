@@ -247,7 +247,7 @@ namespace CameraControl.Layouts
 
         public virtual void OnImageLoaded()
         {
-            if (LayoutViewModel.ZoomFit)
+            if (LayoutViewModel.ZoomFit && ZoomAndPanControl != null)
             {
                 ZoomAndPanControl.AnimatedScaleToFit();
             }

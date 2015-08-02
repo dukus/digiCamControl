@@ -53,6 +53,7 @@
 
     </Style>
 
+   
 
     <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
         <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
