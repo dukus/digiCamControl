@@ -109,10 +109,6 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.FullScreenWnd_Show:
                     Dispatcher.BeginInvoke(new Action(delegate
                                                           {
-                                                              magnifier.Visibility =
-                                                                  ServiceProvider.Settings.ShowMagnifierInFullSccreen
-                                                                      ? Visibility.Visible
-                                                                      : Visibility.Hidden;
                                                               Show();
                                                               Activate();
                                                               Topmost = true;
