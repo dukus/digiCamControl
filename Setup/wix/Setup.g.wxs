@@ -119,10 +119,6 @@
             <File Id="EdsImage.dll" Source="EdsImage.dll" />
           </Component>
 
-          <Component Id="Component.Facebook.dll" Guid="19d12628-7654-4354-a305-9ab0d400b85d">
-            <File Id="Facebook.dll" Source="Facebook.dll" />
-          </Component>
-
           <Component Id="Component.GalaSoft.MvvmLight.dll" Guid="19d12628-7654-4354-a305-9ab0a4f9d066">
             <File Id="GalaSoft.MvvmLight.dll" Source="GalaSoft.MvvmLight.dll" />
           </Component>
@@ -231,10 +227,6 @@
             <File Id="WriteableBitmapEx.Wpf.dll" Source="WriteableBitmapEx.Wpf.dll" />
           </Component>
 
-          <Component Id="Component.Xceed.Wpf.Toolkit.dll" Guid="19d12628-7654-4354-a305-9ab041e7d8a8">
-            <File Id="Xceed.Wpf.Toolkit.dll" Source="Xceed.Wpf.Toolkit.dll" />
-          </Component>
-
           <Component Id="Component.CameraControl.Core.pdb" Guid="19d12628-7654-4354-a305-9ab042b997b2">
             <File Id="CameraControl.Core.pdb" Source="CameraControl.Core.pdb" />
           </Component>
@@ -291,6 +283,10 @@
             <File Id="Hardcodet.Wpf.TaskbarNotification.pdb" Source="Hardcodet.Wpf.TaskbarNotification.pdb" />
           </Component>
 
+          <Component Id="Component.MahApps.Metro.pdb" Guid="19d12628-7654-4354-a305-9ab01119268f">
+            <File Id="MahApps.Metro.pdb" Source="MahApps.Metro.pdb" />
+          </Component>
+
           <Component Id="Component.Microsoft.Practices.ServiceLocation.pdb" Guid="19d12628-7654-4354-a305-9ab01700782e">
             <File Id="Microsoft.Practices.ServiceLocation.pdb" Source="Microsoft.Practices.ServiceLocation.pdb" />
           </Component>
@@ -305,10 +301,6 @@
 
           <Component Id="Component.WriteableBitmapEx.Wpf.pdb" Guid="19d12628-7654-4354-a305-9ab091b3b8bf">
             <File Id="WriteableBitmapEx.Wpf.pdb" Source="WriteableBitmapEx.Wpf.pdb" />
-          </Component>
-
-          <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-            <File Id="logo.png" Source="logo.png" />
           </Component>
 
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
@@ -734,8 +726,8 @@
                   <File Id="live.png" Source="WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
-                  <File Id="logo.png.1" Source="WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+                  <File Id="logo.png" Source="WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
@@ -973,7 +965,6 @@
       <ComponentRef Id="Component.Eagle.dll" />
       <ComponentRef Id="Component.EDSDK.dll" />
       <ComponentRef Id="Component.EdsImage.dll" />
-      <ComponentRef Id="Component.Facebook.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.dll" />
       <ComponentRef Id="Component.Gma.QrCodeNet.Encoding.dll" />
@@ -1001,7 +992,6 @@
       <ComponentRef Id="Component.Typesafe.Mailgun.dll" />
       <ComponentRef Id="Component.wiaaut.dll" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.dll" />
-      <ComponentRef Id="Component.Xceed.Wpf.Toolkit.dll" />
       <ComponentRef Id="Component.CameraControl.Core.pdb" />
       <ComponentRef Id="Component.CameraControl.Devices.pdb" />
       <ComponentRef Id="Component.CameraControl.pdb" />
@@ -1016,11 +1006,11 @@
       <ComponentRef Id="Component.Griffin.Networking.Protocol.Http.pdb" />
       <ComponentRef Id="Component.Griffin.WebServer.pdb" />
       <ComponentRef Id="Component.Hardcodet.Wpf.TaskbarNotification.pdb" />
+      <ComponentRef Id="Component.MahApps.Metro.pdb" />
       <ComponentRef Id="Component.Microsoft.Practices.ServiceLocation.pdb" />
       <ComponentRef Id="Component.PhotoBooth.pdb" />
       <ComponentRef Id="Component.PortableDeviceLib.pdb" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.pdb" />
-      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
@@ -1118,7 +1108,7 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png.1" />
+      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
