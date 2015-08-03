@@ -31,21 +31,6 @@
             Gets/sets the name of the Accent.
             </summary>
         </member>
-        <member name="T:MahApps.Metro.AppTheme">
-            <summary>
-            Represents the background theme of the application.
-            </summary>
-        </member>
-        <member name="P:MahApps.Metro.AppTheme.Resources">
-            <summary>
-            The ResourceDictionary that represents this application theme.
-            </summary>
-        </member>
-        <member name="P:MahApps.Metro.AppTheme.Name">
-            <summary>
-            Gets the name of the application theme.
-            </summary>
-        </member>
         <member name="T:MahApps.Metro.Behaviours.BorderlessWindowBehavior">
             <summary>
             With this class we can make custom window styles.
@@ -59,52 +44,6 @@
             <SecurityNote>
               Critical : Calls critical methods
             </SecurityNote>
-        </member>
-        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.Update">
-            <summary>
-            Updates all glow windows (visible, hidden, collapsed)
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.SetOpacityTo(System.Double)">
-            <summary>
-            Sets the opacity to all glow windows
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.StartOpacityStoryboard">
-            <summary>
-            Starts the opacity storyboard 0 -> 1
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.Show">
-            <summary>
-            Shows all glow windows
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordProperty">
-            <summary>
-            Gets or sets the bindable Password property on the PasswordBox control. This is a dependency property.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.OnPasswordPropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
-            <summary>
-            Handles changes to the 'Password' attached property.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordBox_PasswordChanged(System.Object,System.Windows.RoutedEventArgs)">
-            <summary>
-            Handle the 'PasswordChanged'-event on the PasswordBox
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.Behaviours.TabControlSelectFirstVisibleTabBehavior">
-            <summary>
-            <para>
-                Sets the first TabItem with Visibility="<see cref="F:System.Windows.Visibility.Visible"/>" as
-                the SelectedItem of the TabControl.
-            </para>
-            <para>
-                If there is no visible TabItem, null is set as the SelectedItem
-            </para>
-            </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.Dialogs.IDialogCoordinator">
             <summary>
@@ -189,103 +128,39 @@
             Gets the default instance if the dialog coordinator, which can be injected into a view model.
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Controls.ButtonHelper.GetPreserveTextCase(System.Windows.UIElement)">
+        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.Update">
             <summary>
-            Overrides the text case behavior for certain buttons.
-            When set to <c>true</c>, the text case will be preserved and won't be changed to upper or lower case.
+            Updates all glow windows (visible, hidden, collapsed)
             </summary>
         </member>
-        <member name="F:MahApps.Metro.Controls.ButtonHelper.CornerRadiusProperty">
+        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.SetOpacityTo(System.Double)">
             <summary>
-            DependencyProperty for <see cref="T:System.Windows.CornerRadius"/> property.
+            Sets the opacity to all glow windows
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Controls.ButtonHelper.GetCornerRadius(System.Windows.UIElement)">
-            <summary> 
-            The CornerRadius property allows users to control the roundness of the button corners independently by 
-            setting a radius value for each corner. Radius values that are too large are scaled so that they
-            smoothly blend from corner to corner. (Can be used e.g. at MetroButton style)
-            Description taken from original Microsoft description :-D
+        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.StartOpacityStoryboard">
+            <summary>
+            Starts the opacity storyboard 0 -> 1
             </summary>
         </member>
-        <member name="T:MahApps.Metro.Controls.ComboBoxHelper">
+        <member name="M:MahApps.Metro.Behaviours.GlowWindowBehavior.Show">
             <summary>
-            A helper class that provides various attached properties for the ComboBox control.
-            <see cref="T:System.Windows.Controls.ComboBox"/>
+            Shows all glow windows
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.GetMaxLength(System.Windows.UIElement)">
+        <member name="F:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordProperty">
             <summary>
-            Gets the Maximum number of characters the TextBox can accept.
+            Gets or sets the bindable Password property on the PasswordBox control. This is a dependency property.
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.SetMaxLength(System.Windows.UIElement,System.Int32)">
+        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.OnPasswordPropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
-            Sets the Maximum number of characters the TextBox can accept.
+            Handles changes to the 'Password' attached property.
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.GetCharacterCasing(System.Windows.UIElement)">
+        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordBox_PasswordChanged(System.Object,System.Windows.RoutedEventArgs)">
             <summary>
-            Gets the Character casing of the TextBox.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.SetCharacterCasing(System.Windows.UIElement,System.Windows.Controls.CharacterCasing)">
-            <summary>
-            Sets the Character casing of the TextBox.
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.Controls.ControlsHelper">
-            <summary>
-            A helper class that provides various controls.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetDisabledVisualElementVisibility(System.Windows.UIElement)">
-            <summary>
-            Gets the value to handle the visibility of the DisabledVisualElement in the template.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetDisabledVisualElementVisibility(System.Windows.UIElement,System.Windows.Visibility)">
-            <summary>
-            Sets the value to handle the visibility of the DisabledVisualElement in the template.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetPreserveTextCase(System.Windows.UIElement)">
-            <summary>
-            Gets the value to override the text case behavior for the header content.
-            When set to <c>true</c>, the text case will be preserved and won't be changed to upper or lower case.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetPreserveTextCase(System.Windows.UIElement,System.Boolean)">
-            <summary>
-            Sets the value to override the text case behavior for the header content.
-            When set to <c>true</c>, the text case will be preserved and won't be changed to upper or lower case.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Controls.ControlsHelper.ButtonWidthProperty">
-            <summary>
-            This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox
-            For multiline TextBox, PasswordBox is this the fallback for the clear text button! so it must set manually!
-            For normal TextBox, PasswordBox the width is the height. 
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetFocusBorderBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
-            <summary>
-            Sets the brush used to draw the focus border.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetFocusBorderBrush(System.Windows.DependencyObject)">
-            <summary>
-            Gets the brush used to draw the focus border.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetMouseOverBorderBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
-            <summary>
-            Sets the brush used to draw the mouse over brush.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetMouseOverBorderBrush(System.Windows.DependencyObject)">
-            <summary>
-            Gets the brush used to draw the mouse over brush.
+            Handle the 'PasswordChanged'-event on the PasswordBox
             </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.CustomValidationPopup">
@@ -295,6 +170,11 @@
                 - repositioning if host-window size or location changed
                 - repositioning if host-window gets maximized and vice versa
                 - it's only topmost if the host-window is activated
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.CustomValidationPopup.CloseOnMouseLeftButtonDown">
+            <summary>
+            Gets/sets if the popup can be closed by left mouse button down.
             </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.Dialogs.BaseMetroDialog">
@@ -429,11 +309,6 @@
             An enum representing the different choices for a color scheme in a Metro Dialog.
             </summary>
         </member>
-        <member name="T:MahApps.Metro.Controls.Dialogs.CustomDialog">
-            <summary>
-            An implementation of BaseMetroDialog allowing arbitrary content.
-            </summary>
-        </member>
         <member name="M:MahApps.Metro.Controls.Dialogs.DialogManager.ShowLoginAsync(MahApps.Metro.Controls.MetroWindow,System.String,System.String,MahApps.Metro.Controls.Dialogs.LoginDialogSettings)">
             <summary>
             Creates a LoginDialog inside of the current window.
@@ -527,39 +402,6 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="T:MahApps.Metro.Controls.Dialogs.MessageDialog">
-            <summary>
-            An internal control that represents a message dialog. Please use MetroWindow.ShowMessage instead!
-            </summary>
-            <summary>
-            MessageDialog
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.Dialogs.MessageDialog.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.Controls.Dialogs.MessageDialogResult">
-            <summary>
-            An enum representing the result of a Message Dialog.
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.Controls.Dialogs.MessageDialogStyle">
-            <summary>
-            An enum representing the different button states for a Message Dialog.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative">
-            <summary>
-            Just "OK"
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Controls.Dialogs.MessageDialogStyle.AffirmativeAndNegative">
-            <summary>
-            "OK" and "Cancel"
-            </summary>
-        </member>
         <member name="T:MahApps.Metro.Controls.Dialogs.ProgressDialog">
             <summary>
             An internal control that represents a message dialog. Please use MetroWindow.ShowMessage instead!
@@ -631,6 +473,11 @@
         <member name="P:MahApps.Metro.Controls.Dialogs.ProgressDialogController.IsCanceled">
             <summary>
             Gets if the Cancel button has been pressed.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.Dialogs.CustomDialog">
+            <summary>
+            An implementation of BaseMetroDialog allowing arbitrary content.
             </summary>
         </member>
         <member name="P:MahApps.Metro.Controls.DropDownButton.Content">
@@ -879,6 +726,138 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="T:MahApps.Metro.Controls.Dialogs.MessageDialog">
+            <summary>
+            An internal control that represents a message dialog. Please use MetroWindow.ShowMessage instead!
+            </summary>
+            <summary>
+            MessageDialog
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Dialogs.MessageDialog.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.Dialogs.MessageDialogResult">
+            <summary>
+            An enum representing the result of a Message Dialog.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.Dialogs.MessageDialogStyle">
+            <summary>
+            An enum representing the different button states for a Message Dialog.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.Dialogs.MessageDialogStyle.Affirmative">
+            <summary>
+            Just "OK"
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.Dialogs.MessageDialogStyle.AffirmativeAndNegative">
+            <summary>
+            "OK" and "Cancel"
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ButtonHelper.GetPreserveTextCase(System.Windows.UIElement)">
+            <summary>
+            Overrides the text case behavior for certain buttons.
+            When set to <c>true</c>, the text case will be preserved and won't be changed to upper or lower case.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.ButtonHelper.CornerRadiusProperty">
+            <summary>
+            DependencyProperty for <see cref="T:System.Windows.CornerRadius"/> property.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ButtonHelper.GetCornerRadius(System.Windows.UIElement)">
+            <summary> 
+            The CornerRadius property allows users to control the roundness of the button corners independently by 
+            setting a radius value for each corner. Radius values that are too large are scaled so that they
+            smoothly blend from corner to corner. (Can be used e.g. at MetroButton style)
+            Description taken from original Microsoft description :-D
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.ComboBoxHelper">
+            <summary>
+            A helper class that provides various attached properties for the ComboBox control.
+            <see cref="T:System.Windows.Controls.ComboBox"/>
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.GetMaxLength(System.Windows.UIElement)">
+            <summary>
+            Gets the Maximum number of characters the TextBox can accept.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.SetMaxLength(System.Windows.UIElement,System.Int32)">
+            <summary>
+            Sets the Maximum number of characters the TextBox can accept.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.GetCharacterCasing(System.Windows.UIElement)">
+            <summary>
+            Gets the Character casing of the TextBox.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ComboBoxHelper.SetCharacterCasing(System.Windows.UIElement,System.Windows.Controls.CharacterCasing)">
+            <summary>
+            Sets the Character casing of the TextBox.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.ControlsHelper">
+            <summary>
+            A helper class that provides various controls.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetDisabledVisualElementVisibility(System.Windows.UIElement)">
+            <summary>
+            Gets the value to handle the visibility of the DisabledVisualElement in the template.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetDisabledVisualElementVisibility(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+            Sets the value to handle the visibility of the DisabledVisualElement in the template.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetPreserveTextCase(System.Windows.UIElement)">
+            <summary>
+            Gets the value to override the text case behavior for the header content.
+            When set to <c>true</c>, the text case will be preserved and won't be changed to upper or lower case.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetPreserveTextCase(System.Windows.UIElement,System.Boolean)">
+            <summary>
+            Sets the value to override the text case behavior for the header content.
+            When set to <c>true</c>, the text case will be preserved and won't be changed to upper or lower case.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.ControlsHelper.ButtonWidthProperty">
+            <summary>
+            This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox
+            For multiline TextBox, PasswordBox is this the fallback for the clear text button! so it must set manually!
+            For normal TextBox, PasswordBox the width is the height. 
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetFocusBorderBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
+            <summary>
+            Sets the brush used to draw the focus border.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetFocusBorderBrush(System.Windows.DependencyObject)">
+            <summary>
+            Gets the brush used to draw the focus border.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.SetMouseOverBorderBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
+            <summary>
+            Sets the brush used to draw the mouse over brush.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ControlsHelper.GetMouseOverBorderBrush(System.Windows.DependencyObject)">
+            <summary>
+            Gets the brush used to draw the mouse over brush.
+            </summary>
+        </member>
         <member name="M:MahApps.Metro.Controls.DataGridCellHelper.GetSaveDataGrid(System.Windows.UIElement)">
             <summary>
             Save the DataGrid.
@@ -943,6 +922,76 @@
         <member name="M:MahApps.Metro.Controls.ExpanderHelper.SetHeaderRightStyle(System.Windows.UIElement,System.Windows.Style)">
             <summary>
             Sets the toggle button style used for the ExpandDirection Right.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.ScrollBarHelper.VerticalScrollBarOnLeftSideProperty">
+            <summary>
+            This property can be used to set vertical scrollbar left side from the tabpanel (look at MetroAnimatedSingleRowTabControl)
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.TabControlHelper.IsUnderlinedProperty">
+            <summary>
+            Defines whether the underline below the <see cref="T:System.Windows.Controls.TabControl"/> is shown or not.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.TabControlHelper.TransitionProperty">
+            <summary>
+            This property can be used to set the Transition for animated TabControls
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.TextBoxHelper">
+            <summary>
+            A helper class that provides various attached properties for the TextBox control.
+            </summary>
+            <remarks>
+            Password watermarking code from: http://prabu-guru.blogspot.com/2010/06/how-to-add-watermark-text-to-textbox.html
+            </remarks>
+        </member>
+        <member name="F:MahApps.Metro.Controls.TextBoxHelper.IsClearTextButtonBehaviorEnabledProperty">
+            <summary>
+            The clear text button behavior property. It sets a click event to the button if the value is true.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetIsSpellCheckContextMenuEnabled(System.Windows.UIElement)">
+            <summary>
+            Indicates if a TextBox or RichTextBox should use SpellCheck context menu
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetHasText(System.Windows.DependencyObject)">
+            <summary>
+            Gets if the attached TextBox has text.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetButtonsAlignment(System.Windows.DependencyObject)">
+            <summary>
+            Gets the buttons placement variant.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.SetButtonsAlignment(System.Windows.DependencyObject,MahApps.Metro.Controls.ButtonsAlignment)">
+            <summary>
+            Sets the buttons placement variant.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetIsClearTextButtonBehaviorEnabled(System.Windows.Controls.Button)">
+            <summary>
+            Gets the clear text button behavior.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.SetIsClearTextButtonBehaviorEnabled(System.Windows.Controls.Button,System.Boolean)">
+            <summary>
+            Sets the clear text button behavior.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Controls.ToggleButtonHelper.ContentDirectionProperty">
+            <summary>
+            This property can be used to handle the style for CheckBox and RadioButton
+            LeftToRight means content left and button right and RightToLeft vise versa
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.ToggleButtonHelper.GetContentDirection(System.Windows.UIElement)">
+            <summary>
+            This property can be used to handle the style for CheckBox and RadioButton
+            LeftToRight means content left and button right and RightToLeft vise versa
             </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.MetroAnimatedSingleRowTabControl">
@@ -1576,11 +1625,6 @@
             </summary>
             <seealso cref="F:MahApps.Metro.Controls.PropertyChangeNotifier.ValueProperty"/>
         </member>
-        <member name="F:MahApps.Metro.Controls.ScrollBarHelper.VerticalScrollBarOnLeftSideProperty">
-            <summary>
-            This property can be used to set vertical scrollbar left side from the tabpanel (look at MetroAnimatedSingleRowTabControl)
-            </summary>
-        </member>
         <member name="P:MahApps.Metro.Controls.SplitButton.CommandParameter">
             <summary>
             Reflects the parameter to pass to the CommandProperty upon execution. 
@@ -1651,26 +1695,9 @@
             Gets/sets the brush of the button arrow icon.
             </summary>
         </member>
-        <member name="F:MahApps.Metro.Controls.TabControlHelper.IsUnderlinedProperty">
+        <member name="P:MahApps.Metro.Controls.WindowCommands.ShowSeparators">
             <summary>
-            Defines whether the underline below the <see cref="T:System.Windows.Controls.TabControl"/> is shown or not.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Controls.TabControlHelper.TransitionProperty">
-            <summary>
-            This property can be used to set the Transition for animated TabControls
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Controls.ToggleButtonHelper.ContentDirectionProperty">
-            <summary>
-            This property can be used to handle the style for CheckBox and RadioButton
-            LeftToRight means content left and button right and RightToLeft vise versa
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.ToggleButtonHelper.GetContentDirection(System.Windows.UIElement)">
-            <summary>
-            This property can be used to handle the style for CheckBox and RadioButton
-            LeftToRight means content left and button right and RightToLeft vise versa
+            Gets or sets the value indicating whether to show the separators.
             </summary>
         </member>
         <member name="F:MahApps.Metro.Controls.WindowCommandsOverlayBehavior.Never">
@@ -1695,6 +1722,36 @@
             </summary>
             <param name = "bg">The bg.</param>
             <returns></returns>
+        </member>
+        <member name="T:MahApps.Metro.Converters.ThicknessBindingConverter">
+            <summary>
+            Converts a Thickness to a new Thickness. It's possible to ignore a side With the IgnoreThicknessSide property.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.None">
+            <summary>
+            Use all sides.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Left">
+            <summary>
+            Ignore the left side.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Top">
+            <summary>
+            Ignore the top side.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Right">
+            <summary>
+            Ignore the right side.
+            </summary>
+        </member>
+        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Bottom">
+            <summary>
+            Ignore the bottom side.
+            </summary>
         </member>
         <member name="T:MahApps.Metro.Converters.IsNullConverter">
             <summary>
@@ -1813,49 +1870,6 @@
         <member name="P:MahApps.Metro.Controls.RangeSlider.MinRange">
             <summary>
             Get/sets the minimum range that can be selected.
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.Controls.TextBoxHelper">
-            <summary>
-            A helper class that provides various attached properties for the TextBox control.
-            </summary>
-            <remarks>
-            Password watermarking code from: http://prabu-guru.blogspot.com/2010/06/how-to-add-watermark-text-to-textbox.html
-            </remarks>
-        </member>
-        <member name="F:MahApps.Metro.Controls.TextBoxHelper.IsClearTextButtonBehaviorEnabledProperty">
-            <summary>
-            The clear text button behavior property. It sets a click event to the button if the value is true.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetIsSpellCheckContextMenuEnabled(System.Windows.UIElement)">
-            <summary>
-            Indicates if a TextBox or RichTextBox should use SpellCheck context menu
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetHasText(System.Windows.DependencyObject)">
-            <summary>
-            Gets if the attached TextBox has text.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetButtonsAlignment(System.Windows.DependencyObject)">
-            <summary>
-            Gets the buttons placement variant.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.TextBoxHelper.SetButtonsAlignment(System.Windows.DependencyObject,MahApps.Metro.Controls.ButtonsAlignment)">
-            <summary>
-            Sets the buttons placement variant.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetIsClearTextButtonBehaviorEnabled(System.Windows.Controls.Button)">
-            <summary>
-            Gets the clear text button behavior.
-            </summary>
-        </member>
-        <member name="M:MahApps.Metro.Controls.TextBoxHelper.SetIsClearTextButtonBehaviorEnabled(System.Windows.Controls.Button,System.Boolean)">
-            <summary>
-            Sets the clear text button behavior.
             </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.ToggleSwitchButton">
@@ -2036,11 +2050,6 @@
             hit testing.</param>
             <param name="point">The position to be evaluated on the origin.</param>
         </member>
-        <member name="P:MahApps.Metro.Controls.WindowCommands.ShowSeparators">
-            <summary>
-            Gets or sets the value indicating whether to show the separators.
-            </summary>
-        </member>
         <member name="T:MahApps.Metro.Converters.StringToVisibilityConverter">
             <summary>
                 Converts a String into a Visibility enumeration (and back)
@@ -2060,36 +2069,6 @@
         <member name="P:MahApps.Metro.Converters.StringToVisibilityConverter.OppositeStringValue">
             <summary>
                 Define whether the opposite boolean value is crucial (default : false)
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.Converters.ThicknessBindingConverter">
-            <summary>
-            Converts a Thickness to a new Thickness. It's possible to ignore a side With the IgnoreThicknessSide property.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.None">
-            <summary>
-            Use all sides.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Left">
-            <summary>
-            Ignore the left side.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Top">
-            <summary>
-            Ignore the top side.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Right">
-            <summary>
-            Ignore the right side.
-            </summary>
-        </member>
-        <member name="F:MahApps.Metro.Converters.IgnoreThicknessSideType.Bottom">
-            <summary>
-            Ignore the bottom side.
             </summary>
         </member>
         <member name="F:Standard.IID.ApplicationAssociationRegistration">
@@ -5609,6 +5588,21 @@
         </member>
         <member name="M:MahApps.Metro.Native.UnsafeNativeMethods.EnableMenuItem(System.IntPtr,System.UInt32,System.UInt32)">
             <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms647636(v=vs.85).aspx</devdoc>
+        </member>
+        <member name="T:MahApps.Metro.AppTheme">
+            <summary>
+            Represents the background theme of the application.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.AppTheme.Resources">
+            <summary>
+            The ResourceDictionary that represents this application theme.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.AppTheme.Name">
+            <summary>
+            Gets the name of the application theme.
+            </summary>
         </member>
         <member name="T:MahApps.Metro.ThemeManager">
             <summary>
