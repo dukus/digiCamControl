@@ -1,10 +1,13 @@
+For developers visit http://digicamcontrol.com/wiki/index.php/Standalone_library
+
+
 [digiCamControl](http://digicamcontrol.com/)
 ==============
 
 DSLR camera remote control open source software
 
+==============
 Code transfered from : https://code.google.com/p/nikon-camera-control/
-
 
 digiCamControl - DSLR camera remote control open source software
 Copyright (C) 2014  Duka Istvan
