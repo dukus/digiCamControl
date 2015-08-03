@@ -459,6 +459,7 @@ namespace CameraControl.Core.Classes
         
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
+            int rotation = 0;
             if (fileItem == null)
                 return null;
             if (!File.Exists(fileItem.LargeThumb) && !fullres)
@@ -495,42 +496,41 @@ namespace CameraControl.Core.Classes
                     }
                 }
 
-                if (bmpDec == null)
-                    bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
-                        BitmapCreateOptions.None,
-                        BitmapCacheOption.OnLoad);
-
-                double dw = (double) MaxThumbSize/bmpDec.Frames[0].PixelWidth;
-                WriteableBitmap bitmap;
-                /*
-                if (fullres)
-                    bitmap =
-                        BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
-                                                                            (int) (bmpDec.Frames[0].PixelWidth*dw),
-                                                                            (int) (bmpDec.Frames[0].PixelHeight*dw),
-                                                                            BitmapScalingMode.NearestNeighbor));
-                else
-                    bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-                */
-                bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-
-                if (showfocuspoints)
-                    DrawFocusPoints(fileItem, bitmap);
-
-                if (ServiceProvider.Settings.Autorotate && fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
+                if (ServiceProvider.Settings.Autorotate && fileItem.FileInfo != null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation"))
                 {
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
-                        bitmap = bitmap.Rotate(180);
+                        rotation = 180;
 
                     //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
                     //    bitmap = bitmap.Rotate(180);
 
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
-                        bitmap = bitmap.Rotate(90);
+                        rotation = 90;
 
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "left, bottom")
-                        bitmap = bitmap.Rotate(270);
+                        rotation = 270;
+
                 }
+
+                if (bmpDec == null)
+                    bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
+                        BitmapCreateOptions.None,
+                        BitmapCacheOption.OnLoad);
+                // if no future processing required
+                if (rotation == 0 && !showfocuspoints && ServiceProvider.Settings.RotateIndex == 0 && ServiceProvider.Settings.FlipPreview)
+                {
+                    return new WriteableBitmap(bmpDec.Frames[0]);
+                }
+
+                
+                var bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
+
+
+                if (showfocuspoints)
+                    DrawFocusPoints(fileItem, bitmap);
+
+                if (rotation != 0)
+                    bitmap = bitmap.Rotate(rotation);
 
                 if (ServiceProvider.Settings.RotateIndex != 0)
                 {

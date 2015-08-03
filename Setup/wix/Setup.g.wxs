@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a350268a" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.19" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a350268b" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.20" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -229,10 +229,6 @@
 
           <Component Id="Component.WriteableBitmapEx.Wpf.dll" Guid="19d12628-7654-4354-a305-9ab061a87355">
             <File Id="WriteableBitmapEx.Wpf.dll" Source="WriteableBitmapEx.Wpf.dll" />
-          </Component>
-
-          <Component Id="Component.Xceed.Wpf.Toolkit.dll" Guid="19d12628-7654-4354-a305-9ab041e7d8a8">
-            <File Id="Xceed.Wpf.Toolkit.dll" Source="Xceed.Wpf.Toolkit.dll" />
           </Component>
 
           <Component Id="Component.CameraControl.Core.pdb" Guid="19d12628-7654-4354-a305-9ab042b997b2">
@@ -936,8 +932,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.19" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.99.19" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.20" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.2.99.20" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -1001,7 +997,6 @@
       <ComponentRef Id="Component.Typesafe.Mailgun.dll" />
       <ComponentRef Id="Component.wiaaut.dll" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.dll" />
-      <ComponentRef Id="Component.Xceed.Wpf.Toolkit.dll" />
       <ComponentRef Id="Component.CameraControl.Core.pdb" />
       <ComponentRef Id="Component.CameraControl.Devices.pdb" />
       <ComponentRef Id="Component.CameraControl.pdb" />

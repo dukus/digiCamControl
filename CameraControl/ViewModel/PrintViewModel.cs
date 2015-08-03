@@ -128,16 +128,23 @@ namespace CameraControl.ViewModel
 
         public PrintViewModel()
         {
-            PrintSettings = ServiceProvider.Settings.DefaultSession.PrintSettings;
-            PrintSetupCommand = new RelayCommand(PrintSetup);
-            PageSetupCommand = new RelayCommand(PageSetup);
-            PrintCommand = new RelayCommand(Print);
-            if (!IsInDesignMode)
+            try
             {
-                Items = new ObservableCollection<PrintItemViewModel>();
+                PrintSettings = ServiceProvider.Settings.DefaultSession.PrintSettings;
+                PrintSetupCommand = new RelayCommand(PrintSetup);
+                PageSetupCommand = new RelayCommand(PageSetup);
+                PrintCommand = new RelayCommand(Print);
+                if (!IsInDesignMode)
+                {
+                    Items = new ObservableCollection<PrintItemViewModel>();
+                }
+                LoadPrinterSettings();
+                InitItems();
             }
-            LoadPrinterSettings();
-            InitItems();
+            catch (Exception ex)
+            {
+                Log.Error("Error init PrintViewModel", ex);
+            }
         }
 
         private void Print()
