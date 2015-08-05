@@ -97,7 +97,7 @@ namespace CameraControl.Core.Classes
             set
             {
                 _selectedBitmap = value;
-                NotifyPropertyChanged("DefaultSession");
+                NotifyPropertyChanged("SelectedBitmap");
             }
         }
 

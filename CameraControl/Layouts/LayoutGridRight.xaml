@@ -37,7 +37,7 @@
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Margin="0,0,0,0">
 
             <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseDown="zoomAndPanControl_MouseDown" MouseUp="zoomAndPanControl_MouseUp" MouseMove="zoomAndPanControl_MouseMove" MouseWheel="zoomAndPanControl_MouseWheel">
-                <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" Margin="5" Stretch="Uniform" Width="{Binding ElementName=Image,Path=Source.PixelWidth}" Height="{Binding ElementName=Image,Path=Source.PixelHeight}">
+                <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Center" Margin="5" Stretch="Uniform" Width="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Width}" Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Height}">
                     <Image.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
                     </Image.InputBindings>

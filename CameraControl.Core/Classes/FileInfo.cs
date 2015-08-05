@@ -42,14 +42,36 @@ namespace CameraControl.Core.Classes
 {
     public class FileInfo : BaseFieldClass
     {
+        private int _width;
+        private int _height;
         public string InfoLabel { get; set; }
         public int Orientation { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+
+        public int Width
+        {
+            get { return _width; }
+            set
+            {
+                _width = value;
+                if (_width == 0)
+                    _width = 2000;
+                NotifyPropertyChanged("Width");
+            }
+        }
+
+        public int Height
+        {
+            get { return _height; }
+            set
+            {
+                _height = value;
+                if (_height == 0)
+                    _height = 2000;
+                NotifyPropertyChanged("Height");
+            }
+        }
 
 
-
-        
         public ValuePairEnumerator ExifTags { get; set; }
         public List<Rect> FocusPoints { get; set; }
         public int[] HistogramRed { get; set; }
@@ -80,5 +102,12 @@ namespace CameraControl.Core.Classes
             string re = @"[^\x07\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]";
             return Regex.Replace(text, re, "");
         }
+
+        public void SetSize(int w, int h)
+        {
+            _width = w;
+            _height = h;
+        }
+
     }
 }

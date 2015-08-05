@@ -55,7 +55,6 @@ namespace CameraControl.Core.Classes
             set
             {
                 _fileItem = value;
-                NotifyPropertyChanged("FileItem");
             }
         }
 
@@ -199,6 +198,13 @@ namespace CameraControl.Core.Classes
                 BitmapLoaded(this);
         }
 
+        /// <summary>
+        /// Notifi UI about attached FileItem was changed
+        /// </summary>
+        public void Notify()
+        {
+            NotifyPropertyChanged("FileItem");
+        }
 
         public void SetFileItem(FileItem item)
         {

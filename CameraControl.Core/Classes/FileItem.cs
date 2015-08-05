@@ -388,7 +388,15 @@ namespace CameraControl.Core.Classes
 
         [JsonIgnore]
         [XmlIgnore]
-        public FileInfo FileInfo { get; set; }
+        public FileInfo FileInfo
+        {
+            get { return _fileInfo; }
+            set
+            {
+                _fileInfo = value;
+                NotifyPropertyChanged("FileInfo");
+            }
+        }
 
 
         /// <summary>
@@ -441,6 +449,7 @@ namespace CameraControl.Core.Classes
         private string _focalLength;
         private string _exposureBias;
         private string _shortName;
+        private FileInfo _fileInfo;
 
         [JsonIgnore]
         [XmlIgnore]

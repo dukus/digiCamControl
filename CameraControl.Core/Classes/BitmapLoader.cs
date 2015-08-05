@@ -162,9 +162,27 @@ namespace CameraControl.Core.Classes
                                                                 BitmapCacheOption.OnLoad);
 
                     bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
+                    var rotation = 0;
 
-                    fileItem.FileInfo.Width = bmpDec.Frames[0].PixelWidth;
-                    fileItem.FileInfo.Height = bmpDec.Frames[0].PixelHeight;
+                    if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation"))
+                    {
+                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
+                            rotation = 180;
+
+                        //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
+                        //    writeableBitmap = writeableBitmap.Rotate(180);
+
+                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
+                            rotation = 90;
+
+                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "left, bottom")
+                            rotation = 270;
+                    }
+
+                    if (rotation == 90 || rotation == 270)
+                        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelHeight, bmpDec.Frames[0].PixelWidth);
+                    else
+                        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelWidth, bmpDec.Frames[0].PixelHeight);
 
                     double dw = (double) LargeThumbSize/bmpDec.Frames[0].PixelWidth;
                     WriteableBitmap writeableBitmap =
@@ -181,20 +199,8 @@ namespace CameraControl.Core.Classes
                                                              (int) (writeableBitmap.PixelHeight*dw),
                                                              WriteableBitmapExtensions.Interpolation.Bilinear);
 
-                    if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
-                    {
-                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
-                            writeableBitmap = writeableBitmap.Rotate(180);
-
-                        //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
-                        //    writeableBitmap = writeableBitmap.Rotate(180);
-
-                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
-                            writeableBitmap = writeableBitmap.Rotate(90);
-
-                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "left, bottom")
-                            writeableBitmap = writeableBitmap.Rotate(270);
-                    }
+                    if (rotation > 0)
+                        writeableBitmap = writeableBitmap.Rotate(rotation);
 
                     Save2Jpg(writeableBitmap, fileItem.SmallThumb);
                     fileItem.Thumbnail = LoadSmallImage(fileItem);

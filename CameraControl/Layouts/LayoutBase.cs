@@ -35,6 +35,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -226,13 +227,16 @@ namespace CameraControl.Layouts
             if (ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
             //bool fullres = e.Argument is bool && (bool) e.Argument ||LayoutViewModel.ZoomFit
-            bool fullres = !LayoutViewModel.ZoomFit;
+            //bool fullres = !LayoutViewModel.ZoomFit;
+            bool fullres = e.Argument is bool && (bool) e.Argument;
 
             ServiceProvider.Settings.ImageLoading = fullres ||
                                                     !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
             BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
+            ServiceProvider.Settings.SelectedBitmap.Notify();
+
             BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
                               ServiceProvider.Settings.SelectedBitmap.FileItem);
             BitmapLoader.Instance.Highlight(ServiceProvider.Settings.SelectedBitmap,
@@ -243,6 +247,15 @@ namespace CameraControl.Layouts
 
             Dispatcher.BeginInvoke(new Action(OnImageLoaded));
             GC.Collect();
+            if (!LayoutViewModel.ZoomFit)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(100);
+                    LoadFullRes();
+                });
+            }
+
         }
 
         public virtual void OnImageLoaded()

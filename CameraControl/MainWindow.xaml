@@ -446,8 +446,8 @@
                 <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuLayout}">
-                    <MenuItem Header="{T:TranslateExtension MenuLayoutDefault}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
-                    <MenuItem Header="{T:TranslateExtension MenuLayoutGridRight}" Command="{Binding SetLayoutCommand}" CommandParameter="GridRight"/>
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutLandscape}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutPortrait}" Command="{Binding SetLayoutCommand}" CommandParameter="GridRight"/>
                     <MenuItem Header="{T:TranslateExtension MenuLayoutGrid}" Command="{Binding SetLayoutCommand}" CommandParameter="Grid"/>
                 </MenuItem>
                 <MenuItem Header="{T:TranslateExtension MenuThumbnailSize}">
