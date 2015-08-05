@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a350268b" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.20" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a350268c" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.21" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -117,6 +117,10 @@
 
           <Component Id="Component.EdsImage.dll" Guid="19d12628-7654-4354-a305-9ab019e4d8f1">
             <File Id="EdsImage.dll" Source="EdsImage.dll" />
+          </Component>
+
+          <Component Id="Component.Facebook.dll" Guid="19d12628-7654-4354-a305-9ab0d400b85d">
+            <File Id="Facebook.dll" Source="Facebook.dll" />
           </Component>
 
           <Component Id="Component.GalaSoft.MvvmLight.dll" Guid="19d12628-7654-4354-a305-9ab0a4f9d066">
@@ -301,6 +305,10 @@
 
           <Component Id="Component.WriteableBitmapEx.Wpf.pdb" Guid="19d12628-7654-4354-a305-9ab091b3b8bf">
             <File Id="WriteableBitmapEx.Wpf.pdb" Source="WriteableBitmapEx.Wpf.pdb" />
+          </Component>
+
+          <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+            <File Id="logo.png" Source="logo.png" />
           </Component>
 
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
@@ -726,8 +734,8 @@
                   <File Id="live.png" Source="WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-                  <File Id="logo.png" Source="WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
+                  <File Id="logo.png.1" Source="WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
@@ -928,8 +936,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.20" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.99.20" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.21" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.2.99.21" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -965,6 +973,7 @@
       <ComponentRef Id="Component.Eagle.dll" />
       <ComponentRef Id="Component.EDSDK.dll" />
       <ComponentRef Id="Component.EdsImage.dll" />
+      <ComponentRef Id="Component.Facebook.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.dll" />
       <ComponentRef Id="Component.Gma.QrCodeNet.Encoding.dll" />
@@ -1011,6 +1020,7 @@
       <ComponentRef Id="Component.PhotoBooth.pdb" />
       <ComponentRef Id="Component.PortableDeviceLib.pdb" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.pdb" />
+      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
@@ -1108,7 +1118,7 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png" />
+      <ComponentRef Id="Component.logo.png.1" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
