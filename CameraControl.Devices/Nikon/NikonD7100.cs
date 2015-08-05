@@ -65,7 +65,11 @@ namespace CameraControl.Devices.Nikon
 
             viewData.HaveLevelAngleData = true;
             viewData.LevelAngleRolling = ToInt16(result, 52);
-            
+            viewData.PeakSoundL = (int)(result[352] / 14.0 * 100);
+            viewData.PeakSoundR = (int)(result[353] / 14.0 * 100);
+            viewData.SoundL = (int)(result[354] / 14.0 * 100);
+            viewData.SoundR = (int)(result[355] / 14.0 * 100);
+            viewData.HaveSoundData = true;
         }
 
         protected override void InitFNumber()

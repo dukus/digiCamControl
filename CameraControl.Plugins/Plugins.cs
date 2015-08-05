@@ -80,6 +80,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ResizeTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new CropTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new OverlayTransform());
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new RotateTransform());
             }
             catch (Exception exception)
             {

@@ -53,6 +53,7 @@ namespace CameraControl.Core.Classes
                 var camera = o as ICameraDevice;
                 if (camera != null)
                 {
+                    ServiceProvider.DeviceManager.LastCapturedImage[camera] = "";
                     CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
                     if (property.UseExternalShutter && property.SelectedConfig != null)
                     {
@@ -73,13 +74,18 @@ namespace CameraControl.Core.Classes
         {
             try
             {
-                Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
+                CaptureWithError();
             }
             catch (Exception e)
             {
                 Log.Debug("Error capture", e);
                 StaticHelper.Instance.SystemMessage = e.Message;
             }
+        }
+
+        public static void CaptureWithError()
+        {
+            Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
         }
 
         /// <summary>

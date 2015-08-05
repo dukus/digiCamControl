@@ -9,6 +9,10 @@
     
     <CornerRadius x:Key="CornerRadius">10</CornerRadius>
     
+    <Style TargetType="{x:Type Border}" >
+        <Setter Property="CornerRadius" Value="{StaticResource CornerRadius}"/>
+     </Style>
+    
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="BorderThickness" Value="0"/>

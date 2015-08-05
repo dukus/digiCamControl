@@ -63,6 +63,7 @@ namespace CameraControl.Core.Classes
         public const string Capture = "Capture";
         public const string CaptureNoAf = "CaptureNoAf";
         public const string CaptureAll = "CaptureAll";
+        public const string ResetDevice = "ResetDevice";
         public const string NextAperture = "NextAperture";
         public const string PrevAperture = "PrevAperture";
         public const string NextIso = "NextIso";

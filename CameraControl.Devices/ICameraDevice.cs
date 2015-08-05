@@ -138,6 +138,7 @@ namespace CameraControl.Devices
         void LockCamera();
         void UnLockCamera();
         void Close();
+        void ResetDevice();
 
         void TransferFile(object o, string filename);
         void TransferFile(object o, System.IO.Stream stream);

@@ -16,9 +16,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
@@ -91,6 +88,10 @@
 
                     <Label Grid.Row="8" Grid.Column="0" Content="{T:TranslateExtension LabelAlowFolderChange}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding Path=AlowFolderChange}" Margin="2" />
+
+                    <Label Grid.Row="9" Grid.Column="0" Content="{T:TranslateExtension LabelReloadOnFolderChange}" HorizontalContentAlignment="Right" />
+                    <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding Path=ReloadOnFolderChange}" Margin="2" IsEnabled="{Binding AlowFolderChange}" />
+                    
                     <Label Grid.Row="10" Grid.Column="0" Content="{T:TranslateExtension LabelDownloadJpgOnly}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="10" Grid.Column="1" ToolTip="{T:TranslateExtension LabelDownloadJpgOnlyToolTip}" IsChecked="{Binding Path=DownloadOnlyJpg}" Margin="2" />
 

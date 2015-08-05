@@ -25,7 +25,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="244*"/>
         </Grid.RowDefinitions>
-        <ComboBox IsReadOnly="True" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=AvaiableWebAddresses, Mode=OneTime}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=Webaddress}" IsEditable="False" SelectionChanged="textBox1_SelectionChanged" Grid.Row="0" Margin="2,2,40,2" />
+        <ComboBox IsReadOnly="True" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=AvaiableWebAddresses, Mode=OneTime}" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=Webaddress}" IsEditable="False" SelectionChanged="textBox1_SelectionChanged" Grid.Row="0" Margin="2,2,40,2"/>
         <wpf:QrCodeImgControl Grid.Row="1" Stretch="Uniform" Name="qrcode" Cursor="Hand" MouseDown="qrcode_MouseDown" />
 
     </Grid>

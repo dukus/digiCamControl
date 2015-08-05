@@ -94,5 +94,17 @@ namespace CameraControl.Devices.Nikon
 
             viewData.Focused = result[40] != 1;
         }
+
+        public override void StartRecordMovie()
+        {
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)1 }, CONST_PROP_ApplicationMode);
+            base.StartRecordMovie();
+        }
+
+        public override void StopRecordMovie()
+        {
+            base.StopRecordMovie();
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)0 }, CONST_PROP_ApplicationMode);
+        }
     }
 }

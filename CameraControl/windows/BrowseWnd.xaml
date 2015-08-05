@@ -12,9 +12,6 @@
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
-                    <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                    <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
                     <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
@@ -72,7 +69,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <my:FolderBrowser Grid.Column="1" x:Name="folderBrowser1" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Grid.Row="1" MouseDoubleClick="folderBrowser1_MouseDoubleClick" BorderThickness="1"/>
         <StatusBar Grid.ColumnSpan="5" Grid.Row="3" Name="statusBar1" Background="{DynamicResource WindowBackgroundBrush}">
             <StatusBarItem Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Folder}" />
             <StatusBarItem Content="(" />            

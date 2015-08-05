@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Printing;
 using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -128,16 +128,23 @@ namespace CameraControl.ViewModel
 
         public PrintViewModel()
         {
-            PrintSettings = ServiceProvider.Settings.DefaultSession.PrintSettings;
-            PrintSetupCommand = new RelayCommand(PrintSetup);
-            PageSetupCommand = new RelayCommand(PageSetup);
-            PrintCommand = new RelayCommand(Print);
-            if (!IsInDesignMode)
+            try
             {
-                Items = new ObservableCollection<PrintItemViewModel>();
+                PrintSettings = ServiceProvider.Settings.DefaultSession.PrintSettings;
+                PrintSetupCommand = new RelayCommand(PrintSetup);
+                PageSetupCommand = new RelayCommand(PageSetup);
+                PrintCommand = new RelayCommand(Print);
+                if (!IsInDesignMode)
+                {
+                    Items = new ObservableCollection<PrintItemViewModel>();
+                }
+                LoadPrinterSettings();
+                InitItems();
             }
-            LoadPrinterSettings();
-            InitItems();
+            catch (Exception ex)
+            {
+                Log.Error("Error init PrintViewModel", ex);
+            }
         }
 
         private void Print()
@@ -181,7 +188,7 @@ namespace CameraControl.ViewModel
             try
             {
                 PrinterName = Dlg.PrintQueue.Name;
-                System.Printing.PrintCapabilities capabilities = Dlg.PrintQueue.GetPrintCapabilities(Dlg.PrintTicket);
+                PrintCapabilities capabilities = Dlg.PrintQueue.GetPrintCapabilities(Dlg.PrintTicket);
                 if (capabilities.PageImageableArea != null)
                 {
                     PageWidth = (int) capabilities.PageImageableArea.ExtentWidth;
@@ -190,8 +197,7 @@ namespace CameraControl.ViewModel
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Unable to load settings " + exception.Message);
-                Log.Error("Unable to load settings", exception);
+                Log.Error("Unable to load printer settings", exception);
             }
         }
 

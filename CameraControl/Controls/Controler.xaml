@@ -164,14 +164,6 @@
                         </ComboBox.ItemTemplate>-->
                 </ComboBox>
             </StackPanel>
-            <StackPanel Margin="1" Orientation="Horizontal" Grid.RowSpan="2" HorizontalAlignment="Center">
-                <Button Content="{T:TranslateExtension LabelUseAsMaster}" Click="Button_Click" Name="btn_useasmaster" Margin="2" Padding="3"/>
-                <Button  Name="button1" Width="25" Click="button1_Click" Margin="2" Padding="1">
-                    <Button.Content>
-                        <Image Source="/CameraControl;component/Images/Properties.png" />
-                    </Button.Content>
-                </Button>
-            </StackPanel>
             <my:ImageEx VerticalAlignment="Top" Source="{Binding Path=SelectedCameraDevice.DeviceName, Converter={StaticResource CameraToImageSourceConverter}}" x:Name="IcoImage" RenderTransformOrigin="0,1" Canvas.ZIndex="100"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAnimation, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <my:ImageEx.RenderTransform>

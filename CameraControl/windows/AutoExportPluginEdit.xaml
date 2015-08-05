@@ -43,6 +43,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="111*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}">
                     <ListBox.ItemTemplate>
@@ -60,7 +61,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <controls:DropDownButton Name="DownButton" Padding="0" Margin="0" VerticalContentAlignment="Center" Content="{translation:TranslateExtension LabelAddPlugin}" ItemsSource="{Binding ImageTransformPlugins}" Grid.Row="1">
+                <controls:DropDownButton Name="DownButton" Padding="0" Margin="3" VerticalContentAlignment="Center" Content="{translation:TranslateExtension LabelAddPlugin}" ItemsSource="{Binding ImageTransformPlugins}" Grid.Row="1">
                     <controls:DropDownButton.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Command" Value="{Binding DataContext.AddTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type controls:DropDownButton}}}"/>
@@ -75,6 +76,7 @@
                         </Rectangle>
                     </controls:DropDownButton.Icon>
                 </controls:DropDownButton>
+                <Button Grid.Row="2" Content="{translation:TranslateExtension ButtonPreview}" Margin="3" Command="{Binding PreviewCommand}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="2" Header="Transform plugins properties" Margin="0">

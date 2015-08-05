@@ -5,23 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                     xmlns:Layouts="clr-namespace:CameraControl.Layouts"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:classes="clr-namespace:CameraControl.Classes"
-                    mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"                    
-             d:DesignHeight="484" d:DesignWidth="689">
+                    xmlns:zoomAndPan="clr-namespace:CameraControl.Controls.ZoomAndPan"
+                    xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+                    mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="689">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="LayoutBaseResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
-
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModel:LayoutViewModel/>
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="364*" />
@@ -29,20 +31,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
-
-            <!--<xctk:MagnifierManager.Magnifier>
-                <xctk:Magnifier Radius="100" ZoomFactor=".4" Target="{Binding ElementName=image1}" />
-            </xctk:MagnifierManager.Magnifier>-->
-            <xctk:Zoombox x:Name="zoombox"
-                    ViewStackIndex="0"
-                    Grid.Column="1"
-                    Margin="5"
-                    Focusable="True"
-                    IsTabStop="True" MouseWheel="zoombox_MouseWheel" PreviewMouseWheel="zoombox_PreviewMouseWheel" ViewStackIndexChanged="zoombox_ViewStackIndexChanged" MinScale="0.5">
-                <xctk:Zoombox.ViewStack>
-                    <xctk:ZoomboxView>Fit</xctk:ZoomboxView>
-                </xctk:Zoombox.ViewStack>
-                <Image Name="image1" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" Margin="15" >
+            <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseDown="zoomAndPanControl_MouseDown" MouseUp="zoomAndPanControl_MouseUp" MouseMove="zoomAndPanControl_MouseMove" MouseWheel="zoomAndPanControl_MouseWheel">
+                <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Right" Margin="15" Stretch="Uniform" Width="{Binding ElementName=Image,Path=Source.PixelWidth}" Height="{Binding ElementName=Image,Path=Source.PixelHeight}">
                     <Image.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
                     </Image.InputBindings>
@@ -50,27 +40,7 @@
                         <DropShadowEffect ShadowDepth="10" Color="Black" BlurRadius="20" />
                     </Image.Effect>
                 </Image>
-            </xctk:Zoombox>
-            <!--</local:ZoomBorder>-->
-            <!--
-            <ProgressBar Height="10" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" Value="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=LoadingProgress}" Opacity="0.5" Panel.ZIndex="1" IsIndeterminate="True" />
-            <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
-                <ToggleButton  Height="60" Name="but_unlike" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                    <Rectangle Width="30" Height="30">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </ToggleButton>
-                <ToggleButton  Height="60" Name="but_like" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                    <Rectangle Width="30" Height="30">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </ToggleButton>
-
-            </StackPanel>-->
+            </zoomAndPan:ZoomAndPanControl>
         </Grid>
 
         <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5">
@@ -80,77 +50,90 @@
                     <GradientStop Color="{DynamicResource AccentColor4}"/>
                 </LinearGradientBrush>
             </StatusBar.Background>
-            <!--<Grid>-->
-            <Button Height="40" Width="40" Margin="2,-2" Style="{DynamicResource MetroCircleButtonStyle}" Click="ButtonPrev_Click">
-                <Path Width="20" Height="20"
+            <StatusBarItem >
+                <StackPanel Orientation="Horizontal">
+                    <Button Height="40" Width="40" Margin="2,-2" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding PrevImageCommand}">
+                        <Path Width="20" Height="20"
                                   Canvas.Left="15.9063"
                                   Canvas.Top="14.75"
                                   Stretch="Fill"
                                   Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />            
-            </Button>
-            <Button Height="40" Width="40" Margin="2,-2" VerticalAlignment="Center" HorizontalAlignment="Right"  Click="ButtonNext_Click" Style="{DynamicResource MetroCircleButtonStyle}">
-                <Path Width="20" Height="20"
+                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding NextImageCommand}" Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Path Width="20" Height="20"
                                   Canvas.Left="15.9063"
                                   Canvas.Top="14.75"
                                   Stretch="Fill"
                                   Fill="{DynamicResource BlackBrush}"
                                   Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
-            </Button>
-            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
-                <ToggleButton Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_down}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </ToggleButton>
-                <ToggleButton  Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_up}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </ToggleButton>
-            </StackPanel>
-            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_folder_open}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_image_select}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MetroCircleButtonStyle}"
+                    </Button>
+                    <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+                        <ToggleButton Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_down}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </ToggleButton>
+                        <ToggleButton  Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_up}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </ToggleButton>
+                    </StackPanel>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_folder_open}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_image_select}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MetroCircleButtonStyle}"
                     IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.HaveBackupFile}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_reset}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <StackPanel HorizontalAlignment="Right">
-                <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="30" Width="30" />
-            </StackPanel>
-            <!--</Grid>-->
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_reset}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem  DockPanel.Dock="Right">
+                <ToggleButton Height="40" Width="40" Content="Fit" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding ZoomFit}"/>
+            </StatusBarItem>
+            <StatusBarItem  DockPanel.Dock="Right">
+                <ToggleButton Height="40" Width="40" Content="1:1" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding Zoom11}"/>
+            </StatusBarItem>
+            <StatusBarItem  DockPanel.Dock="Right">
+                <ToggleButton Height="40" Width="40" Content="1:2" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding Zoom12}"/>
+            </StatusBarItem>
+
+            <StatusBarItem  DockPanel.Dock="Right">
+                <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="30" Width="30" />
+            </StatusBarItem>
+
         </StatusBar>
         <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False">
-                <i:Interaction.Behaviors>
-                    <classes:HorizontalScrollBehavior />
-                </i:Interaction.Behaviors>
+            <i:Interaction.Behaviors>
+                <classes:HorizontalScrollBehavior />
+            </i:Interaction.Behaviors>
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >

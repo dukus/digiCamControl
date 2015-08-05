@@ -11,7 +11,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
@@ -25,27 +24,11 @@
         <SolidColorBrush Color="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=FullScreenColor}"/>
     </Window.Background>
     <Grid>
-        <xctk:MagnifierManager.Magnifier >
-            <xctk:Magnifier Radius="150" ZoomFactor=".4" Name="magnifier" />
-        </xctk:MagnifierManager.Magnifier>
-        <!--<Controls:ZoomBorder>-->
-        <xctk:Zoombox x:Name="zoombox"
-                    ViewStackIndex="0"
-                    Grid.Column="1"
-                    Margin="20"
-                    Focusable="True"
-                    IsTabStop="True"
-                          >
-            <xctk:Zoombox.ViewStack>
-                <xctk:ZoomboxView>Fit</xctk:ZoomboxView>
-            </xctk:Zoombox.ViewStack>
-
-            <Image Name="image1" Margin="5" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" KeyUp="image1_KeyUp">
-                <Image.Effect>
-                    <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
-                </Image.Effect>
-            </Image>
-        </xctk:Zoombox>
+        <Image Name="image1" Margin="5" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" KeyUp="image1_KeyUp">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
+            </Image.Effect>
+        </Image>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
             <ToggleButton  Height="60" Name="but_unlike" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
                 <Rectangle Width="30" Height="30">

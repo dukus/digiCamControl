@@ -16,15 +16,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/CameraControl;component/Styles/Wpf.Toolkit.Extended.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -148,8 +139,11 @@
                         <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelShowThumbUpDown}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="5" Grid.Column="1" Margin="3" IsChecked="{Binding ShowThumbUpDown}" />
 
-                        <Label Grid.Row="6" Grid.Column="0" Content="{T:TranslateExtension LabelShowFocusPoints}" HorizontalContentAlignment="Right"/>
-                        <CheckBox Grid.Row="6" Grid.Column="1" Margin="3" IsChecked="{Binding ShowFocusPoints}"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="{T:TranslateExtension LabelAutorotate}" HorizontalContentAlignment="Right"/>
+                        <CheckBox Grid.Row="6" Grid.Column="1" Margin="3" IsChecked="{Binding Autorotate}" />
+
+                        <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelShowThumbInfo}" HorizontalContentAlignment="Right"/>
+                        <CheckBox Grid.Row="7" Grid.Column="1" Margin="3" IsChecked="{Binding ShowThumbInfo}" />
 
                         <Label Grid.Row="8" Grid.Column="0" Content="{T:TranslateExtension LabelDontLoadThumbs}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="8" Grid.Column="1" Margin="3" IsChecked="{Binding DontLoadThumbnails}" />

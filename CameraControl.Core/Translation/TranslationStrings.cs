@@ -596,5 +596,22 @@ namespace CameraControl.Core.Translation
         public static string LabelStartupScript = "Execute script on startup";
         public static string LabelPublicWebserver = "Allow public access";
         public static string LabelLoadCanonTransferMode = "Load Canon transfer mode";
+        public static string LabelFolderSelector = "Folder selector";
+        public static string LabelReloadOnFolderChange = "Reload files on folder change";
+        public static string MenuSession = "Session";
+        public static string MenuCamera = "Camera";
+        public static string MenuThumbnailSize = "Thumbnail Size";
+        public static string MenuInver = "Invert selection";
+        public static string MenuResetDevice = "Reset device";
+        public static string MenuSessionAdd = "Add new session ...";
+        public static string MenuSessionEdit = "Edit current session ...";
+        public static string MenuSessionDel = "Remove current session";
+        public static string MenuIncrementSeries = "Increment series";
+        public static string MenuWindows = "Windows";
+        public static string MenuOnlineManual = "Online manual";
+        public static string MenuPlugins = "Plugins";
+        public static string LabelAutorotate = "Auto rotate image";
+        public static string MenuCameraProperty = "Camera property";
+        public static string LabelShowThumbInfo = "Show info next to thubnail";
     }
 }

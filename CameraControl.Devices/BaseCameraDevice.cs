@@ -422,6 +422,11 @@ namespace CameraControl.Devices
         {
         }
 
+        public virtual void ResetDevice()
+        {
+            
+        }
+
         public virtual void ReadDeviceProperties(uint prop)
         {
         }

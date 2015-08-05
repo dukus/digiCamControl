@@ -42,15 +42,38 @@ namespace CameraControl.Core.Classes
 {
     public class Branding
     {
+        private string _startupScreenImage;
+        private string _logoImage;
+        private string _defaultThumbImage;
         public string ApplicationDataFolder { get; set; }
         
         public string ApplicationTitle { get; set; }
 
-        public string StartupScreenImage { get; set; }
+        public string StartupScreenImage
+        {
+            get
+            {
+                return _startupScreenImage!=null && !_startupScreenImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _startupScreenImage) : _startupScreenImage;
+            }
+            set { _startupScreenImage = value; }
+        }
 
-        public string LogoImage { get; set; }
+        public string LogoImage
+        {
+            get { return _logoImage!=null && !_logoImage.Contains("\\") ? Path.Combine(Settings.ApplicationFolder, _logoImage) : _logoImage;}
+            set { _logoImage = value; }
+        }
 
-        public string DefaultThumbImage { get; set; }
+        public string DefaultThumbImage
+        {
+            get
+            {
+                return _defaultThumbImage != null && !_defaultThumbImage.Contains("\\")
+                    ? Path.Combine(Settings.ApplicationFolder, _defaultThumbImage)
+                    : _defaultThumbImage;
+            }
+            set { _defaultThumbImage = value; }
+        }
 
         public string DefaultMissingThumbImage { get; set; }
 
@@ -61,6 +84,8 @@ namespace CameraControl.Core.Classes
         public bool OnlineReference { get; set; }
 
         public bool ShowStartupScreen { get; set; }
+        
+        public bool ShowStartupScreenAnimation { get; set; }
         
         public bool ShowWelcomeScreen { get; set; }
 
@@ -136,6 +161,8 @@ namespace CameraControl.Core.Classes
 
         public bool ShowToolsPanel { get; set; }
 
+        public bool ShowMainMenu { get; set; }
+
         public string DefaultSettings
         {
             get { return Path.Combine(Settings.ApplicationFolder, "default_settings.xml"); }
@@ -148,6 +175,7 @@ namespace CameraControl.Core.Classes
             ShowAboutWindow = true;
             OnlineReference = true;
             ShowStartupScreen = true;
+            ShowStartupScreenAnimation = true;
             ShowWelcomeScreen = true;
             CheckForUpdate = true;
             ShowRefreshButtonMainWindow = true;
@@ -185,6 +213,7 @@ namespace CameraControl.Core.Classes
             ShowExportPanel = true;
             ShowToolsPanel = true;
             ShowAnimation = true;
+            ShowMainMenu = true;
         }
 
         public static Branding LoadBranding()

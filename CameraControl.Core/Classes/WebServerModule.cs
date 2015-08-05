@@ -184,14 +184,16 @@ namespace CameraControl.Core.Classes
                     {
                         response = ex.Message;
                     }
+                    if (string.IsNullOrEmpty(response))
+                        response = "OK";
 
                     byte[] buffer = Encoding.UTF8.GetBytes(response);
 
                     //response.ContentLength64 = buffer.Length;
                     context.Response.AddHeader("Content-Length", buffer.Length.ToString());
-
+                    context.Response.ContentType = "text/html";
                     context.Response.Body = new MemoryStream();
-
+                    
                     context.Response.Body.Write(buffer, 0, buffer.Length);
                     context.Response.Body.Position = 0;
                     return ModuleResult.Continue;

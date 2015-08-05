@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "Magick.NET.Wrapper"
+    </assembly>
+    <members>
+        <member name="M:ImageMagick.Wrapper.MagickImage.Shadow(System.Int32,System.Int32,System.Double,System.Double,ImageMagick.Wrapper.MagickColor)">
+=============================================================================================
+</member>
+        <member name="M:ImageMagick.Wrapper.MagickImage.Shadow(System.Int32,System.Int32,System.Double,System.Double)">
+=============================================================================================
+</member>
+        <member name="T:ImageMagick.Wrapper.LayerMethod">
+==========================================================================================
+<summary>
+The method of selecting the size of the initial canvas.
+</summary></member>
+        <member name="T:ImageMagick.Wrapper.MagickSearchResult">
+==========================================================================================
+<summary>
+Result for a sub image search operation.
+</summary></member>
+    </members>
+</doc>

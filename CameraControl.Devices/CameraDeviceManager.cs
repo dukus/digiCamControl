@@ -62,6 +62,7 @@ namespace CameraControl.Devices
         private List<DeviceDescription> _deviceDescriptions = new List<DeviceDescription>();
 
         public Dictionary<ICameraDevice, byte[]> LiveViewImage;
+        public Dictionary<ICameraDevice, string> LastCapturedImage;
 
         /// <summary>
         /// Gets or sets a value indicating whether use experimental drivers.
@@ -161,6 +162,8 @@ namespace CameraControl.Devices
                                   {"D800E", typeof (NikonD800)},
                                   {"D800e", typeof (NikonD800)},
                                   {"D810", typeof (NikonD600)},
+                                  {"D810A", typeof (NikonD600)},
+                                  {"D810a", typeof (NikonD600)},
                                   {"D90", typeof (NikonD90)},
                                   {"V1", typeof (NikonD5100)},
                                   {"V2", typeof (NikonD5100)},
@@ -186,6 +189,7 @@ namespace CameraControl.Devices
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
             _deviceEnumerator = new DeviceDescriptorEnumerator();
             LiveViewImage = new Dictionary<ICameraDevice, byte[]>();
+            LastCapturedImage = new Dictionary<ICameraDevice, string>();
 
             // prevent program crash in something wrong with wia
             try

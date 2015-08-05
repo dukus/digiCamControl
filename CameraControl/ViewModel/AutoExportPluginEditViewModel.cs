@@ -1,23 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.windows;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using MessageBox = System.Windows.Forms.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace CameraControl.ViewModel
 {
     public class AutoExportPluginEditViewModel : ViewModelBase
     {
+        private PreviewWnd _wnd;
         private AutoExportPluginConfig _config;
         private ObservableCollection<TransformPluginItem> _transformPluginItems;
         private TransformPluginItem _selectedTransformPluginItem;
 
-        public RelayCommand<string> AddTransforPluginCommand { get; set; }
-        public RelayCommand<TransformPluginItem> RemoveTransforPluginCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand<string> AddTransforPluginCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand<TransformPluginItem> RemoveTransforPluginCommand { get; set; }
+        public RelayCommand PreviewCommand { get; set; }
         
         public AutoExportPluginConfig Config
         {
@@ -110,10 +118,35 @@ namespace CameraControl.ViewModel
         public AutoExportPluginEditViewModel(AutoExportPluginConfig config)
         {
             Config = config;
-            AddTransforPluginCommand = new RelayCommand<string>(AddTransforPlugin);
-            RemoveTransforPluginCommand=new RelayCommand<TransformPluginItem>(RemoveTransforPlugin);
+            AddTransforPluginCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(AddTransforPlugin);
+            RemoveTransforPluginCommand =
+                new GalaSoft.MvvmLight.Command.RelayCommand<TransformPluginItem>(RemoveTransforPlugin);
+            PreviewCommand = new RelayCommand(Preview);
         }
 
+        public void Preview()
+        {
+            try
+            {
+                var outfile = Path.GetTempFileName();
+                AutoExportPluginHelper.ExecuteTransformPlugins(ServiceProvider.Settings.SelectedBitmap.FileItem, Config, outfile);
+                if (_wnd == null || !_wnd.IsVisible )
+                {
+                    _wnd = new PreviewWnd();
+                    _wnd.Owner = (Window) ServiceProvider.PluginManager.SelectedWindow;
+                }
+                _wnd.Show();
+                _wnd.Image.BeginInit();
+                _wnd.Image.Source = new BitmapImage(new Uri(outfile));
+                _wnd.Image.EndInit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error to preview filter " + ex.Message);
+            }
+            
+
+        }
 
         public void AddTransforPlugin(string plugin)
         {

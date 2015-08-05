@@ -770,6 +770,7 @@ namespace CameraControl.Core.Classes
         private string _startupScript;
         private bool _publicWebserver;
         private bool _loadCanonTransferMode;
+        private bool _showThumbInfo;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -873,6 +874,17 @@ namespace CameraControl.Core.Classes
         }
 
         public bool FullScreenInSecondaryMonitor { get; set; }
+        public bool Autorotate { get; set; }
+
+        public bool ShowThumbInfo
+        {
+            get { return _showThumbInfo; }
+            set
+            {
+                _showThumbInfo = value;
+                NotifyPropertyChanged("ShowThumbInfo");
+            }
+        }
 
         public string OverlayFolder
         {
@@ -981,6 +993,8 @@ namespace CameraControl.Core.Classes
             AllowWebserverActions = true;
             PublicWebserver = false;
             LoadCanonTransferMode = true;
+            Autorotate = true;
+            ShowThumbInfo = true;
         }
 
 
@@ -1020,6 +1034,10 @@ namespace CameraControl.Core.Classes
                     return;
                 if (!Directory.Exists(session.Folder))
                     return;
+                if (session.AlowFolderChange && session.ReloadOnFolderChange)
+                {
+                    session.Files.Clear();
+                }
 
                 FileItem[] fileItems = new FileItem[session.Files.Count];
                 session.Files.CopyTo(fileItems, 0);
@@ -1082,8 +1100,7 @@ namespace CameraControl.Core.Classes
                 if (!Directory.Exists(PresetFolder))
                     Directory.CreateDirectory(PresetFolder);
 
-                string filename = Path.Combine(PresetFolder, preset.Name + ".xml");
-                preset.Save(filename);
+                preset.Save(preset.FileName);
             }
             catch (Exception exception)
             {

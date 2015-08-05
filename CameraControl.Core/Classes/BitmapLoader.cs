@@ -47,7 +47,7 @@ namespace CameraControl.Core.Classes
     {
         private const int MaxThumbSize = 1920*2;
         private const int LargeThumbSize = 1600;
-        private const int SmallThumbSize = 255;
+        private const int SmallThumbSize = 512;
 
         private static BitmapLoader _instance;
 
@@ -459,6 +459,7 @@ namespace CameraControl.Core.Classes
         
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
+            int rotation = 0;
             if (fileItem == null)
                 return null;
             if (!File.Exists(fileItem.LargeThumb) && !fullres)
@@ -495,42 +496,41 @@ namespace CameraControl.Core.Classes
                     }
                 }
 
-                if (bmpDec == null)
-                    bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
-                        BitmapCreateOptions.None,
-                        BitmapCacheOption.OnLoad);
-
-                double dw = (double) MaxThumbSize/bmpDec.Frames[0].PixelWidth;
-                WriteableBitmap bitmap;
-                /*
-                if (fullres)
-                    bitmap =
-                        BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
-                                                                            (int) (bmpDec.Frames[0].PixelWidth*dw),
-                                                                            (int) (bmpDec.Frames[0].PixelHeight*dw),
-                                                                            BitmapScalingMode.NearestNeighbor));
-                else
-                    bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-                */
-                bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-
-                if (showfocuspoints)
-                    DrawFocusPoints(fileItem, bitmap);
-
-                if (fileItem.FileInfo !=null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation") )
+                if (ServiceProvider.Settings.Autorotate && fileItem.FileInfo != null && fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation"))
                 {
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
-                        bitmap = bitmap.Rotate(180);
+                        rotation = 180;
 
                     //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
                     //    bitmap = bitmap.Rotate(180);
 
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
-                        bitmap = bitmap.Rotate(90);
+                        rotation = 90;
 
                     if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "left, bottom")
-                        bitmap = bitmap.Rotate(270);
+                        rotation = 270;
+
                 }
+
+                if (bmpDec == null)
+                    bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
+                        BitmapCreateOptions.None,
+                        BitmapCacheOption.OnLoad);
+                // if no future processing required
+                if (rotation == 0 && !showfocuspoints && ServiceProvider.Settings.RotateIndex == 0 && ServiceProvider.Settings.FlipPreview)
+                {
+                    return new WriteableBitmap(bmpDec.Frames[0]);
+                }
+
+                
+                var bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
+
+
+                if (showfocuspoints)
+                    DrawFocusPoints(fileItem, bitmap);
+
+                if (rotation != 0)
+                    bitmap = bitmap.Rotate(rotation);
 
                 if (ServiceProvider.Settings.RotateIndex != 0)
                 {
@@ -617,37 +617,32 @@ namespace CameraControl.Core.Classes
 
         private void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
         {
-            for (int i = 0; i < line; i++)
-            {
-                //bmp.DrawRectangle(x1 + i, y1 + i, x2 - i, y2 - i, color);
-                DrawFocusRect(bmp, x1 + i, y1 + i, x2 - i, y2 - i, color);
-            }
+            DrawFocusRect(bmp, x1 , y1, x2 , y2 , color, line);
         }
 
-        private void DrawFocusRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color)
+        private void DrawFocusRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int tick)
         {
             int width = (x2 - x1)/4;
             int height = (y2 - y1)/4;
+            DrawLineEx(bmp, x1 - (tick / 2), y1, width, 0, color, tick);
+            DrawLineEx(bmp, x1, y1, 0, height, color, tick);
 
-            DrawLineEx(bmp, x1, y1, width, 0, color);
-            DrawLineEx(bmp, x1, y1, 0, height, color);
-
-            DrawLineEx(bmp, x1, y2, width, 0, color);
-            DrawLineEx(bmp, x1, y2, 0, -height, color);
+            DrawLineEx(bmp, x1 , y2, width, 0, color, tick);
+            DrawLineEx(bmp, x1 + (tick / 2), y2, 0, -height, color, tick);
 
 
-            DrawLineEx(bmp, x2, y1, -width, 0, color);
-            DrawLineEx(bmp, x2, y1, 0, height, color);
+            DrawLineEx(bmp, x2, y1, -width, 0, color, tick);
+            DrawLineEx(bmp, x2 - (tick / 2), y1, 0, height, color, tick);
 
-            DrawLineEx(bmp, x2, y2, -width, 0, color);
-            DrawLineEx(bmp, x2, y2, 0, -height, color);
+            DrawLineEx(bmp, x2 + (tick / 2), y2, -width, 0, color, tick);
+            DrawLineEx(bmp, x2, y2, 0, -height, color, tick);
 
 
         }
 
-        public void DrawLineEx(WriteableBitmap bmp, int x, int y, int width, int height, Color color)
+        public void DrawLineEx(WriteableBitmap bmp, int x, int y, int width, int height, Color color, int tick)
         {
-            bmp.DrawLineAa(x, y, x + width, y + height, color);
+            bmp.DrawLineAa(x, y, x + width, y + height, color,tick);
         }
 
         private PointCollection ConvertToPointCollection(int[] values)

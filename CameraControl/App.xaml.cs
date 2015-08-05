@@ -262,12 +262,18 @@ namespace CameraControl
                     case CmdConsts.CaptureAll:
                         CameraHelper.CaptureAll(0);
                         break;
+                    case CmdConsts.NextSeries:
+                        if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
+                        break;
                 }
                 ICameraDevice device = ServiceProvider.DeviceManager.SelectedCameraDevice;
                 if (device != null && device.IsConnected)
                 {
                     switch (cmd)
                     {
+                        case CmdConsts.ResetDevice:
+                                device.ResetDevice();
+                            break;
                         case CmdConsts.NextAperture:
                             if (device.FNumber != null)
                                 device.FNumber.NextValue();
@@ -313,9 +319,6 @@ namespace CameraControl
                             break;
                         case CmdConsts.PrevCamera:
                             ServiceProvider.DeviceManager.SelectPrevCamera();
-                            break;
-                        case CmdConsts.NextSeries:
-                            if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
                             break;
                     }
                 }
