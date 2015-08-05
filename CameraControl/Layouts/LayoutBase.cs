@@ -44,6 +44,8 @@ using GalaSoft.MvvmLight.Command;
 using Microsoft.VisualBasic.FileIO;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using CameraControl.Controls.ZoomAndPan;
 using CameraControl.ViewModel;
 using Clipboard = System.Windows.Clipboard;
@@ -109,6 +111,7 @@ namespace CameraControl.Layouts
 
         public void UnInit()
         {
+            ZoomAndPanControl.ContentScaleChanged -= ZoomAndPanControl_ContentScaleChanged;
             _worker.DoWork -= worker_DoWork;
             _worker.RunWorkerCompleted -= _worker_RunWorkerCompleted;
             ServiceProvider.Settings.PropertyChanged -= Settings_PropertyChanged;
@@ -203,6 +206,31 @@ namespace CameraControl.Layouts
             {
                 if (ServiceProvider.Settings.DefaultSession.Files.Count > 0)
                     ImageLIst.SelectedIndex = 0;
+            }
+            ZoomAndPanControl.ContentScaleChanged += ZoomAndPanControl_ContentScaleChanged;
+        }
+
+        private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)
+        {
+            double dw = ZoomAndPanControl.ContentViewportWidthRation;
+            double dh = ZoomAndPanControl.ContentViewportHeightRation;
+            double fw = ZoomAndPanControl.ContentZoomFocusXRation;
+            double fh = ZoomAndPanControl.ContentZoomFocusYRation;
+            try
+            {
+                var bitmap = BitmapLoader.Instance.LoadSmallImage(ServiceProvider.Settings.SelectedBitmap.FileItem);
+                
+                if (bitmap != null)
+                {
+                    bitmap.DrawRectangle((int) (bitmap.PixelWidth*fw), (int) (bitmap.PixelHeight*fh), (int) (bitmap.PixelWidth*Math.Min(1, dw)), (int) (bitmap.PixelHeight*Math.Min(1, dh)),
+                        Colors.Aqua);
+                    bitmap.Freeze();
+                    ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
 

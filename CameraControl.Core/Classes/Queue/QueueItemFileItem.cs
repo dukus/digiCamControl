@@ -30,6 +30,7 @@
 
 using System;
 using System.IO;
+using System.Windows.Media.Imaging;
 using CameraControl.Core.Interfaces;
 
 #endregion
@@ -48,7 +49,9 @@ namespace CameraControl.Core.Classes.Queue
             {
                 if (File.Exists(FileItem.SmallThumb))
                 {
-                    FileItem.Thumbnail = BitmapLoader.Instance.LoadSmallImage(FileItem);
+                    var thumb = BitmapLoader.Instance.LoadSmallImage(FileItem);
+                    thumb.Freeze();
+                    FileItem.Thumbnail = thumb;
                 }
                 else
                 {

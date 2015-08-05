@@ -89,6 +89,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public BitmapSource Preview
+        {
+            get { return _preview; }
+            set
+            {
+                _preview = value;
+                NotifyPropertyChanged("Preview");
+            }
+        }
+
         public PointCollection LuminanceHistogramPoints
         {
             get { return luminanceHistogramPoints; }
@@ -178,6 +188,7 @@ namespace CameraControl.Core.Classes
         }
 
         private string _comment;
+        private BitmapSource _preview;
 
         public string Comment
         {

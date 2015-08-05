@@ -101,6 +101,9 @@ namespace CameraControl.Controls.ZoomAndPan
         /// </summary>
         private ScrollViewer scrollOwner = null;
 
+        private double _contentViewportHeightRation;
+        private double _contentZoomFocusXRation;
+
         #endregion IScrollInfo Data Members
 
         #region Dependency Property Definitions
@@ -268,6 +271,18 @@ namespace CameraControl.Controls.ZoomAndPan
             }
         }
 
+        public double ContentZoomFocusXRation
+        {
+            get { return ContentZoomFocusX/ unScaledExtent.Width; }
+            
+        }
+
+        public double ContentZoomFocusYRation
+        {
+            get { return ContentZoomFocusY / unScaledExtent.Height; }
+
+        }
+
         /// <summary>
         /// The Y coordinate of the content focus, this is the point that we are focusing on when zooming.
         /// </summary>
@@ -358,6 +373,16 @@ namespace CameraControl.Controls.ZoomAndPan
             {
                 SetValue(ContentViewportHeightProperty, value);
             }
+        }
+
+        public double ContentViewportHeightRation
+        {
+            get { return ContentViewportHeight/unScaledExtent.Height; }
+        }
+
+        public double ContentViewportWidthRation
+        {
+            get { return ContentViewportWidth / unScaledExtent.Width; }
         }
 
         /// <summary>

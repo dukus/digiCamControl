@@ -203,7 +203,9 @@ namespace CameraControl.Core.Classes
                         writeableBitmap = writeableBitmap.Rotate(rotation);
 
                     Save2Jpg(writeableBitmap, fileItem.SmallThumb);
-                    fileItem.Thumbnail = LoadSmallImage(fileItem);
+                    var thumb = LoadSmallImage(fileItem);
+                    thumb.Freeze();
+                    fileItem.Thumbnail = thumb;
                     fileItem.IsLoaded = true;
                     fileItem.SaveInfo();
                     if (deleteFile)
@@ -581,7 +583,7 @@ namespace CameraControl.Core.Classes
                 bi.UriSource = new Uri(fileItem.SmallThumb);
                 bi.EndInit();
                 WriteableBitmap bitmap = BitmapFactory.ConvertToPbgra32Format(bi);
-                bitmap.Freeze();
+                //bitmap.Freeze();
                 return bitmap;
             }
             catch (Exception exception)
