@@ -84,10 +84,10 @@ namespace CameraControl.Classes
                                             if (index4 >= 0 && index4 < length)
                                             {
                                                 num24 = pixels1[index4];
-                                                num8 = num24 >> 24 & (int)byte.MaxValue;
-                                                num5 = num24 >> 16 & (int)byte.MaxValue;
-                                                num6 = num24 >> 8 & (int)byte.MaxValue;
-                                                num7 = num24 & (int)byte.MaxValue;
+                                                num8 = num24 >> 24 & (int)Byte.MaxValue;
+                                                num5 = num24 >> 16 & (int)Byte.MaxValue;
+                                                num6 = num24 >> 8 & (int)Byte.MaxValue;
+                                                num7 = num24 & (int)Byte.MaxValue;
                                                 if (flag2 && num8 != 0)
                                                 {
                                                     num8 = num8 * num9 * 32897 >> 23;
@@ -104,43 +104,43 @@ namespace CameraControl.Classes
                                             pixels2[index2] = num24;
                                         else if (blendMode == WriteableBitmapExtensions.BlendMode.ColorKeying)
                                         {
-                                            num5 = num24 >> 16 & (int)byte.MaxValue;
-                                            num6 = num24 >> 8 & (int)byte.MaxValue;
-                                            num7 = num24 & (int)byte.MaxValue;
+                                            num5 = num24 >> 16 & (int)Byte.MaxValue;
+                                            num6 = num24 >> 8 & (int)Byte.MaxValue;
+                                            num7 = num24 & (int)Byte.MaxValue;
                                             if (num5 != (int)color.R || num6 != (int)color.G || num7 != (int)color.B)
                                                 pixels2[index2] = num24;
                                         }
                                         else if (blendMode == WriteableBitmapExtensions.BlendMode.Mask)
                                         {
                                             int num25 = pixels2[index2];
-                                            int num26 = num25 >> 24 & (int)byte.MaxValue;
-                                            int num27 = num25 >> 16 & (int)byte.MaxValue;
-                                            int num28 = num25 >> 8 & (int)byte.MaxValue;
-                                            int num29 = num25 & (int)byte.MaxValue;
+                                            int num26 = num25 >> 24 & (int)Byte.MaxValue;
+                                            int num27 = num25 >> 16 & (int)Byte.MaxValue;
+                                            int num28 = num25 >> 8 & (int)Byte.MaxValue;
+                                            int num29 = num25 & (int)Byte.MaxValue;
                                             int num30 = num26 * num8 * 32897 >> 23 << 24 | num27 * num8 * 32897 >> 23 << 16 | num28 * num8 * 32897 >> 23 << 8 | num29 * num8 * 32897 >> 23;
                                             pixels2[index2] = num30;
                                         }
                                         else if (num8 > 0)
                                         {
                                             int num25 = pixels2[index2];
-                                            int num26 = num25 >> 24 & (int)byte.MaxValue;
-                                            if ((num8 == (int)byte.MaxValue || num26 == 0) && (blendMode != WriteableBitmapExtensions.BlendMode.Additive && blendMode != WriteableBitmapExtensions.BlendMode.Subtractive) && blendMode != WriteableBitmapExtensions.BlendMode.Multiply)
+                                            int num26 = num25 >> 24 & (int)Byte.MaxValue;
+                                            if ((num8 == (int)Byte.MaxValue || num26 == 0) && (blendMode != WriteableBitmapExtensions.BlendMode.Additive && blendMode != WriteableBitmapExtensions.BlendMode.Subtractive) && blendMode != WriteableBitmapExtensions.BlendMode.Multiply)
                                             {
                                                 pixels2[index2] = num24;
                                             }
                                             else
                                             {
-                                                int num27 = num25 >> 16 & (int)byte.MaxValue;
-                                                int num28 = num25 >> 8 & (int)byte.MaxValue;
-                                                int num29 = num25 & (int)byte.MaxValue;
+                                                int num27 = num25 >> 16 & (int)Byte.MaxValue;
+                                                int num28 = num25 >> 8 & (int)Byte.MaxValue;
+                                                int num29 = num25 & (int)Byte.MaxValue;
                                                 if (blendMode == WriteableBitmapExtensions.BlendMode.Alpha)
                                                 {
-                                                    int num30 = (int)byte.MaxValue - num8;
-                                                    num25 = !flag1 ? (num26 & (int)byte.MaxValue) << 24 | (num5 * num8 + num30 * num27 >> 8 & (int)byte.MaxValue) << 16 | (num6 * num8 + num30 * num28 >> 8 & (int)byte.MaxValue) << 8 | num7 * num8 + num30 * num29 >> 8 & (int)byte.MaxValue : (num26 & (int)byte.MaxValue) << 24 | ((num5 << 8) + num30 * num27 >> 8 & (int)byte.MaxValue) << 16 | ((num6 << 8) + num30 * num28 >> 8 & (int)byte.MaxValue) << 8 | (num7 << 8) + num30 * num29 >> 8 & (int)byte.MaxValue;
+                                                    int num30 = (int)Byte.MaxValue - num8;
+                                                    num25 = !flag1 ? (num26 & (int)Byte.MaxValue) << 24 | (num5 * num8 + num30 * num27 >> 8 & (int)Byte.MaxValue) << 16 | (num6 * num8 + num30 * num28 >> 8 & (int)Byte.MaxValue) << 8 | num7 * num8 + num30 * num29 >> 8 & (int)Byte.MaxValue : (num26 & (int)Byte.MaxValue) << 24 | ((num5 << 8) + num30 * num27 >> 8 & (int)Byte.MaxValue) << 16 | ((num6 << 8) + num30 * num28 >> 8 & (int)Byte.MaxValue) << 8 | (num7 << 8) + num30 * num29 >> 8 & (int)Byte.MaxValue;
                                                 }
                                                 else if (blendMode == WriteableBitmapExtensions.BlendMode.Additive)
                                                 {
-                                                    int num30 = (int)byte.MaxValue <= num8 + num26 ? (int)byte.MaxValue : num8 + num26;
+                                                    int num30 = (int)Byte.MaxValue <= num8 + num26 ? (int)Byte.MaxValue : num8 + num26;
                                                     num25 = num30 << 24 | (num30 <= num5 + num27 ? num30 : num5 + num27) << 16 | (num30 <= num6 + num28 ? num30 : num6 + num28) << 8 | (num30 <= num7 + num29 ? num30 : num7 + num29);
                                                 }
                                                 else if (blendMode == WriteableBitmapExtensions.BlendMode.Subtractive)
@@ -174,5 +174,142 @@ namespace CameraControl.Classes
             }
         }
 
+        public static unsafe void FillRectangleDeBlend(this WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color)
+        {
+            using (var context = bmp.GetBitmapContext())
+            {
+                unsafe
+                {
+
+
+                    // Use refs for faster access (really important!) speeds up a lot!
+                    int w = bmp.PixelWidth;
+                    int h = bmp.PixelHeight;
+                    var pixels = context.Pixels;
+
+                    // Check boundaries
+                    if (x1 < 0)
+                    {
+                        x1 = 0;
+                    }
+                    if (y1 < 0)
+                    {
+                        y1 = 0;
+                    }
+                    if (x2 < 0)
+                    {
+                        x2 = 0;
+                    }
+                    if (y2 < 0)
+                    {
+                        y2 = 0;
+                    }
+                    if (x1 >= w)
+                    {
+                        x1 = w - 1;
+                    }
+                    if (y1 >= h)
+                    {
+                        y1 = h - 1;
+                    }
+                    if (x2 >= w)
+                    {
+                        x2 = w - 1;
+                    }
+                    if (y2 >= h)
+                    {
+                        y2 = h - 1;
+                    }
+
+
+                    unchecked
+                    {
+                        for (int y = y1; y <= y2; y++)
+                        {
+                            for (int i = y * w + x1; i < y * w + x2; i++)
+                            {
+                                byte oneOverAlpha = (byte)(255 - color.A);
+                                int c = pixels[i];
+
+                                int r = (((byte)(c >> 16) << 8) / oneOverAlpha);
+                                int g = (((byte)(c >> 8) << 8) / oneOverAlpha);
+                                int b = (((byte)(c >> 0) << 8) / oneOverAlpha);
+
+                                pixels[i] = 255 << 24 | r << 16 | g << 8 | b;
+
+
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        public static unsafe void FillRectangle2(this WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color)
+        {
+            using (var context = bmp.GetBitmapContext())
+            {
+                unsafe
+                {
+                    // Use refs for faster access (really important!) speeds up a lot!
+                    int w = bmp.PixelWidth;
+                    int h = bmp.PixelHeight;
+                    var pixels = context.Pixels;
+
+                    // Check boundaries
+                    if (x1 < 0)
+                    {
+                        x1 = 0;
+                    }
+                    if (y1 < 0)
+                    {
+                        y1 = 0;
+                    }
+                    if (x2 < 0)
+                    {
+                        x2 = 0;
+                    }
+                    if (y2 < 0)
+                    {
+                        y2 = 0;
+                    }
+                    if (x1 >= w)
+                    {
+                        x1 = w - 1;
+                    }
+                    if (y1 >= h)
+                    {
+                        y1 = h - 1;
+                    }
+                    if (x2 >= w)
+                    {
+                        x2 = w - 1;
+                    }
+                    if (y2 >= h)
+                    {
+                        y2 = h - 1;
+                    }
+
+                    unchecked
+                    {
+                        for (int y = y1; y <= y2; y++)
+                        {
+                            for (int i = y * w + x1; i <= y * w + x2; i++)
+                            {
+                                byte oneOverAlpha = (byte)(255 - color.A);
+                                int c = pixels[i];
+
+                                int r = ((byte)(c >> 16) * oneOverAlpha) >> 8;
+                                int g = ((byte)(c >> 8) * oneOverAlpha) >> 8;
+                                int b = ((byte)(c >> 0) * oneOverAlpha) >> 8;
+
+                                pixels[i] = 255 << 24 | r << 16 | g << 8 | b;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

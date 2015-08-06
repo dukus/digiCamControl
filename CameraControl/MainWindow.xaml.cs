@@ -870,5 +870,16 @@ namespace CameraControl
                                                           (res.Y/PrviewImage.ActualHeight));
         }
 
+        private void PrviewImage_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                var res = e.GetPosition(PrviewImage);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
+                                                              (res.X / PrviewImage.ActualWidth) + "_" +
+                                                              (res.Y / PrviewImage.ActualHeight)+"_!");
+            }
+        }
+
     }
 }

@@ -467,6 +467,13 @@ namespace CameraControl.Controls.ZoomAndPan
             this.ContentOffsetY = contentPoint.Y - (this.ContentViewportHeight / 2);
         }
 
+        public void SnapToRation(double x, double y)
+        {
+            double newX = unScaledExtent.Width * x;
+            double newY = unScaledExtent.Height * y;
+            SnapTo(new Point(newX, newY));
+        }
+
         /// <summary>
         /// Use animation to center the view on the specified point (in rations 0.0-1.0).
         /// </summary>

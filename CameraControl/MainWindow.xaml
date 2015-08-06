@@ -255,8 +255,8 @@
                 <Grid Grid.Row="1" Margin="0" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                         <StackPanel>
-                            <Expander Header="Preview" >
-                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage"/>
+                            <Expander Header="Preview" IsExpanded="True">
+                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"/>
                             </Expander>
                             <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">

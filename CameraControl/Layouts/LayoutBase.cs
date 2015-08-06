@@ -46,6 +46,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CameraControl.Classes;
 using CameraControl.Controls.ZoomAndPan;
 using CameraControl.ViewModel;
 using Clipboard = System.Windows.Clipboard;
@@ -112,6 +113,8 @@ namespace CameraControl.Layouts
         public void UnInit()
         {
             ZoomAndPanControl.ContentScaleChanged -= ZoomAndPanControl_ContentScaleChanged;
+            ZoomAndPanControl.ContentOffsetXChanged -= ZoomAndPanControl_ContentScaleChanged;
+            ZoomAndPanControl.ContentOffsetYChanged -= ZoomAndPanControl_ContentScaleChanged;
             _worker.DoWork -= worker_DoWork;
             _worker.RunWorkerCompleted -= _worker_RunWorkerCompleted;
             ServiceProvider.Settings.PropertyChanged -= Settings_PropertyChanged;
@@ -208,22 +211,31 @@ namespace CameraControl.Layouts
                     ImageLIst.SelectedIndex = 0;
             }
             ZoomAndPanControl.ContentScaleChanged += ZoomAndPanControl_ContentScaleChanged;
+            ZoomAndPanControl.ContentOffsetXChanged += ZoomAndPanControl_ContentScaleChanged;
+            ZoomAndPanControl.ContentOffsetYChanged += ZoomAndPanControl_ContentScaleChanged;
         }
 
         private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)
         {
-            double dw = ZoomAndPanControl.ContentViewportWidthRation;
-            double dh = ZoomAndPanControl.ContentViewportHeightRation;
-            double fw = ZoomAndPanControl.ContentZoomFocusXRation;
-            double fh = ZoomAndPanControl.ContentZoomFocusYRation;
+            GeneratePreview();
+        }
+
+        private void GeneratePreview()
+        {
             try
             {
                 var bitmap = BitmapLoader.Instance.LoadSmallImage(ServiceProvider.Settings.SelectedBitmap.FileItem);
-                
+
                 if (bitmap != null)
                 {
-                    bitmap.DrawRectangle((int) (bitmap.PixelWidth*fw), (int) (bitmap.PixelHeight*fh), (int) (bitmap.PixelWidth*Math.Min(1, dw)), (int) (bitmap.PixelHeight*Math.Min(1, dh)),
-                        Colors.Aqua);
+                    int dw = (int)(ZoomAndPanControl.ContentViewportWidthRation * bitmap.PixelWidth);
+                    int dh = (int)(ZoomAndPanControl.ContentViewportHeightRation * bitmap.PixelHeight);
+                    int fw = (int)(ZoomAndPanControl.ContentZoomFocusXRation * bitmap.PixelWidth);
+                    int fh = (int)(ZoomAndPanControl.ContentZoomFocusYRation * bitmap.PixelHeight);
+
+                    bitmap.FillRectangle2(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, Color.FromArgb(128, 128, 128, 128));
+                    bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2), Color.FromArgb(128, 128, 128, 128));
+
                     bitmap.Freeze();
                     ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
                 }
@@ -232,6 +244,7 @@ namespace CameraControl.Layouts
             {
 
             }
+           
         }
 
         private void ImageLIst_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -291,6 +304,10 @@ namespace CameraControl.Layouts
             if (LayoutViewModel.ZoomFit && ZoomAndPanControl != null)
             {
                 ZoomAndPanControl.AnimatedScaleToFit();
+            }
+            else
+            {
+                GeneratePreview();
             }
         }
 
@@ -463,13 +480,19 @@ namespace CameraControl.Layouts
                                                                if (cmd.Contains("_"))
                                                                {
                                                                    var vals = cmd.Split('_');
-                                                                   if (vals.Count() == 3)
+                                                                   if (vals.Count() > 2)
                                                                    {
                                                                        double x;
                                                                        double y;
                                                                        double.TryParse(vals[1], out x);
                                                                        double.TryParse(vals[2], out y);
-                                                                       ZoomAndPanControl.AnimatedSnapToRation(x, y);
+                                                                       if (cmd.EndsWith("!"))
+                                                                           ZoomAndPanControl.SnapToRation(x, y);
+                                                                       else
+                                                                       {
+                                                                           ZoomAndPanControl.AnimatedSnapToRation(x, y);
+                                                                       }
+
                                                                    }
                                                                }
                                                            }
