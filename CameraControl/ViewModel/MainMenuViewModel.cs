@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -62,6 +63,8 @@ namespace CameraControl.ViewModel
         public RelayCommand SendLogFileCommand { get; set; }
         public RelayCommand ShowChangeLogCommand { get; set; }
         public RelayCommand AboutCommand { get; set; }
+        public RelayCommand ExportSessionCommand { get; set; }
+        public RelayCommand ImportSessionCommand { get; set; }
 
         public AsyncObservableCollection<IExportPlugin> ExportPlugins
         {
@@ -161,11 +164,60 @@ namespace CameraControl.ViewModel
                 ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraConnected;
             }
+            ExportSessionCommand = new RelayCommand(ExportSession);
+            ImportSessionCommand = new RelayCommand(ImportSession);
         }
 
         void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
         {
             RaisePropertyChanged(() => CameraConnected);
+        }
+
+        private void ExportSession()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.FileName = ServiceProvider.Settings.DefaultSession.Name + ".dccsession";
+            dialog.Filter = "Session files (*.dccsession)|*.dccsession|All files (*.*)|*.*";
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    string tempfile = Path.GetTempFileName();
+                    ServiceProvider.Settings.SaveSession(ServiceProvider.Settings.DefaultSession,tempfile);
+                    var session = ServiceProvider.Settings.LoadSession(tempfile);
+                    session.Files.Clear();
+                    ServiceProvider.Settings.SaveSession(session, dialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Unable to export session", ex);
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MainWnd_Message, "Unable to export session " + ex.Message);
+                }
+            }
+        }
+
+        private void ImportSession()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Session files (*.dccsession)|*.dccsession|All files (*.*)|*.*";
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var session = ServiceProvider.Settings.LoadSession(dialog.FileName);
+                    if (ServiceProvider.Settings.PhotoSessions.Any(photoSession => photoSession.Name.ToLower() == session.Name.ToLower()))
+                    {
+                        throw new Exception("Session with same name already exist !");
+                    }
+                    ServiceProvider.Settings.Add(session);
+                    ServiceProvider.Settings.DefaultSession = session;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Unable to import session", ex);
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MainWnd_Message, "Unable to import session " + ex.Message);
+                }
+            }
         }
 
         private void NewSession()

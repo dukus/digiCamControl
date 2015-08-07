@@ -1076,19 +1076,24 @@ namespace CameraControl.Core.Classes
             try
             {
                 string filename = Path.Combine(SessionFolder, session.Name + ".xml");
-                XmlSerializer serializer = new XmlSerializer(typeof (PhotoSession));
-                // Create a FileStream to write with.
-
-                Stream writer = new FileStream(filename, FileMode.Create);
-                // Serialize the object, and close the TextWriter
-                serializer.Serialize(writer, session);
-                writer.Close();
+                SaveSession(session, filename);
                 session.ConfigFile = filename;
             }
             catch (Exception exception)
             {
                 Log.Error("Unable to save session " + session.Name, exception);
             }
+        }
+
+        public void SaveSession(PhotoSession session, string filename)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(PhotoSession));
+            // Create a FileStream to write with.
+
+            Stream writer = new FileStream(filename, FileMode.Create);
+            // Serialize the object, and close the TextWriter
+            serializer.Serialize(writer, session);
+            writer.Close();
         }
 
         public void Save(CameraPreset preset)

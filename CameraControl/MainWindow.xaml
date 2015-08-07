@@ -480,6 +480,9 @@
                     <MenuItem Header="{T:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>
                     <MenuItem Header="{T:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
                 </MenuItem>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension MenuImportSession}" Command="{Binding Path=ImportSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuExportSession}" Command="{Binding Path=ExportSessionCommand}"/>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuCamera}">
                 <MenuItem Header="{T:TranslateExtension MenuCameraProperty}" Command="{Binding Path=CameraPropertyCommand}" IsEnabled="{Binding CameraConnected}"/>

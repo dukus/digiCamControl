@@ -615,5 +615,7 @@ namespace CameraControl.Core.Translation
         public static string LabelShowThumbInfo = "Show info next to thubnail";
         public static string MenuLayoutPortrait = "Portrait";
         public static string MenuLayoutLandscape = "Landscape";
+        public static string MenuExportSession = "Export session ...";
+        public static string MenuImportSession = "Import session ...";
     }
 }
