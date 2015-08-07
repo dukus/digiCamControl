@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -10,6 +11,10 @@ namespace Canon.Eos.Framework
 {
     public sealed partial class EosCamera : EosObject
     {
+
+        private object _lock = new object();
+        private Queue<Action> _liveViewqueue = new Queue<Action>();
+
         const int WaitTimeoutForNextLiveDownload = 125;
         const int MaximumCopyrightLengthInBytes = 64;
         const int MaximumArtistLengthInBytes = 64;
@@ -503,6 +508,31 @@ namespace Canon.Eos.Framework
         {
             this.LiveViewDevice = EosLiveViewDevice.None;
         }
+
+        public void StartRecord()
+        {
+            _liveViewqueue.Enqueue(() =>
+            {
+                StopLiveView();
+                SavePicturesToCamera();
+                this.SendCommand(Edsdk.CameraCommand_MovieSelectSwON);
+                StartLiveView();
+                this.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
+                SetPropertyIntegerData(Edsdk.PropID_Record, (long)4);
+            });
+        }
+
+        public void StopRecord()
+        {
+            _liveViewqueue.Enqueue(() =>
+            {
+                this.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
+                SetPropertyIntegerData(Edsdk.PropID_Record, (long)0);
+                this.SendCommand(Edsdk.CameraCommand_MovieSelectSwOFF);
+                StartLiveView();
+            });
+        }
+
 
         /// <summary>
         /// Takes the picture.

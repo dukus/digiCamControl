@@ -41,20 +41,34 @@ namespace Canon.Eos.Framework
 
         public bool DownloadEvf()
         {
-            // Do not download if pauseUpdate requested
-            if (_pauseLiveViewRequested)
+            lock (_locker)
+            {
+
+                // Do not download if pauseUpdate requested
+                if (_pauseLiveViewRequested)
+                    return true;
+
+                if ((this.LiveViewDevice & EosLiveViewDevice.Host) == EosLiveViewDevice.None || _cancelLiveViewRequested)
+                    return false;
+
+                //lock (_locker)
+                //{
+                _liveViewRunning = true;
+                DownloadEvfInternal();
+                if (_liveViewqueue.Count > 0)
+                {
+                    try
+                    {
+                        _liveViewqueue.Dequeue().Invoke();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                _liveViewRunning = false;
+                //}
                 return true;
-
-            if ((this.LiveViewDevice & EosLiveViewDevice.Host) == EosLiveViewDevice.None || _cancelLiveViewRequested)
-                return false;
-
-            //lock (_locker)
-            //{
-            _liveViewRunning = true;
-            DownloadEvfInternal();
-            _liveViewRunning = false;
-            //}
-            return true;
+            }
         }
 
         public bool DownloadEvfInternal()

@@ -96,7 +96,7 @@ namespace Canon.Eos.Framework
                 switch (objectEvent)
                 {
                     case Edsdk.ObjectEvent_VolumeInfoChanged:
-                        this.OnObjectEventVolumeInfoChanged(sender);
+                        //this.OnObjectEventVolumeInfoChanged(sender);
                         break;
                     case Edsdk.ObjectEvent_VolumeUpdateItems:
                         this.OnObjectEventVolumeUpdateItems(sender, context);

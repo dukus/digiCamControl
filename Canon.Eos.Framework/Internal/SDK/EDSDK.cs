@@ -157,6 +157,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint   PropID_Evf_WhiteBalance        = 0x00000502;
         public const uint   PropID_Evf_ColorTemperature    = 0x00000503;
         public const uint   PropID_Evf_DepthOfFieldPreview = 0x00000504;
+        public const uint   PropID_Record                  = 0x00000510;
 
 		// EVF IMAGE DATA Properties
         public const uint   PropID_Evf_Zoom                = 0x00000507;
@@ -199,7 +200,9 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint CameraCommand_DriveLensEvf        = 0x00000103;
         public const uint CameraCommand_DoClickWBEvf        = 0x00000104;
 
-        public const uint CameraCommand_PressShutterButton  = 0x00000004; 
+        public const uint CameraCommand_PressShutterButton  = 0x00000004;
+        public const uint CameraCommand_MovieSelectSwON     = 0x00000107;
+        public const uint CameraCommand_MovieSelectSwOFF    = 0x00000108;
         
         public enum EdsEvfAf : uint
         {

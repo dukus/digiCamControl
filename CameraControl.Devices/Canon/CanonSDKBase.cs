@@ -51,6 +51,7 @@ namespace CameraControl.Devices.Canon
     public class CanonSDKBase : BaseMTPCamera
     {
         private EosLiveImageEventArgs _liveViewImageData = null;
+        private bool _recording = false;
 
         public EosCamera Camera = null;
 
@@ -372,6 +373,7 @@ namespace CameraControl.Devices.Canon
                 Capabilities.Add(CapabilityEnum.Bulb);
                 Capabilities.Add(CapabilityEnum.LiveView);
                 Capabilities.Add(CapabilityEnum.CaptureInRam);
+                Capabilities.Add(CapabilityEnum.RecordMovie);
                 Capabilities.Add(CapabilityEnum.SimpleManualFocus);
                 IsConnected = true;
                 LoadProperties();
@@ -1136,6 +1138,19 @@ namespace CameraControl.Devices.Canon
             Camera.BulbEnd();
         }
 
+        public override void StartRecordMovie()
+        {
+            _recording = true;
+            ResetShutterButton();
+            Camera.StartRecord();
+        }
+
+        public override void StopRecordMovie()
+        {
+            Camera.StopRecord();
+            _recording = false;
+        }
+
         public override void Focus(int x, int y)
         {
             lock (Locker)
@@ -1180,6 +1195,7 @@ namespace CameraControl.Devices.Canon
                         viewData.FocusY = _liveViewImageData.ZommBounds.Y + (_liveViewImageData.ZommBounds.Height/2);
                         viewData.FocusFrameXSize = _liveViewImageData.ZommBounds.Width;
                         viewData.FocusFrameYSize = _liveViewImageData.ZommBounds.Height;
+                        viewData.MovieIsRecording = _recording;
                     }
                 }
                 catch (Exception)
@@ -1196,6 +1212,7 @@ namespace CameraControl.Devices.Canon
 
         public override void StartLiveView()
         {
+            _recording = false;
             ResetShutterButton();
             //if (!Camera.IsInLiveViewMode) 
             Camera.StartLiveView(EosLiveViewAutoFocus.LiveMode);
