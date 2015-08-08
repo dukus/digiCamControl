@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Canon.Eos.Framework.Eventing;
 using Canon.Eos.Framework.Helper;
 using Canon.Eos.Framework.Internal;
@@ -13,7 +14,7 @@ namespace Canon.Eos.Framework
         private void OnPictureTaken(EosImageEventArgs eventArgs)
         {
             if (this.PictureTaken != null)
-                this.PictureTaken(this, eventArgs);
+                Task.Factory.StartNew(() => this.PictureTaken(this, eventArgs));
         }
 
         private void OnVolumeInfoChanged(EosVolumeInfoEventArgs eventArgs)
@@ -47,9 +48,11 @@ namespace Canon.Eos.Framework
         
         private void OnObjectEventDirItemCreated(IntPtr sender, IntPtr context)
         {
-            PauseLiveview();
-            this.OnPictureTaken(_transporter.TransportInMemory(sender));
-            ResumeLiveview();
+            //LiveViewqueue.Enqueue(() =>
+            //{
+            //    this.OnPictureTaken(new EosMemoryImageEventArgs(null){Pointer = sender});
+            //});
+            this.OnPictureTaken(new EosMemoryImageEventArgs(null) { Pointer = sender });
         }
         
         private void OnObjectEventDirItemRemoved(IntPtr sender, IntPtr context)
@@ -66,9 +69,13 @@ namespace Canon.Eos.Framework
         
         private void OnObjectEventDirItemRequestTransfer(IntPtr sender)
         {
-            PauseLiveview();
-            this.OnPictureTaken(_transporter.TransportInMemory(sender));
-            ResumeLiveview();
+            //LiveViewqueue.Enqueue(() =>
+            //{
+            //    this.OnPictureTaken(new EosMemoryImageEventArgs(null) { Pointer = sender });
+            //    this.OnPictureTaken(_transporter.TransportInMemory(sender));
+            //    Edsdk.EdsRelease(sender);
+            //});
+            this.OnPictureTaken(new EosMemoryImageEventArgs(null) { Pointer = sender });
         }
         
         private void OnObjectEventDirItemRequestTransferDt(IntPtr sender, IntPtr context)
@@ -97,39 +104,52 @@ namespace Canon.Eos.Framework
                 {
                     case Edsdk.ObjectEvent_VolumeInfoChanged:
                         //this.OnObjectEventVolumeInfoChanged(sender);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_VolumeUpdateItems:
                         this.OnObjectEventVolumeUpdateItems(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_FolderUpdateItems:
                         this.OnObjectEventFolderUpdateItems(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_DirItemCreated:
                         this.OnObjectEventDirItemCreated(sender, context);
                         break;
                     case Edsdk.ObjectEvent_DirItemRemoved:
                         this.OnObjectEventDirItemRemoved(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_DirItemInfoChanged:
                         this.OnObjectEventDirItemInfoChanged(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_DirItemContentChanged:
                         this.OnObjectEventDirItemContentChanged(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_DirItemRequestTransfer:
                         this.OnObjectEventDirItemRequestTransfer(sender);
                         break;
                     case Edsdk.ObjectEvent_DirItemRequestTransferDT:
                         this.OnObjectEventDirItemRequestTransferDt(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_DirItemCancelTransferDT:
                         this.OnObjectEventDirItemCancelTransferDt(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_VolumeAdded:
                         this.OnObjectEventVolumeAdded(sender, context);
+                        Edsdk.EdsRelease(sender);
                         break;
                     case Edsdk.ObjectEvent_VolumeRemoved:
                         this.OnObjectEventVolumeRemoved(sender, context);
+                        Edsdk.EdsRelease(sender);
+                        break;
+                    default:
+                        Edsdk.EdsRelease(sender);
                         break;
                 }
             }
@@ -139,7 +159,7 @@ namespace Canon.Eos.Framework
             }
             finally
             {
-                Edsdk.EdsRelease(sender);
+                
             }
 
             return Edsdk.EDS_ERR_OK;

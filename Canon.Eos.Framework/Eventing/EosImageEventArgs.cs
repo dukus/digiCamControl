@@ -19,5 +19,7 @@ namespace Canon.Eos.Framework.Eventing
         }
 
         public abstract Stream GetStream();
+
+        public IntPtr Pointer { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Canon.Eos.Framework
     {
 
         private object _lock = new object();
-        private Queue<Action> _liveViewqueue = new Queue<Action>();
+        public Queue<Action> LiveViewqueue = new Queue<Action>();
 
         const int WaitTimeoutForNextLiveDownload = 125;
         const int MaximumCopyrightLengthInBytes = 64;
@@ -511,7 +511,7 @@ namespace Canon.Eos.Framework
 
         public void StartRecord()
         {
-            _liveViewqueue.Enqueue(() =>
+            LiveViewqueue.Enqueue(() =>
             {
                 StopLiveView();
                 SavePicturesToCamera();
@@ -524,12 +524,11 @@ namespace Canon.Eos.Framework
 
         public void StopRecord()
         {
-            _liveViewqueue.Enqueue(() =>
+            LiveViewqueue.Enqueue(() =>
             {
                 this.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
                 SetPropertyIntegerData(Edsdk.PropID_Record, (long)0);
                 this.SendCommand(Edsdk.CameraCommand_MovieSelectSwOFF);
-                StartLiveView();
             });
         }
 

@@ -55,11 +55,11 @@ namespace Canon.Eos.Framework
                 //{
                 _liveViewRunning = true;
                 DownloadEvfInternal();
-                if (_liveViewqueue.Count > 0)
+                if (LiveViewqueue.Count > 0)
                 {
                     try
                     {
-                        _liveViewqueue.Dequeue().Invoke();
+                        LiveViewqueue.Dequeue().Invoke();
                     }
                     catch (Exception)
                     {

@@ -40,6 +40,7 @@ using System.Threading;
 using CameraControl.Devices.Classes;
 using Canon.Eos.Framework;
 using Canon.Eos.Framework.Eventing;
+using Canon.Eos.Framework.Internal;
 using Canon.Eos.Framework.Internal.SDK;
 using PortableDeviceLib;
 using PortableDeviceLib.Model;
@@ -501,73 +502,71 @@ namespace CameraControl.Devices.Canon
 
         private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
         {
-            try
-            {
-                Camera.PauseLiveview();
-                Camera.SetProperty(Edsdk.PropID_Evf_Zoom, val);
-                Camera.ResumeLiveview();
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Error set property sP", exception);
-            }
+            Camera.LiveViewqueue.Enqueue(() => Camera.SetProperty(Edsdk.PropID_Evf_Zoom, val));
         }
 
 
         private void Camera_PropertyChanged(object sender, EosPropertyEventArgs e)
         {
-            try
+            if (IsBusy)
+                return;
+            lock (Locker)
             {
-               // Log.Debug("Property changed " + e.PropertyId.ToString("X"));
-                switch (e.PropertyId)
+
+                try
                 {
-                    case Edsdk.PropID_ExposureCompensation:
-                        ExposureCompensation.SetValue((int) Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
-                        break;
-                    case Edsdk.PropID_AEMode:
-                        Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
-                        ReInitFNumber(true);
-                        ReInitShutterSpeed();
-                        break;
-                    case Edsdk.PropID_WhiteBalance:
-                        WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
-                        break;
-                    case Edsdk.PropID_ISOSpeed:
-                        WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_ISOSpeed), false);
-                        break;
-                    case Edsdk.PropID_Tv:
-                        ShutterSpeed.SetValue(Camera.GetProperty(Edsdk.PropID_Tv), false);
-                        break;
-                    case Edsdk.PropID_Av:
-                        FNumber.SetValue((int) Camera.GetProperty(Edsdk.PropID_Av), false);
-                        break;
-                    case Edsdk.PropID_MeteringMode:
-                        ExposureMeteringMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
-                        break;
-                    case Edsdk.PropID_AFMode:
-                        FocusMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_AFMode), false);
-                        break;
-                    case Edsdk.PropID_ImageQuality:
-                        int i = (int) Camera.GetProperty(Edsdk.PropID_ImageQuality);
-                        CompressionSetting.SetValue((int) Camera.ImageQuality.ToBitMask(), false);
-                        break;
-                    case Edsdk.PropID_BatteryLevel:
-                        Battery = (int) Camera.BatteryLevel + 20;
-                        break;
-                    case Edsdk.PropID_FocusInfo:
-                        //ResetShutterButton();
-                        break;
+                    // Log.Debug("Property changed " + e.PropertyId.ToString("X"));
+                    switch (e.PropertyId)
+                    {
+                        case Edsdk.PropID_ExposureCompensation:
+                            ExposureCompensation.SetValue((int) Camera.GetProperty(Edsdk.PropID_ExposureCompensation),
+                                false);
+                            break;
+                        case Edsdk.PropID_AEMode:
+                            Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
+                            ReInitFNumber(true);
+                            ReInitShutterSpeed();
+                            break;
+                        case Edsdk.PropID_WhiteBalance:
+                            WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
+                            break;
+                        case Edsdk.PropID_ISOSpeed:
+                            WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_ISOSpeed), false);
+                            break;
+                        case Edsdk.PropID_Tv:
+                            ShutterSpeed.SetValue(Camera.GetProperty(Edsdk.PropID_Tv), false);
+                            break;
+                        case Edsdk.PropID_Av:
+                            FNumber.SetValue((int) Camera.GetProperty(Edsdk.PropID_Av), false);
+                            break;
+                        case Edsdk.PropID_MeteringMode:
+                            ExposureMeteringMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
+                            break;
+                        case Edsdk.PropID_AFMode:
+                            FocusMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_AFMode), false);
+                            break;
+                        case Edsdk.PropID_ImageQuality:
+                            int i = (int) Camera.GetProperty(Edsdk.PropID_ImageQuality);
+                            CompressionSetting.SetValue((int) Camera.ImageQuality.ToBitMask(), false);
+                            break;
+                        case Edsdk.PropID_BatteryLevel:
+                            Battery = (int) Camera.BatteryLevel + 20;
+                            break;
+                        case Edsdk.PropID_FocusInfo:
+                            //ResetShutterButton();
+                            break;
+                    }
+                    foreach (
+                        PropertyValue<long> advancedProperty in
+                            AdvancedProperties.Where(advancedProperty => advancedProperty.Code == e.PropertyId))
+                    {
+                        advancedProperty.SetValue((long) Camera.GetProperty(advancedProperty.Code), false);
+                    }
                 }
-                foreach (
-                    PropertyValue<long> advancedProperty in
-                        AdvancedProperties.Where(advancedProperty => advancedProperty.Code == e.PropertyId))
+                catch (Exception exception)
                 {
-                    advancedProperty.SetValue((long) Camera.GetProperty(advancedProperty.Code), false);
+                    Log.Error("Error set property " + e.PropertyId.ToString("X"), exception);
                 }
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Error set property " + e.PropertyId.ToString("X"), exception);
             }
         }
 
@@ -587,7 +586,7 @@ namespace CameraControl.Devices.Canon
                                                       //  }),
                                                       CameraDevice = this,
                                                       FileName = "IMG0000.jpg",
-                                                      Handle = e
+                                                      Handle =e.Pointer.ToInt32() != 0?(object) e.Pointer: e
                                                   };
 
                 EosFileImageEventArgs file = e as EosFileImageEventArgs;
@@ -1140,15 +1139,21 @@ namespace CameraControl.Devices.Canon
 
         public override void StartRecordMovie()
         {
-            _recording = true;
-            ResetShutterButton();
-            Camera.StartRecord();
+            lock (Locker)
+            {
+                _recording = true;
+                ResetShutterButton();
+                Camera.StartRecord();
+            }
         }
 
         public override void StopRecordMovie()
         {
-            Camera.StopRecord();
-            _recording = false;
+            lock (Locker)
+            {
+                Camera.StopRecord();
+                _recording = false;
+            }
         }
 
         public override void Focus(int x, int y)
@@ -1156,7 +1161,6 @@ namespace CameraControl.Devices.Canon
             lock (Locker)
             {
                 ResetShutterButton();
-                Camera.PauseLiveview();
                 if (_liveViewImageData != null)
                 {
                     x -= (_liveViewImageData.ZommBounds.Width/2);
@@ -1166,8 +1170,10 @@ namespace CameraControl.Devices.Canon
                     x = 0;
                 if (y < 0)
                     y = 0;
-                Camera.SetPropertyIntegerArrayData(Edsdk.PropID_Evf_ZoomPosition, new uint[] {(uint) x, (uint) y});
-                Camera.ResumeLiveview();
+                Camera.LiveViewqueue.Enqueue(
+                    () =>
+                        Camera.SetPropertyIntegerArrayData(Edsdk.PropID_Evf_ZoomPosition,
+                            new uint[] {(uint) x, (uint) y}));
             }
         }
 
@@ -1270,47 +1276,73 @@ namespace CameraControl.Devices.Canon
 
         public override void TransferFile(object o, string filename)
         {
-            EosFileImageEventArgs file = o as EosFileImageEventArgs;
-            if (file != null)
+            lock (Locker)
             {
-                Log.Debug("File transfer started");
-                try
+                IsBusy = true;
+                if (o is IntPtr)
                 {
-                    if (File.Exists(file.ImageFilePath))
+                    Log.Debug("Pointer file transfer started");
+                    try
                     {
-                        File.Copy(file.ImageFilePath, filename, true);
-                        File.Delete(file.ImageFilePath);
+                        IsBusy = true;
+                        Camera.PauseLiveview();
+                        var transporter = new EosImageTransporter();
+                        transporter.ProgressEvent += (i) => TransferProgress = (uint) i;
+                        EosMemoryImageEventArgs m = transporter.TransportInMemory((IntPtr) o, Camera.Handle);
+                        Edsdk.EdsRelease((IntPtr) o);
+                        using (FileStream fileStream = File.Create(filename, (int) m.ImageData.Length))
+                        {
+                            fileStream.Write(m.ImageData, 0, m.ImageData.Length);
+                        }
+                        Camera.ResumeLiveview();
                     }
-                    else
+                    catch (Exception exception)
                     {
-                        Log.Error("Base file not found " + file.ImageFilePath);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Transfer error ", exception);
-                }
-            }
-            EosMemoryImageEventArgs memory = o as EosMemoryImageEventArgs;
-            if (memory != null)
-            {
-                Log.Debug("Memory file transfer started");
-                try
-                {
-                    using (FileStream fileStream = File.Create(filename, (int) memory.ImageData.Length))
-                    {
-                        fileStream.Write(memory.ImageData, 0, memory.ImageData.Length);
+                        Log.Error("Error transfer memory file", exception);
                     }
                 }
-                catch (Exception exception)
+                EosFileImageEventArgs file = o as EosFileImageEventArgs;
+                if (file != null)
                 {
-                    Log.Error("Error transfer memory file", exception);
+                    Log.Debug("File transfer started");
+                    try
+                    {
+                        if (File.Exists(file.ImageFilePath))
+                        {
+                            File.Copy(file.ImageFilePath, filename, true);
+                            File.Delete(file.ImageFilePath);
+                        }
+                        else
+                        {
+                            Log.Error("Base file not found " + file.ImageFilePath);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Transfer error ", exception);
+                    }
                 }
-            }
-            string fil = o as string;
-            if (fil != null)
-            {
-                GetFile(fil, filename);
+                EosMemoryImageEventArgs memory = o as EosMemoryImageEventArgs;
+                if (memory != null)
+                {
+                    Log.Debug("Memory file transfer started");
+                    try
+                    {
+                        using (FileStream fileStream = File.Create(filename, (int) memory.ImageData.Length))
+                        {
+                            fileStream.Write(memory.ImageData, 0, memory.ImageData.Length);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Error transfer memory file", exception);
+                    }
+                }
+                string fil = o as string;
+                if (fil != null)
+                {
+                    GetFile(fil, filename);
+                }
             }
         }
 

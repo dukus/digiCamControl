@@ -9,6 +9,10 @@ namespace Canon.Eos.Framework.Internal
 {
     public class EosImageTransporter : IEosAssertable
     {
+        public delegate void ProgressEventHandler(int progress);
+        public event ProgressEventHandler ProgressEvent;
+
+
         private static Edsdk.EdsDirectoryItemInfo GetDirectoryItemInfo(IntPtr directoryItem)
         {
             Edsdk.EdsDirectoryItemInfo directoryItemInfo;
@@ -98,12 +102,13 @@ namespace Canon.Eos.Framework.Internal
             return new EosFileImageEventArgs(imagePath);
         }
 
-        public EosImageEventArgs TransportInMemory(IntPtr directoryItem)
+        public EosMemoryImageEventArgs TransportInMemory(IntPtr directoryItem, IntPtr context)
         {
             var directoryItemInfo = GetDirectoryItemInfo(directoryItem);
             var stream = CreateMemoryStream(directoryItemInfo.Size);
             try
             {
+                Edsdk.EdsSetProgressCallback(stream, progress, Edsdk.EdsProgressOption.Periodically, context);
                 Transport(directoryItem, directoryItemInfo.Size, stream, false);           
                 var converter = new EosConverter();
                 return new EosMemoryImageEventArgs(converter.ConvertImageStreamToBytes(stream)){FileName = directoryItemInfo.szFileName};
@@ -112,6 +117,13 @@ namespace Canon.Eos.Framework.Internal
             {
                 DestroyStream(ref stream);
             }
-        }                
+        }
+
+        private uint progress(uint inpercent, IntPtr incontext, ref bool outcancel)
+        {
+            if (ProgressEvent != null)
+                ProgressEvent((int) inpercent);
+            return Edsdk.EDS_ERR_OK;
+        }
     }
 }
