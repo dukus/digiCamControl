@@ -26,6 +26,7 @@ namespace CameraControl.ViewModel
         private bool _captureAll;
         private bool _captureScript;
         private string _scriptFile;
+        private bool _fullSpeed;
         public TimeLapseSettings TimeLapseSettings { get; set; }
 
         public bool StartNow
@@ -346,6 +347,8 @@ namespace CameraControl.ViewModel
                 TimeLapseSettings.Capture = value;
                 RaisePropertyChanged(() => Capture);
                 RaisePropertyChanged(() => ScriptVisibility);
+                RaisePropertyChanged(() => FullSpeed);
+                RaisePropertyChanged(() => NotFullSpeed);
             }
         }
 
@@ -357,6 +360,8 @@ namespace CameraControl.ViewModel
                 TimeLapseSettings.CaptureAll = value;
                 RaisePropertyChanged(() => CaptureAll);
                 RaisePropertyChanged(() => ScriptVisibility);
+                RaisePropertyChanged(() => FullSpeed);
+                RaisePropertyChanged(() => NotFullSpeed);
             }
         }
 
@@ -368,6 +373,8 @@ namespace CameraControl.ViewModel
                 TimeLapseSettings.CaptureScript = value;
                 RaisePropertyChanged(() => CaptureScript);
                 RaisePropertyChanged(() => ScriptVisibility);
+                RaisePropertyChanged(() => FullSpeed);
+                RaisePropertyChanged(() => NotFullSpeed);
             }
         }
 
@@ -422,6 +429,21 @@ namespace CameraControl.ViewModel
             get { return !_isRunning; }
         }
 
+        public bool FullSpeed
+        {
+            get { return _fullSpeed && Capture; }
+            set
+            {
+                _fullSpeed = value;
+                RaisePropertyChanged(() => FullSpeed);
+                RaisePropertyChanged(() => NotFullSpeed);
+            }
+        }
+
+        public bool NotFullSpeed
+        {
+            get { return !FullSpeed; }
+        }
 
         public bool IsRunning
         {
@@ -475,7 +497,8 @@ namespace CameraControl.ViewModel
                     }
                     return "Waiting for shedule";
                 }
-                return string.Format("Timelapse in progress.\nNext capture in {0} seconds\nTotal captured photos {1}",
+                return FullSpeed ? string.Format("Timelapse in progress.\nTotal captured photos {0}", _totalCaptures) 
+                    : string.Format("Timelapse in progress.\nNext capture in {0} seconds\nTotal captured photos {1}",
                     Math.Round(TimeBetweenShots - (DateTime.Now - _lastCaptureTime).TotalSeconds, 0), _totalCaptures);
             }
         }
@@ -538,7 +561,7 @@ namespace CameraControl.ViewModel
                 return;
             if (IsActive)
             {
-                if (Math.Round((DateTime.Now - _lastCaptureTime).TotalSeconds) >= TimeBetweenShots)
+                if (Math.Round((DateTime.Now - _lastCaptureTime).TotalSeconds) >= TimeBetweenShots || (FullSpeed && !ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy))
                 {
                     _lastCaptureTime = DateTime.Now;
                     _totalCaptures++;
@@ -675,6 +698,7 @@ namespace CameraControl.ViewModel
             _lastCaptureTime = DateTime.Now;
             Log.Debug("Timelapse start");
             _totalCaptures = 0;
+            _timer.Interval = FullSpeed ? 100 : 1000;
             _timer.Start();
         }
 

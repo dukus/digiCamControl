@@ -617,5 +617,6 @@ namespace CameraControl.Core.Translation
         public static string MenuLayoutLandscape = "Landscape";
         public static string MenuExportSession = "Export session ...";
         public static string MenuImportSession = "Import session ...";
+        public static string LabelFullSpeed = "Full speed";
     }
 }
