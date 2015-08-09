@@ -100,6 +100,7 @@ namespace CameraControl.Layouts
         private FileItem _selectedItem = null;
         public ZoomAndPanControl ZoomAndPanControl { get; set; }
         public  UIElement content { get; set; }
+        public MediaElement MediaElement { get; set; }
 
         public LayoutViewModel LayoutViewModel { get; set; }
 
@@ -639,6 +640,21 @@ namespace CameraControl.Layouts
         private void ZoomIn(Point contentZoomCenter)
         {
             ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
+        }
+
+        public void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MediaElement.Play();
+        }
+
+        public void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MediaElement.Pause();
+        }
+
+        public void Button_Click_2(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MediaElement.Stop();
         }
     }
 }

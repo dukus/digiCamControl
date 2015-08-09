@@ -45,6 +45,7 @@ namespace CameraControl.Layouts
             ImageLIst = ImageLIstBox;
             ZoomAndPanControl = zoomAndPanControl;
             LayoutViewModel = (LayoutViewModel)ZoomAndPanControl.DataContext;
+            MediaElement = VideoControl;
             content = Image;
             InitServices();
         }

@@ -175,6 +175,15 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool IsMovie
+        {
+            get
+            {
+                var extension = Path.GetExtension(FileName);
+                return extension != null && (!string.IsNullOrEmpty(FileName) && (extension.ToLower() == ".mov" || extension.ToLower() == ".avi" || extension.ToLower() == ".mts"));
+            }
+        }
+
         [XmlAttribute]
         public DateTime FileDate { get; set; }
 

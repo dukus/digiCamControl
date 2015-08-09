@@ -46,6 +46,33 @@
                     </Image.Effect>
                 </Image>
             </zoomAndPan:ZoomAndPanControl>
+            <MediaElement Name="VideoControl" Grid.Column="0" Grid.RowSpan="3" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Play" UnloadedBehavior="Close" >
+            </MediaElement>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
+                    <Rectangle Width="25" Height="25">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_1" >
+                    <Rectangle Width="25" Height="25">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_2">
+                    <Rectangle Width="25" Height="25">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_stop}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+
+            </StackPanel>
         </Grid>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="3" Margin="0,0,0,25" Background="{DynamicResource ControlBackgroundBrush}"/>
 

@@ -82,6 +82,8 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                             <CheckBox IsChecked="{Binding Path=IsChecked}" Margin="3,3,3,5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
+                            <Label Content="RAW" Background="White" Margin="5" Padding="1" Opacity="0.5" FontWeight="Bold" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsRaw, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <Label Content="VIDEO" Background="White" Margin="5" Padding="1" Opacity="0.5" FontWeight="Bold" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         </Grid>
                         <StackPanel Width="75" Margin="5" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel Orientation="Horizontal" ToolTip="Aperture value">

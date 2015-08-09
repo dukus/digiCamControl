@@ -127,9 +127,30 @@ namespace CameraControl.Core.Classes
                 return;
 
             string filename = fileItem.FileName;
+            if (fileItem.IsMovie)
+            {
+                try
+                {
+                    string ffmpeg_exe = Path.Combine(Settings.ApplicationFolder, "ffmpeg.exe");
+                    if (File.Exists(ffmpeg_exe))
+                    {
+                        string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
+                            Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
+                        PhotoUtils.RunAndWait(ffmpeg_exe,  String.Format("-i \"{0}\" -ss 00:00:01.000 -f image2 -vframes 1 \"{1}\"",fileItem.FileName, thumb));
+                        if (File.Exists(thumb))
+                        {
+                            deleteFile = true;
+                            filename = thumb;
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Error get video thumb", exception);
+                }                
+            }
             if (fileItem.IsRaw)
             {
-
                 try
                 {
                     string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");

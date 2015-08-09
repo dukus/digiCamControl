@@ -45,6 +45,7 @@ namespace CameraControl.Layouts
             ImageLIst = ImageLIstBox;
             ZoomAndPanControl = zoomAndPanControl;
             LayoutViewModel = (LayoutViewModel)ZoomAndPanControl.DataContext;
+            MediaElement = VideoControl;
             content = Image;
             InitServices();
             //zoombox.RelativeZoomModifiers.Clear();
@@ -53,7 +54,5 @@ namespace CameraControl.Layouts
             //zoombox.DragModifiers.Add(KeyModifier.None);
             //zoombox.KeepContentInBounds = true;
         }
-
-
     }
 }
