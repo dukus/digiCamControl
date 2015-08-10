@@ -13,7 +13,7 @@ namespace Canon.Eos.Framework.Internal
         public event ProgressEventHandler ProgressEvent;
 
 
-        private static Edsdk.EdsDirectoryItemInfo GetDirectoryItemInfo(IntPtr directoryItem)
+        public static Edsdk.EdsDirectoryItemInfo GetDirectoryItemInfo(IntPtr directoryItem)
         {
             Edsdk.EdsDirectoryItemInfo directoryItemInfo;
             Util.Assert(Edsdk.EdsGetDirectoryItemInfo(directoryItem, out directoryItemInfo), "Failed to get directory item info.");

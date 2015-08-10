@@ -229,6 +229,11 @@ namespace CameraControl.Layouts
 
                 if (bitmap != null)
                 {
+                    if (ServiceProvider.Settings.SelectedBitmap.FileItem.IsMovie)
+                    {
+                        ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                        return;
+                    }
                     int dw = (int)(ZoomAndPanControl.ContentViewportWidthRation * bitmap.PixelWidth);
                     int dh = (int)(ZoomAndPanControl.ContentViewportHeightRation * bitmap.PixelHeight);
                     int fw = (int)(ZoomAndPanControl.ContentZoomFocusXRation * bitmap.PixelWidth);
@@ -306,10 +311,7 @@ namespace CameraControl.Layouts
             {
                 ZoomAndPanControl.AnimatedScaleToFit();
             }
-            else
-            {
-                GeneratePreview();
-            }
+            GeneratePreview();
         }
 
         public void LoadFullRes()

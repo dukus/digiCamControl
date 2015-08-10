@@ -29,6 +29,9 @@
                 <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
             </Image.Effect>
         </Image>
+        <MediaElement Name="VideoControl" Grid.Column="0" Grid.RowSpan="3" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Play" UnloadedBehavior="Close" >
+        </MediaElement>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
             <ToggleButton  Height="60" Name="but_unlike" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
                 <Rectangle Width="30" Height="30">

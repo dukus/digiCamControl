@@ -11,8 +11,10 @@ namespace Canon.Eos.Framework
     {
         public readonly EosImageTransporter _transporter = new EosImageTransporter();
 
-        private void OnPictureTaken(EosImageEventArgs eventArgs)
+        private void OnPictureTaken(EosMemoryImageEventArgs eventArgs)
         {
+            var directoryItemInfo = EosImageTransporter.GetDirectoryItemInfo(eventArgs.Pointer);
+            eventArgs.FileName = directoryItemInfo.szFileName;
             if (this.PictureTaken != null)
                 Task.Factory.StartNew(() => this.PictureTaken(this, eventArgs));
         }
