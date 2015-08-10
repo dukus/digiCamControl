@@ -41,6 +41,7 @@
   <string name="[S]_SINGLE_AF_SERVO">[S] Single AF servo</string>
   <string name="[M]_MANUAL_FOCUS">[M] Mise au point manuelle</string>
   <string name="KELVIN">Kelvin</string>
+  <string name="WHITE_FLUORESCENT_LAMP">Lampe fluorescente blanche</string>
   <string name="ADOBE_RGB">Adobe RGB</string>
   <string name="COLOR_SPACE">Espace colorimétrique</string>
   <string name="14_BIT_RECORDING">Enregistrement 14 bits</string>
@@ -105,7 +106,7 @@
   <string name="ButtonStartTimeLapse">Démarrer le laps de temps</string>
   <string name="ButtonStopTimeLapse">Arrêter le laps de temps</string>
   <string name="ButtonCreateMovie">Créer une vidéo</string>
-  <string name="ButtonLocateLogFile">Localiser le fichier Log</string>
+  <string name="ButtonLocateLogFile">Localiser le fichier journal</string>
   <string name="LabelInterfaceLanguage">Langue de l\'interface</string>
   <string name="LabelDisableDriver">Désactiver les drivers natifs (non recommandé)</string>
   <string name="LabelTheme">Thème :</string>
@@ -148,11 +149,13 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelUseOriginal">Utiliser le nom de fichier original défini par le boîtier</string>
   <string name="LabelUseOriginalToolTip">Cette option ne fonctionne pas avec le pilote WIA</string>
   <string name="LabelDontDownloadPhotos">Ne pas télécharger les photo sur l\'ordinateur</string>
+  <string name="LabelAlowFolderChange">Autoriser le changement de répertoire en utilisant le navigateur d\'images </string>
   <string name="LabelTags">Étiquettes</string>
   <string name="LabelManualFocus">Mise au point manuelle</string>
   <string name="LabelGrid">Grille</string>
   <string name="LabelLvZoomRation">Facteur de zoom Live View</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
+  <string name="LabelNoOfPhots">Nbre. de photos</string>
   <string name="LabelFocusStep">Incrément de mise au point</string>
   <string name="LabelLuminosity">Luminosité</string>
   <string name="LabelExposureBracketing">Bracketing d\'exposition</string>
@@ -177,6 +180,7 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelNumberOfPhotos">Nombre de photos</string>
   <string name="LabelDontAutofocusOnEveryCapture">Pas d\'autofocus à chaque prise de vue</string>
   <string name="LabelCaptureInterval">Intervalle des prises de vues (HH:MM:SS)</string>
+  <string name="LabelMovieLenght">Durée du film (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Ajustements vidéo</string>
   <string name="LabelVideoFormat">Format vidéo</string>
   <string name="LabelOutputFile">Fichier de sortie</string>
@@ -199,10 +203,14 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelVideoCodecProblem">Problème de codec vidéo</string>
   <string name="MsgPhotoTransferBegin">Début du transfert des photos</string>
   <string name="MsgPhotoTransferDone">Transfert des photos terminé</string>
+  <string name="MsgPhotoTransferError">Erreur de transfert !\nMessage :{0}</string>
   <string name="MsgBulbModeNotSupported">Le mode Bulb n\'est pas supporté !</string>
   <string name="MsgApplicationUpToDate">Votre application est à jour !</string>
   <string name="MsgUseSessionEditorTags">Utiliser l\'éditeur de session pour définir des étiquettes !</string>
+  <string name="MsgLastSessionCantBeDeleted">La dernière session ne peut être supprimée</string>
   <string name="MsgStopTimeLapse">Le laps de temps n\'est pas terminé ! Voulez vous l\'arrêter ?</string>
+  <string name="MsgInstallXvidCodec">Le codec Xvid n\'est pas installé !\nSouhaitez-vous le télécharger et l\'installer ?</string>
+  <string name="MsgDeleteSessionQuestion">Souhaitez-vous continuer à supprimer la session {0} ?\nAucun fichier ne sera supprimé !</string>
   <string name="MsgBracketingDone">Bracketing terminé</string>
   <string name="MsgActionInProgress">Action en cours {0}/{1}</string>
   <string name="MenuFile">_Fichier</string>
@@ -280,6 +288,7 @@ $Tag4 - Tag sélectionné 4</string>
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Télécharger les photos</string>
   <string name="LabelDeleteFilesAfterTransfer">Supprimer les images à la fin du transfert</string>
+  <string name="LabelAskForDelete">Les fichiers transférés seront supprimés.\nSouhaitez-vous continuer ?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Erreur de réglage de la mise au point</string>
   <string name="LabelErrorUnableFocus">Incapable de faire la mise au point</string>
@@ -362,9 +371,11 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelDestinationCardError">La destination d\'enregistrement est la carte</string>
   <string name="LabelLiveViewError">Erreur Live view</string>
   <!--07/05/2013-->
+  <string name="LabelDevices">Appareils</string>
   <string name="LabelDriver">Driver</string>
   <string name="LabelAstronomy">Astronomie</string>
   <string name="LabelEnable">Activé</string>
+  <string name="LabelNoExternalDeviceSelected">Aucun appareil externe n\'est sélectionné</string>
   <string name="LabelScript">Script</string>
   <string name="LabelStartScript">Démarrer le script</string>
   <string name="LabelStopScript">Arrêter le script</string>
@@ -384,6 +395,7 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelFileName">Nom du fichier</string>
   <string name="LabelSet">Paramétrer</string>
   <string name="LabelTagSelector">Sélecteur de tag</string>
+  <string name="LabelWriteComments">Écrire les commentaires dans le fichier d\'image téléchargé.</string>
   <string name="LabelPHDGuiding">Guidage PHD</string>
   <string name="LabelAutomaticallyGuiding">Guidage PHD automatique après prise de vue</string>
   <string name="LabelAutoRotate">Rotation automatique</string>
@@ -392,16 +404,18 @@ $Tag4 - Tag sélectionné 4</string>
   <!--17/11/2013-->
   <string name="LabelAddFakeCamera">Ajouter une fausse caméra</string>
   <string name="LabelBarcode">Code barre</string>
-  <string name="LabelSendTheLogFile">Envoyer le fichier log</string>
-  <string name="LabelAskSendLogFile">Souhaitez-vous envoyer le fichier log aux développeurs ?</string>
+  <string name="LabelSendTheLogFile">Envoyer le fichier journal</string>
+  <string name="LabelAskSendLogFile">Souhaitez-vous envoyer le fichier journal aux développeurs ?</string>
   <string name="LabelSend">Envoyer</string>
   <string name="LabelLogMessage">Message aux développeurs de digiCamControl</string>
-  <string name="LabelLogText">Le fichier log sera envoyé à l\'équipe de développement de digiCamControl pour améliorer la stabilité de l\'application.</string>
+  <string name="LabelLogText">Le fichier journal sera envoyé à l\'équipe de développement de digiCamControl pour améliorer la stabilité de l\'application.</string>
   <string name="LabelFullscreen">Plein écran</string>
   <string name="LabelSelection">Sélection</string>
   <string name="LabelSelectAll">Sélectionner tout</string>
   <!--19/01/2014-->
+  <string name="LabelChangelog">Journal des modifications</string>
   <!--27/02/2014-->
+  <string name="LabelAllowOverWrite">Autoriser l\'écrasement du fichier</string>
   <string name="LabelSettingsLiveView">Mise au point Live View</string>
   <!--17.05.2014-->
   <!--//20/08/2014-->

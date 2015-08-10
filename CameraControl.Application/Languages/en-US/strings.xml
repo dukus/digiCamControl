@@ -585,4 +585,32 @@
 	<string name="LabelShowInExplorer">Show in explorer</string>
 	<string name="LabelOpenInExternalViewer">Open in external viewer</string>
 	<string name="LabelRestoreFromBackup">Restore from backup copy</string>
+	       <!--  // 11/03/2015 -->
+	<string name="LabelAllowWebCommands">Allow interaction via webserver</string>
+	<string name="LabelCurrentMotion">Detected motion</string>
+	<string name="LabelStartupScript">Execute script on startup</string>
+	<string name="LabelPublicWebserver">Allow public access</string>
+	<string name="LabelLoadCanonTransferMode">Load Canon transfer mode</string>
+	<string name="LabelFolderSelector">Folder selector</string>
+	<string name="LabelReloadOnFolderChange">Reload files on folder change</string>
+	<string name="MenuSession">Session</string>
+	<string name="MenuCamera">Camera</string>
+	<string name="MenuThumbnailSize">Thumbnail Size</string>
+	<string name="MenuInver">Invert selection</string>
+	<string name="MenuResetDevice">Reset device</string>
+	<string name="MenuSessionAdd">Add new session ...</string>
+	<string name="MenuSessionEdit">Edit current session ...</string>
+	<string name="MenuSessionDel">Remove current session</string>
+	<string name="MenuIncrementSeries">Increment series</string>
+	<string name="MenuWindows">Windows</string>
+	<string name="MenuOnlineManual">Online manual</string>
+	<string name="MenuPlugins">Plugins</string>
+	<string name="LabelAutorotate">Auto rotate image</string>
+	<string name="MenuCameraProperty">Camera property</string>
+	<string name="LabelShowThumbInfo">Show info next to thubnail</string>
+	<string name="MenuLayoutPortrait">Portrait</string>
+	<string name="MenuLayoutLandscape">Landscape</string>
+	<string name="MenuExportSession">Export session ...</string>
+	<string name="MenuImportSession">Import session ...</string>
+	<string name="LabelFullSpeed">Full speed</string>
 </resources>

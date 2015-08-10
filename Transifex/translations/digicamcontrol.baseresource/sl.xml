@@ -1,77 +1,291 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <!--Property values-->
-  <string name="AUTO">Samosejno</string>
+  <string name="BURST_NUMBER">Število zaporednih posnetkov</string>
+  <string name="STILL_CAPTURE_MODE">Način zajema fotografij</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Zaporedni posnetki (zaporedno fotografiranje)</string>
+  <string name="AUTO_ISO">Avtomatska nastavitev svetlobne občutljivosti ISO</string>
+  <string name="ON">Vklop</string>
+  <string name="OFF">Izklop</string>
+  <string name="FLASH">Bliskavica</string>
+  <string name="NORMAL_SYNCHRONIZATION">Običajna sinhronizacija</string>
+  <string name="LONG_EXP._NR">Zmanjšanje šuma dolge osvetlitve</string>
+  <string name="HIGH_ISO_NR">Zmanjšanje šuma visoke svetlobne občutljivosti ISO</string>
+  <string name="NORMAL">Običajno</string>
+  <string name="EXPOSURE_DELAY_MODE">Način zakasnitve osvetlitve</string>
+  <string name="LOCK">Zaklepanje</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Posamično proženje (proženje posamičnih posnetkov)</string>
+  <string name="SELF_TIMER">Samosprožilec</string>
+  <string name="QUICK_RESPONSE_REMOTE">Daljinec - neposredno proženje</string>
+  <string name="2S_DELAYED_REMOTE">Daljinec - proženje z zamikom 2 s</string>
+  <string name="QUIET_SHOOTING">Tiho proženje</string>
+  <string name="FLASH_PROHIBITED">Bliskavica ni dovoljena</string>
+  <string name="RED_EYE_REDUCTION">Zmanjšanje pojava rdečih oči</string>
+  <string name="SLOW_SYNCHRONIZATION">Sinhronizacija bliskavice s prvo zaslonko</string>
+  <string name="REAR_SYNCHRONIZATION">Sinhronizacija bliskavice z drugo zaslonko</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Zmanjšanje pojava rdečih oči pri prvi zaslonki</string>
+  <string name="NOT_PERFORMED">Ni izvedeno</string>
+  <string name="LOW">Nizko</string>
+  <string name="HIGH">Visoko</string>
+  <string name="CENTER_WEIGHTED_METERING">Merjenje s centralnim področjem</string>
+  <string name="MULTI_PATTERN_METERING">Vzorčno merjenje</string>
+  <string name="SPOT_METERING">Točkovno merjenje</string>
+  <string name="AUTO">Samodejno</string>
   <string name="DAYLIGHT">Dnevna svetloba</string>
+  <string name="FLUORESCENT_">Fluorescenčna svetloba</string>
+  <string name="INCANDESCENT">Svetloba žarnic z žarilno nitko</string>
   <string name="CLOUDY">Oblačno</string>
-  <string name="SHADE">Baterija</string>
+  <string name="SHADE">Senca</string>
+  <string name="CUSTOM">Po meri</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] Način avtomatskega preklopa AF servo</string>
+  <string name="[S]_SINGLE_AF_SERVO">[S] AF servo za posamični posnetek</string>
+  <string name="[M]_MANUAL_FOCUS">[M] Ročno ostrenje</string>
+  <string name="KELVIN">Kelvin</string>
+  <string name="APPLICATION_MODE">Način aplikacije</string>
+  <string name="WHITE_FLUORESCENT_LAMP">Bela fluorescenčna svetilka</string>
+  <string name="FLUORESCENT_LIGHT_TYPE">Tip fluorescenčne svetlobe</string>
+  <string name="ADOBE_RGB">Adobe RGB</string>
+  <string name="COLOR_SPACE">Barvni sistem</string>
+  <string name="14_BIT_RECORDING">14-bitno snemanje</string>
+  <string name="RAW_RECORDING_BIT_MODE">Bitna dolžina RAW zapisa</string>
+  <string name="NEUTRAL">Nevtralno</string>
+  <string name="PICTURE_CONTROL">Nastavitve fotografije</string>
+  <string name="LOSSLESS_COMPRESSED_RAW">RAW kompresija brez izgube podatkov</string>
+  <string name="RAW_COMPRESSION">RAW kompresija</string>
+  <string name="MF__HARD_">MF (hard)</string>
   <!--End Property values-->
   <string name="Mode">Način</string>
+  <string name="Iso">_ISO svetlobna občutljivost</string>
+  <string name="ShutterSpeed">_Hitrost zaklopa</string>
+  <string name="Aperture">_Zaslonka</string>
+  <string name="WhiteBalance">_Nastavitev beline</string>
+  <string name="ExposureComp">_Svetlobna kompenzacija</string>
+  <string name="Compression">_Kompresija</string>
+  <string name="MeteringMode">_Način meritve</string>
+  <string name="FocusMode">_Način ostrenja</string>
   <string name="Battery">Baterija</string>
-  <string name="SDRamToolTip">Zajemi slike direktno na  računalnik brez uporabe spominske kartice</string>
+  <string name="SDRam">SD_Ram</string>
+  <string name="SDRamToolTip">Zajem slik neposredno na računalnik brez uporabe spominske kartice</string>
+  <string name="CapturePhotoToolTip">Snemanje fotorgafij</string>
+  <string name="CapturePhotoNoAfToolTip">Snemanje fotorgafij brez samodejnega ostrenja</string>
+  <string name="BraketingToolTip">Kadriranje</string>
   <string name="SettingsToolTip">Nastavitve</string>
+  <string name="TimeLapseToolTip">Intervalno fotografiranje</string>
+  <string name="FullscreenToolTip">FullScreen način</string>
+  <string name="LiveViewToolTip">Pogled LiveView</string>
+  <string name="BrowseSessionsToolTip">Brskalne seje</string>
+  <string name="SelectTagsToolTip">Izbira značk</string>
+  <string name="AboutToolTip">O </string>
   <string name="Session">Seja</string>
   <string name="SessionAdd">Dodaj</string>
   <string name="SessionEdit">Uredi</string>
   <string name="SessionDel">Izbriši</string>
+  <string name="MainWindowTitle">NCC - Prevod</string>
   <string name="SettingsWindowTitle">Nastavitve</string>
   <string name="SessionWindowTitle">Seja [Dodaj/Uredi]</string>
+  <string name="LiveViewWindowTitle">Pogled v LiveView
+</string>
+  <string name="PresetEditWindowTitle">Urejanje prednastavitev</string>
+  <string name="BraketingWindowTitle">Kadriranje</string>
+  <string name="EditTagWindowTitle">Značke[Dodaj/Uredi]</string>
+  <string name="MultipleCameraWindowTitle">Podpora za snemanje z več kamerami</string>
+  <string name="SavePresetWindowTitle">Shrani prednastavitev</string>
+  <string name="TimeLapseWindowTitle">Intervalno fotografiranje</string>
+  <string name="ButtonOk">Shrani</string>
   <string name="ButtonCancel">Prekliči</string>
   <string name="ButtonAdd">Dodaj</string>
   <string name="ButtonDelete">Izbriši</string>
   <string name="ButtonEdit">Uredi</string>
-  <string name="ButtonStart">Predvajaj</string>
+  <string name="ButtonAutoFocus">_Avtomatsko ostrenje</string>
+  <string name="ButtonCapture">_Zajem</string>
+  <string name="ButtonRecordMovie">Snemanje filma</string>
+  <string name="ButtonFreezeImage">Zamrzni sliko</string>
+  <string name="ButtonStart">Začni</string>
   <string name="ButtonPreview">Predogled</string>
   <string name="ButtonStop">Ustavi</string>
+  <string name="ButtonDeletePreset">Izbriši prednastavitev</string>
+  <string name="ButtonDeleteProperty">Izbriši lastnost</string>
   <string name="ButtonClose">Zapri</string>
   <string name="ButtonSave">Shrani</string>
+  <string name="ButtonCapturePhotos">Zajem fotografije</string>
+  <string name="ButtonStartTimeLapse">Začni intervalno snemanje</string>
+  <string name="ButtonStopTimeLapse">Ustavi intervalno snemanje</string>
+  <string name="ButtonCreateMovie">Izdelaj film</string>
+  <string name="ButtonLocateLogFile">Poišči log datoteko</string>
+  <string name="LabelInterfaceLanguage">Jezik vmesnika</string>
+  <string name="LabelDisableDriver">Izklop lastnih gonilnikov (ni priporočeno)</string>
+  <string name="LabelTheme">Teme :</string>
   <string name="LabelGeneral">Splošno</string>
   <string name="LabelPreview">Predogled</string>
+  <string name="LabelPlaySound">Zaigraj zvok po zajemu fotografije</string>
+  <string name="LabelAutoPreview">Samodejni predogled</string>
+  <string name="LabelPreviewAfterCapture">Predogl. fot. po zajemu iz FullScreen</string>
+  <string name="LabelPreviewTime">Čas predogleda v sekundah:</string>
+  <string name="LabelPreviewInLIveView">Predogl. fot. po zajemu iz LiveView</string>
+  <string name="LabelLIveViewImageFreeze">Zamrznitev LiveView v sekundah</string>
+  <string name="LabelRotateImage">Zavrti fotografijo :</string>
+  <string name="LabelDontLoadThumbs">Ne nalagaj predsličic</string>
+  <string name="LabelFullscrenBack">Ozadje FullScreen okna</string>
+  <string name="LabelTriggers">Sprožilci</string>
+  <string name="LabelUseKeybordToTrigger">Uporabi tipkovnico kot sprožilec</string>
   <string name="LabelWebserver">Spletni strežnik</string>
   <string name="LabelUseWebserver">Uporabi spletni strežnik</string>
+  <string name="LabelFocusAndLiveview">Pogled LiveView</string>
+  <string name="LabelSmallFocusSstep">Kratek korak ostrenja</string>
+  <string name="LabelMediumFocusStep">Srednji korak ostrenja</string>
+  <string name="LabelLargFocusStep">Dolg korak ostrenja</string>
+  <string name="ReStartToolTip">Za uveljavitev sprememb, je potrebno ponoven zagon programa.</string>
+  <string name="LabelSessonName">Ime seje:</string>
   <string name="LabelFolder">Mapa:</string>
   <string name="LabelFileNameTemplate">Predloga za ime datoteke:</string>
+  <string name="LabelFileNameTemplateToolTip">$N - Ime seje 
+$C - Števec 
+$E - Svetlobna kompenzacija 
+$X - Ime naprave 
+$D - Trenutni datum 
+$SUTime - Unix časovni odtis
+$Type - Tip datoteke (Raw|Jpg)
+$B - Bar koda
+$Tag1 - Izbrana značka 1 
+$Tag1 - Izbrana značka 2 
+$Tag1 - Izbrana značka 3 
+$Tag1 - Izbrana značka 4 </string>
   <string name="LabelCounter">Števec</string>
   <string name="LabelUseOriginal">Uporabi originalno ime, ki ga poda fotoaparat</string>
   <string name="LabelUseOriginalToolTip">Ta možnost ni na voljo ob uporabi WIA gonilnika</string>
-  <string name="LabelDontDownloadPhotos">Ne prenesi slik na računalnik</string>
+  <string name="LabelDontDownloadPhotos">Ne prenesi fotografij na računalnik</string>
+  <string name="LabelAlowFolderChange">Dovoli spremembo mape s pregledovalnikom fotografij</string>
+  <string name="LabelTags">Značke</string>
+  <string name="LabelManualFocus">Ročno ostrenje</string>
+  <string name="LabelGrid">Mreža</string>
+  <string name="LabelLvZoomRation">razmerje Lv ostrenja</string>
+  <string name="LabelFocusStacking">Focus Stacking</string>
+  <string name="LabelNoOfPhots">Število fotografij</string>
+  <string name="LabelFocusStep">Korak ostrenja</string>
+  <string name="LabelLuminosity">Svetilnost</string>
+  <string name="LabelExposureBracketing">Kadriranje s spreminjanjem časa osvetlitve</string>
+  <string name="LabelExposureBracketingToolTip">Za zaneslivejše rezultate preklopi fotoaparat v način prioritete zaslonke \"A\", izklopi nastavitev avtomatske svetlobne občutljivosti ISO in izklopi nastavitev avtomatske nastavitve beline.</string>
+  <string name="LabelManualExposureBracketing">Ročno kadriranje s spreminjanjem časa osvetlitve</string>
+  <string name="LabelManualExposureBracketingToolTip">Za zaneslivejše rezultate preklopi fotoaparat v ročni način (M), izklopi nastavitev avtomatske svetlobne občutljivosti ISO in izklopi nastavitev avtomatske nastavitve beline.</string>
+  <string name="LabelPresetBracketing">Prednastavljeno kadriranje</string>
+  <string name="LabelTagDisplayValue">Prikaz vrednosti</string>
+  <string name="LabelTagValue">Vrednost</string>
+  <string name="LabelTagIncludeInGroup1">Vključi v skupino 1</string>
+  <string name="LabelTagIncludeInGroup2">Vključi v skupino 2</string>
+  <string name="LabelTagIncludeInGroup3">Vključi v skupino 3</string>
+  <string name="LabelTagIncludeInGroup4">Vključi v skupino 4</string>
   <string name="LabelDelay">Zakasnitev (ms)</string>
-  <string name="LabelConnectedCameras">Povezani fotoaparati</string>
+  <string name="LabelNumberOfCaptures">Število posnetkov</string>
+  <string name="LabelWaitTime">Čakalni čas (sekunde)</string>
+  <string name="LabelDisableAutofocus">Izklop samodejnega ostrenja</string>
+  <string name="LabelConnectedCameras">Priklopljene kamere</string>
+  <string name="LabelPresetName">Ime prednastavitve:</string>
+  <string name="LabelTimeLapse">Intervalno fotografiranje</string>
+  <string name="LabelSecondsBetweenShots">Seknude med posnetki</string>
   <string name="LabelNumberOfPhotos">Število posnetkov</string>
+  <string name="LabelDontAutofocusOnEveryCapture">Ne uporabi samodejnega ostrenja pri vsakem snemanju</string>
+  <string name="LabelCaptureInterval">Interval zajemanja (UU:MM:SS)</string>
+  <string name="LabelMovieLenght">Dolžina filma (UU:MM:SS)</string>
+  <string name="LabelMovieSettings">Nastavitve filma</string>
+  <string name="LabelVideoFormat">Video format</string>
+  <string name="LabelOutputFile">Izhodna datoteka</string>
   <string name="LabelFps">Posnetkov na sekundo</string>
-  <string name="MenuConnectedCameras">Povezani fotoaparati</string>
+  <string name="LabelFillImage">Zapolnitev formata</string>
+  <string name="LabelCreateMovie">Izdelaj film</string>
+  <string name="LabelAddVirtualMovingToVideo">Filmu dodaj navidezno gibanje</string>
+  <string name="LabelMovingSurface">Površina gibanja (%):</string>
+  <string name="LabelMovingDirection">Smer gibanja:</string>
+  <string name="LabelMovingDirectionLeftToRight">Od leve proti desni</string>
+  <string name="LabelMovingDirectionRightToLeft">Od desne proti levi</string>
+  <string name="LabelMovingDirectionTopToBottom">Od zgoraj navzdol</string>
+  <string name="LabelMovingDirectionBottomToTop">Od spodaj navzgor</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">od levo-zgoraj proti desno-spodaj</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">od spodaj-desno proti levo-zgoraj</string>
+  <string name="LabelImageAlignment">Poravnava posnetka:</string>
+  <string name="LabelImageAlignmentLeftTop">levo/zgoraj</string>
+  <string name="LabelImageAlignmentCenter">Center</string>
+  <string name="LabelImageAlignmentRightBottom">desno/spodaj</string>
+  <string name="LabelVideoCodecProblem">Težava z video kodekom</string>
+  <string name="MsgPhotoTransferBegin">Prenos fotografij začet</string>
+  <string name="MsgPhotoTransferDone">Prenos fotografij končan</string>
+  <string name="MsgPhotoTransferError">Napaka pri prenosu !\nMessage :{0}</string>
+  <string name="MsgBulbModeNotSupported">Bulb način ni podprt!</string>
+  <string name="MsgApplicationUpToDate">Vaš program je posodobljen!</string>
+  <string name="MsgUseSessionEditorTags">Uporabi urejevalnik sej za opredelitev značk !</string>
+  <string name="MsgLastSessionCantBeDeleted">Zadnje seje ni mogoče pobrisati</string>
+  <string name="MsgStopTimeLapse">Intervalno snemanje ni končano! Ali ga želite prekiniti?</string>
+  <string name="MsgInstallXvidCodec">Xvid kodek ni nameščen!\nAli ga želite prenesti in namestiti?</string>
+  <string name="MsgDeleteSessionQuestion">Želite pobrisati sejo {0} ?\nDatoteke ne bodo pobrisane !</string>
+  <string name="MsgBracketingDone">Kadriranje zaključeno</string>
+  <string name="MsgActionInProgress">Akcija v teku {0}/{1}</string>
+  <string name="MenuFile">_Datoteka</string>
+  <string name="MenuReScan">Osveži povezave s priključenimi kamerami</string>
+  <string name="MenuConnectedCameras">Priklopljene kamere</string>
   <string name="MenuExit">Izhod</string>
   <string name="MenuView">_Pogled</string>
-  <string name="MenuSelectedCameraProperty">Izbrana lastnost fotoaparata</string>
+  <string name="MenuMultipleCamera">Upravljanje z več kamerami</string>
+  <string name="MenuSelectedCameraProperty">Izbrana lastnost kamere</string>
+  <string name="MenuPresets">Prednastavitve</string>
   <string name="MenuPresetsLoad">Naloži</string>
   <string name="MenuPresetsSave">Shrani</string>
   <string name="MenuPresetsEdit">Uredi</string>
   <string name="MenuHelp">_Pomoč</string>
   <string name="MenuHomePage">Domača stran</string>
-  <string name="MenuCheckForUpdate">Preveri za posodobitve</string>
+  <string name="MenuCheckForUpdate">Preveri posodobitve</string>
   <string name="MenuDonate">Doniraj</string>
+  <string name="MenuAbout">O</string>
+  <string name="MenuLayout">Razpored</string>
+  <string name="MenuLayoutNormal">Običajno</string>
+  <string name="MenuLayoutGridRight">Mreža desno</string>
+  <string name="MenuLayoutGrid">Mreža </string>
   <string name="MenuProperties">Lastnosti</string>
+  <string name="MenuUseSelectedCameraPreset">Uporabi prednastavitve izbrane kamere</string>
   <!--15/10/2012-->
+  <string name="LabelExternalViewerPath">Zunanji pregledovalnik iz menuja</string>
+  <string name="LabelStayOnTop">Vedno na vrhu</string>
   <!--22/10/2012-->
+  <string name="LabelDisplay">Prikaži</string>
+  <string name="LabelMotionDetection">Zaznavanje gibanja</string>
+  <string name="LabelActivateMotionDetection">Vklopi zaznavanje gibanja</string>
+  <string name="LabelCaptureWhenMove">Vklop zajema pri zaznavi gibanja</string>
+  <string name="LabelThreshold">Prag zaznavanja (%)</string>
+  <string name="LabelWaitMoion">Časovni zamik (sekunde)</string>
   <!--25/10/2012-->
+  <string name="LabelAutofocusBeforeCapture">Samodejno ostrenje pred zajemom</string>
   <!--26/10/2012-->
+  <string name="LabelOpacity">Prosojnost</string>
   <!--29/10/2012-->
+  <string name="LabelMotionDetectionType">Tip zaznave gibanja</string>
+  <string name="LabelTwoFramesDifferenceDetector">Two Frames Difference Detector</string>
+  <string name="LabelSimpleBackgroundModelingDetector">Simple Background Modelling Detector</string>
+  <string name="LabelSmallestBlockSize">Smallest block size</string>
   <string name="ButtonHelp">Pomoč</string>
   <!--31/10/2012-->
   <string name="LabelMenu">Meni</string>
   <!--03/11/2012-->
   <string name="MenuForum">Forum</string>
   <!--07/11/2012-->
+  <string name="ButtonGetRawCodec">Pridobi RAW kodek</string>
   <!--08/11/2012-->
+  <string name="LabelErrorRecordMovie">Napaka pri začetku snemanja filma</string>
   <string name="LabelNoCardInserted">Spominska kartica ni vstavljena</string>
   <string name="LabelCardError">Napaka spominske kartice</string>
   <string name="LabelCardNotFormatted">Spominska kartica ni formatirana</string>
   <string name="LabelNoFreeAreaInCard">Spominska kartica je polna</string>
+  <string name="LabelCardBufferNotEmpty">V medpomnilniku so podatki, ki so namenjeni snemanju na spominsko kartico.</string>
+  <string name="LabelPcBufferNotEmpty">V medpomnilniku so podatki, ki so namenjeni snemanju na računalnik.</string>
+  <string name="LabelBufferNotEmpty">V medpomnilniku so filmski podatki.</string>
+  <string name="LabelRecordInProgres">Med snemanjem filmske datoteke.</string>
   <string name="LabelCardProtected">Spominska kartica je zaklenjena</string>
-  <string name="ButtonResetSettings">Ponastavi nastavitve</string>
+  <string name="LabelDuringEnlargedDisplayLiveView">Med povečanim LiveView</string>
+  <string name="LabelNotInApplicationMode">Kamera ni v programskem načinu.</string>
+  <string name="ButtonResetSettings">Ponastavi vse</string>
   <!--14/11/2012-->
-  <string name="LabelUseExternalViewer">Spominska kartica ni vstavljena</string>
+  <string name="LabelUseExternalViewer">Uporabi zunanji pregledovalnik</string>
+  <string name="LabelExternalPreViewerPath">Pot do zunanjega pregledovalnika</string>
+  <string name="LabelExternalPreViewerArgs">Parametri zunanjega pregledovalnika</string>
   <!--18/11/2012-->
+  <string name="LabelControl">Upravljanje</string>
   <!--20/11/2012-->
   <string name="LabelExport">Izvozi</string>
   <!--21/11/2012-->
@@ -79,32 +293,48 @@
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Prenesi posnetke</string>
   <string name="LabelDeleteFilesAfterTransfer">Pobriši  datoteke po prenosu</string>
+  <string name="LabelAskForDelete">Prenesene datoteke bodo izbrisane.\nŽeliš nadaljevati?</string>
   <!--26/11/2012-->
+  <string name="LabelErrorSetFocusPos">Napaka pri pozicioniranju ostrenja.</string>
+  <string name="LabelErrorUnableFocus">Nezmožnost ostrenja.</string>
   <!--28/11/2012-->
+  <string name="LabelErrorLoadingFileList">Napaka pri nalaganju spiska datotek.</string>
   <!--30/11/2012-->
   <string name="LabelTransfer">Prenesi</string>
   <string name="LabelTransferItem1">1.Shrani samo na računalnik</string>
   <string name="LabelTransferItem2">2.Shrani samo na fotoaparat</string>
   <string name="LabelTransferItem3">3.Shrani na računalnik in fotoaparat</string>
   <!--05/12/2012-->
+  <string name="MsgDisabledDrivers">Lastni gonilniki so izklopljeni! Jih želiš vklopiti?</string>
   <!--14/12/2012-->
+  <string name="LabelShowFocusPoints">Prikaži točko ostrenja</string>
   <string name="LabelMainWindow">Glavno okno</string>
   <string name="LabelSelect">Izberi</string>
   <string name="TimeSelectWindowTitle">Izberi okno</string>
   <!--16/12/2012-->
+  <string name="LabelRotateNone">Nič od tega</string>
   <string name="LabelRotate90">Zavrti za 90</string>
   <string name="LabelRotate180">Zavrti za 180</string>
   <string name="LabelRotate270">Zavrti za 270</string>
+  <string name="LabelLowMemoryUsage">Majhna poraba spomina</string>
   <!--04/01/2013-->
+  <string name="LabelRawCodecNotInstalled">RAW kodek ni naložen ali napačen format datoteke.</string>
   <!--05/01/2013-->
-  <string name="LabelResetCounters">Ponastavi števce</string>
+  <string name="LabelUseCameraCounter">Uporabi števec kamere namesto lastnega števca</string>
+  <string name="LabelResetCounters">Reset števcev</string>
   <!--07/01/2013-->
+  <string name="LabelUnabletoDeleteSession">Ni mogoče izbrisati seje</string>
   <!--12/01/2013-->
+  <string name="LabelWaitingForDevice">Čakam, da bo naprava pripravljena</string>
   <string name="LabelAdvanced">Napredno</string>
+  <string name="LabelUseParellelTransfer">Uporabi vzporedni prenos datotek</string>
   <!--19/01/2013-->
+  <string name="LabelShowUnTranslatedStringIds">Pokaži id neprevedenih nizov</string>
   <!--20/01/2013-->
   <!--29/01/2013-->
   <!--31/01/2013-->
+  <string name="LabelNone">Nič od tega</string>
+  <string name="LabelComboGrid">Mreža</string>
   <!--13/03/2013-->
   <string name="LabelTools">Orodja</string>
   <!--17/03/2012-->
@@ -114,12 +344,16 @@
   <string name="LabelDevices">Naprave</string>
   <!--04/07/2013-->
   <string name="LabelFileName">Ime datoteke</string>
+  <string name="LabelShowMagnifierInFullSccreen">Prikaži lupo</string>
   <!--17/11/2013-->
   <string name="LabelBarcode">Črtna koda</string>
   <string name="LabelSend">Pošlji</string>
+  <string name="LabelFullscreen">FullScreen način</string>
   <!--19/01/2014-->
   <string name="LabelChangelog">Dnevnik sprememb</string>
   <!--27/02/2014-->
+  <string name="LabelAutoPreviewJpgOnly">Samodejni predogled .jpg</string>
+  <string name="LabelSettingsLiveView">LiveView</string>
   <!--17.05.2014-->
   <!--//20/08/2014-->
   <!--20/08/2014-->

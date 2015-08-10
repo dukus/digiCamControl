@@ -618,5 +618,6 @@ namespace CameraControl.Core.Translation
         public static string MenuExportSession = "Export session ...";
         public static string MenuImportSession = "Import session ...";
         public static string LabelFullSpeed = "Full speed";
+        // 10/08/2015
     }
 }

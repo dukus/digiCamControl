@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <!--Property values-->
+  <string name="BURST_NUMBER">Číslo sekvence</string>
+  <string name="STILL_CAPTURE_MODE">Režim neustálého záznamu</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Sekvenční snímek (sekvenční snímání)</string>
+  <string name="AUTO_ISO">Automatické ISO</string>
+  <string name="ON">Zapnuto</string>
+  <string name="OFF">Vypnuto</string>
+  <string name="FLASH">Blesk</string>
+  <string name="NORMAL_SYNCHRONIZATION">Normální synchronizace</string>
+  <string name="LONG_EXP._NR">Redukce šumu při dlouhé expozici</string>
+  <string name="HIGH_ISO_NR">Redukce šumu při vysokém ISO</string>
+  <string name="NORMAL">Normální</string>
+  <string name="EXPOSURE_DELAY_MODE">Režim zpožděné expozice</string>
+  <string name="LOCK">Zámek</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Jeden snímek (jednotlivé snímkování)</string>
+  <string name="SELF_TIMER">Automatický časovač</string>
+  <string name="QUICK_RESPONSE_REMOTE">Rychlá dálková odezva</string>
+  <string name="2S_DELAYED_REMOTE">2s vzdálené zpoždění</string>
+  <string name="QUIET_SHOOTING">Tiché snímání</string>
+  <string name="FLASH_PROHIBITED">Blesk zakázán</string>
+  <string name="RED_EYE_REDUCTION">Redukce červených očí</string>
+  <string name="SLOW_SYNCHRONIZATION">Pomalá synchronizace</string>
+  <string name="REAR_SYNCHRONIZATION">Synchronizace na druhou závěrku</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Pomalá synchronizace pro redukci červených očí</string>
+  <string name="NOT_PERFORMED">Neprovedeno</string>
+  <string name="LOW">Nízké</string>
+  <string name="HIGH">Vysoké</string>
+  <string name="CENTER_WEIGHTED_METERING">Měření vyvážení na střed</string>
+  <string name="MULTI_PATTERN_METERING">Multi-vzorcové měření</string>
+  <string name="SPOT_METERING">Bodové měření</string>
+  <string name="AUTO">Auto</string>
+  <string name="DAYLIGHT">Denní světlo</string>
+  <string name="FLUORESCENT_">Fluorescenční</string>
+  <string name="INCANDESCENT">Žárovka</string>
+  <string name="CLOUDY">Zataženo</string>
+  <string name="SHADE">Stín</string>
+  <string name="CUSTOM">Vlastní</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] Automatické přepínání režimu zaostření</string>
+  <string name="[S]_SINGLE_AF_SERVO">[S] Statické automatické zaostření</string>
+  <string name="[M]_MANUAL_FOCUS">[M] Manuální zaostření</string>
+  <string name="KELVIN">Kelvin</string>
+  <string name="APPLICATION_MODE">Režim aplikace</string>
+  <string name="WHITE_FLUORESCENT_LAMP">Bílá fluorescenční lampa</string>
+  <string name="FLUORESCENT_LIGHT_TYPE">Typ fluorescenčního světla</string>
+  <string name="ADOBE_RGB">Adobe RGB</string>
+  <string name="COLOR_SPACE">Barevný prostor</string>
+  <string name="14_BIT_RECORDING">14-bit zaznamenávání</string>
+  <!--End Property values-->
+  <string name="MenuLayoutNormal">Normální</string>
+  <!--15/10/2012-->
+  <!--22/10/2012-->
+  <!--25/10/2012-->
+  <!--26/10/2012-->
+  <!--29/10/2012-->
+  <!--31/10/2012-->
+  <!--03/11/2012-->
+  <!--07/11/2012-->
+  <!--08/11/2012-->
+  <!--14/11/2012-->
+  <!--18/11/2012-->
+  <!--20/11/2012-->
+  <!--21/11/2012-->
+  <!--25/11/2012-->
+  <!--26/11/2012-->
+  <!--28/11/2012-->
+  <!--30/11/2012-->
+  <!--05/12/2012-->
+  <!--14/12/2012-->
+  <!--16/12/2012-->
+  <!--04/01/2013-->
+  <!--05/01/2013-->
+  <!--07/01/2013-->
+  <!--12/01/2013-->
+  <!--19/01/2013-->
+  <!--20/01/2013-->
+  <!--29/01/2013-->
+  <!--31/01/2013-->
+  <!--13/03/2013-->
+  <!--17/03/2012-->
+  <!--28/03/2012-->
+  <!--07/05/2013-->
+  <!--04/07/2013-->
+  <!--17/11/2013-->
+  <!--19/01/2014-->
+  <!--27/02/2014-->
+  <!--17.05.2014-->
+  <!--//20/08/2014-->
+  <!--20/08/2014-->
+  <!--20/12/2014-->
+</resources>
