@@ -11,7 +11,7 @@
                       xmlns:ViewModel="clr-namespace:CameraControl.ViewModel"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
-                      SizeChanged="MetroWindow_SizeChanged">
+                      SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True">
     <Window.DataContext>
         <ViewModel:LiveViewViewModel/>
     </Window.DataContext>

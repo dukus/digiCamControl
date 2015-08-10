@@ -1309,15 +1309,19 @@ namespace CameraControl.ViewModel
             dlg.FileName = SelectedOverlay;
             if (dlg.ShowDialog() == true)
             {
-                Overlays.Add(new ValuePair
-                {
-                    Name = Path.GetFileNameWithoutExtension(dlg.FileName),
-                    Value = dlg.FileName
-                });
-                SelectedOverlay = dlg.FileName;
+                SetOverlay(dlg.FileName);
             }
         }
 
+        public void SetOverlay(string file)
+        {
+            Overlays.Add(new ValuePair
+            {
+                Name = Path.GetFileNameWithoutExtension(file),
+                Value = file
+            });
+            SelectedOverlay = file;
+        }
 
         public void WindowsManager_Event(string cmd, object o)
         {
