@@ -113,9 +113,12 @@ namespace CameraControl.Layouts
 
         public void UnInit()
         {
-            ZoomAndPanControl.ContentScaleChanged -= ZoomAndPanControl_ContentScaleChanged;
-            ZoomAndPanControl.ContentOffsetXChanged -= ZoomAndPanControl_ContentScaleChanged;
-            ZoomAndPanControl.ContentOffsetYChanged -= ZoomAndPanControl_ContentScaleChanged;
+            if (ZoomAndPanControl != null)
+            {
+                ZoomAndPanControl.ContentScaleChanged -= ZoomAndPanControl_ContentScaleChanged;
+                ZoomAndPanControl.ContentOffsetXChanged -= ZoomAndPanControl_ContentScaleChanged;
+                ZoomAndPanControl.ContentOffsetYChanged -= ZoomAndPanControl_ContentScaleChanged;
+            }
             _worker.DoWork -= worker_DoWork;
             _worker.RunWorkerCompleted -= _worker_RunWorkerCompleted;
             ServiceProvider.Settings.PropertyChanged -= Settings_PropertyChanged;
@@ -211,9 +214,12 @@ namespace CameraControl.Layouts
                 if (ServiceProvider.Settings.DefaultSession.Files.Count > 0)
                     ImageLIst.SelectedIndex = 0;
             }
-            ZoomAndPanControl.ContentScaleChanged += ZoomAndPanControl_ContentScaleChanged;
-            ZoomAndPanControl.ContentOffsetXChanged += ZoomAndPanControl_ContentScaleChanged;
-            ZoomAndPanControl.ContentOffsetYChanged += ZoomAndPanControl_ContentScaleChanged;
+            if (ZoomAndPanControl != null)
+            {
+                ZoomAndPanControl.ContentScaleChanged += ZoomAndPanControl_ContentScaleChanged;
+                ZoomAndPanControl.ContentOffsetXChanged += ZoomAndPanControl_ContentScaleChanged;
+                ZoomAndPanControl.ContentOffsetYChanged += ZoomAndPanControl_ContentScaleChanged;
+            }
         }
 
         private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)

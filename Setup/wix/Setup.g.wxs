@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a350268c" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.21" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a350268d" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.22" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -538,6 +538,14 @@
 
           <Directory Id="INSTALLDIR.Languages" Name="Languages">
 
+            <Component Id="Component.ca.xml" Guid="19d12628-7654-4354-a305-9ab07fd22707">
+              <File Id="ca.xml" Source="Languages\ca.xml" />
+            </Component>
+
+            <Component Id="Component.cs.xml" Guid="19d12628-7654-4354-a305-9ab0e9582707">
+              <File Id="cs.xml" Source="Languages\cs.xml" />
+            </Component>
+
             <Component Id="Component.cs_CZ.xml" Guid="19d12628-7654-4354-a305-9ab02fae43f5">
               <File Id="cs_CZ.xml" Source="Languages\cs_CZ.xml" />
             </Component>
@@ -570,12 +578,20 @@
               <File Id="it.xml" Source="Languages\it.xml" />
             </Component>
 
+            <Component Id="Component.it_IT.xml" Guid="19d12628-7654-4354-a305-9ab0f59f1781">
+              <File Id="it_IT.xml" Source="Languages\it_IT.xml" />
+            </Component>
+
             <Component Id="Component.ja.xml" Guid="19d12628-7654-4354-a305-9ab03dba9eda">
               <File Id="ja.xml" Source="Languages\ja.xml" />
             </Component>
 
             <Component Id="Component.nl.xml" Guid="19d12628-7654-4354-a305-9ab05a7523c6">
               <File Id="nl.xml" Source="Languages\nl.xml" />
+            </Component>
+
+            <Component Id="Component.nl_BE.xml" Guid="19d12628-7654-4354-a305-9ab0638a863e">
+              <File Id="nl_BE.xml" Source="Languages\nl_BE.xml" />
             </Component>
 
             <Component Id="Component.pl.xml" Guid="19d12628-7654-4354-a305-9ab0e9dc2b7c">
@@ -933,16 +949,16 @@
 
     <Property Id="ARPPRODUCTICON" Value="app_icon.ico"  />
 
-    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
+    <WixVariable Id="WixUILicenseRtf" Value="F:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.21" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.99.21" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.22" IncludeMaximum="yes" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
     <CustomAction Id="Action2_SetRightAction" BinaryKey="Action1_MyAction_File" DllEntry="SetRightAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
-    <CustomAction Id="PreventDowngrading" Error="Newer version already installed"  />
+    <CustomAction Id="PreventDowngrading" Error="A version of the digiCamControl already installed. Unistall it first from Control Panel !"  />
 
     <Binary Id="Action1_MyAction_File" SourceFile="..\..\..\Setup\%this%.CA.dll"  />
 
@@ -1073,6 +1089,8 @@
       <ComponentRef Id="Component.dcc.plugin" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />
       <ComponentRef Id="Component.dcc.plugin.1" />
+      <ComponentRef Id="Component.ca.xml" />
+      <ComponentRef Id="Component.cs.xml" />
       <ComponentRef Id="Component.cs_CZ.xml" />
       <ComponentRef Id="Component.da.xml" />
       <ComponentRef Id="Component.de.xml" />
@@ -1081,8 +1099,10 @@
       <ComponentRef Id="Component.fr.xml" />
       <ComponentRef Id="Component.hu.xml" />
       <ComponentRef Id="Component.it.xml" />
+      <ComponentRef Id="Component.it_IT.xml" />
       <ComponentRef Id="Component.ja.xml" />
       <ComponentRef Id="Component.nl.xml" />
+      <ComponentRef Id="Component.nl_BE.xml" />
       <ComponentRef Id="Component.pl.xml" />
       <ComponentRef Id="Component.pt_PT.xml" />
       <ComponentRef Id="Component.ru.xml" />
