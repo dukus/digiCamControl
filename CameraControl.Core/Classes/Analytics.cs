@@ -128,6 +128,11 @@ namespace CameraControl.Core.Classes
             SendEvent("Command", command, null);
         }
 
+        public void Command(string command, string label)
+        {
+            SendEvent("Command", command, null);
+        }
+
         public void PluginExecute(string command)
         {
             SendEvent("Plugin", command, null);

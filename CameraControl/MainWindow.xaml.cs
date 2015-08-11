@@ -856,10 +856,9 @@ namespace CameraControl
 
         private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if(e.Delta>0)
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image);
-            else
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image);
+            ServiceProvider.WindowsManager.ExecuteCommand(e.Delta > 0
+                ? WindowsCmdConsts.Next_Image
+                : WindowsCmdConsts.Prev_Image);
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
