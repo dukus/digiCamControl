@@ -84,6 +84,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.1.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.2\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
@@ -221,6 +225,11 @@
       <DependentUpon>RotateTransformView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageTransformPlugins\RotateTransformViewModel.cs" />
+    <Compile Include="ImageTransformPlugins\ScriptTransform.cs" />
+    <Compile Include="ImageTransformPlugins\ScriptTransformView.xaml.cs">
+      <DependentUpon>ScriptTransformView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\ScriptTransformViewModel.cs" />
     <Compile Include="MainWindowPlugins\SimpleMainWindow.xaml.cs">
       <DependentUpon>SimpleMainWindow.xaml</DependentUpon>
     </Compile>
@@ -324,6 +333,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\RotateTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\ScriptTransformView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
