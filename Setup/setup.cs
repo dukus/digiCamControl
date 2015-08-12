@@ -188,7 +188,7 @@ namespace Setup
                 dInfo.SetAccessControl(dSecurity);
                 string cachfolder = Path.Combine(
                                     Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "digiCamControl", "Cache");
-                if (!Directory.Exists(cachfolder))
+                if (Directory.Exists(cachfolder))
                 {
                     Directory.Delete(cachfolder, true);
                 }
@@ -196,7 +196,7 @@ namespace Setup
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Set right error "+ex.Message);
+                session.Log("Set right error " + ex.Message);
             }
             return ActionResult.Success;
         }
