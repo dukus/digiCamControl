@@ -113,8 +113,8 @@ namespace Setup
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
             project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
             project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
-            project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
-            project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
+            //project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
+            //project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
 
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
