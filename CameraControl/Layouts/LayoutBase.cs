@@ -134,6 +134,13 @@ namespace CameraControl.Layouts
                 ServiceProvider.Settings.SelectedBitmap.FileItem = _selectedItem;
                 _worker.RunWorkerAsync(_selectedItem);
             }
+            else
+            {
+                if (!LayoutViewModel.ZoomFit)
+                {
+                    LoadFullRes();
+                }
+            }
         }
 
         private void DeleteItem()
@@ -229,8 +236,10 @@ namespace CameraControl.Layouts
 
         private void GeneratePreview()
         {
-            try
-            {
+          try
+          {
+              if (ZoomAndPanControl == null)
+                  return;
                 var bitmap = BitmapLoader.Instance.LoadSmallImage(ServiceProvider.Settings.SelectedBitmap.FileItem);
 
                 if (bitmap != null)
@@ -300,15 +309,6 @@ namespace CameraControl.Layouts
 
             Dispatcher.BeginInvoke(new Action(OnImageLoaded));
             GC.Collect();
-            if (!LayoutViewModel.ZoomFit)
-            {
-                Task.Factory.StartNew(() =>
-                {
-                    Thread.Sleep(100);
-                    LoadFullRes();
-                });
-            }
-
         }
 
         public virtual void OnImageLoaded()

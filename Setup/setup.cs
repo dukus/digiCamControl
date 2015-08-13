@@ -113,8 +113,8 @@ namespace Setup
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
             project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
             project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
-            project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
-            project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
+            //project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
+            //project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
 
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
@@ -188,7 +188,7 @@ namespace Setup
                 dInfo.SetAccessControl(dSecurity);
                 string cachfolder = Path.Combine(
                                     Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "digiCamControl", "Cache");
-                if (!Directory.Exists(cachfolder))
+                if (Directory.Exists(cachfolder))
                 {
                     Directory.Delete(cachfolder, true);
                 }
@@ -196,7 +196,7 @@ namespace Setup
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Set right error "+ex.Message);
+                session.Log("Set right error " + ex.Message);
             }
             return ActionResult.Success;
         }
