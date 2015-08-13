@@ -18,10 +18,10 @@
         </Grid.RowDefinitions>
         <Label Content="Predefined scripts"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <ComboBox ItemsSource="{Binding AvailableScripts}" HorizontalAlignment="Stretch" MinWidth="250" Margin="3"/>
+            <ComboBox ItemsSource="{Binding AvailableScripts}" HorizontalAlignment="Stretch" MinWidth="230" Margin="3"/>
             <Button Content="Load" Command="{Binding LoadCommand}" HorizontalAlignment="Right" Margin="3"/>
         </StackPanel>
-        <avalonedit:TextEditor Grid.Row="2" SyntaxHighlighting="XML" Background="White" Name="textEditor" ShowLineNumbers="True" FontSize="16" />
+        <TextBox Grid.Row="2" FontSize="16" Text="{Binding Script, Mode=TwoWay }" x:Name="Editor" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True"/>
 
     </Grid>
 </UserControl>

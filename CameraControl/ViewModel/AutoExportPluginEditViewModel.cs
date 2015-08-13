@@ -154,6 +154,11 @@ namespace CameraControl.ViewModel
             c["TransformPlugin"] = plugin;
             Config.ConfigDataCollection.Add(c);
             RaisePropertyChanged(() => TransformPluginItems);
+            foreach (var item in TransformPluginItems)
+            {
+                if (item.Config == c)
+                    SelectedTransformPluginItem = item;
+            }
         }
 
         public void RemoveTransforPlugin(TransformPluginItem item)

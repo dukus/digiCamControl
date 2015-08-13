@@ -23,5 +23,6 @@ namespace CameraControl.Plugins.ImageTransformPlugins
         {
             InitializeComponent();
         }
+
     }
 }

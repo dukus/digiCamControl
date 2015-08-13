@@ -204,6 +204,7 @@
     <Compile Include="ExternalDevices\UsbRelayReleaseConfig.xaml.cs">
       <DependentUpon>UsbRelayReleaseConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageTransformPlugins\BindableTextEditor.cs" />
     <Compile Include="ImageTransformPlugins\CropTransform.cs" />
     <Compile Include="ImageTransformPlugins\CropTransformView.xaml.cs">
       <DependentUpon>CropTransformView.xaml</DependentUpon>

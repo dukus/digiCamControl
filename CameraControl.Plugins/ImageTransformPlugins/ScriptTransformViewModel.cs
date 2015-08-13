@@ -5,6 +5,7 @@ using System.Text;
 using CameraControl.Core.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
@@ -16,12 +17,13 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public RelayCommand LoadCommand { get; set; }
 
+
         public string Script
         {
-            get { return _script; }
+            get { return _config["Script"]; }
             set
             {
-                _script = value;
+                _config["Script"] = value;
                 RaisePropertyChanged(()=>Script);
             }
         }

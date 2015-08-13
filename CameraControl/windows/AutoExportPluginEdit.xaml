@@ -4,7 +4,7 @@
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="AutoExportPluginEdit" Height="450" Width="700" WindowStartupLocation="CenterOwner">
+        Title="AutoExportPluginEdit" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <viewModel:AutoExportPluginEditViewModel/>
     </Window.DataContext>
@@ -22,9 +22,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <CheckBox Content="Enabled" Margin="2" IsChecked="{Binding IsEnabled}"/>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1">
