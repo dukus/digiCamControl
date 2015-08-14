@@ -24,5 +24,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             InitializeComponent();
         }
 
+        private void Editor_TextChanged(object sender, EventArgs e)
+        {
+            ((ScriptTransformViewModel) DataContext).Script = Editor.Text;
+        }
+
     }
 }

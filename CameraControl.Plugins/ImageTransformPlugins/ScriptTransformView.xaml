@@ -21,7 +21,7 @@
             <ComboBox ItemsSource="{Binding AvailableScripts}" HorizontalAlignment="Stretch" MinWidth="230" Margin="3"/>
             <Button Content="Load" Command="{Binding LoadCommand}" HorizontalAlignment="Right" Margin="3"/>
         </StackPanel>
-        <TextBox Grid.Row="2" FontSize="16" Text="{Binding Script, Mode=TwoWay }" x:Name="Editor" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True"/>
+        <imageTransformPlugins:BindableTextEditor Grid.Row="2" FontSize="16" Text="{Binding Script, Mode=OneTime }" x:Name="Editor" Background="White" SyntaxHighlighting="XML" TextChanged="Editor_TextChanged" ShowLineNumbers="True" />
 
     </Grid>
 </UserControl>
