@@ -139,6 +139,9 @@ namespace CameraControl.ViewModel
                 _wnd.Image.BeginInit();
                 _wnd.Image.Source = new BitmapImage(new Uri(outfile));
                 _wnd.Image.EndInit();
+                _wnd.ImageO.BeginInit();
+                _wnd.ImageO.Source = new BitmapImage(new Uri(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName));
+                _wnd.ImageO.EndInit();
             }
             catch (Exception ex)
             {

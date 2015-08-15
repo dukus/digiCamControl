@@ -4,7 +4,7 @@
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="AutoExportPluginEdit" Height="450" Width="800" WindowStartupLocation="CenterOwner">
+        Title="{translation:TranslateExtension LabelConfigurePlugin}" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <viewModel:AutoExportPluginEditViewModel/>
     </Window.DataContext>
@@ -21,71 +21,77 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <CheckBox Content="Enabled" Margin="2" IsChecked="{Binding IsEnabled}"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1">
-            <Label Content="Name" Margin="2"/>
-            <TextBox Width="250" Margin="2" Text="{Binding Name}"/>
-        </StackPanel>
-        <GroupBox Grid.Row="1" Header="Properties" Margin="0" >
-            <Grid>
-                <ScrollViewer>
-                    <ContentControl Content="{Binding ConfigControl}"/>
-                </ScrollViewer>
-            </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Transform plugins" Margin="0" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="111*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Label Content="{Binding Name}"/>
-                                <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right">
-                                    <Rectangle Width="10" Height="10">
+        <TabControl Grid.ColumnSpan="3" Grid.RowSpan="2">
+            <TabItem Header="{translation:TranslateExtension LabelPluginProperties}">
+                <Grid>
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding ConfigControl}"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{translation:TranslateExtension LabelPluginTransformPlugins}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Row="1" Header="Transform plugins" Margin="0" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="111*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Label Content="{Binding Name}"/>
+                                            <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right">
+                                                <Rectangle Width="10" Height="10">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <controls:DropDownButton Name="DownButton" Padding="0" Margin="3" VerticalContentAlignment="Center" Content="{translation:TranslateExtension LabelAddPlugin}" ItemsSource="{Binding ImageTransformPlugins}" Grid.Row="1">
+                                <controls:DropDownButton.ItemContainerStyle>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Command" Value="{Binding DataContext.AddTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type controls:DropDownButton}}}"/>
+                                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                                    </Style>
+                                </controls:DropDownButton.ItemContainerStyle>
+                                <controls:DropDownButton.Icon>
+                                    <Rectangle Width="20" Height="20">
                                         <Rectangle.Fill>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <controls:DropDownButton Name="DownButton" Padding="0" Margin="3" VerticalContentAlignment="Center" Content="{translation:TranslateExtension LabelAddPlugin}" ItemsSource="{Binding ImageTransformPlugins}" Grid.Row="1">
-                    <controls:DropDownButton.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command" Value="{Binding DataContext.AddTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type controls:DropDownButton}}}"/>
-                            <Setter Property="CommandParameter" Value="{Binding}"/>
-                        </Style>
-                    </controls:DropDownButton.ItemContainerStyle>
-                    <controls:DropDownButton.Icon>
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </controls:DropDownButton.Icon>
-                </controls:DropDownButton>
-                <Button Grid.Row="2" Content="{translation:TranslateExtension ButtonPreview}" Margin="3" Command="{Binding PreviewCommand}"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="2" Header="Transform plugins properties" Margin="0">
-            <Grid>
-                <ScrollViewer>
-                    <ContentControl Content="{Binding TransformControl}"/>
-                </ScrollViewer>
-            </Grid>
-        </GroupBox>
+                                </controls:DropDownButton.Icon>
+                            </controls:DropDownButton>
+                            <Button Grid.Row="2" Content="{translation:TranslateExtension ButtonPreview}" Margin="3" Command="{Binding PreviewCommand}"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Grid.Column="1" Header="Transform plugins properties" Margin="0">
+                        <Grid>
+                            <ScrollViewer>
+                                <ContentControl Content="{Binding TransformControl}"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Right">
+            <Label Content="Name" Margin="2"/>
+            <TextBox Width="250" Margin="2" Text="{Binding Name}"/>
+            <CheckBox Content="Enabled" Margin="2" IsChecked="{Binding IsEnabled}"/>
+        </StackPanel>
 
     </Grid>
 </controls:MetroWindow>

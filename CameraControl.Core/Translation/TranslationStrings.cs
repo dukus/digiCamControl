@@ -619,5 +619,11 @@ namespace CameraControl.Core.Translation
         public static string MenuImportSession = "Import session ...";
         public static string LabelFullSpeed = "Full speed";
         // 10/08/2015
+        public static string LabelPreviewWindows = "Preview Windows";
+        public static string LabelTransformed = "Transformed";
+        public static string LabelOriginal = "Original";
+        public static string LabelPluginProperties = "Properties";
+        public static string LabelPluginTransformPlugins = "Transform plugins";
+        public static string LabelConfigurePlugin = "Configure Plugin";
     }
 }

@@ -340,7 +340,7 @@
                                                              ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=AutoExportPlugins}">
                                         <Controls:DropDownButton.ItemContainerStyle>
                                             <Style TargetType="MenuItem">
-                                                <Setter Property="Command" Value="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.AddPluginCommand}"/>
+                                                <Setter Property="Command" Value="{Binding AddPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}"/>
                                                 <Setter Property="CommandParameter" Value="{Binding}"/>
                                             </Style>
                                         </Controls:DropDownButton.ItemContainerStyle>

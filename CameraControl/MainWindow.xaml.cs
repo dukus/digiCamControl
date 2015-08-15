@@ -81,6 +81,7 @@ namespace CameraControl
         private bool _sortCameraOreder = true;
 
         public RelayCommand<AutoExportPluginConfig> ConfigurePluginCommand { get; set; }
+        public RelayCommand<IAutoExportPlugin> AddPluginCommand { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
@@ -95,7 +96,7 @@ namespace CameraControl
             LoadInAllPresetCommand = new RelayCommand<CameraPreset>(LoadInAllPreset);
             VerifyPresetCommand = new RelayCommand<CameraPreset>(VerifyPreset);
             ConfigurePluginCommand = new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
-
+            AddPluginCommand=new RelayCommand<IAutoExportPlugin>(AddPlugin);
             InitializeComponent();
 
 
@@ -116,6 +117,11 @@ namespace CameraControl
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+        }
+
+        private void AddPlugin(IAutoExportPlugin obj)
+        {
+            ConfigurePlugin(ServiceProvider.Settings.DefaultSession.AddPlugin(obj));
         }
 
         private void ConfigurePlugin(AutoExportPluginConfig plugin)

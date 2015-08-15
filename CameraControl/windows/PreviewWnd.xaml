@@ -2,8 +2,21 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="PreviewWnd" Height="600" Width="800">
+        xmlns:zoomAndPan="clr-namespace:CameraControl.Controls.ZoomAndPan"
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        Title="{translation:TranslateExtension LabelPreviewWindows}" Height="600" Width="800">
     <Grid>
-        <Image Name="Image"/>
+        <TabControl>
+            <TabItem Header="{translation:TranslateExtension LabelTransformed}">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    <Image Name="Image"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{translation:TranslateExtension LabelOriginal}">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    <Image Name="ImageO"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </controls:MetroWindow>

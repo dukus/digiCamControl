@@ -20,7 +20,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" TextWrapping="Wrap" > Use with care !!! The original photo will be overwriten !!!</TextBlock>
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" > Use with care !!! The original photo will be overwriten !!! <LineBreak/>
+        
+            <LineBreak/>
+            Swich to Transform plugins tab to configure photo transform plugins
+        </TextBlock>
 
     </Grid>
 </UserControl>
