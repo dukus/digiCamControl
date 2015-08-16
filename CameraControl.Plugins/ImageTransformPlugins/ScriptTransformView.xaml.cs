@@ -29,5 +29,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             ((ScriptTransformViewModel) DataContext).Script = Editor.Text;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((ScriptTransformViewModel)DataContext).Load();
+            Editor.Text = ((ScriptTransformViewModel)DataContext).Script;
+        }
+
     }
 }

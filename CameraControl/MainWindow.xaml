@@ -457,6 +457,7 @@
                     <MenuItem Header="300 %" Command="{Binding ThumbSizeCommand}" CommandParameter="300"/>
                     <MenuItem Header="400 %" Command="{Binding ThumbSizeCommand}" CommandParameter="400"/>
                     <MenuItem Header="500 %" Command="{Binding ThumbSizeCommand}" CommandParameter="500"/>
+                    <Slider Minimum="50" Maximum="600" Value="{Binding Settings.ThumbHeigh}"/>
                 </MenuItem>
                 <MenuItem Header="{T:TranslateExtension MenuWindows}">
                     <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>

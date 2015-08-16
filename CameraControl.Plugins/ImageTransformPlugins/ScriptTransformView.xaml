@@ -18,10 +18,10 @@
         </Grid.RowDefinitions>
         <Label Content="Predefined scripts"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <ComboBox ItemsSource="{Binding AvailableScripts}" HorizontalAlignment="Stretch" MinWidth="230" Margin="3"/>
-            <Button Content="Load" Command="{Binding LoadCommand}" HorizontalAlignment="Right" Margin="3"/>
+            <ComboBox ItemsSource="{Binding AvailableScripts}" HorizontalAlignment="Stretch" MinWidth="230" Margin="3" IsEditable="False" SelectedItem="{Binding SelectedScript}"/>
+            <Button Content="Load" HorizontalAlignment="Right" Margin="3,3,3,0" Height="22" VerticalAlignment="Top" Click="Button_Click"/>
         </StackPanel>
-        <imageTransformPlugins:BindableTextEditor Grid.Row="2" FontSize="16" Text="{Binding Script, Mode=OneTime }" x:Name="Editor" Background="White" SyntaxHighlighting="XML" TextChanged="Editor_TextChanged" ShowLineNumbers="True" />
+        <imageTransformPlugins:BindableTextEditor Grid.Row="2" FontSize="16" Text="{Binding Script, Mode=OneTime}" x:Name="Editor" Background="White" SyntaxHighlighting="XML" TextChanged="Editor_TextChanged" ShowLineNumbers="True" />
 
     </Grid>
 </UserControl>

@@ -29,6 +29,7 @@ namespace CameraControl.ViewModel
         private Branding _branding;
         private List<IExportPlugin> _exportPlugins;
         private bool _cameraConnected;
+        private Settings _settings;
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<int> ThumbSizeCommand { get; set; }
@@ -110,11 +111,16 @@ namespace CameraControl.ViewModel
             get { return ServiceProvider.DeviceManager.SelectedCameraDevice != null && ServiceProvider.DeviceManager.SelectedCameraDevice.IsConnected; }
         }
 
+        public Settings Settings
+        {
+            get { return ServiceProvider.Settings; }
+        }
+
 
         public MainMenuViewModel()
         {
             SendCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(Send);
-            SettingsCommand = new RelayCommand(Settings);
+            SettingsCommand = new RelayCommand(EditSettings);
             ThumbSizeCommand = new GalaSoft.MvvmLight.Command.RelayCommand<int>(ThumbSize);
             SetLayoutCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(SetLayout);
             SelectAllCommand =new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectAll(); });
@@ -386,7 +392,7 @@ namespace CameraControl.ViewModel
             ServiceProvider.WindowsManager.ExecuteCommand(command);
         }
 
-        private void Settings()
+        private void EditSettings()
         {
             SettingsWnd wnd = new SettingsWnd();
             wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;

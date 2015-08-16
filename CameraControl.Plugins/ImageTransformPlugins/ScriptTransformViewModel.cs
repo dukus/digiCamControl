@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using CameraControl.Core.Classes;
+using CameraControl.Devices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using ICSharpCode.AvalonEdit.Document;
@@ -28,6 +30,8 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             }
         }
 
+        public string SelectedScript { get; set; }
+
         public List<string> AvailableScripts
         {
             get { return _availableScripts; }
@@ -49,11 +53,36 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             _config = config;
             AvailableScripts = new List<string>();
             LoadCommand = new RelayCommand(Load);
+            try
+            {
+                var files = Directory.GetFiles(Path.Combine(Settings.ApplicationFolder, "Data", "msl"), "*.msl");
+                foreach (var file in files)
+                {
+                    AvailableScripts.Add(Path.GetFileNameWithoutExtension(file));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error load scrip list", ex);
+            }
         }
 
-        private void Load()
+        public void Load()
         {
-            
+            try
+            {
+                var file = Path.Combine(Settings.ApplicationFolder,"Data", "msl", SelectedScript + ".msl");
+                Script = File.ReadAllText(file);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error");
+            }
+        }
+
+        public void SetScript(string s)
+        {
+            _script = s;
         }
     }
 }
