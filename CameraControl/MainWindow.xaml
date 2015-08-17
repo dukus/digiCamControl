@@ -20,6 +20,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Icons.xaml" />
+                <ResourceDictionary Source="Resources/MoreIcons.xaml" />
                 <ResourceDictionary Source="Styles/ExpanderEx.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
@@ -61,8 +62,12 @@
 
         <!--<Controls:MetroContentControl Grid.ColumnSpan="4">-->
         <WrapPanel Grid.Row="1"  Grid.ColumnSpan="3">
-            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Height="50" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}">
-                <Image Margin="5" Source="/CameraControl;component/Images/Camera.png"/>
+            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Width="50" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}">
+                <Rectangle Width="30" Height="30">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource camera-iris}" />
+                    </Rectangle.Fill>
+                </Rectangle>
             </Button>
             <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-55,5,5,5" Height="50" Width="50" />
 
