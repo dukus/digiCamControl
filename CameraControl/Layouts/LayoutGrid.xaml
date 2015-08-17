@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CameraControl.Controls"
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"                                        
              xmlns:Layouts="clr-namespace:CameraControl.Layouts"
-                    xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices" mc:Ignorable="d" 
+                    xmlns:Devices="clr-namespace:CameraControl.Devices;assembly=CameraControl.Devices"
+                    xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+                    mc:Ignorable="d" 
              d:DesignHeight="426" d:DesignWidth="652">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -17,10 +20,14 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModel:LayoutViewModel/>
+    </UserControl.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListBox Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}"  Background="{DynamicResource WindowBackgroundBrush}"  BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.InputBindings>
@@ -55,5 +62,83 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,0">
+            <StatusBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="{DynamicResource AccentColor}" Offset="1"/>
+                    <GradientStop Color="{DynamicResource AccentColor4}"/>
+                </LinearGradientBrush>
+            </StatusBar.Background>
+            <StatusBarItem >
+                <StackPanel Orientation="Horizontal">
+                    <Button Height="40" Width="40" Margin="2,-2" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding PrevImageCommand}">
+                        <Path Width="20" Height="20"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding NextImageCommand}" Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Path Width="20" Height="20"
+                                  Canvas.Left="15.9063"
+                                  Canvas.Top="14.75"
+                                  Stretch="Fill"
+                                  Fill="{DynamicResource BlackBrush}"
+                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
+                    </Button>
+                    <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+                        <ToggleButton Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_down}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </ToggleButton>
+                        <ToggleButton  Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
+                            <Rectangle Width="20" Height="20">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_up}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </ToggleButton>
+                    </StackPanel>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_folder_open}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_image_select}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MetroCircleButtonStyle}"
+                    IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.HaveBackupFile}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_reset}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem  DockPanel.Dock="Right">
+                <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="30" Width="30" />
+            </StatusBarItem>
+
+        </StatusBar>
     </Grid>
 </Layouts:LayoutBase>
