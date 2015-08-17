@@ -20,6 +20,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Icons.xaml" />
+                <ResourceDictionary Source="Styles/ExpanderEx.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
@@ -143,9 +144,10 @@
         </WrapPanel>
         <!--</Controls:MetroContentControl>-->
         <StackPanel Grid.Row="2" Grid.RowSpan="4" Orientation="Horizontal">
-            <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+            <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"
+                      Style="{DynamicResource MetroExpanderEx}">
                 <Expander.Header>
-                    <Label Content="{T:Translate LabelConnectedCameras}">
+                    <Label Content="{T:Translate LabelConnectedCameras}" Padding="0">
                         <Label.LayoutTransform>
                             <TransformGroup>
                                 <TransformGroup.Children>
@@ -202,6 +204,7 @@
         </StackPanel>
 
         <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="1" Grid.RowSpan="5" Padding="0" Margin="0" 
+                  Style="{DynamicResource MetroExpanderEx}"
                   Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRightPanelMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <Expander.Resources>
                 <ResourceDictionary>
@@ -255,10 +258,10 @@
                 <Grid Grid.Row="1" Margin="0" >
                     <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                         <StackPanel>
-                            <Expander Header="Preview" IsExpanded="True">
+                            <Expander Header="Preview" IsExpanded="True" Style="{DynamicResource MetroExpanderEx}" >
                                 <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"/>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0"
+                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -293,10 +296,12 @@
                                 </Grid>
                             </Expander>
                             <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" MaxHeight="200"
+                                      Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" />
                             </Expander>
                             <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0"
+                                       Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel Orientation="Vertical">
                                     <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
@@ -355,6 +360,7 @@
                                 </StackPanel>
                             </Expander>
                             <Expander  Header="{T:TranslateExtension MenuPresets}" VerticalAlignment="Top" IsExpanded="False" Margin="0" Padding="0" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" 
+                                       Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPresetPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <StackPanel>
                                     <ListBox MaxHeight="100" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" Name="PresetListBox" Margin="3">
@@ -411,10 +417,12 @@
                                 </StackPanel>
                             </Expander>
                             <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
+                                       Style="{DynamicResource MetroExpanderEx}"
                                 Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowImagePropertiesPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
                             </Expander>
                             <Expander  Header="{T:Translate LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
+                                       Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMetadataPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" Width="250" />
                             </Expander>

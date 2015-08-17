@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Styles/CustomControls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Styles/ExpanderEx.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <T:TranslateConverter x:Key="converter" />
@@ -107,9 +108,10 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0" Grid.RowSpan="2" Padding="0">
+        <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0" Grid.RowSpan="2" Padding="0"
+                  Style="{DynamicResource MetroExpanderEx}">
             <Expander.Header>
-                <Label Content="{T:TranslateExtension LabelAdvancedProperties}">
+                <Label Content="{T:TranslateExtension LabelAdvancedProperties}" Padding="0">
                     <Label.LayoutTransform>
                         <TransformGroup>
                             <TransformGroup.Children>

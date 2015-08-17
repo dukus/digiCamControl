@@ -508,6 +508,18 @@
               </Component>
 
             </Directory>
+
+            <Directory Id="INSTALLDIR.Data.msl" Name="msl">
+
+              <Component Id="Component.MagickScript.xsd" Guid="19d12628-7654-4354-a305-9ab0a0f528c8">
+                <File Id="MagickScript.xsd" Source="Data\msl\MagickScript.xsd" />
+              </Component>
+
+              <Component Id="Component.Wave.msl" Guid="19d12628-7654-4354-a305-9ab0cbd1f58f">
+                <File Id="Wave.msl" Source="Data\msl\Wave.msl" />
+              </Component>
+
+            </Directory>
           </Directory>
 
           <Directory Id="INSTALLDIR.Plugins" Name="Plugins">
@@ -1085,6 +1097,8 @@
       <ComponentRef Id="Component.D810.png" />
       <ComponentRef Id="Component.D90.png" />
       <ComponentRef Id="Component.DF.png" />
+      <ComponentRef Id="Component.MagickScript.xsd" />
+      <ComponentRef Id="Component.Wave.msl" />
       <ComponentRef Id="Component.CameraControl.Plugins.dll" />
       <ComponentRef Id="Component.dcc.plugin" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />
