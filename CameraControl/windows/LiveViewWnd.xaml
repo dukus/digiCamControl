@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="../Resources/MoreIcons.xaml" />
+                <ResourceDictionary Source="../Styles/ExpanderEx.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />-->
@@ -189,7 +190,8 @@
             <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="{Binding FocusStep}" Width="475" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" LargeChange="100" IsMoveToPointEnabled="True" />
         </StackPanel>
 
-        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" >
+        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" 
+                  Style="{DynamicResource MetroExpanderEx}">
             <Grid MinWidth="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="140" />
@@ -222,6 +224,7 @@
                             <ScrollViewer />
                         </StackPanel.ScrollOwner>
                         <Expander Header="{T:TranslateExtension LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" 
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                             <Expander.Content>
                                 <Grid>
@@ -267,6 +270,7 @@
                             </Expander.Content>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" 
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                             <Expander.Content>
                                 <Grid>
@@ -315,6 +319,7 @@
                             </Expander.Content>
                         </Expander>
                         <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
                             <StackPanel>
                                 <Label Content="{T:Translate LabelCaptureDelay}" Margin="20,0"/>
@@ -323,6 +328,7 @@
                             </StackPanel>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelDisplay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}" >
                             <Expander.Content>
                                 <Grid>
@@ -389,6 +395,7 @@
                             </Expander.Content>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowOverlayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                             <Expander.Content>
                                 <Grid>
@@ -443,6 +450,7 @@
                             </Expander.Content>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="{Binding ShowHistogram}"
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLuminosityLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                             <Expander.Content>
                                 <Grid Height="75" >
@@ -470,6 +478,7 @@
                             </Expander.Content>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelMotionDetection}" BorderThickness="1"  BorderBrush="Black"  Margin="3"
+                                  Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMotionDetectionLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
                             <Expander.Content>
                                 <Grid>
