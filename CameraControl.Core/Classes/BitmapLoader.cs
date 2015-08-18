@@ -38,6 +38,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using ImageMagick;
 
 #endregion
 
@@ -176,6 +177,23 @@ namespace CameraControl.Core.Classes
             GetMetadata(fileItem);
             try
             {
+                var rotation = 0;
+
+                if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation"))
+                {
+                    if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
+                        rotation = 180;
+
+                    //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
+                    //    writeableBitmap = writeableBitmap.Rotate(180);
+
+                    if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
+                        rotation = 90;
+
+                    if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "left, bottom")
+                        rotation = 270;
+                }
+
                 using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
                 {
                     BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
@@ -183,55 +201,57 @@ namespace CameraControl.Core.Classes
                                                                 BitmapCacheOption.OnLoad);
 
                     bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
-                    var rotation = 0;
-
-                    if (fileItem.FileInfo.ExifTags.ContainName("Exif.Image.Orientation"))
-                    {
-                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "bottom, right")
-                            rotation = 180;
-
-                        //if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "top, left")
-                        //    writeableBitmap = writeableBitmap.Rotate(180);
-
-                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "right, top")
-                            rotation = 90;
-
-                        if (fileItem.FileInfo.ExifTags["Exif.Image.Orientation"] == "left, bottom")
-                            rotation = 270;
-                    }
 
                     if (rotation == 90 || rotation == 270)
                         fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelHeight, bmpDec.Frames[0].PixelWidth);
                     else
                         fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelWidth, bmpDec.Frames[0].PixelHeight);
 
-                    double dw = (double) LargeThumbSize/bmpDec.Frames[0].PixelWidth;
+                    double dw = (double)LargeThumbSize / bmpDec.Frames[0].PixelWidth;
                     WriteableBitmap writeableBitmap =
                         BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
-                                                                            (int) (bmpDec.Frames[0].PixelWidth*dw),
-                                                                            (int) (bmpDec.Frames[0].PixelHeight*dw),
+                                                                            (int)(bmpDec.Frames[0].PixelWidth * dw),
+                                                                            (int)(bmpDec.Frames[0].PixelHeight * dw),
                                                                             BitmapScalingMode.Linear));
 
                     LoadHistogram(fileItem, writeableBitmap);
                     Save2Jpg(writeableBitmap, fileItem.LargeThumb);
 
-                    dw = (double) SmallThumbSize/writeableBitmap.PixelWidth;
-                    writeableBitmap = writeableBitmap.Resize((int) (writeableBitmap.PixelWidth*dw),
-                                                             (int) (writeableBitmap.PixelHeight*dw),
+                    dw = (double)SmallThumbSize / writeableBitmap.PixelWidth;
+                    writeableBitmap = writeableBitmap.Resize((int)(writeableBitmap.PixelWidth * dw),
+                                                             (int)(writeableBitmap.PixelHeight * dw),
                                                              WriteableBitmapExtensions.Interpolation.Bilinear);
 
                     if (rotation > 0)
                         writeableBitmap = writeableBitmap.Rotate(rotation);
 
                     Save2Jpg(writeableBitmap, fileItem.SmallThumb);
-                    var thumb = LoadSmallImage(fileItem);
-                    thumb.Freeze();
-                    fileItem.Thumbnail = thumb;
-                    fileItem.IsLoaded = true;
-                    fileItem.SaveInfo();
-                    if (deleteFile)
-                        File.Delete(filename);
+                    //var thumb = LoadSmallImage(fileItem);
+                    //thumb.Freeze();
+                    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
                 }
+
+                //using (MagickImage image = new MagickImage(filename))
+                //{
+                //    if (rotation == 90 || rotation == 270)
+                //        fileItem.FileInfo.SetSize(image.Height, image.Width);
+                //    else
+                //        fileItem.FileInfo.SetSize(image.Width, image.Height);
+
+                //    double dw = (double)LargeThumbSize / image.Width;
+                //    image.Thumbnail(dw*100);
+                //    LoadHistogram(fileItem, image);
+                //    image.Write(fileItem.LargeThumb);
+                //    dw = (double)LargeThumbSize / image.Width;
+                //    image.Thumbnail(dw * 100);
+                //    image.Write(fileItem.SmallThumb);
+                //    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
+                //}
+
+                fileItem.IsLoaded = true;
+                fileItem.SaveInfo();
+                if (deleteFile)
+                    File.Delete(filename);
             }
             catch (Exception exception)
             {
@@ -329,6 +349,30 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        private void LoadHistogram(FileItem fileItem, MagickImage bitmap)
+        {
+            fileItem.FileInfo.HistogramBlue = new int[256];
+            fileItem.FileInfo.HistogramGreen = new int[256];
+            fileItem.FileInfo.HistogramRed = new int[256];
+            fileItem.FileInfo.HistogramLuminance = new int[256];
+            Dictionary<MagickColor, int> h = bitmap.Histogram();
+            foreach (var i in h)
+            {
+                byte R = i.Key.R;
+                byte G = i.Key.G;
+                byte B = i.Key.B;
+                fileItem.FileInfo.HistogramBlue[B] += i.Value;
+                fileItem.FileInfo.HistogramGreen[G] += i.Value;
+                fileItem.FileInfo.HistogramRed[R] += i.Value;
+                int lum = (R + R + R + B + G + G + G + G) >> 3;
+                fileItem.FileInfo.HistogramLuminance[lum] += i.Value;
+            }
+            //fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
+            //fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
+            //fileItem.FileInfo.HistogramRed = SmoothHistogram(fileItem.FileInfo.HistogramRed);
+            //fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
+        }
+
         private unsafe void LoadHistogram(FileItem fileItem, WriteableBitmap bitmap)
         {
             fileItem.FileInfo.HistogramBlue = new int[256];
@@ -356,10 +400,10 @@ namespace CameraControl.Core.Classes
                     fileItem.FileInfo.HistogramLuminance[lum]++;
                 }
             }
-            fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
-            fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
-            fileItem.FileInfo.HistogramRed = SmoothHistogram(fileItem.FileInfo.HistogramRed);
-            fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
+            //fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
+            //fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
+            //fileItem.FileInfo.HistogramRed = SmoothHistogram(fileItem.FileInfo.HistogramRed);
+            //fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
         }
 
         public unsafe void Highlight(BitmapFile file, bool under, bool over)
@@ -465,11 +509,23 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public BitmapSource LoadImage(string filename)
+        {
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.UriSource = new Uri(filename);
+            bi.EndInit();
+            bi.Freeze();
+            return bi;
+        }
+
         public ImageSource LoadImage(string filename, int width, int rotateAngle)
         {
             var bi = new BitmapImage();
             bi.BeginInit();
-            bi.DecodePixelWidth = width;
+            if (width > 0)
+                bi.DecodePixelWidth = width;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.UriSource = new Uri(filename);
             bi.EndInit();

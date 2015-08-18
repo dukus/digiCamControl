@@ -26,6 +26,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             // Read from file
             using (MagickImage image = new MagickImage(infile))
             {
+                
                 image.BackgroundColor = new MagickColor(Color.Black);
                 if (conf.AutoRotate)
                 {
