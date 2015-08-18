@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Devices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -106,22 +107,31 @@ namespace CameraControl.Plugins.ToolPlugins
 
         void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            RaisePropertyChanged(() => IsBusy);
-            RaisePropertyChanged(() => IsFree);
-            Thread.Sleep(500);
-            CurrentImages = 0;
-            TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count;
-            foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
+            try
             {
-                if (_backgroundWorker.CancellationPending)
-                    break;
-                CurrentImages++;
-                if (!item.HaveGeneratedThumbnail)
+                RaisePropertyChanged(() => IsBusy);
+                RaisePropertyChanged(() => IsFree);
+                Thread.Sleep(500);
+                CurrentImages = 0;
+                TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count;
+                foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
                 {
-                    BitmapLoader.Instance.GenerateCache(item);
-                    BitmapLoader.Instance.SetImageInfo(item);
+                    if (_backgroundWorker.CancellationPending)
+                        break;
+                    CurrentImages++;
+                    if (!item.HaveGeneratedThumbnail)
+                    {
+                        BitmapLoader.Instance.GenerateCache(item);
+                        BitmapLoader.Instance.SetImageInfo(item);
+                    }
+                    Bitmap = item.Thumbnail;
+                    GC.Collect();
                 }
-                Bitmap = item.Thumbnail;
+                ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to generate thumbs", ex);
             }
         }
 

@@ -583,6 +583,19 @@ namespace CameraControl.Controls.ZoomAndPan
             AnimatedZoomTo(new Rect(0, 0, content.ActualWidth, content.ActualHeight));
         }
 
+        public double FitScale()
+        {
+            if (content == null)
+            {
+                throw new ApplicationException("PART_Content was not found in the ZoomAndPanControl visual template!");
+            }
+
+            double scaleX = this.ContentViewportWidth / content.ActualWidth;
+            double scaleY = this.ContentViewportHeight / content.ActualHeight;
+            double newScale = this.ContentScale * Math.Min(scaleX, scaleY);
+            return newScale;
+        }
+        
         /// <summary>
         /// Instantly scale the content so that it fits completely in the control.
         /// </summary>

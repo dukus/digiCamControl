@@ -70,7 +70,7 @@ namespace CameraControl.ViewModel
 
         public bool FreeZoom
         {
-            get { return _freeZoom; }
+            get { return _freeZoom || Zoom12 || Zoom11; }
             set
             {
                 if (value)

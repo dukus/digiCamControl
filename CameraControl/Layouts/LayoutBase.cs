@@ -136,7 +136,7 @@ namespace CameraControl.Layouts
             }
             else
             {
-                if (!LayoutViewModel.ZoomFit)
+                if (LayoutViewModel.FreeZoom)
                 {
                     LoadFullRes();
                 }
@@ -232,6 +232,7 @@ namespace CameraControl.Layouts
         private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)
         {
             GeneratePreview();
+            LayoutViewModel.FreeZoom = ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale();
         }
 
         private void GeneratePreview()
@@ -298,7 +299,7 @@ namespace CameraControl.Layouts
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
             ServiceProvider.Settings.SelectedBitmap.Notify();
-
+            Console.WriteLine(fullres);
             BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
                               ServiceProvider.Settings.SelectedBitmap.FileItem);
             BitmapLoader.Instance.Highlight(ServiceProvider.Settings.SelectedBitmap,
@@ -306,9 +307,8 @@ namespace CameraControl.Layouts
                                             ServiceProvider.Settings.HighlightOverExp);
             ServiceProvider.Settings.SelectedBitmap.FullResLoaded = fullres;
             ServiceProvider.Settings.ImageLoading = false;
-
-            Dispatcher.BeginInvoke(new Action(OnImageLoaded));
             GC.Collect();
+            Dispatcher.BeginInvoke(new Action(OnImageLoaded));
         }
 
         public virtual void OnImageLoaded()
@@ -511,7 +511,6 @@ namespace CameraControl.Layouts
         protected void zoomAndPanControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
-            LayoutViewModel.FreeZoom = true;
             if (e.Delta > 0)
             {
                 Point curContentMousePoint = e.GetPosition(content);
@@ -522,7 +521,12 @@ namespace CameraControl.Layouts
                 Point curContentMousePoint = e.GetPosition(content);
                 ZoomOut(curContentMousePoint);
             }
-            LoadFullRes();
+            if (ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale())
+            {
+                LoadFullRes();
+                LayoutViewModel.FreeZoom = true;
+            }
+            
         }
 
         /// <summary>
