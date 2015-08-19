@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
+  <read>
+    <colorFuzz value="100"/>
+    <transparentChroma colorHigh="#FFFFFF" colorLow="#BFBFCF"/>
+    <backgroundColor value="#FFFFFF"/>
+    <alpha option="Background"/>
+    <brightnessContrast brightness="5" contrast="10"/>
+  </read>
+</msl>
