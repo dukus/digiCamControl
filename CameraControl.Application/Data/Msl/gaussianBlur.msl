@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
+   <read>
+        <gaussianBlur sigma="10" width="20" channels="All"/>
+    </read>
+</msl>

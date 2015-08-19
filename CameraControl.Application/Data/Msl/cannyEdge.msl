@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
+   <read>
+     <cannyEdge lower="5" upper="11" radius="5" sigma="10"/>
+    </read>
+</msl>
