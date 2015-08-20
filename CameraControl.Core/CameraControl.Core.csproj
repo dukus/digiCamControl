@@ -232,6 +232,7 @@
     <Compile Include="Interfaces\IFilenameTemplate.cs" />
     <Compile Include="Interfaces\IImageTransformPlugin.cs" />
     <Compile Include="Interfaces\IMainWindowPlugin.cs" />
+    <Compile Include="Interfaces\IPanelPlugin.cs" />
     <Compile Include="Interfaces\IPlugin.cs" />
     <Compile Include="Classes\ActionEventArgs.cs" />
     <Compile Include="Classes\ActionManager.cs" />

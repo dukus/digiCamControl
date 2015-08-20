@@ -40,6 +40,7 @@ using CameraControl.Plugins.ExportPlugins;
 using CameraControl.Plugins.ExternalDevices;
 using CameraControl.Plugins.ImageTransformPlugins;
 using CameraControl.Plugins.MainWindowPlugins;
+using CameraControl.Plugins.PanelPlugins;
 using CameraControl.Plugins.ToolPlugins;
 
 #endregion
@@ -82,6 +83,8 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new OverlayTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new RotateTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ScriptTransform());
+
+                ServiceProvider.PluginManager.PanelPlugins.Add(new OpenInExternalViewer());
             }
             catch (Exception exception)
             {

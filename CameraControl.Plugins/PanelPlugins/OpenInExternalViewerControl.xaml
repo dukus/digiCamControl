@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="CameraControl.Plugins.PanelPlugins.OpenInExternalViewerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
+            <Rectangle Width="20" Height="20">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_image_select}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Button>
+    </Grid>
+</UserControl>

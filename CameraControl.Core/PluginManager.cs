@@ -90,6 +90,7 @@ namespace CameraControl.Core
         private AsyncObservableCollection<IToolPlugin> _toolPlugins;
         private AsyncObservableCollection<IAutoExportPlugin> _autoExportPlugins;
         private AsyncObservableCollection<IImageTransformPlugin> _imageTransformPlugins;
+        private AsyncObservableCollection<IPanelPlugin> _panelPlugins;
 
         public AsyncObservableCollection<IToolPlugin> ToolPlugins
         {
@@ -121,6 +122,16 @@ namespace CameraControl.Core
             }
         }
 
+        public AsyncObservableCollection<IPanelPlugin> PanelPlugins
+        {
+            get { return _panelPlugins; }
+            set
+            {
+                _panelPlugins = value;
+                NotifyPropertyChanged("PanelPlugins");
+            }
+        }
+
         public string PluginsFolder
         {
             get { return Path.Combine(Settings.DataFolder, "Plugins"); }
@@ -141,6 +152,7 @@ namespace CameraControl.Core
             AvaiablePlugins = new AsyncObservableCollection<PluginInfo>();
             AutoExportPlugins = new AsyncObservableCollection<IAutoExportPlugin>();
             ImageTransformPlugins = new AsyncObservableCollection<IImageTransformPlugin>();
+            PanelPlugins = new AsyncObservableCollection<IPanelPlugin>();
         }
 
         public IAutoExportPlugin GetAutoExportPlugin(string type)

@@ -234,6 +234,10 @@
     <Compile Include="MainWindowPlugins\SimpleMainWindow.xaml.cs">
       <DependentUpon>SimpleMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PanelPlugins\OpenInExternalViewer.cs" />
+    <Compile Include="PanelPlugins\OpenInExternalViewerControl.xaml.cs">
+      <DependentUpon>OpenInExternalViewerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PhdPlugin.cs" />
     <Compile Include="Plugins.cs" />
     <Compile Include="ExportPlugins\ExportToFolder.cs" />
@@ -275,6 +279,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Astro\PHDWnd.xaml">
@@ -345,6 +350,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PanelPlugins\OpenInExternalViewerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ToolPlugins\GenMovieWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -357,6 +370,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Entypo-license.txt" />
+    <Content Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,9 @@ using System.Text;
 using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
+using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -19,6 +21,7 @@ namespace CameraControl.ViewModel
         private bool _zoom11;
         private bool _zoom12;
         private bool _freeZoom;
+        private AsyncObservableCollection<IPanelPlugin> _panelPlugins;
 
         public bool ZoomFit
         {
@@ -83,11 +86,15 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public AsyncObservableCollection<IPanelPlugin> PanelPlugins
+        {
+            get { return ServiceProvider.PluginManager.PanelPlugins; }
+        }
+
         public RelayCommand NextImageCommand { get; private set; }
         public RelayCommand PrevImageCommand { get; private set; }
         public RelayCommand CopyNameClipboardCommand { get; private set; }
         public RelayCommand OpenExplorerCommand { get; private set; }
-        public RelayCommand OpenViewerCommand { get; private set; }
         public RelayCommand DeleteItemCommand { get; private set; }
         public RelayCommand RestoreCommand { get; private set; }
         public RelayCommand ImageDoubleClickCommand { get; private set; }
@@ -114,7 +121,6 @@ namespace CameraControl.ViewModel
                         }
                     });
             OpenExplorerCommand = new RelayCommand(OpenInExplorer);
-            OpenViewerCommand = new RelayCommand(OpenViewer);
             DeleteItemCommand = new RelayCommand(DeleteItem);
             RestoreCommand = new RelayCommand(Restore);
             ImageDoubleClickCommand =
@@ -149,24 +155,6 @@ namespace CameraControl.ViewModel
             catch (Exception exception)
             {
                 Log.Error("Error to show file in explorer", exception);
-            }
-        }
-
-        private void OpenViewer()
-        {
-            if (ServiceProvider.Settings.SelectedBitmap == null ||
-                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) &&
-                File.Exists(ServiceProvider.Settings.ExternalViewer))
-            {
-                PhotoUtils.Run(ServiceProvider.Settings.ExternalViewer,
-                    ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, ProcessWindowStyle.Maximized);
-            }
-            else
-            {
-                PhotoUtils.Run(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName, "",
-                    ProcessWindowStyle.Maximized);
             }
         }
 
