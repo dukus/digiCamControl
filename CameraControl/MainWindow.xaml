@@ -42,10 +42,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="463*" />
+            <RowDefinition />
             <RowDefinition Height="54" />
             <RowDefinition Height="102" />
             <RowDefinition Height="23" />
+            <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
 
@@ -222,10 +223,7 @@
             <Grid Width="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" 
@@ -434,13 +432,6 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">
-                    <Label Content="Model:" />
-                    <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
-                </StackPanel>
-                <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
-                <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Grid.Row="4"
-                     Grid.Column="0" Margin="5,0,5,0"/>
             </Grid>
             <!--</ScrollViewer>-->
 
@@ -534,5 +525,15 @@
                 <MenuItem Header="{T:TranslateExtension MenuAbout}" Command="{Binding AboutCommand}"/>
             </MenuItem>
         </Menu>
+        <StatusBar Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="6">
+            <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
+                    <Separator/>
+                    <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Width="120" Margin="5,0,5,0" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Controls:MetroWindow >
