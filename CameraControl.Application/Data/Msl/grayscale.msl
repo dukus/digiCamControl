@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
   <read>
-    <wave/>
+    <!-- <grayscale method="Brightness"/>--> 
+    <!-- <grayscale method="Lightness"/>-->
+    <!-- <grayscale method="MS"/>-->
+    <grayscale method="M"/>
   </read>
 </msl>

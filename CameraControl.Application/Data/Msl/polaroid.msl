@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
   <read>
-    <wave/>
+         <fontPointsize value="50"/>
+         <polaroid angle="2" caption="test" method="Background" />
   </read>
 </msl>

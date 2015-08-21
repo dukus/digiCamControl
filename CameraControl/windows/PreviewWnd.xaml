@@ -6,17 +6,29 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         Title="{translation:TranslateExtension LabelPreviewWindows}" Height="600" Width="800">
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl >
             <TabItem Header="{translation:TranslateExtension LabelTransformed}">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
-                    <Image Name="Image"/>
+                    <Image Name="Image" MouseMove="Image_MouseMove" MouseDown="Image_MouseDown"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{translation:TranslateExtension LabelOriginal}">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
-                    <Image Name="ImageO"/>
+                    <Image Name="ImageO" MouseMove="Image_MouseMove" MouseDown="Image_MouseDown"/>
                 </Grid>
             </TabItem>
         </TabControl>
+        <StatusBar Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+            <Label Content="Color "/>
+            <Label Name="Label" Width="40"/>
+                <TextBox Name="TextBox" Width="70" IsReadOnly="True" Margin="2"/>
+                <Label Content="Click on image to copy in clipboard"/>
+            </StackPanel>
+        </StatusBar>
     </Grid>
 </controls:MetroWindow>
