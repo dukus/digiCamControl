@@ -13,7 +13,8 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public CropTransformViewModel()
         {
-
+            WidthProcent = 5;
+            HeightProcent = 5;
         }
 
         public CropTransformViewModel(ValuePairEnumerator config)
@@ -50,6 +51,29 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return _config["FromLiveView"] == "True"; }
             set { _config["FromLiveView"] = value.ToString(); }
         }
+
+        public bool CropMargins
+        {
+            get { return _config["CropMargins"] == "True"; }
+            set
+            {
+                _config["CropMargins"] = value.ToString();
+                RaisePropertyChanged(() => CropMargins);
+            }
+        }
+
+        public int WidthProcent
+        {
+            get { return GetInt(_config["WidthProcent"]); }
+            set { _config["WidthProcent"] = value.ToString(CultureInfo.InvariantCulture); }
+        }
+
+        public int HeightProcent
+        {
+            get { return GetInt(_config["HeightProcent"]); }
+            set { _config["HeightProcent"] = value.ToString(CultureInfo.InvariantCulture); }
+        }
+
 
         private int GetInt(string s)
         {

@@ -4,6 +4,7 @@ using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using ImageMagick;
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
@@ -14,31 +15,37 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return "Crop"; }
         }
 
-        public string Execute(FileItem item,string infile, string dest, ValuePairEnumerator configData)
+        public string Execute(FileItem item, string infile, string dest, ValuePairEnumerator configData)
         {
             var conf = new CropTransformViewModel(configData);
-            using (var fileStream = new MemoryStream(File.ReadAllBytes(infile)))
+            using (MagickImage image = new MagickImage(infile))
             {
-                BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-                    BitmapCreateOptions.PreservePixelFormat,
-                    BitmapCacheOption.OnLoad);
-                WriteableBitmap writeableBitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
                 if (conf.FromLiveView && ServiceProvider.DeviceManager.SelectedCameraDevice != null)
                 {
                     var prop = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
-                    conf.Left = (int) (writeableBitmap.PixelWidth*prop.LiveviewSettings.HorizontalMin/100);
-                    conf.Width =
-                        (int)
-                            (writeableBitmap.PixelWidth*
-                             (prop.LiveviewSettings.HorizontalMax - prop.LiveviewSettings.HorizontalMin)/100);
-                    conf.Top = (int) (writeableBitmap.Height*prop.LiveviewSettings.VerticalMin/100);
-                    conf.Height =
-                        (int)
-                            (writeableBitmap.Height*
-                             (prop.LiveviewSettings.VerticalMax - prop.LiveviewSettings.VerticalMin)/100);
+                    conf.Left = (int) (image.Width*prop.LiveviewSettings.HorizontalMin/100);
+                    conf.Width = (image.Width*
+                                  (prop.LiveviewSettings.HorizontalMax - prop.LiveviewSettings.HorizontalMin)/100);
+                    conf.Top = (image.Height*prop.LiveviewSettings.VerticalMin/100);
+                    conf.Height = (image.Height*(prop.LiveviewSettings.VerticalMax - prop.LiveviewSettings.VerticalMin)/
+                                   100);
+                }
+                if (conf.CropMargins)
+                {
+                    conf.Left = image.Width * conf.WidthProcent / 100;
+                    conf.Width = image.Width - (conf.Left*2);
+                    conf.Top = image.Height * conf.HeightProcent / 100;
+                    conf.Height = image.Height - (conf.Top*2);
                 }
 
-                BitmapLoader.Save2Jpg(writeableBitmap.Crop(conf.Left,conf.Top,conf.Width,conf.Height), dest);
+                MagickGeometry geometry = new MagickGeometry();
+                geometry.Width = conf.Width;
+                geometry.Height = conf.Height;
+                geometry.X = conf.Left;
+                geometry.Y = conf.Top;
+                image.Crop(geometry);
+                image.Format = MagickFormat.Jpeg;
+                image.Write(dest);
             }
             return dest;
         }

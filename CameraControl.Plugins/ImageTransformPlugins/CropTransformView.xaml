@@ -23,7 +23,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="84*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Label Content="Left" HorizontalAlignment="Right"/>
@@ -40,6 +44,15 @@
 
         <Label Grid.Row="5" Grid.Column="0" Content="Use Live view ruler" HorizontalAlignment="Right"/>
         <CheckBox Grid.Row="5" Grid.Column="1" Margin="3" IsChecked="{Binding FromLiveView}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Crop margins" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="6" Grid.Column="1" Margin="3" IsChecked="{Binding CropMargins}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="7" Grid.Column="0" Content="Width %" HorizontalAlignment="Right"/>
+        <controls:NumericUpDown Grid.Row="7" Grid.Column="1" Margin="3" Minimum="0" Maximum="99" Value="{Binding WidthProcent}" IsEnabled="{Binding CropMargins}"/>
+
+        <Label Grid.Row="8" Grid.Column="0" Content="Height %" HorizontalAlignment="Right"/>
+        <controls:NumericUpDown Grid.Row="8" Grid.Column="1" Margin="3" Minimum="0" Maximum="99" Value="{Binding HeightProcent}" IsEnabled="{Binding CropMargins}"/>
 
     </Grid>
 </UserControl>

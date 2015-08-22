@@ -23,6 +23,10 @@ namespace CameraControl.Plugins.PanelPlugins
         }
 
         public bool Visible { get; set; }
-        public string Id { get; private set; }
+
+        public string Id
+        {
+            get { return "{68BEC560-FF4B-4C76-8562-790206C521DC}"; } 
+        }
     }
 }
