@@ -13,14 +13,18 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <CheckBox Content="Create new item " IsChecked="{Binding CreateNew}"/>
 
-        <TextBlock Grid.Row="0" TextWrapping="Wrap" > Use with care !!! The original photo will be overwriten !!! <LineBreak/>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Visibility="{Binding Path=OverWrite, Converter={StaticResource BooleanToVisibilityConverter1}}"> Use with care !!! The original photo will be overwriten !!! <LineBreak/>
         
             <LineBreak/>
             Swich to Transform plugins tab to configure photo transform plugins
