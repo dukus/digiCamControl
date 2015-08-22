@@ -43,6 +43,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 if (conf.FlipVertical)
                     image.Flip();
 
+                image.Format = MagickFormat.Jpeg;
                 // Save the result
                 image.Write(dest);
             }

@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
+using ImageMagick;
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
@@ -22,60 +23,15 @@ namespace CameraControl.Plugins.ImageTransformPlugins
         public string Execute(FileItem fileItem,string infile, string dest, ValuePairEnumerator configData)
         {
             var conf = new ResizeTransformViewModel(configData);
-            bool deleteFile = false;
-            var filename = infile;
-            if (fileItem.IsRaw)
+            dest = Path.Combine(Path.GetDirectoryName(dest), Path.GetFileNameWithoutExtension(dest) + ".jpg");
+            using (MagickImage image = new MagickImage(infile))
             {
-                string s = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
-                    Path.GetFileNameWithoutExtension(fileItem.FileName) + ".jpg");
-                if (File.Exists(s))
-                {
-                    filename = s;
-                }
-                else
-                {
-                    string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
-                    if (File.Exists(dcraw_exe))
-                    {
-                        PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e {0}", fileItem.FileName));
-                        string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
-                            Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
-                        if (File.Exists(thumb))
-                        {
-                            deleteFile = true;
-                            filename = thumb;
-                        }
-                    }
-                }
-                dest = Path.Combine(Path.GetDirectoryName(dest), Path.GetFileNameWithoutExtension(dest) + ".jpg");
-            }
-            using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
-            {
-                BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-                    BitmapCreateOptions.PreservePixelFormat,
-                    BitmapCacheOption.OnLoad);
-                WriteableBitmap writeableBitmap ;
-                if (conf.KeepAspect)
-                {
-                    double dw = (double)conf.Width / bmpDec.Frames[0].PixelWidth;
-                    writeableBitmap =
-                        BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],
-                            (int)(bmpDec.Frames[0].PixelWidth * dw),
-                            (int)(bmpDec.Frames[0].PixelHeight * dw),
-                            BitmapScalingMode.Linear));
-                }
-                else
-                {
-                    writeableBitmap =
-                        BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0], conf.Width, conf.Height, BitmapScalingMode.Linear));
-                   
-                }
+                MagickGeometry geometry = new MagickGeometry(conf.Width, conf.Height);
+                geometry.IgnoreAspectRatio = !conf.KeepAspect;
 
-                BitmapLoader.Save2Jpg(writeableBitmap, dest);
-
-                // remove temporally file created by dcraw
-                if (deleteFile)
-                    File.Delete(filename);
+                image.Resize(geometry);
+                image.Format = MagickFormat.Jpeg;
+                image.Write(dest);
             }
             return dest;
         }

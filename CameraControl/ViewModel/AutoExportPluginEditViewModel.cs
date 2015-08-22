@@ -129,8 +129,10 @@ namespace CameraControl.ViewModel
             try
             {
                 var outfile = Path.GetTempFileName();
-                AutoExportPluginHelper.ExecuteTransformPlugins(ServiceProvider.Settings.SelectedBitmap.FileItem, Config,
-                    outfile, true);
+                outfile =
+                    AutoExportPluginHelper.ExecuteTransformPlugins(ServiceProvider.Settings.SelectedBitmap.FileItem,
+                        Config,
+                        outfile, true);
                 if (_wnd == null || !_wnd.IsVisible )
                 {
                     _wnd = new PreviewWnd();
