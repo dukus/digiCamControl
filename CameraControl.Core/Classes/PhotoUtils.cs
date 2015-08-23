@@ -113,6 +113,13 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public static string GetFullPath(string path)
+        {
+            if (Path.IsPathRooted(path))
+                return path;
+            return Path.Combine(Settings.ApplicationFolder, path);
+        }
+
         public static void Donate()
         {
             Run("http://www.digicamcontrol.com/donate/");

@@ -77,7 +77,7 @@ namespace CameraControl
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.
                 bi.BeginInit();
-                bi.UriSource = new Uri(ServiceProvider.Branding.StartupScreenImage);
+                bi.UriSource = new Uri(PhotoUtils.GetFullPath(ServiceProvider.Branding.StartupScreenImage));
                 bi.EndInit();
                 background.Source = bi;
             }

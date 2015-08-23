@@ -7,5 +7,6 @@ namespace CameraControl.Core.Interfaces
         UserControl Control { get;}
         bool Visible { get; set; }
         string Id { get; }
+        void Init();
     }
 }

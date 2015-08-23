@@ -110,7 +110,7 @@ namespace CameraControl
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.
                 bi.BeginInit();
-                bi.UriSource = new Uri(ServiceProvider.Branding.LogoImage);
+                bi.UriSource = new Uri(PhotoUtils.GetFullPath(ServiceProvider.Branding.LogoImage));
                 bi.EndInit();
                 Icon = bi;
             }

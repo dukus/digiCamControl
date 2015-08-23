@@ -6,9 +6,9 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a3502690" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.25" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a3502690" Name="Scientific focus Acquisition software 1" Language="1033" Codepage="Windows-1252" Version="1.2.99.25" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Scientific focus Acquisition software 1">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
-    <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
+    <Media Id="1" Cabinet="Scientific_focus_Acquisition_software_1.cab" EmbedCab="yes" />
 
     <Condition Message="Please install .NET 4.0 first." ><![CDATA[NET40="#1"]]></Condition>
 
@@ -307,10 +307,6 @@
             <File Id="WriteableBitmapEx.Wpf.pdb" Source="WriteableBitmapEx.Wpf.pdb" />
           </Component>
 
-          <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
-            <File Id="logo.png" Source="logo.png" />
-          </Component>
-
           <Component Id="Component.noconn.png" Guid="19d12628-7654-4354-a305-9ab00011fbb5">
             <File Id="noconn.png" Source="noconn.png" />
           </Component>
@@ -321,6 +317,10 @@
 
           <Component Id="Component.notloaded.png" Guid="19d12628-7654-4354-a305-9ab019fe5786">
             <File Id="notloaded.png" Source="notloaded.png" />
+          </Component>
+
+          <Component Id="Component.branding.xml" Guid="19d12628-7654-4354-a305-9ab0773b8acc">
+            <File Id="branding.xml" Source="branding.xml" />
           </Component>
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
@@ -543,8 +543,68 @@
                 <File Id="gaussianBlur.msl" Source="Data\msl\gaussianBlur.msl" />
               </Component>
 
+              <Component Id="Component.grayscale.msl" Guid="19d12628-7654-4354-a305-9ab0f17d4a2a">
+                <File Id="grayscale.msl" Source="Data\msl\grayscale.msl" />
+              </Component>
+
+              <Component Id="Component.kuwahara.msl" Guid="19d12628-7654-4354-a305-9ab08b33a25b">
+                <File Id="kuwahara.msl" Source="Data\msl\kuwahara.msl" />
+              </Component>
+
+              <Component Id="Component.level.msl" Guid="19d12628-7654-4354-a305-9ab01cd7c011">
+                <File Id="level.msl" Source="Data\msl\level.msl" />
+              </Component>
+
               <Component Id="Component.MagickScript.xsd" Guid="19d12628-7654-4354-a305-9ab0a0f528c8">
                 <File Id="MagickScript.xsd" Source="Data\msl\MagickScript.xsd" />
+              </Component>
+
+              <Component Id="Component.motionBlur.msl" Guid="19d12628-7654-4354-a305-9ab0064f8182">
+                <File Id="motionBlur.msl" Source="Data\msl\motionBlur.msl" />
+              </Component>
+
+              <Component Id="Component.negate.msl" Guid="19d12628-7654-4354-a305-9ab0024cd23c">
+                <File Id="negate.msl" Source="Data\msl\negate.msl" />
+              </Component>
+
+              <Component Id="Component.normalize.msl" Guid="19d12628-7654-4354-a305-9ab01669343c">
+                <File Id="normalize.msl" Source="Data\msl\normalize.msl" />
+              </Component>
+
+              <Component Id="Component.oilPaint.msl" Guid="19d12628-7654-4354-a305-9ab04b724ec5">
+                <File Id="oilPaint.msl" Source="Data\msl\oilPaint.msl" />
+              </Component>
+
+              <Component Id="Component.polaroid.msl" Guid="19d12628-7654-4354-a305-9ab0344545ab">
+                <File Id="polaroid.msl" Source="Data\msl\polaroid.msl" />
+              </Component>
+
+              <Component Id="Component.reduceNoise.msl" Guid="19d12628-7654-4354-a305-9ab052e558e1">
+                <File Id="reduceNoise.msl" Source="Data\msl\reduceNoise.msl" />
+              </Component>
+
+              <Component Id="Component.RemoveBackground_White.msl" Guid="19d12628-7654-4354-a305-9ab0bdefa337">
+                <File Id="RemoveBackground_White.msl" Source="Data\msl\RemoveBackground-White.msl" />
+              </Component>
+
+              <Component Id="Component.sepiaTone.msl" Guid="19d12628-7654-4354-a305-9ab04b62be23">
+                <File Id="sepiaTone.msl" Source="Data\msl\sepiaTone.msl" />
+              </Component>
+
+              <Component Id="Component.sharpen.msl" Guid="19d12628-7654-4354-a305-9ab0a1b02dae">
+                <File Id="sharpen.msl" Source="Data\msl\sharpen.msl" />
+              </Component>
+
+              <Component Id="Component.sketch.msl" Guid="19d12628-7654-4354-a305-9ab0e9aec088">
+                <File Id="sketch.msl" Source="Data\msl\sketch.msl" />
+              </Component>
+
+              <Component Id="Component.solarize.msl" Guid="19d12628-7654-4354-a305-9ab04ee73cfb">
+                <File Id="solarize.msl" Source="Data\msl\solarize.msl" />
+              </Component>
+
+              <Component Id="Component.swirl.msl" Guid="19d12628-7654-4354-a305-9ab05ed51bd0">
+                <File Id="swirl.msl" Source="Data\msl\swirl.msl" />
               </Component>
 
               <Component Id="Component.Wave.msl" Guid="19d12628-7654-4354-a305-9ab0cbd1f58f">
@@ -575,6 +635,18 @@
 
               <Component Id="Component.dcc.plugin.1" Guid="19d12628-7654-4354-a305-9ab0bdbf76ef">
                 <File Id="dcc.plugin.1" Source="Plugins\Plugin.DeviceControlBox\dcc.plugin" />
+              </Component>
+
+            </Directory>
+
+            <Directory Id="INSTALLDIR.Plugins.imageJPlugin" Name="imageJPlugin">
+
+              <Component Id="Component.imageJPlugin.dll" Guid="19d12628-7654-4354-a305-9ab034605693">
+                <File Id="imageJPlugin.dll" Source="Plugins\imageJPlugin\imageJPlugin.dll" />
+              </Component>
+
+              <Component Id="Component.dcc.plugin.2" Guid="19d12628-7654-4354-a305-9ab0bdc276ef">
+                <File Id="dcc.plugin.2" Source="Plugins\imageJPlugin\dcc.plugin" />
               </Component>
 
             </Directory>
@@ -794,8 +866,8 @@
                   <File Id="live.png" Source="WebServer\css\img\live.png" />
                 </Component>
 
-                <Component Id="Component.logo.png.1" Guid="19d12628-7654-4354-a305-9ab0cacb11c3">
-                  <File Id="logo.png.1" Source="WebServer\css\img\logo.png" />
+                <Component Id="Component.logo.png" Guid="19d12628-7654-4354-a305-9ab0dbea15f6">
+                  <File Id="logo.png" Source="WebServer\css\img\logo.png" />
                 </Component>
 
                 <Component Id="Component.slideshow.png" Guid="19d12628-7654-4354-a305-9ab0126dee55">
@@ -922,6 +994,14 @@
                 </Directory>
               </Directory>
             </Directory>
+          </Directory>
+
+          <Directory Id="INSTALLDIR.Branding" Name="Branding">
+
+            <Component Id="Component.Logo_big.jpg.1" Guid="19d12628-7654-4354-a305-9ab04a795ff7">
+              <File Id="Logo_big.jpg.1" Source="Branding\Logo_big.jpg" />
+            </Component>
+
           </Directory>
         </Directory>
 
@@ -1080,10 +1160,10 @@
       <ComponentRef Id="Component.PhotoBooth.pdb" />
       <ComponentRef Id="Component.PortableDeviceLib.pdb" />
       <ComponentRef Id="Component.WriteableBitmapEx.Wpf.pdb" />
-      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
+      <ComponentRef Id="Component.branding.xml" />
       <ComponentRef Id="Component.takephoto.mp3" />
       <ComponentRef Id="Component.takephoto.wav" />
       <ComponentRef Id="Component.Canon_EOS_100D.png" />
@@ -1137,12 +1217,29 @@
       <ComponentRef Id="Component.cannyEdge.msl" />
       <ComponentRef Id="Component.charcoal.msl" />
       <ComponentRef Id="Component.gaussianBlur.msl" />
+      <ComponentRef Id="Component.grayscale.msl" />
+      <ComponentRef Id="Component.kuwahara.msl" />
+      <ComponentRef Id="Component.level.msl" />
       <ComponentRef Id="Component.MagickScript.xsd" />
+      <ComponentRef Id="Component.motionBlur.msl" />
+      <ComponentRef Id="Component.negate.msl" />
+      <ComponentRef Id="Component.normalize.msl" />
+      <ComponentRef Id="Component.oilPaint.msl" />
+      <ComponentRef Id="Component.polaroid.msl" />
+      <ComponentRef Id="Component.reduceNoise.msl" />
+      <ComponentRef Id="Component.RemoveBackground_White.msl" />
+      <ComponentRef Id="Component.sepiaTone.msl" />
+      <ComponentRef Id="Component.sharpen.msl" />
+      <ComponentRef Id="Component.sketch.msl" />
+      <ComponentRef Id="Component.solarize.msl" />
+      <ComponentRef Id="Component.swirl.msl" />
       <ComponentRef Id="Component.Wave.msl" />
       <ComponentRef Id="Component.CameraControl.Plugins.dll" />
       <ComponentRef Id="Component.dcc.plugin" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />
       <ComponentRef Id="Component.dcc.plugin.1" />
+      <ComponentRef Id="Component.imageJPlugin.dll" />
+      <ComponentRef Id="Component.dcc.plugin.2" />
       <ComponentRef Id="Component.ca.xml" />
       <ComponentRef Id="Component.cs.xml" />
       <ComponentRef Id="Component.cs_CZ.xml" />
@@ -1192,7 +1289,7 @@
       <ComponentRef Id="Component.IsLiked.png" />
       <ComponentRef Id="Component.IsUnLiked.png" />
       <ComponentRef Id="Component.live.png" />
-      <ComponentRef Id="Component.logo.png.1" />
+      <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
@@ -1221,6 +1318,7 @@
       <ComponentRef Id="Component.ui_icons_f5e175_256x240.png" />
       <ComponentRef Id="Component.ui_icons_f7a50d_256x240.png" />
       <ComponentRef Id="Component.ui_icons_fcd113_256x240.png" />
+      <ComponentRef Id="Component.Logo_big.jpg.1" />
       <ComponentRef Id="digiCamControl.EmptyDirectory" />
       <ComponentRef Id="DesktopFolder.EmptyDirectory" />
       <ComponentRef Id="ProgramMenuFolder" />

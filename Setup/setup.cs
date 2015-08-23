@@ -25,7 +25,7 @@ namespace Setup
 
             var appDir = new Dir(@"digiCamControl",
                 new File(appFeature, "CameraControl.exe",
-                    new FileShortcut(appFeature,"digiCamControl", @"%ProgramMenu%\digiCamControl"),
+                    new FileShortcut(appFeature, "digiCamControl", @"%ProgramMenu%\digiCamControl"),
                     new FileShortcut(appFeature, "digiCamControl", @"%Desktop%")),
                 new File(appFeature, "CameraControl.PluginManager.exe"),
                 new File(appFeature, "CameraControlCmd.exe"),
@@ -37,9 +37,9 @@ namespace Setup
                 //new File(appFeature, "PhotoBooth.exe",new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
 #if DEBUG
-                new DirFiles(appFeature, @"*.pdb"),
+ new DirFiles(appFeature, @"*.pdb"),
 #endif
-                new File(appFeature, "regwia.bat"),
+ new File(appFeature, "regwia.bat"),
                 new File(appFeature, "logo.ico"),
                 new File(appFeature, "logo_big.jpg"),
                 new File(appFeature, "baseMtpDevice.xml"),
@@ -56,8 +56,11 @@ namespace Setup
                         new File(appFeature, "Plugins\\CameraControl.Plugins\\dcc.plugin")),
                     new Dir(appFeature, "Plugin.DeviceControlBox",
                         new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\Plugin.DeviceControlBox.dll"),
-                        new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\dcc.plugin"))
-                    ),
+                        new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\dcc.plugin")),
+                    new Dir(appFeature, "imageJPlugin",
+                        new File(appFeature, "Plugins\\imageJPlugin\\imageJPlugin.dll"),
+                        new File(appFeature, "Plugins\\imageJPlugin\\dcc.plugin"))
+                        ),
                 new Dir(appFeature, "Languages",
                     new DirFiles(appFeature, @"Languages\*.xml")),
                 new Dir(appFeature, "Licenses",
@@ -67,7 +70,7 @@ namespace Setup
                 new Dir(appFeature, "WebServer",
                     new Files(appFeature, @"WebServer\*.*"))
                 );
-            
+
 
             var obsDir = new Dir(@"OBS\plugins",
                 new File(obsPlugin, @"ObsPlugin\CLRHostPlugin.dll"),
@@ -76,7 +79,7 @@ namespace Setup
                     ));
 
             var baseDir = new Dir(@"%ProgramFiles%\",
-                appDir ,
+                appDir,
                 obsDir
                 );
 
@@ -91,11 +94,11 @@ namespace Setup
                 new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
                     Condition.Always, Sequence.InstallExecuteSequence)
                 );
-            
+
             project.UI = WUI.WixUI_FeatureTree;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
 
-#if DEBUG            
+#if DEBUG
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Debug\"));
 #else
@@ -108,7 +111,7 @@ namespace Setup
                 FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
 
             project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
-            
+
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
             project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
@@ -119,7 +122,7 @@ namespace Setup
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.ControlPanelInfo.ProductIcon = "logo.ico";
-            
+
             string branding = Path.Combine(project.SourceBaseDir, "branding.xml");
             if (System.IO.File.Exists(branding))
             {
@@ -127,8 +130,10 @@ namespace Setup
                 doc.LoadXml(System.IO.File.ReadAllText(branding));
                 string name = doc.DocumentElement.SelectSingleNode("/Branding/ApplicationTitle").InnerText;
                 project.ControlPanelInfo.Manufacturer = name;
-                project.OutFileName = string.Format(name+"_{0}", ver.FileVersion);
+                project.OutFileName = string.Format(name.Replace(" ", "_") + "_{0}", ver.FileVersion);
                 appDir.AddFile(new File(appFeature, "branding.xml"));
+                appDir.AddDir(new Dir(appFeature, "Branding",
+                    new DirFiles(appFeature, @"Branding\*.*")));
                 project.Name = name;
             }
 
@@ -149,14 +154,14 @@ namespace Setup
             {
                 try
                 {
-                    MessageBox.Show("Older version is installed, first should be UnInstalled !", "Installation" );
+                    MessageBox.Show("Older version is installed, first should be UnInstalled !", "Installation");
                     ProcessStartInfo Pro = new ProcessStartInfo();
                     Pro.Verb = "runas";
                     Pro.UseShellExecute = true;
                     Pro.FileName = unInstallFile;
                     Pro.Arguments = "/S";
                     Pro.WindowStyle = ProcessWindowStyle.Normal;
-                    Process process=new Process();
+                    Process process = new Process();
                     process.StartInfo = Pro;
                     process.Start();
                     process.WaitForExit();
@@ -184,7 +189,7 @@ namespace Setup
                 DirectoryInfo dInfo = new DirectoryInfo(folder);
                 DirectorySecurity dSecurity = dInfo.GetAccessControl();
                 SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
-                dSecurity.AddAccessRule(new FileSystemAccessRule( everyone, FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+                dSecurity.AddAccessRule(new FileSystemAccessRule(everyone, FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
                 dInfo.SetAccessControl(dSecurity);
                 string cachfolder = Path.Combine(
                                     Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "digiCamControl", "Cache");

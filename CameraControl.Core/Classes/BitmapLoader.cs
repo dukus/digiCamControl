@@ -72,7 +72,7 @@ namespace CameraControl.Core.Classes
                         BitmapImage bi = new BitmapImage();
                         // BitmapImage.UriSource must be in a BeginInit/EndInit block.
                         bi.BeginInit();
-                        bi.UriSource = new Uri(ServiceProvider.Branding.DefaultThumbImage);
+                        bi.UriSource = new Uri(PhotoUtils.GetFullPath(ServiceProvider.Branding.DefaultThumbImage));
                         bi.EndInit();
                         _defaultThumbnail = bi;
                     }

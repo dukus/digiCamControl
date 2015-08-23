@@ -189,6 +189,11 @@ namespace CameraControl
                     Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins"));
 
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
+
+                foreach (IPanelPlugin plugin in ServiceProvider.PluginManager.PanelPlugins)
+                {
+                    plugin.Init();
+                }
             }
             catch (Exception exception)
             {
