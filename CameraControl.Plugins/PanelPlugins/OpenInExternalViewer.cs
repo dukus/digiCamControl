@@ -28,5 +28,15 @@ namespace CameraControl.Plugins.PanelPlugins
         {
             get { return "{68BEC560-FF4B-4C76-8562-790206C521DC}"; } 
         }
+
+        public OpenInExternalViewer()
+        {
+            Visible = true;
+        }
+
+        public void Init()
+        {
+            
+        }
     }
 }

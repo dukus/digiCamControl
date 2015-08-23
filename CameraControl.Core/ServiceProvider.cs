@@ -90,7 +90,7 @@ namespace CameraControl.Core
             Trigger = new TriggerClass();
             ActionManager = new ActionManager();
             QueueManager = new QueueManager();
-            Branding = new Branding();
+            //Branding = new Branding();
             ScriptManager = new ScriptManager();
             PluginManager = new PluginManager();
             FilenameTemplateManager = new FilenameTemplateManager();

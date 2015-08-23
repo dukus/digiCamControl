@@ -137,7 +137,7 @@
                     <ItemsControl ItemsSource="{Binding PanelPlugins}" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                    <ContentControl Content="{Binding Control}"/>
+                                <ContentControl Content="{Binding Control}" Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
