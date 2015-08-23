@@ -10,6 +10,8 @@ using System.Windows.Media.Imaging;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
+using ImageMagick;
+
 
 namespace CameraControl.Plugins.ImageTransformPlugins
 {
@@ -29,40 +31,69 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             return dest;
         }
 
-        public string ExecuteThread(FileItem item,string infile, string dest, ValuePairEnumerator configData)
+        public string ExecuteThread(FileItem item, string infile, string dest, ValuePairEnumerator configData)
         {
-            try
-            {
-
             var conf = new OverlayTransformViewModel(configData);
-            using (var fileStream = new MemoryStream(File.ReadAllBytes(infile)))
+            using (MagickImage image = new MagickImage(infile))
             {
-                BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-                    BitmapCreateOptions.PreservePixelFormat,
-                    BitmapCacheOption.OnLoad);
-                WriteableBitmap writeableBitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-                writeableBitmap.Freeze();
-                
-                Grid grid = new Grid
+                Gravity gravity = Gravity.Center;
+                if (conf.A11)
                 {
-                    Width = writeableBitmap.PixelWidth,
-                    Height = writeableBitmap.PixelHeight,
-                    ClipToBounds = true,
-                    SnapsToDevicePixels = true
-                };
-                grid.UpdateLayout();
-                var size = new Size(writeableBitmap.PixelWidth, writeableBitmap.PixelWidth);
-                grid.Measure(size);
-                grid.Arrange(new Rect(size));
-                
-                Image overlay = new Image();
-                Image image = new Image { Width = writeableBitmap.PixelWidth, Height = writeableBitmap.PixelHeight };
-                image.BeginInit();
-                image.Source = writeableBitmap;
-                image.EndInit();
-                image.Stretch = Stretch.Fill;
-                grid.Children.Add(image);
-                grid.UpdateLayout();
+                    gravity = Gravity.Northwest;
+                }
+                if (conf.A12)
+                {
+                    gravity = Gravity.North;
+                }
+                if (conf.A13)
+                {
+                    gravity = Gravity.Northeast;
+                }
+                if (conf.A21)
+                {
+                    gravity = Gravity.West;
+                }
+                if (conf.A22)
+                {
+                    gravity = Gravity.Center;
+                }
+                if (conf.A23)
+                {
+                    gravity = Gravity.East;
+                }
+                if (conf.A31)
+                {
+                    gravity = Gravity.Southwest;
+                }
+                if (conf.A32)
+                {
+                    gravity = Gravity.South;
+                }
+                if (conf.A33)
+                {
+                    gravity = Gravity.Southeast;
+                }
+
+
+                if (File.Exists(conf.OverlayFile))
+                {
+                    // Read the watermark that will be put on top of the image
+                    using (MagickImage watermark = new MagickImage(conf.OverlayFile))
+                    {
+                        if (conf.StrechOverlay)
+                            watermark.Resize(image.Width, image.Height);
+                        // Optionally make the watermark more transparent
+                        watermark.Evaluate(Channels.Alpha, EvaluateOperator.Add, -(255*(100 - conf.Transparency)/100));
+                        // Draw the watermark in the bottom right corner
+                        image.Composite(watermark, gravity, CompositeOperator.Over);
+
+                        //// Optionally make the watermark more transparent
+                        //watermark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 4);
+
+                        //// Or draw the watermark at a specific location
+                        //image.Composite(watermark, 200, 50, CompositeOperator.Over);
+                    }
+                }
 
                 string text = "";
                 if (!string.IsNullOrEmpty(conf.Text))
@@ -77,92 +108,16 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                                         String.Compare(template.Name, match.Value,
                                             StringComparison.InvariantCultureIgnoreCase) == 0).Aggregate(current1,
                                                 (current, template) => current.Replace(match.Value, template.Value)));
-                }
-                TextBlock textBlock = new TextBlock
-                {
-                    Text = text,
-                    Foreground = (SolidColorBrush) new BrushConverter().ConvertFromString(conf.FontColor),
-                    FontFamily = (FontFamily) new FontFamilyConverter().ConvertFromString(conf.Font),
-                    FontSize = conf.FontSize,
-                    Opacity = conf.Transparency/100.00
-                };
-                if (conf.A11)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-                    textBlock.VerticalAlignment = VerticalAlignment.Top;
-                }
-                if (conf.A12)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                    textBlock.VerticalAlignment = VerticalAlignment.Top;
-                }
-                if (conf.A13)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Right;
-                    textBlock.VerticalAlignment = VerticalAlignment.Top;
-                }
-                if (conf.A21)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-                    textBlock.VerticalAlignment = VerticalAlignment.Center;
-                }
-                if (conf.A22)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                    textBlock.VerticalAlignment = VerticalAlignment.Center;
-                }
-                if (conf.A23)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Right;
-                    textBlock.VerticalAlignment = VerticalAlignment.Center;
-                }
-                if (conf.A31)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-                    textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                }
-                if (conf.A32)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                    textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                }
-                if (conf.A33)
-                {
-                    textBlock.HorizontalAlignment = HorizontalAlignment.Right;
-                    textBlock.VerticalAlignment = VerticalAlignment.Bottom;
-                }
 
-                textBlock.Margin = new Thickness(conf.Margins);
-                if (File.Exists(conf.OverlayFile))
-                {
-                    overlay.Source = BitmapLoader.Instance.LoadImage(conf.OverlayFile, 0, 0);
-                    overlay.Opacity = textBlock.Opacity;
-                    if (!conf.StrechOverlay)
-                    {
-                        overlay.HorizontalAlignment = textBlock.HorizontalAlignment;
-                        overlay.VerticalAlignment = textBlock.VerticalAlignment;
-                        overlay.Stretch = Stretch.None;
-                    }
-                    else
-                    {
-                        overlay.HorizontalAlignment = HorizontalAlignment.Stretch;
-                        overlay.VerticalAlignment = VerticalAlignment.Stretch;
-                        overlay.Stretch = Stretch.UniformToFill;
-                    }
-                    grid.Children.Add(overlay);
-                    grid.UpdateLayout();
+                    image.Font = conf.Font;
+                    image.FontPointsize = conf.FontSize;
+                    Color color = (Color) ColorConverter.ConvertFromString(conf.FontColor);
+                    image.FillColor = new MagickColor(color.R, color.G, color.B, color.A);
+                    image.StrokeColor = new MagickColor(color.R, color.G, color.B, color.A);
+                    image.Annotate(text, gravity);
                 }
-               
-                grid.Children.Add(textBlock);
-                grid.UpdateLayout();
-  
-                BitmapLoader.Save2Jpg(
-                    BitmapLoader.SaveImageSource(grid, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight), dest);
-            }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Overlay Transform Plugin error ", ex);
+                image.Format = MagickFormat.Jpeg;
+                image.Write(dest);
             }
             return dest;
         }
