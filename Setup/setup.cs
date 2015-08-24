@@ -56,10 +56,10 @@ namespace Setup
                         new File(appFeature, "Plugins\\CameraControl.Plugins\\dcc.plugin")),
                     new Dir(appFeature, "Plugin.DeviceControlBox",
                         new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\Plugin.DeviceControlBox.dll"),
-                        new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\dcc.plugin")),
-                    new Dir(appFeature, "imageJPlugin",
-                        new File(appFeature, "Plugins\\imageJPlugin\\imageJPlugin.dll"),
-                        new File(appFeature, "Plugins\\imageJPlugin\\dcc.plugin"))
+                        new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\dcc.plugin"))
+                    //new Dir(appFeature, "imageJPlugin",
+                    //    new File(appFeature, "Plugins\\imageJPlugin\\imageJPlugin.dll"),
+                    //    new File(appFeature, "Plugins\\imageJPlugin\\dcc.plugin"))
                         ),
                 new Dir(appFeature, "Languages",
                     new DirFiles(appFeature, @"Languages\*.xml")),

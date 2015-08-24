@@ -65,8 +65,10 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="{T:TranslateExtension LabelTheme}" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
-                    <ComboBox Name="cmb_themes" Grid.Row="1" Grid.Column="3" SelectedValue="{Binding CurrentThemeName}" ItemsSource="{Binding Themes}" Margin="2"/>
+                    <Label Content="{T:TranslateExtension LabelTheme}" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"
+                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=UseThemeSelector, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    <ComboBox Name="cmb_themes" Grid.Row="1" Grid.Column="3" SelectedValue="{Binding CurrentThemeName}" ItemsSource="{Binding Themes}" Margin="2"
+                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=UseThemeSelector, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                     <Label Content="{T:TranslateExtension LabelMainWindow}" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
                     <ComboBox Name="cmb_mainwindow" Grid.Row="2" Grid.Column="3" SelectedItem="{Binding SelectedMainForm}" Margin="2"/>
@@ -282,7 +284,7 @@
                         <RowDefinition Height="Auto" />                        
                         <RowDefinition Height="67*" />
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Nikon">
+                    <GroupBox Header="Nikon" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
@@ -309,7 +311,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Grid.Row="0" Grid.Column="1" Header="Canon">
+                    <GroupBox Grid.Row="0" Grid.Column="1" Header="Canon" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />

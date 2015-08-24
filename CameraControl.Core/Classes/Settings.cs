@@ -155,7 +155,12 @@ namespace CameraControl.Core.Classes
 
         public string CurrentThemeName
         {
-            get { return _currentThemeName; }
+            get
+            {
+                if (!ServiceProvider.Branding.UseThemeSelector)
+                    return ServiceProvider.Branding.DefaultTheme;
+                return _currentThemeName;
+            }
             set
             {
                 _currentThemeName = value;

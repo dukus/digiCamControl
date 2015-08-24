@@ -162,6 +162,13 @@ namespace CameraControl.Core.Classes
         public bool ShowToolsPanel { get; set; }
 
         public bool ShowMainMenu { get; set; }
+        
+        public string DefaultTheme { get; set; }
+
+        public bool UseThemeSelector
+        {
+            get { return string.IsNullOrEmpty(DefaultTheme); }
+        }
 
         public string DefaultSettings
         {
