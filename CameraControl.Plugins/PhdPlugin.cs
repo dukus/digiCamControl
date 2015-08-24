@@ -52,6 +52,11 @@ namespace CameraControl.Plugins
 
         public string Title { get; set; }
 
+        public string Id
+        {
+            get { return "{26528ED8-0747-454F-BAEB-ACEF2BEF73C7}"; }
+        }
+
         #endregion
 
         public PhdPlugin()

@@ -20,6 +20,11 @@ namespace CameraControl.Plugins.ToolPlugins
             return true;
         }
 
+        public string Id
+        {
+            get { return "{6E020FD0-BEF0-4B22-8247-8271D07B4900}"; }
+        }
+
         public string Title { get; set; }
 
         public ImageSequencerPlugin()

@@ -190,7 +190,7 @@ namespace CameraControl
 
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
 
-                foreach (IPanelPlugin plugin in ServiceProvider.PluginManager.PanelPlugins)
+                foreach (IPlugin plugin in ServiceProvider.PluginManager.Plugins)
                 {
                     plugin.Init();
                 }

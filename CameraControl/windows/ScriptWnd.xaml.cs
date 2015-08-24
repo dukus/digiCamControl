@@ -67,6 +67,11 @@ namespace CameraControl.windows
     {
         private readonly TclScripManager _manager = new TclScripManager();
 
+        public string Id
+        {
+            get { return "{04F1DD8E-3E4E-497D-80A9-125ABC76DA7E}"; }
+        }
+
         public string ScriptFileName { get; set; }
 
         public ScriptWnd()

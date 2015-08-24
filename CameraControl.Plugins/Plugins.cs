@@ -93,6 +93,11 @@ namespace CameraControl.Plugins
             return true;
         }
 
+        public void Init()
+        {
+            
+        }
+
         #endregion
     }
 }

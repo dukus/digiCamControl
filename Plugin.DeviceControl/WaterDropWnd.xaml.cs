@@ -54,6 +54,11 @@ namespace Plugin.DeviceControl
             return true;
         }
 
+        public string Id
+        {
+            get { return "{D69B4655-0FA9-453F-A995-89C17D69D8DD}"; }
+        }
+
         #endregion
 
         private void btn_start_Click(object sender, RoutedEventArgs e)

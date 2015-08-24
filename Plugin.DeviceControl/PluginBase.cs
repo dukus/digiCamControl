@@ -17,6 +17,11 @@ namespace Plugin.DeviceControl
             return true;
         }
 
+        public void Init()
+        {
+            
+        }
+
         #endregion
     }
 }

@@ -17,6 +17,11 @@ namespace CameraControl.Plugins.ToolPlugins
             return true;
         }
 
+        public string Id
+        {
+            get { return "{FEF994F3-6C4C-412F-9374-C92340EA80D2}"; }
+        }
+
         public string Title { get; set; }
 
         public GenMoviePlugin()

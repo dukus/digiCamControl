@@ -17,6 +17,11 @@ namespace CameraControl.Plugins.ToolPlugins
             return true;
         }
 
+        public string Id
+        {
+            get { return "{C66CBC77-71A3-491A-B844-56AF460DBEF5}"; }
+        }
+
         public string Title { get; set; }
 
         public GenThumbPlugin()
