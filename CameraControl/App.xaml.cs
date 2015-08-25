@@ -185,8 +185,9 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.RegisterKnowCommands();
                 ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
 
-                ServiceProvider.PluginManager.LoadPlugins(
-                    Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Plugins"));
+                ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Settings.ApplicationFolder, "Plugins"));
+
+                ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Settings.ApplicationFolder, "Branding", "Plugins"));
 
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
 

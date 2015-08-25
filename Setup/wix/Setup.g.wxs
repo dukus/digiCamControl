@@ -18,8 +18,8 @@
 
           <Component Id="Component.CameraControl.exe" Guid="19d12628-7654-4354-a305-9ab0ea60ab71">
             <File Id="CameraControl.exe" Source="CameraControl.exe">
-              <Shortcut Id="Shortcut.CameraControl.exe.digiCamControl" WorkingDirectory="ProgramMenuFolder.digiCamControl" Directory="ProgramMenuFolder.digiCamControl" Name="digiCamControl.lnk" />
-              <Shortcut Id="Shortcut.CameraControl.exe.digiCamControl.1" WorkingDirectory="DesktopFolder" Directory="DesktopFolder" Name="digiCamControl.lnk" />
+              <Shortcut Id="Shortcut.CameraControl.exe.Scientific_focus_Acquisition_software_1" WorkingDirectory="INSTALLDIR" Directory="ProgramMenuFolder.digiCamControl" Name="Scientific focus Acquisition software 1.lnk" Icon="IconFile1_logo.ico" IconIndex="0" />
+              <Shortcut Id="Shortcut.CameraControl.exe.Scientific_focus_Acquisition_software_1.1" WorkingDirectory="INSTALLDIR" Directory="DesktopFolder" Name="Scientific focus Acquisition software 1.lnk" Icon="IconFile1_logo.ico" IconIndex="0" />
             </File>
 
             <RegistryKey Root="HKCU" Key="Software\WixSharp\Used">
@@ -73,6 +73,10 @@
 
           <Component Id="Component.DigiCamControl.xbs" Guid="19d12628-7654-4354-a305-9ab08fb8314d">
             <File Id="DigiCamControl.xbs" Source="DigiCamControl.xbs" />
+          </Component>
+
+          <Component Id="Component.branding.xml" Guid="19d12628-7654-4354-a305-9ab0773b8acc">
+            <File Id="branding.xml" Source="branding.xml" />
           </Component>
 
           <Component Id="Component.AForge.dll" Guid="19d12628-7654-4354-a305-9ab0d997c732">
@@ -317,10 +321,6 @@
 
           <Component Id="Component.notloaded.png" Guid="19d12628-7654-4354-a305-9ab019fe5786">
             <File Id="notloaded.png" Source="notloaded.png" />
-          </Component>
-
-          <Component Id="Component.branding.xml" Guid="19d12628-7654-4354-a305-9ab0773b8acc">
-            <File Id="branding.xml" Source="branding.xml" />
           </Component>
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
@@ -986,10 +986,31 @@
 
           <Directory Id="INSTALLDIR.Branding" Name="Branding">
 
+            <Component Id="Component.Logo.ico.1" Guid="19d12628-7654-4354-a305-9ab0a280229e">
+              <File Id="Logo.ico.1" Source="Branding\Logo.ico" />
+            </Component>
+
             <Component Id="Component.Logo_big.jpg.1" Guid="19d12628-7654-4354-a305-9ab04a795ff7">
               <File Id="Logo_big.jpg.1" Source="Branding\Logo_big.jpg" />
             </Component>
 
+            <Directory Id="INSTALLDIR.Branding.Plugins" Name="Plugins">
+              <Directory Id="INSTALLDIR.Branding.Plugins.imageJPlugin" Name="imageJPlugin">
+
+                <Component Id="Component.dcc.plugin.2" Guid="19d12628-7654-4354-a305-9ab0bdc276ef">
+                  <File Id="dcc.plugin.2" Source="Branding\Plugins\imageJPlugin\dcc.plugin" />
+                </Component>
+
+                <Component Id="Component.imageJPlugin.dll" Guid="19d12628-7654-4354-a305-9ab034605693">
+                  <File Id="imageJPlugin.dll" Source="Branding\Plugins\imageJPlugin\imageJPlugin.dll" />
+                </Component>
+
+                <Component Id="Component.imageJPlugin.pdb" Guid="19d12628-7654-4354-a305-9ab05082569b">
+                  <File Id="imageJPlugin.pdb" Source="Branding\Plugins\imageJPlugin\imageJPlugin.pdb" />
+                </Component>
+
+              </Directory>
+            </Directory>
           </Directory>
         </Directory>
 
@@ -1070,7 +1091,7 @@
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
     <CustomAction Id="Action2_SetRightAction" BinaryKey="Action1_MyAction_File" DllEntry="SetRightAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
-    <CustomAction Id="PreventDowngrading" Error="A version of the digiCamControl already installed. Unistall it first from Control Panel !"  />
+    <CustomAction Id="PreventDowngrading" Error="Newer version already installed"  />
 
     <Binary Id="Action1_MyAction_File" SourceFile="..\..\..\Setup\%this%.CA.dll"  />
 
@@ -1090,6 +1111,7 @@
       <ComponentRef Id="Component.logo_big.jpg" />
       <ComponentRef Id="Component.baseMtpDevice.xml" />
       <ComponentRef Id="Component.DigiCamControl.xbs" />
+      <ComponentRef Id="Component.branding.xml" />
       <ComponentRef Id="Component.AForge.dll" />
       <ComponentRef Id="Component.AForge.Imaging.dll" />
       <ComponentRef Id="Component.AForge.Imaging.Formats.dll" />
@@ -1151,7 +1173,6 @@
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
-      <ComponentRef Id="Component.branding.xml" />
       <ComponentRef Id="Component.takephoto.mp3" />
       <ComponentRef Id="Component.takephoto.wav" />
       <ComponentRef Id="Component.Canon_EOS_100D.png" />
@@ -1304,7 +1325,11 @@
       <ComponentRef Id="Component.ui_icons_f5e175_256x240.png" />
       <ComponentRef Id="Component.ui_icons_f7a50d_256x240.png" />
       <ComponentRef Id="Component.ui_icons_fcd113_256x240.png" />
+      <ComponentRef Id="Component.Logo.ico.1" />
       <ComponentRef Id="Component.Logo_big.jpg.1" />
+      <ComponentRef Id="Component.dcc.plugin.2" />
+      <ComponentRef Id="Component.imageJPlugin.dll" />
+      <ComponentRef Id="Component.imageJPlugin.pdb" />
       <ComponentRef Id="digiCamControl.EmptyDirectory" />
       <ComponentRef Id="DesktopFolder.EmptyDirectory" />
       <ComponentRef Id="ProgramMenuFolder" />
@@ -1326,10 +1351,11 @@
       <Custom Action="Action2_SetRightAction" Before="InstallFinalize"> (1) </Custom>
       <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
 
-      <RemoveExistingProducts After="InstallInitialize" />
+      <RemoveExistingProducts After="InstallFinalize" />
     </InstallExecuteSequence>
 
-    <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico"  />
+    <Icon Id="app_icon.ico" SourceFile="Branding\logo.ico"  />
+    <Icon Id="IconFile1_logo.ico" SourceFile="Branding\logo.ico"  />
 
   </Product>
 </Wix>

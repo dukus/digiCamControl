@@ -115,7 +115,7 @@ namespace CameraControl.Core.Classes
 
         public static string GetFullPath(string path)
         {
-            if (Path.IsPathRooted(path))
+            if (path.Contains(":\\"))
                 return path;
             return Path.Combine(Settings.ApplicationFolder, path);
         }

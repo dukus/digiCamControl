@@ -22,11 +22,10 @@ namespace Setup
 
             Feature appFeature = new Feature("Application files", "Main application files", true, false, @"INSTALLDIR");
             Feature obsPlugin = new Feature("Obs Plugin");
-
+            var shortcut = new FileShortcut(appFeature, "digiCamControl", @"%ProgramMenu%\digiCamControl") { WorkingDirectory = @"INSTALLDIR" };
+            var shortcutD = new FileShortcut(appFeature, "digiCamControl", @"%Desktop%") { WorkingDirectory = @"INSTALLDIR" };
             var appDir = new Dir(@"digiCamControl",
-                new File(appFeature, "CameraControl.exe",
-                    new FileShortcut(appFeature, "digiCamControl", @"%ProgramMenu%\digiCamControl"),
-                    new FileShortcut(appFeature, "digiCamControl", @"%Desktop%")),
+                new File(appFeature, "CameraControl.exe",shortcut,shortcutD),
                 new File(appFeature, "CameraControl.PluginManager.exe"),
                 new File(appFeature, "CameraControlCmd.exe"),
                 new File(appFeature, "CameraControlRemoteCmd.exe"),
@@ -57,9 +56,6 @@ namespace Setup
                     new Dir(appFeature, "Plugin.DeviceControlBox",
                         new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\Plugin.DeviceControlBox.dll"),
                         new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\dcc.plugin"))
-                    //new Dir(appFeature, "imageJPlugin",
-                    //    new File(appFeature, "Plugins\\imageJPlugin\\imageJPlugin.dll"),
-                    //    new File(appFeature, "Plugins\\imageJPlugin\\dcc.plugin"))
                         ),
                 new Dir(appFeature, "Languages",
                     new DirFiles(appFeature, @"Languages\*.xml")),
@@ -105,8 +101,7 @@ namespace Setup
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Release\"));
 #endif
-            project.ResolveWildCards();
-
+            
             FileVersionInfo ver =
                 FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
 
@@ -114,10 +109,10 @@ namespace Setup
 
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
-            project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
-            project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
-            //project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
-            //project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
+            //project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
+            //project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
+            ////project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
+            ////project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
 
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
@@ -133,9 +128,22 @@ namespace Setup
                 project.OutFileName = string.Format(name.Replace(" ", "_") + "_{0}", ver.FileVersion);
                 appDir.AddFile(new File(appFeature, "branding.xml"));
                 appDir.AddDir(new Dir(appFeature, "Branding",
-                    new DirFiles(appFeature, @"Branding\*.*")));
+                    new Files(appFeature, @"Branding\*.*")));
                 project.Name = name;
+                if (System.IO.File.Exists(Path.Combine(project.SourceBaseDir, "Branding", "logo.ico")))
+                {
+                    project.ControlPanelInfo.ProductIcon = Path.Combine(project.SourceBaseDir, "Branding", "logo.ico");
+                    shortcut.IconFile = Path.Combine(project.SourceBaseDir, "Branding", "logo.ico");
+                    shortcutD.IconFile = Path.Combine(project.SourceBaseDir, "Branding", "logo.ico");
+                    shortcut.Name = name;
+                    shortcutD.Name = name;
+                }
+                if (System.IO.File.Exists(Path.Combine(project.SourceBaseDir, "Branding", "Licence.rtf")))
+                    project.ControlPanelInfo.ProductIcon = "Branding\\Licence.rtf";
+
             }
+
+            project.ResolveWildCards();
 
             Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);
