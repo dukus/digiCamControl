@@ -8,13 +8,21 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
         <autoExportPlugins:DropboxViewModel/>
-    </UserControl.DataContext>    
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <Button Content="Login" Command="{Binding LoginCommand}"/>
-
+        <Button Content="Login" Command="{Binding LoginCommand}" Visibility="{Binding IsLogedOut, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Button Content="Logout" Command="{Binding LoginCommand}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Label Grid.Row="1" Content="{Binding UserName}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        
     </Grid>
 </UserControl>
