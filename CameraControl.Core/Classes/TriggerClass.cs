@@ -122,7 +122,6 @@ namespace CameraControl.Core.Classes
             try
             {
                 Key inputKey = KeyInterop.KeyFromVirtualKey((int)e.Key);
-                Console.WriteLine("Key" + e.isAltPressed + e.isCtrlPressed + inputKey);
                 foreach (var item in ServiceProvider.Settings.Actions)
                 {
                     if (!item.Global)
