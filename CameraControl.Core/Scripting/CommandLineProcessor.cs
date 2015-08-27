@@ -19,8 +19,15 @@ namespace CameraControl.Core.Scripting
             switch (cmd)
             {
                 case "capture":
-                    //Task.Factory.StartNew(CameraHelper.Capture);
-                    //Thread.Sleep(200);
+                    if (args.Length > 1)
+                    {
+                        var file = args[1];
+                        if (file.Contains(":\\"))
+                        {
+                            ServiceProvider.Settings.DefaultSession.Folder = Path.GetDirectoryName(file);
+                        }
+                        ServiceProvider.Settings.DefaultSession.FileNameTemplate = Path.GetFileNameWithoutExtension(file);
+                    }
                     CameraHelper.CaptureWithError();
                     ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
                     return null;
