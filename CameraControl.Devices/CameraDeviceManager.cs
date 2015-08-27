@@ -165,6 +165,8 @@ namespace CameraControl.Devices
                                   {"V1", typeof (NikonD5100)},
                                   {"V2", typeof (NikonD5100)},
                                   {"V3", typeof (NikonD600)},
+                                  {"J3", typeof (NikonD600)},
+                                  {"J4", typeof (NikonD600)},
                                   {"Df", typeof (NikonD600)},
                                   //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},
                                   {"MTP Sim", typeof (BaseMTPCamera)},
