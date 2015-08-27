@@ -110,7 +110,7 @@ namespace Setup
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
             project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
             //project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
-            //project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
+            project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
             ////project.MajorUpgradeStrategy.UpgradeVersions = VersionRange.ThisAndOlder;
             ////project.MajorUpgradeStrategy.PreventDowngradingVersions = VersionRange.ThisAndOlder;
 
