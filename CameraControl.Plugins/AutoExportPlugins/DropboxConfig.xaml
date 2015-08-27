@@ -18,11 +18,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <Button Content="Login" Command="{Binding LoginCommand}" Visibility="{Binding IsLogedOut, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <Button Content="Logout" Command="{Binding LoginCommand}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        <Label Grid.Row="1" Content="{Binding UserName}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Button Content="Login" Command="{Binding LoginCommand}" Visibility="{Binding IsLogedOut, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="3"/>
+        <Button Content="Logout" Command="{Binding LogoutCommand}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="3"/>
+        <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="16" Content="{Binding UserName}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="3"/>
+        <Button Grid.Row="2" Content="Show folder in browser" Margin="3" Command="{Binding ShowFolderCommand}" Visibility="{Binding IsLogedIn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         
     </Grid>
 </UserControl>

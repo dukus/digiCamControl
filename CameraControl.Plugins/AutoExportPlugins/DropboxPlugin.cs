@@ -44,7 +44,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new DropboxViewModel(configData);
-
+                
                 var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 

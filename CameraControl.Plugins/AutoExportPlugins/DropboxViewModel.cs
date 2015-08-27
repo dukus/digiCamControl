@@ -15,13 +15,16 @@ namespace CameraControl.Plugins.AutoExportPlugins
 {
     public class DropboxViewModel : BasePluginViewModel
     {
+        private const string AppKey = "71jiamqc1znjurb";
+        private const string AppSecret = "yt7p9rxiq87cpnd";
         private const string Server = "http://localhost:5514/";
-        DropNetClient _client = new DropNetClient("71jiamqc1znjurb", "yt7p9rxiq87cpnd");
+        private DropNetClient _client;
         private MiniWebServer _miniWebServer ;
         private bool _isLogedIn;
 
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand LogoutCommand { get; set; }
+        public RelayCommand ShowFolderCommand { get; set; }
 
         public string AccessToken
         {
@@ -75,19 +78,26 @@ namespace CameraControl.Plugins.AutoExportPlugins
             _config = configData;
             LoginCommand = new RelayCommand(Login);
             LogoutCommand = new RelayCommand(LogOut);
+            ShowFolderCommand = new RelayCommand(ShowFolder);
             LoadData();
         }
 
         private void LogOut()
         {
             AccessToken = "";
+            Secret = "";
+            _client = null;
         }
 
         private void Login()
         {
             try
             {
-                _client.GetToken();
+                if (_client == null)
+                {
+                    _client = new DropNetClient(AppKey, AppSecret);
+                    _client.GetToken();                    
+                }
                 var url = _client.BuildAuthorizeUrl(Server);
                 _miniWebServer = new MiniWebServer(SendResponse, Server);
                 _miniWebServer.Run();
@@ -125,18 +135,25 @@ namespace CameraControl.Plugins.AutoExportPlugins
             {
                 if (!string.IsNullOrEmpty(AccessToken))
                 {
-                    _client.GetToken();
-                    _client.UserLogin.Secret = Secret;
-                    _client.UserLogin.Token = AccessToken;
+                    _client = new DropNetClient(AppKey, AppSecret, AccessToken, Secret);
                     var data = _client.AccountInfo();
                     UserName = data.display_name;
                     IsLogedIn = true;
+                }
+                else
+                {
+                    IsLogedIn = false;
                 }
             }
             catch (Exception ex)
             {
                 IsLogedIn = false;
             }
+        }
+
+        private void ShowFolder()
+        {
+            PhotoUtils.Run("https://www.dropbox.com/home/Apps/digiCamControl");
         }
     }
 }
