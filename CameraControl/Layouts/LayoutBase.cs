@@ -237,36 +237,45 @@ namespace CameraControl.Layouts
 
         private void GeneratePreview()
         {
-          try
-          {
-              if (ZoomAndPanControl == null)
-                  return;
+            try
+            {
                 var bitmap = BitmapLoader.Instance.LoadSmallImage(ServiceProvider.Settings.SelectedBitmap.FileItem);
+
 
                 if (bitmap != null)
                 {
-                    if (ServiceProvider.Settings.SelectedBitmap.FileItem.IsMovie)
+                    if (ZoomAndPanControl == null)
                     {
+                        bitmap.Freeze();
                         ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
-                        return;
                     }
-                    int dw = (int)(ZoomAndPanControl.ContentViewportWidthRation * bitmap.PixelWidth);
-                    int dh = (int)(ZoomAndPanControl.ContentViewportHeightRation * bitmap.PixelHeight);
-                    int fw = (int)(ZoomAndPanControl.ContentZoomFocusXRation * bitmap.PixelWidth);
-                    int fh = (int)(ZoomAndPanControl.ContentZoomFocusYRation * bitmap.PixelHeight);
+                    else
+                    {
+                        if (ServiceProvider.Settings.SelectedBitmap.FileItem.IsMovie)
+                        {
+                            ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                            return;
+                        }
+                        int dw = (int) (ZoomAndPanControl.ContentViewportWidthRation*bitmap.PixelWidth);
+                        int dh = (int) (ZoomAndPanControl.ContentViewportHeightRation*bitmap.PixelHeight);
+                        int fw = (int) (ZoomAndPanControl.ContentZoomFocusXRation*bitmap.PixelWidth);
+                        int fh = (int) (ZoomAndPanControl.ContentZoomFocusYRation*bitmap.PixelHeight);
 
-                    bitmap.FillRectangle2(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, Color.FromArgb(128, 128, 128, 128));
-                    bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2), Color.FromArgb(128, 128, 128, 128));
+                        bitmap.FillRectangle2(0, 0, bitmap.PixelWidth, bitmap.PixelHeight,
+                            Color.FromArgb(128, 128, 128, 128));
+                        bitmap.FillRectangleDeBlend(fw - (dw/2), fh - (dh/2), fw + (dw/2), fh + (dh/2),
+                            Color.FromArgb(128, 128, 128, 128));
 
-                    bitmap.Freeze();
-                    ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                        bitmap.Freeze();
+                        ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                    }
                 }
             }
             catch (Exception)
             {
 
             }
-           
+
         }
 
         private void ImageLIst_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -486,7 +495,7 @@ namespace CameraControl.Layouts
                                                            }
                                                            if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))
                                                            {
-                                                               if (cmd.Contains("_"))
+                                                               if (ZoomAndPanControl!=null &&  cmd.Contains("_"))
                                                                {
                                                                    var vals = cmd.Split('_');
                                                                    if (vals.Count() > 2)
