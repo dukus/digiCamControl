@@ -6,7 +6,7 @@
              xmlns:imageTransformPlugins="clr-namespace:CameraControl.Plugins.ImageTransformPlugins"
              xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.DataContext>
         <imageTransformPlugins:ScriptTransformViewModel/>
     </UserControl.DataContext>
@@ -20,6 +20,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <ComboBox ItemsSource="{Binding AvailableScripts}" HorizontalAlignment="Stretch" MinWidth="230" Margin="3" IsEditable="False" SelectedItem="{Binding SelectedScript}"/>
             <Button Content="Load" HorizontalAlignment="Right" Margin="3,3,3,0" Height="22" VerticalAlignment="Top" Click="Button_Click"/>
+            <Button Content="Open in notepad" HorizontalAlignment="Right" Margin="3,3,3,0" Height="22" VerticalAlignment="Top" Command="{Binding OpenCommand}"/>
         </StackPanel>
         <imageTransformPlugins:BindableTextEditor Grid.Row="2" FontSize="16" Text="{Binding Script, Mode=OneTime}" x:Name="Editor" Background="White" SyntaxHighlighting="XML" TextChanged="Editor_TextChanged" ShowLineNumbers="True" />
 

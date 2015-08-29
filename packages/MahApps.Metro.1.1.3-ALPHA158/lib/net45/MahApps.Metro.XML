@@ -429,6 +429,11 @@
             Gets/sets a custom resource dictionary which can contains custom styles, brushes or something else.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.Dialogs.MetroDialogSettings.SuppressDefaultResources">
+            <summary>
+            If set, stops standard resource dictionaries being applied to the dialog.
+            </summary>
+        </member>
         <member name="T:MahApps.Metro.Controls.Dialogs.MetroDialogColorScheme">
             <summary>
             An enum representing the different choices for a color scheme in a Metro Dialog.
@@ -3868,14 +3873,184 @@
         </member>
         <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._hwnd">
             <summary>Underlying HWND for the _window.</summary>
+            <SecurityNote>
+              Critical : Critical member
+            </SecurityNote>
+        </member>
+        <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._hwndSource">
+            <summary>Underlying HWND for the _window.</summary>
+            <SecurityNote>
+              Critical : Critical member provides access to HWND's window messages which are critical
+            </SecurityNote>
         </member>
         <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._chromeInfo">
             <summary>Object that describes the current modifications being made to the chrome.</summary>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker.#ctor">
+            <SecurityNote>
+              Critical : Store critical methods in critical callback table
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker.SetWindowChrome(Microsoft.Windows.Shell.WindowChrome)">
+            <SecurityNote>
+              Critical : Calls critical methods
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._OnChromePropertyChangedThatRequiresRepaint(System.Object,System.EventArgs)">
+            <SecurityNote>
+              Critical : Calls critical methods
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._OnChromeWorkerChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <SecurityNote>
+              Critical : Calls critical methods
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._SetWindow(System.Windows.Window)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._WindowSourceInitialized(System.Object,System.EventArgs)">
+            <SecurityNote>
+              Critical : Store critical methods in critical callback table
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker.UnsubscribeWindowEvents">
+            <SecurityNote>
+              Critical : References critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._UnsetWindow(System.Object,System.EventArgs)">
+            <SecurityNote>
+              Critical : Store critical methods in critical callback table
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._OnWindowPropertyChangedThatRequiresTemplateFixup(System.Object,System.EventArgs)">
+            <SecurityNote>
+              Critical : Accesses critical _hwnd field
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._ApplyNewCustomChrome">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._FixupTemplateIssues">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._FixupRestoreBounds(System.Object,System.EventArgs)">
+            <SecurityNote>
+              Critical : Store critical methods in critical callback table
+              Safe     : Demands full trust permissions
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._GetAdjustedWindowRect(Standard.RECT)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._WndProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Accesses critical _hwnd
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleNCUAHDrawCaption(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleRestoreWindow(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleNCActivate(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
         </member>
         <member name="M:Microsoft.Windows.Shell.WindowChromeWorker.AdjustWorkingAreaForAutoHide(System.IntPtr,Standard.RECT)">
             <summary>
             This method handles the window size if the taskbar is set to auto-hide.
             </summary>
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleNCCalcSize(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical Marshal.PtrToStructure
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleNCHitTest(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleNCRButtonUp(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical method
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleSize(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical method
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleWindowPosChanging(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical Marshal.PtrToStructure
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleWindowPosChanged(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical Marshal.PtrToStructure
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleGetMinMaxInfo(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleDwmCompositionChanged(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleSettingChange(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleEnterSizeMove(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleEnterSizeMoveForAnimation(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleMoveForRealSize(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._HandleExitSizeMoveForAnimation(Standard.WM,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
         </member>
         <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._ModifyStyle(Standard.WS,Standard.WS)">
             <summary>Add and remove a native WindowStyle from the HWND.</summary>
@@ -3890,12 +4065,18 @@
             <summary>
             Get the WindowState as the native HWND knows it to be.  This isn't necessarily the same as what Window thinks.
             </summary>
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
         </member>
         <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._GetWindowRect">
             <summary>
             Get the bounding rectangle for the window in physical coordinates.
             </summary>
             <returns>The bounding rectangle for the window.</returns>
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
         </member>
         <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._UpdateSystemMenu(System.Nullable{System.Windows.WindowState})">
             <summary>
@@ -3907,13 +4088,76 @@
             <remarks>
             We want to update the menu while we have some control over whether the caption will be repainted.
             </remarks>
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._UpdateFrameState(System.Boolean)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._ClearRoundingRegion">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._GetClientRectRelativeToWindowRect(System.IntPtr)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._SetRoundingRegion(System.Nullable{Standard.WINDOWPOS})">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._CreateRoundRectRgn(System.Windows.Rect,System.Double)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._CreateAndCombineRoundRectRgn(System.IntPtr,System.Windows.Rect,System.Double)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._ExtendGlassFrame">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
         </member>
         <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._HitTestBorders">
             <summary>
             Matrix of the HT values to return when responding to NC window messages.
             </summary>
         </member>
-        <member name="P:Microsoft.Windows.Shell.WindowChromeWorker._IsPresentationFrameworkVersionLessThan4">
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._RestoreStandardChromeState(System.Boolean)">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._UnhookCustomChrome">
+            <SecurityNote>
+              Critical : Unsubscribes event handler from critical _hwndSource
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._RestoreFrameworkIssueFixups">
+            <SecurityNote>
+              Critical : Unsubscribes critical event handler
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._RestoreGlassFrame">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._RestoreHrgn">
+            <SecurityNote>
+              Critical : Calls critical methods
+            </SecurityNote>
+        </member>
+        <member name="P:Microsoft.Windows.Shell.WindowChromeWorker.IsPresentationFrameworkVersionLessThan4">
             <summary>
             Is this using WPF4?
             </summary>
@@ -3921,6 +4165,11 @@
             There are a few specific bugs in Window in 3.5SP1 and below that require workarounds
             when handling WM_NCCALCSIZE on the HWND.
             </remarks>
+        </member>
+        <member name="P:Microsoft.Windows.Shell.WindowChromeWorker._IsWindowDocked">
+            <SecurityNote>
+              Critical : Calls critical method
+            </SecurityNote>
         </member>
         <member name="P:Microsoft.Windows.Shell.WindowChromeWorker._MinimizeAnimation">
             A borderless window lost his animation, with this we bring it back.

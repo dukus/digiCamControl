@@ -18,6 +18,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
         private List<string> _availableScripts;
 
         public RelayCommand LoadCommand { get; set; }
+        public RelayCommand OpenCommand { get; set; }
 
 
         public string Script
@@ -46,6 +47,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
         {
             AvailableScripts = new List<string>();
             LoadCommand = new RelayCommand(Load);
+            OpenCommand = new RelayCommand(Open);
         }
 
         public ScriptTransformViewModel(ValuePairEnumerator config)
@@ -53,6 +55,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             _config = config;
             AvailableScripts = new List<string>();
             LoadCommand = new RelayCommand(Load);
+            OpenCommand = new RelayCommand(Open);
             try
             {
                 var files = Directory.GetFiles(Path.Combine(Settings.ApplicationFolder, "Data", "msl"), "*.msl");
@@ -83,6 +86,19 @@ namespace CameraControl.Plugins.ImageTransformPlugins
         public void SetScript(string s)
         {
             _script = s;
+        }
+
+        public void Open()
+        {
+            try
+            {
+                var file = Path.Combine(Settings.ApplicationFolder, "Data", "msl", SelectedScript + ".msl");
+                PhotoUtils.Run("notepad.exe", file);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error");
+            }
         }
     }
 }

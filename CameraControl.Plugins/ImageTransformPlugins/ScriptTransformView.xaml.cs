@@ -35,5 +35,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             Editor.Text = ((ScriptTransformViewModel)DataContext).Script;
         }
 
+
+
     }
 }

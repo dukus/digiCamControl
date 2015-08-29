@@ -20,7 +20,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             if (conf.CreateNew)
             {
                 string newFile = Path.Combine(Path.GetDirectoryName(filename),
-                    Path.GetFileNameWithoutExtension(filename) + "_transformed" + Path.GetExtension(outfile));
+                    Path.GetFileNameWithoutExtension(filename) + "_transformed" + Path.GetExtension(item.FileName));
                 File.Copy(outfile, newFile, true);
                 if (ServiceProvider.Settings.DefaultSession.GetFile(newFile)==null)
                 {

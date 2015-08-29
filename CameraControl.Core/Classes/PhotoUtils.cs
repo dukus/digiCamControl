@@ -131,7 +131,7 @@ namespace CameraControl.Core.Classes
 
             try
             {
-                stream = File.Open(file,FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                stream = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
             }
             catch (IOException)
             {
@@ -150,12 +150,37 @@ namespace CameraControl.Core.Classes
         public static void WaitForFile(string file)
         {
             int retry = 15;
-            while (IsFileLocked(file) && retry>0 )
+            while (IsFileLocked(file) && retry > 0)
             {
                 Thread.Sleep(100);
                 retry--;
             }
         }
+
+        public static Boolean IsNumeric(Object expression)
+        {
+            if (expression == null || expression is DateTime)
+                return false;
+
+            if (expression is Int16 || expression is Int32 || expression is Int64 || expression is Decimal ||
+                expression is Single || expression is Double || expression is Boolean)
+                return true;
+
+            try
+            {
+                if (expression is string)
+                    Double.Parse(expression as string);
+                else
+                    Double.Parse(expression.ToString());
+                return true;
+            }
+            catch
+            {
+            } // just dismiss errors but return false
+            return false;
+        }
+
+
 
     }
 }

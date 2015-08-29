@@ -223,7 +223,7 @@ namespace CameraControl.Core.Scripting
                         foreach (PropertyInfo info in props)
                         {
                             if (info.PropertyType.Name.StartsWith("PropertyValue") &&
-                                (arg.Split('.')[1].ToLower() == info.Name.ToLower())
+                                (arg.Split('.')[1].ToLower().Replace(" ", "_") == info.Name.ToLower())
                                 )
                             {
                                 dynamic valp = info.GetValue(device, null);
@@ -306,7 +306,7 @@ namespace CameraControl.Core.Scripting
                     {
                         foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
                         {
-                            if (cameraDevice.SerialNumber == args[1])
+                            if ((PhotoUtils.IsNumeric(args[1]) && cameraDevice.SerialNumber == args[1]) || cameraDevice.DeviceName.Replace(" ", "_") == args[1].Replace(" ", "_"))
                             {
                                 ServiceProvider.DeviceManager.SelectedCameraDevice = cameraDevice;
                                 break;
@@ -392,18 +392,18 @@ namespace CameraControl.Core.Scripting
                         foreach (PropertyInfo info in props)
                         {
                             if (info.PropertyType.Name.StartsWith("PropertyValue") &&
-                                (arg.Split('.')[1].ToLower() == info.Name.ToLower())
+                                (arg.Split('.')[1].ToLower().Replace("_", " ") == info.Name.ToLower())
                                 )
                             {
                                 dynamic valp = info.GetValue(device, null);
-                                valp.Value = args[1];
+                                valp.Value = args[1].Replace("_"," ");
                             }
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)
                         {
-                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower().Replace("_", " ") == property.Name.ToLower()))
                             {
-                                property.Value = args[1];
+                                property.Value = args[1].Replace("_", " ");
                             }
                         }
                         return;

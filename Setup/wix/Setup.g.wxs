@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a3502694" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.2.99.29" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a35bd677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.3.30.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -772,6 +772,22 @@
 
           </Directory>
 
+          <Directory Id="INSTALLDIR.x64" Name="x64">
+
+            <Component Id="Component.Spilornis.dll" Guid="19d12628-7654-4354-a305-9ab072a9939f">
+              <File Id="Spilornis.dll" Source="x64\Spilornis.dll" />
+            </Component>
+
+          </Directory>
+
+          <Directory Id="INSTALLDIR.x86" Name="x86">
+
+            <Component Id="Component.Spilornis.dll.1" Guid="19d12628-7654-4354-a305-9ab081d7dba8">
+              <File Id="Spilornis.dll.1" Source="x86\Spilornis.dll" />
+            </Component>
+
+          </Directory>
+
           <Directory Id="INSTALLDIR.Tools" Name="Tools">
 
             <Component Id="Component.align_image_stack.exe" Guid="19d12628-7654-4354-a305-9ab0e987b4e0">
@@ -1060,8 +1076,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.2.99.29" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.2.99.29" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.30.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.3.30.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
@@ -1253,6 +1269,8 @@
       <ComponentRef Id="Component.gpl_3.0.txt" />
       <ComponentRef Id="Component.GPLv3LICENSE.rtf" />
       <ComponentRef Id="Component.WPFSharp.Globalizer.Licence.txt" />
+      <ComponentRef Id="Component.Spilornis.dll" />
+      <ComponentRef Id="Component.Spilornis.dll.1" />
       <ComponentRef Id="Component.align_image_stack.exe" />
       <ComponentRef Id="Component.COPYING" />
       <ComponentRef Id="Component.enfuse.exe" />

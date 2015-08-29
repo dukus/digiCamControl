@@ -61,6 +61,10 @@ namespace Setup
                     new DirFiles(appFeature, @"Languages\*.xml")),
                 new Dir(appFeature, "Licenses",
                     new DirFiles(appFeature, @"Licenses\*.*")),
+                new Dir(appFeature, "x64",
+                    new DirFiles(appFeature, @"x64\*.*")),
+                new Dir(appFeature, "x86",
+                    new DirFiles(appFeature, @"x86\*.*")),
                 new Dir(appFeature, "Tools",
                     new DirFiles(appFeature, @"Tools\*.*")),
                 new Dir(appFeature, "WebServer",
@@ -101,7 +105,7 @@ namespace Setup
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Release\"));
 #endif
-            
+
             FileVersionInfo ver =
                 FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
 
