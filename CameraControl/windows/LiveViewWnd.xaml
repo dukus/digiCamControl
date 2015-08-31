@@ -200,7 +200,8 @@
                     <RowDefinition Height="303*" />
                     <RowDefinition Height="20*" />
                 </Grid.RowDefinitions>
-                <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" />
+                <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" 
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
                 <Button Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension ButtonCapture}" Height="30" Margin="0,12,9,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
                 <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Height="30" Margin="12,88,9,0" VerticalAlignment="Top" IsChecked="{Binding FreezeImage}" Checked="ToggleButton_Checked" />

@@ -134,6 +134,8 @@ namespace CameraControl.Core.Classes
         public bool ShowOverlayLiveView { get; set; }
 
         public bool ShowDisplayLiveView { get; set; }
+        
+        public bool ShowAutofocusLiveView { get; set; }
 
         public bool ShowLuminosityLiveView { get; set; }
 
@@ -207,6 +209,7 @@ namespace CameraControl.Core.Classes
             ShowControlLiveView = true;
             ShowOverlayLiveView = true;
             ShowDisplayLiveView = true;
+            ShowAutofocusLiveView = true;
             ShowLuminosityLiveView = true;
             ShowMotionDetectionLiveView = true;
             ShowHistogram = true;
