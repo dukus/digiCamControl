@@ -109,7 +109,8 @@
             </ScrollViewer>
         </Grid>
         <Expander Grid.Column="1"  Name="expander1" UseLayoutRounding="True" ExpandDirection="Right" IsExpanded="False" BorderThickness="0" Margin="0" Grid.RowSpan="2" Padding="0"
-                  Style="{DynamicResource MetroExpanderEx}">
+                  Style="{DynamicResource MetroExpanderEx}"
+                  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowCameraAdvancedProperties, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Expander.Header>
                 <Label Content="{T:TranslateExtension LabelAdvancedProperties}" Padding="0">
                     <Label.LayoutTransform>

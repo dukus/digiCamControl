@@ -167,6 +167,8 @@ namespace CameraControl.Core.Classes
         
         public string DefaultTheme { get; set; }
 
+        public bool ShowCameraAdvancedProperties { get; set; }
+
         public bool UseThemeSelector
         {
             get { return string.IsNullOrEmpty(DefaultTheme); }
@@ -204,6 +206,7 @@ namespace CameraControl.Core.Classes
             ShowCameraSelectorMainWindow = true;
             ShowRightPanelMainWindow = true;
             ShowCameraPropertiesMainWindow = true;
+            ShowCameraAdvancedProperties = true;
             ShowFocusControlLiveView = true;
             ShowFocusStackingLiveView = true;
             ShowControlLiveView = true;
@@ -225,6 +228,7 @@ namespace CameraControl.Core.Classes
             ShowAnimation = true;
             ShowMainMenu = true;
         }
+
 
         public static Branding LoadBranding()
         {
