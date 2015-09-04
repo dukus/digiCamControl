@@ -83,9 +83,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public static void CaptureWithError()
+        public static void CaptureWithError(ICameraDevice device = null)
         {
-            Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
+            Capture(device ?? ServiceProvider.DeviceManager.SelectedCameraDevice);
         }
 
         /// <summary>

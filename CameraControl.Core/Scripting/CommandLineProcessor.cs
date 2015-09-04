@@ -13,6 +13,8 @@ namespace CameraControl.Core.Scripting
 {
     public class CommandLineProcessor
     {
+        public ICameraDevice TargetDevice { get; set; }
+
         public object Pharse(string[] args)
         {
             var cmd = args[0].ToLower().Trim();
@@ -28,7 +30,7 @@ namespace CameraControl.Core.Scripting
                         }
                         ServiceProvider.Settings.DefaultSession.FileNameTemplate = Path.GetFileNameWithoutExtension(file);
                     }
-                    CameraHelper.CaptureWithError();
+                    CameraHelper.CaptureWithError(TargetDevice);
                     ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
                     return null;
                 case "capturenoaf":
@@ -55,6 +57,20 @@ namespace CameraControl.Core.Scripting
                     return List(args.Skip(1).ToArray());
                 default:
                     throw new Exception("Unknow parameter " + cmd);
+            }
+        }
+
+        public void SetCamera(string camera)
+        {
+            if (string.IsNullOrEmpty(camera))
+                return;
+            foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+            {
+                if ((PhotoUtils.IsNumeric(camera) && cameraDevice.SerialNumber == camera.Trim()) || cameraDevice.DeviceName.Replace(" ", "_") == camera.Replace(" ", "_"))
+                {
+                    TargetDevice = cameraDevice;
+                    break;
+                }
             }
         }
 
@@ -416,6 +432,8 @@ namespace CameraControl.Core.Scripting
         {
             if (ServiceProvider.DeviceManager == null)
                 return null;
+            if (TargetDevice != null)
+                return TargetDevice;
             return ServiceProvider.DeviceManager.SelectedCameraDevice;
         }
     }
