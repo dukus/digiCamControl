@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
-
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
-using CameraControl.Devices.TransferProtocol.DDServer;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-
+using Microsoft.Win32;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
@@ -194,7 +189,7 @@ namespace CameraControl.Plugins.ToolPlugins
             MaxValue = TotalImages;
             VideoTypes = new ObservableCollection<VideoType>
             {
-                //new VideoType("4K 16:9", 3840, 2160),
+                new VideoType("4K 16:9", 3840, 2160),
                 new VideoType("HD 1080 16:9", 1920, 1080),
                 new VideoType("UXGA 4:3", 1600, 1200),
                 new VideoType("HD 720 16:9", 1280, 720),
@@ -215,7 +210,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private void BrowseFile()
         {
 
-            var dialog = new Microsoft.Win32.SaveFileDialog();
+            var dialog = new SaveFileDialog();
             dialog.Filter = "Mp4 files (*.mp4)|*.mp4|All files (*.*)|*.*";
             dialog.AddExtension = true;
             dialog.FileName = OutPutFile;
@@ -304,7 +299,10 @@ namespace CameraControl.Plugins.ToolPlugins
             try
             {
                 string parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p {2}";
-
+                if (VideoType.Name.StartsWith("4K"))
+                {
+                    parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx265 -vf fps=25 {2}";
+                }
                 OutPut.Insert(0, "Generating video ..... ");
                 Process newprocess = new Process();
 
@@ -344,9 +342,16 @@ namespace CameraControl.Plugins.ToolPlugins
 
         private void newprocess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            lock (_locker)
+            try
             {
-                //OutPut.Insert(0, e.Data);
+                lock (_locker)
+                {
+                    OutPut.Insert(0, e.Data);
+                }
+            }
+            catch (Exception)
+            {
+  
             }
         }
 

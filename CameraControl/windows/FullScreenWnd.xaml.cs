@@ -140,6 +140,23 @@ namespace CameraControl.windows
                                                               Topmost = true;
                                                               Topmost = false;
                                                               Focus();
+                                                              if (ServiceProvider.Settings.FullScreenInSecondaryMonitor)
+                                                              {
+                                                                  var allScreens =
+                                                                      System.Windows.Forms.Screen.AllScreens.ToList();
+                                                                  foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
+                                                                  {
+                                                                      Left = r1.Left;
+                                                                      Top = r1.Top;
+                                                                      Width = r1.Width;
+                                                                      Height = r1.Height;
+                                                                      Topmost = true;
+                                                                      break;
+                                                                  }
+                                                              }
+                                                              WindowState = WindowState.Maximized;
+                                                              WindowStyle = WindowStyle.None;
+
                                                               _timer.Stop();
                                                               _timer.Interval = ServiceProvider.Settings.PreviewSeconds*
                                                                                 1000;
@@ -156,6 +173,7 @@ namespace CameraControl.windows
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
                                                      {
+                                                         _timer.Stop();
                                                          Hide();
                                                          Close();
                                                      }));
