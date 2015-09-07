@@ -165,6 +165,7 @@ namespace CameraControl.Core.Classes
                     try
                     {
                         var processor = new CommandLineProcessor();
+                        processor.SetCamera(context.Request.QueryString["camera"]);
                         var resp = processor.Pharse(new[] { context.Request.QueryString["slc"], context.Request.QueryString["param1"], context.Request.QueryString["param2"] });
                         var list = resp as IEnumerable<string>;
                         if (list != null)

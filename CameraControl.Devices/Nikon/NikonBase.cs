@@ -1642,6 +1642,7 @@ namespace CameraControl.Devices.Nikon
             {
                 try
                 {
+                    IsConnected = false;
                     _timer.Stop();
                     HaveLiveView = false;
                     StillImageDevice.Disconnect();

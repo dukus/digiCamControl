@@ -34,6 +34,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using CameraControl.Devices;
 
 #endregion
 
@@ -99,30 +100,37 @@ namespace CameraControl.Controls
         {
             set
             {
-                foreach (Shape shape in shapes)
+                try
                 {
-                    shape.Fill = brushInactive;
-                }
-                SetValue(ExposureStatusProperty, value);
-                double absValue = Math.Abs(value);
-                double delta = 2.0; // For the D90, the granularity is 1/3 stop
-
-                int count = (int) Math.Round(absValue/delta);
-                count = Math.Min(count, 7);
-
-                if (value > 0.0)
-                {
-                    for (int i = 6; i > 6 - count; i--)
+                    foreach (Shape shape in shapes)
                     {
-                        shapes[i].Fill = brushActive;
+                        shape.Fill = brushInactive;
+                    }
+                    SetValue(ExposureStatusProperty, value);
+                    double absValue = Math.Abs(value);
+                    double delta = 2.0; // For the D90, the granularity is 1/3 stop
+
+                    int count = (int)Math.Round(absValue / delta);
+                    count = Math.Min(count, 7);
+
+                    if (value > 0.0)
+                    {
+                        for (int i = 6; i > 6 - count; i--)
+                        {
+                            shapes[i].Fill = brushActive;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 7; i < 7 + count; i++)
+                        {
+                            shapes[i].Fill = brushActive;
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    for (int i = 7; i < 7 + count; i++)
-                    {
-                        shapes[i].Fill = brushActive;
-                    }
+                    Log.Debug("EXS error", ex);
                 }
             }
             get { return (int) GetValue(ExposureStatusProperty); }

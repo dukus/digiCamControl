@@ -163,7 +163,7 @@
             </StatusBarItem>
 
         </StatusBar>
-        <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False">
+        <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False" >
             <i:Interaction.Behaviors>
                 <classes:HorizontalScrollBehavior />
             </i:Interaction.Behaviors>
@@ -179,7 +179,7 @@
                         </MenuItem.ItemTemplate>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
+                    <MenuItem Header="Copy full path to clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
             <ListBox.ItemsPanel>

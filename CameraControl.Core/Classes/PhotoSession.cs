@@ -51,7 +51,7 @@ namespace CameraControl.Core.Classes
 
         [JsonIgnore]
         [XmlIgnore]
-        public List<string> SupportedExtensions = new List<string> { ".jpg", ".nef", ".tif", ".png", ".cr2" };
+        public List<string> SupportedExtensions = new List<string> { ".jpg", ".nef", ".tif", ".png", ".cr2", ".mov", ".avi" };
 
         [JsonIgnore]
         [XmlIgnore]
@@ -209,9 +209,9 @@ namespace CameraControl.Core.Classes
         }
 
 
-        private ObservableCollection<FileItem> _files;
+        private AsyncObservableCollection<FileItem> _files;
 
-        public ObservableCollection<FileItem> Files
+        public AsyncObservableCollection<FileItem> Files
         {
             get { return _files; }
             set
@@ -415,7 +415,7 @@ namespace CameraControl.Core.Classes
                 Log.Error("Error set My pictures folder", exception);
                 Folder = "c:\\";
             }
-            Files = new ObservableCollection<FileItem>();
+            Files = new AsyncObservableCollection<FileItem>();
             FileNameTemplate = "DSC_[Counter 4 digit]";
 
             UseOriginalFilename = false;
@@ -585,35 +585,47 @@ namespace CameraControl.Core.Classes
 
         public FileItem AddFile(string fileName)
         {
-            FileItem oitem = GetFile(fileName);
-            if (oitem != null)
-                return oitem;
-            FileItem item = new FileItem(fileName);
-            Files.Add(item);
-            return item;
+            lock (_locker)
+            {
+                FileItem oitem = GetFile(fileName);
+                if (oitem != null)
+                    return oitem;
+                FileItem item = new FileItem(fileName);
+                Files.Add(item);
+                return item;
+            }
         }
 
         public bool ContainFile(string fileName)
         {
-            return !string.IsNullOrEmpty(fileName) && Files.Any(fileItem => fileItem.FileName.ToUpper() == fileName.ToUpper());
+            lock (_locker)
+            {
+                return !string.IsNullOrEmpty(fileName) && Files.Any(fileItem => fileItem.FileName.ToUpper() == fileName.ToUpper());                
+            }
         }
 
         public FileItem GetFile(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName))
-                return null;
-            return
-                Files.FirstOrDefault(
-                    fileItem =>
-                        fileItem != null && !string.IsNullOrEmpty(fileItem.FileName) &&
-                        String.Equals(fileItem.FileName, fileName, StringComparison.CurrentCultureIgnoreCase));
+            lock (_locker)
+            {
+                if (string.IsNullOrEmpty(fileName))
+                    return null;
+                return
+                    Files.FirstOrDefault(
+                        fileItem =>
+                            fileItem != null && !string.IsNullOrEmpty(fileItem.FileName) &&
+                            String.Equals(fileItem.FileName, fileName, StringComparison.CurrentCultureIgnoreCase));
+            }
         }
 
         public FileItem GetByName(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                return null;
-            return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.Name, name, StringComparison.CurrentCultureIgnoreCase));
+            lock (_locker)
+            {
+                if (string.IsNullOrEmpty(name))
+                    return null;
+                return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.Name, name, StringComparison.CurrentCultureIgnoreCase));
+            }
         }
 
         /// <summary>
@@ -624,7 +636,10 @@ namespace CameraControl.Core.Classes
         /// <returns></returns>
         public FileItem GetFile(string fileName, string serial)
         {
-            return Files.FirstOrDefault(fileItem => fileItem.OriginalName == fileName && fileItem.CameraSerial == serial);
+            lock (_locker)
+            {
+                return Files.FirstOrDefault(fileItem => fileItem.OriginalName == fileName && fileItem.CameraSerial == serial);                
+            }
         }
 
         public override string ToString()
@@ -634,60 +649,81 @@ namespace CameraControl.Core.Classes
 
         public AsyncObservableCollection<FileItem> GetSelectedFiles()
         {
-            AsyncObservableCollection<FileItem> list = new AsyncObservableCollection<FileItem>();
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                if (fileItem.IsChecked)
-                    list.Add(fileItem);
+                AsyncObservableCollection<FileItem> list = new AsyncObservableCollection<FileItem>();
+                foreach (FileItem fileItem in Files)
+                {
+                    if (fileItem.IsChecked)
+                        list.Add(fileItem);
+                }
+                return list;
             }
-            return list;
         }
 
         public void SelectAll()
         {
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                fileItem.IsChecked = true;
+                foreach (FileItem fileItem in Files)
+                {
+                    fileItem.IsChecked = true;
+                }
             }
         }
 
         public void SelectNone()
         {
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                fileItem.IsChecked = false;
+                foreach (FileItem fileItem in Files)
+                {
+                    fileItem.IsChecked = false;
+                }
             }
         }
 
         public void SelectLiked()
         {
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                fileItem.IsChecked = fileItem.IsLiked;
+                foreach (FileItem fileItem in Files)
+                {
+                    fileItem.IsChecked = fileItem.IsLiked;
+                }
             }
         }
 
         public void SelectUnLiked()
         {
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                fileItem.IsChecked = fileItem.IsUnLiked;
+                foreach (FileItem fileItem in Files)
+                {
+                    fileItem.IsChecked = fileItem.IsUnLiked;
+                }
             }
         }
 
         public void SelectInver()
         {
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                fileItem.IsChecked = !fileItem.IsChecked;
+                foreach (FileItem fileItem in Files)
+                {
+                    fileItem.IsChecked = !fileItem.IsChecked;
+                }
             }
         }
 
         public void SelectSameSeries(int s)
         {
-            foreach (FileItem fileItem in Files)
+            lock (_locker)
             {
-                fileItem.IsChecked = fileItem.Series == s;
+                foreach (FileItem fileItem in Files)
+                {
+                    fileItem.IsChecked = fileItem.Series == s;
+                }
             }
         }
 

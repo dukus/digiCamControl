@@ -140,7 +140,7 @@ namespace CameraControl.Devices.Classes
                     }
                     else
                     {
-                        
+
                     }
                 }
                 NotifyPropertyChanged("Value");
@@ -195,7 +195,7 @@ namespace CameraControl.Devices.Classes
         {
             Thread thread = new Thread(OnValueChangedThread);
             thread.Name = "SetProperty thread " + Name;
-            thread.Start(new object[] {sender, key, val});
+            thread.Start(new object[] { sender, key, val });
             thread.Join(200);
         }
 
@@ -213,7 +213,7 @@ namespace CameraControl.Devices.Classes
                     {
                         object sender = objparams[0];
                         string key = objparams[1] as string;
-                        T val = (T) objparams[2];
+                        T val = (T)objparams[2];
                         ValueChanged(sender, key, val);
                     }
                     catch (DeviceException exception)
@@ -289,7 +289,7 @@ namespace CameraControl.Devices.Classes
                 foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
                 {
                     if (EqualityComparer<T>.Default.Equals(keyValuePair.Value, o))
-                        //(keyValuePair.Value== o)
+                    //(keyValuePair.Value== o)
                     {
                         Value = keyValuePair.Key;
                         return;
@@ -352,60 +352,58 @@ namespace CameraControl.Devices.Classes
         {
             if (ba == null || ba.Length < 1)
                 return;
-            if (typeof (T) == typeof (int))
+            if (typeof(T) == typeof(int))
             {
                 int val = ba.Length == 1 ? ba[0] : BitConverter.ToInt16(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
             }
-            if (typeof (T) == typeof (uint))
+            if (typeof(T) == typeof(uint))
             {
                 uint val = BitConverter.ToUInt16(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
             }
-            if (typeof (T) == typeof (long) && ba.Length == 1)
+            if (typeof(T) == typeof(long) && ba.Length == 1)
             {
                 long val = ba[0];
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
                 return;
             }
-            if (typeof (T) == typeof (long) && ba.Length == 2 && SubType == typeof (UInt16))
+            if (typeof(T) == typeof(long) && ba.Length == 2 && SubType == typeof(UInt16))
             {
                 long val = BitConverter.ToUInt16(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
                 return;
             }
-            if (typeof (T) == typeof (long) && ba.Length == 2)
+            if (typeof(T) == typeof(long) && ba.Length == 2)
             {
                 long val = BitConverter.ToInt16(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
                 return;
             }
-            if (typeof (T) == typeof (long) && ba.Length == 4)
+            if (typeof(T) == typeof(long) && ba.Length == 4)
             {
                 long val = BitConverter.ToUInt32(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
                 return;
             }
-            if (typeof (T) == typeof (long))
+            if (typeof(T) == typeof(long))
             {
                 long val = BitConverter.ToInt64(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
             }
-            if (typeof (T) == typeof (uint))
+            if (typeof(T) == typeof(uint))
             {
                 uint val = BitConverter.ToUInt16(ba, 0);
-                SetValue((T) ((object) val));
+                SetValue((T)((object)val));
             }
         }
 
         public void AddValues(string key, T value)
         {
-            lock (_syncRoot)
-            {
-                if (!_valuesDictionary.ContainsKey(key))
-                    _valuesDictionary.Add(key, value);
-                GetValues();
-            }
+
+            if (!_valuesDictionary.ContainsKey(key))
+                _valuesDictionary.Add(key, value);
+            GetValues();
         }
 
         public void GetValues()
@@ -414,7 +412,7 @@ namespace CameraControl.Devices.Classes
             _values.Clear();
             NotifyPropertyChanged("Values");
             _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
-           
+
             for (int i = 0; i < _values.Count; i++)
             {
                 if (_replaceValues.ContainsValue(_values[i]))
