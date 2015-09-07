@@ -36,7 +36,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />                    
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -46,10 +46,10 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="{T:TranslateExtension LabelFps}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
                 <controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding Fps}" Margin="3"/>
-                
+
                 <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelVideoFormat}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center"/>
                 <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VideoTypes}" SelectedValue="{Binding VideoType}" Margin="3"/>
-                
+
                 <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelOutputFile}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OutPutFile}" Margin="3,3,50,3" IsReadOnly="True" />
                 <Button Grid.Row="2" Grid.Column="1" Content="..." Width="40" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding BrowseFileCommand}"/>
