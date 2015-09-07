@@ -2075,6 +2075,8 @@ namespace CameraControl.ViewModel
 
         private void StopLiveView()
         {
+            if(!CameraDevice.IsChecked)
+                return;
             Thread thread = new Thread(StopLiveViewThread);
             thread.Start();
         }

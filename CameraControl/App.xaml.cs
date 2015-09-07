@@ -240,8 +240,8 @@ namespace CameraControl
 
                 if (cmd == CmdConsts.All_Close)
                 {
-                    ServiceProvider.Analytics.Stop();
                     ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
+                    ServiceProvider.Analytics.Stop();
                     if (ServiceProvider.Settings != null)
                     {
                         ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);

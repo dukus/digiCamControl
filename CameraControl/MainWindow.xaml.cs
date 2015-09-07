@@ -324,8 +324,14 @@ namespace CameraControl
                 {
                     Dispatcher.Invoke(new Action(() =>
                     {
-                        var wnd = new Welcome();
-                        wnd.ShowDialog();
+                        try
+                        {
+                            var wnd = new Welcome();
+                            wnd.ShowDialog();
+                        }
+                        catch 
+                        {
+                        }
                     }));
                 }
             }
@@ -467,10 +473,17 @@ namespace CameraControl
                 // prevent crash og GUI when item count updated
                 Dispatcher.Invoke(new Action(delegate
                 {
-                    _selectedItem = session.AddFile(fileName);
-                    _selectedItem.BackupFileName = backupfile;
-                    _selectedItem.Series = session.Series;
-                    _selectedItem.AddTemplates(eventArgs.CameraDevice,session);
+                    try
+                    {
+                        _selectedItem = session.AddFile(fileName);
+                        _selectedItem.BackupFileName = backupfile;
+                        _selectedItem.Series = session.Series;
+                        _selectedItem.AddTemplates(eventArgs.CameraDevice, session);
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
                 }));
 
                 foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
