@@ -89,8 +89,8 @@ namespace Setup
                 baseDir,
                 new RegValueProperty("NET40", RegistryHive.LocalMachine,
                     @"Software\Microsoft\NET Framework Setup\NDP\v4\Full", "Install", "0"),
-                new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.LaunchConditions,
-                    Condition.NOT_Installed, Sequence.InstallUISequence),
+                new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.InstallExecute,
+                    Condition.NOT_Installed, Sequence.InstallExecuteSequence),
                 new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
                     Condition.Always, Sequence.InstallExecuteSequence)
                 );
@@ -166,22 +166,19 @@ namespace Setup
             {
                 try
                 {
-                    MessageBox.Show("Older version is installed, first should be UnInstalled !", "Installation");
-                    ProcessStartInfo Pro = new ProcessStartInfo();
-                    Pro.Verb = "runas";
-                    Pro.UseShellExecute = true;
-                    Pro.FileName = unInstallFile;
-                    Pro.Arguments = "/S";
-                    Pro.WindowStyle = ProcessWindowStyle.Normal;
-                    Process process = new Process();
-                    process.StartInfo = Pro;
+                    ProcessStartInfo pro = new ProcessStartInfo();
+                    pro.Verb = "runas";
+                    pro.UseShellExecute = true;
+                    pro.FileName = unInstallFile;
+                    pro.Arguments = "/S";
+                    pro.WindowStyle = ProcessWindowStyle.Normal;
+                    Process process = new Process {StartInfo = pro};
                     process.Start();
                     process.WaitForExit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-
+                    session.Log("Uninstall old " + ex.Message);
                 }
             }
             return ActionResult.Success;

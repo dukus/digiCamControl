@@ -1092,6 +1092,7 @@ namespace CameraControl.ViewModel
             }
 
             TriggerOnMotion = false;
+            ShowHistogram = true;
             Init();
             ServiceProvider.WindowsManager.Event += WindowsManagerEvent;
         }

@@ -122,6 +122,10 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         public void Upload(string file, string folder)
         {
+            if (string.IsNullOrEmpty(AccessToken))
+            {
+                throw new Exception("Not loged in !");
+            }
             LoadData();
             using (Stream stream = File.Open(file,FileMode.Open,FileAccess.Read))
             {

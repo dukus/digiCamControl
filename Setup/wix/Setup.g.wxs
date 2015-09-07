@@ -1331,17 +1331,17 @@
       <ComponentRef Id="ProgramMenuFolder" />
     </Feature>
 
-    <InstallUISequence >
-      <Custom Action="Action1_MyAction" Before="LaunchConditions"> (NOT Installed) </Custom>
-      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-    </InstallUISequence>
-
     <InstallExecuteSequence >
+      <Custom Action="Action1_MyAction" Before="InstallExecute"> (NOT Installed) </Custom>
       <Custom Action="Action2_SetRightAction" Before="InstallFinalize"> (1) </Custom>
       <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
 
       <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
+
+    <InstallUISequence >
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
 
     <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico"  />
 

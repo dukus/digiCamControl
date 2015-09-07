@@ -1000,6 +1000,7 @@ namespace CameraControl.Core.Classes
             LoadCanonTransferMode = true;
             Autorotate = true;
             ShowThumbInfo = true;
+            SelectedLayout = "Normal";
         }
 
 

@@ -45,6 +45,7 @@ namespace CameraControl.Devices.Classes
         public event ValueChangedEventHandler ValueChanged;
 
         private Dictionary<string, T> _valuesDictionary;
+        private Dictionary<string, string> _replaceValues;
         private AsyncObservableCollection<T> _numericValues = new AsyncObservableCollection<T>();
         private AsyncObservableCollection<string> _values = new AsyncObservableCollection<string>();
         private bool _notifyValuChange = true;
@@ -105,22 +106,41 @@ namespace CameraControl.Devices.Classes
 
         public string Value
         {
-            get { return _value; }
+            get
+            {
+                if (_value != null)
+                {
+                    foreach (var replaceValue in _replaceValues.Where(replaceValue => replaceValue.Value == _value))
+                    {
+                        return replaceValue.Key;
+                    }
+                }
+                return _value;
+            }
             set
             {
                 lock (_syncRoot)
                 {
                     _value = value;
-                    HaveError = false;
-                    if (ValueChanged != null && _notifyValuChange)
+                    if (_value != null)
                     {
-                        foreach (KeyValuePair<string, T> keyValuePair in _valuesDictionary)
+                        if (_replaceValues.ContainsKey(_value))
                         {
-                            if (keyValuePair.Key == _value)
+                            _value = _replaceValues[_value];
+                        }
+
+                        HaveError = false;
+                        if (ValueChanged != null && _notifyValuChange)
+                        {
+                            if (_valuesDictionary.ContainsKey(_value))
                             {
-                                OnValueChanged(this, _value, keyValuePair.Value);
+                                OnValueChanged(this, _value, _valuesDictionary[_value]);
                             }
                         }
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 NotifyPropertyChanged("Value");
@@ -249,6 +269,7 @@ namespace CameraControl.Devices.Classes
         public PropertyValue()
         {
             _valuesDictionary = new Dictionary<string, T>();
+            _replaceValues = new Dictionary<string, string>();
             DisableIfWrongValue = false;
             IsEnabled = true;
         }
@@ -383,11 +404,50 @@ namespace CameraControl.Devices.Classes
             {
                 if (!_valuesDictionary.ContainsKey(key))
                     _valuesDictionary.Add(key, value);
-                _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
-                _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
-                NotifyPropertyChanged("Values");
+                GetValues();
             }
         }
+
+        public void GetValues()
+        {
+            string newVal = Value;
+            _values.Clear();
+            NotifyPropertyChanged("Values");
+            _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
+           
+            for (int i = 0; i < _values.Count; i++)
+            {
+                if (_replaceValues.ContainsValue(_values[i]))
+                {
+                    foreach (var value in _replaceValues)
+                    {
+                        if (value.Value == _values[i])
+                            _values[i] = value.Key;
+                    }
+                }
+            }
+            _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
+            NotifyPropertyChanged("Values");
+            Value = newVal;
+        }
+
+        /// <summary>
+        /// Replace a displayed value 
+        /// GetValues() call is required
+        /// </summary>
+        /// <param name="oldVal"></param>
+        /// <param name="newVal"></param>
+        public void ReplaceValue(string oldVal, string newVal)
+        {
+            lock (_syncRoot)
+            {
+                if (!_replaceValues.ContainsKey(newVal))
+                {
+                    _replaceValues.Add(newVal, oldVal);
+                }
+            }
+        }
+
 
         public void Clear()
         {

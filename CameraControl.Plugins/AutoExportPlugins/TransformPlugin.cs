@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using CameraControl.Core;
@@ -22,19 +23,21 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 string newFile = Path.Combine(Path.GetDirectoryName(filename),
                     Path.GetFileNameWithoutExtension(filename) + "_transformed" + Path.GetExtension(item.FileName));
                 File.Copy(outfile, newFile, true);
-                if (ServiceProvider.Settings.DefaultSession.GetFile(newFile)==null)
+                if (ServiceProvider.Settings.DefaultSession.GetFile(newFile) == null)
                 {
-                    FileItem im = new FileItem(newFile);
-                    var i = ServiceProvider.Settings.DefaultSession.Files.IndexOf(item);
-                    if (ServiceProvider.Settings.DefaultSession.Files.Count - 1 == i)
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        ServiceProvider.Settings.DefaultSession.Files.Add(im);
-                    }
-                    else
-                    {
-                        ServiceProvider.Settings.DefaultSession.Files.Insert(i + 1, im);
-                    }
-                    
+                        FileItem im = new FileItem(newFile);
+                        var i = ServiceProvider.Settings.DefaultSession.Files.IndexOf(item);
+                        if (ServiceProvider.Settings.DefaultSession.Files.Count - 1 == i)
+                        {
+                            ServiceProvider.Settings.DefaultSession.Files.Add(im);
+                        }
+                        else
+                        {
+                            ServiceProvider.Settings.DefaultSession.Files.Insert(i + 1, im);
+                        }
+                    }));
                 }
             }
             else

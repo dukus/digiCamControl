@@ -182,6 +182,11 @@
                     <MenuItem Header="Copy full path to clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal" VerticalAlignment="Top"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
 
     </Grid>
