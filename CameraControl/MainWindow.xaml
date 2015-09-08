@@ -27,11 +27,11 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Controls:MetroWindow.RightWindowCommands>
+    <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

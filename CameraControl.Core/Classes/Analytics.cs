@@ -133,6 +133,11 @@ namespace CameraControl.Core.Classes
             SendEvent("Command", command, null);
         }
 
+        public void Error(Exception exception)
+        {
+            SendEvent("Error", exception.Message, null);
+        }
+
         public void PluginExecute(string command)
         {
             SendEvent("Plugin", command, null);

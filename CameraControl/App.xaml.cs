@@ -452,7 +452,7 @@ namespace CameraControl
             e.Handled = true;
 
             Log.Error("Unhandled error ", e.Exception);
-
+            ServiceProvider.Analytics.Error(e.Exception);
             string errorMessage =
                 string.Format(
                     TranslationStrings.LabelUnHandledError,

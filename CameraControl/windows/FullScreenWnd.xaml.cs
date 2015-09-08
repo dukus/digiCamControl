@@ -45,6 +45,7 @@ using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 
 #endregion
 
@@ -135,32 +136,39 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.FullScreenWnd_ShowTimed:
                     Dispatcher.BeginInvoke(new Action(delegate
                                                           {
-                                                              Show();
-                                                              Activate();
-                                                              Topmost = true;
-                                                              Topmost = false;
-                                                              Focus();
-                                                              if (ServiceProvider.Settings.FullScreenInSecondaryMonitor)
+                                                              try
                                                               {
-                                                                  var allScreens =
-                                                                      System.Windows.Forms.Screen.AllScreens.ToList();
-                                                                  foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
+                                                                  Show();
+                                                                  Activate();
+                                                                  Topmost = true;
+                                                                  Topmost = false;
+                                                                  Focus();
+                                                                  if (ServiceProvider.Settings.FullScreenInSecondaryMonitor)
                                                                   {
-                                                                      Left = r1.Left;
-                                                                      Top = r1.Top;
-                                                                      Width = r1.Width;
-                                                                      Height = r1.Height;
-                                                                      Topmost = true;
-                                                                      break;
+                                                                      var allScreens =
+                                                                          System.Windows.Forms.Screen.AllScreens.ToList();
+                                                                      foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
+                                                                      {
+                                                                          Left = r1.Left;
+                                                                          Top = r1.Top;
+                                                                          Width = r1.Width;
+                                                                          Height = r1.Height;
+                                                                          Topmost = true;
+                                                                          break;
+                                                                      }
                                                                   }
-                                                              }
-                                                              WindowState = WindowState.Maximized;
-                                                              WindowStyle = WindowStyle.None;
+                                                                  WindowState = WindowState.Maximized;
+                                                                  WindowStyle = WindowStyle.None;
 
-                                                              _timer.Stop();
-                                                              _timer.Interval = ServiceProvider.Settings.PreviewSeconds*
-                                                                                1000;
-                                                              _timer.Start();
+                                                                  _timer.Stop();
+                                                                  _timer.Interval = ServiceProvider.Settings.PreviewSeconds *
+                                                                                    1000;
+                                                                  _timer.Start();
+                                                              }
+                                                              catch (Exception ex)
+                                                              {
+                                                                  Log.Error("Full screen ");
+                                                              }
                                                           }));
                     break;
                 case WindowsCmdConsts.FullScreenWnd_Hide:
