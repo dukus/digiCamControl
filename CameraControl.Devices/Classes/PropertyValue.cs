@@ -108,14 +108,14 @@ namespace CameraControl.Devices.Classes
         {
             get
             {
-                if (_value != null)
-                {
-                    foreach (var replaceValue in _replaceValues.Where(replaceValue => replaceValue.Value == _value))
+                    if (_value != null && _replaceValues != null && _replaceValues.Count > 0)
                     {
-                        return replaceValue.Key;
+                        foreach (var replaceValue in _replaceValues.Where(replaceValue => replaceValue.Value == _value))
+                        {
+                            return replaceValue.Key;
+                        }
                     }
-                }
-                return _value;
+                    return _value;
             }
             set
             {
@@ -124,7 +124,7 @@ namespace CameraControl.Devices.Classes
                     _value = value;
                     if (_value != null)
                     {
-                        if (_replaceValues.ContainsKey(_value))
+                        if (_replaceValues != null && _replaceValues.Count>0 && _replaceValues.ContainsKey(_value))
                         {
                             _value = _replaceValues[_value];
                         }
@@ -258,7 +258,12 @@ namespace CameraControl.Devices.Classes
 
         public AsyncObservableCollection<string> Values
         {
-            get { return _values; }
+            get
+            {
+                if (_valuesDictionary.Count > 0 && _values.Count == 0)
+                    ReloadValues();
+                return _values;
+            }
         }
 
         public AsyncObservableCollection<T> NumericValues
@@ -309,6 +314,7 @@ namespace CameraControl.Devices.Classes
             }
             _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
             _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
+            NotifyPropertyChanged("Values");
         }
 
         public void SetValue()
@@ -403,30 +409,48 @@ namespace CameraControl.Devices.Classes
 
             if (!_valuesDictionary.ContainsKey(key))
                 _valuesDictionary.Add(key, value);
-            GetValues();
         }
 
-        public void GetValues()
+        /// <summary>
+        /// Reload display values 
+        /// Should be called after AddValues
+        /// </summary>
+        public void ReloadValues()
         {
-            string newVal = Value;
-            _values.Clear();
-            NotifyPropertyChanged("Values");
             _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
-
-            for (int i = 0; i < _values.Count; i++)
-            {
-                if (_replaceValues.ContainsValue(_values[i]))
-                {
-                    foreach (var value in _replaceValues)
-                    {
-                        if (value.Value == _values[i])
-                            _values[i] = value.Key;
-                    }
-                }
-            }
             _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
             NotifyPropertyChanged("Values");
-            Value = newVal;
+        }
+
+        /// <summary>
+        /// Refresh display values based on replace values 
+        /// </summary>
+        public void GetValues()
+        {
+            lock (_syncRoot)
+            {
+                string newVal = Value;
+                _values.Clear();
+                NotifyPropertyChanged("Values");
+                _values = new AsyncObservableCollection<string>(_valuesDictionary.Keys);
+                if (_replaceValues != null && _replaceValues.Count > 0)
+                {
+                    for (int i = 0; i < _values.Count; i++)
+                    {
+                        if (_replaceValues.ContainsValue(_values[i]))
+                        {
+                            foreach (var value in _replaceValues)
+                            {
+                                if (value.Value == _values[i])
+                                    _values[i] = value.Key;
+                            }
+                        }
+                    }
+                }
+                _numericValues = new AsyncObservableCollection<T>(_valuesDictionary.Values);
+                NotifyPropertyChanged("Values");
+                Value = newVal;
+            }
         }
 
         /// <summary>
