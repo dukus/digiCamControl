@@ -110,6 +110,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Self-timer", 0x8011);
             res.AddValues("Mirror-up", 0x8012);
             res.AddValues("Quiet shooting", 0x8016);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                                                   res.Code);

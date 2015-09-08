@@ -76,6 +76,7 @@ namespace CameraControl.Devices.Nikon
                     byte val = result.Data[((2 * datasize) + 6 + 2) + i];
                     CompressionSetting.AddValues(_csTable.ContainsKey(val) ? _csTable[val] : val.ToString(), val);
                 }
+                CompressionSetting.ReloadValues();
                 CompressionSetting.SetValue(defval);
             }
             catch (Exception)

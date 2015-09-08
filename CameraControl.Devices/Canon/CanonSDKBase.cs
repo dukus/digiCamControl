@@ -443,6 +443,7 @@ namespace CameraControl.Devices.Canon
             res.AddValues("10-Sec Self-Timer plus continuous shots", 7);
             res.AddValues("10-Sec Self-Timer", 10);
             res.AddValues("2-Sec Self-Timer", 11);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => Camera.SetProperty(res.Code, val); 
             return res;
@@ -460,6 +461,7 @@ namespace CameraControl.Devices.Canon
             };
             res.AddValues("No flash", 0);
             res.AddValues("Flash", 1);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => Camera.SetProperty(res.Code, val);
             return res;
@@ -706,7 +708,7 @@ namespace CameraControl.Devices.Canon
                             ShutterSpeed.AddValues(keyValuePair.Value, keyValuePair.Key);
                         }
                     }
-
+                    ShutterSpeed.ReloadValues();
                     long value = Camera.GetProperty(Edsdk.PropID_Tv);
                     if (value == 0)
                     {
@@ -786,7 +788,7 @@ namespace CameraControl.Devices.Canon
                         FNumber.AddValues("ƒ/" + keyValuePair.Value, keyValuePair.Key);
                     }
                 }
-
+                FNumber.ReloadValues();
                 if (value == 0)
                 {
                     FNumber.IsEnabled = false;
@@ -866,7 +868,7 @@ namespace CameraControl.Devices.Canon
                         IsoNumber.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                     }
                 }
-
+                IsoNumber.ReloadValues();
                 IsoNumber.SetValue((int)value, false);
                 IsoNumber.IsEnabled = true;
 
@@ -886,7 +888,7 @@ namespace CameraControl.Devices.Canon
                 {
                     Mode.AddValues(keyValuePair.Value, keyValuePair.Key);
                 }
-
+                Mode.ReloadValues();
                 Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
                 Mode.IsEnabled = false;
             }
@@ -915,6 +917,7 @@ namespace CameraControl.Devices.Canon
                             ExposureCompensation.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
                     }
                 }
+                ExposureCompensation.ReloadValues();
                 ExposureCompensation.IsEnabled = true;
                 ExposureCompensation.SetValue((int) Camera.GetProperty(Edsdk.PropID_ExposureCompensation), false);
             }
@@ -936,6 +939,7 @@ namespace CameraControl.Devices.Canon
                     if (data.Count > 0 && data.Contains((int) keyValuePair.Key))
                         WhiteBalance.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
+                WhiteBalance.ReloadValues();
                 WhiteBalance.IsEnabled = true;
                 WhiteBalance.SetValue((long) Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
             }
@@ -969,6 +973,7 @@ namespace CameraControl.Devices.Canon
                     if (data.Contains((int) keyValuePair.Key))
                         ExposureMeteringMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
+                ExposureMeteringMode.ReloadValues();
                 ExposureMeteringMode.IsEnabled = true;
                 ExposureMeteringMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_MeteringMode), false);
             }
@@ -990,6 +995,7 @@ namespace CameraControl.Devices.Canon
                     if (data.Contains((int) keyValuePair.Key))
                         FocusMode.AddValues(keyValuePair.Value, (int) keyValuePair.Key);
                 }
+                FocusMode.ReloadValues();
                 FocusMode.IsEnabled = true;
                 FocusMode.SetValue((int) Camera.GetProperty(Edsdk.PropID_AFMode), false);
             }
