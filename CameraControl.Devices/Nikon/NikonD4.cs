@@ -98,6 +98,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("2 sec", 1);
             res.AddValues("One sec", 1);
             res.AddValues("OFF", 1);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) val}, res.Code);
             return res;

@@ -542,6 +542,7 @@ namespace CameraControl.Devices.Nikon
                 {
                     res.AddValues(pair.Value, pair.Key);
                 }
+                res.ReloadValues();
                 res.SetValue(defval, false);
             }
             catch (Exception)
@@ -563,6 +564,7 @@ namespace CameraControl.Devices.Nikon
                                           };
             res.AddValues("sRGB", 0);
             res.AddValues("Adobe RGB", 1);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -585,6 +587,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Day white fluorescent lamp", 4);
             res.AddValues("Daylight fluorescent lamp", 5);
             res.AddValues("High color-temperature mercury lamp", 6);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                                                   res.Code);
@@ -632,7 +635,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("8330 K", 28);
             res.AddValues("9090 K", 29);
             res.AddValues("10000 K", 30);
-
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                     res.Code);
@@ -651,6 +654,7 @@ namespace CameraControl.Devices.Nikon
                                           };
             res.AddValues("12-bit recording", 0);
             res.AddValues("14-bit recording", 1);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -689,6 +693,7 @@ namespace CameraControl.Devices.Nikon
             {
                 
             }
+            res.ReloadValues();
             return res;
         }
 
@@ -708,6 +713,7 @@ namespace CameraControl.Devices.Nikon
                 res.AddValues(Encoding.Unicode.GetString(result.Data, 93, 20), 0);
                 res.SetValue(Encoding.Unicode.GetString(result.Data, 27, 20), false);
             }
+            res.ReloadValues();
             return res;
         }
 
@@ -734,6 +740,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Lossless compressed RAW", 0);
             res.AddValues("Compressed RAW", 1);
             res.AddValues("Uncompressed RAW", 2);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -744,6 +751,7 @@ namespace CameraControl.Devices.Nikon
             var res = new PropertyValue<long>() {Name = name, IsEnabled = true, Code = code};
             res.AddValues("OFF", 0);
             res.AddValues("ON", 1);
+            res.ReloadValues();
             res.ValueChanged += (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) val},
                                                                   res.Code);
             return res;
@@ -754,6 +762,7 @@ namespace CameraControl.Devices.Nikon
             var res = new PropertyValue<long>() {Name = "Lock", IsEnabled = true};
             res.AddValues("OFF", 0);
             res.AddValues("ON", 1);
+            res.ReloadValues();
             res.Value = "OFF";
             res.ValueChanged += delegate(object sender, string key, long val)
                                     {
@@ -779,6 +788,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Slow synchronization", 0x8011);
             res.AddValues("Rear synchronization", 0x8012);
             res.AddValues("Red-eye reduction slow synchronization", 0x8013);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                                                   res.Code);
@@ -800,6 +810,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Quick-response remote", 0x8014);
             res.AddValues("2s delayed remote", 0x8015);
             res.AddValues("Quiet shooting", 0x8016);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                                                   res.Code);
@@ -819,6 +830,7 @@ namespace CameraControl.Devices.Nikon
             {
                 res.AddValues(i.ToString(), i);
             }
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
                                                   res.Code);
@@ -833,6 +845,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Low", 1);
             res.AddValues("Normal", 2);
             res.AddValues("High", 3);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) val}, res.Code);
             return res;
@@ -844,6 +857,7 @@ namespace CameraControl.Devices.Nikon
                                           {Name = "Exposure delay mode", IsEnabled = true, Code = 0xD06A};
             res.AddValues("OFF", 0);
             res.AddValues("ON", 1);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) val}, res.Code);
             return res;
@@ -928,6 +942,7 @@ namespace CameraControl.Devices.Nikon
                         UInt16 val = BitConverter.ToUInt16(result.Data, 12 + i);
                         NormalIsoNumber.AddValues(_isoTable.ContainsKey(val) ? _isoTable[val] : val.ToString(), val);
                     }
+                    NormalIsoNumber.ReloadValues();
                     NormalIsoNumber.SetValue(defval, false);
                     IsoNumber = NormalIsoNumber;
                 }
@@ -950,6 +965,7 @@ namespace CameraControl.Devices.Nikon
                         UInt16 val = BitConverter.ToUInt16(result.Data, 12 + i);
                         MovieIsoNumber.AddValues(_isoTable.ContainsKey(val) ? _isoTable[val] : val.ToString(CultureInfo.InvariantCulture), val);
                     }
+                    MovieIsoNumber.ReloadValues();
                     MovieIsoNumber.SetValue(defval, false);
                 }
                 catch (Exception)
@@ -1034,7 +1050,7 @@ namespace CameraControl.Devices.Nikon
                     // force to add Bulb mode for some cameras which not support it
                     if (Mode != null && (Mode.Value == "S" || Mode.Value == "M") && !NormalShutterSpeed.Values.Contains("Bulb"))
                         NormalShutterSpeed.AddValues("Bulb", 0xFFFFFFFF);
-
+                    NormalShutterSpeed.ReloadValues();
                     NormalShutterSpeed.SetValue(defval, false);
                     ShutterSpeed = NormalShutterSpeed;
                 }
@@ -1089,6 +1105,7 @@ namespace CameraControl.Devices.Nikon
                     UInt16 val = BitConverter.ToUInt16(result.Data, ((2 * datasize) + 6 + 2) + i);
                     Mode.AddValues(_exposureModeTable.ContainsKey(val) ? _exposureModeTable[val] : val.ToString(), val);
                 }
+                Mode.ReloadValues();
                 Mode.SetValue(defval);
             }
             catch (Exception)
@@ -1169,18 +1186,23 @@ namespace CameraControl.Devices.Nikon
                 var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc, CONST_PROP_Fnumber);
                 if (result.Data != null)
                 {
-                    NormalFNumber.Clear();
                     int type = BitConverter.ToInt16(result.Data, 2);
                     byte formFlag = result.Data[(2*datasize) + 5];
                     UInt16 defval = BitConverter.ToUInt16(result.Data, datasize + 5);
+                    NormalFNumber.Clear();
                     for (int i = 0; i < result.Data.Length - ((2*datasize) + 6 + 2); i += datasize)
                     {
                         UInt16 val = BitConverter.ToUInt16(result.Data, ((2*datasize) + 6 + 2) + i);
                         string s = "ƒ/" + (val/100.0).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US"));
                         NormalFNumber.AddValues(s, val);
                     }
+                    NormalFNumber.ReloadValues();
                     NormalFNumber.SetValue(defval, trigervaluchange);
                     FNumber = NormalFNumber;
+                }
+                else
+                {
+                    
                 }
                 result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc, CONST_PROP_MovieFnumber);
                 if (result.Data != null && result.Data.Length > 0)
@@ -1195,6 +1217,7 @@ namespace CameraControl.Devices.Nikon
                         string s = "ƒ/" + (val / 100.0).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US"));
                         MovieFNumber.AddValues(s, val);
                     }
+                    MovieFNumber.ReloadValues();
                     MovieFNumber.SetValue(defval, trigervaluchange);
                 }
             }
@@ -1223,6 +1246,7 @@ namespace CameraControl.Devices.Nikon
                         UInt16 val = BitConverter.ToUInt16(result.Data, ((2*datasize) + 6 + 2) + i);
                         WhiteBalance.AddValues(_wbTable.ContainsKey(val) ? _wbTable[val] : val.ToString(), val);
                     }
+                    WhiteBalance.ReloadValues();
                     WhiteBalance.SetValue(defval, false);
                 }
                 else
@@ -1266,6 +1290,7 @@ namespace CameraControl.Devices.Nikon
                         s = "+" + s;
                     NormalExposureCompensation.AddValues(s, val);
                 }
+                NormalExposureCompensation.ReloadValues();
                 NormalExposureCompensation.SetValue(defval, false);
                 ExposureCompensation = NormalExposureCompensation;
             }
@@ -1291,6 +1316,7 @@ namespace CameraControl.Devices.Nikon
                         s = "+" + s;
                     MovieExposureCompensation.AddValues(s, val);
                 }
+                MovieExposureCompensation.ReloadValues();
                 MovieExposureCompensation.SetValue(defval, false);
             }
             catch (Exception)
@@ -1329,6 +1355,8 @@ namespace CameraControl.Devices.Nikon
                 CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
                 var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
                                                                  CONST_PROP_CompressionSetting);
+                if(result.Data.Length==0)
+                    return;
                 int type = BitConverter.ToInt16(result.Data, 2);
                 byte formFlag = result.Data[(2 * datasize) + 5];
                 byte defval = result.Data[datasize + 5];
@@ -1337,6 +1365,7 @@ namespace CameraControl.Devices.Nikon
                     byte val = result.Data[((2 * datasize) + 6 + 2) + i];
                     CompressionSetting.AddValues(_csTable.ContainsKey(val) ? _csTable[val] : val.ToString(), val);
                 }
+                CompressionSetting.ReloadValues();
                 CompressionSetting.SetValue(defval, false);
             }
             catch (Exception)
@@ -1366,6 +1395,7 @@ namespace CameraControl.Devices.Nikon
                     UInt16 val = BitConverter.ToUInt16(result.Data, ((2*datasize) + 6 + 2) + i);
                     ExposureMeteringMode.AddValues(_emmTable.ContainsKey(val) ? _emmTable[val] : val.ToString(), val);
                 }
+                ExposureMeteringMode.ReloadValues();
                 ExposureMeteringMode.SetValue(defval, false);
             }
             catch (Exception)
@@ -1394,6 +1424,7 @@ namespace CameraControl.Devices.Nikon
                 NormalFocusMode.AddValues("AF-A", 2);
                 NormalFocusMode.AddValues("MF (hard)", 3);
                 NormalFocusMode.AddValues("MF (soft)", 4);
+                NormalFocusMode.ReloadValues();
                 NormalFocusMode.ValueChanged += NormalFocusMode_ValueChanged;
                 FocusMode = NormalFocusMode;
                 ReadDeviceProperties(NormalFocusMode.Code);
@@ -1406,6 +1437,7 @@ namespace CameraControl.Devices.Nikon
                 LiveViewFocusMode.AddValues("AF-F", 2);
                 LiveViewFocusMode.AddValues("MF (hard)", 3);
                 LiveViewFocusMode.AddValues("MF (soft)", 4);
+                LiveViewFocusMode.ReloadValues();
                 LiveViewFocusMode.ValueChanged += LiveViewFocusMode_ValueChanged;
                 ReadDeviceProperties(LiveViewFocusMode.Code);
                 Log.Debug("InitFocusMode 3");
