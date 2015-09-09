@@ -126,6 +126,16 @@ namespace Plugin.DeviceControl
             SerialPort spL = (SerialPort)sender;
             string str = spL.ReadLine();
             Dispatcher.Invoke(new Action(delegate { lst_message.Items.Add(str); }));
+            if (str.Contains("??"))
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    if (chk_external.IsChecked != true)
+                    {
+                        ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
+                    }
+                }));
+            }
             if(str.Contains("="))
             {
                 string command = str.Split('=')[0];
