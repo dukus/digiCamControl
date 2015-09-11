@@ -62,7 +62,7 @@
                         <RowDefinition Height="54*" />
                         <RowDefinition Height="98*" />
                     </Grid.RowDefinitions>
-                    <my:AdvancedSlider Label="Camera shutter lag (msec)" Grid.Column="1" Grid.Row="1" Minimum="350" Name="slider_cmera" Maximum="10000" Value="1000" />
+                    <my:AdvancedSlider Label="Camera shutter lag (msec)" Grid.Column="1" Grid.Row="1" Name="slider_cmera" Maximum="10000" Value="1000" />
                     <my:AdvancedSlider Grid.Column="1" Grid.Row="2" Label="1st Drop size"  Name="slider_drop1" Maximum="200" />
                     <my:AdvancedSlider Grid.Column="1" Grid.Row="3" Label="Time between drops 1 - 2"  Name="slider_drop_wait" Maximum="200" />
                     <my:AdvancedSlider Grid.Column="1" Grid.Row="4" Label="2st Drop size"  Name="slider_drop2" Maximum="200" />

@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CameraControl.Core;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Nikon;
 using MahApps.Metro.Controls;
@@ -123,57 +124,69 @@ namespace Plugin.DeviceControl
          
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort spL = (SerialPort)sender;
-            string str = spL.ReadLine();
-            Dispatcher.Invoke(new Action(delegate { lst_message.Items.Add(str); }));
-            if (str.Contains("??"))
+            try
             {
-                Dispatcher.Invoke(new Action(() =>
+                SerialPort spL = (SerialPort)sender;
+                string str = spL.ReadLine();
+                Dispatcher.Invoke(new Action(delegate { lst_message.Items.Add(str); }));
+                if (str.Contains("??"))
                 {
-                    if (chk_external.IsChecked != true)
+                    Dispatcher.Invoke(new Action(() =>
                     {
-                        ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
-                    }
-                }));
-            }
-            if(str.Contains("="))
-            {
-                string command = str.Split('=')[0];
-                int value = 0;
-                if (int.TryParse(str.Split('=')[1], out value))
+                        try
+                        {
+                            if (chk_external.IsChecked != true)
+                            {
+                                ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            StaticHelper.Instance.SystemMessage = ex.Message;
+
+                        }
+                    }));
+                }
+                if (str.Contains("="))
                 {
-                    switch (command)
+                    string command = str.Split('=')[0];
+                    int value = 0;
+                    if (int.TryParse(str.Split('=')[1], out value))
                     {
-                        case "camera_timer":
-                            Dispatcher.Invoke(new Action(delegate { slider_cmera.Value = value; }));
-                            break;
-                        case "drop1_time":
-                            Dispatcher.Invoke(new Action(delegate { slider_drop1.Value = value; }));
-                            break;
-                        case "drop_wait_time":
-                            Dispatcher.Invoke(new Action(delegate { slider_drop_wait.Value = value; }));
-                            break;
-                        case "drop2_wait_time":
-                            Dispatcher.Invoke(new Action(delegate { slider_drop2_wait.Value = value; }));
-                            break;
-                        case "drop2_time":
-                            Dispatcher.Invoke(new Action(delegate { slider_drop2.Value = value; }));
-                            break;
-                        case "drop3_time":
-                            Dispatcher.Invoke(new Action(delegate { slider_drop3.Value = value; }));
-                            break;
-                        case "flash_time":
-                            Dispatcher.Invoke(new Action(delegate { slider_flash.Value = value; }));
-                            break;
-                        case "sound":
-                            Dispatcher.Invoke(new Action(delegate { prg_threshold.Value = value; }));
-                            break;
+                        switch (command)
+                        {
+                            case "camera_timer":
+                                Dispatcher.Invoke(new Action(delegate { slider_cmera.Value = value; }));
+                                break;
+                            case "drop1_time":
+                                Dispatcher.Invoke(new Action(delegate { slider_drop1.Value = value; }));
+                                break;
+                            case "drop_wait_time":
+                                Dispatcher.Invoke(new Action(delegate { slider_drop_wait.Value = value; }));
+                                break;
+                            case "drop2_wait_time":
+                                Dispatcher.Invoke(new Action(delegate { slider_drop2_wait.Value = value; }));
+                                break;
+                            case "drop2_time":
+                                Dispatcher.Invoke(new Action(delegate { slider_drop2.Value = value; }));
+                                break;
+                            case "drop3_time":
+                                Dispatcher.Invoke(new Action(delegate { slider_drop3.Value = value; }));
+                                break;
+                            case "flash_time":
+                                Dispatcher.Invoke(new Action(delegate { slider_flash.Value = value; }));
+                                break;
+                            case "sound":
+                                Dispatcher.Invoke(new Action(delegate { prg_threshold.Value = value; }));
+                                break;
+                        }
                     }
                 }
             }
-            Console.WriteLine(str);
-
-            Console.WriteLine();
+            catch (Exception ex)
+            {
+                Log.Error("Data error ", ex);
+            }
         }
 
 
