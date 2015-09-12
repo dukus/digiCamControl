@@ -169,9 +169,15 @@ namespace CameraControl.ViewModel
             {
                 ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraConnected;
+                ServiceProvider.DeviceManager.CameraSelected += DeviceManager_CameraSelected;
             }
             ExportSessionCommand = new RelayCommand(ExportSession);
             ImportSessionCommand = new RelayCommand(ImportSession);
+        }
+
+        void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
+        {
+            RaisePropertyChanged(() => CameraConnected);
         }
 
         void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
