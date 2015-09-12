@@ -625,5 +625,8 @@ namespace CameraControl.Core.Translation
         public static string LabelPluginProperties = "Properties";
         public static string LabelPluginTransformPlugins = "Transform plugins";
         public static string LabelConfigurePlugin = "Configure Plugin";
+        // 12/09/2015
+        public static string LabelEmailPublicWebAddress = "Email public web address";
+
     }
 }

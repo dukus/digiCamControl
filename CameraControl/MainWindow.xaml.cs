@@ -899,5 +899,18 @@ namespace CameraControl
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           this.ShowInputAsync(TranslationStrings.LabelEmailPublicWebAddress, "Email").ContinueWith(s =>
+           {
+               if (!string.IsNullOrEmpty(s.Result))
+                   HelpProvider.SendEmail(
+                       "digiCamControl public web address " + ServiceProvider.Settings.PublicWebAdress,
+                       "digiCamControl public web address ", s.Result);
+           }
+               );
+
+        }
+
     }
 }

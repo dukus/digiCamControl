@@ -467,6 +467,8 @@
                     <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
                     <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
                 </MenuItem>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelEmailPublicWebAddress}" Click="MenuItem_Click" IsEnabled="{Binding Settings.PublicWebserver}"/>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuSession}" Visibility="{Binding Branding.ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension MenuSessionAdd}" Command="{Binding NewSessionCommand}"/>

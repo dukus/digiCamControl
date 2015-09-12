@@ -38,7 +38,7 @@ namespace CameraControl.windows
         {
             try
             {
-                Close();
+                
             }
             catch
             {
@@ -48,6 +48,7 @@ namespace CameraControl.windows
         private void qrcode_MouseDown(object sender, MouseButtonEventArgs e)
         {
             PhotoUtils.Run(ServiceProvider.Settings.Webaddress);
+            //Close();
         }
 
     }

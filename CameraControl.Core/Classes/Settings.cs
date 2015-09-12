@@ -297,7 +297,8 @@ namespace CameraControl.Core.Classes
                     res.AddRange(ipA.Select(ip => string.Format("http://{0}:{1}", ip, WebserverPort)));
                     if (PublicWebserver)
                     {
-                        res.Add("http://digicamcontrol.com/remote/"+ClientId);
+                        res.Add(PublicWebAdress);
+                        _webaddress = PublicWebAdress;
                     }
                 }
                 catch (Exception exception)
@@ -308,6 +309,10 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string PublicWebAdress
+        {
+            get { return "http://digicamcontrol.com/remote/" + ClientId; }
+        }
 
         private string _webaddress;
 
@@ -315,8 +320,11 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                if (!AvaiableWebAddresses.Contains(_webaddress) && AvaiableWebAddresses.Count > 0)
+                if ((_webaddress == null || !AvaiableWebAddresses.Contains(_webaddress)) &&
+                    AvaiableWebAddresses.Count > 0)
+                {
                     return AvaiableWebAddresses[0];
+                }
                 return _webaddress;
             }
             set

@@ -36,6 +36,7 @@ using System.Net.Mail;
 using System.Text;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Devices;
 using Ionic.Zip;
 using Typesafe.Mailgun;
 
@@ -87,6 +88,26 @@ namespace CameraControl.Classes
             if (_helpData == null)
                 Init();
             PhotoUtils.Run(_helpData[sections], "");
+        }
+
+        public static void SendEmail(string body, string subject, string email)
+        {
+            try
+            {
+                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82");
+                var message = new MailMessage("postmaster@digicamcontrol.com", email)
+                {
+                    Subject = subject,
+                    Body = body,
+                };
+
+                client.SendMail(message);
+                message.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error send email", ex);
+            }
         }
 
         public static void SendCrashReport(string body, string type, string email=null)
