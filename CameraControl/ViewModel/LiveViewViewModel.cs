@@ -1678,16 +1678,18 @@ namespace CameraControl.ViewModel
                                     break;
                             }
                         }
-                        if (FlipImage)
-                        {
-                            writeableBitmap = writeableBitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
-                        }
+
                         if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
                         {
                             preview.Freeze();
                             Preview = preview;
                             if (ShowFocusRect)
                                 DrawFocusPoint(writeableBitmap);
+                        }
+                        
+                        if (FlipImage)
+                        {
+                            writeableBitmap = writeableBitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
                         }
 
                         writeableBitmap.Freeze();
@@ -2288,6 +2290,8 @@ namespace CameraControl.ViewModel
                 double xt = LiveViewData.ImageWidth / refWidth;
                 double yt = LiveViewData.ImageHeight / refHeight;
                 int posx = (int)(initialPoint.X * xt);
+                if (FlipImage)
+                    posx = (int) ((refWidth - initialPoint.X)*xt);
                 int posy = (int)(initialPoint.Y * yt);
                 Task.Factory.StartNew(() => SetFocusPos(posx, posy));
             }

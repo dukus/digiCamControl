@@ -277,9 +277,9 @@ namespace CameraControl
                 {
                     switch (cmd)
                     {
-                        case CmdConsts.ResetDevice:
-                                device.ResetDevice();
-                            break;
+                        //case CmdConsts.ResetDevice:
+                        //        device.ResetDevice();
+                        //    break;
                         case CmdConsts.NextAperture:
                             if (device.FNumber != null)
                                 device.FNumber.NextValue();
