@@ -260,8 +260,8 @@ namespace CameraControl.Devices.Classes
         {
             get
             {
-                if (_valuesDictionary.Count > 0 && _values.Count == 0)
-                    ReloadValues();
+                //if (_valuesDictionary.Count > 0 && _values.Count == 0)
+                //    ReloadValues();
                 return _values;
             }
         }

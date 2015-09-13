@@ -221,9 +221,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private BraketingClass _braketing;
+        private BracketingClass _braketing;
 
-        public BraketingClass Braketing
+        public BracketingClass Braketing
         {
             get { return _braketing; }
             set
@@ -405,7 +405,7 @@ namespace CameraControl.Core.Classes
 
             Name = "Default";
             CaptureName = "Capture";
-            Braketing = new BraketingClass();
+            Braketing = new BracketingClass();
             try
             {
                 Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Name);

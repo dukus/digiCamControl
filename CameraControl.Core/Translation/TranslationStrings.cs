@@ -627,6 +627,15 @@ namespace CameraControl.Core.Translation
         public static string LabelConfigurePlugin = "Configure Plugin";
         // 12/09/2015
         public static string LabelEmailPublicWebAddress = "Email public web address";
-
+        public static string LabelBracketingMode = "Bracketing mode";
+        public static string LabelDepthOfFieldBracketing = "Depth-of-field bracketing";
+        public static string LabelWhiteBalanceBracketing = "White balance bracketing";
+        public static string LabelIsoBracketing = "Iso bracketing";
+        public static string LabelBracketingLow = "Low value";
+        public static string LabelBracketingHigh = "High value";
+        public static string LabelBracketingNumberOfShots = "Number Of shots";
+        public static string LabelNoLowValueError = "No low value is set";
+        public static string LabelNoHighValueError = "No high value is set";
+        public static string LabelWrongValue = "Wrong low or high value";
     }
 }

@@ -37,8 +37,15 @@ using CameraControl.Devices.Classes;
 
 namespace CameraControl.Core.Classes
 {
-    public class BraketingClass : BaseFieldClass
+    public class BracketingClass : BaseFieldClass
     {
+        public int Mode { get; set; }
+        public string ExpLow { get; set; }
+        public string ExpHigh { get; set; }
+        public int ExpCaptureCount { get; set; }
+
+        //------------------------------------------------------
+
         public int Index;
         private string _defec = "0";
         private CameraPreset _cameraPreset = new CameraPreset();
@@ -62,7 +69,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public int Mode { get; set; }
+       
 
         private AsyncObservableCollection<string> _exposureValues;
 
@@ -112,7 +119,7 @@ namespace CameraControl.Core.Classes
         }
 
 
-        public BraketingClass()
+        public BracketingClass()
         {
             IsBusy = false;
             ExposureValues = new AsyncObservableCollection<string>();

@@ -123,6 +123,10 @@
             <File Id="EdsImage.dll" Source="EdsImage.dll" />
           </Component>
 
+          <Component Id="Component.Facebook.dll" Guid="19d12628-7654-4354-a305-9ab0d400b85d">
+            <File Id="Facebook.dll" Source="Facebook.dll" />
+          </Component>
+
           <Component Id="Component.GalaSoft.MvvmLight.dll" Guid="19d12628-7654-4354-a305-9ab0a4f9d066">
             <File Id="GalaSoft.MvvmLight.dll" Source="GalaSoft.MvvmLight.dll" />
           </Component>
@@ -509,106 +513,106 @@
 
             </Directory>
 
-            <Directory Id="INSTALLDIR.Data.Msl" Name="Msl">
+            <Directory Id="INSTALLDIR.Data.msl" Name="msl">
 
               <Component Id="Component.adaptiveSharpen.msl" Guid="19d12628-7654-4354-a305-9ab07f20c2bc">
-                <File Id="adaptiveSharpen.msl" Source="Data\Msl\adaptiveSharpen.msl" />
+                <File Id="adaptiveSharpen.msl" Source="Data\msl\adaptiveSharpen.msl" />
               </Component>
 
               <Component Id="Component.addNoise.msl" Guid="19d12628-7654-4354-a305-9ab0654e6b68">
-                <File Id="addNoise.msl" Source="Data\Msl\addNoise.msl" />
+                <File Id="addNoise.msl" Source="Data\msl\addNoise.msl" />
               </Component>
 
               <Component Id="Component.autoGamma.msl" Guid="19d12628-7654-4354-a305-9ab0ddfbad0f">
-                <File Id="autoGamma.msl" Source="Data\Msl\autoGamma.msl" />
+                <File Id="autoGamma.msl" Source="Data\msl\autoGamma.msl" />
               </Component>
 
               <Component Id="Component.autoLevel.msl" Guid="19d12628-7654-4354-a305-9ab03c0ec730">
-                <File Id="autoLevel.msl" Source="Data\Msl\autoLevel.msl" />
+                <File Id="autoLevel.msl" Source="Data\msl\autoLevel.msl" />
               </Component>
 
               <Component Id="Component.brightnessContrast.msl" Guid="19d12628-7654-4354-a305-9ab0acb8c5a8">
-                <File Id="brightnessContrast.msl" Source="Data\Msl\brightnessContrast.msl" />
+                <File Id="brightnessContrast.msl" Source="Data\msl\brightnessContrast.msl" />
               </Component>
 
               <Component Id="Component.cannyEdge.msl" Guid="19d12628-7654-4354-a305-9ab083286c96">
-                <File Id="cannyEdge.msl" Source="Data\Msl\cannyEdge.msl" />
+                <File Id="cannyEdge.msl" Source="Data\msl\cannyEdge.msl" />
               </Component>
 
               <Component Id="Component.charcoal.msl" Guid="19d12628-7654-4354-a305-9ab016775f8e">
-                <File Id="charcoal.msl" Source="Data\Msl\charcoal.msl" />
+                <File Id="charcoal.msl" Source="Data\msl\charcoal.msl" />
               </Component>
 
               <Component Id="Component.gaussianBlur.msl" Guid="19d12628-7654-4354-a305-9ab0b6d390c0">
-                <File Id="gaussianBlur.msl" Source="Data\Msl\gaussianBlur.msl" />
+                <File Id="gaussianBlur.msl" Source="Data\msl\gaussianBlur.msl" />
               </Component>
 
               <Component Id="Component.grayscale.msl" Guid="19d12628-7654-4354-a305-9ab0f17d4a2a">
-                <File Id="grayscale.msl" Source="Data\Msl\grayscale.msl" />
+                <File Id="grayscale.msl" Source="Data\msl\grayscale.msl" />
               </Component>
 
               <Component Id="Component.kuwahara.msl" Guid="19d12628-7654-4354-a305-9ab08b33a25b">
-                <File Id="kuwahara.msl" Source="Data\Msl\kuwahara.msl" />
+                <File Id="kuwahara.msl" Source="Data\msl\kuwahara.msl" />
               </Component>
 
               <Component Id="Component.level.msl" Guid="19d12628-7654-4354-a305-9ab01cd7c011">
-                <File Id="level.msl" Source="Data\Msl\level.msl" />
+                <File Id="level.msl" Source="Data\msl\level.msl" />
               </Component>
 
               <Component Id="Component.MagickScript.xsd" Guid="19d12628-7654-4354-a305-9ab0a0f528c8">
-                <File Id="MagickScript.xsd" Source="Data\Msl\MagickScript.xsd" />
+                <File Id="MagickScript.xsd" Source="Data\msl\MagickScript.xsd" />
               </Component>
 
               <Component Id="Component.motionBlur.msl" Guid="19d12628-7654-4354-a305-9ab0064f8182">
-                <File Id="motionBlur.msl" Source="Data\Msl\motionBlur.msl" />
+                <File Id="motionBlur.msl" Source="Data\msl\motionBlur.msl" />
               </Component>
 
               <Component Id="Component.negate.msl" Guid="19d12628-7654-4354-a305-9ab0024cd23c">
-                <File Id="negate.msl" Source="Data\Msl\negate.msl" />
+                <File Id="negate.msl" Source="Data\msl\negate.msl" />
               </Component>
 
               <Component Id="Component.normalize.msl" Guid="19d12628-7654-4354-a305-9ab01669343c">
-                <File Id="normalize.msl" Source="Data\Msl\normalize.msl" />
+                <File Id="normalize.msl" Source="Data\msl\normalize.msl" />
               </Component>
 
               <Component Id="Component.oilPaint.msl" Guid="19d12628-7654-4354-a305-9ab04b724ec5">
-                <File Id="oilPaint.msl" Source="Data\Msl\oilPaint.msl" />
+                <File Id="oilPaint.msl" Source="Data\msl\oilPaint.msl" />
               </Component>
 
               <Component Id="Component.polaroid.msl" Guid="19d12628-7654-4354-a305-9ab0344545ab">
-                <File Id="polaroid.msl" Source="Data\Msl\polaroid.msl" />
+                <File Id="polaroid.msl" Source="Data\msl\polaroid.msl" />
               </Component>
 
               <Component Id="Component.reduceNoise.msl" Guid="19d12628-7654-4354-a305-9ab052e558e1">
-                <File Id="reduceNoise.msl" Source="Data\Msl\reduceNoise.msl" />
+                <File Id="reduceNoise.msl" Source="Data\msl\reduceNoise.msl" />
               </Component>
 
               <Component Id="Component.RemoveBackground_White.msl" Guid="19d12628-7654-4354-a305-9ab0bdefa337">
-                <File Id="RemoveBackground_White.msl" Source="Data\Msl\RemoveBackground-White.msl" />
+                <File Id="RemoveBackground_White.msl" Source="Data\msl\RemoveBackground-White.msl" />
               </Component>
 
               <Component Id="Component.sepiaTone.msl" Guid="19d12628-7654-4354-a305-9ab04b62be23">
-                <File Id="sepiaTone.msl" Source="Data\Msl\sepiaTone.msl" />
+                <File Id="sepiaTone.msl" Source="Data\msl\sepiaTone.msl" />
               </Component>
 
               <Component Id="Component.sharpen.msl" Guid="19d12628-7654-4354-a305-9ab0a1b02dae">
-                <File Id="sharpen.msl" Source="Data\Msl\sharpen.msl" />
+                <File Id="sharpen.msl" Source="Data\msl\sharpen.msl" />
               </Component>
 
               <Component Id="Component.sketch.msl" Guid="19d12628-7654-4354-a305-9ab0e9aec088">
-                <File Id="sketch.msl" Source="Data\Msl\sketch.msl" />
+                <File Id="sketch.msl" Source="Data\msl\sketch.msl" />
               </Component>
 
               <Component Id="Component.solarize.msl" Guid="19d12628-7654-4354-a305-9ab04ee73cfb">
-                <File Id="solarize.msl" Source="Data\Msl\solarize.msl" />
+                <File Id="solarize.msl" Source="Data\msl\solarize.msl" />
               </Component>
 
               <Component Id="Component.swirl.msl" Guid="19d12628-7654-4354-a305-9ab05ed51bd0">
-                <File Id="swirl.msl" Source="Data\Msl\swirl.msl" />
+                <File Id="swirl.msl" Source="Data\msl\swirl.msl" />
               </Component>
 
-              <Component Id="Component.wave.msl" Guid="19d12628-7654-4354-a305-9ab02f33ce6f">
-                <File Id="wave.msl" Source="Data\Msl\wave.msl" />
+              <Component Id="Component.Wave.msl" Guid="19d12628-7654-4354-a305-9ab0cbd1f58f">
+                <File Id="Wave.msl" Source="Data\msl\Wave.msl" />
               </Component>
 
             </Directory>
@@ -1110,6 +1114,7 @@
       <ComponentRef Id="Component.Eagle.dll" />
       <ComponentRef Id="Component.EDSDK.dll" />
       <ComponentRef Id="Component.EdsImage.dll" />
+      <ComponentRef Id="Component.Facebook.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.dll" />
       <ComponentRef Id="Component.GalaSoft.MvvmLight.Extras.dll" />
       <ComponentRef Id="Component.Gma.QrCodeNet.Encoding.dll" />
@@ -1229,7 +1234,7 @@
       <ComponentRef Id="Component.sketch.msl" />
       <ComponentRef Id="Component.solarize.msl" />
       <ComponentRef Id="Component.swirl.msl" />
-      <ComponentRef Id="Component.wave.msl" />
+      <ComponentRef Id="Component.Wave.msl" />
       <ComponentRef Id="Component.CameraControl.Plugins.dll" />
       <ComponentRef Id="Component.dcc.plugin" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />

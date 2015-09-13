@@ -320,6 +320,7 @@
     <Compile Include="ViewModel\AstroLiveViewViewModel.cs" />
     <Compile Include="ViewModel\AutoExportPluginEditViewModel.cs" />
     <Compile Include="ViewModel\BarcodeViewModel.cs" />
+    <Compile Include="ViewModel\BracketingViewModel.cs" />
     <Compile Include="ViewModel\LayoutViewModel.cs" />
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
