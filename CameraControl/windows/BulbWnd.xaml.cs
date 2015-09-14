@@ -289,13 +289,21 @@ namespace CameraControl.windows
         private void _waitTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _waitSecs++;
-            CountDown--;
+            if (CountDown > 0)
+                CountDown--;
             Message = string.Format("Waiting for next capture {0} sec. Photo done {1}/{2}",
                                     _waitSecs, _photoCount, NumOfPhotos);
             if (_waitSecs >= WaitTime)
             {
-                _waitTimer.Stop();
-                StartCapture();
+                if (CameraDevice.IsBusy)
+                {
+                    Message = "Device is busy !Waiting for device to be ready !";
+                }
+                else
+                {
+                    _waitTimer.Stop();
+                    StartCapture();
+                }
             }
         }
 
@@ -340,6 +348,7 @@ namespace CameraControl.windows
         private void StartCaptureThread()
         {
             bool retry;
+            Message = "";
             do
             {
                 retry = false;
@@ -367,6 +376,7 @@ namespace CameraControl.windows
                     {
                         if (CameraDevice.GetCapability(CapabilityEnum.Bulb))
                         {
+                            CameraDevice.IsBusy = true;
                             CameraDevice.LockCamera();
                             CameraDevice.StartBulbMode();
                         }
@@ -384,6 +394,7 @@ namespace CameraControl.windows
                     {
                         StaticHelper.Instance.SystemMessage = deviceException.Message;
                         Log.Error("Bulb start", deviceException);
+                        CameraDevice.IsBusy = false;
                     }
                 }
                 catch (Exception exception)
@@ -392,6 +403,7 @@ namespace CameraControl.windows
                     Log.Error("Bulb start", exception);
                     Event = "Error";
                     CountDown = 0;
+                    CameraDevice.IsBusy = false;
                     return;
                 }
             } while (retry);
