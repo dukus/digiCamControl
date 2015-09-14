@@ -44,6 +44,10 @@ namespace CameraControl.Core.Classes
         public string ExpHigh { get; set; }
         public int ExpCaptureCount { get; set; }
 
+        public string FLow { get; set; }
+        public string FHigh { get; set; }
+        public int FCaptureCount { get; set; }
+
         //------------------------------------------------------
 
         public int Index;

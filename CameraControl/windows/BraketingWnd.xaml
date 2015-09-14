@@ -44,14 +44,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Content="{T:TranslateExtension LabelBracketingMode}" HorizontalAlignment="Right" Margin="0,3,3,3"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" SelectedIndex="{Binding Mode}">
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" SelectedIndex="{Binding Mode}" IsEnabled="{Binding IsFree}">
             <ComboBoxItem Content="{T:TranslateExtension LabelExposureBracketing}"/>
             <ComboBoxItem Content="{T:TranslateExtension LabelDepthOfFieldBracketing}"/>
             <ComboBoxItem Content="{T:TranslateExtension LabelWhiteBalanceBracketing}"/>
             <ComboBoxItem Content="{T:TranslateExtension LabelIsoBracketing}"/>
         </ComboBox>
         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding Error}" Foreground="Red" HorizontalContentAlignment="Center" FontSize="16"/>
-        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding ExpVisibility}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -74,13 +74,36 @@
             </Grid>
         </GroupBox>
 
+        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding FVisibility}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="187*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{T:TranslateExtension LabelBracketingLow}" HorizontalAlignment="Center"/>
+                <ComboBox Grid.Row="1" Grid.Column="0" Margin="3" ItemsSource="{Binding FLowList}" SelectedItem="{Binding FLow}"/>
+
+                <Label Grid.Row="0" Grid.Column="1" Content="{T:TranslateExtension LabelBracketingNumberOfShots}" HorizontalAlignment="Center"/>
+                <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding FCaptureCount}"/>
+
+                <Label Grid.Row="0" Grid.Column="2" Content="{T:TranslateExtension LabelBracketingHigh}" HorizontalAlignment="Center"/>
+                <ComboBox Grid.Row="1" Grid.Column="2" Margin="3" ItemsSource="{Binding FHighList}" SelectedValue="{Binding FHigh}"/>
+            </Grid>
+        </GroupBox>
 
         <StackPanel Grid.Row="5" HorizontalAlignment="Left" Orientation="Horizontal">
             <Button Content="{T:TranslateExtension ButtonStart}" Margin="5" Width="75" VerticalAlignment="Bottom" Command="{Binding StartCommand}" IsEnabled="{Binding IsFree}"/>
-            <Button Content="{T:TranslateExtension LabelReset}"  HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75"  />
+            <Button Content="{T:TranslateExtension LabelReset}"  HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding StopCommand}" />
         </StackPanel>
-        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,5,5" Width="75" VerticalAlignment="Bottom" Grid.Column="2" />
+        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,5,5" Width="75" VerticalAlignment="Bottom" Grid.Column="2" Click="Button_Click" />
         <Label Content="{Binding Message}"  Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0" HorizontalContentAlignment="Center" />
+        <Label Content="{Binding CurValue}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 
     </Grid>
 </Controls:MetroWindow>

@@ -62,5 +62,10 @@ namespace CameraControl.windows
             HelpProvider.Run(HelpSections.Bracketig);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
