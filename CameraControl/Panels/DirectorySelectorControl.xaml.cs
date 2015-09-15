@@ -165,6 +165,8 @@ namespace CameraControl.Panels
             foreach (Object item in parentContainer.Items)
             {
                 TreeViewItem currentContainer = parentContainer.ItemContainerGenerator.ContainerFromItem(item) as TreeViewItem;
+                if (currentContainer == null)
+                    continue;
                 var drive = currentContainer.Tag as DriveInfo;
                 var path = currentContainer.Tag as DirectoryInfo;
                 if (drive != null && !itemToSelect.StartsWith(drive.RootDirectory.FullName))
