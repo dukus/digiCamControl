@@ -161,6 +161,10 @@ namespace CameraControl
         private void InitWindowManager()
         {
             ServiceProvider.WindowsManager = new WindowsManager();
+            ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Settings.ApplicationFolder, "Plugins"));
+
+            ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Settings.ApplicationFolder, "Branding", "Plugins"));
+
             _basemainwindow = new MainWindow();
             ServiceProvider.PluginManager.MainWindowPlugins.Add(_basemainwindow);
 
@@ -184,10 +188,6 @@ namespace CameraControl
                 //ServiceProvider.WindowsManager.ApplyKeyHanding();
                 ServiceProvider.WindowsManager.RegisterKnowCommands();
                 ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
-
-                ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Settings.ApplicationFolder, "Plugins"));
-
-                ServiceProvider.PluginManager.LoadPlugins(Path.Combine(Settings.ApplicationFolder, "Branding", "Plugins"));
 
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
 

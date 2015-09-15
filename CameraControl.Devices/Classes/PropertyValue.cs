@@ -63,6 +63,18 @@ namespace CameraControl.Devices.Classes
                 NotifyPropertyChanged("Code");
             }
         }
+        /// <summary>
+        /// Indicate if the property is available and can be used 
+        /// </summary>
+        public bool Available
+        {
+            get { return _available; }
+            set
+            {
+                _available = value;
+                NotifyPropertyChanged("Available");
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating the propertie 
@@ -108,40 +120,37 @@ namespace CameraControl.Devices.Classes
         {
             get
             {
-                    if (_value != null && _replaceValues != null && _replaceValues.Count > 0)
+                if (_value != null && _replaceValues != null && _replaceValues.Count > 0)
+                {
+                    foreach (var replaceValue in _replaceValues.Where(replaceValue => replaceValue.Value == _value))
                     {
-                        foreach (var replaceValue in _replaceValues.Where(replaceValue => replaceValue.Value == _value))
-                        {
-                            return replaceValue.Key;
-                        }
+                        return replaceValue.Key;
                     }
-                    return _value;
+                }
+                return _value;
             }
             set
             {
-                lock (_syncRoot)
+                _value = value;
+                if (_value != null)
                 {
-                    _value = value;
-                    if (_value != null)
+                    if (_replaceValues != null && _replaceValues.Count > 0 && _replaceValues.ContainsKey(_value))
                     {
-                        if (_replaceValues != null && _replaceValues.Count>0 && _replaceValues.ContainsKey(_value))
-                        {
-                            _value = _replaceValues[_value];
-                        }
+                        _value = _replaceValues[_value];
+                    }
 
-                        HaveError = false;
-                        if (ValueChanged != null && _notifyValuChange)
+                    HaveError = false;
+                    if (ValueChanged != null && _notifyValuChange)
+                    {
+                        if (_valuesDictionary.ContainsKey(_value))
                         {
-                            if (_valuesDictionary.ContainsKey(_value))
-                            {
-                                OnValueChanged(this, _value, _valuesDictionary[_value]);
-                            }
+                            OnValueChanged(this, _value, _valuesDictionary[_value]);
                         }
                     }
-                    else
-                    {
+                }
+                else
+                {
 
-                    }
                 }
                 NotifyPropertyChanged("Value");
             }
@@ -232,6 +241,7 @@ namespace CameraControl.Devices.Classes
 
         private bool _isEnabled;
         private bool _haveError;
+        private bool _available;
 
         public bool IsEnabled
         {
@@ -277,6 +287,7 @@ namespace CameraControl.Devices.Classes
             _replaceValues = new Dictionary<string, string>();
             DisableIfWrongValue = false;
             IsEnabled = true;
+            Available = true;
         }
 
         public void SetValue(T o, bool notifyValuChange)

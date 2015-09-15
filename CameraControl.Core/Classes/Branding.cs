@@ -165,6 +165,8 @@ namespace CameraControl.Core.Classes
 
         public bool ShowMainMenu { get; set; }
         
+        public bool ShowBattery { get; set; }
+        
         public string DefaultTheme { get; set; }
 
         public bool ShowCameraAdvancedProperties { get; set; }
@@ -227,6 +229,7 @@ namespace CameraControl.Core.Classes
             ShowToolsPanel = true;
             ShowAnimation = true;
             ShowMainMenu = true;
+            ShowBattery = true;
         }
 
 

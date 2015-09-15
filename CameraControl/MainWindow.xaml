@@ -71,7 +71,8 @@
                 </Rectangle>
             </Button>
             <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-55,5,5,5" Height="50" Width="50" />
-
+            <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Height="50" Name="btn_liveview" Width="50" Margin="5" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLiveViewButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="50" Name="but_download" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDownloadButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <Rectangle Width="25" Height="25">
@@ -103,8 +104,6 @@
                 </Rectangle>
                 <!--<Image Margin="5" Source="/CameraControl;component/Images/Fullscreen.png" />-->
             </Button>
-            <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Height="50" Name="btn_liveview" Width="50" Margin="5" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"
-                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLiveViewButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button Content="B" ToolTip="{T:TranslateExtension BrowseSessionsToolTip}" Height="50" Name="btn_browse" Width="50" Margin="5"  FontSize="15" Click="btn_browse_Click" Style="{DynamicResource MetroCircleButtonStyle}"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBrowseButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <Button ToolTip="{T:TranslateExtension LabelAstronomy}" Height="50" Name="but_star" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_star_Click"

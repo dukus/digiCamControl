@@ -55,7 +55,7 @@ namespace CameraControl.Core.Translation
                 string key = val.Trim();
                 key = val.Replace(" ", "_").Replace("(", "_").Replace(")", "_").Replace("-", "_");
                 key = key.ToUpper();
-                if (!TranslationManager.HaveTranslation(key))
+                if (string.IsNullOrEmpty(key) || !TranslationManager.HaveTranslation(key))
                 {
                     Log.Debug("No translation for:" + key + "|" + val);
                     return ServiceProvider.Settings.ShowUntranslatedLabelId ? key : value;

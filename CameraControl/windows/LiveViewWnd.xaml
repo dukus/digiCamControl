@@ -321,7 +321,7 @@
                         </Expander>
                         <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
                                   Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                          Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" IsExpanded="True">
                             <StackPanel>
                                 <Label Content="{T:Translate LabelCaptureDelay}" Margin="20,0"/>
                                 <Controls:NumericUpDown Minimum="0" Value="{Binding CaptureDelay}" IsEnabled="{Binding IsFree}" Margin="20,3"/>
