@@ -637,5 +637,7 @@ namespace CameraControl.Core.Translation
         public static string LabelNoLowValueError = "No low value is set";
         public static string LabelNoHighValueError = "No high value is set";
         public static string LabelWrongValue = "Wrong low or high value";
+        public static string LabelWrongFNumber = "Aperture cannot be modified";
+        public static string LabelBracketingMMode = "Set camera in M mode";
     }
 }

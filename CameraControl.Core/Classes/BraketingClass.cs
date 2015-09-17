@@ -48,6 +48,9 @@ namespace CameraControl.Core.Classes
         public string FHigh { get; set; }
         public int FCaptureCount { get; set; }
 
+        public string IsoLow { get; set; }
+        public string IsoHigh { get; set; }
+        public int IsoCaptureCount { get; set; }
         //------------------------------------------------------
 
         public int Index;

@@ -21,6 +21,8 @@ namespace CameraControl.ViewModel
         private ICameraDevice _camera;
         private ObservableCollection<string> _expLowList;
         private ObservableCollection<string> _expHighList;
+        private ObservableCollection<string> _isoLowList;
+        private ObservableCollection<string> _isoHighList;
         private ObservableCollection<string> _fLowList;
         private ObservableCollection<string> _fHighList;
 
@@ -85,6 +87,7 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => Mode);
                 RaisePropertyChanged(() => ExpVisibility);
                 RaisePropertyChanged(() => FVisibility);
+                RaisePropertyChanged(() => IsoVisibility);
             }
         }
 
@@ -235,6 +238,82 @@ namespace CameraControl.ViewModel
         }
 
         #endregion
+#region iso
+        public Visibility IsoVisibility
+        {
+            get { return Mode == 2 ? Visibility.Visible : Visibility.Hidden; }
+        }
+
+
+        public ObservableCollection<string> IsoLowList
+        {
+            get
+            {
+                return Camera.IsoNumber.Values;
+                return _isoLowList;
+            }
+            set { _isoLowList = value; }
+        }
+
+        public ObservableCollection<string> IsoHighList
+        {
+            get
+            {
+                if (_isoHighList == null)
+                    return Camera.IsoNumber.Values;
+                return _isoHighList;
+            }
+            set
+            {
+                _isoHighList = value;
+                RaisePropertyChanged(() => IsoHighList);
+            }
+        }
+
+        public string IsoLow
+        {
+            get { return BracketingSettings.IsoLow; }
+            set
+            {
+                BracketingSettings.IsoLow = value;
+                RaisePropertyChanged(() => IsoLow);
+                try
+                {
+                    var i = Camera.IsoNumber.Values.IndexOf(IsoLow) + 1;
+                    if (i < Camera.IsoNumber.Values.Count)
+                        IsoHighList = new ObservableCollection<string>(Camera.IsoNumber.Values.ToList()
+                            .GetRange(i, Camera.IsoNumber.Values.Count - i));
+                }
+                catch (Exception)
+                {
+
+                }
+                SetMessage();
+            }
+        }
+
+        public string IsoHigh
+        {
+            get { return BracketingSettings.IsoHigh; }
+            set
+            {
+                BracketingSettings.IsoHigh = value;
+                RaisePropertyChanged(() => IsoHigh);
+                SetMessage();
+            }
+        }
+
+        public int IsoCaptureCount
+        {
+            get { return BracketingSettings.IsoCaptureCount; }
+            set
+            {
+                BracketingSettings.IsoCaptureCount = value;
+                RaisePropertyChanged(() => IsoCaptureCount);
+                SetMessage();
+            }
+        }
+#endregion
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -283,6 +362,7 @@ namespace CameraControl.ViewModel
             try
             {
                 _timer.Stop();
+                Thread.Sleep(100);
                 switch (Mode)
                 {
                     case 0:
@@ -294,6 +374,12 @@ namespace CameraControl.ViewModel
                     case 1:
                         {
                             Camera.FNumber.Value = Values[Counter];
+                            CurValue = Values[Counter];
+                        }
+                        break;
+                    case 2:
+                        {
+                            Camera.IsoNumber.Value = Values[Counter];
                             CurValue = Values[Counter];
                         }
                         break;
@@ -318,19 +404,39 @@ namespace CameraControl.ViewModel
 
         public void Start()
         {
-            Error = "";
-            switch (Mode)
+            try
             {
-                case 0:
-                    DefValue = Camera.ExposureCompensation.Value;
-                    break;
-                case 1:
-                    DefValue = Camera.FNumber.Value;
-                    break;
+                Error = "";
+                switch (Mode)
+                {
+                    case 0:
+                        DefValue = Camera.ExposureCompensation.Value;
+                        break;
+                    case 1:
+                        if (!Camera.FNumber.IsEnabled)
+                        {
+                            Error = TranslationStrings.LabelWrongFNumber;
+                            return;
+                        }
+                        DefValue = Camera.FNumber.Value;
+                        break;
+                    case 2:
+                        if (Camera.Mode.Value != "M")
+                        {
+                            Error = TranslationStrings.LabelBracketingMMode;
+                        }
+                        DefValue = Camera.IsoNumber.Value;
+                        break;
+                }
+                Counter = 0;
+                IsBusy = true;
+                _timer.Start();
             }
-            Counter = 0;
-            IsBusy = true;
-            _timer.Start();
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                Log.Error("Unable to start bracketing ", ex);
+            }
         }
 
         public void Stop()
@@ -345,6 +451,9 @@ namespace CameraControl.ViewModel
                     break;
                 case 1:
                     Camera.FNumber.Value = DefValue;
+                    break;
+                case 2:
+                    Camera.IsoNumber.Value = DefValue;
                     break;
             }
             IsBusy = false;
@@ -371,6 +480,18 @@ namespace CameraControl.ViewModel
                 case 1:
                     {
                         var vals = GetValues(FLowList.ToList(), FLow, FHigh, FCaptureCount);
+                        if (vals == null || vals.Count == 0)
+                            return;
+                        Values = vals;
+                        foreach (var val in vals)
+                        {
+                            Message += (val + ", ");
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        var vals = GetValues(IsoLowList.ToList(), IsoLow, IsoHigh, IsoCaptureCount);
                         if (vals == null || vals.Count == 0)
                             return;
                         Values = vals;
