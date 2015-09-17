@@ -135,7 +135,7 @@ namespace CameraControl.Core.Classes
 
         public void Error(Exception exception)
         {
-            SendEvent("Error", exception.Message, null);
+            SendEvent("Error", exception.GetType().ToString(), exception.Message);
         }
 
         public void PluginExecute(string command)

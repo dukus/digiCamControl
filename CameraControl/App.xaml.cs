@@ -235,7 +235,7 @@ namespace CameraControl
                 Log.Debug("Window command received :" + cmd);
 
                 if (cmd != WindowsCmdConsts.Next_Image && cmd != WindowsCmdConsts.Prev_Image &&
-                    cmd != WindowsCmdConsts.Select_Image)
+                    cmd != WindowsCmdConsts.Select_Image && !cmd.StartsWith("Zoom"))
                     ServiceProvider.Analytics.Command(cmd, o as string);
 
                 if (cmd == CmdConsts.All_Close)

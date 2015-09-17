@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a35c0677" Name="Scientific focus Acquisition software 1" Language="1033" Codepage="Windows-1252" Version="1.3.33.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Scientific focus Acquisition software 1">
+  <Product Id="19d12628-7654-4354-a305-9ab0a35c1677" Name="Scientific focus Acquisition software 1" Language="1033" Codepage="Windows-1252" Version="1.3.34.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Scientific focus Acquisition software 1">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="Scientific_focus_Acquisition_software_1.cab" EmbedCab="yes" />
 
@@ -1109,8 +1109,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.33.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.3.33.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.34.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.3.34.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />

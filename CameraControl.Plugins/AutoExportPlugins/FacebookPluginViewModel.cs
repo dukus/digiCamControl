@@ -149,14 +149,21 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         private void Login()
         {
-            FacebookClient client=new FacebookClient();
-            client.AppId = ClientId;
-            client.AppSecret = ClientSecret;
-            //PhotoUtils.Run(GenerateLoginUrl(client.AppId,"publish_actions,manage_pages").ToString());
-            _miniWebServer = new MiniWebServer(SendResponse, Server);
-            _miniWebServer.Run();
-            PhotoUtils.Run(
-                GenerateLoginUrl(client.AppId, "publish_actions,manage_pages,user_photos,publish_pages").ToString());
+            try
+            {
+                FacebookClient client = new FacebookClient();
+                client.AppId = ClientId;
+                client.AppSecret = ClientSecret;
+                //PhotoUtils.Run(GenerateLoginUrl(client.AppId,"publish_actions,manage_pages").ToString());
+                _miniWebServer = new MiniWebServer(SendResponse, Server);
+                _miniWebServer.Run();
+                PhotoUtils.Run(
+                    GenerateLoginUrl(client.AppId, "publish_actions,manage_pages,user_photos,publish_pages").ToString());
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Facebook login error ", ex);
+            }
         }
 
         private void Logout()
