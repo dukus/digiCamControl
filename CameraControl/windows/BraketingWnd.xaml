@@ -121,10 +121,10 @@
         </GroupBox>
         
         <StackPanel Grid.Row="5" HorizontalAlignment="Left" Orientation="Horizontal">
-            <Button Content="{T:TranslateExtension ButtonStart}" Margin="5" Width="75" VerticalAlignment="Bottom" Command="{Binding StartCommand}" IsEnabled="{Binding IsFree}"/>
-            <Button Content="{T:TranslateExtension LabelReset}"  HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding StopCommand}" />
+            <Button Content="{T:TranslateExtension ButtonStart}" Margin="5" Width="75" VerticalAlignment="Bottom" Command="{Binding StartCommand}" IsEnabled="{Binding IsFree}" Padding="20"/>
+            <Button Content="{T:TranslateExtension LabelReset}"  HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding StopCommand}" Padding="20"/>
         </StackPanel>
-        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,5,5" Width="75" VerticalAlignment="Bottom" Grid.Column="2" Click="Button_Click" />
+        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,5,5" Width="75" VerticalAlignment="Bottom" Grid.Column="2" Click="Button_Click" Padding="20"/>
         <Label Content="{Binding Message}"  Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0" HorizontalContentAlignment="Center" />
         <Label Content="{Binding CurValue}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using CameraControl.Core;
@@ -22,11 +23,9 @@ namespace CameraControl.ViewModel
         private DateTime _lastCaptureTime = DateTime.Now;
         private DateTime _timeLapseStartTime = DateTime.Now;
         private DateTime _firstLapseStartTime = DateTime.Now;
-        private bool _capture;
-        private bool _captureAll;
-        private bool _captureScript;
-        private string _scriptFile;
         private bool _fullSpeed;
+        private BracketingViewModel _bracketingViewModel = null;
+
         public TimeLapseSettings TimeLapseSettings { get; set; }
 
         public bool StartNow
@@ -96,7 +95,7 @@ namespace CameraControl.ViewModel
             set
             {
                 var d = TimeLapseSettings.StartDate;
-                TimeLapseSettings.StartDate = TimeLapseSettings.StartDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second); ;
+                TimeLapseSettings.StartDate = TimeLapseSettings.StartDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second);
                 RaisePropertyChanged(() => StartDate);
             }
         }
@@ -378,6 +377,12 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool Bracketing
+        {
+            get { return TimeLapseSettings.Bracketing; }
+            set { TimeLapseSettings.Bracketing = value; }
+        }
+
         public string ScriptFile
         {
             get { return TimeLapseSettings.ScriptFile; }
@@ -568,7 +573,19 @@ namespace CameraControl.ViewModel
                     try
                     {
                         if (Capture)
-                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);
+                        {
+                            if (Bracketing)
+                            {
+                                if (_bracketingViewModel == null)
+                                    _bracketingViewModel = new BracketingViewModel();
+                                Task.Factory.StartNew(new Action(_bracketingViewModel.Start));
+                                StaticHelper.Instance.SystemMessage = _bracketingViewModel.Error;
+                            }
+                            else
+                            {
+                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);                                
+                            }
+                        }
                         if (CaptureAll)
                             ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.CaptureAll);
                         if (CaptureScript)
@@ -693,6 +710,9 @@ namespace CameraControl.ViewModel
         {
             if (IsRunning)
                 return;
+            if (_bracketingViewModel != null)
+                _bracketingViewModel.Stop();
+            _bracketingViewModel = null;
             IsRunning = true;
             _timeLapseStartTime = DateTime.Now;
             _lastCaptureTime = DateTime.Now;

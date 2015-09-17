@@ -32,6 +32,7 @@ namespace CameraControl.Core.Classes
         public bool CaptureAll { get; set; }
         public bool CaptureScript { get; set; }
         public string ScriptFile { get; set; }
+        public bool Bracketing { get; set; }
 
         public TimeLapseSettings()
         {

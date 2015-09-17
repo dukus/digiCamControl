@@ -29,7 +29,7 @@ namespace CameraControl.ViewModel
         private string _error;
         private string _message;
         private int _expCountMax;
-        private Timer _timer = new Timer(200);
+        private Timer _timer = new Timer(100);
         private bool _isBusy;
         private string _curValue;
 
