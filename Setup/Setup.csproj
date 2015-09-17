@@ -11,7 +11,7 @@
     <AssemblyName>Setup</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>285e0f0b</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>03747660</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -54,8 +54,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Deployment.WindowsInstaller">
       <HintPath>..\packages\WixSharp.bin.1.0.18.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,9 +71,9 @@
       <HintPath>..\packages\WixSharp.bin.1.0.18.0\lib\WixSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WixSharp.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="WixSharp.UI">
       <HintPath>..\packages\WixSharp.bin.1.0.18.0\lib\WixSharp.UI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +97,6 @@ $(TargetPath)</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <UsingTask AssemblyFile="packages\WixSharp.bin.1.0.18.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
   <Import Project="..\packages\WixSharp.bin.1.0.18.0\build\WixSharp.bin.targets" Condition="Exists('..\packages\WixSharp.bin.1.0.18.0\build\WixSharp.bin.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -104,4 +104,5 @@ $(TargetPath)</PostBuildEvent>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\WixSharp.bin.1.0.18.0\build\WixSharp.bin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.bin.1.0.18.0\build\WixSharp.bin.targets'))" />
   </Target>
+  <UsingTask AssemblyFile="packages\WixSharp.bin.1.0.18.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
 </Project>
