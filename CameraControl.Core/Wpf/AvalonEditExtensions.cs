@@ -29,10 +29,7 @@
 #region
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
@@ -41,7 +38,7 @@ using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 #endregion
 
-namespace CameraControl.Controls
+namespace CameraControl.Core.Wpf
 {
     // original code from : http://blog.thomaslebrun.net/category/avalonedit/#.Uc6TuztM98E
     public static class AvalonEditExtensions

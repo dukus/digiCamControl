@@ -261,7 +261,6 @@
     <Compile Include="Classes\WpfCommands.cs" />
     <Compile Include="Classes\WriteableBitmapExtensionsLocal.cs" />
     <Compile Include="Controls\AnimationHelper.cs" />
-    <Compile Include="Controls\AvalonEditExtensions.cs" />
     <Compile Include="Controls\CameraItem.xaml.cs">
       <DependentUpon>CameraItem.xaml</DependentUpon>
     </Compile>

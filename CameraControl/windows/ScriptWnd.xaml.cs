@@ -29,32 +29,25 @@
 #region
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using CameraControl.Controls;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Scripting;
 using CameraControl.Core.TclScripting;
+using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using Microsoft.Win32;
 using MessageBox = System.Windows.Forms.MessageBox;
-using Path = System.IO.Path;
 
 #endregion
 
@@ -91,6 +84,8 @@ namespace CameraControl.windows
             {
                 // open code completion after the user has pressed dot:
                 completionWindow = new CompletionWindow(textEditor.TextArea);
+                completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
+                ServiceProvider.Settings.ApplyTheme(completionWindow);
                 // provide AvalonEdit with the data:
                 IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                 foreach (IScriptCommand command in ServiceProvider.ScriptManager.AvaiableCommands)
@@ -107,6 +102,7 @@ namespace CameraControl.windows
                 {
                     IList<PropertyInfo> props = new List<PropertyInfo>(typeof (PhotoSession).GetProperties());
                     completionWindow = new CompletionWindow(textEditor.TextArea);
+                    completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                     // provide AvalonEdit with the data:
                     IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                     foreach (PropertyInfo prop in props)
@@ -125,6 +121,7 @@ namespace CameraControl.windows
                 if (word == "{camera" && ServiceProvider.DeviceManager.SelectedCameraDevice != null)
                 {
                     completionWindow = new CompletionWindow(textEditor.TextArea);
+                    completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                     IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
 
                     CameraPreset preset = new CameraPreset();
@@ -148,6 +145,7 @@ namespace CameraControl.windows
                     if (!line.Contains("property") && !line.Contains("value"))
                     {
                         completionWindow = new CompletionWindow(textEditor.TextArea);
+                        completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                         IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                         data.Add(new MyCompletionData("property", "", "property"));
                         completionWindow.Show();
@@ -156,6 +154,7 @@ namespace CameraControl.windows
                     if (line.Contains("property") && !line.Contains("value"))
                     {
                         completionWindow = new CompletionWindow(textEditor.TextArea);
+                        completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                         IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                         data.Add(new MyCompletionData("value", "", "value"));
                         completionWindow.Show();
@@ -174,6 +173,7 @@ namespace CameraControl.windows
                     if (word == "property")
                     {
                         completionWindow = new CompletionWindow(textEditor.TextArea);
+                        completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                         IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                         data.Add(new MyCompletionData("\"" + "aperture" + "\"", "", "aperture"));
                         data.Add(new MyCompletionData("\"" + "iso" + "\"", "", "iso"));
@@ -190,6 +190,7 @@ namespace CameraControl.windows
                             ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber != null)
                         {
                             completionWindow = new CompletionWindow(textEditor.TextArea);
+                            completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                             IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
 
                             foreach (string value in ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber.Values)
@@ -333,7 +334,7 @@ namespace CameraControl.windows
 
         #endregion
 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             if (IsVisible)
             {
