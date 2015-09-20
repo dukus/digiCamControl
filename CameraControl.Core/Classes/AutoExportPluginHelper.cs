@@ -9,7 +9,13 @@ namespace CameraControl.Core.Classes
         public static string ExecuteTransformPlugins(FileItem item, AutoExportPluginConfig configData, string outfile,
             bool preview = false)
         {
-            File.Copy(preview ? item.LargeThumb : item.FileName, outfile, true);
+            return ExecuteTransformPlugins(item, configData, preview ? item.LargeThumb : item.FileName, outfile);
+        }
+        
+        public static string ExecuteTransformPlugins(FileItem item, AutoExportPluginConfig configData,string infile, string outfile)
+        {
+            if (infile != outfile)
+                File.Copy(infile, outfile, true);
             if (configData.ConfigDataCollection == null || configData.ConfigDataCollection.Count == 0)
                 return outfile;
             foreach (var enumerator in configData.ConfigDataCollection)

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CameraControl.Core.Classes;
-using GalaSoft.MvvmLight;
-
-namespace CameraControl.ViewModel
+﻿namespace CameraControl.Core.Classes
 {
-    public class TransformPluginItem: ViewModelBase
+    public class TransformPluginItem 
     {
         private ValuePairEnumerator _config = new ValuePairEnumerator();
         private string _name;

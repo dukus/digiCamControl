@@ -330,7 +330,6 @@
     <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\SimpleLiveViewViewModel.cs" />
     <Compile Include="ViewModel\TimelapseViewModel.cs" />
-    <Compile Include="ViewModel\TransformPluginItem.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="windows\AboutWnd.xaml.cs">
       <DependentUpon>AboutWnd.xaml</DependentUpon>

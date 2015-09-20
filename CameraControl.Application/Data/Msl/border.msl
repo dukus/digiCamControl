@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
+   <read>
+      <borderColor value="#000000"/>
+      <border height="10" width="10" />
+      <borderColor value="#f0f0ff"/>
+      <border height="5" width="5" />
+    </read>
+</msl>

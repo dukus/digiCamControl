@@ -11,14 +11,18 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using CameraControl.Plugins.ImageTransformPlugins;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using ImageMagick;
 using Microsoft.Win32;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
     public class GenMovieViewModel : ViewModelBase
     {
+        private bool _canceling;
+        private AutoExportPluginConfig _config = new AutoExportPluginConfig() {Name = "Test"};
         private BackgroundWorker _backgroundWorker = new BackgroundWorker();
         private BitmapSource _bitmap;
         private int _totalImages;
@@ -33,6 +37,9 @@ namespace CameraControl.Plugins.ToolPlugins
         private string _outPutFile;
         private bool _fillImage;
         private object _locker = new object();
+        private bool _transformBefor;
+        private int _progress;
+        private int _progressMax;
 
         public BitmapSource Bitmap
         {
@@ -164,11 +171,42 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public bool TransformBefor
+        {
+            get { return _transformBefor; }
+            set
+            {
+                _transformBefor = value;
+                RaisePropertyChanged(() => TransformBefor);
+            }
+        }
+
+        public int Progress
+        {
+            get { return _progress; }
+            set
+            {
+                _progress = value;
+                RaisePropertyChanged(() => Progress);
+            }
+        }
+
+        public int ProgressMax
+        {
+            get { return _progressMax; }
+            set
+            {
+                _progressMax = value;
+                RaisePropertyChanged(()=>ProgressMax);
+            }
+        }
+
         public RelayCommand StartCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
         public RelayCommand BrowseFileCommand { get; set; }
         public RelayCommand PlayVideoCommand { get; set; }
-
+        public RelayCommand ConfPluginCommand { get; set; }
+        
         public GenMovieViewModel()
         {
 
@@ -182,6 +220,7 @@ namespace CameraControl.Plugins.ToolPlugins
             StopCommand = new RelayCommand(Stop);
             PlayVideoCommand = new RelayCommand(PlayVideo);
             BrowseFileCommand = new RelayCommand(BrowseFile);
+            ConfPluginCommand = new RelayCommand(ConfPlugin);
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
             _backgroundWorker.WorkerSupportsCancellation = true;
@@ -200,6 +239,14 @@ namespace CameraControl.Plugins.ToolPlugins
                 ServiceProvider.Settings.DefaultSession.Name + ".mp4");
             OutPut = new AsyncObservableCollection<string>();
             Fps = 15;
+        }
+
+        private void ConfPlugin()
+        {
+            TransformPluginEditView wnd =new TransformPluginEditView();
+            wnd.DataContext = new TransformPluginEditViewModel(_config);
+            wnd.Owner = _window;
+            wnd.ShowDialog();
         }
 
         private void _window_Closed(object sender, EventArgs e)
@@ -232,15 +279,23 @@ namespace CameraControl.Plugins.ToolPlugins
 
         private void Start()
         {
-            if (File.Exists(OutPutFile))
+            try
             {
-                if (
-                    MessageBox.Show("Video file already exist. Do you want to continue ?", "Warning ",
-                        MessageBoxButton.YesNo) != MessageBoxResult.Yes)
-                    return;
-                File.Delete(OutPutFile);
+                _canceling = false;
+                if (File.Exists(OutPutFile))
+                {
+                    if (
+                        MessageBox.Show("Video file already exist. Do you want to continue ?", "Warning ",
+                            MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                        return;
+                    File.Delete(OutPutFile);
+                }
+                _backgroundWorker.RunWorkerAsync();
             }
-            _backgroundWorker.RunWorkerAsync();
+            catch (Exception ex)
+            {
+                Log.Error("Error delete video", ex);
+            }
         }
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -278,15 +333,25 @@ namespace CameraControl.Plugins.ToolPlugins
             CurrentImages = 0;
             TotalImages = ServiceProvider.Settings.DefaultSession.Files.Count;
             int counter = 0;
+            ProgressMax = MaxValue - MinValue;
+            Progress = 0;
             for (int i = MinValue; i < MaxValue; i++)
             {
                 if (_backgroundWorker.CancellationPending)
-                    break;
+                {
+                    DeleteTempFolder(tempFolder);
+                    OutPut.Insert(0, "Operation CANCELED !!!");
+                    return;
+                }
+
                 try
                 {
+                    Progress++;
                     FileItem item = ServiceProvider.Settings.DefaultSession.Files[i];
                     string outfile = Path.Combine(tempFolder, "img" + counter.ToString("000000") + ".jpg");
                     CopyFile(item.FileName, outfile);
+                    //outfile =
+                    AutoExportPluginHelper.ExecuteTransformPlugins(item, _config, outfile, outfile);
                     OutPut.Insert(0,"Procesing file " + item.Name);
                     counter++;
                 }
@@ -328,16 +393,23 @@ namespace CameraControl.Plugins.ToolPlugins
                 OutPut.Insert(0, "Converting error :" + exception.Message);
             }
 
+            DeleteTempFolder(tempFolder);
+
+            OutPut.Insert(0, "DONE !!!");
+        }
+
+        private void DeleteTempFolder(string tempFolder)
+        {
             try
             {
                 OutPut.Insert(0, "Removing temporary folder ..");
-                Directory.Delete(tempFolder);
+                Directory.Delete(tempFolder,true);
             }
             catch (Exception ex)
             {
                 OutPut.Insert(0, "Error :" + ex.Message);
             }
-            OutPut.Insert(0, "DONE !!!");
+            
         }
 
         private void newprocess_OutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -358,31 +430,46 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public void CopyFile(string filename, string destFile)
         {
-            using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
+            //using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
+            //{
+            //    BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
+            //                                                BitmapCreateOptions.PreservePixelFormat,
+            //                                                BitmapCacheOption.OnLoad);
+
+            //    bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
+
+            //    double zw = (double)VideoType.Width / bmpDec.Frames[0].PixelWidth;
+            //    double zh = (double)VideoType.Height / bmpDec.Frames[0].PixelHeight;
+            //    double za = FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
+            //    WriteableBitmap writeableBitmap =
+            //        BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],
+            //            (int) (bmpDec.Frames[0].PixelWidth*za)/2*2,
+            //            (int) (bmpDec.Frames[0].PixelHeight*za)/2*2,
+            //            BitmapScalingMode.HighQuality));
+
+
+            //    BitmapLoader.Save2Jpg(writeableBitmap, destFile);
+
+            //}
+
+            using (MagickImage image = new MagickImage(filename))
             {
-                BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-                                                            BitmapCreateOptions.PreservePixelFormat,
-                                                            BitmapCacheOption.OnLoad);
-
-                bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
-
-                double zw = (double)VideoType.Width / bmpDec.Frames[0].PixelWidth;
-                double zh = (double)VideoType.Height / bmpDec.Frames[0].PixelHeight;
-                double za = FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
-                WriteableBitmap writeableBitmap =
-                    BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],
-                        (int) (bmpDec.Frames[0].PixelWidth*za)/2*2,
-                        (int) (bmpDec.Frames[0].PixelHeight*za)/2*2,
-                        BitmapScalingMode.HighQuality));
-
-
-                BitmapLoader.Save2Jpg(writeableBitmap, destFile);
-
+                MagickGeometry geometry = new MagickGeometry(VideoType.Width, VideoType.Width)
+                {
+                    IgnoreAspectRatio = false,
+                    FillArea = FillImage
+                };
+                image.FilterType = FilterType.Point;
+                image.Resize(geometry);
+                image.Quality = 80;
+                image.Format = MagickFormat.Jpeg;
+                image.Write(destFile);
             }
         }
 
         private void Stop()
         {
+            _canceling = true;
             if (_backgroundWorker.IsBusy)
             {
                 _backgroundWorker.CancelAsync();

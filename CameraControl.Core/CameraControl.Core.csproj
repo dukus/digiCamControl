@@ -220,6 +220,7 @@
     <Compile Include="Classes\SourceEnum.cs" />
     <Compile Include="Classes\TagItem.cs" />
     <Compile Include="Classes\TimeLapseSettings.cs" />
+    <Compile Include="Classes\TransformPluginItem.cs" />
     <Compile Include="Classes\TriggerClass.cs" />
     <Compile Include="Classes\ValuePairEnumerator.cs" />
     <Compile Include="Classes\WebServer.cs" />

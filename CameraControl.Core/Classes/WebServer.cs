@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using CameraControl.Devices;
 using Griffin.Networking.Protocol.Http.Services.BodyDecoders;
 using Griffin.WebServer;
 using Griffin.WebServer.Files;
@@ -47,27 +48,34 @@ namespace CameraControl.Core.Classes
     {
         public void Start(int port)
         {
-            // Module manager handles all modules in the server
-            var moduleManager = new ModuleManager();
+            try
+            {
+                // Module manager handles all modules in the server
+                var moduleManager = new ModuleManager();
 
-            // Let's serve our downloaded files (Windows 7 users)
-            var fileService = new DiskFileService("/", Settings.WebServerFolder);
+                // Let's serve our downloaded files (Windows 7 users)
+                var fileService = new DiskFileService("/", Settings.WebServerFolder);
 
-            // Create the file module and allow files to be listed.
-            var module = new FileModule(fileService) {ListFiles = false};
+                // Create the file module and allow files to be listed.
+                var module = new FileModule(fileService) { ListFiles = false };
 
-            var routerModule = new RouterModule();
+                var routerModule = new RouterModule();
 
-            // Add the module
-            //moduleManager.Add(module);
-            moduleManager.Add(new WebServerModule());
+                // Add the module
+                //moduleManager.Add(module);
+                moduleManager.Add(new WebServerModule());
 
-            //moduleManager.Add(new BodyDecodingModule(new UrlFormattedDecoder()));
+                //moduleManager.Add(new BodyDecodingModule(new UrlFormattedDecoder()));
 
-            // And start the server.
-            var server = new HttpServer(moduleManager);
+                // And start the server.
+                var server = new HttpServer(moduleManager);
 
-            server.Start(IPAddress.Any, port);
+                server.Start(IPAddress.Any, port);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to start web server ", ex);
+            }
         }
 
         public void Stop()

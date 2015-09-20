@@ -243,6 +243,10 @@
       <DependentUpon>ScriptTransformView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageTransformPlugins\ScriptTransformViewModel.cs" />
+    <Compile Include="ImageTransformPlugins\TransformPluginEditView.xaml.cs">
+      <DependentUpon>TransformPluginEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\TransformPluginEditViewModel.cs" />
     <Compile Include="MainWindowPlugins\SimpleMainWindow.xaml.cs">
       <DependentUpon>SimpleMainWindow.xaml</DependentUpon>
     </Compile>
@@ -359,6 +363,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\ScriptTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\TransformPluginEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
