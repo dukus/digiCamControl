@@ -407,6 +407,7 @@ namespace CameraControl.ViewModel
             try
             {
                 Error = "";
+                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.NextSeries);
                 switch (Mode)
                 {
                     case 0:
