@@ -2,11 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                     xmlns:classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
-                    xmlns:local="clr-namespace:CameraControl.Controls.ZoomAndPan">
+                    xmlns:local="clr-namespace:CameraControl.Controls.ZoomAndPan"
+                    xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
+    <wpf:ItemBackgroundConverter x:Key="myConverter"/>
     <!--
     Default style and template for the ZoomAndPanControl.
     -->
@@ -53,11 +54,21 @@
 
     </Style>
 
-   
 
     <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
-        <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
+           <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
            explains how to display an object of type BitmapImage. -->
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MetroListBoxItem}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate DataType="classes:FileItem">

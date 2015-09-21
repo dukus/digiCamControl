@@ -82,10 +82,17 @@ namespace CameraControl.ViewModel
             if (!IsInDesignMode)
             {
                 ServiceProvider.WindowsManager.Event += WindowsManager_Event;
-                string file = Path.Combine(Path.GetDirectoryName(ServiceProvider.Settings.DefaultSession.ConfigFile),
-                    ServiceProvider.Settings.DefaultSession.Name + "_data.csv");
-                if (File.Exists(file))
-                    ImportCsv(file);
+                try
+                {
+                    string file = Path.Combine(Path.GetDirectoryName(ServiceProvider.Settings.DefaultSession.ConfigFile),
+                        ServiceProvider.Settings.DefaultSession.Name + "_data.csv");
+                    if (File.Exists(file))
+                        ImportCsv(file);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Unable to load CSV data", ex);
+                }
             }
             KeepActive = true;
         }

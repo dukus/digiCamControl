@@ -595,6 +595,10 @@
                 <File Id="RemoveBackground_White.msl" Source="Data\msl\RemoveBackground-White.msl" />
               </Component>
 
+              <Component Id="Component.rotate.msl" Guid="19d12628-7654-4354-a305-9ab0cb3ced25">
+                <File Id="rotate.msl" Source="Data\msl\rotate.msl" />
+              </Component>
+
               <Component Id="Component.sepiaTone.msl" Guid="19d12628-7654-4354-a305-9ab04b62be23">
                 <File Id="sepiaTone.msl" Source="Data\msl\sepiaTone.msl" />
               </Component>
@@ -1234,6 +1238,7 @@
       <ComponentRef Id="Component.polaroid.msl" />
       <ComponentRef Id="Component.reduceNoise.msl" />
       <ComponentRef Id="Component.RemoveBackground_White.msl" />
+      <ComponentRef Id="Component.rotate.msl" />
       <ComponentRef Id="Component.sepiaTone.msl" />
       <ComponentRef Id="Component.sharpen.msl" />
       <ComponentRef Id="Component.sketch.msl" />
