@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -379,7 +380,8 @@ namespace CameraControl.Plugins.ToolPlugins
                 }
                 OutPut.Insert(0, "Generating video ..... ");
                 Process newprocess = new Process();
-
+                Progress = 0;
+                ProgressMax = (MaxValue - MinValue)*25/Fps;
                 newprocess.StartInfo = new ProcessStartInfo()
                 {
                     FileName = ffmpegPath,
@@ -428,6 +430,14 @@ namespace CameraControl.Plugins.ToolPlugins
                 lock (_locker)
                 {
                     OutPut.Insert(0, e.Data);
+                    //frame=   20 fps= 12 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A    
+                    if (e.Data != null && e.Data.StartsWith("frame="))
+                    {
+                        var s = e.Data.Substring(7, 5).Trim();
+                        int i = 0;
+                        if (int.TryParse(e.Data.Substring(7, 5).Trim(), out i))
+                            Progress = i;
+                    }
                 }
             }
             catch (Exception)
@@ -439,29 +449,7 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public void CopyFile(string filename, string destFile)
         {
-            //using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
-            //{
-            //    BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-            //                                                BitmapCreateOptions.PreservePixelFormat,
-            //                                                BitmapCacheOption.OnLoad);
-
-            //    bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
-
-            //    double zw = (double)VideoType.Width / bmpDec.Frames[0].PixelWidth;
-            //    double zh = (double)VideoType.Height / bmpDec.Frames[0].PixelHeight;
-            //    double za = FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
-            //    WriteableBitmap writeableBitmap =
-            //        BitmapFactory.ConvertToPbgra32Format(BitmapLoader.GetBitmapFrame(bmpDec.Frames[0],
-            //            (int) (bmpDec.Frames[0].PixelWidth*za)/2*2,
-            //            (int) (bmpDec.Frames[0].PixelHeight*za)/2*2,
-            //            BitmapScalingMode.HighQuality));
-
-
-            //    BitmapLoader.Save2Jpg(writeableBitmap, destFile);
-
-            //}
-
-            using (MagickImage image = new MagickImage(filename))
+           using (MagickImage image = new MagickImage(filename))
             {
                 double zw = (double)VideoType.Width / image.Width;
                 double zh = (double)VideoType.Height /image.Height;
