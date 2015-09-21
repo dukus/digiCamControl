@@ -148,7 +148,7 @@ namespace CameraControl.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error to preview filter " + ex.Message);
+                MessageBox.Show("Error to preview filter \n" + ex.Message);
             }
             
 

@@ -11,8 +11,9 @@ namespace CameraControl.Core.Classes
         {
             return ExecuteTransformPlugins(item, configData, preview ? item.LargeThumb : item.FileName, outfile);
         }
-        
-        public static string ExecuteTransformPlugins(FileItem item, AutoExportPluginConfig configData,string infile, string outfile)
+
+        public static string ExecuteTransformPlugins(FileItem item, AutoExportPluginConfig configData, string infile,
+            string outfile)
         {
             if (infile != outfile)
                 File.Copy(infile, outfile, true);
@@ -20,17 +21,10 @@ namespace CameraControl.Core.Classes
                 return outfile;
             foreach (var enumerator in configData.ConfigDataCollection)
             {
-                try
-                {
-                    var plugin = enumerator["TransformPlugin"];
-                    var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(plugin);
-                    if (tp != null)
-                        outfile = tp.Execute(item, outfile, outfile, enumerator);
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Error execute transform olugin ", exception);
-                }
+                var plugin = enumerator["TransformPlugin"];
+                var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(plugin);
+                if (tp != null)
+                    outfile = tp.Execute(item, outfile, outfile, enumerator);
             }
             return outfile;
         }

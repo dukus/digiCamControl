@@ -349,9 +349,18 @@ namespace CameraControl.Plugins.ToolPlugins
                     Progress++;
                     FileItem item = ServiceProvider.Settings.DefaultSession.Files[i];
                     string outfile = Path.Combine(tempFolder, "img" + counter.ToString("000000") + ".jpg");
-                    CopyFile(item.FileName, outfile);
+                    if (TransformBefor)
+                    {
+                        AutoExportPluginHelper.ExecuteTransformPlugins(item, _config, item.FileName, outfile);
+                        CopyFile(outfile, outfile);
+                    }
+                    else
+                    {
+                        CopyFile(item.FileName, outfile);                        
+                    }
                     //outfile =
-                    AutoExportPluginHelper.ExecuteTransformPlugins(item, _config, outfile, outfile);
+                    if (!TransformBefor)
+                        AutoExportPluginHelper.ExecuteTransformPlugins(item, _config, outfile, outfile);
                     OutPut.Insert(0,"Procesing file " + item.Name);
                     counter++;
                 }
@@ -454,11 +463,26 @@ namespace CameraControl.Plugins.ToolPlugins
 
             using (MagickImage image = new MagickImage(filename))
             {
-                MagickGeometry geometry = new MagickGeometry(VideoType.Width, VideoType.Width)
+                double zw = (double)VideoType.Width / image.Width;
+                double zh = (double)VideoType.Height /image.Height;
+                double za = FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
+
+                if (FillImage)
+                {
+                    double aspect = (double) VideoType.Width/VideoType.Height;
+                    double pAspect = (double) image.Width/image.Height;
+                    if (aspect > pAspect)
+                        image.Crop(image.Width, (int) (image.Width/aspect), Gravity.Center);
+                    else
+                        image.Crop((int) (image.Height/aspect), image.Height, Gravity.Center);
+                }
+
+                MagickGeometry geometry = new MagickGeometry(VideoType.Width, VideoType.Height)
                 {
                     IgnoreAspectRatio = false,
-                    FillArea = FillImage
+                    FillArea = false
                 };
+
                 image.FilterType = FilterType.Point;
                 image.Resize(geometry);
                 image.Quality = 80;
