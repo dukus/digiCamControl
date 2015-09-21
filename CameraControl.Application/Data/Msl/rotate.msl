@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<msl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MagickScript.xsd">
+  <read>
+    <distort method="ScaleRotateTranslate">
+      <arguments>
+        <value>5</value> 
+      </arguments>
+    </distort>
+  </read>
+</msl>

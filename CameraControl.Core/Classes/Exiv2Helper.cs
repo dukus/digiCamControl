@@ -756,7 +756,7 @@ namespace CameraControl.Core.Classes
             // prevent crash if wrong data is received 
             try
             {
-                if (e.Data != null && !Tags.ContainsKey(e.Data.Substring(0, 45).Trim()) && e.Data.Length > 60)
+                if (e.Data != null && e.Data.Length > 60 && !Tags.ContainsKey(e.Data.Substring(0, 45).Trim()))
                     Tags.Add(e.Data.Substring(0, 45).Trim(),
                         new Exiv2Data()
                         {
