@@ -72,8 +72,10 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate DataType="classes:FileItem">
-                    <StackPanel Orientation="Horizontal">
-                        <Grid Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="0,4,4,4">
+                    <Grid Margin="-5,0,0,0" >
+                        <Line Stroke="Green" StrokeThickness="4" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" X2="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}" Visibility="{Binding Alternate, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5"/>
+                        <StackPanel Orientation="Horizontal">
+                        <Grid Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="4,4,4,4">
                             <!--<Rectangle Stroke="Black" Margin="0"/>
                             <Rectangle Stroke="Black" Margin="2" />-->
                             <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" Name="_image">
@@ -125,6 +127,7 @@
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
+                    </Grid>
                     <DataTemplate.Triggers>
                         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
                         <DataTrigger Binding="{Binding Path=IsUnLiked}" Value="true">

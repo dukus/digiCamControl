@@ -166,6 +166,17 @@ namespace CameraControl.Core.Classes
         [XmlAttribute]
         public int Series { get; set; }
 
+        [XmlIgnore]
+        public bool Alternate
+        {
+            get { return _alternate; }
+            set
+            {
+                _alternate = value;
+                NotifyPropertyChanged("Alternate");
+            }
+        }
+
         public bool IsRaw
         {
             get
@@ -459,6 +470,7 @@ namespace CameraControl.Core.Classes
         private string _exposureBias;
         private string _shortName;
         private FileInfo _fileInfo;
+        private bool _alternate;
 
         [JsonIgnore]
         [XmlIgnore]

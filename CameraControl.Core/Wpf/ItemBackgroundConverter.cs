@@ -32,19 +32,14 @@ namespace CameraControl.Core.Wpf
                 if (oldFileItem == null)
                     return Brushes.Transparent;
                 if (fileItem.Series == oldFileItem.Series)
-                    return oldItem.Background;
+                {
+                    fileItem.Alternate = oldFileItem.Alternate;
+                }
                 else
                 {
-                    if (Equals(oldItem.Background, Brushes.Transparent))
-                    {
-                        return (Brush)listView.FindResource("GrayBrush5");
-                        //return new SolidColorBrush(Color.FromArgb(80, 255, 255, 255));
-                    }
-                    else
-                    {
-                        return Brushes.Transparent;
-                    }
+                    fileItem.Alternate = !oldFileItem.Alternate;
                 }
+                return Brushes.Transparent;
             }
             catch (Exception)
             {
