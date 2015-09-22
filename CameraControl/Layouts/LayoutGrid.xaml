@@ -54,6 +54,7 @@
                     <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
+
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />

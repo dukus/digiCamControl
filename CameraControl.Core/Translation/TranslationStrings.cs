@@ -640,5 +640,6 @@ namespace CameraControl.Core.Translation
         public static string LabelWrongFNumber = "Aperture cannot be modified";
         public static string LabelBracketingMMode = "Set camera in M mode";
         public static string LabelTimeLapseCaptureBracketing = "Capture with bracketing";
+        public static string LabelZoomToFocus = "Always zoom to firs focus point";
     }
 }

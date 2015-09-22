@@ -157,7 +157,9 @@
             <StatusBarItem  DockPanel.Dock="Right">
                 <ToggleButton Height="40" Width="40" Content="1:2" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding Zoom12}"/>
             </StatusBarItem>
-
+            <StatusBarItem  DockPanel.Dock="Right">
+                <ToggleButton Height="40" Width="40" Content="[ : ]" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding ZoomToFocus}" ToolTip="{translation:TranslateExtension LabelZoomToFocus}" />
+            </StatusBarItem>
             <StatusBarItem  DockPanel.Dock="Right">
                 <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="30" Width="30" />
             </StatusBarItem>

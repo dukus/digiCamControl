@@ -22,6 +22,7 @@ namespace CameraControl.ViewModel
         private bool _zoom12;
         private bool _freeZoom;
         private AsyncObservableCollection<IPanelPlugin> _panelPlugins;
+        private bool _zoomToFocus;
 
         public bool ZoomFit
         {
@@ -71,6 +72,7 @@ namespace CameraControl.ViewModel
             }
         }
 
+
         public bool FreeZoom
         {
             get { return _freeZoom || Zoom12 || Zoom11; }
@@ -83,6 +85,16 @@ namespace CameraControl.ViewModel
                     Zoom12 = false;
                 }
                 _freeZoom = value;
+            }
+        }
+
+        public bool ZoomToFocus
+        {
+            get { return _zoomToFocus; }
+            set
+            {
+                _zoomToFocus = value;
+                RaisePropertyChanged(() => ZoomToFocus);
             }
         }
 

@@ -326,6 +326,10 @@ namespace CameraControl.Layouts
             {
                 ZoomAndPanControl.AnimatedScaleToFit();
             }
+            else
+            {
+                ZoomToFocus();
+            }
             GeneratePreview();
         }
 
@@ -487,10 +491,12 @@ namespace CameraControl.Layouts
                                                                case WindowsCmdConsts.Zoom_Image_100:
                                                                    LoadFullRes();
                                                                    ZoomAndPanControl.AnimatedZoomTo(1.0);
+                                                                   ZoomToFocus();
                                                                    break;
                                                                case WindowsCmdConsts.Zoom_Image_200:
                                                                    LoadFullRes();
                                                                    ZoomAndPanControl.AnimatedZoomTo(2.0);
+                                                                   ZoomToFocus();
                                                                    break;
                                                            }
                                                            if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))
@@ -515,6 +521,21 @@ namespace CameraControl.Layouts
                                                                }
                                                            }
                                                        }));
+        }
+
+        private void ZoomToFocus()
+        {
+            if (!LayoutViewModel.ZoomToFocus)
+                return;
+            if (
+                ServiceProvider.Settings.SelectedBitmap.FileItem
+                    .FileInfo != null &&
+                ServiceProvider.Settings.SelectedBitmap.FileItem
+                    .FileInfo.FocusPoints.Count > 0)
+            {
+                ZoomAndPanControl.SnapTo(new Point(ServiceProvider.Settings.SelectedBitmap.FileItem.FileInfo.FocusPoints[0].X + ServiceProvider.Settings.SelectedBitmap.FileItem.FileInfo.FocusPoints[0].Width / 2,
+                    ServiceProvider.Settings.SelectedBitmap.FileItem.FileInfo.FocusPoints[0].Y + ServiceProvider.Settings.SelectedBitmap.FileItem.FileInfo.FocusPoints[0].Height / 2));
+            }
         }
 
         protected void zoomAndPanControl_MouseWheel(object sender, MouseWheelEventArgs e)
