@@ -40,6 +40,7 @@ namespace CameraControl.Core.Classes.Queue
     public class QueueItemFileItem : IQueueItem
     {
         public FileItem FileItem { get; set; }
+        public bool Generate { get; set; }
 
         #region Implementation of IQueueItem
 
@@ -56,7 +57,13 @@ namespace CameraControl.Core.Classes.Queue
                 else
                 {
                     if (FileItem.ItemType == FileItemType.File)
-                        FileItem.GetExtendedThumb();
+                        if (Generate)
+                            BitmapLoader.Instance.GenerateCache(FileItem);
+                        else
+                        {
+                            FileItem.GetExtendedThumb();
+                            ServiceProvider.QueueManager.Add(new QueueItemFileItem { FileItem = FileItem, Generate = true });
+                        }
                 }
             }
             catch (Exception)

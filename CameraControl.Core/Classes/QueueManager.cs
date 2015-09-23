@@ -41,13 +41,15 @@ namespace CameraControl.Core.Classes
 {
     public class QueueManager
     {
-        public BlockingCollection<IQueueItem> Queue { get; set; }
+        private BlockingCollection<IQueueItem> PriorityQueue { get; set; }
+        private BlockingCollection<IQueueItem> Queue { get; set; }
         private readonly BackgroundWorker _worker;
         private object _locker = new object();
 
 
         public QueueManager()
         {
+            PriorityQueue = new BlockingCollection<IQueueItem>();
             Queue = new BlockingCollection<IQueueItem>();
             _worker = new BackgroundWorker();
             _worker.DoWork += _worker_DoWork;
@@ -55,17 +57,22 @@ namespace CameraControl.Core.Classes
 
         private void _worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            IQueueItem item;
             while (true)
             {
-                item = Queue.Take();
+                IQueueItem item;
                 try
                 {
-                    if (!item.Execute(this))
+                    if (PriorityQueue.Count > 0 && PriorityQueue.TryTake(out item))
                     {
-                        break;
+                        item.Execute(this);
+                        continue;
                     }
-                    //Thread.Sleep(10);
+                    if (Queue.Count > 0 && Queue.TryTake(out item))
+                    {
+                        item.Execute(this);
+                    }
+                    if (Queue.Count == 0 && PriorityQueue.Count == 0)
+                        Thread.Sleep(200);
                 }
                 catch (Exception exception)
                 {
@@ -81,6 +88,13 @@ namespace CameraControl.Core.Classes
                 IQueueItem item;
                 Queue.TryTake(out item);
             }
+        }
+
+        public void AddWithPriority(IQueueItem item)
+        {
+            PriorityQueue.Add(item);
+            if (!_worker.IsBusy)
+                _worker.RunWorkerAsync();
         }
 
         public void Add(IQueueItem item)

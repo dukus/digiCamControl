@@ -518,7 +518,7 @@ namespace CameraControl.Core.Classes
                             ? BitmapLoader.Instance.NoImageThumbnail
                             : BitmapLoader.Instance.DefaultThumbnail;
                         if (!ServiceProvider.Settings.DontLoadThumbnails)
-                            ServiceProvider.QueueManager.Add(new QueueItemFileItem { FileItem = this });
+                            ServiceProvider.QueueManager.AddWithPriority(new QueueItemFileItem { FileItem = this });
                     }
                 }
                 return _thumbnail;
@@ -565,7 +565,7 @@ namespace CameraControl.Core.Classes
 
                     Thumbnail =
                         BitmapSourceConvert.ToBitmapSource(
-                            (Bitmap)tempImage.GetThumbnailImage(160, 120, myCallback, IntPtr.Zero));
+                            (Bitmap)tempImage.GetThumbnailImage(180, 120, myCallback, IntPtr.Zero));
                     tempImage.Dispose();
                     fs.Close();
                 }
