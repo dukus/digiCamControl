@@ -641,5 +641,6 @@ namespace CameraControl.Core.Translation
         public static string LabelBracketingMMode = "Set camera in M mode";
         public static string LabelTimeLapseCaptureBracketing = "Capture with bracketing";
         public static string LabelZoomToFocus = "Always zoom to firs focus point";
+        public static string LabelPreviewFullSize = "Preview full size photo";
     }
 }

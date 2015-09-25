@@ -22,6 +22,7 @@ namespace CameraControl.ViewModel
         private AutoExportPluginConfig _config;
         private ObservableCollection<TransformPluginItem> _transformPluginItems;
         private TransformPluginItem _selectedTransformPluginItem;
+        private bool _fullSize;
 
         public GalaSoft.MvvmLight.Command.RelayCommand<string> AddTransforPluginCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<TransformPluginItem> RemoveTransforPluginCommand { get; set; }
@@ -54,6 +55,16 @@ namespace CameraControl.ViewModel
             {
                 Config.IsEnabled = value;
                 RaisePropertyChanged(()=>IsEnabled);
+            }
+        }
+
+        public bool FullSize
+        {
+            get { return _fullSize; }
+            set
+            {
+                _fullSize = value;
+                RaisePropertyChanged(() => FullSize);
             }
         }
 
@@ -132,7 +143,7 @@ namespace CameraControl.ViewModel
                 outfile =
                     AutoExportPluginHelper.ExecuteTransformPlugins(ServiceProvider.Settings.SelectedBitmap.FileItem,
                         Config,
-                        outfile, true);
+                        outfile, !FullSize);
                 if (_wnd == null || !_wnd.IsVisible )
                 {
                     _wnd = new PreviewWnd();
