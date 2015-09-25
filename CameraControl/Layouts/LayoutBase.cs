@@ -490,13 +490,13 @@ namespace CameraControl.Layouts
                                                                    break;
                                                                case WindowsCmdConsts.Zoom_Image_100:
                                                                    LoadFullRes();
-                                                                   ZoomAndPanControl.AnimatedZoomTo(1.0);
                                                                    ZoomToFocus();
+                                                                   ZoomAndPanControl.AnimatedZoomTo(1.0);
                                                                    break;
                                                                case WindowsCmdConsts.Zoom_Image_200:
                                                                    LoadFullRes();
-                                                                   ZoomAndPanControl.AnimatedZoomTo(2.0);
                                                                    ZoomToFocus();
+                                                                   ZoomAndPanControl.AnimatedZoomTo(2.0);
                                                                    break;
                                                            }
                                                            if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))

@@ -1196,7 +1196,8 @@ namespace CameraControl.ViewModel
             {
                 if (CameraDevice.LiveViewImageZoomRatio == null || CameraDevice.LiveViewImageZoomRatio.Values == null)
                     return;
-                if (CameraDevice.LiveViewImageZoomRatio.Values.Count == 1)
+                // for canon cameras 
+                if (CameraDevice.LiveViewImageZoomRatio.Values.Count == 2)
                 {
                     CameraDevice.LiveViewImageZoomRatio.Value = CameraDevice.LiveViewImageZoomRatio.Value ==
                                                                 CameraDevice.LiveViewImageZoomRatio.Values[0]

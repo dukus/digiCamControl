@@ -474,6 +474,7 @@ namespace CameraControl.Devices.Canon
             LiveViewImageZoomRatio.AddValues("5x", 5);
             //LiveViewImageZoomRatio.AddValues("10x", 10);
             LiveViewImageZoomRatio.SetValue("All");
+            LiveViewImageZoomRatio.ReloadValues();
             LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
         }
 
@@ -504,7 +505,8 @@ namespace CameraControl.Devices.Canon
 
         private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
         {
-            Camera.LiveViewqueue.Enqueue(() => Camera.SetProperty(Edsdk.PropID_Evf_Zoom, val));
+            Camera.SetProperty(Edsdk.PropID_Evf_Zoom, val);
+            //Camera.LiveViewqueue.Enqueue(() => Camera.SetProperty(Edsdk.PropID_Evf_Zoom, val));
         }
 
 
