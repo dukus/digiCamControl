@@ -228,6 +228,11 @@
     <Compile Include="ImageTransformPlugins\OverlayTransformView.xaml.cs">
       <DependentUpon>OverlayTransformView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageTransformPlugins\PixelBinning.cs" />
+    <Compile Include="ImageTransformPlugins\PixelBinningView.xaml.cs">
+      <DependentUpon>PixelBinningView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\PixelBinningViewModel.cs" />
     <Compile Include="ImageTransformPlugins\ResizeTransform.cs" />
     <Compile Include="ImageTransformPlugins\ResizeTransformView.xaml.cs">
       <DependentUpon>ResizeTransformView.xaml</DependentUpon>
@@ -351,6 +356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\OverlayTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\PixelBinningView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
