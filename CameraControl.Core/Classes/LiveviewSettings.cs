@@ -206,6 +206,7 @@ namespace CameraControl.Core.Classes
         public bool ShowRuler { get; set; }
         public bool FlipImage { get; set; }
         public int PreviewTime { get; set; }
+        public int CropRatio { get; set; }
 
         public LiveviewSettings()
         {
@@ -224,6 +225,7 @@ namespace CameraControl.Core.Classes
             VerticalMin = 0;
             VerticalMax = 100;
             FlipImage = false;
+            CropRatio = 0;
         }
 
 

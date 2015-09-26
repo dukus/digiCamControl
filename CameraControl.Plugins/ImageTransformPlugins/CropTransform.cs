@@ -38,6 +38,15 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     conf.Height = image.Height - (conf.Top*2);
                 }
 
+                if (conf.LiveViewCrop)
+                {
+                    var prop = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+                    conf.Left = image.Width/2*prop.LiveviewSettings.CropRatio/100;
+                    conf.Width = image.Width - (conf.Left*2);
+                    conf.Top = image.Height/2*prop.LiveviewSettings.CropRatio/100;
+                    conf.Height = image.Height - (conf.Top*2);
+                }
+
                 MagickGeometry geometry = new MagickGeometry();
                 geometry.Width = conf.Width;
                 geometry.Height = conf.Height;

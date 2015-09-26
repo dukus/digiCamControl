@@ -358,6 +358,7 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
                                     <Label Content="{T:TranslateExtension LabelGrid}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -392,6 +393,10 @@
                                     </ComboBox>
                                     <Label Content="{T:TranslateExtension LabelLiveViewPreviewTime}" Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="3"/>
                                     <Controls:NumericUpDown Minimum="0" Value="{Binding PreviewTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="3"/>
+
+                                    <Label Content="{T:TranslateExtension LabelCropMargins}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="3"/>
+                                    <Controls:NumericUpDown Minimum="0" Maximum="100" Value="{Binding CropRatio}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="17" Grid.ColumnSpan="3"/>
+
                                 </Grid>
                             </Expander.Content>
                         </Expander>

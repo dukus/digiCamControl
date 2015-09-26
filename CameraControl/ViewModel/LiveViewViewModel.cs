@@ -422,6 +422,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public int CropRatio
+        {
+            get { return CameraProperty.LiveviewSettings.CropRatio; }
+            set { CameraProperty.LiveviewSettings.CropRatio = value; }
+        }
+
+        public int CropOffsetX { get; set; }
+        
+        public int CropOffsetY { get; set; }
+        
         public int FocusStackingTick
         {
             get { return _focusStackingTick; }
@@ -1692,7 +1702,14 @@ namespace CameraControl.ViewModel
                         {
                             writeableBitmap = writeableBitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
                         }
-
+                        if (CropRatio > 0)
+                        {
+                            CropOffsetX = (int) ((writeableBitmap.PixelWidth/2.0)*CropRatio/100);
+                            CropOffsetY = (int) ((writeableBitmap.PixelHeight/2.0)*CropRatio/100);
+                            writeableBitmap = writeableBitmap.Crop(CropOffsetX, CropOffsetY,
+                                writeableBitmap.PixelWidth - (2*CropOffsetX),
+                                writeableBitmap.PixelHeight - (2*CropOffsetY));
+                        }
                         writeableBitmap.Freeze();
                         Bitmap = writeableBitmap;
 
@@ -2288,12 +2305,15 @@ namespace CameraControl.ViewModel
         {
             if (LiveViewData != null)
             {
-                double xt = LiveViewData.ImageWidth / refWidth;
-                double yt = LiveViewData.ImageHeight / refHeight;
-                int posx = (int)(initialPoint.X * xt);
+                //CropOffsetX = (writeableBitmap.PixelWidth / 2) * CropRatio / 100;
+                double offsetX = (((refWidth*100)/(100 - CropRatio)) - refWidth)/2;
+                double offsety = (((refHeight * 100) / (100 - CropRatio)) - refHeight) / 2; ; ;
+                double xt = (LiveViewData.ImageWidth )/(refWidth+(offsetX*2));
+                double yt = (LiveViewData.ImageHeight ) /( refHeight+(offsety*2));
+                int posx = (int)((offsetX+initialPoint.X) * xt);
                 if (FlipImage)
-                    posx = (int) ((refWidth - initialPoint.X)*xt);
-                int posy = (int)(initialPoint.Y * yt);
+                    posx = (int)(((refWidth) - initialPoint.X + offsetX) * xt);
+                int posy = (int)((initialPoint.Y+offsety) * yt);
                 Task.Factory.StartNew(() => SetFocusPos(posx, posy));
             }
         }

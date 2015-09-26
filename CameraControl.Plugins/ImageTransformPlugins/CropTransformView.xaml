@@ -27,6 +27,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -54,5 +55,7 @@
         <Label Grid.Row="8" Grid.Column="0" Content="Height %" HorizontalAlignment="Right"/>
         <controls:NumericUpDown Grid.Row="8" Grid.Column="1" Margin="3" Minimum="0" Maximum="99" Value="{Binding HeightProcent}" IsEnabled="{Binding CropMargins}"/>
 
+        <Label Grid.Row="9" Grid.Column="0" Content="Use live view crop" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="9" Grid.Column="1" Margin="3" IsChecked="{Binding LiveViewCrop}" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

@@ -642,5 +642,6 @@ namespace CameraControl.Core.Translation
         public static string LabelTimeLapseCaptureBracketing = "Capture with bracketing";
         public static string LabelZoomToFocus = "Always zoom to firs focus point";
         public static string LabelPreviewFullSize = "Preview full size photo";
+        public static string LabelCropMargins = "Crop margins (%)";
     }
 }

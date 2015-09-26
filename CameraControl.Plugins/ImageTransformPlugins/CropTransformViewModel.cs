@@ -62,6 +62,16 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             }
         }
 
+        public bool LiveViewCrop
+        {
+            get { return _config["LiveViewCrop"] == "True"; }
+            set
+            {
+                _config["LiveViewCrop"] = value.ToString();
+                RaisePropertyChanged(() => CropMargins);
+            }
+        }
+
         public int WidthProcent
         {
             get { return GetInt(_config["WidthProcent"]); }
