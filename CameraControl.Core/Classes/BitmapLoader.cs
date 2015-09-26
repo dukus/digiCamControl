@@ -549,7 +549,9 @@ namespace CameraControl.Core.Classes
                 return null;
             if (!File.Exists(fileItem.LargeThumb) && !fullres)
                 return null;
-
+            if (fileItem.Loading)
+                return null;
+            fileItem.Loading = true;
             if (File.Exists(fileItem.InfoFile))
                 fileItem.LoadInfo();
             else
@@ -597,6 +599,7 @@ namespace CameraControl.Core.Classes
 
                 }
 
+                PhotoUtils.WaitForFile(fullres ? fileItem.FileName : fileItem.LargeThumb);
                 if (bmpDec == null)
                     bmpDec = BitmapDecoder.Create(new Uri(fullres ? fileItem.FileName : fileItem.LargeThumb),
                         BitmapCreateOptions.None,
@@ -604,6 +607,7 @@ namespace CameraControl.Core.Classes
                 // if no future processing required
                 if (rotation == 0 && !showfocuspoints && ServiceProvider.Settings.RotateIndex == 0 && ServiceProvider.Settings.FlipPreview)
                 {
+                    fileItem.Loading = false;
                     return new WriteableBitmap(bmpDec.Frames[0]);
                 }
 
@@ -639,12 +643,14 @@ namespace CameraControl.Core.Classes
                 }
 
                 bitmap.Freeze();
+                fileItem.Loading = false;
                 return bitmap;
             }
             catch (Exception exception)
             {
                 Log.Error("Error loading image", exception);
             }
+            fileItem.Loading = false;
             return null;
         }
 

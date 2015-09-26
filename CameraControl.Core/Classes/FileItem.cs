@@ -167,6 +167,9 @@ namespace CameraControl.Core.Classes
         public int Series { get; set; }
 
         [XmlIgnore]
+        public bool Loading { get; set; }
+
+        [XmlIgnore]
         public bool Alternate
         {
             get { return _alternate; }
@@ -342,6 +345,7 @@ namespace CameraControl.Core.Classes
             FileName = file;
             Name = Path.GetFileName(file);
             ItemType = FileItemType.File;
+            Loading = false;
             //FileInfo = new FileInfo();
             FileNameTemplates = new AsyncObservableCollection<ValuePair>();
         }
