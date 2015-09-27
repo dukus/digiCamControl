@@ -4,6 +4,7 @@
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
         Title="{translation:TranslateExtension LabelConfigurePlugin}" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <viewModel:AutoExportPluginEditViewModel/>
@@ -43,7 +44,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}">
+                            <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}"
+                                     dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
