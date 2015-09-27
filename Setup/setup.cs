@@ -25,7 +25,7 @@ namespace Setup
             var shortcut = new FileShortcut(appFeature, "digiCamControl", @"%ProgramMenu%\digiCamControl") { WorkingDirectory = @"INSTALLDIR" };
             var shortcutD = new FileShortcut(appFeature, "digiCamControl", @"%Desktop%") { WorkingDirectory = @"INSTALLDIR" };
             var appDir = new Dir(@"digiCamControl",
-                new File(appFeature, "CameraControl.exe",shortcut,shortcutD),
+                new File(appFeature, "CameraControl.exe", shortcut, shortcutD),
                 new File(appFeature, "CameraControl.PluginManager.exe"),
                 new File(appFeature, "CameraControlCmd.exe"),
                 new File(appFeature, "CameraControlRemoteCmd.exe"),
@@ -36,9 +36,9 @@ namespace Setup
                 //new File(appFeature, "PhotoBooth.exe",new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
 #if DEBUG
- new DirFiles(appFeature, @"*.pdb"),
+                new DirFiles(appFeature, @"*.pdb"),
 #endif
- new File(appFeature, "regwia.bat"),
+                new File(appFeature, "regwia.bat"),
                 new File(appFeature, "logo.ico"),
                 new File(appFeature, "logo_big.jpg"),
                 new File(appFeature, "baseMtpDevice.xml"),
@@ -56,7 +56,7 @@ namespace Setup
                     new Dir(appFeature, "Plugin.DeviceControlBox",
                         new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\Plugin.DeviceControlBox.dll"),
                         new File(appFeature, "Plugins\\Plugin.DeviceControlBox\\dcc.plugin"))
-                        ),
+                    ),
                 new Dir(appFeature, "Languages",
                     new DirFiles(appFeature, @"Languages\*.xml")),
                 new Dir(appFeature, "Licenses",
@@ -78,15 +78,22 @@ namespace Setup
                     new DirFiles(obsPlugin, @"ObsPlugin\CLRHostPlugin\*.*")
                     ));
 
-            var baseDir = new Dir(@"%ProgramFiles%\",
-                appDir,
-                obsDir
+            var baseDir = new Dir(@"%ProgramFiles%",
+                appDir
+                //obsDir
                 );
 
 
             Project project = new Project("digiCamControl",
                 new LaunchCondition("NET40=\"#1\"", "Please install .NET 4.0 first."),
                 baseDir,
+                new Binary(@"vcredist_x86.exe"),
+                new ManagedAction(@"InstallCRTAction",
+                    Return.check,
+                    When.After,
+                    Step.LaunchConditions,
+                    Condition.NOT_Installed,
+                    Sequence.InstallUISequence),
                 new RegValueProperty("NET40", RegistryHive.LocalMachine,
                     @"Software\Microsoft\NET Framework Setup\NDP\v4\Full", "Install", "0"),
                 new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.InstallExecute,
@@ -95,7 +102,7 @@ namespace Setup
                     Condition.Always, Sequence.InstallExecuteSequence)
                 );
 
-            project.UI = WUI.WixUI_FeatureTree;
+            project.UI = WUI.WixUI_InstallDir;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
 
 #if DEBUG
@@ -148,7 +155,6 @@ namespace Setup
             }
 
             project.ResolveWildCards();
-
             Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);
 
@@ -158,6 +164,22 @@ namespace Setup
 
     public class CustomActions
     {
+        [CustomAction]
+        public static ActionResult InstallCRTAction(Session session)
+        {
+            //This can be successfully executed only from UISequence
+                //extract CRT msi into temp directory
+                string CRTMsiFile = Path.ChangeExtension(Path.GetTempFileName(), ".exe");
+                string CRTMsiId = "vcredist_x86.exe".Expand();//Expand() is needed to normalize file name into file ID
+
+                session.SaveBinary(CRTMsiId, CRTMsiFile);
+
+                //install CTR
+                Process.Start(CRTMsiFile,"/passive /install").WaitForExit();
+
+            return ActionResult.Success;
+        }
+
         [CustomAction]
         public static ActionResult MyAction(Session session)
         {

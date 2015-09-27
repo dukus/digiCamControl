@@ -790,8 +790,20 @@
 
           <Directory Id="INSTALLDIR.x86" Name="x86">
 
+            <Component Id="Component.msvcp110.dll" Guid="19d12628-7654-4354-a305-9ab01e9e0904">
+              <File Id="msvcp110.dll" Source="x86\msvcp110.dll" />
+            </Component>
+
+            <Component Id="Component.msvcr110.dll" Guid="19d12628-7654-4354-a305-9ab0832c478e">
+              <File Id="msvcr110.dll" Source="x86\msvcr110.dll" />
+            </Component>
+
             <Component Id="Component.Spilornis.dll.1" Guid="19d12628-7654-4354-a305-9ab081d7dba8">
               <File Id="Spilornis.dll.1" Source="x86\Spilornis.dll" />
+            </Component>
+
+            <Component Id="Component.vccorlib110.dll" Guid="19d12628-7654-4354-a305-9ab0a0d3a884">
+              <File Id="vccorlib110.dll" Source="x86\vccorlib110.dll" />
             </Component>
 
           </Directory>
@@ -1280,7 +1292,10 @@
       <ComponentRef Id="Component.GPLv3LICENSE.rtf" />
       <ComponentRef Id="Component.WPFSharp.Globalizer.Licence.txt" />
       <ComponentRef Id="Component.Spilornis.dll" />
+      <ComponentRef Id="Component.msvcp110.dll" />
+      <ComponentRef Id="Component.msvcr110.dll" />
       <ComponentRef Id="Component.Spilornis.dll.1" />
+      <ComponentRef Id="Component.vccorlib110.dll" />
       <ComponentRef Id="Component.align_image_stack.exe" />
       <ComponentRef Id="Component.COPYING" />
       <ComponentRef Id="Component.enfuse.exe" />
@@ -1346,7 +1361,7 @@
       <Custom Action="Action2_SetRightAction" Before="InstallFinalize"> (1) </Custom>
       <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
 
-      <RemoveExistingProducts After="InstallInitialize" />
+      <RemoveExistingProducts After="InstallFinalize" />
     </InstallExecuteSequence>
 
     <InstallUISequence >
