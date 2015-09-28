@@ -85,6 +85,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new RotateTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ScriptTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new PixelBinning());
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Enhance());
 
                 ServiceProvider.PluginManager.PanelPlugins.Add(new OpenInExternalViewer());
             }
