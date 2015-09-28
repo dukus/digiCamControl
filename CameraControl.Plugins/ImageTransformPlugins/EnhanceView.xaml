@@ -15,11 +15,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="241*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Brightness"/>
         <Slider Grid.Row="1" Grid.Column="0" Margin="3" Minimum="-100" Maximum="+100" Value="{Binding Brightness}" AutoToolTipPlacement="TopLeft" TickFrequency="5" TickPlacement="BottomRight"/>
@@ -27,5 +33,16 @@
         <Label Grid.Row="2" Grid.Column="0" Content="Contrast"/>
         <Slider Grid.Row="3" Grid.Column="0" Margin="3" Minimum="-100" Maximum="+100" Value="{Binding Contrast}" AutoToolTipPlacement="TopLeft" TickFrequency="5" TickPlacement="BottomRight"/>
 
+        <Label Grid.Row="4" Grid.Column="0" Content="Sigmoidal Contrast"/>
+        <Slider Grid.Row="5" Grid.Column="0" Margin="3" Minimum="0" Maximum="20" Value="{Binding SContrast}" AutoToolTipPlacement="TopLeft" TickFrequency="1" TickPlacement="BottomRight"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Sharpen"/>
+        <Slider Grid.Row="7" Grid.Column="0" Margin="3" Minimum="0" Maximum="500" Value="{Binding Sharpen}" AutoToolTipPlacement="TopLeft" TickFrequency="10" TickPlacement="BottomRight"/>
+
+        <Button Grid.Row="9" Grid.Column="0" Content="Reset values" Margin="5" Command="{Binding ResetCommand}"/>
+        
+        <CheckBox Content="Normalize" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Normalize}" Margin="3"/>
+        <CheckBox Content="Auto Gamma" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding AutoGamma}" Margin="3"/>
+        <CheckBox Content="Enhance edges" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Edge}" Margin="3"/>
     </Grid>
 </UserControl>
