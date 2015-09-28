@@ -127,6 +127,9 @@ namespace CameraControl.Core.Classes
             if ((File.Exists(fileItem.LargeThumb) && File.Exists(fileItem.SmallThumb)) && File.Exists(fileItem.InfoFile))
                 return;
 
+            if(fileItem.Loading)
+                return;
+            fileItem.Loading = true;
             string filename = fileItem.FileName;
             if (fileItem.IsMovie)
             {
@@ -247,7 +250,7 @@ namespace CameraControl.Core.Classes
                 //    image.Write(fileItem.SmallThumb);
                 //    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
                 //}
-
+                fileItem.Loading = false;
                 fileItem.IsLoaded = true;
                 fileItem.SaveInfo();
                 if (deleteFile)
@@ -549,9 +552,6 @@ namespace CameraControl.Core.Classes
                 return null;
             if (!File.Exists(fileItem.LargeThumb) && !fullres)
                 return null;
-            if (fileItem.Loading)
-                return null;
-            fileItem.Loading = true;
             if (File.Exists(fileItem.InfoFile))
                 fileItem.LoadInfo();
             else
@@ -643,14 +643,12 @@ namespace CameraControl.Core.Classes
                 }
 
                 bitmap.Freeze();
-                fileItem.Loading = false;
                 return bitmap;
             }
             catch (Exception exception)
             {
                 Log.Error("Error loading image", exception);
             }
-            fileItem.Loading = false;
             return null;
         }
 
@@ -678,9 +676,9 @@ namespace CameraControl.Core.Classes
 
         public void GetMetadata(FileItem fileItem)
         {
-            Exiv2Helper exiv2Helper = new Exiv2Helper();
             try
             {
+                Exiv2Helper exiv2Helper = new Exiv2Helper();
                 exiv2Helper.Load(fileItem);
             }
             catch (Exception exception)
