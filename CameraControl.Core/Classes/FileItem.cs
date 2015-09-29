@@ -167,7 +167,15 @@ namespace CameraControl.Core.Classes
         public int Series { get; set; }
 
         [XmlIgnore]
-        public bool Loading { get; set; }
+        public bool Loading
+        {
+            get { return _loading; }
+            set
+            {
+                _loading = value;
+                NotifyPropertyChanged("Loading");
+            }
+        }
 
         [XmlIgnore]
         public bool Alternate
@@ -475,6 +483,7 @@ namespace CameraControl.Core.Classes
         private string _shortName;
         private FileInfo _fileInfo;
         private bool _alternate;
+        private bool _loading;
 
         [JsonIgnore]
         [XmlIgnore]

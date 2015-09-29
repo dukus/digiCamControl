@@ -190,6 +190,11 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <StackPanel Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Orientation="Horizontal" Background="{DynamicResource WhiteBrush}"  Margin="2,-5">
+            <Label Content="{Binding ElementName=ImageLIstBox, Path=SelectedIndex}" Margin="0" Padding="0"/>
+            <Label Content="/" Margin="0" Padding="0"/>
+            <Label Content="{Binding ElementName=ImageLIstBox, Path=Items.Count}" Margin="0" Padding="0"/>
+        </StackPanel>
 
     </Grid>
 </Layouts:LayoutBase>
