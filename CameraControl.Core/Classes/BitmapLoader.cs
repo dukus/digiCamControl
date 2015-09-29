@@ -197,60 +197,62 @@ namespace CameraControl.Core.Classes
                         rotation = 270;
                 }
 
-                using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
-                {
-                    BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-                                                                BitmapCreateOptions.PreservePixelFormat,
-                                                                BitmapCacheOption.OnLoad);
-
-                    bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
-
-                    if (rotation == 90 || rotation == 270)
-                        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelHeight, bmpDec.Frames[0].PixelWidth);
-                    else
-                        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelWidth, bmpDec.Frames[0].PixelHeight);
-
-                    double dw = (double)LargeThumbSize / bmpDec.Frames[0].PixelWidth;
-                    WriteableBitmap writeableBitmap =
-                        BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
-                                                                            (int)(bmpDec.Frames[0].PixelWidth * dw),
-                                                                            (int)(bmpDec.Frames[0].PixelHeight * dw),
-                                                                            BitmapScalingMode.Linear));
-
-                    LoadHistogram(fileItem, writeableBitmap);
-                    Save2Jpg(writeableBitmap, fileItem.LargeThumb);
-
-                    dw = (double)SmallThumbSize / writeableBitmap.PixelWidth;
-                    writeableBitmap = writeableBitmap.Resize((int)(writeableBitmap.PixelWidth * dw),
-                                                             (int)(writeableBitmap.PixelHeight * dw),
-                                                             WriteableBitmapExtensions.Interpolation.Bilinear);
-
-                    if (rotation > 0)
-                        writeableBitmap = writeableBitmap.Rotate(rotation);
-
-                    Save2Jpg(writeableBitmap, fileItem.SmallThumb);
-                    //var thumb = LoadSmallImage(fileItem);
-                    //thumb.Freeze();
-                    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
-                }
-
-                //using (MagickImage image = new MagickImage(filename))
+                //using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
                 //{
-                //    if (rotation == 90 || rotation == 270)
-                //        fileItem.FileInfo.SetSize(image.Height, image.Width);
-                //    else
-                //        fileItem.FileInfo.SetSize(image.Width, image.Height);
+                //    BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
+                //                                                BitmapCreateOptions.PreservePixelFormat,
+                //                                                BitmapCacheOption.OnLoad);
 
-                //    double dw = (double)LargeThumbSize / image.Width;
-                //    image.Thumbnail(dw*100);
-                //    LoadHistogram(fileItem, image);
-                //    image.Write(fileItem.LargeThumb);
-                //    dw = (double)LargeThumbSize / image.Width;
-                //    image.Thumbnail(dw * 100);
-                //    image.Write(fileItem.SmallThumb);
+                //    bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
+
+                //    if (rotation == 90 || rotation == 270)
+                //        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelHeight, bmpDec.Frames[0].PixelWidth);
+                //    else
+                //        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelWidth, bmpDec.Frames[0].PixelHeight);
+
+                //    double dw = (double)LargeThumbSize / bmpDec.Frames[0].PixelWidth;
+                //    WriteableBitmap writeableBitmap =
+                //        BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
+                //                                                            (int)(bmpDec.Frames[0].PixelWidth * dw),
+                //                                                            (int)(bmpDec.Frames[0].PixelHeight * dw),
+                //                                                            BitmapScalingMode.Linear));
+
+                //    LoadHistogram(fileItem, writeableBitmap);
+                //    Save2Jpg(writeableBitmap, fileItem.LargeThumb);
+
+                //    dw = (double)SmallThumbSize / writeableBitmap.PixelWidth;
+                //    writeableBitmap = writeableBitmap.Resize((int)(writeableBitmap.PixelWidth * dw),
+                //                                             (int)(writeableBitmap.PixelHeight * dw),
+                //                                             WriteableBitmapExtensions.Interpolation.Bilinear);
+
+                //    if (rotation > 0)
+                //        writeableBitmap = writeableBitmap.Rotate(rotation);
+
+                //    Save2Jpg(writeableBitmap, fileItem.SmallThumb);
+                //    //var thumb = LoadSmallImage(fileItem);
+                //    //thumb.Freeze();
                 //    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
                 //}
-                fileItem.Loading = false;
+
+                using (MagickImage image = new MagickImage(filename))
+                {
+                    if (rotation == 90 || rotation == 270)
+                        fileItem.FileInfo.SetSize(image.Height, image.Width);
+                    else
+                        fileItem.FileInfo.SetSize(image.Width, image.Height);
+
+                    double dw = (double)LargeThumbSize / image.Width;
+                    image.FilterType = FilterType.Box;
+                    image.Thumbnail((int) (image.Width*dw), (int) (image.Height*dw));
+                    PhotoUtils.CreateFolder(fileItem.LargeThumb);
+                    image.Write(fileItem.LargeThumb);
+                    dw = (double)SmallThumbSize / image.Width;
+                    image.Thumbnail((int)(image.Width * dw), (int)(image.Height * dw));
+                    PhotoUtils.CreateFolder(fileItem.SmallThumb);
+                    LoadHistogram(fileItem.FileInfo, image);
+                    image.Write(fileItem.SmallThumb);
+                    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
+                }
                 fileItem.IsLoaded = true;
                 fileItem.SaveInfo();
                 if (deleteFile)
@@ -260,8 +262,10 @@ namespace CameraControl.Core.Classes
             {
                 Log.Error("Error generating cache " + fileItem.FileName, exception);
             }
+            fileItem.Loading = false;
         }
 
+        
 
         public static BitmapFrame GetBitmapFrame(BitmapFrame photo, int width, int height, BitmapScalingMode mode)
         {
@@ -352,23 +356,23 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private void LoadHistogram(FileItem fileItem, MagickImage bitmap)
+        private void LoadHistogram(FileInfo fileInfo, MagickImage bitmap)
         {
-            fileItem.FileInfo.HistogramBlue = new int[256];
-            fileItem.FileInfo.HistogramGreen = new int[256];
-            fileItem.FileInfo.HistogramRed = new int[256];
-            fileItem.FileInfo.HistogramLuminance = new int[256];
+            fileInfo.HistogramBlue = new int[256];
+            fileInfo.HistogramGreen = new int[256];
+            fileInfo.HistogramRed = new int[256];
+            fileInfo.HistogramLuminance = new int[256];
             Dictionary<MagickColor, int> h = bitmap.Histogram();
             foreach (var i in h)
             {
                 byte R = i.Key.R;
                 byte G = i.Key.G;
                 byte B = i.Key.B;
-                fileItem.FileInfo.HistogramBlue[B] += i.Value;
-                fileItem.FileInfo.HistogramGreen[G] += i.Value;
-                fileItem.FileInfo.HistogramRed[R] += i.Value;
+                fileInfo.HistogramBlue[B] += i.Value;
+                fileInfo.HistogramGreen[G] += i.Value;
+                fileInfo.HistogramRed[R] += i.Value;
                 int lum = (R + R + R + B + G + G + G + G) >> 3;
-                fileItem.FileInfo.HistogramLuminance[lum] += i.Value;
+                fileInfo.HistogramLuminance[lum] += i.Value;
             }
             //fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
             //fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
@@ -648,6 +652,10 @@ namespace CameraControl.Core.Classes
             catch (Exception exception)
             {
                 Log.Error("Error loading image", exception);
+                if (exception.GetType() == typeof (OutOfMemoryException) && fullres)
+                {
+                    return LoadImage(fileItem, false);
+                }
             }
             return null;
         }

@@ -304,7 +304,17 @@ namespace CameraControl.Layouts
 
             ServiceProvider.Settings.ImageLoading = fullres ||
                                                     !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
-            BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
+            if (ServiceProvider.Settings.SelectedBitmap.FileItem.Loading)
+            {
+                while (ServiceProvider.Settings.SelectedBitmap.FileItem.Loading)
+                {
+                    Thread.Sleep(10);
+                }
+            }
+            else
+            {
+                BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);                
+            }
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
             ServiceProvider.Settings.SelectedBitmap.Notify();

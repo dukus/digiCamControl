@@ -600,8 +600,7 @@ namespace CameraControl.Core.Classes
                 return;
             try
             {
-                if (!Directory.Exists(Path.GetDirectoryName(InfoFile)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(InfoFile));
+                PhotoUtils.CreateFolder(InfoFile);
                 FileInfo.ValidateValues();
                 XmlSerializer serializer = new XmlSerializer(typeof(FileInfo));
                 // Create a FileStream to write with.

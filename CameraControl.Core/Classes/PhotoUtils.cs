@@ -33,8 +33,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Media;
 using System.Reflection;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Threading;
 using CameraControl.Devices;
+using Eagle._Containers.Public;
 
 #endregion
 
@@ -180,7 +183,19 @@ namespace CameraControl.Core.Classes
             return false;
         }
 
-
+        public static void CreateFolder(string filename)
+        {
+            var folder = Path.GetDirectoryName(filename);
+            if (folder != null && !Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+                //DirectorySecurity sec = Directory.GetAccessControl(folder);
+                //// Using this instead of the "Everyone" string means we work on non-English systems.
+                //SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+                //sec.AddAccessRule(new FileSystemAccessRule(everyone, FileSystemRights.Modify | FileSystemRights.Synchronize, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow));
+                //Directory.SetAccessControl(folder, sec);
+            }
+        }
 
     }
 }
