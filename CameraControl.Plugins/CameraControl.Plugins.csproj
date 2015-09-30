@@ -222,6 +222,12 @@
       <DependentUpon>CropTransformView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageTransformPlugins\CropTransformViewModel.cs" />
+    <Compile Include="ImageTransformPlugins\Effect.cs" />
+    <Compile Include="ImageTransformPlugins\EffectType.cs" />
+    <Compile Include="ImageTransformPlugins\EffectView.xaml.cs">
+      <DependentUpon>EffectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\EffectViewModel.cs" />
     <Compile Include="ImageTransformPlugins\Enhance.cs" />
     <Compile Include="ImageTransformPlugins\EnhanceView.xaml.cs">
       <DependentUpon>EnhanceView.xaml</DependentUpon>
@@ -357,6 +363,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageTransformPlugins\CropTransformView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\EffectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
