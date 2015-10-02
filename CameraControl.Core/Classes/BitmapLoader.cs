@@ -246,14 +246,16 @@ namespace CameraControl.Core.Classes
                     image.Thumbnail((int) (image.Width*dw), (int) (image.Height*dw));
                     PhotoUtils.CreateFolder(fileItem.LargeThumb);
                     image.Write(fileItem.LargeThumb);
+                    fileItem.IsLoaded = true;
+                    fileItem.Loading = false;
+
                     dw = (double)SmallThumbSize / image.Width;
                     image.Thumbnail((int)(image.Width * dw), (int)(image.Height * dw));
                     PhotoUtils.CreateFolder(fileItem.SmallThumb);
-                    LoadHistogram(fileItem.FileInfo, image);
                     image.Write(fileItem.SmallThumb);
                     fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
+                    LoadHistogram(fileItem.FileInfo, image);
                 }
-                fileItem.IsLoaded = true;
                 fileItem.SaveInfo();
                 if (deleteFile)
                     File.Delete(filename);
