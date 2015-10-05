@@ -112,6 +112,11 @@ namespace CameraControl.ViewModel
         private bool _haveSoundData;
 
 
+        public Rect RullerRect
+        {
+            get { return new Rect(HorizontalMin, VerticalMin, HorizontalMax, VerticalMax); }
+        }
+
         public ICameraDevice CameraDevice
         {
             get { return _cameraDevice; }
@@ -965,25 +970,41 @@ namespace CameraControl.ViewModel
         public int HorizontalMin
         {
             get { return CameraProperty.LiveviewSettings.HorizontalMin; }
-            set { CameraProperty.LiveviewSettings.HorizontalMin = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.HorizontalMin = value;
+                RaisePropertyChanged(() => RullerRect);
+            }
         }
 
         public int HorizontalMax
         {
             get { return CameraProperty.LiveviewSettings.HorizontalMax; }
-            set { CameraProperty.LiveviewSettings.HorizontalMax = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.HorizontalMax = value;
+                RaisePropertyChanged(() => RullerRect);
+            }
         }
 
         public int VerticalMin
         {
             get { return CameraProperty.LiveviewSettings.VerticalMin; }
-            set { CameraProperty.LiveviewSettings.VerticalMin = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.VerticalMin = value;
+                RaisePropertyChanged(() => RullerRect);
+            }
         }
 
         public int VerticalMax
         {
             get { return CameraProperty.LiveviewSettings.VerticalMax; }
-            set { CameraProperty.LiveviewSettings.VerticalMax = value; }
+            set
+            {
+                CameraProperty.LiveviewSettings.VerticalMax = value;
+                RaisePropertyChanged(() => RullerRect);
+            }
         }
 
         public bool ShowRuler
@@ -1773,21 +1794,21 @@ namespace CameraControl.ViewModel
                         _overlayImage = BitmapFactory.ConvertToPbgra32Format(bitmapSource);
                         _overlayImage.Freeze();
                     }
-                    int x = writeableBitmap.PixelWidth * OverlayScale / 100;
-                    int y = writeableBitmap.PixelHeight * OverlayScale / 100;
-                    int xx = writeableBitmap.PixelWidth * OverlayHorizontal / 100;
-                    int yy = writeableBitmap.PixelWidth * OverlayVertical / 100;
+                    int x = writeableBitmap.PixelWidth*OverlayScale/100;
+                    int y = writeableBitmap.PixelHeight*OverlayScale/100;
+                    int xx = writeableBitmap.PixelWidth*OverlayHorizontal/100;
+                    int yy = writeableBitmap.PixelWidth*OverlayVertical/100;
                     Color transpColor = Colors.White;
 
                     //set color transparency for blit only the alpha chanel is used from transpColor
                     if (OverlayTransparency < 100)
-                        transpColor = Color.FromArgb((byte)(0xff * OverlayTransparency / 100d), 0xff, 0xff, 0xff);
-
+                        transpColor = Color.FromArgb((byte) (0xff*OverlayTransparency/100d), 0xff, 0xff, 0xff);
                     writeableBitmap.Blit(
                         new Rect(0 + (x / 2) + xx, 0 + (y / 2) + yy, writeableBitmap.PixelWidth - x,
                             writeableBitmap.PixelHeight - y),
                         _overlayImage,
-                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight), transpColor, WriteableBitmapExtensions.BlendMode.Alpha);
+                        new Rect(0, 0, _overlayImage.PixelWidth, _overlayImage.PixelHeight), transpColor,
+                        WriteableBitmapExtensions.BlendMode.Alpha);
                 }
             }
 
@@ -1851,10 +1872,10 @@ namespace CameraControl.ViewModel
 
             if (ShowRuler)
             {
-                int x1 = writeableBitmap.PixelWidth * HorizontalMin / 100;
-                int x2 = writeableBitmap.PixelWidth * HorizontalMax / 100;
-                int y2 = writeableBitmap.PixelHeight * (100 - VerticalMin) / 100;
-                int y1 = writeableBitmap.PixelHeight * (100 - VerticalMax) / 100;
+                int x1 = writeableBitmap.PixelWidth * (HorizontalMin) / 1000;
+                int x2 = writeableBitmap.PixelWidth * (HorizontalMin+HorizontalMax) / 1000;
+                int y2 = writeableBitmap.PixelHeight * (VerticalMin+VerticalMax) / 1000;
+                int y1 = writeableBitmap.PixelHeight * VerticalMin / 1000;
 
                 writeableBitmap.FillRectangle2(0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, Color.FromArgb(128, 128, 128, 128));
                 writeableBitmap.FillRectangleDeBlend(x1, y1, x2, y2, Color.FromArgb(128, 128, 128, 128));

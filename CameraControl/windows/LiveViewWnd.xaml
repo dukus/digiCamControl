@@ -31,6 +31,43 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
+            <!-- MoveThumb Template -->
+            <ControlTemplate x:Key="MoveThumbTemplate" TargetType="{x:Type local:MoveThumb}">
+                <Rectangle Fill="Transparent"/>
+            </ControlTemplate>
+
+            <!-- ResizeDecorator Template -->
+            <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
+                <Grid>
+                    <local:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
+                       VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                    <local:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
+                       VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+                    <local:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
+                       VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+                    <local:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
+                       VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
+                       VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                </Grid>
+            </ControlTemplate>
+
+
+            <!-- Designer Item Template-->
+            <ControlTemplate x:Key="DesignerItemTemplate" TargetType="ContentControl">
+                <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                    <local:MoveThumb Template="{StaticResource MoveThumbTemplate}" Cursor="SizeAll"/>
+                    <Control Template="{StaticResource ResizeDecoratorTemplate}"/>
+                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                </Grid>
+            </ControlTemplate>
+
         </ResourceDictionary>
     </Window.Resources>
     <Controls:MetroWindow.RightWindowCommands>
@@ -59,9 +96,33 @@
             </Image.RenderTransform>
         </Image>
 
-        <Controls:RangeSlider VerticalAlignment="Top" Grid.Column="2" Margin="4" Padding="20,0" Width="{Binding ElementName=_image, Path=ActualWidth}" Orientation="Horizontal" UpperValue="{Binding Path=HorizontalMax}"  LowerValue="{Binding Path=HorizontalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Viewbox Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Stretch="Fill" ClipToBounds="True" Width="{Binding ElementName=_image,Path=ActualWidth}" Height="{Binding ElementName=_image,Path=ActualHeight}">
+            
+            <Canvas Width="1000" Height="1000">
+                <Path Fill="#80000000">
+                    <Path.Data>
+                        <CombinedGeometry GeometryCombineMode="Xor">
+                            <CombinedGeometry.Geometry1>
+                                <RectangleGeometry Rect="0,0,1000,1000"/>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <RectangleGeometry x:Name="transparentRect" Rect="{Binding RullerRect}"/>
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+                </Path>
+                <ContentControl Width="{Binding HorizontalMax, Mode=TwoWay}"
+                    Height="{Binding VerticalMax, Mode=TwoWay}"
+                    Canvas.Top="{Binding VerticalMin, Mode=TwoWay}"
+                    Canvas.Left="{Binding HorizontalMin, Mode=TwoWay}"
+                    Template="{StaticResource DesignerItemTemplate}">
+                    <!--<Rectangle Opacity="0.4" Fill="Black" IsHitTestVisible="False"/>-->
+                </ContentControl>
+            </Canvas>
+        </Viewbox>
+        <!--<Controls:RangeSlider VerticalAlignment="Top" Grid.Column="2" Margin="4" Padding="20,0" Width="{Binding ElementName=_image, Path=ActualWidth}" Orientation="Horizontal" UpperValue="{Binding Path=HorizontalMax}"  LowerValue="{Binding Path=HorizontalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <Controls:RangeSlider HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="4" Padding="0,40" Height="{Binding ElementName=_image, Path=ActualHeight}" Orientation="Vertical" UpperValue="{Binding Path=VerticalMax}"  LowerValue="{Binding Path= VerticalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Controls:RangeSlider HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="4" Padding="0,40" Height="{Binding ElementName=_image, Path=ActualHeight}" Orientation="Vertical" UpperValue="{Binding Path=VerticalMax}"  LowerValue="{Binding Path= VerticalMin}"  SmallChange="1" MinRangeWidth="0" Visibility="{Binding Path=ShowRuler, Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
 
         <Canvas Grid.Column="2" Background="{x:Null}" Grid.RowSpan="4" >
             <StackPanel Canvas.Left="0" Canvas.Top="0" Orientation="Horizontal" Visibility="{Binding Recording, Converter={StaticResource BooleanToVisibilityConverter1}}">
