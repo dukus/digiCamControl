@@ -17,7 +17,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <NuGetPackageImportStamp>ce8c364d</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>e466f841</NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -121,9 +121,9 @@
     <Reference Include="DropNet">
       <HintPath>..\packages\DropNet.1.10.23.0\lib\net40\DropNet.dll</HintPath>
     </Reference>
-    <Reference Include="Eagle, Version=1.0.5633.18513, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Eagle.1.0.5633.18513\lib\Eagle.dll</HintPath>
+    <Reference Include="Eagle, Version=1.0.5749.32588, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eagle.1.0.5749.32588\lib\Eagle.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -187,8 +187,8 @@
       <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0019\lib\net40-client\Magick.NET.Wrapper-x86.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.1.3.174, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA174\lib\net40\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.1.3.182, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA182\lib\net40\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -217,7 +217,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA174\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA182\lib\net40\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -814,13 +814,6 @@
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)PostBuild.Bat $(SolutionDir) $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Eagle.1.0.5633.18513\build\Eagle.targets" Condition="Exists('..\packages\Eagle.1.0.5633.18513\build\Eagle.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Eagle.1.0.5633.18513\build\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.1.0.5633.18513\build\Eagle.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -829,4 +822,11 @@
   </Target>
   -->
   <UsingTask AssemblyFile="packages\WixSharp.bin.1.0.17.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
+  <Import Project="..\packages\Eagle.1.0.5749.32588\build\Eagle.targets" Condition="Exists('..\packages\Eagle.1.0.5749.32588\build\Eagle.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Eagle.1.0.5749.32588\build\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.1.0.5749.32588\build\Eagle.targets'))" />
+  </Target>
 </Project>

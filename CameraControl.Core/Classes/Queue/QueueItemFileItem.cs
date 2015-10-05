@@ -62,7 +62,12 @@ namespace CameraControl.Core.Classes.Queue
                         else
                         {
                             FileItem.GetExtendedThumb();
-                            ServiceProvider.QueueManager.Add(new QueueItemFileItem { FileItem = FileItem, Generate = true });
+                            if (ServiceProvider.Settings.SelectedBitmap.FileItem != FileItem)
+                                ServiceProvider.QueueManager.Add(new QueueItemFileItem
+                                {
+                                    FileItem = FileItem,
+                                    Generate = true
+                                });
                         }
                 }
             }

@@ -55,7 +55,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.0.27.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+      <HintPath>..\packages\WixSharp.bin.1.0.27.2-HotFix\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -67,19 +67,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WixSharp, Version=1.0.27.0, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.0.27.0\lib\WixSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="WixSharp.UI, Version=1.0.27.0, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.0.27.0\lib\WixSharp.UI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="setup.cs" />
-    <None Include="packages.config" />
     <None Include="wix\$(ProjectName).g.wxs" />
   </ItemGroup>
   <ItemGroup>

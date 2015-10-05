@@ -64,6 +64,11 @@ namespace CameraControl.Core.Classes
             get { return _name; }
             set
             {
+
+                if (!AlowFolderChange && Path.GetDirectoryName(Folder) != null && Path.GetFileName(Folder) == _name)
+                {
+                    if (Folder != null) Folder = Path.Combine(Path.GetDirectoryName(Folder), value);
+                }
                 _name = value;
                 NotifyPropertyChanged("Name");
             }
@@ -401,14 +406,14 @@ namespace CameraControl.Core.Classes
             //_systemWatcher.Deleted += _systemWatcher_Deleted;
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
             RemovePluginCommand = new RelayCommand<AutoExportPluginConfig>(RemovePlugin);
-            ApplyPluginCommand=new RelayCommand<AutoExportPluginConfig>(ApplyPlugin);
+            ApplyPluginCommand = new RelayCommand<AutoExportPluginConfig>(ApplyPlugin);
 
-            Name = "Default";
+            Name = "Session1";
             CaptureName = "Capture";
             Braketing = new BracketingClass();
             try
             {
-                Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Name);
+                Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),"digiCamControl", Name);
             }
             catch (Exception exception)
             {
