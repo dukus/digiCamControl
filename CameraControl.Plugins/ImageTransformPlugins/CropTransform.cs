@@ -23,12 +23,10 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 if (conf.FromLiveView && ServiceProvider.DeviceManager.SelectedCameraDevice != null)
                 {
                     var prop = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
-                    conf.Left = (int) (image.Width*prop.LiveviewSettings.HorizontalMin/100);
-                    conf.Width = (image.Width*
-                                  (prop.LiveviewSettings.HorizontalMax - prop.LiveviewSettings.HorizontalMin)/100);
-                    conf.Top = (image.Height*prop.LiveviewSettings.VerticalMin/100);
-                    conf.Height = (image.Height*(prop.LiveviewSettings.VerticalMax - prop.LiveviewSettings.VerticalMin)/
-                                   100);
+                    conf.Left = image.Width*prop.LiveviewSettings.HorizontalMin/1000;
+                    conf.Width = image.Width*(prop.LiveviewSettings.HorizontalMax)/1000;
+                    conf.Top = image.Height*prop.LiveviewSettings.VerticalMin/1000;
+                    conf.Height = image.Height*(prop.LiveviewSettings.VerticalMax)/1000;
                 }
                 if (conf.CropMargins)
                 {

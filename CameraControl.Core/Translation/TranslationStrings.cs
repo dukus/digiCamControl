@@ -643,5 +643,8 @@ namespace CameraControl.Core.Translation
         public static string LabelZoomToFocus = "Always zoom to firs focus point";
         public static string LabelPreviewFullSize = "Preview full size photo";
         public static string LabelCropMargins = "Crop margins (%)";
+        public static string LabelShowActiveArea = "Show active area";
+        public static string LabelSetArea = "Set";
+        public static string LabelDoneArea = "Done";
     }
 }

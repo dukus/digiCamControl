@@ -110,6 +110,7 @@ namespace CameraControl.ViewModel
         private int _peakSoundL;
         private int _peakSoundR;
         private bool _haveSoundData;
+        private bool _settingArea;
 
 
         public Rect RullerRect
@@ -1017,6 +1018,22 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool SettingArea
+        {
+            get { return _settingArea; }
+            set
+            {
+                _settingArea = value;
+                RaisePropertyChanged(() => SettingArea);
+                RaisePropertyChanged(() => NoSettingArea);
+            }
+        }
+
+        public bool NoSettingArea
+        {
+            get { return !SettingArea; }
+        }
+
         #endregion
 
         #region focus progress
@@ -1086,6 +1103,9 @@ namespace CameraControl.ViewModel
         public RelayCommand ZoomInCommand { get; set; }
         public RelayCommand ZoomIn100 { get; set; }
         public RelayCommand ToggleGridCommand { get; set; }
+
+        public RelayCommand SetAreaCommand { get; set; }
+        public RelayCommand DoneSetAreaCommand { get; set; }
 
         #endregion
 
@@ -1209,6 +1229,9 @@ namespace CameraControl.ViewModel
             ZoomIn100 = new RelayCommand(ToggleZoom);
             ToggleGridCommand = new RelayCommand(ToggleGrid);
             FocuseDone += LiveViewViewModel_FocuseDone;
+
+            SetAreaCommand = new RelayCommand(() => SettingArea = true);
+            DoneSetAreaCommand = new RelayCommand(() => SettingArea = false);
 
         }
 
@@ -1870,7 +1893,7 @@ namespace CameraControl.ViewModel
                     break;
             }
 
-            if (ShowRuler)
+            if (ShowRuler && NoSettingArea)
             {
                 int x1 = writeableBitmap.PixelWidth * (HorizontalMin) / 1000;
                 int x2 = writeableBitmap.PixelWidth * (HorizontalMin+HorizontalMax) / 1000;
@@ -1916,10 +1939,10 @@ namespace CameraControl.ViewModel
                 float movement = 0;
                 if (DetectMotionArea)
                 {
-                    int x1 = bmp.Width * HorizontalMin / 100;
-                    int x2 = bmp.Width * HorizontalMax / 100;
-                    int y2 = bmp.Height * (100 - VerticalMin) / 100;
-                    int y1 = bmp.Height * (100 - VerticalMax) / 100;
+                    int x1 = bmp.Width * HorizontalMin / 1000;
+                    int x2 = bmp.Width * (HorizontalMin+ HorizontalMax) / 1000;
+                    int y2 = bmp.Height * (VerticalMin + VerticalMax) / 1000;
+                    int y1 = bmp.Height * VerticalMin / 1000;
                     using (
                         var cropbmp = new Bitmap(bmp.Clone(new Rectangle(x1, y1, (x2 - x1), (y2 - y1)), bmp.PixelFormat))
                         )
