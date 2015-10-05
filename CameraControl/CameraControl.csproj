@@ -278,6 +278,8 @@
     <Compile Include="Controls\ExposureStatusControl.xaml.cs">
       <DependentUpon>ExposureStatusControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MoveThumb.cs" />
+    <Compile Include="Controls\ResizeThumb.cs" />
     <Compile Include="Controls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
