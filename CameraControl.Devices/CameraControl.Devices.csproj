@@ -112,6 +112,10 @@
     <Compile Include="Classes\PhotoCapturedEventArgs.cs" />
     <Compile Include="Classes\PictureControl.cs" />
     <Compile Include="Classes\PropertyValue.cs" />
+    <Compile Include="Custom\CustomDevice.cs" />
+    <Compile Include="Custom\DeviceDescription.cs" />
+    <Compile Include="Custom\DeviceProperty.cs" />
+    <Compile Include="Custom\DevicePropertyValue.cs" />
     <Compile Include="ICameraDevice.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Nikon\NikonD7100.cs" />

@@ -25,6 +25,7 @@
             <MenuItem Header="Menu" >
                 <MenuItem Header="New" Click="MenuItem_Click" />
                 <MenuItem Header="Save as" Click="MenuItem_Click_1"/>
+                <MenuItem Header="Save device data as" Click="MenuItem_Click_3"/>
                 <MenuItem Header="Load" Click="MenuItem_Click_2" />
             </MenuItem>
         </Menu>

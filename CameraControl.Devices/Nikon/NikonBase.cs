@@ -56,7 +56,6 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_CMD_StartLiveView = 0x9201;
         public const uint CONST_CMD_EndLiveView = 0x9202;
         public const uint CONST_CMD_GetLiveViewImage = 0x9203;
-        public const uint CONST_CMD_InitiateCapture = 0x100E;
         public const uint CONST_CMD_InitiateCaptureRecInMedia = 0x9207;
         public const uint CONST_CMD_AfAndCaptureRecInSdram = 0x90CB;
         public const uint CONST_CMD_InitiateCaptureRecInSdram = 0x90C0;

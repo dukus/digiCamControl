@@ -30,11 +30,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
+using CameraControl.Devices.Custom;
 using CameraControl.Devices.Nikon;
 using CameraControl.Devices.Others;
 using CameraControl.Devices.TransferProtocol;
@@ -57,6 +59,7 @@ namespace CameraControl.Devices
         private DeviceDescriptorEnumerator _deviceEnumerator;
         private EosFramework _framework;
         private object _locker = new object();
+        private List<DeviceDescription> _deviceDescriptions = new List<DeviceDescription>();
 
         public Dictionary<ICameraDevice, byte[]> LiveViewImage;
         public Dictionary<ICameraDevice, string> LastCapturedImage;
@@ -142,7 +145,7 @@ namespace CameraControl.Devices
                                   {"D5500", typeof (NikonD5200)},
                                   {"D5300", typeof (NikonD5200)},
                                   {"D5200", typeof (NikonD5200)},
-                                  {"D5100", typeof (NikonD5100)},
+                                  //{"D5100", typeof (NikonD5100)},
                                   {"D5000", typeof (NikonD90)},
                                   {"D60", typeof (NikonD60)},
                                   {"D610", typeof (NikonD600)},
@@ -180,7 +183,7 @@ namespace CameraControl.Devices
             //}
         }
 
-        public CameraDeviceManager()
+        public CameraDeviceManager(string datafolder=null)
         {
             UseExperimentalDrivers = true;
             StartInNewThread = false;
@@ -201,6 +204,23 @@ namespace CameraControl.Devices
             catch (Exception exception)
             {
                 Log.Error("Error initialize WIA", exception);
+            }
+            if (datafolder != null && Directory.Exists(datafolder))
+            {
+                try
+                {
+                    var files = Directory.GetFiles(datafolder, "*.xml");
+                    foreach (var file in files)
+                    {
+                        var device = DeviceDescription.Load(file);
+                        if (device != null)
+                            _deviceDescriptions.Add(device);
+                    }
+                }
+                catch (Exception)
+                {
+                    Log.Error("Error loading custom data");
+                }
             }
         }
 
@@ -343,12 +363,13 @@ namespace CameraControl.Devices
                     if (!SupportedCanonCamera(portableDevice.DeviceId))
                         continue;
                     portableDevice.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+
                     if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
                         GetNativeDriver(portableDevice.Model) != null)
                     {
                         ICameraDevice cameraDevice;
-                        DeviceDescriptor descriptor = new DeviceDescriptor { WpdId = portableDevice.DeviceId };
-                        cameraDevice = (ICameraDevice)Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
+                        DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
+                        cameraDevice = (ICameraDevice) Activator.CreateInstance(GetNativeDriver(portableDevice.Model));
                         MtpProtocol device = new MtpProtocol(descriptor.WpdId);
                         device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
 
@@ -356,7 +377,7 @@ namespace CameraControl.Devices
 
                         cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
                         cameraDevice.Init(descriptor);
-                        
+
                         if (string.IsNullOrWhiteSpace(cameraDevice.SerialNumber))
                             cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
 
@@ -366,7 +387,35 @@ namespace CameraControl.Devices
                         descriptor.CameraDevice = cameraDevice;
                         _deviceEnumerator.Add(descriptor);
                     }
+
+                    if (_deviceEnumerator.GetByWpdId(portableDevice.DeviceId) == null &&
+                        GetNativeDriver(portableDevice.Model) == null)
+                    {
+                        var description = getDeviceDescription(portableDevice.Model);
+                        if (description != null)
+                        {
+                            CustomDevice cameraDevice = new CustomDevice();
+                            DeviceDescriptor descriptor = new DeviceDescriptor {WpdId = portableDevice.DeviceId};
+                            MtpProtocol device = new MtpProtocol(descriptor.WpdId);
+                            device.ConnectToDevice(AppName, AppMajorVersionNumber, AppMinorVersionNumber);
+
+                            descriptor.StillImageDevice = device;
+
+                            cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                            cameraDevice.Init(descriptor, description);
+
+                            ConnectedDevices.Add(cameraDevice);
+                            NewCameraConnected(cameraDevice);
+
+                            descriptor.CameraDevice = cameraDevice;
+                            _deviceEnumerator.Add(descriptor);
+                            break;
+                        }
+
+                    }
+
                 }
+
             }
             catch (Exception exception)
             {
@@ -374,6 +423,11 @@ namespace CameraControl.Devices
             }
 
             _connectionInProgress = false;
+        }
+
+        private DeviceDescription getDeviceDescription(string model)
+        {
+            return _deviceDescriptions.FirstOrDefault(description => description.Model == model);
         }
 
         public void ConnectToServer(string s, int type)
@@ -683,6 +737,9 @@ namespace CameraControl.Devices
                 // skip canon cameras 
                 //if (!string.IsNullOrEmpty(model) && model.Contains("Canon"))
                 //    continue;
+                if (getDeviceDescription(model) != null)
+                    continue;
+
                 var nativeDriver = GetNativeDriver(model);
                 ret = nativeDriver != null;
 

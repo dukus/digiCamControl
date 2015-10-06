@@ -78,6 +78,7 @@ namespace CameraControl.Devices
         public const uint CONST_CMD_GetObjectInfo = 0x1008;
         public const uint CONST_CMD_GetThumb = 0x100A;
         public const uint CONST_CMD_DeleteObject = 0x100B;
+        public const uint CONST_CMD_InitiateCapture = 0x100E;
         public const uint CONST_CMD_FormatStore = 0x100F;
         public const uint CONST_CMD_GetStorageIDs = 0x1004;
 
