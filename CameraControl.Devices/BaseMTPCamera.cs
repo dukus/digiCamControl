@@ -85,6 +85,8 @@ namespace CameraControl.Devices
         public const uint CONST_Event_ObjectAdded = 0x4002;
         public const uint CONST_Event_ObjectAddedInSdram = 0xC101;
 
+        public const uint CONST_PROP_BatteryLevel = 0x5001;
+
         private const int CONST_READY_TIME = 1;
         private const int CONST_LOOP_TIME = 100;
 
@@ -94,7 +96,7 @@ namespace CameraControl.Devices
         /// <summary>
         /// The timer for get periodically the event list
         /// </summary>
-        protected Timer _timer = new Timer(1000/10);
+        protected Timer _timer = new Timer(1000 / 10);
 
         /// <summary>
         /// Variable to check if event processing is in progress 
@@ -108,9 +110,38 @@ namespace CameraControl.Devices
             if (imageDevice != null)
                 imageDevice.DeviceEvent += StillImageDevice_DeviceEvent;
             IsConnected = true;
+            DeviceName = StillImageDevice.Model;
+            Manufacturer = StillImageDevice.Manufacturer;
+            var data = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
+                                                                               CONST_PROP_BatteryLevel);
+            if (data.Data != null && data.Data.Length > 0)
+                Battery = data.Data[0];
             return true;
         }
 
+        public override void CapturePhoto()
+        {
+            Monitor.Enter(Locker);
+            try
+            {
+                IsBusy = true;
+                ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_InitiateCapture));
+            }
+            catch (COMException comException)
+            {
+                IsBusy = false;
+                ErrorCodes.GetException(comException);
+            }
+            catch
+            {
+                IsBusy = false;
+                throw;
+            }
+            finally
+            {
+                Monitor.Exit(Locker);
+            }
+        }
 
         public void StopEventTimer()
         {
@@ -133,18 +164,25 @@ namespace CameraControl.Devices
                 StillImageDevice.Disconnect();
                 StillImageDevice.IsConnected = false;
                 IsConnected = false;
-                OnCameraDisconnected(this, new DisconnectCameraEventArgs {StillImageDevice = StillImageDevice});
+                OnCameraDisconnected(this, new DisconnectCameraEventArgs { StillImageDevice = StillImageDevice });
             }
-            else
+            if (e.EventType.EventGuid == PortableDeviceGuids.WPD_EVENT_OBJECT_ADDED)
             {
-                //Thread thread = new Thread(getEvent);
-                //thread.Start();
+                var id = e.EventType.DeviceObject.ID;
+                PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+                {
+                    WiaImageItem = null,
+                    CameraDevice = this,
+                    FileName = e.EventType.DeviceObject.Name,
+                    Handle = e.EventType.DeviceObject.ID
+                };
+                OnPhotoCapture(this, args);
             }
         }
 
         public override bool DeleteObject(DeviceObject deviceObject)
         {
-            uint res = ExecuteWithNoData(CONST_CMD_DeleteObject, (uint) deviceObject.Handle);
+            uint res = ExecuteWithNoData(CONST_CMD_DeleteObject, (uint)deviceObject.Handle);
             return res == 0 || res == ErrorCodes.MTP_OK;
         }
 
@@ -162,7 +200,7 @@ namespace CameraControl.Devices
             for (int i = 0; i < objCount; i++)
             {
                 DeviceObject deviceObject = new DeviceObject();
-                uint handle = BitConverter.ToUInt32(response.Data, 4*i + 4);
+                uint handle = BitConverter.ToUInt32(response.Data, 4 * i + 4);
                 deviceObject.Handle = handle;
                 MTPDataResponse objectdata = ExecuteReadDataEx(CONST_CMD_GetObjectInfo, handle);
                 if (objectdata.Data != null)
@@ -170,12 +208,12 @@ namespace CameraControl.Devices
                     uint objFormat = BitConverter.ToUInt16(objectdata.Data, 4);
                     if (objFormat == 0x3000 || objFormat == 0x3801 || objFormat == 0x3800)
                     {
-                        deviceObject.FileName = Encoding.Unicode.GetString(objectdata.Data, 53, 12*2);
+                        deviceObject.FileName = Encoding.Unicode.GetString(objectdata.Data, 53, 12 * 2);
                         if (deviceObject.FileName.Contains("\0"))
                             deviceObject.FileName = deviceObject.FileName.Split('\0')[0];
                         try
                         {
-                            string datesrt = Encoding.Unicode.GetString(objectdata.Data, 53 + (12*2) + 3, 30);
+                            string datesrt = Encoding.Unicode.GetString(objectdata.Data, 53 + (12 * 2) + 3, 30);
                             //datesrt = datesrt.Replace("T", "");
                             DateTime date = DateTime.MinValue;
                             if (DateTime.TryParseExact(datesrt, "yyyyMMddTHHmmss", CultureInfo.InvariantCulture,
@@ -223,10 +261,16 @@ namespace CameraControl.Devices
             // Sanity checks.
             if (!stream.CanWrite)
                 throw new ArgumentException("Specified stream is not writable.", "stream");
-
-            int retryes = TransferRetries;
             lock (Locker)
             {
+
+                string s = o as string;
+                if (s != null)
+                {
+                    ((StillImageDevice)StillImageDevice).SaveFile(s, stream);
+                    return;
+                }
+                int retryes = TransferRetries;
                 _timer.Stop();
                 MTPDataResponse result = new MTPDataResponse();
                 //=================== managed file write
@@ -236,13 +280,13 @@ namespace CameraControl.Devices
                     {
                         result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetObject,
                                                                      (total, current) =>
-                                                                         {
-                                                                             double i = (double) current/total;
-                                                                             TransferProgress =
-                                                                                 Convert.ToUInt32(i*100);
-                                                                         },Convert.ToUInt32(o) );
+                                                                     {
+                                                                         double i = (double)current / total;
+                                                                         TransferProgress =
+                                                                             Convert.ToUInt32(i * 100);
+                                                                     }, Convert.ToUInt32(o));
                     }
-                        // if not enough memory for transfer catch it and wait and try again
+                    // if not enough memory for transfer catch it and wait and try again
                     catch (OutOfMemoryException)
                     {
                     }
@@ -287,7 +331,7 @@ namespace CameraControl.Devices
                 int objCount = BitConverter.ToInt32(response.Data, 0);
                 for (int i = 0; i < objCount; i++)
                 {
-                    uint handle = BitConverter.ToUInt32(response.Data, 4*i + 4);
+                    uint handle = BitConverter.ToUInt32(response.Data, 4 * i + 4);
                     ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_FormatStore, handle));
                 }
             }
@@ -374,7 +418,7 @@ namespace CameraControl.Devices
             return res;
         }
 
-        public MTPDataResponse ExecuteReadDataEx(uint code, uint param1,uint param2, int loop, int counter)
+        public MTPDataResponse ExecuteReadDataEx(uint code, uint param1, uint param2, int loop, int counter)
         {
             DeviceIsBusy = true;
             MTPDataResponse res = new MTPDataResponse();
@@ -586,8 +630,8 @@ namespace CameraControl.Devices
 
         public static short ToInt16(byte[] value, int startIndex)
         {
-            int i = (short) (value[startIndex] << 8 | value[startIndex + 1]);
-            return (short) (i);
+            int i = (short)(value[startIndex] << 8 | value[startIndex + 1]);
+            return (short)(i);
             //return System.BitConverter.ToInt16(value.Reverse().ToArray(), value.Length - sizeof(Int16) - startIndex);
         }
 
@@ -600,7 +644,7 @@ namespace CameraControl.Devices
 
         public static int ToInt32(byte[] value, int startIndex)
         {
-            int i = (value[startIndex] << 24 |value[startIndex+1] << 16 | value[startIndex+2] << 8 | value[startIndex + 3]);
+            int i = (value[startIndex] << 24 | value[startIndex + 1] << 16 | value[startIndex + 2] << 8 | value[startIndex + 3]);
             return i;
             //return System.BitConverter.ToInt16(value.Reverse().ToArray(), value.Length - sizeof(Int16) - startIndex);
         }
@@ -608,7 +652,7 @@ namespace CameraControl.Devices
         public decimal ToDeciaml(byte[] value, int startIndex)
         {
             int i = ToUInt16(value, startIndex);
-            int d = ToUInt16(value, startIndex+2);
+            int d = ToUInt16(value, startIndex + 2);
             if (d == 0 && i == 0)
                 return 0;
             string s = i + "." + d;

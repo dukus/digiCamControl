@@ -134,6 +134,7 @@
     <Compile Include="Nikon\NikonD80.cs" />
     <Compile Include="Nikon\NikonD800.cs" />
     <Compile Include="Nikon\NikonD90.cs" />
+    <Compile Include="Nikon\NikonL830.cs" />
     <Compile Include="Others\FakeCameraDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
     <Compile Include="Others\WiaCameraDevice.cs" />

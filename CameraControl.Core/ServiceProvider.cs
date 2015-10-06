@@ -85,7 +85,8 @@ namespace CameraControl.Core
             }
             catch {}
             Analytics = new Analytics();
-            DeviceManager = new CameraDeviceManager(Path.Combine(Classes.Settings.ApplicationFolder, "Devices"));
+            //DeviceManager = new CameraDeviceManager(Path.Combine(Classes.Settings.ApplicationFolder, "Devices"));
+            DeviceManager = new CameraDeviceManager();
             ExternalDeviceManager = new ExternalDeviceManager();
             Trigger = new TriggerClass();
             ActionManager = new ActionManager();

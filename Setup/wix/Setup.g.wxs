@@ -6,13 +6,13 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a35c1677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.3.34.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
+  <Product Id="19d12628-7654-4354-a305-9ab0a35c2677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.3.35.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
-    <Condition Message="Please install .NET 4.0 first." ><![CDATA[NET40="#1"]]></Condition>
+    <Condition Message="Please install .NET 4.0 first."><![CDATA[NET40="#1"]]></Condition>
 
-    <Directory Id="TARGETDIR" Name="SourceDir" >
+    <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
         <Directory Id="INSTALLDIR" Name="digiCamControl">
 
@@ -329,6 +329,7 @@
 
           <Directory Id="INSTALLDIR.Data" Name="Data">
 
+            <Component Id="Component.Data" Guid="19d12628-7654-4354-a305-9ab0cc4e6cf3" KeyPath="yes" />
             <Component Id="Component.takephoto.mp3" Guid="19d12628-7654-4354-a305-9ab01991f333">
               <File Id="takephoto.mp3" Source="Data\takephoto.mp3" />
             </Component>
@@ -339,6 +340,7 @@
 
             <Directory Id="INSTALLDIR.Data.Camera" Name="Camera">
 
+              <Component Id="Component.Camera" Guid="19d12628-7654-4354-a305-9ab05466b863" KeyPath="yes" />
               <Component Id="Component.Canon_EOS_100D.png" Guid="19d12628-7654-4354-a305-9ab0378a50ae">
                 <File Id="Canon_EOS_100D.png" Source="Data\Camera\Canon EOS 100D.png" />
               </Component>
@@ -515,6 +517,7 @@
 
             <Directory Id="INSTALLDIR.Data.msl" Name="msl">
 
+              <Component Id="Component.msl" Guid="19d12628-7654-4354-a305-9ab0a430a85e" KeyPath="yes" />
               <Component Id="Component.adaptiveSharpen.msl" Guid="19d12628-7654-4354-a305-9ab07f20c2bc">
                 <File Id="adaptiveSharpen.msl" Source="Data\msl\adaptiveSharpen.msl" />
               </Component>
@@ -627,8 +630,12 @@
           </Directory>
 
           <Directory Id="INSTALLDIR.Plugins" Name="Plugins">
+
+            <Component Id="Component.Plugins" Guid="19d12628-7654-4354-a305-9ab03d203b0c" KeyPath="yes" />
+
             <Directory Id="INSTALLDIR.Plugins.CameraControl.Plugins" Name="CameraControl.Plugins">
 
+              <Component Id="Component.CameraControl.Plugins" Guid="19d12628-7654-4354-a305-9ab024853ab6" KeyPath="yes" />
               <Component Id="Component.CameraControl.Plugins.dll" Guid="19d12628-7654-4354-a305-9ab036c1c93d">
                 <File Id="CameraControl.Plugins.dll" Source="Plugins\CameraControl.Plugins\CameraControl.Plugins.dll" />
               </Component>
@@ -641,6 +648,7 @@
 
             <Directory Id="INSTALLDIR.Plugins.Plugin.DeviceControlBox" Name="Plugin.DeviceControlBox">
 
+              <Component Id="Component.Plugin.DeviceControlBox" Guid="19d12628-7654-4354-a305-9ab02ee1cbe1" KeyPath="yes" />
               <Component Id="Component.Plugin.DeviceControlBox.dll" Guid="19d12628-7654-4354-a305-9ab093dd4c23">
                 <File Id="Plugin.DeviceControlBox.dll" Source="Plugins\Plugin.DeviceControlBox\Plugin.DeviceControlBox.dll" />
               </Component>
@@ -654,6 +662,7 @@
 
           <Directory Id="INSTALLDIR.Languages" Name="Languages">
 
+            <Component Id="Component.Languages" Guid="19d12628-7654-4354-a305-9ab041b09ea7" KeyPath="yes" />
             <Component Id="Component.ca.xml" Guid="19d12628-7654-4354-a305-9ab07fd22707">
               <File Id="ca.xml" Source="Languages\ca.xml" />
             </Component>
@@ -750,6 +759,7 @@
 
           <Directory Id="INSTALLDIR.Licenses" Name="Licenses">
 
+            <Component Id="Component.Licenses" Guid="19d12628-7654-4354-a305-9ab05a9215d7" KeyPath="yes" />
             <Component Id="Component.AForge_Copyright.txt" Guid="19d12628-7654-4354-a305-9ab0d56acb3a">
               <File Id="AForge_Copyright.txt" Source="Licenses\AForge Copyright.txt" />
             </Component>
@@ -782,6 +792,7 @@
 
           <Directory Id="INSTALLDIR.x64" Name="x64">
 
+            <Component Id="Component.x64" Guid="19d12628-7654-4354-a305-9ab024655017" KeyPath="yes" />
             <Component Id="Component.Spilornis.dll" Guid="19d12628-7654-4354-a305-9ab072a9939f">
               <File Id="Spilornis.dll" Source="x64\Spilornis.dll" />
             </Component>
@@ -790,26 +801,16 @@
 
           <Directory Id="INSTALLDIR.x86" Name="x86">
 
-            <Component Id="Component.msvcp110.dll" Guid="19d12628-7654-4354-a305-9ab01e9e0904">
-              <File Id="msvcp110.dll" Source="x86\msvcp110.dll" />
-            </Component>
-
-            <Component Id="Component.msvcr110.dll" Guid="19d12628-7654-4354-a305-9ab0832c478e">
-              <File Id="msvcr110.dll" Source="x86\msvcr110.dll" />
-            </Component>
-
+            <Component Id="Component.x86" Guid="19d12628-7654-4354-a305-9ab00d9b5015" KeyPath="yes" />
             <Component Id="Component.Spilornis.dll.1" Guid="19d12628-7654-4354-a305-9ab081d7dba8">
               <File Id="Spilornis.dll.1" Source="x86\Spilornis.dll" />
-            </Component>
-
-            <Component Id="Component.vccorlib110.dll" Guid="19d12628-7654-4354-a305-9ab0a0d3a884">
-              <File Id="vccorlib110.dll" Source="x86\vccorlib110.dll" />
             </Component>
 
           </Directory>
 
           <Directory Id="INSTALLDIR.Tools" Name="Tools">
 
+            <Component Id="Component.Tools" Guid="19d12628-7654-4354-a305-9ab0aed28d1b" KeyPath="yes" />
             <Component Id="Component.align_image_stack.exe" Guid="19d12628-7654-4354-a305-9ab0e987b4e0">
               <File Id="align_image_stack.exe" Source="Tools\align_image_stack.exe" />
             </Component>
@@ -834,6 +835,7 @@
 
           <Directory Id="INSTALLDIR.WebServer" Name="WebServer">
 
+            <Component Id="Component.WebServer" Guid="19d12628-7654-4354-a305-9ab09873d522" KeyPath="yes" />
             <Component Id="Component.browse.html" Guid="19d12628-7654-4354-a305-9ab0cd361020">
               <File Id="browse.html" Source="WebServer\browse.html" />
             </Component>
@@ -856,12 +858,14 @@
 
             <Directory Id="INSTALLDIR.WebServer.css" Name="css">
 
+              <Component Id="Component.css" Guid="19d12628-7654-4354-a305-9ab0895909d3" KeyPath="yes" />
               <Component Id="Component.style.css" Guid="19d12628-7654-4354-a305-9ab03fe39de8">
                 <File Id="style.css" Source="WebServer\css\style.css" />
               </Component>
 
               <Directory Id="INSTALLDIR.WebServer.css.img" Name="img">
 
+                <Component Id="Component.img" Guid="19d12628-7654-4354-a305-9ab0068c7bd1" KeyPath="yes" />
                 <Component Id="Component.ajax_loader.gif" Guid="19d12628-7654-4354-a305-9ab018eca467">
                   <File Id="ajax_loader.gif" Source="WebServer\css\img\ajax-loader.gif" />
                 </Component>
@@ -911,6 +915,7 @@
 
             <Directory Id="INSTALLDIR.WebServer.js" Name="js">
 
+              <Component Id="Component.js" Guid="19d12628-7654-4354-a305-9ab0333eddc9" KeyPath="yes" />
               <Component Id="Component.jquery_1.11.2.min.js" Guid="19d12628-7654-4354-a305-9ab00285491d">
                 <File Id="jquery_1.11.2.min.js" Source="WebServer\js\jquery-1.11.2.min.js" />
               </Component>
@@ -937,6 +942,7 @@
 
               <Directory Id="INSTALLDIR.WebServer.js.jquery_ui_1.11.2.custom" Name="jquery-ui-1.11.2.custom">
 
+                <Component Id="Component.jquery_ui_1.11.2.custom" Guid="19d12628-7654-4354-a305-9ab049703574" KeyPath="yes" />
                 <Component Id="Component.jquery_ui.min.css" Guid="19d12628-7654-4354-a305-9ab0c411455c">
                   <File Id="jquery_ui.min.css" Source="WebServer\js\jquery-ui-1.11.2.custom\jquery-ui.min.css" />
                 </Component>
@@ -955,6 +961,7 @@
 
                 <Directory Id="INSTALLDIR.WebServer.js.jquery_ui_1.11.2.custom.images" Name="images">
 
+                  <Component Id="Component.images" Guid="19d12628-7654-4354-a305-9ab04db92e60" KeyPath="yes" />
                   <Component Id="Component.ui_bg_flat_100_fcfdfd_40x100.png" Guid="19d12628-7654-4354-a305-9ab025300a13">
                     <File Id="ui_bg_flat_100_fcfdfd_40x100.png" Source="WebServer\js\jquery-ui-1.11.2.custom\images\ui-bg_flat_100_fcfdfd_40x100.png" />
                   </Component>
@@ -1024,36 +1031,13 @@
             </Directory>
           </Directory>
         </Directory>
-
-        <Directory Id="ProgramFilesFolder.OBS" Name="OBS">
-          <Directory Id="ProgramFilesFolder.OBS.plugins" Name="plugins">
-
-            <Component Id="Component.CLRHostPlugin.dll" Guid="19d12628-7654-4354-a305-9ab0e225050a">
-              <File Id="CLRHostPlugin.dll" Source="ObsPlugin\CLRHostPlugin.dll" />
-            </Component>
-
-            <Directory Id="ProgramFilesFolder.OBS.plugins.CLRHostPlugin" Name="CLRHostPlugin">
-
-              <Component Id="Component.CLRHost.Interop.dll" Guid="19d12628-7654-4354-a305-9ab033d1b9f4">
-                <File Id="CLRHost.Interop.dll" Source="ObsPlugin\CLRHostPlugin\CLRHost.Interop.dll" />
-              </Component>
-
-              <Component Id="Component.DccObsPlugin.dll" Guid="19d12628-7654-4354-a305-9ab09076de6c">
-                <File Id="DccObsPlugin.dll" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
-              </Component>
-
-            </Directory>
-          </Directory>
-        </Directory>
       </Directory>
 
       <Directory Id="ProgramMenuFolder" Name="ProgramMenuFolder">
         <Directory Id="ProgramMenuFolder.digiCamControl" Name="digiCamControl">
 
           <Component Id="digiCamControl.EmptyDirectory" Guid="19d12628-7654-4354-a305-9ab06ef57507">
-            <CreateFolder />
-
-            <RemoveFolder Id="ProgramMenuFolder.digiCamControl" On="uninstall" />
+            <RemoveFolder Id="ProgramMenuFolder.digiCamControl" On="both" />
 
             <RegistryKey Root="HKCU" Key="Software\WixSharp\Used">
               <RegistryValue Value="0" Type="string" KeyPath="yes" />
@@ -1061,24 +1045,11 @@
           </Component>
 
         </Directory>
-
-        <Component Id="ProgramMenuFolder" Guid="19d12628-7654-4354-a305-9ab016680bd8">
-          <RemoveFolder Id="ProgramMenuFolder" On="uninstall" />
-
-          <RegistryKey Root="HKCU" Key="Software\WixSharp\Used">
-            <RegistryValue Value="0" Type="string" KeyPath="yes" />
-          </RegistryKey>
-        </Component>
-
       </Directory>
 
       <Directory Id="DesktopFolder" Name="DesktopFolder">
 
         <Component Id="DesktopFolder.EmptyDirectory" Guid="19d12628-7654-4354-a305-9ab07111cee0">
-          <CreateFolder />
-
-          <RemoveFolder Id="DesktopFolder" On="uninstall" />
-
           <RegistryKey Root="HKCU" Key="Software\WixSharp\Used">
             <RegistryValue Value="0" Type="string" KeyPath="yes" />
           </RegistryKey>
@@ -1087,28 +1058,31 @@
       </Directory>
     </Directory>
 
-    <Property Id="NET40" Value="0" >
+    <Property Id="NET40" Value="0">
       <RegistrySearch Id="NET40_RegSearch" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v4\Full" Type="raw" Name="Install" />
     </Property>
 
-    <Property Id="ARPPRODUCTICON" Value="app_icon.ico"  />
+    <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
 
-    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf"  />
+    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
-    <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676" >
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.34.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.3.34.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+    <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676">
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.35.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.3.35.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
-    <CustomAction Id="Action1_MyAction" BinaryKey="Action1_MyAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
-    <CustomAction Id="Action2_SetRightAction" BinaryKey="Action1_MyAction_File" DllEntry="SetRightAction" Impersonate="yes" Execute="immediate" Return="ignore"  />
-    <CustomAction Id="PreventDowngrading" Error="Newer version already installed"  />
+    <CustomAction Id="Action1_InstallCRTAction" BinaryKey="Action1_InstallCRTAction_File" DllEntry="InstallCRTAction" Impersonate="yes" Execute="immediate" Return="check" />
+    <CustomAction Id="Action2_MyAction" BinaryKey="Action1_InstallCRTAction_File" DllEntry="MyAction" Impersonate="yes" Execute="immediate" Return="ignore" />
+    <CustomAction Id="Action3_SetRightAction" BinaryKey="Action1_InstallCRTAction_File" DllEntry="SetRightAction" Impersonate="yes" Execute="immediate" Return="ignore" />
+    <CustomAction Id="PreventDowngrading" Error="Newer version already installed" />
 
-    <Binary Id="Action1_MyAction_File" SourceFile="..\..\..\Setup\%this%.CA.dll"  />
+    <Binary Id="Action1_InstallCRTAction_File" SourceFile="..\..\..\Setup\%this%.CA.dll" />
+    <Binary Id="vcredist_x86.exe" SourceFile="..\..\..\Setup\vcredist_x86.exe" />
 
-    <UIRef Id="WixUI_FeatureTree"  />
+    <UIRef Id="WixUI_InstallDir" />
 
-    <Feature Id="Application_files" Title="Application files" Absent="disallow" Level="1" Description="Main application files" ConfigurableDirectory="INSTALLDIR" >
+    <Feature Id="Application_files" Title="Application files" Absent="disallow" Level="1" Description="Main application files" ConfigurableDirectory="INSTALLDIR">
       <ComponentRef Id="Component.CameraControl.exe" />
       <ComponentRef Id="Component.CameraControl.PluginManager.exe" />
       <ComponentRef Id="Component.CameraControlCmd.exe" />
@@ -1185,8 +1159,10 @@
       <ComponentRef Id="Component.noconn.png" />
       <ComponentRef Id="Component.nosignal.png" />
       <ComponentRef Id="Component.notloaded.png" />
+      <ComponentRef Id="Component.Data" />
       <ComponentRef Id="Component.takephoto.mp3" />
       <ComponentRef Id="Component.takephoto.wav" />
+      <ComponentRef Id="Component.Camera" />
       <ComponentRef Id="Component.Canon_EOS_100D.png" />
       <ComponentRef Id="Component.Canon_EOS_1100D.png" />
       <ComponentRef Id="Component.Canon_EOS_1200D.png" />
@@ -1230,6 +1206,7 @@
       <ComponentRef Id="Component.D810.png" />
       <ComponentRef Id="Component.D90.png" />
       <ComponentRef Id="Component.DF.png" />
+      <ComponentRef Id="Component.msl" />
       <ComponentRef Id="Component.adaptiveSharpen.msl" />
       <ComponentRef Id="Component.addNoise.msl" />
       <ComponentRef Id="Component.autoGamma.msl" />
@@ -1257,10 +1234,14 @@
       <ComponentRef Id="Component.solarize.msl" />
       <ComponentRef Id="Component.swirl.msl" />
       <ComponentRef Id="Component.Wave.msl" />
+      <ComponentRef Id="Component.Plugins" />
+      <ComponentRef Id="Component.CameraControl.Plugins" />
       <ComponentRef Id="Component.CameraControl.Plugins.dll" />
       <ComponentRef Id="Component.dcc.plugin" />
+      <ComponentRef Id="Component.Plugin.DeviceControlBox" />
       <ComponentRef Id="Component.Plugin.DeviceControlBox.dll" />
       <ComponentRef Id="Component.dcc.plugin.1" />
+      <ComponentRef Id="Component.Languages" />
       <ComponentRef Id="Component.ca.xml" />
       <ComponentRef Id="Component.cs.xml" />
       <ComponentRef Id="Component.cs_CZ.xml" />
@@ -1284,6 +1265,7 @@
       <ComponentRef Id="Component.uk.xml" />
       <ComponentRef Id="Component.vi.xml" />
       <ComponentRef Id="Component.zh_CN.xml" />
+      <ComponentRef Id="Component.Licenses" />
       <ComponentRef Id="Component.AForge_Copyright.txt" />
       <ComponentRef Id="Component.AForge_License.txt" />
       <ComponentRef Id="Component.DigiCamControlLicence.rtf" />
@@ -1291,22 +1273,25 @@
       <ComponentRef Id="Component.gpl_3.0.txt" />
       <ComponentRef Id="Component.GPLv3LICENSE.rtf" />
       <ComponentRef Id="Component.WPFSharp.Globalizer.Licence.txt" />
+      <ComponentRef Id="Component.x64" />
       <ComponentRef Id="Component.Spilornis.dll" />
-      <ComponentRef Id="Component.msvcp110.dll" />
-      <ComponentRef Id="Component.msvcr110.dll" />
+      <ComponentRef Id="Component.x86" />
       <ComponentRef Id="Component.Spilornis.dll.1" />
-      <ComponentRef Id="Component.vccorlib110.dll" />
+      <ComponentRef Id="Component.Tools" />
       <ComponentRef Id="Component.align_image_stack.exe" />
       <ComponentRef Id="Component.COPYING" />
       <ComponentRef Id="Component.enfuse.exe" />
       <ComponentRef Id="Component.exiv2.exe" />
       <ComponentRef Id="Component.libexpat.dll" />
+      <ComponentRef Id="Component.WebServer" />
       <ComponentRef Id="Component.browse.html" />
       <ComponentRef Id="Component.cmd.html" />
       <ComponentRef Id="Component.index.html" />
       <ComponentRef Id="Component.liveview.html" />
       <ComponentRef Id="Component.slide.html" />
+      <ComponentRef Id="Component.css" />
       <ComponentRef Id="Component.style.css" />
+      <ComponentRef Id="Component.img" />
       <ComponentRef Id="Component.ajax_loader.gif" />
       <ComponentRef Id="Component.browse.png" />
       <ComponentRef Id="Component.capture.png" />
@@ -1318,16 +1303,19 @@
       <ComponentRef Id="Component.logo.png" />
       <ComponentRef Id="Component.slideshow.png" />
       <ComponentRef Id="Component.t01.png" />
+      <ComponentRef Id="Component.js" />
       <ComponentRef Id="Component.jquery_1.11.2.min.js" />
       <ComponentRef Id="Component.jquery.cycle.all.js" />
       <ComponentRef Id="Component.jquery.cycle2.center.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.min.js" />
       <ComponentRef Id="Component.jquery.cycle2.swipe.min.js" />
       <ComponentRef Id="Component.jssor.slider.mini.js" />
+      <ComponentRef Id="Component.jquery_ui_1.11.2.custom" />
       <ComponentRef Id="Component.jquery_ui.min.css" />
       <ComponentRef Id="Component.jquery_ui.min.js" />
       <ComponentRef Id="Component.jquery_ui.structure.min.css" />
       <ComponentRef Id="Component.jquery_ui.theme.min.css" />
+      <ComponentRef Id="Component.images" />
       <ComponentRef Id="Component.ui_bg_flat_100_fcfdfd_40x100.png" />
       <ComponentRef Id="Component.ui_bg_flat_45_0078ae_40x100.png" />
       <ComponentRef Id="Component.ui_bg_flat_50_6eac2c_40x100.png" />
@@ -1346,29 +1334,22 @@
       <ComponentRef Id="Component.ui_icons_fcd113_256x240.png" />
       <ComponentRef Id="digiCamControl.EmptyDirectory" />
       <ComponentRef Id="DesktopFolder.EmptyDirectory" />
-      <ComponentRef Id="ProgramMenuFolder" />
     </Feature>
 
-    <Feature Id="Obs_Plugin" Title="Obs Plugin" Absent="allow" Level="1" >
-      <ComponentRef Id="Component.CLRHostPlugin.dll" />
-      <ComponentRef Id="Component.CLRHost.Interop.dll" />
-      <ComponentRef Id="Component.DccObsPlugin.dll" />
-      <ComponentRef Id="ProgramMenuFolder" />
-    </Feature>
-
-    <InstallExecuteSequence >
-      <Custom Action="Action1_MyAction" Before="InstallExecute"> (NOT Installed) </Custom>
-      <Custom Action="Action2_SetRightAction" Before="InstallFinalize"> (1) </Custom>
-      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-
-      <RemoveExistingProducts After="InstallFinalize" />
-    </InstallExecuteSequence>
-
-    <InstallUISequence >
+    <InstallUISequence>
+      <Custom Action="Action1_InstallCRTAction" After="LaunchConditions"> (NOT Installed) </Custom>
       <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
 
-    <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico"  />
+    <InstallExecuteSequence>
+      <Custom Action="Action2_MyAction" Before="InstallExecute"> (NOT Installed) </Custom>
+      <Custom Action="Action3_SetRightAction" Before="InstallFinalize"> (1) </Custom>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+
+      <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
+
+    <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico" />
 
   </Product>
 </Wix>

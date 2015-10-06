@@ -82,7 +82,6 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_ExposureBiasCompensation = 0x5010;
         public const uint CONST_PROP_MovieExposureBiasCompensation = 0xD1AB;
         public const uint CONST_PROP_DateTime = 0x5011;
-        public const uint CONST_PROP_BatteryLevel = 0x5001;
         public const uint CONST_PROP_LiveViewImageZoomRatio = 0xD1A3;
         public const uint CONST_PROP_AFModeSelect = 0xD161;
         public const uint CONST_PROP_AfModeAtLiveView = 0xD061;
@@ -1796,8 +1795,7 @@ namespace CameraControl.Devices.Nikon
                             break;
                         case CONST_PROP_BatteryLevel:
                             {
-                                var data = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
-                                                                               CONST_PROP_BatteryLevel);
+                                var data = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_BatteryLevel);
                                 if (data.Data != null && data.Data.Length > 0)
                                     Battery = data.Data[0];
                             }
