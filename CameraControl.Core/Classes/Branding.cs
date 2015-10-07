@@ -149,6 +149,8 @@ namespace CameraControl.Core.Classes
 
         public bool ShowLayoutPanel { get; set; }
 
+        public bool ShowPreviewPanel { get; set; }
+
         public bool ShowSessionPanel { get; set; }
         
         public bool ShowAutoExportPanel { get; set; }
@@ -220,6 +222,7 @@ namespace CameraControl.Core.Classes
             ShowHistogram = true;
             ShowSelectionPanel = true;
             ShowLayoutPanel = true;
+            ShowPreviewPanel = true;
             ShowSessionPanel = true;
             ShowAutoExportPanel = true;
             ShowPresetPanel = true;

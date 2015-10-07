@@ -166,18 +166,6 @@ namespace CameraControl.Devices
                 IsConnected = false;
                 OnCameraDisconnected(this, new DisconnectCameraEventArgs { StillImageDevice = StillImageDevice });
             }
-            if (e.EventType.EventGuid == PortableDeviceGuids.WPD_EVENT_OBJECT_ADDED)
-            {
-                var id = e.EventType.DeviceObject.ID;
-                PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
-                {
-                    WiaImageItem = null,
-                    CameraDevice = this,
-                    FileName = e.EventType.DeviceObject.Name,
-                    Handle = e.EventType.DeviceObject.ID
-                };
-                OnPhotoCapture(this, args);
-            }
         }
 
         public override bool DeleteObject(DeviceObject deviceObject)

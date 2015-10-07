@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CameraControl.Devices.Classes;
+using PortableDeviceLib;
 
 namespace CameraControl.Devices.Nikon
 {
@@ -12,7 +13,9 @@ namespace CameraControl.Devices.Nikon
         {
             base.Init(deviceDescriptor);
             AdvancedProperties.Add(InitFocalLength());
-
+            StillImageDevice imageDevice = StillImageDevice as StillImageDevice;
+            if (imageDevice != null)
+                imageDevice.DeviceEvent += StillImageDevice_DeviceEvent;
             return true;
         }
 
@@ -38,6 +41,22 @@ namespace CameraControl.Devices.Nikon
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
+        }
+
+        private void StillImageDevice_DeviceEvent(object sender, PortableDeviceEventArgs e)
+        {
+            if (e.EventType.EventGuid == PortableDeviceGuids.WPD_EVENT_OBJECT_ADDED)
+            {
+                var id = e.EventType.DeviceObject.ID;
+                PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+                {
+                    WiaImageItem = null,
+                    CameraDevice = this,
+                    FileName = e.EventType.DeviceObject.Name,
+                    Handle = e.EventType.DeviceObject.ID
+                };
+                OnPhotoCapture(this, args);
+            }
         }
     }
 }
