@@ -257,6 +257,7 @@ namespace CameraControl.Core.Classes
                     LoadHistogram(fileItem.FileInfo, image);
                 }
                 fileItem.SaveInfo();
+                SetImageInfo(fileItem);
                 if (deleteFile)
                     File.Delete(filename);
             }

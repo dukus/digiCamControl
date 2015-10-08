@@ -232,7 +232,11 @@ namespace CameraControl.Layouts
         private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)
         {
             GeneratePreview();
-            LayoutViewModel.FreeZoom = ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale();
+            var i =Math.Round( ZoomAndPanControl.FitScale(),4);
+            LayoutViewModel.FreeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
+                                       Math.Round(ZoomAndPanControl.FitScale(), 4);
+            if (!LayoutViewModel.FreeZoom)
+                LayoutViewModel.ZoomFit = true;
         }
 
         private void GeneratePreview()
