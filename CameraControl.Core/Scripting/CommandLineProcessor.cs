@@ -144,6 +144,7 @@ namespace CameraControl.Core.Scripting
                                 res.Add("camera." + property.Name.ToLower().Replace(" ", "_") + "=" + property.Value);
                             }
                         }
+                        res.Add("camera." + "exposurestatus" + "=" + device.ExposureStatus);
                         return res;
                     }
                 default:
@@ -200,8 +201,10 @@ namespace CameraControl.Core.Scripting
                     return Path.GetFileName(ServiceProvider.DeviceManager.LastCapturedImage[device]);
                 case "session":
                     return ServiceProvider.Settings.DefaultSession.Name;
+                case "camera.exposurestatus":
+                    return device.ExposureStatus;
                 case "camera":
-                    return ServiceProvider.DeviceManager.SelectedCameraDevice.SerialNumber;
+                    return device.SerialNumber;
                 default:
                     if (arg.StartsWith("session."))
                     {
