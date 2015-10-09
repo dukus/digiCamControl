@@ -376,6 +376,7 @@ namespace CameraControl.windows
                     {
                         if (CameraDevice.GetCapability(CapabilityEnum.Bulb))
                         {
+                            ServiceProvider.DeviceManager.LastCapturedImage[CameraDevice] = "";
                             CameraDevice.IsBusy = true;
                             CameraDevice.LockCamera();
                             CameraDevice.StartBulbMode();
