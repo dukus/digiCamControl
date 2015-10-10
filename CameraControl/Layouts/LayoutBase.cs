@@ -396,18 +396,11 @@ namespace CameraControl.Layouts
                     _worker.RunWorkerAsync(false);
                 }
             }
-            if (e.PropertyName == "LowMemoryUsage")
-            {
-                if (!_worker.IsBusy)
-                {
-                    _worker.RunWorkerAsync(false);
-                }
-            }
         }
 
         private void Trigger_Event(string cmd, object o)
         {
-            ImageLIst.Dispatcher.Invoke(new Action(delegate
+            Application.Current.Dispatcher.Invoke(new Action(delegate
                                                        {
                                                            switch (cmd)
                                                            {

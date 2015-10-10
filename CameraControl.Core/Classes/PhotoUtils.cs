@@ -30,6 +30,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Media;
 using System.Reflection;
@@ -195,6 +196,20 @@ namespace CameraControl.Core.Classes
                 //sec.AddAccessRule(new FileSystemAccessRule(everyone, FileSystemRights.Modify | FileSystemRights.Synchronize, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow));
                 //Directory.SetAccessControl(folder, sec);
             }
+        }
+
+        public static int GetInt(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return 0;
+            return Convert.ToInt32(s, CultureInfo.InvariantCulture);
+        }
+
+        public static double Getdouble(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return 0;
+            return Convert.ToDouble(s, CultureInfo.InvariantCulture);
         }
 
     }

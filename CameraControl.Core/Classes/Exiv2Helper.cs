@@ -32,6 +32,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -637,6 +638,10 @@ namespace CameraControl.Core.Classes
                                            dw, dh));
                 }
             }
+            if (Tags.ContainsKey("Exif.NikonAf.AFPointsInFocus"))
+            {
+                
+            }
             return;
         }
 
@@ -722,6 +727,41 @@ namespace CameraControl.Core.Classes
                     {
                         if (bitArray.Get(i - 1))
                             Focuspoints.Add(ToRect(relWidth, relHeight, FocusPoints51[i.ToString()], 1, 1));
+                    }
+                }
+            }
+
+            if (Tags.ContainsKey("Exif.Canon.AFInfo"))
+            {
+                if (Tags["Exif.Canon.AFInfo"].Value.Contains(" "))
+                {
+                    string[] vals = Tags["Exif.Canon.AFInfo"].Value.Split(' ');
+                    int poinst = PhotoUtils.GetInt(vals[2]);
+                    int[] poitw = new int[poinst];
+                    int[] poith = new int[poinst];
+                    int[] poitx = new int[poinst];
+                    int[] poity = new int[poinst];
+                    if (vals.Length > poinst*4+9)
+                    {
+                        long activepoint = Convert.ToInt64(vals[9 + (poinst * 4)]);
+                        for (int i = 0; i < poinst; i++)
+                        {
+                            poitw[i] = PhotoUtils.GetInt(vals[8 + i]);
+                            poith[i] = PhotoUtils.GetInt(vals[8 + (poinst) + i]);
+                            poitx[i] = PhotoUtils.GetInt(vals[8 + (poinst*2) + i]);
+                            poity[i] = PhotoUtils.GetInt(vals[8 + (poinst*3) + i]);
+                        }
+                        for (int i = 0; i < poinst; i++)
+                        {
+                            int x = Convert.ToInt16(poitx[i].ToString("X"), 16);
+                            int y = Convert.ToInt16(poity[i].ToString("X"), 16);
+                            if (StaticHelper.GetBit(activepoint, i))
+                            {
+                            x = (Width / 2) + x;
+                            y = (Height / 2) - y;
+                                Focuspoints.Add(new Rect(x - (poitw[i] / 2), y - (poith[i]/2), poitw[i], poith[i]));
+                            }
+                        } 
                     }
                 }
             }

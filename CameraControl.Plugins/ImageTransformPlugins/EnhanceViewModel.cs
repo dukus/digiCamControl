@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 using CameraControl.Core.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -17,7 +13,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public int Brightness
         {
-            get { return GetInt(_config["Brightness"]); }
+            get { return PhotoUtils.GetInt(_config["Brightness"]); }
             set
             {
                 _config["Brightness"] = value.ToString(CultureInfo.InvariantCulture);
@@ -27,7 +23,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public int Contrast
         {
-            get { return GetInt(_config["Contrast"]); }
+            get { return PhotoUtils.GetInt(_config["Contrast"]); }
             set
             {
                 _config["Contrast"] = value.ToString(CultureInfo.InvariantCulture);
@@ -37,7 +33,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public int Sharpen
         {
-            get { return GetInt(_config["Sharpen"]); }
+            get { return PhotoUtils.GetInt(_config["Sharpen"]); }
             set
             {
                 _config["Sharpen"] = value.ToString(CultureInfo.InvariantCulture);
@@ -47,7 +43,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public double SContrast
         {
-            get { return Getdouble(_config["SContrast"]); }
+            get { return PhotoUtils.Getdouble(_config["SContrast"]); }
             set
             {
                 _config["SContrast"] = value.ToString(CultureInfo.InvariantCulture);
@@ -107,18 +103,6 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         }
 
-        private int GetInt(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-                return 0;
-            return Convert.ToInt32(s, CultureInfo.InvariantCulture);
-        }
 
-        private double Getdouble(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-                return 0;
-            return Convert.ToDouble(s, CultureInfo.InvariantCulture);
-        }
     }
 }
