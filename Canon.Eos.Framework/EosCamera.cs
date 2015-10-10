@@ -382,6 +382,7 @@ namespace Canon.Eos.Framework
         {
             lock (_locker)
             {
+                SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
                 bool retry = false;
                 int retrynum = 0;
                 //DeviceReady();
