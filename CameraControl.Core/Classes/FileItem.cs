@@ -165,6 +165,9 @@ namespace CameraControl.Core.Classes
 
         [XmlAttribute]
         public int Series { get; set; }
+        
+        [XmlAttribute]
+        public int  Rotation { get; set; }
 
         [XmlIgnore]
         public bool Loading
@@ -220,7 +223,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isChecked;
-
+        [XmlAttribute]
         public bool IsChecked
         {
             get { return _isChecked; }
@@ -232,7 +235,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isLiked;
-
+        [XmlAttribute]
         public bool IsLiked
         {
             get { return _isLiked; }
@@ -246,7 +249,7 @@ namespace CameraControl.Core.Classes
         }
 
         private bool _isUnLiked;
-
+        [XmlAttribute]
         public bool IsUnLiked
         {
             get { return _isUnLiked; }
@@ -484,6 +487,17 @@ namespace CameraControl.Core.Classes
         private FileInfo _fileInfo;
         private bool _alternate;
         private bool _loading;
+        private int _rotationAngle;
+
+        public int RotationAngle
+        {
+            get { return _rotationAngle; }
+            set
+            {
+                _rotationAngle = value;
+                NotifyPropertyChanged("RotationAngle");
+            }
+        }
 
         [JsonIgnore]
         [XmlIgnore]

@@ -35,17 +35,21 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Margin="0,0,0,0">
-
-            <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseDown="zoomAndPanControl_MouseDown" MouseUp="zoomAndPanControl_MouseUp" MouseMove="zoomAndPanControl_MouseMove" MouseWheel="zoomAndPanControl_MouseWheel">
-                <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Center" Margin="5" Stretch="Uniform" Width="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Width}" Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Height}">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
-                    </Image.InputBindings>
-                    <Image.Effect>
-                        <DropShadowEffect ShadowDepth="10" Color="Black" BlurRadius="20" />
-                    </Image.Effect>
-                </Image>
-            </zoomAndPan:ZoomAndPanControl>
+            <Grid RenderTransformOrigin="0.5,0.5" ClipToBounds="True">
+                <Grid.LayoutTransform>
+                    <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
+                </Grid.LayoutTransform>
+                <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseDown="zoomAndPanControl_MouseDown" MouseUp="zoomAndPanControl_MouseUp" MouseMove="zoomAndPanControl_MouseMove" MouseWheel="zoomAndPanControl_MouseWheel">
+                    <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Center" Margin="5" Stretch="Uniform" Width="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Width}" Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Height}">
+                        <Image.InputBindings>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
+                        </Image.InputBindings>
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="10" Color="Black" BlurRadius="20" />
+                        </Image.Effect>
+                    </Image>
+                </zoomAndPan:ZoomAndPanControl>
+            </Grid>
             <MediaElement Name="VideoControl" Grid.Column="0" Grid.RowSpan="3" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"
                   Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Play" UnloadedBehavior="Close" >
             </MediaElement>
@@ -151,6 +155,20 @@
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_reset}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateCounterclockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateLeftCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_transform_rotate_counterclockwise}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateClockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateRightCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_transform_rotate_clockwise}" />
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>

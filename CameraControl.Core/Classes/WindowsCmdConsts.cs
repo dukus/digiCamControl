@@ -80,5 +80,7 @@ namespace CameraControl.Core.Classes
         public const string TimeLapse_Start = "TimeLapse_Start";
         public const string TimeLapse_Stop = "TimeLapse_Stop";
         public const string SetLayout = "SetLayout";
+        public const string RotateLeft = "RotateLeft";
+        public const string RotateRight = "RotateRight";
     }
 }

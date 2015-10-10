@@ -273,8 +273,13 @@
                     <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                         <StackPanel>
                             <Expander Header="Preview" IsExpanded="True" Style="{DynamicResource MetroExpanderEx}" >
-                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"/>
+                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove">
+                                    <Image.LayoutTransform>
+                                        <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
+                                    </Image.LayoutTransform>
+                                </Image>
                             </Expander>
+
                             <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Grid>

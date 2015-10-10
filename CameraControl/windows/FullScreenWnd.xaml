@@ -25,6 +25,9 @@
     </Window.Background>
     <Grid>
         <Image Name="image1" Margin="5" Stretch="Uniform" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" KeyUp="image1_KeyUp">
+            <Image.LayoutTransform>
+                <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
+            </Image.LayoutTransform>
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="5" Color="Black" BlurRadius="20" />
             </Image.Effect>

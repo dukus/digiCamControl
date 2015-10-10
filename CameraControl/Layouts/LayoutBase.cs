@@ -99,7 +99,7 @@ namespace CameraControl.Layouts
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private FileItem _selectedItem = null;
         public ZoomAndPanControl ZoomAndPanControl { get; set; }
-        public  UIElement content { get; set; }
+        public UIElement content { get; set; }
         public MediaElement MediaElement { get; set; }
 
         public LayoutViewModel LayoutViewModel { get; set; }
@@ -173,7 +173,7 @@ namespace CameraControl.Layouts
 
                 }
                 if (delete)
-                                    {
+                {
                     foreach (FileItem fileItem in filestodelete)
                     {
                         if ((ServiceProvider.Settings.SelectedBitmap != null &&
@@ -232,7 +232,7 @@ namespace CameraControl.Layouts
         private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)
         {
             GeneratePreview();
-            var i =Math.Round( ZoomAndPanControl.FitScale(),4);
+            var i = Math.Round(ZoomAndPanControl.FitScale(), 4);
             LayoutViewModel.FreeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
                                        Math.Round(ZoomAndPanControl.FitScale(), 4);
             if (!LayoutViewModel.FreeZoom)
@@ -260,14 +260,14 @@ namespace CameraControl.Layouts
                             ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
                             return;
                         }
-                        int dw = (int) (ZoomAndPanControl.ContentViewportWidthRation*bitmap.PixelWidth);
-                        int dh = (int) (ZoomAndPanControl.ContentViewportHeightRation*bitmap.PixelHeight);
-                        int fw = (int) (ZoomAndPanControl.ContentZoomFocusXRation*bitmap.PixelWidth);
-                        int fh = (int) (ZoomAndPanControl.ContentZoomFocusYRation*bitmap.PixelHeight);
+                        int dw = (int)(ZoomAndPanControl.ContentViewportWidthRation * bitmap.PixelWidth);
+                        int dh = (int)(ZoomAndPanControl.ContentViewportHeightRation * bitmap.PixelHeight);
+                        int fw = (int)(ZoomAndPanControl.ContentZoomFocusXRation * bitmap.PixelWidth);
+                        int fh = (int)(ZoomAndPanControl.ContentZoomFocusYRation * bitmap.PixelHeight);
 
                         bitmap.FillRectangle2(0, 0, bitmap.PixelWidth, bitmap.PixelHeight,
                             Color.FromArgb(128, 128, 128, 128));
-                        bitmap.FillRectangleDeBlend(fw - (dw/2), fh - (dh/2), fw + (dw/2), fh + (dh/2),
+                        bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2),
                             Color.FromArgb(128, 128, 128, 128));
 
                         bitmap.Freeze();
@@ -304,7 +304,7 @@ namespace CameraControl.Layouts
                 return;
             //bool fullres = e.Argument is bool && (bool) e.Argument ||LayoutViewModel.ZoomFit
             //bool fullres = !LayoutViewModel.ZoomFit;
-            bool fullres = e.Argument is bool && (bool) e.Argument;
+            bool fullres = e.Argument is bool && (bool)e.Argument;
 
             ServiceProvider.Settings.ImageLoading = fullres ||
                                                     !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
@@ -317,12 +317,11 @@ namespace CameraControl.Layouts
             }
             else
             {
-                BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);                
+                BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
             }
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
             ServiceProvider.Settings.SelectedBitmap.Notify();
-            Console.WriteLine(fullres);
             BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
                               ServiceProvider.Settings.SelectedBitmap.FileItem);
             BitmapLoader.Instance.Highlight(ServiceProvider.Settings.SelectedBitmap,
@@ -342,7 +341,8 @@ namespace CameraControl.Layouts
             }
             else
             {
-                ZoomToFocus();
+                if (ZoomAndPanControl != null)
+                    ZoomToFocus();
             }
             GeneratePreview();
         }
@@ -398,136 +398,186 @@ namespace CameraControl.Layouts
             }
         }
 
+        private void TriggerEvent(string cmd, object o)
+        {
+            try
+            {
+                switch (cmd)
+                {
+                    case WindowsCmdConsts.Next_Image:
+                        if (ImageLIst.SelectedIndex <
+                            ImageLIst.Items.Count - 1)
+                        {
+                            FileItem item =
+                                ImageLIst.SelectedItem as FileItem;
+                            if (item != null)
+                            {
+                                int ind = ImageLIst.Items.IndexOf(item);
+                                ImageLIst.SelectedIndex = ind + 1;
+                            }
+                            item = ImageLIst.SelectedItem as FileItem;
+                            if (item != null)
+                                ImageLIst.ScrollIntoView(item);
+                        }
+                        break;
+                    case WindowsCmdConsts.Prev_Image:
+                        if (ImageLIst.SelectedIndex > 0)
+                        {
+                            FileItem item =
+                                ImageLIst.SelectedItem as FileItem;
+                            if (item != null)
+                            {
+                                int ind = ImageLIst.Items.IndexOf(item);
+                                ImageLIst.SelectedIndex = ind - 1;
+                            }
+                            item = ImageLIst.SelectedItem as FileItem;
+                            if (item != null)
+                                ImageLIst.ScrollIntoView(item);
+                        }
+                        break;
+                    case WindowsCmdConsts.Like_Image:
+                        if (ImageLIst.SelectedItem != null)
+                        {
+                            FileItem item = null;
+                            if (o != null)
+                            {
+                                item = ServiceProvider.Settings.DefaultSession.GetByName(o as string);
+                            }
+                            else
+                            {
+                                item = ImageLIst.SelectedItem as FileItem;
+                            }
+                            if (item != null)
+                            {
+                                item.IsLiked = !item.IsLiked;
+                            }
+                        }
+                        break;
+                    case WindowsCmdConsts.Unlike_Image:
+                        if (ImageLIst.SelectedItem != null)
+                        {
+                            FileItem item = null;
+                            if (o != null)
+                            {
+                                item =
+                                    ServiceProvider.Settings.DefaultSession
+                                        .GetByName(o as string);
+                            }
+                            else
+                            {
+                                item = ImageLIst.SelectedItem as FileItem;
+                            }
+                            if (item != null)
+                            {
+                                item.IsUnLiked = !item.IsUnLiked;
+                            }
+                        }
+                        break;
+                    case WindowsCmdConsts.Del_Image:
+                    {
+                        DeleteItem();
+                    }
+                        break;
+                    case WindowsCmdConsts.Select_Image:
+                        FileItem fileItem = o as FileItem;
+                        if (fileItem != null)
+                        {
+                            ImageLIst.SelectedValue = fileItem;
+                            ImageLIst.ScrollIntoView(fileItem);
+                        }
+                        break;
+                    case WindowsCmdConsts.Refresh_Image:
+                        RefreshImage();
+                        break;
+                    case WindowsCmdConsts.Zoom_Image_Fit:
+                        ZoomAndPanControl.AnimatedScaleToFit();
+                        break;
+                    case WindowsCmdConsts.Zoom_Image_100:
+                        ZoomToFocus();
+                        LoadFullRes();
+                        ZoomAndPanControl.AnimatedZoomTo(1.0);
+                        break;
+                    case WindowsCmdConsts.Zoom_Image_200:
+                        ZoomToFocus();
+                        LoadFullRes();
+                        ZoomAndPanControl.AnimatedZoomTo(2.0);
+                        break;
+                    case WindowsCmdConsts.RotateLeft:
+                    {
+                        FileItem item =
+                            ImageLIst.SelectedItem as FileItem;
+                        if (item != null)
+                        {
+                            item.Rotation--;
+                            item.RotationAngle = item.Rotation*90;
+                            //BitmapLoader.Instance.ReGenerateSmallThumb(item);
+                        }
+                    }
+                        break;
+                    case WindowsCmdConsts.RotateRight:
+                    {
+                        FileItem item =
+                            ImageLIst.SelectedItem as FileItem;
+                        if (item != null)
+                        {
+                            item.Rotation++;
+                            item.RotationAngle = item.Rotation * 90;
+                            //RefreshImage();
+                            //BitmapLoader.Instance.ReGenerateSmallThumb(item);
+                        }
+                    }
+                        break;
+
+                }
+                if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))
+                {
+                    if (ZoomAndPanControl != null && cmd.Contains("_"))
+                    {
+                        var vals = cmd.Split('_');
+                        if (vals.Count() > 2)
+                        {
+                            double x;
+                            double y;
+                            double.TryParse(vals[1], out x);
+                            double.TryParse(vals[2], out y);
+                            if (cmd.EndsWith("!"))
+                                ZoomAndPanControl.SnapToRation(x, y);
+                            else
+                            {
+                                ZoomAndPanControl.AnimatedSnapToRation(x, y);
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to process event ", exception);
+            }
+
+        }
+
+
         private void Trigger_Event(string cmd, object o)
         {
-            Application.Current.Dispatcher.Invoke(new Action(delegate
-                                                       {
-                                                           switch (cmd)
-                                                           {
-                                                               case WindowsCmdConsts.Next_Image:
-                                                                   if (ImageLIst.SelectedIndex <
-                                                                       ImageLIst.Items.Count - 1)
-                                                                   {
-                                                                       FileItem item =
-                                                                           ImageLIst.SelectedItem as FileItem;
-                                                                       if (item != null)
-                                                                       {
-                                                                           int ind = ImageLIst.Items.IndexOf(item);
-                                                                           ImageLIst.SelectedIndex = ind + 1;
-                                                                       }
-                                                                       item = ImageLIst.SelectedItem as FileItem;
-                                                                       if (item != null)
-                                                                           ImageLIst.ScrollIntoView(item);
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Prev_Image:
-                                                                   if (ImageLIst.SelectedIndex > 0)
-                                                                   {
-                                                                       FileItem item =
-                                                                           ImageLIst.SelectedItem as FileItem;
-                                                                       if (item != null)
-                                                                       {
-                                                                           int ind = ImageLIst.Items.IndexOf(item);
-                                                                           ImageLIst.SelectedIndex = ind - 1;
-                                                                       }
-                                                                       item = ImageLIst.SelectedItem as FileItem;
-                                                                       if (item != null)
-                                                                           ImageLIst.ScrollIntoView(item);
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Like_Image:
-                                                                   if (ImageLIst.SelectedItem != null)
-                                                                   {
-                                                                       FileItem item = null;
-                                                                       if (o != null)
-                                                                       {
-                                                                           item = ServiceProvider.Settings.DefaultSession.GetByName(o as string);
-                                                                       }
-                                                                       else
-                                                                       {
-                                                                           item = ImageLIst.SelectedItem as FileItem;
-                                                                       }
-                                                                       if (item != null)
-                                                                       {
-                                                                           item.IsLiked = !item.IsLiked;
-                                                                       }
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Unlike_Image:
-                                                                   if (ImageLIst.SelectedItem != null)
-                                                                   {
-                                                                       FileItem item = null;
-                                                                       if (o != null)
-                                                                       {
-                                                                           item =
-                                                                               ServiceProvider.Settings.DefaultSession
-                                                                                   .GetByName(o as string);
-                                                                       }
-                                                                       else
-                                                                       {
-                                                                           item = ImageLIst.SelectedItem as FileItem;
-                                                                       }
-                                                                       if (item != null)
-                                                                       {
-                                                                           item.IsUnLiked = !item.IsUnLiked;
-                                                                       }
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Del_Image:
-                                                                   {
-                                                                       DeleteItem();
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Select_Image:
-                                                                   FileItem fileItem = o as FileItem;
-                                                                   if (fileItem != null)
-                                                                   {
-                                                                       ImageLIst.SelectedValue = fileItem;
-                                                                       ImageLIst.ScrollIntoView(fileItem);
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Refresh_Image:
-                                                                   if (!_worker.IsBusy)
-                                                                   {
-                                                                       _worker.RunWorkerAsync(false);
-                                                                   }
-                                                                   break;
-                                                               case WindowsCmdConsts.Zoom_Image_Fit:
-                                                                   ZoomAndPanControl.AnimatedScaleToFit();
-                                                                   break;
-                                                               case WindowsCmdConsts.Zoom_Image_100:
-                                                                   LoadFullRes();
-                                                                   ZoomToFocus();
-                                                                   ZoomAndPanControl.AnimatedZoomTo(1.0);
-                                                                   break;
-                                                               case WindowsCmdConsts.Zoom_Image_200:
-                                                                   LoadFullRes();
-                                                                   ZoomToFocus();
-                                                                   ZoomAndPanControl.AnimatedZoomTo(2.0);
-                                                                   break;
-                                                           }
-                                                           if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))
-                                                           {
-                                                               if (ZoomAndPanControl!=null &&  cmd.Contains("_"))
-                                                               {
-                                                                   var vals = cmd.Split('_');
-                                                                   if (vals.Count() > 2)
-                                                                   {
-                                                                       double x;
-                                                                       double y;
-                                                                       double.TryParse(vals[1], out x);
-                                                                       double.TryParse(vals[2], out y);
-                                                                       if (cmd.EndsWith("!"))
-                                                                           ZoomAndPanControl.SnapToRation(x, y);
-                                                                       else
-                                                                       {
-                                                                           ZoomAndPanControl.AnimatedSnapToRation(x, y);
-                                                                       }
+            try
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() => TriggerEvent(cmd, o)));
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+        }
 
-                                                                   }
-                                                               }
-                                                           }
-                                                       }));
+        private void RefreshImage()
+        {
+            if (!_worker.IsBusy)
+            {
+                _worker.RunWorkerAsync(false);
+            }
         }
 
         private void ZoomToFocus()
@@ -563,7 +613,7 @@ namespace CameraControl.Layouts
                 LoadFullRes();
                 LayoutViewModel.FreeZoom = true;
             }
-            
+
         }
 
         /// <summary>

@@ -646,5 +646,7 @@ namespace CameraControl.Core.Translation
         public static string LabelShowActiveArea = "Show active area";
         public static string LabelSetArea = "Set";
         public static string LabelDoneArea = "Done";
+        public static string LabelRotateCounterclockwise = "Rotate counterclockwise";
+        public static string LabelRotateClockwise = "Rotate clockwise";
     }
 }

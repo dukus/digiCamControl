@@ -110,6 +110,8 @@ namespace CameraControl.ViewModel
         public RelayCommand DeleteItemCommand { get; private set; }
         public RelayCommand RestoreCommand { get; private set; }
         public RelayCommand ImageDoubleClickCommand { get; private set; }
+        public RelayCommand RotateLeftCommand { get; private set; }
+        public RelayCommand RotateRightCommand { get; private set; }
 
         public LayoutViewModel()
         {
@@ -142,6 +144,11 @@ namespace CameraControl.ViewModel
             {
                 ZoomFit = true;
             }
+            RotateLeftCommand =
+                new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateLeft));
+            RotateRightCommand =
+                new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateRight));
+
         }
 
         private void DeleteItem()
