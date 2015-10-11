@@ -460,6 +460,13 @@ namespace CameraControl
                                                ? "\n" +
                                                  e.Exception.InnerException.Message
                                                : null));
+            if (e.Exception.GetType() == typeof(MissingMethodException))
+            {
+                Log.Error("Damaged installation. Application exiting ");
+                MessageBox.Show("Application crash !! Damaged installation!\nPlease unintall aplication from control panel and reinstall it!");
+                if (Current != null)
+                    Current.Shutdown();
+            }
             // check if wia 2.0 is registered 
             // isn't a clean way
             if (errorMessage.Contains("{E1C5D730-7E97-4D8A-9E42-BBAE87C2059F}"))
