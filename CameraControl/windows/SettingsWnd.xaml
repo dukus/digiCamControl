@@ -219,17 +219,9 @@
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelTriggers}">
                 <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
                     <GroupBox Header="Keyboard">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <ListBox Height="150" Grid.Row="1" ItemsSource="{Binding Actions}">
+                            <ListBox ItemsSource="{Binding Actions}" ScrollViewer.VerticalScrollBarVisibility="Visible">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -244,25 +236,25 @@
                             </ListBox>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="{T:TranslateExtension LabelWebserver}" Grid.Row="1">
-                        <Grid ToolTip="{T:TranslateExtension ReStartToolTip}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />                                
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="2"/>
-                            <CheckBox Grid.Row="1" Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
-                            <CheckBox Grid.Row="2" Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
-                            <Label Grid.Row="3" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
-                        </Grid>
-                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelWebserver}">
+                <Grid ToolTip="{T:TranslateExtension ReStartToolTip}" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="2"/>
+                    <CheckBox Grid.Row="1" Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
+                    <CheckBox Grid.Row="2" Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
+                    <Label Grid.Row="3" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelSettingsLiveView}">
