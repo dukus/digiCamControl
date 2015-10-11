@@ -51,7 +51,7 @@
                 </zoomAndPan:ZoomAndPanControl>
             </Grid>
             <MediaElement Name="VideoControl" Grid.Column="0" Grid.RowSpan="3" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Play" UnloadedBehavior="Close" >
+                  Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Manual" UnloadedBehavior="Close" >
             </MediaElement>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
