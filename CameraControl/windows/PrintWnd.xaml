@@ -81,8 +81,9 @@
 
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Button Content="{translation:TranslateExtension LabelPrintSetup}" Command="{Binding PrintSetupCommand}" Grid.ColumnSpan="2"/>
+                <Button Content="{translation:TranslateExtension LabelPrintSetup}" Command="{Binding PrintSetupCommand}" Grid.ColumnSpan="2" Margin="2"/>
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
                     <Label Content="{Binding PrinterName}"/>
                     <Label Content="{Binding PaperName}"/>
@@ -103,8 +104,16 @@
                 <Label Content="{translation:TranslateExtension LabelRepeatImages}" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right"/>
                 <CheckBox Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Repeat}" Margin="3"/>
 
+                <Label Content="{translation:TranslateExtension LabelPageWidth}" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right"/>
+                <controls:NumericUpDown Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Minimum="0" Value="{Binding PageWidth}" Margin="3"/>
 
-                <Button Grid.Row="11" Grid.ColumnSpan="2" Grid.Column="0"
+                <Label Content="{translation:TranslateExtension LabelPageHeigh}" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right"/>
+                <controls:NumericUpDown Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Minimum="0" Value="{Binding PageHeight}" Margin="3"/>
+
+                <Button Grid.Row="11" Grid.ColumnSpan="2" Grid.Column="0" Margin="2"
+                        Content="{translation:TranslateExtension LabelSaveJpg}"  Click="JpgButton_Click" />
+
+                <Button Grid.Row="12" Grid.ColumnSpan="2" Grid.Column="0" Margin="2"
                         Content="{translation:TranslateExtension LabelPrint}" Name="PrintButton" Click="PrintButton_Click" />
 
 

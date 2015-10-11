@@ -16,6 +16,7 @@ using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.ViewModel;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
 
 namespace CameraControl.windows
 {
@@ -75,6 +76,26 @@ namespace CameraControl.windows
                 this.ShowMessageAsync("Eror", exception.Message);
                 Log.Error("Error print", exception);
             }
+        }
+
+        private void JpgButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dialog = new SaveFileDialog {Filter = "Jpg files (*.jpg)|*.jpg|All files|*.*"};
+                if (dialog.ShowDialog() == true)
+                {
+                    BitmapLoader.Save2Jpg(
+                        BitmapLoader.SaveImageSource(ItemsControl, (int) ItemsControl.Width, (int) ItemsControl.Height),
+                        dialog.FileName);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.ShowMessageAsync("Save error", exception.Message);
+                Log.Error("Save error", exception);
+            }
+
         }
 
     }
