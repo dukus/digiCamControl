@@ -161,6 +161,11 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public static string ReplaceExtension(string file, string ext)
+        {
+            return Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + ext);
+        }
+
         public static Boolean IsNumeric(Object expression)
         {
             if (expression == null || expression is DateTime)

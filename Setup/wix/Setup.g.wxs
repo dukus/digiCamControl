@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="19d12628-7654-4354-a305-9ab0a35c3677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.3.36.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="digiCamControl">
+  <Product Id="19d12628-7654-4354-a305-9ab0a35c4677" Name="digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.3.37.0" UpgradeCode="19d12628-7654-4354-a305-9ab0932af676" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
     <Media Id="1" Cabinet="digiCamControl.cab" EmbedCab="yes" />
 
@@ -73,10 +73,6 @@
 
           <Component Id="Component.DigiCamControl.xbs" Guid="19d12628-7654-4354-a305-9ab08fb8314d">
             <File Id="DigiCamControl.xbs" Source="DigiCamControl.xbs" />
-          </Component>
-
-          <Component Id="Component.branding.xml" Guid="19d12628-7654-4354-a305-9ab0773b8acc">
-            <File Id="branding.xml" Source="branding.xml" />
           </Component>
 
           <Component Id="Component.AForge.dll" Guid="19d12628-7654-4354-a305-9ab0d997c732">
@@ -1034,33 +1030,6 @@
               </Directory>
             </Directory>
           </Directory>
-
-          <Directory Id="INSTALLDIR.Branding" Name="Branding">
-
-            <Component Id="Component.Branding" Guid="19d12628-7654-4354-a305-9ab07eeea0e4" KeyPath="yes" />
-
-            <Directory Id="INSTALLDIR.Branding.Plugins" Name="Plugins">
-
-              <Component Id="Component.Plugins.1" Guid="19d12628-7654-4354-a305-9ab02df7c326" KeyPath="yes" />
-
-              <Directory Id="INSTALLDIR.Branding.Plugins.Marty" Name="Marty">
-
-                <Component Id="Component.Marty" Guid="19d12628-7654-4354-a305-9ab036651595" KeyPath="yes" />
-                <Component Id="Component.dcc.plugin.2" Guid="19d12628-7654-4354-a305-9ab0bdc276ef">
-                  <File Id="dcc.plugin.2" Source="Branding\Plugins\Marty\dcc.plugin" />
-                </Component>
-
-                <Component Id="Component.Marty.dll" Guid="19d12628-7654-4354-a305-9ab0c4450190">
-                  <File Id="Marty.dll" Source="Branding\Plugins\Marty\Marty.dll" />
-                </Component>
-
-                <Component Id="Component.Marty.pdb" Guid="19d12628-7654-4354-a305-9ab07eee1766">
-                  <File Id="Marty.pdb" Source="Branding\Plugins\Marty\Marty.pdb" />
-                </Component>
-
-              </Directory>
-            </Directory>
-          </Directory>
         </Directory>
       </Directory>
 
@@ -1099,8 +1068,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="19d12628-7654-4354-a305-9ab0932af676">
-      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.36.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="1.3.36.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.3.37.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="1.3.37.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="Action1_InstallCRTAction" BinaryKey="Action1_InstallCRTAction_File" DllEntry="InstallCRTAction" Impersonate="yes" Execute="immediate" Return="check" />
@@ -1127,7 +1096,6 @@
       <ComponentRef Id="Component.logo_big.jpg" />
       <ComponentRef Id="Component.baseMtpDevice.xml" />
       <ComponentRef Id="Component.DigiCamControl.xbs" />
-      <ComponentRef Id="Component.branding.xml" />
       <ComponentRef Id="Component.AForge.dll" />
       <ComponentRef Id="Component.AForge.Imaging.dll" />
       <ComponentRef Id="Component.AForge.Imaging.Formats.dll" />
@@ -1364,12 +1332,6 @@
       <ComponentRef Id="Component.ui_icons_f5e175_256x240.png" />
       <ComponentRef Id="Component.ui_icons_f7a50d_256x240.png" />
       <ComponentRef Id="Component.ui_icons_fcd113_256x240.png" />
-      <ComponentRef Id="Component.Branding" />
-      <ComponentRef Id="Component.Plugins.1" />
-      <ComponentRef Id="Component.Marty" />
-      <ComponentRef Id="Component.dcc.plugin.2" />
-      <ComponentRef Id="Component.Marty.dll" />
-      <ComponentRef Id="Component.Marty.pdb" />
       <ComponentRef Id="digiCamControl.EmptyDirectory" />
       <ComponentRef Id="DesktopFolder.EmptyDirectory" />
     </Feature>

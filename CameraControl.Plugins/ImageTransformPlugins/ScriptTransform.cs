@@ -21,6 +21,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public string Execute(FileItem item, string infile, string dest, ValuePairEnumerator configData)
         {
+            dest = PhotoUtils.ReplaceExtension(dest, ".jpg");
             var conf = new ScriptTransformViewModel(configData);
             using (Stream stream = ToStream(conf.Script))
             {
@@ -31,6 +32,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 {
                     // Execute script with the image and write it to a jpg file
                     script.Execute(image);
+                    image.Format = MagickFormat.Jpeg;
                     image.Write(dest);
                 }
             }

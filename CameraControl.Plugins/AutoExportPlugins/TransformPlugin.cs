@@ -17,11 +17,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
             var filename = item.FileName;
             var conf = new TransformPluginViewModel(configData);
             var outfile = Path.GetTempFileName();
+            outfile = PhotoUtils.ReplaceExtension(outfile, Path.GetExtension(filename));
             outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
             if (conf.CreateNew)
             {
                 string newFile = Path.Combine(Path.GetDirectoryName(filename),
-                    Path.GetFileNameWithoutExtension(filename) + "_transformed" + Path.GetExtension(item.FileName));
+                    Path.GetFileNameWithoutExtension(filename) + "_transformed" + ".jpg");
                 File.Copy(outfile, newFile, true);
                 if (ServiceProvider.Settings.DefaultSession.GetFile(newFile) == null)
                 {
