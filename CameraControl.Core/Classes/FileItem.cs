@@ -165,9 +165,30 @@ namespace CameraControl.Core.Classes
 
         [XmlAttribute]
         public int Series { get; set; }
-        
+
         [XmlAttribute]
-        public int  Rotation { get; set; }
+        public int Rotation
+        {
+            get { return _rotation; }
+            set
+            {
+                _rotation = value;
+                NotifyPropertyChanged("RotationAngle");
+            }
+        }
+
+        [XmlAttribute]
+        public int AutoRotation
+        {
+            get { return _autoRotation; }
+            set
+            {
+                _autoRotation = value;
+                NotifyPropertyChanged("AutoRotation");
+                NotifyPropertyChanged("RotationAngle");
+            }
+        }
+
 
         [XmlIgnore]
         public bool Loading
@@ -433,6 +454,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool IsLoading { get; set; }
 
         /// <summary>
         /// Gets the small thumb file name.
@@ -483,20 +505,15 @@ namespace CameraControl.Core.Classes
         private string _backupFileName;
         private string _focalLength;
         private string _exposureBias;
-        private string _shortName;
         private FileInfo _fileInfo;
         private bool _alternate;
         private bool _loading;
-        private int _rotationAngle;
+        private int _autoRotation;
+        private int _rotation;
 
         public int RotationAngle
         {
-            get { return _rotationAngle; }
-            set
-            {
-                _rotationAngle = value;
-                NotifyPropertyChanged("RotationAngle");
-            }
+            get { return (Rotation + (ServiceProvider.Settings.Autorotate?AutoRotation:0))*90; }
         }
 
         [JsonIgnore]

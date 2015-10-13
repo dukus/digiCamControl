@@ -775,7 +775,9 @@ namespace CameraControl.Core.Classes
                 }
             }
 
-            fileItem.FileInfo = new FileInfo();
+            if (fileItem.FileInfo == null)
+                fileItem.FileInfo = new FileInfo();
+
             fileItem.FileInfo.ExifTags.Items.Clear();
 
             foreach (KeyValuePair<string, Exiv2Data> data in Tags)

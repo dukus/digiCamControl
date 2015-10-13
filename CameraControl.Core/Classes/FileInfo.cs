@@ -119,6 +119,8 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool IsLoading { get; set; }
+
         public FileInfo()
         {
             ExifTags = new ValuePairEnumerator();

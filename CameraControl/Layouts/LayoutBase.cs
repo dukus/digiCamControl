@@ -517,8 +517,7 @@ namespace CameraControl.Layouts
                         if (item != null)
                         {
                             item.Rotation--;
-                            item.RotationAngle = item.Rotation*90;
-                            //BitmapLoader.Instance.ReGenerateSmallThumb(item);
+
                         }
                     }
                         break;
@@ -529,9 +528,6 @@ namespace CameraControl.Layouts
                         if (item != null)
                         {
                             item.Rotation++;
-                            item.RotationAngle = item.Rotation * 90;
-                            //RefreshImage();
-                            //BitmapLoader.Instance.ReGenerateSmallThumb(item);
                         }
                     }
                         break;
