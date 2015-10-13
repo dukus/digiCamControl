@@ -46,7 +46,7 @@ namespace CameraControl.Core.Classes
 {
     public class BitmapLoader : BaseFieldClass
     {
-        private const int MaxThumbSize = 1920*2;
+        private const int MaxThumbSize = 1920 * 2;
         private const int LargeThumbSize = 1600;
         private const int SmallThumbSize = 400;
 
@@ -123,11 +123,11 @@ namespace CameraControl.Core.Classes
                 return;
             if (!File.Exists(fileItem.FileName))
                 return;
-            
+
             if ((File.Exists(fileItem.LargeThumb) && File.Exists(fileItem.SmallThumb)) && File.Exists(fileItem.InfoFile))
                 return;
 
-            if(fileItem.Loading)
+            if (fileItem.Loading)
                 return;
             fileItem.Loading = true;
             string filename = fileItem.FileName;
@@ -140,7 +140,7 @@ namespace CameraControl.Core.Classes
                     {
                         string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
                             Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
-                        PhotoUtils.RunAndWait(ffmpeg_exe,  String.Format("-i \"{0}\" -ss 00:00:01.000 -f image2 -vframes 1 \"{1}\"",fileItem.FileName, thumb));
+                        PhotoUtils.RunAndWait(ffmpeg_exe, String.Format("-i \"{0}\" -ss 00:00:01.000 -f image2 -vframes 1 \"{1}\"", fileItem.FileName, thumb));
                         if (File.Exists(thumb))
                         {
                             deleteFile = true;
@@ -151,7 +151,7 @@ namespace CameraControl.Core.Classes
                 catch (Exception exception)
                 {
                     Log.Error("Error get video thumb", exception);
-                }                
+                }
             }
             if (fileItem.IsRaw)
             {
@@ -176,7 +176,6 @@ namespace CameraControl.Core.Classes
                 }
             }
 
-
             GetMetadata(fileItem);
             try
             {
@@ -197,43 +196,6 @@ namespace CameraControl.Core.Classes
                         rotation = 270;
                 }
 
-                //using (MemoryStream fileStream = new MemoryStream(File.ReadAllBytes(filename)))
-                //{
-                //    BitmapDecoder bmpDec = BitmapDecoder.Create(fileStream,
-                //                                                BitmapCreateOptions.PreservePixelFormat,
-                //                                                BitmapCacheOption.OnLoad);
-
-                //    bmpDec.DownloadProgress += (o, args) => StaticHelper.Instance.LoadingProgress = args.Progress;
-
-                //    if (rotation == 90 || rotation == 270)
-                //        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelHeight, bmpDec.Frames[0].PixelWidth);
-                //    else
-                //        fileItem.FileInfo.SetSize(bmpDec.Frames[0].PixelWidth, bmpDec.Frames[0].PixelHeight);
-
-                //    double dw = (double)LargeThumbSize / bmpDec.Frames[0].PixelWidth;
-                //    WriteableBitmap writeableBitmap =
-                //        BitmapFactory.ConvertToPbgra32Format(GetBitmapFrame(bmpDec.Frames[0],
-                //                                                            (int)(bmpDec.Frames[0].PixelWidth * dw),
-                //                                                            (int)(bmpDec.Frames[0].PixelHeight * dw),
-                //                                                            BitmapScalingMode.Linear));
-
-                //    LoadHistogram(fileItem, writeableBitmap);
-                //    Save2Jpg(writeableBitmap, fileItem.LargeThumb);
-
-                //    dw = (double)SmallThumbSize / writeableBitmap.PixelWidth;
-                //    writeableBitmap = writeableBitmap.Resize((int)(writeableBitmap.PixelWidth * dw),
-                //                                             (int)(writeableBitmap.PixelHeight * dw),
-                //                                             WriteableBitmapExtensions.Interpolation.Bilinear);
-
-                //    if (rotation > 0)
-                //        writeableBitmap = writeableBitmap.Rotate(rotation);
-
-                //    Save2Jpg(writeableBitmap, fileItem.SmallThumb);
-                //    //var thumb = LoadSmallImage(fileItem);
-                //    //thumb.Freeze();
-                //    fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
-                //}
-
                 using (MagickImage image = new MagickImage(filename))
                 {
                     if (rotation == 90 || rotation == 270)
@@ -243,7 +205,7 @@ namespace CameraControl.Core.Classes
 
                     double dw = (double)LargeThumbSize / image.Width;
                     image.FilterType = FilterType.Box;
-                    image.Thumbnail((int) (image.Width*dw), (int) (image.Height*dw));
+                    image.Thumbnail((int)(image.Width * dw), (int)(image.Height * dw));
                     PhotoUtils.CreateFolder(fileItem.LargeThumb);
                     image.Write(fileItem.LargeThumb);
                     fileItem.IsLoaded = true;
@@ -254,7 +216,6 @@ namespace CameraControl.Core.Classes
                     PhotoUtils.CreateFolder(fileItem.SmallThumb);
                     image.Write(fileItem.SmallThumb);
                     fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
-                    LoadHistogram(fileItem.FileInfo, image);
                 }
                 fileItem.SaveInfo();
                 SetImageInfo(fileItem);
@@ -268,15 +229,15 @@ namespace CameraControl.Core.Classes
             fileItem.Loading = false;
         }
 
-        
+
 
         public static BitmapFrame GetBitmapFrame(BitmapFrame photo, int width, int height, BitmapScalingMode mode)
         {
             TransformedBitmap target = new TransformedBitmap(
                 photo,
                 new ScaleTransform(
-                    width/photo.Width*96/photo.DpiX,
-                    height/photo.Height*96/photo.DpiY,
+                    width / photo.Width * 96 / photo.DpiX,
+                    height / photo.Height * 96 / photo.DpiY,
                     0, 0));
             BitmapFrame thumbnail = BitmapFrame.Create(target);
             BitmapFrame newPhoto = Resize(thumbnail, width, height, mode);
@@ -288,7 +249,7 @@ namespace CameraControl.Core.Classes
         {
             TransformedBitmap target = new TransformedBitmap(
                 photo,
-                new RotateTransform(angle, photo.PixelWidth/2, photo.PixelHeight/2));
+                new RotateTransform(angle, photo.PixelWidth / 2, photo.PixelHeight / 2));
             BitmapFrame thumbnail = BitmapFrame.Create(target);
             BitmapFrame newPhoto = Resize(thumbnail, photo.PixelWidth, photo.PixelHeight, mode);
             return newPhoto;
@@ -359,62 +320,54 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private void LoadHistogram(FileInfo fileInfo, MagickImage bitmap)
+        public void LoadHistogram(FileItem item)
         {
-            fileInfo.HistogramBlue = new int[256];
-            fileInfo.HistogramGreen = new int[256];
-            fileInfo.HistogramRed = new int[256];
-            fileInfo.HistogramLuminance = new int[256];
-            Dictionary<MagickColor, int> h = bitmap.Histogram();
-            foreach (var i in h)
+            try
             {
-                byte R = i.Key.R;
-                byte G = i.Key.G;
-                byte B = i.Key.B;
-                fileInfo.HistogramBlue[B] += i.Value;
-                fileInfo.HistogramGreen[G] += i.Value;
-                fileInfo.HistogramRed[R] += i.Value;
-                int lum = (R + R + R + B + G + G + G + G) >> 3;
-                fileInfo.HistogramLuminance[lum] += i.Value;
-            }
-            //fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
-            //fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
-            //fileItem.FileInfo.HistogramRed = SmoothHistogram(fileItem.FileInfo.HistogramRed);
-            //fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
-        }
-
-        private unsafe void LoadHistogram(FileItem fileItem, WriteableBitmap bitmap)
-        {
-            fileItem.FileInfo.HistogramBlue = new int[256];
-            fileItem.FileInfo.HistogramGreen = new int[256];
-            fileItem.FileInfo.HistogramRed = new int[256];
-            fileItem.FileInfo.HistogramLuminance = new int[256];
-            using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
-            {
-                for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
+                var fileInfo = item.FileInfo;
+                if (fileInfo == null || fileInfo.ExifTags == null || fileInfo.ExifTags.Items.Count == 0)
                 {
-                    int num1 = bitmapContext.Pixels[i];
-                    byte a = (byte) (num1 >> 24);
-                    int num2 = (int) a;
-                    if (num2 == 0)
-                        num2 = 1;
-                    int num3 = 65280/num2;
-                    byte R = (byte) ((num1 >> 16 & (int) byte.MaxValue)*num3 >> 8);
-                    byte G = (byte) ((num1 >> 8 & (int) byte.MaxValue)*num3 >> 8);
-                    byte B = (byte) ((num1 & (int) byte.MaxValue)*num3 >> 8);
-
-                    fileItem.FileInfo.HistogramBlue[B]++;
-                    fileItem.FileInfo.HistogramGreen[G]++;
-                    fileItem.FileInfo.HistogramRed[R]++;
-                    int lum = (R + R + R + B + G + G + G + G) >> 3;
-                    fileItem.FileInfo.HistogramLuminance[lum]++;
+                    item.RemoveThumbs();
+                    GenerateCache(item);
                 }
+                if (!File.Exists(item.SmallThumb))
+                    return;
+
+                using (MagickImage image = new MagickImage(item.SmallThumb))
+                {
+                    var Blue = new int[256];
+                    var Green = new int[256];
+                    var Red = new int[256];
+                    var Luminance = new int[256];
+                    Dictionary<MagickColor, int> h = image.Histogram();
+                    foreach (var i in h)
+                    {
+                        byte R = i.Key.R;
+                        byte G = i.Key.G;
+                        byte B = i.Key.B;
+                        Blue[B] += i.Value;
+                        Green[G] += i.Value;
+                        Red[R] += i.Value;
+                        int lum = (R + R + R + B + G + G + G + G) >> 3;
+                        Luminance[lum] += i.Value;
+                    }
+                    fileInfo.HistogramBlue = Blue;
+                    fileInfo.HistogramGreen = Green;
+                    fileInfo.HistogramRed = Red;
+                    fileInfo.HistogramLuminance = Luminance;
+                }
+                item.SaveInfo();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to load histogram", ex);
             }
             //fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
             //fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
             //fileItem.FileInfo.HistogramRed = SmoothHistogram(fileItem.FileInfo.HistogramRed);
             //fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
         }
+
 
         public unsafe void Highlight(BitmapFile file, bool under, bool over)
         {
@@ -428,20 +381,20 @@ namespace CameraControl.Core.Classes
             int treshold = 2;
             using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
             {
-                for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
+                for (var i = 0; i < bitmapContext.Width * bitmapContext.Height; i++)
                 {
                     int num1 = bitmapContext.Pixels[i];
-                    byte a = (byte) (num1 >> 24);
-                    int num2 = (int) a;
+                    byte a = (byte)(num1 >> 24);
+                    int num2 = (int)a;
                     if (num2 == 0)
                         num2 = 1;
-                    int num3 = 65280/num2;
+                    int num3 = 65280 / num2;
                     //Color col = Color.FromArgb(a, (byte)((num1 >> 16 & (int)byte.MaxValue) * num3 >> 8),
                     //                           (byte)((num1 >> 8 & (int)byte.MaxValue) * num3 >> 8),
                     //                           (byte)((num1 & (int)byte.MaxValue) * num3 >> 8));
-                    byte R = (byte) ((num1 >> 16 & byte.MaxValue)*num3 >> 8);
-                    byte G = (byte) ((num1 >> 8 & byte.MaxValue)*num3 >> 8);
-                    byte B = (byte) ((num1 & byte.MaxValue)*num3 >> 8);
+                    byte R = (byte)((num1 >> 16 & byte.MaxValue) * num3 >> 8);
+                    byte G = (byte)((num1 >> 8 & byte.MaxValue) * num3 >> 8);
+                    byte B = (byte)((num1 & byte.MaxValue) * num3 >> 8);
 
                     if (under && R < treshold && G < treshold && B < treshold)
                         bitmapContext.Pixels[i] = color1;
@@ -466,7 +419,7 @@ namespace CameraControl.Core.Classes
             file.Metadata.Clear();
             foreach (ValuePair item in fileItem.FileInfo.ExifTags.Items)
             {
-                file.Metadata.Add(new DictionaryItem() {Name = item.Name, Value = item.Value});
+                file.Metadata.Add(new DictionaryItem() { Name = item.Name, Value = item.Value });
             }
             file.BlueColorHistogramPoints = ConvertToPointCollection(fileItem.FileInfo.HistogramBlue);
             file.RedColorHistogramPoints = ConvertToPointCollection(fileItem.FileInfo.HistogramRed);
@@ -551,7 +504,7 @@ namespace CameraControl.Core.Classes
         {
             return LoadImage(fileItem, fullres, ServiceProvider.Settings.ShowFocusPoints);
         }
-        
+
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
             int rotation = 0;
@@ -579,7 +532,7 @@ namespace CameraControl.Core.Classes
                                 Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
                             if (File.Exists(thumb))
                             {
-                                bmpDec = BitmapDecoder.Create(new Uri(thumb),BitmapCreateOptions.None,BitmapCacheOption.OnLoad);
+                                bmpDec = BitmapDecoder.Create(new Uri(thumb), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                                 File.Delete(thumb);
                             }
                         }
@@ -618,7 +571,7 @@ namespace CameraControl.Core.Classes
                     return new WriteableBitmap(bmpDec.Frames[0]);
                 }
 
-                
+
                 var bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
 
 
@@ -655,7 +608,7 @@ namespace CameraControl.Core.Classes
             catch (Exception exception)
             {
                 Log.Error("Error loading image", exception);
-                if (exception.GetType() == typeof (OutOfMemoryException) && fullres)
+                if (exception.GetType() == typeof(OutOfMemoryException) && fullres)
                 {
                     return LoadImage(fileItem, false);
                 }
@@ -689,6 +642,7 @@ namespace CameraControl.Core.Classes
         {
             try
             {
+                PhotoUtils.WaitForFile(fileItem.FileName);
                 Exiv2Helper exiv2Helper = new Exiv2Helper();
                 exiv2Helper.Load(fileItem);
             }
@@ -703,31 +657,31 @@ namespace CameraControl.Core.Classes
             if (fileItem.FileInfo == null || fileItem.FileInfo.Width == 0 || fileItem.FileInfo.Height == 0)
                 return;
             bitmap.Lock();
-            double dw = (double) bitmap.PixelWidth/fileItem.FileInfo.Width;
-            double dh = (double) bitmap.PixelHeight/fileItem.FileInfo.Height;
+            double dw = (double)bitmap.PixelWidth / fileItem.FileInfo.Width;
+            double dh = (double)bitmap.PixelHeight / fileItem.FileInfo.Height;
 
             foreach (Rect focuspoint in fileItem.FileInfo.FocusPoints)
             {
-                DrawRect(bitmap, (int) (focuspoint.X*dw), (int) (focuspoint.Y*dh),
-                    (int) ((focuspoint.X + focuspoint.Width)*dw),
-                    (int) ((focuspoint.Y + focuspoint.Height)*dh), Colors.Aqua, (bitmap.PixelWidth/1000) + 1);
+                DrawRect(bitmap, (int)(focuspoint.X * dw), (int)(focuspoint.Y * dh),
+                    (int)((focuspoint.X + focuspoint.Width) * dw),
+                    (int)((focuspoint.Y + focuspoint.Height) * dh), Colors.Aqua, (bitmap.PixelWidth / 1000) + 1);
             }
             bitmap.Unlock();
         }
 
         private void DrawRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int line)
         {
-            DrawFocusRect(bmp, x1 , y1, x2 , y2 , color, line);
+            DrawFocusRect(bmp, x1, y1, x2, y2, color, line);
         }
 
         private void DrawFocusRect(WriteableBitmap bmp, int x1, int y1, int x2, int y2, Color color, int tick)
         {
-            int width = (x2 - x1)/4;
-            int height = (y2 - y1)/4;
+            int width = (x2 - x1) / 4;
+            int height = (y2 - y1) / 4;
             DrawLineEx(bmp, x1 - (tick / 2), y1, width, 0, color, tick);
             DrawLineEx(bmp, x1, y1, 0, height, color, tick);
 
-            DrawLineEx(bmp, x1 , y2, width, 0, color, tick);
+            DrawLineEx(bmp, x1, y2, width, 0, color, tick);
             DrawLineEx(bmp, x1 + (tick / 2), y2, 0, -height, color, tick);
 
 
@@ -742,7 +696,7 @@ namespace CameraControl.Core.Classes
 
         public void DrawLineEx(WriteableBitmap bmp, int x, int y, int width, int height, Color color, int tick)
         {
-            bmp.DrawLineAa(x, y, x + width, y + height, color,tick);
+            bmp.DrawLineAa(x, y, x + width, y + height, color, tick);
         }
 
         private PointCollection ConvertToPointCollection(int[] values)
@@ -776,16 +730,16 @@ namespace CameraControl.Core.Classes
         {
             int[] smoothedValues = new int[originalValues.Length];
 
-            double[] mask = new double[] {0.25, 0.5, 0.25};
+            double[] mask = new double[] { 0.25, 0.5, 0.25 };
 
             for (int bin = 1; bin < originalValues.Length - 1; bin++)
             {
                 double smoothedValue = 0;
                 for (int i = 0; i < mask.Length; i++)
                 {
-                    smoothedValue += originalValues[bin - 1 + i]*mask[i];
+                    smoothedValue += originalValues[bin - 1 + i] * mask[i];
                 }
-                smoothedValues[bin] = (int) smoothedValue;
+                smoothedValues[bin] = (int)smoothedValue;
             }
 
             return smoothedValues;
@@ -793,9 +747,9 @@ namespace CameraControl.Core.Classes
 
         private static int ConvertColor(Color color)
         {
-            int num = (int) color.A + 1;
-            return (int) color.A << 24 | (int) (byte) ((int) color.R*num >> 8) << 16 |
-                   (int) (byte) ((int) color.G*num >> 8) << 8 | (int) (byte) ((int) color.B*num >> 8);
+            int num = (int)color.A + 1;
+            return (int)color.A << 24 | (int)(byte)((int)color.R * num >> 8) << 16 |
+                   (int)(byte)((int)color.G * num >> 8) << 8 | (int)(byte)((int)color.B * num >> 8);
         }
     }
 }

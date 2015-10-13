@@ -37,10 +37,17 @@ using CameraControl.Core.Interfaces;
 
 namespace CameraControl.Core.Classes.Queue
 {
+    public enum QueueType
+    {
+        Thumb,
+        Cache,
+        Histogram
+    }
+
     public class QueueItemFileItem : IQueueItem
     {
         public FileItem FileItem { get; set; }
-        public bool Generate { get; set; }
+        public QueueType Generate { get; set; }
 
         #region Implementation of IQueueItem
 
@@ -48,17 +55,18 @@ namespace CameraControl.Core.Classes.Queue
         {
             try
             {
-                if (File.Exists(FileItem.SmallThumb))
+                if (FileItem.ItemType != FileItemType.File)
+                    return true;
+
+                switch (Generate)
                 {
-                    var thumb = BitmapLoader.Instance.LoadSmallImage(FileItem);
-                    thumb.Freeze();
-                    FileItem.Thumbnail = thumb;
-                }
-                else
-                {
-                    if (FileItem.ItemType == FileItemType.File)
-                        if (Generate)
-                            BitmapLoader.Instance.GenerateCache(FileItem);
+                    case QueueType.Thumb:
+                        if (File.Exists(FileItem.SmallThumb))
+                        {
+                            var thumb = BitmapLoader.Instance.LoadSmallImage(FileItem);
+                            thumb.Freeze();
+                            FileItem.Thumbnail = thumb;
+                        }
                         else
                         {
                             FileItem.GetExtendedThumb();
@@ -66,9 +74,24 @@ namespace CameraControl.Core.Classes.Queue
                                 ServiceProvider.QueueManager.Add(new QueueItemFileItem
                                 {
                                     FileItem = FileItem,
-                                    Generate = true
+                                    Generate = QueueType.Cache
                                 });
                         }
+                        break;
+                    case QueueType.Cache:
+                        BitmapLoader.Instance.GenerateCache(FileItem);
+                        if (!FileItem.HaveHistogramReady())
+                            ServiceProvider.QueueManager.AddWithLowPriority(new QueueItemFileItem
+                            {
+                                FileItem = FileItem,
+                                Generate = QueueType.Histogram
+                            });
+                        break;
+                    case QueueType.Histogram:
+                        BitmapLoader.Instance.LoadHistogram(FileItem);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             catch (Exception)

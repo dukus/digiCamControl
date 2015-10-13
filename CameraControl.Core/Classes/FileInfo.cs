@@ -44,6 +44,10 @@ namespace CameraControl.Core.Classes
     {
         private int _width;
         private int _height;
+        private int[] _histogramRed;
+        private int[] _histogramBlue;
+        private int[] _histogramGreen;
+        private int[] _histogramLuminance;
         public string InfoLabel { get; set; }
         public int Orientation { get; set; }
 
@@ -74,10 +78,46 @@ namespace CameraControl.Core.Classes
 
         public ValuePairEnumerator ExifTags { get; set; }
         public List<Rect> FocusPoints { get; set; }
-        public int[] HistogramRed { get; set; }
-        public int[] HistogramBlue { get; set; }
-        public int[] HistogramGreen { get; set; }
-        public int[] HistogramLuminance { get; set; }
+
+        public int[] HistogramRed
+        {
+            get { return _histogramRed; }
+            set
+            {
+                _histogramRed = value;
+                NotifyPropertyChanged("HistogramRed");
+            }
+        }
+
+        public int[] HistogramBlue
+        {
+            get { return _histogramBlue; }
+            set
+            {
+                _histogramBlue = value;
+                NotifyPropertyChanged("HistogramBlue");
+            }
+        }
+
+        public int[] HistogramGreen
+        {
+            get { return _histogramGreen; }
+            set
+            {
+                _histogramGreen = value;
+                NotifyPropertyChanged("HistogramGreen");
+            }
+        }
+
+        public int[] HistogramLuminance
+        {
+            get { return _histogramLuminance; }
+            set
+            {
+                _histogramLuminance = value;
+                NotifyPropertyChanged("HistogramLuminance");
+            }
+        }
 
         public FileInfo()
         {

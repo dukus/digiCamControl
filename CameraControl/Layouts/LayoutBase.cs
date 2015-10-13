@@ -48,6 +48,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Classes;
 using CameraControl.Controls.ZoomAndPan;
+using CameraControl.Core.Classes.Queue;
 using CameraControl.ViewModel;
 using Clipboard = System.Windows.Clipboard;
 using ListBox = System.Windows.Controls.ListBox;
@@ -319,6 +320,13 @@ namespace CameraControl.Layouts
             {
                 BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
             }
+            if (!ServiceProvider.Settings.SelectedBitmap.FileItem.HaveHistogramReady())
+                ServiceProvider.QueueManager.AddWithPriority(new QueueItemFileItem
+                {
+                    FileItem = ServiceProvider.Settings.SelectedBitmap.FileItem,
+                    Generate = QueueType.Histogram
+                });
+
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
             ServiceProvider.Settings.SelectedBitmap.Notify();

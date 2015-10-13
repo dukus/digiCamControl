@@ -18,7 +18,7 @@ namespace CameraControl.Core.Classes
 
         public void SetParams(TrackerParameters param)
         {
-            param.ApplicationName = "digiCamControl";
+            param.ApplicationName = ServiceProvider.Branding.ApplicationTitle ?? "digiCamControl";
             param.ApplicationVersion = _applicationVersion;
             param.ScreenResolution = new Size((int) System.Windows.SystemParameters.PrimaryScreenWidth, (int) System.Windows.SystemParameters.PrimaryScreenHeight);
             param.UserLanguage = ServiceProvider.Settings.SelectedLanguage;

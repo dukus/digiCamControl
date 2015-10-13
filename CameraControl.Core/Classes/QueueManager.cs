@@ -43,6 +43,7 @@ namespace CameraControl.Core.Classes
     {
         private BlockingCollection<IQueueItem> PriorityQueue { get; set; }
         private BlockingCollection<IQueueItem> Queue { get; set; }
+        private BlockingCollection<IQueueItem> LowPriorityQueue { get; set; }
         private readonly BackgroundWorker _worker;
         private object _locker = new object();
 
@@ -51,6 +52,7 @@ namespace CameraControl.Core.Classes
         {
             PriorityQueue = new BlockingCollection<IQueueItem>();
             Queue = new BlockingCollection<IQueueItem>();
+            LowPriorityQueue = new BlockingCollection<IQueueItem>();
             _worker = new BackgroundWorker();
             _worker.DoWork += _worker_DoWork;
         }
@@ -70,9 +72,14 @@ namespace CameraControl.Core.Classes
                     if (Queue.Count > 0 && Queue.TryTake(out item))
                     {
                         item.Execute(this);
+                        continue;
                     }
-                    if (Queue.Count == 0 && PriorityQueue.Count == 0)
-                        Thread.Sleep(200);
+                    if (LowPriorityQueue.Count > 0 && LowPriorityQueue.TryTake(out item))
+                    {
+                        item.Execute(this);
+                    }
+                    if (Queue.Count == 0 && PriorityQueue.Count == 0 && LowPriorityQueue.Count == 0)
+                        Thread.Sleep(100);
                 }
                 catch (Exception exception)
                 {
@@ -83,7 +90,17 @@ namespace CameraControl.Core.Classes
 
         public void Clear()
         {
+            while (PriorityQueue.Count > 0)
+            {
+                IQueueItem item;
+                Queue.TryTake(out item);
+            }
             while (Queue.Count > 0)
+            {
+                IQueueItem item;
+                Queue.TryTake(out item);
+            }
+            while (LowPriorityQueue.Count > 0)
             {
                 IQueueItem item;
                 Queue.TryTake(out item);
@@ -97,6 +114,12 @@ namespace CameraControl.Core.Classes
                 _worker.RunWorkerAsync();
         }
 
+        public void AddWithLowPriority(IQueueItem item)
+        {
+            LowPriorityQueue.Add(item);
+            if (!_worker.IsBusy)
+                _worker.RunWorkerAsync();
+        }
         public void Add(IQueueItem item)
         {
             Queue.Add(item);

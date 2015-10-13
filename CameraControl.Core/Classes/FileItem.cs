@@ -545,7 +545,7 @@ namespace CameraControl.Core.Classes
                             ? BitmapLoader.Instance.NoImageThumbnail
                             : BitmapLoader.Instance.DefaultThumbnail;
                         if (!ServiceProvider.Settings.DontLoadThumbnails)
-                            ServiceProvider.QueueManager.AddWithPriority(new QueueItemFileItem { FileItem = this });
+                            ServiceProvider.QueueManager.AddWithPriority(new QueueItemFileItem { FileItem = this,Generate = QueueType.Thumb});
                     }
                 }
                 return _thumbnail;
@@ -647,6 +647,17 @@ namespace CameraControl.Core.Classes
             {
                 Log.Error(e);
             }
+        }
+
+        public bool HaveHistogramReady()
+        {
+            if (FileInfo == null)
+                return false;
+            if (FileInfo.HistogramBlue == null || FileInfo.HistogramBlue.Length == 0)
+                return false;
+            if (FileInfo.ExifTags == null || FileInfo.ExifTags.Items.Count == 0)
+                return false;
+            return true;
         }
 
         public void Dispose()
