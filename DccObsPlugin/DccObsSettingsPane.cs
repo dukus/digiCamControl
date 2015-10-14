@@ -10,15 +10,6 @@ namespace DccObsPlugin
 {
     public class DccObsSettingsPane : AbstractWPFSettingsPane
     {
-        public override void DestroyPane()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetCategory()
-        {
-            return "DCC";
-        }
 
         public override void ApplySettings()
         {

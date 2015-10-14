@@ -21,7 +21,6 @@ namespace Setup
         {
 
             Feature appFeature = new Feature("Application files", "Main application files", true, false, @"INSTALLDIR");
-            Feature obsPlugin = new Feature("Obs Plugin");
             var shortcut = new FileShortcut(appFeature, "digiCamControl", @"%ProgramMenu%\digiCamControl") { WorkingDirectory = @"INSTALLDIR" };
             var shortcutD = new FileShortcut(appFeature, "digiCamControl", @"%Desktop%") { WorkingDirectory = @"INSTALLDIR" };
             var appDir = new Dir(@"digiCamControl",
@@ -72,15 +71,8 @@ namespace Setup
                 );
 
 
-            var obsDir = new Dir(@"OBS\plugins",
-                new File(obsPlugin, @"ObsPlugin\CLRHostPlugin.dll"),
-                new Dir(obsPlugin, "CLRHostPlugin",
-                    new DirFiles(obsPlugin, @"ObsPlugin\CLRHostPlugin\*.*")
-                    ));
-
             var baseDir = new Dir(@"%ProgramFiles%",
                 appDir
-                //obsDir
                 );
 
 
@@ -157,7 +149,7 @@ namespace Setup
             project.ResolveWildCards();
             Compiler.PreserveTempFiles = true;
             Compiler.BuildMsi(project);
-
+            ObsPluginSetup.Execute();
         }
 
     }
