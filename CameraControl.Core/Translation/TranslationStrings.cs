@@ -651,5 +651,6 @@ namespace CameraControl.Core.Translation
         public static string LabelSaveJpg = "Save as JPG";
         public static string LabelPageWidth = "Page width";
         public static string LabelPageHeigh = "Page heigh";
+        public static string LabelFill = "Fill";
     }
 }

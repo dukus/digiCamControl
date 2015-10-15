@@ -125,6 +125,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool Fill
+        {
+            get { return PrintSettings.Fill; }
+            set
+            {
+                PrintSettings.Fill = value;
+                RaisePropertyChanged(() => Fill);
+                InitItems();
+            }
+        }
 
         public PrintViewModel()
         {

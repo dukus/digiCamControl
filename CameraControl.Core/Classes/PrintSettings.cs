@@ -11,6 +11,7 @@
         public int MarginBetweenImages { get; set; }
         public bool Repeat { get; set; }
         public bool Rotate { get; set; }
+        public bool Fill { get; set; }
 
         public PrintSettings()
         {

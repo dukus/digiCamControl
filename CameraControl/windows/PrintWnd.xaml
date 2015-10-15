@@ -30,7 +30,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Background="LightGray">
-            <Viewbox Stretch="Uniform" Margin="10">
+            <Viewbox Stretch="Uniform" Margin="10" ClipToBounds="True">
 
                 <ItemsControl ItemsSource="{Binding Items}" Width="{Binding PageWidth}" Height="{Binding PageHeight}" Background="White" x:Name="ItemsControl">
                     <ItemsControl.ItemsPanel>
@@ -43,7 +43,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModel:PrintItemViewModel}">
                             <Grid Name="_grid" Margin="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.MarginBetweenImages}">
-                                <Image Source="{Binding BitmapSource}">
+                                <Image Source="{Binding BitmapSource}" Stretch="{Binding Fill}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Image.LayoutTransform>
                                         <TransformGroup>
                                             <TransformGroup.Children>
@@ -96,7 +96,7 @@
                 <controls:NumericUpDown Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Minimum="1" Value="{Binding Rows}" Maximum="10" Margin="3"/>
 
                 <Label Content="{translation:TranslateExtension LabelMarginBetweenImages}" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"/>
-                <controls:NumericUpDown Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Minimum="0" Value="{Binding MarginBetweenImages}" Maximum="100" Margin="3"/>
+                <controls:NumericUpDown Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Minimum="-100" Value="{Binding MarginBetweenImages}" Maximum="100" Margin="3"/>
 
                 <Label Content="{translation:TranslateExtension LabelRotate}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right"/>
                 <CheckBox Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Rotate}" Margin="3"/>
@@ -109,6 +109,9 @@
 
                 <Label Content="{translation:TranslateExtension LabelPageHeigh}" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right"/>
                 <controls:NumericUpDown Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Minimum="0" Value="{Binding PageHeight}" Margin="3"/>
+
+                <Label Content="{translation:TranslateExtension LabelFill}" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right"/>
+                <CheckBox Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Fill}" Margin="3"/>
 
                 <Button Grid.Row="11" Grid.ColumnSpan="2" Grid.Column="0" Margin="2"
                         Content="{translation:TranslateExtension LabelSaveJpg}"  Click="JpgButton_Click" />

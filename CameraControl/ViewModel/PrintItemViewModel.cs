@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using CameraControl.Core.Classes;
 using GalaSoft.MvvmLight;
 
@@ -15,6 +11,7 @@ namespace CameraControl.ViewModel
         private PrintViewModel _parent;
         private FileItem _fileItem;
         private BitmapSource _bitmapSource;
+        private string _fill;
 
         public PrintViewModel Parent
         {
@@ -24,6 +21,7 @@ namespace CameraControl.ViewModel
                 _parent = value;
                 if (_parent.Rotate)
                     Angle = 90;
+                Fill = _parent.Fill ? "UniformToFill" : "Uniform";
             }
         }
 
@@ -64,6 +62,16 @@ namespace CameraControl.ViewModel
                 return _bitmapSource;
             }
             set { _bitmapSource = value; }
+        }
+
+        public string Fill
+        {
+            get { return _fill; }
+            set
+            {
+                _fill = value;
+                RaisePropertyChanged(() => Fill);
+            }
         }
 
         public int Angle
