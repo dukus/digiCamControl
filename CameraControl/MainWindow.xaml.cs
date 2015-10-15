@@ -268,15 +268,22 @@ namespace CameraControl
 
         void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
         {
-            MyNotifyIcon.HideBalloonTip();
-            MyNotifyIcon.ShowBalloonTip("Camera disconnected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                MyNotifyIcon.HideBalloonTip();
+                MyNotifyIcon.ShowBalloonTip("Camera disconnected", cameraDevice.LoadProperties().DeviceName,
+                    BalloonIcon.Info);
+            }));
         }
 
         void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
         {
-            MyNotifyIcon.HideBalloonTip();
-            MyNotifyIcon.ShowBalloonTip("Camera connected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
-            SortCameras();
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                MyNotifyIcon.HideBalloonTip();
+                MyNotifyIcon.ShowBalloonTip("Camera connected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
+                SortCameras();
+            }));
         }
 
         private void CheckForUpdate()
