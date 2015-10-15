@@ -161,7 +161,7 @@ namespace CameraControl.Core.Classes
         public void Stop()
         {
             WebServer.Stop();
-            if (_ngrok_process!=null)
+            if (_ngrok_process!=null && !_ngrok_process.HasExited)
             {
                 _ngrok_process.Kill();
             }

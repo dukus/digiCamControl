@@ -429,8 +429,9 @@ namespace CameraControl
                                 Path.GetExtension(fileName));
                 }
 
-                if (session.AllowOverWrite && File.Exists(fileName))
+                if (session.AllowOverWrite&& File.Exists(fileName))
                 {
+                    PhotoUtils.WaitForFile(fileName);
                     File.Delete(fileName);
                 }
 
