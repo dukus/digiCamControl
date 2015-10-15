@@ -613,4 +613,31 @@
 	<string name="MenuExportSession">Export session ...</string>
 	<string name="MenuImportSession">Import session ...</string>
 	<string name="LabelFullSpeed">Full speed</string>
+	<!-- // 12/09/2015 -->
+	<string name="LabelEmailPublicWebAddress">Email public web address</string>
+	<string name="LabelBracketingMode">Bracketing mode</string>
+	<string name="LabelDepthOfFieldBracketing">Depth-of-field bracketing</string>
+	<string name="LabelWhiteBalanceBracketing">White balance bracketing</string>
+	<string name="LabelIsoBracketing">Iso bracketing</string>
+	<string name="LabelBracketingLow">Low value</string>
+	<string name="LabelBracketingHigh">High value</string>
+	<string name="LabelBracketingNumberOfShots">Number Of shots</string>
+	<string name="LabelNoLowValueError">No low value is set</string>
+	<string name="LabelNoHighValueError">No high value is set</string>
+	<string name="LabelWrongValue">Wrong low or high value</string>
+	<string name="LabelWrongFNumber">Aperture cannot be modified</string>
+	<string name="LabelBracketingMMode">Set camera in M mode</string>
+	<string name="LabelTimeLapseCaptureBracketing">Capture with bracketing</string>
+	<string name="LabelZoomToFocus">Always zoom to firs focus point</string>
+	<string name="LabelPreviewFullSize">Preview full size photo</string>
+	<string name="LabelCropMargins">Crop margins (%)</string>
+	<string name="LabelShowActiveArea">Show active area</string>
+	<string name="LabelSetArea">Set</string>
+	<string name="LabelDoneArea">Done</string>
+	<string name="LabelRotateCounterclockwise">Rotate counterclockwise</string>
+	<string name="LabelRotateClockwise">Rotate clockwise</string>
+	<string name="LabelSaveJpg">Save as JPG</string>
+	<string name="LabelPageWidth">Page width</string>
+	<string name="LabelPageHeigh">Page heigh</string>
+	<string name="LabelFill">Fill</string>	
 </resources>
