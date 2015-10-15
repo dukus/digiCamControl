@@ -28,11 +28,16 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             {
                 
                 image.BackgroundColor = new MagickColor(Color.Black);
-                if (conf.AutoRotate)
+                if (conf.ManualRotate)
+                    image.Rotate(item.RotationAngle);
+                else
                 {
-                    ExifProfile profile = image.GetExifProfile();
-                    image.AutoOrient();
-                    profile.SetValue(ExifTag.Orientation, (UInt16)0);
+                    if (conf.AutoRotate)
+                    {
+                        ExifProfile profile = image.GetExifProfile();
+                        image.AutoOrient();
+                        profile.SetValue(ExifTag.Orientation, (UInt16) 0);
+                    }
                 }
                 if (conf.Angle > 0)
                     image.Rotate(conf.Angle);

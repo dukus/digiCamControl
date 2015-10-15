@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,7 @@ using CameraControl.Core.Interfaces;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using ImageMagick;
 
 #endregion
 
@@ -92,7 +94,20 @@ namespace CameraControl.Plugins.ExportPlugins
                 {
                     try
                     {
-                        File.Copy(fileItem.FileName, Path.Combine(destfolder, Path.GetFileName(fileItem.FileName)), true);
+                        var dest = Path.Combine(destfolder, Path.GetFileName(fileItem.FileName));
+                        if (fileItem.RotationAngle == 0)
+                            File.Copy(fileItem.FileName, dest, true);
+                        else
+                        {
+                            using (MagickImage image = new MagickImage(fileItem.FileName))
+                            {
+                                image.BackgroundColor = new MagickColor(Color.Black);
+                                image.Rotate(fileItem.RotationAngle);
+                                image.Format = MagickFormat.Jpeg;
+                                // Save the result
+                                image.Write(dest);
+                            }
+                        }
                     }
                     catch (Exception exception)
                     {

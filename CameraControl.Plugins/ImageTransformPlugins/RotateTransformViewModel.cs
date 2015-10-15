@@ -47,6 +47,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             set { _config["FlipVertical"] = value.ToString(); }
         }
 
+        public bool ManualRotate
+        {
+            get { return _config["ManualRotate"] == "True"; }
+            set { _config["ManualRotate"] = value.ToString(); }
+        }
         private int GetInt(string s)
         {
             if (string.IsNullOrEmpty(s))
