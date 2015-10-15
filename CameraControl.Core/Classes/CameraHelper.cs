@@ -55,6 +55,11 @@ namespace CameraControl.Core.Classes
                 {
                     ServiceProvider.DeviceManager.LastCapturedImage[camera] = "";
                     CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
+                    for (int i = 0; i < property.Delay; i++)
+                    {
+                        StaticHelper.Instance.SystemMessage = "Countig down " + (property.Delay - i);
+                        Thread.Sleep(1000);
+                    }
                     if (property.UseExternalShutter && property.SelectedConfig != null)
                     {
                         ServiceProvider.ExternalDeviceManager.AssertFocus(property.SelectedConfig);

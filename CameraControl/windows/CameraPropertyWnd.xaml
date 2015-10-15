@@ -78,6 +78,10 @@
                 <!--<CheckBox IsChecked="{Binding Path=Global}" Content="Global" Margin="5" ToolTip="System wide available"/>-->
             </StackPanel>
         </GroupBox>
+
+        <Label Content="{T:TranslateExtension LabelCaptureDelay}" Grid.Row="4" Grid.Column="3" HorizontalContentAlignment="Right"/>
+        <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.Delay}" Minimum="0" Grid.Row="4" Grid.Column="4" Margin="2"/>
+
         <Button Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Content="Sync camera date and time"  Name="btn_dateTime" Margin="5" Click="btn_dateTime_Click" />
     </Grid>
 </ontrols:MetroWindow>

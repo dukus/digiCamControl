@@ -191,6 +191,7 @@ namespace CameraControl.Core.Classes
         private LiveviewSettings _liveviewSettings;
         private int _sortOrder;
         private WindowCommandItem _keyTrigger;
+        private int _delay;
 
         public LiveviewSettings LiveviewSettings
         {
@@ -209,6 +210,16 @@ namespace CameraControl.Core.Classes
             {
                 _sortOrder = value;
                 NotifyPropertyChanged("SortOrder");
+            }
+        }
+
+        public int Delay
+        {
+            get { return _delay; }
+            set
+            {
+                _delay = value;
+                NotifyPropertyChanged("Delay");
             }
         }
 
