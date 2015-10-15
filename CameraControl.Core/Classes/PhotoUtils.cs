@@ -189,6 +189,11 @@ namespace CameraControl.Core.Classes
             return false;
         }
 
+
+        /// <summary>
+        /// Create forlder for the specified filename
+        /// </summary>
+        /// <param name="Full path to filename"></param>
         public static void CreateFolder(string filename)
         {
             var folder = Path.GetDirectoryName(filename);
@@ -200,6 +205,24 @@ namespace CameraControl.Core.Classes
                 //SecurityIdentifier everyone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
                 //sec.AddAccessRule(new FileSystemAccessRule(everyone, FileSystemRights.Modify | FileSystemRights.Synchronize, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow));
                 //Directory.SetAccessControl(folder, sec);
+            }
+        }
+
+        public static string GetNextFileName(string file)
+        {
+            if (!File.Exists(file))
+                return file;
+
+            var ext = Path.GetExtension(file);
+            var fileName = Path.GetFileNameWithoutExtension(file);
+            var folder = Path.GetDirectoryName(file);
+            int counter = 0;
+            while (true)
+            {
+                var newfile = Path.Combine(folder, fileName+counter.ToString("0000") + ext);
+                if (!File.Exists(newfile))
+                    return newfile;
+                counter++;
             }
         }
 

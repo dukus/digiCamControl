@@ -43,9 +43,6 @@
         <Label Grid.Row="4" Grid.Column="0" Content="Height" HorizontalAlignment="Right"/>
         <controls:NumericUpDown Grid.Row="4" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding Height}"/>
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Use Live view ruler" HorizontalAlignment="Right"/>
-        <CheckBox Grid.Row="5" Grid.Column="1" Margin="3" IsChecked="{Binding FromLiveView}" VerticalAlignment="Center"/>
-
         <Label Grid.Row="6" Grid.Column="0" Content="Crop margins" HorizontalAlignment="Right"/>
         <CheckBox Grid.Row="6" Grid.Column="1" Margin="3" IsChecked="{Binding CropMargins}" VerticalAlignment="Center"/>
 
@@ -57,5 +54,8 @@
 
         <Label Grid.Row="9" Grid.Column="0" Content="Use live view crop" HorizontalAlignment="Right"/>
         <CheckBox Grid.Row="9" Grid.Column="1" Margin="3" IsChecked="{Binding LiveViewCrop}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="10" Grid.Column="0" Content="Live view selected area" HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="10" Grid.Column="1" Margin="3" IsChecked="{Binding FromLiveView}" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

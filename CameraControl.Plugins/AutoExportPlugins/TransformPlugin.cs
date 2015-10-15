@@ -23,6 +23,8 @@ namespace CameraControl.Plugins.AutoExportPlugins
             {
                 string newFile = Path.Combine(Path.GetDirectoryName(filename),
                     Path.GetFileNameWithoutExtension(filename) + "_transformed" + ".jpg");
+                newFile = PhotoUtils.GetNextFileName(newFile);
+
                 File.Copy(outfile, newFile, true);
 
                 if (ServiceProvider.Settings.DefaultSession.GetFile(newFile) == null)
