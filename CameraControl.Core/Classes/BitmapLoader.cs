@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -115,7 +116,7 @@ namespace CameraControl.Core.Classes
             set { _noImageThumbnail = value; }
         }
 
-
+        [HandleProcessCorruptedStateExceptions] 
         public void GenerateCache(FileItem fileItem)
         {
             bool deleteFile = false;
@@ -492,7 +493,8 @@ namespace CameraControl.Core.Classes
         {
             return LoadImage(fileItem, fullres, ServiceProvider.Settings.ShowFocusPoints);
         }
-
+        
+        [HandleProcessCorruptedStateExceptions] 
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
             if (fileItem == null)
