@@ -132,12 +132,34 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 Max1 = 99,
                 Default1 = 30,
                 Param1Visible = true,
-                Name2 = "wavelength",
+                Name2 = "Wave length",
                 Min2 = 0,
                 Max2 = 365,
                 Default2 = 135,
                 Param2Visible = true
 
+            });
+            Effects.Add(new EffectType()
+            {
+                Name = "BlueShift",
+            });
+            Effects.Add(new EffectType()
+            {
+                Name = "Radial Blur",
+                Name1 = "Degrees",
+                Min1 = 0,
+                Max1 = 100,
+                Default1 = 10,
+                Param1Visible = true
+            });
+            Effects.Add(new EffectType()
+            {
+                Name = "Raise",
+                Name1 = "Degrees",
+                Min1 = -200,
+                Max1 = +200,
+                Default1 = 20,
+                Param1Visible = true
             });
             _selectedEffect = Effects[SelectedMode];
         }

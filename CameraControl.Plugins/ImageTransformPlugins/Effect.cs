@@ -46,6 +46,15 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     case 6:
                         image.Wave(conf.Param1, conf.Param2);
                         break;
+                    case 7:
+                        image.BlueShift();
+                        break;
+                    case 8:
+                        image.RotationalBlur(conf.Param1);
+                        break;
+                    case 9:
+                        image.Raise(conf.Param1);
+                        break;
                 }
                 image.Format = MagickFormat.Jpeg;
                 image.Write(dest);
