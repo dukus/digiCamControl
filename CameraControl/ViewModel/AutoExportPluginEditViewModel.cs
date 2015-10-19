@@ -27,6 +27,7 @@ namespace CameraControl.ViewModel
         public GalaSoft.MvvmLight.Command.RelayCommand<string> AddTransforPluginCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<TransformPluginItem> RemoveTransforPluginCommand { get; set; }
         public RelayCommand PreviewCommand { get; set; }
+        public RelayCommand ApplyCommand { get; set; }
         
         public AutoExportPluginConfig Config
         {
@@ -133,6 +134,14 @@ namespace CameraControl.ViewModel
             RemoveTransforPluginCommand =
                 new GalaSoft.MvvmLight.Command.RelayCommand<TransformPluginItem>(RemoveTransforPlugin);
             PreviewCommand = new RelayCommand(Preview);
+            ApplyCommand = new RelayCommand(Apply);
+        }
+
+        private void Apply()
+        {
+            PhotoSession.ApplyPlugin(Config);
+            if (Config.IsError)
+                MessageBox.Show(Config.Error);
         }
 
         public void Preview()

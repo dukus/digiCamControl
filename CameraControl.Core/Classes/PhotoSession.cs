@@ -450,8 +450,11 @@ namespace CameraControl.Core.Classes
             AutoExportPluginConfigs.Remove(plugin);
         }
 
-        private void ApplyPlugin(AutoExportPluginConfig plugin)
+        public static void ApplyPlugin(AutoExportPluginConfig plugin)
         {
+            plugin.IsError = true;
+            plugin.Error = "";
+            plugin.IsRedy = true;
             var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
             try
             {
