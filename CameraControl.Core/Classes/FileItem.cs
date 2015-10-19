@@ -188,7 +188,17 @@ namespace CameraControl.Core.Classes
                 NotifyPropertyChanged("RotationAngle");
             }
         }
-
+        
+        [XmlAttribute]
+        public bool Transformed
+        {
+            get { return _transformed; }
+            set
+            {
+                _transformed = value;
+                NotifyPropertyChanged("Transformed");
+            }
+        }
 
         [XmlIgnore]
         public bool Loading
@@ -488,11 +498,20 @@ namespace CameraControl.Core.Classes
             try
             {
                 if (File.Exists(SmallThumb))
+                {
+                    PhotoUtils.WaitForFile(SmallThumb);
                     File.Delete(SmallThumb);
+                }
                 if (File.Exists(LargeThumb))
+                {
+                    PhotoUtils.WaitForFile(LargeThumb);
                     File.Delete(LargeThumb);
+                }
                 if (File.Exists(InfoFile))
+                {
+                    PhotoUtils.WaitForFile(InfoFile);
                     File.Delete(InfoFile);
+                }
             }
             catch (Exception ex)
             {
@@ -510,6 +529,7 @@ namespace CameraControl.Core.Classes
         private bool _loading;
         private int _autoRotation;
         private int _rotation;
+        private bool _transformed;
 
         public int RotationAngle
         {

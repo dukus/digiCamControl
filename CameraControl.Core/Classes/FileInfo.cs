@@ -53,24 +53,30 @@ namespace CameraControl.Core.Classes
 
         public int Width
         {
-            get { return _width; }
+            get
+            {
+                if (_width == 0)
+                    _width = 4000;
+                return _width;
+            }
             set
             {
                 _width = value;
-                if (_width == 0)
-                    _width = 2000;
                 NotifyPropertyChanged("Width");
             }
         }
 
         public int Height
         {
-            get { return _height; }
+            get
+            {
+                if (_height == 0)
+                    _height = 3000;
+                return _height;
+            }
             set
             {
                 _height = value;
-                if (_height == 0)
-                    _height = 2000;
                 NotifyPropertyChanged("Height");
             }
         }

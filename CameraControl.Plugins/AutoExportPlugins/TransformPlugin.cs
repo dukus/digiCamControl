@@ -32,6 +32,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         FileItem im = new FileItem(newFile);
+                        im.Transformed = true;
                         var i = ServiceProvider.Settings.DefaultSession.Files.IndexOf(item);
                         if (ServiceProvider.Settings.DefaultSession.Files.Count - 1 == i)
                         {
@@ -51,6 +52,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 File.Copy(outfile, filename, true);
                 item.IsLoaded = false;
                 item.RemoveThumbs();
+                item.Transformed = true;
             }
             // remove unused file
             if (outfile != item.FileName)

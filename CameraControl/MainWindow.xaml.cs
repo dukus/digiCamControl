@@ -483,7 +483,7 @@ namespace CameraControl
                 {
                     try
                     {
-                        _selectedItem = session.AddFile(fileName);
+                        _selectedItem = session.GetNewFileItem(fileName);
                         _selectedItem.BackupFileName = backupfile;
                         _selectedItem.Series = session.Series;
                         _selectedItem.AddTemplates(eventArgs.CameraDevice, session);
@@ -513,6 +513,11 @@ namespace CameraControl
                     }
                 }
 
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    _selectedItem.RemoveThumbs();
+                    session.Add(_selectedItem);
+                }));
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
                 {

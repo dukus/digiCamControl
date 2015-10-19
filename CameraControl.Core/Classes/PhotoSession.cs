@@ -604,6 +604,33 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public FileItem Add(FileItem item)
+        {
+            lock (_locker)
+            {
+                Files.Add(item);
+                return item;
+            }
+        }
+
+        /// <summary>
+        /// Will return a new file item based on file name parameter
+        /// If file already added then will retun that file item
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public FileItem GetNewFileItem(string fileName)
+        {
+            lock (_locker)
+            {
+                FileItem oitem = GetFile(fileName);
+                if (oitem != null)
+                    return oitem;
+                FileItem item = new FileItem(fileName);
+                return item;
+            }
+        }
+
         public bool ContainFile(string fileName)
         {
             lock (_locker)

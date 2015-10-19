@@ -44,6 +44,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
+using ImageMagick;
 using MahApps.Metro;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;

@@ -153,6 +153,8 @@ namespace CameraControl.Core.Classes
 
         public static void WaitForFile(string file)
         {
+            if (!File.Exists(file))
+                return;
             int retry = 15;
             while (IsFileLocked(file) && retry > 0)
             {

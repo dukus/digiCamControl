@@ -130,7 +130,10 @@ namespace CameraControl.Core.Classes
 
             if (fileItem.Loading)
                 return;
+
             fileItem.Loading = true;
+
+            PhotoUtils.WaitForFile(fileItem.FileName);
             string filename = fileItem.FileName;
             if (fileItem.IsMovie)
             {
@@ -503,7 +506,7 @@ namespace CameraControl.Core.Classes
                 return null;
             if (File.Exists(fileItem.InfoFile))
                 fileItem.LoadInfo();
-            else
+            if (fileItem.FileInfo == null)
                 fileItem.FileInfo = new FileInfo();
 
             try
@@ -548,7 +551,7 @@ namespace CameraControl.Core.Classes
                 var bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
 
 
-                if (showfocuspoints)
+                if (showfocuspoints && !fileItem.Transformed)
                     DrawFocusPoints(fileItem, bitmap);
 
 

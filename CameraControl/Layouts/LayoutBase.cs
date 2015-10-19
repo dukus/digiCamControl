@@ -321,7 +321,7 @@ namespace CameraControl.Layouts
                 BitmapLoader.Instance.GenerateCache(ServiceProvider.Settings.SelectedBitmap.FileItem);
             }
             if (!ServiceProvider.Settings.SelectedBitmap.FileItem.HaveHistogramReady())
-                ServiceProvider.QueueManager.AddWithPriority(new QueueItemFileItem
+                ServiceProvider.QueueManager.Add(new QueueItemFileItem
                 {
                     FileItem = ServiceProvider.Settings.SelectedBitmap.FileItem,
                     Generate = QueueType.Histogram
