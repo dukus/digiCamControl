@@ -125,10 +125,6 @@
       <HintPath>..\packages\Eagle.1.0.5749.32588\lib\Eagle.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Facebook.7.0.9-beta\lib\net40-client\Facebook.dll</HintPath>
-    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37223, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -141,8 +137,7 @@
       <HintPath>..\refs\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
     <Reference Include="GongSolutions.Wpf.DragDrop">
-      <HintPath>..\packages\gong-wpf-dragdrop.1.0.0-ALPHA010\lib\net40\GongSolutions.Wpf.DragDrop.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\gong-wpf-dragdrop.1.0.0-ALPHA011\lib\net40\GongSolutions.Wpf.DragDrop.dll</HintPath>
     </Reference>
     <Reference Include="Griffin.Networking">
       <HintPath>..\packages\Griffin.Networking.0.5.7\lib\net40\Griffin.Networking.dll</HintPath>
@@ -176,15 +171,14 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Magick.NET-x86, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
-      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0019\lib\net40-client\Magick.NET-x86.dll</HintPath>
+      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0020\lib\net40-client\Magick.NET-x86.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Magick.NET.Core">
-      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0019\lib\net40-client\Magick.NET.Core.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0020\lib\net40-client\Magick.NET.Core.dll</HintPath>
     </Reference>
     <Reference Include="Magick.NET.Wrapper-x86, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
-      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0019\lib\net40-client\Magick.NET.Wrapper-x86.dll</HintPath>
+      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.0.0020\lib\net40-client\Magick.NET.Wrapper-x86.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.3.182, Culture=neutral, processorArchitecture=MSIL">
@@ -198,7 +192,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1-beta1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">

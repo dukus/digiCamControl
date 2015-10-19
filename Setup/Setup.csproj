@@ -11,7 +11,7 @@
     <AssemblyName>Setup</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>c34a7fdb</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>a7b48619</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,8 +55,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.1.0.27.3-HotFix\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\WixSharp.1.0.28.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,13 +66,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WixSharp, Version=1.0.27.3, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.1.0.27.3-HotFix\lib\WixSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="WixSharp, Version=1.0.28.0, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WixSharp.1.0.28.0\lib\WixSharp.dll</HintPath>
     </Reference>
     <Reference Include="WixSharp.UI, Version=1.0.27.3, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.1.0.27.3-HotFix\lib\WixSharp.UI.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WixSharp.1.0.28.0\lib\WixSharp.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -98,12 +97,12 @@ $(TargetPath)</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\packages\WixSharp.1.0.27.3-HotFix\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.0.27.3-HotFix\build\WixSharp.targets')" />
+  <Import Project="..\packages\WixSharp.1.0.28.0\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.0.28.0\build\WixSharp.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WixSharp.1.0.27.3-HotFix\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.0.27.3-HotFix\build\WixSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\WixSharp.1.0.28.0\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.0.28.0\build\WixSharp.targets'))" />
   </Target>
-  <UsingTask AssemblyFile="packages\WixSharp.1.0.27.3-HotFix\build\SetEnvVar.dll" TaskName="SetEnvVar" />
+  <UsingTask AssemblyFile="packages\WixSharp.1.0.28.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
 </Project>
