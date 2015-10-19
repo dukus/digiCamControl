@@ -270,7 +270,7 @@ namespace CameraControl.Layouts
                             Color.FromArgb(128, 128, 128, 128));
                         bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2),
                             Color.FromArgb(128, 128, 128, 128));
-
+                        bitmap.DrawRectangle(fw - (dw/2), fh - (dh/2), fw + (dw/2), fh + (dh/2), Colors.White);
                         bitmap.Freeze();
                         ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
                     }
