@@ -99,7 +99,7 @@
     <string name="ButtonEdit">Edit</string> 
     <string name="ButtonAutoFocus">_Auto Focus</string> 
     <string name="ButtonCapture">_Capture</string> 
-    <string name="ButtonRecordMovie">Record movie</string> 
+    <string name="ButtonRecordMovie">Record video</string> 
     <string name="ButtonFreezeImage">Freeze Image</string> 
     <string name="ButtonStart">Start</string> 
     <string name="ButtonPreview">Preview</string> 
@@ -111,7 +111,7 @@
     <string name="ButtonCapturePhotos">Capture photos</string> 
     <string name="ButtonStartTimeLapse">Start TimeLapse</string> 
     <string name="ButtonStopTimeLapse">Stop TimeLapse</string> 
-    <string name="ButtonCreateMovie">Create movie</string> 
+    <string name="ButtonCreateMovie">Create video</string> 
     
     <string name="ButtonLocateLogFile">Locate log file</string> 
 
@@ -122,7 +122,7 @@
     <string name="LabelPreview">Preview</string> 
     <string name="LabelPlaySound">Play sound after photo taken</string> 
     <string name="LabelAutoPreview">Auto preview</string> 
-    <string name="LabelPreviewAfterCapture">Preview image after capture in fullscreen</string> 
+    <string name="LabelPreviewAfterCapture">Preview image after capture in full screen</string> 
     <string name="LabelPreviewTime">Preview time in sec : </string> 
     <string name="LabelPreviewInLIveView">Preview image after shot in live view</string> 
     <string name="LabelLIveViewImageFreeze">Live view image freeze in sec : </string> 
@@ -144,7 +144,7 @@
     <string name="LabelFileNameTemplate">File Name Template :</string> 
     <string name="LabelFileNameTemplateToolTip">$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4</string> 
     <string name="LabelCounter">Counter :</string> 
-    <string name="LabelUseOriginal">Use original filename gave by the camera</string> 
+    <string name="LabelUseOriginal">Use original file name gave by the camera</string> 
     <string name="LabelUseOriginalToolTip">This option isn't works with WIA driver</string> 
     <string name="LabelDontDownloadPhotos">Don't download photos to PC</string> 
     <string name="LabelAlowFolderChange">Allow folder change using image browser</string> 
@@ -184,13 +184,13 @@
     <string name="LabelNumberOfPhotos">Number of photos</string> 
     <string name="LabelDontAutofocusOnEveryCapture">Don't autofocus on every capture</string> 
     <string name="LabelCaptureInterval">Capture interval (HH:MM:SS)</string> 
-    <string name="LabelMovieLenght">Movie length (HH:MM:SS)</string> 
-    <string name="LabelMovieSettings">Movie settings</string> 
+    <string name="LabelMovieLenght">Video length (HH:MM:SS)</string> 
+    <string name="LabelMovieSettings">Video settings</string> 
     <string name="LabelVideoFormat">Video format</string> 
     <string name="LabelOutputFile">Output file</string> 
     <string name="LabelFps">Fps</string> 
     <string name="LabelFillImage">Fill image</string> 
-    <string name="LabelCreateMovie">Create movie</string> 
+    <string name="LabelCreateMovie">Create video</string> 
     <string name="LabelAddVirtualMovingToVideo">Add virtual moving to video</string> 
     <string name="LabelMovingSurface">Moving surface (%):</string> 
     <string name="LabelMovingDirection">Moving direction:</string> 
@@ -272,15 +272,15 @@
     <!-- 07/11/2012 -->
      <string name="ButtonGetRawCodec">Get raw codec</string>
     <!-- 08/11/2012 -->
-     <string name="LabelErrorRecordMovie">Error start movie recording</string>
+     <string name="LabelErrorRecordMovie">Error start video recording</string>
      <string name="LabelNoCardInserted">No card inserted</string>
      <string name="LabelCardError">Card Error</string>
      <string name="LabelCardNotFormatted">Card not formatted</string>
      <string name="LabelNoFreeAreaInCard">No free area in the card</string>
      <string name="LabelCardBufferNotEmpty">There is data whose recording destination is a card in the buffer.</string>
      <string name="LabelPcBufferNotEmpty">There is data whose recording destination is the PC in the buffer.</string>
-     <string name="LabelBufferNotEmpty">There is movie data in the buffer. </string>
-     <string name="LabelRecordInProgres">During movie file recording</string>
+     <string name="LabelBufferNotEmpty">There is video data in the buffer. </string>
+     <string name="LabelRecordInProgres">During video file recording</string>
      <string name="LabelCardProtected">Card protected</string>
      <string name="LabelDuringEnlargedDisplayLiveView">During enlarged display of Live view</string>
      <string name="LabelWrongLiveViewType">The set live view selector is the live view photography.</string>
@@ -339,7 +339,7 @@
     <string name="LabelApplicationError">Application Error</string>
     <string name="LabelWiaNotInstalled">WIA 2.0 not installed</string>
     <string name="LabelRestartTheApplication">Restart the application !</string>
-    <string name="LabelOutOfMemory">The application run out of memory. Application will shutdown! </string>
+    <string name="LabelOutOfMemory">The application run out of memory. Application will shut down! </string>
     <string name="LabelApplicationAlreadyRunning">Application already running</string>
     <string name="LabelDeleteSession">Delete session</string>
     <string name="LabelStartCapture">Start Capture</string>
@@ -607,7 +607,7 @@
 	<string name="MenuPlugins">Plugins</string>
 	<string name="LabelAutorotate">Auto rotate image</string>
 	<string name="MenuCameraProperty">Camera property</string>
-	<string name="LabelShowThumbInfo">Show info next to thubnail</string>
+	<string name="LabelShowThumbInfo">Show info next to thumbnail</string>
 	<string name="MenuLayoutPortrait">Portrait</string>
 	<string name="MenuLayoutLandscape">Landscape</string>
 	<string name="MenuExportSession">Export session ...</string>
@@ -634,7 +634,7 @@
 	<string name="LabelShowActiveArea">Show active area</string>
 	<string name="LabelSetArea">Set</string>
 	<string name="LabelDoneArea">Done</string>
-	<string name="LabelRotateCounterclockwise">Rotate counterclockwise</string>
+	<string name="LabelRotateCounterclockwise">Rotate counter clockwise</string>
 	<string name="LabelRotateClockwise">Rotate clockwise</string>
 	<string name="LabelSaveJpg">Save as JPG</string>
 	<string name="LabelPageWidth">Page width</string>

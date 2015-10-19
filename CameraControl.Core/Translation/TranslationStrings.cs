@@ -75,7 +75,7 @@ namespace CameraControl.Core.Translation
         public static string ButtonEdit = "Edit";
         public static string ButtonAutoFocus = "_Auto Focus";
         public static string ButtonCapture = "_Capture";
-        public static string ButtonRecordMovie = "Record movie";
+        public static string ButtonRecordMovie = "Record video";
         public static string ButtonFreezeImage = "Freeze Image";
         public static string ButtonStart = "Start";
         public static string ButtonPreview = "Preview";
@@ -87,7 +87,7 @@ namespace CameraControl.Core.Translation
         public static string ButtonCapturePhotos = "Capture photos";
         public static string ButtonStartTimeLapse = "Start TimeLapse";
         public static string ButtonStopTimeLapse = "Stop TimeLapse";
-        public static string ButtonCreateMovie = "Create movie";
+        public static string ButtonCreateMovie = "Create video";
 
         public static string ButtonLocateLogFile = "Locate log file";
 
@@ -169,13 +169,13 @@ namespace CameraControl.Core.Translation
         public static string LabelNumberOfPhotos = "Number of photos";
         public static string LabelDontAutofocusOnEveryCapture = "Don't autofocus on every capture";
         public static string LabelCaptureInterval = "Capture interval (HHMMSS)";
-        public static string LabelMovieLenght = "Movie length (HHMMSS)";
-        public static string LabelMovieSettings = "Movie settings";
+        public static string LabelMovieLenght = "Video length (HHMMSS)";
+        public static string LabelMovieSettings = "Video settings";
         public static string LabelVideoFormat = "Video format";
         public static string LabelOutputFile = "Output file";
         public static string LabelFps = "Fps";
         public static string LabelFillImage = "Fill image";
-        public static string LabelCreateMovie = "Create movie";
+        public static string LabelCreateMovie = "Create video";
         public static string LabelAddVirtualMovingToVideo = "Add virtual moving to video";
         public static string LabelMovingSurface = "Moving surface (%)";
         public static string LabelMovingDirection = "Moving direction";
@@ -261,7 +261,7 @@ namespace CameraControl.Core.Translation
         // 07/11/2012
         public static string ButtonGetRawCodec = "Get raw codec";
         // 08/11/2012
-        public static string LabelErrorRecordMovie = "Error start movie recording";
+        public static string LabelErrorRecordMovie = "Error start video recording";
         public static string LabelNoCardInserted = "No card inserted";
         public static string LabelCardError = "Card Error";
         public static string LabelCardNotFormatted = "Card not formatted";
@@ -273,8 +273,8 @@ namespace CameraControl.Core.Translation
         public static string LabelPcBufferNotEmpty =
             "There is data whose recording destination is the PC in the buffer.";
 
-        public static string LabelBufferNotEmpty = "There is movie data in the buffer. ";
-        public static string LabelRecordInProgres = "During movie file recording";
+        public static string LabelBufferNotEmpty = "There is video data in the buffer. ";
+        public static string LabelRecordInProgres = "During video file recording";
         public static string LabelCardProtected = "Card protected";
         public static string LabelDuringEnlargedDisplayLiveView = "During enlarged display of Live view";
         public static string LabelWrongLiveViewType = "The set live view selector is the live view photography.";
@@ -470,7 +470,7 @@ namespace CameraControl.Core.Translation
         public static string LabelMetadata = "Metadata";
         public static string LabelFullSize = "Full size image";
         public static string LabelWifi = "Connect with DSLRDASHBOARDSERVER";
-        public static string ButtonRecordStopMovie = "Stop Record movie";
+        public static string ButtonRecordStopMovie = "Stop record video";
         public static string LabelOverlay = "Overlay";
         public static string LabelGenerateThumbs = "Generate Thumbnails";
         public static string LabelPlay = "Play";
