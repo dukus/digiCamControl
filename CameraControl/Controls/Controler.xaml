@@ -105,6 +105,24 @@
                             </ComboBox>
                         </Border>
                     </StackPanel>
+                    <ListBox ItemsSource="{Binding Path=SelectedCameraDevice.Properties}" HorizontalAlignment="Left">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2" >
+                                    <Label Content="{Binding Path=Name, Converter={StaticResource converter}}" Padding="1"/>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=ErrorColor}" >
+                                        <ComboBox IsEnabled="{Binding Path=IsEnabled}" ItemsSource="{Binding Path=Values}" SelectedValue="{Binding Path=Value}" ToolTip="{Binding Value}" Width="120">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Converter={StaticResource converter}}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

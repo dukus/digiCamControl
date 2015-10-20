@@ -12,7 +12,17 @@ namespace CameraControl.Devices.Nikon
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
             base.Init(deviceDescriptor);
-            AdvancedProperties.Add(InitFocalLength());
+            Properties.Add(InitFocalLength());
+            ExposureCompensation = new PropertyValue<int> {Available = false};
+            ExposureMeteringMode = new PropertyValue<int> {Available = false};
+            FNumber = new PropertyValue<int> {Available = false};
+            IsoNumber = new PropertyValue<int> {Available = false};
+            CompressionSetting = new PropertyValue<int> {Available = false};
+            Mode = new PropertyValue<uint>() {Available = false};
+            ShutterSpeed = new PropertyValue<long>() {Available = false};
+            WhiteBalance = new PropertyValue<long>() {Available = false};
+            FocusMode = new PropertyValue<long>() {Available = false};
+
             StillImageDevice imageDevice = StillImageDevice as StillImageDevice;
             if (imageDevice != null)
                 imageDevice.DeviceEvent += StillImageDevice_DeviceEvent;

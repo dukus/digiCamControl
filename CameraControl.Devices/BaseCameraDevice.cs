@@ -482,6 +482,7 @@ namespace CameraControl.Devices
         }
 
         private AsyncObservableCollection<PropertyValue<long>> _advancedProperties;
+        private AsyncObservableCollection<PropertyValue<long>> _properties;
 
         public AsyncObservableCollection<PropertyValue<long>> AdvancedProperties
         {
@@ -490,6 +491,16 @@ namespace CameraControl.Devices
             {
                 _advancedProperties = value;
                 NotifyPropertyChanged("AdvancedProperties");
+            }
+        }
+
+        public AsyncObservableCollection<PropertyValue<long>> Properties
+        {
+            get { return _properties; }
+            set
+            {
+                _properties = value;
+                NotifyPropertyChanged("Properties");
             }
         }
 
@@ -528,6 +539,7 @@ namespace CameraControl.Devices
         {
             IsChecked = true;
             AdvancedProperties = new AsyncObservableCollection<PropertyValue<long>>();
+            Properties = new AsyncObservableCollection<PropertyValue<long>>();
             Capabilities = new List<CapabilityEnum>();
         }
 

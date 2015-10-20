@@ -168,6 +168,7 @@ namespace CameraControl.Devices
         /// </value>
         AsyncObservableCollection<PropertyValue<long>> AdvancedProperties { get; set; }
 
+        AsyncObservableCollection<PropertyValue<long>> Properties { get; set; }
         /// <summary>
         /// Gets files stored in card.
         /// </summary>
