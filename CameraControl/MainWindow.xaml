@@ -160,7 +160,7 @@
             </ItemsControl>
         </WrapPanel>
         <!--</Controls:MetroContentControl>-->
-        <StackPanel Grid.Row="2" Grid.RowSpan="4" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Orientation="Horizontal">
             <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"
                       Style="{DynamicResource MetroExpanderEx}">
                 <Expander.Header>

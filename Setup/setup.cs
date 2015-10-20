@@ -82,7 +82,7 @@ namespace Setup
                 new Binary(@"vcredist_x86.exe"),
                 new ManagedAction(@"InstallCRTAction",
                     Return.check,
-                    When.After,
+                    When.Before,
                     Step.LaunchConditions,
                     Condition.NOT_Installed,
                     Sequence.InstallUISequence),
