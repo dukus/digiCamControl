@@ -373,7 +373,10 @@ namespace CameraControl.Layouts
                                                  {
                                                      ImageLIst.SelectedIndex = 0;
                                                      if (ImageLIst.Items.Count == 0)
+                                                     {
                                                          ServiceProvider.Settings.SelectedBitmap.DisplayImage = null;
+                                                         ServiceProvider.Settings.SelectedBitmap.Preview = null;
+                                                     }
                                                  }));
             }
             if (e.PropertyName == "HighlightOverExp")
