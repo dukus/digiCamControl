@@ -654,5 +654,6 @@ namespace CameraControl.Core.Translation
         public static string LabelFill = "Fill";
         // 19/10/2015
         public static string LabelApplyToImage = "Apply to selected image";
+        public static string LabelLiveviewInSecMonitor = "Live view in secondary monitor";
     }
 }

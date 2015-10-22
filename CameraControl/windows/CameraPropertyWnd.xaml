@@ -59,7 +59,7 @@
         <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.CounterInc}" Minimum="1" Grid.Row="5" Grid.Column="2" Margin="2"/>
 
         <Label Content="{T:TranslateExtension LabelUseExternalShutterRelease}" Grid.Column="1" Grid.Row="6" HorizontalContentAlignment="Right"/>
-        <CheckBox Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.UseExternalShutter}" Margin="2"/>
+        <CheckBox Grid.Column="2" Grid.Row="6"  Margin="3" VerticalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.UseExternalShutter}"/>
 
         <Label Content="{T:TranslateExtension LabelUseConfiguration}" Grid.Column="1" Grid.Row="7" HorizontalContentAlignment="Right"/>
         <ComboBox Grid.Column="2" Grid.Row="7" Margin="3"  ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalShutters}" DisplayMemberPath="Name" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SelectedConfig}"/>
@@ -81,6 +81,10 @@
 
         <Label Content="{T:TranslateExtension LabelCaptureDelay}" Grid.Row="4" Grid.Column="3" HorizontalContentAlignment="Right"/>
         <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.Delay}" Minimum="0" Grid.Row="4" Grid.Column="4" Margin="2"/>
+
+        <Label Content="{T:TranslateExtension LabelLiveviewInSecMonitor}" ToolTip="{T:TranslateExtension LabelLiveviewInSecMonitor}" Grid.Column="3" Grid.Row="5" HorizontalContentAlignment="Right"/>
+        <CheckBox Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.LiveViewInSecMonitor}" Margin="3"/>
+
 
         <Button Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Content="Sync camera date and time"  Name="btn_dateTime" Margin="5" Click="btn_dateTime_Click" />
     </Grid>

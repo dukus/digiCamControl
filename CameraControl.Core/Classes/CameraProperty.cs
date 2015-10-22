@@ -192,6 +192,7 @@ namespace CameraControl.Core.Classes
         private int _sortOrder;
         private WindowCommandItem _keyTrigger;
         private int _delay;
+        private bool _liveViewInSecMonitor;
 
         public LiveviewSettings LiveviewSettings
         {
@@ -230,6 +231,16 @@ namespace CameraControl.Core.Classes
             {
                 _keyTrigger = value;
                 NotifyPropertyChanged("KeyTrigger");
+            }
+        }
+
+        public bool LiveViewInSecMonitor
+        {
+            get { return _liveViewInSecMonitor; }
+            set
+            {
+                _liveViewInSecMonitor = value;
+                NotifyPropertyChanged("LiveViewInSecMonitor");
             }
         }
 

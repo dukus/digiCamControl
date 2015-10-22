@@ -174,6 +174,22 @@ namespace CameraControl.windows
         }
 
 
+        private void ShowInSecMonitor()
+        {
+            var allScreens =
+                System.Windows.Forms.Screen.AllScreens.ToList();
+            foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
+            {
+                Left = r1.Left;
+                Top = r1.Top;
+                Width = r1.Width;
+                Height = r1.Height;
+                Topmost = true;
+                break;
+            }
+            WindowState = WindowState.Maximized;
+        }
+
         #region Implementation of IWindow
 
         public void ExecuteCommand(string cmd, object param)
@@ -206,6 +222,8 @@ namespace CameraControl.windows
                             {
                                 Activate();
                                 Focus();
+                                if (cameraparam.LoadProperties().LiveViewInSecMonitor)
+                                    ShowInSecMonitor();
                                 return;
                             }
                             DataContext = new LiveViewViewModel(cameraparam);
@@ -214,6 +232,8 @@ namespace CameraControl.windows
                             Show();
                             Activate();
                             Focus();
+                            if (cameraparam.LoadProperties().LiveViewInSecMonitor)
+                                ShowInSecMonitor();
                         }
                         catch (Exception exception)
                         {
