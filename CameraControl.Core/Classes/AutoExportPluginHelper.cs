@@ -24,7 +24,11 @@ namespace CameraControl.Core.Classes
                 var plugin = enumerator["TransformPlugin"];
                 var tp = ServiceProvider.PluginManager.GetImageTransformPlugin(plugin);
                 if (tp != null)
+                {
                     outfile = tp.Execute(item, outfile, outfile, enumerator);
+                    ServiceProvider.Analytics.TransformPluginExecute(plugin);
+                    Log.Debug("TransformPlugin executed " + plugin);
+                }
             }
             return outfile;
         }

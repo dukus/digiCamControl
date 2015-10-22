@@ -143,5 +143,9 @@ namespace CameraControl.Core.Classes
             SendEvent("Plugin", command, null);
         }
 
+        public void TransformPluginExecute(string command)
+        {
+            SendEvent("TransformPlugin", command, null);
+        }
     }
 }

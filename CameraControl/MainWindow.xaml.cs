@@ -503,6 +503,7 @@ namespace CameraControl
                     {
                         pl.Execute(_selectedItem, plugin);
                         ServiceProvider.Analytics.PluginExecute(plugin.Type);
+                        Log.Debug("AutoexportPlugin executed " + plugin.Type);
                     }
                     catch (Exception ex)
                     {
