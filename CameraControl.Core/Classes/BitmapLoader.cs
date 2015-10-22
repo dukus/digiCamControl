@@ -590,10 +590,17 @@ namespace CameraControl.Core.Classes
             return null;
         }
 
+        /// <summary>
+        /// Will load the small thumbnail attached to file item
+        /// If the cach not yet generated will retun null
+        /// </summary>
+        /// <param name="fileItem"></param>
+        /// <returns></returns>
         public WriteableBitmap LoadSmallImage(FileItem fileItem)
         {
             if (!File.Exists(fileItem.SmallThumb))
                 return null;
+            PhotoUtils.WaitForFile(fileItem.SmallThumb);
             try
             {
                 BitmapImage bi = new BitmapImage();
