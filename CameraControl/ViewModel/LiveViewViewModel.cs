@@ -111,6 +111,7 @@ namespace CameraControl.ViewModel
         private int _peakSoundR;
         private bool _haveSoundData;
         private bool _settingArea;
+        private string _title;
 
 
         public Rect RullerRect
@@ -952,6 +953,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                RaisePropertyChanged(() => Title);
+            }
+        }
+
         public bool CaptureInProgress
         {
             get { return _captureInProgress; }
@@ -1123,6 +1134,7 @@ namespace CameraControl.ViewModel
             CameraDevice = device;
             CameraProperty = device.LoadProperties();
             SimpleManualFocus = CameraDevice.GetCapability(CapabilityEnum.SimpleManualFocus);
+            Title = TranslationStrings.LiveViewWindowTitle + " - " + CameraProperty.DeviceName;
             InitOverlay();
             InitCommands();
             if (ServiceProvider.Settings.DetectionType == 0)
