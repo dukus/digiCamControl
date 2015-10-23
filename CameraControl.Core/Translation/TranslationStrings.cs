@@ -650,7 +650,7 @@ namespace CameraControl.Core.Translation
         public static string LabelRotateClockwise = "Rotate clockwise";
         public static string LabelSaveJpg = "Save as JPG";
         public static string LabelPageWidth = "Page width";
-        public static string LabelPageHeigh = "Page heigh";
+        public static string LabelPageHeigh = "Page height";
         public static string LabelFill = "Fill";
         // 19/10/2015
         public static string LabelApplyToImage = "Apply to selected image";

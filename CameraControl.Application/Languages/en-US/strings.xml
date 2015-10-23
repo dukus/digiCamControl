@@ -638,6 +638,6 @@
 	<string name="LabelRotateClockwise">Rotate clockwise</string>
 	<string name="LabelSaveJpg">Save as JPG</string>
 	<string name="LabelPageWidth">Page width</string>
-	<string name="LabelPageHeigh">Page heigh</string>
+	<string name="LabelPageHeigh">Page height</string>
 	<string name="LabelFill">Fill</string>	
 </resources>
