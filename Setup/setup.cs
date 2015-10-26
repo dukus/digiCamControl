@@ -77,7 +77,6 @@ namespace Setup
 
 
             Project project = new Project("digiCamControl",
-                new LaunchCondition("NET40=\"#1\"", "Please install .NET 4.0 first."),
                 baseDir,
                 new Binary(@"vcredist_x86.exe"),
                 new ManagedAction(@"InstallCRTAction",
@@ -86,8 +85,6 @@ namespace Setup
                     Step.LaunchConditions,
                     Condition.NOT_Installed,
                     Sequence.InstallUISequence),
-                new RegValueProperty("NET40", RegistryHive.LocalMachine,
-                    @"Software\Microsoft\NET Framework Setup\NDP\v4\Full", "Install", "0"),
                 new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.InstallExecute,
                     Condition.NOT_Installed, Sequence.InstallExecuteSequence),
                 new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
@@ -96,6 +93,7 @@ namespace Setup
 
             project.UI = WUI.WixUI_InstallDir;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
+            project.SetNetFxPrerequisite("NETFRAMEWORK40FULL='#1'");
 
 #if DEBUG
             project.SourceBaseDir =
