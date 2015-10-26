@@ -322,7 +322,10 @@ namespace CameraControl.Core.Classes
                     fileInfo.IsLoading = true;
                 }
                 if (!File.Exists(item.SmallThumb))
+                {
+                    fileInfo.IsLoading = false;
                     return;
+                }
 
                 using (MagickImage image = new MagickImage(item.SmallThumb))
                 {
@@ -347,17 +350,24 @@ namespace CameraControl.Core.Classes
                     fileInfo.HistogramRed = Red;
                     fileInfo.HistogramLuminance = Luminance;
                     fileInfo.IsLoading = false;
+                    item.FileInfo = fileInfo;
                 }
                 item.SaveInfo();
+                if (ServiceProvider.Settings.SelectedBitmap.FileItem == item)
+                {
+                    SetData(ServiceProvider.Settings.SelectedBitmap,
+                                 ServiceProvider.Settings.SelectedBitmap.FileItem);   
+                }
             }
             catch (Exception ex)
             {
                 Log.Error("Unable to load histogram", ex);
             }
-            //fileItem.FileInfo.HistogramBlue = SmoothHistogram(fileItem.FileInfo.HistogramBlue);
-            //fileItem.FileInfo.HistogramGreen = SmoothHistogram(fileItem.FileInfo.HistogramGreen);
-            //fileItem.FileInfo.HistogramRed = SmoothHistogram(fileItem.FileInfo.HistogramRed);
-            //fileItem.FileInfo.HistogramLuminance = SmoothHistogram(fileItem.FileInfo.HistogramLuminance);
+            
+            //item.FileInfo.HistogramBlue = SmoothHistogram(item.FileInfo.HistogramBlue);
+            //item.FileInfo.HistogramGreen = SmoothHistogram(item.FileInfo.HistogramGreen);
+            //item.FileInfo.HistogramRed = SmoothHistogram(item.FileInfo.HistogramRed);
+            //item.FileInfo.HistogramLuminance = SmoothHistogram(item.FileInfo.HistogramLuminance);
         }
 
 

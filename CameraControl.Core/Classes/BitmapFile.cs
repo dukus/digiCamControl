@@ -104,11 +104,8 @@ namespace CameraControl.Core.Classes
             get { return luminanceHistogramPoints; }
             set
             {
-                if (luminanceHistogramPoints != value)
-                {
-                    luminanceHistogramPoints = value;
-                    NotifyPropertyChanged("LuminanceHistogramPoints");
-                }
+                luminanceHistogramPoints = value;
+                NotifyPropertyChanged("LuminanceHistogramPoints");
             }
         }
 
@@ -117,11 +114,8 @@ namespace CameraControl.Core.Classes
             get { return redColorHistogramPoints; }
             set
             {
-                if (redColorHistogramPoints != value)
-                {
-                    redColorHistogramPoints = value;
-                    NotifyPropertyChanged("RedColorHistogramPoints");
-                }
+                redColorHistogramPoints = value;
+                NotifyPropertyChanged("RedColorHistogramPoints");
             }
         }
 
@@ -130,11 +124,8 @@ namespace CameraControl.Core.Classes
             get { return greenColorHistogramPoints; }
             set
             {
-                if (greenColorHistogramPoints != value)
-                {
-                    greenColorHistogramPoints = value;
-                    NotifyPropertyChanged("GreenColorHistogramPoints");
-                }
+                greenColorHistogramPoints = value;
+                NotifyPropertyChanged("GreenColorHistogramPoints");
             }
         }
 
@@ -143,11 +134,8 @@ namespace CameraControl.Core.Classes
             get { return blueColorHistogramPoints; }
             set
             {
-                if (blueColorHistogramPoints != value)
-                {
-                    blueColorHistogramPoints = value;
-                    NotifyPropertyChanged("BlueColorHistogramPoints");
-                }
+                blueColorHistogramPoints = value;
+                NotifyPropertyChanged("BlueColorHistogramPoints");
             }
         }
 
@@ -215,6 +203,8 @@ namespace CameraControl.Core.Classes
         public void Notify()
         {
             NotifyPropertyChanged("FileItem");
+            NotifyPropertyChanged("LuminanceHistogramPoints");
+            NotifyPropertyChanged("RedColorHistogramPoints");
         }
 
         public void SetFileItem(FileItem item)

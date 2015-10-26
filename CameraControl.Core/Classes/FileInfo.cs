@@ -34,6 +34,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -125,6 +126,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        [XmlIgnore]
         public bool IsLoading { get; set; }
 
         public FileInfo()
