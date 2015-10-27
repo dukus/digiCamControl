@@ -48,7 +48,6 @@ namespace CameraControl.ViewModel
         private DateTime _restartTimerStartTime;
         private string _lastOverlay = string.Empty;
 
-        private BackgroundWorker _worker = new BackgroundWorker();
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
         private int _focusStackinMode = 0;
@@ -112,6 +111,7 @@ namespace CameraControl.ViewModel
         private bool _haveSoundData;
         private bool _settingArea;
         private string _title;
+        private int _rotation;
 
 
         public Rect RullerRect
@@ -403,9 +403,22 @@ namespace CameraControl.ViewModel
             {
                 _freezeImage = value;
                 if (_freezeImage)
+                {
+                    _freezeTimer.Stop();
                     _freezeTimer.Start();
+                }
                 RaisePropertyChanged(() => FreezeImage);
 
+            }
+        }
+
+        public int Rotation
+        {
+            get { return _rotation; }
+            set
+            {
+                _rotation = value;
+                RaisePropertyChanged(() => Rotation);
             }
         }
 
@@ -1325,11 +1338,6 @@ namespace CameraControl.ViewModel
             _freezeTimer.Interval = ServiceProvider.Settings.LiveViewFreezeTimeOut * 1000;
             _freezeTimer.Elapsed += _freezeTimer_Elapsed;
             _timer.Elapsed += _timer_Elapsed;
-            _worker.DoWork += delegate
-            {
-                if (!FreezeImage)
-                    GetLiveImage();
-            };
             //ServiceProvider.WindowsManager.Event += WindowsManager_Event;
             _focusStackingTimer.AutoReset = true;
             _focusStackingTimer.Elapsed += _focusStackingTimer_Elapsed;
@@ -1555,6 +1563,9 @@ namespace CameraControl.ViewModel
                 return;
             }
 
+            if (FreezeImage)
+                return;
+
             _operInProgress = true;
             _totalframes++;
             if ((DateTime.Now - _framestart).TotalSeconds > 0)
@@ -1724,26 +1735,23 @@ namespace CameraControl.ViewModel
                                     BitmapSourceConvert.ToBitmapSource(newbmp));
                         }
                         DrawGrid(writeableBitmap);
-                        if (RotationIndex != 0)
+                        switch (RotationIndex)
                         {
-                            switch (RotationIndex)
-                            {
-                                case 1:
-                                    writeableBitmap = writeableBitmap.Rotate(90);
-                                    break;
-                                case 2:
-                                    writeableBitmap = writeableBitmap.Rotate(180);
-                                    break;
-                                case 3:
-                                    writeableBitmap = writeableBitmap.Rotate(270);
-                                    break;
-                                case 4:
-                                    if (LiveViewData.Rotation != 0)
-                                        writeableBitmap =
-                                            writeableBitmap.RotateFree(
-                                                LiveViewData.Rotation, false);
-                                    break;
-                            }
+                            case 0:
+                                Rotation = 0;
+                                break;
+                            case 1:
+                                Rotation = 90;
+                                break;
+                            case 2:
+                                Rotation = 180;
+                                break;
+                            case 3:
+                                Rotation = 270;
+                                break;
+                            case 4:
+                                Rotation = LiveViewData.Rotation;
+                                break;
                         }
 
                         if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
