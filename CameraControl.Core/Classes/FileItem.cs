@@ -456,7 +456,12 @@ namespace CameraControl.Core.Classes
         [XmlIgnore]
         public FileInfo FileInfo
         {
-            get { return _fileInfo; }
+            get
+            {
+                if (_fileInfo == null)
+                    LoadInfo();
+                return _fileInfo;
+            }
             set
             {
                 _fileInfo = value;

@@ -34,6 +34,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Media;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 
@@ -51,6 +52,12 @@ namespace CameraControl.Core.Classes
         private int[] _histogramLuminance;
         public string InfoLabel { get; set; }
         public int Orientation { get; set; }
+
+        [XmlIgnore]
+        public PointCollection LuminanceHistogramPoints
+        {
+            get { return BitmapLoader.ConvertToPointCollection(HistogramLuminance);  }
+        }
 
         public int Width
         {
@@ -123,6 +130,7 @@ namespace CameraControl.Core.Classes
             {
                 _histogramLuminance = value;
                 NotifyPropertyChanged("HistogramLuminance");
+                NotifyPropertyChanged("LuminanceHistogramPoints");
             }
         }
 

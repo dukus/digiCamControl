@@ -124,12 +124,12 @@
                                     <Label Content="EB : " Padding="0"/>
                                     <Label Content="{Binding ExposureBias}" Padding="0" FontStyle="Italic"/>
                                 </StackPanel>
+                                <Border Width="75" Height="30" Padding="2" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1">
+                                    <Polygon Points="{Binding Path=FileInfo.LuminanceHistogramPoints}" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Opacity="1" />
+                                </Border>
                                 <!--<StackPanel Orientation="Horizontal" ToolTip="File name">
                                 <Label Content="{Binding ShortName}" Padding="0" FontStyle="Italic"/>
                             </StackPanel>-->
-                                <StackPanel Orientation="Horizontal" ToolTip="File format">
-                                    <Label Content="{Binding Format}" Padding="0" />
-                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

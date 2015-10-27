@@ -706,7 +706,7 @@ namespace CameraControl.Core.Classes
             bmp.DrawLineAa(x, y, x + width, y + height, color, tick);
         }
 
-        private PointCollection ConvertToPointCollection(int[] values)
+        public static PointCollection ConvertToPointCollection(int[] values)
         {
             PointCollection points = new PointCollection();
             if (values == null)
