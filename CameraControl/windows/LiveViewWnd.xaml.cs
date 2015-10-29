@@ -184,10 +184,8 @@ namespace CameraControl.windows
                 Top = r1.Top;
                 Width = r1.Width;
                 Height = r1.Height;
-                Topmost = true;
                 break;
             }
-            WindowState = WindowState.Maximized;
         }
 
         #region Implementation of IWindow
@@ -215,25 +213,31 @@ namespace CameraControl.windows
                     {
                         try
                         {
-                            this.WindowState = ((Window) ServiceProvider.PluginManager.SelectedWindow).WindowState;
-
                             ICameraDevice cameraparam = param as ICameraDevice;
+                            if (cameraparam.LoadProperties().LiveViewInSecMonitor)
+                            {
+                                ShowInSecMonitor();
+                            }
+                            else
+                            {
+                                this.WindowState = ((Window)ServiceProvider.PluginManager.SelectedWindow).WindowState;                                
+                            }
+
                             if (cameraparam == SelectedPortableDevice && IsVisible)
                             {
                                 Activate();
                                 Focus();
-                                if (cameraparam.LoadProperties().LiveViewInSecMonitor)
-                                    ShowInSecMonitor();
                                 return;
                             }
+
+
                             DataContext = new LiveViewViewModel(cameraparam);
                             SelectedPortableDevice = cameraparam;
 
                             Show();
                             Activate();
                             Focus();
-                            if (cameraparam.LoadProperties().LiveViewInSecMonitor)
-                                ShowInSecMonitor();
+
                         }
                         catch (Exception exception)
                         {

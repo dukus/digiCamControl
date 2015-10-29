@@ -269,8 +269,8 @@
             <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="{Binding FocusStep}" Width="440" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" LargeChange="100" IsMoveToPointEnabled="True" />
         </StackPanel>
 
-        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" >
-            <!--Style="{DynamicResource MetroExpanderEx}">-->
+        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" 
+            Style="{DynamicResource MetroExpanderEx}">
             <Grid MinWidth="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -287,7 +287,7 @@
                 <Button Content="{Binding RecButtonText}" Height="30" Margin="12,51,9,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}"/>
 
 
-                <Image Height="150" Margin="6" VerticalAlignment="Top" Grid.Row="1"  Width="200" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform" ToolTip="{Binding Fps}"/>
+                <Image Width="200"  Height="120" Margin="6" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform" ToolTip="{Binding Fps}"/>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
                     <StackPanel>

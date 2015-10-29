@@ -229,7 +229,7 @@
                                     </ToggleButton.Foreground>
                                 </ToggleButton>
                             </Border>
-                            <Border x:Name="ExpandSite" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" UseLayoutRounding="True" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:IgnoreThicknessSideType.Top}}" DockPanel.Dock="Bottom" Focusable="false" Opacity="0" Visibility="Collapsed">
+                            <Border x:Name="ExpandSite" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" UseLayoutRounding="True" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:IgnoreThicknessSideType.Top}}" DockPanel.Dock="Bottom" Focusable="false" Opacity="1" Visibility="Collapsed">
                                 <ContentPresenter UseLayoutRounding="False" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Cursor="{TemplateBinding Cursor}"/>
                             </Border>
                         </DockPanel>
