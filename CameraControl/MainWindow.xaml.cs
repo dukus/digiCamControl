@@ -536,8 +536,7 @@ namespace CameraControl
                     if ((Path.GetExtension(fileName).ToLower() == ".jpg" && ServiceProvider.Settings.AutoPreviewJpgOnly) ||
                         !ServiceProvider.Settings.AutoPreviewJpgOnly)
                     {
-                        if (ServiceProvider.Settings.DelayImageLoading &&
-                            (DateTime.Now - _lastLoadTime).TotalSeconds < 4)
+                        if ((DateTime.Now - _lastLoadTime).TotalSeconds < 4)
                         {
                             _selectiontimer.Stop();
                             _selectiontimer.Start();

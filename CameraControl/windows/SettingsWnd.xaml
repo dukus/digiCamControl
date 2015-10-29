@@ -135,9 +135,6 @@
                         <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelAutoPreviewJpgOnly}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="3" Grid.Column="1" Margin="3" IsChecked="{Binding AutoPreviewJpgOnly}" />
 
-                        <Label Grid.Row="4" Grid.Column="0" Content="{T:TranslateExtension LabelDelayImageLoading}" HorizontalContentAlignment="Right"/>
-                        <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding DelayImageLoading}" />
-
                         <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelShowThumbUpDown}" HorizontalContentAlignment="Right"/>
                         <CheckBox Grid.Row="5" Grid.Column="1" Margin="3" IsChecked="{Binding ShowThumbUpDown}" />
 

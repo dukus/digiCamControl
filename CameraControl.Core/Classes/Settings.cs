@@ -655,18 +655,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private bool _delayImageLoading;
-
-        public bool DelayImageLoading
-        {
-            get { return _delayImageLoading; }
-            set
-            {
-                _delayImageLoading = value;
-                NotifyPropertyChanged("DelayImageLoading");
-            }
-        }
-
         private bool _addFakeCamera;
 
         public bool AddFakeCamera
@@ -969,7 +957,7 @@ namespace CameraControl.Core.Classes
             ShowUntranslatedLabelId = false;
             HighlightOverExp = false;
             HighlightUnderExp = false;
-            DelayImageLoading = true;
+           
             AddFakeCamera = false;
             SyncCameraDateTime = false;
             ShowThumbUpDown = false;
