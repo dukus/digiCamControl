@@ -328,11 +328,29 @@
                         <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
                                   Style="{DynamicResource MetroExpanderEx}"
                           Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" IsExpanded="True">
-                            <StackPanel>
-                                <Label Content="{T:Translate LabelCaptureDelay}" Margin="20,0"/>
-                                <Controls:NumericUpDown Minimum="0" Value="{Binding CaptureDelay}" IsEnabled="{Binding IsFree}" Margin="20,3"/>
-                                <local:LiveViewControlerSimple DataContext="{Binding CameraDevice}" Margin="20,3"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{T:Translate LabelCaptureDelay}" Margin="3" />
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding CaptureDelay}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="0"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="{T:Translate LabelCaptureCount}" Margin="3" />
+                                <Controls:NumericUpDown Minimum="1" Value="{Binding CaptureCount}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="1" />
+
+                                <CheckBox Grid.Row="2" Grid.Column="0" Content="{T:Translate LabelAutoFocusBeforCapture}" Margin="3" IsChecked="{Binding AutoFocusBeforCapture}" Grid.ColumnSpan="2"/>
+
+
+                                <local:LiveViewControlerSimple DataContext="{Binding CameraDevice}" Margin="20,3" Grid.ColumnSpan="2"
+                                                               Grid.Column="0" Grid.Row="3"  />
+                            </Grid>
                         </Expander>
                         <Expander Header="{T:TranslateExtension LabelDisplay}" BorderBrush="Black" Margin="3"
                                   Style="{DynamicResource MetroExpanderEx}"
@@ -611,7 +629,29 @@
             <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#82000000" HorizontalAlignment="Center" />
+        <Ellipse Width="170" Height="170" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.Fill>
+                <LinearGradientBrush EndPoint="0.3,1" MappingMode="RelativeToBoundingBox" StartPoint="0.3,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Ellipse.Fill>
+            <Ellipse.RenderTransform>
+                <RotateTransform/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:1" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Ellipse.Triggers>
+        </Ellipse>
+
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#80000000" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="3" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />

@@ -112,6 +112,8 @@ namespace CameraControl.ViewModel
         private bool _settingArea;
         private string _title;
         private int _rotation;
+        private int _captureCount;
+        private bool _autoFocusBeforCapture;
 
 
         public Rect RullerRect
@@ -946,6 +948,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public int CaptureCount
+        {
+            get { return _captureCount; }
+            set
+            {
+                _captureCount = value;
+                RaisePropertyChanged(() => CaptureCount);
+            }
+        }
+
         public int CountDown
         {
             get { return _countDown; }
@@ -953,6 +965,16 @@ namespace CameraControl.ViewModel
             {
                 _countDown = value;
                 RaisePropertyChanged(() => CountDown);
+            }
+        }
+
+        public bool AutoFocusBeforCapture
+        {
+            get { return _autoFocusBeforCapture; }
+            set
+            {
+                _autoFocusBeforCapture = value;
+                RaisePropertyChanged(() => AutoFocusBeforCapture);
             }
         }
 
@@ -2329,38 +2351,47 @@ namespace CameraControl.ViewModel
 
         private void Capture()
         {
+            if (CameraDevice.ShutterSpeed != null && CameraDevice.ShutterSpeed.Value == "Bulb")
+            {
+                StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.MsgBulbModeNotSupported);
+                CaptureInProgress = false;
+                return;
+            }
             CaptureInProgress = true;
-            Log.Debug("LiveView: Capture started");
-            if (CaptureDelay > 0)
+            if (CaptureCount == 0)
+                CaptureCount = 1;
+            for (int i = 0; i < CaptureCount; i++)
             {
-                Log.Debug("LiveView: Capture delayed");
-                CountDown = CaptureDelay;
-                CountDownVisible = true;
-                while (CountDown > 0)
+                CameraDevice.WaitForCamera(2000);
+                Log.Debug("LiveView: Capture started");
+                if (CaptureDelay > 0)
                 {
-                    Thread.Sleep(1000);
-                    CountDown--;
+                    Log.Debug("LiveView: Capture delayed");
+                    CountDown = CaptureDelay;
+                    CountDownVisible = true;
+                    while (CountDown > 0)
+                    {
+                        Thread.Sleep(1000);
+                        CountDown--;
+                    }
+                    CountDownVisible = false;
                 }
-                CountDownVisible = false;
-            }
-            _timer.Stop();
-            Thread.Sleep(300);
-            try
-            {
-                if (CameraDevice.ShutterSpeed != null && CameraDevice.ShutterSpeed.Value == "Bulb")
+                if (AutoFocusBeforCapture)
+                    AutoFocusThread();
+                _timer.Stop();
+                Thread.Sleep(300);
+                try
                 {
-                    StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.MsgBulbModeNotSupported);
-                    CaptureInProgress = false;
-                    return;
+                    CameraDevice.CapturePhotoNoAf();
+                    Log.Debug("LiveView: Capture Initialization Done");
                 }
-                CameraDevice.CapturePhotoNoAf();
-                Log.Debug("LiveView: Capture Initialization Done");
-            }
-            catch (Exception exception)
-            {
-                StaticHelper.Instance.SystemMessage = exception.Message;
-                Log.Error("Unable to take picture with no af", exception);
+                catch (Exception exception)
+                {
+                    StaticHelper.Instance.SystemMessage = exception.Message;
+                    Log.Error("Unable to take picture with no af", exception);
+                    break;
+                }
             }
             CaptureInProgress = false;
         }

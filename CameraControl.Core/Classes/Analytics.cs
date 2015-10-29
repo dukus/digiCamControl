@@ -130,7 +130,7 @@ namespace CameraControl.Core.Classes
 
         public void Command(string command, string label)
         {
-            SendEvent("Command", command, null);
+            SendEvent("Command", command, label);
         }
 
         public void Error(Exception exception)
