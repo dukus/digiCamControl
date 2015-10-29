@@ -191,8 +191,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowMagnifierInFullSccreen}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                    <CheckBox  Grid.Row="0" Grid.Column="1" Margin="3" IsChecked="{Binding ShowMagnifierInFullSccreen}"/>
 
                     <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelFullscrenBack}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <wpf:Colorpicker Grid.Row="1" Grid.Column="1" Margin="3" SelectedColor="{Binding FullScreenColor, Mode=TwoWay}" />

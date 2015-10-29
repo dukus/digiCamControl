@@ -655,18 +655,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private bool _showMagnifierInFullSccreen;
-
-        public bool ShowMagnifierInFullSccreen
-        {
-            get { return _showMagnifierInFullSccreen; }
-            set
-            {
-                _showMagnifierInFullSccreen = value;
-                NotifyPropertyChanged("ShowMagnifierInFullSccreen");
-            }
-        }
-
         private bool _delayImageLoading;
 
         public bool DelayImageLoading
@@ -981,7 +969,6 @@ namespace CameraControl.Core.Classes
             ShowUntranslatedLabelId = false;
             HighlightOverExp = false;
             HighlightUnderExp = false;
-            ShowMagnifierInFullSccreen = true;
             DelayImageLoading = true;
             AddFakeCamera = false;
             SyncCameraDateTime = false;
