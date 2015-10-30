@@ -2369,7 +2369,6 @@ namespace CameraControl.ViewModel
                 CaptureCount = 1;
             for (int i = 0; i < CaptureCount; i++)
             {
-                CameraDevice.WaitForCamera(2000);
                 Log.Debug("LiveView: Capture started");
                 if (CaptureDelay > 0)
                 {
@@ -2409,6 +2408,7 @@ namespace CameraControl.ViewModel
                 // if multiple capture set wait also preview time
                 if (CaptureCount > 1)
                 {
+                    CameraDevice.WaitForCamera(2000);
                     for (int j = 0; j < PreviewTime; j++)
                     {
                         Thread.Sleep(1000);

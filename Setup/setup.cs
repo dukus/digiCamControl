@@ -1,17 +1,13 @@
 using System;
-using System.IO;
-using System.Xml;
-using WixSharp;
-using System;
-using System.IO;
-using Microsoft.Win32;
 using System.Diagnostics;
-using WixSharp.CommonTasks;
-using File = WixSharp.File;
-using System.Windows.Forms;
-using Microsoft.Deployment.WindowsInstaller;
+using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Xml;
+using Microsoft.Deployment.WindowsInstaller;
+using WixSharp;
+using WixSharp.CommonTasks;
+using File = WixSharp.File;
 
 namespace Setup
 {
@@ -97,7 +93,7 @@ namespace Setup
 
 #if DEBUG
             project.SourceBaseDir =
-                Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Debug\"));
+                Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Debug\"));
 #else
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Release\"));

@@ -497,7 +497,7 @@ namespace CameraControl.windows
                 }
                 catch (Exception exception)
                 {
-                    AddOutput("Error in script. Running aborted ! ");
+                    AddOutput("Error in script. Running aborted ! " + exception.Message);
                 }
             }
         }

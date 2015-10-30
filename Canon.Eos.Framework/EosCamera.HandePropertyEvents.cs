@@ -13,7 +13,7 @@ namespace Canon.Eos.Framework
         private bool _liveMode;
         private bool _cancelLiveViewRequested;
         private bool _pauseLiveViewRequested;
-        private bool _liveViewRunning = false;
+        private bool _liveViewRunning;
 
         private void OnLiveViewStarted(EventArgs eventArgs)
         {

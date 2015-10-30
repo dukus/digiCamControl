@@ -1976,7 +1976,6 @@ namespace CameraControl.Devices.Nikon
         }
 
         private DateTime _dateTime;
-        private bool _hostMode1;
         private bool _liveViewOn;
         private bool _liveViewMovieOn;
 

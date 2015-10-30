@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -310,8 +309,6 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private string _barcode;
-
         public string Barcode { get; set; }
 
         [XmlIgnore]
@@ -387,8 +384,6 @@ namespace CameraControl.Core.Classes
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
         public PrintSettings PrintSettings { get; set; }
-        
-        private FileSystemWatcher _systemWatcher;
 
         [XmlIgnore]
         [JsonIgnore]
@@ -401,8 +396,8 @@ namespace CameraControl.Core.Classes
 
         public PhotoSession()
         {
-            _systemWatcher = new FileSystemWatcher();
-            _systemWatcher.EnableRaisingEvents = false;
+            var systemWatcher = new FileSystemWatcher();
+            systemWatcher.EnableRaisingEvents = false;
             //_systemWatcher.Deleted += _systemWatcher_Deleted;
             //_systemWatcher.Created += new FileSystemEventHandler(_systemWatcher_Created);
             RemovePluginCommand = new RelayCommand<AutoExportPluginConfig>(RemovePlugin);

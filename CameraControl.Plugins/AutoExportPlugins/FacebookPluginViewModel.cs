@@ -27,7 +27,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
         private MiniWebServer _miniWebServer ;
         private bool _isLogedIn;
         private AsyncObservableCollection<ValuePair> _pages;
-        private string _selectedAlbum;
         private AsyncObservableCollection<ValuePair> _albums;
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand LogoutCommand { get; set; }

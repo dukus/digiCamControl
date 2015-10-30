@@ -167,7 +167,7 @@ namespace CameraControl.windows
                                                               }
                                                               catch (Exception ex)
                                                               {
-                                                                  Log.Error("Full screen ");
+                                                                  Log.Error("Full screen ", ex);
                                                               }
                                                           }));
                     break;

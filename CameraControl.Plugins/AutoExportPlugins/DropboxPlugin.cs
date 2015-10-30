@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using CameraControl.Core;
@@ -18,7 +15,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             Thread thread = new Thread(() => Send(item, configData));
             thread.Start();
-            return true;
             return true;
         }
 

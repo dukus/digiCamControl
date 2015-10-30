@@ -165,21 +165,18 @@ namespace CameraControl.Core.Classes
                             thread.Start(device);
                             return ":;response:ok;";
                         }
-                            break;
                         case "starliveview":
                         {
                             ServiceProvider.WindowsManager.ExecuteCommand(
                                 WindowsCmdConsts.LiveViewWnd_Show, device);
                             return ":;response:ok;";
                         }
-                            break;
                         case "captureliveview":
                         {
                             ServiceProvider.WindowsManager.ExecuteCommand(
                                 CmdConsts.LiveView_Capture, device);
                             return ":;response:ok;";
                         }
-                            break;
                         case "manualfocus":
                         {
                             var time = DateTime.Now;
@@ -187,7 +184,6 @@ namespace CameraControl.Core.Classes
                                 CmdConsts.LiveView_ManualFocus + lines["step"], device);
                             return ":;response:ok;executiontime:" + (DateTime.Now - time);
                         }
-                            break;
 
                         case "stopliveview":
                         {
@@ -195,7 +191,6 @@ namespace CameraControl.Core.Classes
                                 WindowsCmdConsts.LiveViewWnd_Hide, device);
                             return ":;response:ok;";
                         }
-                            break;
                         case "dcc":
                         {
                             try
@@ -213,7 +208,6 @@ namespace CameraControl.Core.Classes
                                 return ":;response:error;message:" + ex.Message;
                             }
                         }
-                            break;
                     }
                 }
             }

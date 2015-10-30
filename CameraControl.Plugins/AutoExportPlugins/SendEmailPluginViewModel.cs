@@ -8,8 +8,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
 {
     public class SendEmailPluginViewModel:BasePluginViewModel
     {
-        private string _subject;
-
         public string To
         {
             get { return _config.ConfigData["To"]; }

@@ -97,7 +97,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             }
             catch (Exception ex)
             {
-                Log.Error("Error");
+                Log.Error("Error", ex);
             }
         }
     }

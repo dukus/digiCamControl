@@ -29,11 +29,9 @@
 #region
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Plugin;
@@ -218,7 +216,7 @@ namespace CameraControl.Core
                 }
                 catch (Exception exception)
                 {
-                    Log.Debug("Unable to copy file:" + newfile);
+                    Log.Debug("Unable to copy file:" + newfile, exception);
                 }
             }
         }

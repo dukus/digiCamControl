@@ -49,13 +49,11 @@ namespace CameraControl.Controls
     /// </summary>
     public partial class Controler : UserControl
     {
-        private ProgressWindow dlg = null;
         private bool _loading = false;
 
         public Controler()
         {
             InitializeComponent();
-            CameraDeviceManager cameraDeviceManager = DataContext as CameraDeviceManager;
             if (ServiceProvider.DeviceManager != null)
                 ServiceProvider.DeviceManager.PropertyChanged += DeviceManager_PropertyChanged;
             RefreshItems();

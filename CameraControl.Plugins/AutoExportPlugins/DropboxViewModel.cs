@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
@@ -103,7 +100,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 _miniWebServer.Run();
                 PhotoUtils.Run(url);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Log.Error("Unable to login");
             }
@@ -117,7 +114,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
             AccessToken = accessToken.Token;
 
             return "<HTML><BODY>OK</br><h3>Logis succeed. Please return to digiCamControl</br><a href=\"javascript:window.open('','_self').close();\">close</a></BODY></HTML>";
-            return string.Format("<HTML><BODY>Something goes wrong. Please try again</BODY></HTML>");
         }
 
         public void Upload(string file, string folder)
@@ -149,7 +145,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                     IsLogedIn = false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 IsLogedIn = false;
             }

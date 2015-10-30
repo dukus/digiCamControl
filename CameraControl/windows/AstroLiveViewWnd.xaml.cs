@@ -67,7 +67,6 @@ namespace CameraControl.windows
     {
         public ICameraDevice CameraDevice { get; set; }
         public LiveViewData LiveViewData { get; set; }
-        private bool _oper_in_progress = false;
 
         public int Brightness { get; set; }
         public bool Freeze { get; set; }

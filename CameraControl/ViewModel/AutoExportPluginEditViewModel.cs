@@ -20,7 +20,6 @@ namespace CameraControl.ViewModel
     {
         private PreviewWnd _wnd;
         private AutoExportPluginConfig _config;
-        private ObservableCollection<TransformPluginItem> _transformPluginItems;
         private TransformPluginItem _selectedTransformPluginItem;
         private bool _fullSize;
 

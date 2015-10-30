@@ -22,14 +22,8 @@ namespace CameraControl.ViewModel
 {
     public class MainMenuViewModel : ViewModelBase
     {
-        ProgressWindow dlg;
+        ProgressWindow _dlg;
 
-        private bool _showFocusPoints;
-        private bool _flipPreview;
-        private Branding _branding;
-        private List<IExportPlugin> _exportPlugins;
-        private bool _cameraConnected;
-        private Settings _settings;
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<int> ThumbSizeCommand { get; set; }
@@ -337,9 +331,9 @@ namespace CameraControl.ViewModel
 
         private void UseAsMaster()
         {
-            if (dlg == null)
-                dlg = new ProgressWindow();
-            dlg.Show();
+            if (_dlg == null)
+                _dlg = new ProgressWindow();
+            _dlg.Show();
             Thread thread = new Thread(SetAsMaster);
             thread.Start();
         }
@@ -349,7 +343,7 @@ namespace CameraControl.ViewModel
             try
             {
                 int i = 0;
-                dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+                _dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
                 var preset = new CameraPreset();
                 preset.Get(ServiceProvider.DeviceManager.SelectedCameraDevice);
                 foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
@@ -360,8 +354,8 @@ namespace CameraControl.ViewModel
                     {
                         if (connectedDevice != ServiceProvider.DeviceManager.SelectedCameraDevice)
                         {
-                            dlg.Label = connectedDevice.DisplayName;
-                            dlg.Progress = i;
+                            _dlg.Label = connectedDevice.DisplayName;
+                            _dlg.Progress = i;
                             i++;
                             preset.Set(connectedDevice);
                         }
@@ -377,7 +371,7 @@ namespace CameraControl.ViewModel
             {
                 Log.Error("Unable to set as master ", exception);
             }
-            dlg.Hide();
+            _dlg.Hide();
         }
 
         private void Refresh()

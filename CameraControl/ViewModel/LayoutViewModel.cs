@@ -21,7 +21,6 @@ namespace CameraControl.ViewModel
         private bool _zoom11;
         private bool _zoom12;
         private bool _freeZoom;
-        private AsyncObservableCollection<IPanelPlugin> _panelPlugins;
         private bool _zoomToFocus;
 
         public bool ZoomFit

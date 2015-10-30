@@ -2,8 +2,7 @@
 {
     public class TransformPluginItem 
     {
-        private ValuePairEnumerator _config = new ValuePairEnumerator();
-        private string _name;
+        private ValuePairEnumerator _config;
 
         public ValuePairEnumerator Config
         {

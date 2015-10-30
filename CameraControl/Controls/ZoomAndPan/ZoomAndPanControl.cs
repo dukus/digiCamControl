@@ -101,8 +101,6 @@ namespace CameraControl.Controls.ZoomAndPan
         /// </summary>
         private ScrollViewer scrollOwner = null;
 
-        private double _contentViewportHeightRation;
-        private double _contentZoomFocusXRation;
 
         #endregion IScrollInfo Data Members
 

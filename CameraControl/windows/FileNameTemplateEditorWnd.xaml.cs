@@ -37,7 +37,6 @@ namespace CameraControl.windows
                 {
                     return e.Message;
                 }
-                return "";
             }
         }
 

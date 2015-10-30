@@ -28,7 +28,6 @@ namespace CameraControl.ViewModel
 
         private string _error;
         private string _message;
-        private int _expCountMax;
         private Timer _timer = new Timer(100);
         private bool _isBusy;
         private string _curValue;
@@ -102,7 +101,6 @@ namespace CameraControl.ViewModel
             get
             {
                 return Camera.ExposureCompensation.Values;
-                return _expLowList;
             }
             set { _expLowList = value; }
         }
@@ -250,7 +248,6 @@ namespace CameraControl.ViewModel
             get
             {
                 return Camera.IsoNumber.Values;
-                return _isoLowList;
             }
             set { _isoLowList = value; }
         }
