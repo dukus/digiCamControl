@@ -48,8 +48,8 @@ namespace CameraControl.Core.Classes
     public class BitmapLoader : BaseFieldClass
     {
         private const int MaxThumbSize = 1920 * 2;
-        private const int LargeThumbSize = 1600;
-        private const int SmallThumbSize = 400;
+        public const int LargeThumbSize = 1600;
+        public const int SmallThumbSize = 400;
 
         private static BitmapLoader _instance;
 

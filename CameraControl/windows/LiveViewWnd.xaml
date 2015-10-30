@@ -653,7 +653,7 @@
             </Ellipse.Triggers>
         </Ellipse>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="4" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#80FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="4" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="2" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />

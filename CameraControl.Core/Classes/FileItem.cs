@@ -222,6 +222,11 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool IsJpg
+        {
+            get { return !IsRaw && !IsMovie; }
+        }
+
         public bool IsRaw
         {
             get

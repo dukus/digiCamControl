@@ -29,31 +29,25 @@
 #region
 
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using CameraControl.Core;
-using CameraControl.Core.Classes;
-using CameraControl.Devices;
-using GalaSoft.MvvmLight.Command;
-using Microsoft.VisualBasic.FileIO;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Classes;
 using CameraControl.Controls.ZoomAndPan;
+using CameraControl.Core;
+using CameraControl.Core.Classes;
 using CameraControl.Core.Classes.Queue;
+using CameraControl.Devices;
 using CameraControl.ViewModel;
-using Clipboard = System.Windows.Clipboard;
-using ListBox = System.Windows.Controls.ListBox;
-using MessageBox = System.Windows.MessageBox;
-using UserControl = System.Windows.Controls.UserControl;
+using Microsoft.VisualBasic.FileIO;
 
 #endregion
 
@@ -301,11 +295,27 @@ namespace CameraControl.Layouts
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            var item = ServiceProvider.Settings.SelectedBitmap.FileItem;
+
             if (ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
             //bool fullres = e.Argument is bool && (bool) e.Argument ||LayoutViewModel.ZoomFit
             //bool fullres = !LayoutViewModel.ZoomFit;
             bool fullres = e.Argument is bool && (bool)e.Argument;
+
+            if ((!File.Exists(item.LargeThumb) && item.IsJpg && File.Exists(item.FileName)))
+            {
+                try
+                {
+                    PhotoUtils.WaitForFile(item.FileName);
+                    ServiceProvider.Settings.SelectedBitmap.DisplayImage = (WriteableBitmap)BitmapLoader.Instance.LoadImage(item.FileName, BitmapLoader.LargeThumbSize,
+                        0);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Unable to load fast preview", ex);
+                }
+            }
 
             ServiceProvider.Settings.ImageLoading = fullres ||
                                                     !ServiceProvider.Settings.SelectedBitmap.FileItem.IsLoaded;
@@ -748,17 +758,17 @@ namespace CameraControl.Layouts
             ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
         }
 
-        public void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             MediaElement.Play();
         }
 
-        public void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        public void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MediaElement.Pause();
         }
 
-        public void Button_Click_2(object sender, System.Windows.RoutedEventArgs e)
+        public void Button_Click_2(object sender, RoutedEventArgs e)
         {
             MediaElement.Stop();
         }
