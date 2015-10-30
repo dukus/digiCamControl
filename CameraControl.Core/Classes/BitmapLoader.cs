@@ -605,8 +605,9 @@ namespace CameraControl.Core.Classes
         /// If the cach not yet generated will retun null
         /// </summary>
         /// <param name="fileItem"></param>
+        /// <param name="width">The desired with, if 0 the full size will be loaded</param>
         /// <returns></returns>
-        public WriteableBitmap LoadSmallImage(FileItem fileItem)
+        public WriteableBitmap LoadSmallImage(FileItem fileItem, int width=0)
         {
             if (!File.Exists(fileItem.SmallThumb))
                 return null;
@@ -615,6 +616,8 @@ namespace CameraControl.Core.Classes
             {
                 BitmapImage bi = new BitmapImage();
                 bi.BeginInit();
+                if (width > 0)
+                    bi.DecodePixelWidth = width;
                 bi.CacheOption = BitmapCacheOption.OnLoad;
                 bi.UriSource = new Uri(fileItem.SmallThumb);
                 bi.EndInit();

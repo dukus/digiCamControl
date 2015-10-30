@@ -244,7 +244,7 @@ namespace CameraControl.Layouts
         {
             try
             {
-                var bitmap = BitmapLoader.Instance.LoadSmallImage(ServiceProvider.Settings.SelectedBitmap.FileItem);
+                var bitmap = BitmapLoader.Instance.LoadSmallImage(ServiceProvider.Settings.SelectedBitmap.FileItem, 270);
 
 
                 if (bitmap != null)
