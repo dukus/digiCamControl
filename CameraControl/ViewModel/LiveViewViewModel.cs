@@ -475,6 +475,7 @@ namespace CameraControl.ViewModel
         }
 
         public bool ShowHistogram { get; set; }
+        public bool CaptureCancelRequested { get; set; }
 
         #region motion detection
 
@@ -1120,6 +1121,8 @@ namespace CameraControl.ViewModel
         public RelayCommand AutoFocusCommand { get; set; }
         public RelayCommand RecordMovieCommand { get; set; }
         public RelayCommand CaptureCommand { get; set; }
+        public RelayCommand CancelCaptureCommand { get; set; }
+
         public RelayCommand FocusPCommand { get; set; }
         public RelayCommand FocusPPCommand { get; set; }
         public RelayCommand FocusPPPCommand { get; set; }
@@ -1280,6 +1283,8 @@ namespace CameraControl.ViewModel
             SetAreaCommand = new RelayCommand(() => SettingArea = true);
             DoneSetAreaCommand = new RelayCommand(() => SettingArea = false);
 
+            CancelCaptureCommand = new RelayCommand(() => CaptureCancelRequested = true);
+
         }
 
         private void ToggleGrid()
@@ -1349,6 +1354,7 @@ namespace CameraControl.ViewModel
             PhotoNo = 2;
             FocusStep = 2;
             PhotoCount = 5;
+            CaptureCount = 1;
             DelayedStart = false;
 
             _timer.Stop();
@@ -1628,7 +1634,6 @@ namespace CameraControl.ViewModel
             Recording = LiveViewData.MovieIsRecording;
             try
             {
-                WriteableBitmap preview;
                 if (LiveViewData != null && LiveViewData.ImageData != null)
                 {
                     MemoryStream stream = new MemoryStream(LiveViewData.ImageData,
@@ -1726,9 +1731,9 @@ namespace CameraControl.ViewModel
                             bmp = filter.Apply(bmp);
                         }
 
-                        preview =
-                            BitmapFactory.ConvertToPbgra32Format(
-                                BitmapSourceConvert.ToBitmapSource(bmp));
+                        var preview = BitmapFactory.ConvertToPbgra32Format(
+                            BitmapSourceConvert.ToBitmapSource(bmp));
+
                         DrawFocusPoint(preview);
                         Bitmap newbmp = bmp;
                         if (EdgeDetection)
@@ -2359,6 +2364,7 @@ namespace CameraControl.ViewModel
                 return;
             }
             CaptureInProgress = true;
+            CaptureCancelRequested = false;
             if (CaptureCount == 0)
                 CaptureCount = 1;
             for (int i = 0; i < CaptureCount; i++)
@@ -2372,13 +2378,20 @@ namespace CameraControl.ViewModel
                     CountDownVisible = true;
                     while (CountDown > 0)
                     {
+                        if (CaptureCancelRequested)
+                            break;
                         Thread.Sleep(1000);
                         CountDown--;
                     }
                     CountDownVisible = false;
                 }
+               
                 if (AutoFocusBeforCapture)
                     AutoFocusThread();
+
+                if (CaptureCancelRequested)
+                    break;
+
                 _timer.Stop();
                 Thread.Sleep(300);
                 try
@@ -2391,6 +2404,17 @@ namespace CameraControl.ViewModel
                     StaticHelper.Instance.SystemMessage = exception.Message;
                     Log.Error("Unable to take picture with no af", exception);
                     break;
+                }
+
+                // if multiple capture set wait also preview time
+                if (CaptureCount > 1)
+                {
+                    for (int j = 0; j < PreviewTime; j++)
+                    {
+                        Thread.Sleep(1000);
+                        if (CaptureCancelRequested)
+                            break;
+                    }
                 }
             }
             CaptureInProgress = false;

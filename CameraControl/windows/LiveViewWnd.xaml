@@ -286,6 +286,8 @@
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
                 <Button Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension ButtonCapture}" Height="30" Margin="0,10,10,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension ButtonCancel}" Height="30" Margin="0,10,10,0" Command="{Binding CancelCaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" 
+                        Visibility="{Binding CaptureInProgress, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
                 <Button Grid.Row="0" Content="{Binding RecButtonText}" Height="30" Margin="10,50,10,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}"/>
 
@@ -629,10 +631,10 @@
             <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
 
-        <Ellipse Width="170" Height="170" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" 
-                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5">
+        <Ellipse Width="190" Height="190" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.4" RenderTransformOrigin="0.5,0.5">
             <Ellipse.Fill>
-                <LinearGradientBrush EndPoint="0.3,1" MappingMode="RelativeToBoundingBox" StartPoint="0.3,0">
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
@@ -651,9 +653,9 @@
             </Ellipse.Triggers>
         </Ellipse>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#80000000" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="4" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#80FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="3" />
+        <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="2" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />
     </Grid>
 </Controls:MetroWindow>
