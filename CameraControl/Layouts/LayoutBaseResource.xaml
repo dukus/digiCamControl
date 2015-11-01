@@ -137,9 +137,12 @@
                                 <Border Width="75" Height="30" Padding="2" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1">
                                     <Polygon Points="{Binding Path=FileInfo.LuminanceHistogramPoints}" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Opacity="1" />
                                 </Border>
-                                <!--<StackPanel Orientation="Horizontal" ToolTip="File name">
-                                <Label Content="{Binding ShortName}" Padding="0" FontStyle="Italic"/>
-                            </StackPanel>-->
+
+                                <StackPanel Orientation="Horizontal" >
+                                    <Ellipse Width="15" Height="15" Fill="Blue" Margin="3" Visibility="{Binding FileInfo.IsUnderExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are under exposed"/>
+                                    <Ellipse Width="15" Height="15" Fill="Red" Margin="3" Visibility="{Binding FileInfo.IsOverExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are over exposed"/>
+                                    <!--<Label Content="[+]" FontWeight="Bold" Margin="3" Padding="1" Visibility="{Binding FileInfo.IsFocused, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are under exposed"/>-->
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

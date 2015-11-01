@@ -59,6 +59,35 @@ namespace CameraControl.Core.Classes
             get { return BitmapLoader.ConvertToPointCollection(HistogramLuminance);  }
         }
 
+        [XmlIgnore]
+        public bool IsFocused
+        {
+            get
+            {
+                return FocusPoints != null && FocusPoints.Count > 0;
+                
+            } 
+        }
+
+
+        public bool IsOverExposed
+        {
+            get
+            {
+                return HistogramLuminance != null && HistogramLuminance.Length == 256 && HistogramLuminance[254] > 5 &&
+                       HistogramLuminance[255] > 5;
+            }
+        }
+
+        public bool IsUnderExposed
+        {
+            get
+            {
+                return HistogramLuminance != null && HistogramLuminance.Length == 256 && HistogramLuminance[0] > 5 &&
+                       HistogramLuminance[1] > 5;
+            }
+        }
+
         public int Width
         {
             get
