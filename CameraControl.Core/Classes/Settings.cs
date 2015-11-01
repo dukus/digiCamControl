@@ -760,6 +760,7 @@ namespace CameraControl.Core.Classes
         private bool _publicWebserver;
         private bool _loadCanonTransferMode;
         private bool _showThumbInfo;
+        private bool _enhancedThumbs;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -829,6 +830,16 @@ namespace CameraControl.Core.Classes
             {
                 _flipPreview = value;
                 NotifyPropertyChanged("FlipPreview");
+            }
+        }
+
+        public bool EnhancedThumbs
+        {
+            get { return _enhancedThumbs; }
+            set
+            {
+                _enhancedThumbs = value;
+                NotifyPropertyChanged("EnhancedThumbs");
             }
         }
 
@@ -952,6 +963,7 @@ namespace CameraControl.Core.Classes
             UseExternalViewer = false;
             ExternalViewerArgs = string.Empty;
             ShowFocusPoints = true;
+            EnhancedThumbs = true;
 
             UseParallelTransfer = false;
             ShowUntranslatedLabelId = false;

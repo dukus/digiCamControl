@@ -66,6 +66,11 @@ namespace CameraControl.Core.Classes.Queue
                             var thumb = BitmapLoader.Instance.LoadSmallImage(FileItem);
                             thumb.Freeze();
                             FileItem.Thumbnail = thumb;
+                            thumb = thumb.Clone();
+                            BitmapLoader.Highlight(thumb, true, true);
+                            BitmapLoader.Instance.DrawFocusPoints(FileItem, thumb);
+                            thumb.Freeze();
+                            FileItem.ThumbnailMarks = thumb;
                         }
                         else
                         {

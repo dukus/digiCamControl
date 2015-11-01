@@ -540,10 +540,23 @@ namespace CameraControl.Core.Classes
         private int _autoRotation;
         private int _rotation;
         private bool _transformed;
+        private BitmapSource _thumbnailMarks;
 
         public int RotationAngle
         {
             get { return (Rotation + (ServiceProvider.Settings.Autorotate?AutoRotation:0))*90; }
+        }
+
+        [JsonIgnore]
+        [XmlIgnore]
+        public BitmapSource ThumbnailMarks
+        {
+            get { return _thumbnailMarks; }
+            set
+            {
+                _thumbnailMarks = value;
+                NotifyPropertyChanged("ThumbnailMarks");
+            }
         }
 
         [JsonIgnore]
@@ -683,6 +696,7 @@ namespace CameraControl.Core.Classes
             {
                 if (File.Exists(InfoFile))
                 {
+                    PhotoUtils.WaitForFile(InfoFile);
                     XmlSerializer mySerializer =
                         new XmlSerializer(typeof(FileInfo));
                     FileStream myFileStream = new FileStream(InfoFile, FileMode.Open);

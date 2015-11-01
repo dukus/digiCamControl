@@ -464,6 +464,7 @@
             <MenuItem Header="{T:TranslateExtension MenuView}">
                 <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints}" Command="{Binding ToggleFocusCommand}"/>
                 <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuLayout}">
                     <MenuItem Header="{T:TranslateExtension MenuLayoutLandscape}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>

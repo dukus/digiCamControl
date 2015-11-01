@@ -23,6 +23,7 @@ namespace CameraControl.ViewModel
     public class MainMenuViewModel : ViewModelBase
     {
         ProgressWindow _dlg;
+        private bool _enhancedThumbs;
 
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
@@ -50,6 +51,7 @@ namespace CameraControl.ViewModel
         public RelayCommand UseAsMasterCommand { get; private set; }
         
         public RelayCommand FlipPreviewCommand { get; set; }
+        public RelayCommand EnhancedThumbsCommand { get; set; }
 
         public RelayCommand ManualPageCommand { get; set; }
         public RelayCommand HomePageCommand { get; set; }
@@ -92,6 +94,16 @@ namespace CameraControl.ViewModel
             {
                 ServiceProvider.Settings.FlipPreview = value;
                 RaisePropertyChanged(()=>FlipPreview);
+            }
+        }
+
+        public bool EnhancedThumbs
+        {
+            get { return ServiceProvider.Settings.EnhancedThumbs; }
+            set
+            {
+                ServiceProvider.Settings.EnhancedThumbs = value;
+                RaisePropertyChanged(()=>EnhancedThumbs);
             }
         }
 
@@ -149,6 +161,7 @@ namespace CameraControl.ViewModel
 
             ToggleFocusCommand = new RelayCommand(() => ShowFocusPoints = !ShowFocusPoints);
             FlipPreviewCommand = new RelayCommand(() => FlipPreview = !FlipPreview);
+            EnhancedThumbsCommand = new RelayCommand(() => EnhancedThumbs = !EnhancedThumbs);
             HomePageCommand = new RelayCommand(() => PhotoUtils.Run("http://www.digicamcontrol.com/", ""));
             CheckUpdateCommand = new RelayCommand(() => NewVersionWnd.CheckForUpdate(true));
             ForumCommand = new RelayCommand(() => PhotoUtils.Run("http://www.digicamcontrol.com/forum/", ""));

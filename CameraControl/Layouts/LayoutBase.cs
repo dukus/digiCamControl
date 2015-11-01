@@ -342,7 +342,7 @@ namespace CameraControl.Layouts
             ServiceProvider.Settings.SelectedBitmap.Notify();
             BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
                               ServiceProvider.Settings.SelectedBitmap.FileItem);
-            BitmapLoader.Instance.Highlight(ServiceProvider.Settings.SelectedBitmap,
+            BitmapLoader.Highlight(ServiceProvider.Settings.SelectedBitmap,
                                             ServiceProvider.Settings.HighlightUnderExp,
                                             ServiceProvider.Settings.HighlightOverExp);
             ServiceProvider.Settings.SelectedBitmap.FullResLoaded = fullres;

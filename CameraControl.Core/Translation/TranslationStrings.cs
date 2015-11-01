@@ -657,5 +657,6 @@ namespace CameraControl.Core.Translation
         public static string LabelLiveviewInSecMonitor = "Live view in secondary monitor";
         public static string LabelCaptureCount = "Capture Count";
         public static string LabelAutoFocusBeforCapture = "Autofocus befor capture";
+        public static string LabelEnhancedThumbs = "Enhanced Thumbs";
     }
 }

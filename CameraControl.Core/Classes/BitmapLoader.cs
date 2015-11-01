@@ -199,6 +199,7 @@ namespace CameraControl.Core.Classes
                     image.Thumbnail((int)(image.Width * dw), (int)(image.Height * dw));
                     PhotoUtils.CreateFolder(fileItem.SmallThumb);
                     image.Write(fileItem.SmallThumb);
+                    
                     fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
                 }
                 fileItem.SaveInfo();
@@ -370,14 +371,21 @@ namespace CameraControl.Core.Classes
             //item.FileInfo.HistogramLuminance = SmoothHistogram(item.FileInfo.HistogramLuminance);
         }
 
-
-        public unsafe void Highlight(BitmapFile file, bool under, bool over)
+        public static void Highlight(BitmapFile file, bool under, bool over)
         {
             if (!under && !over)
-                return;
+                return ;
             if (file == null || file.DisplayImage == null)
                 return;
-            WriteableBitmap bitmap = file.DisplayImage.Clone();
+            var bitmap = Highlight(file.DisplayImage.Clone(), under, over);
+            bitmap.Freeze();
+            file.DisplayImage = bitmap;
+        }
+
+        public static unsafe WriteableBitmap Highlight(WriteableBitmap bitmap, bool under, bool over)
+        {
+            if (!under && !over)
+                return bitmap;
             int color1 = ConvertColor(Colors.Blue);
             int color2 = ConvertColor(Colors.Red);
             int treshold = 2;
@@ -404,8 +412,7 @@ namespace CameraControl.Core.Classes
                         bitmapContext.Pixels[i] = color2;
                 }
             }
-            bitmap.Freeze();
-            file.DisplayImage = bitmap;
+            return bitmap;
         }
 
         public void SetData(BitmapFile file, FileItem fileItem)
@@ -662,7 +669,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private void DrawFocusPoints(FileItem fileItem, WriteableBitmap bitmap)
+        public void DrawFocusPoints(FileItem fileItem, WriteableBitmap bitmap)
         {
             if (fileItem.FileInfo == null || fileItem.FileInfo.Width == 0 || fileItem.FileInfo.Height == 0)
                 return;
@@ -674,7 +681,7 @@ namespace CameraControl.Core.Classes
             {
                 DrawRect(bitmap, (int)(focuspoint.X * dw), (int)(focuspoint.Y * dh),
                     (int)((focuspoint.X + focuspoint.Width) * dw),
-                    (int)((focuspoint.Y + focuspoint.Height) * dh), Colors.Aqua, (bitmap.PixelWidth / 1000) + 1);
+                    (int)((focuspoint.Y + focuspoint.Height) * dh), Colors.Aqua, (bitmap.PixelWidth / 1000) + 2);
             }
             bitmap.Unlock();
         }

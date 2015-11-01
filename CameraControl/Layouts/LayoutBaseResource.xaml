@@ -4,7 +4,8 @@
                     xmlns:classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                     xmlns:local="clr-namespace:CameraControl.Controls.ZoomAndPan"
                     xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
-                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:controls1="clr-namespace:CameraControl.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -87,6 +88,15 @@
                                         <RotateTransform  Angle="{Binding RotationAngle}" />
                                     </Image.LayoutTransform>
                                 </Image>
+                                <Image Source="{Binding Path=ThumbnailMarks}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" RenderTransformOrigin="0.5,0.5"
+                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=EnhancedThumbs, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Image.Effect>
+                                        <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
+                                    </Image.Effect>
+                                    <Image.LayoutTransform>
+                                        <RotateTransform  Angle="{Binding RotationAngle}" />
+                                    </Image.LayoutTransform>
+                                </Image>                                
                                 <Rectangle Stroke="Transparent" Margin="1" Name="_Rectangle"/>
                                 <Rectangle Width="10" Height="10" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6">
                                     <Rectangle.Fill>
