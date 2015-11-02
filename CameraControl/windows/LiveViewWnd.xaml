@@ -292,7 +292,7 @@
                 <Button Grid.Row="0" Content="{Binding RecButtonText}" Height="30" Margin="10,50,10,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}"/>
 
 
-                <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform" ToolTip="{Binding Fps}" />
+                <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform"/>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
                     <StackPanel>

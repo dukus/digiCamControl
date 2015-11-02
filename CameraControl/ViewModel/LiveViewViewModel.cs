@@ -1,10 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -22,9 +22,8 @@ using CameraControl.Devices.Others;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Color = System.Windows.Media.Color;
-using HelpProvider = CameraControl.Classes.HelpProvider;
-using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using Microsoft.Win32;
+using Color = System.Drawing.Color;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
 
@@ -1373,7 +1372,7 @@ namespace CameraControl.ViewModel
             _restartTimer.Elapsed += _restartTimer_Elapsed;
         }
 
-        private void _restartTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void _restartTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if ((DateTime.Now - _restartTimerStartTime).TotalSeconds > 2)
             {
@@ -1504,7 +1503,7 @@ namespace CameraControl.ViewModel
             }
         }
 
-        void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             //if (!_worker.IsBusy)
             //    _worker.RunWorkerAsync();
@@ -1512,7 +1511,7 @@ namespace CameraControl.ViewModel
             Task.Factory.StartNew(GetLiveImage);
         }
 
-        void _freezeTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void _freezeTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             FreezeImage = false;
         }
@@ -1710,7 +1709,7 @@ namespace CameraControl.ViewModel
                             filtering.Red = new IntRange(0, 5);
                             filtering.Green = new IntRange(0, 5);
                             filtering.FillOutsideRange = false;
-                            filtering.FillColor = new RGB(System.Drawing.Color.Blue);
+                            filtering.FillColor = new RGB(Color.Blue);
                             filtering.ApplyInPlace(bmp);
                         }
 
@@ -1721,9 +1720,13 @@ namespace CameraControl.ViewModel
                             filtering.Red = new IntRange(250, 255);
                             filtering.Green = new IntRange(250, 255);
                             filtering.FillOutsideRange = false;
-                            filtering.FillColor = new RGB(System.Drawing.Color.Red);
+                            filtering.FillColor = new RGB(Color.Red);
                             filtering.ApplyInPlace(bmp);
                         }
+
+                        var preview = BitmapFactory.ConvertToPbgra32Format(
+                            BitmapSourceConvert.ToBitmapSource(bmp));
+                        DrawFocusPoint(preview, true);
 
                         if (Brightness != 0)
                         {
@@ -1731,10 +1734,7 @@ namespace CameraControl.ViewModel
                             bmp = filter.Apply(bmp);
                         }
 
-                        var preview = BitmapFactory.ConvertToPbgra32Format(
-                            BitmapSourceConvert.ToBitmapSource(bmp));
 
-                        DrawFocusPoint(preview);
                         Bitmap newbmp = bmp;
                         if (EdgeDetection)
                         {
@@ -1837,7 +1837,7 @@ namespace CameraControl.ViewModel
 
         private void DrawGrid(WriteableBitmap writeableBitmap)
         {
-            Color color = Colors.White;
+            System.Windows.Media.Color color = Colors.White;
             color.A = 50;
 
             if (OverlayActivated)
@@ -1868,11 +1868,11 @@ namespace CameraControl.ViewModel
                     int y = writeableBitmap.PixelHeight*OverlayScale/100;
                     int xx = writeableBitmap.PixelWidth*OverlayHorizontal/100;
                     int yy = writeableBitmap.PixelWidth*OverlayVertical/100;
-                    Color transpColor = Colors.White;
+                    System.Windows.Media.Color transpColor = Colors.White;
 
                     //set color transparency for blit only the alpha chanel is used from transpColor
                     if (OverlayTransparency < 100)
-                        transpColor = Color.FromArgb((byte) (0xff*OverlayTransparency/100d), 0xff, 0xff, 0xff);
+                        transpColor = System.Windows.Media.Color.FromArgb((byte) (0xff*OverlayTransparency/100d), 0xff, 0xff, 0xff);
                     writeableBitmap.Blit(
                         new Rect(0 + (x / 2) + xx, 0 + (y / 2) + yy, writeableBitmap.PixelWidth - x,
                             writeableBitmap.PixelHeight - y),
@@ -1947,15 +1947,15 @@ namespace CameraControl.ViewModel
                 int y2 = writeableBitmap.PixelHeight * (VerticalMin+VerticalMax) / 1000;
                 int y1 = writeableBitmap.PixelHeight * VerticalMin / 1000;
 
-                writeableBitmap.FillRectangle2(0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, Color.FromArgb(128, 128, 128, 128));
-                writeableBitmap.FillRectangleDeBlend(x1, y1, x2, y2, Color.FromArgb(128, 128, 128, 128));
+                writeableBitmap.FillRectangle2(0, 0, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, System.Windows.Media.Color.FromArgb(128, 128, 128, 128));
+                writeableBitmap.FillRectangleDeBlend(x1, y1, x2, y2, System.Windows.Media.Color.FromArgb(128, 128, 128, 128));
                 writeableBitmap.DrawRectangle(x1, y1, x2, y2, color);
 
             }
 
         }
 
-        private void DrawFocusPoint(WriteableBitmap bitmap)
+        private void DrawFocusPoint(WriteableBitmap bitmap, bool fill=false)
         {
             try
             {
@@ -1964,11 +1964,24 @@ namespace CameraControl.ViewModel
                 double xt = bitmap.Width / LiveViewData.ImageWidth;
                 double yt = bitmap.Height / LiveViewData.ImageHeight;
 
-                bitmap.DrawRectangle((int)(LiveViewData.FocusX * xt - (LiveViewData.FocusFrameXSize * xt / 2)),
-                    (int)(LiveViewData.FocusY * yt - (LiveViewData.FocusFrameYSize * yt / 2)),
-                    (int)(LiveViewData.FocusX * xt + (LiveViewData.FocusFrameXSize * xt / 2)),
-                    (int)(LiveViewData.FocusY * yt + (LiveViewData.FocusFrameYSize * yt / 2)),
-                    LiveViewData.HaveFocusData ? Colors.Green : Colors.Red);
+                if (fill)
+                {
+                    bitmap.FillRectangle2((int) (LiveViewData.FocusX*xt - (LiveViewData.FocusFrameXSize*xt/2)),
+                        (int) (LiveViewData.FocusY*yt - (LiveViewData.FocusFrameYSize*yt/2)),
+                        (int) (LiveViewData.FocusX*xt + (LiveViewData.FocusFrameXSize*xt/2)),
+                        (int) (LiveViewData.FocusY*yt + (LiveViewData.FocusFrameYSize*yt/2)),
+                        LiveViewData.HaveFocusData
+                            ? System.Windows.Media.Color.FromArgb(0x80, 0, 0xFF, 0)
+                            : System.Windows.Media.Color.FromArgb(0x80, 0xFF, 0, 0));
+                }
+                else
+                {
+                    bitmap.DrawRectangle((int)(LiveViewData.FocusX * xt - (LiveViewData.FocusFrameXSize * xt / 2)),
+                        (int)(LiveViewData.FocusY * yt - (LiveViewData.FocusFrameYSize * yt / 2)),
+                        (int)(LiveViewData.FocusX * xt + (LiveViewData.FocusFrameXSize * xt / 2)),
+                        (int)(LiveViewData.FocusY * yt + (LiveViewData.FocusFrameYSize * yt / 2)),
+                        LiveViewData.HaveFocusData ? Colors.Green : Colors.Red);
+                }
             }
             catch (Exception exception)
             {
@@ -2524,7 +2537,7 @@ namespace CameraControl.ViewModel
         }
 
 
-        void _focusStackingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void _focusStackingTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!IsFocusStackingRunning)
                 return;
