@@ -33,6 +33,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 //using System.Threading;
 using System.Threading;
 using System.Windows;
@@ -176,14 +177,20 @@ namespace CameraControl.windows
 
         private void ShowInSecMonitor()
         {
+            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+            var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
+
+            var dpiX = (int)dpiXProperty.GetValue(null, null);
+            var dpiY = (int)dpiYProperty.GetValue(null, null);
+
             var allScreens =
                 System.Windows.Forms.Screen.AllScreens.ToList();
             foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
             {
-                Left = r1.Left;
-                Top = r1.Top;
-                Width = r1.Width;
-                Height = r1.Height;
+                Left = r1.Left*96.0/dpiX;
+                Top = r1.Top*96.0/dpiY;
+                Width = r1.Width*96.0/dpiX;
+                Height = r1.Height*96.0/dpiY;
                 break;
             }
         }
