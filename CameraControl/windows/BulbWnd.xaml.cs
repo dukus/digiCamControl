@@ -89,6 +89,27 @@ namespace CameraControl.windows
             }
         }
 
+        private int _expDelay;
+
+        public int expDelay
+        {
+            get { return _expDelay; }
+            set
+            {
+                _expDelay = value;
+            }
+        }
+
+        private int _waitDelay;
+
+        public int waitDelay
+        {
+            get { return _waitDelay; }
+            set
+            {
+                _waitDelay = value;
+            }
+        }
 
         private int _numOfPhotos;
 
@@ -289,11 +310,12 @@ namespace CameraControl.windows
         private void _waitTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _waitSecs++;
-            if (CountDown > 0)
-                CountDown--;
+
             Message = string.Format("Waiting for next capture {0} sec. Photo done {1}/{2}",
                                     _waitSecs, _photoCount, NumOfPhotos);
-            if (_waitSecs >= WaitTime)
+            if (CountDown > 0)
+                CountDown--;
+            else if (_waitSecs >= WaitTime)
             {
                 if (CameraDevice.IsBusy)
                 {
@@ -310,7 +332,7 @@ namespace CameraControl.windows
         private void _captureTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _captureSecs++;
-            if (_captureSecs >= CaptureTime)
+            if (_captureSecs >= CaptureTime + expDelay)
             {
                 _captureTimer.Stop();
                 StopCapture();
@@ -322,12 +344,12 @@ namespace CameraControl.windows
                         PhdGuiding(PhdType);
 
                     Event = "Waiting";
-                    CountDown = WaitTime;
+                    CountDown = WaitTime + waitDelay;
                     _waitTimer.Start();
                 }
             }
-//            Message = string.Format("Capture time {0}/{1} sec. Photo done {2}/{3}", _captureSecs, CaptureTime, _photoCount,
-//                        NumOfPhotos);
+            //            Message = string.Format("Capture time {0}/{1} sec. Photo done {2}/{3}", _captureSecs, CaptureTime, _photoCount,
+            //                        NumOfPhotos);
             CountDown--;
         }
 
@@ -376,6 +398,26 @@ namespace CameraControl.windows
                     {
                         if (CameraDevice.GetCapability(CapabilityEnum.Bulb))
                         {
+                            AsyncObservableCollection<PropertyValue<long>> coll = CameraDevice.AdvancedProperties;
+                            foreach (PropertyValue<long> prop in coll)
+                                if (prop.Code == 0xD06A)//.Name == "Exposure delay mode")
+                                {
+                                    if (prop.Value!="OFF")
+                                    {
+                                        expDelay = int.Parse(prop.Value.Substring(0, 1));
+                                        //expDelay = (int)prop.NumericValue;
+                                        CountDown += expDelay;
+                                    }
+                                    else
+                                        expDelay = 0;
+                                }
+                                else if (prop.Code == NikonBase.CONST_PROP_NoiseReduction)
+                                {
+                                    if (prop.Value == "ON")
+                                        waitDelay = CaptureTime;
+                                    else
+                                        waitDelay = 0;
+                                }
                             ServiceProvider.DeviceManager.LastCapturedImage[CameraDevice] = "";
                             CameraDevice.IsBusy = true;
                             CameraDevice.LockCamera();
@@ -436,6 +478,7 @@ namespace CameraControl.windows
         private void btn_stop_Click(object sender, RoutedEventArgs e)
         {
             StopCapture();
+            CountDown = 0;
         }
 
         private void StopCapture()
@@ -483,7 +526,7 @@ namespace CameraControl.windows
                             StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
                         }
                     }
-                    CountDown = 0;
+                    //CountDown = 0;
                     StaticHelper.Instance.SystemMessage = "Capture done";
                     Log.Debug("Bulb capture done");
                 }
@@ -684,7 +727,7 @@ namespace CameraControl.windows
             try
             {
                 // Blocks until send returns. 
-                int byteCount = server.Client.Send(new[] {opersEnum}, SocketFlags.None);
+                int byteCount = server.Client.Send(new[] { opersEnum }, SocketFlags.None);
                 //Console.WriteLine("Sent {0} bytes.", byteCount);
 
                 // Get reply from the server.
