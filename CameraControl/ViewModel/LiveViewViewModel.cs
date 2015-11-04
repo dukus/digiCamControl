@@ -1971,8 +1971,8 @@ namespace CameraControl.ViewModel
                         (int) (LiveViewData.FocusX*xt + (LiveViewData.FocusFrameXSize*xt/2)),
                         (int) (LiveViewData.FocusY*yt + (LiveViewData.FocusFrameYSize*yt/2)),
                         LiveViewData.HaveFocusData
-                            ? System.Windows.Media.Color.FromArgb(0x80, 0, 0xFF, 0)
-                            : System.Windows.Media.Color.FromArgb(0x80, 0xFF, 0, 0));
+                            ? System.Windows.Media.Color.FromArgb(0x60, 0, 0xFF, 0)
+                            : System.Windows.Media.Color.FromArgb(0x60, 0xFF, 0, 0));
                 }
                 else
                 {

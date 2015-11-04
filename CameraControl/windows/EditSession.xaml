@@ -1,6 +1,6 @@
 <Controls:MetroWindow x:Class="CameraControl.windows.EditSession"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension SessionWindowTitle}" Height="500" Width="600" Loaded="Window_Loaded" ResizeMode="NoResize" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension SessionWindowTitle}" Height="550" Width="600" Loaded="Window_Loaded" ResizeMode="NoResize" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
@@ -104,7 +104,9 @@
                     <Label Grid.Row="13" Grid.Column="0" Content="{T:TranslateExtension LabelLowerCaseExtension}" HorizontalContentAlignment="Right" />
                     <CheckBox Grid.Row="13" Grid.Column="1" IsChecked="{Binding Path=LowerCaseExtension}" Margin="2"/>
 
-                    
+                    <Label Grid.Row="14" Grid.Column="0" Content="{T:TranslateExtension LabelAskSavePath}" HorizontalContentAlignment="Right" />
+                    <CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding Path=AskSavePath}" Margin="2"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelTags}">

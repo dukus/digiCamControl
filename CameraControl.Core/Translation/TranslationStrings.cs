@@ -131,7 +131,7 @@ namespace CameraControl.Core.Translation
 
         public static string LabelManualFocus = "Manual Focus";
         public static string LabelGrid = "Grid";
-        public static string LabelLvZoomRation = "Lv zoom ration";
+        public static string LabelLvZoomRation = "Lv zoom ratio";
         public static string LabelFocusStacking = "Focus Stacking";
         public static string LabelNoOfPhots = "No. of photos";
         public static string LabelFocusStep = "Focus step";
@@ -658,5 +658,6 @@ namespace CameraControl.Core.Translation
         public static string LabelCaptureCount = "Capture Count";
         public static string LabelAutoFocusBeforCapture = "Autofocus befor capture";
         public static string LabelEnhancedThumbs = "Enhanced Thumbs";
+        public static string LabelAskSavePath = "Ask for captured file path";
     }
 }

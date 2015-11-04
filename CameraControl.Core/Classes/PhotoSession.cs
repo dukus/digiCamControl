@@ -374,6 +374,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool AskSavePath
+        {
+            get { return _askSavePath; }
+            set
+            {
+                _askSavePath = value;
+                NotifyPropertyChanged("AskSavePath");
+            }
+        }
+
         private string _configFile;
 
         public string ConfigFile
@@ -507,6 +517,7 @@ namespace CameraControl.Core.Classes
         private int _series;
         private bool _lowerCaseExtension;
         private bool _reloadOnFolderChange;
+        private bool _askSavePath;
 
         public bool AllowOverWrite
         {

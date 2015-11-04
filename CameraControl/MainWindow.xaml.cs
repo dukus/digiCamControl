@@ -442,6 +442,27 @@ namespace CameraControl
                         Path.GetFileNameWithoutExtension(fileName) + Path.GetExtension(fileName).ToLower());
                 }
 
+
+                if (session.AskSavePath)
+                {
+                    SaveFileDialog dialog = new SaveFileDialog();
+                    dialog.Filter = "All files|*.*";
+                    dialog.Title = "Save captured photo";
+                    dialog.FileName = fileName;
+                    dialog.InitialDirectory = Path.GetDirectoryName(fileName);
+                    if (dialog.ShowDialog() == true)
+                    {
+                        fileName = dialog.FileName;
+                    }
+                    else
+                    {
+                        eventArgs.CameraDevice.IsBusy = false;
+                        if (File.Exists(tempFile))
+                            File.Delete(tempFile);
+                        return;
+                    }
+                }
+
                 if (!Directory.Exists(Path.GetDirectoryName(fileName)))
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName));
