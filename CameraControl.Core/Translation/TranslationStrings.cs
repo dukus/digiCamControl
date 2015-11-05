@@ -654,10 +654,10 @@ namespace CameraControl.Core.Translation
         public static string LabelFill = "Fill";
         // 19/10/2015
         public static string LabelApplyToImage = "Apply to selected image";
-        public static string LabelLiveviewInSecMonitor = "Live view in secondary monitor";
         public static string LabelCaptureCount = "Capture Count";
         public static string LabelAutoFocusBeforCapture = "Autofocus befor capture";
         public static string LabelEnhancedThumbs = "Enhanced Thumbs";
         public static string LabelAskSavePath = "Ask for captured file path";
+        public static string LabelSaveLiveviewWindow = "Save live view window position";
     }
 }
