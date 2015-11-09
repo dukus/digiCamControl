@@ -85,18 +85,27 @@ namespace CameraControl.Core
             }
             catch {}
             Analytics = new Analytics();
+            Log.Debug("Init : Analytics");
             //DeviceManager = new CameraDeviceManager(Path.Combine(Classes.Settings.ApplicationFolder, "Devices"));
             DeviceManager = new CameraDeviceManager();
+            Log.Debug("Init : DeviceManager");
             ExternalDeviceManager = new ExternalDeviceManager();
+            Log.Debug("Init : ExternalDeviceManager");
             Trigger = new TriggerClass();
+            Log.Debug("Init : Trigger");
             ActionManager = new ActionManager();
+            Log.Debug("Init : ActionManager");
             QueueManager = new QueueManager();
+            Log.Debug("Init : QueueManager");
             //Branding = new Branding();
             ScriptManager = new ScriptManager();
+            Log.Debug("Init : ScriptManager");
             PluginManager = new PluginManager();
+            Log.Debug("Init : PluginManager");
             FilenameTemplateManager = new FilenameTemplateManager();
             _pipeServer = new PipeServerT();
             _pipeServer.Listen("DCCPipe");
+            Log.Debug("Init : _pipeServer");
         }
 
         private static void Log_LogError(LogEventArgs e)
