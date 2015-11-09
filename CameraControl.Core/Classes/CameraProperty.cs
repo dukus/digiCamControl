@@ -29,6 +29,7 @@
 #region
 
 using System.Net.NetworkInformation;
+using System.Windows;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 
@@ -193,6 +194,7 @@ namespace CameraControl.Core.Classes
         private WindowCommandItem _keyTrigger;
         private int _delay;
         private bool _liveViewInSecMonitor;
+        private bool _saveLiveViewWindow;
 
         public LiveviewSettings LiveviewSettings
         {
@@ -234,15 +236,18 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public bool LiveViewInSecMonitor
+
+        public bool SaveLiveViewWindow
         {
-            get { return _liveViewInSecMonitor; }
+            get { return _saveLiveViewWindow; }
             set
             {
-                _liveViewInSecMonitor = value;
-                NotifyPropertyChanged("LiveViewInSecMonitor");
+                _saveLiveViewWindow = value;
+                NotifyPropertyChanged("SaveLiveViewWindow");
             }
         }
+
+        public Rect WindowRect { get; set; }
 
         public CameraProperty()
         {
@@ -251,6 +256,8 @@ namespace CameraControl.Core.Classes
             Counter = 0;
             LiveviewSettings = new LiveviewSettings();
             KeyTrigger = new WindowCommandItem();
+            SaveLiveViewWindow = true;
+            WindowRect = new Rect();
         }
     }
 }

@@ -82,8 +82,8 @@
         <Label Content="{T:TranslateExtension LabelCaptureDelay}" Grid.Row="4" Grid.Column="3" HorizontalContentAlignment="Right"/>
         <ontrols:NumericUpDown Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.Delay}" Minimum="0" Grid.Row="4" Grid.Column="4" Margin="2"/>
 
-        <Label Content="{T:TranslateExtension LabelLiveviewInSecMonitor}" ToolTip="{T:TranslateExtension LabelLiveviewInSecMonitor}" Grid.Column="3" Grid.Row="5" HorizontalContentAlignment="Right"/>
-        <CheckBox Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.LiveViewInSecMonitor}" Margin="3"/>
+        
+        <CheckBox Content="{T:TranslateExtension LabelSaveLiveviewWindow}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="5" VerticalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SaveLiveViewWindow}" Margin="3" FlowDirection="RightToLeft"/>
 
 
         <Button Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Content="Sync camera date and time"  Name="btn_dateTime" Margin="5" Click="btn_dateTime_Click" />

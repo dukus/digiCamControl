@@ -175,26 +175,6 @@ namespace CameraControl.windows
         }
 
 
-        private void ShowInSecMonitor()
-        {
-            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
-            var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
-
-            var dpiX = (int)dpiXProperty.GetValue(null, null);
-            var dpiY = (int)dpiYProperty.GetValue(null, null);
-
-            var allScreens =
-                System.Windows.Forms.Screen.AllScreens.ToList();
-            foreach (var r1 in from item in allScreens where !item.Primary select item.WorkingArea)
-            {
-                Left = r1.Left*96.0/dpiX;
-                Top = r1.Top*96.0/dpiY;
-                Width = r1.Width*96.0/dpiX;
-                Height = r1.Height*96.0/dpiY;
-                break;
-            }
-        }
-
         #region Implementation of IWindow
 
         public void ExecuteCommand(string cmd, object param)
@@ -221,9 +201,13 @@ namespace CameraControl.windows
                         try
                         {
                             ICameraDevice cameraparam = param as ICameraDevice;
-                            if (cameraparam.LoadProperties().LiveViewInSecMonitor)
+                            var properties = cameraparam.LoadProperties();
+                            if (properties.SaveLiveViewWindow && properties.WindowRect.Width > 0 && properties.WindowRect.Height>0)
                             {
-                                ShowInSecMonitor();
+                                this.Left = properties.WindowRect.Left;
+                                this.Top = properties.WindowRect.Top;
+                                this.Width = properties.WindowRect.Width;
+                                this.Height = properties.WindowRect.Height;
                             }
                             else
                             {
@@ -258,6 +242,12 @@ namespace CameraControl.windows
                     {
                         try
                         {
+                            ICameraDevice cameraparam = ((LiveViewViewModel)DataContext).CameraDevice;
+                            var properties = cameraparam.LoadProperties();
+                            if (properties.SaveLiveViewWindow)
+                            {
+                                properties.WindowRect = new Rect(this.Left, this.Top, this.Width, this.Height);
+                            }
                             ((LiveViewViewModel) DataContext).UnInit();
                         }
                         catch (Exception exception)
@@ -286,6 +276,12 @@ namespace CameraControl.windows
                     {
                         if (DataContext != null)
                         {
+                            ICameraDevice cameraparam = ((LiveViewViewModel)DataContext).CameraDevice;
+                            var properties = cameraparam.LoadProperties();
+                            if (properties.SaveLiveViewWindow)
+                            {
+                                properties.WindowRect = new Rect(this.Left, this.Top, this.Width, this.Height);
+                            }
                             ((LiveViewViewModel) DataContext).UnInit();
                             Hide();
                             Close();
