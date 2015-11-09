@@ -207,6 +207,9 @@
 
                     <Label Grid.Row="7" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowSecondary}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="7" Grid.Column="1" Margin="3" IsChecked="{Binding FullScreenInSecondaryMonitor}"/>
+
+                    <Label Grid.Row="8" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowFullscreenControls}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox Grid.Row="8" Grid.Column="1" Margin="3" IsChecked="{Binding ShowFullscreenControls}"/>                    
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelTriggers}">

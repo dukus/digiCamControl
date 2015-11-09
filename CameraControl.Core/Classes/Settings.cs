@@ -361,6 +361,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool ShowFullscreenControls
+        {
+            get { return _hideFullscreenControls; }
+            set
+            {
+                _hideFullscreenControls = value;
+                NotifyPropertyChanged("ShowFullscreenControls");
+            }
+        }
+
         private int _previewSeconds;
 
         public int PreviewSeconds
@@ -761,6 +771,7 @@ namespace CameraControl.Core.Classes
         private bool _loadCanonTransferMode;
         private bool _showThumbInfo;
         private bool _enhancedThumbs;
+        private bool _hideFullscreenControls;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -957,6 +968,7 @@ namespace CameraControl.Core.Classes
             CanonFocusStepWait = 400;
             RotateIndex = 0;
             FullScreenColor = Colors.Black;
+            ShowFullscreenControls = true;
             SelectedLanguage = Thread.CurrentThread.CurrentCulture.Name;
             FocusMoveStep = 50;
             MotionBlockSize = 40;

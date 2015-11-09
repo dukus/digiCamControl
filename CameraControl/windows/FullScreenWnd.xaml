@@ -52,7 +52,8 @@
             </ToggleButton>
         </StackPanel>
 
-        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="5"  Background="Transparent">
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="5"  Background="Transparent"
+                Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowFullscreenControls, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Path Width="50" Height="40"
                                   Canvas.Left="15.9063"
                                   Canvas.Top="14.75"
@@ -60,7 +61,8 @@
                                   Fill="{DynamicResource BlackBrush}"
                                   Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
         </Button>
-        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="5" Background="Transparent">
+        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="5" Background="Transparent"
+                Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowFullscreenControls, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Path Width="50" Height="40"
                                   Canvas.Left="15.9063"
                                   Canvas.Top="14.75"
