@@ -24,7 +24,7 @@ namespace CameraControl.Core.Scripting
                     if (args.Length > 1)
                     {
                         var file = args[1];
-                        if (file.Contains(":\\"))
+                        if (file.Contains(":\\") || file.StartsWith(@"\\"))
                         {
                             ServiceProvider.Settings.DefaultSession.Folder = Path.GetDirectoryName(file);
                         }
