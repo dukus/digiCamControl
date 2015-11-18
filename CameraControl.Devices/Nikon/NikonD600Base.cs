@@ -1,4 +1,4 @@
-﻿#region Licence
+#region Licence
 
 // Distributed under MIT License
 // ===========================================================
@@ -30,16 +30,49 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using CameraControl.Devices.Classes;
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD7100 : NikonD600Base
+    public class NikonD600Base : NikonD800
     {
+        public override LiveViewData GetLiveViewImage()
+        {
+            LiveViewData viewData = new LiveViewData();
+            if (Monitor.TryEnter(Locker, 10))
+            {
+                try
+                {
+                    //DeviceReady();
+                    viewData.HaveFocusData = true;
+
+                    const int headerSize = 384;
+
+                    var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+                    if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
+                    {
+                        _timer.Start();
+                        viewData.IsLiveViewRunning = false;
+                        viewData.ImageData = null;
+                        return viewData;
+                    }
+                    if (result.Data == null || result.Data.Length <= headerSize)
+                        return null;
+                    GetAdditionalLiveViewData(viewData, result.Data);
+                    viewData.ImageDataPosition = headerSize;
+                    viewData.ImageData = result.Data;
+                }
+                finally
+                {
+                    Monitor.Exit(Locker);
+                }
+            }
+            return viewData;
+        }
+
         protected override void GetAdditionalLiveViewData(LiveViewData viewData, byte[] result)
         {
             viewData.LiveViewImageWidth = ToInt16(result, 8);
@@ -72,10 +105,28 @@ namespace CameraControl.Devices.Nikon
             viewData.HaveSoundData = true;
         }
 
-        protected override void InitFNumber()
+
+        protected override PropertyValue<long> InitStillCaptureMode()
         {
-            base.InitFNumber();
-            MovieFNumber.IsEnabled = false;
+            PropertyValue<long> res = new PropertyValue<long>()
+                                          {
+                                              Name = "Still Capture Mode",
+                                              IsEnabled = true,
+                                              Code = 0x5013,
+                                              SubType = typeof (UInt16)
+                                          };
+            res.AddValues("Single shot (single-frame shooting)", 0x0001);
+            res.AddValues("Continuous high-speed shooting (CH)", 0x0002);
+            res.AddValues("Continuous low-speed shooting (CL)", 0x8010);
+            res.AddValues("Self-timer", 0x8011);
+            res.AddValues("Mirror-up", 0x8012);
+            res.AddValues("Quiet shooting", 0x8016);
+            res.AddValues("Remote control", 0x8017);
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                                                  res.Code);
+            return res;
         }
     }
 }

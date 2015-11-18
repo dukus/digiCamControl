@@ -37,7 +37,7 @@ using System.Text;
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD5200 : NikonD600
+    public class NikonD5200 : NikonD600Base
     {
     }
 }

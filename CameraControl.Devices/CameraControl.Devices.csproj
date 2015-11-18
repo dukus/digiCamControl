@@ -118,6 +118,7 @@
     <Compile Include="Custom\DevicePropertyValue.cs" />
     <Compile Include="ICameraDevice.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Nikon\NikonD600.cs" />
     <Compile Include="Nikon\NikonD7100.cs" />
     <Compile Include="Nikon\NikonBase.cs" />
     <Compile Include="Nikon\NikonD300.cs" />
@@ -128,7 +129,7 @@
     <Compile Include="Nikon\NikonD5100.cs" />
     <Compile Include="Nikon\NikonD5200.cs" />
     <Compile Include="Nikon\NikonD60.cs" />
-    <Compile Include="Nikon\NikonD600.cs" />
+    <Compile Include="Nikon\NikonD600Base.cs" />
     <Compile Include="Nikon\NikonD700.cs" />
     <Compile Include="Nikon\NikonD7000.cs" />
     <Compile Include="Nikon\NikonD80.cs" />
