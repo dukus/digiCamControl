@@ -1669,10 +1669,10 @@ namespace CameraControl.ViewModel
                         Bitmap bmp = res;
                         if (PreviewTime > 0 && (DateTime.Now - _photoCapturedTime).TotalSeconds <= PreviewTime)
                         {
-                            var bitmap = ServiceProvider.Settings.SelectedBitmap.DisplayImage;
-                            var dw = (double)bmp.Width / bitmap.PixelWidth;
-                            bitmap = bitmap.Resize((int)(bitmap.PixelWidth * dw), (int)(bitmap.PixelHeight * dw),
-                                WriteableBitmapExtensions.Interpolation.NearestNeighbor);
+                            var bitmap = ServiceProvider.Settings.SelectedBitmap.DisplayImage.Clone();
+                            //var dw = (double)bmp.Width / bitmap.PixelWidth;
+                            //bitmap = bitmap.Resize((int)(bitmap.PixelWidth * dw), (int)(bitmap.PixelHeight * dw),
+                            //    WriteableBitmapExtensions.Interpolation.NearestNeighbor);
                             // flip image only if the prview not fliped 
                             if (FlipImage && !ServiceProvider.Settings.FlipPreview)
                                 bitmap = bitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
