@@ -388,14 +388,16 @@ namespace CameraControl
                 PhotoSession session = (PhotoSession) eventArgs.CameraDevice.AttachedPhotoSession ??
                                        ServiceProvider.Settings.DefaultSession;
                 StaticHelper.Instance.SystemMessage = "";
-                if (!eventArgs.CameraDevice.CaptureInSdRam)
+                
+                var extension = Path.GetExtension(eventArgs.FileName);
+
+                if (!eventArgs.CameraDevice.CaptureInSdRam || (extension != null && extension.ToLower() == ".mov"))
                 {
                     if (property.NoDownload)
                     {
                         eventArgs.CameraDevice.IsBusy = false;
                         return;
                     }
-                    var extension = Path.GetExtension(eventArgs.FileName);
                     if (extension != null && (session.DownloadOnlyJpg && extension.ToLower() != ".jpg"))
                     {
                         eventArgs.CameraDevice.IsBusy = false;

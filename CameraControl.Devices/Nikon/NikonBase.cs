@@ -1631,6 +1631,11 @@ namespace CameraControl.Devices.Nikon
                             ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF));
                             return;
                         }
+                        else
+                        {
+                            ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInMedia, 0xFFFFFFFF, 0x0000));
+                            return;
+                        }
                         StopLiveView();
                     }
 

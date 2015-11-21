@@ -167,11 +167,11 @@ namespace CameraControl.windows
             //force to capture in ram
             if (device is NikonBase)
             {
-                if (!_recordtoRam.ContainsKey(device))
-                    _recordtoRam.Add(device, device.CaptureInSdRam);
-                else
-                    _recordtoRam[device] = device.CaptureInSdRam;
-                device.CaptureInSdRam = true;
+                //if (!_recordtoRam.ContainsKey(device))
+                //    _recordtoRam.Add(device, device.CaptureInSdRam);
+                //else
+                //    _recordtoRam[device] = device.CaptureInSdRam;
+                //device.CaptureInSdRam = true;
                 //if (!_hostMode.ContainsKey(device))
                 //    _hostMode.Add(device, device.HostMode);
                 //else
@@ -188,8 +188,8 @@ namespace CameraControl.windows
             device.StopLiveView();
             if (device is NikonBase)
             {
-                if (_recordtoRam.ContainsKey(device))
-                    device.CaptureInSdRam = _recordtoRam[device];
+                //if (_recordtoRam.ContainsKey(device))
+                //    device.CaptureInSdRam = _recordtoRam[device];
                 //if (_hostMode.ContainsKey(device))
                 //    device.HostMode = _hostMode[device];
             }
