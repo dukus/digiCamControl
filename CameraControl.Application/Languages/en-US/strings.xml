@@ -120,7 +120,7 @@
     <string name="LabelTheme">Theme :</string> 
     <string name="LabelGeneral">General</string> 
     <string name="LabelPreview">Preview</string> 
-    <string name="LabelPlaySound">Play sound after photo taken</string> 
+    <string name="LabelPlaySound">Play sound after capture</string> 
     <string name="LabelAutoPreview">Auto preview</string> 
     <string name="LabelPreviewAfterCapture">Preview image after capture in full screen</string> 
     <string name="LabelPreviewTime">Preview time in sec : </string> 
@@ -137,14 +137,14 @@
     <string name="LabelSmallFocusSstep">Small focus step</string> 
     <string name="LabelMediumFocusStep">Medium focus step</string> 
     <string name="LabelLargFocusStep">Larg focus step</string> 
-    <string name="ReStartToolTip">You need to restart the application for this changes to take affect</string> 
+    <string name="ReStartToolTip">You need to restart the application for these changes to take affect</string> 
 
     <string name="LabelSessonName">Session name :</string> 
     <string name="LabelFolder">Folder :</string> 
     <string name="LabelFileNameTemplate">File Name Template :</string> 
     <string name="LabelFileNameTemplateToolTip">$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4</string> 
     <string name="LabelCounter">Counter :</string> 
-    <string name="LabelUseOriginal">Use original file name gave by the camera</string> 
+    <string name="LabelUseOriginal">Use original file name given by the camera</string> 
     <string name="LabelUseOriginalToolTip">This option isn't works with WIA driver</string> 
     <string name="LabelDontDownloadPhotos">Don't download photos to PC</string> 
     <string name="LabelAlowFolderChange">Allow folder change using image browser</string> 
@@ -518,9 +518,9 @@
 	<string name="LabelLowerCaseExtension">Lower case extension</string>
 	<string name="LabelOverlayTransparency">Transparency</string>
 	<string name="LabelOverlayUseLastCaptured">Use last captured</string>
-	<string name="LabelMinimizeToTryIcon">Minimize to try icon</string>
+	<string name="LabelMinimizeToTryIcon">Minimize to tray icon</string>
 	<string name="LabelStartMinimized">Start minimized</string>
-	<string name="LabelStartupWithWindows">Start when Windows start </string>
+	<string name="LabelStartupWithWindows">Start when Windows starts</string>
 	<string name="LabelSelectSeries">Select photos in same series</string>
 	<string name="LabelCaptureDelay">Capture delay</string>
 	<string name="LabelAutoExportPlugins">Auto Export Plugins</string>
@@ -628,7 +628,7 @@
 	<string name="LabelWrongFNumber">Aperture cannot be modified</string>
 	<string name="LabelBracketingMMode">Set camera in M mode</string>
 	<string name="LabelTimeLapseCaptureBracketing">Capture with bracketing</string>
-	<string name="LabelZoomToFocus">Always zoom to firs focus point</string>
+	<string name="LabelZoomToFocus">Always zoom to first focus point</string>
 	<string name="LabelPreviewFullSize">Preview full size photo</string>
 	<string name="LabelCropMargins">Crop margins (%)</string>
 	<string name="LabelShowActiveArea">Show active area</string>

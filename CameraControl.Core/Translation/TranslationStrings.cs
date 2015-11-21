@@ -96,7 +96,7 @@ namespace CameraControl.Core.Translation
         public static string LabelTheme = "Theme ";
         public static string LabelGeneral = "General";
         public static string LabelPreview = "Preview";
-        public static string LabelPlaySound = "Play sound after photo taken";
+        public static string LabelPlaySound = "Play sound after capture";
         public static string LabelAutoPreview = "Auto preview";
         public static string LabelPreviewAfterCapture = "Preview image after capture in fullscreen";
         public static string LabelPreviewTime = "Preview time in sec  ";
@@ -113,7 +113,7 @@ namespace CameraControl.Core.Translation
         public static string LabelSmallFocusSstep = "Small focus step";
         public static string LabelMediumFocusStep = "Medium focus step";
         public static string LabelLargFocusStep = "Large focus step";
-        public static string ReStartToolTip = "You need to restart the application for this changes to take affect";
+        public static string ReStartToolTip = "You need to restart the application for these changes to take affect";
 
         public static string LabelSessonName = "Session name ";
         public static string LabelFolder = "Folder ";
@@ -123,7 +123,7 @@ namespace CameraControl.Core.Translation
             "$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4";
 
         public static string LabelCounter = "Counter";
-        public static string LabelUseOriginal = "Use original filename gave by the camera";
+        public static string LabelUseOriginal = "Use original filename given by the camera";
         public static string LabelUseOriginalToolTip = "This option isn't works with WIA driver";
         public static string LabelDontDownloadPhotos = "Don't download photos to PC";
         public static string LabelAlowFolderChange = "Allow folder change using image browser";
@@ -523,9 +523,9 @@ namespace CameraControl.Core.Translation
         public static string LabelLowerCaseExtension = "Lower case extension";
         public static string LabelOverlayTransparency = "Transparency";
         public static string LabelOverlayUseLastCaptured = "Use last captured";
-        public static string LabelMinimizeToTryIcon = "Minimize to try icon";
+        public static string LabelMinimizeToTryIcon = "Minimize to tray icon";
         public static string LabelStartMinimized = "Start minimized";
-        public static string LabelStartupWithWindows = "Start when Windows start ";
+        public static string LabelStartupWithWindows = "Start when Windows starts";
         public static string LabelSelectSeries = "Select photos in same series";
         public static string LabelCaptureDelay = "Capture delay";
         public static string LabelAutoExportPlugins = "Auto Export Plugins";
@@ -640,7 +640,7 @@ namespace CameraControl.Core.Translation
         public static string LabelWrongFNumber = "Aperture cannot be modified";
         public static string LabelBracketingMMode = "Set camera in M mode";
         public static string LabelTimeLapseCaptureBracketing = "Capture with bracketing";
-        public static string LabelZoomToFocus = "Always zoom to firs focus point";
+        public static string LabelZoomToFocus = "Always zoom to first focus point";
         public static string LabelPreviewFullSize = "Preview full size photo";
         public static string LabelCropMargins = "Crop margins (%)";
         public static string LabelShowActiveArea = "Show active area";

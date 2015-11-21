@@ -64,6 +64,7 @@ namespace CameraControl.windows
             _presets = new Dictionary<ICameraDevice, CameraPreset>();
             try
             {
+                // xsplit plugin support 
                 var plugin = TimedBroadcasterPlugin.CreateInstance(
                     "F752DC1B-438E-4014-914B-48F249D4C8F1", null, 1380, 112, 50);
 
@@ -171,11 +172,11 @@ namespace CameraControl.windows
                 else
                     _recordtoRam[device] = device.CaptureInSdRam;
                 device.CaptureInSdRam = true;
-                if (!_hostMode.ContainsKey(device))
-                    _hostMode.Add(device, device.HostMode);
-                else
-                    _hostMode[device] = device.HostMode;
-                device.HostMode = true;
+                //if (!_hostMode.ContainsKey(device))
+                //    _hostMode.Add(device, device.HostMode);
+                //else
+                //    _hostMode[device] = device.HostMode;
+                //device.HostMode = true;
             }
             device.StartLiveView();
         }
@@ -189,8 +190,8 @@ namespace CameraControl.windows
             {
                 if (_recordtoRam.ContainsKey(device))
                     device.CaptureInSdRam = _recordtoRam[device];
-                if (_hostMode.ContainsKey(device))
-                    device.HostMode = _hostMode[device];
+                //if (_hostMode.ContainsKey(device))
+                //    device.HostMode = _hostMode[device];
             }
         }
 
