@@ -2310,50 +2310,59 @@ namespace CameraControl.ViewModel
                         step = FocusValue - FocusCounter;
                 }
 
-                try
-                {
-                    var focusStep = 0;
-                    _timer.Stop();
-                    CameraDevice.StartLiveView();
-                    StaticHelper.Instance.SystemMessage = "Move focus " + step;
-                    if (SimpleManualFocus)
-                    {
-                        FocusProgressMax = Math.Abs(step);
-                        FocusProgressValue = 0;
-                        FocusProgressVisible = true;
+                var focusStep = 0;
+                _timer.Stop();
 
-                        for (var i = 0; i < Math.Abs(step); i++)
+                var retryCount = 10;
+                do
+                {
+                    try
+                    {
+                        CameraDevice.StartLiveView();
+                        if (SimpleManualFocus)
                         {
-                            FocusProgressValue++;
-                            focusStep += CameraDevice.Focus(step);
-                            GetLiveImage();
-                            Thread.Sleep(ServiceProvider.Settings.CanonFocusStepWait);
+                            FocusProgressMax = Math.Abs(step);
+                            FocusProgressValue = 0;
+                            FocusProgressVisible = true;
+
+                            for (var i = 0; i < Math.Abs(step); i++)
+                            {
+                                FocusProgressValue++;
+                                focusStep += CameraDevice.Focus(step);
+                                GetLiveImage();
+                                Thread.Sleep(ServiceProvider.Settings.CanonFocusStepWait);
+                            }
+                            FocusProgressVisible = false;
                         }
-                        FocusProgressVisible = false;
+                        else
+                        {
+                            focusStep += CameraDevice.Focus(step);
+                        }
+
+                        FocusCounter += focusStep;
+                        if (!LockA && LockB && FocusCounter < 0)
+                        {
+                            FocusValue += (FocusCounter * -1);
+                            FocusCounter = 0;
+                        }
+                        StaticHelper.Instance.SystemMessage = "Move focus " + step;
+                        break;
                     }
-                    else
+                    catch (DeviceException exception)
                     {
-                        focusStep += CameraDevice.Focus(step);
+                        Log.Debug("Unable to focus", exception);
+                        StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus + " " +
+                                                              exception.Message;
+                        retryCount--;
                     }
-                    
-                    FocusCounter += focusStep;
-                    if (!LockA && LockB &&FocusCounter<0)
+                    catch (Exception exception)
                     {
-                        FocusValue += (FocusCounter*-1);
-                        FocusCounter = 0;
+                        Log.Debug("Unable to focus", exception);
+                        StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus;
+                        retryCount--;
                     }
-                }
-                catch (DeviceException exception)
-                {
-                    Log.Error("Unable to focus", exception);
-                    StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus + " " +
-                                                          exception.Message;
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Unable to focus", exception);
-                    StaticHelper.Instance.SystemMessage = TranslationStrings.LabelErrorUnableFocus;
-                }
+                    Thread.Sleep(50);
+                } while (retryCount > 0);
             }
 
             _focusIProgress = false;
