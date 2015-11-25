@@ -1155,6 +1155,9 @@ namespace CameraControl.ViewModel
         public RelayCommand SetAreaCommand { get; set; }
         public RelayCommand DoneSetAreaCommand { get; set; }
 
+        public RelayCommand LockCurrentNearCommand { get; set; }
+        public RelayCommand LockCurrentFarCommand { get; set; }
+
         #endregion
 
         public bool IsActive { get; set; }
@@ -1259,6 +1262,25 @@ namespace CameraControl.ViewModel
             FocusPPPCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? ServiceProvider.Settings.LargeFocusStepCanon : ServiceProvider.Settings.LargeFocusStep));
             MoveACommand = new RelayCommand(() => SetFocus(-FocusCounter));
             MoveBCommand = new RelayCommand(() => SetFocus(FocusValue));
+            LockCurrentNearCommand = new RelayCommand(() =>
+            {
+                if (LockB)
+                {
+                    FocusValue = FocusValue - FocusCounter;
+                    FocusCounter = 0;
+                }
+                LockA = true;
+            });
+
+            LockCurrentFarCommand = new RelayCommand(() =>
+            {
+                if (LockB || LockA)
+                {
+                    FocusValue = FocusCounter;
+                }
+                LockB = true;
+            });
+
             StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
             PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking, () => LockB);
             StopFocusStackingCommand = new RelayCommand(StopFocusStacking);
