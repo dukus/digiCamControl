@@ -1,0 +1,33 @@
+﻿<controls:MetroWindow x:Class="CameraControl.windows.StatisticsWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        Title="{translation:TranslateExtension LabelStatistics}" Height="332" Width="679" Closing="MetroWindow_Closing">
+    <Window.DataContext>
+        <viewModel:StatisticsViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="271*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <DatePicker Margin="5" SelectedDate="{Binding From}"/>
+            <DatePicker Margin="5" SelectedDate="{Binding To}"/>
+        </StackPanel>
+        <Button Grid.Row="0" HorizontalAlignment="Right" Margin="5" Content="{translation:TranslateExtension LabelRefresh}" Command="{Binding RefreshCommand}"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="{translation:TranslateExtension LabelOverview}">
+                <Grid />
+            </TabItem>
+            <TabItem Header="{translation:TranslateExtension LabelItems}">
+                <Grid />
+            </TabItem>
+            <TabItem Header="{translation:TranslateExtension LabelExport}">
+                <Grid />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</controls:MetroWindow>

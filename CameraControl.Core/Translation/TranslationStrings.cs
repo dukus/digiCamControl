@@ -662,5 +662,9 @@ namespace CameraControl.Core.Translation
         public static string LabelShowFullscreenControls = "Show fullscreen window controls";
         public static string LabelCurrentLockNear = "Lock current position as nearest point";
         public static string LabelCurrentLockFar = "Lock current position as farthest point";
+        public static string LabelStatistics = "Statistics";
+        public static string LabelRefresh = "Refresh";
+        public static string LabelOverview = "Overview";
+        public static string LabelItems = "Items";
     }
 }
