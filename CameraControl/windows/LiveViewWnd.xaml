@@ -531,7 +531,7 @@
                                     <Label Content="{Binding PhotoCount}" Grid.Row="4" Margin="5"/>
 
                                     <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
-                                    <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                                    <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
                                     <Button Grid.Row="5" Grid.Column="1" ToolTip="{T:TranslateExtension SessionAdd}" Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding HelpFocusStackingCommand}">
                                         <Rectangle Width="10" Height="10">
