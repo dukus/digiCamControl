@@ -510,10 +510,31 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitWbColorTemp());
             AdvancedProperties.Add(InitOnOffProperty("Application mode", CONST_PROP_ApplicationMode));
             AdvancedProperties.Add(InitAutoIsoHight());
+            AdvancedProperties.Add(CenterWeightedExRange());
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> CenterWeightedExRange()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Center-weighted area",
+                IsEnabled = true,
+                Code = 0xD059,
+                SubType = typeof(byte)
+            };
+            res.AddValues("6 mm", 0);
+            res.AddValues("8 mm", 1);
+            res.AddValues("10 mm", 2);
+            res.AddValues("10 mm", 3);
+            res.AddValues("Average on the entire screen", 4);
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
         }
 
         public virtual PropertyValue<long> InitAutoIsoHight()
