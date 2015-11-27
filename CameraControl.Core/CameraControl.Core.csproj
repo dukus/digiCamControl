@@ -219,7 +219,6 @@
     <Compile Include="Classes\PipeServerT.cs" />
     <Compile Include="Classes\PrintSettings.cs" />
     <Compile Include="Classes\Queue\QueueItemFileItem.cs" />
-    <Compile Include="Classes\ScreenTracker.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SourceEnum.cs" />
     <Compile Include="Classes\TagItem.cs" />
