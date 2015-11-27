@@ -5,6 +5,7 @@
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         Title="{translation:TranslateExtension LabelStatistics}" Height="332" Width="679" Closing="MetroWindow_Closing">
+    <!--xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"-->
     <Window.DataContext>
         <viewModel:StatisticsViewModel/>
     </Window.DataContext>
@@ -20,7 +21,16 @@
         <Button Grid.Row="0" HorizontalAlignment="Right" Margin="5" Content="{translation:TranslateExtension LabelRefresh}" Command="{Binding RefreshCommand}"/>
         <TabControl Grid.Row="1">
             <TabItem Header="{translation:TranslateExtension LabelOverview}">
-                <Grid />
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!--<metroChart:PieChart ChartTitle="Minimal Pie Chart" ChartSubTitle="Chart with fixed width and height">
+                        <metroChart:PieChart.Series>
+                            <metroChart:ChartSeries DisplayMember="Name" ValueMember="Value" ItemsSource="{Binding Path=Cameras}" />
+                        </metroChart:PieChart.Series>
+                    </metroChart:PieChart>-->
+                </Grid>
             </TabItem>
             <TabItem Header="{translation:TranslateExtension LabelItems}">
                 <Grid />

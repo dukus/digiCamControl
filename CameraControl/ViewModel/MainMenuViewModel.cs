@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -23,8 +22,6 @@ namespace CameraControl.ViewModel
     public class MainMenuViewModel : ViewModelBase
     {
         ProgressWindow _dlg;
-        private bool _enhancedThumbs;
-        private bool _showThumbInfo;
 
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
@@ -257,7 +254,7 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                var defaultsessionfile = Path.Combine(Core.Classes.Settings.SessionFolder, "Default.xml");
+                var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.xml");
                 var session = new PhotoSession();
                 // copy session with default name
                 if (File.Exists(defaultsessionfile))
@@ -286,7 +283,7 @@ namespace CameraControl.ViewModel
             try
             {
                 EditSession editSession = new EditSession(ServiceProvider.Settings.DefaultSession);
-                editSession.Owner = ServiceProvider.PluginManager.SelectedWindow as Window; ;
+                editSession.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                 ServiceProvider.Settings.ApplyTheme(editSession);
                 editSession.ShowDialog();
                 ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
@@ -433,10 +430,10 @@ namespace CameraControl.ViewModel
 
                 if (ServiceProvider.Settings.StartupWithWindows)
                 {
-                    rk.SetValue(Core.Classes.Settings.AppName, Assembly.GetExecutingAssembly().Location);
+                    rk.SetValue(Settings.AppName, Assembly.GetExecutingAssembly().Location);
                 }
                 else
-                    rk.DeleteValue(Core.Classes.Settings.AppName, false);
+                    rk.DeleteValue(Settings.AppName, false);
             }
             catch (Exception ex)
             {
