@@ -382,7 +382,7 @@
     <string name="LabelMirrorUpError">The release mode is set to Mirror-up and the mirror-up operation is being performed.</string>
     <string name="LabelMirrorUpError2">The release mode is [Mirror-up].</string>
     <string name="LabelDestinationCardError">The recording destination is the card.</string>
-    <string name="LabelLiveViewError">Error stating live view </string>
+    <string name="LabelLiveViewError">Error starting live view </string>
 	<!-- 07/05/2013 -->
 	<string name="LabelDevices">Devices</string>
 	<string name="LabelExternalShutterRelease">External shutter release</string>

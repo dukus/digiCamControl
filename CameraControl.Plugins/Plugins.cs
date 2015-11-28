@@ -57,6 +57,7 @@ namespace CameraControl.Plugins
             {
                 ServiceProvider.PluginManager.ExportPlugins.Add(new ExportToZip());
                 ServiceProvider.PluginManager.ExportPlugins.Add(new ExportToFolder());
+                ServiceProvider.PluginManager.ExportPlugins.Add(new ExportCsv());
                 ServiceProvider.PluginManager.MainWindowPlugins.Add(new SimpleMainWindow());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new PhdPlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new GenThumbPlugin());

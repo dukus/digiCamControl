@@ -175,7 +175,7 @@ namespace CameraControl.ViewModel
 
             HomePageCommand = new RelayCommand(() => PhotoUtils.Run("http://www.digicamcontrol.com/", ""));
             CheckUpdateCommand = new RelayCommand(() => NewVersionWnd.CheckForUpdate(true));
-            ForumCommand = new RelayCommand(() => PhotoUtils.Run("http://www.digicamcontrol.com/forum/", ""));
+            ForumCommand = new RelayCommand(() => PhotoUtils.Run("http://digicamcontrol.com/phpbb/index.php", ""));
             SendLogFileCommand = new RelayCommand(() => new ErrorReportWnd("Log file").ShowDialog());
             ShowChangeLogCommand = new RelayCommand(NewVersionWnd.ShowChangeLog);
             AboutCommand = new RelayCommand(() => new AboutWnd().ShowDialog());

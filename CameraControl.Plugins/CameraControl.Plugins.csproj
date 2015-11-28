@@ -204,6 +204,7 @@
     </Compile>
     <Compile Include="AutoExportPlugins\TransformPluginViewModel.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="ExportPlugins\ExportCsv.cs" />
     <Compile Include="ExportPlugins\ExportToZip.cs" />
     <Compile Include="ExternalDevices\DCCUSBShutterRelease.cs" />
     <Compile Include="ExternalDevices\DCCUSBShutterReleaseConfig.xaml.cs">

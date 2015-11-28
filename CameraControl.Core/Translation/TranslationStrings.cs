@@ -384,7 +384,7 @@ namespace CameraControl.Core.Translation
 
         public static string LabelMirrorUpError2 = "The release mode is [Mirror-up].";
         public static string LabelDestinationCardError = "The recording destination is the card.";
-        public static string LabelLiveViewError = "Error stating live view ";
+        public static string LabelLiveViewError = "Error starting live view ";
         //07/05/2013
         public static string LabelDevices = "Devices";
         public static string LabelExternalShutterRelease = "External shutter release";
