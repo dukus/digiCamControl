@@ -214,12 +214,12 @@
     <Compile Include="Classes\LiveviewSettings.cs" />
     <Compile Include="Classes\MessageEventArgs.cs" />
     <Compile Include="Classes\MiniWebServer.cs" />
+    <Compile Include="Classes\NamedValue.cs" />
     <Compile Include="Classes\PhotoSession.cs" />
     <Compile Include="Classes\PhotoUtils.cs" />
     <Compile Include="Classes\PipeServerT.cs" />
     <Compile Include="Classes\PrintSettings.cs" />
     <Compile Include="Classes\Queue\QueueItemFileItem.cs" />
-    <Compile Include="Classes\ScreenTracker.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SourceEnum.cs" />
     <Compile Include="Classes\TagItem.cs" />

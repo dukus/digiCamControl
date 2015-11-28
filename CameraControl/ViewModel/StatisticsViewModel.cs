@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CameraControl.Core.Classes;
+using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -12,6 +10,7 @@ namespace CameraControl.ViewModel
     {
         private DateTime _from;
         private DateTime _to;
+        private AsyncObservableCollection<NamedValue<int>> _cameras;
 
         public DateTime From
         {
@@ -33,6 +32,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public AsyncObservableCollection<NamedValue<int>> Cameras
+        {
+            get { return _cameras; }
+            set
+            {
+                _cameras = value;
+                RaisePropertyChanged(() => Cameras);
+            }
+        }
+
         public RelayCommand RefreshCommand { get; set; }
 
         public StatisticsViewModel()
@@ -44,7 +53,9 @@ namespace CameraControl.ViewModel
 
         private void Refresh()
         {
-            
+            Cameras=new AsyncObservableCollection<NamedValue<int>>();
+            Cameras.Add(new NamedValue<int>("Raw", 10));
+            Cameras.Add(new NamedValue<int>("Jpg", 90));
         }
     }
 }

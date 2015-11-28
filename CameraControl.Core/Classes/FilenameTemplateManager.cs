@@ -57,6 +57,7 @@ namespace CameraControl.Core.Classes
 
             Templates.Add("[Date yyyy]", templatePharser);
             Templates.Add("[Date yyyy-MM]", templatePharser);
+            Templates.Add("[Date yyyy-MM-dd-hh-mm-ss]", templatePharser);
             Templates.Add("[Date MMM]", templatePharser);
             Templates.Add("[DB Row 1]", templatePharser);
             Templates.Add("[DB Row 2]", templatePharser);
