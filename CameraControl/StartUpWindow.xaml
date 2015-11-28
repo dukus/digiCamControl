@@ -34,6 +34,10 @@
         		</TransformGroup>
         	</Image.RenderTransform>
         </Image>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" >
+        <Image Stretch="Uniform" Source="Images/Two.png" Height="150" Margin="1" />
+            <Label Content="Beta" HorizontalAlignment="Right" FontSize="25" Padding="0"/>
+        </StackPanel>
         <ProgressBar IsIndeterminate="True" Panel.ZIndex="-3" Height="30" VerticalAlignment="Bottom" Grid.RowSpan="2" />
         <Label Grid.Row="1" Content="Loading...." FontSize="15"/>
         <Label Content="Label" Name="lbl_vers" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontSize="15" Panel.ZIndex="-1" Grid.RowSpan="2">

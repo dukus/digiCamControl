@@ -40,11 +40,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("CamControl")]
+[assembly: AssemblyTitle("digiCamControl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("digiCameraControl")]
+[assembly: AssemblyProduct("digiCamControl")]
 [assembly: AssemblyCopyright("Copyright ©  2015 Duka Istvan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -86,5 +86,5 @@ using System.Windows;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.3.51.0")]
-[assembly: AssemblyFileVersion("1.3.51.0")]
+[assembly: AssemblyVersion("1.3.52.0")]
+[assembly: AssemblyFileVersion("1.3.52.0")]
