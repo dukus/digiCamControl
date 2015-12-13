@@ -558,15 +558,15 @@ namespace CameraControl.Core.Classes
                         BitmapCreateOptions.None,
                         BitmapCacheOption.OnLoad);
                 // if no future processing required
-                if (!showfocuspoints && ServiceProvider.Settings.RotateIndex == 0 && ServiceProvider.Settings.FlipPreview)
+                if (!showfocuspoints && ServiceProvider.Settings.RotateIndex == 0 && !ServiceProvider.Settings.FlipPreview)
                 {
                     fileItem.Loading = false;
-                    return new WriteableBitmap(bmpDec.Frames[0]);
+                    var b = new WriteableBitmap(bmpDec.Frames[0]);
+                    b.Freeze();
+                    return b;
                 }
 
-
                 var bitmap = BitmapFactory.ConvertToPbgra32Format(bmpDec.Frames[0]);
-
 
                 if (showfocuspoints && !fileItem.Transformed)
                     DrawFocusPoints(fileItem, bitmap);

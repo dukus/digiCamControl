@@ -222,15 +222,15 @@ namespace CameraControl.Core.Classes
             IsLoaded = false;
             RawCodecNeeded = false;
             Metadata = new AsyncObservableCollection<DictionaryItem>();
-            Metadata.Add(new DictionaryItem() {Name = "Exposure mode"});
-            Metadata.Add(new DictionaryItem() {Name = "Exposure program"});
-            Metadata.Add(new DictionaryItem() {Name = "Exposure time"});
-            Metadata.Add(new DictionaryItem() {Name = "F number"});
-            Metadata.Add(new DictionaryItem() {Name = "Lens focal length"});
-            Metadata.Add(new DictionaryItem() {Name = "ISO speed rating"});
-            Metadata.Add(new DictionaryItem() {Name = "Metering mode"});
-            Metadata.Add(new DictionaryItem() {Name = "White balance"});
-            Metadata.Add(new DictionaryItem() {Name = "Exposure bias"});
+            //Metadata.Add(new DictionaryItem() {Name = "Exposure mode"});
+            //Metadata.Add(new DictionaryItem() {Name = "Exposure program"});
+            //Metadata.Add(new DictionaryItem() {Name = "Exposure time"});
+            //Metadata.Add(new DictionaryItem() {Name = "F number"});
+            //Metadata.Add(new DictionaryItem() {Name = "Lens focal length"});
+            //Metadata.Add(new DictionaryItem() {Name = "ISO speed rating"});
+            //Metadata.Add(new DictionaryItem() {Name = "Metering mode"});
+            //Metadata.Add(new DictionaryItem() {Name = "White balance"});
+            //Metadata.Add(new DictionaryItem() {Name = "Exposure bias"});
         }
     }
 }
