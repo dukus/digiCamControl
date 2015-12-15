@@ -23,7 +23,7 @@
         <Label Content="{translation:TranslateExtension LabelFileNameTemplate}"/>
         
         <TextBox Grid.Row="1" Margin="3" Name="txt_templateName" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=TemplateString, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="2" Margin="3" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=ExampleTemplateString}"/>
+        <TextBlock Grid.Row="2" Margin="3" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=ExampleTemplateString}"/>
         
         <ListBox Grid.Row="3" Margin="3" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.FilenameTemplateManager}, Path=Values}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListBox.ItemTemplate>
