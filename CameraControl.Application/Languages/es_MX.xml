@@ -96,7 +96,6 @@
   <string name="ButtonEdit">Editar</string>
   <string name="ButtonAutoFocus">_Enfoque automático</string>
   <string name="ButtonCapture">_Captura</string>
-  <string name="ButtonRecordMovie">Grabar video</string>
   <string name="ButtonFreezeImage">Congelar Imagen</string>
   <string name="ButtonStart">Comenzar</string>
   <string name="ButtonPreview">Vista previa</string>
@@ -108,16 +107,13 @@
   <string name="ButtonCapturePhotos">Capturar fotos</string>
   <string name="ButtonStartTimeLapse">Comenzar intervalo de tiempo</string>
   <string name="ButtonStopTimeLapse">Detener Intervalo de tiempo</string>
-  <string name="ButtonCreateMovie">Crear video</string>
   <string name="ButtonLocateLogFile">Localizar archivo de registro</string>
   <string name="LabelInterfaceLanguage">Idioma de la Interfase :</string>
   <string name="LabelDisableDriver">Deshabilitar controladores nativos (no recomendado)</string>
   <string name="LabelTheme">Tema:</string>
   <string name="LabelGeneral">General</string>
   <string name="LabelPreview">Vista previa</string>
-  <string name="LabelPlaySound">Emitir sonido después de capturar una foto</string>
   <string name="LabelAutoPreview">Vista previa automática</string>
-  <string name="LabelPreviewAfterCapture">Previsualización imagen después de captura en pantalla completa</string>
   <string name="LabelPreviewTime">Tiempo de vista previa en segundos :</string>
   <string name="LabelPreviewInLIveView">Previsualización imagen después de captura en Live view</string>
   <string name="LabelLIveViewImageFreeze">Congelamiento imagen en Live View en segundos :</string>
@@ -131,7 +127,6 @@
   <string name="LabelSmallFocusSstep">Paso de enfoque pequeño</string>
   <string name="LabelMediumFocusStep">Paso de enfoque medio</string>
   <string name="LabelLargFocusStep">Paso de enfoque grande</string>
-  <string name="ReStartToolTip">Necesita reiniciar la aplicación para que los cambios se lleven acabo</string>
   <string name="LabelSessonName">Nombre de sesión:</string>
   <string name="LabelFolder">Carpeta :</string>
   <string name="LabelFileNameTemplate">Plantilla para nombre de archivo :</string>
@@ -148,7 +143,6 @@ $Tag2 - Seleccionada etiqueta 2
 $Tag3 - Seleccionada etiqueta 3
 $Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelCounter">Contador :</string>
-  <string name="LabelUseOriginal">Usar el nombre de archivo original dado por la cámara</string>
   <string name="LabelUseOriginalToolTip">Esta opción no funciona con el controlador WIA</string>
   <string name="LabelDontDownloadPhotos">No descargar fotos a la PC</string>
   <string name="LabelAlowFolderChange">Permitir cambio de carpeta usando el navegador de imágenes</string>
@@ -182,13 +176,10 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelNumberOfPhotos">Número de fotos</string>
   <string name="LabelDontAutofocusOnEveryCapture">No enfocar automáticamente en cada captura.</string>
   <string name="LabelCaptureInterval">Intervalo de captura (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Duración (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Ajustes de video</string>
   <string name="LabelVideoFormat">Formato de Video</string>
   <string name="LabelOutputFile">Archivo de salida</string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">Imagen de relleno</string>
-  <string name="LabelCreateMovie">Crear video</string>
   <string name="LabelAddVirtualMovingToVideo">Agregar movimiento virtual al video</string>
   <string name="LabelMovingSurface">Superficie movible (%)</string>
   <string name="LabelMovingDirection">Dirección de movimiento:</string>
@@ -264,15 +255,12 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Obtener codec raw</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Error al iniciar la grabación de video</string>
   <string name="LabelNoCardInserted">No hay tarjeta insertada</string>
   <string name="LabelCardError">Error de tarjeta</string>
   <string name="LabelCardNotFormatted">Tarjeta no formateada</string>
   <string name="LabelNoFreeAreaInCard">No hay espacio disponible en la tarjeta</string>
   <string name="LabelCardBufferNotEmpty">Existen datos cuyo destino es una tarjeta en el buffer</string>
   <string name="LabelPcBufferNotEmpty">Existen datos cuyo destino es la PC en el buffer</string>
-  <string name="LabelBufferNotEmpty">Existen datos en el buffer.</string>
-  <string name="LabelRecordInProgres">Durante la grabación del archivo de video</string>
   <string name="LabelCardProtected">Tarjeta protegida</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Durante la exhibición agrandada de Live view</string>
   <string name="LabelWrongLiveViewType">El selector Live view establece la vista en vivo de la fotografía.</string>
@@ -330,7 +318,6 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelApplicationError">Error de aplicación</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 no instalado</string>
   <string name="LabelRestartTheApplication">Reinicie la aplicación !</string>
-  <string name="LabelOutOfMemory">A la aplicación se le agotó la memoria disponible, la aplicación se cerrará!</string>
   <string name="LabelApplicationAlreadyRunning">La aplicación ya se está ejecutando</string>
   <string name="LabelDeleteSession">Borrar sesión</string>
   <string name="LabelStartCapture">Empezar captura</string>
@@ -372,7 +359,6 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelMirrorUpError">El modo de liberación está en espejo abatido y la operación de abatimiento de espejo se está efectuando.</string>
   <string name="LabelMirrorUpError2">El modo de liberación es [Espejo abatido]</string>
   <string name="LabelDestinationCardError">El destino de grabación es la tarjeta</string>
-  <string name="LabelLiveViewError">Error afirmando Live view</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Dispositivos</string>
   <string name="LabelExternalShutterRelease">Disparador externo</string>
@@ -475,9 +461,7 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <!--20/08/2014-->
   <string name="LabelOverlayTransparency">Transparencia</string>
   <string name="LabelOverlayUseLastCaptured">Usar ultima capturada</string>
-  <string name="LabelMinimizeToTryIcon">Minimizar al icono en bandeja</string>
   <string name="LabelStartMinimized">Empezar minimizado</string>
-  <string name="LabelStartupWithWindows">Empezar con Windows</string>
   <string name="LabelCaptureDelay">Demora de captura</string>
   <string name="LabelAutoExportPlugins">Auto exportar plugins</string>
   <string name="LabelAddPlugin">Agregar plugin</string>
@@ -491,4 +475,7 @@ $Tag4 - Seleccionada etiqueta 4</string>
   <string name="LabelWaitBetweenSteps">Pausa entre pasos (ms)</string>
   <string name="LabelShowSecondary ">Mostrar en monitor secundario</string>
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Sesión</string>
+  <!--// 12/09/2015-->
 </resources>

@@ -93,7 +93,6 @@
   <string name="ButtonEdit">Редактировать</string>
   <string name="ButtonAutoFocus">Автофокус</string>
   <string name="ButtonCapture">Снимок</string>
-  <string name="ButtonRecordMovie">Записать видео</string>
   <string name="ButtonFreezeImage">Остановить</string>
   <string name="ButtonStart">Старт</string>
   <string name="ButtonPreview">Просмотр</string>
@@ -105,15 +104,12 @@
   <string name="ButtonCapturePhotos">Захват фотографий</string>
   <string name="ButtonStartTimeLapse">Начать замедленную киносъёмку</string>
   <string name="ButtonStopTimeLapse">Остановить замедленную киносъёмку</string>
-  <string name="ButtonCreateMovie">Создать фильм</string>
   <string name="ButtonLocateLogFile">Открыть папку с log-файлом</string>
   <string name="LabelInterfaceLanguage">Язык интерфейса:</string>
   <string name="LabelTheme">Тема оформления:</string>
   <string name="LabelGeneral">Основные</string>
   <string name="LabelPreview">Просмотр</string>
-  <string name="LabelPlaySound">Проигрывать звук после снимка</string>
   <string name="LabelAutoPreview">Автопросмотр</string>
-  <string name="LabelPreviewAfterCapture">Просмотр снимка на полном экране</string>
   <string name="LabelPreviewTime">Время просмотра в сек.:</string>
   <string name="LabelPreviewInLIveView">Просмотр снимка в Live view</string>
   <string name="LabelLIveViewImageFreeze">Просмотр снимка в Live view секунд:</string>
@@ -127,7 +123,6 @@
   <string name="LabelSmallFocusSstep">Малый шаг фокусировки</string>
   <string name="LabelMediumFocusStep">Средний шаг фокусировки</string>
   <string name="LabelLargFocusStep">Большой шаг фокусировки</string>
-  <string name="ReStartToolTip">Вы должны перезапустить приложение, чтобы изменения вступили в силу</string>
   <string name="LabelFolder">Папка:</string>
   <string name="LabelFileNameTemplate">Имя шаблона:</string>
   <string name="LabelFileNameTemplateToolTip">$N - Имя сессии
@@ -143,7 +138,6 @@ $Tag2 - Выбрать метку 2
 $Tag3 - Выбрать метку 3
 $Tag4 - Выбрать метку 4</string>
   <string name="LabelCounter">Счетчик:</string>
-  <string name="LabelUseOriginal">Используйте исходное имя файла данное камерой</string>
   <string name="LabelUseOriginalToolTip">Эта опция не работает с драйвером WIA</string>
   <string name="LabelDontDownloadPhotos">Не загрузите фотографии на ПК</string>
   <string name="LabelTags">Метки</string>
@@ -175,12 +169,10 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelNumberOfPhotos">Количество фотографий</string>
   <string name="LabelDontAutofocusOnEveryCapture">Не автофокусировать на каждом снимке</string>
   <string name="LabelCaptureInterval">Интервал снимков (час:мин:сек)</string>
-  <string name="LabelMovieSettings">Настройки фильма</string>
   <string name="LabelVideoFormat">Видео формат</string>
   <string name="LabelOutputFile">Исходный файл</string>
   <string name="LabelFps">Частота кадров</string>
   <string name="LabelFillImage">Заполнить картинку</string>
-  <string name="LabelCreateMovie">Создать фильм</string>
   <string name="LabelAddVirtualMovingToVideo">Добавить виртуальное перемещение в видео</string>
   <string name="LabelMovingSurface">Перемещение поверхности (%):</string>
   <string name="LabelMovingDirection">Направление перемещения:</string>
@@ -251,15 +243,12 @@ $Tag4 - Выбрать метку 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Получить кодеки RAW</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Ошибка начала записи фильма</string>
   <string name="LabelNoCardInserted">Не вставлена карта</string>
   <string name="LabelCardError">Ошибка карты</string>
   <string name="LabelCardNotFormatted">Карта не отформатирована</string>
   <string name="LabelNoFreeAreaInCard">Нет свободного места в карте</string>
   <string name="LabelCardBufferNotEmpty">Есть данные для записи на карту в буфере.</string>
   <string name="LabelPcBufferNotEmpty">Есть данные для записи на ПК в буфере.</string>
-  <string name="LabelBufferNotEmpty">Есть фильм в буфере.</string>
-  <string name="LabelRecordInProgres">В процессе записи фильма</string>
   <string name="LabelCardProtected">Карта защищена</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Во время расширенного отображения в режиме Live view</string>
   <string name="LabelWrongLiveViewType">Выберите live view положение для live view фотографии.</string>
@@ -315,7 +304,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelApplicationError">Ошибка приложения</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 не установлен</string>
   <string name="LabelRestartTheApplication">Перезапустить приложение !</string>
-  <string name="LabelOutOfMemory">Приложению нехватает памяти. Приложение завершит работу!</string>
   <string name="LabelApplicationAlreadyRunning">Приложение уже запущено</string>
   <string name="LabelDeleteSession">Удаление сессии</string>
   <string name="LabelStartCapture">Начать съёмку</string>
@@ -353,7 +341,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelOverHeatedError">Live view не может быть начато, когда температура поднимается.</string>
   <string name="LabelCardProtectedError">Карта защищена</string>
   <string name="LabelDestinationCardError">Пункт назначения записи, карта</string>
-  <string name="LabelLiveViewError">Сообщение, в режиме live view</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Устройства</string>
   <string name="LabelExternalShutterRelease">Внешний спуск затвора</string>
@@ -422,4 +409,7 @@ $Tag4 - Выбрать метку 4</string>
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Сессия</string>
+  <!--// 12/09/2015-->
 </resources>

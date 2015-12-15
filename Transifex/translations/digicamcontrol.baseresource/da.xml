@@ -82,7 +82,6 @@
   <string name="ButtonEdit">Rediger</string>
   <string name="ButtonAutoFocus">_Auto Fokus</string>
   <string name="ButtonCapture">_Eksponere</string>
-  <string name="ButtonRecordMovie">Optag filmklip</string>
   <string name="ButtonFreezeImage">Frys billede</string>
   <string name="ButtonStart">Start</string>
   <string name="ButtonPreview">Eksempel</string>
@@ -94,15 +93,12 @@
   <string name="ButtonCapturePhotos">Eksponer billeder</string>
   <string name="ButtonStartTimeLapse">Start TimeLapse</string>
   <string name="ButtonStopTimeLapse">Stop TimeLapse</string>
-  <string name="ButtonCreateMovie">Opret film</string>
   <string name="ButtonLocateLogFile">Lokaliser log fil</string>
   <string name="LabelInterfaceLanguage">Interface sprog</string>
   <string name="LabelTheme">Tema:</string>
   <string name="LabelGeneral">Generelt</string>
   <string name="LabelPreview">Eksempel</string>
-  <string name="LabelPlaySound">Afspil lyd efter hver eksponering</string>
   <string name="LabelAutoPreview">Auto eksempel</string>
-  <string name="LabelPreviewAfterCapture">Vis eksempel i fuldskærm efter hver eksponering</string>
   <string name="LabelPreviewTime">Eksempel i sekunder</string>
   <string name="LabelPreviewInLIveView">Vis billede efter eksponering i liveview</string>
   <string name="LabelLIveViewImageFreeze">Frys billede i liveview i sekunder:</string>
@@ -116,11 +112,9 @@
   <string name="LabelSmallFocusSstep">Lille fokus skridt</string>
   <string name="LabelMediumFocusStep">Medium fokus skridt</string>
   <string name="LabelLargFocusStep">Stort forkus skridt</string>
-  <string name="ReStartToolTip">Du skal genstarte applikationen for ændringerne tages i brug</string>
   <string name="LabelFolder">Mappe: </string>
   <string name="LabelFileNameTemplate">Filnavn skabelon:</string>
   <string name="LabelCounter">Tæller</string>
-  <string name="LabelUseOriginal">Brug originale filnavn givet af kameraet</string>
   <string name="LabelUseOriginalToolTip">Denne option virker ikke med WIA driver</string>
   <string name="LabelDontDownloadPhotos">Donwload ikke fotos til PC</string>
   <string name="LabelTags">Tags</string>
@@ -152,12 +146,10 @@
   <string name="LabelNumberOfPhotos">Antal fotos</string>
   <string name="LabelDontAutofocusOnEveryCapture">fokuser ikke ved hver eksponering</string>
   <string name="LabelCaptureInterval">Exponerings interval (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Film indstillinger</string>
   <string name="LabelVideoFormat">Video format</string>
   <string name="LabelOutputFile">Output fil</string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">Fyld billede</string>
-  <string name="LabelCreateMovie">Opret film</string>
   <string name="LabelAddVirtualMovingToVideo">Tilføj virtuel bevægelse til video</string>
   <string name="LabelMovingSurface">Bevægelses overflade (%):</string>
   <string name="LabelMovingDirection">Bevælgelses retning:</string>
@@ -228,15 +220,12 @@
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Hent raw codec</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Fejl ved start af filmoptagelse</string>
   <string name="LabelNoCardInserted">Intet kort isat</string>
   <string name="LabelCardError">Fejl på kort</string>
   <string name="LabelCardNotFormatted">Kort ikke formateret</string>
   <string name="LabelNoFreeAreaInCard">Ingen fri hukomelse på kort</string>
   <string name="LabelCardBufferNotEmpty">Der er data hvis optagelses destination er i kort bufferen</string>
   <string name="LabelPcBufferNotEmpty">Der er data hvis optagelses destination er i PC bufferen</string>
-  <string name="LabelBufferNotEmpty">Der er filmdate i bufferen</string>
-  <string name="LabelRecordInProgres">Under film optagelse</string>
   <string name="LabelCardProtected">Kort skrivebeskyttet</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Under forstørret visning af liveview</string>
   <string name="LabelWrongLiveViewType">Forkert liveview type</string>
@@ -293,7 +282,6 @@
   <string name="LabelApplicationError">Programfejl</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 ikke installeret</string>
   <string name="LabelRestartTheApplication">Genstart programmet.</string>
-  <string name="LabelOutOfMemory">Programmet er løbet tør for hukommelse. Programmet vil blive lukket</string>
   <string name="LabelApplicationAlreadyRunning">Programmet kører allerede</string>
   <string name="LabelDeleteSession">Slet sæssion</string>
   <string name="LabelStartCapture">Start eksponering</string>
@@ -335,7 +323,6 @@
   <string name="LabelMirrorUpError">Der sat mirrorlockup og mirrorlockup bliver udført.</string>
   <string name="LabelMirrorUpError2">Frigørelsesmodus er [Mirror-up]</string>
   <string name="LabelDestinationCardError">Optagelsesdestinationen er kortet</string>
-  <string name="LabelLiveViewError">Fejl ved at starte Liveview.</string>
   <!--07/05/2013-->
   <!--04/07/2013-->
   <!--17/11/2013-->
@@ -346,4 +333,7 @@
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Sæssion</string>
+  <!--// 12/09/2015-->
 </resources>

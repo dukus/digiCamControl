@@ -97,7 +97,6 @@
   <string name="ButtonEdit">Düzenle</string>
   <string name="ButtonAutoFocus">_Otomatik fokus</string>
   <string name="ButtonCapture">_Çek</string>
-  <string name="ButtonRecordMovie">Video çek</string>
   <string name="ButtonFreezeImage">Görüntüyü Dondur</string>
   <string name="ButtonStart">Başla</string>
   <string name="ButtonPreview">Önizleme</string>
@@ -109,16 +108,13 @@
   <string name="ButtonCapturePhotos">Fotoğraf çek</string>
   <string name="ButtonStartTimeLapse">Aralıklı Çekimi başlat</string>
   <string name="ButtonStopTimeLapse">Aralıklı Çekimi durdur</string>
-  <string name="ButtonCreateMovie">Video oluştur</string>
   <string name="ButtonLocateLogFile">log dosyasını konumla</string>
   <string name="LabelInterfaceLanguage">Arayüz dili: </string>
   <string name="LabelDisableDriver">Yerel sürücüleri devre dışı bırak (önerilmez)</string>
   <string name="LabelTheme">Tema:</string>
   <string name="LabelGeneral">Genel</string>
   <string name="LabelPreview">Önizleme</string>
-  <string name="LabelPlaySound">Fotoğraf çekilirken ses çal</string>
   <string name="LabelAutoPreview">Otomatik önizleme</string>
-  <string name="LabelPreviewAfterCapture">Çekim sonrası fotoğrafı tam ekranda önizleme</string>
   <string name="LabelPreviewTime">Önizleme süresi(sn):</string>
   <string name="LabelPreviewInLIveView">Çekim sonrası fotoğrafı canlı görünümde önizleme</string>
   <string name="LabelLIveViewImageFreeze">Görüntü dondurma(sn):</string>
@@ -133,7 +129,6 @@
   <string name="LabelSmallFocusSstep">Küçük odaklama aşaması</string>
   <string name="LabelMediumFocusStep">Orta odaklama aşaması</string>
   <string name="LabelLargFocusStep">Büyük odaklama aşaması</string>
-  <string name="ReStartToolTip">Değişikliklerin uygulanması için programı tekrar başlatmanız gerekiyor</string>
   <string name="LabelSessonName">Oturum adı :</string>
   <string name="LabelFolder">Klasör:</string>
   <string name="LabelFileNameTemplate">Dosya İsmi Şablonu:</string>
@@ -161,7 +156,6 @@ $Tag3 - tag 3
 
 $Tag4 - tag 4</string>
   <string name="LabelCounter">Sayaç :</string>
-  <string name="LabelUseOriginal">Kamera tarafından verilen orijinal dosya adını kullan</string>
   <string name="LabelUseOriginalToolTip">Bu seçenek WIA sürücüsü ile çalışmıyor</string>
   <string name="LabelDontDownloadPhotos">Fotoğrafları bilgisayara indirme</string>
   <string name="LabelAlowFolderChange">Değişikliğe izin ver</string>
@@ -195,13 +189,10 @@ $Tag4 - tag 4</string>
   <string name="LabelNumberOfPhotos">Fotoğraf sayıları</string>
   <string name="LabelDontAutofocusOnEveryCapture">Her çekimde otomatik odaklama kullanma</string>
   <string name="LabelCaptureInterval">Çekim aralığı(sa:dk:sn)</string>
-  <string name="LabelMovieLenght">Video süresi (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Video ayarları</string>
   <string name="LabelVideoFormat">Video formatı</string>
   <string name="LabelOutputFile">Çıktı dosyası</string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">Görüntüyü doldur</string>
-  <string name="LabelCreateMovie">Video oluştur</string>
   <string name="LabelAddVirtualMovingToVideo">Videoya sanal hareket ekle</string>
   <string name="LabelMovingSurface">Arayüz taşınıyor (%):</string>
   <string name="LabelMovingDirection">Hareket yönü:</string>
@@ -276,15 +267,12 @@ $Tag4 - tag 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Ham codec\'i getir</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Video kaydı başlatımında hata</string>
   <string name="LabelNoCardInserted">Kart takılı değil</string>
   <string name="LabelCardError">Kart hatası</string>
   <string name="LabelCardNotFormatted">Kart formatlanmadı</string>
   <string name="LabelNoFreeAreaInCard">Hafıza dolu</string>
   <string name="LabelCardBufferNotEmpty">Tampon bellekte karta kaydetme yapan veri var.</string>
   <string name="LabelPcBufferNotEmpty">Tampon bellekte bilgisayara kaydetme yapan veri var.</string>
-  <string name="LabelBufferNotEmpty">Bufferda video verisi var.</string>
-  <string name="LabelRecordInProgres">Video dosyası kaydetme anında</string>
   <string name="LabelCardProtected">Kart korumalı</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Çekim esnasında canlı görüntünün genişletilmiş bir şekilde görüntülenmesi </string>
   <string name="LabelWrongLiveViewType">Canlı görünüm seçicisi ayarı canlı görünüm fotoğrafçılığıdır.</string>
@@ -342,7 +330,6 @@ $Tag4 - tag 4</string>
   <string name="LabelApplicationError">Uygulama Hatası</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 yüklü değil</string>
   <string name="LabelRestartTheApplication">Uygulamayı yeniden başlatın!</string>
-  <string name="LabelOutOfMemory">Uygulama hafızayı bitirdi. Uygulama kapatılacak!</string>
   <string name="LabelApplicationAlreadyRunning">Uygulama zaten çalışıyor</string>
   <string name="LabelDeleteSession">Oturumu sil</string>
   <string name="LabelStartCapture">Çekime başla</string>
@@ -403,4 +390,7 @@ $Tag4 - tag 4</string>
   <string name="LabelRotate">Çevir</string>
   <string name="LabelShowSecondary ">İkinci monitörde göster</string>
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Oturum</string>
+  <!--// 12/09/2015-->
 </resources>

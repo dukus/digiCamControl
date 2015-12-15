@@ -94,7 +94,6 @@
   <string name="ButtonEdit">Edytuj</string>
   <string name="ButtonAutoFocus">Autofokus</string>
   <string name="ButtonCapture">Przechwyć</string>
-  <string name="ButtonRecordMovie">Nagraj film</string>
   <string name="ButtonFreezeImage">Zamroź obraz</string>
   <string name="ButtonStart">Uruchom</string>
   <string name="ButtonPreview">Podgląd</string>
@@ -106,15 +105,12 @@
   <string name="ButtonCapturePhotos">Zrób zdjęcia</string>
   <string name="ButtonStartTimeLapse">Uruchom film</string>
   <string name="ButtonStopTimeLapse">Zatrzymaj film</string>
-  <string name="ButtonCreateMovie">Utwórz film</string>
   <string name="ButtonLocateLogFile">Lokalizacja pliku Log</string>
   <string name="LabelInterfaceLanguage">Jezyk programu:</string>
   <string name="LabelTheme">Motyw:</string>
   <string name="LabelGeneral">Ogólne</string>
   <string name="LabelPreview">Podgląd</string>
-  <string name="LabelPlaySound">Odtwórz dźwięk po zrobieniu zdjęcia</string>
   <string name="LabelAutoPreview">Autopodgląd</string>
-  <string name="LabelPreviewAfterCapture">Podgląd obrazu po wykonaniu na pełnym ekranie</string>
   <string name="LabelPreviewTime">Czas podglądu w sek:</string>
   <string name="LabelPreviewInLIveView">Podgląd obrazu po zrobieniu w trybie podglądu na żywo</string>
   <string name="LabelLIveViewImageFreeze">Podgląd na żywo zamrożenie obrazu w sek:</string>
@@ -128,7 +124,6 @@
   <string name="LabelSmallFocusSstep">Mały krok fokusa</string>
   <string name="LabelMediumFocusStep">Średni krok fokusa</string>
   <string name="LabelLargFocusStep">Duży krok fokusa</string>
-  <string name="ReStartToolTip">Musisz ponownie uruchomić aplikację, dla tego, aby zmiany przyniosły efekt</string>
   <string name="LabelFolder">Folder:</string>
   <string name="LabelFileNameTemplate">Nazwa pliku szablonu:</string>
   <string name="LabelFileNameTemplateToolTip">$N - Nazwa sesji
@@ -144,7 +139,6 @@ $Tag2 - Zaznaczony tag 2
 $Tag3 - Zaznaczony tag 3
 $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelCounter">Licznik:</string>
-  <string name="LabelUseOriginal">Użyj oryginalnej nazwy pliku danej przez aparat</string>
   <string name="LabelUseOriginalToolTip">Ta opcja jest współpracuje z sterownika WIA</string>
   <string name="LabelDontDownloadPhotos">Nie pobieraj zdjęć na PC</string>
   <string name="LabelTags">Tagi</string>
@@ -176,12 +170,10 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelNumberOfPhotos">Ilość zdjęć</string>
   <string name="LabelDontAutofocusOnEveryCapture">Brak autofokusa w każdym przechwytywaniu</string>
   <string name="LabelCaptureInterval">Przedział zrzutu (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Ustawienia filmu</string>
   <string name="LabelVideoFormat">Format wideo</string>
   <string name="LabelOutputFile">Plik wynikowy</string>
   <string name="LabelFps">FPS</string>
   <string name="LabelFillImage">Wypełnij obraz</string>
-  <string name="LabelCreateMovie">Tworzenie filmu</string>
   <string name="LabelAddVirtualMovingToVideo">Dodaj wirtualny ruch do wideo</string>
   <string name="LabelMovingSurface">Przenoszenie powierzchni (%):</string>
   <string name="LabelMovingDirection">Kierunek ruchu:</string>
@@ -252,15 +244,12 @@ $Tag4 - Zaznaczony tag 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Pobierz kodek Raw </string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Błąd rozpoczęcia nagrywania filmu</string>
   <string name="LabelNoCardInserted">Karta nie włożona</string>
   <string name="LabelCardError">Błąd karty</string>
   <string name="LabelCardNotFormatted">Karta nie sformatowana</string>
   <string name="LabelNoFreeAreaInCard">Brak wolnego miejsca na karcie</string>
   <string name="LabelCardBufferNotEmpty">Brak danych, których miejscem przeznaczenia nagrania jest karta w buforze.</string>
   <string name="LabelPcBufferNotEmpty">Brak danych, których miejscem przeznaczenia nagrania jest PC w buforze.</string>
-  <string name="LabelBufferNotEmpty">Brak danych filmu w buforze.</string>
-  <string name="LabelRecordInProgres">Podczas nagrywania pliku z filmem</string>
   <string name="LabelCardProtected">Karta zabezpieczona</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Podczas wyświetlania rozszerzonego Podglądu na żywo</string>
   <string name="LabelWrongLiveViewType">Ustawienie wyboru podglądu na żywo jest na fotografii podglądu na żywo.</string>
@@ -317,7 +306,6 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelApplicationError">Błąd aplikacji</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 nie zainstalowany</string>
   <string name="LabelRestartTheApplication">Uruchom ponownie aplikację!</string>
-  <string name="LabelOutOfMemory">Aplikacji zabrakło pamięci. Aplikacja będzie zamknięta!</string>
   <string name="LabelApplicationAlreadyRunning">Aplikacja już działa</string>
   <string name="LabelDeleteSession">Usuń sesje</string>
   <string name="LabelStartCapture">Uruchom przechwytywanie</string>
@@ -359,7 +347,6 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelMirrorUpError">Tryb jest ustawiony na podniesione lustro i operacja podniesienia lustra jest wykonywana.</string>
   <string name="LabelMirrorUpError2">Tryb zwolnienia jest [Podniesienie lustra].</string>
   <string name="LabelDestinationCardError">Miejsce zapisu to karta.</string>
-  <string name="LabelLiveViewError">Błąd uruchomienia podglądu na żywo</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Urządzenia</string>
   <string name="LabelExternalShutterRelease">Zewnętrzny spust migawki</string>
@@ -432,4 +419,7 @@ $Tag4 - Zaznaczony tag 4</string>
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Sesja</string>
+  <!--// 12/09/2015-->
 </resources>

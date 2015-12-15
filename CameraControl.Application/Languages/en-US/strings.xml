@@ -640,4 +640,18 @@
 	<string name="LabelPageWidth">Page width</string>
 	<string name="LabelPageHeigh">Page height</string>
 	<string name="LabelFill">Fill</string>	
+	<!-- // 19/10/2015 -->
+	<string name="LabelApplyToImage">Apply to selected image</string>	
+	<string name="LabelCaptureCount">Capture Count</string>	
+	<string name="LabelAutoFocusBeforCapture">Autofocus befor capture</string>	
+	<string name="LabelEnhancedThumbs">Enhanced Thumbs</string>	
+	<string name="LabelAskSavePath">Ask for captured file path</string>	
+	<string name="LabelSaveLiveviewWindow">Save live view window position</string>	
+	<string name="LabelShowFullscreenControls">Show fullscreen window controls</string>	
+	<string name="LabelCurrentLockNear">Lock current position as nearest point</string>	
+	<string name="LabelCurrentLockFar">Lock current position as farthest point</string>	
+	<string name="LabelStatistics">Statistics</string>	
+	<string name="LabelRefresh">Refresh</string>	
+	<string name="LabelOverview">Overview</string>	
+	<string name="LabelItems">Items</string>	
 </resources>

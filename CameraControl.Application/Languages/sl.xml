@@ -98,7 +98,6 @@
   <string name="ButtonEdit">Uredi</string>
   <string name="ButtonAutoFocus">_Avtomatsko ostrenje</string>
   <string name="ButtonCapture">_Zajem</string>
-  <string name="ButtonRecordMovie">Snemanje filma</string>
   <string name="ButtonFreezeImage">Zamrzni sliko</string>
   <string name="ButtonStart">Začni</string>
   <string name="ButtonPreview">Predogled</string>
@@ -110,16 +109,13 @@
   <string name="ButtonCapturePhotos">Zajem fotografije</string>
   <string name="ButtonStartTimeLapse">Začni intervalno snemanje</string>
   <string name="ButtonStopTimeLapse">Ustavi intervalno snemanje</string>
-  <string name="ButtonCreateMovie">Izdelaj film</string>
   <string name="ButtonLocateLogFile">Poišči log datoteko</string>
   <string name="LabelInterfaceLanguage">Jezik vmesnika</string>
   <string name="LabelDisableDriver">Izklop lastnih gonilnikov (ni priporočeno)</string>
   <string name="LabelTheme">Teme :</string>
   <string name="LabelGeneral">Splošno</string>
   <string name="LabelPreview">Predogled</string>
-  <string name="LabelPlaySound">Zaigraj zvok po zajemu fotografije</string>
   <string name="LabelAutoPreview">Samodejni predogled</string>
-  <string name="LabelPreviewAfterCapture">Predogl. fot. po zajemu iz FullScreen</string>
   <string name="LabelPreviewTime">Čas predogleda v sekundah:</string>
   <string name="LabelPreviewInLIveView">Predogl. fot. po zajemu iz LiveView</string>
   <string name="LabelLIveViewImageFreeze">Zamrznitev LiveView v sekundah</string>
@@ -134,7 +130,6 @@
   <string name="LabelSmallFocusSstep">Kratek korak ostrenja</string>
   <string name="LabelMediumFocusStep">Srednji korak ostrenja</string>
   <string name="LabelLargFocusStep">Dolg korak ostrenja</string>
-  <string name="ReStartToolTip">Za uveljavitev sprememb, je potrebno ponoven zagon programa.</string>
   <string name="LabelSessonName">Ime seje:</string>
   <string name="LabelFolder">Mapa:</string>
   <string name="LabelFileNameTemplate">Predloga za ime datoteke:</string>
@@ -151,7 +146,6 @@ $Tag1 - Izbrana značka 2
 $Tag1 - Izbrana značka 3 
 $Tag1 - Izbrana značka 4 </string>
   <string name="LabelCounter">Števec</string>
-  <string name="LabelUseOriginal">Uporabi originalno ime, ki ga poda fotoaparat</string>
   <string name="LabelUseOriginalToolTip">Ta možnost ni na voljo ob uporabi WIA gonilnika</string>
   <string name="LabelDontDownloadPhotos">Ne prenesi fotografij na računalnik</string>
   <string name="LabelAlowFolderChange">Dovoli spremembo mape s pregledovalnikom fotografij</string>
@@ -185,13 +179,10 @@ $Tag1 - Izbrana značka 4 </string>
   <string name="LabelNumberOfPhotos">Število posnetkov</string>
   <string name="LabelDontAutofocusOnEveryCapture">Ne uporabi samodejnega ostrenja pri vsakem snemanju</string>
   <string name="LabelCaptureInterval">Interval zajemanja (UU:MM:SS)</string>
-  <string name="LabelMovieLenght">Dolžina filma (UU:MM:SS)</string>
-  <string name="LabelMovieSettings">Nastavitve filma</string>
   <string name="LabelVideoFormat">Video format</string>
   <string name="LabelOutputFile">Izhodna datoteka</string>
   <string name="LabelFps">Posnetkov na sekundo</string>
   <string name="LabelFillImage">Zapolnitev formata</string>
-  <string name="LabelCreateMovie">Izdelaj film</string>
   <string name="LabelAddVirtualMovingToVideo">Filmu dodaj navidezno gibanje</string>
   <string name="LabelMovingSurface">Površina gibanja (%):</string>
   <string name="LabelMovingDirection">Smer gibanja:</string>
@@ -267,15 +258,12 @@ $Tag1 - Izbrana značka 4 </string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Pridobi RAW kodek</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Napaka pri začetku snemanja filma</string>
   <string name="LabelNoCardInserted">Spominska kartica ni vstavljena</string>
   <string name="LabelCardError">Napaka spominske kartice</string>
   <string name="LabelCardNotFormatted">Spominska kartica ni formatirana</string>
   <string name="LabelNoFreeAreaInCard">Spominska kartica je polna</string>
   <string name="LabelCardBufferNotEmpty">V medpomnilniku so podatki, ki so namenjeni snemanju na spominsko kartico.</string>
   <string name="LabelPcBufferNotEmpty">V medpomnilniku so podatki, ki so namenjeni snemanju na računalnik.</string>
-  <string name="LabelBufferNotEmpty">V medpomnilniku so filmski podatki.</string>
-  <string name="LabelRecordInProgres">Med snemanjem filmske datoteke.</string>
   <string name="LabelCardProtected">Spominska kartica je zaklenjena</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Med povečanim LiveView</string>
   <string name="LabelNotInApplicationMode">Kamera ni v programskem načinu.</string>
@@ -358,4 +346,7 @@ $Tag1 - Izbrana značka 4 </string>
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Seja</string>
+  <!--// 12/09/2015-->
 </resources>

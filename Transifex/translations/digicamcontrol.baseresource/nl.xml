@@ -94,7 +94,7 @@
   <string name="ButtonEdit">Bewerken</string>
   <string name="ButtonAutoFocus">Automatisch Scherpstellen</string>
   <string name="ButtonCapture">_Opname</string>
-  <string name="ButtonRecordMovie">Film opnemen</string>
+  <string name="ButtonRecordMovie">Video opnemen</string>
   <string name="ButtonFreezeImage">Beeld bevriezen</string>
   <string name="ButtonStart">Start</string>
   <string name="ButtonPreview">Voorbeeld</string>
@@ -106,15 +106,14 @@
   <string name="ButtonCapturePhotos">Foto\'s maken</string>
   <string name="ButtonStartTimeLapse">Start tijd opnamen</string>
   <string name="ButtonStopTimeLapse">Stop tijd opnamen</string>
-  <string name="ButtonCreateMovie">Film maken</string>
+  <string name="ButtonCreateMovie">Creëer video</string>
   <string name="ButtonLocateLogFile">Lokaliseren log-bestand</string>
   <string name="LabelInterfaceLanguage">Taalinstellingen</string>
+  <string name="LabelDisableDriver">Schakel de standaard driver uit (niet aanbevolen)</string>
   <string name="LabelTheme">Thema:</string>
   <string name="LabelGeneral">Algemeen</string>
   <string name="LabelPreview">Voorbeeld</string>
-  <string name="LabelPlaySound">Speel geluid na foto opname</string>
   <string name="LabelAutoPreview">Automatisch voorbeeld</string>
-  <string name="LabelPreviewAfterCapture">Voorbeeld afbeelding na opname in volledig scherm</string>
   <string name="LabelPreviewTime">Voorbeeld tijd in sec:</string>
   <string name="LabelPreviewInLIveView">Voobeeld afbeelding na opnamen in live beeld</string>
   <string name="LabelLIveViewImageFreeze">Live beeld bevriezen in sec:</string>
@@ -128,7 +127,7 @@
   <string name="LabelSmallFocusSstep">Kleine scherpstel stap</string>
   <string name="LabelMediumFocusStep">Gemiddelde scherpstel stap</string>
   <string name="LabelLargFocusStep">Grote scherpstel stap</string>
-  <string name="ReStartToolTip">U moet de applciation afsluiten en opnieuw opstarten om de wijzigingen door te voeren.</string>
+  <string name="LabelSessonName">Sessie naam: </string>
   <string name="LabelFolder">Map:</string>
   <string name="LabelFileNameTemplate">Bestandsnaam Template:</string>
   <string name="LabelFileNameTemplateToolTip">$N - Sessie naam
@@ -144,7 +143,6 @@ $Tag2 - Geselecteerde label 2
 $Tag3 - Geselecteerde tabel 3
 $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelCounter">Teller:</string>
-  <string name="LabelUseOriginal">Gebruik originele camera bestandsnaam</string>
   <string name="LabelUseOriginalToolTip">De optie werkt niet via de WIA driver</string>
   <string name="LabelDontDownloadPhotos">Geen foto\'s verzenden naar de PC</string>
   <string name="LabelTags">Tags</string>
@@ -176,12 +174,13 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelNumberOfPhotos">Aantal foto\'s</string>
   <string name="LabelDontAutofocusOnEveryCapture">Niet automatisch scherpstellen tussen opnamen</string>
   <string name="LabelCaptureInterval">Opname interval (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Film instellingen</string>
+  <string name="LabelMovieLenght">Video lengte (UU:MM:SS)</string>
+  <string name="LabelMovieSettings">Video instellingen</string>
   <string name="LabelVideoFormat">Video formaat</string>
   <string name="LabelOutputFile">Output bestand</string>
   <string name="LabelFps">Bps</string>
   <string name="LabelFillImage">Afbeelding vullen</string>
-  <string name="LabelCreateMovie">Film maken</string>
+  <string name="LabelCreateMovie">Creëer video</string>
   <string name="LabelAddVirtualMovingToVideo">Virtuele beweging toevoegen aan video</string>
   <string name="LabelMovingSurface">Oppervlak bewegen (%):</string>
   <string name="LabelMovingDirection">Bewegingsrichting</string>
@@ -201,7 +200,9 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="MsgBulbModeNotSupported">Bulb-modus niet ondersteund!</string>
   <string name="MsgApplicationUpToDate">Dit programma is bijgewerkt!</string>
   <string name="MsgUseSessionEditorTags">Gebruik de sessie editor om de tags te definiëren!</string>
+  <string name="MsgLastSessionCantBeDeleted">De laatste sessie kan niet verwijderd worden.</string>
   <string name="MsgStopTimeLapse">De time-lapse is niet beëindigd! Wilt u de time-lapse afbreken?</string>
+  <string name="MsgInstallXvidCodec">De Xvid codec is niet geïnstalleerd !\nWilt u de codec downloaden en installeren?</string>
   <string name="MsgBracketingDone">Bracketing uitgevoerd</string>
   <string name="MsgActionInProgress">Actie wordt uitgevoerd {0}/{1}</string>
   <string name="MenuFile">_Bestand</string>
@@ -252,15 +253,12 @@ $Tag4 - Geselecteerde tabel 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Verkrijg de raw codec</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Fout bij starten filmopname</string>
   <string name="LabelNoCardInserted">Geen Geheugenkaart aanwezig</string>
   <string name="LabelCardError">Geheugenkaart Fout</string>
   <string name="LabelCardNotFormatted">Geheugenkaart niet geformatteerd</string>
   <string name="LabelNoFreeAreaInCard">Geen vrije ruimte op geheugenkaart</string>
   <string name="LabelCardBufferNotEmpty">Er is geen data in de buffer die weggeschreven gaat worden in een geheugenkaart.</string>
   <string name="LabelPcBufferNotEmpty">Er is geen data in de buffer dat weggeschreven gaat worden in het PC geheugen.</string>
-  <string name="LabelBufferNotEmpty">Er is geen film data in de buffer aanwezig.</string>
-  <string name="LabelRecordInProgres">Tijdens filmopname</string>
   <string name="LabelCardProtected">Geheugenkaart beschermd</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Tijdens vergroten van het Live-view venster</string>
   <string name="LabelWrongLiveViewType">De set Live-view selector is in de Live-view fotografie.</string>
@@ -317,7 +315,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelApplicationError">Applicatie fout</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 is niet geïnstalleerd</string>
   <string name="LabelRestartTheApplication">Herstart het programma!</string>
-  <string name="LabelOutOfMemory">Het programma heeft te weinig geheugen ter beschikking en wordt afgesloten!</string>
   <string name="LabelApplicationAlreadyRunning">Toepassing reeds geopend</string>
   <string name="LabelDeleteSession">Verwijder sessie</string>
   <string name="LabelStartCapture">Start opname</string>
@@ -359,7 +356,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelMirrorUpError">De camera is ingesteld op Spiegel-omhoog en de spiegel-omhoog modus wordt uitgevoerd.</string>
   <string name="LabelMirrorUpError2">De opname stand is [Mirror-up]  </string>
   <string name="LabelDestinationCardError">De opnamebestemming is de geheugenkaart.</string>
-  <string name="LabelLiveViewError">Fout bij starten Livebeeld.</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Apparaten</string>
   <string name="LabelExternalShutterRelease">Vanaf afstand bediende ontspanner.</string>
@@ -424,4 +420,7 @@ $Tag4 - Geselecteerde tabel 4</string>
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Sessie</string>
+  <!--// 12/09/2015-->
 </resources>

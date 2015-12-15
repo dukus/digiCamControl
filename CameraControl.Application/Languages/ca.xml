@@ -97,7 +97,6 @@
   <string name="ButtonEdit">Editar</string>
   <string name="ButtonAutoFocus">_Enfoc Automàtic</string>
   <string name="ButtonCapture">_Captura</string>
-  <string name="ButtonRecordMovie">Gravar video</string>
   <string name="ButtonFreezeImage">Congelar imatge</string>
   <string name="ButtonStart">Començar</string>
   <string name="ButtonPreview">Vista prèvia</string>
@@ -109,16 +108,13 @@
   <string name="ButtonCapturePhotos">Capturar fotos</string>
   <string name="ButtonStartTimeLapse">Iniciar TimeLapse</string>
   <string name="ButtonStopTimeLapse">Aturar TimeLapse</string>
-  <string name="ButtonCreateMovie">Crear pel·lícula</string>
   <string name="ButtonLocateLogFile">Cercar fitxer de registre</string>
   <string name="LabelInterfaceLanguage">Idioma de la interfície:</string>
   <string name="LabelDisableDriver">Deshabilitar controladors nadius (no recomanat) </string>
   <string name="LabelTheme">Tema</string>
   <string name="LabelGeneral">General</string>
   <string name="LabelPreview">Vista prèvia </string>
-  <string name="LabelPlaySound">Reproduir so després d\'una foto </string>
   <string name="LabelAutoPreview">Vista prèvia automàtica</string>
-  <string name="LabelPreviewAfterCapture">Vista prèvia de imatge després de captura en pantalla completa</string>
   <string name="LabelPreviewTime">Vista prèvia de temps en segons :</string>
   <string name="LabelPreviewInLIveView">Vista prèvia de imatge després de captura en Live View</string>
   <string name="LabelLIveViewImageFreeze">Vista prèvia de imatge congelada en segons :</string>
@@ -133,7 +129,6 @@
   <string name="LabelSmallFocusSstep">Pas de focus petit</string>
   <string name="LabelMediumFocusStep">Pas de focus mitjà</string>
   <string name="LabelLargFocusStep">Pas de focus gran</string>
-  <string name="ReStartToolTip">Cal reiniciar l\'aplicació per que els canvis es realitzin</string>
   <string name="LabelSessonName">Nom de la sessió :</string>
   <string name="LabelFolder">Carpeta :</string>
   <string name="LabelFileNameTemplate"> Nom del fitxer Plantilla :</string>
@@ -150,7 +145,6 @@ $Tag2 - Etiqueta seleccionada 2
 $Tag3 - Etiqueta seleccionada 3
 $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelCounter">Contador :</string>
-  <string name="LabelUseOriginal">Utilitzar nom de fitxer original donat per la càmera</string>
   <string name="LabelUseOriginalToolTip">Aquesta opció no treballa amb controlador WIA</string>
   <string name="LabelDontDownloadPhotos">No descarregar fotos a PC </string>
   <string name="LabelAlowFolderChange">Permetre el canvi de carpeta amb el navegador d\'imatges </string>
@@ -184,13 +178,10 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelNumberOfPhotos">Número de fotos</string>
   <string name="LabelDontAutofocusOnEveryCapture">No enfocar automàticament a cada captura </string>
   <string name="LabelCaptureInterval">Interval de captura (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Durada de la pel·lícula (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Ajustos de video</string>
   <string name="LabelVideoFormat">Format de video</string>
   <string name="LabelOutputFile">Fitxer de sortida </string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">Omplir imatge</string>
-  <string name="LabelCreateMovie">Crear pel·lícula </string>
   <string name="LabelAddVirtualMovingToVideo">Afegir moviment virtual al vídeo</string>
   <string name="LabelMovingSurface">Superfície en moviment (%) : </string>
   <string name="LabelMovingDirection">Direcció de moviment:</string>
@@ -266,15 +257,12 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Obtenir còdec RAW</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Error d\'inici de gravació de pel·lícules</string>
   <string name="LabelNoCardInserted">No hi ha targeta inserida </string>
   <string name="LabelCardError">Error de Targeta</string>
   <string name="LabelCardNotFormatted">Targeta no formatada </string>
   <string name="LabelNoFreeAreaInCard">Cap àrea lliure a la targeta </string>
   <string name="LabelCardBufferNotEmpty">Hi ha dades d\'enregistrament a la destinació és una targeta en la memòria intermèdia.</string>
   <string name="LabelPcBufferNotEmpty">Hi ha dades d\'enregistrament a la destinació és el PC a la memòria intermèdia.</string>
-  <string name="LabelBufferNotEmpty">Hi ha dades de pel·lícula en el buffer. </string>
-  <string name="LabelRecordInProgres">Enregistrar durant l\'arxiu de pel·lícula </string>
   <string name="LabelCardProtected">Targeta protegida</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Durant la pantalla completa de Live View</string>
   <string name="LabelWrongLiveViewType">La configuració del selector de Live View és el Live View fotogràfic.</string>
@@ -333,7 +321,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelApplicationError">Error d\'aplicació</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 no instal·lat</string>
   <string name="LabelRestartTheApplication">Reiniciar l\'aplicació !</string>
-  <string name="LabelOutOfMemory">L\'aplicació es queda sense memòria. S\'apagarà aplicació! </string>
   <string name="LabelApplicationAlreadyRunning">L\'aplicació ja està funcionant </string>
   <string name="LabelDeleteSession">Eliminar sessió</string>
   <string name="LabelStartCapture">Iniciar Captura</string>
@@ -376,7 +363,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelMirrorUpError">L\'alliberament de tret està ajustat a Mirall pujat en marxa i s\'està realitzant l\'operació de mirall pujat.</string>
   <string name="LabelMirrorUpError2">La manera de tret es [Mirall pujat].</string>
   <string name="LabelDestinationCardError">El destí de l\'enregistrament és la targeta. </string>
-  <string name="LabelLiveViewError">Error que indica Live View</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Dispositius</string>
   <string name="LabelExternalShutterRelease">Disparador extern </string>
@@ -512,9 +498,7 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelLowerCaseExtension">Reduir extensió</string>
   <string name="LabelOverlayTransparency">Transparència</string>
   <string name="LabelOverlayUseLastCaptured">Utilitzar última captura</string>
-  <string name="LabelMinimizeToTryIcon">Minimitzar la icona de la safata</string>
   <string name="LabelStartMinimized">Inicia minimitzat </string>
-  <string name="LabelStartupWithWindows">Iniciar al iniciar Windows</string>
   <string name="LabelSelectSeries">Seleccionar les fotos de la mateixa sèrie</string>
   <string name="LabelCaptureDelay">Retardar captura</string>
   <string name="LabelAutoExportPlugins">Autoexportar Pluguins</string>
@@ -536,4 +520,7 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelWaitBetweenSteps">Esperar entre els passos (ms)</string>
   <string name="LabelShowSecondary ">Mostra en monitor secundari </string>
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Sessió</string>
+  <!--// 12/09/2015-->
 </resources>

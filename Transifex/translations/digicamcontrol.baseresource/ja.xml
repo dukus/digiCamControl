@@ -89,7 +89,6 @@
   <string name="ButtonEdit">編集</string>
   <string name="ButtonAutoFocus">_オートフォーカス</string>
   <string name="ButtonCapture">_撮影</string>
-  <string name="ButtonRecordMovie">動画記録</string>
   <string name="ButtonFreezeImage">フリーズ</string>
   <string name="ButtonStart">開始</string>
   <string name="ButtonPreview">プレビュー</string>
@@ -101,15 +100,12 @@
   <string name="ButtonCapturePhotos">写真キャプチャ</string>
   <string name="ButtonStartTimeLapse">微速度撮影開始</string>
   <string name="ButtonStopTimeLapse">微速度撮影停止</string>
-  <string name="ButtonCreateMovie">動画作成</string>
   <string name="ButtonLocateLogFile">ログファイル指定</string>
   <string name="LabelInterfaceLanguage">表示言語</string>
   <string name="LabelTheme">テーマ：</string>
   <string name="LabelGeneral">一般</string>
   <string name="LabelPreview">プレビュー</string>
-  <string name="LabelPlaySound">撮影音</string>
   <string name="LabelAutoPreview">自動プレビュー</string>
-  <string name="LabelPreviewAfterCapture">全画面プレビュー</string>
   <string name="LabelPreviewTime">プレビュー時間（秒）：</string>
   <string name="LabelPreviewInLIveView">ライブビューで撮影後プレビュー</string>
   <string name="LabelLIveViewImageFreeze">ライブビュー画像表示時間（秒）：</string>
@@ -123,11 +119,9 @@
   <string name="LabelSmallFocusSstep">フォーカス送り：小</string>
   <string name="LabelMediumFocusStep">フォーカス送り：中</string>
   <string name="LabelLargFocusStep">フォーカス送り：大</string>
-  <string name="ReStartToolTip">変更はアプリケーションの再起動後に反映されます。</string>
   <string name="LabelFolder">フォルダ：</string>
   <string name="LabelFileNameTemplate">ファイル名テンプレート：</string>
   <string name="LabelCounter">カウンター：</string>
-  <string name="LabelUseOriginal">カメラ設定のファイル名を使用する</string>
   <string name="LabelUseOriginalToolTip">このオプションはWIAドライバでは利用できません</string>
   <string name="LabelDontDownloadPhotos">PCに写真をダウンロードしない</string>
   <string name="LabelTags">タグ</string>
@@ -159,12 +153,10 @@
   <string name="LabelNumberOfPhotos">写真の数</string>
   <string name="LabelDontAutofocusOnEveryCapture">キャプチャ時にAFしない</string>
   <string name="LabelCaptureInterval">キャプチャ間隔</string>
-  <string name="LabelMovieSettings">動画設定</string>
   <string name="LabelVideoFormat">ビデオ形式</string>
   <string name="LabelOutputFile">出力ファイル</string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">画像埋込</string>
-  <string name="LabelCreateMovie">動画の作成</string>
   <string name="LabelAddVirtualMovingToVideo">動画に仮想移動を加える</string>
   <string name="LabelMovingSurface">移動量（％）：</string>
   <string name="LabelMovingDirection">移動方向</string>
@@ -235,15 +227,12 @@
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">RAWコ－デック取得</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">録画開始失敗</string>
   <string name="LabelNoCardInserted">カードが挿入されていません</string>
   <string name="LabelCardError">カード異常</string>
   <string name="LabelCardNotFormatted">カードがフォーマットされていません</string>
   <string name="LabelNoFreeAreaInCard">カード空き容量が不足しています</string>
   <string name="LabelCardBufferNotEmpty">カード記録用のデータがバッファに残っています。</string>
   <string name="LabelPcBufferNotEmpty">バッファにPCへ転送するデータが残っています。</string>
-  <string name="LabelBufferNotEmpty">バッファに動画データが残っています。</string>
-  <string name="LabelRecordInProgres">動画ファイルを記録中です。</string>
   <string name="LabelCardProtected">カードが書き込み禁止です</string>
   <string name="LabelDuringEnlargedDisplayLiveView">ライブビュー拡大表示中</string>
   <string name="LabelWrongLiveViewType">ライブビュー選択が写真撮影になっています</string>
@@ -300,7 +289,6 @@
   <string name="LabelApplicationError">アプリケーションエラー</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 がインストールされていません。</string>
   <string name="LabelRestartTheApplication">アプリケーションを再起動して下さい！</string>
-  <string name="LabelOutOfMemory">アプリケーションのメモリ不足です。　アプリケーションを停止します。</string>
   <string name="LabelApplicationAlreadyRunning">アプリケーションは既に起動しています。</string>
   <string name="LabelDeleteSession">作業の削除</string>
   <string name="LabelStartCapture">キャプチャ開始</string>
@@ -329,7 +317,6 @@
   <string name="LabelMirrorUpError">レリーズモードがミラーアップ撮影に設定されており、現在、ミラーアップ中です</string>
   <string name="LabelMirrorUpError2">レリーズモードは[ミラーアップ撮影]です</string>
   <string name="LabelDestinationCardError">カードへ記録</string>
-  <string name="LabelLiveViewError">ライブビュー開始時にエラーが発生しました</string>
   <!--07/05/2013-->
   <string name="LabelDevices">デバイス</string>
   <string name="LabelExternalShutterRelease">外部シャッター</string>
@@ -398,4 +385,7 @@
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">作業</string>
+  <!--// 12/09/2015-->
 </resources>

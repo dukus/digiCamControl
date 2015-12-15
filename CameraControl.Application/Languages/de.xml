@@ -97,7 +97,7 @@
   <string name="ButtonEdit">Ändern</string>
   <string name="ButtonAutoFocus">_Autofokus</string>
   <string name="ButtonCapture">A_ufnehmen</string>
-  <string name="ButtonRecordMovie">Film aufnehmen</string>
+  <string name="ButtonRecordMovie">Video aufnehmen</string>
   <string name="ButtonFreezeImage">Bild einfrieren</string>
   <string name="ButtonStart">Starten</string>
   <string name="ButtonPreview">Vorschau</string>
@@ -109,16 +109,15 @@
   <string name="ButtonCapturePhotos">Bilder aufnehmen</string>
   <string name="ButtonStartTimeLapse">Starte Zeitraffer</string>
   <string name="ButtonStopTimeLapse">Stoppe Zeitraffer</string>
-  <string name="ButtonCreateMovie">Film erzeugen</string>
+  <string name="ButtonCreateMovie">Video erstellen</string>
   <string name="ButtonLocateLogFile">Logdatei suchen</string>
   <string name="LabelInterfaceLanguage">Programmsprache</string>
   <string name="LabelDisableDriver">Native Treiber deaktivieren (nicht empfohlen)</string>
   <string name="LabelTheme">Thema</string>
   <string name="LabelGeneral">Allgemein</string>
   <string name="LabelPreview">Vorschau</string>
-  <string name="LabelPlaySound">Ton nach Aufnahme abspielen</string>
   <string name="LabelAutoPreview">Autovorschau</string>
-  <string name="LabelPreviewAfterCapture">Vollbildvorschau nach Aufnahme</string>
+  <string name="LabelPreviewAfterCapture">Vorschaubild nach Aufnahme in Vollbild</string>
   <string name="LabelPreviewTime">Vorschauzeit in Sek.</string>
   <string name="LabelPreviewInLIveView">Vorschaubild nach Aufnahme in der Live-Ansicht</string>
   <string name="LabelLIveViewImageFreeze">Einfrieren der Live-Ansicht in Sek.</string>
@@ -133,7 +132,6 @@
   <string name="LabelSmallFocusSstep">Kleiner Fokusschritt</string>
   <string name="LabelMediumFocusStep">Mittlerer Fokusschritt</string>
   <string name="LabelLargFocusStep">Großer Fokusschritt</string>
-  <string name="ReStartToolTip">Für die Übernahme der Einstellungen ist ein Programm-Neustart erforderlich.</string>
   <string name="LabelSessonName">Sitzungsname :</string>
   <string name="LabelFolder">Ordner :</string>
   <string name="LabelFileNameTemplate">Dateibenennungsvorlage :</string>
@@ -150,7 +148,6 @@ $Tag2 - Ausgewähltes Schlagwort 2
 $Tag3 - Ausgewähltes Schlagwort 3
 $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelCounter">Zähler :</string>
-  <string name="LabelUseOriginal">Originalnamen der Kamera benutzen</string>
   <string name="LabelUseOriginalToolTip">Diese Option funktioniert nicht mit dem WIA-Treiber</string>
   <string name="LabelDontDownloadPhotos">Bilder nicht auf den Computer laden</string>
   <string name="LabelAlowFolderChange">Ordneränderung über Bildauswahl erlauben</string>
@@ -184,13 +181,13 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelNumberOfPhotos">Anzahl der Bilder</string>
   <string name="LabelDontAutofocusOnEveryCapture">Kein Autofokus vor jeder Aufnahme</string>
   <string name="LabelCaptureInterval">Aufnahmewiederholung (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Filmlänge (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Filmeinstellungen</string>
+  <string name="LabelMovieLenght">Videolänge (HH:MM:SS)</string>
+  <string name="LabelMovieSettings">Videoeinstellungen</string>
   <string name="LabelVideoFormat">Filmformat</string>
   <string name="LabelOutputFile">Ausgabedatei</string>
   <string name="LabelFps">BpS</string>
   <string name="LabelFillImage">Fülle Bild</string>
-  <string name="LabelCreateMovie">Film erzeugen</string>
+  <string name="LabelCreateMovie">Video erstellen</string>
   <string name="LabelAddVirtualMovingToVideo">Virtuelle Bewegungung zum Film hinzufügen</string>
   <string name="LabelMovingSurface">Bewege Oberfläche (%):</string>
   <string name="LabelMovingDirection">Bewegungsrichtung:</string>
@@ -266,15 +263,15 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">RAW-Codec holen</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Filmaufnahmefehler</string>
+  <string name="LabelErrorRecordMovie">Fehler beim Start der Videoaufnahme</string>
   <string name="LabelNoCardInserted">Keine Speicherkarte eingelegt</string>
   <string name="LabelCardError">Speicherkartenfehler</string>
   <string name="LabelCardNotFormatted">Speicherkarte ist nicht formatiert</string>
   <string name="LabelNoFreeAreaInCard">Speicherkarte ist voll</string>
   <string name="LabelCardBufferNotEmpty">Es sind noch nicht alle Daten auf der Speicherkarte gespeichert.</string>
   <string name="LabelPcBufferNotEmpty">Es sind noch nicht alle Daten auf dem Computer gespeichert.</string>
-  <string name="LabelBufferNotEmpty">Es sind noch Filmdaten im Puffer. </string>
-  <string name="LabelRecordInProgres">Während der Filmaufnahme</string>
+  <string name="LabelBufferNotEmpty">Es sind keine Videodaten im Puffer.</string>
+  <string name="LabelRecordInProgres">Während der Videodateiaufnahme</string>
   <string name="LabelCardProtected">Speicherkarte ist schreibgeschützt</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Während vergrößerter Darstellung der Live-Ansicht</string>
   <string name="LabelWrongLiveViewType">Live-Ansicht ist auf Live-Ansicht der Fotos eingestellt.</string>
@@ -287,7 +284,7 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <!--18/11/2012-->
   <string name="LabelControl">Steuerung</string>
   <!--20/11/2012-->
-  <string name="LabelExport">Export</string>
+  <string name="LabelExport">Exportieren</string>
   <!--21/11/2012-->
   <string name="LabelDownload">Herunterladen</string>
   <!--25/11/2012-->
@@ -333,7 +330,7 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelApplicationError">Anwendungsfehler</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 ist nicht installiert</string>
   <string name="LabelRestartTheApplication">Programm neu starten.</string>
-  <string name="LabelOutOfMemory">Programm hat zuwenig Speicher und wird deshalb beendet.</string>
+  <string name="LabelOutOfMemory">Die Anwendung hat keinen Speicher mehr. Anwendung wird heruntergefahren! </string>
   <string name="LabelApplicationAlreadyRunning">Anwendung wird bereits ausgeführt.</string>
   <string name="LabelDeleteSession">Sitzung löschen</string>
   <string name="LabelStartCapture">Aufnahme starten</string>
@@ -377,7 +374,6 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelMirrorUpError">Der Release-Modus ist auf Spiegel-up gesetzt und die Spiegel-Operation wird durchgeführt.</string>
   <string name="LabelMirrorUpError2">Der Release-Modus ist [Mirror-up].</string>
   <string name="LabelDestinationCardError">Aufnahmeziel ist die Speicherkarte der Kamera.</string>
-  <string name="LabelLiveViewError">Fehlerangabe Live-Ansicht</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Geräte</string>
   <string name="LabelExternalShutterRelease">Externer Auslöser</string>
@@ -513,12 +509,10 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelLowerCaseExtension">Kleinschreibung</string>
   <string name="LabelOverlayTransparency">Transparenz</string>
   <string name="LabelOverlayUseLastCaptured">Letzte Aufnahme benutzen</string>
-  <string name="LabelMinimizeToTryIcon">Minimieren in den Try</string>
   <string name="LabelStartMinimized">Minimiert starten</string>
-  <string name="LabelStartupWithWindows">Mit Windows starten</string>
   <string name="LabelSelectSeries">Wählen Sie Fotos der gleichen Serie</string>
   <string name="LabelCaptureDelay">Aufnahmeverzögerung</string>
-  <string name="LabelAutoExportPlugins">Auto Export Plugins</string>
+  <string name="LabelAutoExportPlugins">Plugins für automatischen Export</string>
   <string name="LabelAddPlugin">Plugin hinzufügen</string>
   <string name="LabelErrorSetFolder">Fehler Satz Ordner</string>
   <string name="LabelDetectArea">Nur Erkennung im Lineal</string>
@@ -580,4 +574,48 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelShowInExplorer">Im Explorer anzeigen</string>
   <string name="LabelOpenInExternalViewer">In externem Betrachter öffnen</string>
   <string name="LabelRestoreFromBackup">Aus Sicherungskopie wiederherstellen</string>
+  <!--// 11/03/2015-->
+  <string name="LabelAllowWebCommands">Interaktion über Webserver erlauben</string>
+  <string name="LabelCurrentMotion">Erkannte Bewegung</string>
+  <string name="LabelStartupScript">Skript beim Starten ausführen</string>
+  <string name="LabelPublicWebserver">Öffentlichen Zugriff erlauben</string>
+  <string name="LabelLoadCanonTransferMode">Canon-Übertragungsmodus laden</string>
+  <string name="LabelFolderSelector">Ordnerauswahl</string>
+  <string name="LabelReloadOnFolderChange">Dateien beim Ordnerwechsel neu laden</string>
+  <string name="MenuSession">Sitzung</string>
+  <string name="MenuCamera">Kamera</string>
+  <string name="MenuThumbnailSize">Vorschaubildgröße</string>
+  <string name="MenuInver">Auswahl umkehren</string>
+  <string name="MenuResetDevice">Gerät zurücksetzen</string>
+  <string name="MenuSessionAdd">Neue Sitzung hinzufügen ...</string>
+  <string name="MenuSessionEdit">Aktuelle Sitzung bearbeiten ...</string>
+  <string name="MenuSessionDel">Aktuelle Sitzung entfernen</string>
+  <string name="MenuIncrementSeries">Serie hochzählen</string>
+  <string name="MenuOnlineManual">Online-Handbuch</string>
+  <string name="MenuPlugins">Plugins</string>
+  <string name="LabelAutorotate">Bild automatisch drehen</string>
+  <string name="MenuCameraProperty">Kameraeigenschaft</string>
+  <string name="LabelShowThumbInfo">Info neben dem Vorschaubild anzeigen</string>
+  <string name="MenuLayoutPortrait">Hochformat</string>
+  <string name="MenuLayoutLandscape">Querformat</string>
+  <string name="MenuExportSession">Sitzung exportieren ...</string>
+  <string name="MenuImportSession">Sitzung importieren ...</string>
+  <string name="LabelFullSpeed">Volle Geschwindigkeit</string>
+  <!--// 12/09/2015-->
+  <string name="LabelBracketingLow">Niedriger Wert</string>
+  <string name="LabelBracketingHigh">Hoher Wert</string>
+  <string name="LabelBracketingNumberOfShots">Anzahl der Aufnahmen</string>
+  <string name="LabelNoLowValueError">Kein niedriger Wert festgelegt</string>
+  <string name="LabelNoHighValueError">Kein hoher Wert festgelegt</string>
+  <string name="LabelWrongValue">Falscher niedriger oder hoher Wert</string>
+  <string name="LabelWrongFNumber">Blende kann nicht geändert werden</string>
+  <string name="LabelShowActiveArea">Aktiven Bereich anzeigen</string>
+  <string name="LabelSetArea">Festlegen</string>
+  <string name="LabelDoneArea">Fertig</string>
+  <string name="LabelRotateCounterclockwise">Gegen den Uhrzeigersinn drehen</string>
+  <string name="LabelRotateClockwise">Im Uhrzeigersinn drehen</string>
+  <string name="LabelSaveJpg">Als JPG speichern</string>
+  <string name="LabelPageWidth">Seitenbreite</string>
+  <string name="LabelPageHeigh">Seitenhöhe</string>
+  <string name="LabelFill">Füllen</string>
 </resources>

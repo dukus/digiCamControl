@@ -93,7 +93,6 @@
   <string name="ButtonEdit">Éditer</string>
   <string name="ButtonAutoFocus">Autofocus</string>
   <string name="ButtonCapture">Photographier</string>
-  <string name="ButtonRecordMovie">Enregistrer une vidéo</string>
   <string name="ButtonFreezeImage">Geler l\'image</string>
   <string name="ButtonStart">Démarrer</string>
   <string name="ButtonPreview">Aperçu</string>
@@ -105,16 +104,13 @@
   <string name="ButtonCapturePhotos">Photographier</string>
   <string name="ButtonStartTimeLapse">Démarrer le laps de temps</string>
   <string name="ButtonStopTimeLapse">Arrêter le laps de temps</string>
-  <string name="ButtonCreateMovie">Créer une vidéo</string>
   <string name="ButtonLocateLogFile">Localiser le fichier journal</string>
   <string name="LabelInterfaceLanguage">Langue de l\'interface</string>
   <string name="LabelDisableDriver">Désactiver les drivers natifs (non recommandé)</string>
   <string name="LabelTheme">Thème :</string>
   <string name="LabelGeneral">Général</string>
   <string name="LabelPreview">Aperçu</string>
-  <string name="LabelPlaySound">Jouer un son après une photographie</string>
   <string name="LabelAutoPreview">Prévisualisation automatique</string>
-  <string name="LabelPreviewAfterCapture">Prévisualiser l\'image en plein écran après une photographie</string>
   <string name="LabelPreviewTime">Temps de prévisualisation en secondes :</string>
   <string name="LabelPreviewInLIveView">Prévisualiser l\'image après une photographie en Live View</string>
   <string name="LabelLIveViewImageFreeze">Gel des images Live View en secondes :</string>
@@ -129,7 +125,6 @@
   <string name="LabelSmallFocusSstep">Petit incrément de mise au point</string>
   <string name="LabelMediumFocusStep">Incrément moyen de mise au point</string>
   <string name="LabelLargFocusStep">Grand incrément de mise au point</string>
-  <string name="ReStartToolTip">Vous devez redémarrer l\'application pour que les changements soient effectifs</string>
   <string name="LabelSessonName">Nom de la session</string>
   <string name="LabelFolder">Répertoire :</string>
   <string name="LabelFileNameTemplate">Modèle du nom de fichier :</string>
@@ -146,7 +141,6 @@ $Tag2 - Tag sélectionné 2
 $Tag3 - Tag sélectionné 3
 $Tag4 - Tag sélectionné 4</string>
   <string name="LabelCounter">Compteur</string>
-  <string name="LabelUseOriginal">Utiliser le nom de fichier original défini par le boîtier</string>
   <string name="LabelUseOriginalToolTip">Cette option ne fonctionne pas avec le pilote WIA</string>
   <string name="LabelDontDownloadPhotos">Ne pas télécharger les photo sur l\'ordinateur</string>
   <string name="LabelAlowFolderChange">Autoriser le changement de répertoire en utilisant le navigateur d\'images </string>
@@ -180,13 +174,10 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelNumberOfPhotos">Nombre de photos</string>
   <string name="LabelDontAutofocusOnEveryCapture">Pas d\'autofocus à chaque prise de vue</string>
   <string name="LabelCaptureInterval">Intervalle des prises de vues (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Durée du film (HH:MM:SS)</string>
-  <string name="LabelMovieSettings">Ajustements vidéo</string>
   <string name="LabelVideoFormat">Format vidéo</string>
   <string name="LabelOutputFile">Fichier de sortie</string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">Remplir l\'image</string>
-  <string name="LabelCreateMovie">Créer une vidéo</string>
   <string name="LabelAddVirtualMovingToVideo">Ajouter des mouvements virtuel à la vidéo</string>
   <string name="LabelMovingSurface">Superficie du mouvement (%)</string>
   <string name="LabelMovingDirection">Direction du mouvement :</string>
@@ -261,15 +252,12 @@ $Tag4 - Tag sélectionné 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Obtenir le codec RAW</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Erreur au démarrage de l\'enregistrement vidéo</string>
   <string name="LabelNoCardInserted">Pas de carte insérée</string>
   <string name="LabelCardError">Erreur de carte</string>
   <string name="LabelCardNotFormatted">Carte non formatée</string>
   <string name="LabelNoFreeAreaInCard">Pas d\'espace libre sur la carte</string>
   <string name="LabelCardBufferNotEmpty">La mémoire tampon contient des données à enregistrer sur carte.</string>
   <string name="LabelPcBufferNotEmpty">La mémoire tampon contient des données à enregistrer sur ordinateur.</string>
-  <string name="LabelBufferNotEmpty">La mémoire tampon contient une vidéo.</string>
-  <string name="LabelRecordInProgres">Enregistrement de la vidéo en cours</string>
   <string name="LabelCardProtected">La carte est protégée</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Pendant l\'affichage élargie de Live View</string>
   <string name="LabelWrongLiveViewType">Le réglage de commande Live View est photographie en live view</string>
@@ -327,7 +315,6 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelApplicationError">Erreur d\'application</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 non installé</string>
   <string name="LabelRestartTheApplication">Redémarrez l\'application !</string>
-  <string name="LabelOutOfMemory">Mémoire insuffisante. L\'application va s\'arrêter.</string>
   <string name="LabelApplicationAlreadyRunning">L\'application fonctionne normalement.</string>
   <string name="LabelDeleteSession">Supprimer la session</string>
   <string name="LabelStartCapture">Démarrage capture</string>
@@ -369,7 +356,6 @@ $Tag4 - Tag sélectionné 4</string>
   <string name="LabelMirrorUpError">Le mode de déclenchement est réglé sur Mirror-up et l\'opération Mirror-up est en cours.</string>
   <string name="LabelMirrorUpError2">Le mode de déclenchement est [Mirror-up]</string>
   <string name="LabelDestinationCardError">La destination d\'enregistrement est la carte</string>
-  <string name="LabelLiveViewError">Erreur Live view</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Appareils</string>
   <string name="LabelDriver">Driver</string>
@@ -421,4 +407,7 @@ $Tag4 - Tag sélectionné 4</string>
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Session</string>
+  <!--// 12/09/2015-->
 </resources>

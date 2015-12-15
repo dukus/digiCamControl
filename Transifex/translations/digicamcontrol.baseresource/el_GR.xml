@@ -97,7 +97,6 @@
   <string name="ButtonEdit">Επεξεργασία</string>
   <string name="ButtonAutoFocus">_Αυτόματη Εστίαση</string>
   <string name="ButtonCapture">_Λήψη</string>
-  <string name="ButtonRecordMovie">Εγγραφή ταινίας</string>
   <string name="ButtonFreezeImage">Πάγωμα Εικόνας</string>
   <string name="ButtonStart">Εκκίνηση</string>
   <string name="ButtonPreview">Προεπισκόπηση</string>
@@ -109,16 +108,13 @@
   <string name="ButtonCapturePhotos">Λήψη φωτογραφιών</string>
   <string name="ButtonStartTimeLapse">Έναρξη TimeLapse</string>
   <string name="ButtonStopTimeLapse">Διακοπή TimeLapse</string>
-  <string name="ButtonCreateMovie">Δημιουργία ταινίας</string>
   <string name="ButtonLocateLogFile">Εντοπισμός αρχείου καταγραφής</string>
   <string name="LabelInterfaceLanguage">Γλώσσα διεπαφής</string>
   <string name="LabelDisableDriver">Απενεργοποίηση τοπικών drivers (δεν προτείνεται)</string>
   <string name="LabelTheme">Θέμα</string>
   <string name="LabelGeneral">Γενικά</string>
   <string name="LabelPreview">Προεπισκόπηση</string>
-  <string name="LabelPlaySound">Αναπαραγωγή ήχου μετά τη λήψη φωτογραφίας</string>
   <string name="LabelAutoPreview">Αυτόματη προεπισκόπιση</string>
-  <string name="LabelPreviewAfterCapture">Προεπισκόπηση εικόνας σε πλήρη οθόνη μετά τη λήψη</string>
   <string name="LabelPreviewTime">Χρόνος προεπισκόπησης σε δευτερόλεπτα :</string>
   <string name="LabelPreviewInLIveView">Προεπισκόπηση εικόνας μετά τη λήψη σε ζωντανή προβολή</string>
   <string name="LabelLIveViewImageFreeze">Πάγωμα εικόνας ζωντανής προβολής σε δευτερόλεπτα:</string>
@@ -133,7 +129,6 @@
   <string name="LabelSmallFocusSstep">Μικρό βήμα εστίασης</string>
   <string name="LabelMediumFocusStep">Μέτριο βήμα εστίασης</string>
   <string name="LabelLargFocusStep">Μεγάλο βήμα εστίασης</string>
-  <string name="ReStartToolTip">Θα πρέπει να επανεκκινήσετε την εφαρμογή για να ενεργοποιηθούν οι αλλαγές</string>
   <string name="LabelSessonName">Όνομα εργασίας</string>
   <string name="LabelFolder">Φάκελος :</string>
   <string name="LabelFileNameTemplate">Όνομα προτύπου :</string>
@@ -150,7 +145,6 @@ $Tag2 - Selected tag 2
 $Tag3 - Selected tag 3
 $Tag4 - Selected tag 4</string>
   <string name="LabelCounter">Μετρητής :</string>
-  <string name="LabelUseOriginal">Χρήση ονόματος αρχείου από την κάμερα</string>
   <string name="LabelUseOriginalToolTip">Αυτή η επιλογή δεν θα δουλέψει με τον WIA driver</string>
   <string name="LabelDontDownloadPhotos">Μην κατεβάσεις τις φωτογραφίες στον υπολογιστή</string>
   <string name="LabelAlowFolderChange">Επιτρέπεται αλλαγή φακέλου χρησιμοποιώντας το πρόγραμμα περιήγησης εικόνας</string>
@@ -184,13 +178,10 @@ $Tag4 - Selected tag 4</string>
   <string name="LabelNumberOfPhotos">Αριθμός φωτογραφιών</string>
   <string name="LabelDontAutofocusOnEveryCapture">Μην εστιάζεις αυτόματα σε κάθε λήψη</string>
   <string name="LabelCaptureInterval">Χρονικό διάστημα μεταξύ των λήψεων (ΩΩ:ΛΛ:ΔΔ)</string>
-  <string name="LabelMovieLenght">Μήκος ταινίας (ΩΩ:ΛΛ:ΔΔ)</string>
-  <string name="LabelMovieSettings">Ρυθμίσεις ταινίας</string>
   <string name="LabelVideoFormat">Φορμά βίντεο</string>
   <string name="LabelOutputFile">Εξαγωγή αρχείου</string>
   <string name="LabelFps">Καρέ ανα δευτερόλεπτο</string>
   <string name="LabelFillImage">Εικόνα γεμίσματος</string>
-  <string name="LabelCreateMovie">Δημιουργία ταινίας</string>
   <string name="LabelAddVirtualMovingToVideo">Προσθήκη εικονικής κίνησης στο βίντεο</string>
   <string name="LabelMovingSurface">Κινούμενο επίπεδο (%):</string>
   <string name="LabelMovingDirection">Κατεύθυνση κίνησης:</string>
@@ -269,15 +260,12 @@ $Tag4 - Selected tag 4</string>
   <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Λήψη κωδικοποιητή raw</string>
   <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Σφάλμα εκκίνησης λήψης βίντεο</string>
   <string name="LabelNoCardInserted">Δεν έχει εισαχθεί κάρτα μνήμης</string>
   <string name="LabelCardError">Σφάλμα κάρτας μνήμης</string>
   <string name="LabelCardNotFormatted">Η κάρτα μνήμης δεν διαμορφώθηκε</string>
   <string name="LabelNoFreeAreaInCard">Δεν υπάρχει ελεύθερος χώρος στην κάρτα μνήμης</string>
   <string name="LabelCardBufferNotEmpty">Υπάρχουν δεδομένα πρως εγγραφή στην προσωρινή μνήμη της κάρτας μνήμης.</string>
   <string name="LabelPcBufferNotEmpty">Υπάρχουν δεδομένα πρως εγγραφή στην προσωρινή μνήμη του υπολογιστή.</string>
-  <string name="LabelBufferNotEmpty">Υπάρχουν δεδομένα ταινίας στην προσωρινή μνήμη.</string>
-  <string name="LabelRecordInProgres">Κατά τη διάρκεια εγγραφής αρχείου ταινίας</string>
   <string name="LabelCardProtected">Η κάρτα είναι προστατευμένη</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Κατά τη μεγέθυνση εμφάνισης της ζωντανής προβολής</string>
   <string name="LabelWrongLiveViewType">Η επιλεγμένη ζωντανή προβολή είναι η φωτογραφία ζωντανής προβολής.</string>
@@ -343,7 +331,6 @@ Error:{0}
   <string name="LabelApplicationError">Σφάλμα εφαρμογής</string>
   <string name="LabelWiaNotInstalled">Το WIA 2.0 δεν έχει εγκατασταθεί</string>
   <string name="LabelRestartTheApplication">Επανεκκίνηση εφαρμογής!</string>
-  <string name="LabelOutOfMemory">Η εφαρμογή δεν έχει αρκετή μνήμη. Η εφαρμογή θα τερματιστεί!</string>
   <string name="LabelApplicationAlreadyRunning">Η εφαρμογή είναι ήδη ανοιχτή</string>
   <string name="LabelDeleteSession">Διαγραφή εργασίας</string>
   <string name="LabelStartCapture">Εκκίνηση λήψης</string>
@@ -387,7 +374,6 @@ Error:{0}
   <string name="LabelMirrorUpError">Ο τρόπος αποδέσμευσης ρυθμίζεται σε Mirror-up και ο καθρέφτης-up λειτουργίας πραγματοποιείται.</string>
   <string name="LabelMirrorUpError2">Ο τρόπος απελευθέρωσης είναι [Mirror-up].</string>
   <string name="LabelDestinationCardError">Ο προορισμός εγγραφής είναι η κάρτα μνήμης.</string>
-  <string name="LabelLiveViewError">Σφάλμα εκκίνησης ζωντανής προβολής</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Συσκευές</string>
   <string name="LabelExternalShutterRelease">Εξωτερική απελευθέρωση του κλείστρου</string>
@@ -523,9 +509,7 @@ Error:{0}
   <string name="LabelLowerCaseExtension">Χαμηλότερη επέκταση υπόθεσης</string>
   <string name="LabelOverlayTransparency">Διαφάνεια</string>
   <string name="LabelOverlayUseLastCaptured">Χρήση που λήφθηκε τελευταία</string>
-  <string name="LabelMinimizeToTryIcon">Ελαχιστοποίηση εικονίδιου</string>
   <string name="LabelStartMinimized">Εκκίνηση ελαχιστοποιηθεί</string>
-  <string name="LabelStartupWithWindows">Εκκίνηση μαζι με το Windows</string>
   <string name="LabelSelectSeries">Επιλογή φωτογραφιών στη ίδια σειρά</string>
   <string name="LabelCaptureDelay">Σύλληψη καθυστέρησης</string>
   <string name="LabelAutoExportPlugins">Αυτόματη Εξαγωγή Plugins</string>
@@ -590,4 +574,7 @@ Error:{0}
   <string name="LabelShowInExplorer">Εμφάνιση στον Explorer</string>
   <string name="LabelOpenInExternalViewer">Άνοιγμα σε εξωτερική συσκευή προβολής</string>
   <string name="LabelRestoreFromBackup">Επαναφορά από εφεδρικό αντίγραφο</string>
+  <!--// 11/03/2015-->
+  <string name="MenuSession">Εργασία</string>
+  <!--// 12/09/2015-->
 </resources>
