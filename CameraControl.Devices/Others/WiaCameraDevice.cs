@@ -228,6 +228,7 @@ namespace CameraControl.Devices.Others
                             double d = (int) subTypeValue;
                             string s = "f/" + (d/100).ToString("0.0");
                             FNumber.AddValues(s, (int) d);
+                            FNumber.ReloadValues();
                             if ((int) subTypeValue == (int) apertureProperty.get_Value())
                                 FNumber.SetValue((int) d);
                         }
@@ -246,6 +247,7 @@ namespace CameraControl.Devices.Others
                         foreach (var subTypeValue in isoProperty.SubTypeValues)
                         {
                             IsoNumber.AddValues(subTypeValue.ToString(), (int) subTypeValue);
+                            IsoNumber.ReloadValues();
                             if ((int) subTypeValue == (int) isoProperty.get_Value())
                                 IsoNumber.SetValue((int) subTypeValue);
                         }
@@ -266,6 +268,7 @@ namespace CameraControl.Devices.Others
                             if (ShutterTable.ContainsKey((int) subTypeValue))
                                 ShutterSpeed.AddValues(ShutterTable[(int) subTypeValue], (int) subTypeValue);
                         }
+                        ShutterSpeed.ReloadValues();
                         ShutterSpeed.SetValue(shutterProperty.get_Value());
                     }
                 }
@@ -284,6 +287,7 @@ namespace CameraControl.Devices.Others
                             if (WbTable.ContainsKey((int) subTypeValue))
                                 WhiteBalance.AddValues(WbTable[(int) subTypeValue], (int) subTypeValue);
                         }
+                        WhiteBalance.ReloadValues();
                         WhiteBalance.SetValue(wbProperty.get_Value());
                     }
                 }
@@ -302,6 +306,7 @@ namespace CameraControl.Devices.Others
                             if (ExposureModeTable.ContainsKey((int) subTypeValue))
                                 Mode.AddValues(ExposureModeTable[(int) subTypeValue], Convert.ToUInt32(subTypeValue));
                         }
+                        Mode.ReloadValues();
                         Mode.SetValue(Convert.ToUInt32(modeProperty.get_Value()));
                     }
                     Mode.IsEnabled = false;
@@ -324,6 +329,7 @@ namespace CameraControl.Devices.Others
                                 s = "+" + s;
                             ExposureCompensation.AddValues(s, (int) subTypeValue);
                         }
+                        ExposureCompensation.ReloadValues();
                         ExposureCompensation.SetValue(ecProperty.get_Value());
                     }
                 }
@@ -342,6 +348,7 @@ namespace CameraControl.Devices.Others
                             if (CSTable.ContainsKey((int) subTypeValue))
                                 CompressionSetting.AddValues(CSTable[(int) subTypeValue], (int) subTypeValue);
                         }
+                        CompressionSetting.ReloadValues();
                         CompressionSetting.SetValue(csProperty.get_Value());
                     }
                 }
@@ -360,7 +367,8 @@ namespace CameraControl.Devices.Others
                             if (EMMTable.ContainsKey((int) subTypeValue))
                                 ExposureMeteringMode.AddValues(EMMTable[(int) subTypeValue], (int) subTypeValue);
                         }
-                        CompressionSetting.SetValue(emmProperty.get_Value());
+                        ExposureMeteringMode.ReloadValues();
+                        ExposureMeteringMode.SetValue(emmProperty.get_Value());
                     }
                 }
                 catch (COMException)
@@ -379,6 +387,7 @@ namespace CameraControl.Devices.Others
                             if (FMTable.ContainsKey(subval))
                                 FocusMode.AddValues(FMTable[subval], subval);
                         }
+                        FocusMode.ReloadValues();
                         FocusMode.SetValue(Convert.ToUInt16((int) fmProperty.get_Value()));
                     }
                 }
