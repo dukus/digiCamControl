@@ -148,7 +148,7 @@ namespace CameraControl.ViewModel
                 {
                     Items = new ObservableCollection<PrintItemViewModel>();
                 }
-                LoadPrinterSettings();
+                //LoadPrinterSettings();
                 InitItems();
             }
             catch (Exception ex)
@@ -193,7 +193,7 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void LoadPrinterSettings()
+        public void LoadPrinterSettings()
         {
             try
             {

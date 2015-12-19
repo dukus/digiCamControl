@@ -37,7 +37,9 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.PrintWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
                     {
-                        DataContext = new PrintViewModel();
+                        var data = new PrintViewModel();
+                        data.LoadPrinterSettings();
+                        DataContext = data;
                         Show();
                         Activate();
                         Focus();
