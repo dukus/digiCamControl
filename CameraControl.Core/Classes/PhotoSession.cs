@@ -48,9 +48,17 @@ namespace CameraControl.Core.Classes
         private object _locker = new object();
         private string _lastFilename = null;
 
-        [JsonIgnore]
-        [XmlIgnore]
-        public List<string> SupportedExtensions = new List<string> { ".jpg", ".nef", ".tif", ".png", ".cr2", ".mov", ".avi" };
+        [JsonIgnore] [XmlIgnore] public List<string> SupportedExtensions = new List<string>
+        {
+            ".jpg",
+            ".nef",
+            ".tif",
+            ".png",
+            ".bmp",
+            ".cr2",
+            ".mov",
+            ".avi"
+        };
 
         [JsonIgnore]
         [XmlIgnore]
