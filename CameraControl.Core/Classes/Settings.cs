@@ -897,6 +897,11 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public static string BrandingFolder
+        {
+            get { return Path.Combine(ApplicationFolder, "Branding"); }
+        }
+
         public string OverlayFolder
         {
             get { return Path.Combine(DataFolder, "LiveViewOverlay"); }
@@ -926,6 +931,11 @@ namespace CameraControl.Core.Classes
         public static string WebServerFolder
         {
             get { return Path.Combine(ApplicationFolder, "WebServer\\"); }
+        }
+
+        public static string BrandingWebServerFolder
+        {
+            get { return Path.Combine(BrandingFolder, "WebServer\\"); }
         }
 
         public static string ApplicationFolder

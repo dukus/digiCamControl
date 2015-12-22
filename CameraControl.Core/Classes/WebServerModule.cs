@@ -280,6 +280,12 @@ namespace CameraControl.Core.Classes
 
         private string GetFullPath(Uri uri)
         {
+            // check first if there a branded version of the web server folder
+            string file = Path.Combine(Settings.BrandingWebServerFolder,
+                Uri.UnescapeDataString(uri.AbsolutePath.Remove(0, 1)).TrimStart(new[] { '/' })
+                    .Replace('/', '\\'));
+            if (File.Exists(file))
+                return file;
             return Path.Combine(Settings.WebServerFolder,
                 Uri.UnescapeDataString(uri.AbsolutePath.Remove(0, 1)).TrimStart(new[] {'/'})
                     .Replace('/', '\\'));

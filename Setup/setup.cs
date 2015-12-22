@@ -114,6 +114,11 @@ namespace Setup
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("digiCamControlsetup_{0}", ver.FileVersion);
             project.ControlPanelInfo.ProductIcon = "logo.ico";
+            if (System.IO.Directory.Exists(Path.Combine(project.SourceBaseDir, "Branding")))
+            {
+                appDir.AddDir(new Dir(appFeature, "Branding",
+                    new Files(appFeature, @"Branding\*.*")));
+            }
 
             string branding = Path.Combine(project.SourceBaseDir, "branding.xml");
             if (System.IO.File.Exists(branding))
@@ -124,8 +129,6 @@ namespace Setup
                 project.ControlPanelInfo.Manufacturer = name;
                 project.OutFileName = string.Format(name.Replace(" ", "_") + "_{0}", ver.FileVersion);
                 appDir.AddFile(new File(appFeature, "branding.xml"));
-                appDir.AddDir(new Dir(appFeature, "Branding",
-                    new Files(appFeature, @"Branding\*.*")));
                 project.Name = name;
                 if (System.IO.File.Exists(Path.Combine(project.SourceBaseDir, "Branding", "logo.ico")))
                 {
