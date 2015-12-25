@@ -74,13 +74,6 @@ namespace Setup
 
             Project project = new Project("digiCamControl",
                 baseDir,
-                new Binary(@"vcredist_x86.exe"),
-                new ManagedAction(@"InstallCRTAction",
-                    Return.check,
-                    When.Before,
-                    Step.LaunchConditions,
-                    Condition.NOT_Installed,
-                    Sequence.InstallUISequence),
                 new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.InstallExecute,
                     Condition.NOT_Installed, Sequence.InstallExecuteSequence),
                 new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
