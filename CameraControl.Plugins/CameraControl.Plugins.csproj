@@ -211,7 +211,12 @@
       <DependentUpon>DCCUSBShutterReleaseConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExternalDevices\DSUSBShutterRelease.cs" />
+    <Compile Include="ExternalDevices\HidUsbRelay.cs" />
+    <Compile Include="ExternalDevices\HidUsbRelayConfig.xaml.cs">
+      <DependentUpon>HidUsbRelayConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExternalDevices\MultiCameraBoxShutterRelease.cs" />
+    <Compile Include="ExternalDevices\RelayDeviceWrapper.cs" />
     <Compile Include="ExternalDevices\SerialPortShutterRelease.cs" />
     <Compile Include="ExternalDevices\SerialPortShutterReleaseConfig.xaml.cs">
       <DependentUpon>SerialPortShutterReleaseConfig.xaml</DependentUpon>
@@ -357,6 +362,10 @@
     <Page Include="ExternalDevices\DCCUSBShutterReleaseConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExternalDevices\HidUsbRelayConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExternalDevices\SerialPortShutterReleaseConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
