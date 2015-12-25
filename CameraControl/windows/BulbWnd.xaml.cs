@@ -642,6 +642,22 @@ namespace CameraControl.windows
                                                          Close();
                                                      }));
                     break;
+                case WindowsCmdConsts.BulbCaptureStart:
+                    if (IsVisible)
+                        btn_start_Click(null, null);
+                    break;
+                case WindowsCmdConsts.BulbCaptureStop:
+                    if (IsVisible)
+                        btn_stop_Click(null, null);
+                    break;
+                case WindowsCmdConsts.BulbScriptStart:
+                    if (IsVisible)
+                        button1_Click(null, null);
+                    break;
+                case WindowsCmdConsts.BulbScriptStop:
+                    if (IsVisible)
+                        btn_stop_script_Click(null, null);
+                    break;
             }
         }
 

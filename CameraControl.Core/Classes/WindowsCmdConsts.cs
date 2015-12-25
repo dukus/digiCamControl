@@ -34,6 +34,10 @@ namespace CameraControl.Core.Classes
         public const string ScriptWnd_Hide = "ScriptWnd_Hide";
         public const string BulbWnd_Show = "BulbWnd_Show";
         public const string BulbWnd_Hide = "BulbWnd_Hide";
+        public const string BulbCaptureStart = "BulbCaptureStart";
+        public const string BulbCaptureStop = "BulbCaptureStop";
+        public const string BulbScriptStart = "BulbScriptStart";
+        public const string BulbScriptStop = "BulbScriptStop";
         public const string DownloadPhotosWnd_Show = "DownloadPhotosWnd_Show";
         public const string DownloadPhotosWnd_Hide = "DownloadPhotosWnd_Hide";
         public const string TagSelectorWnd_Show = "TagSelectorWnd_Show";
