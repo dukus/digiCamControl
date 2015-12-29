@@ -42,7 +42,7 @@
 
     <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
 
-    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="d:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
       <UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="1.0.0.0" IncludeMaximum="no" Property="UPGRADEFOUND" />
