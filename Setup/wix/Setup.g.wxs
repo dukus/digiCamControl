@@ -40,8 +40,6 @@
 
     <PropertyRef Id="NETFRAMEWORK45" />
 
-    <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
-
     <WixVariable Id="WixUILicenseRtf" Value="d:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
@@ -49,9 +47,13 @@
       <UpgradeVersion Minimum="1.0.0.0" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
+    <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico" />
+
     <CustomAction Id="PreventDowngrading" Error="Newer version already installed" />
 
     <UIRef Id="WixUI_Minimal" />
+
+    <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
 
     <Feature Id="Obs_Plugin" Title="Obs Plugin" Absent="allow" Level="1">
       <ComponentRef Id="Component.CLRHostPlugin.dll" />
@@ -69,8 +71,6 @@
     <InstallUISequence>
       <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
     </InstallUISequence>
-
-    <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico" />
 
   </Product>
 </Wix>
