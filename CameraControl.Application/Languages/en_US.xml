@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<resources>
+    <!-- Property values -->
+    <string name="BURST_NUMBER">Burst Number</string> 
+    <string name="STILL_CAPTURE_MODE">Still Capture Mode</string> 
+    <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Continuous shot (continuous shooting)</string> 
+    <string name="AUTO_ISO">Auto Iso</string> 
+	<string name="ON">ON</string> 	
+    <string name="OFF">OFF</string> 
+    <string name="FLASH">Flash</string> 
+    <string name="NORMAL_SYNCHRONIZATION">Normal synchronization</string> 
+    <string name="LONG_EXP._NR">Long exp. NR</string> 
+    <string name="HIGH_ISO_NR">High ISO NR</string> 
+    <string name="NORMAL">Normal</string> 
+    <string name="EXPOSURE_DELAY_MODE">Exposure delay mode</string> 
+    <string name="LOCK">Lock</string> 
+    <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Single shot (single-frame shooting)</string> 
+    <string name="SELF_TIMER">Self-timer</string> 
+    <string name="QUICK_RESPONSE_REMOTE">Quick-response remote</string> 
+    <string name="2S_DELAYED_REMOTE">2s delayed remote</string> 
+    <string name="QUIET_SHOOTING">Quiet shooting</string> 
+	<string name="FLASH_PROHIBITED">Flash prohibited</string> 
+	<string name="RED_EYE_REDUCTION">Red-eye reduction</string> 
+	<string name="SLOW_SYNCHRONIZATION">Slow synchronization</string> 
+	<string name="REAR_SYNCHRONIZATION">Rear synchronization</string> 
+	<string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Red-eye reduction slow synchronization</string> 
+	<string name="NOT_PERFORMED">Not performed</string> 
+	<string name="LOW">Low</string> 
+	<string name="HIGH">High</string> 
+	<string name="CENTER_WEIGHTED_METERING">Center-weighted metering</string> 
+	<string name="MULTI_PATTERN_METERING">Multi-pattern metering</string> 
+	<string name="SPOT_METERING">Spot metering</string> 
+	<string name="AUTO">Auto</string> 
+	<string name="DAYLIGHT">Daylight</string> 
+	<string name="FLUORESCENT_">Fluorescent</string> 
+	<string name="INCANDESCENT">Incandescent</string> 
+	<string name="CLOUDY">Cloudy</string> 
+	<string name="SHADE">Shade</string> 
+	<string name="CUSTOM">Custom</string> 
+	<string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] AF servo mode automatic switching</string> 
+	<string name="[S]_SINGLE_AF_SERVO">[S] Single AF servo</string> 
+	<string name="[M]_MANUAL_FOCUS">[M] Manual focus</string> 
+	<string name="KELVIN">Kelvin</string> 
+	<string name="APPLICATION_MODE">Application mode</string> 
+	<string name="WHITE_FLUORESCENT_LAMP">White fluorescent lamp</string> 
+	<string name="FLUORESCENT_LIGHT_TYPE">Fluorescent light type</string> 
+	<string name="ADOBE_RGB">Adobe RGB</string> 
+	<string name="COLOR_SPACE">Color space</string> 
+	<string name="14_BIT_RECORDING">14-bit recording</string> 
+	<string name="RAW_RECORDING_BIT_MODE">Raw Recording bit mode</string> 
+	<string name="NEUTRAL">Neutral</string> 
+	<string name="PICTURE_CONTROL">Picture control</string> 
+	<string name="LOSSLESS_COMPRESSED_RAW">Lossless compressed RAW</string> 
+	<string name="RAW_COMPRESSION">Raw Compression</string> 
+	<string name="MF__HARD_">MF (hard)</string> 
+    <!-- End Property values -->	
+    <string name="Mode">Mode</string> 
+    <string name="Iso">_Iso</string> 
+    <string name="ShutterSpeed">_Shutter speed</string> 
+    <string name="Aperture">_Aperture</string> 
+    <string name="WhiteBalance">_White Balance</string> 
+    <string name="ExposureComp">_Exposure Comp.</string> 
+    <string name="Compression">_Compression</string> 
+    <string name="MeteringMode">_Metering Mode</string> 
+    <string name="FocusMode">_Focus Mode</string> 
+    <string name="Battery">Battery</string> 
+    <string name="SDRam">SD_Ram</string> 
+    <string name="SDRamToolTip">Capture images direct to PC without using card</string> 
+    <string name="CapturePhotoToolTip">Capture photo</string> 
+    <string name="CapturePhotoNoAfToolTip">Capture photo no auto focus</string> 
+    <string name="BraketingToolTip">Bracketing</string> 
+    <string name="SettingsToolTip">Settings</string> 
+    <string name="TimeLapseToolTip">Time lapse</string> 
+    <string name="FullscreenToolTip">Full screen</string> 
+    <string name="LiveViewToolTip">Live view</string> 
+    <string name="BrowseSessionsToolTip">Browse sessions</string> 
+    <string name="SelectTagsToolTip">Select Tags</string> 
+    <string name="AboutToolTip">About</string> 
+    <string name="Session">Session</string> 
+    <string name="SessionAdd">Add</string> 
+    <string name="SessionEdit">Edit</string> 
+    <string name="SessionDel">Del</string> 
+
+    <string name="MainWindowTitle">NCC - Translated</string> 
+    <string name="SettingsWindowTitle">Settings</string> 
+    <string name="SessionWindowTitle">Session [Add/Edit]</string> 
+    <string name="LiveViewWindowTitle">Live view</string> 
+    <string name="PresetEditWindowTitle">Preset Edit</string> 
+    <string name="BraketingWindowTitle">Bracketing</string> 
+    <string name="EditTagWindowTitle">Tag [Add/Edit]</string> 
+    <string name="MultipleCameraWindowTitle">Multiple camera support</string> 
+    <string name="SavePresetWindowTitle">Save Preset</string> 
+    <string name="TimeLapseWindowTitle">Time Lapse</string> 
+
+    <string name="ButtonOk">Ok</string> 
+    <string name="ButtonCancel">Cancel</string> 
+    <string name="ButtonAdd">Add</string> 
+    <string name="ButtonDelete">Delete</string> 
+    <string name="ButtonEdit">Edit</string> 
+    <string name="ButtonAutoFocus">_Auto Focus</string> 
+    <string name="ButtonCapture">_Capture</string> 
+    <string name="ButtonRecordMovie">Record video</string> 
+    <string name="ButtonFreezeImage">Freeze Image</string> 
+    <string name="ButtonStart">Start</string> 
+    <string name="ButtonPreview">Preview</string> 
+    <string name="ButtonStop">Stop</string> 
+    <string name="ButtonDeletePreset">Delete preset</string> 
+    <string name="ButtonDeleteProperty">Delete property</string> 
+    <string name="ButtonClose">Close</string> 
+    <string name="ButtonSave">Save</string> 
+    <string name="ButtonCapturePhotos">Capture photos</string> 
+    <string name="ButtonStartTimeLapse">Start TimeLapse</string> 
+    <string name="ButtonStopTimeLapse">Stop TimeLapse</string> 
+    <string name="ButtonCreateMovie">Create video</string> 
+    
+    <string name="ButtonLocateLogFile">Locate log file</string> 
+
+    <string name="LabelInterfaceLanguage">Interface language :</string> 
+    <string name="LabelDisableDriver">Disable native drivers (not recommended)</string> 
+    <string name="LabelTheme">Theme :</string> 
+    <string name="LabelGeneral">General</string> 
+    <string name="LabelPreview">Preview</string> 
+    <string name="LabelPlaySound">Play sound after capture</string> 
+    <string name="LabelAutoPreview">Auto preview</string> 
+    <string name="LabelPreviewAfterCapture">Preview image after capture in full screen</string> 
+    <string name="LabelPreviewTime">Preview time in sec : </string> 
+    <string name="LabelPreviewInLIveView">Preview image after shot in live view</string> 
+    <string name="LabelLIveViewImageFreeze">Live view image freeze in sec : </string> 
+    <string name="LabelRotateImage">Rotate image :</string> 
+    <string name="LabelDontLoadThumbs">Don't load thumbnails</string> 
+    <string name="LabelFullscrenBack">Full screen window background : </string> 
+    <string name="LabelTriggers">Triggers</string> 
+    <string name="LabelUseKeybordToTrigger">Use keyboard to trigger take photo</string> 
+    <string name="LabelWebserver">Webserver</string> 
+    <string name="LabelUseWebserver">Use web server</string> 
+    <string name="LabelFocusAndLiveview">Live view</string> 
+    <string name="LabelSmallFocusSstep">Small focus step</string> 
+    <string name="LabelMediumFocusStep">Medium focus step</string> 
+    <string name="LabelLargFocusStep">Larg focus step</string> 
+    <string name="ReStartToolTip">You need to restart the application for these changes to take affect</string> 
+
+    <string name="LabelSessonName">Session name :</string> 
+    <string name="LabelFolder">Folder :</string> 
+    <string name="LabelFileNameTemplate">File Name Template :</string> 
+    <string name="LabelFileNameTemplateToolTip">$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4</string> 
+    <string name="LabelCounter">Counter :</string> 
+    <string name="LabelUseOriginal">Use original file name given by the camera</string> 
+    <string name="LabelUseOriginalToolTip">This option isn't works with WIA driver</string> 
+    <string name="LabelDontDownloadPhotos">Don't download photos to PC</string> 
+    <string name="LabelAlowFolderChange">Allow folder change using image browser</string> 
+    <string name="LabelTags">Tags</string> 
+
+    <string name="LabelManualFocus">Manual Focus</string> 
+    <string name="LabelGrid">Grid</string> 
+    <string name="LabelLvZoomRation">Lv zoom ration</string> 
+    <string name="LabelFocusStacking">Focus Stacking</string> 
+    <string name="LabelNoOfPhots">No. of photos</string> 
+    <string name="LabelFocusStep">Focus step</string> 
+    <string name="LabelLuminosity">Luminosity</string> 
+
+    <string name="LabelExposureBracketing">Exposure bracketing</string> 
+    <string name="LabelExposureBracketingToolTip">Set camera to Aperture mode and turn off Auto ISO and Auto White Balance for most reliable results.</string> 
+    <string name="LabelManualExposureBracketing">Manual Exposure bracketing</string> 
+    <string name="LabelManualExposureBracketingToolTip">Set camera to Manual (M) mode and turn off Auto ISO and Auto White Balance for most reliable results.</string> 
+    <string name="LabelPresetBracketing">Preset bracketing</string> 
+
+    <string name="LabelTagDisplayValue">Display Value</string> 
+    <string name="LabelTagValue">Value</string> 
+    <string name="LabelTagIncludeInGroup1">Include in group 1</string> 
+    <string name="LabelTagIncludeInGroup2">Include in group 2</string> 
+    <string name="LabelTagIncludeInGroup3">Include in group 3</string> 
+    <string name="LabelTagIncludeInGroup4">Include in group 4</string> 
+
+    <string name="LabelDelay">Delay (msec)</string> 
+    <string name="LabelNumberOfCaptures">Number of captures</string> 
+    <string name="LabelWaitTime">Wait time (sec)</string> 
+    <string name="LabelDisableAutofocus">Disable autofocus</string> 
+    <string name="LabelConnectedCameras">Connected cameras</string> 
+
+    <string name="LabelPresetName">Preset name:</string> 
+
+    <string name="LabelTimeLapse">TimeLapse</string> 
+    <string name="LabelSecondsBetweenShots">Seconds between shots</string> 
+    <string name="LabelNumberOfPhotos">Number of photos</string> 
+    <string name="LabelDontAutofocusOnEveryCapture">Don't autofocus on every capture</string> 
+    <string name="LabelCaptureInterval">Capture interval (HH:MM:SS)</string> 
+    <string name="LabelMovieLenght">Video length (HH:MM:SS)</string> 
+    <string name="LabelMovieSettings">Video settings</string> 
+    <string name="LabelVideoFormat">Video format</string> 
+    <string name="LabelOutputFile">Output file</string> 
+    <string name="LabelFps">Fps</string> 
+    <string name="LabelFillImage">Fill image</string> 
+    <string name="LabelCreateMovie">Create video</string> 
+    <string name="LabelAddVirtualMovingToVideo">Add virtual moving to video</string> 
+    <string name="LabelMovingSurface">Moving surface (%):</string> 
+    <string name="LabelMovingDirection">Moving direction:</string> 
+    <string name="LabelMovingDirectionLeftToRight">Left to Right</string> 
+    <string name="LabelMovingDirectionRightToLeft">Right to Left</string> 
+    <string name="LabelMovingDirectionTopToBottom">Top to Bottom</string> 
+    <string name="LabelMovingDirectionBottomToTop">Bottom to Top</string> 
+    <string name="LabelMovingDirectionLeftTopToRightBottom">Left/Top to Right/Bottom</string> 
+    <string name="LabelMovingDirectionRightBottomToLeftTop">Right/Bottom to Left/Top</string> 
+    <string name="LabelImageAlignment">Image alignment:</string> 
+    <string name="LabelImageAlignmentLeftTop">Left/Top</string> 
+    <string name="LabelImageAlignmentCenter">Center</string> 
+    <string name="LabelImageAlignmentRightBottom">Right/Bottom</string> 
+    <string name="LabelVideoCodecProblem">Video codec problem</string> 
+    
+    <string name="MsgPhotoTransferBegin">Photo transfer begin</string> 
+    <string name="MsgPhotoTransferDone">Photo transfer done</string> 
+    <string name="MsgPhotoTransferError">Transfer error !\nMessage :{0}</string> 
+    <string name="MsgBulbModeNotSupported">Bulb mode not supported !</string> 
+    <string name="MsgApplicationUpToDate">Your application is up to date !</string> 
+    <string name="MsgUseSessionEditorTags">Use session editor to define tags !</string> 
+    <string name="MsgLastSessionCantBeDeleted">Last session can't be deleted</string> 
+    <string name="MsgStopTimeLapse">The time lapse not finished! Do you want to stop the time lapse ?</string> 
+    <string name="MsgInstallXvidCodec">Xvid codec not installed !\nDo you want to download and install it ? </string> 
+
+    <string name="MsgDeleteSessionQuestion">Do you want continue to deleting session {0} ?\nNo files will be deleted !</string> 
+
+    <string name="MsgBracketingDone">Bracketing done</string> 
+    <string name="MsgActionInProgress">Action in progress {0}/{1}</string> 
+
+    <string name="MenuFile">_File</string> 
+    <string name="MenuReScan">Rescan connected cameras</string> 
+    <string name="MenuConnectedCameras">Connected cameras</string> 
+    <string name="MenuExit">Exit</string> 
+    <string name="MenuView">_View</string> 
+    <string name="MenuMultipleCamera">Multiple camera control</string> 
+    <string name="MenuSelectedCameraProperty">Selected camera property</string> 
+    <string name="MenuPresets">Presets</string> 
+    <string name="MenuPresetsLoad">Load</string> 
+    <string name="MenuPresetsSave">Save</string> 
+    <string name="MenuPresetsEdit">Edit</string> 
+    <string name="MenuHelp">_Help</string> 
+    <string name="MenuHomePage">Home page</string> 
+    <string name="MenuCheckForUpdate">Check for update</string> 
+    <string name="MenuDonate">Donate</string> 
+    <string name="MenuAbout">About</string> 
+    <string name="MenuLayout">Layout</string> 
+    <string name="MenuLayoutNormal">Normal</string> 
+    <string name="MenuLayoutGridRight">Grid right</string> 
+    <string name="MenuLayoutGrid">Grid</string> 
+
+    <string name="MenuProperties">Properties</string> 
+    <string name="MenuUseSelectedCameraPreset">Use selected camera preset</string> 
+	
+	<!-- 15/10/2012 -->
+     <string name="LabelExternalViewerPath">Context menu external viewer</string>
+     <string name="LabelStayOnTop">Always on top</string>
+    <!-- 22/10/2012 -->
+     <string name="LabelDisplay">Display</string>
+     <string name="LabelMotionDetection">Motion detection</string>
+     <string name="LabelActivateMotionDetection">Activate motion detection</string>
+     <string name="LabelCaptureWhenMove">Capture when motion detected</string>
+     <string name="LabelThreshold">Threshold (%)</string>
+     <string name="LabelWaitMoion">Wait (sec)</string>
+    <!-- 25/10/2012 -->
+     <string name="LabelAutofocusBeforeCapture">Autofocus before capture</string>
+    <!-- 26/10/2012 -->
+     <string name="LabelOpacity">Opacity</string>
+    <!-- 29/10/2012 -->
+     <string name="LabelMotionDetectionType">Motion detection type</string>
+     <string name="LabelTwoFramesDifferenceDetector">Two Frames Difference Detector</string>
+     <string name="LabelSimpleBackgroundModelingDetector">Simple Background Modelling Detector</string>
+     <string name="LabelSmallestBlockSize">Smallest block size</string>
+     <string name="ButtonHelp">Help</string>
+    <!-- 31/10/2012 -->
+     <string name="LabelMenu">Menu</string>
+    <!-- 03/11/2012 -->
+     <string name="MenuForum">Forum</string>
+    <!-- 07/11/2012 -->
+     <string name="ButtonGetRawCodec">Get raw codec</string>
+    <!-- 08/11/2012 -->
+     <string name="LabelErrorRecordMovie">Error start video recording</string>
+     <string name="LabelNoCardInserted">No card inserted</string>
+     <string name="LabelCardError">Card Error</string>
+     <string name="LabelCardNotFormatted">Card not formatted</string>
+     <string name="LabelNoFreeAreaInCard">No free area in the card</string>
+     <string name="LabelCardBufferNotEmpty">There is data whose recording destination is a card in the buffer.</string>
+     <string name="LabelPcBufferNotEmpty">There is data whose recording destination is the PC in the buffer.</string>
+     <string name="LabelBufferNotEmpty">There is video data in the buffer. </string>
+     <string name="LabelRecordInProgres">During video file recording</string>
+     <string name="LabelCardProtected">Card protected</string>
+     <string name="LabelDuringEnlargedDisplayLiveView">During enlarged display of Live view</string>
+     <string name="LabelWrongLiveViewType">The set live view selector is the live view photography.</string>
+     <string name="LabelNotInApplicationMode">The camera is not in the application mode.</string>
+     <string name="ButtonResetSettings">Reset settings</string>
+    <!-- 14/11/2012 -->
+    <string name="LabelUseExternalViewer">Use external viewer</string>
+    <string name="LabelExternalPreViewerPath">External viewer path</string>
+    <string name="LabelExternalPreViewerArgs">External viewer arguments</string>
+    <!-- 18/11/2012 -->
+    <string name="LabelControl">Control</string>
+    <!-- 20/11/2012 -->
+    <string name="LabelExport">Export</string>
+    <!-- 21/11/2012 -->
+    <string name="LabelDownload">Download</string>
+    <!-- 25/11/2012 -->
+    <string name="DownloadWindowTitle">Download photos</string>
+    <string name="LabelDeleteFilesAfterTransfer">Delete files after transfer</string>
+    <string name="LabelAskForDelete">Transferred files will be deleted.\nDo you want to continue ?</string>
+    <!-- 26/11/2012 -->
+    <string name="LabelErrorSetFocusPos">Error set focus position</string>
+    <string name="LabelErrorUnableFocus">Unable focus</string>
+    <!-- 28/11/2012 -->
+    <string name="LabelErrorLoadingFileList">Error loading file list</string>
+    <!-- 30/11/2012 -->
+    <string name="LabelTransfer">Transfer</string>
+    <string name="LabelTransferItem1">1.Save to PC only</string>
+    <string name="LabelTransferItem2">2.Save to camera only</string>
+    <string name="LabelTransferItem3">3.Save to PC and camera</string>	
+    <!--  05/12/2012-->
+	<string name="MsgDisabledDrivers">Native drivers are disabled ! Do you want to enable it ?</string>
+    <!--  14/12/2012-->
+    <string name="LabelShowFocusPoints">Show focus points</string>
+    <string name="LabelMainWindow">Main window</string>
+    <string name="LabelSelect">Select</string>
+    <string name="TimeSelectWindowTitle">Select window</string>
+    <!--  16/12/2012-->
+    <string name="LabelRotateNone">None</string>
+    <string name="LabelRotate90">Rotate 90</string>
+    <string name="LabelRotate180">Rotate 180</string>
+    <string name="LabelRotate270">Rotate 270</string>
+    <string name="LabelLowMemoryUsage">Low memory usage</string>
+    <!--  04/01/2013-->
+    <string name="LabelRawCodecNotInstalled">Raw codec not installed or unknown file format</string>
+    <!--  05/01/2013-->
+    <string name="LabelUseCameraCounter">Use camera counter instead of generic counter</string>
+    <string name="LabelResetCounters">Reset counters</string>
+    <!--  07/01/2013-->
+    <string name="LabelUnabletoDeleteSession">Unable to delete session</string>
+    <!--  12/01/2013-->
+    <string name="LabelWaitingForDevice">Waiting for device to be ready</string>
+    <string name="LabelAdvanced">Advanced</string>
+    <string name="LabelUseParellelTransfer">Use parallel file transfer</string>
+    <!-- 19/01/2013 -->
+    <string name="LabelUnHandledError">An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError:{0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)</string>
+    <string name="LabelApplicationError">Application Error</string>
+    <string name="LabelWiaNotInstalled">WIA 2.0 not installed</string>
+    <string name="LabelRestartTheApplication">Restart the application !</string>
+    <string name="LabelOutOfMemory">The application run out of memory. Application will shut down! </string>
+    <string name="LabelApplicationAlreadyRunning">Application already running</string>
+    <string name="LabelDeleteSession">Delete session</string>
+    <string name="LabelStartCapture">Start Capture</string>
+    <string name="LabelStopCapture">Stop Capture</string>
+    <string name="LabelCaptureTime">Capture time (sec)</string>
+    <string name="LabelTimeBetweenShots">Time between shots</string>
+    <string name="LabelDontAutofocus">Don't autofocus</string>
+    <string name="LabelShowUnTranslatedStringIds">Show untranslated string ids</string>    
+    <!-- 20/01/2013-->
+    <string name="LabelUseAsMaster">Use as master</string>
+    <!--29/01/2013-->
+    <string name="LabelCounterIncrementer">Counter incrementer</string>
+    <string name="LabelSelected">Selected</string>
+    <!-- 31/01/2013-->
+    <string name="LabelNone">None</string>
+    <string name="LabelRuleOfThirds">Rule of thirds</string>
+    <string name="LabelComboGrid">Grid</string>
+    <string name="LabelDiagonal">Diagonal</string>
+    <string name="LabelSplit">Split</string>
+    <!-- 13/03/2013-->
+    <string name="LabelTools">Tools</string>
+    <!-- 17/03/2012-->
+    <string name="LabelMFError">Camera is in MF focus mode</string>
+    <string name="LabelNotAFSError">Camera isn't in AF-S focus mode</string>
+    <!-- 28/03/2012-->
+    <string name="LabelSequenceError">Sequence error</string>
+    <string name="LabelFullyPressedButtonError">Fully pressed button error</string>
+    <string name="LabelApertureValueError">The aperture value is being set by the lens aperture ring.</string>
+    <string name="LabelBulbError">Bulb error</string>
+    <string name="LabelDuringCleaningMirror">During cleaning mirror-up operation</string>
+    <string name="LabelDuringInsufficiencyBattery">During insufficiency of battery</string>
+    <string name="LabelTTLError">TTL error</string>
+    <string name="LabelNonCPULEnseError">A non-CPU lens is mounted and the exposure mode is not M.</string>
+    <string name="LabelImageInRAM">There is an image whose recording destination is SDRAM.</string>
+    <string name="LabelNoCardInsertedError">The recording destination is the card or the card and SDRAM,\n and the card is not inserted with the release disabled without a card.</string>
+    <string name="LabelCommandProcesingError">During processing by the shooting command</string>
+    <string name="LabelShoutingInProgress">The shooting mode is EFFECTS.</string>
+    <string name="LabelOverHeatedError">The Live view cannot be started when the temperature rises.</string>
+    <string name="LabelCardProtectedError">Card protected</string>
+    <string name="LabelMirrorUpError">The release mode is set to Mirror-up and the mirror-up operation is being performed.</string>
+    <string name="LabelMirrorUpError2">The release mode is [Mirror-up].</string>
+    <string name="LabelDestinationCardError">The recording destination is the card.</string>
+    <string name="LabelLiveViewError">Error starting live view </string>
+	<!-- 07/05/2013 -->
+	<string name="LabelDevices">Devices</string>
+	<string name="LabelExternalShutterRelease">External shutter release</string>
+	<string name="LabelConfigName">Configuration name</string>
+	<string name="LabelDriver">Driver</string>
+	<string name="LabelAstronomy">Astronomy</string>
+	<string name="LabelEnable">Enable</string>
+	<string name="LabelUseConfiguration">Use configuration</string>
+	<string name="LabelNoExternalDeviceSelected">No external device is selected</string>
+	<string name="LabelScript">Script</string>
+	<string name="LabelStartScript">Start Script</string>
+	<string name="LabelStopScript">Stop Script</string>
+	<string name="LabelDeviceSettings">Device settings</string>
+	<string name="LabelAvailableDevices">Available devices</string>
+	<string name="LabelCommands">Commands</string>
+	<string name="LabelStartLiveView">Start Live View</string>
+	<string name="LabelStopLiveView">Stop Live View</string>
+	<string name="LabelBrightness">Brightness</string>
+	<string name="LabelUseExternalShutterRelease">Use external shutter release</string>
+	<string name="LabelDownloadJpgOnly">Download Jpg file only</string>
+	<string name="LabelDownloadJpgOnlyToolTip">If capture done with JPG+RAW only the jpg files are downloaded</string>
+	<string name="LabelSetCounters">Set Counters</string>
+	<string name="LabelEdgeDetection">Edge detection</string>
+	<string name="LabelLeadingZeros">Counter leading zeros</string>
+	<!--04/07/2013-->
+	<string name="LabelShowFocusRect">Show focus rectangle</string>
+	<string name="LabelEasyLiveViewControl">Easy live view control</string>
+	<string name="LabelExif">Exif</string>
+	<string name="LabelImageProperties">Image Properties</string>
+	<string name="LabelFileName">File Name</string>
+	<string name="LabelSet">Set</string>
+	<string name="LabelTagSelector">Tag selector</string>
+	<string name="LabelComment">Comment</string>
+	<string name="LabelWriteComments">Write comments/tags in downloaded image file</string>
+	<string name="LabelStayOnTop2">Stay on top</string>
+	<string name="LabelWriteSelectedTags">Write tags from tag selector</string>
+	<string name="LabelClearCache">Clear cache</string>
+	<string name="LabelShowMagnifierInFullSccreen">Show magnifier in full screen</string>
+	<string name="LabelDelayImageLoading">Delay image loading</string>
+	<string name="LabelShowOverlayFolder">Show overlay folder</string>
+	<string name="LabelPHDGuiding">PHD Guiding</string>
+	<string name="LabelWaitPHDGuiding">Wait for PHD (sec)</string>
+	<string name="LabelCountDown">Countdown</string>
+	<string name="LabelCurrentEvent">Current event</string>
+	<string name="LabelRemainingCaptures">Captures left</string>
+	<string name="LabelLiveViewRotation">Live view rotation</string>
+	<string name="LabelAutomaticallyGuiding">Automatically PHD Guiding after photo captured</string>
+	<string name="LabelAutoRotate">Auto rotate</string>
+	<string name="LabelReset">Reset</string>
+	<string name="LabelFocus">Focus</string>
+	<!--17/11/2013-->        
+    <string name="LabelAddFakeCamera">Add a fake camera</string>
+    <string name="LabelBarcode">Barcode</string>
+    <string name="LabelSendTheLogFile">Send the log file</string>
+    <string name="LabelAskSendLogFile">Do you want to send log file to developers ?</string>
+    <string name="LabelSyncCameraDate">Sync camera date time on camera connect</string>
+    <string name="LabelShowThumbUpDown">Show thumb up/down buttons</string>
+    <string name="LabelSend">Send</string>
+    <string name="LabelLogMessage">Message to the developers of digiCamControl :</string>
+    <string name="LabelLogText">The log file will be send to the digiCamcontrol developer team for improve application stability.</string>
+    <string name="LabelFullscreen">Full screen</string>
+    <string name="LabelSelection">Selection</string>
+    <string name="LabelSelectAll">Select All</string>
+    <string name="LabelSelectNone">Select None</string>
+    <string name="LabelSelectLiked">Select Liked</string>
+    <string name="LabelSelectUnLiked">Select UnLiked</string>
+	<!--19/01/2014-->        
+	<string name="LabelLockNearFar">Please lock nearest and farest focus points</string>
+	<string name="LabelError">Error</string>
+	<string name="LabelChangelog">Change Log</string>
+	<!--27/02/2014-->        
+	<string name="LabelAllowOverWrite">Allow overwrite</string>
+	<string name="LabelShowRuler">Show Ruler</string>
+	<string name="LabelAutoPreviewJpgOnly">Auto Preview Jpg Only</string>
+	<string name="LabelSettingsLiveView">Live view</string>
+	<string name="LabelHostMode">Host mode</string>
+	<!--17.05.2014-->        
+	<string name="LabelClear">Clear</string>
+	<string name="LabelHistogram">Histogram</string>
+	<string name="LabelMetadata">Metadata</string>
+	<string name="LabelFullSize">Full size image</string>
+	<string name="LabelWifi">Connect with DSLRDASHBOARDSERVER</string>
+	<string name="ButtonRecordStopMovie">Stop Record movie</string>
+	<string name="LabelOverlay">Overlay</string>
+	<string name="LabelGenerateThumbs">Generate Thumbnails</string>
+	<string name="LabelPlay">Play</string>
+	<string name="LabelPause">Pause</string>
+	<string name="LabelImageSequencer">Image Sequencer</string>
+	<string name="LabelLoop">Loop</string>
+	<string name="LabelProgress">Progress</string>
+	<string name="LabelStartImageFrame">Start image frame</string>
+	<string name="LabelStopImageFrame">Stop image frame</string>
+	<string name="LabelPlayVideo">Play Video</string>
+	<string name="LabelLoadPresetAllCamera">Load preset in all cameras</string>
+	<string name="LabelBackUpFolder">Backup folder</string>
+	<string name="LabelBackUp">Backup photos</string>
+	<string name="LabelVerifyPreset">Verify preset</string>
+	<string name="LabelRefreshSession">Refresh file list</string>
+	<string name="LabelErrorEmail">Your email address (if you want get feedback)</string>
+	<string name="LabelApertureBracketing">Aperture bracketing </string>
+<!-- 	        //20/08/2014 -->
+	<string name="LabelCaptureName">Capture Name</string>
+	<string name="LabelSeries">Series</string>
+	<string name="LabelAdvancedProperties">Advanced Properties</string>
+	<string name="LabelDirection">Direction</string>
+	<string name="LabelFarNear">Far -> Near</string>
+	<string name="LabelNearFar">Near -> Far</string>
+	<string name="LabelStepSmall">Small step</string>
+	<string name="LabelStepMedium">Medium step</string>
+	<string name="LabelStepLarge">Large step</string>
+	<string name="LabelSessionOpenFolder">Open session folder</string>
+	<string name="LabelActivate">Activate</string>
+	<string name="LabelScaling">Scaling</string>
+	<string name="LabelHorizontal">Horizontal</string>
+	<string name="LabelVertical">Vertical</string>
+		<!-- 20/08/2014 -->
+	<string name="LabelLockNear">Lock nearest point</string>
+	<string name="LabelLockFar">Lock farthest point</string>
+	<string name="LabelGoNear">Go to nearest focusing point</string>
+	<string name="LabelGoFar">Go to farthest focusing point</string>
+	<string name="LabelMoveSmallToCamera">Move small step to camera</string>
+	<string name="LabelMoveMediumToCamera">Move medium step to camera</string>
+	<string name="LabelMoveLargeToCamera">Move large step to camera</string>
+	<string name="LabelMoveSmallToInfinity">Move small step to infinity</string>
+	<string name="LabelMoveMediumToInfinity">Move medium step to infinity</string>
+	<string name="LabelMoveLargeToInfinity">Move large step to infinity</string>
+	<string name="LabelDistantFromPoints">Distance between the nearest and farthest locked in focus points</string>
+	<string name="LabelFocusStackingSimple">Focus Stacking Simple</string>
+	<string name="LabelFocusStackingAdvanced">Focus Stacking Advanced</string>
+	<string name="LabelErrorFarPoit">First set the farthest focus point</string>
+	<string name="LabelErrorAutoFocusLock">The focus is locked, unlock first to autofocus</string>
+	<string name="LabelErrorSimpleStackingFocusLock">The focus is locked, simple focus stacking no required focus lock, unlock first to start</string>
+	<string name="LabelLowerCaseExtension">Lower case extension</string>
+	<string name="LabelOverlayTransparency">Transparency</string>
+	<string name="LabelOverlayUseLastCaptured">Use last captured</string>
+	<string name="LabelMinimizeToTryIcon">Minimize to tray icon</string>
+	<string name="LabelStartMinimized">Start minimized</string>
+	<string name="LabelStartupWithWindows">Start when Windows starts</string>
+	<string name="LabelSelectSeries">Select photos in same series</string>
+	<string name="LabelCaptureDelay">Capture delay</string>
+	<string name="LabelAutoExportPlugins">Auto Export Plugins</string>
+	<string name="LabelAddPlugin">Add plugin</string>
+	<string name="LabelErrorSetFolder">Error set folder</string>
+	<string name="LabelDetectArea">Detect only in ruler area</string>
+	<string name="LabelMessagesLog">Messages log</string>
+	<string name="LabelRefreshCameraList">Refresh camera list</string>
+	<string name="LabelSortOrder">Sort order</string>
+	<string name="LabelSaveOrder">Save sort order</string>
+	<string name="LabelLoadThumbDownload">Load thumbs in download window</string>
+	<string name="LabelFormatAllCards">Format all cards</string>
+	<string name="LabelPrint">Print</string>
+	<string name="LabelPrintSetup">Print setup</string>
+	<string name="LabelPageSetup">Page setup</string>
+	<string name="LabelMarginBetweenImages">Margin</string>
+	<string name="LabelRotate">Rotate</string>
+	<string name="LabelRepeatImages">Repeat images</string>
+	<string name="LabelWaitBetweenSteps">Wait between steps (ms)</string>
+	<string name="LabelShowSecondary ">Show in secondary monitor</string>
+		 <!-- 20/12/2014 -->
+	<string name="LabelKeyboardTrigger">Keyboard trigger</string>
+	<string name="LabelNoProccesing">No processing</string>
+	<string name="LabelNoProccesingTooltip">Most of functionality are disabled</string>
+	<string name="LabelSendUsage">Automatically send usage statistics</string>
+	<string name="LabelSheduleStart">Start schedule</string>
+	<string name="LabelSheduleStop">Stop schedule</string>
+	<string name="LabelTimeLapseSettings">Timelapse settings</string>
+	<string name="LabelTimeLapseNow">Start now</string>
+	<string name="LabelTimeLapseIn">Start in</string>
+	<string name="LabelTimeLapseAt">Start at</string>
+	<string name="LabelTimeLapseDaily">Start Daily</string>
+	<string name="LabelDate">Date</string>
+	<string name="LabelTime">Time</string>
+	<string name="LabelSunday">Sunday</string>
+	<string name="LabelMonday">Monday</string>
+	<string name="LabelTuesday">Tuesday</string>
+	<string name="LabelWednesday">Wednesday</string>
+	<string name="LabelThursday">Thursday</string>
+	<string name="LabelFriday">Friday</string>
+	<string name="LabelSaturday">Saturday</string>
+	<string name="LabelTimeLapseStop">Stop </string>
+	<string name="LabelTimeLapseStopIn">Stop in</string>
+	<string name="LabelTimeLapseStopAt">Stop at</string>
+	<string name="LabelTimeLapseStopPhotoCount">After capture count</string>
+	<string name="LabelTimeLapseWaitBetweenCaptures">Time to wait between captures (sec)</string>
+	<string name="LabelTimeLapseCapture">Capture with selected camera</string>
+	<string name="LabelTimeLapseCaptureAll">Capture with all camera</string>
+	<string name="LabelTimeLapseCaptureScript">Execute script</string>
+	<string name="LabelTimeLapseScriptFile">Script file</string>
+	<string name="LabelBrowse">Browse</string>
+	<string name="LabelFlip">Flip horizontally</string>
+	<string name="LabelLiveViewPreviewTime">Preview captured photo time</string>
+	<string name="LabelColor">Colour</string>
+	<string name="LabelImportData">Import Data</string>
+	<string name="LabelExportData">Export Data</string>
+	<string name="LabelData">Data</string>
+	<string name="LabelScanBarcode">Scan Barcode</string>
+	<string name="LabelCaptureAfterScan">Capture after scan</string>
+	<string name="LabelKeepWindowActive">Keep window active</string>
+	<string name="LabelDeleteFiles">Delete selected files</string>
+	<string name="LabelShowInExplorer">Show in explorer</string>
+	<string name="LabelOpenInExternalViewer">Open in external viewer</string>
+	<string name="LabelRestoreFromBackup">Restore from backup copy</string>
+	       <!--  // 11/03/2015 -->
+	<string name="LabelAllowWebCommands">Allow interaction via webserver</string>
+	<string name="LabelCurrentMotion">Detected motion</string>
+	<string name="LabelStartupScript">Execute script on startup</string>
+	<string name="LabelPublicWebserver">Allow public access</string>
+	<string name="LabelLoadCanonTransferMode">Load Canon transfer mode</string>
+	<string name="LabelFolderSelector">Folder selector</string>
+	<string name="LabelReloadOnFolderChange">Reload files on folder change</string>
+	<string name="MenuSession">Session</string>
+	<string name="MenuCamera">Camera</string>
+	<string name="MenuThumbnailSize">Thumbnail Size</string>
+	<string name="MenuInver">Invert selection</string>
+	<string name="MenuResetDevice">Reset device</string>
+	<string name="MenuSessionAdd">Add new session ...</string>
+	<string name="MenuSessionEdit">Edit current session ...</string>
+	<string name="MenuSessionDel">Remove current session</string>
+	<string name="MenuIncrementSeries">Increment series</string>
+	<string name="MenuWindows">Windows</string>
+	<string name="MenuOnlineManual">Online manual</string>
+	<string name="MenuPlugins">Plugins</string>
+	<string name="LabelAutorotate">Auto rotate image</string>
+	<string name="MenuCameraProperty">Camera property</string>
+	<string name="LabelShowThumbInfo">Show info next to thumbnail</string>
+	<string name="MenuLayoutPortrait">Portrait</string>
+	<string name="MenuLayoutLandscape">Landscape</string>
+	<string name="MenuExportSession">Export session ...</string>
+	<string name="MenuImportSession">Import session ...</string>
+	<string name="LabelFullSpeed">Full speed</string>
+	<!-- // 12/09/2015 -->
+	<string name="LabelEmailPublicWebAddress">Email public web address</string>
+	<string name="LabelBracketingMode">Bracketing mode</string>
+	<string name="LabelDepthOfFieldBracketing">Depth-of-field bracketing</string>
+	<string name="LabelWhiteBalanceBracketing">White balance bracketing</string>
+	<string name="LabelIsoBracketing">Iso bracketing</string>
+	<string name="LabelBracketingLow">Low value</string>
+	<string name="LabelBracketingHigh">High value</string>
+	<string name="LabelBracketingNumberOfShots">Number Of shots</string>
+	<string name="LabelNoLowValueError">No low value is set</string>
+	<string name="LabelNoHighValueError">No high value is set</string>
+	<string name="LabelWrongValue">Wrong low or high value</string>
+	<string name="LabelWrongFNumber">Aperture cannot be modified</string>
+	<string name="LabelBracketingMMode">Set camera in M mode</string>
+	<string name="LabelTimeLapseCaptureBracketing">Capture with bracketing</string>
+	<string name="LabelZoomToFocus">Always zoom to first focus point</string>
+	<string name="LabelPreviewFullSize">Preview full size photo</string>
+	<string name="LabelCropMargins">Crop margins (%)</string>
+	<string name="LabelShowActiveArea">Show active area</string>
+	<string name="LabelSetArea">Set</string>
+	<string name="LabelDoneArea">Done</string>
+	<string name="LabelRotateCounterclockwise">Rotate counter clockwise</string>
+	<string name="LabelRotateClockwise">Rotate clockwise</string>
+	<string name="LabelSaveJpg">Save as JPG</string>
+	<string name="LabelPageWidth">Page width</string>
+	<string name="LabelPageHeigh">Page height</string>
+	<string name="LabelFill">Fill</string>	
+	<!-- // 19/10/2015 -->
+	<string name="LabelApplyToImage">Apply to selected image</string>	
+	<string name="LabelCaptureCount">Capture Count</string>	
+	<string name="LabelAutoFocusBeforCapture">Autofocus befor capture</string>	
+	<string name="LabelEnhancedThumbs">Enhanced Thumbs</string>	
+	<string name="LabelAskSavePath">Ask for captured file path</string>	
+	<string name="LabelSaveLiveviewWindow">Save live view window position</string>	
+	<string name="LabelShowFullscreenControls">Show fullscreen window controls</string>	
+	<string name="LabelCurrentLockNear">Lock current position as nearest point</string>	
+	<string name="LabelCurrentLockFar">Lock current position as farthest point</string>	
+	<string name="LabelStatistics">Statistics</string>	
+	<string name="LabelRefresh">Refresh</string>	
+	<string name="LabelOverview">Overview</string>	
+	<string name="LabelItems">Items</string>	
+</resources>

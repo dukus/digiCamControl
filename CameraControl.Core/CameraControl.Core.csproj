@@ -306,10 +306,13 @@
     <Compile Include="Wpf\HeaderToImageConverter.cs" />
     <Compile Include="Wpf\ItemBackgroundConverter.cs" />
     <Compile Include="Wpf\ListBoxBehavior.cs" />
+    <Compile Include="Wpf\MoveThumb.cs" />
     <Compile Include="Wpf\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\ResizeThumb.cs" />
     <Compile Include="Wpf\SizeConverter.cs" />
+    <Compile Include="Wpf\WriteableBitmapExtensionsLocal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CameraControl.Devices\CameraControl.Devices.csproj">

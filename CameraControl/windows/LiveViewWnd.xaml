@@ -10,6 +10,7 @@
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:ViewModel="clr-namespace:CameraControl.ViewModel"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+                      xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True">
     <Window.DataContext>
@@ -32,28 +33,28 @@
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
             <!-- MoveThumb Template -->
-            <ControlTemplate x:Key="MoveThumbTemplate" TargetType="{x:Type local:MoveThumb}">
+            <ControlTemplate x:Key="MoveThumbTemplate" TargetType="{x:Type wpf:MoveThumb}">
                 <Rectangle Fill="Transparent"/>
             </ControlTemplate>
 
             <!-- ResizeDecorator Template -->
             <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
                 <Grid>
-                    <local:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
+                    <wpf:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
                        VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-                    <local:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
+                    <wpf:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
                        VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-                    <local:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
+                    <wpf:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
                        VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-                    <local:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
+                    <wpf:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
                        VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
-                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
+                    <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
                        VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
+                    <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
                        VerticalAlignment="Top" HorizontalAlignment="Right"/>
-                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
+                    <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
                        VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                    <local:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
+                    <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
                        VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
             </ControlTemplate>
@@ -62,7 +63,7 @@
             <!-- Designer Item Template-->
             <ControlTemplate x:Key="DesignerItemTemplate" TargetType="ContentControl">
                 <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
-                    <local:MoveThumb Template="{StaticResource MoveThumbTemplate}" Cursor="SizeAll"/>
+                    <wpf:MoveThumb Template="{StaticResource MoveThumbTemplate}" Cursor="SizeAll"/>
                     <Control Template="{StaticResource ResizeDecoratorTemplate}"/>
                     <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
                 </Grid>

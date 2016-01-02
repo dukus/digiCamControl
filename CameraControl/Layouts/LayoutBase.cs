@@ -45,6 +45,7 @@ using CameraControl.Controls.ZoomAndPan;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Classes.Queue;
+using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.ViewModel;
 using Microsoft.VisualBasic.FileIO;

@@ -253,7 +253,6 @@
     <Compile Include="Classes\HorizontalScrollBehavior.cs" />
     <Compile Include="Classes\VisualTreeHelpers.cs" />
     <Compile Include="Classes\WpfCommands.cs" />
-    <Compile Include="Classes\WriteableBitmapExtensionsLocal.cs" />
     <Compile Include="Controls\AnimationHelper.cs" />
     <Compile Include="Controls\CameraItem.xaml.cs">
       <DependentUpon>CameraItem.xaml</DependentUpon>
@@ -272,8 +271,6 @@
     <Compile Include="Controls\ExposureStatusControl.xaml.cs">
       <DependentUpon>ExposureStatusControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MoveThumb.cs" />
-    <Compile Include="Controls\ResizeThumb.cs" />
     <Compile Include="Controls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>

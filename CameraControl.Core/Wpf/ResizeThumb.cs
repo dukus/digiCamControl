@@ -2,8 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+
 // code source: http://www.codeproject.com/Articles/22952/WPF-Diagram-Designer-Part-1
-namespace CameraControl.Controls
+namespace CameraControl.Core.Wpf
 {
     public class ResizeThumb : Thumb
     {
