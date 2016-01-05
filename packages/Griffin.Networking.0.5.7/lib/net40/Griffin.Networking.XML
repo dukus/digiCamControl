@@ -817,8 +817,8 @@
             </summary>
             <remarks>Do note that it's recommended that you pool buffers (i.e.) reuse them. You can use the <see cref="T:Griffin.Networking.Buffers.BufferSliceStack"/> for that.
             
-            <para>All buffers that are reusable should implement <c>IDisposable</c>. Return the buffer to the pool on disposal. You therefore
-            also have to check each buffer if it's disposable when you are done with it (and dispose it if it is).</para>
+            <para>All buffers that are reusable should implement <c>IDisposable</c>. Buffers are returned to the pool by calling <c>Dispose()</c>. You therefore
+            have to check each buffer if it's disposable when you are done with it (and dispose it if it is).</para>
             </remarks>
         </member>
         <member name="T:Griffin.Networking.Buffers.PeekableMemoryStream">
@@ -1220,24 +1220,30 @@
             Service which can send and receive messages.
             </summary>
         </member>
-        <member name="T:Griffin.Networking.Servers.IServerService">
+        <member name="T:Griffin.Networking.Servers.INetworkService">
             <summary>
             Represents that class that will handle a connection from the client
             </summary>
             <remarks>The server will invoke dispose when the client has disconnected.</remarks>
         </member>
-        <member name="M:Griffin.Networking.Servers.IServerService.Assign(Griffin.Networking.Servers.IServerClientContext)">
+        <member name="M:Griffin.Networking.Servers.INetworkService.Assign(Griffin.Networking.Servers.IServerClientContext)">
             <summary>
             Assign the context which can be used to communicate with the client
             </summary>
             <param name="context">Context</param>
         </member>
-        <member name="M:Griffin.Networking.Servers.IServerService.HandleReceive(System.Object)">
+        <member name="M:Griffin.Networking.Servers.INetworkService.HandleReceive(System.Object)">
             <summary>
             A new message have been received from the remote end.
             </summary>
             <param name="message">Message type depends on the type of client/server you are using. See the remarks.</param>
             <remarks><para>A clean <see cref="T:Griffin.Networking.Servers.Server"/> will give you a <see cref="T:Griffin.Networking.Buffers.SliceStream"/> here.</para><para>Other server implementations might give you something else.</para></remarks>
+        </member>
+        <member name="M:Griffin.Networking.Servers.INetworkService.OnUnhandledException(Griffin.Networking.Servers.ServiceExceptionContext)">
+            <summary>
+            An unhandled exception was caught when handling incoming bytes.
+            </summary>
+            <param name="context">Information about the exception that was caught</param>
         </member>
         <member name="M:Griffin.Networking.Messaging.MessagingService.Dispose">
             <summary>
@@ -1245,7 +1251,7 @@
             </summary>
             <filterpriority>2</filterpriority>
         </member>
-        <member name="M:Griffin.Networking.Messaging.MessagingService.Griffin#Networking#Servers#IServerService#Assign(Griffin.Networking.Servers.IServerClientContext)">
+        <member name="M:Griffin.Networking.Messaging.MessagingService.Griffin#Networking#Servers#INetworkService#Assign(Griffin.Networking.Servers.IServerClientContext)">
             <summary>
             Assign the context which can be used to communicate with the client
             </summary>
@@ -1257,6 +1263,12 @@
             </summary>
             <param name="message"></param>
             <remarks>We'll deserialize messages for you. What you receive here depends on the used <see cref="T:Griffin.Networking.Messaging.IMessageFormatterFactory"/>.</remarks>
+        </member>
+        <member name="M:Griffin.Networking.Messaging.MessagingService.OnUnhandledException(Griffin.Networking.Servers.ServiceExceptionContext)">
+            <summary>
+            An unhandled exception was caught when handling incoming bytes.
+            </summary>
+            <param name="context">Information about the exception that was caught</param>
         </member>
         <member name="P:Griffin.Networking.Messaging.MessagingService.Context">
             <summary>
@@ -1303,13 +1315,17 @@
         </member>
         <member name="T:Griffin.Networking.Servers.Server">
             <summary>
-            Uses a <see cref="T:Griffin.Networking.Servers.IServiceFactory"/> to create the connection handlers.
+            A basic server. 
             </summary>
+            <remarks>
+            <para>Will take care of all client management for you.  Uses a <see cref="T:Griffin.Networking.Servers.IServiceFactory"/> to create the classes which will serve each connecting client.</para>
+            </remarks>
         </member>
         <member name="T:Griffin.Networking.Servers.ServerBase">
             <summary>
-            Contains most of the logic, but do not dictate how you should handle clients.
+            Base class for servers.
             </summary>
+            <remarks>Contains most of the logic, but do not dictate how you should handle clients.</remarks>
         </member>
         <member name="M:Griffin.Networking.Servers.ServerBase.#ctor(Griffin.Networking.Servers.ServerConfiguration)">
             <summary>
@@ -1376,6 +1392,18 @@
             </summary>
             <remarks>Any existing connections will continue to run until they disconnect.</remarks>
         </member>
+        <member name="P:Griffin.Networking.Servers.ServerBase.LocalPort">
+            <summary>
+            Gets port that the server is listening on
+            </summary>
+            <remarks>Useful if you specify <c>0</c> as port in <see cref="M:Griffin.Networking.Servers.ServerBase.Start(System.Net.IPEndPoint)"/> (which means that the OS should pick a free port)</remarks>
+        </member>
+        <member name="E:Griffin.Networking.Servers.ServerBase.UnhandledClientExceptionCaught">
+            <summary>
+            An unhandled exception has been caught for one of the clients.
+            </summary>
+            <remarks>Use the <see cref="P:Griffin.Networking.Servers.ClientExceptionEventArgs.CanContinue"/> to flag if processing should be aborted or not.</remarks>
+        </member>
         <member name="M:Griffin.Networking.Servers.Server.#ctor(Griffin.Networking.Servers.IServiceFactory,Griffin.Networking.Servers.ServerConfiguration)">
             <summary>
             Initializes a new instance of the <see cref="T:Griffin.Networking.Servers.Server"/> class.
@@ -1404,6 +1432,18 @@
             </summary>
             <param name="readBuffer">Read buffer</param>
             <returns>Created client</returns>
+        </member>
+        <member name="T:Griffin.Networking.NamespaceDoc">
+            <summary>
+            Griffin.Networking - Your new favorite networking framework
+            </summary>
+            <remarks>
+            <para>
+            Griffin.Networking is a networking layer built on top of the new socket <c>Async</c> methods. The library contains buffer management, socket management, message encoding/decoding and a pipeline implemention. i.e. basically everything that you need to create your own socket application.
+            </para>
+            <para>We currently also have two implemented protocols: HTTP and Basic. Basic is a small encoder/decoder which allows you to transport objects other the network (transported as JSON) without you having to do any socket coding.</para>
+            <para>To build clients, visit the <see cref="N:Griffin.Networking.Clients"/> namespace. To build servers, visit the <see cref="N:Griffin.Networking.Servers"/> namespace.</para>
+            </remarks>
         </member>
         <member name="T:Griffin.Networking.Pipelines.IDownstreamHandler">
             <summary>
@@ -1821,6 +1861,14 @@
             <summary>
             Contains a logging abstraction layer allowing you to use your favorite logging framework.
             </summary>
+            <remarks>You can also use the <see cref="T:Griffin.Networking.Logging.ConsoleLogger"/> in combination with <see cref="T:Griffin.Networking.Logging.SimpleLogManager`1"/> during debugging.</remarks>
+            <example>
+            <code>
+            <![CDATA[
+            LogManager.Assign(new SimpleLogManager<ConsoleLogger>());
+            ]]>
+            </code>
+            </example>
         </member>
         <member name="T:Griffin.Networking.Logging.NullLogger">
             <summary>
@@ -1903,7 +1951,7 @@
             <summary>
             Log manager which uses one of the base loggers.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Type of logger, for instance <see cref="T:Griffin.Networking.Logging.ConsoleLogger"/>.</typeparam>
         </member>
         <member name="M:Griffin.Networking.Logging.SimpleLogManager`1.#ctor">
             <summary>
@@ -1955,6 +2003,7 @@
             <param name="reader">Contains bytes which was received from the other end</param>
             <returns><c>true</c> if a complete message has been built; otherwise <c>false</c>.</returns>
             <remarks>You must handle/read everything which is available in the buffer</remarks>
+            <exception cref="T:System.IO.InvalidDataException">Failed to parse the received information.</exception>
         </member>
         <member name="M:Griffin.Networking.Messaging.IMessageBuilder.TryDequeue(System.Object@)">
             <summary>
@@ -1962,6 +2011,11 @@
             </summary>
             <param name="message">Message that the builder has built.</param>
             <returns><c>true</c> if a message was available; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Griffin.Networking.Messaging.IMessageBuilder.Reset">
+            <summary>
+            Client has been disconnected. Reset state
+            </summary>
         </member>
         <member name="T:Griffin.Networking.Messaging.IMessageFormatterFactory">
             <summary>
@@ -2014,7 +2068,7 @@
             A client have connected to our server.
             </summary>
         </member>
-        <member name="M:Griffin.Networking.Pipelines.Messages.ClientConnected.#ctor(Griffin.Networking.Servers.IServerService)">
+        <member name="M:Griffin.Networking.Pipelines.Messages.ClientConnected.#ctor(Griffin.Networking.Servers.INetworkService)">
             <summary>
             Initializes a new instance of the <see cref="T:Griffin.Networking.Pipelines.Messages.ClientConnected"/> class.
             </summary>
@@ -2375,18 +2429,18 @@
             <param name="remoteEndPoint">Remote end point</param>
             <returns>Created client</returns>
         </member>
-        <member name="T:Griffin.Networking.Pipelines.PipelineServerService">
+        <member name="T:Griffin.Networking.Pipelines.PipelineNetworkService">
             <summary>
             Takes care of everything from a specific client in the server.
             </summary>
         </member>
-        <member name="M:Griffin.Networking.Pipelines.PipelineServerService.#ctor(Griffin.Networking.Pipelines.IPipeline)">
+        <member name="M:Griffin.Networking.Pipelines.PipelineNetworkService.#ctor(Griffin.Networking.Pipelines.IPipeline)">
             <summary>
-            Initializes a new instance of the <see cref="T:Griffin.Networking.Pipelines.PipelineServerService"/> class.
+            Initializes a new instance of the <see cref="T:Griffin.Networking.Pipelines.PipelineNetworkService"/> class.
             </summary>
             <param name="pipeline">The pipeline.</param>
         </member>
-        <member name="M:Griffin.Networking.Pipelines.PipelineServerService.HandleDownstream(Griffin.Networking.Pipelines.IPipelineHandlerContext,Griffin.Networking.Pipelines.IPipelineMessage)">
+        <member name="M:Griffin.Networking.Pipelines.PipelineNetworkService.HandleDownstream(Griffin.Networking.Pipelines.IPipelineHandlerContext,Griffin.Networking.Pipelines.IPipelineMessage)">
             <summary>
             Process message
             </summary>
@@ -2397,19 +2451,19 @@
             unless the handler really wants to stop the processing.
             </remarks>
         </member>
-        <member name="M:Griffin.Networking.Pipelines.PipelineServerService.Dispose">
+        <member name="M:Griffin.Networking.Pipelines.PipelineNetworkService.Dispose">
             <summary>
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>
             <filterpriority>2</filterpriority>
         </member>
-        <member name="M:Griffin.Networking.Pipelines.PipelineServerService.Assign(Griffin.Networking.Servers.IServerClientContext)">
+        <member name="M:Griffin.Networking.Pipelines.PipelineNetworkService.Assign(Griffin.Networking.Servers.IServerClientContext)">
             <summary>
             Assign the context which can be used to communicate with the client
             </summary>
             <param name="context">Context</param>
         </member>
-        <member name="M:Griffin.Networking.Pipelines.PipelineServerService.HandleReceive(System.Object)">
+        <member name="M:Griffin.Networking.Pipelines.PipelineNetworkService.HandleReceive(System.Object)">
             <summary>
             A new message have been received from the remote end.
             </summary>
@@ -2417,6 +2471,12 @@
             <remarks>
             We'll deserialize messages for you. What you receive here depends on the used <see cref="T:Griffin.Networking.Messaging.IMessageFormatterFactory"/>.
             </remarks>
+        </member>
+        <member name="M:Griffin.Networking.Pipelines.PipelineNetworkService.OnUnhandledException(Griffin.Networking.Servers.ServiceExceptionContext)">
+            <summary>
+            Sends all unhandled exceptions upstream.
+            </summary>
+            <param name="context">Context info</param>
         </member>
         <member name="T:Griffin.Networking.Pipelines.PipelineUpstreamContext">
             <summary>
@@ -2470,10 +2530,55 @@
             <param name="handler">Must implement <see cref="T:Griffin.Networking.Pipelines.IDownstreamHandler"/> and/or <see cref="T:Griffin.Networking.Pipelines.IUpstreamHandler"/></param>
             <remarks>Same instance will be used for all channels. Use the <see cref="T:Griffin.Networking.Pipelines.IPipelineHandlerContext"/> to store any context information.</remarks>
         </member>
+        <member name="T:Griffin.Networking.Servers.ClientExceptionEventArgs">
+            <summary>
+            An unhandled exception has been caught for one of the clients in the server
+            </summary>
+        </member>
+        <member name="M:Griffin.Networking.Servers.ClientExceptionEventArgs.#ctor(Griffin.Networking.Servers.IServerClientContext,System.Exception,Griffin.Networking.Buffers.BufferSlice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Griffin.Networking.Servers.ClientExceptionEventArgs"/> class.
+            </summary>
+            <param name="clientContext">The client context.</param>
+            <param name="exception">The exception.</param>
+            <param name="buffer"></param>
+            <exception cref="T:System.ArgumentNullException">clientContext</exception>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ClientExceptionEventArgs.ClientContext">
+            <summary>
+            Gets client that the exception was caught for
+            </summary>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ClientExceptionEventArgs.Exception">
+            <summary>
+            Gets caught exception
+            </summary>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ClientExceptionEventArgs.Buffer">
+            <summary>
+            Gets buffer (incoming bytes) that caused the exception
+            </summary>
+            <remarks>The buffer can have caused the exception directly or indirectly. Directly most often means protocol failure.
+            Indirectly means that your code caused the exception.</remarks>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ClientExceptionEventArgs.CanContinue">
+            <summary>
+            Gets or sets if processing can be continued or if we should abort
+            </summary>
+            <remarks>You still have to disconnect the client yourself using the <see cref="P:Griffin.Networking.Servers.ClientExceptionEventArgs.ClientContext"/>.</remarks>
+        </member>
+        <member name="T:Griffin.Networking.Servers.NamespaceDoc">
+            <summary>
+            Server implementation. 
+            </summary>
+            <remarks>All servers are divided into two parts. The core which will accept all clients and monitor their state (all classes derived from <see cref="T:Griffin.Networking.Servers.ServerBase"/>) and the
+            actual class which takes care of each client (<see cref="T:Griffin.Networking.Servers.INetworkService"/>).</remarks>
+        </member>
         <member name="T:Griffin.Networking.Servers.ServerClientContext">
             <summary>
             Represents a client connection in the server.
             </summary>
+            <remarks>These contexts are reused since they contain information which is a bit heavy to recreate every time.</remarks>
         </member>
         <member name="T:Griffin.Networking.Servers.IServerClientContext">
             <summary>
@@ -2499,9 +2604,19 @@
             Close connection and clean up.
             </summary>
         </member>
+        <member name="M:Griffin.Networking.Servers.IServerClientContext.Reset">
+            <summary>
+            Context has been freed. Reset the state.
+            </summary>
+        </member>
         <member name="P:Griffin.Networking.Servers.IServerClientContext.RemoteEndPoint">
             <summary>
             Gets address of the remote end point
+            </summary>
+        </member>
+        <member name="E:Griffin.Networking.Servers.IServerClientContext.UnhandledExceptionCaught">
+            <summary>
+            An unhandled exception was caught during read processing (which always is our entry point since we are a server).
             </summary>
         </member>
         <member name="M:Griffin.Networking.Servers.ServerClientContext.#ctor(Griffin.Networking.Buffers.IBufferSlice)">
@@ -2524,22 +2639,24 @@
             <param name="stream">Stream to send</param>
             <remarks>The stream will be owned by the framework, i.e. disposed when sent.</remarks>
         </member>
-        <member name="M:Griffin.Networking.Servers.ServerClientContext.Close">
+        <member name="M:Griffin.Networking.Servers.ServerClientContext.Reset">
             <summary>
-            Close connection.
+            Context has been freed. Reset the state.
             </summary>
         </member>
-        <member name="M:Griffin.Networking.Servers.ServerClientContext.TriggerDisconnect(System.Net.Sockets.SocketError)">
+        <member name="M:Griffin.Networking.Servers.ServerClientContext.Close">
             <summary>
-            Invoked when we have been disconnected
+            Closes the specified trigger disconnect event.
             </summary>
-            <param name="error"><see cref="F:System.Net.Sockets.SocketError.Success"/> means that we called <see cref="M:Griffin.Networking.Servers.ServerClientContext.Close"/>.</param>
         </member>
         <member name="M:Griffin.Networking.Servers.ServerClientContext.OnDisconnect(System.Net.Sockets.SocketError)">
             <summary>
             Invoked when we've been disconnected
             </summary>
-            <param name="error"><see cref="F:System.Net.Sockets.SocketError.Success"/> means that we disconnected, all other codes indicates network failure or that the remote end point disconnected</param>
+            <param name="error"><see cref="F:System.Net.Sockets.SocketError.Success"/> means that we disconnected, all other codes indicates network failure or that the remote end point disconnected.
+            
+            </param>
+            <remarks>Remember to call the <c>base</c> when you override this method (to trigger the Disconnected event)</remarks>
         </member>
         <member name="M:Griffin.Networking.Servers.ServerClientContext.TriggerClientReceive(System.Object)">
             <summary>
@@ -2558,7 +2675,7 @@
             you should not call the base method from your code.</para>
             </remarks>
         </member>
-        <member name="M:Griffin.Networking.Servers.ServerClientContext.Assign(System.Net.Sockets.Socket,Griffin.Networking.Servers.IServerService)">
+        <member name="M:Griffin.Networking.Servers.ServerClientContext.Assign(System.Net.Sockets.Socket,Griffin.Networking.Servers.INetworkService)">
             <summary>
             Assign a new socket &amp; client to this context.
             </summary>
@@ -2581,6 +2698,12 @@
             Gets remote end point
             </summary>
         </member>
+        <member name="E:Griffin.Networking.Servers.ServerClientContext.UnhandledExceptionCaught">
+            <summary>
+            An unhandled exception was caught during read processing (which always is our entry point since we are a server).
+            </summary>
+            <remarks>Use the <see cref="P:Griffin.Networking.Servers.ClientExceptionEventArgs.CanContinue"/> to flag if processing should be aborted or not.</remarks>
+        </member>
         <member name="E:Griffin.Networking.Servers.ServerClientContext.Disconnected">
             <summary>
             Remote side have disconnected (or network failure)
@@ -2598,6 +2721,30 @@
             </summary>
             <param name="remoteEndPoint">IP address of the remote end point</param>
             <returns>Created client</returns>
+        </member>
+        <member name="T:Griffin.Networking.Servers.IServerService">
+            <summary>
+            Just included to refer to the renamed interface.
+            </summary>
+        </member>
+        <member name="M:Griffin.Networking.Servers.IServerService.Assign(Griffin.Networking.Servers.IServerClientContext)">
+            <summary>
+            Assign the context which can be used to communicate with the client
+            </summary>
+            <param name="context">Context</param>
+        </member>
+        <member name="M:Griffin.Networking.Servers.IServerService.HandleReceive(System.Object)">
+            <summary>
+            A new message have been received from the remote end.
+            </summary>
+            <param name="message">Message type depends on the type of client/server you are using. See the remarks.</param>
+            <remarks><para>A clean <see cref="T:Griffin.Networking.Servers.Server"/> will give you a <see cref="T:Griffin.Networking.Buffers.SliceStream"/> here.</para><para>Other server implementations might give you something else.</para></remarks>
+        </member>
+        <member name="M:Griffin.Networking.Servers.IServerService.OnUnhandledException(Griffin.Networking.Servers.ServiceExceptionContext)">
+            <summary>
+            An unhandled exception was caught when handling incoming bytes.
+            </summary>
+            <param name="context">Information about the exception that was caught</param>
         </member>
         <member name="T:Griffin.Networking.Messaging.MessagingClientContext">
             <summary>
@@ -2617,6 +2764,12 @@
             </summary>
             <param name="slice">The slice.</param>
             <param name="bytesRead">The bytes read.</param>
+        </member>
+        <member name="M:Griffin.Networking.Messaging.MessagingClientContext.Reset">
+            <summary>
+            Context has been freed. Reset the state.
+            </summary>
+            <remarks>will reset the message builder.</remarks>
         </member>
         <member name="M:Griffin.Networking.Messaging.MessagingClientContext.Write(System.Object)">
             <summary>
@@ -2673,6 +2826,41 @@
             <summary>
             Used to serialize/build the messages that are transferred.
             </summary>
+        </member>
+        <member name="T:Griffin.Networking.Servers.ServiceExceptionContext">
+            <summary>
+            Context for <see cref="M:Griffin.Networking.Servers.INetworkService.OnUnhandledException(Griffin.Networking.Servers.ServiceExceptionContext)"/>.
+            </summary>
+        </member>
+        <member name="M:Griffin.Networking.Servers.ServiceExceptionContext.#ctor(System.Exception,Griffin.Networking.Buffers.IBufferSlice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Griffin.Networking.Servers.ServiceExceptionContext"/> class.
+            </summary>
+            <param name="exception">The exception that was caught.</param>
+            <param name="bufferSlice">The buffer slice that caused the exception (directly = protocol failure, indirectly = the handling failed).</param>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ServiceExceptionContext.MayContinue">
+            <summary>
+            Gets or sets if we may continue to process incoming bytes
+            </summary>
+            <remarks>Setting this bool to false will only abort any reads. It will not shut down the client or anything.
+            Hence setting it to true indicated that you are going to close the connection.</remarks>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ServiceExceptionContext.CanExceptionBePropagated">
+            <summary>
+            Gets or sets if we can dispatch the exception to our unhandled exception events (in <see cref="T:Griffin.Networking.Servers.IServerClientContext"/> and <see cref="T:Griffin.Networking.Servers.ServerBase"/>).
+            </summary>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ServiceExceptionContext.Exception">
+            <summary>
+            Exception that was caught
+            </summary>
+        </member>
+        <member name="P:Griffin.Networking.Servers.ServiceExceptionContext.BufferSlice">
+            <summary>
+            Gets buffer that caused the exception (directly or indirectly)
+            </summary>
+            <remarks>(directly = protocol failure, indirectly = the handling failed)</remarks>
         </member>
         <member name="T:Griffin.Networking.SliceSocketWriterJob">
             <summary>

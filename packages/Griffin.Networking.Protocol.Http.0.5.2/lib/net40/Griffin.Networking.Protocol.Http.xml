@@ -1097,6 +1097,11 @@
             <param name="name">header name.</param>
             <returns>value if found; otherwise <c>null</c>.</returns>
         </member>
+        <member name="T:Griffin.Networking.Protocol.Http.Implementation.HttpMessage">
+            <summary>
+            Base class for HTTP messages
+            </summary>
+        </member>
         <member name="T:Griffin.Networking.Protocol.Http.Protocol.IMessage">
             <summary>
             Base interface for request and response.
@@ -1139,6 +1144,11 @@
             Gets headers.
             </summary>
         </member>
+        <member name="M:Griffin.Networking.Protocol.Http.Implementation.HttpMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Griffin.Networking.Protocol.Http.Implementation.HttpMessage"/> class.
+            </summary>
+        </member>
         <member name="M:Griffin.Networking.Protocol.Http.Implementation.HttpMessage.AddHeader(System.String,System.String)">
             <summary>
             Add a new header
@@ -1170,6 +1180,7 @@
             Gets or sets content encoding
             </summary>
             <remarks>Appended to the contentType header as "charset" parameter.</remarks>
+            <value>Default is UTF8</value>
         </member>
         <member name="P:Griffin.Networking.Protocol.Http.Implementation.HttpMessage.Headers">
             <summary>
@@ -1205,7 +1216,7 @@
             <summary>
             Gets content type
             </summary>
-            <remarks>Any extra parameters are stripped. Use <see cref="!:Headers"/> to get the raw value</remarks>
+            <remarks>Any extra parameters are stripped. Use <see cref="P:Griffin.Networking.Protocol.Http.Protocol.IMessage.Headers"/> to get the raw value</remarks>
         </member>
         <member name="P:Griffin.Networking.Protocol.Http.Protocol.IRequest.Cookies">
             <summary>

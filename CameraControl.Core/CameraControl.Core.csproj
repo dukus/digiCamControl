@@ -113,12 +113,12 @@
       <HintPath>..\packages\gong-wpf-dragdrop.1.0.0-ALPHA012\lib\net40\GongSolutions.Wpf.DragDrop.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Griffin.Networking, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Griffin.Networking.0.5\lib\net40\Griffin.Networking.dll</HintPath>
+    <Reference Include="Griffin.Networking, Version=0.5.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Griffin.Networking.0.5.7\lib\net40\Griffin.Networking.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Griffin.Networking.Protocol.Http">
-      <HintPath>..\packages\Griffin.Networking.Protocol.Http.0.5.1\lib\net40\Griffin.Networking.Protocol.Http.dll</HintPath>
+    <Reference Include="Griffin.Networking.Protocol.Http, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Griffin.Networking.Protocol.Http.0.5.2\lib\net40\Griffin.Networking.Protocol.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Griffin.WebServer, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
