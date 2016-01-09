@@ -12,7 +12,7 @@
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
-                      SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True">
+                      SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True" StateChanged="MetroWindow_StateChanged">
     <Window.DataContext>
         <ViewModel:LiveViewViewModel/>
     </Window.DataContext>

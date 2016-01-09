@@ -84,7 +84,17 @@ namespace Setup
                 new RegValue(appFeature, RegistryHive.ClassesRoot,
                     @"Wow6432Node\CLSID\{860BB310-5D01-11d0-BD3B-00A0C911CE86}\Instance\{628C6DCD-6A0A-4804-AAF3-91335A83239B}",
                     "FriendlyName",
-                    "digiCamControl Virtual WebCam")
+                    "digiCamControl Virtual WebCam"),
+                new RegValue(appFeature, RegistryHive.CurrentUser,
+                    @"SOFTWARE\IP Webcam",
+                    "url",
+                    "http://localhost:5513/liveviewwebcam.jpg"),
+                new RegValue(appFeature, RegistryHive.CurrentUser,
+                    @"SOFTWARE\IP Webcam",
+                    "width","640"),
+                new RegValue(appFeature, RegistryHive.CurrentUser,
+                    @"SOFTWARE\IP Webcam",
+                    "height", "426")
                 );
 
             project.UI = WUI.WixUI_InstallDir;

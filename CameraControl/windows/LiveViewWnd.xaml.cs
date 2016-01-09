@@ -391,5 +391,10 @@ namespace CameraControl.windows
                 // handling code you have defined.
             }
         }
+
+        private void MetroWindow_StateChanged(object sender, EventArgs e)
+        {
+            ((LiveViewViewModel) DataContext).IsMinized = this.WindowState == WindowState.Minimized;
+        }
     }
 }
