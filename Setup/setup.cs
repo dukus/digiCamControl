@@ -5,7 +5,9 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Xml;
 using Microsoft.Deployment.WindowsInstaller;
+using Microsoft.Win32;
 using WixSharp;
+using WixSharp.Bootstrapper;
 using WixSharp.CommonTasks;
 using File = WixSharp.File;
 
@@ -67,6 +69,7 @@ namespace Setup
                 );
 
 
+
             var baseDir = new Dir(@"%ProgramFiles%",
                 appDir
                 );
@@ -77,12 +80,16 @@ namespace Setup
                 new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.InstallExecute,
                     Condition.NOT_Installed, Sequence.InstallExecuteSequence),
                 new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
-                    Condition.Always, Sequence.InstallExecuteSequence)
+                    Condition.Always, Sequence.InstallExecuteSequence),
+                new RegValue(appFeature, RegistryHive.ClassesRoot,
+                    @"Wow6432Node\CLSID\{860BB310-5D01-11d0-BD3B-00A0C911CE86}\Instance\{628C6DCD-6A0A-4804-AAF3-91335A83239B}",
+                    "FriendlyName",
+                    "digiCamControl Virtual WebCam")
                 );
 
             project.UI = WUI.WixUI_InstallDir;
             project.GUID = new Guid("19d12628-7654-4354-a305-9ab0932af676");
-            project.SetNetFxPrerequisite("NETFRAMEWORK40FULL='#1'");
+            //project.SetNetFxPrerequisite("NETFRAMEWORK45='#1'");
 
 #if DEBUG
             project.SourceBaseDir =
@@ -132,14 +139,33 @@ namespace Setup
                     shortcutD.Name = name;
                 }
                 if (System.IO.File.Exists(Path.Combine(project.SourceBaseDir, "Branding", "Licence.rtf")))
-                    project.ControlPanelInfo.ProductIcon = "Branding\\Licence.rtf";
+                    project.LicenceFile = "Branding\\Licence.rtf";
 
             }
-
+            project.InstallScope = InstallScope.perMachine;
             project.ResolveWildCards();
-            Compiler.PreserveTempFiles = true;
-            Compiler.BuildMsi(project);
+            Compiler.PreserveTempFiles = false;
+            string productMsi = Compiler.BuildMsi(project);
             ObsPluginSetup.Execute();
+
+            var bootstrapper =new Bundle(project.Name,
+            new PackageGroupRef("NetFx46Web"),
+            new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")),
+            new MsiPackage(productMsi) { Id = "MyProductPackageId",});
+
+            bootstrapper.Version = project.Version;
+            bootstrapper.UpgradeCode = project.UpgradeCode.Value;
+            bootstrapper.Application = new LicenseBootstrapperApplication()
+            {
+                LicensePath = Path.Combine(project.SourceBaseDir, project.LicenceFile),
+                LogoFile = project.ControlPanelInfo.ProductIcon,
+                
+            };
+            bootstrapper.IconFile = project.ControlPanelInfo.ProductIcon;
+            bootstrapper.PreserveTempFiles = true;
+            bootstrapper.OutFileName = project.OutFileName;
+            
+            bootstrapper.Build();
         }
 
     }
