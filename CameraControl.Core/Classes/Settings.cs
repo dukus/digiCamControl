@@ -886,6 +886,7 @@ namespace CameraControl.Core.Classes
 
         public bool FullScreenInSecondaryMonitor { get; set; }
         public bool Autorotate { get; set; }
+        public ObservableCollection<PluginSetting> PluginSettings { get; set; }
 
         public bool ShowThumbInfo
         {
@@ -943,6 +944,26 @@ namespace CameraControl.Core.Classes
             get { return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); }
         }
 
+        /// <summary>
+        /// Return plugin settings with specified name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public PluginSetting this[string name]
+        {
+            get
+            {
+                foreach (var pluginSetting in PluginSettings)
+                {
+                    if (pluginSetting.Name == name)
+                        return pluginSetting;
+                }
+                var pl=new PluginSetting(){Name = name};
+                PluginSettings.Add(pl);
+                return pl;
+            }
+        }
+
         public Settings()
         {
             ConfigFile = Path.Combine(DataFolder, "settings.xml");
@@ -953,6 +974,7 @@ namespace CameraControl.Core.Classes
             ImageLoading = false;
             CameraProperties = new CameraPropertyEnumerator();
             DeviceConfigs = new CustomConfigEnumerator();
+            PluginSettings = new ObservableCollection<PluginSetting>();
             ResetSettings();
         }
 

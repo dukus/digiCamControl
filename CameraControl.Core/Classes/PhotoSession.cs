@@ -392,13 +392,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private string _configFile;
-
-        public string ConfigFile
-        {
-            get { return _configFile; }
-            set { _configFile = value; }
-        }
+        public string ConfigFile { get; set; }
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
         public PrintSettings PrintSettings { get; set; }
@@ -696,6 +690,10 @@ namespace CameraControl.Core.Classes
             return Name;
         }
 
+        /// <summary>
+        /// Return selected items
+        /// </summary>
+        /// <returns>Empty list if no item is selected</returns>
         public AsyncObservableCollection<FileItem> GetSelectedFiles()
         {
             lock (_locker)
@@ -704,6 +702,24 @@ namespace CameraControl.Core.Classes
                 foreach (FileItem fileItem in Files)
                 {
                     if (fileItem.IsChecked)
+                        list.Add(fileItem);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Return items with i series
+        /// </summary>
+        /// <returns>Empty list if no item was found</returns>
+        public AsyncObservableCollection<FileItem> GetSeries(int i)
+        {
+            lock (_locker)
+            {
+                AsyncObservableCollection<FileItem> list = new AsyncObservableCollection<FileItem>();
+                foreach (FileItem fileItem in Files)
+                {
+                    if (fileItem.Series==i)
                         list.Add(fileItem);
                 }
                 return list;

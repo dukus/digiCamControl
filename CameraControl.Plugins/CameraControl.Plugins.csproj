@@ -294,6 +294,11 @@
     <Compile Include="Plugins.cs" />
     <Compile Include="ExportPlugins\ExportToFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolPlugins\EnfusePlugin.cs" />
+    <Compile Include="ToolPlugins\EnfusePluginViewModel.cs" />
+    <Compile Include="ToolPlugins\EnfusePluginWindow.xaml.cs">
+      <DependentUpon>EnfusePluginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToolPlugins\GenMoviePlugin.cs" />
     <Compile Include="ToolPlugins\GenMovieViewModel.cs" />
     <Compile Include="ToolPlugins\GenMovieWindow.xaml.cs">
@@ -433,6 +438,10 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToolPlugins\EnfusePluginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolPlugins\GenMovieWindow.xaml">
       <SubType>Designer</SubType>

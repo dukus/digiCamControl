@@ -162,7 +162,7 @@ namespace Setup
             new PackageGroupRef("NetFx46Web"),
             new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")),
             new MsiPackage(productMsi) { Id = "MyProductPackageId",});
-
+            bootstrapper.Copyright = project.ControlPanelInfo.Manufacturer;
             bootstrapper.Version = project.Version;
             bootstrapper.UpgradeCode = project.UpgradeCode.Value;
             bootstrapper.Application = new LicenseBootstrapperApplication()

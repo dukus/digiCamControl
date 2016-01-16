@@ -647,7 +647,10 @@ namespace CameraControl.ViewModel
 
         public bool IsFree
         {
-            get { return !_isBusy && !CaptureInProgress; }
+            get
+            {
+                return !_isBusy && !CaptureInProgress;
+            }
         }
 
 
@@ -1293,8 +1296,8 @@ namespace CameraControl.ViewModel
                 LockB = true;
             });
 
-            StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
-            PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking, () => LockB);
+            StartFocusStackingCommand = new RelayCommand(StartFocusStacking);
+            PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking);
             StopFocusStackingCommand = new RelayCommand(StopFocusStacking);
             StartLiveViewCommand = new RelayCommand(StartLiveView);
             StopLiveViewCommand = new RelayCommand(StopLiveView);
