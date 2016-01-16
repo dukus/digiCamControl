@@ -618,4 +618,5 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelPageWidth">Seitenbreite</string>
   <string name="LabelPageHeigh">Seitenhöhe</string>
   <string name="LabelFill">Füllen</string>
+  <!--// 19/10/2015-->
 </resources>

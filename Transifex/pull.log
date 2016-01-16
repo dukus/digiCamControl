@@ -17,7 +17,7 @@ Skipping 'pt_PT' translation (file: translations\digicamcontrol.baseresource\pt_
  -> pl: translations\digicamcontrol.baseresource\pl.xml
 Skipping 'ar_EG' translation (file: translations\digicamcontrol.baseresource\ar_EG.xml).
  -> fr: translations\digicamcontrol.baseresource\fr.xml
-Skipping 'zh_TW' translation (file: translations\digicamcontrol.baseresource\zh_TW.xml).
+ -> zh_TW: translations\digicamcontrol.baseresource\zh_TW.xml
 Skipping 'pt_BR' translation (file: translations\digicamcontrol.baseresource\pt_BR.xml).
  -> de: translations\digicamcontrol.baseresource\de.xml
 Skipping 'hu' translation (file: translations\digicamcontrol.baseresource\hu.xml).
@@ -31,8 +31,8 @@ Skipping 'he' translation (file: translations\digicamcontrol.baseresource\he.xml
 Skipping 'ro' translation (file: translations\digicamcontrol.baseresource\ro.xml).
 Skipping 'zh_CN' translation (file: translations\digicamcontrol.baseresource\zh_CN.xml).
 Skipping 'sr' translation (file: translations\digicamcontrol.baseresource\sr.xml).
- -> da: translations\digicamcontrol.baseresource\da.xml
+Skipping 'da' translation (file: translations\digicamcontrol.baseresource\da.xml).
 Skipping 'gl_ES' translation (file: translations\digicamcontrol.baseresource\gl_ES.xml).
 Skipping 'uk' translation (file: translations\digicamcontrol.baseresource\uk.xml).
- -> sl: translations\digicamcontrol.baseresource\sl.xml
+Skipping 'sl' translation (file: translations\digicamcontrol.baseresource\sl.xml).
 Done.
