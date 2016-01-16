@@ -11,10 +11,12 @@ namespace CameraControl.Core.Classes
     {
         public string Name { get; set; }
         public List<ValuePair> Values { get; set; }
+        public AutoExportPluginConfig AutoExportPluginConfig { get; set; }
 
         public PluginSetting()
         {
             Values = new List<ValuePair>();
+            AutoExportPluginConfig = new AutoExportPluginConfig(){Name = "Plugin"};
         }
 
         /// <summary>

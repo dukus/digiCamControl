@@ -12,6 +12,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using CameraControl.Plugins.ImageTransformPlugins;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -44,6 +45,7 @@ namespace CameraControl.Plugins.ToolPlugins
         public RelayCommand GenerateCommand { get; set; }
         public RelayCommand ReloadCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
+        public RelayCommand ConfPluginCommand { get; set; }
         
         public ObservableCollection<FileItem> Files
         {
@@ -307,6 +309,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 ReloadCommand = new RelayCommand(Reload);
                 GenerateCommand=new RelayCommand(Generate);
                 StopCommand=new RelayCommand(Stop);
+                ConfPluginCommand = new RelayCommand(ConfPlugin);
                 Output = new AsyncObservableCollection<string>();
                 LoadData();
                 _pathtoalign = Path.Combine(Settings.ApplicationFolder, "Tools", "align_image_stack.exe");
@@ -325,6 +328,15 @@ namespace CameraControl.Plugins.ToolPlugins
                 _pathtoenfuse = Path.Combine(Settings.ApplicationFolder, "Tools", "x64", "enfuse.exe");
             }
         }
+
+        private void ConfPlugin()
+        {
+            TransformPluginEditView wnd = new TransformPluginEditView();
+            wnd.DataContext = new TransformPluginEditViewModel(PluginSetting.AutoExportPluginConfig);
+            //wnd.Owner = _window;
+            wnd.ShowDialog();
+        }
+
 
         private void Stop()
         {
@@ -478,9 +490,13 @@ namespace CameraControl.Plugins.ToolPlugins
                 {
                     string randomFile = Path.Combine(_tempdir, "image_" + counter.ToString("0000") + ".jpg");
                     OnProgressChange("Copying file " + fileItem.Name);
-                    //PhotoUtils.CopyPhotoScale(fileItem.FileName, randomFile,
-                    //                          _settings.Scale == 0 ? 1 : (double)1 / (_settings.Scale * 2));
-                    File.Copy(preview ? (UseSmallThumb ? fileItem.SmallThumb : fileItem.LargeThumb) : fileItem.FileName, randomFile);
+                    string source = preview
+                        ? (UseSmallThumb ? fileItem.SmallThumb : fileItem.LargeThumb)
+                        : fileItem.FileName;
+
+                    AutoExportPluginHelper.ExecuteTransformPlugins(fileItem, PluginSetting.AutoExportPluginConfig,
+                        source, randomFile);
+                    
                     _filenames.Add(randomFile);
                     counter++;
                     if (_shouldStop)

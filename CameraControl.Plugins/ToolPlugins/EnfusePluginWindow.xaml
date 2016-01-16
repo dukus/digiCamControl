@@ -130,6 +130,7 @@
                 </Grid>
                 <StackPanel Orientation="Vertical" Grid.Row="6" IsEnabled="{Binding IsFree}">
                     <Button Content="Reset to default values" Command="{Binding ResetCommand}" Margin="3"/>
+                    <Button Content="Transform plugin" Grid.Column="2" Grid.Row="3" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
                     <Button Content="Preview" Margin="3" Command="{Binding PreviewCommand}" />
                     <Button Content="Create final image" Margin="3" Command="{Binding GenerateCommand}" />
                 </StackPanel>
