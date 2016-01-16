@@ -249,8 +249,6 @@
     <Compile Include="Interfaces\IMainWindowPlugin.cs" />
     <Compile Include="Interfaces\IPanelPlugin.cs" />
     <Compile Include="Interfaces\IPlugin.cs" />
-    <Compile Include="Classes\ActionEventArgs.cs" />
-    <Compile Include="Classes\ActionManager.cs" />
     <Compile Include="Classes\BitmapSourceConvert.cs" />
     <Compile Include="Classes\CheckedListItem.cs" />
     <Compile Include="Classes\DictionaryItem.cs" />
@@ -259,7 +257,6 @@
     <Compile Include="Classes\ValuePair.cs" />
     <Compile Include="Classes\VideoType.cs" />
     <Compile Include="Classes\WindowsManager.cs" />
-    <Compile Include="Interfaces\IMenuAction.cs" />
     <Compile Include="Interfaces\IQueueItem.cs" />
     <Compile Include="Interfaces\IToolPlugin.cs" />
     <Compile Include="Interfaces\IWindow.cs" />

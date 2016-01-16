@@ -256,15 +256,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Actions\CmdExpJpg.cs" />
-    <Compile Include="Actions\CmdFocusStacking.cs" />
-    <Compile Include="Actions\CmdFocusStackingCombineZP.cs" />
-    <Compile Include="Actions\CmdToJpg.cs" />
-    <Compile Include="Actions\Enfuse\CmdEnfuse.cs" />
-    <Compile Include="Actions\Enfuse\EnfuseSettings.cs" />
-    <Compile Include="Actions\Enfuse\EnfuseSettingsWnd.xaml.cs">
-      <DependentUpon>EnfuseSettingsWnd.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Classes\CommandShortcutExtensioncs.cs" />
     <Compile Include="Classes\HelpProvider.cs" />
     <Compile Include="Classes\HorizontalScrollBehavior.cs" />
@@ -344,9 +335,6 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="windows\AboutWnd.xaml.cs">
       <DependentUpon>AboutWnd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="windows\ActionExecuteWnd.xaml.cs">
-      <DependentUpon>ActionExecuteWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\AstroLiveViewWnd.xaml.cs">
       <DependentUpon>AstroLiveViewWnd.xaml</DependentUpon>
@@ -447,10 +435,6 @@
     </Compile>
     <Compile Include="XSplit\BroadcasterPlugin.cs" />
     <Compile Include="XSplit\TimedBroadcasterPlugin.cs" />
-    <Page Include="Actions\Enfuse\EnfuseSettingsWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\CameraItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -556,10 +540,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\AboutWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="windows\ActionExecuteWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

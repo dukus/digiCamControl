@@ -33,16 +33,6 @@
             </ListBox.InputBindings>
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >
-                        <MenuItem.ItemTemplate>
-                            <DataTemplate>
-                                <MenuItem Header="{Binding Path=Title}" 
-                                      Command="{Binding }" 
-                                      CommandParameter="{Binding}" />
-                            </DataTemplate>
-                        </MenuItem.ItemTemplate>
-                    </MenuItem>
-                    <Separator/>
                     <MenuItem Header="Select" >
                         <MenuItem Header="All" Name="mnu_select_all" Command="{Binding Path=SelectAllCommand}" />
                         <MenuItem Header="None" Name="mnu_select_none" Command="{Binding Path=SelectNoneCommand}" />
