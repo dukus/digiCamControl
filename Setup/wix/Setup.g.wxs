@@ -7,7 +7,7 @@
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="357e0d80-5093-478e-8c11-28b1b72096e8" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
-    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" InstallScope="perMachine" />
     <Media Id="1" Cabinet="OBS_plugin_for_digiCamControl.cab" EmbedCab="yes" />
 
     <Condition Message="Please install .Net 4.5 First"><![CDATA[NETFRAMEWORK45 >= "#378389"]]></Condition>

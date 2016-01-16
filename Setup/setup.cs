@@ -156,11 +156,12 @@ namespace Setup
             project.ResolveWildCards();
             Compiler.PreserveTempFiles = false;
             string productMsi = Compiler.BuildMsi(project);
-            ObsPluginSetup.Execute();
+            string obsMsi = ObsPluginSetup.Execute();
 
             var bootstrapper =new Bundle(project.Name,
             new PackageGroupRef("NetFx46Web"),
             new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")),
+            new MsiPackage(obsMsi) { Id = "ObsPackageId", },
             new MsiPackage(productMsi) { Id = "MyProductPackageId",});
             bootstrapper.Copyright = project.ControlPanelInfo.Manufacturer;
             bootstrapper.Version = project.Version;

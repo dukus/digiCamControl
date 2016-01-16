@@ -610,7 +610,8 @@ namespace CameraControl.Devices
                 {
                     OnCameraDisconnected(wiaCameraDevice);
                 }
-                PortableDeviceCollection.Instance.RefreshDevices();
+                if (PortableDeviceCollection.Instance != null)
+                    PortableDeviceCollection.Instance.RefreshDevices();
             }
         }
 

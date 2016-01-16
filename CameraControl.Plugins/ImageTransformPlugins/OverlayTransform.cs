@@ -24,11 +24,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public string Execute(FileItem item, string infile, string dest, ValuePairEnumerator configData)
         {
-            Thread thread = new Thread(() => ExecuteThread(item, infile, dest, configData));
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-            thread.Join();
-            return dest;
+            return ExecuteThread(item, infile, dest, configData);
         }
 
         public string ExecuteThread(FileItem item, string infile, string dest, ValuePairEnumerator configData)
@@ -83,7 +79,9 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                         if (conf.StrechOverlay)
                             watermark.Resize(image.Width, image.Height);
                         // Optionally make the watermark more transparent
-                        watermark.Evaluate(Channels.Alpha, EvaluateOperator.Add, -(255*(100 - conf.Transparency)/100));
+                        if (conf.Transparency != 100)
+                            watermark.Evaluate(Channels.Alpha, EvaluateOperator.Add,
+                                -(255*(100 - conf.Transparency)/100));
                         // Draw the watermark in the bottom right corner
                         image.Composite(watermark, gravity, CompositeOperator.Over);
 
