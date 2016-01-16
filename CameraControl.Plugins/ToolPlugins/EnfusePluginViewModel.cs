@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -46,6 +47,7 @@ namespace CameraControl.Plugins.ToolPlugins
         public RelayCommand ReloadCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
         public RelayCommand ConfPluginCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand<FileItem> RemoveItemCommand { get; set; }
         
         public ObservableCollection<FileItem> Files
         {
@@ -195,6 +197,17 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public bool AutoPreview
+        {
+            get { return PluginSetting.GetBool("AutoPreview"); }
+            set
+            {
+                PluginSetting["AutoPreview"] = value;
+                RaisePropertyChanged(() => AutoPreview);
+            }
+        }
+
+
         public bool HardMask
         {
             get { return PluginSetting.GetBool("HardMask"); }
@@ -242,7 +255,7 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 _selectedFileItem = value;
                 RaisePropertyChanged(()=>SelectedFileItem);
-                if (File.Exists(_selectedFileItem.LargeThumb))
+                if (_selectedFileItem!=null && File.Exists(_selectedFileItem.LargeThumb))
                     PreviewBitmap = BitmapLoader.Instance.LoadImage(_selectedFileItem.LargeThumb);
             }
         }
@@ -301,8 +314,16 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public EnfusePluginViewModel()
         {
+            
+        }
+
+        public EnfusePluginViewModel(Window window)
+        {
             if (!IsInDesignMode)
             {
+                window.Closing += window_Closing;
+                ServiceProvider.FileTransfered += ServiceProvider_FileTransfered;
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
                 SetEnabled();
                 ResetCommand = new RelayCommand(SetDefault);
                 PreviewCommand = new RelayCommand(Preview);
@@ -310,6 +331,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 GenerateCommand=new RelayCommand(Generate);
                 StopCommand=new RelayCommand(Stop);
                 ConfPluginCommand = new RelayCommand(ConfPlugin);
+                RemoveItemCommand = new GalaSoft.MvvmLight.Command.RelayCommand<FileItem>(RemoveItem);
                 Output = new AsyncObservableCollection<string>();
                 LoadData();
                 _pathtoalign = Path.Combine(Settings.ApplicationFolder, "Tools", "align_image_stack.exe");
@@ -329,11 +351,61 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        private void RemoveItem(FileItem obj)
+        {
+            if (Files.Contains(obj))
+                Files.Remove(obj);
+        }
+
+        void WindowsManager_Event(string cmd, object o)
+        {
+            
+        }
+
+        private void ServiceProvider_FileTransfered(object sender, FileItem fileItem)
+        {
+            if (Files.Count > 0)
+            {
+                if (Files[0].Series != fileItem.Series)
+                {
+                    Files.Clear();
+                }
+            }
+            Files.Add(fileItem);
+            if (IsFree && AutoPreview && Files.Count > 1)
+            {
+                Task.Factory.StartNew(WaitAndPreview);
+            }
+        }
+
+        private void WaitAndPreview()
+        {
+            Thread.Sleep(700);
+            try
+            {
+                while (Files[Files.Count-1].Loading)
+                {
+                    Thread.Sleep(200);
+                }
+                Preview();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("WaitAndPreview", ex);
+            }
+        }
+
+        void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ServiceProvider.FileTransfered -= ServiceProvider_FileTransfered;
+            ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
+        }
+
         private void ConfPlugin()
         {
             TransformPluginEditView wnd = new TransformPluginEditView();
             wnd.DataContext = new TransformPluginEditViewModel(PluginSetting.AutoExportPluginConfig);
-            //wnd.Owner = _window;
+//            wnd.Owner = window;
             wnd.ShowDialog();
         }
 
@@ -371,7 +443,7 @@ namespace CameraControl.Plugins.ToolPlugins
 
         private void Reload()
         {
-            
+            LoadData();
         }
 
         private void Preview()

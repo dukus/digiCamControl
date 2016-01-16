@@ -45,6 +45,13 @@ namespace CameraControl.Core
 {
     public class ServiceProvider : BaseFieldClass
     {
+        public delegate void FileTransferedEventHandler(object sender, FileItem fileItem);
+
+        /// <summary>
+        /// Occurs when a new camera is connected.
+        /// </summary>
+        public static event FileTransferedEventHandler FileTransfered;
+
         private static readonly ILog _log = LogManager.GetLogger("DCC");
         private static PipeServerT _pipeServer;
 
@@ -144,6 +151,12 @@ namespace CameraControl.Core
                 BasicConfigurator.Configure(ta);
 #endif
             }
+        }
+
+        public static void OnFileTransfered(FileItem fileitem)
+        {
+            var handler = FileTransfered;
+            if (handler != null) handler(null, fileitem);
         }
     }
 }

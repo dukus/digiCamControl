@@ -31,15 +31,14 @@
         <GroupBox Header="File list" Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="287*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="33*"/>
                 </Grid.RowDefinitions>
                 <ListBox ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFileItem}">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="classes:FileItem">
                             <Grid Margin="-5,0,0,0" >
-                                <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" Name="_image" RenderTransformOrigin="0.5,0.5">
+                                <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" Name="_image" RenderTransformOrigin="0.5,0.5" Width="147">
                                     <Image.Effect>
                                         <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
                                     </Image.Effect>
@@ -48,11 +47,13 @@
                                     </Image.LayoutTransform>
                                 </Image>
                                 <controls:ProgressRing IsActive="{Binding Loading}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Height="40" Width="40" />
+                                <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="7" Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                   AncestorType=Window}}" CommandParameter="{Binding}" Opacity="0.5"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Grid.Row="1" Content="Reload current series" Margin="3"/>
+                <Button Grid.Row="1" Content="Reload current series" Margin="3" Command="{Binding ReloadCommand}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="0" Grid.Column="1" Header="Settings" Grid.RowSpan="2">
@@ -146,7 +147,7 @@
                 </Grid.RowDefinitions>
                 <Image Margin="3" Source="{Binding PreviewBitmap}"/>
                 <controls:ProgressRing IsActive="{Binding Path=IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="150" Width="150" />
-                <CheckBox Grid.Row="1" Content="Auto preview when new image captured" Margin="3"/>
+                <CheckBox Grid.Row="1" Content="Auto preview when new image captured" Margin="3" IsChecked="{Binding AutoPreview}"/>
             </Grid>
         </GroupBox>
 

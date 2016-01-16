@@ -537,11 +537,12 @@ namespace CameraControl
                     }
                 }
 
-                Dispatcher.Invoke(new Action(delegate
+                Dispatcher.Invoke(() =>
                 {
                     _selectedItem.RemoveThumbs();
                     session.Add(_selectedItem);
-                }));
+                    ServiceProvider.OnFileTransfered(_selectedItem);
+                });
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
                 {

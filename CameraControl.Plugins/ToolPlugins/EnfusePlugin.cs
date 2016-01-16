@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
+using CameraControl.Core;
 using CameraControl.Core.Interfaces;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
     public class EnfusePlugin : IToolPlugin
     {
+        private EnfusePluginWindow _window;
         public bool Execute()
         {
-            EnfusePluginWindow window = new EnfusePluginWindow();
-            window.DataContext = new EnfusePluginViewModel();
-            window.ShowDialog();
+            if (_window == null || !_window.IsVisible)
+            {
+                _window = new EnfusePluginWindow();
+                _window.DataContext = new EnfusePluginViewModel(_window);
+                _window.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+                _window.Show();
+            }
+            else
+            {
+                _window.Activate();
+            }
             return true;
         }
 
