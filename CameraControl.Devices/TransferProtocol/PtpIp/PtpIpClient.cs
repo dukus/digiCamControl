@@ -48,6 +48,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
             }
             catch (Exception e)
             {
+                Log.Error(e);
                 return false;
             }
             return true;

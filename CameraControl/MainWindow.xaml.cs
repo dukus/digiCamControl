@@ -841,8 +841,7 @@ namespace CameraControl
                 wnd.Owner = this;
                 if (wnd.ShowDialog() == true)
                 {
-                    ServiceProvider.DeviceManager.ConnectToServer(ServiceProvider.Settings.WifiIp,
-                        ServiceProvider.Settings.SelectedWifi);
+                    ServiceProvider.DeviceManager.AddDevice(wnd.WifiDeviceProvider.Connect(wnd.Ip));
                 }
             }
             catch (Exception exception)

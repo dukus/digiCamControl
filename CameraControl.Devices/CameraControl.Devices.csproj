@@ -124,6 +124,7 @@
     <Compile Include="Custom\DeviceProperty.cs" />
     <Compile Include="Custom\DevicePropertyValue.cs" />
     <Compile Include="ICameraDevice.cs" />
+    <Compile Include="IWifiDeviceProvider.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Nikon\NikonD600.cs" />
     <Compile Include="Nikon\NikonD7100.cs" />
@@ -176,6 +177,8 @@
     <Compile Include="TransferProtocol\PtpIp\PtpIpHeader.cs" />
     <Compile Include="TransferProtocol\PtpIpProtocol.cs" />
     <Compile Include="TransferProtocol\PtpIp\StartDataPacket.cs" />
+    <Compile Include="Wifi\DDServerProvider.cs" />
+    <Compile Include="Wifi\PtpIpProvider.cs" />
     <Compile Include="Xml\XmlCommandDescriptor.cs" />
     <Compile Include="Xml\XmlDataManager.cs" />
     <Compile Include="Xml\XmlDeviceData.cs" />

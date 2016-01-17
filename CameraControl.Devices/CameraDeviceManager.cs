@@ -42,6 +42,7 @@ using CameraControl.Devices.Others;
 using CameraControl.Devices.TransferProtocol;
 using CameraControl.Devices.TransferProtocol.DDServer;
 using CameraControl.Devices.TransferProtocol.PtpIp;
+using CameraControl.Devices.Wifi;
 using Canon.Eos.Framework;
 using PortableDeviceLib;
 using WIA;
@@ -75,13 +76,15 @@ namespace CameraControl.Devices
 
         /// <summary>
         /// Gets or sets the natively supported model dictionary.
-        /// This property is used to fine the right driver for connected camera, 
+        /// This property is used to find the right driver for connected camera, 
         /// if model not found in this dictionary generic wia driver will used.
         /// </summary>
         /// <value>
         /// The device class.
         /// </value>
-        public Dictionary<string, Type> DeviceClass { get; set; }
+        public static Dictionary<string, Type> DeviceClass { get; set; }
+
+        public List<IWifiDeviceProvider> WifiDeviceProviders { get; set; }
 
         private ICameraDevice _selectedCameraDevice;
 
@@ -184,6 +187,8 @@ namespace CameraControl.Devices
             //{
             //  DeviceClass.Add("Canon EOS.*", typeof(CanonSDKBase));
             //}
+            WifiDeviceProviders.Add(new DDServerProvider());
+            WifiDeviceProviders.Add(new PtpIpProvider());
         }
 
         public CameraDeviceManager(string datafolder=null)
@@ -195,6 +200,7 @@ namespace CameraControl.Devices
             _deviceEnumerator = new DeviceDescriptorEnumerator();
             LiveViewImage = new Dictionary<ICameraDevice, byte[]>();
             LastCapturedImage = new Dictionary<ICameraDevice, string>();
+            WifiDeviceProviders = new List<IWifiDeviceProvider>();
 
             // prevent program crash in something wrong with wia
             try
@@ -433,6 +439,14 @@ namespace CameraControl.Devices
             return _deviceDescriptions.FirstOrDefault(description => description.Model == model);
         }
 
+        public void AddDevice(DeviceDescriptor descriptor)
+        {
+            _deviceEnumerator.RemoveDisconnected();
+            ConnectedDevices.Add(descriptor.CameraDevice);
+            NewCameraConnected(descriptor.CameraDevice);
+            _deviceEnumerator.Add(descriptor);
+        }
+
         public void ConnectToServer(string s, int type)
         {
             if(string.IsNullOrEmpty(s))
@@ -576,7 +590,7 @@ namespace CameraControl.Devices
         /// </summary>
         /// <param name="model">The model name.</param>
         /// <returns>If the model not supported return null else the driver type</returns>
-        private Type GetNativeDriver(string model)
+        public static Type GetNativeDriver(string model)
         {
             if (String.IsNullOrEmpty(model))
                 return null;

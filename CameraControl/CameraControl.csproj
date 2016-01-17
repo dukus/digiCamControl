@@ -315,6 +315,7 @@
     <Compile Include="Panels\SessionControl.xaml.cs">
       <DependentUpon>SessionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StartUpWindow.xaml.cs">
       <DependentUpon>StartUpWindow.xaml</DependentUpon>
     </Compile>
