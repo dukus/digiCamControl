@@ -226,6 +226,11 @@
       <DependentUpon>UsbRelayReleaseConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageTransformPlugins\BindableTextEditor.cs" />
+    <Compile Include="ImageTransformPlugins\Chromakey.cs" />
+    <Compile Include="ImageTransformPlugins\ChromakeyView.xaml.cs">
+      <DependentUpon>ChromakeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageTransformPlugins\ChromakeyViewModel.cs" />
     <Compile Include="ImageTransformPlugins\CropTransform.cs" />
     <Compile Include="ImageTransformPlugins\CropTransformView.xaml.cs">
       <DependentUpon>CropTransformView.xaml</DependentUpon>
@@ -372,6 +377,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ExternalDevices\UsbRelayReleaseConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageTransformPlugins\ChromakeyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

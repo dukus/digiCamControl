@@ -89,6 +89,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new PixelBinning());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Enhance());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Effect());
+                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Chromakey());
 
                 ServiceProvider.PluginManager.PanelPlugins.Add(new OpenInExternalViewer());
             }
