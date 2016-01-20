@@ -552,7 +552,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
                     <Separator/>
-                    <ProgressBar ToolTip="File transfer progress" Height="10" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Width="120" Margin="5,0,5,0" HorizontalAlignment="Right"/>
+                    <ProgressBar ToolTip="File transfer progress" Height="20" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Width="120"  Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
