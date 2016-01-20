@@ -103,14 +103,6 @@ namespace CameraControl
             ServiceProvider.Settings = ServiceProvider.Settings.Load();
             ServiceProvider.Branding = Branding.LoadBranding();
 
-            ServiceProvider.ActionManager.Actions = new AsyncObservableCollection<IMenuAction>
-                                                        {
-                                                            //new CmdFocusStackingCombineZP(),
-                                                            //new CmdEnfuse(),
-                                                           // new CmdToJpg(),
-                                                            //new CmdExpJpg()
-                                                        };
-
             if (ServiceProvider.Settings.DisableNativeDrivers &&
                 MessageBox.Show(TranslationStrings.MsgDisabledDrivers, "", MessageBoxButton.YesNo) ==
                 MessageBoxResult.Yes)

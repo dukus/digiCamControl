@@ -30,28 +30,12 @@
 
 using System;
 using System.IO;
-using System.Linq;
-using System.Diagnostics;
 using System.Reflection;
-using System.Threading;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using CameraControl.Actions;
-using CameraControl.Actions.Enfuse;
-using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
-using CameraControl.Core.Interfaces;
-using CameraControl.Core.Translation;
-using CameraControl.Devices;
-using CameraControl.Devices.Classes;
-using CameraControl.windows;
-using Application = System.Windows.Application;
-using MessageBox = System.Windows.MessageBox;
-using Path = System.IO.Path;
-using Timer = System.Timers.Timer;
 
 #endregion
 

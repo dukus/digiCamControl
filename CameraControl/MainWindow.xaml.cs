@@ -537,11 +537,12 @@ namespace CameraControl
                     }
                 }
 
-                Dispatcher.Invoke(new Action(delegate
+                Dispatcher.Invoke(() =>
                 {
                     _selectedItem.RemoveThumbs();
                     session.Add(_selectedItem);
-                }));
+                    ServiceProvider.OnFileTransfered(_selectedItem);
+                });
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
                 {
@@ -840,8 +841,7 @@ namespace CameraControl
                 wnd.Owner = this;
                 if (wnd.ShowDialog() == true)
                 {
-                    ServiceProvider.DeviceManager.ConnectToServer(ServiceProvider.Settings.WifiIp,
-                        ServiceProvider.Settings.SelectedWifi);
+                    ServiceProvider.DeviceManager.AddDevice(wnd.WifiDeviceProvider.Connect(wnd.Ip));
                 }
             }
             catch (Exception exception)

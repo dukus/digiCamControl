@@ -114,6 +114,7 @@ namespace CameraControl.ViewModel
         private int _rotation;
         private int _captureCount;
         private bool _autoFocusBeforCapture;
+        private bool _isMinized;
 
 
         public Rect RullerRect
@@ -304,6 +305,16 @@ namespace CameraControl.ViewModel
                 CameraProperty.LiveviewSettings.SelectedOverlay = value;
                 _overlayImage = null;
                 RaisePropertyChanged(() => SelectedOverlay);
+            }
+        }
+
+        public bool IsMinized
+        {
+            get { return _isMinized; }
+            set
+            {
+                _isMinized = value;
+                RaisePropertyChanged(() => IsMinized);
             }
         }
 
@@ -636,7 +647,10 @@ namespace CameraControl.ViewModel
 
         public bool IsFree
         {
-            get { return !_isBusy && !CaptureInProgress; }
+            get
+            {
+                return !_isBusy && !CaptureInProgress;
+            }
         }
 
 
@@ -1282,8 +1296,8 @@ namespace CameraControl.ViewModel
                 LockB = true;
             });
 
-            StartFocusStackingCommand = new RelayCommand(StartFocusStacking, () => LockB);
-            PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking, () => LockB);
+            StartFocusStackingCommand = new RelayCommand(StartFocusStacking);
+            PreviewFocusStackingCommand = new RelayCommand(PreviewFocusStacking);
             StopFocusStackingCommand = new RelayCommand(StopFocusStacking);
             StartLiveViewCommand = new RelayCommand(StartLiveView);
             StopLiveViewCommand = new RelayCommand(StopLiveView);
@@ -1523,6 +1537,9 @@ namespace CameraControl.ViewModel
                 case CmdConsts.LiveView_Focus:
                     AutoFocus();
                     break;
+                case CmdConsts.LiveView_NoProcess:
+                    NoProcessing = true;
+                    break;
             }
         }
 
@@ -1675,13 +1692,16 @@ namespace CameraControl.ViewModel
 
                     if (NoProcessing)
                     {
-                        BitmapImage bi = new BitmapImage();
-                        bi.BeginInit();
-                        bi.CacheOption = BitmapCacheOption.OnLoad;
-                        bi.StreamSource = stream;
-                        bi.EndInit();
-                        bi.Freeze();
-                        Bitmap = bi;
+                        if (!IsMinized)
+                        {
+                            BitmapImage bi = new BitmapImage();
+                            bi.BeginInit();
+                            bi.CacheOption = BitmapCacheOption.OnLoad;
+                            bi.StreamSource = stream;
+                            bi.EndInit();
+                            bi.Freeze();
+                            Bitmap = bi;
+                        }
                         ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = stream.ToArray();
                         _operInProgress = false;
                         return;

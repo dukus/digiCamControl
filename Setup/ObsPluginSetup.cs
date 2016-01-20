@@ -14,7 +14,7 @@ namespace Setup
 {
     public class ObsPluginSetup
     {
-        public static void Execute()
+        public static string Execute()
         {
             Feature obsPlugin = new Feature("Obs Plugin");
             var obsDir = new Dir(@"%ProgramFiles%\OBS\plugins",
@@ -52,11 +52,11 @@ namespace Setup
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("ObsPluginSetup_{0}", ver.FileVersion);
             project.ControlPanelInfo.ProductIcon = "logo.ico";
-
+            project.InstallScope = InstallScope.perMachine;
 
             project.ResolveWildCards();
-            Compiler.PreserveTempFiles = true;
-            Compiler.BuildMsi(project);
+            Compiler.PreserveTempFiles = false;
+            return Compiler.BuildMsi(project);
         }
     }
 }

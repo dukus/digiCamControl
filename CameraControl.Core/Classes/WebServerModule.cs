@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using CameraControl.Core.Scripting;
 using CameraControl.Devices;
 using Griffin.WebServer;
@@ -54,6 +55,9 @@ namespace CameraControl.Core.Classes
 
         private string _lineFormat =
     "            <img u=\"image\" src=\"@image@\" />";
+
+        private bool _liveViewFirstRun = true;
+
         #region Implementation of IHttpModule
 
         public void BeginRequest(IHttpContext context)
@@ -141,8 +145,27 @@ namespace CameraControl.Core.Classes
                     ServiceProvider.DeviceManager.LiveViewImage.ContainsKey(
                         ServiceProvider.DeviceManager.SelectedCameraDevice))
                 {
-                    SendData(context,
-                        ServiceProvider.DeviceManager.LiveViewImage[ServiceProvider.DeviceManager.SelectedCameraDevice]);
+                    SendDataFile(context,
+                        ServiceProvider.DeviceManager.LiveViewImage[ServiceProvider.DeviceManager.SelectedCameraDevice], MimeTypeProvider.Instance.Get("liveview.jpg"));
+                }
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/liveviewwebcam.jpg") &&
+                    ServiceProvider.DeviceManager.SelectedCameraDevice != null )
+                {
+                    if (_liveViewFirstRun)
+                    {
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Show);
+                        Thread.Sleep(500);
+                        ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.All_Minimize);
+                        ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.LiveView_NoProcess);
+                        _liveViewFirstRun = false;
+                    }
+                    if (ServiceProvider.DeviceManager.LiveViewImage.ContainsKey(
+                        ServiceProvider.DeviceManager.SelectedCameraDevice))
+                        SendDataFile(context,
+                            ServiceProvider.DeviceManager.LiveViewImage[
+                                ServiceProvider.DeviceManager.SelectedCameraDevice],
+                            MimeTypeProvider.Instance.Get("liveview.jpg"));
                 }
 
                 if (context.Request.Uri.AbsolutePath.StartsWith("/image/"))
@@ -274,6 +297,18 @@ namespace CameraControl.Core.Classes
             //            context.Response.AddHeader("Content-Disposition",
             //"inline;filename=\"" + Path.GetFileName(fullpath) + "\"");
             context.Response.ContentType = "application/json";
+            context.Response.ContentLength = data.Length;
+            context.Response.Body = stream;
+        }
+
+        private void SendDataFile(IHttpContext context, byte[] data, string mimet)
+        {
+            if (data == null)
+                return;
+            MemoryStream stream = new MemoryStream(data);
+            //            context.Response.AddHeader("Content-Disposition",
+            //"inline;filename=\"" + Path.GetFileName(fullpath) + "\"");
+            context.Response.ContentType = mimet;
             context.Response.ContentLength = data.Length;
             context.Response.Body = stream;
         }

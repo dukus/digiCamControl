@@ -45,6 +45,13 @@ namespace CameraControl.Core
 {
     public class ServiceProvider : BaseFieldClass
     {
+        public delegate void FileTransferedEventHandler(object sender, FileItem fileItem);
+
+        /// <summary>
+        /// Occurs when a new camera is connected.
+        /// </summary>
+        public static event FileTransferedEventHandler FileTransfered;
+
         private static readonly ILog _log = LogManager.GetLogger("DCC");
         private static PipeServerT _pipeServer;
 
@@ -56,7 +63,6 @@ namespace CameraControl.Core
         public static CameraDeviceManager DeviceManager { get; set; }
         public static TriggerClass Trigger { get; set; }
         public static WindowsManager WindowsManager { get; set; }
-        public static ActionManager ActionManager { get; set; }
         public static QueueManager QueueManager { get; set; }
         public static PluginManager PluginManager { get; set; }
         public static Branding Branding { get; set; }
@@ -93,8 +99,6 @@ namespace CameraControl.Core
             Log.Debug("Init : ExternalDeviceManager");
             Trigger = new TriggerClass();
             Log.Debug("Init : Trigger");
-            ActionManager = new ActionManager();
-            Log.Debug("Init : ActionManager");
             QueueManager = new QueueManager();
             Log.Debug("Init : QueueManager");
             //Branding = new Branding();
@@ -147,6 +151,12 @@ namespace CameraControl.Core
                 BasicConfigurator.Configure(ta);
 #endif
             }
+        }
+
+        public static void OnFileTransfered(FileItem fileitem)
+        {
+            var handler = FileTransfered;
+            if (handler != null) handler(null, fileitem);
         }
     }
 }

@@ -1,0 +1,160 @@
+﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.EnfusePluginWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
+             xmlns:classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
+             mc:Ignorable="d" 
+             Height="600" Width="800">
+    <Window.DataContext>
+        <toolPlugins:EnfusePluginViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="130"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="File list" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListBox ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFileItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="classes:FileItem">
+                            <Grid Margin="-5,0,0,0" >
+                                <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" Name="_image" RenderTransformOrigin="0.5,0.5" Width="147">
+                                    <Image.Effect>
+                                        <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
+                                    </Image.Effect>
+                                    <Image.LayoutTransform>
+                                        <RotateTransform  Angle="{Binding RotationAngle}" />
+                                    </Image.LayoutTransform>
+                                </Image>
+                                <controls:ProgressRing IsActive="{Binding Loading}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Height="40" Width="40" />
+                                <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="7" Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                   AncestorType=Window}}" CommandParameter="{Binding}" Opacity="0.5"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Grid.Row="1" Content="Reload current series" Margin="3" Command="{Binding ReloadCommand}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Settings" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="144*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ComboBox SelectedIndex="{Binding Mode}" Margin="3" IsEnabled="{Binding IsFree}">
+                    <ComboBoxItem Content="Exposure enfuse (HDR)"/>
+                    <ComboBoxItem Content="Contras enfuse (Focus stacking)"/>
+                </ComboBox>
+                <GroupBox Header="Fusion options" Grid.Row="1" Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12*"/>
+                            <RowDefinition Height="53*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Exp." Padding="0" HorizontalAlignment="Center" ToolTip="Exposure"/>
+                        <Slider Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="2,2,2,5"  Minimum="0" Maximum="100" Value="{Binding Exposure}" TickPlacement="TopLeft" TickFrequency="10" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="0" IsEnabled="{Binding ExposureEnabled}"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" Content="Cont." Padding="0" HorizontalAlignment="Center" ToolTip="Contrast"/>
+                        <Slider Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="2,2,2,5" Minimum="0" Maximum="100" Value="{Binding Contrast}" TickPlacement="TopLeft" TickFrequency="10" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="0" IsEnabled="{Binding ContrastEnabled}"/>
+
+                        <Label Grid.Row="0" Grid.Column="2" Content="Sat." Padding="0" HorizontalAlignment="Center" ToolTip="Saturation"/>
+                        <Slider Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="2,2,2,5" Minimum="0" Maximum="100" Value="{Binding Saturation}" TickPlacement="TopLeft" TickFrequency="10" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="0" IsEnabled="{Binding SaturationEnabled}"/>
+
+                        <Label Grid.Row="0" Grid.Column="3" Content="Mu" Padding="0" HorizontalAlignment="Center" ToolTip="Mu"/>
+                        <Slider Grid.Row="1" Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" Margin="2,2,2,5" Minimum="0" Maximum="100" Value="{Binding Mu}" TickPlacement="TopLeft" TickFrequency="10" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="0" IsEnabled="{Binding MuEnabled}"/>
+
+                        <Label Grid.Row="0" Grid.Column="4" Content="Sig" Padding="0" HorizontalAlignment="Center" ToolTip="Sigma"/>
+                        <Slider Grid.Row="1" Grid.Column="4" Orientation="Vertical" HorizontalAlignment="Center" Margin="2,2,2,5" Minimum="0" Maximum="100" Value="{Binding Sigma}" TickPlacement="TopLeft" TickFrequency="10" AutoToolTipPlacement="BottomRight" AutoToolTipPrecision="0" IsEnabled="{Binding SigmaEnabled}"/>
+
+                    </Grid>
+                </GroupBox>
+                <StackPanel Orientation="Vertical" Grid.Row="2" IsEnabled="{Binding IsFree}">
+                    <CheckBox Margin="3" Content="Force hard blend masks" IsChecked="{Binding HardMask}"/>
+                    <CheckBox Margin="3" Content="Align images before enfuse" IsChecked="{Binding AlignImages}"/>
+                    <CheckBox Margin="3" Content="Optimize the field of view" IsChecked="{Binding OptimizeFiledOfView}" IsEnabled="{Binding AlignImages}"/>
+                    <CheckBox Margin="3" Content="Use GPU " IsChecked="{Binding OptimizeFiledOfView}" IsEnabled="{Binding AlignImages}" ToolTip="This option only works if Hugin is installed"/>
+                    <CheckBox Margin="3" Content="Use small thumb for preview" IsChecked="{Binding UseSmallThumb}"/>
+                </StackPanel>
+                <Grid Grid.Row="3" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Contrast Window Size"/>
+                    <controls:NumericUpDown Grid.Row="0" Grid.Column="1" Margin="3" Minimum="3" Maximum="9" Value="{Binding ContrastWindowSize}" ToolTip="If there are halos around high contrast edges, you can try increasing the "/>
+
+                    <!--<Label Grid.Row="1" Content="Contrast Window Size"/>
+                    <controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="3" Maximum="3" Value="{Binding ContrastWindowSize}" ToolTip="If there are halos around high contrast edges, you can try increasing the "/>-->
+
+                </Grid>
+                <StackPanel Orientation="Vertical" Grid.Row="6" IsEnabled="{Binding IsFree}">
+                    <Button Content="Reset to default values" Command="{Binding ResetCommand}" Margin="3"/>
+                    <Button Content="Transform plugin" Grid.Column="2" Grid.Row="3" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                    <Button Content="Preview" Margin="3" Command="{Binding PreviewCommand}" />
+                    <Button Content="Create final image" Margin="3" Command="{Binding GenerateCommand}" />
+                </StackPanel>
+                <Button Grid.Row="7" Content="Stop" Command="{Binding StopCommand}" Margin="3" IsEnabled="{Binding IsBusy}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="2" Header="Preview">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="169*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Margin="3" Source="{Binding PreviewBitmap}"/>
+                <controls:ProgressRing IsActive="{Binding Path=IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="150" Width="150" />
+                <CheckBox Grid.Row="1" Content="Auto preview when new image captured" Margin="3" IsChecked="{Binding AutoPreview}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Column="2" Header="Output" Grid.Row="1" >
+            <ListBox ItemsSource="{Binding Output}"/>
+        </GroupBox>
+
+
+    </Grid>
+</controls:MetroWindow>

@@ -190,16 +190,6 @@
             </i:Interaction.Behaviors>
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Actions" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ActionManager}, Path=Actions}" >
-                        <MenuItem.ItemTemplate>
-                            <DataTemplate>
-                                <MenuItem Header="{Binding Path=Title}" 
-                                      Command="{Binding }" 
-                                      CommandParameter="{Binding}" />
-                            </DataTemplate>
-                        </MenuItem.ItemTemplate>
-                    </MenuItem>
-                    <Separator/>
                     <MenuItem Header="Copy full path to clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
