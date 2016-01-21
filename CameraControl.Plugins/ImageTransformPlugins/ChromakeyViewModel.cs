@@ -21,7 +21,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             get { return _config["BackgroundColor"] ?? "Green"; }
             set
             {
-                _config["FontColor"] = value;
+                _config["BackgroundColor"] = value;
                 RaisePropertyChanged(() => BackgroundColor);
             }
         }
