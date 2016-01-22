@@ -54,6 +54,12 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             }
         }
 
+        public bool UnsharpMask
+        {
+            get { return _config["UnsharpMask"] == "True"; }
+            set { _config["UnsharpMask"] = value.ToString(); }
+        }
+
         public ChromakeyViewModel()
         {
             

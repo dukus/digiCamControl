@@ -21,6 +21,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Margin="3" Content="Background Color" Padding="0"/>
         <wpf:Colorpicker Grid.Row="0" Grid.Column="1" Margin="3" SelectedColor="{Binding BackgroundColor, Mode=TwoWay}" />
@@ -37,5 +38,7 @@
         <Label Grid.Row="4" Grid.Column="0" Margin="3" Content="Background file" Padding="0"/>
         <Button Grid.Row="4" Grid.Column="1" Margin="3" Content="Browse" Command="{Binding BrowseCommand}"/>
 
+        <Label Grid.Row="5" Grid.Column="0" Margin="3" Content="Apply Unsharp Mask" Padding="0"/>
+        <CheckBox Grid.Row="5" Grid.Column="1" Margin="3" IsChecked="{Binding UnsharpMask}"/>
     </Grid>
 </UserControl>

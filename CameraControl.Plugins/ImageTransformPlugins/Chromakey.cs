@@ -33,10 +33,14 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             filter.ToleranceSaturnation = conf.Saturnation/100f;
             filter.ToleranceBrightness = conf.Brigthness / 100f;
             image.ApplyFilter(filter);
+            var res = image.Clone();
+            
+            if (conf.UnsharpMask)
+                res.ApplyFilter(new UnsharpMaskFilter(1.4f, 1.32f, 5));
 
             var backdrop = new KalikoImage(conf.BackgroundFile);
             backdrop = backdrop.Scale(new FitScaling(image.Width, image.Height));
-            backdrop.BlitImage(image);
+            backdrop.BlitImage(res);
 
             backdrop.SaveJpg(dest, 90);
             return dest;
