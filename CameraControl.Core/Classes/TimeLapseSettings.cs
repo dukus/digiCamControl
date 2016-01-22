@@ -34,6 +34,9 @@ namespace CameraControl.Core.Classes
         public string ScriptFile { get; set; }
         public bool Bracketing { get; set; }
 
+        public int FineTune { get; set; }
+        public int Resolution { get; set; }
+
         public TimeLapseSettings()
         {
             StartNow = true;

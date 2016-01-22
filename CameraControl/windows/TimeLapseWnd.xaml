@@ -117,6 +117,22 @@
         </GroupBox>
         <Button Content="{Binding StartText}" Grid.Row="0" Grid.Column="1" Margin="3" Command="{Binding StartCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding StatusText}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        <GroupBox Grid.Column="1" Header="accuracy" Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding TimeDiff}" Padding="2"/>
+                <Label Grid.Row="1" Content="Fine tune" Padding="2"/>
+                <controls:NumericUpDown Grid.Row="2" Value="{Binding FineTune}" Minimum="-15" Maximum="5" Margin="2" IsEnabled="{Binding IsFree}"/>
+                <Label Grid.Row="3" Content="Resolution" Padding="2"/>
+                <controls:NumericUpDown Grid.Row="4" Value="{Binding Resolution}" Minimum="1" Maximum="{Binding TimeBetweenShots}" Margin="2" IsEnabled="{Binding IsFree}"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </controls:MetroWindow>

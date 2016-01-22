@@ -17,6 +17,7 @@ namespace CameraControl.ViewModel
     public class TimelapseViewModel : ViewModelBase
     {
         private Timer _timer = new Timer(1000);
+        private DateTime _lastTime;
         private bool _isRunning;
         private bool _isActive;
         private int _totalCaptures;
@@ -25,6 +26,10 @@ namespace CameraControl.ViewModel
         private DateTime _firstLapseStartTime = DateTime.Now;
         private bool _fullSpeed;
         private BracketingViewModel _bracketingViewModel = null;
+        private double _timeDiff;
+        private int _fineTune;
+        private int _resolution;
+
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
 
@@ -261,6 +266,36 @@ namespace CameraControl.ViewModel
             {
                 TimeLapseSettings.StopCaptureCount = value;
                 RaisePropertyChanged(() => StopCaptureCount);
+            }
+        }
+
+        public double TimeDiff
+        {
+            get { return _timeDiff; }
+            set
+            {
+                _timeDiff = value;
+                RaisePropertyChanged(() => TimeDiff);
+            }
+        }
+
+        public int FineTune
+        {
+            get { return TimeLapseSettings.FineTune; }
+            set
+            {
+                TimeLapseSettings.FineTune = value;
+                RaisePropertyChanged(() => FineTune);
+            }
+        }
+
+        public int Resolution
+        {
+            get { return TimeLapseSettings.Resolution; }
+            set
+            {
+                TimeLapseSettings.Resolution = value;
+                RaisePropertyChanged(() => Resolution);
             }
         }
 
@@ -555,6 +590,10 @@ namespace CameraControl.ViewModel
 
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            
+            TimeDiff += (DateTime.Now - _lastTime).TotalMilliseconds - (1000*Resolution);
+            _lastTime = DateTime.Now;
+
             if (!IsActive)
             {
                 IsActive = CheckStart();
@@ -718,8 +757,10 @@ namespace CameraControl.ViewModel
             _lastCaptureTime = DateTime.Now;
             Log.Debug("Timelapse start");
             _totalCaptures = 0;
-            _timer.Interval = FullSpeed ? 100 : 1000;
+            _timer.Interval = FullSpeed ? 100 : ((1000*Resolution) + FineTune);
             _timer.Start();
+            _lastTime = DateTime.Now;
+            TimeDiff = 0;
         }
 
         private void StopL()
