@@ -400,9 +400,9 @@ namespace CameraControl.windows
                         {
                             AsyncObservableCollection<PropertyValue<long>> coll = CameraDevice.AdvancedProperties;
                             foreach (PropertyValue<long> prop in coll)
-                                if (prop.Code == 0xD06A)//.Name == "Exposure delay mode")
+                                if (prop.Code == 0xD06A && !string.IsNullOrEmpty(prop.Value) )//.Name == "Exposure delay mode")
                                 {
-                                    if (prop.Value!="OFF")
+                                    if (prop.Value != "OFF")
                                     {
                                         expDelay = int.Parse(prop.Value.Substring(0, 1));
                                         //expDelay = (int)prop.NumericValue;
@@ -411,12 +411,9 @@ namespace CameraControl.windows
                                     else
                                         expDelay = 0;
                                 }
-                                else if (prop.Code == NikonBase.CONST_PROP_NoiseReduction)
+                                else if (prop.Code == NikonBase.CONST_PROP_NoiseReduction && prop.Value != null)
                                 {
-                                    if (prop.Value == "ON")
-                                        waitDelay = CaptureTime;
-                                    else
-                                        waitDelay = 0;
+                                    waitDelay = prop.Value == "ON" ? CaptureTime : 0;
                                 }
                             ServiceProvider.DeviceManager.LastCapturedImage[CameraDevice] = "";
                             CameraDevice.IsBusy = true;

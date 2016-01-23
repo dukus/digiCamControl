@@ -22,6 +22,6 @@
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
         <Label Content="{T:TranslateExtension LabelCaptureTime}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=WaitTime}" Margin="3" Minimum="1"/>
+        <controls:NumericUpDown Grid.Column="1" Value="{Binding Path=Time}" Margin="3" Minimum="1"/>
     </Grid>
 </UserControl>

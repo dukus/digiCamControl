@@ -79,7 +79,7 @@
                 </Grid.RowDefinitions>
                 <Menu Name="menu1">
                     <MenuItem Header="Add">
-                        <MenuItem Header="Commands" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ScriptManager}, Path=AvaiableCommands}" >
+                        <MenuItem Header="Commands" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ScriptManager}, Path=EditableCommands}" >
                             <MenuItem.ItemTemplate>
                                 <DataTemplate>
                                     <MenuItem Header="{Binding Path=Name}" 

@@ -100,10 +100,10 @@ namespace CameraControl.Core.Scripting.ScriptCommands
             return new WaitCommand();
         }
 
-        //public override UserControl GetConfig()
-        //{
-        //    return new WaitCommandControl(this);
-        //}
+        public override UserControl GetConfig()
+        {
+            return new WaitCommandControl(this);
+        }
 
         //public override XmlNode Save(XmlDocument doc)
         //{

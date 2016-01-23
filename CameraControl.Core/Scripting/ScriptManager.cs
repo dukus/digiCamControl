@@ -71,6 +71,12 @@ namespace CameraControl.Core.Scripting
 
         public List<IScriptCommand> AvaiableCommands { get; set; }
 
+        public List<IScriptCommand> EditableCommands
+        {
+            get { return AvaiableCommands.Where((x) => x.HaveEditControl).ToList(); }
+        }
+
+
         public ScriptManager()
         {
             AvaiableCommands = new List<IScriptCommand>
