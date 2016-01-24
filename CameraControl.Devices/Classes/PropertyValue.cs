@@ -50,6 +50,7 @@ namespace CameraControl.Devices.Classes
         private AsyncObservableCollection<string> _values = new AsyncObservableCollection<string>();
         private bool _notifyValuChange = true;
         private readonly object _syncRoot = new object();
+        public string Tag { get; set; }
 
 
         private uint _code;
@@ -415,6 +416,11 @@ namespace CameraControl.Devices.Classes
             }
         }
 
+        /// <summary>
+        /// After value add finished, ReloadValues should be called
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void AddValues(string key, T value)
         {
 

@@ -82,6 +82,10 @@
       <HintPath>..\refs\Interop.WIA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -123,6 +127,7 @@
     <Compile Include="Custom\DeviceDescription.cs" />
     <Compile Include="Custom\DeviceProperty.cs" />
     <Compile Include="Custom\DevicePropertyValue.cs" />
+    <Compile Include="Custom\YiCamera.cs" />
     <Compile Include="ICameraDevice.cs" />
     <Compile Include="IWifiDeviceProvider.cs" />
     <Compile Include="Log.cs" />
@@ -177,8 +182,10 @@
     <Compile Include="TransferProtocol\PtpIp\PtpIpHeader.cs" />
     <Compile Include="TransferProtocol\PtpIpProtocol.cs" />
     <Compile Include="TransferProtocol\PtpIp\StartDataPacket.cs" />
+    <Compile Include="TransferProtocol\YiCameraProtocol.cs" />
     <Compile Include="Wifi\DDServerProvider.cs" />
     <Compile Include="Wifi\PtpIpProvider.cs" />
+    <Compile Include="Wifi\YiCameraProvider.cs" />
     <Compile Include="Xml\XmlCommandDescriptor.cs" />
     <Compile Include="Xml\XmlDataManager.cs" />
     <Compile Include="Xml\XmlDeviceData.cs" />
@@ -197,7 +204,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

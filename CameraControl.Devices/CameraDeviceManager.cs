@@ -189,6 +189,7 @@ namespace CameraControl.Devices
             //}
             WifiDeviceProviders.Add(new DDServerProvider());
             WifiDeviceProviders.Add(new PtpIpProvider());
+            WifiDeviceProviders.Add(new YiCameraProvider());
         }
 
         public CameraDeviceManager(string datafolder=null)
