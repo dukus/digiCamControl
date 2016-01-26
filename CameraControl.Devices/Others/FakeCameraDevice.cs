@@ -78,6 +78,7 @@ namespace CameraControl.Devices.Others
             Battery = 100;
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
             Capabilities.Add(CapabilityEnum.LiveView);
+            Capabilities.Add(CapabilityEnum.LiveViewStream);
             LiveViewImageZoomRatio = new PropertyValue<int>();
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.Value = "All";
@@ -115,6 +116,10 @@ namespace CameraControl.Devices.Others
             
         }
 
+        public override string GetLiveViewStream()
+        {
+            return "rtsp://wms.waystv.tv:1935/html5_waystlive/132/mainstream";
+        }
 
         public override LiveViewData GetLiveViewImage()
         {

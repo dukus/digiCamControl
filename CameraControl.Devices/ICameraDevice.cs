@@ -115,6 +115,8 @@ namespace CameraControl.Devices
         bool Init(DeviceDescriptor deviceDescriptor);
         void StartLiveView();
         void StopLiveView();
+        string GetLiveViewStream();
+
         LiveViewData GetLiveViewImage();
         void AutoFocus();
         int Focus(int step);

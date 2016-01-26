@@ -24,6 +24,7 @@ using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using WebEye;
 using Color = System.Drawing.Color;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
@@ -35,7 +36,7 @@ namespace CameraControl.ViewModel
         public static event EventHandler FocuseDone;
 
         private const int DesiredFrameRate = 20;
-
+        private StreamPlayerControl _videoSource = new StreamPlayerControl();
         private bool _operInProgress = false;
         private int _totalframes = 0;
         private DateTime _framestart;
@@ -1393,6 +1394,9 @@ namespace CameraControl.ViewModel
             CaptureCount = 1;
             DelayedStart = false;
 
+            _videoSource.StreamStarted += _videoSource_StreamStarted;
+            _videoSource.StreamFailed += _videoSource_StreamFailed;
+
             _timer.Stop();
             _timer.AutoReset = true;
             CameraDevice.CameraDisconnected += CameraDeviceCameraDisconnected;
@@ -1545,9 +1549,6 @@ namespace CameraControl.ViewModel
 
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //if (!_worker.IsBusy)
-            //    _worker.RunWorkerAsync();
-            //ThreadPool.QueueUserWorkItem(GetLiveImage);
             Task.Factory.StartNew(GetLiveImage);
         }
 
@@ -1609,34 +1610,58 @@ namespace CameraControl.ViewModel
             }
         }
 
-
-        public virtual void GetLiveImage(object o)
-        {
-            GetLiveImage();
-        }
-
-
         public virtual void GetLiveImage()
         {
+            if (FreezeImage)
+                return;
+
             if (_operInProgress)
             {
-               // Log.Error("OperInProgress");
                 return;
             }
+            
+            _totalframes++;
+            if ((DateTime.Now - _framestart).TotalSeconds > 0)
+                Fps = (int)(_totalframes / (DateTime.Now - _framestart).TotalSeconds);
 
+
+            _operInProgress = true;
+            if (CameraDevice.GetCapability(CapabilityEnum.LiveViewStream))
+                GetLiveImageStream();
+            else
+                GetLiveImageData();
+            _operInProgress = false;
+        }
+
+        public virtual void GetLiveImageStream()
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    if (!_videoSource.IsPlaying)
+                        return;
+
+                    using (Bitmap image = _videoSource.GetCurrentFrame())
+                    {
+                        ProcessLiveView(image);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }));
+        }
+
+        public virtual void GetLiveImageData()
+        {
             if (DelayedStart)
             {
                 //Log.Error("Start is delayed");
                 return;
             }
 
-            if (FreezeImage)
-                return;
-
-            _operInProgress = true;
-            _totalframes++;
-            if ((DateTime.Now - _framestart).TotalSeconds > 0)
-                Fps = (int)(_totalframes / (DateTime.Now - _framestart).TotalSeconds);
             try
             {
                 LiveViewData = LiveViewManager.GetLiveViewImage(CameraDevice);
@@ -1650,7 +1675,6 @@ namespace CameraControl.ViewModel
 
             if (LiveViewData == null)
             {
-                _operInProgress = false;
                 return;
             }
 
@@ -1665,8 +1689,6 @@ namespace CameraControl.ViewModel
 
             if (LiveViewData.ImageData == null)
             {
-               // Log.Error("LV image data is null !");
-                _operInProgress = false;
                 return;
             }
 
@@ -1709,146 +1731,7 @@ namespace CameraControl.ViewModel
 
                     using (var res = new Bitmap(stream))
                     {
-                        Bitmap bmp = res;
-                        if (PreviewTime > 0 && (DateTime.Now - _photoCapturedTime).TotalSeconds <= PreviewTime)
-                        {
-                            var bitmap = ServiceProvider.Settings.SelectedBitmap.DisplayImage.Clone();
-                            //var dw = (double)bmp.Width / bitmap.PixelWidth;
-                            //bitmap = bitmap.Resize((int)(bitmap.PixelWidth * dw), (int)(bitmap.PixelHeight * dw),
-                            //    WriteableBitmapExtensions.Interpolation.NearestNeighbor);
-                            // flip image only if the prview not fliped 
-                            if (FlipImage && !ServiceProvider.Settings.FlipPreview)
-                                bitmap = bitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
-                            bitmap.Freeze();
-                            ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(bitmap);
-                            Bitmap = bitmap;
-                            return;
-                        }
-                        if (DetectMotion)
-                        {
-                            ProcessMotionDetection(bmp);
-                        }
-
-                        if (_totalframes % DesiredFrameRate == 0 && ShowHistogram)
-                        {
-                            ImageStatisticsHSL hslStatistics =
-                                new ImageStatisticsHSL(bmp);
-                            LuminanceHistogramPoints =
-                                ConvertToPointCollection(
-                                    hslStatistics.Luminance.Values);
-                            ImageStatistics statistics = new ImageStatistics(bmp);
-                            RedColorHistogramPoints = ConvertToPointCollection(
-                                statistics.Red.Values);
-                            GreenColorHistogramPoints = ConvertToPointCollection(
-                                statistics.Green.Values);
-                            BlueColorHistogramPoints = ConvertToPointCollection(
-                                statistics.Blue.Values);
-                        }
-
-                        if (HighlightUnderExp)
-                        {
-                            ColorFiltering filtering = new ColorFiltering();
-                            filtering.Blue = new IntRange(0, 5);
-                            filtering.Red = new IntRange(0, 5);
-                            filtering.Green = new IntRange(0, 5);
-                            filtering.FillOutsideRange = false;
-                            filtering.FillColor = new RGB(Color.Blue);
-                            filtering.ApplyInPlace(bmp);
-                        }
-
-                        if (HighlightOverExp)
-                        {
-                            ColorFiltering filtering = new ColorFiltering();
-                            filtering.Blue = new IntRange(250, 255);
-                            filtering.Red = new IntRange(250, 255);
-                            filtering.Green = new IntRange(250, 255);
-                            filtering.FillOutsideRange = false;
-                            filtering.FillColor = new RGB(Color.Red);
-                            filtering.ApplyInPlace(bmp);
-                        }
-
-                        var preview = BitmapFactory.ConvertToPbgra32Format(
-                            BitmapSourceConvert.ToBitmapSource(bmp));
-                        DrawFocusPoint(preview, true);
-
-                        if (Brightness != 0)
-                        {
-                            BrightnessCorrection filter = new BrightnessCorrection(Brightness);
-                            bmp = filter.Apply(bmp);
-                        }
-
-
-                        Bitmap newbmp = bmp;
-                        if (EdgeDetection)
-                        {
-                            var filter = new FiltersSequence(
-                                Grayscale.CommonAlgorithms.BT709,
-                                new HomogenityEdgeDetector()
-                                );
-                            newbmp = filter.Apply(bmp);
-                        }
-
-                        WriteableBitmap writeableBitmap;
-
-                        if (BlackAndWhite)
-                        {
-                            Grayscale filter = new Grayscale(0.299, 0.587, 0.114);
-                            writeableBitmap =
-                                BitmapFactory.ConvertToPbgra32Format(
-                                    BitmapSourceConvert.ToBitmapSource(
-                                        filter.Apply(newbmp)));
-                        }
-                        else
-                        {
-                            writeableBitmap =
-                                BitmapFactory.ConvertToPbgra32Format(
-                                    BitmapSourceConvert.ToBitmapSource(newbmp));
-                        }
-                        DrawGrid(writeableBitmap);
-                        switch (RotationIndex)
-                        {
-                            case 0:
-                                Rotation = 0;
-                                break;
-                            case 1:
-                                Rotation = 90;
-                                break;
-                            case 2:
-                                Rotation = 180;
-                                break;
-                            case 3:
-                                Rotation = 270;
-                                break;
-                            case 4:
-                                Rotation = LiveViewData.Rotation;
-                                break;
-                        }
-
-                        if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
-                        {
-                            preview.Freeze();
-                            Preview = preview;
-                            if (ShowFocusRect)
-                                DrawFocusPoint(writeableBitmap);
-                        }
-                        
-                        if (FlipImage)
-                        {
-                            writeableBitmap = writeableBitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
-                        }
-                        if (CropRatio > 0)
-                        {
-                            CropOffsetX = (int) ((writeableBitmap.PixelWidth/2.0)*CropRatio/100);
-                            CropOffsetY = (int) ((writeableBitmap.PixelHeight/2.0)*CropRatio/100);
-                            writeableBitmap = writeableBitmap.Crop(CropOffsetX, CropOffsetY,
-                                writeableBitmap.PixelWidth - (2*CropOffsetX),
-                                writeableBitmap.PixelHeight - (2*CropOffsetY));
-                        }
-                        writeableBitmap.Freeze();
-                        Bitmap = writeableBitmap;
-
-                        //if (_totalframes%DesiredWebFrameRate == 0)
-                        ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
+                        ProcessLiveView(res);
                     }
                     stream.Close();
                 }
@@ -1863,6 +1746,146 @@ namespace CameraControl.ViewModel
                 _operInProgress = false;
             }
             _operInProgress = false;
+        }
+
+        public void ProcessLiveView(Bitmap bmp)
+        {
+            if (PreviewTime > 0 && (DateTime.Now - _photoCapturedTime).TotalSeconds <= PreviewTime)
+            {
+                var bitmap = ServiceProvider.Settings.SelectedBitmap.DisplayImage.Clone();
+                // flip image only if the prview not fliped 
+                if (FlipImage && !ServiceProvider.Settings.FlipPreview)
+                    bitmap = bitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
+                bitmap.Freeze();
+                ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(bitmap);
+                Bitmap = bitmap;
+                return;
+            }
+            if (DetectMotion)
+            {
+                ProcessMotionDetection(bmp);
+            }
+
+            if (_totalframes%DesiredFrameRate == 0 && ShowHistogram)
+            {
+                ImageStatisticsHSL hslStatistics =
+                    new ImageStatisticsHSL(bmp);
+                LuminanceHistogramPoints =
+                    ConvertToPointCollection(
+                        hslStatistics.Luminance.Values);
+                ImageStatistics statistics = new ImageStatistics(bmp);
+                RedColorHistogramPoints = ConvertToPointCollection(
+                    statistics.Red.Values);
+                GreenColorHistogramPoints = ConvertToPointCollection(
+                    statistics.Green.Values);
+                BlueColorHistogramPoints = ConvertToPointCollection(
+                    statistics.Blue.Values);
+            }
+
+            if (HighlightUnderExp)
+            {
+                ColorFiltering filtering = new ColorFiltering();
+                filtering.Blue = new IntRange(0, 5);
+                filtering.Red = new IntRange(0, 5);
+                filtering.Green = new IntRange(0, 5);
+                filtering.FillOutsideRange = false;
+                filtering.FillColor = new RGB(Color.Blue);
+                filtering.ApplyInPlace(bmp);
+            }
+
+            if (HighlightOverExp)
+            {
+                ColorFiltering filtering = new ColorFiltering();
+                filtering.Blue = new IntRange(250, 255);
+                filtering.Red = new IntRange(250, 255);
+                filtering.Green = new IntRange(250, 255);
+                filtering.FillOutsideRange = false;
+                filtering.FillColor = new RGB(Color.Red);
+                filtering.ApplyInPlace(bmp);
+            }
+
+            var preview = BitmapFactory.ConvertToPbgra32Format(
+                BitmapSourceConvert.ToBitmapSource(bmp));
+            DrawFocusPoint(preview, true);
+
+            if (Brightness != 0)
+            {
+                BrightnessCorrection filter = new BrightnessCorrection(Brightness);
+                bmp = filter.Apply(bmp);
+            }
+
+
+            Bitmap newbmp = bmp;
+            if (EdgeDetection)
+            {
+                var filter = new FiltersSequence(
+                    Grayscale.CommonAlgorithms.BT709,
+                    new HomogenityEdgeDetector()
+                    );
+                newbmp = filter.Apply(bmp);
+            }
+
+            WriteableBitmap writeableBitmap;
+
+            if (BlackAndWhite)
+            {
+                Grayscale filter = new Grayscale(0.299, 0.587, 0.114);
+                writeableBitmap =
+                    BitmapFactory.ConvertToPbgra32Format(
+                        BitmapSourceConvert.ToBitmapSource(
+                            filter.Apply(newbmp)));
+            }
+            else
+            {
+                writeableBitmap =
+                    BitmapFactory.ConvertToPbgra32Format(
+                        BitmapSourceConvert.ToBitmapSource(newbmp));
+            }
+            DrawGrid(writeableBitmap);
+            switch (RotationIndex)
+            {
+                case 0:
+                    Rotation = 0;
+                    break;
+                case 1:
+                    Rotation = 90;
+                    break;
+                case 2:
+                    Rotation = 180;
+                    break;
+                case 3:
+                    Rotation = 270;
+                    break;
+                case 4:
+                    Rotation = LiveViewData.Rotation;
+                    break;
+            }
+
+            if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
+            {
+                preview.Freeze();
+                Preview = preview;
+                if (ShowFocusRect)
+                    DrawFocusPoint(writeableBitmap);
+            }
+
+            if (FlipImage)
+            {
+                writeableBitmap = writeableBitmap.Flip(WriteableBitmapExtensions.FlipMode.Vertical);
+            }
+            if (CropRatio > 0)
+            {
+                CropOffsetX = (int) ((writeableBitmap.PixelWidth/2.0)*CropRatio/100);
+                CropOffsetY = (int) ((writeableBitmap.PixelHeight/2.0)*CropRatio/100);
+                writeableBitmap = writeableBitmap.Crop(CropOffsetX, CropOffsetY,
+                    writeableBitmap.PixelWidth - (2*CropOffsetX),
+                    writeableBitmap.PixelHeight - (2*CropOffsetY));
+            }
+            writeableBitmap.Freeze();
+            Bitmap = writeableBitmap;
+
+            //if (_totalframes%DesiredWebFrameRate == 0)
+            ServiceProvider.DeviceManager.LiveViewImage[CameraDevice] = SaveJpeg(writeableBitmap);
         }
 
         public byte[] SaveJpeg(WriteableBitmap image)
@@ -2229,7 +2252,20 @@ namespace CameraControl.ViewModel
                         }
                     }
                 } while (retry && retryNum < 35);
-                _timer.Start();
+                if (CameraDevice.GetCapability(CapabilityEnum.LiveViewStream))
+                {
+                    Application.Current.Dispatcher.BeginInvoke(new Action(
+                        () =>
+                        {
+                            _videoSource.StartPlay(new Uri(CameraDevice.GetLiveViewStream()));
+                            StaticHelper.Instance.SystemMessage = "Waiting for live view stream...";
+                        }));
+                }
+                else
+                {
+                    _timer.Start();                    
+                }
+                
                 _operInProgress = false;
                 Log.Debug("LiveView: Liveview start done");
             }
@@ -2238,6 +2274,17 @@ namespace CameraControl.ViewModel
                 Log.Error("Unable to start liveview !", exception);
                 StaticHelper.Instance.SystemMessage = "Unable to start liveview ! " + exception.Message;
             }
+        }
+
+        void _videoSource_StreamFailed(object sender, StreamFailedEventArgs e)
+        {
+            StaticHelper.Instance.SystemMessage = "Error start live view streem :" + e.Error;
+        }
+
+        void _videoSource_StreamStarted(object sender, EventArgs e)
+        {
+            StaticHelper.Instance.SystemMessage = "Frame processing started";
+            _timer.Start();
         }
 
         private void StopLiveView()
@@ -2279,6 +2326,13 @@ namespace CameraControl.ViewModel
                         }
                     }
                 } while (retry && retryNum < 35);
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (_videoSource != null && _videoSource.IsPlaying)
+                    {
+                        _videoSource.Stop();
+                    }
+                }));
             }
             catch (Exception exception)
             {

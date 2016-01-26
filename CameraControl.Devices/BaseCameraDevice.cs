@@ -363,6 +363,11 @@ namespace CameraControl.Devices
         {
         }
 
+        public virtual string GetLiveViewStream()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual LiveViewData GetLiveViewImage()
         {
             return null;

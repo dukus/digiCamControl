@@ -31,6 +31,7 @@ namespace CameraControl.Devices.Classes
     public enum CapabilityEnum
     {
         LiveView,
+        LiveViewStream,
         Bulb,
         RecordMovie,
         CanLockFocus,
@@ -38,4 +39,5 @@ namespace CameraControl.Devices.Classes
         CaptureNoAf,
         SimpleManualFocus
     }
+
 }

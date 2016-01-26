@@ -23,6 +23,8 @@ namespace CameraControl.Devices.Custom
 
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
+            Capabilities.Add(CapabilityEnum.LiveView);
+            Capabilities.Add(CapabilityEnum.LiveViewStream);
             Protocol = deviceDescriptor.StillImageDevice as YiCameraProtocol;
             DeviceName = Protocol.Model;
             Manufacturer = Protocol.Manufacturer;
@@ -30,6 +32,10 @@ namespace CameraControl.Devices.Custom
             CompressionSetting = new PropertyValue<int> { Tag = "photo_quality" };
             Mode = new PropertyValue<uint> { Tag = "system_mode" };
             ExposureMeteringMode = new PropertyValue<int>() { Tag = "meter_mode" };
+            
+            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio.AddValues("All", 0);
+            LiveViewImageZoomRatio.Value = "All";
 
             Protocol.DataReceiverd += Protocol_DataReceiverd;
             var thread = new Thread(LoadProperties) { Priority = ThreadPriority.Lowest };
@@ -136,7 +142,7 @@ namespace CameraControl.Devices.Custom
         public override void TransferFile(object o, string filename)
         {
             TransferProgress = 0;
-            DownLoadFileByWebRequest(String.Format("http://192.168.42.1/DCIM/100MEDIA/{0}",o), filename);
+            DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}", Protocol.Ip, o), filename);
         }
 
         private void SetProperty(string prop, string val)
@@ -263,7 +269,16 @@ namespace CameraControl.Devices.Custom
             finally
             {
             }
+        }
 
+        public override string GetLiveViewStream()
+        {
+            return String.Format("rtsp://{0}/live",Protocol.Ip);
+        }
+
+        public override void StartLiveView()
+        {
+            Protocol.SendCommand(259, "none_force");
         }
     }
 }

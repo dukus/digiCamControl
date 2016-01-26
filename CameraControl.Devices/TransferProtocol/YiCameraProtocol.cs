@@ -29,6 +29,7 @@ namespace CameraControl.Devices.TransferProtocol
         private int bracker = 0;
         private string data = "";
 
+        public string Ip { get; set; }
 
         public string Model { get; private set; }
         public string Manufacturer { get; private set; }
@@ -45,11 +46,12 @@ namespace CameraControl.Devices.TransferProtocol
 
         public void Connect(string address, int port)
         {
+            Ip = address;
             // Close the socket if it is still open
             if (m_sock != null && m_sock.Connected)
             {
                 m_sock.Shutdown(SocketShutdown.Both);
-                System.Threading.Thread.Sleep(10);
+                Thread.Sleep(10);
                 m_sock.Close();
             }
 
