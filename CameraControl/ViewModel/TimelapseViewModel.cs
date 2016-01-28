@@ -761,6 +761,8 @@ namespace CameraControl.ViewModel
             _timer.Start();
             _lastTime = DateTime.Now;
             TimeDiff = 0;
+            TimeLapseSettings.Started = true;
+            ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
         }
 
         private void StopL()
@@ -770,7 +772,9 @@ namespace CameraControl.ViewModel
             Log.Debug("Timelapse stop");
             IsActive = false;
             IsRunning = false;
-            _timer.Stop();            
+            _timer.Stop();
+            TimeLapseSettings.Started = false;
+            ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
         }
     }
 }

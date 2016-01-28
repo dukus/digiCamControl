@@ -263,6 +263,11 @@ namespace CameraControl
             thread.Start();
             if (ServiceProvider.Settings.StartMinimized)
                 this.WindowState = WindowState.Minimized;
+            if (ServiceProvider.Settings.DefaultSession.TimeLapseSettings.Started)
+            {
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.TimeLapseWnd_Show);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.TimeLapse_Start);
+            }
             SortCameras();
         }
 

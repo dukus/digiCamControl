@@ -37,6 +37,8 @@ namespace CameraControl.Core.Classes
         public int FineTune { get; set; }
         public int Resolution { get; set; }
 
+        public bool Started { get; set; }
+
         public TimeLapseSettings()
         {
             StartNow = true;
@@ -45,6 +47,7 @@ namespace CameraControl.Core.Classes
             StopDate = DateTime.Now.AddHours(1);
             TimeBetweenShots = 15;
             Capture = true;
+            Started = false;
         }
     }
 }
