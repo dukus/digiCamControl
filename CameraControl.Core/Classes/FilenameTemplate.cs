@@ -51,13 +51,13 @@ namespace CameraControl.Core.Classes
                 case "[Date MMM]":
                     return DateTime.Now.ToString("MMM");
                 case "[Date yyyy-MM-dd-hh-mm-ss]":
-                    return DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
+                    return DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
                 case "[Time hh-mm-ss]":
-                    return DateTime.Now.ToString("hh-mm-ss");
+                    return DateTime.Now.ToString("HH-mm-ss");
                 case "[Time hh-mm]":
-                    return DateTime.Now.ToString("hh-mm");
+                    return DateTime.Now.ToString("HH-mm");
                 case "[Time hh]":
-                    return DateTime.Now.ToString("hh");
+                    return DateTime.Now.ToString("HH");
                 case "[Barcode]":
                     return session.Barcode;
                 case "[File format]":
