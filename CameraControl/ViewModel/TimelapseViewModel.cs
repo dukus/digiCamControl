@@ -27,9 +27,6 @@ namespace CameraControl.ViewModel
         private bool _fullSpeed;
         private BracketingViewModel _bracketingViewModel = null;
         private double _timeDiff;
-        private int _fineTune;
-        private int _resolution;
-
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
 
@@ -526,14 +523,14 @@ namespace CameraControl.ViewModel
                     {
                         var t = new TimeSpan(StartHour, StartMinute, StartSecond);
                         var sec = t.TotalSeconds - (DateTime.Now - _timeLapseStartTime).TotalSeconds;
-
                         return sec < 0
                             ? ""
-                            : string.Format("The timlapse will start in {0} seconds", Math.Round(sec, 0));
+                            : string.Format("The timlapse will start in {0} seconds",
+                                TimeSpan.FromSeconds(sec).ToString(@"hh\:mm\:ss"));
                     }
                     if (StartAt)
                     {
-                        return StartDate < DateTime.Now ? "" : string.Format("The timlapse will start in {0:dd\\.hh\\:mm\\:ss}", (StartDate - DateTime.Now));
+                        return StartDate < DateTime.Now ? "" : string.Format("The timlapse will start in {0}", (StartDate - DateTime.Now).ToString(@"hh\:mm\:ss"));
                     }
                     return "Waiting for shedule";
                 }
