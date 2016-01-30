@@ -488,6 +488,9 @@ namespace CameraControl
                         StaticHelper.Instance.SystemMessage = "Unable to save the backup";
                 }
 
+                if (!eventArgs.CameraDevice.CaptureInSdRam && session.DeleteFileAfterTransfer)
+                    eventArgs.CameraDevice.DeleteObject(new DeviceObject() {Handle = eventArgs.Handle});
+
 
                 if (File.Exists(tempFile))
                     File.Delete(tempFile);

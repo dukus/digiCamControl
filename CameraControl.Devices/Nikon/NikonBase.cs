@@ -61,6 +61,7 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_CMD_InitiateCaptureRecInSdram = 0x90C0;
         public const uint CONST_CMD_ChangeAfArea = 0x9205;
         public const uint CONST_CMD_MfDrive = 0x9204;
+        public const uint CONST_CMD_GetLargeThumb = 0x90C4;
 
         public const uint CONST_CMD_GetEvent = 0x90C7;
 
@@ -2305,5 +2306,28 @@ namespace CameraControl.Devices.Nikon
             DeviceReady();
             return base.GetObjects(storageId, loadThumbs);
         }
+
+        public override void TransferFileThumb(object o, string filename)
+        {
+            lock (Locker)
+            {
+
+                using (var fs = File.Open(filename, FileMode.Create))
+                {
+                    MTPDataResponse result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetLargeThumb,
+                        (total, current) =>
+                        {
+                            double i = (double) current/total;
+                            TransferProgress =
+                                Convert.ToUInt32(i*100);
+                        }, Convert.ToUInt32(o));
+                    fs.Write(result.Data, 0, result.Data.Length);
+                }
+                _timer.Start();
+                TransferProgress = 0;
+            }
+        }
+
+
     }
 }

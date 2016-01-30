@@ -668,6 +668,8 @@ namespace CameraControl.Core.Translation
         public static string LabelItems = "Items";
         //30/01/2016
         public static string LabelDownloadThumb = "Download photo thumb only";
+        public static string LabelDeleteFileAfterTransfer = "Delete file after transfer";
+       
 
     }
 }

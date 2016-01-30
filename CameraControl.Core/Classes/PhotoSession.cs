@@ -370,6 +370,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool DeleteFileAfterTransfer
+        {
+            get { return _deleteFileAfterTransfer; }
+            set
+            {
+                _deleteFileAfterTransfer = value;
+                NotifyPropertyChanged("DeleteFileAfterTransfer");
+            }
+        }
+
         private int _leadingZeros;
 
         public int LeadingZeros
@@ -531,6 +541,7 @@ namespace CameraControl.Core.Classes
         private bool _reloadOnFolderChange;
         private bool _askSavePath;
         private bool _downloadThumbOnly;
+        private bool _deleteFileAfterTransfer;
 
         public bool AllowOverWrite
         {
