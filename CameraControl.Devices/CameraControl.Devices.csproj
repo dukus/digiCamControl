@@ -127,7 +127,6 @@
     <Compile Include="Custom\DeviceDescription.cs" />
     <Compile Include="Custom\DeviceProperty.cs" />
     <Compile Include="Custom\DevicePropertyValue.cs" />
-    <Compile Include="Custom\YiCamera.cs" />
     <Compile Include="ICameraDevice.cs" />
     <Compile Include="IWifiDeviceProvider.cs" />
     <Compile Include="Log.cs" />
@@ -152,6 +151,7 @@
     <Compile Include="Others\FakeCameraDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
     <Compile Include="Others\WiaCameraDevice.cs" />
+    <Compile Include="Others\YiCamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticHelper.cs" />
     <Compile Include="TransferProtocol\DdServerProtocol.cs" />

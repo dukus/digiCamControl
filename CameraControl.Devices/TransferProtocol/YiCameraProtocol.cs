@@ -21,7 +21,6 @@ namespace CameraControl.Devices.TransferProtocol
         public delegate void DataReceiverdHandler(object sender, string data);
 
         public string Token { get; set; }
-        public Dictionary<string, string> CurrentValues { get; set; }
 
         // My Attributes
         private Socket m_sock;						// Server connection
@@ -41,7 +40,6 @@ namespace CameraControl.Devices.TransferProtocol
         {
             Manufacturer = "Xiaomi";
             Model = "Yi action camera";
-            CurrentValues=new Dictionary<string, string>();
         }
 
         public void Connect(string address, int port)
@@ -82,12 +80,12 @@ namespace CameraControl.Devices.TransferProtocol
                     throw new Exception("Unable to get token.");
 
             }
-            SendCommand(3);
+//            SendCommand(3);
         }
 
         public void SendCommand(int command)
         {
-                m_sock.Send(
+            m_sock.Send(
                     Encoding.UTF8.GetBytes(String.Format("{{\"msg_id\":{0},\"token\":{1}}}", command, Token ?? "0")));
         }
 
@@ -190,14 +188,6 @@ namespace CameraControl.Devices.TransferProtocol
                     case "257": // token
                         Token = resp.param;
                         break;
-                    case "3": // allproperties
-                        CurrentValues.Clear();
-                        foreach (JObject o in resp.param)
-                        {
-                            var k = o.ToObject<Dictionary<string, string>>();
-                            CurrentValues.Add(k.First().Key, k.First().Value);
-                        }
-                        break;
                     default:
                         OnDataReceiverd(data);
                         break;
@@ -245,7 +235,7 @@ namespace CameraControl.Devices.TransferProtocol
 
         public void Disconnect()
         {
-            throw new NotImplementedException();
+            
         }
 
         protected virtual void OnDataReceiverd(string data)

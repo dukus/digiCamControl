@@ -432,6 +432,11 @@ namespace CameraControl.Devices
             
         }
 
+        public virtual void TransferFileThumb(object o, string filename)
+        {
+            TransferFile(o, filename);
+        }
+
         public virtual void ReadDeviceProperties(uint prop)
         {
         }

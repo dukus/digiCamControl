@@ -142,6 +142,7 @@ namespace CameraControl.Devices
         void Close();
         void ResetDevice();
 
+        void TransferFileThumb(object o, string filename);
         void TransferFile(object o, string filename);
         void TransferFile(object o, System.IO.Stream stream);
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Custom;
+using CameraControl.Devices.Others;
 using CameraControl.Devices.TransferProtocol;
 using CameraControl.Devices.TransferProtocol.PtpIp;
 
