@@ -275,9 +275,12 @@ namespace CameraControl
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                MyNotifyIcon.HideBalloonTip();
-                MyNotifyIcon.ShowBalloonTip("Camera disconnected", cameraDevice.LoadProperties().DeviceName,
-                    BalloonIcon.Info);
+                if (!ServiceProvider.Settings.HideTrayNotifications)
+                {
+                    MyNotifyIcon.HideBalloonTip();
+                    MyNotifyIcon.ShowBalloonTip("Camera disconnected", cameraDevice.LoadProperties().DeviceName,
+                        BalloonIcon.Info);
+                }
             }));
         }
 
@@ -285,8 +288,12 @@ namespace CameraControl
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                MyNotifyIcon.HideBalloonTip();
-                MyNotifyIcon.ShowBalloonTip("Camera connected", cameraDevice.LoadProperties().DeviceName, BalloonIcon.Info);
+                if (!ServiceProvider.Settings.HideTrayNotifications)
+                {
+                    MyNotifyIcon.HideBalloonTip();
+                    MyNotifyIcon.ShowBalloonTip("Camera connected", cameraDevice.LoadProperties().DeviceName,
+                        BalloonIcon.Info);
+                }
                 SortCameras();
             }));
         }
@@ -555,7 +562,7 @@ namespace CameraControl
                     ServiceProvider.OnFileTransfered(_selectedItem);
                 });
 
-                if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible)
+                if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible && !ServiceProvider.Settings.HideTrayNotifications)
                 {
                     MyNotifyIcon.HideBalloonTip();
                     MyNotifyIcon.ShowBalloonTip("Photo transfered", fileName, BalloonIcon.Info);
@@ -894,7 +901,7 @@ namespace CameraControl
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon)
+            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon && !ServiceProvider.Settings.HideTrayNotifications)
             {
                 this.Hide();
                 MyNotifyIcon.HideBalloonTip();

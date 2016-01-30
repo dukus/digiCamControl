@@ -772,6 +772,7 @@ namespace CameraControl.Core.Classes
         private bool _showThumbInfo;
         private bool _enhancedThumbs;
         private bool _hideFullscreenControls;
+        private bool _hideTrayNotifications;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -791,6 +792,16 @@ namespace CameraControl.Core.Classes
             {
                 _minimizeToTrayIcon = value;
                 NotifyPropertyChanged("MinimizeToTrayIcon");
+            }
+        }
+
+        public bool HideTrayNotifications
+        {
+            get { return _hideTrayNotifications; }
+            set
+            {
+                _hideTrayNotifications = value;
+                NotifyPropertyChanged("HideTrayNotifications");
             }
         }
 

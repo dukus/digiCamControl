@@ -395,7 +395,7 @@
             <TabItem Header="{T:TranslateExtension LabelAdvanced}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="4*" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
@@ -437,7 +437,11 @@
                     <Label Content="{T:TranslateExtension LabelLoadCanonTransferMode}"  Margin="3" Grid.Column="0" Grid.Row="8" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="8" IsChecked="{Binding LoadCanonTransferMode}" Margin="2" Grid.Column="1"/>
 
-                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="9" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
+                    <Label Content="{T:TranslateExtension LabelHideTrayNotifications}"  Margin="3" Grid.Column="0" Grid.Row="9" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <CheckBox Grid.Row="9" IsChecked="{Binding HideTrayNotifications}" Margin="2" Grid.Column="1"/>
+
+
+                    <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="10" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelMessagesLog}">
