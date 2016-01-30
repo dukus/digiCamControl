@@ -265,6 +265,11 @@ namespace CameraControl.Devices.Others
             }
         }
 
+        public override void CapturePhotoNoAf()
+        {
+            CapturePhoto();
+        }
+
         public override void CapturePhoto()
         {
             IsBusy = true;
@@ -287,6 +292,12 @@ namespace CameraControl.Devices.Others
         {
             TransferProgress = 0;
             DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}", Protocol.Ip, o), filename);
+        }
+
+        public override void TransferFileThumb(object o, string filename)
+        {
+            TransferProgress = 0;
+            DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}?type=screen", Protocol.Ip, o), filename);
         }
 
         private void SetProperty(string prop, string val)

@@ -360,6 +360,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool DownloadThumbOnly
+        {
+            get { return _downloadThumbOnly; }
+            set
+            {
+                _downloadThumbOnly = value;
+                NotifyPropertyChanged("DownloadThumbOnly");
+            }
+        }
+
         private int _leadingZeros;
 
         public int LeadingZeros
@@ -520,6 +530,7 @@ namespace CameraControl.Core.Classes
         private bool _lowerCaseExtension;
         private bool _reloadOnFolderChange;
         private bool _askSavePath;
+        private bool _downloadThumbOnly;
 
         public bool AllowOverWrite
         {

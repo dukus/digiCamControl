@@ -417,7 +417,10 @@ namespace CameraControl
                 if (File.Exists(tempFile))
                     File.Delete(tempFile);
 
-                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+                if (!eventArgs.CameraDevice.CaptureInSdRam && session.DownloadThumbOnly)
+                    eventArgs.CameraDevice.TransferFileThumb(eventArgs.Handle, tempFile);
+                else
+                    eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
 
                 string fileName = "";
                 if (!session.UseOriginalFilename || eventArgs.CameraDevice.CaptureInSdRam)

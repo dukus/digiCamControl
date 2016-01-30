@@ -666,5 +666,8 @@ namespace CameraControl.Core.Translation
         public static string LabelRefresh = "Refresh";
         public static string LabelOverview = "Overview";
         public static string LabelItems = "Items";
+        //30/01/2016
+        public static string LabelDownloadThumb = "Download photo thumb only";
+
     }
 }
