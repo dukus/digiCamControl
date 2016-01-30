@@ -83,6 +83,7 @@ namespace CameraControl.Devices.Others
                 AdvancedProperties.Add(AddNames("auto_power_off", "Auto power off"));
                 AdvancedProperties.Add(AddNames("loop_record", "Loop record"));
                 AdvancedProperties.Add(AddNames("warp_enable", "Lens correction"));
+                AdvancedProperties.Add(AddNames("buzzer_ring", "Find device"));
 
                 CompressionSetting.ValueChanged +=
                     (sender, key, val) => { Protocol.SendValue(CompressionSetting.Tag, key); };
