@@ -70,12 +70,14 @@ namespace CameraControl.Core
         public static FilenameTemplateManager FilenameTemplateManager { get; set; }
         public static ExternalDeviceManager ExternalDeviceManager { get; set; }
         public static Analytics Analytics { get; set; }
+        public static Database.Database Database { get; set; }
         public static string LogFile;
 
         public static void Configure()
         {
             LogFile = Path.Combine(Settings.DataFolder, "Log", "app.log");
             Configure(LogFile);
+            Database = new Database.Database(Path.Combine(Settings.DataFolder, "database.db"));
         }
 
         public static void Configure(string logFile)

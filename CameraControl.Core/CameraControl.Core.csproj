@@ -241,6 +241,9 @@
     <Compile Include="Classes\WebServerOld.cs" />
     <Compile Include="Classes\WindowCommandItem.cs" />
     <Compile Include="Classes\WindowsCmdConsts.cs" />
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\DbEvents.cs" />
+    <Compile Include="Database\EventType.cs" />
     <Compile Include="Interfaces\IAutoExportPlugin.cs" />
     <Compile Include="Interfaces\IExportPlugin.cs" />
     <Compile Include="Interfaces\IExternalDevice.cs" />
@@ -293,6 +296,8 @@
     <Compile Include="Scripting\ScriptManager.cs" />
     <Compile Include="Scripting\ScriptObject.cs" />
     <Compile Include="ServiceProvider.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <Compile Include="TclScripting\ConsoleRedirect.cs" />
     <Compile Include="TclScripting\DccCommand.cs" />
     <Compile Include="TclScripting\EchoCommand.cs" />

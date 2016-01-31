@@ -38,6 +38,7 @@ using System.Windows;
 using System.Windows.Threading;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.Database;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
@@ -149,6 +150,7 @@ namespace CameraControl
                 if (_startUpWindow != null)
                     _startUpWindow.Close();
             }));
+            ServiceProvider.Database.Add(new DbEvents(EventType.AppStart));
         }
 
         private void InitWindowManager()
