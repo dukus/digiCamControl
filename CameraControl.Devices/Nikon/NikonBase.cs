@@ -102,6 +102,7 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_WbTuneFluorescentType = 0xD14F;
         public const uint CONST_PROP_WbColorTemp = 0xD01E;
         public const uint CONST_PROP_ISOAutoHighLimit = 0xD183;
+        public const uint CONST_PROP_FlashCompensation = 0xD124;
 
         public const uint CONST_Event_DevicePropChanged = 0x4006;
         public const uint CONST_Event_StoreFull = 0x400A;
@@ -512,10 +513,34 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitOnOffProperty("Application mode", CONST_PROP_ApplicationMode));
             AdvancedProperties.Add(InitAutoIsoHight());
             AdvancedProperties.Add(CenterWeightedExRange());
+            AdvancedProperties.Add(FlashCompensation());
+
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> FlashCompensation ()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Ext. flash compensation",
+                IsEnabled = true,
+                Code = CONST_PROP_FlashCompensation,
+                SubType = typeof (sbyte)
+            };
+            for (decimal i = -18; i <= 18; i++)
+            {
+                if (i > 0)
+                    res.AddValues("+"+Decimal.Round(i/6, 1).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US")), (long) i);
+                else
+                    res.AddValues(Decimal.Round(i / 6, 1).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US")), (long)i);
+            }
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((sbyte)val), res.Code);
+            return res;
         }
 
         protected virtual PropertyValue<long> CenterWeightedExRange()

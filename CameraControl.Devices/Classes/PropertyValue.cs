@@ -380,6 +380,12 @@ namespace CameraControl.Devices.Classes
                 uint val = BitConverter.ToUInt16(ba, 0);
                 SetValue((T)((object)val));
             }
+            if (typeof(T) == typeof(long) && SubType == typeof(sbyte))
+            {
+                long val = Convert.ToSByte(ba[0]);
+                SetValue((T)((object)val));
+                return;
+            }
             if (typeof(T) == typeof(long) && ba.Length == 1)
             {
                 long val = ba[0];
