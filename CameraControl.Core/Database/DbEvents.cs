@@ -13,15 +13,21 @@ namespace CameraControl.Core.Database
         public int Id { get; set; }
 
         public EventType EventType { get; set; }
-        public DateTime DateTime { get; set; }
-        public string File { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string CameraSerial { get; set; }
         public string Camera { get; set; }
+
+        public DbEvents()
+        {
+            
+        }
 
         public DbEvents(EventType eventType)
         {
             EventType = eventType;
-            DateTime=DateTime.Now;
+            StartDate = DateTime.Now;
         }
+
     }
 }

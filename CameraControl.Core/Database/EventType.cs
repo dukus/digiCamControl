@@ -2,10 +2,8 @@
 {
     public enum EventType
     {
-        AppStart,
-        AppStop,
-        SessionStart,
-        SessionEnd,
+        App,
+        Session,
         CameraConnect,
         CameraDisconnect,
         Capture

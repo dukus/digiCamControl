@@ -47,6 +47,10 @@ namespace CameraControl.Core.Classes
 {
     public class BitmapLoader : BaseFieldClass
     {
+        public delegate void MetaDataUpdatedEventHandler(object sender, FileItem item);
+
+        public event MetaDataUpdatedEventHandler MetaDataUpdated;
+
         private const int MaxThumbSize = 1920 * 2;
         public const int LargeThumbSize = 1600;
         public const int SmallThumbSize = 400;
@@ -208,6 +212,7 @@ namespace CameraControl.Core.Classes
                 SetImageInfo(fileItem);
                 if (deleteFile)
                     File.Delete(filename);
+                OnMetaDataUpdated(fileItem);
             }
             catch (Exception exception)
             {
@@ -769,6 +774,12 @@ namespace CameraControl.Core.Classes
             int num = (int)color.A + 1;
             return (int)color.A << 24 | (int)(byte)((int)color.R * num >> 8) << 16 |
                    (int)(byte)((int)color.G * num >> 8) << 8 | (int)(byte)((int)color.B * num >> 8);
+        }
+
+        protected virtual void OnMetaDataUpdated(FileItem item)
+        {
+            var handler = MetaDataUpdated;
+            if (handler != null) handler(this, item);
         }
     }
 }

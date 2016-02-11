@@ -124,6 +124,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AForge.Vision.2.2.5\lib\AForge.Vision.dll</HintPath>
     </Reference>
+    <Reference Include="De.TorstenMandelkow.MetroChart">
+      <HintPath>..\packages\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
     <Reference Include="DropNet">
       <HintPath>..\packages\DropNet.1.10.23.0\lib\net40\DropNet.dll</HintPath>
     </Reference>

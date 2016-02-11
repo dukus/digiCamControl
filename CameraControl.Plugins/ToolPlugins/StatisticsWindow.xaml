@@ -1,0 +1,48 @@
+﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.StatisticsWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
+             xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+             xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             mc:Ignorable="d" Height="417" Width="564">
+    <Window.DataContext>
+        <toolPlugins:StatisticsViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="239*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <DatePicker Margin="5" SelectedDate="{Binding From}"/>
+            <DatePicker Margin="5" SelectedDate="{Binding To}"/>
+        </StackPanel>
+        <Button Grid.Row="0" HorizontalAlignment="Right" Margin="5" Content="{translation:TranslateExtension LabelRefresh}" Command="{Binding RefreshCommand}"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Charts">
+                <metroChart:PieChart ChartTitle="File formats" Height="300" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left" ChartSubTitle="">
+                        <metroChart:PieChart.Series>
+                            <metroChart:ChartSeries DisplayMember="Name" ValueMember="Value" ItemsSource="{Binding Path=Formats}" SeriesTitle="."/>
+                        </metroChart:PieChart.Series>
+                    </metroChart:PieChart>
+            </TabItem>
+            <TabItem Header="Application">
+                <DataGrid ItemsSource="{Binding Apps}"/>
+            </TabItem>
+            <TabItem Header="Files">
+                <DataGrid ItemsSource="{Binding Files}"/>
+            </TabItem>            
+        </TabControl>
+
+    </Grid>
+</controls:MetroWindow>

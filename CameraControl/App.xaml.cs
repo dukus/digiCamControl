@@ -117,7 +117,7 @@ namespace CameraControl
 
             ServiceProvider.Trigger.Start();
             ServiceProvider.Analytics.Start();
-
+            BitmapLoader.Instance.MetaDataUpdated += Instance_MetaDataUpdated;
 
 
             Dispatcher.Invoke(new Action(delegate
@@ -150,7 +150,19 @@ namespace CameraControl
                 if (_startUpWindow != null)
                     _startUpWindow.Close();
             }));
-            ServiceProvider.Database.Add(new DbEvents(EventType.AppStart));
+            ServiceProvider.Database.StartEvent(EventType.App);
+        }
+
+        private void Instance_MetaDataUpdated(object sender, FileItem item)
+        {
+            try
+            {
+                ServiceProvider.Database.SaveFile(item);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Instance_MetaDataUpdated", ex);
+            }
         }
 
         private void InitWindowManager()
@@ -178,7 +190,6 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.Add(new PrintWnd());
                 ServiceProvider.WindowsManager.Add(new TimeLapseWnd());
                 ServiceProvider.WindowsManager.Add(new BarcodeWnd());
-                //ServiceProvider.WindowsManager.Add(new StatisticsWnd());
                 ServiceProvider.WindowsManager.Event += WindowsManager_Event;
                 ServiceProvider.WindowsManager.ApplyTheme();
                 //ServiceProvider.WindowsManager.ApplyKeyHanding();
@@ -238,6 +249,7 @@ namespace CameraControl
                 {
                     ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
                     ServiceProvider.Analytics.Stop();
+                    ServiceProvider.Database.EndEvent(EventType.App);
                     if (ServiceProvider.Settings != null)
                     {
                         ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);

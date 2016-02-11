@@ -243,6 +243,7 @@
     <Compile Include="Classes\WindowsCmdConsts.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\DbEvents.cs" />
+    <Compile Include="Database\DbFile.cs" />
     <Compile Include="Database\EventType.cs" />
     <Compile Include="Interfaces\IAutoExportPlugin.cs" />
     <Compile Include="Interfaces\IExportPlugin.cs" />

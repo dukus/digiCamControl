@@ -41,6 +41,7 @@ using System.Windows.Media.Imaging;
 using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.Database;
 using CameraControl.Core.Interfaces;
 using CameraControl.Core.TclScripting;
 using CameraControl.Core.Translation;
@@ -528,6 +529,8 @@ namespace CameraControl
                         _selectedItem.BackupFileName = backupfile;
                         _selectedItem.Series = session.Series;
                         _selectedItem.AddTemplates(eventArgs.CameraDevice, session);
+                        ServiceProvider.Database.Add(new DbFile(_selectedItem, eventArgs.CameraDevice.DisplayName,
+                            eventArgs.CameraDevice.SerialNumber, session.Name));
                     }
                     catch (Exception ex)
                     {

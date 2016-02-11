@@ -64,6 +64,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ToolPlugins.Add(new ImageSequencerPlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new GenMoviePlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new EnfusePlugin());
+                ServiceProvider.PluginManager.ToolPlugins.Add(new StatisticsPlugin());
 
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new SerialPortShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DSUSBShutterRelease());

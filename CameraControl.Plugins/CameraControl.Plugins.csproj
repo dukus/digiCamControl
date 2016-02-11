@@ -79,12 +79,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart">
+      <HintPath>..\packages\De.TorstenMandelkow.MetroChart.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DropNet">
       <HintPath>..\packages\DropNet.1.10.23.0\lib\net40\DropNet.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.7.0.10-beta\lib\net45\Facebook.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -323,6 +328,11 @@
     <Compile Include="ToolPlugins\ImageSequencerWindow.xaml.cs">
       <DependentUpon>ImageSequencerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ToolPlugins\StatisticsPlugin.cs" />
+    <Compile Include="ToolPlugins\StatisticsViewModel.cs" />
+    <Compile Include="ToolPlugins\StatisticsWindow.xaml.cs">
+      <DependentUpon>StatisticsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
@@ -465,6 +475,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolPlugins\ImageSequencerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolPlugins\StatisticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
