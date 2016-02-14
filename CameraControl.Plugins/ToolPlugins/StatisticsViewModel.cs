@@ -23,6 +23,39 @@ namespace CameraControl.Plugins.ToolPlugins
         private ObservableCollection<DbEvents> _apps;
         private ObservableCollection<DbFile> _files;
         private AsyncObservableCollection<NamedValue<int>> _formats;
+        private AsyncObservableCollection<NamedValue<int>> _cameras;
+        private AsyncObservableCollection<NamedValue<int>> _sessions;
+        private AsyncObservableCollection<NamedValue<string>> _summary;
+
+        public AsyncObservableCollection<NamedValue<string>> Summary
+        {
+            get { return _summary; }
+            set
+            {
+                _summary = value;
+                RaisePropertyChanged(() => Summary);
+            }
+        }
+
+        public AsyncObservableCollection<NamedValue<int>> Sessions
+        {
+            get { return _sessions; }
+            set
+            {
+                _sessions = value;
+                RaisePropertyChanged(() => Sessions);
+            }
+        }
+
+        public AsyncObservableCollection<NamedValue<int>> Cameras
+        {
+            get { return _cameras; }
+            set
+            {
+                _cameras = value;
+                RaisePropertyChanged(() => Cameras);
+            }
+        }
 
         public AsyncObservableCollection<NamedValue<int>> Formats
         {
@@ -92,6 +125,9 @@ namespace CameraControl.Plugins.ToolPlugins
                 Dictionary<string, int> dictionary = new Dictionary<string, int>();
                 
                 Formats = new AsyncObservableCollection<NamedValue<int>>();
+                Cameras = new AsyncObservableCollection<NamedValue<int>>();
+                Sessions = new AsyncObservableCollection<NamedValue<int>>();
+                Summary = new AsyncObservableCollection<NamedValue<string>>();
                 
                 if (!IsInDesignMode)
                 {
@@ -126,6 +162,40 @@ namespace CameraControl.Plugins.ToolPlugins
                         if(i.Value>0)
                         Formats.Add(new NamedValue<int>(i.Key,i.Value));
                     }
+
+                    dictionary.Clear();
+                    foreach (DbFile file in Files)
+                    {
+                        if(!dictionary.ContainsKey(file.Camera))
+                            dictionary.Add(file.Camera,0);
+                        dictionary[file.Camera]++;
+                    }
+
+                    foreach (var i in dictionary)
+                    {
+                            Cameras.Add(new NamedValue<int>(i.Key, i.Value));
+                    }
+
+                    dictionary.Clear();
+                    foreach (DbFile file in Files)
+                    {
+                        if (!dictionary.ContainsKey(file.Session))
+                            dictionary.Add(file.Session, 0);
+                        dictionary[file.Session]++;
+                    }
+
+                    foreach (var i in dictionary)
+                    {
+                        Sessions.Add(new NamedValue<int>(i.Key, i.Value));
+                    }
+
+                    Summary.Add(new NamedValue<string>("Total photos", Files.Count.ToString()));
+                    Summary.Add(new NamedValue<string>("Total used session", Sessions.Count.ToString()));
+                    Summary.Add(new NamedValue<string>("Total used cameras", Cameras.Count.ToString()));
+                    Summary.Add(new NamedValue<string>("Most used apperture", Files.GroupBy(x => x.F).OrderByDescending(x => x.Count()).First().Key));
+                    Summary.Add(new NamedValue<string>("Most used exposure", Files.GroupBy(x => x.E).OrderByDescending(x => x.Count()).First().Key));
+                    Summary.Add(new NamedValue<string>("Most used ISO", Files.GroupBy(x => x.Iso).OrderByDescending(x => x.Count()).First().Key));
+                   
                 }
             }
             catch (Exception ex)

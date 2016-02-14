@@ -529,8 +529,7 @@ namespace CameraControl
                         _selectedItem.BackupFileName = backupfile;
                         _selectedItem.Series = session.Series;
                         _selectedItem.AddTemplates(eventArgs.CameraDevice, session);
-                        ServiceProvider.Database.Add(new DbFile(_selectedItem, eventArgs.CameraDevice.DisplayName,
-                            eventArgs.CameraDevice.SerialNumber, session.Name));
+                        ServiceProvider.Database.Add(new DbFile(_selectedItem, eventArgs.CameraDevice.SerialNumber, eventArgs.CameraDevice.DisplayName, session.Name));
                     }
                     catch (Exception ex)
                     {

@@ -18,6 +18,19 @@ namespace CameraControl.Core.Database
         public string CameraSerial { get; set; }
         public string Camera { get; set; }
 
+        [Ignore]
+        public TimeSpan Duration
+        {
+            get
+            {
+                if (StartDate.HasValue && EndDate.HasValue)
+                {
+                    return EndDate.Value - StartDate.Value;
+                }
+                return new TimeSpan();
+            }
+        }
+
         public DbEvents()
         {
             
