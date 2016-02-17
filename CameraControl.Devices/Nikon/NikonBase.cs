@@ -449,7 +449,12 @@ namespace CameraControl.Devices.Nikon
                 Log.Debug("Serial number" + ser ?? "");
                 if (ser != null && ser.Length >= 7)
                 {
-                    SerialNumber = StillImageDevice.SerialNumber.Substring(0, 7);
+                    SerialNumber = ser.Substring(0, 7);
+                    // there in some cases the leading zero order differs
+                    if (SerialNumber == "0000000")
+                    {
+                        SerialNumber =  ser.Substring(ser.Length-7,7);    
+                    }
                 }
                 // load advanced properties in a separated thread to speed up camera connection
                 var thread = new Thread(LoadProperties) {Priority = ThreadPriority.Lowest};
