@@ -19,3 +19,4 @@ _ReSharper.CameraControl.ServerTest
 /Setup/*.config
 /Setup/*.dll
 /Setup/*.wixobj
+/Setup/*.exe

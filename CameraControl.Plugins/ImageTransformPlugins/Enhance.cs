@@ -33,7 +33,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 if (conf.Edge)
                     image.AdaptiveSharpen();
                 if (conf.Sharpen > 0)
-                    image.Unsharpmask(1.5, 1.5, conf.Sharpen/100.0, 0.2);
+                    image.UnsharpMask(1.5, 1.5, conf.Sharpen/100.0, 0.2);
                 image.Format = MagickFormat.Jpeg;
                 image.Write(dest);
             }

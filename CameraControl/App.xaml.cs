@@ -212,6 +212,8 @@ namespace CameraControl
         private void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
         {
             cameraDevice.CameraInitDone -= cameraDevice_CameraInitDone;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void StartApplication()

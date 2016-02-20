@@ -357,7 +357,7 @@ namespace CameraControl.Devices.Nikon
                 _timer.Stop();
                 lock (Locker)
                 {
-                    ThreadPool.QueueUserWorkItem(GetEvent);
+                   // ThreadPool.QueueUserWorkItem(GetEvent);
                 }
             }
             catch (Exception)

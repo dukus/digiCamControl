@@ -107,11 +107,11 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                                             StringComparison.InvariantCultureIgnoreCase) == 0).Aggregate(current1,
                                                 (current, template) => current.Replace(match.Value, template.Value)));
 
-                    image.Font = conf.Font;
-                    image.FontPointsize = conf.FontSize;
+                    image.Settings.Font = conf.Font;
+                    image.Settings.FontPointsize = conf.FontSize;
                     Color color = (Color) ColorConverter.ConvertFromString(conf.FontColor);
-                    image.FillColor = new MagickColor(color.R, color.G, color.B, color.A);
-                    image.StrokeColor = new MagickColor(color.R, color.G, color.B, color.A);
+                    image.Settings.FillColor = new MagickColor(color.R, color.G, color.B, color.A);
+                    image.Settings.StrokeColor = new MagickColor(color.R, color.G, color.B, color.A);
                     image.Annotate(text, gravity);
                 }
                 image.Format = MagickFormat.Jpeg;

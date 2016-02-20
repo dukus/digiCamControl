@@ -29,7 +29,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                         image.SepiaTone(new Percentage(conf.Param1));
                         break;
                     case 1:
-                        image.OilPaint(conf.Param1);
+                        image.OilPaint(conf.Param1,0.1);
                         break;
                     case 2:
                         image.Sketch();
@@ -44,7 +44,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                         image.Swirl(conf.Param1);
                         break;
                     case 6:
-                        image.Wave(conf.Param1, conf.Param2);
+                        image.Wave(PixelInterpolateMethod.Bilinear, conf.Param1, conf.Param2);
                         break;
                     case 7:
                         image.BlueShift();
