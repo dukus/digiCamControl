@@ -821,6 +821,26 @@
             Specifies the architecture for this assembly.
             </summary>
         </member>
+        <member name="T:WixSharp.CompilerSupportState">
+            <summary>
+            Controls activation of the Wix# compiler features.
+            </summary>
+        </member>
+        <member name="F:WixSharp.CompilerSupportState.Automatic">
+            <summary>
+            The feature will be enabled automatically when needed
+            </summary>
+        </member>
+        <member name="F:WixSharp.CompilerSupportState.Enabled">
+            <summary>
+            The feature will be enabled 
+            </summary>
+        </member>
+        <member name="F:WixSharp.CompilerSupportState.Disabled">
+            <summary>
+            The feature will be disabled 
+            </summary>
+        </member>
         <member name="T:WixSharp.AutoElements">
             <summary>
             Automatically insert elements required for satisfy odd MSI restrictions.
@@ -840,18 +860,13 @@
             http://stackoverflow.com/questions/16119708/component-testcomp-installs-to-user-profile-it-must-use-a-registry-key-under-hk</para>
             </summary>
         </member>
-        <member name="F:WixSharp.AutoElements.DisableAutoCreateFolder">
+        <member name="F:WixSharp.AutoElements.SupportEmptyDirectories">
             <summary>
-            The disable automatic insertion of <c>CreateFolder</c> element.
+            Controls automatic insertion of CreateFolder and RemoveFolder for the directories containing no files.
             Required for: NativeBootstrapper, EmbeddedMultipleActions,  EmptyDirectories, InstallDir, Properties,
             ReleaseFolder, Shortcuts and WildCardFiles samples.
-            <para>Can also be managed by disabling ICE validation via Light.exe command line arguments.</para>
-            <para>
-            This flag is a heavier alternative of DisableAutoKeyPath. 
-            See: http://stackoverflow.com/questions/10358989/wix-using-keypath-on-components-directories-files-registry-etc-etc 
-            for some background info.
-             
-            </para>
+            <para>If set to <c>Automatic</c> then the compiler will enable this feature only if any empty directory 
+            is detected in the project definition.</para>
             </summary>
         </member>
         <member name="F:WixSharp.AutoElements.DisableAutoKeyPath">
@@ -1539,6 +1554,13 @@
             MSI properties to be set based on the value of a burn engine expression. This is a KeyValue mapping expression of the following format:
             <para>&lt;key&gt;=&lt;value&gt;[;&lt;key&gt;=&lt;value&gt;]</para>
             <para><c>Example:</c> "COMMANDARGS=[CommandArgs];GLOBAL=yes""</para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Bootstrapper.MsiPackage.DefaultMsiProperties">
+            <summary>
+            The default MsiProperties of a package .
+            <para>This value is merged with user defined <see cref="F:WixSharp.Bootstrapper.MsiPackage.MsiProperties"/>.</para>
+            <para>The default value of this property is "WIXBUNDLEORIGINALSOURCE=[WixBundleOriginalSource]"</para>
             </summary>
         </member>
         <member name="M:WixSharp.Bootstrapper.MsiPackage.ToXml">
@@ -2331,6 +2353,88 @@
             Schedules RemoveExistingProducts after the InstallFinalize standard action. This is similar to the afterInstallExecute and afterInstallExecuteAgain schedulings but takes place outside the installation transaction so if installation of the upgrade product fails, Windows Installer does not roll back the removal of the installed product, so the machine will have both versions installed.
             </summary>
         </member>
+        <member name="T:WixSharp.Media">
+             <summary>
+             Generic <see cref="T:WixSharp.WixEntity"/> container for defining WiX <c>Media</c> element attributes.
+             <para>These attributes describe a disk that makes up the source media for the installation.</para>
+            <example>The following is an example of defining the <c>Media</c> attributes.
+            <code>
+             var project =
+                 new Project("My Product",
+                     new Dir(@"%ProgramFiles%\My Company\My Product",
+                 ...
+             project.Media.Id=2;
+             project.Media.CompressionLevel=CompressionLevel.high;
+             //or
+             project.Media.AttributesDefinition = @"CompressionLevel=high;
+                                                    Id=2";
+             Compiler.BuildMsi(project);
+             </code>
+             </example>
+             </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:WixSharp.Media.Id" -->
+        <member name="F:WixSharp.Media.Cabinet">
+            <summary>
+            The name of the cabinet if some or all of the files stored on the media are in
+            a cabinet file. If no cabinets are used, this attribute must not be set.
+            <para>The default value is <c> "{projectId}.cab"</c>, which is expanded ar runtime</para>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Media.CompressionLevel">
+            <summary>
+            Indicates the compression level for the Media's cabinet. This attribute can only
+            be used in conjunction with the Cabinet attribute. The default is 'mszip'.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Media.DiskPrompt">
+            <summary>
+            The disk name, which is usually the visible text printed on the disk. This localizable
+            text is used to prompt the user when this disk needs to be inserted. This value will
+            be used in the "[1]" of the DiskPrompt Property. Using this attribute will require you
+            to define a DiskPrompt Property.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Media.EmbedCab">
+            <summary>
+            Instructs the binder to embed the cabinet in the product if 'yes'. This attribute can only
+            be specified in conjunction with the Cabinet attribute.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Media.Layout">
+            <summary>
+            This attribute specifies the root directory for the uncompressed files that are a part of
+            this Media element. By default, the src will be the output directory for the final image.
+            The default value ensures the binder generates an installable image. If a relative path is
+            specified in the src attribute, the value will be appended to the image's output directory.
+            If an absolute path is provided, that path will be used without modification. The latter two
+            options are provided to ease the layout of an image onto multiple medias (CDs/DVDs).
+            </summary>
+        </member>
+        <member name="F:WixSharp.Media.Source">
+            <summary>
+            Optional property that identifies the source of the embedded cabinet. If a cabinet is specified
+            for a patch, this property should be defined and unique to each patch so that the embedded cabinet
+            containing patched and new files can be located in the patch package. If the cabinet is not embedded
+            - this is not typical - the cabinet can be found in the directory referenced in this column. If empty,
+            the external cabinet must be located in the SourceDir directory.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Media.VolumeLabel">
+            <summary>
+            The label attributed to the volume. This is the volume label returned by the GetVolumeInformation function.
+            If the SourceDir property refers to a removable (floppy or CD-ROM) volume, then this volume label is used
+            to verify that the proper disk is in the drive before attempting to install files. The entry in this column
+            must match the volume label of the physical media.
+            </summary>
+        </member>
+        <member name="M:WixSharp.Media.ToXml(System.String)">
+            <summary>
+            Emits WiX XML.
+            </summary>
+            <param name="projectId">The project id.</param>
+            <returns></returns>
+        </member>
         <member name="T:WixSharp.ODBCDataSource">
              <summary>
              Represents an ODBCDataSource to be registered.
@@ -2890,17 +2994,27 @@
         </member>
         <member name="M:WixSharp.Extensions.AddAttributes(System.Xml.Linq.XElement,System.String)">
             <summary>
-            Adds the attributes to the to a given XML element (<see cref="T:System.Xml.Linq.XElement"/>).
+            Adds/sets the attributes to the to a given XML element (<see cref="T:System.Xml.Linq.XElement"/>).
+            <para>It is a renamed version of <see cref="!:WixEntity.SetAttributes"/></para>
             </summary>
             <param name="obj">The object.</param>
             <param name="attributesDefinition">The attributes definition. Rules of the composing the
-            definition are the same as for <see cref="P:WixSharp.WixEntity.AttributesDefinition"/>.</param>
+            definition are the same as for <see cref="!:WixEntity.AttributesDefinition"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WixSharp.Extensions.SetAttributes(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Sets/adds the attributes to the to a given XML element (<see cref="T:System.Xml.Linq.XElement"/>).
+            </summary>
+            <param name="obj">The object.</param>
+            <param name="attributesDefinition">The attributes definition. Rules of the composing the
+            definition are the same as for <see cref="!:WixEntity.AttributesDefinition"/>.</param>
             <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.ToXAttributes(System.String)">
             <summary>
             Converts AttributesDefinition into XAttribute array. Rules of the composing the
-            definition are the same as for <see cref="P:WixSharp.WixEntity.AttributesDefinition"/>
+            definition are the same as for <see cref="!:WixEntity.AttributesDefinition"/>
             </summary>
             <param name="attributesDefinition">The attributes definition.</param>
         </member>
@@ -2920,6 +3034,14 @@
             </summary>
             <param name="obj">The object.</param>
             <param name="nameValuePair">The attribute name/value pair of the "[name]=[value]" format (e.g. ""Version=!(bind.FileVersion.Utils.dll)").</param>
+            <returns></returns>
+        </member>
+        <member name="M:WixSharp.Extensions.AddAttributes(System.Xml.Linq.XElement,System.Collections.Generic.IEnumerable{System.Xml.Linq.XAttribute})">
+            <summary>
+            Adds the attributes to the to a given XML element (<see cref="T:System.Xml.Linq.XElement"/>).
+            </summary>
+            <param name="obj">The object.</param>
+            <param name="attributes">The attributes.</param>
             <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.AddAttributes(System.Xml.Linq.XElement,System.Collections.Generic.Dictionary{System.String,System.String})">
@@ -3073,6 +3195,31 @@
             </summary>
             <param name="value">The value.</param>
             <param name="defaultValue">The default value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WixSharp.Extensions.EndsWith(System.String,System.String,System.Boolean)">
+            <summary>
+            Tests if the text ends with the specified pattern.
+            </summary>
+            <param name="text">The text to test.</param>
+            <param name="pattern">The value.</param>
+            <param name="ignoreCase">if set to <c>true</c> [ignore case].</param>
+            <returns></returns>
+        </member>
+        <member name="M:WixSharp.Extensions.ToSingleQuots(System.String)">
+            <summary>
+            Replaces double-quotation characters with single-quotation ones.
+            </summary>
+            <param name="text">The text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WixSharp.Extensions.StartsWith(System.String,System.String,System.Boolean)">
+            <summary>
+            Tests if the text starts with the specified pattern.
+            </summary>
+            <param name="text">The text to test.</param>
+            <param name="pattern">The value.</param>
+            <param name="ignoreCase">if set to <c>true</c> [ignore case].</param>
             <returns></returns>
         </member>
         <member name="M:WixSharp.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String,System.Func{System.String,System.String})">
@@ -4396,6 +4543,12 @@
         <member name="M:WixSharp.WixExtension.ToXNamespace">
             <summary>
             Returns XmlNamespacePrefix as an instance of XNamespace
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WixSharp.WixExtension.ToXName(System.String)">
+            <summary>
+            Creates XName based on the XNamespace adn specified name.
             </summary>
             <returns></returns>
         </member>
@@ -5918,6 +6071,14 @@
             Starts the execution of the MSI installation.
             </summary>
         </member>
+        <member name="P:WixSharp.IManagedUIShell.IsDemoMode">
+            <summary>
+            Gets or sets a value indicating whether this instance is demo mode.
+            </summary>
+            <value>
+            <c>true</c> if this instance is demo mode; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="T:WixSharp.IManagedUI">
             <summary>
             Interface for an embedded external user interface implementing Wix# ManagedUI architecture (ManagedUI runtime). 
@@ -6124,6 +6285,28 @@
             <para>The default value is "INSTALLDIR,UILevel"</para>
             </summary>
         </member>
+        <member name="F:WixSharp.ManagedProject.AlwaysScheduleInitRuntime">
+            <summary>
+            Flags that indicates if <c>WixSharp_InitRuntime_Action</c> custom action should be always scheduled. The default value is <c>true</c>.
+            <para><c>WixSharp_InitRuntime_Action</c> is the action, which ManagedSetup performs at startup (before AppSearch).
+            In this action the most important MSI properties are pushed into Session.CustomActionData. These properties are typically consumed 
+            from other custom actions (e.g. Project.AfterInstall event) and they are:
+            <list type="bullet">
+            <item><description>Installed</description></item>
+            <item><description>REMOVE</description></item>
+            <item><description>ProductName</description></item>
+            <item><description>REINSTALL</description></item>
+            <item><description>UPGRADINGPRODUCTCODE</description></item>
+            <item><description>UILevel</description></item>
+            <item><description>WIXSHARP_MANAGED_UI</description></item>
+            </list>
+            </para>
+            <para>However in same cases (e.g. oversizes msi file) it is desirable to minimize amount of time the msi loaded into memory 
+            (e.g. by custom actions). Thus setting AlwaysScheduleInitRuntime to <c>false</c> will prevent scheduling <c>WixSharp_InitRuntime_Action</c>
+            unless any of the ManagedProject events (e.g. Project.AfterInstall) has user handler assigned.
+            </para>
+            </summary>
+        </member>
         <member name="M:WixSharp.ManagedProject.ReadDialogs(System.String)">
             <summary>
             Reads and returns the dialog types from the string definition. This method is to be used by WixSharp assembly.
@@ -6290,6 +6473,13 @@
             <value>
             <c>true</c> if this session is a managed UI session; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="P:WixSharp.SetupEventArgs.UpgradingProductCode">
+            <summary>
+            Gets the upgrading product code. Note this property is normally set by MSI for the 
+            uninstall session being triggered by upgrading to a higher version.
+            </summary>
+            <value>The upgrading product code.</value>
         </member>
         <member name="P:WixSharp.SetupEventArgs.Data">
             <summary>
@@ -8202,8 +8392,8 @@
                      
                  ...
                      
-             project.Media.AttributesDefinition = @"Id=2;
-                                                    CompressionLevel=mszip";
+             project.Media.Id = 2;
+             project.CompressionLevel = CompressionLevel.mszip;
                                                      
              Compiler.BuildMsi(project);
              </code>
@@ -8240,7 +8430,7 @@
         </member>
         <member name="F:WixSharp.Project.EmbeddedUI">
             <summary>
-            The Binary (assembly) implemening WiX embedded UI
+            The Binary (assembly) implementing WiX embedded UI
             </summary>
         </member>
         <member name="F:WixSharp.Project.CustomUI">
@@ -8306,7 +8496,7 @@
              <para>If you need to implement Major Upgrade define this member to appropriate 
              <see cref="F:WixSharp.Project.MajorUpgradeStrategy"/> instance.</para>
              <para><c>Note</c>: <see cref="F:WixSharp.Project.MajorUpgradeStrategy"/> yields WiX UpgradeVersion element, which is arguably the most comprehensive
-             upgrade definition. However in the later versions of WiX a simplified upgrade definition has bee introduced. It relies 
+             upgrade definition. However in the later versions of WiX a simplified upgrade definition has been introduced. It relies 
              on MajorUpgrade WiX element. For most of the upgrade scenarios you will find MajorUpgrade allows achieve the same result with 
              much less effort. Wix# supports MajorUpgrade element via  <see cref="F:WixSharp.Project.MajorUpgrade"/> member.</para>
              </summary>
@@ -10770,87 +10960,31 @@
             Base class for all Wix# related types
             </summary>
         </member>
-        <member name="T:WixSharp.Attributes">
-            <summary>
-            Alias for the <c>Dictionary&lt;string, string&gt; </c> type.
-            </summary>
-        </member>
-        <member name="T:WixSharp.Package">
-             <summary>
-             Generic <see cref="T:WixSharp.WixEntity"/> container for defining WiX <c>Package</c> element attributes.
-             <para>These attributes are the properties of the package to be placed in the Summary Information Stream. These are visible from COM through the IStream interface, and can be seen in Explorer.</para>
-            <example>The following is an example of defining the <c>Package</c> attributes.
-            <code>
-             var project = 
-                 new Project("My Product",
-                     new Dir(@"%ProgramFiles%\My Company\My Product",
-                     
-                 ...
-                     
-             project.Package.AttributesDefinition = @"AdminImage=Yes;
-                                                      Comments=Release Candidate;
-                                                      Description=Fantastic product...";
-                                                     
-             Compiler.BuildMsi(project);
-             </code>
-             </example>
-             </summary>
-        </member>
-        <member name="T:WixSharp.Media">
-             <summary>
-             Generic <see cref="T:WixSharp.WixEntity"/> container for defining WiX <c>Media</c> element attributes.
-             <para>These attributes describe a disk that makes up the source media for the installation.</para>
-            <example>The following is an example of defining the <c>Media</c> attributes.
-            <code>
-             var project = 
-                 new Project("My Product",
-                     new Dir(@"%ProgramFiles%\My Company\My Product",
-                     
-                 ...
-                     
-             project.Media.AttributesDefinition = @"Id=2;
-                                                    CompressionLevel=mszip";
-                                                     
-             Compiler.BuildMsi(project);
-             </code>
-             </example>
-             </summary>
-        </member>
-        <member name="M:WixSharp.Media.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:WixSharp.Media"/> class.
-            </summary>
-        </member>
-        <member name="T:WixSharp.WixEntity">
-            <summary>
-            Base class for all Wix# types representing WiX XML elements (entities)
-            </summary>
-        </member>
-        <member name="P:WixSharp.WixEntity.Attributes">
+        <member name="P:WixSharp.WixObject.Attributes">
             <summary>
             Collection of Attribute/Value pairs for WiX element attributes not supported directly by Wix# objects.
-            <para>You should use <c>Attributes</c> if you want to inject specific XML attributes 
+            <para>You should use <c>Attributes</c> if you want to inject specific XML attributes
             for a given WiX element.</para>
-            <para>For example <c>Hotkey</c> attribute is not supported by Wix# <see cref="T:WixSharp.Shortcut"/> 
+            <para>For example <c>Hotkey</c> attribute is not supported by Wix# <see cref="T:WixSharp.Shortcut"/>
             but if you want them to be set in the WiX source file you may achieve this be setting
             <c>WixEntity.Attributes</c> member variable:
             <para> <code>new Shortcut { Attributes= new { {"Hotkey", "0"} }</code> </para>
             <remarks>
-            You can also inject attributes into WiX components "related" to the <see cref="T:WixSharp.WixEntity"/> but not directly 
-            represented in the Wix# entities family. For example if you need to set a custom attribute for the WiX <c>Component</c> 
+            You can also inject attributes into WiX components "related" to the <see cref="T:WixSharp.WixEntity"/> but not directly
+            represented in the Wix# entities family. For example if you need to set a custom attribute for the WiX <c>Component</c>
             XML element you can use corresponding <see cref="T:WixSharp.File"/> attributes. The only difference from
             the <c>Hotkey</c> example is the composite (column separated) key name:
             <para> <code>new File { Attributes= new { {"Component:SharedDllRefCount", "yes"} }</code> </para>
             The code above will force the Wix# compiler to insert "SharedDllRefCount" attribute into <c>Component</c>
-            XML element, which is automatically generated for the <see cref="T:WixSharp.File"/>. 
+            XML element, which is automatically generated for the <see cref="T:WixSharp.File"/>.
             <para>Currently the only supported "related" attribute is  <c>Component</c>.</para>
             </remarks>
             </para>
             </summary>
         </member>
-        <member name="P:WixSharp.WixEntity.AttributesDefinition">
+        <member name="P:WixSharp.WixObject.AttributesDefinition">
             <summary>
-            Optional attributes of the <c>WiX Element</c> (e.g. Secure:YesNoPath) expressed as a string KeyValue pairs (e.g. "StartOnInstall=Yes; Sequence=1"). 
+            Optional attributes of the <c>WiX Element</c> (e.g. Secure:YesNoPath) expressed as a string KeyValue pairs (e.g. "StartOnInstall=Yes; Sequence=1").
             <para>OptionalAttributes just redirects all access calls to the <see cref="T:WixEntity.Attributes"/> member.</para>
             <para>You can also use <see cref="T:WixEntity.AttributesDefinition"/> to keep the code cleaner.</para>
             </summary>
@@ -10866,26 +11000,57 @@
             </code>
             </example>
         </member>
+        <member name="T:WixSharp.Attributes">
+            <summary>
+            Alias for the <c>Dictionary&lt;string, string&gt; </c> type.
+            </summary>
+        </member>
+        <member name="T:WixSharp.Package">
+             <summary>
+             Generic <see cref="T:WixSharp.WixEntity"/> container for defining WiX <c>Package</c> element attributes.
+             <para>These attributes are the properties of the package to be placed in the Summary Information Stream. These are visible from COM through the IStream interface, and can be seen in Explorer.</para>
+            <example>The following is an example of defining the <c>Package</c> attributes.
+            <code>
+             var project =
+                 new Project("My Product",
+                     new Dir(@"%ProgramFiles%\My Company\My Product",
+            
+                 ...
+            
+             project.Package.AttributesDefinition = @"AdminImage=Yes;
+                                                      Comments=Release Candidate;
+                                                      Description=Fantastic product...";
+            
+             Compiler.BuildMsi(project);
+             </code>
+             </example>
+             </summary>
+        </member>
+        <member name="T:WixSharp.WixEntity">
+            <summary>
+            Base class for all Wix# types representing WiX XML elements (entities)
+            </summary>
+        </member>
         <member name="F:WixSharp.WixEntity.Name">
             <summary>
-            Name of the <see cref="T:WixSharp.WixEntity"/>. 
+            Name of the <see cref="T:WixSharp.WixEntity"/>.
             <para>This value is used as a <c>Name</c> for the corresponding WiX XML element.</para>
             </summary>
         </member>
         <member name="P:WixSharp.WixEntity.Id">
             <summary>
-            Gets or sets the <c>Id</c> value of the <see cref="T:WixSharp.WixEntity"/>. 
+            Gets or sets the <c>Id</c> value of the <see cref="T:WixSharp.WixEntity"/>.
             <para>This value is used as a <c>Id</c> for the corresponding WiX XML element.</para>
             <para>If the <see cref="P:WixSharp.WixEntity.Id"/> value is not specified explicitly by the user the Wix# compiler
             generates it automatically insuring its uniqueness.</para>
             <remarks>
             <para>
-             Note: The ID auto-generation is triggered on the first access (evaluation) and in order to make the id 
-             allocation deterministic the compiler resets ID generator just before the build starts. However if you 
-             accessing any auto-id before the Build*() is called you can it interferes with the ID auto generation and eventually 
-             lead to the WiX ID duplications. To prevent this from happening either:\n" 
-             - Avoid evaluating the auto-generated IDs values before the call to Build*() 
-             - Set the IDs (to be evaluated) explicitly  
+             Note: The ID auto-generation is triggered on the first access (evaluation) and in order to make the id
+             allocation deterministic the compiler resets ID generator just before the build starts. However if you
+             accessing any auto-id before the Build*() is called you can it interferes with the ID auto generation and eventually
+             lead to the WiX ID duplications. To prevent this from happening either:\n"
+             - Avoid evaluating the auto-generated IDs values before the call to Build*()
+             - Set the IDs (to be evaluated) explicitly
              - Prevent resetting auto-ID generator by setting WixEntity.DoNotResetIdGenerator to true";
             </para>
             </remarks>
@@ -10904,8 +11069,8 @@
         </member>
         <member name="M:WixSharp.WixEntity.ResetIdGenerator">
             <summary>
-            Resets the <see cref="P:WixSharp.WixEntity.Id"/> generator. This method is exercised by the Wix# compiler before any 
-            <c>Build</c> operations to ensure reproducibility of the <see cref="P:WixSharp.WixEntity.Id"/> set between <c>Build()</c> 
+            Resets the <see cref="P:WixSharp.WixEntity.Id"/> generator. This method is exercised by the Wix# compiler before any
+            <c>Build</c> operations to ensure reproducibility of the <see cref="P:WixSharp.WixEntity.Id"/> set between <c>Build()</c>
             calls.
             </summary>
         </member>
@@ -11243,6 +11408,11 @@
         <member name="F:WixSharp.Platform.arm">
             <summary>
              Set this value to declare that the package is an arm package. This value requires that the  InstallerVersion property be set to 500 or greater.
+            </summary>
+        </member>
+        <member name="T:WixSharp.CompressionLevel">
+            <summary>
+            Indicates the compression level for a cabinet.
             </summary>
         </member>
         <member name="T:WixSharp.StoreLocation">

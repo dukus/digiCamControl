@@ -500,6 +500,13 @@
             Called when MSI execution is complete.
             </summary>
         </member>
+        <member name="M:WixSharp.UI.Forms.ProgressDialog.cancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Click event of the cancel control.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
         <member name="F:WixSharp.UI.Forms.ProgressDialog.components">
             <summary>
             Required designer variable.
@@ -1090,6 +1097,24 @@
             <param name="msiRuntime">The MSI runtime.</param>
             <param name="ui">The MSI external/embedded UI.</param>
         </member>
+        <member name="M:WixSharp.UIShell.Play(WixSharp.ManagedDialogs)">
+            <summary>
+            Plays the specified dialogs in demo mode.
+            </summary>
+            <param name="dialogs">The dialogs.</param>
+        </member>
+        <member name="M:WixSharp.UIShell.Play``1">
+            <summary>
+            Plays the specified dialog in demo mode.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:WixSharp.UIShell.Play(System.Type)">
+            <summary>
+            Plays the specified dialog in demo mode.
+            </summary>
+            <param name="dialog">The dialog.</param>
+        </member>
         <member name="M:WixSharp.UIShell.GoNext">
             <summary>
             Proceeds to the next UI dialog.
@@ -1262,7 +1287,7 @@
         </member>
         <member name="F:WixSharp.WixCLRDialog.delta">
             <summary>
-            There is some strange resizing artefact (at least on Win7) when MoveWindow does not resize the window accurately.
+            There is some strange resizing artifact (at least on Win7) when MoveWindow does not resize the window accurately.
             Thus special adjustment ('delta') is needed to fix the problem.
             <para>
             The delta value is used in the ReplaceHost method.</para>

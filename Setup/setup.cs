@@ -1,4 +1,5 @@
 using System  ;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
@@ -157,21 +158,26 @@ namespace Setup
             Compiler.PreserveTempFiles = false;
             string productMsi = Compiler.BuildMsi(project);
             string obsMsi = ObsPluginSetup.Execute();
-
+            var dict = new Dictionary<string, string>();
+            dict.Add("Visible","yes");
             var bootstrapper =new Bundle(project.Name,
             new PackageGroupRef("NetFx46Web"),
-            new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")),
-            new MsiPackage(obsMsi) { Id = "ObsPackageId", },
-            new MsiPackage(productMsi) { Id = "MyProductPackageId",});
+            //new ExePackage("vcredist_x86.exe"){InstallCommand ="/quite" },
+            new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")) { Permanent = false,Attributes = dict},
+            new MsiPackage(obsMsi) { Id = "ObsPackageId", Attributes = dict },
+            new MsiPackage(productMsi) { Id = "MyProductPackageId", DisplayInternalUI = true, Attributes = dict });
+
             bootstrapper.Copyright = project.ControlPanelInfo.Manufacturer;
             bootstrapper.Version = project.Version;
-            bootstrapper.UpgradeCode = project.UpgradeCode.Value;
-            bootstrapper.Application = new LicenseBootstrapperApplication()
-            {
-                LicensePath = Path.Combine(project.SourceBaseDir, project.LicenceFile),
-                LogoFile = project.ControlPanelInfo.ProductIcon,
+            bootstrapper.UpgradeCode = new Guid("19d12628-7654-4354-a305-3A2057E2E6C9");
+            bootstrapper.DisableModify = "yes";
+            bootstrapper.DisableRemove = true;
+            //bootstrapper.Application = new LicenseBootstrapperApplication()
+            //{
+            //    LicensePath = Path.Combine(project.SourceBaseDir, project.LicenceFile),
+            //    LogoFile = project.ControlPanelInfo.ProductIcon,
                 
-            };
+            //};
             bootstrapper.IconFile = project.ControlPanelInfo.ProductIcon;
             bootstrapper.PreserveTempFiles = true;
             bootstrapper.OutFileName = project.OutFileName;

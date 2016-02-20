@@ -1,0 +1,66 @@
+[1D5C:1B1C][2016-02-20T21:26:06]i001: Burn v3.10.0.2103, Windows v10.0 (Build 10240: Service Pack 0), path: D:\devel\vs2010\CameraControl\Setup\digiCamControlsetup_2.0.14.0.exe
+[1D5C:1B1C][2016-02-20T21:26:06]i009: Command Line: '/log log.txt'
+[1D5C:1B1C][2016-02-20T21:26:06]i000: Setting string variable 'WixBundleLog' to value 'd:\devel\vs2010\CameraControl\Setup\log.txt'
+[1D5C:1B1C][2016-02-20T21:26:06]i000: Setting string variable 'WixBundleOriginalSource' to value 'D:\devel\vs2010\CameraControl\Setup\digiCamControlsetup_2.0.14.0.exe'
+[1D5C:1B1C][2016-02-20T21:26:06]i000: Setting string variable 'WixBundleOriginalSourceFolder' to value 'D:\devel\vs2010\CameraControl\Setup\'
+[1D5C:1B1C][2016-02-20T21:26:06]i000: Setting string variable 'WixBundleName' to value 'digiCamControl'
+[1D5C:1B1C][2016-02-20T21:26:06]i000: Unsetting variable 'WixBundleManufacturer'
+[1D5C:29D0][2016-02-20T21:26:06]i000: Setting numeric variable 'WixStdBALanguageId' to value 1033
+[1D5C:29D0][2016-02-20T21:26:06]i000: Setting version variable 'WixBundleFileVersion' to value '2.0.14.0'
+[1D5C:1B1C][2016-02-20T21:26:06]i100: Detect begin, 4 packages
+[1D5C:1B1C][2016-02-20T21:26:06]i000: Setting string variable 'NETFRAMEWORK45' to value '394271'
+[1D5C:1B1C][2016-02-20T21:26:06]i102: Detected related bundle: {e76a149c-307c-420e-ad48-7ec697fbc2c0}, type: Upgrade, scope: PerMachine, version: 2.0.14.0, operation: None
+[1D5C:1B1C][2016-02-20T21:26:06]i052: Condition 'NETFRAMEWORK45 >= 393295' evaluates to true.
+[1D5C:1B1C][2016-02-20T21:26:06]w120: Detected partially cached package: MyProductPackageId, invalid payload: MyProductPackageId, reason: 0x80070570
+[1D5C:1B1C][2016-02-20T21:26:06]i101: Detected package: NetFx46Web, state: Present, cached: None
+[1D5C:1B1C][2016-02-20T21:26:06]i101: Detected package: IPCamAdapter.msi, state: Present, cached: Complete
+[1D5C:1B1C][2016-02-20T21:26:06]i101: Detected package: ObsPackageId, state: Present, cached: Complete
+[1D5C:1B1C][2016-02-20T21:26:06]i101: Detected package: MyProductPackageId, state: Present, cached: Partial
+[1D5C:1B1C][2016-02-20T21:26:06]i199: Detect complete, result: 0x0
+[1D5C:29D0][2016-02-20T21:26:13]i000: Setting numeric variable 'EulaAcceptCheckbox' to value 1
+[1D5C:1B1C][2016-02-20T21:26:13]i200: Plan begin, 4 packages, action: Install
+[1D5C:1B1C][2016-02-20T21:26:13]w321: Skipping dependency registration on package with no dependency providers: NetFx46Web
+[1D5C:1B1C][2016-02-20T21:26:13]i201: Planned package: NetFx46Web, state: Present, default requested: Present, ba requested: Present, execute: None, rollback: None, cache: No, uncache: No, dependency: None
+[1D5C:1B1C][2016-02-20T21:26:13]i201: Planned package: IPCamAdapter.msi, state: Present, default requested: Present, ba requested: Present, execute: None, rollback: None, cache: No, uncache: No, dependency: Register
+[1D5C:1B1C][2016-02-20T21:26:13]i201: Planned package: ObsPackageId, state: Present, default requested: Present, ba requested: Present, execute: None, rollback: None, cache: No, uncache: No, dependency: Register
+[1D5C:1B1C][2016-02-20T21:26:13]i201: Planned package: MyProductPackageId, state: Present, default requested: Present, ba requested: Present, execute: None, rollback: None, cache: No, uncache: No, dependency: Register
+[1D5C:1B1C][2016-02-20T21:26:13]i207: Planned related bundle: {e76a149c-307c-420e-ad48-7ec697fbc2c0}, type: Upgrade, default requested: None, ba requested: None, execute: None, rollback: None, dependency: None
+[1D5C:1B1C][2016-02-20T21:26:13]i299: Plan complete, result: 0x0
+[1D5C:1B1C][2016-02-20T21:26:13]i300: Apply begin
+[1D5C:1B1C][2016-02-20T21:26:13]i010: Launching elevated engine process.
+[1D5C:1B1C][2016-02-20T21:26:15]i011: Launched elevated engine process.
+[1D5C:1B1C][2016-02-20T21:26:15]i012: Connected to elevated engine.
+[25B0:16B8][2016-02-20T21:26:15]i358: Pausing automatic updates.
+[25B0:16B8][2016-02-20T21:26:15]i359: Paused automatic updates.
+[25B0:16B8][2016-02-20T21:26:15]i360: Creating a system restore point.
+[25B0:16B8][2016-02-20T21:26:15]w363: Could not create system restore point, error: 0x80070422. Continuing...
+[25B0:16B8][2016-02-20T21:26:15]i370: Session begin, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{96b4b756-2839-4188-aa91-d0a5847f6bce}, options: 0x7, disable resume: No
+[25B0:16B8][2016-02-20T21:26:16]i000: Caching bundle from: 'C:\Users\Duka\AppData\Local\Temp\{96b4b756-2839-4188-aa91-d0a5847f6bce}\.be\digiCamControlsetup_2.0.14.0.exe' to: 'C:\ProgramData\Package Cache\{96b4b756-2839-4188-aa91-d0a5847f6bce}\digiCamControlsetup_2.0.14.0.exe'
+[25B0:16B8][2016-02-20T21:26:16]i000: Unsetting variable 'WixBundleManufacturer'
+[25B0:16B8][2016-02-20T21:26:16]i320: Registering bundle dependency provider: {96b4b756-2839-4188-aa91-d0a5847f6bce}, version: 2.0.14.0
+[25B0:16B8][2016-02-20T21:26:16]i371: Updating session, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{96b4b756-2839-4188-aa91-d0a5847f6bce}, resume: Active, restart initiated: No, disable resume: No
+[25B0:16B8][2016-02-20T21:26:16]i323: Registering package dependency provider: {6D140BFF-7CC5-4BFE-AD6D-47035FFE5F14}, version: 2.0.0.0, package: IPCamAdapter.msi
+[25B0:16B8][2016-02-20T21:26:16]i325: Registering dependency: {96b4b756-2839-4188-aa91-d0a5847f6bce} on package provider: {6D140BFF-7CC5-4BFE-AD6D-47035FFE5F14}, package: IPCamAdapter.msi
+[25B0:16B8][2016-02-20T21:26:16]i323: Registering package dependency provider: {357E0D80-5093-478E-8C11-28B1B72096E8}, version: 1.0.0.0, package: ObsPackageId
+[25B0:16B8][2016-02-20T21:26:16]i325: Registering dependency: {96b4b756-2839-4188-aa91-d0a5847f6bce} on package provider: {357E0D80-5093-478E-8C11-28B1B72096E8}, package: ObsPackageId
+[25B0:16B8][2016-02-20T21:26:16]i323: Registering package dependency provider: {19D12628-7654-4354-A305-9AB0B32AD677}, version: 2.0.14.0, package: MyProductPackageId
+[25B0:16B8][2016-02-20T21:26:16]i325: Registering dependency: {96b4b756-2839-4188-aa91-d0a5847f6bce} on package provider: {19D12628-7654-4354-A305-9AB0B32AD677}, package: MyProductPackageId
+[25B0:16B8][2016-02-20T21:26:16]i372: Session end, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{96b4b756-2839-4188-aa91-d0a5847f6bce}, resume: ARP, restart: None, disable resume: No
+[25B0:16B8][2016-02-20T21:26:16]i371: Updating session, registration key: SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{96b4b756-2839-4188-aa91-d0a5847f6bce}, resume: ARP, restart initiated: No, disable resume: No
+[1D5C:1B1C][2016-02-20T21:26:16]i399: Apply complete, result: 0x0, restart: None, ba requested restart:  No
+[1D5C:1B1C][2016-02-20T21:26:17]i500: Shutting down, exit code: 0x0
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: EulaAcceptCheckbox = 1
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: NETFRAMEWORK45 = 394271
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleAction = 5
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleElevated = 1
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleFileVersion = 2.0.14.0
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleInstalled = 0
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleLog = d:\devel\vs2010\CameraControl\Setup\log.txt
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleName = digiCamControl
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleOriginalSource = D:\devel\vs2010\CameraControl\Setup\digiCamControlsetup_2.0.14.0.exe
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleOriginalSourceFolder = D:\devel\vs2010\CameraControl\Setup\
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleProviderKey = {96b4b756-2839-4188-aa91-d0a5847f6bce}
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleTag = 
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixBundleVersion = 2.0.14.0
+[1D5C:1B1C][2016-02-20T21:26:17]i410: Variable: WixStdBALanguageId = 1033
+[1D5C:1B1C][2016-02-20T21:26:17]i007: Exit code: 0x0, restarting: No
