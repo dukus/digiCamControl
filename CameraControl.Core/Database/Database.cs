@@ -95,7 +95,7 @@ namespace CameraControl.Core.Database
             var e = Table<DbFile>().LastOrDefault(x => x.FileId == fileItem.Id);
             if (e == null)
             {
-                var dbfile = new DbFile(fileItem);
+                var dbfile = new DbFile(fileItem,"","",ServiceProvider.Settings.DefaultSession.Name);
                 Insert(dbfile);
             }
             else

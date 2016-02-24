@@ -192,10 +192,16 @@ namespace CameraControl.Plugins.ToolPlugins
                     Summary.Add(new NamedValue<string>("Total photos", Files.Count.ToString()));
                     Summary.Add(new NamedValue<string>("Total used session", Sessions.Count.ToString()));
                     Summary.Add(new NamedValue<string>("Total used cameras", Cameras.Count.ToString()));
-                    Summary.Add(new NamedValue<string>("Most used apperture", Files.GroupBy(x => x.F).OrderByDescending(x => x.Count()).First().Key));
-                    Summary.Add(new NamedValue<string>("Most used exposure", Files.GroupBy(x => x.E).OrderByDescending(x => x.Count()).First().Key));
-                    Summary.Add(new NamedValue<string>("Most used ISO", Files.GroupBy(x => x.Iso).OrderByDescending(x => x.Count()).First().Key));
-                   
+
+                    if (Files.Count > 0)
+                    {
+                        Summary.Add(new NamedValue<string>("Most used apperture",
+                            Files.GroupBy(x => x.F).OrderByDescending(x => x.Count()).First().Key));
+                        Summary.Add(new NamedValue<string>("Most used exposure",
+                            Files.GroupBy(x => x.E).OrderByDescending(x => x.Count()).First().Key));
+                        Summary.Add(new NamedValue<string>("Most used ISO",
+                            Files.GroupBy(x => x.Iso).OrderByDescending(x => x.Count()).First().Key));
+                    }
                 }
             }
             catch (Exception ex)
