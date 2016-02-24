@@ -404,8 +404,15 @@ namespace CameraControl.windows
                                 {
                                     if (prop.Value != "OFF")
                                     {
-                                        expDelay = int.Parse(prop.Value.Substring(0, 1));
-                                        //expDelay = (int)prop.NumericValue;
+                                        expDelay = 0;
+                                        if (prop.Value == "ON")
+                                        {
+                                            expDelay = 2;
+                                        }
+                                        else
+                                        {
+                                            int.TryParse(prop.Value.Substring(0, 1), out _expDelay);                                            
+                                        }
                                         CountDown += expDelay;
                                     }
                                     else
