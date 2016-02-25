@@ -27,13 +27,13 @@
         <wpf:Colorpicker Grid.Row="0" Grid.Column="1" Margin="3" SelectedColor="{Binding BackgroundColor, Mode=TwoWay}" />
 
         <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="Hue Tolerance" Padding="0"/>
-        <Slider Grid.Row="1" Grid.Column="1" Margin="3" Minimum="0" Maximum="360" Value="{Binding Hue}" ToolTip="The value tells how far from the key color hue the filter should work, &#x0a; a higher value will remove more around the edges but can cause some cut-away."/>
+        <Slider Grid.Row="1" Grid.Column="1" Margin="3" Minimum="0" Maximum="360" Value="{Binding Hue}" ToolTip="The value tells how far from the key color hue the filter should work, &#x0a; a higher value will remove more around the edges but can cause some cut-away." AutoToolTipPlacement="TopLeft"/>
 
         <Label Grid.Row="2" Grid.Column="0" Margin="3" Content="Brigthness Tolerance" Padding="0"/>
-        <Slider Grid.Row="2" Grid.Column="1" Margin="3" Minimum="0" Maximum="100" Value="{Binding Brigthness}" />
+        <Slider Grid.Row="2" Grid.Column="1" Margin="3" Minimum="0" Maximum="100" Value="{Binding Brigthness}" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" />
 
         <Label Grid.Row="3" Grid.Column="0" Margin="3" Content="Saturnation Tolerance" Padding="0"/>
-        <Slider Grid.Row="3" Grid.Column="1" Margin="3" Minimum="0" Maximum="100" Value="{Binding Saturnation}" />
+        <Slider Grid.Row="3" Grid.Column="1" Margin="3" Minimum="0" Maximum="100" Value="{Binding Saturnation}" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" />
 
         <Label Grid.Row="4" Grid.Column="0" Margin="3" Content="Background file" Padding="0"/>
         <Button Grid.Row="4" Grid.Column="1" Margin="3" Content="Browse" Command="{Binding BrowseCommand}"/>
