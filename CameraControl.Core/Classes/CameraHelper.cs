@@ -187,5 +187,46 @@ namespace CameraControl.Core.Classes
             //    cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
             return property;
         }
+
+        public static PropertyValue<long> GetProperty(this ICameraDevice cameraDevice,uint cod)
+        {
+            foreach (var property in cameraDevice.AdvancedProperties)
+            {
+                if (property.Code == cod)
+                    return property;
+            }
+            return cameraDevice.Properties.FirstOrDefault(property => property.Code == cod);
+        }
+
+        public static string GetPropertyValue(this ICameraDevice cameraDevice, uint cod)
+        {
+            var pro = cameraDevice.GetProperty(cod);
+            if(pro!=null)
+            return pro.Value;
+            return null;
+        }
+
+        public static int GetExposureDelay(this ICameraDevice cameraDevice)
+        {
+            var prop = cameraDevice.GetProperty(0xD06A);
+            if (prop != null)
+            {
+                if (prop.Value != "OFF")
+                {
+                    if (prop.Value == "ON")
+                    {
+                        return 2;
+                    }
+                    else
+                    {
+                        int expDelay;
+                        int.TryParse(prop.Value.Substring(0, 1), out expDelay);
+                        return expDelay;
+                    }
+                }
+            }
+            return 0;
+        }
+
     }
 }

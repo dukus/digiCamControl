@@ -398,30 +398,9 @@ namespace CameraControl.windows
                     {
                         if (CameraDevice.GetCapability(CapabilityEnum.Bulb))
                         {
-                            AsyncObservableCollection<PropertyValue<long>> coll = CameraDevice.AdvancedProperties;
-                            foreach (PropertyValue<long> prop in coll)
-                                if (prop.Code == 0xD06A && !string.IsNullOrEmpty(prop.Value) )//.Name == "Exposure delay mode")
-                                {
-                                    if (prop.Value != "OFF")
-                                    {
-                                        expDelay = 0;
-                                        if (prop.Value == "ON")
-                                        {
-                                            expDelay = 2;
-                                        }
-                                        else
-                                        {
-                                            int.TryParse(prop.Value.Substring(0, 1), out _expDelay);                                            
-                                        }
-                                        CountDown += expDelay;
-                                    }
-                                    else
-                                        expDelay = 0;
-                                }
-                                else if (prop.Code == NikonBase.CONST_PROP_NoiseReduction && prop.Value != null)
-                                {
-                                    waitDelay = prop.Value == "ON" ? CaptureTime : 0;
-                                }
+                            expDelay = CameraDevice.GetExposureDelay();
+                            CountDown += expDelay;
+                            waitDelay = CameraDevice.GetPropertyValue(NikonBase.CONST_PROP_NoiseReduction) == "ON" ? CaptureTime : 0;
                             ServiceProvider.DeviceManager.LastCapturedImage[CameraDevice] = "";
                             CameraDevice.IsBusy = true;
                             CameraDevice.LockCamera();
