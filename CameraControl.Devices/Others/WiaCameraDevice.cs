@@ -450,12 +450,12 @@ namespace CameraControl.Devices.Others
             Item tem = Device.GetItem(itemId);
             ImageFile imageFile = (ImageFile) tem.Transfer("{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}");
             PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
-                                              {
-                                                  EventArgs = imageFile,
-                                                  CameraDevice = this,
-                                                  FileName = "00000." + imageFile.FileExtension,
-                                                  Handle = imageFile
-                                              };
+            {
+                EventArgs = imageFile,
+                CameraDevice = this,
+                FileName = "00000." + imageFile.FileExtension,
+                Handle = new object[] {imageFile, itemId}
+            };
             OnPhotoCapture(this, args);
             OnCaptureCompleted(this, new EventArgs());
         }
@@ -692,7 +692,7 @@ namespace CameraControl.Devices.Others
 
         public override void TransferFile(object o, string filename)
         {
-            ImageFile deviceEventArgs = o as ImageFile;
+            ImageFile deviceEventArgs = ((object[])(o))[0] as ImageFile;
             if (deviceEventArgs != null)
             {
                 deviceEventArgs.SaveFile(filename);
@@ -700,6 +700,21 @@ namespace CameraControl.Devices.Others
         }
 
         //public override event PhotoCapturedEventHandler PhotoCaptured;
+
+        public override bool DeleteObject(DeviceObject deviceObject)
+        {
+            string id = (string)((object[]) (deviceObject.Handle))[1];
+            for (int j = 1; j <= Device.Items.Count; j++)
+            {
+                if (Device.Items[j].ItemID == id)
+                {
+                    Device.Items.Remove(j);
+                    break;
+                }
+
+            }
+            return true;
+        }
 
         #endregion
     }
