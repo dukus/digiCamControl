@@ -19,7 +19,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
-    public class EnfusePluginViewModel : ViewModelBase
+    public class EnfusePluginViewModel : StackViewModel
     {
         private List<string> _filenames = new List<string>();
         private string _tempdir = "";
@@ -29,35 +29,23 @@ namespace CameraControl.Plugins.ToolPlugins
         private bool _shouldStop;
         private Process _alignProcess;
         private Process _enfuseProcess;
-        private ObservableCollection<FileItem> _files;
         private PluginSetting _pluginSetting;
         private bool _exposureEnabled;
         private bool _contrastEnabled;
         private bool _saturationEnabled;
         private bool _muEnabled;
         private bool _sigmaEnabled;
-        private BitmapSource _previewBitmap;
         private FileItem _selectedFileItem;
-        private AsyncObservableCollection<string> _output;
-        private bool _isBusy;
 
         public RelayCommand ResetCommand { get; set; }
         public RelayCommand PreviewCommand { get; set; }
         public RelayCommand GenerateCommand { get; set; }
-        public RelayCommand ReloadCommand { get; set; }
+
         public RelayCommand StopCommand { get; set; }
         public RelayCommand ConfPluginCommand { get; set; }
-        public GalaSoft.MvvmLight.Command.RelayCommand<FileItem> RemoveItemCommand { get; set; }
+
         
-        public ObservableCollection<FileItem> Files
-        {
-            get { return _files; }
-            set
-            {
-                _files = value;
-                RaisePropertyChanged(() => Files);
-            }
-        }
+
 
         public PluginSetting PluginSetting
         {
@@ -260,25 +248,7 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
-        public BitmapSource PreviewBitmap
-        {
-            get { return _previewBitmap; }
-            set
-            {
-                _previewBitmap = value;
-                RaisePropertyChanged(()=>PreviewBitmap);
-            }
-        }
 
-        public AsyncObservableCollection<string> Output
-        {
-            get { return _output; }
-            set
-            {
-                _output = value;
-                RaisePropertyChanged(()=>Output);
-            }
-        }
 
 
         public bool UseSmallThumb
@@ -289,27 +259,6 @@ namespace CameraControl.Plugins.ToolPlugins
                 PluginSetting["UseSmallThumb"] = value;
                 RaisePropertyChanged(() => UseSmallThumb);
             }
-        }
-
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                _isBusy = value;
-                RaisePropertyChanged(() => IsBusy);
-                RaisePropertyChanged(() => IsFree);
-            }
-        }
-
-        public bool IsFree
-        {
-            get { return !IsBusy; }
-        }
-
-        public PhotoSession Session
-        {
-            get { return ServiceProvider.Settings.DefaultSession; }
         }
 
         public EnfusePluginViewModel()
@@ -327,11 +276,10 @@ namespace CameraControl.Plugins.ToolPlugins
                 SetEnabled();
                 ResetCommand = new RelayCommand(SetDefault);
                 PreviewCommand = new RelayCommand(Preview);
-                ReloadCommand = new RelayCommand(Reload);
                 GenerateCommand=new RelayCommand(Generate);
                 StopCommand=new RelayCommand(Stop);
                 ConfPluginCommand = new RelayCommand(ConfPlugin);
-                RemoveItemCommand = new GalaSoft.MvvmLight.Command.RelayCommand<FileItem>(RemoveItem);
+                InitCommands();
                 Output = new AsyncObservableCollection<string>();
                 LoadData();
                 _pathtoalign = Path.Combine(Settings.ApplicationFolder, "Tools", "align_image_stack.exe");
@@ -349,12 +297,6 @@ namespace CameraControl.Plugins.ToolPlugins
 
                 _pathtoenfuse = Path.Combine(Settings.ApplicationFolder, "Tools", "x64", "enfuse.exe");
             }
-        }
-
-        private void RemoveItem(FileItem obj)
-        {
-            if (Files.Contains(obj))
-                Files.Remove(obj);
         }
 
         void WindowsManager_Event(string cmd, object o)
@@ -424,26 +366,6 @@ namespace CameraControl.Plugins.ToolPlugins
             {
 
             }
-        }
-
-        private void LoadData()
-        {
-            if (Session.Files.Count == 0 || ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            var files = Session.GetSelectedFiles();
-            if (files.Count>0)
-            {
-                Files = files;
-            }
-            else
-            {
-                Files = Session.GetSeries(ServiceProvider.Settings.SelectedBitmap.FileItem.Series);
-            }
-        }
-
-        private void Reload()
-        {
-            LoadData();
         }
 
         private void Preview()
@@ -558,7 +480,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 OnProgressChange("Copying files");
                 _tempdir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 Directory.CreateDirectory(_tempdir);
-                foreach (FileItem fileItem in _files)
+                foreach (FileItem fileItem in Files)
                 {
                     string randomFile = Path.Combine(_tempdir, "image_" + counter.ToString("0000") + ".jpg");
                     OnProgressChange("Copying file " + fileItem.Name);
@@ -652,11 +574,11 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 OnProgressChange("Enfuse images ..");
                 OnProgressChange("This may take few minutes too");
-                _resulfile = Path.Combine(_tempdir, Path.GetFileName(_files[0].FileName) + _files.Count + "_enfuse.jpg");
+                _resulfile = Path.Combine(_tempdir, Path.GetFileName(Files[0].FileName) + Files.Count + "_enfuse.jpg");
                 _resulfile =
                     StaticHelper.GetUniqueFilename(
-                        Path.GetDirectoryName(_files[0].FileName) + "\\" +
-                        Path.GetFileNameWithoutExtension(_files[0].FileName) + "_enfuse", 0, ".jpg");
+                        Path.GetDirectoryName(Files[0].FileName) + "\\" +
+                        Path.GetFileNameWithoutExtension(Files[0].FileName) + "_enfuse", 0, ".jpg");
                 _resulfile = Path.Combine(_tempdir, Path.GetFileName(_resulfile));
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append(" -o " + _resulfile);
