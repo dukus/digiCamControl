@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -19,7 +18,11 @@ namespace CameraControl.Plugins.ToolPlugins
         private BitmapSource _previewBitmap;
         private AsyncObservableCollection<string> _output;
         private bool _isBusy;
-        
+        protected List<string> _filenames = new List<string>();
+        protected bool _shouldStop;
+        protected string _resulfile = "";
+        protected string _tempdir = "";
+   
         public ObservableCollection<FileItem> Files
         {
             get { return _files; }
@@ -73,6 +76,12 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public GalaSoft.MvvmLight.Command.RelayCommand<FileItem> RemoveItemCommand { get; set; }
         public RelayCommand ReloadCommand { get; set; }
+        public RelayCommand ResetCommand { get; set; }
+        public RelayCommand PreviewCommand { get; set; }
+        public RelayCommand GenerateCommand { get; set; }
+
+        public RelayCommand StopCommand { get; set; }
+        public RelayCommand ConfPluginCommand { get; set; }
 
         public void InitCommands()
         {
@@ -106,6 +115,24 @@ namespace CameraControl.Plugins.ToolPlugins
             LoadData();
         }
 
+        public void OnProgressChange(string text)
+        {
+            if (text != null)
+                Output.Insert(0, text);
+        }
 
+        public void OnActionDone()
+        {
+            try
+            {
+                if (Directory.Exists(_tempdir))
+                    Directory.Delete(_tempdir, true);
+            }
+            catch (Exception)
+            {
+                Log.Error("Error  delete temp folder");
+                throw;
+            }
+        }
     }
 }

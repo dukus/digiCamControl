@@ -1,32 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.Plugins.ImageTransformPlugins;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
     public class EnfusePluginViewModel : StackViewModel
     {
-        private List<string> _filenames = new List<string>();
-        private string _tempdir = "";
         private string _pathtoalign = "";
         private string _pathtoenfuse = "";
-        private string _resulfile = "";
-        private bool _shouldStop;
         private Process _alignProcess;
         private Process _enfuseProcess;
         private PluginSetting _pluginSetting;
@@ -37,14 +29,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private bool _sigmaEnabled;
         private FileItem _selectedFileItem;
 
-        public RelayCommand ResetCommand { get; set; }
-        public RelayCommand PreviewCommand { get; set; }
-        public RelayCommand GenerateCommand { get; set; }
-
-        public RelayCommand StopCommand { get; set; }
-        public RelayCommand ConfPluginCommand { get; set; }
-
-        
+    
 
 
         public PluginSetting PluginSetting
@@ -249,8 +234,6 @@ namespace CameraControl.Plugins.ToolPlugins
         }
 
 
-
-
         public bool UseSmallThumb
         {
             get { return PluginSetting.GetBool("UseSmallThumb"); }
@@ -276,7 +259,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 SetEnabled();
                 ResetCommand = new RelayCommand(SetDefault);
                 PreviewCommand = new RelayCommand(Preview);
-                GenerateCommand=new RelayCommand(Generate);
+                GenerateCommand = new RelayCommand(Generate);
                 StopCommand=new RelayCommand(Stop);
                 ConfPluginCommand = new RelayCommand(ConfPlugin);
                 InitCommands();
@@ -337,7 +320,7 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
-        void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        void window_Closing(object sender, CancelEventArgs e)
         {
             ServiceProvider.FileTransfered -= ServiceProvider_FileTransfered;
             ServiceProvider.WindowsManager.Event -= WindowsManager_Event;
@@ -508,19 +491,6 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
-        private void OnActionDone()
-        {
-            try
-            {
-                if (Directory.Exists(_tempdir))
-                    Directory.Delete(_tempdir, true);
-            }
-            catch (Exception)
-            {
-                Log.Error("Error  delete temp folder");
-                throw;
-            }
-        }
 
         private void AlignImagesProcess()
         {
@@ -645,10 +615,6 @@ namespace CameraControl.Plugins.ToolPlugins
             OnProgressChange(e.Data);
         }
 
-        private void OnProgressChange(string text)
-        {
-            if (text != null)
-                Output.Insert(0, text);
-        }
+
     }
 }

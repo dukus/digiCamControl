@@ -55,5 +55,57 @@
                 <Button Grid.Row="1" Content="Reload current series" Margin="3" Command="{Binding ReloadCommand}"/>
             </Grid>
         </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Settings" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="144*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="3" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!--<Label Grid.Row="1" Content="Contrast Window Size"/>
+                    <controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="3" Maximum="3" Value="{Binding ContrastWindowSize}" ToolTip="If there are halos around high contrast edges, you can try increasing the "/>-->
+
+                </Grid>
+                <StackPanel Orientation="Vertical" Grid.Row="6" IsEnabled="{Binding IsFree}">
+                    <Button Content="Transform plugin" Grid.Column="2" Grid.Row="3" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                    <Button Content="Preview" Margin="3" Command="{Binding PreviewCommand}" />
+                    <Button Content="Create final image" Margin="3" Command="{Binding GenerateCommand}" />
+                </StackPanel>
+                <Button Grid.Row="7" Content="Stop" Command="{Binding StopCommand}" Margin="3" IsEnabled="{Binding IsBusy}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="2" Header="Preview">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="169*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Margin="3" Source="{Binding PreviewBitmap}"/>
+                <controls:ProgressRing IsActive="{Binding Path=IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="150" Width="150" />
+                <CheckBox Grid.Row="1" Content="Auto preview when new image captured" Margin="3" IsChecked="{Binding AutoPreview}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Column="2" Header="Output" Grid.Row="1" >
+            <ListBox ItemsSource="{Binding Output}"/>
+        </GroupBox>
     </Grid>
 </controls:MetroWindow>
