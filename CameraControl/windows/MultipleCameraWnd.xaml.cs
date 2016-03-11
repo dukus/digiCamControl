@@ -97,6 +97,15 @@ namespace CameraControl.windows
         {
             switch (cmd)
             {
+                case WindowsCmdConsts.MultipleCamera_Start:
+                    Dispatcher.Invoke(() => btn_shot_Click(null, null));
+                    break;
+                case WindowsCmdConsts.MultipleCamera_Stop:
+                    Dispatcher.Invoke(() => btn_stop_Click(null, null));
+                    break;
+                case WindowsCmdConsts.MultipleCamera_Reset:
+                    Dispatcher.Invoke(() => btn_resetCounters_Click(null, null));
+                    break;
                 case WindowsCmdConsts.MultipleCameraWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
                                                      {
@@ -345,6 +354,11 @@ namespace CameraControl.windows
             {
                 Log.Error("Unable to format device ", exception);
             }
+        }
+
+        private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            TriggerClass.KeyDown(e);
         }
     }
 }

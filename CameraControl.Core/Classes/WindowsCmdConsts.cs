@@ -46,6 +46,9 @@ namespace CameraControl.Core.Classes
         public const string BrowseWnd_Hide = "BrowseWnd_Hide";
         public const string MultipleCameraWnd_Show = "MultipleCameraWnd_Show";
         public const string MultipleCameraWnd_Hide = "MultipleCameraWnd_Hide";
+        public const string MultipleCamera_Start = "MultipleCamera_Start";
+        public const string MultipleCamera_Stop = "MultipleCamera_Stop";
+        public const string MultipleCamera_Reset = "MultipleCamera_Reset";
         public const string CameraPropertyWnd_Show = "CameraPropertyWnd_Show";
         public const string CameraPropertyWnd_Hide = "CameraPropertyWnd_Hide";
         public const string FullScreenWnd_Show = "FullScreenWnd_Show";

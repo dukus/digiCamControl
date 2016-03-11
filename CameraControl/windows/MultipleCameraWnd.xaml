@@ -7,7 +7,7 @@
                       xmlns:local="clr-namespace:CameraControl.Controls"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
-                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" >
+                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" PreviewKeyDown="MetroWindow_PreviewKeyDown" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
