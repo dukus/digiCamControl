@@ -127,6 +127,8 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 if (Directory.Exists(_tempdir))
                     Directory.Delete(_tempdir, true);
+                if (File.Exists(_resulfile))
+                    File.Delete(_resulfile);
             }
             catch (Exception)
             {

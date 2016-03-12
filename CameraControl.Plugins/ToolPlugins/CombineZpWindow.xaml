@@ -59,7 +59,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -69,7 +69,6 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="3" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -79,6 +78,16 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Label Content="Macro" Margin="5"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Macros}" SelectedItem="{Binding Macro}" Margin="5"/>
+                    <TextBlock Grid.Row="2" Text="ConbineZP home page" Cursor="Hand" FontStyle="Italic" HorizontalAlignment="Right" MouseDown="TextBlock_MouseDown">
+                        <TextBlock.TextDecorations>
+                            <TextDecoration>
+                                <TextDecoration.Pen>
+                                    <Pen />
+                                </TextDecoration.Pen>
+                            </TextDecoration>
+                        </TextBlock.TextDecorations></TextBlock>
                     <!--<Label Grid.Row="1" Content="Contrast Window Size"/>
                     <controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="3" Maximum="3" Value="{Binding ContrastWindowSize}" ToolTip="If there are halos around high contrast edges, you can try increasing the "/>-->
 

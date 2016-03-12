@@ -25,6 +25,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private Process _enfuseProcess;
         private PluginSetting _pluginSetting;
         private string _pathtoenfuse = "";
+        private string _combineZpFolder;
 
 
         public PluginSetting PluginSetting
@@ -49,6 +50,29 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public string CombineZpFolder
+        {
+            get { return PluginSetting["CombineZpFolder"] as string; }
+            set
+            {
+                PluginSetting["CombineZpFolder"] = value;
+                RaisePropertyChanged(()=>CombineZpFolder);
+            }
+        }
+
+        public List<string> Macros { get; set; }
+
+        public string Macro
+        {
+            get { return PluginSetting["Macro"] as string; }
+            set
+            {
+                PluginSetting["Macro"] = value;
+                RaisePropertyChanged(() => Macro);
+            }
+        }
+
+
         public bool UseSmallThumb
         {
             get { return PluginSetting.GetBool("UseSmallThumb"); }
@@ -68,6 +92,7 @@ namespace CameraControl.Plugins.ToolPlugins
         {
             InitCommands();
             Output = new AsyncObservableCollection<string>();
+            Macros = new List<string>();
             LoadData();
             window.Closing += window_Closing;
             ServiceProvider.FileTransfered += ServiceProvider_FileTransfered;
@@ -77,7 +102,23 @@ namespace CameraControl.Plugins.ToolPlugins
             GenerateCommand = new RelayCommand(Generate);
             StopCommand = new RelayCommand(Stop);
             ConfPluginCommand = new RelayCommand(ConfPlugin);
-            _pathtoenfuse = @"c:\Program Files (x86)\Alan Hadley\CombineZP\CombineZP.exe";
+            CombineZpFolder = @"c:\Program Files (x86)\Alan Hadley\CombineZP\";
+            _pathtoenfuse = Path.Combine(CombineZpFolder, "CombineZP.exe");
+            PopulateMacros();
+            if (string.IsNullOrEmpty(Macro))
+                Macro = "Do Weighted Average";
+        }
+
+        private void PopulateMacros()
+        {
+            if (Directory.Exists(CombineZpFolder))
+            {
+                var files = Directory.GetFiles(CombineZpFolder, "*.czm");
+                foreach (string file in files)
+                {
+                    Macros.Add(Path.GetFileNameWithoutExtension(file));
+                }
+            }
         }
 
         private void ConfPlugin()
@@ -233,16 +274,12 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 OnProgressChange("Enfuse images ..");
                 OnProgressChange("This may take few minutes too");
-                _resulfile = Path.Combine(_tempdir, Path.GetFileName(Files[0].FileName) + Files.Count + "_enfuse.tif");
-                _resulfile =
-                    StaticHelper.GetUniqueFilename(
-                        Path.GetDirectoryName(Files[0].FileName) + "\\" +
-                        Path.GetFileNameWithoutExtension(Files[0].FileName) + "_enfuse", 0, ".jpg");
-                _resulfile = Path.Combine(_tempdir, Path.GetFileName(_resulfile));
+                _resulfile = Path.Combine(_tempdir, Path.GetFileNameWithoutExtension(Files[0].FileName) + Files.Count + ".jpg");
+                _resulfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(_resulfile));
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append("\""+Path.GetDirectoryName(_filenames[0])+"\" ");
-                //stringBuilder.Append(_resulfile+" ");
-                stringBuilder.Append("\"Do Stack/Do Stack (for Batch Processing)\" ");
+                stringBuilder.Append("\""+Macro+"\" ");
+                stringBuilder.Append(_resulfile + " ");
                 stringBuilder.Append("-q -k +j100");
 
                 Process newprocess = new Process();

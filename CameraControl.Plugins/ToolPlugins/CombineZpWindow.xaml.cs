@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CameraControl.Core.Classes;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
@@ -23,6 +24,11 @@ namespace CameraControl.Plugins.ToolPlugins
         public CombineZpWindow()
         {
             InitializeComponent();
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PhotoUtils.Run("http://www.hadleyweb.pwp.blueyonder.co.uk/");
         }
     }
 }
