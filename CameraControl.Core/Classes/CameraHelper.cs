@@ -53,7 +53,7 @@ namespace CameraControl.Core.Classes
                 var camera = o as ICameraDevice;
                 if (camera != null)
                 {
-                    ServiceProvider.DeviceManager.LastCapturedImage[camera] = "";
+                    ServiceProvider.DeviceManager.LastCapturedImage[camera] = "-";
                     CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
                     for (int i = 0; i < property.Delay; i++)
                     {

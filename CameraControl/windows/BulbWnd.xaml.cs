@@ -401,7 +401,7 @@ namespace CameraControl.windows
                             expDelay = CameraDevice.GetExposureDelay();
                             CountDown += expDelay;
                             waitDelay = CameraDevice.GetPropertyValue(NikonBase.CONST_PROP_NoiseReduction) == "ON" ? CaptureTime : 0;
-                            ServiceProvider.DeviceManager.LastCapturedImage[CameraDevice] = "";
+                            ServiceProvider.DeviceManager.LastCapturedImage[CameraDevice] = "-";
                             CameraDevice.IsBusy = true;
                             CameraDevice.LockCamera();
                             CameraDevice.StartBulbMode();

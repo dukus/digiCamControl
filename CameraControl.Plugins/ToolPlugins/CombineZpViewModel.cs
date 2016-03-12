@@ -241,9 +241,9 @@ namespace CameraControl.Plugins.ToolPlugins
                 _resulfile = Path.Combine(_tempdir, Path.GetFileName(_resulfile));
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append("\""+Path.GetDirectoryName(_filenames[0])+"\" ");
-                stringBuilder.Append("\"Do Stack\" ");
-                stringBuilder.Append(_resulfile+" ");
-                stringBuilder.Append("-q +j100");
+                //stringBuilder.Append(_resulfile+" ");
+                stringBuilder.Append("\"Do Stack/Do Stack (for Batch Processing)\" ");
+                stringBuilder.Append("-q -k +j100");
 
                 Process newprocess = new Process();
                 newprocess.StartInfo = new ProcessStartInfo()
@@ -254,7 +254,8 @@ namespace CameraControl.Plugins.ToolPlugins
                     WindowStyle = ProcessWindowStyle.Minimized,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
-                    RedirectStandardError = true
+                    RedirectStandardError = true,
+                    WorkingDirectory = Path.GetDirectoryName(_filenames[0])
                 };
                 newprocess.Start();
                 _enfuseProcess = newprocess;

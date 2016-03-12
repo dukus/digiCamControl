@@ -197,6 +197,8 @@ namespace CameraControl.Core.Scripting
                     return device.CompressionSetting.Value;
                 case "lastcaptured":
                     if (!ServiceProvider.DeviceManager.LastCapturedImage.ContainsKey(device) || string.IsNullOrEmpty(ServiceProvider.DeviceManager.LastCapturedImage[device]))
+                        return "?";
+                    if (ServiceProvider.DeviceManager.LastCapturedImage[device] == "-")
                         return "-";
                     return Path.GetFileName(ServiceProvider.DeviceManager.LastCapturedImage[device]);
                 case "session":
