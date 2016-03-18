@@ -353,5 +353,10 @@ namespace CameraControl.Core
                 }
             }
         }
+
+        public IExecutePlugin GetExecutePlugin(string id)
+        {
+            return ToolPlugins.Where(plugin => plugin.Id == id && plugin is IExecutePlugin).Cast<IExecutePlugin>().FirstOrDefault();
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private bool _isBusy;
         protected List<string> _filenames = new List<string>();
         protected bool _shouldStop;
-        protected string _resulfile = "";
+        public string _resulfile = "";
         protected string _tempdir = "";
    
         public ObservableCollection<FileItem> Files

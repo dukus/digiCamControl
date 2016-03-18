@@ -17,6 +17,7 @@ using CameraControl.Devices.Classes;
 using CameraControl.Plugins.ImageTransformPlugins;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
+using Newtonsoft.Json;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
@@ -189,12 +190,18 @@ namespace CameraControl.Plugins.ToolPlugins
 
         private void Generate()
         {
-            Output.Clear();
-            _shouldStop = false;
+            Init();
             Task.Factory.StartNew(GenerateTask);
         }
 
-        private void CopyFiles(bool preview)
+        public void Init()
+        {
+            Output.Clear();
+            _shouldStop = false;
+           
+        }
+
+        public void CopyFiles(bool preview)
         {
             int counter = 0;
             try
@@ -230,12 +237,13 @@ namespace CameraControl.Plugins.ToolPlugins
                 _shouldStop = true;
             }
         }
+
         private void GenerateTask()
         {
             IsBusy = true;
             CopyFiles(false);
             if (!_shouldStop)
-                EnfuseImge();
+                Combine();
             if (File.Exists(_resulfile))
             {
                 string newFile = Path.Combine(Path.GetDirectoryName(Files[0].FileName),
@@ -263,12 +271,12 @@ namespace CameraControl.Plugins.ToolPlugins
             IsBusy = true;
             CopyFiles(true);
             if (!_shouldStop)
-                EnfuseImge();
+                Combine();
             OnActionDone();
             IsBusy = false;
         }
 
-        private void EnfuseImge()
+        public void Combine()
         {
             try
             {

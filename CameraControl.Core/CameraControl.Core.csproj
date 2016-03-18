@@ -238,6 +238,7 @@
     <Compile Include="Database\DbFile.cs" />
     <Compile Include="Database\EventType.cs" />
     <Compile Include="Interfaces\IAutoExportPlugin.cs" />
+    <Compile Include="Interfaces\IExecutePlugin.cs" />
     <Compile Include="Interfaces\IExportPlugin.cs" />
     <Compile Include="Interfaces\IExternalDevice.cs" />
     <Compile Include="Interfaces\IFilenameTemplate.cs" />
