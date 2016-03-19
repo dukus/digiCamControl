@@ -190,6 +190,7 @@ namespace CameraControl.Devices
             WifiDeviceProviders.Add(new DDServerProvider());
             WifiDeviceProviders.Add(new PtpIpProvider());
             WifiDeviceProviders.Add(new YiCameraProvider());
+            WifiDeviceProviders.Add(new SonyProvider());
         }
 
         public CameraDeviceManager(string datafolder=null)

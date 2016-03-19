@@ -150,6 +150,7 @@
     <Compile Include="Nikon\NikonL830.cs" />
     <Compile Include="Others\FakeCameraDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
+    <Compile Include="Others\SonyWifiCamera.cs" />
     <Compile Include="Others\WiaCameraDevice.cs" />
     <Compile Include="Others\YiCamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,9 +183,11 @@
     <Compile Include="TransferProtocol\PtpIp\PtpIpHeader.cs" />
     <Compile Include="TransferProtocol\PtpIpProtocol.cs" />
     <Compile Include="TransferProtocol\PtpIp\StartDataPacket.cs" />
+    <Compile Include="TransferProtocol\SonyTransferProtocol.cs" />
     <Compile Include="TransferProtocol\YiCameraProtocol.cs" />
     <Compile Include="Wifi\DDServerProvider.cs" />
     <Compile Include="Wifi\PtpIpProvider.cs" />
+    <Compile Include="Wifi\SonyProvider.cs" />
     <Compile Include="Wifi\YiCameraProvider.cs" />
     <Compile Include="Xml\XmlCommandDescriptor.cs" />
     <Compile Include="Xml\XmlDataManager.cs" />
