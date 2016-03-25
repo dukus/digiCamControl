@@ -527,6 +527,7 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(HDREv());
             AdvancedProperties.Add(HDRSmoothing());
             AdvancedProperties.Add(ActiveSlot());
+            AdvancedProperties.Add(LensSort());
 
             try
             {
@@ -541,12 +542,27 @@ namespace CameraControl.Devices.Nikon
             {
                 Log.Error("Unable to check advanced proprties", ex);
             }
-
-
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> LensSort()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Lens Sort",
+                IsEnabled = false,
+                Code = 0xD0E1,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("Not mounted", 0);
+            res.AddValues("CPU lens mounted", 1);
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
         }
 
         protected virtual PropertyValue<long> ActiveSlot()
