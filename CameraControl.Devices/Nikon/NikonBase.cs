@@ -523,11 +523,31 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(ActiveDLighting());
             AdvancedProperties.Add(HDRMode());
             AdvancedProperties.Add(HDREv());
+            AdvancedProperties.Add(HDRSmoothing());
 
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> HDRSmoothing()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "HDR intensity",
+                IsEnabled = true,
+                Code = 0xD132,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("High", 0);
+            res.AddValues("Normal", 1);
+            res.AddValues("Low", 2);
+            res.AddValues("Auto", 3);
+            res.AddValues("Extra high", 4);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
         }
 
         protected virtual PropertyValue<long> HDREv()
