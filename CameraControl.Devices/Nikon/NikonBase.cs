@@ -490,6 +490,7 @@ namespace CameraControl.Devices.Nikon
                 ReadDeviceProperties(CONST_PROP_LiveViewStatus);
                 _timer.Start();
                 OnCameraInitDone();
+                
             }
             catch (Exception exception)
             {
@@ -527,6 +528,21 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(HDRSmoothing());
             AdvancedProperties.Add(ActiveSlot());
 
+            try
+            {
+                var deviceinfo = LoadDeviceData(ExecuteReadDataEx(0x1001));
+                foreach (PropertyValue<long> value in AdvancedProperties)
+                {
+                    if (!deviceinfo.PropertyExist(value.Code))
+                        value.Available = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to check advanced proprties", ex);
+            }
+
+
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
@@ -546,6 +562,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("CF slot", 1);
             res.AddValues("SD slot", 2);
             res.AddValues("CF slot & SD slot", 3);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -569,6 +586,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("1/100 sec.", 6);
             res.AddValues("1/80 sec.", 7);
             res.AddValues("1/60 sec.", 8);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -588,6 +606,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Low", 2);
             res.AddValues("Auto", 3);
             res.AddValues("Extra high", 4);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -606,6 +625,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("1 EV", 1);
             res.AddValues("2 EV", 2);
             res.AddValues("3 EV", 3);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -623,6 +643,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("OFF", 0);
             res.AddValues("ON (single)", 1);
             res.AddValues("ON (sequence)", 2);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -644,6 +665,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("Low", 3);
             res.AddValues("Not performed", 4);
             res.AddValues("Auto", 5);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;
@@ -662,6 +684,7 @@ namespace CameraControl.Devices.Nikon
             res.AddValues("DX format (24x16)", 1);
             res.AddValues("5:4 (30x24)", 2);
             res.AddValues("1.2x (30x20)", 3);
+            res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
             return res;

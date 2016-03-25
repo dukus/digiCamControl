@@ -151,6 +151,15 @@
                     <Controls:ToggleSwitch Header="{T:TranslateExtension LabelHostMode}" Grid.Row="3" Grid.Column="1" IsChecked="{Binding Path=SelectedCameraDevice.HostMode}" Margin="3" FontSize="12" />
                 </StackPanel>
                 <ListBox Name="listBox1" ItemsSource="{Binding Path=SelectedCameraDevice.AdvancedProperties}" HorizontalAlignment="Left" Grid.Row="1">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Available}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="2" >

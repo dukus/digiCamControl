@@ -99,5 +99,10 @@ namespace CameraControl.Devices.Xml
             }
             return "";
         }
+        
+        public bool PropertyExist(uint code)
+        {
+            return AvaiableProperties.Any(xmlPropertyDescriptor => xmlPropertyDescriptor.Code == code);
+        }
     }
 }

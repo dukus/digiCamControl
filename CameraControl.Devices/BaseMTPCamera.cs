@@ -36,6 +36,7 @@ using System.Text;
 using System.Threading;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.TransferProtocol;
+using CameraControl.Devices.Xml;
 using PortableDeviceLib;
 using Timer = System.Timers.Timer;
 
@@ -645,6 +646,63 @@ namespace CameraControl.Devices
                 return 0;
             string s = i + "." + d;
             return Convert.ToDecimal(s, new CultureInfo("en-US"));
+        }
+
+
+        protected XmlDeviceData LoadDeviceData(MTPDataResponse res)
+        {
+            XmlDeviceData deviceInfo = new XmlDeviceData();
+            ErrorCodes.GetException(res.ErrorCode);
+            deviceInfo.Manufacturer = Manufacturer;
+            int index = 2 + 4 + 2;
+            int vendorDescCount = res.Data[index];
+            index += vendorDescCount * 2;
+            index += 3;
+            int comandsCount = res.Data[index];
+            index += 2;
+            // load commands
+            for (int i = 0; i < comandsCount; i++)
+            {
+                index += 2;
+                deviceInfo.AvaiableCommands.Add(new XmlCommandDescriptor() { Code = BitConverter.ToUInt16(res.Data, index) });
+            }
+            index += 2;
+            int eventcount = res.Data[index];
+            index += 2;
+            // load events
+            for (int i = 0; i < eventcount; i++)
+            {
+                index += 2;
+                deviceInfo.AvaiableEvents.Add(new XmlEventDescriptor() { Code = BitConverter.ToUInt16(res.Data, index) });
+            }
+            index += 2;
+            int propertycount = res.Data[index];
+            index += 2;
+            // load properties codes
+            for (int i = 0; i < propertycount; i++)
+            {
+                index += 2;
+                deviceInfo.AvaiableProperties.Add(new XmlPropertyDescriptor() { Code = BitConverter.ToUInt16(res.Data, index) });
+            }
+            try
+            {
+                MTPDataResponse vendor_res = ExecuteReadDataEx(0x90CA);
+                if (vendor_res.Data.Length > 0)
+                {
+                    index = 0;
+                    propertycount = vendor_res.Data[index];
+                    index += 2;
+                    for (int i = 0; i < propertycount; i++)
+                    {
+                        index += 2;
+                        deviceInfo.AvaiableProperties.Add(new XmlPropertyDescriptor() { Code = BitConverter.ToUInt16(vendor_res.Data, index) });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return deviceInfo;
         }
     }
 }
