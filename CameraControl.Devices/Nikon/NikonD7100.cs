@@ -77,5 +77,21 @@ namespace CameraControl.Devices.Nikon
             base.InitFNumber();
             MovieFNumber.IsEnabled = false;
         }
+
+        protected override PropertyValue<long> CaptureAreaCrop()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Capture area crop",
+                IsEnabled = true,
+                Code = 0xD030,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("DX", 0);
+            res.AddValues("1.3x", 1);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
+        }
     }
 }

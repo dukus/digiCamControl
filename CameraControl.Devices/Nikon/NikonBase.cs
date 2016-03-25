@@ -519,6 +519,7 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitAutoIsoHight());
             AdvancedProperties.Add(CenterWeightedExRange());
             AdvancedProperties.Add(FlashCompensation());
+            AdvancedProperties.Add(CaptureAreaCrop());
 
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
@@ -526,6 +527,24 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
+        protected virtual PropertyValue<long> CaptureAreaCrop()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Capture area crop",
+                IsEnabled = true,
+                Code = 0xD030,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("FX format (36x24)", 0);
+            res.AddValues("DX format (24x16)", 1);
+            res.AddValues("5:4 (30x24)", 2);
+            res.AddValues("1.2x (30x20)", 3);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
+        }
+        
         protected virtual PropertyValue<long> FlashCompensation ()
         {
             PropertyValue<long> res = new PropertyValue<long>()
