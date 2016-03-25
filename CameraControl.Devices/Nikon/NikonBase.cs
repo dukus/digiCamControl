@@ -520,12 +520,32 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(CenterWeightedExRange());
             AdvancedProperties.Add(FlashCompensation());
             AdvancedProperties.Add(CaptureAreaCrop());
+            AdvancedProperties.Add(ActiveDLighting());
+            AdvancedProperties.Add(HDRMode());
 
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
         }
+
+        protected virtual PropertyValue<long> HDRMode()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "HDRMode",
+                IsEnabled = true,
+                Code = 0xD130,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("OFF", 0);
+            res.AddValues("ON (single)", 1);
+            res.AddValues("ON (sequence)", 2);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
+        }
+
 
         protected virtual PropertyValue<long> ActiveDLighting()
         {
