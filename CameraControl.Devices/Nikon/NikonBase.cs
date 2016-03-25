@@ -519,6 +519,7 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitAutoIsoHight());
             AdvancedProperties.Add(CenterWeightedExRange());
             AdvancedProperties.Add(FlashCompensation());
+            AdvancedProperties.Add(FlashSyncSpeed());
             AdvancedProperties.Add(CaptureAreaCrop());
             AdvancedProperties.Add(ActiveDLighting());
             AdvancedProperties.Add(HDRMode());
@@ -529,6 +530,29 @@ namespace CameraControl.Devices.Nikon
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> FlashSyncSpeed()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Flash sync speed",
+                IsEnabled = true,
+                Code = 0xD074,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("1/320 sec. (auto FP)", 0);
+            res.AddValues("1/250 sec. (auto FP)", 1);
+            res.AddValues("1/250 sec.", 2);
+            res.AddValues("1/200 sec.", 3);
+            res.AddValues("1/160 sec.", 4);
+            res.AddValues("1/125 sec.", 5);
+            res.AddValues("1/100 sec.", 6);
+            res.AddValues("1/80 sec.", 7);
+            res.AddValues("1/60 sec.", 8);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
         }
 
         protected virtual PropertyValue<long> HDRSmoothing()
