@@ -522,11 +522,30 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(CaptureAreaCrop());
             AdvancedProperties.Add(ActiveDLighting());
             AdvancedProperties.Add(HDRMode());
+            AdvancedProperties.Add(HDREv());
 
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> HDREv()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "HDR Exposure deviation",
+                IsEnabled = true,
+                Code = 0xD131,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("Auto", 0);
+            res.AddValues("1 EV", 1);
+            res.AddValues("2 EV", 2);
+            res.AddValues("3 EV", 3);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
         }
 
         protected virtual PropertyValue<long> HDRMode()
