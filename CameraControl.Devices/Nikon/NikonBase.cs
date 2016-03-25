@@ -525,11 +525,30 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(HDRMode());
             AdvancedProperties.Add(HDREv());
             AdvancedProperties.Add(HDRSmoothing());
+            AdvancedProperties.Add(ActiveSlot());
 
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 ReadDeviceProperties(value.Code);
             }
+        }
+
+        protected virtual PropertyValue<long> ActiveSlot()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Active Slot",
+                IsEnabled = false,
+                Code = 0xD074,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("Card not inserted", 0);
+            res.AddValues("CF slot", 1);
+            res.AddValues("SD slot", 2);
+            res.AddValues("CF slot & SD slot", 3);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
         }
 
         protected virtual PropertyValue<long> FlashSyncSpeed()
