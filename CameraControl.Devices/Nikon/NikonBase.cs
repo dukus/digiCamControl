@@ -527,6 +527,26 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
+        protected virtual PropertyValue<long> ActiveDLighting()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Active D-Lighting",
+                IsEnabled = true,
+                Code = 0xD14E,
+                SubType = typeof(sbyte)
+            };
+            res.AddValues("Extra high", 0);
+            res.AddValues("High", 1);
+            res.AddValues("Normal", 2);
+            res.AddValues("Low", 3);
+            res.AddValues("Not performed", 4);
+            res.AddValues("Auto", 5);
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+            return res;
+        }
+
         protected virtual PropertyValue<long> CaptureAreaCrop()
         {
             PropertyValue<long> res = new PropertyValue<long>()
