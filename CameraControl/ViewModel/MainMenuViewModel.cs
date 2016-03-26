@@ -116,6 +116,11 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool HomePageMenuVisible
+        {
+            get { return !string.IsNullOrEmpty(Branding.HomePageUrl); }
+        }
+
         public Branding Branding
         {
             get { return ServiceProvider.Branding; }
@@ -173,7 +178,12 @@ namespace CameraControl.ViewModel
             EnhancedThumbsCommand = new RelayCommand(() => EnhancedThumbs = !EnhancedThumbs);
             ShowThumbInfoCommand = new RelayCommand(() => ShowThumbInfo = !ShowThumbInfo);
 
-            HomePageCommand = new RelayCommand(() => PhotoUtils.Run("http://www.digicamcontrol.com/", ""));
+            HomePageCommand =
+                new RelayCommand(
+                    () =>PhotoUtils.Run(string.IsNullOrEmpty(Branding.HomePageUrl)
+                                ? "http://www.digicamcontrol.com/"
+                                : Branding.HomePageUrl, ""));
+
             CheckUpdateCommand = new RelayCommand(() => NewVersionWnd.CheckForUpdate(true));
             ForumCommand = new RelayCommand(() => PhotoUtils.Run("http://digicamcontrol.com/phpbb/index.php", ""));
             SendLogFileCommand = new RelayCommand(() => new ErrorReportWnd("Log file").ShowDialog());

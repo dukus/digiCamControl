@@ -64,6 +64,7 @@ namespace CameraControl
                 bi.UriSource = new Uri(PhotoUtils.GetFullPath(ServiceProvider.Branding.StartupScreenImage));
                 bi.EndInit();
                 background.Source = bi;
+                ImageTwo.Visibility = Visibility.Collapsed;
             }
         }
 

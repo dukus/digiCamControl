@@ -173,6 +173,8 @@ namespace CameraControl.Core.Classes
         
         public string DefaultTheme { get; set; }
 
+        public string HomePageUrl { get; set; }
+
         public bool ShowCameraAdvancedProperties { get; set; }
 
         public bool UseThemeSelector

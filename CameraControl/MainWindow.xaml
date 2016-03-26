@@ -545,6 +545,7 @@
                 <MenuItem Header="{T:TranslateExtension LabelChangelog}" Command="{Binding ShowChangeLogCommand}"/>
                 <MenuItem Header="{T:TranslateExtension MenuAbout}" Command="{Binding AboutCommand}"/>
             </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}" Visibility="{Binding HomePageMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Menu>
         <StatusBar Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="6">
             <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
