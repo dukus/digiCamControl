@@ -168,9 +168,10 @@ namespace CameraControl.Core.Classes
                     string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
                     if (File.Exists(dcraw_exe))
                     {
-                        PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e \"{0}\"", fileItem.FileName));
-                        string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
+                        string thumb = Path.Combine(Path.GetTempPath(),
                             Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
+                        PhotoUtils.RunAndWait(dcraw_exe,
+                            string.Format(" -e -O \"{0}\" \"{1}\"", thumb, fileItem.FileName));
                         if (File.Exists(thumb))
                         {
                             deleteFile = true;
@@ -543,9 +544,10 @@ namespace CameraControl.Core.Classes
                         string dcraw_exe = Path.Combine(Settings.ApplicationFolder, "dcraw.exe");
                         if (File.Exists(dcraw_exe))
                         {
-                            PhotoUtils.RunAndWait(dcraw_exe, string.Format(" -e \"{0}\"", fileItem.FileName));
-                            string thumb = Path.Combine(Path.GetDirectoryName(fileItem.FileName),
+                            string thumb = Path.Combine(Path.GetTempPath(),
                                 Path.GetFileNameWithoutExtension(fileItem.FileName) + ".thumb.jpg");
+                            PhotoUtils.RunAndWait(dcraw_exe,
+                                string.Format(" -e -O \"{0}\" \"{1}\"", thumb, fileItem.FileName));
                             if (File.Exists(thumb))
                             {
                                 bmpDec = BitmapDecoder.Create(new Uri(thumb), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
