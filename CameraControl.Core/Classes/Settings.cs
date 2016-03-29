@@ -31,16 +31,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using CameraControl.Devices;
@@ -349,9 +346,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        private System.Windows.Media.Color _fullScreenColor;
+        private Color _fullScreenColor;
 
-        public System.Windows.Media.Color FullScreenColor
+        public Color FullScreenColor
         {
             get { return _fullScreenColor; }
             set
@@ -952,7 +949,7 @@ namespace CameraControl.Core.Classes
 
         public static string ApplicationFolder
         {
-            get { return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); }
+            get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); }
         }
 
         /// <summary>
