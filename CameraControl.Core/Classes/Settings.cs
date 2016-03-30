@@ -1390,34 +1390,41 @@ namespace CameraControl.Core.Classes
 
         public void ApplyTheme(Window window)
         {
-            if (string.IsNullOrEmpty(CurrentThemeName) || !CurrentThemeName.Contains("\\"))
+            try
             {
-                ThemeManager.ChangeAppStyle(window, ThemeManager.Accents.First(a => a.Name == "Steel"),
-                    ThemeManager.GetAppTheme("BaseDark"));
-                return;
-            }
+                if (string.IsNullOrEmpty(CurrentThemeName) || !CurrentThemeName.Contains("\\"))
+                {
+                    ThemeManager.ChangeAppStyle(window, ThemeManager.Accents.First(a => a.Name == "Steel"),
+                        ThemeManager.GetAppTheme("BaseDark"));
+                    return;
+                }
 
-            if (CurrentThemeName.Split('\\')[1] == "Astro")
-            {
-                ThemeManager.ChangeAppStyle(window,
-                    ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                    ThemeManager.GetAppTheme("Black"));
-                ThemeManager.ChangeAppStyle(Application.Current,
-                    ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                    ThemeManager.GetAppTheme("Black"));
+                if (CurrentThemeName.Split('\\')[1] == "Astro")
+                {
+                    ThemeManager.ChangeAppStyle(window,
+                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
+                        ThemeManager.GetAppTheme("Black"));
+                    ThemeManager.ChangeAppStyle(Application.Current,
+                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
+                        ThemeManager.GetAppTheme("Black"));
+                }
+                else
+                {
+                    ThemeManager.ChangeAppStyle(window,
+                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
+                        ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
+                            ? "BaseDark"
+                            : "BaseLight"));
+                    ThemeManager.ChangeAppStyle(Application.Current,
+                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
+                        ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
+                            ? "BaseDark"
+                            : "BaseLight"));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ThemeManager.ChangeAppStyle(window,
-                    ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                    ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
-                        ? "BaseDark"
-                        : "BaseLight"));
-                ThemeManager.ChangeAppStyle(Application.Current,
-                    ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                    ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
-                        ? "BaseDark"
-                        : "BaseLight"));
+                Log.Error("ApplyTheme", ex);
             }
         }
 
