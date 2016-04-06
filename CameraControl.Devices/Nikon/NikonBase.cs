@@ -571,7 +571,7 @@ namespace CameraControl.Devices.Nikon
             {
                 Name = "Active Slot",
                 IsEnabled = false,
-                Code = 0xD074,
+                Code = 0xD1F2,
                 SubType = typeof(sbyte)
             };
             res.AddValues("Card not inserted", 0);
