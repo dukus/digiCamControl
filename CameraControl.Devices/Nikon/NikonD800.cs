@@ -162,7 +162,9 @@ namespace CameraControl.Devices.Nikon
 
             viewData.HaveLevelAngleData = true;
             viewData.LevelAngleRolling = ToInt16(result, 44);
-            
+            viewData.LevelAnglePitching = ToInt16(result, 48);
+            viewData.LevelAngleYawing = ToInt16(result, 52);
+
             viewData.PeakSoundL = (int)(result[344] / 14.0 * 100);
             viewData.PeakSoundR = (int)(result[345] / 14.0 * 100);
             viewData.SoundL = (int)(result[346] / 14.0 * 100);

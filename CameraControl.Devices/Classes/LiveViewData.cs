@@ -104,6 +104,10 @@ namespace CameraControl.Devices.Classes
 
         public decimal LevelAngleRolling { get; set; }
 
+        public decimal LevelAnglePitching { get; set; }
+
+        public decimal LevelAngleYawing { get; set; }
+
         public decimal MovieTimeRemain { get; set; }
 
         public int SoundL { get; set; }
