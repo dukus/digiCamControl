@@ -355,9 +355,10 @@ namespace CameraControl.windows
 
                 if (!session.UseOriginalFilename)
                 {
+                    //TODO: transfer file first
                     fileName =
                         session.GetNextFileName(Path.GetExtension(fileItem.FileName),
-                            fileItem.Device);
+                            fileItem.Device, "");
                 }
                 else
                 {

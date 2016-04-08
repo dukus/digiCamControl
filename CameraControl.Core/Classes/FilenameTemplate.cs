@@ -7,7 +7,7 @@ namespace CameraControl.Core.Classes
 {
     public class FilenameTemplate : IFilenameTemplate
     {
-        public string Pharse(string template, PhotoSession session, ICameraDevice device, string fileName)
+        public string Pharse(string template, PhotoSession session, ICameraDevice device, string fileName, string tempfileName)
         {
             CameraProperty property = device.LoadProperties();
             switch (template)

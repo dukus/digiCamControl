@@ -5,6 +5,6 @@ namespace CameraControl.Core.Interfaces
 {
     public interface IFilenameTemplate
     {
-        string Pharse(string template, PhotoSession session, ICameraDevice device, string fileName);
+        string Pharse(string template, PhotoSession session, ICameraDevice device, string fileName, string tempfileName);
     }
 }

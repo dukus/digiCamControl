@@ -520,6 +520,14 @@ namespace CameraControlCmd
                     eventArgs.CameraDevice.IsBusy = false;
                     return;
                 }
+
+                string tempFile = Path.GetTempFileName();
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+
+                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+
                 string fileName = "";
                 if (string.IsNullOrEmpty(_outFilename))
                 {
@@ -529,7 +537,7 @@ namespace CameraControlCmd
                         fileName =
                             ServiceProvider.Settings.DefaultSession.GetNextFileName(
                                 Path.GetExtension(eventArgs.FileName),
-                                eventArgs.CameraDevice);
+                                eventArgs.CameraDevice, tempFile);
                     }
                     else
                     {
@@ -554,12 +562,6 @@ namespace CameraControlCmd
                 }
                 Console.WriteLine("Transfer started :" + fileName);
 
-                string tempFile = Path.GetTempFileName();
-
-                if (File.Exists(tempFile))
-                    File.Delete(tempFile);
-
-                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
 
                 File.Copy(tempFile, fileName);
 

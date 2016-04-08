@@ -419,7 +419,7 @@ namespace CameraControl.Core.Classes
             {
                 if(skipItems.Contains(template.Key))
                     continue;
-                var val = template.Value.Pharse(template.Key, session, device, FileName);
+                var val = template.Value.Pharse(template.Key, session, device, FileName, "");
                 if (!string.IsNullOrWhiteSpace(val))
                     FileNameTemplates.Add(new ValuePair() {Name = template.Key, Value = val});
             }

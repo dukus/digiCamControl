@@ -38,6 +38,7 @@ using CameraControl.Devices;
 using CameraControl.Plugins.AutoExportPlugins;
 using CameraControl.Plugins.ExportPlugins;
 using CameraControl.Plugins.ExternalDevices;
+using CameraControl.Plugins.FilenameTemplate;
 using CameraControl.Plugins.ImageTransformPlugins;
 using CameraControl.Plugins.MainWindowPlugins;
 using CameraControl.Plugins.PanelPlugins;
@@ -95,6 +96,23 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Chromakey());
 
                 ServiceProvider.PluginManager.PanelPlugins.Add(new OpenInExternalViewer());
+
+                var exiftemplate = new ExifTemplate();
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Image.DateTime]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ExposureTime]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.FNumber]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ExposureProgram]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ISOSpeedRatings]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ExposureBiasValue]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.MeteringMode]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.WhiteBalance]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.Flash]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.FocalLength]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ColorSpace]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.PixelXDimension]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.PixelYDimension]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ExposureMode]", exiftemplate);
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.FocalLengthIn35mmFilm]", exiftemplate);
             }
             catch (Exception exception)
             {

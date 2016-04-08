@@ -553,7 +553,7 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public string GetNextFileName(string file, ICameraDevice device)
+        public string GetNextFileName(string file, ICameraDevice device, string tempfile)
         {
             lock (_locker)
             {
@@ -565,28 +565,28 @@ namespace CameraControl.Core.Classes
                     !RawExtensions.Contains(Path.GetExtension(_lastFilename).ToLower()))
                 {
                     string rawfile = Path.Combine(Folder,
-                                                  FormatFileName(device, ext, false) + (!ext.StartsWith(".") ? "." : "") +
-                                                  ext);
+                        FormatFileName(device, ext, tempfile, false) + (!ext.StartsWith(".") ? "." : "") +
+                        ext);
                     if (!File.Exists(rawfile))
                         return rawfile;
                 }
 
                 string fileName = Path.Combine(Folder,
-                                               FormatFileName(device, file) + (!ext.StartsWith(".") ? "." : "") + ext);
+                    FormatFileName(device, file, tempfile) + (!ext.StartsWith(".") ? "." : "") + ext);
 
                 if (File.Exists(fileName) && !AllowOverWrite)
                 {
                     // the template should contain a counter type tag
                     if (!FileNameTemplate.Contains("[Counter") && !AllowOverWrite)
                         FileNameTemplate += "[Counter 4 digit]";
-                    return GetNextFileName(file, device);
+                    return GetNextFileName(file, device, tempfile);
                 }
                 _lastFilename = fileName;
                 return fileName;
             }
         }
 
-        private string FormatFileName(ICameraDevice device, string file, bool incremetCounter = true)
+        private string FormatFileName(ICameraDevice device, string file, string tempfile, bool incremetCounter = true)
         {
             CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(device);
             string res = FileNameTemplate;
@@ -605,7 +605,7 @@ namespace CameraControl.Core.Classes
                 {
                     res = res.Replace(match.Value,
                         ServiceProvider.FilenameTemplateManager.Templates[match.Value].Pharse(match.Value, this, device,
-                            file));
+                            file, tempfile));
                 }
             }
 

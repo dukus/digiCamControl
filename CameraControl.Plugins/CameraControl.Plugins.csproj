@@ -238,6 +238,7 @@
     <Compile Include="ExternalDevices\UsbRelayReleaseConfig.xaml.cs">
       <DependentUpon>UsbRelayReleaseConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FilenameTemplate\ExifTemplate.cs" />
     <Compile Include="ImageTransformPlugins\BindableTextEditor.cs" />
     <Compile Include="ImageTransformPlugins\Chromakey.cs" />
     <Compile Include="ImageTransformPlugins\ChromakeyView.xaml.cs">

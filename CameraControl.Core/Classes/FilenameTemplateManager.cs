@@ -75,6 +75,9 @@ namespace CameraControl.Core.Classes
 
         public string GetExample(string res, PhotoSession session, ICameraDevice device, string fileName)
         {
+            string file = "";
+            if (session.Files.Count > 0)
+                file = session.Files[0].FileName;
             Regex regPattern = new Regex(@"\[(.*?)\]", RegexOptions.Singleline);
             MatchCollection matchX = regPattern.Matches(res);
             foreach (Match match in matchX)
@@ -82,8 +85,8 @@ namespace CameraControl.Core.Classes
                 if (ServiceProvider.FilenameTemplateManager.Templates.ContainsKey(match.Value))
                 {
                     res = res.Replace(match.Value,
-                        ServiceProvider.FilenameTemplateManager.Templates[match.Value].Pharse(match.Value, session, device,
-                            fileName));
+                        ServiceProvider.FilenameTemplateManager.Templates[match.Value].Pharse(match.Value, session,
+                            device, fileName, file));
                 }
             }
 
