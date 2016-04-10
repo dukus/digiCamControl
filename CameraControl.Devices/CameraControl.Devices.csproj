@@ -92,6 +92,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -117,6 +118,7 @@
     <Compile Include="Classes\DeviceObject.cs" />
     <Compile Include="Classes\DisconnectCameraEventArgs.cs" />
     <Compile Include="Classes\ErrorCodes.cs" />
+    <Compile Include="Classes\HttpHelper.cs" />
     <Compile Include="Classes\LiveViewData.cs" />
     <Compile Include="Classes\LogEventArgs.cs" />
     <Compile Include="Classes\OperationEnum.cs" />
@@ -150,7 +152,9 @@
     <Compile Include="Nikon\NikonL830.cs" />
     <Compile Include="Others\FakeCameraDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
-    <Compile Include="Others\SonyWifiCamera.cs" />
+    <Compile Include="Sony\CameraDiscovery.cs" />
+    <Compile Include="Sony\SonyCameraDeviceInfo.cs" />
+    <Compile Include="Sony\SonyWifiCamera.cs" />
     <Compile Include="Others\WiaCameraDevice.cs" />
     <Compile Include="Others\YiCamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

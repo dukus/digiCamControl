@@ -292,13 +292,14 @@ namespace CameraControl.Devices.Others
         public override void TransferFile(object o, string filename)
         {
             TransferProgress = 0;
-            DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}", Protocol.Ip, o), filename);
+            HttpHelper.DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}", Protocol.Ip, o), filename, this);
         }
 
         public override void TransferFileThumb(object o, string filename)
         {
             TransferProgress = 0;
-            DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}?type=screen", Protocol.Ip, o), filename);
+            HttpHelper.DownLoadFileByWebRequest(String.Format("http://{0}/DCIM/100MEDIA/{1}?type=screen", Protocol.Ip, o), filename,
+                this);
         }
 
         private void SetProperty(string prop, string val)
@@ -413,42 +414,6 @@ namespace CameraControl.Devices.Others
 
         }
 
-        private void DownLoadFileByWebRequest(string urlAddress, string filePath)
-        {
-            try
-            {
-                HttpWebRequest request = null;
-                HttpWebResponse response = null;
-                request = (HttpWebRequest)WebRequest.Create(urlAddress);
-                request.Timeout = 30000;  //8000 Not work 
-                response = (HttpWebResponse)request.GetResponse();
-                Stream s = response.GetResponseStream();
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
-                
-                FileStream os = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-                byte[] buff = new byte[102400];
-                int c = 0;
-                while ((c = s.Read(buff, 0, 102400)) > 0)
-                {
-                    os.Write(buff, 0, c);
-                    os.Flush();
-                    TransferProgress += 1;
-                }
-                os.Close();
-                s.Close();
-                TransferProgress = 100;
-            }
-            catch
-            {
-                return;
-            }
-            finally
-            {
-            }
-        }
 
         public override string GetLiveViewStream()
         {
