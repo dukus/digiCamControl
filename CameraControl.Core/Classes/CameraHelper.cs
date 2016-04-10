@@ -208,8 +208,9 @@ namespace CameraControl.Core.Classes
 
         public static int GetExposureDelay(this ICameraDevice cameraDevice)
         {
+            // exposure delay for Nikon cameras
             var prop = cameraDevice.GetProperty(0xD06A);
-            if (prop != null)
+            if (prop != null && !string.IsNullOrEmpty( prop.Value))
             {
                 if (prop.Value != "OFF")
                 {
