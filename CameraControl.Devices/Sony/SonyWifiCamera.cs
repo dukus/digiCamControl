@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using CameraControl.Devices.Classes;
 using PortableDeviceLib;
+using Timer = System.Timers.Timer;
 
 namespace CameraControl.Devices.Sony
 {
@@ -19,6 +21,7 @@ namespace CameraControl.Devices.Sony
         public string EndPoint { get; set; }
         private readonly HttpClient mClient = new HttpClient();
         List<string> AvailableMethods;
+        private Timer _timer = new Timer(100);
 
         public SonyWifiCamera()
         {
@@ -27,6 +30,8 @@ namespace CameraControl.Devices.Sony
 
         public bool Init(string endpoint)
         {
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.AutoReset = true;
             IsBusy = true;
             EndPoint = endpoint;
             AvailableMethods = GetMethodTypes();
@@ -38,38 +43,54 @@ namespace CameraControl.Devices.Sony
 
         private void InitProps()
         {
+            Thread.Sleep(3500);
             InitIso();
+            InitShutterSpeed();
             InitFNumber();
             InitFocusMode();
             IsBusy = false;
+            _timer.Start();
         }
 
         private void InitIso()
         {
-            var vals = AsPrimitiveList<string>(Post(CreateJson("getSupportedIsoSpeedRate")));
-            IsoNumber = new PropertyValue<int>();
-            int i = 0;
-            foreach (string val in vals)
-            {
-                IsoNumber.AddValues(val, i++);
-            }
-            IsoNumber.Value = AsPrimitive<string>(Post(CreateJson("getIsoSpeedRate")));
-            IsoNumber.ReloadValues();
-            IsoNumber.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setIsoSpeedRate", "1.0", key)));
+            IsoNumber=new PropertyValue<int>();
+            var prop = IsoNumber;
+            var cap = AsCapability<string>(Post(CreateJson("getAvailableIsoSpeedRate")));
+            SetCapability(prop, cap);
+            prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setIsoSpeedRate", "1.0", key)));
         }
 
         private void InitFNumber()
         {
-            var vals = AsPrimitiveList<string>(Post(CreateJson("getSupportedFNumber")));
             FNumber = new PropertyValue<int>();
-            int i = 0;
-            foreach (string val in vals)
+            var prop = FNumber;
+            var cap = AsCapability<string>(Post(CreateJson("getAvailableFNumber")));
+            SetCapability(prop, cap);
+            prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setFNumber", "1.0", key)));
+        }
+
+        private void InitShutterSpeed()
+        {
+            ShutterSpeed = new PropertyValue<long>();
+            var prop = ShutterSpeed;
+
+            var cap = AsCapability<string>(Post(CreateJson("getAvailableShutterSpeed")));
+
+            for (var index = 0; index < cap.Candidates.Count; index++)
             {
-                FNumber.AddValues(val, i++);
+                string val = cap.Candidates[index];
+                prop.AddValues(val, index);
             }
-            FNumber.Value = AsPrimitive<string>(Post(CreateJson("getFNumber")));
-            FNumber.ReloadValues();
-            FNumber.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setFNumber", "1.0", key)));
+
+            if (cap.Candidates.Count == 0 && !string.IsNullOrEmpty(cap.Current))
+            {
+                prop.AddValues(cap.Current, 0);
+                prop.IsEnabled = false;
+            }
+            prop.Value = cap.Current;
+            prop.ReloadValues();
+            prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setShutterSpeed", "1.0", key)));
         }
 
         private void InitFocusMode()
@@ -79,11 +100,45 @@ namespace CameraControl.Devices.Sony
             int i = 0;
             foreach (string val in vals)
             {
-                FNumber.AddValues(val, i++);
+                FocusMode.AddValues(val, i++);
             }
-            FNumber.Value = AsPrimitive<string>(Post(CreateJson("getFocusMode")));
-            FNumber.ReloadValues();
-            FNumber.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setFocusMode", "1.0", key)));
+            FocusMode.Value = AsPrimitive<string>(Post(CreateJson("getFocusMode")));
+            FocusMode.ReloadValues();
+            FocusMode.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setFocusMode", "1.0", key)));
+        }
+
+
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            Task.Factory.StartNew(GetEvent);
+        }
+
+        private void GetEvent()
+        {
+            try
+            {
+                var jString = Post(CreateJson("getEvent","1.0",false));
+                var json = Initialize(jString);
+                var jResult = json["result"] as JArray;
+
+                if (jResult == null) return;
+                
+                var elem = jResult[32];
+                if (elem.HasValues)
+                {
+                    SetCapability(ShutterSpeed, new Capability<string>
+                    {
+                        Current = elem.Value<string>("currentShutterSpeed"),
+                        Candidates = elem["shutterSpeedCandidates"].Values<string>().ToList()
+                    });
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
+            _timer.Start();
         }
 
         public override void CapturePhoto()
@@ -115,6 +170,21 @@ namespace CameraControl.Devices.Sony
                 this);
         }
 
+        private static void SetCapability<T>(PropertyValue<T> prop, Capability<string> cap)
+        {
+            foreach (string val in cap.Candidates)
+            {
+                prop.AddValues(val, default(T));
+            }
+
+            if (cap.Candidates.Count == 0 && !string.IsNullOrEmpty(cap.Current))
+            {
+                prop.AddValues(cap.Current, default(T));
+                prop.IsEnabled = false;
+            }
+            prop.Value = cap.Current;
+            prop.ReloadValues();
+        }
         
         private void ExecuteMethod(string method, params object[] prms)
         {
@@ -255,6 +325,16 @@ namespace CameraControl.Devices.Sony
 
             return json["result"].Value<T>(0);
         }
-        
+
+        internal static Capability<T> AsCapability<T>(string jString)
+        {
+            var json = Initialize(jString);
+
+            return new Capability<T>
+            {
+                Current = json["result"].Value<T>(0),
+                Candidates = json["result"][1].Values<T>().ToList()
+            };
+        }
     }
 }

@@ -109,6 +109,7 @@
     <Compile Include="Classes\AsyncObservableCollection.cs" />
     <Compile Include="Classes\BaseFieldClass.cs" />
     <Compile Include="Classes\CameraFieldType.cs" />
+    <Compile Include="Classes\Capability.cs" />
     <Compile Include="Classes\CapabilityEnum.cs" />
     <Compile Include="Classes\Conts.cs" />
     <Compile Include="Classes\DelayedDelegate.cs" />
