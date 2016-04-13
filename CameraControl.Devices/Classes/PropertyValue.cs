@@ -494,12 +494,13 @@ namespace CameraControl.Devices.Classes
         }
 
 
-        public void Clear()
+        public void Clear(bool notify = true)
         {
             _valuesDictionary.Clear();
             _values.Clear();
             _numericValues.Clear();
-            NotifyPropertyChanged("Values");
+            if (notify)
+                NotifyPropertyChanged("Values");
         }
     }
 }

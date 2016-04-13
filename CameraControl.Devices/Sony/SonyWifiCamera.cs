@@ -4,7 +4,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,12 +20,37 @@ namespace CameraControl.Devices.Sony
 {
     public class SonyWifiCamera : BaseCameraDevice
     {
+        private LiveViewData _liveViewData = new LiveViewData();
+        private bool _shoulStopLiveView;
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct CommonHeader
+        {
+            public byte StartByte;
+            public byte Type;
+            public Int16 SequenceNo;
+            public Int32 TimeStamp;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        struct PayloadHeader
+        {
+            public Int32 StartCode;
+            public UInt16 JpgDataSize;
+            //public byte Dummy;
+            public byte PadingSize;
+            public Int32 Reserved;
+            public byte Flag;
+        }
+
         private static int request_id = 0;
         public string EndPoint { get; set; }
         private readonly HttpClient mClient = new HttpClient();
         List<string> AvailableMethods;
         private Timer _timer = new Timer(100);
-
+        private string _liveViewUrl = "";
+        private int _lastZoomPos = 0;
         public SonyWifiCamera()
         {
 
@@ -30,6 +58,7 @@ namespace CameraControl.Devices.Sony
 
         public bool Init(string endpoint)
         {
+            Capabilities.Add(CapabilityEnum.LiveView);
             _timer.Elapsed += _timer_Elapsed;
             _timer.AutoReset = true;
             IsBusy = true;
@@ -37,17 +66,51 @@ namespace CameraControl.Devices.Sony
             AvailableMethods = GetMethodTypes();
             ExecuteMethod("startRecMode");
             IsConnected = true;
+            ExposureMeteringMode = new PropertyValue<int>();
+            ExposureMeteringMode.Available = false;
+            LiveViewImageZoomRatio = new PropertyValue<int>();
+            for (int i = 0; i < 101; i++)
+            {
+                LiveViewImageZoomRatio.AddValues(i.ToString(), i);
+            }
+            LiveViewImageZoomRatio.ReloadValues();
+            LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
             Task.Factory.StartNew(InitProps);
             return true;
+        }
+
+        void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
+        {
+            if (val > _lastZoomPos)
+            {
+                //ExecuteMethod("actZoom", "out", "1shot");
+                ExecuteMethod("actZoom", "out", "start");
+            }
+            else
+            {
+                //ExecuteMethod("actZoom", "in", "1shot");
+                ExecuteMethod("actZoom", "in", "start");
+            }
+            _lastZoomPos = val;
         }
 
         private void InitProps()
         {
             Thread.Sleep(3500);
-            InitIso();
-            InitShutterSpeed();
-            InitFNumber();
-            InitFocusMode();
+            try
+            {
+                InitIso();
+                InitShutterSpeed();
+                InitFNumber();
+                InitFocusMode();
+                InitWhitebalce();
+                InitCompressionSetting();
+                InitMode();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Sony prop init error", ex);
+            }
             IsBusy = false;
             _timer.Start();
         }
@@ -74,39 +137,68 @@ namespace CameraControl.Devices.Sony
         {
             ShutterSpeed = new PropertyValue<long>();
             var prop = ShutterSpeed;
-
             var cap = AsCapability<string>(Post(CreateJson("getAvailableShutterSpeed")));
-
-            for (var index = 0; index < cap.Candidates.Count; index++)
-            {
-                string val = cap.Candidates[index];
-                prop.AddValues(val, index);
-            }
-
-            if (cap.Candidates.Count == 0 && !string.IsNullOrEmpty(cap.Current))
-            {
-                prop.AddValues(cap.Current, 0);
-                prop.IsEnabled = false;
-            }
-            prop.Value = cap.Current;
-            prop.ReloadValues();
+            SetCapability(prop, cap);
             prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setShutterSpeed", "1.0", key)));
         }
 
         private void InitFocusMode()
         {
-            var vals = AsPrimitiveList<string>(Post(CreateJson("getSupportedFocusMode")));
             FocusMode = new PropertyValue<long>();
-            int i = 0;
-            foreach (string val in vals)
-            {
-                FocusMode.AddValues(val, i++);
-            }
-            FocusMode.Value = AsPrimitive<string>(Post(CreateJson("getFocusMode")));
-            FocusMode.ReloadValues();
-            FocusMode.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setFocusMode", "1.0", key)));
+            //var prop = FocusMode;
+            //var cap = AsCapability<string>(Post(CreateJson("getAvailableFocusMode")));
+            //SetCapability(prop, cap);
+            //prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setFocusMode", "1.0", key)));
         }
 
+        private void InitWhitebalce()
+        {
+            //TODO:fix me
+            WhiteBalance = new PropertyValue<long>();
+            try
+            {
+                var prop = WhiteBalance;
+                var cap = AsCapability<string>(Post(CreateJson("getAvailableWhiteBalance")));
+                SetCapability(prop, cap);
+                prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setWhiteBalance", "1.0", key)));
+            }
+            catch (Exception)
+            {
+                WhiteBalance.Available = false;
+            }
+        }
+
+        private void InitCompressionSetting()
+        {
+            CompressionSetting = new PropertyValue<int>();
+            try
+            {
+                var prop = CompressionSetting;
+                var cap = AsCapability<string>(Post(CreateJson("getAvailableStillQuality")));
+                SetCapability(prop, cap);
+                prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setStillQuality", "1.0", key)));
+            }
+            catch (Exception)
+            {
+                CompressionSetting.Available = false;
+            }
+        }
+
+        private void InitMode()
+        {
+            try
+            {
+                Mode = new PropertyValue<uint>();
+                var prop = Mode;
+                var cap = AsCapability<string>(Post(CreateJson("getAvailableExposureMode")));
+                SetCapability(prop, cap);
+                prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setExposureMode", "1.0", key)));
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
 
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -123,8 +215,51 @@ namespace CameraControl.Devices.Sony
                 var jResult = json["result"] as JArray;
 
                 if (jResult == null) return;
+                var elem = jResult[2];
+                if (elem.HasValues)
+                {
+                    LiveViewImageZoomRatio.SetValue(elem.Value<int>("zoomPositionCurrentBox").ToString(), false);
+                }
                 
-                var elem = jResult[32];
+                elem = jResult[18];
+                if (elem.HasValues)
+                {
+                    SetCapability(Mode, new Capability<string>
+                    {
+                        Current = elem.Value<string>("currentExposureMode"),
+                        Candidates = elem["exposureModeCandidates"].Values<string>().ToList()
+                    });
+                }
+
+                elem = jResult[27];
+                if (elem.HasValues)
+                {
+                    SetCapability(FNumber, new Capability<string>
+                    {
+                        Current = elem.Value<string>("currentFNumber"),
+                        Candidates = elem["fNumberCandidates"].Values<string>().ToList()
+                    });
+                }
+                elem = jResult[28];
+                if (elem.HasValues)
+                {
+                    SetCapability(FocusMode, new Capability<string>
+                    {
+                        Current = elem.Value<string>("currentFocusMode"),
+                        Candidates = elem["focusModeCandidates"].Values<string>().ToList()
+                    });
+                }
+
+                elem = jResult[29];
+                if (elem.HasValues)
+                {
+                    SetCapability(IsoNumber, new Capability<string>
+                    {
+                        Current = elem.Value<string>("currentIsoSpeedRate"),
+                        Candidates = elem["isoSpeedRateCandidates"].Values<string>().ToList()
+                    });
+                }
+                elem = jResult[32];
                 if (elem.HasValues)
                 {
                     SetCapability(ShutterSpeed, new Capability<string>
@@ -132,6 +267,23 @@ namespace CameraControl.Devices.Sony
                         Current = elem.Value<string>("currentShutterSpeed"),
                         Candidates = elem["shutterSpeedCandidates"].Values<string>().ToList()
                     });
+                }
+                elem = jResult[33];
+                if (elem.HasValues)
+                {
+                    WhiteBalance.SetValue(elem.Value<string>("currentWhiteBalanceMode"), false);
+                }
+                if (jResult.Count > 36) // GetEvent version 1.2
+                {
+                    elem = jResult[37];
+                    if (elem.HasValues)
+                    {
+                        SetCapability(CompressionSetting, new Capability<string>
+                        {
+                            Current = elem.Value<string>("stillQuality"),
+                            Candidates = elem["candidate"].Values<string>().ToList()
+                        });
+                    }
                 }
             }
             catch (Exception)
@@ -143,6 +295,7 @@ namespace CameraControl.Devices.Sony
 
         public override void CapturePhoto()
         {
+            IsBusy = true;
             var url = AsPrimitiveList<string>(Post(CreateJson("actTakePicture")))[0];
             if (url.Contains("?"))
                 url = url.Split('?')[0];
@@ -155,6 +308,24 @@ namespace CameraControl.Devices.Sony
                 Handle = url
             };
             OnPhotoCapture(this, args);
+        }
+
+        public override void StartLiveView()
+        {
+            _shoulStopLiveView = false;
+            _liveViewUrl = AsPrimitive<string>(Post(CreateJson("startLiveview")));
+            BeginGetStream(new Uri(_liveViewUrl));
+        }
+
+        public override void StopLiveView()
+        {
+            _shoulStopLiveView = true;
+            Post(CreateJson("stopLiveview"));
+        }
+
+        public override LiveViewData GetLiveViewImage()
+        {
+            return _liveViewData;
         }
 
         public override void TransferFile(object o, string filename)
@@ -172,6 +343,10 @@ namespace CameraControl.Devices.Sony
 
         private static void SetCapability<T>(PropertyValue<T> prop, Capability<string> cap)
         {
+            // refresh properties only if the collection or value was changed 
+            if (prop.Value == cap.Current && prop.Values.Count == cap.Candidates.Count)
+                return;
+            //prop.Clear(false);
             foreach (string val in cap.Candidates)
             {
                 prop.AddValues(val, default(T));
@@ -182,8 +357,12 @@ namespace CameraControl.Devices.Sony
                 prop.AddValues(cap.Current, default(T));
                 prop.IsEnabled = false;
             }
-            prop.Value = cap.Current;
+            else
+            {
+                prop.IsEnabled = true;
+            }
             prop.ReloadValues();
+            prop.SetValue(cap.Current, false);
         }
         
         private void ExecuteMethod(string method, params object[] prms)
@@ -335,6 +514,76 @@ namespace CameraControl.Devices.Sony
                 Current = json["result"].Value<T>(0),
                 Candidates = json["result"][1].Values<T>().ToList()
             };
+        }
+
+        public void BeginGetStream(Uri uri)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+
+            // asynchronously get a response
+            request.BeginGetResponse(OnGetResponse, request);
+        }
+
+        private void OnGetResponse(IAsyncResult asyncResult)
+        {
+            // get the response
+            HttpWebRequest req = (HttpWebRequest)asyncResult.AsyncState;
+
+            try
+            {
+                HttpWebResponse resp = (HttpWebResponse)req.EndGetResponse(asyncResult);
+                Stream s = resp.GetResponseStream();
+
+
+                while (true)
+                {
+                    object heder = new CommonHeader();
+                    ByteArrayToStructure(s, ref heder);
+                    if (((CommonHeader) heder).Type == 0x12)
+                    {
+                        
+                    }
+                    PayloadHeader playload = new PayloadHeader();
+                    //ByteArrayToStructure(s, ref playload);
+                    var buff = ReadBytes(s, 128);
+
+                    playload.StartCode = BitConverter.ToInt32(buff, 0);
+                    playload.JpgDataSize = BitConverter.ToUInt16(new byte[] { buff[6], buff[5], buff[4], 0 }, 0);
+                    playload.PadingSize = buff[7];
+                    _liveViewData.ImageData = ReadBytes(s, playload.JpgDataSize);
+
+                    if (playload.PadingSize > 0)
+                        ReadBytes(s, playload.PadingSize);
+                    if (_shoulStopLiveView)
+                        break;
+                }
+                resp.Close();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to download stream ", ex);
+            }
+        }
+
+        void ByteArrayToStructure(Stream br, ref object obj)
+        {
+            int len = Marshal.SizeOf(obj);
+            var bytearray = ReadBytes(br, len);
+            IntPtr i = Marshal.AllocHGlobal(len);
+            Marshal.Copy(bytearray, 0, i, len);
+            obj = Marshal.PtrToStructure(i, obj.GetType());
+            Marshal.FreeHGlobal(i);
+        }
+
+        private byte[] ReadBytes(Stream s, int length)
+        {
+            var payload = new byte[length];
+            int numBytes = 0;
+            while (numBytes != length)
+            {
+                numBytes += s.Read(payload, numBytes, length - numBytes);
+            }
+            return payload;
         }
     }
 }
