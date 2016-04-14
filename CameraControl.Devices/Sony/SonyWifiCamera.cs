@@ -220,7 +220,29 @@ namespace CameraControl.Devices.Sony
                 {
                     LiveViewImageZoomRatio.SetValue(elem.Value<int>("zoomPositionCurrentBox").ToString(), false);
                 }
-                
+                elem = jResult[5];
+                if (elem.HasValues)
+                {
+                    foreach (var obj in elem.Children())
+                    {
+                        foreach (var u in obj["takePictureUrl"].Values<string>())
+                        {
+                            var url = u;
+                            if (url.Contains("?"))
+                                url = url.Split('?')[0];
+                            PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+                            {
+                                WiaImageItem = null,
+                                EventArgs = new PortableDeviceEventArgs(),
+                                CameraDevice = this,
+                                FileName = url.Replace('/', '\\'),
+                                Handle = url
+                            };
+                            OnPhotoCapture(this, args);
+                        }
+                    }
+                }
+
                 elem = jResult[18];
                 if (elem.HasValues)
                 {
@@ -296,18 +318,49 @@ namespace CameraControl.Devices.Sony
         public override void CapturePhoto()
         {
             IsBusy = true;
-            var url = AsPrimitiveList<string>(Post(CreateJson("actTakePicture")))[0];
-            if (url.Contains("?"))
-                url = url.Split('?')[0];
-            PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+            List<string> urls;
+            bool firstRun = true;
+            while (true)
             {
-                WiaImageItem = null,
-                EventArgs = new PortableDeviceEventArgs(),
-                CameraDevice = this,
-                FileName = url.Replace('/', '\\'),
-                Handle = url
-            };
-            OnPhotoCapture(this, args);
+                try
+                {
+                    urls = AsPrimitiveList<string>(firstRun ? Post(CreateJson("actTakePicture")) : Post(CreateJson("awaitTakePicture")));
+                    break;
+                }
+                catch (DeviceException exception)
+                {
+                    if (exception.ErrorCode == 40403)
+                    {
+                        firstRun = false;                        
+                    }
+                    else
+                    {
+                        IsBusy = false;
+                        throw;
+                    }
+                }
+                catch
+                {
+                    IsBusy = false;
+                    throw;
+                }
+            }
+            
+            foreach (var u in urls)
+            {
+                var url = u;
+                if (url.Contains("?"))
+                    url = url.Split('?')[0];
+                PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+                {
+                    WiaImageItem = null,
+                    EventArgs = new PortableDeviceEventArgs(),
+                    CameraDevice = this,
+                    FileName = url.Replace('/', '\\'),
+                    Handle = url
+                };
+                OnPhotoCapture(this, args);
+            }
         }
 
         public override void StartLiveView()
@@ -481,6 +534,7 @@ namespace CameraControl.Devices.Sony
             }
             if (json["error"] != null)
             {
+                throw new DeviceException(json["error"].Value<string>(1), json["error"].Value<int>(0));
                 //throw new RemoteApiException((StatusCode)json["error"].Value<int>(0));
             }
             return json;

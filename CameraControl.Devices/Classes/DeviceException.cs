@@ -51,6 +51,12 @@ namespace CameraControl.Devices.Classes
             ErrorCode = errorcode;
         }
 
+        public DeviceException(string message, int errorcode)
+            : base(message)
+        {
+            ErrorCode = (uint) errorcode;
+        }
+
         public DeviceException(string format, params object[] args)
             : base(string.Format(format, args))
         {
