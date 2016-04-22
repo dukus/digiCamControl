@@ -342,7 +342,7 @@ namespace CameraControl
                 // show welcome screen only if not start minimized
                 if (!ServiceProvider.Settings.StartMinimized)
                 {
-                    Dispatcher.Invoke(new Action(() =>
+                    Dispatcher.Invoke(() =>
                     {
                         try
                         {
@@ -352,7 +352,7 @@ namespace CameraControl
                         catch 
                         {
                         }
-                    }));
+                    });
                 }
             }
         }
