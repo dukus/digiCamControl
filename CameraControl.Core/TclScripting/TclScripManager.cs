@@ -76,10 +76,9 @@ namespace CameraControl.Core.TclScripting
 
         public void Stop()
         {
-            Result result = null;
+            Result result = Result.Empty;
             if (_interpreter != null)
-                _interpreter.CancelAnyEvaluate(true, true, ReturnCode.Ok, ref result);
-
+                _interpreter.CancelAnyEvaluate(result, CancelFlags.Cancel, ref result);
         }
 
         void c_Output(string message, bool newline)

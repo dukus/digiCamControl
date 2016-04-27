@@ -1861,7 +1861,7 @@ namespace CameraControl.ViewModel
                     break;
             }
 
-            if (CameraDevice.LiveViewImageZoomRatio.Value == "All")
+            if (CameraDevice.LiveViewImageZoomRatio.Value == "All" || CameraDevice.LiveViewImageZoomRatio.Value == "0")
             {
                 preview.Freeze();
                 Preview = preview;

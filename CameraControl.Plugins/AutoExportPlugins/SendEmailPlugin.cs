@@ -31,7 +31,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
-                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82");
+                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82",3);
                 var message = new MailMessage(conf.From, conf.To)
                 {
                     Subject = (string.IsNullOrEmpty(conf.Subject) ? "Your photo":conf.TransformTemplate(item,conf.Subject)),

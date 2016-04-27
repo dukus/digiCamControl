@@ -81,15 +81,16 @@ namespace CameraControl.Devices.Sony
 
         void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
         {
+            var dif = Math.Abs(_lastZoomPos - val);
             if (val > _lastZoomPos)
             {
                 //ExecuteMethod("actZoom", "out", "1shot");
-                ExecuteMethod("actZoom", "out", "start");
+                ExecuteMethod("actZoom", "out", dif < 25 ? "1shot" : "start");
             }
             else
             {
                 //ExecuteMethod("actZoom", "in", "1shot");
-                ExecuteMethod("actZoom", "in", "start");
+                ExecuteMethod("actZoom", "in", dif < 25 ? "1shot" : "start");
             }
             _lastZoomPos = val;
         }
@@ -365,6 +366,17 @@ namespace CameraControl.Devices.Sony
 
         public override void StartLiveView()
         {
+            string cmd = "{" +
+                         "\"method\": \"setLiveviewFrameInfo\"," +
+                         "\"params\": [" +
+                         "{" +
+                         "\"frameInfo\": true" +
+                         "}" +
+                         "]," +
+                         "\"id\": 1," +
+                         "\"version\": \"1.0\"" +
+                         "}\"";
+            CheckError(Post(cmd));
             _shoulStopLiveView = false;
             _liveViewUrl = AsPrimitive<string>(Post(CreateJson("startLiveview")));
             BeginGetStream(new Uri(_liveViewUrl));
@@ -591,20 +603,42 @@ namespace CameraControl.Devices.Sony
 
                 while (true)
                 {
-                    object heder = new CommonHeader();
-                    ByteArrayToStructure(s, ref heder);
-                    if (((CommonHeader) heder).Type == 0x12)
-                    {
-                        
-                    }
+                    CommonHeader heder = new CommonHeader();
+                    //ByteArrayToStructure(s, ref heder);
+                    var buff = ReadBytes(s, 8);
+                    heder.StartByte = buff[0];
+                    heder.Type = buff[1];
+                    heder.SequenceNo = BitConverter.ToInt16(buff,2); ;
+                    heder.TimeStamp = BitConverter.ToInt32(buff, 4); ;
                     PayloadHeader playload = new PayloadHeader();
                     //ByteArrayToStructure(s, ref playload);
-                    var buff = ReadBytes(s, 128);
+                    buff = ReadBytes(s, 128);
 
                     playload.StartCode = BitConverter.ToInt32(buff, 0);
                     playload.JpgDataSize = BitConverter.ToUInt16(new byte[] { buff[6], buff[5], buff[4], 0 }, 0);
                     playload.PadingSize = buff[7];
-                    _liveViewData.ImageData = ReadBytes(s, playload.JpgDataSize);
+
+                    if (((CommonHeader) heder).Type == 0x02)
+                    {
+                        if (playload.JpgDataSize > 0)
+                        {
+                            var data = ReadBytes(s, playload.JpgDataSize);
+                            _liveViewData.FocusX = BitConverter.ToInt16(new byte[] { data[1], data[0]}, 0);
+                            _liveViewData.FocusY = BitConverter.ToInt16(new byte[] { data[3], data[2] }, 0); ;
+                            _liveViewData.FocusFrameXSize = BitConverter.ToInt16(new byte[] { data[5], data[4] }, 0) - _liveViewData.FocusX;
+                            _liveViewData.FocusFrameYSize = BitConverter.ToInt16(new byte[] { data[7], data[6] }, 0) - _liveViewData.FocusY ;
+                            _liveViewData.HaveFocusData = true;
+                            _liveViewData.Focused = data[9] != 0;
+                            _liveViewData.ImageWidth = 10000;
+                            _liveViewData.ImageHeight = 10000;
+                            _liveViewData.IsLiveViewRunning = true;
+                            Console.WriteLine(playload.JpgDataSize);
+                        }
+                    }
+                    else
+                    {
+                        _liveViewData.ImageData = ReadBytes(s, playload.JpgDataSize);
+                    }
 
                     if (playload.PadingSize > 0)
                         ReadBytes(s, playload.PadingSize);

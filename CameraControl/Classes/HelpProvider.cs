@@ -94,7 +94,7 @@ namespace CameraControl.Classes
         {
             try
             {
-                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82");
+                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82",3);
                 var message = new MailMessage("postmaster@digicamcontrol.com", email)
                 {
                     Subject = subject,
@@ -123,7 +123,7 @@ namespace CameraControl.Classes
                     zip.AddFile(ServiceProvider.LogFile, "");
                     zip.Save(destfile);
                 }
-                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82");
+                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82", 3);
                 var message = new MailMessage(string.IsNullOrWhiteSpace(email) ? "error_report@digicamcontrol.com":email,
                     "error_report@digicamcontrol.com")
                 {
