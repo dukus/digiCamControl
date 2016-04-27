@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="450" Width="600" Title="{T:TranslateExtension LabelCreateMovie}" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowMinButton="False">
+             mc:Ignorable="d" Height="450" Width="764" Title="{T:TranslateExtension LabelCreateMovie}" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowMinButton="False">
     <Window.DataContext>
         <toolPlugins:GenMovieViewModel/>
     </Window.DataContext>
@@ -15,6 +15,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -33,7 +35,7 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="0" Header="{T:TranslateExtension LabelMovieSettings}" Margin="0">
-            <Grid>
+            <Grid Margin="2,0,-2,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -45,38 +47,46 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Label Content="{T:TranslateExtension LabelFps}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
                 <controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding Fps}" Margin="3"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelVideoFormat}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center"/>
-                <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VideoTypes}" SelectedValue="{Binding VideoType}" Margin="3"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelVideoFormat}" HorizontalAlignment="Right" Margin="0,5,3,5" VerticalAlignment="Center"/>
+                <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VideoTypes}" SelectedValue="{Binding VideoType}" Margin="3" Grid.ColumnSpan="3"/>
 
-                <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelOutputFile}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OutPutFile}" Margin="3,3,50,3" IsReadOnly="True" />
-                <Button Grid.Row="2" Grid.Column="1" Content="..." Width="40" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding BrowseFileCommand}"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelOutputFile}" HorizontalAlignment="Right" Margin="0,5,3,5" VerticalAlignment="Center" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OutPutFile}" Margin="3" IsReadOnly="True" Grid.ColumnSpan="2" />
+                <Button Grid.Row="2" Grid.Column="3" Content="..." Margin="3" VerticalAlignment="Center"  Command="{Binding BrowseFileCommand}" />
 
-                <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelFillImage}" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
-                <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding FillImage}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelFillImage}" HorizontalAlignment="Right" Margin="0,5,3,5" VerticalAlignment="Center"  />
+                <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding FillImage}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
 
-                <Label Grid.Row="4" Grid.Column="0" Content="{T:TranslateExtension LabelStartImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-                <controls:NumericUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Value="{Binding MinValue}" Maximum="{Binding TotalImages}" Margin="3"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Width" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                <controls:NumericUpDown Grid.Row="4" Grid.Column="1" Minimum="10" Value="{Binding Width}" Maximum="4096" Margin="3" />
 
-                <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelStopImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-                <controls:NumericUpDown Grid.Row="5" Grid.Column="1" Minimum="{Binding MinValue}" Value="{Binding MaxValue}" Margin="3" Maximum="{Binding TotalImages}"/>
+                <Label Grid.Row="4" Grid.Column="2" Content="Heigh" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
+                <controls:NumericUpDown Grid.Row="4" Grid.Column="3" Minimum="10" Value="{Binding Heigh}" Margin="3" Maximum="4096" />
 
-                <Label Grid.Row="6" Grid.Column="0" Content="Transform befor resize" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
-                <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding TransformBefor}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelStartImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+                <controls:NumericUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Value="{Binding MinValue}" Maximum="{Binding TotalImages}" Margin="3" />
 
-                <ProgressBar Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="0" VerticalAlignment="Bottom" Height="20" Margin="3" Value="{Binding Progress}" Maximum="{Binding ProgressMax}"/>
+                <Label Grid.Row="5" Grid.Column="2" Content="{T:TranslateExtension LabelStopImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
+                <controls:NumericUpDown Grid.Row="5" Grid.Column="3" Minimum="{Binding MinValue}" Value="{Binding MaxValue}" Margin="3" Maximum="{Binding TotalImages}" />
 
-                <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="2" Command="{Binding StartCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
-                <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="2" Grid.Row="1" Command="{Binding StopCommand}" Margin="5" IsEnabled="{Binding IsBusy}"/>
-                <Button Content="{T:TranslateExtension LabelPlayVideo}" Grid.Column="2" Grid.Row="2" Command="{Binding PlayVideoCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
-                <Button Content="Transform plugin" Grid.Column="2" Grid.Row="3" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                <Label Grid.Row="3" Grid.Column="2" Content="Transform befor resize" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
+                <CheckBox Grid.Row="3" Grid.Column="3" IsChecked="{Binding TransformBefor}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+
+                <ProgressBar Grid.Row="7" Grid.ColumnSpan="5" Grid.Column="0" VerticalAlignment="Bottom" Height="20" Margin="3" Value="{Binding Progress}" Maximum="{Binding ProgressMax}"/>
+
+                <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="4" Command="{Binding StartCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="4" Grid.Row="1" Command="{Binding StopCommand}" Margin="5" IsEnabled="{Binding IsBusy}"/>
+                <Button Content="{T:TranslateExtension LabelPlayVideo}" Grid.Column="4" Grid.Row="2" Command="{Binding PlayVideoCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                <Button Content="Transform plugin" Grid.Column="4" Grid.Row="3" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
             </Grid>
         </GroupBox>
     </Grid>

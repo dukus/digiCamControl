@@ -39,6 +39,8 @@ namespace CameraControl.Plugins.ToolPlugins
         private bool _transformBefor;
         private int _progress;
         private int _progressMax;
+        private int _width;
+        private int _heigh;
 
         public BitmapSource Bitmap
         {
@@ -146,6 +148,11 @@ namespace CameraControl.Plugins.ToolPlugins
             set
             {
                 _videoType = value;
+                if (_videoType.Width > 0)
+                    Width = _videoType.Width;
+                if (_videoType.Height > 0)
+                    Heigh = _videoType.Height;
+
                 RaisePropertyChanged(() => VideoType);
             }
         }
@@ -197,6 +204,26 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 _progressMax = value;
                 RaisePropertyChanged(()=>ProgressMax);
+            }
+        }
+
+        public int Width
+        {
+            get { return _width; }
+            set
+            {
+                _width = value;
+                RaisePropertyChanged(()=>Width);
+            }
+        }
+
+        public int Heigh
+        {
+            get { return _heigh; }
+            set
+            {
+                _heigh = value;
+                RaisePropertyChanged(() => Heigh);
             }
         }
 
