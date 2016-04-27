@@ -78,9 +78,9 @@ namespace Setup
 
             Project project = new Project("digiCamControl",
                 baseDir,
-                new ManagedAction(@"MyAction", Return.ignore, When.Before, Step.InstallExecute,
+                new ManagedAction(Setup.CustomActions.MyAction, Return.ignore, When.Before, Step.InstallExecute,
                     Condition.NOT_Installed, Sequence.InstallExecuteSequence),
-                new ManagedAction(@"SetRightAction", Return.ignore, When.Before, Step.InstallFinalize,
+                new ManagedAction(Setup.CustomActions.SetRightAction, Return.ignore, When.Before, Step.InstallFinalize,
                     Condition.Always, Sequence.InstallExecuteSequence),
                 new RegValue(appFeature, RegistryHive.ClassesRoot,
                     @"Wow6432Node\CLSID\{860BB310-5D01-11d0-BD3B-00A0C911CE86}\Instance\{628C6DCD-6A0A-4804-AAF3-91335A83239B}",

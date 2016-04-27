@@ -89,18 +89,43 @@
         </member>
         <member name="F:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordProperty">
             <summary>
-            Gets or sets the bindable Password property on the PasswordBox control. This is a dependency property.
+                Gets or sets the bindable Password property on the PasswordBox control. This is a dependency property.
             </summary>
         </member>
         <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.OnPasswordPropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
             <summary>
-            Handles changes to the 'Password' attached property.
+                Handles changes to the 'Password' attached property.
             </summary>
         </member>
-        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordBox_PasswordChanged(System.Object,System.Windows.RoutedEventArgs)">
+        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.PasswordBoxPasswordChanged(System.Object,System.Windows.RoutedEventArgs)">
             <summary>
-            Handle the 'PasswordChanged'-event on the PasswordBox
+                Handle the 'PasswordChanged'-event on the PasswordBox
             </summary>
+        </member>
+        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.OnAttached">
+            <summary>
+                Called after the behavior is attached to an AssociatedObject.
+            </summary>
+            <remarks>
+                Override this to hook up functionality to the AssociatedObject.
+            </remarks>
+        </member>
+        <member name="M:MahApps.Metro.Behaviours.PasswordBoxBindingBehavior.OnDetaching">
+            <summary>
+                Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+            </summary>
+            <remarks>
+                Override this to unhook functionality from the AssociatedObject.
+            </remarks>
+        </member>
+        <member name="M:MahApps.Metro.Controls.Extensions.BeginInvoke(System.Windows.Threading.DispatcherObject,System.Action)">
+            <summary> 
+              Executes the specified action asynchronously with the DispatcherPriority.Background on the thread that the Dispatcher was created on.
+            </summary>
+            <param name="dispatcherObject">The dispatcher object where the action runs.</param>
+            <param name="invokeAction">
+                An action that takes no parameters. 
+            </param> 
         </member>
         <member name="T:MahApps.Metro.Controls.AmPmComparer">
              <summary>
@@ -346,6 +371,22 @@
             Gets/sets arbitrary content below the dialog.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.Dialogs.BaseMetroDialog.DialogTitleFontSize">
+            <summary>
+            Gets or sets the size of the dialog title font.
+            </summary>
+            <value>
+            The size of the dialog title font.
+            </value>
+        </member>
+        <member name="P:MahApps.Metro.Controls.Dialogs.BaseMetroDialog.DialogMessageFontSize">
+            <summary>
+            Gets or sets the size of the dialog message font.
+            </summary>
+            <value>
+            The size of the dialog message font.
+            </value>
+        </member>
         <member name="M:MahApps.Metro.Controls.Dialogs.BaseMetroDialog.#ctor(MahApps.Metro.Controls.MetroWindow,MahApps.Metro.Controls.Dialogs.MetroDialogSettings)">
             <summary>
             Initializes a new MahApps.Metro.Controls.BaseMetroDialog.
@@ -460,6 +501,22 @@
             If set, stops standard resource dictionaries being applied to the dialog.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.Dialogs.MetroDialogSettings.DialogTitleFontSize">
+            <summary>
+            Gets or sets the size of the dialog title font.
+            </summary>
+            <value>
+            The size of the dialog title font.
+            </value>
+        </member>
+        <member name="P:MahApps.Metro.Controls.Dialogs.MetroDialogSettings.DialogMessageFontSize">
+            <summary>
+            Gets or sets the size of the dialog message font.
+            </summary>
+            <value>
+            The size of the dialog message font.
+            </value>
+        </member>
         <member name="T:MahApps.Metro.Controls.Dialogs.MetroDialogColorScheme">
             <summary>
             An enum representing the different choices for a color scheme in a Metro Dialog.
@@ -534,7 +591,7 @@
         </member>
         <member name="M:MahApps.Metro.Controls.Dialogs.DialogManager.GetCurrentDialogAsync``1(MahApps.Metro.Controls.MetroWindow)">
             <summary>
-            Gets the current shown dialog.
+            Gets the current shown dialog in async way.
             </summary>
             <param name="window">The dialog owner.</param>
         </member>
@@ -944,6 +1001,21 @@
             Removes the control buttons (next/previous) from view.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.FlipView.MouseHoverBorderEnabled">
+            <summary>
+            Gets or sets a value indicating whether the border for mouse over state is enabled or not.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.FlipView.MouseHoverBorderBrush">
+            <summary>
+            Gets or sets the mouse hover border brush.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.FlipView.MouseHoverBorderThickness">
+            <summary>
+            Gets or sets the mouse hover border thickness.
+            </summary>
+        </member>
         <member name="P:MahApps.Metro.Controls.FlipView.BannerText">
             <summary>
             Gets/sets the text that is displayed in the FlipView's banner.
@@ -952,6 +1024,11 @@
         <member name="P:MahApps.Metro.Controls.FlipView.IsBannerEnabled">
             <summary>
             Gets/sets whether the FlipView's banner is visible.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.FlipView.CircularNavigation">
+            <summary>
+            Gets or sets a value indicating whether the navigation is circular, so you get the first after last and the last before first.
             </summary>
         </member>
         <member name="T:MahApps.Metro.Controls.Flyout">
@@ -988,8 +1065,13 @@
         </member>
         <member name="P:MahApps.Metro.Controls.Flyout.CloseCommand">
             <summary>
-            An ICommand that executes when the flyout's close button is clicked.
+            Gets/sets a command which will be executed if the close button was clicked.
             Note that this won't execute when <see cref="P:MahApps.Metro.Controls.Flyout.IsOpen"/> is set to <c>false</c>.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.Flyout.CloseCommandParameter">
+            <summary>
+            Gets/sets the command parameter which will be passed by the CloseCommand.
             </summary>
         </member>
         <member name="P:MahApps.Metro.Controls.Flyout.HeaderTemplate">
@@ -1188,9 +1270,7 @@
         </member>
         <member name="F:MahApps.Metro.Controls.ControlsHelper.ButtonWidthProperty">
             <summary>
-            This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox
-            For multiline TextBox, PasswordBox is this the fallback for the clear text button! so it must set manually!
-            For normal TextBox, PasswordBox the width is the height. 
+            This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox, NumericUpDown
             </summary>
         </member>
         <member name="M:MahApps.Metro.Controls.ControlsHelper.SetFocusBorderBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
@@ -1345,6 +1425,11 @@
             The clear text button behavior property. It sets a click event to the button if the value is true.
             </summary>
         </member>
+        <member name="F:MahApps.Metro.Controls.TextBoxHelper.ButtonWidthProperty">
+            <summary>
+            This property can be used to set the button width (PART_ClearText) of TextBox, PasswordBox, ComboBox, NumericUpDown
+            </summary>
+        </member>
         <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetIsSpellCheckContextMenuEnabled(System.Windows.UIElement)">
             <summary>
             Indicates if a TextBox or RichTextBox should use SpellCheck context menu
@@ -1353,6 +1438,26 @@
         <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetHasText(System.Windows.DependencyObject)">
             <summary>
             Gets if the attached TextBox has text.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetClearTextButton(System.Windows.DependencyObject)">
+            <summary>
+            Gets the clear text button visibility / feature. Can be used to enable text deletion.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.SetClearTextButton(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the clear text button visibility / feature. Can be used to enable text deletion.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetTextButton(System.Windows.DependencyObject)">
+            <summary>
+            Gets the text button visibility.
+            </summary>
+        </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.SetTextButton(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the text button visibility.
             </summary>
         </member>
         <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetButtonsAlignment(System.Windows.DependencyObject)">
@@ -1375,6 +1480,11 @@
             Sets the clear text button behavior.
             </summary>
         </member>
+        <member name="M:MahApps.Metro.Controls.TextBoxHelper.GetButtonContentTemplate(System.Windows.DependencyObject)">
+            <summary> 
+            ButtonContentTemplate is the template used to display the content of the ClearText button. 
+            </summary>
+        </member>
         <member name="F:MahApps.Metro.Controls.ToggleButtonHelper.ContentDirectionProperty">
             <summary>
             This property can be used to handle the style for CheckBox and RadioButton
@@ -1386,6 +1496,50 @@
             This property can be used to handle the style for CheckBox and RadioButton
             LeftToRight means content left and button right and RightToLeft vise versa
             </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.PackIconMaterial">
+            <summary>
+            Icon from the Material Design Icons project, <see><cref>https://materialdesignicons.com/</cref></see>.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.PackIconMaterialDataFactory">
+            ******************************************
+            This code is auto generated. Do not amend.
+            ******************************************
+        </member>
+        <member name="T:MahApps.Metro.Controls.PackIconMaterialKind">
+            ******************************************
+            This code is auto generated. Do not amend.
+            ******************************************
+            <summary>
+            List of available icons for use with <see cref="T:MahApps.Metro.Controls.PackIconMaterial" />.
+            </summary>
+            <remarks>
+            All icons sourced from Material Design Icons Font - <see><cref>https://materialdesignicons.com</cref></see> - in accordance of
+            <see><cref>https://github.com/Templarian/MaterialDesign/blob/master/license.txt</cref></see>.
+            </remarks>
+        </member>
+        <member name="T:MahApps.Metro.Controls.PackIconModern">
+            <summary>
+            Icon from the Material Design Icons project, <see><cref>https://materialdesignicons.com/</cref></see>.
+            </summary>
+        </member>
+        <member name="T:MahApps.Metro.Controls.PackIconModernDataFactory">
+            ******************************************
+            This code is auto generated. Do not amend.
+            ******************************************
+        </member>
+        <member name="T:MahApps.Metro.Controls.PackIconModernKind">
+            ******************************************
+            This code is auto generated. Do not amend.
+            ******************************************
+            <summary>
+            List of available icons for use with <see cref="T:MahApps.Metro.Controls.PackIconModern" />.
+            </summary>
+            <remarks>
+            All icons sourced from Modern UI Icons Font - <see><cref>http://modernuiicons.com</cref></see> - in accordance of
+            <see><cref>https://github.com/Templarian/WindowsIcons/blob/master/WindowsPhone/license.txt</cref></see>.
+            </remarks>
         </member>
         <member name="T:MahApps.Metro.Controls.MetroAnimatedSingleRowTabControl">
             <summary>
@@ -1622,6 +1776,21 @@
             Gets the MetroTabItem that will be closed.
             </summary>
         </member>
+        <member name="M:MahApps.Metro.Controls.MetroTabItemCloseCommand.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="M:MahApps.Metro.Controls.MetroTabItemCloseCommand.Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
         <member name="T:MahApps.Metro.Controls.MetroTabItem">
             <summary>
             An extended TabItem with a metro style.
@@ -1630,6 +1799,11 @@
         <member name="P:MahApps.Metro.Controls.MetroTabItem.CloseButtonEnabled">
             <summary>
             Gets/sets whether the Close Button is visible.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.MetroTabItem.InternalCloseTabCommand">
+            <summary>
+            Gets/sets the command that is executed when the Close Button is clicked.
             </summary>
         </member>
         <member name="P:MahApps.Metro.Controls.MetroTabItem.CloseTabCommand">
@@ -1936,6 +2110,26 @@
         <member name="P:MahApps.Metro.Controls.WindowButtonCommands.Theme">
             <summary>
             Gets or sets the value indicating current theme.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.WindowButtonCommands.Minimize">
+            <summary>
+            Gets or sets the minimize button tooltip.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.WindowButtonCommands.Maximize">
+            <summary>
+            Gets or sets the maximize button tooltip.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.WindowButtonCommands.Close">
+            <summary>
+            Gets or sets the close button tooltip.
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.WindowButtonCommands.Restore">
+            <summary>
+            Gets or sets the restore button tooltip.
             </summary>
         </member>
         <member name="P:MahApps.Metro.Controls.WindowCommands.Theme">
@@ -2355,6 +2549,11 @@
             Gets/sets the right window commands that hosts the user commands.
             </summary>
         </member>
+        <member name="P:MahApps.Metro.Controls.MetroWindow.WindowButtonCommands">
+            <summary>
+            Gets/sets the window button commands that hosts the min/max/close commands.
+            </summary>
+        </member>
         <member name="P:MahApps.Metro.Controls.MetroWindow.IgnoreTaskbarOnMaximize">
             <summary>
             Gets/sets whether the window will ignore (and overlap) the taskbar when maximized.
@@ -2520,6 +2719,28 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="F:MahApps.Metro.Controls.Tile.HorizontalTitleAlignmentProperty">
+            <summary> 
+            HorizontalTitleAlignment Dependency Property.
+            Default Value: HorizontalAlignment.Left
+            </summary>
+        </member>
+        <member name="P:MahApps.Metro.Controls.Tile.HorizontalTitleAlignment">
+            <summary> 
+            Gets/Sets the horizontal alignment of the title.
+            </summary> 
+        </member>
+        <member name="F:MahApps.Metro.Controls.Tile.VerticalTitleAlignmentProperty">
+            <summary>
+            VerticalTitleAlignment Dependency Property. 
+            Default Value: VerticalAlignment.Bottom
+            </summary> 
+        </member>
+        <member name="P:MahApps.Metro.Controls.Tile.VerticalTitleAlignment">
+            <summary>
+            Gets/Sets the vertical alignment of the title.
+            </summary>
+        </member>
         <member name="T:MahApps.Metro.Controls.ToggleSwitch">
             <summary>
             A control that allows the user to toggle between two states: One represents true; The other represents false.
@@ -2624,50 +2845,6 @@
             <summary>
             An event that is raised when the value of IsChecked changes.
             </summary>
-        </member>
-        <member name="T:MahApps.Metro.PackIconMaterial">
-            <summary>
-            Icon from the Material Design Icons project, <see><cref>https://materialdesignicons.com/</cref></see>.
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.PackIconMaterialDataFactory">
-            ******************************************
-            This code is auto generated. Do not amend.
-            ******************************************
-        </member>
-        <member name="T:MahApps.Metro.PackIconMaterialKind">
-            ******************************************
-            This code is auto generated. Do not amend.
-            ******************************************
-            <summary>
-            List of available icons for use with <see cref="T:MahApps.Metro.PackIconMaterial" />.
-            </summary>
-            <remarks>
-            All icons sourced from Material Design Icons Font - <see><cref>https://materialdesignicons.com</cref></see> - in accordance of
-            <see><cref>https://github.com/Templarian/MaterialDesign/blob/master/license.txt</cref></see>.
-            </remarks>
-        </member>
-        <member name="T:MahApps.Metro.PackIconModern">
-            <summary>
-            Icon from the Material Design Icons project, <see><cref>https://materialdesignicons.com/</cref></see>.
-            </summary>
-        </member>
-        <member name="T:MahApps.Metro.PackIconModernDataFactory">
-            ******************************************
-            This code is auto generated. Do not amend.
-            ******************************************
-        </member>
-        <member name="T:MahApps.Metro.PackIconModernKind">
-            ******************************************
-            This code is auto generated. Do not amend.
-            ******************************************
-            <summary>
-            List of available icons for use with <see cref="T:MahApps.Metro.PackIconModern" />.
-            </summary>
-            <remarks>
-            All icons sourced from Modern UI Icons Font - <see><cref>http://modernuiicons.com</cref></see> - in accordance of
-            <see><cref>https://github.com/Templarian/WindowsIcons/blob/master/WindowsPhone/license.txt</cref></see>.
-            </remarks>
         </member>
         <member name="M:MahApps.Metro.Converters.BackgroundToForegroundConverter.IdealTextColor(System.Windows.Media.Color)">
             <summary>
@@ -6538,6 +6715,36 @@
             <SecurityNote>
               Critical : Calls critical methods
             </SecurityNote>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>
