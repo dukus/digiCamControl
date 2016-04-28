@@ -33,6 +33,7 @@ namespace CameraControl.Core.Classes
         public string Name { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public string Extension { get; set; }
 
         public VideoType()
         {
@@ -41,16 +42,17 @@ namespace CameraControl.Core.Classes
             Height = 0;
         }
 
-        public VideoType(string name, int width, int heigth)
+        public VideoType(string name, int width, int heigth, string extension)
         {
             Name = name;
             Width = width;
             Height = heigth;
+            Extension = extension;
         }
 
         public override string ToString()
         {
-            return string.Format("{0} " + "({1}x{2})", Name, Width, Height);
+            return string.Format("{0} ({1}x{2}) ({3})", Name, Width, Height, Extension);
         }
 
         public override bool Equals(object obj)

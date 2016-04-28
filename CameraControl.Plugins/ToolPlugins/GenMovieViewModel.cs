@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -13,6 +14,7 @@ using CameraControl.Devices.Classes;
 using CameraControl.Plugins.ImageTransformPlugins;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Gif.Components;
 using ImageMagick;
 using Microsoft.Win32;
 
@@ -40,7 +42,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private int _progress;
         private int _progressMax;
         private int _width;
-        private int _heigh;
+        private int _height;
 
         public BitmapSource Bitmap
         {
@@ -151,8 +153,8 @@ namespace CameraControl.Plugins.ToolPlugins
                 if (_videoType.Width > 0)
                     Width = _videoType.Width;
                 if (_videoType.Height > 0)
-                    Heigh = _videoType.Height;
-
+                    Height = _videoType.Height;
+                OutPutFile = Path.ChangeExtension(OutPutFile, _videoType.Extension);
                 RaisePropertyChanged(() => VideoType);
             }
         }
@@ -217,22 +219,24 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
-        public int Heigh
+        public int Height
         {
-            get { return _heigh; }
+            get { return _height; }
             set
             {
-                _heigh = value;
-                RaisePropertyChanged(() => Heigh);
+                _height = value;
+                RaisePropertyChanged(() => Height);
             }
         }
 
         public RelayCommand StartCommand { get; set; }
+        public RelayCommand StartPreviewCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
         public RelayCommand BrowseFileCommand { get; set; }
         public RelayCommand PlayVideoCommand { get; set; }
         public RelayCommand ConfPluginCommand { get; set; }
-        
+        public bool Preview { get; set; }
+
         public GenMovieViewModel()
         {
 
@@ -242,7 +246,16 @@ namespace CameraControl.Plugins.ToolPlugins
         {
             _window = window;
             _window.Closed += _window_Closed;
-            StartCommand = new RelayCommand(Start);
+            StartCommand = new RelayCommand(() =>
+            {
+                Preview = false;
+                Start();
+            });
+            StartPreviewCommand = new RelayCommand(() =>
+            {
+                Preview = true;
+                Start();
+            });
             StopCommand = new RelayCommand(Stop);
             PlayVideoCommand = new RelayCommand(PlayVideo);
             BrowseFileCommand = new RelayCommand(BrowseFile);
@@ -254,11 +267,12 @@ namespace CameraControl.Plugins.ToolPlugins
             MaxValue = TotalImages;
             VideoTypes = new ObservableCollection<VideoType>
             {
-                new VideoType("4K 16:9", 3840, 2160),
-                new VideoType("HD 1080 16:9", 1920, 1080),
-                new VideoType("UXGA 4:3", 1600, 1200),
-                new VideoType("HD 720 16:9", 1280, 720),
-                new VideoType("Super VGA 4:3", 800, 600),
+                new VideoType("4K 16:9", 3840, 2160, ".mp4"),
+                new VideoType("HD 1080 16:9", 1920, 1080, ".mp4"),
+                new VideoType("UXGA 4:3", 1600, 1200, ".mp4"),
+                new VideoType("HD 720 16:9", 1280, 720, ".mp4"),
+                new VideoType("Super VGA 4:3", 800, 600, ".mp4"),
+                new VideoType("Animated gif", 800, 600, ".gif"),
             };
             VideoType = VideoTypes[0];
             OutPutFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos),
@@ -337,12 +351,6 @@ namespace CameraControl.Plugins.ToolPlugins
 
 
             string tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            string ffmpegPath = Path.Combine(Settings.ApplicationFolder, "ffmpeg.exe");
-            if (!File.Exists(ffmpegPath))
-            {
-                MessageBox.Show("ffmpeg not found! Please reinstall the application.");
-                return;
-            }
 
             try
             {
@@ -375,19 +383,27 @@ namespace CameraControl.Plugins.ToolPlugins
                     Progress++;
                     FileItem item = ServiceProvider.Settings.DefaultSession.Files[i];
                     string outfile = Path.Combine(tempFolder, "img" + counter.ToString("000000") + ".jpg");
-                    if (TransformBefor)
+                    if (TransformBefor && !Preview)
                     {
                         AutoExportPluginHelper.ExecuteTransformPlugins(item, _config, item.FileName, outfile);
                         CopyFile(outfile, outfile);
                     }
                     else
                     {
-                        CopyFile(item.FileName, outfile);                        
+                        if (Preview)
+                        {
+                            BitmapLoader.Instance.GenerateCache(item);
+                            File.Copy(item.SmallThumb, outfile);
+                        }
+                        else
+                        {
+                            CopyFile(item.FileName, outfile);
+                        }
                     }
                     //outfile =
                     if (!TransformBefor)
                         AutoExportPluginHelper.ExecuteTransformPlugins(item, _config, outfile, outfile);
-                    OutPut.Insert(0,"Procesing file " + item.Name);
+                    OutPut.Insert(0, "Procesing file " + item.Name);
                     counter++;
                 }
                 catch (Exception exception)
@@ -395,18 +411,76 @@ namespace CameraControl.Plugins.ToolPlugins
                     OutPut.Add(exception.Message);
                 }
             }
+            switch (VideoType.Extension)
+            {
+                case ".mp4":
+                    GenerateMp4(tempFolder);
+                    break;
+                case ".gif":
+                    GenerateGif(tempFolder);
+                    break;
 
+            }
+
+
+            DeleteTempFolder(tempFolder);
+            Progress = ProgressMax;
+            OutPut.Insert(0, "DONE !!!");
+            if (Preview)
+            {
+                PlayVideo();
+            }
+        }
+
+        private void GenerateGif(string tempFolder)
+        {
             try
             {
-                string parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p {2}";
+                Progress = 0;
+                var files = Directory.GetFiles(tempFolder);
+                AnimatedGifEncoder e = new AnimatedGifEncoder();
+                e.Start(OutPutFile);
+                e.SetDelay(1000/Fps);
+                //-1:no repeat,0:always repeat
+                e.SetRepeat(0);
+                for (int i = 0, count = files.Length; i < count; i++)
+                {
+                    Progress++;
+                    e.AddFrame(Image.FromFile(files[i]));
+                }
+                e.Finish();
+            }
+            catch (Exception ex)
+            {
+                OutPut.Insert(0, "Converting error :" + ex.Message);
+            }
+        }
+
+        private void GenerateMp4(string tempFolder)
+        {
+            try
+            {
+                string ffmpegPath = Path.Combine(Settings.ApplicationFolder, "ffmpeg.exe");
+                if (!File.Exists(ffmpegPath))
+                {
+                    MessageBox.Show("ffmpeg not found! Please reinstall the application.");
+                    return;
+                }
+
+                string parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx264 -vf fps=25 -pix_fmt yuv420p";
                 if (VideoType.Name.StartsWith("4K"))
                 {
-                    parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx265 -vf fps=25 {2}";
+                    parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx265 -vf fps=25";
                 }
+                if (Preview)
+                {
+                    parameters += " -vf scale=400:264";
+                }
+                parameters += " {2}";
                 OutPut.Insert(0, "Generating video ..... ");
                 Process newprocess = new Process();
                 Progress = 0;
-                ProgressMax = (MaxValue - MinValue)*25/Fps;
+                ProgressMax = (MaxValue - MinValue) * 25 / Fps;
                 newprocess.StartInfo = new ProcessStartInfo()
                 {
                     FileName = ffmpegPath,
@@ -427,11 +501,7 @@ namespace CameraControl.Plugins.ToolPlugins
             catch (Exception exception)
             {
                 OutPut.Insert(0, "Converting error :" + exception.Message);
-            }
-
-            DeleteTempFolder(tempFolder);
-
-            OutPut.Insert(0, "DONE !!!");
+            }           
         }
 
         private void DeleteTempFolder(string tempFolder)
@@ -474,10 +544,11 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public void CopyFile(string filename, string destFile)
         {
+
            using (MagickImage image = new MagickImage(filename))
             {
-                double zw = (double)VideoType.Width / image.Width;
-                double zh = (double)VideoType.Height /image.Height;
+                double zw = (double)Width / image.Width;
+                double zh = (double)Height /image.Height;
                 double za = FillImage ? ((zw <= zh) ? zw : zh) : ((zw >= zh) ? zw : zh);
 
                 if (FillImage)

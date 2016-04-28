@@ -69,8 +69,8 @@
                 <Label Grid.Row="4" Grid.Column="0" Content="Width" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
                 <controls:NumericUpDown Grid.Row="4" Grid.Column="1" Minimum="10" Value="{Binding Width}" Maximum="4096" Margin="3" />
 
-                <Label Grid.Row="4" Grid.Column="2" Content="Heigh" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
-                <controls:NumericUpDown Grid.Row="4" Grid.Column="3" Minimum="10" Value="{Binding Heigh}" Margin="3" Maximum="4096" />
+                <Label Grid.Row="4" Grid.Column="2" Content="Height" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
+                <controls:NumericUpDown Grid.Row="4" Grid.Column="3" Minimum="10" Value="{Binding Height}" Margin="3" Maximum="4096" />
 
                 <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelStartImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
                 <controls:NumericUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Value="{Binding MinValue}" Maximum="{Binding TotalImages}" Margin="3" />
@@ -84,9 +84,10 @@
                 <ProgressBar Grid.Row="7" Grid.ColumnSpan="5" Grid.Column="0" VerticalAlignment="Bottom" Height="20" Margin="3" Value="{Binding Progress}" Maximum="{Binding ProgressMax}"/>
 
                 <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="4" Command="{Binding StartCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
-                <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="4" Grid.Row="1" Command="{Binding StopCommand}" Margin="5" IsEnabled="{Binding IsBusy}"/>
-                <Button Content="{T:TranslateExtension LabelPlayVideo}" Grid.Column="4" Grid.Row="2" Command="{Binding PlayVideoCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
-                <Button Content="Transform plugin" Grid.Column="4" Grid.Row="3" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                <Button Content="Preview" Grid.Row="1" Grid.Column="4" Command="{Binding StartPreviewCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="4" Grid.Row="2" Command="{Binding StopCommand}" Margin="5" IsEnabled="{Binding IsBusy}"/>
+                <Button Content="{T:TranslateExtension LabelPlayVideo}" Grid.Column="4" Grid.Row="3" Command="{Binding PlayVideoCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
+                <Button Content="Transform plugin" Grid.Column="4" Grid.Row="4" Command="{Binding ConfPluginCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
             </Grid>
         </GroupBox>
     </Grid>
