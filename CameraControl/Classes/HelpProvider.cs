@@ -66,19 +66,19 @@ namespace CameraControl.Classes
         {
             _helpData = new Dictionary<HelpSections, string>
                             {
-                                {HelpSections.MainMenu, "http://digicamcontrol.com/wiki/index.php/User_Guide"},
-                                {HelpSections.Bracketig, "http://digicamcontrol.com/wiki/index.php/Bracketing"},
+                                {HelpSections.MainMenu, "http://digicamcontrol.com/doc/userguide"},
+                                {HelpSections.Bracketig, "http://digicamcontrol.com/doc/userguide/interface/bracketing"},
                                 {
                                     HelpSections.FocusStacking,
-                                    "http://digicamcontrol.com/wiki/index.php/Live_view#Focus_stacking"
+                                    "http://digicamcontrol.com/doc/userguide/interface/liveview#focus-stacking"
                                     },
-                                {HelpSections.Settings, "http://digicamcontrol.com/wiki/index.php/Settings"},
-                                {HelpSections.TimeLapse, "http://digicamcontrol.com/wiki/index.php/Time_lapse"},
-                                {HelpSections.LiveView, "http://digicamcontrol.com/wiki/index.php/Live_view"},
-                                {HelpSections.Session, "http://digicamcontrol.com/wiki/index.php/Session"},
-                                {HelpSections.Bulb, "http://digicamcontrol.com/wiki/index.php/Bulb_mode_(Astro_module)"},
-                                {HelpSections.MultipleCamera, "http://digicamcontrol.com/wiki/index.php/Multiple_cameras"},
-                                {HelpSections.DownloadPhotos, "http://digicamcontrol.com/wiki/index.php/Download_photos"},
+                                {HelpSections.Settings, "http://digicamcontrol.com/doc/userguide/settings"},
+                                {HelpSections.TimeLapse, "http://digicamcontrol.com/doc/userguide/interface/timelapse"},
+                                {HelpSections.LiveView, "http://digicamcontrol.com/doc/userguide/interface/liveview"},
+                                {HelpSections.Session, "http://digicamcontrol.com/doc/userguide/session"},
+                                {HelpSections.Bulb, "http://digicamcontrol.com/doc/userguide/interface/astromod"},
+                                {HelpSections.MultipleCamera, "http://digicamcontrol.com/doc/userguide/interface/multicam"},
+                                {HelpSections.DownloadPhotos, "http://digicamcontrol.com/doc/userguide/interface/downph"},
                             };
         }
 
