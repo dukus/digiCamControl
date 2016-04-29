@@ -13,6 +13,7 @@ namespace CameraControl.Core.Classes
         private ObservableCollection<ValuePairEnumerator> _configDataCollection;
         private bool _isEnabled;
         private string _name;
+        private ObservableCollection<PluginCondition> _conditions;
 
         [XmlAttribute]
         public string Type { get; set; }
@@ -36,6 +37,16 @@ namespace CameraControl.Core.Classes
             set
             {
                 _configDataCollection = value;
+            }
+        }
+
+        public ObservableCollection<PluginCondition> Conditions
+        {
+            get { return _conditions; }
+            set
+            {
+                _conditions = value;
+                NotifyPropertyChanged("Conditions");
             }
         }
 
@@ -110,14 +121,18 @@ namespace CameraControl.Core.Classes
             IsRedy = true;
             ConfigData = new ValuePairEnumerator();
             ConfigDataCollection = new ObservableCollection<ValuePairEnumerator>();
+            Conditions = new AsyncObservableCollection<PluginCondition>();
+            Conditions.Add(new PluginCondition());
         }
 
         public AutoExportPluginConfig()
         {
             ConfigData = new ValuePairEnumerator();
             ConfigDataCollection = new ObservableCollection<ValuePairEnumerator>();
+            Conditions = new AsyncObservableCollection<PluginCondition>();
             IsError = false;
             IsRedy = true;
+            Conditions.Add(new PluginCondition());
         }
     }
 }

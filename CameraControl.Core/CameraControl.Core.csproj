@@ -221,6 +221,7 @@
     <Compile Include="Classes\PhotoSession.cs" />
     <Compile Include="Classes\PhotoUtils.cs" />
     <Compile Include="Classes\PipeServerT.cs" />
+    <Compile Include="Classes\PluginCondition.cs" />
     <Compile Include="Classes\PluginSetting.cs" />
     <Compile Include="Classes\PrintSettings.cs" />
     <Compile Include="Classes\Queue\QueueItemFileItem.cs" />
