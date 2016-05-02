@@ -672,5 +672,10 @@ namespace CameraControl.Core.Translation
         public static string LabelHideTrayNotifications = "Hide tray bar notifications";
         //26/03/2016
         public static string LabelConditions = "Conditions";
+        public static string LabelVariable = "Variable";
+        public static string LabelCondition = "Condition";
+        public static string LabelOperator = "Operator";
+        public static string LabelValue = "Value";
+        public static string LabelDelete = "Delete";
     }
 }

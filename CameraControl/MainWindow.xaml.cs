@@ -541,6 +541,9 @@ namespace CameraControl
                 {
                     if(!plugin.IsEnabled)
                         continue;
+                    if (!plugin.Evaluate(eventArgs.CameraDevice))
+                        continue;
+
                     var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
                     try
                     {

@@ -99,18 +99,34 @@
             <TabItem Header="{translation:TranslateExtension LabelConditions}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="31*"/>
-                        <RowDefinition Height="138*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="1" ItemsSource="{Binding Config.Conditions}">
+                    <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding AddConditionCommand}" HorizontalAlignment="Left">
+                        <Rectangle Width="25" Height="25">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Label Content="{translation:TranslateExtension LabelOperator}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
+                        <Label Content="{translation:TranslateExtension LabelVariable}" Margin="2" Width="280" HorizontalContentAlignment="Center"/>
+                        <Label Content="{translation:TranslateExtension LabelCondition}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
+                        <Label Content="{translation:TranslateExtension LabelValue}" Margin="2" Width="280" HorizontalContentAlignment="Center"/>
+                        <Label Content="{translation:TranslateExtension LabelDelete}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="2" ItemsSource="{Binding Config.Conditions}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <ComboBox SelectedItem="{Binding Operator}" ItemsSource="{Binding OperatorList}" Margin="2" Width="70"/>
                                     <ComboBox SelectedItem="{Binding Variable}" ItemsSource="{Binding VariableList}" Margin="2" Width="280"/>
                                     <ComboBox SelectedItem="{Binding Condition}" ItemsSource="{Binding ConditionList}" Margin="2" Width="70"/>
-                                    <ComboBox Text="{Binding Value}" ItemsSource="{Binding VariableList}" Margin="2" Width="280" IsEditable="True"/>
-                                    <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right">
+                                    <ComboBox Text="{Binding Value}" ItemsSource="{Binding ValueList}" Margin="2" Width="280" IsEditable="True"/>
+                                    <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveConditionCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right">
                                         <Rectangle Width="10" Height="10">
                                             <Rectangle.Fill>
                                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 
 namespace CameraControl.Core.Classes
@@ -122,7 +123,6 @@ namespace CameraControl.Core.Classes
             ConfigData = new ValuePairEnumerator();
             ConfigDataCollection = new ObservableCollection<ValuePairEnumerator>();
             Conditions = new AsyncObservableCollection<PluginCondition>();
-            Conditions.Add(new PluginCondition());
         }
 
         public AutoExportPluginConfig()
@@ -132,7 +132,28 @@ namespace CameraControl.Core.Classes
             Conditions = new AsyncObservableCollection<PluginCondition>();
             IsError = false;
             IsRedy = true;
-            Conditions.Add(new PluginCondition());
+        }
+
+        public bool Evaluate(ICameraDevice device)
+        {
+            if (Conditions.Count == 0)
+                return true;
+            var res = Conditions[0].Evaluate(device);
+            if (Conditions.Count == 1)
+                return res;
+            for (int i = 1; i < Conditions.Count; i++)
+            {
+                var cond = Conditions[i];
+                if (cond.Operator == "AND")
+                {
+                    res = res && cond.Evaluate(device);
+                }
+                else
+                {
+                    res = res || cond.Evaluate(device);
+                }
+            }
+            return res;
         }
     }
 }

@@ -157,7 +157,10 @@ namespace CameraControl.Core.Scripting
                                 (arg.Split('.')[1].ToLower().Replace(" ", "_") == info.Name.ToLower()))
                             {
                                 dynamic valp = info.GetValue(device, null);
-                                return valp.Values;
+                                if (valp != null)
+                                    return valp.Values;
+                                else
+                                    return new[] {""};
                             }
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)
