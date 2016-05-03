@@ -195,7 +195,9 @@ namespace CameraControl.Core.Classes
                     double dw = (double)LargeThumbSize / image.Width;
                     image.FilterType = FilterType.Box;
                     image.Thumbnail((int)(image.Width * dw), (int)(image.Height * dw));
+                    
                     image.UnsharpMask(1, 1, 0.5, 0.1);
+                    
                     PhotoUtils.CreateFolder(fileItem.LargeThumb);
                     image.Write(fileItem.LargeThumb);
                     fileItem.IsLoaded = true;
@@ -203,7 +205,9 @@ namespace CameraControl.Core.Classes
 
                     dw = (double)SmallThumbSize / image.Width;
                     image.Thumbnail((int)(image.Width * dw), (int)(image.Height * dw));
+                    
                     image.UnsharpMask(1, 1, 0.5, 0.1);
+                    
                     PhotoUtils.CreateFolder(fileItem.SmallThumb);
                     image.Write(fileItem.SmallThumb);
                     

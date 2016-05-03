@@ -677,5 +677,7 @@ namespace CameraControl.Core.Translation
         public static string LabelOperator = "Operator";
         public static string LabelValue = "Value";
         public static string LabelDelete = "Delete";
+        public static string LabelDisableHardwareAcceleratione = "Disable Hardware Acceleration";
+        
     }
 }

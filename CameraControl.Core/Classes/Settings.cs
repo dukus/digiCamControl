@@ -770,6 +770,7 @@ namespace CameraControl.Core.Classes
         private bool _enhancedThumbs;
         private bool _hideFullscreenControls;
         private bool _hideTrayNotifications;
+        private bool _disableHardwareAcceleration;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -903,6 +904,16 @@ namespace CameraControl.Core.Classes
             {
                 _showThumbInfo = value;
                 NotifyPropertyChanged("ShowThumbInfo");
+            }
+        }
+
+        public bool DisableHardwareAcceleration
+        {
+            get { return _disableHardwareAcceleration; }
+            set
+            {
+                _disableHardwareAcceleration = value;
+                NotifyPropertyChanged("DisableHardwareAcceleration");
             }
         }
 
@@ -1048,6 +1059,7 @@ namespace CameraControl.Core.Classes
             Autorotate = true;
             ShowThumbInfo = true;
             SelectedLayout = "Normal";
+            DisableHardwareAcceleration = true;
         }
 
 

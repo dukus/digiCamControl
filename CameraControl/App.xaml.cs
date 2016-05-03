@@ -135,6 +135,8 @@ namespace CameraControl
                     if (ServiceProvider.Settings.AddFakeCamera)
                         ServiceProvider.DeviceManager.AddFakeCamera();
                     ServiceProvider.DeviceManager.ConnectToCamera();
+                    if (ServiceProvider.Settings.DisableHardwareAcceleration)
+                        OpenCL.IsEnabled = false;
                 }
                 catch (Exception exception)
                 {
