@@ -738,25 +738,25 @@ namespace CameraControl.Core.Classes
                 return points;
             }
 
-            //values = SmoothHistogram(values);
+            values = SmoothHistogram(values);
 
             int max = values.Max();
 
 
             // first point (lower-left corner)
-            points.Add(new System.Windows.Point(0, max));
+            points.Add(new Point(0, max));
             // middle points
             for (int i = 0; i < values.Length; i++)
             {
-                points.Add(new System.Windows.Point(i, max - values[i]));
+                points.Add(new Point(i, max - values[i]));
             }
             // last point (lower-right corner)
-            points.Add(new System.Windows.Point(values.Length - 1, max));
+            points.Add(new Point(values.Length - 1, max));
             points.Freeze();
             return points;
         }
 
-        private int[] SmoothHistogram(int[] originalValues)
+        private static int[] SmoothHistogram(int[] originalValues)
         {
             int[] smoothedValues = new int[originalValues.Length];
 

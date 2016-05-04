@@ -384,6 +384,9 @@
     <Compile Include="windows\GetIpWnd.xaml.cs">
       <DependentUpon>GetIpWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\LiveViewFullScreenWnd.xaml.cs">
+      <DependentUpon>LiveViewFullScreenWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\LiveViewManager.cs" />
     <Compile Include="windows\LiveViewWnd.xaml.cs">
       <DependentUpon>LiveViewWnd.xaml</DependentUpon>
@@ -606,6 +609,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\GetIpWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\LiveViewFullScreenWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

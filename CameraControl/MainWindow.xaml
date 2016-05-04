@@ -245,27 +245,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding ElementName=TgGray, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                        <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.5" Visibility="{Binding ElementName=TgRed, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}" />
-                        <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.5" Visibility="{Binding ElementName=TgGreen, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                        <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding ElementName=TgBlue, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" />
+                        <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Stroke="Red"  />
+                        <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Stroke="LightGreen"  />
+                        <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Stroke="Blue" />
                         <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
                         <CheckBox Grid.Column="0" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
                         <CheckBox Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-                        <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
-                            <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgRed">
-                                <Ellipse Height="10" Width="10" Fill="Red"/>
-                            </ToggleButton>
-                            <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgGreen">
-                                <Ellipse Height="10" Width="10" Fill="Green"/>
-                            </ToggleButton>
-                            <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgBlue">
-                                <Ellipse Height="10" Width="10" Fill="Blue"/>
-                            </ToggleButton>
-                            <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" Name="TgGray" >
-                                <Ellipse Height="10" Width="10" Fill="Gray"/>
-                            </ToggleButton>
-                        </StackPanel>
                         <Label Grid.Row="1" Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Margin="0" Padding="0" HorizontalAlignment="Center" />
                     </Grid>
                 </GroupBox>

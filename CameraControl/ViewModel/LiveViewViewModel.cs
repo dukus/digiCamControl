@@ -34,6 +34,7 @@ namespace CameraControl.ViewModel
     public class LiveViewViewModel : ViewModelBase
     {
         public static event EventHandler FocuseDone;
+        private LiveViewFullScreenWnd FullScreenWnd;
 
         private const int DesiredFrameRate = 20;
         private StreamPlayerControl _videoSource = new StreamPlayerControl();
@@ -1174,6 +1175,7 @@ namespace CameraControl.ViewModel
         public RelayCommand LockCurrentNearCommand { get; set; }
         public RelayCommand LockCurrentFarCommand { get; set; }
 
+        public RelayCommand FullScreenCommand { get; set; }
         #endregion
 
         public bool IsActive { get; set; }
@@ -1322,7 +1324,23 @@ namespace CameraControl.ViewModel
 
             CancelCaptureCommand = new RelayCommand(() => CaptureCancelRequested = true);
 
+            FullScreenCommand = new RelayCommand(FullScreen);
+
         }
+
+        private void FullScreen()
+        {
+            if (FullScreenWnd!=null)
+            {
+                FullScreenWnd.Close();
+                FullScreenWnd.DataContext = null;
+                FullScreenWnd = null;
+            }
+            FullScreenWnd = new LiveViewFullScreenWnd();
+            FullScreenWnd.DataContext = this;
+            FullScreenWnd.Show();
+        }
+
 
         private void ToggleGrid()
         {

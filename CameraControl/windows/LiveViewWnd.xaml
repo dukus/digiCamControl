@@ -146,6 +146,13 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Background="#35000000" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" Grid.RowSpan="4" Margin="10,55,10,10">
+            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding FullScreenCommand}">
+                <Rectangle Width="20" Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new_window}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
             <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding ZoomOutCommand}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
@@ -645,13 +652,14 @@
         </Grid>
 
         <Ellipse Width="190" Height="190" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" 
-                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.4" RenderTransformOrigin="0.5,0.5">
-            <Ellipse.Fill>
+                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
+            <Ellipse.Stroke>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="Blue"/>
+                    <GradientStop Color="Red" Offset="0.5"/>
+                    <GradientStop Color="Green" Offset="1"/>
                 </LinearGradientBrush>
-            </Ellipse.Fill>
+            </Ellipse.Stroke>
             <Ellipse.RenderTransform>
                 <RotateTransform/>
             </Ellipse.RenderTransform>
@@ -659,14 +667,14 @@
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:1" RepeatBehavior="Forever"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:2" RepeatBehavior="Forever"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </Ellipse.Triggers>
         </Ellipse>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="4" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="2" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />

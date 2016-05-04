@@ -1,0 +1,50 @@
+﻿<controls:MetroWindow x:Class="CameraControl.windows.LiveViewFullScreenWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        ShowIconOnTitleBar="False" ShowTitleBar="False"
+        Title="LiveViewFullScreenWnd" Width="472" WindowStyle="None" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" Topmost="True" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False" IgnoreTaskbarOnMaximize="True" PreviewKeyDown="MetroWindow_PreviewKeyDown" WindowState="Maximized">
+    <Window.DataContext>
+        <viewModel:LiveViewViewModel/>
+    </Window.DataContext>    
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
+    </Window.Resources>
+    <Grid>
+        <Image Name="image1" Margin="5" Stretch="Uniform" Source="{Binding Bitmap}" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" KeyUp="image1_KeyUp">
+        </Image>
+        <Grid Width="300" Grid.Column="2" Grid.Row="2" Name="grid_wait" Visibility="{Binding Path=DelayedStart, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}">
+            <ProgressBar IsIndeterminate="True" Height="20"/>
+            <Label Content="{translation:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
+        </Grid>
+
+        <Ellipse Width="190" Height="190" Grid.Row="0" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
+            <Ellipse.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="Blue"/>
+                    <GradientStop Color="Red" Offset="0.5"/>
+                    <GradientStop Color="Green" Offset="1"/>
+                </LinearGradientBrush>
+            </Ellipse.Stroke>
+            <Ellipse.RenderTransform>
+                <RotateTransform/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:2" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Ellipse.Triggers>
+        </Ellipse>
+
+        <Label Grid.Row="0" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    </Grid>
+</controls:MetroWindow>
