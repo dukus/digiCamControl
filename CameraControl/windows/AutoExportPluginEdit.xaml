@@ -103,6 +103,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
                     <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding AddConditionCommand}" HorizontalAlignment="Left">
                         <Rectangle Width="25" Height="25">
                             <Rectangle.Fill>
@@ -110,6 +111,14 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
+                    <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding CheckConditionCommand}" HorizontalAlignment="Left">
+                        <Rectangle Width="25" Height="25">
+                            <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Label Content="{translation:TranslateExtension LabelOperator}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
                         <Label Content="{translation:TranslateExtension LabelVariable}" Margin="2" Width="280" HorizontalContentAlignment="Center"/>
@@ -123,7 +132,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <ComboBox SelectedItem="{Binding Operator}" ItemsSource="{Binding OperatorList}" Margin="2" Width="70"/>
-                                    <ComboBox SelectedItem="{Binding Variable}" ItemsSource="{Binding VariableList}" Margin="2" Width="280"/>
+                                    <ComboBox SelectedItem="{Binding Variable}" ItemsSource="{Binding VariableList}" Margin="2" Width="280" IsEditable="True"/>
                                     <ComboBox SelectedItem="{Binding Condition}" ItemsSource="{Binding ConditionList}" Margin="2" Width="70"/>
                                     <ComboBox Text="{Binding Value}" ItemsSource="{Binding ValueList}" Margin="2" Width="280" IsEditable="True"/>
                                     <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveConditionCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right">

@@ -29,6 +29,7 @@ namespace CameraControl.ViewModel
         public RelayCommand ApplyCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<PluginCondition> RemoveConditionCommand { get; set; }
         public RelayCommand AddConditionCommand { get; set; }
+        public RelayCommand CheckConditionCommand { get; set; }
 
         public AutoExportPluginConfig Config
         {
@@ -138,6 +139,21 @@ namespace CameraControl.ViewModel
             ApplyCommand = new RelayCommand(Apply);
             RemoveConditionCommand = new GalaSoft.MvvmLight.Command.RelayCommand<PluginCondition>(RemoveCondition);
             AddConditionCommand = new RelayCommand(AddCondition);
+            CheckConditionCommand = new RelayCommand(CheckCondition);
+        }
+
+        private void CheckCondition()
+        {
+            try
+            {
+                MessageBox.Show(Config.Evaluate(ServiceProvider.DeviceManager.SelectedCameraDevice)
+                    ? "Conditions is evaluated : True"
+                    : "Conditions is evaluated : False");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Evaluation error " + ex.Message);
+            }
         }
 
         private void AddCondition()
