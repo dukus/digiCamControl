@@ -28,7 +28,7 @@ namespace Canon.Eos.Framework.Internal
             return stream;    
         }
 
-        private static IntPtr CreateMemoryStream(uint size)
+        private static IntPtr CreateMemoryStream(UInt64 size)
         {
             IntPtr stream;
             Util.Assert(Edsdk.EdsCreateMemoryStream(size, out stream), "Failed to create memory stream");
@@ -44,7 +44,7 @@ namespace Canon.Eos.Framework.Internal
             }
         }
 
-        private static void Download(IntPtr directoryItem, uint size, IntPtr stream)
+        private static void Download(IntPtr directoryItem, UInt64 size, IntPtr stream)
         {
             if (stream == IntPtr.Zero)
                 return;
@@ -63,7 +63,7 @@ namespace Canon.Eos.Framework.Internal
             }            
         }
 
-        private static void Transport(IntPtr directoryItem, uint size, IntPtr stream, bool destroyStream)
+        private static void Transport(IntPtr directoryItem, UInt64 size, IntPtr stream, bool destroyStream)
         {
             try
             {

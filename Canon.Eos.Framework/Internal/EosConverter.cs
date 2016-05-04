@@ -13,7 +13,7 @@ namespace Canon.Eos.Framework.Internal
             IntPtr imagePtr;
             Util.Assert(Edsdk.EdsGetPointer(imageStream, out imagePtr), "Failed to get image pointer.");
             
-            uint imageLen;
+            UInt64 imageLen;
             Util.Assert(Edsdk.EdsGetLength(imageStream, out imageLen), "Failed to get image pointer length.");
 
             var bytes = new byte[imageLen];

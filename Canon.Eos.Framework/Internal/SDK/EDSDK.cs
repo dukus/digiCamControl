@@ -6,11 +6,13 @@ namespace Canon.Eos.Framework.Internal.SDK
 
     public partial class Edsdk
     {
+
+
         #region Callback Functions
 
         public delegate uint EdsProgressCallback( uint inPercent, IntPtr inContext, ref bool outCancel);
         public delegate uint EdsCameraAddedHandler(IntPtr inContext);
-        public delegate uint EdsPropertyEventHandler(uint inEvent, uint inPropertyId, uint inParam, IntPtr inContext); 
+        public delegate uint EdsPropertyEventHandler(uint inEvent, uint inPropertyID, uint inParam, IntPtr inContext); 
         public delegate uint EdsObjectEventHandler( uint inEvent, IntPtr inRef, IntPtr inContext); 
         public delegate uint EdsStateEventHandler( uint inEvent, uint inParameter, IntPtr inContext);
 
@@ -122,6 +124,7 @@ namespace Canon.Eos.Framework.Internal.SDK
          Capture Properties
         ----------------------------------*/
         public const uint   PropID_AEMode               = 0x00000400;
+		public const uint   PropID_AEModeSelect         = 0x00000436;
         public const uint   PropID_DriveMode            = 0x00000401;
         public const uint   PropID_ISOSpeed             = 0x00000402;
         public const uint   PropID_MeteringMode         = 0x00000403;
@@ -157,18 +160,18 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint   PropID_Evf_WhiteBalance        = 0x00000502;
         public const uint   PropID_Evf_ColorTemperature    = 0x00000503;
         public const uint   PropID_Evf_DepthOfFieldPreview = 0x00000504;
-        public const uint   PropID_Record                  = 0x00000510;
 
 		// EVF IMAGE DATA Properties
         public const uint   PropID_Evf_Zoom                = 0x00000507;
         public const uint   PropID_Evf_ZoomPosition        = 0x00000508;
         public const uint   PropID_Evf_FocusAid            = 0x00000509;
-        public const uint   PropID_Evf_ZoomRect            = 0x00000541;
         public const uint   PropID_Evf_Histogram           = 0x0000050A;
         public const uint   PropID_Evf_ImagePosition       = 0x0000050B;
+        public const uint PropID_Evf_ZoomRect = 0x00000541;
 		public const uint   PropID_Evf_HistogramStatus     = 0x0000050C;
         public const uint   PropID_Evf_AFMode              = 0x0000050E;
-        public const uint   PropID_Evf_CoordinateSystem    = 0x00000540;
+        public const uint PropID_Evf_CoordinateSystem = 0x00000540;
+		public const uint   PropID_Record                  = 0x00000510;
              
         /*----------------------------------
          Image GPS Properties
@@ -469,6 +472,8 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint PictureStyle_Neutral      = 0x0084;
         public const uint PictureStyle_Faithful     = 0x0085;
         public const uint PictureStyle_Monochrome   = 0x0086;
+        public const uint PictureStyle_Auto         = 0x0087;
+        public const uint PictureStyle_FineDetail   = 0x0088;
         public const uint PictureStyle_User1        = 0x0021;
         public const uint PictureStyle_User2        = 0x0022;
         public const uint PictureStyle_User3        = 0x0023;
@@ -496,6 +501,11 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint   AEMode_Landscape        = 13;
         public const uint   AEMode_Closeup          = 14;
         public const uint   AEMode_FlashOff         = 15;
+        public const uint   AEMode_CreativeAuto     = 19;
+        public const uint   AEMode_Movie			= 20;
+        public const uint   AEMode_PhotoInMovie		= 21;
+		public const uint   AEMode_SceneIntelligentAuto = 22;
+		public const uint   AEMode_SCN              = 25;
         public const uint   AEMode_Unknown          = 0xffffffff;
 
         /*-----------------------------------------------------------------------------
@@ -527,6 +537,7 @@ namespace Canon.Eos.Framework.Internal.SDK
             Evf_AFMode_Quick    = 0,
             Evf_AFMode_Live     = 1,
             Evf_AFMode_LiveFace = 2,
+			Evf_AFMode_LiveMulti = 3,
         }
 
         /*-----------------------------------------------------------------------------
@@ -980,7 +991,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //
         //  Parameters:
         //       In:    inRef - The reference of the item.
-        //              inPropertyId - The ProprtyID
+        //              inPropertyID - The ProprtyID
         //              inParam - Additional information of property.
         //                   We use this parameter in order to specify an index
         //                   in case there are two or more values over the same ID.
@@ -992,7 +1003,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/ 
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsGetPropertySize(IntPtr inRef, uint inPropertyId, int inParam,
+        public extern static uint EdsGetPropertySize(IntPtr inRef, uint inPropertyID, int inParam,
              out EdsDataType outDataType, out int outSize);
         
         /*-----------------------------------------------------------------------------
@@ -1004,7 +1015,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //
         //  Parameters:
         //       In:    inRef - The reference of the item.
-        //              inPropertyId - The ProprtyID
+        //              inPropertyID - The ProprtyID
         //              inParam - Additional information of property.
         //                   We use this parameter in order to specify an index
         //                   in case there are two or more values over the same ID.
@@ -1015,38 +1026,38 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/      
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyId, int inParam,
+        public extern static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyID, int inParam,
              int inPropertySize, IntPtr outPropertyData);
 
         #region GetPorpertyData Wrapper
 
-        public static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyId, int inParam, out uint outPropertyData)
+        public static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyID, int inParam, out uint outPropertyData)
         {
             int size = Marshal.SizeOf(typeof(uint));
             IntPtr ptr = Marshal.AllocHGlobal(size);
-            uint err = EdsGetPropertyData(inRef, inPropertyId, inParam, size, ptr);
+            uint err = EdsGetPropertyData(inRef, inPropertyID, inParam, size, ptr);
 
             outPropertyData = (uint)Marshal.PtrToStructure(ptr, typeof(uint));
             Marshal.FreeHGlobal(ptr);
             return err;
         }
 
-        public static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyId, int inParam,
+        public static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyID, int inParam,
              out Edsdk.EdsTime outPropertyData)
         {
             int size = Marshal.SizeOf(typeof(Edsdk.EdsTime));
             IntPtr ptr = Marshal.AllocHGlobal(size);
-            uint err = EdsGetPropertyData(inRef, inPropertyId, inParam, size, ptr);
+            uint err = EdsGetPropertyData(inRef, inPropertyID, inParam, size, ptr);
 
             outPropertyData = (Edsdk.EdsTime)Marshal.PtrToStructure(ptr, typeof(Edsdk.EdsTime));
             Marshal.FreeHGlobal(ptr);
             return err;
         }
 
-        public static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyId, int inParam, out string outPropertyData)
+        public static uint EdsGetPropertyData(IntPtr inRef, uint inPropertyID, int inParam, out string outPropertyData)
         {
             IntPtr ptr = Marshal.AllocHGlobal(256);
-            uint err = EdsGetPropertyData(inRef, inPropertyId, inParam, 256, ptr);
+            uint err = EdsGetPropertyData(inRef, inPropertyID, inParam, 256, ptr);
 
             outPropertyData = Marshal.PtrToStringAnsi(ptr);
             Marshal.FreeHGlobal(ptr);
@@ -1064,7 +1075,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //
         //  Parameters:
         //       In:    inRef - The reference of the item.
-        //              inPropertyId - The ProprtyID
+        //              inPropertyID - The ProprtyID
         //              inParam - Additional information of property.
         //              inPropertySize - The number of bytes of the prepared buffer
         //                  for set property-value.
@@ -1074,8 +1085,8 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsSetPropertyData( IntPtr inRef, uint inPropertyId,
-             int inParam, int inPropertySize, [MarshalAs(UnmanagedType.AsAny), In] object inPropertyData);        
+        public extern static uint EdsSetPropertyData( IntPtr inRef, uint inPropertyID,
+             int inParam, int inPropertySize, [MarshalAs(UnmanagedType.AsAny), In] object inPropertyData);
     
         /*-----------------------------------------------------------------------------
         //  
@@ -1088,13 +1099,13 @@ namespace Canon.Eos.Framework.Internal.SDK
         //
         //  Parameters:
         //       In:    inRef - The reference of the camera.
-        //              inPropertyId - The Property ID.
+        //              inPropertyID - The Property ID.
         //       Out:   outPropertyDesc - Array of the value which can be set up.
         //
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/ 
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsGetPropertyDesc( IntPtr inRef, uint inPropertyId,
+        public extern static uint EdsGetPropertyDesc( IntPtr inRef, uint inPropertyID,
              out EdsPropertyDesc outPropertyDesc);
 
         /*--------------------------------------------
@@ -1208,7 +1219,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsSendStatusCommand(IntPtr inCameraRef, uint inCameraState, int inParam = 0);
+        public extern static uint EdsSendStatusCommand(IntPtr inCameraRef, uint inCameraState, int inParam);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1336,7 +1347,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsDownload ( IntPtr inDirItemRef, uint inReadSize, IntPtr outStream);
+        public extern static uint EdsDownload(IntPtr inDirItemRef, UInt64 inReadSize, IntPtr outStream);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1479,7 +1490,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsCreateMemoryStream( uint inBufferSize, out IntPtr outStream);
+        public extern static uint EdsCreateMemoryStream(UInt64 inBufferSize, out IntPtr outStream);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1500,7 +1511,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsCreateFileStreamEx( 
+        public extern static uint EdsCreateStreamEx( 
            string                       inFileName,
            EdsFileCreateDisposition     inCreateDisposition,
            EdsAccess                    inDesiredAccess,
@@ -1523,7 +1534,8 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsCreateMemoryStreamFromPointer(byte[] inUserBuffer, uint inBufferSize, out IntPtr outStream);
+        public extern static uint EdsCreateMemoryStreamFromPointer(byte[] inUserBuffer,
+             UInt64 inBufferSize, out IntPtr outStream);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1568,8 +1580,8 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsRead(IntPtr inStreamRef, uint inReadSize, IntPtr outBuffer,
-             out uint outReadSize);
+        public extern static uint EdsRead(IntPtr inStreamRef, UInt64 inReadSize, IntPtr outBuffer,
+             out UInt64 outReadSize);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1589,7 +1601,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsWrite(IntPtr inStreamRef, uint inWriteSize, IntPtr inBuffer,
+        public extern static uint EdsWrite(IntPtr inStreamRef, UInt64 inWriteSize, IntPtr inBuffer,
              out uint outWrittenSize);
 
         /*-----------------------------------------------------------------------------
@@ -1615,7 +1627,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsSeek( IntPtr inStreamRef, int inSeekOffset, EdsSeekOrigin inSeekOrigin );
+        public extern static uint EdsSeek(IntPtr inStreamRef, Int64 inSeekOffset, EdsSeekOrigin inSeekOrigin);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1632,7 +1644,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsGetPosition( IntPtr inStreamRef, out uint outPosition);
+        public extern static uint EdsGetPosition(IntPtr inStreamRef, out UInt64 outPosition);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1648,7 +1660,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsGetLength( IntPtr inStreamRef, out uint outLength );
+        public extern static uint EdsGetLength(IntPtr inStreamRef, out UInt64 outLength);
 
         /*-----------------------------------------------------------------------------
         //
@@ -1670,7 +1682,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         //  Returns:    Any of the sdk errors.
         -----------------------------------------------------------------------------*/
         [DllImport("EDSDK.dll")]
-        public extern static uint EdsCopyData( IntPtr inStreamRef, uint inWriteSize, IntPtr outStreamRef);
+        public extern static uint EdsCopyData(IntPtr inStreamRef, UInt64 inWriteSize, IntPtr outStreamRef);
 
         /*-----------------------------------------------------------------------------
         //
@@ -2119,7 +2131,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         [StructLayout(LayoutKind.Sequential)]
         public struct EdsDirectoryItemInfo 
         {
-            public uint Size;
+            public UInt64 Size;
             public int  isFolder;               
             public uint GroupID;
             public uint Option;
@@ -2128,6 +2140,7 @@ namespace Canon.Eos.Framework.Internal.SDK
             public string szFileName;
 
 			public uint format;
+			public uint dateTime;
 		} 
 
 
@@ -2189,7 +2202,9 @@ namespace Canon.Eos.Framework.Internal.SDK
             public int      saturation;
             public int      colorTone;  
             public uint     filterEffect;   
-            public uint     toningEffect;   
+            public uint     toningEffect;
+            public uint     sharpFineness;
+            public uint     sharpThreshold;
         }
 
         /*-----------------------------------------------------------------------------

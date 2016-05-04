@@ -344,7 +344,7 @@ namespace Canon.Eos.Framework
 
                 if (!this.IsLocked)
                 {
-                    Util.Assert(Edsdk.EdsSendStatusCommand(this.Handle, Edsdk.CameraState_UILock),
+                    Util.Assert(Edsdk.EdsSendStatusCommand(this.Handle, Edsdk.CameraState_UILock,0),
                                 "Failed to lock camera.");
                     this.IsLocked = true;
                 }
@@ -682,7 +682,7 @@ namespace Canon.Eos.Framework
             {
                 if (this.IsLocked)
                 {
-                    Edsdk.EdsSendStatusCommand(this.Handle, Edsdk.CameraState_UIUnLock);
+                    Edsdk.EdsSendStatusCommand(this.Handle, Edsdk.CameraState_UIUnLock,0);
                     this.IsLocked = false;
                 }
             }
