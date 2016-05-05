@@ -48,9 +48,7 @@ namespace CameraControl.Core.Scripting
                     Thread.Sleep(200);
                     return null;
                 case "do":
-                    DoCmd(args.Skip(1).ToArray());
-
-                    return null;
+                    return DoCmd(args.Skip(1).ToArray());
                 case "get":
                     return Get(args.Skip(1).ToArray());
                 case "list":
@@ -74,9 +72,23 @@ namespace CameraControl.Core.Scripting
             }
         }
 
-        private void DoCmd(string[] args)
+        private string DoCmd(string[] args)
         {
-            ServiceProvider.WindowsManager.ExecuteCommand(args[0]);
+            var device = GetDevice();
+            var arg = args[0].ToLower().Trim();
+            switch (arg)
+            {
+                case "startrecord":
+                    return CameraHelper.StartRecordVideo(device);
+                    break;
+                case "stoprecord":
+                    return CameraHelper.StopRecordVideo(device);
+                    break;
+                default:
+                    ServiceProvider.WindowsManager.ExecuteCommand(args[0]);
+                    break;
+            }
+            return "";
         }
 
         private object List(string[] args)
@@ -105,7 +117,10 @@ namespace CameraControl.Core.Scripting
                 case "sessions":
                     return ServiceProvider.Settings.PhotoSessions.Select(x => x.Name).ToArray();
                 case "cmds":
-                    return ServiceProvider.WindowsManager.WindowCommands.Select(x => x.Name).ToArray();
+                    var reslist = ServiceProvider.WindowsManager.WindowCommands.Select(x => x.Name).ToList();
+                    reslist.Add("StartRecord");
+                    reslist.Add("StopRecord");
+                    return reslist;
                 case "cameras":
                     return
                         ServiceProvider.DeviceManager.ConnectedDevices.Where(x => x.IsConnected)

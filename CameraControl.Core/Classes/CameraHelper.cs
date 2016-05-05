@@ -229,5 +229,41 @@ namespace CameraControl.Core.Classes
             return 0;
         }
 
+        public static string StartRecordVideo(ICameraDevice device)
+        {
+            ServiceProvider.DeviceManager.LastCapturedImage[device] = "-";
+            try
+            {
+                string resp = device.GetProhibitionCondition(OperationEnum.RecordMovie);
+                if (string.IsNullOrEmpty(resp))
+                {
+                    device.StartRecordMovie();
+                }
+                else
+                {
+                    return resp;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "";
+        }
+
+        public static string StopRecordVideo(ICameraDevice device)
+        {
+            ServiceProvider.DeviceManager.LastCapturedImage[device] = "-";
+            try
+            {
+                device.StopRecordMovie();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "";
+        }
+
     }
 }
