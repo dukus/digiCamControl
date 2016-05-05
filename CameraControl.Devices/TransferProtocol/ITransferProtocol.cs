@@ -24,6 +24,7 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System.IO;
 using PortableDeviceLib;
 
 namespace CameraControl.Devices.TransferProtocol
@@ -35,10 +36,10 @@ namespace CameraControl.Devices.TransferProtocol
         string SerialNumber { get; }
         bool IsConnected { get; set; }
         string DeviceId { get; }
-        
 
-        MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback,
-                                           params uint[] parameters);
+
+        MTPDataResponse ExecuteReadBigData(uint code, Stream stream, StillImageDevice.TransferCallback callback,
+            params uint[] parameters);
 
         MTPDataResponse ExecuteReadData(uint code, params uint[] parameters);
         uint ExecuteWithNoData(uint code, params uint[] parameters);

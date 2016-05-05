@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -96,7 +97,7 @@ namespace PortableDeviceLib
             return 0;
         }
 
-        public MTPDataResponse ExecuteReadBigData(uint code, TransferCallback callback, params uint[] parameters)
+        public MTPDataResponse ExecuteReadBigData(uint code,Stream stream, TransferCallback callback, params uint[] parameters)
         {
             MTPDataResponse res = new MTPDataResponse();
             // source: http://msdn.microsoft.com/en-us/library/windows/desktop/ff384843(v=vs.85).aspx
@@ -142,7 +143,7 @@ namespace PortableDeviceLib
                     if (((uint)pValue) == PortableDeviceErrorCodes.ERROR_BUSY)
                     {
                         Thread.Sleep(50);
-                        return ExecuteReadBigData(code, callback, parameters);
+                        return ExecuteReadBigData(code, stream, callback, parameters);
                     }
                 }
             }
@@ -181,7 +182,7 @@ namespace PortableDeviceLib
             pParameters.Clear();
             pResults.Clear();
             uint offset = 0;
-            res.Data = new byte[(int)tmpBufferSize];
+            res.Data = null;
             bool cont = true;
 
             do
@@ -237,12 +238,14 @@ namespace PortableDeviceLib
 
                 IntPtr tmpPtr = new IntPtr(Marshal.ReadInt64(ptr));
 
-                //Marshal.Copy(tmpPtr, res.Data, (int)offset, (int)cbBytesRead);
+                byte[] buffer = new byte[(int)cbBytesRead];
+                Marshal.Copy(tmpPtr, buffer, 0, (int)cbBytesRead);
+                stream.Write(buffer, 0, (int)cbBytesRead);
 
-                for (int i = 0; i < cbBytesRead; i++)
-                {
-                    res.Data[offset + i] = Marshal.ReadByte(tmpPtr, i);
-                }
+                //for (int i = 0; i < cbBytesRead; i++)
+                //{
+                //    res.Data[offset + i] = Marshal.ReadByte(tmpPtr, i);
+                //}
 
                 Marshal.FreeHGlobal(tmpPtr);
                 pinnedArray.Free();

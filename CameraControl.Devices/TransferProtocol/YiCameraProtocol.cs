@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -213,7 +214,9 @@ namespace CameraControl.Devices.TransferProtocol
                 Log.Error("SetupRecieveCallback", ex);
             }
         }
-        public MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback, params uint[] parameters)
+
+
+        public MTPDataResponse ExecuteReadBigData(uint code, Stream stream, StillImageDevice.TransferCallback callback, params uint[] parameters)
         {
             throw new NotImplementedException();
         }

@@ -267,33 +267,28 @@ namespace CameraControl.Devices
                 {
                     try
                     {
-                        result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetObject,
-                                                                     (total, current) =>
-                                                                     {
-                                                                         double i = (double)current / total;
-                                                                         TransferProgress =
-                                                                             Convert.ToUInt32(i * 100);
-                                                                     }, Convert.ToUInt32(o));
-                    }
-                    // if not enough memory for transfer catch it and wait and try again
-                    catch (OutOfMemoryException)
-                    {
+                        result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetObject, stream,
+                            (total, current) =>
+                            {
+                                double i = (double) current/total;
+                                TransferProgress =
+                                    Convert.ToUInt32(i*100);
+                            }, Convert.ToUInt32(o));
+                        if (result != null && result.Data != null)
+                        {
+                            stream.Write(result.Data, 0, result.Data.Length);
+                        }
+                        break;
                     }
                     catch (COMException)
-                    {
-                    }
-
-                    if (result != null && result.Data != null)
-                    {
-                        stream.Write(result.Data, 0, result.Data.Length);
-                    }
-                    else
                     {
                         Log.Error("Transfer error code retrying " + result.ErrorCode.ToString("X"));
                         Thread.Sleep(200);
                         retryes--;
                     }
-                } while (result.Data == null && retryes > 0);
+
+                } while (retryes > 0);
+
                 //==================================================================
                 //=================== direct file write
                 //StillImageDevice.ExecuteReadBigDataWriteToFile(CONST_CMD_GetObject,

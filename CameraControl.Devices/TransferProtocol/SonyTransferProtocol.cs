@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace CameraControl.Devices.TransferProtocol
         public string DeviceId { get; private set; }
 
 
-        public MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback, params uint[] parameters)
+        public MTPDataResponse ExecuteReadBigData(uint code, Stream stream, StillImageDevice.TransferCallback callback, params uint[] parameters)
         {
             throw new NotImplementedException();
         }

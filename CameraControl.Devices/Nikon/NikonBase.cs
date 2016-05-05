@@ -2524,14 +2524,15 @@ namespace CameraControl.Devices.Nikon
 
                 using (var fs = File.Open(filename, FileMode.Create))
                 {
-                    MTPDataResponse result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetLargeThumb,
+                    MTPDataResponse result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetLargeThumb,fs,
                         (total, current) =>
                         {
                             double i = (double) current/total;
                             TransferProgress =
                                 Convert.ToUInt32(i*100);
                         }, Convert.ToUInt32(o));
-                    fs.Write(result.Data, 0, result.Data.Length);
+                    if (result.Data != null)
+                        fs.Write(result.Data, 0, result.Data.Length);
                 }
                 _timer.Start();
                 TransferProgress = 0;

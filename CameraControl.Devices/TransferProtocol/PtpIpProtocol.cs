@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using CameraControl.Devices.TransferProtocol.PtpIp;
 using PortableDeviceLib;
@@ -90,7 +91,7 @@ namespace CameraControl.Devices.TransferProtocol
             SerialNumber = Encoding.Unicode.GetString(res.Data, index, strlen4 - 2);
         }
 
-        public MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback, params uint[] parameters)
+        public MTPDataResponse ExecuteReadBigData(uint code,Stream stream, StillImageDevice.TransferCallback callback, params uint[] parameters)
         {
             lock (_locker)
             {

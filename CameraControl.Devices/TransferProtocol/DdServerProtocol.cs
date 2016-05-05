@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using CameraControl.Devices.TransferProtocol.DDServer;
 using PortableDeviceLib;
@@ -21,7 +22,7 @@ namespace CameraControl.Devices.TransferProtocol
         public string DeviceId { get; private set; }
 
 
-        public MTPDataResponse ExecuteReadBigData(uint code, StillImageDevice.TransferCallback callback, params uint[] parameters)
+        public MTPDataResponse ExecuteReadBigData(uint code,Stream stream ,StillImageDevice.TransferCallback callback, params uint[] parameters)
         {
             lock (_syncRoot)
             {
