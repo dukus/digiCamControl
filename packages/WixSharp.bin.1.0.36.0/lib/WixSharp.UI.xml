@@ -359,6 +359,9 @@
             <summary>
             The standard Welcome dialog
             </summary>
+            <summary>
+            The standard Welcome dialog
+            </summary>
         </member>
         <member name="M:WixSharp.UI.Forms.WelcomeDialog.#ctor">
             <summary>

@@ -2466,11 +2466,18 @@
             <param name="id">The id.</param>
             <param name="name">The name.</param>
         </member>
+        <member name="F:WixSharp.FirewallException.Feature">
+            <summary>
+            <see cref="F:WixSharp.FirewallException.Feature"></see> the FirewallException belongs to.
+            </summary>
+        </member>
         <member name="F:WixSharp.FirewallException.IsProcessSpecific">
             <summary>
             Gets or sets a value indicating whether the exception is a process/program specific or system wide one.
             <p>If this value is set to true (default) then the exception element will be placed inside of the parent File element in the 
             emitted WiX XML, otherwise it is placed in the File's Component element.</p>
+            You can achieve the same functionality by passing FirewallException instance directly into Project constructor as a top 
+            level argument. 
             </summary>
             <value>
             <c>true</c> if this instance is process specific; otherwise, <c>false</c>.
@@ -9005,6 +9012,11 @@
             Collection of <see cref="T:WixSharp.Certificate"/> to be installed.
             </summary>
         </member>
+        <member name="F:WixSharp.Project.FirewallExceptions">
+            <summary>
+            Collection of <see cref="T:WixSharp.FirewallException"/> to be installed.
+            </summary>
+        </member>
         <member name="F:WixSharp.Project.Properties">
             <summary>
             Collection of WiX/MSI <see cref="T:WixSharp.Property"/> objects to be created during the installed.
@@ -9067,6 +9079,17 @@
         <member name="F:WixSharp.Project.BackgroundImage">
             <summary>
             Path to the file containing the image (e.g. bmp) setup dialogs background. If not specified default image will be used.
+            <remarks>
+            <para>If the image is to be used in the default ManagedUI dialogs it will be left-docked at runtime and will effectively 
+            play the role of a left-aligned dialog banner. Thus if it is too wide it can push away (to right) the all other UI elements.
+            The optimal size of the image for ManagedUI is 494x312.</para>
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:WixSharp.Project.ValidateBackgroundImage">
+            <summary>
+            Performs validation of aspect ratio for <see cref="F:WixSharp.Project.BackgroundImage"/>. Validation assists with avoiding the situations 
+            when ManagedUI dialog has UI elements 'pushed away' from the view by oversizes <see cref="F:WixSharp.Project.BackgroundImage"/>.
             </summary>
         </member>
         <member name="P:WixSharp.Project.DefaultFeature">
