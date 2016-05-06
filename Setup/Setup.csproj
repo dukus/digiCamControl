@@ -11,7 +11,7 @@
     <AssemblyName>Setup</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>4d103d19</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>61abb7f7</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -108,12 +108,12 @@ $(TargetPath)</PostBuildEvent>
   <Target Name="AfterBuild">
   </Target>
   -->
-  <UsingTask AssemblyFile="packages\WixSharp.1.0.35.3\build\SetEnvVar.dll" TaskName="SetEnvVar" />
-  <Import Project="..\packages\WixSharp.1.0.35.3\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.0.35.3\build\WixSharp.targets')" />
+  <Import Project="..\packages\WixSharp.1.0.36.0\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.0.36.0\build\WixSharp.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WixSharp.1.0.35.3\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.0.35.3\build\WixSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\WixSharp.1.0.36.0\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.0.36.0\build\WixSharp.targets'))" />
   </Target>
+  <UsingTask AssemblyFile="packages\WixSharp.1.0.36.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
 </Project>

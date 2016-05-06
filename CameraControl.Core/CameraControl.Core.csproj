@@ -12,7 +12,7 @@
     <AssemblyName>CameraControl.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>a4df8634</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>a3fc5a2c</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -153,11 +153,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Magick.NET-Q8-x86, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
-      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.1.0\lib\net40-client\Magick.NET-Q8-x86.dll</HintPath>
+      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.1.101\lib\net40-client\Magick.NET-Q8-x86.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MahApps.Metro">
-      <HintPath>..\packages\MahApps.Metro.1.3.0-ALPHA139\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.3.0.147, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0-ALPHA147\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MeasurementProtocolClient">
@@ -175,7 +175,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.3.0-ALPHA139\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.3.0-ALPHA147\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml" />
@@ -374,10 +374,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Eagle.1.0.5934.21851\build\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.1.0.5934.21851\build\Eagle.targets'))" />
-    <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.7.0.1.0\build\net40-client\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.7.0.1.0\build\net40-client\Magick.NET-Q8-x86.targets'))" />
+    <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.7.0.1.101\build\net40-client\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.7.0.1.101\build\net40-client\Magick.NET-Q8-x86.targets'))" />
   </Target>
   <Import Project="..\packages\Eagle.1.0.5934.21851\build\Eagle.targets" Condition="Exists('..\packages\Eagle.1.0.5934.21851\build\Eagle.targets')" />
-  <Import Project="..\packages\Magick.NET-Q8-x86.7.0.1.0\build\net40-client\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.7.0.1.0\build\net40-client\Magick.NET-Q8-x86.targets')" />
+  <Import Project="..\packages\Magick.NET-Q8-x86.7.0.1.101\build\net40-client\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.7.0.1.101\build\net40-client\Magick.NET-Q8-x86.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
