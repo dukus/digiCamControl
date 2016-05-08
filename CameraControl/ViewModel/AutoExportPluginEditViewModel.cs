@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
+using CameraControl.Core.Scripting;
+using CameraControl.Devices;
 using CameraControl.windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -28,6 +30,7 @@ namespace CameraControl.ViewModel
         public RelayCommand PreviewCommand { get; set; }
         public RelayCommand ApplyCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<PluginCondition> RemoveConditionCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand<PluginCondition> GetValueCommand { get; set; }
         public RelayCommand AddConditionCommand { get; set; }
         public RelayCommand CheckConditionCommand { get; set; }
 
@@ -140,6 +143,21 @@ namespace CameraControl.ViewModel
             RemoveConditionCommand = new GalaSoft.MvvmLight.Command.RelayCommand<PluginCondition>(RemoveCondition);
             AddConditionCommand = new RelayCommand(AddCondition);
             CheckConditionCommand = new RelayCommand(CheckCondition);
+            GetValueCommand = new GalaSoft.MvvmLight.Command.RelayCommand<PluginCondition>(GetValue);
+        }
+
+        private void GetValue(PluginCondition obj)
+        {
+            try
+            {
+                var processor = new CommandLineProcessor();
+                var resp = processor.Pharse(new[] {"get", obj.Variable});
+                obj.Value = resp.ToString();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("GetValue",ex);
+            }
         }
 
         private void CheckCondition()

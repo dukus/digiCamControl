@@ -15,6 +15,7 @@ namespace CameraControl.Core.Classes
         private AsyncObservableCollection<string> _variableList;
         private string _variable;
         private AsyncObservableCollection<string> _valueList;
+        private string _value;
         public string Operator { get; set; }
 
         public string Variable
@@ -28,8 +29,17 @@ namespace CameraControl.Core.Classes
         }
 
         public string Condition { get; set; }
-        public string Value { get; set; }
-        
+
+        public string Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                NotifyPropertyChanged("Value");
+            }
+        }
+
         [XmlIgnore]
         public AsyncObservableCollection<string> OperatorList { get; set; }
 
@@ -65,7 +75,7 @@ namespace CameraControl.Core.Classes
         public PluginCondition()
         {
             OperatorList = new AsyncObservableCollection<string>() {"AND", "OR"};
-            ConditionList = new AsyncObservableCollection<string>() { ">=","<=","!=","=","<",">" };
+            ConditionList = new AsyncObservableCollection<string>() { ">=","<=","!=","=","<",">","%"};
             ValueList = new AsyncObservableCollection<string>();
             Operator = "AND";
             Condition = "=";
@@ -93,21 +103,36 @@ namespace CameraControl.Core.Classes
                 {
                     _variableList.Add(s.Split('=')[0]);
                 }
+            }
+            resp = processor.Pharse(new[] { "list", "session" });
+            list = resp as IEnumerable<string>;
+            if (list != null)
+            {
+                foreach (string s in list)
+                {
+                    _variableList.Add(s.Split('=')[0]);
+                }
             }            
         }
 
         private void InitValueList()
         {
             _valueList = new AsyncObservableCollection<string>();
-            if (string.IsNullOrEmpty(Variable))
-                return;
-            var processor = new CommandLineProcessor();
-            if (Variable == "camera")
+            try
             {
-                _valueList = new AsyncObservableCollection<string>(processor.Pharse(new[] { "list", "cameras" }) as IEnumerable<string>);
-                return;
+                if (string.IsNullOrEmpty(Variable))
+                    return;
+                var processor = new CommandLineProcessor();
+                if (Variable == "camera")
+                {
+                    _valueList = new AsyncObservableCollection<string>(processor.Pharse(new[] { "list", "cameras" }) as IEnumerable<string>);
+                    return;
+                }
+                _valueList = new AsyncObservableCollection<string>(processor.Pharse(new[] { "list", Variable }) as IEnumerable<string>);
             }
-            _valueList = new AsyncObservableCollection<string>(processor.Pharse(new[] { "list", Variable }) as IEnumerable<string>);
+            catch (Exception)
+            {
+            }
         }
 
         public bool Evaluate(ICameraDevice device)
@@ -123,7 +148,7 @@ namespace CameraControl.Core.Classes
             var processor = new CommandLineProcessor(){TargetDevice = device};
             var resp = processor.Pharse(new[] { "get",Variable });
 
-            string left = resp as string;
+            string left = resp.ToString();
             string right = Value;
 
             if (string.IsNullOrEmpty(left))
@@ -166,6 +191,11 @@ namespace CameraControl.Core.Classes
             {
                 if (numeric) cond = leftNum > rightNum;
                 else cond = String.Compare(left, right, StringComparison.Ordinal) > 0;
+            }
+            else if (op == "%")
+            {
+                if (numeric) cond = (int) leftNum%(int) rightNum == 0;
+                else cond = false;
             }
             else
             {
