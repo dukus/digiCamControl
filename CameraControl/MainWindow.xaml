@@ -294,7 +294,7 @@
                                     </ComboBox>
 
                                     <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right"/>
-                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="2" Name="txt_CaptureName"/>
 
                                     <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right"/>
                                     <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" Minimum="0" Maximum="100000" Value="{Binding Path=DefaultSession.Series}"/>

@@ -778,6 +778,8 @@ namespace CameraControl
 
         private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            if (txt_CaptureName.IsFocused)
+                return;
             TriggerClass.KeyDown(e);
         }
 
