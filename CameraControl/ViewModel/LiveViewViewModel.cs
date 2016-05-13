@@ -49,6 +49,8 @@ namespace CameraControl.ViewModel
         private Timer _restartTimer = new Timer(1000);
         private DateTime _restartTimerStartTime;
         private string _lastOverlay = string.Empty;
+        private DateTime _recordStartTime;
+        private int _recordLength = 0; 
 
         private bool _focusStackingPreview = false;
         private bool _focusIProgress = false;
@@ -117,6 +119,8 @@ namespace CameraControl.ViewModel
         private int _captureCount;
         private bool _autoFocusBeforCapture;
         private bool _isMinized;
+        private int _motionAction;
+        private int _motionMovieLength;
 
 
         public Rect RullerRect
@@ -554,6 +558,26 @@ namespace CameraControl.ViewModel
                     _detector.Reset();
                 if (value)
                     ShowRuler = true;
+            }
+        }
+
+        public int MotionAction
+        {
+            get { return CameraProperty.LiveviewSettings.MotionAction; }
+            set
+            {
+                CameraProperty.LiveviewSettings.MotionAction = value;
+                RaisePropertyChanged(() => MotionAction);
+            }
+        }
+
+        public int MotionMovieLength
+        {
+            get { return CameraProperty.LiveviewSettings.MotionMovieLength; }
+            set
+            {
+                CameraProperty.LiveviewSettings.MotionMovieLength = value;
+                RaisePropertyChanged(() => MotionMovieLength);
             }
         }
 
@@ -1243,6 +1267,7 @@ namespace CameraControl.ViewModel
                 case WindowsCmdConsts.LiveViewWnd_StartMotionDetection:
                     DetectMotion = true;
                     TriggerOnMotion = true;
+                    MotionAction = 1;
                     break;
                 case WindowsCmdConsts.LiveViewWnd_StopMotionDetection:
                     DetectMotion = false;
@@ -1730,6 +1755,11 @@ namespace CameraControl.ViewModel
                     HaveSoundData = LiveViewData.HaveSoundData;
                     MovieTimeRemain = decimal.Round(LiveViewData.MovieTimeRemain, 2);
 
+                    if (Recording && _recordLength > 0 && (DateTime.Now - _recordStartTime).TotalSeconds > _recordLength)
+                    {
+                        StopRecordMovie();
+                    }
+
                     if (NoProcessing)
                     {
                         if (!IsMinized)
@@ -1878,6 +1908,7 @@ namespace CameraControl.ViewModel
                     Rotation = LiveViewData.Rotation;
                     break;
             }
+
 
             if (CameraDevice.LiveViewImageZoomRatio.Value == "All" || CameraDevice.LiveViewImageZoomRatio.Value == "0")
             {
@@ -2106,36 +2137,21 @@ namespace CameraControl.ViewModel
                 }
 
                 CurrentMotionIndex = Math.Round(movement * 100, 2);
-                if (movement > ((float) MotionThreshold/100) && TriggerOnMotion &&
+                if (movement > ((float) MotionThreshold/100) && MotionAction>0 && !Recording &&
                     (DateTime.Now - _photoCapturedTime).TotalSeconds > WaitForMotionSec &&
                     _totalframes > 10)
                 {
-                    if (MotionAutofocusBeforCapture)
+                    if (MotionAction == 1)
                     {
-                        var processing = _detector.MotionProcessingAlgorithm as BlobCountingObjectsProcessing;
-                        if (processing != null && processing.ObjectRectangles != null &&
-                            processing.ObjectRectangles.Length > 0 &&
-                            LiveViewData.ImageData != null)
-                        {
-                            var rectangle = new Rectangle();
-                            int surface = 0;
-                            foreach (Rectangle objectRectangle in processing.ObjectRectangles)
-                            {
-                                if (surface < objectRectangle.Width*objectRectangle.Height)
-                                {
-                                    surface = objectRectangle.Width*objectRectangle.Height;
-                                    rectangle = objectRectangle;
-                                }
-                            }
-                            double xt = LiveViewData.ImageWidth/(double) bmp.Width;
-                            double yt = LiveViewData.ImageHeight/(double) bmp.Height;
-                            int posx = (int) ((rectangle.X + (rectangle.Width/2))*xt);
-                            int posy = (int) ((rectangle.Y + (rectangle.Height/2))*yt);
-                            CameraDevice.Focus(posx, posy);
-                        }
-                        AutoFocusThread();
+                        FocusOnMovment(bmp);
+                        CaptureInThread();
                     }
-                    CaptureInThread();
+                    if (MotionAction == 2)
+                    {
+                        FocusOnMovment(bmp);
+                        RecordMovie();
+                        _recordLength = MotionMovieLength;
+                    }
                     _detector.Reset();
                     _photoCapturedTime = DateTime.Now;
                     _totalframes = 0;
@@ -2144,6 +2160,35 @@ namespace CameraControl.ViewModel
             catch (Exception exception)
             {
                 Log.Error("Motion detection error ", exception);
+            }
+        }
+
+        private void FocusOnMovment(Bitmap bmp)
+        {
+            if (MotionAutofocusBeforCapture)
+            {
+                var processing = _detector.MotionProcessingAlgorithm as BlobCountingObjectsProcessing;
+                if (processing != null && processing.ObjectRectangles != null &&
+                    processing.ObjectRectangles.Length > 0 &&
+                    LiveViewData.ImageData != null)
+                {
+                    var rectangle = new Rectangle();
+                    int surface = 0;
+                    foreach (Rectangle objectRectangle in processing.ObjectRectangles)
+                    {
+                        if (surface < objectRectangle.Width * objectRectangle.Height)
+                        {
+                            surface = objectRectangle.Width * objectRectangle.Height;
+                            rectangle = objectRectangle;
+                        }
+                    }
+                    double xt = LiveViewData.ImageWidth / (double)bmp.Width;
+                    double yt = LiveViewData.ImageHeight / (double)bmp.Height;
+                    int posx = (int)((rectangle.X + (rectangle.Width / 2)) * xt);
+                    int posy = (int)((rectangle.Y + (rectangle.Height / 2)) * yt);
+                    CameraDevice.Focus(posx, posy);
+                }
+                AutoFocusThread();
             }
         }
 
@@ -2171,6 +2216,7 @@ namespace CameraControl.ViewModel
             string resp = Recording ? "" : CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
             if (string.IsNullOrEmpty(resp))
             {
+                _recordLength = 0;
                 var thread = new Thread(RecordMovieThread);
                 thread.Start();
             }
@@ -2187,6 +2233,7 @@ namespace CameraControl.ViewModel
             try
             {
                 CameraDevice.StartRecordMovie();
+                _recordStartTime = DateTime.Now;
             }
             catch (Exception exception)
             {

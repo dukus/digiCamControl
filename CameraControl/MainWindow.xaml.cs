@@ -760,23 +760,14 @@ namespace CameraControl
             }
         }
 
-        private void btn_donate_Click(object sender, RoutedEventArgs e)
-        {
-            PhotoUtils.Donate();
-        }
-
-        private void btn_help_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
+  
         private void but_download_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Show,
                                                           ServiceProvider.DeviceManager.SelectedCameraDevice);
         }
 
-        private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void MetroWindow_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (txt_CaptureName.IsFocused)
                 return;

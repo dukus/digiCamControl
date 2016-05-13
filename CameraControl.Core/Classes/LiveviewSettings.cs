@@ -194,6 +194,9 @@ namespace CameraControl.Core.Classes
         public bool MotionAutofocusBeforCapture { get; set; }
         public bool DetectMotion { get; set; }
         public bool DetectMotionArea { get; set; }
+        public int MotionAction { get; set; }
+        public int MotionMovieLength { get; set; }
+
         public bool ShowFocusRect { get; set; }
         public bool ShowLeftTab { get; set; }
         public bool NoProcessing { get; set; }
@@ -226,6 +229,7 @@ namespace CameraControl.Core.Classes
             VerticalMax = 100;
             FlipImage = false;
             CropRatio = 0;
+            MotionMovieLength = 30;
         }
 
 
