@@ -93,10 +93,11 @@ namespace Canon.Eos.Framework.Internal
             return new EosFileImageEventArgs(imageFilePath);
         }
 
-        public EosImageEventArgs TransportAsFileName(IntPtr directoryItem, string imagePath)
+        public EosImageEventArgs TransportAsFileName(IntPtr directoryItem, string imagePath, IntPtr context)
         {
             var directoryItemInfo = GetDirectoryItemInfo(directoryItem);
             var stream = CreateFileStream(imagePath);
+            Edsdk.EdsSetProgressCallback(stream, progress, Edsdk.EdsProgressOption.Periodically, context);
             Transport(directoryItem, directoryItemInfo.Size, stream, true);
 
             return new EosFileImageEventArgs(imagePath);
