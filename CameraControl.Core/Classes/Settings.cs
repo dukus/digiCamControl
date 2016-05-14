@@ -907,13 +907,13 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public bool DisableHardwareAcceleration
+        public bool DisableHardwareAccelerationNew
         {
             get { return _disableHardwareAcceleration; }
             set
             {
                 _disableHardwareAcceleration = value;
-                NotifyPropertyChanged("DisableHardwareAcceleration");
+                NotifyPropertyChanged("DisableHardwareAccelerationNew");
             }
         }
 
@@ -1059,7 +1059,7 @@ namespace CameraControl.Core.Classes
             Autorotate = true;
             ShowThumbInfo = true;
             SelectedLayout = "Normal";
-            DisableHardwareAcceleration = true;
+            DisableHardwareAccelerationNew = false;
         }
 
 
