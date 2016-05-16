@@ -125,6 +125,16 @@ namespace CameraControl.Core.Classes
             get { return IsRaw ? "RAW" : "JPG"; }
         }
 
+        [XmlIgnore]
+        public bool Visible
+        {
+            get { return _visible; }
+            set
+            {
+                _visible = value;
+                NotifyPropertyChanged("Visible");
+            }
+        }
 
         private string _fileName;
         public string FileName
@@ -368,6 +378,7 @@ namespace CameraControl.Core.Classes
         public FileItem()
         {
             IsLoaded = false;
+            Visible = true;
             //FileInfo = new FileInfo();
         }
 
@@ -383,6 +394,7 @@ namespace CameraControl.Core.Classes
             IsLiked = false;
             IsUnLiked = false;
             ThumbData = deviceObject.ThumbData;
+            Visible = true;
         }
 
 
@@ -395,6 +407,7 @@ namespace CameraControl.Core.Classes
             Loading = false;
             //FileInfo = new FileInfo();
             FileNameTemplates = new AsyncObservableCollection<ValuePair>();
+            Visible = true;
         }
 
         public void SetFile(string file)
@@ -403,6 +416,7 @@ namespace CameraControl.Core.Classes
             FileName = file;
             Name = Path.GetFileName(file);
             ItemType = FileItemType.File;
+            Visible = true;
             //FileInfo = new FileInfo();
         }
 
@@ -541,6 +555,7 @@ namespace CameraControl.Core.Classes
         private int _rotation;
         private bool _transformed;
         private BitmapSource _thumbnailMarks;
+        private bool _visible;
 
         public int RotationAngle
         {

@@ -155,6 +155,18 @@
             </Setter.Value>
         </Setter>
 
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visible}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>

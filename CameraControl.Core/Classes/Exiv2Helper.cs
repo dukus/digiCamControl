@@ -48,7 +48,8 @@ namespace CameraControl.Core.Classes
     {
         Square,
         HRectangle,
-        VRectangle
+        VRectangle,
+        SmallSquare,
     }
 
     public class FocusPointDefinition
@@ -207,257 +208,257 @@ namespace CameraControl.Core.Classes
                                     {
                                         "1",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.50, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.50, YRat = 0.50}
                                         },
                                     {
                                         "2",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.50, YRat = 0.42}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.50, YRat = 0.42}
                                         },
                                     {
                                         "3",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.50, YRat = 0.35}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.50, YRat = 0.35}
                                         },
                                     {
                                         "4",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.50, YRat = 0.59}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.50, YRat = 0.59}
                                         },
                                     {
                                         "5",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.50, YRat = 0.65}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.50, YRat = 0.65}
                                         },
                                     {
                                         "6",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.56, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.56, YRat = 0.50}
                                         },
                                     {
                                         "7",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.56, YRat = 0.42}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.56, YRat = 0.42}
                                         },
                                     {
                                         "8",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.56, YRat = 0.35}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.56, YRat = 0.35}
                                         },
                                     {
                                         "9",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.56, YRat = 0.59}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.56, YRat = 0.59}
                                         },
                                     {
                                         "10",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.56, YRat = 0.65}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.56, YRat = 0.65}
                                         },
                                     {
                                         "11",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.45, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.45, YRat = 0.50}
                                         },
                                     {
                                         "12",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.45, YRat = 0.42}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.45, YRat = 0.42}
                                         },
                                     {
                                         "13",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.45, YRat = 0.35}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.45, YRat = 0.35}
                                         },
                                     {
                                         "14",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.45, YRat = 0.59}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.45, YRat = 0.59}
                                         },
                                     {
                                         "15",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.45, YRat = 0.65}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.45, YRat = 0.65}
                                         },
                                     {
                                         "16",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.61, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.61, YRat = 0.50}
                                         },
                                     {
                                         "17",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.61, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.61, YRat = 0.44}
                                         },
                                     {
                                         "18",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.61, YRat = 0.38}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.61, YRat = 0.38}
                                         },
                                     {
                                         "19",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.61, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.61, YRat = 0.57}
                                         },
                                     {
                                         "20",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.61, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.61, YRat = 0.44}
                                         },
                                     {
                                         "21",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.65, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.65, YRat = 0.50}
                                         },
                                     {
                                         "22",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.65, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.65, YRat = 0.44}
                                         },
                                     {
                                         "23",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.65, YRat = 0.38}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.65, YRat = 0.38}
                                         },
                                     {
                                         "24",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.65, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.65, YRat = 0.57}
                                         },
                                     {
                                         "25",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.65, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.65, YRat = 0.44}
                                         },
                                     {
                                         "26",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.70, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.70, YRat = 0.50}
                                         },
                                     {
                                         "27",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.70, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.70, YRat = 0.44}
                                         },
                                     {
                                         "28",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.70, YRat = 0.38}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.70, YRat = 0.38}
                                         },
                                     {
                                         "29",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.70, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.70, YRat = 0.57}
                                         },
                                     {
                                         "30",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.70, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.70, YRat = 0.44}
                                         },
                                     {
                                         "31",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.75, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.75, YRat = 0.50}
                                         },
                                     {
                                         "32",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.75, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.75, YRat = 0.44}
                                         },
                                     {
                                         "33",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.75, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.75, YRat = 0.57}
                                         },
                                     {
                                         "34",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.39, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.39, YRat = 0.50}
                                         },
                                     {
                                         "35",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.39, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.39, YRat = 0.44}
                                         },
                                     {
                                         "36",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.39, YRat = 0.38}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.39, YRat = 0.38}
                                         },
                                     {
                                         "37",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.39, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.39, YRat = 0.57}
                                         },
                                     {
                                         "38",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.39, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.39, YRat = 0.44}
                                         },
                                     {
                                         "39",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.35, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.35, YRat = 0.50}
                                         },
                                     {
                                         "40",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.35, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.35, YRat = 0.44}
                                         },
                                     {
                                         "41",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.35, YRat = 0.38}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.35, YRat = 0.38}
                                         },
                                     {
                                         "42",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.35, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.35, YRat = 0.57}
                                         },
                                     {
                                         "43",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.35, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.35, YRat = 0.44}
                                         },
                                     {
                                         "44",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.3, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.3, YRat = 0.50}
                                         },
                                     {
                                         "45",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.3, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.3, YRat = 0.44}
                                         },
                                     {
                                         "46",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.3, YRat = 0.38}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.3, YRat = 0.38}
                                         },
                                     {
                                         "47",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.3, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.3, YRat = 0.57}
                                         },
                                     {
                                         "48",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.3, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.3, YRat = 0.44}
                                         },
                                     {
                                         "49",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.25, YRat = 0.50}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.25, YRat = 0.50}
                                         },
                                     {
                                         "50",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.25, YRat = 0.44}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.25, YRat = 0.44}
                                         },
                                     {
                                         "51",
                                         new FocusPointDefinition()
-                                            {FocusPointType = FocusPointType.Square, XRat = 0.25, YRat = 0.57}
+                                            {FocusPointType = FocusPointType.SmallSquare, XRat = 0.25, YRat = 0.57}
                                         },
                                 };
         }
@@ -831,6 +832,8 @@ namespace CameraControl.Core.Classes
             {
                 case FocusPointType.Square:
                     return new Rect(w*definition.XRat - (150*dw), h*definition.YRat - (100*dh), 300*dw, 200*dh);
+                case FocusPointType.SmallSquare:
+                    return new Rect(w * definition.XRat - (150 * dw), h * definition.YRat - (100 * dh), 150 * dw, 100 * dh);
                 case FocusPointType.VRectangle:
                     return new Rect(w*definition.XRat - (150*dw), h*definition.YRat - (50*dh), 300*dw, 100*dh);
                 case FocusPointType.HRectangle:
