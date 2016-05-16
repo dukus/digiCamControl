@@ -91,5 +91,7 @@ namespace CameraControl.Core.Classes
         public const string SetLayout = "SetLayout";
         public const string RotateLeft = "RotateLeft";
         public const string RotateRight = "RotateRight";
+        public const string ViewExternal = "ViewExternal";
+        public const string ViewExplorer = "ViewExplorer";
     }
 }

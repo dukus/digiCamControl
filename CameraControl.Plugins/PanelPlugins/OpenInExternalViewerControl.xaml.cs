@@ -19,20 +19,7 @@ namespace CameraControl.Plugins.PanelPlugins
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ServiceProvider.Settings.SelectedBitmap == null ||
-                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) &&
-                File.Exists(ServiceProvider.Settings.ExternalViewer))
-            {
-                PhotoUtils.Run(ServiceProvider.Settings.ExternalViewer,
-                   "\"" + ServiceProvider.Settings.SelectedBitmap.FileItem.FileName + "\"", ProcessWindowStyle.Maximized);
-            }
-            else
-            {
-                PhotoUtils.Run("\"" + ServiceProvider.Settings.SelectedBitmap.FileItem.FileName + "\"", "",
-                    ProcessWindowStyle.Maximized);
-            }
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ViewExternal);
         }
     }
 }
