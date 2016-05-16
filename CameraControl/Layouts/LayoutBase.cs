@@ -513,17 +513,17 @@ namespace CameraControl.Layouts
                         RefreshImage();
                         break;
                     case WindowsCmdConsts.Zoom_Image_Fit:
-                        ZoomAndPanControl.AnimatedScaleToFit();
+                        ZoomAndPanControl.ScaleToFit();
                         break;
                     case WindowsCmdConsts.Zoom_Image_100:
                         ZoomToFocus();
                         LoadFullRes();
-                        ZoomAndPanControl.AnimatedZoomTo(1.0);
+                        ZoomAndPanControl.ZoomTo(1.0);
                         break;
                     case WindowsCmdConsts.Zoom_Image_200:
                         ZoomToFocus();
                         LoadFullRes();
-                        ZoomAndPanControl.AnimatedZoomTo(2.0);
+                        ZoomAndPanControl.ZoomTo(2.0);
                         break;
                     case WindowsCmdConsts.RotateLeft:
                     {
@@ -551,6 +551,10 @@ namespace CameraControl.Layouts
                         break;
                     case WindowsCmdConsts.ViewExplorer:
                         OpenInExplorer();
+                        break;
+                    case WindowsCmdConsts.RefreshDisplay:
+                        if (LayoutViewModel.ZoomFit)
+                            ZoomAndPanControl.ScaleToFit();
                         break;
                 }
                 if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))

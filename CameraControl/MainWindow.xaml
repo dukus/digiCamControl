@@ -12,7 +12,7 @@
                        xmlns:tb="http://www.hardcodet.net/taskbar"
                        xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-                       Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel">
+                       Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel" SizeChanged="Window_SizeChanged">
     <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
     </i:Interaction.Behaviors>-->
