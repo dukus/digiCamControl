@@ -94,5 +94,6 @@ namespace CameraControl.Core.Classes
         public const string ViewExternal = "ViewExternal";
         public const string ViewExplorer = "ViewExplorer";
         public const string RefreshDisplay = "RefreshDisplay";
+        public const string Restore = "Restore";
     }
 }

@@ -45,6 +45,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.windows;
+using CameraControlRemoteCmd;
 using ImageMagick;
 using MahApps.Metro;
 using Application = System.Windows.Application;
@@ -74,7 +75,9 @@ namespace CameraControl
 
             if (processes.Length > 1)
             {
-                MessageBox.Show(TranslationStrings.LabelApplicationAlreadyRunning);
+                //MessageBox.Show(TranslationStrings.LabelApplicationAlreadyRunning);
+                CommandProcessor processor = new CommandProcessor();
+                processor.Parse(new[] {"/c", "do", "Restore"});
                 Shutdown(-1);
                 return;
             }

@@ -52,7 +52,18 @@
 
         <tb:TaskbarIcon Name="MyNotifyIcon"
                   IconSource="/CameraControl;component/logo.ico"
-                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" Grid.Row="1" />
+                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" MenuActivation="LeftOrRightClick" NoLeftClickDelay="True" >
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.DataContext>
+                        <viewModel:MainMenuViewModel/>
+                    </ContextMenu.DataContext>
+                    <MenuItem Header="{T:TranslateExtension LabelRestore}" Command="{Binding SendCommand}" CommandParameter="Restore" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+                    <Separator/>
+                    <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
 
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ShowGridLines="False" Margin="0">

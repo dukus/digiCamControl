@@ -148,6 +148,15 @@ namespace CameraControl
                 case WindowsCmdConsts.SetLayout:
                     SetLayout(o.ToString());
                     break;
+                case WindowsCmdConsts.Restore:
+                    Dispatcher.BeginInvoke(new Action(delegate
+                    {
+                        this.Show();
+                        this.WindowState = WindowState.Normal;
+                        this.Activate();
+                        this.Focus();
+                    }));
+                    break;
                 case CmdConsts.All_Minimize:
                     Dispatcher.Invoke(new Action(delegate
                     {
@@ -697,6 +706,11 @@ namespace CameraControl
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (ServiceProvider.Settings.MinimizeToTrayIcon)
+            {
+                WindowState = WindowState.Minimized;
+                e.Cancel = true;
+            }
         }
 
         private void but_fullscreen_Click(object sender, RoutedEventArgs e)
@@ -899,11 +913,16 @@ namespace CameraControl
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon && !ServiceProvider.Settings.HideTrayNotifications)
+            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon &&
+                !ServiceProvider.Settings.HideTrayNotifications)
             {
                 this.Hide();
-                MyNotifyIcon.HideBalloonTip();
-                MyNotifyIcon.ShowBalloonTip("digiCamControl", "Application was minimized \n Double click to restore", BalloonIcon.Info);
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    MyNotifyIcon.HideBalloonTip();
+                    MyNotifyIcon.ShowBalloonTip("digiCamControl", "Application was minimized \n Double click to restore",
+                        BalloonIcon.Info);
+                }));
             }
         }
 
