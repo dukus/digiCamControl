@@ -7649,6 +7649,11 @@
             Collection of WiX/MSI <see cref="T:WixSharp.ODBCDataSource"/> objects to be created during the installed.
             </summary>
         </member>
+        <member name="F:WixSharp.Dir.IISVirtualDirs">
+            <summary>
+            Collection of WiX/MSI <see cref="T:WixSharp.IISVirtualDir"/> objects to be created during the installed.
+            </summary>
+        </member>
         <member name="F:WixSharp.Dir.GenericItems">
             <summary>
             Collection of the user defined <see cref="T:WixSharp.IGenericEntity"/> items.
@@ -7672,6 +7677,16 @@
         <member name="F:WixSharp.Dir.Feature">
             <summary>
             <see cref="F:WixSharp.Dir.Feature"></see> the directory belongs to.
+            </summary>
+        </member>
+        <member name="F:WixSharp.Dir.IsInstallDir">
+            <summary>
+            Indicates if the directory is an installation directory.
+            <para>
+            Wix# assigns a dedicated WiX UI property WIXUI_INSTALLDIR 
+            to the Id value of the directory, which is marked by user as <see cref="F:WixSharp.Dir.IsInstallDir"/> or the directory 
+            with the designated Dir Id value defined by Compiler.AutoGeneration.InstallDirDefaultId ('INSTALLDIR' by default). 
+            </para>
             </summary>
         </member>
         <member name="M:WixSharp.Dir.ToString">
