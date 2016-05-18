@@ -28,13 +28,14 @@ namespace CameraControl.ViewModel
             get { return _zoomFit; }
             set
             {
-                _zoomFit = value;
-                if (value)
+                if ( _zoomFit != value && value )
                 {
+                    _zoomFit = true;
                     Zoom11 = false;
                     Zoom12 = false;
                     ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
                 }
+                _zoomFit = value;
                 RaisePropertyChanged(() => ZoomFit);
             }
         }
