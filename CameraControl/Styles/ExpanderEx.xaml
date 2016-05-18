@@ -9,7 +9,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -189,7 +189,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Foreground" Value="{DynamicResource BlackBrush}"/>
         <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush2}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="{DynamicResource ContentFontSize}"/>
         <Setter Property="Controls:GroupBoxHelper.HeaderForeground" Value="{x:Null}"/>

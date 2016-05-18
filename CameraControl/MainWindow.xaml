@@ -93,7 +93,7 @@
                 </Rectangle>
             </Button>
 
-            <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="40"  Height="40" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Click="btn_br_Click" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"
+            <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="40"  Height="40" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Click="btn_br_Click" FontSize="14" Style="{DynamicResource MetroCircleButtonStyle}"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBracketingButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <!--<ToggleButton ToolTip="Image property" Height="50" Width="50" Name="button1"  Click="button1_Click" Margin="5">
                     <Image Margin="5" Source="/CameraControl;component/Images/Properties.png"/>
@@ -231,7 +231,109 @@
                              Visibility="{Binding ShowCameraPropertiesMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
         </StackPanel>
 
-        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="1" Grid.RowSpan="5" Padding="0" Margin="0" 
+        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Visibility="{Binding Branding.ShowMainMenu, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="0" Margin="0">
+            <Menu.DataContext>
+                <viewModel:MainMenuViewModel/>
+            </Menu.DataContext>
+            <MenuItem Header="{T:TranslateExtension MenuFile}" Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension SettingsToolTip}" Command="{Binding SettingsCommand}" Visibility="{Binding Branding.ShowSettingMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuView}" Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints}" Command="{Binding ToggleFocusCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelShowThumbInfo}" IsChecked="{Binding ShowThumbInfo}" Command="{Binding ShowThumbInfoCommand}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension MenuLayout}">
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutLandscape}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutPortrait}" Command="{Binding SetLayoutCommand}" CommandParameter="GridRight"/>
+                    <MenuItem Header="{T:TranslateExtension MenuLayoutGrid}" Command="{Binding SetLayoutCommand}" CommandParameter="Grid"/>
+                </MenuItem>
+                <MenuItem Header="{T:TranslateExtension MenuThumbnailSize}">
+                    <MenuItem Header="80 %" Command="{Binding ThumbSizeCommand}" CommandParameter="80"/>
+                    <MenuItem Header="100 %" Command="{Binding ThumbSizeCommand}" CommandParameter="100"/>
+                    <MenuItem Header="200 %" Command="{Binding ThumbSizeCommand}" CommandParameter="200"/>
+                    <MenuItem Header="300 %" Command="{Binding ThumbSizeCommand}" CommandParameter="300"/>
+                    <MenuItem Header="400 %" Command="{Binding ThumbSizeCommand}" CommandParameter="400"/>
+                    <MenuItem Header="500 %" Command="{Binding ThumbSizeCommand}" CommandParameter="500"/>
+                    <Slider Minimum="50" Maximum="600" Value="{Binding Settings.ThumbHeigh}"/>
+                </MenuItem>
+                <MenuItem Header="{T:TranslateExtension MenuWindows}">
+                    <MenuItem Header="{T:TranslateExtension LiveViewToolTip}" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension DownloadWindowTitle}" Command="{Binding SendCommand}" CommandParameter="DownloadPhotosWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs DownloadPhotosWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension TimeLapseToolTip}" Command="{Binding SendCommand}" CommandParameter="TimeLapseWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TimeLapseWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelAstronomy}" Command="{Binding SendCommand}" CommandParameter="BulbWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BulbWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension MenuMultipleCamera}" Command="{Binding SendCommand}" CommandParameter="MultipleCameraWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs MultipleCameraWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelPrint}" Command="{Binding SendCommand}" CommandParameter="PrintWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs PrintWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
+                    <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelEmailPublicWebAddress}" Click="MenuItem_Click" IsEnabled="{Binding Settings.PublicWebserver}"/>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuSession}" Visibility="{Binding Branding.ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter}}"  Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension MenuSessionAdd}" Command="{Binding NewSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuSessionEdit}" Command="{Binding EditSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuSessionDel}" Command="{Binding DelSessionCommand}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelRefreshSession}" Command="{Binding RefreshSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelSessionOpenFolder}" Command="{Binding ShowSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuIncrementSeries}" Command="{Binding SendCommand}" CommandParameter="NextSeries" InputGestureText="{myClasess:CommandShortcutExtensioncs NextSeries}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelSelection}">
+                    <MenuItem Header="{T:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectUnLiked}" Command="{Binding Path=SelectUnLiked}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>
+                    <MenuItem Header="{T:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension MenuImportSession}" Command="{Binding Path=ImportSessionCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuExportSession}" Command="{Binding Path=ExportSessionCommand}"/>
+                <Separator/>
+                <MenuItem Header="Copy full path in clipboard" Command="{Binding Path=CopyNameClipboardCommand}" />
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuCamera}" Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension MenuCameraProperty}" Command="{Binding Path=CameraPropertyCommand}" IsEnabled="{Binding CameraConnected}"/>
+                <MenuItem Header="{T:TranslateExtension LabelUseAsMaster}" Command="{Binding Path=UseAsMasterCommand}" IsEnabled="{Binding CameraConnected}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelRefreshCameraList}" Command="{Binding Path=RefreshCommand}"/>
+                <!--<MenuItem Header="{T:TranslateExtension MenuResetDevice}" Command="{Binding SendCommand}" CommandParameter="ResetDevice" InputGestureText="{myClasess:CommandShortcutExtensioncs ResetDevice}"/>-->
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuPlugins}" Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension LabelExport}" ItemsSource="{Binding ExportPlugins}">
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <MenuItem Header="{Binding Title}" Command="{Binding Path=DataContext.ExecuteExportPluginCommand, 
+                        RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Menu}} }" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                </MenuItem>
+                <MenuItem Header="{T:TranslateExtension LabelTools}" ItemsSource="{Binding ToolsPlugins}">
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <MenuItem Header="{Binding Title}" Command="{Binding Path=DataContext.ExecuteToolPluginCommand, 
+                        RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Menu}} }" CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuHelp}" Visibility="{Binding Branding.OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension MenuOnlineManual}" Command="{Binding ManualPageCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuForum}" Command="{Binding ForumCommand}"/>
+                <Separator/>
+                <MenuItem Header="{T:TranslateExtension LabelSendTheLogFile}" Command="{Binding SendLogFileCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuCheckForUpdate}" Command="{Binding CheckUpdateCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelChangelog}" Command="{Binding ShowChangeLogCommand}"/>
+                <MenuItem Header="{T:TranslateExtension MenuAbout}" Command="{Binding AboutCommand}"/>
+            </MenuItem>
+            <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}" Visibility="{Binding HomePageMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="5,2" Margin="1"/>
+        </Menu>
+        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="6" Padding="0" Margin="0" 
                   Style="{DynamicResource MetroExpanderEx}"
                   Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRightPanelMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <Expander.Resources>
@@ -449,103 +551,6 @@
             <!--</ScrollViewer>-->
 
         </Expander>
-        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Visibility="{Binding Branding.ShowMainMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Menu.DataContext>
-                <viewModel:MainMenuViewModel/>
-            </Menu.DataContext>
-            <MenuItem Header="{T:TranslateExtension MenuFile}">
-                <MenuItem Header="{T:TranslateExtension SettingsToolTip}" Command="{Binding SettingsCommand}" Visibility="{Binding Branding.ShowSettingMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
-            </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuView}">
-                <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints}" Command="{Binding ToggleFocusCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelShowThumbInfo}" IsChecked="{Binding ShowThumbInfo}" Command="{Binding ShowThumbInfoCommand}"/>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension MenuLayout}">
-                    <MenuItem Header="{T:TranslateExtension MenuLayoutLandscape}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
-                    <MenuItem Header="{T:TranslateExtension MenuLayoutPortrait}" Command="{Binding SetLayoutCommand}" CommandParameter="GridRight"/>
-                    <MenuItem Header="{T:TranslateExtension MenuLayoutGrid}" Command="{Binding SetLayoutCommand}" CommandParameter="Grid"/>
-                </MenuItem>
-                <MenuItem Header="{T:TranslateExtension MenuThumbnailSize}">
-                    <MenuItem Header="80 %" Command="{Binding ThumbSizeCommand}" CommandParameter="80"/>
-                    <MenuItem Header="100 %" Command="{Binding ThumbSizeCommand}" CommandParameter="100"/>
-                    <MenuItem Header="200 %" Command="{Binding ThumbSizeCommand}" CommandParameter="200"/>
-                    <MenuItem Header="300 %" Command="{Binding ThumbSizeCommand}" CommandParameter="300"/>
-                    <MenuItem Header="400 %" Command="{Binding ThumbSizeCommand}" CommandParameter="400"/>
-                    <MenuItem Header="500 %" Command="{Binding ThumbSizeCommand}" CommandParameter="500"/>
-                    <Slider Minimum="50" Maximum="600" Value="{Binding Settings.ThumbHeigh}"/>
-                </MenuItem>
-                <MenuItem Header="{T:TranslateExtension MenuWindows}">
-                    <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
-                    <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelStatistics}" Command="{Binding SendCommand}" CommandParameter="StatisticsWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs StatisticsWnd_Show}"/>
-                </MenuItem>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension LabelEmailPublicWebAddress}" Click="MenuItem_Click" IsEnabled="{Binding Settings.PublicWebserver}"/>
-            </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuSession}" Visibility="{Binding Branding.ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <MenuItem Header="{T:TranslateExtension MenuSessionAdd}" Command="{Binding NewSessionCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuSessionEdit}" Command="{Binding EditSessionCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuSessionDel}" Command="{Binding DelSessionCommand}"/>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension LabelRefreshSession}" Command="{Binding RefreshSessionCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelSessionOpenFolder}" Command="{Binding ShowSessionCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuIncrementSeries}" Command="{Binding SendCommand}" CommandParameter="NextSeries" InputGestureText="{myClasess:CommandShortcutExtensioncs NextSeries}"/>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension LabelSelection}">
-                    <MenuItem Header="{T:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelSelectUnLiked}" Command="{Binding Path=SelectUnLiked}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>
-                    <MenuItem Header="{T:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
-                </MenuItem>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension MenuImportSession}" Command="{Binding Path=ImportSessionCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuExportSession}" Command="{Binding Path=ExportSessionCommand}"/>
-                <Separator/>
-                <MenuItem Header="Copy full path in clipboard" Command="{Binding Path=CopyNameClipboardCommand}" />
-            </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuCamera}">
-                <MenuItem Header="{T:TranslateExtension MenuCameraProperty}" Command="{Binding Path=CameraPropertyCommand}" IsEnabled="{Binding CameraConnected}"/>
-                <MenuItem Header="{T:TranslateExtension LabelUseAsMaster}" Command="{Binding Path=UseAsMasterCommand}" IsEnabled="{Binding CameraConnected}"/>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension LabelRefreshCameraList}" Command="{Binding Path=RefreshCommand}"/>
-                <!--<MenuItem Header="{T:TranslateExtension MenuResetDevice}" Command="{Binding SendCommand}" CommandParameter="ResetDevice" InputGestureText="{myClasess:CommandShortcutExtensioncs ResetDevice}"/>-->
-            </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuPlugins}">
-                <MenuItem Header="{T:TranslateExtension LabelExport}" ItemsSource="{Binding ExportPlugins}">
-                    <MenuItem.ItemTemplate>
-                        <DataTemplate>
-                            <MenuItem Header="{Binding Title}" Command="{Binding Path=DataContext.ExecuteExportPluginCommand, 
-                        RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Menu}} }" CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </MenuItem.ItemTemplate>
-                </MenuItem>
-                <MenuItem Header="{T:TranslateExtension LabelTools}" ItemsSource="{Binding ToolsPlugins}">
-                    <MenuItem.ItemTemplate>
-                        <DataTemplate>
-                            <MenuItem Header="{Binding Title}" Command="{Binding Path=DataContext.ExecuteToolPluginCommand, 
-                        RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Menu}} }" CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </MenuItem.ItemTemplate>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuHelp}" Visibility="{Binding Branding.OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <MenuItem Header="{T:TranslateExtension MenuOnlineManual}" Command="{Binding ManualPageCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuForum}" Command="{Binding ForumCommand}"/>
-                <Separator/>
-                <MenuItem Header="{T:TranslateExtension LabelSendTheLogFile}" Command="{Binding SendLogFileCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuCheckForUpdate}" Command="{Binding CheckUpdateCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelChangelog}" Command="{Binding ShowChangeLogCommand}"/>
-                <MenuItem Header="{T:TranslateExtension MenuAbout}" Command="{Binding AboutCommand}"/>
-            </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}" Visibility="{Binding HomePageMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        </Menu>
         <StatusBar Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="6">
             <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
             <StatusBarItem HorizontalAlignment="Right">

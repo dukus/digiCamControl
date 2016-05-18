@@ -97,7 +97,7 @@ namespace CameraControl
             LoadInAllPresetCommand = new RelayCommand<CameraPreset>(LoadInAllPreset);
             VerifyPresetCommand = new RelayCommand<CameraPreset>(VerifyPreset);
             ConfigurePluginCommand = new RelayCommand<AutoExportPluginConfig>(ConfigurePlugin);
-            AddPluginCommand=new RelayCommand<IAutoExportPlugin>(AddPlugin);
+            AddPluginCommand = new RelayCommand<IAutoExportPlugin>(AddPlugin);
             InitializeComponent();
 
 
