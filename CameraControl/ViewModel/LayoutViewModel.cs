@@ -104,7 +104,6 @@ namespace CameraControl.ViewModel
 
         public RelayCommand NextImageCommand { get; private set; }
         public RelayCommand PrevImageCommand { get; private set; }
-        public RelayCommand CopyNameClipboardCommand { get; private set; }
         public RelayCommand OpenExplorerCommand { get; private set; }
         public RelayCommand DeleteItemCommand { get; private set; }
         public RelayCommand RestoreCommand { get; private set; }
@@ -119,20 +118,6 @@ namespace CameraControl.ViewModel
             PrevImageCommand =
                 new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image));
 
-            CopyNameClipboardCommand =
-                new RelayCommand(
-                    delegate
-                    {
-                        try
-                        {
-                            Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
-                        }
-                        catch (Exception exception)
-                        {
-                            Log.Error("Copy to Clipboard fail ", exception);
-                            StaticHelper.Instance.SystemMessage = "Copy to Clipboard fail";
-                        }
-                    });
             OpenExplorerCommand = new RelayCommand(OpenInExplorer);
             DeleteItemCommand = new RelayCommand(DeleteItem);
             RestoreCommand = new RelayCommand(Restore);
@@ -157,23 +142,7 @@ namespace CameraControl.ViewModel
 
         private void OpenInExplorer()
         {
-            if (ServiceProvider.Settings.SelectedBitmap == null ||
-                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
-                return;
-            try
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer";
-                processStartInfo.UseShellExecute = true;
-                processStartInfo.WindowStyle = ProcessWindowStyle.Normal;
-                processStartInfo.Arguments =
-                    string.Format("/e,/select,\"{0}\"", ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
-                Process.Start(processStartInfo);
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Error to show file in explorer", exception);
-            }
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ViewExplorer);
         }
 
         private void Restore()

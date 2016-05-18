@@ -148,6 +148,15 @@ namespace CameraControl
                 case WindowsCmdConsts.SetLayout:
                     SetLayout(o.ToString());
                     break;
+                case WindowsCmdConsts.Restore:
+                    Dispatcher.BeginInvoke(new Action(delegate
+                    {
+                        this.Show();
+                        this.WindowState = WindowState.Normal;
+                        this.Activate();
+                        this.Focus();
+                    }));
+                    break;
                 case CmdConsts.All_Minimize:
                     Dispatcher.Invoke(new Action(delegate
                     {
@@ -697,6 +706,11 @@ namespace CameraControl
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (ServiceProvider.Settings.MinimizeToTrayIcon)
+            {
+                WindowState = WindowState.Minimized;
+                e.Cancel = true;
+            }
         }
 
         private void but_fullscreen_Click(object sender, RoutedEventArgs e)
@@ -760,24 +774,17 @@ namespace CameraControl
             }
         }
 
-        private void btn_donate_Click(object sender, RoutedEventArgs e)
-        {
-            PhotoUtils.Donate();
-        }
-
-        private void btn_help_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
+  
         private void but_download_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Show,
                                                           ServiceProvider.DeviceManager.SelectedCameraDevice);
         }
 
-        private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void MetroWindow_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (txt_CaptureName.IsFocused)
+                return;
             TriggerClass.KeyDown(e);
         }
 
@@ -906,11 +913,16 @@ namespace CameraControl
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon && !ServiceProvider.Settings.HideTrayNotifications)
+            if (WindowState == WindowState.Minimized && ServiceProvider.Settings.MinimizeToTrayIcon &&
+                !ServiceProvider.Settings.HideTrayNotifications)
             {
                 this.Hide();
-                MyNotifyIcon.HideBalloonTip();
-                MyNotifyIcon.ShowBalloonTip("digiCamControl", "Application was minimized \n Double click to restore", BalloonIcon.Info);
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    MyNotifyIcon.HideBalloonTip();
+                    MyNotifyIcon.ShowBalloonTip("digiCamControl", "Application was minimized \n Double click to restore",
+                        BalloonIcon.Info);
+                }));
             }
         }
 
@@ -969,6 +981,11 @@ namespace CameraControl
            }
                );
 
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RefreshDisplay);
         }
 
     }

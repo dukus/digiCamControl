@@ -907,13 +907,13 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        public bool DisableHardwareAcceleration
+        public bool DisableHardwareAccelerationNew
         {
             get { return _disableHardwareAcceleration; }
             set
             {
                 _disableHardwareAcceleration = value;
-                NotifyPropertyChanged("DisableHardwareAcceleration");
+                NotifyPropertyChanged("DisableHardwareAccelerationNew");
             }
         }
 
@@ -1059,7 +1059,7 @@ namespace CameraControl.Core.Classes
             Autorotate = true;
             ShowThumbInfo = true;
             SelectedLayout = "Normal";
-            DisableHardwareAcceleration = true;
+            DisableHardwareAccelerationNew = false;
         }
 
 
@@ -1097,34 +1097,35 @@ namespace CameraControl.Core.Classes
             {
                 if (session == null)
                     return;
-                if (!Directory.Exists(session.Folder))
-                    return;
-                if (session.AlowFolderChange && session.ReloadOnFolderChange)
+                if (Directory.Exists(session.Folder))
                 {
-                    session.Files.Clear();
-                }
-
-                FileItem[] fileItems = new FileItem[session.Files.Count];
-                session.Files.CopyTo(fileItems, 0);
-                ////session.Files.Clear();
-                //if (!Directory.Exists(session.Folder))
-                //{
-                //    Directory.CreateDirectory(session.Folder);
-                //}
-                string[] files = Directory.GetFiles(session.Folder);
-                foreach (string file in files)
-                {
-                    if (session.SupportedExtensions.Contains(Path.GetExtension(file).ToLower()))
+                    if (session.AlowFolderChange && session.ReloadOnFolderChange)
                     {
-                        if (!string.IsNullOrEmpty(file) && !session.ContainFile(file))
-                            session.AddFile(file);
+                        session.Files.Clear();
+                    }
+
+                    FileItem[] fileItems = new FileItem[session.Files.Count];
+                    session.Files.CopyTo(fileItems, 0);
+                    ////session.Files.Clear();
+                    //if (!Directory.Exists(session.Folder))
+                    //{
+                    //    Directory.CreateDirectory(session.Folder);
+                    //}
+                    string[] files = Directory.GetFiles(session.Folder);
+                    foreach (string file in files)
+                    {
+                        if (session.SupportedExtensions.Contains(Path.GetExtension(file).ToLower()))
+                        {
+                            if (!string.IsNullOrEmpty(file) && !session.ContainFile(file))
+                                session.AddFile(file);
+                        }
                     }
                 }
-                // remove files which was deleted or not exist
+                // hide files which was deleted or not exist
                 List<FileItem> removedItems = session.Files.Where(fileItem => !File.Exists(fileItem.FileName)).ToList();
                 foreach (FileItem removedItem in removedItems)
                 {
-                    session.Files.Remove(removedItem);
+                    removedItem.Visible = false;
                 }
                 //session.Files = new AsyncObservableCollection<FileItem>(session.Files.OrderBy(x => x.FileDate));
             }

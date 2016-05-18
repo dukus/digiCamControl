@@ -32,6 +32,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -512,17 +513,17 @@ namespace CameraControl.Layouts
                         RefreshImage();
                         break;
                     case WindowsCmdConsts.Zoom_Image_Fit:
-                        ZoomAndPanControl.AnimatedScaleToFit();
+                        ZoomAndPanControl.ScaleToFit();
                         break;
                     case WindowsCmdConsts.Zoom_Image_100:
                         ZoomToFocus();
                         LoadFullRes();
-                        ZoomAndPanControl.AnimatedZoomTo(1.0);
+                        ZoomAndPanControl.ZoomTo(1.0);
                         break;
                     case WindowsCmdConsts.Zoom_Image_200:
                         ZoomToFocus();
                         LoadFullRes();
-                        ZoomAndPanControl.AnimatedZoomTo(2.0);
+                        ZoomAndPanControl.ZoomTo(2.0);
                         break;
                     case WindowsCmdConsts.RotateLeft:
                     {
@@ -545,7 +546,16 @@ namespace CameraControl.Layouts
                         }
                     }
                         break;
-
+                    case WindowsCmdConsts.ViewExternal:
+                        OpenInExternalViewer();
+                        break;
+                    case WindowsCmdConsts.ViewExplorer:
+                        OpenInExplorer();
+                        break;
+                    case WindowsCmdConsts.RefreshDisplay:
+                        if (LayoutViewModel.ZoomFit)
+                            ZoomAndPanControl.ScaleToFit();
+                        break;
                 }
                 if (cmd.StartsWith(WindowsCmdConsts.ZoomPoint))
                 {
@@ -576,6 +586,45 @@ namespace CameraControl.Layouts
 
         }
 
+        private void OpenInExplorer()
+        {
+            if (ServiceProvider.Settings.SelectedBitmap == null ||
+                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
+                return;
+            try
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = "explorer";
+                processStartInfo.UseShellExecute = true;
+                processStartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                processStartInfo.Arguments =
+                    string.Format("/e,/select,\"{0}\"", ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
+                Process.Start(processStartInfo);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error to show file in explorer", exception);
+            }
+        }
+
+        private void OpenInExternalViewer()
+        {
+            if (ServiceProvider.Settings.SelectedBitmap == null ||
+                ServiceProvider.Settings.SelectedBitmap.FileItem == null)
+                return;
+            if (!string.IsNullOrWhiteSpace(ServiceProvider.Settings.ExternalViewer) &&
+                File.Exists(ServiceProvider.Settings.ExternalViewer))
+            {
+                PhotoUtils.Run(ServiceProvider.Settings.ExternalViewer,
+                    "\"" + ServiceProvider.Settings.SelectedBitmap.FileItem.FileName + "\"",
+                    ProcessWindowStyle.Maximized);
+            }
+            else
+            {
+                PhotoUtils.Run("\"" + ServiceProvider.Settings.SelectedBitmap.FileItem.FileName + "\"", "",
+                    ProcessWindowStyle.Maximized);
+            }
+        }
 
         private void Trigger_Event(string cmd, object o)
         {

@@ -25,7 +25,7 @@ namespace CameraControl.ViewModel
 
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
-        public GalaSoft.MvvmLight.Command.RelayCommand<int> ThumbSizeCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand<string> ThumbSizeCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SetLayoutCommand { get; set; }
 
         public RelayCommand ToggleFocusCommand { get; set; }
@@ -61,6 +61,7 @@ namespace CameraControl.ViewModel
         public RelayCommand AboutCommand { get; set; }
         public RelayCommand ExportSessionCommand { get; set; }
         public RelayCommand ImportSessionCommand { get; set; }
+        public RelayCommand CopyNameClipboardCommand { get; private set; }
 
         public AsyncObservableCollection<IExportPlugin> ExportPlugins
         {
@@ -108,7 +109,12 @@ namespace CameraControl.ViewModel
 
         public bool EnhancedThumbs
         {
-            get { return ServiceProvider.Settings.EnhancedThumbs; }
+            get
+            {
+                if (IsInDesignMode)
+                    return true;
+                return ServiceProvider.Settings.EnhancedThumbs;
+            }
             set
             {
                 ServiceProvider.Settings.EnhancedThumbs = value;
@@ -141,13 +147,13 @@ namespace CameraControl.ViewModel
         {
             SendCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(Send);
             SettingsCommand = new RelayCommand(EditSettings);
-            ThumbSizeCommand = new GalaSoft.MvvmLight.Command.RelayCommand<int>(ThumbSize);
+            ThumbSizeCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(ThumbSize);
             SetLayoutCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(SetLayout);
-            SelectAllCommand =new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectAll(); });
-            SelectNoneCommand =new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectNone(); });
+            SelectAllCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectAll(); });
+            SelectNoneCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectNone(); });
             SelectLiked = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectLiked(); });
-            SelectUnLiked =new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectUnLiked(); });
-            SelectInvertCommand =new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectInver(); });
+            SelectUnLiked = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectUnLiked(); });
+            SelectInvertCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectInver(); });
             SelectSeries =
                 new RelayCommand(delegate
                 {
@@ -163,7 +169,7 @@ namespace CameraControl.ViewModel
                 });
             NewSessionCommand = new RelayCommand(NewSession);
             EditSessionCommand = new RelayCommand(EditSession);
-            DelSessionCommand=new RelayCommand(DelSession);
+            DelSessionCommand = new RelayCommand(DelSession);
             RefreshSessionCommand = new RelayCommand(RefreshSession);
             ShowSessionCommand = new RelayCommand(ShowSession);
             RefreshCommand = new RelayCommand(Refresh);
@@ -180,9 +186,9 @@ namespace CameraControl.ViewModel
 
             HomePageCommand =
                 new RelayCommand(
-                    () =>PhotoUtils.Run(string.IsNullOrEmpty(Branding.HomePageUrl)
-                                ? "http://www.digicamcontrol.com/"
-                                : Branding.HomePageUrl, ""));
+                    () => PhotoUtils.Run(string.IsNullOrEmpty(Branding.HomePageUrl)
+                        ? "http://www.digicamcontrol.com/"
+                        : Branding.HomePageUrl, ""));
 
             CheckUpdateCommand = new RelayCommand(() => NewVersionWnd.CheckForUpdate(true));
             ForumCommand = new RelayCommand(() => PhotoUtils.Run("http://digicamcontrol.com/phpbb/index.php", ""));
@@ -201,6 +207,20 @@ namespace CameraControl.ViewModel
             }
             ExportSessionCommand = new RelayCommand(ExportSession);
             ImportSessionCommand = new RelayCommand(ImportSession);
+            CopyNameClipboardCommand =
+                new RelayCommand(
+                    delegate
+                    {
+                        try
+                        {
+                            Clipboard.SetText(ServiceProvider.Settings.SelectedBitmap.FileItem.FileName);
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Error("Copy to Clipboard fail ", exception);
+                            StaticHelper.Instance.SystemMessage = "Copy to Clipboard fail";
+                        }
+                    });
         }
 
         void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
@@ -452,9 +472,9 @@ namespace CameraControl.ViewModel
             }
         }
 
-        private void ThumbSize(int size)
+        private void ThumbSize(string size)
         {
-            ServiceProvider.Settings.ThumbHeigh = size;
+            ServiceProvider.Settings.ThumbHeigh = Convert.ToInt32(size);
         }
 
         private void SetLayout(string type)

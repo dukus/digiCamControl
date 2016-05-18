@@ -678,6 +678,11 @@ namespace CameraControl.Core.Translation
         public static string LabelValue = "Value";
         public static string LabelDelete = "Delete";
         public static string LabelDisableHardwareAcceleratione = "Disable Hardware Acceleration";
-        
+        public static string LabelDisabled = "Disabled";
+        public static string LabelCapturePhoto = "Capture photo";
+        public static string LabelRecordVideo = "Record video";
+        public static string LabelVideoLength = "Video length";
+        public static string LabelRestore = "Restore";
+        public static string LabelTrayMessage = "Application was minimized \n Double click to restore!";
     }
 }

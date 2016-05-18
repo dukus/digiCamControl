@@ -33,15 +33,22 @@
             </ListBox.InputBindings>
             <ListBox.ContextMenu>
                 <ContextMenu>
+                    <ContextMenu.DataContext>
+                        <viewModel:MainMenuViewModel/>
+                    </ContextMenu.DataContext>
                     <MenuItem Header="Select" >
-                        <MenuItem Header="All" Name="mnu_select_all" Command="{Binding Path=SelectAllCommand}" />
-                        <MenuItem Header="None" Name="mnu_select_none" Command="{Binding Path=SelectNoneCommand}" />
+                        <MenuItem Header="{translation:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
+                        <MenuItem Header="{translation:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
+                        <MenuItem Header="{translation:TranslateExtension LabelSelectUnLiked}" Command="{Binding Path=SelectUnLiked}"/>
+                        <MenuItem Header="{translation:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
+                        <MenuItem Header="{translation:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>
+                        <MenuItem Header="{translation:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="Delete File(s)" Name="mnu_delete_file" Command="{Binding Path=DeleteItemCommand}" />
-                    <MenuItem Header="Show in explorer" Name="mnu_show_explorer" Command="{Binding Path=OpenExplorerCommand}" />
-                    <MenuItem Header="Open in external viewer" Name="mnu_open" Command="{Binding Path=OpenViewerCommand}" />
-                    <MenuItem Header="Copy full path in clipboard" Name="mnu_copypath" Command="{Binding Path=CopyNameClipboardCommand}" />
+                    <MenuItem Header="{translation:TranslateExtension LabelDeleteFiles}" Command="{Binding SendCommand}" CommandParameter="Del_Image" />
+                    <MenuItem Header="{translation:TranslateExtension LabelShowInExplorer}" Command="{Binding SendCommand}" CommandParameter="ViewExplorer" />
+                    <MenuItem Header="{translation:TranslateExtension LabelOpenInExternalViewer}" Command="{Binding SendCommand}" CommandParameter="ViewExternal" />
+                    <MenuItem Header="Copy full path in clipboard" Command="{Binding Path=CopyNameClipboardCommand}" />
                 </ContextMenu>
             </ListBox.ContextMenu>
 

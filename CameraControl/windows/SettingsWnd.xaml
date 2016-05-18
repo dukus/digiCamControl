@@ -441,7 +441,7 @@
                     <CheckBox Grid.Row="9" IsChecked="{Binding HideTrayNotifications}" Margin="2" Grid.Column="1"/>
 
                     <Label Content="{T:TranslateExtension LabelDisableHardwareAcceleratione}"  Margin="3" Grid.Column="0" Grid.Row="10" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                    <CheckBox Grid.Row="10" IsChecked="{Binding DisableHardwareAcceleration}" Margin="2" Grid.Column="1"/>
+                    <CheckBox Grid.Row="10" IsChecked="{Binding DisableHardwareAccelerationNew}" Margin="2" Grid.Column="1"/>
 
                     
                     <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="11" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />

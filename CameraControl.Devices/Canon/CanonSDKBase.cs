@@ -1296,12 +1296,8 @@ namespace CameraControl.Devices.Canon
                         Camera.PauseLiveview();
                         var transporter = new EosImageTransporter();
                         transporter.ProgressEvent += (i) => TransferProgress = (uint) i;
-                        EosMemoryImageEventArgs m = transporter.TransportInMemory((IntPtr) o, Camera.Handle);
+                        transporter.TransportAsFileName((IntPtr) o, filename, Camera.Handle);
                         Edsdk.EdsRelease((IntPtr) o);
-                        using (FileStream fileStream = File.Create(filename, (int) m.ImageData.Length))
-                        {
-                            fileStream.Write(m.ImageData, 0, m.ImageData.Length);
-                        }
                         Camera.ResumeLiveview();
                     }
                     catch (Exception exception)
@@ -1488,7 +1484,7 @@ namespace CameraControl.Devices.Canon
                     {
                         if(ChildInfo.szFileName==fileName)
                         {
-                            Camera._transporter.TransportAsFileName(ChildPtr, outfileName);
+                            Camera._transporter.TransportAsFileName(ChildPtr, outfileName, Camera.Handle);
                         }
                     }
                     else

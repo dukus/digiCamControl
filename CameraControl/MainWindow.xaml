@@ -12,7 +12,7 @@
                        xmlns:tb="http://www.hardcodet.net/taskbar"
                        xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-                       Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel">
+                       Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel" SizeChanged="Window_SizeChanged">
     <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
     </i:Interaction.Behaviors>-->
@@ -52,7 +52,18 @@
 
         <tb:TaskbarIcon Name="MyNotifyIcon"
                   IconSource="/CameraControl;component/logo.ico"
-                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" Grid.Row="1" />
+                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" MenuActivation="LeftOrRightClick" NoLeftClickDelay="True" >
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.DataContext>
+                        <viewModel:MainMenuViewModel/>
+                    </ContextMenu.DataContext>
+                    <MenuItem Header="{T:TranslateExtension LabelRestore}" Command="{Binding SendCommand}" CommandParameter="Restore" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+                    <Separator/>
+                    <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
 
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ShowGridLines="False" Margin="0">
@@ -294,7 +305,7 @@
                                     </ComboBox>
 
                                     <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right"/>
-                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="2" Name="txt_CaptureName"/>
 
                                     <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right"/>
                                     <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" Minimum="0" Maximum="100000" Value="{Binding Path=DefaultSession.Series}"/>
@@ -495,6 +506,8 @@
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuImportSession}" Command="{Binding Path=ImportSessionCommand}"/>
                 <MenuItem Header="{T:TranslateExtension MenuExportSession}" Command="{Binding Path=ExportSessionCommand}"/>
+                <Separator/>
+                <MenuItem Header="Copy full path in clipboard" Command="{Binding Path=CopyNameClipboardCommand}" />
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuCamera}">
                 <MenuItem Header="{T:TranslateExtension MenuCameraProperty}" Command="{Binding Path=CameraPropertyCommand}" IsEnabled="{Binding CameraConnected}"/>
