@@ -223,6 +223,10 @@
     <Compile Include="Class1.cs" />
     <Compile Include="ExportPlugins\ExportCsv.cs" />
     <Compile Include="ExportPlugins\ExportToZip.cs" />
+    <Compile Include="ExternalDevices\ArduinoShutterRelease.cs" />
+    <Compile Include="ExternalDevices\ArduinoShutterReleaseConfig.xaml.cs">
+      <DependentUpon>ArduinoShutterReleaseConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExternalDevices\DCCUSBShutterRelease.cs" />
     <Compile Include="ExternalDevices\DCCUSBShutterReleaseConfig.xaml.cs">
       <DependentUpon>DCCUSBShutterReleaseConfig.xaml</DependentUpon>
@@ -400,6 +404,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AutoExportPlugins\TransformPluginConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExternalDevices\ArduinoShutterReleaseConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

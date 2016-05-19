@@ -52,7 +52,7 @@
 
         <tb:TaskbarIcon Name="MyNotifyIcon"
                   IconSource="/CameraControl;component/logo.ico"
-                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" MenuActivation="LeftOrRightClick" NoLeftClickDelay="True" >
+                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" MenuActivation="LeftOrRightClick">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.DataContext>
