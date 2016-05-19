@@ -306,6 +306,11 @@
     <Compile Include="Plugins.cs" />
     <Compile Include="ExportPlugins\ExportToFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolPlugins\ArduinoPlugin.cs" />
+    <Compile Include="ToolPlugins\ArduinoViewModel.cs" />
+    <Compile Include="ToolPlugins\ArduinoWindow.xaml.cs">
+      <DependentUpon>ArduinoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToolPlugins\CombineZpPlugin.cs" />
     <Compile Include="ToolPlugins\CombineZpViewModel.cs" />
     <Compile Include="ToolPlugins\CombineZpWindow.xaml.cs">
@@ -469,6 +474,10 @@
     <Page Include="Resources\IconsNonShared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToolPlugins\ArduinoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToolPlugins\CombineZpWindow.xaml">
       <SubType>Designer</SubType>

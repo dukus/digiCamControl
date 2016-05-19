@@ -1,0 +1,39 @@
+﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.ArduinoWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
+             mc:Ignorable="d" Width="500" Height="500" >
+    <Window.DataContext>
+        <toolPlugins:ArduinoViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Port" HorizontalAlignment="Right" Margin="3"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" ItemsSource="{Binding Ports}" SelectedItem="{Binding Port}"/>
+        <Button Content="Refresh" Grid.Row="0" Grid.Column="2" Margin="3"/>
+        <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Content="All arduino command should be send via Serial.println()" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="3" VerticalAlignment="Top"/>
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Receive" Margin="3" Grid.Row="4" VerticalAlignment="Top"/>
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Monitor" Margin="3" Grid.Row="5" VerticalAlignment="Top">
+            <ListBox Height="100">
+                
+            </ListBox>
+            </GroupBox>
+        
+    </Grid>
+</controls:MetroWindow>

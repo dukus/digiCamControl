@@ -67,6 +67,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ToolPlugins.Add(new EnfusePlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new CombineZpPlugin());
                 ServiceProvider.PluginManager.ToolPlugins.Add(new StatisticsPlugin());
+                ServiceProvider.PluginManager.ToolPlugins.Add(new ArduinoPlugin());
 
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new SerialPortShutterRelease());
                 ServiceProvider.ExternalDeviceManager.ExternalDevices.Add(new DSUSBShutterRelease());
