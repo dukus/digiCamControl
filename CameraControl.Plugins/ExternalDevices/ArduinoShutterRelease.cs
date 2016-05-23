@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 
 namespace CameraControl.Plugins.ExternalDevices
 {
@@ -30,7 +31,15 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public UserControl GetConfig(CustomConfig config)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return new ArduinoShutterReleaseConfig(config);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("", exception);
+            }
+            return null;
         }
 
         public SourceEnum DeviceType { get; set; }

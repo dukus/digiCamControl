@@ -95,7 +95,7 @@ namespace CameraControl.Plugins.ExportPlugins
                     try
                     {
                         var dest = Path.Combine(destfolder, Path.GetFileName(fileItem.FileName));
-                        if (fileItem.RotationAngle == 0)
+                        if (fileItem.RotationAngle == 0 || fileItem.IsRaw ||fileItem.IsMovie)
                             File.Copy(fileItem.FileName, dest, true);
                         else
                         {

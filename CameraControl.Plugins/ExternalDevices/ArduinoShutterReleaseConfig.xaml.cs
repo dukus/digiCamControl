@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CameraControl.Core.Classes;
 
 namespace CameraControl.Plugins.ExternalDevices
 {
@@ -20,9 +22,31 @@ namespace CameraControl.Plugins.ExternalDevices
     /// </summary>
     public partial class ArduinoShutterReleaseConfig : UserControl
     {
+        public CustomConfig CustomConfig { get; set; }
+
+        public string Port
+        {
+            get { return CustomConfig.Get("Port"); }
+            set { CustomConfig.Set("Port", value); }
+        }
+
         public ArduinoShutterReleaseConfig()
         {
+            CustomConfig = new CustomConfig();
             InitializeComponent();
         }
+
+        public ArduinoShutterReleaseConfig(CustomConfig config)
+        {
+            CustomConfig = config;
+            InitializeComponent();
+            string[] ports = SerialPort.GetPortNames();
+            foreach (string port in ports)
+            {
+                cmb_ports.Items.Add(port);
+            }
+        }
+
+
     }
 }
