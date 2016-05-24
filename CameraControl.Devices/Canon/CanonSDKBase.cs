@@ -1352,6 +1352,25 @@ namespace CameraControl.Devices.Canon
 
         public override string GetProhibitionCondition(OperationEnum operationEnum)
         {
+            switch (operationEnum)
+            {
+                case OperationEnum.Capture:
+                    break;
+                case OperationEnum.RecordMovie:
+                    if (Camera.GetProperty(Edsdk.PropID_Record) == 4)
+                        return "LabelRecordInProgres";
+                    if (Camera.LiveViewDevice==EosLiveViewDevice.None)
+                        return "LabelWrongLiveViewType";
+                    break;
+                case OperationEnum.AutoFocus:
+                    break;
+                case OperationEnum.ManualFocus:
+                    break;
+                case OperationEnum.LiveView:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("operationEnum", operationEnum, null);
+            }
             return "";
         }
 

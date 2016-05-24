@@ -126,7 +126,7 @@ namespace CameraControl.Devices
         void StartRecordMovie();
         void StopRecordMovie();
         string GetProhibitionCondition(OperationEnum operationEnum);
-
+        bool GetStatus(OperationEnum operationEnum);
         /// <summary>
         /// Support only if capability Bulb is specified
         /// </summary>

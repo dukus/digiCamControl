@@ -407,6 +407,11 @@ namespace CameraControl.Devices
             return "";
         }
 
+        public virtual bool GetStatus(OperationEnum operationEnum)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void EndBulbMode()
         {
         }

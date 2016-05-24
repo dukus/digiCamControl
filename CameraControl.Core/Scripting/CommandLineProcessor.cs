@@ -223,6 +223,8 @@ namespace CameraControl.Core.Scripting
                     return ServiceProvider.Settings.DefaultSession.Name;
                 case "camera.exposurestatus":
                     return device.ExposureStatus;
+                case "camera.recordcondition":
+                    return device.GetProhibitionCondition(OperationEnum.RecordMovie);
                 case "camera":
                     return device.SerialNumber;
                 default:
