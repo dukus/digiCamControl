@@ -370,7 +370,7 @@ namespace CameraControl.Devices.Sony
                          "\"method\": \"setLiveviewFrameInfo\"," +
                          "\"params\": [" +
                          "{" +
-                         "\"frameInfo\": true" +
+                         "\"frameInfo\": false" +
                          "}" +
                          "]," +
                          "\"id\": 1," +
