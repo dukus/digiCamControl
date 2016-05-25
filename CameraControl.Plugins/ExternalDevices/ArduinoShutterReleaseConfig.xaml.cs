@@ -28,6 +28,25 @@ namespace CameraControl.Plugins.ExternalDevices
         {
             get { return CustomConfig.Get("Port"); }
             set { CustomConfig.Set("Port", value); }
+            
+        }
+
+        public string CaptureOn
+        {
+            get { return CustomConfig.Get("CaptureOn"); }
+            set { CustomConfig.Set("CaptureOn", value); }
+        }
+
+        public string CaptureOff
+        {
+            get { return CustomConfig.Get("CaptureOff"); }
+            set { CustomConfig.Set("CaptureOff", value); }
+        }
+
+        public bool IsHexa
+        {
+            get { return CustomConfig.Get("IsHexa") == "True"; }
+            set { CustomConfig.Set("IsHexa", value.ToString()); }
         }
 
         public ArduinoShutterReleaseConfig()
