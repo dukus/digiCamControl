@@ -94,7 +94,7 @@ namespace CameraControl.windows
                         return;
                     Dispatcher.Invoke(new Action(delegate
                                                      {
-                                                         DataContext = new AstroLiveViewViewModel(CameraDevice);
+                                                         DataContext = new AstroLiveViewViewModel(CameraDevice,this);
                                                          Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                                          Show();
                                                          Activate();

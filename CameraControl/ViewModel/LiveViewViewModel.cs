@@ -121,6 +121,7 @@ namespace CameraControl.ViewModel
         private bool _isMinized;
         private int _motionAction;
         private int _motionMovieLength;
+        private Window _window;
 
 
         public Rect RullerRect
@@ -1211,9 +1212,10 @@ namespace CameraControl.ViewModel
             InitCommands();
         }
 
-        public LiveViewViewModel(ICameraDevice device)
+        public LiveViewViewModel(ICameraDevice device, Window window)
         {
             CameraDevice = device;
+            _window = window;
             CameraProperty = device.LoadProperties();
             SimpleManualFocus = CameraDevice.GetCapability(CapabilityEnum.SimpleManualFocus);
             Title = TranslationStrings.LiveViewWindowTitle + " - " + CameraProperty.DeviceName;
@@ -1363,7 +1365,16 @@ namespace CameraControl.ViewModel
             }
             FullScreenWnd = new LiveViewFullScreenWnd();
             FullScreenWnd.DataContext = this;
+            FullScreenWnd.Title = Title;
+            FullScreenWnd.Closed += FullScreenWnd_Closed;
             FullScreenWnd.Show();
+            _window.Hide();
+        }
+
+        void FullScreenWnd_Closed(object sender, EventArgs e)
+        {
+            FullScreenWnd.Closed -= FullScreenWnd_Closed;
+           _window.Show();
         }
 
 

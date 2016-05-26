@@ -26,8 +26,8 @@ namespace CameraControl.ViewModel
         private double _starSize;
         private int _starWindowSize;
 
-        public AstroLiveViewViewModel(ICameraDevice device)
-            :base(device)
+        public AstroLiveViewViewModel(ICameraDevice device, Window window)
+            :base(device, window)
         {
             ZoomFactor = 1;
             StarWindowSize = 30;

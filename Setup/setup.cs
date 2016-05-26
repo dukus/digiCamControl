@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO; 
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Threading;
 using System.Xml;
 using Microsoft.Deployment.WindowsInstaller;
 using Microsoft.Win32;
@@ -158,6 +159,7 @@ namespace Setup
             Compiler.PreserveTempFiles = false;
             string productMsi = Compiler.BuildMsi(project);
             string obsMsi = ObsPluginSetup.Execute();
+            Thread.Sleep(2000);
             var dict = new Dictionary<string, string>();
             dict.Add("Visible","yes");
             var bootstrapper =new Bundle(project.Name,
