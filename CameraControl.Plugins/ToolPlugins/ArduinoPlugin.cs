@@ -36,6 +36,8 @@ namespace CameraControl.Plugins.ToolPlugins
         {
             Title = "Arduino (Serial)";
             _viewModel = new ArduinoViewModel();
+            if(_viewModel.Active)
+                _viewModel.OpenPort();
         }
     }
 }

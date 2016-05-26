@@ -21,16 +21,27 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Port" HorizontalAlignment="Right" Margin="3"/>
         <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" ItemsSource="{Binding Ports}" SelectedItem="{Binding Port}"/>
         <Button Content="Refresh" Grid.Row="0" Grid.Column="2" Margin="3"/>
         <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Content="All arduino command should be send via Serial.println()" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="3" VerticalAlignment="Top"/>
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Receive" Margin="3" Grid.Row="4" VerticalAlignment="Top"/>
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Monitor" Margin="3" Grid.Row="5" VerticalAlignment="Top">
-            <ListBox Height="100">
+        <CheckBox Grid.Row="1" Grid.Column="1" Content="active" IsChecked="{Binding Active}" />
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="4" VerticalAlignment="Top">
+            <Grid>
+                <CheckBox Content="Send windows commands" IsChecked="{Binding SendCommand}"/>
+            </Grid>
+         </GroupBox>
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Receive" Margin="3" Grid.Row="5" VerticalAlignment="Top">
+            <Grid>
+                <CheckBox Content="Receive windows commands" IsChecked="{Binding ReceiveCommand}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Monitor" Margin="3" Grid.Row="6" VerticalAlignment="Top">
+            <ListBox Height="100" ItemsSource="{Binding Outs}">
                 
             </ListBox>
             </GroupBox>
