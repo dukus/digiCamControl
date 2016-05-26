@@ -6,7 +6,7 @@
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         ShowIconOnTitleBar="False" ShowTitleBar="False"
-        Title="LiveViewFullScreenWnd" Width="472" WindowStyle="None" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" Topmost="True" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False" IgnoreTaskbarOnMaximize="True" PreviewKeyDown="MetroWindow_PreviewKeyDown" WindowState="Maximized">
+        Title="LiveViewFullScreenWnd" Width="472" WindowStyle="None" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" Topmost="True" ShowMinButton="False" ShowInTaskbar="False" IgnoreTaskbarOnMaximize="True" PreviewKeyDown="MetroWindow_PreviewKeyDown" WindowState="Maximized" ShowSystemMenuOnRightClick="False">
     <Window.DataContext>
         <viewModel:LiveViewViewModel/>
     </Window.DataContext>    

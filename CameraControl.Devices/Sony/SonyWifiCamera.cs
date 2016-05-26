@@ -376,7 +376,7 @@ namespace CameraControl.Devices.Sony
                          "\"id\": 1," +
                          "\"version\": \"1.0\"" +
                          "}\"";
-            CheckError(Post(cmd));
+            //CheckError(Post(cmd));
             _shoulStopLiveView = false;
             _liveViewUrl = AsPrimitive<string>(Post(CreateJson("startLiveview")));
             BeginGetStream(new Uri(_liveViewUrl));
