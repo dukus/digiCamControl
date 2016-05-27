@@ -11,15 +11,19 @@ using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
     public class ArduinoViewModel : ViewModelBase
     {
+        private ArduinoCommandWindow _commandWindow;
         private PluginSetting _pluginSetting;
         private List<string> _ports;
         private SerialPort _sp = new SerialPort();
 
+        public RelayCommand ShowButtonsCommand { get; set; } 
+        
         public PluginSetting PluginSetting
         {
             get { return _pluginSetting ?? (_pluginSetting = ServiceProvider.Settings["Arduino"]); }
@@ -35,6 +39,114 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public List<string> Actions
+        {
+            get { return ServiceProvider.Settings.Actions.Select((x) => x.Name).OrderBy(x=>x).ToList(); }
+        }
+
+        public string Command1
+        {
+            get
+            {
+                return PluginSetting["Command1"] as string;
+            }
+            set
+            {
+                PluginSetting["Command1"] = value;
+                RaisePropertyChanged(() => Command1);
+            }
+        }
+
+        public string Action1
+        {
+            get
+            {
+                return PluginSetting["Action1"] as string;
+            }
+            set
+            {
+                PluginSetting["Action1"] = value;
+                RaisePropertyChanged(() => Action1);
+            }
+        }
+
+        public string Command2
+        {
+            get
+            {
+                return PluginSetting["Command2"] as string;
+            }
+            set
+            {
+                PluginSetting["Command2"] = value;
+                RaisePropertyChanged(() => Command2);
+            }
+        }
+
+        public string Action2
+        {
+            get
+            {
+                return PluginSetting["Action2"] as string;
+            }
+            set
+            {
+                PluginSetting["Action2"] = value;
+                RaisePropertyChanged(() => Action2);
+            }
+        }
+
+        public string Command3
+        {
+            get
+            {
+                return PluginSetting["Command3"] as string;
+            }
+            set
+            {
+                PluginSetting["Command3"] = value;
+                RaisePropertyChanged(() => Command3);
+            }
+        }
+
+        public string Action3
+        {
+            get
+            {
+                return PluginSetting["Action3"] as string;
+            }
+            set
+            {
+                PluginSetting["Action3"] = value;
+                RaisePropertyChanged(() => Action3);
+            }
+        }
+
+        public string Command4
+        {
+            get
+            {
+                return PluginSetting["Command4"] as string;
+            }
+            set
+            {
+                PluginSetting["Command4"] = value;
+                RaisePropertyChanged(() => Command4);
+            }
+        }
+
+        public string Action4
+        {
+            get
+            {
+                return PluginSetting["Action4"] as string;
+            }
+            set
+            {
+                PluginSetting["Action4"] = value;
+                RaisePropertyChanged(() => Action4);
+            }
+        }
         public string Port
         {
             get
@@ -46,6 +158,19 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 PluginSetting["Port"] = value;
                 RaisePropertyChanged(()=>Port);
+            }
+        }
+
+        public string AfterTransfer
+        {
+            get
+            {
+                return PluginSetting["AfterTransfer"] as string;
+            }
+            set
+            {
+                PluginSetting["AfterTransfer"] = value;
+                RaisePropertyChanged(() => AfterTransfer);
             }
         }
 
@@ -90,8 +215,27 @@ namespace CameraControl.Plugins.ToolPlugins
         public ArduinoViewModel()
         {
             Outs = new AsyncObservableCollection<string>();
-            ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+            ShowButtonsCommand = new RelayCommand(ShowButtons);
+            if (!IsInDesignMode)
+            {
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+                ServiceProvider.FileTransfered += ServiceProvider_FileTransfered;
+            }
             RefreshPorts();
+        }
+
+        private void ShowButtons()
+        {
+            if (_commandWindow == null || !_commandWindow.IsVisible)
+                _commandWindow = new ArduinoCommandWindow();
+            _commandWindow.DataContext = new ArduinoCommandViewModel() {ArduinoViewModel = this};
+            _commandWindow.Show();
+        }
+
+        void ServiceProvider_FileTransfered(object sender, FileItem fileItem)
+        {
+            if (Active && !string.IsNullOrEmpty(AfterTransfer) && SendCommand)
+                Send(AfterTransfer);
         }
 
         void WindowsManager_Event(string cmd, object o)
@@ -157,11 +301,34 @@ namespace CameraControl.Plugins.ToolPlugins
         {
             try
             {
-                SerialPort spL = (SerialPort)sender;
-                string str = spL.ReadLine().Replace("\r","");
+                SerialPort spL = (SerialPort) sender;
+                string str = spL.ReadLine().Replace("\r", "");
                 Outs.Add(str);
+
+                if (!string.IsNullOrEmpty(Action1) && str == Command1)
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(Action1);
+                    return;
+                }
+                if (!string.IsNullOrEmpty(Action2) && str == Command2)
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(Action2);
+                    return;
+                }
+                if (!string.IsNullOrEmpty(Action3) && str == Command3)
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(Action3);
+                    return;
+                }
+                if (!string.IsNullOrEmpty(Action4) && str == Command4)
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(Action4);
+                    return;
+                }
                 if (ReceiveCommand)
+                {
                     ServiceProvider.WindowsManager.ExecuteCommand(str);
+                }
             }
             catch (Exception ex)
             {

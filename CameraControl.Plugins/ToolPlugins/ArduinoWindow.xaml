@@ -27,24 +27,67 @@
         <Label Content="Port" HorizontalAlignment="Right" Margin="3"/>
         <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" ItemsSource="{Binding Ports}" SelectedItem="{Binding Port}"/>
         <Button Content="Refresh" Grid.Row="0" Grid.Column="2" Margin="3"/>
-        <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Content="All arduino command should be send via Serial.println()" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-        <CheckBox Grid.Row="1" Grid.Column="1" Content="active" IsChecked="{Binding Active}" />
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="4" VerticalAlignment="Top">
+        <Button Content="Show buttons" Grid.Row="1" Grid.Column="2" Margin="3" Command="{Binding ShowButtonsCommand}"/>
+        <CheckBox Grid.Row="1" Grid.Column="1" Content="Active" IsChecked="{Binding Active}" Margin="2"/>
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="4" VerticalAlignment="Top" IsEnabled="{Binding Active}">
             <Grid>
-                <CheckBox Content="Send windows commands" IsChecked="{Binding SendCommand}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <CheckBox Content="Send windows commands" IsChecked="{Binding SendCommand}" Grid.ColumnSpan="2" Margin="2"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Send after file transfered"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="2" Text="{Binding AfterTransfer}"/>
             </Grid>
-         </GroupBox>
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Receive" Margin="3" Grid.Row="5" VerticalAlignment="Top">
+        </GroupBox>
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Receive" Margin="3" Grid.Row="5" VerticalAlignment="Top" IsEnabled="{Binding Active}">
             <Grid>
-                <CheckBox Content="Receive windows commands" IsChecked="{Binding ReceiveCommand}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <CheckBox Content="Receive windows commands" IsChecked="{Binding ReceiveCommand}" Grid.ColumnSpan="2" Margin="2"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Custom command #1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="2" Text="{Binding Command1}" />
+                <ComboBox Grid.Row="1" Grid.Column="2" Margin="2" SelectedItem="{Binding Action1}" ItemsSource="{Binding Actions}"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Custom command #2"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="2" Text="{Binding Command2}" />
+                <ComboBox Grid.Row="2" Grid.Column="2" Margin="2" SelectedItem="{Binding Action2}" ItemsSource="{Binding Actions}"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Custom command #3"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="2" Text="{Binding Command3}" />
+                <ComboBox Grid.Row="3" Grid.Column="2" Margin="2" SelectedItem="{Binding Action3}" ItemsSource="{Binding Actions}"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="Custom command #4"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Margin="2" Text="{Binding Command4}" />
+                <ComboBox Grid.Row="4" Grid.Column="2" Margin="2" SelectedItem="{Binding Action4}" ItemsSource="{Binding Actions}"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Monitor" Margin="3" Grid.Row="6" VerticalAlignment="Top">
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Monitor" Margin="3" Grid.Row="6" VerticalAlignment="Top" >
             <ListBox Height="100" ItemsSource="{Binding Outs}">
-                
+
             </ListBox>
-            </GroupBox>
-        
+        </GroupBox>
+        <TextBlock Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center">
+            This plugin don't work in same time when arduino shutter release device is used
+            <LineBreak/>
+            All arduino command should be send via Serial.println()
+         </TextBlock>
     </Grid>
 </controls:MetroWindow>
