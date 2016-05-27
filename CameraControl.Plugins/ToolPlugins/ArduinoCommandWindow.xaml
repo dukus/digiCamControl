@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             mc:Ignorable="d" Width="400" Height="400">
+             mc:Ignorable="d" Width="400" Height="400" Topmost="True" ShowMaxRestoreButton="False" ShowMinButton="False">
     <Window.DataContext>
         <toolPlugins:ArduinoCommandViewModel/>
     </Window.DataContext>

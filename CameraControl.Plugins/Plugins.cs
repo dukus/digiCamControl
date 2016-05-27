@@ -125,7 +125,10 @@ namespace CameraControl.Plugins
 
         public void Init()
         {
-            
+            foreach (var plugin in ServiceProvider.PluginManager.ToolPlugins)
+            {
+                plugin.Init();
+            }
         }
 
         #endregion

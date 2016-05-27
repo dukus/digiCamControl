@@ -33,5 +33,6 @@ namespace CameraControl.Core.Interfaces
         bool Execute();
         string Title { get; set; }
         string Id { get; }
+        void Init();
     }
 }

@@ -27,6 +27,11 @@ namespace CameraControl.Plugins.ToolPlugins
             get { return "{3EC27FCC-9BE3-4252-BA54-9A2284B998DE}"; }
         }
 
+        public void Init()
+        {
+            
+        }
+
         public StatisticsPlugin()
         {
             Title = "Statistics";

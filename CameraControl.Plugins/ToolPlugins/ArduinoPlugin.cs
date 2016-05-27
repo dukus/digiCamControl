@@ -32,12 +32,22 @@ namespace CameraControl.Plugins.ToolPlugins
             get { return "{5B6842B3-E486-4A3E-A0C3-26988B6F0123}"; }
         }
 
+        public void Init()
+        {
+            _viewModel = new ArduinoViewModel();
+            if (_viewModel.Active)
+            {
+                _viewModel.OpenPort();
+                if (_viewModel.ButtonsStartup)
+                {
+                    _viewModel.ShowButtons();
+                }
+            }
+        }
+
         public ArduinoPlugin()
         {
             Title = "Arduino (Serial)";
-            _viewModel = new ArduinoViewModel();
-            if(_viewModel.Active)
-                _viewModel.OpenPort();
         }
     }
 }

@@ -30,6 +30,11 @@ namespace CameraControl.Plugins.ToolPlugins
             get { return "{2495C316-F222-4AAC-8F2C-65DF524D75CC}"; }
         }
 
+        public void Init()
+        {
+            
+        }
+
         public EnfusePlugin()
         {
             Title = "Enfuse";

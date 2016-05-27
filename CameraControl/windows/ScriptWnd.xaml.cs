@@ -65,6 +65,11 @@ namespace CameraControl.windows
             get { return "{04F1DD8E-3E4E-497D-80A9-125ABC76DA7E}"; }
         }
 
+        public void Init()
+        {
+            
+        }
+
         public string ScriptFileName { get; set; }
 
         public ScriptWnd()

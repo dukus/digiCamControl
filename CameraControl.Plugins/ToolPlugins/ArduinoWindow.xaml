@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
-             mc:Ignorable="d" Width="500" Height="500" >
+             mc:Ignorable="d" Width="800" Height="500" Closed="MetroWindow_Closed" >
     <Window.DataContext>
         <toolPlugins:ArduinoViewModel/>
     </Window.DataContext>
@@ -14,6 +14,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,11 +25,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Port" HorizontalAlignment="Right" Margin="3"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" ItemsSource="{Binding Ports}" SelectedItem="{Binding Port}"/>
-        <Button Content="Refresh" Grid.Row="0" Grid.Column="2" Margin="3"/>
+        <Label Content="Port" HorizontalAlignment="Right" Margin="3" Grid.Column="1"/>
+        <ComboBox Grid.Row="0" Grid.Column="2" Margin="3" ItemsSource="{Binding Ports}" SelectedItem="{Binding Port}"/>
+        <CheckBox Grid.Row="0" Grid.Column="0" Content="Active" IsChecked="{Binding Active}" Margin="2" VerticalAlignment="Center"/>
+        <!--<Button Content="Refresh" Grid.Row="0" Grid.Column="2" Margin="3"/>-->
         <Button Content="Show buttons" Grid.Row="1" Grid.Column="2" Margin="3" Command="{Binding ShowButtonsCommand}"/>
-        <CheckBox Grid.Row="1" Grid.Column="1" Content="Active" IsChecked="{Binding Active}" Margin="2"/>
+        <CheckBox Grid.Row="1" Grid.Column="0" Content="Show buttons on startup" Grid.ColumnSpan="2" IsChecked="{Binding ButtonsStartup}" Margin="2" VerticalAlignment="Center"/>
         <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="4" VerticalAlignment="Top" IsEnabled="{Binding Active}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -88,6 +90,22 @@
             This plugin don't work in same time when arduino shutter release device is used
             <LineBreak/>
             All arduino command should be send via Serial.println()
-         </TextBlock>
+        </TextBlock>
+
+        <GroupBox Grid.Row="0" Grid.Column="3" Grid.RowSpan="7">
+            <ListBox ItemsSource="{Binding CommandViewModel.Buttons}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Title"/>
+                            <TextBox Text="{Binding Title}" Margin="2" Width="70"/>
+                            <Label Content="Command"/>
+                            <TextBox Text="{Binding Command}" Margin="2" Width="70"/>
+                            <CheckBox IsChecked="{Binding Visible}" Content="Visible"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
     </Grid>
 </controls:MetroWindow>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CameraControl.Core.Classes;
 using GalaSoft.MvvmLight;
 
@@ -23,13 +19,14 @@ namespace CameraControl.Plugins.ToolPlugins
             Buttons = new List<ArduinoButton>();
             for (int i = 0; i < 16; i++)
             {
-                Buttons.Add(new ArduinoButton() {Title = "Button " + i, Visible = true});
+                Buttons.Add(new ArduinoButton() {Title = "Button " + (i+1), Visible = true});
             }
         }
 
         private void Execute(ArduinoButton obj)
         {
-            
+            if (ArduinoViewModel.Active)
+                ArduinoViewModel.Send(obj.Command);
         }
     }
 }

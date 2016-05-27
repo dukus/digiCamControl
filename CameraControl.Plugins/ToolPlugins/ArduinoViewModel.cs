@@ -12,6 +12,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 
 namespace CameraControl.Plugins.ToolPlugins
 {
@@ -21,6 +22,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private PluginSetting _pluginSetting;
         private List<string> _ports;
         private SerialPort _sp = new SerialPort();
+        private ArduinoCommandViewModel _commandViewModel;
 
         public RelayCommand ShowButtonsCommand { get; set; } 
         
@@ -36,6 +38,16 @@ namespace CameraControl.Plugins.ToolPlugins
             {
                 _ports = value;
                 RaisePropertyChanged(() => Ports);
+            }
+        }
+
+        public ArduinoCommandViewModel CommandViewModel
+        {
+            get { return _commandViewModel; }
+            set
+            {
+                _commandViewModel = value;
+                RaisePropertyChanged(() => CommandViewModel);
             }
         }
 
@@ -188,6 +200,16 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public bool ButtonsStartup
+        {
+            get { return PluginSetting.GetBool("ButtonsStartup"); }
+            set
+            {
+                PluginSetting["ButtonsStartup"] = value;
+                RaisePropertyChanged(() => ButtonsStartup);
+            }
+        }
+
         public bool SendCommand
         {
             get { return PluginSetting.GetBool("SendCommand"); }
@@ -222,13 +244,31 @@ namespace CameraControl.Plugins.ToolPlugins
                 ServiceProvider.FileTransfered += ServiceProvider_FileTransfered;
             }
             RefreshPorts();
+            CommandViewModel = new ArduinoCommandViewModel() {ArduinoViewModel = this};
+            try
+            {
+                var json = PluginSetting["Buttons"] as string;
+                if (!string.IsNullOrEmpty(json))
+                {
+                    CommandViewModel.Buttons = JsonConvert.DeserializeObject<List<ArduinoButton>>(json);                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("",ex);
+            }
         }
 
-        private void ShowButtons()
+        public void SaveButtons()
+        {
+            PluginSetting["Buttons"] = JsonConvert.SerializeObject(CommandViewModel.Buttons);
+        }
+
+        public void ShowButtons()
         {
             if (_commandWindow == null || !_commandWindow.IsVisible)
                 _commandWindow = new ArduinoCommandWindow();
-            _commandWindow.DataContext = new ArduinoCommandViewModel() {ArduinoViewModel = this};
+            _commandWindow.DataContext = CommandViewModel;
             _commandWindow.Show();
         }
 

@@ -41,6 +41,11 @@ namespace CameraControl.Plugins.ToolPlugins
             get { return "{F3155291-D688-49B8-B22D-E74A2D5E020E}"; }
         }
 
+        public void Init()
+        {
+            
+        }
+
         public CombineZpPlugin()
         {
             Title = "Combine Zp";
