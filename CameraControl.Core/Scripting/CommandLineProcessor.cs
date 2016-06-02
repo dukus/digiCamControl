@@ -396,6 +396,9 @@ namespace CameraControl.Core.Scripting
                                     }
                                     if (prop.PropertyType == typeof(bool))
                                     {
+                                        val = val.ToLower();
+                                        if(val != "true" || val !="false")
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                         prop.SetValue(ServiceProvider.Settings.DefaultSession, val == "true", null);
                                     }
                                     if (prop.PropertyType == typeof(int))
@@ -403,6 +406,8 @@ namespace CameraControl.Core.Scripting
                                         int i = 0;
                                         if (int.TryParse(val, out i))
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, i, null);
+                                        else
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                     }
                                 }
                             }
@@ -426,6 +431,9 @@ namespace CameraControl.Core.Scripting
                                     }
                                     if (prop.PropertyType == typeof(bool))
                                     {
+                                        val = val.ToLower();
+                                        if (val != "true" || val != "false")
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                         prop.SetValue(device.LoadProperties(), val == "true", null);
                                     }
                                     if (prop.PropertyType == typeof(int))
@@ -433,6 +441,8 @@ namespace CameraControl.Core.Scripting
                                         int i = 0;
                                         if (int.TryParse(val, out i))
                                             prop.SetValue(device.LoadProperties(), i, null);
+                                        else
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                     }
                                 }
                             }
