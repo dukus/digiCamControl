@@ -20,23 +20,26 @@ namespace CameraControl.Core.Scripting
             var cmd = args[0].ToLower().Trim();
             switch (cmd)
             {
+                case "capturenoaf":
                 case "capture":
-                    if (args.Length > 1)
+                    if (args.Length > 1 && string.IsNullOrWhiteSpace(args[1]))
                     {
                         var file = args[1];
                         if (file.Contains(":\\") || file.StartsWith(@"\\"))
                         {
                             ServiceProvider.Settings.DefaultSession.Folder = Path.GetDirectoryName(file);
+                            ServiceProvider.Settings.DefaultSession.FileNameTemplate = Path.GetFileNameWithoutExtension(file);
                         }
-                        ServiceProvider.Settings.DefaultSession.FileNameTemplate = Path.GetFileNameWithoutExtension(file);
+                        else
+                        {
+                            ServiceProvider.Settings.DefaultSession.FileNameTemplate = file;                            
+                        }
+
                     }
-                    CameraHelper.CaptureWithError(TargetDevice);
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
-                    return null;
-                case "capturenoaf":
-                    //Task.Factory.StartNew(CameraHelper.Capture);
-                    //Thread.Sleep(200);
-                    CameraHelper.CaptureNoAf();
+                    if (cmd == "capturenoaf")
+                        CameraHelper.CaptureNoAf();
+                    else
+                        CameraHelper.CaptureWithError(TargetDevice);
                     ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
                     return null;
                 //case "startbulb":
