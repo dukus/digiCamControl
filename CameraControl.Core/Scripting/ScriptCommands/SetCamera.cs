@@ -55,11 +55,6 @@ namespace CameraControl.Core.Scripting.ScriptCommands
                     break;
                 case "aperture":
                     {
-                        val = val.Replace("f", "ƒ");
-                        if (!val.Contains("/"))
-                        {
-                            val = "ƒ/" + val;
-                        }
                         if (!val.Contains("."))
                             val = val + ".0";
                         if (!scriptObject.CameraDevice.FNumber.Values.Contains(val))

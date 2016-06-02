@@ -267,8 +267,7 @@ namespace CameraControlCmd
                     else
                     {
                         Thread.Sleep(200);
-                        ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber.SetValue("ƒ/" +
-                                                                                            _arguments["aperture"]);
+                        ServiceProvider.DeviceManager.SelectedCameraDevice.FNumber.SetValue(_arguments["aperture"]);
                     }
                 }
                 if (_arguments.Contains("shutter"))

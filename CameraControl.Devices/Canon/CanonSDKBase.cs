@@ -777,7 +777,7 @@ namespace CameraControl.Devices.Canon
                 {
                     foreach (KeyValuePair<int, string> keyValuePair in _apertureTable)
                     {
-                        FNumber.AddValues("ƒ/" + keyValuePair.Value, keyValuePair.Key);
+                        FNumber.AddValues(keyValuePair.Value, keyValuePair.Key);
                     }
                 }
                 else
@@ -787,7 +787,7 @@ namespace CameraControl.Devices.Canon
                             _apertureTable.Where(keyValuePair => data.Count > 0).Where(
                                 keyValuePair => data.Contains(keyValuePair.Key)))
                     {
-                        FNumber.AddValues("ƒ/" + keyValuePair.Value, keyValuePair.Key);
+                        FNumber.AddValues(keyValuePair.Value, keyValuePair.Key);
                     }
                 }
                 FNumber.ReloadValues();

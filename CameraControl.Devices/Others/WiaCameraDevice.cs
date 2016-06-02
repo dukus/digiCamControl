@@ -226,7 +226,7 @@ namespace CameraControl.Devices.Others
                         foreach (var subTypeValue in apertureProperty.SubTypeValues)
                         {
                             double d = (int) subTypeValue;
-                            string s = "f/" + (d/100).ToString("0.0");
+                            string s = (d/100).ToString("0.0");
                             FNumber.AddValues(s, (int) d);
                             FNumber.ReloadValues();
                             if ((int) subTypeValue == (int) apertureProperty.get_Value())

@@ -319,11 +319,6 @@ namespace CameraControl.Core.Scripting
                 case "aperture":
                     {
                         var val = args[1].Trim();
-                        val = val.Replace("f", "ƒ");
-                        if (!val.Contains("/"))
-                        {
-                            val = "ƒ/" + val;
-                        }
                         if (!val.Contains("."))
                             val = val + ".0";
                         if (!device.FNumber.Values.Contains(val))

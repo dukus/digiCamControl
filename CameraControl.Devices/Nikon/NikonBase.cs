@@ -1424,7 +1424,7 @@ namespace CameraControl.Devices.Nikon
                     for (int i = 0; i < result.Data.Length - ((2*datasize) + 6 + 2); i += datasize)
                     {
                         UInt16 val = BitConverter.ToUInt16(result.Data, ((2*datasize) + 6 + 2) + i);
-                        string s = "ƒ/" + (val/100.0).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US"));
+                        string s =  (val/100.0).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US"));
                         NormalFNumber.AddValues(s, val);
                     }
                     NormalFNumber.ReloadValues();
@@ -1445,7 +1445,7 @@ namespace CameraControl.Devices.Nikon
                     for (int i = 0; i < result.Data.Length - ((2 * datasize) + 6 + 2); i += datasize)
                     {
                         UInt16 val = BitConverter.ToUInt16(result.Data, ((2 * datasize) + 6 + 2) + i);
-                        string s = "ƒ/" + (val / 100.0).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US"));
+                        string s = (val / 100.0).ToString("0.0", CultureInfo.CreateSpecificCulture("en-US"));
                         MovieFNumber.AddValues(s, val);
                     }
                     MovieFNumber.ReloadValues();
