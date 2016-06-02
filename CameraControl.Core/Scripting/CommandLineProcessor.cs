@@ -88,6 +88,8 @@ namespace CameraControl.Core.Scripting
                     return CameraHelper.StopRecordVideo(device);
                     break;
                 default:
+                    if (!ServiceProvider.Settings.Actions.Select((x)=>x.Name).Contains(args[0]))
+                        throw new Exception(string.Format("Invalid command {0}", args[0]));
                     ServiceProvider.WindowsManager.ExecuteCommand(args[0]);
                     break;
             }
