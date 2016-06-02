@@ -307,13 +307,19 @@ namespace CameraControl.Core.Scripting
                         {
                             val = "Bulb";
                         }
+                        if (!device.ShutterSpeed.Values.Contains(val))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                         device.ShutterSpeed.SetValue(val);
                     }
                     break;
                 case "iso":
+                    if (!device.IsoNumber.Values.Contains(args[1]))
+                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                     device.IsoNumber.SetValue(args[1]);
                     break;
                 case "exposurecompensation":
+                    if (!device.ExposureCompensation.Values.Contains(args[1]))
+                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                     device.ExposureCompensation.SetValue(args[1]);
                     break;
                 case "aperture":
@@ -327,15 +333,23 @@ namespace CameraControl.Core.Scripting
                     }
                     break;
                 case "focusmode":
+                    if (!device.FocusMode.Values.Contains(args[1]))
+                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                     device.FocusMode.SetValue(args[1]);
                     break;
                 case "whitebalance":
+                    if (!device.WhiteBalance.Values.Contains(args[1]))
+                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                     device.WhiteBalance.SetValue(args[1]);
                     break;
                 case "mode":
+                    if (!device.Mode.Values.Contains(args[1]))
+                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                     device.Mode.SetValue(args[1]);
                     break;
                 case "compressionsetting":
+                    if (!device.CompressionSetting.Values.Contains(args[1]))
+                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                     device.CompressionSetting.SetValue(args[1]);
                     break;
                 case "camera":
@@ -439,6 +453,8 @@ namespace CameraControl.Core.Scripting
                         {
                             if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower().Replace("_", " ") == property.Name.ToLower()))
                             {
+                                if (!property.Values.Contains(args[1].Replace("_", " ")))
+                                    throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                                 property.Value = args[1].Replace("_", " ");
                             }
                         }
