@@ -6,7 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TreeView Name="trvStructure" TreeViewItem.Expanded="TreeViewItem_Expanded" Margin="0" SelectedItemChanged="TrvStructure_OnSelectedItemChanged"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Refresh" Padding="0" HorizontalAlignment="Right" FontStyle="Italic" Cursor="Hand" Margin="5,-18" MouseDown="Label_MouseDown"/>
+        <TreeView Grid.Row="1" Name="trvStructure" TreeViewItem.Expanded="TreeViewItem_Expanded" Margin="0" SelectedItemChanged="TrvStructure_OnSelectedItemChanged" />
 
     </Grid>
 </UserControl>

@@ -42,6 +42,12 @@ namespace CameraControl.Panels
         public DirectorySelectorControl()
         {
             InitializeComponent();
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            trvStructure.Items.Clear();
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo driveInfo in drives)
                 trvStructure.Items.Add(CreateTreeItem(driveInfo));
@@ -229,6 +235,12 @@ namespace CameraControl.Panels
 
             //no item was found
             return false;
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Refresh();
+            ExpandAndSelectItem(trvStructure, SelectedPath);
         }
 
     }
