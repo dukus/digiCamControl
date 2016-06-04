@@ -437,6 +437,11 @@ namespace CameraControl.Devices
             
         }
 
+        public virtual void ReleaseResurce(object o)
+        {
+            
+        }
+
         public virtual void TransferFileThumb(object o, string filename)
         {
             TransferFile(o, filename);

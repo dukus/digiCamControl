@@ -250,8 +250,7 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                var extension = Path.GetExtension(FileName);
-                return extension != null && (!string.IsNullOrEmpty(FileName) && (extension.ToLower() == ".mov" || extension.ToLower() == ".avi" || extension.ToLower() == ".mts"));
+                return PhotoUtils.IsMovie(FileName);
             }
         }
 

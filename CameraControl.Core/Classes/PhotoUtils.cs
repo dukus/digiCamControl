@@ -191,6 +191,16 @@ namespace CameraControl.Core.Classes
             return false;
         }
 
+        public static bool IsMovie(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+                return false;
+
+
+            var extension = Path.GetExtension(file);
+            return extension != null && ( (extension.ToLower() == ".mov" || extension.ToLower() == ".avi" || extension.ToLower() == ".mts" || extension.ToLower() == ".mp4"));
+
+        }
 
         /// <summary>
         /// Create forlder for the specified filename

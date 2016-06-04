@@ -1282,6 +1282,23 @@ namespace CameraControl.Devices.Canon
             return focus;
         }
 
+        public override bool DeleteObject(DeviceObject deviceObject)
+        {
+            if (deviceObject.Handle is IntPtr)
+            {
+                Camera.DeleteItem((IntPtr)deviceObject.Handle);
+            }
+            return true;
+        }
+
+        public override void ReleaseResurce(object o)
+        {
+            if (o is IntPtr)
+            {
+                Edsdk.EdsRelease((IntPtr)o);
+            }
+        }
+
         public override void TransferFile(object o, string filename)
         {
             lock (Locker)
@@ -1297,7 +1314,6 @@ namespace CameraControl.Devices.Canon
                         var transporter = new EosImageTransporter();
                         transporter.ProgressEvent += (i) => TransferProgress = (uint) i;
                         transporter.TransportAsFileName((IntPtr) o, filename, Camera.Handle);
-                        Edsdk.EdsRelease((IntPtr) o);
                         Camera.ResumeLiveview();
                     }
                     catch (Exception exception)
@@ -1604,31 +1620,34 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
-                Camera.Lock();
-                int count = 0;
-                Log.Debug("EdsGetChildCount");
-                if (Edsdk.EdsGetChildCount(Camera.Handle, out count) != Edsdk.EDS_ERR_OK)
-                    throw new DeviceException("Error EdsGetChildCount");
-                for (int i = 0; i < count; i++)
+                lock (Locker)
                 {
-                    IntPtr volumePtr;
-                    Log.Debug("EdsGetChildAtIndex");
-                    if (Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr) != Edsdk.EDS_ERR_OK)
-                        throw new DeviceException("Error EdsGetChildAtIndex");
-                    Edsdk.EdsVolumeInfo vinfo;
-                    Log.Debug("EdsGetVolumeInfo");
-                    if (Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo) != Edsdk.EDS_ERR_OK)
-                        throw new DeviceException("Error EdsGetVolumeInfo");
-                    //ignore the HDD
-                    if (vinfo.szVolumeLabel != "HDD")
+                    Camera.Lock();
+                    int count = 0;
+                    Log.Debug("EdsGetChildCount");
+                    if (Edsdk.EdsGetChildCount(Camera.Handle, out count) != Edsdk.EDS_ERR_OK)
+                        throw new DeviceException("Error EdsGetChildCount");
+                    for (int i = 0; i < count; i++)
                     {
-                        Log.Debug("EdsFormatVolume");
-                        if (Edsdk.EdsFormatVolume(volumePtr) != Edsdk.EDS_ERR_OK)
-                            throw new DeviceException("Error EdsFormatVolume");
+                        IntPtr volumePtr;
+                        Log.Debug("EdsGetChildAtIndex");
+                        if (Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr) != Edsdk.EDS_ERR_OK)
+                            throw new DeviceException("Error EdsGetChildAtIndex");
+                        Edsdk.EdsVolumeInfo vinfo;
+                        Log.Debug("EdsGetVolumeInfo");
+                        if (Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo) != Edsdk.EDS_ERR_OK)
+                            throw new DeviceException("Error EdsGetVolumeInfo");
+                        //ignore the HDD
+                        if (vinfo.szVolumeLabel != "HDD")
+                        {
+                            Log.Debug("EdsFormatVolume");
+                            if (Edsdk.EdsFormatVolume(volumePtr) != Edsdk.EDS_ERR_OK)
+                                throw new DeviceException("Error EdsFormatVolume");
+                        }
+                        Log.Debug("EdsRelease");
+                        if (Edsdk.EdsRelease(volumePtr) != Edsdk.EDS_ERR_OK)
+                            throw new DeviceException("Error EdsRelease");
                     }
-                    Log.Debug("EdsRelease");
-                    if (Edsdk.EdsRelease(volumePtr) != Edsdk.EDS_ERR_OK)
-                        throw new DeviceException("Error EdsRelease");
                 }
             }
             finally

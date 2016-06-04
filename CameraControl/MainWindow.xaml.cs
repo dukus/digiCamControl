@@ -413,16 +413,18 @@ namespace CameraControl
                 
                 var extension = Path.GetExtension(eventArgs.FileName);
 
-                if (!eventArgs.CameraDevice.CaptureInSdRam || (extension != null && extension.ToLower() == ".mov"))
+                if (!eventArgs.CameraDevice.CaptureInSdRam || PhotoUtils.IsMovie(eventArgs.FileName))
                 {
                     if (property.NoDownload)
                     {
                         eventArgs.CameraDevice.IsBusy = false;
+                        eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
                         return;
                     }
                     if (extension != null && (session.DownloadOnlyJpg && extension.ToLower() != ".jpg"))
                     {
                         eventArgs.CameraDevice.IsBusy = false;
+                        eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
                         return;
                     }
                 }
@@ -505,7 +507,7 @@ namespace CameraControl
                         StaticHelper.Instance.SystemMessage = "Unable to save the backup";
                 }
 
-                if (!eventArgs.CameraDevice.CaptureInSdRam && session.DeleteFileAfterTransfer)
+                if ((!eventArgs.CameraDevice.CaptureInSdRam || PhotoUtils.IsMovie(fileName)) && session.DeleteFileAfterTransfer)
                     eventArgs.CameraDevice.DeleteObject(new DeviceObject() {Handle = eventArgs.Handle});
 
 
@@ -623,6 +625,7 @@ namespace CameraControl
                 {
                     PhotoUtils.PlayCaptureSound();
                 }
+                eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
                 Log.Debug("Photo transfer done.");
             }
             catch (Exception ex)

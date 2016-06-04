@@ -141,6 +141,7 @@ namespace CameraControl.Devices
         void UnLockCamera();
         void Close();
         void ResetDevice();
+        void ReleaseResurce(object o);
 
         void TransferFileThumb(object o, string filename);
         void TransferFile(object o, string filename);

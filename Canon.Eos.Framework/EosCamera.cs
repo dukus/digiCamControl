@@ -351,6 +351,11 @@ namespace Canon.Eos.Framework
             }
         }
 
+        public void DeleteItem(IntPtr itemInfo)
+        {
+            LockAndExceute(() => { Edsdk.EdsDeleteDirectoryItem(itemInfo); });
+        }
+
         private void LockAndExceute(Action action)
         {
             this.Lock();
