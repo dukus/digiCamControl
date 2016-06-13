@@ -26,15 +26,14 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             try
             {
-                var filename = item.FileName;
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new FacebookPluginViewModel(configData, false);
 
-                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
+                var outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(), Path.GetExtension(item.Name));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
-                conf.UploadFile(outfile);
+                conf.UploadFile(outfile, item.Name);
 
                 // remove unused file
                 if (outfile != item.FileName)

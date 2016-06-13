@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Threading;
 using System.Windows.Controls;
 using CameraControl.Core.Classes;
@@ -23,12 +24,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             try
             {
-                var filename = item.FileName;
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new SendEmailPluginViewModel(configData);
 
-                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
+                var outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(),Path.GetExtension(item.Name));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
                 var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82",3);
@@ -38,11 +38,13 @@ namespace CameraControl.Plugins.AutoExportPlugins
                     Body = (string.IsNullOrEmpty(conf.Message) ? "." : conf.TransformTemplate(item, conf.Message)),
                     IsBodyHtml = true
                 };
-                message.Attachments.Add(new Attachment(outfile));
+                using (MemoryStream stream = new MemoryStream(File.ReadAllBytes(outfile)))
+                {
+                    message.Attachments.Add(new Attachment(stream, item.Name));
 
-                client.SendMail(message);
-                message.Dispose();
-
+                    client.SendMail(message);
+                    message.Dispose();
+                }
                 // remove unused file
                 if (outfile != item.FileName)
                 {

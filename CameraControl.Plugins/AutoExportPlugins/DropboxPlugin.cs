@@ -40,11 +40,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new DropboxViewModel(configData);
-                
-                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
+
+                var outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(), Path.GetExtension(item.Name));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
-                conf.Upload(outfile,ServiceProvider.Settings.DefaultSession.Name);
+                conf.Upload(outfile, ServiceProvider.Settings.DefaultSession.Name, item.Name);
 
                 // remove unused file
                 if (outfile != item.FileName)

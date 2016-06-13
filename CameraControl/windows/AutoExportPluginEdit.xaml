@@ -101,25 +101,27 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                    <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding AddConditionCommand}" HorizontalAlignment="Left">
-                        <Rectangle Width="25" Height="25">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding CheckConditionCommand}" HorizontalAlignment="Left">
-                        <Rectangle Width="25" Height="25">
-                            <Rectangle.Fill>
+                    <CheckBox Content="{translation:TranslateExtension LabelExecuteAfterTransfer}" Margin="2" IsChecked="{Binding RunAfterTransfer}"/>
+                    <StackPanel  Grid.Row="1" Orientation="Horizontal">
+                        <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding AddConditionCommand}" HorizontalAlignment="Left">
+                            <Rectangle Width="25" Height="25">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button  Height="45" Width="45" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding CheckConditionCommand}" HorizontalAlignment="Left">
+                            <Rectangle Width="25" Height="25">
+                                <Rectangle.Fill>
                                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_check}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <Label Content="{translation:TranslateExtension LabelOperator}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
                         <Label Content="{translation:TranslateExtension LabelVariable}" Margin="2" Width="280" HorizontalContentAlignment="Center"/>
                         <Label Content="{translation:TranslateExtension LabelCondition}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
@@ -127,7 +129,7 @@
                         <Label Content="{translation:TranslateExtension LabelDelete}" Margin="2" Width="70" HorizontalContentAlignment="Center"/>
                     </StackPanel>
 
-                    <ListBox Grid.Row="2" ItemsSource="{Binding Config.Conditions}">
+                    <ListBox Grid.Row="3" ItemsSource="{Binding Config.Conditions}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

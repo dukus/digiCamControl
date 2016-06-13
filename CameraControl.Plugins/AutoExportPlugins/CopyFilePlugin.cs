@@ -25,15 +25,15 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
             if (!Directory.Exists(conf.Path))
                 Directory.CreateDirectory(conf.Path);
-            string name = Path.GetFileName(filename);
+            string name = item.Name;
 
             if (!string.IsNullOrEmpty(conf.FileName))
             {
                 name = conf.FileName;
                 if (name.Contains("%1"))
-                    name = name.Replace("%1", Path.GetFileNameWithoutExtension(filename));
+                    name = name.Replace("%1", Path.GetFileNameWithoutExtension(item.Name));
                 if (!name.Contains("."))
-                    name = name + Path.GetExtension(filename);
+                    name = name + Path.GetExtension(item.Name);
             }
 
             var outfile = Path.Combine(conf.Path, name);

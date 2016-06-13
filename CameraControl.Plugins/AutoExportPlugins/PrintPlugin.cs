@@ -33,7 +33,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new PrintPluginViewModel(configData);
-                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(item.FileName));
+                var outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(), Path.GetExtension(item.Name));
 
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 

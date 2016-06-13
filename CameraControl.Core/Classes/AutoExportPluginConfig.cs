@@ -15,6 +15,7 @@ namespace CameraControl.Core.Classes
         private bool _isEnabled;
         private string _name;
         private ObservableCollection<PluginCondition> _conditions;
+        private bool _runAfterTransfer;
 
         [XmlAttribute]
         public string Type { get; set; }
@@ -59,6 +60,17 @@ namespace CameraControl.Core.Classes
             {
                 _isEnabled = value;
                 NotifyPropertyChanged("IsEnabled");
+            }
+        }
+
+        [XmlAttribute]
+        public bool RunAfterTransfer
+        {
+            get { return _runAfterTransfer; }
+            set
+            {
+                _runAfterTransfer = value;
+                NotifyPropertyChanged("RunAfterTransfer");
             }
         }
 
@@ -123,6 +135,7 @@ namespace CameraControl.Core.Classes
             ConfigData = new ValuePairEnumerator();
             ConfigDataCollection = new ObservableCollection<ValuePairEnumerator>();
             Conditions = new AsyncObservableCollection<PluginCondition>();
+            RunAfterTransfer = true;
         }
 
         public AutoExportPluginConfig()
@@ -132,6 +145,7 @@ namespace CameraControl.Core.Classes
             Conditions = new AsyncObservableCollection<PluginCondition>();
             IsError = false;
             IsRedy = true;
+            RunAfterTransfer = true;
         }
 
         public bool Evaluate(ICameraDevice device)

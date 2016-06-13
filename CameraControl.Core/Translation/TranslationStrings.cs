@@ -684,5 +684,6 @@ namespace CameraControl.Core.Translation
         public static string LabelVideoLength = "Video length";
         public static string LabelRestore = "Restore";
         public static string LabelTrayMessage = "Application was minimized \n Double click to restore!";
+        public static string LabelExecuteAfterTransfer = "Execute after file transfered";
     }
 }

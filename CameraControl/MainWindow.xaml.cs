@@ -497,7 +497,6 @@ namespace CameraControl
                     Directory.CreateDirectory(Path.GetDirectoryName(fileName));
                 }
 
-                File.Copy(tempFile, fileName);
 
                 string backupfile = null;
                 if (session.BackUp)
@@ -507,12 +506,28 @@ namespace CameraControl
                         StaticHelper.Instance.SystemMessage = "Unable to save the backup";
                 }
 
+                // execute plugins which are executed before transfer 
+                if (ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs.Count((x) => !x.RunAfterTransfer) > 0)
+                {
+                    FileItem tempitem = new FileItem(tempFile);
+                    tempitem.Name = Path.GetFileName(fileName);
+                    tempitem.BackupFileName = backupfile;
+                    tempitem.Series = session.Series;
+                    tempitem.AddTemplates(eventArgs.CameraDevice, session);
+                    ExecuteAutoexportPlugins(eventArgs.CameraDevice, tempitem, false);
+                }
+
+
                 if ((!eventArgs.CameraDevice.CaptureInSdRam || PhotoUtils.IsMovie(fileName)) && session.DeleteFileAfterTransfer)
                     eventArgs.CameraDevice.DeleteObject(new DeviceObject() {Handle = eventArgs.Handle});
 
+                File.Copy(tempFile, fileName);
 
                 if (File.Exists(tempFile))
+                {
+                    PhotoUtils.WaitForFile(tempFile);
                     File.Delete(tempFile);
+                }
 
                 if (session.WriteComment)
                 {
@@ -539,6 +554,7 @@ namespace CameraControl
                         _selectedItem = session.GetNewFileItem(fileName);
                         _selectedItem.BackupFileName = backupfile;
                         _selectedItem.Series = session.Series;
+                       // _selectedItem.Transformed = tempitem.Transformed;
                         _selectedItem.AddTemplates(eventArgs.CameraDevice, session);
                         ServiceProvider.Database.Add(new DbFile(_selectedItem, eventArgs.CameraDevice.SerialNumber, eventArgs.CameraDevice.DisplayName, session.Name));
                     }
@@ -548,35 +564,15 @@ namespace CameraControl
                     }
                 }));
 
-                foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
-                {
-                    if(!plugin.IsEnabled)
-                        continue;
-                    if (!plugin.Evaluate(eventArgs.CameraDevice))
-                        continue;
-
-                    var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
-                    try
-                    {
-                        pl.Execute(_selectedItem, plugin);
-                        ServiceProvider.Analytics.PluginExecute(plugin.Type);
-                        Log.Debug("AutoexportPlugin executed " + plugin.Type);
-                    }
-                    catch (Exception ex)
-                    {
-                        plugin.IsError = true;
-                        plugin.Error = ex.Message;
-                        plugin.IsRedy = true;
-                        Log.Error("Error to apply plugin", ex);
-                    }
-                }
-
                 Dispatcher.Invoke(() =>
                 {
                     _selectedItem.RemoveThumbs();
                     session.Add(_selectedItem);
                     ServiceProvider.OnFileTransfered(_selectedItem);
                 });
+
+                // execute plugins which are executed after transfer  
+                ExecuteAutoexportPlugins(eventArgs.CameraDevice, _selectedItem, true);
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible && !ServiceProvider.Settings.HideTrayNotifications)
                 {
@@ -637,6 +633,34 @@ namespace CameraControl
             // not indicated to be used 
             GC.Collect();
             //GC.WaitForPendingFinalizers();
+        }
+
+        private void ExecuteAutoexportPlugins(ICameraDevice cameraDevice, FileItem fileItem, bool runOnTransfered)
+        {
+            foreach (AutoExportPluginConfig plugin in ServiceProvider.Settings.DefaultSession.AutoExportPluginConfigs)
+            {
+                if (plugin.RunAfterTransfer != runOnTransfered)
+                    continue;
+                if (!plugin.IsEnabled)
+                    continue;
+                if (!plugin.Evaluate(cameraDevice))
+                    continue;
+
+                var pl = ServiceProvider.PluginManager.GetAutoExportPlugin(plugin.Type);
+                try
+                {
+                    pl.Execute(fileItem, plugin);
+                    ServiceProvider.Analytics.PluginExecute(plugin.Type);
+                    Log.Debug("AutoexportPlugin executed " + plugin.Type);
+                }
+                catch (Exception ex)
+                {
+                    plugin.IsError = true;
+                    plugin.Error = ex.Message;
+                    plugin.IsRedy = true;
+                    Log.Error("Error to apply plugin", ex);
+                }
+            }
         }
 
         public RelayCommand<CameraPreset> SelectPresetCommand { get; private set; }

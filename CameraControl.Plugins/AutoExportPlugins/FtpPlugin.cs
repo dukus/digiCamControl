@@ -24,12 +24,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             try
             {
-                var filename = item.FileName;
                 configData.IsRedy = false;
                 configData.IsError = false;
                 var conf = new FtpPluginViewModel(configData);
 
-                var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
+                var outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(), Path.GetExtension(item.Name));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
                 using (FtpClient conn = new FtpClient())
@@ -38,7 +37,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
                     conn.Credentials = new NetworkCredential(conf.User, conf.Pass);
                     if (!string.IsNullOrWhiteSpace(conf.ServerPath))
                         conn.SetWorkingDirectory(conf.ServerPath);
-                    using (Stream ostream = conn.OpenWrite(Path.GetFileName(outfile)))
+                    using (Stream ostream = conn.OpenWrite(item.Name))
                     {
                         try
                         {

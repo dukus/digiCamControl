@@ -24,6 +24,7 @@ namespace CameraControl.ViewModel
         private AutoExportPluginConfig _config;
         private TransformPluginItem _selectedTransformPluginItem;
         private bool _fullSize;
+        private bool _runAfterTransfer;
 
         public GalaSoft.MvvmLight.Command.RelayCommand<string> AddTransforPluginCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand<TransformPluginItem> RemoveTransforPluginCommand { get; set; }
@@ -61,6 +62,16 @@ namespace CameraControl.ViewModel
             {
                 Config.IsEnabled = value;
                 RaisePropertyChanged(()=>IsEnabled);
+            }
+        }
+
+        public bool RunAfterTransfer
+        {
+            get { return Config.RunAfterTransfer; }
+            set
+            {
+                Config.RunAfterTransfer = value;
+                RaisePropertyChanged(() => RunAfterTransfer);
             }
         }
 
@@ -244,6 +255,8 @@ namespace CameraControl.ViewModel
         {
             get
             {
+                if (ServiceProvider.PluginManager == null)
+                    return null;
                 var l = ServiceProvider.PluginManager.ImageTransformPlugins.Select(x => x.Name).ToList();
                 return l;
             }

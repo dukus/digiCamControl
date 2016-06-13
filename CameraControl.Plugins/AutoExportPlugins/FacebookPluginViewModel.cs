@@ -270,7 +270,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
         }
 
-        public void UploadFile(string file)
+        public void UploadFile(string file, string filename)
         {
             if(string.IsNullOrEmpty(SelectedAlbum))
                 throw  new Exception("Upload album not set");
@@ -288,7 +288,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             parameters.source = new FacebookMediaObject
             {
                 ContentType = "image/jpeg",
-                FileName = Path.GetFileName(file),
+                FileName = filename,
 
             }.SetValue(File.ReadAllBytes(file));
             

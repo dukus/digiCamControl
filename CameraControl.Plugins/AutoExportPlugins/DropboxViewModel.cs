@@ -116,7 +116,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             return "<HTML><BODY>OK</br><h3>Logis succeed. Please return to digiCamControl</br><a href=\"javascript:window.open('','_self').close();\">close</a></BODY></HTML>";
         }
 
-        public void Upload(string file, string folder)
+        public void Upload(string file, string folder, string filename)
         {
             if (string.IsNullOrEmpty(AccessToken))
             {
@@ -125,7 +125,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
             LoadData();
             using (Stream stream = File.Open(file,FileMode.Open,FileAccess.Read))
             {
-                _client.UploadFile(folder, Path.GetFileName(file), stream);
+                _client.UploadFile(folder, filename, stream);
             }
         }
 

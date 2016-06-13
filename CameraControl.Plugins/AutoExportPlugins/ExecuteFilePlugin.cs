@@ -13,7 +13,6 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             configData.IsRedy = false;
             configData.IsError = false;
-            var filename = item.FileName;
             var conf = new ExecuteFilePluginViewModel(configData);
             if (string.IsNullOrEmpty(conf.PathToExe) || !File.Exists(conf.PathToExe))
             {
@@ -22,10 +21,12 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 configData.Error = "No executable path was set or executable not found";
                 return false;
             }
-            var outfile = Path.Combine(Path.GetTempPath(), Path.GetFileName(filename));
-
-            outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
-
+            var outfile = item.FileName;
+            if (configData.ConfigDataCollection.Count > 0 || !configData.RunAfterTransfer)
+            {
+                outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(), Path.GetExtension(item.Name));
+                outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
+            }
             if (File.Exists(outfile))
             {
                 PhotoUtils.Run(conf.PathToExe,

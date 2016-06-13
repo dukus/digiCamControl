@@ -1311,10 +1311,14 @@ namespace CameraControl.Devices.Canon
                     {
                         IsBusy = true;
                         Camera.PauseLiveview();
+                        Log.Debug("Camera.PauseLiveview();");
                         var transporter = new EosImageTransporter();
                         transporter.ProgressEvent += (i) => TransferProgress = (uint) i;
+                        Log.Debug("TransportAsFileName");
                         transporter.TransportAsFileName((IntPtr) o, filename, Camera.Handle);
+                        Log.Debug("TransportAsFileName DONE");
                         Camera.ResumeLiveview();
+                        Log.Debug("Camera.ResumeLiveview(); DONE");
                     }
                     catch (Exception exception)
                     {
