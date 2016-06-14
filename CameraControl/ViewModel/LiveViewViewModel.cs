@@ -982,20 +982,20 @@ namespace CameraControl.ViewModel
 
         public int CaptureDelay
         {
-            get { return _captureDelay; }
+            get { return CameraProperty.LiveviewSettings.CaptureDelay; }
             set
             {
-                _captureDelay = value;
+                CameraProperty.LiveviewSettings.CaptureDelay = value;
                 RaisePropertyChanged(() => CaptureDelay);
             }
         }
 
         public int CaptureCount
         {
-            get { return _captureCount; }
+            get { return CameraProperty.LiveviewSettings.CaptureCount; }
             set
             {
-                _captureCount = value;
+                CameraProperty.LiveviewSettings.CaptureCount = value;
                 RaisePropertyChanged(() => CaptureCount);
             }
         }
@@ -1445,7 +1445,6 @@ namespace CameraControl.ViewModel
             PhotoNo = 2;
             FocusStep = 2;
             PhotoCount = 5;
-            CaptureCount = 1;
             DelayedStart = false;
 
             _videoSource.StreamStarted += _videoSource_StreamStarted;
