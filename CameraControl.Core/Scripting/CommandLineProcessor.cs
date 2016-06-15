@@ -141,6 +141,11 @@ namespace CameraControl.Core.Scripting
                         IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
                         return (from prop in props where prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool) select "property." + prop.Name.ToLower() + "=" + prop.GetValue(device.LoadProperties(), null)).ToList();
                     }
+                case "liveview":
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(LiveviewSettings).GetProperties());
+                        return (from prop in props where prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) || prop.PropertyType == typeof(bool) select "liveview." + prop.Name.ToLower() + "=" + prop.GetValue(device.LoadProperties().LiveviewSettings, null)).ToList();
+                    }
                 case "camera":
                     {
                         IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
@@ -259,6 +264,21 @@ namespace CameraControl.Core.Scripting
                                 if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
                                 {
                                     return prop.GetValue(device.LoadProperties(), null);
+                                }
+                            }
+                        }
+                    }
+                    if (arg.StartsWith("liveview."))
+                    {
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(LiveviewSettings).GetProperties());
+                        foreach (PropertyInfo prop in props)
+                        {
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                prop.PropertyType == typeof(bool))
+                            {
+                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                {
+                                    return prop.GetValue(device.LoadProperties().LiveviewSettings, null);
                                 }
                             }
                         }
@@ -443,6 +463,41 @@ namespace CameraControl.Core.Scripting
                                         int i = 0;
                                         if (int.TryParse(val, out i))
                                             prop.SetValue(device.LoadProperties(), i, null);
+                                        else
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                    }
+                                }
+                            }
+                        }
+                        return;
+                    }
+                    if (arg.StartsWith("liveview."))
+                    {
+                        var val = args[1].Trim();
+                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(LiveviewSettings).GetProperties());
+                        foreach (PropertyInfo prop in props)
+                        {
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                prop.PropertyType == typeof(bool))
+                            {
+                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                {
+                                    if (prop.PropertyType == typeof(string))
+                                    {
+                                        prop.SetValue(device.LoadProperties().LiveviewSettings, val, null);
+                                    }
+                                    if (prop.PropertyType == typeof(bool))
+                                    {
+                                        val = val.ToLower();
+                                        if (val != "true" || val != "false")
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                        prop.SetValue(device.LoadProperties().LiveviewSettings, val == "true", null);
+                                    }
+                                    if (prop.PropertyType == typeof(int))
+                                    {
+                                        int i = 0;
+                                        if (int.TryParse(val, out i))
+                                            prop.SetValue(device.LoadProperties().LiveviewSettings, i, null);
                                         else
                                             throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                     }
