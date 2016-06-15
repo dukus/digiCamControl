@@ -210,6 +210,8 @@ namespace CameraControl.Core.Classes
         public bool FlipImage { get; set; }
         public int PreviewTime { get; set; }
         public int CropRatio { get; set; }
+        public int CaptureCount { get; set; }
+        public int CaptureDelay { get; set; }
 
         public LiveviewSettings()
         {
@@ -230,6 +232,8 @@ namespace CameraControl.Core.Classes
             FlipImage = false;
             CropRatio = 0;
             MotionMovieLength = 30;
+
+            CaptureCount = 1;
         }
 
 
