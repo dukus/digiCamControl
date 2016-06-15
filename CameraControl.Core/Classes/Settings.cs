@@ -1059,7 +1059,7 @@ namespace CameraControl.Core.Classes
             Autorotate = true;
             ShowThumbInfo = true;
             SelectedLayout = "Normal";
-            DisableHardwareAccelerationNew = false;
+            DisableHardwareAccelerationNew = true;
         }
 
 
