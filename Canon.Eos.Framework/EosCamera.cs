@@ -669,7 +669,7 @@ namespace Canon.Eos.Framework
         {
             //has to be called if Taking photo fails
             this._pauseLiveViewRequested = true;
-            Thread.Sleep(50);
+            Thread.Sleep(150);
             //while (_liveViewRunning)
             //{
 

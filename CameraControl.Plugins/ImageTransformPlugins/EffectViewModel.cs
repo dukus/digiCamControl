@@ -161,6 +161,14 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 Default1 = 20,
                 Param1Visible = true
             });
+            Effects.Add(new EffectType()
+            {
+                Name = "Negate",
+            });
+            Effects.Add(new EffectType()
+            {
+                Name = "Grayscale",
+            });
             _selectedEffect = Effects[SelectedMode];
         }
 

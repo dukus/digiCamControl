@@ -185,6 +185,7 @@ namespace CameraControl.Core.Classes
         
         public string SelectedOverlay { get; set; }
         public bool BlackAndWhite { get; set; }
+        public bool Invert { get; set; }
         public bool EdgeDetection { get; set; }
         public bool HighlightOverExp { get; set; }
         public bool HighlightUnderExp { get; set; }

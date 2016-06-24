@@ -422,9 +422,10 @@
                                         </Slider.ContextMenu>
                                     </Slider>
                                     <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
-                                    <!--<CheckBox Content="{T:TranslateExtension LabelStayOnTop}" IsChecked="{Binding Path=StayOnTop}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>-->
+                                    <CheckBox Content="{T:TranslateExtension LabelInvert}" IsChecked="{Binding Path=Invert}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                                     <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
                                     <CheckBox Content="{T:TranslateExtension LabelShowActiveArea}" IsChecked="{Binding Path=ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                                   
                                     <Button Content="{T:TranslateExtension LabelSetArea}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" HorizontalAlignment="Right" Command="{Binding SetAreaCommand}" Visibility="{Binding NoSettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
                                     <Button Content="{T:TranslateExtension LabelDoneArea}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" HorizontalAlignment="Right" Command="{Binding DoneSetAreaCommand}" Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 

@@ -122,6 +122,7 @@ namespace CameraControl.ViewModel
         private int _motionAction;
         private int _motionMovieLength;
         private Window _window;
+        private bool _invert;
 
 
         public Rect RullerRect
@@ -393,6 +394,16 @@ namespace CameraControl.ViewModel
             {
                 CameraProperty.LiveviewSettings.BlackAndWhite = value;
                 RaisePropertyChanged(() => BlackAndWhite);
+            }
+        }
+
+        public bool Invert
+        {
+            get { return CameraProperty.LiveviewSettings.Invert; }
+            set
+            {
+                CameraProperty.LiveviewSettings.Invert = value;
+                RaisePropertyChanged(() => Invert);
             }
         }
 
@@ -1658,7 +1669,7 @@ namespace CameraControl.ViewModel
             }
             catch (Exception exception)
             {
-                Log.Error("Unable to autofocus", exception);
+                Log.Error("Unable to auto focus", exception);
                 StaticHelper.Instance.SystemMessage = exception.Message;
             }
         }
@@ -1860,6 +1871,12 @@ namespace CameraControl.ViewModel
                 filtering.FillOutsideRange = false;
                 filtering.FillColor = new RGB(Color.Red);
                 filtering.ApplyInPlace(bmp);
+            }
+
+            if (Invert)
+            {
+                var invertFilter = new Invert();
+                invertFilter.ApplyInPlace(bmp);
             }
 
             var preview = BitmapFactory.ConvertToPbgra32Format(

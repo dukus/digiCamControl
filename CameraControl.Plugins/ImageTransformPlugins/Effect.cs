@@ -55,6 +55,12 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     case 9:
                         image.Raise(conf.Param1);
                         break;
+                    case 10:
+                        image.Negate();
+                        break;
+                    case 11:
+                        image.ColorSpace = ColorSpace.Gray;
+                        break;
                 }
                 image.Format = MagickFormat.Jpeg;
                 image.Write(dest);
