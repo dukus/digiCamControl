@@ -654,4 +654,24 @@
 	<string name="LabelRefresh">Refresh</string>	
 	<string name="LabelOverview">Overview</string>	
 	<string name="LabelItems">Items</string>	
+	<!--         //30/01/2016 -->
+	<string name="LabelDownloadThumb">Download photo thumb only</string>	
+	<string name="LabelDeleteFileAfterTransfer">Delete file after transfer</string>	
+	<string name="LabelHideTrayNotifications">Hide tray bar notifications</string>	
+    <!--     //26/03/2016 -->
+	<string name="LabelConditions">Conditions</string>	
+	<string name="LabelVariable">Variable</string>	
+	<string name="LabelCondition">Condition</string>	
+	<string name="LabelOperator">Operator</string>	
+	<string name="LabelValue">Value</string>	
+	<string name="LabelDelete">Delete</string>	
+	<string name="LabelDisableHardwareAcceleratione">Disable Hardware Acceleration</string>	
+	<string name="LabelDisabled">Disabled</string>	
+	<string name="LabelCapturePhoto">Capture photo</string>	
+	<string name="LabelRecordVideo">Record video</string>	
+	<string name="LabelVideoLength">Video length</string>	
+	<string name="LabelRestore">Restore</string>	
+	<string name="LabelTrayMessage">Application was minimized \n Double click to restore!</string>	
+	<string name="LabelExecuteAfterTransfer">Execute after file transferred</string>	
+	<string name="LabelInvert">Invert</string>	
 </resources>

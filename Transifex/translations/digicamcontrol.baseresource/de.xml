@@ -116,6 +116,7 @@
   <string name="LabelTheme">Thema</string>
   <string name="LabelGeneral">Allgemein</string>
   <string name="LabelPreview">Vorschau</string>
+  <string name="LabelPlaySound">Ton nach Aufnahme abspielen</string>
   <string name="LabelAutoPreview">Autovorschau</string>
   <string name="LabelPreviewAfterCapture">Vorschaubild nach Aufnahme in Vollbild</string>
   <string name="LabelPreviewTime">Vorschauzeit in Sek.</string>
@@ -132,6 +133,7 @@
   <string name="LabelSmallFocusSstep">Kleiner Fokusschritt</string>
   <string name="LabelMediumFocusStep">Mittlerer Fokusschritt</string>
   <string name="LabelLargFocusStep">Großer Fokusschritt</string>
+  <string name="ReStartToolTip">Sie müssen das Programm neustarten, um die Einstellungen zu übernehmen.</string>
   <string name="LabelSessonName">Sitzungsname :</string>
   <string name="LabelFolder">Ordner :</string>
   <string name="LabelFileNameTemplate">Dateibenennungsvorlage :</string>
@@ -374,6 +376,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelMirrorUpError">Der Release-Modus ist auf Spiegel-up gesetzt und die Spiegel-Operation wird durchgeführt.</string>
   <string name="LabelMirrorUpError2">Der Release-Modus ist [Mirror-up].</string>
   <string name="LabelDestinationCardError">Aufnahmeziel ist die Speicherkarte der Kamera.</string>
+  <string name="LabelLiveViewError">Fehler beim Starten des Live-Modus</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Geräte</string>
   <string name="LabelExternalShutterRelease">Externer Auslöser</string>
@@ -509,7 +512,9 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelLowerCaseExtension">Kleinschreibung</string>
   <string name="LabelOverlayTransparency">Transparenz</string>
   <string name="LabelOverlayUseLastCaptured">Letzte Aufnahme benutzen</string>
+  <string name="LabelMinimizeToTryIcon">Programm minimieren</string>
   <string name="LabelStartMinimized">Minimiert starten</string>
+  <string name="LabelStartupWithWindows">Programm beim Start von Windows starten</string>
   <string name="LabelSelectSeries">Wählen Sie Fotos der gleichen Serie</string>
   <string name="LabelCaptureDelay">Aufnahmeverzögerung</string>
   <string name="LabelAutoExportPlugins">Plugins für automatischen Export</string>
@@ -591,6 +596,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="MenuSessionEdit">Aktuelle Sitzung bearbeiten ...</string>
   <string name="MenuSessionDel">Aktuelle Sitzung entfernen</string>
   <string name="MenuIncrementSeries">Serie hochzählen</string>
+  <string name="MenuWindows">Windows</string>
   <string name="MenuOnlineManual">Online-Handbuch</string>
   <string name="MenuPlugins">Plugins</string>
   <string name="LabelAutorotate">Bild automatisch drehen</string>
@@ -609,6 +615,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelNoHighValueError">Kein hoher Wert festgelegt</string>
   <string name="LabelWrongValue">Falscher niedriger oder hoher Wert</string>
   <string name="LabelWrongFNumber">Blende kann nicht geändert werden</string>
+  <string name="LabelZoomToFocus">Immer zum ersten Fokuspunkt zoomen</string>
   <string name="LabelShowActiveArea">Aktiven Bereich anzeigen</string>
   <string name="LabelSetArea">Festlegen</string>
   <string name="LabelDoneArea">Fertig</string>
@@ -619,4 +626,9 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelPageHeigh">Seitenhöhe</string>
   <string name="LabelFill">Füllen</string>
   <!--// 19/10/2015-->
+  <string name="LabelApplyToImage">Auf das ausgewählte Bild anwenden</string>
+  <string name="LabelSaveLiveviewWindow">Speichere Position des Live-Ansicht Fensters</string>
+  <string name="LabelStatistics">Statistiken</string>
+  <string name="LabelRefresh">Erneuern</string>
+  <string name="LabelOverview">Übersicht</string>
 </resources>

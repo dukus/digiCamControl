@@ -94,6 +94,7 @@
   <string name="ButtonEdit">Mod.</string>
   <string name="ButtonAutoFocus">_Auto Focus</string>
   <string name="ButtonCapture">_Scatta</string>
+  <string name="ButtonRecordMovie">Registra video</string>
   <string name="ButtonFreezeImage">Blocca immagine</string>
   <string name="ButtonStart">Inizio</string>
   <string name="ButtonPreview">Anteprima</string>
@@ -105,12 +106,14 @@
   <string name="ButtonCapturePhotos">Scatta foto</string>
   <string name="ButtonStartTimeLapse">Inizia TimeLapse</string>
   <string name="ButtonStopTimeLapse">Termina TimeLapse</string>
+  <string name="ButtonCreateMovie">Crea video</string>
   <string name="ButtonLocateLogFile">Trova il file di log</string>
   <string name="LabelInterfaceLanguage">Lingua interfaccia:</string>
   <string name="LabelDisableDriver">Disabilita i driver nativi (non raccomandato)</string>
   <string name="LabelTheme">Tema:</string>
   <string name="LabelGeneral">Generale</string>
   <string name="LabelPreview">Anteprima</string>
+  <string name="LabelPlaySound">Riproduci suono dopo la registrazione</string>
   <string name="LabelAutoPreview">Anteprima automatica</string>
   <string name="LabelPreviewTime">Tempo di anteprima in sec:</string>
   <string name="LabelPreviewInLIveView">Anteprima immagine dopo lo scatto in Live View</string>
@@ -189,6 +192,7 @@ $Tag4 - Tag 4 selezionato</string>
   <string name="LabelOutputFile">File di output</string>
   <string name="LabelFps">Fps</string>
   <string name="LabelFillImage">Riempi immagine</string>
+  <string name="LabelCreateMovie">Crea video</string>
   <string name="LabelAddVirtualMovingToVideo">Aggiungi movimento virtuale al video</string>
   <string name="LabelMovingSurface">Superficie di movimento (%):</string>
   <string name="LabelMovingDirection">Direzione movimento:</string>

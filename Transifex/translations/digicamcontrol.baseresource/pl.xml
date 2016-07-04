@@ -4,7 +4,7 @@
   <string name="BURST_NUMBER">Liczba zdjęć seryjnych</string>
   <string name="STILL_CAPTURE_MODE">Wciąż tryb przechwytywania</string>
   <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Ciągłe zdjęcia (zdjęcia seryjne)</string>
-  <string name="AUTO_ISO">Auto ISO</string>
+  <string name="AUTO_ISO">Automatyczne ISO</string>
   <string name="ON">WŁ</string>
   <string name="OFF">WYŁ</string>
   <string name="FLASH">Lampa</string>
@@ -12,11 +12,11 @@
   <string name="LONG_EXP._NR">Długa liczba ekspozycji</string>
   <string name="HIGH_ISO_NR">Duże czułości ISO</string>
   <string name="NORMAL">Normalny</string>
-  <string name="EXPOSURE_DELAY_MODE">Tryb opóźnienia ekspozycji</string>
+  <string name="EXPOSURE_DELAY_MODE">Tryb opóźnionej ekspozycji</string>
   <string name="LOCK">Blokada</string>
   <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Pojedyncze zdjęcie (wykonywanie pojedynczych zdjęć)</string>
   <string name="SELF_TIMER">Samowyzwalacz</string>
-  <string name="QUICK_RESPONSE_REMOTE">Szybka odpowiedź zdalna</string>
+  <string name="QUICK_RESPONSE_REMOTE">Natychmiastowe zdalne wyzwalanie</string>
   <string name="2S_DELAYED_REMOTE">2s zdalnego opóźnienia</string>
   <string name="QUIET_SHOOTING">Ciche fotografowanie</string>
   <string name="FLASH_PROHIBITED">lampa błyskowa zakazana</string>
@@ -45,12 +45,12 @@
   <string name="WHITE_FLUORESCENT_LAMP">Biała świetlówka</string>
   <string name="FLUORESCENT_LIGHT_TYPE">Typ światła fluorescencyjnego</string>
   <string name="ADOBE_RGB">Adobe RGB</string>
-  <string name="COLOR_SPACE">Wiadomość dla deweloperów digiCamControl:</string>
+  <string name="COLOR_SPACE">Przestrzeń kolorów</string>
   <string name="14_BIT_RECORDING">Zapis 14-bit</string>
-  <string name="RAW_RECORDING_BIT_MODE">Tryb zapisu bit RAW </string>
+  <string name="RAW_RECORDING_BIT_MODE">Ilość bitów plików RAW</string>
   <string name="NEUTRAL">Neutralny</string>
-  <string name="PICTURE_CONTROL">Kontrola obrazu</string>
-  <string name="LOSSLESS_COMPRESSED_RAW">Niska kompresja RAW</string>
+  <string name="PICTURE_CONTROL">Picture Control</string>
+  <string name="LOSSLESS_COMPRESSED_RAW">Kompresja bezstratna RAW</string>
   <string name="RAW_COMPRESSION">Kompresja RAW</string>
   <string name="MF__HARD_"> MF (ciężki)</string>
   <!--End Property values-->
@@ -448,12 +448,14 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelChangelog">Lista zmian</string>
   <!--27/02/2014-->
   <string name="LabelAllowOverWrite">Pozwól na zastąpienie</string>
+  <string name="LabelShowRuler">Pokaż linijkę</string>
   <string name="LabelAutoPreviewJpgOnly">Auto podgląd JPG tylko</string>
   <string name="LabelSettingsLiveView">Podgląd na żywo</string>
   <string name="LabelHostMode">Tryb hosta</string>
   <!--17.05.2014-->
   <string name="LabelClear">Wyczyść</string>
   <string name="LabelHistogram">Histogram</string>
+  <string name="LabelMetadata">Metadane</string>
   <string name="LabelFullSize">Pełny rozmiar zdjęcia</string>
   <string name="LabelWifi">Połącz z DSLRDASHBOARDSERVER</string>
   <string name="ButtonRecordStopMovie">Zatrzymaj nagrywanie wideo</string>
@@ -539,9 +541,11 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelTimeLapseScriptFile">Plik skryptu</string>
   <string name="LabelBrowse">Przeglądaj</string>
   <string name="LabelFlip">Odwróć w poziomie</string>
+  <string name="LabelLiveViewPreviewTime">Czas podglądu zdjęcia</string>
   <string name="LabelColor">Kolor</string>
   <string name="LabelImportData">Importuj dane</string>
   <string name="LabelExportData">Eksportuj dane</string>
+  <string name="LabelData">Dane</string>
   <string name="LabelScanBarcode">Skanuj kod kreskowy</string>
   <string name="LabelKeepWindowActive">Utrzymaj aktywne okno</string>
   <string name="LabelDeleteFiles">Usuń wybrane pliki</string>
@@ -552,6 +556,7 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelAllowWebCommands">Pozwól na interakcję za pośrednictwem WWW</string>
   <string name="LabelCurrentMotion">Detekcja ruchu</string>
   <string name="LabelStartupScript">Wykonaj skrypt przy uruchomieniu</string>
+  <string name="LabelPublicWebserver">Zezwól na publiczny dostęp</string>
   <string name="LabelReloadOnFolderChange">Przeładuj pliki przy zmianach katalogu</string>
   <string name="MenuSession">Sesja</string>
   <string name="MenuCamera">Aparat</string>
@@ -566,6 +571,7 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="MenuPlugins">Wtyczki</string>
   <string name="LabelAutorotate">Automatyczne obracanie obrazu</string>
   <string name="MenuCameraProperty">Właściwości aparatu</string>
+  <string name="LabelShowThumbInfo">Pokaż informacje obok miniatury</string>
   <string name="MenuLayoutPortrait">Portret</string>
   <string name="MenuLayoutLandscape">Krajobraz</string>
   <string name="MenuExportSession">Eksportuj sesję...</string>
@@ -594,6 +600,7 @@ $Tag4 - Zaznaczony tag 4</string>
   <!--// 19/10/2015-->
   <string name="LabelApplyToImage">Zastosuj do wybranego zdjęcia</string>
   <string name="LabelCaptureCount">Licznik przechwytywania</string>
+  <string name="LabelAutoFocusBeforCapture">Wyostrz przed zrobieniem zdjęcia</string>
   <string name="LabelAskSavePath">Zapytaj o ścieżkę zapisu pliku</string>
   <string name="LabelSaveLiveviewWindow">Zapisz położenie okna Live view</string>
   <string name="LabelShowFullscreenControls">Pokaż sterowanie w oknie pełnego ekranu</string>

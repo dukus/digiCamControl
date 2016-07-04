@@ -6,7 +6,7 @@ Skipping 'it_IT' translation (file: translations\digicamcontrol.baseresource\it_
  -> it: translations\digicamcontrol.baseresource\it.xml
 Skipping 'nl_BE' translation (file: translations\digicamcontrol.baseresource\nl_BE.xml).
  -> el_GR: translations\digicamcontrol.baseresource\el_GR.xml
-Skipping 'cs' translation (file: translations\digicamcontrol.baseresource\cs.xml).
+ -> cs: translations\digicamcontrol.baseresource\cs.xml
 Skipping 'es' translation (file: translations\digicamcontrol.baseresource\es.xml).
  -> ru: translations\digicamcontrol.baseresource\ru.xml
  -> nl: translations\digicamcontrol.baseresource\nl.xml

@@ -67,6 +67,7 @@
   <string name="SDRamToolTip">Afbeeldingen direct op de computer opslaan.</string>
   <string name="CapturePhotoToolTip">Foto maken</string>
   <string name="CapturePhotoNoAfToolTip">Foto maken zonder auto focus</string>
+  <string name="BraketingToolTip">Belichtings- (Witbalans-, Flits-) reeks</string>
   <string name="SettingsToolTip">Instellingen</string>
   <string name="TimeLapseToolTip">Time-Lapse</string>
   <string name="FullscreenToolTip">Volledig scherm</string>
@@ -83,6 +84,7 @@
   <string name="SessionWindowTitle">Sessie  [toevoegen/bewerken]</string>
   <string name="LiveViewWindowTitle">Livebeeld</string>
   <string name="PresetEditWindowTitle">Instelling aanpassen</string>
+  <string name="BraketingWindowTitle">Belichtingsreeks</string>
   <string name="EditTagWindowTitle">Label [toevoegen/bewerken]</string>
   <string name="MultipleCameraWindowTitle">Multi-camera besturing</string>
   <string name="SavePresetWindowTitle">Vooraf ingestelde waarden opslaan</string>
@@ -113,12 +115,15 @@
   <string name="LabelTheme">Thema:</string>
   <string name="LabelGeneral">Algemeen</string>
   <string name="LabelPreview">Voorbeeld</string>
+  <string name="LabelPlaySound">Geluid afspelen na opname</string>
   <string name="LabelAutoPreview">Automatisch voorbeeld</string>
+  <string name="LabelPreviewAfterCapture">Voorbeeld weergeven op volledig scherm</string>
   <string name="LabelPreviewTime">Voorbeeld tijd in sec:</string>
   <string name="LabelPreviewInLIveView">Voobeeld afbeelding na opnamen in live beeld</string>
   <string name="LabelLIveViewImageFreeze">Live beeld bevriezen in sec:</string>
   <string name="LabelRotateImage">Afbeelding roteren:</string>
   <string name="LabelDontLoadThumbs">Geen miniaturen laden</string>
+  <string name="LabelFullscrenBack">Achtergrond voor volledig scherm:</string>
   <string name="LabelTriggers">Triggers</string>
   <string name="LabelUseKeybordToTrigger">Gebruik toetsenbord als trigger bij het maken van foto</string>
   <string name="LabelWebserver">Webserver</string>
@@ -127,6 +132,7 @@
   <string name="LabelSmallFocusSstep">Kleine scherpstel stap</string>
   <string name="LabelMediumFocusStep">Gemiddelde scherpstel stap</string>
   <string name="LabelLargFocusStep">Grote scherpstel stap</string>
+  <string name="ReStartToolTip">U moet de toepassing afsluiten en opnieuw opstarten om deze wijzigingen door te voeren.</string>
   <string name="LabelSessonName">Sessie naam: </string>
   <string name="LabelFolder">Map:</string>
   <string name="LabelFileNameTemplate">Bestandsnaam Template:</string>
@@ -143,6 +149,7 @@ $Tag2 - Geselecteerde label 2
 $Tag3 - Geselecteerde tabel 3
 $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelCounter">Teller:</string>
+  <string name="LabelUseOriginal">Gebruik de bestandsnaam die is gegeven door de camera</string>
   <string name="LabelUseOriginalToolTip">De optie werkt niet via de WIA driver</string>
   <string name="LabelDontDownloadPhotos">Geen foto\'s verzenden naar de PC</string>
   <string name="LabelTags">Tags</string>
@@ -378,17 +385,20 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelDownloadJpgOnlyToolTip">Als opname gemaakt is met JPG + RAW worden alleen de JPG bestanden gedownload</string>
   <string name="LabelSetCounters">Stel bestandsnummering in.</string>
   <string name="LabelEdgeDetection">Edge detectie</string>
+  <string name="LabelLeadingZeros">Voorloopnullen in teller</string>
   <!--04/07/2013-->
   <string name="LabelShowFocusRect">Focus rechthoek weergeven</string>
   <string name="LabelExif">Extra Informatie Foto (Metagegevens)</string>
   <string name="LabelImageProperties">Eigenschappen Afbeelding</string>
   <string name="LabelFileName">Bestandsnaam</string>
+  <string name="LabelSet">Instellen</string>
   <string name="LabelTagSelector">Label selector</string>
   <string name="LabelComment">Opmerking</string>
   <string name="LabelWriteComments">Schrijf opmerkingen/labels in gedownload afbeeldingsbestand</string>
   <string name="LabelStayOnTop2">Blijf bovenaan</string>
   <string name="LabelWriteSelectedTags">Neem labels over van selector</string>
   <string name="LabelClearCache">Wis tussengeheugen</string>
+  <string name="LabelShowMagnifierInFullSccreen">Toon zoomfunctie in volbeeldmodus</string>
   <string name="LabelDelayImageLoading">Vertraging beeldopbouw</string>
   <string name="LabelPHDGuiding">Push Here Dummy Guiding</string>
   <string name="LabelWaitPHDGuiding">Wachten op PHD (sec)</string>
@@ -414,14 +424,51 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelSelectLiked">Selecteer Liked</string>
   <string name="LabelSelectUnLiked">Selecteer Unliked</string>
   <!--19/01/2014-->
+  <string name="LabelError">Fout</string>
+  <string name="LabelChangelog">Wijzigingslog</string>
   <!--27/02/2014-->
+  <string name="LabelAllowOverWrite">Overschrijven toestaan</string>
+  <string name="LabelShowRuler">Toon liniaal</string>
   <string name="LabelSettingsLiveView">Livebeeld</string>
   <!--17.05.2014-->
+  <string name="LabelClear">Wissen</string>
+  <string name="LabelHistogram">Histogram</string>
   <!--//20/08/2014-->
   <!--20/08/2014-->
   <!--20/12/2014-->
+  <string name="LabelDate">Datum</string>
+  <string name="LabelTime">Tijd</string>
+  <string name="LabelSunday">Zondag</string>
+  <string name="LabelMonday">Maandag</string>
+  <string name="LabelTuesday">Dinsdag</string>
+  <string name="LabelWednesday">Woensdag</string>
+  <string name="LabelThursday">Donderdag</string>
+  <string name="LabelFriday">Vrijdag</string>
+  <string name="LabelSaturday">Zaterdag</string>
+  <string name="LabelColor">Kleur</string>
   <!--// 11/03/2015-->
+  <string name="LabelCurrentMotion">Beweging gedetecteerd</string>
   <string name="MenuSession">Sessie</string>
   <!--// 12/09/2015-->
+  <string name="LabelBracketingMode">Opnamereeks modus</string>
+  <string name="LabelDepthOfFieldBracketing">Diafragma/scherptediepte opnamereeks</string>
+  <string name="LabelWhiteBalanceBracketing">Witbalans opnamereeks</string>
+  <string name="LabelIsoBracketing">Iso opnamereeks</string>
+  <string name="LabelBracketingNumberOfShots">Aantal opnamen</string>
+  <string name="LabelSetArea">Instellen</string>
+  <string name="LabelDoneArea">Klaar</string>
+  <string name="LabelRotateCounterclockwise">Draai tegen de klok in</string>
+  <string name="LabelRotateClockwise">Draai met de klok mee</string>
+  <string name="LabelSaveJpg">Opslaan als JPG</string>
+  <string name="LabelPageWidth">Paginabreedte</string>
+  <string name="LabelPageHeigh">Paginahoogte</string>
+  <string name="LabelFill">Opvullen</string>
   <!--// 19/10/2015-->
+  <string name="LabelApplyToImage">Toepassen op geselecteerde afbeelding</string>
+  <string name="LabelCaptureCount">Opnameaantal</string>
+  <string name="LabelAutoFocusBeforCapture">Autofocus voor opname</string>
+  <string name="LabelAskSavePath">Opslagpad voor opnamebestanden vragen</string>
+  <string name="LabelStatistics">Statistieken</string>
+  <string name="LabelRefresh">Verversen</string>
+  <string name="LabelOverview">Overzicht</string>
 </resources>
