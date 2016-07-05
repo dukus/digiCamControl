@@ -1,0 +1,121 @@
+<!--
+ *
+ * Eagle.NuGet.targets -
+ *
+ * WARNING: This MSBuild file requires MSBuild 4.0 features.
+ *
+ * Written by Joe Mistachkin and David Archer.
+ * Released to the public domain, use at your own risk!
+ *
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+  ******************************************************************************
+  **                    Native Utility Library Build Items                    **
+  ******************************************************************************
+  -->
+
+  <ItemGroup>
+    <SpilornisFiles Condition="'$(MSBuildThisFileDirectory)' != '' And
+                               HasTrailingSlash('$(MSBuildThisFileDirectory)')"
+                    Include="$(MSBuildThisFileDirectory)**\Spilornis.*" />
+  </ItemGroup>
+
+  <!--
+  ******************************************************************************
+  **                      Core Library Build Properties                       **
+  ******************************************************************************
+  -->
+
+  <PropertyGroup Condition="'$(NoEagleDefineConstant)' != 'false'">
+    <DefineConstants>$(DefineConstants);EAGLE</DefineConstants>
+  </PropertyGroup>
+
+  <!--
+  ******************************************************************************
+  **                   Native Utility Library Build Targets                   **
+  ******************************************************************************
+  -->
+
+  <Target Name="CopySpilornisFiles"
+          Condition="'$(CopySpilornisFiles)' != 'false' And
+                     '$(OutDir)' != '' And
+                     HasTrailingSlash('$(OutDir)') And
+                     Exists('$(OutDir)')"
+          Inputs="@(SpilornisFiles)"
+          Outputs="@(SpilornisFiles -> '$(OutDir)%(RecursiveDir)%(Filename)%(Extension)')">
+    <!--
+        NOTE: Copy "Spilornis.dll" and all related files, for every
+              supported architecture, to the build output directory.
+    -->
+    <Copy SourceFiles="@(SpilornisFiles)"
+          DestinationFiles="@(SpilornisFiles -> '$(OutDir)%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!--
+  ******************************************************************************
+  -->
+
+  <Target Name="CleanSpilornisFiles"
+          Condition="'$(CleanSpilornisFiles)' != 'false' And
+                     '$(OutDir)' != '' And
+                     HasTrailingSlash('$(OutDir)') And
+                     Exists('$(OutDir)')">
+    <!--
+        NOTE: Delete "Spilornis.dll" and all related files, for every
+              supported architecture, from the build output directory.
+    -->
+    <Delete Files="@(SpilornisFiles -> '$(OutDir)%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!--
+  ******************************************************************************
+  -->
+
+  <Target Name="CollectSpilornisFiles"
+          Condition="'$(CollectSpilornisFiles)' != 'false'">
+    <ItemGroup>
+      <FilesForPackagingFromProject Include="@(SpilornisFiles)">
+        <DestinationRelativePath>bin\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      </FilesForPackagingFromProject>
+    </ItemGroup>
+  </Target>
+
+  <!--
+  ******************************************************************************
+  **                 Native Utility Library Build Properties                  **
+  ******************************************************************************
+  -->
+
+  <PropertyGroup>
+    <PostBuildEventDependsOn>
+      $(PostBuildEventDependsOn);
+      CopySpilornisFiles;
+    </PostBuildEventDependsOn>
+    <BuildDependsOn>
+      $(BuildDependsOn);
+      CopySpilornisFiles;
+    </BuildDependsOn>
+    <CleanDependsOn>
+      $(CleanDependsOn);
+      CleanSpilornisFiles;
+    </CleanDependsOn>
+  </PropertyGroup>
+
+  <!--
+  ******************************************************************************
+  **     Native Utility Library Publish Properties for Visual Studio 201x     **
+  ******************************************************************************
+  -->
+
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' Or
+                            '$(VisualStudioVersion)' == '10.0' Or
+                            '$(VisualStudioVersion)' == '11.0' Or
+                            '$(VisualStudioVersion)' == '12.0' Or
+                            '$(VisualStudioVersion)' == '14.0'">
+    <PipelineCollectFilesPhaseDependsOn>
+      CollectSpilornisFiles;
+      $(PipelineCollectFilesPhaseDependsOn);
+    </PipelineCollectFilesPhaseDependsOn>
+  </PropertyGroup>
+</Project>
