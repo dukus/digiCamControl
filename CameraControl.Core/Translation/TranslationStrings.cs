@@ -686,6 +686,7 @@ namespace CameraControl.Core.Translation
         public static string LabelTrayMessage = "Application was minimized \n Double click to restore!";
         public static string LabelExecuteAfterTransfer = "Execute after file transferred";
         public static string LabelInvert = "Invert";
-        // 
+        // 05/07/2016
+        public static string LabelClosePreview = "Close Preview";
     }
 }

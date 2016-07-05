@@ -506,7 +506,7 @@ namespace CameraControl.Core.Classes
             return bi;
         }
 
-        public ImageSource LoadImage(string filename, int width, int rotateAngle)
+        public BitmapSource LoadImage(string filename, int width, int rotateAngle)
         {
             var bi = new BitmapImage();
             bi.BeginInit();

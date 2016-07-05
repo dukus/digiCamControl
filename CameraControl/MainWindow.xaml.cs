@@ -406,12 +406,27 @@ namespace CameraControl
             {
                 Log.Debug("Photo transfer begin.");
                 eventArgs.CameraDevice.IsBusy = true;
+                var extension = Path.GetExtension(eventArgs.FileName);
+                
+                // the capture is for live view preview 
+                if (LiveViewManager.PreviewRequest.ContainsKey(eventArgs.CameraDevice) &&
+                    LiveViewManager.PreviewRequest[eventArgs.CameraDevice])
+                {
+                    LiveViewManager.PreviewRequest[eventArgs.CameraDevice] = false;
+                    var file = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + extension);
+                    eventArgs.CameraDevice.TransferFile(eventArgs.Handle, file);
+                    eventArgs.CameraDevice.IsBusy = false;
+                    eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
+                    LiveViewManager.Preview[eventArgs.CameraDevice] = file;
+                    LiveViewManager.OnPreviewCaptured(eventArgs.CameraDevice, file);
+                    return;
+                }
+
                 CameraProperty property = eventArgs.CameraDevice.LoadProperties();
                 PhotoSession session = (PhotoSession) eventArgs.CameraDevice.AttachedPhotoSession ??
                                        ServiceProvider.Settings.DefaultSession;
                 StaticHelper.Instance.SystemMessage = "";
                 
-                var extension = Path.GetExtension(eventArgs.FileName);
 
                 if (!eventArgs.CameraDevice.CaptureInSdRam || PhotoUtils.IsMovie(eventArgs.FileName))
                 {

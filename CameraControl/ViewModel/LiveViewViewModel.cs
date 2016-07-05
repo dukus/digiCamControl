@@ -123,6 +123,8 @@ namespace CameraControl.ViewModel
         private int _motionMovieLength;
         private Window _window;
         private bool _invert;
+        private BitmapSource _previewBitmap;
+        private bool _previewBitmapVisible;
 
 
         public Rect RullerRect
@@ -159,6 +161,28 @@ namespace CameraControl.ViewModel
                 RaisePropertyChanged(() => Bitmap);
             }
         }
+
+        public BitmapSource PreviewBitmap
+        {
+            get { return _previewBitmap; }
+            set
+            {
+                _previewBitmap = value;
+                RaisePropertyChanged(()=>PreviewBitmap);
+                PreviewBitmapVisible = true;
+            }
+        }
+
+        public bool PreviewBitmapVisible
+        {
+            get { return _previewBitmapVisible; }
+            set
+            {
+                _previewBitmapVisible = value;
+                RaisePropertyChanged(() => PreviewBitmapVisible);
+            }
+        }
+
 
         public int LevelAngle
         {
@@ -952,7 +976,10 @@ namespace CameraControl.ViewModel
         /// </value>
         public bool DelayedStart
         {
-            get { return _delayedStart; }
+            get
+            {
+                return _delayedStart;
+            }
             set
             {
                 _delayedStart = value;
@@ -1174,6 +1201,7 @@ namespace CameraControl.ViewModel
         public RelayCommand RecordMovieCommand { get; set; }
         public RelayCommand CaptureCommand { get; set; }
         public RelayCommand CancelCaptureCommand { get; set; }
+        public RelayCommand PreviewCommand { get; set; }
 
         public RelayCommand FocusPCommand { get; set; }
         public RelayCommand FocusPPCommand { get; set; }
@@ -1212,6 +1240,9 @@ namespace CameraControl.ViewModel
         public RelayCommand LockCurrentFarCommand { get; set; }
 
         public RelayCommand FullScreenCommand { get; set; }
+
+        public RelayCommand ClosePreviewCommand { get; set; }
+
         #endregion
 
         public bool IsActive { get; set; }
@@ -1310,6 +1341,7 @@ namespace CameraControl.ViewModel
             },
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(CaptureInThread);
+            PreviewCommand=new RelayCommand(CapturePreview);
             FocusMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.SmallFocusStepCanon : -ServiceProvider.Settings.SmalFocusStep));
             FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.MediumFocusStepCanon : -ServiceProvider.Settings.MediumFocusStep));
             FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.LargeFocusStepCanon : -ServiceProvider.Settings.LargeFocusStep));
@@ -1363,7 +1395,32 @@ namespace CameraControl.ViewModel
             CancelCaptureCommand = new RelayCommand(() => CaptureCancelRequested = true);
 
             FullScreenCommand = new RelayCommand(FullScreen);
+            ClosePreviewCommand = new RelayCommand(() => PreviewBitmapVisible = false);
+        }
 
+        void LiveViewManager_PreviewCaptured(ICameraDevice cameraDevice, string file)
+        {
+            // the preview was captured with a another camera
+            if (cameraDevice != CameraDevice)
+                return;
+            try
+            {
+                if (File.Exists(file))
+                {
+                    PreviewBitmap = BitmapLoader.Instance.LoadImage(file, 0, 0);
+                    File.Delete(file);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Preview werror", ex);
+            }
+        }
+
+        private void CapturePreview()
+        {
+            var thread = new Thread(() => Capture(true));
+            thread.Start();   
         }
 
         private void FullScreen()
@@ -1475,6 +1532,7 @@ namespace CameraControl.ViewModel
             _focusStackingTimer.Elapsed += _focusStackingTimer_Elapsed;
             _restartTimer.AutoReset = true;
             _restartTimer.Elapsed += _restartTimer_Elapsed;
+            LiveViewManager.PreviewCaptured += LiveViewManager_PreviewCaptured;
         }
 
         private void _restartTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -2565,7 +2623,8 @@ namespace CameraControl.ViewModel
 
         }
 
-        private void Capture()
+
+        private void Capture(bool preview=false)
         {
             if (CameraDevice.ShutterSpeed != null && CameraDevice.ShutterSpeed.Value == "Bulb")
             {
@@ -2574,6 +2633,25 @@ namespace CameraControl.ViewModel
                 CaptureInProgress = false;
                 return;
             }
+
+            if (preview)
+            {
+                _timer.Stop();
+                Thread.Sleep(300);
+                try
+                {
+                    LiveViewManager.PreviewRequest[CameraDevice] = true;
+                    CameraDevice.CapturePhotoNoAf();
+                    Log.Debug("LiveView: Capture preview done");
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    StaticHelper.Instance.SystemMessage = exception.Message;
+                    Log.Error("Unable to take preview picture with no af", exception);
+                }
+            }
+
             CaptureInProgress = true;
             CaptureCancelRequested = false;
             if (CaptureCount == 0)
@@ -2784,9 +2862,8 @@ namespace CameraControl.ViewModel
 
         private void CaptureInThread()
         {
-            var thread = new Thread(Capture);
+            var thread = new Thread(()=>Capture());
             thread.Start();
-            //thread.Join();
         }
 
         private void LiveViewViewModel_FocuseDone(object sender, EventArgs e)

@@ -49,12 +49,18 @@ namespace CameraControl.windows
 {
     public class LiveViewManager : IWindow
     {
+        public delegate void PreviewCapturedEventHandler(ICameraDevice cameraDevice, string file);
+
+        public static event PreviewCapturedEventHandler PreviewCaptured;
+
         private static object _locker = new object();
 
         private Dictionary<object, LiveViewWnd> _register;
         private static Dictionary<ICameraDevice, bool> _recordtoRam;
         private static Dictionary<ICameraDevice, bool> _hostMode;
         private static Dictionary<ICameraDevice, CameraPreset> _presets;
+        public static Dictionary<ICameraDevice, bool> PreviewRequest;
+        public static Dictionary<ICameraDevice, string> Preview; 
 
         public LiveViewManager()
         {
@@ -62,6 +68,8 @@ namespace CameraControl.windows
             _recordtoRam = new Dictionary<ICameraDevice, bool>();
             _hostMode = new Dictionary<ICameraDevice, bool>();
             _presets = new Dictionary<ICameraDevice, CameraPreset>();
+            PreviewRequest = new Dictionary<ICameraDevice, bool>();
+            Preview = new Dictionary<ICameraDevice, string>();
             try
             {
                 // xsplit plugin support 
@@ -145,9 +153,9 @@ namespace CameraControl.windows
                         }
                         break;
                     default:
-                        foreach (var liveViewWnd in _register)
+                        if (cmd.StartsWith("LiveView"))
                         {
-                            if (cmd.StartsWith("LiveView"))
+                            foreach (var liveViewWnd in _register)
                             {
                                 liveViewWnd.Value.ExecuteCommand(cmd, param);
                             }
@@ -198,6 +206,12 @@ namespace CameraControl.windows
         public static LiveViewData GetLiveViewImage(ICameraDevice device)
         {
             return device.GetLiveViewImage();
+        }
+
+        public static void OnPreviewCaptured(ICameraDevice cameradevice, string file)
+        {
+            var handler = PreviewCaptured;
+            if (handler != null) handler(cameradevice, file);
         }
     }
 }

@@ -22,7 +22,7 @@
         <StackPanel Orientation="Vertical" >
             <StackPanel Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Rectangle Fill="Red" Width="10" Height="10" />
-                <ProgressBar Value="{Binding Path=TransferProgress}" Width="125" Margin="2" Style="{x:Null}"/>
+                <ProgressBar Value="{Binding Path=TransferProgress}" Width="100" Margin="2" Style="{x:Null}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=DisplayName}" Padding="0" ToolTip="{Binding Path=DisplayName}"/>
