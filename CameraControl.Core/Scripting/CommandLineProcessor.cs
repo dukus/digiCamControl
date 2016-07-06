@@ -418,10 +418,10 @@ namespace CameraControl.Core.Scripting
                                     }
                                     if (prop.PropertyType == typeof(bool))
                                     {
-                                        val = val.ToLower();
-                                        if(val != "true" || val !="false")
+                                        val = val.ToLower().Trim();
+                                        if(val != "true" && val !="false" && val != "0" && val !="1")
                                             throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, val == "true", null);
+                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
                                     }
                                     if (prop.PropertyType == typeof(int))
                                     {
@@ -453,10 +453,10 @@ namespace CameraControl.Core.Scripting
                                     }
                                     if (prop.PropertyType == typeof(bool))
                                     {
-                                        val = val.ToLower();
-                                        if (val != "true" || val != "false")
+                                        val = val.ToLower().Trim();
+                                        if (val != "true" && val != "false" && val != "0" && val != "1")
                                             throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                        prop.SetValue(device.LoadProperties(), val == "true", null);
+                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
                                     }
                                     if (prop.PropertyType == typeof(int))
                                     {
@@ -488,10 +488,10 @@ namespace CameraControl.Core.Scripting
                                     }
                                     if (prop.PropertyType == typeof(bool))
                                     {
-                                        val = val.ToLower();
-                                        if (val != "true" || val != "false")
+                                        val = val.ToLower().Trim();
+                                        if (val != "true" && val != "false" && val != "0" && val != "1")
                                             throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                        prop.SetValue(device.LoadProperties().LiveviewSettings, val == "true", null);
+                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
                                     }
                                     if (prop.PropertyType == typeof(int))
                                     {
