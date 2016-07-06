@@ -22,7 +22,7 @@ namespace CameraControl.Core.Scripting
             {
                 case "capturenoaf":
                 case "capture":
-                    if (args.Length > 1 && string.IsNullOrWhiteSpace(args[1]))
+                    if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
                     {
                         var file = args[1];
                         if (file.Contains(":\\") || file.StartsWith(@"\\"))
