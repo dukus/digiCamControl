@@ -516,6 +516,8 @@ namespace CameraControl.Core.Scripting
                                 )
                             {
                                 dynamic valp = info.GetValue(device, null);
+                                if (!valp.Values.Contains(args[1].Replace("_", " ")))
+                                    throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
                                 valp.Value = args[1].Replace("_"," ");
                             }
                         }
