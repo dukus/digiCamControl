@@ -52,6 +52,7 @@ namespace CameraControl.windows
         public delegate void PreviewCapturedEventHandler(ICameraDevice cameraDevice, string file);
 
         public static event PreviewCapturedEventHandler PreviewCaptured;
+        public static event PreviewCapturedEventHandler PreviewLoaded;
 
         private static object _locker = new object();
 
@@ -211,6 +212,12 @@ namespace CameraControl.windows
         public static void OnPreviewCaptured(ICameraDevice cameradevice, string file)
         {
             var handler = PreviewCaptured;
+            if (handler != null) handler(cameradevice, file);
+        }
+
+        public static void OnPreviewLoaded(ICameraDevice cameradevice, string file)
+        {
+            var handler = PreviewLoaded;
             if (handler != null) handler(cameradevice, file);
         }
     }

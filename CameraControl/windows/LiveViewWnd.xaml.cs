@@ -73,7 +73,7 @@ namespace CameraControl.windows
     {
 
         private ICameraDevice _selectedPortableDevice;
-        
+
         private DateTime _focusMoveTime = DateTime.Now;
 
         public LiveViewData LiveViewData { get; set; }
@@ -124,7 +124,7 @@ namespace CameraControl.windows
             }
             catch (Exception ex)
             {
-                Log.Error("Live view init error ",ex);
+                Log.Error("Live view init error ", ex);
             }
             Init();
         }
@@ -134,11 +134,23 @@ namespace CameraControl.windows
             try
             {
                 InitializeComponent();
+                LiveViewManager.PreviewLoaded += LiveViewManager_PreviewCaptured;
             }
             catch (Exception ex)
             {
                 Log.Error("Live view init error ", ex);
             }
+        }
+
+        private void LiveViewManager_PreviewCaptured(ICameraDevice cameraDevice, string file)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (((LiveViewViewModel) DataContext).CameraDevice != cameraDevice)
+                    return;
+                //zoomAndPanControl.ScaleToFit();
+            }
+                ));
         }
 
 
@@ -157,12 +169,12 @@ namespace CameraControl.windows
 
         private void image1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left && 
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left &&
                 _selectedPortableDevice.LiveViewImageZoomRatio.Value == "All")
             {
                 try
                 {
-                    ((LiveViewViewModel) DataContext).SetFocusPos(e.MouseDevice.GetPosition(_image), _image.ActualWidth,
+                    ((LiveViewViewModel)DataContext).SetFocusPos(e.MouseDevice.GetPosition(_image), _image.ActualWidth,
                         _image.ActualHeight);
 
                 }
@@ -185,12 +197,12 @@ namespace CameraControl.windows
                 try
                 {
                     if (DataContext != null)
-                        ((LiveViewViewModel) (DataContext)).WindowsManager_Event(cmd, param);
+                        ((LiveViewViewModel)(DataContext)).WindowsManager_Event(cmd, param);
                 }
                 catch (Exception)
                 {
-                    
-                    
+
+
                 }
             }));
             switch (cmd)
@@ -202,7 +214,7 @@ namespace CameraControl.windows
                         {
                             ICameraDevice cameraparam = param as ICameraDevice;
                             var properties = cameraparam.LoadProperties();
-                            if (properties.SaveLiveViewWindow && properties.WindowRect.Width > 0 && properties.WindowRect.Height>0)
+                            if (properties.SaveLiveViewWindow && properties.WindowRect.Width > 0 && properties.WindowRect.Height > 0)
                             {
                                 this.Left = properties.WindowRect.Left;
                                 this.Top = properties.WindowRect.Top;
@@ -211,7 +223,7 @@ namespace CameraControl.windows
                             }
                             else
                             {
-                                this.WindowState = ((Window)ServiceProvider.PluginManager.SelectedWindow).WindowState;                                
+                                this.WindowState = ((Window)ServiceProvider.PluginManager.SelectedWindow).WindowState;
                             }
 
                             if (cameraparam == SelectedPortableDevice && IsVisible)
@@ -248,7 +260,7 @@ namespace CameraControl.windows
                             {
                                 properties.WindowRect = new Rect(this.Left, this.Top, this.Width, this.Height);
                             }
-                            ((LiveViewViewModel) DataContext).UnInit();
+                            ((LiveViewViewModel)DataContext).UnInit();
                         }
                         catch (Exception exception)
                         {
@@ -259,17 +271,17 @@ namespace CameraControl.windows
                     }));
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Message:
-                {
-                    Dispatcher.Invoke(new Action(delegate
                     {
-                        if (this.IsLoaded)
-                            this.ShowMessageAsync("", (string) param);
-                        else
+                        Dispatcher.Invoke(new Action(delegate
                         {
-                            MessageBox.Show((string) param);
-                        }
-                    }));
-                }
+                            if (this.IsLoaded)
+                                this.ShowMessageAsync("", (string)param);
+                            else
+                            {
+                                MessageBox.Show((string)param);
+                            }
+                        }));
+                    }
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
@@ -282,7 +294,7 @@ namespace CameraControl.windows
                             {
                                 properties.WindowRect = new Rect(this.Left, this.Top, this.Width, this.Height);
                             }
-                            ((LiveViewViewModel) DataContext).UnInit();
+                            ((LiveViewViewModel)DataContext).UnInit();
                             Hide();
                             Close();
                         }
@@ -339,7 +351,7 @@ namespace CameraControl.windows
 
         private void canvas_image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left )
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left)
             {
                 try
                 {
@@ -386,7 +398,7 @@ namespace CameraControl.windows
                 // Note that you can have more than one file.
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 ((LiveViewViewModel)DataContext).SetOverlay(files[0]);
-                ((LiveViewViewModel) DataContext).OverlayActivated = true;
+                ((LiveViewViewModel)DataContext).OverlayActivated = true;
                 // Assuming you have one file that you care about, pass it off to whatever
                 // handling code you have defined.
             }
@@ -394,7 +406,22 @@ namespace CameraControl.windows
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
-            ((LiveViewViewModel) DataContext).IsMinized = this.WindowState == WindowState.Minimized;
+            ((LiveViewViewModel)DataContext).IsMinized = this.WindowState == WindowState.Minimized;
+        }
+
+        private void zoomAndPanControl_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+            if (e.Delta > 0)
+            {
+                Point curContentMousePoint = e.GetPosition(PreviewBitmap);
+                zoomAndPanControl.ZoomIn(curContentMousePoint);
+            }
+            else if (e.Delta < 0)
+            {
+                Point curContentMousePoint = e.GetPosition(PreviewBitmap);
+                zoomAndPanControl.ZoomOut(curContentMousePoint);
+            }
         }
     }
 }

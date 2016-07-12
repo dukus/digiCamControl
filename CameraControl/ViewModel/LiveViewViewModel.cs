@@ -1252,6 +1252,7 @@ namespace CameraControl.ViewModel
             CameraProperty = new CameraProperty();
             CameraDevice = new NotConnectedCameraDevice();
             InitCommands();
+            PreviewBitmapVisible = true;
         }
 
         public LiveViewViewModel(ICameraDevice device, Window window)
@@ -1282,6 +1283,7 @@ namespace CameraControl.ViewModel
 
             TriggerOnMotion = false;
             ShowHistogram = true;
+            PreviewBitmapVisible = false;
             Init();
             ServiceProvider.WindowsManager.Event += WindowsManagerEvent;
         }
@@ -1408,6 +1410,7 @@ namespace CameraControl.ViewModel
                 if (File.Exists(file))
                 {
                     PreviewBitmap = BitmapLoader.Instance.LoadImage(file, 0, 0);
+                    LiveViewManager.OnPreviewLoaded(CameraDevice, file);
                     File.Delete(file);
                 }
             }

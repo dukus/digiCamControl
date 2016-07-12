@@ -58,34 +58,7 @@ namespace CameraControl.Layouts
     public class LayoutBase : UserControl
     {
         /// <summary>
-        /// Specifies the current state of the mouse handling logic.
-        /// </summary>
-        protected MouseHandlingMode mouseHandlingMode = MouseHandlingMode.None;
-
-        /// <summary>
-        /// The point that was clicked relative to the ZoomAndPanControl.
-        /// </summary>
-        protected Point origZoomAndPanControlMouseDownPoint;
-
-        /// <summary>
-        /// The point that was clicked relative to the content that is contained within the ZoomAndPanControl.
-        /// </summary>
-        protected Point origContentMouseDownPoint;
-
-        /// <summary>
-        /// Records which mouse button clicked during mouse dragging.
-        /// </summary>
-        protected MouseButton mouseButtonDown;
-
-        /// <summary>
-        /// Saves the previous zoom rectangle, pressing the backspace key jumps back to this zoom rectangle.
-        /// </summary>
-        protected Rect prevZoomRect;
-
-        /// <summary>
-        /// Save the previous content scale, pressing the backspace key jumps back to this scale.
-        /// </summary>
-        protected double prevZoomScale;
+     
 
         /// <summary>
         /// Set to 'true' when the previous zoom rect is saved.
@@ -683,113 +656,6 @@ namespace CameraControl.Layouts
 
         }
 
-        /// <summary>
-        /// Event raised on mouse down in the ZoomAndPanControl.
-        /// </summary>
-        protected void zoomAndPanControl_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            content.Focus();
-            Keyboard.Focus(content);
-
-            mouseButtonDown = e.ChangedButton;
-            origZoomAndPanControlMouseDownPoint = e.GetPosition(ZoomAndPanControl);
-            origContentMouseDownPoint = e.GetPosition(content);
-
-            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
-                (e.ChangedButton == MouseButton.Left ||
-                 e.ChangedButton == MouseButton.Right))
-            {
-                // Shift + left- or right-down initiates zooming mode.
-                mouseHandlingMode = MouseHandlingMode.Zooming;
-            }
-            else if (mouseButtonDown == MouseButton.Left)
-            {
-                // Just a plain old left-down initiates panning mode.
-                mouseHandlingMode = MouseHandlingMode.Panning;
-            }
-
-            if (mouseHandlingMode != MouseHandlingMode.None)
-            {
-                // Capture the mouse so that we eventually receive the mouse up event.
-                ZoomAndPanControl.CaptureMouse();
-                e.Handled = true;
-            }
-        }
-
-        /// <summary>
-        /// Event raised on mouse up in the ZoomAndPanControl.
-        /// </summary>
-        protected void zoomAndPanControl_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (mouseHandlingMode != MouseHandlingMode.None)
-            {
-                if (mouseHandlingMode == MouseHandlingMode.Zooming)
-                {
-                    if (mouseButtonDown == MouseButton.Left)
-                    {
-                        // Shift + left-click zooms in on the content.
-                        ZoomIn(origContentMouseDownPoint);
-                    }
-                    else if (mouseButtonDown == MouseButton.Right)
-                    {
-                        // Shift + left-click zooms out from the content.
-                        ZoomOut(origContentMouseDownPoint);
-                    }
-                }
-                else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
-                {
-                }
-
-                ZoomAndPanControl.ReleaseMouseCapture();
-                mouseHandlingMode = MouseHandlingMode.None;
-                e.Handled = true;
-            }
-        }
-
-        /// <summary>
-        /// Event raised on mouse move in the ZoomAndPanControl.
-        /// </summary>
-        protected void zoomAndPanControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseHandlingMode == MouseHandlingMode.Panning)
-            {
-                //
-                // The user is left-dragging the mouse.
-                // Pan the viewport by the appropriate amount.
-                //
-                Point curContentMousePoint = e.GetPosition(content);
-                Vector dragOffset = curContentMousePoint - origContentMouseDownPoint;
-
-                ZoomAndPanControl.ContentOffsetX -= dragOffset.X;
-                ZoomAndPanControl.ContentOffsetY -= dragOffset.Y;
-
-                e.Handled = true;
-            }
-            else if (mouseHandlingMode == MouseHandlingMode.Zooming)
-            {
-                Point curZoomAndPanControlMousePoint = e.GetPosition(ZoomAndPanControl);
-                Vector dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
-                double dragThreshold = 10;
-                if (mouseButtonDown == MouseButton.Left &&
-                    (Math.Abs(dragOffset.X) > dragThreshold ||
-                     Math.Abs(dragOffset.Y) > dragThreshold))
-                {
-                    //
-                    // When Shift + left-down zooming mode and the user drags beyond the drag threshold,
-                    // initiate drag zooming mode where the user can drag out a rectangle to select the area
-                    // to zoom in on.
-                    //
-                    mouseHandlingMode = MouseHandlingMode.DragZooming;
-
-                }
-
-                e.Handled = true;
-            }
-            else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
-            {
-
-            }
-        }
 
 
         /// <summary>

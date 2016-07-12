@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CameraControl.Controls.ZoomAndPan
@@ -11,6 +12,36 @@ namespace CameraControl.Controls.ZoomAndPan
     /// </summary>
     public partial class ZoomAndPanControl : ContentControl, IScrollInfo
     {
+
+        /// Specifies the current state of the mouse handling logic.
+        /// </summary>
+        protected MouseHandlingMode mouseHandlingMode = MouseHandlingMode.None;
+
+        /// <summary>
+        /// The point that was clicked relative to the ZoomAndPanControl.
+        /// </summary>
+        protected Point origZoomAndPanControlMouseDownPoint;
+
+        /// <summary>
+        /// The point that was clicked relative to the content that is contained within the ZoomAndPanControl.
+        /// </summary>
+        protected Point origContentMouseDownPoint;
+
+        /// <summary>
+        /// Records which mouse button clicked during mouse dragging.
+        /// </summary>
+        protected MouseButton mouseButtonDown;
+
+        /// <summary>
+        /// Saves the previous zoom rectangle, pressing the backspace key jumps back to this zoom rectangle.
+        /// </summary>
+        protected Rect prevZoomRect;
+
+        /// <summary>
+        /// Save the previous content scale, pressing the backspace key jumps back to this scale.
+        /// </summary>
+        protected double prevZoomScale;
+
         #region Internal Data Members
 
         /// <summary>
@@ -111,58 +142,70 @@ namespace CameraControl.Controls.ZoomAndPan
         //
 
         public static readonly DependencyProperty ContentScaleProperty =
-                DependencyProperty.Register("ContentScale", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(1.0, ContentScale_PropertyChanged, ContentScale_Coerce));
+            DependencyProperty.Register("ContentScale", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(1.0, ContentScale_PropertyChanged, ContentScale_Coerce));
 
         public static readonly DependencyProperty MinContentScaleProperty =
-                DependencyProperty.Register("MinContentScale", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.01, MinOrMaxContentScale_PropertyChanged));
+            DependencyProperty.Register("MinContentScale", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.01, MinOrMaxContentScale_PropertyChanged));
 
         public static readonly DependencyProperty MaxContentScaleProperty =
-                DependencyProperty.Register("MaxContentScale", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(10.0, MinOrMaxContentScale_PropertyChanged));
+            DependencyProperty.Register("MaxContentScale", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(10.0, MinOrMaxContentScale_PropertyChanged));
 
         public static readonly DependencyProperty ContentOffsetXProperty =
-                DependencyProperty.Register("ContentOffsetX", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0, ContentOffsetX_PropertyChanged, ContentOffsetX_Coerce));
+            DependencyProperty.Register("ContentOffsetX", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0, ContentOffsetX_PropertyChanged, ContentOffsetX_Coerce));
 
         public static readonly DependencyProperty ContentOffsetYProperty =
-                DependencyProperty.Register("ContentOffsetY", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0, ContentOffsetY_PropertyChanged, ContentOffsetY_Coerce));
+            DependencyProperty.Register("ContentOffsetY", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0, ContentOffsetY_PropertyChanged, ContentOffsetY_Coerce));
 
         public static readonly DependencyProperty AnimationDurationProperty =
-                DependencyProperty.Register("AnimationDuration", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.4  )); 
+            DependencyProperty.Register("AnimationDuration", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.4));
 
         public static readonly DependencyProperty ContentZoomFocusXProperty =
-                DependencyProperty.Register("ContentZoomFocusX", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0));
+            DependencyProperty.Register("ContentZoomFocusX", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty ContentZoomFocusYProperty =
-                DependencyProperty.Register("ContentZoomFocusY", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0));
+            DependencyProperty.Register("ContentZoomFocusY", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty ViewportZoomFocusXProperty =
-                DependencyProperty.Register("ViewportZoomFocusX", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0));
+            DependencyProperty.Register("ViewportZoomFocusX", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty ViewportZoomFocusYProperty =
-                DependencyProperty.Register("ViewportZoomFocusY", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0));
+            DependencyProperty.Register("ViewportZoomFocusY", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty ContentViewportWidthProperty =
-                DependencyProperty.Register("ContentViewportWidth", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0));
+            DependencyProperty.Register("ContentViewportWidth", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty ContentViewportHeightProperty =
-                DependencyProperty.Register("ContentViewportHeight", typeof(double), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(0.0));
+            DependencyProperty.Register("ContentViewportHeight", typeof (double), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty IsMouseWheelScrollingEnabledProperty =
-                DependencyProperty.Register("IsMouseWheelScrollingEnabled", typeof(bool), typeof(ZoomAndPanControl),
-                                            new FrameworkPropertyMetadata(false));
+            DependencyProperty.Register("IsMouseWheelScrollingEnabled", typeof (bool), typeof (ZoomAndPanControl),
+                new FrameworkPropertyMetadata(false));
 
-        #endregion Dependency Property Definitions
+        // Using a DependencyProperty as the backing store for ZoneOneVisibility. Defaults to Collapsed.
+        public static readonly DependencyProperty ZoneOneVisibilityProperty =
+            DependencyProperty.Register("ZoneOneVisibility", typeof (Visibility), typeof (ZoomAndPanControl),
+                new UIPropertyMetadata(Visibility.Collapsed));
+    
+
+    #endregion Dependency Property Definitions
+
+        public Visibility ZoneOneVisibility
+        {
+            get { return (Visibility)GetValue(ZoneOneVisibilityProperty); }
+            set { SetValue(ZoneOneVisibilityProperty, value); }
+        }
 
         /// <summary>
         /// Get/set the X offset (in content coordinates) of the view on the content.
@@ -615,6 +658,125 @@ namespace CameraControl.Controls.ZoomAndPan
         static ZoomAndPanControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ZoomAndPanControl), new FrameworkPropertyMetadata(typeof(ZoomAndPanControl)));
+            
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            content.Focus();
+            Keyboard.Focus(content);
+
+            mouseButtonDown = e.ChangedButton;
+            origZoomAndPanControlMouseDownPoint = e.GetPosition(this);
+            origContentMouseDownPoint = e.GetPosition(content);
+
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
+                (e.ChangedButton == MouseButton.Left ||
+                 e.ChangedButton == MouseButton.Right))
+            {
+                // Shift + left- or right-down initiates zooming mode.
+                mouseHandlingMode = MouseHandlingMode.Zooming;
+            }
+            else if (mouseButtonDown == MouseButton.Left)
+            {
+                // Just a plain old left-down initiates panning mode.
+                mouseHandlingMode = MouseHandlingMode.Panning;
+            }
+
+            if (mouseHandlingMode != MouseHandlingMode.None)
+            {
+                // Capture the mouse so that we eventually receive the mouse up event.
+                this.CaptureMouse();
+                e.Handled = true;
+            }
+            base.OnMouseDown(e);
+        }
+
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            if (mouseHandlingMode != MouseHandlingMode.None)
+            {
+                if (mouseHandlingMode == MouseHandlingMode.Zooming)
+                {
+                    if (mouseButtonDown == MouseButton.Left)
+                    {
+                        // Shift + left-click zooms in on the content.
+                        ZoomIn(origContentMouseDownPoint);
+                    }
+                    else if (mouseButtonDown == MouseButton.Right)
+                    {
+                        // Shift + left-click zooms out from the content.
+                        ZoomOut(origContentMouseDownPoint);
+                    }
+                }
+                else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
+                {
+                }
+
+                ReleaseMouseCapture();
+                mouseHandlingMode = MouseHandlingMode.None;
+                e.Handled = true;
+            }
+            base.OnMouseUp(e);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            if (mouseHandlingMode == MouseHandlingMode.Panning)
+            {
+                //
+                // The user is left-dragging the mouse.
+                // Pan the viewport by the appropriate amount.
+                //
+                Point curContentMousePoint = e.GetPosition(content);
+                Vector dragOffset = curContentMousePoint - origContentMouseDownPoint;
+
+                ContentOffsetX -= dragOffset.X;
+                ContentOffsetY -= dragOffset.Y;
+
+                e.Handled = true;
+            }
+            else if (mouseHandlingMode == MouseHandlingMode.Zooming)
+            {
+                Point curZoomAndPanControlMousePoint = e.GetPosition(this);
+                Vector dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
+                double dragThreshold = 10;
+                if (mouseButtonDown == MouseButton.Left &&
+                    (Math.Abs(dragOffset.X) > dragThreshold ||
+                     Math.Abs(dragOffset.Y) > dragThreshold))
+                {
+                    //
+                    // When Shift + left-down zooming mode and the user drags beyond the drag threshold,
+                    // initiate drag zooming mode where the user can drag out a rectangle to select the area
+                    // to zoom in on.
+                    //
+                    mouseHandlingMode = MouseHandlingMode.DragZooming;
+
+                }
+
+                e.Handled = true;
+            }
+            else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
+            {
+
+            }
+            base.OnMouseMove(e);
+        }
+
+        /// <summary>
+        /// Zoom the viewport out, centering on the specified point (in content coordinates).
+        /// </summary>
+        public void ZoomOut(Point contentZoomCenter)
+        {
+            ZoomAboutPoint(ContentScale - 0.1, contentZoomCenter);
+        }
+
+        /// <summary>
+        /// Zoom the viewport in, centering on the specified point (in content coordinates).
+        /// </summary>
+        public void ZoomIn(Point contentZoomCenter)
+        {
+            ZoomAboutPoint(ContentScale + 0.1, contentZoomCenter);
         }
 
         /// <summary>
@@ -1069,6 +1231,9 @@ namespace CameraControl.Controls.ZoomAndPan
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
             Size size = base.ArrangeOverride(this.DesiredSize);
+
+            if (content == null)
+                return size;
 
             if (content.DesiredSize != unScaledExtent)
             {

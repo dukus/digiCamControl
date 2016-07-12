@@ -39,7 +39,7 @@
                 <Grid.LayoutTransform>
                     <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
                 </Grid.LayoutTransform>
-                <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseDown="zoomAndPanControl_MouseDown" MouseUp="zoomAndPanControl_MouseUp" MouseMove="zoomAndPanControl_MouseMove" MouseWheel="zoomAndPanControl_MouseWheel">
+                <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel">
                     <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Center" Margin="5" Stretch="Uniform" Width="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Width}" Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Height}">
                         <Image.InputBindings>
                             <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
