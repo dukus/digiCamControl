@@ -110,9 +110,20 @@ namespace Setup
             project.SourceBaseDir =
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Release\"));
 #endif
-
-            FileVersionInfo ver =
-                FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
+            /* Not particularly proud of this change, nor the matching one in ObsPluginSetup.cs, but it seems necessary to allow these
+             * programs to be built regardless of the layout choosen for the files */
+            FileVersionInfo ver = null;
+            try
+            {
+                ver =
+                    FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
+            }
+            catch (FileNotFoundException ex)
+            {
+                project.SourceBaseDir = project.SourceBaseDir.Replace(@"Setup\bin\", "");
+                ver =
+                    FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
+            }
 
             project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
 

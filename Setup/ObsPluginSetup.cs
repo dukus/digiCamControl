@@ -37,8 +37,18 @@ namespace Setup
                 Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"..\CameraControl\bin\Release\"));
 #endif
 
-            FileVersionInfo ver =
-                FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "ObsPlugin\\CLRHostPlugin", "DccObsPlugin.dll"));
+            FileVersionInfo ver = null;
+            try
+            {
+                ver =
+                    FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, @"ObsPlugin\CLRHostPlugin", "DccObsPlugin.dll"));
+            }
+            catch (FileNotFoundException ex)
+            {
+                project.SourceBaseDir = project.SourceBaseDir.Replace(@"Setup\bin\", "");
+                ver =
+                    FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, @"ObsPlugin\CLRHostPlugin", "DccObsPlugin.dll"));
+            }
 
             project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
 
