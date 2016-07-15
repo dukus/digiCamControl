@@ -54,8 +54,8 @@ namespace CameraControlCmd
         //[STAThread]
         private static int Main(string[] args)
         {
-            Console.WriteLine("digiCamControl command line utility");
-            Console.WriteLine();
+            ServiceProvider.ConfigureLog();
+            Log.InfoWithWriteLine("digiCamControl command line utility running\n");
 
             _arguments = new InputArguments(args, "/");
             if (!args.Any() || _arguments.Contains("help"))
@@ -479,9 +479,8 @@ namespace CameraControlCmd
 
         private static void InitApplication()
         {
-            ServiceProvider.Branding = Branding.LoadBranding(); 
-            ServiceProvider.Configure();
-            Log.Debug("Command line utility started");
+            ServiceProvider.Branding = Branding.LoadBranding();
+            ServiceProvider.ConfigureDatabase();
             ServiceProvider.Settings = new Settings();
             ServiceProvider.Settings = ServiceProvider.Settings.Load();
             ServiceProvider.Settings.LoadSessionData();
