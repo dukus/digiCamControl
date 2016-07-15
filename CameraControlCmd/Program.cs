@@ -64,6 +64,24 @@ namespace CameraControlCmd
                 Console.ReadLine();
                 return 0;
             }
+            if (_arguments.Contains("verbose"))
+            {
+                Log.IsVerbose = true;
+                Log.InfoWithWriteLine(String.Format("Running in /verbose mode\n\t{0}\n\t{1}\n", ApplicationInformation.ExecutingAssembly, ApplicationInformation.CompileDate));
+            }
+
+            if (Log.IsVerbose)
+            {
+                Log.VerboseWithWriteLine("Input arguments:");
+                int argc = 0;
+                foreach (string arg in args)
+                {
+                    Log.VerboseWithWriteLine(String.Format("     [{0,-2}]. {1}", argc, arg));
+                    argc++;
+                }
+                Log.VerboseWithWriteLine(String.Format("\nProcessed arguments:\n{0}\n",_arguments.ToString("     ")));
+            }
+
             InitApplication();
             Thread.Sleep(1000);
             while (CamerasAreBusy())
@@ -148,6 +166,20 @@ namespace CameraControlCmd
         {
             try
             {
+                if (_arguments.Contains("verbose"))
+                {
+                    /*  /verbose is processed in main() to set the flag and has nothing to do here */
+                }
+#if DEBUG
+                if (_arguments.Contains("nop"))
+                {
+                /* nop - return to caller w/o processing any other parameters
+                 *    although: help is processed out of line in main() (so /nop in /help /nop is ignored)
+                 *    Several things such as InitApplication() and all of the camera related functions in there */
+                    return 0; 
+                }
+#endif            
+
                 if (_arguments.Contains("export"))
                 {
                     if (string.IsNullOrEmpty(_arguments["export"]))
@@ -425,6 +457,10 @@ namespace CameraControlCmd
             Console.WriteLine(" /filename fileName         - set the photo save file name");
             Console.WriteLine(" /counter number            - set the photo initial counter");
             Console.WriteLine(" /wait [mseconds]           - after done wait for a keypress/ milliseconds ");
+#if DEBUG
+            Console.WriteLine(" /nop                       - force past usage with no parameters");
+#endif
+            Console.WriteLine(" /verbose                   - lots of status messages");
             Console.WriteLine("----------------------------------------------------------------------------------------");
             Console.WriteLine("For single camera usage :");
             Console.WriteLine("----------------------------------------------------------------------------------------");
