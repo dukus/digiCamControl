@@ -123,7 +123,7 @@ namespace CameraControl.Core.Classes
                 {
                     x.Append("\n");
                 }
-                x.Append(String.Format("{0} [{1,20}\t{2}", prefix, key+"]", _parsedArguments[key]));
+                x.Append(String.Format("{0} {1,-20}\t{2}", prefix, key, _parsedArguments[key]));
             }
             return x.ToString();
         }
