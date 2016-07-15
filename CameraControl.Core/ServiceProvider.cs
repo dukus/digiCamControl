@@ -85,6 +85,7 @@ namespace CameraControl.Core
             Configure(AppName, logFile);
             Log.LogDebug += Log_LogDebug;
             Log.LogError += Log_LogError;
+            Log.LogInfo += Log_LogInfo;
             Log.Debug(
                 "--------------------------------===========================Application starting===========================--------------------------------");
             try
@@ -122,6 +123,11 @@ namespace CameraControl.Core
         private static void Log_LogDebug(LogEventArgs e)
         {
             _log.Debug(e.Message, e.Exception);
+        }
+
+        private static void Log_LogInfo(LogEventArgs e)
+        {
+            _log.Info(e.Message, e.Exception);
         }
 
         public static void Configure(string appfolder, string logFile)
