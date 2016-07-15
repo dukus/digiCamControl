@@ -36,6 +36,7 @@
 // Original source of code : http://dotnetfollower.com/wordpress/2012/03/c-simple-command-line-arguments-parser/ 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CameraControl.Core.Classes
 {
@@ -111,6 +112,20 @@ namespace CameraControl.Core.Classes
         public virtual bool IsKey(string str)
         {
             return str.StartsWith(_keyLeadingPattern);
+        }
+
+        public virtual string ToString(string prefix = "")
+        {
+            StringBuilder x = new StringBuilder();
+            foreach (string key in _parsedArguments.Keys)
+            {
+                if (x.Length != 0)
+                {
+                    x.Append("\n");
+                }
+                x.Append(String.Format("{0} [{1,20}\t{2}", prefix, key+"]", _parsedArguments[key]));
+            }
+            return x.ToString();
         }
 
         #endregion
