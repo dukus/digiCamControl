@@ -28,6 +28,7 @@
 // for testing in 64 bit enviroment see: http://social.msdn.microsoft.com/Forums/vstudio/en-US/2e29a4aa-e587-43ef-bf50-329b7cd3eefb/debugging-wcf-service-with-x86-dependencies-on-a-x64-bit-machine?forum=wcf
 #region
 
+using System;
 using System.IO;
 using System.Reflection;
 using CameraControl.Core.Classes;
@@ -73,11 +74,31 @@ namespace CameraControl.Core
         public static Database.Database Database { get; set; }
         public static string LogFile;
 
+        public static void ConfigureLog()
+        {
+            if (String.IsNullOrEmpty(LogFile))
+            {
+                LogFile = Path.Combine(Settings.DataFolder, "Log", "app.log");
+                Configure(LogFile);
+            }
+        }
+
+        public static void ConfigureDatabase()
+        {
+            try
+            {
+                Database = new Database.Database(Path.Combine(Settings.DataFolder, "database.db"));
+            }
+            catch (DllNotFoundException ex)
+            {
+                Log.Error(String.Format("Error(ignored): Database at {0}: {1}", Path.Combine(Settings.DataFolder, "database.db"), ex));
+            }
+        }
+
         public static void Configure()
         {
-            LogFile = Path.Combine(Settings.DataFolder, "Log", "app.log");
-            Configure(LogFile);
-            Database = new Database.Database(Path.Combine(Settings.DataFolder, "database.db"));
+            ConfigureLog();
+            ConfigureDatabase();
         }
 
         public static void Configure(string logFile)
@@ -85,6 +106,7 @@ namespace CameraControl.Core
             Configure(AppName, logFile);
             Log.LogDebug += Log_LogDebug;
             Log.LogError += Log_LogError;
+            Log.LogInfo += Log_LogInfo;
             Log.Debug(
                 "--------------------------------===========================Application starting===========================--------------------------------");
             try
@@ -122,6 +144,11 @@ namespace CameraControl.Core
         private static void Log_LogDebug(LogEventArgs e)
         {
             _log.Debug(e.Message, e.Exception);
+        }
+
+        private static void Log_LogInfo(LogEventArgs e)
+        {
+            _log.Info(e.Message, e.Exception);
         }
 
         public static void Configure(string appfolder, string logFile)

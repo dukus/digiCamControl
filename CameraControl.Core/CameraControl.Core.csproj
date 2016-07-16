@@ -191,6 +191,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationInformation.cs" />
     <Compile Include="Classes\Analytics.cs" />
     <Compile Include="Classes\AutoExportPluginConfig.cs" />
     <Compile Include="Classes\AutoExportPluginHelper.cs" />
