@@ -31,18 +31,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Mail;
-using System.Text;
-using CameraControl.Core;
-using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using Ionic.Zip;
-using Typesafe.Mailgun;
 
 #endregion
 
-namespace CameraControl.Classes
+namespace CameraControl.Core.Classes
 {
     public enum HelpSections
     {
@@ -90,27 +86,31 @@ namespace CameraControl.Classes
             PhotoUtils.Run(_helpData[sections], "");
         }
 
-        public static void SendEmail(string body, string subject, string email)
+        public static void SendEmail(string body, string subject, string from, string to, string file = null)
         {
-            try
+            using (SmtpClient mailClient = new SmtpClient("smtp.sendgrid.net", 587))
             {
-                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82",3);
-                var message = new MailMessage("postmaster@digicamcontrol.com", email)
+                // Set the network credentials.
+                mailClient.Credentials = new NetworkCredential("digicamcontrol", "digicamcontrol987");
+
+                //Enable SSL.
+                //mailClient.EnableSsl = true;
+
+                var message = new MailMessage(from, to)
                 {
                     Subject = subject,
-                    Body = body,
+                    Body = body ?? "",
+                    IsBodyHtml = true
                 };
+                if (File.Exists(file))
+                    message.Attachments.Add(new Attachment(file));
 
-                client.SendMail(message);
+                mailClient.Send(message);
                 message.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error send email", ex);
             }
         }
 
-        public static void SendCrashReport(string body, string type, string email=null)
+        public static void SendCrashReport(string body, string type, string email = null)
         {
             try
             {
@@ -123,21 +123,14 @@ namespace CameraControl.Classes
                     zip.AddFile(ServiceProvider.LogFile, "");
                     zip.Save(destfile);
                 }
-                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82", 3);
-                var message = new MailMessage(string.IsNullOrWhiteSpace(email) ? "error_report@digicamcontrol.com":email,
-                    "error_report@digicamcontrol.com")
-                {
-                    Subject = (type ?? "Log file"),
-                    Body = "Version :" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + "\n" +
-                           "Client Id" + (ServiceProvider.Settings.ClientId ?? "") + "\n" + body,
-                };
-                message.Attachments.Add(new Attachment(destfile));
-
-                client.SendMail(message);
-                message.Dispose();
+                body = "Version :" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + "\n" +
+                       "Client Id" + (ServiceProvider.Settings.ClientId ?? "") + "\n" + body;
+                SendEmail(body, (type ?? "Log file"),
+                    string.IsNullOrWhiteSpace(email) ? "error_report@digicamcontrol.com" : email, "error_report@digicamcontrol.com", destfile);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error("Error send email", ex);
             }
         }
     }

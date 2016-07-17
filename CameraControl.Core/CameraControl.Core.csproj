@@ -214,6 +214,7 @@
     <Compile Include="Classes\FileItem.cs" />
     <Compile Include="Classes\FilenameTemplate.cs" />
     <Compile Include="Classes\FilenameTemplateManager.cs" />
+    <Compile Include="Classes\HelpProvider.cs" />
     <Compile Include="Classes\InputArguments.cs" />
     <Compile Include="Classes\KeyboardHook.cs" />
     <Compile Include="Classes\LiveviewSettings.cs" />
