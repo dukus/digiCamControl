@@ -17,7 +17,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <NuGetPackageImportStamp>a84f1f5b</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -196,8 +197,8 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Magick.NET-Q8-x86">
-      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.2.100\lib\net40-client\Magick.NET-Q8-x86.dll</HintPath>
+    <Reference Include="Magick.NET-Q8-x86, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
+      <HintPath>..\packages\Magick.NET-Q8-x86.7.0.2.400\lib\net40-client\Magick.NET-Q8-x86.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.3.0.173, Culture=neutral, processorArchitecture=MSIL">
@@ -848,9 +849,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.7.0.2.100\build\net40-client\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.7.0.2.100\build\net40-client\Magick.NET-Q8-x86.targets'))" />
     <Error Condition="!Exists('..\packages\Eagle.1.0.6018.45959\build\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.1.0.6018.45959\build\Eagle.targets'))" />
+    <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.7.0.2.400\build\net40-client\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.7.0.2.400\build\net40-client\Magick.NET-Q8-x86.targets'))" />
   </Target>
-  <Import Project="..\packages\Magick.NET-Q8-x86.7.0.2.100\build\net40-client\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.7.0.2.100\build\net40-client\Magick.NET-Q8-x86.targets')" />
   <Import Project="..\packages\Eagle.1.0.6018.45959\build\Eagle.targets" Condition="Exists('..\packages\Eagle.1.0.6018.45959\build\Eagle.targets')" />
+  <Import Project="..\packages\Magick.NET-Q8-x86.7.0.2.400\build\net40-client\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.7.0.2.400\build\net40-client\Magick.NET-Q8-x86.targets')" />
 </Project>
