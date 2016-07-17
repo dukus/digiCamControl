@@ -146,10 +146,9 @@
             </Image.LayoutTransform>
         </Image>
         <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource ZoomStyle}" 
-                                      ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                                      ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="True">
             <Image x:Name="PreviewBitmap" Stretch="Uniform" Source="{Binding PreviewBitmap}" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2"
-                Width="{Binding ElementName=_image, Path=ActualWidth}" Height="{Binding ElementName=_image, Path=ActualHeight}"
-               >
+                Width="{Binding ElementName=_image, Path=ActualWidth}" Height="{Binding ElementName=_image, Path=ActualHeight}" >
             <Image.LayoutTransform>
                 <RotateTransform  Angle="{Binding Rotation}" />
             </Image.LayoutTransform>

@@ -1554,6 +1554,7 @@ namespace CameraControl.ViewModel
             _focusStackingTimer.Stop();
             _restartTimer.Stop();
             CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured;
+            LiveViewManager.PreviewCaptured -= LiveViewManager_PreviewCaptured;
             Thread.Sleep(100);
             StopLiveView();
             Recording = false;

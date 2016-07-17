@@ -768,7 +768,7 @@ namespace CameraControl.Controls.ZoomAndPan
         /// </summary>
         public void ZoomOut(Point contentZoomCenter)
         {
-            ZoomAboutPoint(ContentScale - 0.1, contentZoomCenter);
+            ZoomAboutPoint(ContentScale - 0.2, contentZoomCenter);
         }
 
         /// <summary>
@@ -776,7 +776,7 @@ namespace CameraControl.Controls.ZoomAndPan
         /// </summary>
         public void ZoomIn(Point contentZoomCenter)
         {
-            ZoomAboutPoint(ContentScale + 0.1, contentZoomCenter);
+            ZoomAboutPoint(ContentScale + 0.2, contentZoomCenter);
         }
 
         /// <summary>
