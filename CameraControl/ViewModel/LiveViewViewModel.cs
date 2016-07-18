@@ -1668,6 +1668,9 @@ namespace CameraControl.ViewModel
                 case CmdConsts.LiveView_Focus:
                     AutoFocus();
                     break;
+                case CmdConsts.LiveView_Preview:
+                    PreviewCommand.Execute(null);
+                    break;
                 case CmdConsts.LiveView_NoProcess:
                     NoProcessing = true;
                     break;
