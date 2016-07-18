@@ -76,7 +76,8 @@
             </StackPanel>
         </Grid>
 
-        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5">
+        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5"
+                   Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowThumbPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StatusBar.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="{DynamicResource AccentColor}" Offset="1"/>
