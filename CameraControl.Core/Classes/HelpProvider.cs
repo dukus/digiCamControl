@@ -91,7 +91,7 @@ namespace CameraControl.Core.Classes
             using (SmtpClient mailClient = new SmtpClient("smtp.sendgrid.net", 587))
             {
                 // Set the network credentials.
-                mailClient.Credentials = new NetworkCredential("digicamcontrol", "digicamcontrol987");
+                mailClient.Credentials = new NetworkCredential(CameraControl.Private.Ids.SendgridUser, CameraControl.Private.Ids.SendgridPass);
 
                 //Enable SSL.
                 //mailClient.EnableSsl = true;
