@@ -11,7 +11,6 @@ _ReSharper.CameraControl.ServerTest
 /ScreenShots/1.1.797
 *.tmp_proj
 /CameraControl.Core/*.user
-/*.suo
 /Setup/*.msi
 /Setup/*.wxs
 /Setup/Setup.exe
@@ -21,3 +20,4 @@ _ReSharper.CameraControl.ServerTest
 /Setup/*.wixobj
 /Setup/*.exe
 /.vs/CameraControl/v14
+*.suo
