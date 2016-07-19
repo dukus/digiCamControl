@@ -6,8 +6,9 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
              xmlns:classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
+             xmlns:zoomAndPan="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
              mc:Ignorable="d" 
-             Height="600" Width="800">
+             Height="600" Width="800" Loaded="MetroWindow_Loaded">
     <Window.DataContext>
         <toolPlugins:EnfusePluginViewModel/>
     </Window.DataContext>
@@ -16,7 +17,40 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <Style x:Key="ZoomStyle"
+        TargetType="{x:Type zoomAndPan:ZoomAndPanControl}">
+            <Setter 
+            Property="Template">
+                <Setter.Value>
+                    <ControlTemplate 
+                    TargetType="{x:Type zoomAndPan:ZoomAndPanControl}">
+
+                        <Grid Background="{TemplateBinding Background}">
+
+                            <!-- 
+                        The ContentPresenter is used to scale and offset the content of ZoomAndPanControl.
+                    
+                        A transforms computed from 'ContentScale', 'ContentOffsetX' and 'ContentOffsetY' are assigned 
+                        to the 'RenderTransform' property in OnApplyTemplate in ZoomAndPanControl.cs.
+                        
+                        The alignment is set to top-left.  This allows the content offset to be used to place
+                        the content in the center of the viewport when the viewport is bigger than the content.
+                        -->
+                            <ContentPresenter 
+							x:Name="PART_Content"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            />
+
+                        </Grid>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+        </ResourceDictionary>            
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -145,7 +179,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Image Margin="3" Source="{Binding PreviewBitmap}"/>
+
+                <!--<Image Source="{Binding PreviewBitmap}" RenderTransformOrigin="0.5,0.5" 
+                           Stretch="Uniform" />-->
+                
+                <zoomAndPan:ZoomAndPanControl Margin="3" x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Grid.Row="0" Style="{StaticResource ZoomStyle}" 
+                                      SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="False">
+                    <Image Source="{Binding PreviewBitmap}" Name="Image" RenderTransformOrigin="0.5,0.5" 
+                           Stretch="Uniform" 
+                    Width="{Binding Path=PreviewBitmap.Width}" Height="{Binding Path=PreviewBitmap.Height}"
+                        />
+                </zoomAndPan:ZoomAndPanControl>
+                
                 <controls:ProgressRing IsActive="{Binding Path=IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="150" Width="150" />
                 <CheckBox Grid.Row="1" Content="Auto preview when new image captured" Margin="3" IsChecked="{Binding AutoPreview}"/>
             </Grid>

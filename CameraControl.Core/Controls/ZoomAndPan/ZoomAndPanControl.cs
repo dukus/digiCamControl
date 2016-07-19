@@ -5,7 +5,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace CameraControl.Controls.ZoomAndPan
+namespace CameraControl.Core.Controls.ZoomAndPan
 {
     /// <summary>
     /// A class that wraps up zooming and panning of it's content.

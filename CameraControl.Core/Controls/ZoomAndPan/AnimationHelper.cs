@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace CameraControl.Controls.ZoomAndPan
+namespace CameraControl.Core.Controls.ZoomAndPan
 {
     /// <summary>
     /// A helper class to simplify animation.

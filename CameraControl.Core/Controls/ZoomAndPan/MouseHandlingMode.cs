@@ -1,4 +1,4 @@
-﻿namespace CameraControl.Controls.ZoomAndPan
+﻿namespace CameraControl.Core.Controls.ZoomAndPan
 {
     /// <summary>
     /// Defines the current state of the mouse handling logic.

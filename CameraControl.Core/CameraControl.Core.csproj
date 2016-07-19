@@ -243,6 +243,10 @@
     <Compile Include="Classes\WebServerOld.cs" />
     <Compile Include="Classes\WindowCommandItem.cs" />
     <Compile Include="Classes\WindowsCmdConsts.cs" />
+    <Compile Include="Controls\ZoomAndPan\AnimationHelper.cs" />
+    <Compile Include="Controls\ZoomAndPan\MouseHandlingMode.cs" />
+    <Compile Include="Controls\ZoomAndPan\ZoomAndPanControl.cs" />
+    <Compile Include="Controls\ZoomAndPan\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\DbEvents.cs" />
     <Compile Include="Database\DbFile.cs" />

@@ -288,10 +288,6 @@
     <Compile Include="Controls\VUMeterControl.xaml.cs">
       <DependentUpon>VUMeterControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ZoomAndPan\AnimationHelper.cs" />
-    <Compile Include="Controls\ZoomAndPan\MouseHandlingMode.cs" />
-    <Compile Include="Controls\ZoomAndPan\ZoomAndPanControl.cs" />
-    <Compile Include="Controls\ZoomAndPan\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Layouts\LayoutGrid.xaml.cs">
       <DependentUpon>LayoutGrid.xaml</DependentUpon>
     </Compile>
