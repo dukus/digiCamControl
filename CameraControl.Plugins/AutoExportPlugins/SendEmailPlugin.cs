@@ -3,11 +3,11 @@ using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading;
-using System.Windows.Controls;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
-using Typesafe.Mailgun;
+
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace CameraControl.Plugins.AutoExportPlugins
 {
@@ -31,20 +31,9 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 var outfile = PhotoUtils.ReplaceExtension(Path.GetTempFileName(),Path.GetExtension(item.Name));
                 outfile = AutoExportPluginHelper.ExecuteTransformPlugins(item, configData, outfile);
 
-                var client = new MailgunClient("digicamcontrol.mailgun.org", "key-6n75wci5cpuz74vsxfcwfkf-t8v74g82",3);
-                var message = new MailMessage(conf.From, conf.To)
-                {
-                    Subject = (string.IsNullOrEmpty(conf.Subject) ? "Your photo":conf.TransformTemplate(item,conf.Subject)),
-                    Body = (string.IsNullOrEmpty(conf.Message) ? "." : conf.TransformTemplate(item, conf.Message)),
-                    IsBodyHtml = true
-                };
-                using (MemoryStream stream = new MemoryStream(File.ReadAllBytes(outfile)))
-                {
-                    message.Attachments.Add(new Attachment(stream, item.Name));
+                HelpProvider.SendEmail((string.IsNullOrEmpty(conf.Message) ? "." : conf.TransformTemplate(item, conf.Message)), (string.IsNullOrEmpty(conf.Subject) ? "Your photo" : conf.TransformTemplate(item, conf.Subject)),
+                    conf.From, conf.To,outfile);
 
-                    client.SendMail(message);
-                    message.Dispose();
-                }
                 // remove unused file
                 if (outfile != item.FileName)
                 {
@@ -54,17 +43,14 @@ namespace CameraControl.Plugins.AutoExportPlugins
             }
             catch (Exception exception)
             {
-                Log.Error("Error send facebook file", exception);
+                Log.Error("Error send email file", exception);
                 configData.IsError = true;
                 configData.Error = exception.Message;
             }
             configData.IsRedy = true;
         }
 
-        public string Name
-        {
-            get { return "Email"; }
-        }
+        public string Name => "Email";
 
         public UserControl GetConfig(AutoExportPluginConfig configData)
         {

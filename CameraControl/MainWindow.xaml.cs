@@ -57,7 +57,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using EditSession = CameraControl.windows.EditSession;
 using FileInfo = System.IO.FileInfo;
-using HelpProvider = CameraControl.Classes.HelpProvider;
+using HelpProvider = CameraControl.Core.Classes.HelpProvider;
 using MessageBox = System.Windows.MessageBox;
 //using MessageBox = System.Windows.Forms.MessageBox;
 using Path = System.IO.Path;
@@ -118,6 +118,7 @@ namespace CameraControl
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+            
         }
 
         private void AddPlugin(IAutoExportPlugin obj)
@@ -1019,7 +1020,7 @@ namespace CameraControl
                if (!string.IsNullOrEmpty(s.Result))
                    HelpProvider.SendEmail(
                        "digiCamControl public web address " + ServiceProvider.Settings.PublicWebAdress,
-                       "digiCamControl public web address ", s.Result);
+                       "digiCamControl public web address ", "postmaster@digicamcontrol.com", s.Result);
            }
                );
 

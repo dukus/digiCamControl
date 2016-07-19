@@ -4,8 +4,7 @@
     <StartArguments>/c set aperture 1.4</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartArguments>
-    </StartArguments>
+    <StartArguments>/host Duka-Pc /c set session.filenametemplate DSC_[Counter 4 digit]</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <StartArguments>/c set aperture 1.4</StartArguments>

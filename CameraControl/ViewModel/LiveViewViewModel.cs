@@ -1336,6 +1336,7 @@ namespace CameraControl.ViewModel
             AutoFocusCommand = new RelayCommand(AutoFocus);
             RecordMovieCommand = new RelayCommand(delegate
             {
+                PreviewBitmapVisible = false;
                 if (Recording)
                     StopRecordMovie();
                 else
@@ -1343,7 +1344,7 @@ namespace CameraControl.ViewModel
             },
                 () => CameraDevice.GetCapability(CapabilityEnum.RecordMovie));
             CaptureCommand = new RelayCommand(CaptureInThread);
-            PreviewCommand=new RelayCommand(CapturePreview);
+            PreviewCommand = new RelayCommand(CapturePreview);
             FocusMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.SmallFocusStepCanon : -ServiceProvider.Settings.SmalFocusStep));
             FocusMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.MediumFocusStepCanon : -ServiceProvider.Settings.MediumFocusStep));
             FocusMMMCommand = new RelayCommand(() => SetFocus(SimpleManualFocus ? -ServiceProvider.Settings.LargeFocusStepCanon : -ServiceProvider.Settings.LargeFocusStep));
@@ -1554,6 +1555,7 @@ namespace CameraControl.ViewModel
             _focusStackingTimer.Stop();
             _restartTimer.Stop();
             CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured;
+            LiveViewManager.PreviewCaptured -= LiveViewManager_PreviewCaptured;
             Thread.Sleep(100);
             StopLiveView();
             Recording = false;
@@ -1666,6 +1668,9 @@ namespace CameraControl.ViewModel
                 case CmdConsts.LiveView_Focus:
                     AutoFocus();
                     break;
+                case CmdConsts.LiveView_Preview:
+                    PreviewCommand.Execute(null);
+                    break;
                 case CmdConsts.LiveView_NoProcess:
                     NoProcessing = true;
                     break;
@@ -1701,6 +1706,8 @@ namespace CameraControl.ViewModel
 
         private void AutoFocus()
         {
+            PreviewBitmapVisible = false;
+
             if (LockA || LockB)
             {
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message, TranslationStrings.LabelErrorAutoFocusLock);
@@ -2498,6 +2505,7 @@ namespace CameraControl.ViewModel
         {
             //if (step == 0)
             //    return;
+            PreviewBitmapVisible = false;
 
             if (_focusIProgress)
             {

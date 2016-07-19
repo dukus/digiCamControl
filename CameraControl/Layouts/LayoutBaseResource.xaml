@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                     xmlns:classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
-                    xmlns:local="clr-namespace:CameraControl.Controls.ZoomAndPan"
                     xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                    xmlns:controls1="clr-namespace:CameraControl.Controls">
+                    xmlns:controls1="clr-namespace:CameraControl.Controls"
+                    xmlns:local="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>

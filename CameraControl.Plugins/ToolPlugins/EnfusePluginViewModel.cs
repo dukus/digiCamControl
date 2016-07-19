@@ -227,9 +227,9 @@ namespace CameraControl.Plugins.ToolPlugins
             set
             {
                 _selectedFileItem = value;
-                RaisePropertyChanged(()=>SelectedFileItem);
                 if (_selectedFileItem!=null && File.Exists(_selectedFileItem.LargeThumb))
                     PreviewBitmap = BitmapLoader.Instance.LoadImage(_selectedFileItem.LargeThumb);
+                RaisePropertyChanged(() => SelectedFileItem);
             }
         }
 
@@ -265,6 +265,8 @@ namespace CameraControl.Plugins.ToolPlugins
                 InitCommands();
                 Output = new AsyncObservableCollection<string>();
                 LoadData();
+                if (Files.Count > 0)
+                    SelectedFileItem = Files[0];
                 _pathtoalign = Path.Combine(Settings.ApplicationFolder, "Tools", "align_image_stack.exe");
                 var hugin = @"c:\Program Files (x86)\Hugin\bin\align_image_stack.exe";
                 // use hugin installation 

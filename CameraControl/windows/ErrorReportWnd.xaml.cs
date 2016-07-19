@@ -42,6 +42,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CameraControl.Classes;
 using CameraControl.Core;
+using CameraControl.Core.Classes;
 
 #endregion
 

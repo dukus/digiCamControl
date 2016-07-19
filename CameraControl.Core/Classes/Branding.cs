@@ -149,8 +149,6 @@ namespace CameraControl.Core.Classes
         
         public bool ShowSelectionPanel { get; set; }
 
-        public bool ShowLayoutPanel { get; set; }
-
         public bool ShowPreviewPanel { get; set; }
 
         public bool ShowSessionPanel { get; set; }
@@ -176,6 +174,8 @@ namespace CameraControl.Core.Classes
         public string HomePageUrl { get; set; }
 
         public bool ShowCameraAdvancedProperties { get; set; }
+
+        public bool ShowThumbPanel { get; set; }
 
         public bool UseThemeSelector
         {
@@ -226,7 +226,6 @@ namespace CameraControl.Core.Classes
             ShowMotionDetectionLiveView = true;
             ShowHistogram = true;
             ShowSelectionPanel = true;
-            ShowLayoutPanel = true;
             ShowPreviewPanel = true;
             ShowSessionPanel = true;
             ShowAutoExportPanel = true;
@@ -238,6 +237,7 @@ namespace CameraControl.Core.Classes
             ShowAnimation = true;
             ShowMainMenu = true;
             ShowBattery = true;
+            ShowThumbPanel = true;
         }
 
 

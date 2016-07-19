@@ -56,6 +56,7 @@ namespace CameraControl.Core.Classes
         public const string LiveView_Focus_Move_Up = "LiveView_Focus_Move_Up";
         public const string LiveView_Focus_Move_Down = "LiveView_Focus_Move_Down";
         public const string LiveView_Focus = "LiveView_Focus";
+        public const string LiveView_Preview = "LiveView_Preview";
         public const string LiveView_NoProcess = "LiveView_NoProcess";
         public const string LiveView_Capture = "LiveView_Capture";
         public const string LiveView_ManualFocus = "LiveView_ManualFocus";

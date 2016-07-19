@@ -133,7 +133,6 @@ namespace CameraControl.Plugins.ToolPlugins
             catch (Exception)
             {
                 Log.Error("Error  delete temp folder");
-                throw;
             }
         }
     }

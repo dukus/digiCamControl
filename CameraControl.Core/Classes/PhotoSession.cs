@@ -723,7 +723,7 @@ namespace CameraControl.Core.Classes
                 AsyncObservableCollection<FileItem> list = new AsyncObservableCollection<FileItem>();
                 foreach (FileItem fileItem in Files)
                 {
-                    if (fileItem.IsChecked)
+                    if (fileItem.IsChecked && fileItem.Visible)
                         list.Add(fileItem);
                 }
                 return list;
@@ -741,7 +741,7 @@ namespace CameraControl.Core.Classes
                 AsyncObservableCollection<FileItem> list = new AsyncObservableCollection<FileItem>();
                 foreach (FileItem fileItem in Files)
                 {
-                    if (fileItem.Series==i)
+                    if (fileItem.Series == i && fileItem.Visible)
                         list.Add(fileItem);
                 }
                 return list;

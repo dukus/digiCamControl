@@ -479,8 +479,7 @@ namespace CameraControl
             {
                 Log.Error("Damaged installation. Application exiting ");
                 MessageBox.Show("Application crash !! Damaged installation!\nPlease unintall aplication from control panel and reinstall it!");
-                if (Current != null)
-                    Current.Shutdown();
+                Current?.Shutdown();
             }
             // check if wia 2.0 is registered 
             // isn't a clean way

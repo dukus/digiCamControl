@@ -11,8 +11,7 @@
                       xmlns:ViewModel="clr-namespace:CameraControl.ViewModel"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
-                      xmlns:local1="clr-namespace:CameraControl.Controls.ZoomAndPan"
-                      xmlns:zoomAndPan="clr-namespace:CameraControl.Controls.ZoomAndPan"
+                      xmlns:local1="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True" StateChanged="MetroWindow_StateChanged">
     <Window.DataContext>
@@ -145,16 +144,15 @@
                 <RotateTransform  Angle="{Binding Rotation}" />
             </Image.LayoutTransform>
         </Image>
-        <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource ZoomStyle}" 
-                                      ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
+        <local1:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource ZoomStyle}" 
+                                      ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="True">
             <Image x:Name="PreviewBitmap" Stretch="Uniform" Source="{Binding PreviewBitmap}" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2"
-                Width="{Binding ElementName=_image, Path=ActualWidth}" Height="{Binding ElementName=_image, Path=ActualHeight}"
-               >
+                Width="{Binding ElementName=_image, Path=ActualWidth}" Height="{Binding ElementName=_image, Path=ActualHeight}" >
             <Image.LayoutTransform>
                 <RotateTransform  Angle="{Binding Rotation}" />
             </Image.LayoutTransform>
         </Image>
-        </zoomAndPan:ZoomAndPanControl>            
+        </local1:ZoomAndPanControl>            
         <Button Grid.Row="0" Grid.Column="2" Height="40" Width="40" Margin="10" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ClosePreviewCommand}"
                 ToolTip="{T:TranslateExtension LabelClosePreview}" Visibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <Rectangle Width="20" Height="20">

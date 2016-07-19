@@ -271,7 +271,12 @@ namespace CameraControl.Core.Classes
         [XmlAttribute]
         public bool IsChecked
         {
-            get { return _isChecked; }
+            get
+            {
+                if (!Visible)
+                    return false;
+                return _isChecked;
+            }
             set
             {
                 _isChecked = value;

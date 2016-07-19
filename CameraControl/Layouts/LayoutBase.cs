@@ -42,10 +42,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Classes;
-using CameraControl.Controls.ZoomAndPan;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Classes.Queue;
+using CameraControl.Core.Controls.ZoomAndPan;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.ViewModel;
@@ -330,7 +330,7 @@ namespace CameraControl.Layouts
         {
             if (LayoutViewModel.ZoomFit && ZoomAndPanControl != null)
             {
-                ZoomAndPanControl.AnimatedScaleToFit();
+                ZoomAndPanControl.ScaleToFit();
             }
             else
             {
@@ -638,14 +638,23 @@ namespace CameraControl.Layouts
         protected void zoomAndPanControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
+            Point curContentMousePoint = e.GetPosition(content);
+
             if (e.Delta > 0)
             {
-                Point curContentMousePoint = e.GetPosition(content);
                 ZoomIn(curContentMousePoint);
             }
             else if (e.Delta < 0)
             {
-                Point curContentMousePoint = e.GetPosition(content);
+                // don't allow zoomout les that original image 
+                if (ZoomAndPanControl.ContentScale - 0.1 > ZoomAndPanControl.FitScale())
+                {
+                    ZoomAndPanControl.ZoomOut(curContentMousePoint);
+                }
+                else
+                {
+                    ZoomAndPanControl.ScaleToFit();
+                }
                 ZoomOut(curContentMousePoint);
             }
             if (ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale())
