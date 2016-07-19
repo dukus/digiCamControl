@@ -9,8 +9,8 @@
                     xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:classes="clr-namespace:CameraControl.Classes"
-                    xmlns:zoomAndPan="clr-namespace:CameraControl.Controls.ZoomAndPan"
                     xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+                    xmlns:zoomAndPan="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
                     mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="689">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -76,7 +76,8 @@
             </StackPanel>
         </Grid>
 
-        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5">
+        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5"
+                   Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowThumbPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StatusBar.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="{DynamicResource AccentColor}" Offset="1"/>

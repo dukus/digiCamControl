@@ -46,7 +46,7 @@ using CameraControl.Devices.Classes;
 using Microsoft.Win32;
 using Path = System.IO.Path;
 using CameraControl.Core;
-using HelpProvider = CameraControl.Classes.HelpProvider;
+using HelpProvider = CameraControl.Core.Classes.HelpProvider;
 using MessageBox = System.Windows.MessageBox;
 
 #endregion

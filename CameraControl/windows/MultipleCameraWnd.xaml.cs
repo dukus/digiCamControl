@@ -42,7 +42,7 @@ using CameraControl.Core.Translation;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using MahApps.Metro.Controls.Dialogs;
-using HelpProvider = CameraControl.Classes.HelpProvider;
+using HelpProvider = CameraControl.Core.Classes.HelpProvider;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 #endregion

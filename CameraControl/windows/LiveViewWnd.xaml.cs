@@ -36,8 +36,10 @@ using System.Linq;
 using System.Reflection;
 //using System.Threading;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -108,6 +110,7 @@ namespace CameraControl.windows
             try
             {
                 SelectedPortableDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                LiveViewManager.PreviewLoaded += LiveViewManager_PreviewLoaded;
             }
             catch (Exception ex)
             {
@@ -129,30 +132,26 @@ namespace CameraControl.windows
             Init();
         }
 
+        private void LiveViewManager_PreviewLoaded(ICameraDevice cameraDevice, string file)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(500);
+                App.Current.BeginInvoke(zoomAndPanControl.ScaleToFit);
+            });
+        }
+
         public void Init()
         {
             try
             {
                 InitializeComponent();
-                LiveViewManager.PreviewLoaded += LiveViewManager_PreviewCaptured;
             }
             catch (Exception ex)
             {
                 Log.Error("Live view init error ", ex);
             }
         }
-
-        private void LiveViewManager_PreviewCaptured(ICameraDevice cameraDevice, string file)
-        {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                if (((LiveViewViewModel) DataContext).CameraDevice != cameraDevice)
-                    return;
-                //zoomAndPanControl.ScaleToFit();
-            }
-                ));
-        }
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -412,15 +411,40 @@ namespace CameraControl.windows
         private void zoomAndPanControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
+            Point curContentMousePoint = e.GetPosition(PreviewBitmap);
             if (e.Delta > 0)
             {
-                Point curContentMousePoint = e.GetPosition(PreviewBitmap);
                 zoomAndPanControl.ZoomIn(curContentMousePoint);
             }
             else if (e.Delta < 0)
             {
-                Point curContentMousePoint = e.GetPosition(PreviewBitmap);
-                zoomAndPanControl.ZoomOut(curContentMousePoint);
+                // don't allow zoomout les that original image 
+                if (zoomAndPanControl.ContentScale-0.2 > zoomAndPanControl.FitScale())
+                {
+                    zoomAndPanControl.ZoomOut(curContentMousePoint);
+                }
+                else
+                {
+                    zoomAndPanControl.ScaleToFit();
+                }
+            }
+        }
+
+        private void zoomAndPanControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            zoomAndPanControl.ScaleToFit();
+        }
+
+        private void zoomAndPanControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Point curContentMousePoint = e.GetPosition(PreviewBitmap);
+            if (zoomAndPanControl.ContentScale<= zoomAndPanControl.FitScale())
+            {
+                zoomAndPanControl.ZoomAboutPoint(4, curContentMousePoint);
+            }
+            else
+            {
+                zoomAndPanControl.ScaleToFit();
             }
         }
     }

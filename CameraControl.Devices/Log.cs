@@ -43,6 +43,12 @@ namespace CameraControl.Devices
         public static event LogEventHandler LogError;
         public static event LogEventHandler LogInfo;
 
+        public static bool IsVerbose { get; set; } = false;
+
+        /* The xxxWithWritexxx methods are for convenience instead of doing
+         *    Console.WriteLine(String.Format("...format...", objects));
+         *    Log.Verbose(String.Format("...format...", objects)); 
+         * with all the overhead twice... */
 
         public static void Debug(object message, Exception exception)
         {
@@ -61,15 +67,51 @@ namespace CameraControl.Devices
                 LogError(new LogEventArgs() {Exception = exception, Message = message});
         }
 
+        public static void Error(object message)
+        {
+            Error(message, null);
+        }
+
         public static void Info(object message, Exception exception)
         {
             if (LogInfo != null)
                 LogInfo(new LogEventArgs() {Exception = exception, Message = message});
         }
 
-        public static void Error(object message)
+        public static void Info(object message)
         {
-            Error(message, null);
+            LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
         }
+
+        public static void InfoWithWriteLine(object message)
+        {
+            Console.WriteLine(message);
+            LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
+        }
+
+        public static void Verbose(object message)
+        {
+            if (IsVerbose)
+                LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
+        }
+
+        public static void VerboseWithWriteLine(object message)
+        {
+            if (IsVerbose)
+            {
+                Console.WriteLine(message);
+                LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
+            }
+        }
+
+        public static void VerboseWithWrite(object message)
+        {
+            if (IsVerbose)
+            {
+                Console.Write(message);
+                LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
+            }
+        }
+
     }
 }
