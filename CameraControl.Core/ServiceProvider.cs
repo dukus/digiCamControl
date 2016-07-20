@@ -91,7 +91,14 @@ namespace CameraControl.Core
             }
             catch (DllNotFoundException ex)
             {
-                Log.Error(String.Format("Error(ignored): Database at {0}: {1}", Path.Combine(Settings.DataFolder, "database.db"), ex));
+                if (Log.IsVerbose)
+                {
+                    Log.Error(String.Format("Error(ignored): Database at {0}: {1}", Path.Combine(Settings.DataFolder, "database.db"), ex.Message), ex);
+
+                } else
+                {
+                    Log.Error(String.Format("Error(ignored): Database at {0}: {1}", Path.Combine(Settings.DataFolder, "database.db"), ex.Message), null);
+                }
             }
         }
 
