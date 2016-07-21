@@ -2378,6 +2378,7 @@ namespace CameraControl.ViewModel
                     ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
                         TranslationStrings.LabelLiveViewError + "\n" +
                         TranslationManager.GetTranslation(resp));
+                _timer.Stop();
             }
         }
 
