@@ -399,7 +399,12 @@
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
-                                                    <Label Content="{Binding Path=Name}" Padding="1"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="{Binding Path=Name}" FontWeight="Bold" FontSize="15" Padding="1"/>
+                                                        <Label Content="(" Padding="1"/>
+                                                        <Label Content="{Binding Path=Files.Count}" Padding="1" VerticalAlignment="Center"/>
+                                                        <Label Content=")" Padding="1"/>
+                                                    </StackPanel>
                                                     <Label Content="{Binding Path=Folder}" Padding="1"/>
                                                 </StackPanel>
                                             </DataTemplate>
