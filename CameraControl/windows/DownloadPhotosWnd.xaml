@@ -69,16 +69,16 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="429*" />
-            <RowDefinition Height="81" />
-            <RowDefinition Height="44" />
+            <RowDefinition Height="130" />
         </Grid.RowDefinitions>
 
-        <ListBox   Name="lst_items_simple" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
+        <ListBox   Name="lst_items_simple" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -98,7 +98,7 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <ListBox   Name="lst_items" Grid.ColumnSpan="2">
+        <ListBox   Name="lst_items" Grid.ColumnSpan="3">
             <ListBox.GroupStyle>
                 <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"/>
             </ListBox.GroupStyle>
@@ -108,8 +108,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                            <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Width="120" Height="80"/>
-                            <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=Name}"/>
+                        <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Width="120" Height="80"/>
+                        <CheckBox IsChecked="{Binding Path=IsChecked}" Content="{Binding Path=Name}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -119,14 +119,17 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <Button Content="{Translation:TranslateExtension LabelDownload}" Grid.Row="2" Margin="0,0,12,11" Name="btn_download" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="btn_download_Click" Grid.Column="1" />
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+            <Button Content="{Translation:TranslateExtension LabelReload}"  Margin="10" VerticalAlignment="Bottom" Click="button1_Click" />
+            <Button Content="{Translation:TranslateExtension LabelDownload}" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="btn_download_Click" />
+        </StackPanel>
         <GroupBox Header="Selection" Name="groupBox1" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30*" />
@@ -140,11 +143,11 @@
                 <Controls:NumericUpDown Grid.Column="1" Name="txt_indx" Value="1" HorizontalContentAlignment="Right" Margin="3" Grid.Row="1" Minimum="0"/>
             </Grid>
         </GroupBox>
-        <Button Content="Reload" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,118,11" Name="button1" VerticalAlignment="Bottom" Width="100" Click="button1_Click" Grid.Column="1" />
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
             <CheckBox Content="{T:TranslateExtension LabelDeleteFilesAfterTransfer}" Name="chk_delete" Margin="3"/>
             <CheckBox Content="Format all camera cards" Name="chk_format" Margin="3"/>
             <CheckBox Content="Uncheck dublicates" Name="chk_similar" Margin="3" IsChecked="True"/>
+            <CheckBox Content="{T:TranslateExtension LabelSeriesAsIndex}" Name="chk_series" Margin="3" IsChecked="True"/>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

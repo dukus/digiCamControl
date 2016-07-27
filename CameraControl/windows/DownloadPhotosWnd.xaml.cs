@@ -65,6 +65,7 @@ namespace CameraControl.windows
     {
         private bool delete;
         private bool format;
+        private bool saveseries; 
         private ProgressWindow dlg = new ProgressWindow();
         private Dictionary<ICameraDevice, int> _timeDif = new Dictionary<ICameraDevice, int>();
 
@@ -256,13 +257,15 @@ namespace CameraControl.windows
                     var images = cameraDevice.GetObjects(null, ServiceProvider.Settings.LoadThumbsDownload);
                     if (images.Count > 0)
                     {
+                        int index = 0;
                         foreach (DeviceObject deviceObject in images)
                         {
+                            index++;
                             if (!_itembycamera.ContainsKey(cameraDevice))
                                 _itembycamera.Add(cameraDevice, new AsyncObservableCollection<FileItem>());
 
                             var fileitem = new FileItem(deviceObject, cameraDevice);
-
+                            fileitem.Series = index;
                             dlg.Label2 = fileitem.FileName;
 
                             PhotoSession session = (PhotoSession)cameraDevice.AttachedPhotoSession ??
@@ -327,6 +330,7 @@ namespace CameraControl.windows
             dlg.Show();
             delete = chk_delete.IsChecked == true;
             format = chk_format.IsChecked == true;
+            saveseries = chk_series.IsChecked == true;
             Thread thread = new Thread(TransferFiles);
             thread.Start();
         }
@@ -349,8 +353,15 @@ namespace CameraControl.windows
                     continue;
                 dlg.Label = fileItem.FileName;
                 dlg.ImageSource = fileItem.Thumbnail;
+
                 PhotoSession session = (PhotoSession) fileItem.Device.AttachedPhotoSession ??
                                        ServiceProvider.Settings.DefaultSession;
+                if (saveseries)
+                {
+                    // save series in session, to be used in file name generation 
+                    session.Series = fileItem.Series;
+                }
+
                 string fileName = "";
 
                 if (!session.UseOriginalFilename)
@@ -403,12 +414,15 @@ namespace CameraControl.windows
                 }
                 totalbytes += new FileInfo(fileName).Length;
                 FileItem item1 = fileItem;
-                Dispatcher.Invoke(new Action(delegate
+                var serie = fileItem.Series;
+                Dispatcher.Invoke(delegate
                 {
                     var item = session.AddFile(fileName);
+                    if (saveseries)
+                        item.Series = serie;
                     item.CameraSerial = item1.Device.SerialNumber;
                     item.OriginalName = item1.FileName;
-                }));
+                });
                 i++;
                 dlg.Progress = i;
             }
