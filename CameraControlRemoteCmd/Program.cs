@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CameraControlRemoteCmd
 {
@@ -14,11 +10,9 @@ namespace CameraControlRemoteCmd
 
         static void Main(string[] args)
         {
-            if (args == null || args.Length == 0)
-            {
-                PrintHelp();
-                return;
-            }
+
+            Console.WriteLine(String.Format("digiCamControl remote command line utility ({0}, {1}) running\n", ApplicationInformation.ExecutingAssemblyVersion, ApplicationInformation.CompileDate));
+
             try
             {
                 CommandProcessor processor = new CommandProcessor();
@@ -30,11 +24,6 @@ namespace CameraControlRemoteCmd
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace );
             }
-        }
-
-        private static void PrintHelp()
-        {
-            
         }
     }
 }
