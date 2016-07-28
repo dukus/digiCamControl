@@ -56,14 +56,13 @@ namespace CameraControlRemoteCmd
                                 Console.WriteLine(s);
                             }
                         }
-                        else
+                        else if (lines.ContainsKey("message"))
                         {
-                            if(lines.ContainsKey("message"))
-                            {
-                                Console.WriteLine(lines["response"] + " " + lines["message"]);
-                            } else {
-                                Console.WriteLine(lines["response"]);
-                            }
+                            Console.WriteLine(lines["response"] + " " + lines["message"]);
+                        }
+                        else if (!lines["response"].Equals("null"))
+                        {
+                            Console.WriteLine(lines["response"]);
                         }
                     }
                     else
