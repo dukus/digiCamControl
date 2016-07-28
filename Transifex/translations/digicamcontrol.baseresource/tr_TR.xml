@@ -301,6 +301,7 @@ $Tag4 - tag 4</string>
   <!--25/11/2012-->
   <string name="DownloadWindowTitle">Fotoğrafları indir</string>
   <string name="LabelDeleteFilesAfterTransfer">Taşınma sonrasında dosyaları sil</string>
+  <string name="LabelAskForDelete">Transfer edilen dosyalar silinecek devam etmek istiyor musunuz?</string>
   <!--26/11/2012-->
   <string name="LabelErrorSetFocusPos">Odak pozisyonu ayarlama hatalı</string>
   <string name="LabelErrorUnableFocus">Odaklanılamıyor</string>
@@ -340,6 +341,7 @@ $Tag4 - tag 4</string>
   <string name="LabelApplicationError">Uygulama Hatası</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 yüklü değil</string>
   <string name="LabelRestartTheApplication">Uygulamayı yeniden başlatın!</string>
+  <string name="LabelOutOfMemory">Bellek yetersiz. Uygulama kapatılacak!</string>
   <string name="LabelApplicationAlreadyRunning">Uygulama zaten çalışıyor</string>
   <string name="LabelDeleteSession">Oturumu sil</string>
   <string name="LabelStartCapture">Çekime başla</string>
@@ -370,9 +372,13 @@ $Tag4 - tag 4</string>
   <string name="LabelApertureValueError">Diyafram aralığı lens tarafından belirleniyor.</string>
   <string name="LabelBulbError">Lamba hatası</string>
   <string name="LabelDuringCleaningMirror">Ayna temizleme</string>
+  <string name="LabelDuringInsufficiencyBattery">Pil yetersiz olduğunda</string>
   <string name="LabelTTLError">Işık ölçüm hatası</string>
   <string name="LabelNonCPULEnseError">CPU da olmayan bir lens takılı ve pozlama modu M konumunda değil</string>
+  <string name="LabelShoutingInProgress">Çekim modu EFFECTS.</string>
+  <string name="LabelOverHeatedError">Makine sıcaklığı yüksek olduğunda canlı görünüm başlatılmaz</string>
   <string name="LabelCardProtectedError">Kart korumalı</string>
+  <string name="LabelDestinationCardError">Kayıt hedefi kart.</string>
   <string name="LabelLiveViewError">Canlı görünüme geçilemedi</string>
   <!--07/05/2013-->
   <string name="LabelDevices">Cihazlar</string>
@@ -380,7 +386,11 @@ $Tag4 - tag 4</string>
   <string name="LabelDriver">Sürücü</string>
   <string name="LabelAstronomy">Astronomi</string>
   <string name="LabelEnable">Etkin</string>
+  <string name="LabelUseConfiguration">Kullanım yapılandırma</string>
   <string name="LabelNoExternalDeviceSelected">Harici aygıt seçilmedi</string>
+  <string name="LabelScript">Komut dizisi</string>
+  <string name="LabelStartScript">Komut dizisini başlat</string>
+  <string name="LabelStopScript">Komut dizisini durdur</string>
   <string name="LabelDeviceSettings">Cihaz ayarları</string>
   <string name="LabelAvailableDevices">Bağlı cihazlar</string>
   <string name="LabelCommands">Komutlar</string>
@@ -390,18 +400,26 @@ $Tag4 - tag 4</string>
   <string name="LabelDownloadJpgOnly">Sadece jpg dosyası indir</string>
   <string name="LabelDownloadJpgOnlyToolTip">Çekim jpg formatıyla ise indir</string>
   <string name="LabelSetCounters">Sayacı ayarla</string>
+  <string name="LabelEdgeDetection">Kenar algılama</string>
   <!--04/07/2013-->
   <string name="LabelExif">Exif</string>
   <string name="LabelFileName">Dosya adı</string>
   <string name="LabelSet">Ayar</string>
+  <string name="LabelTagSelector">Tag seçici</string>
+  <string name="LabelComment">Yorum</string>
+  <string name="LabelStayOnTop2">Üstte kal</string>
   <string name="LabelClearCache">Belleği sil</string>
+  <string name="LabelShowMagnifierInFullSccreen">Büyüteci tam ekranda göster</string>
+  <string name="LabelDelayImageLoading">Resim yükleme gecikmesi</string>
   <string name="LabelCountDown">Gerisayım</string>
+  <string name="LabelCurrentEvent">Geçerli olay</string>
   <string name="LabelAutoRotate">Oto. döndür</string>
   <string name="LabelReset">Reset</string>
   <string name="LabelFocus">Odak</string>
   <!--17/11/2013-->
   <string name="LabelAddFakeCamera">Sahte kamera ekle</string>
   <string name="LabelBarcode">Barkod</string>
+  <string name="LabelSendTheLogFile">Log dosyasını gönder</string>
   <string name="LabelSend">Gönder</string>
   <string name="LabelFullscreen">Tam ekran</string>
   <string name="LabelSelection">Seçim</string>
@@ -411,8 +429,11 @@ $Tag4 - tag 4</string>
   <string name="LabelSelectUnLiked">Beğenme</string>
   <!--19/01/2014-->
   <string name="LabelError">Hata</string>
+  <string name="LabelChangelog">Değişiklik logu</string>
   <!--27/02/2014-->
+  <string name="LabelAllowOverWrite">Üstüne yazma</string>
   <string name="LabelShowRuler">Cetveli göster</string>
+  <string name="LabelAutoPreviewJpgOnly">Otomatik önizleme sadece Jpg için</string>
   <string name="LabelSettingsLiveView">Canlı Görünüm</string>
   <!--17.05.2014-->
   <string name="LabelClear">Sil</string>
@@ -420,12 +441,24 @@ $Tag4 - tag 4</string>
   <string name="LabelPlay">Oynat</string>
   <string name="LabelPause">Dur</string>
   <string name="LabelLoop">Döngü</string>
+  <string name="LabelProgress">İlerleme</string>
   <string name="LabelPlayVideo">Videoyu oynat</string>
+  <string name="LabelBackUp">Fotoğrafları yedekle</string>
+  <string name="LabelRefreshSession">Dosya listesini yenile</string>
   <!--//20/08/2014-->
   <string name="LabelSeries">Seri</string>
+  <string name="LabelDirection">Yön</string>
+  <string name="LabelStepSmall">Küçük adım</string>
+  <string name="LabelStepMedium">Orta adım</string>
+  <string name="LabelStepLarge">Büyük adım</string>
+  <string name="LabelSessionOpenFolder">Oturum klasörünü aç</string>
+  <string name="LabelActivate">Aktifleştir</string>
+  <string name="LabelScaling">Ölçeklendir</string>
   <string name="LabelHorizontal">Horizontal</string>
   <string name="LabelVertical">Vertical</string>
   <!--20/08/2014-->
+  <string name="LabelLockNear">En yakın noktaya kitlen</string>
+  <string name="LabelLockFar">En uzak noktaya kitlen</string>
   <string name="LabelOverlayTransparency">Şeffaflık</string>
   <string name="LabelAddPlugin">Plugin ekle</string>
   <string name="LabelRefreshCameraList">Kamera listesini yenile</string>
@@ -468,4 +501,6 @@ $Tag4 - tag 4</string>
   <string name="LabelRefresh">Yenile</string>
   <string name="LabelOverview">Genel</string>
   <string name="LabelItems">Seçenekler</string>
+  <!--//30/01/2016-->
+  <!--//26/03/2016-->
 </resources>

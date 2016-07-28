@@ -150,6 +150,7 @@ $Tag2 - Ausgewähltes Schlagwort 2
 $Tag3 - Ausgewähltes Schlagwort 3
 $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelCounter">Zähler :</string>
+  <string name="LabelUseOriginal">Originaldateinamen der Kamera verwenden</string>
   <string name="LabelUseOriginalToolTip">Diese Option funktioniert nicht mit dem WIA-Treiber</string>
   <string name="LabelDontDownloadPhotos">Bilder nicht auf den Computer laden</string>
   <string name="LabelAlowFolderChange">Ordneränderung über Bildauswahl erlauben</string>
@@ -204,8 +205,8 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelImageAlignmentCenter">Mitte</string>
   <string name="LabelImageAlignmentRightBottom">Rechts/Unten</string>
   <string name="LabelVideoCodecProblem">Filmkodierungsproblem</string>
-  <string name="MsgPhotoTransferBegin">Fotoübertragung starten</string>
-  <string name="MsgPhotoTransferDone">Fotoübertragung abgeschlossen</string>
+  <string name="MsgPhotoTransferBegin">Bildübertragung starten</string>
+  <string name="MsgPhotoTransferDone">Bildübertragung abgeschlossen</string>
   <string name="MsgPhotoTransferError">Übertragungsfehler !\nNachricht :{0}</string>
   <string name="MsgBulbModeNotSupported">Langzeitbelichtungsmodus nicht unterstützt!</string>
   <string name="MsgApplicationUpToDate">Ihre Anwendung ist aktuell!</string>
@@ -276,7 +277,7 @@ $Tag4 - Ausgewähltes Schlagwort 4</string>
   <string name="LabelRecordInProgres">Während der Videodateiaufnahme</string>
   <string name="LabelCardProtected">Speicherkarte ist schreibgeschützt</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Während vergrößerter Darstellung der Live-Ansicht</string>
-  <string name="LabelWrongLiveViewType">Live-Ansicht ist auf Live-Ansicht der Fotos eingestellt.</string>
+  <string name="LabelWrongLiveViewType">Live-Ansicht ist auf Live-Ansicht der Bilder eingestellt.</string>
   <string name="LabelNotInApplicationMode">Die Kamera ist nicht bereit.</string>
   <string name="ButtonResetSettings">Zurücksetzen</string>
   <!--14/11/2012-->
@@ -423,7 +424,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelCurrentEvent">Aktuelles Ereignis</string>
   <string name="LabelRemainingCaptures">Verbleibende Aufnahmen</string>
   <string name="LabelLiveViewRotation">Live-Ansicht drehen</string>
-  <string name="LabelAutomaticallyGuiding">Automatisch PHD Guiding nach Foto erfassen</string>
+  <string name="LabelAutomaticallyGuiding">Automatisch PHD Guiding nach Bild erfassen</string>
   <string name="LabelAutoRotate">Automatisch ausrichten</string>
   <string name="LabelReset">Zurücksetzen</string>
   <string name="LabelFocus">Fokussieren</string>
@@ -472,7 +473,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelPlayVideo">Video wiedergeben</string>
   <string name="LabelLoadPresetAllCamera">Preset laden in alle Kameras</string>
   <string name="LabelBackUpFolder">Ordner sichern</string>
-  <string name="LabelBackUp">Fotos sichern</string>
+  <string name="LabelBackUp">Bilder sichern</string>
   <string name="LabelVerifyPreset">Einstellung prüfen</string>
   <string name="LabelRefreshSession">Dateiliste aktualisieren</string>
   <string name="LabelErrorEmail">Ihre E-Mail-Adresse (falls Sie Rückmeldungen bekommen möchten)</string>
@@ -515,7 +516,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelMinimizeToTryIcon">Programm minimieren</string>
   <string name="LabelStartMinimized">Minimiert starten</string>
   <string name="LabelStartupWithWindows">Programm beim Start von Windows starten</string>
-  <string name="LabelSelectSeries">Wählen Sie Fotos der gleichen Serie</string>
+  <string name="LabelSelectSeries">Bilder der gleichen Serie auswählen</string>
   <string name="LabelCaptureDelay">Aufnahmeverzögerung</string>
   <string name="LabelAutoExportPlugins">Plugins für automatischen Export</string>
   <string name="LabelAddPlugin">Plugin hinzufügen</string>
@@ -567,7 +568,7 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelTimeLapseScriptFile">Skriptdatei</string>
   <string name="LabelBrowse">Durchsuchen</string>
   <string name="LabelFlip">Horizontal spiegeln</string>
-  <string name="LabelLiveViewPreviewTime">Vorschau aufgenommenes Foto </string>
+  <string name="LabelLiveViewPreviewTime">Vorschau des aufgenommenen Bildes</string>
   <string name="LabelColor">Farbe</string>
   <string name="LabelImportData">Daten importieren</string>
   <string name="LabelExportData">Daten exportieren</string>
@@ -616,6 +617,8 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelWrongValue">Falscher niedriger oder hoher Wert</string>
   <string name="LabelWrongFNumber">Blende kann nicht geändert werden</string>
   <string name="LabelZoomToFocus">Immer zum ersten Fokuspunkt zoomen</string>
+  <string name="LabelPreviewFullSize">Vorschau in Bild voller Größe</string>
+  <string name="LabelCropMargins">Ränder abschneiden (%)</string>
   <string name="LabelShowActiveArea">Aktiven Bereich anzeigen</string>
   <string name="LabelSetArea">Festlegen</string>
   <string name="LabelDoneArea">Fertig</string>
@@ -627,8 +630,34 @@ die Karte wird nicht mit der Veröffentlichung ohne Karte deaktiviert eingefügt
   <string name="LabelFill">Füllen</string>
   <!--// 19/10/2015-->
   <string name="LabelApplyToImage">Auf das ausgewählte Bild anwenden</string>
+  <string name="LabelCaptureCount">Aufnahmeanzahl</string>
+  <string name="LabelAutoFocusBeforCapture">Autofokus vor der Aufnahme</string>
+  <string name="LabelAskSavePath">Nach Aufnahmedateipfad fragen</string>
   <string name="LabelSaveLiveviewWindow">Speichere Position des Live-Ansicht Fensters</string>
+  <string name="LabelShowFullscreenControls">Vollbildfenster-Steuerelemente anzeigen</string>
+  <string name="LabelCurrentLockNear">Aktuelle Position als nächstgelegenen Punkt feststellen</string>
+  <string name="LabelCurrentLockFar">Aktuelle Position als entferntesten Punkt feststellen</string>
   <string name="LabelStatistics">Statistiken</string>
   <string name="LabelRefresh">Erneuern</string>
   <string name="LabelOverview">Übersicht</string>
+  <string name="LabelItems">Elemente</string>
+  <!--//30/01/2016-->
+  <string name="LabelDownloadThumb">Nur Bildvorschau herunterladen</string>
+  <string name="LabelDeleteFileAfterTransfer">Datei nach der Übertragung löschen</string>
+  <!--//26/03/2016-->
+  <string name="LabelConditions">Bedingungen</string>
+  <string name="LabelVariable">Variabel</string>
+  <string name="LabelCondition">Bedingung</string>
+  <string name="LabelOperator">Betreiber</string>
+  <string name="LabelValue">Wert</string>
+  <string name="LabelDelete">Löschen</string>
+  <string name="LabelDisableHardwareAcceleratione">Hardwarebeschleunigung deaktivieren</string>
+  <string name="LabelDisabled">Deaktiviert</string>
+  <string name="LabelCapturePhoto">Bild aufnehmen</string>
+  <string name="LabelRecordVideo">Video aufnehmen</string>
+  <string name="LabelVideoLength">Videolänge</string>
+  <string name="LabelRestore">Wiederherstellen</string>
+  <string name="LabelTrayMessage">Anwendung wurde minimiert \n Doppelklick zum Wiederherstellen!</string>
+  <string name="LabelExecuteAfterTransfer">Datei nach der Übertragung ausführen</string>
+  <string name="LabelInvert">Invertieren</string>
 </resources>
