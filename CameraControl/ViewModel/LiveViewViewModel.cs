@@ -1398,7 +1398,12 @@ namespace CameraControl.ViewModel
             CancelCaptureCommand = new RelayCommand(() => CaptureCancelRequested = true);
 
             FullScreenCommand = new RelayCommand(FullScreen);
-            ClosePreviewCommand = new RelayCommand(() => PreviewBitmapVisible = false);
+            ClosePreviewCommand = new RelayCommand(() =>
+            {
+                PreviewBitmap = null;
+                PreviewBitmapVisible = false;
+            });
+
         }
 
         void LiveViewManager_PreviewCaptured(ICameraDevice cameraDevice, string file)
@@ -1410,7 +1415,7 @@ namespace CameraControl.ViewModel
             {
                 if (File.Exists(file))
                 {
-                    PreviewBitmap = BitmapLoader.Instance.LoadImage(file, 0, 0);
+                    PreviewBitmap = BitmapLoader.Instance.LoadImage(file, 2048, 0);
                     LiveViewManager.OnPreviewLoaded(CameraDevice, file);
                     File.Delete(file);
                 }
@@ -2904,6 +2909,8 @@ namespace CameraControl.ViewModel
                     if (FocusCounter >= FocusValue)
                     {
                         IsFocusStackingRunning = false;
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
+                            TranslationStrings.LabelStackingFinished);
                     }
                 }
                 else
@@ -2912,6 +2919,8 @@ namespace CameraControl.ViewModel
                     if (PhotoCount >= PhotoNumber)
                     {
                         IsFocusStackingRunning = false;
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
+                            TranslationStrings.LabelStackingFinished);
                     }
                     GetLiveImage();
                     FocusStackingTick = 0;

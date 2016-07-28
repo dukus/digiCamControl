@@ -690,5 +690,6 @@ namespace CameraControl.Core.Translation
         public static string LabelClosePreview = "Close Preview";
         public static string LabelReload = "Reload";
         public static string LabelSeriesAsIndex = "Save index as series";
+        public static string LabelStackingFinished = "Focus stacking finished";
     }
 }
