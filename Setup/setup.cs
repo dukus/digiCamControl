@@ -1,7 +1,7 @@
 using System  ;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO; 
+using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
@@ -120,9 +120,17 @@ namespace Setup
             }
             catch (FileNotFoundException ex)
             {
+                Console.WriteLine(String.Format("FileNotFound: {0} in Setup.cs@123", Path.Combine(project.SourceBaseDir, "CameraControl.exe")));
                 project.SourceBaseDir = project.SourceBaseDir.Replace(@"Setup\bin\", "");
-                ver =
-                    FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
+                try
+                {
+                    ver =
+                        FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "CameraControl.exe"));
+                }
+                catch (FileNotFoundException exn)
+                {
+                    Console.WriteLine(String.Format("FileNotFound: {0}\nstacktrace\n{1}", Path.Combine(project.SourceBaseDir, "CameraControl.exe"), ex.ToString()));
+                }
             }
 
             project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
