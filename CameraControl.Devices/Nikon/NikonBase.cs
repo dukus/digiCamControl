@@ -1797,7 +1797,7 @@ namespace CameraControl.Devices.Nikon
         {
             if (step == 0)
                 return 0;
-
+            DeviceReady();
             uint resp =(step > 0? ExecuteWithNoData(CONST_CMD_MfDrive, 0x00000002, (uint) step)
                                         : ExecuteWithNoData(CONST_CMD_MfDrive, 0x00000001, (uint) -step));
             ErrorCodes.GetException(resp);
@@ -2364,23 +2364,26 @@ namespace CameraControl.Devices.Nikon
 
         public void DeviceReady(int retrynum)
         {
-            if (retrynum > 50)
-                return;
             //uint cod = Convert.ToUInt32(_stillImageDevice.ExecuteWithNoData(CONST_CMD_DeviceReady));
-            ulong cod = (ulong) ExecuteWithNoData(CONST_CMD_DeviceReady);
-            if (cod != 0 && cod != ErrorCodes.MTP_OK)
+            while (true)
             {
-                if (cod == ErrorCodes.MTP_Device_Busy || cod == 0x800700AA)
+                if (retrynum > 50)
+                    return;
+                ulong cod = (ulong)ExecuteWithNoData(CONST_CMD_DeviceReady);
+                if (cod != 0 && cod != ErrorCodes.MTP_OK)
                 {
-                    //Console.WriteLine("Device not ready");
-                    //Thread.Sleep(50);
-                    retrynum++;
-                    DeviceReady(retrynum);
+                    if (cod == ErrorCodes.MTP_Device_Busy || cod == 0x800700AA)
+                    {
+                       Console.WriteLine("Device not ready");
+                        Thread.Sleep(5);
+                        retrynum++;
+                    }
+                    else
+                    {
+                       Console.WriteLine("Device ready code #0" + cod.ToString("X"));
+                    }
                 }
-                else
-                {
-                    //Console.WriteLine("Device ready code #0" + cod.ToString("X"));
-                }
+                return;
             }
         }
 

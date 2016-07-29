@@ -648,4 +648,24 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelRefresh">更新</string>
   <string name="LabelOverview">概覽</string>
   <string name="LabelItems">項目</string>
+  <!--//30/01/2016-->
+  <string name="LabelDownloadThumb">僅下載縮圖</string>
+  <string name="LabelDeleteFileAfterTransfer">傳輸完畢後刪除檔案</string>
+  <string name="LabelHideTrayNotifications">隱藏工作列上的提示</string>
+  <!--//26/03/2016-->
+  <string name="LabelConditions">狀態</string>
+  <string name="LabelVariable">變數</string>
+  <string name="LabelCondition">狀態</string>
+  <string name="LabelOperator">操作人員</string>
+  <string name="LabelValue">數值</string>
+  <string name="LabelDelete">刪除</string>
+  <string name="LabelDisableHardwareAcceleratione">關閉硬體加速功能</string>
+  <string name="LabelDisabled">已被關閉</string>
+  <string name="LabelCapturePhoto">拍攝照片</string>
+  <string name="LabelRecordVideo">錄影</string>
+  <string name="LabelVideoLength">影片長度</string>
+  <string name="LabelRestore">恢復</string>
+  <string name="LabelTrayMessage">應用程式被最小化\n雙擊以恢復應用程式視窗</string>
+  <string name="LabelExecuteAfterTransfer">檔案傳輸完後執行</string>
+  <string name="LabelInvert">反向</string>
 </resources>
