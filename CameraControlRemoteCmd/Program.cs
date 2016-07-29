@@ -1,40 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CameraControlRemoteCmd
 {
     class Program
     {
-        // set aperture 6.4
-        // set camera 124578965
-        // capture
+        /* all of the input parameters are passed to the GUI - help is in CommandProcessor.cs */
 
         static void Main(string[] args)
         {
-            if (args == null || args.Length == 0)
-            {
-                PrintHelp();
-                return;
-            }
+            int rc = 0;
+
+            Console.WriteLine(String.Format("digiCamControl remote command line utility ({0}, {1}) running\n", ApplicationInformation.ExecutingAssemblyVersion, ApplicationInformation.CompileDate));
+
             try
             {
                 CommandProcessor processor = new CommandProcessor();
-                processor.Parse(args);
+                rc = processor.Parse(args);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error :");
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace );
+                /* Should never happen as the likely errors are caught in Parse() and return here via rc */
+                Console.WriteLine(String.Format("Unusual Error: {0}\n{1}", ex.Message, ex.StackTrace));
+                rc = -2;
             }
-        }
-
-        private static void PrintHelp()
-        {
-            
+            System.Environment.Exit(rc);
         }
     }
 }

@@ -97,6 +97,7 @@ namespace CameraControl.Plugins.ToolPlugins
 
         public void LoadData()
         {
+            Files = new AsyncObservableCollection<FileItem>();
             if (Session.Files.Count == 0 || ServiceProvider.Settings.SelectedBitmap.FileItem == null)
                 return;
             var files = Session.GetSelectedFiles();

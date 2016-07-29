@@ -580,6 +580,9 @@ namespace CameraControl
                     }
                 }));
 
+                // execute plugins which are executed after transfer  
+                ExecuteAutoexportPlugins(eventArgs.CameraDevice, _selectedItem, true);
+
                 Dispatcher.Invoke(() =>
                 {
                     _selectedItem.RemoveThumbs();
@@ -587,8 +590,6 @@ namespace CameraControl
                     ServiceProvider.OnFileTransfered(_selectedItem);
                 });
 
-                // execute plugins which are executed after transfer  
-                ExecuteAutoexportPlugins(eventArgs.CameraDevice, _selectedItem, true);
 
                 if (ServiceProvider.Settings.MinimizeToTrayIcon && !IsVisible && !ServiceProvider.Settings.HideTrayNotifications)
                 {
