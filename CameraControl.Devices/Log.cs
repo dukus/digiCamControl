@@ -104,11 +104,29 @@ namespace CameraControl.Devices
             }
         }
 
+        public static void VerboseWithWriteLineAlways(object message)
+        {
+            Console.WriteLine(message);
+            if (IsVerbose)
+            {
+                LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
+            }
+        }
+
         public static void VerboseWithWrite(object message)
         {
             if (IsVerbose)
             {
                 Console.Write(message);
+                LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
+            }
+        }
+
+        public static void VerboseWithWriteAlways(object message)
+        {
+            Console.Write(message);
+            if (IsVerbose)
+            {
                 LogInfo?.Invoke(new LogEventArgs() { Exception = null, Message = message });
             }
         }

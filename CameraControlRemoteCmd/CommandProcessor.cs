@@ -9,25 +9,36 @@ namespace CameraControlRemoteCmd
 {
     public class CommandProcessor
     {
+    private void ShowHelp()
+        {
+            Console.WriteLine("\nParameters");
+            Console.WriteLine("/c <one line command> (parameter may be repeated multiple times)");
+            Console.WriteLine("/host <host address>");
+            Console.WriteLine("/clean - attempt to cleanup error messages");
+            Console.WriteLine("/help - show this help text");
+            Console.WriteLine("\npress enter to continue...");
+            Console.ReadLine();
+        }
         public int Parse(string[] args)
         {
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine("Wrong usage");
-                Console.WriteLine("Parameters");
-                Console.WriteLine("/c <one line command>");
-                Console.WriteLine("/host <host address>");
-                Console.WriteLine("/clean");
-                Console.ReadLine();
+                ShowHelp();
                 return -1;
             }
             try
             {
                 var arguments = new InputArguments(args, "/", true);
+                if (arguments.Contains("/help"))
+                {
+                    ShowHelp();
+                    return 0;
+                }
                 if (!arguments.Contains("/c"))
                 {
-                    Console.WriteLine("Missing command");
-                    Console.WriteLine("/c <one line command>");
+                    Console.WriteLine("ERROR: Missing command");
+                    ShowHelp();
                     return -1;
                 }
                 string mess = Send(arguments["/c"], "DCCPipe", arguments.Contains("/host") ? arguments["/host"] : ".",
@@ -45,9 +56,13 @@ namespace CameraControlRemoteCmd
                                 Console.WriteLine(s);
                             }
                         }
-                        else
+                        else if (lines.ContainsKey("message"))
                         {
-                            Console.WriteLine(lines["response"]);                            
+                            Console.WriteLine(lines["response"] + " " + lines["message"]);
+                        }
+                        else if (!lines["response"].Equals("null"))
+                        {
+                            Console.WriteLine(lines["response"]);
                         }
                     }
                     else
@@ -60,6 +75,13 @@ namespace CameraControlRemoteCmd
                     Console.WriteLine(mess);                    
                 }
                 return 0;
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine("Timeout Error (is the GUI running?):");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                return -1;
             }
             catch (Exception ex)
             {
