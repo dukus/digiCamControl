@@ -31,6 +31,8 @@ namespace CameraControl.Devices.Example
             FolderForPhotos = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Test");
             InitializeComponent();
             Log.LogError += Log_LogDebug;
+            Log.LogDebug += Log_LogDebug;
+            Log.LogInfo += Log_LogDebug;
         }
 
         void Log_LogDebug(LogEventArgs e)
