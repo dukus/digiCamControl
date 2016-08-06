@@ -26,11 +26,13 @@ namespace CameraControl.Devices.Example
             DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
             // For experimental Canon driver support- to use canon driver the canon sdk files should be copied in application folder
-            DeviceManager.UseExperimentalDrivers = false;
+            DeviceManager.UseExperimentalDrivers = true;
             DeviceManager.DisableNativeDrivers = false;
             FolderForPhotos = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Test");
             InitializeComponent();
             Log.LogError += Log_LogDebug;
+            Log.LogDebug += Log_LogDebug;
+            Log.LogInfo += Log_LogDebug;
         }
 
         void Log_LogDebug(LogEventArgs e)
@@ -157,16 +159,22 @@ namespace CameraControl.Devices.Example
                 }
                 catch (DeviceException exception)
                 {
-                    if (exception.ErrorCode == ErrorCodes.MTP_Device_Busy || exception.ErrorCode == ErrorCodes.ERROR_BUSY)
+                    // if device is bussy retry after 100 miliseconds
+                    if (exception.ErrorCode == ErrorCodes.MTP_Device_Busy ||
+                        exception.ErrorCode == ErrorCodes.ERROR_BUSY)
                     {
-                        // this may cause infinite loop
+                        // !!!!this may cause infinite loop
                         Thread.Sleep(100);
                         retry = true;
                     }
                     else
                     {
-                        MessageBox.Show("Error occurred :" + exception.Message);                        
+                        MessageBox.Show("Error occurred :" + exception.Message);
                     }
+                }
+                catch (Exception  ex)
+                {
+                    MessageBox.Show("Error occurred :" + ex.Message);
                 }
    
             } while (retry);

@@ -184,7 +184,7 @@ namespace CameraControl.Core.Classes
 
         public string DefaultSettings
         {
-            get { return Path.Combine(Settings.ApplicationFolder, "default_settings.xml"); }
+            get { return Path.Combine(Settings.BrandingFolder, "default_settings.xml"); }
         }
 
         public Branding()
