@@ -553,9 +553,10 @@ namespace Canon.Eos.Framework
                     this.LockAndExceute(this.TakePicture);
                     return;
                 }
-
-                Util.Assert(this.SendCommand(Edsdk.CameraCommand_TakePicture),
-                            "Failed to take picture.");
+                Util.Assert(this.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely),
+                    "Failed to press fully.");
+                Util.Assert(this.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF),
+                    "Failed to release.");
             }
         }
 
