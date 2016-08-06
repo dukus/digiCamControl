@@ -1272,11 +1272,11 @@ namespace CameraControl.Core.Classes
         {
             try
             {
-                if (File.Exists(ConfigFile))
+                if (File.Exists(fileName))
                 {
                     XmlSerializer mySerializer =
                         new XmlSerializer(typeof (Settings));
-                    FileStream myFileStream = new FileStream(ConfigFile, FileMode.Open);
+                    FileStream myFileStream = new FileStream(fileName, FileMode.Open);
                     defaultSettings = (Settings) mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }
