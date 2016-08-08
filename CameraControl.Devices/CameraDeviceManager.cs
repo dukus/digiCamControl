@@ -577,8 +577,31 @@ namespace CameraControl.Devices
 
         private void NewCameraConnected(ICameraDevice cameraDevice)
         {
+            const string usbPrefix = "\\\\?\\usb";
+
             StaticHelper.Instance.SystemMessage = "New Camera is connected ! Driver :" + cameraDevice.DeviceName;
             Log.Debug("===========Camera is connected==============");
+
+            if (cameraDevice.PortName.Substring(0, usbPrefix.Length).Equals(usbPrefix))
+            {
+                string vid = "";
+                string pid = "";
+                char[] delimiterChars = { '#', '&', '_' };
+
+                string[] words = cameraDevice.PortName.Split(delimiterChars);
+
+                for (int i = 1; i < words.Length - 1; i++)
+                {
+                    if (words[i].Equals("pid"))
+                        pid = words[i + 1];
+                    else if (words[i].Equals("vid"))
+                        vid = words[i + 1];
+                }
+
+                if (!vid.Equals("") && !pid.Equals(""))
+                    Log.Debug("USB : VID=" + vid + ", PID=" + pid);
+            }
+
             Log.Debug("Driver :" + cameraDevice.GetType().Name);
             Log.Debug("Name :" + cameraDevice.DeviceName);
             Log.Debug("Manufacturer :" + cameraDevice.Manufacturer);
