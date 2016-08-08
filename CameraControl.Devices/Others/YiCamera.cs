@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.TransferProtocol;
@@ -423,6 +424,13 @@ namespace CameraControl.Devices.Others
         public override void StartLiveView()
         {
             Protocol.SendCommand(259, "none_force");
+        }
+
+        public override string ToString()
+        {
+
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................YiA");
+            return c.ToString();
         }
     }
 }

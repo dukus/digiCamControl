@@ -463,5 +463,11 @@ namespace CameraControl.Devices.Canon
             if (timerstate)
                 _timer.Start();
         }
+
+        public override string ToString()
+        {
+            /* Canon Base, just note it for now */
+            return base.ToString() + "\n\tType..................Canon (base)";
+        }
     }
 }

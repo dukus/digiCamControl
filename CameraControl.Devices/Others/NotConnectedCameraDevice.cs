@@ -28,6 +28,7 @@
 
 #region
 
+using System.Text;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -52,6 +53,13 @@ namespace CameraControl.Devices.Others
             IsConnected = false;
             HaveLiveView = false;
             ExposureStatus = 1;
+        }
+
+        public override string ToString()
+        {
+
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Fake");
+            return c.ToString();
         }
     }
 }
