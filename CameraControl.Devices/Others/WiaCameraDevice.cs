@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using CameraControl.Devices.Classes;
 using WIA;
@@ -717,5 +718,16 @@ namespace CameraControl.Devices.Others
         }
 
         #endregion
+
+        public override string ToString()
+        {
+
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................WIA");
+
+            if (Device != null)
+                c.AppendFormat("\n\tDevice ID.............{0}", Device.DeviceID);
+
+            return c.ToString();
+        }
     }
 }

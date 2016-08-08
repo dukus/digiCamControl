@@ -30,10 +30,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows;
 using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Custom;
@@ -251,6 +252,22 @@ namespace CameraControl.Devices
             catch (Exception exception)
             {
                 Log.Error("Unable init canon driver", exception);
+                /* Give specific guidance if the error is a missing DLL */
+                if ((exception.InnerException != null) && (exception.InnerException.Message != null) && (exception.InnerException.Message.Contains("EDSDK.dll")))
+                {
+                    /* one or the other */
+                    if (Process.GetCurrentProcess().ProcessName.Equals("CameraControl"))
+                    {
+                        MessageBoxResult result = MessageBox.Show("Canon EOS camera library, EDSDK.dll is missing\nInstall it after downloading from Canon's site\n\nDo you want to close this application?\n\n(You can try to continue, but it probably will not not work)", "Critical Error", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            Application.Current.Shutdown();
+                        }
+                    } else
+                    {
+                        Console.WriteLine("\n**CRITICAL ERROR**\n\nCanon EOS camera library, EDSDK.dll is missing\nInstall it after downloading from Canon's site\n");
+                    }
+                }
             }
         }
 

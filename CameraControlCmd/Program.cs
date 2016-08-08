@@ -31,6 +31,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Threading;
 using CameraControl.Core;
@@ -100,6 +101,40 @@ namespace CameraControlCmd
             }
             int exitCodes = ExecuteArgs();
             Thread.Sleep(250);
+
+            if ((Log.IsVerbose) && ( _arguments.Contains("capture") ||
+                                    _arguments.Contains("capturenoaf") ||
+                                    _arguments.Contains("captureall") ||
+                                    _arguments.Contains("captureallnoaf")))
+            {
+                /* We report this here, since the capture command has already fired above and that populated the data! */
+                foreach (CameraControl.Devices.BaseCameraDevice _b in ServiceProvider.DeviceManager.ConnectedDevices)
+                {
+
+                    StringBuilder c = new StringBuilder(_b.ToString());
+
+                    c.Append(String.Format("\n\tAdvanced properties ({0}):", _b.AdvancedProperties.Count));
+                    foreach (Object x in _b.AdvancedProperties)
+                    {
+                        if (x is CameraControl.Devices.Classes.PropertyValue<long>)
+                        {
+                            CameraControl.Devices.Classes.PropertyValue<long> l = (CameraControl.Devices.Classes.PropertyValue<long>)x;
+                            c.Append(String.Format("\n\t\t{0} {1}", l.Tag, l.Value));
+                        } else if (x is CameraControl.Devices.Classes.PropertyValue<int>)
+                        {
+                            CameraControl.Devices.Classes.PropertyValue<int> i = (CameraControl.Devices.Classes.PropertyValue<int>)x;
+                            c.Append(String.Format("\n\t\t{0} {1}", i.Tag, i.Value));
+                        }
+                        else if (x is CameraControl.Devices.Classes.PropertyValue<uint>)
+                        {
+                            CameraControl.Devices.Classes.PropertyValue<uint> u = (CameraControl.Devices.Classes.PropertyValue<uint>)x;
+                            c.Append(String.Format("\n\t\t{0} {1}", u.Tag, u.Value));
+                        }
+                    }
+                    Log.VerboseWithWriteLineAlways(c);
+                }
+            }
+
             Thread thread = new Thread(WaitForCameras);
             thread.Start();
 

@@ -2542,6 +2542,22 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
+        public override string ToString()
+        {
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Nikon(" + ")");
+            c.AppendFormat("\n\tHost mode.............{0}", HostMode ? "Yes" : "No");
+            c.AppendFormat("\n\tLiveView:");
+            c.AppendFormat("\n\t  On..................{0}", LiveViewOn ? "Yes" : "No");
+            c.AppendFormat("\n\t  Focus Mode..........{0}", LiveViewFocusMode);
+            c.AppendFormat("\n\tNormal:");
+            c.AppendFormat("\n\t  Focus Mode..........{0}", NormalFocusMode);
+            c.AppendFormat("\n\texposure..............{0} f{1} +/-{2}, ISO{3}",
+                    NormalShutterSpeed,
+                    NormalFNumber,
+                    NormalExposureCompensation,
+                    NormalIsoNumber);
 
+            return c.ToString();
+        }
     }
 }
