@@ -468,6 +468,14 @@ namespace CameraControlCmd
                     ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
             }
+            catch (Canon.Eos.Framework.EosException exception)
+            {
+                ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy = false;
+                Console.WriteLine("Error occurred while capturing photo " + exception.EosErrorCodeMessage);
+                if (exception.EosErrorCode.Equals("TakePictureCard"))
+                    Console.WriteLine(" *** Check if camera's SD card is full? ***");
+                Console.WriteLine("\n" + exception + "\n");
+            }
             catch (Exception exception)
             {
                 ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy = false;
