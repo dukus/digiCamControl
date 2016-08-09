@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using CameraControl.Devices.Classes;
+using System.Text;
 
 #endregion
 
@@ -565,7 +566,42 @@ namespace CameraControl.Devices
 
         public override string ToString()
         {
-            return DisplayName;
+            // return DisplayName;
+
+            StringBuilder c = new StringBuilder("\n\nPost shot camera data:\n");
+            if (PortName != null)
+                c.AppendFormat("Port: {0}\n", PortName);
+            c.AppendFormat("    {0}{1}", String.IsNullOrWhiteSpace(Manufacturer) ? "" : "(" + Manufacturer + ") ", DeviceName);
+            c.AppendFormat("\n\tSerial number........ {0}", SerialNumber);
+            c.AppendFormat("\n\tBusy..................{0}", IsBusy ? "Yes" : "No");
+            c.AppendFormat("\n\tHave LiveView.........{0}", HaveLiveView ? "Yes" : "No");
+            c.AppendFormat("\n\tCapture SDRam.........{0}", CaptureInSdRam ? "Yes" : "No");
+            c.AppendFormat("\n\tHost Mode.............{0}", HostMode ? "Yes" : "No");
+            c.AppendFormat("\n\tIs Connected..........{0}", IsConnected ? "Yes" : "No");
+            c.AppendFormat("\n\tMode..................{0}, {1} focus", Mode.Value, FocusMode.Value);
+            c.AppendFormat("\n\texposure..............{0} f{1} +/-{2}, ISO{3}",
+                    ShutterSpeed.Value,
+                    FNumber.Value,
+                    ExposureCompensation.Value,
+                    IsoNumber.Value);
+            c.AppendFormat("\n\tmetering mode.........{0}", ExposureMeteringMode.Value);
+            c.AppendFormat("\n\twhite balance.........{0}", WhiteBalance.Value);
+            c.AppendFormat("\n\tTransfer progress.....{0}%", TransferProgress);
+
+            c.AppendFormat("\n\tExposure status.......{0}", ExposureStatus);
+            c.AppendFormat("\n\tBattery...............{0}%", Battery);
+            c.AppendFormat("\n\tCompression...........{0}%", CompressionSetting);
+
+            if (Capabilities.Count > 0)
+            {
+                c.Append(String.Format("\n\tCapabilities ({0} present of {1}):", Capabilities.Count, Enum.GetValues(typeof(CapabilityEnum)).Length));
+                foreach (CapabilityEnum x in Enum.GetValues(typeof(CapabilityEnum)))
+                {
+                    c.AppendFormat("\n\t  {0,-20}{1}", x.ToString(""), Capabilities.Contains(x) ? "Yes" : "No");
+                }
+            }
+
+            return c.ToString();
         }
     }
 }

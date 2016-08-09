@@ -42,8 +42,6 @@ using Canon.Eos.Framework;
 using Canon.Eos.Framework.Eventing;
 using Canon.Eos.Framework.Internal;
 using Canon.Eos.Framework.Internal.SDK;
-using PortableDeviceLib;
-using PortableDeviceLib.Model;
 
 #endregion
 
@@ -1660,6 +1658,45 @@ namespace CameraControl.Devices.Canon
             }
         }
 
+        public override string ToString()
+        {
+            /* Canon SDK adds a EosCamera object
+                        BatteryLevel (long) and BatteryQuality (string)
+                        Copyright (string)
+                        FirmwareVersion (string)
+                        ImageQuality
+                            PrimaryCompressLevel
+                            PrimateImageFormat
+                            PrimateImageSize
+                        IsInLiveViewMode (bool)
+            */
 
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Canon (SDK)");
+
+            if (Camera != null)
+            {
+                c.AppendFormat("\n\tFirmware version......{0}", Camera.FirmwareVersion);
+                c.AppendFormat("\n\tDate/Time.............{0}", DateTime.ToString());
+                c.AppendFormat("\n\tBattery...............{0,3}%, quality {1}, (note base class value is this + 20)", Camera.BatteryLevel, Camera.BatteryQuality);
+                c.AppendFormat("\n\tIs in LiveView Mode...{0}", Camera.IsInLiveViewMode ? "Yes" : "No");
+                c.Append("\n\tImage Quality - Primary");
+                c.AppendFormat("\n\t  Format..............{0}", Camera.ImageQuality.PrimaryImageFormat);
+                c.AppendFormat("\n\t  Size................{0}", Camera.ImageQuality.PrimaryImageSize);
+                c.AppendFormat("\n\t  Compression.........{0}", Camera.ImageQuality.PrimaryCompressLevel);
+                if (!Camera.ImageQuality.SecondaryImageFormat.Equals(EosImageFormat.Unknown))
+                {
+                    c.Append("\n\tImage Quality - Secondary");
+                    c.AppendFormat("\n\t  Format..............{0}", Camera.ImageQuality.SecondaryImageFormat);
+                    c.AppendFormat("\n\t  Size................{0}", Camera.ImageQuality.SecondaryImageSize);
+                    c.AppendFormat("\n\t  Compression.........{0}", Camera.ImageQuality.SecondaryCompressLevel);
+                }
+            }
+            c.AppendFormat("\n\tArtist................{0}", Camera.Artist);
+            c.AppendFormat("\n\tCopyright (c).........{0}", Camera.Copyright);
+            c.AppendFormat("\n\tDepth Preview.........{0}", Camera.DepthOfFieldPreview ? "Yes" : "No");
+            c.AppendFormat("\n\tWhite Balance.........{0}", Camera.WhiteBalance);
+
+            return c.ToString();
+        }
     }
 }

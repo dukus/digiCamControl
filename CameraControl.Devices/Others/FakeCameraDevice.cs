@@ -30,6 +30,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -145,6 +146,13 @@ namespace CameraControl.Devices.Others
         public override int Focus(int step)
         {
             return step;
+        }
+
+        public override string ToString()
+        {
+
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Fake");
+            return c.ToString();
         }
     }
 }

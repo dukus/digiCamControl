@@ -673,5 +673,11 @@ namespace CameraControl.Devices.Sony
             }
             return payload;
         }
+
+        public override string ToString()
+        {
+            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Sony WiFi");
+            return c.ToString();
+        }
     }
 }

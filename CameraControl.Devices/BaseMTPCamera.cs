@@ -699,5 +699,11 @@ namespace CameraControl.Devices
             }
             return deviceInfo;
         }
+
+        public override string ToString()
+        {
+            /* MTP adds nothing to report */
+            return base.ToString() + "\n\tMode..................MTP";
+        }
     }
 }
