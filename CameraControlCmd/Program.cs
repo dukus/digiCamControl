@@ -39,6 +39,7 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Scripting;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using Canon.Eos.Framework;
 
 #endregion
 
@@ -468,7 +469,7 @@ namespace CameraControlCmd
                     ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
             }
-            catch (Canon.Eos.Framework.EosException exception)
+            catch (EosException exception)
             {
                 ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy = false;
                 Console.WriteLine("Error occurred while capturing photo " + exception.EosErrorCodeMessage);
