@@ -34,6 +34,7 @@ namespace CameraControl.Core.Classes
             Templates.Add("[Barcode]", templatePharser);
             Templates.Add("[File format]", templatePharser);
             Templates.Add("[Camera Name]", templatePharser);
+            Templates.Add("[Camera Order]", templatePharser);
             Templates.Add("[Selected Tag1]", templatePharser);
             Templates.Add("[Selected Tag2]", templatePharser);
             Templates.Add("[Selected Tag3]", templatePharser);
