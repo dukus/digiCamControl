@@ -229,6 +229,11 @@ namespace CameraControl.Core.Classes
                 {
                     if (Path.GetFileName(fullpath) == "slide.html")
                     {
+                        string template= Path.Combine(Settings.WebServerFolder, "template.txt");
+                        if (File.Exists(template))
+                        {
+                            _lineFormat = File.ReadAllText(template);
+                        }
                         string file = File.ReadAllText(fullpath);
 
                         StringBuilder builder = new StringBuilder();

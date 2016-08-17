@@ -1,0 +1,8 @@
+<img u="image" src="@image@" />
+<!-- 
+@image@ =  large thumb
+@image_thumb@ = small thumb
+@image_url@ = original image
+@title@ = file name
+@desc@ = file info
+  -->
