@@ -38,9 +38,9 @@ namespace CameraControl.Devices.Classes
                 s.Close();
                 device.TransferProgress = 100;
             }
-            catch
+            catch(Exception ex)
             {
-                return;
+                Log.Error("Error download file", ex);
             }
             finally
             {

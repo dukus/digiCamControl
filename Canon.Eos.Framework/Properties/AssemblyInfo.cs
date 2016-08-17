@@ -12,6 +12,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("3a70507d-c50a-47ca-b920-303d687631ec")]
-[assembly: AssemblyVersion("2.0.50.0")]
-[assembly: AssemblyFileVersion("2.0.50.0")]
+[assembly: AssemblyVersion("2.0.52.0")]
+[assembly: AssemblyFileVersion("2.0.52.0")]
 [assembly: InternalsVisibleTo("Canon.Eos.UnitTests")]

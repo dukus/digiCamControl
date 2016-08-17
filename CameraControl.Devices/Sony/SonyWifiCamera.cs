@@ -309,9 +309,9 @@ namespace CameraControl.Devices.Sony
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
+                Log.Debug("Sony get error ", ex);
             }
             _timer.Start();
         }
