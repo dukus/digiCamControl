@@ -599,7 +599,7 @@ namespace CameraControl.Devices
             StaticHelper.Instance.SystemMessage = "New Camera is connected ! Driver :" + cameraDevice.DeviceName;
             Log.Debug("===========Camera is connected==============");
 
-            if (cameraDevice.PortName.Substring(0, usbPrefix.Length).Equals(usbPrefix))
+            if (cameraDevice.PortName != null && cameraDevice.PortName.Substring(0, usbPrefix.Length).Equals(usbPrefix))
             {
                 string vid = "";
                 string pid = "";

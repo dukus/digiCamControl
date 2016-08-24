@@ -567,8 +567,9 @@ namespace CameraControl.Devices
         public override string ToString()
         {
             // return DisplayName;
-
             StringBuilder c = new StringBuilder("\n\nPost shot camera data:\n");
+            try
+            {
             if (PortName != null)
                 c.AppendFormat("Port: {0}\n", PortName);
             c.AppendFormat("    {0}{1}", String.IsNullOrWhiteSpace(Manufacturer) ? "" : "(" + Manufacturer + ") ", DeviceName);
@@ -578,7 +579,7 @@ namespace CameraControl.Devices
             c.AppendFormat("\n\tCapture SDRam.........{0}", CaptureInSdRam ? "Yes" : "No");
             c.AppendFormat("\n\tHost Mode.............{0}", HostMode ? "Yes" : "No");
             c.AppendFormat("\n\tIs Connected..........{0}", IsConnected ? "Yes" : "No");
-            c.AppendFormat("\n\tMode..................{0}, {1} focus", Mode.Value, FocusMode.Value);
+            c.AppendFormat("\n\tMode..................{0}, {1} focus", Mode?.Value, FocusMode?.Value);
             c.AppendFormat("\n\texposure..............{0} f{1} +/-{2}, ISO{3}",
                     ShutterSpeed.Value,
                     FNumber.Value,
@@ -599,6 +600,11 @@ namespace CameraControl.Devices
                 {
                     c.AppendFormat("\n\t  {0,-20}{1}", x.ToString(""), Capabilities.Contains(x) ? "Yes" : "No");
                 }
+            }
+
+            }
+            catch (Exception ex)
+            {
             }
 
             return c.ToString();
