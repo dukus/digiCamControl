@@ -256,6 +256,10 @@ namespace CameraControl.Core.Classes
                                 "/thumb/small/" + Path.GetFileName(item.SmallThumb));
                             tempStr = tempStr.Replace("@image_url@", "/image/" + Path.GetFileName(item.FileName));
                             tempStr = tempStr.Replace("@title@", item.Name);
+                            tempStr = tempStr.Replace("@width@",
+                                item.FileInfo.Width > 0 ? item.FileInfo.Width.ToString() : "3000");
+                            tempStr = tempStr.Replace("@height@",
+                                item.FileInfo.Height > 0 ? item.FileInfo.Height.ToString() : "2000");
                             tempStr = tempStr.Replace("@desc@",
                                 item.FileInfo != null ? (item.FileInfo.InfoLabel ?? "") : "");
                             builder.AppendLine(json?CleanForJson(tempStr):tempStr);

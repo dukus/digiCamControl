@@ -342,12 +342,14 @@ namespace CameraControl.Devices.Sony
                     else
                     {
                         IsBusy = false;
+                        Log.Error("Sony capture error ", exception);
                         throw;
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
                     IsBusy = false;
+                    Log.Error("Sony capture error ", ex);
                     throw;
                 }
             }
@@ -357,6 +359,7 @@ namespace CameraControl.Devices.Sony
                 var url = u;
                 if (url.Contains("?"))
                     url = url.Split('?')[0];
+                Log.Debug("Url to process " + url);
                 PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
                 {
                     WiaImageItem = null,
