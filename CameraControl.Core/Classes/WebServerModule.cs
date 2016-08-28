@@ -229,16 +229,27 @@ namespace CameraControl.Core.Classes
                 {
                     if (Path.GetFileName(fullpath) == "slide.html")
                     {
+                        string file = File.ReadAllText(fullpath);
                         string template= Path.Combine(Settings.WebServerFolder, "template.txt");
+                        string jsontemplate = Path.Combine(Settings.WebServerFolder, "template.json");
+                        bool json = false;
                         if (File.Exists(template))
                         {
                             _lineFormat = File.ReadAllText(template);
                         }
-                        string file = File.ReadAllText(fullpath);
+                        if (File.Exists(jsontemplate))
+                        {
+                            _lineFormat = File.ReadAllText(jsontemplate);
+                            json = true;
+                        }
 
                         StringBuilder builder = new StringBuilder();
                         foreach (FileItem item in ServiceProvider.Settings.DefaultSession.Files)
                         {
+                            if (json && builder.Length>0)
+                            {
+                                builder.AppendLine(",");
+                            }
                             string tempStr = _lineFormat.Replace("@image@",
                                 "/thumb/large/" + Path.GetFileName(item.LargeThumb));
                             tempStr = tempStr.Replace("@image_thumb@",
@@ -247,7 +258,7 @@ namespace CameraControl.Core.Classes
                             tempStr = tempStr.Replace("@title@", item.Name);
                             tempStr = tempStr.Replace("@desc@",
                                 item.FileInfo != null ? (item.FileInfo.InfoLabel ?? "") : "");
-                            builder.AppendLine(tempStr);
+                            builder.AppendLine(json?CleanForJson(tempStr):tempStr);
                         }
 
                         file = file.Replace("@@image_list@@", builder.ToString());
@@ -277,6 +288,65 @@ namespace CameraControl.Core.Classes
                 Log.Error("Web server error", ex);
             }
             return ModuleResult.Continue;
+        }
+
+        private  string CleanForJson(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return "";
+            }
+
+            char c = '\0';
+            int i;
+            int len = s.Length;
+            StringBuilder sb = new StringBuilder(len + 4);
+            String t;
+
+            for (i = 0; i < len; i += 1)
+            {
+                c = s[i];
+                switch (c)
+                {
+                    case '\\':
+                    case '"':
+                        sb.Append('\\');
+                        sb.Append(c);
+                        break;
+                    case '/':
+                        sb.Append('\\');
+                        sb.Append(c);
+                        break;
+                    case '\b':
+                        sb.Append("\\b");
+                        break;
+                    case '\t':
+                        sb.Append("\\t");
+                        break;
+                    case '\n':
+                        //sb.Append("\\n");
+                        sb.Append(c);
+                        break;
+                    case '\f':
+                        sb.Append("\\f");
+                        break;
+                    case '\r':
+                        //sb.Append("\\r");
+                        sb.Append(c);
+                        break;
+                    default:
+                        if (c < ' ')
+                        {
+                            t = "000" + String.Format("X", c);
+                            sb.Append("\\u" + t.Substring(t.Length - 4));
+                        }
+                        else {
+                            sb.Append(c);
+                        }
+                        break;
+                }
+            }
+            return sb.ToString();
         }
 
         private void SendFile(IHttpContext context, string fullpath)

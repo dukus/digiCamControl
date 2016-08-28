@@ -472,9 +472,14 @@ namespace CameraControl.Plugins.ToolPlugins
                 {
                     parameters = @"-r {0} -i {1}\img00%04d.jpg -c:v libx265 -vf fps=25";
                 }
+//                parameters += string.Format("-s {0}x{1}", Width, Height);
                 if (Preview)
                 {
                     parameters += " -vf scale=400:264";
+                }
+                else
+                {
+                    parameters += string.Format(" -vf scale={0}:{1}", Width, Height);
                 }
                 parameters += " {2}";
                 OutPut.Insert(0, "Generating video ..... ");
