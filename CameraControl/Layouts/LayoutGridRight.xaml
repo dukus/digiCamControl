@@ -191,7 +191,7 @@
                         </Rectangle>
                     </Button>
 
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}" CommandParameter="{Binding ElementName=ImageLIstBox}"  Style="{DynamicResource MetroCircleButtonStyle}">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
