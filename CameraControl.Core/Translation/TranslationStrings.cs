@@ -691,5 +691,10 @@ namespace CameraControl.Core.Translation
         public static string LabelReload = "Reload";
         public static string LabelSeriesAsIndex = "Save index as series";
         public static string LabelStackingFinished = "Focus stacking finished";
+
+        // 01/09/2016
+        public static string LabelOpenLightroom = "Open files in Adobe Lightroom";
+        public static string LabelOpenPhotoshop = "Open files in Adobe Photoshop";
+
     }
 }
