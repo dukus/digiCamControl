@@ -38,6 +38,7 @@ using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Newtonsoft.Json;
+using Microsoft.Win32;
 
 #endregion
 
@@ -47,6 +48,8 @@ namespace CameraControl.Core.Classes
     {
         private object _locker = new object();
         private string _lastFilename = null;
+        private const string _keyBase = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths";
+
 
         [JsonIgnore] [XmlIgnore] public List<string> SupportedExtensions = new List<string>
         {
@@ -779,6 +782,117 @@ namespace CameraControl.Core.Classes
                     fileItem.IsChecked = fileItem.IsLiked;
                 }
             }
+        }
+        /// <summary>
+        /// This method uses the System.Diagnostics.ProcessStartInfo to import selected pictures into lightroom
+        /// </summary>
+        public void OpenInLightroom()
+        {
+            System.Diagnostics.ProcessStartInfo lr = new System.Diagnostics.ProcessStartInfo();
+            string path = GetProperLightroomPath( GetPathForExe("Photoshop.exe"));
+            bool noneSelected = false;
+            lr.FileName = path;
+
+            //This is slightly faster than Foreach!
+            for (int i = 0; i < Files.Count; i++)
+                if (Files[i].IsChecked)
+                    lr.Arguments = Path.Combine(Folder, Files[i].Name) + " " + lr.Arguments;
+
+            noneSelected = string.IsNullOrEmpty(lr.Arguments);
+
+            if (noneSelected)
+                lr.Arguments = Folder;
+
+            System.Diagnostics.Process.Start(lr);  
+        }
+
+        /// <summary>
+        /// This method uses the System.Diagnostics.ProcessStartInfo to import selected pictures into Photoshop
+        /// </summary>
+        public void OpenInPhotoshop()
+        {
+            
+            System.Diagnostics.ProcessStartInfo ps = new System.Diagnostics.ProcessStartInfo();
+            string path = GetPathForExe("Photoshop.exe");
+            bool noneSelected = false;
+            ps.FileName = path;
+
+            //This is slightly faster than Foreach!
+            for (int i = 0; i < Files.Count; i++)
+                if (Files[i].IsChecked)
+                    ps.Arguments = Path.Combine(Folder, Files[i].Name) + " " + ps.Arguments;
+
+            noneSelected = string.IsNullOrEmpty(ps.Arguments);
+
+            if (noneSelected)
+            {
+                //TODO: fix this for later.
+                System.Windows.MessageBox.Show("Please Select an image first");
+                return;
+            }
+
+            System.Diagnostics.Process.Start(ps);
+        }
+
+        /// <summary>
+        /// This a helper method to check whether a certain software is installed or not.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAvailable(string applicationName)
+        {
+    
+            string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            bool toReturn = false;
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
+            {
+                foreach (string subkey_name in key.GetSubKeyNames())
+                {
+                    using (RegistryKey subkey = key.OpenSubKey(subkey_name))
+                    {
+
+                        string searchname = (string)subkey.GetValue("DisplayName");
+
+                        if (searchname != null)
+                            if (searchname.ToLower().Contains(applicationName.ToLower()))
+                                toReturn = true;
+                    }
+                }
+            }
+
+            return toReturn;
+        }
+
+        /// <summary>
+        /// This method is to get the path for an application.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private string GetPathForExe(string fileName)
+        {
+            RegistryKey localMachine = Registry.LocalMachine;
+            RegistryKey fileKey = localMachine.OpenSubKey(string.Format(@"{0}\{1}", _keyBase, fileName));
+            object result = null;
+            if (fileKey != null)
+            {
+                result = fileKey.GetValue(string.Empty);
+            }
+            fileKey.Close();
+
+            return (string)result;
+        }
+        /// <summary>
+        /// This gets the proper path to lightroom
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private string GetProperLightroomPath(string path)
+        {
+            string[] thesplit = path.Split(Path.DirectorySeparatorChar);
+            string toReturn = thesplit[0] + Path.DirectorySeparatorChar + thesplit[1] +
+                Path.DirectorySeparatorChar + thesplit[2] +
+                Path.DirectorySeparatorChar + "Adobe Lightroom" +
+                Path.DirectorySeparatorChar + "lightroom.exe";
+            return toReturn;
         }
 
         public void SelectUnLiked()

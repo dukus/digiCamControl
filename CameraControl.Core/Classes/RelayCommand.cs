@@ -89,4 +89,59 @@ namespace CameraControl.Core.Classes
 
         #endregion // ICommand Members
     }
+
+    /// <summary>
+    /// This should be used a placement for the MVVM light toolkit, since MVVM light toolkit does not work properly and is poorly implemented!
+    /// </summary>
+    public class RelayCommandX : ICommand
+    {
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
+
+        /// <summary>
+        /// Initializes a new instance of RelayCommand Class.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="can"></param>
+        public RelayCommandX(Action<object> method, Func<object, bool> can)
+        {
+            this._execute = method;
+            this._canExecute = can;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of RelayCommand class. This is used for CanExecute to be always true.
+        /// </summary>
+        /// <param name="method"></param>
+        public RelayCommandX(Action<object> method) : this(method, null) { }
+
+        /// <summary>
+        /// Determines whether is it possible to execute a command or not. If null it will be true.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        public bool CanExecute(object parameter)
+        {
+            if (this._canExecute == null)
+                return true;
+            else
+                return this._canExecute.Invoke(parameter);
+        }
+
+        /// <summary>
+        /// This executes whatever logic is neccersary to execute.
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void Execute(object parameter)
+        {
+            _execute.Invoke(parameter);
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+    }
+
 }
