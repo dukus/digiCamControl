@@ -12,6 +12,8 @@ namespace CameraControl.Plugins.FilenameTemplate
 {
     public class ExifTemplate : IFilenameTemplate
     {
+        public bool IsRuntime => true;
+
         public string Pharse(string template, PhotoSession session, ICameraDevice device, string fileName, string tempfileName)
         {
             if (!File.Exists(tempfileName))

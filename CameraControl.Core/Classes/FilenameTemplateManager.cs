@@ -85,8 +85,13 @@ namespace CameraControl.Core.Classes
             {
                 if (ServiceProvider.FilenameTemplateManager.Templates.ContainsKey(match.Value))
                 {
+                    IFilenameTemplate template = ServiceProvider.FilenameTemplateManager.Templates[match.Value];
+                    if (template.IsRuntime)
+                    {
+                        continue;
+                    }
                     res = res.Replace(match.Value,
-                        ServiceProvider.FilenameTemplateManager.Templates[match.Value].Pharse(match.Value, session,
+                        template.Pharse(match.Value, session,
                             device, fileName, file));
                 }
             }

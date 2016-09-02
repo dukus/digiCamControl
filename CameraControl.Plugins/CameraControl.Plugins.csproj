@@ -173,6 +173,14 @@
       <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="zxing, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Astro\PHDWnd.xaml.cs">
@@ -245,6 +253,7 @@
     <Compile Include="ExternalDevices\UsbRelayReleaseConfig.xaml.cs">
       <DependentUpon>UsbRelayReleaseConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FilenameTemplate\BarcodeFromImage.cs" />
     <Compile Include="FilenameTemplate\ExifTemplate.cs" />
     <Compile Include="ImageTransformPlugins\BindableTextEditor.cs" />
     <Compile Include="ImageTransformPlugins\Chromakey.cs" />
