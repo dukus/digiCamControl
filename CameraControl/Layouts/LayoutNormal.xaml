@@ -118,7 +118,37 @@
                             </Rectangle>
                         </ToggleButton>
                     </StackPanel>
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
+
+                    <!--   New buttons for selection -->
+                    <Button Height="40" Width="40" Margin="1"  Command="{Binding Path=SelectNoneCommand}" ToolTip="{translation:TranslateExtension LabelSelectNone}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_checkmark_thick_unchecked}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button Margin="1" Height="40" Width="40" Command="{Binding Path=SelectAllCommand}" ToolTip="{translation:TranslateExtension LabelSelectAll}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_checkmark_thick}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+
+                    <!--   New buttons other software! -->
+
+                    <Button Margin="1" Height="40" Width="40" Command="{Binding OpenInLightroomCommand}" 
+                            ToolTip="{translation:TranslateExtension LabelOpenLightroom}" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_adobe_lightroom}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+
+                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}" CommandParameter="{Binding ElementName=ImageLIstBox}"  Style="{DynamicResource MetroCircleButtonStyle}">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
@@ -201,6 +231,10 @@
                         <MenuItem Header="{translation:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
                         <MenuItem Header="{translation:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>
                         <MenuItem Header="{translation:TranslateExtension MenuInver}" Command="{Binding Path=SelectInvertCommand}"/>
+                    </MenuItem>
+                    <MenuItem Header="Edit in" >
+                        <MenuItem Header="Photoshop" Command="{Binding OpenInPhotoshopCommand}"/>
+                        <MenuItem Header="Lightroom" Command="{Binding OpenInLightroomCommand}"/>
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{translation:TranslateExtension LabelDeleteFiles}" Command="{Binding SendCommand}" CommandParameter="Del_Image" />

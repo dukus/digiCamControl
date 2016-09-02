@@ -62,6 +62,8 @@ namespace CameraControl.ViewModel
         public RelayCommand ExportSessionCommand { get; set; }
         public RelayCommand ImportSessionCommand { get; set; }
         public RelayCommand CopyNameClipboardCommand { get; private set; }
+        public RelayCommand OpenInLightroomCommand { get; private set; }
+        public RelayCommand OpenInPhotoshopCommand { get; private set; }
 
         public AsyncObservableCollection<IExportPlugin> ExportPlugins
         {
@@ -153,6 +155,11 @@ namespace CameraControl.ViewModel
             SelectNoneCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectNone(); });
             SelectLiked = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectLiked(); });
             SelectUnLiked = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectUnLiked(); });
+            OpenInLightroomCommand =
+               new RelayCommand(() => ServiceProvider.Settings.DefaultSession.OpenInLightroom(), () => ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom"));
+
+            OpenInPhotoshopCommand =
+                new RelayCommand(OpenInPhotoshop, () => ServiceProvider.Settings.DefaultSession.IsAvailable("Photoshop"));
             SelectInvertCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectInver(); });
             SelectSeries =
                 new RelayCommand(delegate
@@ -508,5 +515,13 @@ namespace CameraControl.ViewModel
             }
         }
 
+        private void OpenInPhotoshop()
+        {
+            //do something fun!
+            ServiceProvider.Settings.DefaultSession.OpenInPhotoshop();
+        }
+
     }
+
+
 }
