@@ -23,7 +23,8 @@ namespace CameraControl.ViewModel
         private bool _zoom12;
         private bool _freeZoom;
         private bool _zoomToFocus;
-
+        private bool _lightroomIsInstalled;
+        private bool _photoshopIsInstalled;
         public bool ZoomFit
         {
             get { return _zoomFit; }
@@ -107,7 +108,7 @@ namespace CameraControl.ViewModel
         public RelayCommand NextImageCommand { get; private set; }
         public RelayCommand PrevImageCommand { get; private set; }
         public RelayCommand OpenExplorerCommand { get; private set; }
-        public RelayCommandX DeleteItemCommand { get; private set; }
+        public RelayCommand DeleteItemCommand { get; private set; }
         public RelayCommand RestoreCommand { get; private set; }
         public RelayCommand ImageDoubleClickCommand { get; private set; }
         public RelayCommand RotateLeftCommand { get; private set; }
@@ -116,8 +117,34 @@ namespace CameraControl.ViewModel
         public RelayCommand SelectNoneCommand { get; private set; }
         public RelayCommand SelectAllCommand { get; private set; }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool LightroomIsInstalled
+        {
+            get
+            {
+                return _lightroomIsInstalled;
+            }
 
+           private set
+            {
+                _lightroomIsInstalled = value;
+            }
+        }
+
+        public bool PhotoshopIsInstalled
+        {
+            get
+            {
+                return _photoshopIsInstalled;
+            }
+
+            private set
+            {
+                _photoshopIsInstalled = value;
+            }
+        }
 
         public LayoutViewModel()
         {
@@ -127,10 +154,12 @@ namespace CameraControl.ViewModel
                 new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image));
 
             OpenExplorerCommand = new RelayCommand(OpenInExplorer);
-            DeleteItemCommand = new RelayCommandX(p => DeleteItem(p), p => canDelete(p));
+            DeleteItemCommand = new RelayCommand(DeleteItem);
             RestoreCommand = new RelayCommand(Restore);
             OpenInLightroomCommand =
                new RelayCommand(() => ServiceProvider.Settings.DefaultSession.OpenInLightroom(), () => ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom"));
+            LightroomIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom");
+            PhotoshopIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Photoshop");
 
             SelectNoneCommand = new RelayCommand(() => ServiceProvider.Settings.DefaultSession.SelectNone());
             SelectAllCommand = new RelayCommand(() => ServiceProvider.Settings.DefaultSession.SelectAll());
@@ -149,23 +178,9 @@ namespace CameraControl.ViewModel
 
         }
 
-        private bool canDelete(object Param)
-        {
-            bool toReturn = true;
-            if (Param == null)
-                return false;
-            ListBox bx = Param as ListBox;
-            AsyncObservableCollection<FileItem> Files = (AsyncObservableCollection<FileItem>)bx.ItemsSource;
+        
 
-            if (Files == null)
-                return false;
-
-            toReturn = Files.FirstOrDefault(p => p.IsChecked) != null;
-
-            return toReturn;
-        }
-
-        private void DeleteItem(object param)
+        private void DeleteItem()
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Del_Image);
         }

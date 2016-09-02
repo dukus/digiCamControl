@@ -789,7 +789,11 @@ namespace CameraControl.Core.Classes
         public void OpenInLightroom()
         {
             System.Diagnostics.ProcessStartInfo lr = new System.Diagnostics.ProcessStartInfo();
-            string path = GetProperLightroomPath( GetPathForExe("Photoshop.exe"));
+            string path = GetProperLightroomPath( GetPathForExe("Phootoshop.exe"));
+            if (string.IsNullOrEmpty(path))
+                //Photoshop may not be installed! Alternative search
+                path = GetProperLightroomPath(GetInstallLocation("Lightroom"));
+
             bool noneSelected = false;
             lr.FileName = path;
 
@@ -863,6 +867,34 @@ namespace CameraControl.Core.Classes
         }
 
         /// <summary>
+        /// This method uses the application name to get the install Location.
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <returns></returns>
+        private string GetInstallLocation(string applicationName)
+        {
+            string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            string toReturn = string.Empty;
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
+            {
+                foreach (string subkey_name in key.GetSubKeyNames())
+                {
+                    using (RegistryKey subkey = key.OpenSubKey(subkey_name))
+                    {
+
+                        string searchname = (string)subkey.GetValue("DisplayName");
+
+                        if (searchname != null)
+                            if (searchname.ToLower().Contains(applicationName.ToLower()))
+                                toReturn = (string)subkey.GetValue("InstallLocation");
+                    }
+                }
+            }
+
+            return toReturn;
+        }
+
+        /// <summary>
         /// This method is to get the path for an application.
         /// </summary>
         /// <param name="fileName"></param>
@@ -870,13 +902,15 @@ namespace CameraControl.Core.Classes
         private string GetPathForExe(string fileName)
         {
             RegistryKey localMachine = Registry.LocalMachine;
-            RegistryKey fileKey = localMachine.OpenSubKey(string.Format(@"{0}\{1}", _keyBase, fileName));
             object result = null;
-            if (fileKey != null)
+            using (RegistryKey fileKey = localMachine.OpenSubKey(string.Format(@"{0}\{1}", _keyBase, fileName)))
             {
-                result = fileKey.GetValue(string.Empty);
+
+                if (fileKey != null)
+                    result = fileKey.GetValue(string.Empty);
+                else
+                    result = string.Empty;
             }
-            fileKey.Close();
 
             return (string)result;
         }
@@ -887,6 +921,9 @@ namespace CameraControl.Core.Classes
         /// <returns></returns>
         private string GetProperLightroomPath(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                return path;
+
             string[] thesplit = path.Split(Path.DirectorySeparatorChar);
             string toReturn = thesplit[0] + Path.DirectorySeparatorChar + thesplit[1] +
                 Path.DirectorySeparatorChar + thesplit[2] +
