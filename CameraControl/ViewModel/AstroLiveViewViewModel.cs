@@ -19,12 +19,14 @@ namespace CameraControl.ViewModel
         private Point _centralPoint;
         private int _zoomFactor;
         private BitmapSource _starWindow;
+        private WriteableBitmap _lastBitmap;
 
         private int Threshold = 400;
         private double StarSizeOld = 0;
         private double K = 10;
         private double _starSize;
         private int _starWindowSize;
+        private int _averageCount;
 
         public AstroLiveViewViewModel(ICameraDevice device, Window window)
             :base(device, window)
@@ -103,6 +105,15 @@ namespace CameraControl.ViewModel
             get { return CameraDevice.LiveViewImageZoomRatio.Value == "All"; }
         }
 
+        public int AverageCount
+        {
+            get { return _averageCount; }
+            set
+            {
+                _averageCount = value;
+                RaisePropertyChanged(() => AverageCount);
+            }
+        }
 
         public void CalculateStarSize(WriteableBitmap bitmap)
         {
@@ -183,6 +194,7 @@ namespace CameraControl.ViewModel
                     }
 
                     var _bitmap = BitmapFactory.ConvertToPbgra32Format(BitmapSourceConvert.ToBitmapSource(res));
+                    AverageImage(_bitmap);
                     DrawGrid(_bitmap);
 
                     if (ZoomFactor > 1)
@@ -205,6 +217,66 @@ namespace CameraControl.ViewModel
             lock (_locker)
             {
                 base.SetFocusPos(x, y);                
+            }
+        }
+
+        private static int ColorstoInt(byte A, byte R, byte G, byte B)
+        {
+            return (int)((A << 24) | (R << 16) | (G << 8) | (B << 0));
+        }
+
+        private System.Windows.Media.Color IntToColor(int num1)
+        {
+            byte a = (byte)(num1 >> 24);
+            int num2 = (int)a;
+            if (num2 == 0)
+                num2 = 1;
+            int num3 = 65280 / num2;
+
+            byte R = (byte)((num1 >> 16 & byte.MaxValue) * num3 >> 8);
+            byte G = (byte)((num1 >> 8 & byte.MaxValue) * num3 >> 8);
+            byte B = (byte)((num1 & byte.MaxValue) * num3 >> 8);
+            return new System.Windows.Media.Color() {A = a, B = B, G = G, R = R};
+        }
+
+        private unsafe void AverageImage(WriteableBitmap bitmap)
+        {
+            if (AverageCount == 0)
+                return;
+            if (_lastBitmap == null || _lastBitmap.PixelWidth != bitmap.PixelWidth ||
+                _lastBitmap.PixelHeight != bitmap.PixelHeight)
+            {
+                _lastBitmap = bitmap.Clone();
+                _lastBitmap.Freeze();
+                return;
+            }
+            try
+            {
+                _lastBitmap = _lastBitmap.Clone();
+                using (BitmapContext lastContext = _lastBitmap.GetBitmapContext())
+                {
+                    using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
+                    {
+                        for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
+                        {
+                            var c = IntToColor(bitmapContext.Pixels[i]);
+                            var oldc = IntToColor(lastContext.Pixels[i]);
+                            c.R = (byte)((c.R + (double)AverageCount * oldc.R) / (AverageCount + 1));
+                            c.G = (byte)((c.G + (double)AverageCount * oldc.G) / (AverageCount + 1));
+                            c.B = (byte)((c.B + (double)AverageCount * oldc.B) / (AverageCount + 1));
+                            //byte grayScale = (byte)((c.R * 0.299) + (c.G * 0.587) + (c.B * 0.114));
+                            bitmapContext.Pixels[i] = ColorstoInt(c.A, c.R, c.G, c.B);
+                            //bitmapContext.Pixels[i] = ColorstoInt(c.A, grayScale, grayScale, grayScale);
+                        }
+                    }
+                }
+
+                _lastBitmap = bitmap.Clone();
+                _lastBitmap.Freeze();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error average image");
             }
         }
 

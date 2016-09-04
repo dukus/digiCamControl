@@ -75,6 +75,8 @@
             <Slider Minimum="1" Maximum="15" Value="{Binding ZoomFactor}" Margin="3"/>
             <Label Content="Star window size" Padding="1"/>
             <Slider Minimum="5" Maximum="45" Value="{Binding StarWindowSize}" Margin="3"/>
+            <Label Content="Average image count" Padding="1"/>
+            <Slider Minimum="0" Maximum="75" Value="{Binding AverageCount}" Margin="3"/>            
             <StackPanel Orientation="Horizontal">
                 <Label Content="{T:TranslateExtension LabelLvZoomRation}" HorizontalAlignment="Right" />
                 <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}"
