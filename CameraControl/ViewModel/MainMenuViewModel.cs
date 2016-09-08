@@ -22,6 +22,8 @@ namespace CameraControl.ViewModel
     public class MainMenuViewModel : ViewModelBase
     {
         ProgressWindow _dlg;
+        private bool _lightroomIsInstalled;
+        private bool _photoshopIsInstalled;
 
         public GalaSoft.MvvmLight.Command.RelayCommand<string> SendCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
@@ -144,6 +146,31 @@ namespace CameraControl.ViewModel
             get { return ServiceProvider.Settings; }
         }
 
+        public bool LightroomIsInstalled
+        {
+            get
+            {
+                return _lightroomIsInstalled;
+            }
+
+           private set
+            {
+                _lightroomIsInstalled = value;
+            }
+        }
+
+        public bool PhotoshopIsInstalled
+        {
+            get
+            {
+                return _photoshopIsInstalled;
+            }
+
+            private set
+            {
+                _photoshopIsInstalled = value;
+            }
+        }
 
         public MainMenuViewModel()
         {
@@ -160,6 +187,8 @@ namespace CameraControl.ViewModel
 
             OpenInPhotoshopCommand =
                 new RelayCommand(OpenInPhotoshop, () => ServiceProvider.Settings.DefaultSession.IsAvailable("Photoshop"));
+            LightroomIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom");
+            PhotoshopIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Photoshop");
             SelectInvertCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectInver(); });
             SelectSeries =
                 new RelayCommand(delegate
