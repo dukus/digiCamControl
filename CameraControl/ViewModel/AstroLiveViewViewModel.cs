@@ -19,7 +19,7 @@ namespace CameraControl.ViewModel
         private Point _centralPoint;
         private int _zoomFactor;
         private BitmapSource _starWindow;
-        private WriteableBitmap _lastBitmap;
+        private System.Windows.Media.Color[] _lastBitmap;
 
         private int Threshold = 400;
         private double StarSizeOld = 0;
@@ -243,36 +243,36 @@ namespace CameraControl.ViewModel
         {
             if (AverageCount == 0)
                 return;
-            if (_lastBitmap == null || _lastBitmap.PixelWidth != bitmap.PixelWidth ||
-                _lastBitmap.PixelHeight != bitmap.PixelHeight)
+            if (_lastBitmap == null ||  bitmap.PixelWidth* bitmap.PixelHeight!=_lastBitmap.Length)
             {
-                _lastBitmap = bitmap.Clone();
-                _lastBitmap.Freeze();
+                _lastBitmap=new System.Windows.Media.Color[bitmap.PixelWidth * bitmap.PixelHeight];
+                using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
+                {
+                    for (var i = 0; i < bitmapContext.Width * bitmapContext.Height; i++)
+                    {
+                        var c = IntToColor(bitmapContext.Pixels[i]);
+                        _lastBitmap[i] = c;
+                    }
+                }
                 return;
             }
             try
             {
-                _lastBitmap = _lastBitmap.Clone();
-                using (BitmapContext lastContext = _lastBitmap.GetBitmapContext())
+                using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
                 {
-                    using (BitmapContext bitmapContext = bitmap.GetBitmapContext())
+                    for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
                     {
-                        for (var i = 0; i < bitmapContext.Width*bitmapContext.Height; i++)
-                        {
-                            var c = IntToColor(bitmapContext.Pixels[i]);
-                            var oldc = IntToColor(lastContext.Pixels[i]);
-                            c.R = (byte)((c.R + (double)AverageCount * oldc.R) / (AverageCount + 1));
-                            c.G = (byte)((c.G + (double)AverageCount * oldc.G) / (AverageCount + 1));
-                            c.B = (byte)((c.B + (double)AverageCount * oldc.B) / (AverageCount + 1));
-                            //byte grayScale = (byte)((c.R * 0.299) + (c.G * 0.587) + (c.B * 0.114));
-                            bitmapContext.Pixels[i] = ColorstoInt(c.A, c.R, c.G, c.B);
-                            //bitmapContext.Pixels[i] = ColorstoInt(c.A, grayScale, grayScale, grayScale);
-                        }
+                        var c = IntToColor(bitmapContext.Pixels[i]);
+                        var oldc = _lastBitmap[i];
+                        c.R = (byte) ((c.R + (double) AverageCount*oldc.R)/(AverageCount + 1));
+                        c.G = (byte) ((c.G + (double) AverageCount*oldc.G)/(AverageCount + 1));
+                        c.B = (byte) ((c.B + (double) AverageCount*oldc.B)/(AverageCount + 1));
+                        //byte grayScale = (byte)((c.R * 0.299) + (c.G * 0.587) + (c.B * 0.114));
+                        bitmapContext.Pixels[i] = ColorstoInt(c.A, c.R, c.G, c.B);
+                        _lastBitmap[i] = c;
+                        //bitmapContext.Pixels[i] = ColorstoInt(c.A, grayScale, grayScale, grayScale);
                     }
                 }
-
-                _lastBitmap = bitmap.Clone();
-                _lastBitmap.Freeze();
             }
             catch (Exception ex)
             {
