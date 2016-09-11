@@ -26,7 +26,7 @@ namespace CameraControl.ViewModel
         private double K = 10;
         private double _starSize;
         private int _starWindowSize;
-        private int _averageCount;
+        private double _averageCount;
 
         public AstroLiveViewViewModel(ICameraDevice device, Window window)
             :base(device, window)
@@ -105,7 +105,7 @@ namespace CameraControl.ViewModel
             get { return CameraDevice.LiveViewImageZoomRatio.Value == "All"; }
         }
 
-        public int AverageCount
+        public double AverageCount
         {
             get { return _averageCount; }
             set
