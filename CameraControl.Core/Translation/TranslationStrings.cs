@@ -695,6 +695,7 @@ namespace CameraControl.Core.Translation
         // 01/09/2016
         public static string LabelOpenLightroom = "Open files in Adobe Lightroom";
         public static string LabelOpenPhotoshop = "Open files in Adobe Photoshop";
+        public static string LabelPasswordOnClose = "Ask password on close";
 
     }
 }

@@ -209,7 +209,11 @@
                     <CheckBox Grid.Row="7" Grid.Column="1" Margin="3" IsChecked="{Binding FullScreenInSecondaryMonitor}"/>
 
                     <Label Grid.Row="8" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelShowFullscreenControls}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                    <CheckBox Grid.Row="8" Grid.Column="1" Margin="3" IsChecked="{Binding ShowFullscreenControls}"/>                    
+                    <CheckBox Grid.Row="8" Grid.Column="1" Margin="3" IsChecked="{Binding ShowFullscreenControls}"/>
+
+                    <Label Grid.Row="9" Grid.Column="0" Margin="3" Content="{T:TranslateExtension LabelPasswordOnClose}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <TextBox Grid.Row="9" Grid.Column="1" Margin="3" Text="{Binding FullScreenPassword}"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelTriggers}">

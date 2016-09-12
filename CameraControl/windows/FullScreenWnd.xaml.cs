@@ -46,6 +46,7 @@ using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
+using MahApps.Metro.Controls.Dialogs;
 
 #endregion
 
@@ -112,8 +113,8 @@ namespace CameraControl.windows
                                                           {
                                                               Show();
                                                               Activate();
-                                                              Topmost = true;
-                                                              Topmost = false;
+                                                              //Topmost = true;
+                                                              //Topmost = false;
                                                               Focus();
                                                               if (ServiceProvider.Settings.FullScreenInSecondaryMonitor)
                                                               {
@@ -191,12 +192,24 @@ namespace CameraControl.windows
 
         #endregion
 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (IsVisible)
             {
                 e.Cancel = true;
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
+                if (!string.IsNullOrEmpty(ServiceProvider.Settings.FullScreenPassword))
+                {
+                    LoginDialogData result = await this.ShowLoginAsync("Closing fullscreen ...", "Enter your password", new LoginDialogSettings { ColorScheme = this.MetroDialogOptions.ColorScheme, ShouldHideUsername = true, AffirmativeButtonText = "Close" });
+                    if (result != null)
+                    {
+                        if(result.Password== ServiceProvider.Settings.FullScreenPassword)
+                            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
+                    }
+                }
+                else
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
+                }
             }
         }
 

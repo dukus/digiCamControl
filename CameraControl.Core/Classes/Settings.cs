@@ -358,6 +358,17 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string FullScreenPassword
+        {
+            get { return _fullScreenPassword; }
+            set
+            {
+                _fullScreenPassword = value;
+                NotifyPropertyChanged("FullScreenPassword");
+            }
+        }
+
+
         public bool ShowFullscreenControls
         {
             get { return _hideFullscreenControls; }
@@ -771,6 +782,7 @@ namespace CameraControl.Core.Classes
         private bool _hideFullscreenControls;
         private bool _hideTrayNotifications;
         private bool _disableHardwareAcceleration;
+        private string _fullScreenPassword;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets

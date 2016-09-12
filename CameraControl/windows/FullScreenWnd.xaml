@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:CameraControl.Controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" ShowIconOnTitleBar="False" ShowTitleBar="False"
                        xmlns:Controls1="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Title="FullScreenWnd" Height="460" Width="472" WindowStyle="None" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" Topmost="True" ShowMinButton="False" ShowMaxRestoreButton="False" ShowInTaskbar="False" IgnoreTaskbarOnMaximize="True" PreviewKeyDown="MetroWindow_PreviewKeyDown">
+                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Title="FullScreenWnd" Height="460" Width="472" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize" IgnoreTaskbarOnMaximize="True" IsMaxRestoreButtonEnabled="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
