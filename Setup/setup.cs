@@ -12,6 +12,7 @@ using WixSharp;
 using WixSharp.Bootstrapper;
 using WixSharp.CommonTasks;
 using File = WixSharp.File;
+using CameraControl.Core.Translation;
 
 namespace Setup
 {
@@ -204,8 +205,20 @@ namespace Setup
             bootstrapper.OutFileName = project.OutFileName;
             
             bootstrapper.Build();
+           // SaveLang();
         }
 
+        private static void SaveLang()
+        {
+            var s = System.IO.File.CreateText("lang.txt");
+            foreach (var lang in TranslationManager.Strings)
+            {
+                Console.WriteLine(string.Format("    <string name=\"{0}\">{1}</string>", lang.Key, lang.Value));
+                s.WriteLine(string.Format("    <string name=\"{0}\">{1}</string>", lang.Key, lang.Value));
+            }
+            s.Flush();
+            s.Close();
+        }
     }
 
     public class CustomActions

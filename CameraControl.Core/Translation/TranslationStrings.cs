@@ -119,12 +119,9 @@ namespace CameraControl.Core.Translation
         public static string LabelFolder = "Folder ";
         public static string LabelFileNameTemplate = "File Name Template ";
 
-        public static string LabelFileNameTemplateToolTip =
-            "$N - Session name &#xa;$C - Counter &#xa;$E - Exposure comp &#xa;$X - Camera name&#xa;$D - Current date&#xa;$UTime - Unix time stamp&#xa;$Type - Type of file (Raw|Jpg) &#xa;$B - Barcode&#xa;$Tag1 - Selected tag 1&#xa;$Tag2 - Selected tag 2&#xa;$Tag3 - Selected tag 3&#xa;$Tag4 - Selected tag 4";
-
         public static string LabelCounter = "Counter";
         public static string LabelUseOriginal = "Use original filename given by the camera";
-        public static string LabelUseOriginalToolTip = "This option isn't works with WIA driver";
+        public static string LabelUseOriginalToolTip = "This option doesn’t work with WIA drivers";
         public static string LabelDontDownloadPhotos = "Don't download photos to PC";
         public static string LabelAlowFolderChange = "Allow folder change using image browser";
         public static string LabelTags = "Tags";
@@ -191,20 +188,20 @@ namespace CameraControl.Core.Translation
         public static string LabelImageAlignmentRightBottom = "Right/Bottom";
         public static string LabelVideoCodecProblem = "Video codec problem";
 
-        public static string MsgPhotoTransferBegin = "Photo transfer begin";
+        public static string MsgPhotoTransferBegin = "Photo transfer begins";
         public static string MsgPhotoTransferDone = "Photo transfer done";
         public static string MsgPhotoTransferError = "Transfer error !\nMessage {0}";
         public static string MsgBulbModeNotSupported = "Bulb mode not supported !";
         public static string MsgApplicationUpToDate = "Your application is up to date !";
         public static string MsgUseSessionEditorTags = "Use session editor to define tags !";
         public static string MsgLastSessionCantBeDeleted = "Last session can't be deleted";
-        public static string MsgStopTimeLapse = "The time lapse not finished! Do you want to stop the time lapse ?";
+        public static string MsgStopTimeLapse = "The time lapse has not finished! Do you want to stop the time lapse ?";
 
         public static string MsgInstallXvidCodec =
             "Xvid codec not installed !\nDo you want to download and install it ? ";
 
         public static string MsgDeleteSessionQuestion =
-            "Do you want continue to deleting session {0} ?\nNo files will be deleted !";
+            "Do you want to continue to delete the session {0} ?\nNo files will be deleted !";
 
         public static string MsgBracketingDone = "Bracketing done";
         public static string MsgActionInProgress = "Action in progress {0}/{1}";
@@ -261,23 +258,23 @@ namespace CameraControl.Core.Translation
         // 07/11/2012
         public static string ButtonGetRawCodec = "Get raw codec";
         // 08/11/2012
-        public static string LabelErrorRecordMovie = "Error start video recording";
+        public static string LabelErrorRecordMovie = "Error when starting video recording";
         public static string LabelNoCardInserted = "No card inserted";
         public static string LabelCardError = "Card Error";
         public static string LabelCardNotFormatted = "Card not formatted";
-        public static string LabelNoFreeAreaInCard = "No free area in the card";
+        public static string LabelNoFreeAreaInCard = "No free storage space left on the card";
 
         public static string LabelCardBufferNotEmpty =
-            "There is data whose recording destination is a card in the buffer.";
+            "The buffer still contains data to be stored to the card.";
 
         public static string LabelPcBufferNotEmpty =
-            "There is data whose recording destination is the PC in the buffer.";
+            "The buffer still contains data to be transferred to the PC.";
 
         public static string LabelBufferNotEmpty = "There is video data in the buffer. ";
         public static string LabelRecordInProgres = "During video file recording";
         public static string LabelCardProtected = "Card protected";
         public static string LabelDuringEnlargedDisplayLiveView = "During enlarged display of Live view";
-        public static string LabelWrongLiveViewType = "The set live view selector is the live view photography.";
+        public static string LabelWrongLiveViewType = "The live view selector is set to live view photography.";
         public static string LabelNotInApplicationMode = "The camera is not in the application mode.";
         public static string ButtonResetSettings = "Reset settings";
         // 14/11/2012
@@ -295,8 +292,8 @@ namespace CameraControl.Core.Translation
         public static string LabelDeleteFilesAfterTransfer = "Delete files after transfer";
         public static string LabelAskForDelete = "Transferred files will be deleted.\nDo you want to continue ?";
         // 26/11/2012
-        public static string LabelErrorSetFocusPos = "Error set focus position";
-        public static string LabelErrorUnableFocus = "Unable focus";
+        public static string LabelErrorSetFocusPos = "Error when setting focus position";
+        public static string LabelErrorUnableFocus = "Unable to focus";
         // 28/11/2012
         public static string LabelErrorLoadingFileList = "Error loading file list";
         // 30/11/2012
@@ -305,7 +302,7 @@ namespace CameraControl.Core.Translation
         public static string LabelTransferItem2 = "2.Save to camera only";
         public static string LabelTransferItem3 = "3.Save to PC and camera";
         // 05/12/2012
-        public static string MsgDisabledDrivers = "Native drivers are disabled ! Do you want to enable it ?";
+        public static string MsgDisabledDrivers = "Native drivers are disabled! Do you want to enable them?";
         // 14/12/2012
         public static string LabelShowFocusPoints = "Show focus points";
         public static string LabelMainWindow = "Main window";
@@ -316,7 +313,6 @@ namespace CameraControl.Core.Translation
         public static string LabelRotate90 = "Rotate 90";
         public static string LabelRotate180 = "Rotate 180";
         public static string LabelRotate270 = "Rotate 270";
-        public static string LabelLowMemoryUsage = "Low memory usage";
         // 04/01/2013
         public static string LabelRawCodecNotInstalled = "Raw codec not installed or unknown file format";
         // 05/01/2013
@@ -330,12 +326,12 @@ namespace CameraControl.Core.Translation
         public static string LabelUseParellelTransfer = "Use parallel file transfer";
         // 19/01/2013
         public static string LabelUnHandledError =
-            "An application error occurred.\nPlease check whether your data is correct and repeat the action. If this error occurs again there seems to be a more serious malfunction in the application, and you better close it.\n\nError{0}\n\nDo you want to continue?\n(if you click Yes you will continue with your work, if you click No the application will close)";
+            "An application error occurred.\nPlease check whether your data is correct and repeat the action. If this message appears again, this indicates a serious malfunction in the application, so we advise you to close it.\n\nError:{0}\n\nDo you want to continue?\n(if you click Yes, you will continue with your work, if you click No, the application will close)";
 
         public static string LabelApplicationError = "Application Error";
         public static string LabelWiaNotInstalled = "WIA 2.0 not installed";
         public static string LabelRestartTheApplication = "Restart the application !";
-        public static string LabelOutOfMemory = "The application run out of memory. Application will shutdown! ";
+        public static string LabelOutOfMemory = "The application ran out of memory and will shut down!";
         public static string LabelApplicationAlreadyRunning = "Application already running";
         public static string LabelDeleteSession = "Delete session";
         public static string LabelStartCapture = "Start Capture";
@@ -372,11 +368,11 @@ namespace CameraControl.Core.Translation
         public static string LabelImageInRAM = "There is an image whose recording destination is SDRAM.";
 
         public static string LabelNoCardInsertedError =
-            "The recording destination is the card or the card & SDRAM,\n and the card is not inserted with the release disabled without a card.";
+            "The recording destination is the card or the card and SDRAM,\n and the card is not inserted with the release disabled without a card.";
 
         public static string LabelCommandProcesingError = "During processing by the shooting command";
         public static string LabelShoutingInProgress = "The shooting mode is EFFECTS.";
-        public static string LabelOverHeatedError = "The Live view cannot be started when the temperature rises.";
+        public static string LabelOverHeatedError = "Live view cannot be started because the camera sensor temperature is too high.";
         public static string LabelCardProtectedError = "Card protected";
 
         public static string LabelMirrorUpError =
@@ -418,7 +414,7 @@ namespace CameraControl.Core.Translation
         public static string LabelSet = "Set";
         public static string LabelTagSelector = "Tag selector";
         public static string LabelComment = "Comment";
-        public static string LabelWriteComments = "Write comments/tags in downloaded image file";
+        public static string LabelWriteComments = "Write comments/tags to downloaded image file";
         public static string LabelStayOnTop2 = "Stay on top";
         public static string LabelWriteSelectedTags = "Write tags from tag selector";
         public static string LabelClearCache = "Clear cache";
@@ -431,7 +427,7 @@ namespace CameraControl.Core.Translation
         public static string LabelCurrentEvent = "Current event";
         public static string LabelRemainingCaptures = "Captures left";
         public static string LabelLiveViewRotation = "Live view rotation";
-        public static string LabelAutomaticallyGuiding = "Automatically PHD Guiding after photo captured";
+        public static string LabelAutomaticallyGuiding = "Automatic PHD Guiding after photo capture";
         public static string LabelAutoRotate = "Auto rotate";
         public static string LabelReset = "Reset";
         public static string LabelFocus = "Focus";
@@ -439,14 +435,14 @@ namespace CameraControl.Core.Translation
         public static string LabelAddFakeCamera = "Add a fake camera";
         public static string LabelBarcode = "Barcode";
         public static string LabelSendTheLogFile = "Send the log file";
-        public static string LabelAskSendLogFile = "Do you want to send log file to developers ?";
-        public static string LabelSyncCameraDate = "Sync camera date time on camera connect";
+        public static string LabelAskSendLogFile = "Do you want to send the log file to the developers?";
+        public static string LabelSyncCameraDate = "Sync camera date/time on camera connect";
         public static string LabelShowThumbUpDown = "Show thumb up/down buttons";
         public static string LabelSend = "Send";
         public static string LabelLogMessage = "Message to the developers of digiCamControl ";
 
         public static string LabelLogText =
-            "The log file will be send to the digiCamcontrol developer team for improve application stability.";
+            "The log file will be sent to the digiCamcontrol developer team for improved application stability.";
 
         public static string LabelFullscreen = "Full screen";
         public static string LabelSelection = "Selection";
@@ -470,7 +466,7 @@ namespace CameraControl.Core.Translation
         public static string LabelMetadata = "Metadata";
         public static string LabelFullSize = "Full size image";
         public static string LabelWifi = "Connect with DSLRDASHBOARDSERVER";
-        public static string ButtonRecordStopMovie = "Stop record video";
+        public static string ButtonRecordStopMovie = "Stop video recording";
         public static string LabelOverlay = "Overlay";
         public static string LabelGenerateThumbs = "Generate Thumbnails";
         public static string LabelPlay = "Play";
@@ -486,7 +482,7 @@ namespace CameraControl.Core.Translation
         public static string LabelBackUp = "Backup photos";
         public static string LabelVerifyPreset = "Verify preset";
         public static string LabelRefreshSession = "Refresh file list";
-        public static string LabelErrorEmail = "Your email address (if you want get feedback)";
+        public static string LabelErrorEmail = "Your email address (if you want to get feedback)";
         public static string LabelApertureBracketing = "Aperture bracketing ";
         //20/08/2014
         public static string LabelCaptureName = "Capture Name";
@@ -514,12 +510,12 @@ namespace CameraControl.Core.Translation
         public static string LabelMoveSmallToInfinity = "Move small step to infinity";
         public static string LabelMoveMediumToInfinity = "Move medium step to infinity";
         public static string LabelMoveLargeToInfinity = "Move large step to infinity";
-        public static string LabelDistantFromPoints = "Distance between the nearest and farthest locked in focus points";
+        public static string LabelDistantFromPoints = "Distance between nearest and farthest locked focus points";
         public static string LabelFocusStackingSimple = "Focus Stacking Simple";
         public static string LabelFocusStackingAdvanced = "Focus Stacking Advanced";
         public static string LabelErrorFarPoit = "First set the farthest focus point";
         public static string LabelErrorAutoFocusLock = "The focus is locked, unlock first to autofocus";
-        public static string LabelErrorSimpleStackingFocusLock = "The focus is locked, simple focus stacking no required focus lock, unlock first to start";
+        public static string LabelErrorSimpleStackingFocusLock = "The focus is locked. Simple focus stacking does not require focus lock, unlock it first to start.";
         public static string LabelLowerCaseExtension = "Lower case extension";
         public static string LabelOverlayTransparency = "Transparency";
         public static string LabelOverlayUseLastCaptured = "Use last captured";
@@ -532,7 +528,7 @@ namespace CameraControl.Core.Translation
         public static string LabelAddPlugin = "Add plugin";
         public static string LabelErrorSetFolder = "Error set folder";
         public static string LabelDetectArea = "Detect only in ruler area";
-        public static string LabelMessagesLog = "Messages log";
+        public static string LabelMessagesLog = "Message log";
         public static string LabelRefreshCameraList = "Refresh camera list";
         public static string LabelSortOrder = "Sort order";
         public static string LabelSaveOrder = "Save sort order";
@@ -545,11 +541,11 @@ namespace CameraControl.Core.Translation
         public static string LabelRotate = "Rotate";
         public static string LabelRepeatImages = "Repeat images";
         public static string LabelWaitBetweenSteps = "Wait between steps (ms)";
-        public static string LabelShowSecondary  = "Show in secondary monitor";
+        public static string LabelShowSecondary  = "Show on secondary monitor";
         // 20/12/2014
         public static string LabelKeyboardTrigger = "Keyboard trigger";
         public static string LabelNoProccesing = "No procesing";
-        public static string LabelNoProccesingTooltip = "Most of functionality are disabled";
+        public static string LabelNoProccesingTooltip = "Most of the functionality is disabled";
         public static string LabelSendUsage = "Automatically send usage statistics";
         public static string LabelSheduleStart = "Start schedule";
         public static string LabelSheduleStop = "Stop schedule";
@@ -573,7 +569,7 @@ namespace CameraControl.Core.Translation
         public static string LabelTimeLapseStopPhotoCount = "After capture count";
         public static string LabelTimeLapseWaitBetweenCaptures = "Time to wait between captures (sec)";
         public static string LabelTimeLapseCapture = "Capture with selected camera";
-        public static string LabelTimeLapseCaptureAll = "Capture with all camera";
+        public static string LabelTimeLapseCaptureAll = "Capture with all cameras";
         public static string LabelTimeLapseCaptureScript = "Execute script";
         public static string LabelTimeLapseScriptFile = "Script file";
         public static string LabelBrowse = "Browse";
@@ -638,7 +634,7 @@ namespace CameraControl.Core.Translation
         public static string LabelNoHighValueError = "No high value is set";
         public static string LabelWrongValue = "Wrong low or high value";
         public static string LabelWrongFNumber = "Aperture cannot be modified";
-        public static string LabelBracketingMMode = "Set camera in M mode";
+        public static string LabelBracketingMMode = "Set camera to M mode";
         public static string LabelTimeLapseCaptureBracketing = "Capture with bracketing";
         public static string LabelZoomToFocus = "Always zoom to first focus point";
         public static string LabelPreviewFullSize = "Preview full size photo";
@@ -655,7 +651,7 @@ namespace CameraControl.Core.Translation
         // 19/10/2015
         public static string LabelApplyToImage = "Apply to selected image";
         public static string LabelCaptureCount = "Capture Count";
-        public static string LabelAutoFocusBeforCapture = "Autofocus befor capture";
+        public static string LabelAutoFocusBeforCapture = "Autofocus before capture";
         public static string LabelEnhancedThumbs = "Enhanced Thumbs";
         public static string LabelAskSavePath = "Ask for captured file path";
         public static string LabelSaveLiveviewWindow = "Save live view window position";
@@ -684,7 +680,7 @@ namespace CameraControl.Core.Translation
         public static string LabelVideoLength = "Video length";
         public static string LabelRestore = "Restore";
         public static string LabelTrayMessage = "Application was minimized \n Double click to restore!";
-        public static string LabelExecuteAfterTransfer = "Execute after file transferred";
+        public static string LabelExecuteAfterTransfer = "Execute after file was transferred ";
         public static string LabelInvert = "Invert";
         // 05/07/2016
         public static string LabelClosePreview = "Close Preview";

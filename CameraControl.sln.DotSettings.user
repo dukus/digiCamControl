@@ -6,6 +6,7 @@
 	
 	
 	
+	
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="d:\devel\vs2010\CameraControl\packages\ImageLibrary.2.0.5\lib\net45\Kaliko.ImageLibrary.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>

@@ -21,3 +21,4 @@ _ReSharper.CameraControl.ServerTest
 /Setup/*.exe
 /.vs/CameraControl/v14
 *.suo
+/Setup/lang.txt
