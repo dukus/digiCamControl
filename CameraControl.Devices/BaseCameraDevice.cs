@@ -128,9 +128,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _fNumber;
+        private PropertyValue<long> _fNumber;
 
-        public virtual PropertyValue<int> FNumber
+        public virtual PropertyValue<long> FNumber
         {
             get { return _fNumber; }
             set

@@ -127,7 +127,7 @@ namespace CameraControl.Devices.Sony
 
         private void InitFNumber()
         {
-            FNumber = new PropertyValue<int>();
+            FNumber = new PropertyValue<long>();
             var prop = FNumber;
             var cap = AsCapability<string>(Post(CreateJson("getAvailableFNumber")));
             SetCapability(prop, cap);

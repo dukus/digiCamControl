@@ -463,7 +463,7 @@ namespace CameraControl.Devices.Others
 
         public WiaCameraDevice()
         {
-            FNumber = new PropertyValue<int>();
+            FNumber = new PropertyValue<long>();
             FNumber.ValueChanged += FNumber_ValueChanged;
             IsoNumber = new PropertyValue<long>();
             IsoNumber.ValueChanged += IsoNumber_ValueChanged;
@@ -598,7 +598,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void FNumber_ValueChanged(object sender, string key, int val)
+        private void FNumber_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

@@ -15,7 +15,7 @@ namespace CameraControl.Devices.Nikon
             Properties.Add(InitFocalLength());
             ExposureCompensation = new PropertyValue<int> {Available = false};
             ExposureMeteringMode = new PropertyValue<int> {Available = false};
-            FNumber = new PropertyValue<int> {Available = false};
+            FNumber = new PropertyValue<long> {Available = false};
             IsoNumber = new PropertyValue<long> {Available = false};
             CompressionSetting = new PropertyValue<int> {Available = false};
             Mode = new PropertyValue<uint>() {Available = false};

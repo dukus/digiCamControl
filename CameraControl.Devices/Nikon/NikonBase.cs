@@ -303,8 +303,8 @@ namespace CameraControl.Devices.Nikon
         public PropertyValue<long> LiveViewFocusMode { get; set; }
         public PropertyValue<long> NormalFocusMode { get; set; }
 
-        public PropertyValue<int> NormalFNumber { get; set; }
-        public PropertyValue<int> MovieFNumber { get; set; }
+        public PropertyValue<long> NormalFNumber { get; set; }
+        public PropertyValue<long> MovieFNumber { get; set; }
 
         public PropertyValue<long> NormalIsoNumber { get; set; }
         public PropertyValue<long> MovieIsoNumber { get; set; }
@@ -1388,24 +1388,26 @@ namespace CameraControl.Devices.Nikon
 
         protected virtual void InitFNumber()
         {
-            NormalFNumber = new PropertyValue<int> {IsEnabled = true, Name = "FNumber"};
+            NormalFNumber = new PropertyValue<long> {IsEnabled = true, Name = "FNumber"};
             NormalFNumber.ValueChanged += NormalFNumber_ValueChanged;
-            MovieFNumber = new PropertyValue<int> { IsEnabled = true, Name = "FNumber" };
+            NormalFNumber.SubType = typeof (int);
+            MovieFNumber = new PropertyValue<long> { IsEnabled = true, Name = "FNumber" };
             MovieFNumber.ValueChanged += MovieFNumber_ValueChanged;
+            MovieFNumber.SubType = typeof(int);
             ReInitFNumber(false);
         }
 
-        private void MovieFNumber_ValueChanged(object sender, string key, int val)
+        private void MovieFNumber_ValueChanged(object sender, string key, long val)
         {
             if (Mode != null && (Mode.Value == "A" || Mode.Value == "M"))
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((int)val),
                             CONST_PROP_MovieFnumber);
         }
 
-        private void NormalFNumber_ValueChanged(object sender, string key, int val)
+        private void NormalFNumber_ValueChanged(object sender, string key, long val)
         {
             if (Mode != null && (Mode.Value == "A" || Mode.Value == "M"))
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((int)val),
                             CONST_PROP_Fnumber);
         }
 

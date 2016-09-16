@@ -69,7 +69,7 @@ namespace CameraControl.Devices.Others
             ExposureStatus = 1;
             ExposureCompensation = new PropertyValue<int>() {IsEnabled = false};
             Mode = new PropertyValue<uint> {IsEnabled = false};
-            FNumber = new PropertyValue<int> {IsEnabled = false};
+            FNumber = new PropertyValue<long> {IsEnabled = false};
             ShutterSpeed = new PropertyValue<long> {IsEnabled = false};
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
             FocusMode = new PropertyValue<long> {IsEnabled = false};

@@ -743,12 +743,12 @@ namespace CameraControl.Devices.Canon
 
         private void InitFNumber()
         {
-            FNumber = new PropertyValue<int> {IsEnabled = true, Name = "FNumber"};
+            FNumber = new PropertyValue<long> {IsEnabled = true, Name = "FNumber"};
             FNumber.ValueChanged += FNumber_ValueChanged;
             ReInitFNumber(true);
         }
 
-        private void FNumber_ValueChanged(object sender, string key, int val)
+        private void FNumber_ValueChanged(object sender, string key, long val)
         {
             try
             {

@@ -58,7 +58,7 @@ namespace CameraControl.Devices
 
         bool HostMode { get; set; }
 
-        PropertyValue<int> FNumber { get; set; }
+        PropertyValue<long> FNumber { get; set; }
         PropertyValue<long> IsoNumber { get; set; }
         PropertyValue<long> ShutterSpeed { get; set; }
         PropertyValue<long> WhiteBalance { get; set; }

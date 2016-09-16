@@ -68,7 +68,7 @@ namespace CameraControl.Devices.Others
             try
             {
                 IsoNumber = new PropertyValue<long> {Available = false};
-                FNumber = new PropertyValue<int> {Available = false};
+                FNumber = new PropertyValue<long> {Available = false};
                 ExposureCompensation = new PropertyValue<int> {Available = false};
                 FocusMode = new PropertyValue<long> {Available = false};
                 ShutterSpeed = new PropertyValue<long> {Available = false};
