@@ -323,6 +323,7 @@
       <DependentUpon>Colorpicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wpf\HeaderToImageConverter.cs" />
+    <Compile Include="Wpf\IntToProgressConverter.cs" />
     <Compile Include="Wpf\ItemBackgroundConverter.cs" />
     <Compile Include="Wpf\ListBoxBehavior.cs" />
     <Compile Include="Wpf\MoveThumb.cs" />

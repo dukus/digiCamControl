@@ -97,6 +97,9 @@ namespace CameraControl
 
         private void InitApplication()
         {
+            try
+            {
+
             // prevent some application crash
             //WpfCommands.DisableWpfTabletSupport();
 
@@ -156,6 +159,11 @@ namespace CameraControl
                     _startUpWindow.Close();
             }));
             ServiceProvider.Database.StartEvent(EventType.App);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Fatal error ",ex);
+            }
         }
 
         private void Instance_MetaDataUpdated(object sender, FileItem item)
