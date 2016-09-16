@@ -64,6 +64,7 @@ namespace CameraControl.windows
             InitializeComponent();
             KeyDown += FullScreenWnd_KeyDown;
             _timer.Elapsed += _timer_Elapsed;
+            KeyDown += image1_KeyDown;
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -87,14 +88,14 @@ namespace CameraControl.windows
         {
             if (e.Key == Key.Escape)
             {
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
+                HideWindow();
             }
         }
 
         private void image1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount >= 2 && e.LeftButton == MouseButtonState.Pressed)
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
+                HideWindow();
         }
 
         private void image1_KeyUp(object sender, KeyEventArgs e)
@@ -192,24 +193,31 @@ namespace CameraControl.windows
 
         #endregion
 
-        private async void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private  void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (IsVisible)
             {
                 e.Cancel = true;
-                if (!string.IsNullOrEmpty(ServiceProvider.Settings.FullScreenPassword))
+                HideWindow();
+            }
+        }
+
+        private async void HideWindow()
+        {
+            if (!string.IsNullOrEmpty(ServiceProvider.Settings.FullScreenPassword))
+            {
+                KeyDown -= image1_KeyDown;
+                LoginDialogData result = await this.ShowLoginAsync("Closing fullscreen ...", "Enter your password", new LoginDialogSettings { ColorScheme = this.MetroDialogOptions.ColorScheme, ShouldHideUsername = true, AffirmativeButtonText = "Close" });
+                if (result != null)
                 {
-                    LoginDialogData result = await this.ShowLoginAsync("Closing fullscreen ...", "Enter your password", new LoginDialogSettings { ColorScheme = this.MetroDialogOptions.ColorScheme, ShouldHideUsername = true, AffirmativeButtonText = "Close" });
-                    if (result != null)
-                    {
-                        if(result.Password== ServiceProvider.Settings.FullScreenPassword)
-                            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
-                    }
+                    if (result.Password == ServiceProvider.Settings.FullScreenPassword)
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
                 }
-                else
-                {
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
-                }
+                KeyDown += image1_KeyDown;
+            }
+            else
+            {
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Hide);
             }
         }
 
