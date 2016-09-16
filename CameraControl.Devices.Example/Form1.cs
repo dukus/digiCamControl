@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using CameraControl.Devices.Classes;
+using CameraControl.Devices.Wifi;
 
 namespace CameraControl.Devices.Example
 {
@@ -80,7 +81,7 @@ namespace CameraControl.Devices.Example
                 return;
             try
             {
-                string fileName = Path.Combine(FolderForPhotos, eventArgs.FileName);
+                string fileName = Path.Combine(FolderForPhotos, Path.GetFileName(eventArgs.FileName));
                 // if file exist try to generate a new filename to prevent file lost. 
                 // This useful when camera is set to record in ram the the all file names are same.
                 if (File.Exists(fileName))
@@ -191,7 +192,22 @@ namespace CameraControl.Devices.Example
             form.ShowDialog();
         }
 
-
-
+        private void btn_wifi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                /*
+                // for Nikon wifi use 
+                IWifiDeviceProvider wifiDeviceProvider = new PtpIpProvider();
+                DeviceManager.AddDevice(wifiDeviceProvider.Connect("192.168.1.1"));
+                */
+                IWifiDeviceProvider wifiDeviceProvider = new SonyProvider();
+                DeviceManager.AddDevice(wifiDeviceProvider.Connect("<Auto>"));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Unable to connect to WiFi device " + exception.Message);
+            }
+        }
     }
 }
