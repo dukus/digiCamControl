@@ -465,7 +465,7 @@ namespace CameraControl.Devices.Others
         {
             FNumber = new PropertyValue<int>();
             FNumber.ValueChanged += FNumber_ValueChanged;
-            IsoNumber = new PropertyValue<int>();
+            IsoNumber = new PropertyValue<long>();
             IsoNumber.ValueChanged += IsoNumber_ValueChanged;
             ShutterSpeed = new PropertyValue<long>();
             ShutterSpeed.ValueChanged += ShutterSpeed_ValueChanged;
@@ -584,7 +584,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void IsoNumber_ValueChanged(object sender, string key, int val)
+        private void IsoNumber_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

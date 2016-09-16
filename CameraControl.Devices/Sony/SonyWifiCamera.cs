@@ -118,7 +118,7 @@ namespace CameraControl.Devices.Sony
 
         private void InitIso()
         {
-            IsoNumber=new PropertyValue<int>();
+            IsoNumber=new PropertyValue<long>();
             var prop = IsoNumber;
             var cap = AsCapability<string>(Post(CreateJson("getAvailableIsoSpeedRate")));
             SetCapability(prop, cap);

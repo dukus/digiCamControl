@@ -92,9 +92,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _isoNumber;
+        private PropertyValue<long> _isoNumber;
 
-        public virtual PropertyValue<int> IsoNumber
+        public virtual PropertyValue<long> IsoNumber
         {
             get { return _isoNumber; }
             set

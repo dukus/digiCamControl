@@ -809,12 +809,12 @@ namespace CameraControl.Devices.Canon
 
         private void InitIso()
         {
-            IsoNumber = new PropertyValue<int>();
+            IsoNumber = new PropertyValue<long>();
             IsoNumber.ValueChanged += IsoNumber_ValueChanged;
             ReInitIso();
         }
 
-        private void IsoNumber_ValueChanged(object sender, string key, int val)
+        private void IsoNumber_ValueChanged(object sender, string key, long val)
         {
             try
             {

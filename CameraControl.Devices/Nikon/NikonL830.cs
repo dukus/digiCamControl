@@ -16,7 +16,7 @@ namespace CameraControl.Devices.Nikon
             ExposureCompensation = new PropertyValue<int> {Available = false};
             ExposureMeteringMode = new PropertyValue<int> {Available = false};
             FNumber = new PropertyValue<int> {Available = false};
-            IsoNumber = new PropertyValue<int> {Available = false};
+            IsoNumber = new PropertyValue<long> {Available = false};
             CompressionSetting = new PropertyValue<int> {Available = false};
             Mode = new PropertyValue<uint>() {Available = false};
             ShutterSpeed = new PropertyValue<long>() {Available = false};

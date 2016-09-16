@@ -306,8 +306,8 @@ namespace CameraControl.Devices.Nikon
         public PropertyValue<int> NormalFNumber { get; set; }
         public PropertyValue<int> MovieFNumber { get; set; }
 
-        public PropertyValue<int> NormalIsoNumber { get; set; }
-        public PropertyValue<int> MovieIsoNumber { get; set; }
+        public PropertyValue<long> NormalIsoNumber { get; set; }
+        public PropertyValue<long> MovieIsoNumber { get; set; }
 
         public PropertyValue<long> NormalShutterSpeed { get; set; }
         public PropertyValue<long> MovieShutterSpeed { get; set; }
@@ -1158,8 +1158,9 @@ namespace CameraControl.Devices.Nikon
         {
             lock (Locker)
             {
-                NormalIsoNumber = new PropertyValue<int>();
+                NormalIsoNumber = new PropertyValue<long>();
                 NormalIsoNumber.Name = "IsoNumber";
+                NormalIsoNumber.SubType = typeof (int);
                 NormalIsoNumber.ValueChanged += IsoNumber_ValueChanged;
                 NormalIsoNumber.Clear();
                 try
@@ -1182,8 +1183,9 @@ namespace CameraControl.Devices.Nikon
                     NormalIsoNumber.IsEnabled = false;
                 }
 
-                MovieIsoNumber = new PropertyValue<int>();
+                MovieIsoNumber = new PropertyValue<long>();
                 MovieIsoNumber.Name = "IsoNumber";
+                MovieIsoNumber.SubType = typeof (int);
                 MovieIsoNumber.ValueChanged += MovieIsoNumber_ValueChanged;
                 MovieIsoNumber.Clear();
                 try
@@ -1206,20 +1208,20 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void IsoNumber_ValueChanged(object sender, string key, int val)
+        private void IsoNumber_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((int)val),
                             CONST_PROP_ExposureIndex);
             }
         }
 
-        private void MovieIsoNumber_ValueChanged(object sender, string key, int val)
+        private void MovieIsoNumber_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((int)val),
                             CONST_PROP_MovieExposureIndex);
             }
         }

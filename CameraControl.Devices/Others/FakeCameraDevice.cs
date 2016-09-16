@@ -74,7 +74,7 @@ namespace CameraControl.Devices.Others
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
             FocusMode = new PropertyValue<long> {IsEnabled = false};
             CompressionSetting = new PropertyValue<int> {IsEnabled = false};
-            IsoNumber = new PropertyValue<int> {IsEnabled = true};
+            IsoNumber = new PropertyValue<long> {IsEnabled = true};
             ExposureMeteringMode = new PropertyValue<int> {IsEnabled = false};
             Battery = 100;
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
