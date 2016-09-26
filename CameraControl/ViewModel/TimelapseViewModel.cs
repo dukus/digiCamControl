@@ -11,6 +11,8 @@ using CameraControl.Devices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using Quartz;
+using Quartz.Impl;
 
 namespace CameraControl.ViewModel
 {
@@ -27,6 +29,8 @@ namespace CameraControl.ViewModel
         private bool _fullSpeed;
         private BracketingViewModel _bracketingViewModel = null;
         private double _timeDiff;
+        private ITrigger trigger;
+        private IScheduler sched;
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
 
@@ -732,6 +736,72 @@ namespace CameraControl.ViewModel
 
         public void Start()
         {
+
+            // construct a scheduler factory
+            ISchedulerFactory schedFact = new StdSchedulerFactory();
+
+            // get a scheduler, start the schedular before triggers or anything else
+            if (sched == null)
+            {
+                sched = schedFact.GetScheduler();
+                sched.Start();
+            }
+
+            // create job
+            IJobDetail job = JobBuilder.Create<SimpleJob>()
+                    .WithIdentity("job1", "group1")
+                    .Build();
+
+            // create trigger
+
+            var triggerB = TriggerBuilder.Create()
+                .WithIdentity("trigger1", "group1")
+                .WithSimpleSchedule(x => x.WithIntervalInSeconds(5).RepeatForever());
+
+            if (StartNow)
+            {
+                if (StopAtPhotos)
+                {
+                    triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots));
+                }
+                if (StopIn)
+                {
+                    triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots)).EndAt(DateBuilder.FutureDate((StopHour*60*60)+(StopMinute*60)+ StopSecond,IntervalUnit.Minute));
+                }
+                if (StopAt)
+                {
+                    triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots)).EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond));
+                }
+                if (StartDaily)
+                {
+                }
+            }
+            if (StartIn)
+            {
+                var t = new TimeSpan(StartHour, StartMinute, StartSecond);
+                if ((DateTime.Now - _timeLapseStartTime).TotalSeconds > t.TotalSeconds)
+            }
+            if (StartAt)
+            {
+                if (StartDate < DateTime.Now)
+            }
+            if (StartDaily)
+            {
+                int day = (int)DateTime.Now.DayOfWeek;
+                bool shoulContinue = (StartDay0 && day == 0) || (StartDay1 && day == 1) || (StartDay2 && day == 2) ||
+                                     (StartDay3 && day == 3) || (StartDay4 && day == 4) || (StartDay5 && day == 5) ||
+                                     (StartDay6 && day == 6);
+                var t = new TimeSpan(StartHour, StartMinute, StartSecond);
+                var t1 = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                if (t1 > t && shoulContinue)
+            }
+
+            trigger = triggerB.Build();
+
+
+            // Schedule the job using the job and trigger 
+            sched.ScheduleJob(job, trigger);
+
             if (!IsRunning)
             {
                 StartL();
@@ -772,6 +842,18 @@ namespace CameraControl.ViewModel
             _timer.Stop();
             TimeLapseSettings.Started = false;
             ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
+        }
+    }
+
+    /// <summary>
+    /// SimpleJOb is just a class that implements IJOB interface. It implements just one method, Execute method
+    /// </summary>
+    public class SimpleJob : IJob
+    {
+        void IJob.Execute(IJobExecutionContext context)
+        {
+            //throw new NotImplementedException();
+            Console.WriteLine("Hello, JOb executed");
         }
     }
 }
