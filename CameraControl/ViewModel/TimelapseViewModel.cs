@@ -8,6 +8,7 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.TclScripting;
 using CameraControl.Core.Translation;
 using CameraControl.Devices;
+using Eagle._Containers.Public;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
@@ -519,6 +520,20 @@ namespace CameraControl.ViewModel
         {
             get
             {
+                if (trigger != null)
+                {
+                  
+                    var tempTrigger = sched.GetTrigger(trigger.Key);
+                    var nextFireTimeUtc = tempTrigger?.GetNextFireTimeUtc();
+                    if (nextFireTimeUtc != null)
+                        return "Next capture time " + nextFireTimeUtc.Value.ToLocalTime();
+                    else
+                    {
+                        
+                    }
+                }
+                return "????";
+
                 if (!IsRunning)
                     return "Not running";
                 if (!IsActive)
@@ -591,7 +606,12 @@ namespace CameraControl.ViewModel
 
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            
+            var tempTrigger = sched.GetTrigger(trigger.Key);
+            if (tempTrigger == null)
+                StopL();
+            RaisePropertyChanged(() => StatusText);
+            return;
+
             TimeDiff += (DateTime.Now - _lastTime).TotalMilliseconds - (1000*Resolution);
             _lastTime = DateTime.Now;
 
@@ -601,7 +621,7 @@ namespace CameraControl.ViewModel
                 if (IsActive)
                     _firstLapseStartTime = DateTime.Now;
             }
-            RaisePropertyChanged(() => StatusText);
+            
             if (!IsActive)
                 return;
             if (IsActive)
@@ -737,71 +757,6 @@ namespace CameraControl.ViewModel
         public void Start()
         {
 
-            // construct a scheduler factory
-            ISchedulerFactory schedFact = new StdSchedulerFactory();
-
-            // get a scheduler, start the schedular before triggers or anything else
-            if (sched == null)
-            {
-                sched = schedFact.GetScheduler();
-                sched.Start();
-            }
-
-            // create job
-            IJobDetail job = JobBuilder.Create<SimpleJob>()
-                    .WithIdentity("job1", "group1")
-                    .Build();
-
-            // create trigger
-
-            var triggerB = TriggerBuilder.Create()
-                .WithIdentity("trigger1", "group1")
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(5).RepeatForever());
-
-            if (StartNow)
-            {
-                if (StopAtPhotos)
-                {
-                    triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots));
-                }
-                if (StopIn)
-                {
-                    triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots)).EndAt(DateBuilder.FutureDate((StopHour*60*60)+(StopMinute*60)+ StopSecond,IntervalUnit.Minute));
-                }
-                if (StopAt)
-                {
-                    triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots)).EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond));
-                }
-                if (StartDaily)
-                {
-                }
-            }
-            if (StartIn)
-            {
-                var t = new TimeSpan(StartHour, StartMinute, StartSecond);
-                if ((DateTime.Now - _timeLapseStartTime).TotalSeconds > t.TotalSeconds)
-            }
-            if (StartAt)
-            {
-                if (StartDate < DateTime.Now)
-            }
-            if (StartDaily)
-            {
-                int day = (int)DateTime.Now.DayOfWeek;
-                bool shoulContinue = (StartDay0 && day == 0) || (StartDay1 && day == 1) || (StartDay2 && day == 2) ||
-                                     (StartDay3 && day == 3) || (StartDay4 && day == 4) || (StartDay5 && day == 5) ||
-                                     (StartDay6 && day == 6);
-                var t = new TimeSpan(StartHour, StartMinute, StartSecond);
-                var t1 = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-                if (t1 > t && shoulContinue)
-            }
-
-            trigger = triggerB.Build();
-
-
-            // Schedule the job using the job and trigger 
-            sched.ScheduleJob(job, trigger);
-
             if (!IsRunning)
             {
                 StartL();
@@ -816,6 +771,76 @@ namespace CameraControl.ViewModel
         {
             if (IsRunning)
                 return;
+
+            // construct a scheduler factory
+            ISchedulerFactory schedFact = new StdSchedulerFactory();
+
+            // get a scheduler, start the schedular before triggers or anything else
+            if (sched == null)
+            {
+                sched = schedFact.GetScheduler();
+                sched.Start();
+            }
+
+            // create job
+            IJobDetail job = JobBuilder.Create<SimpleJob>()
+                .WithIdentity("job1", "group1")
+                .Build();
+
+            // create trigger
+
+            var triggerB = TriggerBuilder.Create()
+                .WithIdentity("trigger1", "group1");
+
+            if (StartIn)
+            {
+                triggerB =
+                    triggerB.StartAt(DateBuilder.FutureDate((StartHour*60*60) + (StartMinute*60) + StartSecond,
+                        IntervalUnit.Second));
+
+            }
+            
+            if (StartAt)
+            {
+
+            }
+            if (StartDaily)
+            {
+            }
+
+            
+
+            if (StopAtPhotos)
+            {
+                triggerB =
+                    triggerB.WithSimpleSchedule(
+                        x => x.WithIntervalInSeconds(TimeBetweenShots).WithRepeatCount(StopCaptureCount));
+            }
+            else if (StopIn)
+            {
+                triggerB =
+                    triggerB.WithSimpleSchedule(
+                        x => x.WithIntervalInSeconds(TimeBetweenShots)
+                            .WithRepeatCount(((StopHour*60*60) + (StopMinute*60) + StopSecond)/TimeBetweenShots));
+            }
+            else
+            {
+                triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots));
+            }
+
+            if (StopAt)
+            {
+                triggerB = triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond));
+            }
+            if (StartDaily)
+            {
+            }
+            trigger = triggerB.Build();
+
+
+            // Schedule the job using the job and trigger 
+            sched.ScheduleJob(job, trigger);
+
             if (_bracketingViewModel != null)
                 _bracketingViewModel.Stop();
             _bracketingViewModel = null;
@@ -824,7 +849,7 @@ namespace CameraControl.ViewModel
             _lastCaptureTime = DateTime.Now;
             Log.Debug("Timelapse start");
             _totalCaptures = 0;
-            _timer.Interval = FullSpeed ? 100 : ((1000*Resolution) + FineTune);
+            _timer.Interval = 1000;
             _timer.Start();
             _lastTime = DateTime.Now;
             TimeDiff = 0;
@@ -836,6 +861,10 @@ namespace CameraControl.ViewModel
         {
             if (!IsRunning)
                 return;
+
+            sched.Standby();
+            sched.Clear();
+
             Log.Debug("Timelapse stop");
             IsActive = false;
             IsRunning = false;
