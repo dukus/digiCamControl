@@ -65,7 +65,8 @@ namespace CameraControl.windows
     {
         private bool delete;
         private bool format;
-        private bool saveseries; 
+        private bool saveseries;
+
         private ProgressWindow dlg = new ProgressWindow();
         private Dictionary<ICameraDevice, int> _timeDif = new Dictionary<ICameraDevice, int>();
 
@@ -75,6 +76,16 @@ namespace CameraControl.windows
         private List<DateTime> _timeTable = new List<DateTime>();
 
         public ObservableCollection<DownloadableItems> Groups { get; set; }
+
+        public CollectionView MyView
+        {
+            get { return _myView; }
+            set
+            {
+                _myView = value;
+                NotifyPropertyChanged("MyView");
+            }
+        }
 
         private ICameraDevice _cameraDevice;
 
@@ -89,6 +100,7 @@ namespace CameraControl.windows
         }
 
         private AsyncObservableCollection<FileItem> _items;
+        private CollectionView _myView;
 
         public AsyncObservableCollection<FileItem> Items
         {
@@ -167,7 +179,7 @@ namespace CameraControl.windows
             switch (cmd)
             {
                 case WindowsCmdConsts.DownloadPhotosWnd_Show:
-                    Dispatcher.Invoke(new Action(delegate
+                    Dispatcher.BeginInvoke(new Action(delegate
                                                      {
                                                          if (dlg.IsVisible)
                                                              return;
@@ -192,8 +204,8 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.DownloadPhotosWnd_Hide:
                     Dispatcher.Invoke(new Action(delegate
                     {
-                        FreeResources();
                         Hide();
+                        FreeResources();
                     }));
                     break;
                 case CmdConsts.All_Close:
@@ -210,13 +222,16 @@ namespace CameraControl.windows
 
         private void FreeResources()
         {
-            lst_items_simple.ItemsSource = null;
-            lst_items.ItemsSource = null;
-
+            //lst_items_simple.ItemsSource = null;
+            //lst_items.ItemsSource = null;
+           
             foreach (FileItem fileItem in Items)
             {
+                if (fileItem.ItemType != FileItemType.Missing)
+                    fileItem.Device.ReleaseResurce(fileItem.DeviceObject.Handle);
                 fileItem.Dispose();
             }
+            MyView = null;
             Items.Clear();
             Items = null;
             Items = new AsyncObservableCollection<FileItem>();
@@ -243,6 +258,7 @@ namespace CameraControl.windows
             //bool checkset = false;
             int counter = 0;
             dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+            dlg.Label = "......";
             foreach (ICameraDevice cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
             {
                 counter++;
@@ -294,22 +310,21 @@ namespace CameraControl.windows
                 {
                     Items.Add(fileItem);
                 }
-                CollectionView myView;
-                myView = (CollectionView) CollectionViewSource.GetDefaultView(Items);
-                myView.GroupDescriptions.Clear();
+                //MyView = (CollectionView)CollectionViewSource.GetDefaultView(Items);
+                //MyView.GroupDescriptions.Clear();
 
-                if (myView.CanGroup == true)
-                {
-                    PropertyGroupDescription groupDescription
-                        = new PropertyGroupDescription("Device");
-                    myView.GroupDescriptions.Add(groupDescription);
-                }
+                //if (MyView.CanGroup == true)
+                //{
+                //    PropertyGroupDescription groupDescription
+                //        = new PropertyGroupDescription("Device");
+                //    MyView.GroupDescriptions.Add(groupDescription);
+                //}
 
                 if (ServiceProvider.DeviceManager.ConnectedDevices.Count > 1)
                 {
                     lst_items.Visibility = Visibility.Visible;
                     lst_items_simple.Visibility = Visibility.Collapsed;
-                    lst_items.ItemsSource = myView;
+//                    lst_items.ItemsSource = MyView;
                 }
                 else
                 {
@@ -337,135 +352,147 @@ namespace CameraControl.windows
 
         private void TransferFiles()
         {
-            DateTime starttime = DateTime.Now;
-            long totalbytes = 0;
-            bool somethingwrong = false;
-            AsyncObservableCollection<FileItem> itemstoExport =
-                new AsyncObservableCollection<FileItem>(Items.Where(x => x.IsChecked));
-            dlg.MaxValue = itemstoExport.Count;
-            dlg.Progress = 0;
-            int i = 0;
-            foreach (FileItem fileItem in itemstoExport)
+            try
             {
-                if (fileItem.ItemType == FileItemType.Missing)
-                    continue;
-                if (!fileItem.IsChecked)
-                    continue;
-                dlg.Label = fileItem.FileName;
-                dlg.ImageSource = fileItem.Thumbnail;
 
-                PhotoSession session = (PhotoSession) fileItem.Device.AttachedPhotoSession ??
-                                       ServiceProvider.Settings.DefaultSession;
-                if (saveseries)
-                {
-                    // save series in session, to be used in file name generation 
-                    session.Series = fileItem.Series;
-                }
-
-                string fileName = "";
-
-                if (!session.UseOriginalFilename)
-                {
-                    //TODO: transfer file first
-                    fileName =
-                        session.GetNextFileName(Path.GetExtension(fileItem.FileName),
-                            fileItem.Device, "");
-                }
-                else
-                {
-                    fileName = Path.Combine(session.Folder, fileItem.FileName);
-                    if (File.Exists(fileName))
-                        fileName =
-                            StaticHelper.GetUniqueFilename(
-                                Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) +
-                                "_", 0,
-                                Path.GetExtension(fileName));
-                }
-
-                string dir = Path.GetDirectoryName(fileName);
-                if (dir != null && !Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-                try
-                {
-                    fileItem.Device.TransferFile(fileItem.DeviceObject.Handle, fileName);
-                }
-                catch (Exception exception)
-                {
-                    somethingwrong = true;
-                    Log.Error("Transfer error", exception);
-                }
-
-                // double check if file was transferred
-                if (File.Exists(fileName))
-                {
-                    if (delete)
-                        fileItem.Device.DeleteObject(fileItem.DeviceObject);
-                }
-                else
-                {
-                    somethingwrong = true;
-                }
-                if (!File.Exists(fileName))
-                {
-                    MessageBox.Show("Unable download file. Aborting!");
-                    break;
-                }
-                totalbytes += new FileInfo(fileName).Length;
-                FileItem item1 = fileItem;
-                var serie = fileItem.Series;
-                Dispatcher.Invoke(delegate
-                {
-                    var item = session.AddFile(fileName);
-                    if (saveseries)
-                        item.Series = serie;
-                    item.CameraSerial = item1.Device.SerialNumber;
-                    item.OriginalName = item1.FileName;
-                });
-                i++;
-                dlg.Progress = i;
-            }
-
-            Log.Debug("File transfer done");
-
-            if (format)
-            {
-                dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+                DateTime starttime = DateTime.Now;
+                long totalbytes = 0;
+                bool somethingwrong = false;
+                AsyncObservableCollection<FileItem> itemstoExport =
+                    new AsyncObservableCollection<FileItem>(Items.Where(x => x.IsChecked));
+                dlg.MaxValue = itemstoExport.Count;
                 dlg.Progress = 0;
-                int ii = 0;
-                if (!somethingwrong)
+                int i = 0;
+                foreach (FileItem fileItem in itemstoExport)
                 {
-                    foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+                    if (fileItem.ItemType == FileItemType.Missing)
+                        continue;
+                    if (!fileItem.IsChecked)
+                        continue;
+                    dlg.Label = fileItem.FileName;
+                    dlg.ImageSource = fileItem.Thumbnail;
+
+                    PhotoSession session = (PhotoSession) fileItem.Device.AttachedPhotoSession ??
+                                           ServiceProvider.Settings.DefaultSession;
+                    if (saveseries)
                     {
-                        try
+                        // save series in session, to be used in file name generation 
+                        session.Series = fileItem.Series;
+                    }
+
+                    string fileName = "";
+
+                    if (!session.UseOriginalFilename)
+                    {
+                        //TODO: transfer file first
+                        fileName =
+                            session.GetNextFileName(Path.GetExtension(fileItem.FileName),
+                                fileItem.Device, "");
+                    }
+                    else
+                    {
+                        fileName = Path.Combine(session.Folder, fileItem.FileName);
+                        if (File.Exists(fileName))
+                            fileName =
+                                StaticHelper.GetUniqueFilename(
+                                    Path.GetDirectoryName(fileName) + "\\" + Path.GetFileNameWithoutExtension(fileName) +
+                                    "_", 0,
+                                    Path.GetExtension(fileName));
+                    }
+
+                    string dir = Path.GetDirectoryName(fileName);
+                    if (dir != null && !Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                    try
+                    {
+                        fileItem.Device.TransferFile(fileItem.DeviceObject.Handle, fileName);
+                        fileItem.Device.ReleaseResurce(fileItem.DeviceObject.Handle);
+                        fileItem.Device.TransferProgress = 0;
+                        fileItem.Device.IsBusy = false;
+                    }
+                    catch (Exception exception)
+                    {
+                        somethingwrong = true;
+                        Log.Error("Transfer error", exception);
+                    }
+
+                    // double check if file was transferred
+                    if (File.Exists(fileName))
+                    {
+                        if (delete)
+                            fileItem.Device.DeleteObject(fileItem.DeviceObject);
+                    }
+                    else
+                    {
+                        somethingwrong = true;
+                    }
+                    if (!File.Exists(fileName))
+                    {
+                        MessageBox.Show("Unable download file. Aborting!");
+                        break;
+                    }
+                    totalbytes += new FileInfo(fileName).Length;
+                    FileItem item1 = fileItem;
+                    var serie = fileItem.Series;
+                    Dispatcher.Invoke(delegate
+                    {
+                        var item = session.AddFile(fileName);
+                        if (saveseries)
+                            item.Series = serie;
+                        item.CameraSerial = item1.Device.SerialNumber;
+                        item.OriginalName = item1.FileName;
+                    });
+                    i++;
+                    dlg.Progress = i;
+                }
+
+                Log.Debug("File transfer done");
+
+                if (format)
+                {
+                    dlg.MaxValue = ServiceProvider.DeviceManager.ConnectedDevices.Count;
+                    dlg.Progress = 0;
+                    int ii = 0;
+                    if (!somethingwrong)
+                    {
+                        foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
                         {
-                            dlg.Label = connectedDevice.DisplayName;
-                            ii++;
-                            dlg.Progress = ii;
-                            Log.Debug("Start format");
-                            Log.Debug(connectedDevice.PortName);
-                            connectedDevice.FormatStorage(null);
-                            Thread.Sleep(200);
-                            Log.Debug("Format done");
-                        }
-                        catch (Exception exception)
-                        {
-                            Log.Error("Unable to format device ", exception);
+                            try
+                            {
+                                dlg.Label = connectedDevice.DisplayName;
+                                ii++;
+                                dlg.Progress = ii;
+                                Log.Debug("Start format");
+                                Log.Debug(connectedDevice.PortName);
+                                connectedDevice.FormatStorage(null);
+                                Thread.Sleep(200);
+                                Log.Debug("Format done");
+                            }
+                            catch (Exception exception)
+                            {
+                                Log.Error("Unable to format device ", exception);
+                            }
                         }
                     }
+                    else
+                    {
+                        Log.Debug("File transfer failed, format aborted!");
+                        StaticHelper.Instance.SystemMessage = "File transfer failed, format aborted!";
+                    }
                 }
-                else
-                {
-                    Log.Debug("File transfer failed, format aborted!");
-                    StaticHelper.Instance.SystemMessage = "File transfer failed, format aborted!";
-                }
+                dlg.Hide();
+                double transfersec = (DateTime.Now - starttime).TotalSeconds;
+                Log.Debug(
+                    string.Format("[BENCHMARK]Total byte transferred ;{0} Total seconds :{1} Speed : {2} Mbyte/sec ",
+                        totalbytes,
+                        transfersec, (totalbytes/transfersec/1024/1024).ToString("0000.00")));
             }
-            dlg.Hide();
-            double transfersec = (DateTime.Now - starttime).TotalSeconds;
-            Log.Debug(string.Format("[BENCHMARK]Total byte transferred ;{0} Total seconds :{1} Speed : {2} Mbyte/sec ",
-                                    totalbytes,
-                                    transfersec, (totalbytes/transfersec/1024/1024).ToString("0000.00")));
+            catch (Exception ex)
+            {
+                Log.Error("Crash on download window ", ex);
+            }
             ServiceProvider.Settings.Save();
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Hide);
         }

@@ -196,11 +196,6 @@ namespace CameraControl.Devices.Example
         {
             try
             {
-                /*
-                // for Nikon wifi use 
-                IWifiDeviceProvider wifiDeviceProvider = new PtpIpProvider();
-                DeviceManager.AddDevice(wifiDeviceProvider.Connect("192.168.1.1"));
-                */
                 IWifiDeviceProvider wifiDeviceProvider = new SonyProvider();
                 DeviceManager.AddDevice(wifiDeviceProvider.Connect("<Auto>"));
             }
@@ -208,6 +203,20 @@ namespace CameraControl.Devices.Example
             {
                 MessageBox.Show("Unable to connect to WiFi device " + exception.Message);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Unable to connect to WiFi device " + exception.Message);
+            }
+            IWifiDeviceProvider wifiDeviceProvider = new PtpIpProvider();
+            DeviceManager.AddDevice(wifiDeviceProvider.Connect("192.168.1.1"));
         }
     }
 }

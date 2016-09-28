@@ -566,6 +566,11 @@ namespace CameraControl.Devices
 
         public override string ToString()
         {
+            return DisplayName;
+        }
+
+        public virtual string ToStringCameraData()
+        {
             // return DisplayName;
             StringBuilder c = new StringBuilder("\n\nPost shot camera data:\n");
             try

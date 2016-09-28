@@ -19,6 +19,16 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Key="items" Source="{Binding Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:DownloadPhotosWnd}}}">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="Device"/>
+                </CollectionViewSource.GroupDescriptions>
+
+                <!--<CollectionViewSource.SortDescriptions>
+                    <scm:SortDescription PropertyName="Priority" Direction="Ascending" />
+                </CollectionViewSource.SortDescriptions>-->
+            </CollectionViewSource>
+            
             <DataTemplate DataType="{x:Type Classes:FileItem}">
                 <!--<Controls:Tile Title="{Binding FileName}" Width="120" Height="80">-->
                 <StackPanel>
@@ -78,7 +88,7 @@
             <RowDefinition Height="130" />
         </Grid.RowDefinitions>
 
-        <ListBox   Name="lst_items_simple" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="3">
+        <ListBox   Name="lst_items_simple" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="3" ItemsSource="{Binding Items, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:DownloadPhotosWnd}}}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -98,7 +108,7 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <ListBox   Name="lst_items" Grid.ColumnSpan="3">
+        <ListBox   Name="lst_items" Grid.ColumnSpan="3" ItemsSource="{Binding Source={StaticResource items}}">
             <ListBox.GroupStyle>
                 <GroupStyle ContainerStyle="{StaticResource ContainerStyle}"/>
             </ListBox.GroupStyle>

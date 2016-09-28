@@ -1464,7 +1464,7 @@ namespace CameraControl.Devices.Canon
                             list.Add(new DeviceObject()
                             {
                                 FileName = ChildInfo.szFileName,
-                                Handle = ChildInfo.szFileName
+                                Handle = ChildPtr
                             });
                         }
                     }
@@ -1472,9 +1472,10 @@ namespace CameraControl.Devices.Canon
                     {
                         //if it's a folder, check for children with recursion
                         list.AddRange(GetChildren(ChildPtr, loadThumbs));
+                        Edsdk.EdsRelease(ChildPtr);
                     }
                     //release current children
-                    Edsdk.EdsRelease(ChildPtr);
+
                 }
             }
             return list;
@@ -1658,7 +1659,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        public override string ToString()
+        public override string ToStringCameraData()
         {
             /* Canon SDK adds a EosCamera object
                         BatteryLevel (long) and BatteryQuality (string)
@@ -1671,7 +1672,7 @@ namespace CameraControl.Devices.Canon
                         IsInLiveViewMode (bool)
             */
 
-            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Canon (SDK)");
+            StringBuilder c = new StringBuilder(base.ToStringCameraData() + "\n\tType..................Canon (SDK)");
 
             if (Camera != null)
             {
@@ -1690,12 +1691,11 @@ namespace CameraControl.Devices.Canon
                     c.AppendFormat("\n\t  Size................{0}", Camera.ImageQuality.SecondaryImageSize);
                     c.AppendFormat("\n\t  Compression.........{0}", Camera.ImageQuality.SecondaryCompressLevel);
                 }
+                c.AppendFormat("\n\tArtist................{0}", Camera.Artist);
+                c.AppendFormat("\n\tCopyright (c).........{0}", Camera.Copyright);
+                c.AppendFormat("\n\tDepth Preview.........{0}", Camera.DepthOfFieldPreview ? "Yes" : "No");
+                c.AppendFormat("\n\tWhite Balance.........{0}", Camera.WhiteBalance);
             }
-            c.AppendFormat("\n\tArtist................{0}", Camera.Artist);
-            c.AppendFormat("\n\tCopyright (c).........{0}", Camera.Copyright);
-            c.AppendFormat("\n\tDepth Preview.........{0}", Camera.DepthOfFieldPreview ? "Yes" : "No");
-            c.AppendFormat("\n\tWhite Balance.........{0}", Camera.WhiteBalance);
-
             return c.ToString();
         }
     }

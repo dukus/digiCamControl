@@ -2546,7 +2546,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        public override string ToString()
+        public override string ToStringCameraData()
         {
             StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Nikon(" + ")");
             c.AppendFormat("\n\tHost mode.............{0}", HostMode ? "Yes" : "No");
