@@ -591,6 +591,9 @@ namespace CameraControl.ViewModel
                 case WindowsCmdConsts.TimeLapse_Stop:
                     StopL();
                     break;
+                case CmdConsts.All_Close:
+                    sched?.Shutdown();
+                    break;
             }
         }
 
@@ -779,7 +782,6 @@ namespace CameraControl.ViewModel
             if (sched == null)
             {
                 sched = schedFact.GetScheduler();
-                sched.Start();
             }
 
             // create job
@@ -802,7 +804,8 @@ namespace CameraControl.ViewModel
             
             if (StartAt)
             {
-
+                triggerB =
+                    triggerB.StartAt(DateBuilder.DateOf(StartHour, StartMinute,  StartSecond,StartDate.Day, StartDate.Month, StartDate.Year));
             }
             if (StartDaily)
             {
@@ -814,29 +817,32 @@ namespace CameraControl.ViewModel
             {
                 triggerB =
                     triggerB.WithSimpleSchedule(
-                        x => x.WithIntervalInSeconds(TimeBetweenShots).WithRepeatCount(StopCaptureCount));
+                        x => x.WithIntervalInSeconds(TimeBetweenShots).WithRepeatCount(StopCaptureCount).WithMisfireHandlingInstructionNowWithExistingCount());
             }
             else if (StopIn)
             {
                 triggerB =
                     triggerB.WithSimpleSchedule(
-                        x => x.WithIntervalInSeconds(TimeBetweenShots)
+                        x => x.WithIntervalInSeconds(TimeBetweenShots).WithMisfireHandlingInstructionNowWithExistingCount()
                             .WithRepeatCount(((StopHour*60*60) + (StopMinute*60) + StopSecond)/TimeBetweenShots));
             }
             else
             {
-                triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots));
+                triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots).WithMisfireHandlingInstructionNowWithExistingCount().RepeatForever());
             }
 
             if (StopAt)
             {
-                triggerB = triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond));
+                triggerB =
+                    triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond, StopDate.Day, StopDate.Month,
+                        StopDate.Year));
             }
             if (StartDaily)
             {
             }
+            
             trigger = triggerB.Build();
-
+            sched.Start();
 
             // Schedule the job using the job and trigger 
             sched.ScheduleJob(job, trigger);
