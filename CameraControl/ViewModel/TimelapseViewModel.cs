@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using Quartz;
+using Quartz.Collection;
 using Quartz.Impl;
 
 namespace CameraControl.ViewModel
@@ -83,11 +84,9 @@ namespace CameraControl.ViewModel
             set
             {
                 TimeLapseSettings.StartDaily = value;
-                if (StopAt)
-                {
-                    StopAt = false;
-                    StopIn = true;
-                }
+                StopAtPhotos = false;
+                StopAt = false;
+                StopIn = true;
                 RaisePropertyChanged(() => StartDaily);
                 RaisePropertyChanged(() => DateVisibility);
                 RaisePropertyChanged(() => TimeVisibility);
@@ -268,36 +267,6 @@ namespace CameraControl.ViewModel
             {
                 TimeLapseSettings.StopCaptureCount = value;
                 RaisePropertyChanged(() => StopCaptureCount);
-            }
-        }
-
-        public double TimeDiff
-        {
-            get { return _timeDiff; }
-            set
-            {
-                _timeDiff = value;
-                RaisePropertyChanged(() => TimeDiff);
-            }
-        }
-
-        public int FineTune
-        {
-            get { return TimeLapseSettings.FineTune; }
-            set
-            {
-                TimeLapseSettings.FineTune = value;
-                RaisePropertyChanged(() => FineTune);
-            }
-        }
-
-        public int Resolution
-        {
-            get { return TimeLapseSettings.Resolution; }
-            set
-            {
-                TimeLapseSettings.Resolution = value;
-                RaisePropertyChanged(() => Resolution);
             }
         }
 
@@ -613,149 +582,7 @@ namespace CameraControl.ViewModel
             if (tempTrigger == null)
                 StopL();
             RaisePropertyChanged(() => StatusText);
-            return;
-
-            TimeDiff += (DateTime.Now - _lastTime).TotalMilliseconds - (1000*Resolution);
-            _lastTime = DateTime.Now;
-
-            if (!IsActive)
-            {
-                IsActive = CheckStart();
-                if (IsActive)
-                    _firstLapseStartTime = DateTime.Now;
-            }
-            
-            if (!IsActive)
-                return;
-            if (IsActive)
-            {
-                if (Math.Round((DateTime.Now - _lastCaptureTime).TotalSeconds) >= TimeBetweenShots || (FullSpeed && !ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy))
-                {
-                    _lastCaptureTime = DateTime.Now;
-                    _totalCaptures++;
-                    try
-                    {
-                        if (Capture)
-                        {
-                            if (Bracketing)
-                            {
-                                if (_bracketingViewModel == null)
-                                    _bracketingViewModel = new BracketingViewModel();
-                                Task.Factory.StartNew(new Action(_bracketingViewModel.Start));
-                                StaticHelper.Instance.SystemMessage = _bracketingViewModel.Error;
-                            }
-                            else
-                            {
-                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);                                
-                            }
-                        }
-                        if (CaptureAll)
-                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.CaptureAll);
-                        if (CaptureScript)
-                        {
-                            if (Path.GetExtension(ScriptFile.ToLower()) == ".tcl")
-                            {
-                                try
-                                {
-                                    var manager = new TclScripManager();
-                                    manager.Execute(File.ReadAllText(ScriptFile));
-                                }
-                                catch (Exception exception)
-                                {
-                                    Log.Error("Script error", exception);
-                                    StaticHelper.Instance.SystemMessage = "Script error :" + exception.Message;
-                                }
-                            }
-                            else
-                            {
-                                var script = ServiceProvider.ScriptManager.Load(ScriptFile);
-                                script.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
-                                ServiceProvider.ScriptManager.Execute(script);
-                            }
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        Log.Error("Timelapse error ", exception);
-                        StaticHelper.Instance.SystemMessage = "Capture error";
-                    }
-                }
-                if (CheckStop())
-                {
-                    IsActive = false;
-                    if (!StartDaily)
-                    {
-                        IsRunning = false;
-                        _timer.Stop();
-                    }
-                }
-            }
-        }
-
-        private bool CheckStart()
-        {
-            if (StartNow)
-                return true;
-            if (StartIn)
-            {
-                var t = new TimeSpan(StartHour, StartMinute, StartSecond);
-                if ((DateTime.Now - _timeLapseStartTime).TotalSeconds > t.TotalSeconds)
-                    return true;
-            }
-            if (StartAt)
-            {
-                if (StartDate < DateTime.Now)
-                    return true;
-            }
-            if (StartDaily)
-            {
-                if (_timeLapseStartTime > DateTime.Now)
-                    return false;
-                int day = (int)DateTime.Now.DayOfWeek;
-                bool shoulContinue = (StartDay0 && day == 0) || (StartDay1 && day == 1) || (StartDay2 && day == 2) ||
-                                     (StartDay3 && day == 3) || (StartDay4 && day == 4) || (StartDay5 && day == 5) ||
-                                     (StartDay6 && day == 6);
-                var t = new TimeSpan(StartHour, StartMinute, StartSecond);
-                var t1 = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-                if (t1 > t && shoulContinue)
-                    return true;
-            }
-            return false;
-        }
-
-        private bool CheckStop()
-        {
-            var res = false;
-            if (StopAtPhotos)
-                res = _totalCaptures >= StopCaptureCount;
-            if (StopIn)
-            {
-                var t = new TimeSpan(StopHour, StopMinute, StopSecond);
-                var now = DateTime.Now;
-                var endt = new DateTime(now.Year, now.Month, now.Day, StartHour, StartMinute, StartSecond);
-                if (StartDaily)
-                {
-                    if ((DateTime.Now - endt).TotalSeconds > t.TotalSeconds)
-                        res = true;
-                }
-                else
-                {
-                    if ((DateTime.Now - _firstLapseStartTime).TotalSeconds > t.TotalSeconds)
-                        res = true;
-                }
-            }
-            if (StopAt)
-            {
-                if (StopDate < DateTime.Now)
-                    res = true;
-            }
-            if (IsActive && res && StartDaily)
-            {
-                _timeLapseStartTime = _timeLapseStartTime.AddDays(1);
-                _totalCaptures = 0;
-            }
-            return res;
-        }
+       }
 
         public void Start()
         {
@@ -809,43 +636,76 @@ namespace CameraControl.ViewModel
             }
             if (StartDaily)
             {
-            }
+                ISet<DayOfWeek> days = new HashSet<DayOfWeek>();
+                if (StartDay0)
+                    days.Add(DayOfWeek.Sunday);
+                if (StartDay1)
+                    days.Add(DayOfWeek.Monday);
+                if (StartDay2)
+                    days.Add(DayOfWeek.Tuesday);
+                if (StartDay3)
+                    days.Add(DayOfWeek.Wednesday);
+                if (StartDay4)
+                    days.Add(DayOfWeek.Thursday);
+                if (StartDay5)
+                    days.Add(DayOfWeek.Friday);
+                if (StartDay6)
+                    days.Add(DayOfWeek.Saturday);
 
-            
-
-            if (StopAtPhotos)
-            {
                 triggerB =
-                    triggerB.WithSimpleSchedule(
-                        x => x.WithIntervalInSeconds(TimeBetweenShots).WithRepeatCount(StopCaptureCount).WithMisfireHandlingInstructionNowWithExistingCount());
-            }
-            else if (StopIn)
-            {
-                triggerB =
-                    triggerB.WithSimpleSchedule(
-                        x => x.WithIntervalInSeconds(TimeBetweenShots).WithMisfireHandlingInstructionNowWithExistingCount()
-                            .WithRepeatCount(((StopHour*60*60) + (StopMinute*60) + StopSecond)/TimeBetweenShots));
+                    triggerB.WithDailyTimeIntervalSchedule(
+                        x =>
+                            x.WithIntervalInSeconds(TimeBetweenShots).WithMisfireHandlingInstructionFireAndProceed()
+                                .StartingDailyAt(new TimeOfDay(StartHour, StartMinute, StartSecond))
+                                .EndingDailyAt(new TimeOfDay(StopHour, StopMinute, StopSecond))
+                                .OnDaysOfTheWeek(days)
+                        );
             }
             else
             {
-                triggerB = triggerB.WithSimpleSchedule(x => x.WithIntervalInSeconds(TimeBetweenShots).WithMisfireHandlingInstructionNowWithExistingCount().RepeatForever());
+
+                if (StopAtPhotos)
+                {
+                    triggerB =
+                        triggerB.WithSimpleSchedule(
+                            x =>
+                                x.WithIntervalInSeconds(TimeBetweenShots)
+                                    .WithRepeatCount(StopCaptureCount)
+                                    .WithMisfireHandlingInstructionNowWithExistingCount());
+                }
+                else if (StopIn)
+                {
+                    triggerB =
+                        triggerB.WithSimpleSchedule(
+                            x =>
+                                x.WithIntervalInSeconds(TimeBetweenShots)
+                                    .WithMisfireHandlingInstructionNowWithExistingCount()
+                                    .WithRepeatCount(((StopHour*60*60) + (StopMinute*60) + StopSecond)/TimeBetweenShots));
+                }
+                else
+                {
+                    triggerB =
+                        triggerB.WithSimpleSchedule(
+                            x =>
+                                x.WithIntervalInSeconds(TimeBetweenShots)
+                                    .WithMisfireHandlingInstructionNowWithExistingCount()
+                                    .RepeatForever());
+                }
+
+                if (StopAt)
+                {
+                    triggerB =
+                        triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond, StopDate.Day, StopDate.Month,
+                            StopDate.Year));
+                }
             }
 
-            if (StopAt)
-            {
-                triggerB =
-                    triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond, StopDate.Day, StopDate.Month,
-                        StopDate.Year));
-            }
-            if (StartDaily)
-            {
-            }
-            
             trigger = triggerB.Build();
-            sched.Start();
+
 
             // Schedule the job using the job and trigger 
             sched.ScheduleJob(job, trigger);
+            sched.Start();
 
             if (_bracketingViewModel != null)
                 _bracketingViewModel.Stop();
@@ -858,7 +718,6 @@ namespace CameraControl.ViewModel
             _timer.Interval = 1000;
             _timer.Start();
             _lastTime = DateTime.Now;
-            TimeDiff = 0;
             TimeLapseSettings.Started = true;
             ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
         }
@@ -887,8 +746,58 @@ namespace CameraControl.ViewModel
     {
         void IJob.Execute(IJobExecutionContext context)
         {
+            if (!ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy)
+            {
+
+                try
+                {
+                    if (ServiceProvider.Settings.DefaultSession.TimeLapseSettings.Capture)
+                    {
+                        if (ServiceProvider.Settings.DefaultSession.TimeLapseSettings.Bracketing)
+                        {
+                            var _bracketingViewModel = new BracketingViewModel();
+                            Task.Factory.StartNew(new Action(_bracketingViewModel.Start));
+                            StaticHelper.Instance.SystemMessage = _bracketingViewModel.Error;
+                        }
+                        else
+                        {
+                            ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);
+                        }
+                    }
+                    if (ServiceProvider.Settings.DefaultSession.TimeLapseSettings.CaptureAll)
+                        ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.CaptureAll);
+                    if (ServiceProvider.Settings.DefaultSession.TimeLapseSettings.CaptureScript)
+                    {
+                        if (Path.GetExtension(ServiceProvider.Settings.DefaultSession.TimeLapseSettings.ScriptFile.ToLower()) == ".tcl")
+                        {
+                            try
+                            {
+                                var manager = new TclScripManager();
+                                manager.Execute(File.ReadAllText(ServiceProvider.Settings.DefaultSession.TimeLapseSettings.ScriptFile));
+                            }
+                            catch (Exception exception)
+                            {
+                                Log.Error("Script error", exception);
+                                StaticHelper.Instance.SystemMessage = "Script error :" + exception.Message;
+                            }
+                        }
+                        else
+                        {
+                            var script = ServiceProvider.ScriptManager.Load(ServiceProvider.Settings.DefaultSession.TimeLapseSettings.ScriptFile);
+                            script.CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                            ServiceProvider.ScriptManager.Execute(script);
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Timelapse error ", exception);
+                    StaticHelper.Instance.SystemMessage = "Capture error";
+                }
+            }
+
             //throw new NotImplementedException();
-            Console.WriteLine("Hello, JOb executed");
+                Console.WriteLine("Hello, JOb executed");
         }
     }
 }
