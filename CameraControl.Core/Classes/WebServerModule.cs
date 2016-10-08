@@ -36,6 +36,7 @@ using System.Text;
 using System.Threading;
 using CameraControl.Core.Scripting;
 using CameraControl.Devices;
+using Eagle._Tests;
 using Griffin.WebServer;
 using Griffin.WebServer.Files;
 using Griffin.WebServer.Modules;
@@ -137,6 +138,23 @@ namespace CameraControl.Core.Classes
                 if (context.Request.Uri.AbsolutePath.StartsWith("/settings.json"))
                 {
                     var s = JsonConvert.SerializeObject(ServiceProvider.Settings, Formatting.Indented);
+                    SendData(context, Encoding.ASCII.GetBytes(s));
+                }
+
+                if (context.Request.Uri.AbsolutePath.StartsWith("/filelist.json"))
+                {
+                    List<FileListItem> items =
+                        ServiceProvider.Settings.DefaultSession.Files.Select(item => new FileListItem()
+                        {
+                            FileName = item.FileName,
+                            LargeThumb = "/thumb/large/" + Path.GetFileName(item.LargeThumb),
+                            SmallThumb = "/thumb/small/" + Path.GetFileName(item.SmallThumb),
+                            Original = "/image/" + Path.GetFileName(item.FileName),
+                            Name = item.Name,
+                            Width = item.FileInfo.Width > 0 ? item.FileInfo.Width : 3000,
+                            Height = item.FileInfo.Height > 0 ? item.FileInfo.Height : 2000,
+                        }).ToList();
+                    var s = JsonConvert.SerializeObject(items, Formatting.Indented);
                     SendData(context, Encoding.ASCII.GetBytes(s));
                 }
 

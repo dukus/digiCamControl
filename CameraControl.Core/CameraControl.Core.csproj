@@ -215,6 +215,7 @@
     <Compile Include="Classes\CustomConfig.cs" />
     <Compile Include="Classes\FileInfo.cs" />
     <Compile Include="Classes\FileItem.cs" />
+    <Compile Include="Classes\FileListItem.cs" />
     <Compile Include="Classes\FilenameTemplate.cs" />
     <Compile Include="Classes\FilenameTemplateManager.cs" />
     <Compile Include="Classes\HelpProvider.cs" />
