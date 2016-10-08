@@ -291,6 +291,22 @@ namespace CameraControl
                     case CmdConsts.CaptureAll:
                         CameraHelper.CaptureAll(0);
                         break;
+                    case CmdConsts.StartBulb:
+                        if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.Bulb))
+                        {
+                            ServiceProvider.DeviceManager.LastCapturedImage[ServiceProvider.DeviceManager.SelectedCameraDevice] = "-";
+                            ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy = true;
+                            ServiceProvider.DeviceManager.SelectedCameraDevice.LockCamera();
+                            ServiceProvider.DeviceManager.SelectedCameraDevice.StartBulbMode();
+                        }
+                        else
+                        {
+                            throw new Exception(TranslationStrings.MsgBulbModeNotSupported);
+                        }
+                        break;
+                    case CmdConsts.EndBulb:
+                        ServiceProvider.DeviceManager.SelectedCameraDevice.EndBulbMode();
+                        break;
                     case CmdConsts.NextSeries:
                         if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
                         break;

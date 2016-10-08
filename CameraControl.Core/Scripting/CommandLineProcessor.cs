@@ -324,14 +324,17 @@ namespace CameraControl.Core.Scripting
                 case "shutterspeed":
                     {
                         var val = args[1].Trim();
-                        if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
-                        {
-                            val += "s";
-                        }
                         if (val.Equals("bulb"))
                         {
                             val = "Bulb";
                         }
+                        // if the value not found check 
+                        if (!device.ShutterSpeed.Values.Contains(val))
+                            if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
+                            {
+                                val += "s";
+                            }
+
                         if (!device.ShutterSpeed.Values.Contains(val))
                             throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                         device.ShutterSpeed.SetValue(val);
