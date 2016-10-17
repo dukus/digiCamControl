@@ -65,6 +65,10 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public bool CloseShutter(CustomConfig config)
         {
+            Connect();
+            RelayDeviceWrapper.usb_relay_device_close_all_relay_channel(Hd);
+            RelayDeviceWrapper.usb_relay_device_close(Hd);
+            Hd = 0;
             return true;
         }
 
