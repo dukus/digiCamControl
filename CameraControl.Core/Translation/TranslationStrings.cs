@@ -692,6 +692,8 @@ namespace CameraControl.Core.Translation
         public static string LabelOpenLightroom = "Open files in Adobe Lightroom";
         public static string LabelOpenPhotoshop = "Open files in Adobe Photoshop";
         public static string LabelPasswordOnClose = "Ask password on close";
-
+        public static string LabelList = "List";
+        public static string LabelCameraname = "Camera name";
+        public static string LabelSerialNumber = "Serial number";
     }
 }

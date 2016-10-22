@@ -38,8 +38,8 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-         <Expander Header="" ExpandDirection="Right" Margin="0" Grid.RowSpan="2">
+
+        <Expander Header="" ExpandDirection="Right" Margin="0" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -64,7 +64,7 @@
                 <CheckBox Content="{T:TranslateExtension LabelDisableAutofocus}" Height="27" HorizontalAlignment="Left" Margin="5,0,0,0" Name="chk_noautofocus" VerticalAlignment="Top" IsChecked="{Binding Path=DisbleAutofocus, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Grid.Row="4" Grid.ColumnSpan="2" Width="220" IsEnabled="True" Checked="chk_noautofocus_Checked" />
                 <Button Content="{T:TranslateExtension ButtonStop}" Name="btn_stop" Click="btn_stop_Click" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"/>
                 <Button Content="{T:Translate LabelResetCounters}" Name="btn_resetCounters" Grid.Row="3" Click="btn_resetCounters_Click" Grid.ColumnSpan="2" Margin="5"/>
-                
+
                 <Label  Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelDelay}" Margin="3" />
                 <Controls:NumericUpDown Grid.Column="1" Grid.Row="5"  Name="int_wait" Minimum="0" Maximum="10000"  Value="{Binding Path=DelaySec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" ToolTip="Wait beetven cameras shots in seconds " Margin="1"/>
 
@@ -73,41 +73,134 @@
 
                 <Label  Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}" Margin="3" />
                 <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Value="{Binding Path=WaitSec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Margin="1" Maximum="3600" Minimum="1"/>
-                
+
                 <Button Content="{T:Translate LabelSettingsLiveView}" Grid.Row="8" Name="btn_liveview" Margin="2" Click="btn_liveview_Click" Grid.ColumnSpan="2" />
                 <Button Content="{T:Translate LabelSaveOrder}" Grid.Row="9" Name="btn_saveOrder" Margin="2" Click="btn_saveOrder_Click" Grid.ColumnSpan="2" />
                 <Button Content="{T:Translate LabelFormatAllCards}" Grid.Row="10" Name="btn_format" Margin="2" Click="btn_format_Click" Grid.ColumnSpan="2" />
-                
-                
+
+
                 <Button Content="{T:Translate LabelSetCounters}" Grid.Row="11" Name="btn_set_counter" Margin="2" Click="btn_set_counter_Click" Grid.ColumnSpan="2" />
                 <TextBox Grid.Row="12" Name="txt_counter" Margin="2" Grid.ColumnSpan="2" />
             </Grid>
         </Expander>
-        <Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />
-        <ListBox Grid.Column="1" Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0"
-                 Grid.Row="0" Grid.RowSpan="2" dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" >
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />
-                    <MenuItem Header="{T:TranslateExtension MenuUseSelectedCameraPreset}" Click="MenuItem_Click_1" />
-                </ContextMenu>
-            </ListBox.ContextMenu>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <HierarchicalDataTemplate>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+        <!--<Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />-->
+        <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+            <TabItem Header="{T:TranslateExtension LabelGrid}">
+                <ListBox  Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0"
+                  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" >
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />
+                            <MenuItem Header="{T:TranslateExtension MenuUseSelectedCameraPreset}" Click="MenuItem_Click_1" />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <HierarchicalDataTemplate>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
 
-                        <local:ControlerSimple DataContext="{Binding Path=.}" Width="120" Height="430"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                <local:ControlerSimple DataContext="{Binding Path=.}" Width="120" Height="430"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="{T:TranslateExtension LabelList}">
+                <DataGrid ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn >
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Controls:ProgressRing Width="30" Height="30" IsActive="{Binding IsBusy}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-     
+                        
+                        
+                        <DataGridTextColumn Binding="{Binding Path=DisplayName}" Header="{T:TranslateExtension LabelCameraname}" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Path=SerialNumber}" Header="{T:TranslateExtension LabelSerialNumber}" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Path=Battery}" Header="{T:TranslateExtension Battery}" IsReadOnly="True" />
+
+                        <DataGridTemplateColumn SortMemberPath="Mode.Value" Header="{T:TranslateExtension Mode}"  >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=Mode.ErrorColor}" >
+                                        <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=Mode.IsEnabled}" ItemsSource="{Binding Path=Mode.Values}" SelectedValue="{Binding Path=Mode.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn SortMemberPath="IsoNumber.Value" Header="{T:TranslateExtension Iso}"  >
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=IsoNumber.ErrorColor}">
+                                        <ComboBox IsEnabled="{Binding Path=IsoNumber.IsEnabled}" ItemsSource="{Binding Path=IsoNumber.Values}" SelectedValue="{Binding Path=IsoNumber.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn  SortMemberPath="ShutterSpeed.Value" Header="{T:TranslateExtension ShutterSpeed}">
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=ShutterSpeed.ErrorColor}" >
+                                        <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=ShutterSpeed.Values}" SelectedValue="{Binding Path=ShutterSpeed.Value , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn  SortMemberPath="FNumber.Value" Header="{T:TranslateExtension Aperture}">
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=FNumber.ErrorColor}" >
+                                        <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=FNumber.IsEnabled}" ItemsSource="{Binding Path=FNumber.Values}" SelectedValue="{Binding Path=FNumber.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged  }"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn  SortMemberPath="WhiteBalance.Value" Header="{T:TranslateExtension WhiteBalance}">
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=WhiteBalance.ErrorColor}" >
+                                        <ComboBox IsEnabled="{Binding Path=WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=WhiteBalance.Values}" SelectedValue="{Binding Path=WhiteBalance.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged  }" />
+                                    </Border> 
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn  SortMemberPath="ExposureCompensation.Value" Header="{T:TranslateExtension ExposureComp}">
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=ExposureCompensation.ErrorColor}" >
+                                        <ComboBox IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn  SortMemberPath="FocusMode.Value" Header="{T:TranslateExtension FocusMode}">
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <Border BorderThickness="1" BorderBrush="{Binding Path=FocusMode.ErrorColor}" >
+                                        <ComboBox Name="cmb_focus" IsEnabled="{Binding Path=FocusMode.IsEnabled}" ItemsSource="{Binding Path=FocusMode.Values}" SelectedValue="{Binding Path=FocusMode.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
         <Expander Grid.ColumnSpan="2" Grid.Row="2" Header="{T:TranslateExtension LabelExternalShutterRelease}" ExpandDirection="Up" Margin="0">
             <Grid>
                 <Grid.ColumnDefinitions>

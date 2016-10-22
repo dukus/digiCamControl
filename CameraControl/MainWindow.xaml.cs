@@ -417,6 +417,7 @@ namespace CameraControl
                     var file = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + extension);
                     eventArgs.CameraDevice.TransferFile(eventArgs.Handle, file);
                     eventArgs.CameraDevice.IsBusy = false;
+                    eventArgs.CameraDevice.TransferProgress = 0;
                     eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
                     LiveViewManager.Preview[eventArgs.CameraDevice] = file;
                     LiveViewManager.OnPreviewCaptured(eventArgs.CameraDevice, file);
@@ -456,7 +457,7 @@ namespace CameraControl
                     eventArgs.CameraDevice.TransferFileThumb(eventArgs.Handle, tempFile);
                 else
                     eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
-
+                eventArgs.CameraDevice.TransferProgress = 0;
                 string fileName = "";
                 if (!session.UseOriginalFilename || eventArgs.CameraDevice.CaptureInSdRam)
                 {

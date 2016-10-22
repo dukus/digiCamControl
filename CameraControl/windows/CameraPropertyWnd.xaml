@@ -40,7 +40,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="83.74*" />
         </Grid.RowDefinitions>
-        <Label Content="Camera name" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right"/>
+        <Label Content="{T:TranslateExtension LabelCameraname}" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right"/>
         <TextBox Grid.Column="2" Grid.Row="1" Name="textBox1" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.DeviceName}" Margin="3"/>
         <Label Content="Serial number" Grid.Column="1" HorizontalContentAlignment="Right"/>
         <TextBox Grid.Column="2" Name="textBox2" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.SerialNumber}" IsReadOnly="True" Margin="3"/>
