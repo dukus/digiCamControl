@@ -533,7 +533,7 @@ namespace CameraControl.Devices.Canon
                             WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);
                             break;
                         case Edsdk.PropID_ISOSpeed:
-                            WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_ISOSpeed), false);
+                            IsoNumber.SetValue(Camera.GetProperty(Edsdk.PropID_ISOSpeed), false);
                             break;
                         case Edsdk.PropID_Tv:
                             ShutterSpeed.SetValue(Camera.GetProperty(Edsdk.PropID_Tv), false);
