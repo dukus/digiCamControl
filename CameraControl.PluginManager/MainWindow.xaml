@@ -38,7 +38,17 @@
             <ColumnDefinition Width="500*" />
             <ColumnDefinition Width="250*" />
         </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" Grid.Row="1" />
+        <TabControl Grid.Row="0"  Grid.RowSpan="2">
+            <TabItem Header="Browse">
+            <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" />
+            </TabItem>
+            <TabItem Header="Installed">
+                <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" />
+            </TabItem>
+            <TabItem Header="Updates">
+                <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}"/>
+            </TabItem>
+        </TabControl>
         <GroupBox Grid.Column="1" Header="Selected plugin" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" Margin="5,0,5,5" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>

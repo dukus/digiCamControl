@@ -64,7 +64,8 @@ namespace CameraControl.Core.Plugin
         public string Folder { get; set; }
         public string AssemblyFileName { get; set; }
         public string LogoFile { get; set; }
-
+        public string DownloadUrl { get; set; }
+        
         [XmlIgnore]
         public bool Enabled { get; set; }
 
