@@ -44,7 +44,7 @@ namespace CameraControl.Core.Plugin
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(PluginCollection));
+                var serializer = new XmlSerializer(typeof(PluginCollection));
                 // Create a FileStream to write with.
 
                 Stream writer = new FileStream(fileName, FileMode.Create);

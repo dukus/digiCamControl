@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:PluginManager="clr-namespace:CameraControl.PluginManager" Title="MainWindow" Height="600" Width="800" Closed="MetroWindow_Closed" ShowMaxRestoreButton="False" ShowMinButton="False" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <PluginManager:MainWindowViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
 
@@ -31,8 +34,9 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="29*" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="532*" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500*" />
@@ -40,16 +44,16 @@
         </Grid.ColumnDefinitions>
         <TabControl Grid.Row="0"  Grid.RowSpan="2">
             <TabItem Header="Browse">
-            <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" />
+                <ListBox ItemsSource="{Binding Path=OnlinePluginS}" SelectedItem="{Binding Path=SelectedPlugin}" />
             </TabItem>
             <TabItem Header="Installed">
-                <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" />
+                <ListBox ItemsSource="{Binding  Path=InstalledPluginS}" SelectedItem="{Binding Path=SelectedPlugin}" />
             </TabItem>
             <TabItem Header="Updates">
-                <ListBox ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=PluginS}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}"/>
+                <ListBox ItemsSource="{Binding Path=UpdatesPluginS}" SelectedItem="{Binding Path=SelectedPlugin}"/>
             </TabItem>
         </TabControl>
-        <GroupBox Grid.Column="1" Header="Selected plugin" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PluginManager:MainWindow, AncestorLevel=1}, Path=SelectedPlugin}" Margin="5,0,5,5" Grid.Row="1">
+        <GroupBox Grid.Column="1" Header="Selected plugin" DataContext="{Binding Path=SelectedPlugin}" Margin="5,0,5,5" Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
@@ -64,14 +68,18 @@
                     <ColumnDefinition Width="124*" />
                 </Grid.ColumnDefinitions>
                 <Label Content="Name"  />
-                <Label Content="{Binding Path=Name}" Grid.Column="1" FontStyle="Italic" Margin="1"/>
-                <Label Grid.Row="1" Content="Author"  />
+                <Label Content="{Binding Path=Name}" Grid.Row="0" Grid.Column="1" FontStyle="Italic" Margin="1"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Author"  />
                 <Label Grid.Row="1" Content="{Binding Path=Author}" Grid.Column="1" FontStyle="Italic" Margin="1"/>
-                <Label Grid.Row="2" Content="Version"  />
+                <Label Grid.Row="2" Grid.Column="0" Content="Version"  />
                 <Label Grid.Row="2" Content="{Binding Path=Version}" Grid.Column="1" FontStyle="Italic" Margin="1"/>
 
             </Grid>
         </GroupBox>
         <Button Content="Check for updates" Grid.Column="1" Height="22" HorizontalAlignment="Left" Margin="110,4,0,0" Name="btn_check_updates" VerticalAlignment="Top" Width="145" Click="btn_check_updates_Click" />
+        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <ProgressBar Width="200" Height="30" Value="{Binding Progress}" Maximum="100" Minimum="0"/>
+            <Label Content="{Binding Message}"/>
+        </StatusBar>
     </Grid>
 </Controls:MetroWindow>

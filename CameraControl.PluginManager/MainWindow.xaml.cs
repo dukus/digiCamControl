@@ -57,9 +57,9 @@ namespace CameraControl.PluginManager
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
-        public ObservableCollection<PluginInfo> PluginS { get; set; }
-        private PluginInfo _selectedPlugin;
 
+
+        private PluginInfo _selectedPlugin;
         public PluginInfo SelectedPlugin
         {
             get { return _selectedPlugin; }
@@ -72,51 +72,25 @@ namespace CameraControl.PluginManager
 
         public MainWindow()
         {
-            ServiceProvider.PluginManager = new Core.PluginManager();
-            ServiceProvider.PluginManager.CopyPlugins();
-            PluginS = new ObservableCollection<PluginInfo>();
-            LoadList();
-            InitializeComponent();
-        }
 
-        public void LoadList()
-        {
-            PluginS.Clear();
-            string[] folders = Directory.GetDirectories(ServiceProvider.PluginManager.PluginsFolder);
-            foreach (string folder in folders)
-            {
-                string configFile = Path.Combine(folder, "dcc.plugin");
-                if (File.Exists(configFile))
-                {
-                    try
-                    {
-                        PluginInfo pluginInfo = PluginInfo.Load(configFile);
-                        pluginInfo.Folder = folder;
-                        pluginInfo.Enabled = !File.Exists(Path.Combine(folder, "disabled"));
-                        PluginS.Add(pluginInfo);
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-            }
+            InitializeComponent();
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
-            foreach (PluginInfo pluginInfo in PluginS)
-            {
-                if (pluginInfo.Enabled)
-                {
-                    if (File.Exists(Path.Combine(pluginInfo.Folder, "disabled")))
-                        File.Delete(Path.Combine(pluginInfo.Folder, "disabled"));
-                }
-                else
-                {
-                    if (!File.Exists(Path.Combine(pluginInfo.Folder, "disabled")))
-                        File.CreateText(Path.Combine(pluginInfo.Folder, "disabled")).Close();
-                }
-            }
+            //foreach (PluginInfo pluginInfo in InstalledPluginS)
+            //{
+            //    if (pluginInfo.Enabled)
+            //    {
+            //        if (File.Exists(Path.Combine(pluginInfo.Folder, "disabled")))
+            //            File.Delete(Path.Combine(pluginInfo.Folder, "disabled"));
+            //    }
+            //    else
+            //    {
+            //        if (!File.Exists(Path.Combine(pluginInfo.Folder, "disabled")))
+            //            File.CreateText(Path.Combine(pluginInfo.Folder, "disabled")).Close();
+            //    }
+            //}
         }
 
         #region Implementation of INotifyPropertyChanged
