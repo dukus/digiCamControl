@@ -15,7 +15,7 @@ namespace CameraControl.PluginManager
 {
     public class MainWindowViewModel:ViewModelBase
     {
-        private const string OnlineFIleList = "";
+        private const string OnlineFileList = "";
         private PluginInfo _selectedPlugin;
         private string _message;
         private int _progress;
@@ -71,7 +71,7 @@ namespace CameraControl.PluginManager
         {
             InstalledPluginS.Clear();
             string[] folders = Directory.GetDirectories(ServiceProvider.PluginManager.PluginsFolder);
-            foreach (string folder in folders)
+            foreach (var folder in folders)
             {
                 string configFile = Path.Combine(folder, "dcc.plugin");
                 if (File.Exists(configFile))
@@ -88,20 +88,33 @@ namespace CameraControl.PluginManager
                     }
                 }
             }
+            Task.Factory.StartNew(DownloadList);
         }
 
         public void DownloadList()
         {
             try
             {
-                //_client.DownloadFileAsync();
+                Message = "Download online plugin informations";
+                List<PluginInfo> infos = new List<PluginInfo>();
+                var urls = _client.DownloadString(OnlineFileList).Split('\n');
+                foreach (var url in urls)
+                {
+                    using (MemoryStream stream = new MemoryStream(_client.DownloadData(url)))
+                    {
+                        var res = PluginCollection.Load(stream);
+                        infos.AddRange(res.Items);
+                    }
+
+                }
+                Message = "Download done";
             }
             catch (Exception ex)
             {
                 Message = "Error download list " + ex.Message;
                 Progress = 0;
             }
-            
+
         }
 
 

@@ -26,13 +26,27 @@ namespace CameraControl.Core.Plugin
             {
                 if (File.Exists(fileName))
                 {
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof(PluginCollection));
                     FileStream myFileStream = new FileStream(fileName, FileMode.Open);
-                    res = (PluginCollection)mySerializer.Deserialize(myFileStream);
+                    Load(myFileStream);
                     myFileStream.Close();
                 }
             }
+            catch (Exception exception)
+            {
+                Log.Error("Error loading plugin list ", exception);
+            }
+            return res;
+        }
+
+        public static PluginCollection Load(Stream stream)
+        {
+            PluginCollection res = new PluginCollection();
+            try
+            {
+                    XmlSerializer mySerializer =
+                        new XmlSerializer(typeof(PluginCollection));
+                    res = (PluginCollection)mySerializer.Deserialize(stream);
+           }
             catch (Exception exception)
             {
                 Log.Error("Error loading plugin list ", exception);
