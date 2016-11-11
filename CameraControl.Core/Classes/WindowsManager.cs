@@ -155,6 +155,10 @@ namespace CameraControl.Core.Classes
                     case WindowsCmdConsts.Unlike_Image:
                         item.SetKey(Key.X);
                         break;
+                    case WindowsCmdConsts.SelectAll_Image:
+                        item.SetKey(Key.A);
+                        item.Ctrl = true;
+                        break;
                 }
             }
         }

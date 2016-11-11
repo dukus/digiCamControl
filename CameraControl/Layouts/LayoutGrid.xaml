@@ -8,6 +8,7 @@
                     xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+                    xmlns:classes="clr-namespace:CameraControl.Classes"
                     mc:Ignorable="d" 
              d:DesignHeight="426" d:DesignWidth="652">
     <UserControl.Resources>
@@ -38,7 +39,7 @@
                     </ContextMenu.DataContext>
                     <MenuItem Header="Select" >
                         <MenuItem Header="{translation:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
-                        <MenuItem Header="{translation:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
+                        <MenuItem Header="{translation:TranslateExtension LabelSelectAll}" Command="{Binding SendCommand}" CommandParameter="SelectAll_Image" InputGestureText="{classes:CommandShortcutExtensioncs SelectAll_Image}"/>
                         <MenuItem Header="{translation:TranslateExtension LabelSelectUnLiked}" Command="{Binding Path=SelectUnLiked}"/>
                         <MenuItem Header="{translation:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
                         <MenuItem Header="{translation:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>

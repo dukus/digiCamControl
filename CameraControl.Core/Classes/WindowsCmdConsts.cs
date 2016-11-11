@@ -75,6 +75,7 @@ namespace CameraControl.Core.Classes
         public const string Refresh_Image = "Refresh_Image";
         public const string Del_Image = "Del_Image";
         public const string Like_Image = "Like_Image";
+        public const string SelectAll_Image = "SelectAll_Image";
         public const string Unlike_Image = "Unlike_Image";
         public const string Zoom_Image_Fit = "Zoom_Image_Fit";
         public const string Zoom_Image_100 = "Zoom_Image_100";

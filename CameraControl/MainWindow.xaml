@@ -291,7 +291,7 @@
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension LabelSelection}">
                     <MenuItem Header="{T:TranslateExtension LabelSelectNone}" Command="{Binding Path=SelectNoneCommand}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelSelectAll}" Command="{Binding Path=SelectAllCommand}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelSelectAll}" Command="{Binding SendCommand}" CommandParameter="SelectAll_Image" InputGestureText="{myClasess:CommandShortcutExtensioncs SelectAll_Image}"/>
                     <MenuItem Header="{T:TranslateExtension LabelSelectUnLiked}" Command="{Binding Path=SelectUnLiked}"/>
                     <MenuItem Header="{T:TranslateExtension LabelSelectLiked}" Command="{Binding Path=SelectLiked}"/>
                     <MenuItem Header="{T:TranslateExtension LabelSelectSeries}" Command="{Binding Path=SelectSeries}"/>

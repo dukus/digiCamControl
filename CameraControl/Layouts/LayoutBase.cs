@@ -58,7 +58,7 @@ namespace CameraControl.Layouts
     public class LayoutBase : UserControl
     {
         /// <summary>
-     
+
 
         /// <summary>
         /// Set to 'true' when the previous zoom rect is saved.
@@ -239,7 +239,7 @@ namespace CameraControl.Layouts
                             Color.FromArgb(128, 128, 128, 128));
                         bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2),
                             Color.FromArgb(128, 128, 128, 128));
-                        bitmap.DrawRectangle(fw - (dw/2), fh - (dh/2), fw + (dw/2), fh + (dh/2), Colors.White);
+                        bitmap.DrawRectangle(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2), Colors.White);
                         bitmap.Freeze();
                         ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
                     }
@@ -470,9 +470,14 @@ namespace CameraControl.Layouts
                         }
                         break;
                     case WindowsCmdConsts.Del_Image:
-                    {
-                        DeleteItem();
-                    }
+                        {
+                            DeleteItem();
+                        }
+                        break;
+                    case WindowsCmdConsts.SelectAll_Image:
+                        {
+                            ServiceProvider.Settings.DefaultSession.SelectAll();
+                        }
                         break;
                     case WindowsCmdConsts.Select_Image:
                         FileItem fileItem = o as FileItem;
@@ -499,25 +504,25 @@ namespace CameraControl.Layouts
                         ZoomAndPanControl.ZoomTo(2.0);
                         break;
                     case WindowsCmdConsts.RotateLeft:
-                    {
-                        FileItem item =
-                            ImageLIst.SelectedItem as FileItem;
-                        if (item != null)
                         {
-                            item.Rotation--;
+                            FileItem item =
+                                ImageLIst.SelectedItem as FileItem;
+                            if (item != null)
+                            {
+                                item.Rotation--;
 
+                            }
                         }
-                    }
                         break;
                     case WindowsCmdConsts.RotateRight:
-                    {
-                        FileItem item =
-                            ImageLIst.SelectedItem as FileItem;
-                        if (item != null)
                         {
-                            item.Rotation++;
+                            FileItem item =
+                                ImageLIst.SelectedItem as FileItem;
+                            if (item != null)
+                            {
+                                item.Rotation++;
+                            }
                         }
-                    }
                         break;
                     case WindowsCmdConsts.ViewExternal:
                         OpenInExternalViewer();
@@ -607,8 +612,8 @@ namespace CameraControl.Layouts
             }
             catch (Exception)
             {
-                
-                
+
+
             }
         }
 

@@ -44,7 +44,6 @@ namespace CameraControl.ViewModel
         public RelayCommand SelectNoneCommand { get; private set; }
         public RelayCommand SelectInvertCommand { get; private set; }
         public RelayCommand SelectSeries { get; private set; }
-        public RelayCommand SelectAllCommand { get; private set; }
         
         public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand CameraPropertyCommand { get; private set; }
@@ -178,7 +177,6 @@ namespace CameraControl.ViewModel
             SettingsCommand = new RelayCommand(EditSettings);
             ThumbSizeCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(ThumbSize);
             SetLayoutCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(SetLayout);
-            SelectAllCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectAll(); });
             SelectNoneCommand = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectNone(); });
             SelectLiked = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectLiked(); });
             SelectUnLiked = new RelayCommand(delegate { ServiceProvider.Settings.DefaultSession.SelectUnLiked(); });
