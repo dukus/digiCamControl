@@ -695,5 +695,6 @@ namespace CameraControl.Core.Translation
         public static string LabelList = "List";
         public static string LabelCameraname = "Camera name";
         public static string LabelSerialNumber = "Serial number";
+        public static string LabelResetCounterOnSeriesChange = "Reset counter on series change";
     }
 }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-        Title="MultipleLiveView" Height="426" Width="632">
+        Title="MultipleLiveView" Height="426" Width="632" Closing="MetroWindow_Closing">
     <Window.DataContext>
         <viewModel:MultipleLiveViewViewModel/>
     </Window.DataContext>

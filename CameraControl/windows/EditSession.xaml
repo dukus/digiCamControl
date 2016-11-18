@@ -57,6 +57,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
@@ -114,6 +115,9 @@
 
                         <Label Grid.Row="15" Grid.Column="0" Content="{T:TranslateExtension LabelDeleteFileAfterTransfer}" HorizontalContentAlignment="Right" />
                         <CheckBox Grid.Row="15" Grid.Column="1" IsChecked="{Binding Path=DeleteFileAfterTransfer}" Margin="2"/>
+
+                        <Label Grid.Row="16" Grid.Column="0" Content="{T:TranslateExtension LabelResetCounterOnSeriesChange}" HorizontalContentAlignment="Right" />
+                        <CheckBox Grid.Row="16" Grid.Column="1" IsChecked="{Binding Path=ResetCounterOnSeries}" Margin="2"/>
                     </Grid>
                 </ScrollViewer>
             </TabItem>

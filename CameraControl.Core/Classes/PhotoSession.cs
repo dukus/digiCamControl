@@ -99,6 +99,10 @@ namespace CameraControl.Core.Classes
             get { return _series; }
             set
             {
+                if (_series != value && ResetCounterOnSeries)
+                {
+                    Counter = 1;
+                }
                 _series = value;
                 NotifyPropertyChanged("Series");
             }
@@ -415,6 +419,17 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool ResetCounterOnSeries
+        {
+            get { return _resetCounterOnSeries; }
+            set
+            {
+                _resetCounterOnSeries = value;
+                NotifyPropertyChanged("ResetCounterOnSeries");
+            }
+        }
+
+
         public string ConfigFile { get; set; }
 
         public TimeLapseSettings TimeLapseSettings { get; set; }
@@ -545,6 +560,7 @@ namespace CameraControl.Core.Classes
         private bool _askSavePath;
         private bool _downloadThumbOnly;
         private bool _deleteFileAfterTransfer;
+        private bool _resetCounterOnSeries;
 
         public bool AllowOverWrite
         {
