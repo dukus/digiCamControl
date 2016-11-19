@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
@@ -21,7 +22,18 @@ namespace CameraControl.ViewModel
         private bool _operInProgress;
         private int _rows;
         private int _cols;
-        public ObservableCollection<SimpleLiveViewViewModel> Cameras { get; set; }
+        private ObservableCollection<SimpleLiveViewViewModel> _cameras;
+
+        public ObservableCollection<SimpleLiveViewViewModel> Cameras
+        {
+            get { return _cameras; }
+            set
+            {
+                _cameras = value;
+                RaisePropertyChanged(()=>Cameras);
+            }
+        }
+
         public RelayCommand StartLiveViewCommand { get; set; }
         public RelayCommand StopLiveViewCommand { get; set; }
         public RelayCommand AutoFocusCommand { get; set; }
@@ -62,11 +74,6 @@ namespace CameraControl.ViewModel
 
         public MultipleLiveViewViewModel()
         {
-            InitCameras();
-        }
-
-        private void InitCameras()
-        {
             Rows = 2;
             Cols = 2;
 
@@ -75,10 +82,16 @@ namespace CameraControl.ViewModel
             AutoFocusCommand = new RelayCommand(AutoFocus);
             StartRecordCommand = new RelayCommand(StartRecord);
             StopRecordCommand = new RelayCommand(StopRecord);
+            _timer.Elapsed += _timer_Elapsed;
+            InitCameras();
+        }
 
+        public void InitCameras()
+        {
             Cameras = new ObservableCollection<SimpleLiveViewViewModel>();
             if (ServiceProvider.DeviceManager != null)
             {
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
                 foreach (
                     ICameraDevice device in
                         ServiceProvider.DeviceManager.ConnectedDevices.Where(
@@ -87,14 +100,52 @@ namespace CameraControl.ViewModel
                     Cameras.Add(new SimpleLiveViewViewModel(device));
                 }
             }
-            _timer.Elapsed += _timer_Elapsed;
+        }
+
+        private void WindowsManager_Event(string cmd, object o)
+        {
+            switch (cmd)
+            {
+                case WindowsCmdConsts.MultipleLiveView_Start:
+                    StartLiveView();
+                    break;
+                case WindowsCmdConsts.MultipleLiveView_Stop:
+                    StopLiveView();
+                    break;
+            }
+            if (cmd.StartsWith(WindowsCmdConsts.MultipleLiveView_Row))
+            {
+                if (cmd.Contains("_"))
+                {
+                    var vals = cmd.Split('_');
+                    if (vals.Count() > 2)
+                    {
+                        int x;
+                        if (int.TryParse(vals[2], out x))
+                            Rows = x;
+                    }
+                }
+            }
+            if (cmd.StartsWith(WindowsCmdConsts.MultipleLiveView_Col))
+            {
+                if (cmd.Contains("_"))
+                {
+                    var vals = cmd.Split('_');
+                    if (vals.Count() > 2)
+                    {
+                        int x;
+                        if (int.TryParse(vals[2], out x))
+                            Cols = x;
+                    }
+                }
+            }
+
         }
 
         void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timer.Stop();
-            Thread thread = new Thread(GetLiveViewThread);
-            thread.Start();
+            Task.Factory.StartNew(GetLiveViewThread);
         }
 
         private void AutoFocus()

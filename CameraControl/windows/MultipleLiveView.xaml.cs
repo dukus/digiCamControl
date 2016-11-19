@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.ViewModel;
 
 namespace CameraControl.windows
 {
@@ -35,6 +36,7 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.MultipleLiveViewWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
                     {
+                        ((MultipleLiveViewViewModel)(DataContext)).InitCameras();
                         Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                         Show();
                         Activate();
@@ -42,13 +44,19 @@ namespace CameraControl.windows
                     }));
                     break;
                 case WindowsCmdConsts.MultipleLiveViewWnd_Hide:
-                    Hide();
+                    Dispatcher.BeginInvoke(new Action(Hide));
                     break;
                 case CmdConsts.All_Close:
                     Dispatcher.Invoke(new Action(delegate
                     {
                         Hide();
                         Close();
+                    }));
+                    break;
+                case WindowsCmdConsts.MultipleLiveViewWnd_Maximize:
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        this.WindowState=WindowState.Maximized;
                     }));
                     break;
             }

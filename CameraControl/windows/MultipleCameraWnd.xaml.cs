@@ -289,9 +289,8 @@ namespace CameraControl.windows
 
         private void btn_liveview_Click(object sender, RoutedEventArgs e)
         {
-            MultipleLiveView view = new MultipleLiveView();
-            view.Owner = this;
-            view.Show();
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MultipleLiveViewWnd_Show);
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MultipleLiveViewWnd_Maximize);
         }
 
         private void chk_noautofocus_Checked(object sender, RoutedEventArgs e)
