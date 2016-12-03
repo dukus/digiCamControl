@@ -38,6 +38,7 @@ namespace CameraControl.windows
                     Dispatcher.Invoke(new Action(delegate
                     {
                         var data = new PrintViewModel();
+                        Owner = (Window)ServiceProvider.PluginManager.SelectedWindow;
                         data.LoadPrinterSettings();
                         DataContext = data;
                         Show();
