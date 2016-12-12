@@ -4,20 +4,25 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="css/images/favicon.png" />
   <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" type="text/css" media="all">  
   <link rel="stylesheet" href="js/jquery-ui-1.11.2.custom/jquery-ui.min.css" type="text/css" media="all">
-  <title>remote digiCamControl</title>
+  
+  <title>Remote | digiCamControl</title>
 </head>
 <body>
   <header>
-    <div class="menu">
+    <div class="menu">    
       <table>
 		<tr>
-		  <td id="logoholder"><span id="logo">digiCamControl<span class="remote">remote</span></span></td>
-		  <td><span id="capture">Capture</span></td>
-		  <td><span id="browse">Control</span></td>
-		  <td><span id="slideshow">Slideshow</span></td>
-		  <td><span id="live">Live</span></td>
+		  <td id="logoholder"><span id="logo"><a href="http://digiCamControl.com" target="_blank" class="logo">digiCamControl</a><span class="nav" id="remote">remote</span></span></td>
+          <td id="nav" class="nav">
+            <span class="nav" id="capture"><i class="fa fa-camera red fa-2x fa-fw"></i>Capture</span>
+            <span class="nav" id="slideshow"><i class="fa fa-photo fa-2x fa-fw"></i>Slideshow</span>
+            <!--<span class="nav" id="browse"><i class="fa fa-cogs"></i>Control</span>-->
+            <span class="nav" id="live"><i class="fa fa-video-camera fa-2x fa-fw"></i>Live</span>
+          </td>
 		</tr>
       </table>
     </div>
@@ -25,7 +30,14 @@
   <div style="clear: both"></div>
   <div id="contentwrapper">
 	<div id="content">
-	  <div style="padding:20px">Welcome to <i>remote</i> digiCamControl</div>
+	  <img id="browseimg" class="centered fullScreen" src="/preview.jpg" />
+        <script type="text/javascript">
+        window.setInterval(function(){
+            $("#browseimg").attr("src","/preview.jpg?rand=" + Math.random());
+        }, 1000);
+            $("#hrefimg").attr("href","/preview.jpg?rand=" + Math.random());
+        }, 1000);
+        </script>
 	</div>
   </div>
 
@@ -36,15 +48,29 @@
 $(document).ready(function(){
   $.ajaxSetup({ cache: false });
   $("#capture").click(function(){
+    if ($('#liveimg').length){
+      $.ajax({
+      method: "GET",
+      url: "/?CMD=LiveView_Capture"
+    });
+    return false;
+    } else {
     $.ajax({
       method: "GET",
       url: "/?CMD=Capture"
     });
     return false;
+    }
   });
   $("#live").click(function(){
     $("#content").children().remove().addClass("loading");
     $("#content").load("/liveview.html?CMD=LiveViewWnd_Show", function(){
+      $(this).removeClass("loading");
+    });
+  });
+  $("#remote").click(function(){
+    $("body").children().remove().addClass("loading");
+    $("body").load("/index.html", function(){
       $(this).removeClass("loading");
     });
   });
@@ -76,6 +102,55 @@ $(window).resize(function() {
   var remaining_height = parseInt($(window).height() - top); 
   $('#contentwrapper').height(remaining_height);
 });
+
+
+var inFullScreen = false; // flag to show when full screen
+
+var fsClass = document.getElementsByClassName("fullScreen");
+for (var i = 0; i < fsClass.length; i++) {
+  fsClass[i].addEventListener("click", function (evt) {
+    if (inFullScreen == false) {
+      makeFullScreen(evt.target); // open to full screen
+    } else {
+      reset();
+    }
+  }, false);
+}
+
+
+function makeFullScreen(divObj) {
+  if (divObj.requestFullscreen) {
+    divObj.requestFullscreen();
+  }
+  else if (divObj.msRequestFullscreen) {
+    divObj.msRequestFullscreen();
+  }
+  else if (divObj.mozRequestFullScreen) {
+    divObj.mozRequestFullScreen();
+  }
+  else if (divObj.webkitRequestFullscreen) {
+    divObj.webkitRequestFullscreen();
+  }
+  inFullScreen = true;
+  return;
+}
+
+function reset() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+  else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+  else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  }
+  else if (document.webkitCancelFullScreen) {
+    document.webkitCancelFullScreen();
+  }
+  inFullScreen = false;
+  return;
+}
 </script>
 </body>
 </html>
