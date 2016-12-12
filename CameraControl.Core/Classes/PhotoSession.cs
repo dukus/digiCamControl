@@ -101,7 +101,7 @@ namespace CameraControl.Core.Classes
             {
                 if (_series != value && ResetCounterOnSeries)
                 {
-                    Counter = 1;
+                    Counter = 0;
                 }
                 _series = value;
                 NotifyPropertyChanged("Series");

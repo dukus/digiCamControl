@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Printing;
 using System.Windows.Controls;
 using CameraControl.Core;
@@ -147,9 +148,8 @@ namespace CameraControl.ViewModel
                 if (!IsInDesignMode)
                 {
                     Items = new ObservableCollection<PrintItemViewModel>();
+                    InitItems();
                 }
-                //LoadPrinterSettings();
-                InitItems();
             }
             catch (Exception ex)
             {
@@ -189,7 +189,10 @@ namespace CameraControl.ViewModel
 
             if (Dlg.ShowDialog() == true)
             {
+                PrinterName = Dlg.PrintQueue.Name;
+                SavePrintTicket(Dlg);
                 LoadPrinterSettings();
+
             }
         }
 
@@ -197,7 +200,8 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                PrinterName = Dlg.PrintQueue.Name;
+                Dlg.PrintQueue = new PrintQueue(new PrintServer(), PrinterName);
+                LoadPrintTicket(Dlg);
                 PrintCapabilities capabilities = Dlg.PrintQueue.GetPrintCapabilities(Dlg.PrintTicket);
                 if (capabilities.PageImageableArea != null)
                 {
@@ -214,6 +218,56 @@ namespace CameraControl.ViewModel
         private void PageSetup()
         {
 
+        }
+
+        public void SavePrintTicket(PrintDialog dialog)
+        {
+            using (FileStream stream = new FileStream(Path.Combine(Settings.SessionFolder, ServiceProvider.Settings.DefaultSession.Name + "_printer.xml"), FileMode.Create))
+            {
+                dialog.PrintTicket.SaveTo(stream);
+                stream.Close();
+            }
+        }
+
+        public  void LoadPrintTicket(PrintDialog dialog)
+        {
+            string configFile = Path.Combine(Settings.SessionFolder, ServiceProvider.Settings.DefaultSession.Name + "_printer.xml");
+
+            PrintTicket defaultTicket;
+
+            try
+            {
+                defaultTicket = dialog.PrintQueue.UserPrintTicket ?? dialog.PrintQueue.DefaultPrintTicket;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to load printer settings.", e);
+                return;
+            }
+
+            if (File.Exists(configFile))
+            {
+                try
+                {
+                    using (FileStream stream = new FileStream(configFile, FileMode.Open))
+                    {
+                        PrintTicket newTicket = new PrintTicket(stream);
+
+                        System.Printing.ValidationResult result = dialog.PrintQueue.MergeAndValidatePrintTicket(defaultTicket, newTicket);
+                        dialog.PrintTicket = result.ValidatedPrintTicket;
+                        stream.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Unable to load printer settings.", e);
+                    dialog.PrintTicket = defaultTicket;
+                }
+            }
+            else
+            {
+                dialog.PrintTicket = defaultTicket;
+            }
         }
 
     }
