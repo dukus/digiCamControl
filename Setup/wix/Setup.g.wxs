@@ -44,7 +44,7 @@
 
     <PropertyRef Id="NETFRAMEWORK45" />
 
-    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="d:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
       <UpgradeVersion Minimum="0.0.0.0" Maximum="2.0.69.1" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />

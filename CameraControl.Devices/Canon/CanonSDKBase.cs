@@ -1230,6 +1230,14 @@ namespace CameraControl.Devices.Canon
             Camera.StartLiveView(EosLiveViewAutoFocus.LiveMode);
         }
 
+        public void StartLiveViewCamera()
+        {
+            _recording = false;
+            ResetShutterButton();
+            //if (!Camera.IsInLiveViewMode) 
+            Camera.StartLiveViewCamera();
+        }
+
         public override void StopLiveView()
         {
             if (Camera == null)
@@ -1295,6 +1303,11 @@ namespace CameraControl.Devices.Canon
             {
                 Edsdk.EdsRelease((IntPtr)o);
             }
+        }
+
+        public override void TransferFileThumb(object o, string filename)
+        {
+            base.TransferFileThumb(o, filename);
         }
 
         public override void TransferFile(object o, string filename)

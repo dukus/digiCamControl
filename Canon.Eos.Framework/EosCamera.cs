@@ -495,6 +495,19 @@ namespace Canon.Eos.Framework
             return this.LiveViewAutoFocus;
         }
 
+        public EosLiveViewAutoFocus StartLiveViewCamera()
+        {
+            if (!this.IsInLiveViewMode)
+                this.IsInLiveViewMode = true;
+            this._cancelLiveViewRequested = false;
+            this._pauseLiveViewRequested = false;
+            var device = this.LiveViewDevice;
+            device = device| EosLiveViewDevice.Camera | EosLiveViewDevice.Host;
+            this.LiveViewDevice = device;
+            this.LiveViewAutoFocus = EosLiveViewAutoFocus.LiveMode;
+            return this.LiveViewAutoFocus;
+        }
+
         /// <summary>
         /// Starts the live view with special auto focus.
         /// </summary>
