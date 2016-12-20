@@ -1,4 +1,9 @@
-<img u="image" src="@image@" />
+<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <a href="@image@" itemprop="contentUrl" data-size="800x600">
+        <img src="@image_thumb@" itemprop="thumbnail" alt="Image description" />
+    </a>
+    <figcaption itemprop="caption description">@title@ <br> @desc@</figcaption>
+</figure>
 <!-- 
 @image@ =  large thumb
 @image_thumb@ = small thumb

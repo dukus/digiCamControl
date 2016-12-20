@@ -525,9 +525,9 @@ namespace CameraControl.Devices.Canon
                                 false);
                             break;
                         case Edsdk.PropID_AEMode:
-                            Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
                             ReInitFNumber(true);
                             ReInitShutterSpeed();
+                            Mode.SetValue((uint)Camera.GetProperty(Edsdk.PropID_AEMode), false);
                             break;
                         case Edsdk.PropID_WhiteBalance:
                             WhiteBalance.SetValue(Camera.GetProperty(Edsdk.PropID_WhiteBalance), false);

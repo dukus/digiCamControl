@@ -1,9 +1,45 @@
 html, body	{margin:0;padding:0;height:100%;width:100%;overflow-x: hidden}
 body{font: 100%/1.2 Verdana, Arial, Helvetica, sans-serif;background: #000;color: #fff}
-header{background:#808080;color:#fff;text-align: center;display:block; height:50px; width:100%}
+header{background:#13171B;color:#fff;text-align: center;display:block; height:60px; width:100%}
 #logoholder{position: relative;width:200px}
-span#logo{position:absolute;background:url(img/logo.png) left center no-repeat;min-height:64px; background-size: 64px auto; padding-left: 70px;display: block;width:130px;margin:0 auto; text-align: left;line-height:3.5em;cursor: default;color:#000;font-weight: bold;top:1px;z-index: 100}
-span.remote{line-height:1em;display: block;text-align: right;font-size: 0.7em;position: relative;top:-25px;left:5px;color:#efefef}
+span#logo{position:absolute;background:url(img/logo.png) left center no-repeat;min-height:64px; background-size: 64px auto; padding-left: 70px;display: block;width:130px;margin:0 auto; text-align: left;line-height:3.5em;cursor: default;color:#730f11;font-weight: bold;top:1px;z-index: 100}
+span#remote{line-height:1.5em;display: block;text-align: right;font-size: 0.7em;position: relative;top:-25px;left:5px;color:#6D6E71}
+a.logo{
+    color:#730f11;
+    text-decoration: none;
+    -webkit-transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-o-transition: color .2s ease-in-out;
+	-ms-transition: color .2s ease-in-out;
+	transition: color .2s ease-in-out;}
+a.logo:hover{color:#c12026;}
+.nav {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 0px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+}
+span.nav {
+   margin-left:3%;
+   font-weight: bold;
+   text-decoration: none;
+   text-align: left;
+   text-transform: uppercase;
+   letter-spacing: 1.5px;
+   /* mod 9/14/2015 */
+   color: #8E848C;
+
+	-webkit-transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-o-transition: color .2s ease-in-out;
+	-ms-transition: color .2s ease-in-out;
+	transition: color .2s ease-in-out;
+}
+span.nav:hover { color: #fff; background-color: transparent !important; text-transform: uppercase;}
+#remote:hover{color: #fff; background-color: transparent !important; text-transform: uppercase;}
+
 div.submenu{text-align:center;width:80%;margin:0 auto;margin-top:3px}
 div.submenu ul{margin:0 auto;width:auto;padding:0;list-style:none}
 div.submenu li{float:left}
@@ -13,16 +49,20 @@ div.submenu2 fieldset{margin-right: 10px;margin-bottom: 3px}
 div.submenu2 li{float:none}
 div.menu table{margin:0 auto;border:0; padding:0; border-spacing: 0; border-collapse: separate;}
 div.menu td{padding:0 8px}
+
+
 div#contentwrapper{text-align: center;display:block; width:100%; top:50px; left:0; right:auto; bottom:0}
 .loading{background:url(img/ajax-loader.gif) center center no-repeat;min-height: 50px}
 img.centered{margin:5px auto;height:90%;width:auto}
 img.centeredsmall{margin:5px auto;height:60%;width:auto}
+img#liveimg{width: 100%;}
 fieldset{border:1px solid #404040;padding:1px;}
 #content,.content{width:100%;height:100%}
 
-span.IsLiked{position:absolute;top: 10px;left:10px;background:url(img/IsLiked.png) center center no-repeat;display: block;width:64px;height:64px;z-index:1000}
-span.IsUnLiked{position:absolute;top: 10px;left:10px;background:url(img/IsUnLiked.png) center center no-repeat;display: block;width:64px;height:64px;z-index:1000}
-
+div.menu span{
+    cursor: pointer;text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+}
+/*
 #capture{background:url(img/capture.png) left center no-repeat;padding-left:34px; display:block;line-height:34px; cursor: pointer;text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);position:relative;top:5px}
 #capture:hover{color:#85ECFF}
 #browse{background:url(img/browse.png) left center no-repeat;padding-left:43px; display:block;line-height:34px; cursor: pointer;text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);position:relative;top:5px}
@@ -31,22 +71,88 @@ span.IsUnLiked{position:absolute;top: 10px;left:10px;background:url(img/IsUnLike
 #slideshow:hover{color:#85ECFF}
 #live{background:url(img/live.png) left center no-repeat;padding-left:36px; display:block;line-height:34px; cursor: pointer;text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);position:relative;top:5px}
 #live:hover{color:#85ECFF}
-
+*/
 @media only screen and (min-width: 768px) and (max-width: 899px) {
 
 }
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 520px) and (max-width: 767px) {
 #capture, #browse, #slideshow, #live{background-image:none;padding-left:2px}
 div.submenu{width:98%}
+i.fa {display: none}
 }
 
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 520px) {
 span#logo{display: none}
-#capture, #browse, #slideshow, #live{background-image:none;padding-left:2px}
+td#logoholder{display: none}
+#capture, #browse, #slideshow, #live{text-transform: none; letter-spacing: 1px;}
 div.submenu{width:98%}
+i.fa {display: none}
 }
 
 
-.cycle-slideshow { width: 70%; margin: auto;  }
-.cycle-slideshow img { width: 100%; height: auto  }
+.my-gallery {
+  width: 100%;
+  float: left;
+}
+.my-gallery img {
+  width: 100%;
+  height: auto;
+}
+.my-gallery figure {
+  display: block;
+  float: left;
+  margin: 0 5px 5px 0;
+  width: 150px;
+}
+.my-gallery figcaption {
+  display: none;
+}
+#browseimg:-webkit-full-screen{
+  position:fixed;
+  top:0; 
+  right:0; 
+  bottom:0; 
+  left:0;
+  margin:auto;
+  box-sizing:border-box;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+#browseimg:-moz-full-screen{
+  position:fixed;
+  top:0; 
+  right:0; 
+  bottom:0; 
+  left:0;
+  margin:auto;
+  box-sizing:border-box;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+#browseimg:-ms-fullscreen{
+  position:fixed;
+  top:0; 
+  right:0; 
+  bottom:0; 
+  left:0;
+  margin:auto;
+  box-sizing:border-box;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+#browseimg:full-screen{
+  position:fixed;
+  top:0; 
+  right:0; 
+  bottom:0; 
+  left:0;
+  margin:auto;
+  box-sizing:border-box;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}

@@ -1,0 +1,12 @@
+{
+    mediumImage: {
+            src: '@image@',
+            w: 600,
+            h: 400
+    },
+    originalImage: {
+            src: '@image_url@',
+            w: @width@,
+            h: @Height@
+    }
+}
