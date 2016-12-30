@@ -1091,6 +1091,19 @@ namespace CameraControl.Devices.Canon
                 (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF);
         }
 
+        public void PressButton()
+        {
+            ResetShutterButton();
+            ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely));
+        }
+
+
+        public void ReleaseButton()
+        {
+           Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton,(int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF);
+        }
+
+
         public override void CapturePhotoNoAf()
         {
             Log.Debug("EOS capture start");
