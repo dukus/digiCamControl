@@ -29,6 +29,7 @@
 #region
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -63,8 +64,8 @@ namespace CameraControl.Devices
         private object _locker = new object();
         private List<DeviceDescription> _deviceDescriptions = new List<DeviceDescription>();
 
-        public Dictionary<ICameraDevice, byte[]> LiveViewImage;
-        public Dictionary<ICameraDevice, string> LastCapturedImage;
+        public ConcurrentDictionary<ICameraDevice, byte[]> LiveViewImage;
+        public ConcurrentDictionary<ICameraDevice, string> LastCapturedImage;
 
         /// <summary>
         /// Gets or sets a value indicating whether use experimental drivers.
@@ -205,8 +206,8 @@ namespace CameraControl.Devices
             SelectedCameraDevice = new NotConnectedCameraDevice();
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
             _deviceEnumerator = new DeviceDescriptorEnumerator();
-            LiveViewImage = new Dictionary<ICameraDevice, byte[]>();
-            LastCapturedImage = new Dictionary<ICameraDevice, string>();
+            LiveViewImage = new ConcurrentDictionary<ICameraDevice, byte[]>();
+            LastCapturedImage = new ConcurrentDictionary<ICameraDevice, string>();
             WifiDeviceProviders = new List<IWifiDeviceProvider>();
 
             // prevent program crash in something wrong with wia
