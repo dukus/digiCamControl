@@ -415,6 +415,8 @@ namespace CameraControl.Devices.Canon
         {
             AdvancedProperties.Add(InitDriveMode());
             AdvancedProperties.Add(InitFlash());
+            AdvancedProperties.Add(InitBracket());
+            AdvancedProperties.Add(InitAEBracket());
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 value.SetValue((long)Camera.GetProperty(value.Code), false);
@@ -465,6 +467,51 @@ namespace CameraControl.Devices.Canon
             return res;
         }
 
+        private PropertyValue<long> InitBracket()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Bracketing",
+                IsEnabled = false,
+                Code = Edsdk.PropID_Bracket,
+                SubType = typeof(UInt32),
+                DisableIfWrongValue = true
+            };
+            res.AddValues("Bracket off", 0xFFFFFFFF);
+            res.AddValues("AE bracket", 1);
+            res.AddValues("ISO bracket", 2);
+            res.AddValues("WB bracket", 3);
+            res.AddValues("FE bracket", 4);
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) => Camera.SetProperty(res.Code, val);
+            return res;
+        }
+
+        private PropertyValue<long> InitAEBracket()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "AE Bracketing",
+                IsEnabled = true,
+                Code = Edsdk.PropID_AEBracket,
+                SubType = typeof(UInt32),
+                DisableIfWrongValue = true
+            };
+            var r = Camera.GetPropertyDescription(Edsdk.PropID_AEBracket);
+            res.AddValues("Bracket off", 0);
+            for (int i = 1; i < r.NumElements; i++)
+            {
+                res.AddValues("Step "+i, r.PropDesc[i]);
+            }
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) =>
+                {
+                    Camera.SetProperty(res.Code, val);
+                };
+            return res;
+        }
         private void InitOther()
         {
             LiveViewImageZoomRatio = new PropertyValue<int> {Name = "LiveViewImageZoomRatio"};
@@ -554,6 +601,15 @@ namespace CameraControl.Devices.Canon
                         case Edsdk.PropID_BatteryLevel:
                             Battery = (int) Camera.BatteryLevel + 20;
                             break;
+                        case Edsdk.PropID_AEBracketType:
+                            int ae = (int)Camera.GetProperty(Edsdk.PropID_AEBracketType);
+                            //ResetShutterButton();
+                            break;
+                        case Edsdk.PropID_Bracket:
+                            int br = (int)Camera.GetProperty(Edsdk.PropID_Bracket);
+                            //ResetShutterButton();
+                            break;
+
                         case Edsdk.PropID_FocusInfo:
                             //ResetShutterButton();
                             break;

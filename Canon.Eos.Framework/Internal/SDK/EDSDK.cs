@@ -139,6 +139,7 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint   PropID_WhiteBalanceBracket  = 0x0000040c;
         public const uint   PropID_LensName             = 0x0000040d;
         public const uint   PropID_AEBracket            = 0x0000040e;
+        public const uint   PropID_AEBracketType        = 16778300;
         public const uint   PropID_FEBracket            = 0x0000040f;
         public const uint   PropID_ISOBracket           = 0x00000410;
         public const uint   PropID_NoiseReduction       = 0x00000411;
