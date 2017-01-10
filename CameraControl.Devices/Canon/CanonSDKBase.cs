@@ -433,16 +433,37 @@ namespace CameraControl.Devices.Canon
                 SubType = typeof (UInt32),
                 DisableIfWrongValue = true
             };
-            res.AddValues("Single-Frame Shooting", 0);
-            res.AddValues("Continuous Shooting", 1);
-            res.AddValues("Video", 2);
+            var r = Camera.GetPropertyDescription(Edsdk.PropID_DriveMode);
+            var rr = r.PropDesc.Take(r.NumElements).ToArray();
+            if (rr.Contains(0))
+                res.AddValues("Single-Frame Shooting", 0);
+            if (rr.Contains(1))
+                res.AddValues("Continuous Shooting", 1);
+            if (rr.Contains(2))
+                res.AddValues("Video", 2);
             //res.AddValues("Not used", 3);
-            res.AddValues("High-Speed Continuous Shooting", 4);
-            res.AddValues("Low-Speed Continuous Shooting", 5);
-            res.AddValues("Silent single shooting", 6);
-            res.AddValues("10-Sec Self-Timer plus continuous shots", 7);
-            res.AddValues("10-Sec Self-Timer", 10);
-            res.AddValues("2-Sec Self-Timer", 11);
+            if (rr.Contains(4))
+                res.AddValues("High-Speed Continuous Shooting", 4);
+            if (rr.Contains(5))
+                res.AddValues("Low-Speed Continuous Shooting", 5);
+            if (rr.Contains(6))
+                res.AddValues("Silent single shooting", 6);
+            if (rr.Contains(7))
+                res.AddValues("10-Sec Self-Timer plus continuous shots", 7);
+            if (rr.Contains(10))
+                res.AddValues("10-Sec Self-Timer", 10);
+            if (rr.Contains(11))
+                res.AddValues("2-Sec Self-Timer", 11);
+            if (rr.Contains(12))
+                res.AddValues("14fps super high speed", 12);
+            if (rr.Contains(13))
+                res.AddValues("Silent single shooting", 13);
+            if (rr.Contains(14))
+                res.AddValues("Silent contin shooting", 14);
+            if (rr.Contains(15))
+                res.AddValues("Silent HS continuous", 15);
+            if (rr.Contains(16))
+                res.AddValues("Silent LS continuous", 16);
             res.ReloadValues();
             res.ValueChanged +=
                 (sender, key, val) => Camera.SetProperty(res.Code, val); 
