@@ -1516,6 +1516,8 @@ namespace CameraControl.Devices.Canon
                 Edsdk.EdsGetChildAtIndex(Camera.Handle, i, out volumePtr);
                 Edsdk.EdsVolumeInfo vinfo;
                 Edsdk.EdsGetVolumeInfo(volumePtr, out vinfo);
+                if (vinfo.StorageType == 0)
+                    throw new Exception("No memory card inserted");
                 //ignore the HDD
                 if (vinfo.szVolumeLabel != "HDD")
                 {
