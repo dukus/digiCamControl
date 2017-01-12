@@ -1542,6 +1542,38 @@ namespace CameraControl.ViewModel
             _restartTimer.AutoReset = true;
             _restartTimer.Elapsed += _restartTimer_Elapsed;
             LiveViewManager.PreviewCaptured += LiveViewManager_PreviewCaptured;
+            if (!IsInDesignMode)
+            {
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event1;
+            }
+
+        }
+
+        private void WindowsManager_Event1(string cmd, object o)
+        {
+            if (cmd.StartsWith("LiveWnd_Overlay"))
+            {
+                try
+                {
+                    if (cmd.Contains("_"))
+                    {
+                        var vals = cmd.Split('_');
+                        if (vals.Count() > 3)
+                        {
+                            var property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+                            int y = 1;
+                            if (int.TryParse(vals[2], out y))
+                                OverlayTransparency = y;
+                            SelectedOverlay = vals[3].ToLower() == "null" ? "" : vals[3];
+                            OverlayActivated = vals[3].ToLower() != "null";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Unable to load overlay", ex);
+                }
+            }
         }
 
         private void _restartTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -1561,6 +1593,7 @@ namespace CameraControl.ViewModel
             _restartTimer.Stop();
             CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured;
             LiveViewManager.PreviewCaptured -= LiveViewManager_PreviewCaptured;
+            ServiceProvider.WindowsManager.Event -= WindowsManager_Event1;
             Thread.Sleep(100);
             StopLiveView();
             Recording = false;

@@ -15,7 +15,7 @@ namespace CameraControl.PluginManager
 {
     public class MainWindowViewModel:ViewModelBase
     {
-        private const string OnlineFileList = "";
+        private const string OnlineFileList = "http://digicamcontrol.com/updates/Plugins/plugin_list.txt";
         private PluginInfo _selectedPlugin;
         private string _message;
         private int _progress;
@@ -80,7 +80,7 @@ namespace CameraControl.PluginManager
                     {
                         PluginInfo pluginInfo = PluginInfo.Load(configFile);
                         pluginInfo.Folder = folder;
-                        pluginInfo.Enabled = !File.Exists(Path.Combine(folder, "disabled"));
+                        //pluginInfo.Enabled = !File.Exists(Path.Combine(folder, "disabled"));
                         InstalledPluginS.Add(pluginInfo);
                     }
                     catch (Exception)

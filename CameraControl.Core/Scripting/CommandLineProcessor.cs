@@ -89,7 +89,8 @@ namespace CameraControl.Core.Scripting
                     break;
                 default:
                     ServiceProvider.WindowsManager.ExecuteCommand(args[0]);
-                    if (!ServiceProvider.Settings.Actions.Select((x)=>x.Name).Contains(args[0]))
+                    // cammand with _ are special commands 
+                    if (!args[0].Contains("_") && !ServiceProvider.Settings.Actions.Select((x) => x.Name).Contains(args[0]))
                         throw new Exception(string.Format("Invalid command {0}", args[0]));
                     break;
             }

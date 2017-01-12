@@ -208,45 +208,47 @@ namespace CameraControl.windows
             {
                 case WindowsCmdConsts.LiveViewWnd_Show:
                     Dispatcher.Invoke(new Action(delegate
-                    {
-                        try
                         {
-                            ICameraDevice cameraparam = param as ICameraDevice;
-                            var properties = cameraparam.LoadProperties();
-                            if (properties.SaveLiveViewWindow && properties.WindowRect.Width > 0 && properties.WindowRect.Height > 0)
+                            try
                             {
-                                this.Left = properties.WindowRect.Left;
-                                this.Top = properties.WindowRect.Top;
-                                this.Width = properties.WindowRect.Width;
-                                this.Height = properties.WindowRect.Height;
-                            }
-                            else
-                            {
-                                this.WindowState = ((Window)ServiceProvider.PluginManager.SelectedWindow).WindowState;
-                            }
+                                ICameraDevice cameraparam = param as ICameraDevice;
+                                var properties = cameraparam.LoadProperties();
+                                if (properties.SaveLiveViewWindow && properties.WindowRect.Width > 0 &&
+                                    properties.WindowRect.Height > 0)
+                                {
+                                    this.Left = properties.WindowRect.Left;
+                                    this.Top = properties.WindowRect.Top;
+                                    this.Width = properties.WindowRect.Width;
+                                    this.Height = properties.WindowRect.Height;
+                                }
+                                else
+                                {
+                                    this.WindowState =
+                                        ((Window) ServiceProvider.PluginManager.SelectedWindow).WindowState;
+                                }
 
-                            if (cameraparam == SelectedPortableDevice && IsVisible)
-                            {
+                                if (cameraparam == SelectedPortableDevice && IsVisible)
+                                {
+                                    Activate();
+                                    Focus();
+                                    return;
+                                }
+
+
+                                DataContext = new LiveViewViewModel(cameraparam, this);
+                                SelectedPortableDevice = cameraparam;
+
+                                Show();
                                 Activate();
                                 Focus();
-                                return;
+
                             }
-
-
-                            DataContext = new LiveViewViewModel(cameraparam, this);
-                            SelectedPortableDevice = cameraparam;
-
-                            Show();
-                            Activate();
-                            Focus();
-
+                            catch (Exception exception)
+                            {
+                                Log.Error("Error initialize live view window ", exception);
+                            }
                         }
-                        catch (Exception exception)
-                        {
-                            Log.Error("Error initialize live view window ", exception);
-                        }
-                    }
-                        ));
+                    ));
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Hide:
                     Dispatcher.Invoke(new Action(delegate
@@ -419,7 +421,7 @@ namespace CameraControl.windows
             else if (e.Delta < 0)
             {
                 // don't allow zoomout les that original image 
-                if (zoomAndPanControl.ContentScale-0.2 > zoomAndPanControl.FitScale())
+                if (zoomAndPanControl.ContentScale - 0.2 > zoomAndPanControl.FitScale())
                 {
                     zoomAndPanControl.ZoomOut(curContentMousePoint);
                 }
@@ -438,7 +440,7 @@ namespace CameraControl.windows
         private void zoomAndPanControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Point curContentMousePoint = e.GetPosition(PreviewBitmap);
-            if (zoomAndPanControl.ContentScale<= zoomAndPanControl.FitScale())
+            if (zoomAndPanControl.ContentScale <= zoomAndPanControl.FitScale())
             {
                 zoomAndPanControl.ZoomAboutPoint(4, curContentMousePoint);
             }
