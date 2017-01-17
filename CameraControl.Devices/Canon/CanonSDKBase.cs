@@ -1424,6 +1424,7 @@ namespace CameraControl.Devices.Canon
                     catch (Exception exception)
                     {
                         Log.Error("Error transfer memory file", exception);
+                        File.Delete(filename);
                     }
                 }
                 EosFileImageEventArgs file = o as EosFileImageEventArgs;
