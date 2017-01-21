@@ -46,6 +46,7 @@ using CameraControl.Devices.TransferProtocol.DDServer;
 using CameraControl.Devices.TransferProtocol.PtpIp;
 using CameraControl.Devices.Wifi;
 using Canon.Eos.Framework;
+using PanonoTest;
 using PortableDeviceLib;
 using WIA;
 
@@ -197,6 +198,7 @@ namespace CameraControl.Devices
             WifiDeviceProviders.Add(new PtpIpProvider());
             WifiDeviceProviders.Add(new YiCameraProvider());
             WifiDeviceProviders.Add(new SonyProvider());
+            WifiDeviceProviders.Add(new PanonoProvider());
         }
 
         public CameraDeviceManager(string datafolder=null)
