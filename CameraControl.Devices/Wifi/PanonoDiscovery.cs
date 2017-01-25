@@ -74,7 +74,7 @@ namespace CameraControl.Devices.Wifi
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+//                MessageBox.Show(exc.Message);
                 return false;
             }
         }
