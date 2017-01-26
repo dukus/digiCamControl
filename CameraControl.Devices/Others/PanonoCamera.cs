@@ -18,11 +18,80 @@ namespace PanonoTest
         {
             _ws = new WebSocket(endpoint);
             _ws.OnMessage += Ws_OnMessage;
+            _ws.OnClose += _ws_OnClose;
+            _ws.OnError += _ws_OnError;
             _ws.Connect();
             LiveViewImageZoomRatio = new PropertyValue<int>();
             Auth();
             IsConnected = true;
+            IsoNumber = new PropertyValue<long> { Available = true };
+            FNumber = new PropertyValue<long> { Available = false };
+            ExposureCompensation = new PropertyValue<int> { Available = false };
+            FocusMode = new PropertyValue<long> { Available = false };
+            ShutterSpeed = new PropertyValue<long> { Available = false };
+            WhiteBalance = new PropertyValue<long> { Available = false };
+            InitIso();
+            InitMode();
             return true;
+        }
+
+        private void _ws_OnError(object sender, ErrorEventArgs e)
+        {
+            StaticHelper.Instance.SystemMessage = e.Message;
+        }
+
+        private void _ws_OnClose(object sender, CloseEventArgs e)
+        {
+            Close();
+            OnCameraDisconnected(this, new DisconnectCameraEventArgs { });
+        }
+
+        public override void Close()
+        {
+            _ws.OnMessage -= Ws_OnMessage;
+            _ws.OnClose -= _ws_OnClose;
+            _ws.OnError -= _ws_OnError;
+        }
+
+        private void InitIso()
+        {
+            IsoNumber.Tag = "ISO";
+            IsoNumber.AddValues("50",50);
+            IsoNumber.AddValues("100", 100);
+            IsoNumber.AddValues("200", 200);
+            IsoNumber.AddValues("400", 400);
+            IsoNumber.AddValues("800", 800);
+            IsoNumber.AddValues("1600", 1600);
+            IsoNumber.ReloadValues();
+            IsoNumber.ValueChanged += IsoNumber_ValueChanged;
+            ExecuteMethod("get_options", IsoNumber.Tag);
+        }
+
+        private void InitMode()
+        {
+            Mode = new PropertyValue<uint> {Tag = "ImageType"};
+            Mode.AddValues("Default", 0);
+            Mode.AddValues("HDR", 1);
+            Mode.ReloadValues();
+            Mode.ValueChanged += Mode_ValueChanged;
+            ExecuteMethod("get_options", Mode.Tag);
+        }
+
+
+        private void SetProperty(string key, string value)
+        {
+            _ws.Send("{ \"id\":3,\"method\":\"set_options\",\"params\":{ \"" + key + "\":\"" + value +
+                     "\"},\"jsonrpc\":\"2.0\"}");
+        }
+
+        private void Mode_ValueChanged(object sender, string key, uint val)
+        {
+            SetProperty(Mode.Tag, key);
+        }
+
+        private void IsoNumber_ValueChanged(object sender, string key, long val)
+        {
+            SetProperty(IsoNumber.Tag, key);
         }
 
         public void Auth()
@@ -32,6 +101,7 @@ namespace PanonoTest
 
         public override void CapturePhoto()
         {
+            IsBusy = true;
             ExecuteMethod("capture");
         }
 
@@ -43,7 +113,11 @@ namespace PanonoTest
                 var values = json["result"].ToObject<Dictionary<string, object>>();
                 if (values.ContainsKey("serial_number"))
                     SerialNumber = (string)values["serial_number"];
+                if (values.ContainsKey(IsoNumber.Tag))
+                    IsoNumber.SetValue((string) values[IsoNumber.Tag], false);
 
+                if (values.ContainsKey(Mode.Tag))
+                    Mode.SetValue((string) values[Mode.Tag], false);
             }
             if ((string)json["method"]== "status_update")
             {

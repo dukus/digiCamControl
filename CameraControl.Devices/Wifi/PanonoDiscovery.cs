@@ -98,7 +98,7 @@ namespace CameraControl.Devices.Wifi
             {
                 try
                 {
-                    udpSocket.SendTo(Encoding.UTF8.GetBytes(searchString), SocketFlags.None, multicastEndpoint);
+
                     for (int i = 0; i < 5; i++)
                     {
                         if (udpSocket.Available > 0)
@@ -114,19 +114,18 @@ namespace CameraControl.Devices.Wifi
                                     udpSocket.Close();
                                     var data = line.Split(' ');
                                     EndPoint = data[1];
+                                    Log.Debug("Camera found at " + EndPoint);
                                     return true;
                                 }
                             }
-                            if (response.Contains("LOCATION"))
-                            {
-                                return true;
-                            }
                         }
+                        Thread.Sleep(150);
                     }
+                    udpSocket.SendTo(Encoding.UTF8.GetBytes(searchString), SocketFlags.None, multicastEndpoint);
                 }
                 catch (Exception exc)
                 {
-                    MessageBox.Show("Test " + exc.Message);
+                    Log.Debug("Camera connection fail");
                     return false;
                 }
                 if ((DateTime.Now - starTime).TotalSeconds > 4000)
