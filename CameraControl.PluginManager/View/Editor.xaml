@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CameraControl.PluginManager.View"
         xmlns:viewModel="clr-namespace:CameraControl.PluginManager.ViewModel"
         mc:Ignorable="d"
-        Title="Editor" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Editor" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.DataContext>
         <viewModel:EditorViewModel/>
     </Window.DataContext>
@@ -21,18 +21,20 @@
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="2" >
             <MenuItem Header="File">
-                <MenuItem Header="New"/>
-                <MenuItem Header="Open ..."/>
-                <MenuItem Header="Save"/>
-                <MenuItem Header="Save as ..."/>
+                <MenuItem Header="New" Command="{Binding NewCommand}"/>
+                <MenuItem Header="Open ..." Command="{Binding LoadProjectCommand}"/>
+                <!--<MenuItem Header="Save"/>-->
+                <MenuItem Header="Save as ..." Command="{Binding SaveProjectCommand}"/>
                 <Separator/>
+                <MenuItem Header="Generate plugin package" Command="{Binding GenerateCommand}"/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
             <MenuItem Header="Edit">
                 <MenuItem Header="Add files" Command="{Binding AddFilesCommand}"/>
                 <MenuItem Header="Remove file"/>
                 <Separator/>
-                <MenuItem Header="Load .plugin file"/>
+                <MenuItem Header="Load .plugin file" Command="{Binding LoadPluginInfoCommand}"/>
+                <MenuItem Header="Save .plugin file" Command="{Binding SavePluginInfoCommand}"/>
                 
             </MenuItem>
         </Menu>
