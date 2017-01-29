@@ -253,6 +253,7 @@
     <Compile Include="ExternalDevices\UsbRelayReleaseConfig.xaml.cs">
       <DependentUpon>UsbRelayReleaseConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FilenameTemplate\ArduinoLabel.cs" />
     <Compile Include="FilenameTemplate\BarcodeFromImage.cs" />
     <Compile Include="FilenameTemplate\ExifTemplate.cs" />
     <Compile Include="ImageTransformPlugins\BindableTextEditor.cs" />

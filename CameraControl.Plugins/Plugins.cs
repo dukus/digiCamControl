@@ -116,6 +116,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.ExposureMode]", exiftemplate);
                 ServiceProvider.FilenameTemplateManager.Templates.Add("[Exif.Photo.FocalLengthIn35mmFilm]", exiftemplate);
                 ServiceProvider.FilenameTemplateManager.Templates.Add("[BarcodeFromImage]", new BarcodeFromImage());
+                ServiceProvider.FilenameTemplateManager.Templates.Add("[ArduinoLabel]", new ArduinoLabel());
             }
             catch (Exception exception)
             {
