@@ -74,7 +74,7 @@ namespace CameraControl.Devices.Wifi
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
+                Log.Debug("Camera discovery fail", exc);
                 return false;
             }
         }
@@ -125,10 +125,10 @@ namespace CameraControl.Devices.Wifi
                 }
                 catch (Exception exc)
                 {
-                    Log.Debug("Camera connection fail");
+                    Log.Debug("Camera connection fail", exc);
                     return false;
                 }
-                if ((DateTime.Now - starTime).TotalSeconds > 4000)
+                if ((DateTime.Now - starTime).TotalSeconds > 1000)
                 {
                     return false;
                 }
