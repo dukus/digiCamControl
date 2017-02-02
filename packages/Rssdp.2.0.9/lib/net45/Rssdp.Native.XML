@@ -1,0 +1,2061 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rssdp.Native</name>
+    </assembly>
+    <members>
+        <member name="T:Rssdp.SsdpDevicePublisher">
+            <summary>
+            Allows publishing devices both as notification and responses to search requests.
+            </summary>
+            <remarks>
+            This is  the 'server' part of the system. You add your devices to an instance of this class so clients can find them.
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor">
+            <summary>
+            Default constructor. 
+            </summary>
+            <remarks>
+            <para>Uses the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation and network settings for Windows and the SSDP specification.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer)">
+            <summary>
+            Partial constructor. 
+            </summary>
+            <remarks>
+            <para>Allows the caller to specify their own <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation for full control over the networking, or for mocking/testing purposes..</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer,Rssdp.ISsdpLogger)">
+            <summary>
+            Full constructor. 
+            </summary>
+            <remarks>
+            <para>Allows the caller to specify their own <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation for full control over the networking, or for mocking/testing purposes..</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(System.Int32)">
+            <summary>
+            Partial constructor. 
+            </summary>
+            <param name="localPort">The local port to use for socket communications, specify 0 to have the system choose it's own.</param>
+            <remarks>
+            <para>Uses the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation and network settings for Windows and the SSDP specification, but specifies the local port to use for socket communications. Specify 0 to indicate the system should choose it's own port.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Partial constructor. 
+            </summary>
+            <param name="localPort">The local port to use for socket communications, specify 0 to have the system choose it's own.</param>
+            <param name="multicastTimeToLive">The number of hops a multicast packet can make before it expires. Must be 1 or greater.</param>
+            <remarks>
+            <para>Uses the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation and network settings for Windows and the SSDP specification, but specifies the local port to use and multicast time to live setting for socket communications.</para>
+            <para>Specify 0 for the <paramref name="localPort"/> argument to indicate the system should choose it's own port.</para>
+            <para>The <paramref name="multicastTimeToLive"/> is actually a number of 'hops' on the network and not a time based argument.</para>
+            </remarks>
+        </member>
+        <member name="T:Rssdp.CustomHttpHeader">
+            <summary>
+            Represents a custom HTTP header sent on device search response or notification messages.
+            </summary>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeader.#ctor(System.String,System.String)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="name">The field name of the header.</param>
+            <param name="value">The value of the header</param>
+            <remarks>
+            <para>As per RFC 822 and 2616, the name must contain only printable ASCII characters (33-126) excluding colon (:). The value may contain any ASCII characters except carriage return or line feed.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the name is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the name is an empty value, or contains an invalid character. Also thrown if the value contains a \r or \n character.</exception>
+        </member>
+        <member name="P:Rssdp.CustomHttpHeader.Name">
+            <summary>
+            Return the name of this header.
+            </summary>
+        </member>
+        <member name="P:Rssdp.CustomHttpHeader.Value">
+            <summary>
+            Returns the value of this header.
+            </summary>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeader.ToString">
+            <summary>
+            Returns the header formatted for use in an HTTP message.
+            </summary>
+            <returns>A string representing this header in the format of  'name: value'.</returns>
+        </member>
+        <member name="T:Rssdp.CustomHttpHeadersCollection">
+            <summary>
+            Represents a collection of custom HTTP headers, keyed by name.
+            </summary>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.#ctor(System.Int32)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="capacity">Specifies the initial capacity of the collection.</param>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.Add(Rssdp.CustomHttpHeader)">
+            <summary>
+            Adds a <see cref="T:Rssdp.CustomHttpHeader"/> instance to the collection.
+            </summary>
+            <param name="header">The <see cref="T:Rssdp.CustomHttpHeader"/> instance to add to the collection.</param>
+            <remarks>
+            <para></para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="header"/> is null.</exception>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.Remove(Rssdp.CustomHttpHeader)">
+            <summary>
+            Removes the specified header instance from the collection.
+            </summary>
+            <param name="header">The <see cref="T:Rssdp.CustomHttpHeader"/> instance to remove from the collection.</param>
+            <remarks>
+            <para>Only removes the specified header if that instance was in the collection, if another header with the same name exists in the collection it is not removed.</para>
+            </remarks>
+            <returns>True if an item was removed from the collection, otherwise false (because it did not exist or was not the same instance).</returns>
+            <seealso cref="M:Rssdp.CustomHttpHeadersCollection.Remove(System.String)"/>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="header"/> is null.</exception>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.Remove(System.String)">
+            <summary>
+            Removes the property with the specified key (<see cref="P:Rssdp.CustomHttpHeader.Name"/> from the collection.
+            </summary>
+            <param name="headerName">The name of the <see cref="T:Rssdp.CustomHttpHeader"/> instance to remove from the collection.</param>
+            <returns>True if an item was removed from the collection, otherwise false (because no item exists in the collection with that key).</returns> 
+            <exception cref="T:System.ArgumentException">Thrown if the <paramref name="headerName"/> argument is null or empty string.</exception>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.Contains(Rssdp.CustomHttpHeader)">
+            <summary>
+            Returns a boolean indicating whether or not the specified <see cref="T:Rssdp.CustomHttpHeader"/> instance is in the collection.
+            </summary>
+            <param name="header">An <see cref="T:Rssdp.CustomHttpHeader"/> instance to check the collection for.</param>
+            <returns>True if the specified instance exists in the collection, otherwise false.</returns>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.Contains(System.String)">
+            <summary>
+            Returns a boolean indicating whether or not a <see cref="T:Rssdp.CustomHttpHeader"/> instance with the specified full name value exists in the collection.
+            </summary>
+            <param name="headerName">A string containing the full name of the <see cref="T:Rssdp.CustomHttpHeader"/> instance to check for.</param>
+            <returns>True if an item with the specified full name exists in the collection, otherwise false.</returns>
+        </member>
+        <member name="P:Rssdp.CustomHttpHeadersCollection.Count">
+            <summary>
+            Returns the number of items in the collection.
+            </summary>
+        </member>
+        <member name="P:Rssdp.CustomHttpHeadersCollection.Item(System.String)">
+            <summary>
+            Returns the <see cref="T:Rssdp.CustomHttpHeader"/> instance from the collection that has the specified <see cref="P:Rssdp.CustomHttpHeader.Name"/> value.
+            </summary>
+            <param name="name">The full name of the property to return.</param>
+            <returns>A <see cref="T:Rssdp.CustomHttpHeader"/> instance from the collection.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Thrown if no item exists in the collection with the specified <paramref name="name"/> value.</exception>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator of <see cref="T:Rssdp.CustomHttpHeader"/> instances in this collection.
+            </summary>
+            <returns>An enumerator of <see cref="T:Rssdp.CustomHttpHeader"/> instances in this collection.</returns>
+        </member>
+        <member name="M:Rssdp.CustomHttpHeadersCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator of <see cref="T:Rssdp.CustomHttpHeader"/> instances in this collection.
+            </summary>
+            <returns>An enumerator of <see cref="T:Rssdp.CustomHttpHeader"/> instances in this collection.</returns>
+        </member>
+        <member name="T:Rssdp.DeviceAvailableEventArgs">
+            <summary>
+            Event arguments for the <see cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable"/> event.
+            </summary>
+        </member>
+        <member name="M:Rssdp.DeviceAvailableEventArgs.#ctor(Rssdp.DiscoveredSsdpDevice,System.Boolean)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="discoveredDevice">A <see cref="T:Rssdp.DiscoveredSsdpDevice"/> instance representing the available device.</param>
+            <param name="isNewlyDiscovered">A boolean value indicating whether or not this device came from the cache. See <see cref="P:Rssdp.DeviceAvailableEventArgs.IsNewlyDiscovered"/> for more detail.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="discoveredDevice"/> parameter is null.</exception>
+        </member>
+        <member name="P:Rssdp.DeviceAvailableEventArgs.IsNewlyDiscovered">
+            <summary>
+            Returns true if the device was discovered due to an alive notification, or a search and was not already in the cache. Returns false if the item came from the cache but matched the current search request.
+            </summary>
+        </member>
+        <member name="P:Rssdp.DeviceAvailableEventArgs.DiscoveredDevice">
+            <summary>
+            A reference to a <see cref="T:Rssdp.DiscoveredSsdpDevice"/> instance containing the discovered details and allowing access to the full device description.
+            </summary>
+        </member>
+        <member name="T:Rssdp.DeviceEventArgs">
+            <summary>
+            Event arguments for the <see cref="E:Rssdp.SsdpDevice.DeviceAdded"/> and <see cref="E:Rssdp.SsdpDevice.DeviceRemoved"/> events.
+            </summary>
+        </member>
+        <member name="M:Rssdp.DeviceEventArgs.#ctor(Rssdp.SsdpDevice)">
+            <summary>
+            Constructs a new instance for the specified <see cref="T:Rssdp.SsdpDevice"/>.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> associated with the event this argument class is being used for.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+        </member>
+        <member name="P:Rssdp.DeviceEventArgs.Device">
+            <summary>
+            Returns the <see cref="T:Rssdp.SsdpDevice"/> instance the event is being raised for.
+            </summary>
+        </member>
+        <member name="T:Rssdp.DeviceUnavailableEventArgs">
+            <summary>
+            Event arguments for the <see cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable"/> event.
+            </summary>
+        </member>
+        <member name="M:Rssdp.DeviceUnavailableEventArgs.#ctor(Rssdp.DiscoveredSsdpDevice,System.Boolean)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="discoveredDevice">A <see cref="T:Rssdp.DiscoveredSsdpDevice"/> instance representing the device that has become unavailable.</param>
+            <param name="expired">A boolean value indicating whether this device is unavailable because it expired, or because it explicitly sent a byebye notification.. See <see cref="P:Rssdp.DeviceUnavailableEventArgs.Expired"/> for more detail.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="discoveredDevice"/> parameter is null.</exception>
+        </member>
+        <member name="P:Rssdp.DeviceUnavailableEventArgs.Expired">
+            <summary>
+            Returns true if the device is considered unavailable because it's cached information expired before a new alive notification or search result was received. Returns false if the device is unavailable because it sent an explicit notification of it's unavailability.
+            </summary>
+        </member>
+        <member name="P:Rssdp.DeviceUnavailableEventArgs.DiscoveredDevice">
+            <summary>
+            A reference to a <see cref="T:Rssdp.DiscoveredSsdpDevice"/> instance containing the discovery details of the removed device.
+            </summary>
+        </member>
+        <member name="T:Rssdp.DiscoveredSsdpDevice">
+            <summary>
+            Represents a discovered device, containing basic information about the device and the location of it's full device description document. Also provides convenience methods for retrieving the device description document.
+            </summary>
+            <seealso cref="T:Rssdp.SsdpDevice"/>
+            <seealso cref="T:Rssdp.Infrastructure.ISsdpDeviceLocator"/>
+        </member>
+        <member name="P:Rssdp.DiscoveredSsdpDevice.NotificationType">
+            <summary>
+            Sets or returns the type of notification, being either a uuid, device type, service type or upnp:rootdevice.
+            </summary>
+        </member>
+        <member name="P:Rssdp.DiscoveredSsdpDevice.Usn">
+            <summary>
+            Sets or returns the universal service name (USN) of the device.
+            </summary>
+        </member>
+        <member name="P:Rssdp.DiscoveredSsdpDevice.DescriptionLocation">
+            <summary>
+            Sets or returns a URL pointing to the device description document for this device.
+            </summary>
+        </member>
+        <member name="P:Rssdp.DiscoveredSsdpDevice.CacheLifetime">
+            <summary>
+            Sets or returns the length of time this information is valid for (from the <see cref="P:Rssdp.DiscoveredSsdpDevice.AsAt"/> time).
+            </summary>
+        </member>
+        <member name="P:Rssdp.DiscoveredSsdpDevice.AsAt">
+            <summary>
+            Sets or returns the date and time this information was received.
+            </summary>
+        </member>
+        <member name="P:Rssdp.DiscoveredSsdpDevice.ResponseHeaders">
+            <summary>
+            Returns the headers from the SSDP device response message
+            </summary>
+        </member>
+        <member name="M:Rssdp.DiscoveredSsdpDevice.IsExpired">
+            <summary>
+            Returns true if this device information has expired, based on the current date/time, and the <see cref="P:Rssdp.DiscoveredSsdpDevice.CacheLifetime"/> &amp; <see cref="P:Rssdp.DiscoveredSsdpDevice.AsAt"/> properties.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Rssdp.DiscoveredSsdpDevice.GetDeviceInfo">
+            <summary>
+            Retrieves the device description document specified by the <see cref="P:Rssdp.DiscoveredSsdpDevice.DescriptionLocation"/> property.
+            </summary>
+            <remarks>
+            <para>This method may choose to cache (or return cached) information if called multiple times within the <see cref="P:Rssdp.DiscoveredSsdpDevice.CacheLifetime"/> period.</para>
+            </remarks>
+            <returns>An <see cref="T:Rssdp.SsdpDevice"/> instance describing the full device details.</returns>
+        </member>
+        <member name="M:Rssdp.DiscoveredSsdpDevice.GetDeviceInfo(System.Net.Http.HttpClient)">
+            <summary>
+            Retrieves the device description document specified by the <see cref="P:Rssdp.DiscoveredSsdpDevice.DescriptionLocation"/> property using the provided <see cref="T:System.Net.Http.HttpClient"/> instance.
+            </summary>
+            <remarks>
+            <para>This method may choose to cache (or return cached) information if called multiple times within the <see cref="P:Rssdp.DiscoveredSsdpDevice.CacheLifetime"/> period.</para>
+            <para>This method performs no error handling, if an exception occurs downloading or parsing the document it will be thrown to the calling code. Ensure you setup correct error handling for these scenarios.</para>
+            </remarks>
+            <param name="downloadHttpClient">A <see cref="T:System.Net.Http.HttpClient"/> to use when downloading the document data.</param>
+            <returns>An <see cref="T:Rssdp.SsdpDevice"/> instance describing the full device details.</returns>
+        </member>
+        <member name="M:Rssdp.DiscoveredSsdpDevice.ToString">
+            <summary>
+            Returns the device's <see cref="P:Rssdp.DiscoveredSsdpDevice.Usn"/> value.
+            </summary>
+            <returns>A string containing the device's universal service name.</returns>
+        </member>
+        <member name="T:Rssdp.Infrastructure.DisposableManagedObjectBase">
+            <summary>
+            Correclty implements the <see cref="T:System.IDisposable"/> interface and pattern for an object containing only managed resources, and adds a few common niceities not on the interface such as an <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose(System.Boolean)">
+            <summary>
+            Override this method and dispose any objects you own the lifetime of if disposing is true;
+            </summary>
+            <param name="disposing">True if managed objects should be disposed, if false, only unmanaged resources should be released.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.DisposableManagedObjectBase.ThrowIfDisposed">
+            <summary>
+            Throws and <see cref="T:System.ObjectDisposedException"/> if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true.
+            </summary>
+            <seealso cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true.</exception>
+            <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose"/>
+        </member>
+        <member name="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed">
+            <summary>
+            Sets or returns a boolean indicating whether or not this instance has been disposed.
+            </summary>
+            <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose"/>
+        </member>
+        <member name="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose">
+            <summary>
+            Disposes this object instance and all internally managed resources.
+            </summary>
+            <remarks>
+            <para>Sets the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property to true. Does not explicitly throw an exception if called multiple times, but makes no promises about behaviour of derived classes.</para>
+            </remarks>
+            <seealso cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/>
+        </member>
+        <member name="T:Rssdp.Infrastructure.HttpParserBase`1">
+            <summary>
+            A base class for the <see cref="T:Rssdp.Infrastructure.HttpResponseParser"/> and <see cref="T:Rssdp.Infrastructure.HttpRequestParser"/> classes. Not intended for direct use.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpParserBase`1.Parse(System.String)">
+            <summary>
+            Parses the <paramref name="data"/> provided into either a <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> object.
+            </summary>
+            <param name="data">A string containing the HTTP message to parse.</param>
+            <returns>Either a <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> object containing the parsed data.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpParserBase`1.Parse(`0,System.Net.Http.Headers.HttpHeaders,System.String)">
+            <summary>
+            Parses a string containing either an HTTP request or response into a <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> object.
+            </summary>
+            <param name="message">A <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> object representing the parsed message.</param>
+            <param name="headers">A reference to the <see cref="T:System.Net.Http.Headers.HttpHeaders"/> collection for the <paramref name="message"/> object.</param>
+            <param name="data">A string containing the data to be parsed.</param>
+            <returns>An <see cref="T:System.Net.Http.HttpContent"/> object containing the content of the parsed message.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpParserBase`1.ParseStatusLine(System.String,`0)">
+            <summary>
+            Used to parse the first line of an HTTP request or response and assign the values to the appropriate properties on the <paramref name="message"/>.
+            </summary>
+            <param name="data">The first line of the HTTP message to be parsed.</param>
+            <param name="message">Either a <see cref="T:System.Net.Http.HttpResponseMessage"/> or <see cref="T:System.Net.Http.HttpRequestMessage"/> to assign the parsed values to.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpParserBase`1.IsContentHeader(System.String)">
+            <summary>
+            Returns a boolean indicating whether the specified HTTP header name represents a content header (true), or a message header (false).
+            </summary>
+            <param name="headerName">A string containing the name of the header to return the type of.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpParserBase`1.ParseHttpVersion(System.String)">
+            <summary>
+            Parses the HTTP version text from an HTTP request or response status line and returns a <see cref="T:System.Version"/> object representing the parsed values.
+            </summary>
+            <param name="versionData">A string containing the HTTP version, from the message status line.</param>
+            <returns>A <see cref="T:System.Version"/> object containing the parsed version data.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpParserBase`1.ParseHeader(System.String,System.Net.Http.Headers.HttpHeaders,System.Net.Http.Headers.HttpHeaders)">
+            <summary>
+            Parses a line from an HTTP request or response message containing a header name and value pair.
+            </summary>
+            <param name="line">A string containing the data to be parsed.</param>
+            <param name="headers">A reference to a <see cref="T:System.Net.Http.Headers.HttpHeaders"/> collection to which the parsed header will be added.</param>
+            <param name="contentHeaders">A reference to a <see cref="T:System.Net.Http.Headers.HttpHeaders"/> collection for the message content, to which the parsed header will be added.</param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.HttpRequestParser">
+            <summary>
+            Parses a string into a <see cref="T:System.Net.Http.HttpRequestMessage"/> or throws an exception.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpRequestParser.Parse(System.String)">
+            <summary>
+            Parses the specified data into a <see cref="T:System.Net.Http.HttpRequestMessage"/> instance.
+            </summary>
+            <param name="data">A string containing the data to parse.</param>
+            <returns>A <see cref="T:System.Net.Http.HttpRequestMessage"/> instance containing the parsed data.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpRequestParser.ParseStatusLine(System.String,System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Used to parse the first line of an HTTP request or response and assign the values to the appropriate properties on the <paramref name="message"/>.
+            </summary>
+            <param name="data">The first line of the HTTP message to be parsed.</param>
+            <param name="message">Either a <see cref="T:System.Net.Http.HttpResponseMessage"/> or <see cref="T:System.Net.Http.HttpRequestMessage"/> to assign the parsed values to.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpRequestParser.IsContentHeader(System.String)">
+            <summary>
+            Returns a boolean indicating whether the specified HTTP header name represents a content header (true), or a message header (false).
+            </summary>
+            <param name="headerName">A string containing the name of the header to return the type of.</param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.HttpResponseParser">
+            <summary>
+            Parses a string into a <see cref="T:System.Net.Http.HttpResponseMessage"/> or throws an exception.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpResponseParser.Parse(System.String)">
+            <summary>
+            Parses the specified data into a <see cref="T:System.Net.Http.HttpResponseMessage"/> instance.
+            </summary>
+            <param name="data">A string containing the data to parse.</param>
+            <returns>A <see cref="T:System.Net.Http.HttpResponseMessage"/> instance containing the parsed data.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpResponseParser.IsContentHeader(System.String)">
+            <summary>
+            Returns a boolean indicating whether the specified HTTP header name represents a content header (true), or a message header (false).
+            </summary>
+            <param name="headerName">A string containing the name of the header to return the type of.</param>
+            <returns>A boolean, true if th specified header relates to HTTP content, otherwise false.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.HttpResponseParser.ParseStatusLine(System.String,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Used to parse the first line of an HTTP request or response and assign the values to the appropriate properties on the <paramref name="message"/>.
+            </summary>
+            <param name="data">The first line of the HTTP message to be parsed.</param>
+            <param name="message">Either a <see cref="T:System.Net.Http.HttpResponseMessage"/> or <see cref="T:System.Net.Http.HttpRequestMessage"/> to assign the parsed values to.</param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.ISocketFactory">
+            <summary>
+            Implemented by components that can create a platform specific UDP socket implementation, and wrap it in the cross platform <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> interface.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISocketFactory.CreateUdpSocket(System.Int32)">
+            <summary>
+            Creates a new unicast socket using the specified local port number.
+            </summary>
+            <param name="localPort">The local port to bind to.</param>
+            <returns>A <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> implementation.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISocketFactory.CreateUdpMulticastSocket(System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates a new multicast socket using the specified multicast IP address, multicast time to live and local port.
+            </summary>
+            <param name="ipAddress">The multicast IP address to bind to.</param>
+            <param name="multicastTimeToLive">The multicast time to live value. Actually a maximum number of network hops for UDP packets.</param>
+            <param name="localPort">The local port to bind to.</param>
+            <returns>A <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> implementation.</returns>
+        </member>
+        <member name="T:Rssdp.Infrastructure.ISsdpCommunicationsServer">
+            <summary>
+            Interface for a component that manages network communication (sending and receiving HTTPU messages) for the SSDP protocol.
+            </summary>
+        </member>
+        <member name="E:Rssdp.Infrastructure.ISsdpCommunicationsServer.RequestReceived">
+            <summary>
+            Raised when a HTTPU request message is received by a socket (unicast or multicast).
+            </summary>
+        </member>
+        <member name="E:Rssdp.Infrastructure.ISsdpCommunicationsServer.ResponseReceived">
+            <summary>
+            Raised when an HTTPU response message is received by a socket (unicast or multicast).
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpCommunicationsServer.BeginListeningForBroadcasts">
+            <summary>
+            Causes the server to begin listening for multicast messages, being SSDP search requests and notifications.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpCommunicationsServer.StopListeningForBroadcasts">
+            <summary>
+            Causes the server to stop listening for multicast messages, being SSDP search requests and notifications.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpCommunicationsServer.StopListeningForResponses">
+            <summary>
+            Stops listening for search responses on the local, unicast socket.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpCommunicationsServer.SendMessage(System.Byte[],Rssdp.Infrastructure.UdpEndPoint)">
+            <summary>
+            Sends a message to a particular address (uni or multicast) and port.
+            </summary>
+            <param name="messageData">A byte array containing the data to send.</param>
+            <param name="destination">A <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> representing the destination address for the data. Can be either a multicast or unicast destination.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpCommunicationsServer.SendMulticastMessage(System.Byte[])">
+            <summary>
+            Sends a message to the SSDP multicast address and port.
+            </summary>
+            <param name="messageData">A byte array containing the data to send.</param>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ISsdpCommunicationsServer.IsShared">
+            <summary>
+            Gets or sets a boolean value indicating whether or not this instance is shared amongst multiple <see cref="T:Rssdp.Infrastructure.SsdpDeviceLocatorBase"/> and/or <see cref="T:Rssdp.Infrastructure.ISsdpDevicePublisher"/> instances.
+            </summary>
+            <remarks>
+            <para>If true, disposing an instance of a <see cref="T:Rssdp.Infrastructure.SsdpDeviceLocatorBase"/>or a <see cref="T:Rssdp.Infrastructure.ISsdpDevicePublisher"/> will not dispose this comms server instance. The calling code is responsible for managing the lifetime of the server.</para>
+            </remarks>
+        </member>
+        <member name="T:Rssdp.Infrastructure.ISsdpDeviceLocator">
+            <summary>
+            Interface for components that discover the existence of SSDP devices.
+            </summary>
+            <remarks>
+            <para>Discovering devices includes explicit search requests as well as listening for broadcast status notifications.</para>
+            </remarks>
+            <seealso cref="T:Rssdp.DiscoveredSsdpDevice"/>
+            <seealso cref="T:Rssdp.SsdpDevice"/>
+            <seealso cref="T:Rssdp.Infrastructure.ISsdpDevicePublisher"/>
+        </member>
+        <member name="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable">
+            <summary>
+            Event raised when a device becomes available or is found by a search request.
+            </summary>
+            <seealso cref="P:Rssdp.Infrastructure.ISsdpDeviceLocator.NotificationFilter"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StartListeningForNotifications"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StopListeningForNotifications"/>
+        </member>
+        <member name="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable">
+            <summary>
+            Event raised when a device explicitly notifies of shutdown or a device expires from the cache.
+            </summary>
+            <seeseealso cref="P:Rssdp.Infrastructure.ISsdpDeviceLocator.NotificationFilter"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StartListeningForNotifications"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StopListeningForNotifications"/>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ISsdpDeviceLocator.NotificationFilter">
+            <summary>
+            Sets or returns a string containing the filter for notifications. Notifications not matching the filter will not raise the <see cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/> or <see cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/> events.
+            </summary>
+            <remarks>
+            <para>Device alive/byebye notifications whose NT header does not match this filter value will still be captured and cached internally, but will not raise events about device availability. Usually used with either a device type of uuid NT header value.</para>
+            <para>Example filters follow;</para>
+            <example>upnp:rootdevice</example>
+            <example>urn:schemas-upnp-org:device:WANDevice:1</example>
+            <example>"uuid:9F15356CC-95FA-572E-0E99-85B456BD3012"</example>
+            </remarks>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StartListeningForNotifications"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StopListeningForNotifications"/>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ISsdpDeviceLocator.IsSearching">
+            <summary>
+            Returns a boolean indicating whether or not a search is currently active.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDeviceLocator.SearchAsync">
+            <summary>
+            Aynchronously performs a search for all devices using the default search timeout, and returns an awaitable task that can be used to retrieve the results.
+            </summary>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDeviceLocator.SearchAsync(System.String)">
+            <summary>
+            Performs a search for the specified search target (criteria) and default search timeout.
+            </summary>
+            <param name="searchTarget">The criteria for the search. Value can be;
+            <list type="table">
+            <item><term>Root devices</term><description>upnp:rootdevice</description></item>
+            <item><term>Specific device by UUID</term><description>uuid:&lt;device uuid&gt;</description></item>
+            <item><term>Device type</term><description>Fully qualified device type starting with urn: i.e urn:schemas-upnp-org:Basic:1</description></item>
+            </list>
+            </param>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDeviceLocator.SearchAsync(System.String,System.TimeSpan)">
+            <summary>
+            Performs a search for the specified search target (criteria) and search timeout.
+            </summary>
+            <param name="searchTarget">The criteria for the search. Value can be;
+            <list type="table">
+            <item><term>Root devices</term><description>upnp:rootdevice</description></item>
+            <item><term>Specific device by UUID</term><description>uuid:&lt;device uuid&gt;</description></item>
+            <item><term>Device type</term><description>A device namespace and type in format of urn:&lt;device namespace&gt;:device:&lt;device type&gt;:&lt;device version&gt; i.e urn:schemas-upnp-org:device:Basic:1</description></item>
+            <item><term>Service type</term><description>A service namespace and type in format of urn:&lt;service namespace&gt;:service:&lt;servicetype&gt;:&lt;service version&gt; i.e urn:my-namespace:service:MyCustomService:1</description></item>
+            </list>
+            </param>
+            <param name="searchWaitTime">The amount of time to wait for network responses to the search request. Longer values will likely return more devices, but increase search time. A value between 1 and 5 is recommended by the UPnP 1.1 specification. Specify TimeSpan.Zero to return only devices already in the cache.</param>
+            <remarks>
+            <para>By design RSSDP does not support 'publishing services' as it is intended for use with non-standard UPnP devices that don't publish UPnP style services. However, it is still possible to use RSSDP to search for devices implemetning these services if you know the service type.</para>
+            </remarks>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDeviceLocator.SearchAsync(System.TimeSpan)">
+            <summary>
+            Performs a search for all devices using the specified search timeout.
+            </summary>
+            <param name="searchWaitTime">The amount of time to wait for network responses to the search request. Longer values will likely return more devices, but increase search time. A value between 1 and 5 is recommended by the UPnP 1.1 specification. Specify TimeSpan.Zero to return only devices already in the cache.</param>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StartListeningForNotifications">
+            <summary>
+            Starts listening for broadcast notifications of service availability.
+            </summary>
+            <remarks>
+            <para>When called the system will listen for 'alive' and 'byebye' notifications. This can speed up searching, as well as provide dynamic notification of new devices appearing on the network, and previously discovered devices disappearing.</para>
+            </remarks>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StopListeningForNotifications"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/>
+            <seealso cref="P:Rssdp.Infrastructure.ISsdpDeviceLocator.NotificationFilter"/>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StopListeningForNotifications">
+            <summary>
+            Stops listening for broadcast notifications of service availability.
+            </summary>
+            <remarks>
+            <para>Does nothing if this instance is not already listening for notifications.</para>
+            </remarks>
+            <exception cref="T:System.ObjectDisposedException">Throw if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true.</exception>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StartListeningForNotifications"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/>
+            <seealso cref="P:Rssdp.Infrastructure.ISsdpDeviceLocator.NotificationFilter"/>
+        </member>
+        <member name="T:Rssdp.Infrastructure.ISsdpDevicePublisher">
+            <summary>
+            Interface for components that publish the existence of SSDP devices.
+            </summary>
+            <remarks>
+            <para>Publishing a device includes sending notifications (alive and byebye) as well as responding to search requests when appropriate.</para>
+            </remarks>
+            <seealso cref="T:Rssdp.SsdpRootDevice"/>
+            <seealso cref="T:Rssdp.Infrastructure.ISsdpDeviceLocator"/>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDevicePublisher.AddDevice(Rssdp.SsdpRootDevice)">
+            <summary>
+            Adds a device (and it's children) to the list of devices being published by this server, making them discoverable to SSDP clients.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpRootDevice"/> instance to add.</param>
+            <returns>An awaitable <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ISsdpDevicePublisher.RemoveDevice(Rssdp.SsdpRootDevice)">
+            <summary>
+            Removes a device (and it's children) from the list of devices being published by this server, making them undiscoverable.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpRootDevice"/> instance to add.</param>
+            <returns>An awaitable <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ISsdpDevicePublisher.Devices">
+            <summary>
+            Returns a read only list of devices being published by this instance.
+            </summary>
+            <seealso cref="T:Rssdp.SsdpDevice"/>
+        </member>
+        <member name="T:Rssdp.Infrastructure.IUdpSocket">
+            <summary>
+            Provides a common interface across platforms for UDP sockets used by this SSDP implementation.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.IUdpSocket.ReceiveAsync">
+            <summary>
+            Waits for and returns the next UDP message sent to this socket (uni or multicast).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.IUdpSocket.SendTo(System.Byte[],Rssdp.Infrastructure.UdpEndPoint)">
+            <summary>
+            Sends a UDP message to a particular end point (uni or multicast).
+            </summary>
+            <param name="messageData">The data to send.</param>
+            <param name="endPoint">The <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> providing the address and port to send to.</param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.IUpnpDeviceValidator">
+            <summary>
+            Interface for components that check an <see cref="T:Rssdp.SsdpDevice"/> object's properties meet the UPnP specification for a particular version.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.IUpnpDeviceValidator.GetValidationErrors(Rssdp.SsdpRootDevice)">
+            <summary>
+            Returns an enumerable set of strings, each one being a description of an invalid property on the specified root device.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpRootDevice"/> to validate.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.IUpnpDeviceValidator.GetValidationErrors(Rssdp.SsdpDevice)">
+            <summary>
+            Returns an enumerable set of strings, each one being a description of an invalid property on the specified device.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> to validate.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.IUpnpDeviceValidator.ThrowIfDeviceInvalid(Rssdp.SsdpDevice)">
+            <summary>
+            Validates the specified device and throws an <see cref="T:System.InvalidOperationException"/> if there are any validation errors.
+            </summary>
+        </member>
+        <member name="T:Rssdp.Infrastructure.ReceivedUdpData">
+            <summary>
+            Used by the sockets wrapper to hold raw data received from a UDP socket.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ReceivedUdpData.Buffer">
+            <summary>
+            The buffer to place received data into.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ReceivedUdpData.ReceivedBytes">
+            <summary>
+            The number of bytes received.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ReceivedUdpData.ReceivedFrom">
+            <summary>
+            The <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> the data was received from.
+            </summary>
+        </member>
+        <member name="T:Rssdp.Infrastructure.RequestReceivedEventArgs">
+            <summary>
+            Provides arguments for the <see cref="E:Rssdp.Infrastructure.ISsdpCommunicationsServer.RequestReceived"/> event.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.RequestReceivedEventArgs.#ctor(System.Net.Http.HttpRequestMessage,Rssdp.Infrastructure.UdpEndPoint)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="message">The <see cref="T:System.Net.Http.HttpRequestMessage"/> that was received.</param>
+            <param name="receivedFrom">A <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> representing the sender's address (sometimes used for replies).</param>
+        </member>
+        <member name="P:Rssdp.Infrastructure.RequestReceivedEventArgs.Message">
+            <summary>
+            The <see cref="T:System.Net.Http.HttpRequestMessage"/> that was received.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.RequestReceivedEventArgs.ReceivedFrom">
+            <summary>
+            The <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> the request came from.
+            </summary>
+        </member>
+        <member name="T:Rssdp.Infrastructure.ResponseReceivedEventArgs">
+            <summary>
+            Provides arguments for the <see cref="E:Rssdp.Infrastructure.ISsdpCommunicationsServer.ResponseReceived"/> event.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.ResponseReceivedEventArgs.#ctor(System.Net.Http.HttpResponseMessage,Rssdp.Infrastructure.UdpEndPoint)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="message">The <see cref="T:System.Net.Http.HttpResponseMessage"/> that was received.</param>
+            <param name="receivedFrom">A <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> representing the sender's address (sometimes used for replies).</param>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ResponseReceivedEventArgs.Message">
+            <summary>
+            The <see cref="T:System.Net.Http.HttpResponseMessage"/> that was received.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.ResponseReceivedEventArgs.ReceivedFrom">
+            <summary>
+            The <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> the response came from.
+            </summary>
+        </member>
+        <member name="T:Rssdp.Infrastructure.SsdpCommunicationsServer">
+            <summary>
+            Provides the platform independent logic for publishing device existence and responding to search requests.
+            </summary>
+        </member>
+        <member name="E:Rssdp.Infrastructure.SsdpCommunicationsServer.RequestReceived">
+            <summary>
+            Raised when a HTTPU request message is received by a socket (unicast or multicast).
+            </summary>
+        </member>
+        <member name="E:Rssdp.Infrastructure.SsdpCommunicationsServer.ResponseReceived">
+            <summary>
+            Raised when an HTTPU response message is received by a socket (unicast or multicast).
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.#ctor(Rssdp.Infrastructure.ISocketFactory)">
+            <summary>
+            Minimum constructor.
+            </summary>
+            <param name="socketFactory">An implementation of the <see cref="T:Rssdp.Infrastructure.ISocketFactory"/> interface that can be used to make new unicast and multicast sockets. Cannot be null.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="socketFactory"/> argument is null.</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.#ctor(Rssdp.Infrastructure.ISocketFactory,System.Int32)">
+            <summary>
+            Partial constructor.
+            </summary>
+            <param name="socketFactory">An implementation of the <see cref="T:Rssdp.Infrastructure.ISocketFactory"/> interface that can be used to make new unicast and multicast sockets. Cannot be null.</param>
+            <param name="localPort">The specific local port to use for all sockets created by this instance. Specify zero to indicate the system should choose a free port itself.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="socketFactory"/> argument is null.</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.#ctor(Rssdp.Infrastructure.ISocketFactory,System.Int32,System.Int32)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="socketFactory">An implementation of the <see cref="T:Rssdp.Infrastructure.ISocketFactory"/> interface that can be used to make new unicast and multicast sockets. Cannot be null.</param>
+            <param name="localPort">The specific local port to use for all sockets created by this instance. Specify zero to indicate the system should choose a free port itself.</param>
+            <param name="multicastTimeToLive">The multicast time to live value for multicast sockets. Technically this is a number of router hops, not a 'Time'. Must be greater than zero.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="socketFactory"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="multicastTimeToLive"/> argument is less than or equal to zero.</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.BeginListeningForBroadcasts">
+            <summary>
+            Causes the server to begin listening for multicast messages, being SSDP search requests and notifications.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true (because <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose" /> has been called previously).</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.StopListeningForBroadcasts">
+            <summary>
+            Causes the server to stop listening for multicast messages, being SSDP search requests and notifications.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true (because <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose" /> has been called previously).</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.SendMessage(System.Byte[],Rssdp.Infrastructure.UdpEndPoint)">
+            <summary>
+            Sends a message to a particular address (uni or multicast) and port.
+            </summary>
+            <param name="messageData">A byte array containing the data to send.</param>
+            <param name="destination">A <see cref="T:Rssdp.Infrastructure.UdpEndPoint"/> representing the destination address for the data. Can be either a multicast or unicast destination.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="messageData"/> argument is null.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true (because <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose" /> has been called previously).</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.SendMulticastMessage(System.Byte[])">
+            <summary>
+            Sends a message to the SSDP multicast address and port.
+            </summary>
+            <param name="messageData">A byte array containing the data to send.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="messageData"/> argument is null.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true (because <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose" /> has been called previously).</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.StopListeningForResponses">
+            <summary>
+            Stops listening for search responses on the local, unicast socket.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true (because <seealso cref="M:Rssdp.Infrastructure.DisposableManagedObjectBase.Dispose" /> has been called previously).</exception>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpCommunicationsServer.IsShared">
+            <summary>
+            Gets or sets a boolean value indicating whether or not this instance is shared amongst multiple <see cref="T:Rssdp.Infrastructure.SsdpDeviceLocatorBase"/> and/or <see cref="T:Rssdp.Infrastructure.ISsdpDevicePublisher"/> instances.
+            </summary>
+            <remarks>
+            <para>If true, disposing an instance of a <see cref="T:Rssdp.Infrastructure.SsdpDeviceLocatorBase"/>or a <see cref="T:Rssdp.Infrastructure.ISsdpDevicePublisher"/> will not dispose this comms server instance. The calling code is responsible for managing the lifetime of the server.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpCommunicationsServer.Dispose(System.Boolean)">
+            <summary>
+            Stops listening for requests, disposes this instance and all internal resources.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.SsdpConstants">
+            <summary>
+            Provides constants for common values related to the SSDP protocols.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.MulticastLocalAdminAddress">
+            <summary>
+            Multicast IP Address used for SSDP multicast messages. Values is 239.255.255.250.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.MulticastPort">
+            <summary>
+            The UDP port used for SSDP multicast messages. Values is 1900.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.SsdpDefaultMulticastTimeToLive">
+            <summary>
+            The default multicase TTL for SSDP multicast messages. Value is 4.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.DefaultUdpSocketBufferSize">
+            <summary>
+            Default buffer size for receiving SSDP broadcasts. Value is 8192 (bytes).
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.MaxUdpSocketBufferSize">
+            <summary>
+            The maximum possible buffer size for a UDP message. Value is 65507 (bytes).
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.UpnpDeviceTypeNamespace">
+            <summary>
+            Namespace/prefix for UPnP device types. Values is schemas-upnp-org.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.UpnpDeviceTypeRootDevice">
+            <summary>
+            UPnP Root Device type. Value is upnp:rootdevice.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.PnpDeviceTypeRootDevice">
+            <summary>
+            The value is used by Windows Explorer for device searches instead of the UPNPDeviceTypeRootDevice constant. 
+            Not sure why (different spec, bug, alternate protocol etc). Used to enable Windows Explorer support.
+            </summary>
+        </member>
+        <member name="F:Rssdp.Infrastructure.SsdpConstants.UpnpDeviceTypeBasicDevice">
+            <summary>
+            UPnP Basic Device type. Value is Basic.
+            </summary>
+        </member>
+        <member name="T:Rssdp.Infrastructure.SsdpDeviceLocatorBase">
+            <summary>
+            Allows you to search the network for a particular device, device types, or UPnP service types. Also listenings for broadcast notifications of device availability and raises events to indicate changes in status.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="communicationsServer">The <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation to use for network communications.</param>
+        </member>
+        <member name="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable">
+            <summary>
+            Raised for when 
+            <list type="bullet">
+            <item>An 'alive' notification is received that a device, regardless of whether or not that device is not already in the cache or has previously raised this event.</item>
+            <item>For each item found during a device <see cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.SearchAsync"/> (cached or not), allowing clients to respond to found devices before the entire search is complete.</item>
+            <item>Only if the notification type matches the <see cref="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.NotificationFilter"/> property. By default the filter is null, meaning all notifications raise events (regardless of ant </item>
+            </list>
+            <para>This event may be raised from a background thread, if interacting with UI or other objects with specific thread affinity invoking to the relevant thread is required.</para>
+            </summary>
+            <seealso cref="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.NotificationFilter"/>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable"/>
+            <seealso cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StartListeningForNotifications"/>
+            <seealso cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StopListeningForNotifications"/>
+        </member>
+        <member name="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable">
+            <summary>
+            Raised when a notification is received that indicates a device has shutdown or otherwise become unavailable.
+            </summary>
+            <remarks>
+            <para>Devices *should* broadcast these types of notifications, but not all devices do and sometimes (in the event of power loss for example) it might not be possible for a device to do so. You should also implement error handling when trying to contact a device, even if RSSDP is reporting that device as available.</para>
+            <para>This event is only raised if the notification type matches the <see cref="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.NotificationFilter"/> property. A null or empty string for the <see cref="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.NotificationFilter"/> will be treated as no filter and raise the event for all notifications.</para>
+            <para>The <see cref="P:Rssdp.DeviceUnavailableEventArgs.DiscoveredDevice"/> property may contain either a fully complete <see cref="T:Rssdp.DiscoveredSsdpDevice"/> instance, or one containing just a USN and NotificationType property. Full information is available if the device was previously discovered and cached, but only partial information if a byebye notification was received for a previously unseen or expired device.</para>
+            <para>This event may be raised from a background thread, if interacting with UI or other objects with specific thread affinity invoking to the relevant thread is required.</para>
+            </remarks>
+            <seealso cref="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.NotificationFilter"/>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable"/>
+            <seealso cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StartListeningForNotifications"/>
+            <seealso cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StopListeningForNotifications"/>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.SearchAsync">
+            <summary>
+            Performs a search for all devices using the default search timeout.
+            </summary>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.SearchAsync(System.String)">
+            <summary>
+            Performs a search for the specified search target (criteria) and default search timeout.
+            </summary>
+            <param name="searchTarget">The criteria for the search. Value can be;
+            <list type="table">
+            <item><term>Root devices</term><description>upnp:rootdevice</description></item>
+            <item><term>Specific device by UUID</term><description>uuid:&lt;device uuid&gt;</description></item>
+            <item><term>Device type</term><description>Fully qualified device type starting with urn: i.e urn:schemas-upnp-org:Basic:1</description></item>
+            </list>
+            </param>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.SearchAsync(System.TimeSpan)">
+            <summary>
+            Performs a search for all devices using the specified search timeout.
+            </summary>
+            <param name="searchWaitTime">The amount of time to wait for network responses to the search request. Longer values will likely return more devices, but increase search time. A value between 1 and 5 seconds is recommended by the UPnP 1.1 specification, this method requires the value be greater 1 second if it is not zero. Specify TimeSpan.Zero to return only devices already in the cache.</param>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.SearchAsync(System.String,System.TimeSpan)">
+            <summary>
+            Performs a search for the specified search target (criteria) and search timeout.
+            </summary>
+            <param name="searchTarget">The criteria for the search. Value can be;
+            <list type="table">
+            <item><term>Root devices</term><description>upnp:rootdevice</description></item>
+            <item><term>Specific device by UUID</term><description>uuid:&lt;device uuid&gt;</description></item>
+            <item><term>Device type</term><description>A device namespace and type in format of urn:&lt;device namespace&gt;:device:&lt;device type&gt;:&lt;device version&gt; i.e urn:schemas-upnp-org:device:Basic:1</description></item>
+            <item><term>Service type</term><description>A service namespace and type in format of urn:&lt;service namespace&gt;:service:&lt;servicetype&gt;:&lt;service version&gt; i.e urn:my-namespace:service:MyCustomService:1</description></item>
+            </list>
+            </param>
+            <param name="searchWaitTime">The amount of time to wait for network responses to the search request. Longer values will likely return more devices, but increase search time. A value between 1 and 5 seconds is recommended by the UPnP 1.1 specification, this method requires the value be greater 1 second if it is not zero. Specify TimeSpan.Zero to return only devices already in the cache.</param>
+            <remarks>
+            <para>By design RSSDP does not support 'publishing services' as it is intended for use with non-standard UPnP devices that don't publish UPnP style services. However, it is still possible to use RSSDP to search for devices implemetning these services if you know the service type.</para>
+            </remarks>
+            <returns>A task whose result is an <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:Rssdp.DiscoveredSsdpDevice" /> instances, representing all found devices.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StartListeningForNotifications">
+            <summary>
+            Starts listening for broadcast notifications of service availability.
+            </summary>
+            <remarks>
+            <para>When called the system will listen for 'alive' and 'byebye' notifications. This can speed up searching, as well as provide dynamic notification of new devices appearing on the network, and previously discovered devices disappearing.</para>
+            </remarks>
+            <seealso cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StopListeningForNotifications"/>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable"/>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable"/>
+            <exception cref="T:System.ObjectDisposedException">Throw if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/>  ty is true.</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StopListeningForNotifications">
+            <summary>
+            Stops listening for broadcast notifications of service availability.
+            </summary>
+            <remarks>
+            <para>Does nothing if this instance is not already listening for notifications.</para>
+            </remarks>
+            <seealso cref="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.StartListeningForNotifications"/>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable"/>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable"/>
+            <exception cref="T:System.ObjectDisposedException">Throw if the <see cref="P:Rssdp.Infrastructure.DisposableManagedObjectBase.IsDisposed"/> property is true.</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.OnDeviceAvailable(Rssdp.DiscoveredSsdpDevice,System.Boolean)">
+            <summary>
+            Raises the <see cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable"/> event.
+            </summary>
+            <param name="device">A <see cref="T:Rssdp.DiscoveredSsdpDevice"/> representing the device that is now available.</param>
+            <param name="isNewDevice">True if the device was not currently in the cahce before this event was raised.</param>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceAvailable"/>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.OnDeviceUnavailable(Rssdp.DiscoveredSsdpDevice,System.Boolean)">
+            <summary>
+            Raises the <see cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable"/> event.
+            </summary>
+            <param name="device">A <see cref="T:Rssdp.DiscoveredSsdpDevice"/> representing the device that is no longer available.</param>
+            <param name="expired">True if the device expired from the cache without being renewed, otherwise false to indicate the device explicitly notified us it was being shutdown.</param>
+            <seealso cref="E:Rssdp.Infrastructure.SsdpDeviceLocatorBase.DeviceUnavailable"/>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.IsSearching">
+            <summary>
+            Returns a boolean indicating whether or not a search is currently in progress.
+            </summary>
+            <remarks>
+            <para>Only one search can be performed at a time, per <see cref="T:Rssdp.Infrastructure.SsdpDeviceLocatorBase"/> instance.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDeviceLocatorBase.NotificationFilter">
+            <summary>
+            Sets or returns a string containing the filter for notifications. Notifications not matching the filter will not raise the <see cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/> or <see cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/> events.
+            </summary>
+            <remarks>
+            <para>Device alive/byebye notifications whose NT header does not match this filter value will still be captured and cached internally, but will not raise events about device availability. Usually used with either a device type of uuid NT header value.</para>
+            <para>If the value is null or empty string then, all notifications are reported.</para>
+            <para>Example filters follow;</para>
+            <example>upnp:rootdevice</example>
+            <example>urn:schemas-upnp-org:device:WANDevice:1</example>
+            <example>uuid:9F15356CC-95FA-572E-0E99-85B456BD3012</example>
+            </remarks>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceAvailable"/>
+            <seealso cref="E:Rssdp.Infrastructure.ISsdpDeviceLocator.DeviceUnavailable"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StartListeningForNotifications"/>
+            <seealso cref="M:Rssdp.Infrastructure.ISsdpDeviceLocator.StopListeningForNotifications"/>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDeviceLocatorBase.Dispose(System.Boolean)">
+            <summary>
+            Disposes this object and all internal resources. Stops listening for all network messages.
+            </summary>
+            <param name="disposing">True if managed resources should be disposed, or false is only unmanaged resources should be cleaned up.</param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.SsdpDevicePublisherBase">
+            <summary>
+            Provides the platform independent logic for publishing SSDP devices (notifications and search responses).
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDevicePublisherBase.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer,System.String,System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="communicationsServer">The <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation, used to send and receive SSDP network messages.</param>
+            <param name="osName">Then name of the operating system running the server.</param>
+            <param name="osVersion">The version of the operating system running the server.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDevicePublisherBase.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer,System.String,System.String,Rssdp.ISsdpLogger)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="communicationsServer">The <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation, used to send and receive SSDP network messages.</param>
+            <param name="osName">Then name of the operating system running the server.</param>
+            <param name="osVersion">The version of the operating system running the server.</param>
+            <param name="log">An implementation of <see cref="T:Rssdp.ISsdpLogger"/> to be used for logging activity. May be null, in which case no logging is performed.</param>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDevicePublisherBase.AddDevice(Rssdp.SsdpRootDevice)">
+            <summary>
+            Adds a device (and it's children) to the list of devices being published by this server, making them discoverable to SSDP clients.
+            </summary>
+            <remarks>
+            <para>Adding a device causes "alive" notification messages to be sent immediately, or very soon after. Ensure your device/description service is running before adding the device object here.</para>
+            <para>Devices added here with a non-zero cache life time will also have notifications broadcast periodically.</para>
+            <para>This method ignores duplicate device adds (if the same device instance is added multiple times, the second and subsequent add calls do nothing).</para>
+            </remarks>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> instance to add.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if the <paramref name="device"/> contains property values that are not acceptable to the UPnP 1.0 specification.</exception>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDevicePublisherBase.RemoveDevice(Rssdp.SsdpRootDevice)">
+            <summary>
+            Removes a device (and it's children) from the list of devices being published by this server, making them undiscoverable.
+            </summary>
+            <remarks>
+            <para>Removing a device causes "byebye" notification messages to be sent immediately, advising clients of the device/service becoming unavailable. We recommend removing the device from the published list before shutting down the actual device/service, if possible.</para>
+            <para>This method does nothing if the device was not found in the collection.</para>
+            </remarks>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> instance to add.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDevicePublisherBase.Log">
+            <summary>
+            Returns a reference to the injected <see cref="T:Rssdp.ISsdpLogger"/> instance.
+            </summary>
+            <remarks>
+            <para>Should never return null. If null was injected a reference to an internal null logger should be returned.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDevicePublisherBase.Devices">
+            <summary>
+            Returns a read only list of devices being published by this instance.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDevicePublisherBase.SupportPnpRootDevice">
+            <summary>
+            If true (default) treats root devices as both upnp:rootdevice and pnp:rootdevice types.
+            </summary>
+            <remarks>
+            <para>Enabling this option will cause devices to show up in Microsoft Windows Explorer's network screens (if discovery is enabled etc.). Windows Explorer appears to search only for pnp:rootdeivce and not upnp:rootdevice.</para>
+            <para>If false, the system will only use upnp:rootdevice for notifiation broadcasts and and search responses, which is correct according to the UPnP/SSDP spec.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDevicePublisherBase.StandardsMode">
+            <summary>
+            Sets or returns a value from the <see cref="T:Rssdp.SsdpStandardsMode"/> controlling how strictly the publisher obeys the SSDP standard.
+            </summary>
+            <remarks>
+            <para>Using relaxed mode will process search requests even if the MX header is missing.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.Infrastructure.SsdpDevicePublisherBase.NotificationBroadcastInterval">
+            <summary>
+            Sets or returns a fixed interval at which alive notifications for services exposed by this publisher instance are broadcast.
+            </summary>
+            <remarks>
+            <para>If this is set to <see cref="F:System.TimeSpan.Zero"/> then the system will follow the process recommended 
+            by the SSDP spec and calculate a randomised interval based on the cache life times of the published services.
+            The default and recommended value is TimeSpan.Zero.
+            </para>
+            <para>While (zero and) any positive <see cref="T:System.TimeSpan"/> value are allowed, the SSDP specification says 
+            notifications should not be broadcast more often than 15 minutes. If you wish to remain compatible with the SSDP
+            specification, do not set this property to a value greater than zero but less than 15 minutes.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.Infrastructure.SsdpDevicePublisherBase.Dispose(System.Boolean)">
+            <summary>
+            Stops listening for requests, stops sending periodic broadcasts, disposes all internal resources.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Rssdp.Infrastructure.UdpEndPoint">
+            <summary>
+            Cross platform representation of a UDP end point, being an IP address (either IPv4 or IPv6) and a port.
+            </summary>
+        </member>
+        <member name="P:Rssdp.Infrastructure.UdpEndPoint.IPAddress">
+            <summary>
+            The IP Address of the end point.
+            </summary>
+            <remarks>
+            <para>Can be either IPv4 or IPv6, up to the code using this instance to determine which was provided.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.Infrastructure.UdpEndPoint.Port">
+            <summary>
+            The port of the end point.
+            </summary>
+        </member>
+        <member name="M:Rssdp.Infrastructure.UdpEndPoint.ToString">
+            <summary>
+            Returns the <see cref="P:Rssdp.Infrastructure.UdpEndPoint.IPAddress"/> and <see cref="P:Rssdp.Infrastructure.UdpEndPoint.Port"/> values separated by a colon.
+            </summary>
+            <returns>A string containing <see cref="P:Rssdp.Infrastructure.UdpEndPoint.IPAddress"/>:<see cref="P:Rssdp.Infrastructure.UdpEndPoint.Port"/>.</returns>
+        </member>
+        <member name="T:Rssdp.Infrastructure.Upnp10DeviceValidator">
+            <summary>
+            Validates a <see cref="T:Rssdp.SsdpDevice"/> object's properties meet the UPnP 1.0 specification.
+            </summary>
+            <remarks>
+            <para>This is a best effort validation for known rules, it doesn't guarantee 100% compatibility with the specification. Reading the specification yourself is the best way to ensure compatibility.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.Infrastructure.Upnp10DeviceValidator.GetValidationErrors(Rssdp.SsdpRootDevice)">
+            <summary>
+            Returns an enumerable set of strings, each one being a description of an invalid property on the specified root device.
+            </summary>
+            <remarks>
+            <para>If no errors are found, an empty (but non-null) enumerable is returned.</para>
+            </remarks>
+            <param name="device">The <see cref="T:Rssdp.SsdpRootDevice"/> to validate.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+            <returns>A non-null enumerable set of strings, empty if there are no validation errors, otherwise each string represents a discrete problem.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.Upnp10DeviceValidator.GetValidationErrors(Rssdp.SsdpDevice)">
+            <summary>
+            Returns an enumerable set of strings, each one being a description of an invalid property on the specified device.
+            </summary>
+            <remarks>
+            <para>If no errors are found, an empty (but non-null) enumerable is returned.</para>
+            </remarks>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> to validate.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+            <returns>A non-null enumerable set of strings, empty if there are no validation errors, otherwise each string represents a discrete problem.</returns>
+        </member>
+        <member name="M:Rssdp.Infrastructure.Upnp10DeviceValidator.ThrowIfDeviceInvalid(Rssdp.SsdpDevice)">
+            <summary>
+            Validates the specified device and throws an <see cref="T:System.InvalidOperationException"/> if there are any validation errors.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> to validate.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if the device object does not pass validation.</exception>
+        </member>
+        <member name="T:Rssdp.ISsdpLogger">
+            <summary>
+            Interface for a simple logging component used by RSSDP to record internal activity.
+            </summary>
+        </member>
+        <member name="M:Rssdp.ISsdpLogger.LogInfo(System.String)">
+            <summary>
+            Records a regular log message.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.ISsdpLogger.LogVerbose(System.String)">
+            <summary>
+            Records a frequent or large log message usually only required when trying to trace a problem.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.ISsdpLogger.LogWarning(System.String)">
+            <summary>
+            Records an important message, but one that may not neccesarily be an error.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.ISsdpLogger.LogError(System.String)">
+            <summary>
+            Records a message that represents an error.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="T:Rssdp.ServiceEventArgs">
+            <summary>
+            Event arguments for the <see cref="E:Rssdp.SsdpDevice.ServiceAdded"/> and <see cref="E:Rssdp.SsdpDevice.ServiceRemoved"/> events.
+            </summary>
+        </member>
+        <member name="M:Rssdp.ServiceEventArgs.#ctor(Rssdp.SsdpService)">
+            <summary>
+            Constructs a new instance for the specified <see cref="T:Rssdp.SsdpService"/>.
+            </summary>
+            <param name="service">The <see cref="T:Rssdp.SsdpService"/> associated with the event this argument class is being used for.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="service"/> argument is null.</exception>
+        </member>
+        <member name="P:Rssdp.ServiceEventArgs.Service">
+            <summary>
+            Returns the <see cref="T:Rssdp.SsdpService"/> instance the event is being raised for.
+            </summary>
+        </member>
+        <member name="T:Rssdp.SocketClosedException">
+            <summary>
+            To be thrown when a socket is unexpectedly closed, or accessed in a closed state.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SocketClosedException.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SocketClosedException.#ctor(System.String)">
+            <summary>
+            Partial constructor.
+            </summary>
+            <param name="message">The error message associated with the error.</param>
+        </member>
+        <member name="M:Rssdp.SocketClosedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="message">The error message associated with the error.</param>
+            <param name="inner">Any inner exception that is wrapped by this exception.</param>
+        </member>
+        <member name="M:Rssdp.SocketClosedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Deserialisation constructor.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Rssdp.SsdpDevice">
+            <summary>
+            Base class representing the common details of a (root or embedded) device, either to be published or that has been located.
+            </summary>
+            <remarks>
+            <para>Do not derive new types directly from this class. New device classes should derive from either <see cref="T:Rssdp.SsdpRootDevice"/> or <see cref="T:Rssdp.SsdpEmbeddedDevice"/>.</para>
+            </remarks>
+            <seealso cref="T:Rssdp.SsdpRootDevice"/>
+            <seealso cref="T:Rssdp.SsdpEmbeddedDevice"/>
+        </member>
+        <member name="E:Rssdp.SsdpDevice.DeviceAdded">
+            <summary>
+            Raised when a new child device is added.
+            </summary>
+            <seealso cref="M:Rssdp.SsdpDevice.AddDevice(Rssdp.SsdpEmbeddedDevice)"/>
+            <seealso cref="E:Rssdp.SsdpDevice.DeviceAdded"/>
+        </member>
+        <member name="E:Rssdp.SsdpDevice.DeviceRemoved">
+            <summary>
+            Raised when a child device is removed.
+            </summary>
+            <seealso cref="M:Rssdp.SsdpDevice.RemoveDevice(Rssdp.SsdpEmbeddedDevice)"/>
+            <seealso cref="E:Rssdp.SsdpDevice.DeviceRemoved"/>
+        </member>
+        <member name="E:Rssdp.SsdpDevice.ServiceAdded">
+            <summary>
+            Raised when a new service is added.
+            </summary>
+            <seealso cref="M:Rssdp.SsdpDevice.AddService(Rssdp.SsdpService)"/>
+            <seealso cref="E:Rssdp.SsdpDevice.ServiceAdded"/>
+        </member>
+        <member name="E:Rssdp.SsdpDevice.ServiceRemoved">
+            <summary>
+            Raised when a service is removed.
+            </summary>
+            <seealso cref="M:Rssdp.SsdpDevice.RemoveService(Rssdp.SsdpService)"/>
+            <seealso cref="M:Rssdp.SsdpDevice.OnServiceRemoved(Rssdp.SsdpService)"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.#ctor">
+            <summary>
+            Derived type constructor, allows constructing a device with no parent. Should only be used from derived types that are or inherit from <see cref="T:Rssdp.SsdpRootDevice"/>.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.#ctor(System.String)">
+            <summary>
+            Deserialisation constructor.
+            </summary>
+            <remarks><para>Uses the provided XML string and parent device properties to set the properties of the object. The XML provided must be a valid UPnP device description document.</para></remarks>
+            <param name="deviceDescriptionXml">A UPnP device description XML document.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="deviceDescriptionXml"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the <paramref name="deviceDescriptionXml"/> argument is empty.</exception>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.DeviceType">
+            <summary>
+            Sets or returns the core device type (not including namespace, version etc.). Required.
+            </summary>
+            <remarks><para>Defaults to the UPnP basic device type.</para></remarks>
+            <seealso cref="P:Rssdp.SsdpDevice.DeviceTypeNamespace"/>
+            <seealso cref="P:Rssdp.SsdpDevice.DeviceVersion"/>
+            <seealso cref="P:Rssdp.SsdpDevice.FullDeviceType"/>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.DeviceTypeNamespace">
+            <summary>
+            Sets or returns the namespace for the <see cref="P:Rssdp.SsdpDevice.DeviceType"/> of this device. Optional, but defaults to UPnP schema so should be changed if <see cref="P:Rssdp.SsdpDevice.DeviceType"/> is not a UPnP device type.
+            </summary>
+            <remarks><para>Defaults to the UPnP standard namespace.</para></remarks>
+            <seealso cref="P:Rssdp.SsdpDevice.DeviceType"/>
+            <seealso cref="P:Rssdp.SsdpDevice.DeviceVersion"/>
+            <seealso cref="P:Rssdp.SsdpDevice.FullDeviceType"/>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.DeviceVersion">
+            <summary>
+            Sets or returns the version of the device type. Optional, defaults to 1.
+            </summary>
+            <remarks><para>Defaults to a value of 1.</para></remarks>
+            <seealso cref="P:Rssdp.SsdpDevice.DeviceType"/>
+            <seealso cref="P:Rssdp.SsdpDevice.DeviceTypeNamespace"/>
+            <seealso cref="P:Rssdp.SsdpDevice.FullDeviceType"/>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.FullDeviceType">
+            <summary>
+            Returns the full device type string.
+            </summary>
+            <remarks>
+            <para>The format used is urn:<see cref="P:Rssdp.SsdpDevice.DeviceTypeNamespace"/>:device:<see cref="P:Rssdp.SsdpDevice.DeviceType"/>:<see cref="P:Rssdp.SsdpDevice.DeviceVersion"/></para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Uuid">
+            <summary>
+            Sets or returns the universally unique identifier for this device (without the uuid: prefix). Required.
+            </summary>
+            <remarks>
+            <para>Must be the same over time for a specific device instance (i.e. must survive reboots).</para>
+            <para>For UPnP 1.0 this can be any unique string. For UPnP 1.1 this should be a 128 bit number formatted in a specific way, preferably generated using the time and MAC based algorithm. See section 1.1.4 of http://upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf for details.</para>
+            <para>Technically this library implements UPnP 1.0, so any value is allowed, but we advise using UPnP 1.1 compatible values for good behaviour and forward compatibility with future versions.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Udn">
+            <summary>
+            Returns (or sets*) a unique device name for this device. Optional, not recommended to be explicitly set.
+            </summary>
+            <remarks>
+            <para>* In general you should not explicitly set this property. If it is not set (or set to null/empty string) the property will return a UDN value that is correct as per the UPnP specification, based on the other device properties.</para>
+            <para>The setter is provided to allow for devices that do not correctly follow the specification (when we discover them), rather than to intentionally deviate from the specification.</para>
+            <para>If a value is explicitly set, it is used verbatim, and so any prefix (such as uuid:) must be provided in the value.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.FriendlyName">
+            <summary>
+            Sets or returns a friendly/display name for this device on the network. Something the user can identify the device/instance by, i.e Lounge Main Light. Required.
+            </summary>
+            <remarks><para>A short description for the end user. </para></remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Manufacturer">
+            <summary>
+            Sets or returns the name of the manufacturer of this device. Required.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.ManufacturerUrl">
+            <summary>
+            Sets or returns a URL to the manufacturers web site. Optional.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.ModelDescription">
+            <summary>
+            Sets or returns a description of this device model. Recommended.
+            </summary>
+            <remarks><para>A long description for the end user.</para></remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.ModelName">
+            <summary>
+            Sets or returns the name of this model. Required.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.ModelNumber">
+            <summary>
+            Sets or returns the number of this model. Recommended.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.ModelUrl">
+            <summary>
+            Sets or returns a URL to a web page with details of this device model. Optional.
+            </summary>
+            <remarks>
+            <para>Optional. May be relative to base URL.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.SerialNumber">
+            <summary>
+            Sets or returns the serial number for this device. Recommended.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Upc">
+            <summary>
+            Sets or returns the universal product code of the device, if any. Optional.
+            </summary>
+            <remarks>
+            <para>If not blank, must be exactly 12 numeric digits.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.PresentationUrl">
+            <summary>
+            Sets or returns the URL to a web page that can be used to configure/manager/use the device. Recommended.
+            </summary>
+            <remarks>
+            <para>May be relative to base URL. </para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Icons">
+            <summary>
+            Returns a list of icons (images) that can be used to display this device. Optional, but recommended you provide at least one at 48x48 pixels.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Devices">
+            <summary>
+            Returns a read-only enumerable set of <see cref="T:Rssdp.SsdpDevice"/> objects representing children of this device. Child devices are optional.
+            </summary>
+            <seealso cref="M:Rssdp.SsdpDevice.AddDevice(Rssdp.SsdpEmbeddedDevice)"/>
+            <seealso cref="M:Rssdp.SsdpDevice.RemoveDevice(Rssdp.SsdpEmbeddedDevice)"/>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.CustomProperties">
+            <summary>
+            Returns a dictionary of <see cref="T:Rssdp.SsdpDeviceProperty"/> objects keyed by <see cref="P:Rssdp.SsdpDeviceProperty.FullName"/>. Each value represents a custom property in the device description document.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.CustomResponseHeaders">
+            <summary>
+            Provides a list of additional information to provide about this device in search response and notification messages.
+            </summary>
+            <remarks>
+            <para>The headers included here are included in the (HTTP headers) for search response and alive notifications sent in relation to this device.</para>
+            <para>Only values specified directly on this <see cref="T:Rssdp.SsdpDevice"/> instance will be included, headers from ancestors are not automatically included.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDevice.Services">
+            <summary>
+            Returns a read-only enumerable set of <see cref="T:Rssdp.SsdpService"/> objects representing services associated with this device.
+            </summary>
+            <seealso cref="M:Rssdp.SsdpDevice.AddService(Rssdp.SsdpService)"/>
+            <seealso cref="M:Rssdp.SsdpDevice.RemoveService(Rssdp.SsdpService)"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.AddDevice(Rssdp.SsdpEmbeddedDevice)">
+            <summary>
+            Adds a child device to the <see cref="P:Rssdp.SsdpDevice.Devices"/> collection.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpEmbeddedDevice"/> instance to add.</param>
+            <remarks>
+            <para>If the device is already a member of the <see cref="P:Rssdp.SsdpDevice.Devices"/> collection, this method does nothing.</para>
+            <para>Also sets the <see cref="P:Rssdp.SsdpEmbeddedDevice.RootDevice"/> property of the added device and all descendant devices to the relevant <see cref="T:Rssdp.SsdpRootDevice"/> instance.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if the <paramref name="device"/> is already associated with a different <see cref="T:Rssdp.SsdpRootDevice"/> instance than used in this tree. Can occur if you try to add the same device instance to more than one tree. Also thrown if you try to add a device to itself.</exception>
+            <seealso cref="E:Rssdp.SsdpDevice.DeviceAdded"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.RemoveDevice(Rssdp.SsdpEmbeddedDevice)">
+            <summary>
+            Removes a child device from the <see cref="P:Rssdp.SsdpDevice.Devices"/> collection.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpEmbeddedDevice"/> instance to remove.</param>
+            <remarks>
+            <para>If the device is not a member of the <see cref="P:Rssdp.SsdpDevice.Devices"/> collection, this method does nothing.</para>
+            <para>Also sets the <see cref="P:Rssdp.SsdpEmbeddedDevice.RootDevice"/> property to null for the removed device and all descendant devices.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="device"/> argument is null.</exception>
+            <seealso cref="E:Rssdp.SsdpDevice.DeviceRemoved"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.OnDeviceAdded(Rssdp.SsdpEmbeddedDevice)">
+            <summary>
+            Raises the <see cref="E:Rssdp.SsdpDevice.DeviceAdded"/> event.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpEmbeddedDevice"/> instance added to the <see cref="P:Rssdp.SsdpDevice.Devices"/> collection.</param>
+            <seealso cref="M:Rssdp.SsdpDevice.AddDevice(Rssdp.SsdpEmbeddedDevice)"/>
+            <seealso cref="E:Rssdp.SsdpDevice.DeviceAdded"/>		
+        </member>
+        <member name="M:Rssdp.SsdpDevice.OnDeviceRemoved(Rssdp.SsdpEmbeddedDevice)">
+            <summary>
+            Raises the <see cref="E:Rssdp.SsdpDevice.DeviceRemoved"/> event.
+            </summary>
+            <param name="device">The <see cref="T:Rssdp.SsdpEmbeddedDevice"/> instance removed from the <see cref="P:Rssdp.SsdpDevice.Devices"/> collection.</param>
+            <seealso cref="M:Rssdp.SsdpDevice.RemoveDevice(Rssdp.SsdpEmbeddedDevice)"/>
+            <see cref="E:Rssdp.SsdpDevice.DeviceRemoved"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.AddService(Rssdp.SsdpService)">
+            <summary>
+            Adds a service to the <see cref="P:Rssdp.SsdpDevice.Services"/> collection.
+            </summary>
+            <param name="service">The <see cref="T:Rssdp.SsdpService"/> instance to add.</param>
+            <remarks>
+            <para>If the service is already a member of the <see cref="P:Rssdp.SsdpDevice.Services"/> collection, this method does nothing.</para>
+            <para>Services should be added to the device before it is added to a publisher.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="service"/> argument is null.</exception>
+            <seealso cref="E:Rssdp.SsdpDevice.ServiceAdded"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.RemoveService(Rssdp.SsdpService)">
+            <summary>
+            Removes a service from the <see cref="P:Rssdp.SsdpDevice.Services"/> collection.
+            </summary>
+            <param name="service">The <see cref="T:Rssdp.SsdpService"/> instance to remove.</param>
+            <remarks>
+            <para>If the service is not a member of the <see cref="P:Rssdp.SsdpDevice.Services"/> collection, this method does nothing.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="service"/> argument is null.</exception>
+            <seealso cref="E:Rssdp.SsdpDevice.ServiceRemoved"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.OnServiceAdded(Rssdp.SsdpService)">
+            <summary>
+            Raises the <see cref="E:Rssdp.SsdpDevice.ServiceAdded"/> event.
+            </summary>
+            <param name="service">The <see cref="T:Rssdp.SsdpService"/> instance added to the <see cref="P:Rssdp.SsdpDevice.Services"/> collection.</param>
+            <seealso cref="M:Rssdp.SsdpDevice.AddService(Rssdp.SsdpService)"/>
+            <seealso cref="E:Rssdp.SsdpDevice.ServiceAdded"/>		
+        </member>
+        <member name="M:Rssdp.SsdpDevice.OnServiceRemoved(Rssdp.SsdpService)">
+            <summary>
+            Raises the <see cref="E:Rssdp.SsdpDevice.ServiceRemoved"/> event.
+            </summary>
+            <param name="service">The <see cref="T:Rssdp.SsdpService"/> instance removed from the <see cref="P:Rssdp.SsdpDevice.Services"/> collection.</param>
+            <seealso cref="M:Rssdp.SsdpDevice.RemoveService(Rssdp.SsdpService)"/>
+            <see cref="E:Rssdp.SsdpDevice.ServiceRemoved"/>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.WriteDeviceDescriptionXml(System.Xml.XmlWriter,Rssdp.SsdpDevice)">
+            <summary>
+            Writes this device to the specified <see cref="T:System.Xml.XmlWriter"/> as a device node and it's content.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> to output to.</param>
+            <param name="device">The <see cref="T:Rssdp.SsdpDevice"/> to write out.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="writer"/> or <paramref name="device"/> argument is null.</exception>
+        </member>
+        <member name="M:Rssdp.SsdpDevice.StringToUri(System.String)">
+            <summary>
+            Converts a string to a <see cref="T:System.Uri"/>, or returns null if the string provided is null.
+            </summary>
+            <param name="value">The string value to convert.</param>
+            <returns>A <see cref="T:System.Uri"/>.</returns>
+        </member>
+        <member name="T:Rssdp.SsdpDeviceExtensions">
+            <summary>
+            Extensions for <see cref="T:Rssdp.SsdpDevice"/> and derived types.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDeviceExtensions.ToRootDevice(Rssdp.SsdpDevice)">
+            <summary>
+            Returns the root device associated with a device instance derived from <see cref="T:Rssdp.SsdpDevice"/>.
+            </summary>
+            <param name="device">The device instance to find the <see cref="T:Rssdp.SsdpRootDevice"/> for.</param>
+            <remarks>
+            <para>The <paramref name="device"/> must be or inherit from <see cref="T:Rssdp.SsdpRootDevice"/> or <see cref="T:Rssdp.SsdpEmbeddedDevice"/>, otherwise an <see cref="T:System.InvalidCastException"/> will occur.</para>
+            <para>May return null if the <paramref name="device"/> instance is an embedded device not yet associated with a <see cref="T:Rssdp.SsdpRootDevice"/> instance yet.</para>
+            <para>If <paramref name="device"/> is an instance of <see cref="T:Rssdp.SsdpRootDevice"/> (or derives from it), returns the same instance cast to <see cref="T:Rssdp.SsdpRootDevice"/>.</para>
+            </remarks>
+            <returns>The <see cref="T:Rssdp.SsdpRootDevice"/> instance associated with the device instance specified, or null otherwise.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="device"/> is null.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown if <paramref name="device"/> is not an instance of or dervied from either <see cref="T:Rssdp.SsdpRootDevice"/> or <see cref="T:Rssdp.SsdpEmbeddedDevice"/>.</exception>
+        </member>
+        <member name="T:Rssdp.SsdpDeviceIcon">
+            <summary>
+            Represents an icon published by an <see cref="T:Rssdp.SsdpDevice"/>.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceIcon.MimeType">
+            <summary>
+            The mime type for the image data returned by the <see cref="P:Rssdp.SsdpDeviceIcon.Url"/> property.
+            </summary>
+            <remarks>
+            <para>Required. Icon's MIME type (cf. RFC 2045, 2046, and 2387). Single MIME image type. At least one icon should be of type “image/png” (Portable Network Graphics, see IETF RFC 2083).</para> 
+            </remarks>
+            <seealso cref="P:Rssdp.SsdpDeviceIcon.Url"/>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceIcon.Url">
+            <summary>
+            The URL that can be called with an HTTP GET command to retrieve the image data.
+            </summary>
+            <remarks>
+            <para>Required. May be relative to base URL. Specified by UPnP vendor. Single URL.</para>
+            </remarks>
+            <seealso cref="P:Rssdp.SsdpDeviceIcon.MimeType"/>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceIcon.Width">
+            <summary>
+            The width of the image in pixels.
+            </summary>
+            <remarks><para>Required, must be greater than zero.</para></remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceIcon.Height">
+            <summary>
+            The height of the image in pixels.
+            </summary>
+            <remarks><para>Required, must be greater than zero.</para></remarks>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceIcon.ColorDepth">
+            <summary>
+            The colour depth of the image.
+            </summary>
+            <remarks><para>Required, must be greater than zero.</para></remarks>
+        </member>
+        <member name="T:Rssdp.SsdpDevicePropertiesCollection">
+            <summary>
+            Represents a collection of <see cref="T:Rssdp.SsdpDeviceProperty"/> instances keyed by the <see cref="P:Rssdp.SsdpDeviceProperty.FullName"/> property value.
+            </summary>
+            <remarks>
+            <para>Items added to this collection are keyed by their <see cref="P:Rssdp.SsdpDeviceProperty.FullName"/> property value, at the time they were added. If the name changes after they were added to the collection, the key is not updated unless the item is manually removed and re-added to the collection.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.#ctor(System.Int32)">
+            <summary>
+            Full constructor.
+            </summary>
+            <param name="capacity">Specifies the initial capacity of the collection.</param>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.Add(Rssdp.SsdpDeviceProperty)">
+            <summary>
+            Adds a <see cref="T:Rssdp.SsdpDeviceProperty"/> instance to the collection.
+            </summary>
+            <param name="customDeviceProperty">The property instance to add to the collection.</param>
+            <remarks>
+            <para></para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="customDeviceProperty"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the <see cref="P:Rssdp.SsdpDeviceProperty.FullName"/> property of the <paramref name="customDeviceProperty"/> argument  is null or empty string, or if the collection already contains an item with the same key.</exception>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.Remove(Rssdp.SsdpDeviceProperty)">
+            <summary>
+            Removes the specified property instance from the collection.
+            </summary>
+            <param name="customDeviceProperty">The <see cref="T:Rssdp.SsdpDeviceProperty"/> instance to remove from the collection.</param>
+            <remarks>
+            <para>Only remove the specified property if that instance was in the collection, if another property with the same full name exists in the collection it is not removed.</para>
+            </remarks>
+            <returns>True if an item was removed from the collection, otherwise false (because it did not exist or was not the same instance).</returns>
+            <seealso cref="M:Rssdp.SsdpDevicePropertiesCollection.Remove(System.String)"/>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="customDeviceProperty"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the <see cref="P:Rssdp.SsdpDeviceProperty.FullName"/> property of the <paramref name="customDeviceProperty"/> argument  is null or empty string, or if the collection already contains an item with the same key.</exception>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.Remove(System.String)">
+            <summary>
+            Removes the property with the specified key (<see cref="P:Rssdp.SsdpDeviceProperty.FullName"/> from the collection.
+            </summary>
+            <param name="customDevicePropertyFullName">The full name of the <see cref="T:Rssdp.SsdpDeviceProperty"/> instance to remove from the collection.</param>
+            <returns>True if an item was removed from the collection, otherwise false (because no item exists in the collection with that key).</returns> 
+            <exception cref="T:System.ArgumentException">Thrown if the <paramref name="customDevicePropertyFullName"/> argument is null or empty string.</exception>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.Contains(Rssdp.SsdpDeviceProperty)">
+            <summary>
+            Returns a boolean indicating whether or not the specified <see cref="T:Rssdp.SsdpDeviceProperty"/> instance is in the collection.
+            </summary>
+            <param name="customDeviceProperty">An <see cref="T:Rssdp.SsdpDeviceProperty"/> instance to check the collection for.</param>
+            <returns>True if the specified instance exists in the collection, otherwise false.</returns>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.Contains(System.String)">
+            <summary>
+            Returns a boolean indicating whether or not a <see cref="T:Rssdp.SsdpDeviceProperty"/> instance with the specified full name value exists in the collection.
+            </summary>
+            <param name="customDevicePropertyFullName">A string containing the full name of the <see cref="T:Rssdp.SsdpDeviceProperty"/> instance to check for.</param>
+            <returns>True if an item with the specified full name exists in the collection, otherwise false.</returns>
+        </member>
+        <member name="P:Rssdp.SsdpDevicePropertiesCollection.Count">
+            <summary>
+            Returns the number of items in the collection.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDevicePropertiesCollection.Item(System.String)">
+            <summary>
+            Returns the <see cref="T:Rssdp.SsdpDeviceProperty"/> instance from the collection that has the specified <see cref="P:Rssdp.SsdpDeviceProperty.FullName"/> value.
+            </summary>
+            <param name="fullName">The full name of the property to return.</param>
+            <returns>A <see cref="T:Rssdp.SsdpDeviceProperty"/> instance from the collection.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Thrown if no item exists in the collection with the specified <paramref name="fullName"/> value.</exception>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator of <see cref="T:Rssdp.SsdpDeviceProperty"/> instances in this collection.
+            </summary>
+            <returns>An enumerator of <see cref="T:Rssdp.SsdpDeviceProperty"/> instances in this collection.</returns>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePropertiesCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator of <see cref="T:Rssdp.SsdpDeviceProperty"/> instances in this collection.
+            </summary>
+            <returns>An enumerator of <see cref="T:Rssdp.SsdpDeviceProperty"/> instances in this collection.</returns>
+        </member>
+        <member name="T:Rssdp.SsdpDeviceProperty">
+            <summary>
+            Represents a custom property of an <see cref="T:Rssdp.SsdpDevice"/>.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceProperty.Namespace">
+            <summary>
+            Sets or returns the namespace this property exists in.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceProperty.Name">
+            <summary>
+            Sets or returns the name of this property.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceProperty.FullName">
+            <summary>
+            Returns the full name of this property (namespace and name).
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpDeviceProperty.Value">
+            <summary>
+            Sets or returns the value of this property.
+            </summary>
+        </member>
+        <member name="T:Rssdp.SsdpEmbeddedDevice">
+            <summary>
+            Represents a device that is a descendant of a <see cref="T:Rssdp.SsdpRootDevice"/> instance.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpEmbeddedDevice.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpEmbeddedDevice.#ctor(System.String)">
+            <summary>
+            Deserialisation constructor.
+            </summary>
+            <param name="deviceDescriptionXml">A UPnP device description XML document.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="deviceDescriptionXml"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the <paramref name="deviceDescriptionXml"/> argument is empty.</exception>
+        </member>
+        <member name="P:Rssdp.SsdpEmbeddedDevice.RootDevice">
+            <summary>
+            Returns the <see cref="T:Rssdp.SsdpRootDevice"/> that is this device's first ancestor. If this device is itself an <see cref="T:Rssdp.SsdpRootDevice"/>, then returns a reference to itself.
+            </summary>
+        </member>
+        <member name="T:Rssdp.SsdpRootDevice">
+            <summary>
+            Represents a 'root' device, a device that has no parent. Used for publishing devices and for the root device in a tree of discovered devices.
+            </summary>
+            <remarks>
+            <para>Child (embedded) devices are represented by the <see cref="T:Rssdp.SsdpDevice"/> in the <see cref="P:Rssdp.SsdpDevice.Devices"/> property.</para>
+            <para>Root devices contain some information that applies to the whole device tree and is therefore not present on child devices, such as <see cref="P:Rssdp.SsdpRootDevice.CacheLifetime"/> and <see cref="P:Rssdp.SsdpRootDevice.Location"/>.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpRootDevice.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpRootDevice.#ctor(System.Uri,System.TimeSpan,System.String)">
+            <summary>
+            Deserialisation constructor.
+            </summary>
+            <param name="location">The url from which the device description document was retrieved.</param>
+            <param name="cacheLifetime">A <see cref="T:System.TimeSpan"/> representing the time maximum period of time the device description can be cached for.</param>
+            <param name="deviceDescriptionXml">The device description XML as a string.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="deviceDescriptionXml"/> or <paramref name="location"/> arguments are null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the <paramref name="deviceDescriptionXml"/> argument is empty.</exception>
+        </member>
+        <member name="P:Rssdp.SsdpRootDevice.CacheLifetime">
+            <summary>
+            Specifies how long clients can cache this device's details for. Optional but defaults to <see cref="F:System.TimeSpan.Zero"/> which means no-caching. Recommended value is half an hour.
+            </summary>
+            <remarks>
+            <para>Specifiy <see cref="F:System.TimeSpan.Zero"/> to indicate no caching allowed.</para>
+            <para>Also used to specify how often to rebroadcast alive notifications.</para>
+            <para>The UPnP/SSDP specifications indicate this should not be less than 1800 seconds (half an hour), but this is not enforced by this library.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpRootDevice.Location">
+            <summary>
+            Gets or sets the URL used to retrieve the description document for this device/tree. Required.
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpRootDevice.UrlBase">
+            <summary>
+            The base URL to use for all relative url's provided in other propertise (and those of child devices). Optional.
+            </summary>
+            <remarks>
+            <para>Defines the base URL. Used to construct fully-qualified URLs. All relative URLs that appear elsewhere in the description are combined with this base URL. If URLBase is empty or not given, the base URL is the URL from which the device description was retrieved (which is the preferred implementation; use of URLBase is no longer recommended). Specified by UPnP vendor. Single URL.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpRootDevice.ToDescriptionDocument">
+            <summary>
+            Saves the property values of this device object to an a string in the full UPnP device description XML format, including child devices and outer root node and XML document declaration.
+            </summary>
+            <returns>A string containing XML in the UPnP device description format</returns>
+        </member>
+        <member name="T:Rssdp.SsdpService">
+            <summary>
+            Represents an SSDP service to be published.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpService.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpService.#ctor(System.String)">
+            <summary>
+            Deserialisation constructor.
+            </summary>
+            <remarks><para>Uses the provided XML string to set the properties of the object. The XML provided must be a valid UPnP service description document.</para></remarks>
+            <param name="serviceDescriptionXml">A UPnP service description XML document.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="serviceDescriptionXml"/> argument is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the <paramref name="serviceDescriptionXml"/> argument is empty.</exception>
+        </member>
+        <member name="P:Rssdp.SsdpService.ServiceType">
+            <summary>
+            Sets or returns the service type (not including namespace, version etc) of the exposed service. Required.
+            </summary>
+            <seealso cref="P:Rssdp.SsdpService.ServiceTypeNamespace"/>
+            <seealso cref="P:Rssdp.SsdpService.ServiceVersion"/>
+            <seealso cref="P:Rssdp.SsdpService.FullServiceType"/>
+        </member>
+        <member name="P:Rssdp.SsdpService.ServiceTypeNamespace">
+            <summary>
+            Sets or returns the namespace for the <seealso cref="P:Rssdp.SsdpService.ServiceType"/> of this service. Optional but defaults to the UPnP schema so should be changed if <seealso cref="P:Rssdp.SsdpService.ServiceType"/> is not an official UPnP service type.
+            </summary>
+            <seealso cref="P:Rssdp.SsdpService.ServiceType"/>
+            <seealso cref="P:Rssdp.SsdpService.ServiceVersion"/>
+            <seealso cref="P:Rssdp.SsdpService.FullServiceType"/>
+        </member>
+        <member name="P:Rssdp.SsdpService.ServiceVersion">
+            <summary>
+            Sets or returns the version of the service type. Optional, defaults to 1.
+            </summary>
+            <remarks><para>Defaults to a value of 1.</para></remarks>
+            <seealso cref="P:Rssdp.SsdpService.ServiceType"/>
+            <seealso cref="P:Rssdp.SsdpService.ServiceTypeNamespace"/>
+            <seealso cref="P:Rssdp.SsdpService.FullServiceType"/>
+        </member>
+        <member name="P:Rssdp.SsdpService.FullServiceType">
+            <summary>
+            Returns the full service type string.
+            </summary>
+            <remarks>
+            <para>The format used is urn:<see cref="P:Rssdp.SsdpService.ServiceTypeNamespace"/>:service:<see cref="P:Rssdp.SsdpService.ServiceType"/>:<see cref="P:Rssdp.SsdpService.ServiceVersion"/></para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpService.Uuid">
+            <summary>
+            Sets or returns the universally unique identifier for this service (without the uuid: prefix). Required.
+            </summary>
+            <remarks>
+            <para>Must be the same over time for a specific service instance (i.e. must survive reboots).</para>
+            <para>For UPnP 1.0 this can be any unique string. For UPnP 1.1 this should be a 128 bit number formatted in a specific way, preferably generated using the time and MAC based algorithm. See section 1.1.4 of http://upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf for details.</para>
+            <para>Technically this library implements UPnP 1.0, so any value is allowed, but we advise using UPnP 1.1 compatible values for good behaviour and forward compatibility with future versions.</para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpService.ServiceId">
+            <summary>
+            Returns the full service type string.
+            </summary>
+            <remarks>
+            <para>The format used is urn:<see cref="P:Rssdp.SsdpService.ServiceTypeNamespace"/>:serviceid:<see cref="P:Rssdp.SsdpService.ServiceType"/></para>
+            </remarks>
+        </member>
+        <member name="P:Rssdp.SsdpService.ScpdUrl">
+            <summary>
+            REQUIRED. URL for service description. (See section  2.5, “Service description” below.) MUST be relative to the URL at which the device description is located in accordance with section 5 of RFC 3986. Specified by UPnP vendor. Single URL. 
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpService.ControlUrl">
+            <summary>
+            REQUIRED. URL for control (see section  3, “Control”). MUST be relative to the URL at which the device description is located in accordance with section 5 of RFC 3986. Specified by UPnP vendor. Single URL. 
+            </summary>
+        </member>
+        <member name="P:Rssdp.SsdpService.EventSubUrl">
+            <summary>
+            URL for eventing (see section  4, “Eventing”). MUST be relative to the URL at which the device description is located in accordance with section 5 of RFC 3986. MUST be unique within the device; any two services MUST NOT have the same URL for eventing. If the service has no evented variables, this element MUST be present but MUST be empty(i.e., <eventSubURL></eventSubURL>.) Specified by UPnP vendor.Single URL.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpService.WriteServiceDescriptionXml(System.Xml.XmlWriter)">
+            <summary>
+            Writes this service to the specified <see cref="T:System.Xml.XmlWriter"/> as a service node and it's content.
+            </summary>
+            <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> to output to.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="writer"/> argument is null.</exception>
+        </member>
+        <member name="T:Rssdp.SsdpStandardsMode">
+            <summary>
+            An enum whose values control how strictly RSSDP follows the SSDP specification.
+            </summary>
+        </member>
+        <member name="F:Rssdp.SsdpStandardsMode.Default">
+            <summary>
+            Equivalent to <see cref="F:Rssdp.SsdpStandardsMode.Relaxed"/>
+            </summary>
+        </member>
+        <member name="F:Rssdp.SsdpStandardsMode.Relaxed">
+            <summary>
+            RSSDP will not strictly follow the specification, but will instead behave in ways that are compatible with most SSDP devices.
+            </summary>
+            <remarks>
+            <para>This mode provides maximum compatibility with other SSDP based systems.</para>
+            </remarks>
+        </member>
+        <member name="F:Rssdp.SsdpStandardsMode.Strict">
+            <summary>
+            RSSDP will strictly follow the SSDP specification even where other implementations commonly deviate.
+            </summary>
+        </member>
+        <member name="T:Rssdp.ExceptionExtensions">
+            <summary>
+            Provides extension methods to <see cref="T:System.Exception"/> and derived objects.
+            </summary>
+        </member>
+        <member name="M:Rssdp.ExceptionExtensions.IsCritical(System.Exception)">
+            <summary>
+            Returns true of the specified exception is one that indicates some form of memory corruption, out of memory state or other fatal exception that should *never* be handled by user code.
+            </summary>
+            <param name="exception">The exception to check.</param>
+            <remarks>
+            <para>Doesn't check for System.StackOverflowExceptions as if the stack really is full calling this method might check, therefore calling code must explicitly handle that exception type itself.</para>
+            <para>Specifically checks for the following exception types;
+            
+            <list type="Bullet">
+            <item>System.AccessViolationException</item>
+            <item>System.OutOfMemoryException</item>
+            <item>System.InvalidProgramException</item>
+            </list>
+            </para>
+            </remarks>
+            <returns>True if the specified exception is considered critical and should be re-thrown and not otherwise handled by user code.</returns>
+        </member>
+        <member name="T:Rssdp.SsdpDeviceLocator">
+            <summary>
+            Allows you to search the network for a particular device, device types, or UPnP service types. Also listenings for broadcast notifications of device availability and raises events to indicate changes in status.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDeviceLocator.#ctor">
+            <summary>
+            Default constructor. Constructs a new instance using the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> and <see cref="T:Rssdp.Infrastructure.ISocketFactory"/> implementations for this platform.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDeviceLocator.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer)">
+            <summary>
+            Full constructor. Constructs a new instance using the provided <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation.
+            </summary>
+        </member>
+        <member name="T:Rssdp.SsdpTraceLogger">
+            <summary>
+            Implementation of <see cref="T:Rssdp.ISsdpLogger"/> that writes to the .Net tracing system on platforms that support it, or <see cref="T:System.Diagnostics.Debug"/> on those that don't.
+            </summary>
+            <remarks>
+            <para>On platforms that only support <see cref="T:System.Diagnostics.Debug"/> no log entries will be output unless running a debug build, and this effectively becomes a null logger for release builds.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogInfo(System.String)">
+            <summary>
+            Records a regular log message.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogVerbose(System.String)">
+            <summary>
+            Records a frequent or large log message usually only required when trying to trace a problem.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogWarning(System.String)">
+            <summary>
+            Records an important message, but one that may not neccesarily be an error.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogError(System.String)">
+            <summary>
+            Records a message that represents an error.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="T:Rssdp.SocketFactory">
+            <summary>
+            Used by RSSDP components to create implementations of the <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> interface, to perform platform agnostic socket communications.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SocketFactory.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="localIP">A string containing the IP address of the local network adapter to bind sockets to. Null or empty string will use <see cref="F:System.Net.IPAddress.Any"/>.</param>
+        </member>
+        <member name="M:Rssdp.SocketFactory.CreateUdpSocket(System.Int32)">
+            <summary>
+            Creates a new UDP socket that is a member of the SSDP multicast local admin group and binds it to the specified local port.
+            </summary>
+            <param name="localPort">An integer specifying the local port to bind the socket to.</param>
+            <returns>An implementation of the <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> interface used by RSSDP components to perform socket operations.</returns>
+        </member>
+        <member name="M:Rssdp.SocketFactory.CreateUdpMulticastSocket(System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates a new UDP socket that is a member of the specified multicast IP address, and binds it to the specified local port.
+            </summary>
+            <param name="ipAddress">The multicast IP address to make the socket a member of.</param>
+            <param name="multicastTimeToLive">The multicast time to live value for the socket.</param>
+            <param name="localPort">The number of the local port to bind to.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

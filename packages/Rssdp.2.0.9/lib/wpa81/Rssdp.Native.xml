@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rssdp.Native</name>
+    </assembly>
+    <members>
+        <member name="T:Rssdp.SsdpDeviceLocator">
+            <summary>
+            Allows you to search the network for a particular device, device types, or UPnP service types. Also listenings for broadcast notifications of device availability and raises events to indicate changes in status.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDeviceLocator.#ctor">
+            <summary>
+            Default constructor. Constructs a new instance using the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> and <see cref="T:Rssdp.Infrastructure.ISocketFactory"/> implementations for this platform.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SsdpDeviceLocator.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer)">
+            <summary>
+            Full constructor. Constructs a new instance using the provided <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation.
+            </summary>
+        </member>
+        <member name="T:Rssdp.SsdpTraceLogger">
+            <summary>
+            Implementation of <see cref="T:Rssdp.ISsdpLogger"/> that writes to the .Net tracing system on platforms that support it, or <see cref="T:System.Diagnostics.Debug"/> on those that don't.
+            </summary>
+            <remarks>
+            <para>On platforms that only support <see cref="T:System.Diagnostics.Debug"/> no log entries will be output unless running a debug build, and this effectively becomes a null logger for release builds.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogInfo(System.String)">
+            <summary>
+            Records a regular log message.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogVerbose(System.String)">
+            <summary>
+            Records a frequent or large log message usually only required when trying to trace a problem.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogWarning(System.String)">
+            <summary>
+            Records an important message, but one that may not neccesarily be an error.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="M:Rssdp.SsdpTraceLogger.LogError(System.String)">
+            <summary>
+            Records a message that represents an error.
+            </summary>
+            <param name="message">The text to be logged.</param>
+        </member>
+        <member name="T:Rssdp.SocketFactory">
+            <summary>
+            Used by RSSDP components to create implementations of the <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> interface, to perform platform agnostic socket communications.
+            </summary>
+        </member>
+        <member name="M:Rssdp.SocketFactory.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="localIP">A string containing the IP address of the local network adapter to bind sockets to. Null or empty string will use IPAddress.Any.</param>
+        </member>
+        <member name="M:Rssdp.SocketFactory.CreateUdpMulticastSocket(System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates a new UDP socket that is a member of the specified multicast IP address, and binds it to the specified local port.
+            </summary>
+            <param name="ipAddress">The multicast IP address to make the socket a member of.</param>
+            <param name="multicastTimeToLive">The multicast time to live value for the socket.</param>
+            <param name="localPort">The number of the local port to bind to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rssdp.SocketFactory.CreateUdpSocket(System.Int32)">
+            <summary>
+            Creates a new UDP socket that is a member of the SSDP multicast local admin group and binds it to the specified local port.
+            </summary>
+            <param name="localPort">An integer specifying the local port to bind the socket to.</param>
+            <returns>An implementation of the <see cref="T:Rssdp.Infrastructure.IUdpSocket"/> interface used by RSSDP components to perform socket operations.</returns>
+        </member>
+        <member name="T:Rssdp.SsdpDevicePublisher">
+            <summary>
+            Allows publishing devices both as notification and responses to search requests.
+            </summary>
+            <remarks>
+            This is  the 'server' part of the system. You add your devices to an instance of this class so clients can find them.
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor">
+            <summary>
+            Default constructor. 
+            </summary>
+            <remarks>
+            <para>Uses the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation and network settings for Windows Phone (Silverlight) and the SSDP specification.</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(Rssdp.Infrastructure.ISsdpCommunicationsServer)">
+            <summary>
+            Full constructor. 
+            </summary>
+            <remarks>
+            <para>Allows the caller to specify their own <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation for full control over the networking, or for mocking/testing purposes..</para>
+            </remarks>
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(System.Int32)">
+            <summary>
+            Partial constructor. 
+            </summary>
+            <param name="localPort">The local port to use for socket communications, specify 0 to have the system choose it's own.</param>
+            <remarks>
+            <para>Uses the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation and network settings for Windows Phone (Silverlight) and the SSDP specification, but specifies the local port to use for socket communications. Specify 0 to indicate the system should choose it's own port.</para>
+            </remarks>3
+        </member>
+        <member name="M:Rssdp.SsdpDevicePublisher.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Partial constructor. 
+            </summary>
+            <param name="localPort">The local port to use for socket communications, specify 0 to have the system choose it's own.</param>
+            <param name="multicastTimeToLive">The number of hops a multicast packet can make before it expires. Must be 1 or greater.</param>
+            <remarks>
+            <para>Uses the default <see cref="T:Rssdp.Infrastructure.ISsdpCommunicationsServer"/> implementation and network settings for Windows Phone (Silverlight) and the SSDP specification, but specifies the local port to use and multicast time to live setting for socket communications.</para>
+            <para>Specify 0 for the <paramref name="localPort"/> argument to indicate the system should choose it's own port.</para>
+            <para>The <paramref name="multicastTimeToLive"/> is actually a number of 'hops' on the network and not a time based argument.</para>
+            </remarks>
+        </member>
+    </members>
+</doc>
