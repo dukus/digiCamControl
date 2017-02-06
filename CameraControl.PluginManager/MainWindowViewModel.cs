@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using CameraControl.Core;
 using CameraControl.Core.Plugin;
 using CameraControl.Devices;
+using CameraControl.PluginManager.View;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace CameraControl.PluginManager
 {
@@ -56,15 +58,23 @@ namespace CameraControl.PluginManager
             }
         }
 
-
+        public RelayCommand EditCommand { get; set; }
+        
         public MainWindowViewModel()
         {
+            EditCommand=new RelayCommand(Edit);
             ServiceProvider.PluginManager = new Core.PluginManager();
             ServiceProvider.PluginManager.CopyPlugins();
             InstalledPluginS = new ObservableCollection<PluginInfo>();
             OnlinePluginS = new ObservableCollection<PluginInfo>();
             UpdatesPluginS = new ObservableCollection<PluginInfo>();
             LoadList();
+        }
+
+        private void Edit()
+        {
+            var wnd = new Editor();
+            wnd.ShowDialog();
         }
 
         public void LoadList()

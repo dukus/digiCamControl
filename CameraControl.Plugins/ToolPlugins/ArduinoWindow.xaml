@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Port" HorizontalAlignment="Right" Margin="3" Grid.Column="1"/>
         <ComboBox Grid.Row="0" Grid.Column="2" Margin="3" ItemsSource="{Binding Ports}" SelectedItem="{Binding Port}"/>
@@ -31,7 +32,7 @@
         <!--<Button Content="Refresh" Grid.Row="0" Grid.Column="2" Margin="3"/>-->
         <Button Content="Show buttons" Grid.Row="1" Grid.Column="2" Margin="3" Command="{Binding ShowButtonsCommand}"/>
         <CheckBox Grid.Row="1" Grid.Column="0" Content="Show buttons on startup" Grid.ColumnSpan="2" IsChecked="{Binding ButtonsStartup}" Margin="2" VerticalAlignment="Center"/>
-        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="4" VerticalAlignment="Top" IsEnabled="{Binding Active}">
+        <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Send" Margin="3" Grid.Row="4" VerticalAlignment="Top" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -40,10 +41,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>                    
                 </Grid.RowDefinitions>
-                <CheckBox Content="Send windows commands" IsChecked="{Binding SendCommand}" Grid.ColumnSpan="2" Margin="2"/>
+                <CheckBox Content="Send windows commands" IsChecked="{Binding SendCommand}" Grid.ColumnSpan="2" Margin="2" IsEnabled="{Binding Active}"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="Send after file transfered"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="2" Text="{Binding AfterTransfer}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="2" Text="{Binding AfterTransfer}" IsEnabled="{Binding Active}"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="File name template command"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="2" Text="{Binding ArduinoLabel}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.ColumnSpan="3" Grid.Column="0" Header="Receive" Margin="3" Grid.Row="5" VerticalAlignment="Top" IsEnabled="{Binding Active}">
@@ -86,7 +90,7 @@
 
             </ListBox>
         </GroupBox>
-        <TextBlock Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center">
+        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center">
             This plugin don't work in same time when arduino shutter release device is used
             <LineBreak/>
             All arduino command should be send via Serial.println()

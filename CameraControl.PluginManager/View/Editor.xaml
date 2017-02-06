@@ -1,0 +1,79 @@
+﻿<Window x:Class="CameraControl.PluginManager.View.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CameraControl.PluginManager.View"
+        xmlns:viewModel="clr-namespace:CameraControl.PluginManager.ViewModel"
+        mc:Ignorable="d"
+        Title="Editor" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.DataContext>
+        <viewModel:EditorViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145*"/>
+            <ColumnDefinition Width="147*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="255*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2" >
+            <MenuItem Header="File">
+                <MenuItem Header="New" Command="{Binding NewCommand}"/>
+                <MenuItem Header="Open ..." Command="{Binding LoadProjectCommand}"/>
+                <!--<MenuItem Header="Save"/>-->
+                <MenuItem Header="Save as ..." Command="{Binding SaveProjectCommand}"/>
+                <Separator/>
+                <MenuItem Header="Generate plugin package" Command="{Binding GenerateCommand}"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Add files" Command="{Binding AddFilesCommand}"/>
+                <MenuItem Header="Remove file"/>
+                <Separator/>
+                <MenuItem Header="Load .plugin file" Command="{Binding LoadPluginInfoCommand}"/>
+                <MenuItem Header="Save .plugin file" Command="{Binding SavePluginInfoCommand}"/>
+                
+            </MenuItem>
+        </Menu>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Files">
+            <Grid>
+                <ListBox ItemsSource="{Binding Files}" DisplayMemberPath="Name"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Plugin Description">
+            <ScrollViewer>
+                <StackPanel>
+                    <Label Content="Name"/>
+                    <TextBox Text="{Binding PluginInfo.Name}" Margin="3,0"/>
+
+                    <Label Content="Id" />
+                    <TextBox Text="{Binding PluginInfo.Id}" Margin="3,0"/>
+
+                    <Label Content="Author" />
+                    <TextBox Text="{Binding PluginInfo.Author}" Margin="3,0"/>
+
+                    <Label Content="Version" />
+                    <TextBox Text="{Binding PluginInfo.Version}" Margin="3,0"/>
+
+                    <Label Content="Home Page Url" />
+                    <TextBox Text="{Binding PluginInfo.HomePageUrl}" Margin="3,0"/>
+
+                    <Label Content="Main Assembly file name" />
+                    <ComboBox SelectedValue="{Binding PluginInfo.AssemblyFileName}" Margin="3,0" ItemsSource="{Binding Files}" DisplayMemberPath="Name" SelectedValuePath="Name"/>
+
+                    <Label Content="Logo file name" />
+                    <ComboBox SelectedValue="{Binding PluginInfo.LogoFile}" Margin="3,0" ItemsSource="{Binding Files}" DisplayMemberPath="Name" SelectedValuePath="Name"/>
+
+                    <Label Content="Description" />
+                    <TextBox Text="{Binding PluginInfo.Description}" Margin="3,0" Height="100"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+
+    </Grid>
+</Window>
+

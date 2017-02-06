@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using Rssdp;
+using Rssdp.Infrastructure;
 
 namespace CameraControl.Devices.Wifi
 {
@@ -15,26 +17,11 @@ namespace CameraControl.Devices.Wifi
 
         public string EndPoint { get; set; }
 
-        IPEndPoint multicastEndpoint = new IPEndPoint(IPAddress.Parse("239.255.255.250"), 1900);
-
-        Socket udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
-
-        public static string response;
-
         public bool UDPSocketSetup()
         {
-            string udpStatus;
-            bool binded = false;
             try
             {
-                udpSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                //udpSocket.Bind(localEndPoint);
-                udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership,
-                    new MulticastOption(multicastEndpoint.Address, IPAddress.Any));
-                udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.MulticastTimeToLive, 2);
-                udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.MulticastLoopback, true);
-
+                SsdpDeviceLocator _DeviceLocator = null;
                 NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
                 foreach (NetworkInterface adapter in nics)
                 {
@@ -57,83 +44,49 @@ namespace CameraControl.Devices.Wifi
                         if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
                         {
 
-                            udpSocket.Bind(new IPEndPoint(ip.Address, 1900));
-                            binded = true;
+                            _DeviceLocator =
+                                new SsdpDeviceLocator(new SsdpCommunicationsServer(new SocketFactory(ip.Address.ToString())));
                             break;
                         }
                     }
 
-                    // now we have adapter index as p.Index, let put it to socket option
-                    udpSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.MulticastInterface,
-                        (int)IPAddress.HostToNetworkOrder(p.Index));
+
                 }
 
-                if (!binded)
+                if (_DeviceLocator == null)
                     throw new Exception("Camea not connected !");
-                return true;
-            }
-            catch (Exception exc)
-            {
-//                MessageBox.Show(exc.Message);
-                return false;
-            }
-        }
 
-        public bool MSearch()
-        {
-            string searchString = "M-SEARCH * HTTP/1.1\r\n" +
-                                  "MX: 10\r\n" +
-                                  "HOST: 239.255.255.250:1900\r\n" +
-                                  "MAN: \"ssdp:discover\"\r\n" +
-                                  "NT: panono:ball-camera\r\n" +
-                                  "\r\n";
+                // (Optional) Set the filter so we only see notifications for devices we care about 
+                // (can be any search target value i.e device type, uuid value etc - any value that appears in the 
+                // DiscoverdSsdpDevice.NotificationType property or that is used with the searchTarget parameter of the Search method).
+                _DeviceLocator.NotificationFilter = "ssdp:all";
 
+                // Connect our event handler so we process devices as they are found
+                //_DeviceLocator.DeviceAvailable += deviceLocator_DeviceAvailable;
 
-            byte[] receiveBuffer = new byte[64000];
+                // Enable listening for notifications (optional)
+                _DeviceLocator.StartListeningForNotifications();
 
-            int receivedBytes = 0;
-            DateTime starTime = DateTime.Now;
-
-            while (true)
-            {
-                try
+                // Perform a search so we don't have to wait for devices to broadcast notifications 
+                // again to get any results right away (notifications are broadcast periodically).
+                var s = _DeviceLocator.SearchAsync(new TimeSpan(0, 0, 3)).Result.ToList();
+                if (s.Any())
                 {
-                    udpSocket.SendTo(Encoding.UTF8.GetBytes(searchString), SocketFlags.None, multicastEndpoint);
-                    for (int i = 0; i < 5; i++)
+                    foreach (var device in s)
                     {
-                        if (udpSocket.Available > 0)
+                        if (device.NotificationType == "panono:ball-camera")
                         {
-
-                            receivedBytes = udpSocket.Receive(receiveBuffer, SocketFlags.None);
-                            response = Encoding.UTF8.GetString(receiveBuffer, 0, receivedBytes);
-                            var lines = response.Split('\n');
-                            foreach (string line in lines)
-                            {
-                                if (line.StartsWith("LOCATION"))
-                                {
-                                    udpSocket.Close();
-                                    var data = line.Split(' ');
-                                    EndPoint = data[1];
-                                    return true;
-                                }
-                            }
-                            if (response.Contains("LOCATION"))
-                            {
-                                return true;
-                            }
+                            EndPoint = device.DescriptionLocation.ToString();
+                            return true;
                         }
                     }
                 }
-                catch (Exception exc)
-                {
-                    MessageBox.Show("Test " + exc.Message);
-                    return false;
-                }
-                if ((DateTime.Now - starTime).TotalSeconds > 4000)
-                {
-                    return false;
-                }
-                Thread.Sleep(150);
+                return false;
+            }
+            catch (Exception exc)
+            {
+                Log.Debug("Camera discovery fail", exc);
+                return false;
             }
         }
 

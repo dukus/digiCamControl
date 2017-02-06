@@ -186,6 +186,19 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public string ArduinoLabel
+        {
+            get
+            {
+                return PluginSetting["ArduinoLabel"] as string;
+            }
+            set
+            {
+                PluginSetting["ArduinoLabel"] = value;
+                RaisePropertyChanged(() => ArduinoLabel);
+            }
+        }
+        
         public bool Active
         {
             get { return PluginSetting.GetBool("Active"); }

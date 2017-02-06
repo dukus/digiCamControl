@@ -12,19 +12,19 @@ namespace CameraControl.Devices.Wifi
 
             if (cameraDiscover.UDPSocketSetup())
             {
-                if (cameraDiscover.MSearch())
+
+                var camera = new PanonoCamera();
+                camera.Init(cameraDiscover.EndPoint);
+                camera.DeviceName = "Panono";
+                camera.Manufacturer = "Panono";
+                DeviceDescriptor descriptor = new DeviceDescriptor
                 {
-                    var camera = new PanonoCamera();
-                    camera.Init(cameraDiscover.EndPoint);
-                    camera.DeviceName = "Panono";
-                    DeviceDescriptor descriptor = new DeviceDescriptor
-                    {
-                        WpdId = "PanonoCamera",
-                        CameraDevice = camera
-                    };
-                    //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
-                    return descriptor;
-                }
+                    WpdId = "PanonoCamera",
+                    CameraDevice = camera
+                };
+                //cameraDevice.SerialNumber = StaticHelper.GetSerial(portableDevice.DeviceId);
+                return descriptor;
+
             }
             throw new Exception("No camera was found !");
         }

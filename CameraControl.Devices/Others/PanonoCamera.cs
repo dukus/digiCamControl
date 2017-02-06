@@ -1,28 +1,122 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
+using Timer = System.Timers.Timer;
 
 namespace PanonoTest
 {
-    public class PanonoCamera: BaseCameraDevice
+    public class PanonoCamera : BaseCameraDevice
     {
         private WebSocket _ws;
         private static int request_id = 0;
+        private Timer _timer = new Timer(500);
+        WebClient _client = new WebClient();
 
         public bool Init(string endpoint)
         {
+            
             _ws = new WebSocket(endpoint);
+            _ws.WaitTime = new TimeSpan(0, 0, 4);
             _ws.OnMessage += Ws_OnMessage;
+            _ws.OnClose += _ws_OnClose;
+            _ws.OnError += _ws_OnError;
             _ws.Connect();
             LiveViewImageZoomRatio = new PropertyValue<int>();
             Auth();
             IsConnected = true;
+            IsoNumber = new PropertyValue<long> {Available = true};
+            FNumber = new PropertyValue<long> {Available = false};
+            ExposureCompensation = new PropertyValue<int> {Available = false};
+            FocusMode = new PropertyValue<long> {Available = false};
+            ShutterSpeed = new PropertyValue<long> {Available = false};
+            WhiteBalance = new PropertyValue<long> {Available = false};
+            InitIso();
+            InitMode();
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.AutoReset = true;
+           // _timer.Start();
             return true;
+        }
+
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                var s = _client.DownloadString("http://"+_ws.Url.Host+ "/update_image");
+            }
+            catch (WebException ex)
+            {
+                if ((uint)ex.HResult != 0x80131515)
+                    Log.Error("Ping error ", ex);
+            }
+        }
+
+        private void _ws_OnError(object sender, ErrorEventArgs e)
+        {
+            StaticHelper.Instance.SystemMessage = e.Message;
+        }
+
+        private void _ws_OnClose(object sender, CloseEventArgs e)
+        {
+            Close();
+            OnCameraDisconnected(this, new DisconnectCameraEventArgs {});
+        }
+
+        public override void Close()
+        {
+            _timer.Stop();
+            _ws.OnMessage -= Ws_OnMessage;
+            _ws.OnClose -= _ws_OnClose;
+            _ws.OnError -= _ws_OnError;
+            _ws.Close();
+        }
+
+        private void InitIso()
+        {
+            IsoNumber.Tag = "ISO";
+            IsoNumber.AddValues("50", 50);
+            IsoNumber.AddValues("100", 100);
+            IsoNumber.AddValues("200", 200);
+            IsoNumber.AddValues("400", 400);
+            IsoNumber.AddValues("800", 800);
+            IsoNumber.AddValues("1600", 1600);
+            IsoNumber.ReloadValues();
+            IsoNumber.ValueChanged += IsoNumber_ValueChanged;
+            ExecuteMethod("get_options", IsoNumber.Tag);
+        }
+
+        private void InitMode()
+        {
+            Mode = new PropertyValue<uint> {Tag = "ImageType"};
+            Mode.AddValues("Default", 0);
+            Mode.AddValues("HDR", 1);
+            Mode.ReloadValues();
+            Mode.ValueChanged += Mode_ValueChanged;
+            ExecuteMethod("get_options", Mode.Tag);
+        }
+
+
+        private void SetProperty(string key, string value)
+        {
+            _ws.Send("{ \"id\":3,\"method\":\"set_options\",\"params\":{ \"" + key + "\":\"" + value +
+                     "\"},\"jsonrpc\":\"2.0\"}");
+        }
+
+        private void Mode_ValueChanged(object sender, string key, uint val)
+        {
+            SetProperty(Mode.Tag, key);
+        }
+
+        private void IsoNumber_ValueChanged(object sender, string key, long val)
+        {
+            SetProperty(IsoNumber.Tag, key);
         }
 
         public void Auth()
@@ -32,65 +126,83 @@ namespace PanonoTest
 
         public override void CapturePhoto()
         {
+            IsBusy = true;
             ExecuteMethod("capture");
         }
 
         private void Ws_OnMessage(object sender, MessageEventArgs e)
         {
-            var json = JObject.Parse(e.Data);
-            if (json["result"] !=null)
+            try
             {
-                var values = json["result"].ToObject<Dictionary<string, object>>();
-                if (values.ContainsKey("serial_number"))
-                    SerialNumber = (string)values["serial_number"];
+                var json = JObject.Parse(e.Data);
+                if (json["result"] != null)
+                {
+                    var values = json["result"].ToObject<Dictionary<string, object>>();
+                    if (values.ContainsKey("serial_number"))
+                        SerialNumber = (string)values["serial_number"];
+                    if (values.ContainsKey(IsoNumber.Tag))
+                        IsoNumber.SetValue((string)values[IsoNumber.Tag], false);
 
-            }
-            if ((string)json["method"]== "status_update")
-            {
-                if (json["params"]["battery_value"] != null)
-                {
-                    Battery = json["params"]["battery_value"].Value<int>();
+                    if (values.ContainsKey(Mode.Tag))
+                        Mode.SetValue((string)values[Mode.Tag], false);
                 }
-                if (json["params"]["capture_available"] != null)
+                if ((string)json["method"] == "status_update")
                 {
-                    IsBusy = json["params"]["capture_available"].Value<bool>();
-                }
-            }
-            if ((string) json["method"] == "upf_infos_update")
-            {
-                if (json["params"] != null)
-                {
-                    var values = json["params"]["upf_infos"][0].ToObject<Dictionary<string, object>>();
-                    if (values.ContainsKey("upf_status") && (string) values["upf_status"] == "ready")
+                    if (json["params"]["battery_value"] != null)
                     {
-                        string url = (string) values["upf_url"];
-                        PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
-                        {
-                            WiaImageItem = null,
-                            EventArgs = null,
-                            CameraDevice = this,
-                            FileName = url.Replace('/', '\\'),
-                            Handle = new List<object>() {url, (long)values["upf_size"] }
-                        };
-                        OnPhotoCapture(this, args);
+                        Battery = json["params"]["battery_value"].Value<int>();
+                    }
+                    if (json["params"]["capture_available"] != null)
+                    {
+                        IsBusy = json["params"]["capture_available"].Value<bool>();
                     }
                 }
+                if ((string)json["method"] == "upf_infos_update")
+                {
+                    if (json["params"] != null)
+                    {
+                        var values = json["params"]["upf_infos"][0].ToObject<Dictionary<string, object>>();
+                        if (values.ContainsKey("upf_status") && (string)values["upf_status"] == "ready")
+                        {
+                            string url = (string)values["upf_url"];
+                            PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+                            {
+                                WiaImageItem = null,
+                                EventArgs = null,
+                                CameraDevice = this,
+                                FileName = url.Replace('/', '\\'),
+                                Handle = new List<object>() { url, (long)values["upf_size"] }
+                            };
+                            OnPhotoCapture(this, args);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
             }
         }
 
         public override void TransferFile(object o, string filename)
         {
+            _timer.Stop();
+            Thread.Sleep(100);
             TransferProgress = 0;
             var param = o as List<object>;
             HttpHelper.DownLoadFileByWebRequest((string) param[0], filename, this, (long) param[1]);
+            _timer.Start();
         }
 
         public override void TransferFileThumb(object o, string filename)
         {
+            _timer.Stop();
+            Thread.Sleep(100);
             TransferProgress = 0;
             var param = o as List<object>;
             HttpHelper.DownLoadFileByWebRequest(((string)param[0]).Replace("panoramas", "previews"), filename,
                 this);
+            _timer.Start();
         }
 
         private void ExecuteMethod(string method, params object[] prms)
