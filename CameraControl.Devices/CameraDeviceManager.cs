@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Windows;
 using CameraControl.Devices.Canon;
@@ -654,6 +655,7 @@ namespace CameraControl.Devices
             //        select keyValuePair.Value).FirstOrDefault();
         }
 
+        [HandleProcessCorruptedStateExceptions]
         public void DisconnectCamera(ICameraDevice cameraDevice)
         {
 
@@ -666,8 +668,6 @@ namespace CameraControl.Devices
 
             cameraDevice.Close();
             OnCameraDisconnected(cameraDevice);
-            if (PortableDeviceCollection.Instance != null)
-                PortableDeviceCollection.Instance.RefreshDevices();
         }
 
         private void DisconnectCamera(string wiaId)

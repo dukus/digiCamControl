@@ -72,10 +72,17 @@ namespace PanonoTest
         public override void Close()
         {
             _timer.Stop();
-            _ws.OnMessage -= Ws_OnMessage;
-            _ws.OnClose -= _ws_OnClose;
-            _ws.OnError -= _ws_OnError;
-            _ws.Close();
+            try
+            {
+                _ws.OnMessage -= Ws_OnMessage;
+                _ws.OnClose -= _ws_OnClose;
+                _ws.OnError -= _ws_OnError;
+                _ws.Close();
+            }
+            catch (Exception e)
+            {
+                Log.Error("Camera close error", e);
+            }
         }
 
         private void InitIso()
