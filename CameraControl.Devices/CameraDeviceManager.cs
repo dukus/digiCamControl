@@ -654,6 +654,22 @@ namespace CameraControl.Devices
             //        select keyValuePair.Value).FirstOrDefault();
         }
 
+        public void DisconnectCamera(ICameraDevice cameraDevice)
+        {
+
+            cameraDevice.PhotoCaptured -= cameraDevice_PhotoCaptured;
+            cameraDevice.CameraDisconnected -= cameraDevice_CameraDisconnected;
+            ConnectedDevices.Remove(cameraDevice);
+            StaticHelper.Instance.SystemMessage = "Camera disconnected :" + cameraDevice.DeviceName;
+            Log.Debug("===========Camera disconnected==============");
+            Log.Debug("Name :" + cameraDevice.DeviceName);
+
+            cameraDevice.Close();
+            OnCameraDisconnected(cameraDevice);
+            if (PortableDeviceCollection.Instance != null)
+                PortableDeviceCollection.Instance.RefreshDevices();
+        }
+
         private void DisconnectCamera(string wiaId)
         {
             DeviceDescriptor descriptor = _deviceEnumerator.GetByWiaId(wiaId);
