@@ -200,6 +200,7 @@ namespace CameraControl.Devices
             WifiDeviceProviders.Add(new YiCameraProvider());
             WifiDeviceProviders.Add(new SonyProvider());
             WifiDeviceProviders.Add(new PanonoProvider());
+            WifiDeviceProviders.Add(new OscProvider());
         }
 
         public CameraDeviceManager(string datafolder=null)

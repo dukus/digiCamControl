@@ -47,6 +47,7 @@ using CameraControl.Core.TclScripting;
 using CameraControl.Core.Translation;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
+using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.Layouts;
 using CameraControl.ViewModel;
@@ -70,7 +71,7 @@ namespace CameraControl
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow :  IMainWindowPlugin, INotifyPropertyChanged
+    public partial class MainWindow : IMainWindowPlugin, INotifyPropertyChanged
     {
         public string DisplayName { get; set; }
 
@@ -83,6 +84,7 @@ namespace CameraControl
 
         public RelayCommand<AutoExportPluginConfig> ConfigurePluginCommand { get; set; }
         public RelayCommand<IAutoExportPlugin> AddPluginCommand { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
@@ -118,7 +120,7 @@ namespace CameraControl
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
-            
+
         }
 
         private void AddPlugin(IAutoExportPlugin obj)
@@ -249,7 +251,7 @@ namespace CameraControl
             }
             catch (Exception)
             {
-                
+
             }
         }
 
@@ -270,7 +272,7 @@ namespace CameraControl
             ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
             ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
             SetLayout(ServiceProvider.Settings.SelectedLayout);
-            var thread = new Thread(CheckForUpdate);
+            var thread = new Thread(StartupThread);
             thread.Start();
             if (ServiceProvider.Settings.StartMinimized)
                 this.WindowState = WindowState.Minimized;
@@ -309,8 +311,44 @@ namespace CameraControl
             }));
         }
 
-        private void CheckForUpdate()
+        private void StartupThread()
         {
+            foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+            {
+                Log.Debug("cameraDevice_CameraInitDone 1");
+                var property = cameraDevice.LoadProperties();
+                CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
+                // multiple canon cameras block with this settings
+
+                if ((cameraDevice is CanonSDKBase && ServiceProvider.Settings.LoadCanonTransferMode) || !(cameraDevice is CanonSDKBase))
+                    cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
+
+                Log.Debug("cameraDevice_CameraInitDone 1a");
+                if (ServiceProvider.Settings.SyncCameraDateTime)
+                {
+                    try
+                    {
+                        cameraDevice.DateTime = DateTime.Now;
+                    }
+                    catch (Exception exception)
+                    {
+                        Log.Error("Unable to sysnc date time", exception);
+                    }
+                }
+                if (preset != null)
+                {
+                    try
+                    {
+                        Thread.Sleep(500);
+                        cameraDevice.WaitForCamera(5000);
+                        preset.Set(cameraDevice);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error("Unable to load default preset", e);
+                    }
+                }
+            }
             var scriptFile = ServiceProvider.Settings.StartupScript;
             if (scriptFile != null && File.Exists(scriptFile))
             {
@@ -359,7 +397,7 @@ namespace CameraControl
                             var wnd = new Welcome();
                             wnd.ShowDialog();
                         }
-                        catch 
+                        catch
                         {
                         }
                     });
@@ -408,7 +446,7 @@ namespace CameraControl
                 Log.Debug("Photo transfer begin.");
                 eventArgs.CameraDevice.IsBusy = true;
                 var extension = Path.GetExtension(eventArgs.FileName);
-                
+
                 // the capture is for live view preview 
                 if (LiveViewManager.PreviewRequest.ContainsKey(eventArgs.CameraDevice) &&
                     LiveViewManager.PreviewRequest[eventArgs.CameraDevice])
@@ -425,10 +463,10 @@ namespace CameraControl
                 }
 
                 CameraProperty property = eventArgs.CameraDevice.LoadProperties();
-                PhotoSession session = (PhotoSession) eventArgs.CameraDevice.AttachedPhotoSession ??
+                PhotoSession session = (PhotoSession)eventArgs.CameraDevice.AttachedPhotoSession ??
                                        ServiceProvider.Settings.DefaultSession;
                 StaticHelper.Instance.SystemMessage = "";
-                
+
 
                 if (!eventArgs.CameraDevice.CaptureInSdRam || PhotoUtils.IsMovie(eventArgs.FileName))
                 {
@@ -475,7 +513,7 @@ namespace CameraControl
                                 Path.GetExtension(fileName));
                 }
 
-                if (session.AllowOverWrite&& File.Exists(fileName))
+                if (session.AllowOverWrite && File.Exists(fileName))
                 {
                     PhotoUtils.WaitForFile(fileName);
                     File.Delete(fileName);
@@ -536,7 +574,7 @@ namespace CameraControl
 
 
                 if ((!eventArgs.CameraDevice.CaptureInSdRam || PhotoUtils.IsMovie(fileName)) && session.DeleteFileAfterTransfer)
-                    eventArgs.CameraDevice.DeleteObject(new DeviceObject() {Handle = eventArgs.Handle});
+                    eventArgs.CameraDevice.DeleteObject(new DeviceObject() { Handle = eventArgs.Handle });
 
                 File.Copy(tempFile, fileName);
 
@@ -556,7 +594,7 @@ namespace CameraControl
                         Exiv2Helper.AddKeyword(fileName, session.SelectedTag2.Value);
                     if (session.SelectedTag3 != null && !string.IsNullOrEmpty(session.SelectedTag3.Value))
                         Exiv2Helper.AddKeyword(fileName, session.SelectedTag3.Value);
-                    if (session.SelectedTag4 != null &&  !string.IsNullOrEmpty(session.SelectedTag4.Value))
+                    if (session.SelectedTag4 != null && !string.IsNullOrEmpty(session.SelectedTag4.Value))
                         Exiv2Helper.AddKeyword(fileName, session.SelectedTag4.Value);
                 }
 
@@ -571,13 +609,13 @@ namespace CameraControl
                         _selectedItem = session.GetNewFileItem(fileName);
                         _selectedItem.BackupFileName = backupfile;
                         _selectedItem.Series = session.Series;
-                       // _selectedItem.Transformed = tempitem.Transformed;
+                        // _selectedItem.Transformed = tempitem.Transformed;
                         _selectedItem.AddTemplates(eventArgs.CameraDevice, session);
                         ServiceProvider.Database.Add(new DbFile(_selectedItem, eventArgs.CameraDevice.SerialNumber, eventArgs.CameraDevice.DisplayName, session.Name));
                     }
                     catch (Exception ex)
                     {
-                        
+
                     }
                 }));
 
@@ -602,7 +640,7 @@ namespace CameraControl
 
                 //select the new file only when the multiple camera support isn't used to prevent high CPU usage on raw files
                 if (ServiceProvider.Settings.AutoPreview &&
-                    !ServiceProvider.WindowsManager.Get(typeof (MultipleCameraWnd)).IsVisible &&
+                    !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
                     !ServiceProvider.Settings.UseExternalViewer)
                 {
                     if ((Path.GetExtension(fileName).ToLower() == ".jpg" && ServiceProvider.Settings.AutoPreviewJpgOnly) ||
@@ -625,7 +663,7 @@ namespace CameraControl
                 eventArgs.CameraDevice.IsBusy = false;
                 //show fullscreen only when the multiple camera support isn't used
                 if (ServiceProvider.Settings.Preview &&
-                    !ServiceProvider.WindowsManager.Get(typeof (MultipleCameraWnd)).IsVisible &&
+                    !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
                     !ServiceProvider.Settings.UseExternalViewer)
                     ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_ShowTimed);
                 if (ServiceProvider.Settings.UseExternalViewer &&
@@ -645,7 +683,7 @@ namespace CameraControl
             catch (Exception ex)
             {
                 eventArgs.CameraDevice.IsBusy = false;
-                StaticHelper.Instance.SystemMessage =TranslationStrings.MsgPhotoTransferError+" "+ ex.Message;
+                StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferError + " " + ex.Message;
                 Log.Error("Transfer error !", ex);
             }
             // not indicated to be used 
@@ -686,7 +724,7 @@ namespace CameraControl
         public RelayCommand<CameraPreset> LoadInAllPresetCommand { get; private set; }
         public RelayCommand<CameraPreset> VerifyPresetCommand { get; private set; }
 
-        
+
         private void SelectPreset(CameraPreset preset)
         {
             if (preset == null)
@@ -769,7 +807,7 @@ namespace CameraControl
                                                 ServiceProvider.Settings.DefaultSession);
             wnd.ShowDialog();
         }
-        
+
         private void btn_browse_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BrowseWnd_Show);
@@ -819,7 +857,7 @@ namespace CameraControl
             }
         }
 
-  
+
         private void but_download_Click(object sender, RoutedEventArgs e)
         {
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.DownloadPhotosWnd_Show,
@@ -866,7 +904,7 @@ namespace CameraControl
             {
                 ServiceProvider.DeviceManager.ConnectedDevices =
                     new AsyncObservableCollection<ICameraDevice>(
-                        ServiceProvider.DeviceManager.ConnectedDevices.OrderBy(x => x.LoadProperties().SortOrder).ThenBy(x=>x.DisplayName));
+                        ServiceProvider.DeviceManager.ConnectedDevices.OrderBy(x => x.LoadProperties().SortOrder).ThenBy(x => x.DisplayName));
             }
             else
             {
@@ -1000,8 +1038,8 @@ namespace CameraControl
         {
             var res = e.GetPosition(PrviewImage);
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
-                                                          (res.X/PrviewImage.ActualWidth) + "_" +
-                                                          (res.Y/PrviewImage.ActualHeight));
+                                                          (res.X / PrviewImage.ActualWidth) + "_" +
+                                                          (res.Y / PrviewImage.ActualHeight));
         }
 
         private void PrviewImage_MouseMove(object sender, MouseEventArgs e)
@@ -1011,20 +1049,20 @@ namespace CameraControl
                 var res = e.GetPosition(PrviewImage);
                 ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
                                                               (res.X / PrviewImage.ActualWidth) + "_" +
-                                                              (res.Y / PrviewImage.ActualHeight)+"_!");
+                                                              (res.Y / PrviewImage.ActualHeight) + "_!");
             }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           this.ShowInputAsync(TranslationStrings.LabelEmailPublicWebAddress, "Email").ContinueWith(s =>
-           {
-               if (!string.IsNullOrEmpty(s.Result))
-                   HelpProvider.SendEmail(
-                       "digiCamControl public web address " + ServiceProvider.Settings.PublicWebAdress,
-                       "digiCamControl public web address ", "postmaster@digicamcontrol.com", s.Result);
-           }
-               );
+            this.ShowInputAsync(TranslationStrings.LabelEmailPublicWebAddress, "Email").ContinueWith(s =>
+            {
+                if (!string.IsNullOrEmpty(s.Result))
+                    HelpProvider.SendEmail(
+                        "digiCamControl public web address " + ServiceProvider.Settings.PublicWebAdress,
+                        "digiCamControl public web address ", "postmaster@digicamcontrol.com", s.Result);
+            }
+                );
 
         }
 

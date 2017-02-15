@@ -162,6 +162,7 @@
     <Compile Include="Nikon\NikonL830.cs" />
     <Compile Include="Others\FakeCameraDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
+    <Compile Include="Others\OscCamera.cs" />
     <Compile Include="Others\PanonoCamera.cs" />
     <Compile Include="Sony\CameraDiscovery.cs" />
     <Compile Include="Sony\SonyCameraDeviceInfo.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="TransferProtocol\SonyTransferProtocol.cs" />
     <Compile Include="TransferProtocol\YiCameraProtocol.cs" />
     <Compile Include="Wifi\DDServerProvider.cs" />
+    <Compile Include="Wifi\OscProvider.cs" />
     <Compile Include="Wifi\PanonoDiscovery.cs" />
     <Compile Include="Wifi\PanonoProvider.cs" />
     <Compile Include="Wifi\PtpIpProvider.cs" />
