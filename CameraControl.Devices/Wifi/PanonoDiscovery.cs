@@ -69,7 +69,7 @@ namespace CameraControl.Devices.Wifi
 
                 // Perform a search so we don't have to wait for devices to broadcast notifications 
                 // again to get any results right away (notifications are broadcast periodically).
-                var s = _DeviceLocator.SearchAsync(new TimeSpan(0, 0, 3)).Result.ToList();
+                var s = _DeviceLocator.SearchAsync(new TimeSpan(0, 0, 15)).Result.ToList();
                 if (s.Any())
                 {
                     foreach (var device in s)

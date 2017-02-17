@@ -1,4 +1,10 @@
-﻿using CameraControl.Devices.Classes;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CameraControl.Devices;
+using CameraControl.Devices.Classes;
 using CameraControl.Devices.Others;
 
 namespace CameraControl.Devices.Wifi

@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -30,16 +35,13 @@ namespace CameraControl.Devices.Others
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};
-
-            InitIso();
-            InitExposureCompensation();
-
+            Mode = new PropertyValue<uint>() {Available = false};
             SessionId = null;
             Address = address;
             GetInfo();
-            //var s = CreateJson("camera.startSession", new JProperty("sessionId", "000011"),new JProperty("sessionId2", "000011"));
             GetSessionId(GetExecute(CreateJson("camera.startSession")));
             InitIso();
+            InitExposureCompensation();
         }
 
 
@@ -49,8 +51,8 @@ namespace CameraControl.Devices.Others
             {
                 string property = "iso";
                 var response=GetProperty(property);
-                response =
-                    "{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"iso\":100,\"isoSupport\":[100,125,160,200,250,320,400,500,640,800,1000,1250,1600]}}}";
+//                response =
+                    //"{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"iso\":100,\"isoSupport\":[100,125,160,200,250,320,400,500,640,800,1000,1250,1600]}}}";
                 var json= Initialize(response);
                 var val = json["results"]["options"][property].Value<string>();
                 var vals= json["results"]["options"][property+ "Support"].Values<string>();
@@ -75,8 +77,8 @@ namespace CameraControl.Devices.Others
             {
                 string property = "exposureCompensation";
                 var response = GetProperty(property);
-                response =
-                    "{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"exposureCompensation\":0.0,\"exposureCompensationSupport\":[-2.0,-1.7,-1.3,-1.0,-0.7,-0.3,0.0,0.3,0.7,1.0,1.3,1.7,2.0]}}}";
+//                response =
+//                    "{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"exposureCompensation\":0.0,\"exposureCompensationSupport\":[-2.0,-1.7,-1.3,-1.0,-0.7,-0.3,0.0,0.3,0.7,1.0,1.3,1.7,2.0]}}}";
                 var json = Initialize(response);
                 var val = json["results"]["options"][property].Value<string>();
                 var vals = json["results"]["options"][property + "Support"].Values<string>();
@@ -91,7 +93,7 @@ namespace CameraControl.Devices.Others
             catch (Exception ex)
             {
                 Log.Debug("Unable to get ISO");
-                throw;
+
             }
 
         }
@@ -146,7 +148,7 @@ namespace CameraControl.Devices.Others
             } while (string.IsNullOrEmpty(url));
             if (!url.StartsWith("http"))
             {
-                url = Address + url;
+                url = Address + "/" + url;
             }
             Log.Debug("Url to process " + url);
             PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
@@ -186,6 +188,11 @@ namespace CameraControl.Devices.Others
         private string CreateJson(string name, params object[] prms)
         {
             var param = new JObject();
+            if (!string.IsNullOrEmpty(SessionId))
+            {
+                param.Add(new JProperty("sessionId", SessionId));
+            }
+
             if (prms != null)
             {
                 foreach (var p in prms)
@@ -193,15 +200,11 @@ namespace CameraControl.Devices.Others
                     param.Add(p);
                 }
             }
-            if (!string.IsNullOrEmpty(SessionId))
-            {
-                param.Add(new JProperty("sessionId", SessionId));
-            }
             var json = new JObject(
                 new JProperty("name", name),
-                new JProperty("params", param));
+                new JProperty("parameters", param));
 
-            return json.ToString(Formatting.None);
+            return json.ToString(Formatting.Indented);
         }
 
         private string GetUrl(string command)
