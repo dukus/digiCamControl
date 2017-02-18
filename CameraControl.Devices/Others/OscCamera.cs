@@ -50,23 +50,23 @@ namespace CameraControl.Devices.Others
             try
             {
                 string property = "iso";
-                var response=GetProperty(property);
+                var response = GetProperty(property);
 //                response =
-                    //"{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"iso\":100,\"isoSupport\":[100,125,160,200,250,320,400,500,640,800,1000,1250,1600]}}}";
-                var json= Initialize(response);
+                //"{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"iso\":100,\"isoSupport\":[100,125,160,200,250,320,400,500,640,800,1000,1250,1600]}}}";
+                var json = Initialize(response);
                 var val = json["results"]["options"][property].Value<string>();
-                var vals= json["results"]["options"][property+ "Support"].Values<string>();
+                var vals = json["results"]["options"][property + "Support"].Values<string>();
                 foreach (string s in vals)
                 {
-                   IsoNumber.AddValues(s,0); 
+                    IsoNumber.AddValues(s, 0);
                 }
                 IsoNumber.Value = val;
                 IsoNumber.ReloadValues();
-                IsoNumber.ValueChanged += (o, s, i) => SetProperty(property, s);
+                IsoNumber.ValueChanged += (o, s, i) => SetProperty(property, int.Parse(s));
             }
             catch (Exception ex)
             {
-                Log.Debug("Unable to get ISO");
+                Log.Debug("Unable to get ISO", ex);
                 throw;
             }
         }
@@ -88,7 +88,7 @@ namespace CameraControl.Devices.Others
                 }
                 ExposureCompensation.Value = val;
                 ExposureCompensation.ReloadValues();
-                ExposureCompensation.ValueChanged += (o, s, i) => SetProperty(property,s);
+                ExposureCompensation.ValueChanged += (o, s, i) => SetProperty(property, double.Parse(s));
             }
             catch (Exception ex)
             {
@@ -98,19 +98,30 @@ namespace CameraControl.Devices.Others
 
         }
 
+
+
         private string GetProperty(string name)
         {
             var param = new JArray();
             param.Add(name);
-            param.Add(name+ "Support");
-            var s = CreateJson("camera.getOptions", new JProperty("optionNames",param));
+            param.Add(name + "Support");
+            var s = CreateJson("camera.getOptions", new JProperty("optionNames", param));
             return GetExecute(s);
         }
 
-        private string SetProperty(string name, string val)
+        public void SetProperty(string name, object val)
         {
-            var s = CreateJson("camera.setOptions", new JProperty("options", new JProperty(name, val)));
-            return GetExecute(s);
+            try
+            {
+                var p = new JObject();
+                p.Add(new JProperty(name, val));
+                var s = CreateJson("camera.setOptions", new JProperty("options", p));
+                GetExecute(s);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to set property " + name, ex);
+            }
         }
 
         private void GetInfo()
@@ -146,10 +157,6 @@ namespace CameraControl.Devices.Others
                     Thread.Sleep(150);
                 }
             } while (string.IsNullOrEmpty(url));
-            if (!url.StartsWith("http"))
-            {
-                url = Address + "/" + url;
-            }
             Log.Debug("Url to process " + url);
             PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
             {
@@ -164,10 +171,23 @@ namespace CameraControl.Devices.Others
 
         public override void TransferFile(object o, string filename)
         {
+            string url = ((string) o);
+            if (!url.StartsWith("http"))
+            {
+                url = Address + "/" + url;
+            }
             TransferProgress = 0;
-            HttpHelper.DownLoadFileByWebRequest(((string)o) , filename, this);
+            HttpHelper.DownLoadFileByWebRequest(url , filename, this);
         }
 
+        public override bool DeleteObject(DeviceObject deviceObject)
+        {
+            string url = ((string)deviceObject.Handle);
+            var s = CreateJson("camera.delete", new JProperty("fileUri", url));
+            GetExecute(s);
+
+            return true;
+        }
 
         internal static JObject Initialize(string response)
         {
