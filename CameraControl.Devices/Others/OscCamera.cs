@@ -38,6 +38,7 @@ namespace CameraControl.Devices.Others
             Mode = new PropertyValue<uint>() {Available = false};
             SessionId = null;
             Address = address;
+            SetProperty("clientVersion", 2);
             GetInfo();
             GetSessionId(GetExecute(CreateJson("camera.startSession")));
             InitIso();
@@ -55,14 +56,17 @@ namespace CameraControl.Devices.Others
                 //"{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"iso\":100,\"isoSupport\":[100,125,160,200,250,320,400,500,640,800,1000,1250,1600]}}}";
                 var json = Initialize(response);
                 var val = json["results"]["options"][property].Value<string>();
-                var vals = json["results"]["options"][property + "Support"].Values<string>();
-                foreach (string s in vals)
+                var vals = json["results"]["options"][property + "Support"].Values<int>();
+                foreach (int i in vals)
                 {
-                    IsoNumber.AddValues(s, 0);
+                    IsoNumber.AddValues(i == 0 ? "Auto" : i.ToString(), 0);
                 }
-                IsoNumber.Value = val;
+                if (val == "0")
+                    IsoNumber.Value = "Auto";
+                else
+                    IsoNumber.Value = val;
                 IsoNumber.ReloadValues();
-                IsoNumber.ValueChanged += (o, s, i) => SetProperty(property, int.Parse(s));
+                IsoNumber.ValueChanged += (o, s, i) => SetProperty(property, i);
             }
             catch (Exception ex)
             {
@@ -142,7 +146,7 @@ namespace CameraControl.Devices.Others
 
         public override void CapturePhoto()
         {
-            var json= Initialize(GetExecute(CreateJson("camera.takePicture")));
+            var json = Initialize(GetExecute(CreateJson("camera.takePicture")));
             string id = json["id"].Value<string>();
             string url = null;
             do
@@ -177,15 +181,22 @@ namespace CameraControl.Devices.Others
                 url = Address + "/" + url;
             }
             TransferProgress = 0;
-            HttpHelper.DownLoadFileByWebRequest(url , filename, this);
+            HttpHelper.DownLoadFileByWebRequest(url, filename, this);
         }
 
         public override bool DeleteObject(DeviceObject deviceObject)
         {
-            string url = ((string)deviceObject.Handle);
-            var s = CreateJson("camera.delete", new JProperty("fileUri", url));
-            GetExecute(s);
-
+            try
+            {
+                string url = ((string)deviceObject.Handle);
+                var array = new JArray {url};
+                var s = CreateJson("camera.delete", new JProperty("fileUrls", array));
+                GetExecute(s);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to set property ", ex);
+            }
             return true;
         }
 
