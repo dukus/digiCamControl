@@ -35,7 +35,7 @@ namespace CameraControl.Devices.Others
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};
-            Mode = new PropertyValue<uint>() {Available = false};
+            Mode = new PropertyValue<uint>() {Available = true};
             SessionId = null;
             Address = address;
             SetProperty("clientVersion", 2);
@@ -43,6 +43,7 @@ namespace CameraControl.Devices.Others
             GetSessionId(GetExecute(CreateJson("camera.startSession")));
             InitIso();
             InitExposureCompensation();
+            InitMode();
         }
 
 
@@ -56,13 +57,17 @@ namespace CameraControl.Devices.Others
                 //"{\"name\":\"camera.getOptions\",\"state\":\"done\",\"results\":{\"options\":{\"iso\":100,\"isoSupport\":[100,125,160,200,250,320,400,500,640,800,1000,1250,1600]}}}";
                 var json = Initialize(response);
                 var val = json["results"]["options"][property].Value<string>();
-                var vals = json["results"]["options"][property + "Support"].Values<int>();
+                var vals = json["results"]["options"][property + "Support"].Values<int>().ToList();
                 foreach (int i in vals)
                 {
                     IsoNumber.AddValues(i == 0 ? "Auto" : i.ToString(), 0);
                 }
                 if (val == "0")
+                {
+                    if (!vals.Contains(0))
+                        IsoNumber.AddValues("Auto", 0);
                     IsoNumber.Value = "Auto";
+                }
                 else
                     IsoNumber.Value = val;
                 IsoNumber.ReloadValues();
@@ -96,13 +101,37 @@ namespace CameraControl.Devices.Others
             }
             catch (Exception ex)
             {
-                Log.Debug("Unable to get ISO");
+                Log.Debug("Unable to get exposureCompensation", ex);
 
             }
 
         }
 
+        private void InitMode()
+        {
+            try
+            {
+                string property = "exposureProgram";
+                var response = GetProperty(property);
+                var json = Initialize(response);
+                var val = json["results"]["options"][property].Value<uint>();
+                //var vals = json["results"]["options"][property + "Support"].Values<string>();
+                Mode.AddValues("Manual program", 1);
+                Mode.AddValues("Normal program", 2);
+                Mode.AddValues("Shutter priority program", 4);
+                Mode.AddValues("ISO priority program", 9);
 
+                Mode.ReloadValues();
+                Mode.ValueChanged += (o, s, i) => SetProperty(property, i);
+                Mode.SetValue(val); 
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Unable to get exposureCompensation", ex);
+
+            }
+
+        }
 
         private string GetProperty(string name)
         {

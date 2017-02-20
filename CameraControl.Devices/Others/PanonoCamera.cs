@@ -17,7 +17,7 @@ namespace PanonoTest
         private WebSocket _ws;
         private static int request_id = 0;
         private Timer _timer = new Timer(500);
-        WebClient _client = new WebClient();
+
 
         public bool Init(string endpoint)
         {
@@ -49,7 +49,10 @@ namespace PanonoTest
         {
             try
             {
-                var s = _client.DownloadString("http://"+_ws.Url.Host+ "/update_image");
+                //using (WebClient client = new WebClient())
+                //{
+                //    var s = client.DownloadString("http://" + _ws.Url.Host + "/update_image");
+                //}
             }
             catch (WebException ex)
             {
@@ -135,6 +138,11 @@ namespace PanonoTest
         {
             IsBusy = true;
             ExecuteMethod("capture");
+        }
+
+        public override bool DeleteObject(DeviceObject deviceObject)
+        {
+            return true;
         }
 
         private void Ws_OnMessage(object sender, MessageEventArgs e)
