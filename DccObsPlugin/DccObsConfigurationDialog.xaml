@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="150" Width="350">
+             mc:Ignorable="d" Height="150" Width="400">
     <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.RenderTransform>
             <TransformGroup>
@@ -20,7 +20,7 @@
         <TextBlock HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center">
             First start the <Hyperlink NavigateUri="http://digicamcontrol.com/">digiCamControl</Hyperlink> application <LineBreak/>
             And turn on the webserver <LineBreak/>
-            Settings->Triggers->Use Web server (Restart required)<LineBreak/>
+            Menu=>Settings=>Webserver=>Use Web server (Restart required)<LineBreak/>
             And don't forget to connect and turn on your camera
         </TextBlock>
         <Button Content="Ok" Name="btn_ok"  HorizontalAlignment="Left" Margin="5" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btn_ok_Click"/>

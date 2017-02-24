@@ -15,21 +15,12 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
         <Directory Id="ProgramFilesFolder.OBS" Name="OBS">
-          <Directory Id="INSTALLDIR" Name="plugins">
+          <Directory Id="ProgramFilesFolder.OBS.plugins" Name="plugins">
+            <Directory Id="INSTALLDIR" Name="CLRHostPlugin">
 
-            <Component Id="Component.CLRHostPlugin.dll" Guid="357e0d80-5093-478e-8c11-28b1f61ba57b">
-              <File Id="CLRHostPlugin.dll" Source="ObsPlugin\CLRHostPlugin.dll" />
-            </Component>
-
-            <Directory Id="INSTALLDIR.CLRHostPlugin" Name="CLRHostPlugin">
-
-              <Component Id="Component.CLRHostPlugin" Guid="357e0d80-5093-478e-8c11-28b1d8195327" KeyPath="yes">
+              <Component Id="Component.INSTALLDIR" Guid="357e0d80-5093-478e-8c11-28b1da4b120a" KeyPath="yes">
                 <CreateFolder />
-                <RemoveFolder Id="INSTALLDIR.CLRHostPlugin" On="uninstall" />
-              </Component>
-
-              <Component Id="Component.CLRHost.Interop.dll" Guid="357e0d80-5093-478e-8c11-28b147c75965">
-                <File Id="CLRHost.Interop.dll" Source="ObsPlugin\CLRHostPlugin\CLRHost.Interop.dll" />
+                <RemoveFolder Id="INSTALLDIR" On="uninstall" />
               </Component>
 
               <Component Id="Component.DccObsPlugin.dll" Guid="357e0d80-5093-478e-8c11-28b1a46c7edd">
@@ -60,9 +51,7 @@
     <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
 
     <Feature Id="Obs_Plugin" Title="Obs Plugin" Absent="allow" Level="1">
-      <ComponentRef Id="Component.CLRHostPlugin.dll" />
-      <ComponentRef Id="Component.CLRHostPlugin" />
-      <ComponentRef Id="Component.CLRHost.Interop.dll" />
+      <ComponentRef Id="Component.INSTALLDIR" />
       <ComponentRef Id="Component.DccObsPlugin.dll" />
     </Feature>
 

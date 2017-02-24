@@ -18,7 +18,6 @@ namespace Setup
         {
             Feature obsPlugin = new Feature("Obs Plugin");
             var obsDir = new Dir(@"%ProgramFiles%\OBS\plugins",
-                new File(obsPlugin, @"ObsPlugin\CLRHostPlugin.dll"),
                 new Dir(obsPlugin, "CLRHostPlugin",
                     new DirFiles(obsPlugin, @"ObsPlugin\CLRHostPlugin\*.*")
                     ));

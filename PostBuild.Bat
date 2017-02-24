@@ -46,6 +46,7 @@ IF EXIST %1MtpTester\Bin\%2\MtpTester.exe (
 echo.
 echo checking %1DccObsPlugin\Bin\%2\DccObsPlugin.dll
 IF EXIST %1DccObsPlugin\Bin\%2\DccObsPlugin.dll (
+    md %1CameraControl\Bin\%2\ObsPlugin\CLRHostPlugin\   
 	copy %1DccObsPlugin\Bin\%2\DccObsPlugin.dll %1CameraControl\Bin\%2\ObsPlugin\CLRHostPlugin\ /Y 
 	echo ...copying
 ) else (

@@ -18,6 +18,10 @@ namespace Setup
 {
     internal class Script
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
 
@@ -186,7 +190,7 @@ namespace Setup
             new PackageGroupRef("NetFx46Web"),
             //new ExePackage("vcredist_x86.exe"){InstallCommand ="/quite" },
             new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")) { Permanent = false,Attributes = dict},
-            new MsiPackage(obsMsi) { Id = "ObsPackageId", Attributes = dict },
+            //new MsiPackage(obsMsi) { Id = "ObsPackageId", Attributes = dict },
             new MsiPackage(productMsi) { Id = "MyProductPackageId", DisplayInternalUI = true, Attributes = dict });
 
             bootstrapper.Copyright = project.ControlPanelInfo.Manufacturer;
