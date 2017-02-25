@@ -177,6 +177,11 @@ namespace CameraControl.Core.Classes
 
         public bool ShowThumbPanel { get; set; }
 
+        public bool ShowViewMenu { get; set; }
+        public bool ShowCameraMenu { get; set; }
+        public bool ShowPluginMenu { get; set; }
+
+
         public bool UseThemeSelector
         {
             get { return string.IsNullOrEmpty(DefaultTheme); }
@@ -238,6 +243,10 @@ namespace CameraControl.Core.Classes
             ShowMainMenu = true;
             ShowBattery = true;
             ShowThumbPanel = true;
+
+            ShowViewMenu = true;
+            ShowCameraMenu = true;
+            ShowPluginMenu = true;
         }
 
 

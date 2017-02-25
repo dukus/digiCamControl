@@ -247,7 +247,7 @@
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
             </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuView}" Padding="5,2" Margin="1">
+            <MenuItem Header="{T:TranslateExtension MenuView}" Padding="5,2" Margin="1" Visibility="{Binding Branding.ShowViewMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints}" Command="{Binding ToggleFocusCommand}"/>
                 <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
                 <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}"/>
@@ -303,14 +303,14 @@
                 <Separator/>
                 <MenuItem Header="Copy full path in clipboard" Command="{Binding Path=CopyNameClipboardCommand}" />
             </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuCamera}" Padding="5,2" Margin="1">
+            <MenuItem Header="{T:TranslateExtension MenuCamera}" Padding="5,2" Margin="1" Visibility="{Binding Branding.ShowCameraMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension MenuCameraProperty}" Command="{Binding Path=CameraPropertyCommand}" IsEnabled="{Binding CameraConnected}"/>
                 <MenuItem Header="{T:TranslateExtension LabelUseAsMaster}" Command="{Binding Path=UseAsMasterCommand}" IsEnabled="{Binding CameraConnected}"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension LabelRefreshCameraList}" Command="{Binding Path=RefreshCommand}"/>
                 <!--<MenuItem Header="{T:TranslateExtension MenuResetDevice}" Command="{Binding SendCommand}" CommandParameter="ResetDevice" InputGestureText="{myClasess:CommandShortcutExtensioncs ResetDevice}"/>-->
             </MenuItem>
-            <MenuItem Header="{T:TranslateExtension MenuPlugins}" Padding="5,2" Margin="1">
+            <MenuItem Header="{T:TranslateExtension MenuPlugins}" Padding="5,2" Margin="1" Visibility="{Binding Branding.ShowPluginMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension LabelExport}" ItemsSource="{Binding ExportPlugins}">
                     <MenuItem.ItemTemplate>
                         <DataTemplate>
