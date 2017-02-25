@@ -38,9 +38,9 @@ namespace CameraControl.Devices.Others
             Mode = new PropertyValue<uint>() {Available = true};
             SessionId = null;
             Address = address;
-            SetProperty("clientVersion", 2);
             GetInfo();
             GetSessionId(GetExecute(CreateJson("camera.startSession")));
+            SetProperty("clientVersion", 2);
             InitIso();
             InitExposureCompensation();
             InitMode();
@@ -51,6 +51,7 @@ namespace CameraControl.Devices.Others
         {
             try
             {
+                IsoNumber = new PropertyValue<long> { Available = true, IsEnabled = true};
                 string property = "iso";
                 var response = GetProperty(property);
 //                response =
@@ -60,13 +61,14 @@ namespace CameraControl.Devices.Others
                 var vals = json["results"]["options"][property + "Support"].Values<int>().ToList();
                 foreach (int i in vals)
                 {
-                    IsoNumber.AddValues(i == 0 ? "Auto" : i.ToString(), 0);
+                    IsoNumber.AddValues(i == 0 ? "Auto" : i.ToString(), i);
                 }
                 if (val == "0")
                 {
                     if (!vals.Contains(0))
                         IsoNumber.AddValues("Auto", 0);
                     IsoNumber.Value = "Auto";
+                    IsoNumber.IsEnabled = false;
                 }
                 else
                     IsoNumber.Value = val;
@@ -116,18 +118,22 @@ namespace CameraControl.Devices.Others
                 var json = Initialize(response);
                 var val = json["results"]["options"][property].Value<uint>();
                 //var vals = json["results"]["options"][property + "Support"].Values<string>();
-                Mode.AddValues("Manual program", 1);
-                Mode.AddValues("Normal program", 2);
-                Mode.AddValues("Shutter priority program", 4);
+               // Mode.AddValues("Manual program", 1);
+                Mode.AddValues("Auto", 2);
+               // Mode.AddValues("Shutter priority program", 4);
                 Mode.AddValues("ISO priority program", 9);
 
                 Mode.ReloadValues();
-                Mode.ValueChanged += (o, s, i) => SetProperty(property, i);
+                Mode.ValueChanged += (o, s, i) =>
+                {
+                    SetProperty(property, i);
+                    InitIso();
+                };
                 Mode.SetValue(val); 
             }
             catch (Exception ex)
             {
-                Log.Debug("Unable to get exposureCompensation", ex);
+                Log.Debug("Unable to get exposureProgram", ex);
 
             }
 
@@ -149,7 +155,10 @@ namespace CameraControl.Devices.Others
                 var p = new JObject();
                 p.Add(new JProperty(name, val));
                 var s = CreateJson("camera.setOptions", new JProperty("options", p));
-                GetExecute(s);
+              //  Log.Debug(s);
+                var res = GetExecute(s);
+                //Log.Debug(res);
+                Initialize(res);
             }
             catch (Exception ex)
             {
