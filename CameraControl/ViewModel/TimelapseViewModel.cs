@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Timers;
@@ -493,7 +494,7 @@ namespace CameraControl.ViewModel
                 {
                   
                     var tempTrigger = sched.GetTrigger(trigger.Key);
-                    var nextFireTimeUtc = tempTrigger?.GetNextFireTimeUtc();
+                    var nextFireTimeUtc = tempTrigger?.Result.GetNextFireTimeUtc();
                     if (nextFireTimeUtc != null)
                         return "Next capture time " + nextFireTimeUtc.Value.ToLocalTime();
                     else
@@ -608,7 +609,7 @@ namespace CameraControl.ViewModel
             // get a scheduler, start the schedular before triggers or anything else
             if (sched == null)
             {
-                sched = schedFact.GetScheduler();
+                sched = schedFact.GetScheduler().Result;
             }
 
             // create job
@@ -744,8 +745,10 @@ namespace CameraControl.ViewModel
     /// </summary>
     public class SimpleJob : IJob
     {
-        void IJob.Execute(IJobExecutionContext context)
-        {
+        
+
+    public Task Execute(IJobExecutionContext context)
+    {
             if (!ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy)
             {
 
@@ -798,6 +801,7 @@ namespace CameraControl.ViewModel
 
             //throw new NotImplementedException();
                 Console.WriteLine("Hello, JOb executed");
+            return Task.FromResult(0);
         }
     }
 }

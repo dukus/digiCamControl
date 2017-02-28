@@ -40,7 +40,7 @@ namespace CameraControl.Devices.Others
             Address = address;
             GetInfo();
             GetSessionId(GetExecute(CreateJson("camera.startSession")));
-            SetProperty("clientVersion", 2);
+            //SetProperty("clientVersion", 2);
             InitIso();
             InitExposureCompensation();
             InitMode();

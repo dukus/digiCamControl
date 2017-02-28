@@ -5,7 +5,7 @@
     Changes to this file will be lost if the code is regenerated.
 </auto-generated>
 -->
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <Product Id="357e0d80-5093-478e-8c11-28b1c72406ee" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.0.71.6" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" InstallScope="perMachine" />
     <Media Id="1" Cabinet="OBS_plugin_for_digiCamControl.cab" EmbedCab="yes" />
