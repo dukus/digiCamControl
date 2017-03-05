@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -99,7 +100,7 @@ namespace CameraControl.Devices.Others
                 }
                 ExposureCompensation.Value = val;
                 ExposureCompensation.ReloadValues();
-                ExposureCompensation.ValueChanged += (o, s, i) => SetProperty(property, double.Parse(s));
+                ExposureCompensation.ValueChanged += (o, s, i) => SetProperty(property, double.Parse(s,CultureInfo.InvariantCulture));
             }
             catch (Exception ex)
             {
@@ -162,7 +163,7 @@ namespace CameraControl.Devices.Others
             }
             catch (Exception ex)
             {
-                Log.Error("Unable to set property " + name, ex);
+                Log.Error("Unable to set property " + name+" "+val.ToString(), ex);
             }
         }
 
