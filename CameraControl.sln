@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraControl", "CameraControl\CameraControl.csproj", "{CD20011B-67C3-45A4-B69D-C7A9E8481550}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -59,6 +59,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture.Workflow", "Capture.Workflow\Capture.Workflow.csproj", "{5272066F-D868-423D-AF40-7B21B00C88BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture.Workflow.Plugins", "Capture.Workflow.Plugins\Capture.Workflow.Plugins.csproj", "{209AC170-2582-44A7-A9BB-C4FA45EB8836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture.Workflow.Core", "Capture.Workflow.Core\Capture.Workflow.Core.csproj", "{4B45D58C-2685-4180-BD33-4D1F818F3C40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -507,6 +509,30 @@ Global
 		{209AC170-2582-44A7-A9BB-C4FA45EB8836}.Release|x64.Build.0 = Release|Any CPU
 		{209AC170-2582-44A7-A9BB-C4FA45EB8836}.Release|x86.ActiveCfg = Release|Any CPU
 		{209AC170-2582-44A7-A9BB-C4FA45EB8836}.Release|x86.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|Any CPU.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|Any CPU.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|Mixed Platforms.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|x64.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|x64.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|x86.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Capture.Workflow|x86.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|x64.Build.0 = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Debug|x86.Build.0 = Debug|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|x64.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|x64.Build.0 = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|x86.ActiveCfg = Release|Any CPU
+		{4B45D58C-2685-4180-BD33-4D1F818F3C40}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
