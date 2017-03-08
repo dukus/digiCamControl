@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Capture.Workflow"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="273*"/>
             <RowDefinition Height="46*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="1"  Content="Create Workflow" HorizontalAlignment="Right" Margin="5" Padding="5"/>
+        <Button Grid.Row="1"  Content="Create Workflow" HorizontalAlignment="Right" Margin="5" Padding="5" Command="{Binding EditCommand}"/>
         <Button Grid.Row="1"  Content="Settings" HorizontalAlignment="Left" Margin="5" Padding="5"/>
     </Grid>
 </controls:MetroWindow>

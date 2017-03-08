@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Capture.Workflow.View"
         mc:Ignorable="d"
-        Title="WorkflowEditorView" Height="300" Width="300">
+        Title="WorkflowEditorView" Height="600" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Views">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0">
+                        <ListBox.Effect>
+                            <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
+                        </ListBox.Effect>
+                    </ListBox>
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <Button Content="Add view ..." Margin="20,5"/>
+                        <Button Content="Delete view" Margin="20,5"/>
+                    </StackPanel>
+                    <GroupBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Header="Vew Settings">
+                        <ContentControl ></ContentControl>
+                        <GroupBox.Effect>
+                            <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
+                        </GroupBox.Effect>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Actions">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Events">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Variables">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings">
+                <Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

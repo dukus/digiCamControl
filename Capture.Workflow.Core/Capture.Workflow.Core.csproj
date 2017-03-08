@@ -61,7 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ActionsList.cs" />
+    <Compile Include="Classes\BaseItem.cs" />
+    <Compile Include="Classes\ValueItem.cs" />
     <Compile Include="Classes\WorkFlow.cs" />
+    <Compile Include="Classes\WorkFlowView.cs" />
     <Compile Include="Interface\IActionPlugin.cs" />
     <Compile Include="Interface\IEvent.cs" />
     <Compile Include="Interface\IUiPlugin.cs" />

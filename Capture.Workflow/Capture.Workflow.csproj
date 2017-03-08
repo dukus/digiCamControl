@@ -134,7 +134,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\NewViewSelectorViewModel.cs" />
     <Compile Include="ViewModel\WorkflowEditorViewModel.cs" />
+    <Compile Include="View\NewViewSelectorView.xaml.cs">
+      <DependentUpon>NewViewSelectorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WorkflowEditorView.xaml.cs">
       <DependentUpon>WorkflowEditorView.xaml</DependentUpon>
     </Compile>
@@ -150,6 +155,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\NewViewSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WorkflowEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +200,10 @@
     <ProjectReference Include="..\CameraControl.Devices\CameraControl.Devices.csproj">
       <Project>{e8572d8b-c987-4d20-bd88-1f8925a64a82}</Project>
       <Name>CameraControl.Devices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capture.Workflow.Core\Capture.Workflow.Core.csproj">
+      <Project>{4B45D58C-2685-4180-BD33-4D1F818F3C40}</Project>
+      <Name>Capture.Workflow.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Capture.Workflow.Plugins\Capture.Workflow.Plugins.csproj">
       <Project>{209ac170-2582-44a7-a9bb-c4fa45eb8836}</Project>
