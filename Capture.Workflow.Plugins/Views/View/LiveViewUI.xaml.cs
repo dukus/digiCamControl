@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Capture.Workflow.View
+namespace Capture.Workflow.Plugins.Views.View
 {
     /// <summary>
-    /// Interaction logic for NewViewSelectorView.xaml
+    /// Interaction logic for LiveViewUI.xaml
     /// </summary>
-    public partial class NewViewSelectorView  
+    public partial class LiveViewUI : UserControl
     {
-        public NewViewSelectorView()
+        public LiveViewUI()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-            Close();
         }
     }
 }

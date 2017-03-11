@@ -1,31 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Xml.Serialization;
+using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
+using Capture.Workflow.Core.Classes.Attributes;
 
 namespace Capture.Workflow.Core
 {
     public class WorkflowManager
     {
-        public List<Type> Plugins { get; set; }
+        private static WorkflowManager _instance;
+
+        public static WorkflowManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new WorkflowManager();
+                return _instance;
+            }
+            set { _instance = value; }
+        }
+
+
+        public List<PluginInfo> Plugins { get; set; }
 
         public WorkflowManager()
         {
-            Plugins = new List<Type>();
+            Plugins = new List<PluginInfo>();
         }
 
-        public List<Type> Get<T>()
+        public List<PluginInfo> GetPlugins(PluginType type)
         {
-            List<Type> res=new List<Type>();
-            foreach (Type type in Plugins)
+            List<PluginInfo> res = new List<PluginInfo>();
+            foreach (PluginInfo plugin in Plugins)
             {
-                if(type is T)
-                    res.Add(type);
+                if (plugin.Type==type)
+                    res.Add(plugin);
             }
             return res;
         }
 
+
+        public void LoadPlugins(string assemblyFile)
+        {
+            try
+            {
+                var pluginAssembly = Assembly.LoadFrom(assemblyFile);
+                if (pluginAssembly == null)
+                {
+                    Log.Error("Error loading assembly");
+                    return;
+                }
+                Type[] exportedTypes = pluginAssembly.GetExportedTypes();
+                foreach (var exportedType in exportedTypes)
+                {
+                    var attribute = exportedType.GetCustomAttribute<PluginTypeAttribute>();
+                    var attributeDes = exportedType.GetCustomAttribute<DescriptionAttribute>();
+                    var attributeName = exportedType.GetCustomAttribute<DisplayNameAttribute>();
+                    
+                    if (attribute != null)
+                    {
+                        Plugins.Add(new PluginInfo()
+                        {
+                            Type = attribute.PluginType,
+                            Class = exportedType,
+                            Description = attributeDes?.Description,
+                            Name = attributeName?.DisplayName
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to load plugins");
+            }
+        }
 
         public void Save(WorkFlow workflow, string file)
         {

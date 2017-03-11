@@ -2,8 +2,8 @@
 {
     public class BaseItem
     {
-        public string TypeId { get; set; }
+        public PluginInfo PluginInfo { get; set; }
         public string Name { get; set; }
-        public string Setting { get; set; }
+        public string SettingData { get; set; }
     }
 }

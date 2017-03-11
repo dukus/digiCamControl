@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Capture.Workflow.Core;
 
 namespace Capture.Workflow
 {
@@ -13,5 +14,9 @@ namespace Capture.Workflow
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            WorkflowManager.Instance.LoadPlugins("Capture.Workflow.Plugins.dll");
+        }
     }
 }

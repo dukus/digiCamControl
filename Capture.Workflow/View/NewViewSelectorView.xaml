@@ -1,24 +1,27 @@
-﻿<Window x:Class="Capture.Workflow.View.NewViewSelectorView"
+﻿<controls:MetroWindow x:Class="Capture.Workflow.View.NewViewSelectorView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Capture.Workflow.View"
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="NewViewSelectorView" Height="200" Width="300" WindowStartupLocation="CenterOwner">
+        Title="NewViewSelectorView" Height="200" Width="300" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowSystemMenuOnRightClick="False" ShowTitleBar="False">
     <Window.DataContext>
         <viewModel:NewViewSelectorViewModel/>
     </Window.DataContext>
     <Grid>
     <StackPanel>
         <Label Content="Select view"/>
-        <ComboBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Margin="3"/>
+        <ComboBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Margin="3" DisplayMemberPath="Name"/>
         <Label Content="View Name"/>
         <TextBox Text="{Binding Name}" Margin="3"/>
     </StackPanel>
-        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Width="70"/>
-        <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3" Width="70"/>
+        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Width="70" IsDefault="True" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3" Width="70" IsCancel="True"/>
     </Grid>
-</Window>
+</controls:MetroWindow>
+
+
 

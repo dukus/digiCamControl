@@ -17,7 +17,7 @@ namespace Capture.Workflow.View
     /// <summary>
     /// Interaction logic for WorkflowEditorView.xaml
     /// </summary>
-    public partial class WorkflowEditorView : Window
+    public partial class WorkflowEditorView  
     {
         public WorkflowEditorView()
         {
