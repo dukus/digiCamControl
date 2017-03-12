@@ -104,6 +104,9 @@
     <Compile Include="Classes\ActionsList.cs" />
     <Compile Include="Classes\Attributes\PluginTypeAttribute.cs" />
     <Compile Include="Classes\BaseItem.cs" />
+    <Compile Include="Classes\CustomProperty.cs" />
+    <Compile Include="Classes\CustomPropertyCollection.cs" />
+    <Compile Include="Classes\CustomPropertyType.cs" />
     <Compile Include="Classes\PluginInfo.cs" />
     <Compile Include="Classes\PluginType.cs" />
     <Compile Include="Classes\ValueItem.cs" />
@@ -123,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\CustomProperties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
