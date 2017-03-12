@@ -15,12 +15,31 @@ namespace Capture.Workflow.ViewModel
     {
         public AsyncObservableCollection<WorkFlowView> Views { get; set; }
 
+        public CustomPropertyCollection PropertyCollection { get; set; }
+
+
         public RelayCommand NewCommand { get; set; }
 
         public WorkflowEditorViewModel()
         {
             NewCommand = new RelayCommand(New);
             Views = new AsyncObservableCollection<WorkFlowView>();
+            PropertyCollection = new CustomPropertyCollection();
+            PropertyCollection.Items.Add(new CustomProperty()
+            {
+                PropertyType = CustomPropertyType.String,
+                Name = "TestParam",
+                Description = "Test param description",
+                Value = "Test value"
+            });
+            PropertyCollection.Items.Add(new CustomProperty()
+            {
+                PropertyType = CustomPropertyType.ValueList,
+                ValueList = new List<string>() { "Value 1","value 2"},
+                Value = "value 2",
+                Name = "TestParam 2",
+                Description = "Test param 2 description"
+            });
         }
 
         private void New()

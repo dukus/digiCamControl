@@ -10,6 +10,7 @@ namespace Capture.Workflow.Core.Classes
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Value { get; set; }
         public string Parameter { get; set; }
         public CustomPropertyType PropertyType { get; set; }
         public List<string> ValueList { get; set; }
@@ -20,5 +21,7 @@ namespace Capture.Workflow.Core.Classes
         {
             ValueList = new List<string>();
         }
+
+
     }
 }

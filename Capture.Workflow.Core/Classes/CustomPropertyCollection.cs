@@ -22,7 +22,7 @@ namespace Capture.Workflow.Core.Classes
                 return null;
             }
         }
-        
+
         public CustomPropertyCollection()
         {
             Items = new List<CustomProperty>();

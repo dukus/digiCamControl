@@ -4,6 +4,7 @@
     {
         Number,
         String,
+        ValueList,
 
     }
 }
