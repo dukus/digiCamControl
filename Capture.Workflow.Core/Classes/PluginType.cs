@@ -5,7 +5,6 @@
         View,
         Event,
         Action,
-        UIElement
-
+        ViewElement
     }
 }

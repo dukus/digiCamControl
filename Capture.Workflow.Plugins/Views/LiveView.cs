@@ -14,6 +14,15 @@ namespace Capture.Workflow.Plugins.Views
     [DisplayName("Live view")]
     public class LiveView:BaseView
     {
-
+        public override WorkFlowView CreateView()
+        {
+            WorkFlowView view = new WorkFlowView();
+            view.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "ViewTitle",
+                PropertyType = CustomPropertyType.String
+            });
+            return view;
+        }
     }
 }

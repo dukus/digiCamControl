@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Classes;
+using Capture.Workflow.Core.Interface;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -13,7 +11,30 @@ namespace Capture.Workflow.ViewModel
 {
     public class WorkflowEditorViewModel: ViewModelBase
     {
+        private WorkFlowView _selectedView;
+        private WorkFlowViewElement _selectedElement;
         public AsyncObservableCollection<WorkFlowView> Views { get; set; }
+        
+        public WorkFlowView SelectedView
+        {
+            get { return _selectedView; }
+            set
+            {
+                _selectedView = value;
+                RaisePropertyChanged(()=>SelectedView);
+            }
+        }
+
+        public WorkFlowViewElement SelectedElement
+        {
+            get { return _selectedElement; }
+            set
+            {
+                _selectedElement = value;
+                RaisePropertyChanged(() => SelectedElement);
+            }
+        }
+
 
         public CustomPropertyCollection PropertyCollection { get; set; }
 
@@ -50,11 +71,12 @@ namespace Capture.Workflow.ViewModel
                 var contex = wnd.DataContext as NewViewSelectorViewModel;
                 if (contex != null)
                 {
-                    Views.Add(new WorkFlowView()
-                    {
-                        PluginInfo = contex.SelectedItem,
-                        Name = contex.Name ?? contex.SelectedItem.Name
-                    });
+                    IViewPlugin plugin = (IViewPlugin) Activator.CreateInstance(contex.SelectedItem.Class);
+                    WorkFlowView view = plugin.CreateView();
+                    view.Instance = plugin;
+                    view.PluginInfo = contex.SelectedItem;
+                    view.Name = contex.Name ?? contex.SelectedItem.Name;
+                    Views.Add(view);
                 }
             }
             

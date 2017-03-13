@@ -23,6 +23,11 @@ namespace Capture.Workflow.Core.Classes
             }
         }
 
+        public void Add(CustomProperty property)
+        {
+            Items.Add(property);
+        }
+
         public CustomPropertyCollection()
         {
             Items = new List<CustomProperty>();
