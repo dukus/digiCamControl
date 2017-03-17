@@ -48,7 +48,7 @@ namespace CameraControl.Devices.Others
 
             ExposureMeteringMode = new PropertyValue<long>() { Tag = "meter_mode" };
             
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.Value = "All";
             SendCommand(3);

@@ -50,7 +50,7 @@ namespace CameraControl.Devices.Sony
         List<string> AvailableMethods;
         private Timer _timer = new Timer(100);
         private string _liveViewUrl = "";
-        private int _lastZoomPos = 0;
+        private long _lastZoomPos = 0;
         public SonyWifiCamera()
         {
 
@@ -68,7 +68,7 @@ namespace CameraControl.Devices.Sony
             IsConnected = true;
             ExposureMeteringMode = new PropertyValue<long>();
             ExposureMeteringMode.Available = false;
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             for (int i = 0; i < 101; i++)
             {
                 LiveViewImageZoomRatio.AddValues(i.ToString(), i);
@@ -79,7 +79,7 @@ namespace CameraControl.Devices.Sony
             return true;
         }
 
-        void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
+        void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
         {
             var dif = Math.Abs(_lastZoomPos - val);
             if (val > _lastZoomPos)

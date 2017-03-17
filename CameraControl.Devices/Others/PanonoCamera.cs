@@ -28,7 +28,7 @@ namespace PanonoTest
             _ws.OnClose += _ws_OnClose;
             _ws.OnError += _ws_OnError;
             _ws.Connect();
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             Auth();
             IsConnected = true;
             IsoNumber = new PropertyValue<long> {Available = true};
