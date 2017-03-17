@@ -110,7 +110,7 @@ namespace CameraControl.Devices
         uint TransferProgress { get; set; }
 
         int Battery { get; set; }
-        PropertyValue<int> LiveViewImageZoomRatio { get; set; }
+        PropertyValue<long> LiveViewImageZoomRatio { get; set; }
 
         bool Init(DeviceDescriptor deviceDescriptor);
         void StartLiveView();

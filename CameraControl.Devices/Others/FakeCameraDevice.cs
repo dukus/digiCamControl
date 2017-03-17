@@ -80,7 +80,7 @@ namespace CameraControl.Devices.Others
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
             Capabilities.Add(CapabilityEnum.LiveView);
             Capabilities.Add(CapabilityEnum.LiveViewStream);
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.Value = "All";
 

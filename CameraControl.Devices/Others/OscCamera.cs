@@ -28,7 +28,7 @@ namespace CameraControl.Devices.Others
         public void Init(string address)
         {
 
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             IsConnected = true;
             IsoNumber = new PropertyValue<long> {Available = true};
             FNumber = new PropertyValue<long> {Available = false};

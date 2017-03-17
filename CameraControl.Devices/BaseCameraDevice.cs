@@ -349,7 +349,7 @@ namespace CameraControl.Devices
             return Capabilities.Contains(capabilityEnum);
         }
 
-        public virtual PropertyValue<int> LiveViewImageZoomRatio { get; set; }
+        public virtual PropertyValue<long> LiveViewImageZoomRatio { get; set; }
 
         public virtual bool Init(DeviceDescriptor deviceDescriptor)
         {

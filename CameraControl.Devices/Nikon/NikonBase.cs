@@ -1132,7 +1132,8 @@ namespace CameraControl.Devices.Nikon
 
         private void InitOther()
         {
-            LiveViewImageZoomRatio = new PropertyValue<int> {Name = "LiveViewImageZoomRatio"};
+            LiveViewImageZoomRatio = new PropertyValue<long> {Name = "LiveViewImageZoomRatio"};
+            LiveViewImageZoomRatio.SubType = typeof(int);
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.AddValues("25%", 1);
             LiveViewImageZoomRatio.AddValues("33%", 2);
@@ -1145,7 +1146,7 @@ namespace CameraControl.Devices.Nikon
             LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
         }
 
-        private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
+        private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
