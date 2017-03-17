@@ -171,7 +171,7 @@ namespace CameraControl.Devices.Sony
 
         private void InitCompressionSetting()
         {
-            CompressionSetting = new PropertyValue<int>();
+            CompressionSetting = new PropertyValue<long>();
             try
             {
                 var prop = CompressionSetting;

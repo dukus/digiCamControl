@@ -64,7 +64,7 @@ namespace CameraControl.Devices
         PropertyValue<long> WhiteBalance { get; set; }
         PropertyValue<long> Mode { get; set; }
         PropertyValue<long> ExposureCompensation { get; set; }
-        PropertyValue<int> CompressionSetting { get; set; }
+        PropertyValue<long> CompressionSetting { get; set; }
         PropertyValue<int> ExposureMeteringMode { get; set; }
         PropertyValue<long> FocusMode { get; set; }
         DateTime DateTime { get; set; }

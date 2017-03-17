@@ -1588,7 +1588,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 1;
-                CompressionSetting = new PropertyValue<int>();
+                CompressionSetting = new PropertyValue<long>();
+                CompressionSetting.SubType = typeof(int);
                 CompressionSetting.Name = "CompressionSetting ";
                 CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
                 var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
@@ -1611,7 +1612,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        protected void CompressionSetting_ValueChanged(object sender, string key, int val)
+        protected void CompressionSetting_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((byte) val),
                         CONST_PROP_CompressionSetting);

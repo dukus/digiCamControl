@@ -64,7 +64,7 @@ namespace CameraControl.Devices.Nikon
             try
             {
                 byte datasize = 1;
-                CompressionSetting = new PropertyValue<int>();
+                CompressionSetting = new PropertyValue<long>();
                 CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
                 var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
                                                                  CONST_PROP_CompressionSetting);

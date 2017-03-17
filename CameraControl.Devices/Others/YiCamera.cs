@@ -37,7 +37,7 @@ namespace CameraControl.Devices.Others
             DeviceName = Protocol.Model;
             Manufacturer = Protocol.Manufacturer;
             IsConnected = true;
-            CompressionSetting = new PropertyValue<int> { Tag = "photo_quality" };
+            CompressionSetting = new PropertyValue<long> { Tag = "photo_quality" };
             
             Mode = new PropertyValue<long> { Tag = "capture_mode" };
             Mode.AddValues("Single", 0);

@@ -473,7 +473,7 @@ namespace CameraControl.Devices.Others
             WhiteBalance.ValueChanged += WhiteBalance_ValueChanged;
             Mode = new PropertyValue<long>();
             Mode.ValueChanged += Mode_ValueChanged;
-            CompressionSetting = new PropertyValue<int>();
+            CompressionSetting = new PropertyValue<long>();
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
             ExposureCompensation = new PropertyValue<long>();
             ExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
@@ -497,7 +497,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void CompressionSetting_ValueChanged(object sender, string key, int val)
+        private void CompressionSetting_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

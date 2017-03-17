@@ -164,9 +164,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _compressionSetting;
+        private PropertyValue<long> _compressionSetting;
 
-        public virtual PropertyValue<int> CompressionSetting
+        public virtual PropertyValue<long> CompressionSetting
         {
             get { return _compressionSetting; }
             set

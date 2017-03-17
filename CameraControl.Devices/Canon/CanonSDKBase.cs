@@ -547,7 +547,7 @@ namespace CameraControl.Devices.Canon
         private void InitCompression()
         {
             var data = GetSettingsList(Edsdk.PropID_ImageQuality);
-            CompressionSetting = new PropertyValue<int>();
+            CompressionSetting = new PropertyValue<long>();
             CompressionSetting.AddValues("Large Fine JPEG", (int) new EosImageQuality(){PrimaryCompressLevel = EosCompressLevel.Fine,PrimaryImageFormat = EosImageFormat.Jpeg,PrimaryImageSize = EosImageSize.Large,SecondaryCompressLevel = EosCompressLevel.Unknown,SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown}.ToBitMask());
             CompressionSetting.AddValues("Large Normal JPEG", (int)new EosImageQuality() { PrimaryCompressLevel = EosCompressLevel.Normal, PrimaryImageFormat = EosImageFormat.Jpeg, PrimaryImageSize = EosImageSize.Large, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown }.ToBitMask());
             CompressionSetting.AddValues("Medium Fine JPEG", (int)new EosImageQuality() { PrimaryCompressLevel = EosCompressLevel.Fine, PrimaryImageFormat = EosImageFormat.Jpeg, PrimaryImageSize = EosImageSize.Middle, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown }.ToBitMask());
@@ -558,12 +558,12 @@ namespace CameraControl.Devices.Canon
             CompressionSetting.AddValues("Tiny JPEG", (int)new EosImageQuality() { PrimaryCompressLevel = EosCompressLevel.Fine, PrimaryImageFormat = EosImageFormat.Jpeg, PrimaryImageSize = EosImageSize.Small4, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown }.ToBitMask());
             CompressionSetting.AddValues("RAW + Large Fine JPEG", (int)new EosImageQuality() {PrimaryImageFormat =EosImageFormat.Cr2,PrimaryCompressLevel = EosCompressLevel.Lossless, PrimaryImageSize = EosImageSize.Large, SecondaryImageSize =EosImageSize.Large,SecondaryCompressLevel = EosCompressLevel.Fine, SecondaryImageFormat = EosImageFormat.Jpeg }.ToBitMask());
             CompressionSetting.AddValues("RAW", (int)new EosImageQuality() { PrimaryImageFormat = EosImageFormat.Cr2, PrimaryCompressLevel = EosCompressLevel.Lossless, PrimaryImageSize = EosImageSize.Large, SecondaryCompressLevel = EosCompressLevel.Unknown, SecondaryImageFormat = EosImageFormat.Unknown, SecondaryImageSize = EosImageSize.Unknown}.ToBitMask());
-            CompressionSetting.Filter(data);
+            CompressionSetting.Filter(data.Select(i => (long) i).ToList());
             CompressionSetting.SetValue((int) Camera.ImageQuality.ToBitMask());
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
         }
 
-        private void CompressionSetting_ValueChanged(object sender, string key, int val)
+        private void CompressionSetting_ValueChanged(object sender, string key, long val)
         {
             Camera.ImageQuality = EosImageQuality.Create(val);
         }

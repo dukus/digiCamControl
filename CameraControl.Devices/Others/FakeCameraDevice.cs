@@ -73,7 +73,7 @@ namespace CameraControl.Devices.Others
             ShutterSpeed = new PropertyValue<long> {IsEnabled = false};
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
             FocusMode = new PropertyValue<long> {IsEnabled = false};
-            CompressionSetting = new PropertyValue<int> {IsEnabled = false};
+            CompressionSetting = new PropertyValue<long> {IsEnabled = false};
             IsoNumber = new PropertyValue<long> {IsEnabled = true};
             ExposureMeteringMode = new PropertyValue<int> {IsEnabled = false};
             Battery = 100;
