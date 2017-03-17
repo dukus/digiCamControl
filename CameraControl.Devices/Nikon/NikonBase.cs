@@ -1624,7 +1624,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                ExposureMeteringMode = new PropertyValue<int>();
+                ExposureMeteringMode = new PropertyValue<long>();
+                ExposureMeteringMode.SubType = typeof(int);
                 ExposureMeteringMode.Name = "ExposureMeteringMode";
                 ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
                 MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_ExposureMeteringMode);
@@ -1642,7 +1643,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
+        private void ExposureMeteringMode_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt16) val),
                         CONST_PROP_ExposureMeteringMode);

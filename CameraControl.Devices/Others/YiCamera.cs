@@ -46,7 +46,7 @@ namespace CameraControl.Devices.Others
             //Mode.AddValues("TimeLapse", 3);
             Mode.ReloadValues();
 
-            ExposureMeteringMode = new PropertyValue<int>() { Tag = "meter_mode" };
+            ExposureMeteringMode = new PropertyValue<long>() { Tag = "meter_mode" };
             
             LiveViewImageZoomRatio = new PropertyValue<int>();
             LiveViewImageZoomRatio.AddValues("All", 0);

@@ -1041,7 +1041,7 @@ namespace CameraControl.Devices.Canon
         private void InitMetering()
         {
             var data = GetSettingsList(Edsdk.PropID_MeteringMode);
-            ExposureMeteringMode = new PropertyValue<int>();
+            ExposureMeteringMode = new PropertyValue<long>();
             ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
             try
             {
@@ -1094,7 +1094,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        private void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
+        private void ExposureMeteringMode_ValueChanged(object sender, string key, long val)
         {
             try
             {

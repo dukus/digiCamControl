@@ -176,9 +176,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _exposureMeteringMode;
+        private PropertyValue<long> _exposureMeteringMode;
 
-        public virtual PropertyValue<int> ExposureMeteringMode
+        public virtual PropertyValue<long> ExposureMeteringMode
         {
             get { return _exposureMeteringMode; }
             set

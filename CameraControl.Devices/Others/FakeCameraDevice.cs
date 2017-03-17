@@ -75,7 +75,7 @@ namespace CameraControl.Devices.Others
             FocusMode = new PropertyValue<long> {IsEnabled = false};
             CompressionSetting = new PropertyValue<long> {IsEnabled = false};
             IsoNumber = new PropertyValue<long> {IsEnabled = true};
-            ExposureMeteringMode = new PropertyValue<int> {IsEnabled = false};
+            ExposureMeteringMode = new PropertyValue<long> {IsEnabled = false};
             Battery = 100;
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
             Capabilities.Add(CapabilityEnum.LiveView);

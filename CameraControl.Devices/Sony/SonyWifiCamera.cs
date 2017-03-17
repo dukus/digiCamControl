@@ -66,7 +66,7 @@ namespace CameraControl.Devices.Sony
             AvailableMethods = GetMethodTypes();
             ExecuteMethod("startRecMode");
             IsConnected = true;
-            ExposureMeteringMode = new PropertyValue<int>();
+            ExposureMeteringMode = new PropertyValue<long>();
             ExposureMeteringMode.Available = false;
             LiveViewImageZoomRatio = new PropertyValue<int>();
             for (int i = 0; i < 101; i++)

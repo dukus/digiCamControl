@@ -477,13 +477,13 @@ namespace CameraControl.Devices.Others
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
             ExposureCompensation = new PropertyValue<long>();
             ExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
-            ExposureMeteringMode = new PropertyValue<int>();
+            ExposureMeteringMode = new PropertyValue<long>();
             ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
             FocusMode = new PropertyValue<long>();
             FocusMode.IsEnabled = false;
         }
 
-        private void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
+        private void ExposureMeteringMode_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
