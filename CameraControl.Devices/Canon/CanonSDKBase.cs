@@ -189,7 +189,7 @@ namespace CameraControl.Devices.Canon
                                                                    {0x70, "91.0"},
                                                                };
 
-        protected Dictionary<uint, string> _exposureModeTable = new Dictionary<uint, string>()
+        protected Dictionary<long, string> _exposureModeTable = new Dictionary<long, string>()
                                                                     {
                                                                         {0, "P"},
                                                                         {1, "Tv"},
@@ -958,10 +958,10 @@ namespace CameraControl.Devices.Canon
 
         private void InitMode()
         {
-           Mode = new PropertyValue<uint>();
+           Mode = new PropertyValue<long>();
             try
             {
-                foreach (KeyValuePair<uint, string> keyValuePair in _exposureModeTable)
+                foreach (KeyValuePair<long, string> keyValuePair in _exposureModeTable)
                 {
                     Mode.AddValues(keyValuePair.Value, keyValuePair.Key);
                 }

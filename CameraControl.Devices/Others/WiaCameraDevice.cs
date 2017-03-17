@@ -471,7 +471,7 @@ namespace CameraControl.Devices.Others
             ShutterSpeed.ValueChanged += ShutterSpeed_ValueChanged;
             WhiteBalance = new PropertyValue<long>();
             WhiteBalance.ValueChanged += WhiteBalance_ValueChanged;
-            Mode = new PropertyValue<uint>();
+            Mode = new PropertyValue<long>();
             Mode.ValueChanged += Mode_ValueChanged;
             CompressionSetting = new PropertyValue<int>();
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
@@ -525,7 +525,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void Mode_ValueChanged(object sender, string key, uint val)
+        private void Mode_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

@@ -104,7 +104,7 @@ namespace PanonoTest
 
         private void InitMode()
         {
-            Mode = new PropertyValue<uint> {Tag = "ImageType"};
+            Mode = new PropertyValue<long> {Tag = "ImageType"};
             Mode.AddValues("Default", 0);
             Mode.AddValues("HDR", 1);
             Mode.ReloadValues();
@@ -119,7 +119,7 @@ namespace PanonoTest
                      "\"},\"jsonrpc\":\"2.0\"}");
         }
 
-        private void Mode_ValueChanged(object sender, string key, uint val)
+        private void Mode_ValueChanged(object sender, string key, long val)
         {
             SetProperty(Mode.Tag, key);
         }

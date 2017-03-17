@@ -18,7 +18,7 @@ namespace CameraControl.Devices.Nikon
             FNumber = new PropertyValue<long> {Available = false};
             IsoNumber = new PropertyValue<long> {Available = false};
             CompressionSetting = new PropertyValue<int> {Available = false};
-            Mode = new PropertyValue<uint>() {Available = false};
+            Mode = new PropertyValue<long>() {Available = false};
             ShutterSpeed = new PropertyValue<long>() {Available = false};
             WhiteBalance = new PropertyValue<long>() {Available = false};
             FocusMode = new PropertyValue<long>() {Available = false};

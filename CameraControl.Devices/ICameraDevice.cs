@@ -62,7 +62,7 @@ namespace CameraControl.Devices
         PropertyValue<long> IsoNumber { get; set; }
         PropertyValue<long> ShutterSpeed { get; set; }
         PropertyValue<long> WhiteBalance { get; set; }
-        PropertyValue<uint> Mode { get; set; }
+        PropertyValue<long> Mode { get; set; }
         PropertyValue<int> ExposureCompensation { get; set; }
         PropertyValue<int> CompressionSetting { get; set; }
         PropertyValue<int> ExposureMeteringMode { get; set; }

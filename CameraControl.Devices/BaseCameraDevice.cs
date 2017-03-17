@@ -116,9 +116,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<uint> _mode;
+        private PropertyValue<long> _mode;
 
-        public virtual PropertyValue<uint> Mode
+        public virtual PropertyValue<long> Mode
         {
             get { return _mode; }
             set

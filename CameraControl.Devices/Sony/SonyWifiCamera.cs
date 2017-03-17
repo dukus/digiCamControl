@@ -189,7 +189,7 @@ namespace CameraControl.Devices.Sony
         {
             try
             {
-                Mode = new PropertyValue<uint>();
+                Mode = new PropertyValue<long>();
                 var prop = Mode;
                 var cap = AsCapability<string>(Post(CreateJson("getAvailableExposureMode")));
                 SetCapability(prop, cap);

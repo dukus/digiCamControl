@@ -36,7 +36,7 @@ namespace CameraControl.Devices.Others
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};
-            Mode = new PropertyValue<uint>() {Available = true};
+            Mode = new PropertyValue<long>() {Available = true};
             SessionId = null;
             Address = address;
             GetInfo();

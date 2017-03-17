@@ -39,7 +39,7 @@ namespace CameraControl.Devices.Others
             IsConnected = true;
             CompressionSetting = new PropertyValue<int> { Tag = "photo_quality" };
             
-            Mode = new PropertyValue<uint> { Tag = "capture_mode" };
+            Mode = new PropertyValue<long> { Tag = "capture_mode" };
             Mode.AddValues("Single", 0);
             Mode.AddValues("Burst", 1);
             Mode.AddValues("Delayed", 2);
@@ -112,7 +112,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        void Mode_ValueChanged(object sender, string key, uint val)
+        void Mode_ValueChanged(object sender, string key, long val)
         {
             switch (val)
             {

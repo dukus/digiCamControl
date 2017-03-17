@@ -1324,7 +1324,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                Mode = new PropertyValue<uint>();
+                Mode = new PropertyValue<long>();
+                Mode.SubType = typeof(uint);
                 Mode.Name = "Mode";
                 Mode.IsEnabled = false;
                 Mode.ValueChanged += Mode_ValueChanged;
@@ -1347,7 +1348,7 @@ namespace CameraControl.Devices.Nikon
         }
 
 
-        private void Mode_ValueChanged(object sender, string key, uint val)
+        private void Mode_ValueChanged(object sender, string key, long val)
         {
             try
             {

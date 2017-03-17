@@ -68,7 +68,7 @@ namespace CameraControl.Devices.Others
             HaveLiveView = false;
             ExposureStatus = 1;
             ExposureCompensation = new PropertyValue<int>() {IsEnabled = false};
-            Mode = new PropertyValue<uint> {IsEnabled = false};
+            Mode = new PropertyValue<long> {IsEnabled = false};
             FNumber = new PropertyValue<long> {IsEnabled = false};
             ShutterSpeed = new PropertyValue<long> {IsEnabled = false};
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
