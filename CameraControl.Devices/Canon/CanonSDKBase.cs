@@ -978,7 +978,7 @@ namespace CameraControl.Devices.Canon
         private void InitEc()
         {
             var data = GetSettingsList(Edsdk.PropID_ExposureCompensation);
-            ExposureCompensation = new PropertyValue<int>();
+            ExposureCompensation = new PropertyValue<long>();
             ExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
             try
             {
@@ -1106,7 +1106,7 @@ namespace CameraControl.Devices.Canon
             }
         }
 
-        private void ExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void ExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             try
             {

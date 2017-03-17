@@ -13,7 +13,7 @@ namespace CameraControl.Devices.Nikon
         {
             base.Init(deviceDescriptor);
             Properties.Add(InitFocalLength());
-            ExposureCompensation = new PropertyValue<int> {Available = false};
+            ExposureCompensation = new PropertyValue<long> {Available = false};
             ExposureMeteringMode = new PropertyValue<int> {Available = false};
             FNumber = new PropertyValue<long> {Available = false};
             IsoNumber = new PropertyValue<long> {Available = false};

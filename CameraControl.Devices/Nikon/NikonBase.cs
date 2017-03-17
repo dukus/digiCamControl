@@ -312,8 +312,8 @@ namespace CameraControl.Devices.Nikon
         public PropertyValue<long> NormalShutterSpeed { get; set; }
         public PropertyValue<long> MovieShutterSpeed { get; set; }
 
-        public PropertyValue<int> NormalExposureCompensation { get; set; }
-        public PropertyValue<int> MovieExposureCompensation { get; set; }
+        public PropertyValue<long> NormalExposureCompensation { get; set; }
+        public PropertyValue<long> MovieExposureCompensation { get; set; }
 
         public NikonBase()
         {
@@ -1511,7 +1511,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                NormalExposureCompensation = new PropertyValue<int>();
+                NormalExposureCompensation = new PropertyValue<long>();
+                NormalExposureCompensation.SubType = typeof(int);
                 NormalExposureCompensation.Name = "ExposureCompensation";
                 NormalExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
                 MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc,
@@ -1537,7 +1538,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                MovieExposureCompensation = new PropertyValue<int>();
+                MovieExposureCompensation = new PropertyValue<long>();
+                MovieExposureCompensation.SubType = typeof(int);
                 MovieExposureCompensation.Name = "ExposureCompensation";
                 MovieExposureCompensation.ValueChanged += MovieExposureCompensation_ValueChanged;
                 MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc,
@@ -1562,7 +1564,7 @@ namespace CameraControl.Devices.Nikon
         }
 
 
-        private void MovieExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void MovieExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -1571,7 +1573,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void ExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void ExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

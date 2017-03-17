@@ -32,7 +32,7 @@ namespace CameraControl.Devices.Others
             IsConnected = true;
             IsoNumber = new PropertyValue<long> {Available = true};
             FNumber = new PropertyValue<long> {Available = false};
-            ExposureCompensation = new PropertyValue<int> {Available = true};
+            ExposureCompensation = new PropertyValue<long> {Available = true};
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};

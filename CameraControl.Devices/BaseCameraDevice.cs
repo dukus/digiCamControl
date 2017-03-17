@@ -152,9 +152,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _exposureCompensation;
+        private PropertyValue<long> _exposureCompensation;
 
-        public virtual PropertyValue<int> ExposureCompensation
+        public virtual PropertyValue<long> ExposureCompensation
         {
             get { return _exposureCompensation; }
             set

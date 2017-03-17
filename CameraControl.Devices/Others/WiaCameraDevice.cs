@@ -475,7 +475,7 @@ namespace CameraControl.Devices.Others
             Mode.ValueChanged += Mode_ValueChanged;
             CompressionSetting = new PropertyValue<int>();
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
-            ExposureCompensation = new PropertyValue<int>();
+            ExposureCompensation = new PropertyValue<long>();
             ExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
             ExposureMeteringMode = new PropertyValue<int>();
             ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
@@ -511,7 +511,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void ExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void ExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

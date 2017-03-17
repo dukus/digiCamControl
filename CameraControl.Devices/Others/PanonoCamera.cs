@@ -33,7 +33,7 @@ namespace PanonoTest
             IsConnected = true;
             IsoNumber = new PropertyValue<long> {Available = true};
             FNumber = new PropertyValue<long> {Available = false};
-            ExposureCompensation = new PropertyValue<int> {Available = false};
+            ExposureCompensation = new PropertyValue<long> {Available = false};
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};
