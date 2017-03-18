@@ -312,8 +312,8 @@ namespace CameraControl.Devices.Nikon
         public PropertyValue<long> NormalShutterSpeed { get; set; }
         public PropertyValue<long> MovieShutterSpeed { get; set; }
 
-        public PropertyValue<int> NormalExposureCompensation { get; set; }
-        public PropertyValue<int> MovieExposureCompensation { get; set; }
+        public PropertyValue<long> NormalExposureCompensation { get; set; }
+        public PropertyValue<long> MovieExposureCompensation { get; set; }
 
         public NikonBase()
         {
@@ -1132,7 +1132,8 @@ namespace CameraControl.Devices.Nikon
 
         private void InitOther()
         {
-            LiveViewImageZoomRatio = new PropertyValue<int> {Name = "LiveViewImageZoomRatio"};
+            LiveViewImageZoomRatio = new PropertyValue<long> {Name = "LiveViewImageZoomRatio"};
+            LiveViewImageZoomRatio.SubType = typeof(int);
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.AddValues("25%", 1);
             LiveViewImageZoomRatio.AddValues("33%", 2);
@@ -1145,7 +1146,7 @@ namespace CameraControl.Devices.Nikon
             LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
         }
 
-        private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
+        private void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -1324,7 +1325,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                Mode = new PropertyValue<uint>();
+                Mode = new PropertyValue<long>();
+                Mode.SubType = typeof(uint);
                 Mode.Name = "Mode";
                 Mode.IsEnabled = false;
                 Mode.ValueChanged += Mode_ValueChanged;
@@ -1347,7 +1349,7 @@ namespace CameraControl.Devices.Nikon
         }
 
 
-        private void Mode_ValueChanged(object sender, string key, uint val)
+        private void Mode_ValueChanged(object sender, string key, long val)
         {
             try
             {
@@ -1510,7 +1512,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                NormalExposureCompensation = new PropertyValue<int>();
+                NormalExposureCompensation = new PropertyValue<long>();
+                NormalExposureCompensation.SubType = typeof(int);
                 NormalExposureCompensation.Name = "ExposureCompensation";
                 NormalExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
                 MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc,
@@ -1536,7 +1539,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                MovieExposureCompensation = new PropertyValue<int>();
+                MovieExposureCompensation = new PropertyValue<long>();
+                MovieExposureCompensation.SubType = typeof(int);
                 MovieExposureCompensation.Name = "ExposureCompensation";
                 MovieExposureCompensation.ValueChanged += MovieExposureCompensation_ValueChanged;
                 MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc,
@@ -1561,7 +1565,7 @@ namespace CameraControl.Devices.Nikon
         }
 
 
-        private void MovieExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void MovieExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -1570,7 +1574,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void ExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void ExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -1585,7 +1589,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 1;
-                CompressionSetting = new PropertyValue<int>();
+                CompressionSetting = new PropertyValue<long>();
+                CompressionSetting.SubType = typeof(int);
                 CompressionSetting.Name = "CompressionSetting ";
                 CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
                 var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropDesc,
@@ -1608,7 +1613,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        protected void CompressionSetting_ValueChanged(object sender, string key, int val)
+        protected void CompressionSetting_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((byte) val),
                         CONST_PROP_CompressionSetting);
@@ -1620,7 +1625,8 @@ namespace CameraControl.Devices.Nikon
             {
                 DeviceReady();
                 byte datasize = 2;
-                ExposureMeteringMode = new PropertyValue<int>();
+                ExposureMeteringMode = new PropertyValue<long>();
+                ExposureMeteringMode.SubType = typeof(int);
                 ExposureMeteringMode.Name = "ExposureMeteringMode";
                 ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
                 MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_ExposureMeteringMode);
@@ -1638,7 +1644,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
+        private void ExposureMeteringMode_ValueChanged(object sender, string key, long val)
         {
             SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt16) val),
                         CONST_PROP_ExposureMeteringMode);

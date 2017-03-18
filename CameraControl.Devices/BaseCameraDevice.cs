@@ -116,9 +116,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<uint> _mode;
+        private PropertyValue<long> _mode;
 
-        public virtual PropertyValue<uint> Mode
+        public virtual PropertyValue<long> Mode
         {
             get { return _mode; }
             set
@@ -152,9 +152,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _exposureCompensation;
+        private PropertyValue<long> _exposureCompensation;
 
-        public virtual PropertyValue<int> ExposureCompensation
+        public virtual PropertyValue<long> ExposureCompensation
         {
             get { return _exposureCompensation; }
             set
@@ -164,9 +164,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _compressionSetting;
+        private PropertyValue<long> _compressionSetting;
 
-        public virtual PropertyValue<int> CompressionSetting
+        public virtual PropertyValue<long> CompressionSetting
         {
             get { return _compressionSetting; }
             set
@@ -176,9 +176,9 @@ namespace CameraControl.Devices
             }
         }
 
-        private PropertyValue<int> _exposureMeteringMode;
+        private PropertyValue<long> _exposureMeteringMode;
 
-        public virtual PropertyValue<int> ExposureMeteringMode
+        public virtual PropertyValue<long> ExposureMeteringMode
         {
             get { return _exposureMeteringMode; }
             set
@@ -349,7 +349,7 @@ namespace CameraControl.Devices
             return Capabilities.Contains(capabilityEnum);
         }
 
-        public virtual PropertyValue<int> LiveViewImageZoomRatio { get; set; }
+        public virtual PropertyValue<long> LiveViewImageZoomRatio { get; set; }
 
         public virtual bool Init(DeviceDescriptor deviceDescriptor)
         {

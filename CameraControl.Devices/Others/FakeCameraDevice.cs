@@ -67,20 +67,20 @@ namespace CameraControl.Devices.Others
             IsConnected = true;
             HaveLiveView = false;
             ExposureStatus = 1;
-            ExposureCompensation = new PropertyValue<int>() {IsEnabled = false};
-            Mode = new PropertyValue<uint> {IsEnabled = false};
+            ExposureCompensation = new PropertyValue<long>() {IsEnabled = false};
+            Mode = new PropertyValue<long> {IsEnabled = false};
             FNumber = new PropertyValue<long> {IsEnabled = false};
             ShutterSpeed = new PropertyValue<long> {IsEnabled = false};
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
             FocusMode = new PropertyValue<long> {IsEnabled = false};
-            CompressionSetting = new PropertyValue<int> {IsEnabled = false};
+            CompressionSetting = new PropertyValue<long> {IsEnabled = false};
             IsoNumber = new PropertyValue<long> {IsEnabled = true};
-            ExposureMeteringMode = new PropertyValue<int> {IsEnabled = false};
+            ExposureMeteringMode = new PropertyValue<long> {IsEnabled = false};
             Battery = 100;
             Capabilities.Add(CapabilityEnum.CaptureNoAf);
             Capabilities.Add(CapabilityEnum.LiveView);
             Capabilities.Add(CapabilityEnum.LiveViewStream);
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.Value = "All";
 

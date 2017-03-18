@@ -37,18 +37,18 @@ namespace CameraControl.Devices.Others
             DeviceName = Protocol.Model;
             Manufacturer = Protocol.Manufacturer;
             IsConnected = true;
-            CompressionSetting = new PropertyValue<int> { Tag = "photo_quality" };
+            CompressionSetting = new PropertyValue<long> { Tag = "photo_quality" };
             
-            Mode = new PropertyValue<uint> { Tag = "capture_mode" };
+            Mode = new PropertyValue<long> { Tag = "capture_mode" };
             Mode.AddValues("Single", 0);
             Mode.AddValues("Burst", 1);
             Mode.AddValues("Delayed", 2);
             //Mode.AddValues("TimeLapse", 3);
             Mode.ReloadValues();
 
-            ExposureMeteringMode = new PropertyValue<int>() { Tag = "meter_mode" };
+            ExposureMeteringMode = new PropertyValue<long>() { Tag = "meter_mode" };
             
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             LiveViewImageZoomRatio.AddValues("All", 0);
             LiveViewImageZoomRatio.Value = "All";
             SendCommand(3);
@@ -69,7 +69,7 @@ namespace CameraControl.Devices.Others
             {
                 IsoNumber = new PropertyValue<long> {Available = false};
                 FNumber = new PropertyValue<long> {Available = false};
-                ExposureCompensation = new PropertyValue<int> {Available = false};
+                ExposureCompensation = new PropertyValue<long> {Available = false};
                 FocusMode = new PropertyValue<long> {Available = false};
                 ShutterSpeed = new PropertyValue<long> {Available = false};
                 WhiteBalance = new PropertyValue<long> {Available = false};
@@ -112,7 +112,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        void Mode_ValueChanged(object sender, string key, uint val)
+        void Mode_ValueChanged(object sender, string key, long val)
         {
             switch (val)
             {

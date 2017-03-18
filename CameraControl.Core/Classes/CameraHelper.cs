@@ -265,5 +265,24 @@ namespace CameraControl.Core.Classes
             return "";
         }
 
+        public static List<PropertyValue<long>> GetAllEllements(this ICameraDevice cameraDevice)
+        {
+            var res = new List<PropertyValue<long>>
+            {
+                cameraDevice.Mode,
+                cameraDevice.CompressionSetting,
+                cameraDevice.ExposureCompensation,
+                cameraDevice.ExposureMeteringMode,
+                cameraDevice.FNumber,
+                cameraDevice.FocusMode,
+                cameraDevice.IsoNumber,
+                cameraDevice.LiveViewImageZoomRatio,
+                cameraDevice.ShutterSpeed,
+                cameraDevice.WhiteBalance
+            };
+            res.AddRange(cameraDevice.Properties);
+            res.AddRange(cameraDevice.AdvancedProperties);
+            return res;
+        }
     }
 }

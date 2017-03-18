@@ -28,15 +28,15 @@ namespace CameraControl.Devices.Others
         public void Init(string address)
         {
 
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             IsConnected = true;
             IsoNumber = new PropertyValue<long> {Available = true};
             FNumber = new PropertyValue<long> {Available = false};
-            ExposureCompensation = new PropertyValue<int> {Available = true};
+            ExposureCompensation = new PropertyValue<long> {Available = true};
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};
-            Mode = new PropertyValue<uint>() {Available = true};
+            Mode = new PropertyValue<long>() {Available = true};
             SessionId = null;
             Address = address;
             GetInfo();

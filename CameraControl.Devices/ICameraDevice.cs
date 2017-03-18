@@ -62,10 +62,10 @@ namespace CameraControl.Devices
         PropertyValue<long> IsoNumber { get; set; }
         PropertyValue<long> ShutterSpeed { get; set; }
         PropertyValue<long> WhiteBalance { get; set; }
-        PropertyValue<uint> Mode { get; set; }
-        PropertyValue<int> ExposureCompensation { get; set; }
-        PropertyValue<int> CompressionSetting { get; set; }
-        PropertyValue<int> ExposureMeteringMode { get; set; }
+        PropertyValue<long> Mode { get; set; }
+        PropertyValue<long> ExposureCompensation { get; set; }
+        PropertyValue<long> CompressionSetting { get; set; }
+        PropertyValue<long> ExposureMeteringMode { get; set; }
         PropertyValue<long> FocusMode { get; set; }
         DateTime DateTime { get; set; }
         /// <summary>
@@ -110,7 +110,7 @@ namespace CameraControl.Devices
         uint TransferProgress { get; set; }
 
         int Battery { get; set; }
-        PropertyValue<int> LiveViewImageZoomRatio { get; set; }
+        PropertyValue<long> LiveViewImageZoomRatio { get; set; }
 
         bool Init(DeviceDescriptor deviceDescriptor);
         void StartLiveView();

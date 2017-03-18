@@ -471,19 +471,19 @@ namespace CameraControl.Devices.Others
             ShutterSpeed.ValueChanged += ShutterSpeed_ValueChanged;
             WhiteBalance = new PropertyValue<long>();
             WhiteBalance.ValueChanged += WhiteBalance_ValueChanged;
-            Mode = new PropertyValue<uint>();
+            Mode = new PropertyValue<long>();
             Mode.ValueChanged += Mode_ValueChanged;
-            CompressionSetting = new PropertyValue<int>();
+            CompressionSetting = new PropertyValue<long>();
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
-            ExposureCompensation = new PropertyValue<int>();
+            ExposureCompensation = new PropertyValue<long>();
             ExposureCompensation.ValueChanged += ExposureCompensation_ValueChanged;
-            ExposureMeteringMode = new PropertyValue<int>();
+            ExposureMeteringMode = new PropertyValue<long>();
             ExposureMeteringMode.ValueChanged += ExposureMeteringMode_ValueChanged;
             FocusMode = new PropertyValue<long>();
             FocusMode.IsEnabled = false;
         }
 
-        private void ExposureMeteringMode_ValueChanged(object sender, string key, int val)
+        private void ExposureMeteringMode_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -497,7 +497,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void CompressionSetting_ValueChanged(object sender, string key, int val)
+        private void CompressionSetting_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -511,7 +511,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void ExposureCompensation_ValueChanged(object sender, string key, int val)
+        private void ExposureCompensation_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
@@ -525,7 +525,7 @@ namespace CameraControl.Devices.Others
             }
         }
 
-        private void Mode_ValueChanged(object sender, string key, uint val)
+        private void Mode_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {

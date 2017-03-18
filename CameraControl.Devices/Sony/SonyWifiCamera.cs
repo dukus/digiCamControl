@@ -50,7 +50,7 @@ namespace CameraControl.Devices.Sony
         List<string> AvailableMethods;
         private Timer _timer = new Timer(100);
         private string _liveViewUrl = "";
-        private int _lastZoomPos = 0;
+        private long _lastZoomPos = 0;
         public SonyWifiCamera()
         {
 
@@ -66,9 +66,9 @@ namespace CameraControl.Devices.Sony
             AvailableMethods = GetMethodTypes();
             ExecuteMethod("startRecMode");
             IsConnected = true;
-            ExposureMeteringMode = new PropertyValue<int>();
+            ExposureMeteringMode = new PropertyValue<long>();
             ExposureMeteringMode.Available = false;
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             for (int i = 0; i < 101; i++)
             {
                 LiveViewImageZoomRatio.AddValues(i.ToString(), i);
@@ -79,7 +79,7 @@ namespace CameraControl.Devices.Sony
             return true;
         }
 
-        void LiveViewImageZoomRatio_ValueChanged(object sender, string key, int val)
+        void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
         {
             var dif = Math.Abs(_lastZoomPos - val);
             if (val > _lastZoomPos)
@@ -171,7 +171,7 @@ namespace CameraControl.Devices.Sony
 
         private void InitCompressionSetting()
         {
-            CompressionSetting = new PropertyValue<int>();
+            CompressionSetting = new PropertyValue<long>();
             try
             {
                 var prop = CompressionSetting;
@@ -189,7 +189,7 @@ namespace CameraControl.Devices.Sony
         {
             try
             {
-                Mode = new PropertyValue<uint>();
+                Mode = new PropertyValue<long>();
                 var prop = Mode;
                 var cap = AsCapability<string>(Post(CreateJson("getAvailableExposureMode")));
                 SetCapability(prop, cap);

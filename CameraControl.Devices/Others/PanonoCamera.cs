@@ -28,12 +28,12 @@ namespace PanonoTest
             _ws.OnClose += _ws_OnClose;
             _ws.OnError += _ws_OnError;
             _ws.Connect();
-            LiveViewImageZoomRatio = new PropertyValue<int>();
+            LiveViewImageZoomRatio = new PropertyValue<long>();
             Auth();
             IsConnected = true;
             IsoNumber = new PropertyValue<long> {Available = true};
             FNumber = new PropertyValue<long> {Available = false};
-            ExposureCompensation = new PropertyValue<int> {Available = false};
+            ExposureCompensation = new PropertyValue<long> {Available = false};
             FocusMode = new PropertyValue<long> {Available = false};
             ShutterSpeed = new PropertyValue<long> {Available = false};
             WhiteBalance = new PropertyValue<long> {Available = false};
@@ -104,7 +104,7 @@ namespace PanonoTest
 
         private void InitMode()
         {
-            Mode = new PropertyValue<uint> {Tag = "ImageType"};
+            Mode = new PropertyValue<long> {Tag = "ImageType"};
             Mode.AddValues("Default", 0);
             Mode.AddValues("HDR", 1);
             Mode.ReloadValues();
@@ -119,7 +119,7 @@ namespace PanonoTest
                      "\"},\"jsonrpc\":\"2.0\"}");
         }
 
-        private void Mode_ValueChanged(object sender, string key, uint val)
+        private void Mode_ValueChanged(object sender, string key, long val)
         {
             SetProperty(Mode.Tag, key);
         }
