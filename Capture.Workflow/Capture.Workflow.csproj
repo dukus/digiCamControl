@@ -143,6 +143,8 @@
     <Compile Include="View\WorkflowEditorView.xaml.cs">
       <DependentUpon>WorkflowEditorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\Controls\EditableTextBlock.cs" />
+    <Compile Include="Wpf\Controls\EditableTextBlockAdorner.cs" />
     <Compile Include="Wpf\Controls\PropertyEditor.xaml.cs">
       <DependentUpon>PropertyEditor.xaml</DependentUpon>
     </Compile>

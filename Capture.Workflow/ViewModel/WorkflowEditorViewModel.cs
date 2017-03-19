@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CameraControl.Devices.Classes;
+using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Interface;
 using Capture.Workflow.View;
@@ -14,7 +15,10 @@ namespace Capture.Workflow.ViewModel
         private WorkFlowView _selectedView;
         private WorkFlowViewElement _selectedElement;
         public AsyncObservableCollection<WorkFlowView> Views { get; set; }
-        
+
+        public List<PluginInfo> ViewsPlugins { get; set; }
+        public List<PluginInfo> ViewElementsPlugins { get; set; }
+
         public WorkFlowView SelectedView
         {
             get { return _selectedView; }
@@ -39,47 +43,36 @@ namespace Capture.Workflow.ViewModel
         public CustomPropertyCollection PropertyCollection { get; set; }
 
 
-        public RelayCommand NewCommand { get; set; }
+        public RelayCommand<PluginInfo> NewViewCommand { get; set; }
+        public RelayCommand<PluginInfo> NewViewElementCommand { get; set; }
 
         public WorkflowEditorViewModel()
         {
-            NewCommand = new RelayCommand(New);
+            NewViewCommand = new RelayCommand<PluginInfo>(NewView);
+            NewViewElementCommand = new RelayCommand<PluginInfo>(NewViewElement);
             Views = new AsyncObservableCollection<WorkFlowView>();
-            PropertyCollection = new CustomPropertyCollection();
-            PropertyCollection.Items.Add(new CustomProperty()
-            {
-                PropertyType = CustomPropertyType.String,
-                Name = "TestParam",
-                Description = "Test param description",
-                Value = "Test value"
-            });
-            PropertyCollection.Items.Add(new CustomProperty()
-            {
-                PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "Value 1","value 2"},
-                Value = "value 2",
-                Name = "TestParam 2",
-                Description = "Test param 2 description"
-            });
+            ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
+            ViewElementsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.ViewElement);
         }
 
-        private void New()
+        private void NewViewElement(PluginInfo pluginInfo)
         {
-            var wnd = new NewViewSelectorView();
-            if (wnd.ShowDialog()==true)
-            {
-                var contex = wnd.DataContext as NewViewSelectorViewModel;
-                if (contex != null)
-                {
-                    IViewPlugin plugin = (IViewPlugin) Activator.CreateInstance(contex.SelectedItem.Class);
-                    WorkFlowView view = plugin.CreateView();
-                    view.Instance = plugin;
-                    view.PluginInfo = contex.SelectedItem;
-                    view.Name = contex.Name ?? contex.SelectedItem.Name;
-                    Views.Add(view);
-                }
-            }
-            
+            IViewElementPlugin plugin = (IViewElementPlugin)Activator.CreateInstance(pluginInfo.Class);
+            WorkFlowViewElement view = plugin.CreateElement();
+            view.Instance = plugin;
+            view.PluginInfo = pluginInfo;
+            view.Name = pluginInfo.Name;
+            SelectedView.Elements.Add(view);
+        }
+
+        private void NewView(PluginInfo pluginInfo)
+        {
+            IViewPlugin plugin = (IViewPlugin)Activator.CreateInstance(pluginInfo.Class);
+            WorkFlowView view = plugin.CreateView();
+            view.Instance = plugin;
+            view.PluginInfo = pluginInfo;
+            view.Name = pluginInfo.Name;
+            Views.Add(view);
         }
     }
 }

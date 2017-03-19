@@ -7,7 +7,11 @@
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:controls1="clr-namespace:Capture.Workflow.Wpf.Controls"
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
+                      x:Name="MetroWindow"
         Title="WorkflowEditorView" Height="600" Width="800">
     <Window.DataContext>
         <viewModel:WorkflowEditorViewModel/>
@@ -24,13 +28,39 @@
                         <ColumnDefinition Width="250"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding Views}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedView}">
+                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
                         <ListBox.Effect>
                             <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
                         </ListBox.Effect>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <controls1:EditableTextBlock Text="{Binding Name}"/>
+                                </Grid>
+                             </DataTemplate>   
+                        </ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Row="1" Grid.Column="0">
-                        <Button Content="Add view ..." Margin="20,5" Command="{Binding NewCommand}"/>
+                        <controls:DropDownButton Name="AddNewViewButton" Margin="20,5" VerticalContentAlignment="Center" Content="Add view" DisplayMemberPath="Name" 
+                                                             ItemsSource="{Binding ViewsPlugins}">
+                            <controls:DropDownButton.ItemContainerStyle>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="Command" Value="{Binding DataContext.NewViewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
+                                    <Setter Property="CommandParameter" Value="{Binding}"/>
+                                </Style>
+                            </controls:DropDownButton.ItemContainerStyle>
+                            <!--<controls:DropDownButton.Icon>
+                                <Rectangle Width="20" Height="20">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </controls:DropDownButton.Icon>-->
+                        </controls:DropDownButton>
                         <Button Content="Delete view" Margin="20,5"/>
                     </StackPanel>
                     <!--<GroupBox.Effect>
@@ -59,7 +89,22 @@
                                 <controls1:PropertyEditor Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
                                                           DataContext="{Binding SelectedElement.Properties}" />
                                 <StackPanel Grid.Row="1" Grid.Column="0">
-                                    <Button Content="Add element ..." Margin="20,5" Command="{Binding NewCommand}"/>
+                                    <controls:DropDownButton  Margin="20,5" VerticalContentAlignment="Center" Content="Add element" DisplayMemberPath="Name" 
+                                                             ItemsSource="{Binding ViewElementsPlugins}">
+                                        <controls:DropDownButton.ItemContainerStyle>
+                                            <Style TargetType="MenuItem">
+                                                <Setter Property="Command" Value="{Binding DataContext.NewViewElementCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
+                                                <Setter Property="CommandParameter" Value="{Binding}"/>
+                                            </Style>
+                                        </controls:DropDownButton.ItemContainerStyle>
+                                        <!--<controls:DropDownButton.Icon>
+                                <Rectangle Width="20" Height="20">
+                                    <Rectangle.Fill>
+                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </controls:DropDownButton.Icon>-->
+                                    </controls:DropDownButton>
                                     <Button Content="Delete element" Margin="20,5"/>
                                 </StackPanel>
                             </Grid>

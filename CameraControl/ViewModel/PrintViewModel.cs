@@ -2,12 +2,13 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Printing;
-using System.Windows.Controls;
+using System.Windows.Forms;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using PrintDialog = System.Windows.Controls.PrintDialog;
 
 namespace CameraControl.ViewModel
 {
@@ -48,7 +49,7 @@ namespace CameraControl.ViewModel
             set
             {
                 PrintSettings.PageWidth = value;
-                RaisePropertyChanged(()=>PageWidth);
+                RaisePropertyChanged(() => PageWidth);
             }
         }
 
@@ -100,7 +101,7 @@ namespace CameraControl.ViewModel
             set
             {
                 PrintSettings.Repeat = value;
-                RaisePropertyChanged(()=>Repeat);
+                RaisePropertyChanged(() => Repeat);
                 InitItems();
             }
         }
@@ -159,7 +160,7 @@ namespace CameraControl.ViewModel
 
         private void Print()
         {
-            
+
         }
 
         private void InitItems()
@@ -173,12 +174,12 @@ namespace CameraControl.ViewModel
                 FileItem file = null;
                 if (Repeat)
                 {
-                    file = files[i % files.Count];
+                    file = files[i%files.Count];
                 }
                 else
                 {
                     if (i < files.Count)
-                    file = files[i];
+                        file = files[i];
                 }
                 Items.Add(new PrintItemViewModel {FileItem = file, Parent = this});
             }
@@ -186,13 +187,21 @@ namespace CameraControl.ViewModel
 
         private void PrintSetup()
         {
-
-            if (Dlg.ShowDialog() == true)
+            try
             {
-                PrinterName = Dlg.PrintQueue.Name;
-                SavePrintTicket(Dlg);
-                LoadPrinterSettings();
+                if (Dlg.ShowDialog() == true)
+                {
+                    PrinterName = Dlg.PrintQueue.Name;
+                    SavePrintTicket(Dlg);
+                    LoadPrinterSettings();
 
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Unable to show printer window ",ex);
+                MessageBox.Show("Unable to show printer window "+ex.Message);
             }
         }
 
@@ -266,7 +275,8 @@ namespace CameraControl.ViewModel
             }
             else
             {
-                dialog.PrintTicket = defaultTicket;
+                if (defaultTicket != null)
+                    dialog.PrintTicket = defaultTicket;
             }
         }
 
