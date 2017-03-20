@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Capture.Workflow.Core.Classes;
+using MahApps.Metro.Controls;
 
 namespace Capture.Workflow.Wpf.Converters
 {
@@ -19,7 +20,12 @@ namespace Capture.Workflow.Wpf.Converters
                 switch (property.PropertyType)
                 {
                     case CustomPropertyType.Number:
-                        break;
+                        NumericUpDown numericUpDown = new NumericUpDown();
+                        numericUpDown.Minimum = property.RangeMin;
+                        numericUpDown.Maximum = property.RangeMax;
+                        numericUpDown.DataContext = property;
+                        numericUpDown.SetBinding(NumericUpDown.ValueProperty, "Value");
+                        return numericUpDown;
                     case CustomPropertyType.String:
                         TextBox text = new TextBox();
                         text.DataContext = property;

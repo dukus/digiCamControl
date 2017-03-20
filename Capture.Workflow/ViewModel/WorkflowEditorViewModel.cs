@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
@@ -10,7 +11,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace Capture.Workflow.ViewModel
 {
-    public class WorkflowEditorViewModel: ViewModelBase
+    public class WorkflowEditorViewModel : ViewModelBase
     {
         private WorkFlowView _selectedView;
         private WorkFlowViewElement _selectedElement;
@@ -25,7 +26,7 @@ namespace Capture.Workflow.ViewModel
             set
             {
                 _selectedView = value;
-                RaisePropertyChanged(()=>SelectedView);
+                RaisePropertyChanged(() => SelectedView);
             }
         }
 
@@ -57,12 +58,20 @@ namespace Capture.Workflow.ViewModel
 
         private void NewViewElement(PluginInfo pluginInfo)
         {
-            IViewElementPlugin plugin = (IViewElementPlugin)Activator.CreateInstance(pluginInfo.Class);
-            WorkFlowViewElement view = plugin.CreateElement();
-            view.Instance = plugin;
-            view.PluginInfo = pluginInfo;
-            view.Name = pluginInfo.Name;
-            SelectedView.Elements.Add(view);
+            try
+            {
+                IViewElementPlugin plugin = (IViewElementPlugin)Activator.CreateInstance(pluginInfo.Class);
+                WorkFlowViewElement view = plugin.CreateElement();
+                view.Instance = plugin;
+                view.PluginInfo = pluginInfo;
+                view.Name = pluginInfo.Name;
+                SelectedView.Elements.Add(view);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error create element", ex);
+                
+            }
         }
 
         private void NewView(PluginInfo pluginInfo)
