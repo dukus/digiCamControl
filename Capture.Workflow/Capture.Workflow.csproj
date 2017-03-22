@@ -140,6 +140,9 @@
     <Compile Include="View\NewViewSelectorView.xaml.cs">
       <DependentUpon>NewViewSelectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewPreviewView.xaml.cs">
+      <DependentUpon>ViewPreviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WorkflowEditorView.xaml.cs">
       <DependentUpon>WorkflowEditorView.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\NewViewSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewPreviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

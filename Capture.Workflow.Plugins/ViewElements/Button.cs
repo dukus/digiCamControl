@@ -16,7 +16,7 @@ namespace Capture.Workflow.Plugins.ViewElements
     public class Button:IViewElementPlugin
     {
         public string Name { get; set; }
-        public WorkFlowViewElement CreateElement()
+        public WorkFlowViewElement CreateElement(WorkFlowView view)
         {
             WorkFlowViewElement element = new WorkFlowViewElement();
             element.Properties.Items.Add(new CustomProperty()
@@ -26,18 +26,25 @@ namespace Capture.Workflow.Plugins.ViewElements
             });
             element.Properties.Items.Add(new CustomProperty()
             {
-                Name = "HorizontalAlignment",
+                Name = "Position",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = {"Left","Center","Right"},
-                Value = "Left"
+                ValueList = view.Instance.GetPositions(),
+                Value = view.Instance.GetPositions()[0]
             });
-            element.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "VerticalAlignment",
-                PropertyType = CustomPropertyType.ValueList,
-                ValueList = { "Top", "Center", "Bottom" },
-                Value = "Top"
-            });
+            //element.Properties.Items.Add(new CustomProperty()
+            //{
+            //    Name = "HorizontalAlignment",
+            //    PropertyType = CustomPropertyType.ValueList,
+            //    ValueList = {"Left","Center","Right"},
+            //    Value = "Left"
+            //});
+            //element.Properties.Items.Add(new CustomProperty()
+            //{
+            //    Name = "VerticalAlignment",
+            //    PropertyType = CustomPropertyType.ValueList,
+            //    ValueList = { "Top", "Center", "Bottom" },
+            //    Value = "Top"
+            //});
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Width",

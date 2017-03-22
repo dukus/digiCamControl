@@ -46,14 +46,25 @@ namespace Capture.Workflow.ViewModel
 
         public RelayCommand<PluginInfo> NewViewCommand { get; set; }
         public RelayCommand<PluginInfo> NewViewElementCommand { get; set; }
+        public RelayCommand PreviewViewCommand { get; set; }
 
         public WorkflowEditorViewModel()
         {
             NewViewCommand = new RelayCommand<PluginInfo>(NewView);
             NewViewElementCommand = new RelayCommand<PluginInfo>(NewViewElement);
+            PreviewViewCommand=new RelayCommand(PreviewView);
+
             Views = new AsyncObservableCollection<WorkFlowView>();
             ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
             ViewElementsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.ViewElement);
+
+        }
+
+        private void PreviewView()
+        {
+            var wnd = new ViewPreviewView();
+            wnd.ContentControl = SelectedView.Instance.GetPreview(SelectedView);
+            wnd.ShowDialog();
         }
 
         private void NewViewElement(PluginInfo pluginInfo)
@@ -61,7 +72,7 @@ namespace Capture.Workflow.ViewModel
             try
             {
                 IViewElementPlugin plugin = (IViewElementPlugin)Activator.CreateInstance(pluginInfo.Class);
-                WorkFlowViewElement view = plugin.CreateElement();
+                WorkFlowViewElement view = plugin.CreateElement(SelectedView);
                 view.Instance = plugin;
                 view.PluginInfo = pluginInfo;
                 view.Name = pluginInfo.Name;

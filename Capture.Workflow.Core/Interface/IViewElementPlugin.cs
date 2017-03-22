@@ -5,6 +5,6 @@ namespace Capture.Workflow.Core.Interface
     public interface IViewElementPlugin
     {
         string Name { get; set; }
-        WorkFlowViewElement CreateElement();
+        WorkFlowViewElement CreateElement(WorkFlowView view);
     }
 }
