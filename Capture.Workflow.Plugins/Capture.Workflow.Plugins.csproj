@@ -119,6 +119,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CameraControl.Devices\CameraControl.Devices.csproj">
+      <Project>{E8572D8B-C987-4D20-BD88-1F8925A64A82}</Project>
+      <Name>CameraControl.Devices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Capture.Workflow.Core\Capture.Workflow.Core.csproj">
       <Project>{4B45D58C-2685-4180-BD33-4D1F818F3C40}</Project>
       <Name>Capture.Workflow.Core</Name>

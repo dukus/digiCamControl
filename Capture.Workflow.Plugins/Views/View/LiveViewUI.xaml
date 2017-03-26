@@ -4,9 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Capture.Workflow.Plugins.Views.View"
+             xmlns:views="clr-namespace:Capture.Workflow.Plugins.Views"
+             xmlns:viewModel="clr-namespace:Capture.Workflow.Plugins.Views.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <viewModel:LiveviewViewModel/>
+    </UserControl.DataContext>
     <Grid>
-            
+        <ItemsControl ItemsSource="{Binding LeftElements }" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        
+        <ItemsControl ItemsSource="{Binding BottomLeftElements }" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>    
+        <ItemsControl ItemsSource="{Binding BottomRightElements }" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>    
     </Grid>
 </UserControl>

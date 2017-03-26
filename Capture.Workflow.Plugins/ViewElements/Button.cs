@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
@@ -53,6 +55,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 RangeMax = 9999,
                 Value = "150"
             });
+
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Height",
@@ -63,6 +66,15 @@ namespace Capture.Workflow.Plugins.ViewElements
             });
             element.Properties.Items.Add(new CustomProperty()
             {
+                Name = "Margins",
+                PropertyType = CustomPropertyType.Number,
+                RangeMin = 0,
+                RangeMax = 9999,
+                Value = "5"
+            });
+
+            element.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "FontSize",
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 6,
@@ -71,6 +83,20 @@ namespace Capture.Workflow.Plugins.ViewElements
             });
             return element;
         }
+
+        public Control GetControl(WorkFlowViewElement viewElement)
+        {
+            var button = new System.Windows.Controls.Button()
+            {
+                Width = viewElement.Properties["Width"].ToInt(),
+                Height = viewElement.Properties["Height"].ToInt(),
+                Content = viewElement.Properties["Caption"].Value,
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
+                FontSize = viewElement.Properties["FontSize"].ToInt(),
+            };
+            return button;
+        }
+
 
     }
 }

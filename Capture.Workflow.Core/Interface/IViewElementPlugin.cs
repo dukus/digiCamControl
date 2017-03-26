@@ -1,4 +1,6 @@
-﻿using Capture.Workflow.Core.Classes;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Capture.Workflow.Core.Classes;
 
 namespace Capture.Workflow.Core.Interface
 {
@@ -6,5 +8,6 @@ namespace Capture.Workflow.Core.Interface
     {
         string Name { get; set; }
         WorkFlowViewElement CreateElement(WorkFlowView view);
+        Control GetControl(WorkFlowViewElement viewElement);
     }
 }

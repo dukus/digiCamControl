@@ -15,8 +15,9 @@ namespace Capture.Workflow.Plugins.Views
     [Description("")]
     [PluginType(PluginType.View)]
     [DisplayName("Live view")]
-    public class LiveView:BaseView
+    public class LiveView : BaseView
     {
+
         public override WorkFlowView CreateView()
         {
             WorkFlowView view = new WorkFlowView();
@@ -30,13 +31,30 @@ namespace Capture.Workflow.Plugins.Views
 
         public override List<string> GetPositions()
         {
-            return new List<string> {"Left", "BottomLeft", "BottomRight"};
+            return new List<string> { "Left", "BottomLeft", "BottomRight" };
         }
 
         public override UserControl GetPreview(WorkFlowView view)
         {
-            var res=new LiveViewUI();
-            res.DataContext = new LiveviewViewModel();
+            var model = new LiveviewViewModel();
+            foreach (var element in view.Elements)
+            {
+                switch (element.Properties["Position"].Value)
+                {
+                    case "Left":
+                        model.LeftElements.Add(element.Instance.GetControl(element));
+                        break;
+                    case "BottomLeft":
+                        model.BottomLeftElements.Add(element.Instance.GetControl(element));
+                        break;
+
+                    case "BottomRight":
+                        model.BottomRightElements.Add(element.Instance.GetControl(element));
+                        break;
+                }
+            }
+            var res = new LiveViewUI();
+            res.DataContext = model;
             return res;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,13 @@ namespace Capture.Workflow.Core.Classes
         public CustomProperty()
         {
             ValueList = new List<string>();
+        }
+
+        public int ToInt()
+        {
+            int val = 0;
+            int.TryParse(Value,  out val);
+            return val;
         }
 
 

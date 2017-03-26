@@ -63,7 +63,7 @@ namespace Capture.Workflow.ViewModel
         private void PreviewView()
         {
             var wnd = new ViewPreviewView();
-            wnd.ContentControl = SelectedView.Instance.GetPreview(SelectedView);
+            wnd.ContentControl.Content = SelectedView.Instance.GetPreview(SelectedView);
             wnd.ShowDialog();
         }
 
