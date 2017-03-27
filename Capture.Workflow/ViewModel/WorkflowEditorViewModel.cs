@@ -72,11 +72,12 @@ namespace Capture.Workflow.ViewModel
             try
             {
                 IViewElementPlugin plugin = (IViewElementPlugin)Activator.CreateInstance(pluginInfo.Class);
-                WorkFlowViewElement view = plugin.CreateElement(SelectedView);
-                view.Instance = plugin;
-                view.PluginInfo = pluginInfo;
-                view.Name = pluginInfo.Name;
-                SelectedView.Elements.Add(view);
+                WorkFlowViewElement element = plugin.CreateElement(SelectedView);
+                element.Instance = plugin;
+                element.PluginInfo = pluginInfo;
+                element.Name = pluginInfo.Name;
+                SelectedView.Elements.Add(element);
+                SelectedElement = element;
             }
             catch (Exception ex)
             {
@@ -93,6 +94,7 @@ namespace Capture.Workflow.ViewModel
             view.PluginInfo = pluginInfo;
             view.Name = pluginInfo.Name;
             Views.Add(view);
+            SelectedView = view;
         }
     }
 }

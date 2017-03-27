@@ -107,8 +107,11 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewElements\Button.cs" />
+    <Compile Include="ViewElements\Label.cs" />
     <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\FullScreenPreview.cs" />
     <Compile Include="Views\LiveView.cs" />
+    <Compile Include="Views\Preview.cs" />
     <Compile Include="Views\ViewModel\BaseViewModel.cs" />
     <Compile Include="Views\ViewModel\LiveviewViewModel.cs" />
     <Compile Include="Views\View\LiveViewUI.xaml.cs">

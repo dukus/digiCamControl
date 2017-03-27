@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using CameraControl.Core.Wpf;
 using Capture.Workflow.Core.Classes;
 using MahApps.Metro.Controls;
 
@@ -31,6 +32,11 @@ namespace Capture.Workflow.Wpf.Converters
                         text.DataContext = property;
                         text.SetBinding(TextBox.TextProperty, "Value");
                         return text;
+                    case CustomPropertyType.Color:
+                        var colorpicker = new Colorpicker();
+                        colorpicker.DataContext = property;
+                        colorpicker.SetBinding(Colorpicker.SelectedColorProperty, new Binding("Value") {Mode = BindingMode.TwoWay});
+                        return colorpicker;
                     case CustomPropertyType.ValueList:
                         ComboBox comboBox=new ComboBox();
                         comboBox.DataContext = property;

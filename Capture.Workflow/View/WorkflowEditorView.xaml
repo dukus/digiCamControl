@@ -12,7 +12,7 @@
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
                       x:Name="MetroWindow"
-        Title="WorkflowEditorView" Height="600" Width="800">
+        Title="WorkflowEditorView" Height="800" Width="1200">
     <Window.DataContext>
         <viewModel:WorkflowEditorViewModel/>
     </Window.DataContext>

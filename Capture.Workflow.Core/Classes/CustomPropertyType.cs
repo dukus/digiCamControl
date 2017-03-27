@@ -5,6 +5,6 @@
         Number,
         String,
         ValueList,
-
+        Color,
     }
 }

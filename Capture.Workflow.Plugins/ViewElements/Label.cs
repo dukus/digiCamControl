@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,8 +16,8 @@ namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("Button")]
-    public class Button:IViewElementPlugin
+    [DisplayName("Label")]
+    public class Label: IViewElementPlugin
     {
         public string Name { get; set; }
         public WorkFlowViewElement CreateElement(WorkFlowView view)
@@ -24,7 +25,7 @@ namespace Capture.Workflow.Plugins.ViewElements
             WorkFlowViewElement element = new WorkFlowViewElement();
             element.Properties.Items.Add(new CustomProperty()
             {
-                Name = "Caption",
+                Name = "Text",
                 PropertyType = CustomPropertyType.String
             });
             element.Properties.Items.Add(new CustomProperty()
@@ -34,20 +35,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 ValueList = view.Instance.GetPositions(),
                 Value = view.Instance.GetPositions()[0]
             });
-            //element.Properties.Items.Add(new CustomProperty()
-            //{
-            //    Name = "HorizontalAlignment",
-            //    PropertyType = CustomPropertyType.ValueList,
-            //    ValueList = {"Left","Center","Right"},
-            //    Value = "Left"
-            //});
-            //element.Properties.Items.Add(new CustomProperty()
-            //{
-            //    Name = "VerticalAlignment",
-            //    PropertyType = CustomPropertyType.ValueList,
-            //    ValueList = { "Top", "Center", "Bottom" },
-            //    Value = "Top"
-            //});
+
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Width",
@@ -73,6 +61,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 RangeMax = 9999,
                 Value = "5"
             });
+
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "FontSize",
@@ -98,26 +87,23 @@ namespace Capture.Workflow.Plugins.ViewElements
 
         public Control GetControl(WorkFlowViewElement viewElement)
         {
-            var button = new System.Windows.Controls.Button()
+            var label = new System.Windows.Controls.Label()
             {
                 Width = viewElement.Properties["Width"].ToInt(),
                 Height = viewElement.Properties["Height"].ToInt(),
-                Content = viewElement.Properties["Caption"].Value,
+                Content = viewElement.Properties["Text"].Value,
                 Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
             };
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
-                button.Background =
+                label.Background =
                     new SolidColorBrush(
-                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
-                button.Foreground =
+                label.Foreground =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
-
-            return button;
+            return label;
         }
-
-
     }
 }
