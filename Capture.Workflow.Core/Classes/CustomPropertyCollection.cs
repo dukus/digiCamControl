@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Capture.Workflow.Core.Classes
 {
     public class CustomPropertyCollection
     {
+        [XmlElement("CustomProperty")]
         public List<CustomProperty> Items { get; set; }
 
         public CustomProperty this[string name]

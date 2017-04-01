@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
+using Capture.Workflow.Core.Interface;
 
 namespace Capture.Workflow.Core
 {
@@ -67,7 +68,7 @@ namespace Capture.Workflow.Core
                         Plugins.Add(new PluginInfo()
                         {
                             Type = attribute.PluginType,
-                            Class = exportedType,
+                            Class = exportedType.AssemblyQualifiedName,
                             Description = attributeDes?.Description,
                             Name = attributeName?.DisplayName
                         });
@@ -87,7 +88,7 @@ namespace Capture.Workflow.Core
 
             Stream writer = new FileStream(file, FileMode.Create);
             // Serialize the object, and close the TextWriter
-            serializer.Serialize(writer, this);
+            serializer.Serialize(writer, workflow);
             writer.Close();
         }
 
@@ -105,5 +106,20 @@ namespace Capture.Workflow.Core
             return null;
         }
 
+        public IViewPlugin GetViewPlugin(string className)
+        {
+            return (IViewPlugin) Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public IViewElementPlugin GetElementPlugin(string className)
+        {
+            return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        private static Assembly AssemblyResolver(AssemblyName assemblyName)
+        {
+            assemblyName.Version = null;
+            return System.Reflection.Assembly.Load(assemblyName);
+        }
     }
 }

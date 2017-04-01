@@ -17,7 +17,18 @@
         <viewModel:WorkflowEditorViewModel/>
     </Window.DataContext>
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open ..."/>
+                <MenuItem Header="Save ..." Command="{Binding SaveCommand}"/>
+            </MenuItem>
+        </Menu>
+        <TabControl Grid.Row="1">
             <TabItem Header="Views">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -29,7 +40,7 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="1*" MaxWidth="200"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
+                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
                         <ListBox.Effect>
                             <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
                         </ListBox.Effect>
