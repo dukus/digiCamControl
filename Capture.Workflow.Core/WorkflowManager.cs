@@ -101,7 +101,28 @@ namespace Capture.Workflow.Core
                 FileStream myFileStream = new FileStream(fileName, FileMode.Open);
                 WorkFlow flow = (WorkFlow)mySerializer.Deserialize(myFileStream);
                 myFileStream.Close();
-                return flow;
+                WorkFlow resflow = new WorkFlow();
+                foreach (var _view in flow.Views)
+                {
+                    IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
+                    WorkFlowView view = plugin.CreateView();
+                    view.Instance = plugin;
+                    view.PluginInfo = _view.PluginInfo;
+                    view.Name = _view.Name;
+                    view.Properties.CopyValuesFrom(_view.Properties);
+                    foreach (var viewElement in _view.Elements)
+                    {
+                        IViewElementPlugin elementplugin = Instance.GetElementPlugin(viewElement.PluginInfo.Class);
+                        WorkFlowViewElement element = elementplugin.CreateElement(view);
+                        element.Instance = elementplugin;
+                        element.PluginInfo = viewElement.PluginInfo;
+                        element.Name = viewElement.Name;
+                        element.Properties.CopyValuesFrom(viewElement.Properties);
+                        view.Elements.Add(element);
+                    }
+                    resflow.Views.Add(view);
+                }
+                return resflow;
             }
             return null;
         }
@@ -119,7 +140,7 @@ namespace Capture.Workflow.Core
         private static Assembly AssemblyResolver(AssemblyName assemblyName)
         {
             assemblyName.Version = null;
-            return System.Reflection.Assembly.Load(assemblyName);
+            return Assembly.Load(assemblyName);
         }
     }
 }

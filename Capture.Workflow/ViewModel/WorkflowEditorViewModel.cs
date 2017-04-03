@@ -59,6 +59,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand<PluginInfo> NewViewElementCommand { get; set; }
         public RelayCommand PreviewViewCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
+        public RelayCommand LoadCommand { get; set; }
 
         public WorkflowEditorViewModel()
         {
@@ -70,6 +71,12 @@ namespace Capture.Workflow.ViewModel
             ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
             ViewElementsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.ViewElement);
             CurrentWorkFlow = new WorkFlow();
+            LoadCommand=new RelayCommand(Load);
+        }
+
+        private void Load()
+        {
+            CurrentWorkFlow = WorkflowManager.Instance.Load("Test.xml");
         }
 
         private void Save()
