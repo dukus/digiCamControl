@@ -16,6 +16,7 @@ namespace Capture.Workflow.ViewModel
         private WorkFlowView _selectedView;
         private WorkFlowViewElement _selectedElement;
         private WorkFlow _currentWorkFlow;
+        private Variable _selectedVariable;
 
         public List<PluginInfo> ViewsPlugins { get; set; }
         public List<PluginInfo> ViewElementsPlugins { get; set; }
@@ -40,6 +41,17 @@ namespace Capture.Workflow.ViewModel
                 RaisePropertyChanged(() => SelectedView);
             }
         }
+
+        public Variable SelectedVariable
+        {
+            get { return _selectedVariable; }
+            set
+            {
+                _selectedVariable = value;
+                RaisePropertyChanged(() => SelectedVariable);
+            }
+        }
+
 
         public WorkFlowViewElement SelectedElement
         {

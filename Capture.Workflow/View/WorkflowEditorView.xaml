@@ -57,12 +57,12 @@
                                             <VisualBrush Stretch="Uniform">
                                                 <VisualBrush.Visual>
                                                     <Path Data="M13,6V11H18V7.75L22.25,12L18,16.25V13H13V18H16.25L12,22.25L7.75,18H11V13H6V16.25L1.75,12L6,7.75V11H11V6H7.75L12,1.75L16.25,6H13Z" Fill="Black" />
-                                        </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Rectangle.Fill>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Rectangle.Fill>
                                     </Rectangle>
                                 </Grid>
-                             </DataTemplate>   
+                            </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Row="1" Grid.Column="0">
@@ -173,7 +173,56 @@
             </TabItem>
             <TabItem Header="Variables">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding CurrentWorkFlow.Variables}" SelectedItem="{Binding SelectedVariable}" >
+                        <ListBox.Effect>
+                            <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
+                        </ListBox.Effect>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding Name}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="3"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3"/>
 
+                        <Label Grid.Row="1" Grid.Column="0" Content="Default Value" Margin="3"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3"/>
+
+                        
+                        <Label Grid.Row="3" Grid.Column="0" Content="Reinit After session" Margin="3"/>
+                        <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
+
+
+                    </Grid>
+                   
                 </Grid>
             </TabItem>
             <TabItem Header="Settings">
