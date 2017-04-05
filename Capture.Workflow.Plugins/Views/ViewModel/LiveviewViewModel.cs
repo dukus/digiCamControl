@@ -14,11 +14,11 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 {
     public class LiveviewViewModel:BaseViewModel
     {
-        private ObservableCollection<Control> _leftElements;
+        private ObservableCollection<FrameworkElement> _leftElements;
         private ObservableCollection<FrameworkElement> _bottomLeftElements;
         private ObservableCollection<FrameworkElement> _bottomRightElements;
 
-        public ObservableCollection<Control> LeftElements
+        public ObservableCollection<FrameworkElement> LeftElements
         {
             get { return _leftElements; }
             set
@@ -50,7 +50,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public LiveviewViewModel()
         {
-            LeftElements = new ObservableCollection<Control>();
+            LeftElements = new ObservableCollection<FrameworkElement>();
             BottomLeftElements = new ObservableCollection<FrameworkElement>();
             BottomRightElements = new ObservableCollection<FrameworkElement>();
         }

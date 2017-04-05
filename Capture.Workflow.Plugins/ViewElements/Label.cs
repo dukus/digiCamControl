@@ -85,7 +85,7 @@ namespace Capture.Workflow.Plugins.ViewElements
             return element;
         }
 
-        public Control GetControl(WorkFlowViewElement viewElement)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement)
         {
             var label = new System.Windows.Controls.Label()
             {

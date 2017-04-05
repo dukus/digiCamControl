@@ -15,8 +15,8 @@ namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("Button")]
-    public class Button:IViewElementPlugin
+    [DisplayName("TextElement")]
+    public class TextElement: IViewElementPlugin
     {
         public string Name { get; set; }
         public WorkFlowViewElement CreateElement(WorkFlowView view)
@@ -34,20 +34,6 @@ namespace Capture.Workflow.Plugins.ViewElements
                 ValueList = view.Instance.GetPositions(),
                 Value = view.Instance.GetPositions()[0]
             });
-            //element.Properties.Items.Add(new CustomProperty()
-            //{
-            //    Name = "HorizontalAlignment",
-            //    PropertyType = CustomPropertyType.ValueList,
-            //    ValueList = {"Left","Center","Right"},
-            //    Value = "Left"
-            //});
-            //element.Properties.Items.Add(new CustomProperty()
-            //{
-            //    Name = "VerticalAlignment",
-            //    PropertyType = CustomPropertyType.ValueList,
-            //    ValueList = { "Top", "Center", "Bottom" },
-            //    Value = "Top"
-            //});
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Width",
@@ -56,7 +42,14 @@ namespace Capture.Workflow.Plugins.ViewElements
                 RangeMax = 9999,
                 Value = "150"
             });
-
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "LabelWidth",
+                PropertyType = CustomPropertyType.Number,
+                RangeMin = 0,
+                RangeMax = 9999,
+                Value = "150"
+            });
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Height",
@@ -64,6 +57,13 @@ namespace Capture.Workflow.Plugins.ViewElements
                 RangeMin = 0,
                 RangeMax = 9999,
                 Value = "50"
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Orientation",
+                PropertyType = CustomPropertyType.ValueList,
+                ValueList = new List<string>() {"Horizontal", "Vertical"},
+                Value = "Horizontal"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -98,26 +98,48 @@ namespace Capture.Workflow.Plugins.ViewElements
 
         public FrameworkElement GetControl(WorkFlowViewElement viewElement)
         {
-            var button = new System.Windows.Controls.Button()
+            var textBox = new System.Windows.Controls.TextBox()
             {
                 Width = viewElement.Properties["Width"].ToInt(),
+                Height = viewElement.Properties["Height"].ToInt(),
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
+                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                VerticalContentAlignment = VerticalAlignment.Center,
+                HorizontalContentAlignment = HorizontalAlignment.Center
+            };
+
+            if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
+                textBox.Background =
+                    new SolidColorBrush(
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
+
+            if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
+                textBox.Foreground =
+                    new SolidColorBrush(
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
+
+            var label = new System.Windows.Controls.Label()
+            {
+                Width = viewElement.Properties["LabelWidth"].ToInt(),
                 Height = viewElement.Properties["Height"].ToInt(),
                 Content = viewElement.Properties["Caption"].Value,
                 Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
             };
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
-                button.Background =
+                label.Background =
                     new SolidColorBrush(
-                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
-                button.Foreground =
+                label.Foreground =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
 
-            return button;
+            var stackpanel = new StackPanel();
+            stackpanel.Children.Add(label);
+            stackpanel.Children.Add(textBox);
+            stackpanel.Orientation = viewElement.Properties["Orientation"].Value == "Horizontal" ? Orientation.Horizontal : Orientation.Vertical;
+            return stackpanel;
         }
-
-
     }
 }
