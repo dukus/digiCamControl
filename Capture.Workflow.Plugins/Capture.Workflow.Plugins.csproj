@@ -90,6 +90,8 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.0-alpha\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -113,10 +115,15 @@
     <Compile Include="Views\FullScreenPreview.cs" />
     <Compile Include="Views\LiveView.cs" />
     <Compile Include="Views\Preview.cs" />
+    <Compile Include="Views\StartScreen.cs" />
     <Compile Include="Views\ViewModel\BaseViewModel.cs" />
     <Compile Include="Views\ViewModel\LiveviewViewModel.cs" />
+    <Compile Include="Views\ViewModel\StartSctreenViewModel.cs" />
     <Compile Include="Views\View\LiveViewUI.xaml.cs">
       <DependentUpon>LiveViewUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\View\StartScreenView.xaml.cs">
+      <DependentUpon>StartScreenView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +142,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\View\LiveViewUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\View\StartScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

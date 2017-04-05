@@ -125,11 +125,12 @@ namespace Capture.Workflow.Plugins.ViewElements
                 Content = viewElement.Properties["Caption"].Value,
                 Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
+                VerticalContentAlignment = VerticalAlignment.Center,
             };
-            if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
-                label.Background =
-                    new SolidColorBrush(
-                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
+            //if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
+            //    label.Background =
+            //        new SolidColorBrush(
+            //            (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
                 label.Foreground =
                     new SolidColorBrush(
