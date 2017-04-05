@@ -9,7 +9,7 @@ namespace Capture.Workflow.Core.Classes
 {
     public class CustomPropertyCollection
     {
-        [XmlElement("CustomProperty")]
+        [XmlElement("Property")]
         public List<CustomProperty> Items { get; set; }
 
         public CustomProperty this[string name]

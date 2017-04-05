@@ -82,7 +82,7 @@
                                 </Rectangle>
                             </controls:DropDownButton.Icon>-->
                         </controls:DropDownButton>
-                        <Button Content="Delete view" Margin="20,5"/>
+                        <Button Content="Delete view" Margin="20,5" Command="{Binding DeleteViewCommand}"/>
                     </StackPanel>
                     <!--<GroupBox.Effect>
                             <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
@@ -146,7 +146,7 @@
                                 </Rectangle>
                             </controls:DropDownButton.Icon>-->
                                     </controls:DropDownButton>
-                                    <Button Content="Delete element" Margin="20,5"/>
+                                    <Button Content="Delete element" Margin="20,5" Command="{Binding DeleteViewElementCommand}"/>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
@@ -178,7 +178,11 @@
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding CurrentWorkFlow.Variables}" SelectedItem="{Binding SelectedVariable}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="75"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding CurrentWorkFlow.Variables.Items}" SelectedItem="{Binding SelectedVariable}" >
                         <ListBox.Effect>
                             <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
                         </ListBox.Effect>
@@ -208,21 +212,23 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="3"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3" IsEnabled="{Binding SelectedVariable.Editable}"/>
 
                         <Label Grid.Row="1" Grid.Column="0" Content="Default Value" Margin="3"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3" />
 
                         <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3" />
 
                         
                         <Label Grid.Row="3" Grid.Column="0" Content="Reinit After session" Margin="3"/>
                         <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
-
-
                     </Grid>
-                   
+                    <StackPanel Grid.Row="1">
+                        <Button Content="Add variable" Margin="20,5" Command="{Binding NewVariableCommand}"/>
+                        <Button Content="Delete variable" Margin="20,5" IsEnabled="{Binding SelectedVariable.Editable}" Command="{Binding DeleteVariableCommand}"/>
+                    </StackPanel>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Settings">

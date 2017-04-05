@@ -101,7 +101,19 @@ namespace Capture.Workflow.Core
                 FileStream myFileStream = new FileStream(fileName, FileMode.Open);
                 WorkFlow flow = (WorkFlow)mySerializer.Deserialize(myFileStream);
                 myFileStream.Close();
-                WorkFlow resflow = new WorkFlow();
+                WorkFlow resflow = Instance.CreateWorkFlow();
+                foreach (Variable variable in flow.Variables.Items)
+                {
+                    if (resflow.Variables[variable.Name] != null)
+                    {
+                        resflow.Variables[variable.Name].Value = variable.Value;
+                    }
+                    else
+                    {
+                        resflow.Variables.Items.Add(variable);
+                    }
+                }
+
                 foreach (var _view in flow.Views)
                 {
                     IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
@@ -137,10 +149,20 @@ namespace Capture.Workflow.Core
             return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
         }
 
+        public WorkFlow CreateWorkFlow()
+        {
+            WorkFlow resflow = new WorkFlow();
+            resflow.Variables.Items.Add(new Variable() {Name = "SessionFolder", Editable = false});
+            resflow.Variables.Items.Add(new Variable() {Name = "FileNameTemplate", Editable = false});
+            return resflow;
+        }
+
         private static Assembly AssemblyResolver(AssemblyName assemblyName)
         {
             assemblyName.Version = null;
             return Assembly.Load(assemblyName);
         }
+
+
     }
 }

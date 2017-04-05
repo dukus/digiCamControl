@@ -68,7 +68,13 @@ namespace Capture.Workflow.ViewModel
 
 
         public RelayCommand<PluginInfo> NewViewCommand { get; set; }
+        public RelayCommand DeleteViewCommand { get; set; }
+
         public RelayCommand<PluginInfo> NewViewElementCommand { get; set; }
+        public RelayCommand DeleteViewElementCommand { get; set; }
+
+        public RelayCommand NewVariableCommand { get; set; }
+        public RelayCommand DeleteVariableCommand { get; set; }
         public RelayCommand PreviewViewCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand LoadCommand { get; set; }
@@ -76,24 +82,76 @@ namespace Capture.Workflow.ViewModel
         public WorkflowEditorViewModel()
         {
             NewViewCommand = new RelayCommand<PluginInfo>(NewView);
+            DeleteViewCommand=new RelayCommand(DeleteView);
+
             NewViewElementCommand = new RelayCommand<PluginInfo>(NewViewElement);
-            PreviewViewCommand=new RelayCommand(PreviewView);
-            SaveCommand=new RelayCommand(Save);
+            DeleteViewElementCommand=new RelayCommand(DeleteViewElement);
+
+            NewVariableCommand = new RelayCommand(NewVariable);
+            DeleteVariableCommand = new RelayCommand(DeleteVariable);
+            PreviewViewCommand = new RelayCommand(PreviewView);
+            SaveCommand = new RelayCommand(Save);
 
             ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
             ViewElementsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.ViewElement);
-            CurrentWorkFlow = new WorkFlow();
-            LoadCommand=new RelayCommand(Load);
+            CurrentWorkFlow = WorkflowManager.Instance.CreateWorkFlow();
+            LoadCommand = new RelayCommand(Load);
+        }
+
+        private void DeleteViewElement()
+        {
+            if (SelectedElement != null && SelectedView!=null)
+            {
+                SelectedView.Elements.Remove(SelectedElement);
+                if (SelectedView.Elements.Count > 0)
+                    SelectedElement = SelectedView.Elements[SelectedView.Elements.Count - 1];
+            }
+        }
+
+        private void DeleteView()
+        {
+            if (SelectedView != null)
+            {
+                CurrentWorkFlow.Views.Remove(SelectedView);
+                if (CurrentWorkFlow.Views.Count > 0)
+                    SelectedView = CurrentWorkFlow.Views[CurrentWorkFlow.Views.Count - 1];
+            }
+        }
+
+        private void DeleteVariable()
+        {
+            if (SelectedVariable != null)
+            {
+                CurrentWorkFlow.Variables.Items.Remove(SelectedVariable);
+                if (CurrentWorkFlow.Variables.Items.Count > 0)
+                {
+                    SelectedVariable = CurrentWorkFlow.Variables.Items[CurrentWorkFlow.Variables.Items.Count - 1];
+                }
+            }
+        }
+
+        private void NewVariable()
+        {
+            CurrentWorkFlow.Variables.Items.Add(new Variable() { Name = "Variable#" + CurrentWorkFlow.Variables.Items.Count });
         }
 
         private void Load()
         {
             CurrentWorkFlow = WorkflowManager.Instance.Load("Test.xml");
+            if (CurrentWorkFlow.Views.Count > 0)
+            {
+                SelectedView = CurrentWorkFlow.Views[0];
+                if (SelectedView.Elements.Count > 0)
+                    SelectedElement = SelectedView.Elements[0];
+            }
+            if (CurrentWorkFlow.Variables.Items.Count > 0)
+                SelectedVariable = CurrentWorkFlow.Variables.Items[0];
+
         }
 
         private void Save()
         {
-            WorkflowManager.Instance.Save(CurrentWorkFlow,"Test.xml");
+            WorkflowManager.Instance.Save(CurrentWorkFlow, "Test.xml");
         }
 
         private void PreviewView()
@@ -118,7 +176,7 @@ namespace Capture.Workflow.ViewModel
             catch (Exception ex)
             {
                 Log.Error("Error create element", ex);
-                
+
             }
         }
 

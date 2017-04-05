@@ -115,6 +115,7 @@
     <Compile Include="Classes\PluginType.cs" />
     <Compile Include="Classes\ValueItem.cs" />
     <Compile Include="Classes\Variable.cs" />
+    <Compile Include="Classes\VariableCollection.cs" />
     <Compile Include="Classes\WorkFlow.cs" />
     <Compile Include="Classes\WorkFlowView.cs" />
     <Compile Include="Classes\WorkFlowViewElement.cs" />
