@@ -6,5 +6,6 @@
         String,
         ValueList,
         Color,
+        Variable
     }
 }

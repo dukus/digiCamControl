@@ -16,6 +16,10 @@ namespace Capture.Workflow.Core.Classes
         [JsonIgnore]
         public IViewPlugin Instance { get; set; }
 
+        [XmlIgnore]
+        [JsonIgnore]
+        public WorkFlow Parent { get; set; }
+
         public AsyncObservableCollection<WorkFlowViewElement> Elements { get; set; }
 
         public WorkFlowView()

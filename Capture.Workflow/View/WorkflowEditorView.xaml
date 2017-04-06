@@ -10,6 +10,7 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:dd="urn:gong-wpf-dragdrop"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
                       x:Name="MetroWindow"
         Title="WorkflowEditorView" Height="800" Width="1200">
@@ -40,27 +41,17 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="1*" MaxWidth="200"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
-                        <ListBox.Effect>
-                            <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
-                        </ListBox.Effect>
+                    <ListBox Margin="10" BorderThickness="1" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                             >
                         <ListBox.ItemTemplate>
                             <DataTemplate >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="15"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
-                                    <controls1:EditableTextBlock Text="{Binding Name}"/>
-                                    <Rectangle Grid.Column="1">
-                                        <Rectangle.Fill>
-                                            <VisualBrush Stretch="Uniform">
-                                                <VisualBrush.Visual>
-                                                    <Path Data="M13,6V11H18V7.75L22.25,12L18,16.25V13H13V18H16.25L12,22.25L7.75,18H11V13H6V16.25L1.75,12L6,7.75V11H11V6H7.75L12,1.75L16.25,6H13Z" Fill="Black" />
-                                                </VisualBrush.Visual>
-                                            </VisualBrush>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
+                                    <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                    <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -102,27 +93,17 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <ListBox Margin="10" BorderBrush="Black" BorderThickness="0" ItemsSource="{Binding SelectedView.Elements}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
-                                    <ListBox.Effect>
-                                        <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
-                                    </ListBox.Effect>
+                                <ListBox Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedView.Elements}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                         materialDesign:ShadowAssist.ShadowDepth="Depth2">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate >
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="15"/>
                                                     <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="30"/>
                                                 </Grid.ColumnDefinitions>
-                                                <controls1:EditableTextBlock Text="{Binding Name}"/>
-                                                <Rectangle Grid.Column="1">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Uniform">
-                                                            <VisualBrush.Visual>
-                                                                <Path Data="M13,6V11H18V7.75L22.25,12L18,16.25V13H13V18H16.25L12,22.25L7.75,18H11V13H6V16.25L1.75,12L6,7.75V11H11V6H7.75L12,1.75L16.25,6H13Z" Fill="Black" />
-                                                            </VisualBrush.Visual>
-                                                        </VisualBrush>
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
+                                                <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                                <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -220,7 +201,7 @@
                         <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
                         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3" />
 
-                        
+
                         <Label Grid.Row="3" Grid.Column="0" Content="Reinit After session" Margin="3"/>
                         <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
                     </Grid>

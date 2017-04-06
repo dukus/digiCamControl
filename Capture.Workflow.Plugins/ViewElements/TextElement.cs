@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -93,12 +89,18 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Color,
                 Value = "Transparent"
             });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Variable",
+                PropertyType = CustomPropertyType.Variable,
+                Value = ""
+            });
             return element;
         }
 
         public FrameworkElement GetControl(WorkFlowViewElement viewElement)
         {
-            var textBox = new System.Windows.Controls.TextBox()
+            var textBox = new TextBox()
             {
                 Width = viewElement.Properties["Width"].ToInt(),
                 Height = viewElement.Properties["Height"].ToInt(),
@@ -107,6 +109,9 @@ namespace Capture.Workflow.Plugins.ViewElements
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
+
+            textBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].Value];
+            textBox.SetBinding(TextBox.TextProperty, "Value");
 
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
                 textBox.Background =

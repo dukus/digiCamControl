@@ -42,6 +42,10 @@ namespace Capture.Workflow.Core.Classes
             return val;
         }
 
+        public void InitVaribleList()
+        {
+            ValueList = WorkflowManager.Instance.CurrentWorkflow.Variables.Items.Select(x => x.Name).ToList();
+        }
 
     }
 }

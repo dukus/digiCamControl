@@ -38,11 +38,22 @@ namespace Capture.Workflow.Wpf.Converters
                         colorpicker.SetBinding(Colorpicker.SelectedColorProperty, new Binding("Value") {Mode = BindingMode.TwoWay});
                         return colorpicker;
                     case CustomPropertyType.ValueList:
-                        ComboBox comboBox=new ComboBox();
+                    {
+                        ComboBox comboBox = new ComboBox();
                         comboBox.DataContext = property;
                         comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
                         comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
                         return comboBox;
+                    }
+                    case CustomPropertyType.Variable:
+                    {
+                        property.InitVaribleList();
+                        ComboBox comboBox = new ComboBox();
+                        comboBox.DataContext = property;
+                        comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
+                        comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
+                        return comboBox;
+                    }
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

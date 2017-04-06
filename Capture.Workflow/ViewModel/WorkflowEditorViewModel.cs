@@ -27,6 +27,7 @@ namespace Capture.Workflow.ViewModel
             set
             {
                 _currentWorkFlow = value;
+                WorkflowManager.Instance.CurrentWorkflow = _currentWorkFlow;
                 RaisePropertyChanged(() => CurrentWorkFlow);
             }
         }
@@ -39,6 +40,8 @@ namespace Capture.Workflow.ViewModel
             {
                 _selectedView = value;
                 RaisePropertyChanged(() => SelectedView);
+                if (_selectedView.Elements.Count > 0)
+                    SelectedElement = _selectedView.Elements[0];
             }
         }
 
@@ -170,6 +173,7 @@ namespace Capture.Workflow.ViewModel
                 element.Instance = plugin;
                 element.PluginInfo = pluginInfo;
                 element.Name = pluginInfo.Name;
+                element.Parent = SelectedView;
                 SelectedView.Elements.Add(element);
                 SelectedElement = element;
             }
@@ -187,6 +191,7 @@ namespace Capture.Workflow.ViewModel
             view.Instance = plugin;
             view.PluginInfo = pluginInfo;
             view.Name = pluginInfo.Name;
+            view.Parent = CurrentWorkFlow;
             CurrentWorkFlow.Views.Add(view);
             SelectedView = view;
         }

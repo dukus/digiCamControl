@@ -15,6 +15,10 @@ namespace Capture.Workflow.Core.Classes
         [JsonIgnore]
         public IViewElementPlugin Instance { get; set; }
 
+        [XmlIgnore]
+        [JsonIgnore]
+        public WorkFlowView Parent { get; set; }
+
         public WorkFlowViewElement()
         {
             Properties = new CustomPropertyCollection();

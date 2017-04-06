@@ -26,6 +26,7 @@ namespace Capture.Workflow.Core
             set { _instance = value; }
         }
 
+        public WorkFlow CurrentWorkflow { get; set; }
 
         public List<PluginInfo> Plugins { get; set; }
 
@@ -118,6 +119,7 @@ namespace Capture.Workflow.Core
                 {
                     IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
                     WorkFlowView view = plugin.CreateView();
+                    view.Parent = resflow;
                     view.Instance = plugin;
                     view.PluginInfo = _view.PluginInfo;
                     view.Name = _view.Name;
@@ -126,6 +128,7 @@ namespace Capture.Workflow.Core
                     {
                         IViewElementPlugin elementplugin = Instance.GetElementPlugin(viewElement.PluginInfo.Class);
                         WorkFlowViewElement element = elementplugin.CreateElement(view);
+                        element.Parent = view;
                         element.Instance = elementplugin;
                         element.PluginInfo = viewElement.PluginInfo;
                         element.Name = viewElement.Name;

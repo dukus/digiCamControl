@@ -139,6 +139,7 @@
     <Compile Include="Interface\IEvent.cs" />
     <Compile Include="Interface\IViewElementPlugin.cs" />
     <Compile Include="Interface\IViewPlugin.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkflowManager.cs" />
   </ItemGroup>
