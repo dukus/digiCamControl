@@ -54,6 +54,15 @@ namespace Capture.Workflow.Wpf.Converters
                         comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
                         return comboBox;
                     }
+                    case CustomPropertyType.View:
+                        {
+                            property.InitViewList();
+                            ComboBox comboBox = new ComboBox();
+                            comboBox.DataContext = property;
+                            comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
+                            comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
+                            return comboBox;
+                        }
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

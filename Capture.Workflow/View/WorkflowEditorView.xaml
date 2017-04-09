@@ -90,8 +90,8 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="3*"/>
                                 </Grid.ColumnDefinitions>
                                 <ListBox Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedView.Elements}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth2">
@@ -108,8 +108,56 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                <controls1:PropertyEditor Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
-                                                          DataContext="{Binding SelectedElement.Properties}" />
+                                <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                                    <TabItem Header="Properties">
+                                        <controls1:PropertyEditor DataContext="{Binding SelectedElement.Properties}" />
+                                    </TabItem>
+                                    <TabItem  Header="Events">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <ComboBox Margin="5,10" Grid.ColumnSpan="2" ItemsSource="{Binding SelectedElement.Events}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCommandCollection}"/>
+                                            <ListBox Grid.Row="1" Grid.Column="0" Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedCommandCollection.Items}" SelectedItem="{Binding SelectedCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                         materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate >
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="15"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                                            <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                            <StackPanel Grid.Row="2" Grid.Column="0">
+                                                <controls:DropDownButton  Margin="20,5" VerticalContentAlignment="Center" Content="Add command" DisplayMemberPath="Name" 
+                                                             ItemsSource="{Binding CommandPlugins}">
+                                                    <controls:DropDownButton.ItemContainerStyle>
+                                                        <Style TargetType="MenuItem">
+                                                            <Setter Property="Command" Value="{Binding DataContext.NewCommandCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
+                                                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                                                        </Style>
+                                                    </controls:DropDownButton.ItemContainerStyle>
+                                                </controls:DropDownButton>
+                                                <Button Content="Delete command" Margin="20,5" Command="{Binding DeleteCommandCommand}"/>
+                                            </StackPanel>
+                                            <controls1:PropertyEditor Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                                                                      DataContext="{Binding SelectedCommand.Properties}" />
+                                            
+                                        </Grid>
+                                    </TabItem>
+
+                                </TabControl>
                                 <StackPanel Grid.Row="1" Grid.Column="0">
                                     <controls:DropDownButton  Margin="20,5" VerticalContentAlignment="Center" Content="Add element" DisplayMemberPath="Name" 
                                                              ItemsSource="{Binding ViewElementsPlugins}">
@@ -119,13 +167,6 @@
                                                 <Setter Property="CommandParameter" Value="{Binding}"/>
                                             </Style>
                                         </controls:DropDownButton.ItemContainerStyle>
-                                        <!--<controls:DropDownButton.Icon>
-                                <Rectangle Width="20" Height="20">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </controls:DropDownButton.Icon>-->
                                     </controls:DropDownButton>
                                     <Button Content="Delete element" Margin="20,5" Command="{Binding DeleteViewElementCommand}"/>
                                 </StackPanel>

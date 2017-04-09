@@ -5,6 +5,7 @@
         View,
         Event,
         Action,
-        ViewElement
+        ViewElement,
+        Command
     }
 }

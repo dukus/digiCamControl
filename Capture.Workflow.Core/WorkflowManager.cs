@@ -134,6 +134,28 @@ namespace Capture.Workflow.Core
                         element.Name = viewElement.Name;
                         element.Properties.CopyValuesFrom(viewElement.Properties);
                         view.Elements.Add(element);
+                        foreach (var commandCollection in element.Events)
+                        {
+                            CommandCollection loadedcommand = null;
+                            foreach (var collection in viewElement.Events)
+                            {
+                                if (collection.Name == commandCollection.Name)
+                                    loadedcommand = collection;
+                            }
+                            if (loadedcommand != null)
+                            {
+                                foreach (var flowCommand in loadedcommand.Items)
+                                {
+                                    IWorkflowCommand commandPlugin= Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                                    var wCommand = commandPlugin.CreateCommand();
+                                    wCommand.Instance = commandPlugin;
+                                    wCommand.PluginInfo = flowCommand.PluginInfo;
+                                    wCommand.Name = flowCommand.Name;
+                                    wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
+                                    commandCollection.Items.Add(wCommand);
+                                }
+                            }
+                        }
                     }
                     resflow.Views.Add(view);
                 }
@@ -150,6 +172,11 @@ namespace Capture.Workflow.Core
         public IViewElementPlugin GetElementPlugin(string className)
         {
             return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public IWorkflowCommand GetCommandPlugin(string className)
+        {
+            return (IWorkflowCommand)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
         }
 
         public WorkFlow CreateWorkFlow()

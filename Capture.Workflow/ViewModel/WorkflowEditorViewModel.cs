@@ -17,8 +17,11 @@ namespace Capture.Workflow.ViewModel
         private WorkFlowViewElement _selectedElement;
         private WorkFlow _currentWorkFlow;
         private Variable _selectedVariable;
+        private CommandCollection _selectedCommandCollection;
+        private WorkFlowCommand _selectedCommand;
 
         public List<PluginInfo> ViewsPlugins { get; set; }
+        public List<PluginInfo> CommandPlugins { get; set; }
         public List<PluginInfo> ViewElementsPlugins { get; set; }
 
         public WorkFlow CurrentWorkFlow
@@ -66,6 +69,26 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public CommandCollection SelectedCommandCollection
+        {
+            get { return _selectedCommandCollection; }
+            set
+            {
+                _selectedCommandCollection = value;
+                RaisePropertyChanged(() => SelectedCommandCollection);
+            }
+        }
+
+        public WorkFlowCommand SelectedCommand
+        {
+            get { return _selectedCommand; }
+            set
+            {
+                _selectedCommand = value;
+                RaisePropertyChanged(() => SelectedCommand);
+            }
+        }
+
 
         public CustomPropertyCollection PropertyCollection { get; set; }
 
@@ -78,6 +101,10 @@ namespace Capture.Workflow.ViewModel
 
         public RelayCommand NewVariableCommand { get; set; }
         public RelayCommand DeleteVariableCommand { get; set; }
+
+        public RelayCommand<PluginInfo> NewCommandCommand { get; set; }
+        public RelayCommand DeleteCommandCommand { get; set; }
+
         public RelayCommand PreviewViewCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand LoadCommand { get; set; }
@@ -85,10 +112,10 @@ namespace Capture.Workflow.ViewModel
         public WorkflowEditorViewModel()
         {
             NewViewCommand = new RelayCommand<PluginInfo>(NewView);
-            DeleteViewCommand=new RelayCommand(DeleteView);
+            DeleteViewCommand = new RelayCommand(DeleteView);
 
             NewViewElementCommand = new RelayCommand<PluginInfo>(NewViewElement);
-            DeleteViewElementCommand=new RelayCommand(DeleteViewElement);
+            DeleteViewElementCommand = new RelayCommand(DeleteViewElement);
 
             NewVariableCommand = new RelayCommand(NewVariable);
             DeleteVariableCommand = new RelayCommand(DeleteVariable);
@@ -97,13 +124,36 @@ namespace Capture.Workflow.ViewModel
 
             ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
             ViewElementsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.ViewElement);
+            CommandPlugins = WorkflowManager.Instance.GetPlugins(PluginType.Command);
             CurrentWorkFlow = WorkflowManager.Instance.CreateWorkFlow();
             LoadCommand = new RelayCommand(Load);
+
+            NewCommandCommand = new RelayCommand<PluginInfo>(NewCommand);
+            DeleteCommandCommand = new RelayCommand(DeleteCommand);
+        }
+
+        private void DeleteCommand()
+        {
+            if (SelectedCommand != null)
+                SelectedCommandCollection?.Items.Remove(SelectedCommand);
+        }
+
+        private void NewCommand(PluginInfo pluginInfo)
+        {
+            if (SelectedCommandCollection != null)
+            {
+                IWorkflowCommand commandPlugin = WorkflowManager.Instance.GetCommandPlugin(pluginInfo.Class);
+                var wCommand = commandPlugin.CreateCommand();
+                wCommand.Instance = commandPlugin;
+                wCommand.PluginInfo = pluginInfo;
+                wCommand.Name = pluginInfo.Name;
+                SelectedCommandCollection.Items.Add(wCommand);
+            }
         }
 
         private void DeleteViewElement()
         {
-            if (SelectedElement != null && SelectedView!=null)
+            if (SelectedElement != null && SelectedView != null)
             {
                 SelectedView.Elements.Remove(SelectedElement);
                 if (SelectedView.Elements.Count > 0)

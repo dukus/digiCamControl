@@ -124,6 +124,7 @@
     <Compile Include="Classes\ActionsList.cs" />
     <Compile Include="Classes\Attributes\PluginTypeAttribute.cs" />
     <Compile Include="Classes\BaseItem.cs" />
+    <Compile Include="Classes\CommandCollection.cs" />
     <Compile Include="Classes\CustomProperty.cs" />
     <Compile Include="Classes\CustomPropertyCollection.cs" />
     <Compile Include="Classes\CustomPropertyType.cs" />
@@ -133,12 +134,14 @@
     <Compile Include="Classes\Variable.cs" />
     <Compile Include="Classes\VariableCollection.cs" />
     <Compile Include="Classes\WorkFlow.cs" />
+    <Compile Include="Classes\WorkFlowCommand.cs" />
     <Compile Include="Classes\WorkFlowView.cs" />
     <Compile Include="Classes\WorkFlowViewElement.cs" />
     <Compile Include="Interface\IActionPlugin.cs" />
     <Compile Include="Interface\IEvent.cs" />
     <Compile Include="Interface\IViewElementPlugin.cs" />
     <Compile Include="Interface\IViewPlugin.cs" />
+    <Compile Include="Interface\IWorkflowCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkflowManager.cs" />

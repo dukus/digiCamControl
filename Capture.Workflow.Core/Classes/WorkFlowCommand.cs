@@ -9,22 +9,19 @@ using Newtonsoft.Json;
 
 namespace Capture.Workflow.Core.Classes
 {
-    public class WorkFlowViewElement: BaseItem
+    public class WorkFlowCommand : BaseItem
     {
         [XmlIgnore]
         [JsonIgnore]
-        public IViewElementPlugin Instance { get; set; }
+        public IWorkflowCommand Instance { get; set; }
 
         [XmlIgnore]
         [JsonIgnore]
-        public WorkFlowView Parent { get; set; }
+        public WorkFlow Parent { get; set; }
 
-        public List<CommandCollection> Events { get; set; }   
-
-        public WorkFlowViewElement()
+        public WorkFlowCommand()
         {
             Properties = new CustomPropertyCollection();
-            Events = new List<CommandCollection>();
         }
     }
 }

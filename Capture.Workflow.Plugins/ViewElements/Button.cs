@@ -93,6 +93,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Color,
                 Value = "Transparent"
             });
+            element.Events.Add(new CommandCollection("Click"));
             return element;
         }
 
