@@ -507,7 +507,7 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(InitStillCaptureMode());
             AdvancedProperties.Add(InitOnOffProperty("Auto Iso", 0xD054));
             AdvancedProperties.Add(InitFlash());
-            AdvancedProperties.Add(InitOnOffProperty("Long exp. NR", CONST_PROP_NoiseReduction));
+            AdvancedProperties.Add(InitOnOffProperty("Long exp NR", CONST_PROP_NoiseReduction));
             AdvancedProperties.Add(InitNRHiIso());
             AdvancedProperties.Add(InitExposureDelay());
             AdvancedProperties.Add(InitLock());
