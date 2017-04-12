@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CameraControl.Devices.Classes;
 
 #endregion
 
@@ -39,5 +40,21 @@ namespace CameraControl.Devices.Nikon
 {
     public class NikonD5200 : NikonD600Base
     {
+        protected override PropertyValue<long> InitExposureDelay()
+        {
+
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Exposure delay mode",
+                IsEnabled = true,
+                Code = 0xD06A
+            };
+            res.AddValues("OFF", 0);
+            res.AddValues("1 sec", 1);
+            res.ReloadValues();
+            res.ValueChanged +=
+                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+            return res;
+        }
     }
 }
