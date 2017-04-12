@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="357e0d80-5093-478e-8c11-28b1c72416e9" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.0.72.1" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
+  <Product Id="357e0d80-5093-478e-8c11-28b1c72416ea" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.0.72.2" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" InstallScope="perMachine" />
     <Media Id="1" Cabinet="OBS_plugin_for_digiCamControl.cab" EmbedCab="yes" />
 
@@ -38,8 +38,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="d:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
-      <UpgradeVersion Minimum="0.0.0.0" Maximum="2.0.72.1" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="2.0.72.1" IncludeMinimum="no" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" Maximum="2.0.72.2" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="2.0.72.2" IncludeMinimum="no" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico" />

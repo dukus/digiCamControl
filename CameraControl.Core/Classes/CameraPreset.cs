@@ -110,6 +110,7 @@ namespace CameraControl.Core.Classes
         
         public void Set(ICameraDevice camera)
         {
+            Log.Debug("Loading preset for "+camera.DisplayName);
             camera.IsBusy = true;
             if (!string.IsNullOrEmpty(GetValue("HostMode")))
             {
@@ -193,12 +194,19 @@ namespace CameraControl.Core.Classes
         public void SetTo(PropertyValue<long> value, string name)
         {
             if (value == null)
+            {
+                Log.Debug("Value is null ");
                 return;
+            }
             foreach (ValuePair valuePair in Values)
             {
                 // set the value only if the value is different from current value 
                 if (valuePair.Name == name && value.IsEnabled && value.Value != valuePair.Value)
                 {
+                    if (value.Values.Count == 0)
+                    {
+                        Log.Debug("No value list " + value.Name);
+                    }
                     value.SetValue(valuePair.Value);
                     return;
                 }
