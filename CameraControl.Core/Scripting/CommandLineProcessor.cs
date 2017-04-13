@@ -290,7 +290,7 @@ namespace CameraControl.Core.Scripting
                         foreach (PropertyInfo info in props)
                         {
                             if (info.PropertyType.Name.StartsWith("PropertyValue") &&
-                                (arg.Split('.')[1].ToLower().Replace(" ", "_") == info.Name.ToLower())
+                                (arg.Split('.')[1].ToLower().Replace("_", " ") == info.Name.ToLower())
                                 )
                             {
                                 dynamic valp = info.GetValue(device, null);
@@ -303,7 +303,7 @@ namespace CameraControl.Core.Scripting
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)
                         {
-                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower().Replace("_", " ") == property.Name.ToLower()))
                             {
                                 return property.Value;
                             }
