@@ -655,24 +655,41 @@ namespace CameraControl.windows
                         btn_stop_script_Click(null, null);
                     break;
             }
-            if (cmd.StartsWith("Bulb_CaptureTime"))
-            {
-                CaptureTime = GetValue(cmd, CaptureTime);
-            }
-        }
-
-        private int GetValue(string cmd, int defVal)
-        {
-            if (cmd.Contains("_"))
+            if (cmd.StartsWith("Bulb_"))
             {
                 var vals = cmd.Split('_');
                 if (vals.Count() > 2)
                 {
-                    int x;
-                    if (int.TryParse(vals[2], out x))
-                        return x;
+                    switch (vals[1])
+                    {
+                        case "CaptureTime":
+                            CaptureTime = GetValue(vals, CaptureTime); 
+                            break;
+                        case "NumOfPhotos":
+                            NumOfPhotos = GetValue(vals, NumOfPhotos);
+                            break;
+                        case "WaitTime":
+                            WaitTime = GetValue(vals, WaitTime);
+                            break;
+                        case "PhdWait":
+                            PhdWait = GetValue(vals, PhdWait);
+                            break;
+                        case "AutomaticGuiding":
+                            AutomaticGuiding = GetValue(vals, 0) == 1;
+                            break;
+                        case "PhdType":
+                            PhdType = GetValue(vals, PhdType);
+                            break;
+                    }
                 }
             }
+        }
+
+        private int GetValue(string[] cmd, int defVal)
+        {
+            int x;
+            if (int.TryParse(cmd[2], out x))
+                return x;
             return defVal;
         }
 
