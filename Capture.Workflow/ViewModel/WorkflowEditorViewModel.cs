@@ -106,6 +106,8 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand DeleteCommandCommand { get; set; }
 
         public RelayCommand PreviewViewCommand { get; set; }
+        public RelayCommand RunCommand { get; set; }
+
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand LoadCommand { get; set; }
 
@@ -130,6 +132,14 @@ namespace Capture.Workflow.ViewModel
 
             NewCommandCommand = new RelayCommand<PluginInfo>(NewCommand);
             DeleteCommandCommand = new RelayCommand(DeleteCommand);
+
+            RunCommand = new RelayCommand(Run);
+        }
+
+        private void Run()
+        {
+            WorkflowViewView wnd = new WorkflowViewView();
+            wnd.ShowDialog();
         }
 
         private void DeleteCommand()

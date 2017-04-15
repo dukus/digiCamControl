@@ -179,6 +179,7 @@
                     <GroupBox Grid.Row="0" Grid.Column="2" Header="Commands">
                         <StackPanel>
                             <Button Content="Preview" Margin="3" Command="{Binding PreviewViewCommand}"/>
+                            <Button Content="Test" Margin="3" Command="{Binding RunCommand}"/>
                         </StackPanel>
                     </GroupBox>
                 </Grid>

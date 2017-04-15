@@ -19,5 +19,16 @@ namespace Capture.Workflow.Core.Classes
             Variables = new VariableCollection();
         }
 
+
+        public WorkFlowView GetView(string name)
+        {
+            foreach (var view in Views)
+            {
+                if (view.Name == name)
+                    return view;
+            }
+            return null;
+        }
+
     }
 }

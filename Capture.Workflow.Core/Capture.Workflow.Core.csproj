@@ -128,6 +128,8 @@
     <Compile Include="Classes\CustomProperty.cs" />
     <Compile Include="Classes\CustomPropertyCollection.cs" />
     <Compile Include="Classes\CustomPropertyType.cs" />
+    <Compile Include="Classes\MessageEventArgs.cs" />
+    <Compile Include="Classes\Messages.cs" />
     <Compile Include="Classes\PluginInfo.cs" />
     <Compile Include="Classes\PluginType.cs" />
     <Compile Include="Classes\ValueItem.cs" />

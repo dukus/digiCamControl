@@ -13,6 +13,11 @@ namespace Capture.Workflow.Core
 {
     public class WorkflowManager
     {
+        public delegate void MessageEventHandler(object sender, MessageEventArgs e);
+        public event MessageEventHandler Message;
+
+
+
         private static WorkflowManager _instance;
 
         public static WorkflowManager Instance
@@ -193,6 +198,11 @@ namespace Capture.Workflow.Core
             return Assembly.Load(assemblyName);
         }
 
+
+        protected virtual void OnMessage(MessageEventArgs e)
+        {
+            Message?.Invoke(this, e);
+        }
 
     }
 }
