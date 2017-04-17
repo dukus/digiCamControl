@@ -125,9 +125,11 @@
     <Compile Include="Classes\Attributes\PluginTypeAttribute.cs" />
     <Compile Include="Classes\BaseItem.cs" />
     <Compile Include="Classes\CommandCollection.cs" />
+    <Compile Include="Classes\Context.cs" />
     <Compile Include="Classes\CustomProperty.cs" />
     <Compile Include="Classes\CustomPropertyCollection.cs" />
     <Compile Include="Classes\CustomPropertyType.cs" />
+    <Compile Include="Classes\FileItem.cs" />
     <Compile Include="Classes\MessageEventArgs.cs" />
     <Compile Include="Classes\Messages.cs" />
     <Compile Include="Classes\PluginInfo.cs" />

@@ -112,7 +112,7 @@
                                     <TabItem Header="Properties">
                                         <controls1:PropertyEditor DataContext="{Binding SelectedElement.Properties}" />
                                     </TabItem>
-                                    <TabItem  Header="Events">
+                                    <TabItem  Header="Events" IsEnabled="{Binding HaveEvents}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using GalaSoft.MvvmLight;
@@ -38,7 +39,8 @@ namespace Capture.Workflow.ViewModel
 
         public WorkflowViewViewModel()
         {
-            Workflow = WorkflowManager.Instance.CurrentWorkflow;
+            Workflow = WorkflowManager.Instance.Context.WorkFlow;
+            WorkflowManager.Instance.Context.CameraDevice = ServiceProvider.Instance.DeviceManager.SelectedCameraDevice;
             if (!IsInDesignMode)
             {
                 WorkflowManager.Instance.Message += Instance_Message;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
@@ -106,6 +107,10 @@ namespace Capture.Workflow.Plugins.ViewElements
                 Content = viewElement.Properties["Caption"].Value,
                 Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
+            };
+            button.Click += (sender, args) =>
+            {
+                WorkflowManager.Execute(viewElement.GetEventCommands("Click"));
             };
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
                 button.Background =

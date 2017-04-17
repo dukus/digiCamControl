@@ -11,5 +11,10 @@ namespace Capture.Workflow.Core.Classes
         public string Name { get; set; }
         public object Param { get; set; }
 
+        public MessageEventArgs(string name, object param)
+        {
+            Name = name;
+            Param = param;
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace Capture.Workflow.ViewModel
         private Variable _selectedVariable;
         private CommandCollection _selectedCommandCollection;
         private WorkFlowCommand _selectedCommand;
+        private bool _haveEvents;
 
         public List<PluginInfo> ViewsPlugins { get; set; }
         public List<PluginInfo> CommandPlugins { get; set; }
@@ -30,7 +31,7 @@ namespace Capture.Workflow.ViewModel
             set
             {
                 _currentWorkFlow = value;
-                WorkflowManager.Instance.CurrentWorkflow = _currentWorkFlow;
+                WorkflowManager.Instance.Context.WorkFlow = _currentWorkFlow;
                 RaisePropertyChanged(() => CurrentWorkFlow);
             }
         }
@@ -59,6 +60,16 @@ namespace Capture.Workflow.ViewModel
         }
 
 
+        public bool HaveEvents
+        {
+            get { return _haveEvents; }
+            set
+            {
+                _haveEvents = value;
+                RaisePropertyChanged(() => HaveEvents);
+            }
+        }
+
         public WorkFlowViewElement SelectedElement
         {
             get { return _selectedElement; }
@@ -66,6 +77,16 @@ namespace Capture.Workflow.ViewModel
             {
                 _selectedElement = value;
                 RaisePropertyChanged(() => SelectedElement);
+                if (_selectedElement.Events.Count > 0)
+                {
+                    HaveEvents = true;
+                    SelectedCommandCollection = _selectedElement.Events[0];
+                }
+                else
+                {
+                    HaveEvents = false;
+                    SelectedCommandCollection = null;
+                }
             }
         }
 

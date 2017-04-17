@@ -124,7 +124,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Commands\Capture.cs" />
-    <Compile Include="Commands\ShowView.cs" />
+    <Compile Include="Commands\ViewAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewElements\Button.cs" />
     <Compile Include="ViewElements\Label.cs" />

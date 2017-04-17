@@ -16,8 +16,6 @@ namespace Capture.Workflow.Core
         public delegate void MessageEventHandler(object sender, MessageEventArgs e);
         public event MessageEventHandler Message;
 
-
-
         private static WorkflowManager _instance;
 
         public static WorkflowManager Instance
@@ -31,13 +29,23 @@ namespace Capture.Workflow.Core
             set { _instance = value; }
         }
 
-        public WorkFlow CurrentWorkflow { get; set; }
+        public Context Context { get; set; }
+
+        public static void Execute(CommandCollection collection)
+        {
+            foreach (var command in collection.Items)
+            {
+                command.Instance.Execute(command);
+            }
+        }
+
 
         public List<PluginInfo> Plugins { get; set; }
 
         public WorkflowManager()
         {
             Plugins = new List<PluginInfo>();
+            Context = new Context();
         }
 
         public List<PluginInfo> GetPlugins(PluginType type)
@@ -199,7 +207,7 @@ namespace Capture.Workflow.Core
         }
 
 
-        protected virtual void OnMessage(MessageEventArgs e)
+        public virtual void OnMessage(MessageEventArgs e)
         {
             Message?.Invoke(this, e);
         }

@@ -44,12 +44,12 @@ namespace Capture.Workflow.Core.Classes
 
         public void InitVaribleList()
         {
-            ValueList = WorkflowManager.Instance.CurrentWorkflow.Variables.Items.Select(x => x.Name).ToList();
+            ValueList = WorkflowManager.Instance.Context.WorkFlow.Variables.Items.Select(x => x.Name).ToList();
         }
 
         public void InitViewList()
         {
-            ValueList = WorkflowManager.Instance.CurrentWorkflow.Views.Select(x => x.Name).ToList();
+            ValueList = WorkflowManager.Instance.Context.WorkFlow.Views.Select(x => x.Name).ToList();
         }
 
     }

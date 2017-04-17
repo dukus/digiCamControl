@@ -26,5 +26,15 @@ namespace Capture.Workflow.Core.Classes
             Properties = new CustomPropertyCollection();
             Events = new List<CommandCollection>();
         }
+
+        public CommandCollection GetEventCommands(string name)
+        {
+            foreach (var collection in Events)
+            {
+                if (collection.Name == name)
+                    return collection;
+            }
+            return null;
+        }
     }
 }
