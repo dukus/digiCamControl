@@ -17,19 +17,53 @@
     <Window.DataContext>
         <viewModel:WorkflowEditorViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Window.Resources>
+            <materialDesign:DialogHost Identifier="RootDialog" >
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="16"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <StackPanel>
+                    <MenuItem Header="New"/>
+                    <MenuItem Header="Open ..." Command="{Binding LoadCommand}"/>
+                    <MenuItem Header="Save ..." Command="{Binding SaveCommand}"/>
+                    </StackPanel>
+
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="File">
-                <MenuItem Header="New"/>
-                <MenuItem Header="Open ..." Command="{Binding LoadCommand}"/>
-                <MenuItem Header="Save ..." Command="{Binding SaveCommand}"/>
-            </MenuItem>
-        </Menu>
-        <TabControl Grid.Row="1">
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton"/>
+                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                            <StackPanel>
+                                
+                                <Separator/>
+                                
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Material Design In XAML Toolkit</TextBlock>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <TabControl Grid.Row="1">
             <TabItem Header="Views">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -261,5 +295,8 @@
             </TabItem>
         </TabControl>
     </Grid>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
+   
 </controls:MetroWindow>
 
