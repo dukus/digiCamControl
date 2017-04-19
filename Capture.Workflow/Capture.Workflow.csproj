@@ -93,6 +93,10 @@
       <HintPath>..\packages\gong-wpf-dragdrop.1.1.0\lib\net46\GongSolutions.Wpf.DragDrop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Magick.NET-Q8-x86, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
       <HintPath>..\packages\Magick.NET-Q8-x86.7.0.4.701\lib\net40-client\Magick.NET-Q8-x86.dll</HintPath>
       <Private>True</Private>
@@ -146,9 +150,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\ServiceProvider.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NewViewSelectorViewModel.cs" />
     <Compile Include="ViewModel\WorkflowEditorViewModel.cs" />
+    <Compile Include="ViewModel\WorkflowViewViewModel.cs" />
     <Compile Include="View\NewViewSelectorView.xaml.cs">
       <DependentUpon>NewViewSelectorView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +163,9 @@
     </Compile>
     <Compile Include="View\WorkflowEditorView.xaml.cs">
       <DependentUpon>WorkflowEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkflowViewView.xaml.cs">
+      <DependentUpon>WorkflowViewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wpf\Controls\EditableTextBlock.cs" />
     <Compile Include="Wpf\Controls\EditableTextBlockAdorner.cs" />
@@ -185,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WorkflowEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkflowViewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
