@@ -330,9 +330,6 @@ namespace CameraControl.Core.Scripting
 
         private void Set(string[] args)
         {
-            for (int k = 0; k < args.Count(); k++)
-                args[k] = args[k].ToLower();
-
             var device = GetDevice();
             args = args.ToArray().Aggregate("", (current, s) => current + s + " ").Split('|');
             
@@ -342,7 +339,7 @@ namespace CameraControl.Core.Scripting
             {
                 arg = args[k].Split(' ')[0];
                 param = args[k].Skip(arg.Length).ToArray().Aggregate("", (current, s) => current + s).Trim();
-                arg = arg.Trim();
+                arg = arg.Trim().ToLower();
                 switch (arg)
                 {
                     case "transfer":
