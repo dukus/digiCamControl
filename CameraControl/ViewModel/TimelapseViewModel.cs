@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using Quartz;
 using Quartz.Collection;
 using Quartz.Impl;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace CameraControl.ViewModel
 {
@@ -102,14 +103,20 @@ namespace CameraControl.ViewModel
             set
             {
                 var d = TimeLapseSettings.StartDate;
-                TimeLapseSettings.StartDate = TimeLapseSettings.StartDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second);
+                TimeLapseSettings.StartDate =
+                    TimeLapseSettings.StartDate =
+                        new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second);
                 RaisePropertyChanged(() => StartDate);
             }
         }
 
         public TimeSpan StartTime
         {
-            get { return new TimeSpan(TimeLapseSettings.StartDate.Hour, TimeLapseSettings.StartDate.Minute, TimeLapseSettings.StartDate.Second); }
+            get
+            {
+                return new TimeSpan(TimeLapseSettings.StartDate.Hour, TimeLapseSettings.StartDate.Minute,
+                    TimeLapseSettings.StartDate.Second);
+            }
             set
             {
                 var d = TimeLapseSettings.StartDate;
@@ -273,10 +280,7 @@ namespace CameraControl.ViewModel
 
         public bool StopAtEnable
         {
-            get
-            {
-                return !StartDaily;
-            }
+            get { return !StartDaily; }
         }
 
         public DateTime StopDate
@@ -285,14 +289,20 @@ namespace CameraControl.ViewModel
             set
             {
                 var d = TimeLapseSettings.StopDate;
-                TimeLapseSettings.StopDate = TimeLapseSettings.StopDate = new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second);
+                TimeLapseSettings.StopDate =
+                    TimeLapseSettings.StopDate =
+                        new DateTime(value.Year, value.Month, value.Day, d.Hour, d.Minute, d.Second);
                 RaisePropertyChanged(() => StopDate);
             }
         }
 
         public TimeSpan StopTime
         {
-            get { return new TimeSpan(TimeLapseSettings.StopDate.Hour, TimeLapseSettings.StopDate.Minute, TimeLapseSettings.StopDate.Second); }
+            get
+            {
+                return new TimeSpan(TimeLapseSettings.StopDate.Hour, TimeLapseSettings.StopDate.Minute,
+                    TimeLapseSettings.StopDate.Second);
+            }
             set
             {
                 var d = TimeLapseSettings.StopDate;
@@ -483,7 +493,10 @@ namespace CameraControl.ViewModel
 
         public string StartText
         {
-            get { return !IsRunning ? TranslationStrings.ButtonStartTimeLapse : TranslationStrings.ButtonStopTimeLapse; }
+            get
+            {
+                return !IsRunning ? TranslationStrings.ButtonStartTimeLapse : TranslationStrings.ButtonStopTimeLapse;
+            }
         }
 
         public string StatusText
@@ -492,14 +505,14 @@ namespace CameraControl.ViewModel
             {
                 if (trigger != null)
                 {
-                  
+
                     var tempTrigger = sched.GetTrigger(trigger.Key);
                     var nextFireTimeUtc = tempTrigger?.Result.GetNextFireTimeUtc();
                     if (nextFireTimeUtc != null)
                         return "Next capture time " + nextFireTimeUtc.Value.ToLocalTime();
                     else
                     {
-                        
+
                     }
                 }
                 return "????";
@@ -519,13 +532,17 @@ namespace CameraControl.ViewModel
                     }
                     if (StartAt)
                     {
-                        return StartDate < DateTime.Now ? "" : string.Format("The timlapse will start in {0}", (StartDate - DateTime.Now).ToString(@"hh\:mm\:ss"));
+                        return StartDate < DateTime.Now
+                            ? ""
+                            : string.Format("The timlapse will start in {0}",
+                                (StartDate - DateTime.Now).ToString(@"hh\:mm\:ss"));
                     }
                     return "Waiting for shedule";
                 }
-                return FullSpeed ? string.Format("Timelapse in progress.\nTotal captured photos {0}", _totalCaptures) 
+                return FullSpeed
+                    ? string.Format("Timelapse in progress.\nTotal captured photos {0}", _totalCaptures)
                     : string.Format("Timelapse in progress.\nNext capture in {0} seconds\nTotal captured photos {1}",
-                    Math.Round(TimeBetweenShots - (DateTime.Now - _lastCaptureTime).TotalSeconds, 0), _totalCaptures);
+                        Math.Round(TimeBetweenShots - (DateTime.Now - _lastCaptureTime).TotalSeconds, 0), _totalCaptures);
             }
         }
 
@@ -583,18 +600,26 @@ namespace CameraControl.ViewModel
             if (tempTrigger == null)
                 StopL();
             RaisePropertyChanged(() => StatusText);
-       }
+        }
 
         public void Start()
         {
+            try
+            {
+                if (!IsRunning)
+                {
+                    StartL();
+                }
+                else
+                {
+                    StopL();
+                }
 
-            if (!IsRunning)
-            {
-                StartL();
             }
-            else
+            catch (Exception ex)
             {
-                StopL();
+                Log.Error("Error starting timelapse", ex);
+                MessageBox.Show("Error starting timelapse "+ex.Message);
             }
         }
 

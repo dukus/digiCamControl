@@ -47,6 +47,7 @@ using CameraControl.Devices.Nikon;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using Timer = System.Timers.Timer;
+using System.Linq;
 
 #endregion
 
@@ -591,17 +592,29 @@ namespace CameraControl.windows
                 case WindowsCmdConsts.BulbWnd_Show:
                     CameraDevice = param as ICameraDevice;
                     if (CameraDevice == null)
+                        CameraDevice = ServiceProvider.DeviceManager.SelectedCameraDevice;
+                    if (CameraDevice == null)
+                    {
+                        Log.Debug("No camera for Bulb window !");
                         return;
-                    Init();
-                    CameraDevice.PhotoCaptured += CameraDevice_PhotoCaptured;
-                    ServiceProvider.ScriptManager.OutPutMessageReceived += ScriptManager_OutPutMessageReceived;
+                    }
                     Dispatcher.Invoke(new Action(delegate
-                                                     {
-                                                         //Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-                                                         Show();
-                                                         Activate();
-                                                         Focus();
-                                                     }));
+                    {
+                        try
+                        {
+                            Init();
+                            CameraDevice.PhotoCaptured += CameraDevice_PhotoCaptured;
+                            ServiceProvider.ScriptManager.OutPutMessageReceived += ScriptManager_OutPutMessageReceived;
+                            //Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+                            Show();
+                            Activate();
+                            Focus();
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error("Bulb window initialization error ", e);
+                        }
+                    }));
                     break;
                 case WindowsCmdConsts.BulbWnd_Hide:
                     if (_captureTimer.Enabled)
@@ -642,6 +655,42 @@ namespace CameraControl.windows
                         btn_stop_script_Click(null, null);
                     break;
             }
+            if (cmd.StartsWith("Bulb_"))
+            {
+                var vals = cmd.Split('_');
+                if (vals.Count() > 2)
+                {
+                    switch (vals[1])
+                    {
+                        case "CaptureTime":
+                            CaptureTime = GetValue(vals, CaptureTime); 
+                            break;
+                        case "NumOfPhotos":
+                            NumOfPhotos = GetValue(vals, NumOfPhotos);
+                            break;
+                        case "WaitTime":
+                            WaitTime = GetValue(vals, WaitTime);
+                            break;
+                        case "PhdWait":
+                            PhdWait = GetValue(vals, PhdWait);
+                            break;
+                        case "AutomaticGuiding":
+                            AutomaticGuiding = GetValue(vals, 0) == 1;
+                            break;
+                        case "PhdType":
+                            PhdType = GetValue(vals, PhdType);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private int GetValue(string[] cmd, int defVal)
+        {
+            int x;
+            if (int.TryParse(cmd[2], out x))
+                return x;
+            return defVal;
         }
 
         private void CameraDevice_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)

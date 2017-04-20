@@ -7,11 +7,15 @@ using System.Xml.Serialization;
 using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
+using Capture.Workflow.Core.Interface;
 
 namespace Capture.Workflow.Core
 {
     public class WorkflowManager
     {
+        public delegate void MessageEventHandler(object sender, MessageEventArgs e);
+        public event MessageEventHandler Message;
+
         private static WorkflowManager _instance;
 
         public static WorkflowManager Instance
@@ -25,12 +29,23 @@ namespace Capture.Workflow.Core
             set { _instance = value; }
         }
 
+        public Context Context { get; set; }
+
+        public static void Execute(CommandCollection collection)
+        {
+            foreach (var command in collection.Items)
+            {
+                command.Instance.Execute(command);
+            }
+        }
+
 
         public List<PluginInfo> Plugins { get; set; }
 
         public WorkflowManager()
         {
             Plugins = new List<PluginInfo>();
+            Context = new Context();
         }
 
         public List<PluginInfo> GetPlugins(PluginType type)
@@ -67,7 +82,7 @@ namespace Capture.Workflow.Core
                         Plugins.Add(new PluginInfo()
                         {
                             Type = attribute.PluginType,
-                            Class = exportedType,
+                            Class = exportedType.AssemblyQualifiedName,
                             Description = attributeDes?.Description,
                             Name = attributeName?.DisplayName
                         });
@@ -87,7 +102,7 @@ namespace Capture.Workflow.Core
 
             Stream writer = new FileStream(file, FileMode.Create);
             // Serialize the object, and close the TextWriter
-            serializer.Serialize(writer, this);
+            serializer.Serialize(writer, workflow);
             writer.Close();
         }
 
@@ -100,9 +115,101 @@ namespace Capture.Workflow.Core
                 FileStream myFileStream = new FileStream(fileName, FileMode.Open);
                 WorkFlow flow = (WorkFlow)mySerializer.Deserialize(myFileStream);
                 myFileStream.Close();
-                return flow;
+                WorkFlow resflow = Instance.CreateWorkFlow();
+                foreach (Variable variable in flow.Variables.Items)
+                {
+                    if (resflow.Variables[variable.Name] != null)
+                    {
+                        resflow.Variables[variable.Name].Value = variable.Value;
+                    }
+                    else
+                    {
+                        resflow.Variables.Items.Add(variable);
+                    }
+                }
+
+                foreach (var _view in flow.Views)
+                {
+                    IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
+                    WorkFlowView view = plugin.CreateView();
+                    view.Parent = resflow;
+                    view.Instance = plugin;
+                    view.PluginInfo = _view.PluginInfo;
+                    view.Name = _view.Name;
+                    view.Properties.CopyValuesFrom(_view.Properties);
+                    foreach (var viewElement in _view.Elements)
+                    {
+                        IViewElementPlugin elementplugin = Instance.GetElementPlugin(viewElement.PluginInfo.Class);
+                        WorkFlowViewElement element = elementplugin.CreateElement(view);
+                        element.Parent = view;
+                        element.Instance = elementplugin;
+                        element.PluginInfo = viewElement.PluginInfo;
+                        element.Name = viewElement.Name;
+                        element.Properties.CopyValuesFrom(viewElement.Properties);
+                        view.Elements.Add(element);
+                        foreach (var commandCollection in element.Events)
+                        {
+                            CommandCollection loadedcommand = null;
+                            foreach (var collection in viewElement.Events)
+                            {
+                                if (collection.Name == commandCollection.Name)
+                                    loadedcommand = collection;
+                            }
+                            if (loadedcommand != null)
+                            {
+                                foreach (var flowCommand in loadedcommand.Items)
+                                {
+                                    IWorkflowCommand commandPlugin= Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                                    var wCommand = commandPlugin.CreateCommand();
+                                    wCommand.Instance = commandPlugin;
+                                    wCommand.PluginInfo = flowCommand.PluginInfo;
+                                    wCommand.Name = flowCommand.Name;
+                                    wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
+                                    commandCollection.Items.Add(wCommand);
+                                }
+                            }
+                        }
+                    }
+                    resflow.Views.Add(view);
+                }
+                return resflow;
             }
             return null;
+        }
+
+        public IViewPlugin GetViewPlugin(string className)
+        {
+            return (IViewPlugin) Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public IViewElementPlugin GetElementPlugin(string className)
+        {
+            return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public IWorkflowCommand GetCommandPlugin(string className)
+        {
+            return (IWorkflowCommand)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public WorkFlow CreateWorkFlow()
+        {
+            WorkFlow resflow = new WorkFlow();
+            resflow.Variables.Items.Add(new Variable() {Name = "SessionFolder", Editable = false});
+            resflow.Variables.Items.Add(new Variable() {Name = "FileNameTemplate", Editable = false});
+            return resflow;
+        }
+
+        private static Assembly AssemblyResolver(AssemblyName assemblyName)
+        {
+            assemblyName.Version = null;
+            return Assembly.Load(assemblyName);
+        }
+
+
+        public virtual void OnMessage(MessageEventArgs e)
+        {
+            Message?.Invoke(this, e);
         }
 
     }

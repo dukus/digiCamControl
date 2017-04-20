@@ -465,7 +465,7 @@ namespace CameraControlCmd
                 ServiceProvider.DeviceManager.SelectedCameraDevice.IsBusy = true;
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
                 // prevent use this mode if the camera not support it 
-                if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+                if (!ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
                     ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                 ServiceProvider.DeviceManager.SelectedCameraDevice.CapturePhoto();
             }

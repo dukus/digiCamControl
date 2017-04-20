@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Capture.Workflow.Classes;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -15,7 +16,21 @@ namespace Capture.Workflow.ViewModel
 
         public MainWindowViewModel()
         {
-            EditCommand=new RelayCommand(Edit);
+            EditCommand = new RelayCommand(Edit);
+
+            ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
+            ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
+            ServiceProvider.Instance.DeviceManager.ConnectToCamera();
+        }
+
+        private void DeviceManager_CameraDisconnected(CameraControl.Devices.ICameraDevice cameraDevice)
+        {
+         
+        }
+
+        private void DeviceManager_CameraConnected(CameraControl.Devices.ICameraDevice cameraDevice)
+        {
+         
         }
 
         private void Edit()

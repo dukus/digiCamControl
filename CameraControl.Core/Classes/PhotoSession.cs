@@ -33,6 +33,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
+//using System.Windows.Forms;
 using System.Xml.Serialization;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
@@ -51,7 +53,9 @@ namespace CameraControl.Core.Classes
         private const string _keyBase = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths";
 
 
-        [JsonIgnore] [XmlIgnore] public List<string> SupportedExtensions = new List<string>
+        [JsonIgnore]
+        [XmlIgnore]
+        public List<string> SupportedExtensions = new List<string>
         {
             ".jpg",
             ".nef",
@@ -139,7 +143,7 @@ namespace CameraControl.Core.Classes
             {
                 //if (_folder != value)
                 //{
-                    
+
                 //    if (!Directory.Exists(value))
                 //    {
                 //        try
@@ -458,7 +462,8 @@ namespace CameraControl.Core.Classes
             Braketing = new BracketingClass();
             try
             {
-                Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),"digiCamControl", Name);
+                Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "digiCamControl",
+                    Name);
             }
             catch (Exception exception)
             {
@@ -684,7 +689,8 @@ namespace CameraControl.Core.Classes
         {
             lock (_locker)
             {
-                return !string.IsNullOrEmpty(fileName) && Files.Any(fileItem => fileItem.FileName.ToUpper() == fileName.ToUpper());                
+                return !string.IsNullOrEmpty(fileName) &&
+                       Files.Any(fileItem => fileItem.FileName.ToUpper() == fileName.ToUpper());
             }
         }
 
@@ -708,7 +714,11 @@ namespace CameraControl.Core.Classes
             {
                 if (string.IsNullOrEmpty(name))
                     return null;
-                return Files.FirstOrDefault(fileItem => !string.IsNullOrEmpty(fileItem.FileName) && String.Equals(fileItem.Name, name, StringComparison.CurrentCultureIgnoreCase));
+                return
+                    Files.FirstOrDefault(
+                        fileItem =>
+                            !string.IsNullOrEmpty(fileItem.FileName) &&
+                            String.Equals(fileItem.Name, name, StringComparison.CurrentCultureIgnoreCase));
             }
         }
 
@@ -722,7 +732,9 @@ namespace CameraControl.Core.Classes
         {
             lock (_locker)
             {
-                return Files.FirstOrDefault(fileItem => fileItem.OriginalName == fileName && fileItem.CameraSerial == serial);                
+                return
+                    Files.FirstOrDefault(
+                        fileItem => fileItem.OriginalName == fileName && fileItem.CameraSerial == serial);
             }
         }
 
@@ -799,31 +811,40 @@ namespace CameraControl.Core.Classes
                 }
             }
         }
+
         /// <summary>
         /// This method uses the System.Diagnostics.ProcessStartInfo to import selected pictures into lightroom
         /// </summary>
         public void OpenInLightroom()
         {
-            System.Diagnostics.ProcessStartInfo lr = new System.Diagnostics.ProcessStartInfo();
-            string path = GetProperLightroomPath( GetPathForExe("Phootoshop.exe"));
-            if (string.IsNullOrEmpty(path))
-                //Photoshop may not be installed! Alternative search
-                path = GetProperLightroomPath(GetInstallLocation("Lightroom"));
+            try
+            {
+                System.Diagnostics.ProcessStartInfo lr = new System.Diagnostics.ProcessStartInfo();
+                string path = GetProperLightroomPath(GetPathForExe("Phootoshop.exe"));
+                if (string.IsNullOrEmpty(path))
+                    //Photoshop may not be installed! Alternative search
+                    path = GetProperLightroomPath(GetInstallLocation("Lightroom"));
 
-            bool noneSelected = false;
-            lr.FileName = path;
+                bool noneSelected = false;
+                lr.FileName = path;
 
-            //This is slightly faster than Foreach!
-            for (int i = 0; i < Files.Count; i++)
-                if (Files[i].IsChecked)
-                    lr.Arguments = Path.Combine(Folder, Files[i].Name) + " " + lr.Arguments;
+                //This is slightly faster than Foreach!
+                for (int i = 0; i < Files.Count; i++)
+                    if (Files[i].IsChecked)
+                        lr.Arguments = Path.Combine(Folder, Files[i].Name) + " " + lr.Arguments;
 
-            noneSelected = string.IsNullOrEmpty(lr.Arguments);
+                noneSelected = string.IsNullOrEmpty(lr.Arguments);
 
-            if (noneSelected)
-                lr.Arguments = Folder;
+                if (noneSelected)
+                    lr.Arguments = Folder;
 
-            System.Diagnostics.Process.Start(lr);  
+                System.Diagnostics.Process.Start(lr);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to start Lightroom", ex);
+                MessageBox.Show("Unable to start Lightroom " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -831,27 +852,35 @@ namespace CameraControl.Core.Classes
         /// </summary>
         public void OpenInPhotoshop()
         {
-            
-            System.Diagnostics.ProcessStartInfo ps = new System.Diagnostics.ProcessStartInfo();
-            string path = GetPathForExe("Photoshop.exe");
-            bool noneSelected = false;
-            ps.FileName = path;
-
-            //This is slightly faster than Foreach!
-            for (int i = 0; i < Files.Count; i++)
-                if (Files[i].IsChecked)
-                    ps.Arguments = Path.Combine(Folder, Files[i].Name) + " " + ps.Arguments;
-
-            noneSelected = string.IsNullOrEmpty(ps.Arguments);
-
-            if (noneSelected)
+            try
             {
-                //TODO: fix this for later.
-                System.Windows.MessageBox.Show("Please Select an image first");
-                return;
+                System.Diagnostics.ProcessStartInfo ps = new System.Diagnostics.ProcessStartInfo();
+                string path = GetPathForExe("Photoshop.exe");
+                bool noneSelected = false;
+                ps.FileName = path;
+
+                //This is slightly faster than Foreach!
+                for (int i = 0; i < Files.Count; i++)
+                    if (Files[i].IsChecked)
+                        ps.Arguments = Path.Combine(Folder, Files[i].Name) + " " + ps.Arguments;
+
+                noneSelected = string.IsNullOrEmpty(ps.Arguments);
+
+                if (noneSelected)
+                {
+                    //TODO: fix this for later.
+                    System.Windows.MessageBox.Show("Please Select an image first");
+                    return;
+                }
+
+                System.Diagnostics.Process.Start(ps);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to start Photoshop", ex);
+                MessageBox.Show("Unable to start Photoshop " + ex.Message);
             }
 
-            System.Diagnostics.Process.Start(ps);
         }
 
         /// <summary>
@@ -860,7 +889,7 @@ namespace CameraControl.Core.Classes
         /// <returns></returns>
         public bool IsAvailable(string applicationName)
         {
-    
+
             string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
             bool toReturn = false;
             using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))

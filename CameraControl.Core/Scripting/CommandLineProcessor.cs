@@ -32,7 +32,7 @@ namespace CameraControl.Core.Scripting
                         }
                         else
                         {
-                            ServiceProvider.Settings.DefaultSession.FileNameTemplate = file;                            
+                            ServiceProvider.Settings.DefaultSession.FileNameTemplate = file;
                         }
 
                     }
@@ -186,12 +186,12 @@ namespace CameraControl.Core.Scripting
                                 if (valp != null)
                                     return valp.Values;
                                 else
-                                    return new[] {""};
+                                    return new[] { "" };
                             }
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)
                         {
-                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower().Replace(" ","_")))
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower().Replace(" ", "_")))
                             {
                                 return property.Values;
                             }
@@ -208,6 +208,20 @@ namespace CameraControl.Core.Scripting
 
             switch (arg)
             {
+                case "transfer":
+                    {
+                        CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+                        if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+                        {
+                            if (ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam)
+                                return "Save to PC only";
+                            if (!ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam && property.NoDownload)
+                                return "Save to camera only";
+                            return "Save to PC and camera";
+                        }
+
+                        return (property.NoDownload) ? "Save to camera only" : "Save to PC and camera";
+                    }
                 case "shutterspeed":
                     return device.ShutterSpeed.Value;
                 case "iso":
@@ -290,7 +304,7 @@ namespace CameraControl.Core.Scripting
                         foreach (PropertyInfo info in props)
                         {
                             if (info.PropertyType.Name.StartsWith("PropertyValue") &&
-                                (arg.Split('.')[1].ToLower().Replace(" ", "_") == info.Name.ToLower())
+                                (arg.Split('.')[1].ToLower().Replace("_", " ") == info.Name.ToLower())
                                 )
                             {
                                 dynamic valp = info.GetValue(device, null);
@@ -303,7 +317,7 @@ namespace CameraControl.Core.Scripting
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)
                         {
-                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower() == property.Name.ToLower()))
+                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower().Replace("_", " ") == property.Name.ToLower()))
                             {
                                 return property.Value;
                             }
@@ -322,6 +336,27 @@ namespace CameraControl.Core.Scripting
             args[1] = param.Trim();
             switch (arg)
             {
+                case "transfer":
+                    {
+                        CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+                        var val = args[1].Trim().ToLower().Replace("_", " ");
+                        switch (val)
+                        {
+                            case "save to pc only":
+                                if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+                                    ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
+                                break;
+                            case "save to camera only":
+                                property.NoDownload = true;
+                                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
+                                break;
+                            case "save to pc and camera":
+                                property.NoDownload = false;
+                                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
+                                break;
+                        }
+                    }
+                    break;
                 case "shutterspeed":
                     {
                         var val = args[1].Trim();
@@ -423,7 +458,7 @@ namespace CameraControl.Core.Scripting
                                     if (prop.PropertyType == typeof(bool))
                                     {
                                         val = val.ToLower().Trim();
-                                        if(val != "true" && val !="false" && val != "0" && val !="1")
+                                        if (val != "true" && val != "false" && val != "0" && val != "1")
                                             throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                         prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
                                     }
@@ -522,7 +557,7 @@ namespace CameraControl.Core.Scripting
                                 dynamic valp = info.GetValue(device, null);
                                 if (!valp.Values.Contains(args[1].Replace("_", " ")))
                                     throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                                valp.Value = args[1].Replace("_"," ");
+                                valp.Value = args[1].Replace("_", " ");
                             }
                         }
                         foreach (PropertyValue<long> property in device.AdvancedProperties)

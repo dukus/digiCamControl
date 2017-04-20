@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Capture.Workflow.Core.Classes
 {
     public class CustomPropertyCollection
     {
+        [XmlElement("Property")]
         public List<CustomProperty> Items { get; set; }
 
         public CustomProperty this[string name]
@@ -31,6 +33,14 @@ namespace Capture.Workflow.Core.Classes
         public CustomPropertyCollection()
         {
             Items = new List<CustomProperty>();
+        }
+
+        public void CopyValuesFrom(CustomPropertyCollection propertyCollection)
+        {
+            foreach (var property in propertyCollection.Items)
+            {
+                this[property.Name].Value = property.Value;
+            }
         }
     }
 }

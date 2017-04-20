@@ -62,18 +62,18 @@ namespace Capture.Workflow.Wpf.Controls
         {
             // @todo: hard values for x, y should be changed to accomodate editing large text on canvas
             // @todo: Editing text on canvas, textblock height needs to be fixed
-            _textBox.Arrange(new Rect(0, 0, _textBlock.DesiredSize.Width + 50, _textBlock.DesiredSize.Height * 1.5));
+            _textBox.Arrange(new Rect(0, -5, finalSize.Width, finalSize.Height+10));
             _textBox.Focus();
             return finalSize;
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            drawingContext.DrawRectangle(null, new Pen
-            {
-                Brush = Brushes.Gold,
-                Thickness = 2
-            }, new Rect(0, 0, _textBlock.DesiredSize.Width + 50, _textBlock.DesiredSize.Height * 1.5));
+            //drawingContext.DrawRectangle(null, new Pen
+            //{
+            //    Brush = Brushes.Gold,
+            //    Thickness = 2
+            //}, new Rect(0, 0, _textBlock.DesiredSize.Width + 50, _textBlock.DesiredSize.Height * 1.5));
         }
 
         public event RoutedEventHandler TextBoxLostFocus
