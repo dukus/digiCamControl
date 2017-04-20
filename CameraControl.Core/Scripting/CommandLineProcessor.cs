@@ -345,18 +345,18 @@ namespace CameraControl.Core.Scripting
                     case "transfer":
                         {
                             CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
-                            var val = param;//.Trim().Replace("_", " ");
+                            var val = param.Replace("_", " ");
                             switch (val)
                             {
-                                case "save_to_pc_only":
+                                case "Save to PC only":
                                     if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
                                         ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
                                     break;
-                                case "save_to_camera_only":
+                                case "Save to camera only":
                                     property.NoDownload = true;
                                     ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                                     break;
-                                case "save_to_pc_and_camera":
+                                case "Save to PC and camera":
                                     property.NoDownload = false;
                                     ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
                                     break;
@@ -463,7 +463,7 @@ namespace CameraControl.Core.Scripting
                                         }
                                         if (prop.PropertyType == typeof(bool))
                                         {
-                                            val = val.Trim();
+                                            val = val.ToLower().Trim();
                                             if (val != "true" && val != "false" && val != "0" && val != "1")
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
@@ -498,7 +498,7 @@ namespace CameraControl.Core.Scripting
                                         }
                                         if (prop.PropertyType == typeof(bool))
                                         {
-                                            val = val.Trim();
+                                            val = val.ToLower().Trim();
                                             if (val != "true" && val != "false" && val != "0" && val != "1")
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
@@ -533,7 +533,7 @@ namespace CameraControl.Core.Scripting
                                         }
                                         if (prop.PropertyType == typeof(bool))
                                         {
-                                            val = val.Trim();
+                                            val = val.ToLower().Trim();
                                             if (val != "true" && val != "false" && val != "0" && val != "1")
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
