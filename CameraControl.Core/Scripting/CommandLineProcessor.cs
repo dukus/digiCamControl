@@ -332,11 +332,12 @@ namespace CameraControl.Core.Scripting
         {
             var device = GetDevice();
             args = args.ToArray().Aggregate("", (current, s) => current + s + " ").Split('|');
-            
+
             string arg;
             string param;
             for (int k = 0; k < args.Length; k++)
             {
+                bool notFound = true;
                 arg = args[k].Split(' ')[0];
                 param = args[k].Skip(arg.Length).ToArray().Aggregate("", (current, s) => current + s).Trim();
                 arg = arg.Trim().ToLower();
@@ -438,13 +439,17 @@ namespace CameraControl.Core.Scripting
                         device.CompressionSetting.SetValue(param);
                         foreach (var session in ServiceProvider.Settings.PhotoSessions)
                         {
-                            if (session.Name.ToLower() == param)
+                            if (session.Name.ToLower() == param.ToLower())
                             {
                                 ServiceProvider.Settings.DefaultSession = session;
-                                return;
+                                notFound = false;
+                                break;// return;
                             }
                         }
-                        throw new Exception("Unknow session name");
+                        if (notFound)
+                            throw new Exception("Unknow session name");
+                        else
+                            break;
                     default:
                         if (arg.StartsWith("session."))
                         {
@@ -460,28 +465,34 @@ namespace CameraControl.Core.Scripting
                                         if (prop.PropertyType == typeof(string))
                                         {
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, val, null);
+                                            notFound = false;
                                         }
-                                        if (prop.PropertyType == typeof(bool))
+                                        else if (prop.PropertyType == typeof(bool))
                                         {
                                             val = val.ToLower().Trim();
                                             if (val != "true" && val != "false" && val != "0" && val != "1")
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
+                                            notFound = false;
                                         }
-                                        if (prop.PropertyType == typeof(int))
+                                        else if (prop.PropertyType == typeof(int))
                                         {
                                             int i = 0;
                                             if (int.TryParse(val, out i))
+                                            {
                                                 prop.SetValue(ServiceProvider.Settings.DefaultSession, i, null);
+                                                notFound = false;
+                                            }
                                             else
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                         }
+                                        break;
                                     }
                                 }
                             }
-                            return;
+                            //return;
                         }
-                        if (arg.StartsWith("property."))
+                        else if (arg.StartsWith("property."))
                         {
                             var val = param;
                             IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
@@ -494,29 +505,35 @@ namespace CameraControl.Core.Scripting
                                     {
                                         if (prop.PropertyType == typeof(string))
                                         {
+                                            notFound = false;
                                             prop.SetValue(device.LoadProperties(), val, null);
                                         }
-                                        if (prop.PropertyType == typeof(bool))
+                                        else if (prop.PropertyType == typeof(bool))
                                         {
                                             val = val.ToLower().Trim();
                                             if (val != "true" && val != "false" && val != "0" && val != "1")
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                            notFound = false;
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
                                         }
-                                        if (prop.PropertyType == typeof(int))
+                                        else if (prop.PropertyType == typeof(int))
                                         {
                                             int i = 0;
                                             if (int.TryParse(val, out i))
+                                            {
+                                                notFound = false;
                                                 prop.SetValue(device.LoadProperties(), i, null);
+                                            }
                                             else
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                         }
+                                        break;
                                     }
                                 }
                             }
-                            return;
+                            //return;
                         }
-                        if (arg.StartsWith("liveview."))
+                        else if (arg.StartsWith("liveview."))
                         {
                             var val = param;
                             IList<PropertyInfo> props = new List<PropertyInfo>(typeof(LiveviewSettings).GetProperties());
@@ -529,29 +546,35 @@ namespace CameraControl.Core.Scripting
                                     {
                                         if (prop.PropertyType == typeof(string))
                                         {
+                                            notFound = false;
                                             prop.SetValue(device.LoadProperties().LiveviewSettings, val, null);
                                         }
-                                        if (prop.PropertyType == typeof(bool))
+                                        else if (prop.PropertyType == typeof(bool))
                                         {
                                             val = val.ToLower().Trim();
                                             if (val != "true" && val != "false" && val != "0" && val != "1")
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                            notFound = false;
                                             prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
                                         }
-                                        if (prop.PropertyType == typeof(int))
+                                        else if (prop.PropertyType == typeof(int))
                                         {
                                             int i = 0;
                                             if (int.TryParse(val, out i))
+                                            {
+                                                notFound = false;
                                                 prop.SetValue(device.LoadProperties().LiveviewSettings, i, null);
+                                            }
                                             else
                                                 throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
                                         }
+                                        break;
                                     }
                                 }
                             }
-                            return;
+                            //return;
                         }
-                        if (arg.StartsWith("camera."))
+                        else if (arg.StartsWith("camera."))
                         {
                             IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
                             foreach (PropertyInfo info in props)
@@ -564,20 +587,27 @@ namespace CameraControl.Core.Scripting
                                     if (!valp.Values.Contains(param.Replace("_", " ")))
                                         throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
                                     valp.Value = param.Replace("_", " ");
+                                    notFound = false;
+                                    break;
                                 }
                             }
-                            foreach (PropertyValue<long> property in device.AdvancedProperties)
-                            {
-                                if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].Replace("_", " ") == property.Name.ToLower()))
+                            if (notFound)
+                                foreach (PropertyValue<long> property in device.AdvancedProperties)
                                 {
-                                    if (!property.Values.Contains(param.Replace("_", " ")))
-                                        throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
-                                    property.Value = param.Replace("_", " ");
+                                    if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].Replace("_", " ") == property.Name.ToLower()))
+                                    {
+                                        if (!property.Values.Contains(param.Replace("_", " ")))
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                                        property.Value = param.Replace("_", " ");
+                                        notFound = false;
+                                        break;
+                                    }
                                 }
-                            }
-                            return;
+                            //return;
                         }
-                        throw new Exception("Unknow parameter");
+                        if (notFound)
+                            throw new Exception("Unknow parameter");
+                        break;
                 }
             }
         }
