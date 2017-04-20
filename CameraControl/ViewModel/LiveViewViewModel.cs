@@ -1641,6 +1641,7 @@ namespace CameraControl.ViewModel
         public void BrowseOverlay()
         {
             OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Supported Images|*.jpg;*.png|Jpeg file(*.jpg)|*.jpg|Png file(*.png)|*.png|All files|*.*";
             dlg.FileName = SelectedOverlay;
             if (dlg.ShowDialog() == true)
             {
