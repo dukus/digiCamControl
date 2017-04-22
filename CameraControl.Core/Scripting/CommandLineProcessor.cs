@@ -331,247 +331,284 @@ namespace CameraControl.Core.Scripting
         private void Set(string[] args)
         {
             var device = GetDevice();
-            var arg = args[0].ToLower().Trim();
-            var param = args.Skip(1).ToArray().Aggregate("", (current, s) => current + s + " ");
-            args[1] = param.Trim();
-            switch (arg)
-            {
-                case "transfer":
-                    {
-                        CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
-                        var val = args[1].Trim().ToLower().Replace("_", " ");
-                        switch (val)
-                        {
-                            case "save to pc only":
-                                if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
-                                    ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
-                                break;
-                            case "save to camera only":
-                                property.NoDownload = true;
-                                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
-                                break;
-                            case "save to pc and camera":
-                                property.NoDownload = false;
-                                ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
-                                break;
-                        }
-                    }
-                    break;
-                case "shutterspeed":
-                    {
-                        var val = args[1].Trim();
-                        if (val.Equals("bulb"))
-                        {
-                            val = "Bulb";
-                        }
-                        // if the value not found check 
-                        if (!device.ShutterSpeed.Values.Contains(val))
-                            if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
-                            {
-                                val += "s";
-                            }
+            args = args.ToArray().Aggregate("", (current, s) => current + s + " ").Split('|');
 
-                        if (!device.ShutterSpeed.Values.Contains(val))
-                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                        device.ShutterSpeed.SetValue(val);
-                    }
-                    break;
-                case "iso":
-                    if (!device.IsoNumber.Values.Contains(args[1]))
-                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                    device.IsoNumber.SetValue(args[1]);
-                    break;
-                case "exposurecompensation":
-                    if (!device.ExposureCompensation.Values.Contains(args[1]))
-                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                    device.ExposureCompensation.SetValue(args[1]);
-                    break;
-                case "aperture":
-                    {
-                        var val = args[1].Trim();
-                        if (!val.Contains("."))
-                            val = val + ".0";
-                        if (!device.FNumber.Values.Contains(val))
-                            throw new Exception(string.Format("Wrong value {0} for property aperture", val));
-                        device.FNumber.SetValue(args[1]);
-                    }
-                    break;
-                case "focusmode":
-                    if (!device.FocusMode.Values.Contains(args[1]))
-                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                    device.FocusMode.SetValue(args[1]);
-                    break;
-                case "whitebalance":
-                    if (!device.WhiteBalance.Values.Contains(args[1]))
-                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                    device.WhiteBalance.SetValue(args[1]);
-                    break;
-                case "mode":
-                    if (!device.Mode.Values.Contains(args[1]))
-                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                    device.Mode.SetValue(args[1]);
-                    break;
-                case "compressionsetting":
-                    if (!device.CompressionSetting.Values.Contains(args[1]))
-                        throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                    device.CompressionSetting.SetValue(args[1]);
-                    break;
-                case "camera":
-                    {
-                        foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+            string arg;
+            string param;
+            for (int k = 0; k < args.Length; k++)
+            {
+                bool notFound = true;
+                arg = args[k].Split(' ')[0];
+                param = args[k].Skip(arg.Length).ToArray().Aggregate("", (current, s) => current + s).Trim();
+                arg = arg.Trim().ToLower();
+                switch (arg)
+                {
+                    case "transfer":
                         {
-                            if ((PhotoUtils.IsNumeric(args[1]) && cameraDevice.SerialNumber == args[1]) || cameraDevice.DeviceName.Replace(" ", "_") == args[1].Replace(" ", "_"))
+                            CameraProperty property = ServiceProvider.DeviceManager.SelectedCameraDevice.LoadProperties();
+                            var val = param.Replace("_", " ");
+                            switch (val)
                             {
-                                ServiceProvider.DeviceManager.SelectedCameraDevice = cameraDevice;
-                                break;
+                                case "Save to PC only":
+                                    if (ServiceProvider.DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
+                                        ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
+                                    break;
+                                case "Save to camera only":
+                                    property.NoDownload = true;
+                                    ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
+                                    break;
+                                case "Save to PC and camera":
+                                    property.NoDownload = false;
+                                    ServiceProvider.DeviceManager.SelectedCameraDevice.CaptureInSdRam = false;
+                                    break;
                             }
                         }
-                    }
-                    break;
-                case "session":
-                    device.CompressionSetting.SetValue(args[1]);
-                    foreach (var session in ServiceProvider.Settings.PhotoSessions)
-                    {
-                        if (session.Name.ToLower() == args[1].ToLower().Trim())
+                        break;
+                    case "shutterspeed":
                         {
-                            ServiceProvider.Settings.DefaultSession = session;
-                            return;
-                        }
-                    }
-                    throw new Exception("Unknow session name");
-                default:
-                    if (arg.StartsWith("session."))
-                    {
-                        var val = args[1].Trim();
-                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
-                        foreach (PropertyInfo prop in props)
-                        {
-                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
-                                prop.PropertyType == typeof(bool))
+                            var val = param;
+                            if (val.Equals("bulb"))
                             {
-                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                val = "Bulb";
+                            }
+                            // if the value not found check 
+                            if (!device.ShutterSpeed.Values.Contains(val))
+                                if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
                                 {
-                                    if (prop.PropertyType == typeof(string))
-                                    {
-                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, val, null);
-                                    }
-                                    if (prop.PropertyType == typeof(bool))
-                                    {
-                                        val = val.ToLower().Trim();
-                                        if (val != "true" && val != "false" && val != "0" && val != "1")
-                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
-                                    }
-                                    if (prop.PropertyType == typeof(int))
-                                    {
-                                        int i = 0;
-                                        if (int.TryParse(val, out i))
-                                            prop.SetValue(ServiceProvider.Settings.DefaultSession, i, null);
-                                        else
-                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                    }
+                                    val += "s";
+                                }
+
+                            if (!device.ShutterSpeed.Values.Contains(val))
+                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                            device.ShutterSpeed.SetValue(val);
+                        }
+                        break;
+                    case "iso":
+                        if (!device.IsoNumber.Values.Contains(param))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                        device.IsoNumber.SetValue(param);
+                        break;
+                    case "exposurecompensation":
+                        if (!device.ExposureCompensation.Values.Contains(param))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                        device.ExposureCompensation.SetValue(param);
+                        break;
+                    case "aperture":
+                        {
+                            var val = param;
+                            if (!val.Contains("."))
+                                val = val + ".0";
+                            if (!device.FNumber.Values.Contains(val))
+                                throw new Exception(string.Format("Wrong value {0} for property aperture", val));
+                            device.FNumber.SetValue(param);
+                        }
+                        break;
+                    case "focusmode":
+                        if (!device.FocusMode.Values.Contains(param))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                        device.FocusMode.SetValue(param);
+                        break;
+                    case "whitebalance":
+                        if (!device.WhiteBalance.Values.Contains(param))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                        device.WhiteBalance.SetValue(param);
+                        break;
+                    case "mode":
+                        if (!device.Mode.Values.Contains(param))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                        device.Mode.SetValue(param);
+                        break;
+                    case "compressionsetting":
+                        if (!device.CompressionSetting.Values.Contains(param))
+                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                        device.CompressionSetting.SetValue(param);
+                        break;
+                    case "camera":
+                        {
+                            foreach (var cameraDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+                            {
+                                if ((PhotoUtils.IsNumeric(param) && cameraDevice.SerialNumber == param) || cameraDevice.DeviceName.Replace(" ", "_") == param.Replace(" ", "_"))
+                                {
+                                    ServiceProvider.DeviceManager.SelectedCameraDevice = cameraDevice;
+                                    break;
                                 }
                             }
                         }
-                        return;
-                    }
-                    if (arg.StartsWith("property."))
-                    {
-                        var val = args[1].Trim();
-                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
-                        foreach (PropertyInfo prop in props)
+                        break;
+                    case "session":
+                        device.CompressionSetting.SetValue(param);
+                        foreach (var session in ServiceProvider.Settings.PhotoSessions)
                         {
-                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
-                                prop.PropertyType == typeof(bool))
+                            if (session.Name.ToLower() == param.ToLower())
                             {
-                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                ServiceProvider.Settings.DefaultSession = session;
+                                notFound = false;
+                                break;// return;
+                            }
+                        }
+                        if (notFound)
+                            throw new Exception("Unknow session name");
+                        else
+                            break;
+                    default:
+                        if (arg.StartsWith("session."))
+                        {
+                            var val = param;
+                            IList<PropertyInfo> props = new List<PropertyInfo>(typeof(PhotoSession).GetProperties());
+                            foreach (PropertyInfo prop in props)
+                            {
+                                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                    prop.PropertyType == typeof(bool))
                                 {
-                                    if (prop.PropertyType == typeof(string))
+                                    if (arg.Split('.')[1] == prop.Name.ToLower())
                                     {
-                                        prop.SetValue(device.LoadProperties(), val, null);
-                                    }
-                                    if (prop.PropertyType == typeof(bool))
-                                    {
-                                        val = val.ToLower().Trim();
-                                        if (val != "true" && val != "false" && val != "0" && val != "1")
-                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
-                                    }
-                                    if (prop.PropertyType == typeof(int))
-                                    {
-                                        int i = 0;
-                                        if (int.TryParse(val, out i))
-                                            prop.SetValue(device.LoadProperties(), i, null);
-                                        else
-                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                        if (prop.PropertyType == typeof(string))
+                                        {
+                                            prop.SetValue(ServiceProvider.Settings.DefaultSession, val, null);
+                                            notFound = false;
+                                        }
+                                        else if (prop.PropertyType == typeof(bool))
+                                        {
+                                            val = val.ToLower().Trim();
+                                            if (val != "true" && val != "false" && val != "0" && val != "1")
+                                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                            prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
+                                            notFound = false;
+                                        }
+                                        else if (prop.PropertyType == typeof(int))
+                                        {
+                                            int i = 0;
+                                            if (int.TryParse(val, out i))
+                                            {
+                                                prop.SetValue(ServiceProvider.Settings.DefaultSession, i, null);
+                                                notFound = false;
+                                            }
+                                            else
+                                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                        }
+                                        break;
                                     }
                                 }
                             }
+                            //return;
                         }
-                        return;
-                    }
-                    if (arg.StartsWith("liveview."))
-                    {
-                        var val = args[1].Trim();
-                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(LiveviewSettings).GetProperties());
-                        foreach (PropertyInfo prop in props)
+                        else if (arg.StartsWith("property."))
                         {
-                            if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
-                                prop.PropertyType == typeof(bool))
+                            var val = param;
+                            IList<PropertyInfo> props = new List<PropertyInfo>(typeof(CameraProperty).GetProperties());
+                            foreach (PropertyInfo prop in props)
                             {
-                                if (arg.Split('.')[1].ToLower() == prop.Name.ToLower())
+                                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                    prop.PropertyType == typeof(bool))
                                 {
-                                    if (prop.PropertyType == typeof(string))
+                                    if (arg.Split('.')[1] == prop.Name.ToLower())
                                     {
-                                        prop.SetValue(device.LoadProperties().LiveviewSettings, val, null);
-                                    }
-                                    if (prop.PropertyType == typeof(bool))
-                                    {
-                                        val = val.ToLower().Trim();
-                                        if (val != "true" && val != "false" && val != "0" && val != "1")
-                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
-                                        prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
-                                    }
-                                    if (prop.PropertyType == typeof(int))
-                                    {
-                                        int i = 0;
-                                        if (int.TryParse(val, out i))
-                                            prop.SetValue(device.LoadProperties().LiveviewSettings, i, null);
-                                        else
-                                            throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                        if (prop.PropertyType == typeof(string))
+                                        {
+                                            notFound = false;
+                                            prop.SetValue(device.LoadProperties(), val, null);
+                                        }
+                                        else if (prop.PropertyType == typeof(bool))
+                                        {
+                                            val = val.ToLower().Trim();
+                                            if (val != "true" && val != "false" && val != "0" && val != "1")
+                                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                            notFound = false;
+                                            prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
+                                        }
+                                        else if (prop.PropertyType == typeof(int))
+                                        {
+                                            int i = 0;
+                                            if (int.TryParse(val, out i))
+                                            {
+                                                notFound = false;
+                                                prop.SetValue(device.LoadProperties(), i, null);
+                                            }
+                                            else
+                                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                        }
+                                        break;
                                     }
                                 }
                             }
+                            //return;
                         }
-                        return;
-                    }
-                    if (arg.StartsWith("camera."))
-                    {
-                        IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
-                        foreach (PropertyInfo info in props)
+                        else if (arg.StartsWith("liveview."))
                         {
-                            if (info.PropertyType.Name.StartsWith("PropertyValue") &&
-                                (arg.Split('.')[1].ToLower().Replace("_", " ") == info.Name.ToLower())
-                                )
+                            var val = param;
+                            IList<PropertyInfo> props = new List<PropertyInfo>(typeof(LiveviewSettings).GetProperties());
+                            foreach (PropertyInfo prop in props)
                             {
-                                dynamic valp = info.GetValue(device, null);
-                                if (!valp.Values.Contains(args[1].Replace("_", " ")))
-                                    throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                                valp.Value = args[1].Replace("_", " ");
+                                if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(int) ||
+                                    prop.PropertyType == typeof(bool))
+                                {
+                                    if (arg.Split('.')[1] == prop.Name.ToLower())
+                                    {
+                                        if (prop.PropertyType == typeof(string))
+                                        {
+                                            notFound = false;
+                                            prop.SetValue(device.LoadProperties().LiveviewSettings, val, null);
+                                        }
+                                        else if (prop.PropertyType == typeof(bool))
+                                        {
+                                            val = val.ToLower().Trim();
+                                            if (val != "true" && val != "false" && val != "0" && val != "1")
+                                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                            notFound = false;
+                                            prop.SetValue(ServiceProvider.Settings.DefaultSession, (val == "true" || val == "1"), null);
+                                        }
+                                        else if (prop.PropertyType == typeof(int))
+                                        {
+                                            int i = 0;
+                                            if (int.TryParse(val, out i))
+                                            {
+                                                notFound = false;
+                                                prop.SetValue(device.LoadProperties().LiveviewSettings, i, null);
+                                            }
+                                            else
+                                                throw new Exception(string.Format("Wrong value {0} for property {1}", val, arg));
+                                        }
+                                        break;
+                                    }
+                                }
                             }
+                            //return;
                         }
-                        foreach (PropertyValue<long> property in device.AdvancedProperties)
+                        else if (arg.StartsWith("camera."))
                         {
-                            if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].ToLower().Replace("_", " ") == property.Name.ToLower()))
+                            IList<PropertyInfo> props = new List<PropertyInfo>(typeof(ICameraDevice).GetProperties());
+                            foreach (PropertyInfo info in props)
                             {
-                                if (!property.Values.Contains(args[1].Replace("_", " ")))
-                                    throw new Exception(string.Format("Wrong value {0} for property {1}", args[1], arg));
-                                property.Value = args[1].Replace("_", " ");
+                                if (info.PropertyType.Name.StartsWith("PropertyValue") &&
+                                    (arg.Split('.')[1].Replace("_", " ") == info.Name.ToLower())
+                                    )
+                                {
+                                    dynamic valp = info.GetValue(device, null);
+                                    if (!valp.Values.Contains(param.Replace("_", " ")))
+                                        throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                                    valp.Value = param.Replace("_", " ");
+                                    notFound = false;
+                                    break;
+                                }
                             }
+                            if (notFound)
+                                foreach (PropertyValue<long> property in device.AdvancedProperties)
+                                {
+                                    if (!string.IsNullOrEmpty(property.Name) && property.Value != null && (arg.Split('.')[1].Replace("_", " ") == property.Name.ToLower()))
+                                    {
+                                        if (!property.Values.Contains(param.Replace("_", " ")))
+                                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                                        property.Value = param.Replace("_", " ");
+                                        notFound = false;
+                                        break;
+                                    }
+                                }
+                            //return;
                         }
-                        return;
-                    }
-                    throw new Exception("Unknow parameter");
+                        if (notFound)
+                            throw new Exception("Unknow parameter");
+                        break;
+                }
             }
         }
 
