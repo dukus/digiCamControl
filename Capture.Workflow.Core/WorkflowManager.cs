@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Xml.Serialization;
 using CameraControl.Devices;
+using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
@@ -13,6 +18,13 @@ namespace Capture.Workflow.Core
 {
     public class WorkflowManager
     {
+        #region private declarations
+
+        private DispatcherTimer _liveViewTimer = new DispatcherTimer();
+
+        #endregion
+
+
         public delegate void MessageEventHandler(object sender, MessageEventArgs e);
         public event MessageEventHandler Message;
 
@@ -46,6 +58,39 @@ namespace Capture.Workflow.Core
         {
             Plugins = new List<PluginInfo>();
             Context = new Context();
+
+            // live view stuff for nikon
+            _liveViewTimer.Interval = TimeSpan.FromMilliseconds(10);
+            _liveViewTimer.Tick += _liveViewTimer_Tick;
+        }
+
+        private void _liveViewTimer_Tick(object sender, EventArgs e)
+        {
+            _liveViewTimer.Stop();
+            Task.Factory.StartNew(GetLiveView);
+        }
+
+        private void GetLiveView()
+        {
+            try
+            {
+                var liveViewData = Context.CameraDevice.GetLiveViewImage();
+                if (liveViewData != null && liveViewData.ImageData != null)
+                {
+                    using (
+                        MemoryStream stream = new MemoryStream(liveViewData.ImageData, liveViewData.ImageDataPosition,
+                            liveViewData.ImageData.Length - liveViewData.ImageDataPosition))
+                    {
+                       
+                        OnMessage(new MessageEventArgs(Messages.LiveViewChanged, new object[] {stream, liveViewData}));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            _liveViewTimer.Start();
         }
 
         public List<PluginInfo> GetPlugins(PluginType type)
@@ -209,6 +254,15 @@ namespace Capture.Workflow.Core
 
         public virtual void OnMessage(MessageEventArgs e)
         {
+            switch (e.Name)
+            {
+                case Messages.StartLiveView:
+                    _liveViewTimer.Start();
+                    break;
+                case Messages.StopLiveView:
+                    _liveViewTimer.Stop();
+                    break;
+            }
             Message?.Invoke(this, e);
         }
 

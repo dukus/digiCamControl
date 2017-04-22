@@ -12,6 +12,7 @@
         <viewModel:LiveviewViewModel/>
     </UserControl.DataContext>
     <Grid>
+        <Image Source="{Binding Bitmap}"/>
         <ItemsControl ItemsSource="{Binding LeftElements }" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
