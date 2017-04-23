@@ -6,5 +6,6 @@
         public const string StartLiveView = "StartLiveView";
         public const string StopLiveView = "StopLiveView";
         public const string LiveViewChanged = "LiveViewChanged";
+        public const string PhotoDownloaded = "PhotoDownloaded";
     }
 }

@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using CameraControl.Devices;
@@ -13,6 +11,7 @@ using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+
 
 namespace Capture.Workflow.Core
 {
@@ -24,9 +23,12 @@ namespace Capture.Workflow.Core
 
         #endregion
 
+        #region events
 
         public delegate void MessageEventHandler(object sender, MessageEventArgs e);
         public event MessageEventHandler Message;
+
+        #endregion
 
         private static WorkflowManager _instance;
 
@@ -45,12 +47,23 @@ namespace Capture.Workflow.Core
 
         public static void Execute(CommandCollection collection)
         {
-            foreach (var command in collection.Items)
+            try
             {
-                command.Instance.Execute(command);
+                foreach (var command in collection.Items)
+                {
+                    if (!command.Instance.Execute(command))
+                        return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Command execution error", ex);                
             }
         }
 
+        public FileItem FileItem { get; set; }
+
+        public AsyncObservableCollection<FileItem> FileItems { get; set; }
 
         public List<PluginInfo> Plugins { get; set; }
 
@@ -60,8 +73,35 @@ namespace Capture.Workflow.Core
             Context = new Context();
 
             // live view stuff for nikon
-            _liveViewTimer.Interval = TimeSpan.FromMilliseconds(10);
+            _liveViewTimer.Interval = TimeSpan.FromMilliseconds(40);
             _liveViewTimer.Tick += _liveViewTimer_Tick;
+            ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
+            FileItems = new AsyncObservableCollection<FileItem>();
+        }
+
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        {
+            try
+            {
+                string tempFile = Path.Combine(Settings.Instance.TempFolder, Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
+
+                Utils.CreateFolder(tempFile);
+
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+
+                eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+                FileItem item = new FileItem() { FileName = tempFile, Thumb = Utils.LoadImage(tempFile, 200, 0) };
+                FileItems.Add(item);
+                FileItem = item;
+                item.ThumbFile = Path.GetTempFileName();
+                Utils.Save2Jpg(Utils.LoadImage(tempFile, 800, 0), item.ThumbFile);
+                OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem));
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error transfer file", ex);
+            }
         }
 
         private void _liveViewTimer_Tick(object sender, EventArgs e)
@@ -212,6 +252,28 @@ namespace Capture.Workflow.Core
                                     wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
                                     commandCollection.Items.Add(wCommand);
                                 }
+                            }
+                        }
+                    }
+                    foreach (var commandCollection in view.Events)
+                    {
+                        CommandCollection loadedcommand = null;
+                        foreach (var collection in _view.Events)
+                        {
+                            if (collection.Name == commandCollection.Name)
+                                loadedcommand = collection;
+                        }
+                        if (loadedcommand != null)
+                        {
+                            foreach (var flowCommand in loadedcommand.Items)
+                            {
+                                IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                                var wCommand = commandPlugin.CreateCommand();
+                                wCommand.Instance = commandPlugin;
+                                wCommand.PluginInfo = flowCommand.PluginInfo;
+                                wCommand.Name = flowCommand.Name;
+                                wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
+                                commandCollection.Items.Add(wCommand);
                             }
                         }
                     }

@@ -12,8 +12,13 @@
         <viewModel:LiveviewViewModel/>
     </UserControl.DataContext>
     <Grid>
-        <Image Source="{Binding Bitmap}"/>
-        <ItemsControl ItemsSource="{Binding LeftElements }" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image Source="{Binding Bitmap}" />
+        <ItemsControl Grid.Row="0" ItemsSource="{Binding LeftElements }" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ContentControl Content="{Binding}" />
@@ -25,20 +30,36 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        
-        <ItemsControl ItemsSource="{Binding BottomLeftElements }" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+
+        <ItemsControl ItemsSource="{Binding BottomLeftElements }" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-        </ItemsControl>    
-        <ItemsControl ItemsSource="{Binding BottomRightElements }" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding BottomRightElements }" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-        </ItemsControl>    
+        </ItemsControl>
+        <ListBox Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Grid Height="135" Cursor="Hand">
+                            <Image Source="{Binding Thumb}"  Stretch="Uniform" Margin="3" Height="100"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </UserControl>

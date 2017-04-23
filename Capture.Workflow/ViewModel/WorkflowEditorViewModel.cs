@@ -20,6 +20,8 @@ namespace Capture.Workflow.ViewModel
         private CommandCollection _selectedCommandCollection;
         private WorkFlowCommand _selectedCommand;
         private bool _haveEvents;
+        private CommandCollection _selectedViewCommandCollection;
+        private WorkFlowCommand _selectedViewCommand;
 
         public List<PluginInfo> ViewsPlugins { get; set; }
         public List<PluginInfo> CommandPlugins { get; set; }
@@ -81,6 +83,10 @@ namespace Capture.Workflow.ViewModel
                 {
                     HaveEvents = true;
                     SelectedCommandCollection = _selectedElement.Events[0];
+                    if (SelectedCommandCollection.Items.Count > 0)
+                    {
+                        SelectedCommand = SelectedCommandCollection.Items[0];
+                    }
                 }
                 else
                 {
@@ -100,6 +106,17 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public CommandCollection SelectedViewCommandCollection
+        {
+            get { return _selectedViewCommandCollection; }
+            set
+            {
+                _selectedViewCommandCollection = value;
+                RaisePropertyChanged(()=>SelectedViewCommandCollection);
+            }
+        }
+
+
         public WorkFlowCommand SelectedCommand
         {
             get { return _selectedCommand; }
@@ -110,6 +127,15 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public WorkFlowCommand SelectedViewCommand
+        {
+            get { return _selectedViewCommand; }
+            set
+            {
+                _selectedViewCommand = value;
+                RaisePropertyChanged(()=>SelectedViewCommand);
+            }
+        }
 
         public CustomPropertyCollection PropertyCollection { get; set; }
 
@@ -131,6 +157,10 @@ namespace Capture.Workflow.ViewModel
 
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand LoadCommand { get; set; }
+
+        public RelayCommand<PluginInfo> NewViewCommandCommand { get; set; }
+        public RelayCommand DeleteViewCommandCommand { get; set; }
+
 
         public WorkflowEditorViewModel()
         {
@@ -154,7 +184,34 @@ namespace Capture.Workflow.ViewModel
             NewCommandCommand = new RelayCommand<PluginInfo>(NewCommand);
             DeleteCommandCommand = new RelayCommand(DeleteCommand);
 
+            NewViewCommandCommand = new RelayCommand<PluginInfo>(AddViewCommand);
+            DeleteViewCommandCommand=new RelayCommand(RemoveViewCommand);
+
             RunCommand = new RelayCommand(Run);
+        }
+
+        private void RemoveViewCommand()
+        {
+            if (SelectedViewCommand != null)
+                SelectedViewCommandCollection?.Items.Remove(SelectedViewCommand);
+            if (SelectedViewCommandCollection?.Items.Count > 0)
+            {
+                SelectedViewCommand = SelectedViewCommandCollection.Items[0];
+            }
+        }
+
+        private void AddViewCommand(PluginInfo pluginInfo)
+        {
+            if (SelectedViewCommandCollection != null)
+            {
+                IWorkflowCommand commandPlugin = WorkflowManager.Instance.GetCommandPlugin(pluginInfo.Class);
+                var wCommand = commandPlugin.CreateCommand();
+                wCommand.Instance = commandPlugin;
+                wCommand.PluginInfo = pluginInfo;
+                wCommand.Name = pluginInfo.Name;
+                SelectedViewCommandCollection.Items.Add(wCommand);
+                SelectedViewCommand = wCommand;
+            }
         }
 
         private void Run()
@@ -167,7 +224,13 @@ namespace Capture.Workflow.ViewModel
         {
             if (SelectedCommand != null)
                 SelectedCommandCollection?.Items.Remove(SelectedCommand);
+            if (SelectedCommandCollection?.Items.Count > 0)
+            {
+                SelectedCommand = SelectedCommandCollection.Items[0];
+            }
         }
+
+
 
         private void NewCommand(PluginInfo pluginInfo)
         {
@@ -179,6 +242,7 @@ namespace Capture.Workflow.ViewModel
                 wCommand.PluginInfo = pluginInfo;
                 wCommand.Name = pluginInfo.Name;
                 SelectedCommandCollection.Items.Add(wCommand);
+                SelectedCommand = wCommand;
             }
         }
 

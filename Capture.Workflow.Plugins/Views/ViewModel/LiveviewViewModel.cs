@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using CameraControl.Devices.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 
@@ -14,6 +15,11 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private ObservableCollection<FrameworkElement> _leftElements;
         private ObservableCollection<FrameworkElement> _bottomLeftElements;
         private ObservableCollection<FrameworkElement> _bottomRightElements;
+        private AsyncObservableCollection<FileItem> _fileItems;
+        private FileItem _fileItem;
+        private FileItem _fileItem1;
+
+        public WorkFlowView View { get; set; }
 
         public ObservableCollection<FrameworkElement> LeftElements
         {
@@ -55,6 +61,19 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             }
         }
 
+        public AsyncObservableCollection<FileItem> FileItems => WorkflowManager.Instance.FileItems;
+
+        public FileItem FileItem
+        {
+            get { return _fileItem1; }
+            set
+            {
+                _fileItem1 = value;
+                RaisePropertyChanged(() => FileItem);
+            }
+        }
+
+
         public LiveviewViewModel()
         {
             LeftElements = new ObservableCollection<FrameworkElement>();
@@ -68,20 +87,33 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             if (e.Name == Messages.LiveViewChanged)
             {
                 var param = e.Param as object[];
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = (MemoryStream)param[0];
-                bi.EndInit();
-                bi.Freeze();
-                var bitmap = BitmapFactory.ConvertToPbgra32Format(bi);
-                bitmap.Freeze();
-                Bitmap = bitmap;
+                if (param != null)
+                {
+                    var stream = (MemoryStream) param[0];
+                    stream.Seek(0, SeekOrigin.Begin);
+                    BitmapImage bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.StreamSource = stream;
+                    bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.EndInit();
+                    bi.Freeze();
+                    Bitmap = bi;
+                }
+            }
+            if (e.Name == Messages.PhotoDownloaded)
+            {
+                RaisePropertyChanged(() => FileItems);
+                FileItem item = e.Param as FileItem;
+                if (item != null)
+                    FileItem = item;
             }
         }
 
+
         public void Dispose()
         {
+            WorkflowManager.Execute(View.GetEventCommands("UnLoad"));
             WorkflowManager.Instance.Message -= Instance_Message;
         }
     }

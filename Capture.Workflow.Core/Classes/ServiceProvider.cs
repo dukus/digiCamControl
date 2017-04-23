@@ -3,13 +3,12 @@ using System.IO;
 using System.Reflection;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
-using Capture.Workflow.Core.Classes;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
 using log4net.Layout;
 
-namespace Capture.Workflow.Classes
+namespace Capture.Workflow.Core.Classes
 {
     public class ServiceProvider
     {

@@ -9,6 +9,7 @@ using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Plugins.Views.View;
 using Capture.Workflow.Plugins.Views.ViewModel;
+using Capture.Workflow.Core;
 
 namespace Capture.Workflow.Plugins.Views
 {
@@ -26,6 +27,8 @@ namespace Capture.Workflow.Plugins.Views
                 Name = "ViewTitle",
                 PropertyType = CustomPropertyType.String
             });
+            view.Events.Add(new CommandCollection("Load"));
+            view.Events.Add(new CommandCollection("UnLoad"));
             return view;
         }
 
@@ -33,6 +36,7 @@ namespace Capture.Workflow.Plugins.Views
         {
             return new List<string> { "Left", "BottomLeft", "BottomRight" };
         }
+
 
         public override UserControl GetPreview(WorkFlowView view)
         {
@@ -53,8 +57,10 @@ namespace Capture.Workflow.Plugins.Views
                         break;
                 }
             }
+            model.View = view;
             var res = new LiveViewUI();
             res.DataContext = model;
+            WorkflowManager.Execute(view.GetEventCommands("Load"));
             return res;
         }
     }

@@ -21,11 +21,23 @@ namespace Capture.Workflow.Core.Classes
         public WorkFlow Parent { get; set; }
 
         public AsyncObservableCollection<WorkFlowViewElement> Elements { get; set; }
+        public List<CommandCollection> Events { get; set; }
 
         public WorkFlowView()
         {
             Properties = new CustomPropertyCollection();
             Elements = new AsyncObservableCollection<WorkFlowViewElement>();
+            Events = new List<CommandCollection>();
+        }
+
+        public CommandCollection GetEventCommands(string name)
+        {
+            foreach (var collection in Events)
+            {
+                if (collection.Name == name)
+                    return collection;
+            }
+            return null;
         }
     }
 }

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Capture.Workflow.Core.Classes
 {
     public class FileItem
     {
+        public string ThumbFile { get; set; }
+        public string FileName { get; set; }
+        public string TempFile { get; set; }
+        public BitmapSource Thumb { get; set; }
     }
 }

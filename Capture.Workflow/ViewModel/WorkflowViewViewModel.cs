@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using GalaSoft.MvvmLight;
@@ -56,6 +55,15 @@ namespace Capture.Workflow.ViewModel
                     WorkFlowView view = Workflow.GetView((string) e.Param);
                     if (view != null)
                     {
+                        if (Contents.DataContext != null)
+                        {
+                            // dispose old view if was loaded
+                            var obj = Contents.DataContext as IDisposable;
+                            if (obj != null)
+                            {
+                                obj.Dispose();
+                            }
+                        }
                         Contents = view.Instance.GetPreview(view);
                     }
                     break;
