@@ -11,6 +11,7 @@ using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using MaterialDesignThemes.Wpf;
 
 namespace Capture.Workflow.Plugins.ViewElements
 {
@@ -35,20 +36,19 @@ namespace Capture.Workflow.Plugins.ViewElements
                 ValueList = view.Instance.GetPositions(),
                 Value = view.Instance.GetPositions()[0]
             });
-            //element.Properties.Items.Add(new CustomProperty()
-            //{
-            //    Name = "HorizontalAlignment",
-            //    PropertyType = CustomPropertyType.ValueList,
-            //    ValueList = {"Left","Center","Right"},
-            //    Value = "Left"
-            //});
-            //element.Properties.Items.Add(new CustomProperty()
-            //{
-            //    Name = "VerticalAlignment",
-            //    PropertyType = CustomPropertyType.ValueList,
-            //    ValueList = { "Top", "Center", "Bottom" },
-            //    Value = "Top"
-            //});
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Style",
+                PropertyType = CustomPropertyType.ValueList,
+                ValueList = { "Default", "Rounded" },
+                Value = "Default"
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Icon",
+                PropertyType = CustomPropertyType.Icon,
+                Value = "(None)"
+            });
             element.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Width",
@@ -112,6 +112,15 @@ namespace Capture.Workflow.Plugins.ViewElements
             {
                 WorkflowManager.Execute(viewElement.GetEventCommands("Click"));
             };
+            if (viewElement.Properties["Style"].Value == "Rounded")
+            {
+                button.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
+            }
+
+            PackIconKind kind;
+            if (Enum.TryParse(viewElement.Properties["Icon"].Value, out kind))
+                button.Content = new PackIcon() {Kind = kind, Width = button.Width /2, Height = button.Height /2};
+
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
                 button.Background =
                     new SolidColorBrush(

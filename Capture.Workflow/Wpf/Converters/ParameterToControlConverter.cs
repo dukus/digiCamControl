@@ -8,11 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using CameraControl.Core.Wpf;
 using Capture.Workflow.Core.Classes;
+using Capture.Workflow.Wpf.Controls;
 using MahApps.Metro.Controls;
 
 namespace Capture.Workflow.Wpf.Converters
 {
-    public class ParameterToControlConverter: IValueConverter
+    public class ParameterToControlConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -35,25 +36,25 @@ namespace Capture.Workflow.Wpf.Converters
                     case CustomPropertyType.Color:
                         var colorpicker = new Colorpicker();
                         colorpicker.DataContext = property;
-                        colorpicker.SetBinding(Colorpicker.SelectedColorProperty, new Binding("Value") {Mode = BindingMode.TwoWay});
+                        colorpicker.SetBinding(Colorpicker.SelectedColorProperty, new Binding("Value") { Mode = BindingMode.TwoWay });
                         return colorpicker;
                     case CustomPropertyType.ValueList:
-                    {
-                        ComboBox comboBox = new ComboBox();
-                        comboBox.DataContext = property;
-                        comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
-                        comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
-                        return comboBox;
-                    }
+                        {
+                            ComboBox comboBox = new ComboBox();
+                            comboBox.DataContext = property;
+                            comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
+                            comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
+                            return comboBox;
+                        }
                     case CustomPropertyType.Variable:
-                    {
-                        property.InitVaribleList();
-                        ComboBox comboBox = new ComboBox();
-                        comboBox.DataContext = property;
-                        comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
-                        comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
-                        return comboBox;
-                    }
+                        {
+                            property.InitVaribleList();
+                            ComboBox comboBox = new ComboBox();
+                            comboBox.DataContext = property;
+                            comboBox.SetBinding(ComboBox.ItemsSourceProperty, "ValueList");
+                            comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
+                            return comboBox;
+                        }
                     case CustomPropertyType.View:
                         {
                             property.InitViewList();
@@ -63,6 +64,11 @@ namespace Capture.Workflow.Wpf.Converters
                             comboBox.SetBinding(ComboBox.SelectedItemProperty, "Value");
                             return comboBox;
                         }
+                    case CustomPropertyType.Icon:
+                        var iconicker = new IconPicker();
+                        iconicker.DataContext = property;
+                        iconicker.SetBinding(IconPicker.SelectedIconProperty, new Binding("Value") { Mode = BindingMode.TwoWay });
+                        return iconicker;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

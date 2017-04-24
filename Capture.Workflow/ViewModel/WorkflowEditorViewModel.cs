@@ -79,7 +79,7 @@ namespace Capture.Workflow.ViewModel
             {
                 _selectedElement = value;
                 RaisePropertyChanged(() => SelectedElement);
-                if (_selectedElement.Events.Count > 0)
+                if (_selectedElement?.Events.Count > 0)
                 {
                     HaveEvents = true;
                     SelectedCommandCollection = _selectedElement.Events[0];

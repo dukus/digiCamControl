@@ -7,6 +7,7 @@
         ValueList,
         Color,
         Variable,
-        View
+        View,
+        Icon,
     }
 }

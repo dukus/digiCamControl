@@ -168,6 +168,9 @@
     </Compile>
     <Compile Include="Wpf\Controls\EditableTextBlock.cs" />
     <Compile Include="Wpf\Controls\EditableTextBlockAdorner.cs" />
+    <Compile Include="Wpf\Controls\IconPicker.xaml.cs">
+      <DependentUpon>IconPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\Controls\PropertyEditor.xaml.cs">
       <DependentUpon>PropertyEditor.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WorkflowViewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wpf\Controls\IconPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
