@@ -26,7 +26,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <materialDesign:DialogHost Identifier="RootDialog" >
+    <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="212">
@@ -75,7 +75,7 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="1*" MaxWidth="200"/>
                             </Grid.ColumnDefinitions>
-                            <ListBox Margin="10" BorderThickness="1" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                            <ListBox Margin="10" BorderThickness="1" BorderBrush="Black" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                              >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate >
@@ -117,7 +117,7 @@
                                     <RowDefinition Height="274*"/>
                                     <RowDefinition Height="201*"/>
                                 </Grid.RowDefinitions>
-                                <GroupBox Grid.Row="0" Header="UI Elements">
+                                <GroupBox Grid.Row="0" Header="UI Elements" Style="{DynamicResource MaterialDesignGroupBox}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
@@ -127,8 +127,8 @@
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="3*"/>
                                         </Grid.ColumnDefinitions>
-                                        <ListBox Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedView.Elements}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                                         materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                                        <ListBox Margin="10"  BorderThickness="1" BorderBrush="Black" ItemsSource="{Binding SelectedView.Elements}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                                 materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate >
                                                     <Grid>
@@ -142,7 +142,8 @@
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
-                                        <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+
+                                            <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Stretch">
                                             <TabItem Header="Properties">
                                                 <controls1:PropertyEditor DataContext="{Binding SelectedElement.Properties}" />
                                             </TabItem>
@@ -192,6 +193,7 @@
                                             </TabItem>
 
                                         </TabControl>
+
                                         <StackPanel Grid.Row="1" Grid.Column="0">
                                             <controls:DropDownButton  Margin="20,5" VerticalContentAlignment="Center" Content="Add element" DisplayMemberPath="Name" 
                                                              ItemsSource="{Binding ViewElementsPlugins}">
