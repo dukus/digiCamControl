@@ -532,7 +532,17 @@ namespace CameraControlCmd
             //WIAManager manager = new WIAManager();
             StaticHelper.Instance.PropertyChanged += Instance_PropertyChanged;
             ServiceProvider.DeviceManager.CameraConnected += DeviceManagerCameraConnected;
-            ServiceProvider.DeviceManager.ConnectToCamera();
+            try
+            {
+                ServiceProvider.DeviceManager.ConnectToCamera();
+            }
+            catch (Exception ex)
+            {
+                /* Give specific guidance if the error is a missing DLL */
+                if ((ex.InnerException != null) && (ex.InnerException.Message != null) && (ex.InnerException.Message.Contains("EDSDK.dll")))
+                    Console.WriteLine("\n**CRITICAL ERROR**\n\nCanon EOS camera library, EDSDK.dll is missing\nInstall it after downloading from Canon's site\n");
+                System.Environment.Exit(1);
+            }
             ServiceProvider.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             if (ServiceProvider.DeviceManager.SelectedCameraDevice.AttachedPhotoSession != null)
                 ServiceProvider.Settings.DefaultSession = (PhotoSession)
