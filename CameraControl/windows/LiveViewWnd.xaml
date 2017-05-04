@@ -711,6 +711,29 @@
                                 </Grid>
                             </Expander.Content>
                         </Expander>
+                        <Expander Header="{T:TranslateExtension LabelSnapshot}" BorderThickness="1"  BorderBrush="Black"  Margin="3" 
+                                  Style="{DynamicResource MetroExpanderEx}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="{T:TranslateExtension LabelCaptureSnapshot}" Margin="5" Grid.ColumnSpan="2"/>
+
+                                <Label Grid.Row="1" Content="{T:Translate LabelCaptureCount}" Margin="3" />
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding SnapshotCaptureCount}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="1"/>
+
+                                <Label Grid.Row="2" Content="{T:Translate LabelCaptureDelay}" Margin="3" />
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding SnapshotCaptureTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="2"/>
+
+                            </Grid>
+                        </Expander>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

@@ -172,6 +172,8 @@ namespace CameraControl.Core.Classes
 
 
         private bool _gridVisible;
+        private int _snapshotCaptureCount;
+        private int _snapshotTimeCapture;
 
         public bool GridVisible
         {
@@ -182,7 +184,28 @@ namespace CameraControl.Core.Classes
                 NotifyPropertyChanged("GridVisible");
             }
         }
-        
+
+        public int SnapshotCaptureCount
+        {
+            get { return _snapshotCaptureCount; }
+            set
+            {
+                _snapshotCaptureCount = value;
+                NotifyPropertyChanged("SnapshotCaptureCount");
+            }
+        }
+
+        public int SnapshotCaptureTime
+        {
+            get { return _snapshotTimeCapture; }
+            set
+            {
+                _snapshotTimeCapture = value;
+                NotifyPropertyChanged(nameof(SnapshotCaptureTime));
+            }
+        }
+
+
         public string SelectedOverlay { get; set; }
         public bool BlackAndWhite { get; set; }
         public bool Invert { get; set; }
@@ -235,6 +258,9 @@ namespace CameraControl.Core.Classes
             MotionMovieLength = 30;
 
             CaptureCount = 1;
+
+            SnapshotCaptureCount = 1;
+            SnapshotCaptureTime = 500;
         }
 
 

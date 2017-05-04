@@ -125,6 +125,7 @@ namespace CameraControl.ViewModel
         private bool _invert;
         private BitmapSource _previewBitmap;
         private bool _previewBitmapVisible;
+        private int cam;
 
 
         public Rect RullerRect
@@ -1081,6 +1082,26 @@ namespace CameraControl.ViewModel
                 _captureInProgress = value;
                 RaisePropertyChanged(() => CaptureInProgress);
                 RaisePropertyChanged(() => IsFree);
+            }
+        }
+
+        public int SnapshotCaptureTime
+        {
+            get { return CameraProperty.LiveviewSettings.SnapshotCaptureTime; }
+            set
+            {
+                CameraProperty.LiveviewSettings.SnapshotCaptureTime = value;
+                RaisePropertyChanged(()=>SnapshotCaptureTime);
+            }
+        }
+
+        public int SnapshotCaptureCount
+        {
+            get { return CameraProperty.LiveviewSettings.SnapshotCaptureCount; }
+            set
+            {
+                CameraProperty.LiveviewSettings.SnapshotCaptureCount = value;
+                RaisePropertyChanged(() => SnapshotCaptureCount);
             }
         }
 
