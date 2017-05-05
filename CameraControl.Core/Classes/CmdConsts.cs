@@ -59,6 +59,7 @@ namespace CameraControl.Core.Classes
         public const string LiveView_Preview = "LiveView_Preview";
         public const string LiveView_NoProcess = "LiveView_NoProcess";
         public const string LiveView_Capture = "LiveView_Capture";
+        public const string LiveView_CaptureSnapShot = "LiveView_CaptureSnapShot";
         public const string LiveView_ManualFocus = "LiveView_ManualFocus";
         public const string All_Close = "All_Close";
         public const string All_Minimize = "All_Minimize";

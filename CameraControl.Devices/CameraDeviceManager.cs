@@ -373,6 +373,12 @@ namespace CameraControl.Devices
                 PhotoCaptured(sender, eventArgs);
         }
 
+        public void OnPhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        {
+            if (PhotoCaptured != null)
+                PhotoCaptured(sender, eventArgs);
+        }
+
         private void ConnectDevices()
         {
             if (_connectionInProgress)

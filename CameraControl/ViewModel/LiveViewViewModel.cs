@@ -1260,6 +1260,9 @@ namespace CameraControl.ViewModel
 
         public RelayCommand ClosePreviewCommand { get; set; }
 
+        public RelayCommand CaptureSnapshotCommand { get; set; }
+
+
         #endregion
 
         public bool IsActive { get; set; }
@@ -1451,6 +1454,38 @@ namespace CameraControl.ViewModel
                 PreviewBitmapVisible = false;
             });
 
+            CaptureSnapshotCommand=new RelayCommand(CaptureSnapshot);
+        }
+
+        private void CaptureSnapshot()
+        {
+            Task.Factory.StartNew(CaptureSnapshotThread);
+        }
+
+        private void CaptureSnapshotThread()
+        {
+            try
+            {
+                for (int i = 0; i < SnapshotCaptureCount; i++)
+                {
+                    MemoryStream stream = new MemoryStream(LiveViewData.ImageData, LiveViewData.ImageDataPosition,
+                        LiveViewData.ImageData.Length - LiveViewData.ImageDataPosition);
+
+                    ServiceProvider.DeviceManager.OnPhotoCaptured(null,new PhotoCapturedEventArgs()
+                    {
+                        CameraDevice = new FileTransferDevice(),
+                        FileName = "file.jpg",
+                        Handle = stream.ToArray()
+                    });
+                    if (i < SnapshotCaptureCount)
+                        Thread.Sleep(SnapshotCaptureTime);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Error capture snapshot");
+            }
+
         }
 
         void LiveViewManager_PreviewCaptured(ICameraDevice cameraDevice, string file)
@@ -1622,6 +1657,31 @@ namespace CameraControl.ViewModel
                     Log.Error("Unable to load overlay", ex);
                 }
             }
+            if (cmd.StartsWith("Snapshot_"))
+            {
+                var vals = cmd.Split('_');
+                if (vals.Count() > 2)
+                {
+                    switch (vals[1])
+                    {
+                        case "CaptureTime":
+                            SnapshotCaptureTime = GetValue(vals, SnapshotCaptureTime);
+                            break;
+                        case "NumOfPhotos":
+                            SnapshotCaptureCount = GetValue(vals, SnapshotCaptureCount);
+                            break;
+                    }
+                }
+            }
+        }
+
+
+        private int GetValue(string[] cmd, int defVal)
+        {
+            int x;
+            if (int.TryParse(cmd[2], out x))
+                return x;
+            return defVal;
         }
 
         private void _restartTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -1690,6 +1750,9 @@ namespace CameraControl.ViewModel
             {
                 case CmdConsts.LiveView_Capture:
                     CaptureInThread();
+                    break;
+                case CmdConsts.LiveView_CaptureSnapShot:
+                    CaptureSnapshot();
                     break;
                 case CmdConsts.LiveView_Focus_Move_Right:
                     if (LiveViewData != null && LiveViewData.ImageData != null)

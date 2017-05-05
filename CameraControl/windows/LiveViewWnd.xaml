@@ -724,7 +724,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button Content="{T:TranslateExtension LabelCaptureSnapshot}" Margin="5" Grid.ColumnSpan="2"/>
+                                <Button Content="{T:TranslateExtension LabelCaptureSnapshot}" Margin="5" Grid.ColumnSpan="2" Command="{Binding CaptureSnapshotCommand}"/>
 
                                 <Label Grid.Row="1" Content="{T:Translate LabelCaptureCount}" Margin="3" />
                                 <Controls:NumericUpDown Minimum="0" Value="{Binding SnapshotCaptureCount}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="1"/>

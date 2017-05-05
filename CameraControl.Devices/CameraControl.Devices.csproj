@@ -188,6 +188,7 @@
     <Compile Include="Nikon\NikonD90.cs" />
     <Compile Include="Nikon\NikonL830.cs" />
     <Compile Include="Others\FakeCameraDevice.cs" />
+    <Compile Include="Others\FileTransferDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
     <Compile Include="Others\OscCamera.cs" />
     <Compile Include="Others\PanonoCamera.cs" />
