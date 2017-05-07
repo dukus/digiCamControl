@@ -143,7 +143,7 @@
                                             </ListBox.ItemTemplate>
                                         </ListBox>
 
-                                            <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Stretch">
+                                        <TabControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Stretch">
                                             <TabItem Header="Properties">
                                                 <controls1:PropertyEditor DataContext="{Binding SelectedElement.Properties}" />
                                             </TabItem>
@@ -273,7 +273,87 @@
                     </TabItem>
                     <TabItem Header="Events">
                         <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Margin="10" BorderThickness="1" BorderBrush="Black" ItemsSource="{Binding CurrentWorkFlow.Events}" SelectedItem="{Binding SelectedEvent}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Grid.RowSpan="2">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate >
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                            <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <StackPanel Grid.Row="2" Grid.Column="0">
+                                <controls:DropDownButton Name="AddNewEventButton" Margin="20,5" VerticalContentAlignment="Center" Content="Add event" DisplayMemberPath="Name" 
+                                                         ItemsSource="{Binding EventsPlugins}">
+                                    <controls:DropDownButton.ItemContainerStyle>
+                                        <Style TargetType="MenuItem">
+                                            <Setter Property="Command" Value="{Binding DataContext.NewEventCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
+                                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                                        </Style>
+                                    </controls:DropDownButton.ItemContainerStyle>
+                                </controls:DropDownButton>
+                                <Button Content="Delete event" Margin="20,5" Command="{Binding DeleteEventCommand}"/>
+                            </StackPanel>
+                            <GroupBox Grid.Row="0" Grid.Column="1" Header="Properties">
+                                <controls1:PropertyEditor DataContext="{Binding SelectedEvent.Properties}" />
+                            </GroupBox>
+                            <GroupBox Grid.Row="1" Grid.Column="1" Header="Commands" Grid.RowSpan="2">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ListBox Grid.Row="0" Grid.Column="0" Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedEvent.CommandCollection.Items}" SelectedItem="{Binding SelectedEventCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate >
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                                    <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <StackPanel Grid.Row="1" Grid.Column="0">
+                                        <controls:DropDownButton  Margin="20,5" VerticalContentAlignment="Center" Content="Add command" DisplayMemberPath="Name" 
+                                                                  ItemsSource="{Binding CommandPlugins}">
+                                            <controls:DropDownButton.ItemContainerStyle>
+                                                <Style TargetType="MenuItem">
+                                                    <Setter Property="Command" Value="{Binding DataContext.NewEventCommandCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
+                                                    <Setter Property="CommandParameter" Value="{Binding}"/>
+                                                </Style>
+                                            </controls:DropDownButton.ItemContainerStyle>
+                                        </controls:DropDownButton>
+                                        <Button Content="Delete command" Margin="20,5" Command="{Binding DeleteEventCommandCommand}"/>
+                                    </StackPanel>
+                                    <controls1:PropertyEditor Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                                              DataContext="{Binding SelectedEventCommand.Properties}" />
 
+
+                                </Grid>
+                            </GroupBox>
                         </Grid>
                     </TabItem>
                     <TabItem Header="Variables">

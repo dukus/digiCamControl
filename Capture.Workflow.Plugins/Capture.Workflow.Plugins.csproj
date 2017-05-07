@@ -129,6 +129,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Commands\CameraAction.cs" />
     <Compile Include="Commands\ViewAction.cs" />
+    <Compile Include="Events\KeyPressedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewElements\Button.cs" />
     <Compile Include="ViewElements\Label.cs" />

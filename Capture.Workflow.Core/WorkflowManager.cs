@@ -213,6 +213,28 @@ namespace Capture.Workflow.Core
                     }
                 }
 
+                foreach (var flowEvent in flow.Events)
+                {
+                    IEventPlugin plugin = Instance.GetEventPlugin(flowEvent.PluginInfo.Class);
+                    WorkFlowEvent event_ = plugin.CreateEvent();
+                    event_.Parent = resflow;
+                    event_.Instance = plugin;
+                    event_.PluginInfo = flowEvent.PluginInfo;
+                    event_.Name = flowEvent.Name;
+                    event_.Properties.CopyValuesFrom(flowEvent.Properties);
+                    foreach (var flowCommand in flowEvent.CommandCollection.Items)
+                    {
+                        IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                        var wCommand = commandPlugin.CreateCommand();
+                        wCommand.Instance = commandPlugin;
+                        wCommand.PluginInfo = flowCommand.PluginInfo;
+                        wCommand.Name = flowCommand.Name;
+                        wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
+                        event_.CommandCollection.Items.Add(wCommand);
+                    }
+                    resflow.Events.Add(event_);
+                }
+
                 foreach (var _view in flow.Views)
                 {
                     IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
@@ -292,6 +314,11 @@ namespace Capture.Workflow.Core
         public IViewElementPlugin GetElementPlugin(string className)
         {
             return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public IEventPlugin GetEventPlugin(string className)
+        {
+            return (IEventPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
         }
 
         public IWorkflowCommand GetCommandPlugin(string className)

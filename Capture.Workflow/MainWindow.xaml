@@ -7,7 +7,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>

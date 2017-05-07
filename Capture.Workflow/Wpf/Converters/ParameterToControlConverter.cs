@@ -69,6 +69,11 @@ namespace Capture.Workflow.Wpf.Converters
                         iconicker.DataContext = property;
                         iconicker.SetBinding(IconPicker.SelectedIconProperty, new Binding("Value") { Mode = BindingMode.TwoWay });
                         return iconicker;
+                    case CustomPropertyType.Bool:
+                        CheckBox checkBox = new CheckBox();
+                        checkBox.DataContext = property;
+                        checkBox.SetBinding(CheckBox.IsCheckedProperty, "Value");
+                        return checkBox;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

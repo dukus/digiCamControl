@@ -151,10 +151,11 @@
     <Compile Include="Classes\VariableCollection.cs" />
     <Compile Include="Classes\WorkFlow.cs" />
     <Compile Include="Classes\WorkFlowCommand.cs" />
+    <Compile Include="Classes\WorkFlowEvent.cs" />
     <Compile Include="Classes\WorkFlowView.cs" />
     <Compile Include="Classes\WorkFlowViewElement.cs" />
     <Compile Include="Interface\IActionPlugin.cs" />
-    <Compile Include="Interface\IEvent.cs" />
+    <Compile Include="Interface\IEventPlugin.cs" />
     <Compile Include="Interface\IViewElementPlugin.cs" />
     <Compile Include="Interface\IViewPlugin.cs" />
     <Compile Include="Interface\IWorkflowCommand.cs" />

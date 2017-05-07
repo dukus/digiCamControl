@@ -9,5 +9,6 @@
         Variable,
         View,
         Icon,
+        Bool
     }
 }
