@@ -37,7 +37,7 @@ namespace CameraControl.Core.TclScripting
 
             try
             {
-                interpreter.Host.WriteResult(ReturnCode.Ok, arguments[1], true);
+                interpreter.Host.WriteResult(ReturnCode.Ok, arguments[1], false);
             }
             catch (Exception exception)
             {

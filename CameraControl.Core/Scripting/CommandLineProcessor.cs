@@ -40,8 +40,9 @@ namespace CameraControl.Core.Scripting
                         CameraHelper.CaptureNoAf();
                     else
                         CameraHelper.CaptureWithError(TargetDevice);
-                    ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(3000);
+                    ServiceProvider.DeviceManager.SelectedCameraDevice.WaitForCamera(30000);
                     return null;
+                    
                 //case "startbulb":
                 //    CameraHelper.Capture(ServiceProvider.DeviceManager.SelectedCameraDevice);
                 //    return null;
