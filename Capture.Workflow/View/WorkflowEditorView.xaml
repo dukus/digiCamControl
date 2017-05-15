@@ -60,7 +60,7 @@
 
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Material Design In XAML Toolkit</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Workflow Editor</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <TabControl Grid.Row="1">

@@ -6,18 +6,89 @@
         xmlns:local="clr-namespace:Capture.Workflow"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen" PreviewKeyDown="MetroWindow_PreviewKeyDown">
+        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="273*"/>
-            <RowDefinition Height="46*"/>
-        </Grid.RowDefinitions>
-        <Button Grid.Row="1"  Content="Create Workflow" HorizontalAlignment="Right" Margin="5" Padding="5" Command="{Binding EditCommand}"/>
-        <Button Grid.Row="1"  Content="Settings" HorizontalAlignment="Left" Margin="5" Padding="5"/>
-    </Grid>
+    <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                  DockPanel.Dock="Top"
+                                  HorizontalAlignment="Right" Margin="16"
+                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <StackPanel>
+                        <!--<MenuItem Header="New"/>
+                        <MenuItem Header="Open ..." Command="{Binding LoadCommand}"/>
+                        <MenuItem Header="Save ..." Command="{Binding SaveCommand}"/>-->
+                    </StackPanel>
+
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="421*"/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          Mode="PrimaryMid" DockPanel.Dock="Top" Height="69">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                      x:Name="MenuToggleButton"/>
+                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                            <StackPanel>
+                                <Button Content="Create New Workflow" Command="{Binding EditCommand}"/>
+                                <Separator/>
+                                <Button Content="Settings" Command="{Binding EditCommand}"/>
+
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Workflow</TextBlock>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+
+                <materialDesign:Card Grid.Row="1" Margin="4 4 0 0" Width="200">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!--<Image Source="Resources/Chartridge046_small.jpg" Height="140" Width="196" Stretch="UniformToFill" />-->
+                        <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                Margin="0 0 16 -20">
+                            <materialDesign:PackIcon Kind="Play" />
+                        </Button>
+                        <StackPanel Grid.Row="1" Margin="8 24 8 0" >
+                            <TextBlock FontWeight="Bold">Cycling</TextBlock>
+                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">A great way to keep fit and forget about the constant grind of IT.</TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal" Margin="8">
+                            <!--<Button Style="{StaticResource MaterialDesignToolButton}" Width="30" Padding="2 0 2 0"
+                                    materialDesign:RippleAssist.IsCentered="True">
+                                <materialDesign:PackIcon Kind="ShareVariant" />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignToolButton}" Width="30" Padding="2 0 2 0"
+                                    materialDesign:RippleAssist.IsCentered="True">
+                                <materialDesign:PackIcon Kind="Heart" />
+                            </Button>-->
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
+                                <StackPanel>
+                                    <Button Content="More"/>
+                                    <Button Content="Options"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
+                
+            </Grid>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
+
 </controls:MetroWindow>
 
