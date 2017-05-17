@@ -266,11 +266,6 @@
                             </GroupBox>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Actions">
-                        <Grid>
-
-                        </Grid>
-                    </TabItem>
                     <TabItem Header="Events">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -418,6 +413,22 @@
                     </TabItem>
                     <TabItem Header="Settings">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <Label Content="Name"/>
+                                <TextBox Text="{Binding CurrentWorkFlow.Name}" Margin="3"/>
+                                <Label Content="Id"/>
+                                <TextBox Text="{Binding CurrentWorkFlow.Id}" IsReadOnly="True" IsEnabled="False" Margin="3"/>
+                                <Label Content="Name"/>
+                                <TextBox Text="{Binding CurrentWorkFlow.Version}" Margin="3"/>
+                                <Label Content="Description"/>
+                                <TextBox Text="{Binding CurrentWorkFlow.Description}"  Margin="3" Height="200" TextWrapping="Wrap"/>
+
+                            </StackPanel>
+                            <controls1:PropertyEditor Grid.Column="1" DataContext="{Binding CurrentWorkFlow.Properties}" />
 
                         </Grid>
                     </TabItem>

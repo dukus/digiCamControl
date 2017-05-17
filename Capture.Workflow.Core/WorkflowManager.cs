@@ -201,6 +201,12 @@ namespace Capture.Workflow.Core
                 WorkFlow flow = (WorkFlow)mySerializer.Deserialize(myFileStream);
                 myFileStream.Close();
                 WorkFlow resflow = Instance.CreateWorkFlow();
+                resflow.Id = flow.Id;
+                resflow.Name = flow.Name;
+                resflow.Description = flow.Description;
+                resflow.Version = flow.Version;
+                resflow.Properties.CopyValuesFrom(flow.Properties);
+
                 foreach (Variable variable in flow.Variables.Items)
                 {
                     if (resflow.Variables[variable.Name] != null)

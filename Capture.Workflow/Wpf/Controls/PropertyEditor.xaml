@@ -24,7 +24,7 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Name}" Margin="3"/>
+                            <Label Content="{Binding Name}" Margin="3" HorizontalAlignment="Right" FontWeight="Bold"/>
                             <ContentControl Grid.Column="1" Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3"/>
                         </Grid>
                     </DataTemplate>
