@@ -50,42 +50,50 @@
                     </DockPanel>
                 </materialDesign:ColorZone>
 
-                <materialDesign:Card Grid.Row="1" Margin="4 4 0 0" Width="200">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="140" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <!--<Image Source="Resources/Chartridge046_small.jpg" Height="140" Width="196" Stretch="UniformToFill" />-->
-                        <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
-                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                Margin="0 0 16 -20">
-                            <materialDesign:PackIcon Kind="Play" />
-                        </Button>
-                        <StackPanel Grid.Row="1" Margin="8 24 8 0" >
-                            <TextBlock FontWeight="Bold">Cycling</TextBlock>
-                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center">A great way to keep fit and forget about the constant grind of IT.</TextBlock>
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal" Margin="8">
-                            <!--<Button Style="{StaticResource MaterialDesignToolButton}" Width="30" Padding="2 0 2 0"
-                                    materialDesign:RippleAssist.IsCentered="True">
-                                <materialDesign:PackIcon Kind="ShareVariant" />
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignToolButton}" Width="30" Padding="2 0 2 0"
-                                    materialDesign:RippleAssist.IsCentered="True">
-                                <materialDesign:PackIcon Kind="Heart" />
-                            </Button>-->
-                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
-                                <StackPanel>
-                                    <Button Content="More"/>
-                                    <Button Content="Options"/>
-                                </StackPanel>
-                            </materialDesign:PopupBox>
-                        </StackPanel>
-                    </Grid>
-                </materialDesign:Card>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding WorkFlows}" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"  />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card  Margin="4 4 0 0" Width="200">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="140" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <!--<Image Source="Resources/Chartridge046_small.jpg" Height="140" Width="196" Stretch="UniformToFill" />-->
+                                        <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                Margin="0 0 16 -20">
+                                            <materialDesign:PackIcon Kind="Play" Height="25" Width="25"/>
+                                        </Button>
+                                        <StackPanel Grid.Row="1" Margin="8 24 8 0" >
+                                            <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
+                                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Description}"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal" Margin="8">
+
+                                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
+                                                <StackPanel>
+                                                    <Button Content="More"/>
+                                                    <Button Content="Options"/>
+                                                </StackPanel>
+                                            </materialDesign:PopupBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
                 
+
             </Grid>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
