@@ -49,7 +49,7 @@ namespace Capture.Workflow.ViewModel
             {
                 _selectedView = value;
                 RaisePropertyChanged(() => SelectedView);
-                if (_selectedView.Elements.Count > 0)
+                if (_selectedView?.Elements.Count > 0)
                     SelectedElement = _selectedView.Elements[0];
             }
         }

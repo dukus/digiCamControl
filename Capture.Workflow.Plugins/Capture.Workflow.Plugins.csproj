@@ -136,6 +136,7 @@
     <Compile Include="Events\KeyPressedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewElements\Button.cs" />
+    <Compile Include="ViewElements\CameraProperty.cs" />
     <Compile Include="ViewElements\Label.cs" />
     <Compile Include="ViewElements\TextElement.cs" />
     <Compile Include="Views\BaseView.cs" />
