@@ -354,13 +354,13 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="276*" />
-                        <RowDefinition Height="35*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="273" />
                         <ColumnDefinition Width="347*" />
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="{T:TranslateExtension LabelAvailableDevices}"  Grid.RowSpan="2">
+                    <GroupBox Header="{T:TranslateExtension LabelAvailableDevices}"  >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="276*" />
@@ -393,6 +393,18 @@
                             <ComboBox Grid.Column="1" Grid.Row="1" Margin="3" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalDeviceNames}" SelectedItem="{Binding DriverName}"/>
                         </Grid>
                     </GroupBox>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{T:TranslateExtension LabelWaitForFocus}" Margin="5" Width="150"/>
+                            <Controls:NumericUpDown Value="{Binding ExternalDeviceWaitForFocus}" Minimum="0" Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{T:TranslateExtension LabelWaitForCapture}" Margin="5" Width="150"/>
+                            <Controls:NumericUpDown Value="{Binding ExternalDeviceWaitForCapture}" Minimum="0" Margin="5" />
+                        </StackPanel>
+
+                    </StackPanel>
                 </Grid>
 
             </TabItem>

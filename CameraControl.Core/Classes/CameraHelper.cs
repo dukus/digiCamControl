@@ -63,9 +63,9 @@ namespace CameraControl.Core.Classes
                     if (property.UseExternalShutter && property.SelectedConfig != null)
                     {
                         ServiceProvider.ExternalDeviceManager.AssertFocus(property.SelectedConfig);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(ServiceProvider.Settings.ExternalDeviceWaitForFocus);
                         ServiceProvider.ExternalDeviceManager.OpenShutter(property.SelectedConfig);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(ServiceProvider.Settings.ExternalDeviceWaitForCapture);
                         ServiceProvider.ExternalDeviceManager.CloseShutter(property.SelectedConfig);
                         return;
                     }

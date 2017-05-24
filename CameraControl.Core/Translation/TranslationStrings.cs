@@ -700,5 +700,7 @@ namespace CameraControl.Core.Translation
         // 04/05/2014
         public static string LabelSnapshot = "Snapshot";
         public static string LabelCaptureSnapshot = "Capture Snapshot";
+        public static string LabelWaitForCapture = "Wait for Capture (msec)";
+        public static string LabelWaitForFocus = "Wait for Focus (msec)";
     }
 }

@@ -907,6 +907,10 @@ namespace CameraControl.Core.Classes
 
         public bool FullScreenInSecondaryMonitor { get; set; }
         public bool Autorotate { get; set; }
+
+        public int ExternalDeviceWaitForFocus { get; set; }
+        public int ExternalDeviceWaitForCapture { get; set; }
+
         public ObservableCollection<PluginSetting> PluginSettings { get; set; }
 
         public bool ShowThumbInfo
@@ -1072,6 +1076,9 @@ namespace CameraControl.Core.Classes
             ShowThumbInfo = true;
             SelectedLayout = "Normal";
             DisableHardwareAccelerationNew = true;
+
+            ExternalDeviceWaitForCapture = 1000;
+            ExternalDeviceWaitForFocus = 1000;
         }
 
 
