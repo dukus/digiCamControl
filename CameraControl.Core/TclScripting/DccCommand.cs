@@ -49,6 +49,7 @@ namespace CameraControl.Core.TclScripting
             {
                 Log.Error("Script error ", exception);
                 result = "Error on command execution " + exception.Message;
+                return ReturnCode.Error;
             }
             return ReturnCode.Ok;
         }

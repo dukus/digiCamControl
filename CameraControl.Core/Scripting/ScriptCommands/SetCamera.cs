@@ -63,16 +63,19 @@ namespace CameraControl.Core.Scripting.ScriptCommands
                         scriptObject.CameraDevice.FNumber.SetValue(val);
                     }
                     break;
+                case "shutterspeed":
                 case "shutter":
                     {
-                        if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("bulb"))
-                        {
-                            val += "s";
-                        }
                         if (val.Equals("bulb"))
                         {
                             val = "Bulb";
                         }
+
+                        if (!scriptObject.CameraDevice.ShutterSpeed.Values.Contains(val))
+                            if (!val.Contains("/") && !val.EndsWith("s") && !val.Equals("Bulb"))
+                            {
+                                val += "s";
+                            }
                         scriptObject.CameraDevice.ShutterSpeed.SetValue(val);
                         if (!scriptObject.CameraDevice.ShutterSpeed.Values.Contains(val))
                             ServiceProvider.ScriptManager.OutPut(string.Format("Wrong value {1} for property {0}",

@@ -334,7 +334,7 @@ namespace CameraControl.windows
 
         private void ScriptManager_OutPutMessageReceived(object sender, MessageEventArgs e)
         {
-            AddOutput(e.Message);
+            AddTclOutput(e.Message);
         }
 
         #endregion
@@ -460,10 +460,19 @@ namespace CameraControl.windows
 
         public void AddOutput(string msg)
         {
-            Dispatcher.Invoke(new Action(delegate
+            Dispatcher.BeginInvoke(new Action(delegate
             {
                 lst_output.Items.Add(msg);
                 lst_output.ScrollIntoView(lst_output.Items[lst_output.Items.Count - 1]);
+            }));
+        }
+
+        public void AddTclOutput(string msg)
+        {
+            Dispatcher.Invoke(new Action(delegate
+            {
+                lst_outputTcl.Items.Add(msg);
+                lst_outputTcl.ScrollIntoView(lst_outputTcl.Items[lst_outputTcl.Items.Count - 1]);
             }));
         }
 
