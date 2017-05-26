@@ -200,7 +200,11 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.Add(new BulbWnd());
                 ServiceProvider.WindowsManager.Add(new AstroLiveViewWnd());
                 ServiceProvider.WindowsManager.Add(new ScriptWnd());
-                ServiceProvider.WindowsManager.Add(new PrintWnd());
+
+                // initialize print interface only if print button is  visible
+                if (ServiceProvider.Branding.ShowPrintButtonMainWindow)
+                    ServiceProvider.WindowsManager.Add(new PrintWnd());
+
                 ServiceProvider.WindowsManager.Add(new TimeLapseWnd());
                 ServiceProvider.WindowsManager.Add(new BarcodeWnd());
                 ServiceProvider.WindowsManager.Add(new MultipleLiveView());
