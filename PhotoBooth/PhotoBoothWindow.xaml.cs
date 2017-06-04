@@ -64,6 +64,8 @@ namespace PhotoBooth
         /// </summary>
         public PrintTicket PrinterSetupTicket {get; set;}
 
+        public PrintQueue PrintQueue { get; set; }
+
         /// <summary>
         /// Gets whether this windows closed abnormally such as when the camera is disconnected.
         /// </summary>
@@ -466,6 +468,11 @@ namespace PhotoBooth
                 printDlg.PrintTicket = this.PrinterSetupTicket;
             }
 
+            if(this.PrintQueue != null)
+            {
+                printDlg.PrintQueue = this.PrintQueue;
+            }
+
             double width = printDlg.PrintableAreaWidth;
             double height = printDlg.PrintableAreaHeight;
 
@@ -483,11 +490,25 @@ namespace PhotoBooth
 
             UIElement content = cardView.RootVisual;
             FixedDocument document = DocumentUtility.CreateFixedDocument(width, height, content);
-            printDlg.PrintDocument(document.DocumentPaginator, "Photo Booth");
+            bool printError = false;
+            try
+            {
+                printDlg.PrintDocument(document.DocumentPaginator, "Photo Booth");
+            }
+            catch(Exception e)
+            {
+                printError = true;
+                Debug.WriteLine(e);
+                MessageBox.Show(e.Message, "Print exception");
+            }
             cardView.Close();
 
-            // Wait so photo capture doesn't get too far ahead of the printer.
-            System.Threading.Thread.Sleep(PrintingDelay);
+            if (!printError)
+            {
+                // Wait so photo capture doesn't get too far ahead of the printer.
+                System.Threading.Thread.Sleep(PrintingDelay);
+            }
+
             this.SetStartPrompt();
         }
 

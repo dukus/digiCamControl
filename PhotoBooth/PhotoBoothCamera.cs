@@ -67,6 +67,11 @@ namespace PhotoBooth
                 CameraControl.Devices.Log.LogInfo += Log_LogInfo;
                 CameraControl.Devices.Log.LogError += Log_LogError;
 
+                if (ServiceProvider.Branding == null)
+                {
+                    ServiceProvider.Branding = Branding.LoadBranding();
+                }
+
                 ServiceProvider.Configure();
 
                 ServiceProvider.Settings = new Settings();
@@ -189,10 +194,16 @@ namespace PhotoBooth
                 testTime = DateTime.Now;
                 Debug.WriteLine("Post capture: {0}:{1}:{2}:{3}", testTime.Hour, testTime.Minute, testTime.Second, testTime.Millisecond);
                 nextImageCapture = DateTime.Now.AddMilliseconds((double)this.ImageInterval);
+                var errorTimeout = DateTime.Now.AddSeconds(10);
                 while (!this.imageCaptured)
                 {
                     // need to add error time out here
                     Thread.Sleep(10);
+                    if(DateTime.Now > errorTimeout)
+                    {
+                        Debug.WriteLine("Capture timeout");
+                        return;
+                    }
                 }
                 this.captureFiles.Add(this.lastImageFile);
                 currentImage++;
