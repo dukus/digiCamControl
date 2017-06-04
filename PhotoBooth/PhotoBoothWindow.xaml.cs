@@ -432,7 +432,9 @@ namespace PhotoBooth
             return !this.TakingPictures &&
                 this.CardTemplate != null &&
                 this.CardTemplate.CanPrint &&
-                this.photoContainer.Visibility == System.Windows.Visibility.Visible;
+                this.photoContainer.Visibility == System.Windows.Visibility.Visible &&
+                this.PrinterSetupTicket != null &&
+                this.PrintQueue != null;
         }
 
         private PhotoCard CreateCardView()
