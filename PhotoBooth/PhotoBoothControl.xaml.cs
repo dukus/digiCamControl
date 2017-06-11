@@ -18,6 +18,7 @@ namespace PhotoBooth
     {
         private PhotoBoothCamera camera;
         private PrintTicket printerSetupTicket;
+        private PrintQueue printQueue;
         private bool initializing = false;
         private PhotoCardTemplate selectedTemplate;
 
@@ -173,6 +174,7 @@ namespace PhotoBooth
             {
                 Camera = this.camera,
                 PrinterSetupTicket = this.printerSetupTicket,
+                PrintQueue = this.printQueue,
                 OneButtonOperation = this.OneButtonOperation,
                 OneButtonMessage = this.OneButtonMessage,
                 CardTemplate = this.SelectedTemplate,
@@ -247,6 +249,7 @@ namespace PhotoBooth
             if (dlg.ShowDialog().GetValueOrDefault())
             {
                 this.printerSetupTicket = dlg.PrintTicket;
+                this.printQueue = dlg.PrintQueue;
                 Properties.Settings.Default.PrintTicket = this.printerSetupTicket;
             }
         }
