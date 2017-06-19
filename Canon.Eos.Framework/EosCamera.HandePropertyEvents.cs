@@ -88,7 +88,8 @@ namespace Canon.Eos.Framework
                             Zoom = image.Zoom,
                             ZommBounds = image.ZoomBounds,
                             ImagePosition = image.ImagePosition,
-                            ImageSize = image.Size
+                            ImageSize = image.Size,
+
                             //Histogram = image.Histogram,
 
                         });

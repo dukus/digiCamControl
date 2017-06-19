@@ -78,6 +78,8 @@ namespace CameraControl.Devices
         /// </value>
         public bool UseExperimentalDrivers { get; set; }
 
+        public bool LoadWiaDevices { get; set; }
+
         /// <summary>
         /// Gets or sets the natively supported model dictionary.
         /// This property is used to find the right driver for connected camera, 
@@ -206,6 +208,7 @@ namespace CameraControl.Devices
         public CameraDeviceManager(string datafolder=null)
         {
             UseExperimentalDrivers = true;
+            LoadWiaDevices = true;
             StartInNewThread = false;
             SelectedCameraDevice = new NotConnectedCameraDevice();
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
@@ -761,6 +764,9 @@ namespace CameraControl.Devices
 
         private void DeviceManager_OnEvent(string eventId, string deviceId, string itemId)
         {
+            if (!LoadWiaDevices)
+                return;
+
             if (eventId == Conts.wiaEventDeviceConnected)
             {
                 if (StartInNewThread)
@@ -815,6 +821,9 @@ namespace CameraControl.Devices
             }
             // if canon camera is connected don't use wia driver
             if (UseExperimentalDrivers && _framework != null && _framework.GetCameraCollection().Count > 0)
+                return true;
+
+            if (!LoadWiaDevices)
                 return true;
 
             bool ret = false;

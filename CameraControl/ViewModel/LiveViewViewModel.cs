@@ -2227,7 +2227,7 @@ namespace CameraControl.ViewModel
                     int x = writeableBitmap.PixelWidth*OverlayScale/100;
                     int y = writeableBitmap.PixelHeight*OverlayScale/100;
                     int xx = writeableBitmap.PixelWidth*OverlayHorizontal/100;
-                    int yy = writeableBitmap.PixelWidth*OverlayVertical/100;
+                    int yy = writeableBitmap.PixelHeight*OverlayVertical/100;
                     System.Windows.Media.Color transpColor = Colors.White;
 
                     //set color transparency for blit only the alpha chanel is used from transpColor
