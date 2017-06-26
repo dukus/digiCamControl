@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,6 +48,7 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using MahApps.Metro.Controls.Dialogs;
+using Timer = System.Timers.Timer;
 
 #endregion
 
@@ -136,6 +138,16 @@ namespace CameraControl.windows
                                                           }));
                     break;
                 case WindowsCmdConsts.FullScreenWnd_ShowTimed:
+                    // wait for image preview to be generated 
+                    var startTime = DateTime.Now;
+                    Thread.Sleep(150);
+                    while (
+                        ServiceProvider.Settings.SelectedBitmap != null && (ServiceProvider.Settings.SelectedBitmap.FileItem != null && ServiceProvider.Settings.SelectedBitmap.FileItem.Loading))
+                    {
+                        Thread.Sleep(10);
+                        if ((DateTime.Now - startTime).TotalSeconds > 3)
+                            break;
+                    }
                     Dispatcher.BeginInvoke(new Action(delegate
                                                           {
                                                               try

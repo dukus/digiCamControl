@@ -661,11 +661,7 @@ namespace CameraControl
                 //ServiceProvider.Settings.Save(session);
                 StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferDone;
                 eventArgs.CameraDevice.IsBusy = false;
-                //show fullscreen only when the multiple camera support isn't used
-                if (ServiceProvider.Settings.Preview &&
-                    !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
-                    !ServiceProvider.Settings.UseExternalViewer)
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_ShowTimed);
+
                 if (ServiceProvider.Settings.UseExternalViewer &&
                     File.Exists(ServiceProvider.Settings.ExternalViewerPath))
                 {
@@ -678,6 +674,14 @@ namespace CameraControl
                     PhotoUtils.PlayCaptureSound();
                 }
                 eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
+                
+                //show fullscreen only when the multiple camera support isn't used
+                if (ServiceProvider.Settings.Preview &&
+                    !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
+                    !ServiceProvider.Settings.UseExternalViewer)
+
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_ShowTimed);
+
                 Log.Debug("Photo transfer done.");
             }
             catch (Exception ex)
