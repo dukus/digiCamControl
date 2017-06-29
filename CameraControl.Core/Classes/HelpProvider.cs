@@ -100,7 +100,7 @@ namespace CameraControl.Core.Classes
                 {
                     Subject = subject,
                     Body = body ?? "",
-                    IsBodyHtml = true
+                    IsBodyHtml = false
                 };
                 if (File.Exists(file))
                     message.Attachments.Add(new Attachment(file));

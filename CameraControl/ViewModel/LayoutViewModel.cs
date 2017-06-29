@@ -148,34 +148,37 @@ namespace CameraControl.ViewModel
 
         public LayoutViewModel()
         {
-            NextImageCommand =
-                new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image));
-            PrevImageCommand =
-                new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image));
-
-            OpenExplorerCommand = new RelayCommand(OpenInExplorer);
-            DeleteItemCommand = new RelayCommand(DeleteItem);
-            RestoreCommand = new RelayCommand(Restore);
-            OpenInLightroomCommand =
-               new RelayCommand(() => ServiceProvider.Settings.DefaultSession.OpenInLightroom(), () => ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom"));
-            LightroomIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom");
-            PhotoshopIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Photoshop");
-
-            SelectNoneCommand = new RelayCommand(() => ServiceProvider.Settings.DefaultSession.SelectNone());
-            SelectAllCommand = new RelayCommand(() => ServiceProvider.Settings.DefaultSession.SelectAll());
-
-            ImageDoubleClickCommand =
-                new RelayCommand(
-                    () => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show));
             if (!IsInDesignMode)
             {
-                ZoomFit = true;
-            }
-            RotateLeftCommand =
-                new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateLeft));
-            RotateRightCommand =
-                new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateRight));
+                NextImageCommand =
+                    new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Next_Image));
+                PrevImageCommand =
+                    new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Prev_Image));
 
+                OpenExplorerCommand = new RelayCommand(OpenInExplorer);
+                DeleteItemCommand = new RelayCommand(DeleteItem);
+                RestoreCommand = new RelayCommand(Restore);
+                OpenInLightroomCommand =
+                    new RelayCommand(() => ServiceProvider.Settings.DefaultSession.OpenInLightroom(),
+                        () => ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom"));
+                LightroomIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Lightroom");
+                PhotoshopIsInstalled = ServiceProvider.Settings.DefaultSession.IsAvailable("Photoshop");
+
+                SelectNoneCommand = new RelayCommand(() => ServiceProvider.Settings.DefaultSession.SelectNone());
+                SelectAllCommand = new RelayCommand(() => ServiceProvider.Settings.DefaultSession.SelectAll());
+
+                ImageDoubleClickCommand =
+                    new RelayCommand(
+                        () => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show));
+                if (!IsInDesignMode)
+                {
+                    ZoomFit = true;
+                }
+                RotateLeftCommand =
+                    new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateLeft));
+                RotateRightCommand =
+                    new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateRight));
+            }
         }
 
         
