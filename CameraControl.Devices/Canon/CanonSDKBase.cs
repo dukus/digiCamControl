@@ -356,6 +356,7 @@ namespace CameraControl.Devices.Canon
         {
             try
             {
+                PreventShutDown = true;
                 IsBusy = true;
                 Camera = camera;
                 Camera.IsErrorTolerantMode = true;
@@ -407,8 +408,17 @@ namespace CameraControl.Devices.Canon
             IsBusy = false;
             CaptureInSdRam = true;
             Camera.PropertyChanged += Camera_PropertyChanged;
+            Camera.WillShutdown += Camera_WillShutdown;
             SerialNumber = Camera.SerialNumber;
             AddAditionalProps();
+        }
+
+        private void Camera_WillShutdown(object sender, EventArgs e)
+        {
+            if (PreventShutDown)
+            {
+                Camera.SendCommand(Edsdk.CameraCommand_ExtendShutDownTimer);
+            }
         }
 
         public virtual void AddAditionalProps()

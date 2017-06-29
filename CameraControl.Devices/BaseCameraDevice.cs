@@ -307,6 +307,16 @@ namespace CameraControl.Devices
             }
         }
 
+        public bool PreventShutDown
+        {
+            get { return _preventShutDown; }
+            set
+            {
+                _preventShutDown = value;
+                NotifyPropertyChanged("PreventShutDown");
+            }
+        }
+
         private bool _isConnected;
 
         public virtual bool IsConnected
@@ -504,6 +514,7 @@ namespace CameraControl.Devices
 
         private AsyncObservableCollection<PropertyValue<long>> _advancedProperties;
         private AsyncObservableCollection<PropertyValue<long>> _properties;
+        private bool _preventShutDown;
 
         public AsyncObservableCollection<PropertyValue<long>> AdvancedProperties
         {

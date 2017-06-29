@@ -99,6 +99,7 @@ namespace CameraControl.Devices
         string SerialNumber { get; set; }
         string DisplayName { get; set; }
         int ExposureStatus { get; set; }
+        bool PreventShutDown { get; set; }
 
         /// <summary>
         /// Check is a capability is supported
