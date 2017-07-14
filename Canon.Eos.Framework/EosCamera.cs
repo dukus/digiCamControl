@@ -544,12 +544,12 @@ namespace Canon.Eos.Framework
 
         public void StopRecord()
         {
-            LiveViewqueue.Enqueue(() =>
-            {
+            //LiveViewqueue.Enqueue(() =>
+            //{
                 this.SendCommand(Edsdk.CameraCommand_DoEvfAf, 0);
                 SetPropertyIntegerData(Edsdk.PropID_Record, (long)0);
                 this.SendCommand(Edsdk.CameraCommand_MovieSelectSwOFF);
-            });
+            //});
         }
 
 
@@ -585,6 +585,8 @@ namespace Canon.Eos.Framework
 
             Util.Assert(this.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int) Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely_NonAF),
                 "Failed to take picture no AF.");
+            Util.Assert(this.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_OFF),
+                "Failed to release.");
         }
 
         public void ResetShutterButton()

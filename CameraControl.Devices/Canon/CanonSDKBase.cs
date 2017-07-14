@@ -1285,40 +1285,43 @@ namespace CameraControl.Devices.Canon
 
         public override LiveViewData GetLiveViewImage()
         {
-            LiveViewData viewData = new LiveViewData();
-            if (Monitor.TryEnter(Locker, 1))
-            {
-                try
+
+                LiveViewData viewData = new LiveViewData();
+                if (Monitor.TryEnter(Locker, 10))
                 {
-                    if (Camera == null)
-                        return viewData;
-                    Camera.DownloadEvf();
-                    if (_liveViewImageData != null)
+                    try
                     {
-                        //DeviceReady();
-                        viewData.HaveFocusData = true;
-                        viewData.ImageDataPosition = 0;
-                        viewData.ImageData = _liveViewImageData.ImageData;
-                        viewData.ImageHeight = _liveViewImageData.ImageSize.Height;
-                        viewData.ImageWidth = _liveViewImageData.ImageSize.Width;
-                        viewData.LiveViewImageHeight = 100;
-                        viewData.LiveViewImageWidth = 100;
-                        viewData.FocusX = _liveViewImageData.ZommBounds.X + (_liveViewImageData.ZommBounds.Width/2);
-                        viewData.FocusY = _liveViewImageData.ZommBounds.Y + (_liveViewImageData.ZommBounds.Height/2);
-                        viewData.FocusFrameXSize = _liveViewImageData.ZommBounds.Width;
-                        viewData.FocusFrameYSize = _liveViewImageData.ZommBounds.Height;
-                        viewData.MovieIsRecording = _recording;
+                        if (Camera == null)
+                            return viewData;
+                        Camera.DownloadEvf();
+                        if (_liveViewImageData != null)
+                        {
+                            //DeviceReady();
+                            viewData.HaveFocusData = true;
+                            viewData.ImageDataPosition = 0;
+                            viewData.ImageData = _liveViewImageData.ImageData;
+                            viewData.ImageHeight = _liveViewImageData.ImageSize.Height;
+                            viewData.ImageWidth = _liveViewImageData.ImageSize.Width;
+                            viewData.LiveViewImageHeight = 100;
+                            viewData.LiveViewImageWidth = 100;
+                            viewData.FocusX = _liveViewImageData.ZommBounds.X +
+                                              (_liveViewImageData.ZommBounds.Width / 2);
+                            viewData.FocusY = _liveViewImageData.ZommBounds.Y +
+                                              (_liveViewImageData.ZommBounds.Height / 2);
+                            viewData.FocusFrameXSize = _liveViewImageData.ZommBounds.Width;
+                            viewData.FocusFrameYSize = _liveViewImageData.ZommBounds.Height;
+                            viewData.MovieIsRecording = _recording;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        //Log.Error("Error get live view image ", e);
+                    }
+                    finally
+                    {
+                        Monitor.Exit(Locker);
                     }
                 }
-                catch (Exception)
-                {
-                    //Log.Error("Error get live view image ", e);
-                }
-                finally
-                {
-                    Monitor.Exit(Locker);
-                }
-            }
             return viewData;
         }
 
