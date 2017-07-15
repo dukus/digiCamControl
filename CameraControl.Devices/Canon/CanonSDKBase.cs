@@ -37,6 +37,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Timers;
 using CameraControl.Devices.Classes;
 using Canon.Eos.Framework;
 using Canon.Eos.Framework.Eventing;
@@ -53,6 +54,7 @@ namespace CameraControl.Devices.Canon
         private bool _recording = false;
 
         public EosCamera Camera = null;
+        private System.Timers.Timer _shutdownTimer = new System.Timers.Timer(1000);
 
         protected Dictionary<uint, string> _shutterTable = new Dictionary<uint, string>
                                                                {
@@ -383,6 +385,7 @@ namespace CameraControl.Devices.Canon
                     OnCameraInitDone();
                 });
                 thread.Start();
+                _shutdownTimer.Elapsed += _shutdownTimer_Elapsed;
                 return true;
             }
             catch (Exception exception)
@@ -390,6 +393,11 @@ namespace CameraControl.Devices.Canon
                 Log.Error("Error initialize EOS camera object ", exception);
                 return false;
             }
+        }
+
+        private void _shutdownTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Camera_WillShutdown(null, null);
         }
 
         public void LoadProperties()
@@ -415,9 +423,16 @@ namespace CameraControl.Devices.Canon
 
         private void Camera_WillShutdown(object sender, EventArgs e)
         {
-            if (PreventShutDown)
+            try
             {
-                Camera.SendCommand(Edsdk.CameraCommand_ExtendShutDownTimer);
+                if (PreventShutDown)
+                {
+                    Camera.SendCommand(Edsdk.CameraCommand_ExtendShutDownTimer);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("PreventShutDown", exception);
             }
         }
 
