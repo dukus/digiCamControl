@@ -1,7 +1,7 @@
 ﻿<Controls:MetroWindow x:Class="CameraControl.windows.BulbWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Bulb" Height="475" Width="800" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:my="clr-namespace:CameraControl.windows"
+        Title="Bulb" Height="520" Width="800" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:my="clr-namespace:CameraControl.windows"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
@@ -35,11 +35,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
 
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Button Content="{T:TranslateExtension LabelStartCapture}" Name="btn_start" Click="btn_start_Click" Grid.Column="3" Grid.Row="1" Margin="5"/>
         <Button Content="{T:TranslateExtension LabelStopCapture}" Name="btn_stop" Click="btn_stop_Click" Grid.Column="3" Grid.Row="5" Margin="5"/>
@@ -73,9 +73,9 @@
         <GroupBox Grid.Column="4" Grid.Row="1" Grid.RowSpan="8" Header="{T:TranslateExtension LabelScript}" Margin="5">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="27*" />
-                    <RowDefinition Height="155*" />
-                    <RowDefinition Height="32*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Menu Name="menu1">
                     <MenuItem Header="Add">

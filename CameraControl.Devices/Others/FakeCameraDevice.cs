@@ -121,7 +121,7 @@ namespace CameraControl.Devices.Others
 
         public override string GetLiveViewStream()
         {
-            return "rtsp://wms.waystv.tv:1935/html5_waystlive/132/mainstream";
+            return "rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov";
         }
 
         public override LiveViewData GetLiveViewImage()

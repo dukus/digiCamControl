@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 
@@ -174,6 +175,7 @@ namespace CameraControl.Core.Classes
         private bool _gridVisible;
         private int _snapshotCaptureCount;
         private int _snapshotTimeCapture;
+        private Color _gridColor;
 
         public bool GridVisible
         {
@@ -202,6 +204,16 @@ namespace CameraControl.Core.Classes
             {
                 _snapshotTimeCapture = value;
                 NotifyPropertyChanged(nameof(SnapshotCaptureTime));
+            }
+        }
+
+        public Color GridColor
+        {
+            get { return _gridColor; }
+            set
+            {
+                _gridColor = value;
+                NotifyPropertyChanged(nameof(GridColor));
             }
         }
 
@@ -261,6 +273,7 @@ namespace CameraControl.Core.Classes
 
             SnapshotCaptureCount = 1;
             SnapshotCaptureTime = 500;
+            GridColor = Colors.Gray;
         }
 
 

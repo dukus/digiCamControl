@@ -1171,6 +1171,16 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public System.Windows.Media.Color GridColor
+        {
+            get { return CameraProperty.LiveviewSettings.GridColor; }
+            set
+            {
+                CameraProperty.LiveviewSettings.GridColor = value;
+                RaisePropertyChanged(()=>GridColor);
+            }
+        }
+
         public bool NoSettingArea
         {
             get { return !SettingArea; }
@@ -2199,7 +2209,7 @@ namespace CameraControl.ViewModel
         {
             System.Windows.Media.Color color = Colors.White;
             color.A = 50;
-
+            color = GridColor;
             if (OverlayActivated)
             {
                 if ((SelectedOverlay != null && File.Exists(SelectedOverlay)) || OverlayUseLastCaptured)
@@ -2232,7 +2242,7 @@ namespace CameraControl.ViewModel
 
                     //set color transparency for blit only the alpha chanel is used from transpColor
                     if (OverlayTransparency < 100)
-                        transpColor = System.Windows.Media.Color.FromArgb((byte) (0xff*OverlayTransparency/100d), 0xff,
+                        transpColor = System.Windows.Media.Color.FromArgb((byte)(0xff * OverlayTransparency / 100d), 0xff,
                             0xff, 0xff);
                     writeableBitmap.Blit(
                         new Rect(0 + (x/2) + xx, 0 + (y/2) + yy, writeableBitmap.PixelWidth - x,
