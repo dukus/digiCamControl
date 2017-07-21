@@ -361,7 +361,7 @@ namespace CameraControl.Devices.Canon
                 PreventShutDown = true;
                 IsBusy = true;
                 Camera = camera;
-                Camera.IsErrorTolerantMode = true;
+                Camera.IsErrorTolerantMode = false;
                 DeviceName = Camera.DeviceDescription;
                 PortName = camera.PortName;
                 Manufacturer = "Canon Inc.";
