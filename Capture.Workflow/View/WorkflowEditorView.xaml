@@ -11,8 +11,9 @@
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-                      x:Name="MetroWindow"
+                      x:Name="WorkflowEditorWindow"
         Title="WorkflowEditorView" Height="800" Width="1200">
     <Window.DataContext>
         <viewModel:WorkflowEditorViewModel/>
@@ -75,43 +76,75 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="1*" MaxWidth="200"/>
                             </Grid.ColumnDefinitions>
-                            <ListBox Margin="10" BorderThickness="1" BorderBrush="Black" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
-                             >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate >
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="15"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <materialDesign:PackIcon Kind="UnfoldMore"/>
-                                            <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            <StackPanel Grid.Row="1" Grid.Column="0">
-                                <controls:DropDownButton Name="AddNewViewButton" Margin="20,5" VerticalContentAlignment="Center" Content="Add view" DisplayMemberPath="Name" 
-                                                             ItemsSource="{Binding ViewsPlugins}">
-                                    <controls:DropDownButton.ItemContainerStyle>
-                                        <Style TargetType="MenuItem">
-                                            <Setter Property="Command" Value="{Binding DataContext.NewViewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
-                                            <Setter Property="CommandParameter" Value="{Binding}"/>
-                                        </Style>
-                                    </controls:DropDownButton.ItemContainerStyle>
-                                    <!--<controls:DropDownButton.Icon>
-                                <Rectangle Width="20" Height="20">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </controls:DropDownButton.Icon>-->
-                                </controls:DropDownButton>
-                                <Button Content="Delete view" Margin="20,5" Command="{Binding DeleteViewCommand}"/>
-                            </StackPanel>
-                            <!--<GroupBox.Effect>
-                            <DropShadowEffect ShadowDepth="1" Color="Gray" BlurRadius="7"  />
-                        </GroupBox.Effect>-->
+                            <materialDesign:DialogHost Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CloseOnClickAway="True" DialogClosing="DialogHost_DialogClosing">
+                                <materialDesign:DialogHost.DialogContent>
+                                    <StackPanel Margin="16">
+                                        <TextBlock>Add a new view.</TextBlock>
+                                        <ComboBox Margin="0 8 0 0" DisplayMemberPath="Name" ItemsSource="{Binding ViewsPlugins}" SelectedIndex="1" x:Name="NewViewComboBox"/>
+                                        <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="NewViewNameTextBox"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <Binding ElementName="NewViewComboBox" Path="SelectedItem"/>
+                                                </Button.CommandParameter>
+                                                ACCEPT
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean>False</system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCEL
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:DialogHost.DialogContent>
+                                <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}" ClipToBounds="True">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ListBox Margin="10" ItemsSource="{Binding CurrentWorkFlow.Views}" SelectedItem="{Binding SelectedView}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate >
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="15"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="30"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                                        <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                                                        <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
+                                                            <StackPanel>
+                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteViewCommand, ElementName=WorkflowEditorWindow}"/>
+                                                            </StackPanel>
+                                                        </materialDesign:PopupBox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
+                                            <TextBlock Margin="16">Views</TextBlock>
+                                        </materialDesign:ColorZone>
+                                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                    Grid.Row="0" Margin="0 0 28 -20">
+                                            <Viewbox Width="22" Height="22">
+                                                <Canvas Width="24" Height="24">
+                                                    <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </materialDesign:DialogHost>
+
                             <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="274*"/>
