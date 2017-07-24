@@ -30,7 +30,25 @@ namespace Capture.Workflow.View
         {
             var param = eventArgs.Parameter as PluginInfo;
             if (param != null)
-                ((WorkflowEditorViewModel) DataContext).NewViewCommand.Execute(param);
+            {
+                switch (param.Type)
+                {
+                    case PluginType.View:
+                        ((WorkflowEditorViewModel)DataContext).NewViewCommand.Execute(param);
+                        break;
+                    case PluginType.Event:
+                        break;
+                    case PluginType.Action:
+                        break;
+                    case PluginType.ViewElement:
+                        ((WorkflowEditorViewModel)DataContext).NewViewElementCommand.Execute(param);
+                        break;
+                    case PluginType.Command:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
     }

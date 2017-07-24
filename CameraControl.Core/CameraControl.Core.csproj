@@ -350,7 +350,6 @@
     <Compile Include="Wpf\AdvancedSlider.xaml.cs">
       <DependentUpon>AdvancedSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wpf\ArrayConverter.cs" />
     <Compile Include="Wpf\AvalonEditExtensions.cs" />
     <Compile Include="Wpf\Colorpicker.xaml.cs">
       <DependentUpon>Colorpicker.xaml</DependentUpon>

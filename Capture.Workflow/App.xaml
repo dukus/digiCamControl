@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Capture.Workflow"
              xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              StartupUri="MainWindow.xaml" Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
@@ -18,11 +20,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
 
                 <!-- Material Design: MahApps Compatibility -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Defaults.xaml" />
                 
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
 
             <!-- MahApps Brushes -->
             <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
@@ -41,7 +45,6 @@
             <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary500Foreground}"/>
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary500}" Opacity="0.4"/>
 
-            <wpf:ArrayConverter x:Key="ArrayConverter"/> 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
