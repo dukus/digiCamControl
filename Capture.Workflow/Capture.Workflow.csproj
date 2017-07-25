@@ -183,6 +183,7 @@
       <DependentUpon>PropertyEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wpf\Converters\ParameterToControlConverter.cs" />
+    <Compile Include="Wpf\Converters\StringToIconConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

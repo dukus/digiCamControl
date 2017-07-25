@@ -14,7 +14,7 @@
     <Grid>
     <StackPanel>
         <Label Content="Select view"/>
-        <ComboBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Margin="3" DisplayMemberPath="Name"/>
+        <ComboBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Margin="3" DisplayMemberPath="Name" />
         <Label Content="View Name"/>
         <TextBox Text="{Binding Name}" Margin="3"/>
     </StackPanel>

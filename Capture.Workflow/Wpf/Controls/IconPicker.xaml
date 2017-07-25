@@ -10,10 +10,7 @@
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type materialDesign:PackIconKind}">
             <DockPanel ToolTip="{Binding }" Width="100" Height="64" Background="Transparent">
-                <TextBlock Text="{Binding }" DockPanel.Dock="Bottom" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" />
-                <materialDesign:PackIcon Kind="{Binding }" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                         Width="32" Height="32"                                                 
-                />
+
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -21,6 +18,22 @@
         <ComboBox Name="IconList"
                   SelectedValue="{Binding ElementName=ThisIconPicker, Path=SelectedIcon}" 
                   SnapsToDevicePixels="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="{Binding Converter={StaticResource StringToIconConverter} }" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                 Width="32" Height="32"                                                 
+                        />
+                        <TextBlock Text="{Binding }" DockPanel.Dock="Bottom" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
         </ComboBox>
     </Grid>
 </UserControl>
+

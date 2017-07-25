@@ -10,26 +10,34 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:ParameterToControlConverter x:Key="ParameterToControlConverter" />
+        <Style x:Key="DataGrid" TargetType="DataGrid">
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <UserControl.DataContext>
         <classes:CustomPropertyCollection/>
     </UserControl.DataContext>
     <Grid>
-        <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding Items}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ToolTip="{Binding Description}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Name}" Margin="3" HorizontalAlignment="Right" FontWeight="Bold"/>
-                            <ContentControl Grid.Column="1" Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <DataGrid ItemsSource="{Binding Items}"  CanUserSortColumns="True" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" EnableRowVirtualization="False"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Name" Width="Auto" />
+                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Value" Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3" Background="{StaticResource MenuItemSelectionFill}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

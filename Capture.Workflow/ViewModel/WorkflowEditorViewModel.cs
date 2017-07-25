@@ -24,6 +24,7 @@ namespace Capture.Workflow.ViewModel
         private WorkFlowCommand _selectedViewCommand;
         private WorkFlowEvent _selectedEvent;
         private WorkFlowCommand _selectedEventCommand;
+        private PluginInfo _selectedNewEventPlugin;
 
         public List<PluginInfo> ViewsPlugins { get; set; }
         public List<PluginInfo> CommandPlugins { get; set; }
@@ -161,6 +162,17 @@ namespace Capture.Workflow.ViewModel
                 RaisePropertyChanged(()=>SelectedViewCommand);
             }
         }
+
+        public PluginInfo SelectedNewEventPlugin
+        {
+            get { return _selectedNewEventPlugin; }
+            set
+            {
+                _selectedNewEventPlugin = value;
+                RaisePropertyChanged(() => SelectedNewEventPlugin);
+            }
+        }
+
 
         public CustomPropertyCollection PropertyCollection { get; set; }
 

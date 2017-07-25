@@ -37,6 +37,7 @@ namespace Capture.Workflow.View
                         ((WorkflowEditorViewModel)DataContext).NewViewCommand.Execute(param);
                         break;
                     case PluginType.Event:
+                        ((WorkflowEditorViewModel)DataContext).NewEventCommand.Execute(param);
                         break;
                     case PluginType.Action:
                         break;

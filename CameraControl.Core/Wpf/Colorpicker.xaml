@@ -22,6 +22,11 @@
         <ComboBox Name="ColorList1"
               SelectedValue="{Binding ElementName=ThisColorPicker, Path=SelectedColor}" 
               SnapsToDevicePixels="True">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
         </ComboBox>
     </Grid>
 </UserControl>
