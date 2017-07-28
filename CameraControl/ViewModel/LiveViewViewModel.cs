@@ -2491,6 +2491,7 @@ namespace CameraControl.ViewModel
             try
             {
                 CameraDevice.StartRecordMovie();
+                Recording = true;
                 _recordStartTime = DateTime.Now;
             }
             catch (Exception exception)
@@ -2590,6 +2591,7 @@ namespace CameraControl.ViewModel
                 } while (retry && retryNum < 35);
                 if (CameraDevice.GetCapability(CapabilityEnum.LiveViewStream))
                 {
+                    Recording = false;
                     Application.Current.Dispatcher.BeginInvoke(new Action(
                         () =>
                         {

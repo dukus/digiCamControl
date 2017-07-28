@@ -31,6 +31,7 @@ namespace CameraControl.Devices.Others
             CurrentValues = new Dictionary<string, string>();
             Capabilities.Add(CapabilityEnum.LiveView);
             Capabilities.Add(CapabilityEnum.LiveViewStream);
+            Capabilities.Add(CapabilityEnum.RecordMovie);
             Protocol = deviceDescriptor.StillImageDevice as YiCameraProtocol;
             Protocol.DataReceiverd += Protocol_DataReceiverd;
 
@@ -281,6 +282,17 @@ namespace CameraControl.Devices.Others
                 _timelapse_running = false;
             Mode.IsEnabled = !_timelapse_running;
             Protocol.SendCommand(_timelapse_running ? 770 : 769);
+        }
+
+
+        public override void StartRecordMovie()
+        {
+            Protocol.SendCommand(513);
+        }
+
+        public override void StopRecordMovie()
+        {
+            Protocol.SendCommand(514);
         }
 
         public override bool DeleteObject(DeviceObject deviceObject)
