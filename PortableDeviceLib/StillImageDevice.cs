@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -241,6 +242,7 @@ namespace PortableDeviceLib
                 byte[] buffer = new byte[(int)cbBytesRead];
                 Marshal.Copy(tmpPtr, buffer, 0, (int)cbBytesRead);
                 stream.Write(buffer, 0, (int)cbBytesRead);
+
 
                 //for (int i = 0; i < cbBytesRead; i++)
                 //{

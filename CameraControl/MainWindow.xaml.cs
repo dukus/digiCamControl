@@ -38,7 +38,6 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Database;
@@ -53,13 +52,9 @@ using CameraControl.Layouts;
 using CameraControl.ViewModel;
 using CameraControl.windows;
 using Hardcodet.Wpf.TaskbarNotification;
-using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
-using EditSession = CameraControl.windows.EditSession;
-using FileInfo = System.IO.FileInfo;
 using HelpProvider = CameraControl.Core.Classes.HelpProvider;
-using MessageBox = System.Windows.MessageBox;
 //using MessageBox = System.Windows.Forms.MessageBox;
 using Path = System.IO.Path;
 using Timer = System.Timers.Timer;
@@ -491,11 +486,23 @@ namespace CameraControl
                 if (File.Exists(tempFile))
                     File.Delete(tempFile);
 
+                Stopwatch stopWatch = new Stopwatch();
+                // transfer file from camera to temporary folder 
+                // in this way if the session folder is used as hot folder will prevent write errors
+                stopWatch.Start();
                 if (!eventArgs.CameraDevice.CaptureInSdRam && session.DownloadThumbOnly)
                     eventArgs.CameraDevice.TransferFileThumb(eventArgs.Handle, tempFile);
                 else
                     eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
                 eventArgs.CameraDevice.TransferProgress = 0;
+                eventArgs.CameraDevice.IsBusy = false;
+                stopWatch.Stop();
+                string strTransfer = "Transfer time : " + stopWatch.Elapsed.TotalSeconds.ToString("##.###") + " Speed :" +
+                                     Math.Round(
+                                         new System.IO.FileInfo(tempFile).Length / 1024.0 / 1024 /
+                                         stopWatch.Elapsed.TotalSeconds, 2)+" Mb/s";
+                Log.Debug(strTransfer);
+
                 string fileName = "";
                 if (!session.UseOriginalFilename || eventArgs.CameraDevice.CaptureInSdRam)
                 {
@@ -659,8 +666,7 @@ namespace CameraControl
                 }
                 _lastLoadTime = DateTime.Now;
                 //ServiceProvider.Settings.Save(session);
-                StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferDone;
-                eventArgs.CameraDevice.IsBusy = false;
+                StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferDone + " "+ strTransfer;
 
                 if (ServiceProvider.Settings.UseExternalViewer &&
                     File.Exists(ServiceProvider.Settings.ExternalViewerPath))

@@ -267,18 +267,23 @@ namespace CameraControl.Devices
                 {
                     try
                     {
-                        result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetObject, stream,
-                            (total, current) =>
-                            {
-                                double i = (double) current/total;
-                                TransferProgress =
-                                    Convert.ToUInt32(i*100);
-                            }, Convert.ToUInt32(o));
-                        if (result != null && result.Data != null)
+                        using (MemoryStream mStream = new MemoryStream())
                         {
-                            stream.Write(result.Data, 0, result.Data.Length);
+
+                            result = StillImageDevice.ExecuteReadBigData(CONST_CMD_GetObject, mStream,
+                                (total, current) =>
+                                {
+                                    double i = (double) current / total;
+                                    TransferProgress =
+                                        Convert.ToUInt32(i * 100);
+                                }, Convert.ToUInt32(o));
+                            //if (result != null && result.Data != null)
+                            //{
+                            //    stream.Write(result.Data, 0, result.Data.Length);
+                            //}
+                            stream.Write(mStream.ToArray(), 0, (int)mStream.Length);
+                            break;
                         }
-                        break;
                     }
                     catch (COMException)
                     {

@@ -627,125 +627,138 @@ namespace CameraControl.ViewModel
         {
             if (IsRunning)
                 return;
-
-            // construct a scheduler factory
-            ISchedulerFactory schedFact = new StdSchedulerFactory();
-
-            // get a scheduler, start the schedular before triggers or anything else
-            if (sched == null)
-            {
-                sched = schedFact.GetScheduler().Result;
-            }
-
-            // create job
-            IJobDetail job = JobBuilder.Create<SimpleJob>()
-                .WithIdentity("job1", "group1")
-                .Build();
-
-            // create trigger
-
-            var triggerB = TriggerBuilder.Create()
-                .WithIdentity("trigger1", "group1");
-
-            if (StartIn)
-            {
-                triggerB =
-                    triggerB.StartAt(DateBuilder.FutureDate((StartHour*60*60) + (StartMinute*60) + StartSecond,
-                        IntervalUnit.Second));
-
-            }
-            
-            if (StartAt)
-            {
-                triggerB =
-                    triggerB.StartAt(DateBuilder.DateOf(StartHour, StartMinute,  StartSecond,StartDate.Day, StartDate.Month, StartDate.Year));
-            }
-            if (StartDaily)
-            {
-                ISet<DayOfWeek> days = new HashSet<DayOfWeek>();
-                if (StartDay0)
-                    days.Add(DayOfWeek.Sunday);
-                if (StartDay1)
-                    days.Add(DayOfWeek.Monday);
-                if (StartDay2)
-                    days.Add(DayOfWeek.Tuesday);
-                if (StartDay3)
-                    days.Add(DayOfWeek.Wednesday);
-                if (StartDay4)
-                    days.Add(DayOfWeek.Thursday);
-                if (StartDay5)
-                    days.Add(DayOfWeek.Friday);
-                if (StartDay6)
-                    days.Add(DayOfWeek.Saturday);
-
-                triggerB =
-                    triggerB.WithDailyTimeIntervalSchedule(
-                        x =>
-                            x.WithIntervalInSeconds(TimeBetweenShots).WithMisfireHandlingInstructionFireAndProceed()
-                                .StartingDailyAt(new TimeOfDay(StartHour, StartMinute, StartSecond))
-                                .EndingDailyAt(new TimeOfDay(StopHour, StopMinute, StopSecond))
-                                .OnDaysOfTheWeek(days)
-                        );
-            }
-            else
+            try
             {
 
-                if (StopAtPhotos)
+                // construct a scheduler factory
+                ISchedulerFactory schedFact = new StdSchedulerFactory();
+
+                // get a scheduler, start the schedular before triggers or anything else
+                if (sched == null)
                 {
-                    triggerB =
-                        triggerB.WithSimpleSchedule(
-                            x =>
-                                x.WithIntervalInSeconds(TimeBetweenShots)
-                                    .WithRepeatCount(StopCaptureCount)
-                                    .WithMisfireHandlingInstructionNowWithExistingCount());
+                    sched = schedFact.GetScheduler().Result;
                 }
-                else if (StopIn)
+
+                // create job
+                IJobDetail job = JobBuilder.Create<SimpleJob>()
+                    .WithIdentity("job1", "group1")
+                    .Build();
+
+                // create trigger
+
+                var triggerB = TriggerBuilder.Create()
+                    .WithIdentity("trigger1", "group1");
+
+                if (StartIn)
                 {
                     triggerB =
-                        triggerB.WithSimpleSchedule(
+                        triggerB.StartAt(DateBuilder.FutureDate(
+                            (StartHour * 60 * 60) + (StartMinute * 60) + StartSecond,
+                            IntervalUnit.Second));
+
+                }
+
+                if (StartAt)
+                {
+                    triggerB =
+                        triggerB.StartAt(DateBuilder.DateOf(StartHour, StartMinute, StartSecond, StartDate.Day,
+                            StartDate.Month, StartDate.Year));
+                }
+                if (StartDaily)
+                {
+                    ISet<DayOfWeek> days = new HashSet<DayOfWeek>();
+                    if (StartDay0)
+                        days.Add(DayOfWeek.Sunday);
+                    if (StartDay1)
+                        days.Add(DayOfWeek.Monday);
+                    if (StartDay2)
+                        days.Add(DayOfWeek.Tuesday);
+                    if (StartDay3)
+                        days.Add(DayOfWeek.Wednesday);
+                    if (StartDay4)
+                        days.Add(DayOfWeek.Thursday);
+                    if (StartDay5)
+                        days.Add(DayOfWeek.Friday);
+                    if (StartDay6)
+                        days.Add(DayOfWeek.Saturday);
+
+                    triggerB =
+                        triggerB.WithDailyTimeIntervalSchedule(
                             x =>
                                 x.WithIntervalInSeconds(TimeBetweenShots)
-                                    .WithMisfireHandlingInstructionNowWithExistingCount()
-                                    .WithRepeatCount(((StopHour*60*60) + (StopMinute*60) + StopSecond)/TimeBetweenShots));
+                                    .WithMisfireHandlingInstructionFireAndProceed()
+                                    .StartingDailyAt(new TimeOfDay(StartHour, StartMinute, StartSecond))
+                                    .EndingDailyAt(new TimeOfDay(StopHour, StopMinute, StopSecond))
+                                    .OnDaysOfTheWeek(days)
+                        );
                 }
                 else
                 {
-                    triggerB =
-                        triggerB.WithSimpleSchedule(
-                            x =>
-                                x.WithIntervalInSeconds(TimeBetweenShots)
-                                    .WithMisfireHandlingInstructionNowWithExistingCount()
-                                    .RepeatForever());
+
+                    if (StopAtPhotos)
+                    {
+                        triggerB =
+                            triggerB.WithSimpleSchedule(
+                                x =>
+                                    x.WithIntervalInSeconds(TimeBetweenShots)
+                                        .WithRepeatCount(StopCaptureCount)
+                                        .WithMisfireHandlingInstructionNowWithExistingCount());
+                    }
+                    else if (StopIn)
+                    {
+                        triggerB =
+                            triggerB.WithSimpleSchedule(
+                                x =>
+                                    x.WithIntervalInSeconds(TimeBetweenShots)
+                                        .WithMisfireHandlingInstructionNowWithExistingCount()
+                                        .WithRepeatCount(((StopHour * 60 * 60) + (StopMinute * 60) + StopSecond) /
+                                                         TimeBetweenShots));
+                    }
+                    else
+                    {
+                        triggerB =
+                            triggerB.WithSimpleSchedule(
+                                x =>
+                                    x.WithIntervalInSeconds(TimeBetweenShots)
+                                        .WithMisfireHandlingInstructionNowWithExistingCount()
+                                        .RepeatForever());
+                    }
+
+                    if (StopAt)
+                    {
+                        triggerB =
+                            triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond, StopDate.Day,
+                                StopDate.Month,
+                                StopDate.Year));
+                    }
                 }
 
-                if (StopAt)
-                {
-                    triggerB =
-                        triggerB.EndAt(DateBuilder.DateOf(StopHour, StopMinute, StopSecond, StopDate.Day, StopDate.Month,
-                            StopDate.Year));
-                }
+                trigger = triggerB.Build();
+
+
+                // Schedule the job using the job and trigger 
+                sched.ScheduleJob(job, trigger);
+                sched.Start();
+
+                if (_bracketingViewModel != null)
+                    _bracketingViewModel.Stop();
+                _bracketingViewModel = null;
+                IsRunning = true;
+                _timeLapseStartTime = DateTime.Now;
+                _lastCaptureTime = DateTime.Now;
+                Log.Debug("Timelapse start");
+                _totalCaptures = 0;
+                _timer.Interval = 1000;
+                _timer.Start();
+                _lastTime = DateTime.Now;
+                TimeLapseSettings.Started = true;
+                ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
             }
-
-            trigger = triggerB.Build();
-
-
-            // Schedule the job using the job and trigger 
-            sched.ScheduleJob(job, trigger);
-            sched.Start();
-
-            if (_bracketingViewModel != null)
-                _bracketingViewModel.Stop();
-            _bracketingViewModel = null;
-            IsRunning = true;
-            _timeLapseStartTime = DateTime.Now;
-            _lastCaptureTime = DateTime.Now;
-            Log.Debug("Timelapse start");
-            _totalCaptures = 0;
-            _timer.Interval = 1000;
-            _timer.Start();
-            _lastTime = DateTime.Now;
-            TimeLapseSettings.Started = true;
-            ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
+            catch (Exception e)
+            {
+                MessageBox.Show("Unable to start timelapse " + e.Message);
+                Log.Debug("Unable to start timelapse ", e);
+            }
         }
 
         private void StopL()
