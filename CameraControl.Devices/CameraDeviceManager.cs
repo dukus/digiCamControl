@@ -110,10 +110,7 @@ namespace CameraControl.Devices
                     ? ConnectedDevices[0]
                     : new NotConnectedCameraDevice());
 
-                if (CameraSelected != null)
-                {
-                    CameraSelected(device, _selectedCameraDevice);
-                }
+                CameraSelected?.Invoke(device, _selectedCameraDevice);
 
                 NotifyPropertyChanged("SelectedCameraDevice");
             }
