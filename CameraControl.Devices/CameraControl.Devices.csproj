@@ -169,6 +169,7 @@
     <Compile Include="ICameraDevice.cs" />
     <Compile Include="IWifiDeviceProvider.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="Nikon\NikonD500.cs" />
     <Compile Include="Nikon\NikonD600.cs" />
     <Compile Include="Nikon\NikonD7100.cs" />
     <Compile Include="Nikon\NikonBase.cs" />

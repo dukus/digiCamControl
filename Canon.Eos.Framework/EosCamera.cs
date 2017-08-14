@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Canon.Eos.Framework.Eventing;
@@ -552,6 +553,17 @@ namespace Canon.Eos.Framework
             //});
         }
 
+        public bool IsOldCanon()
+        {
+            if (string.IsNullOrEmpty(ProductName))
+                return false;
+            string[] models =
+            {
+                " 1000D", " 40D", " 450D", " 50D", " 400D", " 500D", "Rebel XSi", "Rebel XTi",
+                "Rebel XS", "Rebel T1i", "1Ds Mark III"
+            };
+            return models.Any(model => DeviceDescription.ToLower().Contains(model.ToLower()));
+        }
 
         /// <summary>
         /// Takes the picture.
@@ -559,9 +571,14 @@ namespace Canon.Eos.Framework
 
         public void TakePicture()
         {
-            //_photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
             lock (_locker)
             {
+                if (IsOldCanon())
+                {
+                    Util.Assert(this.SendCommand(Edsdk.CameraCommand_TakePicture), "Failed to capture picture with CameraCommand_TakePicture.");
+                    return;
+                }
+
                 if (this.IsLegacy && !this.IsLocked)
                 {
                     this.LockAndExceute(this.TakePicture);
@@ -577,6 +594,12 @@ namespace Canon.Eos.Framework
         public void TakePictureNoAf()
         {
             //_photoCounter = ImageQuality.SecondaryCompressLevel != EosCompressLevel.Unknown ? 0 : 1;
+            if (IsOldCanon())
+            {
+                Util.Assert(this.SendCommand(Edsdk.CameraCommand_TakePicture), "Failed to capture picture with CameraCommand_TakePicture.");
+                return;
+            }
+
             if (this.IsLegacy && !this.IsLocked)
             {
                 this.LockAndExceute(this.TakePictureNoAf);

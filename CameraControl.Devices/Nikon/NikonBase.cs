@@ -245,7 +245,7 @@ namespace CameraControl.Devices.Nikon
                                                               {32787, "Custom"}
                                                           };
 
-        protected Dictionary<int, string> _csTable = new Dictionary<int, string>()
+        protected  Dictionary<int, string> _csTable = new Dictionary<int, string>()
                                                          {
                                                              {0, "JPEG (BASIC)"},
                                                              {1, "JPEG (NORMAL)"},

@@ -110,10 +110,7 @@ namespace CameraControl.Devices
                     ? ConnectedDevices[0]
                     : new NotConnectedCameraDevice());
 
-                if (CameraSelected != null)
-                {
-                    CameraSelected(device, _selectedCameraDevice);
-                }
+                CameraSelected?.Invoke(device, _selectedCameraDevice);
 
                 NotifyPropertyChanged("SelectedCameraDevice");
             }
@@ -152,9 +149,9 @@ namespace CameraControl.Devices
                                   {"D4S", typeof (NikonD4)},
                                   {"D40", typeof (NikonD40)},
                                   {"D40X", typeof (NikonD40)},
-                                  {"D5", typeof (NikonD600Base)},
+                                  {"D5", typeof (NikonD500)},
                                   {"D50", typeof (NikonD40)},
-                                  {"D500", typeof (NikonD600Base)},
+                                  {"D500", typeof (NikonD500)},
                                   {"D5600", typeof (NikonD5200)},
                                   {"D5500", typeof (NikonD5200)},
                                   {"D5300", typeof (NikonD5200)},
