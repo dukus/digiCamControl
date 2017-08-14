@@ -84,7 +84,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 0,
                 RangeMax = 9999,
-                Value = "50"
+                Value = "0"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -92,7 +92,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 0,
                 RangeMax = 9999,
-                Value = "5"
+                Value = "2"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -136,11 +136,14 @@ namespace Capture.Workflow.Plugins.ViewElements
             ComboBox comboBox = new ComboBox()
             {
                 Width = viewElement.Properties["Width"].ToInt(),
-                Height = viewElement.Properties["Height"].ToInt(),
+                
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
+            if (viewElement.Properties["Height"].ToInt() > 0)
+                comboBox.Height = viewElement.Properties["Height"].ToInt();
+
             comboBox.DataContext = property;
             comboBox.SetBinding(ComboBox.IsEnabledProperty, "IsEnabled");
             comboBox.SetBinding(ComboBox.ItemsSourceProperty, "Values");
@@ -161,11 +164,13 @@ namespace Capture.Workflow.Plugins.ViewElements
             var label = new System.Windows.Controls.TextBlock()
             {
                 Width = viewElement.Properties["LabelWidth"].ToInt(),
-                Height = viewElement.Properties["Height"].ToInt(),
                 Text = viewElement.Properties["Caption"].Value,
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
                 VerticalAlignment = VerticalAlignment.Center,
             };
+
+            if (viewElement.Properties["Height"].ToInt() > 0)
+                label.Height = viewElement.Properties["Height"].ToInt();
 
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" &&
                 viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")

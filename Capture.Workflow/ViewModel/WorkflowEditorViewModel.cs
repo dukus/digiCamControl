@@ -50,10 +50,18 @@ namespace Capture.Workflow.ViewModel
             {
                 _selectedView = value;
                 RaisePropertyChanged(() => SelectedView);
+                RaisePropertyChanged(() => IsViewSelected);
+                RaisePropertyChanged(() => HaveViewEvents);
                 if (_selectedView?.Elements.Count > 0)
                     SelectedElement = _selectedView.Elements[0];
+                if (_selectedView?.Events.Count > 0)
+                    SelectedViewCommandCollection = _selectedView?.Events[0];
             }
         }
+
+        public bool HaveViewEvents => _selectedView?.Events.Count>0 || IsInDesignMode;
+
+        public bool IsViewSelected => SelectedView != null || IsInDesignMode;
 
         public WorkFlowEvent SelectedEvent
         {
@@ -94,6 +102,7 @@ namespace Capture.Workflow.ViewModel
             {
                 _selectedElement = value;
                 RaisePropertyChanged(() => SelectedElement);
+                RaisePropertyChanged(() => IsElementSelected);
                 if (_selectedElement?.Events.Count > 0)
                 {
                     HaveEvents = true;
@@ -110,6 +119,8 @@ namespace Capture.Workflow.ViewModel
                 }
             }
         }
+
+        public bool IsElementSelected => SelectedElement != null || IsInDesignMode;
 
         public CommandCollection SelectedCommandCollection
         {
