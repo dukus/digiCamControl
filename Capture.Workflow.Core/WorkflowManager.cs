@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using CameraControl.Devices;
@@ -356,6 +357,9 @@ namespace Capture.Workflow.Core
                     break;
                 case Messages.StopLiveView:
                     _liveViewTimer.Stop();
+                    break;
+                case Messages.ShowMessage:
+                    MessageBox.Show(e.Param.ToString());
                     break;
             }
             Message?.Invoke(this, e);

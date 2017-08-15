@@ -359,6 +359,7 @@
     <Compile Include="Wpf\ItemBackgroundConverter.cs" />
     <Compile Include="Wpf\ListBoxBehavior.cs" />
     <Compile Include="Wpf\MoveThumb.cs" />
+    <Compile Include="Wpf\NotEqualityToVisibilityConverter.cs" />
     <Compile Include="Wpf\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
     </Compile>

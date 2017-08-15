@@ -5,12 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="WorkflowViewView" Height="300" Width="300" WindowState="Maximized">
     <Window.DataContext>
         <viewModel:WorkflowViewViewModel/>
     </Window.DataContext>
-    <Grid>
-        <ContentControl Content="{Binding Contents}"/>
-    </Grid>
+    <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                  DockPanel.Dock="Top"
+                                  HorizontalAlignment="Right" Margin="16"
+                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
+                    <StackPanel>
+                        <!--<MenuItem Header="New"/>
+                        <MenuItem Header="Open ..." Command="{Binding LoadCommand}"/>
+                        <MenuItem Header="Save ..." Command="{Binding SaveCommand}"/>-->
+                    </StackPanel>
+
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          Mode="PrimaryMid" DockPanel.Dock="Top" Height="69">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                      x:Name="MenuToggleButton"/>
+                        <ProgressBar DockPanel.Dock="Right" Width="150" Height="20" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
+                        <!--<materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                            <StackPanel>
+                                <Button Content="Create New Workflow" Command="{Binding EditCommand}"/>
+                                <Separator/>
+                                <Button Content="Settings" Command="{Binding EditCommand}"/>
+
+                            </StackPanel>
+                        </materialDesign:PopupBox>-->
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Text="{Binding Title}"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <ContentControl Grid.Row="1" Content="{Binding Contents}"/>
+            </Grid>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </controls:MetroWindow>
