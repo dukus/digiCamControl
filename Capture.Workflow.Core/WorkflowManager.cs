@@ -46,13 +46,13 @@ namespace Capture.Workflow.Core
 
         public Context Context { get; set; }
 
-        public static void Execute(CommandCollection collection)
+        public static void Execute(CommandCollection collection, Context context)
         {
             try
             {
                 foreach (var command in collection.Items)
                 {
-                    if (!command.Instance.Execute(command))
+                    if (!command.Instance.Execute(command, context))
                         return;
                 }
             }

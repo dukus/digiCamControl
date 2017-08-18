@@ -135,15 +135,13 @@ namespace Capture.Workflow.Plugins.ViewElements
                 ServiceProvider.Instance.DeviceManager.SelectedCameraDevice);
             ComboBox comboBox = new ComboBox()
             {
-                Width = viewElement.Properties["Width"].ToInt(),
-                
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
-            if (viewElement.Properties["Height"].ToInt() > 0)
-                comboBox.Height = viewElement.Properties["Height"].ToInt();
 
+            viewElement.SetSize(comboBox);
+            
             comboBox.DataContext = property;
             comboBox.SetBinding(ComboBox.IsEnabledProperty, "IsEnabled");
             comboBox.SetBinding(ComboBox.ItemsSourceProperty, "Values");
@@ -161,13 +159,15 @@ namespace Capture.Workflow.Plugins.ViewElements
                     new SolidColorBrush(
                         (Color) ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
 
-            var label = new System.Windows.Controls.TextBlock()
+            var label = new TextBlock()
             {
-                Width = viewElement.Properties["LabelWidth"].ToInt(),
                 Text = viewElement.Properties["Caption"].Value,
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
                 VerticalAlignment = VerticalAlignment.Center,
             };
+
+            if (viewElement.Properties["LabelWidth"].ToInt() > 0)
+                label.Width = viewElement.Properties["LabelWidth"].ToInt();
 
             if (viewElement.Properties["Height"].ToInt() > 0)
                 label.Height = viewElement.Properties["Height"].ToInt();
@@ -217,5 +217,6 @@ namespace Capture.Workflow.Plugins.ViewElements
             }
             return null;
         }
+
     }
 }

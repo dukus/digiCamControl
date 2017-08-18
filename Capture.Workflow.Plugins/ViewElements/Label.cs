@@ -89,12 +89,11 @@ namespace Capture.Workflow.Plugins.ViewElements
         {
             var label = new System.Windows.Controls.Label()
             {
-                Width = viewElement.Properties["Width"].ToInt(),
-                Height = viewElement.Properties["Height"].ToInt(),
                 Content = viewElement.Properties["Text"].Value,
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
             };
+            viewElement.SetSize(label);
+
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
                 label.Background =
                     new SolidColorBrush(

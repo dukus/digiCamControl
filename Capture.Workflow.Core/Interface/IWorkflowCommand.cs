@@ -8,6 +8,6 @@ namespace Capture.Workflow.Core.Interface
     {
         string Name { get; set; }
         WorkFlowCommand CreateCommand();
-        bool  Execute(WorkFlowCommand command);
+        bool  Execute(WorkFlowCommand command, Context context);
     }
 }

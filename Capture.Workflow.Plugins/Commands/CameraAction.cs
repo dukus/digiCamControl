@@ -43,7 +43,7 @@ namespace Capture.Workflow.Plugins.Commands
             return command;
         }
 
-        public bool Execute(WorkFlowCommand command)
+        public bool Execute(WorkFlowCommand command, Context context)
         {
             try
             {

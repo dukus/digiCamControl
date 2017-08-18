@@ -102,13 +102,11 @@ namespace Capture.Workflow.Plugins.ViewElements
         {
             var textBox = new TextBox()
             {
-                Width = viewElement.Properties["Width"].ToInt(),
-                Height = viewElement.Properties["Height"].ToInt(),
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
+            viewElement.SetSize(textBox);
 
             textBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].Value];
             textBox.SetBinding(TextBox.TextProperty, "Value");
@@ -125,13 +123,16 @@ namespace Capture.Workflow.Plugins.ViewElements
 
             var label = new System.Windows.Controls.Label()
             {
-                Width = viewElement.Properties["LabelWidth"].ToInt(),
                 Height = viewElement.Properties["Height"].ToInt(),
                 Content = viewElement.Properties["Caption"].Value,
                 Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
                 VerticalContentAlignment = VerticalAlignment.Center,
             };
+
+            if (viewElement.Properties["LabelWidth"].ToInt() > 0)
+                label.Width = viewElement.Properties["LabelWidth"].ToInt();
+
             //if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
             //    label.Background =
             //        new SolidColorBrush(

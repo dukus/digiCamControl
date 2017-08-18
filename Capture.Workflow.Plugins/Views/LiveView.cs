@@ -60,7 +60,7 @@ namespace Capture.Workflow.Plugins.Views
             model.View = view;
             var res = new LiveViewUI();
             res.DataContext = model;
-            WorkflowManager.Execute(view.GetEventCommands("Load"));
+            WorkflowManager.Execute(view.GetEventCommands("Load"), WorkflowManager.Instance.Context);
             return res;
         }
     }

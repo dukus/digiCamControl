@@ -4,6 +4,7 @@
     {
         Number,
         String,
+        ParamString,
         ValueList,
         Color,
         Variable,

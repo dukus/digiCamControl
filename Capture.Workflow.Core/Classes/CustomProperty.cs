@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace Capture.Workflow.Core.Classes
@@ -51,6 +52,5 @@ namespace Capture.Workflow.Core.Classes
         {
             ValueList = WorkflowManager.Instance.Context.WorkFlow.Views.Select(x => x.Name).ToList();
         }
-
     }
 }

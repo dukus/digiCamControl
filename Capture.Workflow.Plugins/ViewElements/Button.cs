@@ -102,15 +102,14 @@ namespace Capture.Workflow.Plugins.ViewElements
         {
             var button = new System.Windows.Controls.Button()
             {
-                Width = viewElement.Properties["Width"].ToInt(),
-                Height = viewElement.Properties["Height"].ToInt(),
                 Content = viewElement.Properties["Caption"].Value,
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
                 FontSize = viewElement.Properties["FontSize"].ToInt(),
             };
+            viewElement.SetSize(button);
+
             button.Click += (sender, args) =>
             {
-                WorkflowManager.Execute(viewElement.GetEventCommands("Click"));
+                WorkflowManager.Execute(viewElement.GetEventCommands("Click"), WorkflowManager.Instance.Context);
             };
             if (viewElement.Properties["Style"].Value == "Rounded")
             {

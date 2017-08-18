@@ -28,7 +28,7 @@ namespace Capture.Workflow.Plugins.Commands
             return command;
         }
 
-        public bool Execute(WorkFlowCommand command)
+        public bool Execute(WorkFlowCommand command,Context context)
         {
             if (ServiceProvider.Instance.DeviceManager.ConnectedDevices.Count == 0 ||
                 ServiceProvider.Instance.DeviceManager.SelectedCameraDevice == null || !ServiceProvider.Instance

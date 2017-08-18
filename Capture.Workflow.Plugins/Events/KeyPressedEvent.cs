@@ -60,7 +60,7 @@ namespace Capture.Workflow.Plugins.Events
             KeyEventArgs args = e.Param as KeyEventArgs;
             if (args != null && args.Key == (Key) Enum.Parse(typeof(Key), _flowEvent.Properties["Key"].Value))
             {
-                WorkflowManager.Execute(_flowEvent.CommandCollection);
+                WorkflowManager.Execute(_flowEvent.CommandCollection, WorkflowManager.Instance.Context);
             }
         }
 

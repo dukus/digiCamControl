@@ -29,10 +29,19 @@ namespace Capture.Workflow.Wpf.Converters
                         numericUpDown.SetBinding(NumericUpDown.ValueProperty, "Value");
                         return numericUpDown;
                     case CustomPropertyType.String:
-                        TextBox text = new TextBox();
-                        text.DataContext = property;
-                        text.SetBinding(TextBox.TextProperty, "Value");
-                        return text;
+                        {
+                            TextBox text = new TextBox();
+                            text.DataContext = property;
+                            text.SetBinding(TextBox.TextProperty, "Value");
+                            return text;
+                        }
+                    case CustomPropertyType.ParamString:
+                        {
+                            TextBox text = new TextBox();
+                            text.DataContext = property;
+                            text.SetBinding(TextBox.TextProperty, "Value");
+                            return text;
+                        }
                     case CustomPropertyType.Color:
                         var colorpicker = new Colorpicker();
                         colorpicker.DataContext = property;

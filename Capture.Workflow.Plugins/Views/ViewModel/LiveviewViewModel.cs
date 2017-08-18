@@ -113,7 +113,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public void Dispose()
         {
-            WorkflowManager.Execute(View.GetEventCommands("UnLoad"));
+            WorkflowManager.Execute(View.GetEventCommands("UnLoad"), WorkflowManager.Instance.Context);
             WorkflowManager.Instance.Message -= Instance_Message;
         }
     }
