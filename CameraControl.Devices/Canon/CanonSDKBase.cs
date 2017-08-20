@@ -1199,6 +1199,11 @@ namespace CameraControl.Devices.Canon
             ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Completely));
         }
 
+        public void PressHalfButton()
+        {
+            ResetShutterButton();
+            ErrorCodes.GetCanonException(Camera.SendCommand(Edsdk.CameraCommand_PressShutterButton, (int)Edsdk.EdsShutterButton.CameraCommand_ShutterButton_Halfway));
+        }
 
         public void ReleaseButton()
         {
