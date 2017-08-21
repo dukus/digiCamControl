@@ -34,12 +34,16 @@ namespace Capture.Workflow.Core.Classes
         public bool Reinit { get; set; }
         [XmlAttribute]
         public bool Editable { get; set; }
+        [XmlAttribute]
+        public VariableTypeEnum VariableType { get; set; }
 
         public Variable()
         {
             Editable = true;
             Value = "";
             DefaultValue = "";
+            VariableType = VariableTypeEnum.String;
+            Reinit = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

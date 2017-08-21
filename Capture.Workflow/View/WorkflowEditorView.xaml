@@ -13,6 +13,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+        xmlns:classes="clr-namespace:Capture.Workflow.Core.Classes;assembly=Capture.Workflow.Core"
         mc:Ignorable="d"
                       x:Name="WorkflowEditorWindow"
         Title="WorkflowEditorView" Height="800" Width="1200">
@@ -26,6 +27,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider MethodName="GetValues"
+                                ObjectType="{x:Type system:Enum}"
+                                x:Key="VariableTypeEnumValues">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="classes:VariableTypeEnum" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
         </ResourceDictionary>
     </Window.Resources>
     <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
@@ -477,54 +485,57 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <materialDesign:Card Margin="4" VerticalAlignment="Stretch">
-                            <ListBox Margin="5" ItemsSource="{Binding CurrentWorkFlow.Variables.Items}" SelectedItem="{Binding SelectedVariable}" HorizontalContentAlignment="Stretch">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate >
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="30"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Content="{Binding Name}"/>
-                                            <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
-                                                <StackPanel>
+                                <ListBox Margin="5" ItemsSource="{Binding CurrentWorkFlow.Variables.Items}" SelectedItem="{Binding SelectedVariable}" HorizontalContentAlignment="Stretch">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate >
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="{Binding Name}"/>
+                                                <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
+                                                    <StackPanel>
                                                         <Button Content="Remove" Command="{Binding DataContext.DeleteVariableCommand, ElementName=WorkflowEditorWindow}" 
                                                                 IsEnabled="{Binding DataContext.SelectedVariable.Editable , ElementName=WorkflowEditorWindow}"/>
-                                                </StackPanel>
-                                            </materialDesign:PopupBox>
+                                                    </StackPanel>
+                                                </materialDesign:PopupBox>
                                             </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </materialDesign:Card>
-                            <materialDesign:Card Margin="4" VerticalAlignment="Stretch" Grid.Column="1">
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="3"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3" IsEnabled="{Binding SelectedVariable.Editable}"/>
+                            <materialDesign:Card Margin="4" Grid.Column="1">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="3"/>
+                                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3" IsEnabled="{Binding SelectedVariable.Editable}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Default Value" Margin="3"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3" />
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Default Value" Margin="3"/>
+                                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3" />
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3" />
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
+                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3" />
 
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Type" Margin="3"/>
+                                    <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding SelectedVariable.VariableType}" ItemsSource="{Binding Source={StaticResource VariableTypeEnumValues}}" Margin="3" />
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Reinit After session" Margin="3"/>
-                                <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
-                            </Grid>
-                                </materialDesign:Card>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="Reinit After session" Margin="3"/>
+                                    <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
+                                </Grid>
+                            </materialDesign:Card>
                             <StackPanel Grid.Row="1">
                                 <Button Content="Add variable" Margin="20,5" Command="{Binding NewVariableCommand}"/>
                             </StackPanel>
@@ -539,20 +550,20 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <materialDesign:Card Margin="4">
-                            <StackPanel Margin="5">
-                                <Label Content="Name"/>
-                                <TextBox Text="{Binding CurrentWorkFlow.Name}" Margin="3"/>
-                                <Label Content="Id"/>
-                                <TextBox Text="{Binding CurrentWorkFlow.Id}" IsReadOnly="True" IsEnabled="False" Margin="3"/>
-                                <Label Content="Name"/>
-                                <TextBox Text="{Binding CurrentWorkFlow.Version}" Margin="3"/>
-                                <Label Content="Description"/>
-                                <TextBox Text="{Binding CurrentWorkFlow.Description}"  Margin="3" Height="200" TextWrapping="Wrap"/>
+                                <StackPanel Margin="5">
+                                    <Label Content="Name"/>
+                                    <TextBox Text="{Binding CurrentWorkFlow.Name}" Margin="3"/>
+                                    <Label Content="Id"/>
+                                    <TextBox Text="{Binding CurrentWorkFlow.Id}" IsReadOnly="True" IsEnabled="False" Margin="3"/>
+                                    <Label Content="Name"/>
+                                    <TextBox Text="{Binding CurrentWorkFlow.Version}" Margin="3"/>
+                                    <Label Content="Description"/>
+                                    <TextBox Text="{Binding CurrentWorkFlow.Description}"  Margin="3" Height="200" TextWrapping="Wrap"/>
 
-                            </StackPanel>
+                                </StackPanel>
                             </materialDesign:Card>
                             <materialDesign:Card  Grid.Column="1" Margin="4">
-                            <controls1:PropertyEditor DataContext="{Binding CurrentWorkFlow.Properties}" Margin="5"/>
+                                <controls1:PropertyEditor DataContext="{Binding CurrentWorkFlow.Properties}" Margin="5"/>
                             </materialDesign:Card>
                         </Grid>
                     </TabItem>

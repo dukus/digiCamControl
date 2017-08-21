@@ -19,7 +19,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "FileNameTemplate",
                 PropertyType = CustomPropertyType.ParamString,
-                Value = @"%SessionFolder%\%SessionName%\IMG_%Counter%"
+                Value = @"{SessionFolder}\\{SessionName}\\IMG_{Counter}"
             });
             command.Properties.Add(new CustomProperty()
             {
@@ -31,6 +31,7 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command, Context context)
         {
+            
             return true;
         }
     }

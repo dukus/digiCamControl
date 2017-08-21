@@ -118,6 +118,10 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SmartFormat, Version=2.1.0.2, Culture=neutral, PublicKeyToken=568866805651201f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmartFormat.Net.2.1.0.2\lib\net45\SmartFormat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -157,6 +161,7 @@
     <Compile Include="Classes\ValueItem.cs" />
     <Compile Include="Classes\Variable.cs" />
     <Compile Include="Classes\VariableCollection.cs" />
+    <Compile Include="Classes\VariableTypeEnum.cs" />
     <Compile Include="Classes\WorkFlow.cs" />
     <Compile Include="Classes\WorkFlowCommand.cs" />
     <Compile Include="Classes\WorkFlowEvent.cs" />
