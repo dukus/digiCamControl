@@ -221,6 +221,7 @@ namespace CameraControl.Devices
                 WiaDeviceManager.RegisterEvent(Conts.wiaEventDeviceConnected, "*");
                 WiaDeviceManager.RegisterEvent(Conts.wiaEventDeviceDisconnected, "*");
                 WiaDeviceManager.OnEvent += DeviceManager_OnEvent;
+                Log.Error("Wia initialized");
             }
             catch (Exception exception)
             {
@@ -761,8 +762,8 @@ namespace CameraControl.Devices
 
         private void DeviceManager_OnEvent(string eventId, string deviceId, string itemId)
         {
-            if (!LoadWiaDevices)
-                return;
+            //if (!LoadWiaDevices)
+            //    return;
 
             if (eventId == Conts.wiaEventDeviceConnected)
             {
