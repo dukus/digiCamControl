@@ -92,12 +92,15 @@ namespace Capture.Workflow.Core
                     File.Delete(tempFile);
 
                 eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
-                FileItem item = new FileItem() { FileName = tempFile, Thumb = Utils.LoadImage(tempFile, 200, 0) };
+                FileItem item = new FileItem() { TempFile = tempFile, Thumb = Utils.LoadImage(tempFile, 200, 0) };
                 FileItems.Add(item);
                 FileItem = item;
                 item.ThumbFile = Path.GetTempFileName();
+                Context.FileItem = FileItem;
+
                 Utils.Save2Jpg(Utils.LoadImage(tempFile, 800, 0), item.ThumbFile);
                 OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem));
+                OnMessage(new MessageEventArgs(Messages.FileTransferred, Context));
             }
             catch (Exception ex)
             {

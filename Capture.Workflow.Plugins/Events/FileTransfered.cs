@@ -13,7 +13,7 @@ namespace Capture.Workflow.Plugins.Events
 {
     [Description("")]
     [PluginType(PluginType.Event)]
-    [DisplayName("FileTransfered")]
+    [DisplayName("FileTransferred")]
     public class FileTransfered: IEventPlugin
     {
         public string Name { get; }
@@ -34,7 +34,12 @@ namespace Capture.Workflow.Plugins.Events
 
         private void Instance_Message(object sender, MessageEventArgs e)
         {
-
+            if (e.Name == Messages.FileTransferred)
+            {
+                var contex = e.Param as Context;
+                if (contex != null)
+                    WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
+            }
         }
 
         public void UnRegisterEvent(WorkFlowEvent flowEvent)

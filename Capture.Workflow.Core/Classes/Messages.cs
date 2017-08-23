@@ -9,5 +9,6 @@
         public const string PhotoDownloaded = "PhotoDownloaded";
         public const string KeyPressed = "KeyPressed";
         public const string ShowMessage = "ShowMessage";
+        public const string FileTransferred = "FileTransferred";
     }
 }

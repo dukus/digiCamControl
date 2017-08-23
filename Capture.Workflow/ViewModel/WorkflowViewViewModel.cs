@@ -63,6 +63,17 @@ namespace Capture.Workflow.ViewModel
             {
                 WorkflowManager.Instance.Message += Instance_Message;
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
+                foreach (WorkFlowEvent workflowEvent in Workflow.Events)
+                {
+                    try
+                    {
+                        workflowEvent.Instance.RegisterEvent(workflowEvent);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error("Unable to register event " + workflowEvent?.Name, e);
+                    }
+                }
                 ShowView(Workflow.Views[0].Name);
             }
         }

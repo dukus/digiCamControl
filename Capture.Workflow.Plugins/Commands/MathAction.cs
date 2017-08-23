@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using NCalc;
 
 namespace Capture.Workflow.Plugins.Commands
 {
@@ -24,16 +25,16 @@ namespace Capture.Workflow.Plugins.Commands
                 Name = "Variable",
                 PropertyType = CustomPropertyType.Variable,
             });
+            //command.Properties.Add(new CustomProperty()
+            //{
+            //    Name = "Action",
+            //    PropertyType = CustomPropertyType.ValueList,
+            //    ValueList = new List<string>() { "Increment", "Set" },
+            //    Value = "Increment"
+            //});
             command.Properties.Add(new CustomProperty()
             {
-                Name = "Action",
-                PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "Increment", "Set" },
-                Value = "Increment"
-            });
-            command.Properties.Add(new CustomProperty()
-            {
-                Name = "Value",
+                Name = "Formula",
                 PropertyType = CustomPropertyType.String,
             });
             return command;
@@ -41,6 +42,12 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command, Context context)
         {
+            Expression e = new Expression(command.Properties["Formula"].Value);
+            foreach (var variable in context.WorkFlow.Variables.Items)
+            {
+                e.Parameters[variable.Name] = new Exception(variable.Value);
+            }
+            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = e.Evaluate().ToString();
             return true;
         }
     }

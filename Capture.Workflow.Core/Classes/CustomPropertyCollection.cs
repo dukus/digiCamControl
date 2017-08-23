@@ -21,7 +21,7 @@ namespace Capture.Workflow.Core.Classes
                     if (item.Name == name)
                         return item;
                 }
-                return null;
+                return new CustomProperty() {Name = name};
             }
         }
 

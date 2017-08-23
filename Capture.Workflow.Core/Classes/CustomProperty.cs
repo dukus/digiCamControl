@@ -43,6 +43,13 @@ namespace Capture.Workflow.Core.Classes
             return val;
         }
 
+        public bool ToBool()
+        {
+            bool val;
+            bool.TryParse(Value, out val);
+            return val;
+        }
+
         public void InitVaribleList()
         {
             ValueList = WorkflowManager.Instance.Context.WorkFlow.Variables.Items.Select(x => x.Name).ToList();
