@@ -43,11 +43,14 @@ namespace Capture.Workflow.Plugins.Commands
         public bool Execute(WorkFlowCommand command, Context context)
         {
             Expression e = new Expression(command.Properties["Formula"].Value);
+            
             foreach (var variable in context.WorkFlow.Variables.Items)
             {
-                e.Parameters[variable.Name] = new Exception(variable.Value);
+                //e.Parameters[variable.Name] = new Exception(variable.Value);
+                e.Parameters[variable.Name] = variable.GetAsObject();
             }
-            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = e.Evaluate().ToString();
+            var res = e.Evaluate();
+            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = res.ToString();
             return true;
         }
     }

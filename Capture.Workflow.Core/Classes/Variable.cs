@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -44,6 +45,35 @@ namespace Capture.Workflow.Core.Classes
             DefaultValue = "";
             VariableType = VariableTypeEnum.String;
             Reinit = true;
+        }
+
+        public object GetAsObject()
+        {
+            switch (VariableType)
+            {
+                case VariableTypeEnum.String:
+                    return Value;
+                case VariableTypeEnum.Number:
+                {
+                    double d = 0;
+                    if (double.TryParse(Value, NumberStyles.Any, CultureInfo.InvariantCulture, out d))
+                    {
+                        return d;
+                    }
+                    break;
+                }
+                case VariableTypeEnum.Date:
+                {
+                    DateTime dateTime;
+                    if (DateTime.TryParse(Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal,
+                        out dateTime))
+                    {
+                        return dateTime;
+                    }
+                    break;
+                }
+            }
+            return Value;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

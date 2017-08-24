@@ -38,7 +38,7 @@ namespace Capture.Workflow.Plugins.Commands
                 context.WorkFlow.Variables.GetAsDictionary());
             filename = filename + Path.GetExtension(context.FileItem.TempFile);
             Utils.CreateFolder(filename);
-            File.Copy(context.FileItem.TempFile, filename, command.Properties["FileNameTemplate"].ToBool());
+            File.Copy(context.FileItem.TempFile, filename, command.Properties["Overwrite"].ToBool());
             context.FileItem.FileName = filename;
             return true;
         }
