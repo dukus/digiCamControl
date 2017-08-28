@@ -1,6 +1,6 @@
-﻿<Controls:MetroWindow x:Class="CameraControl.windows.LiveViewWnd"
+﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{Binding Title}" Height="800" Width="750" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -12,12 +12,11 @@
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                       xmlns:local1="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
-                      mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=Classes:LiveviewSettings}" Topmost="{Binding Path=StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
+                      xmlns:ControlzEx="clr-namespace:ControlzEx;assembly=MahApps.Metro" x:Class="CameraControl.windows.LiveViewWnd"
+        Title="{Binding Title}" Height="800" Width="750" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing"
+                      mc:Ignorable="d" d:DataContext="{d:DesignInstance Type={x:Type Classes:LiveviewSettings}}" Topmost="{Binding StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True" StateChanged="MetroWindow_StateChanged">
-    <Window.DataContext>
-        <ViewModel:LiveViewViewModel/>
-    </Window.DataContext>
-    <Window.Resources>
+    <Controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
@@ -42,19 +41,19 @@
         >
 
                 <Setter 
-            Property="Template"
+            		Property="Template"
             >
                     <Setter.Value>
 
                         <ControlTemplate 
-                    TargetType="{x:Type local1:ZoomAndPanControl}"
+            				TargetType="{x:Type local1:ZoomAndPanControl}"
                     >
 
                             <Border 
-                                Visibility="{TemplateBinding ZoneOneVisibility}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
+            					Visibility="{TemplateBinding ZoneOneVisibility}"
+            					Background="{TemplateBinding Background}"
+            					BorderBrush="{TemplateBinding BorderBrush}"
+            					BorderThickness="{TemplateBinding BorderThickness}"
                         >
 
                                 <!-- 
@@ -67,9 +66,9 @@
                         the content in the center of the viewport when the viewport is bigger than the content.
                         -->
                                 <ContentPresenter 
-							x:Name="PART_Content"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
+            						x:Name="PART_Content"
+            						HorizontalAlignment="Left"
+            						VerticalAlignment="Top"
                             />
 
                             </Border>
@@ -85,39 +84,42 @@
             <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
                 <Grid>
                     <wpf:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
-                       VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            			VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
                     <wpf:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
-                       VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+            			VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
                     <wpf:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
-                       VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+            			VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
                     <wpf:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
-                       VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+            			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
-                       VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            			VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
-                       VerticalAlignment="Top" HorizontalAlignment="Right"/>
+            			VerticalAlignment="Top" HorizontalAlignment="Right"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
-                       VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            			VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
-                       VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            			VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
             </ControlTemplate>
 
 
             <!-- Designer Item Template-->
-            <ControlTemplate x:Key="DesignerItemTemplate" TargetType="ContentControl">
+            <ControlTemplate x:Key="DesignerItemTemplate" TargetType="{x:Type ContentControl}">
                 <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                     <wpf:MoveThumb Template="{StaticResource MoveThumbTemplate}" Cursor="SizeAll"/>
                     <Control Template="{StaticResource ResizeDecoratorTemplate}"/>
-                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                    <ContentPresenter Content="{TemplateBinding Content}"/>
                 </Grid>
             </ControlTemplate>
         </ResourceDictionary>
-        
-    </Window.Resources>
+
+    </Controls:MetroWindow.Resources>
+    <Controls:MetroWindow.DataContext>
+        <ViewModel:LiveViewViewModel/>
+    </Controls:MetroWindow.DataContext>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+            <Button Content="{T:Translate ButtonHelp}" x:Name="btn_help" Click="btn_help_Click" Visibility="{Binding OnlineReference, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
@@ -135,8 +137,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        
-        <Image Name="_image" Stretch="Uniform" Grid.Column="2" MouseDown="image1_MouseDown" Source="{Binding Bitmap}" Grid.RowSpan="4" Opacity="{Binding ElementName=slider_transparent,Path=Value}" RenderTransformOrigin="0.5,0.5" MouseWheel="_image_MouseWheel">
+
+        <Image x:Name="_image" Stretch="Uniform" Grid.Column="2" MouseDown="image1_MouseDown" Source="{Binding Bitmap}" Grid.RowSpan="4" Opacity="{Binding Value, ElementName=slider_transparent}" RenderTransformOrigin="0.5,0.5" MouseWheel="_image_MouseWheel">
             <Image.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding AutoFocusCommand}" />
             </Image.InputBindings>
@@ -145,16 +147,16 @@
             </Image.LayoutTransform>
         </Image>
         <local1:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource ZoomStyle}" 
-                                      ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="True">
+			ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="True">
             <Image x:Name="PreviewBitmap" Stretch="Uniform" Source="{Binding PreviewBitmap}" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2"
-                Width="{Binding ElementName=_image, Path=ActualWidth}" Height="{Binding ElementName=_image, Path=ActualHeight}" >
-            <Image.LayoutTransform>
-                <RotateTransform  Angle="{Binding Rotation}" />
-            </Image.LayoutTransform>
-        </Image>
-        </local1:ZoomAndPanControl>            
+				Width="{Binding ActualWidth, ElementName=_image}" Height="{Binding ActualHeight, ElementName=_image}" >
+                <Image.LayoutTransform>
+                    <RotateTransform  Angle="{Binding Rotation}" />
+                </Image.LayoutTransform>
+            </Image>
+        </local1:ZoomAndPanControl>
         <Button Grid.Row="0" Grid.Column="2" Height="40" Width="40" Margin="10" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ClosePreviewCommand}"
-                ToolTip="{T:TranslateExtension LabelClosePreview}" Visibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
+			ToolTip="{T:Translate LabelClosePreview}" Visibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <Rectangle Width="20" Height="20">
                 <Rectangle.Fill>
                     <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
@@ -167,8 +169,8 @@
             <Grid.LayoutTransform>
                 <RotateTransform  Angle="{Binding Rotation}" />
             </Grid.LayoutTransform>
-            <Viewbox Stretch="Fill" ClipToBounds="True" Width="{Binding ElementName=_image,Path=ActualWidth}" Height="{Binding ElementName=_image,Path=ActualHeight}"
-                 Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}">
+            <Viewbox Stretch="Fill" ClipToBounds="True" Width="{Binding ActualWidth, ElementName=_image}" Height="{Binding ActualHeight, ElementName=_image}"
+				Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <Canvas Width="1000" Height="1000">
                     <Path Fill="#80000000">
                         <Path.Data>
@@ -183,10 +185,10 @@
                         </Path.Data>
                     </Path>
                     <ContentControl Width="{Binding HorizontalMax, Mode=TwoWay}"
-                    Height="{Binding VerticalMax, Mode=TwoWay}"
-                    Canvas.Top="{Binding VerticalMin, Mode=TwoWay}"
-                    Canvas.Left="{Binding HorizontalMin, Mode=TwoWay}"
-                    Template="{StaticResource DesignerItemTemplate}">
+						Height="{Binding VerticalMax, Mode=TwoWay}"
+						Canvas.Top="{Binding VerticalMin, Mode=TwoWay}"
+						Canvas.Left="{Binding HorizontalMin, Mode=TwoWay}"
+						Template="{StaticResource DesignerItemTemplate}">
                         <!--<Rectangle Opacity="0.4" Fill="Black" IsHitTestVisible="False"/>-->
                     </ContentControl>
                 </Canvas>
@@ -198,7 +200,7 @@
             <Label  Content="{Binding MovieTimeRemain}" Height="41" FontSize="20" FontWeight="Bold" Margin="5,0" Width="60"/>
         </StackPanel>
 
-        <StackPanel  Background="#35000000" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"  Grid.Row="0" Margin="5" Orientation="Horizontal" Visibility="{Binding Path=HaveSoundData, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel  Background="#35000000" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"  Grid.Row="0" Margin="5" Orientation="Horizontal" Visibility="{Binding HaveSoundData, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel>
                 <local:VUMeterControl Value="{Binding SoundL}" Width="10" Height="50" Margin="2"  MaxValue="100" BlockCount="14" HighLevel="13" MiddleLevel="10" PeakValue="{Binding PeakSoundL}" />
                 <Label Content="L" Padding="0" HorizontalContentAlignment="Center"/>
@@ -238,14 +240,14 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
-            <ToggleButton Height="40" Width="40" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding FreezeImage}" ToolTip="{T:TranslateExtension ButtonFreezeImage}">
+            <ToggleButton Height="40" Width="40" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding FreezeImage}" ToolTip="{T:Translate ButtonFreezeImage}">
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </ToggleButton>
-            <ToggleButton  ToolTip="{T:TranslateExtension LabelEdgeDetection}" Height="40" Width="40" Margin="0" IsChecked="{Binding EdgeDetection}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
+            <ToggleButton  ToolTip="{T:Translate LabelEdgeDetection}" Height="40" Width="40" Margin="0" IsChecked="{Binding EdgeDetection}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
                 <Rectangle Width="20" Height="20">
                     <Rectangle.Fill>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_contrast}" />
@@ -253,7 +255,7 @@
                 </Rectangle>
             </ToggleButton>
             <Canvas Width="40" Height="40" Margin="5" RenderTransformOrigin="0.5,0.5" ToolTip="{Binding LevelAngle}"
-                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLevelLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
+				Visibility="{Binding ShowLevelLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
                 <Path x:Name="Cutter" Width="30" Height="30" RenderTransformOrigin="0.5,0.5"  Canvas.Left="5" Canvas.Top="5" Stretch="Fill" Fill="{Binding LevelAngleColor}" Data="F1 M 56,36L 56,40L 40,40L 40,56L 36,56L 36,40L 20,40L 20,36L 36,36L 36,20L 40,20L 40,36L 56,36 Z M 8,37L 8,39L 3.01401,39L 3,38L 3.01401,37L 8,37 Z M 13,37L 13,39L 10,39L 10,37L 13,37 Z M 18,37L 18,39L 15,39L 15,37L 18,37 Z M 39,8.00005L 37,8.00005L 37,3.01403L 38,3.00002L 39,3.01403L 39,8.00005 Z M 39,18.0001L 37,18.0001L 37,15.0001L 39,15.0001L 39,18.0001 Z M 37,10.0001L 39,10.0001L 39,13.0001L 37,13.0001L 37,10.0001 Z M 68,39L 68,37L 72.986,37L 73,38L 72.986,39L 68,39 Z M 63,39L 63,37L 66,37L 66,39L 63,39 Z M 57.9999,39L 57.9999,37L 61,37L 61,39L 57.9999,39 Z M 37,68L 39,68L 39,72.986L 38,73L 37,72.986L 37,68 Z M 37,63L 39,63L 39,66L 37,66L 37,63 Z M 37,58L 39,58L 39,61L 37,61L 37,58 Z ">
                     <Path.RenderTransform>
                         <RotateTransform Angle="{Binding LevelAngle}"  />
@@ -264,17 +266,17 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" 
-                    Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
+			Visibility="{Binding ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
             <StackPanel.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{T:TranslateExtension LabelCurrentLockNear}" Command="{Binding LockCurrentNearCommand}"/>
-                    <MenuItem Header="{T:TranslateExtension LabelCurrentLockFar}" Command="{Binding LockCurrentFarCommand}"/>
+                    <MenuItem Header="{T:Translate LabelCurrentLockNear}" Command="{Binding LockCurrentNearCommand}"/>
+                    <MenuItem Header="{T:Translate LabelCurrentLockFar}" Command="{Binding LockCurrentFarCommand}"/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
 
-            <ProgressBar Width="{Binding ElementName=StackPanel, Path=ActualWidth}" Height="5" Visibility="{Binding FocusProgressVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" Value="{Binding FocusProgressValue}" Maximum="{Binding FocusProgressMax}"/>
-            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000" Name="StackPanel">
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockNear}">
+            <ProgressBar Width="{Binding ActualWidth, ElementName=StackPanel}" Height="5" Visibility="{Binding FocusProgressVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" Value="{Binding FocusProgressValue}" Maximum="{Binding FocusProgressMax}"/>
+            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000" x:Name="StackPanel">
+                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" ToolTip="{T:Translate LabelLockNear}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">
                             <Rectangle.Fill>
@@ -287,37 +289,38 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </ToggleButton.Resources>
+                    <ToggleButton.Visibility>
+                        <Binding Converter="{StaticResource BooleanToVisibilityConverter1}" Path="AdvancexFocusStacking"/>
+                    </ToggleButton.Visibility>
                     <ToggleButton.Style>
-                        <Style TargetType="ToggleButton" BasedOn="{StaticResource MetroCircleToggleButtonStyle}">
+                        <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}">
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Content" Value="{StaticResource OnImage}">
-                                    </Setter>
+                                    <Setter Property="Content" Value="{StaticResource OnImage}"/>
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="False">
-                                    <Setter Property="Content" Value="{StaticResource OffImage}">
-                                    </Setter>
+                                    <Setter Property="Content" Value="{StaticResource OffImage}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </ToggleButton.Style>
                 </ToggleButton>
-                <Button Margin="1" Width="40" Content="|&lt;" Command="{Binding MoveACommand}" IsEnabled="{Binding LockA}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelGoNear}"/>
+                <Button Margin="1" Width="40" Content="|&lt;" Command="{Binding MoveACommand}" IsEnabled="{Binding LockA}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:Translate LabelGoNear}"/>
 
-                <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveLargeToCamera}"/>
-                <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveMediumToCamera}"/>
-                <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveSmallToCamera}"/>
+                <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveLargeToCamera}"/>
+                <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveMediumToCamera}"/>
+                <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveSmallToCamera}"/>
 
-                <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="{T:TranslateExtension LabelDistantFromPoints}"/>
+                <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="{T:Translate LabelDistantFromPoints}"/>
 
-                <Button Margin="1" Width="40" Content=">" Command="{Binding FocusPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveSmallToInfinity}"/>
-                <Button Margin="1" Width="40" Content=">>" Command="{Binding FocusPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveMediumToInfinity}"/>
-                <Button Margin="1" Width="40" Content=">>>" Command="{Binding FocusPPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelMoveLargeToInfinity}"/>
+                <Button Margin="1" Width="40" Content="&gt;" Command="{Binding FocusPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveSmallToInfinity}"/>
+                <Button Margin="1" Width="40" Content="&gt;&gt;" Command="{Binding FocusPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveMediumToInfinity}"/>
+                <Button Margin="1" Width="40" Content="&gt;&gt;&gt;" Command="{Binding FocusPPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveLargeToInfinity}"/>
 
-                <Button Margin="1" Width="40" Content=">|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelGoFar}"/>
+                <Button Margin="1" Width="40" Content="&gt;|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:Translate LabelGoFar}"/>
 
 
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:TranslateExtension LabelLockFar}">
+                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" ToolTip="{T:Translate LabelLockFar}">
                     <ToggleButton.Resources>
                         <Rectangle Width="15" Height="15"  x:Key="OnImage">
                             <Rectangle.Fill>
@@ -330,16 +333,17 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </ToggleButton.Resources>
+                    <ToggleButton.Visibility>
+                        <Binding Converter="{StaticResource BooleanToVisibilityConverter1}" Path="AdvancexFocusStacking"/>
+                    </ToggleButton.Visibility>
                     <ToggleButton.Style>
-                        <Style TargetType="ToggleButton" BasedOn="{StaticResource MetroCircleToggleButtonStyle}" >
+                        <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}" >
                             <Style.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Content" Value="{StaticResource OnImage}">
-                                    </Setter>
+                                    <Setter Property="Content" Value="{StaticResource OnImage}"/>
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="False">
-                                    <Setter Property="Content" Value="{StaticResource OffImage}">
-                                    </Setter>
+                                    <Setter Property="Content" Value="{StaticResource OffImage}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -351,7 +355,7 @@
         </StackPanel>
 
         <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" 
-            Style="{DynamicResource MetroExpanderEx}">
+			Style="{DynamicResource MetroExpanderEx}">
             <Grid MinWidth="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -360,20 +364,20 @@
                     <RowDefinition Height="475*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Button Content="{T:TranslateExtension ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" 
-                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button Content="{T:Translate ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" 
+					Visibility="{Binding ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
 
-                <Button Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension ButtonCapture}" Height="30" Margin="0,10,10,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
-                <Button Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension ButtonCancel}" Height="30" Margin="0,10,10,0" Command="{Binding CancelCaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" 
-                        Visibility="{Binding CaptureInProgress, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCapture}" Height="30" Margin="0,10,10,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCancel}" Height="30" Margin="0,10,10,0" Command="{Binding CancelCaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" 
+					Visibility="{Binding CaptureInProgress, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
                 <Button Grid.Row="0" Content="{Binding RecButtonText}" Height="30" Margin="10,50,10,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Left" Width="112"/>
 
-                <Button Grid.Row="0" Content="{T:TranslateExtension ButtonPreview}" Height="30" Margin="10,50,10,0" Command="{Binding PreviewCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Right" Width="101"/>
+                <Button Grid.Row="0" Content="{T:Translate ButtonPreview}" Height="30" Margin="10,50,10,0" Command="{Binding PreviewCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Right" Width="101"/>
 
 
-                <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform"
-                       RenderOptions.BitmapScalingMode="HighQuality">
+                <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" x:Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform"
+					RenderOptions.BitmapScalingMode="HighQuality">
                     <Image.LayoutTransform>
                         <RotateTransform  Angle="{Binding Rotation}" />
                     </Image.LayoutTransform>
@@ -384,37 +388,35 @@
                         <StackPanel.ScrollOwner>
                             <ScrollViewer />
                         </StackPanel.ScrollOwner>
-                        <Expander Header="{T:TranslateExtension LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="{Binding ShowHistogram}"
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLuminosityLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                            <Expander.Content>
-                                <Grid Height="75" >
-                                    <Polygon Points="{Binding Path=LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding ElementName=TgGray, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                                    <Polygon Points="{Binding Path=RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.9" Visibility="{Binding ElementName=TgRed, Path=IsChecked,  Converter={StaticResource BooleanToVisibilityConverter1}}" />
-                                    <Polygon Points="{Binding Path=GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.7" Visibility="{Binding ElementName=TgGreen, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                                    <Polygon Points="{Binding Path=BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding ElementName=TgBlue, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                                    <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
-                                        <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgRed">
-                                            <Ellipse Height="10" Width="10" Fill="Red"/>
-                                        </ToggleButton>
-                                        <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgGreen">
-                                            <Ellipse Height="10" Width="10" Fill="Green"/>
-                                        </ToggleButton>
-                                        <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" Name="TgBlue">
-                                            <Ellipse Height="10" Width="10" Fill="Blue"/>
-                                        </ToggleButton>
-                                        <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" Name="TgGray">
-                                            <Ellipse Height="10" Width="10" Fill="Gray"/>
-                                        </ToggleButton>
-                                    </StackPanel>
-                                    <CheckBox IsChecked="{Binding HighlightUnderExp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="18"/>
-                                    <CheckBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="18" IsChecked="{Binding HighlightOverExp}"/>
-                                </Grid>
-                            </Expander.Content>
+                        <Expander Header="{T:Translate LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="{Binding ShowHistogram}"
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowLuminosityLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                            <Grid Height="75" >
+                                <Polygon Points="{Binding LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgGray}"/>
+                                <Polygon Points="{Binding RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.9" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgRed}" />
+                                <Polygon Points="{Binding GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.7" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgGreen}"/>
+                                <Polygon Points="{Binding BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgBlue}"/>
+                                <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" x:Name="TgRed">
+                                        <Ellipse Height="10" Width="10" Fill="Red"/>
+                                    </ToggleButton>
+                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" x:Name="TgGreen">
+                                        <Ellipse Height="10" Width="10" Fill="Green"/>
+                                    </ToggleButton>
+                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" x:Name="TgBlue">
+                                        <Ellipse Height="10" Width="10" Fill="Blue"/>
+                                    </ToggleButton>
+                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" x:Name="TgGray">
+                                        <Ellipse Height="10" Width="10" Fill="Gray"/>
+                                    </ToggleButton>
+                                </StackPanel>
+                                <CheckBox IsChecked="{Binding HighlightUnderExp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="18"/>
+                                <CheckBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="18" IsChecked="{Binding HighlightOverExp}"/>
+                            </Grid>
                         </Expander>
                         <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" IsExpanded="True">
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -436,287 +438,280 @@
 
 
                                 <local:LiveViewControlerSimple DataContext="{Binding CameraDevice}" Margin="20,3" Grid.ColumnSpan="2"
-                                                               Grid.Column="0" Grid.Row="3"  />
+									Grid.Column="0" Grid.Row="3"  />
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelDisplay}" BorderBrush="Black" Margin="3"
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}" >
-                            <Expander.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5" />
-                                        <ColumnDefinition Width="88*" />
-                                        <ColumnDefinition Width="5" />
-                                        <ColumnDefinition Width="90*" />
-                                        <ColumnDefinition Width="5"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                        <Expander Header="{T:Translate LabelDisplay}" BorderBrush="Black" Margin="3"
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="88*" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="90*" />
+                                    <ColumnDefinition Width="5"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                                    <Label Content="{T:TranslateExtension LabelGrid}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                                    <ComboBox Grid.Row="0" Grid.Column="3" Margin="3" SelectedIndex="{Binding GridType}" ItemsSource="{Binding Grids}"/>
+                                <Label Content="{T:Translate LabelGrid}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                <ComboBox Grid.Row="0" Grid.Column="3" Margin="3" SelectedIndex="{Binding GridType}" ItemsSource="{Binding Grids}"/>
 
-                                    <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}" Grid.Row="1" Grid.Column="3" Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
-                                    <Label Content="{T:TranslateExtension LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
+                                <ComboBox IsEnabled="{Binding CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding CameraDevice.LiveViewImageZoomRatio.Values}" Grid.Row="1" Grid.Column="3" Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
+                                <Label Content="{T:Translate LabelLvZoomRation}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
 
-                                    <Label Grid.Row="2" Grid.Column="1" Margin="3" Content="{T:TranslateExtension LabelGridColor}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                                    <wpf:Colorpicker Grid.Row="2" Grid.Column="3" Margin="3" SelectedColor="{Binding GridColor, Mode=TwoWay}" />
+                                <Label Grid.Row="2" Grid.Column="1" Margin="3" Content="{T:Translate LabelGridColor}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <wpf:Colorpicker Grid.Row="2" Grid.Column="3" Margin="3" SelectedColor="{Binding GridColor, Mode=TwoWay}" />
 
 
-                                    <Label Content="{T:TranslateExtension LabelBrightness}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" />
-                                    <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" TickFrequency="255" TickPlacement="BottomRight">
-                                        <Slider.ContextMenu>
-                                            <ContextMenu>
-                                                <MenuItem Header="{T:TranslateExtension LabelReset}" Command="{Binding Path=ResetBrigthnessCommand}" />
-                                            </ContextMenu>
-                                        </Slider.ContextMenu>
-                                    </Slider>
-                                    <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelInvert}" IsChecked="{Binding Path=Invert}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelShowFocusRect}" IsChecked="{Binding Path=ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelShowActiveArea}" IsChecked="{Binding Path=ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
-                                   
-                                    <Button Content="{T:TranslateExtension LabelSetArea}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" HorizontalAlignment="Right" Command="{Binding SetAreaCommand}" Visibility="{Binding NoSettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-                                    <Button Content="{T:TranslateExtension LabelDoneArea}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" HorizontalAlignment="Right" Command="{Binding DoneSetAreaCommand}" Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                                <Label Content="{T:Translate LabelBrightness}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" />
+                                <Slider Maximum="255" Minimum="-255" Value="{Binding Brightness}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" TickFrequency="255" TickPlacement="BottomRight">
+                                    <Slider.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="{T:Translate LabelReset}" Command="{Binding ResetBrigthnessCommand}" />
+                                        </ContextMenu>
+                                    </Slider.ContextMenu>
+                                </Slider>
+                                <CheckBox Content="B&amp;W" IsChecked="{Binding BlackAndWhite}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Margin="2"/>
+                                <CheckBox Content="{T:Translate LabelInvert}" IsChecked="{Binding Invert}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                                <CheckBox Content="{T:Translate LabelShowFocusRect}" IsChecked="{Binding ShowFocusRect}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
+                                <CheckBox Content="{T:Translate LabelShowActiveArea}" IsChecked="{Binding ShowRuler}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
 
-                                    <Rectangle Fill="{Binding NoProcessingWarnColor}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" />
-                                    <CheckBox Content="{T:TranslateExtension LabelNoProccesing}" ToolTip="{T:TranslateExtension LabelNoProccesingTooltip}" IsChecked="{Binding Path=NoProcessing}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
-                                    <CheckBox Content="{T:TranslateExtension LabelFlip}" IsChecked="{Binding Path=FlipImage}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
+                                <Button Content="{T:Translate LabelSetArea}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" HorizontalAlignment="Right" Command="{Binding SetAreaCommand}" Visibility="{Binding NoSettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                                <Button Content="{T:Translate LabelDoneArea}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" HorizontalAlignment="Right" Command="{Binding DoneSetAreaCommand}" Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
-                                    <Label Content="{T:TranslateExtension LabelLiveViewRotation}" Grid.Column="1" Grid.Row="12" />
-                                    <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="12" Grid.Column="3" Margin="3">
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelRotateNone}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelRotate90}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelRotate180}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelRotate270}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelAutoRotate}" />
-                                    </ComboBox>
+                                <Rectangle Fill="{Binding NoProcessingWarnColor}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" />
+                                <CheckBox Content="{T:Translate LabelNoProccesing}" ToolTip="{T:Translate LabelNoProccesingTooltip}" IsChecked="{Binding NoProcessing}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
+                                <CheckBox Content="{T:Translate LabelFlip}" IsChecked="{Binding FlipImage}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
 
-                                    <Label Content="{T:TranslateExtension LabelCropMargins}" Grid.Column="1" Grid.Row="13" />
-                                    <Controls:NumericUpDown Minimum="0" Maximum="100" Value="{Binding CropRatio}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="3" Grid.Row="13" />
+                                <Label Content="{T:Translate LabelLiveViewRotation}" Grid.Column="1" Grid.Row="12" />
+                                <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="12" Grid.Column="3" Margin="3">
+                                    <ComboBoxItem Content="{T:Translate LabelRotateNone}" />
+                                    <ComboBoxItem Content="{T:Translate LabelRotate90}" />
+                                    <ComboBoxItem Content="{T:Translate LabelRotate180}" />
+                                    <ComboBoxItem Content="{T:Translate LabelRotate270}" />
+                                    <ComboBoxItem Content="{T:Translate LabelAutoRotate}" />
+                                </ComboBox>
 
-                                    <Label Content="{T:TranslateExtension LabelLiveViewPreviewTime}" Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="3"/>
-                                    <Controls:NumericUpDown Minimum="0" Value="{Binding PreviewTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="3"/>
+                                <Label Content="{T:Translate LabelCropMargins}" Grid.Column="1" Grid.Row="13" />
+                                <Controls:NumericUpDown Minimum="0" Maximum="100" Value="{Binding CropRatio}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="3" Grid.Row="13" />
 
-                                </Grid>
-                            </Expander.Content>
+                                <Label Content="{T:Translate LabelLiveViewPreviewTime}" Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="3"/>
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding PreviewTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="3"/>
+
+                            </Grid>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowOverlayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                            <Expander.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                        <Expander Header="{T:Translate LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowOverlayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" MaxHeight="291">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="29" MaxWidth="28"/>
+                                    <ColumnDefinition Width="55"  MaxWidth="54"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" MinHeight="22" />
+                                    <RowDefinition Height="Auto" MinHeight="26" />
+                                    <RowDefinition Height="Auto" MinHeight="22" />
+                                    <RowDefinition Height="Auto" MinHeight="26" />
+                                    <RowDefinition Height="Auto" MinHeight="22" />
+                                    <RowDefinition Height="Auto" MinHeight="26" />
+                                    <RowDefinition Height="Auto" MinHeight="22" />
+                                    <RowDefinition Height="Auto" MinHeight="26" />
+                                    <RowDefinition Height="Auto" MinHeight="27" />
+                                </Grid.RowDefinitions>
 
-                                    <ComboBox Margin="2"  SelectedValue ="{Binding SelectedOverlay}" SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding Overlays}"/>
-                                    <Button Grid.Row="0" Grid.Column="1" Content="..." Margin="2" Command="{Binding BrowseOverlayCommand}"/>
+                                <ComboBox Margin="2,2,3,2" Grid.Column="0" Grid.ColumnSpan="2" SelectedValue ="{Binding SelectedOverlay}" SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding Overlays}"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="..." Margin="1,2,3,2" Command="{Binding BrowseOverlayCommand}"/>
 
-                                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="2" Orientation="Vertical">
-                                        <CheckBox  Content="{T:TranslateExtension LabelActivate}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayActivated}" />
-                                        <CheckBox  Content="{T:TranslateExtension LabelOverlayUseLastCaptured}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayUseLastCaptured}" IsEnabled="{Binding OverlayActivated}"/>
-                                    </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="2,2,3,2" Orientation="Vertical" Grid.ColumnSpan="2">
+                                    <CheckBox  Content="{T:Translate LabelActivate}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayActivated}" />
+                                    <CheckBox  Content="{T:Translate LabelOverlayUseLastCaptured}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayUseLastCaptured}" IsEnabled="{Binding OverlayActivated}"/>
+                                </StackPanel>
 
-                                    <Label Grid.Row="2" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelScaling}" Grid.ColumnSpan="2" Padding="1"/>
-                                    <Slider Grid.Row="3" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayScale}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" Grid.ColumnSpan="2" IsEnabled="{Binding OverlayActivated}"/>
+                                <Label Grid.Row="2" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelScaling}" Grid.ColumnSpan="3" Padding="1"/>
+                                <Slider Grid.Row="3" Grid.Column="0" Margin="2,2,3,2" Minimum="-100" Maximum="100" Value="{Binding OverlayScale}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" IsEnabled="{Binding OverlayActivated}"/>
+                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayScale}" IsEnabled="{Binding OverlayActivated}" Grid.Row="3"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
-                                    <Label Grid.Row="4" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelHorizontal}" Grid.ColumnSpan="2" Padding="1"/>
-                                    <Slider Grid.Row="5" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayHorizontal}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" Grid.ColumnSpan="2" IsEnabled="{Binding OverlayActivated}" />
+                                <Label Grid.Row="4" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelHorizontal}" Grid.ColumnSpan="3" Padding="1"/>
+                                <Slider Grid.Row="5" Grid.Column="0" Margin="2,2,3,2" Minimum="-100" Maximum="100" Value="{Binding OverlayHorizontal}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" IsEnabled="{Binding OverlayActivated}" />
+                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayHorizontal}" IsEnabled="{Binding OverlayActivated}" Grid.Row="5"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
-                                    <Label Grid.Row="6" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelVertical}" Grid.ColumnSpan="2" Padding="1"/>
-                                    <Slider Grid.Row="7" Grid.Column="0" Margin="2" Minimum="-100" Maximum="100" Value="{Binding OverlayVertical}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" Grid.ColumnSpan="2" IsEnabled="{Binding OverlayActivated}"/>
+                                <Label Grid.Row="6" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelVertical}" Grid.ColumnSpan="3" Padding="1"/>
+                                <Slider Grid.Row="7" Grid.Column="0" Margin="2,2,3,2" Minimum="-100" Maximum="100" Value="{Binding OverlayVertical}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" IsEnabled="{Binding OverlayActivated}"/>
+                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayVertical}" IsEnabled="{Binding OverlayActivated}" Grid.Row="7"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
-                                    <Label Grid.Row="8" Grid.Column="0" Margin="2" Content="{T:TranslateExtension LabelOverlayTransparency}" Grid.ColumnSpan="2" Padding="1"/>
-                                    <Slider Grid.Row="9" Grid.Column="0" Margin="2" Minimum="0" Maximum="100" Value="{Binding OverlayTransparency}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" Grid.ColumnSpan="2" IsEnabled="{Binding OverlayActivated}"/>
-                                    <Button Grid.Column="1" Grid.Row="1" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:TranslateExtension LabelReset}" Command="{Binding ResetOverlayCommand}">
-                                        <Rectangle Width="20" Height="20">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_reset}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </Button>
+                                <Label Grid.Row="8" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelOverlayTransparency}" Grid.ColumnSpan="3" Padding="1"/>
+                                <Slider Grid.Row="9" Grid.Column="0" Margin="2,2,3,2" Minimum="0" Maximum="100" Value="{Binding OverlayTransparency}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" IsEnabled="{Binding OverlayActivated}"/>
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding OverlayTransparency}" IsEnabled="{Binding OverlayActivated}" Grid.Row="9"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
-                                </Grid>
-                            </Expander.Content>
+                                <Button Grid.Column="2" Grid.Row="1" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelReset}" Command="{Binding ResetOverlayCommand}" Margin="15,0,1,0">
+                                    <Rectangle Width="20" Height="20">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_reset}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Button>
+                            </Grid>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" 
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                            <Expander.Content>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="1*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Content="{T:TranslateExtension ButtonStart}" Command="{Binding StartFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3"  Margin="5"/>
-                                    <Button Content="{T:TranslateExtension ButtonPreview}" Command="{Binding PreviewFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3" Grid.Column="1" Margin="5"/>
-                                    <Button Content="{T:TranslateExtension ButtonStop}" Command="{Binding StopFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="4" Margin="5"/>
+                        <Expander Header="{T:Translate LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" 
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="{T:Translate ButtonStart}" Command="{Binding StartFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3"  Margin="5"/>
+                                <Button Content="{T:Translate ButtonPreview}" Command="{Binding PreviewFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="3" Grid.Column="1" Margin="5"/>
+                                <Button Content="{T:Translate ButtonStop}" Command="{Binding StopFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="4" Margin="5"/>
 
-                                    <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelNoOfPhots}"/>
-                                    <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{T:Translate LabelNoOfPhots}"/>
+                                <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
-                                    <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
+                                <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
 
-                                    <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
-                                    <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="1" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{T:Translate LabelFocusStep}"/>
+                                <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="1" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
-                                    <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
-                                    <ProgressBar  Grid.Row="5" Margin="5" Value="{Binding FocusStackingTick}" Maximum="{Binding WaitTime}" VerticalAlignment="Bottom"/>
-                                    <Label Content="{Binding PhotoCount}" Grid.Row="4" Margin="5"/>
+                                <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
+                                <ProgressBar  Grid.Row="5" Margin="5" Value="{Binding FocusStackingTick}" Maximum="{Binding WaitTime}" VerticalAlignment="Bottom"/>
+                                <Label Content="{Binding PhotoCount}" Grid.Row="4" Margin="5"/>
 
-                                    <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
-                                    <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{T:Translate LabelWaitTime}"/>
+                                <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
-                                    <Button Grid.Row="5" Grid.Column="1" ToolTip="{T:TranslateExtension SessionAdd}" Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding HelpFocusStackingCommand}">
-                                        <Rectangle Width="10" Height="10">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_question}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </Button>
-                                </Grid>
-                            </Expander.Content>
+                                <Button Grid.Row="5" Grid.Column="1" ToolTip="{T:Translate SessionAdd}" Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Command="{Binding HelpFocusStackingCommand}">
+                                    <Rectangle Width="10" Height="10">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_question}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Button>
+                            </Grid>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" 
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                            <Expander.Content>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Content="{T:TranslateExtension ButtonStart}" Command="{Binding StartSimpleFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="4"  Margin="5"/>
-                                    <Button Content="{T:TranslateExtension ButtonPreview}" Command="{Binding PreviewSimpleFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="4" Grid.Column="1" Margin="5"/>
-                                    <Button Content="{T:TranslateExtension ButtonStop}" Command="{Binding StopSimpleFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="5" Margin="5"/>
+                        <Expander Header="{T:Translate LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" 
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="{T:Translate ButtonStart}" Command="{Binding StartSimpleFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="4"  Margin="5"/>
+                                <Button Content="{T:Translate ButtonPreview}" Command="{Binding PreviewSimpleFocusStackingCommand}" IsEnabled="{Binding IsFree}" Grid.Row="4" Grid.Column="1" Margin="5"/>
+                                <Button Content="{T:Translate ButtonStop}" Command="{Binding StopSimpleFocusStackingCommand}" Grid.Column="1" IsEnabled="{Binding IsFocusStackingRunning}" Grid.Row="5" Margin="5"/>
 
-                                    <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelNoOfPhots}"/>
-                                    <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding PhotoNumber}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{T:Translate LabelNoOfPhots}"/>
+                                <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding PhotoNumber}" IsEnabled="{Binding IsFree}" Margin="2"/>
 
-                                    <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
+                                <!--<Controls1:AdvancedSlider Minimum="1" Maximum="100" Label="{T:TranslateExtension LabelNoOfPhots}" Grid.ColumnSpan="4" Value="{Binding PhotoNo}" IsEnabled="{Binding IsFree}" />-->
 
-                                    <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelDirection}"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="1"  SelectedIndex="{Binding Direction}" IsEnabled="{Binding IsFree}" Margin="2">
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelFarNear}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelNearFar}" />
-                                    </ComboBox>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{T:Translate LabelDirection}"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1"  SelectedIndex="{Binding Direction}" IsEnabled="{Binding IsFree}" Margin="2">
+                                    <ComboBoxItem Content="{T:Translate LabelFarNear}" />
+                                    <ComboBoxItem Content="{T:Translate LabelNearFar}" />
+                                </ComboBox>
 
-                                    <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelFocusStep}"/>
-                                    <ComboBox Grid.Row="2" Grid.Column="1"  SelectedIndex="{Binding FocusStepSize}" IsEnabled="{Binding IsFree}" Margin="2">
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelStepSmall}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelStepMedium}" />
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelStepLarge}" />
-                                    </ComboBox>
-                                    <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
+                                <Label Grid.Row="2" Grid.Column="0" Content="{T:Translate LabelFocusStep}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1"  SelectedIndex="{Binding FocusStepSize}" IsEnabled="{Binding IsFree}" Margin="2">
+                                    <ComboBoxItem Content="{T:Translate LabelStepSmall}" />
+                                    <ComboBoxItem Content="{T:Translate LabelStepMedium}" />
+                                    <ComboBoxItem Content="{T:Translate LabelStepLarge}" />
+                                </ComboBox>
+                                <!--<Controls1:AdvancedSlider Minimum="1" Maximum="1024" Label="{T:TranslateExtension LabelFocusStep}" Grid.ColumnSpan="4" Value="{Binding FocusStep}" IsEnabled="{Binding IsFree}" Grid.Row="1" />-->
 
-                                    <ProgressBar  Grid.Row="5" Margin="5" Value="{Binding FocusStackingTick}" Maximum="{Binding WaitTime}" VerticalAlignment="Bottom"/>
-                                    <Label Content="{Binding PhotoCount}" Grid.Row="5" Margin="5"/>
+                                <ProgressBar  Grid.Row="5" Margin="5" Value="{Binding FocusStackingTick}" Maximum="{Binding WaitTime}" VerticalAlignment="Bottom"/>
+                                <Label Content="{Binding PhotoCount}" Grid.Row="5" Margin="5"/>
 
-                                    <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}"/>
-                                    <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
-                                </Grid>
-                            </Expander.Content>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{T:Translate LabelWaitTime}"/>
+                                <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
+                            </Grid>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelMotionDetection}" BorderThickness="1"  BorderBrush="Black"  Margin="3"
-                                  Style="{DynamicResource MetroExpanderEx}"
-                          Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMotionDetectionLiveView, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                            <Expander.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5" />
-                                        <ColumnDefinition Width="88*" />
-                                        <ColumnDefinition Width="5" />
-                                        <ColumnDefinition Width="90*" />
-                                        <ColumnDefinition Width="5" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <CheckBox Content="{T:TranslateExtension LabelActivateMotionDetection}" Grid.Column="1" IsChecked="{Binding DetectMotion}" Grid.ColumnSpan="3" Margin="3" VerticalAlignment="Center"/>
-                                    <!--<CheckBox Content="{T:TranslateExtension LabelCaptureWhenMove}" Grid.Column="1" Grid.Row="2" IsChecked="{Binding TriggerOnMotion}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>-->
-                                    <ComboBox Grid.Column="3" Grid.Row="2" SelectedIndex="{Binding MotionAction}">
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelDisabled}"/>
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelCapturePhoto}"/>
-                                        <ComboBoxItem Content="{T:TranslateExtension LabelRecordVideo}"/>
-                                    </ComboBox>
-                                    <CheckBox Content="{T:TranslateExtension LabelAutofocusBeforeCapture}" Grid.Column="1" Grid.Row="1" IsChecked="{Binding MotionAutofocusBeforCapture}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
-                                    <CheckBox Content="{T:TranslateExtension LabelDetectArea}" Grid.Column="1" Grid.Row="3" IsChecked="{Binding DetectMotionArea}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
+                        <Expander Header="{T:Translate LabelMotionDetection}" BorderThickness="1"  BorderBrush="Black"  Margin="3"
+							Style="{DynamicResource MetroExpanderEx}"
+							Visibility="{Binding ShowMotionDetectionLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="88*" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="90*" />
+                                    <ColumnDefinition Width="5" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <CheckBox Content="{T:Translate LabelActivateMotionDetection}" Grid.Column="1" IsChecked="{Binding DetectMotion}" Grid.ColumnSpan="3" Margin="3" VerticalAlignment="Center"/>
+                                <!--<CheckBox Content="{T:TranslateExtension LabelCaptureWhenMove}" Grid.Column="1" Grid.Row="2" IsChecked="{Binding TriggerOnMotion}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>-->
+                                <ComboBox Grid.Column="3" Grid.Row="2" SelectedIndex="{Binding MotionAction}">
+                                    <ComboBoxItem Content="{T:Translate LabelDisabled}"/>
+                                    <ComboBoxItem Content="{T:Translate LabelCapturePhoto}"/>
+                                    <ComboBoxItem Content="{T:Translate LabelRecordVideo}"/>
+                                </ComboBox>
+                                <CheckBox Content="{T:Translate LabelAutofocusBeforeCapture}" Grid.Column="1" Grid.Row="1" IsChecked="{Binding MotionAutofocusBeforCapture}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
+                                <CheckBox Content="{T:Translate LabelDetectArea}" Grid.Column="1" Grid.Row="3" IsChecked="{Binding DetectMotionArea}" Grid.ColumnSpan="3" Margin="3"  VerticalAlignment="Center" IsEnabled="{Binding DetectMotion}"/>
 
-                                    <Label Content="{T:Translate LabelVideoLength}" Margin="3"  Grid.Row="4" Grid.Column="1"/>
-                                    <Controls:NumericUpDown Minimum="0" Value="{Binding MotionMovieLength}" IsEnabled="{Binding DetectMotion}" Margin="3" Grid.Column="3" Grid.Row="4"/>
+                                <Label Content="{T:Translate LabelVideoLength}" Margin="3"  Grid.Row="4" Grid.Column="1"/>
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding MotionMovieLength}" IsEnabled="{Binding DetectMotion}" Margin="3" Grid.Column="3" Grid.Row="4"/>
 
-                                    <Label Content="{T:TranslateExtension LabelThreshold}" Grid.Column="1" Grid.Row="5" />
-                                    <Controls:NumericUpDown Grid.Column="3" Grid.Row="5" Maximum="99" Minimum="1" Value="{Binding MotionThreshold}" Margin="3" IsEnabled="{Binding DetectMotion}"/>
-                                    <Label Content="{T:TranslateExtension LabelWaitMoion}" Grid.Column="1" Grid.Row="6" />
-                                    <Controls:NumericUpDown Grid.Column="3" Grid.Row="6" Margin="3" Minimum="0" Maximum="3600" Value="{Binding WaitForMotionSec}" IsEnabled="{Binding DetectMotion}"/>
-                                    <Label Content="{T:TranslateExtension LabelCurrentMotion}" Grid.Column="1" Grid.Row="7" />
-                                    <ProgressBar Grid.Column="3" Grid.Row="7" Maximum="100" Value="{Binding CurrentMotionIndex}" Height="18"/>
-                                    <Label Grid.Column="3" Grid.Row="7" Content="{Binding CurrentMotionIndex}" HorizontalAlignment="Center"/>
-                                </Grid>
-                            </Expander.Content>
+                                <Label Content="{T:Translate LabelThreshold}" Grid.Column="1" Grid.Row="5" />
+                                <Controls:NumericUpDown Grid.Column="3" Grid.Row="5" Maximum="99" Minimum="1" Value="{Binding MotionThreshold}" Margin="3" IsEnabled="{Binding DetectMotion}"/>
+                                <Label Content="{T:Translate LabelWaitMoion}" Grid.Column="1" Grid.Row="6" />
+                                <Controls:NumericUpDown Grid.Column="3" Grid.Row="6" Margin="3" Minimum="0" Maximum="3600" Value="{Binding WaitForMotionSec}" IsEnabled="{Binding DetectMotion}"/>
+                                <Label Content="{T:Translate LabelCurrentMotion}" Grid.Column="1" Grid.Row="7" />
+                                <ProgressBar Grid.Column="3" Grid.Row="7" Maximum="100" Value="{Binding CurrentMotionIndex}" Height="18"/>
+                                <Label Grid.Column="3" Grid.Row="7" Content="{Binding CurrentMotionIndex}" HorizontalAlignment="Center"/>
+                            </Grid>
                         </Expander>
-                        <Expander Header="{T:TranslateExtension LabelSnapshot}" BorderThickness="1"  BorderBrush="Black"  Margin="3" 
-                                  Style="{DynamicResource MetroExpanderEx}">
+                        <Expander Header="{T:Translate LabelSnapshot}" BorderThickness="1"  BorderBrush="Black"  Margin="3" 
+							Style="{DynamicResource MetroExpanderEx}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -728,7 +723,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button Content="{T:TranslateExtension LabelCaptureSnapshot}" Margin="5" Grid.ColumnSpan="2" Command="{Binding CaptureSnapshotCommand}"/>
+                                <Button Content="{T:Translate LabelCaptureSnapshot}" Margin="5" Grid.ColumnSpan="2" Command="{Binding CaptureSnapshotCommand}"/>
 
                                 <Label Grid.Row="1" Content="{T:Translate LabelCaptureCount}" Margin="3" />
                                 <Controls:NumericUpDown Minimum="0" Value="{Binding SnapshotCaptureCount}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="1"/>
@@ -748,13 +743,13 @@
         <!--<Controls:ProgressRing IsActive="{Binding Path=SelectedPortableDevice.IsBusy, RelativeSource={RelativeSource FindAncestor, AncestorType=my:LiveViewWnd, AncestorLevel=1}}" Height="78" Width="81" Canvas.Left="21" Canvas.Top="20" />-->
 
         <!--<Image Name="img_preview" Margin="31,114,0,0" Height="{Binding ElementName=canvas_image, Path=Height}" HorizontalAlignment="Left" Width="{Binding ElementName=canvas_image, Path=Width}"/>-->
-        <Grid Width="300" Grid.Column="2" Grid.Row="2" Name="grid_wait" Visibility="{Binding Path=DelayedStart, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}">
+        <Grid Width="300" Grid.Column="2" Grid.Row="2" x:Name="grid_wait" Visibility="{Binding DelayedStart, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <ProgressBar IsIndeterminate="True" Height="20"/>
-            <Label Content="{T:TranslateExtension LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
+            <Label Content="{T:Translate LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
         </Grid>
 
-        <Ellipse Width="190" Height="190" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" 
-                 HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
+        <Ellipse Width="190" Height="190" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding CountDownVisible, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" 
+			HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
             <Ellipse.Stroke>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="Blue"/>
@@ -766,19 +761,19 @@
                 <RotateTransform/>
             </Ellipse.RenderTransform>
             <Ellipse.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="(Rectangle.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:2" RepeatBehavior="Forever"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" To="-360" Duration="0:0:2" RepeatBehavior="Forever"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </Ellipse.Triggers>
         </Ellipse>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding CountDownVisible, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="2" />
+        <Label Content="{Binding SystemMessage, Source={x:Static Devices:StaticHelper.Instance}}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="2" />
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />
     </Grid>
 </Controls:MetroWindow>
