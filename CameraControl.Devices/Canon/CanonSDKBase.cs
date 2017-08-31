@@ -439,12 +439,63 @@ namespace CameraControl.Devices.Canon
         public virtual void AddAditionalProps()
         {
             AdvancedProperties.Add(InitDriveMode());
-            AdvancedProperties.Add(InitFlash());
+            AdvancedProperties.Add(InitFlahEc());
             AdvancedProperties.Add(InitBracket());
             AdvancedProperties.Add(InitAEBracket());
             foreach (PropertyValue<long> value in AdvancedProperties)
             {
                 value.SetValue((long)Camera.GetProperty(value.Code), false);
+            }
+        }
+
+        private PropertyValue<long> InitFlahEc()
+        {
+            PropertyValue<long> res = new PropertyValue<long>()
+            {
+                Name = "Flash Compensation",
+                IsEnabled = true,
+                Code = Edsdk.PropID_FlashCompensation,
+                SubType = typeof(UInt32),
+                DisableIfWrongValue = true
+            };
+
+            var data = GetSettingsList(Edsdk.PropID_FlashCompensation);
+            
+            res.ValueChanged += FlashExposureCompensation_ValueChanged;
+            try
+            {
+                foreach (KeyValuePair<uint, string> keyValuePair in _ec)
+                {
+                    if (data.Count == 0)
+                    {
+                        res.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
+                    }
+                    else
+                    {
+                        if (data.Contains((int)keyValuePair.Key))
+                            res.AddValues(keyValuePair.Value, (int)keyValuePair.Key);
+                    }
+                }
+                res.ReloadValues();
+                res.IsEnabled = true;
+                res.SetValue((int)Camera.GetProperty(Edsdk.PropID_FlashCompensation), false);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Error get EC", exception);
+            }
+            return res;
+        }
+
+        private void FlashExposureCompensation_ValueChanged(object sender, string key, long val)
+        {
+            try
+            {
+                Camera.SetProperty(Edsdk.PropID_FlashCompensation, val);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Error set EC to camera", exception);
             }
         }
 
@@ -984,6 +1035,7 @@ namespace CameraControl.Devices.Canon
         private void InitMode()
         {
            Mode = new PropertyValue<long>();
+            Mode.ValueChanged += Mode_ValueChanged;
             try
             {
                 foreach (KeyValuePair<long, string> keyValuePair in _exposureModeTable)
@@ -992,11 +1044,27 @@ namespace CameraControl.Devices.Canon
                 }
                 Mode.ReloadValues();
                 Mode.SetValue((uint) Camera.GetProperty(Edsdk.PropID_AEMode), false);
-                Mode.IsEnabled = false;
+                Mode.IsEnabled = true;
             }
             catch (Exception ex)
             {
                 Log.Debug("Error set aperture ", ex);
+            }
+        }
+
+        private void Mode_ValueChanged(object sender, string key, long val)
+        {
+            try
+            {
+                Camera.SetProperty(Edsdk.PropID_AEModeSelect, val);
+                Camera.SetProperty(Edsdk.PropID_AEMode, val);
+                Thread.Sleep(200);
+                ReInitFNumber(true);
+                ReInitShutterSpeed();
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Error set EC to camera", exception);
             }
         }
 

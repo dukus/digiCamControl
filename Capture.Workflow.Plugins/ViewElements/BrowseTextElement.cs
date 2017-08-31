@@ -1,18 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
+using Orientation = System.Windows.Controls.Orientation;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("TextElement")]
-    public class TextElement: IViewElementPlugin
+    [DisplayName("BrowseTextElement")]
+    public class BrowseTextElement: IViewElementPlugin
     {
         public string Name { get; set; }
         public WorkFlowViewElement CreateElement(WorkFlowView view)
@@ -58,7 +66,7 @@ namespace Capture.Workflow.Plugins.ViewElements
             {
                 Name = "Orientation",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() {"Horizontal", "Vertical"},
+                ValueList = new List<string>() { "Horizontal", "Vertical" },
                 Value = "Horizontal"
             });
             element.Properties.Items.Add(new CustomProperty()
@@ -88,6 +96,12 @@ namespace Capture.Workflow.Plugins.ViewElements
                 Name = "ForegroundColor",
                 PropertyType = CustomPropertyType.Color,
                 Value = "Transparent"
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "ButtonText",
+                PropertyType = CustomPropertyType.String,
+                Value = "Browse"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -133,18 +147,37 @@ namespace Capture.Workflow.Plugins.ViewElements
             if (viewElement.Properties["LabelWidth"].ToInt() > 0)
                 label.Width = viewElement.Properties["LabelWidth"].ToInt();
 
-            //if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
-            //    label.Background =
-            //        new SolidColorBrush(
-            //            (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
+
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
                 label.Foreground =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
 
+            var button = new System.Windows.Controls.Button()
+            {
+                Height = viewElement.Properties["Height"].ToInt(),
+                Content = viewElement.Properties["ButtonText"].Value,
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
+                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                VerticalContentAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            button.Click += (sender, e) =>
+            {
+                FolderBrowserDialog browserDialog = new FolderBrowserDialog();
+                if (viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].Value].Value != null)
+                    browserDialog.SelectedPath =
+                        viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].Value].Value;
+                if (browserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].Value].Value =
+                        browserDialog.SelectedPath;
+                }
+            };
             var stackpanel = new StackPanel();
             stackpanel.Children.Add(label);
             stackpanel.Children.Add(textBox);
+            stackpanel.Children.Add(button);
             stackpanel.Orientation = viewElement.Properties["Orientation"].Value == "Horizontal" ? Orientation.Horizontal : Orientation.Vertical;
             return stackpanel;
         }
