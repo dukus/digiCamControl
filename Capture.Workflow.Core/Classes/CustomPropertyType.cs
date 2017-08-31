@@ -10,6 +10,7 @@
         Variable,
         View,
         Icon,
-        Bool
+        Bool,
+        File
     }
 }

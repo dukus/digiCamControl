@@ -29,11 +29,12 @@
         <DataGrid ItemsSource="{Binding Items}"  CanUserSortColumns="True" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" EnableRowVirtualization="False"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Name" Width="Auto" />
-                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Value" Width="*" >
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Name" Width="Auto" SortDirection="Descending" />
+                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Value" Width="*"  >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ContentControl Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3" Background="{StaticResource MenuItemSelectionFill}"/>
+                            <ContentControl Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3" Background="{StaticResource MenuItemSelectionFill}"
+                                            VerticalContentAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

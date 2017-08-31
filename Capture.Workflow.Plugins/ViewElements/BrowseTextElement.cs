@@ -109,6 +109,12 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Variable,
                 Value = ""
             });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "File",
+                PropertyType = CustomPropertyType.File,
+                Value = ""
+            });
             return element;
         }
 
