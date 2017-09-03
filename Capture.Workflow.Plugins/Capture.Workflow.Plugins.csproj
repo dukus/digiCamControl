@@ -143,7 +143,9 @@
     <Compile Include="Commands\CheckCameraAction.cs" />
     <Compile Include="Commands\CopyFileAction.cs" />
     <Compile Include="Commands\MathAction.cs" />
+    <Compile Include="Commands\TriggerEvent.cs" />
     <Compile Include="Commands\ViewAction.cs" />
+    <Compile Include="Events\CustomEvent.cs" />
     <Compile Include="Events\FileTransfered.cs" />
     <Compile Include="Events\KeyPressedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
