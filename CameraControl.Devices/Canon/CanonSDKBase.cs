@@ -1057,10 +1057,10 @@ namespace CameraControl.Devices.Canon
             try
             {
                 Camera.SetProperty(Edsdk.PropID_AEModeSelect, val);
-                Camera.SetProperty(Edsdk.PropID_AEMode, val);
-                Thread.Sleep(200);
-                ReInitFNumber(true);
-                ReInitShutterSpeed();
+                //Camera.SetProperty(Edsdk.PropID_AEMode, val);
+                //Thread.Sleep(200);
+                //ReInitFNumber(true);
+                //ReInitShutterSpeed();
             }
             catch (Exception exception)
             {

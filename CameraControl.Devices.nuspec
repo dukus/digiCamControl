@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>CameraControl.Devices</id>
+        <version>2.0.73-beta</version>
+        <title>digiCamControl</title>
+        <authors>Duka Istvan</authors>
+        <owners>Duka Istvan</owners>
+        <licenseUrl>https://raw.githubusercontent.com/dukus/digiCamControl/master/CameraControl.Application/Licenses/DigiCamControlLicence.txt</licenseUrl>
+        <projectUrl>https://github.com/dukus/digiCamControl</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Library to control Canon,Sony,Nikon DSLR cameras</description>
+        <releaseNotes />
+        <tags>camera control nikon canon sony dslr live view</tags>
+        <dependencies>
+            <group targetFramework=".NETFramework4.6">
+                <dependency id="Newtonsoft.Json" version="10.0.3" />
+                <dependency id="WebSocketSharp" version="1.0.3-rc11" />
+                <dependency id="Rssdp" version="2.0.9" />
+            </group>
+        </dependencies>
+		<contentFiles>
+			<files include="CameraControl\bin\Debug\EDSDK.dll" buildAction="None" copyToOutput="true" flatten="true" />
+			<files include="CameraControl\bin\Debug\EdsImage.dll" buildAction="None" copyToOutput="true" flatten="true" />
+		</contentFiles>
+    </metadata>
+    <files>
+        <file src="CameraControl\bin\Debug\CameraControl.Devices.dll" target="lib\net46\CameraControl.Devices.dll" />
+        <file src="CameraControl\bin\Debug\CameraControl.Devices.pdb" target="lib\net46\CameraControl.Devices.pdb" />
+        <file src="CameraControl\bin\Debug\Canon.Eos.Framework.dll" target="lib\net46\Canon.Eos.Framework.dll" />
+        <file src="CameraControl\bin\Debug\Canon.Eos.Framework.pdb" target="lib\net46\Canon.Eos.Framework.pdb" />
+        <file src="CameraControl\bin\Debug\Interop.PortableDeviceApiLib.dll" target="lib\net46\Interop.PortableDeviceApiLib.dll" />
+        <file src="CameraControl\bin\Debug\Interop.PortableDeviceTypesLib.dll" target="lib\net46\Interop.PortableDeviceTypesLib.dll" />
+        <file src="refs\Interop.WIA.dll" target="lib\net46\Interop.WIA.dll" />
+        <file src="CameraControl\bin\Debug\PortableDeviceLib.dll" target="lib\net46\PortableDeviceLib.dll" />
+        <file src="CameraControl\bin\Debug\PortableDeviceLib.pdb" target="lib\net46\PortableDeviceLib.pdb" />
+        <file src="CameraControl\bin\Debug\PortableDeviceLib.dll" target="lib\net46\PortableDeviceLib.dll" />
+        <file src="CameraControl\bin\Debug\PortableDeviceLib.pdb" target="lib\net46\PortableDeviceLib.pdb" />
+        <file src="tools\install.ps1" target="tools\install.ps1" />
+		<file src="CameraControl\bin\Debug\EDSDK.dll" target="content\EDSDK.dll"/>
+		<file src="CameraControl\bin\Debug\EdsImage.dll" target="content\EdsImage.dll"/>
+	</files>
+</package>
