@@ -46,6 +46,20 @@ namespace Capture.Workflow.Core.Classes
                 Name = "License url",
                 PropertyType = CustomPropertyType.String
             });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "BaseColorScheme",
+                PropertyType = CustomPropertyType.ValueList,
+                ValueList = {"Light","Dark"},
+                Value = "Light",
+            });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "ColorScheme",
+                PropertyType = CustomPropertyType.ValueList,
+                ValueList = { "yellow", "amber", "deeporange", "lightblue", "teal", "cyan", "pink", "green", "deeppurple", "indigo", "lightgreen", "blue", "lime", "red", "orange", "purple", "bluegrey", "grey", "brown" },
+                Value = "blue",
+            });
         }
 
 

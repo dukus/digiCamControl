@@ -4,6 +4,7 @@ using CameraControl.Devices;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using GalaSoft.MvvmLight;
+using MaterialDesignThemes.Wpf;
 
 namespace Capture.Workflow.ViewModel
 {
@@ -59,6 +60,8 @@ namespace Capture.Workflow.ViewModel
         {
             Workflow = WorkflowManager.Instance.Context.WorkFlow;
             CameraDevice = ServiceProvider.Instance.DeviceManager.SelectedCameraDevice;
+            new PaletteHelper().SetLightDark(Workflow.Properties["BaseColorScheme"].Value == "Dark");
+            new PaletteHelper().ReplacePrimaryColor(Workflow.Properties["ColorScheme"].Value);
             if (!IsInDesignMode)
             {
                 WorkflowManager.Instance.Message += Instance_Message;
@@ -114,6 +117,25 @@ namespace Capture.Workflow.ViewModel
         {
             WorkflowManager.Instance.Message -= Instance_Message;
             ServiceProvider.Instance.DeviceManager.CameraConnected -= DeviceManager_CameraConnected;
+            foreach (WorkFlowEvent workflowEvent in Workflow.Events)
+            {
+                try
+                {
+                    workflowEvent.Instance.RegisterEvent(workflowEvent);
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Unable to register event " + workflowEvent?.Name, e);
+                }
+            }
+            if (Contents?.DataContext != null)
+            {
+                // dispose old view if was loaded
+                var obj = Contents.DataContext as IDisposable;
+                obj?.Dispose();
+            }
+            new PaletteHelper().SetLightDark(false);
+            new PaletteHelper().ReplacePrimaryColor("blue");
         }
     }
 }

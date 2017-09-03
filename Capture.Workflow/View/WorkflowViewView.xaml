@@ -7,7 +7,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="WorkflowViewView" Height="300" Width="300" WindowState="Maximized">
+        Title="WorkflowViewView" Height="300" Width="300" WindowState="Maximized" Closed="MetroWindow_Closed">
     <Window.DataContext>
         <viewModel:WorkflowViewViewModel/>
     </Window.DataContext>

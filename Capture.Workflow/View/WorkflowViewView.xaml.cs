@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Capture.Workflow.ViewModel;
 
 namespace Capture.Workflow.View
 {
@@ -22,6 +23,11 @@ namespace Capture.Workflow.View
         public WorkflowViewView()
         {
             InitializeComponent();
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+            ((WorkflowViewViewModel)DataContext).Dispose();
         }
     }
 }
