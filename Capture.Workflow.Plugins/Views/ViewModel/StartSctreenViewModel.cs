@@ -11,50 +11,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 {
     public class StartSctreenViewModel: BaseViewModel
     {
-        private ObservableCollection<FrameworkElement> _centerElements;
-        private ObservableCollection<FrameworkElement> _bottomLeftElements;
-        private ObservableCollection<FrameworkElement> _bottomRightElements;
-        private ObservableCollection<FrameworkElement> _backGroundElements;
 
-        public ObservableCollection<FrameworkElement> CenterElements
-        {
-            get { return _centerElements; }
-            set
-            {
-                _centerElements = value;
-                RaisePropertyChanged(() => CenterElements);
-            }
-        }
-
-        public ObservableCollection<FrameworkElement> BottomLeftElements
-        {
-            get { return _bottomLeftElements; }
-            set
-            {
-                _bottomLeftElements = value;
-                RaisePropertyChanged(() => BottomLeftElements);
-            }
-        }
-
-        public ObservableCollection<FrameworkElement> BottomRightElements
-        {
-            get { return _bottomRightElements; }
-            set
-            {
-                _bottomRightElements = value;
-                RaisePropertyChanged(() => BottomRightElements);
-            }
-        }
-
-        public ObservableCollection<FrameworkElement> BackGroundElements
-        {
-            get { return _backGroundElements; }
-            set
-            {
-                _backGroundElements = value;
-                RaisePropertyChanged(() => BackGroundElements);
-            }
-        }
 
         public string BorderBackground { get; set; }
         public string BorderColor { get; set; }

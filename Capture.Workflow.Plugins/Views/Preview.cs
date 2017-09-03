@@ -33,7 +33,7 @@ namespace Capture.Workflow.Plugins.Views
 
         public override List<string> GetPositions()
         {
-            return new List<string> { "Left", "BottomLeft", "BottomRight" };
+            return new List<string> { "Left", "BottomLeft", "BottomRight", "Background" };
         }
         public override UserControl GetPreview(WorkFlowView view)
         {
@@ -48,9 +48,11 @@ namespace Capture.Workflow.Plugins.Views
                     case "BottomLeft":
                         model.BottomLeftElements.Add(element.Instance.GetControl(element));
                         break;
-
                     case "BottomRight":
                         model.BottomRightElements.Add(element.Instance.GetControl(element));
+                        break;
+                    case "Background":
+                        model.BackGroundElements.Add(element.Instance.GetControl(element));
                         break;
                 }
             }
