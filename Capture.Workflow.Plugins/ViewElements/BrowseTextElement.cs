@@ -19,7 +19,7 @@ namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("BrowseTextElement")]
+    [DisplayName("BrowseFolder")]
     public class BrowseTextElement: IViewElementPlugin
     {
         public string Name { get; set; }

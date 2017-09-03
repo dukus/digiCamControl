@@ -11,7 +11,7 @@ namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("TextElement")]
+    [DisplayName("Text")]
     public class TextElement: IViewElementPlugin
     {
         public string Name { get; set; }

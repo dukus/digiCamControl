@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using CameraControl.Devices.Classes;
 
 namespace Capture.Workflow.Plugins.Views.ViewModel
 {
@@ -13,6 +14,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private ObservableCollection<FrameworkElement> _centerElements;
         private ObservableCollection<FrameworkElement> _bottomLeftElements;
         private ObservableCollection<FrameworkElement> _bottomRightElements;
+        private ObservableCollection<FrameworkElement> _backGroundElements;
 
         public ObservableCollection<FrameworkElement> CenterElements
         {
@@ -44,6 +46,16 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             }
         }
 
+        public ObservableCollection<FrameworkElement> BackGroundElements
+        {
+            get { return _backGroundElements; }
+            set
+            {
+                _backGroundElements = value;
+                RaisePropertyChanged(() => BackGroundElements);
+            }
+        }
+
         public string BorderBackground { get; set; }
         public string BorderColor { get; set; }
         public int BorderThickness { get; set; }
@@ -55,6 +67,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             CenterElements = new ObservableCollection<FrameworkElement>();
             BottomLeftElements = new ObservableCollection<FrameworkElement>();
             BottomRightElements = new ObservableCollection<FrameworkElement>();
+            BackGroundElements = new AsyncObservableCollection<FrameworkElement>();
         }
     }
 }

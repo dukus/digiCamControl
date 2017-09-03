@@ -152,6 +152,7 @@
     <Compile Include="ViewElements\BrowseTextElement.cs" />
     <Compile Include="ViewElements\Button.cs" />
     <Compile Include="ViewElements\CameraProperty.cs" />
+    <Compile Include="ViewElements\ImageElement.cs" />
     <Compile Include="ViewElements\Label.cs" />
     <Compile Include="ViewElements\TextElement.cs" />
     <Compile Include="Views\BaseView.cs" />

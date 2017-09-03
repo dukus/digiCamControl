@@ -11,10 +11,21 @@
         <viewModel:StartSctreenViewModel/>
     </UserControl.DataContext>    
     <Grid>
-        <Border  HorizontalAlignment="Center" VerticalAlignment="Center" Background="{Binding BorderBackground}" BorderBrush="{Binding BorderColor}" 
-                 BorderThickness="{Binding BorderThickness}" CornerRadius="{Binding CornerRadius}">
+        <ItemsControl ItemsSource="{Binding BackGroundElements }" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Border  HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="{Binding BorderThickness}" CornerRadius="{Binding CornerRadius}">
             
-        <ItemsControl ItemsSource="{Binding CenterElements }">
+        <ItemsControl ItemsSource="{Binding CenterElements }" >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ContentControl Content="{Binding}" />

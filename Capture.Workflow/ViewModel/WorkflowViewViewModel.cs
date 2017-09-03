@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using CameraControl.Devices;
 using Capture.Workflow.Core;
@@ -14,6 +15,10 @@ namespace Capture.Workflow.ViewModel
         private WorkFlow _workflow;
         private string _title;
         private Context _context;
+        private bool _titleBar;
+        private WindowState _windowState;
+        private WindowStyle _windowStyle;
+        private bool _fullScreen;
 
         public UserControl Contents
         {
@@ -55,15 +60,65 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public bool TitleBar
+        {
+            get { return _titleBar; }
+            set
+            {
+                _titleBar = value;
+                RaisePropertyChanged(() => TitleBar);
+            }
+        }
+
+        public WindowState WindowState
+        {
+            get { return _windowState; }
+            set
+            {
+                _windowState = value;
+                RaisePropertyChanged(() => WindowState);
+            }
+        }
+
+        public WindowStyle WindowStyle
+        {
+            get { return _windowStyle; }
+            set
+            {
+                _windowStyle = value;
+                RaisePropertyChanged(() => WindowStyle);
+            }
+        }
+
+        public bool FullScreen
+        {
+            get { return _fullScreen; }
+            set
+            {
+                _fullScreen = value;
+                RaisePropertyChanged(() => FullScreen);
+                RaisePropertyChanged(() => ShowTitleBar);
+            }
+        }
+
+        public bool ShowTitleBar => !FullScreen;
+
+
 
         public WorkflowViewViewModel()
         {
             Workflow = WorkflowManager.Instance.Context.WorkFlow;
-            CameraDevice = ServiceProvider.Instance.DeviceManager.SelectedCameraDevice;
-            new PaletteHelper().SetLightDark(Workflow.Properties["BaseColorScheme"].Value == "Dark");
-            new PaletteHelper().ReplacePrimaryColor(Workflow.Properties["ColorScheme"].Value);
+
             if (!IsInDesignMode)
             {
+                TitleBar = !Workflow.Properties["HideTileBar"].ToBool();
+                WindowStyle = Workflow.Properties["FullScreen"].ToBool() ? WindowStyle.None : WindowStyle.SingleBorderWindow;
+                FullScreen = Workflow.Properties["FullScreen"].ToBool();
+                WindowState = WindowState.Maximized;
+
+                new PaletteHelper().SetLightDark(Workflow.Properties["BaseColorScheme"].Value == "Dark");
+                new PaletteHelper().ReplacePrimaryColor(Workflow.Properties["ColorScheme"].Value);
+                CameraDevice = ServiceProvider.Instance.DeviceManager.SelectedCameraDevice;
                 WorkflowManager.Instance.Message += Instance_Message;
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 foreach (WorkFlowEvent workflowEvent in Workflow.Events)

@@ -60,6 +60,16 @@ namespace Capture.Workflow.Core.Classes
                 ValueList = { "yellow", "amber", "deeporange", "lightblue", "teal", "cyan", "pink", "green", "deeppurple", "indigo", "lightgreen", "blue", "lime", "red", "orange", "purple", "bluegrey", "grey", "brown" },
                 Value = "blue",
             });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "HideTileBar",
+                PropertyType = CustomPropertyType.Bool
+            });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "FullScreen",
+                PropertyType = CustomPropertyType.Bool
+            });
         }
 
 
