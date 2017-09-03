@@ -68,6 +68,9 @@ namespace Capture.Workflow.Core
 
         public List<PluginInfo> Plugins { get; set; }
 
+        public FileItem SelectedItem { get; set; }
+
+
         public WorkflowManager()
         {
             Plugins = new List<PluginInfo>();

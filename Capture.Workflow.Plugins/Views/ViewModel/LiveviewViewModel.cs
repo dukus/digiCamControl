@@ -15,9 +15,6 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private ObservableCollection<FrameworkElement> _leftElements;
         private ObservableCollection<FrameworkElement> _bottomLeftElements;
         private ObservableCollection<FrameworkElement> _bottomRightElements;
-        private AsyncObservableCollection<FileItem> _fileItems;
-        private FileItem _fileItem;
-        private FileItem _fileItem1;
 
         public WorkFlowView View { get; set; }
 
@@ -65,10 +62,11 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public FileItem FileItem
         {
-            get { return _fileItem1; }
+            get { return WorkflowManager.Instance.SelectedItem; }
             set
             {
-                _fileItem1 = value;
+                WorkflowManager.Instance.SelectedItem = value;
+                Bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
                 RaisePropertyChanged(() => FileItem);
             }
         }
