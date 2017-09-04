@@ -13,11 +13,6 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
     {
         private BitmapSource _bitmap;
         private ObservableCollection<FrameworkElement> _leftElements;
-        private ObservableCollection<FrameworkElement> _bottomLeftElements;
-        private ObservableCollection<FrameworkElement> _bottomRightElements;
-        private AsyncObservableCollection<FileItem> _fileItems;
-        private FileItem _fileItem;
-        private FileItem _fileItem1;
 
         public WorkFlowView View { get; set; }
 
@@ -28,26 +23,6 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             {
                 _leftElements = value;
                 RaisePropertyChanged(()=>LeftElements);
-            }
-        }
-
-        public ObservableCollection<FrameworkElement> BottomLeftElements
-        {
-            get { return _bottomLeftElements; }
-            set
-            {
-                _bottomLeftElements = value;
-                RaisePropertyChanged(()=>BottomLeftElements);
-            }
-        }
-
-        public ObservableCollection<FrameworkElement> BottomRightElements
-        {
-            get { return _bottomRightElements; }
-            set
-            {
-                _bottomRightElements = value;
-                RaisePropertyChanged(()=>BottomRightElements);
             }
         }
 
@@ -65,10 +40,11 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public FileItem FileItem
         {
-            get { return _fileItem1; }
+            get { return WorkflowManager.Instance.SelectedItem; }
             set
             {
-                _fileItem1 = value;
+                WorkflowManager.Instance.SelectedItem = value;
+                Bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
                 RaisePropertyChanged(() => FileItem);
             }
         }
@@ -79,6 +55,8 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             LeftElements = new ObservableCollection<FrameworkElement>();
             BottomLeftElements = new ObservableCollection<FrameworkElement>();
             BottomRightElements = new ObservableCollection<FrameworkElement>();
+            BackGroundElements = new AsyncObservableCollection<FrameworkElement>();
+
             WorkflowManager.Instance.Message += Instance_Message;
         }
 

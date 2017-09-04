@@ -1,4 +1,4 @@
-For developers visit http://digicamcontrol.com/wiki/index.php/Standalone_library
+For developers visit http://www.digicamcontrol.com/doc/development/lib
 
 
 [digiCamControl](http://digicamcontrol.com/)

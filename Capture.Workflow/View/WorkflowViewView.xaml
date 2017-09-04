@@ -7,7 +7,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="WorkflowViewView" Height="300" Width="300" WindowState="Maximized">
+        Title="WorkflowViewView" Height="300" Width="300" WindowState="{Binding WindowState, Mode=TwoWay}" WindowStyle="{Binding WindowStyle, Mode=TwoWay}"  Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen" IgnoreTaskbarOnMaximize="{Binding FullScreen}" ShowTitleBar="{Binding ShowTitleBar}" >
     <Window.DataContext>
         <viewModel:WorkflowViewViewModel/>
     </Window.DataContext>
@@ -32,8 +32,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                          Mode="PrimaryMid" DockPanel.Dock="Top" Height="69">
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2" Visibility="{Binding TitleBar, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                          Mode="PrimaryMid" DockPanel.Dock="Top" Height="69" >
                     <DockPanel>
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                       x:Name="MenuToggleButton"/>

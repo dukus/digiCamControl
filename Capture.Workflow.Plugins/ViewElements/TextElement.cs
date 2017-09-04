@@ -11,7 +11,7 @@ namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("TextElement")]
+    [DisplayName("Text")]
     public class TextElement: IViewElementPlugin
     {
         public string Name { get; set; }
@@ -52,7 +52,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 0,
                 RangeMax = 9999,
-                Value = "50"
+                Value = "35"
             });
             element.Properties.Items.Add(new CustomProperty()
             {

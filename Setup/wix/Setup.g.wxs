@@ -23,10 +23,6 @@
                 <RemoveFolder Id="INSTALLDIR" On="uninstall" />
               </Component>
 
-              <Component Id="Component.CLRHost.Interop.dll" Guid="357e0d80-5093-478e-8c11-28b147c75965">
-                <File Id="CLRHost.Interop.dll" Source="ObsPlugin\CLRHostPlugin\CLRHost.Interop.dll" />
-              </Component>
-
               <Component Id="Component.DccObsPlugin.dll" Guid="357e0d80-5093-478e-8c11-28b1a46c7edd">
                 <File Id="DccObsPlugin.dll" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
               </Component>
@@ -39,7 +35,7 @@
 
     <PropertyRef Id="NETFRAMEWORK45" />
 
-    <WixVariable Id="WixUILicenseRtf" Value="f:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="d:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
       <UpgradeVersion Minimum="0.0.0.0" Maximum="2.0.73.5" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
@@ -56,7 +52,6 @@
 
     <Feature Id="Obs_Plugin" Title="Obs Plugin" Absent="allow" Level="1">
       <ComponentRef Id="Component.INSTALLDIR" />
-      <ComponentRef Id="Component.CLRHost.Interop.dll" />
       <ComponentRef Id="Component.DccObsPlugin.dll" />
     </Feature>
 

@@ -143,12 +143,16 @@
     <Compile Include="Commands\CheckCameraAction.cs" />
     <Compile Include="Commands\CopyFileAction.cs" />
     <Compile Include="Commands\MathAction.cs" />
+    <Compile Include="Commands\TriggerEvent.cs" />
     <Compile Include="Commands\ViewAction.cs" />
+    <Compile Include="Events\CustomEvent.cs" />
     <Compile Include="Events\FileTransfered.cs" />
     <Compile Include="Events\KeyPressedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewElements\BrowseTextElement.cs" />
     <Compile Include="ViewElements\Button.cs" />
     <Compile Include="ViewElements\CameraProperty.cs" />
+    <Compile Include="ViewElements\ImageElement.cs" />
     <Compile Include="ViewElements\Label.cs" />
     <Compile Include="ViewElements\TextElement.cs" />
     <Compile Include="Views\BaseView.cs" />

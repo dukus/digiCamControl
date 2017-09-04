@@ -27,7 +27,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() {"Capture", "StartLiveView", "StopLiveView"}
+                ValueList = new List<string>() {"Capture", "StartLiveView", "StopLiveView","Autofocus"}
             });
 
             command.Properties.Add(new CustomProperty()
@@ -58,6 +58,9 @@ namespace Capture.Workflow.Plugins.Commands
                         break;
                     case "StopLiveView":
                         StopLiveView();
+                        break;
+                    case "Autofocus":
+                        context.CameraDevice.AutoFocus();
                         break;
                 }
                 return true;
