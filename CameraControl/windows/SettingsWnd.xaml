@@ -248,12 +248,17 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="2"/>
-                    <CheckBox Grid.Row="1" Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
-                    <CheckBox Grid.Row="2" Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
-                    <Label Grid.Row="3" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                        <Label Margin="3" Content="{T:TranslateExtension LabelWebserverPort}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding WebserverPort}"/>
+                    </StackPanel>
+                    <CheckBox Grid.Row="2" Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
+                    <CheckBox Grid.Row="3" Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="2" IsEnabled="{Binding UseWebserver}"/>
+                    <Label Grid.Row="4" Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelSettingsLiveView}">
@@ -272,7 +277,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />                        
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="67*" />
                     </Grid.RowDefinitions>
                     <GroupBox Header="Nikon" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -346,7 +351,7 @@
 
                     <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
                     <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Margin="3" Minimum="2" Maximum="120" Value="{Binding LiveViewFreezeTimeOut}"/>
-                    
+
                     <Button Content="{T:TranslateExtension LabelShowOverlayFolder}" Grid.Column="1" Grid.Row="8" Name="btn_showoverlay" Click="button5_Click" Margin="3"/>
                 </Grid>
             </TabItem>
@@ -459,7 +464,7 @@
                     <Label Content="{T:TranslateExtension LabelDisableHardwareAcceleratione}"  Margin="3" Grid.Column="0" Grid.Row="10" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                     <CheckBox Grid.Row="10" IsChecked="{Binding DisableHardwareAccelerationNew}" Margin="2" Grid.Column="1"/>
 
-                    
+
                     <Button Content="{T:TranslateExtension LabelClearCache}" Grid.Column="1" Grid.Row="11" Margin="3" Name="btn_clearcache" Click="btn_clearcache_Click" />
                 </Grid>
             </TabItem>

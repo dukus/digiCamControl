@@ -703,5 +703,6 @@ namespace CameraControl.Core.Translation
         public static string LabelWaitForCapture = "Wait for Capture (msec)";
         public static string LabelWaitForFocus = "Wait for Focus (msec)";
         public static string LabelGridColor = "Grid Color";
+        public static string LabelWebserverPort = "Webserver Port";
     }
 }
