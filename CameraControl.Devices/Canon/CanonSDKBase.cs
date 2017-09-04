@@ -54,7 +54,7 @@ namespace CameraControl.Devices.Canon
         private bool _recording = false;
 
         public EosCamera Camera = null;
-        private System.Timers.Timer _shutdownTimer = new System.Timers.Timer(1000);
+        private System.Timers.Timer _shutdownTimer = new System.Timers.Timer(1000*60);
 
         protected Dictionary<uint, string> _shutterTable = new Dictionary<uint, string>
                                                                {
@@ -397,7 +397,19 @@ namespace CameraControl.Devices.Canon
 
         private void _shutdownTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Camera_WillShutdown(null, null);
+            if (IsBusy)
+                return;
+            if (Monitor.TryEnter(Locker, 10))
+            {
+                try
+                {
+                    Camera_WillShutdown(null, null);
+                }
+                finally
+                {
+                    Monitor.Exit(Locker);
+                }
+            }
         }
 
         public void LoadProperties()
