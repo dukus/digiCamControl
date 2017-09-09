@@ -38,7 +38,7 @@ namespace Capture.Workflow.Core.Classes
         public double RangeMin { get; set; }
         [XmlIgnore]
         public double RangeMax { get; set; }
-
+        
         public CustomProperty()
         {
             ValueList = new List<string>();

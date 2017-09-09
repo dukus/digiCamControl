@@ -12,5 +12,7 @@ namespace Capture.Workflow.Core.Classes
         public WorkFlow WorkFlow { get; set; }
         public ICameraDevice CameraDevice { get; set; }
         public FileItem FileItem { get; set; }
+        public ContextTargetEnum Target { get; set; }
+
     }
 }

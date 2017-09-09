@@ -10,5 +10,6 @@
         public const string KeyPressed = "KeyPressed";
         public const string ShowMessage = "ShowMessage";
         public const string FileTransferred = "FileTransferred";
+        public const string SessionFinished = "SessionFinished";
     }
 }

@@ -147,6 +147,7 @@
     <Compile Include="Classes\BaseItem.cs" />
     <Compile Include="Classes\CommandCollection.cs" />
     <Compile Include="Classes\Context.cs" />
+    <Compile Include="Classes\ContextTargetEnum.cs" />
     <Compile Include="Classes\CustomProperty.cs" />
     <Compile Include="Classes\CustomPropertyCollection.cs" />
     <Compile Include="Classes\CustomPropertyType.cs" />

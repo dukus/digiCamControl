@@ -148,6 +148,7 @@
     <Compile Include="Events\CustomEvent.cs" />
     <Compile Include="Events\FileTransfered.cs" />
     <Compile Include="Events\KeyPressedEvent.cs" />
+    <Compile Include="Events\ProcessItemEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewElements\BrowseTextElement.cs" />
     <Compile Include="ViewElements\Button.cs" />

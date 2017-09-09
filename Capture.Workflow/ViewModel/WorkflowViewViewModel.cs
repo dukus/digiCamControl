@@ -170,17 +170,20 @@ namespace Capture.Workflow.ViewModel
 
         public void Dispose()
         {
+            WorkflowManager.Instance.OnMessage(
+                new MessageEventArgs(Messages.SessionFinished, WorkflowManager.Instance.Context)); 
+
             WorkflowManager.Instance.Message -= Instance_Message;
             ServiceProvider.Instance.DeviceManager.CameraConnected -= DeviceManager_CameraConnected;
             foreach (WorkFlowEvent workflowEvent in Workflow.Events)
             {
                 try
                 {
-                    workflowEvent.Instance.RegisterEvent(workflowEvent);
+                    workflowEvent.Instance.UnRegisterEvent(workflowEvent);
                 }
                 catch (Exception e)
                 {
-                    Log.Error("Unable to register event " + workflowEvent?.Name, e);
+                    Log.Error("Unable to unregister event " + workflowEvent?.Name, e);
                 }
             }
             if (Contents?.DataContext != null)
