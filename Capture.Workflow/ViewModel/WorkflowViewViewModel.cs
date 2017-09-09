@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using CameraControl.Devices;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
+using Dragablz;
 using GalaSoft.MvvmLight;
 using MaterialDesignThemes.Wpf;
 
@@ -186,6 +187,19 @@ namespace Capture.Workflow.ViewModel
                     Log.Error("Unable to unregister event " + workflowEvent?.Name, e);
                 }
             }
+            foreach (FileItem item in WorkflowManager.Instance.FileItems)
+            {
+                try
+                {
+                    item.Clear();
+                }
+                catch (Exception e)
+                {
+                    Log.Debug("Unable to clean item");
+                }
+            }
+            WorkflowManager.Instance.FileItems.Clear();
+
             if (Contents?.DataContext != null)
             {
                 // dispose old view if was loaded

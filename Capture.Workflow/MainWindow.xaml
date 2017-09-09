@@ -59,10 +59,10 @@
                         </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card  Margin="4 4 0 0" Width="200">
+                                <materialDesign:Card  Margin="4 4 0 0" Width="300">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="140" />
+                                            <RowDefinition Height="240" />
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>

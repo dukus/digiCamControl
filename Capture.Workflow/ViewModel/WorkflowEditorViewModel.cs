@@ -204,6 +204,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand RunCommand { get; set; }
 
         public RelayCommand SaveCommand { get; set; }
+        public RelayCommand SavePackageCommand { get; set; }
         public RelayCommand LoadCommand { get; set; }
 
         public RelayCommand<PluginInfo> NewViewCommandCommand { get; set; }
@@ -228,6 +229,7 @@ namespace Capture.Workflow.ViewModel
             DeleteVariableCommand = new RelayCommand(DeleteVariable);
             PreviewViewCommand = new RelayCommand(PreviewView);
             SaveCommand = new RelayCommand(Save);
+            SavePackageCommand = new RelayCommand(SavePackage);
 
             ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
             ViewElementsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.ViewElement);
@@ -409,6 +411,10 @@ namespace Capture.Workflow.ViewModel
             WorkflowManager.Instance.Save(CurrentWorkFlow, "Test.xml");
         }
 
+        private void SavePackage()
+        {
+            WorkflowManager.Instance.SaveAsPsackage(CurrentWorkFlow, "Test.cwpkg");
+        }
         private void PreviewView()
         {
             var wnd = new ViewPreviewView();

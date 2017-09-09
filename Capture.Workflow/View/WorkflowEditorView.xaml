@@ -48,6 +48,7 @@
                         <MenuItem Header="New"/>
                         <MenuItem Header="Open ..." Command="{Binding LoadCommand}"/>
                         <MenuItem Header="Save ..." Command="{Binding SaveCommand}"/>
+                        <MenuItem Header="Create package ..." Command="{Binding SavePackageCommand}"/>
                     </StackPanel>
 
                 </DockPanel>
@@ -63,13 +64,23 @@
                     <DockPanel>
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                         x:Name="MenuToggleButton"/>
-                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                            <StackPanel>
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{Binding PreviewViewCommand}" ToolTip="Preview current view">
+                                <materialDesign:PackIcon Kind="Eye"  Margin="8 0 0 0"/>
+                            </Button>
 
-                                <Separator/>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{Binding RunCommand}" ToolTip="Run workflow">
+                                <materialDesign:PackIcon Kind="Play" Margin="8 0 0 0" />
+                            </Button>
+                            <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                                <StackPanel>
 
-                            </StackPanel>
-                        </materialDesign:PopupBox>
+                                    <Separator/>
+
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+
+                        </StackPanel>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Workflow Editor</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
@@ -82,8 +93,7 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*" MaxWidth="200"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <materialDesign:DialogHost Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CloseOnClickAway="True" DialogClosing="DialogHost_DialogClosing">
                                 <materialDesign:DialogHost.DialogContent>
@@ -338,12 +348,12 @@
                                     </dragablz:TabablzControl>
                                 </materialDesign:Card>
                             </Grid>
-                            <materialDesign:Card Grid.Row="0" Grid.Column="2" Margin="4">
+                            <!--<materialDesign:Card Grid.Row="0" Grid.Column="2" Margin="4">
                                 <StackPanel>
                                     <Button Content="Preview" Margin="3" Command="{Binding PreviewViewCommand}"/>
                                     <Button Content="Test" Margin="3" Command="{Binding RunCommand}"/>
                                 </StackPanel>
-                            </materialDesign:Card>
+                            </materialDesign:Card>-->
                         </Grid>
                     </TabItem>
                     <TabItem Header="Events" Margin="3,0,-3,0">
@@ -354,6 +364,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
@@ -418,6 +429,12 @@
                             </materialDesign:DialogHost>
 
                             <materialDesign:Card Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Stretch" Margin="4">
+                                <GroupBox Header="Event properties" >
+                                    <controls1:PropertyEditor DataContext="{Binding SelectedEvent.Properties}" />
+                                </GroupBox>
+                            </materialDesign:Card>
+
+                            <materialDesign:Card Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Stretch" Margin="4">
                                 <GroupBox Header="Commands" >
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -425,13 +442,10 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="280*"/>
+                                            <ColumnDefinition Width="279*"/>
                                         </Grid.ColumnDefinitions>
-                                        <controls1:PropertyEditor DataContext="{Binding SelectedEvent.Properties}" />
-
-                                        <ListBox Grid.Row="0" Grid.Column="1" Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedEvent.CommandCollection.Items}" SelectedItem="{Binding SelectedEventCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                        <ListBox Grid.Row="0" Margin="10"  BorderThickness="1" ItemsSource="{Binding SelectedEvent.CommandCollection.Items}" SelectedItem="{Binding SelectedEventCommand}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                                              materialDesign:ShadowAssist.ShadowDepth="Depth2" HorizontalContentAlignment="Stretch">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate >
@@ -452,7 +466,7 @@
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
-                                        <StackPanel Grid.Row="1" Grid.Column="1">
+                                        <StackPanel Grid.Row="1">
                                             <controls:DropDownButton  Margin="20,5" VerticalContentAlignment="Center" Content="Add command" DisplayMemberPath="Name" 
                                                                   ItemsSource="{Binding CommandPlugins}">
                                                 <controls:DropDownButton.ItemContainerStyle>
@@ -464,7 +478,7 @@
                                             </controls:DropDownButton>
                                         </StackPanel>
 
-                                        <controls1:PropertyEditor Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
+                                        <controls1:PropertyEditor Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
                                                               DataContext="{Binding SelectedEventCommand.Properties}" />
 
 

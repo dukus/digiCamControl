@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using Ionic.Zip;
 
 
 namespace Capture.Workflow.Core
@@ -197,6 +199,48 @@ namespace Capture.Workflow.Core
             serializer.Serialize(writer, workflow);
             writer.Close();
         }
+
+        public void SaveAsPsackage(WorkFlow workflow, string file)
+        {
+            var files = new Dictionary<string, string>();
+
+            using (ZipFile zip = new ZipFile())
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(WorkFlow));
+                // Create a FileStream to write with.
+                using (MemoryStream writer=new MemoryStream())
+                {
+                    // Serialize the object, and close the TextWriter
+                    serializer.Serialize(writer, workflow);
+
+                    foreach (var view in workflow.Views)
+                    {
+                        foreach (var viewProperty in view.Properties.Items.Where(
+                            x => x.PropertyType == CustomPropertyType.File))
+                        {
+                            if (File.Exists(viewProperty.Value) && !files.ContainsKey(viewProperty.Value))
+                                files.Add(viewProperty.Value, "");
+
+                        }
+                        foreach (var element in view.Elements)
+                        foreach (var property in element.Properties.Items.Where(
+                            x => x.PropertyType == CustomPropertyType.File))
+                        {
+                            if (File.Exists(property.Value) && !files.ContainsKey(property.Value))
+                                files.Add(property.Value, "");
+                            }
+                    }
+                    zip.AddEntry("package.xml", writer.ToArray());
+                    foreach (var file1 in files)
+                    {
+                        zip.AddFile(file1.Key, "files");
+                    }
+                }
+                zip.Save(file);
+            }
+        }
+
+
 
         public WorkFlow Load(string fileName)
         {
