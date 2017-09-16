@@ -29,8 +29,10 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -41,6 +43,8 @@ namespace CameraControl.Devices.Others
     {
         #region Implementation of ICameraDevice
 
+        
+
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
             return true;
@@ -48,10 +52,35 @@ namespace CameraControl.Devices.Others
 
         public override void CapturePhoto()
         {
+            var files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "*.jpg");
+            if (files.Length > 0)
+            {
+                Random rnd1 = new Random();
+                var file = files[rnd1.Next(files.Length - 1)];
+                PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
+                {
+                    WiaImageItem = null,
+                    EventArgs = null,
+                    CameraDevice = this,
+                    FileName = file,
+                    Handle = file
+                };
+                Task.Factory.StartNew(() => OnPhotoCapture(this, args));
+            }
+            else
+            {
+                throw new Exception("No file in the MyPictures folder");
+            }
         }
 
         public override void CapturePhotoNoAf()
         {
+            CapturePhoto();
+        }
+
+        public override void TransferFile(object o, string filename)
+        {
+            File.Copy((string) o, filename);
         }
 
         #endregion
@@ -148,11 +177,12 @@ namespace CameraControl.Devices.Others
             return step;
         }
 
-        public override string ToString()
-        {
+        //public override string ToString()
+        //{
 
-            StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Fake");
-            return c.ToString();
-        }
+        //    StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Fake");
+        //    return c.ToString();
+        //}
+        
     }
 }

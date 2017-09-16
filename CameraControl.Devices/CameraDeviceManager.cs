@@ -168,13 +168,15 @@ namespace CameraControl.Devices
                                   {"D7000", typeof (NikonD7000)},
                                   {"D7100", typeof (NikonD7100)},
                                   {"D7200", typeof (NikonD7100)},
-                                  {"D80", typeof (NikonD80)},
+                                  {"D7500", typeof (NikonD7100)},
+                                  { "D80", typeof (NikonD80)},
                                   {"D800", typeof (NikonD800)},
                                   {"D800E", typeof (NikonD800)},
                                   {"D800e", typeof (NikonD800)},
                                   {"D810", typeof (NikonD600Base)},
                                   {"D810A", typeof (NikonD600Base)},
                                   {"D810a", typeof (NikonD600Base)},
+                                  {"D850", typeof (NikonD500)},
                                   {"D90", typeof (NikonD90)},
                                   {"V1", typeof (NikonD5100)},
                                   {"V2", typeof (NikonD5100)},
@@ -796,7 +798,7 @@ namespace CameraControl.Devices
         {
             FakeCameraDevice device = new FakeCameraDevice();
             ConnectedDevices.Add(device);
-            SelectedCameraDevice = device;
+            NewCameraConnected(device);
         }
 
         /// <summary>
