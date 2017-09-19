@@ -1,4 +1,8 @@
-﻿using CameraControl.Devices.Classes;
+﻿using System;
+using System.IO;
+using CameraControl.Devices;
+using CameraControl.Devices.Classes;
+using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
@@ -8,8 +12,18 @@ namespace Capture.Workflow.ViewModel
 {
     public class MainWindowViewModel:ViewModelBase
     {
+        private AsyncObservableCollection<WorkFlow> _workFlows;
         public RelayCommand EditCommand { get; set; }
-        public AsyncObservableCollection<WorkFlow> WorkFlows { get; set; }  
+
+        public AsyncObservableCollection<WorkFlow> WorkFlows
+        {
+            get { return _workFlows; }
+            set
+            {
+                _workFlows = value;
+                RaisePropertyChanged(()=>WorkFlows);
+            }
+        }
 
 
         public MainWindowViewModel()
@@ -19,9 +33,24 @@ namespace Capture.Workflow.ViewModel
             ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
             ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
             ServiceProvider.Instance.DeviceManager.ConnectToCamera();
+            LoadWorkFlows();
+        }
+
+        private void LoadWorkFlows()
+        {
             WorkFlows = new AsyncObservableCollection<WorkFlow>();
-            WorkFlows.Add(new WorkFlow() {Name = "Workflow 1", Description = "agsgsdg ggsgsfdg sgsdgdsfg sggsfgsd sgsdgsg "});
-            WorkFlows.Add(new WorkFlow() { Name = "Workflow 2", Description = "agsgsdg ggsgsfdg sgsdgdsfg sggsfgsd sgsdgsg " });
+            var files = Directory.GetFiles(Settings.Instance.WorkflowFolder, "*.cwpkg");
+            foreach (var file in files)
+            {
+                try
+                {
+                   WorkFlows.Add(WorkflowManager.Instance.LoadFromPackage(file)); 
+                }
+                catch (Exception e)
+                {
+                    Log.Debug("Unable to load package" + file, e);
+                }
+            }
         }
 
         private void DeviceManager_CameraDisconnected(CameraControl.Devices.ICameraDevice cameraDevice)

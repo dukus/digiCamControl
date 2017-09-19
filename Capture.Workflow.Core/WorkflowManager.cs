@@ -241,16 +241,39 @@ namespace Capture.Workflow.Core
         }
 
 
+        public WorkFlow LoadFromPackage(string file)
+        {
+            using (ZipFile zip = new ZipFile(file))
+            {
+                using (MemoryStream reader = new MemoryStream())
+                {
+                    zip["package.xml"].Extract(reader);
+                    reader.Seek(0, SeekOrigin.Begin);
+                    return Load(reader);
+                }
+            }
+            
+        }
 
         public WorkFlow Load(string fileName)
         {
             if (File.Exists(fileName))
             {
+                using (FileStream myFileStream = new FileStream(fileName, FileMode.Open))
+                {
+                    return Load(myFileStream);
+                }
+
+            }
+            return null;
+        }
+
+        public WorkFlow Load(Stream myFileStream)
+        {
                 XmlSerializer mySerializer =
                     new XmlSerializer(typeof(WorkFlow));
-                FileStream myFileStream = new FileStream(fileName, FileMode.Open);
                 WorkFlow flow = (WorkFlow)mySerializer.Deserialize(myFileStream);
-                myFileStream.Close();
+
                 WorkFlow resflow = Instance.CreateWorkFlow();
                 resflow.Id = flow.Id;
                 resflow.Name = flow.Name;
@@ -359,8 +382,6 @@ namespace Capture.Workflow.Core
                     resflow.Views.Add(view);
                 }
                 return resflow;
-            }
-            return null;
         }
 
         public IViewPlugin GetViewPlugin(string className)

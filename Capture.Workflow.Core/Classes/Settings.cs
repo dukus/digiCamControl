@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -28,11 +29,16 @@ namespace Capture.Workflow.Core.Classes
             }
         }
 
-        public string TempFolder { get; set; }
+        public static string BasePath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public string TempFolder => Path.Combine(BasePath, "Temp");
+        public string WorkflowFolder => Path.Combine(BasePath, "Workflows");
+
+
+
 
         public Settings()
         {
-            TempFolder = Path.GetTempPath();
+
         }
 
         public void Save()
