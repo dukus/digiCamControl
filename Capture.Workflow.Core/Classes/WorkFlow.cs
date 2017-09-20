@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
+using Ionic.Zip;
 
 namespace Capture.Workflow.Core.Classes
 {
@@ -19,6 +23,10 @@ namespace Capture.Workflow.Core.Classes
         public string Name { get; set; }
         public string Description { get; set; }
         public string Version { get; set; }
+
+        [XmlIgnore]
+        public string Package { get; set; }
+
 
         public WorkFlow()
         {
@@ -70,8 +78,35 @@ namespace Capture.Workflow.Core.Classes
                 Name = "FullScreen",
                 PropertyType = CustomPropertyType.Bool
             });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "CardBackground",
+                PropertyType = CustomPropertyType.File
+            });
         }
 
+        public Stream GetFileStream(string file)
+        {
+           
+            if (File.Exists(file))
+                return File.OpenRead(file);
+            if (File.Exists(Package))
+            {
+                using (ZipFile zip = new ZipFile(Package))
+                {
+                    MemoryStream reader = new MemoryStream();
+                    var zipFile = "files\\" + Path.GetFileName(file);
+                    if (zip.ContainsEntry(zipFile))
+                    {
+                        zip[zipFile].Extract(reader);
+                        reader.Seek(0, SeekOrigin.Begin);
+                        return reader;
+                    }
+
+                }
+            }
+            throw new FileNotFoundException("", file);
+        }
 
         public WorkFlowView GetView(string name)
         {

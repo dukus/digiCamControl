@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow  x:Class="Capture.Workflow.MainWindow"
+﻿<controls:MetroWindow x:Name="MainWindow1"  x:Class="Capture.Workflow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,11 +7,15 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:Capture.Workflow.Wpf.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <converters:WorkflowToCardBitmapConverter x:Key="WorkflowToCardBitmapConverter" />
+    </Window.Resources>
     <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
@@ -66,10 +70,10 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <!--<Image Source="Resources/Chartridge046_small.jpg" Height="140" Width="196" Stretch="UniformToFill" />-->
+                                        <Image Source="{Binding Path=.,Converter={StaticResource WorkflowToCardBitmapConverter}}" Stretch="Fill" />
                                         <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
                                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                                Margin="0 0 16 -20">
+                                                Margin="0 0 16 -20" Command="{Binding ElementName=MainWindow1,Path=DataContext.RunCommand}" CommandParameter="{Binding}">
                                             <materialDesign:PackIcon Kind="Play" Height="25" Width="25"/>
                                         </Button>
                                         <StackPanel Grid.Row="1" Margin="8 24 8 0" >

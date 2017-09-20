@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
@@ -67,11 +68,17 @@ namespace Capture.Workflow.Plugins.ViewElements
         {
             var image = new System.Windows.Controls.Image();
             viewElement.SetSize(image);
-            if (File.Exists(viewElement.Properties["ImageFile"].Value))
+
+            try
             {
-                image.Source = Utils.LoadImage(viewElement.Properties["ImageFile"].Value, 0, 0);
+                image.Source = Utils.LoadImage(
+                    viewElement.Parent.Parent.GetFileStream(viewElement.Properties["ImageFile"].Value), 0, 0);
+                image.Stretch = Stretch.Fill;
             }
-            image.Stretch = Stretch.Fill;
+            catch (Exception e)
+            {
+                Log.Debug("Unable to load image ", e);
+            }
             return image;
         }
     }

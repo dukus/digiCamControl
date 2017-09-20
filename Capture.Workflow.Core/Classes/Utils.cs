@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Devices;
@@ -15,6 +11,19 @@ namespace Capture.Workflow.Core.Classes
 {
     public class Utils
     {
+
+        public static BitmapSource LoadImage(Stream stream, int width, int rotateAngle)
+        {
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            if (width > 0)
+                bi.DecodePixelWidth = width;
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.StreamSource = stream;
+            bi.EndInit();
+            bi.Freeze();
+            return bi;
+        }
 
         public static BitmapSource LoadImage(string filename, int width, int rotateAngle)
         {
@@ -28,7 +37,6 @@ namespace Capture.Workflow.Core.Classes
             bi.Freeze();
             return bi;
         }
-
 
         public static void Save2Jpg(BitmapSource source, string filename)
         {

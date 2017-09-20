@@ -249,10 +249,11 @@ namespace Capture.Workflow.Core
                 {
                     zip["package.xml"].Extract(reader);
                     reader.Seek(0, SeekOrigin.Begin);
-                    return Load(reader);
+                    var package = Load(reader);
+                    package.Package = file;
+                    return package;
                 }
             }
-            
         }
 
         public WorkFlow Load(string fileName)

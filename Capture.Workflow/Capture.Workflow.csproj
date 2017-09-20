@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Wpf\Converters\ParameterToControlConverter.cs" />
     <Compile Include="Wpf\Converters\StringToIconConverter.cs" />
+    <Compile Include="Wpf\Converters\WorkflowToCardBitmapConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
