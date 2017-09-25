@@ -74,7 +74,9 @@ namespace Capture.Workflow.Core.Classes
                 }
             }
             return Value;
+            
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -82,6 +84,11 @@ namespace Capture.Workflow.Core.Classes
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override string ToString()
+        {
+            return Name +" = "+Value;
         }
     }
 }

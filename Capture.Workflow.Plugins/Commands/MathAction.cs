@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
-using NCalc;
+using Jint;
+
 
 namespace Capture.Workflow.Plugins.Commands
 {
@@ -42,15 +43,22 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command, Context context)
         {
-            Expression e = new Expression(command.Properties["Formula"].Value);
-            
+            var var = new Engine()
+                    //.SetValue("x", 3) // define a new variable
+                    //.Execute("x * x") // execute a statement
+                    //.GetCompletionValue() // get the latest statement completion value
+                    //.ToObject() // converts the value to .NET
+                ;
+
+
             foreach (var variable in context.WorkFlow.Variables.Items)
             {
                 //e.Parameters[variable.Name] = new Exception(variable.Value);
-                e.Parameters[variable.Name] = variable.GetAsObject();
+                var.SetValue(variable.Name, variable.GetAsObject());
             }
-            var res = e.Evaluate();
-            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = res.ToString();
+            
+            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = var.Execute(command.Properties["Formula"].Value).GetCompletionValue().ToString(); 
+
             return true;
         }
     }
