@@ -44,7 +44,10 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             set
             {
                 WorkflowManager.Instance.SelectedItem = value;
-                Bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
+                if (WorkflowManager.Instance.SelectedItem != null)
+                {
+                    Bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
+                }
                 RaisePropertyChanged(() => FileItem);
             }
         }
