@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using CameraControl.Devices;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using Jint;
 
 namespace Capture.Workflow.Plugins.Commands
 {
@@ -21,6 +17,11 @@ namespace Capture.Workflow.Plugins.Commands
         public WorkFlowCommand CreateCommand()
         {
             var command = new WorkFlowCommand();
+            command.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Condition",
+                PropertyType = CustomPropertyType.Code
+            });
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Event",
@@ -41,8 +42,17 @@ namespace Capture.Workflow.Plugins.Commands
                 Log.Debug("No event specified for " + command.Name);
                 return false;
             }
-            
-            WorkflowManager.Instance.OnMessage(new MessageEventArgs(command.Properties["Event"].Value, command.Properties["Message"].Value));
+            var var = new Engine();
+
+            foreach (var variable in context.WorkFlow.Variables.Items)
+            {
+                //e.Parameters[variable.Name] = new Exception(variable.Value);
+                var.SetValue(variable.Name, variable.GetAsObject());
+            }
+
+            if (var.Execute(command.Properties["Condition"].Value).GetCompletionValue().AsBoolean())
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(command.Properties["Event"].Value, command.Properties["Message"].Value));
+
             return true;
         }
     }

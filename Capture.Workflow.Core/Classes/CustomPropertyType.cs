@@ -11,6 +11,7 @@
         View,
         Icon,
         Bool,
-        File
+        File,
+        Code
     }
 }

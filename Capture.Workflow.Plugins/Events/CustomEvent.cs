@@ -42,8 +42,7 @@ namespace Capture.Workflow.Plugins.Events
             if (e.Name == _flowEvent.Properties["Event"].Value)
             {
                 var contex = e.Param as Context;
-                if (contex != null)
-                    WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
+                WorkflowManager.Execute(_flowEvent.CommandCollection, contex ?? WorkflowManager.Instance.Context);
             }
         }
 

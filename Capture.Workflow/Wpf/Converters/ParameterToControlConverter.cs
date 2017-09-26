@@ -30,6 +30,7 @@ namespace Capture.Workflow.Wpf.Converters
                         numericUpDown.DataContext = property;
                         numericUpDown.SetBinding(NumericUpDown.ValueProperty, "Value");
                         return numericUpDown;
+                    case CustomPropertyType.Code:
                     case CustomPropertyType.String:
                     {
                         TextBox text = new TextBox();
