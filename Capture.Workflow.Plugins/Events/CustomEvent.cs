@@ -14,14 +14,14 @@ namespace Capture.Workflow.Plugins.Events
     [Description("")]
     [PluginType(PluginType.Event)]
     [DisplayName("CustomEvent")]
-    public class CustomEvent: IEventPlugin
+    public class CustomEvent:BaseEvent, IEventPlugin
     {
-        public string Name { get; }
+
         private WorkFlowEvent _flowEvent;
 
         public WorkFlowEvent CreateEvent()
         {
-            WorkFlowEvent workFlowEvent = new WorkFlowEvent();
+            WorkFlowEvent workFlowEvent = GetEvent();
             workFlowEvent.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Event",
@@ -42,7 +42,9 @@ namespace Capture.Workflow.Plugins.Events
             if (e.Name == _flowEvent.Properties["Event"].Value)
             {
                 var contex = e.Param as Context;
-                WorkflowManager.Execute(_flowEvent.CommandCollection, contex ?? WorkflowManager.Instance.Context);
+                contex = contex ?? WorkflowManager.Instance.Context;
+                if (CheckCondition(_flowEvent, contex))
+                    WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
             }
         }
 

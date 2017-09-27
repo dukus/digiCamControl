@@ -14,14 +14,13 @@ namespace Capture.Workflow.Plugins.Events
     [Description("")]
     [PluginType(PluginType.Event)]
     [DisplayName("FileTransferred")]
-    public class FileTransfered: IEventPlugin
+    public class FileTransfered:BaseEvent, IEventPlugin
     {
-        public string Name { get; }
         private WorkFlowEvent _flowEvent;
 
         public WorkFlowEvent CreateEvent()
         {
-            WorkFlowEvent workFlowEvent = new WorkFlowEvent();
+            WorkFlowEvent workFlowEvent = GetEvent();
             return workFlowEvent;
         }
 
@@ -37,7 +36,8 @@ namespace Capture.Workflow.Plugins.Events
             if (e.Name == Messages.FileTransferred)
             {
                 var contex = e.Param as Context;
-                if (contex != null)
+                contex = contex ?? WorkflowManager.Instance.Context;
+                if (CheckCondition(_flowEvent, contex))
                     WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
             }
         }

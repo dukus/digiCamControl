@@ -14,12 +14,11 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("CheckCameraAction")]
-    public class CheckCameraAction: IWorkflowCommand
+    public class CheckCameraAction: BaseCommand, IWorkflowCommand
     {
-        public string Name { get; set; }
         public WorkFlowCommand CreateCommand()
         {
-            var command = new WorkFlowCommand();
+            var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Message",
@@ -30,6 +29,9 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command,Context context)
         {
+            if (!CheckCondition(command, context))
+                return true;
+
             if (ServiceProvider.Instance.DeviceManager.ConnectedDevices.Count == 0 ||
                 ServiceProvider.Instance.DeviceManager.SelectedCameraDevice == null || !ServiceProvider.Instance
                     .DeviceManager.SelectedCameraDevice.IsConnected)

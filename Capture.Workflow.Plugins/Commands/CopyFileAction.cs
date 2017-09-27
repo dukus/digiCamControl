@@ -11,12 +11,12 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("CopyFileAction")]
-    public class CopyFileAction : IWorkflowCommand
+    public class CopyFileAction : BaseCommand, IWorkflowCommand
     {
-        public string Name { get; set; }
+        
         public WorkFlowCommand CreateCommand()
         {
-            var command = new WorkFlowCommand();
+            var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
                 Name = "FileNameTemplate",
@@ -33,6 +33,9 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command, Context context)
         {
+            if (!CheckCondition(command, context))
+                return true;
+
             Smart.Default.Settings.ConvertCharacterStringLiterals = false;
             var filename = Smart.Format(command.Properties["FileNameTemplate"].Value,
                 context.WorkFlow.Variables.GetAsDictionary());

@@ -14,14 +14,13 @@ namespace Capture.Workflow.Plugins.Events
     [Description("Executed when session finished for every captured item ")]
     [PluginType(PluginType.Event)]
     [DisplayName("ProcessItem")]
-    public class ProcessItemEvent: IEventPlugin
+    public class ProcessItemEvent: BaseEvent, IEventPlugin
     {
-        public string Name { get; }
         private WorkFlowEvent _flowEvent;
 
         public WorkFlowEvent CreateEvent()
         {
-            WorkFlowEvent workFlowEvent = new WorkFlowEvent();
+            WorkFlowEvent workFlowEvent = GetEvent();
             return workFlowEvent;
         }
 
@@ -40,6 +39,8 @@ namespace Capture.Workflow.Plugins.Events
                 {
                     foreach (FileItem item in WorkflowManager.Instance.FileItems)
                     {
+                        if (!CheckCondition(_flowEvent, contex))
+                            continue;
                         var itemContex = new Context();
                         itemContex.CameraDevice = contex.CameraDevice;
                         itemContex.WorkFlow = contex.WorkFlow;

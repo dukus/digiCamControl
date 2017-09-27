@@ -16,18 +16,16 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("CameraAction")]
-    public class CameraAction : IWorkflowCommand
+    public class CameraAction : BaseCommand, IWorkflowCommand
     {
-        public string Name { get; set; }
-
         public WorkFlowCommand CreateCommand()
         {
-            var command = new WorkFlowCommand();
+            var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() {"Capture", "StartLiveView", "StopLiveView","Autofocus"}
+                ValueList = new List<string>() { "Capture", "StartLiveView", "StopLiveView", "Autofocus" }
             });
 
             command.Properties.Add(new CustomProperty()
@@ -47,6 +45,8 @@ namespace Capture.Workflow.Plugins.Commands
         {
             try
             {
+                if (!CheckCondition(command, context))
+                    return true;
 
                 switch (command.Properties["Action"].Value)
                 {

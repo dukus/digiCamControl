@@ -17,14 +17,13 @@ namespace Capture.Workflow.Plugins.Events
     [Description("")]
     [PluginType(PluginType.Event)]
     [DisplayName("KeyPressed")]
-    public class KeyPressedEvent:IEventPlugin
+    public class KeyPressedEvent:BaseEvent, IEventPlugin
     {
         private WorkFlowEvent _flowEvent;
 
-        public string Name { get; }
         public WorkFlowEvent CreateEvent()
         {
-            WorkFlowEvent workFlowEvent = new WorkFlowEvent();
+            WorkFlowEvent workFlowEvent = GetEvent();
             workFlowEvent.Properties.Items.Add(new CustomProperty()
             {
                 Name = "Key",
@@ -60,7 +59,8 @@ namespace Capture.Workflow.Plugins.Events
             KeyEventArgs args = e.Param as KeyEventArgs;
             if (args != null && args.Key == (Key) Enum.Parse(typeof(Key), _flowEvent.Properties["Key"].Value))
             {
-                WorkflowManager.Execute(_flowEvent.CommandCollection, WorkflowManager.Instance.Context);
+                if (CheckCondition(_flowEvent, WorkflowManager.Instance.Context))
+                    WorkflowManager.Execute(_flowEvent.CommandCollection, WorkflowManager.Instance.Context);
             }
         }
 

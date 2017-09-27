@@ -14,12 +14,12 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("ViewAction")]
-    public class ViewAction : IWorkflowCommand
+    public class ViewAction :BaseCommand, IWorkflowCommand
     {
-        public string Name { get; set; }
+     
         public WorkFlowCommand CreateCommand()
         {
-            var command = new WorkFlowCommand();
+            var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Action",
@@ -37,6 +37,9 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command, Context context)
         {
+            if (!CheckCondition(command, context))
+                return true;
+
             switch (command.Properties["Action"].Value)
             {
                 case "ShowView":

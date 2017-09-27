@@ -11,17 +11,11 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("TriggerEvent")]
-    public class TriggerEvent: IWorkflowCommand
+    public class TriggerEvent: BaseCommand, IWorkflowCommand
     {
-        public string Name { get; set; }
         public WorkFlowCommand CreateCommand()
         {
-            var command = new WorkFlowCommand();
-            command.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "Condition",
-                PropertyType = CustomPropertyType.Code
-            });
+            var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Event",
@@ -42,16 +36,10 @@ namespace Capture.Workflow.Plugins.Commands
                 Log.Debug("No event specified for " + command.Name);
                 return false;
             }
-            var var = new Engine();
 
-            foreach (var variable in context.WorkFlow.Variables.Items)
-            {
-                //e.Parameters[variable.Name] = new Exception(variable.Value);
-                var.SetValue(variable.Name, variable.GetAsObject());
-            }
-
-            if (var.Execute(command.Properties["Condition"].Value).GetCompletionValue().AsBoolean())
-                WorkflowManager.Instance.OnMessage(new MessageEventArgs(command.Properties["Event"].Value, command.Properties["Message"].Value));
+            if (CheckCondition(command, context))
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(command.Properties["Event"].Value,
+                    command.Properties["Message"].Value));
 
             return true;
         }

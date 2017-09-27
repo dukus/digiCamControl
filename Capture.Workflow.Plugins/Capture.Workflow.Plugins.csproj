@@ -141,12 +141,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CameraAction.cs" />
     <Compile Include="Commands\CheckCameraAction.cs" />
     <Compile Include="Commands\CopyFileAction.cs" />
     <Compile Include="Commands\MathAction.cs" />
     <Compile Include="Commands\TriggerEvent.cs" />
     <Compile Include="Commands\ViewAction.cs" />
+    <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\CustomEvent.cs" />
     <Compile Include="Events\FileTransfered.cs" />
     <Compile Include="Events\KeyPressedEvent.cs" />
