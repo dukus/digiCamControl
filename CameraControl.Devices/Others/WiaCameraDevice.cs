@@ -719,15 +719,15 @@ namespace CameraControl.Devices.Others
 
         #endregion
 
-        public override string ToString()
+        public override string ToStringCameraData()
         {
-
             StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................WIA");
 
             if (Device != null)
                 c.AppendFormat("\n\tDevice ID.............{0}", Device.DeviceID);
 
             return c.ToString();
+
         }
     }
 }
