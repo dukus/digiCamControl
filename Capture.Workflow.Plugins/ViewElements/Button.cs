@@ -109,7 +109,7 @@ namespace Capture.Workflow.Plugins.ViewElements
 
             button.Click += (sender, args) =>
             {
-                WorkflowManager.Execute(viewElement.GetEventCommands("Click"), WorkflowManager.Instance.Context);
+                WorkflowManager.ExecuteAsync(viewElement.GetEventCommands("Click"), WorkflowManager.Instance.Context);
             };
             if (viewElement.Properties["Style"].Value == "Rounded")
             {

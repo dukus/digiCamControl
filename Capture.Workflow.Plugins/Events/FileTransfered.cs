@@ -38,7 +38,7 @@ namespace Capture.Workflow.Plugins.Events
                 var contex = e.Param as Context;
                 contex = contex ?? WorkflowManager.Instance.Context;
                 if (CheckCondition(_flowEvent, contex))
-                    WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
+                    WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, contex);
             }
         }
 

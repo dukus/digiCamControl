@@ -147,7 +147,7 @@ namespace Capture.Workflow.ViewModel
             switch (e.Name)
             {
                 case Messages.ShowView:
-                    App.Current.Dispatcher.Invoke(()=> ShowView((string)e.Param));
+                    App.Current.Dispatcher.BeginInvoke(new Action(() => ShowView((string) e.Param)));
                     break;
             }
         }

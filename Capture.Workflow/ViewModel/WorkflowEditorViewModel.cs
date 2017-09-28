@@ -8,6 +8,7 @@ using Capture.Workflow.Core.Interface;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 
 namespace Capture.Workflow.ViewModel
 {
@@ -394,27 +395,57 @@ namespace Capture.Workflow.ViewModel
 
         private void Load()
         {
-            CurrentWorkFlow = WorkflowManager.Instance.Load("Test.xml");
-            if (CurrentWorkFlow.Views.Count > 0)
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Package xml file (*.xml)|*.xml|All files (*.*)|*.*";
+            if (dialog.ShowDialog() != true) return;
+            try
             {
-                SelectedView = CurrentWorkFlow.Views[0];
-                if (SelectedView.Elements.Count > 0)
-                    SelectedElement = SelectedView.Elements[0];
+                CurrentWorkFlow = WorkflowManager.Instance.Load(dialog.FileName);
+                if (CurrentWorkFlow.Views.Count > 0)
+                {
+                    SelectedView = CurrentWorkFlow.Views[0];
+                    if (SelectedView.Elements.Count > 0)
+                        SelectedElement = SelectedView.Elements[0];
+                }
+                if (CurrentWorkFlow.Variables.Items.Count > 0)
+                    SelectedVariable = CurrentWorkFlow.Variables.Items[0];
             }
-            if (CurrentWorkFlow.Variables.Items.Count > 0)
-                SelectedVariable = CurrentWorkFlow.Variables.Items[0];
-
+            catch (Exception e)
+            {
+                Log.Debug("Unable to open file", e);
+            }
         }
 
         private void Save()
         {
-            WorkflowManager.Instance.Save(CurrentWorkFlow, "Test.xml");
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Package xml file (*.xml)|*.xml|All files (*.*)|*.*";
+            if (dialog.ShowDialog() != true) return;
+            try
+            {
+                WorkflowManager.Instance.Save(CurrentWorkFlow, dialog.FileName);
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Unable to save file", e);
+            }
         }
 
         private void SavePackage()
         {
-            WorkflowManager.Instance.SaveAsPsackage(CurrentWorkFlow, "Test.cwpkg");
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Package file (*.cwpkg)|*.cwpkg|All files (*.*)|*.*";
+            if (dialog.ShowDialog() != true) return;
+            try
+            {
+                WorkflowManager.Instance.SaveAsPsackage(CurrentWorkFlow, dialog.FileName);
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Unable to save file", e);
+            }
         }
+
         private void PreviewView()
         {
             var wnd = new ViewPreviewView();

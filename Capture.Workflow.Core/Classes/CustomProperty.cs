@@ -53,6 +53,11 @@ namespace Capture.Workflow.Core.Classes
             return val;
         }
 
+        public string ToString(Context context)
+        {
+            return Value;
+        }
+
         public bool ToBool()
         {
             bool val;

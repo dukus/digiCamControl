@@ -60,7 +60,7 @@ namespace Capture.Workflow.Plugins.Events
             if (args != null && args.Key == (Key) Enum.Parse(typeof(Key), _flowEvent.Properties["Key"].Value))
             {
                 if (CheckCondition(_flowEvent, WorkflowManager.Instance.Context))
-                    WorkflowManager.Execute(_flowEvent.CommandCollection, WorkflowManager.Instance.Context);
+                    WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, WorkflowManager.Instance.Context);
             }
         }
 

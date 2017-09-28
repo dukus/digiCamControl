@@ -46,7 +46,7 @@ namespace Capture.Workflow.Plugins.Events
                         itemContex.WorkFlow = contex.WorkFlow;
                         itemContex.FileItem = item;
                         itemContex.Target = ContextTargetEnum.FileItem;
-                        WorkflowManager.Execute(_flowEvent.CommandCollection, itemContex);
+                        WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, itemContex);
                     }
                 }
             }

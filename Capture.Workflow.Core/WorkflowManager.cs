@@ -48,6 +48,12 @@ namespace Capture.Workflow.Core
 
         public Context Context { get; set; }
 
+
+        public static void ExecuteAsync(CommandCollection collection, Context context)
+        {
+            Task.Factory.StartNew(()=>Execute(collection, context));
+        }
+
         public static void Execute(CommandCollection collection, Context context)
         {
             try
@@ -60,7 +66,7 @@ namespace Capture.Workflow.Core
             }
             catch (Exception ex)
             {
-                Log.Debug("Command execution error", ex);                
+                Log.Debug("Command execution error", ex);
             }
         }
 
