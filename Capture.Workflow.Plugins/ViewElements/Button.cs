@@ -98,14 +98,14 @@ namespace Capture.Workflow.Plugins.ViewElements
             return element;
         }
 
-        public FrameworkElement GetControl(WorkFlowViewElement viewElement)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context)
         {
             var button = new System.Windows.Controls.Button()
             {
                 Content = viewElement.Properties["Caption"].Value,
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
             };
-            viewElement.SetSize(button);
+            viewElement.SetSize(button,context);
 
             button.Click += (sender, args) =>
             {

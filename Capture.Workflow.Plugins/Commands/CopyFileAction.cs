@@ -37,11 +37,11 @@ namespace Capture.Workflow.Plugins.Commands
                 return true;
 
             Smart.Default.Settings.ConvertCharacterStringLiterals = false;
-            var filename = Smart.Format(command.Properties["FileNameTemplate"].Value,
+            var filename = Smart.Format(command.Properties["FileNameTemplate"].ToString(context),
                 context.WorkFlow.Variables.GetAsDictionary());
             filename = filename + Path.GetExtension(context.FileItem.TempFile);
             Utils.CreateFolder(filename);
-            File.Copy(context.FileItem.TempFile, filename, command.Properties["Overwrite"].ToBool());
+            File.Copy(context.FileItem.TempFile, filename, command.Properties["Overwrite"].ToBool(context));
             context.FileItem.FileName = filename;
             return true;
         }

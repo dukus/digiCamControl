@@ -109,12 +109,12 @@ namespace Capture.Workflow.ViewModel
         public WorkflowViewViewModel()
         {
             Workflow = WorkflowManager.Instance.Context.WorkFlow;
-
+            var context = WorkflowManager.Instance.Context;
             if (!IsInDesignMode)
             {
-                TitleBar = !Workflow.Properties["HideTileBar"].ToBool();
-                WindowStyle = Workflow.Properties["FullScreen"].ToBool() ? WindowStyle.None : WindowStyle.SingleBorderWindow;
-                FullScreen = Workflow.Properties["FullScreen"].ToBool();
+                TitleBar = !Workflow.Properties["HideTileBar"].ToBool(context);
+                WindowStyle = Workflow.Properties["FullScreen"].ToBool(context) ? WindowStyle.None : WindowStyle.SingleBorderWindow;
+                FullScreen = Workflow.Properties["FullScreen"].ToBool(context);
                 WindowState = WindowState.Maximized;
 
                 new PaletteHelper().SetLightDark(Workflow.Properties["BaseColorScheme"].Value == "Dark");
@@ -164,7 +164,7 @@ namespace Capture.Workflow.ViewModel
                     var obj = Contents.DataContext as IDisposable;
                     obj?.Dispose();
                 }
-                Contents = view.Instance.GetPreview(view);
+                Contents = view.Instance.GetPreview(view, WorkflowManager.Instance.Context);
             }
         }
 

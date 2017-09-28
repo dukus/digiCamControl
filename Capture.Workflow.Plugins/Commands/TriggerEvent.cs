@@ -31,15 +31,15 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool Execute(WorkFlowCommand command, Context context)
         {
-            if (string.IsNullOrWhiteSpace(command.Properties["Event"].Value))
+            if (string.IsNullOrWhiteSpace(command.Properties["Event"].ToString(context)))
             {
                 Log.Debug("No event specified for " + command.Name);
                 return false;
             }
 
             if (CheckCondition(command, context))
-                WorkflowManager.Instance.OnMessage(new MessageEventArgs(command.Properties["Event"].Value,
-                    command.Properties["Message"].Value));
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(command.Properties["Event"].ToString(context),
+                    command.Properties["Message"].ToString(context)));
 
             return true;
         }

@@ -31,7 +31,7 @@ namespace Capture.Workflow.Plugins.Commands
         {
             if (!CheckCondition(command, context))
                 return true;
-            MessageBox.Show(command.Properties["Message"].Value);
+            MessageBox.Show(command.Properties["Message"].ToString(context));
 
             return true;
         }

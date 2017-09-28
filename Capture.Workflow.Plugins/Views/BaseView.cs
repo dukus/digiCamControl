@@ -23,7 +23,7 @@ namespace Capture.Workflow.Plugins.Views
             throw new NotImplementedException();
         }
 
-        public virtual UserControl GetPreview(WorkFlowView view)
+        public virtual UserControl GetPreview(WorkFlowView view, Context context)
         {
             throw new NotImplementedException();
         }

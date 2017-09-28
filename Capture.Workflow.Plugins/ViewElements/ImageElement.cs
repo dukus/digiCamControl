@@ -64,10 +64,10 @@ namespace Capture.Workflow.Plugins.ViewElements
             return element;
         }
 
-        public FrameworkElement GetControl(WorkFlowViewElement viewElement)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement,Context context)
         {
             var image = new System.Windows.Controls.Image();
-            viewElement.SetSize(image);
+            viewElement.SetSize(image,context);
 
             try
             {

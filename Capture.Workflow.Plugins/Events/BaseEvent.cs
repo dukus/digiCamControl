@@ -25,17 +25,16 @@ namespace Capture.Workflow.Plugins.Events
 
         public bool CheckCondition(WorkFlowEvent _event, Context context)
         {
-            if (string.IsNullOrWhiteSpace(_event.Properties["Condition"].Value))
+            if (string.IsNullOrWhiteSpace(_event.Properties["Condition"].ToString(context)))
                 return true;
 
             var var = new Engine();
 
             foreach (var variable in context.WorkFlow.Variables.Items)
             {
-                //e.Parameters[variable.Name] = new Exception(variable.Value);
                 var.SetValue(variable.Name, variable.GetAsObject());
             }
-            return var.Execute(_event.Properties["Condition"].Value).GetCompletionValue().AsBoolean();
+            return var.Execute(_event.Properties["Condition"].ToString(context)).GetCompletionValue().AsBoolean();
         }
     }
 }

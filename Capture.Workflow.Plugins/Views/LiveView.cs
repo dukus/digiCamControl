@@ -38,7 +38,7 @@ namespace Capture.Workflow.Plugins.Views
         }
 
 
-        public override UserControl GetPreview(WorkFlowView view)
+        public override UserControl GetPreview(WorkFlowView view,Context context)
         {
             var model = new LiveviewViewModel();
             foreach (var element in view.Elements)
@@ -46,17 +46,17 @@ namespace Capture.Workflow.Plugins.Views
                 switch (element.Properties["Position"].Value)
                 {
                     case "Left":
-                        model.LeftElements.Add(element.Instance.GetControl(element));
+                        model.LeftElements.Add(element.Instance.GetControl(element,context));
                         break;
                     case "BottomLeft":
-                        model.BottomLeftElements.Add(element.Instance.GetControl(element));
+                        model.BottomLeftElements.Add(element.Instance.GetControl(element, context));
                         break;
 
                     case "BottomRight":
-                        model.BottomRightElements.Add(element.Instance.GetControl(element));
+                        model.BottomRightElements.Add(element.Instance.GetControl(element,context));
                         break;
                     case "Background":
-                        model.BackGroundElements.Add(element.Instance.GetControl(element));
+                        model.BackGroundElements.Add(element.Instance.GetControl(element,context));
                         break;
                 }
             }

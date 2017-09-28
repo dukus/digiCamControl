@@ -25,7 +25,7 @@ namespace Capture.Workflow.Plugins.Commands
 
         public bool CheckCondition(WorkFlowCommand command, Context context)
         {
-            if (string.IsNullOrWhiteSpace(command.Properties["Condition"].Value))
+            if (string.IsNullOrWhiteSpace(command.Properties["Condition"].ToString(context)))
                 return true;
 
             var var = new Engine();
@@ -35,7 +35,7 @@ namespace Capture.Workflow.Plugins.Commands
                 //e.Parameters[variable.Name] = new Exception(variable.Value);
                 var.SetValue(variable.Name, variable.GetAsObject());
             }
-            return var.Execute(command.Properties["Condition"].Value).GetCompletionValue().AsBoolean();
+            return var.Execute(command.Properties["Condition"].ToString(context)).GetCompletionValue().AsBoolean();
         }
     }
 }

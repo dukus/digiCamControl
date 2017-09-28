@@ -35,7 +35,7 @@ namespace Capture.Workflow.Plugins.Commands
             if (!CheckCondition(command, context))
                 return true;
 
-            Thread.Sleep(command.Properties["Seconds"].ToInt() * 1000);
+            Thread.Sleep(command.Properties["Seconds"].ToInt(context) * 1000);
 
             return true;
         }

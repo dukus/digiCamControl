@@ -47,7 +47,7 @@ namespace Capture.Workflow.Plugins.Commands
                 var.SetValue(variable.Name, variable.GetAsObject());
             }
             
-            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = var.Execute(command.Properties["Formula"].Value).GetCompletionValue().ToString(); 
+            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = var.Execute(command.Properties["Formula"].ToString(context)).GetCompletionValue().ToString(); 
 
             return true;
         }

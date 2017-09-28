@@ -8,6 +8,6 @@ namespace Capture.Workflow.Core.Interface
     {
         string Name { get; set; }
         WorkFlowViewElement CreateElement(WorkFlowView view);
-        FrameworkElement GetControl(WorkFlowViewElement viewElement);
+        FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context);
     }
 }

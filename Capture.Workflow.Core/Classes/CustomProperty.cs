@@ -46,10 +46,17 @@ namespace Capture.Workflow.Core.Classes
             RangeMax = 0;
         }
 
-        public int ToInt()
+        private int ToInt()
         {
             int val = 0;
             int.TryParse(Value,  out val);
+            return val;
+        }
+
+        public int ToInt(Context context)
+        {
+            int val = 0;
+            int.TryParse(ToString(context), out val);
             return val;
         }
 
@@ -58,10 +65,17 @@ namespace Capture.Workflow.Core.Classes
             return Value;
         }
 
-        public bool ToBool()
+        private bool ToBool()
         {
             bool val;
             bool.TryParse(Value, out val);
+            return val;
+        }
+
+        public bool ToBool(Context context)
+        {
+            bool val;
+            bool.TryParse(ToString(context), out val);
             return val;
         }
 

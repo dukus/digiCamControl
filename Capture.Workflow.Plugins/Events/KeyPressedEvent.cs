@@ -57,7 +57,7 @@ namespace Capture.Workflow.Plugins.Events
         private void Instance_Message(object sender, MessageEventArgs e)
         {
             KeyEventArgs args = e.Param as KeyEventArgs;
-            if (args != null && args.Key == (Key) Enum.Parse(typeof(Key), _flowEvent.Properties["Key"].Value))
+            if (args != null && args.Key == (Key) Enum.Parse(typeof(Key), _flowEvent.Properties["Key"].ToString(WorkflowManager.Instance.Context)))
             {
                 if (CheckCondition(_flowEvent, WorkflowManager.Instance.Context))
                     WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, WorkflowManager.Instance.Context);

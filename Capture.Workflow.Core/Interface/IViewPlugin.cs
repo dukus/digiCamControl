@@ -9,6 +9,6 @@ namespace Capture.Workflow.Core.Interface
         string Name { get; set; }
         WorkFlowView CreateView();
         List<string> GetPositions();
-        UserControl GetPreview(WorkFlowView view);
+        UserControl GetPreview(WorkFlowView view, Context context);
     }
 }

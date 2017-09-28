@@ -85,14 +85,14 @@ namespace Capture.Workflow.Plugins.ViewElements
             return element;
         }
 
-        public FrameworkElement GetControl(WorkFlowViewElement viewElement)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context)
         {
             var label = new System.Windows.Controls.Label()
             {
                 Content = viewElement.Properties["Text"].Value,
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
             };
-            viewElement.SetSize(label);
+            viewElement.SetSize(label, context);
 
             if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
                 label.Background =

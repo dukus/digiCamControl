@@ -36,7 +36,7 @@ namespace Capture.Workflow.Plugins.Commands
                 ServiceProvider.Instance.DeviceManager.SelectedCameraDevice == null || !ServiceProvider.Instance
                     .DeviceManager.SelectedCameraDevice.IsConnected)
             {
-                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ShowMessage,command.Properties["Message"].Value));
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ShowMessage,command.Properties["Message"].ToString(context)));
                 return false;
             }
 

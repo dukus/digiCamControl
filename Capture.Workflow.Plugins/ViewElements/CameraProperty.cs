@@ -117,7 +117,7 @@ namespace Capture.Workflow.Plugins.ViewElements
             return element;
         }
 
-        public FrameworkElement GetControl(WorkFlowViewElement viewElement)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context)
         {
             //< StackPanel Margin = "2,0" >
 
@@ -135,12 +135,12 @@ namespace Capture.Workflow.Plugins.ViewElements
                 ServiceProvider.Instance.DeviceManager.SelectedCameraDevice);
             ComboBox comboBox = new ComboBox()
             {
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
 
-            viewElement.SetSize(comboBox);
+            viewElement.SetSize(comboBox,context);
             
             comboBox.DataContext = property;
             comboBox.SetBinding(ComboBox.IsEnabledProperty, "IsEnabled");
@@ -162,15 +162,15 @@ namespace Capture.Workflow.Plugins.ViewElements
             var label = new TextBlock()
             {
                 Text = viewElement.Properties["Caption"].Value,
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalAlignment = VerticalAlignment.Center,
             };
 
-            if (viewElement.Properties["LabelWidth"].ToInt() > 0)
-                label.Width = viewElement.Properties["LabelWidth"].ToInt();
+            if (viewElement.Properties["LabelWidth"].ToInt(context) > 0)
+                label.Width = viewElement.Properties["LabelWidth"].ToInt(context);
 
-            if (viewElement.Properties["Height"].ToInt() > 0)
-                label.Height = viewElement.Properties["Height"].ToInt();
+            if (viewElement.Properties["Height"].ToInt(context) > 0)
+                label.Height = viewElement.Properties["Height"].ToInt(context);
 
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" &&
                 viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
@@ -180,7 +180,7 @@ namespace Capture.Workflow.Plugins.ViewElements
 
             var stackpanel = new StackPanel()
             {
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt(context)),
                 Orientation = viewElement.Properties["Orientation"].Value == "Horizontal"
                     ? Orientation.Horizontal
                     : Orientation.Vertical

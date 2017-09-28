@@ -44,7 +44,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 case "ShowView":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ShowView,
-                        command.Properties["ViewName"].Value));
+                        command.Properties["ViewName"].ToString(context)));
                     break;
             }
             return true;

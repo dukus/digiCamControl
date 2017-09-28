@@ -62,7 +62,7 @@ namespace Capture.Workflow.Plugins.Views
             return new List<string> { "Center", "BottomLeft", "BottomRight","Background" };
         }
 
-        public override UserControl GetPreview(WorkFlowView view)
+        public override UserControl GetPreview(WorkFlowView view, Context context)
         {
             var model = new StartSctreenViewModel();
             foreach (var element in view.Elements)
@@ -70,24 +70,24 @@ namespace Capture.Workflow.Plugins.Views
                 switch (element.Properties["Position"].Value)
                 {
                     case "Center":
-                        model.CenterElements.Add(element.Instance.GetControl(element));
+                        model.CenterElements.Add(element.Instance.GetControl(element, context));
                         break;
                     case "BottomLeft":
-                        model.BottomLeftElements.Add(element.Instance.GetControl(element));
+                        model.BottomLeftElements.Add(element.Instance.GetControl(element, context));
                         break;
 
                     case "BottomRight":
-                        model.BottomRightElements.Add(element.Instance.GetControl(element));
+                        model.BottomRightElements.Add(element.Instance.GetControl(element, context));
                         break;
                     case "Background":
-                        model.BackGroundElements.Add(element.Instance.GetControl(element));
+                        model.BackGroundElements.Add(element.Instance.GetControl(element, context));
                         break;
                 }
             }
             model.BorderColor = view.Properties["BorderColor"].Value;
             model.BorderBackground = view.Properties["BorderBackground"].Value;
-            model.BorderThickness= view.Properties["BorderThickness"].ToInt();
-            model.CornerRadius = view.Properties["CornerRadius"].ToInt();
+            model.BorderThickness= view.Properties["BorderThickness"].ToInt(context);
+            model.CornerRadius = view.Properties["CornerRadius"].ToInt(context);
             var res = new StartScreenView();
             res.DataContext = model;
             return res;

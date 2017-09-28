@@ -39,10 +39,11 @@ namespace Capture.Workflow.Plugins.Events
 
         private void Instance_Message(object sender, MessageEventArgs e)
         {
-            if (e.Name == _flowEvent.Properties["Event"].Value)
+            var contex = e.Param as Context;
+            contex = contex ?? WorkflowManager.Instance.Context;
+
+            if (e.Name == _flowEvent.Properties["Event"].ToString(contex))
             {
-                var contex = e.Param as Context;
-                contex = contex ?? WorkflowManager.Instance.Context;
                 if (CheckCondition(_flowEvent, contex))
                     WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, contex);
             }

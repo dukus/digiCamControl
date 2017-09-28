@@ -118,15 +118,15 @@ namespace Capture.Workflow.Plugins.ViewElements
             return element;
         }
 
-        public FrameworkElement GetControl(WorkFlowViewElement viewElement)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context)
         {
             var textBox = new TextBox()
             {
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
-            viewElement.SetSize(textBox);
+            viewElement.SetSize(textBox,context);
 
             textBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].Value];
             textBox.SetBinding(TextBox.TextProperty, "Value");
@@ -143,15 +143,15 @@ namespace Capture.Workflow.Plugins.ViewElements
 
             var label = new System.Windows.Controls.Label()
             {
-                Height = viewElement.Properties["Height"].ToInt(),
+                Height = viewElement.Properties["Height"].ToInt(context),
                 Content = viewElement.Properties["Caption"].Value,
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt(context)),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
             };
 
-            if (viewElement.Properties["LabelWidth"].ToInt() > 0)
-                label.Width = viewElement.Properties["LabelWidth"].ToInt();
+            if (viewElement.Properties["LabelWidth"].ToInt(context) > 0)
+                label.Width = viewElement.Properties["LabelWidth"].ToInt(context);
 
 
             if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
@@ -161,10 +161,10 @@ namespace Capture.Workflow.Plugins.ViewElements
 
             var button = new System.Windows.Controls.Button()
             {
-                Height = viewElement.Properties["Height"].ToInt(),
+                Height = viewElement.Properties["Height"].ToInt(context),
                 Content = viewElement.Properties["ButtonText"].Value,
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt()),
-                FontSize = viewElement.Properties["FontSize"].ToInt(),
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt(context)),
+                FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Right
             };

@@ -13,13 +13,13 @@ namespace Capture.Workflow.Core.Classes
         public CustomPropertyCollection Properties { get; set; }
 
 
-        public void SetSize(FrameworkElement element)
+        public void SetSize(FrameworkElement element, Context context)
         {
-            if (Properties["Width"].ToInt() > 0)
-                element.Width = Properties["Width"].ToInt();
-            if (Properties["Height"].ToInt() > 0)
-                element.Height = Properties["Height"].ToInt();
-            element.Margin = new Thickness(Properties["Margins"].ToInt());
+            if (Properties["Width"].ToInt(context) > 0)
+                element.Width = Properties["Width"].ToInt(context);
+            if (Properties["Height"].ToInt(context) > 0)
+                element.Height = Properties["Height"].ToInt(context);
+            element.Margin = new Thickness(Properties["Margins"].ToInt(context));
         }
     }
 }
