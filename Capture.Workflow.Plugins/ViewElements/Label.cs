@@ -89,19 +89,19 @@ namespace Capture.Workflow.Plugins.ViewElements
         {
             var label = new System.Windows.Controls.Label()
             {
-                Content = viewElement.Properties["Text"].Value,
+                Content = viewElement.Properties["Text"].ToString(context),
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
             };
             viewElement.SetSize(label, context);
 
-            if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
+            if (viewElement.Properties["BackgroundColor"].ToString(context) != "Transparent" && viewElement.Properties["BackgroundColor"].ToString(context) != "#00FFFFFF")
                 label.Background =
                     new SolidColorBrush(
-                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
-            if (viewElement.Properties["ForegroundColor"].Value != "Transparent" && viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].ToString(context)));
+            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" && viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
                 label.Foreground =
                     new SolidColorBrush(
-                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].ToString(context)));
             return label;
         }
     }

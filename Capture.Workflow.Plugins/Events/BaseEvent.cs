@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
 using Jint;
 
@@ -34,7 +35,15 @@ namespace Capture.Workflow.Plugins.Events
             {
                 var.SetValue(variable.Name, variable.GetAsObject());
             }
-            return var.Execute(_event.Properties["Condition"].ToString(context)).GetCompletionValue().AsBoolean();
+            try
+            {
+                return var.Execute(_event.Properties["Condition"].ToString(context)).GetCompletionValue().AsBoolean();
+            }
+            catch (Exception e)
+            {
+                Log.Error("Evaluation error " + _event.Name, e);
+            }
+            return false;
         }
     }
 }

@@ -72,7 +72,7 @@ namespace Capture.Workflow.Plugins.ViewElements
             try
             {
                 image.Source = Utils.LoadImage(
-                    viewElement.Parent.Parent.GetFileStream(viewElement.Properties["ImageFile"].Value), 0, 0);
+                    viewElement.Parent.Parent.GetFileStream(viewElement.Properties["ImageFile"].ToString(context)), 0, 0);
                 image.Stretch = Stretch.Fill;
             }
             catch (Exception e)

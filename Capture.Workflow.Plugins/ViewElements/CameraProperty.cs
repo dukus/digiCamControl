@@ -147,21 +147,21 @@ namespace Capture.Workflow.Plugins.ViewElements
             comboBox.SetBinding(ComboBox.ItemsSourceProperty, "Values");
             comboBox.SetBinding(ComboBox.SelectedValueProperty, "Value");
 
-            if (viewElement.Properties["BackgroundColor"].Value != "Transparent" &&
-                viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
+            if (viewElement.Properties["BackgroundColor"].ToString(context) != "Transparent" &&
+                viewElement.Properties["BackgroundColor"].ToString(context) != "#00FFFFFF")
                 comboBox.Background =
                     new SolidColorBrush(
-                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
+                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].ToString(context)));
 
-            if (viewElement.Properties["ForegroundColor"].Value != "Transparent" &&
-                viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
+            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" &&
+                viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
                 comboBox.Foreground =
                     new SolidColorBrush(
-                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
+                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].ToString(context)));
 
             var label = new TextBlock()
             {
-                Text = viewElement.Properties["Caption"].Value,
+                Text = viewElement.Properties["Caption"].ToString(context),
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalAlignment = VerticalAlignment.Center,
             };
@@ -172,16 +172,16 @@ namespace Capture.Workflow.Plugins.ViewElements
             if (viewElement.Properties["Height"].ToInt(context) > 0)
                 label.Height = viewElement.Properties["Height"].ToInt(context);
 
-            if (viewElement.Properties["ForegroundColor"].Value != "Transparent" &&
-                viewElement.Properties["ForegroundColor"].Value != "#00FFFFFF")
+            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" &&
+                viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
                 label.Foreground =
                     new SolidColorBrush(
-                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].Value));
+                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].ToString(context)));
 
             var stackpanel = new StackPanel()
             {
                 Margin = new Thickness(viewElement.Properties["Margins"].ToInt(context)),
-                Orientation = viewElement.Properties["Orientation"].Value == "Horizontal"
+                Orientation = viewElement.Properties["Orientation"].ToString(context) == "Horizontal"
                     ? Orientation.Horizontal
                     : Orientation.Vertical
             };

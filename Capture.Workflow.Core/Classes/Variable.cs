@@ -63,6 +63,11 @@ namespace Capture.Workflow.Core.Classes
                     }
                     break;
                 }
+                case VariableTypeEnum.Boolean:
+                {
+                    return Value != null && Value.ToLower().Trim() == "true";
+                    break;
+                }
                 case VariableTypeEnum.Date:
                 {
                     DateTime dateTime;

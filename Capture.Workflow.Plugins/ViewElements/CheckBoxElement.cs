@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
@@ -17,8 +18,8 @@ namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("Button")]
-    public class Button:IViewElementPlugin
+    [DisplayName("CheckBox")]
+    public class CheckBoxElement: IViewElementPlugin
     {
         public string Name { get; set; }
         public WorkFlowViewElement CreateElement(WorkFlowView view)
@@ -31,8 +32,9 @@ namespace Capture.Workflow.Plugins.ViewElements
             });
             element.Properties.Items.Add(new CustomProperty()
             {
-                Name = "Enabled",
-                PropertyType = CustomPropertyType.Variable
+                Name = "Variable",
+                PropertyType = CustomPropertyType.Variable,
+                Value = ""
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -45,14 +47,8 @@ namespace Capture.Workflow.Plugins.ViewElements
             {
                 Name = "Style",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = { "Default", "Rounded" },
+                ValueList = { "Default"},
                 Value = "Default"
-            });
-            element.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "Icon",
-                PropertyType = CustomPropertyType.Icon,
-                Value = "(None)"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -99,48 +95,37 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Color,
                 Value = "Transparent"
             });
-            element.Events.Add(new CommandCollection("Click"));
             return element;
         }
 
         public FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context)
         {
-            var button = new System.Windows.Controls.Button()
+            var checkbox = new System.Windows.Controls.CheckBox()
             {
                 Content = viewElement.Properties["Caption"].ToString(context),
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
             };
-            viewElement.SetSize(button,context);
+            viewElement.SetSize(checkbox, context);
 
-            button.Click += (sender, args) =>
-            {
-                WorkflowManager.ExecuteAsync(viewElement.GetEventCommands("Click"), WorkflowManager.Instance.Context);
-            };
-            if (viewElement.Properties["Style"].Value == "Rounded")
-            {
-                button.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
-            }
+            checkbox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].ToString(context)];
+            checkbox.SetBinding(ToggleButton.IsCheckedProperty, "Value");
 
-            if (!string.IsNullOrWhiteSpace(viewElement.Properties["Enabled"].Value) )
-            {
-                button.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Enabled"].Value];
-                button.SetBinding(UIElement.IsEnabledProperty, "Value");
-            }
+            //if (viewElement.Properties["Style"].Value == "Rounded")
+            //{
+            //    checkbox.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
+            //}
 
-            PackIconKind kind;
-            if (Enum.TryParse(viewElement.Properties["Icon"].Value, out kind))
-                button.Content = new PackIcon() {Kind = kind, Width = button.Width /2, Height = button.Height /2};
 
             if (viewElement.Properties["BackgroundColor"].ToString(context) != "Transparent" && viewElement.Properties["BackgroundColor"].ToString(context) != "#00FFFFFF")
-                button.Background =
+                checkbox.Background =
                     new SolidColorBrush(
-                        (Color) ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].ToString(context)));
+                        (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].ToString(context)));
             if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" && viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
-                button.Foreground =
+                checkbox.Foreground =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].ToString(context)));
 
-            return button;
+            return checkbox;
         }
 
 
