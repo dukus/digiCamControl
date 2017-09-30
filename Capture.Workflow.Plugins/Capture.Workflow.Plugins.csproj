@@ -161,6 +161,7 @@
     <Compile Include="ViewElements\Button.cs" />
     <Compile Include="ViewElements\CameraProperty.cs" />
     <Compile Include="ViewElements\CheckBoxElement.cs" />
+    <Compile Include="ViewElements\ComboBoxElement.cs" />
     <Compile Include="ViewElements\ImageElement.cs" />
     <Compile Include="ViewElements\Label.cs" />
     <Compile Include="ViewElements\TextElement.cs" />

@@ -1,18 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using CameraControl.Devices;
+using CameraControl.Devices.Classes;
+using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using MaterialDesignThemes.Wpf;
 
 namespace Capture.Workflow.Plugins.ViewElements
 {
     [Description("")]
     [PluginType(PluginType.ViewElement)]
-    [DisplayName("Text")]
-    public class TextElement: IViewElementPlugin
+    [DisplayName("ComboBox")]
+    public class ComboBoxElement: IViewElementPlugin
     {
         public string Name { get; set; }
         public WorkFlowViewElement CreateElement(WorkFlowView view)
@@ -22,6 +30,25 @@ namespace Capture.Workflow.Plugins.ViewElements
             {
                 Name = "Caption",
                 PropertyType = CustomPropertyType.String
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Variable",
+                PropertyType = CustomPropertyType.Variable,
+                Value = ""
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "ValueList",
+                PropertyType = CustomPropertyType.String,
+                Value = ""
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Orientation",
+                PropertyType = CustomPropertyType.ValueList,
+                ValueList = { "Horizontal", "Vertical" },
+                Value = "Vertical"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -52,14 +79,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 0,
                 RangeMax = 9999,
-                Value = "35"
-            });
-            element.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "Orientation",
-                PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() {"Horizontal", "Vertical"},
-                Value = "Horizontal"
+                Value = "0"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -67,7 +87,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 0,
                 RangeMax = 9999,
-                Value = "5"
+                Value = "2"
             });
             element.Properties.Items.Add(new CustomProperty()
             {
@@ -89,64 +109,68 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Color,
                 Value = "Transparent"
             });
-            element.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "Variable",
-                PropertyType = CustomPropertyType.Variable,
-                Value = ""
-            });
             return element;
         }
 
-        public FrameworkElement GetControl(WorkFlowViewElement viewElement,Context context)
+        public FrameworkElement GetControl(WorkFlowViewElement viewElement, Context context)
         {
-            var textBox = new TextBox()
+            ComboBox comboBox = new ComboBox()
             {
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 HorizontalContentAlignment = HorizontalAlignment.Center
             };
-            viewElement.SetSize(textBox,context);
 
-            textBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].ToString(context)];
-            textBox.SetBinding(TextBox.TextProperty, "Value");
+            viewElement.SetSize(comboBox, context);
 
-            if (viewElement.Properties["BackgroundColor"].ToString(context) != "Transparent" && viewElement.Properties["BackgroundColor"].ToString(context) != "#00FFFFFF")
-                textBox.Background =
+            comboBox.ItemsSource = viewElement.Properties["ValueList"].ToString(context).Split('|');
+            comboBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].ToString(context)]; 
+            comboBox.SetBinding(ComboBox.SelectedValueProperty, "Value");
+
+            if (viewElement.Properties["BackgroundColor"].ToString(context) != "Transparent" &&
+                viewElement.Properties["BackgroundColor"].ToString(context) != "#00FFFFFF")
+                comboBox.Background =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].ToString(context)));
 
-            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" && viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
-                textBox.Foreground =
+            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" &&
+                viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
+                comboBox.Foreground =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].ToString(context)));
 
-            var label = new System.Windows.Controls.Label()
+            var label = new TextBlock()
             {
-                Height = viewElement.Properties["Height"].ToInt(context),
-                Content = viewElement.Properties["Caption"].ToString(context),
-                Margin = new Thickness(viewElement.Properties["Margins"].ToInt(context)),
+                Text = viewElement.Properties["Caption"].ToString(context),
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
-                VerticalContentAlignment = VerticalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
             };
 
             if (viewElement.Properties["LabelWidth"].ToInt(context) > 0)
                 label.Width = viewElement.Properties["LabelWidth"].ToInt(context);
 
-            //if (viewElement.Properties["BackgroundColor"].Value != "Transparent" && viewElement.Properties["BackgroundColor"].Value != "#00FFFFFF")
-            //    label.Background =
-            //        new SolidColorBrush(
-            //            (Color)ColorConverter.ConvertFromString(viewElement.Properties["BackgroundColor"].Value));
-            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" && viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
+            if (viewElement.Properties["Height"].ToInt(context) > 0)
+                label.Height = viewElement.Properties["Height"].ToInt(context);
+
+            if (viewElement.Properties["ForegroundColor"].ToString(context) != "Transparent" &&
+                viewElement.Properties["ForegroundColor"].ToString(context) != "#00FFFFFF")
                 label.Foreground =
                     new SolidColorBrush(
                         (Color)ColorConverter.ConvertFromString(viewElement.Properties["ForegroundColor"].ToString(context)));
 
-            var stackpanel = new StackPanel();
+            var stackpanel = new StackPanel()
+            {
+                Margin = new Thickness(viewElement.Properties["Margins"].ToInt(context)),
+                Orientation = viewElement.Properties["Orientation"].ToString(context) == "Horizontal"
+                    ? Orientation.Horizontal
+                    : Orientation.Vertical
+            };
             stackpanel.Children.Add(label);
-            stackpanel.Children.Add(textBox);
-            stackpanel.Orientation = viewElement.Properties["Orientation"].ToString(context) == "Horizontal" ? Orientation.Horizontal : Orientation.Vertical;
+            stackpanel.Children.Add(comboBox);
+
             return stackpanel;
+
         }
+
     }
 }

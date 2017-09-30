@@ -143,6 +143,5 @@ namespace Capture.Workflow.Plugins.ViewElements
             return button;
         }
 
-
     }
 }
