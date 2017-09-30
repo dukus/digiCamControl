@@ -26,6 +26,7 @@ namespace Capture.Workflow.Core.Classes
             {
                 _value = value;
                 OnPropertyChanged(nameof(Value));
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.VariableChanged, this));
             }
         }
 

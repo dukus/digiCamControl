@@ -37,8 +37,8 @@ namespace Capture.Workflow.Plugins.Commands
                 return true;
 
             Smart.Default.Settings.ConvertCharacterStringLiterals = false;
-            var filename = Smart.Format(command.Properties["FileNameTemplate"].ToString(context),
-                context.WorkFlow.Variables.GetAsDictionary());
+            var filename = command.Properties["FileNameTemplate"].ToString(context);
+
             filename = filename + Path.GetExtension(context.FileItem.TempFile);
             Utils.CreateFolder(filename);
             File.Copy(context.FileItem.TempFile, filename, command.Properties["Overwrite"].ToBool(context));

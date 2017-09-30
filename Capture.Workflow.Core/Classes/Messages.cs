@@ -11,5 +11,6 @@
         public const string ShowMessage = "ShowMessage";
         public const string FileTransferred = "FileTransferred";
         public const string SessionFinished = "SessionFinished";
+        public const string VariableChanged = "VariableChanged";
     }
 }

@@ -14,7 +14,7 @@ namespace Capture.Workflow.Plugins.Events
     [Description("Executed when session finished for every captured item ")]
     [PluginType(PluginType.Event)]
     [DisplayName("ProcessItem")]
-    public class ProcessItemEvent: BaseEvent, IEventPlugin
+    public class ProcessItemEvent : BaseEvent, IEventPlugin
     {
         private WorkFlowEvent _flowEvent;
 
@@ -37,6 +37,8 @@ namespace Capture.Workflow.Plugins.Events
                 var contex = e.Param as Context;
                 if (contex != null)
                 {
+                    if (!CheckCondition(_flowEvent, contex))
+                        return;
                     foreach (FileItem item in WorkflowManager.Instance.FileItems)
                     {
                         if (!CheckCondition(_flowEvent, contex))

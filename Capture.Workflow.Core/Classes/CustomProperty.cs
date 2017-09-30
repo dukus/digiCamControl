@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using Capture.Workflow.Core.Annotations;
+using SmartFormat;
 
 namespace Capture.Workflow.Core.Classes
 {
@@ -62,7 +63,10 @@ namespace Capture.Workflow.Core.Classes
 
         public string ToString(Context context)
         {
-            return Value;
+            if (string.IsNullOrWhiteSpace(Value))
+                return Value;
+            Smart.Default.Settings.ConvertCharacterStringLiterals = false;
+            return Smart.Format(Value, context.WorkFlow.Variables.GetAsDictionary()); 
         }
 
         private bool ToBool()
