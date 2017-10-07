@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace Capture.Workflow.Core.Classes
         public ICameraDevice CameraDevice { get; set; }
         public FileItem FileItem { get; set; }
         public ContextTargetEnum Target { get; set; }
-
+        public Stream ImageStream { get; set; }
     }
 }

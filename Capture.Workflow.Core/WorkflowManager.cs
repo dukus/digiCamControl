@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Serialization;
@@ -23,6 +25,8 @@ namespace Capture.Workflow.Core
         #region private declarations
 
         private DispatcherTimer _liveViewTimer = new DispatcherTimer();
+        private long _frames = 0;
+        private DateTime _startTime ;
 
         #endregion
 
@@ -85,7 +89,7 @@ namespace Capture.Workflow.Core
             Context = new Context();
 
             // live view stuff for nikon
-            _liveViewTimer.Interval = TimeSpan.FromMilliseconds(40);
+            _liveViewTimer.Interval = TimeSpan.FromMilliseconds(20);
             _liveViewTimer.Tick += _liveViewTimer_Tick;
             ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             FileItems = new AsyncObservableCollection<FileItem>();
@@ -136,8 +140,16 @@ namespace Capture.Workflow.Core
                         MemoryStream stream = new MemoryStream(liveViewData.ImageData, liveViewData.ImageDataPosition,
                             liveViewData.ImageData.Length - liveViewData.ImageDataPosition))
                     {
-                       
-                        OnMessage(new MessageEventArgs(Messages.LiveViewChanged, new object[] {stream, liveViewData}));
+                        Stopwatch stopwatch = new Stopwatch();
+                        stopwatch.Start();
+                        Context.ImageStream = stream;
+                        OnMessage(new MessageEventArgs(Messages.LiveViewChanged, new object[] {stream, liveViewData}) {Context = Context});
+                        stopwatch.Stop();
+                        Console.WriteLine(stopwatch.ElapsedMilliseconds);
+                        _frames++;
+                        var fps = ((double)_frames / (DateTime.Now - _startTime).Seconds);
+                        Console.WriteLine("FPS :" + (_frames / (DateTime.Now - _startTime).Seconds));
+                        Context.WorkFlow.Variables.SetValue("Fps", fps.ToString("###.00"));
                     }
                 }
             }
@@ -431,6 +443,8 @@ namespace Capture.Workflow.Core
             switch (e.Name)
             {
                 case Messages.StartLiveView:
+                    _frames = 0;
+                    _startTime = DateTime.Now;
                     _liveViewTimer.Start();
                     break;
                 case Messages.StopLiveView:

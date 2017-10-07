@@ -2,6 +2,7 @@
 using System.IO;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.View;
@@ -12,11 +13,12 @@ namespace Capture.Workflow.ViewModel
 {
     public class MainWindowViewModel:ViewModelBase
     {
-        private AsyncObservableCollection<WorkFlow> _workFlows;
-        public RelayCommand EditCommand { get; set; }
-        public RelayCommand<WorkFlow> RunCommand { get; set; }
+        private AsyncObservableCollection<WorkFlowItem> _workFlows;
+        public RelayCommand NewCommand { get; set; }
+        public RelayCommand<WorkFlowItem> RunCommand { get; set; }
+        public RelayCommand<WorkFlowItem> EditCommand { get; set; }
 
-        public AsyncObservableCollection<WorkFlow> WorkFlows
+        public AsyncObservableCollection<WorkFlowItem> WorkFlows
         {
             get { return _workFlows; }
             set
@@ -29,8 +31,8 @@ namespace Capture.Workflow.ViewModel
 
         public MainWindowViewModel()
         {
-            EditCommand = new RelayCommand(Edit);
-            RunCommand=new RelayCommand<WorkFlow>(Run);
+            EditCommand = new RelayCommand<WorkFlowItem>(Edit);
+            RunCommand=new RelayCommand<WorkFlowItem>(Run);
             if (!IsInDesignMode)
             {
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
@@ -40,22 +42,50 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
-        private void Run(WorkFlow obj)
+        private void Run(WorkFlowItem obj)
         {
-            WorkflowManager.Instance.Context.WorkFlow = obj;
+            WorkflowManager.Instance.Context.WorkFlow = obj.Workflow;
             WorkflowViewView wnd = new WorkflowViewView();
             wnd.ShowDialog();
         }
 
         private void LoadWorkFlows()
         {
-            WorkFlows = new AsyncObservableCollection<WorkFlow>();
+            WorkFlows = new AsyncObservableCollection<WorkFlowItem>();
             var files = Directory.GetFiles(Settings.Instance.WorkflowFolder, "*.cwpkg");
             foreach (var file in files)
             {
                 try
                 {
-                   WorkFlows.Add(WorkflowManager.Instance.LoadFromPackage(file)); 
+                    WorkFlowItem item = new WorkFlowItem()
+                    {
+                        Workflow = WorkflowManager.Instance.LoadFromPackage(file),
+                        IsEditable = false,
+                        IsPackage = true,
+                        File = file
+                    };
+                    WorkFlows.Add(item);
+                }
+                catch (Exception e)
+                {
+                    Log.Debug("Unable to load package" + file, e);
+                }
+            }
+
+            files = Directory.GetFiles(Settings.Instance.WorkflowFolder, "*.cwxml");
+            foreach (var file in files)
+            {
+                try
+                {
+                    WorkFlowItem item = new WorkFlowItem()
+                    {
+                        Workflow = WorkflowManager.Instance.Load(file),
+                        IsEditable = true,
+                        IsPackage = false,
+                        File = file
+
+                    };
+                    WorkFlows.Add(item);
                 }
                 catch (Exception e)
                 {
@@ -74,10 +104,12 @@ namespace Capture.Workflow.ViewModel
          
         }
 
-        private void Edit()
+        private void Edit(WorkFlowItem item)
         {
             WorkflowEditorView wnd = new WorkflowEditorView();
+            ((WorkflowEditorViewModel)wnd.DataContext).LoadXml(item.File);
             wnd.ShowDialog();
+            LoadWorkFlows();
         }
     }
 }

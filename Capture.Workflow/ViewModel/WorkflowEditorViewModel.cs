@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core;
@@ -14,6 +15,8 @@ namespace Capture.Workflow.ViewModel
 {
     public class WorkflowEditorViewModel : ViewModelBase
     {
+        private string _file = "";
+
         private WorkFlowView _selectedView;
         private WorkFlowViewElement _selectedElement;
         private WorkFlow _currentWorkFlow;
@@ -205,6 +208,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand RunCommand { get; set; }
 
         public RelayCommand SaveCommand { get; set; }
+        public RelayCommand SaveAsCommand { get; set; }
         public RelayCommand SavePackageCommand { get; set; }
         public RelayCommand LoadCommand { get; set; }
 
@@ -230,6 +234,7 @@ namespace Capture.Workflow.ViewModel
             DeleteVariableCommand = new RelayCommand(DeleteVariable);
             PreviewViewCommand = new RelayCommand(PreviewView);
             SaveCommand = new RelayCommand(Save);
+            SaveAsCommand = new RelayCommand(SaveAs);
             SavePackageCommand = new RelayCommand(SavePackage);
 
             ViewsPlugins = WorkflowManager.Instance.GetPlugins(PluginType.View);
@@ -396,11 +401,16 @@ namespace Capture.Workflow.ViewModel
         private void Load()
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "Package xml file (*.xml)|*.xml|All files (*.*)|*.*";
+            dialog.Filter = "Package xml file (*.cwxml)|*.xml|All files (*.*)|*.*";
             if (dialog.ShowDialog() != true) return;
+            LoadXml(dialog.FileName);
+        }
+
+        public void LoadXml(string file)
+        {
             try
             {
-                CurrentWorkFlow = WorkflowManager.Instance.Load(dialog.FileName);
+                CurrentWorkFlow = WorkflowManager.Instance.Load(file);
                 if (CurrentWorkFlow.Views.Count > 0)
                 {
                     SelectedView = CurrentWorkFlow.Views[0];
@@ -409,17 +419,37 @@ namespace Capture.Workflow.ViewModel
                 }
                 if (CurrentWorkFlow.Variables.Items.Count > 0)
                     SelectedVariable = CurrentWorkFlow.Variables.Items[0];
+                _file = file;
             }
             catch (Exception e)
             {
                 Log.Debug("Unable to open file", e);
             }
+
         }
 
         private void Save()
         {
+            try
+            {
+                if (File.Exists(_file))
+                    WorkflowManager.Instance.Save(CurrentWorkFlow, _file);
+                else
+                {
+                    SaveAs();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Unable to save file", e);
+            }
+        }
+
+        private void SaveAs()
+        {
             var dialog = new SaveFileDialog();
-            dialog.Filter = "Package xml file (*.xml)|*.xml|All files (*.*)|*.*";
+            dialog.FileName = _file;
+            dialog.Filter = "Package xml file (*.cwxml)|*.xml|All files (*.*)|*.*";
             if (dialog.ShowDialog() != true) return;
             try
             {

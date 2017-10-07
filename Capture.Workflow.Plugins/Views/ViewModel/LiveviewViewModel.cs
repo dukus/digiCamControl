@@ -70,7 +70,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                 var param = e.Param as object[];
                 if (param != null)
                 {
-                    var stream = (MemoryStream) param[0];
+                    var stream = e.Context.ImageStream;
                     stream.Seek(0, SeekOrigin.Begin);
                     BitmapImage bi = new BitmapImage();
                     bi.BeginInit();

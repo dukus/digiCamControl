@@ -20,7 +20,7 @@ namespace Capture.Workflow.Core.Classes
             {
                 foreach (var item in Items)
                 {
-                    if (item.Name == name)
+                    if (item.Name.ToLower() == name.ToLower())
                         return item;
                 }
                 return null;
@@ -37,5 +37,12 @@ namespace Capture.Workflow.Core.Classes
             return Items.ToDictionary(variable => variable.Name, variable => variable.GetAsObject());
         }
 
+        public bool SetValue(string name, string value)
+        {
+            var s = this[name];
+            if (s == null) return false;
+            s.Value = value;
+            return true;
+        }
     }
 }

@@ -70,23 +70,22 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Image Source="{Binding Path=.,Converter={StaticResource WorkflowToCardBitmapConverter}}" Stretch="Fill" />
+                                        <Image Source="{Binding Path=Workflow,Converter={StaticResource WorkflowToCardBitmapConverter}}" Stretch="Fill" />
                                         <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
                                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                                 Margin="0 0 16 -20" Command="{Binding ElementName=MainWindow1,Path=DataContext.RunCommand}" CommandParameter="{Binding}">
                                             <materialDesign:PackIcon Kind="Play" Height="25" Width="25"/>
                                         </Button>
                                         <StackPanel Grid.Row="1" Margin="8 24 8 0" >
-                                            <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
-                                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Description}"/>
+                                            <TextBlock FontWeight="Bold" Text="{Binding Workflow.Name}"/>
+                                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Workflow.Description}"/>
                                         </StackPanel>
                                         
                                         <StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal" Margin="8">
 
                                             <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
                                                 <StackPanel>
-                                                    <Button Content="More"/>
-                                                    <Button Content="Options"/>
+                                                    <Button Content="Edit" IsEnabled="{Binding IsEditable}" Command="{Binding ElementName=MainWindow1,Path=DataContext.EditCommand}" CommandParameter="{Binding}"/>
                                                 </StackPanel>
                                             </materialDesign:PopupBox>
                                         </StackPanel>
