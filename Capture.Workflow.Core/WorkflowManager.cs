@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.UI;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using CameraControl.Devices;
@@ -95,6 +96,31 @@ namespace Capture.Workflow.Core
             FileItems = new AsyncObservableCollection<FileItem>();
         }
 
+        public BitmapSource GetLargeThumbnail(FileItem item)
+        {
+            if (item != null)
+            {
+                try
+                {
+                    var bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        Utils.Save2Jpg(bitmap, stream);
+                        Context.FileItem = item;
+                        Context.ImageStream = stream;
+                        OnMessage(new MessageEventArgs(Messages.ThumbChanged, FileItem) {Context = Context});
+                        stream.Seek(0, SeekOrigin.Begin);
+                        return Utils.LoadImage(stream);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Debug("Unable to create thumbnail");
+                }
+            }
+            return null;
+        }
+
         private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
         {
             try
@@ -110,12 +136,19 @@ namespace Capture.Workflow.Core
                 FileItem item = new FileItem() { TempFile = tempFile, Thumb = Utils.LoadImage(tempFile, 200, 0) };
                 FileItems.Add(item);
                 FileItem = item;
-                item.ThumbFile = Path.GetTempFileName();
+                //item.ThumbFile = Path.GetTempFileName();
                 Context.FileItem = FileItem;
 
-                Utils.Save2Jpg(Utils.LoadImage(tempFile, 800, 0), item.ThumbFile);
-                OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem));
-                OnMessage(new MessageEventArgs(Messages.FileTransferred, Context));
+                //Utils.Save2Jpg(Utils.LoadImage(tempFile, 800, 0), item.ThumbFile);
+                var bitmap = Utils.LoadImage(tempFile);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    Utils.Save2Jpg(bitmap, stream);
+                    Context.FileItem = item;
+                    Context.ImageStream = stream;
+                    OnMessage(new MessageEventArgs(Messages.FileTransferred, Context) { Context = Context });
+                    OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem) { Context = Context });
+                }
             }
             catch (Exception ex)
             {
@@ -134,7 +167,7 @@ namespace Capture.Workflow.Core
             try
             {
                 var liveViewData = Context.CameraDevice.GetLiveViewImage();
-                if (liveViewData != null && liveViewData.ImageData != null)
+                if (liveViewData?.ImageData != null)
                 {
                     using (
                         MemoryStream stream = new MemoryStream(liveViewData.ImageData, liveViewData.ImageDataPosition,

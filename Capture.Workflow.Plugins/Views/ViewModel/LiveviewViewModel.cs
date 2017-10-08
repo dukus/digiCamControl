@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
@@ -44,11 +45,8 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             set
             {
                 WorkflowManager.Instance.SelectedItem = value;
-                if (WorkflowManager.Instance.SelectedItem != null)
-                {
-                    Bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
-                }
                 RaisePropertyChanged(() => FileItem);
+                Bitmap = WorkflowManager.Instance.GetLargeThumbnail(WorkflowManager.Instance.SelectedItem);
             }
         }
 

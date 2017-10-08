@@ -13,8 +13,8 @@ namespace Capture.Workflow.Plugins.Events
 {
     [Description("")]
     [PluginType(PluginType.Event)]
-    [DisplayName("FileTransferred")]
-    public class FileTransfered:BaseEvent, IEventPlugin
+    [DisplayName("ThumbChanged")]
+    public class ThumbChangedEvent : BaseEvent, IEventPlugin
     {
         private WorkFlowEvent _flowEvent;
 
@@ -33,12 +33,11 @@ namespace Capture.Workflow.Plugins.Events
 
         private void Instance_Message(object sender, MessageEventArgs e)
         {
-            if (e.Name == Messages.FileTransferred)
+
+            if (e.Name == Messages.ThumbChanged)
             {
-                var contex = e.Param as Context;
-                contex = contex ?? WorkflowManager.Instance.Context;
-                if (CheckCondition(_flowEvent, contex))
-                    WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
+                if (CheckCondition(_flowEvent, e.Context))
+                    WorkflowManager.Execute(_flowEvent.CommandCollection, e.Context);
             }
         }
 

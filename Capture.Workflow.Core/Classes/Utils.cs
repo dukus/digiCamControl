@@ -12,7 +12,7 @@ namespace Capture.Workflow.Core.Classes
     public class Utils
     {
 
-        public static BitmapSource LoadImage(Stream stream, int width, int rotateAngle)
+        public static BitmapSource LoadImage(Stream stream, int width=0, int rotateAngle=0)
         {
             var bi = new BitmapImage();
             bi.BeginInit();
@@ -25,7 +25,7 @@ namespace Capture.Workflow.Core.Classes
             return bi;
         }
 
-        public static BitmapSource LoadImage(string filename, int width, int rotateAngle)
+        public static BitmapSource LoadImage(string filename, int width=0, int rotateAngle=0)
         {
             var bi = new BitmapImage();
             bi.BeginInit();
@@ -47,13 +47,19 @@ namespace Capture.Workflow.Core.Classes
             }
             using (FileStream stream = new FileStream(filename, FileMode.Create))
             {
-                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(source));
-                encoder.QualityLevel = 90;
-                encoder.Save(stream);
+                Save2Jpg(source, stream);
                 stream.Close();
             }
         }
+
+        public static void Save2Jpg(BitmapSource source, Stream stream)
+        {
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(source));
+            encoder.QualityLevel = 90;
+            encoder.Save(stream);
+        }
+
 
         public static unsafe WriteableBitmap Highlight(WriteableBitmap bitmap, bool under, bool over)
         {

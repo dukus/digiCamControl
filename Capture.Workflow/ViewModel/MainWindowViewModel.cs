@@ -37,6 +37,7 @@ namespace Capture.Workflow.ViewModel
             {
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
+                ServiceProvider.Instance.DeviceManager.AddFakeCamera();
                 ServiceProvider.Instance.DeviceManager.ConnectToCamera();
                 LoadWorkFlows();
             }

@@ -13,11 +13,6 @@ namespace Capture.Workflow
         public MainWindow()
         {
             InitializeComponent();
-            var Swatches = new SwatchesProvider().Swatches;
-            foreach (var swatch in Swatches)
-            {
-                Console.Write("\""+swatch.Name+"\",");
-            }
         }
 
         private void MetroWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
