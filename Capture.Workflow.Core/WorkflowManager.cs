@@ -486,6 +486,8 @@ namespace Capture.Workflow.Core
                 case Messages.ShowMessage:
                     MessageBox.Show(e.Param.ToString());
                     break;
+                case Messages.SessionFinished:
+                    break;
             }
             Message?.Invoke(this, e);
         }

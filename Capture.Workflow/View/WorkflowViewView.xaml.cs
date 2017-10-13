@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Capture.Workflow.Core;
+using Capture.Workflow.Core.Classes;
 using Capture.Workflow.ViewModel;
 
 namespace Capture.Workflow.View
@@ -23,6 +25,18 @@ namespace Capture.Workflow.View
         public WorkflowViewView()
         {
             InitializeComponent();
+            WorkflowManager.Instance.Message += Instance_Message;
+        }
+
+        private void Instance_Message(object sender, Core.Classes.MessageEventArgs e)
+        {
+            switch (e.Name)
+            {
+                case Messages.SessionFinished:
+                case Messages.SessionCanceled:
+                    Application.Current.Dispatcher.BeginInvoke(new Action(Close));
+                    break;
+            }
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e)

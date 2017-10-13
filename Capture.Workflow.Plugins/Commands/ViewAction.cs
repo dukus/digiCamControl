@@ -24,7 +24,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "ShowView"}
+                ValueList = new List<string>() { "ShowView", "FinishSession", "CancelSession", "PreviousView" }
             });
 
             command.Properties.Add(new CustomProperty()
@@ -45,6 +45,12 @@ namespace Capture.Workflow.Plugins.Commands
                 case "ShowView":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ShowView,
                         command.Properties["ViewName"].ToString(context)));
+                    break;
+                case "FinishSession":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionFinished, WorkflowManager.Instance.Context));
+                    break;
+                case "CancelSession":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionCanceled, WorkflowManager.Instance.Context));
                     break;
             }
             return true;

@@ -171,9 +171,6 @@ namespace Capture.Workflow.ViewModel
 
         public void Dispose()
         {
-            WorkflowManager.Instance.OnMessage(
-                new MessageEventArgs(Messages.SessionFinished, WorkflowManager.Instance.Context)); 
-
             WorkflowManager.Instance.Message -= Instance_Message;
             ServiceProvider.Instance.DeviceManager.CameraConnected -= DeviceManager_CameraConnected;
             foreach (WorkFlowEvent workflowEvent in Workflow.Events)
@@ -195,7 +192,7 @@ namespace Capture.Workflow.ViewModel
                 }
                 catch (Exception e)
                 {
-                    Log.Debug("Unable to clean item");
+                    Log.Debug("Unable to clean item", e);
                 }
             }
             WorkflowManager.Instance.FileItems.Clear();
