@@ -12,6 +12,9 @@ namespace Capture.Workflow.ViewModel
 {
     public class WorkflowViewViewModel: ViewModelBase, IDisposable
     {
+
+        private string _currentView;
+        private string _preView;
         private UserControl _contents;
         private WorkFlow _workflow;
         private string _title;
@@ -147,13 +150,21 @@ namespace Capture.Workflow.ViewModel
             switch (e.Name)
             {
                 case Messages.ShowView:
-                    App.Current.Dispatcher.BeginInvoke(new Action(() => ShowView((string) e.Param)));
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => ShowView((string) e.Param)));
+                    break;
+                case Messages.PreviousView:
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => ShowView(_preView)));
                     break;
             }
         }
 
         private void ShowView(string viewName)
         {
+            if(string.IsNullOrWhiteSpace(viewName))
+                return;
+
+            _preView = _currentView;
+            _currentView = viewName;
             WorkFlowView view = Workflow.GetView(viewName);
             if (view != null)
             {

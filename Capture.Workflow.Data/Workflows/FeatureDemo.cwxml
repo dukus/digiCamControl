@@ -343,6 +343,35 @@
             </CommandCollection>
           </Events>
         </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button">
+          <PluginInfo Type="ViewElement" Name="Button" Description="" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=2.0.74.0, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="Caption" Value="Back" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomLeft" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="ViewAction">
+                <PluginInfo Type="Command" Name="ViewAction" Description="" Class="Capture.Workflow.Plugins.Commands.ViewAction, Capture.Workflow.Plugins, Version=2.0.74.0, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="PreviousView" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
       </Elements>
       <Events>
         <CommandCollection>

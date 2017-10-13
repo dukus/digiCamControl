@@ -47,10 +47,13 @@ namespace Capture.Workflow.Plugins.Commands
                         command.Properties["ViewName"].ToString(context)));
                     break;
                 case "FinishSession":
-                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionFinished, WorkflowManager.Instance.Context));
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionFinished, context));
                     break;
                 case "CancelSession":
-                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionCanceled, WorkflowManager.Instance.Context));
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionCanceled, context));
+                    break;
+                case "PreviousView":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.PreviousView, context));
                     break;
             }
             return true;
