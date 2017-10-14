@@ -539,10 +539,10 @@
                                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3" IsEnabled="{Binding SelectedVariable.Editable}"/>
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="Default Value" Margin="3"/>
-                                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3" />
+                                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3" />
 
                                     <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
-                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.DefaultValue}" Margin="3" />
+                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3" />
 
                                     <Label Grid.Row="3" Grid.Column="0" Content="Type" Margin="3"/>
                                     <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding SelectedVariable.VariableType}" ItemsSource="{Binding Source={StaticResource VariableTypeEnumValues}}" Margin="3" />

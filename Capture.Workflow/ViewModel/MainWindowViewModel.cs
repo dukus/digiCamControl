@@ -45,7 +45,7 @@ namespace Capture.Workflow.ViewModel
 
         private void Run(WorkFlowItem obj)
         {
-            WorkflowManager.Instance.Context.WorkFlow = obj.Workflow;
+            WorkflowManager.Instance.Context.WorkFlow = obj.IsPackage ? WorkflowManager.Instance.LoadFromPackage(obj.File) : WorkflowManager.Instance.Load(obj.File);
             WorkflowViewView wnd = new WorkflowViewView();
             wnd.ShowDialog();
         }
@@ -53,6 +53,16 @@ namespace Capture.Workflow.ViewModel
         private void LoadWorkFlows()
         {
             WorkFlows = new AsyncObservableCollection<WorkFlowItem>();
+            try
+            {
+                if (!Directory.Exists(Settings.Instance.WorkflowFolder))
+                    Directory.CreateDirectory(Settings.Instance.WorkflowFolder);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to create workflow folder");
+            }
+
             var files = Directory.GetFiles(Settings.Instance.WorkflowFolder, "*.cwpkg");
             foreach (var file in files)
             {

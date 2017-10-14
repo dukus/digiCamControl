@@ -30,9 +30,13 @@ namespace Capture.Workflow.Core.Classes
         }
 
         public static string BasePath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public string TempFolder => Path.Combine(BasePath, "Temp");
-        public string WorkflowFolder => Path.Combine(BasePath, "Workflows");
 
+        public static string DataPath => Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Workflow.Capture");
+
+        public string TempFolder => Path.Combine(DataPath, "Temp");
+        public string WorkflowFolder => Path.Combine(DataPath, "Workflows");
+        public string CacheFolder => Path.Combine(DataPath, "Cache");
 
 
 
@@ -46,9 +50,9 @@ namespace Capture.Workflow.Core.Classes
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Settings));
+                Utils.CreateFolder(Path.Combine(DataPath, ConfigFile));
                 // Create a FileStream to write with.
-
-                Stream writer = new FileStream(ConfigFile, FileMode.Create);
+                Stream writer = new FileStream(Path.Combine(DataPath,ConfigFile), FileMode.Create);
                 // Serialize the object, and close the TextWriter
                 serializer.Serialize(writer, this);
                 writer.Close();
@@ -64,9 +68,9 @@ namespace Capture.Workflow.Core.Classes
             Settings settings = new Settings();
             try
             {
-                if (File.Exists(ConfigFile))
+                if (File.Exists(Path.Combine(DataPath, ConfigFile)))
                 {
-                    settings = LoadSettings(ConfigFile, settings);
+                    settings = LoadSettings(Path.Combine(DataPath, ConfigFile), settings);
                 }
                 else
                 {
@@ -84,11 +88,11 @@ namespace Capture.Workflow.Core.Classes
         {
             try
             {
-                if (File.Exists(ConfigFile))
+                if (File.Exists(Path.Combine(DataPath, ConfigFile)))
                 {
                     XmlSerializer mySerializer =
                         new XmlSerializer(typeof(Settings));
-                    FileStream myFileStream = new FileStream(ConfigFile, FileMode.Open);
+                    FileStream myFileStream = new FileStream(Path.Combine(DataPath, ConfigFile), FileMode.Open);
                     defaultSettings = (Settings)mySerializer.Deserialize(myFileStream);
                     myFileStream.Close();
                 }

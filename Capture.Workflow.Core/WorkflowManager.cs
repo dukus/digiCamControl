@@ -322,97 +322,74 @@ namespace Capture.Workflow.Core
 
         public WorkFlow Load(Stream myFileStream)
         {
-                XmlSerializer mySerializer =
-                    new XmlSerializer(typeof(WorkFlow));
-                WorkFlow flow = (WorkFlow)mySerializer.Deserialize(myFileStream);
+            XmlSerializer mySerializer =
+                new XmlSerializer(typeof(WorkFlow));
+            WorkFlow flow = (WorkFlow) mySerializer.Deserialize(myFileStream);
 
-                WorkFlow resflow = Instance.CreateWorkFlow();
-                resflow.Id = flow.Id;
-                resflow.Name = flow.Name;
-                resflow.Description = flow.Description;
-                resflow.Version = flow.Version;
-                resflow.Properties.CopyValuesFrom(flow.Properties);
+            WorkFlow resflow = Instance.CreateWorkFlow();
+            resflow.Id = flow.Id;
+            resflow.Name = flow.Name;
+            resflow.Description = flow.Description;
+            resflow.Version = flow.Version;
+            resflow.Properties.CopyValuesFrom(flow.Properties);
 
-                foreach (Variable variable in flow.Variables.Items)
+            foreach (Variable variable in flow.Variables.Items)
+            {
+                if (resflow.Variables[variable.Name] != null)
                 {
-                    if (resflow.Variables[variable.Name] != null)
-                    {
-                        resflow.Variables[variable.Name].Value = variable.Value;
-                    }
-                    else
-                    {
-                        resflow.Variables.Items.Add(variable);
-                    }
+                    resflow.Variables[variable.Name].Value = variable.Value;
                 }
-
-                foreach (var flowEvent in flow.Events)
+                else
                 {
-                    IEventPlugin plugin = Instance.GetEventPlugin(flowEvent.PluginInfo.Class);
-                    WorkFlowEvent event_ = plugin.CreateEvent();
-                    event_.Parent = resflow;
-                    event_.Instance = plugin;
-                    event_.PluginInfo = flowEvent.PluginInfo;
-                    event_.Name = flowEvent.Name;
-                    event_.Properties.CopyValuesFrom(flowEvent.Properties);
-                    foreach (var flowCommand in flowEvent.CommandCollection.Items)
-                    {
-                        IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
-                        var wCommand = commandPlugin.CreateCommand();
-                        wCommand.Instance = commandPlugin;
-                        wCommand.PluginInfo = flowCommand.PluginInfo;
-                        wCommand.Name = flowCommand.Name;
-                        wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
-                        event_.CommandCollection.Items.Add(wCommand);
-                    }
-                    resflow.Events.Add(event_);
+                    resflow.Variables.Items.Add(variable);
                 }
+            }
 
-                foreach (var _view in flow.Views)
+            foreach (var flowEvent in flow.Events)
+            {
+                IEventPlugin plugin = Instance.GetEventPlugin(flowEvent.PluginInfo.Class);
+                WorkFlowEvent event_ = plugin.CreateEvent();
+                event_.Parent = resflow;
+                event_.Instance = plugin;
+                event_.PluginInfo = flowEvent.PluginInfo;
+                event_.Name = flowEvent.Name;
+                event_.Properties.CopyValuesFrom(flowEvent.Properties);
+                foreach (var flowCommand in flowEvent.CommandCollection.Items)
                 {
-                    IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
-                    WorkFlowView view = plugin.CreateView();
-                    view.Parent = resflow;
-                    view.Instance = plugin;
-                    view.PluginInfo = _view.PluginInfo;
-                    view.Name = _view.Name;
-                    view.Properties.CopyValuesFrom(_view.Properties);
-                    foreach (var viewElement in _view.Elements)
-                    {
-                        IViewElementPlugin elementplugin = Instance.GetElementPlugin(viewElement.PluginInfo.Class);
-                        WorkFlowViewElement element = elementplugin.CreateElement(view);
-                        element.Parent = view;
-                        element.Instance = elementplugin;
-                        element.PluginInfo = viewElement.PluginInfo;
-                        element.Name = viewElement.Name;
-                        element.Properties.CopyValuesFrom(viewElement.Properties);
-                        view.Elements.Add(element);
-                        foreach (var commandCollection in element.Events)
-                        {
-                            CommandCollection loadedcommand = null;
-                            foreach (var collection in viewElement.Events)
-                            {
-                                if (collection.Name == commandCollection.Name)
-                                    loadedcommand = collection;
-                            }
-                            if (loadedcommand != null)
-                            {
-                                foreach (var flowCommand in loadedcommand.Items)
-                                {
-                                    IWorkflowCommand commandPlugin= Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
-                                    var wCommand = commandPlugin.CreateCommand();
-                                    wCommand.Instance = commandPlugin;
-                                    wCommand.PluginInfo = flowCommand.PluginInfo;
-                                    wCommand.Name = flowCommand.Name;
-                                    wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
-                                    commandCollection.Items.Add(wCommand);
-                                }
-                            }
-                        }
-                    }
-                    foreach (var commandCollection in view.Events)
+                    IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                    var wCommand = commandPlugin.CreateCommand();
+                    wCommand.Instance = commandPlugin;
+                    wCommand.PluginInfo = flowCommand.PluginInfo;
+                    wCommand.Name = flowCommand.Name;
+                    wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
+                    event_.CommandCollection.Items.Add(wCommand);
+                }
+                resflow.Events.Add(event_);
+            }
+
+            foreach (var _view in flow.Views)
+            {
+                IViewPlugin plugin = Instance.GetViewPlugin(_view.PluginInfo.Class);
+                WorkFlowView view = plugin.CreateView();
+                view.Parent = resflow;
+                view.Instance = plugin;
+                view.PluginInfo = _view.PluginInfo;
+                view.Name = _view.Name;
+                view.Properties.CopyValuesFrom(_view.Properties);
+                foreach (var viewElement in _view.Elements)
+                {
+                    IViewElementPlugin elementplugin = Instance.GetElementPlugin(viewElement.PluginInfo.Class);
+                    WorkFlowViewElement element = elementplugin.CreateElement(view);
+                    element.Parent = view;
+                    element.Instance = elementplugin;
+                    element.PluginInfo = viewElement.PluginInfo;
+                    element.Name = viewElement.Name;
+                    element.Properties.CopyValuesFrom(viewElement.Properties);
+                    view.Elements.Add(element);
+                    foreach (var commandCollection in element.Events)
                     {
                         CommandCollection loadedcommand = null;
-                        foreach (var collection in _view.Events)
+                        foreach (var collection in viewElement.Events)
                         {
                             if (collection.Name == commandCollection.Name)
                                 loadedcommand = collection;
@@ -421,7 +398,8 @@ namespace Capture.Workflow.Core
                         {
                             foreach (var flowCommand in loadedcommand.Items)
                             {
-                                IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                                IWorkflowCommand commandPlugin =
+                                    Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
                                 var wCommand = commandPlugin.CreateCommand();
                                 wCommand.Instance = commandPlugin;
                                 wCommand.PluginInfo = flowCommand.PluginInfo;
@@ -431,9 +409,33 @@ namespace Capture.Workflow.Core
                             }
                         }
                     }
-                    resflow.Views.Add(view);
                 }
-                return resflow;
+                foreach (var commandCollection in view.Events)
+                {
+                    CommandCollection loadedcommand = null;
+                    foreach (var collection in _view.Events)
+                    {
+                        if (collection.Name == commandCollection.Name)
+                            loadedcommand = collection;
+                    }
+                    if (loadedcommand != null)
+                    {
+                        foreach (var flowCommand in loadedcommand.Items)
+                        {
+                            IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
+                            var wCommand = commandPlugin.CreateCommand();
+                            wCommand.Instance = commandPlugin;
+                            wCommand.PluginInfo = flowCommand.PluginInfo;
+                            wCommand.Name = flowCommand.Name;
+                            wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
+                            commandCollection.Items.Add(wCommand);
+                        }
+                    }
+                }
+                resflow.Views.Add(view);
+            }
+            LoadVariables(resflow);
+            return resflow;
         }
 
         public IViewPlugin GetViewPlugin(string className)
@@ -487,10 +489,61 @@ namespace Capture.Workflow.Core
                     MessageBox.Show(e.Param.ToString());
                     break;
                 case Messages.SessionFinished:
+                    SaveVariables(e.Context.WorkFlow);
                     break;
             }
             Message?.Invoke(this, e);
         }
+
+        public void SaveVariables(WorkFlow workflow)
+        {
+            string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + "xml");
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(VariableCollection));
+                Utils.CreateFolder(file);
+                // Create a FileStream to write with.
+                Stream writer = new FileStream(file, FileMode.Create);
+                // Serialize the object, and close the TextWriter
+                serializer.Serialize(writer, workflow.Variables);
+                writer.Close();
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to save variable values ", exception);
+            }
+        }
+
+        public void LoadVariables(WorkFlow workflow)
+        {
+            try
+            {
+                string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + "xml");
+                if (!File.Exists(file))
+                    return;
+
+                XmlSerializer mySerializer =new XmlSerializer(typeof(VariableCollection));
+                FileStream myFileStream = new FileStream(file, FileMode.Open);
+                var values = (VariableCollection) mySerializer.Deserialize(myFileStream);
+                myFileStream.Close();
+                foreach (var val in values.Items)
+                {
+                    var selval = workflow.Variables[val.Name];
+                    if (selval != null && !selval.Reinit)
+                        selval.Value = val.Value;
+                }
+                foreach (var variable in workflow.Variables.Items)
+                {
+                    if (variable.Reinit)
+                        variable.Value = variable.DefaultValue;
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error loading variable values", exception);
+            }
+        }
+
 
     }
 }
