@@ -25,35 +25,6 @@ namespace Capture.Workflow.Plugins.Views
                 Name = "ViewTitle",
                 PropertyType = CustomPropertyType.String
             });
-            view.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "BorderColor",
-                PropertyType = CustomPropertyType.Color,
-                Value = "Transparent"
-            });
-            view.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "BorderBackground",
-                PropertyType = CustomPropertyType.Color,
-                Value = "Transparent"
-            });
-            view.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "BorderThickness",
-                PropertyType = CustomPropertyType.Number,
-                Value = "0",
-                RangeMax = 100
-            });
-            view.Properties.Items.Add(new CustomProperty()
-            {
-                Name = "CornerRadius",
-                PropertyType = CustomPropertyType.Number,
-                Value = "0",
-                RangeMax = 90
-
-            });
-
-
             return view;
         }
 
@@ -84,10 +55,6 @@ namespace Capture.Workflow.Plugins.Views
                         break;
                 }
             }
-            model.BorderColor = view.Properties["BorderColor"].Value;
-            model.BorderBackground = view.Properties["BorderBackground"].Value;
-            model.BorderThickness= view.Properties["BorderThickness"].ToInt(context);
-            model.CornerRadius = view.Properties["CornerRadius"].ToInt(context);
             var res = new StartScreenView();
             res.DataContext = model;
             return res;
