@@ -11,14 +11,6 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 {
     public class StartSctreenViewModel: BaseViewModel
     {
-
-
-        public string BorderBackground { get; set; }
-        public string BorderColor { get; set; }
-        public int BorderThickness { get; set; }
-        public int CornerRadius { get; set; }
-
-
         public StartSctreenViewModel()
         {
             CenterElements = new ObservableCollection<FrameworkElement>();

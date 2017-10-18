@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Capture.Workflow.Plugins.Views.View"
              xmlns:viewModel="clr-namespace:Capture.Workflow.Plugins.Views.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
@@ -23,8 +24,9 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Border  HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="{Binding BorderThickness}" CornerRadius="{Binding CornerRadius}">
-            
+        
+        <materialDesign:Card  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="4">
+           
         <ItemsControl ItemsSource="{Binding CenterElements }" >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -37,7 +39,8 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        </Border>
+        </materialDesign:Card>
+        
         <ItemsControl ItemsSource="{Binding BottomLeftElements }" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
