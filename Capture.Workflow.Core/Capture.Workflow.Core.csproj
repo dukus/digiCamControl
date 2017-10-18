@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ActionsList.cs" />
+    <Compile Include="Classes\Attributes\GroupAttribute.cs" />
     <Compile Include="Classes\Attributes\PluginTypeAttribute.cs" />
     <Compile Include="Classes\BaseItem.cs" />
     <Compile Include="Classes\CommandCollection.cs" />

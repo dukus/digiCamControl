@@ -155,6 +155,7 @@
     <Compile Include="Commands\CheckCameraAction.cs" />
     <Compile Include="Commands\CopyFileAction.cs" />
     <Compile Include="Commands\ImageProcessing\BlackAndWhiteAction.cs" />
+    <Compile Include="Commands\ImageProcessing\BrightnessAction.cs" />
     <Compile Include="Commands\ImageProcessing\FlipAction.cs" />
     <Compile Include="Commands\ImageProcessing\SaveFileAction.cs" />
     <Compile Include="Commands\MathAction.cs" />

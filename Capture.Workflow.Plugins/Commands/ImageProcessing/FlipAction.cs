@@ -15,6 +15,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("Flip")]
+    [Group("ImageProcessing")]
     public class FlipAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

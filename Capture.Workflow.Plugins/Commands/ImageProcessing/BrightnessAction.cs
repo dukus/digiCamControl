@@ -9,31 +9,33 @@ using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
 using ImageMagick;
-using SmartFormat;
 
 namespace Capture.Workflow.Plugins.Commands.ImageProcessing
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("SaveFile")]
+    [DisplayName("BrightnessContrast")]
     [Group("ImageProcessing")]
-    public class SaveFileAction : BaseCommand, IWorkflowCommand
+    public class BrightnessAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()
         {
             var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
-                Name = "FileNameTemplate",
-                PropertyType = CustomPropertyType.ParamString,
-                Value = @"{SessionFolder}\\{SessionName}\\IMG_{Counter}"
+                Name = "Brightness",
+                PropertyType = CustomPropertyType.Number,
+                RangeMin = -100,
+                RangeMax = 100,
+                Value = "0"
             });
             command.Properties.Add(new CustomProperty()
             {
-                Name = "FileFormat",
-                PropertyType = CustomPropertyType.ValueList,
-                ValueList = {"Jpg","Png","Bmp"},
-                Value = "Jpg"
+                Name = "Contrast",
+                PropertyType = CustomPropertyType.Number,
+                RangeMin = -100,
+                RangeMax = 100,
+                Value = "0"
             });
             return command;
         }
@@ -44,27 +46,13 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
                 return true;
             if (!CheckCondition(command, context))
                 return true;
-            Smart.Default.Settings.ConvertCharacterStringLiterals = false;
-            var filename = command.Properties["FileNameTemplate"].ToString(context);
-
-            Utils.CreateFolder(filename);
-            
             context.ImageStream.Seek(0, SeekOrigin.Begin);
             using (MagickImage image = new MagickImage(context.ImageStream))
             {
                 context.ImageStream.Seek(0, SeekOrigin.Begin);
-                switch (command.Properties["FileFormat"].Value)
-                {
-                    case "Jpg":
-                        image.Write(filename + ".jpg");
-                        break;
-                    case "Png":
-                        image.Write(filename + ".png");
-                        break;
-                    case "Bmp":
-                        image.Write(filename + ".bmp");
-                        break;
-                }
+                image.BrightnessContrast(new Percentage(command.Properties["Brightness"].ToInt(context)),
+                    new Percentage(command.Properties["Contrast"].ToInt(context)));
+                image.Write(context.ImageStream, MagickFormat.Jpg);
             }
             return true;
         }
