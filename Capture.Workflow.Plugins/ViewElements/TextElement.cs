@@ -32,6 +32,11 @@ namespace Capture.Workflow.Plugins.ViewElements
             });
             element.Properties.Items.Add(new CustomProperty()
             {
+                Name = "IsReadOnly",
+                PropertyType = CustomPropertyType.Bool
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "Width",
                 PropertyType = CustomPropertyType.Number,
                 RangeMin = 0,
@@ -104,7 +109,8 @@ namespace Capture.Workflow.Plugins.ViewElements
             {
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
-                HorizontalContentAlignment = HorizontalAlignment.Center
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                IsReadOnly = viewElement.Properties["IsReadOnly"].ToBool(context),
             };
             viewElement.SetSize(textBox,context);
 

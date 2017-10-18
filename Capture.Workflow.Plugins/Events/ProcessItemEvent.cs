@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,16 @@ namespace Capture.Workflow.Plugins.Events
                         itemContex.WorkFlow = contex.WorkFlow;
                         itemContex.FileItem = item;
                         itemContex.Target = ContextTargetEnum.FileItem;
-                        WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, itemContex);
+                        itemContex.FileItem = item;
+                        var bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile);
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            Utils.Save2Jpg(bitmap, stream);
+                            itemContex.ImageStream = stream;
+                            WorkflowManager.Execute(_flowEvent.CommandCollection, itemContex);
+                            stream.Seek(0, SeekOrigin.Begin);
+                        }
+                        
                     }
                 }
             }

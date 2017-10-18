@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:Capture.Workflow.Plugins.Views.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
@@ -28,19 +29,20 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <Image Source="{Binding Bitmap}" />
-        <ItemsControl Grid.Row="0" ItemsSource="{Binding LeftElements }" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentControl Content="{Binding}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-
+        <materialDesign:Card Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="4" Margin="4">
+            <ItemsControl ItemsSource="{Binding LeftElements }" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </materialDesign:Card>
         <ItemsControl ItemsSource="{Binding BottomLeftElements }" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
