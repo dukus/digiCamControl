@@ -179,6 +179,7 @@
     <Compile Include="ViewElements\ComboBoxElement.cs" />
     <Compile Include="ViewElements\ImageElement.cs" />
     <Compile Include="ViewElements\Label.cs" />
+    <Compile Include="ViewElements\SliderElement.cs" />
     <Compile Include="ViewElements\TextElement.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\FullScreenPreview.cs" />
