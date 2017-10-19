@@ -13,6 +13,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
     public class LiveviewViewModel:BaseViewModel, IDisposable
     {
         private ObservableCollection<FrameworkElement> _leftElements;
+        private ObservableCollection<FrameworkElement> _rightElements;
 
         public WorkFlowView View { get; set; }
 
@@ -25,6 +26,17 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                 RaisePropertyChanged(()=>LeftElements);
             }
         }
+
+        public ObservableCollection<FrameworkElement> RightElements
+        {
+            get { return _rightElements; }
+            set
+            {
+                _rightElements = value;
+                RaisePropertyChanged(() => RightElements);
+            }
+        }
+
 
         public BitmapSource Bitmap
         {
@@ -57,7 +69,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             BottomLeftElements = new ObservableCollection<FrameworkElement>();
             BottomRightElements = new ObservableCollection<FrameworkElement>();
             BackGroundElements = new AsyncObservableCollection<FrameworkElement>();
-
+            RightElements = new ObservableCollection<FrameworkElement>();
             WorkflowManager.Instance.Message += Instance_Message;
         }
 

@@ -34,6 +34,11 @@
                     <x:Type TypeName="classes:VariableTypeEnum" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
+            <CollectionViewSource x:Key="Elements" Source="{Binding SelectedView.Elements}">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="Properties[Position].Value" />
+                </CollectionViewSource.GroupDescriptions>
+            </CollectionViewSource>
         </ResourceDictionary>
     </Window.Resources>
     <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
@@ -197,8 +202,17 @@
                                                 <ColumnDefinition Width="3*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <ListBox Margin="10" ItemsSource="{Binding SelectedView.Elements}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
+                                            <ListBox Margin="10" ItemsSource="{Binding Source={StaticResource Elements}}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                                                      materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalContentAlignment="Stretch">
+                                                <ListBox.GroupStyle>
+                                                    <GroupStyle>
+                                                        <GroupStyle.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                                            </DataTemplate>
+                                                        </GroupStyle.HeaderTemplate>
+                                                    </GroupStyle>
+                                                </ListBox.GroupStyle>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate >
                                                         <Grid>

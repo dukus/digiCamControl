@@ -44,6 +44,20 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         </materialDesign:Card>
+        <materialDesign:Card Grid.Row="0" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="10">
+            <ItemsControl ItemsSource="{Binding RightElements }" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </materialDesign:Card>
         <ItemsControl ItemsSource="{Binding BottomLeftElements }" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
