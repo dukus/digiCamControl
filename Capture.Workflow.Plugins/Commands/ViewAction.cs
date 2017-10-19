@@ -24,7 +24,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "ShowView", "FinishSession", "CancelSession", "PreviousView" }
+                ValueList = new List<string>() { "ShowView", "FinishSession", "CancelSession", "PreviousView", "UpdateThumb" }
             });
 
             command.Properties.Add(new CustomProperty()
@@ -54,6 +54,9 @@ namespace Capture.Workflow.Plugins.Commands
                     break;
                 case "PreviousView":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.PreviousView, context));
+                    break;
+                case "UpdateThumb":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ThumbCreate, context));
                     break;
             }
             return true;

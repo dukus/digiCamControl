@@ -24,7 +24,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Brightness",
-                PropertyType = CustomPropertyType.Number,
+                PropertyType = CustomPropertyType.Variable,
                 RangeMin = -100,
                 RangeMax = 100,
                 Value = "0"
@@ -32,7 +32,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
             command.Properties.Add(new CustomProperty()
             {
                 Name = "Contrast",
-                PropertyType = CustomPropertyType.Number,
+                PropertyType = CustomPropertyType.Variable,
                 RangeMin = -100,
                 RangeMax = 100,
                 Value = "0"
@@ -50,8 +50,8 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
             using (MagickImage image = new MagickImage(context.ImageStream))
             {
                 context.ImageStream.Seek(0, SeekOrigin.Begin);
-                image.BrightnessContrast(new Percentage(command.Properties["Brightness"].ToInt(context)),
-                    new Percentage(command.Properties["Contrast"].ToInt(context)));
+                image.BrightnessContrast(new Percentage((double)context.WorkFlow.Variables[command.Properties["Brightness"].ToString(context)].GetAsObject()),
+                    new Percentage((double)context.WorkFlow.Variables[command.Properties["Contrast"].ToString(context)].GetAsObject()));
                 image.Write(context.ImageStream, MagickFormat.Jpg);
             }
             return true;

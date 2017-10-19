@@ -7,6 +7,7 @@
         public const string StopLiveView = "StopLiveView";
         public const string LiveViewChanged = "LiveViewChanged";
         public const string ThumbChanged = "ThumbChanged";
+        public const string ThumbCreate = "ThumbCreate";
         public const string PhotoDownloaded = "PhotoDownloaded";
         public const string KeyPressed = "KeyPressed";
         public const string ShowMessage = "ShowMessage";
@@ -15,5 +16,6 @@
         public const string SessionCanceled = "SessionCanceled";
         public const string VariableChanged = "VariableChanged";
         public const string PreviousView = "PreviousView";
+        public const string ThumbUpdated = "ThumbUpdated";
     }
 }

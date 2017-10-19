@@ -12,7 +12,6 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 {
     public class LiveviewViewModel:BaseViewModel, IDisposable
     {
-        private BitmapSource _bitmap;
         private ObservableCollection<FrameworkElement> _leftElements;
 
         public WorkFlowView View { get; set; }
@@ -29,10 +28,10 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public BitmapSource Bitmap
         {
-            get { return _bitmap; }
+            get { return WorkflowManager.Instance.Bitmap; }
             set
             {
-                _bitmap = value;
+                WorkflowManager.Instance.Bitmap = value;
                 RaisePropertyChanged(() => Bitmap);
             }
         }
@@ -46,7 +45,8 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             {
                 WorkflowManager.Instance.SelectedItem = value;
                 RaisePropertyChanged(() => FileItem);
-                Bitmap = WorkflowManager.Instance.GetLargeThumbnail(WorkflowManager.Instance.SelectedItem);
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ThumbCreate,null ));
+
             }
         }
 
@@ -86,6 +86,10 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                 FileItem item = e.Param as FileItem;
                 if (item != null)
                     FileItem = item;
+            }
+            if (e.Name == Messages.ThumbUpdated)
+            {
+                RaisePropertyChanged(() => Bitmap);
             }
         }
 

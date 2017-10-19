@@ -39,7 +39,7 @@ namespace Capture.Workflow.Plugins.Events
             {
                 var var = e.Param as Variable;
                 if (var != null && var.Name == _flowEvent.Properties["Variable"].ToString(e.Context))
-                    WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, e.Context);
+                    WorkflowManager.Execute(_flowEvent.CommandCollection, e.Context);
             }
         }
 

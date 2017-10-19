@@ -16,12 +16,13 @@ using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
+using GalaSoft.MvvmLight;
 using Ionic.Zip;
 
 
 namespace Capture.Workflow.Core
 {
-    public class WorkflowManager
+    public class WorkflowManager: ViewModelBase
     {
         #region private declarations
 
@@ -38,7 +39,11 @@ namespace Capture.Workflow.Core
 
         #endregion
 
+        private bool _thumbRunning = false;
+        private bool _thumbNext = false;
+
         private static WorkflowManager _instance;
+        private BitmapSource _bitmap;
 
         public static WorkflowManager Instance
         {
@@ -83,6 +88,15 @@ namespace Capture.Workflow.Core
 
         public FileItem SelectedItem { get; set; }
 
+        public BitmapSource Bitmap
+        {
+            get { return _bitmap; }
+            set
+            {
+                _bitmap = value;
+                RaisePropertyChanged(() => Bitmap);
+            }
+        }
 
         public WorkflowManager()
         {
@@ -115,7 +129,7 @@ namespace Capture.Workflow.Core
                 }
                 catch (Exception e)
                 {
-                    Log.Debug("Unable to create thumbnail");
+                    Log.Debug("Unable to create thumbnail", e);
                 }
             }
             return null;
@@ -491,8 +505,35 @@ namespace Capture.Workflow.Core
                 case Messages.SessionFinished:
                     SaveVariables(e.Context.WorkFlow);
                     break;
+                case Messages.ThumbCreate:
+                    UpdateThumbAsync();
+                    break;
             }
             Message?.Invoke(this, e);
+        }
+
+        private void UpdateThumbAsync()
+        {
+            if (_thumbRunning)
+            {
+                _thumbNext = true;
+                return;
+            }
+            _thumbNext = false;
+            Task.Factory.StartNew(UpdateThumb);
+        }
+
+        private void UpdateThumb()
+        {
+            _thumbRunning = true;
+            Bitmap = GetLargeThumbnail(SelectedItem);
+            OnMessage(new MessageEventArgs(Messages.ThumbUpdated, null));
+            _thumbRunning = false;
+            if (_thumbNext)
+            {
+                _thumbNext = false;
+                UpdateThumbAsync();
+            }
         }
 
         public void SaveVariables(WorkFlow workflow)
