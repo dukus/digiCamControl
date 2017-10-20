@@ -34,7 +34,7 @@
                     <x:Type TypeName="classes:VariableTypeEnum" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            <CollectionViewSource x:Key="Elements" Source="{Binding SelectedView.Elements}">
+            <CollectionViewSource x:Key="Elements" Source="{Binding SelectedView.Elements}" IsLiveGroupingRequested="True">
                 <CollectionViewSource.GroupDescriptions>
                     <PropertyGroupDescription PropertyName="Properties[Position].Value" />
                 </CollectionViewSource.GroupDescriptions>
@@ -205,14 +205,22 @@
                                             <ListBox Margin="10" ItemsSource="{Binding Source={StaticResource Elements}}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                                                      materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalContentAlignment="Stretch">
                                                 <ListBox.GroupStyle>
-                                                    <GroupStyle>
-                                                        <GroupStyle.HeaderTemplate>
-                                                            <DataTemplate>
-                                                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                                                            </DataTemplate>
-                                                        </GroupStyle.HeaderTemplate>
-                                                    </GroupStyle>
-                                                </ListBox.GroupStyle>
+                                                        <GroupStyle>
+                                                            <GroupStyle.ContainerStyle>
+                                                                <Style TargetType="{x:Type GroupItem}">
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate>
+                                                                                <Expander IsExpanded="True"  Header="{Binding Name}">
+                                                                                    <ItemsPresenter />
+                                                                                </Expander>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </GroupStyle.ContainerStyle>
+                                                        </GroupStyle>
+                                                    </ListBox.GroupStyle>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate >
                                                         <Grid>
