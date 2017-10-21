@@ -198,29 +198,34 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*"/>
-                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="1*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <ListBox Margin="10" ItemsSource="{Binding Source={StaticResource Elements}}" SelectedItem="{Binding SelectedElement}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True"
                                                      materialDesign:ShadowAssist.ShadowDepth="Depth3" HorizontalContentAlignment="Stretch">
                                                 <ListBox.GroupStyle>
-                                                        <GroupStyle>
-                                                            <GroupStyle.ContainerStyle>
-                                                                <Style TargetType="{x:Type GroupItem}">
-                                                                    <Setter Property="Template">
-                                                                        <Setter.Value>
-                                                                            <ControlTemplate>
-                                                                                <Expander IsExpanded="True"  Header="{Binding Name}">
-                                                                                    <ItemsPresenter />
-                                                                                </Expander>
-                                                                            </ControlTemplate>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </GroupStyle.ContainerStyle>
-                                                        </GroupStyle>
-                                                    </ListBox.GroupStyle>
+                                                    <GroupStyle>
+                                                        <GroupStyle.ContainerStyle>
+                                                            <Style TargetType="{x:Type GroupItem}">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate>
+                                                                            <Expander IsExpanded="True" >
+                                                                                <Expander.Header>
+                                                                                    <StackPanel Orientation="Horizontal">
+                                                                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Bottom" />
+                                                                                    </StackPanel>
+                                                                                </Expander.Header>
+                                                                                <ItemsPresenter />
+                                                                            </Expander>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </GroupStyle.ContainerStyle>
+                                                    </GroupStyle>
+                                                </ListBox.GroupStyle>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate >
                                                         <Grid>
@@ -230,7 +235,7 @@
                                                                 <ColumnDefinition Width="30"/>
                                                             </Grid.ColumnDefinitions>
                                                             <materialDesign:PackIcon Kind="UnfoldMore"/>
-                                                            <controls1:EditableTextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1"/>
+                                                            <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1"/>
                                                             <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                                 <StackPanel>
                                                                     <Button Content="Remove" Command="{Binding DataContext.DeleteViewElementCommand, ElementName=WorkflowEditorWindow}"/>
@@ -427,7 +432,7 @@
                                                             <ColumnDefinition Width="30"/>
                                                         </Grid.ColumnDefinitions>
                                                         <materialDesign:PackIcon Kind="UnfoldMore"/>
-                                                        <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
+                                                        <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
                                                                 <Button Content="Remove" Command="{Binding DataContext.DeleteEventCommand, ElementName=WorkflowEditorWindow}"/>

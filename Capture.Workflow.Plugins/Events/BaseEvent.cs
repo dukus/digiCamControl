@@ -18,6 +18,11 @@ namespace Capture.Workflow.Plugins.Events
             WorkFlowEvent workFlowEvent = new WorkFlowEvent();
             workFlowEvent.Properties.Items.Add(new CustomProperty()
             {
+                Name = "(Name)",
+                PropertyType = CustomPropertyType.String
+            });
+            workFlowEvent.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "Condition",
                 PropertyType = CustomPropertyType.Code
             });

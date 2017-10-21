@@ -15,6 +15,8 @@
                 <Setter.Value>
                     <Style TargetType="DataGridCell">
                         <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
                         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
                         <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Style>
@@ -33,7 +35,7 @@
                 <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Value" Width="*"  >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ContentControl Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3" Background="{StaticResource MenuItemSelectionFill}"
+                            <ContentControl Content="{Binding Path=.,Converter={StaticResource ParameterToControlConverter} }" Margin="3,0" Background="{StaticResource MenuItemSelectionFill}"
                                             VerticalContentAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

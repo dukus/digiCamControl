@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
+using CameraControl.Devices;
 using Capture.Workflow.Core.Interface;
 using Newtonsoft.Json;
 
@@ -25,6 +22,12 @@ namespace Capture.Workflow.Core.Classes
         {
             CommandCollection = new CommandCollection();
             Properties = new CustomPropertyCollection();
+            Properties.PropertyChanged += Properties_PropertyChanged;
+        }
+
+        private void Properties_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Name));
         }
     }
 }

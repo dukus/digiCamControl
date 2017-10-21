@@ -1,14 +1,22 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Xml.Serialization;
-using Capture.Workflow.Core.Interface;
+using Capture.Workflow.Core.Annotations;
 
 namespace Capture.Workflow.Core.Classes
 {
-    public class BaseItem
+    public class BaseItem: INotifyPropertyChanged
     {
         public PluginInfo PluginInfo { get; set; }
+
         [XmlAttribute]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return Properties["(Name)"]?.Value; }
+            set { Properties["(Name)"].Value = value; }
+        }
+
         public string SettingData { get; set; }
         public CustomPropertyCollection Properties { get; set; }
 
@@ -20,6 +28,14 @@ namespace Capture.Workflow.Core.Classes
             if (Properties["Height"].ToInt(context) > 0)
                 element.Height = Properties["Height"].ToInt(context);
             element.Margin = new Thickness(Properties["Margins"].ToInt(context));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -23,6 +23,11 @@ namespace Capture.Workflow.Plugins.Views
             WorkFlowView view = new WorkFlowView();
             view.Properties.Items.Add(new CustomProperty()
             {
+                Name = "(Name)",
+                PropertyType = CustomPropertyType.String
+            });
+            view.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "ViewTitle",
                 PropertyType = CustomPropertyType.String
             });

@@ -17,6 +17,11 @@ namespace Capture.Workflow.Plugins.Commands
             var command = new WorkFlowCommand();
             command.Properties.Items.Add(new CustomProperty()
             {
+                Name = "(Name)",
+                PropertyType = CustomPropertyType.String
+            });
+            command.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "Condition",
                 PropertyType = CustomPropertyType.Code
             });

@@ -27,6 +27,11 @@ namespace Capture.Workflow.Plugins.ViewElements
             WorkFlowViewElement element = new WorkFlowViewElement();
             element.Properties.Items.Add(new CustomProperty()
             {
+                Name = "(Name)",
+                PropertyType = CustomPropertyType.String
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "Caption",
                 PropertyType = CustomPropertyType.String
             });

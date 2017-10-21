@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Interface;
@@ -10,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Capture.Workflow.Core.Classes
 {
-    public class WorkFlowView : BaseItem
+    public class WorkFlowView : BaseItem, INotifyPropertyChanged
     {
         [XmlIgnore]
         [JsonIgnore]
@@ -28,6 +25,12 @@ namespace Capture.Workflow.Core.Classes
             Properties = new CustomPropertyCollection();
             Elements = new AsyncObservableCollection<WorkFlowViewElement>();
             Events = new List<CommandCollection>();
+            Properties.PropertyChanged += Properties_PropertyChanged;
+        }
+
+        private void Properties_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Name));
         }
 
         public CommandCollection GetEventCommands(string name)

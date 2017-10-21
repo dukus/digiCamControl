@@ -22,6 +22,12 @@ namespace Capture.Workflow.Core.Classes
         public WorkFlowCommand()
         {
             Properties = new CustomPropertyCollection();
+            Properties.PropertyChanged += Properties_PropertyChanged;
+        }
+
+        private void Properties_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Name));
         }
     }
 }
