@@ -139,7 +139,7 @@
                                                             <ColumnDefinition Width="30"/>
                                                         </Grid.ColumnDefinitions>
                                                         <materialDesign:PackIcon Kind="UnfoldMore"/>
-                                                        <controls1:EditableTextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                                                        <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
                                                                 <Button Content="Remove" Command="{Binding DataContext.DeleteViewCommand, ElementName=WorkflowEditorWindow}"/>

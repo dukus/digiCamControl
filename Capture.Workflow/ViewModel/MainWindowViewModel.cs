@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Classes;
@@ -18,6 +19,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
 
+
         public AsyncObservableCollection<WorkFlowItem> WorkFlows
         {
             get { return _workFlows; }
@@ -32,7 +34,8 @@ namespace Capture.Workflow.ViewModel
         public MainWindowViewModel()
         {
             EditCommand = new RelayCommand<WorkFlowItem>(Edit);
-            RunCommand=new RelayCommand<WorkFlowItem>(Run);
+            RunCommand = new RelayCommand<WorkFlowItem>(Run);
+            NewCommand = new RelayCommand(New);
             if (!IsInDesignMode)
             {
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
@@ -45,7 +48,15 @@ namespace Capture.Workflow.ViewModel
 
         private void Run(WorkFlowItem obj)
         {
-            WorkflowManager.Instance.Context.WorkFlow = obj.IsPackage ? WorkflowManager.Instance.LoadFromPackage(obj.File) : WorkflowManager.Instance.Load(obj.File);
+            var workFlow = obj.IsPackage
+                ? WorkflowManager.Instance.LoadFromPackage(obj.File)
+                : WorkflowManager.Instance.Load(obj.File);
+            if (workFlow.Views.Count == 0)
+            {
+                MessageBox.Show("No view(s) are defined !");
+                return;
+            }
+            WorkflowManager.Instance.Context.WorkFlow = workFlow;
             WorkflowViewView wnd = new WorkflowViewView();
             wnd.ShowDialog();
         }
@@ -121,6 +132,16 @@ namespace Capture.Workflow.ViewModel
             ((WorkflowEditorViewModel)wnd.DataContext).LoadXml(item.File);
             wnd.ShowDialog();
             LoadWorkFlows();
+        }
+
+        private void New()
+        {
+            var workflow = new WorkFlow();
+            workflow.Name = "New Workflow";
+            WorkflowManager.Instance.Save(workflow,
+                Path.Combine(Settings.Instance.WorkflowFolder, workflow.Id + ".cwxml"));
+            LoadWorkFlows();
+
         }
     }
 }

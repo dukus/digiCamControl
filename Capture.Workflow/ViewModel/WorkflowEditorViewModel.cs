@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CameraControl.Devices;
-using CameraControl.Devices.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Interface;
@@ -277,7 +277,7 @@ namespace Capture.Workflow.ViewModel
                 var wCommand = commandPlugin.CreateCommand();
                 wCommand.Instance = commandPlugin;
                 wCommand.PluginInfo = pluginInfo;
-                wCommand.Name = pluginInfo.Name;
+                wCommand.Name = GetNewName(pluginInfo.Name, SelectedEvent.CommandCollection.Items.Select(x => x.Name).ToList()); 
                 SelectedEvent.CommandCollection.Items.Add(wCommand);
                 SelectedEventCommand = wCommand;
             }
@@ -300,7 +300,7 @@ namespace Capture.Workflow.ViewModel
             event_.Parent = CurrentWorkFlow;
             event_.Instance = plugin;
             event_.PluginInfo = pluginInfo;
-            event_.Name = pluginInfo.Name;
+            event_.Name = GetNewName(pluginInfo.Name, CurrentWorkFlow.Events.Select(x => x.Name).ToList());
             CurrentWorkFlow.Events.Add(event_);
             SelectedEvent = event_;
         }
@@ -323,7 +323,8 @@ namespace Capture.Workflow.ViewModel
                 var wCommand = commandPlugin.CreateCommand();
                 wCommand.Instance = commandPlugin;
                 wCommand.PluginInfo = pluginInfo;
-                wCommand.Name = pluginInfo.Name;
+                wCommand.Name = GetNewName(pluginInfo.Name,
+                    SelectedViewCommandCollection.Items.Select(x => x.Name).ToList());
                 SelectedViewCommandCollection.Items.Add(wCommand);
                 SelectedViewCommand = wCommand;
             }
@@ -355,7 +356,8 @@ namespace Capture.Workflow.ViewModel
                 var wCommand = commandPlugin.CreateCommand();
                 wCommand.Instance = commandPlugin;
                 wCommand.PluginInfo = pluginInfo;
-                wCommand.Name = pluginInfo.Name;
+                wCommand.Name = GetNewName(pluginInfo.Name,
+                    SelectedCommandCollection.Items.Select(x => x.Name).ToList());
                 SelectedCommandCollection.Items.Add(wCommand);
                 SelectedCommand = wCommand;
             }
@@ -491,7 +493,7 @@ namespace Capture.Workflow.ViewModel
                 WorkFlowViewElement element = plugin.CreateElement(SelectedView);
                 element.Instance = plugin;
                 element.PluginInfo = pluginInfo;
-                element.Name = pluginInfo.Name;
+                element.Name = GetNewName(pluginInfo.Name, SelectedView.Elements.Select(x => x.Name).ToList()); 
                 element.Parent = SelectedView;
                 SelectedView.Elements.Add(element);
                 SelectedElement = element;
@@ -509,10 +511,24 @@ namespace Capture.Workflow.ViewModel
             WorkFlowView view = plugin.CreateView();
             view.Instance = plugin;
             view.PluginInfo = pluginInfo;
-            view.Name = pluginInfo.Name;
+            view.Name = GetNewName(pluginInfo.Name, CurrentWorkFlow.Views.Select(x => x.Name).ToList());
             view.Parent = CurrentWorkFlow;
             CurrentWorkFlow.Views.Add(view);
             SelectedView = view;
         }
+
+        private string GetNewName(string baseName, IList<string> names)
+        {
+            int i = 1;
+            while (true)
+            {
+                var newName = baseName + " #" + i;
+                if (!names.Contains(newName))
+                    return newName;
+                i++;
+            }
+        }
+
+
     }
 }

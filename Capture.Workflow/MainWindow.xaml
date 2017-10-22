@@ -44,7 +44,7 @@
                                       x:Name="MenuToggleButton"/>
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
-                                <Button Content="Create New Workflow" Command="{Binding EditCommand}"/>
+                                <Button Content="Create New Workflow" Command="{Binding NewCommand}"/>
                                 <Separator/>
                                 <Button Content="Settings" Command="{Binding EditCommand}"/>
 
