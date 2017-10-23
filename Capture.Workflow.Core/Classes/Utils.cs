@@ -158,6 +158,23 @@ namespace Capture.Workflow.Core.Classes
             return false;
         }
 
+        public static void CopyFiles(string source, string dest)
+        {
+            if (!Directory.Exists(source))
+                return;
+
+            var files = Directory.GetFiles(source);
+            if (!Directory.Exists(dest))
+                Directory.CreateDirectory(dest);
+
+            foreach (string file in files)
+            {
+                var newFile = Path.Combine(dest, Path.GetFileName(file));
+                if (!File.Exists(newFile))
+                    File.Copy(file, newFile);
+            }
+        }
+
         public static void CreateFolder(string filename)
         {
             var folder = Path.GetDirectoryName(filename);

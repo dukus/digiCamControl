@@ -397,7 +397,11 @@ namespace Capture.Workflow.ViewModel
 
         private void NewVariable()
         {
-            CurrentWorkFlow.Variables.Items.Add(new Variable() { Name = "Variable#" + CurrentWorkFlow.Variables.Items.Count });
+            CurrentWorkFlow.Variables.Items.Add(new Variable()
+                {
+                    Name = GetNewName("Variable#", CurrentWorkFlow.Variables.Items.Select(x => x.Name).ToList())
+                }
+            );
         }
 
         private void Load()

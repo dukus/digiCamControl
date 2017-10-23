@@ -38,11 +38,30 @@ namespace Capture.Workflow.ViewModel
             NewCommand = new RelayCommand(New);
             if (!IsInDesignMode)
             {
+                // copy default workflows from install folder
+                CopyDefaultWorkFlows();
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
                 ServiceProvider.Instance.DeviceManager.AddFakeCamera();
                 ServiceProvider.Instance.DeviceManager.ConnectToCamera();
                 LoadWorkFlows();
+            }
+        }
+
+        private void CopyDefaultWorkFlows()
+        {
+            try
+            {
+                Utils.CopyFiles(Settings.Instance.DefaultWorkflowFolder, Settings.Instance.WorkflowFolder);
+                var folders = Directory.GetFiles(Settings.Instance.DefaultWorkflowFolder);
+                foreach (string folder in folders)
+                {
+                    Utils.CopyFiles(folder, Path.Combine(Settings.Instance.WorkflowFolder, Path.GetFileName(folder)));
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to copy default workflows");
             }
         }
 

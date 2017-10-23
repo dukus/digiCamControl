@@ -14,9 +14,18 @@ namespace Capture.Workflow.Core.Classes
     public class Variable:INotifyPropertyChanged
     {
         private string _value;
+        private string _name;
 
         [XmlAttribute]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
 
         [XmlAttribute]
         public string Value

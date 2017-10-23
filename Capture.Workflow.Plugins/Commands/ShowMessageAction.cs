@@ -24,6 +24,11 @@ namespace Capture.Workflow.Plugins.Commands
                 Name = "Message",
                 PropertyType = CustomPropertyType.String
             });
+            command.Properties.Add(new CustomProperty()
+            {
+                Name = "Error",
+                PropertyType = CustomPropertyType.Bool
+            });
             return command;
         }
 
@@ -31,9 +36,10 @@ namespace Capture.Workflow.Plugins.Commands
         {
             if (!CheckCondition(command, context))
                 return true;
-            MessageBox.Show(command.Properties["Message"].ToString(context));
-
-            return true;
+            if (!string.IsNullOrEmpty(command.Properties["Message"].ToString(context)))
+                MessageBox.Show(command.Properties["Message"].ToString(context));
+            return !command.Properties["Error"].ToBool(context);
         }
     }
 }
+

@@ -36,8 +36,9 @@ namespace Capture.Workflow.Core.Classes
 
         public string TempFolder => Path.Combine(DataPath, "Temp");
         public string WorkflowFolder => Path.Combine(DataPath, "Workflows");
+        public string DefaultWorkflowFolder => Path.Combine(BasePath, "Workflows");
         public string CacheFolder => Path.Combine(DataPath, "Cache");
-
+        public string LogFolder => Path.Combine(DataPath, "Log");
 
 
         public Settings()

@@ -1,8 +1,10 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using System.Windows;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core;
+using Capture.Workflow.Core.Classes;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
@@ -20,11 +22,12 @@ namespace Capture.Workflow
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             WorkflowManager.Instance.LoadPlugins("Capture.Workflow.Plugins.dll");
-            Configure("app.log");
+            Configure(Path.Combine(Settings.Instance.LogFolder, "app.log"));
         }
 
         public static void Configure(string logFile)
         {
+            Utils.CreateFolder(logFile);
             Configure("Capture.Workflow", logFile);
             Log.LogDebug += Log_LogDebug;
             Log.LogError += Log_LogError;
