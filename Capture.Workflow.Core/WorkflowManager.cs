@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Web.UI;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -44,6 +43,7 @@ namespace Capture.Workflow.Core
 
         private static WorkflowManager _instance;
         private BitmapSource _bitmap;
+        private FileItem _selectedItem;
 
         public static WorkflowManager Instance
         {
@@ -86,7 +86,22 @@ namespace Capture.Workflow.Core
 
         public List<PluginInfo> Plugins { get; set; }
 
-        public FileItem SelectedItem { get; set; }
+        public FileItem SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                foreach (var variable in _selectedItem.Variables.Items)
+                {
+                    var item = Context.WorkFlow.Variables[variable.Name];
+                    if (item != null)
+                    {
+                        item.AttachedVariable = variable;
+                    }
+                }
+            }
+        }
 
         public BitmapSource Bitmap
         {
@@ -147,7 +162,13 @@ namespace Capture.Workflow.Core
                     File.Delete(tempFile);
 
                 eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
-                FileItem item = new FileItem() { TempFile = tempFile, Thumb = Utils.LoadImage(tempFile, 200, 0) };
+                FileItem item = new FileItem()
+                {
+                    TempFile = tempFile,
+                    Thumb = Utils.LoadImage(tempFile, 200),
+                    Variables = Context.WorkFlow.Variables.GetItemVariables()
+                };
+                
                 FileItems.Add(item);
                 FileItem = item;
                 //item.ThumbFile = Path.GetTempFileName();

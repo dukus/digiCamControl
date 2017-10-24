@@ -14,6 +14,12 @@ namespace Capture.Workflow.Core.Classes
         public string FileName { get; set; }
         public string TempFile { get; set; }
         public BitmapSource Thumb { get; set; }
+        public VariableCollection Variables { get; set; }
+
+        public FileItem()
+        {
+            Variables = new VariableCollection();
+        }
 
         public void Clear()
         {

@@ -37,6 +37,26 @@ namespace Capture.Workflow.Core.Classes
             return Items.ToDictionary(variable => variable.Name, variable => variable.GetAsObject());
         }
 
+        public VariableCollection GetItemVariables()
+        {
+            var res = new VariableCollection();
+            foreach (var item in Items)
+            {
+                if (item.ItemVariable)
+                {
+                    var val = new Variable()
+                    {
+                        Name = item.Name,
+                        Value = item.Value,
+                        VariableType = item.VariableType,
+                    };
+                    res.Items.Add(val);
+                    item.AttachedVariable = val;
+                }
+            }
+            return res;
+        }
+
         public bool SetValue(string name, string value)
         {
             var s = this[name];

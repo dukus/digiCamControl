@@ -50,6 +50,16 @@ namespace Capture.Workflow.Plugins.Events
                         itemContex.FileItem = item;
                         itemContex.Target = ContextTargetEnum.FileItem;
                         itemContex.FileItem = item;
+                        //Load item specific variable values
+                        foreach (var variable in item.Variables.Items)
+                        {
+                            var varItem = itemContex.WorkFlow.Variables[variable.Name];
+                            if (varItem != null)
+                            {
+                                varItem.AttachedVariable = variable;
+                            }
+                        }
+                        //-------------------
                         var bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile);
                         using (MemoryStream stream = new MemoryStream())
                         {

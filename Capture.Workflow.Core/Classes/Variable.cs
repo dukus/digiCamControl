@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Capture.Workflow.Core.Annotations;
 
@@ -15,6 +11,7 @@ namespace Capture.Workflow.Core.Classes
     {
         private string _value;
         private string _name;
+        private Variable _attachedVariable;
 
         [XmlAttribute]
         public string Name
@@ -30,10 +27,17 @@ namespace Capture.Workflow.Core.Classes
         [XmlAttribute]
         public string Value
         {
-            get { return _value; }
+            get
+            {
+                if (AttachedVariable != null)
+                    return AttachedVariable.Value;
+                return _value;
+            }
             set
             {
                 _value = value;
+                if (AttachedVariable != null)
+                    AttachedVariable.Value = _value;
                 OnPropertyChanged(nameof(Value));
                 WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.VariableChanged, this));
             }
@@ -46,7 +50,22 @@ namespace Capture.Workflow.Core.Classes
         [XmlAttribute]
         public bool Editable { get; set; }
         [XmlAttribute]
+        public bool ItemVariable { get; set; }
+        [XmlAttribute]
         public VariableTypeEnum VariableType { get; set; }
+
+        [XmlIgnore]
+        public Variable AttachedVariable
+        {
+            get { return _attachedVariable; }
+            set
+            {
+                _attachedVariable = value;
+                OnPropertyChanged(nameof(AttachedVariable));
+                OnPropertyChanged(nameof(Value));
+            }
+        }
+
 
         public Variable()
         {

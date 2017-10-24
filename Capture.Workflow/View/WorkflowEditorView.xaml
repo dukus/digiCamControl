@@ -561,6 +561,8 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="3"/>
                                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedVariable.Name}" Margin="3" IsEnabled="{Binding SelectedVariable.Editable}"/>
@@ -571,11 +573,14 @@
                                     <Label Grid.Row="2" Grid.Column="0" Content="Value" Margin="3"/>
                                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedVariable.Value}" Margin="3" />
 
-                                    <Label Grid.Row="3" Grid.Column="0" Content="Type" Margin="3"/>
-                                    <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding SelectedVariable.VariableType}" ItemsSource="{Binding Source={StaticResource VariableTypeEnumValues}}" Margin="3" />
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Item variable" Margin="3"/>
+                                    <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding SelectedVariable.ItemVariable}" Margin="3"/>
 
-                                    <Label Grid.Row="4" Grid.Column="0" Content="Reinit After session" Margin="3"/>
-                                    <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="Type" Margin="3"/>
+                                    <ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding SelectedVariable.VariableType}" ItemsSource="{Binding Source={StaticResource VariableTypeEnumValues}}" Margin="3" />
+
+                                    <Label Grid.Row="5" Grid.Column="0" Content="Reinit After session" Margin="3"/>
+                                    <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding SelectedVariable.Reinit}" Margin="3"/>
                                 </Grid>
                             </materialDesign:Card>
                             <StackPanel Grid.Row="1">
