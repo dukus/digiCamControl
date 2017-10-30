@@ -17,5 +17,9 @@
         public const string VariableChanged = "VariableChanged";
         public const string PreviousView = "PreviousView";
         public const string ThumbUpdated = "ThumbUpdated";
+        public const string NextPhoto = "NextPhoto";
+        public const string PrevPhoto = "PrevPhoto";
+        public const string DeletePhoto = "DeletePhoto";
+
     }
 }

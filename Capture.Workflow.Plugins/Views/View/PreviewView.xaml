@@ -29,7 +29,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Image Source="{Binding Bitmap}" />
+        <Image Grid.Row="0" Source="{Binding Bitmap}" />
         <materialDesign:Card Grid.Row="0" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="10">
         <ItemsControl ItemsSource="{Binding LeftElements }" >
             <ItemsControl.ItemTemplate>

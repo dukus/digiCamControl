@@ -529,6 +529,43 @@ namespace Capture.Workflow.Core
                 case Messages.ThumbCreate:
                     UpdateThumbAsync();
                     break;
+                case Messages.NextPhoto:
+                    if (SelectedItem != null)
+                    {
+                        var i = FileItems.IndexOf(SelectedItem);
+                        i++;
+                        if (i < FileItems.Count)
+                        {
+                            SelectedItem = FileItems[i];
+                        }
+                    }
+                    UpdateThumbAsync();
+                    break;
+                case Messages.PrevPhoto:
+                    if (SelectedItem != null)
+                    {
+                        var i = FileItems.IndexOf(SelectedItem);
+                        i--;
+                        if (i > -1)
+                        {
+                            SelectedItem = FileItems[i];
+                        }
+                    }
+                    UpdateThumbAsync();
+                    break;
+                case Messages.DeletePhoto:
+                {
+                    if (SelectedItem == null || FileItems.Count == 0)
+                        return;
+                    var i = FileItems.IndexOf(SelectedItem);
+                    FileItems.Remove(SelectedItem);
+                    if (i >= FileItems.Count)
+                        i--;
+                    if (i >= 0 && FileItems.Count > 0)
+                        SelectedItem = FileItems[i];
+                    UpdateThumbAsync();
+                }
+                    break;
             }
             Message?.Invoke(this, e);
         }

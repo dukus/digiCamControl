@@ -40,7 +40,10 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public BitmapSource Bitmap
         {
-            get { return WorkflowManager.Instance.Bitmap; }
+            get
+            {
+                return WorkflowManager.Instance.Bitmap;
+            }
             set
             {
                 WorkflowManager.Instance.Bitmap = value;
@@ -75,33 +78,43 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         private void Instance_Message(object sender, MessageEventArgs e)
         {
-            if (e.Name == Messages.LiveViewChanged)
+            switch (e.Name)
             {
-                var param = e.Param as object[];
-                if (param != null)
+                case Messages.LiveViewChanged:
                 {
-                    var stream = e.Context.ImageStream;
-                    stream.Seek(0, SeekOrigin.Begin);
-                    BitmapImage bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.StreamSource = stream;
-                    bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-                    bi.CacheOption = BitmapCacheOption.OnLoad;
-                    bi.EndInit();
-                    bi.Freeze();
-                    Bitmap = bi;
+                    var param = e.Param as object[];
+                    if (param != null)
+                    {
+                        var stream = e.Context.ImageStream;
+                        stream.Seek(0, SeekOrigin.Begin);
+                        BitmapImage bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.StreamSource = stream;
+                        bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                        bi.CacheOption = BitmapCacheOption.OnLoad;
+                        bi.EndInit();
+                        bi.Freeze();
+                        Bitmap = bi;
+                    }
                 }
-            }
-            if (e.Name == Messages.PhotoDownloaded)
-            {
-                RaisePropertyChanged(() => FileItems);
-                FileItem item = e.Param as FileItem;
-                if (item != null)
-                    FileItem = item;
-            }
-            if (e.Name == Messages.ThumbUpdated)
-            {
-                RaisePropertyChanged(() => Bitmap);
+                    break;
+                case Messages.PhotoDownloaded:
+                {
+                    RaisePropertyChanged(() => FileItems);
+                    FileItem item = e.Param as FileItem;
+                    if (item != null)
+                        FileItem = item;
+                }
+                    break;
+                case Messages.ThumbUpdated:
+                case Messages.NextPhoto:
+                case Messages.PrevPhoto:
+                case Messages.DeletePhoto:
+                    {
+                    RaisePropertyChanged(() => FileItem);
+                    RaisePropertyChanged(() => Bitmap);
+                }
+                    break;
             }
         }
 

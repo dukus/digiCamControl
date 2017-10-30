@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
@@ -13,8 +9,8 @@ namespace Capture.Workflow.Plugins.Commands
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("ViewAction")]
-    public class ViewAction :BaseCommand, IWorkflowCommand
+    [DisplayName("WorkflowAction")]
+    public class WorkflowAction :BaseCommand, IWorkflowCommand
     {
      
         public WorkFlowCommand CreateCommand()
@@ -24,7 +20,17 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "ShowView", "FinishSession", "CancelSession", "PreviousView", "UpdateThumb" }
+                ValueList = new List<string>
+                {
+                    "ShowView",
+                    "FinishSession",
+                    "CancelSession",
+                    "PreviousView",
+                    "UpdateThumb",
+                    "NextPhoto",
+                    "PrevPhoto",
+                    "DeletePhoto",
+                }
             });
 
             command.Properties.Add(new CustomProperty()
@@ -57,6 +63,15 @@ namespace Capture.Workflow.Plugins.Commands
                     break;
                 case "UpdateThumb":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ThumbCreate, context));
+                    break;
+                case "NextPhoto":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.NextPhoto, context));
+                    break;
+                case "PrevPhoto":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.PrevPhoto, context));
+                    break;
+                case "DeletePhoto":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.DeletePhoto, context));
                     break;
             }
             return true;
