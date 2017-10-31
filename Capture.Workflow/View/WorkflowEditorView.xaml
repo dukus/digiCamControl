@@ -7,8 +7,6 @@
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:controls1="clr-namespace:Capture.Workflow.Wpf.Controls"
-        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:dd="urn:gong-wpf-dragdrop"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -16,7 +14,7 @@
         xmlns:classes="clr-namespace:Capture.Workflow.Core.Classes;assembly=Capture.Workflow.Core"
         mc:Ignorable="d"
                       x:Name="WorkflowEditorWindow"
-        Title="WorkflowEditorView" Height="800" Width="1200">
+        Title="WorkflowEditorView" Height="800" Width="1200" Closing="WorkflowEditorWindow_Closing">
     <Window.DataContext>
         <viewModel:WorkflowEditorViewModel/>
     </Window.DataContext>
@@ -50,13 +48,12 @@
                                     HorizontalAlignment="Right" Margin="16"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
                     <StackPanel>
-                        <MenuItem Header="New"/>
+                        <!--<MenuItem Header="New"/>-->
                         <MenuItem Header="Open ..." Command="{Binding LoadCommand}"/>
                         <MenuItem Header="Save" Command="{Binding SaveCommand}"/>
                         <MenuItem Header="Save As ..." Command="{Binding SaveAsCommand}"/>
                         <MenuItem Header="Create package ..." Command="{Binding SavePackageCommand}"/>
                     </StackPanel>
-
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -71,9 +68,9 @@
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                         x:Name="MenuToggleButton"/>
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{Binding PreviewViewCommand}" ToolTip="Preview current view">
+                            <!--<Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{Binding PreviewViewCommand}" ToolTip="Preview current view">
                                 <materialDesign:PackIcon Kind="Eye"  Margin="8 0 0 0"/>
-                            </Button>
+                            </Button>-->
 
                             <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{Binding RunCommand}" ToolTip="Run workflow">
                                 <materialDesign:PackIcon Kind="Play" Margin="8 0 0 0" />

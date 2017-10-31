@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Capture.Workflow"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -45,8 +44,8 @@
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
                                 <Button Content="Create New Workflow" Command="{Binding NewCommand}"/>
-                                <Separator/>
-                                <Button Content="Settings" Command="{Binding EditCommand}"/>
+                                <!--<Separator/>
+                                <Button Content="Settings" Command="{Binding EditCommand}"/>-->
 
                             </StackPanel>
                         </materialDesign:PopupBox>
@@ -54,7 +53,7 @@
                     </DockPanel>
                 </materialDesign:ColorZone>
 
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding WorkFlows}" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -63,12 +62,12 @@
                         </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card  Margin="4 4 0 0" Width="300">
+                                <materialDesign:Card  Margin="4" Width="280" Height="360">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="240" />
                                             <RowDefinition Height="*" />
-                                            <RowDefinition Height="Auto" />
+                                            <!--<RowDefinition Height="80" />-->
                                         </Grid.RowDefinitions>
                                         <Image Source="{Binding Path=Workflow,Converter={StaticResource WorkflowToCardBitmapConverter}}" Stretch="Fill" />
                                         <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
@@ -76,16 +75,17 @@
                                                 Margin="0 0 16 -20" Command="{Binding ElementName=MainWindow1,Path=DataContext.RunCommand}" CommandParameter="{Binding}">
                                             <materialDesign:PackIcon Kind="Play" Height="25" Width="25"/>
                                         </Button>
-                                        <StackPanel Grid.Row="1" Margin="8 24 8 0" >
+                                        <StackPanel Grid.Row="1" Margin="8 8 8 0" VerticalAlignment="Top">
                                             <TextBlock FontWeight="Bold" Text="{Binding Workflow.Name}"/>
                                             <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Workflow.Description}"/>
                                         </StackPanel>
                                         
-                                        <StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal" Margin="8">
+                                        <StackPanel HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal" Margin="8" VerticalAlignment="Bottom">
 
                                             <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
                                                 <StackPanel>
                                                     <Button Content="Edit" IsEnabled="{Binding IsEditable}" Command="{Binding ElementName=MainWindow1,Path=DataContext.EditCommand}" CommandParameter="{Binding}"/>
+                                                    <Button Content="Revert" IsEnabled="{Binding IsRevertable}" Command="{Binding ElementName=MainWindow1,Path=DataContext.RevertCommand}" CommandParameter="{Binding}"/>
                                                 </StackPanel>
                                             </materialDesign:PopupBox>
                                         </StackPanel>

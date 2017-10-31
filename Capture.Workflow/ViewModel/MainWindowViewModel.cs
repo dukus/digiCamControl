@@ -18,6 +18,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand NewCommand { get; set; }
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
+        public RelayCommand<WorkFlowItem> RevertCommand { get; set; }
 
 
         public AsyncObservableCollection<WorkFlowItem> WorkFlows
@@ -36,6 +37,7 @@ namespace Capture.Workflow.ViewModel
             EditCommand = new RelayCommand<WorkFlowItem>(Edit);
             RunCommand = new RelayCommand<WorkFlowItem>(Run);
             NewCommand = new RelayCommand(New);
+            RevertCommand = new RelayCommand<WorkFlowItem>(Revert);
             if (!IsInDesignMode)
             {
                 // copy default workflows from install folder
@@ -46,6 +48,23 @@ namespace Capture.Workflow.ViewModel
                 ServiceProvider.Instance.DeviceManager.ConnectToCamera();
                 LoadWorkFlows();
             }
+        }
+
+        private void Revert(WorkFlowItem obj)
+        {
+            if(!obj.IsRevertable)
+                return;
+            try
+            {
+                var file = Path.GetFileName(obj.File);
+                File.Copy(Path.Combine(Settings.Instance.DefaultWorkflowFolder, file), obj.File, true);
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Unable to revert", e);
+                MessageBox.Show("Unable to revert workflow.");
+            }
+            LoadWorkFlows();
         }
 
         private void CopyDefaultWorkFlows()
@@ -116,6 +135,7 @@ namespace Capture.Workflow.ViewModel
             files = Directory.GetFiles(Settings.Instance.WorkflowFolder, "*.cwxml");
             foreach (var file in files)
             {
+                var fileName = Path.GetFileName(file);
                 try
                 {
                     WorkFlowItem item = new WorkFlowItem()
@@ -123,8 +143,8 @@ namespace Capture.Workflow.ViewModel
                         Workflow = WorkflowManager.Instance.Load(file),
                         IsEditable = true,
                         IsPackage = false,
-                        File = file
-
+                        File = file,
+                        IsRevertable = File.Exists(Path.Combine(Settings.Instance.DefaultWorkflowFolder, fileName))
                     };
                     WorkFlows.Add(item);
                 }

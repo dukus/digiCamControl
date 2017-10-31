@@ -23,6 +23,7 @@ namespace Capture.Workflow.Classes
         }
 
         public bool IsEditable { get; set; }
+        public bool IsRevertable { get; set; }
         public bool IsPackage { get; set; }
         public string File { get; set; }
     }

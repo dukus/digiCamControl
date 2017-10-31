@@ -149,7 +149,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CameraAction.cs" />
     <Compile Include="Commands\CheckCameraAction.cs" />
@@ -157,10 +156,11 @@
     <Compile Include="Commands\ImageProcessing\BlackAndWhiteAction.cs" />
     <Compile Include="Commands\ImageProcessing\BrightnessAction.cs" />
     <Compile Include="Commands\ImageProcessing\FlipAction.cs" />
+    <Compile Include="Commands\ImageProcessing\ResizeAction.cs" />
     <Compile Include="Commands\ImageProcessing\RotateAction.cs" />
     <Compile Include="Commands\ImageProcessing\SaveFileAction.cs" />
     <Compile Include="Commands\MathAction.cs" />
-    <Compile Include="Commands\ShowMessageAction.cs" />
+    <Compile Include="Commands\DialogAction.cs" />
     <Compile Include="Commands\TriggerEvent.cs" />
     <Compile Include="Commands\WorkflowAction.cs" />
     <Compile Include="Commands\WaitAction.cs" />

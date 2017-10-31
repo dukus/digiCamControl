@@ -40,7 +40,7 @@ namespace Capture.Workflow.Plugins.Views
 
         public override UserControl GetPreview(WorkFlowView view, Context context)
         {
-            var model = new StartSctreenViewModel();
+            var model = new StartScreenViewModel();
             foreach (var element in view.Elements)
             {
                 switch (element.Properties["Position"].Value)

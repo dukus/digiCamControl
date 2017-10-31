@@ -13,7 +13,7 @@ namespace Capture.Workflow.Plugins.Commands
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("CheckCameraAction")]
+    [DisplayName("CheckCamera")]
     public class CheckCameraAction: BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

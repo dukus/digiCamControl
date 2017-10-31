@@ -271,7 +271,7 @@ namespace Capture.Workflow.Core
             }
             catch (Exception ex)
             {
-                Log.Error("Unable to load plugins");
+                Log.Error("Unable to load plugins", ex);
             }
         }
 

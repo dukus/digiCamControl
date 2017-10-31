@@ -9,9 +9,9 @@ using CameraControl.Devices.Classes;
 
 namespace Capture.Workflow.Plugins.Views.ViewModel
 {
-    public class StartSctreenViewModel: BaseViewModel
+    public class StartScreenViewModel: BaseViewModel
     {
-        public StartSctreenViewModel()
+        public StartScreenViewModel()
         {
             CenterElements = new ObservableCollection<FrameworkElement>();
             BottomLeftElements = new ObservableCollection<FrameworkElement>();

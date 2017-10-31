@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <viewModel:StartSctreenViewModel/>
+        <viewModel:StartScreenViewModel/>
     </UserControl.DataContext>    
     <Grid>
         <ItemsControl ItemsSource="{Binding BackGroundElements }" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

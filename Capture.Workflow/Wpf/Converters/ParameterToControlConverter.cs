@@ -23,15 +23,16 @@ namespace Capture.Workflow.Wpf.Converters
             if (property != null)
                 switch (property.PropertyType)
                 {
-                    case CustomPropertyType.Number:
-                        NumericUpDown numericUpDown = new NumericUpDown();
-                        numericUpDown.Minimum = property.RangeMin;
-                        numericUpDown.Maximum = property.RangeMax;
-                        numericUpDown.DataContext = property;
-                        numericUpDown.SetBinding(NumericUpDown.ValueProperty, "Value");
-                        return numericUpDown;
+                    //case CustomPropertyType.Number:
+                    //    NumericUpDown numericUpDown = new NumericUpDown();
+                    //    numericUpDown.Minimum = property.RangeMin;
+                    //    numericUpDown.Maximum = property.RangeMax;
+                    //    numericUpDown.DataContext = property;
+                    //    numericUpDown.SetBinding(NumericUpDown.ValueProperty, "Value");
+                    //    return numericUpDown;
                     case CustomPropertyType.Code:
                     case CustomPropertyType.String:
+                    case CustomPropertyType.Number:
                     {
                         TextBox text = new TextBox();
                         text.DataContext = property;

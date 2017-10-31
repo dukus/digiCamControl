@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
@@ -13,8 +8,8 @@ namespace Capture.Workflow.Plugins.Commands
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("ShowMessage")]
-    public class ShowMessageAction : BaseCommand, IWorkflowCommand
+    [DisplayName("Dialog")]
+    public class DialogAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()
         {
@@ -26,6 +21,13 @@ namespace Capture.Workflow.Plugins.Commands
             });
             command.Properties.Add(new CustomProperty()
             {
+                Description = "Display a dialog with Yes/No buttons, No will abort the commands executions",
+                Name = "YesNo",
+                PropertyType = CustomPropertyType.Bool
+            });
+            command.Properties.Add(new CustomProperty()
+            {
+                Description = "If checked, after message show, will abort the commands executions",
                 Name = "Error",
                 PropertyType = CustomPropertyType.Bool
             });
@@ -37,7 +39,14 @@ namespace Capture.Workflow.Plugins.Commands
             if (!CheckCondition(command, context))
                 return true;
             if (!string.IsNullOrEmpty(command.Properties["Message"].ToString(context)))
-                MessageBox.Show(command.Properties["Message"].ToString(context));
+                if (command.Properties["YesNo"].ToBool(context))
+                {
+                    return MessageBox.Show(command.Properties["Message"].ToString(context),"",MessageBoxButton.YesNo,MessageBoxImage.Question)==MessageBoxResult.Yes;
+                }
+                else
+                {
+                    MessageBox.Show(command.Properties["Message"].ToString(context));
+                }
             return !command.Properties["Error"].ToBool(context);
         }
     }

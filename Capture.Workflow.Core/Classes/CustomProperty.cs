@@ -57,8 +57,16 @@ namespace Capture.Workflow.Core.Classes
         public int ToInt(Context context)
         {
             int val = 0;
-            int.TryParse(ToString(context), out val);
+            var strVal = ToString(context);
+            if (IsPercentage(context))
+                strVal = strVal.Replace("%", "");
+            int.TryParse(strVal, out val);
             return val;
+        }
+
+        public bool IsPercentage(Context context)
+        {
+            return ToString(context).Trim().EndsWith("%");
         }
 
         public string ToString(Context context)

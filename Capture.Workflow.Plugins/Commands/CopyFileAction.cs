@@ -10,7 +10,7 @@ namespace Capture.Workflow.Plugins.Commands
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("CopyFileAction")]
+    [DisplayName("CopyFile")]
     public class CopyFileAction : BaseCommand, IWorkflowCommand
     {
         
