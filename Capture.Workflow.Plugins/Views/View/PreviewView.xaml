@@ -6,10 +6,8 @@
              xmlns:viewModel="clr-namespace:Capture.Workflow.Plugins.Views.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewModel:PreviewViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <viewModel:PreviewViewModel/>
-    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

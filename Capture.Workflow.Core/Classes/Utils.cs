@@ -124,6 +124,27 @@ namespace Capture.Workflow.Core.Classes
             return smoothedValues;
         }
 
+
+        /// <summary>
+        /// Delete the file
+        /// Error safe will not throw any exception  
+        /// </summary>
+        /// <param name="file">Full path of the file name</param>
+        public static void DeleteFile(string file)
+        {
+            try
+            {
+                if (!File.Exists(file))
+                    return;
+                WaitForFile(file);
+                File.Delete(file);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to delete file "+file,e);
+            }
+        }
+
         public static void WaitForFile(string file)
         {
             if (!File.Exists(file))

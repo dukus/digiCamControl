@@ -20,6 +20,9 @@
         public const string NextPhoto = "NextPhoto";
         public const string PrevPhoto = "PrevPhoto";
         public const string DeletePhoto = "DeletePhoto";
-
+        /// <summary>
+        /// Remove all phots from list
+        /// </summary>
+        public const string ClearPhotos = "ClearPhotos";
     }
 }

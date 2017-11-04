@@ -60,7 +60,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             {
                 WorkflowManager.Instance.SelectedItem = value;
                 RaisePropertyChanged(() => FileItem);
-                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ThumbCreate,null ));
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ThumbCreate, null));
 
             }
         }
@@ -110,6 +110,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                 case Messages.NextPhoto:
                 case Messages.PrevPhoto:
                 case Messages.DeletePhoto:
+                case Messages.ClearPhotos:
                     {
                     RaisePropertyChanged(() => FileItem);
                     RaisePropertyChanged(() => Bitmap);
@@ -121,7 +122,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public void Dispose()
         {
-            WorkflowManager.ExecuteAsync(View.GetEventCommands("UnLoad"), WorkflowManager.Instance.Context);
+            WorkflowManager.Execute(View.GetEventCommands("UnLoad"), WorkflowManager.Instance.Context);
             WorkflowManager.Instance.Message -= Instance_Message;
         }
     }

@@ -154,6 +154,8 @@ namespace Capture.Workflow.Core
         {
             try
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 string tempFile = Path.Combine(Settings.Instance.TempFolder, Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
 
                 Utils.CreateFolder(tempFile);
@@ -168,21 +170,17 @@ namespace Capture.Workflow.Core
                     Thumb = Utils.LoadImage(tempFile, 200),
                     Variables = Context.WorkFlow.Variables.GetItemVariables()
                 };
-                
                 FileItems.Add(item);
                 FileItem = item;
-                //item.ThumbFile = Path.GetTempFileName();
                 Context.FileItem = FileItem;
 
-                //Utils.Save2Jpg(Utils.LoadImage(tempFile, 800, 0), item.ThumbFile);
-                var bitmap = Utils.LoadImage(tempFile);
-                using (MemoryStream stream = new MemoryStream())
+                Utils.WaitForFile(tempFile);
+                using (MemoryStream stream = new MemoryStream(File.ReadAllBytes(tempFile)))
                 {
-                    Utils.Save2Jpg(bitmap, stream);
                     Context.FileItem = item;
                     Context.ImageStream = stream;
-                    OnMessage(new MessageEventArgs(Messages.FileTransferred, Context) { Context = Context });
                     OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem) { Context = Context });
+                    OnMessage(new MessageEventArgs(Messages.FileTransferred, Context) { Context = Context });
                 }
             }
             catch (Exception ex)
@@ -510,6 +508,7 @@ namespace Capture.Workflow.Core
 
         public virtual void OnMessage(MessageEventArgs e)
         {
+            Console.WriteLine(e.Name);
             switch (e.Name)
             {
                 case Messages.StartLiveView:
@@ -559,6 +558,7 @@ namespace Capture.Workflow.Core
                         return;
                     var i = FileItems.IndexOf(SelectedItem);
                     FileItems.Remove(SelectedItem);
+                    SelectedItem.Clear();
                     if (i >= FileItems.Count)
                         i--;
                     if (i >= 0 && FileItems.Count > 0)
@@ -566,6 +566,17 @@ namespace Capture.Workflow.Core
                     UpdateThumbAsync();
                 }
                     break;
+                case Messages.ClearPhotos:
+                {
+                    foreach (var item in FileItems)
+                    {
+                        item.Clear();
+                    }
+                    FileItems.Clear();
+                    SelectedItem = null;
+                    UpdateThumbAsync();
+                    break;
+                }
             }
             Message?.Invoke(this, e);
         }

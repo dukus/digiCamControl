@@ -21,10 +21,12 @@ namespace Capture.Workflow.Core.Classes
             Variables = new VariableCollection();
         }
 
+        /// <summary>
+        /// Remove the temporary files and clear all values of the instance 
+        /// </summary>
         public void Clear()
         {
-            Utils.WaitForFile(TempFile);
-            File.Delete(TempFile);
+            Utils.DeleteFile(TempFile);
         }
     }
 }

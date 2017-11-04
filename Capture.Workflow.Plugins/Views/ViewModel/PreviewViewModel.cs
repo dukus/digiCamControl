@@ -9,6 +9,10 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 {
     public class PreviewViewModel: LiveviewViewModel
     {
+        public PreviewViewModel()
+        {
+            
+        }
 
     }
 }
