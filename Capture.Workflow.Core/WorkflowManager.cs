@@ -92,12 +92,15 @@ namespace Capture.Workflow.Core
             set
             {
                 _selectedItem = value;
-                foreach (var variable in _selectedItem.Variables.Items)
+                if (_selectedItem != null)
                 {
-                    var item = Context.WorkFlow.Variables[variable.Name];
-                    if (item != null)
+                    foreach (var variable in _selectedItem.Variables.Items)
                     {
-                        item.AttachedVariable = variable;
+                        var item = Context.WorkFlow.Variables[variable.Name];
+                        if (item != null)
+                        {
+                            item.AttachedVariable = variable;
+                        }
                     }
                 }
             }

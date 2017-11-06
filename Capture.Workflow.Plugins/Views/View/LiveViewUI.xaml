@@ -8,6 +8,9 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewModel:LiveviewViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -26,8 +29,16 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Image Source="{Binding Bitmap}" />
-        <materialDesign:Card Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="4" Margin="4">
+        <TabControl Margin="10">
+            <TabItem Header="Live view">
+                <Image Source="{Binding LiveBitmap}" />
+            </TabItem>
+            <TabItem Header="Preview">
+                <Image Source="{Binding Bitmap}" />
+            </TabItem>
+        </TabControl>
+        
+        <materialDesign:Card Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="4" Margin="4,30">
             <ItemsControl ItemsSource="{Binding LeftElements }" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -55,7 +66,8 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ListBox Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <ListBox Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 Visibility="{Binding FileListVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

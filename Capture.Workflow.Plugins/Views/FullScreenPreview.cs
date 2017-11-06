@@ -5,9 +5,9 @@ using Capture.Workflow.Core.Classes.Attributes;
 
 namespace Capture.Workflow.Plugins.Views
 {
-    [Description("Preview window for captured photos")]
-    [PluginType(PluginType.View)]
-    [DisplayName("Fullscreen")]
+    //[Description("Preview window for captured photos")]
+    //[PluginType(PluginType.View)]
+    //[DisplayName("Fullscreen")]
     public class FullScreenPreview: BaseView
     {
         public override WorkFlowView CreateView()

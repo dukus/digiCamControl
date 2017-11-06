@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converters="clr-namespace:Capture.Workflow.Wpf.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen" PreviewKeyDown="MetroWindow_PreviewKeyDown">
+        Title="Workflow Manager" Height="600" Width="800" WindowStartupLocation="CenterScreen" PreviewKeyDown="MetroWindow_PreviewKeyDown">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
@@ -49,7 +49,7 @@
 
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Workflow</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Workflows</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
 

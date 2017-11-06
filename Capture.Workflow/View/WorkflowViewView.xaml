@@ -7,7 +7,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="WorkflowViewView" Height="300" Width="300" WindowState="{Binding WindowState, Mode=TwoWay}" WindowStyle="{Binding WindowStyle, Mode=TwoWay}"  Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen" IgnoreTaskbarOnMaximize="{Binding FullScreen}" ShowTitleBar="{Binding ShowTitleBar}" >
+        Title="{Binding Workflow.Name}" Height="600" Width="600" WindowState="{Binding WindowState, Mode=TwoWay}" WindowStyle="{Binding WindowStyle, Mode=TwoWay}"  Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen" IgnoreTaskbarOnMaximize="{Binding FullScreen}" ShowTitleBar="{Binding ShowTitleBar}" >
     <Window.DataContext>
         <viewModel:WorkflowViewViewModel/>
     </Window.DataContext>
@@ -37,7 +37,10 @@
                     <DockPanel>
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                       x:Name="MenuToggleButton"/>
-                        <ProgressBar DockPanel.Dock="Right" Width="150" Height="20" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
+                        <StackPanel DockPanel.Dock="Right" Width="150">
+                        <ProgressBar  Height="10" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
+                            <ComboBox DockPanel.Dock="Right" Width="150"  Margin="4" ItemsSource="{Binding DeviceManager.ConnectedDevices}" SelectedItem="{Binding CameraDevice}" DisplayMemberPath="DisplayName"/>
+                        </StackPanel>
                         <!--<materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
                                 <Button Content="Create New Workflow" Command="{Binding EditCommand}"/>

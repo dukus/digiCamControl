@@ -64,6 +64,8 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public CameraDeviceManager DeviceManager => ServiceProvider.Instance.DeviceManager;
+
         public bool TitleBar
         {
             get { return _titleBar; }
@@ -138,6 +140,10 @@ namespace Capture.Workflow.ViewModel
                 }
                 ShowView(Workflow.Views[0].Name);
             }
+            else
+            {
+                TitleBar = true;
+            }
         }
 
         private void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
@@ -162,6 +168,7 @@ namespace Capture.Workflow.ViewModel
         {
             if(string.IsNullOrWhiteSpace(viewName))
                 return;
+            Workflow.Variables.SetValue("CurrentView", viewName);
 
             _preView = _currentView;
             _currentView = viewName;

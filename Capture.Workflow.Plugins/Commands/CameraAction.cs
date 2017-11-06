@@ -25,7 +25,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "Capture", "StartLiveView", "StopLiveView", "Autofocus" }
+                ValueList = new List<string>() { "Capture", "CaptureNoAf", "StartLiveView", "StopLiveView", "Autofocus", "CaptureToPc", "CaptureToCard" }
             });
 
             command.Properties.Add(new CustomProperty()
@@ -51,7 +51,10 @@ namespace Capture.Workflow.Plugins.Commands
                 switch (command.Properties["Action"].Value)
                 {
                     case "Capture":
-                        CaptureAsync();
+                        CaptureAsync(true);
+                        break;
+                    case "CaptureNoAf":
+                        CaptureAsync(false);
                         break;
                     case "StartLiveView":
                         StartLiveView();
@@ -62,6 +65,27 @@ namespace Capture.Workflow.Plugins.Commands
                     case "Autofocus":
                         context.CameraDevice.AutoFocus();
                         break;
+                    case "CaptureToPc":
+                        try
+                        {
+                            context.CameraDevice.CaptureInSdRam = true;
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Debug("Unable to set capture destination PC",e);
+                        }
+                        break;
+                    case "CaptureToCard":
+                        try
+                        {
+                            context.CameraDevice.CaptureInSdRam = false;
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Debug("Unable to set capture destination CARD", e);
+                        }
+                        break;
+
                 }
                 return true;
             }
@@ -73,17 +97,20 @@ namespace Capture.Workflow.Plugins.Commands
         }
 
 
-        private void CaptureAsync()
+        private void CaptureAsync(bool autoFocus)
         {
-            Task.Factory.StartNew(CaptureCamera);
+            Task.Factory.StartNew(()=>CaptureCamera(autoFocus));
         }
 
-        private void CaptureCamera()
+        private void CaptureCamera(bool autoFocus)
         {
             try
             {
-                WorkflowManager.Instance.Context.CameraDevice.CapturePhoto();
-                Log.Debug("LiveView: Capture Initialization Done");
+                if (autoFocus)
+                    WorkflowManager.Instance.Context.CameraDevice.CapturePhoto();
+                else
+                    WorkflowManager.Instance.Context.CameraDevice.CapturePhotoNoAf();
+                Log.Debug("Camera Action: Capture Initialization Done");
             }
             catch (Exception exception)
             {

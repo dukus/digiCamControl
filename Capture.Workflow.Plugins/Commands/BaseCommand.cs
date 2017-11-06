@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Capture.Workflow.Core.Classes;
+﻿using Capture.Workflow.Core.Classes;
 using Jint;
 
 namespace Capture.Workflow.Plugins.Commands

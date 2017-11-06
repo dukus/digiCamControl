@@ -22,3 +22,5 @@ _ReSharper.CameraControl.ServerTest
 /.vs/CameraControl/v14
 *.suo
 /Setup/lang.txt
+/Capture.Workflow.Setup/wix/Capture.Workflow.Setup.g.wxs
+/Capture.Workflow.Setup/*.msi

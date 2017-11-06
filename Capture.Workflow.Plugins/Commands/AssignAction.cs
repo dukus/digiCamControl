@@ -14,8 +14,8 @@ namespace Capture.Workflow.Plugins.Commands
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("MathAction")]
-    public class MathAction : BaseCommand, IWorkflowCommand
+    [DisplayName("Assign")]
+    public class AssignAction : BaseCommand, IWorkflowCommand
     {
 
         public WorkFlowCommand CreateCommand()

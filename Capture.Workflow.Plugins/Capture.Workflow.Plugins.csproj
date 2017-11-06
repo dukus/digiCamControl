@@ -159,7 +159,7 @@
     <Compile Include="Commands\ImageProcessing\ResizeAction.cs" />
     <Compile Include="Commands\ImageProcessing\RotateAction.cs" />
     <Compile Include="Commands\ImageProcessing\SaveFileAction.cs" />
-    <Compile Include="Commands\MathAction.cs" />
+    <Compile Include="Commands\AssignAction.cs" />
     <Compile Include="Commands\DialogAction.cs" />
     <Compile Include="Commands\TriggerEvent.cs" />
     <Compile Include="Commands\WorkflowAction.cs" />
