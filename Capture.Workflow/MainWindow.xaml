@@ -86,6 +86,7 @@
                                                 <StackPanel>
                                                     <Button Content="Edit" IsEnabled="{Binding IsEditable}" Command="{Binding ElementName=MainWindow1,Path=DataContext.EditCommand}" CommandParameter="{Binding}"/>
                                                     <Button Content="Revert" IsEnabled="{Binding IsRevertable}" Command="{Binding ElementName=MainWindow1,Path=DataContext.RevertCommand}" CommandParameter="{Binding}"/>
+                                                    <Button Content="Make a copy " IsEnabled="{Binding IsEditable}" Command="{Binding ElementName=MainWindow1,Path=DataContext.CopyCommand}" CommandParameter="{Binding}"/>
                                                 </StackPanel>
                                             </materialDesign:PopupBox>
                                         </StackPanel>

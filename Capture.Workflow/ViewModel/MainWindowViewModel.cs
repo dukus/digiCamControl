@@ -19,7 +19,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
         public RelayCommand<WorkFlowItem> RevertCommand { get; set; }
-
+        public RelayCommand<WorkFlowItem> CopyCommand { get; set; }
 
         public AsyncObservableCollection<WorkFlowItem> WorkFlows
         {
@@ -38,6 +38,8 @@ namespace Capture.Workflow.ViewModel
             RunCommand = new RelayCommand<WorkFlowItem>(Run);
             NewCommand = new RelayCommand(New);
             RevertCommand = new RelayCommand<WorkFlowItem>(Revert);
+            CopyCommand=new RelayCommand<WorkFlowItem>(Copy);
+
             if (!IsInDesignMode)
             {
                 // copy default workflows from install folder
@@ -48,6 +50,16 @@ namespace Capture.Workflow.ViewModel
                 ServiceProvider.Instance.DeviceManager.ConnectToCamera();
                 LoadWorkFlows();
             }
+        }
+
+        private void Copy(WorkFlowItem obj)
+        {
+            var workflow = obj.Workflow;
+            workflow.Name = workflow.Name+" Copy";
+            workflow.Id = Guid.NewGuid().ToString();
+            WorkflowManager.Instance.Save(workflow,
+                Path.Combine(Settings.Instance.WorkflowFolder, workflow.Id + ".cwxml"));
+            LoadWorkFlows();
         }
 
         private void Revert(WorkFlowItem obj)
