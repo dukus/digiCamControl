@@ -18,6 +18,9 @@ namespace Capture.Workflow.Setup
                     new DirFiles(@"*.pdb"),
                     new Dir("Workflows",
                         new DirFiles(@"Workflows\*.*")),
+                    new File("Capture.Workflow.exe",
+                        new FileShortcut("Capture.Workflow", @"%ProgramMenu%\Capture.Workflow") {WorkingDirectory = @"INSTALLDIR"},
+                        new FileShortcut("Capture.Workflow", @"%Desktop%") {WorkingDirectory = @"INSTALLDIR"}),
                     new File("Capture.Workflow.exe")));
 
             project.GUID = new Guid("B83E588B-BD7B-40C9-A78E-4E18E6916EA7");
