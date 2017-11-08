@@ -16,6 +16,8 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private ObservableCollection<FrameworkElement> _rightElements;
         private bool _fileListVisible;
         private BitmapSource _liveBitmap;
+        private bool _preview;
+        private bool _noPreview;
 
         public WorkFlowView View { get; set; }
 
@@ -41,13 +43,29 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public bool FileListVisible
         {
-            get { return _fileListVisible; }
+            get { return _fileListVisible && Preview; }
             set
             {
                 _fileListVisible = value;
                 RaisePropertyChanged(() => FileListVisible);
             }
         }
+
+        public bool Preview
+        {
+            get { return _preview; }
+            set
+            {
+                _preview = value;
+                RaisePropertyChanged(()=>Preview);
+                RaisePropertyChanged(() => NoPreview);
+                RaisePropertyChanged(() => FileListVisible);
+            }
+        }
+
+        public bool NoPreview => !Preview;
+        
+
 
         public BitmapSource LiveBitmap
         {

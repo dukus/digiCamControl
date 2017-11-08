@@ -29,7 +29,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <TabControl Margin="10">
+        <TabControl Margin="10" Visibility="{Binding Preview, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TabItem Header="Live view">
                 <Image Source="{Binding LiveBitmap}" />
             </TabItem>
@@ -37,7 +37,9 @@
                 <Image Source="{Binding Bitmap}" />
             </TabItem>
         </TabControl>
-        
+
+        <Image Margin="4" Source="{Binding LiveBitmap}" Visibility="{Binding NoPreview, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+               
         <materialDesign:Card Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="4" Margin="4,30">
             <ItemsControl ItemsSource="{Binding LeftElements }" >
                 <ItemsControl.ItemTemplate>

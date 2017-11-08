@@ -38,6 +38,12 @@ namespace Capture.Workflow.Plugins.Views
                 PropertyType = CustomPropertyType.Bool,
                 Value = "True"
             });
+            view.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "NoPreview",
+                PropertyType = CustomPropertyType.Bool,
+                Value = "False"
+            });
             view.Events.Add(new CommandCollection("Load"));
             view.Events.Add(new CommandCollection("UnLoad"));
             return view;
@@ -73,6 +79,7 @@ namespace Capture.Workflow.Plugins.Views
             }
             model.View = view;
             model.FileListVisible = view.Properties["FileListVisible"].ToBool(context);
+            model.Preview = !view.Properties["NoPreview"].ToBool(context);
             var res = new LiveViewUI();
             res.DataContext = model;
             WorkflowManager.ExecuteAsync(view.GetEventCommands("Load"), WorkflowManager.Instance.Context);

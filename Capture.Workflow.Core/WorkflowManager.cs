@@ -209,15 +209,10 @@ namespace Capture.Workflow.Core
                         MemoryStream stream = new MemoryStream(liveViewData.ImageData, liveViewData.ImageDataPosition,
                             liveViewData.ImageData.Length - liveViewData.ImageDataPosition))
                     {
-                        Stopwatch stopwatch = new Stopwatch();
-                        stopwatch.Start();
                         Context.ImageStream = stream;
                         OnMessage(new MessageEventArgs(Messages.LiveViewChanged, new object[] {stream, liveViewData}) {Context = Context});
-                        stopwatch.Stop();
-                        Console.WriteLine(stopwatch.ElapsedMilliseconds);
                         _frames++;
                         var fps = ((double)_frames / (DateTime.Now - _startTime).Seconds);
-                        Console.WriteLine("FPS :" + (_frames / (DateTime.Now - _startTime).Seconds));
                         Context.WorkFlow.Variables.SetValue("Fps", fps.ToString("###.00"));
                     }
                 }
