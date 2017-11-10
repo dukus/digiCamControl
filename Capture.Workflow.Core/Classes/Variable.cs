@@ -73,7 +73,7 @@ namespace Capture.Workflow.Core.Classes
             Value = "";
             DefaultValue = "";
             VariableType = VariableTypeEnum.String;
-            Reinit = true;
+            Reinit = false;
         }
 
         public object GetAsObject()

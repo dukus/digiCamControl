@@ -24,6 +24,7 @@ namespace Capture.Workflow.Plugins.Commands
                 {
                     "ShowView",
                     "FinishSession",
+                    "SaveVariables",
                     "CancelSession",
                     "PreviousView",
                     "UpdateThumb",
@@ -55,6 +56,9 @@ namespace Capture.Workflow.Plugins.Commands
                     break;
                 case "FinishSession":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionFinished, context));
+                    break;
+                case "SaveVariables":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SaveVariables, context));
                     break;
                 case "CancelSession":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.SessionCanceled, context));

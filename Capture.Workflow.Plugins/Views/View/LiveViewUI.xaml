@@ -34,12 +34,36 @@
                 <Image Source="{Binding LiveBitmap}" />
             </TabItem>
             <TabItem Header="Preview">
-                <Image Source="{Binding Bitmap}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding Bitmap}" />
+                    <ListBox Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                         Visibility="{Binding FileListVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid Height="135" Cursor="Hand">
+                                        <Image Source="{Binding Thumb}"  Stretch="Uniform" Margin="3" Height="100"/>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
 
         <Image Margin="4" Source="{Binding LiveBitmap}" Visibility="{Binding NoPreview, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-               
+
         <materialDesign:Card Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="4" Margin="4,30">
             <ItemsControl ItemsSource="{Binding LeftElements }" >
                 <ItemsControl.ItemTemplate>
@@ -68,22 +92,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ListBox Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                 Visibility="{Binding FileListVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Grid Height="135" Cursor="Hand">
-                            <Image Source="{Binding Thumb}"  Stretch="Uniform" Margin="3" Height="100"/>
-                        </Grid>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+
     </Grid>
 </UserControl>

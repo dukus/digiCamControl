@@ -34,6 +34,8 @@ namespace Capture.Workflow
             Log.Debug("------------------------------===========================Application starting===========================------------------------------");
             try
             {
+                ServiceProvider.Instance.DeviceManager.AddFakeCamera();
+                ServiceProvider.Instance.DeviceManager.ConnectToCamera();
                 Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
             }
             catch { }

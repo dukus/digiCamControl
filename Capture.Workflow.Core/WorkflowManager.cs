@@ -492,8 +492,8 @@ namespace Capture.Workflow.Core
         public WorkFlow CreateWorkFlow()
         {
             WorkFlow resflow = new WorkFlow();
-            resflow.Variables.Items.Add(new Variable() {Name = "SessionFolder", Editable = false});
-            resflow.Variables.Items.Add(new Variable() {Name = "FileNameTemplate", Editable = false});
+            resflow.Variables.Items.Add(new Variable() {Name = "SessionFolder", Editable = true});
+            //resflow.Variables.Items.Add(new Variable() {Name = "FileNameTemplate", Editable = false});
             return resflow;
         }
 
@@ -506,7 +506,6 @@ namespace Capture.Workflow.Core
 
         public virtual void OnMessage(MessageEventArgs e)
         {
-            Console.WriteLine(e.Name);
             switch (e.Name)
             {
                 case Messages.StartLiveView:
@@ -520,6 +519,7 @@ namespace Capture.Workflow.Core
                 case Messages.ShowMessage:
                     MessageBox.Show(e.Param.ToString());
                     break;
+                case Messages.SaveVariables:
                 case Messages.SessionFinished:
                     SaveVariables(e.Context.WorkFlow);
                     break;
@@ -605,7 +605,7 @@ namespace Capture.Workflow.Core
 
         public void SaveVariables(WorkFlow workflow)
         {
-            string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + "xml");
+            string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + ".xml");
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(VariableCollection));
@@ -626,7 +626,7 @@ namespace Capture.Workflow.Core
         {
             try
             {
-                string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + "xml");
+                string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + ".xml");
                 if (!File.Exists(file))
                     return;
 

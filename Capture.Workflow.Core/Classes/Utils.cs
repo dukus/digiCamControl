@@ -196,6 +196,10 @@ namespace Capture.Workflow.Core.Classes
             }
         }
 
+        /// <summary>
+        /// Creates the folder for the specified filename
+        /// </summary>
+        /// <param name="filename">The filename.</param>
         public static void CreateFolder(string filename)
         {
             var folder = Path.GetDirectoryName(filename);

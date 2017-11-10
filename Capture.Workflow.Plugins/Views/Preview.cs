@@ -73,6 +73,7 @@ namespace Capture.Workflow.Plugins.Views
             model.View = view;
             var res = new PreviewView();
             model.FileListVisible = view.Properties["FileListVisible"].ToBool(context);
+            model.Preview = true;
             res.DataContext = model;
             WorkflowManager.ExecuteAsync(view.GetEventCommands("Load"), WorkflowManager.Instance.Context);
             return res;
