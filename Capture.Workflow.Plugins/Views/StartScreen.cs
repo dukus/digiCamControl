@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Plugins.Views.View;
@@ -30,6 +31,8 @@ namespace Capture.Workflow.Plugins.Views
                 Name = "ViewTitle",
                 PropertyType = CustomPropertyType.String
             });
+            view.Events.Add(new CommandCollection("Load"));
+            view.Events.Add(new CommandCollection("UnLoad"));
             return view;
         }
 
@@ -40,6 +43,7 @@ namespace Capture.Workflow.Plugins.Views
 
         public override UserControl GetPreview(WorkFlowView view, Context context)
         {
+            WorkflowManager.Execute(view.GetEventCommands("Load"), context);
             var model = new StartScreenViewModel();
             foreach (var element in view.Elements)
             {

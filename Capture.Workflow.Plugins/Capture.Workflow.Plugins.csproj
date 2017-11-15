@@ -149,6 +149,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AssignListAction.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CameraAction.cs" />
     <Compile Include="Commands\CheckCameraAction.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="ViewElements\ComboBoxElement.cs" />
     <Compile Include="ViewElements\ImageElement.cs" />
     <Compile Include="ViewElements\Label.cs" />
+    <Compile Include="ViewElements\SeparatorElement.cs" />
     <Compile Include="ViewElements\SliderElement.cs" />
     <Compile Include="ViewElements\TextElement.cs" />
     <Compile Include="Views\BaseView.cs" />
