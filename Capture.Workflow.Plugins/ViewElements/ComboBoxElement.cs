@@ -114,6 +114,12 @@ namespace Capture.Workflow.Plugins.ViewElements
                 PropertyType = CustomPropertyType.Color,
                 Value = "Transparent"
             });
+            element.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "Editable",
+                PropertyType = CustomPropertyType.Bool,
+                Value = "True"
+            });
             return element;
         }
 
@@ -130,7 +136,9 @@ namespace Capture.Workflow.Plugins.ViewElements
 
             comboBox.ItemsSource = viewElement.Properties["ValueList"].ToString(context).Split('|');
             comboBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].ToString(context)]; 
-            comboBox.SetBinding(ComboBox.SelectedValueProperty, "Value");
+            comboBox.SetBinding(ComboBox.TextProperty, "Value");
+            comboBox.IsEditable = viewElement.Properties["Editable"].ToBool(context);
+
 
             if (viewElement.Properties["BackgroundColor"].ToString(context) != "Transparent" &&
                 viewElement.Properties["BackgroundColor"].ToString(context) != "#00FFFFFF")

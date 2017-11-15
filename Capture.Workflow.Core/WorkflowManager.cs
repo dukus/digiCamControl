@@ -14,6 +14,7 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
+using Capture.Workflow.Core.Database;
 using Capture.Workflow.Core.Interface;
 using GalaSoft.MvvmLight;
 using Ionic.Zip;
@@ -57,7 +58,7 @@ namespace Capture.Workflow.Core
         }
 
         public Context Context { get; set; }
-
+        public SqliteDatabase Database { get; set; }
 
         public static void ExecuteAsync(CommandCollection collection, Context context)
         {
@@ -126,7 +127,41 @@ namespace Capture.Workflow.Core
             _liveViewTimer.Tick += _liveViewTimer_Tick;
             ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             FileItems = new AsyncObservableCollection<FileItem>();
+            ConfigureDatabase();
         }
+
+        public void ConfigureDatabase()
+        {
+            try
+            {
+                //Database = new Database.Database(Path.Combine(Settings.DataFolder, "database.db"));
+                Database = new SqliteDatabase(Path.Combine(Settings.DataPath, "database.db"));
+            }
+            catch (DllNotFoundException ex)
+            {
+                Log.Error(
+                    $"Error(ignored): Database at {Path.Combine(Settings.DataPath, "database.db")}: {ex.Message}",
+                    null);
+            }
+            catch (SQLite.SQLiteException exception)
+            {
+                Log.Error("Unable to open database ", exception);
+                try
+                {
+                    File.Delete(Path.Combine(Settings.DataPath, "database.db"));
+                    Database = new SqliteDatabase(Path.Combine(Settings.DataPath, "database.db"));
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Unable to create database ", e);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to create database ", exception);
+            }
+        }
+
 
         public BitmapSource GetLargeThumbnail(FileItem item)
         {
