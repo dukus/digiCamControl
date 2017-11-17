@@ -47,7 +47,7 @@ namespace Capture.Workflow.Plugins.Commands
             Smart.Default.Settings.ConvertCharacterStringLiterals = false;
             var filename = command.Properties["FileNameTemplate"].ToString(context);
 
-            filename = filename + Path.GetExtension(context.FileItem.TempFile);
+            filename = filename + Path.GetExtension(context.FileItem.TempFile).ToLower();
             if (command.Properties["EnqueueAction"].ToBool(context))
             {
                 var file = Path.Combine(Settings.Instance.QueueFolder, Path.GetRandomFileName());
