@@ -7,14 +7,17 @@ namespace Capture.Workflow.Core.Database
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Action { get; set; }
+        public string SourceFile { get; set; }
 
+        public string Action { get; set; }
+        
         public string ActionParam { get; set; }
 
         public bool? Done { get; set; }
 
-        public DbQueue(string action, string param)
+        public DbQueue(string sourceFile,string action, string param)
         {
+            SourceFile = sourceFile;
             Action = action;
             ActionParam = param;
             Done = false;

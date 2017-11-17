@@ -181,6 +181,7 @@
     <Compile Include="Interface\IViewElementPlugin.cs" />
     <Compile Include="Interface\IViewPlugin.cs" />
     <Compile Include="Interface\IWorkflowCommand.cs" />
+    <Compile Include="Interface\IWorkflowQueueCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\SQLite.cs" />

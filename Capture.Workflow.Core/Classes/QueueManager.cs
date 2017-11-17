@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Capture.Workflow.Core.Database;
+using Capture.Workflow.Core.Interface;
 using GalaSoft.MvvmLight;
 
 namespace Capture.Workflow.Core.Classes
@@ -17,6 +19,9 @@ namespace Capture.Workflow.Core.Classes
         private static QueueManager _instance;
         private object _sync = new object();
         private bool _isActive;
+
+        private Dictionary<string, IWorkflowQueueCommand> _loadedCommands =
+            new Dictionary<string, IWorkflowQueueCommand>();
 
         public static QueueManager Instance
         {
@@ -93,6 +98,18 @@ namespace Capture.Workflow.Core.Classes
                     Count = items.Count;
                     foreach (var item in items)
                     {
+                        IWorkflowQueueCommand command;
+                        if (_loadedCommands.ContainsKey(item.Action))
+                        {
+                            command = _loadedCommands[item.Action];
+                        }
+                        else
+                        {
+                            command = WorkflowManager.Instance.GetQueueCommandPlugin(item.Action);
+                            _loadedCommands.Add(item.Action, command);
+                        }
+
+                        item.Done = command.ExecuteQueue(item);
 
                         if (item.Done == true)
                         {

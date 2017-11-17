@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:converters="clr-namespace:Capture.Workflow.Wpf.Converters"
-             xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
-             StartupUri="MainWindow.xaml" Startup="Application_Startup">
+             StartupUri="MainWindow.xaml" Startup="Application_Startup" SessionEnding="Application_SessionEnding">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -46,7 +45,6 @@
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:StringToIconConverter x:Key="StringToIconConverter"/>
-            <wpf:NotEqualityToVisibilityConverter x:Key="NotEqualityToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

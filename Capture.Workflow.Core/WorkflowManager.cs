@@ -128,6 +128,7 @@ namespace Capture.Workflow.Core
             ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             FileItems = new AsyncObservableCollection<FileItem>();
             ConfigureDatabase();
+            QueueManager.Instance.Start();
         }
 
         public void ConfigureDatabase()
@@ -522,6 +523,12 @@ namespace Capture.Workflow.Core
         public IWorkflowCommand GetCommandPlugin(string className)
         {
             return (IWorkflowCommand)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+        }
+
+        public IWorkflowQueueCommand GetQueueCommandPlugin(string pluginName)
+        {
+            var className = Plugins.Where(x => x.Name == pluginName).Select(x => x.Class).FirstOrDefault();
+            return (IWorkflowQueueCommand)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
         }
 
         public WorkFlow CreateWorkFlow()

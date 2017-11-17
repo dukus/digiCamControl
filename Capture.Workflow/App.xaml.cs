@@ -21,8 +21,8 @@ namespace Capture.Workflow
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            WorkflowManager.Instance.LoadPlugins("Capture.Workflow.Plugins.dll");
             Configure(Path.Combine(Settings.Instance.LogFolder, "app.log"));
+            WorkflowManager.Instance.LoadPlugins("Capture.Workflow.Plugins.dll");
         }
 
         public static void Configure(string logFile)
@@ -34,9 +34,9 @@ namespace Capture.Workflow
             Log.Debug("------------------------------===========================Application starting===========================------------------------------");
             try
             {
+                Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
                 ServiceProvider.Instance.DeviceManager.AddFakeCamera();
                 ServiceProvider.Instance.DeviceManager.ConnectToCamera();
-                Log.Debug("Application version : " + Assembly.GetEntryAssembly().GetName().Version);
             }
             catch { }
         }
@@ -80,6 +80,11 @@ namespace Capture.Workflow
                 BasicConfigurator.Configure(ta);
 #endif
             }
+        }
+
+        private void Application_SessionEnding(object sender, SessionEndingCancelEventArgs e)
+        {
+            QueueManager.Instance.Stop();
         }
 
     }
