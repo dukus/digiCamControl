@@ -9,6 +9,7 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("Dialog")]
+    [Icon("CommentQuestionOutline")]
     public class DialogAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()
@@ -27,7 +28,7 @@ namespace Capture.Workflow.Plugins.Commands
             });
             command.Properties.Add(new CustomProperty()
             {
-                Description = "If checked, after message show, will abort the commands executions",
+                Description = "If checked, after message show, will abort the command list executions",
                 Name = "Error",
                 PropertyType = CustomPropertyType.Bool
             });

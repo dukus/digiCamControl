@@ -41,14 +41,19 @@
                     <DockPanel>
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                       x:Name="MenuToggleButton"/>
-                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                            <StackPanel>
-                                <Button Content="Create New Workflow" Command="{Binding NewCommand}"/>
-                                <!--<Separator/>
+                        <StackPanel  DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Label VerticalAlignment="Center" Content="{Binding QueueManager.Count}" ToolTip="{Binding QueueManager.ErrorMessage}"/>
+                            <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                                <StackPanel>
+                                    <Button Content="Create New Workflow" Command="{Binding NewCommand}"/>
+                                    <Separator/>
+                                    <Button Content="Locate log file" Command="{Binding LocateLogCommand}"/>
+                                    <!--<Separator/>
                                 <Button Content="Settings" Command="{Binding EditCommand}"/>-->
 
-                            </StackPanel>
-                        </materialDesign:PopupBox>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Workflows</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
@@ -60,7 +65,7 @@
                                 <WrapPanel Orientation="Horizontal"  />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <materialDesign:Card  Margin="4" Width="280" Height="360">
                                     <Grid>
@@ -69,17 +74,20 @@
                                             <RowDefinition Height="*" />
                                             <!--<RowDefinition Height="80" />-->
                                         </Grid.RowDefinitions>
+                                      
+                                        <Image Stretch="Fill" Source="Images/camera.png" />
                                         <Image Source="{Binding Path=Workflow,Converter={StaticResource WorkflowToCardBitmapConverter}}" Stretch="Fill" />
+                                        
                                         <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
                                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                                 Margin="0 0 16 -20" Command="{Binding ElementName=MainWindow1,Path=DataContext.RunCommand}" CommandParameter="{Binding}">
                                             <materialDesign:PackIcon Kind="Play" Height="25" Width="25"/>
                                         </Button>
                                         <StackPanel Grid.Row="1" Margin="8 8 8 0" VerticalAlignment="Top">
-                                            <TextBlock FontWeight="Bold" Text="{Binding Workflow.Name}"/>
+                                            <TextBlock FontWeight="Bold" Text="{Binding Workflow.Name}" FontSize="15"/>
                                             <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Workflow.Description}"/>
                                         </StackPanel>
-                                        
+
                                         <StackPanel HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal" Margin="8" VerticalAlignment="Bottom">
 
                                             <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}" Padding="2 0 2 0">
@@ -96,7 +104,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-                
+
 
             </Grid>
         </materialDesign:DrawerHost>

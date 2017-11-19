@@ -9,6 +9,7 @@ using Capture.Workflow.Core.Classes;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using log4net.Util;
 
 namespace Capture.Workflow.ViewModel
 {
@@ -16,6 +17,8 @@ namespace Capture.Workflow.ViewModel
     {
         private AsyncObservableCollection<WorkFlowItem> _workFlows;
         public RelayCommand NewCommand { get; set; }
+        public RelayCommand LocateLogCommand { get; set; }
+
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
         public RelayCommand<WorkFlowItem> RevertCommand { get; set; }
@@ -31,6 +34,7 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public QueueManager QueueManager => QueueManager.Instance;
 
         public MainWindowViewModel()
         {
@@ -39,6 +43,7 @@ namespace Capture.Workflow.ViewModel
             NewCommand = new RelayCommand(New);
             RevertCommand = new RelayCommand<WorkFlowItem>(Revert);
             CopyCommand=new RelayCommand<WorkFlowItem>(Copy);
+            LocateLogCommand= new RelayCommand(LocateLog);
 
             if (!IsInDesignMode)
             {
@@ -48,6 +53,11 @@ namespace Capture.Workflow.ViewModel
                 ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
                 LoadWorkFlows();
             }
+        }
+
+        private void LocateLog()
+        {
+            Utils.Run(Settings.Instance.LogFolder);
         }
 
         private void Copy(WorkFlowItem obj)

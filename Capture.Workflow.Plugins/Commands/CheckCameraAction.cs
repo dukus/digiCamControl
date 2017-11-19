@@ -14,6 +14,7 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("CheckCamera")]
+    [Icon("CameraSwitch")]
     public class CheckCameraAction: BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

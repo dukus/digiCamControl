@@ -135,7 +135,7 @@
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="30"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <materialDesign:PackIcon Kind="UnfoldMore"/>
+                                                        <materialDesign:PackIcon Kind="ViewQuilt"/>
                                                         <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
@@ -270,7 +270,7 @@
                                                                             <ColumnDefinition Width="*"/>
                                                                             <ColumnDefinition Width="30"/>
                                                                         </Grid.ColumnDefinitions>
-                                                                        <materialDesign:PackIcon Kind="SwapVertical" Width="24" Height="24"/>
+                                                                        <materialDesign:PackIcon Kind="{Binding PluginInfo.Icon, Converter={StaticResource StringToIconConverter} }" Width="24" Height="24"/>
                                                                         <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center"/>
                                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                                             <StackPanel>
@@ -476,12 +476,12 @@
                                                 <DataTemplate >
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="15"/>
+                                                            <ColumnDefinition Width="30"/>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="30"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <materialDesign:PackIcon Kind="UnfoldMore"/>
-                                                        <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
+                                                        <materialDesign:PackIcon Kind="{Binding PluginInfo.Icon, Converter={StaticResource StringToIconConverter} }" Width="24" Height="24"/>
+                                                        <TextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
                                                                 <Button Content="Remove" Command="{Binding DataContext.DeleteEventCommandCommand, ElementName=WorkflowEditorWindow}"/>
@@ -498,6 +498,11 @@
                                                     <Style TargetType="MenuItem">
                                                         <Setter Property="Command" Value="{Binding DataContext.NewEventCommandCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:WorkflowEditorView}}}"/>
                                                         <Setter Property="CommandParameter" Value="{Binding}"/>
+                                                        <Setter Property="Icon">
+                                                            <Setter.Value>
+                                                                <materialDesign:PackIcon Kind="{Binding PluginInfo.Icon, Converter={StaticResource StringToIconConverter} }" Width="24" Height="24"/>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                     </Style>
                                                 </controls:DropDownButton.ItemContainerStyle>
                                             </controls:DropDownButton>

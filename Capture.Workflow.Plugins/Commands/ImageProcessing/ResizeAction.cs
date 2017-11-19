@@ -11,6 +11,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [PluginType(PluginType.Command)]
     [DisplayName("Resize")]
     [Group("ImageProcessing")]
+    [Icon("MoveResize")]
     public class ResizeAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

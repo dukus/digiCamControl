@@ -10,6 +10,7 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("WorkflowAction")]
+    [Icon("Apps")]
     public class WorkflowAction :BaseCommand, IWorkflowCommand
     {
      

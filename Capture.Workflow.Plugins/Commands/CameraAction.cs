@@ -16,6 +16,7 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("CameraAction")]
+    [Icon("CameraEnhance")]
     public class CameraAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

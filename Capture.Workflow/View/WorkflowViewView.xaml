@@ -6,6 +6,7 @@
         xmlns:viewModel="clr-namespace:Capture.Workflow.ViewModel"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d"
         Title="{Binding Workflow.Name}" Height="600" Width="600" WindowState="{Binding WindowState, Mode=TwoWay}" WindowStyle="{Binding WindowStyle, Mode=TwoWay}"  Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen" IgnoreTaskbarOnMaximize="{Binding FullScreen}" ShowTitleBar="{Binding ShowTitleBar}" >
     <Window.DataContext>
@@ -37,9 +38,12 @@
                     <DockPanel>
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                       x:Name="MenuToggleButton"/>
-                        <StackPanel DockPanel.Dock="Right" Width="150">
-                        <ProgressBar  Height="10" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
-                            <ComboBox DockPanel.Dock="Right" Width="150"  Margin="4" ItemsSource="{Binding DeviceManager.ConnectedDevices}" SelectedItem="{Binding CameraDevice}" DisplayMemberPath="DisplayName"/>
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Label Content="{Binding QueueManager.Count}" ToolTip="{Binding QueueManager.ErrorMessage}" VerticalAlignment="Center"/>
+                            <StackPanel Width="150">
+                                <ProgressBar  Height="10" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
+                                <ComboBox DockPanel.Dock="Right" Width="150"  Margin="4" ItemsSource="{Binding DeviceManager.ConnectedDevices}" SelectedItem="{Binding CameraDevice}" DisplayMemberPath="DisplayName"/>
+                            </StackPanel>
                         </StackPanel>
                         <!--<materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>

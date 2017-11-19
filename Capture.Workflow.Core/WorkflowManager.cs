@@ -290,7 +290,8 @@ namespace Capture.Workflow.Core
                     var attribute = exportedType.GetCustomAttribute<PluginTypeAttribute>();
                     var attributeDes = exportedType.GetCustomAttribute<DescriptionAttribute>();
                     var attributeName = exportedType.GetCustomAttribute<DisplayNameAttribute>();
-                    
+                    var attributeIcon = exportedType.GetCustomAttribute<IconAttribute>();
+
                     if (attribute != null)
                     {
                         Plugins.Add(new PluginInfo()
@@ -298,9 +299,11 @@ namespace Capture.Workflow.Core
                             Type = attribute.PluginType,
                             Class = exportedType.AssemblyQualifiedName,
                             Description = attributeDes?.Description,
-                            Name = attributeName?.DisplayName
+                            Name = attributeName?.DisplayName,
+                            Icon = attributeIcon?.Icon
                         });
                     }
+
                 }
             }
             catch (Exception ex)
@@ -423,6 +426,8 @@ namespace Capture.Workflow.Core
                 event_.PluginInfo = flowEvent.PluginInfo;
                 event_.Name = flowEvent.Name;
                 event_.Properties.CopyValuesFrom(flowEvent.Properties);
+                LoadPluginInfo(event_.PluginInfo);
+
                 foreach (var flowCommand in flowEvent.CommandCollection.Items)
                 {
                     IWorkflowCommand commandPlugin = Instance.GetCommandPlugin(flowCommand.PluginInfo.Class);
@@ -432,6 +437,7 @@ namespace Capture.Workflow.Core
                     wCommand.Name = flowCommand.Name;
                     wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
                     event_.CommandCollection.Items.Add(wCommand);
+                    LoadPluginInfo(flowCommand.PluginInfo);
                 }
                 resflow.Events.Add(event_);
             }
@@ -445,6 +451,7 @@ namespace Capture.Workflow.Core
                 view.PluginInfo = _view.PluginInfo;
                 view.Name = _view.Name;
                 view.Properties.CopyValuesFrom(_view.Properties);
+                LoadPluginInfo(view.PluginInfo);
                 foreach (var viewElement in _view.Elements)
                 {
                     IViewElementPlugin elementplugin = Instance.GetElementPlugin(viewElement.PluginInfo.Class);
@@ -455,6 +462,7 @@ namespace Capture.Workflow.Core
                     element.Name = viewElement.Name;
                     element.Properties.CopyValuesFrom(viewElement.Properties);
                     view.Elements.Add(element);
+                    LoadPluginInfo(element.PluginInfo);
                     foreach (var commandCollection in element.Events)
                     {
                         CommandCollection loadedcommand = null;
@@ -475,6 +483,7 @@ namespace Capture.Workflow.Core
                                 wCommand.Name = flowCommand.Name;
                                 wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
                                 commandCollection.Items.Add(wCommand);
+                                LoadPluginInfo(wCommand.PluginInfo);
                             }
                         }
                     }
@@ -498,6 +507,7 @@ namespace Capture.Workflow.Core
                             wCommand.Name = flowCommand.Name;
                             wCommand.Properties.CopyValuesFrom(flowCommand.Properties);
                             commandCollection.Items.Add(wCommand);
+                            LoadPluginInfo(wCommand.PluginInfo);
                         }
                     }
                 }
@@ -505,6 +515,16 @@ namespace Capture.Workflow.Core
             }
             LoadVariables(resflow);
             return resflow;
+        }
+
+        public void LoadPluginInfo(PluginInfo info)
+        {
+            var item= Plugins.FirstOrDefault(x => x.Name == info.Name);
+            if (item != null)
+            {
+                info.Icon = item.Icon;
+                info.Description = item.Description;
+            }
         }
 
         public IViewPlugin GetViewPlugin(string className)

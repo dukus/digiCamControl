@@ -16,6 +16,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [PluginType(PluginType.Command)]
     [DisplayName("Rotate")]
     [Group("ImageProcessing")]
+    [Icon("Rotate3d")]
     public class RotateAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

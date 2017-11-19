@@ -73,6 +73,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ListBox Grid.Row="1" Grid.Column="0" Margin="4" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
                  Visibility="{Binding FileListVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

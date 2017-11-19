@@ -108,7 +108,7 @@ namespace Capture.Workflow.ViewModel
         }
 
         public bool ShowTitleBar => !FullScreen;
-
+        public QueueManager QueueManager => QueueManager.Instance;
 
 
         public WorkflowViewViewModel()

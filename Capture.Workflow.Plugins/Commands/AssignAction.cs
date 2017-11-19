@@ -15,6 +15,7 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("Assign")]
+    [Icon("Equal")]
     public class AssignAction : BaseCommand, IWorkflowCommand
     {
 

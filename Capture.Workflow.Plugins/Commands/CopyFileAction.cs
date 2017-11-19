@@ -13,6 +13,7 @@ namespace Capture.Workflow.Plugins.Commands
     [Description("")]
     [PluginType(PluginType.Command)]
     [DisplayName("CopyFile")]
+    [Icon("FileRestore")]
     public class CopyFileAction : BaseCommand, IWorkflowCommand, IWorkflowQueueCommand
     {
         

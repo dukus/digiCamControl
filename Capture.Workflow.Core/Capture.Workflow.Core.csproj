@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Attributes\GroupAttribute.cs" />
+    <Compile Include="Classes\Attributes\IconAttribute.cs" />
     <Compile Include="Classes\Attributes\PluginTypeAttribute.cs" />
     <Compile Include="Classes\BaseItem.cs" />
     <Compile Include="Classes\CommandCollection.cs" />
