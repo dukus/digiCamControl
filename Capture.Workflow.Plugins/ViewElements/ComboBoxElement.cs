@@ -50,6 +50,12 @@ namespace Capture.Workflow.Plugins.ViewElements
             });
             element.Properties.Items.Add(new CustomProperty()
             {
+                Name = "ValueListVariable",
+                PropertyType = CustomPropertyType.Variable,
+                Value = ""
+            });
+            element.Properties.Items.Add(new CustomProperty()
+            {
                 Name = "Orientation",
                 PropertyType = CustomPropertyType.ValueList,
                 ValueList = { "Horizontal", "Vertical" },
@@ -133,10 +139,18 @@ namespace Capture.Workflow.Plugins.ViewElements
             };
 
             viewElement.SetSize(comboBox, context);
+            var variable = viewElement.Properties["Variable"].ToString(context);
+            comboBox.DataContext = viewElement.Parent.Parent;
+            if (string.IsNullOrEmpty(viewElement.Properties["ValueListVariable"].ToString(context)))
+            {
+                comboBox.ItemsSource = viewElement.Properties["ValueList"].ToString(context).Split('|');
+            }
+            else
+            {
+                comboBox.SetBinding(ComboBox.ItemsSourceProperty, "Variables[" + viewElement.Properties["ValueListVariable"].ToString(context) + "].ValueList");
+            }
 
-            comboBox.ItemsSource = viewElement.Properties["ValueList"].ToString(context).Split('|');
-            comboBox.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].ToString(context)]; 
-            comboBox.SetBinding(ComboBox.TextProperty, "Value");
+            comboBox.SetBinding(ComboBox.TextProperty, "Variables["+variable+"].Value");
             comboBox.IsEditable = viewElement.Properties["Editable"].ToBool(context);
 
 

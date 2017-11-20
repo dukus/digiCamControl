@@ -94,6 +94,7 @@ namespace Capture.Workflow.Core.Classes
         public void InitVaribleList()
         {
             ValueList = WorkflowManager.Instance.Context.WorkFlow.Variables.Items.Select(x => x.Name).ToList();
+            ValueList.Insert(0, "");
         }
 
         public void InitViewList()

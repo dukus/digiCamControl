@@ -109,7 +109,20 @@ namespace Capture.Workflow.Core.Classes
                             _loadedCommands.Add(item.Action, command);
                         }
 
-                        item.Done = command.ExecuteQueue(item);
+                        try
+                        {
+                            item.Done = command.ExecuteQueue(item);
+                        }
+                        catch (Exception e)
+                        {
+                            // prevent multiple log for same error
+                            if (string.IsNullOrEmpty(ErrorMessage))
+                            {
+                                Log.Error("Queue error", e);
+                            }
+                            ErrorMessage = e.Message;
+                        }
+
 
                         if (item.Done == true)
                         {

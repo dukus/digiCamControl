@@ -74,6 +74,9 @@ namespace Capture.Workflow.ViewModel
         {
             if(!obj.IsRevertable)
                 return;
+            if (MessageBox.Show("If you made any changes, all changes will be reverted !!!\nContinue ?", "Warning",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                return;
             try
             {
                 var file = Path.GetFileName(obj.File);

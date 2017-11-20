@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,7 @@ namespace Capture.Workflow.Core.Classes
         private string _value;
         private string _name;
         private Variable _attachedVariable;
+        private List<string> _valueList;
 
         [XmlAttribute]
         public string Name
@@ -39,9 +41,22 @@ namespace Capture.Workflow.Core.Classes
                 if (AttachedVariable != null)
                     AttachedVariable.Value = _value;
                 OnPropertyChanged(nameof(Value));
+                OnPropertyChanged(nameof(ValueList));
                 WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.VariableChanged, this));
             }
         }
+
+        public List<string> ValueList
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Value) && Value.Contains("|"))
+                    return new List<string>(Value.Split('|'));
+                return new List<string>();
+            }
+
+        }
+
 
         [XmlAttribute]
         public string DefaultValue { get; set; }
