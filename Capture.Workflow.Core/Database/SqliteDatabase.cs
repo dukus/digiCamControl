@@ -40,6 +40,14 @@ namespace Capture.Workflow.Core.Database
             }
         }
 
+        public void Clear()
+        {
+            lock (_locker)
+            {
+                DeleteAll<DbQueue>();
+            }
+        }
+
         public List<DbQueue> GetList()
         {
             lock (_locker)

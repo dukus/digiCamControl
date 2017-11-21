@@ -48,6 +48,7 @@
                                     <Button Content="Create New Workflow" Command="{Binding NewCommand}"/>
                                     <Separator/>
                                     <Button Content="Locate log file" Command="{Binding LocateLogCommand}"/>
+                                    <Button Content="Clear Queue Database" Command="{Binding ClearQueueCommand}"/>
                                     <!--<Separator/>
                                 <Button Content="Settings" Command="{Binding EditCommand}"/>-->
 

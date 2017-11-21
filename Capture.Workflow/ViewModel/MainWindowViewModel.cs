@@ -6,6 +6,7 @@ using CameraControl.Devices.Classes;
 using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
+using Capture.Workflow.Core.Database;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -18,6 +19,7 @@ namespace Capture.Workflow.ViewModel
         private AsyncObservableCollection<WorkFlowItem> _workFlows;
         public RelayCommand NewCommand { get; set; }
         public RelayCommand LocateLogCommand { get; set; }
+        public RelayCommand ClearQueueCommand { get; set; }
 
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
@@ -42,8 +44,9 @@ namespace Capture.Workflow.ViewModel
             RunCommand = new RelayCommand<WorkFlowItem>(Run);
             NewCommand = new RelayCommand(New);
             RevertCommand = new RelayCommand<WorkFlowItem>(Revert);
-            CopyCommand=new RelayCommand<WorkFlowItem>(Copy);
-            LocateLogCommand= new RelayCommand(LocateLog);
+            CopyCommand = new RelayCommand<WorkFlowItem>(Copy);
+            LocateLogCommand = new RelayCommand(LocateLog);
+            ClearQueueCommand = new RelayCommand(ClearQueue);
 
             if (!IsInDesignMode)
             {
@@ -52,6 +55,21 @@ namespace Capture.Workflow.ViewModel
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
                 LoadWorkFlows();
+            }
+        }
+
+        private void ClearQueue()
+        {
+            if (MessageBox.Show("All not executed actions will be cleared !!!\nContinue ?", "Warning",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                return;
+            try
+            {
+                WorkflowManager.Instance.Database.Clear();
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to clear queue database ", e);
             }
         }
 

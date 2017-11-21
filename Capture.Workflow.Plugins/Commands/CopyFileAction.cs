@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using CameraControl.Devices;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
@@ -55,6 +56,7 @@ namespace Capture.Workflow.Plugins.Commands
                 Utils.CreateFolder(file);
                 File.Copy(context.FileItem.TempFile, file, true);
                 WorkflowManager.Instance.Database.Add(new DbQueue(file, "CopyFile", filename));
+                Log.Debug("Adding to queue " + filename);
             }
             else
             {

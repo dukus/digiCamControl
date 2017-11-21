@@ -67,17 +67,19 @@ namespace Capture.Workflow.Core
 
         public static void Execute(CommandCollection collection, Context context)
         {
+            var currCmd = "";
             try
             {
                 foreach (var command in collection.Items)
                 {
+                    currCmd = command.Name;
                     if (!command.Instance.Execute(command, context))
                         return;
                 }
             }
             catch (Exception ex)
             {
-                Log.Debug("Command execution error", ex);
+                Log.Debug("Command execution error "+currCmd, ex);
             }
         }
 
