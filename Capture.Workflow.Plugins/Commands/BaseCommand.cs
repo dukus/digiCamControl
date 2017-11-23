@@ -1,7 +1,7 @@
 ﻿using System;
 using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
-using Jint;
+using Capture.Workflow.Core.Scripting;
 
 namespace Capture.Workflow.Plugins.Commands
 {
@@ -32,14 +32,7 @@ namespace Capture.Workflow.Plugins.Commands
                 if (string.IsNullOrWhiteSpace(command.Properties["Condition"].ToString(context)))
                     return true;
 
-                var var = new Engine();
-
-                foreach (var variable in context.WorkFlow.Variables.Items)
-                {
-                    //e.Parameters[variable.Name] = new Exception(variable.Value);
-                    var.SetValue(variable.Name, variable.GetAsObject());
-                }
-                return var.Execute(command.Properties["Condition"].ToString(context)).GetCompletionValue().AsBoolean();
+                return ScriptEngine.Instance.Evaluate(command.Properties["Condition"].ToString(context), context);
             }
             catch (Exception e)
             {

@@ -4,7 +4,7 @@ using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
-using Jint;
+
 
 namespace Capture.Workflow.Plugins.Commands
 {

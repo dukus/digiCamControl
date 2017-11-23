@@ -126,6 +126,47 @@ namespace Capture.Workflow.Core.Classes
             
         }
 
+        /// <summary>
+        /// Return as CSharp variable definition
+        /// </summary>
+        /// <returns></returns>
+        public string GetAsCsString()
+        {
+            switch (VariableType)
+            {
+                case VariableTypeEnum.String:
+                    return "public string " + Name + " = @\"" + Value + "\"";
+                case VariableTypeEnum.Number:
+                {
+                    double d = 0;
+                    if (double.TryParse(Value, NumberStyles.Any, CultureInfo.InvariantCulture, out d))
+                    {
+                        return "public double " + Name + " = " + Value + "";
+                    }
+                    break;
+                }
+                case VariableTypeEnum.Boolean:
+                {
+                    return "public bool " + Name + " = " + ((Value != null && Value.ToLower().Trim() == "true")
+                               ? "true"
+                               : "false" + "");
+                }
+                case VariableTypeEnum.Date:
+                {
+                        
+                    DateTime dateTime;
+                    if (DateTime.TryParse(Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal,
+                        out dateTime))
+                    {
+                        return "public DateTime " + Name + " = DateTime.FromFileTimeUtc(" + dateTime.ToFileTimeUtc() +
+                               ")";
+                    }
+                    break;
+                }
+            }
+            return "public string " + Name + " = @\"" + Value + "\"";
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

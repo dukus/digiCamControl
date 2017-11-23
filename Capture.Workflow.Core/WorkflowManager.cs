@@ -453,6 +453,7 @@ namespace Capture.Workflow.Core
             foreach (var flowEvent in flow.Events)
             {
                 IEventPlugin plugin = Instance.GetEventPlugin(flowEvent.PluginInfo.Class);
+
                 WorkFlowEvent event_ = plugin.CreateEvent();
                 event_.Parent = resflow;
                 event_.Instance = plugin;
@@ -572,7 +573,8 @@ namespace Capture.Workflow.Core
 
         public IEventPlugin GetEventPlugin(string className)
         {
-            return (IEventPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            var plugin= Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            return (IEventPlugin) plugin;
         }
 
         public IWorkflowCommand GetCommandPlugin(string className)

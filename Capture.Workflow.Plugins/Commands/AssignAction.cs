@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
-using Jint;
+using Capture.Workflow.Core.Scripting;
+
 
 
 namespace Capture.Workflow.Plugins.Commands
@@ -40,16 +41,9 @@ namespace Capture.Workflow.Plugins.Commands
             if (!CheckCondition(command, context))
                 return true;
 
-            var var = new Engine();
-
-            foreach (var variable in context.WorkFlow.Variables.Items)
-            {
-                //e.Parameters[variable.Name] = new Exception(variable.Value);
-                var.SetValue(variable.Name, variable.GetAsObject());
-            }
+            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value =
+                ScriptEngine.Instance.ExecuteLine(command.Properties["Formula"].ToString(context), context);
             
-            context.WorkFlow.Variables[command.Properties["Variable"].Value].Value = var.Execute(command.Properties["Formula"].ToString(context)).GetCompletionValue().ToString(); 
-
             return true;
         }
     }

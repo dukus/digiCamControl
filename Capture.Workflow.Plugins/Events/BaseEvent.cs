@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
-using Jint;
+using Capture.Workflow.Core.Scripting;
+
 
 namespace Capture.Workflow.Plugins.Events
 {
@@ -31,22 +32,16 @@ namespace Capture.Workflow.Plugins.Events
 
         public bool CheckCondition(WorkFlowEvent _event, Context context)
         {
-            if (string.IsNullOrWhiteSpace(_event.Properties["Condition"].ToString(context)))
-                return true;
-
-            var var = new Engine();
-
-            foreach (var variable in context.WorkFlow.Variables.Items)
-            {
-                var.SetValue(variable.Name, variable.GetAsObject());
-            }
             try
             {
-                return var.Execute(_event.Properties["Condition"].ToString(context)).GetCompletionValue().AsBoolean();
+                if (string.IsNullOrWhiteSpace(_event.Properties["Condition"].ToString(context)))
+                    return true;
+
+                return ScriptEngine.Instance.Evaluate(_event.Properties["Condition"].ToString(context), context);
             }
             catch (Exception e)
             {
-                Log.Error("Evaluation error " + _event.Name, e);
+                Log.Error("Event CheckCondition error " + _event.Name, e);
             }
             return false;
         }
