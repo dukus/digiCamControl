@@ -85,6 +85,15 @@ namespace Capture.Workflow.Core.Classes
             });
         }
 
+        public Version GetVersion()
+        {
+            Version result;
+            if (System.Version.TryParse(Version, out result))
+                return result;
+
+            return new Version();
+        }
+
         public Stream GetFileStream(string file)
         {
            

@@ -52,8 +52,15 @@ namespace Capture.Workflow.ViewModel
                 CopyDefaultWorkFlows();
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
                 ServiceProvider.Instance.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
+                ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
                 LoadWorkFlows();
             }
+        }
+
+        private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
+        {
+            MessageBox.Show("Photo capture detected !\nFirst please run a workflow!");
+            Log.Debug("Wrong time capture detected");
         }
 
         private void ClearQueue()
@@ -128,14 +135,38 @@ namespace Capture.Workflow.ViewModel
             var workFlow = obj.IsPackage
                 ? WorkflowManager.Instance.LoadFromPackage(obj.File)
                 : WorkflowManager.Instance.Load(obj.File);
+
+            if (File.Exists(Path.Combine(Settings.Instance.DefaultWorkflowFolder,Path.GetFileName( obj.File))))
+            {
+                var defFile = Path.Combine(Settings.Instance.DefaultWorkflowFolder, Path.GetFileName(obj.File));
+                var defWorkflow= obj.IsPackage
+                    ? WorkflowManager.Instance.LoadFromPackage(defFile)
+                    : WorkflowManager.Instance.Load(defFile);
+
+                if (defWorkflow.GetVersion() > workFlow.GetVersion())
+                {
+                    if (MessageBox.Show("New version is available do  you want update the workflow ?", "Warning",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Revert(obj);
+                        workFlow = obj.IsPackage
+                            ? WorkflowManager.Instance.LoadFromPackage(obj.File)
+                            : WorkflowManager.Instance.Load(obj.File);
+                    }
+                }
+            }
+
             if (workFlow.Views.Count == 0)
             {
                 MessageBox.Show("No view(s) are defined !");
                 return;
             }
+            ServiceProvider.Instance.DeviceManager.PhotoCaptured -= DeviceManager_PhotoCaptured;
             WorkflowManager.Instance.Context.WorkFlow = workFlow;
             WorkflowViewView wnd = new WorkflowViewView();
             wnd.ShowDialog();
+            WorkflowManager.Instance.Context.WorkFlow = null;
+            ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
         }
 
         private void LoadWorkFlows()

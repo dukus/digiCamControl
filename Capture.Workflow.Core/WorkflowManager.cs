@@ -208,11 +208,13 @@ namespace Capture.Workflow.Core
         {
             try
             {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
-                string tempFile = Path.Combine(Settings.Instance.TempFolder, Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
-                // set in varieable the captured file original name
+                // if no workflow loaded do nothing 
+                if (Context?.WorkFlow == null)
+                    return;
 
+                string tempFile = Path.Combine(Settings.Instance.TempFolder, Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
+
+                // set in varieable the captured file original name
                 Context?.WorkFlow?.Variables.SetValue("CapturedFileName", Path.GetFileNameWithoutExtension(eventArgs.FileName));
 
                 Utils.CreateFolder(tempFile);

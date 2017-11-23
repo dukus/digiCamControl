@@ -23,6 +23,7 @@ namespace Capture.Workflow.ViewModel
         private WindowState _windowState;
         private WindowStyle _windowStyle;
         private bool _fullScreen;
+        private string _displayName;
 
         public UserControl Contents
         {
@@ -53,6 +54,17 @@ namespace Capture.Workflow.ViewModel
                 RaisePropertyChanged(() => Title);
             }
         }
+
+        public string DisplayName
+        {
+            get { return _displayName; }
+            set
+            {
+                _displayName = value;
+                RaisePropertyChanged(() => DisplayName);
+            }
+        }
+
 
         public Context Context => WorkflowManager.Instance.Context;
 
@@ -109,6 +121,8 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+
+
         public bool ShowTitleBar => !FullScreen;
         public QueueManager QueueManager => QueueManager.Instance;
 
@@ -123,7 +137,7 @@ namespace Capture.Workflow.ViewModel
                 WindowStyle = Workflow.Properties["FullScreen"].ToBool(context) ? WindowStyle.None : WindowStyle.SingleBorderWindow;
                 FullScreen = Workflow.Properties["FullScreen"].ToBool(context);
                 WindowState = WindowState.Maximized;
-
+                DisplayName = Workflow.Name + " - " + Workflow.Version;
                 new PaletteHelper().SetLightDark(Workflow.Properties["BaseColorScheme"].Value == "Dark");
                 new PaletteHelper().ReplacePrimaryColor(Workflow.Properties["ColorScheme"].Value);
                 CameraDevice = ServiceProvider.Instance.DeviceManager.SelectedCameraDevice;
