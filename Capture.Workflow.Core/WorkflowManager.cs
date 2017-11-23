@@ -127,10 +127,23 @@ namespace Capture.Workflow.Core
             // live view stuff for nikon
             _liveViewTimer.Interval = TimeSpan.FromMilliseconds(20);
             _liveViewTimer.Tick += _liveViewTimer_Tick;
+            ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
             ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             FileItems = new AsyncObservableCollection<FileItem>();
+            FileItems.CollectionChanged += FileItems_CollectionChanged;
             ConfigureDatabase();
             QueueManager.Instance.Start();
+        }
+
+        private void FileItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Context?.WorkFlow?.Variables.SetValue("CapturedFilesCount", FileItems.Count.ToString());
+        }
+
+        private void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
+        {
+            if (Context != null)
+                Context.CameraDevice = cameraDevice;
         }
 
         public void ConfigureDatabase()
@@ -199,7 +212,8 @@ namespace Capture.Workflow.Core
                 stopwatch.Start();
                 string tempFile = Path.Combine(Settings.Instance.TempFolder, Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
                 // set in varieable the captured file original name
-                Context.WorkFlow.Variables.SetValue("CapturedFileName", Path.GetFileNameWithoutExtension(eventArgs.FileName));
+
+                Context?.WorkFlow?.Variables.SetValue("CapturedFileName", Path.GetFileNameWithoutExtension(eventArgs.FileName));
 
                 Utils.CreateFolder(tempFile);
 
@@ -272,7 +286,8 @@ namespace Capture.Workflow.Core
                 if (plugin.Type==type)
                     res.Add(plugin);
             }
-            return res;
+
+            return res.OrderBy(x => x.Name).ToList();
         }
 
 
@@ -296,16 +311,19 @@ namespace Capture.Workflow.Core
 
                     if (attribute != null)
                     {
-                        Plugins.Add(new PluginInfo()
+                        var plugin=new PluginInfo()
                         {
                             Type = attribute.PluginType,
                             Class = exportedType.AssemblyQualifiedName,
                             Description = attributeDes?.Description,
                             Name = attributeName?.DisplayName,
                             Icon = attributeIcon?.Icon
-                        });
-                    }
+                        };
+                        Log.Debug("Loading plugin " + plugin.Type.ToString().PadRight(15) + "=>" +
+                                  plugin.Name.PadRight(25) + "=>" + plugin.Class);
 
+                        Plugins.Add(plugin);
+                    }
                 }
             }
             catch (Exception ex)

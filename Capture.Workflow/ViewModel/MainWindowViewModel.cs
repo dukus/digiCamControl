@@ -6,11 +6,9 @@ using CameraControl.Devices.Classes;
 using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
-using Capture.Workflow.Core.Database;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using log4net.Util;
 
 namespace Capture.Workflow.ViewModel
 {

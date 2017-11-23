@@ -54,6 +54,8 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public Context Context => WorkflowManager.Instance.Context;
+
         public ICameraDevice CameraDevice
         {
             get { return WorkflowManager.Instance.Context.CameraDevice; }

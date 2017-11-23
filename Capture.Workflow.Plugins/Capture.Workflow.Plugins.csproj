@@ -163,10 +163,12 @@
     <Compile Include="Commands\ImageProcessing\SaveFileAction.cs" />
     <Compile Include="Commands\AssignAction.cs" />
     <Compile Include="Commands\DialogAction.cs" />
+    <Compile Include="Commands\ShellExecuteAction.cs" />
     <Compile Include="Commands\TriggerEvent.cs" />
     <Compile Include="Commands\WorkflowAction.cs" />
     <Compile Include="Commands\WaitAction.cs" />
     <Compile Include="Events\BaseEvent.cs" />
+    <Compile Include="Events\CameraConnectedEvent.cs" />
     <Compile Include="Events\CustomEvent.cs" />
     <Compile Include="Events\FileTransfered.cs" />
     <Compile Include="Events\KeyPressedEvent.cs" />

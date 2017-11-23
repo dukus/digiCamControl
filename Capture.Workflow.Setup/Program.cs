@@ -50,7 +50,6 @@ namespace Capture.Workflow.Setup
             Compiler.PreserveTempFiles = false;
 
             project.BuildMsi();
-            project.BuildMsi();
         }
     }
 }

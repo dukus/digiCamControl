@@ -41,8 +41,8 @@
                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                             <Label Content="{Binding QueueManager.Count}" ToolTip="{Binding QueueManager.ErrorMessage}" VerticalAlignment="Center"/>
                             <StackPanel Width="150">
-                                <ProgressBar  Height="10" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
-                                <ComboBox DockPanel.Dock="Right" Width="150"  Margin="4" ItemsSource="{Binding DeviceManager.ConnectedDevices}" SelectedItem="{Binding CameraDevice}" DisplayMemberPath="DisplayName"/>
+                                <ProgressBar  Height="10" Value="{Binding CameraDevice.TransferProgress}" Visibility="{Binding Context.CameraDevice.TransferProgress, Converter={StaticResource EqualityToVisibilityConverter}}"/>
+                                <ComboBox DockPanel.Dock="Right" Width="150"  Margin="4" ItemsSource="{Binding DeviceManager.ConnectedDevices}" SelectedItem="{Binding Context.CameraDevice}" DisplayMemberPath="DisplayName"/>
                             </StackPanel>
                         </StackPanel>
                         <!--<materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">

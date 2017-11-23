@@ -155,6 +155,8 @@ namespace Capture.Workflow.Plugins.ViewElements
                 FontSize = viewElement.Properties["FontSize"].ToInt(context),
                 VerticalContentAlignment = VerticalAlignment.Center,
             };
+            if (viewElement.Properties["Orientation"].ToString(context) == "Vertical")
+                label.HorizontalContentAlignment = HorizontalAlignment.Center;
 
             if (viewElement.Properties["LabelWidth"].ToInt(context) > 0)
                 label.Width = viewElement.Properties["LabelWidth"].ToInt(context);
