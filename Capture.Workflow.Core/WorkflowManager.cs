@@ -223,6 +223,17 @@ namespace Capture.Workflow.Core
                     File.Delete(tempFile);
 
                 eventArgs.CameraDevice.TransferFile(eventArgs.Handle, tempFile);
+                eventArgs.CameraDevice.ReleaseResurce(eventArgs);
+
+                if (!Context.CaptureEnabled)
+                {
+                    // files should be transferred anyway if capture is enabled or not
+                    // to prevent camera buffer fill up 
+                    Utils.DeleteFile(tempFile);
+                    Log.Debug("File transfer disabled");
+                    return;
+                }
+
                 FileItem item = new FileItem()
                 {
                     TempFile = tempFile,

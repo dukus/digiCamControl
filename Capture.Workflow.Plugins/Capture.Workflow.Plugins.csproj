@@ -170,7 +170,7 @@
     <Compile Include="Events\BaseEvent.cs" />
     <Compile Include="Events\CameraConnectedEvent.cs" />
     <Compile Include="Events\CustomEvent.cs" />
-    <Compile Include="Events\FileTransfered.cs" />
+    <Compile Include="Events\FileTransferred.cs" />
     <Compile Include="Events\KeyPressedEvent.cs" />
     <Compile Include="Events\LiveViewEvent.cs" />
     <Compile Include="Events\ProcessItemEvent.cs" />

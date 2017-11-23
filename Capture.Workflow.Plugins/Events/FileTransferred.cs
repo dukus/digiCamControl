@@ -14,7 +14,7 @@ namespace Capture.Workflow.Plugins.Events
     [Description("")]
     [PluginType(PluginType.Event)]
     [DisplayName("FileTransferred")]
-    public class FileTransfered:BaseEvent, IEventPlugin
+    public class FileTransferred:BaseEvent, IEventPlugin
     {
         private WorkFlowEvent _flowEvent;
 

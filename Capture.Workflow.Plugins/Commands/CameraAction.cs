@@ -26,7 +26,7 @@ namespace Capture.Workflow.Plugins.Commands
             {
                 Name = "Action",
                 PropertyType = CustomPropertyType.ValueList,
-                ValueList = new List<string>() { "Capture", "CaptureNoAf", "StartLiveView", "StopLiveView", "Autofocus", "CaptureToPc", "CaptureToCard" }
+                ValueList = new List<string>() { "Capture", "CaptureNoAf", "StartLiveView", "StopLiveView", "Autofocus", "CaptureToPc", "CaptureToCard","EnableCapture", "DisableCapture" }
             });
 
             command.Properties.Add(new CustomProperty()
@@ -85,6 +85,12 @@ namespace Capture.Workflow.Plugins.Commands
                         {
                             Log.Debug("Unable to set capture destination CARD", e);
                         }
+                        break;
+                    case "EnableCapture":
+                        context.CaptureEnabled = true;
+                        break;
+                    case "DisableCapture":
+                        context.CaptureEnabled = false;
                         break;
 
                 }

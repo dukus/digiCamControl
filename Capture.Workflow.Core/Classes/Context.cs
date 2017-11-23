@@ -27,5 +27,18 @@ namespace Capture.Workflow.Core.Classes
         public FileItem FileItem { get; set; }
         public ContextTargetEnum Target { get; set; }
         public Stream ImageStream { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the captured photo transfer is enabled or not.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [capture enabled]; otherwise, <c>false</c>.
+        /// </value>
+        public bool CaptureEnabled { get; set; }
+
+        public Context()
+        {
+            CaptureEnabled = true;
+        }
     }
 }

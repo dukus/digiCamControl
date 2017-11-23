@@ -65,7 +65,7 @@ namespace Capture.Workflow.ViewModel
 
         private void ClearQueue()
         {
-            if (MessageBox.Show("All not executed actions will be cleared !!!\nContinue ?", "Warning",
+            if (MessageBox.Show("All not executed queued actions will be cleared !!!\nContinue ?", "Warning",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
                 return;
             try
