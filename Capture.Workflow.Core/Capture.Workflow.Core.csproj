@@ -296,7 +296,9 @@
     <Compile Include="Scripting.evaluator.cs" />
     <Compile Include="Scripting.Extensions.cs" />
     <Compile Include="Scripting.native.cs" />
+    <Compile Include="Scripting\IEvaluateScript.cs" />
     <Compile Include="Scripting\ScriptEngine.cs" />
+    <Compile Include="Scripting\TestScript.cs" />
     <Compile Include="WorkflowManager.cs" />
   </ItemGroup>
   <ItemGroup>

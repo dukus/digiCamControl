@@ -32,14 +32,15 @@ namespace Capture.Workflow.Plugins.Events
 
         private void Instance_Message(object sender, MessageEventArgs e)
         {
-            if (!CheckCondition(_flowEvent, e.Context))
-                return;
-
             if (e.Name == Messages.VariableChanged)
             {
                 var var = e.Param as Variable;
                 if (var != null && var.Name == _flowEvent.Properties["Variable"].ToString(e.Context))
+                {
+                    if (!CheckCondition(_flowEvent, e.Context))
+                        return;
                     WorkflowManager.Execute(_flowEvent.CommandCollection, e.Context);
+                }
             }
         }
 

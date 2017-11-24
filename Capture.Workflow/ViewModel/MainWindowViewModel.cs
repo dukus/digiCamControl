@@ -6,6 +6,7 @@ using CameraControl.Devices.Classes;
 using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
+using Capture.Workflow.Core.Scripting;
 using Capture.Workflow.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -166,6 +167,7 @@ namespace Capture.Workflow.ViewModel
             WorkflowViewView wnd = new WorkflowViewView();
             wnd.ShowDialog();
             WorkflowManager.Instance.Context.WorkFlow = null;
+            ScriptEngine.Instance.ClearCache();
             ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
         }
 

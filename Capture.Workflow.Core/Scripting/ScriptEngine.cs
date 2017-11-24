@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CameraControl.Devices;
 using Capture.Workflow.Core.Classes;
 using CSScriptLibrary;
 
@@ -10,6 +8,9 @@ namespace Capture.Workflow.Core.Scripting
 {
     public class ScriptEngine
     {
+        public Dictionary<string,IEvaluateScript> EvaluateScriptsCache { get; set; }
+
+
         private static ScriptEngine _instance;
 
         public static ScriptEngine Instance
@@ -23,53 +24,75 @@ namespace Capture.Workflow.Core.Scripting
             set { _instance = value; }
         }
 
+        public ScriptEngine()
+        {
+            CSScript.EvaluatorConfig.Engine = EvaluatorEngine.CodeDom;
+            CSScript.EvaluatorConfig.DebugBuild = true;
+            EvaluateScriptsCache = new Dictionary<string, IEvaluateScript>();
+        }
+
+        public void ClearCache()
+        {
+            EvaluateScriptsCache.Clear();
+        }
 
         public string ExecuteLine(string code, Context context)
         {
-            string codeString =
-                @"using System;
-                                     public class Script
+            try
+            {
+                if (EvaluateScriptsCache.ContainsKey(code))
+                    return EvaluateScriptsCache[code].Evaluate(context).ToString();
+
+                string codeString =
+                    @"using System;
+                      using Capture.Workflow.Core.Scripting;
+                      using Capture.Workflow.Core.Classes;
+                                     public class Script:IEvaluateScript
                                      {
-                                        "+ GetVariables(context.WorkFlow) + "\n" + @"  
-                                         public object Evaluate()
+                                        " + GetVariables(context.WorkFlow) + "\n" + @"  
+                                         public object Evaluate(Context context)
                                          {
-                                            " +  "\n return " + code+";";
-            codeString+= @"                 
+                                            " + GetVariablesAssign(context.WorkFlow, "context") +
+                    "\n return " + code + ";\n";
+                codeString += @"                 
                                          }
                                      }";
-            dynamic script = CSScript.Evaluator
-                .LoadCode(codeString);
-            
-            return script.Evaluate().ToString();
+                IEvaluateScript script = (IEvaluateScript) CSScript.Evaluator
+                    .LoadCode(codeString);
+                EvaluateScriptsCache.Add(code, script);
+                return script.Evaluate(context).ToString();
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Invalid script ",e);
+            }
+            return "";
         }
 
         public bool Evaluate(string code, Context context)
         {
-            string codeString =
-                @"using System;
-                                     public class Script
-                                     {
-                                        " + GetVariables(context.WorkFlow) + "\n" + @"  
-                                         public bool Evaluate()
-                                         {
-                                            " + "\n return " + code + ";";
-            codeString += @"                 
-                                         }
-                                     }";
-            dynamic script = CSScript.Evaluator
-                .LoadCode(codeString);
-
-            return script.Evaluate();
+            var res = ExecuteLine(code, context);
+            return res == "True";
         }
 
 
-        public string GetVariables(WorkFlow workFlow)
+        private string GetVariables(WorkFlow workFlow)
         {
             string res="";
             foreach (var variable in workFlow.Variables.Items)
             {
                 res += variable.GetAsCsString() + ";" + Environment.NewLine;
 
+            }
+            return res;
+        }
+
+        private string GetVariablesAssign(WorkFlow workFlow, string varPrefix)
+        {
+            string res = "";
+            foreach (var variable in workFlow.Variables.Items)
+            {
+                res+=string.Format("{0} = ({1}){2}.WorkFlow.Variables[\"{0}\"].GetAsObject();\n",variable.Name,variable.GetCSType(),varPrefix);
             }
             return res;
         }

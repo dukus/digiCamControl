@@ -126,6 +126,22 @@ namespace Capture.Workflow.Core.Classes
             
         }
 
+        public string GetCSType()
+        {
+            switch (VariableType)
+            {
+                case VariableTypeEnum.String:
+                    return "string";
+                case VariableTypeEnum.Number:
+                    return "double";
+                case VariableTypeEnum.Boolean:
+                    return "bool";
+                case VariableTypeEnum.Date:
+                    return "DateTime";
+            }
+            return "string";
+        }
+
         /// <summary>
         /// Return as CSharp variable definition
         /// </summary>
