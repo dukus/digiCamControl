@@ -144,6 +144,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                     FileItem item = e.Param as FileItem;
                     if (item != null)
                         FileItem = item;
+                    RaisePropertyChanged(() => Bitmap);
                 }
                     break;
                 case Messages.ThumbUpdated:

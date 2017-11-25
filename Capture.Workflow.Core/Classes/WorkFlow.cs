@@ -83,6 +83,13 @@ namespace Capture.Workflow.Core.Classes
                 Name = "CardBackground",
                 PropertyType = CustomPropertyType.File
             });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "PreviewSize",
+                PropertyType = CustomPropertyType.Number,
+                Value = "1090",
+                Description = "With 0 will load the original image, \nany other number the image with will be resize befor preview, \nthis can improve drastically the loading speed \nbut with some action can create diferent preview that the exported image"
+            });
         }
 
         public Version GetVersion()

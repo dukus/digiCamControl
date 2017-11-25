@@ -41,6 +41,8 @@ namespace Capture.Workflow.Core
 
         private bool _thumbRunning = false;
         private bool _thumbNext = false;
+        private object _lock = new object();
+
 
         private static WorkflowManager _instance;
         private BitmapSource _bitmap;
@@ -82,6 +84,8 @@ namespace Capture.Workflow.Core
                 Log.Debug("Command execution error "+currCmd, ex);
             }
         }
+
+        public int PreviewSize { get; set; }
 
         public FileItem FileItem { get; set; }
 
@@ -183,22 +187,27 @@ namespace Capture.Workflow.Core
         {
             if (item != null)
             {
-                try
+                lock (_lock)
                 {
-                    var bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, 1090, 0);
-                    using (MemoryStream stream = new MemoryStream())
+                    try
                     {
-                        Utils.Save2Jpg(bitmap, stream);
-                        Context.FileItem = item;
-                        Context.ImageStream = stream;
-                        OnMessage(new MessageEventArgs(Messages.ThumbChanged, FileItem) {Context = Context});
-                        stream.Seek(0, SeekOrigin.Begin);
-                        return Utils.LoadImage(stream);
+                        var bitmap = Utils.LoadImage(WorkflowManager.Instance.SelectedItem.TempFile, PreviewSize, 0);
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            Utils.Save2Jpg(bitmap, stream);
+                            Context.FileItem = item;
+                            Context.ImageStream = stream;
+                            OnMessage(new MessageEventArgs(Messages.ThumbChanged, FileItem) {Context = Context});
+                            stream.Seek(0, SeekOrigin.Begin);
+                            item.Thumb = Utils.LoadImage(stream, 200);
+                            stream.Seek(0, SeekOrigin.Begin);
+                            return Utils.LoadImage(stream);
+                        }
                     }
-                }
-                catch (Exception e)
-                {
-                    Log.Debug("Unable to create thumbnail", e);
+                    catch (Exception e)
+                    {
+                        Log.Debug("Unable to create thumbnail", e);
+                    }
                 }
             }
             return null;
@@ -240,6 +249,7 @@ namespace Capture.Workflow.Core
                     Thumb = Utils.LoadImage(tempFile, 200),
                     Variables = Context.WorkFlow.Variables.GetItemVariables()
                 };
+                Bitmap = Utils.LoadImage(tempFile, 1090);
                 FileItems.Add(item);
                 FileItem = item;
                 Context.FileItem = FileItem;

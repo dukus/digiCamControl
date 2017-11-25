@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Media;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
@@ -36,6 +32,21 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
                 Name = "StrechOverlay",
                 PropertyType = CustomPropertyType.Bool,
                 Value = "true"
+            });
+            command.Properties.Add(new CustomProperty()
+            {
+                Name = "Position",
+                PropertyType = CustomPropertyType.ValueList,
+                Value = Enum.GetNames(typeof(Gravity)).ToList()[0],
+                ValueList = Enum.GetNames(typeof(Gravity)).ToList()
+            });
+            command.Properties.Add(new CustomProperty()
+            {
+                Name = "Transparency",
+                PropertyType = CustomPropertyType.Number,
+                Value = "100",
+                RangeMin = 0,
+                RangeMax = 100
             });
             command.Properties.Add(new CustomProperty()
             {
@@ -71,17 +82,16 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
                 Value = "Arial",
                 ValueList = Fonts()
             });
-
             command.Properties.Add(new CustomProperty()
             {
-                Name = "Position",
+                Name = "TextPosition",
                 PropertyType = CustomPropertyType.ValueList,
                 Value = Enum.GetNames(typeof(Gravity)).ToList()[0],
                 ValueList = Enum.GetNames(typeof(Gravity)).ToList()
             });
             command.Properties.Add(new CustomProperty()
             {
-                Name = "Transparency",
+                Name = "TextTransparency",
                 PropertyType = CustomPropertyType.Number,
                 Value = "100",
                 RangeMin = 0,
@@ -120,12 +130,12 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
                     image.Settings.FontPointsize = command.Properties["TextPointSize"].ToInt(context); ;
 
                     Color color = (Color)ColorConverter.ConvertFromString(command.Properties["TextFillColor"].ToString(context));
-                    image.Settings.FillColor = new MagickColor(color.R, color.G, color.B, color.A);
+                    image.Settings.FillColor = new MagickColor(color.R, color.G, color.B, (byte) (255 * (100 - command.Properties["TextTransparency"].ToInt(context)) / 100));
                     color = (Color)ColorConverter.ConvertFromString(command.Properties["TextStrokeColor"].ToString(context));
-                    image.Settings.StrokeColor = new MagickColor(color.R, color.G, color.B, color.A);
+                    image.Settings.StrokeColor = new MagickColor(color.R, color.G, color.B, (byte)(255 * (100 - command.Properties["TextTransparency"].ToInt(context)) / 100));
 
                     image.Annotate(command.Properties["Text"].ToString(context).Replace("\\n","\n"),
-                        (Gravity) Enum.Parse(typeof(Gravity), command.Properties["Position"].ToString(context)));
+                        (Gravity) Enum.Parse(typeof(Gravity), command.Properties["TextPosition"].ToString(context)));
                 }
 
                 image.Write(context.ImageStream, MagickFormat.Jpg);

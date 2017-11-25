@@ -136,6 +136,7 @@ namespace Capture.Workflow.ViewModel
                 TitleBar = !Workflow.Properties["HideTileBar"].ToBool(context);
                 WindowStyle = Workflow.Properties["FullScreen"].ToBool(context) ? WindowStyle.None : WindowStyle.SingleBorderWindow;
                 FullScreen = Workflow.Properties["FullScreen"].ToBool(context);
+                WorkflowManager.Instance.PreviewSize = Workflow.Properties["PreviewSize"].ToInt(context);
                 WindowState = WindowState.Maximized;
                 DisplayName = Workflow.Name + " - " + Workflow.Version;
                 new PaletteHelper().SetLightDark(Workflow.Properties["BaseColorScheme"].Value == "Dark");
