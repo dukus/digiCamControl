@@ -2846,3 +2846,14 @@ _ReSharper.CameraControl.ServerTest
 /packages/ZXing.Net.0.14.0.1/lib/wpa81/ZXing.pdb
 /packages/ZXing.Net.0.14.0.1/lib/wpa81/ZXing.pri
 /packages/ZXing.Net.0.14.0.1/lib/wpa81/ZXing.winmd
+/packages/MaterialDesignThemes.2.3.2-ci1003/*.nupkg
+/packages/MaterialDesignThemes.2.3.2-ci1003/lib/net45/*.XML
+/packages/MaterialDesignThemes.2.3.2-ci1003/lib/net45/*.dll
+/packages/MaterialDesignThemes.2.3.2-ci1003/lib/net45/*.pdb
+/packages/MaterialDesignThemes.2.3.2-ci1003/src/net45/*.cs
+/packages/MaterialDesignThemes.2.3.2-ci1003/src/net45/Converters/*.cs
+/packages/MaterialDesignThemes.2.3.2-ci1003/src/net45/Converters/CircularProgressBar/*.cs
+/packages/MaterialDesignThemes.2.3.2-ci1003/src/net45/Properties/*.cs
+/packages/MaterialDesignThemes.2.3.2-ci1003/src/net45/Transitions/*.cs
+/packages/MaterialDesignThemes.MahApps.0.0.11/*.nupkg
+/packages/MaterialDesignThemes.MahApps.0.0.11/lib/net45/*.dll
