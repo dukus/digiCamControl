@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using CameraControl.Devices;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
+using Capture.Workflow.View;
 using Dragablz;
 using GalaSoft.MvvmLight;
 using MaterialDesignThemes.Wpf;
@@ -178,6 +179,30 @@ namespace Capture.Workflow.ViewModel
                 case Messages.PreviousView:
                     Application.Current.Dispatcher.BeginInvoke(new Action(() => ShowView(_preView)));
                     break;
+                case Messages.ShowHelp:
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => ShowHelp((Context)e.Param)));
+                    break;
+
+            }
+        }
+
+        private void ShowHelp(Context context)
+        {
+            if (string.IsNullOrEmpty(context.WorkFlow.Properties["HelpFile"].ToString(context)))
+                return;
+            try
+            {
+                var stream = Workflow.GetFileStream(context.WorkFlow.Properties["HelpFile"].ToString(context));
+                if (stream != null)
+                {
+                    var view = new HelpView(stream);
+                    view.ShowDialog();
+                    stream.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Show help error", e);
             }
         }
 

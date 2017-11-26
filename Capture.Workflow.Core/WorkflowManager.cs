@@ -396,6 +396,13 @@ namespace Capture.Workflow.Core
                                 files.Add(property.Value, "");
                             }
                     }
+                    foreach (var viewProperty in workflow.Properties.Items.Where(
+                        x => x.PropertyType == CustomPropertyType.File))
+                    {
+                        if (File.Exists(viewProperty.Value) && !files.ContainsKey(viewProperty.Value))
+                            files.Add(viewProperty.Value, "");
+
+                    }
                     zip.AddEntry("package.xml", writer.ToArray());
                     foreach (var file1 in files)
                     {

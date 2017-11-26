@@ -90,6 +90,13 @@ namespace Capture.Workflow.Core.Classes
                 Value = "1090",
                 Description = "With 0 will load the original image, \nany other number the image with will be resize befor preview, \nthis can improve drastically the loading speed \nbut with some action can create diferent preview that the exported image"
             });
+            Properties.Add(new CustomProperty()
+            {
+                Name = "HelpFile",
+                PropertyType = CustomPropertyType.File,
+                Description = "Documentation file can be show via Worflow Action->ShowHelp",
+                Value = ""
+            });
         }
 
         public Version GetVersion()
@@ -101,9 +108,16 @@ namespace Capture.Workflow.Core.Classes
             return new Version();
         }
 
+        /// <summary>
+        /// Load a referenced file, from apackage or from the original location
+        /// 
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
+        /// <exception cref="System.IO.FileNotFoundException"></exception>
         public Stream GetFileStream(string file)
         {
-           
+
             if (File.Exists(file))
                 return File.OpenRead(file);
             if (File.Exists(Package))
@@ -120,6 +134,10 @@ namespace Capture.Workflow.Core.Classes
                     }
 
                 }
+            }
+            if (File.Exists(Path.Combine(Settings.Instance.WorkflowFolder, Id, Path.GetFileName(file))))
+            {
+                return File.OpenRead(Path.Combine(Settings.Instance.WorkflowFolder, Id, Path.GetFileName(file)));
             }
             throw new FileNotFoundException("", file);
         }

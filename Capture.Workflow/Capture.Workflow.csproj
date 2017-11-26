@@ -279,6 +279,9 @@
     <Compile Include="ViewModel\NewViewSelectorViewModel.cs" />
     <Compile Include="ViewModel\WorkflowEditorViewModel.cs" />
     <Compile Include="ViewModel\WorkflowViewViewModel.cs" />
+    <Compile Include="View\HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewViewSelectorView.xaml.cs">
       <DependentUpon>NewViewSelectorView.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\HelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NewViewSelectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

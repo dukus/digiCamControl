@@ -20,7 +20,7 @@
         public const string NextPhoto = "NextPhoto";
         public const string PrevPhoto = "PrevPhoto";
         public const string DeletePhoto = "DeletePhoto";
-
+        public const string ShowHelp = "ShowHelp";
         /// <summary>
         /// The save all variables from current workflow
         /// </summary>

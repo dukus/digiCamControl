@@ -33,6 +33,7 @@ namespace Capture.Workflow.Plugins.Commands
                     "PrevPhoto",
                     "DeletePhoto",
                     "ClearPhotos",
+                    "ShowHelp"
                 }
             });
 
@@ -81,6 +82,9 @@ namespace Capture.Workflow.Plugins.Commands
                     break;
                 case "ClearPhotos":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ClearPhotos, context));
+                    break;
+                case "ShowHelp":
+                    WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ShowHelp, context));
                     break;
             }
             return true;
