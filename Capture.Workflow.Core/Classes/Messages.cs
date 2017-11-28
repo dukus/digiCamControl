@@ -29,5 +29,9 @@
         /// Remove all phots from list
         /// </summary>
         public const string ClearPhotos = "ClearPhotos";
+
+        public const string IsBusy = "IsBusy";
+        public const string IsNotBusy = "IsNotBusy";
+
     }
 }

@@ -32,7 +32,6 @@ namespace Capture.Workflow.View
         {
             switch (e.Name)
             {
-                case Messages.SessionFinished:
                 case Messages.SessionCanceled:
                     Application.Current.Dispatcher.BeginInvoke(new Action(Close));
                     break;

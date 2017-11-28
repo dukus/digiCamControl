@@ -45,6 +45,8 @@ namespace Capture.Workflow.Core.Scripting
 
                 string codeString =
                     @"using System;
+                      using System.IO;
+                      using CameraControl.Devices;
                       using Capture.Workflow.Core.Scripting;
                       using Capture.Workflow.Core.Classes;
                                      public class Script:IEvaluateScript
@@ -65,6 +67,7 @@ namespace Capture.Workflow.Core.Scripting
             catch (Exception e)
             {
                 Log.Debug("Invalid script ",e);
+               
             }
             return "";
         }

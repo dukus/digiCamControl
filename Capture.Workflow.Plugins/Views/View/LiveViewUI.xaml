@@ -40,6 +40,20 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <materialDesign:Card Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="4" Margin="4">
+                        <ItemsControl ItemsSource="{Binding PreviewRight }" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl Content="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </materialDesign:Card>
                     <Image Source="{Binding Bitmap}" />
                     <ListBox Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding FileItems}" SelectedItem="{Binding FileItem }" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                          Visibility="{Binding FileListVisible, Converter={StaticResource BooleanToVisibilityConverter}}">

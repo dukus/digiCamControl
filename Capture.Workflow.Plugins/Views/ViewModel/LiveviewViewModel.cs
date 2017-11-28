@@ -18,6 +18,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private BitmapSource _liveBitmap;
         private bool _preview;
         private bool _noPreview;
+        private ObservableCollection<FrameworkElement> _previewRight;
 
         public WorkFlowView View { get; set; }
 
@@ -38,6 +39,16 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             {
                 _rightElements = value;
                 RaisePropertyChanged(() => RightElements);
+            }
+        }
+
+        public ObservableCollection<FrameworkElement> PreviewRight
+        {
+            get { return _previewRight; }
+            set
+            {
+                _previewRight = value;
+                RaisePropertyChanged(() => PreviewRight);
             }
         }
 
@@ -113,6 +124,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             BottomRightElements = new ObservableCollection<FrameworkElement>();
             BackGroundElements = new AsyncObservableCollection<FrameworkElement>();
             RightElements = new ObservableCollection<FrameworkElement>();
+            PreviewRight = new ObservableCollection<FrameworkElement>();
             WorkflowManager.Instance.Message += Instance_Message;
         }
 

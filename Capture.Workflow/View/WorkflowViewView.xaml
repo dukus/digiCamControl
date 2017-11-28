@@ -12,7 +12,19 @@
     <Window.DataContext>
         <viewModel:WorkflowViewViewModel/>
     </Window.DataContext>
-    <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" >
+    <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" IsOpen="{Binding IsBusy}">
+        <materialDesign:DialogHost.DialogContent>
+
+            <materialDesign:Card UniformCornerRadius="14" Padding="4"
+                                 Grid.Row="5" Grid.Column="0"
+                                 VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12 12 12 12">
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" 
+                             Value="50"
+                             IsIndeterminate="True"                         
+                />
+            </materialDesign:Card>
+        </materialDesign:DialogHost.DialogContent>
+        
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="212">

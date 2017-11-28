@@ -25,6 +25,7 @@ namespace Capture.Workflow.ViewModel
         private WindowStyle _windowStyle;
         private bool _fullScreen;
         private string _displayName;
+        private bool _isBusy;
 
         public UserControl Contents
         {
@@ -122,6 +123,15 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
+            }
+        }
 
 
         public bool ShowTitleBar => !FullScreen;
@@ -182,7 +192,12 @@ namespace Capture.Workflow.ViewModel
                 case Messages.ShowHelp:
                     Application.Current.Dispatcher.BeginInvoke(new Action(() => ShowHelp((Context)e.Param)));
                     break;
-
+                case Messages.IsBusy:
+                    IsBusy = true;
+                    break;
+                case Messages.IsNotBusy:
+                    IsBusy = false;
+                    break;
             }
         }
 

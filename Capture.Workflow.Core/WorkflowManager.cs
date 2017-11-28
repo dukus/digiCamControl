@@ -671,8 +671,9 @@ namespace Capture.Workflow.Core
                     if (SelectedItem == null || FileItems.Count == 0)
                         return;
                     var i = FileItems.IndexOf(SelectedItem);
-                    FileItems.Remove(SelectedItem);
                     SelectedItem.Clear();
+                    FileItems.Remove(SelectedItem);
+                    
                     if (i >= FileItems.Count)
                         i--;
                     if (i >= 0 && FileItems.Count > 0)
@@ -738,10 +739,22 @@ namespace Capture.Workflow.Core
             }
         }
 
+        /// <summary>
+        /// Reinit all variable values with default one and
+        /// load the saved variables value from cache.
+        /// </summary>
+        /// <param name="workflow">The workflow.</param>
         public void LoadVariables(WorkFlow workflow)
         {
             try
             {
+                // set for all variables the default value,
+                // which will be overwrited or not later 
+                foreach (var variable in workflow.Variables.Items)
+                {
+                    variable.Value = variable.DefaultValue;
+                }
+
                 string file = Path.Combine(Settings.Instance.CacheFolder, workflow.Id + ".xml");
                 if (!File.Exists(file))
                     return;

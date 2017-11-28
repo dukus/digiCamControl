@@ -35,6 +35,7 @@ namespace Capture.Workflow.Plugins.Events
         {
             if (e.Name == Messages.SessionFinished)
             {
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.IsBusy, null));
                 var contex = e.Param as Context;
                 if (contex != null)
                 {
@@ -71,6 +72,7 @@ namespace Capture.Workflow.Plugins.Events
                         
                     }
                 }
+                WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.IsNotBusy, null));
             }
         }
 
