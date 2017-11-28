@@ -2857,3 +2857,14 @@ _ReSharper.CameraControl.ServerTest
 /packages/MaterialDesignThemes.2.3.2-ci1003/src/net45/Transitions/*.cs
 /packages/MaterialDesignThemes.MahApps.0.0.11/*.nupkg
 /packages/MaterialDesignThemes.MahApps.0.0.11/lib/net45/*.dll
+/packages/Magick.NET-Q8-x86.7.1.0/*.txt
+/packages/Magick.NET-Q8-x86.7.1.0/*.nupkg
+/packages/Magick.NET-Q8-x86.7.1.0/build/net20/*.targets
+/packages/Magick.NET-Q8-x86.7.1.0/build/net40/*.targets
+/packages/Magick.NET-Q8-x86.7.1.0/lib/net20/*.dll
+/packages/Magick.NET-Q8-x86.7.1.0/lib/net20/*.xml
+/packages/Magick.NET-Q8-x86.7.1.0/lib/net40/*.dll
+/packages/Magick.NET-Q8-x86.7.1.0/lib/net40/*.xml
+/packages/Magick.NET-Q8-x86.7.1.0/lib/netstandard13/*.dll
+/packages/Magick.NET-Q8-x86.7.1.0/lib/netstandard13/*.xml
+/packages/Magick.NET-Q8-x86.7.1.0/runtimes/win7-x86/native/*.dll
