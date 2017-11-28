@@ -282,15 +282,15 @@ namespace Capture.Workflow.Core
                 var liveViewData = Context.CameraDevice.GetLiveViewImage();
                 if (liveViewData?.ImageData != null)
                 {
-                    using (
-                        MemoryStream stream = new MemoryStream(liveViewData.ImageData, liveViewData.ImageDataPosition,
-                            liveViewData.ImageData.Length - liveViewData.ImageDataPosition))
+                    using (MemoryStream stream = new MemoryStream())
                     {
+                        // can be used in MemoryStream constructor because throw error with image magick 
+                        stream.Write(liveViewData.ImageData, liveViewData.ImageDataPosition, liveViewData.ImageData.Length - liveViewData.ImageDataPosition);
                         Context.ImageStream = stream;
-                        OnMessage(new MessageEventArgs(Messages.LiveViewChanged, new object[] {stream, liveViewData}) {Context = Context});
+                        OnMessage(new MessageEventArgs(Messages.LiveViewChanged, new object[] { stream, liveViewData }) { Context = Context });
                         _frames++;
                         var fps = ((double)_frames / (DateTime.Now - _startTime).Seconds);
-                        Context.WorkFlow.Variables.SetValue("Fps", fps.ToString("###.00"));
+                        Context?.WorkFlow?.Variables.SetValue("Fps", fps.ToString("###.00"));
                     }
                 }
             }

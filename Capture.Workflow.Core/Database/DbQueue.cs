@@ -10,8 +10,10 @@ namespace Capture.Workflow.Core.Database
         public string SourceFile { get; set; }
 
         public string Action { get; set; }
-        
+
         public string ActionParam { get; set; }
+
+        public string Error { get; set; }
 
         public bool? Done { get; set; }
 
@@ -21,6 +23,7 @@ namespace Capture.Workflow.Core.Database
             Action = action;
             ActionParam = param;
             Done = false;
+            Error = "";
         }
 
         public DbQueue()

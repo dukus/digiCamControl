@@ -115,12 +115,13 @@ namespace Capture.Workflow.Core.Classes
                         }
                         catch (Exception e)
                         {
-                            // prevent multiple log for same error
-                            if (string.IsNullOrEmpty(ErrorMessage))
-                            {
-                                Log.Error("Queue error", e);
-                            }
+                            //// prevent multiple log for same error
+                            //if (string.IsNullOrEmpty(ErrorMessage))
+                            //{
+                            //    Log.Error("Queue error", e);
+                            //}
                             ErrorMessage = e.Message;
+                            item.Error = e.Message;
                         }
 
 
