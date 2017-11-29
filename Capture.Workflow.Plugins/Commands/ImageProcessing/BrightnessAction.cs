@@ -52,7 +52,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
                 context.ImageStream.Seek(0, SeekOrigin.Begin);
                 image.BrightnessContrast(new Percentage((double)context.WorkFlow.Variables[command.Properties["Brightness"].ToString(context)].GetAsObject()),
                     new Percentage((double)context.WorkFlow.Variables[command.Properties["Contrast"].ToString(context)].GetAsObject()));
-                image.Write(context.ImageStream, MagickFormat.Jpg);
+                image.Write(context.ImageStream, MagickFormat.Bmp);
             }
             return true;
         }

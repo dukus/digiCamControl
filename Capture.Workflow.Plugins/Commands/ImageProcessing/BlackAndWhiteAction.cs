@@ -32,7 +32,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
             {
                 context.ImageStream.Seek(0, SeekOrigin.Begin);
                 image.Grayscale(PixelIntensityMethod.Average);
-                image.Write(context.ImageStream,MagickFormat.Jpg);
+                image.Write(context.ImageStream,MagickFormat.Bmp);
             }
             return true;
         }

@@ -259,6 +259,7 @@
     <Compile Include="Commands\ImageProcessing\BlackAndWhiteAction.cs" />
     <Compile Include="Commands\ImageProcessing\BrightnessAction.cs" />
     <Compile Include="Commands\ImageProcessing\FlipAction.cs" />
+    <Compile Include="Commands\ImageProcessing\LevelAction.cs" />
     <Compile Include="Commands\ImageProcessing\OverlayAction.cs" />
     <Compile Include="Commands\ImageProcessing\ResizeAction.cs" />
     <Compile Include="Commands\ImageProcessing\RotateAction.cs" />
