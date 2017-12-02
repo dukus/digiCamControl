@@ -40,7 +40,7 @@ namespace Capture.Workflow.Plugins.Events
             if (e.Name == _flowEvent.Properties["Event"].ToString(contex))
             {
                 if (CheckCondition(_flowEvent, contex))
-                    WorkflowManager.ExecuteAsync(_flowEvent.CommandCollection, contex);
+                    WorkflowManager.Execute(_flowEvent.CommandCollection, contex);
             }
         }
 

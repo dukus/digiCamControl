@@ -60,7 +60,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
                 geometry.IgnoreAspectRatio = !command.Properties["KeepAspectRatio"].ToBool(context);
 
                 image.Resize(geometry);
-                image.Write(context.ImageStream, MagickFormat.Jpg);
+                image.Write(context.ImageStream, MagickFormat.Bmp);
             }
             return true;
         }

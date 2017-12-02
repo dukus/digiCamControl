@@ -13,6 +13,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [PluginType(PluginType.Command)]
     [DisplayName("BlackAndWhite")]
     [Group("ImageProcessing")]
+    [Icon("ImageFilterBlackWhite")]
     public class BlackAndWhiteAction: BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

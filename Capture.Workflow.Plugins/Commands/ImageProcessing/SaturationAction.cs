@@ -14,20 +14,21 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
 {
     [Description("")]
     [PluginType(PluginType.Command)]
-    [DisplayName("Rotate")]
+    [DisplayName("Saturation")]
     [Group("ImageProcessing")]
-    [Icon("Rotate3d")]
-    public class RotateAction : BaseCommand, IWorkflowCommand
+    [Icon("InvertColors")]
+    public class SaturationAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()
         {
             var command = GetCommand();
             command.Properties.Add(new CustomProperty()
             {
-                Name = "Angle",
+                Name = "Saturation",
                 PropertyType = CustomPropertyType.Variable,
-                Value = "0"
-
+                Value = "0",
+                RangeMin = 0,
+                RangeMax = 200
             });
             return command;
         }
@@ -42,7 +43,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
             using (MagickImage image = new MagickImage(context.ImageStream))
             {
                 context.ImageStream.Seek(0, SeekOrigin.Begin);
-                image.Rotate((double)context.WorkFlow.Variables[command.Properties["Angle"].ToString(context)].GetAsObject());
+                image.Modulate(new Percentage(100), new Percentage((double)context.WorkFlow.Variables[command.Properties["Saturation"].ToString(context)].GetAsObject()));
                 image.Write(context.ImageStream, MagickFormat.Bmp);
             }
             return true;

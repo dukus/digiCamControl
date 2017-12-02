@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
 using Capture.Workflow.Core.Interface;
@@ -17,6 +12,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [PluginType(PluginType.Command)]
     [DisplayName("SaveFile")]
     [Group("ImageProcessing")]
+    [Icon("Floppy")]
     public class SaveFileAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

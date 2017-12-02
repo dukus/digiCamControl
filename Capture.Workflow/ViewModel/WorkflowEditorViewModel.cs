@@ -220,7 +220,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand DeleteEventCommand { get; set; }
 
         public RelayCommand<PluginInfo> NewEventCommandCommand { get; set; }
-        public RelayCommand DeleteEventCommandCommand { get; set; }
+        public RelayCommand<WorkFlowCommand> DeleteEventCommandCommand { get; set; }
 
         public WorkflowEditorViewModel()
         {
@@ -256,14 +256,14 @@ namespace Capture.Workflow.ViewModel
             DeleteEventCommand = new RelayCommand(DeleteEvent);
 
             NewEventCommandCommand=new RelayCommand<PluginInfo>(NewEventCommandMethod);
-            DeleteEventCommandCommand=new RelayCommand(DeleteEventCommandMethod);
+            DeleteEventCommandCommand=new RelayCommand<WorkFlowCommand>(DeleteEventCommandMethod);
         }
 
-        private void DeleteEventCommandMethod()
+        private void DeleteEventCommandMethod(WorkFlowCommand command)
         {
-            if (SelectedEvent != null && SelectedEventCommand != null)
+            if (SelectedEvent != null && command != null)
             {
-                SelectedEvent.CommandCollection.Items.Remove(SelectedEventCommand);
+                SelectedEvent.CommandCollection.Items.Remove(command);
                 if (SelectedEvent.CommandCollection.Items.Count > 0)
                     SelectedEventCommand = SelectedEvent.CommandCollection.Items[0];
             }

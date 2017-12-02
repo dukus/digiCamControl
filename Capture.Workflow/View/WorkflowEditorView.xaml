@@ -484,7 +484,7 @@
                                                         <TextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
-                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteEventCommandCommand, ElementName=WorkflowEditorWindow}"/>
+                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteEventCommandCommand, ElementName=WorkflowEditorWindow}" CommandParameter="{Binding}"/>
                                                             </StackPanel>
                                                         </materialDesign:PopupBox>
                                                     </Grid>

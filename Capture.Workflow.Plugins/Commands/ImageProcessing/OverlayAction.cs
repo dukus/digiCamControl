@@ -16,6 +16,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [PluginType(PluginType.Command)]
     [DisplayName("Overlay")]
     [Group("ImageProcessing")]
+    [Icon("ImageMultiple")]
     public  class OverlayAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

@@ -16,6 +16,7 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
     [PluginType(PluginType.Command)]
     [DisplayName("BrightnessContrast")]
     [Group("ImageProcessing")]
+    [Icon("Meteor")]
     public class BrightnessAction : BaseCommand, IWorkflowCommand
     {
         public WorkFlowCommand CreateCommand()

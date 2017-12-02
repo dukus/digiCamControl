@@ -124,7 +124,7 @@ namespace Capture.Workflow.Plugins.ViewElements
                 HorizontalAlignment = HorizontalAlignment.Center
             };
             viewElement.SetSize(slider, context);
-
+            
             slider.DataContext = viewElement.Parent.Parent.Variables[viewElement.Properties["Variable"].ToString(context)];
             slider.SetBinding(RangeBase.ValueProperty, "Value");
 
