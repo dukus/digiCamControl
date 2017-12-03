@@ -12,6 +12,7 @@ namespace Capture.Workflow.Core.Classes
     public class Context:ViewModelBase
     {
         private ICameraDevice _cameraDevice;
+        private Stream _imageStream;
         public WorkFlow WorkFlow { get; set; }
 
         public ICameraDevice CameraDevice
@@ -26,7 +27,18 @@ namespace Capture.Workflow.Core.Classes
 
         public FileItem FileItem { get; set; }
         public ContextTargetEnum Target { get; set; }
-        public Stream ImageStream { get; set; }
+
+        public Stream ImageStream
+        {
+            get
+            {
+                return _imageStream;
+            }
+            set
+            {
+                _imageStream = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the captured photo transfer is enabled or not.

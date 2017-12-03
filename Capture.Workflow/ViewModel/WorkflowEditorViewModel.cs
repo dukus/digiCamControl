@@ -193,16 +193,16 @@ namespace Capture.Workflow.ViewModel
 
 
         public RelayCommand<PluginInfo> NewViewCommand { get; set; }
-        public RelayCommand DeleteViewCommand { get; set; }
+        public RelayCommand<WorkFlowView> DeleteViewCommand { get; set; }
 
         public RelayCommand<PluginInfo> NewViewElementCommand { get; set; }
-        public RelayCommand DeleteViewElementCommand { get; set; }
+        public RelayCommand<WorkFlowViewElement> DeleteViewElementCommand { get; set; }
 
         public RelayCommand NewVariableCommand { get; set; }
         public RelayCommand DeleteVariableCommand { get; set; }
 
         public RelayCommand<PluginInfo> NewCommandCommand { get; set; }
-        public RelayCommand DeleteCommandCommand { get; set; }
+        public RelayCommand<WorkFlowCommand> DeleteCommandCommand { get; set; }
 
         public RelayCommand PreviewViewCommand { get; set; }
         public RelayCommand RunCommand { get; set; }
@@ -213,11 +213,11 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand LoadCommand { get; set; }
 
         public RelayCommand<PluginInfo> NewViewCommandCommand { get; set; }
-        public RelayCommand DeleteViewCommandCommand { get; set; }
+        public RelayCommand<WorkFlowCommand> DeleteViewCommandCommand { get; set; }
 
 
         public RelayCommand<PluginInfo> NewEventCommand { get; set; }
-        public RelayCommand DeleteEventCommand { get; set; }
+        public RelayCommand<WorkFlowEvent> DeleteEventCommand { get; set; }
 
         public RelayCommand<PluginInfo> NewEventCommandCommand { get; set; }
         public RelayCommand<WorkFlowCommand> DeleteEventCommandCommand { get; set; }
@@ -225,10 +225,10 @@ namespace Capture.Workflow.ViewModel
         public WorkflowEditorViewModel()
         {
             NewViewCommand = new RelayCommand<PluginInfo>(NewView);
-            DeleteViewCommand = new RelayCommand(DeleteView);
+            DeleteViewCommand = new RelayCommand<WorkFlowView>(DeleteView);
 
             NewViewElementCommand = new RelayCommand<PluginInfo>(NewViewElement);
-            DeleteViewElementCommand = new RelayCommand(DeleteViewElement);
+            DeleteViewElementCommand = new RelayCommand<WorkFlowViewElement>(DeleteViewElement);
 
             NewVariableCommand = new RelayCommand(NewVariable);
             DeleteVariableCommand = new RelayCommand(DeleteVariable);
@@ -245,15 +245,15 @@ namespace Capture.Workflow.ViewModel
             LoadCommand = new RelayCommand(Load);
 
             NewCommandCommand = new RelayCommand<PluginInfo>(NewCommand);
-            DeleteCommandCommand = new RelayCommand(DeleteCommand);
+            DeleteCommandCommand = new RelayCommand<WorkFlowCommand>(DeleteCommand);
 
             NewViewCommandCommand = new RelayCommand<PluginInfo>(AddViewCommand);
-            DeleteViewCommandCommand = new RelayCommand(RemoveViewCommand);
+            DeleteViewCommandCommand = new RelayCommand<WorkFlowCommand>(RemoveViewCommand);
 
             RunCommand = new RelayCommand(Run);
 
             NewEventCommand = new RelayCommand<PluginInfo>(NewEvent);
-            DeleteEventCommand = new RelayCommand(DeleteEvent);
+            DeleteEventCommand = new RelayCommand<WorkFlowEvent>(DeleteEvent);
 
             NewEventCommandCommand=new RelayCommand<PluginInfo>(NewEventCommandMethod);
             DeleteEventCommandCommand=new RelayCommand<WorkFlowCommand>(DeleteEventCommandMethod);
@@ -283,11 +283,11 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
-        private void DeleteEvent()
+        private void DeleteEvent(WorkFlowEvent flowEvent)
         {
-            if (SelectedEvent != null)
+            if (flowEvent != null)
             {
-                CurrentWorkFlow.Events.Remove(SelectedEvent);
+                CurrentWorkFlow.Events.Remove(flowEvent);
                 if (CurrentWorkFlow.Events.Count > 0)
                     SelectedEvent = CurrentWorkFlow.Events[0];
             }
@@ -305,10 +305,10 @@ namespace Capture.Workflow.ViewModel
             SelectedEvent = event_;
         }
 
-        private void RemoveViewCommand()
+        private void RemoveViewCommand(WorkFlowCommand command)
         {
-            if (SelectedViewCommand != null)
-                SelectedViewCommandCollection?.Items.Remove(SelectedViewCommand);
+            if (command != null)
+                SelectedViewCommandCollection?.Items.Remove(command);
             if (SelectedViewCommandCollection?.Items.Count > 0)
             {
                 SelectedViewCommand = SelectedViewCommandCollection.Items[0];
@@ -336,10 +336,11 @@ namespace Capture.Workflow.ViewModel
             wnd.ShowDialog();
         }
 
-        private void DeleteCommand()
+        private void DeleteCommand(WorkFlowCommand command)
         {
-            if (SelectedCommand != null)
-                SelectedCommandCollection?.Items.Remove(SelectedCommand);
+            if (command != null)
+                SelectedCommandCollection?.Items.Remove(command);
+
             if (SelectedCommandCollection?.Items.Count > 0)
             {
                 SelectedCommand = SelectedCommandCollection.Items[0];
@@ -363,21 +364,21 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
-        private void DeleteViewElement()
+        private void DeleteViewElement(WorkFlowViewElement element)
         {
-            if (SelectedElement != null && SelectedView != null)
+            if (element != null && SelectedView != null)
             {
-                SelectedView.Elements.Remove(SelectedElement);
+                SelectedView.Elements.Remove(element);
                 if (SelectedView.Elements.Count > 0)
                     SelectedElement = SelectedView.Elements[SelectedView.Elements.Count - 1];
             }
         }
 
-        private void DeleteView()
+        private void DeleteView(WorkFlowView flowView)
         {
-            if (SelectedView != null)
+            if (flowView != null)
             {
-                CurrentWorkFlow.Views.Remove(SelectedView);
+                CurrentWorkFlow.Views.Remove(flowView);
                 if (CurrentWorkFlow.Views.Count > 0)
                     SelectedView = CurrentWorkFlow.Views[CurrentWorkFlow.Views.Count - 1];
             }

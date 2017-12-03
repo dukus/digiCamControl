@@ -139,7 +139,7 @@
                                                         <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
-                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteViewCommand, ElementName=WorkflowEditorWindow}"/>
+                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteViewCommand, ElementName=WorkflowEditorWindow}" CommandParameter="{Binding}"/>
                                                             </StackPanel>
                                                         </materialDesign:PopupBox>
                                                     </Grid>
@@ -235,7 +235,7 @@
                                                             <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1"/>
                                                             <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                                 <StackPanel>
-                                                                    <Button Content="Remove" Command="{Binding DataContext.DeleteViewElementCommand, ElementName=WorkflowEditorWindow}"/>
+                                                                    <Button Content="Remove" Command="{Binding DataContext.DeleteViewElementCommand, ElementName=WorkflowEditorWindow}" CommandParameter="{Binding}"/>
                                                                 </StackPanel>
                                                             </materialDesign:PopupBox>
                                                         </Grid>
@@ -274,7 +274,7 @@
                                                                         <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center"/>
                                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                                             <StackPanel>
-                                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteCommandCommand, ElementName=WorkflowEditorWindow}"/>
+                                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteCommandCommand, ElementName=WorkflowEditorWindow}" CommandParameter="{Binding}"/>
                                                                             </StackPanel>
                                                                         </materialDesign:PopupBox>
                                                                     </Grid>
@@ -347,7 +347,7 @@
                                                                 <controls1:EditableTextBlock Text="{Binding Name}" Grid.Column="1"/>
                                                                 <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                                     <StackPanel>
-                                                                        <Button Content="Remove" Command="{Binding DataContext.DeleteViewCommandCommand, ElementName=WorkflowEditorWindow}"/>
+                                                                        <Button Content="Remove" Command="{Binding DataContext.DeleteViewCommandCommand, ElementName=WorkflowEditorWindow}" CommandParameter="{Binding}"/>
                                                                     </StackPanel>
                                                                 </materialDesign:PopupBox>
                                                             </Grid>
@@ -432,7 +432,7 @@
                                                         <TextBlock Text="{Binding Name, Mode=TwoWay}" Grid.Column="1"/>
                                                         <materialDesign:PopupBox Grid.Column="2" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
                                                             <StackPanel>
-                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteEventCommand, ElementName=WorkflowEditorWindow}"/>
+                                                                <Button Content="Remove" Command="{Binding DataContext.DeleteEventCommand, ElementName=WorkflowEditorWindow}" CommandParameter="{Binding}"/>
                                                             </StackPanel>
                                                         </materialDesign:PopupBox>
                                                     </Grid>

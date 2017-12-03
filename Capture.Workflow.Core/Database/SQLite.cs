@@ -1469,24 +1469,37 @@ namespace SQLite
 
 		public void Close ()
 		{
-			if (_open && Handle != NullHandle) {
-				try {
-					if (_mappings != null) {
-						foreach (var sqlInsertCommand in _mappings.Values) {
-							sqlInsertCommand.Dispose();
-						}
-					}
-					var r = SQLite3.Close (Handle);
-					if (r != SQLite3.Result.OK) {
-						string msg = SQLite3.GetErrmsg (Handle);
-						throw SQLiteException.New (r, msg);
-					}
-				}
-				finally {
-					Handle = NullHandle;
-					_open = false;
-				}
-			}
+		    try
+		    {
+		        if (_open && Handle != NullHandle)
+		        {
+		            try
+		            {
+		                if (_mappings != null)
+		                {
+		                    foreach (var sqlInsertCommand in _mappings.Values)
+		                    {
+		                        sqlInsertCommand.Dispose();
+		                    }
+		                }
+		                var r = SQLite3.Close(Handle);
+		                if (r != SQLite3.Result.OK)
+		                {
+		                    string msg = SQLite3.GetErrmsg(Handle);
+		                    throw SQLiteException.New(r, msg);
+		                }
+		            }
+		            finally
+		            {
+		                Handle = NullHandle;
+		                _open = false;
+		            }
+		        }
+            }
+            catch (Exception e)
+		    {
+                Console.WriteLine(e);
+		    }
 		}
 	}
 

@@ -264,6 +264,7 @@
     <Compile Include="Classes\CustomPropertyCollection.cs" />
     <Compile Include="Classes\CustomPropertyType.cs" />
     <Compile Include="Classes\FileItem.cs" />
+    <Compile Include="Classes\MemoryStreamEx.cs" />
     <Compile Include="Classes\MessageEventArgs.cs" />
     <Compile Include="Classes\Messages.cs" />
     <Compile Include="Classes\PluginInfo.cs" />

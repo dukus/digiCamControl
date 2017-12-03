@@ -75,6 +75,7 @@ namespace Capture.Workflow.Core
                 foreach (var command in collection.Items)
                 {
                     currCmd = command.Name;
+                    Log.Debug("Executing command " + currCmd);
                     if (!command.Instance.Execute(command, context))
                         return;
                 }
@@ -208,6 +209,7 @@ namespace Capture.Workflow.Core
                     {
                         Log.Debug("Unable to create thumbnail", e);
                     }
+                    Context.ImageStream = null;
                 }
             }
             return null;
@@ -221,10 +223,12 @@ namespace Capture.Workflow.Core
                 if (Context?.WorkFlow == null)
                     return;
 
-                string tempFile = Path.Combine(Settings.Instance.TempFolder, Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
+                string tempFile = Path.Combine(Settings.Instance.TempFolder,
+                    Path.GetRandomFileName() + Path.GetExtension(eventArgs.FileName));
 
                 // set in varieable the captured file original name
-                Context?.WorkFlow?.Variables.SetValue("CapturedFileName", Path.GetFileNameWithoutExtension(eventArgs.FileName));
+                Context?.WorkFlow?.Variables.SetValue("CapturedFileName",
+                    Path.GetFileNameWithoutExtension(eventArgs.FileName));
 
                 Utils.CreateFolder(tempFile);
 
@@ -255,13 +259,9 @@ namespace Capture.Workflow.Core
                 Context.FileItem = FileItem;
 
                 Utils.WaitForFile(tempFile);
-                using (MemoryStream stream = new MemoryStream(File.ReadAllBytes(tempFile)))
-                {
-                    Context.FileItem = item;
-                    Context.ImageStream = stream;
-                    OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem) { Context = Context });
-                    OnMessage(new MessageEventArgs(Messages.FileTransferred, Context) { Context = Context });
-                }
+                Context.FileItem = item;
+                OnMessage(new MessageEventArgs(Messages.PhotoDownloaded, FileItem) {Context = Context});
+                OnMessage(new MessageEventArgs(Messages.FileTransferred, Context) {Context = Context});
             }
             catch (Exception ex)
             {

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using CameraControl.Devices;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.Core.Classes.Attributes;
@@ -33,7 +36,9 @@ namespace Capture.Workflow.Plugins.Commands
                     "PrevPhoto",
                     "DeletePhoto",
                     "ClearPhotos",
-                    "ShowHelp"
+                    "ShowHelp",
+                    "LoadImage",
+                    "UnLoadImage"
                 }
             });
 
@@ -85,6 +90,37 @@ namespace Capture.Workflow.Plugins.Commands
                     break;
                 case "ShowHelp":
                     WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.ShowHelp, context));
+                    break;
+                case "LoadImage":
+                {
+                    try
+                    {
+                        var stream = new MemoryStreamEx();
+                        var buffer = File.ReadAllBytes(context.FileItem.TempFile);
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Seek(0, SeekOrigin.Begin);
+                        context.ImageStream = stream;
+                        Log.Debug("LoadImage executed");
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Debug("Error unload image", e);
+                    }
+                }
+                    break;
+                case "UnLoadImage":
+                {
+                    try
+                    {
+                        context.ImageStream?.Close();
+                        Log.Debug("UnLoadImage executed");
+                        }
+                    catch (Exception e)
+                    {
+                            Log.Debug("Error unload image", e);
+                    }
+                    }
+                    
                     break;
             }
             return true;

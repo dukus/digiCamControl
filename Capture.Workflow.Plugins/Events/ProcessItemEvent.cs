@@ -60,16 +60,8 @@ namespace Capture.Workflow.Plugins.Events
                                 varItem.AttachedVariable = variable;
                             }
                         }
-                        //-------------------
-                        using (MemoryStream stream = new MemoryStream())
-                        {
-                            var buffer = File.ReadAllBytes(item.TempFile);
-                            stream.Write(buffer, 0, buffer.Length);
-                            itemContex.ImageStream = stream;
-                            WorkflowManager.Execute(_flowEvent.CommandCollection, itemContex);
-                            stream.Seek(0, SeekOrigin.Begin);
-                        }
-                        
+                        WorkflowManager.Instance.Context = itemContex;
+                        WorkflowManager.Execute(_flowEvent.CommandCollection, itemContex);
                     }
                 }
                 WorkflowManager.Instance.OnMessage(new MessageEventArgs(Messages.IsNotBusy, null));
