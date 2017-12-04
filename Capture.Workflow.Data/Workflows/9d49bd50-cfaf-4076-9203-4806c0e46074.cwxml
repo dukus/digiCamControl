@@ -1,0 +1,1227 @@
+<?xml version="1.0"?>
+<WorkFlow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Views>
+    <WorkFlowView Name="StartScreen ">
+      <PluginInfo Type="View" Name="StartScreen" Class="Capture.Workflow.Plugins.Views.StartScreen, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="StartScreen " />
+        <Property Name="ViewTitle" Value="Start" />
+      </Properties>
+      <Elements>
+        <WorkFlowViewElement Name="Text(Product)">
+          <PluginInfo Type="ViewElement" Name="Text" Class="Capture.Workflow.Plugins.ViewElements.TextElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Text(Product)" />
+            <Property Name="Caption" Value="Product Name" />
+            <Property Name="Position" Value="Center" />
+            <Property Name="IsReadOnly" />
+            <Property Name="Width" Value="250" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="Height" Value="35" />
+            <Property Name="Orientation" Value="Horizontal" />
+            <Property Name="Margins" Value="15" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+            <Property Name="Variable" Value="ProductName" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="BrowseFolder( SessionFolder)">
+          <PluginInfo Type="ViewElement" Name="BrowseFolder" Class="Capture.Workflow.Plugins.ViewElements.BrowseTextElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="BrowseFolder( SessionFolder)" />
+            <Property Name="Caption" Value="Session folder" />
+            <Property Name="Position" Value="Center" />
+            <Property Name="Width" Value="250" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="Height" Value="35" />
+            <Property Name="Orientation" Value="Horizontal" />
+            <Property Name="Margins" Value="15" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+            <Property Name="ButtonText" Value="..." />
+            <Property Name="Variable" Value="SessionFolder" />
+            <Property Name="File" Value="" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Next)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Next)" />
+            <Property Name="Caption" Value="Next" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomRight" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="Dialog #1">
+                <PluginInfo Type="Command" Name="Dialog" Class="Capture.Workflow.Plugins.Commands.DialogAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Dialog #1" />
+                  <Property Name="Condition" Value="string.IsNullOrEmpty(SessionFolder)" />
+                  <Property Name="Message" Value="First set the session folder" />
+                  <Property Name="Type" Value="Message" />
+                  <Property Name="Variable" />
+                  <Property Name="FileNameFilter" Value="Jpeg files (*.jpg)|*.jpg|All files (*.*)|*.*" />
+                  <Property Name="Error" Value="True" />
+                </Properties>
+              </Command>
+              <Command Name="Dialog #2">
+                <PluginInfo Type="Command" Name="Dialog" Class="Capture.Workflow.Plugins.Commands.DialogAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Dialog #2" />
+                  <Property Name="Condition" Value="string.IsNullOrEmpty(ProductName)" />
+                  <Property Name="Message" Value="First set the product name" />
+                  <Property Name="Type" Value="Message" />
+                  <Property Name="Variable" />
+                  <Property Name="FileNameFilter" Value="Jpeg files (*.jpg)|*.jpg|All files (*.*)|*.*" />
+                  <Property Name="Error" Value="True" />
+                </Properties>
+              </Command>
+              <Command Name="Assign #1">
+                <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Assign #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Variable" Value="Brightness" />
+                  <Property Name="Formula" Value="0" />
+                </Properties>
+              </Command>
+              <Command Name="Assign #2">
+                <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Assign #2" />
+                  <Property Name="Condition" />
+                  <Property Name="Variable" Value="Contrast" />
+                  <Property Name="Formula" Value="0" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction(Save variables)">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction(Save variables)" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="SaveVariables" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Command Name="TriggerEvent #1">
+                <PluginInfo Type="Command" Name="TriggerEvent" Class="Capture.Workflow.Plugins.Commands.TriggerEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="TriggerEvent #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Event" Value="Init" />
+                  <Property Name="Message" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ShowView" />
+                  <Property Name="ViewName" Value="Live view" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Close)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Close)" />
+            <Property Name="Caption" Value="Close" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomLeft" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="CancelSession" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Help)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Help)" />
+            <Property Name="Caption" Value="Help" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomLeft" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ShowHelp" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+      </Elements>
+      <Events>
+        <CommandCollection>
+          <Name>Load</Name>
+        </CommandCollection>
+        <CommandCollection>
+          <Name>UnLoad</Name>
+        </CommandCollection>
+      </Events>
+    </WorkFlowView>
+    <WorkFlowView Name="Live view">
+      <PluginInfo Type="View" Name="Live view" Class="Capture.Workflow.Plugins.Views.LiveView, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="Live view" />
+        <Property Name="ViewTitle" Value="Capture" />
+        <Property Name="FileListVisible" Value="True" />
+        <Property Name="NoPreview" Value="False" />
+      </Properties>
+      <Elements>
+        <WorkFlowViewElement Name="Button(Capture)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Capture)" />
+            <Property Name="Caption" Value="Capture" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="CameraAction #1">
+                <PluginInfo Type="Command" Name="CameraAction" Class="Capture.Workflow.Plugins.Commands.CameraAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="CameraAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="CaptureNoAf" />
+                  <Property Name="Param1" />
+                  <Property Name="Param2" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(AutoFocus)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(AutoFocus)" />
+            <Property Name="Caption" Value="AutoFocus" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="CameraAction #1">
+                <PluginInfo Type="Command" Name="CameraAction" Class="Capture.Workflow.Plugins.Commands.CameraAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="CameraAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="Autofocus" />
+                  <Property Name="Param1" />
+                  <Property Name="Param2" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Next)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Next)" />
+            <Property Name="Caption" Value="Next" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomRight" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="Dialog #1">
+                <PluginInfo Type="Command" Name="Dialog" Class="Capture.Workflow.Plugins.Commands.DialogAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Dialog #1" />
+                  <Property Name="Condition" Value="CapturedFilesCount==0" />
+                  <Property Name="Message" Value="No captured files " />
+                  <Property Name="Type" Value="Message" />
+                  <Property Name="Variable" />
+                  <Property Name="FileNameFilter" Value="Jpeg files (*.jpg)|*.jpg|All files (*.*)|*.*" />
+                  <Property Name="Error" Value="True" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ShowView" />
+                  <Property Name="ViewName" Value="Preview" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Delete)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Delete)" />
+            <Property Name="Caption" Value="Delete" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="PreviewRight" />
+            <Property Name="Style" Value="Rounded" />
+            <Property Name="Icon" Value="Delete" />
+            <Property Name="Width" Value="70" />
+            <Property Name="Height" Value="70" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="DeletePhoto" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Separator #1">
+          <PluginInfo Type="ViewElement" Name="Separator" Class="Capture.Workflow.Plugins.ViewElements.SeparatorElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Separator #1" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="5" />
+            <Property Name="Margins" Value="5" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="CameraProperty #1">
+          <PluginInfo Type="ViewElement" Name="CameraProperty" Class="Capture.Workflow.Plugins.ViewElements.CameraProperty, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="CameraProperty #1" />
+            <Property Name="Caption" Value="Mode" />
+            <Property Name="Property" Value="Mode" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="150" />
+            <Property Name="Height" Value="0" />
+            <Property Name="Margins" Value="2" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="CameraProperty #2">
+          <PluginInfo Type="ViewElement" Name="CameraProperty" Class="Capture.Workflow.Plugins.ViewElements.CameraProperty, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="CameraProperty #2" />
+            <Property Name="Caption" Value="Iso" />
+            <Property Name="Property" Value="IsoNumber" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="150" />
+            <Property Name="Height" Value="0" />
+            <Property Name="Margins" Value="2" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="CameraProperty #3">
+          <PluginInfo Type="ViewElement" Name="CameraProperty" Class="Capture.Workflow.Plugins.ViewElements.CameraProperty, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="CameraProperty #3" />
+            <Property Name="Caption" Value="White Balance" />
+            <Property Name="Property" Value="WhiteBalance" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="150" />
+            <Property Name="Height" Value="0" />
+            <Property Name="Margins" Value="2" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="CameraProperty #4">
+          <PluginInfo Type="ViewElement" Name="CameraProperty" Class="Capture.Workflow.Plugins.ViewElements.CameraProperty, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="CameraProperty #4" />
+            <Property Name="Caption" Value="Aperture" />
+            <Property Name="Property" Value="FNumber" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="150" />
+            <Property Name="Height" Value="0" />
+            <Property Name="Margins" Value="2" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+      </Elements>
+      <Events>
+        <CommandCollection>
+          <Command Name="CameraAction #1">
+            <PluginInfo Type="Command" Name="CameraAction" Class="Capture.Workflow.Plugins.Commands.CameraAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+            <Properties>
+              <Property Name="(Name)" Value="CameraAction #1" />
+              <Property Name="Condition" />
+              <Property Name="Action" Value="StartLiveView" />
+              <Property Name="Param1" />
+              <Property Name="Param2" />
+            </Properties>
+          </Command>
+          <Name>Load</Name>
+        </CommandCollection>
+        <CommandCollection>
+          <Command Name="CameraAction #1">
+            <PluginInfo Type="Command" Name="CameraAction" Class="Capture.Workflow.Plugins.Commands.CameraAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+            <Properties>
+              <Property Name="(Name)" Value="CameraAction #1" />
+              <Property Name="Condition" />
+              <Property Name="Action" Value="StopLiveView" />
+              <Property Name="Param1" />
+              <Property Name="Param2" />
+            </Properties>
+          </Command>
+          <Name>UnLoad</Name>
+        </CommandCollection>
+      </Events>
+    </WorkFlowView>
+    <WorkFlowView Name="Preview">
+      <PluginInfo Type="View" Name="Preview" Class="Capture.Workflow.Plugins.Views.Preview, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="Preview" />
+        <Property Name="ViewTitle" Value="Edit" />
+        <Property Name="FileListVisible" Value="True" />
+      </Properties>
+      <Elements>
+        <WorkFlowViewElement Name="Button(Cancel)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Cancel)" />
+            <Property Name="Caption" Value="Cancel" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomRight" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="Dialog #1">
+                <PluginInfo Type="Command" Name="Dialog" Class="Capture.Workflow.Plugins.Commands.DialogAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Dialog #1" />
+                  <Property Name="Condition" Value="All captured files in current  session will be lost. Continue ?" />
+                  <Property Name="Message" />
+                  <Property Name="Type" Value="Message" />
+                  <Property Name="Variable" />
+                  <Property Name="FileNameFilter" Value="Jpeg files (*.jpg)|*.jpg|All files (*.*)|*.*" />
+                  <Property Name="Error" Value="True" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ClearPhotos" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #2">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #2" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ShowView" />
+                  <Property Name="ViewName" Value="StartScreen " />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Slider(Br)">
+          <PluginInfo Type="ViewElement" Name="Slider" Class="Capture.Workflow.Plugins.ViewElements.SliderElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Slider(Br)" />
+            <Property Name="Caption" Value="Brightness" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="Height" Value="30" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Margins" Value="0" />
+            <Property Name="Variable" Value="Brightness" />
+            <Property Name="Minimum" Value="-100" />
+            <Property Name="Maximum" Value="100" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Finish)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Finish)" />
+            <Property Name="Caption" Value="Finish" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomRight" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="WorkflowAction(Process)">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction(Process)" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="FinishSession" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction(Clear)">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction(Clear)" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ClearPhotos" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #2">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #2" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ShowView" />
+                  <Property Name="ViewName" Value="StartScreen " />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Slider(Contrast)">
+          <PluginInfo Type="ViewElement" Name="Slider" Class="Capture.Workflow.Plugins.ViewElements.SliderElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Slider(Contrast)" />
+            <Property Name="Caption" Value="Contrast" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="Height" Value="30" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Margins" Value="0" />
+            <Property Name="Variable" Value="Contrast" />
+            <Property Name="Minimum" Value="-100" />
+            <Property Name="Maximum" Value="100" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Separator #1">
+          <PluginInfo Type="ViewElement" Name="Separator" Class="Capture.Workflow.Plugins.ViewElements.SeparatorElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Separator #1" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="5" />
+            <Property Name="Margins" Value="0" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Back)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Back)" />
+            <Property Name="Caption" Value="Back" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="BottomLeft" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="50" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="ShowView" />
+                  <Property Name="ViewName" Value="Live view" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Slider(Black)">
+          <PluginInfo Type="ViewElement" Name="Slider" Class="Capture.Workflow.Plugins.ViewElements.SliderElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Slider(Black)" />
+            <Property Name="Caption" Value="Black" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="Height" Value="30" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Margins" Value="0" />
+            <Property Name="Variable" Value="BlackPoint" />
+            <Property Name="Minimum" Value="0" />
+            <Property Name="Maximum" Value="100" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Slider(Mid)">
+          <PluginInfo Type="ViewElement" Name="Slider" Class="Capture.Workflow.Plugins.ViewElements.SliderElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Slider(Mid)" />
+            <Property Name="Caption" Value="Mid" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="Height" Value="30" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Margins" Value="0" />
+            <Property Name="Variable" Value="MidPoint" />
+            <Property Name="Minimum" Value="-100" />
+            <Property Name="Maximum" Value="100" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Slider(White)">
+          <PluginInfo Type="ViewElement" Name="Slider" Class="Capture.Workflow.Plugins.ViewElements.SliderElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Slider(White)" />
+            <Property Name="Caption" Value="White" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="Height" Value="30" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Margins" Value="0" />
+            <Property Name="Variable" Value="WhitePoint" />
+            <Property Name="Minimum" Value="0" />
+            <Property Name="Maximum" Value="100" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Delete)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Delete)" />
+            <Property Name="Caption" Value="Delete" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="Right" />
+            <Property Name="Style" Value="Rounded" />
+            <Property Name="Icon" Value="Delete" />
+            <Property Name="Width" Value="70" />
+            <Property Name="Height" Value="70" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="Dialog #1">
+                <PluginInfo Type="Command" Name="Dialog" Class="Capture.Workflow.Plugins.Commands.DialogAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Dialog #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Message" Value="Do you want to remove the selected item ?" />
+                  <Property Name="Type" Value="YesNo" />
+                  <Property Name="Variable" />
+                  <Property Name="FileNameFilter" Value="Jpeg files (*.jpg)|*.jpg|All files (*.*)|*.*" />
+                  <Property Name="Error" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="DeletePhoto" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Save)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Save)" />
+            <Property Name="Caption" Value="Save" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="Right" />
+            <Property Name="Style" Value="Rounded" />
+            <Property Name="Icon" Value="Floppy" />
+            <Property Name="Width" Value="70" />
+            <Property Name="Height" Value="70" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="Dialog #1">
+                <PluginInfo Type="Command" Name="Dialog" Class="Capture.Workflow.Plugins.Commands.DialogAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="Dialog #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Message" />
+                  <Property Name="Type" Value="SaveFile" />
+                  <Property Name="Variable" Value="DialogSaveFile" />
+                  <Property Name="FileNameFilter" Value="Jpeg files (*.jpg)|*.jpg|All files (*.*)|*.*" />
+                  <Property Name="Error" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #1">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="LoadImage" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Command Name="TriggerEvent #1">
+                <PluginInfo Type="Command" Name="TriggerEvent" Class="Capture.Workflow.Plugins.Commands.TriggerEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="TriggerEvent #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Event" Value="Render" />
+                  <Property Name="Message" />
+                </Properties>
+              </Command>
+              <Command Name="SaveFile #1">
+                <PluginInfo Type="Command" Name="SaveFile" Class="Capture.Workflow.Plugins.Commands.ImageProcessing.SaveFileAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="SaveFile #1" />
+                  <Property Name="Condition" />
+                  <Property Name="FileNameTemplate" Value="{DialogSaveFile}" />
+                  <Property Name="FileFormat" Value="Jpg" />
+                </Properties>
+              </Command>
+              <Command Name="WorkflowAction #2">
+                <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="WorkflowAction #2" />
+                  <Property Name="Condition" />
+                  <Property Name="Action" Value="UnLoadImage" />
+                  <Property Name="ViewName" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Slider(Saturation)">
+          <PluginInfo Type="ViewElement" Name="Slider" Class="Capture.Workflow.Plugins.ViewElements.SliderElement, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Slider(Saturation)" />
+            <Property Name="Caption" Value="Saturation" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Width" Value="150" />
+            <Property Name="LabelWidth" Value="0" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="Height" Value="30" />
+            <Property Name="Orientation" Value="Vertical" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="Variable" Value="Saturation" />
+            <Property Name="Minimum" Value="0" />
+            <Property Name="Maximum" Value="200" />
+          </Properties>
+          <Events />
+        </WorkFlowViewElement>
+        <WorkFlowViewElement Name="Button(Reset)">
+          <PluginInfo Type="ViewElement" Name="Button" Class="Capture.Workflow.Plugins.ViewElements.Button, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Button(Reset)" />
+            <Property Name="Caption" Value="Reset" />
+            <Property Name="Enabled" />
+            <Property Name="Position" Value="Left" />
+            <Property Name="Style" Value="Default" />
+            <Property Name="Icon" Value="(None)" />
+            <Property Name="Width" Value="150" />
+            <Property Name="Height" Value="40" />
+            <Property Name="Margins" Value="5" />
+            <Property Name="FontSize" Value="15" />
+            <Property Name="BackgroundColor" Value="Transparent" />
+            <Property Name="ForegroundColor" Value="Transparent" />
+          </Properties>
+          <Events>
+            <CommandCollection>
+              <Command Name="TriggerEvent #1">
+                <PluginInfo Type="Command" Name="TriggerEvent" Class="Capture.Workflow.Plugins.Commands.TriggerEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+                <Properties>
+                  <Property Name="(Name)" Value="TriggerEvent #1" />
+                  <Property Name="Condition" />
+                  <Property Name="Event" Value="Init" />
+                  <Property Name="Message" />
+                </Properties>
+              </Command>
+              <Name>Click</Name>
+            </CommandCollection>
+          </Events>
+        </WorkFlowViewElement>
+      </Elements>
+      <Events>
+        <CommandCollection>
+          <Name>Load</Name>
+        </CommandCollection>
+        <CommandCollection>
+          <Name>UnLoad</Name>
+        </CommandCollection>
+      </Events>
+    </WorkFlowView>
+  </Views>
+  <Events>
+    <WorkFlowEvent Name="ThumbChanged #1">
+      <PluginInfo Type="Event" Name="ThumbChanged" Class="Capture.Workflow.Plugins.Events.ThumbChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="ThumbChanged #1" />
+        <Property Name="Condition" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="TriggerEvent #1">
+          <PluginInfo Type="Command" Name="TriggerEvent" Class="Capture.Workflow.Plugins.Commands.TriggerEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="TriggerEvent #1" />
+            <Property Name="Condition" />
+            <Property Name="Event" Value="Render" />
+            <Property Name="Message" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="VariableChanged #1">
+      <PluginInfo Type="Event" Name="VariableChanged" Class="Capture.Workflow.Plugins.Events.VariableChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="VariableChanged #1" />
+        <Property Name="Condition" />
+        <Property Name="Variable" Value="Brightness" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UpdateThumb" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="VariableChanged #2">
+      <PluginInfo Type="Event" Name="VariableChanged" Class="Capture.Workflow.Plugins.Events.VariableChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="VariableChanged #2" />
+        <Property Name="Condition" />
+        <Property Name="Variable" Value="Contrast" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UpdateThumb" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="ProcessItem #1">
+      <PluginInfo Type="Event" Name="ProcessItem" Class="Capture.Workflow.Plugins.Events.ProcessItemEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="ProcessItem #1" />
+        <Property Name="Condition" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="LoadImage" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+        <Command Name="Assign #1">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #1" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="Counter" />
+            <Property Name="Formula" Value="Counter+1" />
+          </Properties>
+        </Command>
+        <Command Name="TriggerEvent #1">
+          <PluginInfo Type="Command" Name="TriggerEvent" Class="Capture.Workflow.Plugins.Commands.TriggerEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="TriggerEvent #1" />
+            <Property Name="Condition" />
+            <Property Name="Event" Value="Render" />
+            <Property Name="Message" />
+          </Properties>
+        </Command>
+        <Command Name="SaveFile #1">
+          <PluginInfo Type="Command" Name="SaveFile" Class="Capture.Workflow.Plugins.Commands.ImageProcessing.SaveFileAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="SaveFile #1" />
+            <Property Name="Condition" />
+            <Property Name="FileNameTemplate" Value="{SessionFolder}\\{ProductName}\\{ProductName}_{Counter:000}" />
+            <Property Name="FileFormat" Value="Jpg" />
+          </Properties>
+        </Command>
+        <Command Name="WorkflowAction #2">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #2" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UnLoadImage" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="VariableChanged #3">
+      <PluginInfo Type="Event" Name="VariableChanged" Class="Capture.Workflow.Plugins.Events.VariableChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="VariableChanged #3" />
+        <Property Name="Condition" />
+        <Property Name="Variable" Value="BlackPoint" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UpdateThumb" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="VariableChanged #4">
+      <PluginInfo Type="Event" Name="VariableChanged" Class="Capture.Workflow.Plugins.Events.VariableChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="VariableChanged #4" />
+        <Property Name="Condition" />
+        <Property Name="Variable" Value="MidPoint" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UpdateThumb" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="VariableChanged #5">
+      <PluginInfo Type="Event" Name="VariableChanged" Class="Capture.Workflow.Plugins.Events.VariableChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="VariableChanged #5" />
+        <Property Name="Condition" />
+        <Property Name="Variable" Value="WhitePoint" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UpdateThumb" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="VariableChanged #6">
+      <PluginInfo Type="Event" Name="VariableChanged" Class="Capture.Workflow.Plugins.Events.VariableChangedEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="VariableChanged #6" />
+        <Property Name="Condition" />
+        <Property Name="Variable" Value="Saturation" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="WorkflowAction #1">
+          <PluginInfo Type="Command" Name="WorkflowAction" Class="Capture.Workflow.Plugins.Commands.WorkflowAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="WorkflowAction #1" />
+            <Property Name="Condition" />
+            <Property Name="Action" Value="UpdateThumb" />
+            <Property Name="ViewName" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="CustomEvent(Render)">
+      <PluginInfo Type="Event" Name="CustomEvent" Class="Capture.Workflow.Plugins.Events.CustomEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="CustomEvent(Render)" />
+        <Property Name="Condition" />
+        <Property Name="Event" Value="Render" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="BrightnessContrast #1">
+          <PluginInfo Type="Command" Name="BrightnessContrast" Class="Capture.Workflow.Plugins.Commands.ImageProcessing.BrightnessAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="BrightnessContrast #1" />
+            <Property Name="Condition" />
+            <Property Name="Brightness" Value="Brightness" />
+            <Property Name="Contrast" Value="Contrast" />
+          </Properties>
+        </Command>
+        <Command Name="Saturation #1">
+          <PluginInfo Type="Command" Name="Saturation" Class="Capture.Workflow.Plugins.Commands.ImageProcessing.SaturationAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Saturation #1" />
+            <Property Name="Condition" />
+            <Property Name="Saturation" Value="Saturation" />
+          </Properties>
+        </Command>
+        <Command Name="Level #1">
+          <PluginInfo Type="Command" Name="Level" Class="Capture.Workflow.Plugins.Commands.ImageProcessing.LevelAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Level #1" />
+            <Property Name="Condition" />
+            <Property Name="BlackPoint" Value="BlackPoint" />
+            <Property Name="MidPoint" Value="MidPoint" />
+            <Property Name="WhitePoint" Value="WhitePoint" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+    <WorkFlowEvent Name="CustomEvent(Init)">
+      <PluginInfo Type="Event" Name="CustomEvent" Class="Capture.Workflow.Plugins.Events.CustomEvent, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+      <Properties>
+        <Property Name="(Name)" Value="CustomEvent(Init)" />
+        <Property Name="Condition" />
+        <Property Name="Event" Value="Init" />
+      </Properties>
+      <CommandCollection>
+        <Command Name="Assign #1">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #1" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="Brightness" />
+            <Property Name="Formula" Value="0" />
+          </Properties>
+        </Command>
+        <Command Name="Assign #2">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #2" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="Contrast" />
+            <Property Name="Formula" Value="0" />
+          </Properties>
+        </Command>
+        <Command Name="Assign #3">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #3" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="BlackPoint" />
+            <Property Name="Formula" Value="0" />
+          </Properties>
+        </Command>
+        <Command Name="Assign #4">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #4" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="MidPoint" />
+            <Property Name="Formula" Value="0" />
+          </Properties>
+        </Command>
+        <Command Name="Assign #5">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #5" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="WhitePoint" />
+            <Property Name="Formula" Value="100" />
+          </Properties>
+        </Command>
+        <Command Name="Assign #6">
+          <PluginInfo Type="Command" Name="Assign" Class="Capture.Workflow.Plugins.Commands.AssignAction, Capture.Workflow.Plugins, Version=0.1.0.4, Culture=neutral, PublicKeyToken=null" />
+          <Properties>
+            <Property Name="(Name)" Value="Assign #6" />
+            <Property Name="Condition" />
+            <Property Name="Variable" Value="Saturation" />
+            <Property Name="Formula" Value="100" />
+          </Properties>
+        </Command>
+      </CommandCollection>
+    </WorkFlowEvent>
+  </Events>
+  <Variables>
+    <Variable Name="SessionFolder" Value="F:\test" DefaultValue="" Reinit="false" Editable="true" ItemVariable="false" VariableType="String">
+      <ValueList />
+    </Variable>
+    <Variable Name="ProductName" Value="Telefon" DefaultValue="" Reinit="false" Editable="true" ItemVariable="false" VariableType="String">
+      <ValueList />
+    </Variable>
+    <Variable Name="Brightness" Value="0" DefaultValue="0" Reinit="true" Editable="true" ItemVariable="true" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="Contrast" Value="0" DefaultValue="0" Reinit="true" Editable="true" ItemVariable="true" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="Counter" Value="0" DefaultValue="0" Reinit="true" Editable="true" ItemVariable="false" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="BlackPoint" Value="0" DefaultValue="0" Reinit="true" Editable="true" ItemVariable="true" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="MidPoint" Value="0" DefaultValue="0" Reinit="true" Editable="true" ItemVariable="true" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="WhitePoint" Value="100" DefaultValue="100" Reinit="true" Editable="true" ItemVariable="true" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="CapturedFilesCount" Value="0" DefaultValue="0" Reinit="false" Editable="true" ItemVariable="false" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="Saturation" Value="100" DefaultValue="100" Reinit="true" Editable="true" ItemVariable="true" VariableType="Number">
+      <ValueList />
+    </Variable>
+    <Variable Name="DialogSaveFile" Value="" DefaultValue="" Reinit="true" Editable="true" ItemVariable="false" VariableType="String">
+      <ValueList />
+    </Variable>
+  </Variables>
+  <Properties>
+    <Property Name="Author" Value="Duka Istvan" />
+    <Property Name="Forum" />
+    <Property Name="License url" />
+    <Property Name="BaseColorScheme" Value="Dark" />
+    <Property Name="ColorScheme" Value="orange" />
+    <Property Name="HideTileBar" />
+    <Property Name="FullScreen" Value="True" />
+    <Property Name="CardBackground" />
+    <Property Name="PreviewSize" Value="1090" />
+    <Property Name="HelpFile" Value="" />
+  </Properties>
+  <Id>9d49bd50-cfaf-4076-9203-4806c0e46074</Id>
+  <Name>Product Photography</Name>
+  <Description>Workflow to capture multiple photos from a product with simple edit capabilities.</Description>
+  <Version>0.0.1</Version>
+</WorkFlow>

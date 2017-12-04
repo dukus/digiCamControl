@@ -39,9 +39,9 @@ namespace Capture.Workflow.Setup
                     FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "Capture.Workflow.exe"));
 
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
-            project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
-            //project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
-            project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
+            //project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
+            ////project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";
+            //project.MajorUpgradeStrategy.RemoveExistingProductAfter = Step.InstallInitialize;
             project.ControlPanelInfo.Manufacturer = "Duka Istvan";
             project.OutFileName = string.Format("Capture.Workflow.Setup_{0}", ver.FileVersion);
 

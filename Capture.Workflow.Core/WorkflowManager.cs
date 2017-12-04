@@ -433,7 +433,7 @@ namespace Capture.Workflow.Core
         {
             if (File.Exists(fileName))
             {
-                using (FileStream myFileStream = new FileStream(fileName, FileMode.Open))
+                using (FileStream myFileStream = new FileStream(fileName, FileMode.Open,FileAccess.Read,FileShare.Read))
                 {
                     return Load(myFileStream);
                 }
@@ -580,23 +580,59 @@ namespace Capture.Workflow.Core
 
         public IViewPlugin GetViewPlugin(string className)
         {
-            return (IViewPlugin) Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            try
+            {
+                return (IViewPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to load view plugin" + className, e);
+                throw;
+            }
+
         }
 
         public IViewElementPlugin GetElementPlugin(string className)
         {
-            return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            try
+            {
+                return (IViewElementPlugin)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to load element plugin" + className, e);
+                throw;
+            }
+
         }
 
         public IEventPlugin GetEventPlugin(string className)
         {
-            var plugin= Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
-            return (IEventPlugin) plugin;
+            try
+            {
+                Log.Debug("Load event plugin " + className);
+                var plugin = Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+                return (IEventPlugin)plugin;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to load event plugin" + className,e);
+                throw;
+            }
         }
 
         public IWorkflowCommand GetCommandPlugin(string className)
         {
-            return (IWorkflowCommand)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            try
+            {
+                return (IWorkflowCommand)Activator.CreateInstance(Type.GetType(className, AssemblyResolver, null));
+            }
+            catch (Exception e)
+            {
+                Log.Error("Unable to load command plugin" + className, e);
+                throw;
+            }
+
         }
 
         public IWorkflowQueueCommand GetQueueCommandPlugin(string pluginName)
@@ -709,14 +745,17 @@ namespace Capture.Workflow.Core
 
         private void UpdateThumb()
         {
-            _thumbRunning = true;
-            Bitmap = GetLargeThumbnail(SelectedItem);
-            OnMessage(new MessageEventArgs(Messages.ThumbUpdated, null));
-            _thumbRunning = false;
-            if (_thumbNext)
+            lock (_lock)
             {
-                _thumbNext = false;
-                UpdateThumbAsync();
+                _thumbRunning = true;
+                Bitmap = GetLargeThumbnail(SelectedItem);
+                OnMessage(new MessageEventArgs(Messages.ThumbUpdated, null));
+                _thumbRunning = false;
+                if (_thumbNext)
+                {
+                    _thumbNext = false;
+                    UpdateThumbAsync();
+                }
             }
         }
 

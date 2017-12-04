@@ -70,11 +70,11 @@ namespace Capture.Workflow
             {
                 Log.Error("Damaged installation. Application exiting ");
                 MessageBox.Show(
-                    "Application crash !! Damaged installation!\nPlease unintall aplication from control panel and reinstall it!");
+                    "Application crash !! Damaged installation!\nPlease unintall the aplication from control panel and reinstall it!");
             }
             else
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show(errorMessage, "Application crash !!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             Current?.Shutdown();
         }
