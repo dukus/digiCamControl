@@ -52,11 +52,12 @@ namespace CameraControl.Devices.Others
 
         public override void CapturePhoto()
         {
-            var files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "*.jpg");
-            if (files.Length > 0)
+            List<string> files = new List<string>(
+                Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "*."+ CompressionSetting.Value));
+            if (files.Count > 0)
             {
                 Random rnd1 = new Random();
-                var file = files[rnd1.Next(files.Length - 1)];
+                var file = files[rnd1.Next(files.Count - 1)];
                 PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
                 {
                     WiaImageItem = null,
@@ -69,7 +70,7 @@ namespace CameraControl.Devices.Others
             }
             else
             {
-                throw new Exception("No file in the MyPictures folder");
+                throw new Exception("No file in the MyPictures folder with extension " + CompressionSetting.Value);
             }
         }
 
@@ -102,7 +103,14 @@ namespace CameraControl.Devices.Others
             ShutterSpeed = new PropertyValue<long> {IsEnabled = false};
             WhiteBalance = new PropertyValue<long> {IsEnabled = false};
             FocusMode = new PropertyValue<long> {IsEnabled = false};
-            CompressionSetting = new PropertyValue<long> {IsEnabled = false};
+
+            CompressionSetting = new PropertyValue<long> {IsEnabled = true};
+            CompressionSetting.AddValues("jpg",0);
+            CompressionSetting.AddValues("cr2", 1);
+            CompressionSetting.AddValues("new", 2);
+            CompressionSetting.Value = "jpg";
+            CompressionSetting.ReloadValues();
+
             IsoNumber = new PropertyValue<long> {IsEnabled = true};
             ExposureMeteringMode = new PropertyValue<long> {IsEnabled = false};
             Battery = 100;

@@ -436,7 +436,7 @@ namespace CameraControl.Devices.Classes
 
         /// <summary>
         /// Reload display values 
-        /// Should be called after AddValues
+        /// Should be called always after AddValues
         /// </summary>
         public void ReloadValues()
         {

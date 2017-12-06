@@ -24,7 +24,9 @@ namespace CameraControl.Core.Scripting
                 case "capture":
                     if (args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]))
                     {
-                        var file = args[1];
+                        // fix if space is in file name 
+                        //http://digicamcontrol.com/phpbb/viewtopic.php?f=4&t=1929&p=5486#p5486
+                        var file = string.Join(" ", args.Skip(1)).Trim();
                         if (file.Contains(":\\") || file.StartsWith(@"\\"))
                         {
                             ServiceProvider.Settings.DefaultSession.Folder = Path.GetDirectoryName(file);
