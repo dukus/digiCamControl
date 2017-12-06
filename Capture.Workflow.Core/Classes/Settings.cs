@@ -29,6 +29,10 @@ namespace Capture.Workflow.Core.Classes
             }
         }
 
+        public string ClientId { get; set; }
+        public bool SendStatistics { get; set; }
+
+
         public static string BasePath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         public static string DataPath => Path.Combine(
@@ -44,7 +48,8 @@ namespace Capture.Workflow.Core.Classes
 
         public Settings()
         {
-
+            ClientId = new Guid().ToString();
+            SendStatistics = true;
         }
 
         public void Save()

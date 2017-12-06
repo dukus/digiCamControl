@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using CameraControl.Devices;
+using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.View;
@@ -155,6 +156,9 @@ namespace Capture.Workflow.ViewModel
                 CameraDevice = ServiceProvider.Instance.DeviceManager.SelectedCameraDevice;
                 WorkflowManager.Instance.Message += Instance_Message;
                 ServiceProvider.Instance.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
+
+                GoogleAnalytics.Instance.TrackEvent("Workflow", "Start", Workflow.Name);
+
                 foreach (WorkFlowEvent workflowEvent in Workflow.Events)
                 {
                     try
@@ -226,7 +230,7 @@ namespace Capture.Workflow.ViewModel
             if(string.IsNullOrWhiteSpace(viewName))
                 return;
             Workflow.Variables.SetValue("CurrentView", viewName);
-
+            GoogleAnalytics.Instance.TrackScreenView(viewName);
             _preView = _currentView;
             _currentView = viewName;
             WorkFlowView view = Workflow.GetView(viewName);

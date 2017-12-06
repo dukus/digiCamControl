@@ -19,6 +19,7 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand NewCommand { get; set; }
         public RelayCommand LocateLogCommand { get; set; }
         public RelayCommand ClearQueueCommand { get; set; }
+        public RelayCommand SettingsCommand { get; set; }
 
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
@@ -46,7 +47,7 @@ namespace Capture.Workflow.ViewModel
             CopyCommand = new RelayCommand<WorkFlowItem>(Copy);
             LocateLogCommand = new RelayCommand(LocateLog);
             ClearQueueCommand = new RelayCommand(ClearQueue);
-
+            SettingsCommand = new RelayCommand(ShowSettings);
             if (!IsInDesignMode)
             {
                 // copy default workflows from install folder
@@ -56,6 +57,12 @@ namespace Capture.Workflow.ViewModel
                 ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
                 LoadWorkFlows();
             }
+        }
+
+        private void ShowSettings()
+        {
+            SettingsView view = new SettingsView();
+            view.ShowDialog();
         }
 
         private void DeviceManager_PhotoCaptured(object sender, PhotoCapturedEventArgs eventArgs)
@@ -227,14 +234,14 @@ namespace Capture.Workflow.ViewModel
             }
         }
 
-        private void DeviceManager_CameraDisconnected(CameraControl.Devices.ICameraDevice cameraDevice)
+        private void DeviceManager_CameraDisconnected(ICameraDevice cameraDevice)
         {
-         
+            GoogleAnalytics.Instance.TrackEvent("Camera", "Disconnected", cameraDevice.DeviceName);
         }
 
-        private void DeviceManager_CameraConnected(CameraControl.Devices.ICameraDevice cameraDevice)
+        private void DeviceManager_CameraConnected(ICameraDevice cameraDevice)
         {
-         
+            GoogleAnalytics.Instance.TrackEvent("Camera", "Connected", cameraDevice.DeviceName);
         }
 
         private void Edit(WorkFlowItem item)

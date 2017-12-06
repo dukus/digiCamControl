@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using log4net;
@@ -38,6 +39,7 @@ namespace Capture.Workflow
                 return;
             }
             Configure(Path.Combine(Settings.Instance.LogFolder, "Capture.Workflow.log"));
+            GoogleAnalytics.Instance.TrackEvent("Application", "Start");
             WorkflowManager.Instance.LoadPlugins("Capture.Workflow.Plugins.dll");
         }
 
@@ -66,6 +68,9 @@ namespace Capture.Workflow
                                                         ? "\n" +
                                                           e.Exception.InnerException.Message
                                                         : null));
+
+            GoogleAnalytics.Instance.TrackException(e.Exception.Message, true);
+
             if (e.Exception.GetType() == typeof(MissingMethodException))
             {
                 Log.Error("Damaged installation. Application exiting ");
@@ -140,6 +145,8 @@ namespace Capture.Workflow
         private void Application_SessionEnding(object sender, SessionEndingCancelEventArgs e)
         {
             QueueManager.Instance.Stop();
+            Settings.Instance.Save();
+            GoogleAnalytics.Instance.TrackEvent("Application","Stop");
         }
 
     }
