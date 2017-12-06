@@ -33,7 +33,7 @@
             <TabItem Header="Live view">
                 <Image Source="{Binding LiveBitmap}" />
             </TabItem>
-            <TabItem Header="Preview">
+            <TabItem Header="{Binding PreviewTitle}" IsSelected="{Binding PreviewTabActive}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

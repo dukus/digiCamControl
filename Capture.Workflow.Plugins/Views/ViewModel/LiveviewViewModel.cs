@@ -19,6 +19,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private bool _preview;
         private bool _noPreview;
         private ObservableCollection<FrameworkElement> _previewRight;
+        private bool _previewTabActive;
 
         public WorkFlowView View { get; set; }
 
@@ -75,7 +76,18 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         }
 
         public bool NoPreview => !Preview;
-        
+
+        public string PreviewTitle => String.Format("Preview ({0})", FileItems.Count);
+
+        public bool PreviewTabActive
+        {
+            get { return _previewTabActive; }
+            set
+            {
+                _previewTabActive = value;
+                RaisePropertyChanged(() => PreviewTabActive);
+            }
+        }
 
 
         public BitmapSource LiveBitmap
@@ -157,6 +169,9 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                     if (item != null)
                         FileItem = item;
                     RaisePropertyChanged(() => Bitmap);
+                    RaisePropertyChanged(() => PreviewTitle);
+                    if (FileItems.Count < 2)
+                        PreviewTabActive = true;
                 }
                     break;
                 case Messages.ThumbUpdated:
@@ -164,9 +179,10 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                 case Messages.PrevPhoto:
                 case Messages.DeletePhoto:
                 case Messages.ClearPhotos:
-                    {
+                {
                     RaisePropertyChanged(() => FileItem);
                     RaisePropertyChanged(() => Bitmap);
+                    RaisePropertyChanged(() => PreviewTitle);
                 }
                     break;
             }
