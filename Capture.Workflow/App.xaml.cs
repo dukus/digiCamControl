@@ -79,11 +79,36 @@ namespace Capture.Workflow
             }
             else
             {
+                SendCrashReport(e.Exception);
                 MessageBox.Show(errorMessage, "Application crash !!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             Current?.Shutdown();
         }
 
+        private void SendCrashReport(Exception e)
+        {
+            try
+            {
+                var body = "Version :" + Assembly.GetExecutingAssembly().GetName().Version + "\n" +
+                       "Client Id" + (Settings.Instance.ClientId ?? "") + "\n" ;
+                var error = "";
+                if (e != null)
+                {
+                    error = e.Message;
+                    body += e.StackTrace+"\n";
+                    if (e.InnerException != null)
+                    {
+                        error = e.InnerException.Message;
+                        body += "----------------------------------" + "\n";
+                        body += e.InnerException.StackTrace;
+                    }
+                }
+                Utils.SendEmail(body, "Capture.Workflow Crash report - "+error,"error_report@digicamcontrol.com" , "error_report@digicamcontrol.com",Path.Combine(Settings.Instance.LogFolder, "Capture.Workflow.log") );
+            }
+            catch (Exception )
+            {
+            }
+        }
 
         public static void Configure(string logFile)
         {

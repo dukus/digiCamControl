@@ -69,6 +69,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CameraControl.Private">
+      <HintPath>..\packages\CameraControl.Private.dll</HintPath>
+    </Reference>
     <Reference Include="CSScriptLibrary, Version=3.27.2.0, Culture=neutral, PublicKeyToken=70fcc3d18c749033, processorArchitecture=MSIL">
       <HintPath>..\packages\CS-Script.bin.3.27.2.0\lib\net46\CSScriptLibrary.dll</HintPath>
       <Private>True</Private>

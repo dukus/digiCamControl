@@ -20,6 +20,8 @@ namespace Capture.Workflow.ViewModel
         public RelayCommand LocateLogCommand { get; set; }
         public RelayCommand ClearQueueCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
+        public RelayCommand ForumCommand { get; set; }
+        public RelayCommand HelpCommand { get; set; }
 
         public RelayCommand<WorkFlowItem> RunCommand { get; set; }
         public RelayCommand<WorkFlowItem> EditCommand { get; set; }
@@ -48,6 +50,9 @@ namespace Capture.Workflow.ViewModel
             LocateLogCommand = new RelayCommand(LocateLog);
             ClearQueueCommand = new RelayCommand(ClearQueue);
             SettingsCommand = new RelayCommand(ShowSettings);
+            ForumCommand =
+                new RelayCommand(() => Utils.Run("http://digicamcontrol.com/phpbb/viewtopic.php?f=6&p=5483"));
+            HelpCommand = new RelayCommand(() => Utils.Run("http://digicamcontrol.com/doc/workflow"));
             if (!IsInDesignMode)
             {
                 // copy default workflows from install folder

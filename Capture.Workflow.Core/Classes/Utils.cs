@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Mail;
 using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -272,5 +273,30 @@ namespace Capture.Workflow.Core.Classes
             }
             return exists;
         }
+
+        public static void SendEmail(string body, string subject, string from, string to, string file = null)
+        {
+            using (SmtpClient mailClient = new SmtpClient("smtp.sendgrid.net", 587))
+            {
+                // Set the network credentials.
+                mailClient.Credentials = new NetworkCredential(CameraControl.Private.Ids.SendgridUser, CameraControl.Private.Ids.SendgridPass);
+
+                //Enable SSL.
+                //mailClient.EnableSsl = true;
+
+                var message = new MailMessage(from, to)
+                {
+                    Subject = subject,
+                    Body = body ?? "",
+                    IsBodyHtml = false
+                };
+                if (File.Exists(file))
+                    message.Attachments.Add(new Attachment(file));
+
+                mailClient.Send(message);
+                message.Dispose();
+            }
+        }
+
     }
 }

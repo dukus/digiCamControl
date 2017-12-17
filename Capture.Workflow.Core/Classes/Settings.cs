@@ -48,7 +48,7 @@ namespace Capture.Workflow.Core.Classes
 
         public Settings()
         {
-            ClientId = new Guid().ToString();
+            ClientId = Guid.NewGuid().ToString();
             SendStatistics = true;
         }
 

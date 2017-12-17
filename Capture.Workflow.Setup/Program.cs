@@ -38,6 +38,7 @@ namespace Capture.Workflow.Setup
             ver =
                     FileVersionInfo.GetVersionInfo(Path.Combine(project.SourceBaseDir, "Capture.Workflow.exe"));
 
+            project.LicenceFile = @"Licenses\DigiCamControlLicence.rtf";
             project.Version = new Version(ver.FileMajorPart, ver.FileMinorPart, ver.FileBuildPart, ver.FilePrivatePart);
             //project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
             ////project.MajorUpgradeStrategy.NewerProductInstalledErrorMessage = "A version of the digiCamControl already installed. Unistall it first from Control Panel !";

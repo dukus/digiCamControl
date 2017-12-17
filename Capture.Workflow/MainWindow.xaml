@@ -51,6 +51,9 @@
                                     <Button Content="Clear Queue Database" Command="{Binding ClearQueueCommand}"/>
                                     <Separator/>
                                     <Button Content="Settings" Command="{Binding SettingsCommand}"/>
+                                    <Separator/>
+                                    <Button Content="Forum" Command="{Binding ForumCommand}"/>
+                                    <Button Content="Help" Command="{Binding HelpCommand}"/>
 
                                 </StackPanel>
                             </materialDesign:PopupBox>
