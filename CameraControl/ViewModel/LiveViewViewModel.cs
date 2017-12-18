@@ -2471,18 +2471,26 @@ namespace CameraControl.ViewModel
 
         private void RecordMovie()
         {
-            string resp = Recording ? "" : CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
-            if (string.IsNullOrEmpty(resp))
+            try
             {
-                _recordLength = 0;
-                var thread = new Thread(RecordMovieThread);
-                thread.Start();
+                string resp = Recording ? "" : CameraDevice.GetProhibitionCondition(OperationEnum.RecordMovie);
+                if (string.IsNullOrEmpty(resp))
+                {
+                    _recordLength = 0;
+                    var thread = new Thread(RecordMovieThread);
+                    thread.Start();
+                }
+                else
+                {
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
+                        TranslationStrings.LabelErrorRecordMovie + "\n" +
+                        TranslationManager.GetTranslation(resp));
+                }
             }
-            else
+            catch (Exception e)
             {
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.LiveViewWnd_Message,
-                    TranslationStrings.LabelErrorRecordMovie + "\n" +
-                    TranslationManager.GetTranslation(resp));
+                Log.Debug("Start movie record error", e);
+                StaticHelper.Instance.SystemMessage = "Start movie record error " + e.Message;
             }
         }
 

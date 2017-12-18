@@ -149,10 +149,17 @@ namespace CameraControl
                 case WindowsCmdConsts.Restore:
                     Dispatcher.BeginInvoke(new Action(delegate
                     {
-                        this.Show();
-                        this.WindowState = WindowState.Normal;
-                        this.Activate();
-                        this.Focus();
+                        try
+                        {
+                            this.Show();
+                            this.WindowState = WindowState.Normal;
+                            this.Activate();
+                            this.Focus();
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Debug("Unable to restore window", e);
+                        }
                     }));
                     break;
                 case CmdConsts.All_Minimize:
