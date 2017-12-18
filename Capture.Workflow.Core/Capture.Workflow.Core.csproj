@@ -260,6 +260,7 @@
     <Compile Include="Classes\Attributes\IconAttribute.cs" />
     <Compile Include="Classes\Attributes\PluginTypeAttribute.cs" />
     <Compile Include="Classes\BaseItem.cs" />
+    <Compile Include="Classes\CacheObject.cs" />
     <Compile Include="Classes\CommandCollection.cs" />
     <Compile Include="Classes\Context.cs" />
     <Compile Include="Classes\ContextTargetEnum.cs" />

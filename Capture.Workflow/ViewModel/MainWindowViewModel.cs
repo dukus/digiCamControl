@@ -178,8 +178,7 @@ namespace Capture.Workflow.ViewModel
             WorkflowManager.Instance.Context.WorkFlow = workFlow;
             WorkflowViewView wnd = new WorkflowViewView();
             wnd.ShowDialog();
-            WorkflowManager.Instance.Context.WorkFlow = null;
-            ScriptEngine.Instance.ClearCache();
+            WorkflowManager.Instance.Context.Clear();
             ServiceProvider.Instance.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
         }
 

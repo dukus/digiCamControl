@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CameraControl.Devices;
+using Capture.Workflow.Core.Scripting;
 using GalaSoft.MvvmLight;
 
 namespace Capture.Workflow.Core.Classes
@@ -12,7 +9,6 @@ namespace Capture.Workflow.Core.Classes
     public class Context:ViewModelBase
     {
         private ICameraDevice _cameraDevice;
-        private Stream _imageStream;
         public WorkFlow WorkFlow { get; set; }
 
         public ICameraDevice CameraDevice
@@ -28,17 +24,7 @@ namespace Capture.Workflow.Core.Classes
         public FileItem FileItem { get; set; }
         public ContextTargetEnum Target { get; set; }
 
-        public Stream ImageStream
-        {
-            get
-            {
-                return _imageStream;
-            }
-            set
-            {
-                _imageStream = value;
-            }
-        }
+        public Stream ImageStream { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the captured photo transfer is enabled or not.
@@ -48,9 +34,23 @@ namespace Capture.Workflow.Core.Classes
         /// </value>
         public bool CaptureEnabled { get; set; }
 
+        public Dictionary<string, CacheObject> Cache { get; set; }
+
         public Context()
         {
             CaptureEnabled = true;
+            Cache = new Dictionary<string, CacheObject>();
+        }
+
+        public void Clear()
+        {
+            WorkFlow = null;
+            foreach (var cacheObject in Cache)
+            {
+                cacheObject.Value.DisposeObject();
+            }
+            Cache.Clear();
+            ScriptEngine.Instance.ClearCache();
         }
     }
 }

@@ -108,23 +108,50 @@ namespace Capture.Workflow.Plugins.Commands.ImageProcessing
             if (!CheckCondition(command, context))
                 return true;
             context.ImageStream.Seek(0, SeekOrigin.Begin);
+            MagickImage watermark = null;
             using (MagickImage image = new MagickImage(context.ImageStream))
             {
-                if (File.Exists(command.Properties["OverlayFile"].ToString(context)))
+                // check the cache if the image is already is loaded 
+                if (context.Cache.ContainsKey(command.GetHashCode().ToString()))
+                {
+                    var cache = context.Cache[command.GetHashCode().ToString()];
+                    if (cache.Id == command.Properties["OverlayFile"].ToString(context))
+                    {
+                        watermark = (MagickImage) cache.Object;
+                    }
+                    else
+                    {
+                        cache.DisposeObject();
+                        context.Cache.Remove(command.GetHashCode().ToString());
+                    }
+
+                }
+                if (watermark == null && File.Exists(command.Properties["OverlayFile"].ToString(context)))
                 {
                     // Read the watermark that will be put on top of the image
-                    using (MagickImage watermark = new MagickImage(command.Properties["OverlayFile"].ToString(context)))
-                    {
-                        if (command.Properties["StrechOverlay"].ToBool(context))
-                            watermark.Resize(image.Width, image.Height);
-                        // Optionally make the watermark more transparent
-                        if (command.Properties["Transparency"].ToInt(context) != 100)
-                            watermark.Evaluate(Channels.Alpha, EvaluateOperator.Add,
-                                -(255 * (100 - command.Properties["Transparency"].ToInt(context)) / 100));
-                        // Draw the watermark in the bottom right corner
-                        image.Composite(watermark, (Gravity)Enum.Parse(typeof(Gravity),command.Properties["Position"].ToString(context)), CompositeOperator.Over);
-                    }
+                    watermark = new MagickImage(command.Properties["OverlayFile"].ToString(context));
+
+                    if (command.Properties["StrechOverlay"].ToBool(context))
+                        watermark.Resize(image.Width, image.Height);
+                    // Optionally make the watermark more transparent
+                    context.Cache.Add(command.GetHashCode().ToString(),
+                        new CacheObject()
+                        {
+                            Id = command.Properties["OverlayFile"].ToString(context),
+                            Object = watermark
+                        });
                 }
+
+                if (watermark != null)
+                {
+                    if (command.Properties["Transparency"].ToInt(context) != 100)
+                        watermark.Evaluate(Channels.Alpha, EvaluateOperator.Add,
+                            -(255 * (100 - command.Properties["Transparency"].ToInt(context)) / 100));
+                    image.Composite(watermark,
+                        (Gravity)Enum.Parse(typeof(Gravity), command.Properties["Position"].ToString(context)),
+                        CompositeOperator.Over);
+                }
+
                 if (!string.IsNullOrEmpty(command.Properties["Text"].ToString(context)))
                 {
                     image.Settings.Font = command.Properties["TextFont"].ToString(context);
