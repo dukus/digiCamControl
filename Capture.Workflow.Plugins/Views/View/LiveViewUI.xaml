@@ -31,7 +31,7 @@
         </ItemsControl>
         <TabControl Margin="10" Visibility="{Binding Preview, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TabItem Header="Live view">
-                <Image Source="{Binding LiveBitmap}" />
+                <Image Source="{Binding LiveBitmap}" PreviewMouseDown="Image_MouseDown"/>
             </TabItem>
             <TabItem Header="{Binding PreviewTitle}" IsSelected="{Binding PreviewTabActive}">
                 <Grid>
@@ -76,7 +76,7 @@
             </TabItem>
         </TabControl>
 
-        <Image Margin="4" Source="{Binding LiveBitmap}" Visibility="{Binding NoPreview, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Image Source="{Binding LiveBitmap}" Visibility="{Binding NoPreview, Converter={StaticResource BooleanToVisibilityConverter}}" PreviewMouseDown="Image_MouseDown"/>
 
         <materialDesign:Card Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="4" Margin="4,30">
             <ItemsControl ItemsSource="{Binding LeftElements }" >

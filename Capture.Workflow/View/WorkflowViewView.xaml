@@ -12,7 +12,7 @@
     <Window.DataContext>
         <viewModel:WorkflowViewViewModel/>
     </Window.DataContext>
-    <materialDesign:DialogHost Identifier="RootDialog" Focusable="False" IsOpen="{Binding IsBusy}">
+    <materialDesign:DialogHost Identifier="RootDialog" Focusable="True" IsOpen="{Binding IsBusy}">
         <materialDesign:DialogHost.DialogContent>
 
             <materialDesign:Card UniformCornerRadius="14" Padding="4"

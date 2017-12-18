@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
@@ -12,6 +14,8 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 {
     public class LiveviewViewModel:BaseViewModel, IDisposable
     {
+        private LiveViewData _liveViewData;
+
         private ObservableCollection<FrameworkElement> _leftElements;
         private ObservableCollection<FrameworkElement> _rightElements;
         private bool _fileListVisible;
@@ -149,6 +153,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                     var param = e.Param as object[];
                     if (param != null)
                     {
+                        _liveViewData = (LiveViewData) param[1];
                         var stream = e.Context.ImageStream;
                         stream.Seek(0, SeekOrigin.Begin);
                         BitmapImage bi = new BitmapImage();
@@ -157,8 +162,18 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                         bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                         bi.CacheOption = BitmapCacheOption.OnLoad;
                         bi.EndInit();
-                        bi.Freeze();
-                        LiveBitmap = bi;
+                        if (WorkflowManager.Instance.Context.CameraDevice.LiveViewImageZoomRatio.Value == "All")
+                        {
+                            var writeableBitmap = BitmapFactory.ConvertToPbgra32Format(bi);
+                            DrawFocusPoint(writeableBitmap, _liveViewData);
+                            writeableBitmap.Freeze();
+                            LiveBitmap = writeableBitmap;
+                        }
+                        else
+                        {
+                            bi.Freeze();
+                            LiveBitmap = bi;
+                        }
                     }
                 }
                     break;
@@ -188,6 +203,53 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             }
         }
 
+        public void SetFocusPos(Point initialPoint, double refWidth, double refHeight)
+        {
+            if (WorkflowManager.Instance.Context.CameraDevice.LiveViewImageZoomRatio.Value != "All")
+                return;
+            if (_liveViewData != null)
+            {
+                double xt = (_liveViewData.ImageWidth) / (refWidth);
+                double yt = (_liveViewData.ImageHeight) / (refHeight);
+                int posx = (int) ((initialPoint.X) * xt);
+                int posy = (int) ((initialPoint.Y) * yt);
+                Task.Factory.StartNew(() => SetFocusPos(posx, posy));
+            }
+        }
+
+
+        private void DrawFocusPoint(WriteableBitmap bitmap, LiveViewData liveViewData)
+        {
+            try
+            {
+                if (liveViewData == null)
+                    return;
+                double xt = bitmap.Width / liveViewData.ImageWidth;
+                double yt = bitmap.Height / liveViewData.ImageHeight;
+
+                bitmap.DrawRectangle((int)(liveViewData.FocusX * xt - (liveViewData.FocusFrameXSize * xt / 2)),
+                    (int)(liveViewData.FocusY * yt - (liveViewData.FocusFrameYSize * yt / 2)),
+                    (int)(liveViewData.FocusX * xt + (liveViewData.FocusFrameXSize * xt / 2)),
+                    (int)(liveViewData.FocusY * yt + (liveViewData.FocusFrameYSize * yt / 2)),
+                    liveViewData.HaveFocusData ? Colors.Green : Colors.Red);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error draw helper lines", exception);
+            }
+        }
+
+        public virtual void SetFocusPos(int x, int y)
+        {
+            try
+            {
+               WorkflowManager.Instance.Context.CameraDevice.Focus(x, y);
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Error set focus pos :", exception);
+            }
+        }
 
         public void Dispose()
         {

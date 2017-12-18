@@ -2868,3 +2868,5 @@ _ReSharper.CameraControl.ServerTest
 /packages/Magick.NET-Q8-x86.7.1.0/lib/netstandard13/*.dll
 /packages/Magick.NET-Q8-x86.7.1.0/lib/netstandard13/*.xml
 /packages/Magick.NET-Q8-x86.7.1.0/runtimes/win7-x86/native/*.dll
+/packages/Dragablz.0.0.3.197
+/packages/MaterialDesignThemes.2.3.2-ci1016

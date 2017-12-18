@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CameraControl.Devices;
+using Capture.Workflow.Plugins.Views.ViewModel;
 
 namespace Capture.Workflow.Plugins.Views.View
 {
@@ -23,6 +14,24 @@ namespace Capture.Workflow.Plugins.Views.View
         public LiveViewUI()
         {
             InitializeComponent();
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed && e.ChangedButton == MouseButton.Left )
+            {
+                try
+                {
+                    var _image = (Image) sender;
+                    ((LiveviewViewModel)DataContext).SetFocusPos(e.MouseDevice.GetPosition(_image), _image.ActualWidth,
+                        _image.ActualHeight);
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Focus Error", exception);
+
+                }
+            }
         }
     }
 }

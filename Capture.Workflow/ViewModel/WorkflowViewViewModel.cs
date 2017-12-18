@@ -6,7 +6,6 @@ using Capture.Workflow.Classes;
 using Capture.Workflow.Core;
 using Capture.Workflow.Core.Classes;
 using Capture.Workflow.View;
-using Dragablz;
 using GalaSoft.MvvmLight;
 using MaterialDesignThemes.Wpf;
 

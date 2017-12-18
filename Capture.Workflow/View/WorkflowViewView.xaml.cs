@@ -42,5 +42,6 @@ namespace Capture.Workflow.View
         {
             ((WorkflowViewViewModel)DataContext).Dispose();
         }
+
     }
 }
