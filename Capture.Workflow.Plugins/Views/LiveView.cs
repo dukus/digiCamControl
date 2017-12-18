@@ -44,6 +44,12 @@ namespace Capture.Workflow.Plugins.Views
                 PropertyType = CustomPropertyType.Bool,
                 Value = "False"
             });
+            view.Properties.Items.Add(new CustomProperty()
+            {
+                Name = "ShowFocusArea",
+                PropertyType = CustomPropertyType.Bool,
+                Value = "True"
+            });
             view.Events.Add(new CommandCollection("Load"));
             view.Events.Add(new CommandCollection("UnLoad"));
             return view;
@@ -82,6 +88,8 @@ namespace Capture.Workflow.Plugins.Views
             }
             model.View = view;
             model.FileListVisible = view.Properties["FileListVisible"].ToBool(context);
+            model.ShowFocusArea = view.Properties["ShowFocusArea"].ToBool(context);
+
             model.Preview = !view.Properties["NoPreview"].ToBool(context);
             var res = new LiveViewUI();
             res.DataContext = model;

@@ -24,6 +24,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
         private bool _noPreview;
         private ObservableCollection<FrameworkElement> _previewRight;
         private bool _previewTabActive;
+        private bool _showFocusArea;
 
         public WorkFlowView View { get; set; }
 
@@ -54,6 +55,16 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
             {
                 _previewRight = value;
                 RaisePropertyChanged(() => PreviewRight);
+            }
+        }
+
+        public bool ShowFocusArea
+        {
+            get { return _showFocusArea; }
+            set
+            {
+                _showFocusArea = value;
+                RaisePropertyChanged(() => ShowFocusArea);
             }
         }
 
@@ -162,7 +173,7 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
                         bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                         bi.CacheOption = BitmapCacheOption.OnLoad;
                         bi.EndInit();
-                        if (WorkflowManager.Instance.Context.CameraDevice.LiveViewImageZoomRatio.Value == "All")
+                        if (WorkflowManager.Instance.Context.CameraDevice.LiveViewImageZoomRatio?.Value == "All" && ShowFocusArea)
                         {
                             var writeableBitmap = BitmapFactory.ConvertToPbgra32Format(bi);
                             DrawFocusPoint(writeableBitmap, _liveViewData);
@@ -205,7 +216,8 @@ namespace Capture.Workflow.Plugins.Views.ViewModel
 
         public void SetFocusPos(Point initialPoint, double refWidth, double refHeight)
         {
-            if (WorkflowManager.Instance.Context.CameraDevice.LiveViewImageZoomRatio.Value != "All")
+
+            if (WorkflowManager.Instance.Context.CameraDevice.LiveViewImageZoomRatio.Value != "All" || !ShowFocusArea)
                 return;
             if (_liveViewData != null)
             {
