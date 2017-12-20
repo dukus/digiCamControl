@@ -4,8 +4,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="LiveViewFullScreenWnd" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" PreviewKeyDown="MetroWindow_PreviewKeyDown" IgnoreTaskbarOnMaximize="True" ShowMinButton="False" ShowIconOnTitleBar="False" StateChanged="MetroWindow_StateChanged" WindowState="Maximized" ShowTitleBar="False">
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" PreviewKeyDown="MetroWindow_PreviewKeyDown" IgnoreTaskbarOnMaximize="True" ShowMinButton="False" ShowIconOnTitleBar="False" StateChanged="MetroWindow_StateChanged" WindowState="Maximized" ShowSystemMenuOnRightClick="False" WindowStartupLocation="CenterOwner" TitleCaps="False" ShowTitleBar="False" Topmost="True">
     <Window.DataContext>
         <viewModel:LiveViewViewModel/>
     </Window.DataContext>    
@@ -13,7 +12,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
     </Window.Resources>
     <Grid>
-        <Image Name="image1" Margin="5" Stretch="Uniform" Source="{Binding Bitmap}" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" KeyUp="image1_KeyUp">
+        <Image Name="image1" Margin="0" Stretch="Uniform" Source="{Binding Bitmap}" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" KeyUp="image1_KeyUp" IsHitTestVisible="False">
         </Image>
         <Grid Width="300" Grid.Column="2" Grid.Row="2" Name="grid_wait" Visibility="{Binding Path=DelayedStart, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}">
             <ProgressBar IsIndeterminate="True" Height="20"/>

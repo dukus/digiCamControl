@@ -55,7 +55,7 @@ namespace CameraControl.windows
 
         private void MetroWindow_StateChanged(object sender, EventArgs e)
         {
-            ShowTitleBar = WindowState != WindowState.Maximized;
+            //ShowTitleBar = WindowState != WindowState.Maximized;
         }
     }
 }

@@ -1542,8 +1542,15 @@ namespace CameraControl.ViewModel
 
         void FullScreenWnd_Closed(object sender, EventArgs e)
         {
-            FullScreenWnd.Closed -= FullScreenWnd_Closed;
-            _window.Show();
+            try
+            {
+                FullScreenWnd.Closed -= FullScreenWnd_Closed;
+                _window.Show();
+            }
+            catch (Exception ex)
+            {
+                Log.Debug("Unable to show main live view window", ex);
+            }
         }
 
 
