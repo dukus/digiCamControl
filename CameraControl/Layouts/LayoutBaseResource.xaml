@@ -5,7 +5,8 @@
                     xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:controls1="clr-namespace:CameraControl.Controls"
-                    xmlns:local="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core">
+                    xmlns:local="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -57,7 +58,7 @@
     </Style>
 
 
-    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
+    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
         <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
            explains how to display an object of type BitmapImage. -->
         <!--<Setter Property="ItemContainerStyle">
@@ -74,7 +75,8 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate DataType="classes:FileItem">
-                    <Grid Margin="-5,0,0,0" >
+                    <materialDesign:Card Margin="3,4" >
+                    <Grid >
                         <!--<Line Stroke="Green" StrokeThickness="4" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" X2="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}" Visibility="{Binding Alternate, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5"/>-->
                         <StackPanel Orientation="Horizontal">
                             <Grid Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="4,4,4,4">
@@ -115,35 +117,36 @@
                             </Grid>
                             <StackPanel Width="75" Margin="5" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <StackPanel Orientation="Horizontal" ToolTip="Aperture value">
-                                    <Label Content="F : f/" Padding="0" />
+                                    <Label Content="F : f/" Padding="0" Opacity="0.6"/>
                                     <Label Content="{Binding F}" Padding="0" FontStyle="Italic"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <Label Content="Iso : " Padding="0"/>
+                                    <Label Content="Iso : " Padding="0" Opacity="0.6"/>
                                     <Label Content="{Binding Iso}" Padding="0" FontStyle="Italic"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" ToolTip="Exposure time">
-                                    <Label Content="E : " Padding="0"/>
+                                    <Label Content="E : " Padding="0" Opacity="0.6"/>
                                     <Label Content="{Binding E}" Padding="0" FontStyle="Italic"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" ToolTip="Focal Length">
-                                    <Label Content="FL : " Padding="0"/>
+                                    <Label Content="FL : " Padding="0" Opacity="0.6"/>
                                     <Label Content="{Binding FocalLength}" Padding="0" FontStyle="Italic"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" ToolTip="Exposure Bias value">
-                                    <Label Content="EB : " Padding="0"/>
+                                    <Label Content="EB : " Padding="0" Opacity="0.6"/>
                                     <Label Content="{Binding ExposureBias}" Padding="0" FontStyle="Italic"/>
                                 </StackPanel>
                                 <Grid Width="75" Height="30" >
                                     <Rectangle Width="5" HorizontalAlignment="Left" Fill="Blue" Margin="2" Visibility="{Binding FileInfo.IsUnderExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are under exposed"/>
                                     <Rectangle Width="5" HorizontalAlignment="Right" Fill="Red" Margin="2" Visibility="{Binding FileInfo.IsOverExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are over exposed"/>
-                                    <Border Padding="2" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1">
+                                    <Border Padding="2" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="0">
                                         <Polygon Points="{Binding Path=FileInfo.LuminanceHistogramPoints}" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Opacity="1" />
                                     </Border>
                                 </Grid>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
+                    </materialDesign:Card>
                     <DataTemplate.Triggers>
                         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
                         <DataTrigger Binding="{Binding Path=IsUnLiked}" Value="true">

@@ -2,6 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="digiCamControl" Height="799" Width="987" xmlns:my="clr-namespace:CameraControl"
+
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}" 
+         GlowBrush="{DynamicResource AccentColorBrush}"                       
+         
         xmlns:local="clr-namespace:CameraControl.Controls"
                        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                        xmlns:myClasess="clr-namespace:CameraControl.Classes"
@@ -13,7 +23,8 @@
                        xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
                        xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
-                       Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel" SizeChanged="Window_SizeChanged">
+                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                       Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel" SizeChanged="Window_SizeChanged" ShowTitleBar="False">
     <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
     </i:Interaction.Behaviors>-->
@@ -23,6 +34,16 @@
                 <ResourceDictionary Source="Resources/Icons.xaml" />
                 <ResourceDictionary Source="Resources/MoreIcons.xaml" />
                 <ResourceDictionary Source="Styles/ExpanderEx.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Snackbar.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
             <wpf:IntToProgressConverter x:Key="MyConverter"/>
@@ -30,10 +51,9 @@
     </Window.Resources>
 
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo Description="An app with a taskbar info description" 
-                     ProgressValue="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress, Converter={StaticResource MyConverter}}" ProgressState="Normal"/>
+        <TaskbarItemInfo ProgressValue="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress, Converter={StaticResource MyConverter}}" ProgressState="Normal"/>
     </Window.TaskbarItemInfo>
-    
+
     <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <CheckBox Content="{T:TranslateExtension LabelStayOnTop2}" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
@@ -50,10 +70,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="54" />
-            <RowDefinition Height="102" />
-            <RowDefinition Height="23" />
-            <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
 
@@ -74,95 +90,64 @@
 
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ShowGridLines="False" Margin="0">
-            <DockPanel   Name="StackLayout">
+            <DockPanel   Name="StackLayout" Margin="0">
             </DockPanel>
             <!--<Controls:ProgressRing IsActive="True" Height="184" Width="214" IsLarge="False" />-->
         </Grid>
 
         <!--<Controls:MetroContentControl Grid.ColumnSpan="4">-->
         <WrapPanel Grid.Row="1"  Grid.ColumnSpan="3">
-            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Width="40" Height="40" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}">
-                <Rectangle Width="25" Height="25">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource camera-iris}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Width="40" Height="40" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}">
+                <materialDesign:PackIcon Kind="CameraIris" Height="35" Width="35" />
             </Button>
-            <Controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-40,5,5,5" Height="40" Width="40" />
-            <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Height="40" Name="btn_liveview" Width="40" Margin="0" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" FontSize="15" Style="{DynamicResource MetroCircleButtonStyle}"
+            <!--<ProgressBar  Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" IsIndeterminate="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-44,5,5,5" Height="40" Width="40" 
+                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsBusy}"/>-->
+
+            <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Height="40" Name="btn_liveview" Width="40" Margin="4" Command="{Binding Source={x:Static Member=myClasess:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" FontSize="15" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowLiveViewButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-            <Button ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="40" Name="but_download" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click"
+            <Button  ToolTip="{T:TranslateExtension DownloadWindowTitle}" Height="40" Name="but_download" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Click="but_download_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowDownloadButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_download}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="Download" Height="35" Width="35" />
             </Button>
 
-            <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="40"  Height="40" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="0" Click="btn_br_Click" FontSize="14" Style="{DynamicResource MetroCircleButtonStyle}"
+            <Button Content="[BR]" ToolTip="{T:TranslateExtension BraketingToolTip}" Width="40"  Height="40" Name="btn_br" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="4" Click="btn_br_Click" FontSize="14" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBracketingButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
             <!--<ToggleButton ToolTip="Image property" Height="50" Width="50" Name="button1"  Click="button1_Click" Margin="5">
                     <Image Margin="5" Source="/CameraControl;component/Images/Properties.png"/>
                 </ToggleButton>-->
-            <Button ToolTip="{T:TranslateExtension TimeLapseToolTip}" Height="40" Name="but_timelapse" Width="40" Margin="0" Click="but_timelapse_Click" Style="{DynamicResource MetroCircleButtonStyle}"
+            <Button ToolTip="{T:TranslateExtension TimeLapseToolTip}" Height="40" Name="but_timelapse" Width="40" Margin="4" Click="but_timelapse_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowTimelapseButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_movie_clapper}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="Timelapse" Height="35" Width="35" />
             </Button>
-            <Button ToolTip="{T:TranslateExtension FullscreenToolTip}" Height="40" Name="but_fullscreen" Width="40" Margin="0" Click="but_fullscreen_Click" Style="{DynamicResource MetroCircleButtonStyle}"
+            <Button ToolTip="{T:TranslateExtension FullscreenToolTip}" Height="40" Name="but_fullscreen" Width="40" Margin="4" Click="but_fullscreen_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowFullScreenButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new_window}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-                <!--<Image Margin="5" Source="/CameraControl;component/Images/Fullscreen.png" />-->
+                <materialDesign:PackIcon Kind="Fullscreen" Height="35" Width="35" />
             </Button>
-            <Button Content="B" ToolTip="{T:TranslateExtension BrowseSessionsToolTip}" Height="40" Name="btn_browse" Width="40" Margin="0"  FontSize="15" Click="btn_browse_Click" Style="{DynamicResource MetroCircleButtonStyle}"
-                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBrowseButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
-            <Button ToolTip="{T:TranslateExtension LabelAstronomy}" Height="40" Name="but_star" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_star_Click"
+            <Button ToolTip="{T:TranslateExtension BrowseSessionsToolTip}" Height="40" Name="btn_browse" Width="40" Margin="4"  FontSize="15" Click="btn_browse_Click" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowBrowseButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <materialDesign:PackIcon Kind="FolderImage" Height="35" Width="35" />
+            </Button>
+            <Button ToolTip="{T:TranslateExtension LabelAstronomy}" Height="40" Name="but_star" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_star_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAstronomyButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_star_add}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="WeatherNight" Height="35" Width="35" />
             </Button>
-            <Button ToolTip="{T:TranslateExtension MenuMultipleCamera}" Height="40" Name="but_multiple" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click"
+            <Button ToolTip="{T:TranslateExtension MenuMultipleCamera}" Height="40" Name="but_multiple" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="Button_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMulyiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_box_layered}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="ImageMultiple" Height="35" Width="35" />
             </Button>
-            <Button ToolTip="{T:TranslateExtension LabelWifi}" Height="40" Name="but_wifi" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_wifi_Click"
+            <Button ToolTip="{T:TranslateExtension LabelWifi}" Height="40" Name="but_wifi" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_wifi_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_connection_wifi_variant}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="SignalVariant" Height="35" Width="35" />
             </Button>
-            <Button ToolTip="{T:TranslateExtension LabelPrint}" Height="40" Name="but_print" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_print_Click"
+            <Button ToolTip="{T:TranslateExtension LabelPrint}" Height="40" Name="but_print" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_print_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPrintButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_printer}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="Printer" Height="35" Width="35" />
             </Button>
-            <Button ToolTip="{T:TranslateExtension LabelWebserver}" Height="40" Name="but_qr" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="but_qr_Click"
+            <Button ToolTip="{T:TranslateExtension LabelWebserver}" Height="40" Name="but_qr" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Click="but_qr_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=UseWebserver, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_qr}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                <materialDesign:PackIcon Kind="Qrcode" Height="35" Width="35" />
             </Button>
             <ItemsControl ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=ToolBarPlugins}" >
                 <ItemsControl.ItemTemplate>
@@ -178,67 +163,13 @@
             </ItemsControl>
         </WrapPanel>
         <!--</Controls:MetroContentControl>-->
-        <StackPanel Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Orientation="Horizontal">
-            <Expander ExpandDirection="Right" Padding="0" Margin="0" Visibility="{Binding ShowCameraSelectorMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"
-                      Style="{DynamicResource MetroExpanderEx}">
-                <Expander.Header>
-                    <Label Content="{T:Translate LabelConnectedCameras}" Padding="0">
-                        <Label.LayoutTransform>
-                            <TransformGroup>
-                                <TransformGroup.Children>
-                                    <TransformCollection>
-                                        <RotateTransform Angle="90" />
-                                    </TransformCollection>
-                                </TransformGroup.Children>
-                            </TransformGroup>
-                        </Label.LayoutTransform>
-                    </Label>
-                </Expander.Header>
-                <Grid Width="210" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Height="35" x:Name="btn_sort" Width="35" Click="btn_sort_Click" Style="{DynamicResource MetroCircleButtonStyle}">
-                                <Rectangle Width="18" Height="18">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_sort_alphabetical_ascending}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Button>
-                            <Button Height="35" x:Name="btn_sort_desc" Width="35" Click="btn_sort_desc_Click" Style="{DynamicResource MetroCircleButtonStyle}">
-                                <Rectangle Width="18" Height="18">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_sort_alphabetical_descending}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Visible" Margin="0" Grid.Row="1">
-                        <StackPanel >
-                            <StackPanel.ScrollOwner>
-                                <ScrollViewer />
-                            </StackPanel.ScrollOwner>
-
-                            <ListBox ItemsSource="{Binding ConnectedDevices, Source={x:Static Core:ServiceProvider.DeviceManager}}" SelectedItem="{Binding SelectedCameraDevice, Source={x:Static Core:ServiceProvider.DeviceManager}}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <local:CameraItem CameraDevice="{Binding .}"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </Expander>
+        <StackPanel Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Orientation="Horizontal" Margin="4">
             <local:Controler x:Name="controler1" DataContext="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}}" IsEnabled="{Binding SelectedCameraDevice.IsConnected, Source={x:Static Core:ServiceProvider.DeviceManager}}" Margin="0" Padding="0" 
                              Visibility="{Binding ShowCameraPropertiesMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
         </StackPanel>
 
-        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Visibility="{Binding Branding.ShowMainMenu, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="0" Margin="0">
+        <Menu Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" Visibility="{Binding Branding.ShowMainMenu, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="0" Margin="0" HorizontalAlignment="Left"
+              IsMainMenu="True">
             <Menu.DataContext>
                 <viewModel:MainMenuViewModel/>
             </Menu.DataContext>
@@ -248,10 +179,10 @@
                 <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuView}" Padding="5,2" Margin="1" Visibility="{Binding Branding.ShowViewMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints}" Command="{Binding ToggleFocusCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}"/>
-                <MenuItem Header="{T:TranslateExtension LabelShowThumbInfo}" IsChecked="{Binding ShowThumbInfo}" Command="{Binding ShowThumbInfoCommand}"/>
+                <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints, Mode=OneWay}" Command="{Binding ToggleFocusCommand}" IsCheckable="True"/>
+                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}" IsCheckable="True"/>
+                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}" IsCheckable="True"/>
+                <MenuItem Header="{T:TranslateExtension LabelShowThumbInfo}" IsChecked="{Binding ShowThumbInfo}" Command="{Binding ShowThumbInfoCommand}" IsCheckable="True"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuLayout}">
                     <MenuItem Header="{T:TranslateExtension MenuLayoutLandscape}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
@@ -340,55 +271,63 @@
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuHomePage}" Command="{Binding HomePageCommand}" Visibility="{Binding HomePageMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="5,2" Margin="1"/>
         </Menu>
-        <Expander Grid.Column="3" ExpandDirection="Left" IsExpanded="True" Grid.Row="0" Grid.RowSpan="6" Padding="0" Margin="0" 
-                  Style="{DynamicResource MetroExpanderEx}"
-                  Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRightPanelMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
-            <Expander.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </Expander.Resources>
-            <!--<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">-->
-            <Grid Width="250">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
 
-                <GroupBox  Header="{T:TranslateExtension LabelHistogram}" VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Padding="0" Margin="0" 
+
+
+        <ToggleButton Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" Name="PanelButton" VerticalAlignment="Center" Grid.RowSpan="3" IsChecked="True"
+                      Margin="0" Width="24" Height="24" Style="{StaticResource MaterialDesignFlatToggleButton}" Cursor="Hand" >
+            <materialDesign:PackIcon Width="21" Height="21" Kind="DotsVertical" />
+        </ToggleButton>
+
+
+        <!--Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowRightPanelMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}"-->
+        <!--<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">-->
+        <Grid Width="300" Grid.Column="3" Grid.Row="1" Grid.RowSpan="6"  Margin="0,0,15,3" 
+                  Visibility="{Binding ElementName=PanelButton, Path=IsChecked , Converter={StaticResource BooleanToVisibilityConverter1}}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card   VerticalAlignment="Top" DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Margin="4" 
                            Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowHistogram, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                    <Grid >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="90" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" />
-                        <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Stroke="Red"  />
-                        <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Stroke="LightGreen"  />
-                        <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Stroke="Blue" />
-                        <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
-                        <CheckBox Grid.Column="0" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
-                        <CheckBox Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-                        <Label Grid.Row="1" Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Margin="0" Padding="0" HorizontalAlignment="Center" />
-                    </Grid>
-                </GroupBox>
-                <Grid Grid.Row="1" Margin="0" >
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
-                        <StackPanel>
-                            <Expander Header="Preview" IsExpanded="True" Style="{DynamicResource MetroExpanderEx}" >
-                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Polygon Points="{Binding Path=SelectedBitmap.LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="0.5"/>
+                    <Polygon Points="{Binding Path=SelectedBitmap.RedColorHistogramPoints}" Stretch="Fill" Stroke="Red" Opacity="0.5" />
+                    <Polygon Points="{Binding Path=SelectedBitmap.GreenColorHistogramPoints}" Stretch="Fill" Stroke="LightGreen"  Opacity="0.5"/>
+                    <Polygon Points="{Binding Path=SelectedBitmap.BlueColorHistogramPoints}" Stretch="Fill" Stroke="Blue" Opacity="0.5"/>
+                    <Controls:ProgressRing IsActive="{Binding Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="50" />
+                    <CheckBox Grid.Column="0" Height="20" HorizontalAlignment="Left" Margin="1" IsChecked="{Binding Path=HighlightUnderExp}" VerticalAlignment="Top" />
+                    <CheckBox Height="20" Width="20" Margin="1"  IsChecked="{Binding Path=HighlightOverExp}" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                    <Label Grid.Row="1" Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.InfoLabel}" HorizontalContentAlignment="Center" Margin="0" Padding="0" HorizontalAlignment="Center" />
+                </Grid>
+            </materialDesign:Card>
+            <Grid Grid.Row="1" Margin="0" >
+                <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
+                    <StackPanel>
+                        <materialDesign:Card Margin="4">
+                            <Expander Header="Preview" IsExpanded="True">
+                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"  Margin="4">
                                     <Image.LayoutTransform>
                                         <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
                                     </Image.LayoutTransform>
                                 </Image>
                             </Expander>
-
-                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" Style="{DynamicResource MetroExpanderEx}"
+                        </materialDesign:Card>
+                        <!--<Border
+                                Height="1"
+                                HorizontalAlignment="Stretch"
+                                Background="{DynamicResource MaterialDesignDivider}"
+                                SnapsToDevicePixels="True" />-->
+                        <materialDesign:Card Margin="4">
+                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" 
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Grid>
+                                <Grid Margin="4" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="1*" />
@@ -402,7 +341,8 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}" Margin="3"  Grid.ColumnSpan="2" >
+                                    <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}"   Grid.ColumnSpan="2" 
+                                                  Margin="4">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
@@ -418,60 +358,44 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
 
-                                    <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right"/>
-                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="2" Name="txt_CaptureName"/>
+                                    <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right" Margin="4"/>
+                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="4" Name="txt_CaptureName"/>
 
-                                    <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right"/>
-                                    <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Margin="2" Minimum="0" Maximum="100000" Value="{Binding Path=DefaultSession.Series}"/>
+                                    <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right" Margin="4"/>
+                                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=DefaultSession.Series}" Margin="4" VerticalAlignment="Top"/>
                                 </Grid>
                             </Expander>
-                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Padding="0" MaxHeight="200"
-                                      Style="{DynamicResource MetroExpanderEx}"
-                                       Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" />
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="4">
+                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True"  MaxHeight="200"
+                                      Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                                <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" Margin="4"/>
                             </Expander>
-                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0"  Padding="0"
-                                       Style="{DynamicResource MetroExpanderEx}"
-                                       Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <StackPanel Orientation="Vertical">
-                                    <ListBox ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="4">
+                            <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                                <StackPanel Orientation="Vertical" Margin="4">
+                                    <ListBox Margin="4" ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" HorizontalContentAlignment="Stretch">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid IsEnabled="{Binding IsRedy}" Margin="2">
+                                                <Grid IsEnabled="{Binding IsRedy}" >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="30"/>
+                                                    </Grid.ColumnDefinitions>
                                                     <CheckBox Content="{Binding DisplayName}" IsChecked="{Binding IsEnabled}"/>
-                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                        <Rectangle Width="10" Height="10" Visibility="{Binding Path=IsError,  Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{Binding Error}">
-                                                            <Rectangle.Fill>
-                                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_noentry}" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.RemovePluginCommand}" CommandParameter="{Binding}">
-                                                            <Rectangle Width="10" Height="10">
-                                                                <Rectangle.Fill>
-                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
-                                                                </Rectangle.Fill>
-                                                            </Rectangle>
-                                                        </Button>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding ConfigurePluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}" CommandParameter="{Binding}">
-                                                            <Rectangle Width="10" Height="10">
-                                                                <Rectangle.Fill>
-                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
-                                                                </Rectangle.Fill>
-                                                            </Rectangle>
-                                                        </Button>
-                                                        <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ApplyPluginCommand}" CommandParameter="{Binding}">
-                                                            <Rectangle Width="10" Height="10">
-                                                                <Rectangle.Fill>
-                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_stamp}" />
-                                                                </Rectangle.Fill>
-                                                            </Rectangle>
-                                                        </Button>
-                                                    </StackPanel>
+                                                    <materialDesign:PopupBox Grid.Column="1" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
+                                                        <StackPanel>
+                                                            <Button Content="Delete" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.RemovePluginCommand}" CommandParameter="{Binding}"/>
+                                                            <Button Content="Settings" Command="{Binding ConfigurePluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}" CommandParameter="{Binding}"/>
+                                                            <Button Content="Execute"  Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ApplyPluginCommand}" CommandParameter="{Binding}"/>
+                                                        </StackPanel>
+                                                    </materialDesign:PopupBox>
                                                 </Grid>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
-                                    <Controls:DropDownButton Name="DownButton" Padding="0" Margin="0" VerticalContentAlignment="Center" Content="{T:TranslateExtension LabelAddPlugin}" DisplayMemberPath="Name" 
+                                    <Controls:DropDownButton Name="DownButton" Padding="0" Margin="4" VerticalContentAlignment="Center" Content="{T:TranslateExtension LabelAddPlugin}" DisplayMemberPath="Name" 
                                                              ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=AutoExportPlugins}">
                                         <Controls:DropDownButton.ItemContainerStyle>
                                             <Style TargetType="MenuItem">
@@ -489,10 +413,11 @@
                                     </Controls:DropDownButton>
                                 </StackPanel>
                             </Expander>
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="4">
                             <Expander  Header="{T:TranslateExtension MenuPresets}" VerticalAlignment="Top" IsExpanded="False" Margin="0" Padding="0" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" 
-                                       Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPresetPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <StackPanel>
+                                <StackPanel Margin="4">
                                     <ListBox MaxHeight="100" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" Name="PresetListBox" Margin="3">
 
                                     </ListBox>
@@ -546,32 +471,30 @@
                                     </StackPanel>
                                 </StackPanel>
                             </Expander>
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="4">
                             <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
-                                       Style="{DynamicResource MetroExpanderEx}"
                                 Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowImagePropertiesPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" />
+                                <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Margin="4"/>
                             </Expander>
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="4">
                             <Expander  Header="{T:Translate LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
-                                       Style="{DynamicResource MetroExpanderEx}"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMetadataPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" Width="250" />
+                                <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" HorizontalContentAlignment="Stretch" Margin="4"/>
                             </Expander>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
+                        </materialDesign:Card>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
-            <!--</ScrollViewer>-->
+        </Grid>
+        <!--</ScrollViewer>-->
 
-        </Expander>
-        <StatusBar Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="6">
-            <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" HorizontalContentAlignment="Right" Padding="1" Grid.Row="3" Margin="3" ToolTip="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
-            <StatusBarItem HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.DeviceName}" />
-                    <Separator/>
-                    <ProgressBar ToolTip="File transfer progress" Height="20" Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}" Width="120"  Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                </StackPanel>
-            </StatusBarItem>
-        </StatusBar>
+        <materialDesign:Snackbar
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" 
+            IsActive="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=IsActive}">
+            <materialDesign:SnackbarMessage Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
+        </materialDesign:Snackbar>
+
     </Grid>
 </Controls:MetroWindow >

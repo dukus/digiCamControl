@@ -11,12 +11,14 @@
                     xmlns:classes="clr-namespace:CameraControl.Classes"
                     xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
                     xmlns:zoomAndPan="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="689">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="LayoutBaseResource.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
@@ -75,72 +77,39 @@
 
             </StackPanel>
         </Grid>
-
-        <StatusBar Grid.Row="1" UseLayoutRounding="True" Margin="-1,5,0,5"
-                   Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowThumbPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StatusBar.Background>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="{DynamicResource AccentColor}" Offset="1"/>
-                    <GradientStop Color="{DynamicResource AccentColor4}"/>
-                </LinearGradientBrush>
-            </StatusBar.Background>
-            <StatusBarItem >
-                <StackPanel Orientation="Horizontal">
-                    <Button Height="40" Width="40" Margin="2,-2" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding PrevImageCommand}">
-                        <Path Width="20" Height="20"
-                                  Canvas.Left="15.9063"
-                                  Canvas.Top="14.75"
-                                  Stretch="Fill"
-                                  Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
-                    </Button>
-                    <Button Height="40" Width="40" Margin="2,-2" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding NextImageCommand}" Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Path Width="20" Height="20"
-                                  Canvas.Left="15.9063"
-                                  Canvas.Top="14.75"
-                                  Stretch="Fill"
-                                  Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
-                    </Button>
+        <materialDesign:Card Grid.Row="1" Margin="4" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowThumbPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <DockPanel  UseLayoutRounding="True" Margin="4">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <Button Height="40" Width="40" Margin="4" Command="{Binding PrevImageCommand}" Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="ArrowLeft" />
+                        </Button>
+                        <Button Height="40" Width="40" Margin="4" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding NextImageCommand}" Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                        <materialDesign:PackIcon Width="24" Height="24" Kind="ArrowRight" />
+                        </Button>
                     <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
-                        <ToggleButton Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                            <Rectangle Width="20" Height="20">
-                                <Rectangle.Fill>
-                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_down}" />
-                                </Rectangle.Fill>
-                            </Rectangle>
+                        <ToggleButton Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}"  Style="{StaticResource  MaterialDesignFlatPrimaryToggleButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="ThumbDown" />                      
                         </ToggleButton>
-                        <ToggleButton  Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                            <Rectangle Width="20" Height="20">
-                                <Rectangle.Fill>
-                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_thumbs_up}" />
-                                </Rectangle.Fill>
-                            </Rectangle>
+
+                            <ToggleButton  Height="40"  Width="40" Margin="2,-2" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="ThumbUp" />
                         </ToggleButton>
                     </StackPanel>
 
                     <!--   New buttons for selection -->
-                    <Button Height="40" Width="40" Margin="1"  Command="{Binding Path=SelectNoneCommand}" ToolTip="{translation:TranslateExtension LabelSelectNone}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_checkmark_thick_unchecked}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <Button Margin="1" Height="40" Width="40" Command="{Binding Path=SelectAllCommand}" ToolTip="{translation:TranslateExtension LabelSelectAll}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_checkmark_thick}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
+                        <Button Height="40" Width="40" Margin="4"  Command="{Binding Path=SelectNoneCommand}" ToolTip="{translation:TranslateExtension LabelSelectNone}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="CheckboxBlankOutline" />
+                        </Button>
+                        <Button Margin="4" Height="40" Width="40" Command="{Binding Path=SelectAllCommand}" ToolTip="{translation:TranslateExtension LabelSelectAll}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                        <materialDesign:PackIcon Width="24" Height="24" Kind="CheckboxMarkedOutline" />
+                        </Button>
 
                     <!--   New buttons other software! -->
 
                     <Button Margin="1" Height="40" Width="40" Command="{Binding OpenInLightroomCommand}" 
                             ToolTip="{translation:TranslateExtension LabelOpenLightroom}" 
                             VerticalAlignment="Center" 
-                            HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}"
+                            HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFloatingActionLightButton}"
                             Visibility="{Binding LightroomIsInstalled, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
@@ -149,42 +118,22 @@
                         </Rectangle>
                     </Button>
 
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}" Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_delete}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_folder_open}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MetroCircleButtonStyle}"
+                        <Button Height="40" Width="40" Margin="4" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="Delete" />
+                        </Button>
+                        <Button Height="40" Width="40" Margin="4" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="FolderImage" />
+                        </Button>
+                        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}"
                     IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.HaveBackupFile}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_reset}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateCounterclockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateLeftCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_transform_rotate_counterclockwise}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateClockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateRightCommand}"  Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_transform_rotate_clockwise}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>                    
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="BackupRestore" />
+                        </Button>
+                        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateCounterclockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateLeftCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="RotateLeftVariant" />
+                        </Button>
+                        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateClockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateRightCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="RotateRightVariant" />
+                        </Button>                    
                     <ItemsControl ItemsSource="{Binding PanelPlugins}" >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -198,25 +147,16 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </StackPanel>
-            </StatusBarItem>
-            <StatusBarItem  DockPanel.Dock="Right">
-                <ToggleButton Height="40" Width="40" Content="Fit" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding ZoomFit}"/>
-            </StatusBarItem>
-            <StatusBarItem  DockPanel.Dock="Right">
-                <ToggleButton Height="40" Width="40" Content="1:1" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding Zoom11}"/>
-            </StatusBarItem>
-            <StatusBarItem  DockPanel.Dock="Right">
-                <ToggleButton Height="40" Width="40" Content="1:2" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding Zoom12}"/>
-            </StatusBarItem>
-            <StatusBarItem  DockPanel.Dock="Right">
-                <ToggleButton Height="40" Width="40" Content="[ : ]" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding ZoomToFocus}" ToolTip="{translation:TranslateExtension LabelZoomToFocus}" />
-            </StatusBarItem>
-            <StatusBarItem  DockPanel.Dock="Right">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                 <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="30" Width="30" />
-            </StatusBarItem>
-
-        </StatusBar>
-        <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False" >
+                    <ToggleButton Height="40" Width="40" Content="[ : ]" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ZoomToFocus}" ToolTip="{translation:TranslateExtension LabelZoomToFocus}" />
+                    <ToggleButton Height="40" Width="40" Content="1:2" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding Zoom12}"/>
+                    <ToggleButton Height="40" Width="40" Content="1:1" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding Zoom11}"/>
+                    <ToggleButton Height="40" Width="40" Content="Fit" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ZoomFit}"/>                
+            </StackPanel>
+        </DockPanel>
+        </materialDesign:Card>
+        <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
             <i:Interaction.Behaviors>
                 <classes:HorizontalScrollBehavior />
             </i:Interaction.Behaviors>

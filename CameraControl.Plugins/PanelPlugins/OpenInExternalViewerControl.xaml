@@ -3,22 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core">
+             xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
-            <Rectangle Width="20" Height="20">
-                <Rectangle.Fill>
-                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_image_select}" />
-                </Rectangle.Fill>
-            </Rectangle>
+        <Button Height="40" Width="40" Margin="4" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="Button_Click">
+            <materialDesign:PackIcon Kind="TooltipImage" Height="30" Width="30" />
         </Button>
     </Grid>
 </UserControl>

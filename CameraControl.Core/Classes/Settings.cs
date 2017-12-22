@@ -1422,6 +1422,7 @@ namespace CameraControl.Core.Classes
 
         public void ApplyTheme(Window window)
         {
+            return;
             try
             {
                 if (string.IsNullOrEmpty(CurrentThemeName) || !CurrentThemeName.Contains("\\"))

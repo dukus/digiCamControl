@@ -42,7 +42,7 @@ namespace CameraControl.Devices
     {
         private static StaticHelper _instance;
 
-        private Timer _timer = new Timer(60*1000);
+        private Timer _timer = new Timer(5*1000);
 
         public AsyncObservableCollection<string> Messages { get; set; }
 
@@ -70,6 +70,16 @@ namespace CameraControl.Devices
             SystemMessage = "";
         }
 
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set
+            {
+                _isActive = value;
+                NotifyPropertyChanged("IsActive");
+            }
+        }
+
         private string _systemMessage;
 
         public string SystemMessage
@@ -78,6 +88,7 @@ namespace CameraControl.Devices
             set
             {
                 _systemMessage = value;
+                IsActive = !string.IsNullOrWhiteSpace(_systemMessage);
                 NotifyPropertyChanged("SystemMessage");
                 if (!String.IsNullOrWhiteSpace(_systemMessage))
                     Messages.Add(DateTime.Now.ToShortTimeString() + " - " + _systemMessage);
@@ -89,6 +100,7 @@ namespace CameraControl.Devices
 
 
         private int _loadingProgress;
+        private bool _isActive;
 
         public int LoadingProgress
         {

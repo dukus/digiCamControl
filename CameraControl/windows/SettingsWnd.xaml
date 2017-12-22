@@ -2,6 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{T:TranslateExtension SettingsWindowTitle}" Height="500" Width="800" Loaded="Window_Loaded" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" 
+
+                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                       TextElement.FontWeight="Regular"
+                       TextElement.FontSize="13"
+                       TextOptions.TextFormattingMode="Ideal"
+                       TextOptions.TextRenderingMode="Auto"
+                       Background="{DynamicResource MaterialDesignPaper}"
+                       FontFamily="{DynamicResource MaterialDesignFont}" 
+                       GlowBrush="{DynamicResource AccentColorBrush}"     
+                       
                        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" ShowMaxRestoreButton="False" ShowMinButton="False"
                        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
