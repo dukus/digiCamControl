@@ -328,7 +328,6 @@ namespace CameraControl.ViewModel
                 }
                 var editSession = new EditSession(session);
                 editSession.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-                ServiceProvider.Settings.ApplyTheme(editSession);
                 if (editSession.ShowDialog() == true)
                 {
                     ServiceProvider.Settings.Add(editSession.Session);
@@ -348,7 +347,6 @@ namespace CameraControl.ViewModel
             {
                 EditSession editSession = new EditSession(ServiceProvider.Settings.DefaultSession);
                 editSession.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-                ServiceProvider.Settings.ApplyTheme(editSession);
                 editSession.ShowDialog();
                 ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
             }

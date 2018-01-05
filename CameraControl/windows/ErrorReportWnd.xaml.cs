@@ -59,7 +59,6 @@ namespace CameraControl.windows
         public ErrorReportWnd(string type, string message = "")
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
             _type = type;
             _message = message;
         }

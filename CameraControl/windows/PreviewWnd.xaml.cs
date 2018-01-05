@@ -14,7 +14,6 @@ namespace CameraControl.windows
         public PreviewWnd()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         private void Image_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)

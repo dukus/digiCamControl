@@ -58,7 +58,6 @@ namespace CameraControl.windows
         public PresetEditWnd()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         public virtual event PropertyChangedEventHandler PropertyChanged;

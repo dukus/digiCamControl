@@ -56,7 +56,6 @@ namespace CameraControl.windows
                 Session.BeginEdit();
                 InitializeComponent();
                 DataContext = Session;
-                ServiceProvider.Settings.ApplyTheme(this);
             }
             catch (Exception ex)
             {

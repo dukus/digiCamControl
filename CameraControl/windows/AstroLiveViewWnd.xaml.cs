@@ -79,7 +79,6 @@ namespace CameraControl.windows
             Brightness = 0;
             Freeze = false;
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         #region Implementation of IWindow

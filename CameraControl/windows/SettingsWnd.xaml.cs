@@ -74,7 +74,6 @@ namespace CameraControl.windows
             RotateFlipTypesValues =
                 new AsyncObservableCollection<RotateFlipType>(
                     Enum.GetValues(typeof (RotateFlipType)).Cast<RotateFlipType>().Distinct());
-            ServiceProvider.Settings.ApplyTheme(this);
             foreach (IMainWindowPlugin mainWindowPlugin in ServiceProvider.PluginManager.MainWindowPlugins)
             {
                 cmb_mainwindow.Items.Add(mainWindowPlugin.DisplayName);

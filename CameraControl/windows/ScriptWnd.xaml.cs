@@ -75,7 +75,6 @@ namespace CameraControl.windows
         public ScriptWnd()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             NewScript();
@@ -90,7 +89,6 @@ namespace CameraControl.windows
                 // open code completion after the user has pressed dot:
                 completionWindow = new CompletionWindow(textEditor.TextArea);
                 completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
-                ServiceProvider.Settings.ApplyTheme(completionWindow);
                 // provide AvalonEdit with the data:
                 IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
                 foreach (IScriptCommand command in ServiceProvider.ScriptManager.AvaiableCommands)

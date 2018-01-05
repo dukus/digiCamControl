@@ -12,7 +12,9 @@
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                       xmlns:local1="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
-                      xmlns:ControlzEx="clr-namespace:ControlzEx;assembly=MahApps.Metro" x:Class="CameraControl.windows.LiveViewWnd"
+                      xmlns:ControlzEx="clr-namespace:ControlzEx;assembly=MahApps.Metro"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                      x:Class="CameraControl.windows.LiveViewWnd"
         Title="{Binding Title}" Height="800" Width="750" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type={x:Type Classes:LiveviewSettings}}" Topmost="{Binding StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True" StateChanged="MetroWindow_StateChanged">
@@ -20,16 +22,24 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />-->
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="../Resources/MoreIcons.xaml" />
-                <ResourceDictionary Source="../Styles/ExpanderEx.xaml" />
+                <!--<ResourceDictionary Source="../Styles/ExpanderEx.xaml" />-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Snackbar.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
             <!-- MoveThumb Template -->
@@ -127,12 +137,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="140" />
             <RowDefinition Height="100" />
-            <RowDefinition Height="46*" />
-            <RowDefinition Height="303*" />
-            <RowDefinition Height="20*" />
+            <RowDefinition Height="70*" />
+            <RowDefinition Height="459*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" MaxWidth="350"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -155,13 +164,9 @@
                 </Image.LayoutTransform>
             </Image>
         </local1:ZoomAndPanControl>
-        <Button Grid.Row="0" Grid.Column="2" Height="40" Width="40" Margin="10" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ClosePreviewCommand}"
+        <Button Grid.Row="0" Grid.Column="2" Height="40" Width="40" Margin="10" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ClosePreviewCommand}"
 			ToolTip="{T:Translate LabelClosePreview}" Visibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
-            <Rectangle Width="20" Height="20">
-                <Rectangle.Fill>
-                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
-                </Rectangle.Fill>
-            </Rectangle>
+            <materialDesign:PackIcon Kind="Close" Height="35" Width="35" />
         </Button>
 
 
@@ -210,214 +215,167 @@
                 <Label Content="R" Padding="0" HorizontalContentAlignment="Center"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Background="#35000000" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Orientation="Vertical" Grid.RowSpan="4" Margin="10,55,10,10">
-            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding FullScreenCommand}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new_window}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding ZoomOutCommand}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_out}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding ZoomInCommand}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_in}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <Button Content="100" Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding ZoomIn100}"/>
-            <Button Height="40" Width="40" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Center" Command="{Binding ToggleGridCommand}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_grid}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Button>
-            <ToggleButton Height="40" Width="40" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="{Binding FreezeImage}" ToolTip="{T:Translate ButtonFreezeImage}">
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </ToggleButton>
-            <ToggleButton  ToolTip="{T:Translate LabelEdgeDetection}" Height="40" Width="40" Margin="0" IsChecked="{Binding EdgeDetection}" Style="{DynamicResource MetroCircleToggleButtonStyle}" >
-                <Rectangle Width="20" Height="20">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_contrast}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </ToggleButton>
-            <Canvas Width="40" Height="40" Margin="5" RenderTransformOrigin="0.5,0.5" ToolTip="{Binding LevelAngle}"
+        <materialDesign:Card Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Grid.RowSpan="4" Margin="10,30,10,10">
+            <StackPanel Margin="4">
+                <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding FullScreenCommand}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new_window}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ZoomOutCommand}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_out}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ZoomInCommand}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_in}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <Button Content="100" Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ZoomIn100}"/>
+                <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ToggleGridCommand}">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_grid}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Button>
+                <ToggleButton Height="40" Width="40" Style="{DynamicResource MaterialDesignActionLightToggleButton}" IsChecked="{Binding FreezeImage}" ToolTip="{T:Translate ButtonFreezeImage}" Margin="4">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ToggleButton>
+                <ToggleButton  ToolTip="{T:Translate LabelEdgeDetection}" Height="40" Width="40" Margin="4" IsChecked="{Binding EdgeDetection}" Style="{DynamicResource MaterialDesignActionLightToggleButton}" >
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_contrast}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ToggleButton>
+                <Canvas Width="40" Height="40" Margin="4" RenderTransformOrigin="0.5,0.5" ToolTip="{Binding LevelAngle}"
 				Visibility="{Binding ShowLevelLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
-                <Path x:Name="Cutter" Width="30" Height="30" RenderTransformOrigin="0.5,0.5"  Canvas.Left="5" Canvas.Top="5" Stretch="Fill" Fill="{Binding LevelAngleColor}" Data="F1 M 56,36L 56,40L 40,40L 40,56L 36,56L 36,40L 20,40L 20,36L 36,36L 36,20L 40,20L 40,36L 56,36 Z M 8,37L 8,39L 3.01401,39L 3,38L 3.01401,37L 8,37 Z M 13,37L 13,39L 10,39L 10,37L 13,37 Z M 18,37L 18,39L 15,39L 15,37L 18,37 Z M 39,8.00005L 37,8.00005L 37,3.01403L 38,3.00002L 39,3.01403L 39,8.00005 Z M 39,18.0001L 37,18.0001L 37,15.0001L 39,15.0001L 39,18.0001 Z M 37,10.0001L 39,10.0001L 39,13.0001L 37,13.0001L 37,10.0001 Z M 68,39L 68,37L 72.986,37L 73,38L 72.986,39L 68,39 Z M 63,39L 63,37L 66,37L 66,39L 63,39 Z M 57.9999,39L 57.9999,37L 61,37L 61,39L 57.9999,39 Z M 37,68L 39,68L 39,72.986L 38,73L 37,72.986L 37,68 Z M 37,63L 39,63L 39,66L 37,66L 37,63 Z M 37,58L 39,58L 39,61L 37,61L 37,58 Z ">
-                    <Path.RenderTransform>
-                        <RotateTransform Angle="{Binding LevelAngle}"  />
-                    </Path.RenderTransform>
-                </Path>
-                <Path Width="40" Height="40" Stretch="Uniform" Fill="{DynamicResource BlackBrush}" Data="F1 M 66.6667,1.52588e-005C 29.907,1.52588e-005 0,29.907 0,66.6667C 0,103.425 29.907,133.333 66.6667,133.333C 103.427,133.333 133.333,103.425 133.333,66.6667C 133.333,29.907 103.427,1.52588e-005 66.6667,1.52588e-005 Z M 72.0429,122.315L 72.0429,104.302L 61.2904,104.302L 61.2904,122.318C 34.7428,119.772 13.5612,98.5912 11.0176,72.043L 29.0332,72.043L 29.0332,61.2904L 11.0176,61.2904C 13.5625,34.7428 34.7428,13.5625 61.2904,11.0176L 61.2904,29.0319L 72.0429,29.0319L 72.0429,11.0176C 98.5912,13.5612 119.772,34.7416 122.315,61.2904L 104.302,61.2904L 104.302,72.043L 122.318,72.043C 119.772,98.5912 98.5912,119.772 72.0429,122.315 Z "/>
-            </Canvas>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" 
-			Visibility="{Binding ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
-            <StackPanel.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="{T:Translate LabelCurrentLockNear}" Command="{Binding LockCurrentNearCommand}"/>
-                    <MenuItem Header="{T:Translate LabelCurrentLockFar}" Command="{Binding LockCurrentFarCommand}"/>
-                </ContextMenu>
-            </StackPanel.ContextMenu>
-
-            <ProgressBar Width="{Binding ActualWidth, ElementName=StackPanel}" Height="5" Visibility="{Binding FocusProgressVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" Value="{Binding FocusProgressValue}" Maximum="{Binding FocusProgressMax}"/>
-            <StackPanel Height="45" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" Background="#35000000" x:Name="StackPanel">
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockA}" ToolTip="{T:Translate LabelLockNear}">
-                    <ToggleButton.Resources>
-                        <Rectangle Width="15" Height="15"  x:Key="OnImage">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_lock}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Width="15" Height="15"  x:Key="OffImage">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_unlock_keyhole}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </ToggleButton.Resources>
-                    <ToggleButton.Visibility>
-                        <Binding Converter="{StaticResource BooleanToVisibilityConverter1}" Path="AdvancexFocusStacking"/>
-                    </ToggleButton.Visibility>
-                    <ToggleButton.Style>
-                        <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}">
-                            <Style.Triggers>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Content" Value="{StaticResource OnImage}"/>
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="False">
-                                    <Setter Property="Content" Value="{StaticResource OffImage}"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-                <Button Margin="1" Width="40" Content="|&lt;" Command="{Binding MoveACommand}" IsEnabled="{Binding LockA}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:Translate LabelGoNear}"/>
-
-                <Button Margin="1" Width="40" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveLargeToCamera}"/>
-                <Button Margin="1" Width="40" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveMediumToCamera}"/>
-                <Button Margin="1" Width="40" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveSmallToCamera}"/>
-
-                <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="{T:Translate LabelDistantFromPoints}"/>
-
-                <Button Margin="1" Width="40" Content="&gt;" Command="{Binding FocusPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveSmallToInfinity}"/>
-                <Button Margin="1" Width="40" Content="&gt;&gt;" Command="{Binding FocusPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveMediumToInfinity}"/>
-                <Button Margin="1" Width="40" Content="&gt;&gt;&gt;" Command="{Binding FocusPPPCommand}" FontWeight="Bold" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelMoveLargeToInfinity}"/>
-
-                <Button Margin="1" Width="40" Content="&gt;|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MetroCircleButtonStyle}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:Translate LabelGoFar}"/>
-
-
-                <ToggleButton Width="40" Margin="3" IsChecked="{Binding LockB}" ToolTip="{T:Translate LabelLockFar}">
-                    <ToggleButton.Resources>
-                        <Rectangle Width="15" Height="15"  x:Key="OnImage">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_lock}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Rectangle Width="15" Height="15"  x:Key="OffImage">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_unlock_keyhole}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </ToggleButton.Resources>
-                    <ToggleButton.Visibility>
-                        <Binding Converter="{StaticResource BooleanToVisibilityConverter1}" Path="AdvancexFocusStacking"/>
-                    </ToggleButton.Visibility>
-                    <ToggleButton.Style>
-                        <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MetroCircleToggleButtonStyle}" >
-                            <Style.Triggers>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Content" Value="{StaticResource OnImage}"/>
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="False">
-                                    <Setter Property="Content" Value="{StaticResource OffImage}"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-
+                    <Path x:Name="Cutter" Width="30" Height="30" RenderTransformOrigin="0.5,0.5"  Canvas.Left="5" Canvas.Top="5" Stretch="Fill" Fill="{Binding LevelAngleColor}" Data="F1 M 56,36L 56,40L 40,40L 40,56L 36,56L 36,40L 20,40L 20,36L 36,36L 36,20L 40,20L 40,36L 56,36 Z M 8,37L 8,39L 3.01401,39L 3,38L 3.01401,37L 8,37 Z M 13,37L 13,39L 10,39L 10,37L 13,37 Z M 18,37L 18,39L 15,39L 15,37L 18,37 Z M 39,8.00005L 37,8.00005L 37,3.01403L 38,3.00002L 39,3.01403L 39,8.00005 Z M 39,18.0001L 37,18.0001L 37,15.0001L 39,15.0001L 39,18.0001 Z M 37,10.0001L 39,10.0001L 39,13.0001L 37,13.0001L 37,10.0001 Z M 68,39L 68,37L 72.986,37L 73,38L 72.986,39L 68,39 Z M 63,39L 63,37L 66,37L 66,39L 63,39 Z M 57.9999,39L 57.9999,37L 61,37L 61,39L 57.9999,39 Z M 37,68L 39,68L 39,72.986L 38,73L 37,72.986L 37,68 Z M 37,63L 39,63L 39,66L 37,66L 37,63 Z M 37,58L 39,58L 39,61L 37,61L 37,58 Z ">
+                        <Path.RenderTransform>
+                            <RotateTransform Angle="{Binding LevelAngle}"  />
+                        </Path.RenderTransform>
+                    </Path>
+                    <Path Width="40" Height="40" Stretch="Uniform" Fill="{DynamicResource BlackBrush}" Data="F1 M 66.6667,1.52588e-005C 29.907,1.52588e-005 0,29.907 0,66.6667C 0,103.425 29.907,133.333 66.6667,133.333C 103.427,133.333 133.333,103.425 133.333,66.6667C 133.333,29.907 103.427,1.52588e-005 66.6667,1.52588e-005 Z M 72.0429,122.315L 72.0429,104.302L 61.2904,104.302L 61.2904,122.318C 34.7428,119.772 13.5612,98.5912 11.0176,72.043L 29.0332,72.043L 29.0332,61.2904L 11.0176,61.2904C 13.5625,34.7428 34.7428,13.5625 61.2904,11.0176L 61.2904,29.0319L 72.0429,29.0319L 72.0429,11.0176C 98.5912,13.5612 119.772,34.7416 122.315,61.2904L 104.302,61.2904L 104.302,72.043L 122.318,72.043C 119.772,98.5912 98.5912,119.772 72.0429,122.315 Z "/>
+                </Canvas>
             </StackPanel>
-            <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="{Binding FocusStep}" Width="440" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" LargeChange="100" IsMoveToPointEnabled="True" />
-        </StackPanel>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" Margin="0,30" HorizontalAlignment="Center"
+                             Visibility="{Binding ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+            <StackPanel Margin="4">
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{T:Translate LabelCurrentLockNear}" Command="{Binding LockCurrentNearCommand}"/>
+                        <MenuItem Header="{T:Translate LabelCurrentLockFar}" Command="{Binding LockCurrentFarCommand}"/>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
 
-        <Expander Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" 
-			Style="{DynamicResource MetroExpanderEx}">
-            <Grid MinWidth="250">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="72*" />
-                    <RowDefinition Height="475*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Button Content="{T:Translate ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" 
+                <ProgressBar Width="{Binding ActualWidth, ElementName=StackPanel}" Height="5" Visibility="{Binding FocusProgressVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" Value="{Binding FocusProgressValue}" Maximum="{Binding FocusProgressMax}"/>
+                <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal" x:Name="StackPanel">
+                    <ToggleButton IsChecked="{Binding LockA}" Margin="4" Style="{StaticResource MaterialDesignActionLightToggleButton}" Height="40" Width="40"
+                                  ToolTip="{T:Translate LabelLockNear}">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon  Kind="LockOpen" />
+                        </ToggleButton.Content>
+                        <materialDesign:ToggleButtonAssist.OnContent >
+                            <materialDesign:PackIcon Kind="Lock" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+
+                    <Button Margin="4" Content="|&lt;" Command="{Binding MoveACommand}" IsEnabled="{Binding LockA}" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:Translate LabelGoNear}"/>
+
+                    <Button Margin="4" Content="&lt;&lt;&lt;" Command="{Binding FocusMMMCommand}" FontWeight="Bold" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{T:Translate LabelMoveLargeToCamera}"/>
+                    <Button Margin="4" Content="&lt;&lt;" Command="{Binding FocusMMCommand}" FontWeight="Bold" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{T:Translate LabelMoveMediumToCamera}"/>
+                    <Button Margin="4" Content="&lt;" Command="{Binding FocusMCommand}" FontWeight="Bold" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{T:Translate LabelMoveSmallToCamera}"/>
+
+                    <Label Content="{Binding CounterMessage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="{T:Translate LabelDistantFromPoints}"/>
+
+                    <Button Margin="4" Content="&gt;" Command="{Binding FocusPCommand}" FontWeight="Bold" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{T:Translate LabelMoveSmallToInfinity}"/>
+                    <Button Margin="4" Content="&gt;&gt;" Command="{Binding FocusPPCommand}" FontWeight="Bold" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{T:Translate LabelMoveMediumToInfinity}"/>
+                    <Button Margin="4" Content="&gt;&gt;&gt;" Command="{Binding FocusPPPCommand}" FontWeight="Bold" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="{T:Translate LabelMoveLargeToInfinity}"/>
+
+                    <Button Margin="4" Content="&gt;|" Command="{Binding MoveBCommand}" IsEnabled="{Binding LockB}" Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" ToolTip="{T:Translate LabelGoFar}"/>
+
+                    <ToggleButton IsChecked="{Binding LockB}" Margin="4" Style="{StaticResource MaterialDesignActionLightToggleButton}" Height="40" Width="40"
+                                  ToolTip="{T:Translate LabelLockFar}">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon  Kind="LockOpen" />
+                        </ToggleButton.Content>
+                        <materialDesign:ToggleButtonAssist.OnContent >
+                            <materialDesign:PackIcon Kind="Lock" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+
+                </StackPanel>
+                <Slider Maximum="{Binding FocusValue}" IsEnabled="{Binding LockB}" Value="{Binding SelectedFocusValue, UpdateSourceTrigger=PropertyChanged}" AutoToolTipPlacement="BottomRight" TickFrequency="{Binding FocusStep}" Width="440" Visibility="{Binding AdvancexFocusStacking, Converter={StaticResource BooleanToVisibilityConverter1}}" TickPlacement="BottomRight" SmallChange="10" LargeChange="100" IsMoveToPointEnabled="True" />
+            </StackPanel>
+        </materialDesign:Card>
+
+        <ToggleButton Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Name="PanelButton" VerticalAlignment="Center" Grid.RowSpan="5" IsChecked="True"
+                      Margin="0" Width="24" Height="24" Style="{StaticResource MaterialDesignFlatToggleButton}" Cursor="Hand" >
+            <materialDesign:PackIcon Width="21" Height="21" Kind="DotsVertical" />
+        </ToggleButton>
+        <!--<Expander ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" 
+			Style="{DynamicResource MetroExpanderEx}">-->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"  MinWidth="250" Visibility="{Binding ElementName=PanelButton, Path=IsChecked , Converter={StaticResource BooleanToVisibilityConverter1}}" Margin="15,0,0,3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="72*" />
+                <RowDefinition Height="475*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button Content="{T:Translate ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" 
 					Visibility="{Binding ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
 
-                <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCapture}" Height="30" Margin="0,10,10,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
-                <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCancel}" Height="30" Margin="0,10,10,0" Command="{Binding CancelCaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" 
+            <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCapture}" Height="30" Margin="0,10,10,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
+            <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCancel}" Height="30" Margin="0,10,10,0" Command="{Binding CancelCaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" 
 					Visibility="{Binding CaptureInProgress, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
-                <Button Grid.Row="0" Content="{Binding RecButtonText}" Height="30" Margin="10,50,10,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Left" Width="112"/>
+            <Button Grid.Row="0" Content="{Binding RecButtonText}" Height="30" Margin="10,50,10,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Left" Width="112"/>
 
-                <Button Grid.Row="0" Content="{T:Translate ButtonPreview}" Height="30" Margin="10,50,10,0" Command="{Binding PreviewCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Right" Width="101"/>
+            <Button Grid.Row="0" Content="{T:Translate ButtonPreview}" Height="30" Margin="10,50,10,0" Command="{Binding PreviewCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Right" Width="101"/>
 
 
-                <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" x:Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform"
+            <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" x:Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform"
 					RenderOptions.BitmapScalingMode="HighQuality">
-                    <Image.LayoutTransform>
-                        <RotateTransform  Angle="{Binding Rotation}" />
-                    </Image.LayoutTransform>
-                </Image>
+                <Image.LayoutTransform>
+                    <RotateTransform  Angle="{Binding Rotation}" />
+                </Image.LayoutTransform>
+            </Image>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
-                    <StackPanel>
-                        <StackPanel.ScrollOwner>
-                            <ScrollViewer />
-                        </StackPanel.ScrollOwner>
-                        <Expander Header="{T:Translate LabelLuminosity}" BorderThickness="1"  BorderBrush="Black"  Margin="3" IsExpanded="{Binding ShowHistogram}"
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowLuminosityLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
-                            <Grid Height="75" >
-                                <Polygon Points="{Binding LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgGray}"/>
-                                <Polygon Points="{Binding RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.9" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgRed}" />
-                                <Polygon Points="{Binding GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.7" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgGreen}"/>
-                                <Polygon Points="{Binding BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter1}, ElementName=TgBlue}"/>
-                                <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" x:Name="TgRed">
-                                        <Ellipse Height="10" Width="10" Fill="Red"/>
-                                    </ToggleButton>
-                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" x:Name="TgGreen">
-                                        <Ellipse Height="10" Width="10" Fill="Green"/>
-                                    </ToggleButton>
-                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="True" x:Name="TgBlue">
-                                        <Ellipse Height="10" Width="10" Fill="Blue"/>
-                                    </ToggleButton>
-                                    <ToggleButton  Height="26" Width="26" Margin="0" Style="{DynamicResource MetroCircleToggleButtonStyle}" IsChecked="False" x:Name="TgGray">
-                                        <Ellipse Height="10" Width="10" Fill="Gray"/>
-                                    </ToggleButton>
-                                </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.RowSpan="2">
+                <StackPanel>
+                    <StackPanel.ScrollOwner>
+                        <ScrollViewer />
+                    </StackPanel.ScrollOwner>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowLuminosityLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelLuminosity}" IsExpanded="{Binding ShowHistogram}">
+                            <Grid Height="75" Margin="4">
+                                <Polygon Points="{Binding LuminanceHistogramPoints}" Stretch="Fill" Fill="LightGray" Opacity="1" />
+                                <Polygon Points="{Binding RedColorHistogramPoints}" Stretch="Fill" Fill="Red" Opacity="0.9" />
+                                <Polygon Points="{Binding GreenColorHistogramPoints}" Stretch="Fill" Fill="Green" Opacity="0.7"/>
+                                <Polygon Points="{Binding BlueColorHistogramPoints}" Stretch="Fill" Fill="Blue" Opacity="0.5" />
+
                                 <CheckBox IsChecked="{Binding HighlightUnderExp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="18"/>
                                 <CheckBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="18" IsChecked="{Binding HighlightOverExp}"/>
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" BorderThickness="1"  BorderBrush="Black" Margin="3"
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
-                            <Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelControl}" IsEnabled="{Binding IsFree}" >
+                            <Grid Margin="4">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -441,10 +399,10 @@
 									Grid.Column="0" Grid.Row="3"  />
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelDisplay}" BorderBrush="Black" Margin="3"
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" >
-                            <Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowDisplayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelDisplay}"  >
+                            <Grid Margin="4">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
                                     <ColumnDefinition Width="88*" />
@@ -520,14 +478,14 @@
 
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelOverlay}" BorderThickness="1"  BorderBrush="Black" Margin="3"
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowOverlayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}" MaxHeight="291">
-                            <Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowOverlayLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelOverlay}">
+                            <Grid Margin="4">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100*"/>
                                     <ColumnDefinition Width="29" MaxWidth="28"/>
-                                    <ColumnDefinition Width="55"  MaxWidth="54"/>
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -544,7 +502,7 @@
                                 </Grid.RowDefinitions>
 
                                 <ComboBox Margin="2,2,3,2" Grid.Column="0" Grid.ColumnSpan="2" SelectedValue ="{Binding SelectedOverlay}" SelectedValuePath="Value" DisplayMemberPath="Name" ItemsSource="{Binding Overlays}"/>
-                                <Button Grid.Row="0" Grid.Column="2" Content="..." Margin="1,2,3,2" Command="{Binding BrowseOverlayCommand}"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="..." Margin="4" Command="{Binding BrowseOverlayCommand}"/>
 
                                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="2,2,3,2" Orientation="Vertical" Grid.ColumnSpan="2">
                                     <CheckBox  Content="{T:Translate LabelActivate}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding OverlayActivated}" />
@@ -567,19 +525,15 @@
                                 <Slider Grid.Row="9" Grid.Column="0" Margin="2,2,3,2" Minimum="0" Maximum="100" Value="{Binding OverlayTransparency}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" IsEnabled="{Binding OverlayActivated}"/>
                                 <Controls:NumericUpDown Minimum="0" Value="{Binding OverlayTransparency}" IsEnabled="{Binding OverlayActivated}" Grid.Row="9"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
-                                <Button Grid.Column="2" Grid.Row="1" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="{T:Translate LabelReset}" Command="{Binding ResetOverlayCommand}" Margin="15,0,1,0">
-                                    <Rectangle Width="20" Height="20">
-                                        <Rectangle.Fill>
-                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_reset}" />
-                                        </Rectangle.Fill>
-                                    </Rectangle>
+                                <Button Grid.Column="2" Grid.Row="1" Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTip="{T:Translate LabelReset}" Command="{Binding ResetOverlayCommand}" Margin="4">
+                                    <materialDesign:PackIcon Kind="RedoVariant" Height="35" Width="35" />
                                 </Button>
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelFocusStackingAdvanced}" BorderThickness="1" BorderBrush="Black" Margin="3" 
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
-                            <Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelFocusStackingAdvanced}">
+                            <Grid Margin="4">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -620,10 +574,10 @@
                                 </Button>
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelFocusStackingSimple}" BorderThickness="1" BorderBrush="Black" Margin="3" 
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
-                            <Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowFocusStackingLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelFocusStackingSimple}" >
+                            <Grid Margin="4">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -667,9 +621,9 @@
                                 <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="2" Value="{Binding WaitTime}" IsEnabled="{Binding IsFree}" Margin="2"/>
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelMotionDetection}" BorderThickness="1"  BorderBrush="Black"  Margin="3"
-							Style="{DynamicResource MetroExpanderEx}"
-							Visibility="{Binding ShowMotionDetectionLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ShowMotionDetectionLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                        <Expander Header="{T:Translate LabelMotionDetection}" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -710,9 +664,10 @@
                                 <Label Grid.Column="3" Grid.Row="7" Content="{Binding CurrentMotionIndex}" HorizontalAlignment="Center"/>
                             </Grid>
                         </Expander>
-                        <Expander Header="{T:Translate LabelSnapshot}" BorderThickness="1"  BorderBrush="Black"  Margin="3" 
-							Style="{DynamicResource MetroExpanderEx}">
-                            <Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="4" >
+                        <Expander Header="{T:Translate LabelSnapshot}">
+                            <Grid Margin="4">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -733,21 +688,23 @@
 
                             </Grid>
                         </Expander>
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
-        </Expander>
+                    </materialDesign:Card>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <!--</Expander>-->
 
 
 
         <!--<Controls:ProgressRing IsActive="{Binding Path=SelectedPortableDevice.IsBusy, RelativeSource={RelativeSource FindAncestor, AncestorType=my:LiveViewWnd, AncestorLevel=1}}" Height="78" Width="81" Canvas.Left="21" Canvas.Top="20" />-->
 
         <!--<Image Name="img_preview" Margin="31,114,0,0" Height="{Binding ElementName=canvas_image, Path=Height}" HorizontalAlignment="Left" Width="{Binding ElementName=canvas_image, Path=Width}"/>-->
-        <Grid Width="300" Grid.Column="2" Grid.Row="2" x:Name="grid_wait" Visibility="{Binding DelayedStart, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}">
-            <ProgressBar IsIndeterminate="True" Height="20"/>
-            <Label Content="{T:Translate LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
-        </Grid>
-
+        <materialDesign:Card Width="300" Grid.Column="2" Grid.Row="2" >
+            <Grid x:Name="grid_wait" Visibility="{Binding DelayedStart, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" Margin="4">
+                <ProgressBar IsIndeterminate="True" Height="20"/>
+                <Label Content="{T:Translate LabelWaitingForDevice}" HorizontalContentAlignment="Center" Height="67" VerticalAlignment="Center" />
+            </Grid>
+        </materialDesign:Card>
         <Ellipse Width="190" Height="190" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding CountDownVisible, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" 
 			HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
             <Ellipse.Stroke>
@@ -771,9 +728,13 @@
             </Ellipse.Triggers>
         </Ellipse>
 
-        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding CountDownVisible, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding CountDownVisible, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <Label Content="{Binding SystemMessage, Source={x:Static Devices:StaticHelper.Instance}}" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Row="4" Grid.Column="1" Padding="0" Grid.ColumnSpan="2" />
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5" />
+        <materialDesign:Snackbar
+            Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" 
+            IsActive="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=IsActive}">
+            <materialDesign:SnackbarMessage Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" />
+        </materialDesign:Snackbar>
+
     </Grid>
 </Controls:MetroWindow>

@@ -107,7 +107,6 @@ namespace CameraControl.windows
         public TagSelectorWnd()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
             //if (Tags1.Count == 0)
             //  Tags1.Add(new TagItem() { DisplayValue = "(empty)" });
         }

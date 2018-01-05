@@ -156,7 +156,6 @@ namespace CameraControl.windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //SelectedPortableDevice.StoptLiveView();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
 

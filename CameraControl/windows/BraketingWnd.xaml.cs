@@ -53,7 +53,6 @@ namespace CameraControl.windows
         public BraketingWnd(ICameraDevice device, PhotoSession session)
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
 

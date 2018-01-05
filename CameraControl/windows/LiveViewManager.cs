@@ -105,7 +105,6 @@ namespace CameraControl.windows
                                 Application.Current.Dispatcher.Invoke(new Action(delegate
                                 {
                                     LiveViewWnd wnd = new LiveViewWnd();
-                                    ServiceProvider.Settings.ApplyTheme(wnd);
                                     _register.Add(param, wnd);
                                     wnd.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
                                 }));

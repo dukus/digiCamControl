@@ -23,7 +23,6 @@ namespace CameraControl.windows
         public Welcome()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         private void btn_facebook_Click(object sender, RoutedEventArgs e)

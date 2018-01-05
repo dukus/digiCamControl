@@ -60,7 +60,6 @@ namespace CameraControl.windows
             InitializeComponent();
             _tagItem.BeginEdit();
             DataContext = _tagItem;
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         private void btn_save_Click(object sender, RoutedEventArgs e)

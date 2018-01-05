@@ -54,7 +54,6 @@ namespace CameraControl.windows
         public ScriptCommandEdit(UserControl control)
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
             stackPanel.Children.Add(control);
         }
 

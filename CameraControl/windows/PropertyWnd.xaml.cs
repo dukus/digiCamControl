@@ -52,7 +52,6 @@ namespace CameraControl.windows
             InitializeComponent();
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Close,
                                                    new ExecutedRoutedEventHandler(delegate { this.Close(); })));
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         public void DragWindow(object sender, MouseButtonEventArgs args)

@@ -312,7 +312,7 @@
                     <StackPanel>
                         <materialDesign:Card Margin="4">
                             <Expander Header="Preview" IsExpanded="True">
-                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="170" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"  Margin="4">
+                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="185" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"  Margin="4">
                                     <Image.LayoutTransform>
                                         <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
                                     </Image.LayoutTransform>

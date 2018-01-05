@@ -254,7 +254,6 @@ namespace CameraControl.windows
             AutomaticGuiding = false;
             _captureTimer.Elapsed += _captureTimer_Elapsed;
             _waitTimer.Elapsed += _waitTimer_Elapsed;
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         private void Init()

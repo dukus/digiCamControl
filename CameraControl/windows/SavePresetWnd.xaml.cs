@@ -48,7 +48,6 @@ namespace CameraControl.windows
             InitializeComponent();
             CameraPreset = cameraPreset;
             CameraPreset.BeginEdit();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
