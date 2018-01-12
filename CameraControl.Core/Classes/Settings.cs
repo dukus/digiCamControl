@@ -43,6 +43,7 @@ using System.Xml.Serialization;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using MahApps.Metro;
+using MaterialDesignColors;
 using Newtonsoft.Json;
 
 #endregion
@@ -1068,7 +1069,7 @@ namespace CameraControl.Core.Classes
             FullScreenInSecondaryMonitor = false;
             SendUsageStatistics = true;
             ThumbHeigh = 100;
-            CurrentThemeName = "Dark\\Blue";
+            CurrentThemeName = "Light\\grey";
             AllowWebserverActions = true;
             PublicWebserver = false;
             LoadCanonTransferMode = true;
@@ -1409,55 +1410,15 @@ namespace CameraControl.Core.Classes
             {
                 try
                 {
-                    var themes = ThemeManager.Accents.Select(accent => "Light\\" + accent.Name).ToList();
-                    themes.AddRange(ThemeManager.Accents.Select(accent => "Dark\\" + accent.Name));
+                    
+                    var themes = new SwatchesProvider().Swatches.Select(accent => "Light\\" + accent.Name).ToList();
+                    themes.AddRange(new SwatchesProvider().Swatches.Select(accent => "Dark\\" + accent.Name));
                     return themes;
                 }
                 catch (Exception)
                 {
                     return new List<string>();
                 }
-            }
-        }
-
-        public void ApplyTheme(Window window)
-        {
-            return;
-            try
-            {
-                if (string.IsNullOrEmpty(CurrentThemeName) || !CurrentThemeName.Contains("\\"))
-                {
-                    ThemeManager.ChangeAppStyle(window, ThemeManager.Accents.First(a => a.Name == "Steel"),
-                        ThemeManager.GetAppTheme("BaseDark"));
-                    return;
-                }
-
-                if (CurrentThemeName.Split('\\')[1] == "Astro")
-                {
-                    ThemeManager.ChangeAppStyle(window,
-                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                        ThemeManager.GetAppTheme("Black"));
-                    ThemeManager.ChangeAppStyle(Application.Current,
-                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                        ThemeManager.GetAppTheme("Black"));
-                }
-                else
-                {
-                    ThemeManager.ChangeAppStyle(window,
-                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                        ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
-                            ? "BaseDark"
-                            : "BaseLight"));
-                    ThemeManager.ChangeAppStyle(Application.Current,
-                        ThemeManager.Accents.First(a => a.Name == CurrentThemeName.Split('\\')[1]),
-                        ThemeManager.GetAppTheme(CurrentThemeName.Split('\\')[0] == "Dark"
-                            ? "BaseDark"
-                            : "BaseLight"));
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("ApplyTheme", ex);
             }
         }
 

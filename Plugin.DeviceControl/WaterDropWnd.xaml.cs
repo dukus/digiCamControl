@@ -32,7 +32,6 @@ namespace Plugin.DeviceControl
             {
                 cmb_ports.Items.Add(port);
             }
-            ServiceProvider.Settings.ApplyTheme(this);
             _timer.Elapsed += _timer_Elapsed;
             _timer.AutoReset = false;
         }

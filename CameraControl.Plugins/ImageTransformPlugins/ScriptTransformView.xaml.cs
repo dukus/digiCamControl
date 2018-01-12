@@ -104,7 +104,6 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             {
                 // open code completion after the user has pressed dot:
                 completionWindow = new CompletionWindow(Editor.TextArea);
-                ServiceProvider.Settings.ApplyTheme(completionWindow);
                 completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                 // provide AvalonEdit with the data:
                 IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
@@ -130,7 +129,6 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 if (words.Count > 0)
                 {
                     completionWindow = new CompletionWindow(Editor.TextArea);
-                    ServiceProvider.Settings.ApplyTheme(completionWindow);
                     completionWindow.CompletionList.ListBox.Foreground = new SolidColorBrush(Colors.Black);
                     // provide AvalonEdit with the data:
                     IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;

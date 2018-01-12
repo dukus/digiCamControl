@@ -10,7 +10,6 @@ namespace CameraControl.Plugins.ImageTransformPlugins
         public TransformPluginEditView()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
     }
 }

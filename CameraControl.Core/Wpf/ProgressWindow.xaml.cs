@@ -44,7 +44,6 @@ namespace CameraControl.Core.Wpf
         public ProgressWindow()
         {
             InitializeComponent();
-            ServiceProvider.Settings.ApplyTheme(this);
         }
 
         public string Label
