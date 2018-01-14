@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="Welcome - Support Us" Height="200" Width="610" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="True" WindowStyle="None" TitlebarHeight="40" TitleCaps="False">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Welcome - Support Us" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="True" WindowStyle="None" TitlebarHeight="40" TitleCaps="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,7 +14,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <!--<StackPanel Orientation="Horizontal">
             <StackPanel>
                 <Button  Height="120" Width="120" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_facebook_Click" Cursor="Hand">
                     <Rectangle Width="80" Height="80">
@@ -60,6 +61,61 @@
                 </Button>
                 <Label Content="Donate" HorizontalContentAlignment="Center" FontSize="17"/>
             </StackPanel>            
-        </StackPanel>
+        </StackPanel>-->
+        <materialDesign:Card Width="420" Margin="8" >
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="GithubCircle" Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 8">Open Source</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                               VerticalAlignment="Top">This project is completely open source. If you like it and want to say thanks you could, tweet or post about it, or tell your friends about it!</TextBlock>
+                </StackPanel>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Padding="8">
+                    <DockPanel>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                                DockPanel.Dock="Right"
+                                x:Name="DonateButton" Click="btn_donate_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Gift" />
+                                <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Donate</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <TextBlock Foreground="{DynamicResource MaterialDesignBodyLight}" TextWrapping="Wrap" Margin="16" VerticalAlignment="Center">
+                            Feel like you want to make a donation?  It would be gratefully received.  Click the button to donate via PayPal.
+                        </TextBlock>
+                    </DockPanel>
+                </Border>
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" DockPanel.Dock="Right" Click="btn_facebook_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Facebook" VerticalAlignment="Center" />
+                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Facebook</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" DockPanel.Dock="Right" Click="btn_twitter_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Twitter" VerticalAlignment="Center" />
+                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Twitter</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" DockPanel.Dock="Right" Click="btn_twitter_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="GooglePlus" VerticalAlignment="Center" />
+                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Google++</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </controls:MetroWindow>

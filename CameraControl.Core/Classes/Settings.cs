@@ -168,6 +168,23 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public string CurrentThemeNameNew
+        {
+            get
+            {
+                if (!ServiceProvider.Branding.UseThemeSelector)
+                    return ServiceProvider.Branding.DefaultTheme;
+
+                return _currentThemeNameNew;
+            }
+            set
+            {
+                _currentThemeNameNew = value;
+                NotifyPropertyChanged("CurrentThemeNameNew");
+            }
+        }
+
+
         private int _liveViewFreezeTimeOut;
 
         public int LiveViewFreezeTimeOut
@@ -784,6 +801,7 @@ namespace CameraControl.Core.Classes
         private bool _hideTrayNotifications;
         private bool _disableHardwareAcceleration;
         private string _fullScreenPassword;
+        private string _currentThemeNameNew;
 
         [XmlIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
@@ -1069,7 +1087,7 @@ namespace CameraControl.Core.Classes
             FullScreenInSecondaryMonitor = false;
             SendUsageStatistics = true;
             ThumbHeigh = 100;
-            CurrentThemeName = "Light\\grey";
+            CurrentThemeNameNew = "Light\\grey";
             AllowWebserverActions = true;
             PublicWebserver = false;
             LoadCanonTransferMode = true;

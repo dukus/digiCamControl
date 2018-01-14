@@ -90,8 +90,8 @@ namespace CameraControl.Core.Classes
 
         public void ApplyTheme()
         {
-            new PaletteHelper().ReplacePrimaryColor(ServiceProvider.Settings.CurrentThemeName.Split('\\')[1]);
-            new PaletteHelper().SetLightDark(ServiceProvider.Settings.CurrentThemeName.StartsWith("Dark"));
+            new PaletteHelper().ReplacePrimaryColor(ServiceProvider.Settings.CurrentThemeNameNew.Split('\\')[1]);
+            new PaletteHelper().SetLightDark(ServiceProvider.Settings.CurrentThemeNameNew.StartsWith("Dark"));
         }
 
         public void ApplyKeyHanding()

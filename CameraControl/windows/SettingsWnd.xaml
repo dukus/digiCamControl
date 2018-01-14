@@ -77,7 +77,7 @@
 
                     <Label Content="{T:TranslateExtension LabelTheme}" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"
                            Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=UseThemeSelector, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    <ComboBox Name="cmb_themes" Grid.Row="1" Grid.Column="3" SelectedValue="{Binding CurrentThemeName}" ItemsSource="{Binding Themes}" Margin="2"
+                    <ComboBox Name="cmb_themes" Grid.Row="1" Grid.Column="3" SelectedValue="{Binding CurrentThemeNameNew}" ItemsSource="{Binding Themes}" Margin="2"
                            Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=UseThemeSelector, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                     <Label Content="{T:TranslateExtension LabelMainWindow}" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>

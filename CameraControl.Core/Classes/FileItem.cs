@@ -504,10 +504,7 @@ namespace CameraControl.Core.Classes
         /// <value>
         /// The small thumb.
         /// </value>
-        public string SmallThumb
-        {
-            get { return Path.Combine(Settings.DataFolder, "Cache\\Small", Id + ".jpg"); }
-        }
+        public string SmallThumb => Path.Combine(Settings.DataFolder, "Cache\\Small", Id.ToString().Substring(0, 1), Id + ".jpg");
 
         /// <summary>
         /// Gets the large thumb file name.
@@ -515,15 +512,15 @@ namespace CameraControl.Core.Classes
         /// <value>
         /// The large thumb.
         /// </value>
-        public string LargeThumb
-        {
-            get { return Path.Combine(Settings.DataFolder, "Cache\\Large", Id + ".jpg"); }
-        }
+        public string LargeThumb => Path.Combine(Settings.DataFolder, "Cache\\Large", Id.ToString().Substring(0, 1), Id + ".jpg");
 
-        public string InfoFile
-        {
-            get { return Path.Combine(Settings.DataFolder, "Cache\\InfoFile", Id + ".xml"); }
-        }
+        /// <summary>
+        /// Path to the information file
+        /// </summary>
+        /// <value>
+        /// The information file.
+        /// </value>
+        public string InfoFile => Path.Combine(Settings.DataFolder, "Cache\\InfoFile",Id.ToString().Substring(0,1), Id + ".json");
 
         public void RemoveThumbs()
         {
@@ -698,18 +695,21 @@ namespace CameraControl.Core.Classes
             try
             {
                 PhotoUtils.CreateFolder(InfoFile);
-                FileInfo.ValidateValues();
-                XmlSerializer serializer = new XmlSerializer(typeof(FileInfo));
-                // Create a FileStream to write with.
-                System.Text.Encoding code = Encoding.GetEncoding("UTF-8");
-                StreamWriter writer = new StreamWriter(InfoFile, false, code);
-                // Serialize the object, and close the TextWriter
-                serializer.Serialize(writer, FileInfo);
-                writer.Close();
+                var json= JsonConvert.SerializeObject(FileInfo);
+                File.WriteAllText(InfoFile, json);
+
+                //FileInfo.ValidateValues();
+                //XmlSerializer serializer = new XmlSerializer(typeof(FileInfo));
+                //// Create a FileStream to write with.
+                //System.Text.Encoding code = Encoding.GetEncoding("UTF-8");
+                //StreamWriter writer = new StreamWriter(InfoFile, false, code);
+                //// Serialize the object, and close the TextWriter
+                //serializer.Serialize(writer, FileInfo);
+                //writer.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Error("Unable to save session branding file");
+                Log.Error("Unable to save session info file", e);
             }
         }
 
@@ -719,12 +719,13 @@ namespace CameraControl.Core.Classes
             {
                 if (File.Exists(InfoFile))
                 {
-                    PhotoUtils.WaitForFile(InfoFile);
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof(FileInfo));
-                    FileStream myFileStream = new FileStream(InfoFile, FileMode.Open);
-                    FileInfo = (FileInfo)mySerializer.Deserialize(myFileStream);
-                    myFileStream.Close();
+                    FileInfo = JsonConvert.DeserializeObject<FileInfo>(File.ReadAllText(InfoFile));
+                    //PhotoUtils.WaitForFile(InfoFile);
+                    //XmlSerializer mySerializer =
+                    //    new XmlSerializer(typeof(FileInfo));
+                    //FileStream myFileStream = new FileStream(InfoFile, FileMode.Open);
+                    //FileInfo = (FileInfo)mySerializer.Deserialize(myFileStream);
+                    //myFileStream.Close();
                 }
             }
             catch (Exception e)

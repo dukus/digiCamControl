@@ -173,6 +173,9 @@ namespace CameraControl.ViewModel
 
         public MainMenuViewModel()
         {
+            if (IsInDesignMode)  
+                return;
+
             SendCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(Send);
             SettingsCommand = new RelayCommand(EditSettings);
             ThumbSizeCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(ThumbSize);
