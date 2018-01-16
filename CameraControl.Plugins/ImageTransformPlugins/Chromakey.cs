@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Controls;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Devices;
 using Kaliko.ImageLibrary;
 using Kaliko.ImageLibrary.Filters;
 using Kaliko.ImageLibrary.Scaling;
@@ -22,6 +23,9 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
         public string Execute(FileItem item, string infile, string dest, ValuePairEnumerator configData)
         {
+            try
+            {
+
             var conf = new ChromakeyViewModel(configData);
             dest = Path.Combine(Path.GetDirectoryName(dest), Path.GetFileNameWithoutExtension(dest) + ".jpg");
 
@@ -44,7 +48,14 @@ namespace CameraControl.Plugins.ImageTransformPlugins
 
             backdrop.SaveJpg(dest, 90);
             return dest;
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Chromakey error", e);
+            }
+            return null;
         }
+
 
         public UserControl GetConfig(ValuePairEnumerator configData)
         {

@@ -3,19 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:CameraControl.Controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" ShowIconOnTitleBar="False" ShowTitleBar="False"
                        xmlns:Controls1="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Title="FullScreenWnd" Height="460" Width="472" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize" IgnoreTaskbarOnMaximize="True" IsMaxRestoreButtonEnabled="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False">
+                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                       Title="FullScreenWnd" Height="460" Width="472" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize" IgnoreTaskbarOnMaximize="True" IsMaxRestoreButtonEnabled="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowSystemMenuOnRightClick="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="../Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />-->
+                <!--<ResourceDictionary Source="../Resources/Icons.xaml" />-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -35,42 +37,26 @@
         <MediaElement Name="VideoControl" Grid.Column="0" Grid.RowSpan="3" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"
                   Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Play" UnloadedBehavior="Close" >
         </MediaElement>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
-            <ToggleButton  Height="60" Name="but_unlike" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                <Rectangle Width="30" Height="30">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="4,14">
+
+            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="4"  Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                    Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowFullscreenControls, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <materialDesign:PackIcon Width="24" Height="24" Kind="ArrowLeft" />
+            </Button>
+            
+            <ToggleButton   Margin="4" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsUnLiked}" Style="{StaticResource  MaterialDesignFlatPrimaryToggleButton}"
+                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+                <materialDesign:PackIcon Width="24" Height="24" Kind="ThumbDown" />
             </ToggleButton>
-            <ToggleButton  Height="60" Name="but_like" Width="60" Margin="5" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}" Style="{DynamicResource MetroCircleToggleButtonStyle}">
-                <Rectangle Width="30" Height="30">
-                    <Rectangle.Fill>
-                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+            <ToggleButton  Margin="4" IsChecked="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsLiked}" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}"
+                           Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
+                <materialDesign:PackIcon Width="24" Height="24" Kind="ThumbUp" />
             </ToggleButton>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                    Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowFullscreenControls, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <materialDesign:PackIcon Width="24" Height="24" Kind="ArrowRight" />
+            </Button>
         </StackPanel>
-
-        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Name="ButtonPrev" Click="ButtonPrev_Click" Margin="5"  Background="Transparent"
-                Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowFullscreenControls, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Path Width="50" Height="40"
-                                  Canvas.Left="15.9063"
-                                  Canvas.Top="14.75"
-                                  Stretch="Fill"
-                                  Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 22.6563,23.75L 24.6563,25.75L 31.9063,32.75L 25.4063,32.75L 15.9063,23.75L 25.4063,14.75L 31.9063,14.75L 24.6563,21.75L 22.6563,23.75 Z " />
-        </Button>
-        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Name="ButtonNext" Click="ButtonNext_Click" Margin="5" Background="Transparent"
-                Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowFullscreenControls, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Path Width="50" Height="40"
-                                  Canvas.Left="15.9063"
-                                  Canvas.Top="14.75"
-                                  Stretch="Fill"
-                                  Fill="{DynamicResource BlackBrush}"
-                                  Data="F1 M 25.1563,23.75L 23.1563,21.75L 15.9063,14.75L 22.4063,14.75L 31.9063,23.75L 22.4063,32.75L 15.9063,32.75L 23.1563,25.75L 25.1563,23.75 Z " />
-        </Button>
-
         <ProgressBar Height="10" Margin="150,0,150,0" Name="progressBar1" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}" IsIndeterminate="True" Opacity="0.5" UseLayoutRounding="True" />
         <!--</Controls:ZoomBorder>-->
         <!--<Controls1:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Center" IsLarge="False" />-->

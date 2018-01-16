@@ -5,6 +5,7 @@
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls1="clr-namespace:CameraControl.Controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="{translation:TranslateExtension TimeLapseWindowTitle}" Height="550" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowMaxRestoreButton="False">
     <Window.DataContext>
         <viewModel:TimelapseViewModel/>
@@ -20,6 +21,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <materialDesign:Card Grid.Column="0" Margin="4">
         <GroupBox Header="{translation:TranslateExtension LabelSheduleStart}" IsEnabled="{Binding IsFree}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -57,7 +59,9 @@
                 </WrapPanel>
             </Grid>
         </GroupBox>
-        <GroupBox Header="{translation:TranslateExtension LabelTimeLapseSettings}" Grid.Row="1" IsEnabled="{Binding IsFree}">
+            </materialDesign:Card>
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="4">
+            <GroupBox Header="{translation:TranslateExtension LabelTimeLapseSettings}" Grid.Row="1" IsEnabled="{Binding IsFree}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150*"/>
@@ -87,7 +91,9 @@
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <GroupBox Header="{translation:TranslateExtension LabelSheduleStop}" Grid.Row="2" IsEnabled="{Binding IsFree}">
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2" Grid.Column="0" Margin="4">
+            <GroupBox Header="{translation:TranslateExtension LabelSheduleStop}" Grid.Row="2" IsEnabled="{Binding IsFree}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="72*"/>
@@ -115,7 +121,8 @@
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <Button Content="{Binding StartText}" Grid.Row="0" Grid.Column="1" Margin="3" Command="{Binding StartCommand}"/>
+         </materialDesign:Card>   
+        <Button Content="{Binding StartText}" Grid.Row="0" Grid.Column="1" Margin="4" Command="{Binding StartCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding StatusText}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
     </Grid>
 </controls:MetroWindow>
