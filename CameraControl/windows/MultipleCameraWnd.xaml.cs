@@ -229,23 +229,23 @@ namespace CameraControl.windows
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (listBox1.SelectedItem != null)
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.CameraPropertyWnd_Show,
-                                                              listBox1.SelectedItem);
+            //if (listBox1.SelectedItem != null)
+            //    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.CameraPropertyWnd_Show,
+            //                                                  listBox1.SelectedItem);
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            if (listBox1.SelectedItem != null)
-            {
-                CameraPreset preset = new CameraPreset();
-                preset.Get((ICameraDevice) listBox1.SelectedItem);
-                foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
-                {
-                    if (connectedDevice.IsConnected && connectedDevice.IsChecked)
-                        preset.Set(connectedDevice);
-                }
-            }
+            //if (listBox1.SelectedItem != null)
+            //{
+            //    CameraPreset preset = new CameraPreset();
+            //    preset.Get((ICameraDevice) listBox1.SelectedItem);
+            //    foreach (ICameraDevice connectedDevice in ServiceProvider.DeviceManager.ConnectedDevices)
+            //    {
+            //        if (connectedDevice.IsConnected && connectedDevice.IsChecked)
+            //            preset.Set(connectedDevice);
+            //    }
+            //}
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)

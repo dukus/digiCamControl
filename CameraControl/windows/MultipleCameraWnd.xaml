@@ -7,18 +7,10 @@
                       xmlns:local="clr-namespace:CameraControl.Controls"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                       WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" PreviewKeyDown="MetroWindow_PreviewKeyDown" >
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
     </Window.Resources>
@@ -86,28 +78,28 @@
         <!--<Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />-->
         <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
             <TabItem Header="{T:TranslateExtension LabelGrid}">
-                <ListBox  Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice}" Margin="0,20,0,0"
+                <ItemsControl  Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Margin="0,20,0,0"
                   dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" >
-                    <ListBox.ContextMenu>
+                    <ItemsControl.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />
                             <MenuItem Header="{T:TranslateExtension MenuUseSelectedCameraPreset}" Click="MenuItem_Click_1" />
                         </ContextMenu>
-                    </ListBox.ContextMenu>
-                    <ListBox.ItemsPanel>
+                    </ItemsControl.ContextMenu>
+                    <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>
                         </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
                         <HierarchicalDataTemplate>
-                            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                            <materialDesign:Card  VerticalAlignment="Top">
 
                                 <local:ControlerSimple DataContext="{Binding Path=.}" Width="120" Height="430"/>
-                            </StackPanel>
+                            </materialDesign:Card>
                         </HierarchicalDataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelList}">
                 <DataGrid ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">

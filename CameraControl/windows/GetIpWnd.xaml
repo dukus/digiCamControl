@@ -11,8 +11,8 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <ComboBox Margin="3" IsEditable="False" SelectedItem="{Binding WifiDeviceProvider, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" ItemsSource="{Binding Providers, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" DisplayMemberPath="Name"/>
-        <TextBox Grid.Row="1" Margin="3" x:Name="txt_ip" Text="{Binding Ip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" FontSize="20"/>
-        <Button Content="Connect" Grid.Row="2" x:Name="btn_conect" Margin="3" Click="btn_conect_Click" />
+        <ComboBox Margin="4" IsEditable="False" SelectedItem="{Binding WifiDeviceProvider, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" ItemsSource="{Binding Providers, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" DisplayMemberPath="Name"/>
+        <TextBox Grid.Row="1" Margin="4" x:Name="txt_ip" Text="{Binding Ip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" FontSize="20"/>
+        <Button Content="Connect" Grid.Row="2" x:Name="btn_conect" Margin="4" Click="btn_conect_Click" />
     </Grid>
 </Controls:MetroWindow>
