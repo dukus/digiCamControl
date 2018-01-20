@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using AForge.Imaging.Filters;
+using Accord.Imaging.Filters;
 using CameraControl.Core.Classes;
 using CameraControl.Devices;
 using CameraControl.windows;

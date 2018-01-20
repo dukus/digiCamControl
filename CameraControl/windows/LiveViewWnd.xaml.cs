@@ -30,39 +30,20 @@
 
 using System;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 //using System.Threading;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using AForge;
-using AForge.Imaging;
-using AForge.Imaging.Filters;
-using AForge.Vision.Motion;
-using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
-using CameraControl.Core.Translation;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using CameraControl.ViewModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Color = System.Windows.Media.Color;
-using Path = System.IO.Path;
 using Point = System.Windows.Point;
-using Rectangle = System.Windows.Shapes.Rectangle;
-using Timer = System.Timers.Timer;
 
 #endregion
 
@@ -71,7 +52,7 @@ namespace CameraControl.windows
     /// <summary>
     /// Interaction logic for LiveViewWnd.xaml
     /// </summary>
-    public partial class LiveViewWnd : MetroWindow, IWindow, INotifyPropertyChanged
+    public partial class LiveViewWnd : IWindow, INotifyPropertyChanged
     {
 
         private ICameraDevice _selectedPortableDevice;
