@@ -930,6 +930,9 @@ namespace CameraControl.Core.Classes
         public int ExternalDeviceWaitForFocus { get; set; }
         public int ExternalDeviceWaitForCapture { get; set; }
 
+        public bool WebcamSupport { get; set; }
+
+
         public ObservableCollection<PluginSetting> PluginSettings { get; set; }
 
         public bool ShowThumbInfo
@@ -1098,6 +1101,8 @@ namespace CameraControl.Core.Classes
 
             ExternalDeviceWaitForCapture = 1000;
             ExternalDeviceWaitForFocus = 1000;
+
+            WebcamSupport = true;
         }
 
 

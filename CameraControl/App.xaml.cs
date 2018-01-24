@@ -140,6 +140,7 @@ namespace CameraControl
                     ServiceProvider.DeviceManager.DisableNativeDrivers = ServiceProvider.Settings.DisableNativeDrivers;
                     if (ServiceProvider.Settings.AddFakeCamera)
                         ServiceProvider.DeviceManager.AddFakeCamera();
+                    ServiceProvider.DeviceManager.DetectWebcams = ServiceProvider.Settings.WebcamSupport;
                     ServiceProvider.DeviceManager.ConnectToCamera();
                     if (ServiceProvider.Settings.DisableHardwareAccelerationNew)
                         OpenCL.IsEnabled = false;
