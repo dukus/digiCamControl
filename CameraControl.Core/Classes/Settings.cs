@@ -1020,7 +1020,7 @@ namespace CameraControl.Core.Classes
 
         public Settings()
         {
-            ConfigFile = Path.Combine(DataFolder, "settings.xml");
+            ConfigFile = Path.Combine(DataFolder, "settings.json");
             CameraPresets = new AsyncObservableCollection<CameraPreset>();
             DefaultSession = new PhotoSession();
             PhotoSessions = new ObservableCollection<PhotoSession>();
@@ -1179,7 +1179,7 @@ namespace CameraControl.Core.Classes
                 return;
             try
             {
-                string filename = Path.Combine(SessionFolder, session.Name + ".xml");
+                string filename = Path.Combine(SessionFolder, session.Name + ".json");
                 SaveSession(session, filename);
                 session.ConfigFile = filename;
             }
@@ -1191,13 +1191,8 @@ namespace CameraControl.Core.Classes
 
         public void SaveSession(PhotoSession session, string filename)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(PhotoSession));
-            // Create a FileStream to write with.
-
-            Stream writer = new FileStream(filename, FileMode.Create);
-            // Serialize the object, and close the TextWriter
-            serializer.Serialize(writer, session);
-            writer.Close();
+            var json = JsonConvert.SerializeObject(session);
+            File.WriteAllText(filename, json);
         }
 
         public void Save(CameraPreset preset)
@@ -1245,26 +1240,33 @@ namespace CameraControl.Core.Classes
             {
                 if (File.Exists(filename))
                 {
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof (PhotoSession));
-                    FileStream myFileStream = new FileStream(filename, FileMode.Open);
-                    photoSession = (PhotoSession) mySerializer.Deserialize(myFileStream);
-                    myFileStream.Close();
-                    photoSession.ConfigFile = filename;
-                    // upgrade to new fie template
-                    var s = photoSession.FileNameTemplate;
-                    s = s.Replace("$C", "[Counter 4 digit]");
-                    s = s.Replace("$N", "[Session Name]");
-                    s = s.Replace("$E", "[Exposure Compensation]");
-                    s = s.Replace("$D", "[Date yyyy-MM-dd]");
-                    s = s.Replace("$B", "[Barcode]");
-                    s = s.Replace("$Type", "[File format]");
-                    s = s.Replace("$X", "[Camera Name]");
-                    s = s.Replace("$Tag1", "[Selected Tag1]");
-                    s = s.Replace("$Tag2", "[Selected Tag2]");
-                    s = s.Replace("$Tag3", "[Selected Tag3]");
-                    s = s.Replace("$Tag4", "[Selected Tag4]");
-                    photoSession.FileNameTemplate = s;
+                    if (Path.GetExtension(filename) == ".json")
+                    {
+                        photoSession = JsonConvert.DeserializeObject<PhotoSession>(File.ReadAllText(filename));
+                    }
+                    else
+                    {
+                        XmlSerializer mySerializer =
+                            new XmlSerializer(typeof(PhotoSession));
+                        FileStream myFileStream = new FileStream(filename, FileMode.Open);
+                        photoSession = (PhotoSession) mySerializer.Deserialize(myFileStream);
+                        myFileStream.Close();
+                        photoSession.ConfigFile = filename;
+                        // upgrade to new fie template
+                        var s = photoSession.FileNameTemplate;
+                        s = s.Replace("$C", "[Counter 4 digit]");
+                        s = s.Replace("$N", "[Session Name]");
+                        s = s.Replace("$E", "[Exposure Compensation]");
+                        s = s.Replace("$D", "[Date yyyy-MM-dd]");
+                        s = s.Replace("$B", "[Barcode]");
+                        s = s.Replace("$Type", "[File format]");
+                        s = s.Replace("$X", "[Camera Name]");
+                        s = s.Replace("$Tag1", "[Selected Tag1]");
+                        s = s.Replace("$Tag2", "[Selected Tag2]");
+                        s = s.Replace("$Tag3", "[Selected Tag3]");
+                        s = s.Replace("$Tag4", "[Selected Tag4]");
+                        photoSession.FileNameTemplate = s;
+                    }
                 }
             }
             catch (Exception e)
@@ -1312,12 +1314,25 @@ namespace CameraControl.Core.Classes
             {
                 if (File.Exists(fileName))
                 {
-                    XmlSerializer mySerializer =
-                        new XmlSerializer(typeof (Settings));
-                    FileStream myFileStream = new FileStream(fileName, FileMode.Open);
-                    defaultSettings = (Settings) mySerializer.Deserialize(myFileStream);
-                    myFileStream.Close();
+                    if (Path.GetExtension(fileName) == ".json")
+                    {
+                        defaultSettings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(fileName));
+                    }
+                    else
+                    {
+                        XmlSerializer mySerializer =
+                            new XmlSerializer(typeof(Settings));
+                        FileStream myFileStream = new FileStream(fileName, FileMode.Open);
+                        defaultSettings = (Settings)mySerializer.Deserialize(myFileStream);
+                        myFileStream.Close();
+                    }
                 }
+                else
+                {
+                    defaultSettings =
+                        LoadSettings(fileName.Replace(".json", ".xml"), defaultSettings);
+                }
+
             }
             catch (Exception exception)
             {
@@ -1353,7 +1368,7 @@ namespace CameraControl.Core.Classes
                 Directory.CreateDirectory(sesionFolder);
             }
 
-            string[] sesions = Directory.GetFiles(sesionFolder, "*.xml");
+            string[] sesions = Directory.GetFiles(sesionFolder, "*.json");
             foreach (string sesion in sesions)
             {
                 try
@@ -1364,6 +1379,27 @@ namespace CameraControl.Core.Classes
                 {
                     Log.Error("Error loading session :" + sesion, e);
                 }
+            }
+            // first run after using json format in place of xml
+            if (PhotoSessions.Count == 0)
+            {
+                sesions = Directory.GetFiles(sesionFolder, "*.xml");
+                foreach (string sesion in sesions)
+                {
+                    try
+                    {
+                        var sesiondata = LoadSession(sesion);
+                        Add(sesiondata);
+                        // remove old xml file
+                        File.Delete(sesion);
+                        Save(sesiondata);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error("Error loading session :" + sesion, e);
+                    }
+                }
+
             }
             if (PhotoSessions.Count > 0)
             {
@@ -1402,13 +1438,16 @@ namespace CameraControl.Core.Classes
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof (Settings));
-                // Create a FileStream to write with.
+                //XmlSerializer serializer = new XmlSerializer(typeof (Settings));
+                //// Create a FileStream to write with.
 
-                Stream writer = new FileStream(ConfigFile, FileMode.Create);
-                // Serialize the object, and close the TextWriter
-                serializer.Serialize(writer, this);
-                writer.Close();
+                //Stream writer = new FileStream(ConfigFile, FileMode.Create);
+                //// Serialize the object, and close the TextWriter
+                //serializer.Serialize(writer, this);
+                //writer.Close();
+
+                var json = JsonConvert.SerializeObject(this);
+                File.WriteAllText(ConfigFile, json);
                 // save preset in separated files
                 foreach (var cameraPreset in this.CameraPresets)
                 {
