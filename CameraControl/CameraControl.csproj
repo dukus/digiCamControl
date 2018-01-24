@@ -370,6 +370,7 @@
     <Compile Include="Controls\ExposureStatusControl.xaml.cs">
       <DependentUpon>ExposureStatusControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TemplateNameToIconConverter.cs" />
     <Compile Include="Controls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>

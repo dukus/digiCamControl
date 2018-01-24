@@ -31,12 +31,10 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading;
-using System.Windows;
 using CameraControl.Devices.Canon;
 using CameraControl.Devices.Classes;
 using CameraControl.Devices.Custom;
@@ -47,9 +45,9 @@ using CameraControl.Devices.TransferProtocol.DDServer;
 using CameraControl.Devices.TransferProtocol.PtpIp;
 using CameraControl.Devices.Wifi;
 using Canon.Eos.Framework;
-using PanonoTest;
 using PortableDeviceLib;
 using WIA;
+using Accord.Video.DirectShow;
 
 #endregion
 
@@ -115,6 +113,15 @@ namespace CameraControl.Devices
                 NotifyPropertyChanged("SelectedCameraDevice");
             }
         }
+
+        /// <summary>
+        /// If enabled the application will detect the connected webcams
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [detect webcams]; otherwise, <c>false</c>.
+        /// </value>
+        public bool DetectWebcams { get; set; }
+
 
         public bool StartInNewThread { get; set; }
 
@@ -209,6 +216,7 @@ namespace CameraControl.Devices
             UseExperimentalDrivers = true;
             LoadWiaDevices = true;
             StartInNewThread = false;
+            DetectWebcams = true;
             SelectedCameraDevice = new NotConnectedCameraDevice();
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
             _deviceEnumerator = new DeviceDescriptorEnumerator();
@@ -265,18 +273,7 @@ namespace CameraControl.Devices
                 /* Give specific guidance if the error is a missing DLL */
                 if ((exception.InnerException != null) && (exception.InnerException.Message != null) && (exception.InnerException.Message.Contains("EDSDK.dll")))
                 {
-                    /* one or the other */
-                    if (Process.GetCurrentProcess().ProcessName.Equals("CameraControl"))
-                    {
-                        MessageBoxResult result = MessageBox.Show("Canon EOS camera library, EDSDK.dll is missing\nInstall it after downloading from Canon's site\n\nDo you want to close this application?\n\n(You can try to continue, but it probably will not not work)", "Critical Error", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            Application.Current.Shutdown();
-                        }
-                    } else
-                    {
-                        Console.WriteLine("\n**CRITICAL ERROR**\n\nCanon EOS camera library, EDSDK.dll is missing\nInstall it after downloading from Canon's site\n");
-                    }
+                    Console.WriteLine("\n**CRITICAL ERROR**\n\nCanon EOS camera library, EDSDK.dll is missing\nInstall it after downloading from Canon's site\n");
                 }
             }
         }
@@ -290,6 +287,60 @@ namespace CameraControl.Devices
         {
             using (EosCameraCollection cameras = _framework.GetCameraCollection())
                 return cameras.ToArray();
+        }
+
+        private void AddWebcameras()
+        {
+            try
+            {
+                List<string> monikers = new List<string>();
+                var loaclWebCamsCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                foreach (Accord.Video.DirectShow.FilterInfo localcamera in loaclWebCamsCollection)
+                {
+                    monikers.Add(localcamera.MonikerString);
+                    bool added = false;
+                    foreach (ICameraDevice device in ConnectedDevices)
+                    {
+                        WebCameraDevice webCamera = device as WebCameraDevice;
+                        if (webCamera != null)
+                        {
+                            if (webCamera.PortName == localcamera.MonikerString)
+                            {
+                                added = true;
+                            }
+                        }
+                    }
+
+                    if (added)
+                        continue;
+
+                    WebCameraDevice camera = new WebCameraDevice();
+                    camera.Init(localcamera.MonikerString);
+                    camera.DeviceName = localcamera.Name;
+                    camera.SerialNumber = localcamera.MonikerString;
+
+                    ConnectedDevices.Add(camera);
+
+                    SelectedCameraDevice = camera;
+
+                    camera.PhotoCaptured += cameraDevice_PhotoCaptured;
+                    camera.CameraDisconnected += cameraDevice_CameraDisconnected;
+
+                    CameraConnected?.Invoke(camera);
+                }
+                //List<WebCameraDevice> devicesToDisconnect = ConnectedDevices.OfType<WebCameraDevice>()
+                //    .Where(webCamera => !monikers.Contains(webCamera.PortName))
+                //    .ToList();
+                //foreach (var webCamera in devicesToDisconnect)
+                //{
+                //    cameraDevice_CameraDisconnected(webCamera, new DisconnectCameraEventArgs() { });
+                //}
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unable to connect to a webcamera", ex);
+            }
+
         }
 
         private void AddCanonCameras()
@@ -810,6 +861,9 @@ namespace CameraControl.Devices
         {
             if (DeviceClass == null || DeviceClass.Count == 0)
                 PopulateDeviceClass();
+
+            if(DetectWebcams)
+                AddWebcameras();
 
             if (!DisableNativeDrivers)
             {

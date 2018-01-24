@@ -18,6 +18,10 @@ namespace CameraControl.Core.Classes
             get { return Templates.Keys.ToList(); }
         }
 
+        public List<KeyValuePair<string,IFilenameTemplate>> ValuesList
+        {
+            get { return Templates.ToList(); }
+        }
         public FilenameTemplateManager()
         {
             Templates = new Dictionary<string, IFilenameTemplate>();

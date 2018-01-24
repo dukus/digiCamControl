@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using CameraControl.Core;
 using CameraControl.Devices.Others;
+using MaterialDesignThemes.Wpf;
 
 namespace CameraControl.windows
 {
@@ -61,7 +62,7 @@ namespace CameraControl.windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button s = sender as Button;
+            Chip s = sender as Chip;
             if (s != null)
             {
                 var text = "_" + (string) s.Content;

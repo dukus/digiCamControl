@@ -5,7 +5,15 @@
                       xmlns:Classes="clr-namespace:CameraControl.Core.Classes;assembly=CameraControl.Core"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-                      WindowStartupLocation="CenterScreen">
+                      WindowStartupLocation="CenterScreen"
+                      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                      TextElement.FontWeight="Regular"
+                      TextElement.FontSize="13"
+                      TextOptions.TextFormattingMode="Ideal"
+                      TextOptions.TextRenderingMode="Auto"
+                      Background="{DynamicResource MaterialDesignPaper}"
+                      FontFamily="{DynamicResource MaterialDesignFont}" 
+                      GlowBrush="{DynamicResource AccentColorBrush}">
     <!--<Window.DataContext>
         <Classes:PhotoSession/>
     </Window.DataContext>-->
@@ -68,20 +76,20 @@
                         <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSessonName}" HorizontalContentAlignment="Right" />
                         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Name}" Margin="2"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelFolder}" HorizontalContentAlignment="Right" />
+                        <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelFolder}" HorizontalContentAlignment="Right" VerticalAlignment="Center" />
                         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Folder}" Margin="2"/>
-                        <Button Grid.Row="1" Grid.Column="2" Name="btn_browse" Content=" ... " Width="40" Click="btn_browse_Click" HorizontalAlignment="Left" Margin="2"/>
+                        <Button Grid.Row="1" Grid.Column="2" Name="btn_browse" Content=" ... " Width="50" Click="btn_browse_Click" HorizontalAlignment="Left" Margin="2"/>
 
                         <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelBackUp}" HorizontalContentAlignment="Right" />
                         <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding Path=BackUp}" Margin="2" />
 
-                        <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelBackUpFolder}" HorizontalContentAlignment="Right" IsEnabled="{Binding Path=BackUp}"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelBackUpFolder}" HorizontalContentAlignment="Right" VerticalAlignment="Center" IsEnabled="{Binding Path=BackUp}"/>
                         <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=BackUpPath}" Margin="2" IsEnabled="{Binding Path=BackUp}"/>
-                        <Button Grid.Row="3" Grid.Column="2" Name="btn_browse_bk" Content=" ... " Click="btn_browse_bk_Click" HorizontalAlignment="Left" Width="40" Margin="2" IsEnabled="{Binding Path=BackUp}"/>
+                        <Button Grid.Row="3" Grid.Column="2" Name="btn_browse_bk" Content=" ... " Click="btn_browse_bk_Click" HorizontalAlignment="Left" Width="50" Margin="2" IsEnabled="{Binding Path=BackUp}"/>
 
-                        <Label Grid.Row="4" Grid.Column="0" Content="{T:TranslateExtension LabelFileNameTemplate}" HorizontalContentAlignment="Right" />
+                        <Label Grid.Row="4" Grid.Column="0" Content="{T:TranslateExtension LabelFileNameTemplate}" HorizontalContentAlignment="Right" VerticalAlignment="Center" />
                         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=FileNameTemplate}" ToolTip="{Binding ElementName=txt_template, Path=Text}" Name="txt_template" Margin="2" IsReadOnly="True"/>
-                        <Button Grid.Row="4" Grid.Column="2" Name="btn_template" Content=" ... " Width="40" Click="btn_template_Click" HorizontalAlignment="Left" Margin="2"/>
+                        <Button Grid.Row="4" Grid.Column="2" Name="btn_template" Content=" ... " Width="50" Click="btn_template_Click" HorizontalAlignment="Left" Margin="2"/>
 
                         <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelCounter}" HorizontalContentAlignment="Right" />
                         <Controls:NumericUpDown  Grid.Row="5" Grid.Column="1" Value="{Binding Path=Counter}" Minimum="0" Margin="2"/>
@@ -136,7 +144,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="{T:TranslateExtension ButtonOk}" Grid.Row="1" HorizontalAlignment="Left" Margin="5" Name="button1" Width="75" VerticalAlignment="Bottom" Click="button1_Click" IsDefault="True" />
-        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Row="1" Margin="5" Name="button2" HorizontalAlignment="Right" Width="75"  VerticalAlignment="Bottom" Click="button2_Click" IsCancel="True" />
+        <Button Content="{T:TranslateExtension ButtonOk}" Grid.Row="1" HorizontalAlignment="Left" Margin="4" Name="button1" Width="75" VerticalAlignment="Bottom" Click="button1_Click" IsDefault="True" />
+        <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Row="1" Margin="4" Name="button2" HorizontalAlignment="Right" Width="75"  VerticalAlignment="Bottom" Click="button2_Click" IsCancel="True" />
     </Grid>
 </Controls:MetroWindow>

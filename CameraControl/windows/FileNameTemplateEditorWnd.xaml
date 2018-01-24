@@ -4,12 +4,17 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-        Title="File Name Template Editor" Height="600" Width="600" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" xmlns:my="clr-namespace:CameraControl.windows" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
+        Title="File Name Template Editor" Height="600" Width="600" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" xmlns:my="clr-namespace:CameraControl.windows"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                      xmlns:controls1="clr-namespace:CameraControl.Controls"
+                      WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <!--<ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>-->
+            <!--TemplateNameToIconConverter-->
+            <controls1:TemplateNameToIconConverter x:Key="TemplateNameToIconConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -22,23 +27,28 @@
         </Grid.RowDefinitions>
         <Label Content="{translation:TranslateExtension LabelFileNameTemplate}"/>
         
-        <TextBox Grid.Row="1" Margin="3" Name="txt_templateName" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=TemplateString, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Grid.Row="2" Margin="3" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=ExampleTemplateString}"/>
-        
-        <ListBox Grid.Row="3" Margin="3" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.FilenameTemplateManager}, Path=Values}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-            <ListBox.ItemTemplate>
+        <TextBox Grid.Row="1" Margin="4" Name="txt_templateName" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=TemplateString, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="2" Margin="4" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FileNameTemplateEditorWnd, AncestorLevel=1}, Path=ExampleTemplateString}"/>
+
+        <materialDesign:Card Grid.Row="3" Margin="4" VerticalAlignment="Stretch">
+            <!--<Grid Grid.Row="3" Margin="4">-->
+            <ScrollViewer>
+            <ItemsControl Grid.Row="3" Margin="4" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.FilenameTemplateManager}, Path=ValuesList}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding}" Margin="0,3,3,3" Click="Button_Click" />
+                        <materialDesign:Chip Content="{Binding Key}" Icon="{Binding Key, Converter={StaticResource TemplateNameToIconConverter}}" Click="Button_Click" Margin="4"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
+            </ItemsControl.ItemTemplate>
+ 
+                <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel/>
+                        <WrapPanel />
                 </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
-       
-        <Button Content="{translation:TranslateExtension ButtonOk}" Grid.Row="4" HorizontalAlignment="Left" Margin="3" Name="btn_ok" VerticalAlignment="Top" Width="75" Click="btn_ok_Click" />
-        <Button Content="{translation:TranslateExtension ButtonCancel}" Grid.Row="4"  HorizontalAlignment="Right" Margin="3" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+            </ScrollViewer>
+        </materialDesign:Card>
+        <Button Content="{translation:TranslateExtension ButtonOk}" Grid.Row="4" HorizontalAlignment="Left" Margin="4" Name="btn_ok" VerticalAlignment="Top" Width="75" Click="btn_ok_Click" />
+        <Button Content="{translation:TranslateExtension ButtonCancel}" Grid.Row="4"  HorizontalAlignment="Right" Margin="4" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />
     </Grid>
 </controls:MetroWindow>

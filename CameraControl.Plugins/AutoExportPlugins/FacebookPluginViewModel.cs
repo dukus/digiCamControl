@@ -15,12 +15,13 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using Facebook;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 
 namespace CameraControl.Plugins.AutoExportPlugins
 {
     class FacebookPluginViewModel : BasePluginViewModel
     {
-        private const string Server = "http://localhost:5514/";
+        private const string Server = "http://localhost:15514/";
         private const string ClientId = "1389681264691751";
         private const string ClientSecret = "032eb21c825b83e04c1dc63e1689c7d1";
 
@@ -321,24 +322,32 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
         public string SendResponse(HttpListenerRequest request)
         {
-            if (request.QueryString.HasKeys() && request.QueryString.Get("code") != null)
+            try
             {
-                string code = request.QueryString.Get("code");
-                string token_url =
-                    string.Format(
-                        "https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&%20client_secret={2}&code={3}",
-                        ClientId, Server, ClientSecret, code);
-                using (WebClient webclient=new WebClient())
+                if (request.QueryString.HasKeys() && request.QueryString.Get("code") != null)
                 {
-                    var data = webclient.DownloadString(token_url);
-                    var ph=HttpUtility.ParseQueryString(data);
-                    AccessToken = ph.Get("access_token");
-                    if (AccessToken != null)
+                    string code = request.QueryString.Get("code");
+                    string token_url =
+                        string.Format(
+                            "https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&%20client_secret={2}&code={3}",
+                            ClientId, Server, ClientSecret, code);
+                    using (WebClient webclient = new WebClient())
                     {
-                        Application.Current.Dispatcher.Invoke(new Action(() => ((Window) ServiceProvider.PluginManager.SelectedWindow).Activate()));
-                        return "<HTML><BODY>OK</br><h3>Logis succeed. Please return to digiCamControl</br><a href=\"javascript:window.open('','_self').close();\">close</a></BODY></HTML>";
+                        var data = webclient.DownloadString(token_url);
+                        dynamic obj= JsonConvert.DeserializeObject(data);
+                        AccessToken = obj.access_token;
+                        if (AccessToken != null)
+                        {
+                            Application.Current.Dispatcher.Invoke(new Action(() => ((Window)ServiceProvider.PluginManager.SelectedWindow).Activate()));
+                            return "<HTML><BODY>OK</br><h3>Login succeed. Please return to digiCamControl</br><a href=\"javascript:window.open('','_self').close();\">close</a></BODY></HTML>";
+                        }
                     }
                 }
+             
+            }
+            catch (Exception e)
+            {
+                return string.Format("<HTML><BODY>Something goes wrong. Please try again "+e.Message +"</BODY></HTML>");
             }
             return string.Format("<HTML><BODY>Something goes wrong. Please try again</BODY></HTML>");
         }
