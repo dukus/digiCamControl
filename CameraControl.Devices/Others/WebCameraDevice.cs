@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using Accord.Video;
 using Accord.Video.DirectShow;
 using CameraControl.Devices.Classes;
@@ -33,6 +35,39 @@ namespace CameraControl.Devices.Others
             _captureDevice.ProvideSnapshots = true;
             IsConnected = true;
             LiveViewImageZoomRatio = new PropertyValue<long>();
+
+            IsoNumber = new PropertyValue<long> { Available = false };
+            FNumber = new PropertyValue<long> { Available = false };
+            ExposureCompensation = new PropertyValue<long> { Available = false };
+            FocusMode = new PropertyValue<long> { Available = false };
+            ShutterSpeed = new PropertyValue<long> { Available = false };
+            WhiteBalance = new PropertyValue<long> { Available = false };
+            Mode = new PropertyValue<long> { Available = false };
+            ExposureMeteringMode = new PropertyValue<long> { Available = false };
+            CompressionSetting =new PropertyValue<long>();
+            VideoCapabilities[] capabilities = _captureDevice.VideoCapabilities;
+            for (int i = 0; i < capabilities.Length; i++)
+            {
+                CompressionSetting.AddValues(capabilities[i].ToString(),i);
+            }
+            CompressionSetting.ReloadValues();
+            StartLiveView();
+            if (_captureDevice.VideoResolution != null)
+                CompressionSetting.Value = _captureDevice.VideoResolution.ToString();
+            else
+            {
+                _captureDevice.VideoResolution = _captureDevice.VideoCapabilities.First();
+                CompressionSetting.Value = _captureDevice.VideoResolution.ToString();
+            }
+            CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
+
+        }
+
+        private void CompressionSetting_ValueChanged(object sender, string key, long val)
+        {
+            StopLiveView();
+            VideoCapabilities[] capabilities = _captureDevice.VideoCapabilities;
+            _captureDevice.VideoResolution = capabilities[val];
             StartLiveView();
         }
 
@@ -81,7 +116,7 @@ namespace CameraControl.Devices.Others
             {
                 throw new Exception("Could not capture photo from webcam.");
             }
-            _processLiveView = false;
+
 
             //StopLiveView();
         }
@@ -93,7 +128,7 @@ namespace CameraControl.Devices.Others
                 if (!_captureDevice.IsRunning)
                 {
                     _captureDevice.Start();
-                   
+                    Thread.Sleep(500);
                 }
                 _operationInProgress = false;
                 _processLiveView = true;
