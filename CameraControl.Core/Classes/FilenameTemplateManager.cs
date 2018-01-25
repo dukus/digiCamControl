@@ -61,12 +61,19 @@ namespace CameraControl.Core.Classes
             Templates.Add("[Camera Counter 9 digit]", templatePharser);
 
             Templates.Add("[Date yyyy]", templatePharser);
+            Templates.Add("[Date MM]", templatePharser);
+            Templates.Add("[Date dd]", templatePharser);
+            Templates.Add("[Date HH]", templatePharser);
+            Templates.Add("[Date mm]", templatePharser);
+            Templates.Add("[Date ss]", templatePharser);
             Templates.Add("[Date yyyy-MM]", templatePharser);
             Templates.Add("[Date yyyy-MM-dd-hh-mm-ss]", templatePharser);
+            Templates.Add("[Date yyyyMMdd]", templatePharser);
             Templates.Add("[Date MMM]", templatePharser);
             Templates.Add("[Time hh-mm-ss]", templatePharser);
             Templates.Add("[Time hh-mm]", templatePharser);
             Templates.Add("[Time hh]", templatePharser);
+            Templates.Add("[Time hhmmss]", templatePharser);
             Templates.Add("[DB Row 1]", templatePharser);
             Templates.Add("[DB Row 2]", templatePharser);
             Templates.Add("[DB Row 3]", templatePharser);

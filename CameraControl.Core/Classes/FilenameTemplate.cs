@@ -50,12 +50,26 @@ namespace CameraControl.Core.Classes
                     return DateTime.Now.ToString("yyyy");
                 case "[Date yyyy-MM]":
                     return DateTime.Now.ToString("yyyy-MM");
+                case "[Date yyyyMMdd]":
+                    return DateTime.Now.ToString("yyyyMMdd");
                 case "[Date MMM]":
                     return DateTime.Now.ToString("MMM");
+                case "[Date MM]":
+                    return DateTime.Now.ToString("MM");
+                case "[Date dd]":
+                    return DateTime.Now.ToString("dd");
+                case "[Date HH]":
+                    return DateTime.Now.ToString("HH");
+                case "[Date mm]":
+                    return DateTime.Now.ToString("mm");
+                case "[Date ss]":
+                    return DateTime.Now.ToString("ss");
                 case "[Date yyyy-MM-dd-hh-mm-ss]":
                     return DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
                 case "[Time hh-mm-ss]":
                     return DateTime.Now.ToString("HH-mm-ss");
+                case "[Time hhmmss]":
+                    return DateTime.Now.ToString("HHmmss");
                 case "[Time hh-mm]":
                     return DateTime.Now.ToString("HH-mm");
                 case "[Time hh]":
