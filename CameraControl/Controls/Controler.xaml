@@ -39,24 +39,28 @@
                         <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.Mode.ErrorColor}" >
                             <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=SelectedCameraDevice.Mode.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.Mode.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.Mode.Value}" />
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel  Visibility="{Binding SelectedCameraDevice.IsoNumber.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension Iso}" Target="{Binding ElementName=cmb_iso}" FontWeight="Bold"/>
                         <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.IsoNumber.ErrorColor}" >
                             <ComboBox Name="cmb_iso" IsEnabled="{Binding Path=SelectedCameraDevice.IsoNumber.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.IsoNumber.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.IsoNumber.Value}" GotFocus="cmb_shutter_GotFocus" />
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.ShutterSpeed.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension ShutterSpeed}" Target="{Binding ElementName=cmb_shutter}" FontWeight="Bold"/>
                         <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.ShutterSpeed.ErrorColor}" >
                             <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=SelectedCameraDevice.ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ShutterSpeed.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ShutterSpeed.Value}" GotFocus="cmb_shutter_GotFocus" />
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.FNumber.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension Aperture}" Target="{Binding ElementName=cmb_aperture}" FontWeight="Bold"/>
                         <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.FNumber.ErrorColor}" >
                             <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=SelectedCameraDevice.FNumber.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.FNumber.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.FNumber.Value}" GotFocus="cmb_shutter_GotFocus" />
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.WhiteBalance.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension WhiteBalance}" Target="{Binding ElementName=cmb_WB}" FontWeight="Bold"/>
@@ -69,18 +73,21 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.ExposureCompensation.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension ExposureComp}" Target="{Binding ElementName=cmb_EComp}" FontWeight="Bold"/>
                         <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.ExposureCompensation.ErrorColor}" >
                             <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=SelectedCameraDevice.ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.ExposureCompensation.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.ExposureCompensation.Value}" GotFocus="cmb_shutter_GotFocus" />
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.CompressionSetting.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension Compression}" Target="{Binding ElementName=cmb_com}" FontWeight="Bold"/>
                         <Border BorderThickness="1" BorderBrush="{Binding Path=SelectedCameraDevice.CompressionSetting.ErrorColor}" >
                             <ComboBox Name="cmb_com" IsEnabled="{Binding Path=SelectedCameraDevice.CompressionSetting.IsEnabled}" ItemsSource="{Binding Path=SelectedCameraDevice.CompressionSetting.Values}" SelectedValue="{Binding Path=SelectedCameraDevice.CompressionSetting.Value}" ToolTip="{Binding Path=SelectedCameraDevice.CompressionSetting.Value}" GotFocus="cmb_shutter_GotFocus" />
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.ExposureMeteringMode.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension MeteringMode}" Target="{Binding ElementName=cmb_meter}" FontWeight="Bold"/>
@@ -93,6 +100,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <StackPanel Visibility="{Binding SelectedCameraDevice.FocusMode.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Label Content="{T:TranslateExtension FocusMode}" Target="{Binding ElementName=cmb_focus}" FontWeight="Bold"/>
@@ -105,6 +113,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Border>
+                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                     </StackPanel>
                     <ListBox ItemsSource="{Binding Path=SelectedCameraDevice.Properties}" HorizontalAlignment="Left">
                         <ListBox.ItemTemplate>
@@ -121,6 +130,7 @@
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>
                                         </Border>
+                                        <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
                                     </StackPanel>
                                 </materialDesign:Card>
                             </DataTemplate>
@@ -153,7 +163,8 @@
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>
                                         </Border>
-                                    </StackPanel>
+                                    <Separator Margin="8,0,8,0" Style="{StaticResource MaterialDesignLightSeparator}" />
+                                </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

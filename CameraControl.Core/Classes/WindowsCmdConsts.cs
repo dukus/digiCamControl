@@ -87,6 +87,7 @@ namespace CameraControl.Core.Classes
         public const string SelectAll_Image = "SelectAll_Image";
         public const string Unlike_Image = "Unlike_Image";
         public const string Zoom_Image_Fit = "Zoom_Image_Fit";
+        public const string Zoom_Image_60 = "Zoom_Image_60";
         public const string Zoom_Image_100 = "Zoom_Image_100";
         public const string Zoom_Image_200 = "Zoom_Image_200";
         public const string ZoomPoint = "ZoomPoint";

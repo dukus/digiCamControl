@@ -106,7 +106,7 @@ namespace CameraControl.Layouts
             }
             else
             {
-                if (LayoutViewModel.FreeZoom)
+                if (LayoutViewModel.ZoomIndex>0)
                 {
                     LoadFullRes();
                 }
@@ -203,10 +203,10 @@ namespace CameraControl.Layouts
         {
             GeneratePreview();
             var i = Math.Round(ZoomAndPanControl.FitScale(), 4);
-            LayoutViewModel.FreeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
+            var freeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
                                        Math.Round(ZoomAndPanControl.FitScale(), 4);
-            if (!LayoutViewModel.FreeZoom)
-                LayoutViewModel.ZoomFit = true;
+            if (!freeZoom)
+                LayoutViewModel.ZoomIndex = 0;
         }
 
         private void GeneratePreview()
@@ -328,7 +328,7 @@ namespace CameraControl.Layouts
 
         public virtual void OnImageLoaded()
         {
-            if (LayoutViewModel.ZoomFit && ZoomAndPanControl != null)
+            if (LayoutViewModel.ZoomIndex==0 && ZoomAndPanControl != null)
             {
                 ZoomAndPanControl.ScaleToFit();
             }
@@ -493,6 +493,11 @@ namespace CameraControl.Layouts
                     case WindowsCmdConsts.Zoom_Image_Fit:
                         ZoomAndPanControl.ScaleToFit();
                         break;
+                    case WindowsCmdConsts.Zoom_Image_60:
+                        ZoomToFocus();
+                        LoadFullRes();
+                        ZoomAndPanControl.ZoomTo(0.6);
+                        break;
                     case WindowsCmdConsts.Zoom_Image_100:
                         ZoomToFocus();
                         LoadFullRes();
@@ -531,7 +536,7 @@ namespace CameraControl.Layouts
                         OpenInExplorer();
                         break;
                     case WindowsCmdConsts.RefreshDisplay:
-                        if (LayoutViewModel.ZoomFit)
+                        if (LayoutViewModel.ZoomIndex == 0)
                             ZoomAndPanControl.ScaleToFit();
                         break;
                 }
@@ -665,7 +670,6 @@ namespace CameraControl.Layouts
             if (ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale())
             {
                 LoadFullRes();
-                LayoutViewModel.FreeZoom = true;
             }
 
         }

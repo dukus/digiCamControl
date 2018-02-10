@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Button Height="40" Width="40" Margin="4" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="Button_Click">
+        <Button Margin="4" ToolTip="{translation:TranslateExtension LabelOpenInExternalViewer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenViewerCommand}"  Style="{StaticResource MaterialDesignFlatButton}" Click="Button_Click">
             <materialDesign:PackIcon Kind="TooltipImage" Height="30" Width="30" />
         </Button>
     </Grid>

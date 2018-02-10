@@ -12,13 +12,15 @@
                     xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
                     xmlns:zoomAndPan="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="689">
+                    mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="989">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="LayoutBaseResource.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Combobox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
@@ -80,10 +82,10 @@
         <materialDesign:Card Grid.Row="1" Margin="4" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowThumbPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
         <DockPanel  UseLayoutRounding="True" Margin="4">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                        <Button Height="40" Width="40" Margin="4" Command="{Binding PrevImageCommand}" Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                        <Button Margin="4" Command="{Binding PrevImageCommand}" Style="{StaticResource MaterialDesignFlatButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="ArrowLeft" />
                         </Button>
-                        <Button Height="40" Width="40" Margin="4" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding NextImageCommand}" Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                    <Button  Margin="4" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding NextImageCommand}" Style="{StaticResource MaterialDesignFlatButton}">
                         <materialDesign:PackIcon Width="24" Height="24" Kind="ArrowRight" />
                         </Button>
                     <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbUpDown, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=false}">
@@ -97,41 +99,36 @@
                     </StackPanel>
 
                     <!--   New buttons for selection -->
-                        <Button Height="40" Width="40" Margin="4"  Command="{Binding Path=SelectNoneCommand}" ToolTip="{translation:TranslateExtension LabelSelectNone}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                    <Button Margin="4"  Command="{Binding Path=SelectNoneCommand}" ToolTip="{translation:TranslateExtension LabelSelectNone}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="CheckboxBlankOutline" />
                         </Button>
-                        <Button Margin="4" Height="40" Width="40" Command="{Binding Path=SelectAllCommand}" ToolTip="{translation:TranslateExtension LabelSelectAll}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                    <Button Margin="4" Command="{Binding Path=SelectAllCommand}" ToolTip="{translation:TranslateExtension LabelSelectAll}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}">
                         <materialDesign:PackIcon Width="24" Height="24" Kind="CheckboxMarkedOutline" />
                         </Button>
 
                     <!--   New buttons other software! -->
 
-                    <Button Margin="1" Height="40" Width="40" Command="{Binding OpenInLightroomCommand}" 
+                    <Button Margin="1" Command="{Binding OpenInLightroomCommand}" 
                             ToolTip="{translation:TranslateExtension LabelOpenLightroom}" 
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFloatingActionLightButton}"
+                            VerticalAlignment="Center" Content="Lr" FontSize="20"
+                            HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}"
                             Visibility="{Binding LightroomIsInstalled, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_adobe_lightroom}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
                     </Button>
 
-                        <Button Height="40" Width="40" Margin="4" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                    <Button Margin="4" ToolTip="{translation:TranslateExtension LabelDeleteFiles}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=DeleteItemCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="Delete" />
                         </Button>
-                        <Button Height="40" Width="40" Margin="4" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                    <Button Margin="4" ToolTip="{translation:TranslateExtension LabelShowInExplorer}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=OpenExplorerCommand}"  Style="{DynamicResource MaterialDesignFlatButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="FolderImage" />
                         </Button>
-                        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}"
+                    <Button Margin="4" ToolTip="{translation:TranslateExtension LabelRestoreFromBackup}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RestoreCommand}"  Style="{DynamicResource MaterialDesignFlatButton}"
                     IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.HaveBackupFile}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="BackupRestore" />
                         </Button>
-                        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateCounterclockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateLeftCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                    <Button Margin="4" ToolTip="{translation:TranslateExtension LabelRotateCounterclockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateLeftCommand}"  Style="{DynamicResource MaterialDesignFlatButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="RotateLeftVariant" />
                         </Button>
-                        <Button Height="40" Width="40" Margin="2,-2" ToolTip="{translation:TranslateExtension LabelRotateClockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateRightCommand}"  Style="{DynamicResource MaterialDesignFloatingActionLightButton}">
+                    <Button Margin="4" ToolTip="{translation:TranslateExtension LabelRotateClockwise}" VerticalAlignment="Center" HorizontalAlignment="Right"  Command="{Binding Path=RotateRightCommand}"  Style="{DynamicResource MaterialDesignFlatButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="RotateRightVariant" />
                         </Button>                    
                     <ItemsControl ItemsSource="{Binding PanelPlugins}" >
@@ -148,12 +145,18 @@
                     </ItemsControl>
                 </StackPanel>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="30" Width="30" />
-                    <ToggleButton Height="40" Width="40" Content="[ : ]" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ZoomToFocus}" ToolTip="{translation:TranslateExtension LabelZoomToFocus}" />
+                <!--<controls:ProgressRing IsActive="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ImageLoading}" VerticalAlignment="Center" HorizontalAlignment="Right"  Height="30" Width="30" />-->
+                    <!--<ToggleButton Height="40" Width="40" Content="[ : ]" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ZoomToFocus}" ToolTip="{translation:TranslateExtension LabelZoomToFocus}" />
                     <ToggleButton Height="40" Width="40" Content="1:2" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding Zoom12}"/>
                     <ToggleButton Height="40" Width="40" Content="1:1" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding Zoom11}"/>
-                    <ToggleButton Height="40" Width="40" Content="Fit" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ZoomFit}"/>                
-            </StackPanel>
+                    <ToggleButton Height="40" Width="40" Content="Fit" Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}" IsChecked="{Binding ZoomFit}"/>-->      
+                    <ComboBox Width="50" VerticalAlignment="Center" HorizontalContentAlignment="Right" SelectedIndex="{Binding ZoomIndex}">
+                        <ComboBoxItem Content="Fit"/>
+                        <ComboBoxItem Content="60 %"/>
+                        <ComboBoxItem Content="100 %"/>
+                        <ComboBoxItem Content="200 %"/>
+                    </ComboBox>
+                </StackPanel>
         </DockPanel>
         </materialDesign:Card>
         <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >

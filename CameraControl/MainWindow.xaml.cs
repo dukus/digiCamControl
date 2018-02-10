@@ -872,6 +872,8 @@ namespace CameraControl
                     }
                     break;
             }
+            Thread.Sleep(500);
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
         }
 
 

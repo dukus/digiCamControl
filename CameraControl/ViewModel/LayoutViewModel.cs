@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
@@ -12,83 +7,16 @@ using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.Windows.Controls;
 
 namespace CameraControl.ViewModel
 {
     public class LayoutViewModel : ViewModelBase
     {
-        private bool _zoomFit;
-        private bool _zoom11;
-        private bool _zoom12;
-        private bool _freeZoom;
         private bool _zoomToFocus;
-        private bool _lightroomIsInstalled;
-        private bool _photoshopIsInstalled;
-        public bool ZoomFit
-        {
-            get { return _zoomFit; }
-            set
-            {
-                if ( _zoomFit != value && value )
-                {
-                    _zoomFit = true;
-                    Zoom11 = false;
-                    Zoom12 = false;
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
-                }
-                _zoomFit = value;
-                RaisePropertyChanged(() => ZoomFit);
-            }
-        }
-
-        public bool Zoom11
-        {
-            get { return _zoom11; }
-            set
-            {
-                _zoom11 = value;
-                if (value)
-                {
-                    ZoomFit = false;
-                    Zoom12 = false;
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_100);
-                }
-                RaisePropertyChanged(() => Zoom11);
-            }
-        }
-
-        public bool Zoom12
-        {
-            get { return _zoom12; }
-            set
-            {
-                _zoom12 = value;
-                if (value)
-                {
-                    ZoomFit = false;
-                    Zoom11 = false;
-                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_200);
-                }
-                RaisePropertyChanged(() => Zoom12);
-            }
-        }
+        private int _zoomIndex;
 
 
-        public bool FreeZoom
-        {
-            get { return _freeZoom || Zoom12 || Zoom11; }
-            set
-            {
-                if (value)
-                {
-                    ZoomFit = false;
-                    Zoom11 = false;
-                    Zoom12 = false;
-                }
-                _freeZoom = value;
-            }
-        }
+
 
         public bool ZoomToFocus
         {
@@ -100,12 +28,38 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public int ZoomIndex
+        {
+            get { return _zoomIndex; }
+            set
+            {
+                _zoomIndex = value;
+                RaisePropertyChanged(()=>ZoomIndex);
+                switch (ZoomIndex)
+                {
+                    case 0:
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
+                        break;
+                    case 1:
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_60);
+                        break;
+                    case 2:
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_100);
+                        break;
+                    case 3:
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_200);
+                        break;
+                }
+            }
+        }
+
+
         public AsyncObservableCollection<IPanelPlugin> PanelPlugins
         {
             get { return ServiceProvider.PluginManager.PanelPlugins; }
         }
 
-        public RelayCommand NextImageCommand { get; private set; }
+        public RelayCommand NextImageCommand { get; }
         public RelayCommand PrevImageCommand { get; private set; }
         public RelayCommand OpenExplorerCommand { get; private set; }
         public RelayCommand DeleteItemCommand { get; private set; }
@@ -120,31 +74,9 @@ namespace CameraControl.ViewModel
         /// <summary>
         /// 
         /// </summary>
-        public bool LightroomIsInstalled
-        {
-            get
-            {
-                return _lightroomIsInstalled;
-            }
+        public bool LightroomIsInstalled { get; private set; }
 
-           private set
-            {
-                _lightroomIsInstalled = value;
-            }
-        }
-
-        public bool PhotoshopIsInstalled
-        {
-            get
-            {
-                return _photoshopIsInstalled;
-            }
-
-            private set
-            {
-                _photoshopIsInstalled = value;
-            }
-        }
+        public bool PhotoshopIsInstalled { get; private set; }
 
         public LayoutViewModel()
         {
@@ -170,10 +102,9 @@ namespace CameraControl.ViewModel
                 ImageDoubleClickCommand =
                     new RelayCommand(
                         () => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.FullScreenWnd_Show));
-                if (!IsInDesignMode)
-                {
-                    ZoomFit = true;
-                }
+
+                
+                ZoomIndex = 0;
                 RotateLeftCommand =
                     new RelayCommand(() => ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RotateLeft));
                 RotateRightCommand =
