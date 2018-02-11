@@ -1090,7 +1090,7 @@ namespace CameraControl.Core.Classes
             FullScreenInSecondaryMonitor = false;
             SendUsageStatistics = true;
             ThumbHeigh = 100;
-            CurrentThemeNameNew = "Light\\grey";
+            CurrentThemeNameNew = "Dark\\grey";
             AllowWebserverActions = true;
             PublicWebserver = false;
             LoadCanonTransferMode = true;

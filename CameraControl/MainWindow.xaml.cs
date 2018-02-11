@@ -405,6 +405,15 @@ namespace CameraControl
                     });
                 }
             }
+
+            Dispatcher.BeginInvoke(
+                new Action(
+                    delegate
+                    {
+                        Thread.Sleep(1500);
+                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
+                    }));
+
         }
 
         private void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
@@ -872,8 +881,6 @@ namespace CameraControl
                     }
                     break;
             }
-            Thread.Sleep(500);
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
         }
 
 

@@ -327,147 +327,158 @@
                         <materialDesign:Card Margin="4">
                             <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" 
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Grid Margin="4" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="1*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}"   Grid.ColumnSpan="2" 
+                                <StackPanel Orientation="Vertical">
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <Grid Margin="24,8,24,16" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ComboBox Name="cmb_session" SelectedValue="{Binding Path=DefaultSession}" ItemsSource="{Binding Path=PhotoSessions}" ToolTip="{Binding Path=DefaultSession.Folder}"   Grid.ColumnSpan="2" 
                                                   Margin="4">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Label Content="{Binding Path=Name}" FontWeight="Bold" FontSize="15" Padding="1"/>
-                                                        <Label Content="(" Padding="1"/>
-                                                        <Label Content="{Binding Path=Files.Count}" Padding="1" VerticalAlignment="Center"/>
-                                                        <Label Content=")" Padding="1"/>
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label Content="{Binding Path=Name}" FontWeight="Bold" FontSize="15" Padding="1"/>
+                                                            <Label Content="(" Padding="1"/>
+                                                            <Label Content="{Binding Path=Files.Count}" Padding="1" VerticalAlignment="Center"/>
+                                                            <Label Content=")" Padding="1"/>
+                                                        </StackPanel>
+                                                        <Label Content="{Binding Path=Folder}" Padding="1"/>
                                                     </StackPanel>
-                                                    <Label Content="{Binding Path=Folder}" Padding="1"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
 
-                                    <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right" Margin="4"/>
-                                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="4" Name="txt_CaptureName"/>
+                                        <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right" Margin="4"/>
+                                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="4" Name="txt_CaptureName"/>
 
-                                    <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right" Margin="4"/>
-                                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=DefaultSession.Series}" Margin="4" VerticalAlignment="Top"/>
-                                </Grid>
+                                        <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right" Margin="4"/>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=DefaultSession.Series}" Margin="4" VerticalAlignment="Top"/>
+                                    </Grid>
+                                </StackPanel>
                             </Expander>
                         </materialDesign:Card>
-                        <materialDesign:Card Margin="4">
-                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True"  MaxHeight="200"
-                                      Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" Margin="4"/>
+                        <materialDesign:Card Margin="4" Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True"  MaxHeight="200">
+                                <StackPanel Orientation="Vertical">
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" Margin="24,8,24,16"/>
+                                </StackPanel>
                             </Expander>
                         </materialDesign:Card>
                         <materialDesign:Card Margin="4">
                             <Expander  Header="{T:TranslateExtension LabelAutoExportPlugins}" VerticalAlignment="Top" IsExpanded="True" Margin="0" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowAutoExportPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <StackPanel Orientation="Vertical" Margin="4">
-                                    <ListBox Margin="4" ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" HorizontalContentAlignment="Stretch">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid IsEnabled="{Binding IsRedy}" >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="30"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <CheckBox Content="{Binding DisplayName}" IsChecked="{Binding IsEnabled}"/>
-                                                    <materialDesign:PopupBox Grid.Column="1" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
-                                                        <StackPanel>
-                                                            <Button Content="Delete" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.RemovePluginCommand}" CommandParameter="{Binding}"/>
-                                                            <Button Content="Settings" Command="{Binding ConfigurePluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}" CommandParameter="{Binding}"/>
-                                                            <Button Content="Execute"  Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ApplyPluginCommand}" CommandParameter="{Binding}"/>
-                                                        </StackPanel>
-                                                    </materialDesign:PopupBox>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                    <Controls:DropDownButton Name="DownButton" Padding="0" Margin="4" VerticalContentAlignment="Center" Content="{T:TranslateExtension LabelAddPlugin}" DisplayMemberPath="Name" 
+                                <StackPanel Orientation="Vertical">
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <StackPanel Orientation="Vertical" Margin="24,8,24,16">
+                                        <ListBox Margin="4" ItemsSource="{Binding DefaultSession.AutoExportPluginConfigs}" MaxHeight="200"  dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" HorizontalContentAlignment="Stretch">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid IsEnabled="{Binding IsRedy}" >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="30"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <CheckBox Content="{Binding DisplayName}" IsChecked="{Binding IsEnabled}"/>
+                                                        <materialDesign:PopupBox Grid.Column="1" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
+                                                            <StackPanel>
+                                                                <Button Content="Delete" Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.RemovePluginCommand}" CommandParameter="{Binding}"/>
+                                                                <Button Content="Settings" Command="{Binding ConfigurePluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}" CommandParameter="{Binding}"/>
+                                                                <Button Content="Execute"  Command="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.ApplyPluginCommand}" CommandParameter="{Binding}"/>
+                                                            </StackPanel>
+                                                        </materialDesign:PopupBox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <Controls:DropDownButton Name="DownButton" Padding="0" Margin="4" VerticalContentAlignment="Center" Content="{T:TranslateExtension LabelAddPlugin}" DisplayMemberPath="Name" 
                                                              ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.PluginManager}, Path=AutoExportPlugins}">
-                                        <Controls:DropDownButton.ItemContainerStyle>
-                                            <Style TargetType="MenuItem">
-                                                <Setter Property="Command" Value="{Binding AddPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}"/>
-                                                <Setter Property="CommandParameter" Value="{Binding}"/>
-                                            </Style>
-                                        </Controls:DropDownButton.ItemContainerStyle>
-                                        <Controls:DropDownButton.Icon>
-                                            <Rectangle Width="20" Height="20">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Controls:DropDownButton.Icon>
-                                    </Controls:DropDownButton>
+                                            <Controls:DropDownButton.ItemContainerStyle>
+                                                <Style TargetType="MenuItem">
+                                                    <Setter Property="Command" Value="{Binding AddPluginCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type my:MainWindow}}}"/>
+                                                    <Setter Property="CommandParameter" Value="{Binding}"/>
+                                                </Style>
+                                            </Controls:DropDownButton.ItemContainerStyle>
+                                            <Controls:DropDownButton.Icon>
+                                                <Rectangle Width="20" Height="20">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Controls:DropDownButton.Icon>
+                                        </Controls:DropDownButton>
+                                    </StackPanel>
                                 </StackPanel>
                             </Expander>
                         </materialDesign:Card>
                         <materialDesign:Card Margin="4">
                             <Expander  Header="{T:TranslateExtension MenuPresets}" VerticalAlignment="Top" IsExpanded="False" Margin="0" Padding="0" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" 
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPresetPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <StackPanel Margin="4">
-                                    <ListBox MaxHeight="100" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" Name="PresetListBox" Margin="3">
+                                <StackPanel Orientation="Vertical">
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <StackPanel Margin="24,8,24,16">
+                                        <ListBox MaxHeight="100" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=CameraPresets}" Name="PresetListBox" Margin="3">
 
-                                    </ListBox>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <Button  ToolTip="{T:TranslateExtension SavePresetWindowTitle}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_1">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension MenuPresetsLoad}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Path=SelectPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                        </ListBox>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button  ToolTip="{T:TranslateExtension SavePresetWindowTitle}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_1">
+                                                <Rectangle Width="15" Height="15">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_save}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                            <Button  ToolTip="{T:TranslateExtension MenuPresetsLoad}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Path=SelectPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
                                         CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_upload}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension ButtonDeletePreset}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Path=DeletePresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                                <Rectangle Width="15" Height="15">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_upload}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                            <Button  ToolTip="{T:TranslateExtension ButtonDeletePreset}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding Path=DeletePresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
                                         CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension SavePresetWindowTitle}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_2">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension LabelLoadPresetAllCamera}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}"  Command="{Binding Path=LoadInAllPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                                <Rectangle Width="15" Height="15">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                            <Button  ToolTip="{T:TranslateExtension SavePresetWindowTitle}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_2">
+                                                <Rectangle Width="15" Height="15">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                            <Button  ToolTip="{T:TranslateExtension LabelLoadPresetAllCamera}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}"  Command="{Binding Path=LoadInAllPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
                                         CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_elevator_up}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                        <Button  ToolTip="{T:TranslateExtension LabelVerifyPreset}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}"  Command="{Binding Path=VerifyPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
+                                                <Rectangle Width="15" Height="15">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_elevator_up}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                            <Button  ToolTip="{T:TranslateExtension LabelVerifyPreset}" Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}"  Command="{Binding Path=VerifyPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
                                         CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
-                                            <Rectangle Width="15" Height="15">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_checkmark_pencil}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
+                                                <Rectangle Width="15" Height="15">
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_checkmark_pencil}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Button>
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </Expander>
@@ -475,13 +486,19 @@
                         <materialDesign:Card Margin="4">
                             <Expander  Header="{T:TranslateExtension LabelImageProperties}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
                                 Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowImagePropertiesPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Margin="4"/>
+                                <StackPanel Orientation="Vertical">
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <Panels:ImagePropertiesControl DataContext="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}}" Height="250" Margin="24,8,24,16"/>
+                                </StackPanel>
                             </Expander>
                         </materialDesign:Card>
                         <materialDesign:Card Margin="4">
                             <Expander  Header="{T:Translate LabelMetadata}" VerticalAlignment="Top" IsExpanded="False"  Margin="0" Padding="0"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMetadataPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                                <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" HorizontalContentAlignment="Stretch" Margin="4"/>
+                                <StackPanel Orientation="Vertical">
+                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                                    <Panels:MetadataControl DataContext="{Binding Source={x:Static Core:ServiceProvider.Settings}}" Height="250" HorizontalContentAlignment="Stretch" Margin="24,8,24,16"/>
+                                </StackPanel>
                             </Expander>
                         </materialDesign:Card>
                     </StackPanel>
