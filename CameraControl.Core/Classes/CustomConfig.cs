@@ -36,6 +36,7 @@ using System.Windows.Controls;
 using System.Xml.Serialization;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices.Classes;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -47,6 +48,7 @@ namespace CameraControl.Core.Classes
         public AsyncObservableCollection<ValuePair> ConfigData { get; set; }
 
         [XmlIgnore]
+        [JsonIgnore]
         public object AttachedObject { get; set; }
 
         private string _driverName;
@@ -71,6 +73,7 @@ namespace CameraControl.Core.Classes
         private UserControl _config;
 
         [XmlIgnore]
+        [JsonIgnore]
         public UserControl Config
         {
             get

@@ -804,6 +804,7 @@ namespace CameraControl.Core.Classes
         private string _currentThemeNameNew;
 
         [XmlIgnore]
+        [JsonIgnore]
         public ObservableCollection<CameraPreset> CameraPresets
         {
             get { return _cameraPresets; }

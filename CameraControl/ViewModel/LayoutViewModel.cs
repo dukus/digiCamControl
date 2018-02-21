@@ -112,7 +112,11 @@ namespace CameraControl.ViewModel
             }
         }
 
-        
+        public void RefresZoomIndex(int index)
+        {
+            _zoomIndex = index;
+            RaisePropertyChanged(() => ZoomIndex);
+        }
 
         private void DeleteItem()
         {

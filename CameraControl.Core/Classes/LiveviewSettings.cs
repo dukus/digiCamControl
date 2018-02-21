@@ -35,6 +35,7 @@ using System.Text;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -45,6 +46,7 @@ namespace CameraControl.Core.Classes
         private double _canvasWidt;
 
         [XmlIgnore]
+        [JsonIgnore]
         public double CanvasWidt
         {
             get { return _canvasWidt; }
@@ -59,6 +61,7 @@ namespace CameraControl.Core.Classes
         private double _canvasHeight;
 
         [XmlIgnore]
+        [JsonIgnore]
         public double CanvasHeight
         {
             get { return _canvasHeight; }
@@ -70,7 +73,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        [XmlIgnore] private double _gridVerticalMinSize;
+        [XmlIgnore]
+        [JsonIgnore]
+        private double _gridVerticalMinSize;
 
         public double GridVerticalMinSize
         {
@@ -82,7 +87,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        [XmlIgnore] private double _gridVerticalMaxSize;
+        [XmlIgnore]
+        [JsonIgnore]
+        private double _gridVerticalMaxSize;
 
         public double GridVerticalMaxSize
         {
@@ -121,7 +128,9 @@ namespace CameraControl.Core.Classes
         }
 
         //------------------------------
-        [XmlIgnore] private double _gridHorizontalMinSize;
+        [XmlIgnore]
+        [JsonIgnore]
+        private double _gridHorizontalMinSize;
 
         public double GridHorizontalMinSize
         {
@@ -133,7 +142,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
-        [XmlIgnore] private double _gridHorizontalMaxSize;
+        [XmlIgnore]
+        [JsonIgnore]
+        private double _gridHorizontalMaxSize;
 
         public double GridHorizontalMaxSize
         {

@@ -126,6 +126,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool Visible
         {
             get { return _visible; }
@@ -211,6 +212,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool Loading
         {
             get { return _loading; }
@@ -222,6 +224,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool Alternate
         {
             get { return _alternate; }

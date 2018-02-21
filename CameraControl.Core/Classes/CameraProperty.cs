@@ -32,6 +32,7 @@ using System.Net.NetworkInformation;
 using System.Windows;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -88,6 +89,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public PhotoSession PhotoSession { get; set; }
 
         private bool _noDownload;
@@ -158,6 +160,7 @@ namespace CameraControl.Core.Classes
         private CustomConfig _selectedConfig;
 
         [XmlIgnore]
+        [JsonIgnore]
         public CustomConfig SelectedConfig
         {
             get

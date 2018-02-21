@@ -206,7 +206,9 @@ namespace CameraControl.Layouts
             var freeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
                                        Math.Round(ZoomAndPanControl.FitScale(), 4);
             if (!freeZoom)
-                LayoutViewModel.ZoomIndex = 0;
+            {
+                LayoutViewModel.RefresZoomIndex(0);
+            }
         }
 
         private void GeneratePreview()

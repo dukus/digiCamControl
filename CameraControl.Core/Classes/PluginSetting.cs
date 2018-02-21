@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace CameraControl.Core.Classes
 {
@@ -25,6 +26,7 @@ namespace CameraControl.Core.Classes
         /// <param name="name"></param>
         /// <returns> string</returns>
         [XmlIgnore]
+        [JsonIgnore]
         public object this[string name]
         {
             get

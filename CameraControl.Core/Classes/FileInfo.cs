@@ -37,6 +37,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -54,12 +55,14 @@ namespace CameraControl.Core.Classes
         public int Orientation { get; set; }
 
         [XmlIgnore]
+        [JsonIgnore]
         public PointCollection LuminanceHistogramPoints
         {
             get { return BitmapLoader.ConvertToPointCollection(HistogramLuminance);  }
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool IsFocused
         {
             get
@@ -164,6 +167,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool IsLoading { get; set; }
 
         public FileInfo()

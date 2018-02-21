@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using CameraControl.Core.Scripting;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using Newtonsoft.Json;
 
 namespace CameraControl.Core.Classes
 {
@@ -41,9 +42,11 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public AsyncObservableCollection<string> OperatorList { get; set; }
 
         [XmlIgnore]
+        [JsonIgnore]
         public AsyncObservableCollection<string> VariableList
         {
             get
@@ -55,9 +58,11 @@ namespace CameraControl.Core.Classes
         }
         
         [XmlIgnore]
+        [JsonIgnore]
         public AsyncObservableCollection<string> ConditionList { get; set; }
 
         [XmlIgnore]
+        [JsonIgnore]
         public AsyncObservableCollection<string> ValueList
         {
             get

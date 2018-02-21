@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using Newtonsoft.Json;
 
 namespace CameraControl.Core.Classes
 {
@@ -87,6 +88,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool IsError
         {
             get { return _isError; }
@@ -98,6 +100,7 @@ namespace CameraControl.Core.Classes
         }
 
         [XmlIgnore]
+        [JsonIgnore]
         public string Error
         {
             get { return _error; }
@@ -110,6 +113,7 @@ namespace CameraControl.Core.Classes
 
 
         [XmlIgnore]
+        [JsonIgnore]
         public bool IsRedy
         {
             get { return _isRedy; }
