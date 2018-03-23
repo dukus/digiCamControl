@@ -10,7 +10,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -35,26 +35,26 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition />
             <RowDefinition Height="Auto" />
 
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Button Content="{T:TranslateExtension LabelStartCapture}" Name="btn_start" Click="btn_start_Click" Grid.Column="3" Grid.Row="1" Margin="5"/>
         <Button Content="{T:TranslateExtension LabelStopCapture}" Name="btn_stop" Click="btn_stop_Click" Grid.Column="3" Grid.Row="5" Margin="5"/>
-        <Controls:NumericUpDown Name="upd_time" Minimum="1" Maximum="6000" Value="{Binding Path=CaptureTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="1" Margin="5"/>
-        <Label Content="{T:TranslateExtension LabelCaptureTime}" Name="label1" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalContentAlignment="Right" />
+        <TextBox Name="upd_time" Text="{Binding Path=CaptureTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="1" Margin="5" HorizontalContentAlignment="Center"/>
+        <Label Content="{T:TranslateExtension LabelCaptureTime}" Name="label1" Grid.Column="1" Grid.Row="1" Margin="4" HorizontalContentAlignment="Right" />
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" Name="lbl_status" Grid.Row="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="3" />
-        <Controls:NumericUpDown Name="upd_num" Minimum="1" Maximum="10000" Value="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="2" Margin="5"/>
-        <Label Content="{T:TranslateExtension LabelNumberOfPhotos}" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right" />
-        <Label Content="{T:TranslateExtension LabelTimeBetweenShots}" Grid.Row="3" Grid.Column="1" Margin="4,4,6,6" HorizontalContentAlignment="Right" />
-        <Label Content="{T:TranslateExtension LabelPHDGuiding}" Grid.Row="4" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right" />
-        <Label Content="{T:TranslateExtension LabelWaitPHDGuiding}" Grid.Row="5" Grid.Column="1" Margin="5" HorizontalContentAlignment="Right"/>
-        <Controls:NumericUpDown Name="upd_waittime" Minimum="0" Maximum="6000" Value="{Binding Path=WaitTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="3" Margin="5"/>
-        <Controls:NumericUpDown Name="upd_phdwaittime" Minimum="0" Maximum="300" Value="{Binding Path=PhdWait, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="5" Margin="5"/>
+        <TextBox Name="upd_num" Text="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="2" Margin="4" HorizontalContentAlignment="Center"/>
+        <Label Content="{T:TranslateExtension LabelNumberOfPhotos}" Grid.Row="2" Grid.Column="1" Margin="4" HorizontalContentAlignment="Right" />
+        <Label Content="{T:TranslateExtension LabelTimeBetweenShots}" Grid.Row="3" Grid.Column="1" Margin="4" HorizontalContentAlignment="Right" />
+        <Label Content="{T:TranslateExtension LabelPHDGuiding}" Grid.Row="4" Grid.Column="1" Margin="4" HorizontalContentAlignment="Right" />
+        <Label Content="{T:TranslateExtension LabelWaitPHDGuiding}" Grid.Row="5" Grid.Column="1" Margin="4" HorizontalContentAlignment="Right"/>
+        <TextBox Name="upd_waittime" Text="{Binding Path=WaitTime, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="3" Margin="4" HorizontalContentAlignment="Center"/>
+        <TextBox Name="upd_phdwaittime" Text="{Binding Path=PhdWait, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="2" Grid.Row="5" Margin="4" HorizontalContentAlignment="Center"/>
         <Label Content="{Binding Path=Message, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" Grid.Column="4" Grid.Row="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" FontWeight="Bold" />
-        <GroupBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Header="{T:TranslateExtension LabelExternalShutterRelease}" Margin="5">
+        <GroupBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Header="{T:TranslateExtension LabelExternalShutterRelease}" Margin="4" VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="152*" />
@@ -115,7 +115,7 @@
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsExecuted}" Value="False">
                                     <Setter TargetName="lst_label" Property="TextBlock.FontStyle" Value="Normal" />
-                                </DataTrigger>                                
+                                </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -124,16 +124,10 @@
                 <Button Content="{T:TranslateExtension LabelStopScript}" Grid.Row="2" Margin="5" Name="btn_stop_script" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Click="btn_stop_script_Click" />
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="8" Header="{T:TranslateExtension LabelCommands}" Grid.Column="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="293*" />
-                </Grid.ColumnDefinitions>
-                <Button Content="Lv" ToolTip="{T:TranslateExtension LiveViewToolTip}" Name="btn_astrolv" Style="{DynamicResource MetroCircleButtonStyle}" FontSize="15" Click="btn_astrolv_Click" />
-            </Grid>
+        <GroupBox Grid.Row="8" Header="{T:TranslateExtension LabelCommands}" Grid.Column="3" Margin="4" VerticalAlignment="Top">
+            <Button Content="Live view" ToolTip="{T:TranslateExtension LiveViewToolTip}" Name="btn_astrolv"  FontSize="15" Click="btn_astrolv_Click" />
         </GroupBox>
-        <ComboBox Grid.Column="2" Grid.Row="4" Margin="5" SelectedIndex="{Binding Path=PhdType, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}">
+        <ComboBox Grid.Column="2" Grid.Row="4" Margin="4" SelectedIndex="{Binding Path=PhdType, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}">
             <ComboBoxItem Content="(None)" />
             <ComboBoxItem Content="Move 1" />
             <ComboBoxItem Content="Move 2" />
@@ -141,17 +135,17 @@
             <ComboBoxItem Content="Move 4" />
             <ComboBoxItem Content="Move 5" />
         </ComboBox>
-        <GroupBox Grid.Column="1" Grid.Row="7" Header="{T:TranslateExtension LabelCountDown}">
+        <GroupBox Grid.Column="1" Grid.Row="7" Header="{T:TranslateExtension LabelCountDown}" Margin="4">
             <Grid>
                 <Label Content="{Binding Path=CountDown, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Padding="0"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="2" Grid.Row="7" Header="{T:TranslateExtension LabelCurrentEvent}">
+        <GroupBox Grid.Column="2" Grid.Row="7" Header="{T:TranslateExtension LabelCurrentEvent}" Margin="4">
             <Grid>
                 <Label Content="{Binding Path=Event, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Padding="0"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="3" Grid.Row="7" Header="{T:TranslateExtension LabelRemainingCaptures}">
+        <GroupBox Grid.Column="3" Grid.Row="7" Header="{T:TranslateExtension LabelRemainingCaptures}" Margin="4">
             <Grid>
                 <Label Content="{Binding Path=PhotoLeft, RelativeSource={RelativeSource FindAncestor, AncestorType=my:BulbWnd, AncestorLevel=1}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Padding="0"/>
             </Grid>

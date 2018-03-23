@@ -68,7 +68,6 @@
   <string name="CapturePhotoNoAfToolTip">Захват фото без авто фокуса</string>
   <string name="SettingsToolTip">Настройки</string>
   <string name="TimeLapseToolTip">Замедленная киносъёмка</string>
-  <string name="FullscreenToolTip">Полный экран</string>
   <string name="LiveViewToolTip">Live view</string>
   <string name="BrowseSessionsToolTip">Обзор сессий</string>
   <string name="SelectTagsToolTip">Выбор метки</string>
@@ -77,7 +76,6 @@
   <string name="SessionAdd">Доб.</string>
   <string name="SessionEdit">Ред.</string>
   <string name="SessionDel">Удал.</string>
-  <string name="MainWindowTitle">NCC- Перевод</string>
   <string name="SettingsWindowTitle">Настройки</string>
   <string name="SessionWindowTitle">Сессия [добавить/редактировать]</string>
   <string name="LiveViewWindowTitle">Live view</string>
@@ -93,6 +91,7 @@
   <string name="ButtonEdit">Редактировать</string>
   <string name="ButtonAutoFocus">Автофокус</string>
   <string name="ButtonCapture">Снимок</string>
+  <string name="ButtonRecordMovie">Записать видео</string>
   <string name="ButtonFreezeImage">Остановить</string>
   <string name="ButtonStart">Старт</string>
   <string name="ButtonPreview">Просмотр</string>
@@ -104,16 +103,13 @@
   <string name="ButtonCapturePhotos">Захват фотографий</string>
   <string name="ButtonStartTimeLapse">Начать замедленную киносъёмку</string>
   <string name="ButtonStopTimeLapse">Остановить замедленную киносъёмку</string>
+  <string name="ButtonCreateMovie">Создать видео</string>
   <string name="ButtonLocateLogFile">Открыть папку с log-файлом</string>
-  <string name="LabelInterfaceLanguage">Язык интерфейса:</string>
-  <string name="LabelTheme">Тема оформления:</string>
+  <string name="LabelInterfaceLanguage">язык интерфейса</string>
   <string name="LabelGeneral">Основные</string>
   <string name="LabelPreview">Просмотр</string>
   <string name="LabelAutoPreview">Автопросмотр</string>
-  <string name="LabelPreviewTime">Время просмотра в сек.:</string>
   <string name="LabelPreviewInLIveView">Просмотр снимка в Live view</string>
-  <string name="LabelLIveViewImageFreeze">Просмотр снимка в Live view секунд:</string>
-  <string name="LabelRotateImage">Повернуть снимок:</string>
   <string name="LabelDontLoadThumbs">Не загружать эскизы</string>
   <string name="LabelTriggers">Тригеры</string>
   <string name="LabelUseKeybordToTrigger">Использовать комбинацию клавиш для спуска затвора</string>
@@ -122,28 +118,10 @@
   <string name="LabelFocusAndLiveview">Фокусировка и Live view</string>
   <string name="LabelSmallFocusSstep">Малый шаг фокусировки</string>
   <string name="LabelMediumFocusStep">Средний шаг фокусировки</string>
-  <string name="LabelLargFocusStep">Большой шаг фокусировки</string>
-  <string name="LabelFolder">Папка:</string>
-  <string name="LabelFileNameTemplate">Имя шаблона:</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Имя сессии
-$C - Счётчик
-$E - Поправка экспозиции
-$X - Имя камеры
-$D - Текущая дата
-$UTime - Штамп времени
-$Type - Тип файла (Raw/Jpg)
-$B - Штрих-код
-$Tag1 - Выбрать метку 1
-$Tag2 - Выбрать метку 2
-$Tag3 - Выбрать метку 3
-$Tag4 - Выбрать метку 4</string>
-  <string name="LabelCounter">Счетчик:</string>
-  <string name="LabelUseOriginalToolTip">Эта опция не работает с драйвером WIA</string>
   <string name="LabelDontDownloadPhotos">Не загрузите фотографии на ПК</string>
   <string name="LabelTags">Метки</string>
   <string name="LabelManualFocus">Ручная фокусировка</string>
   <string name="LabelGrid">Сетка</string>
-  <string name="LabelLvZoomRation">Коэффициент масштабирования Lv</string>
   <string name="LabelFocusStacking">Фокусировок</string>
   <string name="LabelFocusStep">Шаг фокусировки</string>
   <string name="LabelLuminosity">Светосила</string>
@@ -163,36 +141,30 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelWaitTime">Время ожидания (сек)</string>
   <string name="LabelDisableAutofocus">Отключить автофокус</string>
   <string name="LabelConnectedCameras">подключенных камер</string>
-  <string name="LabelPresetName">Имя предустановки:</string>
   <string name="LabelTimeLapse"> Замедленная киносъёмка</string>
   <string name="LabelSecondsBetweenShots">Секунд между снимками</string>
   <string name="LabelNumberOfPhotos">Количество фотографий</string>
   <string name="LabelDontAutofocusOnEveryCapture">Не автофокусировать на каждом снимке</string>
-  <string name="LabelCaptureInterval">Интервал снимков (час:мин:сек)</string>
   <string name="LabelVideoFormat">Видео формат</string>
   <string name="LabelOutputFile">Исходный файл</string>
   <string name="LabelFps">Частота кадров</string>
   <string name="LabelFillImage">Заполнить картинку</string>
+  <string name="LabelCreateMovie">Создать видео</string>
   <string name="LabelAddVirtualMovingToVideo">Добавить виртуальное перемещение в видео</string>
-  <string name="LabelMovingSurface">Перемещение поверхности (%):</string>
-  <string name="LabelMovingDirection">Направление перемещения:</string>
   <string name="LabelMovingDirectionLeftToRight">Слева направо</string>
   <string name="LabelMovingDirectionRightToLeft">Справа налево</string>
   <string name="LabelMovingDirectionTopToBottom">Сверху вниз</string>
   <string name="LabelMovingDirectionBottomToTop">Снизу вверх</string>
   <string name="LabelMovingDirectionLeftTopToRightBottom">С верху слева к низу справа</string>
   <string name="LabelMovingDirectionRightBottomToLeftTop">С низу справа к верху слева</string>
-  <string name="LabelImageAlignment">Выравнивание изображения:</string>
   <string name="LabelImageAlignmentLeftTop">Верхний левый</string>
   <string name="LabelImageAlignmentCenter">Центр</string>
   <string name="LabelImageAlignmentRightBottom">Нижний правый</string>
   <string name="LabelVideoCodecProblem">Проблема с видеокодеком</string>
-  <string name="MsgPhotoTransferBegin">Передача фото началась</string>
   <string name="MsgPhotoTransferDone">Передача фото закончена</string>
   <string name="MsgBulbModeNotSupported">Выдержка от руки не поддерживается !</string>
   <string name="MsgApplicationUpToDate">Ваша программа имеет последнею версию !</string>
   <string name="MsgUseSessionEditorTags">Используйте редактор сеанса для определения меток!</string>
-  <string name="MsgStopTimeLapse">Замедленная киносъёмка не завершена! Желаете остановит замедленную киносъёмку?</string>
   <string name="MsgBracketingDone">Брекетинг закончен</string>
   <string name="MsgActionInProgress">Действие выполняется {0}/{1}</string>
   <string name="MenuFile">Файл</string>
@@ -203,7 +175,6 @@ $Tag4 - Выбрать метку 4</string>
   <string name="MenuMultipleCamera">Управление несколькими камерами</string>
   <string name="MenuSelectedCameraProperty">Выбрать свойство камеры</string>
   <string name="MenuPresets">Предустановка</string>
-  <string name="MenuPresetsLoad">Загрузить</string>
   <string name="MenuPresetsSave">Сохранить</string>
   <string name="MenuPresetsEdit">Редактировать</string>
   <string name="MenuHelp">Помощь</string>
@@ -217,90 +188,57 @@ $Tag4 - Выбрать метку 4</string>
   <string name="MenuLayoutGrid">Сетка</string>
   <string name="MenuProperties">Свойства</string>
   <string name="MenuUseSelectedCameraPreset">Использование выбранной предустановки камеры</string>
-  <!--15/10/2012-->
   <string name="LabelExternalViewerPath">Контекстное меню внешней программы просмотра</string>
   <string name="LabelStayOnTop">Всегда поверх остальных</string>
-  <!--22/10/2012-->
   <string name="LabelDisplay">Дисплей</string>
   <string name="LabelMotionDetection">Обнаружение движения</string>
   <string name="LabelActivateMotionDetection">Включить обнаружение движения</string>
   <string name="LabelCaptureWhenMove">Снимать при обнаружении движения</string>
   <string name="LabelThreshold">Пороговое значение (%)</string>
   <string name="LabelWaitMoion">Ждать (сек)</string>
-  <!--25/10/2012-->
   <string name="LabelAutofocusBeforeCapture">Авто фокус перед снимком</string>
-  <!--26/10/2012-->
   <string name="LabelOpacity">Непрозрачность</string>
-  <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Типа обнаружения движения</string>
   <string name="LabelTwoFramesDifferenceDetector">Два кадра с разным детектором</string>
   <string name="LabelSmallestBlockSize">Наименьший размер блока</string>
   <string name="ButtonHelp">Помощь</string>
-  <!--31/10/2012-->
   <string name="LabelMenu">Меню</string>
-  <!--03/11/2012-->
   <string name="MenuForum">Форум</string>
-  <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Получить кодеки RAW</string>
-  <!--08/11/2012-->
   <string name="LabelNoCardInserted">Не вставлена карта</string>
   <string name="LabelCardError">Ошибка карты</string>
   <string name="LabelCardNotFormatted">Карта не отформатирована</string>
-  <string name="LabelNoFreeAreaInCard">Нет свободного места в карте</string>
-  <string name="LabelCardBufferNotEmpty">Есть данные для записи на карту в буфере.</string>
-  <string name="LabelPcBufferNotEmpty">Есть данные для записи на ПК в буфере.</string>
   <string name="LabelCardProtected">Карта защищена</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Во время расширенного отображения в режиме Live view</string>
-  <string name="LabelWrongLiveViewType">Выберите live view положение для live view фотографии.</string>
   <string name="LabelNotInApplicationMode">Камера не в режиме приложения.</string>
   <string name="ButtonResetSettings">Сбросить настройки</string>
-  <!--14/11/2012-->
   <string name="LabelUseExternalViewer">Используйте внешнюю программу просмотра</string>
   <string name="LabelExternalPreViewerPath">Внешнее средство просмотра, путь</string>
-  <!--18/11/2012-->
   <string name="LabelControl">Управление</string>
-  <!--20/11/2012-->
   <string name="LabelExport">Экспорт</string>
-  <!--21/11/2012-->
   <string name="LabelDownload">Загрузка</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">Загрузить фотографии</string>
   <string name="LabelDeleteFilesAfterTransfer">Удалить файлы после передачи</string>
-  <!--26/11/2012-->
-  <string name="LabelErrorSetFocusPos">Ошибка выбранной позиции фокуса</string>
-  <string name="LabelErrorUnableFocus">Не возможно сфокусировать</string>
-  <!--28/11/2012-->
   <string name="LabelErrorLoadingFileList">Ошибка загрузки файлов</string>
-  <!--30/11/2012-->
   <string name="LabelTransfer">Перенос</string>
   <string name="LabelTransferItem1">1.Записать только на ПК</string>
   <string name="LabelTransferItem2">2.Записать только в камеру</string>
   <string name="LabelTransferItem3">3.Записать на ПК и в камеру</string>
-  <!--05/12/2012-->
-  <string name="MsgDisabledDrivers">Системный драйвер отключен ! Хотите его включить ?</string>
-  <!--14/12/2012-->
   <string name="LabelShowFocusPoints">Показывать точки фокусировки</string>
   <string name="LabelMainWindow">Главное окно</string>
   <string name="LabelSelect">Выбор</string>
   <string name="TimeSelectWindowTitle">Выберите окно</string>
-  <!--16/12/2012-->
   <string name="LabelRotateNone">Нет</string>
   <string name="LabelRotate90">на 90</string>
   <string name="LabelRotate180">на 180</string>
   <string name="LabelRotate270">на 270</string>
-  <string name="LabelLowMemoryUsage">Использовать меньше памяти</string>
-  <!--04/01/2013-->
   <string name="LabelRawCodecNotInstalled">RAW кодек не установлен или неизвестный формат файла</string>
-  <!--05/01/2013-->
   <string name="LabelUseCameraCounter">Использовать счетчик камеры вместо общего счетчика</string>
   <string name="LabelResetCounters">Сброс счётчиков</string>
-  <!--07/01/2013-->
   <string name="LabelUnabletoDeleteSession">Невозможно удалить сеанс</string>
-  <!--12/01/2013-->
   <string name="LabelWaitingForDevice">Ожидайте пока устройство будет готово</string>
   <string name="LabelAdvanced">Дополнительно</string>
   <string name="LabelUseParellelTransfer">Использовать параллельный перенос файлов</string>
-  <!--19/01/2013-->
   <string name="LabelApplicationError">Ошибка приложения</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 не установлен</string>
   <string name="LabelRestartTheApplication">Перезапустить приложение !</string>
@@ -312,23 +250,17 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelTimeBetweenShots">Время между кадрами</string>
   <string name="LabelDontAutofocus">Без автофокуса</string>
   <string name="LabelShowUnTranslatedStringIds">Показать непереведенные идентификаторы строк</string>
-  <!--20/01/2013-->
   <string name="LabelUseAsMaster">Используйте в качестве ведущего</string>
-  <!--29/01/2013-->
   <string name="LabelCounterIncrementer">Счётчик приращения</string>
   <string name="LabelSelected">Выбранные</string>
-  <!--31/01/2013-->
   <string name="LabelNone">Нет</string>
   <string name="LabelRuleOfThirds">Правило третей</string>
   <string name="LabelComboGrid">Сетка</string>
   <string name="LabelDiagonal">Диагональ</string>
   <string name="LabelSplit">Разделение</string>
-  <!--13/03/2013-->
   <string name="LabelTools">Инструменты</string>
-  <!--17/03/2012-->
   <string name="LabelMFError">Камера в режиме ручной фокусировки</string>
   <string name="LabelNotAFSError">Камера не в AF-S режим фокусировки</string>
-  <!--28/03/2012-->
   <string name="LabelSequenceError">Ошибка последовательности</string>
   <string name="LabelFullyPressedButtonError">Ошибка полного нажатия кнопки</string>
   <string name="LabelApertureValueError">Значение диафрагмы устанавливается с помощью кольца диафрагмы объектива.</string>
@@ -338,10 +270,8 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelTTLError">TTL ошибка</string>
   <string name="LabelCommandProcesingError">Во время обработки команды \"съёмка\"</string>
   <string name="LabelShoutingInProgress">Эффекты съёмки</string>
-  <string name="LabelOverHeatedError">Live view не может быть начато, когда температура поднимается.</string>
   <string name="LabelCardProtectedError">Карта защищена</string>
   <string name="LabelDestinationCardError">Пункт назначения записи, карта</string>
-  <!--07/05/2013-->
   <string name="LabelDevices">Устройства</string>
   <string name="LabelExternalShutterRelease">Внешний спуск затвора</string>
   <string name="LabelConfigName">Имя конфигурации</string>
@@ -361,17 +291,14 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelBrightness">Яркость</string>
   <string name="LabelUseExternalShutterRelease">Используйте внешний спуск затвора</string>
   <string name="LabelDownloadJpgOnly">Загружать только JPG файлы</string>
-  <string name="LabelDownloadJpgOnlyToolTip">Если сделать снимок с JPG+RAW загружаются только jpg файлы</string>
   <string name="LabelSetCounters">Установить счетчики</string>
   <string name="LabelEdgeDetection">Обнаружение края</string>
-  <!--04/07/2013-->
   <string name="LabelShowFocusRect">Показать прямоугольник фокуса</string>
   <string name="LabelEasyLiveViewControl">Простое управление Live View</string>
   <string name="LabelImageProperties">Свойства изображения</string>
   <string name="LabelFileName">Имя файла</string>
   <string name="LabelTagSelector">Селектор меток</string>
   <string name="LabelComment">Комментарий</string>
-  <string name="LabelWriteComments">Писать комментарии/метки в загруженное изображение</string>
   <string name="LabelStayOnTop2">Поверх</string>
   <string name="LabelWriteSelectedTags">Написать метку для селектора меток</string>
   <string name="LabelClearCache">Очистить кэш</string>
@@ -382,37 +309,21 @@ $Tag4 - Выбрать метку 4</string>
   <string name="LabelCurrentEvent">Текущие события</string>
   <string name="LabelRemainingCaptures">Выполненые снимки</string>
   <string name="LabelLiveViewRotation">Вращение Live view</string>
-  <string name="LabelAutomaticallyGuiding">Автоматический PHD Guiding перед фото съёмкой</string>
   <string name="LabelAutoRotate">Автоповорот</string>
   <string name="LabelReset">Сброс</string>
   <string name="LabelFocus">Фокус</string>
-  <!--17/11/2013-->
   <string name="LabelAddFakeCamera">Добавить фальшивые камеры</string>
   <string name="LabelBarcode">Штрих-код</string>
   <string name="LabelSendTheLogFile">Отправить журнал</string>
-  <string name="LabelAskSendLogFile">Вы хотите отправить файл журнала для разработчиков ?</string>
-  <string name="LabelSyncCameraDate">Синхронизировать дату и время камеры при подключении</string>
   <string name="LabelShowThumbUpDown">Показать кнопки большого пальца</string>
   <string name="LabelSend">Отправить</string>
-  <string name="LabelLogMessage">Сообщение разработчикам digiCamControl :</string>
-  <string name="LabelLogText">Журнал будет выслан команде разработчиков digiCamcontrol для повышения стабильности работы приложения.</string>
   <string name="LabelFullscreen">Полный экран</string>
   <string name="LabelSelection">Выбор</string>
   <string name="LabelSelectAll">Выбрать всё</string>
   <string name="LabelSelectNone">Отменить выбор</string>
   <string name="LabelSelectLiked">Выбрать понравившиеся</string>
   <string name="LabelSelectUnLiked">Выбрать не понравившиеся</string>
-  <!--19/01/2014-->
-  <!--27/02/2014-->
   <string name="LabelSettingsLiveView">Live view</string>
-  <!--17.05.2014-->
-  <!--//20/08/2014-->
-  <!--20/08/2014-->
-  <!--20/12/2014-->
-  <!--// 11/03/2015-->
   <string name="MenuSession">Сессия</string>
-  <!--// 12/09/2015-->
-  <!--// 19/10/2015-->
-  <!--//30/01/2016-->
-  <!--//26/03/2016-->
+  <string name="LabelRecordVideo">Записать видео</string>
 </resources>

@@ -705,5 +705,6 @@ namespace CameraControl.Core.Translation
         public static string LabelGridColor = "Grid Color";
         public static string LabelWebserverPort = "Webserver Port";
         public static string LabelWebcameraSupport = "Webcamera Support";
+        public static string LabelContrast = "Contrast";
     }
 }

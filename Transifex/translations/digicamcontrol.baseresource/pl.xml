@@ -9,8 +9,8 @@
   <string name="OFF">WYŁ</string>
   <string name="FLASH">Lampa</string>
   <string name="NORMAL_SYNCHRONIZATION">Normalna synchronizacja</string>
-  <string name="LONG_EXP._NR">Długa liczba ekspozycji</string>
-  <string name="HIGH_ISO_NR">Duże czułości ISO</string>
+  <string name="LONG_EXP._NR">Redukcja szumów przy długiej ekspozycji</string>
+  <string name="HIGH_ISO_NR">Redukcja szumów przy wysokim ISO</string>
   <string name="NORMAL">Normalny</string>
   <string name="EXPOSURE_DELAY_MODE">Tryb opóźnionej ekspozycji</string>
   <string name="LOCK">Blokada</string>
@@ -80,7 +80,6 @@
   <string name="SessionAdd">Dodaj</string>
   <string name="SessionEdit">Edytuj</string>
   <string name="SessionDel">Usuń</string>
-  <string name="MainWindowTitle">NCC - Przetłumaczył: Mutrix</string>
   <string name="SettingsWindowTitle">Ustwawienia</string>
   <string name="SessionWindowTitle">Sesja [Dodaj/Usuń]</string>
   <string name="LiveViewWindowTitle">Podgląd na żywo</string>
@@ -110,21 +109,18 @@
   <string name="ButtonStartTimeLapse">Uruchom film</string>
   <string name="ButtonStopTimeLapse">Zatrzymaj film</string>
   <string name="ButtonCreateMovie">Utwórz wideo</string>
-  <string name="ButtonLocateLogFile">Lokalizacja pliku Log</string>
-  <string name="LabelInterfaceLanguage">Jezyk programu:</string>
+  <string name="ButtonLocateLogFile">Lokalizacja pliku dziennika</string>
+  <string name="LabelInterfaceLanguage">Język</string>
   <string name="LabelDisableDriver">Wyłącz natywne sterowniki (nie zalecane)</string>
-  <string name="LabelTheme">Motyw:</string>
+  <string name="LabelTheme">Motyw</string>
   <string name="LabelGeneral">Ogólne</string>
   <string name="LabelPreview">Podgląd</string>
   <string name="LabelPlaySound">Odtwórz dźwięk po zdjęciu</string>
   <string name="LabelAutoPreview">Autopodgląd</string>
-  <string name="LabelPreviewAfterCapture">Podgląd obrazu po zrobieniu na pełnym ekranie</string>
-  <string name="LabelPreviewTime">Czas podglądu w sek:</string>
+  <string name="LabelPreviewTime">Czas podglądu w sekundach</string>
   <string name="LabelPreviewInLIveView">Podgląd obrazu po zrobieniu w trybie podglądu na żywo</string>
-  <string name="LabelLIveViewImageFreeze">Podgląd na żywo zamrożenie obrazu w sek:</string>
-  <string name="LabelRotateImage">Obróć obraz:</string>
+  <string name="LabelRotateImage">Obracaj zdjęcia</string>
   <string name="LabelDontLoadThumbs">Nie ładuj miniturek</string>
-  <string name="LabelFullscrenBack">Tło okna pełnego ekranu:</string>
   <string name="LabelTriggers">Wyzwalacze</string>
   <string name="LabelUseKeybordToTrigger">Użyj klawiatury, aby wyzwolić zdjęcie</string>
   <string name="LabelWebserver">Webserwer</string>
@@ -132,32 +128,19 @@
   <string name="LabelFocusAndLiveview">Fokus i Podgląd na żywo</string>
   <string name="LabelSmallFocusSstep">Mały krok fokusa</string>
   <string name="LabelMediumFocusStep">Średni krok fokusa</string>
-  <string name="LabelLargFocusStep">Duży krok fokusa</string>
   <string name="ReStartToolTip">Musisz ponownie uruchomić aplikację, dla tego, aby zmiany przyniosły efekt</string>
-  <string name="LabelSessonName">Nazwa sesji:</string>
-  <string name="LabelFolder">Folder:</string>
-  <string name="LabelFileNameTemplate">Nazwa pliku szablonu:</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Nazwa sesji
-$C - Licznik 
-$E - Ekspozycja 
-$X - Nazwa aparatu
-$D - Bieżąca data
-$UTime - Sygnatura czasu
-$Type - Typ pliku (Raw|Jpg) 
-$B - Kod kreskowy
-$Tag1 - Zaznaczony tag 1
-$Tag2 - Zaznaczony tag 2
-$Tag3 - Zaznaczony tag 3
-$Tag4 - Zaznaczony tag 4</string>
-  <string name="LabelCounter">Licznik:</string>
-  <string name="LabelUseOriginal">Użyj oryginalnej nazwy pliku danej przez aparat</string>
-  <string name="LabelUseOriginalToolTip">Ta opcja jest współpracuje z sterownika WIA</string>
+  <string name="LabelSessonName">Nazwa sesji</string>
+  <string name="LabelFolder">Folder</string>
+  <string name="LabelFileNameTemplate">Szablon nazwy pliku</string>
+  <string name="LabelCounter">Licznik</string>
+  <string name="LabelUseOriginal">Używaj nazwy pliku nadanej w aparacie</string>
+  <string name="LabelUseOriginalToolTip">Ta opcja nie działa ze sterownikami WIA</string>
   <string name="LabelDontDownloadPhotos">Nie pobieraj zdjęć na PC</string>
   <string name="LabelAlowFolderChange">Umożliwić zmianę folderu przy użyciu przeglądarki zdjęć</string>
   <string name="LabelTags">Tagi</string>
   <string name="LabelManualFocus">Ręczny fokus</string>
   <string name="LabelGrid">Siatka</string>
-  <string name="LabelLvZoomRation">Powiększenie podglądu na żywo</string>
+  <string name="LabelLvZoomRation">Proporcje zoom w trybie Lv</string>
   <string name="LabelFocusStacking">Stosowanie fokusa</string>
   <string name="LabelNoOfPhots">Liczba zdjęć</string>
   <string name="LabelFocusStep">Krok fokusa</string>
@@ -178,13 +161,10 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelWaitTime">Czas oczekiwania (sek)</string>
   <string name="LabelDisableAutofocus">Wyłącz autofokusa</string>
   <string name="LabelConnectedCameras">Podłączone aparaty</string>
-  <string name="LabelPresetName">Nazwa ustawienia:</string>
   <string name="LabelTimeLapse">Film poklatkowy</string>
   <string name="LabelSecondsBetweenShots">Sekund między strzałami</string>
   <string name="LabelNumberOfPhotos">Ilość zdjęć</string>
   <string name="LabelDontAutofocusOnEveryCapture">Brak autofokusa w każdym przechwytywaniu</string>
-  <string name="LabelCaptureInterval">Przedział zrzutu (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Czas trwania wideo (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Ustawienia wideo</string>
   <string name="LabelVideoFormat">Format wideo</string>
   <string name="LabelOutputFile">Plik wynikowy</string>
@@ -192,40 +172,34 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelFillImage">Wypełnij obraz</string>
   <string name="LabelCreateMovie">Utwórz wideo</string>
   <string name="LabelAddVirtualMovingToVideo">Dodaj wirtualny ruch do wideo</string>
-  <string name="LabelMovingSurface">Przenoszenie powierzchni (%):</string>
-  <string name="LabelMovingDirection">Kierunek ruchu:</string>
   <string name="LabelMovingDirectionLeftToRight">Lewa do prawej</string>
   <string name="LabelMovingDirectionRightToLeft">Prawa do lewej</string>
   <string name="LabelMovingDirectionTopToBottom">Góra do dołu</string>
   <string name="LabelMovingDirectionBottomToTop">Dół do góry</string>
   <string name="LabelMovingDirectionLeftTopToRightBottom">Lewa/góra do prawej/dół</string>
   <string name="LabelMovingDirectionRightBottomToLeftTop">Prawa/dół do lewej/góra</string>
-  <string name="LabelImageAlignment">Wyrównanie zdjęcia:</string>
   <string name="LabelImageAlignmentLeftTop">Lewa/Góra</string>
   <string name="LabelImageAlignmentCenter">Środek</string>
   <string name="LabelImageAlignmentRightBottom">Prawa/Dół</string>
   <string name="LabelVideoCodecProblem">Problem kodeka wideo</string>
-  <string name="MsgPhotoTransferBegin">Przesyłanie zdjęć rozpoczęte</string>
+  <string name="MsgPhotoTransferBegin">Początek przesyłania zdjęcia</string>
   <string name="MsgPhotoTransferDone">Przesyłanie zdjęć wykonane</string>
-  <string name="MsgPhotoTransferError">Błąd transferu !\nWiadomość :{0}</string>
+  <string name="MsgPhotoTransferError">Błąd transferu !
+Wiadomość {0}</string>
   <string name="MsgBulbModeNotSupported">Tryb Bulb nie obsługiwany!</string>
   <string name="MsgApplicationUpToDate">Aplikacja jest aktualna!</string>
   <string name="MsgUseSessionEditorTags">Użyj edytora sesji by określić tagi!</string>
   <string name="MsgLastSessionCantBeDeleted">Ostatnia sesja nie może być usunięta</string>
-  <string name="MsgStopTimeLapse">Film poklatkowy nie zakończony! Czy chcesz, zatrzymać film?</string>
-  <string name="MsgInstallXvidCodec">Kodek Xvid nie jest zainstalowany!\nCzy chcesz pobrać i zainstalować go?</string>
-  <string name="MsgDeleteSessionQuestion">Czy chcesz kontynuować usuwanie sesji {0} ?\nŻadne pliki nie zostaną skasowane!</string>
   <string name="MsgBracketingDone">Ekspozycja zrobiona</string>
   <string name="MsgActionInProgress">Działanie w trakcie {0} / {1}</string>
   <string name="MenuFile">Plik</string>
-  <string name="MenuReScan">Skanuj podłączone kamery</string>
+  <string name="MenuReScan">Skanuj podłączone aparaty</string>
   <string name="MenuConnectedCameras">Podłączone kamery</string>
   <string name="MenuExit">Zamknij</string>
   <string name="MenuView">Widok</string>
   <string name="MenuMultipleCamera">Wielokrotne sterowanie aparatu</string>
   <string name="MenuSelectedCameraProperty">Wybrane własności aparatu</string>
   <string name="MenuPresets">Właściwości</string>
-  <string name="MenuPresetsLoad">Ładuj</string>
   <string name="MenuPresetsSave">Zapisz</string>
   <string name="MenuPresetsEdit">Edycja</string>
   <string name="MenuHelp">Pomoc</string>
@@ -234,106 +208,74 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="MenuDonate">Darowizna</string>
   <string name="MenuAbout">O...</string>
   <string name="MenuLayout">Układ</string>
+  <string name="MenuLayoutDefault">Domyślny</string>
   <string name="MenuLayoutNormal">Normalny</string>
   <string name="MenuLayoutGridRight">Prawa siatka</string>
   <string name="MenuLayoutGrid">Siatka</string>
   <string name="MenuProperties">Właściwości</string>
   <string name="MenuUseSelectedCameraPreset">Użyj wybranych ustwień aparatu</string>
-  <!--15/10/2012-->
   <string name="LabelExternalViewerPath">Menu kontekstowe zewnętrznej przeglądarki</string>
   <string name="LabelStayOnTop">Zawsze na wierzchu</string>
-  <!--22/10/2012-->
   <string name="LabelDisplay">Wyświetl</string>
   <string name="LabelMotionDetection">Detekcja ruchu</string>
   <string name="LabelActivateMotionDetection">Aktywuj wykrywanie ruchu</string>
   <string name="LabelCaptureWhenMove">Uchwyć kiedy wykryto ruch</string>
   <string name="LabelThreshold">Próg (%)</string>
   <string name="LabelWaitMoion">Czekaj (sek)</string>
-  <!--25/10/2012-->
   <string name="LabelAutofocusBeforeCapture">Autofocus przed przechwyceniem</string>
-  <!--26/10/2012-->
   <string name="LabelOpacity">Krycie</string>
-  <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Typ detekcji ruchu</string>
   <string name="LabelTwoFramesDifferenceDetector">Detector różnicy dwóch ramek</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Prosty detektor modelowania tła</string>
   <string name="LabelSmallestBlockSize">Najmniejszy rozmiar bloku</string>
   <string name="ButtonHelp">Pomoc</string>
-  <!--31/10/2012-->
   <string name="LabelMenu">Menu</string>
-  <!--03/11/2012-->
   <string name="MenuForum">Forum</string>
-  <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Pobierz kodek Raw </string>
-  <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Błąd uruchomienia nagrywania wideo</string>
+  <string name="LabelErrorRecordMovie">Błąd przy rozpoczynaniu nagrywania</string>
   <string name="LabelNoCardInserted">Karta nie włożona</string>
   <string name="LabelCardError">Błąd karty</string>
   <string name="LabelCardNotFormatted">Karta nie sformatowana</string>
   <string name="LabelNoFreeAreaInCard">Brak wolnego miejsca na karcie</string>
-  <string name="LabelCardBufferNotEmpty">Brak danych, których miejscem przeznaczenia nagrania jest karta w buforze.</string>
-  <string name="LabelPcBufferNotEmpty">Brak danych, których miejscem przeznaczenia nagrania jest PC w buforze.</string>
+  <string name="LabelCardBufferNotEmpty">W buforze są dane do zapisania na karcie</string>
+  <string name="LabelPcBufferNotEmpty">W buforze są dane do zapisania na komputerze</string>
   <string name="LabelBufferNotEmpty">Istnieją dane wideo w buforze.</string>
   <string name="LabelRecordInProgres">W trakcie nagrywania plików wideo</string>
   <string name="LabelCardProtected">Karta zabezpieczona</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Podczas wyświetlania rozszerzonego Podglądu na żywo</string>
-  <string name="LabelWrongLiveViewType">Ustawienie wyboru podglądu na żywo jest na fotografii podglądu na żywo.</string>
   <string name="LabelNotInApplicationMode">Aparat nie jest w trybie aplikacji.</string>
   <string name="ButtonResetSettings">Reset ustawień</string>
-  <!--14/11/2012-->
   <string name="LabelUseExternalViewer">Użyj zewnętrznej przeglądarki</string>
   <string name="LabelExternalPreViewerPath">Ścieżka zewnętrznej przeglądarki</string>
   <string name="LabelExternalPreViewerArgs">Argumenty zewnetrznej przeglądarki</string>
-  <!--18/11/2012-->
   <string name="LabelControl">Kontrola</string>
-  <!--20/11/2012-->
   <string name="LabelExport">Eksportuj</string>
-  <!--21/11/2012-->
   <string name="LabelDownload">Pobierz</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">Pobierz zdjęcia</string>
   <string name="LabelDeleteFilesAfterTransfer">Usuń pliki po przeniesieniu</string>
-  <string name="LabelAskForDelete">Przesłane pliki zostaną usunięte.\nCzy chcesz kontynuować?</string>
-  <!--26/11/2012-->
-  <string name="LabelErrorSetFocusPos">Błąd ustawienia pozycji ostrości</string>
-  <string name="LabelErrorUnableFocus">Brak ostrości</string>
-  <!--28/11/2012-->
+  <string name="LabelErrorUnableFocus">Nie można ustawić ostrości</string>
   <string name="LabelErrorLoadingFileList">Błąd wczytywania listy plików</string>
-  <!--30/11/2012-->
   <string name="LabelTransfer">Transfer</string>
   <string name="LabelTransferItem1">1. Zapisz tylko do komputera</string>
   <string name="LabelTransferItem2">2. Zapisz tylko do kamery</string>
   <string name="LabelTransferItem3">3. Zapisz do komputera i kamery</string>
-  <!--05/12/2012-->
-  <string name="MsgDisabledDrivers">Natywne sterowniki są wyłączone! Czy chcesz je włączyć?</string>
-  <!--14/12/2012-->
   <string name="LabelShowFocusPoints">Pokaż punkty ostrości</string>
   <string name="LabelMainWindow">Okno główne</string>
   <string name="LabelSelect">Wybierz</string>
   <string name="TimeSelectWindowTitle">Wybierz okno</string>
-  <!--16/12/2012-->
   <string name="LabelRotateNone">Brak</string>
   <string name="LabelRotate90">Obróć 90\'</string>
   <string name="LabelRotate180">Obróć 180\'</string>
   <string name="LabelRotate270">Obróć 270\'</string>
-  <string name="LabelLowMemoryUsage">Niskie zużycie pamięci</string>
-  <!--04/01/2013-->
   <string name="LabelRawCodecNotInstalled">Kodek Raw nie jest zainstalowany lub nieznany format pliku</string>
-  <!--05/01/2013-->
   <string name="LabelUseCameraCounter">Użyj licznika kamery zamiast ogólnego licznika</string>
   <string name="LabelResetCounters">Reset liczników</string>
-  <!--07/01/2013-->
   <string name="LabelUnabletoDeleteSession">Nie można usunąć sesji</string>
-  <!--12/01/2013-->
   <string name="LabelWaitingForDevice">Czekam na gotowość urządzenia</string>
   <string name="LabelAdvanced">Zaawansowane</string>
   <string name="LabelUseParellelTransfer">Użyj równoległego transferu plików</string>
-  <!--19/01/2013-->
-  <string name="LabelUnHandledError">Wystąpił błąd aplikacji.\nProszę sprawdzić, czy dane są poprawne i powtórzyć czynność. Jeśli błąd wystąpi ponownie, nie wydaje się być bardziej poważna usterka w aplikacji, i lepiej go zamknąć \n\nBłąd\n\n:. {0}\n\nCzy chcesz kontynuować\n(jeśli przycisk Tak będzie kontynuować swojej pracy? jeśli klikniesz przycisk Nie aplikacja zostanie zamknięta)</string>
   <string name="LabelApplicationError">Błąd aplikacji</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 nie zainstalowany</string>
   <string name="LabelRestartTheApplication">Uruchom ponownie aplikację!</string>
-  <string name="LabelOutOfMemory">Aplikacji zabrakło pamięci. Aplikacja będzie zamknięta!</string>
   <string name="LabelApplicationAlreadyRunning">Aplikacja już działa</string>
   <string name="LabelDeleteSession">Usuń sesje</string>
   <string name="LabelStartCapture">Uruchom przechwytywanie</string>
@@ -342,23 +284,17 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelTimeBetweenShots">Czas pomiędzy zdjęciami</string>
   <string name="LabelDontAutofocus">Bez autofokusa</string>
   <string name="LabelShowUnTranslatedStringIds">Pokaż nie przetłumaczone id ciągów</string>
-  <!--20/01/2013-->
   <string name="LabelUseAsMaster">Użyj jako główny</string>
-  <!--29/01/2013-->
   <string name="LabelCounterIncrementer">Licznik przyrostowy</string>
   <string name="LabelSelected">Wybrany</string>
-  <!--31/01/2013-->
   <string name="LabelNone">Brak</string>
   <string name="LabelRuleOfThirds">Zasada trzech</string>
   <string name="LabelComboGrid">Siatka</string>
   <string name="LabelDiagonal">Przekątna</string>
   <string name="LabelSplit">Podziel</string>
-  <!--13/03/2013-->
   <string name="LabelTools">Narzędzia</string>
-  <!--17/03/2012-->
   <string name="LabelMFError">Aparat jest w trybie ręcznej ostrości MF</string>
   <string name="LabelNotAFSError">Aparat nie jest w trybie ostrości AF-S</string>
-  <!--28/03/2012-->
   <string name="LabelSequenceError">Błąd sekwencji</string>
   <string name="LabelFullyPressedButtonError">Błąd całkowitego wciśnięcia przycisku</string>
   <string name="LabelApertureValueError">Wartość przysłony ustawiana jest za pomocą pierścienia przysłony.</string>
@@ -368,16 +304,13 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelTTLError">Błąd TTL</string>
   <string name="LabelNonCPULEnseError">Obiektyw bez procesora jest zamontowany i tryb ekspozycji nie jest ręczny</string>
   <string name="LabelImageInRAM">Jest obraz, którego nagranie docelowe to SDRAM.</string>
-  <string name="LabelNoCardInsertedError">Miejscem zapisu jest karta lub karta i SDRAM,\n a karta nie jest włożona z uwalnianiem wyłączona bez karty.</string>
   <string name="LabelCommandProcesingError">W trakcie przetwarzania polecenia fotografowania</string>
   <string name="LabelShoutingInProgress">Tryb fotografowania jest efektami.</string>
-  <string name="LabelOverHeatedError">Podglądu na żywo nie można uruchomić, gdy temperatura wzrasta.</string>
   <string name="LabelCardProtectedError">Karta zabezpieczona</string>
   <string name="LabelMirrorUpError">Tryb jest ustawiony na podniesione lustro i operacja podniesienia lustra jest wykonywana.</string>
   <string name="LabelMirrorUpError2">Tryb zwolnienia jest [Podniesienie lustra].</string>
   <string name="LabelDestinationCardError">Miejsce zapisu to karta.</string>
   <string name="LabelLiveViewError">Błąd uruchomienia Live view</string>
-  <!--07/05/2013-->
   <string name="LabelDevices">Urządzenia</string>
   <string name="LabelExternalShutterRelease">Zewnętrzny spust migawki</string>
   <string name="LabelConfigName">Nazwa konfiguracja</string>
@@ -397,11 +330,9 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelBrightness">Jasność</string>
   <string name="LabelUseExternalShutterRelease">Użyj zewnętrznego spustu migawki</string>
   <string name="LabelDownloadJpgOnly">Pobierz plik JPG tylko</string>
-  <string name="LabelDownloadJpgOnlyToolTip">Jeśli przechwytywanie odbywa się tylko w formacie RAW + JPEG, pliki pobierane są tylko JPG</string>
   <string name="LabelSetCounters">Ustaw liczniki</string>
   <string name="LabelEdgeDetection">Wykrywanie krawędzi</string>
   <string name="LabelLeadingZeros">Licznik początkowych zer</string>
-  <!--04/07/2013-->
   <string name="LabelShowFocusRect">Pokaż ramkę aktywności</string>
   <string name="LabelEasyLiveViewControl">Łatwe sterowanie podglądem na żywo</string>
   <string name="LabelExif">Exif</string>
@@ -410,7 +341,6 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelSet">Ustaw</string>
   <string name="LabelTagSelector">Selektor tagu</string>
   <string name="LabelComment">Komentarz</string>
-  <string name="LabelWriteComments">Zapisz komentarze/tagi w pobranym pliku obrazu</string>
   <string name="LabelStayOnTop2">Zawsze na wierzchu</string>
   <string name="LabelWriteSelectedTags">Zapisz tagi z selektora tagu</string>
   <string name="LabelClearCache">Wyczyść cache</string>
@@ -423,36 +353,29 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelCurrentEvent">Bieżące zdarzenie</string>
   <string name="LabelRemainingCaptures">Pozostało zdjęć</string>
   <string name="LabelLiveViewRotation">Obrót Podglądu na żywo</string>
-  <string name="LabelAutomaticallyGuiding">Automatycznie po zdjęciu przewodnik PHD przechwycenia</string>
   <string name="LabelAutoRotate">Auto obrót</string>
   <string name="LabelReset">Reset</string>
   <string name="LabelFocus">Ostrzenie</string>
-  <!--17/11/2013-->
   <string name="LabelAddFakeCamera">Dodaj fałszywy aparat</string>
   <string name="LabelBarcode">Kod kreskowy</string>
-  <string name="LabelSendTheLogFile">Wyślij plik log</string>
-  <string name="LabelAskSendLogFile">Czy chcesz wysłać plik dziennika do deweloperów?</string>
-  <string name="LabelSyncCameraDate">Synchronizacja czasu/daty z podłączonym aparatem</string>
+  <string name="LabelSendTheLogFile">Wyślij plik dziennika</string>
+  <string name="LabelAskSendLogFile">Czy wysłać plik dziennika do programistów?</string>
   <string name="LabelShowThumbUpDown">Pokaż Przycisk miniaturek Góra/Dół</string>
   <string name="LabelSend">Wyślij</string>
-  <string name="LabelLogMessage">Wiadomość dla deweloperów digiCamControl:</string>
-  <string name="LabelLogText">Plik dziennika zostanie wysłany do zespołu deweloperskiego digiCamcontrol dla poprawy stabilności aplikacji.</string>
+  <string name="LabelLogText">Plik dziennika zostanie wysłany do programisty digiCamcontrol w celu poprawienia stabilności aplikacji.</string>
   <string name="LabelFullscreen">Pełny Ekran</string>
   <string name="LabelSelection">Zaznaczenie</string>
   <string name="LabelSelectAll">Zaznacz wszystko</string>
   <string name="LabelSelectNone">Brak zaznaczenia</string>
   <string name="LabelSelectLiked">Zaznacz Polubione</string>
   <string name="LabelSelectUnLiked">Zaznacz niepolubione</string>
-  <!--19/01/2014-->
   <string name="LabelError">Błąd</string>
   <string name="LabelChangelog">Lista zmian</string>
-  <!--27/02/2014-->
   <string name="LabelAllowOverWrite">Pozwól na zastąpienie</string>
   <string name="LabelShowRuler">Pokaż linijkę</string>
   <string name="LabelAutoPreviewJpgOnly">Auto podgląd JPG tylko</string>
   <string name="LabelSettingsLiveView">Podgląd na żywo</string>
   <string name="LabelHostMode">Tryb hosta</string>
-  <!--17.05.2014-->
   <string name="LabelClear">Wyczyść</string>
   <string name="LabelHistogram">Histogram</string>
   <string name="LabelMetadata">Metadane</string>
@@ -471,8 +394,6 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelBackUp">Kopia zdjęć</string>
   <string name="LabelVerifyPreset">Zweryfikuj ustawienie</string>
   <string name="LabelRefreshSession">Odśwież listę plików</string>
-  <string name="LabelErrorEmail">Twój adres e-mail (jeśli chcesz uzyskać informacje zwrotne)</string>
-  <!--//20/08/2014-->
   <string name="LabelCaptureName">Nazwa przechwytywania </string>
   <string name="LabelSeries">Serie</string>
   <string name="LabelAdvancedProperties">Właściwości zaawansowane</string>
@@ -485,19 +406,18 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelScaling">Skalowanie</string>
   <string name="LabelHorizontal">Poziomy</string>
   <string name="LabelVertical">Pionowy</string>
-  <!--20/08/2014-->
   <string name="LabelErrorAutoFocusLock">Ostrość jest zablokowana, odblokuj najpierw autofokus</string>
   <string name="LabelOverlayTransparency">Przezroczystość</string>
   <string name="LabelOverlayUseLastCaptured">Użyj ostatniego wykonania</string>
-  <string name="LabelMinimizeToTryIcon">Minimalizuj do tray</string>
+  <string name="LabelMinimizeToTryIcon">Minimalizuj do ikony zasobnika</string>
   <string name="LabelStartMinimized">Uruchom zminimalizowany</string>
-  <string name="LabelStartupWithWindows">Uruchom przy starcie windowsa</string>
+  <string name="LabelStartupWithWindows">Uruchom przy starcie systemu Windows</string>
   <string name="LabelSelectSeries">Wybierz zdjęcia w tej samej serii</string>
   <string name="LabelCaptureDelay">Opóźnienie wykonania</string>
-  <string name="LabelAutoExportPlugins">Auto eksportuj wtyczki</string>
+  <string name="LabelAutoExportPlugins">Wtyczki automatycznego eksportowania</string>
   <string name="LabelAddPlugin">Dodaj wtyczkę</string>
   <string name="LabelErrorSetFolder">Błąd ustawienia katalogu</string>
-  <string name="LabelMessagesLog">Wiadomość Log</string>
+  <string name="LabelMessagesLog">Dziennik komunikatów</string>
   <string name="LabelRefreshCameraList">Odśwież listę aparatów</string>
   <string name="LabelSortOrder">Sortowanie po</string>
   <string name="LabelSaveOrder">Zapisz kolejność sortowania</string>
@@ -510,11 +430,9 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelRotate">Obróć</string>
   <string name="LabelRepeatImages">Powtórz zdjęcie</string>
   <string name="LabelWaitBetweenSteps">Poczekaj pomiędzy krokami (ms)</string>
-  <string name="LabelShowSecondary ">Pokaż na drugim monitorze</string>
-  <!--20/12/2014-->
+  <string name="LabelShowSecondary">Pokaż na dodatkowym monitorze</string>
   <string name="LabelKeyboardTrigger">Klawiszowy wyzwalacz</string>
-  <string name="LabelNoProccesing">Brak przetwarzania</string>
-  <string name="LabelNoProccesingTooltip">Większość funkcjonalności jest wyłączone</string>
+  <string name="LabelNoProccesing">Bez przetwarzania</string>
   <string name="LabelSendUsage">Automatyczne wysyłanie statystyk użytkowania</string>
   <string name="LabelSheduleStart">Uruchom harmonogram</string>
   <string name="LabelSheduleStop">Zatrzymaj harmonogram</string>
@@ -535,8 +453,8 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelTimeLapseStop">Zatrzymaj</string>
   <string name="LabelTimeLapseStopPhotoCount"> Przelicz po przechwyceniu</string>
   <string name="LabelTimeLapseWaitBetweenCaptures">Czas oczekiwania pomiędzy zdjęciami (s)</string>
-  <string name="LabelTimeLapseCapture">Przechwytywanie z wybranym aparatem</string>
-  <string name="LabelTimeLapseCaptureAll">Przechwytywanie z wszystkimi aparatami</string>
+  <string name="LabelTimeLapseCapture">Zrób zdjęcie wybranym aparatem</string>
+  <string name="LabelTimeLapseCaptureAll">Zrób zdjęcia wszystkimi aparatami</string>
   <string name="LabelTimeLapseCaptureScript">Wykonaj skrypt</string>
   <string name="LabelTimeLapseScriptFile">Plik skryptu</string>
   <string name="LabelBrowse">Przeglądaj</string>
@@ -552,11 +470,11 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelShowInExplorer">Pokaż w explorerze </string>
   <string name="LabelOpenInExternalViewer">Otwórz w zewnętrznej przeglądarce</string>
   <string name="LabelRestoreFromBackup">Przywróć z kopii</string>
-  <!--// 11/03/2015-->
   <string name="LabelAllowWebCommands">Pozwól na interakcję za pośrednictwem WWW</string>
   <string name="LabelCurrentMotion">Detekcja ruchu</string>
   <string name="LabelStartupScript">Wykonaj skrypt przy uruchomieniu</string>
   <string name="LabelPublicWebserver">Zezwól na publiczny dostęp</string>
+  <string name="LabelFolderSelector">Wybór katalogu</string>
   <string name="LabelReloadOnFolderChange">Przeładuj pliki przy zmianach katalogu</string>
   <string name="MenuSession">Sesja</string>
   <string name="MenuCamera">Aparat</string>
@@ -577,7 +495,13 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="MenuExportSession">Eksportuj sesję...</string>
   <string name="MenuImportSession">Importuj sesję...</string>
   <string name="LabelFullSpeed">Pełna prędkość</string>
-  <!--// 12/09/2015-->
+  <string name="LabelPreviewWindows">Okno podglądu</string>
+  <string name="LabelOriginal">Oryginalny</string>
+  <string name="LabelPluginProperties">Właściwości</string>
+  <string name="LabelPluginTransformPlugins">Wtyczki przekształceń</string>
+  <string name="LabelConfigurePlugin">Konfiguruj wtyczkę</string>
+  <string name="LabelBracketingMode">Tryb bracketingu</string>
+  <string name="LabelIsoBracketing">Bracketing ISO</string>
   <string name="LabelBracketingLow">Niska wartość</string>
   <string name="LabelBracketingHigh">Wysoka wartość</string>
   <string name="LabelBracketingNumberOfShots">Liczba zdjęć</string>
@@ -591,16 +515,13 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelShowActiveArea">Pokaż aktywne pole</string>
   <string name="LabelSetArea">Ustaw</string>
   <string name="LabelDoneArea">Zrobione</string>
-  <string name="LabelRotateCounterclockwise">Obróć w lewo</string>
   <string name="LabelRotateClockwise">Obróć w prawo</string>
   <string name="LabelSaveJpg">Zapisz jako JPG</string>
   <string name="LabelPageWidth">Szerokość strony</string>
   <string name="LabelPageHeigh">Wysokość strony</string>
   <string name="LabelFill">Wypełnij</string>
-  <!--// 19/10/2015-->
   <string name="LabelApplyToImage">Zastosuj do wybranego zdjęcia</string>
   <string name="LabelCaptureCount">Licznik przechwytywania</string>
-  <string name="LabelAutoFocusBeforCapture">Wyostrz przed zrobieniem zdjęcia</string>
   <string name="LabelAskSavePath">Zapytaj o ścieżkę zapisu pliku</string>
   <string name="LabelSaveLiveviewWindow">Zapisz położenie okna Live view</string>
   <string name="LabelShowFullscreenControls">Pokaż sterowanie w oknie pełnego ekranu</string>
@@ -608,6 +529,29 @@ $Tag4 - Zaznaczony tag 4</string>
   <string name="LabelRefresh">Odśwież</string>
   <string name="LabelOverview">Przegląd</string>
   <string name="LabelItems">Przedmioty</string>
-  <!--//30/01/2016-->
-  <!--//26/03/2016-->
+  <string name="LabelDownloadThumb">Pobierz miniaturkę tylko</string>
+  <string name="LabelDeleteFileAfterTransfer">Usuń plik po wysłaniu</string>
+  <string name="LabelHideTrayNotifications">Ukryj ikonę powiadomień tray</string>
+  <string name="LabelConditions">Warunki</string>
+  <string name="LabelVariable">Zmienna</string>
+  <string name="LabelCondition">Stan</string>
+  <string name="LabelOperator">Operator</string>
+  <string name="LabelValue">Wartość</string>
+  <string name="LabelDelete">Usuń</string>
+  <string name="LabelDisableHardwareAcceleratione">Wyłącz sprzętową akcelerację</string>
+  <string name="LabelDisabled">Wyłączony</string>
+  <string name="LabelCapturePhoto">Zrzut zdjęcia</string>
+  <string name="LabelRecordVideo">Nagraj wideo</string>
+  <string name="LabelVideoLength">Długość wideo</string>
+  <string name="LabelRestore">Przywróć</string>
+  <string name="LabelTrayMessage">Aplikacja została zminimalizowana
+ Kliknij dwukrotnie, aby przywrócić!</string>
+  <string name="LabelExecuteAfterTransfer">Uruchom po przesłaniu pliku</string>
+  <string name="LabelInvert">Odwróć</string>
+  <string name="LabelClosePreview">Zamknij podgląd</string>
+  <string name="LabelReload">Przeładuj</string>
+  <string name="LabelSeriesAsIndex">Zapisz indeks jako serię</string>
+  <string name="LabelOpenLightroom">Otwórz pliki w LIghtroom</string>
+  <string name="LabelOpenPhotoshop">Otwórz pliki w Photoshop</string>
+  <string name="LabelPasswordOnClose">Zapytaj o hasło na zakończenie</string>
 </resources>

@@ -7,7 +7,7 @@
   <string name="AUTO_ISO">Auto Iso</string>
   <string name="ON">AAN</string>
   <string name="OFF">UIT</string>
-  <string name="FLASH">Flitser</string>
+  <string name="FLASH">Flits</string>
   <string name="NORMAL_SYNCHRONIZATION">Normale synchronisatie</string>
   <string name="LONG_EXP._NR">Lang exp. NR</string>
   <string name="HIGH_ISO_NR">Hoog ISO NR</string>
@@ -79,7 +79,6 @@
   <string name="SessionAdd">Toevoegen</string>
   <string name="SessionEdit">Bewerken</string>
   <string name="SessionDel">Verwijder</string>
-  <string name="MainWindowTitle">NCC - Vertaald</string>
   <string name="SettingsWindowTitle">Instellingen</string>
   <string name="SessionWindowTitle">Sessie  [toevoegen/bewerken]</string>
   <string name="LiveViewWindowTitle">Livebeeld</string>
@@ -110,20 +109,16 @@
   <string name="ButtonStopTimeLapse">Stop tijd opnamen</string>
   <string name="ButtonCreateMovie">Creëer video</string>
   <string name="ButtonLocateLogFile">Lokaliseren log-bestand</string>
-  <string name="LabelInterfaceLanguage">Taalinstellingen</string>
+  <string name="LabelInterfaceLanguage">Interface taal</string>
   <string name="LabelDisableDriver">Schakel de standaard driver uit (niet aanbevolen)</string>
-  <string name="LabelTheme">Thema:</string>
+  <string name="LabelTheme">Thema</string>
   <string name="LabelGeneral">Algemeen</string>
   <string name="LabelPreview">Voorbeeld</string>
   <string name="LabelPlaySound">Geluid afspelen na opname</string>
   <string name="LabelAutoPreview">Automatisch voorbeeld</string>
-  <string name="LabelPreviewAfterCapture">Voorbeeld weergeven op volledig scherm</string>
-  <string name="LabelPreviewTime">Voorbeeld tijd in sec:</string>
   <string name="LabelPreviewInLIveView">Voobeeld afbeelding na opnamen in live beeld</string>
-  <string name="LabelLIveViewImageFreeze">Live beeld bevriezen in sec:</string>
-  <string name="LabelRotateImage">Afbeelding roteren:</string>
+  <string name="LabelRotateImage">Beeld roteren</string>
   <string name="LabelDontLoadThumbs">Geen miniaturen laden</string>
-  <string name="LabelFullscrenBack">Achtergrond voor volledig scherm:</string>
   <string name="LabelTriggers">Triggers</string>
   <string name="LabelUseKeybordToTrigger">Gebruik toetsenbord als trigger bij het maken van foto</string>
   <string name="LabelWebserver">Webserver</string>
@@ -131,31 +126,14 @@
   <string name="LabelFocusAndLiveview">Scherpstellen en live beeld</string>
   <string name="LabelSmallFocusSstep">Kleine scherpstel stap</string>
   <string name="LabelMediumFocusStep">Gemiddelde scherpstel stap</string>
-  <string name="LabelLargFocusStep">Grote scherpstel stap</string>
   <string name="ReStartToolTip">U moet de toepassing afsluiten en opnieuw opstarten om deze wijzigingen door te voeren.</string>
-  <string name="LabelSessonName">Sessie naam: </string>
-  <string name="LabelFolder">Map:</string>
-  <string name="LabelFileNameTemplate">Bestandsnaam Template:</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Sessie naam
-$C - Teller
-$E - Belichtings correctie
-$X - Camera naam
-$D - Actuele datum
-$UTime - Unix tijdnotatie
-$Type - Bestandstype (RAW|Jpg)
-$B - Streepjescode
-$Tag1 - Geselecteerde label 1
-$Tag2 - Geselecteerde label 2
-$Tag3 - Geselecteerde tabel 3
-$Tag4 - Geselecteerde tabel 4</string>
-  <string name="LabelCounter">Teller:</string>
-  <string name="LabelUseOriginal">Gebruik de bestandsnaam die is gegeven door de camera</string>
-  <string name="LabelUseOriginalToolTip">De optie werkt niet via de WIA driver</string>
+  <string name="LabelSessonName">Sessie naam</string>
+  <string name="LabelFolder">Map</string>
+  <string name="LabelCounter">Teller</string>
   <string name="LabelDontDownloadPhotos">Geen foto\'s verzenden naar de PC</string>
   <string name="LabelTags">Tags</string>
   <string name="LabelManualFocus">Handmatig scherpstellen</string>
   <string name="LabelGrid">Raster</string>
-  <string name="LabelLvZoomRation">Lv zoom ratio</string>
   <string name="LabelFocusStacking">Focus Stacking</string>
   <string name="LabelFocusStep">Scherpstel stap</string>
   <string name="LabelLuminosity">Helderheid</string>
@@ -175,13 +153,10 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelWaitTime">Wachttijd (sec)</string>
   <string name="LabelDisableAutofocus">Automatisch scherpstellen uitschakelen</string>
   <string name="LabelConnectedCameras">Aangesloten camera\'s</string>
-  <string name="LabelPresetName">Naam instelling</string>
   <string name="LabelTimeLapse">Time-Lapse</string>
   <string name="LabelSecondsBetweenShots">Seconden tussen opnamen</string>
   <string name="LabelNumberOfPhotos">Aantal foto\'s</string>
   <string name="LabelDontAutofocusOnEveryCapture">Niet automatisch scherpstellen tussen opnamen</string>
-  <string name="LabelCaptureInterval">Opname interval (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Video lengte (UU:MM:SS)</string>
   <string name="LabelMovieSettings">Video instellingen</string>
   <string name="LabelVideoFormat">Video formaat</string>
   <string name="LabelOutputFile">Output bestand</string>
@@ -189,27 +164,21 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelFillImage">Afbeelding vullen</string>
   <string name="LabelCreateMovie">Creëer video</string>
   <string name="LabelAddVirtualMovingToVideo">Virtuele beweging toevoegen aan video</string>
-  <string name="LabelMovingSurface">Oppervlak bewegen (%):</string>
-  <string name="LabelMovingDirection">Bewegingsrichting</string>
   <string name="LabelMovingDirectionLeftToRight">Links naar rechts</string>
   <string name="LabelMovingDirectionRightToLeft">Rechts naar links</string>
   <string name="LabelMovingDirectionTopToBottom">Boven naar beneden</string>
   <string name="LabelMovingDirectionBottomToTop">Beneden naar boven</string>
   <string name="LabelMovingDirectionLeftTopToRightBottom">Linksboven naar rechtsonder</string>
   <string name="LabelMovingDirectionRightBottomToLeftTop">Rechtsonder naar linksboven</string>
-  <string name="LabelImageAlignment">Afbeeldingsrichting</string>
   <string name="LabelImageAlignmentLeftTop">Links/boven</string>
   <string name="LabelImageAlignmentCenter">Midden</string>
   <string name="LabelImageAlignmentRightBottom">Rechts/Onder</string>
   <string name="LabelVideoCodecProblem">Video codec probleem</string>
-  <string name="MsgPhotoTransferBegin">Begin foto overdracht</string>
   <string name="MsgPhotoTransferDone">Foto overdracht uitgevoerd</string>
   <string name="MsgBulbModeNotSupported">Bulb-modus niet ondersteund!</string>
   <string name="MsgApplicationUpToDate">Dit programma is bijgewerkt!</string>
   <string name="MsgUseSessionEditorTags">Gebruik de sessie editor om de tags te definiëren!</string>
   <string name="MsgLastSessionCantBeDeleted">De laatste sessie kan niet verwijderd worden.</string>
-  <string name="MsgStopTimeLapse">De time-lapse is niet beëindigd! Wilt u de time-lapse afbreken?</string>
-  <string name="MsgInstallXvidCodec">De Xvid codec is niet geïnstalleerd !\nWilt u de codec downloaden en installeren?</string>
   <string name="MsgBracketingDone">Bracketing uitgevoerd</string>
   <string name="MsgActionInProgress">Actie wordt uitgevoerd {0}/{1}</string>
   <string name="MenuFile">_Bestand</string>
@@ -220,7 +189,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="MenuMultipleCamera">Meervoudige camera besturing</string>
   <string name="MenuSelectedCameraProperty">Geselecteerde camera eigenschap</string>
   <string name="MenuPresets">Instellingen</string>
-  <string name="MenuPresetsLoad">Laden</string>
   <string name="MenuPresetsSave">Opslaan</string>
   <string name="MenuPresetsEdit">Bewerken</string>
   <string name="MenuHelp">_Help</string>
@@ -229,100 +197,69 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="MenuDonate">Doneer</string>
   <string name="MenuAbout">Over</string>
   <string name="MenuLayout">Layout</string>
+  <string name="MenuLayoutDefault">Standaard</string>
   <string name="MenuLayoutNormal">Normaal</string>
   <string name="MenuLayoutGridRight">Raster rechts</string>
   <string name="MenuLayoutGrid">Grid</string>
   <string name="MenuProperties">Eigenschappen</string>
   <string name="MenuUseSelectedCameraPreset">Gebruik geselecteerde camera preset</string>
-  <!--15/10/2012-->
   <string name="LabelExternalViewerPath">Context-menu externe viewer</string>
   <string name="LabelStayOnTop">Altijd bovenaan</string>
-  <!--22/10/2012-->
   <string name="LabelDisplay">Toon</string>
   <string name="LabelMotionDetection">Bewegingsdetectie</string>
   <string name="LabelActivateMotionDetection">Activeer bewegingsdetectie</string>
   <string name="LabelCaptureWhenMove">Opname bij bewegingsdetectie</string>
   <string name="LabelThreshold">Drempelwaarde (%)</string>
   <string name="LabelWaitMoion">Wacht (sec)</string>
-  <!--25/10/2012-->
   <string name="LabelAutofocusBeforeCapture">Automatisch scherpstellen voor opname</string>
-  <!--26/10/2012-->
   <string name="LabelOpacity">Opaciteit</string>
-  <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Bewegingsdetectie type</string>
   <string name="LabelTwoFramesDifferenceDetector">Twee-Frame verschil-detector</string>
   <string name="LabelSmallestBlockSize">Kleinste datablok grootte</string>
   <string name="ButtonHelp">Help</string>
-  <!--31/10/2012-->
   <string name="LabelMenu">Menu</string>
-  <!--03/11/2012-->
   <string name="MenuForum">Forum</string>
-  <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Verkrijg de raw codec</string>
-  <!--08/11/2012-->
   <string name="LabelNoCardInserted">Geen Geheugenkaart aanwezig</string>
   <string name="LabelCardError">Geheugenkaart Fout</string>
   <string name="LabelCardNotFormatted">Geheugenkaart niet geformatteerd</string>
-  <string name="LabelNoFreeAreaInCard">Geen vrije ruimte op geheugenkaart</string>
-  <string name="LabelCardBufferNotEmpty">Er is geen data in de buffer die weggeschreven gaat worden in een geheugenkaart.</string>
-  <string name="LabelPcBufferNotEmpty">Er is geen data in de buffer dat weggeschreven gaat worden in het PC geheugen.</string>
   <string name="LabelCardProtected">Geheugenkaart beschermd</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Tijdens vergroten van het Live-view venster</string>
-  <string name="LabelWrongLiveViewType">De set Live-view selector is in de Live-view fotografie.</string>
   <string name="LabelNotInApplicationMode">De camera is niet in de applicatie mode.</string>
   <string name="ButtonResetSettings">Instellingen resetten</string>
-  <!--14/11/2012-->
   <string name="LabelUseExternalViewer">Gebruik externe viewer</string>
   <string name="LabelExternalPreViewerPath">Externe viewer bestandslokatie</string>
   <string name="LabelExternalPreViewerArgs">Exterene viewer argumenten</string>
-  <!--18/11/2012-->
   <string name="LabelControl">Besturing</string>
-  <!--20/11/2012-->
   <string name="LabelExport">Exporteer</string>
-  <!--21/11/2012-->
   <string name="LabelDownload">Download</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">Download foto\'s</string>
   <string name="LabelDeleteFilesAfterTransfer">Verwijder bestanden na overdracht</string>
-  <!--26/11/2012-->
-  <string name="LabelErrorSetFocusPos">Fout bij instelling focus positie</string>
-  <string name="LabelErrorUnableFocus">Scherpstellen niet mogelijk</string>
-  <!--28/11/2012-->
   <string name="LabelErrorLoadingFileList">Fout bij laden bestandslijst</string>
-  <!--30/11/2012-->
   <string name="LabelTransfer">Transfer</string>
   <string name="LabelTransferItem1">1.Opslaan enkel op PC</string>
   <string name="LabelTransferItem2">2.Opslaan enkel op camera</string>
   <string name="LabelTransferItem3">3.Opslaan op PC en camera</string>
-  <!--05/12/2012-->
-  <string name="MsgDisabledDrivers">Native drivers zijn uitgeschakeld! Wilt U dat ze worden ingeschakeld?</string>
-  <!--14/12/2012-->
   <string name="LabelShowFocusPoints">Toon focuspunten</string>
   <string name="LabelMainWindow">Hoofdvenster</string>
   <string name="LabelSelect">Selecteer</string>
   <string name="TimeSelectWindowTitle">Selecteer venster</string>
-  <!--16/12/2012-->
   <string name="LabelRotateNone">Geen</string>
   <string name="LabelRotate90">Roteer 90</string>
   <string name="LabelRotate180">Roteer 180</string>
   <string name="LabelRotate270">Roteer 270</string>
-  <string name="LabelLowMemoryUsage">Laag geheugengebruik</string>
-  <!--04/01/2013-->
   <string name="LabelRawCodecNotInstalled">Raw codec niet geïnstalleerd  of onbekend bestandsformaat</string>
-  <!--05/01/2013-->
   <string name="LabelUseCameraCounter">Gebruik de camera-teller in plaats van de generieke teller</string>
   <string name="LabelResetCounters">Reset teller</string>
-  <!--07/01/2013-->
   <string name="LabelUnabletoDeleteSession">Kan sessie niet verwijderen</string>
-  <!--12/01/2013-->
   <string name="LabelWaitingForDevice">Wachten op het beschikbaar zijn van het apparaat</string>
   <string name="LabelAdvanced">Geavanceerd</string>
   <string name="LabelUseParellelTransfer">Gebruik parallele bestandsoverdracht</string>
-  <!--19/01/2013-->
   <string name="LabelApplicationError">Applicatie fout</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 is niet geïnstalleerd</string>
   <string name="LabelRestartTheApplication">Herstart het programma!</string>
-  <string name="LabelApplicationAlreadyRunning">Toepassing reeds geopend</string>
+  <string name="LabelOutOfMemory">Het programma heeft niet genoeg geheugen en zal afsluiten!</string>
+  <string name="LabelApplicationAlreadyRunning">Programma reeds geopend</string>
   <string name="LabelDeleteSession">Verwijder sessie</string>
   <string name="LabelStartCapture">Start opname</string>
   <string name="LabelStopCapture">Stop opname</string>
@@ -330,23 +267,17 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelTimeBetweenShots">Tijd tussen de verschillende opnames</string>
   <string name="LabelDontAutofocus">Geen autofocus</string>
   <string name="LabelShowUnTranslatedStringIds">Geef onvertaalde string ids weer</string>
-  <!--20/01/2013-->
   <string name="LabelUseAsMaster">Gebruik als master</string>
-  <!--29/01/2013-->
   <string name="LabelCounterIncrementer">Marge waarmee de bestandsnummering stapsgewijs wordt verhoogd.</string>
   <string name="LabelSelected">Geselecteerd</string>
-  <!--31/01/2013-->
   <string name="LabelNone">Geen</string>
   <string name="LabelRuleOfThirds">Regel van derden</string>
   <string name="LabelComboGrid">Grid</string>
   <string name="LabelDiagonal">Diagonaal</string>
   <string name="LabelSplit">Splis</string>
-  <!--13/03/2013-->
   <string name="LabelTools">Gereedschappen</string>
-  <!--17/03/2012-->
   <string name="LabelMFError">Camera is in handmatige focus mode</string>
   <string name="LabelNotAFSError">Camera is in Auto-Focus mode</string>
-  <!--28/03/2012-->
   <string name="LabelSequenceError">Fout in de sequentie.</string>
   <string name="LabelFullyPressedButtonError">Fout: Druk de ontspanknop helemaal in.</string>
   <string name="LabelApertureValueError">De diafragmawaarde wordt ingesteld met de diafragmaring van het objectief.</string>
@@ -358,12 +289,10 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelImageInRAM">Er is een afbeelding met de opnamebestemming SDRAM.</string>
   <string name="LabelCommandProcesingError">Tijdens de verwerking van het opnamecommando</string>
   <string name="LabelShoutingInProgress">De programmakeuze is EFFECTEN.</string>
-  <string name="LabelOverHeatedError">De Livebeeld modus kan niet gebruikt worden bij te hoge temperaturen.</string>
   <string name="LabelCardProtectedError">Gegevens op Geheugenkaart zijn beveiligd.</string>
   <string name="LabelMirrorUpError">De camera is ingesteld op Spiegel-omhoog en de spiegel-omhoog modus wordt uitgevoerd.</string>
   <string name="LabelMirrorUpError2">De opname stand is [Mirror-up]  </string>
   <string name="LabelDestinationCardError">De opnamebestemming is de geheugenkaart.</string>
-  <!--07/05/2013-->
   <string name="LabelDevices">Apparaten</string>
   <string name="LabelExternalShutterRelease">Vanaf afstand bediende ontspanner.</string>
   <string name="LabelConfigName">configuratienaam</string>
@@ -374,6 +303,7 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelNoExternalDeviceSelected">Geen extern apparaat is geselecteerd</string>
   <string name="LabelScript">Draaiboek</string>
   <string name="LabelStartScript">Start draaiboek</string>
+  <string name="LabelStopScript">Stop Script</string>
   <string name="LabelDeviceSettings">Apparaatinstellingen</string>
   <string name="LabelAvailableDevices">Beschikbare apparaten</string>
   <string name="LabelCommands">Opdrachten</string>
@@ -382,11 +312,9 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelBrightness">Helderheid</string>
   <string name="LabelUseExternalShutterRelease">Gebruik afstandsbediening ontspanner.</string>
   <string name="LabelDownloadJpgOnly">Download alleen Jpg file</string>
-  <string name="LabelDownloadJpgOnlyToolTip">Als opname gemaakt is met JPG + RAW worden alleen de JPG bestanden gedownload</string>
   <string name="LabelSetCounters">Stel bestandsnummering in.</string>
   <string name="LabelEdgeDetection">Edge detectie</string>
   <string name="LabelLeadingZeros">Voorloopnullen in teller</string>
-  <!--04/07/2013-->
   <string name="LabelShowFocusRect">Focus rechthoek weergeven</string>
   <string name="LabelExif">Extra Informatie Foto (Metagegevens)</string>
   <string name="LabelImageProperties">Eigenschappen Afbeelding</string>
@@ -394,7 +322,6 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelSet">Instellen</string>
   <string name="LabelTagSelector">Label selector</string>
   <string name="LabelComment">Opmerking</string>
-  <string name="LabelWriteComments">Schrijf opmerkingen/labels in gedownload afbeeldingsbestand</string>
   <string name="LabelStayOnTop2">Blijf bovenaan</string>
   <string name="LabelWriteSelectedTags">Neem labels over van selector</string>
   <string name="LabelClearCache">Wis tussengeheugen</string>
@@ -408,34 +335,48 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelAutoRotate">Auto rotatie</string>
   <string name="LabelReset">Resetten</string>
   <string name="LabelFocus">Focus</string>
-  <!--17/11/2013-->
+  <string name="LabelAddFakeCamera">Nep camera toevoegen</string>
   <string name="LabelBarcode">Barcode</string>
   <string name="LabelSendTheLogFile">Stuur logboekbestand</string>
-  <string name="LabelAskSendLogFile">Wilt u het logboekbestand naar de ontwikkelaars sturen ?</string>
-  <string name="LabelSyncCameraDate">Synchroniseer camera datum/tijd op aangesloten camera</string>
   <string name="LabelShowThumbUpDown">Toon miniaturen op/neer knoppen.</string>
   <string name="LabelSend">Zenden</string>
-  <string name="LabelLogMessage">Bericht aan de ontwikkelaars van digiCamControl :</string>
-  <string name="LabelLogText">Het logboekbestand zal naar het digiCamControl ontwikkelingsteam gezonden worden om de toepassingsstabiliteit te verbeteren.</string>
   <string name="LabelFullscreen">Volledig scherm</string>
   <string name="LabelSelection">Selectie</string>
   <string name="LabelSelectAll">Selecteer Alles</string>
   <string name="LabelSelectNone">Niets Selecteren</string>
   <string name="LabelSelectLiked">Selecteer Liked</string>
   <string name="LabelSelectUnLiked">Selecteer Unliked</string>
-  <!--19/01/2014-->
   <string name="LabelError">Fout</string>
   <string name="LabelChangelog">Wijzigingslog</string>
-  <!--27/02/2014-->
   <string name="LabelAllowOverWrite">Overschrijven toestaan</string>
   <string name="LabelShowRuler">Toon liniaal</string>
   <string name="LabelSettingsLiveView">Livebeeld</string>
-  <!--17.05.2014-->
   <string name="LabelClear">Wissen</string>
   <string name="LabelHistogram">Histogram</string>
-  <!--//20/08/2014-->
-  <!--20/08/2014-->
-  <!--20/12/2014-->
+  <string name="LabelPlay">Afspelen</string>
+  <string name="LabelPause">Pauzeren</string>
+  <string name="LabelProgress">Voortgang</string>
+  <string name="LabelPlayVideo">Video afspelen</string>
+  <string name="LabelBackUpFolder">Backup map</string>
+  <string name="LabelBackUp">Backup foto\'s</string>
+  <string name="LabelRefreshSession">Bestandslijst vernieuwen</string>
+  <string name="LabelAdvancedProperties">Geavanceerde Eigenschappen</string>
+  <string name="LabelDirection">Richting</string>
+  <string name="LabelHorizontal">Horizontaal</string>
+  <string name="LabelVertical">Verticaal</string>
+  <string name="LabelOverlayTransparency">Doorzichtigheid</string>
+  <string name="LabelStartMinimized">Geminimaliseerd starten</string>
+  <string name="LabelStartupWithWindows">Starten wanneer Windows start</string>
+  <string name="LabelAddPlugin">Plug-in toevoegen</string>
+  <string name="LabelPrint">Printen</string>
+  <string name="LabelPrintSetup">Print instellingen</string>
+  <string name="LabelPageSetup">Papier instellingen</string>
+  <string name="LabelMarginBetweenImages">Marge</string>
+  <string name="LabelRotate">Roteren</string>
+  <string name="LabelTimeLapseNow">Nu starten</string>
+  <string name="LabelTimeLapseIn">Starten over</string>
+  <string name="LabelTimeLapseAt">Starten om</string>
+  <string name="LabelTimeLapseDaily">Dagelijks starten</string>
   <string name="LabelDate">Datum</string>
   <string name="LabelTime">Tijd</string>
   <string name="LabelSunday">Zondag</string>
@@ -445,11 +386,26 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelThursday">Donderdag</string>
   <string name="LabelFriday">Vrijdag</string>
   <string name="LabelSaturday">Zaterdag</string>
+  <string name="LabelTimeLapseStop">Stoppen</string>
+  <string name="LabelTimeLapseStopIn">Stoppen over</string>
+  <string name="LabelTimeLapseStopAt">Stoppen om</string>
+  <string name="LabelBrowse">Bladeren</string>
   <string name="LabelColor">Kleur</string>
-  <!--// 11/03/2015-->
+  <string name="LabelImportData">Data importeren</string>
+  <string name="LabelExportData">Data exporteren</string>
+  <string name="LabelScanBarcode">Barcode scannen</string>
   <string name="LabelCurrentMotion">Beweging gedetecteerd</string>
   <string name="MenuSession">Sessie</string>
-  <!--// 12/09/2015-->
+  <string name="MenuCamera">Camera</string>
+  <string name="MenuWindows">Windows</string>
+  <string name="MenuOnlineManual">Online handleiding</string>
+  <string name="MenuPlugins">Plug-ins</string>
+  <string name="MenuCameraProperty">Camera eigenschappen</string>
+  <string name="MenuExportSession">Sessie exporteren ...</string>
+  <string name="MenuImportSession">Sessie importeren ...</string>
+  <string name="LabelFullSpeed">Volledige snelheid</string>
+  <string name="LabelOriginal">Origineel</string>
+  <string name="LabelPluginProperties">Eigenschappen</string>
   <string name="LabelBracketingMode">Opnamereeks modus</string>
   <string name="LabelDepthOfFieldBracketing">Diafragma/scherptediepte opnamereeks</string>
   <string name="LabelWhiteBalanceBracketing">Witbalans opnamereeks</string>
@@ -457,20 +413,26 @@ $Tag4 - Geselecteerde tabel 4</string>
   <string name="LabelBracketingNumberOfShots">Aantal opnamen</string>
   <string name="LabelSetArea">Instellen</string>
   <string name="LabelDoneArea">Klaar</string>
-  <string name="LabelRotateCounterclockwise">Draai tegen de klok in</string>
   <string name="LabelRotateClockwise">Draai met de klok mee</string>
   <string name="LabelSaveJpg">Opslaan als JPG</string>
   <string name="LabelPageWidth">Paginabreedte</string>
   <string name="LabelPageHeigh">Paginahoogte</string>
   <string name="LabelFill">Opvullen</string>
-  <!--// 19/10/2015-->
   <string name="LabelApplyToImage">Toepassen op geselecteerde afbeelding</string>
   <string name="LabelCaptureCount">Opnameaantal</string>
-  <string name="LabelAutoFocusBeforCapture">Autofocus voor opname</string>
   <string name="LabelAskSavePath">Opslagpad voor opnamebestanden vragen</string>
   <string name="LabelStatistics">Statistieken</string>
   <string name="LabelRefresh">Verversen</string>
   <string name="LabelOverview">Overzicht</string>
-  <!--//30/01/2016-->
-  <!--//26/03/2016-->
+  <string name="LabelValue">Waarde</string>
+  <string name="LabelDelete">Verwijderen</string>
+  <string name="LabelDisableHardwareAcceleratione">Hardware Versnelling uitschakelen</string>
+  <string name="LabelDisabled">Uitgeschakeld</string>
+  <string name="LabelRestore">Herstellen</string>
+  <string name="LabelInvert">Omkeren</string>
+  <string name="LabelClosePreview">Voorbeeld sluiten</string>
+  <string name="LabelReload">Herladen</string>
+  <string name="LabelOpenLightroom">Bestanden openen in Adobe Lightroom</string>
+  <string name="LabelOpenPhotoshop">Bestanden openen in Adobe Photoshop</string>
+  <string name="LabelPasswordOnClose">Vraag wachtwoord bij afsluiten</string>
 </resources>

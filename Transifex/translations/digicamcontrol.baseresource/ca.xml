@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <!--Property values-->
-  <string name="BURST_NUMBER">Número de descàrrega</string>
+  <string name="BURST_NUMBER">Número de ràfega</string>
   <string name="STILL_CAPTURE_MODE">Mode de captura</string>
   <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Tret continu (Ràfega)</string>
-  <string name="AUTO_ISO">Auto ISO </string>
+  <string name="AUTO_ISO">Auto ISO</string>
   <string name="ON">ON</string>
   <string name="OFF">OFF</string>
   <string name="FLASH">Flash</string>
@@ -80,7 +80,7 @@
   <string name="SessionAdd">Afegir</string>
   <string name="SessionEdit">Editar</string>
   <string name="SessionDel">Eliminar</string>
-  <string name="MainWindowTitle">NCC - Traduït</string>
+  <string name="MainWindowTitle">NCC</string>
   <string name="SettingsWindowTitle">Ajustos </string>
   <string name="SessionWindowTitle">Sessió [Afegir/Editar]</string>
   <string name="LiveViewWindowTitle">Live view </string>
@@ -111,20 +111,20 @@
   <string name="ButtonStopTimeLapse">Aturar TimeLapse</string>
   <string name="ButtonCreateMovie">Crea video</string>
   <string name="ButtonLocateLogFile">Cercar fitxer de registre</string>
-  <string name="LabelInterfaceLanguage">Idioma de la interfície:</string>
+  <string name="LabelInterfaceLanguage">Idioma d\'interfície</string>
   <string name="LabelDisableDriver">Deshabilitar controladors nadius (no recomanat) </string>
   <string name="LabelTheme">Tema</string>
   <string name="LabelGeneral">General</string>
   <string name="LabelPreview">Vista prèvia </string>
   <string name="LabelPlaySound">Reprodueix so després de la captura</string>
   <string name="LabelAutoPreview">Vista prèvia automàtica</string>
-  <string name="LabelPreviewAfterCapture">Vista prèvia de imatge després de captura en pantalla completa</string>
-  <string name="LabelPreviewTime">Vista prèvia de temps en segons :</string>
+  <string name="LabelPreviewAfterCapture">Previsualizar imatge després de captura a pantalla completa</string>
+  <string name="LabelPreviewTime">Temps de previsualització en segons</string>
   <string name="LabelPreviewInLIveView">Vista prèvia de imatge després de captura en Live View</string>
-  <string name="LabelLIveViewImageFreeze">Vista prèvia de imatge congelada en segons :</string>
-  <string name="LabelRotateImage">Rotar imatge :</string>
+  <string name="LabelLIveViewImageFreeze">Temps de congelació d\'image en Live View</string>
+  <string name="LabelRotateImage">Rotar imatge</string>
   <string name="LabelDontLoadThumbs">No carregar miniatures</string>
-  <string name="LabelFullscrenBack">Finestra de pantalla complerta de fons :</string>
+  <string name="LabelFullscrenBack">Fons de pantalla completa</string>
   <string name="LabelTriggers">Disparadors</string>
   <string name="LabelUseKeybordToTrigger">Utilitzeu el teclat per activar i prendre la foto</string>
   <string name="LabelWebserver">Servidor Web</string>
@@ -132,32 +132,15 @@
   <string name="LabelFocusAndLiveview">Live view </string>
   <string name="LabelSmallFocusSstep">Pas de focus petit</string>
   <string name="LabelMediumFocusStep">Pas de focus mitjà</string>
-  <string name="LabelLargFocusStep">Pas de focus gran</string>
   <string name="ReStartToolTip">Cal que reinicieu l\'aplicació per a que aquests canvis tinguin efecte</string>
-  <string name="LabelSessonName">Nom de la sessió :</string>
-  <string name="LabelFolder">Carpeta :</string>
-  <string name="LabelFileNameTemplate"> Nom del fitxer Plantilla :</string>
-  <string name="LabelFileNameTemplateToolTip">$N - Nom de sessió
-$C - Contador
-$E - Compensar Exposició
-$X - Nom de la càmera
-SD - Data
-$UTime - Marca de temps Unix
-$Type - Tipus d\'arxiu (Raw | jpg)
-$B - Codi de barres
-$Tag1 - Etiqueta seleccionada 1
-$Tag2 - Etiqueta seleccionada 2
-$Tag3 - Etiqueta seleccionada 3
-$Tag4 - Etiqueta seleccionada 4</string>
-  <string name="LabelCounter">Contador :</string>
-  <string name="LabelUseOriginal">Utilitza l\'arxiu original proporcionat per la camera</string>
-  <string name="LabelUseOriginalToolTip">Aquesta opció no treballa amb controlador WIA</string>
+  <string name="LabelSessonName">Nom de la sessió</string>
+  <string name="LabelFolder">Carpeta</string>
+  <string name="LabelFileNameTemplate">Plantilla de nom de fitxer</string>
   <string name="LabelDontDownloadPhotos">No descarregar fotos a PC </string>
   <string name="LabelAlowFolderChange">Permetre el canvi de carpeta amb el navegador d\'imatges </string>
   <string name="LabelTags">Etiquetes</string>
   <string name="LabelManualFocus">Enfocament manual</string>
   <string name="LabelGrid">Quadrícula</string>
-  <string name="LabelLvZoomRation">Lv relació de zoom</string>
   <string name="LabelFocusStacking">Enfocament d\'apilament</string>
   <string name="LabelNoOfPhots">Nº de fotos</string>
   <string name="LabelFocusStep">Pas d\'enfocament</string>
@@ -178,13 +161,10 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelWaitTime">Temps d\'espera (seg) </string>
   <string name="LabelDisableAutofocus">Desactivar autofocus</string>
   <string name="LabelConnectedCameras">Càmeres conectades</string>
-  <string name="LabelPresetName">Nom d\'ajust :</string>
   <string name="LabelTimeLapse">TimeLapse</string>
   <string name="LabelSecondsBetweenShots">Segons entre trets </string>
   <string name="LabelNumberOfPhotos">Número de fotos</string>
   <string name="LabelDontAutofocusOnEveryCapture">No enfocar automàticament a cada captura </string>
-  <string name="LabelCaptureInterval">Interval de captura (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Duració del video (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Configuració del video</string>
   <string name="LabelVideoFormat">Format de video</string>
   <string name="LabelOutputFile">Fitxer de sortida </string>
@@ -192,29 +172,21 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelFillImage">Omplir imatge</string>
   <string name="LabelCreateMovie">Crea video</string>
   <string name="LabelAddVirtualMovingToVideo">Afegir moviment virtual al vídeo</string>
-  <string name="LabelMovingSurface">Superfície en moviment (%) : </string>
-  <string name="LabelMovingDirection">Direcció de moviment:</string>
   <string name="LabelMovingDirectionLeftToRight">D\'esquerra a dreta</string>
   <string name="LabelMovingDirectionRightToLeft">De dreta a esquerra</string>
   <string name="LabelMovingDirectionTopToBottom">De dalt a baix </string>
   <string name="LabelMovingDirectionBottomToTop">De baix a dalt</string>
   <string name="LabelMovingDirectionLeftTopToRightBottom">Esquerra/A dalt a la dreta/A baix</string>
   <string name="LabelMovingDirectionRightBottomToLeftTop">Dreta/Inferior esquerra/A dalt</string>
-  <string name="LabelImageAlignment">Alineació de la imatge: </string>
   <string name="LabelImageAlignmentLeftTop">Esquerra/A dalt</string>
   <string name="LabelImageAlignmentCenter">Centrar</string>
   <string name="LabelImageAlignmentRightBottom">Dreta/A baix</string>
   <string name="LabelVideoCodecProblem">Problema amb còdec de vídeo </string>
-  <string name="MsgPhotoTransferBegin">Transferència de fotos iniciada </string>
   <string name="MsgPhotoTransferDone">Transferencia de fotos feta</string>
-  <string name="MsgPhotoTransferError">Error de transferència !\nMessage :{0} </string>
   <string name="MsgBulbModeNotSupported">Mode bulb no suportat !</string>
   <string name="MsgApplicationUpToDate">La seva aplicació està al dia !</string>
   <string name="MsgUseSessionEditorTags">Utilitzar l\'editor de sessió per definir les etiquetes !</string>
   <string name="MsgLastSessionCantBeDeleted">L\'última sessió no es pot eliminar</string>
-  <string name="MsgStopTimeLapse">El TimeLapse no ha finalitzat! Vol aturar el TimeLapse ?</string>
-  <string name="MsgInstallXvidCodec">Xvid còdec no instal·lat !\nVoleu descarregar i instal·lar ? </string>
-  <string name="MsgDeleteSessionQuestion">Vols seguir esborrant sessió {0} ?\nNo s\'eliminaran els arxius !</string>
   <string name="MsgBracketingDone">Horquillat fet</string>
   <string name="MsgActionInProgress">Acció en curs {0}/{1}</string>
   <string name="MenuFile">_Arxiu</string>
@@ -225,7 +197,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="MenuMultipleCamera">Control de múltiples càmeres</string>
   <string name="MenuSelectedCameraProperty">Propietat de càmera seleccionada</string>
   <string name="MenuPresets">Ajusts</string>
-  <string name="MenuPresetsLoad">Carregar</string>
   <string name="MenuPresetsSave">Guardar</string>
   <string name="MenuPresetsEdit">Editar</string>
   <string name="MenuHelp">_Ajuda</string>
@@ -239,101 +210,63 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="MenuLayoutGrid">Quadrícula</string>
   <string name="MenuProperties">Propietats</string>
   <string name="MenuUseSelectedCameraPreset">Ús d\'ajusts de càmera seleccionats</string>
-  <!--15/10/2012-->
   <string name="LabelExternalViewerPath">Menú contextual de visor extern</string>
   <string name="LabelStayOnTop">Sempre a la part superior </string>
-  <!--22/10/2012-->
   <string name="LabelDisplay">Visualització</string>
   <string name="LabelMotionDetection">Detecció de moviment</string>
   <string name="LabelActivateMotionDetection">Activar la detecció de moviment </string>
   <string name="LabelCaptureWhenMove">Capturar quan detecta el moviment</string>
   <string name="LabelThreshold">Llindar (%)</string>
   <string name="LabelWaitMoion">Esperar (seg)</string>
-  <!--25/10/2012-->
   <string name="LabelAutofocusBeforeCapture">Enfocament automàtic abans de la captura</string>
-  <!--26/10/2012-->
   <string name="LabelOpacity">Opacitat</string>
-  <!--29/10/2012-->
   <string name="LabelMotionDetectionType">Tipus de detecció de moviment</string>
   <string name="LabelTwoFramesDifferenceDetector">Diferència de detector de dos marcs</string>
-  <string name="LabelSimpleBackgroundModelingDetector">Fons Simple de Detector de Modelatge </string>
   <string name="LabelSmallestBlockSize">Petit bloc de mida</string>
   <string name="ButtonHelp">Ajuda</string>
-  <!--31/10/2012-->
   <string name="LabelMenu">Menú</string>
-  <!--03/11/2012-->
   <string name="MenuForum">Fòrum</string>
-  <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Obtenir còdec RAW</string>
-  <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">S\'ha produït un error en iniciar la gravació de video</string>
   <string name="LabelNoCardInserted">No hi ha targeta inserida </string>
   <string name="LabelCardError">Error de Targeta</string>
   <string name="LabelCardNotFormatted">Targeta no formatada </string>
-  <string name="LabelNoFreeAreaInCard">Cap àrea lliure a la targeta </string>
-  <string name="LabelCardBufferNotEmpty">Hi ha dades d\'enregistrament a la destinació és una targeta en la memòria intermèdia.</string>
-  <string name="LabelPcBufferNotEmpty">Hi ha dades d\'enregistrament a la destinació és el PC a la memòria intermèdia.</string>
   <string name="LabelBufferNotEmpty">Hi ha dades d\'enregistrament en la memòria intermèdia.</string>
   <string name="LabelRecordInProgres">Durant la gravació de l\'arxiu de video</string>
   <string name="LabelCardProtected">Targeta protegida</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Durant la pantalla completa de Live View</string>
-  <string name="LabelWrongLiveViewType">La configuració del selector de Live View és el Live View fotogràfic.</string>
   <string name="LabelNotInApplicationMode">La càmera no està en el mode d\'aplicació.</string>
   <string name="ButtonResetSettings">Reajustar paràmetres</string>
-  <!--14/11/2012-->
   <string name="LabelUseExternalViewer">Utilitzar visor extern</string>
   <string name="LabelExternalPreViewerPath">Camí de visor extern</string>
   <string name="LabelExternalPreViewerArgs">Arguments de visor extern</string>
-  <!--18/11/2012-->
   <string name="LabelControl">Control</string>
-  <!--20/11/2012-->
   <string name="LabelExport">Exportar</string>
-  <!--21/11/2012-->
   <string name="LabelDownload">Descarregar</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">Descarregar fotos</string>
   <string name="LabelDeleteFilesAfterTransfer">Eliminar arxius després de la transferència</string>
-  <string name="LabelAskForDelete">Eliminar els arxius transferits.\nVoleu continuar? </string>
-  <!--26/11/2012-->
-  <string name="LabelErrorSetFocusPos">Error en la posició del focus</string>
-  <string name="LabelErrorUnableFocus">Incapaç de moure el focus</string>
-  <!--28/11/2012-->
   <string name="LabelErrorLoadingFileList">Error de càrrega de llista d\'arxius </string>
-  <!--30/11/2012-->
   <string name="LabelTransfer">Transferir</string>
   <string name="LabelTransferItem1">1.Gravar només al PC</string>
   <string name="LabelTransferItem2">2.Gravar només a la càmera</string>
   <string name="LabelTransferItem3">3.Gravar al PC i a la càmera</string>
-  <!--05/12/2012-->
-  <string name="MsgDisabledDrivers">Els controladors nadius estan deshabilitats ! Vols activar-los ?</string>
-  <!--14/12/2012-->
   <string name="LabelShowFocusPoints">Mostra punts d\'enfocament </string>
   <string name="LabelMainWindow">Finestra principal </string>
   <string name="LabelSelect">Seleccionar</string>
   <string name="TimeSelectWindowTitle">Seleccionar finestra</string>
-  <!--16/12/2012-->
   <string name="LabelRotateNone">Cap</string>
   <string name="LabelRotate90">Rotar 90</string>
   <string name="LabelRotate180">Rotar 180</string>
   <string name="LabelRotate270">Rotar 270</string>
-  <string name="LabelLowMemoryUsage">Poc ús de memòria</string>
-  <!--04/01/2013-->
   <string name="LabelRawCodecNotInstalled">Codec Raw no s\'instal·lat o tipus d\'arxiu desconegut</string>
-  <!--05/01/2013-->
   <string name="LabelUseCameraCounter">Utilitzeu comptador de càmera en lloc del comptador genèric </string>
   <string name="LabelResetCounters">Reiniciar comptadors</string>
-  <!--07/01/2013-->
   <string name="LabelUnabletoDeleteSession">No es pot eliminar la sessió </string>
-  <!--12/01/2013-->
   <string name="LabelWaitingForDevice">Esperant dispositiu estigui llest </string>
   <string name="LabelAdvanced">Avançat</string>
   <string name="LabelUseParellelTransfer">Utilitzeu la transferència d\'arxius paral·lel </string>
-  <!--19/01/2013-->
-  <string name="LabelUnHandledError">S\'ha produït un error d\'aplicació.\nSi us plau, comprovar si les seves dades són correctes i repetir l\'acció. Si es produeix aquest error de nou sembla que hi ha una avaria més greu en l\'aplicació, i és millor tancar-la.\n\nError:{0}\n\nVoleu continuar?\n(si fa clic a Sí es continuarà amb el seu treball, si fa clic a No, l\'aplicació es tancarà) </string>
   <string name="LabelApplicationError">Error d\'aplicació</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 no instal·lat</string>
   <string name="LabelRestartTheApplication">Reiniciar l\'aplicació !</string>
-  <string name="LabelOutOfMemory">L\'aplicació s\'ha quedat sense memòria. L\'aplicació serà tancada! </string>
   <string name="LabelApplicationAlreadyRunning">L\'aplicació ja està funcionant </string>
   <string name="LabelDeleteSession">Eliminar sessió</string>
   <string name="LabelStartCapture">Iniciar Captura</string>
@@ -342,23 +275,17 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelTimeBetweenShots">Temps entre trets </string>
   <string name="LabelDontAutofocus">Sense autofocus</string>
   <string name="LabelShowUnTranslatedStringIds">Mostra ID de cadena sense traduir </string>
-  <!--20/01/2013-->
   <string name="LabelUseAsMaster">Utilitzeu com a mestre </string>
-  <!--29/01/2013-->
   <string name="LabelCounterIncrementer">Incrementar comptador</string>
   <string name="LabelSelected">Seleccionar</string>
-  <!--31/01/2013-->
   <string name="LabelNone">Cap </string>
   <string name="LabelRuleOfThirds">Regla dels terços </string>
   <string name="LabelComboGrid">Quadrícula </string>
   <string name="LabelDiagonal">Diagonal</string>
   <string name="LabelSplit">Divisió</string>
-  <!--13/03/2013-->
   <string name="LabelTools">Eines</string>
-  <!--17/03/2012-->
   <string name="LabelMFError">La càmera està en el mode d\'enfocament MF </string>
   <string name="LabelNotAFSError">La càmera no està en mode d\'enfocament AF-S </string>
-  <!--28/03/2012-->
   <string name="LabelSequenceError">Error de sequència</string>
   <string name="LabelFullyPressedButtonError">Error Botó completament premsat </string>
   <string name="LabelApertureValueError">El valor d\'obertura s\'està creant per l\'anell d\'obertura de l\'objectiu. </string>
@@ -368,16 +295,13 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelTTLError">Error TTL</string>
   <string name="LabelNonCPULEnseError">Un objectiu sense CPU està muntat i la manera d\'exposició no és M. </string>
   <string name="LabelImageInRAM">Aquesta es una imatge la destinació de la gravació és SDRAM. </string>
-  <string name="LabelNoCardInsertedError">El destí de l\'enregistrament és la targeta o la targeta i SDRAM,\n i la targeta no s\'insereix amb el llançament deshabilitat sense targeta. </string>
   <string name="LabelCommandProcesingError">Durant el processament per la comanda de tret </string>
   <string name="LabelShoutingInProgress">La manera de tret és EFECTES. </string>
-  <string name="LabelOverHeatedError">El Live View no es pot iniciar quan la temperatura puja.</string>
   <string name="LabelCardProtectedError">Protegir targeta</string>
   <string name="LabelMirrorUpError">L\'alliberament de tret està ajustat a Mirall pujat en marxa i s\'està realitzant l\'operació de mirall pujat.</string>
   <string name="LabelMirrorUpError2">La manera de tret es [Mirall pujat].</string>
   <string name="LabelDestinationCardError">El destí de l\'enregistrament és la targeta. </string>
   <string name="LabelLiveViewError">Error d\'inici de visualització en directe</string>
-  <!--07/05/2013-->
   <string name="LabelDevices">Dispositius</string>
   <string name="LabelExternalShutterRelease">Disparador extern </string>
   <string name="LabelConfigName">Nom de configuració</string>
@@ -397,11 +321,9 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelBrightness">Brillantor</string>
   <string name="LabelUseExternalShutterRelease">Utilitzar disparador extern</string>
   <string name="LabelDownloadJpgOnly">Descarregar només arxiu JPG</string>
-  <string name="LabelDownloadJpgOnlyToolTip">Si la captura es fa amb JPG+RAW només els arxius jpg es descarreguen</string>
   <string name="LabelSetCounters">Establir comptadors</string>
   <string name="LabelEdgeDetection">Detecció de vores</string>
   <string name="LabelLeadingZeros">Comptar zeros a l\'esquerra</string>
-  <!--04/07/2013-->
   <string name="LabelShowFocusRect">Mostrar rectangle d\'enfocament</string>
   <string name="LabelEasyLiveViewControl">Control fàcil de Live View</string>
   <string name="LabelExif">Exif</string>
@@ -410,7 +332,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelSet">Establir</string>
   <string name="LabelTagSelector">Selector d\'etiquetes</string>
   <string name="LabelComment">Comentari</string>
-  <string name="LabelWriteComments">Escriure comentaris/etiquetes en l\'arxiu d\'imatge descarregada </string>
   <string name="LabelStayOnTop2">Romandre a munt</string>
   <string name="LabelWriteSelectedTags">Escriure etiquetes desde selector d\'etiquetes </string>
   <string name="LabelClearCache">Esborrar cache</string>
@@ -423,43 +344,32 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelCurrentEvent">Esdeveniment actual</string>
   <string name="LabelRemainingCaptures">captures a l\'esquerra</string>
   <string name="LabelLiveViewRotation">Totar Live View</string>
-  <string name="LabelAutomaticallyGuiding">Guiar PHD Automàticament després de capturar la foto </string>
   <string name="LabelAutoRotate">Rotar automàticament</string>
   <string name="LabelReset">Reajustar</string>
   <string name="LabelFocus">Focus</string>
-  <!--17/11/2013-->
   <string name="LabelAddFakeCamera">Afegir una càmera falsa </string>
   <string name="LabelBarcode">Codi de barres</string>
   <string name="LabelSendTheLogFile">Enviar el fitxer de registre </string>
-  <string name="LabelAskSendLogFile">Vols enviar fitxer de registre per als desenvolupadors ?</string>
-  <string name="LabelSyncCameraDate">Sincronització de data i hora de la càmera en càmera connectada  </string>
   <string name="LabelShowThumbUpDown">Mostra botons amunt/avall </string>
   <string name="LabelSend">Enviar</string>
-  <string name="LabelLogMessage">Missatge als desenvolupadors de digiCamControl :</string>
-  <string name="LabelLogText">L\'arxiu de registre s\'envia a l\'equip desenvolupador de digiCamcontrol per millorar l\'estabilitat de l\'aplicació.</string>
   <string name="LabelFullscreen">Pantalla completa</string>
   <string name="LabelSelection">Seleccionar</string>
   <string name="LabelSelectAll">Seleccionar tot</string>
   <string name="LabelSelectNone">Seleccionar cap</string>
   <string name="LabelSelectLiked">Seleccionar favorits</string>
   <string name="LabelSelectUnLiked">Seleccionar no favorits</string>
-  <!--19/01/2014-->
-  <string name="LabelLockNearFar">Si us plau, bloquejar punts d\'enfocament més proper i més allunyat </string>
   <string name="LabelError">Error</string>
   <string name="LabelChangelog">Canvi de registre</string>
-  <!--27/02/2014-->
   <string name="LabelAllowOverWrite">Permetre sobreescriure</string>
   <string name="LabelShowRuler">Mostrar regla</string>
   <string name="LabelAutoPreviewJpgOnly">Vista prèvia automàtica només Jpg </string>
   <string name="LabelSettingsLiveView">Live view</string>
   <string name="LabelHostMode">Mode host</string>
-  <!--17.05.2014-->
   <string name="LabelClear">Netejar</string>
   <string name="LabelHistogram">Histograma</string>
   <string name="LabelMetadata">Metadades</string>
   <string name="LabelFullSize">Imatge a mida completa</string>
   <string name="LabelWifi">Connectar amb DSLRDASHBOARDSERVER</string>
-  <string name="ButtonRecordStopMovie">Aturar gravació de video</string>
   <string name="LabelOverlay">Superposició</string>
   <string name="LabelGenerateThumbs">Generar miniatures</string>
   <string name="LabelPlay">Reproduir</string>
@@ -475,9 +385,7 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelBackUp">Copia de seguretat de fotos</string>
   <string name="LabelVerifyPreset">Verificar ajustos</string>
   <string name="LabelRefreshSession">Actualitzar llista d\'arxius</string>
-  <string name="LabelErrorEmail">El seu email (si vol aconseguir actualitzacions)</string>
   <string name="LabelApertureBracketing">Obertura d\'horquillat</string>
-  <!--//20/08/2014-->
   <string name="LabelCaptureName">Nom de captura</string>
   <string name="LabelSeries">Sèries</string>
   <string name="LabelAdvancedProperties">Propietats avançades</string>
@@ -492,7 +400,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelScaling">Escalada</string>
   <string name="LabelHorizontal">Horitzontal</string>
   <string name="LabelVertical">Vertical</string>
-  <!--20/08/2014-->
   <string name="LabelLockNear">Bloquejar punt més proper </string>
   <string name="LabelLockFar">Punt més llunyà de bloqueig </string>
   <string name="LabelGoNear">Anar a punt d\'enfocament més proper</string>
@@ -503,12 +410,10 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelMoveSmallToInfinity">Moure un pas petit al infinit</string>
   <string name="LabelMoveMediumToInfinity">Moure un pas mitjà al infinit</string>
   <string name="LabelMoveLargeToInfinity">Moure un pas llarg al infinit</string>
-  <string name="LabelDistantFromPoints">Distància entre el més proper i més llunyà tancat en punts d\'enfocament </string>
   <string name="LabelFocusStackingSimple">Enfocament d\'apilament simple </string>
   <string name="LabelFocusStackingAdvanced">Enfocament d\'apilament avançat</string>
   <string name="LabelErrorFarPoit">En primer lloc establir el punt d\'enfocament més allunyat </string>
   <string name="LabelErrorAutoFocusLock">L\'enfocament està bloquejat, desbloquejar primer l\'enfocament automàtic </string>
-  <string name="LabelErrorSimpleStackingFocusLock">L\'enfocament està bloquejat, l\'enfocament senzill d\'apilament no requereix bloqueig d\'enfocament, desbloquejar primer per començar </string>
   <string name="LabelLowerCaseExtension">Reduir extensió</string>
   <string name="LabelOverlayTransparency">Transparència</string>
   <string name="LabelOverlayUseLastCaptured">Utilitzar última captura</string>
@@ -521,7 +426,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelAddPlugin">Afegir pluguin</string>
   <string name="LabelErrorSetFolder">Error al seleccionar arxiu</string>
   <string name="LabelDetectArea">Detectar només en àrea de la regla </string>
-  <string name="LabelMessagesLog">Missatges de registre </string>
   <string name="LabelRefreshCameraList">Refrescar llista de càmeres</string>
   <string name="LabelSortOrder">Ordre de classificació</string>
   <string name="LabelSaveOrder">Guardar ordre de classificació</string>
@@ -534,11 +438,7 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelRotate">Rotar</string>
   <string name="LabelRepeatImages">Repetir imatges</string>
   <string name="LabelWaitBetweenSteps">Esperar entre els passos (ms)</string>
-  <string name="LabelShowSecondary ">Mostra en monitor secundari </string>
-  <!--20/12/2014-->
   <string name="LabelKeyboardTrigger">Disparador de teclat</string>
-  <string name="LabelNoProccesing">Sense processar</string>
-  <string name="LabelNoProccesingTooltip">La major part de la funcionalitat està desactivada</string>
   <string name="LabelSendUsage">Envia automàticament les estadístiques d\'ús</string>
   <string name="LabelSheduleStart">Inicia planificació</string>
   <string name="LabelSheduleStop">Atura planificació</string>
@@ -562,13 +462,11 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelTimeLapseStopPhotoCount">Despés del recompte de captura</string>
   <string name="LabelTimeLapseWaitBetweenCaptures">Temps d\'espera entre els passos (seg)</string>
   <string name="LabelTimeLapseCapture">Captura amb la càmera seleccionada</string>
-  <string name="LabelTimeLapseCaptureAll">Captura amb tota la càmera</string>
   <string name="LabelTimeLapseCaptureScript">Executa script</string>
   <string name="LabelTimeLapseScriptFile">Arxiu d\'script</string>
   <string name="LabelBrowse">Explora</string>
   <string name="LabelFlip">Volteja horitzontalment</string>
   <string name="LabelLiveViewPreviewTime">Vista prèvia de la foto capturada en temps</string>
-  <string name="LabelColor">Color</string>
   <string name="LabelImportData">Importa dades</string>
   <string name="LabelExportData">Exporta dades</string>
   <string name="LabelData">Dades</string>
@@ -579,7 +477,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelShowInExplorer">Mostra en l\'explorador</string>
   <string name="LabelOpenInExternalViewer">Obre en visor extern</string>
   <string name="LabelRestoreFromBackup">Restaura còpia de reserva</string>
-  <!--// 11/03/2015-->
   <string name="LabelAllowWebCommands">Permet interacció a través de servidor web</string>
   <string name="LabelCurrentMotion">Moviment detectat</string>
   <string name="LabelStartupScript">Executa script a l\'inici</string>
@@ -607,7 +504,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="MenuExportSession">Exporta sessió ...</string>
   <string name="MenuImportSession">Importa sessió ...</string>
   <string name="LabelFullSpeed">Velocitat màxima</string>
-  <!--// 12/09/2015-->
   <string name="LabelEmailPublicWebAddress">Direcció de email web públic</string>
   <string name="LabelBracketingMode">Mode d\'horquillat</string>
   <string name="LabelDepthOfFieldBracketing">Horquillat de profunditat</string>
@@ -620,7 +516,6 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelNoHighValueError">No hi ha valor alt configurat</string>
   <string name="LabelWrongValue">Valor baix o alt incorrecte</string>
   <string name="LabelWrongFNumber">L\'apertura no es pot modificar</string>
-  <string name="LabelBracketingMMode">Configura el mode M de la càmera</string>
   <string name="LabelTimeLapseCaptureBracketing">Captura amb horquillat</string>
   <string name="LabelZoomToFocus">Sempre enfoca al primer punt d\'enfocament</string>
   <string name="LabelPreviewFullSize">Vista prèvia completa de la foto</string>
@@ -628,16 +523,13 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelShowActiveArea">Mostra àrea activa</string>
   <string name="LabelSetArea">Estableix</string>
   <string name="LabelDoneArea">Fet</string>
-  <string name="LabelRotateCounterclockwise">Gira comptador en sentit contrari</string>
   <string name="LabelRotateClockwise">Gira en sentit contrari</string>
   <string name="LabelSaveJpg">Desa com a JPG</string>
   <string name="LabelPageWidth">Ample de pàgina</string>
   <string name="LabelPageHeigh">Alçada de pàgina</string>
   <string name="LabelFill">Omple</string>
-  <!--// 19/10/2015-->
   <string name="LabelApplyToImage">Aplica a una imatge seleccionada</string>
   <string name="LabelCaptureCount">Captura comptador</string>
-  <string name="LabelAutoFocusBeforCapture">Enfocament automàtic abans de captura</string>
   <string name="LabelEnhancedThumbs">Miniatures millorats</string>
   <string name="LabelAskSavePath">Demana pel camí de l\'arxiu capturat</string>
   <string name="LabelSaveLiveviewWindow">Desa posició de finestra de visualització en directe</string>
@@ -648,6 +540,4 @@ $Tag4 - Etiqueta seleccionada 4</string>
   <string name="LabelRefresh">Refresca</string>
   <string name="LabelOverview">Informació general</string>
   <string name="LabelItems">Objectes</string>
-  <!--//30/01/2016-->
-  <!--//26/03/2016-->
 </resources>

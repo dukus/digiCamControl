@@ -68,7 +68,6 @@
   <string name="BraketingToolTip">Bracketing</string>
   <string name="SettingsToolTip">Nastavení</string>
   <string name="TimeLapseToolTip">Časosběr</string>
-  <string name="FullscreenToolTip">Celá obrazovka</string>
   <string name="LiveViewToolTip">Živý náhled</string>
   <string name="BrowseSessionsToolTip">Procházej relace</string>
   <string name="SelectTagsToolTip">Vyber štítky</string>
@@ -105,20 +104,13 @@
   <string name="ButtonStopTimeLapse">Ukonči časosběrné video</string>
   <string name="ButtonCreateMovie">Nahrej video</string>
   <string name="ButtonLocateLogFile">Umístění log souboru</string>
-  <string name="LabelInterfaceLanguage">Jazyk :</string>
   <string name="LabelDisableDriver">Zakázat originální ovladač (nedoporučuje se)</string>
-  <string name="LabelTheme">Motiv :</string>
   <string name="LabelGeneral">Všeobecně</string>
   <string name="LabelPreview">Náhled</string>
   <string name="LabelPlaySound">Přehraj zvuk po zachycení snímku</string>
   <string name="LabelAutoPreview">Automatický náhled</string>
-  <string name="LabelPreviewAfterCapture">Ukaž obrázek po sejmutí celé obrazovky</string>
-  <string name="LabelPreviewTime">Doba náhledu v sekundách:</string>
   <string name="LabelPreviewInLIveView">Ukaž obrázek po focení v živém náhledu</string>
-  <string name="LabelLIveViewImageFreeze">Zmrazení živého náhledu v sekundách :</string>
-  <string name="LabelRotateImage">Otoč obrázek :</string>
   <string name="LabelDontLoadThumbs">Nenahrávat malé náhledy</string>
-  <string name="LabelFullscrenBack">Pozadí v režimu celé obrazovky : </string>
   <string name="LabelTriggers">Spouště</string>
   <string name="LabelUseKeybordToTrigger">Použij klávesnici jako spoušť</string>
   <string name="LabelWebserver">Webserver</string>
@@ -126,14 +118,7 @@
   <string name="LabelFocusAndLiveview">Živý náhled</string>
   <string name="LabelSmallFocusSstep">Malý krok ostření</string>
   <string name="LabelMediumFocusStep">Střední krok ostření</string>
-  <string name="LabelLargFocusStep">Velký krok ostření</string>
   <string name="ReStartToolTip">Aby se projevily změny, musíte restartovat program</string>
-  <string name="LabelSessonName">Název relace :</string>
-  <string name="LabelFolder">Složka :</string>
-  <string name="LabelFileNameTemplate">Název souboru šablony :</string>
-  <string name="LabelCounter">Čítač :</string>
-  <string name="LabelUseOriginal">Použij originální název souboru z fotoaparátu</string>
-  <string name="LabelUseOriginalToolTip">Tato volba nepracuje s WIA ovladačem</string>
   <string name="LabelDontDownloadPhotos">Nenahrávat snímky do PC</string>
   <string name="LabelTags">Štítky</string>
   <string name="LabelManualFocus">Manuální ostření</string>
@@ -157,40 +142,30 @@
   <string name="LabelWaitTime">Čas (sec)</string>
   <string name="LabelDisableAutofocus">Zakázat automatické ostření</string>
   <string name="LabelConnectedCameras">Připojené fotoaparáty</string>
-  <string name="LabelPresetName">Název nastavení :</string>
   <string name="LabelTimeLapse">Časosběr</string>
   <string name="LabelSecondsBetweenShots">Sekund mezi snímky</string>
   <string name="LabelNumberOfPhotos">Počet snímků</string>
   <string name="LabelDontAutofocusOnEveryCapture">Vypni autofokus před každým stiskem spouště</string>
-  <string name="LabelCaptureInterval">Interval snímání (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">Délka videa (HH:MM:SS)</string>
   <string name="LabelMovieSettings">Nastavení videa</string>
   <string name="LabelVideoFormat">Formát videa</string>
   <string name="LabelOutputFile">Výstupní soubor</string>
   <string name="LabelFps">FPS</string>
   <string name="LabelFillImage">Vyplnit obraz</string>
   <string name="LabelCreateMovie">Nahrej video</string>
-  <string name="LabelMovingDirection">Směr pohybu:</string>
   <string name="LabelMovingDirectionLeftToRight">Zleva doprava</string>
   <string name="LabelMovingDirectionRightToLeft">Zprava doleva</string>
   <string name="LabelMovingDirectionTopToBottom">Odshora dolů</string>
   <string name="LabelMovingDirectionBottomToTop">Zespodu nahoru</string>
   <string name="LabelMovingDirectionLeftTopToRightBottom">Z levé horní na pravou dolní</string>
   <string name="LabelMovingDirectionRightBottomToLeftTop">Z pravé dolní na levou horní</string>
-  <string name="LabelImageAlignment">Zarovnání obrazu</string>
   <string name="LabelImageAlignmentLeftTop">Doleva nahoru</string>
   <string name="LabelImageAlignmentCenter">Na střed</string>
   <string name="LabelImageAlignmentRightBottom">Doprava dolů</string>
   <string name="LabelVideoCodecProblem">Chyba video kodeku</string>
-  <string name="MsgPhotoTransferBegin">Začni přenos snímků</string>
   <string name="MsgPhotoTransferDone">Přenos snímků dokončen</string>
-  <string name="MsgPhotoTransferError">Chyba přenosu !\nMessage :{0}</string>
   <string name="MsgApplicationUpToDate">Váš program je zastaralý !</string>
   <string name="MsgUseSessionEditorTags">Použij editor relací pro definici štítků !</string>
   <string name="MsgLastSessionCantBeDeleted">Poslední relaci nelze smazat</string>
-  <string name="MsgStopTimeLapse">Časosběrné video není hotovo. Opravdu jej chcete ukončit ?</string>
-  <string name="MsgInstallXvidCodec">Kodek Xvid není nainstalován !nChcete jej nyní stáhnout a nainstalovat ?</string>
-  <string name="MsgDeleteSessionQuestion">Pokračovat v mazání relace {0} ?\nSoubory nebudou smazány !</string>
   <string name="MsgBracketingDone">Bracketing - hotovo</string>
   <string name="MenuFile">_Soubor</string>
   <string name="MenuReScan">Znovu načíst připojené aparáty</string>
@@ -200,7 +175,6 @@
   <string name="MenuMultipleCamera">Řízení více aparátů</string>
   <string name="MenuSelectedCameraProperty">Nástroje vybraného aparátu</string>
   <string name="MenuPresets">Nastavení</string>
-  <string name="MenuPresetsLoad">Nahrát</string>
   <string name="MenuPresetsSave">Ulož</string>
   <string name="MenuPresetsEdit">Edituj</string>
   <string name="MenuHelp">_Nápověda</string>
@@ -212,87 +186,55 @@
   <string name="MenuLayoutNormal">Normální</string>
   <string name="MenuLayoutGrid">Mřížka</string>
   <string name="MenuProperties">Nastavení</string>
-  <!--15/10/2012-->
   <string name="LabelStayOnTop">Vždy nahoře</string>
-  <!--22/10/2012-->
   <string name="LabelDisplay">Displej</string>
   <string name="LabelThreshold">Práh (%)</string>
   <string name="LabelWaitMoion">Čekání (sec)</string>
-  <!--25/10/2012-->
   <string name="LabelAutofocusBeforeCapture">Autofokus před stiskem spouště</string>
-  <!--26/10/2012-->
   <string name="LabelOpacity">Průsvitnost</string>
-  <!--29/10/2012-->
   <string name="LabelSmallestBlockSize">Nejmenší velikost bloku</string>
   <string name="ButtonHelp">Nápověda</string>
-  <!--31/10/2012-->
   <string name="LabelMenu">Menu</string>
-  <!--03/11/2012-->
   <string name="MenuForum">Fórum</string>
-  <!--07/11/2012-->
   <string name="ButtonGetRawCodec">Získat kodek RAW</string>
-  <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">Chyba nahrávání videa</string>
   <string name="LabelNoCardInserted">Není vložena karta</string>
   <string name="LabelCardError">Chyba karty</string>
   <string name="LabelCardNotFormatted">Karta není naformátována</string>
-  <string name="LabelNoFreeAreaInCard">Karta je plná</string>
   <string name="LabelRecordInProgres">Během nahrávání videa</string>
   <string name="LabelCardProtected">Karta je zamčená</string>
   <string name="LabelDuringEnlargedDisplayLiveView">Při zvětšení okna živého náhledu</string>
   <string name="ButtonResetSettings">Reset</string>
-  <!--14/11/2012-->
   <string name="LabelUseExternalViewer">Otevři v externím prohlížeči</string>
   <string name="LabelExternalPreViewerPath">Cesta k externímu prohlížeči</string>
   <string name="LabelExternalPreViewerArgs">Parametry pro externí prohlížeč</string>
-  <!--18/11/2012-->
   <string name="LabelControl">Ovládání</string>
-  <!--20/11/2012-->
   <string name="LabelExport">Export</string>
-  <!--21/11/2012-->
   <string name="LabelDownload">Stáhnout</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">Stáhni snímky</string>
   <string name="LabelDeleteFilesAfterTransfer">Smaž snímky po přenosu</string>
-  <string name="LabelAskForDelete">Přenesené soubory budou smazány.\nPřejete si pokračovat ?</string>
-  <!--26/11/2012-->
-  <string name="LabelErrorSetFocusPos">Chyba nastavení pozice ostření</string>
-  <string name="LabelErrorUnableFocus">Nelze zaostřit</string>
-  <!--28/11/2012-->
   <string name="LabelErrorLoadingFileList">Chyba načítání seznamu souborů</string>
-  <!--30/11/2012-->
   <string name="LabelTransfer">Přenos</string>
   <string name="LabelTransferItem1">1.Nahrej pouze do PC</string>
   <string name="LabelTransferItem2">2.Nahrej pouze do aparátu</string>
   <string name="LabelTransferItem3">3.Nahrej do PC i do aparátu</string>
-  <!--05/12/2012-->
-  <string name="MsgDisabledDrivers">Originální ovladač je zakázán ! Chcete ho povolit ?</string>
-  <!--14/12/2012-->
   <string name="LabelShowFocusPoints">Ukaž ostřící body</string>
   <string name="LabelMainWindow">Hlavní okno</string>
   <string name="LabelSelect">Výběr</string>
   <string name="TimeSelectWindowTitle">Výběr okna</string>
-  <!--16/12/2012-->
   <string name="LabelRotateNone">Nic</string>
   <string name="LabelRotate90">Otoč o 90°</string>
   <string name="LabelRotate180">Otoč o 180°</string>
   <string name="LabelRotate270">Otoč o 270°</string>
-  <!--04/01/2013-->
   <string name="LabelRawCodecNotInstalled">Chybí RAW kodek nebo neznámý formát souboru</string>
-  <!--05/01/2013-->
   <string name="LabelUseCameraCounter">Použij čítač aparátu místo obecného čítače</string>
   <string name="LabelResetCounters">Vynuluj čítače</string>
-  <!--07/01/2013-->
   <string name="LabelUnabletoDeleteSession">Nelze smazat relaci</string>
-  <!--12/01/2013-->
   <string name="LabelWaitingForDevice">Čekání až bude zařízení připraveno</string>
   <string name="LabelAdvanced">Rozšířené</string>
   <string name="LabelUseParellelTransfer">Použij paralelní přenos souborů</string>
-  <!--19/01/2013-->
   <string name="LabelApplicationError">Chyba aplikace</string>
   <string name="LabelWiaNotInstalled">WIA 2.0 není nainstalován</string>
   <string name="LabelRestartTheApplication">Restartujte program !</string>
-  <string name="LabelOutOfMemory">Nedostatek paměti. Aplikace se nyní ukončí!</string>
   <string name="LabelApplicationAlreadyRunning">Aplikace již běží</string>
   <string name="LabelDeleteSession">Smaž relaci</string>
   <string name="LabelStartCapture">Start záznamu</string>
@@ -300,23 +242,17 @@
   <string name="LabelCaptureTime">Doba záběru (sec)</string>
   <string name="LabelTimeBetweenShots">Čas mezi záběry</string>
   <string name="LabelDontAutofocus">Neostřit automaticky</string>
-  <!--20/01/2013-->
   <string name="LabelUseAsMaster">Použít jako řídící</string>
-  <!--29/01/2013-->
   <string name="LabelCounterIncrementer">Přičítání</string>
   <string name="LabelSelected">Vybráno</string>
-  <!--31/01/2013-->
   <string name="LabelNone">Nic</string>
   <string name="LabelRuleOfThirds">Pravidlo třetin</string>
   <string name="LabelComboGrid">Mřížka</string>
   <string name="LabelDiagonal">Diagonála</string>
   <string name="LabelSplit">Rozdělit</string>
-  <!--13/03/2013-->
   <string name="LabelTools">Nástroje</string>
-  <!--17/03/2012-->
   <string name="LabelMFError">Aparát je v režimu manuálního ostření</string>
   <string name="LabelNotAFSError">Aparát není v režimu ostření AF-S</string>
-  <!--28/03/2012-->
   <string name="LabelSequenceError">Chyba sekvence</string>
   <string name="LabelApertureValueError">Hodnota clony bude nastavena clonovým kroužkem na objektivu.</string>
   <string name="LabelBulbError">Chyba blesku</string>
@@ -324,11 +260,9 @@
   <string name="LabelDuringInsufficiencyBattery">Při vybité baterii</string>
   <string name="LabelTTLError">Chyba TTL</string>
   <string name="LabelNonCPULEnseError">Není nastaven manuální režim pro objektiv bez procesoru.</string>
-  <string name="LabelOverHeatedError">Živý náhled nelze spustit kvůli zvýšené teplotě.</string>
   <string name="LabelCardProtectedError">Karta je zamčená</string>
   <string name="LabelDestinationCardError">Záznam bude prováděn na kartu.</string>
   <string name="LabelLiveViewError">Chyba živého náhledu</string>
-  <!--07/05/2013-->
   <string name="LabelDevices">Zařízení</string>
   <string name="LabelConfigName">Název konfigurace</string>
   <string name="LabelDriver">Ovladač</string>
@@ -346,40 +280,33 @@
   <string name="LabelStopLiveView">Ukonči živý náhled</string>
   <string name="LabelBrightness">Jas</string>
   <string name="LabelSetCounters">Nastav čítače</string>
-  <!--04/07/2013-->
   <string name="LabelExif">Exif</string>
   <string name="LabelFileName">Jméno souboru</string>
   <string name="LabelSet">Nastavení</string>
   <string name="LabelTagSelector">Volič štítků</string>
   <string name="LabelComment">Komentář</string>
-  <string name="LabelWriteComments">Napiš poznámku/štítek k nahranému souboru</string>
   <string name="LabelStayOnTop2">Vždy nahoře</string>
   <string name="LabelWriteSelectedTags">Napiš štítek z voliče štítků</string>
   <string name="LabelClearCache">Smaž vyrovnávací paměť</string>
   <string name="LabelLiveViewRotation">Otočení živého náhledu</string>
   <string name="LabelReset">Reset</string>
   <string name="LabelFocus">Ostření</string>
-  <!--17/11/2013-->
   <string name="LabelBarcode">Čárový kód</string>
   <string name="LabelSendTheLogFile">Pošli log soubor</string>
   <string name="LabelFullscreen">Celá obrazovka</string>
   <string name="LabelSelection">Výběr</string>
   <string name="LabelSelectAll">Vyber vše</string>
   <string name="LabelSelectNone">Zrušit výběr</string>
-  <!--19/01/2014-->
   <string name="LabelError">Chyba</string>
   <string name="LabelChangelog">Seznam změn</string>
-  <!--27/02/2014-->
   <string name="LabelAllowOverWrite">Povolit přepsání</string>
   <string name="LabelShowRuler">Ukaž měřítko</string>
   <string name="LabelAutoPreviewJpgOnly">Automatický náhled pouze pro jpg</string>
   <string name="LabelSettingsLiveView">Živý náhled</string>
-  <!--17.05.2014-->
   <string name="LabelClear">Vymaž</string>
   <string name="LabelHistogram">Histogram</string>
   <string name="LabelMetadata">Metadata</string>
   <string name="LabelFullSize">Obrázek v plném rozlišení</string>
-  <string name="ButtonRecordStopMovie">Konec nahrávání videa</string>
   <string name="LabelGenerateThumbs">Vytvoř náhledy</string>
   <string name="LabelPlay">Přehrej</string>
   <string name="LabelPause">Pauza</string>
@@ -391,7 +318,6 @@
   <string name="LabelBackUpFolder">Zálohuj složku</string>
   <string name="LabelBackUp">Zálohuj snímky</string>
   <string name="LabelApertureBracketing">Bracketing na clonu</string>
-  <!--//20/08/2014-->
   <string name="LabelAdvancedProperties">Rozšířená nastavení</string>
   <string name="LabelStepSmall">Malý krok</string>
   <string name="LabelStepMedium">Střední krok</string>
@@ -399,7 +325,6 @@
   <string name="LabelSessionOpenFolder">Otevřít složku relací</string>
   <string name="LabelHorizontal">Horizontální</string>
   <string name="LabelVertical">Vertikální</string>
-  <!--20/08/2014-->
   <string name="LabelLockNear">Zamkni nejbližší bod</string>
   <string name="LabelLockFar">Zamkni nejvzdálenější bod</string>
   <string name="LabelGoNear">Jdi na nejbližší ostřící bod</string>
@@ -410,8 +335,6 @@
   <string name="LabelPageSetup">Nastavení stránky</string>
   <string name="LabelMarginBetweenImages">Ořez</string>
   <string name="LabelRotate">Rotace</string>
-  <string name="LabelShowSecondary ">Ukaž na druhém monitoru</string>
-  <!--20/12/2014-->
   <string name="LabelTimeLapseSettings">Nastavení časosběru</string>
   <string name="LabelTimeLapseNow">Start teď</string>
   <string name="LabelTimeLapseIn">Start v</string>
@@ -432,12 +355,10 @@
   <string name="LabelTimeLapseCaptureScript">Spusť skript</string>
   <string name="LabelTimeLapseScriptFile">Soubor skriptu</string>
   <string name="LabelBrowse">Procházej</string>
-  <string name="LabelColor">Barva</string>
   <string name="LabelDeleteFiles">Smaž vybrané soubory</string>
   <string name="LabelShowInExplorer">Ukaž v průzkumníku</string>
   <string name="LabelOpenInExternalViewer">Otevři v externím prohlížeči</string>
   <string name="LabelRestoreFromBackup">Obnov ze zálohy</string>
-  <!--// 11/03/2015-->
   <string name="MenuSession">Relace</string>
   <string name="MenuCamera">Aparát</string>
   <string name="MenuThumbnailSize">Velikost náhledů</string>
@@ -451,33 +372,26 @@
   <string name="MenuExportSession">Exportuj relaci ...</string>
   <string name="MenuImportSession">Importuj relaci ...</string>
   <string name="LabelFullSpeed">Plná rychlost</string>
-  <!--// 12/09/2015-->
   <string name="LabelBracketingMode">Typ bracketingu</string>
   <string name="LabelDepthOfFieldBracketing">Bracketing na hloubku ostosti</string>
   <string name="LabelWhiteBalanceBracketing">Bracketing na vyvážení bílé</string>
   <string name="LabelIsoBracketing">Bracketing na ISO</string>
   <string name="LabelBracketingLow">Nízká hodnota</string>
   <string name="LabelBracketingHigh">Vysoká hodnota</string>
-  <string name="LabelBracketingMMode">Manuální režim aparátu</string>
   <string name="LabelTimeLapseCaptureBracketing">Vyfoť s bracketingem</string>
   <string name="LabelPreviewFullSize">Náhled plného rozlišení snímku</string>
   <string name="LabelCropMargins">Oříznutí okrajů (%)</string>
   <string name="LabelShowActiveArea">Ukaž aktivní oblast</string>
   <string name="LabelSetArea">Nastavení</string>
   <string name="LabelDoneArea">Hotovo</string>
-  <string name="LabelRotateCounterclockwise">Otoč proti směru hodin</string>
   <string name="LabelRotateClockwise">Otoč po směru hodin</string>
   <string name="LabelSaveJpg">Ulož jako JPG</string>
   <string name="LabelPageWidth">Šířka stránky</string>
   <string name="LabelPageHeigh">Výška stránky</string>
   <string name="LabelFill">Vyplnit</string>
-  <!--// 19/10/2015-->
   <string name="LabelApplyToImage">Použij na vybrané snímky</string>
-  <string name="LabelAutoFocusBeforCapture">Autofokus před stiskem spouště</string>
   <string name="LabelStatistics">Statistika</string>
   <string name="LabelRefresh">Znovu načíst</string>
   <string name="LabelOverview">Přehled</string>
   <string name="LabelItems">Položky</string>
-  <!--//30/01/2016-->
-  <!--//26/03/2016-->
 </resources>

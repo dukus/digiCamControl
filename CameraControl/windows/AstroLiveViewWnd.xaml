@@ -11,14 +11,14 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />--><!--
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -65,29 +65,36 @@
                 </Grid.RowDefinitions>
                 <Button Content="{T:TranslateExtension LabelStartLiveView}" Command="{Binding StartLiveViewCommand}" Margin="2" />
                 <Button  Content="{T:TranslateExtension LabelStopLiveView}" Grid.Row="0" Grid.Column="1" Command="{Binding StopLiveViewCommand}" Margin="2"  />
-                <ToggleButton Content="{T:TranslateExtension ButtonFreezeImage}" Grid.Row="0" Margin="2" IsChecked="{Binding Path=FreezeImage}" Grid.Column="3" />
             </Grid>
         </GroupBox>
         <StackPanel Grid.Column="2" Margin="2" Grid.RowSpan="2">
             <Label Content="{T:TranslateExtension LabelBrightness}" Padding="1"/>
-            <Slider Minimum="-255" Maximum="255" Value="{Binding Brightness}" Margin="3"/>
+            <Slider Minimum="-255" Maximum="255" Value="{Binding Brightness}" Margin="4"/>
+            <Label Content="{T:TranslateExtension LabelContrast}" Padding="1"/>
+            <Slider Minimum="-127" Maximum="127" Value="{Binding Contrast}" Margin="4"/>
             <Label Content="Zoom X" Padding="1"/>
-            <Slider Minimum="1" Maximum="15" Value="{Binding ZoomFactor}" Margin="3"/>
+            <Slider Minimum="1" Maximum="15" Value="{Binding ZoomFactor}" Margin="4"/>
             <Label Content="Star window size" Padding="1"/>
-            <Slider Minimum="5" Maximum="45" Value="{Binding StarWindowSize}" Margin="3"/>
+            <Slider Minimum="5" Maximum="45" Value="{Binding StarWindowSize}" Margin="4"/>
             <Label Content="Average image count" Padding="1"/>
-            <Slider Minimum="0" Maximum="5" Value="{Binding AverageCount}" Margin="3"/>            
+            <Slider Minimum="0" Maximum="5" Value="{Binding AverageCount}" Margin="4"/>            
             <StackPanel Orientation="Horizontal">
                 <Label Content="{T:TranslateExtension LabelLvZoomRation}" HorizontalAlignment="Right" />
                 <ComboBox IsEnabled="{Binding Path=CameraDevice.LiveViewImageZoomRatio.IsEnabled}" ItemsSource="{Binding Path=CameraDevice.LiveViewImageZoomRatio.Values}"
-                          Margin="3" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
+                          Margin="4" SelectedItem="{Binding CameraDevice.LiveViewImageZoomRatio.Value}"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{T:TranslateExtension ButtonFreezeImage}" HorizontalAlignment="Right" />
+                <ToggleButton Margin="4" IsChecked="{Binding Path=FreezeImage}"/>
+            </StackPanel>
+
+
             <StackPanel Orientation="Horizontal">
                 <Label Content="Star Size" HorizontalContentAlignment="Center" FontSize="20"/>
                 <Label Content="{Binding StringFormat=\{0.FN\}, Path=DisplayStarSize}" HorizontalContentAlignment="Center" FontSize="20"/>
             </StackPanel>
-            <Image Stretch="Uniform" HorizontalAlignment="Center" Source="{Binding StarWindow}" Height="80" Margin="5"/>
-            <Image Stretch="Uniform" Source="{Binding Preview}" MouseDown="img_preview_MouseDown" Name="img_preview" Margin="5"/>
+            <Image Stretch="Uniform" HorizontalAlignment="Center" Source="{Binding StarWindow}" Height="80" Margin="4"/>
+            <Image Stretch="Uniform" Source="{Binding Preview}" MouseDown="img_preview_MouseDown" Name="img_preview" Margin="4"/>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

@@ -71,7 +71,7 @@
   <string name="BraketingToolTip">包圍曝光</string>
   <string name="SettingsToolTip">設定</string>
   <string name="TimeLapseToolTip">延遲攝影</string>
-  <string name="FullscreenToolTip">全螢幕</string>
+  <string name="FullscreenToolTip">全幅</string>
   <string name="LiveViewToolTip">實時顯示</string>
   <string name="BrowseSessionsToolTip">瀏覽排程</string>
   <string name="SelectTagsToolTip">選擇標籤</string>
@@ -80,7 +80,7 @@
   <string name="SessionAdd">新增</string>
   <string name="SessionEdit">修改</string>
   <string name="SessionDel">刪除</string>
-  <string name="MainWindowTitle">主視窗</string>
+  <string name="MainWindowTitle">NCC</string>
   <string name="SettingsWindowTitle">設定</string>
   <string name="SessionWindowTitle">新增或編輯排程</string>
   <string name="LiveViewWindowTitle">實時顯示</string>
@@ -111,20 +111,20 @@
   <string name="ButtonStopTimeLapse">停止曠時攝影</string>
   <string name="ButtonCreateMovie">建立影片</string>
   <string name="ButtonLocateLogFile">定位日誌檔案</string>
-  <string name="LabelInterfaceLanguage">界面語言：</string>
+  <string name="LabelInterfaceLanguage">介面語言</string>
   <string name="LabelDisableDriver">取消內建驅動程式（不推薦）</string>
-  <string name="LabelTheme">主題：</string>
+  <string name="LabelTheme">主題</string>
   <string name="LabelGeneral">一般</string>
   <string name="LabelPreview">預覽</string>
   <string name="LabelPlaySound">拍攝後播放音效</string>
   <string name="LabelAutoPreview">自動預覽</string>
-  <string name="LabelPreviewAfterCapture">拍攝後全螢幕預覽</string>
-  <string name="LabelPreviewTime">預覽時間 (秒)：</string>
+  <string name="LabelPreviewAfterCapture">在全螢幕下拍攝後預覽影像</string>
+  <string name="LabelPreviewTime">預覽影像秒數</string>
   <string name="LabelPreviewInLIveView">在實時顯示模式拍攝後馬上預覽影像</string>
-  <string name="LabelLIveViewImageFreeze">實時顯示影像定格時間</string>
+  <string name="LabelLIveViewImageFreeze">實時檢視影像暫停秒數</string>
   <string name="LabelRotateImage">旋轉影像</string>
   <string name="LabelDontLoadThumbs">不載入縮圖</string>
-  <string name="LabelFullscrenBack">全螢幕背景：</string>
+  <string name="LabelFullscrenBack">全螢幕視窗背景</string>
   <string name="LabelTriggers">釋放快門</string>
   <string name="LabelUseKeybordToTrigger">使用鍵盤觸發快門拍照</string>
   <string name="LabelWebserver">Web 伺服器</string>
@@ -132,32 +132,20 @@
   <string name="LabelFocusAndLiveview">對焦和顯示顯示</string>
   <string name="LabelSmallFocusSstep">小區域對焦級數</string>
   <string name="LabelMediumFocusStep">中區域對焦級數</string>
-  <string name="LabelLargFocusStep">大區域對焦級數</string>
+  <string name="LabelLargFocusStep">大的對焦步數</string>
   <string name="ReStartToolTip">你需要重啟本程式讓更改設定生效</string>
-  <string name="LabelSessonName">排程名稱：</string>
-  <string name="LabelFolder">檔案夾：</string>
-  <string name="LabelFileNameTemplate">檔案名稱樣版：</string>
-  <string name="LabelFileNameTemplateToolTip">$N - 排程名稱 
-$C - 計數器 
-$E - 曝光補償 
-$X - 相機名稱
-$D - 目前日期
-$UTime - Unix 時間戳記
-$Type - 檔案型態 (Raw|Jpg) 
-$B - 條碼
-$Tag1 - 被選擇的標記 1
-$Tag2 - 被選擇的標記 2
-$Tag3 - 被選擇的標記 3
-$Tag4 - 被選擇的標記 4</string>
-  <string name="LabelCounter">計數器：</string>
-  <string name="LabelUseOriginal">使用相機本身的原始檔案名稱</string>
-  <string name="LabelUseOriginalToolTip">該選項無法在 WIA 驅動下工作</string>
+  <string name="LabelSessonName">會話 (session) 名稱</string>
+  <string name="LabelFolder">目錄</string>
+  <string name="LabelFileNameTemplate">檔案名稱範本</string>
+  <string name="LabelCounter">計數器</string>
+  <string name="LabelUseOriginal">使用相機原本給定的檔案名稱</string>
+  <string name="LabelUseOriginalToolTip">此選項無法在 WIA 驅動程式中使用</string>
   <string name="LabelDontDownloadPhotos">不要下載影像到電腦</string>
   <string name="LabelAlowFolderChange">使用影像瀏覽器時允許更改檔案夾</string>
   <string name="LabelTags">標籤</string>
   <string name="LabelManualFocus">手動對焦</string>
   <string name="LabelGrid">格線</string>
-  <string name="LabelLvZoomRation">Lv 縮放比率</string>
+  <string name="LabelLvZoomRation">實時顯示放大率</string>
   <string name="LabelFocusStacking">焦點合成</string>
   <string name="LabelNoOfPhots">照片數量</string>
   <string name="LabelFocusStep">對焦級數</string>
@@ -183,8 +171,8 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelSecondsBetweenShots">拍攝間隔秒數</string>
   <string name="LabelNumberOfPhotos">照片數</string>
   <string name="LabelDontAutofocusOnEveryCapture">取消每次拍攝的自動對焦動作</string>
-  <string name="LabelCaptureInterval">拍攝間隔 (HH:MM:SS)</string>
-  <string name="LabelMovieLenght">影片長度 (HH:MM:SS)</string>
+  <string name="LabelCaptureInterval">拍攝時間(HHMMSS)</string>
+  <string name="LabelMovieLenght">視訊長度(HHMMSS)</string>
   <string name="LabelMovieSettings">影片設定</string>
   <string name="LabelVideoFormat">視頻格式</string>
   <string name="LabelOutputFile">輸出檔名</string>
@@ -192,29 +180,32 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelFillImage">填滿影像</string>
   <string name="LabelCreateMovie">建立影片</string>
   <string name="LabelAddVirtualMovingToVideo">增加虛擬位移到影片中</string>
-  <string name="LabelMovingSurface">位移量 (%)</string>
-  <string name="LabelMovingDirection">位移方向</string>
+  <string name="LabelMovingSurface">移動表面(%)</string>
+  <string name="LabelMovingDirection">移動方向</string>
   <string name="LabelMovingDirectionLeftToRight">由左到右</string>
   <string name="LabelMovingDirectionRightToLeft">由右到左</string>
   <string name="LabelMovingDirectionTopToBottom">從上到下</string>
   <string name="LabelMovingDirectionBottomToTop">從下到上</string>
   <string name="LabelMovingDirectionLeftTopToRightBottom">左上到右下</string>
   <string name="LabelMovingDirectionRightBottomToLeftTop">右下到左上</string>
-  <string name="LabelImageAlignment">影像對齊</string>
+  <string name="LabelImageAlignment">影像對準</string>
   <string name="LabelImageAlignmentLeftTop">左/上</string>
   <string name="LabelImageAlignmentCenter">中央</string>
   <string name="LabelImageAlignmentRightBottom">右/下</string>
   <string name="LabelVideoCodecProblem">視頻編碼器問題</string>
   <string name="MsgPhotoTransferBegin">開始傳輸照片</string>
   <string name="MsgPhotoTransferDone">照片傳輸完成</string>
-  <string name="MsgPhotoTransferError">傳輸錯誤！\n訊息 :{0}</string>
+  <string name="MsgPhotoTransferError">傳輸錯誤!
+訊息 {0}</string>
   <string name="MsgBulbModeNotSupported">不支援 B 快門模式！</string>
   <string name="MsgApplicationUpToDate">您的應用程式已經是最新版本！</string>
   <string name="MsgUseSessionEditorTags">請使用排程編輯器來定義標籤！</string>
   <string name="MsgLastSessionCantBeDeleted">僅剩的一個排程不能被刪除</string>
-  <string name="MsgStopTimeLapse">曠時攝影仍在進行中！ 要中止嘛？</string>
-  <string name="MsgInstallXvidCodec">未安裝 Xvid 編碼器！\n要下載並安裝嗎？</string>
-  <string name="MsgDeleteSessionQuestion">確定要刪除排程 {0} 嗎？\n照片檔案不會被刪除！</string>
+  <string name="MsgStopTimeLapse">曠時攝影未完成! 要終止這個拍攝程序?</string>
+  <string name="MsgInstallXvidCodec">沒有安裝 Xvid 解碼器 !
+你要下載並安裝這個解碼器嗎 ? </string>
+  <string name="MsgDeleteSessionQuestion">你要繼續刪除這個會話 {0} ?
+不會有任何檔案會被刪除 !</string>
   <string name="MsgBracketingDone">完成包圍曝光</string>
   <string name="MsgActionInProgress">作業進度 {0}/{1}</string>
   <string name="MenuFile">檔案（_F）</string>
@@ -225,7 +216,7 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="MenuMultipleCamera">控制多部相機</string>
   <string name="MenuSelectedCameraProperty">所選擇相機的屬性</string>
   <string name="MenuPresets">預設集</string>
-  <string name="MenuPresetsLoad">載入</string>
+  <string name="MenuPresetsLoad">載入相機的預設集</string>
   <string name="MenuPresetsSave">儲存</string>
   <string name="MenuPresetsEdit">編輯</string>
   <string name="MenuHelp">輔助（_H）</string>
@@ -234,106 +225,89 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="MenuDonate">捐款</string>
   <string name="MenuAbout">關於</string>
   <string name="MenuLayout">界面布局</string>
+  <string name="MenuLayoutDefault">預設值</string>
   <string name="MenuLayoutNormal">普通</string>
   <string name="MenuLayoutGridRight">右側縮圖</string>
   <string name="MenuLayoutGrid">僅縮圖</string>
   <string name="MenuProperties">屬性</string>
   <string name="MenuUseSelectedCameraPreset">使用所選定相機的預設集</string>
-  <!--15/10/2012-->
   <string name="LabelExternalViewerPath">外部瀏覽器選單</string>
   <string name="LabelStayOnTop">總是在最上層</string>
-  <!--22/10/2012-->
   <string name="LabelDisplay">顯示</string>
   <string name="LabelMotionDetection">移動偵測</string>
   <string name="LabelActivateMotionDetection">啟用移動偵測</string>
   <string name="LabelCaptureWhenMove">當偵測到移動時拍攝</string>
   <string name="LabelThreshold">臨界值 (%)</string>
   <string name="LabelWaitMoion">等待時間 (秒)</string>
-  <!--25/10/2012-->
   <string name="LabelAutofocusBeforeCapture">拍攝前自動對焦</string>
-  <!--26/10/2012-->
   <string name="LabelOpacity">透明度</string>
-  <!--29/10/2012-->
   <string name="LabelMotionDetectionType">移動偵測類型</string>
   <string name="LabelTwoFramesDifferenceDetector">影像差異偵測</string>
-  <string name="LabelSimpleBackgroundModelingDetector">單存背景差異偵測</string>
+  <string name="LabelSimpleBackgroundModelingDetector">簡易背景模式偵測器</string>
   <string name="LabelSmallestBlockSize">最小區塊大小</string>
   <string name="ButtonHelp">輔助</string>
-  <!--31/10/2012-->
   <string name="LabelMenu">選單</string>
-  <!--03/11/2012-->
   <string name="MenuForum">論壇</string>
-  <!--07/11/2012-->
   <string name="ButtonGetRawCodec">取得 RAW 檔格式編碼器</string>
-  <!--08/11/2012-->
-  <string name="LabelErrorRecordMovie">開始拍攝影片發生錯誤</string>
+  <string name="LabelErrorRecordMovie">開始錄影時發生錯誤</string>
   <string name="LabelNoCardInserted">未插入記憶卡</string>
   <string name="LabelCardError">記憶卡錯誤</string>
   <string name="LabelCardNotFormatted">記憶卡未格式化</string>
-  <string name="LabelNoFreeAreaInCard">記憶卡空間不足</string>
-  <string name="LabelCardBufferNotEmpty">緩衝區中有未寫入記憶卡的資料存在。</string>
-  <string name="LabelPcBufferNotEmpty">缓緩衝區中有未寫入電腦的資料存在。</string>
+  <string name="LabelNoFreeAreaInCard">記憶卡儲存空間不足</string>
+  <string name="LabelCardBufferNotEmpty">緩衝區中還有未完全寫入到相機記憶卡的影像資料</string>
+  <string name="LabelPcBufferNotEmpty">緩衝區中還有未完全寫入到電腦的影像資料</string>
   <string name="LabelBufferNotEmpty">緩衝區中有影片資料。</string>
   <string name="LabelRecordInProgres">影片錄製中</string>
   <string name="LabelCardProtected">記憶卡防寫</string>
   <string name="LabelDuringEnlargedDisplayLiveView">實時顯示放大中</string>
-  <string name="LabelWrongLiveViewType">設定實時顯示選擇器為實時攝影。</string>
+  <string name="LabelWrongLiveViewType">實時顯示選擇器被設定為實時顯示拍攝模式</string>
   <string name="LabelNotInApplicationMode">相機不可使用</string>
   <string name="ButtonResetSettings">重新設定</string>
-  <!--14/11/2012-->
   <string name="LabelUseExternalViewer">使用外部瀏覽器</string>
   <string name="LabelExternalPreViewerPath">外部瀏覽器路徑</string>
   <string name="LabelExternalPreViewerArgs">外部瀏覽器命令參數</string>
-  <!--18/11/2012-->
   <string name="LabelControl">控制</string>
-  <!--20/11/2012-->
   <string name="LabelExport">匯出</string>
-  <!--21/11/2012-->
   <string name="LabelDownload">下載</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">下載照片</string>
   <string name="LabelDeleteFilesAfterTransfer">傳輸完成後刪除原始檔案</string>
-  <string name="LabelAskForDelete">已傳輸的檔案將被刪除, 繼續？</string>
-  <!--26/11/2012-->
-  <string name="LabelErrorSetFocusPos">設定對焦點發生錯誤</string>
+  <string name="LabelAskForDelete">傳輸後檔案將會被刪除,
+要繼續嗎?</string>
+  <string name="LabelErrorSetFocusPos">設定對焦位置實發生錯誤</string>
   <string name="LabelErrorUnableFocus">無法對焦</string>
-  <!--28/11/2012-->
   <string name="LabelErrorLoadingFileList">載入檔案列表發生錯誤</string>
-  <!--30/11/2012-->
   <string name="LabelTransfer">傳輸</string>
   <string name="LabelTransferItem1">1. 僅儲存到電腦</string>
   <string name="LabelTransferItem2">2. 僅儲存到相機</string>
   <string name="LabelTransferItem3">3. 同時儲存到電腦和相機</string>
-  <!--05/12/2012-->
-  <string name="MsgDisabledDrivers">驅動程式被禁用！ 要啟用嗎？</string>
-  <!--14/12/2012-->
+  <string name="MsgDisabledDrivers">內建驅動程式被關閉！要啟用驅動程式嗎？</string>
   <string name="LabelShowFocusPoints">顯示對焦點</string>
   <string name="LabelMainWindow">主視窗</string>
   <string name="LabelSelect">選擇</string>
   <string name="TimeSelectWindowTitle">選擇視窗</string>
-  <!--16/12/2012-->
   <string name="LabelRotateNone">無</string>
   <string name="LabelRotate90">旋轉90度</string>
   <string name="LabelRotate180">旋轉180度</string>
   <string name="LabelRotate270">旋轉270度</string>
-  <string name="LabelLowMemoryUsage">低記憶體使用模式</string>
-  <!--04/01/2013-->
   <string name="LabelRawCodecNotInstalled">未安裝RAW檔格式解碼器或不明的檔案格式</string>
-  <!--05/01/2013-->
   <string name="LabelUseCameraCounter">使用相機本身的計數器而非通用計數器</string>
   <string name="LabelResetCounters">重置計數器</string>
-  <!--07/01/2013-->
   <string name="LabelUnabletoDeleteSession">無法刪除排程</string>
-  <!--12/01/2013-->
   <string name="LabelWaitingForDevice">等待設備就緒</string>
   <string name="LabelAdvanced">進階</string>
   <string name="LabelUseParellelTransfer">使用平行埠來傳輸檔案</string>
-  <!--19/01/2013-->
-  <string name="LabelUnHandledError">程式發生錯誤。\n請檢查您的資料是否正確然後重試。如果該問題仍出現, 可能是本程式有問題, 你最好關閉本程式。。\n\nError:{0}\n\n是否繼續？\n(選擇”是“則繼續執行, \"否\"則會中止並關閉本程式)</string>
+  <string name="LabelUnHandledError">發生應用程式錯誤
+請檢查資料是否正確然後重複此動作, 如果發生同樣問題, 代表程式發生
+一連串的問題所導致的結果, 建議將程式關閉。
+
+錯誤:{0}
+
+要繼續？
+(如果點選 Yes, 將會繼續你的工作, No 則會關閉程式)</string>
   <string name="LabelApplicationError">程式發生錯誤</string>
   <string name="LabelWiaNotInstalled">未安裝 WIA 2.0</string>
   <string name="LabelRestartTheApplication">重新執行本程式！</string>
-  <string name="LabelOutOfMemory">記憶體不足, 離開程式！</string>
+  <string name="LabelOutOfMemory">記憶體不足, 程式將會關閉！</string>
   <string name="LabelApplicationAlreadyRunning">程式執行中</string>
   <string name="LabelDeleteSession">刪除排程</string>
   <string name="LabelStartCapture">開始拍攝</string>
@@ -342,23 +316,17 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelTimeBetweenShots">拍攝間隔</string>
   <string name="LabelDontAutofocus">取消自動對焦</string>
   <string name="LabelShowUnTranslatedStringIds">顯示未翻譯的字串識別碼</string>
-  <!--20/01/2013-->
   <string name="LabelUseAsMaster">設為主要設定</string>
-  <!--29/01/2013-->
   <string name="LabelCounterIncrementer">計數器增量</string>
   <string name="LabelSelected">已選擇</string>
-  <!--31/01/2013-->
   <string name="LabelNone">無</string>
   <string name="LabelRuleOfThirds">三分法</string>
   <string name="LabelComboGrid">網格</string>
   <string name="LabelDiagonal">對角線</string>
   <string name="LabelSplit">分割</string>
-  <!--13/03/2013-->
   <string name="LabelTools">工具</string>
-  <!--17/03/2012-->
   <string name="LabelMFError">相機處於 MF 對焦模式</string>
   <string name="LabelNotAFSError">相機不是在 AF-S 對焦模式</string>
-  <!--28/03/2012-->
   <string name="LabelSequenceError">排序發生錯誤</string>
   <string name="LabelFullyPressedButtonError">全按下按鈕發生錯誤</string>
   <string name="LabelApertureValueError">光圈值為鏡頭光圈環所控制。</string>
@@ -368,16 +336,16 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelTTLError">TTL error</string>
   <string name="LabelNonCPULEnseError">使用非 CPU 鏡頭, 而曝光模式不是在 M 模式。</string>
   <string name="LabelImageInRAM">此影像的儲存目的地為 SDRAM</string>
-  <string name="LabelNoCardInsertedError">儲存目的地是此記憶卡插槽或 SDRAM,\n 且此插槽沒有插入記憶卡</string>
+  <string name="LabelNoCardInsertedError">儲存目的地是記憶卡或記憶卡及SDRAM,
+但沒有插入記憶卡而且無記憶卡還可拍攝的選項也被關閉。</string>
   <string name="LabelCommandProcesingError">拍攝命令進行中</string>
   <string name="LabelShoutingInProgress">拍攝模式為 EFFECTS</string>
-  <string name="LabelOverHeatedError">溫度過高, 無法啟用實時顯示模式。</string>
+  <string name="LabelOverHeatedError">相機感測器的溫度太高, 無法啟用實時顯示</string>
   <string name="LabelCardProtectedError">記憶卡防寫</string>
   <string name="LabelMirrorUpError">快門釋放模式已設定為預升反光鏡, 作業正在進行中</string>
   <string name="LabelMirrorUpError2">快門釋放模式已設定為 [Mirror-up] 模式</string>
   <string name="LabelDestinationCardError">記憶卡發生錯誤。</string>
   <string name="LabelLiveViewError">啟用實時顯示時發生錯誤</string>
-  <!--07/05/2013-->
   <string name="LabelDevices">設備</string>
   <string name="LabelExternalShutterRelease">外部快門釋放器</string>
   <string name="LabelConfigName">組態名稱</string>
@@ -397,11 +365,10 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelBrightness">亮度</string>
   <string name="LabelUseExternalShutterRelease">使用外部快門釋放器</string>
   <string name="LabelDownloadJpgOnly">僅下載 JPG 檔案</string>
-  <string name="LabelDownloadJpgOnlyToolTip">如果以 JPG+RAW 方式拍攝, 僅 JPG 檔會被下載</string>
+  <string name="LabelDownloadJpgOnlyToolTip">只在影像儲存到相機記憶卡時才能啟用</string>
   <string name="LabelSetCounters">設定計數器</string>
   <string name="LabelEdgeDetection">邊緣偵測</string>
   <string name="LabelLeadingZeros">計數器載入結果為零</string>
-  <!--04/07/2013-->
   <string name="LabelShowFocusRect">顯示焦點方格</string>
   <string name="LabelEasyLiveViewControl">簡易實時檢視控制器</string>
   <string name="LabelExif">Exif</string>
@@ -410,7 +377,7 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelSet">設定</string>
   <string name="LabelTagSelector">標籤選擇器</string>
   <string name="LabelComment">附註</string>
-  <string name="LabelWriteComments">將附註/標籤寫入已下載的檔案中</string>
+  <string name="LabelWriteComments">寫入註記/標示到下載影像檔</string>
   <string name="LabelStayOnTop2">在最上層顯示</string>
   <string name="LabelWriteSelectedTags">自標籤選擇器中寫入標籤</string>
   <string name="LabelClearCache">清除快取</string>
@@ -423,43 +390,39 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelCurrentEvent">目前事件</string>
   <string name="LabelRemainingCaptures">剩餘拍攝張數</string>
   <string name="LabelLiveViewRotation">實時顯示相場旋轉</string>
-  <string name="LabelAutomaticallyGuiding">開始拍攝後自動使用 PHD 導星</string>
+  <string name="LabelAutomaticallyGuiding">開始拍攝照片後自動啟動 PHD 導星</string>
   <string name="LabelAutoRotate">自動旋轉</string>
   <string name="LabelReset">重置</string>
   <string name="LabelFocus">焦點</string>
-  <!--17/11/2013-->
   <string name="LabelAddFakeCamera">加入假相機</string>
   <string name="LabelBarcode">條碼</string>
   <string name="LabelSendTheLogFile">傳送日誌檔</string>
-  <string name="LabelAskSendLogFile">你要將日誌檔傳送給程式開發者嗎?</string>
-  <string name="LabelSyncCameraDate">當相機連接後同步相機的日期及時間</string>
+  <string name="LabelAskSendLogFile">要傳送日誌檔給軟體開發人員嗎?</string>
+  <string name="LabelSyncCameraDate">當相機連接上後, 與相機同步日期/時間</string>
   <string name="LabelShowThumbUpDown">顯示縮圖的上/下控制按鈕</string>
   <string name="LabelSend">傳送</string>
-  <string name="LabelLogMessage">給 digiCamControl 程式開發者的訊息:</string>
-  <string name="LabelLogText">日誌檔將會傳送給 digiCamcontrol 開發團隊以增強應用程式的穩定性.</string>
+  <string name="LabelLogMessage">傳送訊息給 digiCamControl 程式開發人員</string>
+  <string name="LabelLogText">日誌檔將傳送給 digiCamcontrol 軟體開發人員以強化軟體穩定度。</string>
   <string name="LabelFullscreen">全螢幕</string>
   <string name="LabelSelection">選擇</string>
   <string name="LabelSelectAll">全選</string>
   <string name="LabelSelectNone">不選</string>
   <string name="LabelSelectLiked">選擇喜歡的</string>
   <string name="LabelSelectUnLiked">選擇不喜歡的</string>
-  <!--19/01/2014-->
-  <string name="LabelLockNearFar">請鎖定最近及最遠的對焦點</string>
+  <string name="LabelLockNearFar">請鎖定最近及最遠對焦點</string>
   <string name="LabelError">錯誤</string>
   <string name="LabelChangelog">改變日誌</string>
-  <!--27/02/2014-->
   <string name="LabelAllowOverWrite">容許覆寫</string>
   <string name="LabelShowRuler">顯示尺規</string>
   <string name="LabelAutoPreviewJpgOnly">僅自動預覽 JPG 檔</string>
   <string name="LabelSettingsLiveView">實時顯示</string>
   <string name="LabelHostMode">主機模式</string>
-  <!--17.05.2014-->
   <string name="LabelClear">清除</string>
   <string name="LabelHistogram">色階圖</string>
   <string name="LabelMetadata">中繼資料</string>
   <string name="LabelFullSize">完整大小的影像</string>
   <string name="LabelWifi">連接 DSLRDASHBOARDSERVER</string>
-  <string name="ButtonRecordStopMovie">停止錄影</string>
+  <string name="ButtonRecordStopMovie">停止錄製視訊</string>
   <string name="LabelOverlay">覆蓋</string>
   <string name="LabelGenerateThumbs">產生縮圖</string>
   <string name="LabelPlay">播放</string>
@@ -475,9 +438,8 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelBackUp">備份照片</string>
   <string name="LabelVerifyPreset">診斷預設集</string>
   <string name="LabelRefreshSession">重新整理檔案列表</string>
-  <string name="LabelErrorEmail">你的電子郵件地址 (如果你想要取得任何訊息的回饋)</string>
+  <string name="LabelErrorEmail">您的郵件地址(如果你想要我們回應訊息的話)</string>
   <string name="LabelApertureBracketing">光圈包圍 </string>
-  <!--//20/08/2014-->
   <string name="LabelCaptureName">照片名稱</string>
   <string name="LabelSeries">序列</string>
   <string name="LabelAdvancedProperties">進階屬性</string>
@@ -492,7 +454,6 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelScaling">尺度</string>
   <string name="LabelHorizontal">水平</string>
   <string name="LabelVertical">垂直</string>
-  <!--20/08/2014-->
   <string name="LabelLockNear">鎖定最近對焦點</string>
   <string name="LabelLockFar">鎖定最遠對焦點</string>
   <string name="LabelGoNear">調到最近對焦點</string>
@@ -503,12 +464,12 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelMoveSmallToInfinity">以小型轉距移動到無窮遠處</string>
   <string name="LabelMoveMediumToInfinity">以中型轉距移動到無窮遠處</string>
   <string name="LabelMoveLargeToInfinity">以大型轉距移動到無窮遠處</string>
-  <string name="LabelDistantFromPoints">最近與最遠間的距離已經在對焦點中鎖定</string>
+  <string name="LabelDistantFromPoints">最近與最遠對焦點間的距離</string>
   <string name="LabelFocusStackingSimple">簡易對焦疊合</string>
   <string name="LabelFocusStackingAdvanced">進階對焦疊合</string>
   <string name="LabelErrorFarPoit">第一次設定最遠對焦點</string>
   <string name="LabelErrorAutoFocusLock">焦點已經鎖定, 解開鎖定來進行自動對焦</string>
-  <string name="LabelErrorSimpleStackingFocusLock">焦點以鎖定, 簡易焦點疊合不需要鎖定焦點, 解開鎖定後開始執行</string>
+  <string name="LabelErrorSimpleStackingFocusLock">焦點已經鎖定, 簡易的對焦影像疊合不需要鎖定對焦點, 請解開鎖定後再繼續。</string>
   <string name="LabelLowerCaseExtension">延伸檔名設為小寫</string>
   <string name="LabelOverlayTransparency">明度</string>
   <string name="LabelOverlayUseLastCaptured">使用最後一張照片</string>
@@ -534,11 +495,10 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelRotate">旋轉</string>
   <string name="LabelRepeatImages">重複的影像</string>
   <string name="LabelWaitBetweenSteps">在每步間等待 (ms)</string>
-  <string name="LabelShowSecondary ">在第二個螢幕上顯示</string>
-  <!--20/12/2014-->
+  <string name="LabelShowSecondary">顯示於第二台螢幕上</string>
   <string name="LabelKeyboardTrigger">鍵盤觸發</string>
-  <string name="LabelNoProccesing">沒有進行任何處理程序</string>
-  <string name="LabelNoProccesingTooltip">大部份功能已關閉</string>
+  <string name="LabelNoProccesing">不處理</string>
+  <string name="LabelNoProccesingTooltip">大部份的功能都被關閉了</string>
   <string name="LabelSendUsage">自動地傳送使用統計數值</string>
   <string name="LabelSheduleStart">開始排程</string>
   <string name="LabelSheduleStop">停止排程</string>
@@ -562,7 +522,7 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelTimeLapseStopPhotoCount">在拍攝幾張之後</string>
   <string name="LabelTimeLapseWaitBetweenCaptures">拍攝中間間隔時間 (秒)</string>
   <string name="LabelTimeLapseCapture">以所選擇的相機拍攝</string>
-  <string name="LabelTimeLapseCaptureAll">以所有的相機拍攝</string>
+  <string name="LabelTimeLapseCaptureAll">讓所有相機進行拍攝</string>
   <string name="LabelTimeLapseCaptureScript">執行腳本檔</string>
   <string name="LabelTimeLapseScriptFile">腳本檔案</string>
   <string name="LabelBrowse">瀏覽</string>
@@ -579,7 +539,6 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelShowInExplorer">在瀏覽器中顯示</string>
   <string name="LabelOpenInExternalViewer">以外部檔案檢視程式開啟</string>
   <string name="LabelRestoreFromBackup">由備份檔回復</string>
-  <!--// 11/03/2015-->
   <string name="LabelAllowWebCommands">容許透過網頁伺服器進行通訊</string>
   <string name="LabelCurrentMotion">偵測到的移動</string>
   <string name="LabelStartupScript">啟動時執行腳本</string>
@@ -607,7 +566,12 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="MenuExportSession">匯出作業排程 ...</string>
   <string name="MenuImportSession">匯入作業排程 ...</string>
   <string name="LabelFullSpeed">速率全開</string>
-  <!--// 12/09/2015-->
+  <string name="LabelPreviewWindows">預覽視窗</string>
+  <string name="LabelTransformed">已轉換</string>
+  <string name="LabelOriginal">原始的</string>
+  <string name="LabelPluginProperties">特性</string>
+  <string name="LabelPluginTransformPlugins">轉換插件</string>
+  <string name="LabelConfigurePlugin">設定插件</string>
   <string name="LabelEmailPublicWebAddress">Email 公眾網站地址</string>
   <string name="LabelBracketingMode">包圍曝光模式</string>
   <string name="LabelDepthOfFieldBracketing">景深包圍曝光</string>
@@ -628,16 +592,15 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelShowActiveArea">顯示活動區域</string>
   <string name="LabelSetArea">設定</string>
   <string name="LabelDoneArea">完成</string>
-  <string name="LabelRotateCounterclockwise">逆時針方向旋轉</string>
+  <string name="LabelRotateCounterclockwise">逆時針方向選轉</string>
   <string name="LabelRotateClockwise">順時針方向旋轉</string>
   <string name="LabelSaveJpg">儲存為 JPG 檔</string>
   <string name="LabelPageWidth">頁寬</string>
   <string name="LabelPageHeigh">頁高</string>
   <string name="LabelFill">填滿</string>
-  <!--// 19/10/2015-->
   <string name="LabelApplyToImage">套用到所選擇的檔案</string>
   <string name="LabelCaptureCount">拍攝張數</string>
-  <string name="LabelAutoFocusBeforCapture">拍攝前進行自動對焦</string>
+  <string name="LabelAutoFocusBeforCapture">開始拍攝前進行自動對焦</string>
   <string name="LabelEnhancedThumbs">加強縮圖</string>
   <string name="LabelAskSavePath">詢問拍攝檔案放置的目錄路徑</string>
   <string name="LabelSaveLiveviewWindow">儲存實時顯示視窗的位置</string>
@@ -648,11 +611,9 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelRefresh">更新</string>
   <string name="LabelOverview">概覽</string>
   <string name="LabelItems">項目</string>
-  <!--//30/01/2016-->
   <string name="LabelDownloadThumb">僅下載縮圖</string>
   <string name="LabelDeleteFileAfterTransfer">傳輸完畢後刪除檔案</string>
   <string name="LabelHideTrayNotifications">隱藏工作列上的提示</string>
-  <!--//26/03/2016-->
   <string name="LabelConditions">狀態</string>
   <string name="LabelVariable">變數</string>
   <string name="LabelCondition">狀態</string>
@@ -665,7 +626,15 @@ $Tag4 - 被選擇的標記 4</string>
   <string name="LabelRecordVideo">錄影</string>
   <string name="LabelVideoLength">影片長度</string>
   <string name="LabelRestore">恢復</string>
-  <string name="LabelTrayMessage">應用程式被最小化\n雙擊以恢復應用程式視窗</string>
-  <string name="LabelExecuteAfterTransfer">檔案傳輸完後執行</string>
+  <string name="LabelTrayMessage">程式視窗被最小化
+雙及可以恢復視窗大小</string>
+  <string name="LabelExecuteAfterTransfer">檔案船完後執行</string>
   <string name="LabelInvert">反向</string>
+  <string name="LabelClosePreview">關閉預覽</string>
+  <string name="LabelReload">重新載入</string>
+  <string name="LabelSeriesAsIndex">儲存作為系列的索引</string>
+  <string name="LabelStackingFinished">對焦影像疊合完成</string>
+  <string name="LabelOpenLightroom">在 Adobe Lightroom 中開啟</string>
+  <string name="LabelOpenPhotoshop">在  Adobe Photoshop 中開啟</string>
+  <string name="LabelPasswordOnClose">結束時詢問密碼</string>
 </resources>

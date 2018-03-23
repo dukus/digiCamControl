@@ -27,6 +27,7 @@ namespace CameraControl.ViewModel
         private double _starSize;
         private int _starWindowSize;
         private double _averageCount;
+        private int _contrast;
 
         public AstroLiveViewViewModel(ICameraDevice device, Window window)
             :base(device, window)
@@ -41,6 +42,17 @@ namespace CameraControl.ViewModel
         {
             
         }
+
+        public int Contrast
+        {
+            get { return _contrast; }
+            set
+            {
+                _contrast = value;
+                RaisePropertyChanged(() => Contrast);
+            }
+        }
+
 
         public int StarWindowSize
         {
@@ -183,6 +195,12 @@ namespace CameraControl.ViewModel
                     {
                         BrightnessCorrection filter = new BrightnessCorrection(Brightness);
                         res = filter.Apply(res);
+                        
+                    }
+                    if (Contrast != 0)
+                    {
+                        ContrastCorrection contrastCorrection = new ContrastCorrection(Contrast);
+                        res = contrastCorrection.Apply(res);
                     }
                     if (EdgeDetection)
                     {
