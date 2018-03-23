@@ -626,7 +626,7 @@ namespace CameraControl.windows
                     ServiceProvider.ScriptManager.OutPutMessageReceived -= ScriptManager_OutPutMessageReceived;
                     CameraDevice.PhotoCaptured -= CameraDevice_PhotoCaptured;
                     ServiceProvider.ScriptManager.Save(DefaultScript, _defaultScriptFile);
-                    Hide();
+                    Dispatcher.Invoke(Hide);
                     break;
                 case CmdConsts.All_Close:
                     ServiceProvider.ScriptManager.OutPutMessageReceived -= ScriptManager_OutPutMessageReceived;
