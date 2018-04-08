@@ -87,6 +87,7 @@ namespace CameraControl.Devices
         /// The device class.
         /// </value>
         public static Dictionary<string, Type> DeviceClass { get; set; }
+        public Dictionary<string, Type> CustomDeviceClass { get; set; }
 
         public List<IWifiDeviceProvider> WifiDeviceProviders { get; set; }
 
@@ -140,65 +141,65 @@ namespace CameraControl.Devices
         private void PopulateDeviceClass()
         {
             DeviceClass = new Dictionary<string, Type>
-                              {
-                                  {"D200", typeof (NikonD40)},
-                                  {"D3", typeof (NikonD90)},
-                                  {"D3S", typeof (NikonD90)},
-                                  {"D3X", typeof (NikonD3X)},
-                                  {"D300", typeof (NikonD300)},
-                                  {"D300s", typeof (NikonD300)},
-                                  {"D300S", typeof (NikonD300)},
-                                  {"D3200", typeof (NikonD3200)},
-                                  {"D3300", typeof (NikonD600Base)},
-                                  {"D3400", typeof (NikonD600Base)},
-                                  {"D4", typeof (NikonD4)},
-                                  {"D4s", typeof (NikonD4)},
-                                  {"D4S", typeof (NikonD4)},
-                                  {"D40", typeof (NikonD40)},
-                                  {"D40X", typeof (NikonD40)},
-                                  {"D5", typeof (NikonD500)},
-                                  {"D50", typeof (NikonD40)},
-                                  {"D500", typeof (NikonD500)},
-                                  {"D5600", typeof (NikonD5200)},
-                                  {"D5500", typeof (NikonD5200)},
-                                  {"D5300", typeof (NikonD5200)},
-                                  {"D5200", typeof (NikonD5200)},
-                                  {"D5100", typeof (NikonD5100)},
-                                  {"D5000", typeof (NikonD90)},
-                                  {"D60", typeof (NikonD60)},
-                                  {"D610", typeof (NikonD600Base)},
-                                  {"D600", typeof (NikonD600)},
-                                  {"D70", typeof (NikonD40)},
-                                  {"D70s", typeof (NikonD40)},
-                                  {"D700", typeof (NikonD700)},
-                                  {"D750", typeof (NikonD600Base)},
-                                  {"D7000", typeof (NikonD7000)},
-                                  {"D7100", typeof (NikonD7100)},
-                                  {"D7200", typeof (NikonD7100)},
-                                  {"D7500", typeof (NikonD7100)},
-                                  { "D80", typeof (NikonD80)},
-                                  {"D800", typeof (NikonD800)},
-                                  {"D800E", typeof (NikonD800)},
-                                  {"D800e", typeof (NikonD800)},
-                                  {"D810", typeof (NikonD600Base)},
-                                  {"D810A", typeof (NikonD600Base)},
-                                  {"D810a", typeof (NikonD600Base)},
-                                  {"D850", typeof (NikonD500)},
-                                  {"D90", typeof (NikonD90)},
-                                  {"V1", typeof (NikonD5100)},
-                                  {"V2", typeof (NikonD5100)},
-                                  {"V3", typeof (NikonD600Base)},
-                                  {"J3", typeof (NikonD600Base)},
-                                  {"J4", typeof (NikonD600Base)},
-                                  {"Df", typeof (NikonD600Base)},
-                                  {"L830", typeof (NikonL830)},
-                                  {"L840", typeof (NikonL830)},
-                                  //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},
-                                  {"MTP Sim", typeof (BaseMTPCamera)},
-                                  //{"D.*", typeof (NikonBase)},
-                                  // for mtp simulator
-                                  //{"Test Camera ", typeof (NikonBase)},
-                              };
+            {
+                {"D200", typeof(NikonD40)},
+                {"D3", typeof(NikonD90)},
+                {"D3S", typeof(NikonD90)},
+                {"D3X", typeof(NikonD3X)},
+                {"D300", typeof(NikonD300)},
+                {"D300s", typeof(NikonD300)},
+                {"D300S", typeof(NikonD300)},
+                {"D3200", typeof(NikonD3200)},
+                {"D3300", typeof(NikonD600Base)},
+                {"D3400", typeof(NikonD600Base)},
+                {"D4", typeof(NikonD4)},
+                {"D4s", typeof(NikonD4)},
+                {"D4S", typeof(NikonD4)},
+                {"D40", typeof(NikonD40)},
+                {"D40X", typeof(NikonD40)},
+                {"D5", typeof(NikonD500)},
+                {"D50", typeof(NikonD40)},
+                {"D500", typeof(NikonD500)},
+                {"D5600", typeof(NikonD5200)},
+                {"D5500", typeof(NikonD5200)},
+                {"D5300", typeof(NikonD5200)},
+                {"D5200", typeof(NikonD5200)},
+                {"D5100", typeof(NikonD5100)},
+                {"D5000", typeof(NikonD90)},
+                {"D60", typeof(NikonD60)},
+                {"D610", typeof(NikonD600Base)},
+                {"D600", typeof(NikonD600)},
+                {"D70", typeof(NikonD40)},
+                {"D70s", typeof(NikonD40)},
+                {"D700", typeof(NikonD700)},
+                {"D750", typeof(NikonD600Base)},
+                {"D7000", typeof(NikonD7000)},
+                {"D7100", typeof(NikonD7100)},
+                {"D7200", typeof(NikonD7100)},
+                {"D7500", typeof(NikonD7100)},
+                {"D80", typeof(NikonD80)},
+                {"D800", typeof(NikonD800)},
+                {"D800E", typeof(NikonD800)},
+                {"D800e", typeof(NikonD800)},
+                {"D810", typeof(NikonD600Base)},
+                {"D810A", typeof(NikonD600Base)},
+                {"D810a", typeof(NikonD600Base)},
+                {"D850", typeof(NikonD500)},
+                {"D90", typeof(NikonD90)},
+                {"V1", typeof(NikonD5100)},
+                {"V2", typeof(NikonD5100)},
+                {"V3", typeof(NikonD600Base)},
+                {"J3", typeof(NikonD600Base)},
+                {"J4", typeof(NikonD600Base)},
+                {"Df", typeof(NikonD600Base)},
+                {"L830", typeof(NikonL830)},
+                {"L840", typeof(NikonL830)},
+                //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},
+                {"MTP Sim", typeof(BaseMTPCamera)},
+                //{"D.*", typeof (NikonBase)},
+                // for mtp simulator
+                //{"Test Camera ", typeof (NikonBase)},
+            };
             //if(UseExperimentalDrivers)
             //{
             //  DeviceClass.Add("Canon EOS.*", typeof(CanonSDKBase));
@@ -209,6 +210,10 @@ namespace CameraControl.Devices
             WifiDeviceProviders.Add(new SonyProvider());
             WifiDeviceProviders.Add(new PanonoProvider());
             WifiDeviceProviders.Add(new OscProvider());
+            foreach (var type in CustomDeviceClass)
+            {
+                DeviceClass.Add(type.Key, type.Value);
+            }
         }
 
         public CameraDeviceManager(string datafolder=null)
@@ -217,12 +222,14 @@ namespace CameraControl.Devices
             LoadWiaDevices = true;
             StartInNewThread = false;
             DetectWebcams = true;
+            CustomDeviceClass = new Dictionary<string, Type>();
             SelectedCameraDevice = new NotConnectedCameraDevice();
             ConnectedDevices = new AsyncObservableCollection<ICameraDevice>();
             _deviceEnumerator = new DeviceDescriptorEnumerator();
             LiveViewImage = new ConcurrentDictionary<ICameraDevice, byte[]>();
             LastCapturedImage = new ConcurrentDictionary<ICameraDevice, string>();
             WifiDeviceProviders = new List<IWifiDeviceProvider>();
+
 
             // prevent program crash in something wrong with wia
             try
