@@ -330,10 +330,6 @@
                                 <StackPanel Orientation="Vertical">
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                     <Grid Margin="24,8,24,16" >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*" />
-                                            <ColumnDefinition Width="1*" />
-                                        </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -360,11 +356,13 @@
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
 
-                                        <Label Grid.Row="2" Content="{T:TranslateExtension LabelCaptureName}" HorizontalContentAlignment="Right" Margin="4"/>
-                                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="4" Name="txt_CaptureName"/>
+                                        <TextBox Grid.Row="2" Grid.Column="0"  Text="{Binding Path=DefaultSession.CaptureName, UpdateSourceTrigger=PropertyChanged}" Margin="4" Name="txt_CaptureName"
+                                                 materialDesign:HintAssist.Hint="{T:TranslateExtension LabelCaptureName}"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-                                        <Label Grid.Row="3" Content="{T:TranslateExtension LabelSeries}" HorizontalContentAlignment="Right" Margin="4"/>
-                                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=DefaultSession.Series}" Margin="4" VerticalAlignment="Top"/>
+                                        <TextBox Grid.Row="3" Text="{Binding Path=DefaultSession.Series}" Margin="4" VerticalAlignment="Top"
+                                                 materialDesign:HintAssist.Hint="{T:TranslateExtension LabelSeries}"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                                     </Grid>
                                 </StackPanel>
                             </Expander>

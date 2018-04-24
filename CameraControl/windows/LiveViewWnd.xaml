@@ -15,6 +15,16 @@
                       xmlns:ControlzEx="clr-namespace:ControlzEx;assembly=MahApps.Metro"
                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                       x:Class="CameraControl.windows.LiveViewWnd"
+    
+                    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                    TextElement.FontWeight="Regular"
+                    TextElement.FontSize="13"
+                    TextOptions.TextFormattingMode="Ideal"
+                    TextOptions.TextRenderingMode="Auto"
+                    Background="{DynamicResource MaterialDesignPaper}"
+                    FontFamily="{DynamicResource MaterialDesignFont}" 
+                    GlowBrush="{DynamicResource AccentColorBrush}"   
+    
         Title="{Binding Title}" Height="800" Width="750" Loaded="Window_Loaded" Closed="Window_Closed" Closing="Window_Closing"
                       mc:Ignorable="d" d:DataContext="{d:DesignInstance Type={x:Type Classes:LiveviewSettings}}" Topmost="{Binding StayOnTop, Mode=OneWay}" PreviewKeyDown="MetroWindow_PreviewKeyDown"
                       SizeChanged="MetroWindow_SizeChanged" Drop="MetroWindow_Drop" AllowDrop="True" UseLayoutRounding="True" StateChanged="MetroWindow_StateChanged">
@@ -51,19 +61,19 @@
         >
 
                 <Setter 
-            		Property="Template"
+                    Property="Template"
             >
                     <Setter.Value>
 
                         <ControlTemplate 
-            				TargetType="{x:Type local1:ZoomAndPanControl}"
+                            TargetType="{x:Type local1:ZoomAndPanControl}"
                     >
 
                             <Border 
-            					Visibility="{TemplateBinding ZoneOneVisibility}"
-            					Background="{TemplateBinding Background}"
-            					BorderBrush="{TemplateBinding BorderBrush}"
-            					BorderThickness="{TemplateBinding BorderThickness}"
+                                Visibility="{TemplateBinding ZoneOneVisibility}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                         >
 
                                 <!-- 
@@ -76,9 +86,9 @@
                         the content in the center of the viewport when the viewport is bigger than the content.
                         -->
                                 <ContentPresenter 
-            						x:Name="PART_Content"
-            						HorizontalAlignment="Left"
-            						VerticalAlignment="Top"
+                                    x:Name="PART_Content"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
                             />
 
                             </Border>
@@ -94,21 +104,21 @@
             <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
                 <Grid>
                     <wpf:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
-            			VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                        VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
                     <wpf:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
-            			VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+                        VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
                     <wpf:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
-            			VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+                        VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
                     <wpf:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
-            			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+                        VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
-            			VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
-            			VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        VerticalAlignment="Top" HorizontalAlignment="Right"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
-            			VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     <wpf:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
-            			VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 </Grid>
             </ControlTemplate>
 
@@ -156,16 +166,16 @@
             </Image.LayoutTransform>
         </Image>
         <local1:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource ZoomStyle}" 
-			ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="True">
+            ZoneOneVisibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}" SizeChanged="zoomAndPanControl_SizeChanged" MouseDoubleClick="zoomAndPanControl_MouseDoubleClick" ClipToBounds="True">
             <Image x:Name="PreviewBitmap" Stretch="Uniform" Source="{Binding PreviewBitmap}" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2"
-				Width="{Binding ActualWidth, ElementName=_image}" Height="{Binding ActualHeight, ElementName=_image}" >
+                Width="{Binding ActualWidth, ElementName=_image}" Height="{Binding ActualHeight, ElementName=_image}" >
                 <Image.LayoutTransform>
                     <RotateTransform  Angle="{Binding Rotation}" />
                 </Image.LayoutTransform>
             </Image>
         </local1:ZoomAndPanControl>
         <Button Grid.Row="0" Grid.Column="2" Height="40" Width="40" Margin="10" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ClosePreviewCommand}"
-			ToolTip="{T:Translate LabelClosePreview}" Visibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
+            ToolTip="{T:Translate LabelClosePreview}" Visibility="{Binding PreviewBitmapVisible, Converter={StaticResource BooleanToVisibilityConverter1}}">
             <materialDesign:PackIcon Kind="Close" Height="35" Width="35" />
         </Button>
 
@@ -175,7 +185,7 @@
                 <RotateTransform  Angle="{Binding Rotation}" />
             </Grid.LayoutTransform>
             <Viewbox Stretch="Fill" ClipToBounds="True" Width="{Binding ActualWidth, ElementName=_image}" Height="{Binding ActualHeight, ElementName=_image}"
-				Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                Visibility="{Binding SettingArea, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <Canvas Width="1000" Height="1000">
                     <Path Fill="#80000000">
                         <Path.Data>
@@ -190,10 +200,10 @@
                         </Path.Data>
                     </Path>
                     <ContentControl Width="{Binding HorizontalMax, Mode=TwoWay}"
-						Height="{Binding VerticalMax, Mode=TwoWay}"
-						Canvas.Top="{Binding VerticalMin, Mode=TwoWay}"
-						Canvas.Left="{Binding HorizontalMin, Mode=TwoWay}"
-						Template="{StaticResource DesignerItemTemplate}">
+                        Height="{Binding VerticalMax, Mode=TwoWay}"
+                        Canvas.Top="{Binding VerticalMin, Mode=TwoWay}"
+                        Canvas.Left="{Binding HorizontalMin, Mode=TwoWay}"
+                        Template="{StaticResource DesignerItemTemplate}">
                         <!--<Rectangle Opacity="0.4" Fill="Black" IsHitTestVisible="False"/>-->
                     </ContentControl>
                 </Canvas>
@@ -218,50 +228,26 @@
         <materialDesign:Card Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" IsEnabled="{Binding FocusingEnabled}" Grid.RowSpan="4" Margin="10,30,10,10">
             <StackPanel Margin="4">
                 <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding FullScreenCommand}">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_new_window}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <materialDesign:PackIcon Kind="Fullscreen" Width="20" Height="20"/>
                 </Button>
                 <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ZoomOutCommand}">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_out}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <materialDesign:PackIcon Kind="MagnifyMinus" Width="20" Height="20"/>
                 </Button>
                 <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ZoomInCommand}">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_zoom_in}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <materialDesign:PackIcon Kind="MagnifyPlus" Width="20" Height="20"/>
                 </Button>
                 <Button Content="100" Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ZoomIn100}"/>
                 <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Command="{Binding ToggleGridCommand}">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_grid}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <materialDesign:PackIcon Kind="Grid" Width="20" Height="20"/>
                 </Button>
                 <ToggleButton Height="40" Width="40" Style="{DynamicResource MaterialDesignActionLightToggleButton}" IsChecked="{Binding FreezeImage}" ToolTip="{T:Translate ButtonFreezeImage}" Margin="4">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <materialDesign:PackIcon Kind="Pause" Width="20" Height="20"/>
                 </ToggleButton>
                 <ToggleButton  ToolTip="{T:Translate LabelEdgeDetection}" Height="40" Width="40" Margin="4" IsChecked="{Binding EdgeDetection}" Style="{DynamicResource MaterialDesignActionLightToggleButton}" >
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_contrast}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                    <materialDesign:PackIcon Kind="ContrastCircle" Width="20" Height="20"/>
                 </ToggleButton>
                 <Canvas Width="40" Height="40" Margin="4" RenderTransformOrigin="0.5,0.5" ToolTip="{Binding LevelAngle}"
-				Visibility="{Binding ShowLevelLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
+                Visibility="{Binding ShowLevelLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
                     <Path x:Name="Cutter" Width="30" Height="30" RenderTransformOrigin="0.5,0.5"  Canvas.Left="5" Canvas.Top="5" Stretch="Fill" Fill="{Binding LevelAngleColor}" Data="F1 M 56,36L 56,40L 40,40L 40,56L 36,56L 36,40L 20,40L 20,36L 36,36L 36,20L 40,20L 40,36L 56,36 Z M 8,37L 8,39L 3.01401,39L 3,38L 3.01401,37L 8,37 Z M 13,37L 13,39L 10,39L 10,37L 13,37 Z M 18,37L 18,39L 15,39L 15,37L 18,37 Z M 39,8.00005L 37,8.00005L 37,3.01403L 38,3.00002L 39,3.01403L 39,8.00005 Z M 39,18.0001L 37,18.0001L 37,15.0001L 39,15.0001L 39,18.0001 Z M 37,10.0001L 39,10.0001L 39,13.0001L 37,13.0001L 37,10.0001 Z M 68,39L 68,37L 72.986,37L 73,38L 72.986,39L 68,39 Z M 63,39L 63,37L 66,37L 66,39L 63,39 Z M 57.9999,39L 57.9999,37L 61,37L 61,39L 57.9999,39 Z M 37,68L 39,68L 39,72.986L 38,73L 37,72.986L 37,68 Z M 37,63L 39,63L 39,66L 37,66L 37,63 Z M 37,58L 39,58L 39,61L 37,61L 37,58 Z ">
                         <Path.RenderTransform>
                             <RotateTransform Angle="{Binding LevelAngle}"  />
@@ -327,7 +313,7 @@
             <materialDesign:PackIcon Width="21" Height="21" Kind="DotsVertical" />
         </ToggleButton>
         <!--<Expander ExpandDirection="Right" IsExpanded="{Binding ShowLeftTab}" Margin="0" Padding="0" 
-			Style="{DynamicResource MetroExpanderEx}">-->
+            Style="{DynamicResource MetroExpanderEx}">-->
         <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"  MinWidth="250" Visibility="{Binding ElementName=PanelButton, Path=IsChecked , Converter={StaticResource BooleanToVisibilityConverter1}}" Margin="15,0,0,3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -337,11 +323,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Button Content="{T:Translate ButtonAutoFocus}" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="112" Command="{Binding AutoFocusCommand}" 
-					Visibility="{Binding ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
+                    Visibility="{Binding ShowAutofocusLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}"/>
 
             <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCapture}" Height="30" Margin="0,10,10,0" Command="{Binding CaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" IsEnabled="{Binding IsFree}"/>
             <Button Grid.Row="0" Grid.Column="0" Content="{T:Translate ButtonCancel}" Height="30" Margin="0,10,10,0" Command="{Binding CancelCaptureCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="101" 
-					Visibility="{Binding CaptureInProgress, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
+                    Visibility="{Binding CaptureInProgress, Converter={StaticResource BooleanToVisibilityConverter1}}"/>
 
             <Button Grid.Row="0" Content="{Binding RecButtonText}" Height="30" Margin="10,50,10,0" Command="{Binding RecordMovieCommand}" VerticalAlignment="Top" IsEnabled="{Binding IsFree}" HorizontalAlignment="Left" Width="112"/>
 
@@ -349,7 +335,7 @@
 
 
             <Image Width="200"  Height="120" Margin="10" VerticalAlignment="Top" Grid.Row="1" Source="{Binding Preview}" x:Name="_previeImage" MouseDown="canvas_image_MouseDown" HorizontalAlignment="Left" Stretch="Uniform"
-					RenderOptions.BitmapScalingMode="HighQuality">
+                    RenderOptions.BitmapScalingMode="HighQuality">
                 <Image.LayoutTransform>
                     <RotateTransform  Angle="{Binding Rotation}" />
                 </Image.LayoutTransform>
@@ -396,7 +382,7 @@
 
 
                                 <local:LiveViewControlerSimple DataContext="{Binding CameraDevice}" Margin="20,3" Grid.ColumnSpan="2"
-									Grid.Column="0" Grid.Row="3"  />
+                                    Grid.Column="0" Grid.Row="3"  />
                             </Grid>
                         </Expander>
                     </materialDesign:Card>
@@ -706,7 +692,7 @@
             </Grid>
         </materialDesign:Card>
         <Ellipse Width="190" Height="190" Grid.Row="0" Grid.Column="2" Grid.RowSpan="5" Visibility="{Binding CountDownVisible, ConverterParameter=false, Converter={StaticResource BooleanToVisibilityConverter1}}" 
-			HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
+            HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.8" RenderTransformOrigin="0.5,0.5" StrokeThickness="15"  StrokeDashArray="4 1">
             <Ellipse.Stroke>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="Blue"/>

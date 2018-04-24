@@ -283,7 +283,8 @@ namespace CameraControl
                     ServiceProvider.ScriptManager.Stop();
                     ServiceProvider.DeviceManager.CloseAll();
                     Thread.Sleep(1000);
-                    Dispatcher.Invoke(new Action(() => Current.Shutdown()));
+                    Environment.Exit(0);
+                    //Dispatcher.begi(new Action(() => Current.Shutdown()));
                 }
                 switch (cmd)
                 {

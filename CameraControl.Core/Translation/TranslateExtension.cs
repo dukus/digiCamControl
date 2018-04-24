@@ -84,7 +84,7 @@ namespace CameraControl.Core.Translation
         {
             if (!TranslationManager.Strings.ContainsKey(Key))
                 return DefaultValue;
-            return TranslationManager.Strings[Key];
+            return TranslationManager.Strings[Key].Replace("_","");
         }
     }
 }
