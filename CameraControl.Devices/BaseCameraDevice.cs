@@ -80,18 +80,6 @@ namespace CameraControl.Devices
             }
         }
 
-        protected bool _hostMode;
-
-        public virtual bool HostMode
-        {
-            get { return _hostMode; }
-            set
-            {
-                _hostMode = value;
-                NotifyPropertyChanged("HostMode");
-            }
-        }
-
         private PropertyValue<long> _isoNumber;
 
         public virtual PropertyValue<long> IsoNumber
@@ -593,7 +581,6 @@ namespace CameraControl.Devices
             c.AppendFormat("\n\tBusy..................{0}", IsBusy ? "Yes" : "No");
             c.AppendFormat("\n\tHave LiveView.........{0}", HaveLiveView ? "Yes" : "No");
             c.AppendFormat("\n\tCapture SDRam.........{0}", CaptureInSdRam ? "Yes" : "No");
-            c.AppendFormat("\n\tHost Mode.............{0}", HostMode ? "Yes" : "No");
             c.AppendFormat("\n\tIs Connected..........{0}", IsConnected ? "Yes" : "No");
             c.AppendFormat("\n\tMode..................{0}, {1} focus", Mode?.Value, FocusMode?.Value);
             c.AppendFormat("\n\texposure..............{0} f{1} +/-{2}, ISO{3}",

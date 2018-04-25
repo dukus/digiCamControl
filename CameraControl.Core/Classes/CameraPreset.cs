@@ -69,7 +69,6 @@ namespace CameraControl.Core.Classes
             Add(GetFrom(camera.FocusMode, "FocusMode"));
             Add(GetFrom(camera.LiveViewImageZoomRatio, "LiveViewImageZoomRatio"));
             Add(new ValuePair {Name = "CaptureInSdRam", Value = camera.CaptureInSdRam.ToString()});
-            Add(new ValuePair {Name = "HostMode", Value = camera.HostMode.ToString()});
             var property = camera.LoadProperties();
             Add(new ValuePair { Name = "NoDownload", Value = property.NoDownload.ToString() });
             if (camera.AdvancedProperties != null)
@@ -112,13 +111,6 @@ namespace CameraControl.Core.Classes
         {
             Log.Debug("Loading preset for "+camera.DisplayName);
             camera.IsBusy = true;
-            if (!string.IsNullOrEmpty(GetValue("HostMode")))
-            {
-                bool val;
-                if (bool.TryParse(GetValue("HostMode"), out val))
-                    camera.HostMode = val;
-            }
-
             SetTo(camera.Mode, "Mode");
             SetTo(camera.CompressionSetting, "CompressionSetting");
             SetTo(camera.ExposureCompensation, "ExposureCompensation");

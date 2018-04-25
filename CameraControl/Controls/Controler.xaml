@@ -136,10 +136,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel Orientation="Horizontal" Margin="4">
+                    <!--<StackPanel Orientation="Horizontal" Margin="4">
                         <Label Content="{T:TranslateExtension LabelHostMode}"/>
                         <ToggleButton  IsChecked="{Binding Path=SelectedCameraDevice.HostMode}" Margin="3" Style="{StaticResource MaterialDesignSwitchToggleButton}" />
-                    </StackPanel>
+                    </StackPanel>-->
                     <ItemsControl Name="listBox1" ItemsSource="{Binding Path=SelectedCameraDevice.AdvancedProperties}" HorizontalAlignment="Stretch"  Margin="0">
                         <ItemsControl.ItemContainerStyle>
                             <Style TargetType="{x:Type FrameworkElement}">

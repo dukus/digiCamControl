@@ -410,21 +410,22 @@ namespace CameraControl.Devices.Nikon
         {
         }
 
-        public override bool HostMode
+        protected virtual PropertyValue<long> InitHostMode()
         {
-            get { return _hostMode; }
-            set
+            var res = new PropertyValue<long>() { Name = "Lock", IsEnabled = true };
+            res.AddValues("OFF", 0);
+            res.AddValues("ON", 1);
+            res.ReloadValues();
+            res.Value = "OFF";
+            res.ValueChanged += delegate (object sender, string key, long val)
             {
-                _hostMode = value;
-                ExecuteWithNoData(CONST_CMD_ChangeCameraMode, (uint) (HostMode ? 1 : 0));
-                if (Mode != null)
-                    Mode.IsEnabled = HostMode;
+                ExecuteWithNoData(CONST_CMD_ChangeCameraMode, (uint) (key == "OFF" ? 0 : 1));
+                Mode.IsEnabled = key == "ON";
                 GetEvent(null);
                 ReadDeviceProperties(CONST_PROP_ExposureProgramMode);
-                NotifyPropertyChanged("HostMode");
-            }
+            };
+            return res;
         }
-
 
         public override bool Init(DeviceDescriptor deviceDescriptor)
         {
@@ -486,7 +487,6 @@ namespace CameraControl.Devices.Nikon
                 ReadDeviceProperties(CONST_PROP_ExposureIndicateStatus);
                 AddAditionalProps();
                 ReInitShutterSpeed();
-                HostMode = false;
                 ReadDeviceProperties(CONST_PROP_LiveViewStatus);
                 _timer.Start();
                 OnCameraInitDone();
@@ -528,7 +528,7 @@ namespace CameraControl.Devices.Nikon
             AdvancedProperties.Add(HDRSmoothing());
             AdvancedProperties.Add(ActiveSlot());
             AdvancedProperties.Add(LensSort());
-
+            AdvancedProperties.Add(InitHostMode());
             try
             {
                 var deviceinfo = LoadDeviceData(ExecuteReadDataEx(0x1001));
@@ -1101,16 +1101,6 @@ namespace CameraControl.Devices.Nikon
                     CONST_PROP_RecordingMedia);
                 ReadDeviceProperties(CONST_PROP_RecordingMedia);
             }
-            //if (e.PropertyName == "HostMode")
-            //{
-            //    Thread thread = new Thread(() =>
-            //    {
-            //        ExecuteWithNoData(CONST_CMD_ChangeCameraMode, (uint) (HostMode ? 1 : 0));
-            //        if (Mode != null)
-            //            Mode.IsEnabled = HostMode;
-            //    });
-            //    thread.Start();
-            //}
         }
 
         private void _stillImageDevice_DeviceEvent(object sender, PortableDeviceEventArgs e)
@@ -2555,7 +2545,6 @@ namespace CameraControl.Devices.Nikon
         public override string ToStringCameraData()
         {
             StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Nikon(" + ")");
-            c.AppendFormat("\n\tHost mode.............{0}", HostMode ? "Yes" : "No");
             c.AppendFormat("\n\tLiveView:");
             c.AppendFormat("\n\t  On..................{0}", LiveViewOn ? "Yes" : "No");
             c.AppendFormat("\n\t  Focus Mode..........{0}", LiveViewFocusMode);
