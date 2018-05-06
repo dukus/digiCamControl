@@ -152,7 +152,10 @@ namespace CameraControl.Devices
         void LockCamera();
         void UnLockCamera();
         void Close();
-        void ResetDevice();
+
+        void StartZoom(ZoomDirection direction);
+        void StopZoom(ZoomDirection direction);
+
         /// <summary>
         /// Should be called after file tranferred 
         /// </summary>
@@ -202,6 +205,5 @@ namespace CameraControl.Devices
 
         void SetCameraField(CameraFieldType cameraFieldType, string comment);
 
-        void WaitForReady();
     }
 }

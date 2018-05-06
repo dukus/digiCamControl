@@ -431,6 +431,16 @@ namespace CameraControl.Devices
         {
         }
 
+        public void StartZoom(ZoomDirection direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopZoom(ZoomDirection direction)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void ResetDevice()
         {
             

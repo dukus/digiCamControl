@@ -37,7 +37,8 @@ namespace CameraControl.Devices.Classes
         CanLockFocus,
         CaptureInRam,
         CaptureNoAf,
-        SimpleManualFocus
+        SimpleManualFocus,
+        Zoom
     }
 
 }

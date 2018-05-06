@@ -176,6 +176,7 @@
     <Compile Include="Classes\PhotoCapturedEventArgs.cs" />
     <Compile Include="Classes\PictureControl.cs" />
     <Compile Include="Classes\PropertyValue.cs" />
+    <Compile Include="Classes\ZoomDirection.cs" />
     <Compile Include="Custom\CustomDevice.cs" />
     <Compile Include="Custom\DeviceDescription.cs" />
     <Compile Include="Custom\DeviceProperty.cs" />
