@@ -5,20 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:my="clr-namespace:CameraControl.Controls"
              xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-             xmlns:Classes="clr-namespace:CameraControl.Classes" mc:Ignorable="d"  
-             d:DesignHeight="430" d:DesignWidth="115">
+             xmlns:Classes="clr-namespace:CameraControl.Classes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"  
+             d:DesignHeight="430" d:DesignWidth="130">
     <!--d:DataContext="{d:DesignInstance Type=Devices:BaseCameraDevice}"-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Styles/CustomControls.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
 
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel Margin="4">
         <StackPanel Orientation="Vertical" >
             <StackPanel Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Rectangle Fill="Red" Width="10" Height="10" />
@@ -31,58 +34,65 @@
         </StackPanel>
         <my:ExposureStatusControl ExposureStatus="{Binding Path=ExposureStatus, Mode=TwoWay}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}" Padding="0" Height="35" Name="btn_capture" IsEnabled="{Binding IsConnected}"  Style="{DynamicResource MetroCircleButtonStyle}" Click="btn_capture_Click">
-                <Image Margin="4" Source="/CameraControl;component/Images/Camera.png"/>
+            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}" Height="35" Width="35" Name="btn_capture" IsEnabled="{Binding IsConnected}" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="btn_capture_Click" >
+                <materialDesign:PackIcon Kind="CameraIris" Height="30" Width="30" />
             </Button>
-            <Button Height="23" Width="25" Padding="2" Margin="2" Command="{Binding Source={x:Static Member=Classes:WpfCommands.DevicePropertyCommand}}" CommandParameter="{Binding}">
+            <Button Height="35" Width="35" Margin="4" Command="{Binding Source={x:Static Member=Classes:WpfCommands.DevicePropertyCommand}}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignFloatingActionLightButton}">
                 <Button.Content>
-                    <Image Source="/CameraControl;component/Images/Properties.png" />
+                    <materialDesign:PackIcon Kind="Settings" Height="30" Width="30" />
                 </Button.Content>
             </Button>
-            <Button  Height="23" Width="25" Padding="2" Content="Lv" Margin="2" Command="{Binding Source={x:Static Member=Classes:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding}"/>
+            <Button  Height="35" Width="35" Content="Lv"  Command="{Binding Source={x:Static Member=Classes:WpfCommands.ShowLiveViewCommand}}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignFloatingActionLightButton}"/>
         </StackPanel>
-        <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension Mode}" Padding="0"/>
+        <StackPanel >
             <Border BorderThickness="1" BorderBrush="{Binding Path=Mode.ErrorColor}" >
-                <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=Mode.IsEnabled}" ItemsSource="{Binding Path=Mode.Values}" SelectedValue="{Binding Path=Mode.Value}" />
+                <ComboBox Name="cmb_mode" IsEnabled="{Binding Path=Mode.IsEnabled}" ItemsSource="{Binding Path=Mode.Values}" SelectedValue="{Binding Path=Mode.Value}" 
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension Mode}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
-        <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension Iso}" Target="{Binding ElementName=cmb_iso}" Padding="0"/>
+        <StackPanel>
             <Border BorderThickness="1" BorderBrush="{Binding Path=IsoNumber.ErrorColor}" >
-                <ComboBox Name="cmb_iso" IsEnabled="{Binding Path=IsoNumber.IsEnabled}" ItemsSource="{Binding Path=IsoNumber.Values}" SelectedValue="{Binding Path=IsoNumber.Value}"/>
+                <ComboBox IsEnabled="{Binding Path=IsoNumber.IsEnabled}" ItemsSource="{Binding Path=IsoNumber.Values}" SelectedValue="{Binding Path=IsoNumber.Value}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension Iso}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
         <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension ShutterSpeed}" Target="{Binding ElementName=cmb_shutter}" Padding="0"/>
             <Border BorderThickness="1" BorderBrush="{Binding Path=ShutterSpeed.ErrorColor}" >
-                <ComboBox Name="cmb_shutter" IsEnabled="{Binding Path=ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=ShutterSpeed.Values}" SelectedValue="{Binding Path=ShutterSpeed.Value}"/>
+                <ComboBox IsEnabled="{Binding Path=ShutterSpeed.IsEnabled}" ItemsSource="{Binding Path=ShutterSpeed.Values}" SelectedValue="{Binding Path=ShutterSpeed.Value}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension ShutterSpeed}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
-        <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension Aperture}" Target="{Binding ElementName=cmb_aperture}" Padding="0"/>
+        <StackPanel >
             <Border BorderThickness="1" BorderBrush="{Binding Path=FNumber.ErrorColor}" >
-                <ComboBox Name="cmb_aperture" IsEnabled="{Binding Path=FNumber.IsEnabled}" ItemsSource="{Binding Path=FNumber.Values}" SelectedValue="{Binding Path=FNumber.Value}"/>
+                <ComboBox IsEnabled="{Binding Path=FNumber.IsEnabled}" ItemsSource="{Binding Path=FNumber.Values}" SelectedValue="{Binding Path=FNumber.Value}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension Aperture}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
-        <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension WhiteBalance}" Target="{Binding ElementName=cmb_WB}" Padding="0"/>
+        <StackPanel>
             <Border BorderThickness="1" BorderBrush="{Binding Path=WhiteBalance.ErrorColor}" >
-                <ComboBox Name="cmb_WB" IsEnabled="{Binding Path=WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=WhiteBalance.Values}" SelectedValue="{Binding Path=WhiteBalance.Value}" />
+                <ComboBox IsEnabled="{Binding Path=WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=WhiteBalance.Values}" SelectedValue="{Binding Path=WhiteBalance.Value}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension WhiteBalance}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
-        <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension ExposureComp}" Target="{Binding ElementName=cmb_EComp}" Padding="0"/>
+        <StackPanel>
             <Border BorderThickness="1" BorderBrush="{Binding Path=ExposureCompensation.ErrorColor}" >
-                <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value}"/>
+                <ComboBox IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension ExposureComp}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
-        <StackPanel Margin="2,0">
-            <Label Content="{T:TranslateExtension FocusMode}" Target="{Binding ElementName=cmb_focus}" Padding="0"/>
+        <StackPanel>
             <Border BorderThickness="1" BorderBrush="{Binding Path=FocusMode.ErrorColor}" >
-                <ComboBox Name="cmb_focus" IsEnabled="{Binding Path=FocusMode.IsEnabled}" ItemsSource="{Binding Path=FocusMode.Values}" SelectedValue="{Binding Path=FocusMode.Value}" />
+                <ComboBox Name="cmb_focus" IsEnabled="{Binding Path=FocusMode.IsEnabled}" ItemsSource="{Binding Path=FocusMode.Values}" SelectedValue="{Binding Path=FocusMode.Value}" 
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension FocusMode}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Border>
         </StackPanel>
-        <ProgressBar Minimum="0" Maximum="100" Height="20" Value="{Binding Path=Battery}" ToolTip="{Binding Path=Battery}" Style="{x:Null}" Margin="4"/>
+        <ProgressBar Minimum="0" Maximum="100" Height="20" Value="{Binding Path=Battery}" ToolTip="{Binding Path=Battery}" />
     </StackPanel>
 </UserControl>

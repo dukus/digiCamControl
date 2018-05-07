@@ -93,9 +93,8 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <HierarchicalDataTemplate>
-                            <materialDesign:Card  VerticalAlignment="Top">
-
-                                <local:ControlerSimple DataContext="{Binding Path=.}" Width="120" Height="430"/>
+                            <materialDesign:Card  VerticalAlignment="Top" Margin="2">
+                                <local:ControlerSimple DataContext="{Binding Path=.}" Width="130" Height="410" />
                             </materialDesign:Card>
                         </HierarchicalDataTemplate>
                     </ItemsControl.ItemTemplate>
