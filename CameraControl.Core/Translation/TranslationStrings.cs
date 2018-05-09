@@ -706,5 +706,7 @@ namespace CameraControl.Core.Translation
         public static string LabelWebserverPort = "Webserver Port";
         public static string LabelWebcameraSupport = "Webcamera Support";
         public static string LabelContrast = "Contrast";
+
+        public static string LabelZoom = "Zoom";
     }
 }

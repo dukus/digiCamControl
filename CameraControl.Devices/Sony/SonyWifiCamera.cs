@@ -59,6 +59,7 @@ namespace CameraControl.Devices.Sony
         public bool Init(string endpoint)
         {
             Capabilities.Add(CapabilityEnum.LiveView);
+            Capabilities.Add(CapabilityEnum.Zoom);
             _timer.Elapsed += _timer_Elapsed;
             _timer.AutoReset = true;
             IsBusy = true;
@@ -74,6 +75,7 @@ namespace CameraControl.Devices.Sony
                 LiveViewImageZoomRatio.AddValues(i.ToString(), i);
             }
             LiveViewImageZoomRatio.ReloadValues();
+            LiveViewImageZoomRatio.IsEnabled = false;
             LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
             Task.Factory.StartNew(InitProps);
             return true;
@@ -686,6 +688,37 @@ namespace CameraControl.Devices.Sony
         {
             StringBuilder c = new StringBuilder(base.ToString() + "\n\tType..................Sony WiFi");
             return c.ToString();
+        }
+
+        public override void StartZoom(ZoomDirection direction)
+        {
+            switch (direction)
+            {
+                case ZoomDirection.In:
+                    ExecuteMethod("actZoom", "in", "start");
+                    break;
+                case ZoomDirection.Out:
+                    ExecuteMethod("actZoom", "out", "start");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+        }
+
+        public override void StopZoom(ZoomDirection direction)
+        {
+            switch (direction)
+            {
+                case ZoomDirection.In:
+                    ExecuteMethod("actZoom", "in", "stop");
+                    break;
+                case ZoomDirection.Out:
+                    ExecuteMethod("actZoom", "out", "stop");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+
         }
     }
 }

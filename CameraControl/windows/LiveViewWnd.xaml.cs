@@ -429,5 +429,77 @@ namespace CameraControl.windows
                 zoomAndPanControl.ScaleToFit();
             }
         }
+
+        private void ButtonZoomMinus_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.StartZoom(ZoomDirection.Out);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Zoom error", exception);
+            }
+        }
+
+        private void ButtonZoomMinus_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.StopZoom(ZoomDirection.Out);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Zoom error", exception);
+            }
+        }
+
+        private void ButtonZoomMinus_MouseLeave(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.StopZoom(ZoomDirection.Out);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Zoom error", exception);
+            }
+        }
+
+        private void ButtonZoomPlus_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.StartZoom(ZoomDirection.In);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Zoom error", exception);
+            }
+        }
+
+        private void ButtonZoomPlus_MouseLeave(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.StopZoom(ZoomDirection.In);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Zoom error", exception);
+            }
+        }
+
+        private void ButtonZoomPlus_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                ((LiveViewViewModel)DataContext).CameraDevice.StopZoom(ZoomDirection.In);
+            }
+            catch (Exception exception)
+            {
+                Log.Debug("Zoom error", exception);
+            }
+        }
     }
 }

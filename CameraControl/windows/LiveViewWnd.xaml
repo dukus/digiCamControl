@@ -675,6 +675,26 @@
                             </Grid>
                         </Expander>
                     </materialDesign:Card>
+                    <materialDesign:Card Margin="4" Visibility="{Binding ZoomSupported, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                        <Expander Header="{T:Translate LabelZoom}">
+                            <Grid Margin="4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Name="ButtonZoomMinus" PreviewMouseDown="ButtonZoomMinus_MouseDown" PreviewMouseUp="ButtonZoomMinus_MouseUp" MouseLeave="ButtonZoomMinus_MouseLeave" >
+                                    <materialDesign:PackIcon Kind="MinusBox" Width="20" Height="20"/>
+                                </Button>
+                                <Button Grid.Column="1" Height="40" Width="40" Margin="4" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" HorizontalAlignment="Center" Name="ButtonZoomPlus" PreviewMouseDown="ButtonZoomPlus_MouseDown" MouseLeave="ButtonZoomPlus_MouseLeave" PreviewMouseUp="ButtonZoomPlus_MouseUp">
+                                    <materialDesign:PackIcon Kind="PlusBox" Width="20" Height="20"/>
+                                </Button>
+
+                            </Grid>
+                        </Expander>
+                    </materialDesign:Card>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

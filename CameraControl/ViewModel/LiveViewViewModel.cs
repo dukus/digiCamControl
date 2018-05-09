@@ -140,6 +140,7 @@ namespace CameraControl.ViewModel
             {
                 _cameraDevice = value;
                 RaisePropertyChanged(() => CameraDevice);
+                RaisePropertyChanged(() => ZoomSupported);
             }
         }
 
@@ -1276,6 +1277,9 @@ namespace CameraControl.ViewModel
         #endregion
 
         public bool IsActive { get; set; }
+
+        public bool ZoomSupported => CameraDevice.GetCapability(CapabilityEnum.Zoom);
+
 
         public LiveViewViewModel()
         {

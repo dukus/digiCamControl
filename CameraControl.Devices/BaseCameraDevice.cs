@@ -431,12 +431,12 @@ namespace CameraControl.Devices
         {
         }
 
-        public void StartZoom(ZoomDirection direction)
+        public virtual void StartZoom(ZoomDirection direction)
         {
             throw new NotImplementedException();
         }
 
-        public void StopZoom(ZoomDirection direction)
+        public virtual void StopZoom(ZoomDirection direction)
         {
             throw new NotImplementedException();
         }
