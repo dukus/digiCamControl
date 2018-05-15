@@ -83,5 +83,9 @@ namespace CameraControl.Core.Classes
         public const string PrevCamera = "PrevCamera";
         public const string NextSeries = "NextSeries";
         public const string SortCameras = "SortCameras";
+        public const string StartZoomIn = "StartZoomIn";
+        public const string StopZoomIn = "StopZoomIn";
+        public const string StartZoomOut = "StartZoomOut";
+        public const string StopZoomOut = "StopZoomOut";
     }
 }

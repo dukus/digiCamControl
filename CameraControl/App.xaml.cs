@@ -372,6 +372,13 @@ namespace CameraControl
                         case CmdConsts.PrevCamera:
                             ServiceProvider.DeviceManager.SelectPrevCamera();
                             break;
+                        case CmdConsts.StartZoomIn:
+                            device.StartZoom(ZoomDirection.In);
+                            break;
+                        case CmdConsts.StopZoomIn:
+                            device.StopZoom(ZoomDirection.In);
+                            break;
+
                     }
                 }
             }
