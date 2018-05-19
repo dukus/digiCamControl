@@ -255,6 +255,14 @@ namespace CameraControl
                 ((Window)mainWindowPlugin).Activate();
         }
 
+
+        /// <summary>
+        /// Handle application wide messages which
+        /// isn't handled by a specific window
+        /// </summary>
+        /// <param name="cmd">The command.</param>
+        /// <param name="o">The o.</param>
+        /// <exception cref="System.Exception"></exception>
         private void WindowsManager_Event(string cmd, object o)
         {
             try
@@ -327,44 +335,34 @@ namespace CameraControl
                         //        device.ResetDevice();
                         //    break;
                         case CmdConsts.NextAperture:
-                            if (device.FNumber != null)
-                                device.FNumber.NextValue();
+                            device.FNumber?.NextValue();
                             break;
                         case CmdConsts.PrevAperture:
-                            if (device.FNumber != null)
-                                device.FNumber.PrevValue();
+                            device.FNumber?.PrevValue();
                             break;
                         case CmdConsts.NextIso:
-                            if (device.IsoNumber != null)
-                                device.IsoNumber.NextValue();
+                            device.IsoNumber?.NextValue();
                             break;
                         case CmdConsts.PrevIso:
-                            if (device.IsoNumber != null)
-                                device.IsoNumber.PrevValue();
+                            device.IsoNumber?.PrevValue();
                             break;
                         case CmdConsts.NextShutter:
-                            if (device.ShutterSpeed != null)
-                                device.ShutterSpeed.NextValue();
+                            device.ShutterSpeed?.NextValue();
                             break;
                         case CmdConsts.PrevShutter:
-                            if (device.ShutterSpeed != null)
-                                device.ShutterSpeed.PrevValue();
+                            device.ShutterSpeed?.PrevValue();
                             break;
                         case CmdConsts.NextWhiteBalance:
-                            if (device.WhiteBalance != null)
-                                device.WhiteBalance.NextValue();
+                            device.WhiteBalance?.NextValue();
                             break;
                         case CmdConsts.PrevWhiteBalance:
-                            if (device.WhiteBalance != null)
-                                device.WhiteBalance.PrevValue();
+                            device.WhiteBalance?.PrevValue();
                             break;
                         case CmdConsts.NextExposureCompensation:
-                            if (device.ExposureCompensation != null)
-                                device.ExposureCompensation.NextValue();
+                            device.ExposureCompensation?.NextValue();
                             break;
                         case CmdConsts.PrevExposureCompensation:
-                            if (device.ExposureCompensation != null)
-                                device.ExposureCompensation.PrevValue();
+                            device.ExposureCompensation?.PrevValue();
                             break;
                         case CmdConsts.NextCamera:
                             ServiceProvider.DeviceManager.SelectNextCamera();

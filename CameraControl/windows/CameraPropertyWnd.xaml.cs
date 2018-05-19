@@ -9,6 +9,7 @@ using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using CameraControl.ViewModel;
 
 namespace CameraControl.windows
 {
@@ -21,25 +22,13 @@ namespace CameraControl.windows
 
         private ICameraDevice _cameraDevice;
 
-        private CameraProperty _cameraProperty;
         public CameraProperty CameraProperty
         {
-            get { return _cameraProperty; }
+            get { return ((CameraPropertyViewModel)DataContext).CameraProperty; }
             set
             {
-                _cameraProperty = value;
+                ((CameraPropertyViewModel)DataContext).CameraProperty = value;
                 NotifyPropertyChanged("CameraProperty");
-            }
-        }
-
-        private AsyncObservableCollection<string> _photoSessionNames;
-        public AsyncObservableCollection<string> PhotoSessionNames
-        {
-            get { return _photoSessionNames; }
-            set
-            {
-                _photoSessionNames = value;
-                NotifyPropertyChanged("PhotoSessionNames");
             }
         }
 
@@ -62,7 +51,6 @@ namespace CameraControl.windows
             {
                 AvailableKeys.Add(key);
             }
-            PhotoSessionNames = new AsyncObservableCollection<string>();
             CameraPresets = new AsyncObservableCollection<string>();
         }
 
@@ -73,18 +61,7 @@ namespace CameraControl.windows
             switch (cmd)
             {
                 case WindowsCmdConsts.CameraPropertyWnd_Show:
-                    PhotoSessionNames.Clear();
-                    PhotoSessionNames.Add("(None)");
-                    foreach (PhotoSession photoSession in ServiceProvider.Settings.PhotoSessions)
-                    {
-                        PhotoSessionNames.Add(photoSession.Name);
-                    }
-                    CameraPresets.Clear();
-                    CameraPresets.Add("(None)");
-                    foreach (var cameraPresets in ServiceProvider.Settings.CameraPresets)
-                    {
-                        CameraPresets.Add(cameraPresets.Name);
-                    }
+                    ((CameraPropertyViewModel)DataContext).Init();
 
                     _cameraDevice = param as ICameraDevice;
                     if (_cameraDevice == null)
