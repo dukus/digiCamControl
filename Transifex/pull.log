@@ -1,4 +1,3 @@
-New translations found for the following languages: sv
 Pulling translations for resource digicamcontrol.baseresource (source: None)
  -> tr_TR: translations\digicamcontrol.baseresource\tr_TR.xml
 Skipping 'vi' translation (file: translations\digicamcontrol.baseresource\vi.xml).
@@ -33,9 +32,8 @@ Skipping 'ro' translation (file: translations\digicamcontrol.baseresource\ro.xml
  -> zh_CN: translations\digicamcontrol.baseresource\zh_CN.xml
 Skipping 'sr' translation (file: translations\digicamcontrol.baseresource\sr.xml).
 Skipping 'da' translation (file: translations\digicamcontrol.baseresource\da.xml).
+ -> sv: translations\digicamcontrol.baseresource\sv.xml
 Skipping 'gl_ES' translation (file: translations\digicamcontrol.baseresource\gl_ES.xml).
 Skipping 'uk' translation (file: translations\digicamcontrol.baseresource\uk.xml).
 Skipping 'sl' translation (file: translations\digicamcontrol.baseresource\sl.xml).
-Pulling new translations for resource digicamcontrol.baseresource (source: None)
- -> sv: translations\digicamcontrol.baseresource\sv.xml
 Done.

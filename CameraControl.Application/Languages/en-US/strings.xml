@@ -408,7 +408,7 @@ Do you want to continue?
     <string name="LabelSelectNone">Select None</string>
     <string name="LabelSelectLiked">Select Liked</string>
     <string name="LabelSelectUnLiked">Select UnLiked</string>
-    <string name="LabelLockNearFar">Please lock nerest and farest focus points</string>
+    <string name="LabelLockNearFar">Please lock nearest and farest focus points</string>
     <string name="LabelError">Error</string>
     <string name="LabelChangelog">Change Log</string>
     <string name="LabelAllowOverWrite">Allow overwrite</string>
@@ -496,7 +496,7 @@ Do you want to continue?
     <string name="LabelWaitBetweenSteps">Wait between steps (ms)</string>
     <string name="LabelShowSecondary">Show on secondary monitor</string>
     <string name="LabelKeyboardTrigger">Keyboard trigger</string>
-    <string name="LabelNoProccesing">No procesing</string>
+    <string name="LabelNoProccesing">No processing</string>
     <string name="LabelNoProccesingTooltip">Most of the functionality is disabled</string>
     <string name="LabelSendUsage">Automatically send usage statistics</string>
     <string name="LabelSheduleStart">Start schedule</string>
