@@ -710,5 +710,6 @@ namespace CameraControl.Core.Translation
         public static string LabelZoom = "Zoom";
         public static string LabelDefaultSession = "Default Session";
         public static string LabelDefaultPreset = "Default Preset";
+        public static string LabelWiaDeviceSupport = "Wia device support";
     }
 }

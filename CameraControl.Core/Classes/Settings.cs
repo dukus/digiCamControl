@@ -292,6 +292,10 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        [JsonIgnore]
+        [XmlIgnore]
+        public Branding Branding => ServiceProvider.Branding;
+
         public List<string> AvaiableWebAddresses
         {
             get
@@ -933,6 +937,7 @@ namespace CameraControl.Core.Classes
 
         public bool WebcamSupport { get; set; }
 
+        public bool WiaDeviceSupport { get; set; }
 
         public ObservableCollection<PluginSetting> PluginSettings { get; set; }
 
@@ -1104,6 +1109,7 @@ namespace CameraControl.Core.Classes
             ExternalDeviceWaitForFocus = 1000;
 
             WebcamSupport = true;
+            WiaDeviceSupport = true;
         }
 
 
