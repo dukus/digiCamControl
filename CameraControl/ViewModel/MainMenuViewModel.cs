@@ -50,8 +50,6 @@ namespace CameraControl.ViewModel
         public RelayCommand UseAsMasterCommand { get; private set; }
         
         public RelayCommand FlipPreviewCommand { get; set; }
-        public RelayCommand EnhancedThumbsCommand { get; set; }
-        public RelayCommand ShowThumbInfoCommand { get; set; }
         
         public RelayCommand ManualPageCommand { get; set; }
         public RelayCommand HomePageCommand { get; set; }
@@ -218,9 +216,6 @@ namespace CameraControl.ViewModel
 
             ToggleFocusCommand = new RelayCommand(() => ShowFocusPoints = !ShowFocusPoints);
             FlipPreviewCommand = new RelayCommand(() => FlipPreview = !FlipPreview);
-            EnhancedThumbsCommand = new RelayCommand(() => EnhancedThumbs = !EnhancedThumbs);
-            ShowThumbInfoCommand = new RelayCommand(() => ShowThumbInfo = !ShowThumbInfo);
-
             HomePageCommand =
                 new RelayCommand(
                     () => PhotoUtils.Run(string.IsNullOrEmpty(Branding.HomePageUrl)

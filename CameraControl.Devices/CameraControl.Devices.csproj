@@ -169,6 +169,8 @@
     <Compile Include="Classes\DeviceObject.cs" />
     <Compile Include="Classes\DisconnectCameraEventArgs.cs" />
     <Compile Include="Classes\ErrorCodes.cs" />
+    <Compile Include="Classes\FocusAmount.cs" />
+    <Compile Include="Classes\FocusDirection.cs" />
     <Compile Include="Classes\HttpHelper.cs" />
     <Compile Include="Classes\LiveViewData.cs" />
     <Compile Include="Classes\LogEventArgs.cs" />

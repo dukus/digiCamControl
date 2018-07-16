@@ -385,6 +385,11 @@ namespace CameraControl.Devices
         {
         }
 
+        public virtual void Focus(FocusDirection direction, FocusAmount amount)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void CapturePhotoNoAf()
         {
         }

@@ -1805,6 +1805,48 @@ namespace CameraControl.Devices.Nikon
             return step;
         }
 
+
+        public override void Focus(FocusDirection direction, FocusAmount amount)
+        {
+            switch (direction)
+            {
+                case FocusDirection.Far:
+                    switch (amount)
+                    {
+                        case FocusAmount.Small:
+                            Focus(10);
+                            break;
+                        case FocusAmount.Medium:
+                            Focus(100);
+                            break;
+                        case FocusAmount.Large:
+                            Focus(500);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(amount), amount, null);
+                    }
+                    break;
+                case FocusDirection.Near:
+                    switch (amount)
+                    {
+                        case FocusAmount.Small:
+                            Focus(-10);
+                            break;
+                        case FocusAmount.Medium:
+                            Focus(-100);
+                            break;
+                        case FocusAmount.Large:
+                            Focus(-500);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(amount), amount, null);
+                    }
+                    break;
+
+            }
+        }
+    
+
         public override void AutoFocus()
         {
             lock (Locker)

@@ -1491,6 +1491,47 @@ namespace CameraControl.Devices.Canon
             return focus;
         }
 
+        public override void Focus(FocusDirection direction, FocusAmount amount)
+        {
+            ResetShutterButton();
+            switch (direction)
+            {
+                case FocusDirection.Far:
+                    switch (amount)
+                    {
+                        case FocusAmount.Small:
+                            Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf, (int) Edsdk.EvfDriveLens_Far1);
+                            break;
+                        case FocusAmount.Medium:
+                            Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf, (int) Edsdk.EvfDriveLens_Far2);
+                            break;
+                        case FocusAmount.Large:
+                            Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf, (int) Edsdk.EvfDriveLens_Far3);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(amount), amount, null);
+                    }
+                    break;
+                case FocusDirection.Near:
+                    switch (amount)
+                    {
+                        case FocusAmount.Small:
+                            Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf, (int)Edsdk.EvfDriveLens_Near1);
+                            break;
+                        case FocusAmount.Medium:
+                            Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf, (int)Edsdk.EvfDriveLens_Near2);
+                            break;
+                        case FocusAmount.Large:
+                            Camera.SendCommand(Edsdk.CameraCommand_DriveLensEvf, (int)Edsdk.EvfDriveLens_Near3);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(amount), amount, null);
+                    }
+                    break;
+
+            }
+        }
+
         public override bool DeleteObject(DeviceObject deviceObject)
         {
             if (deviceObject.Handle is IntPtr)

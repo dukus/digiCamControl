@@ -3,16 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                        xmlns:core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-                       xmlns:local="clr-namespace:CameraControl.windows"  x:Class="CameraControl.windows.GetIpWnd"
-                       Title="Connect" Height="157" Width="303" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowInTaskbar="False" ShowMinButton="False">
+                       xmlns:local="clr-namespace:CameraControl.windows"
+                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                       xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+                       x:Class="CameraControl.windows.GetIpWnd"
+                       Title="Connect" Height="180" Width="303" Loaded="MetroWindow_Loaded" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowInTaskbar="False" ShowMinButton="False">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ComboBox Margin="4" IsEditable="False" SelectedItem="{Binding WifiDeviceProvider, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" ItemsSource="{Binding Providers, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" DisplayMemberPath="Name"/>
-        <TextBox Grid.Row="1" Margin="4" x:Name="txt_ip" Text="{Binding Ip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" FontSize="20"/>
+        <ComboBox Margin="4" IsEditable="False" SelectedItem="{Binding WifiDeviceProvider, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" ItemsSource="{Binding Providers, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" DisplayMemberPath="Name"
+                  materialDesign:HintAssist.Hint="{translation:TranslateExtension LabelWiFiProvider}"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+        <TextBox Grid.Row="1" Margin="4" x:Name="txt_ip" Text="{Binding Ip, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GetIpWnd}}}" FontSize="20"
+                 materialDesign:HintAssist.Hint="{translation:TranslateExtension LabelIpAddreess}"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         <Button Content="Connect" Grid.Row="2" x:Name="btn_conect" Margin="4" Click="btn_conect_Click" />
     </Grid>
 </Controls:MetroWindow>

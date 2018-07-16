@@ -5,6 +5,9 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
+        xmlns:my="clr-namespace:CameraControl"
         Title="{translation:TranslateExtension LabelConfigurePlugin}" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <viewModel:AutoExportPluginEditViewModel/>
@@ -51,20 +54,22 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}"
+                            <ListBox ItemsSource="{Binding TransformPluginItems}" SelectedItem="{Binding SelectedTransformPluginItem}" HorizontalContentAlignment="Stretch"
                                      dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid>
-                                            <Label Content="{Binding Name}"/>
-                                            <Button  Height="25" Width="25" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right">
-                                                <Rectangle Width="10" Height="10">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_delete}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Button>
-                                        </Grid>
+                                            <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Content="{Binding Name}"/>
+                                                <materialDesign:PopupBox Grid.Column="1" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top"  PopupMode="Click">
+                                                    <StackPanel>
+                                                        <Button Content="Delete"  Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding DataContext.RemoveTransforPluginCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right"/>
+                                                    </StackPanel>
+                                                </materialDesign:PopupBox>
+                                            </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>

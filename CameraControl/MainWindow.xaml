@@ -180,9 +180,9 @@
             </MenuItem>
             <MenuItem Header="{T:TranslateExtension MenuView}" Padding="5,2" Margin="1" Visibility="{Binding Branding.ShowViewMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <MenuItem Header="{T:TranslateExtension LabelShowFocusPoints}" IsChecked="{Binding ShowFocusPoints, Mode=OneWay}" Command="{Binding ToggleFocusCommand}" IsCheckable="True"/>
-                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" Command="{Binding FlipPreviewCommand}" IsCheckable="True"/>
-                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" Command="{Binding EnhancedThumbsCommand}" IsCheckable="True"/>
-                <MenuItem Header="{T:TranslateExtension LabelShowThumbInfo}" IsChecked="{Binding ShowThumbInfo}" Command="{Binding ShowThumbInfoCommand}" IsCheckable="True"/>
+                <MenuItem Header="{T:TranslateExtension LabelFlip}" IsChecked="{Binding FlipPreview}" IsCheckable="True"/>
+                <MenuItem Header="{T:TranslateExtension LabelEnhancedThumbs}" IsChecked="{Binding EnhancedThumbs}" IsCheckable="True"/>
+                <MenuItem Header="{T:TranslateExtension LabelShowThumbInfo}" IsChecked="{Binding ShowThumbInfo}" IsCheckable="True"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuLayout}">
                     <MenuItem Header="{T:TranslateExtension MenuLayoutLandscape}" Command="{Binding SetLayoutCommand}" CommandParameter="Normal"/>
@@ -325,8 +325,16 @@
                                 Background="{DynamicResource MaterialDesignDivider}"
                                 SnapsToDevicePixels="True" />-->
                         <materialDesign:Card Margin="4">
-                            <Expander  Header="{T:TranslateExtension Session}" VerticalAlignment="Top" IsExpanded="True" 
+                            <Expander  VerticalAlignment="Top" IsExpanded="True" 
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowSessionPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                                <Expander.Header>
+                                    <Grid>
+                                        <TextBlock Text="{T:TranslateExtension Session}" VerticalAlignment="Center" FontSize="15"/>
+                                        <Button Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalContentAlignment="Right" Padding="0" Click="Button_Click_3">
+                                            <materialDesign:PackIcon Width="20" Height="20" Kind="Settings" />
+                                        </Button>
+                                    </Grid>
+                                </Expander.Header>
                                 <StackPanel Orientation="Vertical">
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                     <Grid Margin="24,8,24,16" >
@@ -368,7 +376,7 @@
                             </Expander>
                         </materialDesign:Card>
                         <materialDesign:Card Margin="4" Visibility="{Binding  Path=DefaultSession.AlowFolderChange, Converter={StaticResource BooleanToVisibilityConverter1}}">
-                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="True"  MaxHeight="200">
+                            <Expander Header="{T:TranslateExtension LabelFolderSelector}" VerticalAlignment="Top" IsExpanded="False"  MaxHeight="200">
                                 <StackPanel Orientation="Vertical">
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                                     <Panels:DirectorySelectorControl SelectedPath="{Binding Path=DefaultSession.Folder, Mode=TwoWay}" Margin="24,8,24,16"/>

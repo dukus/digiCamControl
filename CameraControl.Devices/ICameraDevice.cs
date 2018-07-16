@@ -126,6 +126,7 @@ namespace CameraControl.Devices
         void AutoFocus();
         int Focus(int step);
         void Focus(int x, int y);
+        void Focus(FocusDirection direction, FocusAmount amount);
         void CapturePhotoNoAf();
         void CapturePhoto();
         void StartRecordMovie();

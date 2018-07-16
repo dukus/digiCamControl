@@ -2,9 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Welcome - Support Us" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="True" WindowStyle="None" TitlebarHeight="40" TitleCaps="False">
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="digiCamControl by Duka Istvan" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="True" WindowStyle="None" TitlebarHeight="40" TitleCaps="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

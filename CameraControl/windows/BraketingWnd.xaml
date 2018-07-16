@@ -1,26 +1,12 @@
 ﻿<Controls:MetroWindow x:Class="CameraControl.windows.BraketingWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension BraketingWindowTitle}" Height="476" Width="574"  WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension BraketingWindowTitle}" Height="300" Width="550"  WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
+                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                       ShowMaxRestoreButton="False" ShowMinButton="False">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Window.DataContext>
         <viewModel:BracketingViewModel/>
     </Window.DataContext>
@@ -43,88 +29,86 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Content="{T:TranslateExtension LabelBracketingMode}" HorizontalAlignment="Right" Margin="0,3,3,3"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" SelectedIndex="{Binding Mode}" IsEnabled="{Binding IsFree}">
+
+        <ComboBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="4" SelectedIndex="{Binding Mode}" IsEnabled="{Binding IsFree}"
+                  materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingMode}"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
             <ComboBoxItem Content="{T:TranslateExtension LabelExposureBracketing}"/>
             <ComboBoxItem Content="{T:TranslateExtension LabelDepthOfFieldBracketing}"/>
             <ComboBoxItem Content="{T:TranslateExtension LabelIsoBracketing}"/>            
             <ComboBoxItem Content="{T:TranslateExtension LabelWhiteBalanceBracketing}"/>
         </ComboBox>
         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding Error}" Foreground="Red" HorizontalContentAlignment="Center" FontSize="16"/>
-        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding ExpVisibility}">
+        <materialDesign:Card Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding ExpVisibility}" Margin="24,8">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="187*"/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="{T:TranslateExtension LabelBracketingLow}" HorizontalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="0" Margin="3" ItemsSource="{Binding ExpLowList}" SelectedItem="{Binding ExpLow}"/>
+                <ComboBox Grid.Row="1" Grid.Column="0" Margin="3" ItemsSource="{Binding ExpLowList}" SelectedItem="{Binding ExpLow}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingLow}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="{T:TranslateExtension LabelBracketingNumberOfShots}" HorizontalAlignment="Center"/>
-                <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding ExpCaptureCount}"/>
-
-                <Label Grid.Row="0" Grid.Column="2" Content="{T:TranslateExtension LabelBracketingHigh}" HorizontalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" Margin="3" ItemsSource="{Binding ExpHighList}" SelectedValue="{Binding ExpHigh}"/>
+                <TextBox  Grid.Column="1" Margin="3" Text="{Binding ExpCaptureCount}"
+                                        materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingNumberOfShots}"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <ComboBox Grid.Column="2" Margin="3" ItemsSource="{Binding ExpHighList}" SelectedValue="{Binding ExpHigh}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingHigh}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Grid>
-        </GroupBox>
+        </materialDesign:Card>
 
-        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding FVisibility}">
+        <materialDesign:Card Margin="24,8" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding FVisibility}">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="187*"/>
-                </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="{T:TranslateExtension LabelBracketingLow}" HorizontalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="0" Margin="3" ItemsSource="{Binding FLowList}" SelectedItem="{Binding FLow}"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="{T:TranslateExtension LabelBracketingNumberOfShots}" HorizontalAlignment="Center"/>
-                <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding FCaptureCount}"/>
+                <ComboBox Grid.Column="0" Margin="3" ItemsSource="{Binding FLowList}" SelectedItem="{Binding FLow}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingLow}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{T:TranslateExtension LabelBracketingHigh}" HorizontalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" Margin="3" ItemsSource="{Binding FHighList}" SelectedValue="{Binding FHigh}"/>
+                <TextBox Grid.Column="1" Margin="3" Text="{Binding FCaptureCount}" materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingNumberOfShots}"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                <ComboBox Grid.Column="2" Margin="3" ItemsSource="{Binding FHighList}" SelectedValue="{Binding FHigh}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingHigh}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Grid>
-        </GroupBox>
+        </materialDesign:Card>
 
-        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding IsoVisibility}">
+        <materialDesign:Card Margin="24,8" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" IsEnabled="{Binding IsFree}" Visibility="{Binding IsoVisibility}">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="187*"/>
-                </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="{T:TranslateExtension LabelBracketingLow}" HorizontalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="0" Margin="3" ItemsSource="{Binding IsoLowList}" SelectedItem="{Binding IsoLow}"/>
+                <ComboBox Grid.Column="0" Margin="3" ItemsSource="{Binding IsoLowList}" SelectedItem="{Binding IsoLow}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingLow}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="{T:TranslateExtension LabelBracketingNumberOfShots}" HorizontalAlignment="Center"/>
-                <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Margin="3" Minimum="2" Value="{Binding IsoCaptureCount}"/>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{T:TranslateExtension LabelBracketingHigh}" HorizontalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" Margin="3" ItemsSource="{Binding IsoHighList}" SelectedValue="{Binding IsoHigh}"/>
+                <TextBox Grid.Column="1" Margin="3" Text="{Binding IsoCaptureCount}"
+                         materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingNumberOfShots}"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                <ComboBox  Grid.Column="2" Margin="3" ItemsSource="{Binding IsoHighList}" SelectedValue="{Binding IsoHigh}"
+                          materialDesign:HintAssist.Hint="{T:TranslateExtension LabelBracketingHigh}"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
             </Grid>
-        </GroupBox>
+        </materialDesign:Card>
         
         <StackPanel Grid.Row="5" HorizontalAlignment="Left" Orientation="Horizontal">
-            <Button Content="{T:TranslateExtension ButtonStart}" Margin="5" Width="75" VerticalAlignment="Bottom" Command="{Binding StartCommand}" IsEnabled="{Binding IsFree}" Padding="20"/>
-            <Button Content="{T:TranslateExtension LabelReset}"  HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding StopCommand}" Padding="20"/>
+            <Button Content="{T:TranslateExtension ButtonStart}" Margin="4" Width="75" VerticalAlignment="Bottom" Command="{Binding StartCommand}" IsEnabled="{Binding IsFree}" />
+            <Button Content="{T:TranslateExtension LabelReset}"  HorizontalAlignment="Left" Margin="4" VerticalAlignment="Top" Width="75" Command="{Binding StopCommand}" />
         </StackPanel>
-        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="5" HorizontalAlignment="Right" Margin="0,0,5,5" Width="75" VerticalAlignment="Bottom" Grid.Column="2" Click="Button_Click" Padding="20"/>
+        <Button Content="{T:TranslateExtension ButtonClose}" Grid.Row="5" HorizontalAlignment="Right" Margin="4" Width="75" VerticalAlignment="Bottom" Grid.Column="2" Click="Button_Click" />
         <Label Content="{Binding Message}"  Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0" HorizontalContentAlignment="Center" />
         <Label Content="{Binding CurValue}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 

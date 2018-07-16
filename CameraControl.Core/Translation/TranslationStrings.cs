@@ -711,5 +711,7 @@ namespace CameraControl.Core.Translation
         public static string LabelDefaultSession = "Default Session";
         public static string LabelDefaultPreset = "Default Preset";
         public static string LabelWiaDeviceSupport = "Wia device support";
+        public static string LabelWiFiProvider = "WiFi Provider";
+        public static string LabelIpAddreess = "Ip Address";
     }
 }

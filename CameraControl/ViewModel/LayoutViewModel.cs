@@ -70,7 +70,7 @@ namespace CameraControl.ViewModel
         public RelayCommand OpenInLightroomCommand { get; private set; }
         public RelayCommand SelectNoneCommand { get; private set; }
         public RelayCommand SelectAllCommand { get; private set; }
-
+        
         /// <summary>
         /// 
         /// </summary>

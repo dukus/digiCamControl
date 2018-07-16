@@ -1097,5 +1097,26 @@ namespace CameraControl
             ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.RefreshDisplay);
         }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            EditSession();
+        }
+
+        private void EditSession()
+        {
+            try
+            {
+                EditSession editSession = new EditSession(ServiceProvider.Settings.DefaultSession);
+                editSession.Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+                editSession.ShowDialog();
+                ServiceProvider.Settings.Save(ServiceProvider.Settings.DefaultSession);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error refresh session ", ex);
+                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.MainWnd_Message, ex.Message);
+            }
+        }
+
     }
 }
