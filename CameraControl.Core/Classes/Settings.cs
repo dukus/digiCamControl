@@ -1303,7 +1303,7 @@ namespace CameraControl.Core.Classes
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(ConfigFile));
                 }
-                if (File.Exists(ConfigFile))
+                if (File.Exists(ConfigFile) || File.Exists(ConfigFile.Replace(".json", ".xml")))
                 {
                     settings = LoadSettings(ConfigFile, settings);
                 }
@@ -1458,7 +1458,7 @@ namespace CameraControl.Core.Classes
                 //serializer.Serialize(writer, this);
                 //writer.Close();
 
-                var json = JsonConvert.SerializeObject(this);
+                var json = JsonConvert.SerializeObject(this, Formatting.Indented);
                 File.WriteAllText(ConfigFile, json);
                 // save preset in separated files
                 foreach (var cameraPreset in this.CameraPresets)
