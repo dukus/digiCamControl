@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>CameraControl.Devices</id>
-        <version>2.0.73-beta</version>
+        <version>2.1.0-beta</version>
         <title>digiCamControl</title>
         <authors>Duka Istvan</authors>
         <owners>Duka Istvan</owners>
@@ -14,7 +14,7 @@
         <tags>camera control nikon canon sony dslr live view</tags>
         <dependencies>
             <group targetFramework=".NETFramework4.6">
-                <dependency id="Newtonsoft.Json" version="10.0.3" />
+                <dependency id="Newtonsoft.Json" version="11.0.2" />
                 <dependency id="WebSocketSharp" version="1.0.3-rc11" />
                 <dependency id="Rssdp" version="2.0.9" />
             </group>
@@ -27,8 +27,10 @@
     <files>
         <file src="CameraControl\bin\Debug\CameraControl.Devices.dll" target="lib\net46\CameraControl.Devices.dll" />
         <file src="CameraControl\bin\Debug\CameraControl.Devices.pdb" target="lib\net46\CameraControl.Devices.pdb" />
+		<file src="CameraControl\bin\Debug\CameraControl.Devices.xml" target="lib\net46\CameraControl.Devices.xml" />
         <file src="CameraControl\bin\Debug\Canon.Eos.Framework.dll" target="lib\net46\Canon.Eos.Framework.dll" />
         <file src="CameraControl\bin\Debug\Canon.Eos.Framework.pdb" target="lib\net46\Canon.Eos.Framework.pdb" />
+		<file src="CameraControl\bin\Debug\Canon.Eos.Framework.xml" target="lib\net46\Canon.Eos.Framework.xml" />
         <file src="CameraControl\bin\Debug\Interop.PortableDeviceApiLib.dll" target="lib\net46\Interop.PortableDeviceApiLib.dll" />
         <file src="CameraControl\bin\Debug\Interop.PortableDeviceTypesLib.dll" target="lib\net46\Interop.PortableDeviceTypesLib.dll" />
         <file src="refs\Interop.WIA.dll" target="lib\net46\Interop.WIA.dll" />
