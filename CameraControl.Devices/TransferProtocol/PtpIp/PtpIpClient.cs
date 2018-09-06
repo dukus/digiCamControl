@@ -26,6 +26,8 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
                 //_client.SendTimeout = 0;
                 //_client.ReceiveTimeout = 0;
                 _client.Connect(ip, port);
+                _client.ReceiveTimeout = 300000;
+                _client.SendTimeout = 300000;
                 _inerStream = _client.GetStream();
 
                 Write(new InitCommandRequest());
@@ -40,9 +42,9 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
                 header.Read(_eventinerStream);
 
                 header.Length = 8;
-                header.Type = (uint) PtpIpContainerType.Ping;
+                header.Type = (uint)PtpIpContainerType.Ping;
                 WriteEvent(header);
-               
+
                 header.Read(_eventinerStream);
 
             }
@@ -80,16 +82,16 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
             }
         }
 
-        public IPtpIpCommand Read(StillImageDevice.TransferCallback callback=null)
+        public IPtpIpCommand Read(StillImageDevice.TransferCallback callback = null, Stream stream = null)
         {
             var header = new PtpIpHeader();
             header.Read(_inerStream);
-            switch ((PtpIpContainerType) header.Type)
+            switch ((PtpIpContainerType)header.Type)
             {
                 case PtpIpContainerType.Init_Command_Request:
                     break;
                 case PtpIpContainerType.Init_Command_Ack:
-                    var initcommand = new InitCommandAck() {Header = header};
+                    var initcommand = new InitCommandAck() { Header = header };
                     initcommand.Read(_inerStream);
                     return initcommand;
                 case PtpIpContainerType.Init_Event_Request:
@@ -101,24 +103,27 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
                 case PtpIpContainerType.Cmd_Request:
                     break;
                 case PtpIpContainerType.Cmd_Response:
-                    var cmdresp = new CmdResponse() {Header = header};
+                    var cmdresp = new CmdResponse() { Header = header };
                     cmdresp.Read(_inerStream);
                     return cmdresp;
                 case PtpIpContainerType.Event:
                     break;
                 case PtpIpContainerType.Start_Data_Packet:
-                    var stardatares = new StartDataPacket() {Header = header};
+                    var stardatares = new StartDataPacket() { Header = header };
                     stardatares.Read(_inerStream);
                     return stardatares;
                 case PtpIpContainerType.Data_Packet:
-                    var data = new DataPacket() {Header = header};
+                    var data = new DataPacket() { Header = header };
                     data.Read(_inerStream);
                     return data;
                 case PtpIpContainerType.Cancel_Transaction:
                     break;
                 case PtpIpContainerType.End_Data_Packet:
-                    var enddata = new EndDataPacket() {Header = header};
-                    enddata.Read(_inerStream, callback);
+                    var enddata = new EndDataPacket() { Header = header };
+                    if (stream != null)
+                        enddata.Read(_inerStream, callback, stream);
+                    else
+                        enddata.Read(_inerStream, callback);
                     return enddata;
                 case PtpIpContainerType.Ping:
                     break;
@@ -165,7 +170,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
         //    Container result = getContainer(false);
         //    return result;
         //}
-        
+
 
     }
 }

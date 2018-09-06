@@ -108,7 +108,7 @@ namespace CameraControl.Devices.TransferProtocol
                 }
 
                 var response1 = res1 as StartDataPacket;
-                var res2 = _client.Read(callback);
+                var res2 = _client.Read(callback, stream);
                 var res3 = (EndDataPacket)res2;
 
                 var res4 = _client.Read();
