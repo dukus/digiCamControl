@@ -107,7 +107,7 @@ namespace CameraControl.Devices.Others
             CompressionSetting = new PropertyValue<long> {IsEnabled = true};
             CompressionSetting.AddValues("jpg",0);
             CompressionSetting.AddValues("cr2", 1);
-            CompressionSetting.AddValues("new", 2);
+            CompressionSetting.AddValues("nef", 2);
             CompressionSetting.Value = "jpg";
             CompressionSetting.ReloadValues();
 
@@ -183,6 +183,11 @@ namespace CameraControl.Devices.Others
         public override int Focus(int step)
         {
             return step;
+        }
+
+        public override bool DeleteObject(DeviceObject deviceObject)
+        {
+            return true;
         }
 
         //public override string ToString()

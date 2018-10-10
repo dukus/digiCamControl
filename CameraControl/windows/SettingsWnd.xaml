@@ -190,24 +190,26 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="276*" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="273" />
                                     <ColumnDefinition Width="347*" />
                                 </Grid.ColumnDefinitions>
-                                <GroupBox Header="{T:TranslateExtension LabelAvailableDevices}"  >
+                                <GroupBox Header="{T:TranslateExtension LabelAvailableDevices}" MinHeight="200" >
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="276*" />
                                             <RowDefinition Height="35" />
                                         </Grid.RowDefinitions>
+                                        <ListBox Name="lst_device" ItemsSource="{Binding DeviceConfigs.Items}" DisplayMemberPath="Name" Margin="4" />
+                                        <Button Content="{T:Translate ButtonAdd}"  Margin="4" Name="btn_add_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_add_device_Click" HorizontalAlignment="Left" />
+                                        <Button Content="{T:Translate ButtonDelete}" Margin="4" Name="btn_del_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_del_device_Click" HorizontalAlignment="Right" />
+
                                     </Grid>
                                 </GroupBox>
-                                <ListBox Name="lst_device" ItemsSource="{Binding DeviceConfigs.Items}" DisplayMemberPath="Name" Margin="4" />
-                                <Button Content="{T:Translate ButtonAdd}" Height="30" Margin="4" Name="btn_add_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_add_device_Click" HorizontalAlignment="Left" Width="53" />
-                                <Button Content="{T:Translate ButtonDelete}" Height="30" Margin="4" Name="btn_del_device" VerticalAlignment="Top" Grid.Row="1" Click="btn_del_device_Click" HorizontalAlignment="Right" Width="53" />
 
-                                <GroupBox Header="{T:TranslateExtension LabelDeviceSettings}" Grid.Column="1" Grid.RowSpan="2">
+                                <GroupBox Header="{T:TranslateExtension LabelDeviceSettings}" Grid.Column="1" Grid.RowSpan="3">
                                     <Grid DataContext="{Binding ElementName=lst_device, Path=SelectedItem}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="115*" />
@@ -228,7 +230,7 @@
                                         <ComboBox Grid.Column="1" Grid.Row="1" Margin="3" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.ExternalDeviceManager}, Path=ExternalDeviceNames}" SelectedItem="{Binding DriverName}"/>
                                     </Grid>
                                 </GroupBox>
-                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                                <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="{T:TranslateExtension LabelWaitForFocus}" Margin="5" Width="150"/>
                                         <Controls:NumericUpDown Value="{Binding ExternalDeviceWaitForFocus}" Minimum="0" Margin="5"/>

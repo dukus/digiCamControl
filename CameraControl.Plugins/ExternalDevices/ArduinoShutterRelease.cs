@@ -17,17 +17,18 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public bool Capture(CustomConfig config)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return true;
         }
 
         public bool Focus(CustomConfig config)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool CanExecute(CustomConfig config)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public UserControl GetConfig(CustomConfig config)
@@ -103,12 +104,12 @@ namespace CameraControl.Plugins.ExternalDevices
 
         public bool AssertFocus(CustomConfig config)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool DeassertFocus(CustomConfig config)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public ArduinoShutterRelease()
