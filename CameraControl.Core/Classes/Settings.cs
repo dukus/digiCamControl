@@ -1311,6 +1311,13 @@ namespace CameraControl.Core.Classes
                 {
                     settings.Save();
                 }
+                // There is a bug somewhere which cause null exception
+                // but too lazy to find it ..
+                if (settings == null)
+                {
+                    settings = new Settings();
+                    settings.Save();
+                }
                 settings.LoadPresetData();
             }
             catch (Exception exception)

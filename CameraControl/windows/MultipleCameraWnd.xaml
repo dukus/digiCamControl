@@ -78,27 +78,29 @@
         <!--<Label Content="{T:TranslateExtension LabelConnectedCameras}" Grid.Column="1" Padding="0" Margin="0,0,0,334" />-->
         <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
             <TabItem Header="{T:TranslateExtension LabelGrid}">
-                <ItemsControl  Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Margin="0,20,0,0"
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,20,0,0" HorizontalScrollBarVisibility="Disabled"  >
+                    <ItemsControl  Name="listBox1" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" 
                   dragDrop:DragDrop.IsDragSource="True" dragDrop:DragDrop.IsDropTarget="True" >
-                    <ItemsControl.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />
-                            <MenuItem Header="{T:TranslateExtension MenuUseSelectedCameraPreset}" Click="MenuItem_Click_1" />
-                        </ContextMenu>
-                    </ItemsControl.ContextMenu>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <HierarchicalDataTemplate>
-                            <materialDesign:Card  VerticalAlignment="Top" Margin="2">
-                                <local:ControlerSimple DataContext="{Binding Path=.}" Width="130" Height="410" />
-                            </materialDesign:Card>
-                        </HierarchicalDataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                        <ItemsControl.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{T:TranslateExtension MenuProperties}" Click="MenuItem_Click" />
+                                <MenuItem Header="{T:TranslateExtension MenuUseSelectedCameraPreset}" Click="MenuItem_Click_1" />
+                            </ContextMenu>
+                        </ItemsControl.ContextMenu>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <materialDesign:Card  VerticalAlignment="Top" Margin="2">
+                                    <local:ControlerSimple DataContext="{Binding Path=.}" Width="130" Height="410" />
+                                </materialDesign:Card>
+                            </HierarchicalDataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="{T:TranslateExtension LabelList}">
                 <DataGrid ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=ConnectedDevices}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
@@ -111,8 +113,8 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        
-                        
+
+
                         <DataGridTextColumn Binding="{Binding Path=DisplayName}" Header="{T:TranslateExtension LabelCameraname}" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding Path=SerialNumber}" Header="{T:TranslateExtension LabelSerialNumber}" IsReadOnly="True" />
                         <DataGridTextColumn Binding="{Binding Path=Battery}" Header="{T:TranslateExtension Battery}" IsReadOnly="True" />
@@ -162,7 +164,7 @@
                                 <DataTemplate>
                                     <Border BorderThickness="1" BorderBrush="{Binding Path=WhiteBalance.ErrorColor}" >
                                         <ComboBox IsEnabled="{Binding Path=WhiteBalance.IsEnabled}" ItemsSource="{Binding Path=WhiteBalance.Values}" SelectedValue="{Binding Path=WhiteBalance.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged  }" />
-                                    </Border> 
+                                    </Border>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
