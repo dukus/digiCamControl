@@ -188,7 +188,7 @@ namespace CameraControl.Core.Translation
         public static string LabelImageAlignmentRightBottom = "Right/Bottom";
         public static string LabelVideoCodecProblem = "Video codec problem";
 
-        public static string MsgPhotoTransferBegin = "Photo transfer begins";
+        public static string MsgPhotoTransferBegin = "Transferring captured image...";
         public static string MsgPhotoTransferDone = "Photo transfer done";
         public static string MsgPhotoTransferError = "Transfer error !\nMessage {0}";
         public static string MsgBulbModeNotSupported = "Bulb mode not supported !";
