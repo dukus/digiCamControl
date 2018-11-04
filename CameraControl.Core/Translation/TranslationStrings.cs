@@ -713,5 +713,8 @@ namespace CameraControl.Core.Translation
         public static string LabelWiaDeviceSupport = "Wia device support";
         public static string LabelWiFiProvider = "WiFi Provider";
         public static string LabelIpAddreess = "Ip Address";
+
+        // 04/11/2018
+        public static string LabelShowFocusControlBar = "Show Focus Control Bar";
     }
 }

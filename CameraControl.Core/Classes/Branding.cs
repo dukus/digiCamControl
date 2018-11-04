@@ -220,7 +220,7 @@ namespace CameraControl.Core.Classes
             ShowRightPanelMainWindow = true;
             ShowCameraPropertiesMainWindow = true;
             ShowCameraAdvancedProperties = true;
-            ShowFocusControlLiveView = false;
+            ShowFocusControlLiveView = true;
             ShowFocusStackingLiveView = true;
             ShowControlLiveView = true;
             ShowOverlayLiveView = true;
