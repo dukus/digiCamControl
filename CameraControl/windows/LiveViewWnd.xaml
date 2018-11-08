@@ -257,6 +257,7 @@
                 </Canvas>
             </StackPanel>
         </materialDesign:Card>
+        <!--Focus control bar-->
         <materialDesign:Card Grid.Column="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="{Binding FocusingEnabled}" Margin="0,30" HorizontalAlignment="Center"
                              Visibility="{Binding ShowFocusControlLiveView, Converter={StaticResource BooleanToVisibilityConverter1}, Source={x:Static Core:ServiceProvider.Branding}}">
             <StackPanel Margin="4">
@@ -446,9 +447,10 @@
                                 <Rectangle Fill="{Binding NoProcessingWarnColor}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" />
                                 <CheckBox Content="{T:Translate LabelNoProccesing}" ToolTip="{T:Translate LabelNoProccesingTooltip}" IsChecked="{Binding NoProcessing}" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
                                 <CheckBox Content="{T:Translate LabelFlip}" IsChecked="{Binding FlipImage}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
+                                <CheckBox Content="{T:Translate LabelShowFocusControlBar}" IsChecked="{Binding ShowFocusControlLiveView, Source={x:Static Core:ServiceProvider.Branding}}" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="3" Margin="2" />
 
-                                <Label Content="{T:Translate LabelLiveViewRotation}" Grid.Column="1" Grid.Row="12" />
-                                <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="12" Grid.Column="3" Margin="3">
+                                <Label Content="{T:Translate LabelLiveViewRotation}" Grid.Column="1" Grid.Row="13" />
+                                <ComboBox SelectedIndex="{Binding RotationIndex}" Grid.Row="13" Grid.Column="3" Margin="3">
                                     <ComboBoxItem Content="{T:Translate LabelRotateNone}" />
                                     <ComboBoxItem Content="{T:Translate LabelRotate90}" />
                                     <ComboBoxItem Content="{T:Translate LabelRotate180}" />
@@ -456,11 +458,11 @@
                                     <ComboBoxItem Content="{T:Translate LabelAutoRotate}" />
                                 </ComboBox>
 
-                                <Label Content="{T:Translate LabelCropMargins}" Grid.Column="1" Grid.Row="13" />
-                                <Controls:NumericUpDown Minimum="0" Maximum="100" Value="{Binding CropRatio}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="3" Grid.Row="13" />
+                                <Label Content="{T:Translate LabelCropMargins}" Grid.Column="1" Grid.Row="14" />
+                                <Controls:NumericUpDown Minimum="0" Maximum="100" Value="{Binding CropRatio}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="3" Grid.Row="14" />
 
-                                <Label Content="{T:Translate LabelLiveViewPreviewTime}" Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="3"/>
-                                <Controls:NumericUpDown Minimum="0" Value="{Binding PreviewTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="3"/>
+                                <Label Content="{T:Translate LabelLiveViewPreviewTime}" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="3"/>
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding PreviewTime}" IsEnabled="{Binding IsFree}" Margin="3" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="3"/>
 
                             </Grid>
                         </Expander>

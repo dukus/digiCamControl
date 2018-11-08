@@ -454,7 +454,7 @@ namespace CameraControl
                 return;
             try
             {
-                Log.Debug("Photo transfer begin.");
+                Log.Debug(TranslationStrings.MsgPhotoTransferBegin);
                 eventArgs.CameraDevice.IsBusy = true;
                 var extension = Path.GetExtension(eventArgs.FileName);
 
