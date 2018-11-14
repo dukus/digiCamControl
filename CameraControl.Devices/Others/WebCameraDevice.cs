@@ -56,8 +56,11 @@ namespace CameraControl.Devices.Others
                 CompressionSetting.Value = _captureDevice.VideoResolution.ToString();
             else
             {
-                _captureDevice.VideoResolution = _captureDevice.VideoCapabilities.First();
-                CompressionSetting.Value = _captureDevice.VideoResolution.ToString();
+                if (_captureDevice.VideoCapabilities.Length > 0)
+                {
+                    _captureDevice.VideoResolution = _captureDevice.VideoCapabilities.First();
+                    CompressionSetting.Value = _captureDevice.VideoResolution.ToString();
+                }
             }
             CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
 
