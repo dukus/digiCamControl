@@ -342,15 +342,32 @@ namespace CameraControl.Devices.Canon
 
         }
 
-        private DateTime _dateTime;
-
         public override DateTime DateTime
         {
-            get { return _dateTime; }
+            get
+            {
+                try
+                {
+                    return Camera.GetDate();
+                }
+                catch (Exception e)
+                {
+                    Log.Error("   Unable to get time", e);
+                }
+                return DateTime.MinValue;
+            }
             set
             {
-                _dateTime = value;
-                NotifyPropertyChanged("DateTime");
+                try
+                {
+                    Camera.SetDate(value);
+                    NotifyPropertyChanged("DateTime");
+
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Unable to set time",e);
+                }
             }
         }
 

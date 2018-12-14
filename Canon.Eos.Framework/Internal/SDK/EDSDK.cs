@@ -77,9 +77,10 @@ namespace Canon.Eos.Framework.Internal.SDK
         public const uint   kEdsPropID_CurrentFolder    = 0x0000000d;
         public const uint   kEdsPropID_MyMenu           = 0x0000000e;
 
-		public const uint	PropID_BatteryQuality         = 0x00000010;	
+		public const uint	PropID_BatteryQuality       = 0x00000010;
+        public const uint   PropID_UTCTime              = 16777238;
 
-		public const uint	PropID_HDDirectoryStructure   = 0x00000020;
+        public const uint	PropID_HDDirectoryStructure   = 0x00000020;
 
         /*----------------------------------
          Image Properties

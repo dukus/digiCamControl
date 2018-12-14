@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -160,6 +161,22 @@ namespace Canon.Eos.Framework
             });
         }
 
+        internal void SetPropertyStruct<T>(uint propertyId,T data) where T : struct
+        {
+            this.ExecuteSetter(() =>
+            {
+                try
+                {
+                    Util.Assert(Edsdk.EdsSetPropertyData(this.Handle, propertyId, 0, Marshal.SizeOf((object)data), (object)data),
+                        string.Format("Failed to set property string data: propertyId {0}, data {1}", propertyId, data),
+                        propertyId, data);
+                }
+                finally
+                {
+                
+                }
+            });
+        }
         public Edsdk.EdsPropertyDesc GetPropertyDescription(uint propertyId)
         {
             return this.ExecuteGetter(() =>
