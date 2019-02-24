@@ -261,6 +261,14 @@
       <HintPath>..\packages\ImageLibrary.3.0.2\lib\net45\Kaliko.ImageLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LibMJPEGServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibMJPEGServer.1.0.2\lib\net452\LibMJPEGServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LibThreadedSockets, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibThreadedSockets.1.0.3\lib\net452\LibThreadedSockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -427,9 +435,11 @@
     <Compile Include="ViewModel\BracketingViewModel.cs" />
     <Compile Include="ViewModel\CameraPropertyViewModel.cs" />
     <Compile Include="ViewModel\LayoutViewModel.cs" />
+    <Compile Include="ViewModel\LiveViewVideoSource.cs" />
     <Compile Include="ViewModel\LiveViewViewModel.cs" />
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MJpegServer.cs" />
     <Compile Include="ViewModel\MultipleLiveViewViewModel.cs" />
     <Compile Include="ViewModel\PrintItemViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />

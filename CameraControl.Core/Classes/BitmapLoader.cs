@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.ExceptionServices;
@@ -40,6 +41,9 @@ using System.Windows.Media.Imaging;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using ImageMagick;
+using Color = System.Windows.Media.Color;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 #endregion
 
@@ -120,7 +124,7 @@ namespace CameraControl.Core.Classes
             set { _noImageThumbnail = value; }
         }
 
-        [HandleProcessCorruptedStateExceptions] 
+        [HandleProcessCorruptedStateExceptions]
         public void GenerateCache(FileItem fileItem)
         {
             bool deleteFile = false;
@@ -190,7 +194,7 @@ namespace CameraControl.Core.Classes
             {
                 using (MagickImage image = new MagickImage(filename))
                 {
-                    fileItem.FileInfo.SetSize(image.Width, image.Height);                       
+                    fileItem.FileInfo.SetSize(image.Width, image.Height);
 
                     double dw = (double)LargeThumbSize / image.Width;
                     image.FilterType = FilterType.Box;
@@ -198,7 +202,7 @@ namespace CameraControl.Core.Classes
 
                     if (!ServiceProvider.Settings.DisableHardwareAccelerationNew)
                         image.UnsharpMask(1, 1, 0.5, 0.1);
-                    
+
                     PhotoUtils.CreateFolder(fileItem.LargeThumb);
                     image.Write(fileItem.LargeThumb);
                     fileItem.IsLoaded = true;
@@ -209,10 +213,10 @@ namespace CameraControl.Core.Classes
 
                     if (!ServiceProvider.Settings.DisableHardwareAccelerationNew)
                         image.UnsharpMask(1, 1, 0.5, 0.1);
-                    
+
                     PhotoUtils.CreateFolder(fileItem.SmallThumb);
                     image.Write(fileItem.SmallThumb);
-                    
+
                     fileItem.Thumbnail = LoadImage(fileItem.SmallThumb);
                 }
                 fileItem.SaveInfo();
@@ -324,7 +328,7 @@ namespace CameraControl.Core.Classes
             try
             {
                 var fileInfo = item.FileInfo;
-                if (fileInfo!=null)
+                if (fileInfo != null)
                 {
                     if (fileInfo.IsLoading)
                         return;
@@ -371,14 +375,14 @@ namespace CameraControl.Core.Classes
                 if (ServiceProvider.Settings.SelectedBitmap.FileItem == item)
                 {
                     SetData(ServiceProvider.Settings.SelectedBitmap,
-                                 ServiceProvider.Settings.SelectedBitmap.FileItem);   
+                                 ServiceProvider.Settings.SelectedBitmap.FileItem);
                 }
             }
             catch (Exception ex)
             {
                 Log.Error("Unable to load histogram", ex);
             }
-            
+
             //item.FileInfo.HistogramBlue = SmoothHistogram(item.FileInfo.HistogramBlue);
             //item.FileInfo.HistogramGreen = SmoothHistogram(item.FileInfo.HistogramGreen);
             //item.FileInfo.HistogramRed = SmoothHistogram(item.FileInfo.HistogramRed);
@@ -388,7 +392,7 @@ namespace CameraControl.Core.Classes
         public static void Highlight(BitmapFile file, bool under, bool over)
         {
             if (!under && !over)
-                return ;
+                return;
             if (file == null || file.DisplayImage == null)
                 return;
             var bitmap = Highlight(file.DisplayImage.Clone(), under, over);
@@ -527,8 +531,8 @@ namespace CameraControl.Core.Classes
         {
             return LoadImage(fileItem, fullres, ServiceProvider.Settings.ShowFocusPoints);
         }
-        
-        [HandleProcessCorruptedStateExceptions] 
+
+        [HandleProcessCorruptedStateExceptions]
         public WriteableBitmap LoadImage(FileItem fileItem, bool fullres, bool showfocuspoints)
         {
             if (fileItem == null)
@@ -629,7 +633,7 @@ namespace CameraControl.Core.Classes
         /// <param name="fileItem"></param>
         /// <param name="width">The desired with, if 0 the full size will be loaded</param>
         /// <returns></returns>
-        public WriteableBitmap LoadSmallImage(FileItem fileItem, int width=0)
+        public WriteableBitmap LoadSmallImage(FileItem fileItem, int width = 0)
         {
             if (!File.Exists(fileItem.SmallThumb))
                 return null;
@@ -789,5 +793,58 @@ namespace CameraControl.Core.Classes
             var handler = MetaDataUpdated;
             if (handler != null) handler(this, item);
         }
+
+        static bool HasJpegHeader(Stream stream)
+        {
+            try
+            {
+                using (BinaryReader br = new BinaryReader(stream))
+                {
+                    UInt16 soi = br.ReadUInt16();  // Start of Image (SOI) marker (FFD8)
+                    UInt16 jfif = br.ReadUInt16(); // JFIF marker (FFE0)
+                    return soi == 0xd8ff && (jfif == 0xe0ff || jfif == 0xe1ff || jfif == 0xeeff);
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+
+        public static bool IsCompleteJPG(Stream stream)
+        {
+            try
+            {
+                if (HasJpegHeader(stream))
+                {
+                    int maxBytestoTest = 20480; // on sony slt-a37, end of file marker is at 18788 bytes (18KB from end of file, usting 20K to be safe)
+                    long numBytes = stream.Length;
+                    long offset = 2;
+                    byte[] last_bytes = new byte[2];
+                    using (BinaryReader reader = new BinaryReader(stream))
+                    {
+                        do
+                        {
+                            reader.BaseStream.Seek(-1 * offset, SeekOrigin.End);
+                            reader.Read(last_bytes, 0, 2);
+
+                            if (last_bytes[0] == 0xFF && last_bytes[1] == 0xD9)
+                                return true;
+                            else
+                                offset += 1;
+                        } while (offset < maxBytestoTest);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //log.Error(e);
+                return false;
+            }
+            return false;
+
+        }
+
     }
 }

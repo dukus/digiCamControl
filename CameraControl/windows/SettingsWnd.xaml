@@ -177,6 +177,10 @@
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                             <CheckBox Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="4" IsEnabled="{Binding UseWebserver}"/>
                             <CheckBox Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="4" IsEnabled="{Binding UseWebserver}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="MJPEG Stream address " Margin="4"/>
+                                <TextBox Text="http://127.0.0.1:5514/live" VerticalAlignment="Center" IsReadOnly="True"/>
+                            </StackPanel>
                             <Label    Content="{T:TranslateExtension ReStartToolTip}" FontStyle="Italic"/>
                         </StackPanel>
                     </Expander>
@@ -364,7 +368,7 @@
                             <CheckBox IsChecked="{Binding WebcamSupport}" Margin="4" Content="{T:TranslateExtension LabelWebcameraSupport}"/>
                             <CheckBox IsChecked="{Binding WiaDeviceSupport}" Margin="4" Content="{T:TranslateExtension LabelWebcameraSupport}"/>
                             <CheckBox IsChecked="{Binding WiaDeviceSupport}" Margin="4" Content="{T:TranslateExtension LabelWiaDeviceSupport}" />
-                       
+
                             <Button Content="{T:TranslateExtension LabelClearCache}" Margin="4" Name="btn_clearcache" Click="btn_clearcache_Click" />
 
                         </StackPanel>
