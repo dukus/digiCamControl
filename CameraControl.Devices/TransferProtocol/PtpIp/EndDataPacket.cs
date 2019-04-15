@@ -20,7 +20,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
                         (int) (Header.Length - 8 - 4 -
                                numBytes)); // payload.Read(Payload, numBytes, Header.PayloadLength - numBytes);
                 if (callback != null)
-                    callback((int) Header.Length, numBytes);
+                    callback(Header.Length, (uint)numBytes);
             }
 
         }
@@ -38,7 +38,7 @@ namespace CameraControl.Devices.TransferProtocol.PtpIp
                 outStream.Write(buff, 0, bytesRead);
                 numBytes += bytesRead;
                 if (callback != null)
-                    callback((int) Header.Length, numBytes);
+                    callback(Header.Length, (uint)numBytes);
             }
         }
 
