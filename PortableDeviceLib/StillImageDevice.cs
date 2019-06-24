@@ -13,7 +13,7 @@ namespace PortableDeviceLib
 
     public class StillImageDevice : PortableDevice
     {
-        public delegate void TransferCallback(int total, int current);
+        public delegate void TransferCallback(uint total, uint current);
 
         public StillImageDevice(string deviceId)
             : base(deviceId)
@@ -227,7 +227,7 @@ namespace PortableDeviceLib
                 {
                 }
 
-                callback((int)tmpBufferSize, (int)offset);
+                callback(tmpBufferSize, offset);
 
                 GCHandle pinnedArray = GCHandle.Alloc(imgdate, GCHandleType.Pinned);
                 IntPtr ptr = pinnedArray.AddrOfPinnedObject();

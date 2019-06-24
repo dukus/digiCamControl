@@ -20,7 +20,7 @@ namespace CameraControl.Devices.TransferProtocol.DDServer
             {
                 numBytes += payload.Read(Payload, numBytes, Header.PayloadLength - numBytes);
                 if (callback != null)
-                    callback(Header.PayloadLength, numBytes);
+                    callback((uint)Header.PayloadLength, (uint)numBytes);
             }
         }
 
