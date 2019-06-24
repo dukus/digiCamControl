@@ -1362,11 +1362,18 @@ namespace CameraControl.Core.Classes
 
         public PhotoSession GetSession(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                return null;
-            if (!string.IsNullOrEmpty(name))
+            try
             {
-                return PhotoSessions.FirstOrDefault(photoSession => photoSession.Name == name);
+                if (string.IsNullOrEmpty(name))
+                    return null;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return PhotoSessions.FirstOrDefault(photoSession => photoSession.Name == name);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Debug("Error find photo session ",e);
             }
             return null;
         }
