@@ -152,12 +152,22 @@ namespace CameraControl.Core.TclScripting
             )
         {
             if (_interpreter == null)
+            {
+                c_Error(Utility.FormatResult(
+                    code, result, errorLine), newLine);
+
                 return false;
+            }
 
             IDebugHost host = _interpreter.Host;
 
             if (host == null)
+            {
+                c_Error(Utility.FormatResult(
+                    code, result, errorLine), newLine);
+
                 return false;
+            }
 
             return host.WriteResult(
                 code, result, errorLine, newLine);
