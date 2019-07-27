@@ -138,7 +138,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B77EBB7F27D1C1861A17A9198FCA224482445EDF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3D6118D45CEDDA3683D354DB2DC74826E7076BE5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>CameraControl_TemporaryKey.pfx</ManifestKeyFile>
@@ -818,6 +818,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="CameraControl_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
