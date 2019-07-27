@@ -74,6 +74,7 @@ namespace CameraControl.Devices.Nikon
         public const uint CONST_PROP_Fnumber = 0x5007;
         public const uint CONST_PROP_MovieFnumber = 0xD1A9;
         public const uint CONST_PROP_ExposureIndex = 0x500F;
+        public const uint CONST_PROP_ExposureIndexEx = 0xD0B4;
         public const uint CONST_PROP_MovieExposureIndex = 0xD1AA;
         public const uint CONST_PROP_ExposureTime = 0x500D;
         public const uint CONST_PROP_ShutterSpeed = 0xD100;
@@ -138,7 +139,7 @@ namespace CameraControl.Devices.Nikon
                                                                {0x6400, "Hi 2"},
                                                            };
 
-        public  Dictionary<byte, string> _autoIsoTable = new Dictionary<byte, string>()
+        protected Dictionary<byte, string> _autoIsoTable = new Dictionary<byte, string>()
                                                            {
                                                                {0, "200"},
                                                                {1, "400"},
@@ -215,7 +216,7 @@ namespace CameraControl.Devices.Nikon
                                                                    {0xFFFFFFFF, "Bulb"},
                                                                };
 
-        protected Dictionary<int, string> _exposureModeTable = new Dictionary<int, string>()
+        private Dictionary<int, string> _exposureModeTable = new Dictionary<int, string>()
                                                                    {
                                                                        {1, "M"},
                                                                        {2, "P"},
@@ -232,20 +233,21 @@ namespace CameraControl.Devices.Nikon
                                                                        {0x8019, "[EffectMode] EFFECTS"},
                                                                    };
 
-        protected Dictionary<uint, string> _wbTable = new Dictionary<uint, string>()
-                                                          {
-                                                              {2, "Auto"},
-                                                              {4, "Daylight"},
-                                                              {5, "Fluorescent"},
-                                                              {6, "Incandescent"},
-                                                              {7, "Flash"},
-                                                              {32784, "Cloudy"},
-                                                              {32785, "Shade"},
-                                                              {32786, "Kelvin"},
-                                                              {32787, "Custom"}
-                                                          };
+        private Dictionary<uint, string> _wbTable = new Dictionary<uint, string>()
+                                                            {
+                                                                {2, "Auto"},
+                                                                {4, "Daylight"},
+                                                                {5, "Fluorescent"},
+                                                                {6, "Incandescent"},
+                                                                {7, "Flash"},
+                                                                {0x8010, "Cloudy"},
+                                                                {0x8011, "Shade"},
+                                                                {0x8012, "Kelvin"},
+                                                                {0x8013, "Custom"},
+                                                                {0x8016, "Natural Light Auto"}
+                                                            };
 
-        protected  Dictionary<int, string> _csTable = new Dictionary<int, string>()
+        protected Dictionary<int, string> _csTable = new Dictionary<int, string>()
                                                          {
                                                              {0, "JPEG (BASIC)"},
                                                              {1, "JPEG (NORMAL)"},
@@ -261,7 +263,8 @@ namespace CameraControl.Devices.Nikon
                                                         {
                                                             {2, "Center-weighted metering"},
                                                             {3, "Multi-pattern metering"},
-                                                            {4, "Spot metering"}
+                                                            {4, "Spot metering"},
+                                                            {0x8010, "Highlight-weighted"}
                                                         };
 
         private Dictionary<uint, string> _fmTable = new Dictionary<uint, string>()
@@ -1145,7 +1148,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void InitIso()
+        protected virtual void InitIso()
         {
             lock (Locker)
             {
@@ -1217,7 +1220,7 @@ namespace CameraControl.Devices.Nikon
             }
         }
 
-        private void InitShutterSpeed()
+        protected virtual void InitShutterSpeed()
         {
             NormalShutterSpeed = new PropertyValue<long>();
             NormalShutterSpeed.Name = "ShutterSpeed";
@@ -1250,7 +1253,7 @@ namespace CameraControl.Devices.Nikon
                         CONST_PROP_MovieShutterSpeed);
         }
 
-        private void ReInitShutterSpeed()
+        protected virtual void ReInitShutterSpeed()
         {
             lock (Locker)
             {
@@ -1404,7 +1407,7 @@ namespace CameraControl.Devices.Nikon
         }
 
 
-        private void ReInitFNumber(bool trigervaluchange)
+        protected void ReInitFNumber(bool trigervaluchange)
         {
             try
             {
@@ -2019,7 +2022,11 @@ namespace CameraControl.Devices.Nikon
                             NormalIsoNumber.SetValue(StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
                                                                                 CONST_PROP_ExposureIndex), false);
                             break;
-                        case CONST_PROP_MovieExposureIndex:
+                    case CONST_PROP_ExposureIndexEx:
+                        NormalIsoNumber.SetValue(StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
+                                                                            CONST_PROP_ExposureIndexEx), false);
+                        break;
+                    case CONST_PROP_MovieExposureIndex:
                             MovieFNumber.SetValue(StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
                                                                                 CONST_PROP_MovieExposureIndex), false);
                             break;
