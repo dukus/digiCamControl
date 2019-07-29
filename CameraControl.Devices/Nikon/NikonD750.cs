@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD500 : NikonD600Base
+    public class NikonD750 : NikonD600
     {
-        public NikonD500()
+        public NikonD750()
         {
             _isoTable = new Dictionary<uint, string>()
             {
@@ -46,22 +46,11 @@ namespace CameraControl.Devices.Nikon
                 {0x1F40, "8000"},
                 {0x2710, "10000"},
                 {0x3200, "12800"},
-                {0x3e80, "16000"},
-                {0x4650, "18000"},
-                {0x4e20, "20000"},
-                {0x6400, "25600"},
-                {0x7d00, "32000"},
-                {0x8ca0, "36000"},
-                {0x9c40, "40000"},
-                {0xC800, "51200"},
-                {0xFA00, "Hi 0.3"},
-                {0x11940, "Hi 0.5"},
-                {0x13d30, "Hi 0.7"},
-                {0x19000, "Hi 1"},
-                {0x32000, "Hi 2"},
-                {0x64000, "Hi 3"},
-                {0xC8320, "Hi 4"},
-                {0x190640, "Hi 5"},
+                {0x3E80, "Hi 0.3"},
+                {0x4650, "Hi 0.5"},
+                {0x4E20, "Hi 0.7"},
+                {0x6400, "Hi 1"},
+                {0xC800, "Hi 2"},
             };
 
             _autoIsoTable = new Dictionary<byte, string>()
@@ -91,45 +80,12 @@ namespace CameraControl.Devices.Nikon
                 {22, "9000"},
                 {23, "10000"},
                 {24, "12800"},
-                {25, "16000"},
-                {26, "18000"},
-                {27, "20000"},
-                {28, "25600"},
-                {29, "32000"},
-                {30, "36000"},
-                {31, "40000"},
-                {32, "51200"},
-                {33, "Hi 0.3"},
-                {34, "Hi 0.5"},
-                {35, "Hi 0.7"},
-                {36, "Hi 1"},
-                {37, "Hi 2"},
-                {38, "Hi 3"},
-                {39, "Hi 4"},
-                {40, "Hi 5"},
+                {25, "Hi 0.3"},
+                {26, "Hi 0.5"},
+                {27, "Hi 0.7"},
+                {28, "Hi 1"},
+                {29, "Hi 2"},
             };
-        }
-
-        protected override void InitCompressionSetting()
-        {
-            _csTable = new Dictionary<int, string>()
-            {
-                {0, "JPEG (BASIC)"},
-                {1, "JPEG (BASIC*)"},
-                {2, "JPEG (NORMAL)"},
-                {3, "JPEG (NORMAL*)"},
-                {4, "JPEG (FINE)"},
-                {5, "JPEG (FINE*)"},
-                {6, "TIFF (RGB)"},
-                {7, "RAW"},
-                {8, "RAW + JPEG (BASIC)"},
-                {9, "RAW + JPEG (BASIC*)"},
-                {10, "RAW + JPEG (NORMAL)"},
-                {11, "RAW + JPEG (NORMAL*)"},
-                {12, "RAW + JPEG (FINE)"},
-                {13, "RAW + JPEG (FINE*)"}
-            };
-            base.InitCompressionSetting();
         }
 
         protected override PropertyValue<long> InitStillCaptureMode()
