@@ -10,6 +10,17 @@ namespace CameraControl.Core.TclScripting
         private string _line = "";
         public event OutputEventHandler Output;
 
+        public ConsoleRedirect()
+            : this(null)
+        {
+            // do nothing.
+        }
+
+        public ConsoleRedirect(OutputEventHandler output)
+        {
+            this.Output = output;
+        }
+
         public override void Write(char value)
         {
             if (value == '\n')
