@@ -192,6 +192,7 @@ namespace CameraControl.Devices
                 {"V3", typeof(NikonD600Base)},
                 {"J3", typeof(NikonD600Base)},
                 {"J4", typeof(NikonD600Base)},
+                {"J5", typeof(NikonD600Base)},
                 {"Df", typeof(NikonD600Base)},
                 {"L830", typeof(NikonL830)},
                 {"L840", typeof(NikonL830)},
