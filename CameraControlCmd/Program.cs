@@ -532,6 +532,7 @@ namespace CameraControlCmd
             //WIAManager manager = new WIAManager();
             StaticHelper.Instance.PropertyChanged += Instance_PropertyChanged;
             ServiceProvider.DeviceManager.CameraConnected += DeviceManagerCameraConnected;
+            ServiceProvider.DeviceManager.DetectWebcams = false;
             ServiceProvider.DeviceManager.ConnectToCamera();
             ServiceProvider.DeviceManager.PhotoCaptured += DeviceManager_PhotoCaptured;
             if (ServiceProvider.DeviceManager.SelectedCameraDevice.AttachedPhotoSession != null)
