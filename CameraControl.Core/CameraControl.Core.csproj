@@ -159,8 +159,8 @@
       <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eagle, Version=1.0.6848.11041, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eagle.CLRv4.1.0.6848.11041\lib\net40\Eagle.dll</HintPath>
+    <Reference Include="Eagle, Version=1.0.7213.50727, Culture=neutral, PublicKeyToken=29c6297630be05eb">
+      <HintPath>..\packages\Eagle.CLRv4.Core.1.0.7213.50727\lib\net40\Eagle.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Gif.Components">
@@ -445,11 +445,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Eagle.CLRv4.1.0.6848.11041\build\net40\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.CLRv4.1.0.6848.11041\build\net40\Eagle.targets'))" />
+    <Error Condition="!Exists('..\packages\Eagle.CLRv4.1.0.7213.50727\build\net40\Eagle.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eagle.CLRv4.1.0.7213.50727\build\net40\Eagle.targets'))" />
     <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.7.1.0\build\net40\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.7.1.0\build\net40\Magick.NET-Q8-x86.targets'))" />
     <Error Condition="!Exists('..\packages\Accord.3.8.2-alpha\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.8.2-alpha\build\Accord.targets'))" />
   </Target>
-  <Import Project="..\packages\Eagle.CLRv4.1.0.6848.11041\build\net40\Eagle.targets" Condition="Exists('..\packages\Eagle.CLRv4.1.0.6848.11041\build\net40\Eagle.targets')" />
+  <Import Project="..\packages\Eagle.CLRv4.1.0.7213.50727\build\net40\Eagle.targets" Condition="Exists('..\packages\Eagle.CLRv4.1.0.7213.50727\build\net40\Eagle.targets')" />
   <Import Project="..\packages\Magick.NET-Q8-x86.7.1.0\build\net40\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.7.1.0\build\net40\Magick.NET-Q8-x86.targets')" />
   <Import Project="..\packages\Accord.3.8.2-alpha\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.2-alpha\build\Accord.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
