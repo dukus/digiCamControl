@@ -332,6 +332,7 @@ Devam etmek istiyor musunuz?
   <string name="LabelNoCardInsertedError">Kayıt hedefi kartı veya SDRAM,
 ve kartın kartı olmadan devre dışı bırakılması ile takılı değildir.</string>
   <string name="LabelShoutingInProgress">Çekim modu EFFECTS.</string>
+  <string name="LabelOverHeatedError">Canlı izleme sensör sıcaklığının çok yüksek olması nedeniyle başlatılamadı.</string>
   <string name="LabelCardProtectedError">Kart korumalı</string>
   <string name="LabelDestinationCardError">Kayıt hedefi kart.</string>
   <string name="LabelLiveViewError">Canlı görünüme geçilemedi</string>
@@ -352,8 +353,11 @@ ve kartın kartı olmadan devre dışı bırakılması ile takılı değildir.</
   <string name="LabelStopLiveView">Canlı görünümü kapat</string>
   <string name="LabelBrightness">Işık</string>
   <string name="LabelDownloadJpgOnly">Sadece jpg dosyası indir</string>
+  <string name="LabelDownloadJpgOnlyToolTip">Sadece fotoğraflar hafıza kartında da kayıtlıysa aktif olur.</string>
   <string name="LabelSetCounters">Sayacı ayarla</string>
   <string name="LabelEdgeDetection">Kenar algılama</string>
+  <string name="LabelShowFocusRect">Odak bölgesini göster</string>
+  <string name="LabelEasyLiveViewControl">Kolay canlı izleme</string>
   <string name="LabelExif">Exif</string>
   <string name="LabelImageProperties">Resim Özellikleri</string>
   <string name="LabelFileName">Dosya adı</string>

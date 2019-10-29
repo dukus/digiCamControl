@@ -383,7 +383,6 @@ Quer continuar?</string>
   <string name="LabelSelectNone">Não Selecionar Nada</string>
   <string name="LabelSelectLiked">Selecionado Ligados</string>
   <string name="LabelSelectUnLiked">Selecionar Não Ligados</string>
-  <string name="LabelLockNearFar">Por favor bloqueie os pontos de focagem mais próximo e mais longe</string>
   <string name="LabelError">Erro</string>
   <string name="LabelChangelog">Alterar Registo</string>
   <string name="LabelAllowOverWrite">Permitir gravar por cima</string>
@@ -467,7 +466,6 @@ Quer continuar?</string>
   <string name="LabelWaitBetweenSteps">Espera entre passos (ms)</string>
   <string name="LabelShowSecondary">Mostrar no monitor secundário</string>
   <string name="LabelKeyboardTrigger">Despoletador de teclado</string>
-  <string name="LabelNoProccesing">Sem processamento</string>
   <string name="LabelNoProccesingTooltip">A maioria das funcionalidades estão desativadas</string>
   <string name="LabelSendUsage">Enviar automaticamente estatísticas de utilização</string>
   <string name="LabelSheduleStart">Iniciar agendamento</string>

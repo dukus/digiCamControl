@@ -432,7 +432,7 @@ Wiadomość {0}</string>
   <string name="LabelWaitBetweenSteps">Poczekaj pomiędzy krokami (ms)</string>
   <string name="LabelShowSecondary">Pokaż na dodatkowym monitorze</string>
   <string name="LabelKeyboardTrigger">Klawiszowy wyzwalacz</string>
-  <string name="LabelNoProccesing">Bez przetwarzania</string>
+  <string name="LabelNoProccesing">Brak przetwarzania</string>
   <string name="LabelSendUsage">Automatyczne wysyłanie statystyk użytkowania</string>
   <string name="LabelSheduleStart">Uruchom harmonogram</string>
   <string name="LabelSheduleStop">Zatrzymaj harmonogram</string>

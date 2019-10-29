@@ -25,7 +25,7 @@ Skipping 'ko_KR' translation (file: translations\digicamcontrol.baseresource\ko_
 Skipping 'sk_SK' translation (file: translations\digicamcontrol.baseresource\sk_SK.xml).
  -> es_MX: translations\digicamcontrol.baseresource\es_MX.xml
 Skipping 'cs_CZ' translation (file: translations\digicamcontrol.baseresource\cs_CZ.xml).
-Skipping 'ja' translation (file: translations\digicamcontrol.baseresource\ja.xml).
+ -> ja: translations\digicamcontrol.baseresource\ja.xml
 Skipping 'fr_CA' translation (file: translations\digicamcontrol.baseresource\fr_CA.xml).
 Skipping 'he' translation (file: translations\digicamcontrol.baseresource\he.xml).
 Skipping 'ro' translation (file: translations\digicamcontrol.baseresource\ro.xml).

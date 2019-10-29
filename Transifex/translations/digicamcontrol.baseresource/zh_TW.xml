@@ -409,7 +409,7 @@
   <string name="LabelSelectNone">不選</string>
   <string name="LabelSelectLiked">選擇喜歡的</string>
   <string name="LabelSelectUnLiked">選擇不喜歡的</string>
-  <string name="LabelLockNearFar">請鎖定最近及最遠對焦點</string>
+  <string name="LabelLockNearFar">請鎖定最近及最遠的對焦點</string>
   <string name="LabelError">錯誤</string>
   <string name="LabelChangelog">改變日誌</string>
   <string name="LabelAllowOverWrite">容許覆寫</string>
@@ -497,7 +497,7 @@
   <string name="LabelWaitBetweenSteps">在每步間等待 (ms)</string>
   <string name="LabelShowSecondary">顯示於第二台螢幕上</string>
   <string name="LabelKeyboardTrigger">鍵盤觸發</string>
-  <string name="LabelNoProccesing">不處理</string>
+  <string name="LabelNoProccesing">沒有進行任何處理程序</string>
   <string name="LabelNoProccesingTooltip">大部份的功能都被關閉了</string>
   <string name="LabelSendUsage">自動地傳送使用統計數值</string>
   <string name="LabelSheduleStart">開始排程</string>

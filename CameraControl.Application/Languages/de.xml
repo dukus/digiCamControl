@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <!--Property values-->
-  <string name="BURST_NUMBER">Burst-Nummer</string>
-  <string name="STILL_CAPTURE_MODE">Standbildaufnahme-Modus</string>
+  <string name="BURST_NUMBER">Serienbild-Nummer</string>
+  <string name="STILL_CAPTURE_MODE">Einzelbild-Aufnahmemodus</string>
   <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Serienaufnahme (kontinuierliche Aufnahme)</string>
   <string name="AUTO_ISO">ISO-Automatik</string>
   <string name="ON">EIN</string>
@@ -80,6 +80,7 @@
   <string name="SessionAdd">Hinzufügen</string>
   <string name="SessionEdit">Ändern</string>
   <string name="SessionDel">Löschen</string>
+  <string name="MainWindowTitle">NCC</string>
   <string name="SettingsWindowTitle">Einstellungen</string>
   <string name="SessionWindowTitle">Sitzung [Hinzuf./ändern]</string>
   <string name="LiveViewWindowTitle">Live-Ansicht</string>
@@ -332,6 +333,7 @@ Wollen Sie weitermachen?
   <string name="LabelTTLError">TTL-Fehler</string>
   <string name="LabelNonCPULEnseError">Ein Objektiv ohne CPU ist montiert und die Belichtung ist nicht M.</string>
   <string name="LabelImageInRAM">Es ist ein Bild, dessen Aufnahme Ziel SDRAM ist.</string>
+  <string name="LabelNoCardInsertedError">Die Aufnahme soll auf der Karte oder Karte+SDRAM gespeichert werden und es ist keine Karte vorhanden, ohne dass das Aufnehmen ohne Karte erlaubt wurde.</string>
   <string name="LabelCommandProcesingError">Während der Verarbeitung im Aufnahmebetried</string>
   <string name="LabelShoutingInProgress">Der Aufnahmemodus ist EFFEKTE.</string>
   <string name="LabelOverHeatedError">Live View konnte nicht gestartet werden, da die Temperatur des Kamerasensors zu hoch ist.</string>
@@ -403,7 +405,7 @@ Wollen Sie weitermachen?
   <string name="LabelSelectNone">Nichts auswählen</string>
   <string name="LabelSelectLiked">Favoriten auswählen</string>
   <string name="LabelSelectUnLiked">Abgewiesene auswählen</string>
-  <string name="LabelLockNearFar">Bitte den am nähesten und am weitesten entfernten Fokuspunkt festlegen</string>
+  <string name="LabelLockNearFar">Nächste und weitest entfernte Fokuspunkte sperren</string>
   <string name="LabelError">Fehler</string>
   <string name="LabelChangelog">Änderungsprotokoll</string>
   <string name="LabelAllowOverWrite">Überschreiben erlauben</string>
@@ -463,6 +465,7 @@ Wollen Sie weitermachen?
   <string name="LabelFocusStackingAdvanced">Fokus Stapel Erweitert</string>
   <string name="LabelErrorFarPoit">Setzen Sie zuerst den weitesten Fokuspunkt</string>
   <string name="LabelErrorAutoFocusLock">Fokus ist gesperrt, vor dem Autofokus entsperren</string>
+  <string name="LabelErrorSimpleStackingFocusLock">Der Fokus ist verriegelt. Einfaches Fokusstacking erfordert keine Fokusverriegelung.  Entriegeln Sie erst den Fokus.</string>
   <string name="LabelLowerCaseExtension">Kleinschreibung</string>
   <string name="LabelOverlayTransparency">Transparenz</string>
   <string name="LabelOverlayUseLastCaptured">Letzte Aufnahme benutzen</string>

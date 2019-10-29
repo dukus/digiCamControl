@@ -393,7 +393,7 @@ Souhaitez-vous continuer?
   <string name="LabelSelection">Sélection</string>
   <string name="LabelSelectAll">Sélectionner tout</string>
   <string name="LabelSelectNone">Aucune Sélection</string>
-  <string name="LabelLockNearFar">Merci de verrouiller les points de focus au plus près et au plus loin</string>
+  <string name="LabelLockNearFar">Veuillez verrouiller les points de focalisation les plus proches et les plus éloignés</string>
   <string name="LabelError">erreur</string>
   <string name="LabelChangelog">Journal des modifications</string>
   <string name="LabelAllowOverWrite">Autoriser l\'écrasement du fichier</string>
@@ -433,6 +433,10 @@ Souhaitez-vous continuer?
   <string name="LabelScaling">Mise à l\'échelle</string>
   <string name="LabelHorizontal">horizontale</string>
   <string name="LabelVertical">verticale</string>
+  <string name="LabelLockNear">Verrouiller le point le plus proche</string>
+  <string name="LabelLockFar">Verrouiller le point le plus éloigné</string>
+  <string name="LabelGoNear">Aller au point de focalisation le plus proche</string>
+  <string name="LabelGoFar">Aller au point de focalisation le plus éloigné</string>
   <string name="LabelFocusStackingSimple">Empilement de mises au point simplifié</string>
   <string name="LabelFocusStackingAdvanced">Empilement de mises au point avancé</string>
   <string name="LabelErrorAutoFocusLock">La mise au point est verrouillée, déverrouillez-la d\'abord</string>
@@ -447,6 +451,7 @@ Souhaitez-vous continuer?
   <string name="LabelAutoExportPlugins">Extensions d\'exportation automatique</string>
   <string name="LabelAddPlugin">ajouter plugin</string>
   <string name="LabelErrorSetFolder">erreur dossier</string>
+  <string name="LabelDetectArea">Détecter seulement dans la zone sélectionnée</string>
   <string name="LabelMessagesLog">Journal des événements</string>
   <string name="LabelRefreshCameraList">actualisation de la liste des appareils photo</string>
   <string name="LabelSortOrder">Ordre de tri</string>
@@ -462,7 +467,7 @@ Souhaitez-vous continuer?
   <string name="LabelWaitBetweenSteps">Attente entre chaque étape (ms)</string>
   <string name="LabelShowSecondary">Voir sur le second moniteur</string>
   <string name="LabelKeyboardTrigger">Déclenchement clavier</string>
-  <string name="LabelNoProccesing">Pas de traitement</string>
+  <string name="LabelNoProccesing">aucun traitement</string>
   <string name="LabelSendUsage">Envoyer automatiquement des statistiques d\'utilisation</string>
   <string name="LabelSheduleStart">Commence la planification</string>
   <string name="LabelSheduleStop">Arrête la planification</string>
@@ -545,6 +550,7 @@ Souhaitez-vous continuer?
   <string name="LabelWrongFNumber">L\'ouverture ne peut être modifiée</string>
   <string name="LabelBracketingMMode">Régler l\'appareil en mode M</string>
   <string name="LabelTimeLapseCaptureBracketing">capture avec bracketing</string>
+  <string name="LabelZoomToFocus">Toujours zoomer sur le premier point de mise au point</string>
   <string name="LabelPreviewFullSize">aperçu taille réelle </string>
   <string name="LabelCropMargins">Marges de la zone de recadrage (%)</string>
   <string name="LabelShowActiveArea">Voir la zone active</string>
@@ -559,6 +565,7 @@ Souhaitez-vous continuer?
   <string name="LabelApplyToImage">appuyer pour sélectionner l\'image</string>
   <string name="LabelCaptureCount">compteur de capture</string>
   <string name="LabelAutoFocusBeforCapture">Autofocus avant la capture</string>
+  <string name="LabelEnhancedThumbs">Aperçu améliorer</string>
   <string name="LabelAskSavePath">Choix du dossier de sauvegarde</string>
   <string name="LabelSaveLiveviewWindow">Enregistrer la position de la fenêtre de live view</string>
   <string name="LabelShowFullscreenControls">Afficher contrôles de fenêtre

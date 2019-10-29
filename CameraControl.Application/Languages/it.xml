@@ -408,7 +408,7 @@ e la scheda di memoria non è inserita. Disabilitata senza una scheda di memoria
   <string name="LabelSelectNone">Elimina selezione</string>
   <string name="LabelSelectLiked">Seleziona i Preferiti</string>
   <string name="LabelSelectUnLiked">Seleziona i Non preferiti</string>
-  <string name="LabelLockNearFar">Si prega di bloccare i punti di fuoco più vicini e più lontani</string>
+  <string name="LabelLockNearFar">Si prega di bloccare i punti AF più vicini e più lontani</string>
   <string name="LabelError">Errore</string>
   <string name="LabelChangelog">Registro delle modifiche</string>
   <string name="LabelAllowOverWrite">Permetti la sovrascrittura</string>
@@ -496,7 +496,7 @@ e la scheda di memoria non è inserita. Disabilitata senza una scheda di memoria
   <string name="LabelWaitBetweenSteps">Attendi tra passi (ms)</string>
   <string name="LabelShowSecondary">Mostra su schermo secondario</string>
   <string name="LabelKeyboardTrigger">Innesco della tastiera</string>
-  <string name="LabelNoProccesing">Nessun Processamento</string>
+  <string name="LabelNoProccesing">Nessuna elaborazione</string>
   <string name="LabelNoProccesingTooltip">La maggioranza delle funzionalità sono disabilitate</string>
   <string name="LabelSendUsage">Invio automatico delle statistiche di utilizzo</string>
   <string name="LabelSheduleStart">Avviare la pianificazione</string>

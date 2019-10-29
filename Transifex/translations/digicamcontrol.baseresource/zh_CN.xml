@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <!--Property values-->
-  <string name="BURST_NUMBER">突发数</string>
-  <string name="STILL_CAPTURE_MODE">静态影像拍摄模式</string>
+  <string name="BURST_NUMBER">高速连拍张数</string>
+  <string name="STILL_CAPTURE_MODE">照相模式</string>
   <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">连续拍摄</string>
   <string name="AUTO_ISO">自动 ISO</string>
   <string name="ON">开</string>
@@ -40,13 +40,13 @@
   <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] 自动切换AF伺服模式</string>
   <string name="[S]_SINGLE_AF_SERVO">[S] 单次AF伺服模式</string>
   <string name="[M]_MANUAL_FOCUS">[M] 手动对焦</string>
-  <string name="KELVIN">Kelvin</string>
+  <string name="KELVIN">开尔文</string>
   <string name="APPLICATION_MODE">应用模式</string>
   <string name="WHITE_FLUORESCENT_LAMP">白色荧光灯</string>
   <string name="FLUORESCENT_LIGHT_TYPE">荧光灯类型</string>
   <string name="ADOBE_RGB">Adobe RGB</string>
   <string name="COLOR_SPACE">色彩空间</string>
-  <string name="14_BIT_RECORDING">以 14-bit 深度记录</string>
+  <string name="14_BIT_RECORDING">以 14-bit 位深记录</string>
   <string name="RAW_RECORDING_BIT_MODE">RAW 位深度</string>
   <string name="NEUTRAL">中性</string>
   <string name="PICTURE_CONTROL">图像控制</string>

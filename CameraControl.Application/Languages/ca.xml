@@ -358,6 +358,7 @@
   <string name="LabelSelectNone">Seleccionar cap</string>
   <string name="LabelSelectLiked">Seleccionar favorits</string>
   <string name="LabelSelectUnLiked">Seleccionar no favorits</string>
+  <string name="LabelLockNearFar">Si us plau, bloquejar punts d\'enfocament més proper i més allunyat </string>
   <string name="LabelError">Error</string>
   <string name="LabelChangelog">Canvi de registre</string>
   <string name="LabelAllowOverWrite">Permetre sobreescriure</string>
@@ -439,6 +440,7 @@
   <string name="LabelRepeatImages">Repetir imatges</string>
   <string name="LabelWaitBetweenSteps">Esperar entre els passos (ms)</string>
   <string name="LabelKeyboardTrigger">Disparador de teclat</string>
+  <string name="LabelNoProccesing">Sense processar</string>
   <string name="LabelSendUsage">Envia automàticament les estadístiques d\'ús</string>
   <string name="LabelSheduleStart">Inicia planificació</string>
   <string name="LabelSheduleStop">Atura planificació</string>

@@ -102,13 +102,13 @@ namespace CameraControl.Devices.Sony
             Thread.Sleep(3500);
             try
             {
+                InitMode();
                 InitIso();
                 InitShutterSpeed();
                 InitFNumber();
                 InitFocusMode();
                 InitWhitebalce();
                 InitCompressionSetting();
-                InitMode();
             }
             catch (Exception ex)
             {
@@ -120,11 +120,17 @@ namespace CameraControl.Devices.Sony
 
         private void InitIso()
         {
-            IsoNumber=new PropertyValue<long>();
-            var prop = IsoNumber;
-            var cap = AsCapability<string>(Post(CreateJson("getAvailableIsoSpeedRate")));
-            SetCapability(prop, cap);
-            prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setIsoSpeedRate", "1.0", key)));
+            try
+            {
+                IsoNumber = new PropertyValue<long>();
+                var prop = IsoNumber;
+                var cap = AsCapability<string>(Post(CreateJson("getAvailableIsoSpeedRate")));
+                SetCapability(prop, cap);
+                prop.ValueChanged += (sender, key, val) => CheckError(Post(CreateJson("setIsoSpeedRate", "1.0", key)));
+            }
+            catch (Exception e)
+            {
+            }
         }
 
         private void InitFNumber()
@@ -418,6 +424,9 @@ namespace CameraControl.Devices.Sony
 
         private static void SetCapability<T>(PropertyValue<T> prop, Capability<string> cap)
         {
+            if (prop == null)
+                return;
+
             // refresh properties only if the collection or value was changed 
             if (prop?.Value == cap.Current && prop.Values.Count == cap.Candidates.Count)
                 return;

@@ -349,6 +349,7 @@
   <string name="LabelSelectNone">Elija nada</string>
   <string name="LabelSelectLiked">Elija la que le gusta</string>
   <string name="LabelSelectUnLiked">Elija la que no le gusta</string>
+  <string name="LabelLockNearFar">Por favor bloquee los puntos de enfoque mas cercano y lejano</string>
   <string name="LabelError">Error</string>
   <string name="LabelChangelog">Historial de cambios</string>
   <string name="LabelAllowOverWrite">Permitir sobreescribir</string>
@@ -424,6 +425,7 @@
   <string name="LabelRepeatImages">Repetir imágenes</string>
   <string name="LabelWaitBetweenSteps">Pausa entre pasos (ms)</string>
   <string name="LabelKeyboardTrigger">Teclas rápidas</string>
+  <string name="LabelNoProccesing">No procesar</string>
   <string name="LabelSendUsage">Enviar automáticamente estadísticas de uso</string>
   <string name="LabelSheduleStart">Comenzar agenda</string>
   <string name="LabelSheduleStop">Detener agenda</string>
