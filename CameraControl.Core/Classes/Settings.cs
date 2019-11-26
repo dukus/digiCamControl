@@ -806,6 +806,7 @@ namespace CameraControl.Core.Classes
         private bool _disableHardwareAcceleration;
         private string _fullScreenPassword;
         private string _currentThemeNameNew;
+        private bool _webcamSupport;
 
         [XmlIgnore]
         [JsonIgnore]
@@ -935,7 +936,15 @@ namespace CameraControl.Core.Classes
         public int ExternalDeviceWaitForFocus { get; set; }
         public int ExternalDeviceWaitForCapture { get; set; }
 
-        public bool WebcamSupport { get; set; }
+        public bool WebcamSupport
+        {
+            get
+            {
+                return false;
+                return _webcamSupport;
+            }
+            set { _webcamSupport = value; }
+        }
 
         public bool WiaDeviceSupport { get; set; }
 
