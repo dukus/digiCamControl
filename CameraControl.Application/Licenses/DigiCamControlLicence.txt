@@ -1,5 +1,5 @@
 digiCamControl - DSLR camera remote control open source software
-Copyright (C) 2017  Duka Istvan
+Copyright (C) 2019  Duka Istvan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
