@@ -77,7 +77,7 @@ namespace CameraControl
             {
                 //MessageBox.Show(TranslationStrings.LabelApplicationAlreadyRunning);
                 CommandProcessor processor = new CommandProcessor();
-                processor.Parse(new[] {"/c", "do", "Restore"});
+                processor.Parse(new[] { "/c", "do", "Restore" });
                 Shutdown(-1);
                 return;
             }
@@ -88,7 +88,7 @@ namespace CameraControl
             ServiceProvider.Branding = Branding.LoadBranding();
             if (ServiceProvider.Branding.ShowStartupScreen)
             {
-                _startUpWindow=new StartUpWindow();
+                _startUpWindow = new StartUpWindow();
                 _startUpWindow.Show();
             }
 
@@ -100,72 +100,78 @@ namespace CameraControl
             try
             {
 
-            // prevent some application crash
-            //WpfCommands.DisableWpfTabletSupport();
+                // prevent some application crash
+                //WpfCommands.DisableWpfTabletSupport();
 
-            Dispatcher.Invoke(new Action(ServiceProvider.Configure));
-            
-
-            ServiceProvider.Settings = new Settings();
-            ServiceProvider.Settings = ServiceProvider.Settings.Load();
-            ServiceProvider.Branding = Branding.LoadBranding();
-
-            if (ServiceProvider.Settings.DisableNativeDrivers &&
-                MessageBox.Show(TranslationStrings.MsgDisabledDrivers, "", MessageBoxButton.YesNo) ==
-                MessageBoxResult.Yes)
-                ServiceProvider.Settings.DisableNativeDrivers = false;
-            ServiceProvider.Settings.LoadSessionData();
-            TranslationManager.LoadLanguage(ServiceProvider.Settings.SelectedLanguage);
-            
-            ServiceProvider.PluginManager.CopyPlugins();
-            Dispatcher.Invoke(new Action(InitWindowManager));
+                Dispatcher.Invoke(new Action(ServiceProvider.Configure));
 
 
-            ServiceProvider.Trigger.Start();
-            ServiceProvider.Analytics.Start();
-            BitmapLoader.Instance.MetaDataUpdated += Instance_MetaDataUpdated;
+                ServiceProvider.Settings = new Settings();
+                ServiceProvider.Settings = ServiceProvider.Settings.Load();
+                ServiceProvider.Branding = Branding.LoadBranding();
+
+                if (ServiceProvider.Settings.DisableNativeDrivers &&
+                    MessageBox.Show(TranslationStrings.MsgDisabledDrivers, "", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
+                    ServiceProvider.Settings.DisableNativeDrivers = false;
+                ServiceProvider.Settings.LoadSessionData();
+                TranslationManager.LoadLanguage(ServiceProvider.Settings.SelectedLanguage);
+
+                ServiceProvider.PluginManager.CopyPlugins();
+                Dispatcher.Invoke(new Action(InitWindowManager));
 
 
-            Dispatcher.Invoke(new Action(delegate
-            {
-                try
+                ServiceProvider.Trigger.Start();
+                ServiceProvider.Analytics.Start();
+                BitmapLoader.Instance.MetaDataUpdated += Instance_MetaDataUpdated;
+
+
+                Dispatcher.Invoke(new Action(delegate
                 {
-                    // event handlers
-                    ServiceProvider.Settings.SessionSelected += Settings_SessionSelected;
-
-                    ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
-                    ServiceProvider.DeviceManager.CameraSelected += DeviceManager_CameraSelected;
-                    ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
-                    //-------------------
-                    ServiceProvider.DeviceManager.DisableNativeDrivers = ServiceProvider.Settings.DisableNativeDrivers;
-                    if (ServiceProvider.Settings.AddFakeCamera)
-                        ServiceProvider.DeviceManager.AddFakeCamera();
-                    ServiceProvider.DeviceManager.LoadWiaDevices = ServiceProvider.Settings.WiaDeviceSupport;
-                    ServiceProvider.DeviceManager.DetectWebcams = ServiceProvider.Settings.WebcamSupport;
-                    ServiceProvider.DeviceManager.ConnectToCamera();
-                    if (ServiceProvider.Settings.DisableHardwareAccelerationNew)
-                        OpenCL.IsEnabled = false;
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Unable to initialize device manager", exception);
-                    if (exception.Message.Contains("0AF10CEC-2ECD-4B92-9581-34F6AE0637F3"))
+                    try
                     {
-                        MessageBox.Show(
-                            "Unable to initialize device manager !\nMissing some components! Please install latest Windows Media Player! ");
-                        Application.Current.Shutdown(1);
+                        // event handlers
+                        ServiceProvider.Settings.SessionSelected += Settings_SessionSelected;
+
+                        ServiceProvider.DeviceManager.CameraConnected += DeviceManager_CameraConnected;
+                        ServiceProvider.DeviceManager.CameraSelected += DeviceManager_CameraSelected;
+                        ServiceProvider.DeviceManager.CameraDisconnected += DeviceManager_CameraDisconnected;
+                        //-------------------
+                        ServiceProvider.DeviceManager.DisableNativeDrivers =
+                            ServiceProvider.Settings.DisableNativeDrivers;
+                        if (ServiceProvider.Settings.AddFakeCamera)
+                            ServiceProvider.DeviceManager.AddFakeCamera();
+                        ServiceProvider.DeviceManager.LoadWiaDevices = ServiceProvider.Settings.WiaDeviceSupport;
+                        ServiceProvider.DeviceManager.DetectWebcams = ServiceProvider.Settings.WebcamSupport;
+                        ServiceProvider.DeviceManager.ConnectToCamera();
+                        if (ServiceProvider.Settings.DisableHardwareAccelerationNew)
+                            OpenCL.IsEnabled = false;
                     }
-                }
-                StartApplication();
-                if (_startUpWindow != null)
-                    _startUpWindow.Close();
-            }));
-            ServiceProvider.Database.StartEvent(EventType.App);
+                    catch (Exception exception)
+                    {
+                        Log.Error("Unable to initialize device manager", exception);
+                        if (exception.Message.Contains("0AF10CEC-2ECD-4B92-9581-34F6AE0637F3"))
+                        {
+                            MessageBox.Show(
+                                "Unable to initialize device manager !\nMissing some components! Please install latest Windows Media Player! ");
+                            Application.Current.Shutdown(1);
+                        }
+                    }
+                }));
+                ServiceProvider.Database.StartEvent(EventType.App);
             }
             catch (Exception ex)
             {
-                Log.Error("Fatal error ",ex);
+                Log.Error("Fatal error ", ex);
             }
+
+            Dispatcher.Invoke(new Action(delegate
+            {
+                StartApplication();
+                if (_startUpWindow != null)
+                    _startUpWindow.Close();
+
+            }));
         }
 
         private void Instance_MetaDataUpdated(object sender, FileItem item)
@@ -192,6 +198,9 @@ namespace CameraControl
 
             try
             {
+                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
+                ServiceProvider.WindowsManager.ApplyTheme();
+
                 ServiceProvider.WindowsManager.Add(new FullScreenWnd());
                 ServiceProvider.WindowsManager.Add(new LiveViewManager());
                 ServiceProvider.WindowsManager.Add(new MultipleCameraWnd());
@@ -210,8 +219,6 @@ namespace CameraControl
                 ServiceProvider.WindowsManager.Add(new TimeLapseWnd());
                 ServiceProvider.WindowsManager.Add(new BarcodeWnd());
                 ServiceProvider.WindowsManager.Add(new MultipleLiveView());
-                ServiceProvider.WindowsManager.Event += WindowsManager_Event;
-                ServiceProvider.WindowsManager.ApplyTheme();
                 //ServiceProvider.WindowsManager.ApplyKeyHanding();
                 ServiceProvider.WindowsManager.RegisterKnowCommands();
                 ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
@@ -411,7 +418,7 @@ namespace CameraControl
             if (newcameraDevice == null)
                 return;
             Log.Debug("DeviceManager_CameraSelected 1");
-            var thread = new Thread(delegate()
+            var thread = new Thread(delegate ()
             {
                 CameraProperty property = newcameraDevice.LoadProperties();
                 // load session data only if not session attached to the selected camera
@@ -462,7 +469,7 @@ namespace CameraControl
             Log.Debug("cameraDevice_CameraInitDone 2");
             if (preset != null)
             {
-                var thread = new Thread(delegate()
+                var thread = new Thread(delegate ()
                 {
                     try
                     {
@@ -527,7 +534,7 @@ namespace CameraControl
                 MessageBox.Show(TranslationStrings.LabelRestartTheApplication);
                 Application.Current.Shutdown();
             }
-            else if (e.Exception.GetType() == typeof (OutOfMemoryException))
+            else if (e.Exception.GetType() == typeof(OutOfMemoryException))
             {
                 Log.Error("Out of memory. Application exiting ");
                 MessageBox.Show(TranslationStrings.LabelOutOfMemory);

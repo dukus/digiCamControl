@@ -81,7 +81,7 @@
                     <ContextMenu.DataContext>
                         <viewModel:MainMenuViewModel/>
                     </ContextMenu.DataContext>
-                    <MenuItem Header="{T:TranslateExtension LabelRestore}" Command="{Binding SendCommand}" CommandParameter="Restore" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
+                    <MenuItem Header="{T:TranslateExtension LabelRestore}" Command="{Binding SendCommand}" CommandParameter="Restore" InputGestureText="{myClasess:CommandShortcutExtensioncs Restore}"/>
                     <Separator/>
                     <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
                 </ContextMenu>

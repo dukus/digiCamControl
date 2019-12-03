@@ -1294,6 +1294,10 @@ namespace CameraControl.Core.Classes
             {
                 Log.Error(e);
             }
+
+            if (photoSession == null)
+                photoSession = new PhotoSession();
+
             return photoSession;
         }
 
@@ -1366,6 +1370,10 @@ namespace CameraControl.Core.Classes
             {
                 Log.Error("Error loading config file ", exception);
             }
+
+            if (defaultSettings==null)
+                defaultSettings=new Settings();
+
             return defaultSettings;
         }
 
