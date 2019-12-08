@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -14,7 +16,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using Quartz;
-using Quartz.Collection;
 using Quartz.Impl;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -689,7 +690,7 @@ namespace CameraControl.ViewModel
                                     .WithMisfireHandlingInstructionFireAndProceed()
                                     .StartingDailyAt(new TimeOfDay(StartHour, StartMinute, StartSecond))
                                     .EndingDailyAt(new TimeOfDay(StopHour, StopMinute, StopSecond))
-                                    .OnDaysOfTheWeek(days)
+                                    .OnDaysOfTheWeek(new ReadOnlyCollection<DayOfWeek>(days.ToList()))
                         );
                 }
                 else

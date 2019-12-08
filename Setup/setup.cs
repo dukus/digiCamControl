@@ -13,6 +13,7 @@ using WixSharp.Bootstrapper;
 using WixSharp.CommonTasks;
 using File = WixSharp.File;
 using CameraControl.Core.Translation;
+using RegistryHive = WixSharp.RegistryHive;
 
 namespace Setup
 {
