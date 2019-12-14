@@ -63,6 +63,7 @@ namespace CameraControl.Devices.Example
                 }
                 cmb_cameras.DisplayMember = "DeviceName";
                 cmb_cameras.SelectedItem = DeviceManager.SelectedCameraDevice;
+                DeviceManager.SelectedCameraDevice.CaptureInSdRam = true;
                 // check if camera support live view
                 btn_liveview.Enabled = DeviceManager.SelectedCameraDevice.GetCapability(CapabilityEnum.LiveView);
                 cmb_cameras.EndUpdate();
