@@ -190,12 +190,12 @@ namespace CameraControl.Devices.Nikon
         protected override PropertyValue<long> InitStillCaptureMode()
         {
             PropertyValue<long> res = new PropertyValue<long>()
-                                          {
-                                              Name = "Still Capture Mode",
-                                              IsEnabled = true,
-                                              Code = 0x5013,
-                                              SubType = typeof (UInt16)
-                                          };
+            {
+                Name = "Still Capture Mode",
+                IsEnabled = true,
+                Code = 0x5013,
+                SubType = typeof(UInt16)
+            };
             res.AddValues("Single shot (single-frame shooting)", 0x0001);
             res.AddValues("Continuous high-speed shooting (CH)", 0x0002);
             res.AddValues("Continuous low-speed shooting (CL)", 0x8010);
@@ -242,12 +242,15 @@ namespace CameraControl.Devices.Nikon
                 try
                 {
                     DeviceReady();
-                    MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_ExposureIndexEx);
+                    MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_ExposureIndex);
                     //IsoNumber.IsEnabled = result.Data[4] == 1;
-                    UInt32 defval = BitConverter.ToUInt32(result.Data, 9);
-                    for (int i = 0; i < result.Data.Length - 16; i += 4)
+
+                    //From the D600 documentation this is a uint16 not uint32.
+                    //Oddly the MovieExposureIndex DOES use uint32
+                    UInt16 defval = BitConverter.ToUInt16(result.Data, 7);
+                    for (int i = 0; i < result.Data.Length - 12; i += 2)
                     {
-                        UInt32 val = BitConverter.ToUInt32(result.Data, 16 + i);
+                        UInt16 val = BitConverter.ToUInt16(result.Data, 12 + i);
                         NormalIsoNumber.AddValues(_isoTable.ContainsKey(val) ? _isoTable[val] : val.ToString(), val);
                     }
                     NormalIsoNumber.ReloadValues();
@@ -268,6 +271,7 @@ namespace CameraControl.Devices.Nikon
                 {
                     MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_MovieExposureIndex);
                     //IsoNumber.IsEnabled = result.Data[4] == 1;
+                    //Uses uint32 but exposureIndex use uint16
                     UInt32 defval = BitConverter.ToUInt32(result.Data, 9);
                     for (int i = 0; i < result.Data.Length - 16; i += 4)
                     {
