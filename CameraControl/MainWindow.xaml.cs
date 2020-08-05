@@ -485,6 +485,7 @@ namespace CameraControl
                     {
                         eventArgs.CameraDevice.IsBusy = false;
                         eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
+                        StaticHelper.Instance.SystemMessage = "File transfer disabled";
                         return;
                     }
                     if (extension != null && (session.DownloadOnlyJpg && extension.ToLower() != ".jpg"))

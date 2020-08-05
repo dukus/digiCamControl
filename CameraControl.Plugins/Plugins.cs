@@ -91,7 +91,7 @@ namespace CameraControl.Plugins
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new CropTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new OverlayTransform());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new RotateTransform());
-                ServiceProvider.PluginManager.ImageTransformPlugins.Add(new ScriptTransform());
+                
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new PixelBinning());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Enhance());
                 ServiceProvider.PluginManager.ImageTransformPlugins.Add(new Effect());

@@ -150,6 +150,12 @@ namespace CameraControl.Core.Classes
                         item.SetKey(Key.A);
                         item.Ctrl = true;
                         break;
+                    case CmdConsts.NextSeries:
+                        item.SetKey(Key.Add);
+                        break;
+                    case CmdConsts.PrevSeries:
+                        item.SetKey(Key.Subtract);
+                        break;
                 }
             }
         }

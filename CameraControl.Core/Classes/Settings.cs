@@ -940,7 +940,6 @@ namespace CameraControl.Core.Classes
         {
             get
             {
-                return false;
                 return _webcamSupport;
             }
             set { _webcamSupport = value; }
@@ -1117,7 +1116,7 @@ namespace CameraControl.Core.Classes
             ExternalDeviceWaitForCapture = 1000;
             ExternalDeviceWaitForFocus = 1000;
 
-            WebcamSupport = true;
+            WebcamSupport = false;
             WiaDeviceSupport = true;
         }
 

@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Accord;
 using CameraControl.Devices.Classes;
 
 #endregion
@@ -77,6 +78,12 @@ namespace CameraControl.Devices.Others
         public override void CapturePhotoNoAf()
         {
             CapturePhoto();
+        }
+
+        public override void TransferFile(object o, Stream stream)
+        {
+                var b = File.ReadAllBytes((string) o);
+                stream.Write(b, 0, b.Length);
         }
 
         public override void TransferFile(object o, string filename)
@@ -158,7 +165,8 @@ namespace CameraControl.Devices.Others
 
         public override string GetLiveViewStream()
         {
-            return "rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov";
+            return "rtsp://freja.hiof.no:1935/rtplive/definst/hessdalen03.stream";
+           // return "rtsp://173.12.1.249/1";
         }
 
         public override LiveViewData GetLiveViewImage()

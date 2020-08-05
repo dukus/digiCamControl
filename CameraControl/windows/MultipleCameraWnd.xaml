@@ -61,10 +61,10 @@
                 <Controls:NumericUpDown Grid.Column="1" Grid.Row="5"  Name="int_wait" Minimum="0" Maximum="10000"  Value="{Binding Path=DelaySec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" ToolTip="Wait beetven cameras shots in seconds " Margin="1"/>
 
                 <Label  Grid.Row="6" Grid.Column="0" Content="{T:TranslateExtension LabelNumberOfCaptures}" Margin="3" />
-                <Controls:NumericUpDown  Grid.Row="6" Value="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Maximum="1000" Minimum="1" Margin="1" Grid.Column="1" />
+                <Controls:NumericUpDown  Grid.Row="6" Value="{Binding Path=NumOfPhotos, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Maximum="1000" Minimum="1" Margin="5" Grid.Column="1" />
 
                 <Label  Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelWaitTime}" Margin="3" />
-                <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Value="{Binding Path=WaitSec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Margin="1" Maximum="3600" Minimum="1"/>
+                <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Value="{Binding Path=WaitSec, RelativeSource={RelativeSource FindAncestor, AncestorType=my1:MultipleCameraWnd, AncestorLevel=1}}" Margin="5" Maximum="3600" Minimum="0"/>
 
                 <Button Content="{T:Translate LabelSettingsLiveView}" Grid.Row="8" Name="btn_liveview" Margin="2" Click="btn_liveview_Click" Grid.ColumnSpan="2" />
                 <Button Content="{T:Translate LabelSaveOrder}" Grid.Row="9" Name="btn_saveOrder" Margin="2" Click="btn_saveOrder_Click" Grid.ColumnSpan="2" />

@@ -320,23 +320,16 @@ namespace CameraControl.Devices.Canon
             set
             {
                 base.CaptureInSdRam = value;
-                try
+                if (IsConnected && Camera != null)
                 {
-                    if (IsConnected && Camera != null)
+                    if (!base.CaptureInSdRam)
                     {
-                        if (!base.CaptureInSdRam)
-                        {
-                            Camera.SavePicturesToCamera();
-                        }
-                        else
-                        {
-                            Camera.SavePicturesToHost(Path.GetTempPath());
-                        }
+                        Camera.SavePicturesToCamera();
                     }
-                }
-                catch (Exception exception)
-                {
-                    Log.Error("Error set CaptureInSdram", exception);
+                    else
+                    {
+                        Camera.SavePicturesToHost(Path.GetTempPath());
+                    }
                 }
             }
 

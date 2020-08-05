@@ -1944,8 +1944,8 @@ namespace CameraControl.ViewModel
 
         public virtual void GetLiveImageStream()
         {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
+            //Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            //{
                 try
                 {
                     if (!_videoSource.IsPlaying)
@@ -1960,7 +1960,7 @@ namespace CameraControl.ViewModel
                 {
 
                 }
-            }));
+            //}));
         }
 
         public virtual void GetLiveImageData()

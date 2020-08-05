@@ -215,6 +215,7 @@ namespace CameraControl.Devices
             WifiDeviceProviders.Add(new SonyProvider());
             WifiDeviceProviders.Add(new PanonoProvider());
             WifiDeviceProviders.Add(new OscProvider());
+            WifiDeviceProviders.Add(new PtzOpticsProvider());
             foreach (var type in CustomDeviceClass)
             {
                 DeviceClass.Add(type.Key, type.Value);

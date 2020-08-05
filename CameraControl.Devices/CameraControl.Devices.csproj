@@ -45,7 +45,8 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\x86\Debug\CameraControl.Devices.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\Release\</OutputPath>
@@ -217,6 +218,7 @@
     <Compile Include="Others\FileTransferDevice.cs" />
     <Compile Include="Others\NotConnectedCameraDevice.cs" />
     <Compile Include="Others\OscCamera.cs" />
+    <Compile Include="Others\PtzOpticsCamera.cs" />
     <Compile Include="Others\PanonoCamera.cs" />
     <Compile Include="Others\WebCameraDevice.cs" />
     <Compile Include="Sony\CameraDiscovery.cs" />
@@ -261,6 +263,7 @@
     <Compile Include="Wifi\PanonoDiscovery.cs" />
     <Compile Include="Wifi\PanonoProvider.cs" />
     <Compile Include="Wifi\PtpIpProvider.cs" />
+    <Compile Include="Wifi\PtzOpticsProvider.cs" />
     <Compile Include="Wifi\SonyProvider.cs" />
     <Compile Include="Wifi\YiCameraProvider.cs" />
     <Compile Include="Xml\XmlCommandDescriptor.cs" />

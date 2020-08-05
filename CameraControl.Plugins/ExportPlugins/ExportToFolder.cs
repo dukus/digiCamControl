@@ -101,7 +101,7 @@ namespace CameraControl.Plugins.ExportPlugins
                         {
                             using (MagickImage image = new MagickImage(fileItem.FileName))
                             {
-                                image.BackgroundColor = new MagickColor(Color.Black);
+                                image.BackgroundColor = new MagickColor(Color.Black.R, Color.Black.G, Color.Black.B);
                                 image.Rotate(fileItem.RotationAngle);
                                 image.Format = MagickFormat.Jpeg;
                                 // Save the result

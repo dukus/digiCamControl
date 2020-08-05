@@ -333,6 +333,10 @@ namespace CameraControl
                     case CmdConsts.NextSeries:
                         if (ServiceProvider.Settings != null) ServiceProvider.Settings.DefaultSession.Series++;
                         break;
+                    case CmdConsts.PrevSeries:
+                        if (ServiceProvider.Settings != null && ServiceProvider.Settings.DefaultSession.Series > 0)
+                            ServiceProvider.Settings.DefaultSession.Series--;
+                        break;
                 }
                 ICameraDevice device = ServiceProvider.DeviceManager.SelectedCameraDevice;
                 if (device != null && device.IsConnected)

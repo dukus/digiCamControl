@@ -352,7 +352,7 @@ namespace CameraControl.Core.Classes
                     var Green = new int[256];
                     var Red = new int[256];
                     var Luminance = new int[256];
-                    Dictionary<MagickColor, int> h = image.Histogram();
+                    Dictionary<IMagickColor<byte>, int> h = image.Histogram();
                     foreach (var i in h)
                     {
                         byte R = i.Key.R;

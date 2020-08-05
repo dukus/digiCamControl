@@ -366,9 +366,7 @@
                             <CheckBox IsChecked="{Binding HideTrayNotifications}" Margin="4" Content="{T:TranslateExtension LabelHideTrayNotifications}"/>
                             <CheckBox IsChecked="{Binding DisableHardwareAccelerationNew}" Margin="4" Content="{T:TranslateExtension LabelDisableHardwareAcceleratione}"/>
                             <CheckBox IsChecked="{Binding WebcamSupport}" Margin="4" Content="{T:TranslateExtension LabelWebcameraSupport}"/>
-                            <CheckBox IsChecked="{Binding WiaDeviceSupport}" Margin="4" Content="{T:TranslateExtension LabelWebcameraSupport}"/>
                             <CheckBox IsChecked="{Binding WiaDeviceSupport}" Margin="4" Content="{T:TranslateExtension LabelWiaDeviceSupport}" />
-
                             <Button Content="{T:TranslateExtension LabelClearCache}" Margin="4" Name="btn_clearcache" Click="btn_clearcache_Click" />
 
                         </StackPanel>
