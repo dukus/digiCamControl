@@ -27,6 +27,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Button Content="Close" Grid.Row="2"  Name="button2" VerticalAlignment="Top" Click="button2_Click" Margin="16" />
+        <TextBlock Name="textBlock1" Margin="16" TextWrapping="Wrap" TextTrimming="WordEllipsis" TextAlignment="Justify"/>
         <TextBlock Name="textBlock2" Margin="16" TextWrapping="Wrap" TextTrimming="WordEllipsis" TextAlignment="Justify">digiCamControl - Copyright (c) 2018 Duka István<LineBreak/>
 <LineBreak/>
 Permission is hereby granted, free of charge, to any person obtaining a copy

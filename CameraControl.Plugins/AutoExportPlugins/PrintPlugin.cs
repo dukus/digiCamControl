@@ -48,7 +48,7 @@ namespace CameraControl.Plugins.AutoExportPlugins
 
                 var image = new Image
                 {
-                    Source = BitmapLoader.Instance.LoadImage(outfile, PageWidth > PageHeight ? PageWidth : PageHeight, conf.Rotate ? 90 : 0),
+                    Source = BitmapLoader.Instance.LoadImage(outfile, 0, conf.Rotate ? 90 : 0),
                     Width = PageWidth ,
                     Height = PageHeight,
                     Stretch = Stretch.Uniform,

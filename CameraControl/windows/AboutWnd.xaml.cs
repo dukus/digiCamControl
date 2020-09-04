@@ -28,6 +28,7 @@
 
 #region
 
+using System.IO;
 using System.Windows;
 using CameraControl.Classes;
 using CameraControl.Core;
@@ -46,6 +47,14 @@ namespace CameraControl.windows
         {
             InitializeComponent();
             Title = "About " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            var file = Path.Combine(Settings.ApplicationFolder, "about.txt");
+            if (File.Exists(file))
+            {
+                textBlock2.Visibility = Visibility.Hidden;
+                textBlock1.Text = File.ReadAllText(file);
+                btn_donate.Visibility = Visibility.Collapsed;
+                button1.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
