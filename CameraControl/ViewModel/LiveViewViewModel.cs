@@ -1348,6 +1348,7 @@ namespace CameraControl.ViewModel
                 {
                 }
             }
+
             switch (cmd)
             {
                 case WindowsCmdConsts.LiveViewWnd_StartMotionDetection:
@@ -1367,7 +1368,13 @@ namespace CameraControl.ViewModel
                 case WindowsCmdConsts.LiveViewWnd_StopRecord:
                     StopRecordMovie();
                     break;
-
+                case WindowsCmdConsts.LiveViewFullScreen_Show:
+                    FullScreen();
+                    break;
+                case WindowsCmdConsts.LiveViewFullScreen_Hide:
+                    if (FullScreenWnd != null && FullScreenWnd.IsVisible)
+                        FullScreenWnd.Close();
+                    break;
             }
         }
 
