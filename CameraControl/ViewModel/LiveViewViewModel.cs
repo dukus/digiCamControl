@@ -1369,11 +1369,15 @@ namespace CameraControl.ViewModel
                     StopRecordMovie();
                     break;
                 case WindowsCmdConsts.LiveViewFullScreen_Show:
-                    FullScreen();
+                    Application.Current.Dispatcher.BeginInvoke(new Action(FullScreen));
                     break;
                 case WindowsCmdConsts.LiveViewFullScreen_Hide:
-                    if (FullScreenWnd != null && FullScreenWnd.IsVisible)
-                        FullScreenWnd.Close();
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (FullScreenWnd != null && FullScreenWnd.IsVisible)
+                            FullScreenWnd.Close();
+
+                    }));
                     break;
             }
         }
@@ -1736,6 +1740,7 @@ namespace CameraControl.ViewModel
             CameraDevice.PhotoCaptured -= CameraDevicePhotoCaptured;
             LiveViewManager.PreviewCaptured -= LiveViewManager_PreviewCaptured;
             ServiceProvider.WindowsManager.Event -= WindowsManager_Event1;
+            ServiceProvider.WindowsManager.Event -= WindowsManagerEvent;
             Thread.Sleep(100);
             StopLiveView();
             Recording = false;
