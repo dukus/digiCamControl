@@ -23,6 +23,7 @@ namespace CameraControl.Plugins.ToolPlugins
         private List<string> _ports;
         private SerialPort _sp = new SerialPort();
         private ArduinoCommandViewModel _commandViewModel;
+        private int _baudRate;
 
         public RelayCommand ShowButtonsCommand { get; set; } 
         
@@ -243,6 +244,21 @@ namespace CameraControl.Plugins.ToolPlugins
             }
         }
 
+        public int BaudRate
+        {
+            get
+            {
+                var i = PluginSetting.GetInt("BaudRate");
+                if (i == 0)
+                    i = 9600;
+                return i;
+            }
+            set
+            {
+                PluginSetting["BaudRate"] = value;
+                RaisePropertyChanged(() => BaudRate);
+            }
+        }
 
 
         public AsyncObservableCollection<string> Outs { get; set; }
@@ -309,7 +325,7 @@ namespace CameraControl.Plugins.ToolPlugins
                 if (Active && !string.IsNullOrEmpty(Port) && !_sp.IsOpen)
                 {
                     _sp.PortName = Port;
-                    _sp.BaudRate = 9600;
+                    _sp.BaudRate = BaudRate;
                     _sp.WriteTimeout = 3500;
                     _sp.Open();
                     _sp.DataReceived += sp_DataReceived;
