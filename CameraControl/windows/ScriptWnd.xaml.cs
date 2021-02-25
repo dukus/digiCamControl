@@ -58,7 +58,7 @@ namespace CameraControl.windows
     /// </summary>
     public partial class ScriptWnd : IWindow, IToolPlugin
     {
-        private readonly TclScripManager _manager = new TclScripManager();
+        private readonly TclScriptManager _manager = new TclScriptManager();
 
         public string Id
         {

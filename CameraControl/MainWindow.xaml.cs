@@ -358,7 +358,7 @@ namespace CameraControl
                 {
                     try
                     {
-                        var manager = new TclScripManager();
+                        var manager = new TclScriptManager();
                         manager.Execute(File.ReadAllText(scriptFile));
                     }
                     catch (Exception exception)

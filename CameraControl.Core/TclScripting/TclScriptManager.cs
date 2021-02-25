@@ -6,7 +6,7 @@ using Eagle._Interfaces.Public;
 
 namespace CameraControl.Core.TclScripting
 {
-    public class TclScripManager : IDisposable
+    public class TclScriptManager : IDisposable
     {
         public event OutputEventHandler Output;
         public event OutputEventHandler Error;
@@ -14,7 +14,7 @@ namespace CameraControl.Core.TclScripting
         private Interpreter _interpreter = null;
 
         #region Public Constructors
-        public TclScripManager()
+        public TclScriptManager()
         {
         }
         #endregion
@@ -285,7 +285,7 @@ namespace CameraControl.Core.TclScripting
             if (disposed && Engine.IsThrowOnDisposed(_interpreter, false))
             {
                 throw new ObjectDisposedException(
-                    typeof(TclScripManager).Name);
+                    typeof(TclScriptManager).Name);
             }
         }
 
@@ -315,7 +315,7 @@ namespace CameraControl.Core.TclScripting
         #endregion
 
         #region Destructor
-        ~TclScripManager()
+        ~TclScriptManager()
         {
             Dispose(false);
         }
