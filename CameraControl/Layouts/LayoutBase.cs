@@ -133,7 +133,7 @@ namespace CameraControl.Layouts
                 bool delete = false;
                 if (filestodelete.Count > 1)
                 {
-                    delete = MessageBox.Show("Multile files are selected !! Do you really want to delete selected files ?", "Delete files",
+                    delete = MessageBox.Show("Multiple files are selected!! Do you really want to delete selected files?", "Delete files",
                         MessageBoxButton.YesNo) == MessageBoxResult.Yes;
                 }
                 else
