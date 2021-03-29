@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using CameraControl.Core.Classes;
@@ -17,6 +18,17 @@ namespace CameraControl.Plugins.AutoExportPlugins
         {
             _config = config;
         }
+
+        public int Port
+        {
+            get { return  GetInt(_config.ConfigData["Port"]); }
+            set
+            {
+                _config.ConfigData["Port"] = value.ToString(CultureInfo.InvariantCulture); 
+                RaisePropertyChanged(() => Server);
+            }
+        }
+
 
         public string Server
         {
@@ -58,6 +70,11 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 RaisePropertyChanged(() => ServerPath);
             }
         }
-
+        private int GetInt(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return 0;
+            return Convert.ToInt32(s, CultureInfo.InvariantCulture);
+        }
     }
 }

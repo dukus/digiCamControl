@@ -198,6 +198,7 @@ namespace CameraControl.Devices
                 {"L830", typeof(NikonL830)},
                 {"L840", typeof(NikonL830)},
                 {"Z 50", typeof(NikonZ6)},
+                {"Z 5", typeof(NikonZ6)},
                 {"Z 6", typeof(NikonZ6)},
                 {"Z 7", typeof(NikonZ7)},
                 //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},

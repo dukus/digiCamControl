@@ -34,6 +34,9 @@ namespace CameraControl.Plugins.AutoExportPlugins
                 using (FtpClient conn = new FtpClient())
                 {
                     conn.Host = conf.Server;
+                    if (conf.Port > 0)
+                        conn.Port = conf.Port;
+
                     conn.Credentials = new NetworkCredential(conf.User, conf.Pass);
                     if (!string.IsNullOrWhiteSpace(conf.ServerPath))
                         conn.SetWorkingDirectory(conf.ServerPath);
