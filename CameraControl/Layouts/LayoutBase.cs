@@ -106,10 +106,7 @@ namespace CameraControl.Layouts
             }
             else
             {
-                if (LayoutViewModel.ZoomIndex>0)
-                {
-                    LoadFullRes();
-                }
+                LoadFullRes();
             }
         }
 
