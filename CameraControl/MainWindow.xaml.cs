@@ -865,6 +865,7 @@ namespace CameraControl
                     {
                         StackLayout.Children.Clear();
                         LayoutNormal control = new LayoutNormal();
+                        PreviewPanel.DataContext = control.ZoomAndPanControl;
                         StackLayout.Children.Add(control);
                     }
                     break;
@@ -1062,24 +1063,24 @@ namespace CameraControl
                 : WindowsCmdConsts.Prev_Image);
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var res = e.GetPosition(PrviewImage);
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
-                                                          (res.X / PrviewImage.ActualWidth) + "_" +
-                                                          (res.Y / PrviewImage.ActualHeight));
-        }
+        //private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    var res = e.GetPosition(PrviewImage);
+        //    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
+        //                                                  (res.X / PrviewImage.ActualWidth) + "_" +
+        //                                                  (res.Y / PrviewImage.ActualHeight));
+        //}
 
-        private void PrviewImage_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var res = e.GetPosition(PrviewImage);
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
-                                                              (res.X / PrviewImage.ActualWidth) + "_" +
-                                                              (res.Y / PrviewImage.ActualHeight) + "_!");
-            }
-        }
+        //private void PrviewImage_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (e.LeftButton == MouseButtonState.Pressed)
+        //    {
+        //        var res = e.GetPosition(PrviewImage);
+        //        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
+        //                                                      (res.X / PrviewImage.ActualWidth) + "_" +
+        //                                                      (res.Y / PrviewImage.ActualHeight) + "_!");
+        //    }
+        //}
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {

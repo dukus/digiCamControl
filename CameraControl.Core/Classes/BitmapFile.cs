@@ -28,6 +28,7 @@
 
 #region
 
+using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CameraControl.Devices.Classes;
@@ -85,6 +86,7 @@ namespace CameraControl.Core.Classes
                 //  _displayImage = FileItem.Thumbnail;
                 //}
                 _displayImage = value;
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!");
                 NotifyPropertyChanged("DisplayImage");
             }
         }
@@ -205,6 +207,7 @@ namespace CameraControl.Core.Classes
             NotifyPropertyChanged("FileItem");
             NotifyPropertyChanged("LuminanceHistogramPoints");
             NotifyPropertyChanged("RedColorHistogramPoints");
+            NotifyPropertyChanged("DisplayImage");
         }
 
         public void SetFileItem(FileItem item)

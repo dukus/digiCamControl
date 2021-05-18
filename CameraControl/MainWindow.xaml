@@ -23,7 +23,7 @@
                        xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
                        xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
-                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:zoomAndPan="clr-namespace:ZoomAndPan;assembly=ZoomAndPan"
                        Closed="Window_Closed" Closing="Window_Closing" Icon="/CameraControl;component/Images/logo.png" WindowState="Maximized" VerticalContentAlignment="Center" PreviewKeyDown="MetroWindow_PreviewKeyDown" Loaded="MetroWindow_Loaded" Name="Window" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" MouseWheel="Window_MouseWheel" SizeChanged="Window_SizeChanged" ShowTitleBar="False">
     <!--<i:Interaction.Behaviors>
         <Behaviours:BorderlessWindowBehavior/>
@@ -312,11 +312,19 @@
                     <StackPanel>
                         <materialDesign:Card Margin="4">
                             <Expander Header="Preview" IsExpanded="True">
-                                <Image Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="185" MouseDown="Image_MouseDown" Name="PrviewImage" MouseMove="PrviewImage_MouseMove"  Margin="4">
-                                    <Image.LayoutTransform>
-                                        <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
-                                    </Image.LayoutTransform>
-                                </Image>
+                                <Grid>
+                                    <Image x:Name="PreviewImage" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="185" Margin="4">
+                                        <Image.LayoutTransform>
+                                            <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
+                                        </Image.LayoutTransform>
+                                    </Image>
+
+                                    <zoomAndPan:ZoomAndPanViewBox x:Name="PreviewPanel" Margin="4"
+                                      Background="#AACCCCCC"
+                                      Height="185" 
+                                      DataContext="{Binding ElementName=ZoomAndPanControl}"
+                                      />
+                                </Grid>
                             </Expander>
                         </materialDesign:Card>
                         <!--<Border

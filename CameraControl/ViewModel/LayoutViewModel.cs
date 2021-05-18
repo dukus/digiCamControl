@@ -35,21 +35,26 @@ namespace CameraControl.ViewModel
             {
                 _zoomIndex = value;
                 RaisePropertyChanged(()=>ZoomIndex);
-                switch (ZoomIndex)
-                {
-                    case 0:
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
-                        break;
-                    case 1:
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_60);
-                        break;
-                    case 2:
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_100);
-                        break;
-                    case 3:
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_200);
-                        break;
-                }
+                DoZoom();
+            }
+        }
+
+        public void DoZoom()
+        {
+            switch (ZoomIndex)
+            {
+                case 0:
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
+                    break;
+                case 1:
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_60);
+                    break;
+                case 2:
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_100);
+                    break;
+                case 3:
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_200);
+                    break;
             }
         }
 
