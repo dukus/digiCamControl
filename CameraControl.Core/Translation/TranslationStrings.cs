@@ -104,6 +104,7 @@ namespace CameraControl.Core.Translation
         public static string LabelLIveViewImageFreeze = "Live view image freeze in sec  ";
         public static string LabelRotateImage = "Rotate image ";
         public static string LabelDontLoadThumbs = "Don't load thumbnails";
+        public static string LabelFullResPreview = "Preview full resolution image";
         public static string LabelFullscrenBack = "Full screen window background  ";
         public static string LabelTriggers = "Triggers";
         public static string LabelUseKeybordToTrigger = "Use keyboard to trigger take photo";

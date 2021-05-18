@@ -412,12 +412,15 @@ namespace CameraControl.Core.Scripting
                         device.FocusMode.SetValue(param);
                         break;
                     case "whitebalance":
-                        if (!device.WhiteBalance.Values.Contains(param))
-                            throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
-                        device.WhiteBalance.SetValue(param);
+                        if (device?.WhiteBalance != null)
+                        {
+                            if (!device.WhiteBalance.Values.Contains(param) == true)
+                                throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
+                            device.WhiteBalance.SetValue(param);
+                        }
                         break;
                     case "mode":
-                        if (!device.Mode.Values.Contains(param))
+                        if (!device?.Mode?.Values?.Contains(param)==true)
                             throw new Exception(string.Format("Wrong value {0} for property {1}", param, arg));
                         device.Mode.SetValue(param);
                         break;

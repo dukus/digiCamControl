@@ -87,7 +87,8 @@
                             <CheckBox Margin="4" IsChecked="{Binding ShowThumbUpDown}" Content="{T:TranslateExtension LabelShowThumbUpDown}" />
                             <CheckBox Margin="4" IsChecked="{Binding Autorotate}" Content="{T:TranslateExtension LabelAutorotate}" />
                             <CheckBox Margin="4" IsChecked="{Binding DontLoadThumbnails}" Content="{T:TranslateExtension LabelDontLoadThumbs}" />
-
+                            <CheckBox Margin="4" IsChecked="{Binding LoadFullRespreview}" Content="{T:TranslateExtension LabelFullResPreview}" />
+                            
                             <ComboBox SelectedIndex="{Binding RotateIndex}" Margin="4"
                                       materialDesign:HintAssist.Hint="{T:TranslateExtension LabelRotateImage}"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}">

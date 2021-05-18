@@ -526,6 +526,9 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool LoadFullRespreview { get; set; }
+
+
         private bool _dontLoadThumbnails;
 
         public bool DontLoadThumbnails

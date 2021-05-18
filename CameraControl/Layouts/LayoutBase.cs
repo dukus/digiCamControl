@@ -106,7 +106,7 @@ namespace CameraControl.Layouts
             }
             else
             {
-                if (LayoutViewModel.ZoomIndex>0)
+                if (LayoutViewModel.ZoomIndex>0|| ServiceProvider.Settings.LoadFullRespreview)
                 {
                     LoadFullRes();
                 }

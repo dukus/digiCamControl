@@ -354,6 +354,7 @@ namespace CameraControl
             var scriptFile = ServiceProvider.Settings.StartupScript;
             if (scriptFile != null && File.Exists(scriptFile))
             {
+                Log.Debug("Startup script " + scriptFile);
                 if (Path.GetExtension(scriptFile.ToLower()) == ".tcl")
                 {
                     try
