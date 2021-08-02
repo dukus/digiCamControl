@@ -103,11 +103,14 @@ namespace CameraControl.Layouts
             if (_selectedItem != ServiceProvider.Settings.SelectedBitmap.FileItem)
             {
                 ServiceProvider.Settings.SelectedBitmap.FileItem = _selectedItem;
-                _worker.RunWorkerAsync(_selectedItem);
+                if (ServiceProvider.Settings.LoadFullRespreview)
+                    _worker.RunWorkerAsync(true);
+                else
+                    _worker.RunWorkerAsync(_selectedItem);
             }
             else
             {
-                if (LayoutViewModel.ZoomIndex>0|| ServiceProvider.Settings.LoadFullRespreview)
+                if (LayoutViewModel.ZoomIndex > 0)
                 {
                     LoadFullRes();
                 }

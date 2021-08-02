@@ -322,8 +322,16 @@ namespace CameraControl
                 CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
                 // multiple canon cameras block with this settings
 
-                if ((cameraDevice is CanonSDKBase && ServiceProvider.Settings.LoadCanonTransferMode) || !(cameraDevice is CanonSDKBase))
-                    cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
+                try
+                {
+                    if ((cameraDevice is CanonSDKBase && ServiceProvider.Settings.LoadCanonTransferMode) || !(cameraDevice is CanonSDKBase))
+                        cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Unable unable to set TransferMode", exception);
+                }
+
 
                 Log.Debug("cameraDevice_CameraInitDone 1a");
                 if (ServiceProvider.Settings.SyncCameraDateTime)

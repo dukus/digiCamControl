@@ -51,6 +51,13 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                 geometry.X = conf.Left;
                 geometry.Y = conf.Top;
                 image.Crop(geometry);
+              
+                if(conf.Trim)
+                {
+                    image.ColorFuzz = new Percentage(conf.TrimSensitivity);
+                    image.Trim();
+                    image.RePage();
+                }                
                 image.Format = MagickFormat.Jpeg;
                 image.Write(dest);
             }

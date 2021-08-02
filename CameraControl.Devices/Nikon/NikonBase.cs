@@ -2329,12 +2329,13 @@ namespace CameraControl.Devices.Nikon
                                 case CONST_Event_ObjectAddedInSdram:
                                 case CONST_Event_ObjectAdded:
                                     {
-                                        Log.Debug("CONST_Event_ObjectAddedInSdram" + eventCode.ToString("X"));
+                                        Log.Debug("CONST_Event_ObjectAddedInSdram" + eventCode.ToString("X")+ " L:");
                                         MTPDataResponse objectdata = ExecuteReadDataEx(CONST_CMD_GetObjectInfo,
                                                                                        (uint) longeventParam);
                                         string filename = "DSC_0000.JPG";
-                                        if (objectdata.Data != null)
+                                        if (objectdata.Data != null && objectdata.Data.Length>0)
                                         {
+                                            Log.Debug("L:" + objectdata.Data.Length.ToString());
                                             filename = Encoding.Unicode.GetString(objectdata.Data, 53, 12*2);
                                             if (filename.Contains("\0"))
                                                 filename = filename.Split('\0')[0];

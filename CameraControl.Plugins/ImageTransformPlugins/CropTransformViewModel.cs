@@ -62,6 +62,21 @@ namespace CameraControl.Plugins.ImageTransformPlugins
             }
         }
 
+        public bool Trim
+        {
+            get { return _config["Trim"] == "True"; }
+            set
+            {
+                _config["Trim"] = value.ToString();
+                RaisePropertyChanged(() => CropMargins);
+            }
+        }
+        public int TrimSensitivity
+        {
+            get { return GetInt(_config["TrimSensitivity"]); }
+            set { _config["TrimSensitivity"] = value.ToString(CultureInfo.InvariantCulture); }
+        }
+
         public bool LiveViewCrop
         {
             get { return _config["LiveViewCrop"] == "True"; }

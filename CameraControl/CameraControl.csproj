@@ -273,14 +273,14 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Magick.NET-Q8-x86, Version=7.21.1.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
-      <HintPath>..\packages\Magick.NET-Q8-x86.7.21.1\lib\net40\Magick.NET-Q8-x86.dll</HintPath>
+    <Reference Include="Magick.NET-Q8-x86, Version=8.1.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=x86">
+      <HintPath>..\packages\Magick.NET-Q8-x86.8.1.0\lib\net20\Magick.NET-Q8-x86.dll</HintPath>
     </Reference>
-    <Reference Include="Magick.NET.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\packages\Magick.NET.Core.4.1.0\lib\net40\Magick.NET.Core.dll</HintPath>
+    <Reference Include="Magick.NET.Core, Version=8.1.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET.Core.8.1.0\lib\net20\Magick.NET.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Magick.NET.SystemDrawing, Version=2.0.3.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\packages\Magick.NET.SystemDrawing.2.0.3\lib\net40\Magick.NET.SystemDrawing.dll</HintPath>
+    <Reference Include="Magick.NET.SystemDrawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET.SystemDrawing.4.0.2\lib\net40\Magick.NET.SystemDrawing.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
@@ -966,8 +966,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Accord.3.8.2-alpha\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.8.2-alpha\build\Accord.targets'))" />
-    <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.7.21.1\build\net40\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.7.21.1\build\net40\Magick.NET-Q8-x86.targets'))" />
+    <Error Condition="!Exists('..\packages\Magick.NET-Q8-x86.8.1.0\build\net20\Magick.NET-Q8-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q8-x86.8.1.0\build\net20\Magick.NET-Q8-x86.targets'))" />
   </Target>
   <Import Project="..\packages\Accord.3.8.2-alpha\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.2-alpha\build\Accord.targets')" />
-  <Import Project="..\packages\Magick.NET-Q8-x86.7.21.1\build\net40\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.7.21.1\build\net40\Magick.NET-Q8-x86.targets')" />
+  <Import Project="..\packages\Magick.NET-Q8-x86.8.1.0\build\net20\Magick.NET-Q8-x86.targets" Condition="Exists('..\packages\Magick.NET-Q8-x86.8.1.0\build\net20\Magick.NET-Q8-x86.targets')" />
 </Project>
