@@ -203,8 +203,8 @@
     <Reference Include="DropNet">
       <HintPath>..\packages\DropNet.1.10.23.0\lib\net40\DropNet.dll</HintPath>
     </Reference>
-    <Reference Include="Eagle, Version=1.0.7790.43198, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eagle.CLRv4.Core.1.0.7790.43198\lib\net40\Eagle.dll</HintPath>
+    <Reference Include="Eagle, Version=1.0.7897.33333, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eagle.CLRv4.Core.1.0.7897.33333\lib\net40\Eagle.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
@@ -949,7 +949,7 @@
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)PostBuild.Bat" "$(SolutionDir)" $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

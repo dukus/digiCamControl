@@ -159,8 +159,8 @@
       <HintPath>..\packages\DotNetZip.1.13.4\lib\net40\DotNetZip.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eagle, Version=1.0.7790.43198, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eagle.CLRv4.Core.1.0.7790.43198\lib\net40\Eagle.dll</HintPath>
+    <Reference Include="Eagle, Version=1.0.7897.33333, Culture=neutral, PublicKeyToken=29c6297630be05eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eagle.CLRv4.Core.1.0.7897.33333\lib\net40\Eagle.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Gif.Components">
