@@ -200,6 +200,7 @@ namespace CameraControl.Devices
                 {"Z 50", typeof(NikonZ6)},
                 {"Z 5", typeof(NikonZ6)},
                 {"Z 6", typeof(NikonZ6)},
+                {"Z 6_2", typeof(NikonZ6)},
                 {"Z 7", typeof(NikonZ7)},
                 //{"Canon EOS 5D Mark II", typeof (CanonSDKBase)},
                 {"MTP Sim", typeof(BaseMTPCamera)},
