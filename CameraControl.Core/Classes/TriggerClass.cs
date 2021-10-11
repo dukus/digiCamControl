@@ -148,6 +148,13 @@ namespace CameraControl.Core.Classes
                         CameraHelper.Capture(device);
                         lastDevice = device;
                     }
+                    if (property.KeyTriggerNoAF.KeyEnum != Key.None && property.KeyTriggerNoAF.Alt == e.isAltPressed &&
+                        property.KeyTriggerNoAF.Ctrl == e.isCtrlPressed &&
+                        property.KeyTriggerNoAF.KeyEnum == inputKey)
+                    {
+                      CameraHelper.CaptureNoAf(device);
+                      lastDevice = device;
+                    }
                 }
             }
             catch (Exception exception)
