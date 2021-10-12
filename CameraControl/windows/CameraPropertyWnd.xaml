@@ -92,7 +92,16 @@
                             <ComboBox SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.KeyTrigger.Key}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=AvailableKeys}" Margin="2"/>
                         </StackPanel>
                     </Expander>
-
+                    <Expander HorizontalAlignment="Stretch" IsExpanded="False"  >
+                        <Expander.Header>
+                            <TextBlock Text="{T:TranslateExtension LabelKeyboardTriggerNoAF}" FontWeight="Bold"/>
+                        </Expander.Header>
+                        <StackPanel Orientation="Vertical" Margin="24,8,24,16">
+                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.KeyTriggerNoAF.Alt}" Content="Alt" Margin="5"/>
+                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.KeyTriggerNoAF.Ctrl}" Content="Ctrl" Margin="5"/>
+                            <ComboBox SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=CameraProperty.KeyTriggerNoAF.Key}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=AvailableKeys}" Margin="2"/>
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </materialDesign:Card>
         </ScrollViewer>
