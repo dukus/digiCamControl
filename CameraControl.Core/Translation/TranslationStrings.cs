@@ -717,5 +717,8 @@ namespace CameraControl.Core.Translation
 
         // 04/11/2018
         public static string LabelShowFocusControlBar = "Show Focus Control Bar";
-    }
+
+        // 11/10/2021
+        public static string LabelKeyboardTriggerNoAF = "Keyboard trigger no auto focus";
+}
 }
