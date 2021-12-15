@@ -1,39 +1,39 @@
-Pulling translations for resource digicamcontrol.baseresource (source: None)
- -> tr_TR: translations\digicamcontrol.baseresource\tr_TR.xml
-Skipping 'vi' translation (file: translations\digicamcontrol.baseresource\vi.xml).
- -> ca: translations\digicamcontrol.baseresource\ca.xml
- -> it_IT: translations\digicamcontrol.baseresource\it_IT.xml
- -> it: translations\digicamcontrol.baseresource\it.xml
-Skipping 'nl_BE' translation (file: translations\digicamcontrol.baseresource\nl_BE.xml).
- -> el_GR: translations\digicamcontrol.baseresource\el_GR.xml
- -> cs: translations\digicamcontrol.baseresource\cs.xml
-Skipping 'es' translation (file: translations\digicamcontrol.baseresource\es.xml).
- -> ru: translations\digicamcontrol.baseresource\ru.xml
- -> nl: translations\digicamcontrol.baseresource\nl.xml
-Skipping 'hu_HU' translation (file: translations\digicamcontrol.baseresource\hu_HU.xml).
-Skipping 'ja_JP' translation (file: translations\digicamcontrol.baseresource\ja_JP.xml).
-Skipping 'uz@Latn' translation (file: translations\digicamcontrol.baseresource\uz@Latn.xml).
- -> pt_PT: translations\digicamcontrol.baseresource\pt_PT.xml
- -> pl: translations\digicamcontrol.baseresource\pl.xml
-Skipping 'ar_EG' translation (file: translations\digicamcontrol.baseresource\ar_EG.xml).
- -> fr: translations\digicamcontrol.baseresource\fr.xml
- -> zh_TW: translations\digicamcontrol.baseresource\zh_TW.xml
-Skipping 'pt_BR' translation (file: translations\digicamcontrol.baseresource\pt_BR.xml).
- -> de: translations\digicamcontrol.baseresource\de.xml
-Skipping 'hu' translation (file: translations\digicamcontrol.baseresource\hu.xml).
-Skipping 'ko_KR' translation (file: translations\digicamcontrol.baseresource\ko_KR.xml).
-Skipping 'sk_SK' translation (file: translations\digicamcontrol.baseresource\sk_SK.xml).
- -> es_MX: translations\digicamcontrol.baseresource\es_MX.xml
-Skipping 'cs_CZ' translation (file: translations\digicamcontrol.baseresource\cs_CZ.xml).
- -> ja: translations\digicamcontrol.baseresource\ja.xml
-Skipping 'fr_CA' translation (file: translations\digicamcontrol.baseresource\fr_CA.xml).
-Skipping 'he' translation (file: translations\digicamcontrol.baseresource\he.xml).
-Skipping 'ro' translation (file: translations\digicamcontrol.baseresource\ro.xml).
- -> zh_CN: translations\digicamcontrol.baseresource\zh_CN.xml
-Skipping 'sr' translation (file: translations\digicamcontrol.baseresource\sr.xml).
-Skipping 'da' translation (file: translations\digicamcontrol.baseresource\da.xml).
- -> sv: translations\digicamcontrol.baseresource\sv.xml
-Skipping 'gl_ES' translation (file: translations\digicamcontrol.baseresource\gl_ES.xml).
-Skipping 'uk' translation (file: translations\digicamcontrol.baseresource\uk.xml).
-Skipping 'sl' translation (file: translations\digicamcontrol.baseresource\sl.xml).
-Done.
+tx INFO: Pulling translations for resource digicamcontrol.baseresource (source: None)
+tx INFO: Skipping 'he' translation (file: translations\digicamcontrol.baseresource\he.xml).
+tx INFO:  -> de: translations\digicamcontrol.baseresource\de.xml
+tx INFO: Skipping 'sr' translation (file: translations\digicamcontrol.baseresource\sr.xml).
+tx INFO:  -> el_GR: translations\digicamcontrol.baseresource\el_GR.xml
+tx INFO: Skipping 'ro' translation (file: translations\digicamcontrol.baseresource\ro.xml).
+tx INFO:  -> tr_TR: translations\digicamcontrol.baseresource\tr_TR.xml
+tx INFO:  -> nl: translations\digicamcontrol.baseresource\nl.xml
+tx INFO:  -> fr: translations\digicamcontrol.baseresource\fr.xml
+tx INFO: Skipping 'da' translation (file: translations\digicamcontrol.baseresource\da.xml).
+tx INFO:  -> es: translations\digicamcontrol.baseresource\es.xml
+tx INFO:  -> es_MX: translations\digicamcontrol.baseresource\es_MX.xml
+tx INFO: Skipping 'ko_KR' translation (file: translations\digicamcontrol.baseresource\ko_KR.xml).
+tx INFO:  -> ru: translations\digicamcontrol.baseresource\ru.xml
+tx INFO:  -> cs: translations\digicamcontrol.baseresource\cs.xml
+tx INFO: Skipping 'fr_CA' translation (file: translations\digicamcontrol.baseresource\fr_CA.xml).
+tx INFO: Skipping 'vi' translation (file: translations\digicamcontrol.baseresource\vi.xml).
+tx INFO: Skipping 'hu_HU' translation (file: translations\digicamcontrol.baseresource\hu_HU.xml).
+tx INFO:  -> ja: translations\digicamcontrol.baseresource\ja.xml
+tx INFO: Skipping 'hu' translation (file: translations\digicamcontrol.baseresource\hu.xml).
+tx INFO:  -> it_IT: translations\digicamcontrol.baseresource\it_IT.xml
+tx INFO: Skipping 'nl_BE' translation (file: translations\digicamcontrol.baseresource\nl_BE.xml).
+tx INFO: Skipping 'sk_SK' translation (file: translations\digicamcontrol.baseresource\sk_SK.xml).
+tx INFO:  -> ca: translations\digicamcontrol.baseresource\ca.xml
+tx INFO: Skipping 'uz@Latn' translation (file: translations\digicamcontrol.baseresource\uz@Latn.xml).
+tx INFO: Skipping 'cs_CZ' translation (file: translations\digicamcontrol.baseresource\cs_CZ.xml).
+tx INFO: Skipping 'ja_JP' translation (file: translations\digicamcontrol.baseresource\ja_JP.xml).
+tx INFO:  -> sv: translations\digicamcontrol.baseresource\sv.xml
+tx INFO: Skipping 'sl' translation (file: translations\digicamcontrol.baseresource\sl.xml).
+tx INFO:  -> pt_PT: translations\digicamcontrol.baseresource\pt_PT.xml
+tx INFO: Skipping 'gl_ES' translation (file: translations\digicamcontrol.baseresource\gl_ES.xml).
+tx INFO:  -> zh_TW: translations\digicamcontrol.baseresource\zh_TW.xml
+tx INFO:  -> pl: translations\digicamcontrol.baseresource\pl.xml
+tx INFO: Skipping 'ar_EG' translation (file: translations\digicamcontrol.baseresource\ar_EG.xml).
+tx INFO:  -> it: translations\digicamcontrol.baseresource\it.xml
+tx INFO:  -> uk: translations\digicamcontrol.baseresource\uk.xml
+tx INFO: Skipping 'pt_BR' translation (file: translations\digicamcontrol.baseresource\pt_BR.xml).
+tx INFO:  -> zh_CN: translations\digicamcontrol.baseresource\zh_CN.xml
+tx INFO: Done.
