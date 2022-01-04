@@ -144,11 +144,11 @@ namespace CameraControl.Devices.Nikon
             LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
         }
 
-        protected virtual void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
+        protected override void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
         {
             lock (Locker)
             {
-                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val),
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt32)val),
                             CONST_CMD_LiveViewZoomArea);
             }
         }
