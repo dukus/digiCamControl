@@ -15,31 +15,34 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+        <Label Content="Server"/>
+        <TextBox Grid.Row="1" Text="{Binding Server}" Margin="2"/>
 
-                <Label Content="Server"/>
-                <TextBox Grid.Row="1" Text="{Binding Server}" Margin="2"/>
+        <Label Content="Port"/>
+        <TextBox Grid.Row="1" Text="{Binding Port}" Margin="2"/>
 
-                <Label Grid.Row="2" Content="User"/>
-                <TextBox Grid.Row="3" Text="{Binding User}" Margin="2" />
-                
-                <Label Grid.Row="5" Content="Password"/>
-                <TextBox Grid.Row="6" Text="{Binding Pass}" Margin="2"/>
+        <Label Grid.Row="2" Content="User"/>
+        <TextBox Grid.Row="3" Text="{Binding User}" Margin="2" />
 
-                <Label Grid.Row="7" Content="Path on server"/>
-                <TextBox Grid.Row="8" Text="{Binding ServerPath}" Margin="2"/>
+        <Label Grid.Row="5" Content="Password"/>
+        <TextBox Grid.Row="6" Text="{Binding Pass}" Margin="2"/>
 
-            </Grid>
+        <Label Grid.Row="7" Content="Path on server"/>
+        <TextBox Grid.Row="8" Text="{Binding ServerPath}" Margin="2"/>
+        </StackPanel>
+    </Grid>
 </UserControl>

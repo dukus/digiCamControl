@@ -55,7 +55,7 @@ namespace CameraControl.Core.Classes
 
         public event MetaDataUpdatedEventHandler MetaDataUpdated;
 
-        private const int MaxThumbSize = 1920 * 2;
+        ///private const int MaxThumbSize = 1920 * 2;
         public const int LargeThumbSize = 1600;
         public const int SmallThumbSize = 400;
 

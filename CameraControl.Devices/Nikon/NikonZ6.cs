@@ -11,9 +11,10 @@ namespace CameraControl.Devices.Nikon
 {
     public class NikonZ6 : NikonD500
     {
+        public const uint CONST_CMD_LiveViewZoomArea = 0xD1BD;
         public NikonZ6()
-        {
-            _isoTable = new Dictionary<uint, string>()
+        {        
+        _isoTable = new Dictionary<uint, string>()
             {
                 {0x0032, "Lo 1.0"},
                 {0x0040, "Lo 0.7"},
@@ -105,7 +106,7 @@ namespace CameraControl.Devices.Nikon
 
         }
 
-        protected virtual void InitFNumber()
+        protected override void InitFNumber()
         {
             NormalFNumber = new PropertyValue<long> {IsEnabled = true, Name = "FNumber"};
             NormalFNumber.ValueChanged += NormalFNumber_ValueChanged;
@@ -128,6 +129,37 @@ namespace CameraControl.Devices.Nikon
             if (Mode != null && (Mode.Value == "A" || Mode.Value == "M"))
                 SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt16) val),
                     CONST_PROP_Fnumber);
+        }
+
+        protected override void InitOther()
+        {
+            LiveViewImageZoomRatio = new PropertyValue<long> { Name = "LiveViewImageZoomRatio" };
+            LiveViewImageZoomRatio.SubType = typeof(UInt16);
+            LiveViewImageZoomRatio.AddValues("All", 0);
+            LiveViewImageZoomRatio.AddValues("50%", 2048);
+            LiveViewImageZoomRatio.AddValues("100%", 1024);
+            LiveViewImageZoomRatio.AddValues("200%", 512);
+            LiveViewImageZoomRatio.SetValue("All");
+            LiveViewImageZoomRatio.ReloadValues();
+            LiveViewImageZoomRatio.ValueChanged += LiveViewImageZoomRatio_ValueChanged;
+        }
+
+        protected override void LiveViewImageZoomRatio_ValueChanged(object sender, string key, long val)
+        {
+            lock (Locker)
+            {
+                SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((UInt32)val),
+                            CONST_CMD_LiveViewZoomArea);
+            }
+        }
+
+        public override void StartRecordMovie()
+        {
+            // set liveview selector in movie mode
+            SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)1 }, 0xD1A6);
+            base.StartRecordMovie();
+            DeviceReady();
+            ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_StartMovieRecInCard));
         }
 
     }

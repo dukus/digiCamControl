@@ -104,6 +104,7 @@ namespace CameraControl.Core.Translation
         public static string LabelLIveViewImageFreeze = "Live view image freeze in sec  ";
         public static string LabelRotateImage = "Rotate image ";
         public static string LabelDontLoadThumbs = "Don't load thumbnails";
+        public static string LabelFullResPreview = "Preview full resolution image";
         public static string LabelFullscrenBack = "Full screen window background  ";
         public static string LabelTriggers = "Triggers";
         public static string LabelUseKeybordToTrigger = "Use keyboard to trigger take photo";
@@ -716,5 +717,8 @@ namespace CameraControl.Core.Translation
 
         // 04/11/2018
         public static string LabelShowFocusControlBar = "Show Focus Control Bar";
-    }
+
+        // 11/10/2021
+        public static string LabelKeyboardTriggerNoAF = "Keyboard trigger no auto focus";
+}
 }

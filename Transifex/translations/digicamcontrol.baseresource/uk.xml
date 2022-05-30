@@ -1,68 +1,349 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
   <!--Property values-->
+  <string name="BURST_NUMBER">Номер серії</string>
+  <string name="STILL_CAPTURE_MODE">Фоторежим</string>
+  <string name="CONTINUOUS_SHOT__CONTINUOUS_SHOOTING_">Серійна зйомка</string>
+  <string name="AUTO_ISO">Авто ISO</string>
+  <string name="ON">Увімкн.</string>
+  <string name="OFF">Вимкн.</string>
+  <string name="FLASH">Спалах</string>
+  <string name="NORMAL_SYNCHRONIZATION">Звичайна синхронізація</string>
+  <string name="LONG_EXP._NR">Шумозниження на довгій експозиції</string>
+  <string name="HIGH_ISO_NR">Шумозниження на великому ISO</string>
+  <string name="NORMAL">Звичайний режим</string>
+  <string name="EXPOSURE_DELAY_MODE">Режим затримки спуску</string>
+  <string name="LOCK">Фіксація</string>
+  <string name="SINGLE_SHOT__SINGLE_FRAME_SHOOTING_">Однокадрова зйомка</string>
+  <string name="SELF_TIMER">Автоспуск</string>
+  <string name="QUICK_RESPONSE_REMOTE">Швидке дистанційне керування</string>
+  <string name="2S_DELAYED_REMOTE">Автоспуск з 2с затримкою</string>
+  <string name="QUIET_SHOOTING">Тиха зйомка</string>
+  <string name="FLASH_PROHIBITED">Без спалаху</string>
+  <string name="RED_EYE_REDUCTION">Без ефекту \"чевоних очей\"</string>
+  <string name="SLOW_SYNCHRONIZATION">Синхронізація на довгих швидкостях затвору</string>
+  <string name="REAR_SYNCHRONIZATION">Синхронізація \"по другій шторці\"</string>
+  <string name="RED_EYE_REDUCTION_SLOW_SYNCHRONIZATION">Синхронізація на довгих витримках без \"червоних очей\"</string>
+  <string name="NOT_PERFORMED">Не виконано</string>
+  <string name="LOW">Низьке</string>
+  <string name="HIGH">Високе</string>
+  <string name="CENTER_WEIGHTED_METERING">Центрально-усереднений замір експозиції</string>
+  <string name="MULTI_PATTERN_METERING">Матричний замір експозиції</string>
+  <string name="SPOT_METERING">Точковий замір експозиції</string>
+  <string name="AUTO">Авто</string>
+  <string name="DAYLIGHT">Денне світло</string>
+  <string name="FLUORESCENT_">Люмінісцентні лампи</string>
+  <string name="INCANDESCENT">Лампи розжарювання</string>
+  <string name="CLOUDY">Хмарно</string>
+  <string name="SHADE"> В тіні</string>
+  <string name="CUSTOM">Користувацький</string>
+  <string name="[A]_AF_SERVO_MODE_AUTOMATIC_SWITCHING">[A] Автоперемикання на серворежим автофокусу</string>
+  <string name="[S]_SINGLE_AF_SERVO">[S] Одноразовий серворежим автофокусу</string>
+  <string name="[M]_MANUAL_FOCUS">[M] Фокусування вручну</string>
+  <string name="KELVIN">В кельвінах</string>
+  <string name="APPLICATION_MODE">Режим застосування</string>
+  <string name="WHITE_FLUORESCENT_LAMP">Білі люмінісцентні лампи</string>
+  <string name="FLUORESCENT_LIGHT_TYPE">Тип люмінісцентних ламп</string>
+  <string name="ADOBE_RGB">Adobe RGB</string>
+  <string name="COLOR_SPACE">Колірний простір</string>
+  <string name="14_BIT_RECORDING">14-бітовий запис</string>
+  <string name="RAW_RECORDING_BIT_MODE">Запис в RAW</string>
+  <string name="NEUTRAL">Нейтральний</string>
+  <string name="PICTURE_CONTROL">Контроль зображення</string>
+  <string name="LOSSLESS_COMPRESSED_RAW">Запис RAW без стиснення </string>
+  <string name="RAW_COMPRESSION">Стиснення RAW</string>
+  <string name="MF__HARD_">Ручне фокусування(жорстке)</string>
   <!--End Property values-->
+  <string name="Mode">Режим</string>
+  <string name="Iso">_Iso</string>
+  <string name="ShutterSpeed">_Швидкість затвору</string>
+  <string name="Aperture">_Апертура</string>
+  <string name="WhiteBalance">_Баланс білого</string>
+  <string name="ExposureComp">_Компенсація експозиції</string>
+  <string name="Compression">_Стиснення</string>
+  <string name="MeteringMode">_Режим експозаміру</string>
+  <string name="FocusMode">_Режим фокусування</string>
   <string name="Battery">Акумулятор</string>
+  <string name="SDRam">Пам\'ять SD</string>
+  <string name="SDRamToolTip">Зберегти фото безпосередньо на комп\'ютер, оминаючи карту пам\'яті</string>
+  <string name="CapturePhotoToolTip">Зйомка фото</string>
+  <string name="CapturePhotoNoAfToolTip">Зйомка фото без автофокусу</string>
+  <string name="BraketingToolTip">Брекетинг</string>
   <string name="SettingsToolTip">Налаштування</string>
+  <string name="TimeLapseToolTip">Інтервальна зйомка</string>
+  <string name="FullscreenToolTip">На повний екран</string>
+  <string name="LiveViewToolTip">Просмотр наживо</string>
+  <string name="BrowseSessionsToolTip">Дивитися сесії</string>
+  <string name="SelectTagsToolTip">Вибрати мітки</string>
+  <string name="AboutToolTip">Додаткова інформація</string>
+  <string name="Session">Сесія</string>
   <string name="SessionAdd">Додати</string>
   <string name="SessionEdit">Редагувати</string>
+  <string name="SessionDel">Видалити</string>
+  <string name="MainWindowTitle">NCC</string>
   <string name="SettingsWindowTitle">Налаштування</string>
+  <string name="SessionWindowTitle">Сесія[Додати/Змінити]</string>
+  <string name="LiveViewWindowTitle">Просмотр наживо</string>
+  <string name="PresetEditWindowTitle">Редагування пресетів</string>
+  <string name="BraketingWindowTitle">Брекетинг</string>
+  <string name="EditTagWindowTitle">Мітка[Додати/Змінити]</string>
+  <string name="MultipleCameraWindowTitle">Підтримка декількох камер</string>
+  <string name="SavePresetWindowTitle">Зберегти пресет</string>
+  <string name="TimeLapseWindowTitle">Інтервальна зйомка</string>
   <string name="ButtonOk">Гаразд</string>
   <string name="ButtonCancel">Скасувати</string>
   <string name="ButtonAdd">Додати</string>
   <string name="ButtonDelete">Вилучати</string>
   <string name="ButtonEdit">Редагувати</string>
-  <string name="ButtonStop">Стоп</string>
-  <string name="ButtonClose">Зкрити</string>
+  <string name="ButtonAutoFocus">_Автофокус</string>
+  <string name="ButtonCapture">_Зйомка</string>
+  <string name="ButtonRecordMovie">Записати відео</string>
+  <string name="ButtonFreezeImage">Закарбувати зображення</string>
+  <string name="ButtonStart">Почати</string>
+  <string name="ButtonPreview">Попередній просмотр</string>
+  <string name="ButtonStop">Зупинити</string>
+  <string name="ButtonDeletePreset">Видалити пресет</string>
+  <string name="ButtonDeleteProperty">Видалити властивості</string>
+  <string name="ButtonClose">Закрити</string>
   <string name="ButtonSave">Зберегти</string>
-  <string name="LabelTheme">Тема:</string>
-  <string name="LabelFolder">Тека:</string>
+  <string name="ButtonCapturePhotos">Зняти фото</string>
+  <string name="ButtonStartTimeLapse">Почати інтервальну зйомку</string>
+  <string name="ButtonStopTimeLapse">Зупинити інтервальну зйомку</string>
+  <string name="ButtonCreateMovie">Створити відео</string>
+  <string name="ButtonLocateLogFile">Розмістити лог-файл</string>
+  <string name="LabelInterfaceLanguage">Мова інтерфейсу</string>
+  <string name="LabelDisableDriver">Вимкнути рідні драйвери(не рекомендовано)</string>
+  <string name="LabelTheme">Тема</string>
+  <string name="LabelGeneral">Загальне</string>
+  <string name="LabelPreview">Попередній просмотр</string>
+  <string name="LabelPlaySound">Звук після спуску затвора</string>
+  <string name="LabelAutoPreview">Автоматичний попередній просмотр</string>
+  <string name="LabelPreviewAfterCapture">Показати зображення після зйомки на повному екрані</string>
+  <string name="LabelPreviewTime">Попередній просмотр в сек.</string>
+  <string name="LabelPreviewInLIveView">Показати зображення після зйомки</string>
+  <string name="LabelLIveViewImageFreeze">Затримка попередній просмотр в сек</string>
+  <string name="LabelRotateImage">Повернути зображення</string>
+  <string name="LabelDontLoadThumbs">Не завантажувати превьюшки</string>
+  <string name="LabelFullscrenBack">Тло вікна на повний екран</string>
+  <string name="LabelTriggers">Тригери</string>
+  <string name="LabelUseKeybordToTrigger">Використовувати клавіатуру для зйомки</string>
+  <string name="LabelWebserver">Вебсервер</string>
+  <string name="LabelUseWebserver">Використовувати вебсервер</string>
+  <string name="LabelFocusAndLiveview">Просмотр наживо</string>
+  <string name="LabelSmallFocusSstep">Малий крок фокусування</string>
+  <string name="LabelMediumFocusStep">Середній крок фокусування</string>
+  <string name="LabelLargFocusStep">Великий крок фокусування</string>
+  <string name="ReStartToolTip">Потрібно перезавантажити программу, щоб зафіксувати зміни</string>
+  <string name="LabelSessonName">Ім\'я сесії</string>
+  <string name="LabelFolder">Тека</string>
+  <string name="LabelFileNameTemplate">Шаблон імені файлу</string>
+  <string name="LabelCounter">Номерація</string>
+  <string name="LabelUseOriginal">Використовувати ім\'я файлу, створене камерою</string>
+  <string name="LabelUseOriginalToolTip">Ця опція не працює з WIA драйверами</string>
+  <string name="LabelDontDownloadPhotos">Не завантажувати фото на комп\'ютер</string>
+  <string name="LabelAlowFolderChange">Дозволити зміну імені теки через браузер зображень</string>
   <string name="LabelTags">Теґи</string>
+  <string name="LabelManualFocus">Фокусування вручну</string>
+  <string name="LabelGrid">Сітка</string>
+  <string name="LabelLvZoomRation">LV діапазон зумування</string>
+  <string name="LabelFocusStacking">Фокус стекінг</string>
+  <string name="LabelNoOfPhots">Кількість фото</string>
+  <string name="LabelFocusStep">Крок фокусування</string>
+  <string name="LabelLuminosity">Світимість</string>
+  <string name="LabelExposureBracketing">Брекетинг експозиції</string>
+  <string name="LabelExposureBracketingToolTip">Встановити Режим пріоритету апертури та вимкнути режими Авто ISO та Авто баланс білого для надійніших результатів</string>
+  <string name="LabelManualExposureBracketing">Брекетинг ручної експозиції</string>
+  <string name="LabelManualExposureBracketingToolTip">Встановити Ручний режим (М) та вимкнути режими Авто ISO та Авто баланс білого для надійніших результатів</string>
+  <string name="LabelPresetBracketing">Попередні налаштування брекетингу</string>
+  <string name="LabelTagDisplayValue">Значення дісплею</string>
+  <string name="LabelTagValue">Значення</string>
+  <string name="LabelTagIncludeInGroup1">Включити в групу 1</string>
+  <string name="LabelTagIncludeInGroup2">Включити в групу 2</string>
+  <string name="LabelTagIncludeInGroup3">Включити в групу 3</string>
+  <string name="LabelTagIncludeInGroup4">Включити в групу 4</string>
+  <string name="LabelDelay">Затримка(мсек)</string>
+  <string name="LabelNumberOfCaptures">Кількість знімків</string>
+  <string name="LabelWaitTime">Час очікування (сек)</string>
+  <string name="LabelDisableAutofocus">Вимкнути автофокус</string>
+  <string name="LabelConnectedCameras">Під\'єднані камери</string>
+  <string name="LabelPresetName">Ім\'я пресету</string>
+  <string name="LabelTimeLapse">Інтервальна зйомка</string>
+  <string name="LabelSecondsBetweenShots">Секунд між знімками</string>
+  <string name="LabelNumberOfPhotos">Кількість фото</string>
+  <string name="LabelDontAutofocusOnEveryCapture">Не автофокусувати на кожному знімку</string>
+  <string name="LabelCaptureInterval">Інтервал між знімками (ГодХвилСек)</string>
+  <string name="LabelMovieLenght">Довжина відео (ГодХвилСек)</string>
+  <string name="LabelMovieSettings">Налаштування відео</string>
+  <string name="LabelVideoFormat">Формат відео</string>
+  <string name="LabelOutputFile">Ім\'я файлу, що зберігається</string>
+  <string name="LabelFps">Кадрів за секунду</string>
+  <string name="LabelFillImage">Заповнити зображення</string>
+  <string name="LabelCreateMovie">Створити відео</string>
+  <string name="LabelAddVirtualMovingToVideo">Додати віртуальний зсув до відео</string>
+  <string name="LabelMovingSurface">Зсув поверхні (%)</string>
+  <string name="LabelMovingDirection">Напрямок зсуву</string>
+  <string name="LabelMovingDirectionLeftToRight">Зліва направо</string>
+  <string name="LabelMovingDirectionRightToLeft">Зправа наліво</string>
+  <string name="LabelMovingDirectionTopToBottom">Згори донизу</string>
+  <string name="LabelMovingDirectionBottomToTop">З низу догори</string>
+  <string name="LabelMovingDirectionLeftTopToRightBottom">З верхного лівого кута в правий нижній</string>
+  <string name="LabelMovingDirectionRightBottomToLeftTop">З правого нижнього кута в верхній лівий</string>
+  <string name="LabelImageAlignment">Вирівнювання зображення</string>
+  <string name="LabelImageAlignmentLeftTop">Лівий/верхній</string>
+  <string name="LabelImageAlignmentCenter">Середина</string>
+  <string name="LabelImageAlignmentRightBottom">Правий/нижній</string>
+  <string name="LabelVideoCodecProblem">Проблема з відео кодеком</string>
+  <string name="MsgPhotoTransferBegin">Передача фото починається</string>
+  <string name="MsgPhotoTransferDone">Передачу фото закінчено</string>
+  <string name="MsgPhotoTransferError">Помилка передачі! Повідомлення {0}</string>
+  <string name="MsgBulbModeNotSupported">Режим витримки вручну не підтримується!</string>
+  <string name="MsgApplicationUpToDate">Ваш додаток оновлено!</string>
+  <string name="MsgUseSessionEditorTags">Використовуйте редактор сесії для роботи з мітками!</string>
+  <string name="MsgLastSessionCantBeDeleted">Остання сесія не може бути видалена</string>
+  <string name="MsgStopTimeLapse">Інтервальну зйомку не закінчено! Бажаєте зупинити її?</string>
+  <string name="MsgInstallXvidCodec">Кодек Xvid не інстальовано!
+Бажаєте завантажити та встановити його?</string>
+  <string name="MsgDeleteSessionQuestion">Бажаєте продовжити видалення сесії {0} ? Жодного файлу не буде видалено!</string>
+  <string name="MsgBracketingDone">Брекетинг завершено</string>
+  <string name="MsgActionInProgress">Дія триває {0}/{1}</string>
+  <string name="MenuFile">_Файл</string>
+  <string name="MenuReScan">Перевстановити з\'єднання з під\'єднаними камерами</string>
+  <string name="MenuConnectedCameras">Під\'єднані камери</string>
   <string name="MenuExit">Вихід</string>
+  <string name="MenuView">_Просмотр</string>
+  <string name="MenuMultipleCamera">Керування декількома камерами</string>
+  <string name="MenuSelectedCameraProperty">Властивості обраної камери</string>
+  <string name="MenuPresets">Попередні налаштування</string>
+  <string name="MenuPresetsLoad">Завантажити пресет в камеру</string>
   <string name="MenuPresetsSave">Зберегти</string>
   <string name="MenuPresetsEdit">Редагувати</string>
-  <!--15/10/2012-->
-  <!--22/10/2012-->
-  <!--25/10/2012-->
-  <!--26/10/2012-->
-  <!--29/10/2012-->
-  <!--31/10/2012-->
+  <string name="MenuHelp">_Довідка</string>
+  <string name="MenuHomePage">Домашня сторінка</string>
+  <string name="MenuCheckForUpdate">Перевірити наявність оновлень</string>
+  <string name="MenuDonate">Зробити пожертву</string>
+  <string name="MenuAbout">Додаткова інформація</string>
+  <string name="MenuLayout">Макет</string>
+  <string name="MenuLayoutDefault">За замовчуванням</string>
+  <string name="MenuLayoutNormal">Звичайний режим</string>
+  <string name="MenuLayoutGridRight">Сітка зправа</string>
+  <string name="MenuLayoutGrid">Сітка</string>
+  <string name="MenuProperties">Властивості</string>
+  <string name="MenuUseSelectedCameraPreset">Використовувати пресет вибраної камери</string>
+  <string name="LabelExternalViewerPath">Зовнішній проглядач контекстного меню</string>
+  <string name="LabelStayOnTop">Завжди вгорі</string>
+  <string name="LabelDisplay">Дисплей</string>
+  <string name="LabelMotionDetection">Визначення руху</string>
+  <string name="LabelActivateMotionDetection">Активувати визначення руху</string>
+  <string name="LabelCaptureWhenMove">Зробити знімок, коли знайдено рух у кадрі</string>
+  <string name="LabelThreshold">Поріг (%)</string>
+  <string name="LabelWaitMoion">Очікування (сек)</string>
+  <string name="LabelAutofocusBeforeCapture">Автофокусування перед знімком</string>
+  <string name="LabelOpacity">Непрозорість</string>
+  <string name="LabelMotionDetectionType">Тип визначення руху</string>
+  <string name="LabelTwoFramesDifferenceDetector">Детектор різниці між кадрами</string>
+  <string name="LabelSimpleBackgroundModelingDetector">Простий детектор моделювання тла</string>
+  <string name="LabelSmallestBlockSize">Найменший розмір блоку</string>
+  <string name="ButtonHelp">Довідка</string>
   <string name="LabelMenu">Меню</string>
-  <!--03/11/2012-->
-  <!--07/11/2012-->
-  <!--08/11/2012-->
-  <!--14/11/2012-->
-  <!--18/11/2012-->
-  <!--20/11/2012-->
-  <!--21/11/2012-->
+  <string name="MenuForum">Форум</string>
+  <string name="ButtonGetRawCodec">Отримати raw кодек</string>
+  <string name="LabelErrorRecordMovie">Помилка початку відеозапису</string>
+  <string name="LabelNoCardInserted">Немає карти пам\'яті</string>
+  <string name="LabelCardError">Помилка карти пам\'яті</string>
+  <string name="LabelCardNotFormatted">Карту пам\'яті не форматовано</string>
+  <string name="LabelNoFreeAreaInCard">Немає місця на карті</string>
+  <string name="LabelCardBufferNotEmpty">Буфер все ще містить дані для збереження на карті</string>
+  <string name="LabelPcBufferNotEmpty">Буфер все ще містить дані для передачі на компьютер </string>
+  <string name="LabelBufferNotEmpty">Ці відеоданні в буфері</string>
+  <string name="LabelRecordInProgres">Під час запису відеофайлу</string>
+  <string name="LabelCardProtected">Карта пам\'яті захищена</string>
+  <string name="LabelDuringEnlargedDisplayLiveView">Під час збільшеного дисплея в просмотрі наживо</string>
+  <string name="LabelWrongLiveViewType">Вібір режиму просмотру наживо встановлено на фото</string>
+  <string name="LabelNotInApplicationMode">Ця камера не використовується </string>
+  <string name="ButtonResetSettings">Налаштування ресету</string>
+  <string name="LabelUseExternalViewer">Використовувати зовнішній проглядач</string>
+  <string name="LabelExternalPreViewerPath">Шлях до зовнішнього проглядача</string>
+  <string name="LabelExternalPreViewerArgs">Розбіжності зовнішнього прогядача</string>
+  <string name="LabelControl">Керування</string>
+  <string name="LabelExport">Експорт</string>
   <string name="LabelDownload">Завантажити</string>
-  <!--25/11/2012-->
   <string name="DownloadWindowTitle">Завантажити фотографії</string>
   <string name="LabelDeleteFilesAfterTransfer">Видалити файли після передачі</string>
-  <!--26/11/2012-->
-  <!--28/11/2012-->
-  <!--30/11/2012-->
-  <!--05/12/2012-->
-  <!--14/12/2012-->
-  <!--16/12/2012-->
-  <!--04/01/2013-->
-  <!--05/01/2013-->
-  <!--07/01/2013-->
-  <!--12/01/2013-->
-  <!--19/01/2013-->
-  <!--20/01/2013-->
-  <!--29/01/2013-->
-  <!--31/01/2013-->
-  <!--13/03/2013-->
-  <!--17/03/2012-->
-  <!--28/03/2012-->
-  <!--07/05/2013-->
-  <!--04/07/2013-->
-  <!--17/11/2013-->
-  <!--19/01/2014-->
-  <!--27/02/2014-->
-  <!--17.05.2014-->
-  <!--//20/08/2014-->
-  <!--20/08/2014-->
-  <!--20/12/2014-->
+  <string name="LabelAskForDelete">Передані файли буде видалено.
+Бажаєте продовжити?</string>
+  <string name="LabelErrorSetFocusPos">Помилка визначення точки фокусування</string>
+  <string name="LabelErrorUnableFocus">Не можу зфокусуватися</string>
+  <string name="LabelErrorLoadingFileList">Помилка завантаження файлового списку</string>
+  <string name="LabelTransfer">Передача</string>
+  <string name="LabelTransferItem1">1. Зберігати тільки на компьютер</string>
+  <string name="LabelTransferItem2">2. Зберігати тільки на камеру</string>
+  <string name="LabelTransferItem3">3. Зберігати на компьютер та на камеру</string>
+  <string name="MsgDisabledDrivers">Рідні драйвери вимкнуто! Бажаєте увімкнути?</string>
+  <string name="LabelShowFocusPoints">Показати точку фокусування.</string>
+  <string name="LabelMainWindow">Головне вікно</string>
+  <string name="LabelSelect">Вибір</string>
+  <string name="TimeSelectWindowTitle">Вікно вибору</string>
+  <string name="LabelRotateNone">Без змін</string>
+  <string name="LabelRotate90">Повернути на 90град</string>
+  <string name="LabelRotate180">Повернути на 180град</string>
+  <string name="LabelRotate270">Повернути на 270град</string>
+  <string name="LabelRawCodecNotInstalled">Raw кодек не встановлено або невідомий формат файлу</string>
+  <string name="LabelUseCameraCounter">Використовувати номератор камери замість загального номератора</string>
+  <string name="LabelResetCounters">Обнулити номератори</string>
+  <string name="LabelUnabletoDeleteSession">Не можу видалити сесію</string>
+  <string name="LabelWaitingForDevice">Очікування готовності пристрою</string>
+  <string name="LabelAdvanced">Розширені</string>
+  <string name="LabelUseParellelTransfer">Задіяти паралельну передачу файлів</string>
+  <string name="LabelUnHandledError">Сталася помилка програми.
+Перевірте, чи правильні ваші дані, і повторіть дію. Якщо це повідомлення з’являється знову, це свідчить про серйозну несправність програми, тому радимо закрити її.
+
+Помилка:{0}
+
+Бажаєте продовжити?
+(якщо натиснути Так, ви продовжите свою роботу, якщо натиснете Ні, програма закриється)</string>
+  <string name="LabelApplicationError">Помилка програми</string>
+  <string name="LabelWiaNotInstalled">WIA 2.0 не встановлено</string>
+  <string name="LabelRestartTheApplication">Перезапустіть програму!</string>
+  <string name="LabelOutOfMemory">Програма перевантажила оперативну пам\'ять та її буде закрито!</string>
+  <string name="LabelApplicationAlreadyRunning">Програма вже працює</string>
+  <string name="LabelDeleteSession">Видалити сесію</string>
+  <string name="LabelStartCapture">Почати зйомку</string>
+  <string name="LabelStopCapture">Зупинити зйомку</string>
+  <string name="LabelCaptureTime">Час експозиції (сек)</string>
+  <string name="LabelTimeBetweenShots">Інтервал між знімками</string>
+  <string name="LabelDontAutofocus">Не автофокусувати</string>
+  <string name="LabelShowUnTranslatedStringIds">Показати неперекладені ідентифікатори рядків</string>
+  <string name="LabelUseAsMaster">Використовувати як основний</string>
+  <string name="LabelCounterIncrementer">Збільшити номерацію</string>
+  <string name="LabelSelected">Вибрано</string>
+  <string name="LabelNone">Без змін</string>
+  <string name="LabelRuleOfThirds">Правило третин</string>
+  <string name="LabelComboGrid">Сітка</string>
+  <string name="LabelDiagonal">Діагональ</string>
+  <string name="LabelSplit">Розділити</string>
+  <string name="LabelTools">Інструменти</string>
+  <string name="LabelMFError">Камера в режимі фокусування вручну</string>
+  <string name="LabelNotAFSError">Камера в режимі AF-S стежного автофокусу</string>
+  <string name="LabelSequenceError">Помилка серії</string>
+  <string name="LabelFullyPressedButtonError">Помилка повного натиснення кнопки</string>
+  <string name="LabelApertureValueError">Значення апертури встановлюється кільцем апертури об’єктива.</string>
+  <string name="LabelBulbError">Помилка експонування вручну</string>
+  <string name="LabelDuringCleaningMirror">Під час операції очищення </string>
+  <string name="LabelDuringInsufficiencyBattery">Під час відсутності батареї</string>
+  <string name="LabelTTLError">Помилка TTL</string>
+  <string name="LabelNonCPULEnseError">Під\'єднано невідповідний об\'єктив та режим експозиціі не ручний М</string>
+  <string name="LabelImageInRAM">Це зображення буде записано на SDRAM</string>
+  <string name="LabelNoCardInsertedError">Це зображення буде записано на карту або на карту та  SDRAM,
+та карту не встановлено та спуск без карти заблоковано</string>
+  <string name="LabelCommandProcesingError">Під час обробки командою зйомки</string>
+  <string name="LabelShoutingInProgress">Режим зйомки ЕФЕКТИ</string>
+  <string name="LabelOverHeatedError">Просмотр наживо не може бути активовано з причини перегріву матриці камери</string>
+  <string name="LabelCardProtectedError">Карта пам\'яті захищена</string>
+  <string name="LabelSettingsLiveView">Просмотр наживо</string>
+  <string name="MenuSession">Сесія</string>
+  <string name="LabelPluginProperties">Властивості</string>
+  <string name="LabelAutoFocusBeforCapture">Автофокусування перед знімком</string>
+  <string name="LabelValue">Значення</string>
+  <string name="LabelCapturePhoto">Зйомка фото</string>
+  <string name="LabelRecordVideo">Зйомка відео</string>
 </resources>

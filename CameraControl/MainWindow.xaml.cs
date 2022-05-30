@@ -322,8 +322,16 @@ namespace CameraControl
                 CameraPreset preset = ServiceProvider.Settings.GetPreset(property.DefaultPresetName);
                 // multiple canon cameras block with this settings
 
-                if ((cameraDevice is CanonSDKBase && ServiceProvider.Settings.LoadCanonTransferMode) || !(cameraDevice is CanonSDKBase))
-                    cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
+                try
+                {
+                    if ((cameraDevice is CanonSDKBase && ServiceProvider.Settings.LoadCanonTransferMode) || !(cameraDevice is CanonSDKBase))
+                        cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
+                }
+                catch (Exception exception)
+                {
+                    Log.Error("Unable unable to set TransferMode", exception);
+                }
+
 
                 Log.Debug("cameraDevice_CameraInitDone 1a");
                 if (ServiceProvider.Settings.SyncCameraDateTime)
@@ -354,6 +362,7 @@ namespace CameraControl
             var scriptFile = ServiceProvider.Settings.StartupScript;
             if (scriptFile != null && File.Exists(scriptFile))
             {
+                Log.Debug("Startup script " + scriptFile);
                 if (Path.GetExtension(scriptFile.ToLower()) == ".tcl")
                 {
                     try
@@ -864,6 +873,7 @@ namespace CameraControl
                     {
                         StackLayout.Children.Clear();
                         LayoutNormal control = new LayoutNormal();
+                        PreviewPanel.DataContext = control.ZoomAndPanControl;
                         StackLayout.Children.Add(control);
                     }
                     break;
@@ -1061,24 +1071,24 @@ namespace CameraControl
                 : WindowsCmdConsts.Prev_Image);
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var res = e.GetPosition(PrviewImage);
-            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
-                                                          (res.X / PrviewImage.ActualWidth) + "_" +
-                                                          (res.Y / PrviewImage.ActualHeight));
-        }
+        //private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    var res = e.GetPosition(PrviewImage);
+        //    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
+        //                                                  (res.X / PrviewImage.ActualWidth) + "_" +
+        //                                                  (res.Y / PrviewImage.ActualHeight));
+        //}
 
-        private void PrviewImage_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var res = e.GetPosition(PrviewImage);
-                ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
-                                                              (res.X / PrviewImage.ActualWidth) + "_" +
-                                                              (res.Y / PrviewImage.ActualHeight) + "_!");
-            }
-        }
+        //private void PrviewImage_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (e.LeftButton == MouseButtonState.Pressed)
+        //    {
+        //        var res = e.GetPosition(PrviewImage);
+        //        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ZoomPoint + "_" +
+        //                                                      (res.X / PrviewImage.ActualWidth) + "_" +
+        //                                                      (res.Y / PrviewImage.ActualHeight) + "_!");
+        //    }
+        //}
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {

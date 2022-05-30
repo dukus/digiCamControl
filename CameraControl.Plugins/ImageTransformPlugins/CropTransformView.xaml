@@ -28,6 +28,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -57,5 +58,11 @@
 
         <Label Grid.Row="10" Grid.Column="0" Content="Live view selected area" HorizontalAlignment="Right"/>
         <CheckBox Grid.Row="10" Grid.Column="1" Margin="3" IsChecked="{Binding FromLiveView}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="11" Grid.Column="0" Content="Crop empty space " HorizontalAlignment="Right"/>
+        <CheckBox Grid.Row="11" Grid.Column="1" Margin="3" IsChecked="{Binding Trim}" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="12" Grid.Column="0" Content="Crop sensitivity" HorizontalAlignment="Right"/>
+        <Slider Grid.Row="12" Grid.Column="1" Margin="3" Minimum="0" Maximum="+100" Value="{Binding TrimSensitivity}" AutoToolTipPlacement="TopLeft" TickFrequency="5" TickPlacement="BottomRight" IsEnabled="{Binding Trim}"/>
     </Grid>
 </UserControl>

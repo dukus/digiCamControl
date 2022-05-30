@@ -45,11 +45,12 @@ using CameraControl.Classes;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Classes.Queue;
-using CameraControl.Core.Controls.ZoomAndPan;
+//using CameraControl.Core.Controls.ZoomAndPan;
 using CameraControl.Core.Wpf;
 using CameraControl.Devices;
 using CameraControl.ViewModel;
 using Microsoft.VisualBasic.FileIO;
+using ZoomAndPan;
 
 #endregion
 
@@ -85,7 +86,7 @@ namespace CameraControl.Layouts
         {
             if (ZoomAndPanControl != null)
             {
-                ZoomAndPanControl.ContentScaleChanged -= ZoomAndPanControl_ContentScaleChanged;
+               // ZoomAndPanControl.ContentScaleChanged -= ZoomAndPanControl_ContentScaleChanged;
                 ZoomAndPanControl.ContentOffsetXChanged -= ZoomAndPanControl_ContentScaleChanged;
                 ZoomAndPanControl.ContentOffsetYChanged -= ZoomAndPanControl_ContentScaleChanged;
             }
@@ -102,11 +103,14 @@ namespace CameraControl.Layouts
             if (_selectedItem != ServiceProvider.Settings.SelectedBitmap.FileItem)
             {
                 ServiceProvider.Settings.SelectedBitmap.FileItem = _selectedItem;
-                _worker.RunWorkerAsync(_selectedItem);
+                if (ServiceProvider.Settings.LoadFullRespreview)
+                    _worker.RunWorkerAsync(true);
+                else
+                    _worker.RunWorkerAsync(_selectedItem);
             }
             else
             {
-                if (LayoutViewModel.ZoomIndex>0)
+                if (LayoutViewModel.ZoomIndex > 0)
                 {
                     LoadFullRes();
                 }
@@ -133,7 +137,7 @@ namespace CameraControl.Layouts
                 bool delete = false;
                 if (filestodelete.Count > 1)
                 {
-                    delete = MessageBox.Show("Multile files are selected !! Do you really want to delete selected files ?", "Delete files",
+                    delete = MessageBox.Show("Multiple files are selected!! Do you really want to delete selected files?", "Delete files",
                         MessageBoxButton.YesNo) == MessageBoxResult.Yes;
                 }
                 else
@@ -193,7 +197,7 @@ namespace CameraControl.Layouts
             }
             if (ZoomAndPanControl != null)
             {
-                ZoomAndPanControl.ContentScaleChanged += ZoomAndPanControl_ContentScaleChanged;
+               // ZoomAndPanControl.ContentScaleChanged += ZoomAndPanControl_ContentScaleChanged;
                 ZoomAndPanControl.ContentOffsetXChanged += ZoomAndPanControl_ContentScaleChanged;
                 ZoomAndPanControl.ContentOffsetYChanged += ZoomAndPanControl_ContentScaleChanged;
             }
@@ -201,14 +205,14 @@ namespace CameraControl.Layouts
 
         private void ZoomAndPanControl_ContentScaleChanged(object sender, EventArgs e)
         {
-            GeneratePreview();
-            var i = Math.Round(ZoomAndPanControl.FitScale(), 4);
-            var freeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
-                                       Math.Round(ZoomAndPanControl.FitScale(), 4);
-            if (!freeZoom)
-            {
-                LayoutViewModel.RefresZoomIndex(0);
-            }
+            //GeneratePreview();
+            //var i = Math.Round(ZoomAndPanControl.FitScale(), 4);
+            //var freeZoom = Math.Round(ZoomAndPanControl.ContentScale, 4) >
+            //                           Math.Round(ZoomAndPanControl.FitScale(), 4);
+            //if (!freeZoom)
+            //{
+            //    LayoutViewModel.RefresZoomIndex(0);
+            //}
         }
 
         private void GeneratePreview()
@@ -220,31 +224,36 @@ namespace CameraControl.Layouts
 
                 if (bitmap != null)
                 {
-                    if (ZoomAndPanControl == null)
-                    {
-                        bitmap.Freeze();
-                        ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
-                    }
-                    else
-                    {
-                        if (ServiceProvider.Settings.SelectedBitmap.FileItem.IsMovie)
-                        {
-                            ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
-                            return;
-                        }
-                        int dw = (int)(ZoomAndPanControl.ContentViewportWidthRation * bitmap.PixelWidth);
-                        int dh = (int)(ZoomAndPanControl.ContentViewportHeightRation * bitmap.PixelHeight);
-                        int fw = (int)(ZoomAndPanControl.ContentZoomFocusXRation * bitmap.PixelWidth);
-                        int fh = (int)(ZoomAndPanControl.ContentZoomFocusYRation * bitmap.PixelHeight);
+                    if (ServiceProvider.Settings.SelectedBitmap.FileItem.RotationAngle != 0)
+                        bitmap.Rotate(ServiceProvider.Settings.SelectedBitmap.FileItem.RotationAngle);
+                    bitmap.Freeze();
+                    ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
 
-                        bitmap.FillRectangle2(0, 0, bitmap.PixelWidth, bitmap.PixelHeight,
-                            Color.FromArgb(128, 128, 128, 128));
-                        bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2),
-                            Color.FromArgb(128, 128, 128, 128));
-                        bitmap.DrawRectangle(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2), Colors.White);
-                        bitmap.Freeze();
-                        ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
-                    }
+                    //    if (ZoomAndPanControl == null)
+                    //    {
+                    //        bitmap.Freeze();
+                    //        ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                    //    }
+                    //    else
+                    //    {
+                    //        if (ServiceProvider.Settings.SelectedBitmap.FileItem.IsMovie)
+                    //        {
+                    //            ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                    //            return;
+                    //        }
+                    //        int dw = (int)(ZoomAndPanControl.ContentViewportWidthRation * bitmap.PixelWidth);
+                    //        int dh = (int)(ZoomAndPanControl.ContentViewportHeightRation * bitmap.PixelHeight);
+                    //        int fw = (int)(ZoomAndPanControl.ContentZoomFocusXRation * bitmap.PixelWidth);
+                    //        int fh = (int)(ZoomAndPanControl.ContentZoomFocusYRation * bitmap.PixelHeight);
+
+                    //        bitmap.FillRectangle2(0, 0, bitmap.PixelWidth, bitmap.PixelHeight,
+                    //            Color.FromArgb(128, 128, 128, 128));
+                    //        bitmap.FillRectangleDeBlend(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2),
+                    //            Color.FromArgb(128, 128, 128, 128));
+                    //        bitmap.DrawRectangle(fw - (dw / 2), fh - (dh / 2), fw + (dw / 2), fh + (dh / 2), Colors.White);
+                    //        bitmap.Freeze();
+                    //        ServiceProvider.Settings.SelectedBitmap.Preview = bitmap;
+                    //    }
                 }
             }
             catch (Exception)
@@ -316,7 +325,6 @@ namespace CameraControl.Layouts
 
             ServiceProvider.Settings.SelectedBitmap.DisplayImage =
                 BitmapLoader.Instance.LoadImage(ServiceProvider.Settings.SelectedBitmap.FileItem, fullres);
-            ServiceProvider.Settings.SelectedBitmap.Notify();
             BitmapLoader.Instance.SetData(ServiceProvider.Settings.SelectedBitmap,
                               ServiceProvider.Settings.SelectedBitmap.FileItem);
             BitmapLoader.Highlight(ServiceProvider.Settings.SelectedBitmap,
@@ -340,6 +348,8 @@ namespace CameraControl.Layouts
                     ZoomToFocus();
             }
             GeneratePreview();
+            LayoutViewModel.DoZoom();
+            ServiceProvider.Settings.SelectedBitmap.Notify();
         }
 
         public void LoadFullRes()
@@ -553,12 +563,12 @@ namespace CameraControl.Layouts
                             double y;
                             double.TryParse(vals[1], out x);
                             double.TryParse(vals[2], out y);
-                            if (cmd.EndsWith("!"))
-                                ZoomAndPanControl.SnapToRation(x, y);
-                            else
-                            {
-                                ZoomAndPanControl.AnimatedSnapToRation(x, y);
-                            }
+                            //if (cmd.EndsWith("!"))
+                            //  //  ZoomAndPanControl.SnapToRation(x, y);
+                            //else
+                            //{
+                            //  //  ZoomAndPanControl.AnimatedSnapToRation(x, y);
+                            //}
 
                         }
                     }
@@ -658,21 +668,21 @@ namespace CameraControl.Layouts
             }
             else if (e.Delta < 0)
             {
-                // don't allow zoomout les that original image 
-                if (ZoomAndPanControl.ContentScale - 0.1 > ZoomAndPanControl.FitScale())
-                {
-                    ZoomAndPanControl.ZoomOut(curContentMousePoint);
-                }
-                else
-                {
-                    ZoomAndPanControl.ScaleToFit();
-                }
+                //// don't allow zoomout les that original image 
+                //if (ZoomAndPanControl.ContentScale - 0.1 > ZoomAndPanControl.FitScale())
+                //{
+                //    ZoomAndPanControl.ZoomOut(curContentMousePoint);
+                //}
+                //else
+                //{
+                //    ZoomAndPanControl.ScaleToFit();
+                //}
                 ZoomOut(curContentMousePoint);
             }
-            if (ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale())
-            {
-                LoadFullRes();
-            }
+            //if (ZoomAndPanControl.ContentScale > ZoomAndPanControl.FitScale())
+            //{
+            //    LoadFullRes();
+            //}
 
         }
 
@@ -683,7 +693,7 @@ namespace CameraControl.Layouts
         /// </summary>
         private void ZoomOut(Point contentZoomCenter)
         {
-            ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
+            //ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
         }
 
         /// <summary>
@@ -691,7 +701,7 @@ namespace CameraControl.Layouts
         /// </summary>
         private void ZoomIn(Point contentZoomCenter)
         {
-            ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
+            //ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)

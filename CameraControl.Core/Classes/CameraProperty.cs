@@ -195,6 +195,7 @@ namespace CameraControl.Core.Classes
         private LiveviewSettings _liveviewSettings;
         private int _sortOrder;
         private WindowCommandItem _keyTrigger;
+        private WindowCommandItem _keyTriggerNoAF;
         private int _delay;
         private bool _liveViewInSecMonitor;
         private bool _saveLiveViewWindow;
@@ -239,7 +240,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
-
+        public WindowCommandItem KeyTriggerNoAF
+        {
+          get { return _keyTriggerNoAF; }
+          set
+          {
+            _keyTriggerNoAF = value;
+            NotifyPropertyChanged("KeyTriggerNoAF");
+          }
+        }
+       
         public bool SaveLiveViewWindow
         {
             get { return _saveLiveViewWindow; }
@@ -259,6 +269,7 @@ namespace CameraControl.Core.Classes
             Counter = 0;
             LiveviewSettings = new LiveviewSettings();
             KeyTrigger = new WindowCommandItem();
+            KeyTriggerNoAF = new WindowCommandItem();
             SaveLiveViewWindow = true;
             WindowRect = new Rect();
         }

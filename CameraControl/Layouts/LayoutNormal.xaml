@@ -10,8 +10,8 @@
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:classes="clr-namespace:CameraControl.Classes"
                     xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-                    xmlns:zoomAndPan="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:zoomandpan="clr-namespace:ZoomAndPan;assembly=ZoomAndPan"
                     mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="989">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -40,16 +40,17 @@
                 <Grid.LayoutTransform>
                     <RotateTransform  Angle="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.RotationAngle}" />
                 </Grid.LayoutTransform>
-                <zoomAndPan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" >
-                <Image Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Center" Margin="15" Stretch="Uniform" Width="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Width}" Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Height}">
+                <zoomandpan:ZoomAndPanControl x:Name="zoomAndPanControl" MouseWheel="zoomAndPanControl_MouseWheel" Background="Transparent" >
+                    <zoomandpan:ImageColorPicker Name="Image" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.DisplayImage}" HorizontalAlignment="Center" Margin="15" Stretch="Uniform" Width="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Width}" Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileInfo.Height}"
+                       Scale="{Binding ElementName=ZoomAndPanControl, Path=ViewportZoom}">
                     <Image.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path=ImageDoubleClickCommand}" />
                     </Image.InputBindings>
                     <Image.Effect>
                         <DropShadowEffect ShadowDepth="10" Color="Black" BlurRadius="20" />
                     </Image.Effect>
-                </Image>
-            </zoomAndPan:ZoomAndPanControl>
+                </zoomandpan:ImageColorPicker>
+            </zoomandpan:ZoomAndPanControl>
             </Grid>
             <MediaElement Name="VideoControl" Grid.Column="0" Grid.RowSpan="3" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"
                   Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Manual" UnloadedBehavior="Close" >

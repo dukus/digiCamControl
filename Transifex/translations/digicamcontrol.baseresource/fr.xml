@@ -79,6 +79,7 @@
   <string name="SessionAdd">Ajouter</string>
   <string name="SessionEdit">Éditer</string>
   <string name="SessionDel">Supprimer</string>
+  <string name="MainWindowTitle">NCC</string>
   <string name="SettingsWindowTitle">Configuration</string>
   <string name="SessionWindowTitle">Session [Ajouter/Editer]</string>
   <string name="LiveViewWindowTitle">Live view</string>
@@ -120,6 +121,7 @@
 une capture en plein écran</string>
   <string name="LabelPreviewTime">Temps de prévisualisation en seconde</string>
   <string name="LabelPreviewInLIveView">Prévisualiser l\'image après une photographie en Live View</string>
+  <string name="LabelLIveViewImageFreeze">Gel des images Live View en secondes :</string>
   <string name="LabelRotateImage">Rotation image</string>
   <string name="LabelDontLoadThumbs">Ne pas charger les vignettes</string>
   <string name="LabelFullscrenBack">Arrière plan en plein écran</string>
@@ -178,6 +180,7 @@ une capture en plein écran</string>
   <string name="LabelFillImage">Remplir l\'image</string>
   <string name="LabelCreateMovie">Créer une vidéo</string>
   <string name="LabelAddVirtualMovingToVideo">Ajouter des mouvements virtuel à la vidéo</string>
+  <string name="LabelMovingSurface">Superficie du mouvement (%)</string>
   <string name="LabelMovingDirection">Direction du mouvement</string>
   <string name="LabelMovingDirectionLeftToRight">Gauche à droite</string>
   <string name="LabelMovingDirectionRightToLeft">Droite à gauche</string>
@@ -240,6 +243,7 @@ Aucun fichier ne sera supprimé !</string>
   <string name="LabelOpacity">Opacité</string>
   <string name="LabelMotionDetectionType">Type de détection de mouvement</string>
   <string name="LabelTwoFramesDifferenceDetector">Détection de différence entre deux images</string>
+  <string name="LabelSimpleBackgroundModelingDetector">Détecteur de modélisation d\'arrière-plan simple</string>
   <string name="LabelSmallestBlockSize">Plus petite taille de bloc</string>
   <string name="ButtonHelp">Aide</string>
   <string name="LabelMenu">Menu</string>
@@ -330,6 +334,8 @@ Souhaitez-vous continuer?
   <string name="LabelTTLError">Erreur TTL</string>
   <string name="LabelNonCPULEnseError">Un objectif sans CPU est monté et le mode d\'exposition n\'est pas M</string>
   <string name="LabelImageInRAM">Il y a une image dont la destination d\'enregistrement est la SDRAM.</string>
+  <string name="LabelNoCardInsertedError">La destination de l\'enregistrement est la carte ou de la carte et la SDRAM, 
+et la carte n\'est pas insérée avec la sortie désactivée sans carte présente.</string>
   <string name="LabelCommandProcesingError">Pendant le traitement de la commande de prise de vue</string>
   <string name="LabelShoutingInProgress">Mode de prise de vue est Effects</string>
   <string name="LabelOverHeatedError">Le mode Live View ne peut pas démarrer car le capteur de température de l\'appareil indique une température trop élevée</string>
@@ -373,10 +379,12 @@ Souhaitez-vous continuer?
   <string name="LabelClearCache">supprimer cache</string>
   <string name="LabelShowMagnifierInFullSccreen">Montrer la loupe en plein écran</string>
   <string name="LabelPHDGuiding">Guidage PHD</string>
+  <string name="LabelWaitPHDGuiding">Attente PHD (secondes)</string>
   <string name="LabelCountDown">compte à rebours</string>
   <string name="LabelCurrentEvent">Événement courant</string>
   <string name="LabelRemainingCaptures">Photos restantes</string>
   <string name="LabelLiveViewRotation">rotation Live view </string>
+  <string name="LabelAutomaticallyGuiding">Guidage PHD automatique après prise de vue</string>
   <string name="LabelAutoRotate">Rotation automatique</string>
   <string name="LabelReset">Réinitialiser</string>
   <string name="LabelFocus">Focus</string>
@@ -414,6 +422,8 @@ Souhaitez-vous continuer?
   <string name="LabelImageSequencer">séquenceur d\'image</string>
   <string name="LabelLoop">boucle</string>
   <string name="LabelProgress">progression</string>
+  <string name="LabelStartImageFrame">Démarrage trame image</string>
+  <string name="LabelStopImageFrame">Arrêt trame image</string>
   <string name="LabelPlayVideo">play</string>
   <string name="LabelLoadPresetAllCamera">Charger les réglages dans tous les appareils</string>
   <string name="LabelBackUpFolder">Dossier de la copie de sauvegarde</string>
