@@ -315,7 +315,7 @@ namespace CameraControl.ViewModel
         {
             try
             {
-                var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.xml");
+                var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.json");
                 var session = new PhotoSession();
                 // copy session with default name
                 if (File.Exists(defaultsessionfile))

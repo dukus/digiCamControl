@@ -634,6 +634,9 @@ namespace CameraControl
                 if (session.ExternalData != null)
                     session.ExternalData.FileName = fileName;
 
+                if (ServiceProvider.Settings.SkipAddingFileToSession)
+                    return;
+
                 // prevent crash og GUI when item count updated
                 Dispatcher.Invoke(new Action(delegate
                 {

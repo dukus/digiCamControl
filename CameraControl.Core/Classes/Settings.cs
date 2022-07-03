@@ -933,6 +933,16 @@ namespace CameraControl.Core.Classes
             }
         }
 
+        public bool NewSessionOnStartUp
+        {
+            get { return _newSessionOnStartUp; }
+            set
+            {
+                _newSessionOnStartUp = value;
+                NotifyPropertyChanged("NewSessionOnStartUp");
+            }
+        }
+
         public bool FullScreenInSecondaryMonitor { get; set; }
         public bool Autorotate { get; set; }
 
@@ -949,6 +959,15 @@ namespace CameraControl.Core.Classes
         }
 
         public bool WiaDeviceSupport { get; set; }
+
+        private bool _skipAddingFileToSession;
+        private bool _newSessionOnStartUp;
+
+        public bool SkipAddingFileToSession
+        {
+            get { return _skipAddingFileToSession; }
+            set { _skipAddingFileToSession = value; }
+        }
 
         public ObservableCollection<PluginSetting> PluginSettings { get; set; }
 
@@ -1149,7 +1168,7 @@ namespace CameraControl.Core.Classes
         }
 
         /// <summary>
-        /// Load files attached to a session
+        /// Load/remove files attached to a session
         /// </summary>
         /// <param name="session"></param>
         public void LoadData(PhotoSession session)
@@ -1160,6 +1179,13 @@ namespace CameraControl.Core.Classes
                     return;
                 if (Directory.Exists(session.Folder))
                 {
+                    // clear file list if adding file to session  is disable 
+                    if(ServiceProvider.Settings.SkipAddingFileToSession)
+                    {
+                        session.Files.Clear();
+                        return;
+                    }
+
                     if (session.AlowFolderChange && session.ReloadOnFolderChange)
                     {
                         session.Files.Clear();
@@ -1444,16 +1470,52 @@ namespace CameraControl.Core.Classes
                         Log.Error("Error loading session :" + sesion, e);
                     }
                 }
-
             }
-            if (PhotoSessions.Count > 0)
+            if (NewSessionOnStartUp)
             {
-                DefaultSession = GetSession(DefaultSessionName) ?? PhotoSessions[0];
-            }
-            if (PhotoSessions.Count == 0)
-            {
+                DefaultSession = GenerateNewSession();
                 Add(DefaultSession);
             }
+            else
+            {
+                if (PhotoSessions.Count > 0)
+                {
+                    DefaultSession = GetSession(DefaultSessionName) ?? PhotoSessions[0];
+                }
+                if (PhotoSessions.Count == 0)
+                {
+                    Add(DefaultSession);
+                }
+            }
+        }
+
+        private PhotoSession GenerateNewSession()
+        {
+            var session = new PhotoSession();
+            session.Name = "Session";
+            var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.json");
+            // copy session with default name
+            if (File.Exists(defaultsessionfile))
+            {
+                session = ServiceProvider.Settings.LoadSession(defaultsessionfile);
+                session.Files.Clear();
+            }
+            var i = 1;
+            var sessiomname = session.Name;
+            while (true)
+            {
+                if(PhotoSessions.Any(x=>x.Name.ToLower()== (sessiomname + i.ToString()).ToLower() &&x.Files.Count>0 ))
+                {
+                    i++;
+                }
+                else
+                {
+                    sessiomname = sessiomname + i.ToString();
+                    break;
+                }
+            }
+            session.Name = sessiomname;
+            return session;
         }
 
         public void LoadPresetData()

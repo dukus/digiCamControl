@@ -61,6 +61,7 @@
                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                             <CheckBox Margin="4" IsChecked="{Binding MinimizeToTrayIcon}" Content="{T:TranslateExtension LabelMinimizeToTryIcon}"/>
                             <CheckBox Margin="4" IsChecked="{Binding StartupWithWindows}" Content="{T:TranslateExtension LabelStartupWithWindows}"/>
+                            <CheckBox Margin="4" IsChecked="{Binding NewSessionOnStartUp}" Content="{T:TranslateExtension LabelStartNewSessionOnSTartup}"/>
 
                             <Grid >
                                 <Grid.ColumnDefinitions>
@@ -88,6 +89,7 @@
                             <CheckBox Margin="4" IsChecked="{Binding Autorotate}" Content="{T:TranslateExtension LabelAutorotate}" />
                             <CheckBox Margin="4" IsChecked="{Binding DontLoadThumbnails}" Content="{T:TranslateExtension LabelDontLoadThumbs}" />
                             <CheckBox Margin="4" IsChecked="{Binding LoadFullRespreview}" Content="{T:TranslateExtension LabelFullResPreview}" />
+                            <CheckBox Margin="4" IsChecked="{Binding SkipAddingFileToSession}" Content="Skip adding file to session" />
                             
                             <ComboBox SelectedIndex="{Binding RotateIndex}" Margin="4"
                                       materialDesign:HintAssist.Hint="{T:TranslateExtension LabelRotateImage}"

@@ -523,6 +523,7 @@ namespace CameraControl.Core.Translation
         public static string LabelMinimizeToTryIcon = "Minimize to tray icon";
         public static string LabelStartMinimized = "Start minimized";
         public static string LabelStartupWithWindows = "Start when Windows starts";
+        public static string LabelStartNewSessionOnSTartup = "Start new session on startup";
         public static string LabelSelectSeries = "Select photos in same series";
         public static string LabelCaptureDelay = "Capture delay";
         public static string LabelAutoExportPlugins = "Auto Export Plugins";

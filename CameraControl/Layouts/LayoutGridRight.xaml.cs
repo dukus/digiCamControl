@@ -44,10 +44,14 @@ namespace CameraControl.Layouts
             InitializeComponent();
             ImageLIst = ImageLIstBox;
             //ZoomAndPanControl = zoomAndPanControl;
+            InitServices();
+            if (ZoomAndPanControl == null)
+                return;
+
             LayoutViewModel = (LayoutViewModel)ZoomAndPanControl.DataContext;
             MediaElement = VideoControl;
             content = Image;
-            InitServices();
+
         }
 
        

@@ -15,15 +15,24 @@ namespace ZoomAndPan
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            //NOTE: Cannot pass ExtentWidth or ExtentHeight as one of the values because it does not seem to update
-            var zoomAndPanControl = (ZoomAndPanControl)values[3];
-            if (values[0] == null || zoomAndPanControl == null) return DependencyProperty.UnsetValue;
-            var size = (double)values[0];
-            var offset = (double)values[1];
-            var zoom = (double)values[2];
-            return Math.Max((parameter?.ToString().ToLower() == "width")
-                 ? Math.Min(zoomAndPanControl.ExtentWidth / zoom - offset, size)
-                 : Math.Min(zoomAndPanControl.ExtentHeight / zoom - offset, size), 0);
+            try
+            {
+                //NOTE: Cannot pass ExtentWidth or ExtentHeight as one of the values because it does not seem to update
+                var zoomAndPanControl = (ZoomAndPanControl)values[3];
+                if (values[0] == null || zoomAndPanControl == null) return DependencyProperty.UnsetValue;
+                var size = (double)values[0];
+                var offset = (double)values[1];
+                var zoom = (double)values[2];
+                return Math.Max((parameter?.ToString().ToLower() == "width")
+                     ? Math.Min(zoomAndPanControl.ExtentWidth / zoom - offset, size)
+                     : Math.Min(zoomAndPanControl.ExtentHeight / zoom - offset, size), 0);
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return null;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

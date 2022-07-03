@@ -311,7 +311,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="Both" PanningRatio="2">
                     <StackPanel>
                         <materialDesign:Card Margin="4">
-                            <Expander Header="Preview" IsExpanded="True">
+                            <Expander Header="Preview" IsExpanded="True" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPreviewPanel, Converter={StaticResource BooleanToVisibilityConverter1}}">
                                 <Grid>
                                     <Image x:Name="PreviewImage" Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.Preview}" Height="185" Margin="4">
                                         <Image.LayoutTransform>
