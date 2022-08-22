@@ -60,6 +60,7 @@
                                        materialDesign:HintAssist.Hint="{T:TranslateExtension LabelInterfaceLanguage}"
                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                             <CheckBox Margin="4" IsChecked="{Binding MinimizeToTrayIcon}" Content="{T:TranslateExtension LabelMinimizeToTryIcon}"/>
+                            <CheckBox Margin="4" IsChecked="{Binding StartMinimized}" Content="{T:TranslateExtension LabelStartMinimized}"/>
                             <CheckBox Margin="4" IsChecked="{Binding StartupWithWindows}" Content="{T:TranslateExtension LabelStartupWithWindows}"/>
                             <CheckBox Margin="4" IsChecked="{Binding NewSessionOnStartUp}" Content="{T:TranslateExtension LabelStartNewSessionOnSTartup}"/>
 
