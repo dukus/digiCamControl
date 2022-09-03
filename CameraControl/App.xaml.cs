@@ -82,8 +82,8 @@ namespace CameraControl
                 return;
             }
 
-            ThemeManager.AddAccent("Astro", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroAccent.xaml"));
-            ThemeManager.AddAppTheme("Black", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroTheme.xaml"));
+            //ThemeManager.AddAccent("Astro", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroAccent.xaml"));
+            //ThemeManager.AddAppTheme("Black", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroTheme.xaml"));
 
             ServiceProvider.Branding = Branding.LoadBranding();
             if (ServiceProvider.Branding.ShowStartupScreen)

@@ -16,7 +16,7 @@ namespace Plugin.DeviceControl
     /// <summary>
     /// Interaction logic for WaterDropWnd.xaml
     /// </summary>
-    public partial class WaterDropWnd :MetroWindow, IToolPlugin
+    public partial class WaterDropWnd :Window, IToolPlugin
     {
         private SerialPort sp = new SerialPort();
         private object _locker = new object();

@@ -1,20 +1,14 @@
-﻿<Controls:MetroWindow x:Class="CameraControl.windows.TagSelectorWnd"
+﻿<Window x:Class="CameraControl.windows.TagSelectorWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{T:TranslateExtension LabelTagSelector}" Height="429" Width="769" Closing="Window_Closing" xmlns:my="clr-namespace:CameraControl.windows"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      WindowStyle="ToolWindow" UseLayoutRounding="True" ShowMaxRestoreButton="False">
+                      WindowStyle="ToolWindow" UseLayoutRounding="True" >
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource  {x:Type ListBox}}">
+             <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource  {x:Type ListBox}}">
                 <!-- Set the ItemTemplate of the ListBox to a DataTemplate which
            explains how to display an object of type BitmapImage. -->
                 <Setter Property="ItemTemplate">
@@ -79,4 +73,4 @@
             <Label Content="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.SelectedTag4.DisplayValue}" />
         </StackPanel>
     </Grid>
-</Controls:MetroWindow>
+</Window>

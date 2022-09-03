@@ -12,7 +12,6 @@
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:wpf="clr-namespace:CameraControl.Core.Wpf;assembly=CameraControl.Core"
                       xmlns:local1="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
-                      xmlns:ControlzEx="clr-namespace:ControlzEx;assembly=MahApps.Metro"
                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                       x:Class="CameraControl.windows.LiveViewWnd"
     
@@ -31,17 +30,9 @@
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />-->
                 <ResourceDictionary Source="../Resources/Icons.xaml" />
                 <ResourceDictionary Source="../Resources/MoreIcons.xaml" />
-                <!--<ResourceDictionary Source="../Styles/ExpanderEx.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Colors.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/VS/Styles.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />-->
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
@@ -499,19 +490,19 @@
 
                                 <Label Grid.Row="2" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelScaling}" Grid.ColumnSpan="3" Padding="1"/>
                                 <Slider Grid.Row="3" Grid.Column="0" Margin="2,2,3,2" Minimum="-100" Maximum="100" Value="{Binding OverlayScale}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" IsEnabled="{Binding OverlayActivated}"/>
-                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayScale}" IsEnabled="{Binding OverlayActivated}" Grid.Row="3"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
+                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayScale}" IsEnabled="{Binding OverlayActivated}" Grid.Row="3" NumericInputMode="Numbers" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
                                 <Label Grid.Row="4" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelHorizontal}" Grid.ColumnSpan="3" Padding="1"/>
                                 <Slider Grid.Row="5" Grid.Column="0" Margin="2,2,3,2" Minimum="-100" Maximum="100" Value="{Binding OverlayHorizontal}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" IsEnabled="{Binding OverlayActivated}" />
-                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayHorizontal}" IsEnabled="{Binding OverlayActivated}" Grid.Row="5"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
+                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayHorizontal}" IsEnabled="{Binding OverlayActivated}" Grid.Row="5"  NumericInputMode="Numbers" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
                                 <Label Grid.Row="6" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelVertical}" Grid.ColumnSpan="3" Padding="1"/>
                                 <Slider Grid.Row="7" Grid.Column="0" Margin="2,2,3,2" Minimum="-100" Maximum="100" Value="{Binding OverlayVertical}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="100" IsEnabled="{Binding OverlayActivated}"/>
-                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayVertical}" IsEnabled="{Binding OverlayActivated}" Grid.Row="7"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
+                                <Controls:NumericUpDown Minimum="-100" Value="{Binding OverlayVertical}" IsEnabled="{Binding OverlayActivated}" Grid.Row="7" NumericInputMode="Numbers" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
                                 <Label Grid.Row="8" Grid.Column="0" Margin="2,2,3,2" Content="{T:Translate LabelOverlayTransparency}" Grid.ColumnSpan="3" Padding="1"/>
                                 <Slider Grid.Row="9" Grid.Column="0" Margin="2,2,3,2" Minimum="0" Maximum="100" Value="{Binding OverlayTransparency}" IsSelectionRangeEnabled="False" TickPlacement="BottomRight" TickFrequency="10" IsEnabled="{Binding OverlayActivated}"/>
-                                <Controls:NumericUpDown Minimum="0" Value="{Binding OverlayTransparency}" IsEnabled="{Binding OverlayActivated}" Grid.Row="9"  HasDecimals="False" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
+                                <Controls:NumericUpDown Minimum="0" Value="{Binding OverlayTransparency}" IsEnabled="{Binding OverlayActivated}" Grid.Row="9"  NumericInputMode="Numbers" Margin="3,0,1,0" Grid.Column="1" Grid.ColumnSpan="2" Maximum="100" Speedup="False" />
 
                                 <Button Grid.Column="2" Grid.Row="1" Width="40" Height="40" Style="{StaticResource MaterialDesignFloatingActionLightButton}" ToolTip="{T:Translate LabelReset}" Command="{Binding ResetOverlayCommand}" Margin="4">
                                     <materialDesign:PackIcon Kind="RedoVariant" Height="35" Width="35" />

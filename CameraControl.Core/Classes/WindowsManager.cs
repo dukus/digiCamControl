@@ -32,11 +32,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web.UI;
 using System.Windows;
 using System.Windows.Input;
 using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
+using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
 
 #endregion
@@ -90,8 +92,16 @@ namespace CameraControl.Core.Classes
 
         public void ApplyTheme()
         {
-            new PaletteHelper().ReplacePrimaryColor(ServiceProvider.Settings.CurrentThemeNameNew.Split('\\')[1]);
-            new PaletteHelper().SetLightDark(ServiceProvider.Settings.CurrentThemeNameNew.StartsWith("Dark"));
+            //new PaletteHelper().SetTheme ReplacePrimaryColor();
+            //new PaletteHelper().SetLightDark(ServiceProvider.Settings.CurrentThemeNameNew.StartsWith("Dark"));
+
+            var paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
+            IBaseTheme baseTheme = ServiceProvider.Settings.CurrentThemeNameNew.StartsWith("Dark") ? new MaterialDesignDarkTheme() : (IBaseTheme)new MaterialDesignLightTheme();
+            theme.SetPrimaryColor((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(ServiceProvider.Settings.CurrentThemeNameNew.Split('\\')[1]));
+            theme.SetBaseTheme(baseTheme);
+
+            paletteHelper.SetTheme(theme);
         }
 
         public void ApplyKeyHanding()

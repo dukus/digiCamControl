@@ -4,7 +4,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" PreviewKeyDown="MetroWindow_PreviewKeyDown" IgnoreTaskbarOnMaximize="True" ShowMinButton="False" ShowIconOnTitleBar="False" StateChanged="MetroWindow_StateChanged" WindowState="Maximized" ShowSystemMenuOnRightClick="False" WindowStartupLocation="CenterOwner" TitleCaps="False" ShowTitleBar="False" Topmost="True">
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" PreviewKeyDown="MetroWindow_PreviewKeyDown" IgnoreTaskbarOnMaximize="True" ShowMinButton="False" ShowIconOnTitleBar="False" StateChanged="MetroWindow_StateChanged" WindowState="Maximized" ShowSystemMenuOnRightClick="False" WindowStartupLocation="CenterOwner" ShowTitleBar="False" Topmost="True">
     <Window.DataContext>
         <viewModel:LiveViewViewModel/>
     </Window.DataContext>    

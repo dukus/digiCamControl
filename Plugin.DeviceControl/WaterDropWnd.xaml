@@ -1,29 +1,11 @@
-<Controls:MetroWindow x:Class="Plugin.DeviceControl.WaterDropWnd"
+<Window x:Class="Plugin.DeviceControl.WaterDropWnd"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                      xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro" 
               xmlns:my="clr-namespace:CameraControl.Controls;assembly=CameraControl.Core"
                       xmlns:DeviceControl="clr-namespace:Plugin.DeviceControl"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core" Height="574" Width="670" Closed="MetroWindow_Closed" KeyDown="MetroWindow_KeyDown">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-
-
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <CheckBox Content="Stay on top" Name="btn_stay_on_top" IsChecked="{Binding Path=Topmost, RelativeSource={RelativeSource FindAncestor, AncestorType=DeviceControl:WaterDropWnd, AncestorLevel=1}}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5" />
@@ -101,4 +83,4 @@
             </TabItem>            
         </TabControl>
     </Grid>
-</Controls:MetroWindow>
+</Window>

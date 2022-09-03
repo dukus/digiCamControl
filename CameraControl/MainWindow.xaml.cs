@@ -141,7 +141,8 @@ namespace CameraControl
                     SortCameras();
                     break;
                 case WindowsCmdConsts.MainWnd_Message:
-                    this.ShowMessageAsync("", o.ToString());
+                    //this.ShowMessageAsync("", o.ToString());
+                    StaticHelper.Instance.SystemMessage = o.ToString();
                     break;
                 case WindowsCmdConsts.SetLayout:
                     SetLayout(o.ToString());
@@ -796,7 +797,8 @@ namespace CameraControl
                     }
                     else
                     {
-                        this.ShowMessageAsync("Error", TranslationStrings.MsgBulbModeNotSupported);
+                        //this.ShowMessageAsync("Error", TranslationStrings.MsgBulbModeNotSupported);
+                        StaticHelper.Instance.SystemMessage = TranslationStrings.MsgBulbModeNotSupported;
                         return;
                     }
                 }
@@ -1000,7 +1002,8 @@ namespace CameraControl
             catch (Exception exception)
             {
                 Log.Error("Unable to connect to WiFi device", exception);
-                this.ShowMessageAsync("Error", "Unable to connect to WiFi device " + exception.Message);
+//                this.ShowMessageAsync("Error", "Unable to connect to WiFi device " + exception.Message);
+                StaticHelper.Instance.SystemMessage = "Unable to connect to WiFi device " + exception.Message;
             }
         }
 
@@ -1095,14 +1098,14 @@ namespace CameraControl
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            this.ShowInputAsync(TranslationStrings.LabelEmailPublicWebAddress, "Email").ContinueWith(s =>
-            {
-                if (!string.IsNullOrEmpty(s.Result))
-                    HelpProvider.SendEmail(
-                        "digiCamControl public web address " + ServiceProvider.Settings.PublicWebAdress,
-                        "digiCamControl public web address ", "postmaster@digicamcontrol.com", s.Result);
-            }
-                );
+            //this.ShowInputAsync(TranslationStrings.LabelEmailPublicWebAddress, "Email").ContinueWith(s =>
+            //{
+            //    if (!string.IsNullOrEmpty(s.Result))
+            //        HelpProvider.SendEmail(
+            //            "digiCamControl public web address " + ServiceProvider.Settings.PublicWebAdress,
+            //            "digiCamControl public web address ", "postmaster@digicamcontrol.com", s.Result);
+            //}
+            //    );
 
         }
 

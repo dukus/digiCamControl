@@ -191,8 +191,8 @@
         <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush2}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="{DynamicResource ContentFontSize}"/>
-        <Setter Property="Controls:GroupBoxHelper.HeaderForeground" Value="{x:Null}"/>
+        <Setter Property="Controls:HeaderedControlHelper.HeaderFontSize" Value="{DynamicResource ContentFontSize}"/>
+        <Setter Property="Controls:HeaderedControlHelper.HeaderForeground" Value="{x:Null}"/>
         <Setter Property="Controls:ExpanderHelper.HeaderUpStyle" Value="{StaticResource ExpanderUpHeaderStyle}"/>
         <Setter Property="Controls:ExpanderHelper.HeaderDownStyle" Value="{StaticResource ExpanderDownHeaderStyle}"/>
         <Setter Property="Controls:ExpanderHelper.HeaderLeftStyle" Value="{StaticResource ExpanderLeftHeaderStyle}"/>
@@ -220,16 +220,16 @@
                         <Rectangle x:Name="DisabledVisualElement" Fill="{DynamicResource ControlsDisabledBrush}" IsHitTestVisible="false" Opacity="0"/>
                         <DockPanel x:Name="ExpanderRoot">
                             <Border x:Name="HeaderSite" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" UseLayoutRounding="True" BorderThickness="{TemplateBinding BorderThickness}" DockPanel.Dock="Top">
-                                <ToggleButton x:Name="ToggleSite" UseLayoutRounding="False" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" FontSize="{TemplateBinding Controls:ControlsHelper.HeaderFontSize}" FontStretch="{TemplateBinding Controls:ControlsHelper.HeaderFontStretch}" FontWeight="{TemplateBinding Controls:ControlsHelper.HeaderFontWeight}" Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ExpanderHelper.HeaderDownStyle)}">
+                                <ToggleButton x:Name="ToggleSite" UseLayoutRounding="False" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" FontSize="{TemplateBinding Controls:HeaderedControlHelper.HeaderFontSize}" FontStretch="{TemplateBinding Controls:HeaderedControlHelper.HeaderFontStretch}" FontWeight="{TemplateBinding Controls:HeaderedControlHelper.HeaderFontWeight}" Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ExpanderHelper.HeaderDownStyle)}">
                                     <ToggleButton.Foreground>
                                         <MultiBinding Converter="{x:Static Converters:BackgroundToForegroundConverter.Instance}">
                                             <Binding Mode="OneWay" Path="Background" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                            <Binding Mode="OneWay" Path="(Controls:GroupBoxHelper.HeaderForeground)" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Mode="OneWay" Path="(Controls:HeaderedControlHelper.HeaderForeground)" RelativeSource="{RelativeSource TemplatedParent}"/>
                                         </MultiBinding>
                                     </ToggleButton.Foreground>
                                 </ToggleButton>
                             </Border>
-                            <Border x:Name="ExpandSite" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" UseLayoutRounding="True" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:IgnoreThicknessSideType.Top}}" DockPanel.Dock="Bottom" Focusable="false" Opacity="1" Visibility="Collapsed">
+                            <Border x:Name="ExpandSite" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" UseLayoutRounding="True" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:ThicknessSideType.Top}}" DockPanel.Dock="Bottom" Focusable="false" Opacity="1" Visibility="Collapsed">
                                 <ContentPresenter UseLayoutRounding="False" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Cursor="{TemplateBinding Cursor}"/>
                             </Border>
                         </DockPanel>
@@ -254,19 +254,19 @@
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Right">
                             <Setter TargetName="ExpandSite" Property="DockPanel.Dock" Value="Right"/>
-                            <Setter TargetName="ExpandSite" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:IgnoreThicknessSideType.Left}}"/>
+                            <Setter TargetName="ExpandSite" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:ThicknessSideType.Left}}"/>
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Left"/>
                             <Setter TargetName="ToggleSite" Property="Style" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ExpanderHelper.HeaderRightStyle)}"/>
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Up">
                             <Setter TargetName="ExpandSite" Property="DockPanel.Dock" Value="Top"/>
-                            <Setter TargetName="ExpandSite" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:IgnoreThicknessSideType.Bottom}}"/>
+                            <Setter TargetName="ExpandSite" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:ThicknessSideType.Bottom}}"/>
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Bottom"/>
                             <Setter TargetName="ToggleSite" Property="Style" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ExpanderHelper.HeaderUpStyle)}"/>
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Left">
                             <Setter TargetName="ExpandSite" Property="DockPanel.Dock" Value="Left"/>
-                            <Setter TargetName="ExpandSite" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:IgnoreThicknessSideType.Right}}"/>
+                            <Setter TargetName="ExpandSite" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness, Converter={StaticResource ThicknessBindingConverter}, ConverterParameter={x:Static Converters:ThicknessSideType.Right}}"/>
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Right"/>
                             <Setter TargetName="ToggleSite" Property="Style" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ExpanderHelper.HeaderLeftStyle)}"/>
                         </Trigger>

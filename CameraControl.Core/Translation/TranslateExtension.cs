@@ -82,6 +82,8 @@ namespace CameraControl.Core.Translation
         /// </summary>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
+            if(string.IsNullOrEmpty(Key))
+                return DefaultValue;
             if (!TranslationManager.Strings.ContainsKey(Key))
                 return DefaultValue;
             return TranslationManager.Strings[Key].Replace("_","");

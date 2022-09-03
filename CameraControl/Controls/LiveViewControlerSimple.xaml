@@ -11,7 +11,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/CustomControls.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="../Styles/CustomControls.xaml" />-->
+               
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -51,7 +53,7 @@
         <StackPanel Margin="1" Visibility="{Binding ExposureCompensation.Available, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label Content="{T:TranslateExtension ExposureComp}" Target="{Binding ElementName=cmb_EComp}" Padding="0"/>
             <Border BorderThickness="1" BorderBrush="{Binding Path=ExposureCompensation.ErrorColor}" >
-                <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value}"/>
+                <ComboBox Name="cmb_EComp" IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=ExposureCompensation.Value}"/>
             </Border>
         </StackPanel>
         <StackPanel Margin="1" Visibility="{Binding FocusMode.Available, Converter={StaticResource BooleanToVisibilityConverter}}">

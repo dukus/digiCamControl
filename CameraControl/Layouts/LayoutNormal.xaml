@@ -11,7 +11,7 @@
                     xmlns:classes="clr-namespace:CameraControl.Classes"
                     xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
                     
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:zoomandpan="clr-namespace:ZoomAndPan;assembly=ZoomAndPan"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:zoomandpan="clr-namespace:ZoomAndPan;assembly=ZoomAndPan" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
                     mc:Ignorable="d" d:DesignHeight="484" d:DesignWidth="989">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -56,26 +56,14 @@
                   Source="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.FileName}" LoadedBehavior="Manual" UnloadedBehavior="Close" >
             </MediaElement>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedBitmap.FileItem.IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click">
-                    <Rectangle Width="25" Height="25">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click">
+                    <materialDesign:PackIcon Width="24" Height="24" Kind="Play" />
                 </Button>
-                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_1" >
-                    <Rectangle Width="25" Height="25">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_pause}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_1" >
+                    <materialDesign:PackIcon Width="24" Height="24" Kind="Pause" />
                 </Button>
-                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MetroCircleButtonStyle}" Click="Button_Click_2">
-                    <Rectangle Width="25" Height="25">
-                        <Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_stop}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                <Button Height="50" Width="50" Margin="5" Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_2">
+                    <materialDesign:PackIcon Width="24" Height="24" Kind="Stop" />
                 </Button>
 
             </StackPanel>
@@ -161,9 +149,9 @@
         </DockPanel>
         </materialDesign:Card>
         <ListBox Grid.Row="2" VirtualizingStackPanel.IsVirtualizing="True"  Name="ImageLIstBox" ItemsSource="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=DefaultSession.Files, IsAsync=True}" BorderThickness="0" IsSynchronizedWithCurrentItem="True" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
-            <i:Interaction.Behaviors>
+            <i1:Interaction.Behaviors>
                 <classes:HorizontalScrollBehavior />
-            </i:Interaction.Behaviors>
+            </i1:Interaction.Behaviors>
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.DataContext>
