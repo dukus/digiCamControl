@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Setup</RootNamespace>
     <AssemblyName>Setup</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -78,11 +78,9 @@
   <ItemGroup>
     <Reference Include="BootstrapperCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\BootstrapperCore.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,15 +93,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="WixSharp, Version=1.13.2.2, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
       <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\WixSharp.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WixSharp.Msi, Version=1.13.2.2, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
       <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\WixSharp.Msi.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WixSharp.UI, Version=1.13.2.2, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
       <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\WixSharp.UI.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
