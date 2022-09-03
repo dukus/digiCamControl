@@ -54,7 +54,7 @@ namespace CameraControl.Core.Database
             }
         }
 
-        public void EndEvent(EventType eventType)
+        public void EndEvent(EventType _eventType)
         {
             try
             {

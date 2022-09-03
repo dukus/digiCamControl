@@ -76,12 +76,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BootstrapperCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\BootstrapperCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
@@ -91,21 +85,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WixSharp, Version=1.13.2.2, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\WixSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="WixSharp.Msi, Version=1.13.2.2, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\WixSharp.Msi.dll</HintPath>
-    </Reference>
-    <Reference Include="WixSharp.UI, Version=1.13.2.2, Culture=neutral, PublicKeyToken=3775edd25acc43c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\WixSharp.bin.1.13.2.2-pre\lib\WixSharp.UI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ObsPluginSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="setup.cs" />
-    <None Include="packages.config" />
     <None Include="wix\$(ProjectName).g.wxs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +105,14 @@
       <Name>CameraControl.Devices</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixSharp">
+      <Version>1.13.2.2-pre</Version>
+    </PackageReference>
+    <PackageReference Include="WixSharp.bin">
+      <Version>1.13.2.2-pre</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd ..\..\
@@ -134,13 +126,4 @@
   </Target>
   -->
   <UsingTask AssemblyFile="$(SolutionDir)packages\WixSharp.1.4.1.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
-  <Import Project="..\packages\WixSharp.bin.1.13.2.2-pre\build\WixSharp.bin.targets" Condition="Exists('..\packages\WixSharp.bin.1.13.2.2-pre\build\WixSharp.bin.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WixSharp.bin.1.13.2.2-pre\build\WixSharp.bin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.bin.1.13.2.2-pre\build\WixSharp.bin.targets'))" />
-    <Error Condition="!Exists('..\packages\WixSharp.1.13.2.2-pre\build\WixSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixSharp.1.13.2.2-pre\build\WixSharp.targets'))" />
-  </Target>
-  <Import Project="..\packages\WixSharp.1.13.2.2-pre\build\WixSharp.targets" Condition="Exists('..\packages\WixSharp.1.13.2.2-pre\build\WixSharp.targets')" />
 </Project>
