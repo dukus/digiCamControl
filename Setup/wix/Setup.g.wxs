@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="357e0d80-5093-478e-8c11-28b1c730d6ec" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.1.4.4" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
+  <Product Id="357e0d80-5093-478e-8c11-28b1c730d6ed" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.1.4.5" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" InstallScope="perMachine" />
     <Media Id="1" Cabinet="OBS_plugin_for_digiCamControl.cab" EmbedCab="yes" />
 
@@ -23,8 +23,8 @@
                 <RemoveFolder Id="INSTALLDIR" On="uninstall" />
               </Component>
 
-              <Component Id="Component.DccObsPlugin.dll_1463449416" Guid="357e0d80-5093-478e-8c11-28b1d6a99177">
-                <File Id="DccObsPlugin.dll_1463449416" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
+              <Component Id="Component.DccObsPlugin.dll_1755465709" Guid="357e0d80-5093-478e-8c11-28b181003918">
+                <File Id="DccObsPlugin.dll_1755465709" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
               </Component>
 
             </Directory>
@@ -47,11 +47,11 @@
 
     <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico" />
 
-    <WixVariable Id="WixUILicenseRtf" Value="d:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="D:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
-      <UpgradeVersion Minimum="0.0.0.0" Maximum="2.1.4.4" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="2.1.4.4" IncludeMinimum="no" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" Maximum="2.1.4.5" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="2.1.4.5" IncludeMinimum="no" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="PreventDowngrading" Error="Newer version already installed" />
@@ -63,7 +63,7 @@
 
     <Feature Id="Obs_Plugin" Title="Obs Plugin" Absent="allow" Level="1">
       <ComponentRef Id="Component.INSTALLDIR" />
-      <ComponentRef Id="Component.DccObsPlugin.dll_1463449416" />
+      <ComponentRef Id="Component.DccObsPlugin.dll_1755465709" />
       <ComponentRef Id="ProgramFilesFolder.OBS.plugins" />
       <ComponentRef Id="ProgramFilesFolder.OBS" />
     </Feature>
