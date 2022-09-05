@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.ImageSequencerWindow"
+﻿<Window x:Class="CameraControl.Plugins.ToolPlugins.ImageSequencerWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="540" Width="780" WindowStartupLocation="CenterScreen" ShowMinButton="False"
+             mc:Ignorable="d" Height="540" Width="780" WindowStartupLocation="CenterScreen" 
                        Title="{T:TranslateExtension LabelImageSequencer}" Name="metrowindow">
     <Window.DataContext>
         <toolPlugins:ImageSequencerViewModel/>
@@ -62,4 +62,4 @@
         </StackPanel>
         <controls:RangeSlider Grid.Row="3" Grid.Column="0" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" LowerValue="{Binding MinValue}" UpperValue="{Binding MaxValue}" Margin="5" ExtendedMode="True" MoveWholeRange="False" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True" />
     </Grid>
-</controls:MetroWindow>
+</Window>

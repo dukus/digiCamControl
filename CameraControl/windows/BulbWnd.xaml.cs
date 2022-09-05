@@ -56,7 +56,7 @@ namespace CameraControl.windows
     /// <summary>
     /// Interaction logic for BulbWnd.xaml
     /// </summary>
-    public partial class BulbWnd : MetroWindow, INotifyPropertyChanged, IWindow
+    public partial class BulbWnd : Window, INotifyPropertyChanged, IWindow
     {
         private Timer _captureTimer = new Timer(1000);
         private Timer _waitTimer = new Timer(1000);

@@ -1,17 +1,21 @@
-﻿<controls:MetroWindow x:Class="CameraControl.windows.MultipleLiveView"
+﻿<Window x:Class="CameraControl.windows.MultipleLiveView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-        Title="MultipleLiveView" Height="426" Width="632" Closing="MetroWindow_Closing">
+        xmlns:viewModel="clr-namespace:CameraControl.ViewModel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="MultipleLiveView" Height="426" Width="632" Closing="MetroWindow_Closing"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.DataContext>
         <viewModel:MultipleLiveViewViewModel/>
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resources/Icons.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
     </Window.Resources>
@@ -35,12 +39,8 @@
                         <Image Source="{Binding Bitmap}" Stretch="Uniform"/>
                         <Label Content="{Binding CameraDevice.DisplayName}" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                            <Button Height="35" Width="35" Margin="0" Style="{DynamicResource MetroCircleButtonStyle}" Command="{Binding FocusCommand}">
-                                <Rectangle Width="15" Height="15">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_image_focus}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
+                            <Button Height="35" Width="35" Margin="0" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Command="{Binding FocusCommand}">
+                                <materialDesign:PackIcon Kind="FocusAuto" Height="35" Width="35" />
                             </Button>
                         </StackPanel>
                     </Grid>
@@ -76,4 +76,4 @@
             </Grid>
         </GroupBox>
     </Grid>
-</controls:MetroWindow>
+</Window>

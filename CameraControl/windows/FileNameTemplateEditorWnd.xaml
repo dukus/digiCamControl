@@ -1,13 +1,20 @@
-﻿<controls:MetroWindow x:Class="CameraControl.windows.FileNameTemplateEditorWnd"
+﻿<Window x:Class="CameraControl.windows.FileNameTemplateEditorWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-        Title="File Name Template Editor" Height="600" Width="600" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" xmlns:my="clr-namespace:CameraControl.windows"
+        Title="File Name Template Editor" Height="600" Width="600" ShowInTaskbar="False" xmlns:my="clr-namespace:CameraControl.windows"
                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                       xmlns:controls1="clr-namespace:CameraControl.Controls"
-                      WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
+                      WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.Resources>
         <ResourceDictionary>
             <controls1:TemplateNameToIconConverter x:Key="TemplateNameToIconConverter" />
@@ -47,4 +54,4 @@
         <Button Content="{translation:TranslateExtension ButtonOk}" Grid.Row="4" HorizontalAlignment="Left" Margin="4" Name="btn_ok" VerticalAlignment="Top" Width="75" Click="btn_ok_Click" />
         <Button Content="{translation:TranslateExtension ButtonCancel}" Grid.Row="4"  HorizontalAlignment="Right" Margin="4" Name="btn_cancel" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" />
     </Grid>
-</controls:MetroWindow>
+</Window>

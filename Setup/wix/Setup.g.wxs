@@ -7,8 +7,8 @@
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <Product Id="357e0d80-5093-478e-8c11-28b1c730d6ed" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.1.4.5" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
-    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" InstallScope="perMachine" />
-    <Media Id="1" Cabinet="OBS_plugin_for_digiCamControl.cab" EmbedCab="yes" />
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" InstallScope="perMachine" Languages="1033" />
+    <Media Id="1" Cabinet="_...S20plugin20for20digiCamControl.cab" EmbedCab="yes" />
 
     <Condition Message="Please install .Net 4.5 First"><![CDATA[NETFRAMEWORK45 >= "#378389"]]></Condition>
 
@@ -23,8 +23,8 @@
                 <RemoveFolder Id="INSTALLDIR" On="uninstall" />
               </Component>
 
-              <Component Id="Component.DccObsPlugin.dll_1755465709" Guid="357e0d80-5093-478e-8c11-28b181003918">
-                <File Id="DccObsPlugin.dll_1755465709" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
+              <Component Id="Component.DccObsPlugin.dll_2539501587" Guid="357e0d80-5093-478e-8c11-28b140ebdf48">
+                <File Id="DccObsPlugin.dll_2539501587" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
               </Component>
 
             </Directory>
@@ -61,9 +61,9 @@
 
     <Property Id="ARPPRODUCTICON" Value="app_icon.ico" />
 
-    <Feature Id="Obs_Plugin" Title="Obs Plugin" Absent="allow" Level="1">
+    <Feature Id="Obs20Plugin" Title="Obs Plugin" Absent="allow" Level="1">
       <ComponentRef Id="Component.INSTALLDIR" />
-      <ComponentRef Id="Component.DccObsPlugin.dll_1755465709" />
+      <ComponentRef Id="Component.DccObsPlugin.dll_2539501587" />
       <ComponentRef Id="ProgramFilesFolder.OBS.plugins" />
       <ComponentRef Id="ProgramFilesFolder.OBS" />
     </Feature>

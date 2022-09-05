@@ -3,6 +3,7 @@ using System.Windows;
 using CameraControl.Core;
 using CameraControl.Core.Classes;
 using CameraControl.Core.Interfaces;
+using CameraControl.Core.Translation;
 using CameraControl.Devices;
 using CameraControl.ViewModel;
 using MahApps.Metro.Controls.Dialogs;
@@ -66,7 +67,7 @@ namespace CameraControl.windows
             }
             catch (Exception exception)
             {
-                this.ShowMessageAsync("Eror", exception.Message);
+                MessageBox.Show(exception.Message);
                 Log.Error("Error print", exception);
             }
         }
@@ -85,7 +86,7 @@ namespace CameraControl.windows
             }
             catch (Exception exception)
             {
-                this.ShowMessageAsync("Save error", exception.Message);
+                MessageBox.Show(exception.Message, "Save error");
                 Log.Error("Save error", exception);
             }
 

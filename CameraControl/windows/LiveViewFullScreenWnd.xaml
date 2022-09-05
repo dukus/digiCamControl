@@ -1,10 +1,17 @@
-﻿<controls:MetroWindow x:Class="CameraControl.windows.LiveViewFullScreenWnd"
+﻿<Window x:Class="CameraControl.windows.LiveViewFullScreenWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
-        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" PreviewKeyDown="MetroWindow_PreviewKeyDown" IgnoreTaskbarOnMaximize="True" ShowMinButton="False" ShowIconOnTitleBar="False" StateChanged="MetroWindow_StateChanged" WindowState="Maximized" ShowSystemMenuOnRightClick="False" WindowStartupLocation="CenterOwner" ShowTitleBar="False" Topmost="True">
+        xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" KeyDown="image1_KeyDown" MouseDown="image1_MouseDown" Closing="MetroWindow_Closing" PreviewKeyDown="MetroWindow_PreviewKeyDown" StateChanged="MetroWindow_StateChanged" WindowState="Maximized" WindowStartupLocation="CenterOwner" Topmost="True"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.DataContext>
         <viewModel:LiveViewViewModel/>
     </Window.DataContext>    
@@ -48,4 +55,4 @@
         <Label Grid.Row="0" Content="{Binding CountDown}" FontSize="155" Padding="0" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="{Binding Path=CountDownVisible, Converter={StaticResource BooleanToVisibilityConverter1}, ConverterParameter=false}" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     </Grid>
-</controls:MetroWindow>
+</Window>

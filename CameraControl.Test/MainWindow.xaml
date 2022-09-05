@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="CameraControl.Test.MainWindow"
+﻿<Window x:Class="CameraControl.Test.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -12,24 +12,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="settings" />
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="20" Height="20">
-                        <Rectangle.Resources>
-                            <SolidColorBrush x:Key="BlackBrush" Color="White" />
-                        </Rectangle.Resources>
-                        <!--<Rectangle.Fill>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cupcake}" />
-                        </Rectangle.Fill>-->
-                    </Rectangle>
-                    <TextBlock Text="deploy cupcakes" />
-                </StackPanel>
-            </Button>
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="445*"/>
@@ -44,4 +26,4 @@
         <TextBox Grid.Row="1" TextWrapping="Wrap" Text="TextBox" Grid.ColumnSpan="2" Name="TextBox_receive"/>
 
     </Grid>
-</Controls:MetroWindow>
+</Window>

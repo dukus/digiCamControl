@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="MtpTester.MainWindow"
+﻿<Window x:Class="MtpTester.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="MainWindow" Height="706" Width="814" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:MtpTester">
@@ -99,4 +99,4 @@
 
         </TabControl>
     </Grid>
-</Controls:MetroWindow>
+</Window>

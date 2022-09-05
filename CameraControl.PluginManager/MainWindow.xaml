@@ -1,8 +1,8 @@
-﻿<Controls:MetroWindow x:Class="CameraControl.PluginManager.MainWindow"
+﻿<Window x:Class="CameraControl.PluginManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      xmlns:PluginManager="clr-namespace:CameraControl.PluginManager" Title="MainWindow" Height="600" Width="800" Closed="MetroWindow_Closed" ShowMaxRestoreButton="False" ShowMinButton="False" WindowStartupLocation="CenterScreen">
+                      xmlns:PluginManager="clr-namespace:CameraControl.PluginManager" Title="MainWindow" Height="600" Width="800" Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <PluginManager:MainWindowViewModel/>
     </Window.DataContext>
@@ -93,4 +93,4 @@
         </Menu>
         <!--<Button Content="Check for updates" Grid.Column="1" Height="22" HorizontalAlignment="Left" Margin="110,4,0,0" Name="btn_check_updates" VerticalAlignment="Top" Width="145" Click="btn_check_updates_Click" />-->     
     </Grid>
-</Controls:MetroWindow>
+</Window>

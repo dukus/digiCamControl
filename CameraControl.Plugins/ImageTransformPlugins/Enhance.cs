@@ -29,7 +29,7 @@ namespace CameraControl.Plugins.ImageTransformPlugins
                     image.AutoGamma();
                 image.BrightnessContrast(new Percentage(conf.Brightness), new Percentage(conf.Contrast));
                 if (conf.SContrast > 0)
-                    image.SigmoidalContrast(true, conf.SContrast);
+                    image.SigmoidalContrast( conf.SContrast);
                 if (conf.Edge)
                     image.AdaptiveSharpen();
                 if (conf.Sharpen > 0)

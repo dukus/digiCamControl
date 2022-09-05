@@ -1,9 +1,8 @@
-﻿<ontrols:MetroWindow x:Class="CameraControl.windows.CameraPropertyWnd"
+﻿<Window x:Class="CameraControl.windows.CameraPropertyWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Camera Property" Height="600" Width="484" Closing="Window_Closing" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:CameraControl.windows"
-                     xmlns:ontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                     xmlns:ontrols="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                     
                      xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                      xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -15,8 +14,8 @@
                      TextOptions.TextFormattingMode="Ideal"
                      TextOptions.TextRenderingMode="Auto"
                      Background="{DynamicResource MaterialDesignPaper}"
-                     FontFamily="{DynamicResource MaterialDesignFont}" 
-                     GlowBrush="{DynamicResource AccentColorBrush}"     >
+                     FontFamily="{DynamicResource MaterialDesignFont}" >
+
     <Window.DataContext>
         <viewModel:CameraPropertyViewModel/>
     </Window.DataContext>
@@ -110,4 +109,4 @@
         <Button Content="Cancel" HorizontalAlignment="Left"  Click="btn_cancel_Click" Margin="8" Grid.Row="1"/>
         <Button Grid.Row="1" HorizontalAlignment="Center" Content="Sync camera date and time"  Name="btn_dateTime" Margin="8" Click="btn_dateTime_Click" />
     </Grid>
-</ontrols:MetroWindow>
+</Window>

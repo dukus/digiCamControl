@@ -3075,3 +3075,4 @@ _ReSharper.CameraControl.ServerTest
 /packages/Accord.Video.DirectShow.3.8.2-alpha/lib/netstandard2.0/Accord.Video.DirectShow.xml
 /packages/*
 /.vs/*
+*.wixpdb

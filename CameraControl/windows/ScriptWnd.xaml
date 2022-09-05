@@ -4,10 +4,17 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      xmlns:windows="clr-namespace:CameraControl.windows" Title="Script Execution" Height="576" Width="935" Closing="MetroWindow_Closing">
+                      xmlns:windows="clr-namespace:CameraControl.windows" Title="Script Execution" Height="576" Width="935" Closing="MetroWindow_Closing"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Name="menu2">

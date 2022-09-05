@@ -7,9 +7,7 @@
                     xmlns:controls1="clr-namespace:CameraControl.Controls"
                     xmlns:local="clr-namespace:CameraControl.Core.Controls.ZoomAndPan;assembly=CameraControl.Core"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="../Resources/Icons.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+
     <wpf:ItemBackgroundConverter x:Key="myConverter"/>
     <!--
     Default style and template for the ZoomAndPanControl.
@@ -76,76 +74,68 @@
             <Setter.Value>
                 <DataTemplate DataType="classes:FileItem">
                     <materialDesign:Card Margin="3,4" >
-                    <Grid >
-                        <!--<Line Stroke="Green" StrokeThickness="4" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" X2="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}" Visibility="{Binding Alternate, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5"/>-->
-                        <StackPanel Orientation="Horizontal">
-                            <Grid Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="4,4,4,4">
-                                <!--<Rectangle Stroke="Black" Margin="0"/>
+                        <Grid >
+                            <!--<Line Stroke="Green" StrokeThickness="4" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" X2="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}" Visibility="{Binding Alternate, Converter={StaticResource BooleanToVisibilityConverter}}" Opacity="0.5"/>-->
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Height="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ThumbHeigh}" Margin="4,4,4,4">
+                                    <!--<Rectangle Stroke="Black" Margin="0"/>
                             <Rectangle Stroke="Black" Margin="2" />-->
-                                <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" Name="_image" RenderTransformOrigin="0.5,0.5">
-                                    <Image.Effect>
-                                        <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
-                                    </Image.Effect>
-                                    <Image.LayoutTransform>
-                                        <RotateTransform  Angle="{Binding RotationAngle}" />
-                                    </Image.LayoutTransform>
-                                </Image>
-                                <Image Source="{Binding Path=ThumbnailMarks}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" RenderTransformOrigin="0.5,0.5"
+                                    <Image Source="{Binding Path=Thumbnail}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" Name="_image" RenderTransformOrigin="0.5,0.5">
+                                        <Image.Effect>
+                                            <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
+                                        </Image.Effect>
+                                        <Image.LayoutTransform>
+                                            <RotateTransform  Angle="{Binding RotationAngle}" />
+                                        </Image.LayoutTransform>
+                                    </Image>
+                                    <Image Source="{Binding Path=ThumbnailMarks}" ToolTip="{Binding Path=ToolTip}" Stretch="Uniform" Margin="3" RenderTransformOrigin="0.5,0.5"
                                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=EnhancedThumbs, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <Image.Effect>
-                                        <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
-                                    </Image.Effect>
-                                    <Image.LayoutTransform>
-                                        <RotateTransform  Angle="{Binding RotationAngle}" />
-                                    </Image.LayoutTransform>
-                                </Image>
-                                <Rectangle Stroke="Transparent" Margin="1" Name="_Rectangle"/>
-                                <Rectangle Width="10" Height="10" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_down}"/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Rectangle Width="10" Height="10" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="6">
-                                    <Rectangle.Fill>
-                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_thumbs_up}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <CheckBox IsChecked="{Binding Path=IsChecked}" Margin="3,3,3,5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
-                                <Label Content="RAW" Background="White" Margin="5" Padding="1" Opacity="0.5" FontWeight="Bold" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsRaw, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                <Label Content="VIDEO" Background="White" Margin="5" Padding="1" Opacity="0.5" FontWeight="Bold" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                <controls:ProgressRing IsActive="{Binding Loading}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Height="40" Width="40" />
-                            </Grid>
-                            <StackPanel Width="75" Margin="5" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <StackPanel Orientation="Horizontal" ToolTip="Aperture value">
-                                    <Label Content="F : f/" Padding="0" Opacity="0.6"/>
-                                    <Label Content="{Binding F}" Padding="0" FontStyle="Italic"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" >
-                                    <Label Content="Iso : " Padding="0" Opacity="0.6"/>
-                                    <Label Content="{Binding Iso}" Padding="0" FontStyle="Italic"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" ToolTip="Exposure time">
-                                    <Label Content="E : " Padding="0" Opacity="0.6"/>
-                                    <Label Content="{Binding E}" Padding="0" FontStyle="Italic"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" ToolTip="Focal Length">
-                                    <Label Content="FL : " Padding="0" Opacity="0.6"/>
-                                    <Label Content="{Binding FocalLength}" Padding="0" FontStyle="Italic"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" ToolTip="Exposure Bias value">
-                                    <Label Content="EB : " Padding="0" Opacity="0.6"/>
-                                    <Label Content="{Binding ExposureBias}" Padding="0" FontStyle="Italic"/>
-                                </StackPanel>
-                                <Grid Width="75" Height="30" >
-                                    <Rectangle Width="5" HorizontalAlignment="Left" Fill="Blue" Margin="2" Visibility="{Binding FileInfo.IsUnderExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are under exposed"/>
-                                    <Rectangle Width="5" HorizontalAlignment="Right" Fill="Red" Margin="2" Visibility="{Binding FileInfo.IsOverExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are over exposed"/>
-                                    <Border Padding="2" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="0">
-                                        <Polygon Points="{Binding Path=FileInfo.LuminanceHistogramPoints}" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Opacity="1" />
-                                    </Border>
+                                        <Image.Effect>
+                                            <DropShadowEffect ShadowDepth="2" Color="Black" BlurRadius="7" />
+                                        </Image.Effect>
+                                        <Image.LayoutTransform>
+                                            <RotateTransform  Angle="{Binding RotationAngle}" />
+                                        </Image.LayoutTransform>
+                                    </Image>
+                                    <Rectangle Stroke="Transparent" Margin="1" Name="_Rectangle"/>
+                                    <materialDesign:PackIcon Kind="ThumbDown" Width="10" Height="10" Visibility="{Binding IsUnLiked, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6"/>
+                                    <materialDesign:PackIcon Kind="ThumbsUp" Width="10" Height="10" Visibility="{Binding IsLiked, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="6"/>
+                                    <CheckBox IsChecked="{Binding Path=IsChecked}" Margin="3,3,3,5" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontSize="10" />
+                                    <Label Content="RAW" Background="White" Margin="5" Padding="1" Opacity="0.5" FontWeight="Bold" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsRaw, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                    <Label Content="VIDEO" Background="White" Margin="5" Padding="1" Opacity="0.5" FontWeight="Bold" Foreground="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding IsMovie, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                    <controls:ProgressRing IsActive="{Binding Loading}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" Height="40" Width="40" />
                                 </Grid>
+                                <StackPanel Width="75" Margin="5" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=ShowThumbInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal" ToolTip="Aperture value">
+                                        <Label Content="F : f/" Padding="0" Opacity="0.6"/>
+                                        <Label Content="{Binding F}" Padding="0" FontStyle="Italic"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Label Content="Iso : " Padding="0" Opacity="0.6"/>
+                                        <Label Content="{Binding Iso}" Padding="0" FontStyle="Italic"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" ToolTip="Exposure time">
+                                        <Label Content="E : " Padding="0" Opacity="0.6"/>
+                                        <Label Content="{Binding E}" Padding="0" FontStyle="Italic"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" ToolTip="Focal Length">
+                                        <Label Content="FL : " Padding="0" Opacity="0.6"/>
+                                        <Label Content="{Binding FocalLength}" Padding="0" FontStyle="Italic"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" ToolTip="Exposure Bias value">
+                                        <Label Content="EB : " Padding="0" Opacity="0.6"/>
+                                        <Label Content="{Binding ExposureBias}" Padding="0" FontStyle="Italic"/>
+                                    </StackPanel>
+                                    <Grid Width="75" Height="30" >
+                                        <Rectangle Width="5" HorizontalAlignment="Left" Fill="Blue" Margin="2" Visibility="{Binding FileInfo.IsUnderExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are under exposed"/>
+                                        <Rectangle Width="5" HorizontalAlignment="Right" Fill="Red" Margin="2" Visibility="{Binding FileInfo.IsOverExposed, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Some area in image are over exposed"/>
+                                        <Border Padding="2" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="0">
+                                            <Polygon Points="{Binding Path=FileInfo.LuminanceHistogramPoints}" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Opacity="1" />
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
+                        </Grid>
                     </materialDesign:Card>
                     <DataTemplate.Triggers>
                         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
@@ -169,7 +159,7 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        
+
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>

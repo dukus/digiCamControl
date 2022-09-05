@@ -1180,7 +1180,7 @@ namespace CameraControl.Core.Classes
                 if (Directory.Exists(session.Folder))
                 {
                     // clear file list if adding file to session  is disable 
-                    if(ServiceProvider.Settings.SkipAddingFileToSession)
+                    if(ServiceProvider.Settings!=null && ServiceProvider.Settings.SkipAddingFileToSession)
                     {
                         session.Files.Clear();
                         return;

@@ -3,13 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
         xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="{T:TranslateExtension TimeSelectWindowTitle}" Height="240" Width="220" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True">
+        Title="{T:TranslateExtension TimeSelectWindowTitle}" Height="240" Width="220" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="166*" />
-            <RowDefinition Height="38*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Button Content="{T:TranslateExtension LabelSelect}" Grid.Row="1" Name="btn_select" Margin="5" Click="btn_select_Click" />
+        <Button Content="{T:TranslateExtension LabelSelect}" Grid.Row="1" Name="btn_select" Margin="16" Click="btn_select_Click" />
         <ListBox Name="lst_windows" SelectedItem="{Binding Source={x:Static Member=Core:ServiceProvider.Settings}, Path=SelectedMainForm}"/>
     </Grid>
 </Window>

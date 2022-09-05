@@ -30,19 +30,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Icons.xaml" />
                 <ResourceDictionary Source="Resources/MoreIcons.xaml" />
                 <ResourceDictionary Source="Styles/ExpanderEx.xaml" />
-
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Snackbar.xaml" />
-
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
             <wpf:IntToProgressConverter x:Key="MyConverter"/>
@@ -95,8 +84,8 @@
         </Grid>
 
         <!--<Controls:MetroContentControl Grid.ColumnSpan="4">-->
-        <WrapPanel Grid.Row="1"  Grid.ColumnSpan="3">
-            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Width="40" Height="40" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+        <WrapPanel Grid.Row="1"  Grid.ColumnSpan="3" >
+            <Button ToolTip="{T:TranslateExtension CapturePhotoToolTip}"  Width="40" Height="40" Name="button3" Click="button3_Click" IsEnabled="{Binding Source={x:Static Member=Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.IsConnected}" Margin="4,8" Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                     materialDesign:ButtonProgressAssist.Value="{Binding Source={x:Static Core:ServiceProvider.DeviceManager}, Path=SelectedCameraDevice.TransferProgress}">
                 <materialDesign:PackIcon Kind="CameraIris" Height="35" Width="35" />
@@ -424,11 +413,7 @@
                                                 </Style>
                                             </Controls:DropDownButton.ItemContainerStyle>
                                             <Controls:DropDownButton.Icon>
-                                                <Rectangle Width="20" Height="20">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
+                                                <materialDesign:PackIcon Kind="Add" Height="35" Width="35" />
                                             </Controls:DropDownButton.Icon>
                                         </Controls:DropDownButton>
                                     </StackPanel>

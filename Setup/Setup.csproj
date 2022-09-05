@@ -107,10 +107,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WixSharp">
-      <Version>1.13.2.2-pre</Version>
+      <Version>1.20.2</Version>
     </PackageReference>
     <PackageReference Include="WixSharp.bin">
-      <Version>1.13.2.2-pre</Version>
+      <Version>1.20.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

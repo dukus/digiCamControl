@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.GenMovieWindow"
+﻿<Window x:Class="CameraControl.Plugins.ToolPlugins.GenMovieWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="450" Width="764" Title="{T:TranslateExtension LabelCreateMovie}" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" ShowMinButton="False">
+             mc:Ignorable="d" Height="450" Width="764" Title="{T:TranslateExtension LabelCreateMovie}" WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <toolPlugins:GenMovieViewModel/>
     </Window.DataContext>
@@ -81,4 +81,4 @@
             </Grid>
         </GroupBox>
     </Grid>
-</controls:MetroWindow>
+</Window>

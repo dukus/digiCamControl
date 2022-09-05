@@ -1,9 +1,8 @@
-﻿<Controls:MetroWindow x:Class="CameraControl.windows.AboutWnd"
+﻿<Window x:Class="CameraControl.windows.AboutWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="About" Height="488" Width="579" WindowStyle="ToolWindow" 
-                      ShowCloseButton="False" ShowMaxRestoreButton="False" ShowMinButton="False"
                       WindowStartupLocation="CenterScreen"
                       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                       TextElement.FontWeight="Regular"
@@ -11,8 +10,7 @@
                       TextOptions.TextFormattingMode="Ideal"
                       TextOptions.TextRenderingMode="Auto"
                       Background="{DynamicResource MaterialDesignPaper}"
-                      FontFamily="{DynamicResource MaterialDesignFont}" 
-                      GlowBrush="{DynamicResource AccentColorBrush}"> 
+                      FontFamily="{DynamicResource MaterialDesignFont}"       > 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -51,4 +49,4 @@ THE SOFTWARE." <LineBreak/>
         <Button Content="Home page" Grid.Row="1"  HorizontalAlignment="Left" Margin="16" Name="button1" VerticalAlignment="Top" Width="120" Click="button1_Click" />
         <Button Content="Donate" Grid.Row="1"  HorizontalAlignment="Right" Margin="16" Name="btn_donate" VerticalAlignment="Top" Width="120" Click="btn_donate_Click" />
     </Grid>
-</Controls:MetroWindow>
+</Window>

@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="CameraControl.windows.TimeLapseWnd"
+﻿<Window x:Class="CameraControl.windows.TimeLapseWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -6,7 +6,14 @@
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
         xmlns:controls1="clr-namespace:CameraControl.Controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="{translation:TranslateExtension TimeLapseWindowTitle}" Height="550" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowMaxRestoreButton="False">
+        Title="{translation:TranslateExtension TimeLapseWindowTitle}" Height="550" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.DataContext>
         <viewModel:TimelapseViewModel/>
     </Window.DataContext>
@@ -125,4 +132,4 @@
         <Button Content="{Binding StartText}" Grid.Row="0" Grid.Column="1" Margin="4" Command="{Binding StartCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding StatusText}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
     </Grid>
-</controls:MetroWindow>
+</Window>

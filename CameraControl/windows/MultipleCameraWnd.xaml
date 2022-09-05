@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="CameraControl.windows.MultipleCameraWnd"
+﻿<Window x:Class="CameraControl.windows.MultipleCameraWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension MultipleCameraWindowTitle}" Height="643" Width="800" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" Closing="Window_Closing" xmlns:my1="clr-namespace:CameraControl.windows"
                       xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
@@ -8,17 +8,19 @@
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
                       xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ShowMinButton="False" PreviewKeyDown="MetroWindow_PreviewKeyDown" >
+                      WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" PreviewKeyDown="MetroWindow_PreviewKeyDown"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter1" />
         </ResourceDictionary>
     </Window.Resources>
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="363*" />
@@ -173,7 +175,7 @@
                             <DataGridTemplateColumn.CellTemplate  >
                                 <DataTemplate>
                                     <Border BorderThickness="1" BorderBrush="{Binding Path=ExposureCompensation.ErrorColor}" >
-                                        <ComboBox IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=.ExposureCompensation.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
+                                        <ComboBox IsEnabled="{Binding Path=ExposureCompensation.IsEnabled}" ItemsSource="{Binding Path=ExposureCompensation.Values}" SelectedValue="{Binding Path=ExposureCompensation.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"/>
                                     </Border>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -213,4 +215,4 @@
         </Expander>
         <Label Content="{Binding Source={x:Static Member=Devices:StaticHelper.Instance}, Path=SystemMessage}" Name="lbl_message" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3" Grid.ColumnSpan="2" />
     </Grid>
-</Controls:MetroWindow>
+</Window>

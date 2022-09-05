@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="CameraControl.Plugins.ToolPlugins.CombineZpWindow"
+﻿<Window x:Class="CameraControl.Plugins.ToolPlugins.CombineZpWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -110,4 +110,4 @@
             <ListBox ItemsSource="{Binding Output}"/>
         </GroupBox>
     </Grid>
-</controls:MetroWindow>
+</Window>

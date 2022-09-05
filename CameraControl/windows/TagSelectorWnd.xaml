@@ -5,7 +5,14 @@
         xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-                      WindowStyle="ToolWindow" UseLayoutRounding="True" >
+                      WindowStyle="ToolWindow" UseLayoutRounding="True"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.Resources>
         <ResourceDictionary>
              <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource  {x:Type ListBox}}">

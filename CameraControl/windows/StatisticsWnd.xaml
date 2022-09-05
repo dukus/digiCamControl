@@ -1,10 +1,17 @@
-﻿<controls:MetroWindow x:Class="CameraControl.windows.StatisticsWnd"
+﻿<Window x:Class="CameraControl.windows.StatisticsWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="{translation:TranslateExtension LabelStatistics}" Height="332" Width="679" Closing="MetroWindow_Closing">
+        Title="{translation:TranslateExtension LabelStatistics}" Height="332" Width="679" Closing="MetroWindow_Closing"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <!--xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"-->
     <Window.DataContext>
         <viewModel:StatisticsViewModel/>
@@ -40,4 +47,4 @@
             </TabItem>
         </TabControl>
     </Grid>
-</controls:MetroWindow>
+</Window>

@@ -1,16 +1,10 @@
-﻿<controls:MetroWindow x:Class="CameraControl.windows.Welcome"
+﻿<Window x:Class="CameraControl.windows.Welcome"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="digiCamControl by Duka Istvan" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ShowMaxRestoreButton="False" ShowMinButton="False" ShowIconOnTitleBar="False" Topmost="True" WindowStyle="None" TitleBarHeight="40" TitleCharacterCasing="Normal">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resources/Icons.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        Title="digiCamControl by Duka Istvan" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" >
+    
     <Grid>
         <!--<StackPanel Orientation="Horizontal">
             <StackPanel>
@@ -60,8 +54,8 @@
                 <Label Content="Donate" HorizontalContentAlignment="Center" FontSize="17"/>
             </StackPanel>            
         </StackPanel>-->
-        <materialDesign:Card Width="420" Margin="8" >
-            <Grid VerticalAlignment="Stretch">
+        <materialDesign:Card Margin="8" >
+            <Grid VerticalAlignment="Stretch" Margin="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -73,7 +67,7 @@
                 </Grid.ColumnDefinitions>
                 <materialDesign:PackIcon Kind="Git" Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <StackPanel Grid.Row="0" Grid.Column="1">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 8">Open Source</TextBlock>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="16 16 16 8">Open Source</TextBlock>
                     <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                VerticalAlignment="Top">This project is completely open source. If you like it and want to say thanks you could, tweet or post about it, or tell your friends about it!</TextBlock>
                 </StackPanel>
@@ -105,15 +99,14 @@
                             <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Twitter</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{DynamicResource MaterialDesignFlatButton}" DockPanel.Dock="Right" Click="btn_twitter_Click">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" DockPanel.Dock="Right" Click="btn_site_Click">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="GooglePlus" VerticalAlignment="Center" />
-                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Google++</TextBlock>
+                            <materialDesign:PackIcon Kind="Web" VerticalAlignment="Center" />
+                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Site</TextBlock>
                         </StackPanel>
                     </Button>
-
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
     </Grid>
-</controls:MetroWindow>
+</Window>

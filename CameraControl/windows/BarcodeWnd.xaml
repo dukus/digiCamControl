@@ -4,10 +4,17 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="BarcodeWnd" Height="600" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" >
+        Title="BarcodeWnd" Height="600" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" 
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
     <Window.DataContext>
         <viewModel:BarcodeViewModel/>
-    </Window.DataContext>    
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

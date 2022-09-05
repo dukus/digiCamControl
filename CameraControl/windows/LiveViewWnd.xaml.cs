@@ -255,12 +255,7 @@ namespace CameraControl.windows
                     {
                         Dispatcher.Invoke(new Action(delegate
                         {
-                            if (this.IsLoaded)
-                                this.ShowMessageAsync("", (string)param);
-                            else
-                            {
-                                MessageBox.Show((string)param);
-                            }
+                            MessageBox.Show((string)param);
                         }));
                     }
                     break;

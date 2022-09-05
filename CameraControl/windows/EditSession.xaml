@@ -1,4 +1,4 @@
-<Controls:MetroWindow x:Class="CameraControl.windows.EditSession"
+<Window x:Class="CameraControl.windows.EditSession"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{T:TranslateExtension SessionWindowTitle}" Height="550" Width="600" Loaded="Window_Loaded" ResizeMode="NoResize" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -13,15 +13,11 @@
                       TextOptions.TextRenderingMode="Auto"
                       Background="{DynamicResource MaterialDesignPaper}"
                       FontFamily="{DynamicResource MaterialDesignFont}" 
-                      GlowBrush="{DynamicResource AccentColorBrush}">
+                      >
     <!--<Window.DataContext>
         <Classes:PhotoSession/>
     </Window.DataContext>-->
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="{T:TranslateExtension ButtonHelp}" Name="btn_help" Click="btn_help_Click" Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=OnlineReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
+
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -133,4 +129,4 @@
         <Button Content="{T:TranslateExtension ButtonOk}" Grid.Row="1" HorizontalAlignment="Left" Margin="4" Name="button1" Width="75" VerticalAlignment="Bottom" Click="button1_Click" IsDefault="True" />
         <Button Content="{T:TranslateExtension ButtonCancel}" Grid.Row="1" Margin="4" Name="button2" HorizontalAlignment="Right" Width="75"  VerticalAlignment="Bottom" Click="button2_Click" IsCancel="True" />
     </Grid>
-</Controls:MetroWindow>
+</Window>

@@ -295,7 +295,7 @@ namespace CameraControl.windows
 
         private void chk_noautofocus_Checked(object sender, RoutedEventArgs e)
         {
-            this.ShowMessageAsync("Warning", "This feature not working reliable ");
+            MessageBox.Show("This feature not working reliable ");
         }
 
         private void btn_saveOrder_Click(object sender, RoutedEventArgs e)

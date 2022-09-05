@@ -76,7 +76,7 @@ namespace CameraControl.windows
             }
             catch (Exception ex)
             {
-                this.ShowMessageAsync(TranslationStrings.LabelError, TranslationStrings.LabelErrorSetFolder);
+                MessageBox.Show(TranslationStrings.LabelErrorSetFolder);
                 Log.Error("Error set folder ", ex);
             }
         }
