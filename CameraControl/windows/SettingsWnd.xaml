@@ -33,12 +33,12 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="220*" />
-            <RowDefinition Height="41*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="4">
-            <materialDesign:Card Margin="4" Background="{DynamicResource MaterialDesignBackground}">
+            <materialDesign:Card Margin="4" >
                 <StackPanel>
                     <Expander HorizontalAlignment="Stretch" IsExpanded="False"  >
                         <Expander.Header>

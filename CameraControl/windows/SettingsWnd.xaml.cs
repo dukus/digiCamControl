@@ -97,6 +97,7 @@ namespace CameraControl.windows
         {
             ServiceProvider.Settings.EndEdit();
             ServiceProvider.Settings.Save();
+            ServiceProvider.WindowsManager.ApplyTheme();
             this.Close();
         }
 

@@ -98,8 +98,14 @@ namespace CameraControl.Core.Classes
             var paletteHelper = new PaletteHelper();
             ITheme theme = paletteHelper.GetTheme();
             IBaseTheme baseTheme = ServiceProvider.Settings.CurrentThemeNameNew.StartsWith("Dark") ? new MaterialDesignDarkTheme() : (IBaseTheme)new MaterialDesignLightTheme();
-            theme.SetPrimaryColor((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(ServiceProvider.Settings.CurrentThemeNameNew.Split('\\')[1]));
             theme.SetBaseTheme(baseTheme);
+            foreach (var item in new SwatchesProvider().Swatches)
+            {
+                if (item.Name == ServiceProvider.Settings.CurrentThemeNameNew.Split('\\')[1])
+                    theme.SetPrimaryColor(item.PrimaryHues[item.PrimaryHues.Count / 2].Color);
+            }
+//            theme.SetPrimaryColor((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(ServiceProvider.Settings.CurrentThemeNameNew.Split('\\')[1]));
+
 
             paletteHelper.SetTheme(theme);
         }

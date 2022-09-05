@@ -2,8 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="digiCamControl by Duka Istvan" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" >
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="digiCamControl by Duka Istvan" Height="380" Width="460" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" 
+        >
     
     <Grid>
         <!--<StackPanel Orientation="Horizontal">
