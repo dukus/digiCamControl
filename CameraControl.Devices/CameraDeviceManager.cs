@@ -224,6 +224,7 @@ namespace CameraControl.Devices
             WifiDeviceProviders.Add(new PanonoProvider());
             WifiDeviceProviders.Add(new OscProvider());
             WifiDeviceProviders.Add(new PtzOpticsProvider());
+            WifiDeviceProviders.Add(new GoProProvider());
             foreach (var type in CustomDeviceClass)
             {
                 DeviceClass.Add(type.Key, type.Value);

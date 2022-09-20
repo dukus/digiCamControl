@@ -129,6 +129,10 @@
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <materialDesign:PackIcon Kind="SignalVariant" Height="35" Width="35" />
             </Button>
+            <Button ToolTip="Connect bluetooth device" Height="40" Name="but_bt" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_bt_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <materialDesign:PackIcon Kind="Bluetooth" Height="35" Width="35" />
+            </Button>
             <Button ToolTip="{T:TranslateExtension LabelPrint}" Height="40" Name="but_print" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_print_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowPrintButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <materialDesign:PackIcon Kind="Printer" Height="35" Width="35" />

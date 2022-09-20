@@ -38,7 +38,7 @@ namespace Setup
                 new File(appFeature, "ffmpeg.exe"),
                 new File(appFeature, "ngrok.exe"),
                 new File(appFeature, "MtpTester.exe"),
-                new File(appFeature, "PhotoBooth.exe", new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
+                //new File(appFeature, "PhotoBooth.exe", new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
 #if DEBUG
                 new DirFiles(appFeature, @"*.pdb"),
@@ -188,11 +188,11 @@ namespace Setup
             var dict = new Dictionary<string, string>();
             dict.Add("Visible","yes");
             var bootstrapper =new Bundle(project.Name,
-            new PackageGroupRef("NetFx46Web"),
+           // new PackageGroupRef("NetFx48Web"),
             //new ExePackage("vcredist_x86.exe"){InstallCommand ="/quite" },
             //new MsiPackage(Path.Combine(Path.GetDirectoryName(productMsi), "IPCamAdapter.msi")) { Permanent = false,Attributes = dict},
             //new MsiPackage(obsMsi) { Id = "ObsPackageId", Attributes = dict },
-            new MsiPackage(productMsi) { Id = "MyProductPackageId", DisplayInternalUI = true, Attributes = dict });
+            new MsiPackage(productMsi) { Id = "MyProductPackageId", DisplayInternalUI = true, Attributes = dict, SourceFile= productMsi });
 
             bootstrapper.Copyright = project.ControlPanelInfo.Manufacturer;
             bootstrapper.Version = project.Version;

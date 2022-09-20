@@ -1,0 +1,36 @@
+﻿<Window  xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls" x:Class="CameraControl.windows.BluetoothView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local1="clr-namespace:CameraControl.ViewModel"
+        mc:Ignorable="d"
+        Title="Connect Bluetooth Device" Height="350" Width="400"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.DataContext>
+        <local1:BlueToothViewModel/>
+    </Window.DataContext>
+    <Grid IsEnabled="{Binding IsNotBusy}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="lbDevices" ItemsSource="{Binding GoProBluetoothHelper.Devices}" DisplayMemberPath="DisplayName" Margin="16" SelectedItem="{Binding SelectedItem}" />
+        <StackPanel Grid.Column="1">
+            <Button Margin="4" Content="ReScan" Command="{Binding ReScanCommand}"/>
+            <Button Margin="4" Content="Pair" Command="{Binding PairCommand}" IsEnabled="{Binding IsSelected}"/>
+            <Button Margin="4" Content="Connect" Command="{Binding ConnectCommand}" IsEnabled="{Binding IsSelected}"/>
+        </StackPanel>
+        <TextBlock Margin="4" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding GoProBluetoothHelper.Message}"/>
+    </Grid> 
+</Window>

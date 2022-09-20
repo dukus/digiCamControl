@@ -1135,5 +1135,20 @@ namespace CameraControl
             }
         }
 
+        private void but_bt_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dlg = new BluetoothView();
+                dlg.Owner = this;
+                dlg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                dlg.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Unable to connect to Bluetooth device", exception);
+                this.ShowMessageAsync("Error", "Unable to connect to Bluetooth device " + exception.Message);
+            }
+        }
     }
 }

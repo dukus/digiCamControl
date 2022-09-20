@@ -267,6 +267,7 @@
     <Compile Include="ViewModel\AstroLiveViewViewModel.cs" />
     <Compile Include="ViewModel\AutoExportPluginEditViewModel.cs" />
     <Compile Include="ViewModel\BarcodeViewModel.cs" />
+    <Compile Include="ViewModel\BlueToothViewModel.cs" />
     <Compile Include="ViewModel\BracketingViewModel.cs" />
     <Compile Include="ViewModel\CameraPropertyViewModel.cs" />
     <Compile Include="ViewModel\LayoutViewModel.cs" />
@@ -292,6 +293,9 @@
     </Compile>
     <Compile Include="windows\BarcodeWnd.xaml.cs">
       <DependentUpon>BarcodeWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\BluetoothView.xaml.cs">
+      <DependentUpon>BluetoothView.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\BraketingWnd.xaml.cs">
       <DependentUpon>BraketingWnd.xaml</DependentUpon>
@@ -501,6 +505,10 @@
     <Page Include="windows\BarcodeWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\BluetoothView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="windows\BraketingWnd.xaml">
       <SubType>Designer</SubType>
