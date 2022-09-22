@@ -2731,14 +2731,11 @@ namespace CameraControl.ViewModel
                         }
                     }
                 } while (retry && retryNum < 35);
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    if (_videoSource != null && _videoSource.IsPlaying)
-                    {
-                        _videoSource.Stop();
-                    }
-                }));
                 server?.Stop();
+                if (_videoSource != null && _videoSource.IsPlaying)
+                {
+                    _videoSource.Stop();
+                }
             }
             catch (Exception exception)
             {
