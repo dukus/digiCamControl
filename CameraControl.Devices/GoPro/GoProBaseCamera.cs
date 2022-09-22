@@ -236,18 +236,26 @@ namespace CameraControl.Devices.Others
         public override void TransferFile(object o, string filename)
         {
             _keepAlivetimer.Stop();
+            _timer.Stop();
             TransferProgress = 0;
-            HttpHelper.DownLoadFileByWebRequest(String.Format("{0}/videos/DCIM/{1}",Address,(string)o), filename, this);
+            HttpHelper.DownLoadFileByWebRequest(String.Format("{0}/videos/DCIM/{1}", Address, (string)o), filename, this);
             _keepAlivetimer.Start();
+            _timer.Start();
         }
         public override void TransferFileThumb(object o, string filename)
         {
             TransferProgress = 0;
             HttpHelper.DownLoadFileByWebRequest(String.Format(_useOpenGoPro ? "{0}/gopro/media/screennail?path={1}" : "{0}/gp/gpMediaMetadata?p={1}", Address, (string)o), filename, this);
         }
+        public override bool DeleteObject(DeviceObject deviceObject)
+        {
+            GetJson(String.Format( _useOpenGoPro ? "/gopro/media/delete/file?path={0}" : "gp/gpControl/command/storage/delete?p={0}",deviceObject.Handle));
+            return true;
+        }
         public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
         {
             _keepAlivetimer.Stop();
+            _timer.Stop();
             AsyncObservableCollection<DeviceObject> res = new AsyncObservableCollection<DeviceObject>();
             var json = GetJson(_useOpenGoPro ? "gopro/media/list" : "gp/gpMediaList");
             foreach (var item in json["media"])
@@ -265,6 +273,7 @@ namespace CameraControl.Devices.Others
                 }
             }
             _keepAlivetimer.Start();
+            _timer.Start();
             return res;
 
         }

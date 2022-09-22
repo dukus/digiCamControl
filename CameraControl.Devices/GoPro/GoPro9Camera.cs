@@ -138,5 +138,6 @@ namespace CameraControl.Devices.Others
             var res = GetJson("/gopro/camera/stream/stop");
         }
 
+
     }
 }
