@@ -373,6 +373,7 @@ namespace CameraControl.windows
                         continue;
                     dlg.Label = fileItem.FileName;
                     dlg.ImageSource = fileItem.Thumbnail;
+                    dlg.Camera=fileItem.Device;
 
                     PhotoSession session = (PhotoSession) fileItem.Device.AttachedPhotoSession ??
                                            ServiceProvider.Settings.DefaultSession;

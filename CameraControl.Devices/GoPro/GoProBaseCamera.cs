@@ -52,7 +52,9 @@ namespace CameraControl.Devices.Others
             IsConnected = true;
             //-------------------
             IsoNumber = new PropertyValue<long> { Available = false };
-            
+            FNumber=new PropertyValue<long> { Available = false };
+            FocusMode = new PropertyValue<long> { Available = false };
+            ExposureMeteringMode = new PropertyValue<long> { Available = false };
             //-------------------
             Mode = new PropertyValue<long> { Tag = "144", Available = true, IsEnabled = true };
             Mode.AddValues("Video", 0);
@@ -151,6 +153,7 @@ namespace CameraControl.Devices.Others
         public override void CapturePhoto()
         {
             StopLiveView();
+            _timer.Stop();
             IsBusy = true;
             if (Mode.Value != "Photo")
             {
@@ -173,16 +176,18 @@ namespace CameraControl.Devices.Others
                 GetEvent();
                 Console.WriteLine("====");
             }
-            var filename = GetLastMedia();
+            var mediaInfo = GetLastMedia();
+
             PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
             {
                 WiaImageItem = null,
                 EventArgs = new PortableDeviceEventArgs(),
                 CameraDevice = this,
-                FileName = filename,
-                Handle = filename
+                FileName = mediaInfo.Location,
+                Handle =  mediaInfo
             };
             OnPhotoCapture(this, args);
+            _timer.Start();
         }
 
         public override void StartRecordMovie()
@@ -222,14 +227,14 @@ namespace CameraControl.Devices.Others
                 GetEvent();
                 Console.WriteLine("====");
             }
-            var filename = GetLastMedia();
+            var mediaInfo = GetLastMedia();
             PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
             {
                 WiaImageItem = null,
                 EventArgs = new PortableDeviceEventArgs(),
                 CameraDevice = this,
-                FileName = filename,
-                Handle = filename
+                FileName = mediaInfo.Location,
+                Handle = mediaInfo
             };
             OnPhotoCapture(this, args);
         }
@@ -238,18 +243,22 @@ namespace CameraControl.Devices.Others
             _keepAlivetimer.Stop();
             _timer.Stop();
             TransferProgress = 0;
-            HttpHelper.DownLoadFileByWebRequest(String.Format("{0}/videos/DCIM/{1}", Address, (string)o), filename, this);
+            if (_useOpenGoPro)
+                GetJson("/gopro/media/turbo_transfer?p=1");
+            HttpHelper.DownLoadFileByWebRequest(String.Format("{0}/videos/DCIM/{1}", Address, ((GoProMediaHandle)o).Location), filename, this, ((GoProMediaHandle)o).Size);
+            if (_useOpenGoPro)
+                GetJson("/gopro/media/turbo_transfer?p=0");
             _keepAlivetimer.Start();
             _timer.Start();
         }
         public override void TransferFileThumb(object o, string filename)
         {
             TransferProgress = 0;
-            HttpHelper.DownLoadFileByWebRequest(String.Format(_useOpenGoPro ? "{0}/gopro/media/screennail?path={1}" : "{0}/gp/gpMediaMetadata?p={1}", Address, (string)o), filename, this);
+            HttpHelper.DownLoadFileByWebRequest(String.Format(_useOpenGoPro ? "{0}/gopro/media/screennail?path={1}" : "{0}/gp/gpMediaMetadata?p={1}", Address, ((GoProMediaHandle)o).Location), filename, this, ((GoProMediaHandle)o).Size);
         }
         public override bool DeleteObject(DeviceObject deviceObject)
         {
-            GetJson(String.Format( _useOpenGoPro ? "/gopro/media/delete/file?path={0}" : "gp/gpControl/command/storage/delete?p={0}",deviceObject.Handle));
+            GetJson(String.Format( _useOpenGoPro ? "/gopro/media/delete/file?path={0}" : "gp/gpControl/command/storage/delete?p={0}", ((GoProMediaHandle)deviceObject.Handle).Location));
             return true;
         }
         public override AsyncObservableCollection<DeviceObject> GetObjects(object storageId, bool loadThumbs)
@@ -267,9 +276,9 @@ namespace CameraControl.Devices.Others
                     res.Add(new DeviceObject()
                     {
                         FileName = file,
-                        Handle = string.Format("{1}/{2}", Address, folder, file),
+                        Handle = new GoProMediaHandle { Location = string.Format("{1}/{2}", Address, folder, file), Size = (long)fileItem["s"] },
                         ThumbData = !loadThumbs ? null : (GetData(string.Format(_useOpenGoPro ? "/gopro/media/thumbnail?path={0}/{1}" : "/gp/gpMediaMetadata?p={0}/{1}", folder, file)))
-                    }); 
+                    });
                 }
             }
             _keepAlivetimer.Start();
@@ -277,12 +286,13 @@ namespace CameraControl.Devices.Others
             return res;
 
         }
-        private string GetLastMedia()
+        private GoProMediaHandle GetLastMedia()
         {
             try
             {
                 var folder = "";
                 var file = "";
+                long size = 0;
                 var json = GetJson(_useOpenGoPro ? "gopro/media/list" : "gp/gpMediaList");
                 foreach (var item in json["media"])
                 {
@@ -290,16 +300,17 @@ namespace CameraControl.Devices.Others
                     foreach(var fileItem in item["fs"])
                     {
                         file = (string)fileItem["n"];
+                        size = (long)fileItem["s"];
                     }
                 }
-                return string.Format("{0}/videos/DCIM/{1}/{2}",Address, folder, file);
+                return new GoProMediaHandle() { Location = string.Format("{1}/{2}", Address, folder, file), Size = size };
 
             }
             catch (Exception ex)
             {
                 Log.Error("Error to get last media", ex);
             }
-            return "";
+            return new GoProMediaHandle();
         }
 
         public void GetEvent()

@@ -166,6 +166,7 @@
     <Compile Include="GoPro\GoProBaseCamera.cs" />
     <Compile Include="GoPro\GoProBluetoothDevice.cs" />
     <Compile Include="GoPro\GoProBluetoothHelper.cs" />
+    <Compile Include="GoPro\GoProMediaHandle.cs" />
     <Compile Include="GoPro\GoProProvider.cs" />
     <Compile Include="ICameraDevice.cs" />
     <Compile Include="IWifiDeviceProvider.cs" />

@@ -26,10 +26,10 @@ namespace CameraControl.Devices.Classes
                 }
 
                 FileStream os = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-                byte[] buff = new byte[102400];
+                byte[] buff = new byte[1024*1024];
                 int c = 0;
                 int totalsize = 0;
-                while ((c = s.Read(buff, 0, 102400)) > 0)
+                while ((c = s.Read(buff, 0, buff.Length)) > 0)
                 {
                     os.Write(buff, 0, c);
                     os.Flush();

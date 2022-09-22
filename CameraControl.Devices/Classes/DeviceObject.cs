@@ -40,5 +40,7 @@ namespace CameraControl.Devices.Classes
         public string FileName { get; set; }
         public byte[] ThumbData { get; set; }
         public DateTime FileDate { get; set; }
+        public long Size { get; set; }
+
     }
 }

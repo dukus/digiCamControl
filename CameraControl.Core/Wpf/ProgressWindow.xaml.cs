@@ -29,6 +29,7 @@
 #region
 
 using System;
+using System.ComponentModel;
 using System.Windows.Media;
 using CameraControl.Devices;
 
@@ -39,8 +40,10 @@ namespace CameraControl.Core.Wpf
     /// <summary>
     /// Interaction logic for ProgressWindow.xaml
     /// </summary>
-    public partial class ProgressWindow 
+    public partial class ProgressWindow : INotifyPropertyChanged
     {
+        private ICameraDevice camera;
+
         public ProgressWindow()
         {
             InitializeComponent();
@@ -48,7 +51,7 @@ namespace CameraControl.Core.Wpf
 
         public string Label
         {
-            get { return (string) lbl_label.Content; }
+            get { return (string)lbl_label.Content; }
             set { Dispatcher.Invoke(new Action(delegate { lbl_label.Content = value; })); }
         }
 
@@ -73,6 +76,32 @@ namespace CameraControl.Core.Wpf
             get { return progressBar.Maximum; }
             set { Dispatcher.Invoke(new Action(delegate { progressBar.Maximum = value; })); }
         }
+
+        #region Implementation of INotifyPropertyChanged
+
+        public virtual event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        #endregion
+
+        public ICameraDevice Camera
+        {
+            get => camera;
+
+            set
+            {
+                camera = value;
+                NotifyPropertyChanged(nameof(Camera));
+            }
+        }
+
 
         public new void Hide()
         {

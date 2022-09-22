@@ -23,8 +23,8 @@
                 <RemoveFolder Id="INSTALLDIR" On="uninstall" />
               </Component>
 
-              <Component Id="Component.DccObsPlugin.dll_2539501587" Guid="357e0d80-5093-478e-8c11-28b140ebdf48">
-                <File Id="DccObsPlugin.dll_2539501587" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
+              <Component Id="Component.DccObsPlugin.dll_1677022606" Guid="357e0d80-5093-478e-8c11-28b1962748b9">
+                <File Id="DccObsPlugin.dll_1677022606" Source="ObsPlugin\CLRHostPlugin\DccObsPlugin.dll" />
               </Component>
 
             </Directory>
@@ -47,7 +47,7 @@
 
     <Icon Id="app_icon.ico" SourceFile="..\..\..\Setup\logo.ico" />
 
-    <WixVariable Id="WixUILicenseRtf" Value="D:\devel\vs2010\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="C:\Work\VS\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
       <UpgradeVersion Minimum="0.0.0.0" Maximum="2.1.4.6" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
@@ -63,7 +63,7 @@
 
     <Feature Id="Obs20Plugin" Title="Obs Plugin" Absent="allow" Level="1">
       <ComponentRef Id="Component.INSTALLDIR" />
-      <ComponentRef Id="Component.DccObsPlugin.dll_2539501587" />
+      <ComponentRef Id="Component.DccObsPlugin.dll_1677022606" />
       <ComponentRef Id="ProgramFilesFolder.OBS.plugins" />
       <ComponentRef Id="ProgramFilesFolder.OBS" />
     </Feature>
