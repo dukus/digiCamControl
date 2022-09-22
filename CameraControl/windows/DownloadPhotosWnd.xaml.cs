@@ -197,6 +197,7 @@ namespace CameraControl.windows
                                                          dlg.Show();
                                                          Items.Clear();
                                                          FreeResources();
+                                                         dlg.Owner = this;
                                                          Thread thread = new Thread(PopulateImageList);
                                                          thread.Start();
                                                      }));
@@ -320,11 +321,12 @@ namespace CameraControl.windows
                 //    MyView.GroupDescriptions.Add(groupDescription);
                 //}
 
-                if (ServiceProvider.DeviceManager.ConnectedDevices.Count > 1)
+                //if (ServiceProvider.DeviceManager.ConnectedDevices.Count > 1)
+                if (Items.Select(x=>x.Device).Distinct().Count()>1)
                 {
                     lst_items.Visibility = Visibility.Visible;
                     lst_items_simple.Visibility = Visibility.Collapsed;
-//                    lst_items.ItemsSource = MyView;
+                    //                    lst_items.ItemsSource = MyView;
                 }
                 else
                 {

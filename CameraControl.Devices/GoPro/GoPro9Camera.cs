@@ -75,7 +75,7 @@ namespace CameraControl.Devices.Others
             AdvancedProperties.Add(LoadJsonValues("87", json));
             AdvancedProperties.Add(LoadJsonValues("88", json));
             AdvancedProperties.Add(LoadJsonValues("147", json));
-
+            GetEvent();
         }
 
         private PropertyValue<long> LoadJsonValues(string tag, JObject json)
