@@ -30,7 +30,7 @@ namespace CameraControl.Devices.Others
             //Mode.AddValues("Night Lapse Video", 26);
             //Mode.AddValues("Slo-Mo", 27);
             //Mode.AddValues("TimeLapse", 3);
-            base.Init(address, json, bluetoothDevice);
+            base.BaseInit(address, json, bluetoothDevice);
 
             foreach (var item in json["modes"])
             {

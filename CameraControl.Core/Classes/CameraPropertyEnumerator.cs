@@ -48,10 +48,18 @@ namespace CameraControl.Core.Classes
         {
             if (device == null)
                 return new CameraProperty();
-            foreach (CameraProperty cameraProperty in Items)
+            // there is a threading error, but too lazy to find it. 
+            try
             {
-                if (cameraProperty.SerialNumber == device.SerialNumber)
-                    return cameraProperty;
+                foreach (CameraProperty cameraProperty in Items)
+                {
+                    if (cameraProperty.SerialNumber == device.SerialNumber)
+                        return cameraProperty;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Error("CameraProperty error", ex);
             }
             var c = new CameraProperty() {SerialNumber = device.SerialNumber, DeviceName = device.DisplayName};
             Items.Add(c);

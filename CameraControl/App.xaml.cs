@@ -165,7 +165,7 @@ namespace CameraControl
                 Log.Error("Fatal error ", ex);
             }
 
-            Dispatcher.Invoke(new Action(delegate
+            Dispatcher.BeginInvoke(new Action(delegate
             {
                 StartApplication();
                 if (_startUpWindow != null)

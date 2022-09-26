@@ -408,6 +408,7 @@ namespace CameraControl
                         {
                             var wnd = new Welcome();
                             wnd.ShowDialog();
+                            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
                         }
                         catch
                         {
@@ -415,14 +416,6 @@ namespace CameraControl
                     });
                 }
             }
-
-            Dispatcher.BeginInvoke(
-                new Action(
-                    delegate
-                    {
-                        Thread.Sleep(1500);
-                        ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
-                    }));
 
         }
 
@@ -527,7 +520,7 @@ namespace CameraControl
                 string strTransfer = "Transfer time : " + stopWatch.Elapsed.TotalSeconds.ToString("##.###") + " Speed :" +
                                      Math.Round(
                                          new System.IO.FileInfo(tempFile).Length / 1024.0 / 1024 /
-                                         stopWatch.Elapsed.TotalSeconds, 2)+" Mb/s";
+                                         stopWatch.Elapsed.TotalSeconds, 2) + " Mb/s";
                 Log.Debug(strTransfer);
 
                 string fileName = "";
@@ -696,7 +689,7 @@ namespace CameraControl
                 }
                 _lastLoadTime = DateTime.Now;
                 //ServiceProvider.Settings.Save(session);
-                StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferDone + " "+ strTransfer;
+                StaticHelper.Instance.SystemMessage = TranslationStrings.MsgPhotoTransferDone + " " + strTransfer;
 
                 if (ServiceProvider.Settings.UseExternalViewer &&
                     File.Exists(ServiceProvider.Settings.ExternalViewerPath))
@@ -710,7 +703,7 @@ namespace CameraControl
                     PhotoUtils.PlayCaptureSound();
                 }
                 eventArgs.CameraDevice.ReleaseResurce(eventArgs.Handle);
-                
+
                 //show fullscreen only when the multiple camera support isn't used
                 if (ServiceProvider.Settings.Preview &&
                     !ServiceProvider.WindowsManager.Get(typeof(MultipleCameraWnd)).IsVisible &&
@@ -1002,7 +995,7 @@ namespace CameraControl
             catch (Exception exception)
             {
                 Log.Error("Unable to connect to WiFi device", exception);
-//                this.ShowMessageAsync("Error", "Unable to connect to WiFi device " + exception.Message);
+                //                this.ShowMessageAsync("Error", "Unable to connect to WiFi device " + exception.Message);
                 StaticHelper.Instance.SystemMessage = "Unable to connect to WiFi device " + exception.Message;
             }
         }

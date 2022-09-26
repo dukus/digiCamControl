@@ -3,6 +3,7 @@ using CameraControl.Devices.GoPro;
 using Newtonsoft.Json.Linq;
 using PortableDeviceLib;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Documents;
 using Timer = System.Timers.Timer;
 
 namespace CameraControl.Devices.Others
@@ -21,6 +23,7 @@ namespace CameraControl.Devices.Others
         protected Timer _timer = new System.Timers.Timer(2000);
         protected Timer _keepAlivetimer = new System.Timers.Timer(2500);
         private object _locker = new object();
+        private List<List<string>> _props = new List<List<string>>();
         public string Address { get; set; }
 
         public PropertyValue<long> Fps { get; set; }
@@ -36,8 +39,7 @@ namespace CameraControl.Devices.Others
             Manufacturer = "GoPro";
             
         }
-
-        public virtual void Init(string address, JObject json, GoProBluetoothDevice bluetoothDevice)
+        public virtual void BaseInit(string address, JObject json, GoProBluetoothDevice bluetoothDevice)
         {
             _bluetoothDevice = bluetoothDevice;
             Address = "http://" + address;
@@ -52,9 +54,25 @@ namespace CameraControl.Devices.Others
             IsConnected = true;
             //-------------------
             IsoNumber = new PropertyValue<long> { Available = false };
-            FNumber=new PropertyValue<long> { Available = false };
+            FNumber = new PropertyValue<long> { Available = false };
             FocusMode = new PropertyValue<long> { Available = false };
             ExposureMeteringMode = new PropertyValue<long> { Available = false };
+            //-------------------
+
+        }
+        public virtual void Init(string address, JObject json, GoProBluetoothDevice bluetoothDevice)
+        {
+            BaseInit(address, json, bluetoothDevice);
+            
+            foreach (var grup in json["display_hints"])
+            {
+                var list = new List<string>();
+                foreach (var item in grup["settings"])
+                {
+                    list.Add((string)item["setting_id"]);
+                }
+                _props.Add(list);
+            }
             //-------------------
             Mode = new PropertyValue<long> { Tag = "144", Available = true, IsEnabled = true };
             Mode.AddValues("Video", 0);
@@ -62,36 +80,59 @@ namespace CameraControl.Devices.Others
             Mode.AddValues("MultiShotMode", 2);
             Mode.ValueChanged += Mode_ValueChanged;
             Mode.ReloadValues();
-            CompressionSetting = new PropertyValue<long> {Tag="2", Available = true, IsEnabled = true };
-            CompressionSetting.AddValues("5K", 24);
-            CompressionSetting.AddValues("4K", 1);
-            CompressionSetting.AddValues("4K 4:3", 18);
-            CompressionSetting.AddValues("2.7K", 4);
-            CompressionSetting.AddValues("2.7K 4:3", 6);
-            CompressionSetting.AddValues("1440", 7);
-            CompressionSetting.AddValues("1080", 9);
-            CompressionSetting.ValueChanged += CompressionSetting_ValueChanged;
-            CompressionSetting.ReloadValues();
-            Fps = new PropertyValue<long> { Tag = "3", Available = true, IsEnabled = true, Name = "FPS" };
-            Fps.AddValues("240 - 8X", 0);
-            Fps.AddValues("200 - 8X", 13);
-            Fps.AddValues("120 - 4X", 1);
-            Fps.AddValues("60  - 2X", 5);
-            Fps.AddValues("30  - 1X", 8);
-            Fps.AddValues("24  - 1X", 10);
-            Fps.ValueChanged += Fps_ValueChanged;
-            Fps.ReloadValues();
-            AdvancedProperties.Add(Fps);
+            Mode.SetValue(0);
+            CompressionSetting = new PropertyValue<long> {Tag="2", Available = false, IsEnabled = true };
+            WhiteBalance = new PropertyValue<long> { Tag = "22", Available = true, IsEnabled = true };
+            ShutterSpeed = new PropertyValue<long> { Tag = "19", Available = true, IsEnabled = true };
+            ExposureCompensation = new PropertyValue<long> { Tag = "26", Available = true, IsEnabled = true };
+            LoadJsonValues(WhiteBalance, json);
+            LoadJsonValues(ShutterSpeed, json);
+            LoadJsonValues(ExposureCompensation, json);
+
+            foreach (var item in _props)
+            {
+                foreach (var value in item)
+                    AdvancedProperties.Add(LoadJsonValues(value.ToString(), json));
+            }
+            ReloadSubModes();
         }
 
-        private void Fps_ValueChanged(object sender, string key, long val)
+        private PropertyValue<long> LoadJsonValues(string tag, JObject json)
         {
-            GetJson("gp/gpControl/setting/3/" + val.ToString());
+            PropertyValue<long> prop = new PropertyValue<long> { Tag = tag, IsEnabled = true, Available = true };
+            prop.ValueChanged += Property_ValueChanged;
+            LoadJsonValues(prop, json);
+            return prop;
         }
 
-        private void CompressionSetting_ValueChanged(object sender, string key, long val)
+        private void LoadJsonValues(PropertyValue<long> prop, JObject json)
         {
-            GetJson("gp/gpControl/setting/2/" + val.ToString());
+            prop.Clear();
+            try
+            {
+                foreach (var group in json["modes"])
+                    foreach (var item in group["settings"])
+                    {
+                        if (((int)item["id"]).ToString() == prop.Tag)
+                        {
+                            prop.Name = (string)item["display_name"] + " - " + prop.Tag;
+                            foreach (var val in item["options"])
+                            {
+                                prop.AddValues((string)val["display_name"], (long)val["value"]);
+                            }
+                        }
+                    }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error loading property values ", ex);
+            }
+            prop.ReloadValues();
+        }
+
+        private void Property_ValueChanged(object sender, string key, long val)
+        {
+            GetJson(String.Format("/gp/gpControl/setting/{0}/{1}", ((PropertyValue<long>)sender).Tag, val));
         }
 
         private void Mode_ValueChanged(object sender, string key, long val)
@@ -330,7 +371,11 @@ namespace CameraControl.Devices.Others
                                 IsBusy = ((int)item.Value) != 0;
                             if (item.Name == "43" && !_useOpenGoPro)
                             {
-                                Mode.SetValue(((int)item.Value), false);
+                                if (Mode.NumericValue != (long)item.Value)
+                                {
+                                    Mode.SetValue(((int)item.Value), false);
+                                    ReloadSubModes();
+                                }
                             }
                             if (item.Name == "96" && _useOpenGoPro)
                             {
@@ -356,10 +401,10 @@ namespace CameraControl.Devices.Others
                             }
                             if (CompressionSetting != null && CompressionSetting.Tag == item.Name)
                                 CompressionSetting.SetValue((long)item.Value, false);
-                            
+
                             if (ShutterSpeed != null && ShutterSpeed.Tag == item.Name)
                                 ShutterSpeed.SetValue((long)item.Value, false);
-                            
+
                             if (WhiteBalance != null && WhiteBalance.Tag == item.Name)
                                 WhiteBalance.SetValue((long)item.Value, false);
 
@@ -372,15 +417,17 @@ namespace CameraControl.Devices.Others
                                 {
                                     if (!property.NumericValues.Contains((long)item.Value))
                                     {
-                                        property.Available = false;
+                                            property.Available = false;
                                     }
                                     else
                                     {
                                         property.SetValue((long)item.Value, false);
-                                        property.Available = true;
+                                        if (_useOpenGoPro)
+                                            property.Available = true;
                                     }
                                 }
                             }
+
                         }
                     }
                 }
@@ -399,8 +446,21 @@ namespace CameraControl.Devices.Others
          
         public virtual void ReloadSubModes()
         {
-
+            if (Mode.NumericValue >= _props.Count)
+                return;
+            foreach(var property in AdvancedProperties)
+            {
+                if (_props[(int)Mode.NumericValue].Contains(property.Tag) || _props[3].Contains(property.Tag))
+                {
+                    property.Available = true;
+                }
+                else
+                {
+                    property.Available = false;
+                }
+            }
         }
+
         public JObject GetJson(string endpoint)
         {
             if (Monitor.TryEnter(Locker, 5000))
