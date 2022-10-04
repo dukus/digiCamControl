@@ -96,12 +96,13 @@ namespace CameraControl.Core.Classes
                 //Enable SSL.
                 //mailClient.EnableSsl = true;
 
-                var message = new MailMessage(from, to)
+                var message = new MailMessage("admin@digicamcontrol.com", to)
                 {
                     Subject = subject,
-                    Body = body ?? "",
+                    Body = body ?? "",                    
                     IsBodyHtml = false
                 };
+                message.ReplyToList.Add(from);
                 if (File.Exists(file))
                     message.Attachments.Add(new Attachment(file));
 
@@ -126,7 +127,7 @@ namespace CameraControl.Core.Classes
                 body = "Version :" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + "\n" +
                        "Client Id" + (ServiceProvider.Settings.ClientId ?? "") + "\n" + body;
                 SendEmail(body, (type ?? "Log file"),
-                    string.IsNullOrWhiteSpace(email) ? "error_report@digicamcontrol.com" : email, "error_report@digicamcontrol.com", destfile);
+                    string.IsNullOrWhiteSpace(email) ? "admin@digicamcontrol.com" : email, "error_report@digicamcontrol.com", destfile);
             }
             catch (Exception ex)
             {

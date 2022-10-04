@@ -115,7 +115,6 @@ namespace CameraControl
             _selectiontimer.Elapsed += _selectiontimer_Elapsed;
             _selectiontimer.AutoReset = false;
             ServiceProvider.WindowsManager.Event += WindowsManager_Event;
-
         }
 
         private void AddPlugin(IAutoExportPlugin obj)

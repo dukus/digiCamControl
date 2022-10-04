@@ -81,7 +81,6 @@ namespace CameraControl
                 Shutdown(-1);
                 return;
             }
-
             //ThemeManager.AddAccent("Astro", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroAccent.xaml"));
             //ThemeManager.AddAppTheme("Black", new Uri("pack://application:,,,/CameraControl;component/Resources/AstroTheme.xaml"));
 
@@ -164,7 +163,6 @@ namespace CameraControl
             {
                 Log.Error("Fatal error ", ex);
             }
-
             Dispatcher.BeginInvoke(new Action(delegate
             {
                 StartApplication();
@@ -515,7 +513,7 @@ namespace CameraControl
             e.Handled = true;
 
             Log.Error("Unhandled error ", e.Exception);
-            ServiceProvider.Analytics.Error(e.Exception);
+            ServiceProvider.Analytics?.Error(e.Exception);
             string errorMessage =
                 string.Format(
                     TranslationStrings.LabelUnHandledError,
