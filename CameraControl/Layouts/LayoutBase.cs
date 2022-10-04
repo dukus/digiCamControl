@@ -503,7 +503,7 @@ namespace CameraControl.Layouts
                         RefreshImage();
                         break;
                     case WindowsCmdConsts.Zoom_Image_Fit:
-                        ZoomAndPanControl.ScaleToFit();
+                        ZoomAndPanControl?.ScaleToFit();
                         break;
                     case WindowsCmdConsts.Zoom_Image_60:
                         ZoomToFocus();

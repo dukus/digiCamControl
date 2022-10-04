@@ -43,7 +43,7 @@ namespace CameraControl.Layouts
         {
             InitializeComponent();
             ImageLIst = ImageLIstBox;
-            //ZoomAndPanControl = zoomAndPanControl;
+            ZoomAndPanControl = zoomAndPanControl;
             InitServices();
             if (ZoomAndPanControl == null)
                 return;
