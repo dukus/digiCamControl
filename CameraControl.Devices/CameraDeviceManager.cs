@@ -48,6 +48,7 @@ using Canon.Eos.Framework;
 using PortableDeviceLib;
 using WIA;
 using Accord.Video.DirectShow;
+using System.Management;
 
 #endregion
 
@@ -259,6 +260,22 @@ namespace CameraControl.Devices
             {
                 Log.Error("Error initialize WIA", exception);
             }
+
+            try
+            {
+                ManagementEventWatcher watcher = new ManagementEventWatcher();
+                WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM __InstanceCreationEvent WITHIN 2 WHERE TargetInstance ISA 'Win32_PnPEntity'");
+                watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
+                watcher.Query = insertQuery;
+                watcher.Start();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error initialize GoPro USB support", ex);
+            }
+            
+
+
             if (datafolder != null && Directory.Exists(datafolder))
             {
                 try
@@ -275,6 +292,43 @@ namespace CameraControl.Devices
                 {
                     Log.Error("Error loading custom data");
                 }
+            }
+        }
+
+        private void watcher_EventArrived(object sender, EventArrivedEventArgs e)
+        {
+            try
+            {
+                ManagementBaseObject instance = (ManagementBaseObject)e.NewEvent["TargetInstance"];
+                // GoPro camera ethernet emulator 
+                if ((string)instance.GetPropertyValue("Name")== "GoPro RNDIS Device")
+                {
+                    string deviceId = (string)instance.GetPropertyValue("DeviceID");
+                    string serialNr = deviceId.Substring(deviceId.LastIndexOf('\\')).Replace("\\", "");
+                    bool added = false;
+                    foreach (ICameraDevice device in ConnectedDevices)
+                    {
+                        GoProBaseCamera webCamera = device as GoProBaseCamera;
+                        if (webCamera != null)
+                        {
+                            if (webCamera.SerialNumber == serialNr)
+                            {
+                                added = true;
+                            }
+                        }
+                    }
+                    if(!added)
+                    {
+                        var provider = new GoProProvider();
+                        string ip = string.Format("172.2{0}.1{1}.51", serialNr.Substring(serialNr.Length - 3, 1), serialNr.Substring(serialNr.Length - 2, 2));
+                        Thread.Sleep(3000);
+                        AddDevice(provider.Connect(ip));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Connection error to GoProCamera", ex);
             }
         }
 
