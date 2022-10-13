@@ -1037,8 +1037,9 @@ namespace CameraControl
                 this.Hide();
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
+                    
                     MyNotifyIcon.HideBalloonTip();
-                    MyNotifyIcon.ShowBalloonTip("digiCamControl", "Application was minimized \n Double click to restore",
+                    MyNotifyIcon.ShowBalloonTip(ServiceProvider.Branding.ApplicationTitle, "Application was minimized \n Double click to restore",
                         BalloonIcon.Info);
                 }));
             }

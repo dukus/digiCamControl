@@ -45,7 +45,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("digiCamControl")]
-[assembly: AssemblyCopyright("Copyright ©  2019 Duka Istvan")]
+[assembly: AssemblyCopyright("Copyright ©  2022 Duka Istvan")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -194,6 +194,7 @@ namespace CameraControl.Core.Classes
 
         public Branding()
         {
+            ApplicationTitle = "digiCamControl";
             ApplicationDataFolder = String.Empty;
             ResetSettingsOnLoad = false;
             ShowAboutWindow = true;

@@ -61,9 +61,9 @@
 
         </Grid.RowDefinitions>
 
-        <tb:TaskbarIcon Name="MyNotifyIcon"
+        <tb:TaskbarIcon Name="MyNotifyIcon" 
                   IconSource="/CameraControl;component/logo.ico"
-                  ToolTipText="digiCamControl" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" MenuActivation="LeftOrRightClick">
+                  ToolTipText="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ApplicationTitle}" TrayMouseDoubleClick="MyNotifyIcon_TrayMouseDoubleClick" MenuActivation="LeftOrRightClick">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.DataContext>
