@@ -64,10 +64,7 @@ namespace CameraControl.Devices.Others
             ExposureCompensation.ValueChanged += Property_ValueChanged;
             LoadJsonValues(ExposureCompensation, json);
 
-
-            LoadJsonValues(CompressionSetting, json);
             
-            LoadJsonValues(Fps, json);
             AdvancedProperties.Add(LoadJsonValues("121", json));
             AdvancedProperties.Add(LoadJsonValues("122", json));
             AdvancedProperties.Add(LoadJsonValues("123", json));

@@ -6,7 +6,7 @@
 </auto-generated>
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="357e0d80-5093-478e-8c11-28b1c730e6ee" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.1.5.6" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
+  <Product Id="357e0d80-5093-478e-8c11-28b1c730e6ef" Name="OBS plugin for digiCamControl" Language="1033" Codepage="Windows-1252" Version="2.1.5.7" UpgradeCode="357e0d80-5093-478e-8c11-28b1a72096e7" Manufacturer="Duka Istvan">
     <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" InstallScope="perMachine" Languages="1033" />
     <Media Id="1" Cabinet="_...S20plugin20for20digiCamControl.cab" EmbedCab="yes" />
 
@@ -50,8 +50,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="C:\Work\VS\CameraControl\CameraControl\bin\Debug\Licenses\DigiCamControlLicence.rtf" />
 
     <Upgrade Id="357e0d80-5093-478e-8c11-28b1a72096e7">
-      <UpgradeVersion Minimum="0.0.0.0" Maximum="2.1.5.6" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
-      <UpgradeVersion Minimum="2.1.5.6" IncludeMinimum="no" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="0.0.0.0" Maximum="2.1.5.7" IncludeMinimum="yes" IncludeMaximum="no" Property="UPGRADEFOUND" />
+      <UpgradeVersion Minimum="2.1.5.7" IncludeMinimum="no" Property="NEWPRODUCTFOUND" />
     </Upgrade>
 
     <CustomAction Id="PreventDowngrading" Error="Newer version already installed" />
