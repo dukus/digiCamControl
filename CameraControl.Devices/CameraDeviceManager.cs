@@ -279,12 +279,9 @@ namespace CameraControl.Devices
                 }
                 collection.Dispose();
 
+                CreateWqlWatcher("__InstanceCreationEvent", new EventArrivedEventHandler(watcher_EventArrived));
+                CreateWqlWatcher("__InstanceDeletionEvent", new EventArrivedEventHandler(watcher_EventRemoved));
 
-                ManagementEventWatcher watcher = new ManagementEventWatcher();
-                WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM __InstanceCreationEvent WITHIN 2 WHERE TargetInstance ISA 'Win32_PnPEntity'");
-                watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
-                watcher.Query = insertQuery;
-                watcher.Start();
             }
             catch (Exception ex)
             {
@@ -312,6 +309,49 @@ namespace CameraControl.Devices
             }
         }
 
+        private void watcher_EventRemoved(object sender, EventArrivedEventArgs e)
+        {
+            try
+            {
+                ManagementBaseObject instance = (ManagementBaseObject)e.NewEvent["TargetInstance"];
+                // GoPro camera ethernet emulator 
+                if ((string)instance.GetPropertyValue("Name") == "GoPro RNDIS Device")
+                {
+                    string deviceId = (string)instance.GetPropertyValue("DeviceID");
+                    string serialNr = deviceId.Substring(deviceId.LastIndexOf('\\')).Replace("\\", "");
+                    ICameraDevice camera = null;
+                    foreach (ICameraDevice device in ConnectedDevices)
+                    {
+                        GoProBaseCamera goProCamera = device as GoProBaseCamera;
+                        if (goProCamera != null)
+                        {
+                            if (goProCamera.SerialNumber == serialNr)
+                            {
+                                camera=device;
+                            }
+                        }
+                    }
+                    if (camera!=null)
+                    {
+                        DisconnectCamera(camera);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Connection error to GoProCamera", ex);
+            }
+        }
+
+        private void CreateWqlWatcher(string verb, EventArrivedEventHandler eventHandler)
+        {
+            ManagementEventWatcher watcher = new ManagementEventWatcher();
+            WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM " + verb + " WITHIN 2 WHERE TargetInstance ISA 'Win32_PnPEntity'");
+            watcher.EventArrived +=  eventHandler;
+            watcher.Query = insertQuery;
+            watcher.Start();
+        }
+
         private void watcher_EventArrived(object sender, EventArrivedEventArgs e)
         {
             try
@@ -336,10 +376,10 @@ namespace CameraControl.Devices
             bool added = false;
             foreach (ICameraDevice device in ConnectedDevices)
             {
-                GoProBaseCamera webCamera = device as GoProBaseCamera;
-                if (webCamera != null)
+                GoProBaseCamera goProCamera = device as GoProBaseCamera;
+                if (goProCamera != null)
                 {
-                    if (webCamera.SerialNumber == serialNr)
+                    if (goProCamera.SerialNumber == serialNr)
                     {
                         added = true;
                     }
