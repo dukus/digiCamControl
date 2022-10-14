@@ -49,6 +49,7 @@ using PortableDeviceLib;
 using WIA;
 using Accord.Video.DirectShow;
 using System.Management;
+using System.Management.Instrumentation;
 
 #endregion
 
@@ -263,6 +264,22 @@ namespace CameraControl.Devices
 
             try
             {
+                ManagementObjectCollection collection;
+                using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_PnPEntity"))
+                    collection = searcher.Get();
+
+                foreach (var device in collection)
+                {
+                    if ((string)device.GetPropertyValue("Name") == "GoPro RNDIS Device")
+                    {
+                        string deviceId = (string)device.GetPropertyValue("DeviceID");
+                        string serialNr = deviceId.Substring(deviceId.LastIndexOf('\\')).Replace("\\", "");
+                        AddGoProCamera(serialNr);
+                    }
+                }
+                collection.Dispose();
+
+
                 ManagementEventWatcher watcher = new ManagementEventWatcher();
                 WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM __InstanceCreationEvent WITHIN 2 WHERE TargetInstance ISA 'Win32_PnPEntity'");
                 watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
@@ -305,25 +322,7 @@ namespace CameraControl.Devices
                 {
                     string deviceId = (string)instance.GetPropertyValue("DeviceID");
                     string serialNr = deviceId.Substring(deviceId.LastIndexOf('\\')).Replace("\\", "");
-                    bool added = false;
-                    foreach (ICameraDevice device in ConnectedDevices)
-                    {
-                        GoProBaseCamera webCamera = device as GoProBaseCamera;
-                        if (webCamera != null)
-                        {
-                            if (webCamera.SerialNumber == serialNr)
-                            {
-                                added = true;
-                            }
-                        }
-                    }
-                    if(!added)
-                    {
-                        var provider = new GoProProvider();
-                        string ip = string.Format("172.2{0}.1{1}.51", serialNr.Substring(serialNr.Length - 3, 1), serialNr.Substring(serialNr.Length - 2, 2));
-                        Thread.Sleep(3000);
-                        AddDevice(provider.Connect(ip));
-                    }
+                    AddGoProCamera(serialNr);
                 }
             }
             catch (Exception ex)
@@ -332,6 +331,28 @@ namespace CameraControl.Devices
             }
         }
 
+        private void AddGoProCamera(string serialNr)
+        {
+            bool added = false;
+            foreach (ICameraDevice device in ConnectedDevices)
+            {
+                GoProBaseCamera webCamera = device as GoProBaseCamera;
+                if (webCamera != null)
+                {
+                    if (webCamera.SerialNumber == serialNr)
+                    {
+                        added = true;
+                    }
+                }
+            }
+            if (!added)
+            {
+                var provider = new GoProProvider();
+                string ip = string.Format("172.2{0}.1{1}.51", serialNr.Substring(serialNr.Length - 3, 1), serialNr.Substring(serialNr.Length - 2, 2));
+                Thread.Sleep(3000);
+                AddDevice(provider.Connect(ip));
+            }
+        }
         private void InitCanon()
         {
             try
