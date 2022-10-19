@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD500 : NikonD600Base
+    public class NikonD500 : NikonD500Base
     {
         public NikonD500()
         {

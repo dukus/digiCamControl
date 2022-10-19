@@ -42,9 +42,9 @@ using System.Threading.Tasks;
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD600Base : NikonD800
+    public class NikonD500Base : NikonD800
     {
-        public NikonD600Base()
+        public NikonD500Base()
         {
             _shutterTable = new Dictionary<uint, string>
             {
@@ -242,25 +242,24 @@ namespace CameraControl.Devices.Nikon
                 try
                 {
                     DeviceReady();
-                    MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_ExposureIndex);
+                    MTPDataResponse result = ExecuteReadDataEx(CONST_CMD_GetDevicePropDesc, CONST_PROP_ExposureIndexEx);
                     //IsoNumber.IsEnabled = result.Data[4] == 1;
 
                     //From the D600 documentation this is a uint16 not uint32.
                     //Oddly the MovieExposureIndex DOES use uint32
-                    UInt16 defval = BitConverter.ToUInt16(result.Data, 7);
-                    for (int i = 0; i < result.Data.Length - 12; i += 2)
+                    UInt32 defval = BitConverter.ToUInt32(result.Data, 9);
+                    for (int i = 0; i < result.Data.Length - 16; i += 4)
                     {
-                        UInt16 val = BitConverter.ToUInt16(result.Data, 12 + i);
+                        UInt32 val = BitConverter.ToUInt32(result.Data, 16 + i);
                         NormalIsoNumber.AddValues(_isoTable.ContainsKey(val) ? _isoTable[val] : val.ToString(), val);
                     }
                     NormalIsoNumber.ReloadValues();
                     NormalIsoNumber.SetValue(defval, false);
                     IsoNumber = NormalIsoNumber;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     NormalIsoNumber.IsEnabled = false;
-                    Log.Error("Unable to initialize Iso property", ex);
                 }
 
                 MovieIsoNumber = new PropertyValue<long>();
@@ -294,7 +293,7 @@ namespace CameraControl.Devices.Nikon
             lock (Locker)
             {
                 SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes((int)val),
-                            CONST_PROP_ExposureIndex);
+                            CONST_PROP_ExposureIndexEx);
             }
         }
 
@@ -419,9 +418,13 @@ namespace CameraControl.Devices.Nikon
                         //FNumber.SetValue(_stillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_Fnumber));
                         ReInitFNumber(false);
                         break;
-                    case CONST_PROP_ExposureIndex:
+                    //case CONST_PROP_ExposureIndex:
+                    //    NormalIsoNumber.SetValue(StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
+                    //                                                        CONST_PROP_ExposureIndex), false);
+                    //    break;
+                    case CONST_PROP_ExposureIndexEx:
                         NormalIsoNumber.SetValue(StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
-                                                                            CONST_PROP_ExposureIndex), false);
+                                                                            CONST_PROP_ExposureIndexEx), false);
                         break;
                     case CONST_PROP_MovieExposureIndex:
                         MovieFNumber.SetValue(StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue,
