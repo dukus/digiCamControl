@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
-             xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="200" Width="400" WindowStartupLocation="CenterScreen"
+             xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core" xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+        mc:Ignorable="d" Height="300" Width="400" WindowStartupLocation="CenterScreen"
+              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="15"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}" 
                       Title="{T:TranslateExtension LabelGenerateThumbs}">
     <Window.DataContext>
         <toolPlugins:GenThumbViewModel/>
@@ -21,10 +28,12 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Image Grid.RowSpan="2"  Stretch="Uniform" Source="{Binding Bitmap}" Margin="5" />
+        <wpf:Card Grid.RowSpan="2" Margin="16" >
+            <Image Stretch="Uniform" Source="{Binding Bitmap}" Margin="4" />
+        </wpf:Card>
         <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Content="{Binding CounterText}" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <ProgressBar Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" Height="20" Margin="2"/>
-        <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="1" Command="{Binding StartCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
-        <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="1" Grid.Row="1" Command="{Binding StopCommand}" Margin="5" IsEnabled="{Binding IsBusy}"/>
+        <ProgressBar Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="{Binding TotalImages}" Value="{Binding CurrentImages}" Height="20" Margin="8"/>
+        <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="1" Command="{Binding StartCommand}" Margin="8" IsEnabled="{Binding IsFree}"/>
+        <Button Content="{T:TranslateExtension ButtonStop}" Grid.Column="1" Grid.Row="1" Command="{Binding StopCommand}" Margin="8" IsEnabled="{Binding IsBusy}"/>
     </Grid>
 </Window>

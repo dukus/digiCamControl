@@ -51,6 +51,8 @@ namespace CameraControl.ViewModel
             }
         }
 
+        public bool CaptureAllCamera { get; set; }
+
 
         public int Delay { get; set; }
 
@@ -151,7 +153,7 @@ namespace CameraControl.ViewModel
         public void EnterPressed()
         {
             if (CaptureOnEnter)
-                ServiceProvider.WindowsManager.ExecuteCommand(CmdConsts.Capture);
+                ServiceProvider.WindowsManager.ExecuteCommand(CaptureAllCamera? CmdConsts.CaptureAll: CmdConsts.Capture);
         }
 
         private void ExportCsv(string file)

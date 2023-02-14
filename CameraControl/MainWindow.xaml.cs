@@ -383,6 +383,9 @@ namespace CameraControl
                     ServiceProvider.ScriptManager.Execute(script);
                 }
             }
+
+
+
             if ((DateTime.Now - ServiceProvider.Settings.LastUpdateCheckDate).TotalDays > 7)
             {
                 if (!ServiceProvider.Branding.CheckForUpdate)
@@ -405,17 +408,25 @@ namespace CameraControl
                     {
                         try
                         {
+                            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
                             var wnd = new Welcome();
                             wnd.ShowDialog();
-                            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
                         }
                         catch
                         {
                         }
                     });
+
                 }
             }
 
+            Dispatcher.BeginInvoke(
+            new Action(
+                delegate
+                {
+                    Thread.Sleep(1500);
+                    ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.Zoom_Image_Fit);
+                }));
         }
 
         private void DeviceManager_CameraSelected(ICameraDevice oldcameraDevice, ICameraDevice newcameraDevice)
@@ -1037,7 +1048,7 @@ namespace CameraControl
                 this.Hide();
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    
+
                     MyNotifyIcon.HideBalloonTip();
                     MyNotifyIcon.ShowBalloonTip(ServiceProvider.Branding.ApplicationTitle, "Application was minimized \n Double click to restore",
                         BalloonIcon.Info);
@@ -1141,6 +1152,20 @@ namespace CameraControl
             {
                 Log.Error("Unable to connect to Bluetooth device", exception);
                 this.ShowMessageAsync("Error", "Unable to connect to Bluetooth device " + exception.Message);
+            }
+        }
+
+        private void but_barcode_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.BarcodeWnd_Show);
+        }
+
+        private void but_sequencer_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in ServiceProvider.PluginManager.ToolPlugins)
+            {
+                if (item.Title == TranslationStrings.LabelImageSequencer)
+                    item.Execute();
             }
         }
     }

@@ -7,7 +7,14 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:toolPlugins="clr-namespace:CameraControl.Plugins.ToolPlugins"
              xmlns:Core="clr-namespace:CameraControl.Core;assembly=CameraControl.Core"
-             mc:Ignorable="d" Height="450" Width="764" Title="{T:TranslateExtension LabelCreateMovie}" WindowStartupLocation="CenterScreen" >
+             mc:Ignorable="d" Height="450" Width="764" Title="{T:TranslateExtension LabelCreateMovie}" WindowStartupLocation="CenterScreen"
+                 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}" >
     <Window.DataContext>
         <toolPlugins:GenMovieViewModel/>
     </Window.DataContext>
@@ -46,8 +53,8 @@
                 <Label Content="{T:TranslateExtension LabelFps}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
                 <controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Value="{Binding Fps}" Margin="3"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelVideoFormat}" HorizontalAlignment="Right" Margin="0,5,3,5" VerticalAlignment="Center"/>
-                <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VideoTypes}" SelectedValue="{Binding VideoType}" Margin="3" Grid.ColumnSpan="3"/>
+                <Label  Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelVideoFormat}" HorizontalAlignment="Right" Margin="4" VerticalAlignment="Center"/>
+                <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VideoTypes}" SelectedValue="{Binding VideoType}" Margin="4" Grid.ColumnSpan="3"/>
 
                 <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelOutputFile}" HorizontalAlignment="Right" Margin="0,5,3,5" VerticalAlignment="Center" />
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OutPutFile}" Margin="3" IsReadOnly="True" Grid.ColumnSpan="2" />
@@ -57,21 +64,21 @@
                 <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding FillImage}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
 
                 <Label Grid.Row="4" Grid.Column="0" Content="Width" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-                <controls:NumericUpDown Grid.Row="4" Grid.Column="1" Minimum="10" Value="{Binding Width}" Maximum="4096" Margin="3" />
+                <controls:NumericUpDown Grid.Row="4" Grid.Column="1" Minimum="10" Value="{Binding Width}" Maximum="4096" Margin="4" />
 
                 <Label Grid.Row="4" Grid.Column="2" Content="Height" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
-                <controls:NumericUpDown Grid.Row="4" Grid.Column="3" Minimum="10" Value="{Binding Height}" Margin="3" Maximum="4096" />
+                <controls:NumericUpDown Grid.Row="4" Grid.Column="3" Minimum="10" Value="{Binding Height}" Margin="4" Maximum="4096" />
 
                 <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelStartImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
-                <controls:NumericUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Value="{Binding MinValue}" Maximum="{Binding TotalImages}" Margin="3" />
+                <controls:NumericUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Value="{Binding MinValue}" Maximum="{Binding TotalImages}" Margin="4" />
 
                 <Label Grid.Row="5" Grid.Column="2" Content="{T:TranslateExtension LabelStopImageFrame}" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
                 <controls:NumericUpDown Grid.Row="5" Grid.Column="3" Minimum="{Binding MinValue}" Value="{Binding MaxValue}" Margin="3" Maximum="{Binding TotalImages}" />
 
-                <Label Grid.Row="3" Grid.Column="2" Content="Transform befor resize" HorizontalAlignment="Right" Margin="3" VerticalAlignment="Center" />
-                <CheckBox Grid.Row="3" Grid.Column="3" IsChecked="{Binding TransformBefor}" Margin="3" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                <Label Grid.Row="3" Grid.Column="2" Content="Transform befor resize" HorizontalAlignment="Right" Margin="4" VerticalAlignment="Center" />
+                <CheckBox Grid.Row="3" Grid.Column="3" IsChecked="{Binding TransformBefor}" Margin="4" VerticalContentAlignment="Center" VerticalAlignment="Center" />
 
-                <ProgressBar Grid.Row="7" Grid.ColumnSpan="5" Grid.Column="0" VerticalAlignment="Bottom" Height="20" Margin="3" Value="{Binding Progress}" Maximum="{Binding ProgressMax}"/>
+                <ProgressBar Grid.Row="7" Grid.ColumnSpan="5" Grid.Column="0" VerticalAlignment="Bottom" Height="20" Margin="4" Value="{Binding Progress}" Maximum="{Binding ProgressMax}"/>
 
                 <Button Content="{T:TranslateExtension ButtonStart}" Grid.Row="0" Grid.Column="4" Command="{Binding StartCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>
                 <Button Content="Preview" Grid.Row="1" Grid.Column="4" Command="{Binding StartPreviewCommand}" Margin="5" IsEnabled="{Binding IsFree}"/>

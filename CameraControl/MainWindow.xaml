@@ -5,7 +5,7 @@
          ShowTitleBar="False"
          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
-         TextElement.FontSize="13"
+         TextElement.FontSize="15"
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto"
          Background="{DynamicResource MaterialDesignPaper}"
@@ -125,9 +125,17 @@
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowMulyiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <materialDesign:PackIcon Kind="ImageMultiple" Height="35" Width="35" />
             </Button>
-            <Button ToolTip="{T:TranslateExtension LabelWifi}" Height="40" Name="but_wifi" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_wifi_Click"
+            <Button ToolTip="{T:TranslateExtension LabelWifiNew}" Height="40" Name="but_wifi" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_wifi_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
                 <materialDesign:PackIcon Kind="SignalVariant" Height="35" Width="35" />
+            </Button>
+            <Button ToolTip="{T:TranslateExtension LabelBarcode}" Height="40" Name="but_barcode" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_barcode_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <materialDesign:PackIcon Kind="BarcodeScan" Height="35" Width="35" />
+            </Button>
+            <Button ToolTip="{T:TranslateExtension LabelImageSequencer}" Height="40" Name="but_sequencer" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_sequencer_Click"
+                        Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">
+                <materialDesign:PackIcon Kind="FilmReel" Height="35" Width="35" />
             </Button>
             <Button ToolTip="Connect bluetooth device" Height="40" Name="but_bt" Width="40" Margin="4" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Click="but_bt_Click"
                         Visibility="{Binding Source={x:Static Member=Core:ServiceProvider.Branding}, Path=ShowWifiCameraButtonMainWindow, Converter={StaticResource BooleanToVisibilityConverter1}}">

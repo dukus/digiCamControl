@@ -4,7 +4,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:viewModel="clr-namespace:CameraControl.ViewModel"
         xmlns:translation="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
-        Title="BarcodeWnd" Height="600" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" 
+        Title="Barcode" Height="600" Width="800" Closing="MetroWindow_Closing" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" 
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -17,9 +17,9 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <GroupBox Header="{translation:TranslateExtension LabelScanBarcode}">
             <Grid>
@@ -28,9 +28,12 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Name="TextBox"  TextWrapping="NoWrap" Text="{Binding Barcode, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="40" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.SelectAllOnFocus="True" Margin="3"  KeyDown="TextBox_OnKeyDown"/>
-                <StackPanel Grid.Column="1">
-                    <CheckBox Content="{translation:TranslateExtension LabelCaptureAfterScan}" Margin="3" IsChecked="{Binding CaptureOnEnter}"/>
-                    <CheckBox Content="{translation:TranslateExtension LabelKeepWindowActive}" Margin="3" IsChecked="{Binding KeepActive}"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <StackPanel>
+                        <CheckBox Content="{translation:TranslateExtension LabelCaptureAfterScan}" Margin="4" IsChecked="{Binding CaptureOnEnter}"/>
+                        <CheckBox Content="{translation:TranslateExtension LabelKeepWindowActive}" Margin="4" IsChecked="{Binding KeepActive}"/>
+                        <CheckBox Content="Capture with all cameras" Margin="4" IsChecked="{Binding CaptureAllCamera}"/>
+                    </StackPanel>
                 </StackPanel>
 
             </Grid>
@@ -41,14 +44,9 @@
         </GroupBox>
         <GroupBox Header="{translation:TranslateExtension SettingsToolTip}" Grid.Row="2">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <Button Margin="3" Content="{translation:TranslateExtension LabelImportData}" Command="{Binding ImportCommand}"/>
-                    <Button Margin="3" Content="{translation:TranslateExtension LabelExportData}" Command="{Binding ExportCommand}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="4" Content="{translation:TranslateExtension LabelImportData}" Command="{Binding ImportCommand}"/>
+                    <Button Margin="4" Content="{translation:TranslateExtension LabelExportData}" Command="{Binding ExportCommand}"/>
                 </StackPanel>
 
             </Grid>
