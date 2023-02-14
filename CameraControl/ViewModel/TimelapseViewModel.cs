@@ -814,7 +814,7 @@ namespace CameraControl.ViewModel
                         {
                             try
                             {
-                                var manager = new TclScripManager();
+                                var manager = new TclScriptManager();
                                 manager.Execute(File.ReadAllText(ServiceProvider.Settings.DefaultSession.TimeLapseSettings.ScriptFile));
                             }
                             catch (Exception exception)

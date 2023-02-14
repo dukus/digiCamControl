@@ -271,7 +271,7 @@
     <Compile Include="TclScripting\ConsoleRedirect.cs" />
     <Compile Include="TclScripting\DccCommand.cs" />
     <Compile Include="TclScripting\EchoCommand.cs" />
-    <Compile Include="TclScripting\TclScripManager.cs" />
+    <Compile Include="TclScripting\TclScriptManager.cs" />
     <Compile Include="Translation\TranslateConverter.cs" />
     <Compile Include="Translation\TranslateExtension.cs" />
     <Compile Include="Translation\TranslationLangDesc.cs" />

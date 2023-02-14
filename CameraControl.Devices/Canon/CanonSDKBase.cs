@@ -763,7 +763,7 @@ namespace CameraControl.Devices.Canon
                                                       //  }),
                                                       CameraDevice = this,
                                                       FileName = "IMG0000.jpg",
-                                                      Handle =e.Pointer.ToInt32() != 0?(object) e.Pointer: e
+                                                      Handle = e.Pointer != IntPtr.Zero  ? (object) e.Pointer : e
                                                   };
 
                 EosFileImageEventArgs file = e as EosFileImageEventArgs;
