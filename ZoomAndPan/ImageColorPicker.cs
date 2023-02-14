@@ -117,7 +117,7 @@ namespace ZoomAndPan
             set
             {
                 var newPos = new Point(Clamp(value.X, 0, ActualWidth), Clamp(value.Y, 0, ActualHeight));
-                if (_position != newPos)
+                if (_position != newPos && Source != null)
                 {
                     _position = newPos;
                     Color color = GetColor(_position.X, _position.Y);
