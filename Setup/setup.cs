@@ -31,7 +31,6 @@ namespace Setup
             var shortcutD = new FileShortcut(appFeature, "digiCamControl", @"%Desktop%") { WorkingDirectory = @"INSTALLDIR" };
             var appDir = new Dir(@"digiCamControl",
                 new File(appFeature, "CameraControl.exe", shortcut, shortcutD),
-                new File(appFeature, "CameraControl.exe.config"),
                 new File(appFeature, "CameraControlCmd.exe"),
                 new File(appFeature, "CameraControlRemoteCmd.exe"),
                 new File(appFeature, "dcraw.exe"),
@@ -40,6 +39,7 @@ namespace Setup
                 new File(appFeature, "MtpTester.exe"),
                 //new File(appFeature, "PhotoBooth.exe", new FileShortcut(appFeature, "PhotoBooth", @"%ProgramMenu%\digiCamControl")),
                 new DirFiles(appFeature, @"*.dll"),
+                new DirFiles(appFeature, @"*.config"),
 #if DEBUG
                 new DirFiles(appFeature, @"*.pdb"),
 #endif

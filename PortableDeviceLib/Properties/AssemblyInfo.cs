@@ -52,6 +52,6 @@ using System.Runtime.InteropServices;
 // Vous pouvez spécifier toutes les valeurs ou indiquer les numéros de build et de révision par défaut 
 // en utilisant '*', comme indiqué ci-dessous :
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.1.5.7")]
-[assembly: AssemblyFileVersion("2.1.5.7")]
+[assembly: AssemblyVersion("2.1.5.9")]
+[assembly: AssemblyFileVersion("2.1.5.9")]
 [assembly: InternalsVisibleTo("PortableDeviceLib.Tests")]

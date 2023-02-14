@@ -33,7 +33,7 @@ namespace CameraControl.Core.Classes
                 case "[Camera Counter 9 digit]":
                     return property.Counter.ToString(new string('0', Convert.ToInt16(template.Substring(16, 1))));
                 case "[Session Name]":
-                    return session.Name;
+                    return  session.Name;
                 case "[Capture Name]":
                     return session.CaptureName;
                 case "[Exposure Compensation]":
@@ -42,7 +42,7 @@ namespace CameraControl.Core.Classes
                     return "";
                 case "[FNumber]":
                     if (device != null && device.FNumber != null)
-                        return device.FNumber.Value ?? "";
+                        return CleanUpName( device.FNumber.Value);
                     return "";
                 case "[Date yyyy-MM-dd]":
                     return DateTime.Now.ToString("yyyy-MM-dd");
@@ -83,7 +83,7 @@ namespace CameraControl.Core.Classes
                 case "[Camera Order]":
                     return property.SortOrder.ToString("D3");
                 case "[Camera Name]":
-                    return property.DeviceName.Replace(":", "_").Replace("?", "_").Replace("*", "_");
+                    return CleanUpName(property.DeviceName);
                 case "[Selected Tag1]":
                     return session.SelectedTag1 != null ? session.SelectedTag1.Value.Trim() : "";
                 case "[Selected Tag2]":
@@ -134,6 +134,13 @@ namespace CameraControl.Core.Classes
                         : "";
             }
             return "";
+        }
+
+        private string CleanUpName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return "";
+            return name.Replace(":", "_").Replace("?", "_").Replace("*", "_").Replace("+", "_").Replace("\\", "_").Replace("/", "_").Trim();
         }
 
         private string GetType(string file)

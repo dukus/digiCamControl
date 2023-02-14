@@ -22,7 +22,7 @@ namespace CameraControl.Plugins.FilenameTemplate
             BitmapLoader.Instance.GetMetadata(item);
             string tag = template.Replace("[", "").Replace("]", "");
             if (item.FileInfo.ExifTags.ContainName(tag))
-                return item.FileInfo.ExifTags[tag].Replace(":", "_").Replace("?", "_").Replace("*", "_").Replace("\\", "_"); ;
+                return item.FileInfo.ExifTags[tag].Replace(":", "_").Replace("?", "_").Replace("*", "_").Replace("\\", "_").Replace("/", "_"); 
             return template;
         }
     }
