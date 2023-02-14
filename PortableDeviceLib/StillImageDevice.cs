@@ -285,13 +285,11 @@ namespace PortableDeviceLib
         {
             IPortableDevicePropVariantCollection propVariant =
               (IPortableDevicePropVariantCollection)new PortableDeviceTypesLib.PortableDevicePropVariantCollection();
-
-            foreach (uint parameter in parameters)
+            tag_inner_PROPVARIANT[] vparams = new tag_inner_PROPVARIANT[parameters.Length];
+            for (int i = 0; i < parameters.Length; i++)
             {
-                tag_inner_PROPVARIANT vparam1 = new tag_inner_PROPVARIANT();
-                UintToPropVariant(parameter, out vparam1);
-                propVariant.Add(ref vparam1);
-
+                UintToPropVariant(parameters[i], out vparams[i]);
+                propVariant.Add(ref vparams[i]);
             }
             return ExecuteReadData(code, propVariant);
         }

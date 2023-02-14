@@ -508,7 +508,7 @@ namespace CameraControl.ViewModel
                 {
 
                     var tempTrigger = sched.GetTrigger(trigger.Key);
-                    var nextFireTimeUtc = tempTrigger?.Result.GetNextFireTimeUtc();
+                    var nextFireTimeUtc = tempTrigger?.Result?.GetNextFireTimeUtc();
                     if (nextFireTimeUtc != null)
                         return "Next capture time " + nextFireTimeUtc.Value.ToLocalTime();
                     else
