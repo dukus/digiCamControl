@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonZ6 : NikonD500
+    public class NikonZ6 : NikonZ 
     {
         public const uint CONST_CMD_LiveViewZoomArea = 0xD1BD;
         public NikonZ6()
