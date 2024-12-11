@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonZ7 : NikonD500
+    public class NikonZ7 : NikonZ
     {
         public NikonZ7()
         {
@@ -95,7 +95,7 @@ namespace CameraControl.Devices.Nikon
                 {37, "Hi 2"},
             };
         }
-        protected virtual void InitFNumber()
+        protected override void InitFNumber()
         {
             NormalFNumber = new PropertyValue<long> { IsEnabled = true, Name = "FNumber" };
             NormalFNumber.ValueChanged += NormalFNumber_ValueChanged;

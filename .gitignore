@@ -3076,3 +3076,6 @@ _ReSharper.CameraControl.ServerTest
 /packages/*
 /.vs/*
 *.wixpdb
+/CameraControl.Devices/.vs/*
+/Canon.Eos.Framework/.vs/*
+/PortableDeviceLib/.vs/*
