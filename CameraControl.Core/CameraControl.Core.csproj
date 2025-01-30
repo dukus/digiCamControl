@@ -420,7 +420,7 @@
       <Version>1.1.39</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.2-beta2</Version>
+      <Version>13.0.2</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net">
       <Version>1.6.292</Version>

@@ -886,7 +886,7 @@
       <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.2-beta2</Version>
+      <Version>13.0.2</Version>
     </PackageReference>
     <PackageReference Include="Quartz">
       <Version>3.4.0</Version>
