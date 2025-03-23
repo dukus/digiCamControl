@@ -206,6 +206,7 @@ namespace CameraControl.Devices
                 {"Z 6_2", typeof(NikonZ6)},
                 {"Z 7", typeof(NikonZ7)},
                 {"Z 7_2", typeof(NikonZ7)},
+                {"Z 8", typeof(NikonZ7)},
                 {"Z 9", typeof(NikonZ7)},
                 {"Z fc", typeof(NikonZ7)},
                 
