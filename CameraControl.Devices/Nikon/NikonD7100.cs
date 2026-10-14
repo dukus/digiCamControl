@@ -28,70 +28,107 @@
 
 #region
 
+using CameraControl.Devices.Classes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CameraControl.Devices.Classes;
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD7100 : NikonD600Base
-    {
-        protected override void GetAdditionalLiveViewData(LiveViewData viewData, byte[] result)
-        {
-            viewData.LiveViewImageWidth = ToInt16(result, 8);
-            viewData.LiveViewImageHeight = ToInt16(result, 10);
+	public class NikonD7100 : NikonD600Base
+	{
 
-            viewData.ImageWidth = ToInt16(result, 12);
-            viewData.ImageHeight = ToInt16(result, 14);
+		protected override bool SupportsAEBracketing
+			=> true;
 
-            viewData.FocusFrameXSize = ToInt16(result, 24);
-            viewData.FocusFrameYSize = ToInt16(result, 26);
+		protected override IEnumerable<(long, string)> SupportedExposureEVSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+			}
+		}
 
-            viewData.FocusX = ToInt16(result, 28);
-            viewData.FocusY = ToInt16(result, 30);
+		protected override IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+				yield return (4, "2 EV");
+				yield return (5, "3 EV");
+			}
+		}
 
-            viewData.Focused = result[48] != 1;
-            viewData.MovieIsRecording = result[68] == 1;
-            viewData.MovieTimeRemain = ToDeciaml(result, 64);
+		protected override IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				yield return (0, 2, "-1..0");
+				yield return (1, 2, "0..+1");
+				yield return (2, 3, "-2..0");
+				yield return (3, 3, "0..+2");
+				yield return (4, 3, "-1..+1");
+				yield return (5, 5, "-2..+2");
+			}
+		}
 
-            if (result[37] == 1)
-                viewData.Rotation = -90;
-            if (result[37] == 2)
-                viewData.Rotation = 90;
+		protected override void GetAdditionalLiveViewData (LiveViewData viewData, byte[] result)
+		{
+			viewData.LiveViewImageWidth = ToInt16(result, 8);
+			viewData.LiveViewImageHeight = ToInt16(result, 10);
 
-            viewData.HaveLevelAngleData = true;
-            viewData.LevelAngleRolling = ToInt16(result, 52);
-            viewData.PeakSoundL = (int)(result[352] / 14.0 * 100);
-            viewData.PeakSoundR = (int)(result[353] / 14.0 * 100);
-            viewData.SoundL = (int)(result[354] / 14.0 * 100);
-            viewData.SoundR = (int)(result[355] / 14.0 * 100);
-            viewData.HaveSoundData = true;
-        }
+			viewData.ImageWidth = ToInt16(result, 12);
+			viewData.ImageHeight = ToInt16(result, 14);
 
-        protected override void InitFNumber()
-        {
-            base.InitFNumber();
-            MovieFNumber.IsEnabled = false;
-        }
+			viewData.FocusFrameXSize = ToInt16(result, 24);
+			viewData.FocusFrameYSize = ToInt16(result, 26);
 
-        protected override PropertyValue<long> CaptureAreaCrop()
-        {
-            PropertyValue<long> res = new PropertyValue<long>()
-            {
-                Name = "Capture area crop",
-                IsEnabled = true,
-                Code = 0xD030,
-                SubType = typeof(sbyte)
-            };
-            res.AddValues("DX", 0);
-            res.AddValues("1.3x", 1);
-            res.ValueChanged +=
-                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
-            return res;
-        }
-    }
+			viewData.FocusX = ToInt16(result, 28);
+			viewData.FocusY = ToInt16(result, 30);
+
+			viewData.Focused = result[48] != 1;
+			viewData.MovieIsRecording = result[68] == 1;
+			viewData.MovieTimeRemain = ToDeciaml(result, 64);
+
+			if (result[37] == 1)
+				viewData.Rotation = -90;
+			if (result[37] == 2)
+				viewData.Rotation = 90;
+
+			viewData.HaveLevelAngleData = true;
+			viewData.LevelAngleRolling = ToInt16(result, 52);
+			viewData.PeakSoundL = (int)(result[352] / 14.0 * 100);
+			viewData.PeakSoundR = (int)(result[353] / 14.0 * 100);
+			viewData.SoundL = (int)(result[354] / 14.0 * 100);
+			viewData.SoundR = (int)(result[355] / 14.0 * 100);
+			viewData.HaveSoundData = true;
+		}
+
+		protected override void InitFNumber ()
+		{
+			base.InitFNumber();
+			MovieFNumber.IsEnabled = false;
+		}
+
+		protected override PropertyValue<long> CaptureAreaCrop ()
+		{
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "Capture area crop",
+				IsEnabled = true,
+				Code = 0xD030,
+				SubType = typeof(sbyte)
+			};
+			res.AddValues("DX", 0);
+			res.AddValues("1.3x", 1);
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, BitConverter.GetBytes(val), res.Code);
+			return res;
+		}
+	}
 }

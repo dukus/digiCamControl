@@ -460,12 +460,12 @@ namespace CameraControl
 				try
 				{
 					Log.Debug("set time 1");
-					cameraDevice.DateTime = DateTime.Now;
+					CameraHelper.SyncDateAndTime(cameraDevice, ServiceProvider.Settings.SyncCameraDateTimeUtc);
 					Log.Debug("set time 2");
 				}
 				catch (Exception exception)
 				{
-					Log.Error("Unable to sysnc date time", exception);
+					Log.Error("Unable to sync date time", exception);
 				}
 			}
 			Log.Debug("cameraDevice_CameraInitDone 2");
