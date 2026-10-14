@@ -69,6 +69,17 @@
 
                     </Expander>
                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <Expander HorizontalAlignment="Stretch" IsExpanded="False" >
+                        <Expander.Header>
+                            <TextBlock Text="Date and time" FontWeight="Bold"/>
+                        </Expander.Header>
+                        <StackPanel Orientation="Vertical" Margin="24,8,24,16">
+                            <Button HorizontalAlignment="Center" Content="Sync camera date and time"  Name="btn_dateTime" Margin="8" Click="btn_dateTime_Click" />
+                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=SyncCameraDateTimeUtc}" Content="{T:TranslateExtension LabelSyncCameraDateUtc}" Margin="5"/>
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CameraPropertyWnd, AncestorLevel=1}, Path=SyncedCameraDateTime}" Margin="4" />
+                        </StackPanel>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                     <Expander HorizontalAlignment="Stretch" IsExpanded="False">
                         <Expander.Header>
                             <TextBlock Text="{T:TranslateExtension LabelExternalShutterRelease}" FontWeight="Bold"/>
@@ -107,6 +118,5 @@
 
         <Button Content="Save" HorizontalAlignment="Right" Name="btn_save" Click="btn_save_Click" Grid.Row="1" Margin="8"/>
         <Button Content="Cancel" HorizontalAlignment="Left"  Click="btn_cancel_Click" Margin="8" Grid.Row="1"/>
-        <Button Grid.Row="1" HorizontalAlignment="Center" Content="Sync camera date and time"  Name="btn_dateTime" Margin="8" Click="btn_dateTime_Click" />
     </Grid>
 </Window>

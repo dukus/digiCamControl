@@ -439,6 +439,7 @@
     <string name="LabelSendTheLogFile">Send the log file</string>
     <string name="LabelAskSendLogFile">Do you want to send log file to developers ?</string>
     <string name="LabelSyncCameraDate">Sync camera date time on camera connect</string>
+	<string name="LabelSyncCameraDateUtc">UTC</string>
     <string name="LabelShowThumbUpDown">Show thumb up/down buttons</string>
     <string name="LabelSend">Send</string>
     <string name="LabelLogMessage">Message to the developers of digiCamControl :</string>

@@ -385,6 +385,7 @@ Souhaitez-vous continuer?
   <string name="LabelSendTheLogFile">Envoyer le fichier journal</string>
   <string name="LabelAskSendLogFile">Voulez-vous envoyer le fichier journal aux développeurs ?</string>
   <string name="LabelSyncCameraDate">Synchroniser la date et l\'heure lors de la connexion de l\'appareil photo</string>
+  <string name="LabelSyncCameraDateUtc">UTC</string>
   <string name="LabelShowThumbUpDown">Bouton Haut/Bas des vignettes</string>
   <string name="LabelSend">Envoyer</string>
   <string name="LabelLogMessage">Message aux développeurs de digiCamControl</string>

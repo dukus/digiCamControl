@@ -399,6 +399,7 @@
   <string name="LabelSendTheLogFile">傳送日誌檔</string>
   <string name="LabelAskSendLogFile">要傳送日誌檔給軟體開發人員嗎?</string>
   <string name="LabelSyncCameraDate">當相機連接上後, 與相機同步日期/時間</string>
+  <string name="LabelSyncCameraDateUtc">UTC</string>
   <string name="LabelShowThumbUpDown">顯示縮圖的上/下控制按鈕</string>
   <string name="LabelSend">傳送</string>
   <string name="LabelLogMessage">傳送訊息給 digiCamControl 程式開發人員</string>

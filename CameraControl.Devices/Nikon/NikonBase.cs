@@ -2431,7 +2431,7 @@ namespace CameraControl.Devices.Nikon
 			get { return _dateTime; }
 			set
 			{
-				_dateTime = value;
+				_dateTime = new DateTime(value.Year, value.Month, value.Day, value.Hour, value.Minute, value.Second, DateTimeKind.Unspecified);
 				try
 				{
 					string datestring = _dateTime.ToString("yyyyMMddTHHmmss");

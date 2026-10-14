@@ -86,7 +86,7 @@
                             <CheckBox Margin="4" IsChecked="{Binding DontLoadThumbnails}" Content="{T:TranslateExtension LabelDontLoadThumbs}" />
                             <CheckBox Margin="4" IsChecked="{Binding LoadFullRespreview}" Content="{T:TranslateExtension LabelFullResPreview}" />
                             <CheckBox Margin="4" IsChecked="{Binding SkipAddingFileToSession}" Content="Skip adding file to session" />
-                            
+
                             <ComboBox SelectedIndex="{Binding RotateIndex}" Margin="4"
                                       materialDesign:HintAssist.Hint="{T:TranslateExtension LabelRotateImage}"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}">
@@ -358,7 +358,10 @@
                             <CheckBox IsChecked="{Binding ShowUntranslatedLabelId}" Margin="4" Content="{T:TranslateExtension LabelShowUnTranslatedStringIds}"/>
                             <CheckBox IsChecked="{Binding DisableNativeDrivers}" Margin="4" Content="{T:TranslateExtension LabelDisableDriver}" ToolTip="This option disable special handig of some cameras. Use this if you experience some problem" />
                             <CheckBox IsChecked="{Binding AddFakeCamera}" Margin="4" Content="{T:TranslateExtension LabelAddFakeCamera}"/>
-                            <CheckBox IsChecked="{Binding SyncCameraDateTime}" Margin="4" Content="{T:TranslateExtension LabelSyncCameraDate}" />
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                <CheckBox IsChecked="{Binding SyncCameraDateTime}" Margin="4" Content="{T:TranslateExtension LabelSyncCameraDate}" />
+                                <CheckBox IsChecked="{Binding SyncCameraDateTimeUtc}" Margin="4" Content="{T:TranslateExtension LabelSyncCameraDateUtc}" />
+                            </StackPanel>
                             <CheckBox IsChecked="{Binding LoadThumbsDownload}" Margin="4" Content="{T:TranslateExtension LabelLoadThumbDownload}"/>
                             <CheckBox IsChecked="{Binding SendUsageStatistics}" Margin="4" Content="{T:TranslateExtension LabelSendUsage}"/>
                             <CheckBox IsChecked="{Binding LoadCanonTransferMode}" Margin="4" Content="{T:TranslateExtension LabelLoadCanonTransferMode}"/>

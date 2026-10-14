@@ -395,6 +395,7 @@ Wollen Sie weitermachen?
   <string name="LabelSendTheLogFile">Logdatei senden</string>
   <string name="LabelAskSendLogFile">Möchten Sie die Protokolldatei an die Entwickler senden?</string>
   <string name="LabelSyncCameraDate">Kameradatum/-Zeit beim Verbinden der Kamera synchronisieren</string>
+  <string name="LabelSyncCameraDateUtc">UTC</string>
   <string name="LabelShowThumbUpDown">Bewertungs-Schaltflächen für Daumen hoch / runter anzeigen</string>
   <string name="LabelSend">Senden</string>
   <string name="LabelLogMessage">Nachricht an die Entwickler von digiCamControl </string>
