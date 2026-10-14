@@ -28,33 +28,65 @@
 
 #region
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CameraControl.Devices.Classes;
+using System.Collections.Generic;
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD5200 : NikonD600Base
-    {
-        protected override PropertyValue<long> InitExposureDelay()
-        {
+	public class NikonD5200 : NikonD600Base
+	{
+		protected override PropertyValue<long> InitExposureDelay ()
+		{
 
-            PropertyValue<long> res = new PropertyValue<long>()
-            {
-                Name = "Exposure delay mode",
-                IsEnabled = true,
-                Code = 0xD06A
-            };
-            res.AddValues("OFF", 0);
-            res.AddValues("1 sec", 1);
-            res.ReloadValues();
-            res.ValueChanged +=
-                (sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
-            return res;
-        }
-    }
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "Exposure delay mode",
+				IsEnabled = true,
+				Code = 0xD06A
+			};
+			res.AddValues("OFF", 0);
+			res.AddValues("1 sec", 1);
+			res.ReloadValues();
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+
+		protected override bool SupportsAEBracketing
+			=> true;
+
+		protected override IEnumerable<(long, string)> SupportedExposureEVSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+			}
+		}
+
+		protected override IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+				yield return (4, "1+1/3 EV");
+				yield return (5, "1+1/2 EV");
+				yield return (6, "1+2/3 EV");
+				yield return (7, "2 EV");
+			}
+		}
+
+		protected override IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				yield return (2, 3, "-1..+1");
+			}
+		}
+	}
 }

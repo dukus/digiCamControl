@@ -25,57 +25,86 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
-
 #region
 
-using System.IO;
 using CameraControl.Devices.Classes;
+using System.Collections.Generic;
+using System.IO;
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD3X : NikonBase
-    {
-        public override bool Init(DeviceDescriptor deviceDescriptor)
-        {
-            bool ret = base.Init(deviceDescriptor);
-            Capabilities.Add(CapabilityEnum.LiveView);
-            return ret;
-        }
+	public class NikonD3X : NikonBase
+	{
+		public override bool Init (DeviceDescriptor deviceDescriptor)
+		{
+			bool ret = base.Init(deviceDescriptor);
+			Capabilities.Add(CapabilityEnum.LiveView);
+			return ret;
+		}
 
-        public override LiveViewData GetLiveViewImage()
-        {
-            LiveViewData viewData = new LiveViewData();
-            viewData.HaveFocusData = true;
+		protected override bool SupportsAEBracketing
+			=> true;
 
-            const int headerSize = 64;
+		protected override IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+			}
+		}
 
-            var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
-            if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
-            {
-                _timer.Start();
-                viewData.IsLiveViewRunning = false;
-                viewData.ImageData = null;
-                return viewData;
-            }
-            if (result.Data == null || result.Data.Length <= headerSize)
-                return null;
-            int cbBytesRead = result.Data.Length;
-            GetAdditionalLiveViewData(viewData, result.Data);
+		protected override IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				yield return (0, 2, "-1..0");
+				yield return (1, 2, "0..+1");
+				yield return (2, 3, "-2..0");
+				yield return (3, 3, "0..+2");
+				yield return (4, 3, "-1..+1");
+				yield return (5, 5, "-2..+2");
+				yield return (6, 7, "-3..+3");
+				yield return (7, 9, "-4..+4");
+			}
+		}
 
-            MemoryStream copy = new MemoryStream((int) cbBytesRead - headerSize);
-            copy.Write(result.Data, headerSize, (int)cbBytesRead - headerSize);
-            copy.Close();
-            viewData.ImageData = copy.GetBuffer();
+		public override LiveViewData GetLiveViewImage ()
+		{
+			LiveViewData viewData = new LiveViewData();
+			viewData.HaveFocusData = true;
 
-            return viewData;
-        }
+			const int headerSize = 64;
 
-        protected override void InitFocusMode()
-        {
-            base.InitFocusMode();
-            FocusMode.IsEnabled = false;
-        }
-    }
+			var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+			if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
+			{
+				_timer.Start();
+				viewData.IsLiveViewRunning = false;
+				viewData.ImageData = null;
+				return viewData;
+			}
+			if (result.Data == null || result.Data.Length <= headerSize)
+				return null;
+			int cbBytesRead = result.Data.Length;
+			GetAdditionalLiveViewData(viewData, result.Data);
+
+			MemoryStream copy = new MemoryStream((int)cbBytesRead - headerSize);
+			copy.Write(result.Data, headerSize, (int)cbBytesRead - headerSize);
+			copy.Close();
+			viewData.ImageData = copy.GetBuffer();
+
+			return viewData;
+		}
+
+		protected override void InitFocusMode ()
+		{
+			base.InitFocusMode();
+			FocusMode.IsEnabled = false;
+		}
+	}
 }

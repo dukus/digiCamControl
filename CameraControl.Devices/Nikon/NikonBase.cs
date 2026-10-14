@@ -25,7 +25,6 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
-
 #region
 
 using CameraControl.Devices.Classes;
@@ -530,6 +529,18 @@ namespace CameraControl.Devices.Nikon
 			AdvancedProperties.Add(ActiveSlot());
 			AdvancedProperties.Add(LensSort());
 			AdvancedProperties.Add(InitHostMode());
+			if (SupportsAEBracketing)
+			{
+				AdvancedProperties.Add(AEBracketingType());
+				AdvancedProperties.Add(EnableAEBracketing());
+				if (SupportedExposureEVSteps.Any())
+				{
+					AdvancedProperties.Add(ExposureEVStep());
+				}
+				AdvancedProperties.Add(AEBracketingPattern());
+				AdvancedProperties.Add(AEBracketingStep());
+				AdvancedProperties.Add(AEBracketingCount());
+			}
 			try
 			{
 				var deviceinfo = LoadDeviceData(ExecuteReadDataEx(0x1001));
@@ -1091,6 +1102,158 @@ namespace CameraControl.Devices.Nikon
 			res.ReloadValues();
 			res.ValueChanged +=
 				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+
+		protected virtual bool SupportsAEBracketing
+			=> false;
+
+		protected virtual PropertyValue<long> EnableAEBracketing ()
+		{
+			// Nikon SDK also supports Flash/WB/ADL bracketing; here only AE bracketing is implemented
+			PropertyValue<long> res = new PropertyValue<long>()
+			{ Name = "AE bracketing", IsEnabled = true, Code = 0xD0C0 };
+			res.AddValues("Off", 0);
+			res.AddValues("In progress", 1);
+			res.ReloadValues();
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+
+		protected virtual PropertyValue<long> AEBracketingType ()
+		{
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "AE bracketing type",
+				IsEnabled = true,
+				Code = 0xD078,
+				SubType = typeof(Byte)
+			};
+
+			foreach (var (code, step) in SupportedAEBracketingTypes)
+			{
+				res.AddValues(step, code);
+			}
+			res.ReloadValues();
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+		protected virtual IEnumerable<(long, string)> SupportedAEBracketingTypes
+		{
+			get
+			{
+				yield return (0, "AE & flash");
+				yield return (1, "AE only");
+				yield return (2, "Flash only");
+				yield return (3, "Not available (WB bracketing)");
+				yield return (4, "Not available (ADL bracketing)");
+			}
+		}
+
+		protected virtual PropertyValue<long> ExposureEVStep ()
+		{
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "AE exposure step",
+				IsEnabled = true,
+				Code = 0xD056,
+				SubType = typeof(Byte)
+			};
+
+			foreach (var (code, step) in SupportedExposureEVSteps)
+			{
+				res.AddValues(step, code);
+			}
+			res.ReloadValues();
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+		protected virtual IEnumerable<(long, string)> SupportedExposureEVSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "1 EV");
+			}
+		}
+
+		protected virtual PropertyValue<long> AEBracketingStep ()
+		{
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "AE bracketing step",
+				IsEnabled = true,
+				Code = 0xD0C1,
+				SubType = typeof(Byte)
+			};
+
+			foreach (var (code, step) in SupportedAEBracketingSteps)
+			{
+				res.AddValues(step, code);
+			}
+			res.ReloadValues();
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+		protected virtual IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+				yield return (4, "2 EV");
+				yield return (5, "3 EV");
+			}
+		}
+
+		protected virtual PropertyValue<long> AEBracketingPattern ()
+		{
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "AE bracketing pattern",
+				IsEnabled = true,
+				Code = 0xD0C2,
+				SubType = typeof(Byte)
+			};
+
+			foreach (var (code, count, range) in SupportedAEBracketingPatterns)
+			{
+				res.AddValues($"{count}: {range}", code);
+			}
+			res.ReloadValues();
+			res.ValueChanged +=
+				(sender, key, val) => SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)val }, res.Code);
+			return res;
+		}
+		protected virtual IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		protected virtual PropertyValue<long> AEBracketingCount ()
+		{
+			PropertyValue<long> res = new PropertyValue<long>()
+			{
+				Name = "AE bracketing count",
+				Code = 0xD0C3,
+				SubType = typeof(Byte)
+			};
+			var maxCount = (from p in SupportedAEBracketingPatterns select p.count).Max();
+			for (var i = 0; i <= maxCount; i++)
+			{
+				res.AddValues(i.ToString(), i);
+			}
+			res.ReloadValues();
 			return res;
 		}
 

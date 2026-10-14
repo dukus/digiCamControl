@@ -29,29 +29,68 @@
 #region
 
 using CameraControl.Devices.Classes;
+using System.Collections.Generic;
+
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD7000 : NikonBase
-    {
-        public override bool Init(DeviceDescriptor deviceDescriptor)
-        {
-            bool res = base.Init(deviceDescriptor);
-            Capabilities.Clear();
-            Capabilities.Add(CapabilityEnum.LiveView);
-            Capabilities.Add(CapabilityEnum.RecordMovie);
-            Capabilities.Add(CapabilityEnum.CaptureInRam);
-            Capabilities.Add(CapabilityEnum.CaptureNoAf);
-            return res;
-        }
+	public class NikonD7000 : NikonBase
+	{
+		public override bool Init (DeviceDescriptor deviceDescriptor)
+		{
+			bool res = base.Init(deviceDescriptor);
+			Capabilities.Clear();
+			Capabilities.Add(CapabilityEnum.LiveView);
+			Capabilities.Add(CapabilityEnum.RecordMovie);
+			Capabilities.Add(CapabilityEnum.CaptureInRam);
+			Capabilities.Add(CapabilityEnum.CaptureNoAf);
+			return res;
+		}
 
-        public override void StartLiveView()
-        {
-            base.StartLiveView();
-            //SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_AfModeAtLiveView );
-        }
+		public override void StartLiveView ()
+		{
+			base.StartLiveView();
+			//SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 0}, CONST_PROP_AfModeAtLiveView );
+		}
 
-    }
+		protected override bool SupportsAEBracketing
+			=> true;
+
+		protected override IEnumerable<(long, string)> SupportedExposureEVSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+			}
+		}
+
+		protected override IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+				yield return (4, "1+1/3 EV");
+				yield return (5, "1+1/2 EV");
+				yield return (6, "1+2/3 EV");
+				yield return (7, "2 EV");
+			}
+		}
+
+		protected override IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				yield return (0, 2, "-1..0");
+				yield return (1, 2, "0..+1");
+				yield return (2, 3, "-1..+1");
+			}
+		}
+
+	}
 }
