@@ -69,6 +69,8 @@
   <string name="CapturePhotoNoAfToolTip">Foto maken zonder auto focus</string>
   <string name="BraketingToolTip">Belichtings- (Witbalans-, Flits-) reeks</string>
   <string name="SettingsToolTip">Instellingen</string>
+  <string name="ImportProjectToolTip">Importeer project</string>
+  <string name="ExportProjectToolTip">Exporteer project</string>
   <string name="TimeLapseToolTip">Time-Lapse</string>
   <string name="FullscreenToolTip">Volledig scherm</string>
   <string name="LiveViewToolTip">Live beeld</string>

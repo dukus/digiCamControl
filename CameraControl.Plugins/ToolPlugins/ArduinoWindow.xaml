@@ -13,7 +13,8 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Title="{Binding Title}" >
     <Window.DataContext>
         <toolPlugins:ArduinoViewModel/>
     </Window.DataContext>

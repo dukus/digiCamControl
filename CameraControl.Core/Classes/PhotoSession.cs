@@ -136,6 +136,7 @@ namespace CameraControl.Core.Classes
 
 		private string _folder;
 
+		[DCCProjectSettingsProvider.FilePath]
 		public string Folder
 		{
 			get { return _folder; }
@@ -211,6 +212,7 @@ namespace CameraControl.Core.Classes
 			}
 		}
 
+		[DCCProjectSettingsProvider.FilePath]
 		public string BackUpPath
 		{
 			get { return _backUpPath; }
@@ -233,7 +235,7 @@ namespace CameraControl.Core.Classes
 
 
 		private AsyncObservableCollection<FileItem> _files;
-
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public AsyncObservableCollection<FileItem> Files
 		{
 			get { return _files; }
@@ -246,6 +248,7 @@ namespace CameraControl.Core.Classes
 
 		private BracketingClass _braketing;
 
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public BracketingClass Braketing
 		{
 			get { return _braketing; }
@@ -328,6 +331,7 @@ namespace CameraControl.Core.Classes
 			}
 		}
 
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public string Barcode { get; set; }
 
 		[XmlIgnore]
@@ -434,9 +438,12 @@ namespace CameraControl.Core.Classes
 		}
 
 		[TclScriptIgnore]
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public string ConfigFile { get; set; }
 
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public TimeLapseSettings TimeLapseSettings { get; set; }
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public PrintSettings PrintSettings { get; set; }
 
 		[XmlIgnore]
@@ -487,6 +494,17 @@ namespace CameraControl.Core.Classes
 			PrintSettings = new PrintSettings();
 		}
 
+		public static PhotoSession CreateFromDefault ()
+		{
+			var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.json");
+			if (File.Exists(defaultsessionfile))
+			{
+				var session = ServiceProvider.Settings.LoadSession(defaultsessionfile);
+				session.Files.Clear();
+				return session;
+			}
+			return new PhotoSession();
+		}
 
 		public AutoExportPluginConfig AddPlugin (IAutoExportPlugin plugin)
 		{

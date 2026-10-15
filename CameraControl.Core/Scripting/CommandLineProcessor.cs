@@ -28,6 +28,7 @@
 
 #region
 using CameraControl.Core.Classes;
+using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using System;
@@ -64,7 +65,8 @@ namespace CameraControl.Core.Scripting
 
 		public void ScriptExecutionCompleted ()
 		{
-			DiscardSyncEvents(this);
+			DiscardExternalObjectEvents();
+			DiscardSyncEvents();
 		}
 
 		public const string SingleCommandDocumentationUrl = "https://www.digicamcontrol.com/doc/userguide/singlecmd";
@@ -88,6 +90,22 @@ List
 		Lists all connected cameras.
 	Cmds
 		Lists all available window commands. Commands are executed via 'do'.
+	External
+		Lists all services and devices (excluding cameras) that can be scripted,
+		and whether they are activated (i.e., available for use in scripts).
+		The services are external to the application and have to be registered
+		and activated before being included in the list. Spaces in registered
+		names are replaced by '_'.
+	External <name>
+		Lists the properties, triggers and events that are available for the
+		external service <name> that has been activated. See 'List External'
+		for valid names.
+	External <name> <property>
+		Lists the allowed values for the property <property> of an activated
+		external service <name>, in case the property has a limited number of
+		valid values. That is marked as 'Enumeration' in 'List External <name>'.
+		For other properties the list is empty. If <property> is an event,
+		lists the state of the event.
 	Session
 		Lists all properties of the session.
 	SyncEvents
@@ -121,6 +139,52 @@ Do
 		Execute the command <name> associated with an action that is typically
 		started from one of the (open) windows of the application. See
 		'List Cmds' for valid command names.
+
+External <name>
+	Commands related to an external service or device <name>. See
+	'List External' for valid names.
+
+	Activate
+		Activate the external service or device, in case that has not yet been
+		done.
+	Get <property>
+		Returns the value of the read-only or read/write property <property>.
+		See 'List External <name>' for valid property names.
+	Set <property> <value>
+		Sets the value of the write-only or read/write property <property>. See
+		'List External <name>' for valid property names. If the property has a
+		limited number of valid values, use 'List External <name> <property>' to
+		list them.
+	Trigger <trigger>
+		Trigger the trigger <trigger>. A trigger is often associated with a
+		button in the application; triggering it is equivalent to clicking the
+		button. See 'List External <name>' for valid trigger names.
+	Use <event>
+	Use <event> <milliseconds>
+		Indicates that the script is going to wait for the event <event> after
+		the next couple of commands have been completed. See 
+		'List External <name>' for valid event names.
+		If the event has not already been raised at the time an 
+		'External <name> Wait <event>' command is started, the application
+		regularly asks the service whether the event has been raised. By default
+		that is once per second. Specifying an alternative via <milliseconds>
+		(larger than zero). If <milliseconds> is zero or smaller, the default
+		interval is restored.
+	Wait <event>
+	Wait <event> <milliseconds>
+		Wait until the event <event> has been raised. If the event has been
+		raised before the Wait command (and after the Use or previous Wait
+		command), the script continues immediately. Otherwise the script will
+		continue once the event is raised. The parameter <milliseconds> is 
+		optional and must be zero or larger. If it is specified, the script
+		only waits the indicated number of milliseconds before it cancels the
+		wait. The command returns 'true' if the wait has been completed, false
+		if it was cancelled.
+	Discard <event>
+		Indicates that the script no longer wants to wait for the event <event>.
+		The application will no longer take the <milliseconds> argument into
+		account that was previously passed via the command
+		'External <name> use <event> <milliseconds>'.
 
 SyncEvent <name>
 	Commands related to a synchronisation event with name <name> (a name without
@@ -320,6 +384,8 @@ insensitive."
 					return Get(args.Skip(1).ToArray());
 				case "list":
 					return List(args.Skip(1).ToArray());
+				case "external":
+					return ExternalCmd(args.Skip(1).ToArray());
 				case "syncevent":
 					return SyncEventCmd(args.Skip(1).ToArray());
 				default:
@@ -356,6 +422,88 @@ insensitive."
 
 			switch (arg)
 			{
+				case "external":
+					if (args.Length == 1)
+					{
+						return string.Join("\n", from n in ServiceProvider.Project.AllExternalObjects
+												 orderby n.scriptName.ToLower()
+												 select n.scriptName + (n.isActivated ? ": activated" : ": not activated"));
+					}
+					else
+					{
+						var externalObject = ServiceProvider.Project.GetExternalObject(args[1])
+							?? throw new Exception($"Unknow external service/device '{args[1]}'");
+						if (!externalObject.IsActivated)
+						{
+							throw new Exception($"External service/device '{args[1]}' is not activated");
+						}
+						if (args.Length == 2)
+						{
+							string _Property (ScriptExternalObjectProperty p)
+								=> p.CanRead && p.CanWrite
+										? "read/write property"
+								 : p.CanRead
+										? "read-only property"
+										: "write-only property";
+							return string.Join("\n", from p in externalObject.Properties
+													 orderby p.ScriptName
+													 select p.ScriptName + ": " +
+														(p.Type == ScriptExternalObjectProperty.ValueType.Event
+															? " event"
+														: p.Type == ScriptExternalObjectProperty.ValueType.Trigger
+															? " trigger"
+														: p.Type == ScriptExternalObjectProperty.ValueType.Boolean
+															? _Property(p) + " with 'true' or 'false' as value"
+														: p.Type == ScriptExternalObjectProperty.ValueType.Long
+															? _Property(p) + " with an integer number" + (p.EnumerationValues != null ? " from a list" : "") + " as value"
+														: p.Type == ScriptExternalObjectProperty.ValueType.String
+															? _Property(p) + " with a text" + (p.EnumerationValues != null ? " from a list" : "") + " as value"
+														: throw new NotImplementedException()
+														)
+														+ (string.IsNullOrWhiteSpace(p.Description) ? "" : "\n    " + p.Description.Trim())
+											);
+						}
+						else
+						{
+							var property = (from p in externalObject.Properties
+											where p.ScriptName.ToLower() == args[2].ToLower()
+											select p).FirstOrDefault();
+							if (property == null)
+							{
+								throw new Exception($"Unknow property '{args[2]}' of external service/device '{args[1]}'");
+							}
+							switch (property.Type)
+							{
+								case ScriptExternalObjectProperty.ValueType.Boolean:
+									return string.Join(" or ", _tclTrue) + "\n" + string.Join(" or ", _tclFalse);
+								case ScriptExternalObjectProperty.ValueType.Long:
+								case ScriptExternalObjectProperty.ValueType.String:
+									if (property.EnumerationValues == null)
+									{
+										return "";
+									}
+									else
+									{
+										return string.Join("\n", property.EnumerationValues);
+									}
+								case ScriptExternalObjectProperty.ValueType.Event:
+									lock (_externalObjectEvents)
+									{
+										if (_externalObjectEvents.TryGetValue(externalObject, out var events)
+											&& events.TryGetValue(property.Name, out var @event))
+										{
+											var list = new List<string>();
+											@event.List(list);
+											return string.Join("\n", list);
+										}
+									}
+									return "No script is using the event";
+								default:
+									return "";
+							}
+
+						}
+					}
 				case "syncevents":
 					lock (_syncEvents)
 					{
@@ -605,7 +753,6 @@ insensitive."
 					throw new Exception($"Unknow parameter {arg}");
 			}
 		}
-
 
 		private void Set (string[] args)
 		{
@@ -961,6 +1108,433 @@ insensitive."
 			}
 		}
 
+		#region IExternalServiceScriptObject events
+		private string ExternalCmd (string[] args)
+		{
+			if (args.Length == 0)
+			{
+				throw new Exception("Missing service/device name");
+			}
+			if (args.Length == 1)
+			{
+				throw new Exception($"Missing command for service/device {args[0]}");
+			}
+
+			var externalObject = ServiceProvider.Project.GetExternalObject(args[0]);
+			if (externalObject == null)
+			{
+				throw new Exception($"Service/device {args[0]} is not present");
+			}
+
+			var command = args[1].ToLower().Trim();
+			if (command == "activate")
+			{
+				var wrapper = (from e in ServiceProvider.Project.ExternalObjects
+							   where e.ScriptObject == externalObject
+							   select e).FirstOrDefault();
+				if (wrapper == null)
+				{
+					externalObject.Activate();
+				}
+				else
+				{
+					wrapper.Activate();
+				}
+				return "";
+			}
+			if (!externalObject.IsActivated)
+			{
+				throw new Exception($"Service/device {args[0]} is not activated");
+			}
+
+			ScriptExternalObjectProperty _GetProperty (string type)
+			{
+				if (args.Length == 2)
+				{
+					throw new Exception($"Missing {type} name for service/device {args[0]}");
+				}
+				return (from p in externalObject.Properties
+						where p.ScriptName.ToLower() == args[2].ToLower()
+						select p).FirstOrDefault()
+						?? throw new Exception($"Service/device {args[0]} has no {type} with name {args[2]}");
+			}
+
+			switch (command)
+			{
+				case "get":
+					{
+						var property = _GetProperty("property");
+						if (!property.CanRead
+							|| property.Type == ScriptExternalObjectProperty.ValueType.Trigger
+							|| property.Type == ScriptExternalObjectProperty.ValueType.Event)
+						{
+							throw new Exception($"{property.ScriptName} of service/device {args[0]} is not a read-only or read/write property");
+						}
+						var value = externalObject.Read(property.Name);
+						return value == null ? "" : value.ToString();
+					}
+
+				case "set":
+					{
+						var property = _GetProperty("property");
+						if (!property.CanWrite
+							|| property.Type == ScriptExternalObjectProperty.ValueType.Trigger
+							|| property.Type == ScriptExternalObjectProperty.ValueType.Event)
+						{
+							throw new Exception($"{property.ScriptName} of service/device {args[0]} is not a write-only or read/write property");
+						}
+						if (args.Length == 3)
+						{
+							throw new Exception($"Missing value for property {property.ScriptName} of service/device {args[0]}");
+						}
+						object value;
+						switch (property.Type)
+						{
+							case ScriptExternalObjectProperty.ValueType.Boolean:
+								if (_tclTrue.Contains(args[3].ToLower()))
+								{
+									value = true;
+								}
+								else if (_tclFalse.Contains(args[3].ToLower()))
+								{
+									value = false;
+								}
+								else
+								{
+									throw new Exception($"Invalid value '{args[3]}' for property {property.ScriptName} of service/device {args[0]}");
+								}
+								break;
+
+							case ScriptExternalObjectProperty.ValueType.Long:
+							case ScriptExternalObjectProperty.ValueType.String:
+								if (property.EnumerationValues != null
+									&& !property.EnumerationValues.Contains(args[3]))
+								{
+									throw new Exception($"Invalid value '{args[3]}' for property {property.ScriptName} of service/device {args[0]}");
+								}
+								if (property.Type == ScriptExternalObjectProperty.ValueType.Long)
+								{
+									if (!long.TryParse(args[3], out var longValue))
+									{
+										throw new Exception($"Invalid value '{args[3]}' for property {property.ScriptName} of service/device {args[0]}");
+									}
+									value = longValue;
+								}
+								else
+								{
+									value = args[3];
+								}
+								break;
+							default:
+								throw new NotImplementedException($"{property.GetType().FullName}.{property.Type}");
+						}
+						externalObject.Write(property.Name, value);
+						return value.ToString();
+					}
+
+				case "trigger":
+					{
+						var property = _GetProperty("trigger");
+						if (property.Type != ScriptExternalObjectProperty.ValueType.Trigger)
+						{
+							throw new Exception($"{property.ScriptName} of service/device {args[0]} is not a trigger");
+						}
+						externalObject.Trigger(property.Name);
+						return "";
+					}
+
+				case "use":
+					{
+						var property = _GetProperty("event");
+						if (property.Type != ScriptExternalObjectProperty.ValueType.Event)
+						{
+							throw new Exception($"{property.ScriptName} of service/device {args[0]} is not an event");
+						}
+						var interval = 0;
+						if (args.Length > 3 && !int.TryParse(args[3], out interval))
+						{
+							throw new Exception($"Invalid value '{args[3]}' for 'Use' argument for event {property.ScriptName} of service/device {args[0]}");
+						}
+						EvalExternalObjectEvent(externalObject, property.Name, use =>
+						{
+							use.Interval = interval;
+							use.IsUsing = true;
+						}, true);
+						return "";
+					}
+				case "wait":
+					{
+						var property = _GetProperty("event");
+						if (property.Type != ScriptExternalObjectProperty.ValueType.Event)
+						{
+							throw new Exception($"{property.ScriptName} of service/device {args[0]} is not an event");
+						}
+
+						var timeout = -1;
+						if (args.Length > 3 && !int.TryParse(args[3], out timeout))
+						{
+							throw new Exception($"Invalid value '{args[3]}' for 'Wait' timeout for event {property.ScriptName} of service/device {args[0]}");
+						}
+						var waitCompleted = true;
+						EvalExternalObjectEvent(externalObject, property.Name, use => waitCompleted = use.Wait(timeout));
+						return waitCompleted ? "true" : "false";
+					}
+				case "discard":
+					{
+						var property = _GetProperty("event");
+						if (property.Type != ScriptExternalObjectProperty.ValueType.Event)
+						{
+							throw new Exception($"{property.ScriptName} of service/device {args[0]} is not an event");
+						}
+						EvalExternalObjectEvent(externalObject, property.Name, use => use.Discard(), false);
+						return "";
+					}
+				default:
+					throw new Exception(string.Format("Invalid command {0}", command));
+			}
+		}
+		private static List<string> _tclTrue = new List<string> { "true", "yes", "on", "1" };
+		private static List<string> _tclFalse = new List<string> { "false", "no", "off", "0" };
+
+
+		private void EvalExternalObjectEvent (IExternalServiceScriptObject externalObject, string eventName, Action<ExternalObjectEventUse> command, bool forceCreate = true)
+		{
+			ExternalObjectEventUse use;
+			lock (_externalObjectEvents)
+			{
+				if (!_externalObjectEvents.TryGetValue(externalObject, out var externalObjectEvents))
+				{
+					if (!forceCreate)
+					{
+						return;
+					}
+					_externalObjectEvents[externalObject] = externalObjectEvents = new Dictionary<string, ExternalObjectEvent>();
+				}
+				if (!externalObjectEvents.TryGetValue(eventName, out var @event))
+				{
+					if (!forceCreate)
+					{
+						return;
+					}
+					@event = new ExternalObjectEvent(externalObject, externalObjectEvents, eventName);
+				}
+				if (!@event.Users.TryGetValue(this, out var sharedUse))
+				{
+					use = new ExternalObjectEventUse(@event, this);
+				}
+				else
+				{
+					use = sharedUse as ExternalObjectEventUse;
+				}
+			}
+			command(use);
+		}
+
+		private void DiscardExternalObjectEvents ()
+		{
+			lock (_externalObjectEvents)
+			{
+				foreach (var events in _externalObjectEvents.Values)
+				{
+					foreach (var ev in events.ToList())
+					{
+						if (ev.Value.Users.TryGetValue(this, out var use))
+						{
+							use.Discard();
+						}
+					}
+				}
+			}
+		}
+
+		private static Dictionary<IExternalServiceScriptObject, Dictionary<string, ExternalObjectEvent>> _externalObjectEvents = new Dictionary<IExternalServiceScriptObject, Dictionary<string, ExternalObjectEvent>>();
+
+		private sealed class ExternalObjectEvent : SharedEvent
+		{
+			internal ExternalObjectEvent (IExternalServiceScriptObject externalObject, Dictionary<string, ExternalObjectEvent> collection, string name)
+				: base(name)
+			{
+				_externalObject = externalObject;
+				_collection = collection;
+				_collection[Name] = this;
+			}
+
+			internal override void Remove ()
+			{
+				_collection.Remove(Name);
+			}
+
+			private Dictionary<string, ExternalObjectEvent> _collection;
+			internal override object GlobalCollection => _collection;
+
+			internal void List (List<string> result)
+			{
+				result.Add(Name + ":");
+				result.Add($"    #Use={(from u in Users.Values where u.IsUsing select u).Count()}");
+				result.Add($"    #Wait={(from u in Users.Values where u.IsWaiting select u).Count()}");
+				result.Add($"    Interval={_pollInterval}ms");
+				if (_lastPollTime != DateTime.MinValue)
+				{
+					result.Add($"    Last poll={_lastPollTime:yyyy-MM-dd HH:mm:ss} UTC");
+					var lastPollError = _lastPollError;
+					if (lastPollError != null)
+					{
+						result.Add($"    Last poll error={_lastPollError}");
+					}
+				}
+				if (_nextPollTime > DateTime.UtcNow)
+				{
+					result.Add($"    Next poll={_nextPollTime:yyyy-MM-dd HH:mm:ss} UTC");
+				}
+			}
+
+			private IExternalServiceScriptObject _externalObject;
+
+			private DateTime _lastPollTime = DateTime.MinValue;
+			private DateTime _nextPollTime = DateTime.MinValue;
+			private long _pollInterval = 1000;
+			private Timer _pollTimer;
+			private bool _enablePolling;
+			private bool _isPolling;
+			private string _lastPollError;
+
+			internal override bool TryFire ()
+			{
+				if (!(from u in Users.Values
+					  where u.IsWaiting
+					  select u).Any())
+				{
+					_enablePolling = false;
+					_pollTimer?.Stop();
+					return false;
+				}
+
+				_pollInterval = (from u in Users.Values
+								 where u.IsWaiting && (u as ExternalObjectEventUse).Interval > 0
+								 select (int?)(u as ExternalObjectEventUse).Interval).Min()
+								?? 1000;
+				if (_lastPollTime.AddSeconds(_pollInterval) == _nextPollTime)
+				{
+					return false;
+				}
+				else
+				{
+					_pollTimer?.Stop();
+					return !StartPollTimer(DateTime.UtcNow);
+				}
+			}
+
+			private bool StartPollTimer (DateTime now)
+			{
+				_nextPollTime = _lastPollTime.AddMilliseconds(_pollInterval);
+				_enablePolling = true;
+				if (_nextPollTime <= now)
+				{
+					return !Poll(now);
+				}
+				if (_pollTimer == null)
+				{
+					_pollTimer = new Timer()
+					{
+						AutoReset = false
+					};
+					_pollTimer.Elapsed += (s, e) =>
+					{
+						Poll(DateTime.UtcNow);
+					};
+				}
+				_pollTimer.Interval = (_nextPollTime - now).TotalMilliseconds;
+				_pollTimer.Start();
+				return true;
+			}
+
+			private bool Poll (DateTime now)
+			{
+				if (!_enablePolling || _isPolling)
+				{
+					return false;
+				}
+				bool isRaised = false;
+				_lastPollError = null;
+				try
+				{
+					_isPolling = true;
+					isRaised = _externalObject.IsEventRaised(Name);
+				}
+				catch (Exception ex)
+				{
+					Log.Error($"Cannot get state of event '{Name}' of external service '{_externalObject.Name}': {_lastPollError = ex.Message}");
+				}
+				finally
+				{
+					_isPolling = false;
+				}
+				_lastPollTime = now;
+				if (isRaised)
+				{
+					_enablePolling = false;
+					_pollTimer?.Stop();
+					_nextPollTime = DateTime.MinValue;
+					lock (_collection)
+					{
+						foreach (ExternalObjectEventUse user in Users.Values)
+						{
+							if (user.IsWaiting)
+							{
+								user.StopWaiting();
+							}
+							else
+							{
+								user.EventFired = true;
+							}
+						}
+					}
+				}
+				else if (_enablePolling)
+				{
+					StartPollTimer(now);
+				}
+				return isRaised;
+			}
+		}
+
+		private sealed class ExternalObjectEventUse : SharedEventUse
+		{
+			internal ExternalObjectEventUse (ExternalObjectEvent @event, CommandLineProcessor processor)
+				: base(@event, processor)
+			{
+			}
+
+			internal bool EventFired
+			{
+				get;
+				set;
+			}
+
+			internal int Interval
+			{
+				get;
+				set;
+			}
+
+			internal override bool Wait (long timeout)
+			{
+				if (EventFired)
+				{
+					EventFired = false;
+					if (IsUsing)
+					{
+						return true;
+					}
+				}
+				var result = base.Wait(timeout);
+				Event.TryFire();
+				return result;
+			}
+		}
+		#endregion
+
+		#region Sync events
 		private string SyncEventCmd (string[] args)
 		{
 			if (args.Length == 0)
@@ -975,18 +1549,18 @@ insensitive."
 			switch (command)
 			{
 				case "use":
-					EvalSyncEvent(args[0], this, use => use.IsUsing = true);
+					EvalSyncEvent(args[0], use => use.IsUsing = true);
 					return "";
 				case "wait":
 					if (args.Length == 2)
 					{
 						var waitCompleted = true;
-						EvalSyncEvent(args[0], this, use => waitCompleted = use.Wait(-1));
+						EvalSyncEvent(args[0], use => waitCompleted = use.Wait(-1));
 						return waitCompleted ? "true" : "false";
 					}
 					break;
 				case "discard":
-					EvalSyncEvent(args[0], this, use => use.Discard(), false);
+					EvalSyncEvent(args[0], use => use.Discard(), false);
 					return "";
 				case "after":
 				case "notbefore":
@@ -994,7 +1568,7 @@ insensitive."
 				case "interval":
 					if (args.Length == 3 && args[2] == "-")
 					{
-						EvalSyncEvent(args[0], this, use => use.Event.SetInterval(0));
+						EvalSyncEvent(args[0], use => (use.Event as SyncEvent).SetInterval(0));
 						return "";
 					}
 					break;
@@ -1020,45 +1594,72 @@ insensitive."
 				case "wait":
 					{
 						var waitCompleted = true;
-						EvalSyncEvent(args[0], this, use => waitCompleted = use.Wait(value));
+						EvalSyncEvent(args[0], use => waitCompleted = use.Wait(value));
 						return waitCompleted ? "true" : "false";
 					}
 				case "after":
-					EvalSyncEvent(args[0], this, use => use.Event.SetAfter(value));
+					EvalSyncEvent(args[0], use => (use.Event as SyncEvent).SetAfter(value));
 					break;
 				case "notbefore":
-					EvalSyncEvent(args[0], this, use => use.Event.SetNotBefore(value));
+					EvalSyncEvent(args[0], use => (use.Event as SyncEvent).SetNotBefore(value));
 					break;
 				case "interval":
-					EvalSyncEvent(args[0], this, use => use.Event.SetInterval(value));
+					EvalSyncEvent(args[0], use => (use.Event as SyncEvent).SetInterval(value));
 					break;
 			}
 			return "";
 		}
 
-		private sealed class SyncEvent
+		private void EvalSyncEvent (string eventName, Action<SharedEventUse> command, bool forceCreate = true)
+		{
+			SharedEventUse use;
+			lock (_syncEvents)
+			{
+				if (!_syncEvents.TryGetValue(eventName, out var syncEvent))
+				{
+					if (!forceCreate)
+					{
+						return;
+					}
+					syncEvent = new SyncEvent(eventName);
+				}
+				if (!syncEvent.Users.TryGetValue(this, out use))
+				{
+					use = new SharedEventUse(syncEvent, this);
+				}
+			}
+			command(use);
+		}
+
+		private void DiscardSyncEvents ()
+		{
+			lock (_syncEvents)
+			{
+				foreach (var syncEvent in _syncEvents.ToList())
+				{
+					if (syncEvent.Value.Users.TryGetValue(this, out var use))
+					{
+						use.Discard();
+					}
+				}
+			}
+		}
+		private static Dictionary<string, SyncEvent> _syncEvents = new Dictionary<string, SyncEvent>(StringComparer.OrdinalIgnoreCase);
+
+		private sealed class SyncEvent : SharedEvent
 		{
 			internal SyncEvent (string name)
+				: base(name)
 			{
-				Name = name;
 				_syncEvents[name] = this;
 			}
 
-			internal string Name
-			{
-				get;
-			}
-
-			internal Dictionary<CommandLineProcessor, SyncEventUse> Users
-			{
-				get;
-			} = new Dictionary<CommandLineProcessor, SyncEventUse>();
-
-
-			internal void Remove ()
+			internal override void Remove ()
 			{
 				_syncEvents.Remove(Name);
 			}
+
+			internal override object GlobalCollection => _syncEvents;
 
 			internal void List (List<string> result)
 			{
@@ -1076,7 +1677,7 @@ insensitive."
 				}
 				if (_interval > 0)
 				{
-					result.Add($"    Interval={_interval}");
+					result.Add($"    Interval={_interval}s");
 				}
 			}
 
@@ -1085,7 +1686,7 @@ insensitive."
 			private DateTime _notBefore = DateTime.MinValue;
 			private Timer _wait;
 
-			internal bool TryFire ()
+			internal override bool TryFire ()
 			{
 				if ((from u in Users.Values
 					 where !u.IsWaiting && u.IsUsing
@@ -1170,10 +1771,40 @@ insensitive."
 				TryFire();
 			}
 		}
+		#endregion
 
-		private sealed class SyncEventUse
+		#region Base classes for event handling
+		private abstract class SharedEvent
 		{
-			internal SyncEventUse (SyncEvent @event, CommandLineProcessor processor)
+			internal SharedEvent (string name)
+			{
+				Name = name;
+			}
+
+			internal string Name
+			{
+				get;
+			}
+
+			internal Dictionary<CommandLineProcessor, SharedEventUse> Users
+			{
+				get;
+			} = new Dictionary<CommandLineProcessor, SharedEventUse>();
+
+
+			internal abstract void Remove ();
+
+			internal abstract bool TryFire ();
+
+			internal abstract object GlobalCollection
+			{
+				get;
+			}
+		}
+
+		private class SharedEventUse
+		{
+			internal SharedEventUse (SharedEvent @event, CommandLineProcessor processor)
 			{
 				_processor = processor;
 				Event = @event;
@@ -1181,7 +1812,7 @@ insensitive."
 			}
 			private readonly CommandLineProcessor _processor;
 
-			internal SyncEvent Event { get; }
+			internal SharedEvent Event { get; }
 
 			private bool _isUsing;
 			internal bool IsUsing
@@ -1202,7 +1833,7 @@ insensitive."
 
 			internal void Discard ()
 			{
-				lock (_syncEvents)
+				lock (Event.GlobalCollection)
 				{
 					Event.Users.Remove(_processor);
 					if (Event.Users.Count == 0)
@@ -1217,7 +1848,7 @@ insensitive."
 				}
 			}
 
-			internal bool Wait (long timeout)
+			internal virtual bool Wait (long timeout)
 			{
 				if (!IsUsing)
 				{
@@ -1255,42 +1886,6 @@ insensitive."
 				}
 			}
 		}
-
-		private static Dictionary<string, SyncEvent> _syncEvents = new Dictionary<string, SyncEvent>(StringComparer.OrdinalIgnoreCase);
-
-		private static void EvalSyncEvent (string eventName, CommandLineProcessor processor, Action<SyncEventUse> command, bool forceCreate = true)
-		{
-			SyncEventUse use;
-			lock (_syncEvents)
-			{
-				if (!_syncEvents.TryGetValue(eventName, out var syncEvent))
-				{
-					if (!forceCreate)
-					{
-						return;
-					}
-					syncEvent = new SyncEvent(eventName);
-				}
-				if (!syncEvent.Users.TryGetValue(processor, out use))
-				{
-					use = new SyncEventUse(syncEvent, processor);
-				}
-			}
-			command(use);
-		}
-
-		private void DiscardSyncEvents (CommandLineProcessor processor)
-		{
-			lock (_syncEvents)
-			{
-				foreach (var syncEvent in _syncEvents.ToList())
-				{
-					if (syncEvent.Value.Users.TryGetValue(processor, out var use))
-					{
-						use.Discard();
-					}
-				}
-			}
-		}
+		#endregion
 	}
 }

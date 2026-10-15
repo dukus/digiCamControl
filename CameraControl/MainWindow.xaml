@@ -174,6 +174,9 @@
                 <viewModel:MainMenuViewModel/>
             </Menu.DataContext>
             <MenuItem Header="{T:TranslateExtension MenuFile}" Padding="5,2" Margin="1">
+                <MenuItem Header="{T:TranslateExtension ImportProjectToolTip}" Command="{Binding ImportProjectCommand}" />
+                <MenuItem Header="{T:TranslateExtension ExportProjectToolTip}" Command="{Binding ExportProjectCommand}" />
+                <Separator/>
                 <MenuItem Header="{T:TranslateExtension SettingsToolTip}" Command="{Binding SettingsCommand}" Visibility="{Binding Branding.ShowSettingMenuMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension MenuExit}" Command="{Binding SendCommand}" CommandParameter="All_Close" InputGestureText="{myClasess:CommandShortcutExtensioncs All_Close}"/>
@@ -207,6 +210,8 @@
                     <MenuItem Header="{T:TranslateExtension LabelPrint}" Command="{Binding SendCommand}" CommandParameter="PrintWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs PrintWnd_Show}"/>
                     <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
                     <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
+                    <MenuItem Header="Buttons" Command="{Binding SendCommand}" CommandParameter="UIButtonWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs ButtonsWnd_Show}" />
+                    <MenuItem Header="External services/devices" Command="{Binding SendCommand}" CommandParameter="ExternalServicesWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs ExternalServicesWnd_Show}"/>
                     <MenuItem Header="Script execution" Command="{Binding SendCommand}" CommandParameter="ScriptWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs ScriptWnd_Show}"/>
                 </MenuItem>
                 <Separator/>

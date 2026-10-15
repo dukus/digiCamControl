@@ -70,6 +70,8 @@
     <string name="CapturePhotoNoAfToolTip">Capture photo no auto focus</string> 
     <string name="BraketingToolTip">Bracketing</string> 
     <string name="SettingsToolTip">Settings</string> 
+    <string name="ImportProjectToolTip">Import project</string>
+    <string name="ExportProjectToolTip">Export project</string>
     <string name="TimeLapseToolTip">Time lapse</string> 
     <string name="FullscreenToolTip">Full screen</string> 
     <string name="LiveViewToolTip">Live view</string> 

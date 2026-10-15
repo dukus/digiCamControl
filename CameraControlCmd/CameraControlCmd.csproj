@@ -134,10 +134,6 @@
       <Project>{E8572D8B-C987-4D20-BD88-1F8925A64A82}</Project>
       <Name>CameraControl.Devices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CameraControl.Plugins\CameraControl.Plugins.csproj">
-      <Project>{F9CF3A51-3A4C-454C-A6A6-23E84E73D839}</Project>
-      <Name>CameraControl.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Canon.Eos.Framework\Canon.Eos.Framework.csproj">
       <Project>{f809dbb6-e0e8-47a8-92ed-c24575576a5d}</Project>
       <Name>Canon.Eos.Framework</Name>

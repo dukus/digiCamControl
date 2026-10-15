@@ -1,0 +1,144 @@
+﻿@page "/"
+@using ScriptExternalObjectRestService.Components.ScriptExternalObjectDemo
+
+<PageTitle>Web service as external service</PageTitle>
+
+<h1>Web service addressable in scripting</h1>
+
+This website implements a REST web service that can be addressed by the single command implementation
+and tcl scripts in digiCamControl.
+
+<h2>Quick start</h2>
+
+<ul>
+    <li>Import the project <i>External - WebService.dccproject.zip</i> from <i>Examples\Tcl scripts</i></li>
+    <li>Open the <i>Script execution</i> window</li>
+    <li>Select the <i>Test web service</i> script from the <i>Scripts</i> window</li>
+    <li>Make sure the output window is large enough and run the script.</li>
+</ul>
+
+<h2>The object exposed by this web service</h2>
+
+The object that is exposed via the service has the properties:
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>BooleanValue</td>
+            <td>Boolean</td>
+            <td><input type="checkbox" @bind="ScriptExternalObject.Instance.BooleanValue" @bind:event="oninput" /></td>
+            <td>@PropertyDescription("BooleanValue")</td>
+        </tr>
+        <tr>
+            <td>LongValue</td>
+            <td>long</td>
+            <td><input type="text" @bind="ScriptExternalObject.Instance.LongValue" @bind:event="oninput" /></td>
+            <td>@PropertyDescription("LongValue")</td>
+        </tr>
+        <tr>
+            <td>StringValue</td>
+            <td>string</td>
+            <td><input type="text" @bind="ScriptExternalObject.Instance.StringValue" @bind:event="oninput" /></td>
+            <td>@PropertyDescription("StringValue")</td>
+        </tr>
+        <tr>
+            <td>EnumValue</td>
+            <td>string</td>
+            <td>
+                <select @bind="ScriptExternalObject.Instance.EnumValue" @bind:event="oninput">
+                    @foreach (var name in Enum.GetNames<ScriptExternalObject.EnumValueType>())
+                    {
+                        <option>@name</option>
+                    }
+                </select>
+            </td>
+            <td>@PropertyDescription("EnumValue")</td>
+        </tr>
+        <tr>
+            <td>ReadOnlyValue</td>
+            <td>long</td>
+            <td><input type="text" @bind="ReadOnlyValue" @bind:event="oninput" /></td>
+            <td>@PropertyDescription("ReadOnlyValue")</td>
+        </tr>
+        <tr>
+            <td>WriteOnlyValue</td>
+            <td>string</td>
+            <td>@ScriptExternalObject.Instance.GetWriteOnlyValue()</td>
+            <td>@PropertyDescription("WriteOnlyValue")</td>
+        </tr>
+        <tr>
+            <td>PressButton</td>
+            <td>Trigger</td>
+            <td>#pressed: @ScriptExternalObject.Instance.TriggerCount</td>
+            <td>@PropertyDescription("PressButton")</td>
+        </tr>
+        <tr>
+            <td>EventRaised</td>
+            <td>Event</td>
+            <td><button class="btn btn-primary" @onclick="ScriptExternalObject.Instance.RaiseEvent">Raise event</button> Raised: @ScriptExternalObject.Instance.HasEventBeenRaised</td>
+            <td>@PropertyDescription("EventRaised")</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>How the project was created</h2>
+
+<h3>Register an external object in digiCamControl</h3>
+
+<ul>
+    <li>Open the <i>External services/devices</i> window.</li>
+    <li>Select <i>New...</i>  from the <i>Registration</i> menu.</li>
+    <li>Select <i>REST web service</i> as device/service type.</li>.
+    <li>Enter '@RestServiceUrl' as URL of the REST service and choose a name. In the examples on this page the name 'My web service' is used.</li>
+    <li>Click <i>Create</i>.</li>
+</ul>
+
+<h2>Show information about the external object</h2>
+
+Once the service is registered, information about the object can be displayed via scripting.
+
+Select the <i>Single command</i> from the <i>Script</i> menu and execute:
+<ul>
+    <li>list external</li>
+    <li>list external my_web_service</li>
+</ul>
+
+Or open a (new) <i>Tcl script</i> from the <i>Script</i> menu, enter and run the script:
+<pre class="code">
+    echo [ dcc list external ]
+    echo [ dcc list external my_web_service ]
+</pre>
+
+
+<h2>Pass information to/from the external object</h2>
+
+Open a (new) <i>Tcl script</i> from the <i>Script</i> menu, enter and run the script:
+<pre class="code">
+    dcc external my_web_service activate ;# not required if the web service is already activated
+    dcc external my_web_service use EventRaised
+    dcc external my_web_service wait EventRaised
+
+    echo [ dcc external my_web_service get BooleanValue ]
+    echo [ dcc external my_web_service get LongValue ]
+    echo [ dcc external my_web_service get StringValue ]
+    echo [ dcc external my_web_service get EnumValue ]
+    echo [ dcc external my_web_service get ReadOnlyValue ]
+
+    dcc external my_web_service set BooleanValue false
+    dcc external my_web_service set LongValue 321
+    dcc external my_web_service set StringValue "A value set by the script"
+    dcc external my_web_service set EnumValue Three
+    dcc external my_web_service set WriteOnlyValue "Some string"
+
+    dcc external my_web_service trigger PressButton
+</pre>
+The script pauses near the start until <button class="btn btn-primary" @onclick="ScriptExternalObject.Instance.RaiseEvent">Raise event</button> is clicked.
+
+The values on this page are updated when they are changed by the script.

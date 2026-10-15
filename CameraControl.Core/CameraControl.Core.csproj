@@ -171,6 +171,8 @@
     <Compile Include="Classes\CameraPropertyEnumerator.cs" />
     <Compile Include="Classes\CmdConsts.cs" />
     <Compile Include="Classes\CustomConfigEnumerator.cs" />
+    <Compile Include="Classes\DCCProjectFile.cs" />
+    <Compile Include="Classes\DCCProjectSettingsProvider.cs" />
     <Compile Include="Classes\Exiv2Helper.cs" />
     <Compile Include="Classes\ExternalData.cs" />
     <Compile Include="Classes\ExternalDeviceManager.cs" />
@@ -194,6 +196,9 @@
     <Compile Include="Classes\PluginSetting.cs" />
     <Compile Include="Classes\PrintSettings.cs" />
     <Compile Include="Classes\Queue\QueueItemFileItem.cs" />
+    <Compile Include="Classes\ScriptExternalObjectCOMPortParameter.cs" />
+    <Compile Include="Classes\ScriptExternalObjectCreateParameter.cs" />
+    <Compile Include="Classes\ScriptExternalObjectProperty.cs" />
     <Compile Include="Classes\TclScriptIgnoreAttribute.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SourceEnum.cs" />
@@ -201,6 +206,7 @@
     <Compile Include="Classes\TimeLapseSettings.cs" />
     <Compile Include="Classes\TransformPluginItem.cs" />
     <Compile Include="Classes\TriggerClass.cs" />
+    <Compile Include="Classes\DCCProject.cs" />
     <Compile Include="Classes\ValuePairEnumerator.cs" />
     <Compile Include="Classes\WebServer.cs" />
     <Compile Include="Classes\WebServerModule.cs" />
@@ -216,9 +222,12 @@
     <Compile Include="Database\DbFile.cs" />
     <Compile Include="Database\EventType.cs" />
     <Compile Include="Interfaces\IAutoExportPlugin.cs" />
+    <Compile Include="Interfaces\IDCCProjectSettingsProvider.cs" />
     <Compile Include="Interfaces\IExecutePlugin.cs" />
     <Compile Include="Interfaces\IExportPlugin.cs" />
     <Compile Include="Interfaces\IExternalDevice.cs" />
+    <Compile Include="Interfaces\IExternalServiceProvider.cs" />
+    <Compile Include="Interfaces\IExternalServiceScriptObject.cs" />
     <Compile Include="Interfaces\IFilenameTemplate.cs" />
     <Compile Include="Interfaces\IImageTransformPlugin.cs" />
     <Compile Include="Interfaces\IMainWindowPlugin.cs" />
@@ -233,7 +242,11 @@
     <Compile Include="Classes\VideoType.cs" />
     <Compile Include="Classes\WindowsManager.cs" />
     <Compile Include="Interfaces\IQueueItem.cs" />
+    <Compile Include="Interfaces\IScriptExternalObject.cs" />
+    <Compile Include="Interfaces\IScriptExternalObjectProvider.cs" />
     <Compile Include="Interfaces\IToolPlugin.cs" />
+    <Compile Include="Interfaces\IUIButton.cs" />
+    <Compile Include="Interfaces\IUIButtonProvider.cs" />
     <Compile Include="Interfaces\IWindow.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Plugin\PluginCollection.cs" />
@@ -268,6 +281,8 @@
     </Compile>
     <Compile Include="Scripting\ScriptManager.cs" />
     <Compile Include="Scripting\ScriptObject.cs" />
+    <Compile Include="Scripting\ScriptTriggerProvider.cs" />
+    <Compile Include="Scripting\ScriptExternalObjectUIButtonProvider.cs" />
     <Compile Include="ServiceProvider.cs" />
     <Compile Include="TclScripting\ThreadConsoleRedirect.cs" />
     <Compile Include="TclScripting\DccCommand.cs" />
@@ -275,6 +290,7 @@
     <Compile Include="TclScripting\TclScriptManager.cs" />
     <Compile Include="Translation\TranslateConverter.cs" />
     <Compile Include="Translation\TranslateExtension.cs" />
+    <Compile Include="Translation\TranslationExtensionWithProjectSuffix.cs" />
     <Compile Include="Translation\TranslationLangDesc.cs" />
     <Compile Include="Translation\TranslationManager.cs" />
     <Compile Include="Translation\TranslationStrings.cs" />

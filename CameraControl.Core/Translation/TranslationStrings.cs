@@ -28,34 +28,36 @@
 
 namespace CameraControl.Core.Translation
 {
-	public class TranslationStrings
-	{
-		public static string Mode = "Mode";
-		public static string Iso = "_Iso";
-		public static string ShutterSpeed = "_Shutter speed";
-		public static string Aperture = "_Aperture";
-		public static string WhiteBalance = "_White Balance";
-		public static string ExposureComp = "_Exposure Comp.";
-		public static string Compression = "_Compression";
-		public static string MeteringMode = "_Metering Mode";
-		public static string FocusMode = "_Focus Mode";
-		public static string Battery = "Battery";
-		public static string SDRam = "SD_Ram";
-		public static string SDRamToolTip = "Capture images direct to PC without using card";
-		public static string CapturePhotoToolTip = "Capture photo";
-		public static string CapturePhotoNoAfToolTip = "Capture photo no auto focus";
-		public static string BraketingToolTip = "Bracketing";
-		public static string SettingsToolTip = "Settings";
-		public static string TimeLapseToolTip = "Time lapse";
-		public static string FullscreenToolTip = "Fullscreen";
-		public static string LiveViewToolTip = "Live view";
-		public static string BrowseSessionsToolTip = "Browse sessions";
-		public static string SelectTagsToolTip = "Select Tags";
-		public static string AboutToolTip = "About";
-		public static string Session = "Session";
-		public static string SessionAdd = "Add";
-		public static string SessionEdit = "Edit";
-		public static string SessionDel = "Del";
+    public class TranslationStrings
+    {
+        public static string Mode = "Mode";
+        public static string Iso = "_Iso";
+        public static string ShutterSpeed = "_Shutter speed";
+        public static string Aperture = "_Aperture";
+        public static string WhiteBalance = "_White Balance";
+        public static string ExposureComp = "_Exposure Comp.";
+        public static string Compression = "_Compression";
+        public static string MeteringMode = "_Metering Mode";
+        public static string FocusMode = "_Focus Mode";
+        public static string Battery = "Battery";
+        public static string SDRam = "SD_Ram";
+        public static string SDRamToolTip = "Capture images direct to PC without using card";
+        public static string CapturePhotoToolTip = "Capture photo";
+        public static string CapturePhotoNoAfToolTip = "Capture photo no auto focus";
+        public static string BraketingToolTip = "Bracketing";
+        public static string SettingsToolTip = "Settings";
+        public static string ImportProjectToolTip = "Import project";
+        public static string ExportProjectToolTip = "Export project";
+        public static string TimeLapseToolTip = "Time lapse";
+        public static string FullscreenToolTip = "Fullscreen";
+        public static string LiveViewToolTip = "Live view";
+        public static string BrowseSessionsToolTip = "Browse sessions";
+        public static string SelectTagsToolTip = "Select Tags";
+        public static string AboutToolTip = "About";
+        public static string Session = "Session";
+        public static string SessionAdd = "Add";
+        public static string SessionEdit = "Edit";
+        public static string SessionDel = "Del";
 
 		public static string MainWindowTitle = "NCC";
 		public static string SettingsWindowTitle = "Settings";

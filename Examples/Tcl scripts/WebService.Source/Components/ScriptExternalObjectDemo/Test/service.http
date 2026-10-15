@@ -1,0 +1,84 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@baseUrl = {{websiteUrl}}api/dcc/
+
+GET {{websiteUrl}}
+
+###
+
+OPTIONS {{websiteUrl}}api/dcc
+
+###
+
+OPTIONS {{baseUrl}}
+
+###
+
+GET {{baseUrl}}BooleanValue
+
+###
+
+PUT {{baseUrl}}BooleanValue
+Content-Type: application/json
+
+false
+
+###
+
+PUT {{baseUrl}}BooleanValue
+Content-Type: application/json
+
+true
+
+###
+
+GET {{baseUrl}}LongValue
+
+###
+
+PUT {{baseUrl}}LongValue
+Content-Type: application/json
+
+321
+
+###
+
+GET {{baseUrl}}StringValue
+
+###
+
+PUT {{baseUrl}}StringValue
+Content-Type: application/json
+
+"A value set \"via\" a test request"
+
+###
+
+GET {{baseUrl}}EnumValue
+
+###
+
+PUT {{baseUrl}}EnumValue
+Content-Type: application/json
+
+"Two"
+
+###
+
+GET {{baseUrl}}ReadOnlyValue
+
+###
+
+PUT {{baseUrl}}WriteOnlyValue
+Content-Type: application/json
+
+"Value written to the service"
+
+###
+
+POST {{baseUrl}}PressButton
+
+###
+
+POST {{baseUrl}}EventRaised
+
+###

@@ -1,0 +1,86 @@
+﻿<Window x:Class="CameraControl.windows.ExternalServicesWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        xmlns:local="clr-namespace:CameraControl.windows"
+        mc:Ignorable="d"
+        Title="External services and devices" Height="576" Width="935" 
+        Closing="MetroWindow_Closing"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="600*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Name="menu" Grid.ColumnSpan="3">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Name="mnu_scripts" Header="Registration">
+                <MenuItem Header="New..." Click="mnu_new_Click" />
+                <MenuItem Header="Delete" Click="mnu_delete_Click" IsEnabled="{Binding IsExternalObjectSelected}"/>
+                <Separator />
+                <MenuItem Header="{T:TranslateExtension ImportProjectToolTip}" Click="mnu_import_Click"/>
+                <MenuItem Header="{T:TranslateExtension ExportProjectToolTip}" Click="mnu_export_Click" />
+            </MenuItem>
+            <MenuItem Name="mnu_activation" Header="Activation" IsEnabled="{Binding AnyActivationRequired}">
+                <MenuItem Header="Activate selected" Click="mnu_activate_Click" IsEnabled="{Binding IsActivationRequired}" />
+                <MenuItem Header="Activate all" Click="mnu_activate_all_Click" />
+                <Separator />
+                <MenuItem Header="Import..."/>
+                <MenuItem Header="Export..." />
+            </MenuItem>
+            <MenuItem Header="Related" HorizontalAlignment="Right">
+                <MenuItem Header="Buttons..." Click="mnu_buttons_Click" />
+                <MenuItem Header="Scripts..." Click="mnu_scripts_Click" />
+            </MenuItem>
+        </Menu>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Registered">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListBox Name="lst_objects" SelectionChanged="lst_objects_Selected" />
+            </Grid>
+        </GroupBox>
+        <GridSplitter Grid.Column="1" ResizeDirection="Columns"/>
+        <GroupBox Grid.Row="1" Grid.Column="2" Header="{Binding SelectedObjectTitle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding PropertiesVisibility}">
+                    <Grid Name="grid_properties">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="300*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.ColumnSpan="2" Name="tb_activation_error" Margin="4"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Device/service type" Margin="4" />
+                        <ComboBox Grid.Row="1" Grid.Column="1" Name="cb_provider" SelectionChanged="cb_provider_SelectionChanged" Margin="4"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Name="tb_provider" Margin="4"/>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

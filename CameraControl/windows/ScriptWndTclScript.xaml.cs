@@ -25,8 +25,10 @@
 // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion
+
 #region
 
+using CameraControl.Core.Classes;
 using CameraControl.Core.TclScripting;
 using CameraControl.Devices;
 using Microsoft.Win32;
@@ -46,20 +48,28 @@ namespace CameraControl.windows
 	public partial class ScriptWndTclScript : UserControl, ScriptWnd.IScriptControl, INotifyPropertyChanged
 	{
 		public ScriptWndTclScript ()
-			: this($"Tcl script")
+			: this($"Tcl script", null)
 		{
 		}
 
-		public ScriptWndTclScript (int index)
-			: this($"Tcl script #{index}")
+		public ScriptWndTclScript (DCCProject.TclScript tclScript)
+			: this(tclScript.Name, tclScript)
 		{
 		}
 
-		private ScriptWndTclScript (string scriptTitle)
+		private ScriptWndTclScript (string scriptTitle, DCCProject.TclScript tclScript)
 		{
 			DataContext = this;
 			_scriptTitle = scriptTitle;
+			_tclScript = tclScript;
+			_tclScript.RunRequested = Run;
+			_tclScript.StopRequested = Stop;
+			_tclScript.SaveScript = () => SaveScriptFile(_tclScript.ScriptFilePath);
 			InitializeComponent();
+			if (_tclScript?.ScriptFilePath != null)
+			{
+				textEditor.Load(ScriptFileName);
+			}
 			textEditor.TextArea.TextInput += (s, e) => ScriptSaved = _savedScript == textEditor.Text;
 			textEditor.TextArea.KeyUp += (s, e) => ScriptSaved = _savedScript == textEditor.Text;
 		}
@@ -73,15 +83,14 @@ namespace CameraControl.windows
 		}
 		#endregion
 
-		private bool _isRunning;
 		public bool IsRunning
 		{
-			get => _isRunning;
+			get => _tclScript.IsRunning;
 			set
 			{
-				if (_isRunning != value)
+				if (_tclScript.IsRunning != value)
 				{
-					_isRunning = value;
+					_tclScript.IsRunning = value;
 					NotifyPropertyChanged(nameof(IsRunning));
 					NotifyPropertyChanged(nameof(IsNotRunning));
 				}
@@ -91,20 +100,20 @@ namespace CameraControl.windows
 		public bool IsNotRunning
 			=> !IsRunning;
 
+		public bool ShowInButtons
+		{
+			get => _tclScript.ShowInButtons;
+			set
+			{
+				_tclScript.ShowInButtons = value;
+				NotifyPropertyChanged(nameof(ShowInButtons));
+			}
+		}
+
 		private readonly string _scriptTitle;
 
 		string ScriptWnd.IScriptControl.ScriptTitle
-		{
-			get
-			{
-				var result = _scriptTitle;
-				if (ScriptFileName != null)
-				{
-					result += $" [{Path.GetFileName(ScriptFileName)}]";
-				}
-				return result;
-			}
-		}
+			=> _tclScript.Name;
 
 		public string FullScriptTitle
 		{
@@ -127,31 +136,30 @@ namespace CameraControl.windows
 			}
 		}
 
-		private string _scriptFileName;
+		private DCCProject.TclScript _tclScript;
 		private string ScriptFileName
 		{
-			get => _scriptFileName;
+			get => _tclScript.ScriptFilePath;
 			set
 			{
-				if (_scriptFileName != value)
+				if (_tclScript.ScriptFilePath != value)
 				{
-					_scriptFileName = value;
+					_tclScript.ScriptFilePath = value;
 					NotifyPropertyChanged(nameof(ScriptWnd.IScriptControl.ScriptTitle));
 					NotifyPropertyChanged(nameof(FullScriptTitle));
 				}
 			}
 		}
 
-		private bool _scriptSaved = true;
 		private string _savedScript = "";
 		private bool ScriptSaved
 		{
-			get => _scriptSaved;
+			get => !_tclScript.IsModifiedInEditor;
 			set
 			{
-				if (_scriptSaved != value)
+				if (ScriptSaved != value)
 				{
-					_scriptSaved = value;
+					_tclScript.IsModifiedInEditor = !value;
 					NotifyPropertyChanged(nameof(FullScriptTitle));
 				}
 			}
@@ -220,7 +228,7 @@ namespace CameraControl.windows
 		{
 		}
 
-		void ScriptWnd.IScriptControl.Run ()
+		public void Run ()
 		{
 			lst_output.Items.Clear();
 
@@ -236,7 +244,7 @@ namespace CameraControl.windows
 			}
 		}
 
-		void ScriptWnd.IScriptControl.Stop ()
+		public void Stop ()
 		{
 			if (_manager != null)
 			{
@@ -354,6 +362,5 @@ namespace CameraControl.windows
 				manager_IsBusyChanged(this, EventArgs.Empty);
 			}
 		}
-
 	}
 }

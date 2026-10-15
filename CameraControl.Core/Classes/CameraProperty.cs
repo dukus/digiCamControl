@@ -65,7 +65,6 @@ namespace CameraControl.Core.Classes
 
 		private string _profileNmae;
 
-		[TclScriptIgnore]
 		public string PhotoSessionName
 		{
 			get { return _profileNmae; }
@@ -91,6 +90,7 @@ namespace CameraControl.Core.Classes
 		private bool _noDownload;
 
 		[TclScriptIgnore]
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public bool NoDownload
 		{
 			get { return _noDownload; }
@@ -121,6 +121,7 @@ namespace CameraControl.Core.Classes
 		private bool _captureInSdRam;
 
 		[TclScriptIgnore]
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public bool CaptureInSdRam
 		{
 			get { return _captureInSdRam; }
@@ -132,7 +133,6 @@ namespace CameraControl.Core.Classes
 		}
 
 		private int _counter;
-
 		public int Counter
 		{
 			get { return _counter; }
@@ -258,6 +258,7 @@ namespace CameraControl.Core.Classes
 			}
 		}
 
+		[DCCProjectSettingsProvider.DCCProjectIgnore]
 		public Rect WindowRect { get; set; }
 
 		public CameraProperty ()

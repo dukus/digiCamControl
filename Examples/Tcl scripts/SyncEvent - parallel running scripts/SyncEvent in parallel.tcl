@@ -1,5 +1,8 @@
 echo Open two Tcl script windows and load this script in both.
 echo Stop all running scripts if necessary
+echo Let's ensure both the script and button windows are visible
+dcc do UIButtonWnd_Show
+dcc do ScriptWnd_Show
 echo Start script #1 and monitor its output
 
 echo At least 10 seconds between events for 'test'

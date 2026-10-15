@@ -28,6 +28,7 @@
 
 #region
 
+using CameraControl.Core.Interfaces;
 using CameraControl.Devices;
 using CameraControl.Devices.Classes;
 using MaterialDesignColors;
@@ -1515,15 +1516,8 @@ namespace CameraControl.Core.Classes
 
 		private PhotoSession GenerateNewSession ()
 		{
-			var session = new PhotoSession();
+			var session = PhotoSession.CreateFromDefault();
 			session.Name = "Session";
-			var defaultsessionfile = Path.Combine(Settings.SessionFolder, "Default.json");
-			// copy session with default name
-			if (File.Exists(defaultsessionfile))
-			{
-				session = ServiceProvider.Settings.LoadSession(defaultsessionfile);
-				session.Files.Clear();
-			}
 			var i = 1;
 			var sessiomname = session.Name;
 			while (true)
@@ -1613,5 +1607,212 @@ namespace CameraControl.Core.Classes
 		public delegate void SessionSelectedEventHandler (PhotoSession oldvalu, PhotoSession newvalue);
 
 		public event SessionSelectedEventHandler SessionSelected;
+
+		public static IEnumerable<IDCCProjectSettingsProvider> ProjectSettingsProviders
+		{
+			get;
+		} = new IDCCProjectSettingsProvider[]
+		{
+			new ProjectGeneral (),
+			new ProjectPreview (),
+			new ProjectRemoteControl (),
+			new ProjectLiveView (),
+			new ProjectAdvanced (),
+		};
+
+		private sealed class ProjectGeneral : DCCProjectSettingsProvider
+		{
+			public ProjectGeneral () : base("Settings: general") { }
+
+			public string Theme
+			{
+				get => ServiceProvider.Settings.CurrentThemeNameNew;
+				set => ServiceProvider.Settings.CurrentThemeNameNew = value;
+			}
+		}
+
+		private sealed class ProjectPreview : DCCProjectSettingsProvider
+		{
+			public ProjectPreview () : base("Settings: preview") { }
+
+			public bool PlaySound
+			{
+				get => ServiceProvider.Settings.PlaySound;
+				set => ServiceProvider.Settings.PlaySound = value;
+			}
+
+			public bool AutoPreview
+			{
+				get => ServiceProvider.Settings.AutoPreview;
+				set => ServiceProvider.Settings.AutoPreview = value;
+			}
+
+			public bool AutoPreviewJpgOnly
+			{
+				get => ServiceProvider.Settings.AutoPreviewJpgOnly;
+				set => ServiceProvider.Settings.AutoPreviewJpgOnly = value;
+			}
+
+			public bool Autorotate
+			{
+				get => ServiceProvider.Settings.Autorotate;
+				set => ServiceProvider.Settings.Autorotate = value;
+			}
+
+			public int RotateIndex
+			{
+				get => ServiceProvider.Settings.RotateIndex;
+				set => ServiceProvider.Settings.RotateIndex = value;
+			}
+
+			public bool SkipAddingFileToSession
+			{
+				get => ServiceProvider.Settings.SkipAddingFileToSession;
+				set => ServiceProvider.Settings.SkipAddingFileToSession = value;
+			}
+		}
+
+		private sealed class ProjectRemoteControl : DCCProjectSettingsProvider
+		{
+			public ProjectRemoteControl () : base("Settings: remote control") { }
+
+			public bool UsePipeServer
+			{
+				get => ServiceProvider.Settings.UsePipeServer;
+				set => ServiceProvider.Settings.UsePipeServer = value;
+			}
+			public bool UseWebserver
+			{
+				get => ServiceProvider.Settings.UseWebserver;
+				set => ServiceProvider.Settings.UseWebserver = value;
+			}
+			public int WebserverPort
+			{
+				get => ServiceProvider.Settings.WebserverPort;
+				set => ServiceProvider.Settings.WebserverPort = value;
+			}
+			public bool AllowWebserverActions
+			{
+				get => ServiceProvider.Settings.AllowWebserverActions;
+				set => ServiceProvider.Settings.AllowWebserverActions = value;
+			}
+			public bool PublicWebserver
+			{
+				get => ServiceProvider.Settings.PublicWebserver;
+				set => ServiceProvider.Settings.PublicWebserver = value;
+			}
+		}
+
+		private sealed class ProjectLiveView : DCCProjectSettingsProvider
+		{
+			public ProjectLiveView () : base("Settings: live view") { }
+
+			public int SmalFocusStep
+			{
+				get => ServiceProvider.Settings.SmalFocusStep;
+				set => ServiceProvider.Settings.SmalFocusStep = value;
+			}
+
+			public int LargeFocusStep
+			{
+				get => ServiceProvider.Settings.LargeFocusStep;
+				set => ServiceProvider.Settings.LargeFocusStep = value;
+			}
+
+			public int MediumFocusStep
+			{
+				get => ServiceProvider.Settings.MediumFocusStep;
+				set => ServiceProvider.Settings.MediumFocusStep = value;
+			}
+
+			public int SmallFocusStepCanon
+			{
+				get => ServiceProvider.Settings.SmallFocusStepCanon;
+				set => ServiceProvider.Settings.SmallFocusStepCanon = value;
+			}
+
+			public int LargeFocusStepCanon
+			{
+				get => ServiceProvider.Settings.LargeFocusStepCanon;
+				set => ServiceProvider.Settings.LargeFocusStepCanon = value;
+			}
+
+			public int MediumFocusStepCanon
+			{
+				get => ServiceProvider.Settings.MediumFocusStepCanon;
+				set => ServiceProvider.Settings.MediumFocusStepCanon = value;
+			}
+
+			public int CanonFocusStepWait
+			{
+				get => ServiceProvider.Settings.CanonFocusStepWait;
+				set => ServiceProvider.Settings.CanonFocusStepWait = value;
+			}
+
+			public int DetectionType
+			{
+				get => ServiceProvider.Settings.DetectionType;
+				set => ServiceProvider.Settings.DetectionType = value;
+			}
+
+			public int MotionBlockSize
+			{
+				get => ServiceProvider.Settings.MotionBlockSize;
+				set => ServiceProvider.Settings.MotionBlockSize = value;
+			}
+
+			public bool EasyLiveViewControl
+			{
+				get => ServiceProvider.Settings.EasyLiveViewControl;
+				set => ServiceProvider.Settings.EasyLiveViewControl = value;
+			}
+
+			public int LiveViewFreezeTimeOut
+			{
+				get => ServiceProvider.Settings.LiveViewFreezeTimeOut;
+				set => ServiceProvider.Settings.LiveViewFreezeTimeOut = value;
+			}
+		}
+
+		private sealed class ProjectAdvanced : DCCProjectSettingsProvider
+		{
+			public ProjectAdvanced () : base("Settings: advanced") { }
+
+			public bool UseParallelTransfer
+			{
+				get => ServiceProvider.Settings.UseParallelTransfer;
+				set => ServiceProvider.Settings.UseParallelTransfer = value;
+			}
+
+			public bool SyncCameraDateTime
+			{
+				get => ServiceProvider.Settings.SyncCameraDateTime;
+				set => ServiceProvider.Settings.SyncCameraDateTime = value;
+			}
+
+			public bool LoadThumbsDownload
+			{
+				get => ServiceProvider.Settings.LoadThumbsDownload;
+				set => ServiceProvider.Settings.LoadThumbsDownload = value;
+			}
+
+			public bool LoadCanonTransferMode
+			{
+				get => ServiceProvider.Settings.LoadCanonTransferMode;
+				set => ServiceProvider.Settings.LoadCanonTransferMode = value;
+			}
+
+			public bool WebcamSupport
+			{
+				get => ServiceProvider.Settings.WebcamSupport;
+				set => ServiceProvider.Settings.WebcamSupport = value;
+			}
+
+			public bool WiaDeviceSupport
+			{
+				get => ServiceProvider.Settings.WiaDeviceSupport;
+				set => ServiceProvider.Settings.WiaDeviceSupport = value;
+			}
+		}
 	}
 }

@@ -7,7 +7,6 @@
         xmlns:windows="clr-namespace:CameraControl.windows" 
         Title="{Binding WindowTitle}" 
         Height="576" Width="935" 
-        WindowStartupLocation="CenterScreen"
         Closing="MetroWindow_Closing"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -22,9 +21,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Name="menu">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
             <MenuItem Name="mnu_scripts" Header="Script">
                 <MenuItem Header="New tcl script" Name="mnu_new_tclscript" Click="mnu_new_tclscript_Click" />
                 <MenuItem Header="Close script" Name="mnu_close" Click="mnu_close_Click" IsEnabled="{Binding ScriptCanClose}"/>
+                <Separator />
+                <MenuItem Header="{T:TranslateExtension ImportProjectToolTip}" Click="mnu_import_Click"/>
+                <MenuItem Header="{T:TranslateExtension ExportProjectToolTip}" Click="mnu_export_Click" />
                 <Separator />
                 <MenuItem Name="mnu_singlecommand" Header="Single command"/>
                 <MenuItem Name="mnu_xmlscript" />
@@ -39,6 +46,10 @@
             <MenuItem Header="Run"  Name="mnu_run" Click="mnu_run_Click" IsEnabled="{Binding ScriptIsNotRunning}" />
             <MenuItem Header="Stop" Name="mnu_stop" Click="mnu_stop_Click" IsEnabled="{Binding ScriptIsRunning}" />
             <MenuItem Header="Stop all" Name="mnu_stop_all" Click="mnu_stop_all_Click" IsEnabled="{Binding AnyScriptIsRunning}" />
+            <MenuItem Header="Related" HorizontalAlignment="Right">
+                <MenuItem Header="Buttons..." Click="mnu_buttons_Click" />
+                <MenuItem Header="Services and devices..." Click="mnu_services_Click" />
+            </MenuItem>
         </Menu>
         <TabControl Grid.Row="1" Name="tabs">
             <TabItem Header="Blank" Visibility="Collapsed">

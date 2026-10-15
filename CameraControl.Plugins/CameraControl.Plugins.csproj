@@ -267,12 +267,14 @@
     <Compile Include="Plugins.cs" />
     <Compile Include="ExportPlugins\ExportToFolder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptExternalObjectPlugins\RestServiceObject.cs" />
+    <Compile Include="ScriptExternalObjectPlugins\RestServiceProvider.cs" />
+    <Compile Include="ScriptExternalObjectPlugins\SerialServiceObject.cs" />
+    <Compile Include="ScriptExternalObjectPlugins\SerialServiceProvider.cs" />
     <Compile Include="ToolPlugins\ArduinoButton.cs" />
     <Compile Include="ToolPlugins\ArduinoCommandViewModel.cs" />
-    <Compile Include="ToolPlugins\ArduinoCommandWindow.xaml.cs">
-      <DependentUpon>ArduinoCommandWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ToolPlugins\ArduinoPlugin.cs" />
+    <Compile Include="ToolPlugins\ArduinoScriptObject.cs" />
     <Compile Include="ToolPlugins\ArduinoViewModel.cs" />
     <Compile Include="ToolPlugins\ArduinoWindow.xaml.cs">
       <DependentUpon>ArduinoWindow.xaml</DependentUpon>
@@ -422,10 +424,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PanelPlugins\OpenInExternalViewerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ToolPlugins\ArduinoCommandWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -60,8 +60,8 @@ namespace CameraControl.windows
 		{
 			DataContext = this;
 			InitializeComponent();
-			_ = new Script(this, mnu_singlecommand, tab_singlecommand, ctrl_singlecommand);
-			_ = new Script(this, mnu_xmlscript, tab_xmlscript, ctrl_xmlscript);
+			_ = new ScriptViewModel(this, mnu_singlecommand, tab_singlecommand, ctrl_singlecommand, null);
+			_ = new ScriptViewModel(this, mnu_xmlscript, tab_xmlscript, ctrl_xmlscript, null);
 		}
 
 		#region Implementation of IWindow
@@ -71,14 +71,31 @@ namespace CameraControl.windows
 			switch (cmd)
 			{
 				case WindowsCmdConsts.ScriptWnd_Show:
-					Dispatcher.Invoke(new Action(delegate
+				case WindowsCmdConsts.ScriptWnd_ShowTclScript:
 					{
-						Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
-						Show();
-						Activate();
-						Focus();
-					}));
-					break;
+						var script = param as DCCProject.TclScript;
+						Dispatcher.Invoke(new Action(delegate
+						{
+							Owner = ServiceProvider.PluginManager.SelectedWindow as Window;
+							Show();
+							Activate();
+							Focus();
+							if (script != null)
+							{
+								var tclScript = (from s in _scripts
+												 where s.TclScript == script
+												 select s).FirstOrDefault();
+								if (tclScript != null)
+								{
+									Dispatcher.Invoke(new Action(delegate
+									{
+										mnu_select_script(tclScript);
+									}));
+								}
+							}
+						}));
+						break;
+					}
 				case WindowsCmdConsts.ScriptWnd_Hide:
 					Hide();
 					break;
@@ -94,6 +111,33 @@ namespace CameraControl.windows
 						Close();
 					}));
 					break;
+				case WindowsCmdConsts.ScriptWnd_VerifyTclScriptsPresent:
+					Dispatcher.Invoke(new Action(delegate
+					{
+						VerifyTclScripts();
+					}));
+					break;
+				case WindowsCmdConsts.ScriptWnd_CloseAllTclScripts:
+					{
+						List<ScriptViewModel> tclScripts;
+						lock (_scripts)
+						{
+							tclScripts = (from s in _scripts
+										  where s.TclScript != null
+										  select s).ToList();
+						}
+						if (tclScripts.Count > 0)
+						{
+							Dispatcher.Invoke(new Action(delegate
+							{
+								foreach (var script in tclScripts)
+								{
+									script.Close();
+								}
+							}));
+						}
+						break;
+					}
 			}
 		}
 		#endregion
@@ -139,8 +183,8 @@ namespace CameraControl.windows
 			}
 		}
 
-		private List<Script> _scripts = new List<Script>();
-		private Script _selectedScript;
+		private List<ScriptViewModel> _scripts = new List<ScriptViewModel>();
+		private ScriptViewModel _selectedScript;
 
 		public bool ScriptCanClose
 			=> (_selectedScript?.SupportsMultiple ?? false) && ScriptIsNotRunning;
@@ -155,11 +199,11 @@ namespace CameraControl.windows
 		public bool AnyScriptIsRunning
 			=> _numRunning > 0;
 
-		private void mnu_select_script (Script script)
+		private void mnu_select_script (ScriptViewModel script)
 		{
 			if (script == null)
 			{
-				script = (tabs.SelectedItem as TabItem)?.Tag as Script;
+				script = (tabs.SelectedItem as TabItem)?.Tag as ScriptViewModel;
 				if (script == null)
 				{
 					lock (_scripts)
@@ -167,8 +211,9 @@ namespace CameraControl.windows
 						script = (from s in _scripts
 								  where s.IsRunning
 								  select s).FirstOrDefault()
-								  ??
-								  (_scripts.Count > 0 ? _scripts[0] : null);
+							  ?? (from s in _scripts
+								  where s.TclScript != null
+								  select s).FirstOrDefault();
 					}
 				}
 			}
@@ -193,7 +238,7 @@ namespace CameraControl.windows
 			}
 		}
 
-		private void script_StateChanged (Script sender)
+		private void script_StateChanged (ScriptViewModel sender)
 		{
 			if (_selectedScript == sender)
 			{
@@ -223,21 +268,9 @@ namespace CameraControl.windows
 
 		private void mnu_new_tclscript_Click (object sender, RoutedEventArgs e)
 		{
-			_lastTclScriptIndex++;
-			var menu = new MenuItem();
-			var control = new ScriptWndTclScript(_lastTclScriptIndex);
-			var tab = new TabItem()
-			{
-				Content = control
-			};
-			var script = new Script(this, menu, tab, control);
-
-			mnu_scripts.Items.Add(menu);
-			tabs.Items.Add(tab);
-
+			var script = CreateTclScript(ServiceProvider.Project.CreateTclScript());
 			mnu_select_script(script);
 		}
-		private int _lastTclScriptIndex;
 
 		private void mnu_close_Click (object sender, RoutedEventArgs e)
 		{
@@ -246,6 +279,15 @@ namespace CameraControl.windows
 				return;
 			}
 			_selectedScript.Close();
+		}
+		private void mnu_export_Click (object sender, RoutedEventArgs e)
+		{
+			ExportProjectDlg.ExportProject();
+		}
+
+		private void mnu_import_Click (object sender, RoutedEventArgs e)
+		{
+			ImportProjectDlg.ImportProject();
 		}
 
 		private void mnu_new_Click (object sender, RoutedEventArgs e)
@@ -323,6 +365,44 @@ namespace CameraControl.windows
 			}
 		}
 
+		private void mnu_buttons_Click (object sender, RoutedEventArgs e)
+			=> ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.UIButtonWnd_Show);
+
+		private void mnu_services_Click (object sender, RoutedEventArgs e)
+			=> ServiceProvider.WindowsManager.ExecuteCommand(WindowsCmdConsts.ExternalServicesWnd_Show);
+
+
+		private ScriptViewModel CreateTclScript (DCCProject.TclScript tclScript)
+		{
+			var menu = new MenuItem();
+			var control = new ScriptWndTclScript(tclScript);
+			var tab = new TabItem()
+			{
+				Content = control
+			};
+			var script = new ScriptViewModel(this, menu, tab, control, tclScript);
+
+			mnu_scripts.Items.Add(menu);
+			tabs.Items.Add(tab);
+			return script;
+		}
+
+		private void VerifyTclScripts ()
+		{
+			lock (_scripts)
+			{
+				foreach (var tclScript in ServiceProvider.Project.TclScripts.ToList())
+				{
+					if (!(from s in _scripts
+						  where s.TclScript == tclScript
+						  select s).Any())
+					{
+						_ = CreateTclScript(tclScript);
+					}
+				}
+			}
+		}
+
 		public interface IScriptControl : INotifyPropertyChanged
 		{
 			string ScriptTitle
@@ -362,10 +442,11 @@ namespace CameraControl.windows
 			void Dispose ();
 		}
 
-		private class Script
+		private class ScriptViewModel
 		{
-			internal Script (ScriptWnd window, MenuItem menu, TabItem tab, UserControl content)
+			internal ScriptViewModel (ScriptWnd window, MenuItem menu, TabItem tab, UserControl content, DCCProject.TclScript tclScript)
 			{
+				TclScript = tclScript;
 				_window = window;
 				Menu = menu;
 				_defaultMenuTitle = Menu.Header as string;
@@ -389,6 +470,7 @@ namespace CameraControl.windows
 				};
 				Menu.Header = MenuTitle;
 				Menu.IsCheckable = true;
+
 				lock (_window._scripts)
 				{
 					_window._scripts.Add(this);
@@ -406,6 +488,11 @@ namespace CameraControl.windows
 			}
 
 			internal IScriptControl Control
+			{
+				get;
+			}
+
+			internal DCCProject.TclScript TclScript
 			{
 				get;
 			}
@@ -452,16 +539,24 @@ namespace CameraControl.windows
 
 			internal void Close ()
 			{
-				if (SupportsMultiple && _window._selectedScript == this)
+				if (SupportsMultiple)
 				{
 					lock (_window._scripts)
 					{
 						_window._scripts.Remove(this);
 						Control?.Dispose();
 					}
+					var selectTab = _window._selectedScript == this;
 					_window.mnu_scripts.Items.Remove(Menu);
 					_window.tabs.Items.Remove(Tab);
-					_window.mnu_select_script(null);
+					if (selectTab || _window._selectedScript == null)
+					{
+						_window.mnu_select_script(null);
+					}
+					if (TclScript != null)
+					{
+						ServiceProvider.Project.RemoveTclScript(TclScript);
+					}
 				}
 			}
 

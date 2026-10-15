@@ -33,11 +33,20 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="4">
+        <StackPanel Orientation="Horizontal" Margin="4" HorizontalAlignment="Right" TextElement.FontSize="11">
+            <TextBlock Text="("/>
+            <TextBlock Text="{T:TranslateExtension ImportProjectToolTip}"/>
+            <TextBlock Text=" / "/>
+            <TextBlock Text="{T:TranslationExtensionWithProjectSuffix ExportProjectToolTip}"/>
+            <TextBlock Text=")"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="4">
             <materialDesign:Card Margin="4" >
                 <StackPanel>
                     <Expander HorizontalAlignment="Stretch" IsExpanded="False"  >
@@ -47,7 +56,7 @@
                         <StackPanel Orientation="Vertical" Margin="24,8,24,16">
                             <ComboBox Margin="4" SelectedValue="{Binding CurrentThemeNameNew}" ItemsSource="{Binding Themes}" 
                                       Visibility="{Binding Path=Branding.UseThemeSelector, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                      materialDesign:HintAssist.Hint="{T:TranslateExtension LabelTheme}"
+                                      materialDesign:HintAssist.Hint="{T:TranslationExtensionWithProjectSuffix LabelTheme}"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                             <ComboBox SelectedItem="{Binding SelectedMainForm}" Margin="4" materialDesign:HintAssist.Hint="{T:TranslateExtension LabelMainWindow}" Name="cmb_mainwindow"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
@@ -78,17 +87,17 @@
                             <TextBlock Text="{T:TranslateExtension LabelPreview}" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel Orientation="Vertical" Margin="24,8,24,16">
-                            <CheckBox Margin="4" IsChecked="{Binding PlaySound}" Content="{T:TranslateExtension LabelPlaySound}"/>
-                            <CheckBox Margin="4" IsChecked="{Binding AutoPreview}" ToolTip="Disable this option if you use Lightroom" Content="{T:TranslateExtension LabelAutoPreview}"/>
-                            <CheckBox Margin="4" IsChecked="{Binding AutoPreviewJpgOnly}" Content="{T:TranslateExtension LabelAutoPreviewJpgOnly}"/>
+                            <CheckBox Margin="4" IsChecked="{Binding PlaySound}" Content="{T:TranslationExtensionWithProjectSuffix LabelPlaySound}"/>
+                            <CheckBox Margin="4" IsChecked="{Binding AutoPreview}" ToolTip="Disable this option if you use Lightroom" Content="{T:TranslationExtensionWithProjectSuffix LabelAutoPreview}"/>
+                            <CheckBox Margin="4" IsChecked="{Binding AutoPreviewJpgOnly}" Content="{T:TranslationExtensionWithProjectSuffix LabelAutoPreviewJpgOnly}"/>
                             <CheckBox Margin="4" IsChecked="{Binding ShowThumbUpDown}" Content="{T:TranslateExtension LabelShowThumbUpDown}" />
-                            <CheckBox Margin="4" IsChecked="{Binding Autorotate}" Content="{T:TranslateExtension LabelAutorotate}" />
+                            <CheckBox Margin="4" IsChecked="{Binding Autorotate}" Content="{T:TranslationExtensionWithProjectSuffix LabelAutorotate}" />
                             <CheckBox Margin="4" IsChecked="{Binding DontLoadThumbnails}" Content="{T:TranslateExtension LabelDontLoadThumbs}" />
                             <CheckBox Margin="4" IsChecked="{Binding LoadFullRespreview}" Content="{T:TranslateExtension LabelFullResPreview}" />
-                            <CheckBox Margin="4" IsChecked="{Binding SkipAddingFileToSession}" Content="Skip adding file to session" />
+                            <CheckBox Margin="4" IsChecked="{Binding SkipAddingFileToSession}" Content="Skip adding file to session ●" />
 
                             <ComboBox SelectedIndex="{Binding RotateIndex}" Margin="4"
-                                      materialDesign:HintAssist.Hint="{T:TranslateExtension LabelRotateImage}"
+                                      materialDesign:HintAssist.Hint="{T:TranslationExtensionWithProjectSuffix LabelRotateImage}"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                                 <ComboBoxItem Content="{T:TranslateExtension LabelRotateNone}" />
                                 <ComboBoxItem Content="{T:TranslateExtension LabelRotate90}" />
@@ -170,13 +179,13 @@
                             <TextBlock Text="{T:TranslateExtension LabelWebserverAndPipeServer}" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel Orientation="Vertical" Margin="24,8,24,16">
-                            <CheckBox Content="{T:TranslateExtension LabelUsePipeServer}" IsChecked="{Binding UsePipeServer}" Margin="4"/>
-                            <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="4"/>
+                            <CheckBox Content="{T:TranslationExtensionWithProjectSuffix LabelUsePipeServer}" IsChecked="{Binding UsePipeServer}" Margin="4"/>
+                            <CheckBox Content="{T:TranslationExtensionWithProjectSuffix LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="4"/>
                             <TextBox Margin="4" Text="{Binding WebserverPort}"
-                                     materialDesign:HintAssist.Hint="{T:TranslateExtension LabelWebserverPort}"
+                                     materialDesign:HintAssist.Hint="{T:TranslationExtensionWithProjectSuffix LabelWebserverPort}"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                            <CheckBox Content="{T:TranslateExtension LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="4" IsEnabled="{Binding UseWebserver}"/>
-                            <CheckBox Content="{T:TranslateExtension LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="4" IsEnabled="{Binding UseWebserver}"/>
+                            <CheckBox Content="{T:TranslationExtensionWithProjectSuffix LabelAllowWebCommands}" IsChecked="{Binding AllowWebserverActions}" Margin="4" IsEnabled="{Binding UseWebserver}"/>
+                            <CheckBox Content="{T:TranslationExtensionWithProjectSuffix LabelPublicWebserver}" IsChecked="{Binding PublicWebserver}" Margin="4" IsEnabled="{Binding UseWebserver}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="MJPEG Stream address " Margin="4"/>
                                 <TextBox Text="http://127.0.0.1:5514/live" VerticalAlignment="Center" IsReadOnly="True"/>
@@ -289,13 +298,13 @@
                                             <RowDefinition Height="Auto" />
 
                                         </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding SmalFocusStep}" Margin="3"/>
 
-                                        <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="{Binding SmalFocusStep}" Maximum="250" Value="{Binding MediumFocusStep}" Margin="3"/>
 
-                                        <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="{Binding MediumFocusStep}" Maximum="1500" Value="{Binding LargeFocusStep}" Margin="3"/>
                                     </Grid>
                                 </GroupBox>
@@ -315,34 +324,34 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslateExtension LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="0" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelSmallFocusSstep}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding SmallFocusStepCanon}" Margin="3"/>
 
-                                        <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslateExtension LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelMediumFocusStep}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="1" Grid.Column="1" Minimum="{Binding SmallFocusStepCanon}" Maximum="250" Value="{Binding MediumFocusStepCanon}" Margin="3"/>
 
-                                        <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslateExtension LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelLargFocusStep}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="{Binding MediumFocusStepCanon}" Maximum="1500" Value="{Binding LargeFocusStepCanon}" Margin="3"/>
 
-                                        <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslateExtension LabelWaitBetweenSteps}" HorizontalContentAlignment="Right"/>
+                                        <Label Grid.Row="3" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelWaitBetweenSteps}" HorizontalContentAlignment="Right"/>
                                         <Controls:NumericUpDown Grid.Row="3" Grid.Column="1" Minimum="5" Maximum="1500" Value="{Binding CanonFocusStepWait}" Margin="3"/>
 
                                     </Grid>
                                 </GroupBox>
 
-                                <Label Content="{T:TranslateExtension LabelMotionDetectionType}" Grid.Row="4" HorizontalContentAlignment="Right" />
+                                <Label Content="{T:TranslationExtensionWithProjectSuffix LabelMotionDetectionType}" Grid.Row="4" HorizontalContentAlignment="Right" />
                                 <ComboBox Grid.Column="1" Grid.Row="4" Margin="3" ItemsSource="{Binding}" SelectedIndex="{Binding DetectionType}">
                                     <ComboBoxItem Content="{T:TranslateExtension LabelTwoFramesDifferenceDetector}"/>
                                     <ComboBoxItem Content="{T:TranslateExtension LabelSimpleBackgroundModelingDetector}"/>
                                 </ComboBox>
 
-                                <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslateExtension LabelSmallestBlockSize}" HorizontalContentAlignment="Right"/>
+                                <Label Grid.Row="5" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelSmallestBlockSize}" HorizontalContentAlignment="Right"/>
                                 <Controls:NumericUpDown Grid.Row="5" Grid.Column="1" Minimum="5" Maximum="250" Value="{Binding MotionBlockSize}" Margin="3"/>
 
-                                <Label Content="{T:TranslateExtension LabelEasyLiveViewControl}" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Content="{T:TranslationExtensionWithProjectSuffix LabelEasyLiveViewControl}" Grid.Row="6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <CheckBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding EasyLiveViewControl}" Margin="3"/>
 
-                                <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslateExtension LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
+                                <Label Grid.Row="7" Grid.Column="0" Content="{T:TranslationExtensionWithProjectSuffix LabelLIveViewImageFreeze}" HorizontalContentAlignment="Right"/>
                                 <Controls:NumericUpDown Grid.Row="7" Grid.Column="1" Margin="3" Minimum="2" Maximum="120" Value="{Binding LiveViewFreezeTimeOut}"/>
 
                                 <Button Content="{T:TranslateExtension LabelShowOverlayFolder}" Grid.Column="1" Grid.Row="8" Name="btn_showoverlay" Click="button5_Click" Margin="3"/>
@@ -355,21 +364,21 @@
                             <TextBlock Text="{T:TranslateExtension LabelAdvanced}" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel Orientation="Vertical" Margin="24,8,24,16">
-                            <CheckBox IsChecked="{Binding UseParallelTransfer}" Margin="4" Content="{T:TranslateExtension LabelUseParellelTransfer}"/>
+                            <CheckBox IsChecked="{Binding UseParallelTransfer}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelUseParellelTransfer}"/>
                             <CheckBox IsChecked="{Binding ShowUntranslatedLabelId}" Margin="4" Content="{T:TranslateExtension LabelShowUnTranslatedStringIds}"/>
                             <CheckBox IsChecked="{Binding DisableNativeDrivers}" Margin="4" Content="{T:TranslateExtension LabelDisableDriver}" ToolTip="This option disable special handig of some cameras. Use this if you experience some problem" />
                             <CheckBox IsChecked="{Binding AddFakeCamera}" Margin="4" Content="{T:TranslateExtension LabelAddFakeCamera}"/>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                                <CheckBox IsChecked="{Binding SyncCameraDateTime}" Margin="4" Content="{T:TranslateExtension LabelSyncCameraDate}" />
-                                <CheckBox IsChecked="{Binding SyncCameraDateTimeUtc}" Margin="4" Content="{T:TranslateExtension LabelSyncCameraDateUtc}" />
+                                <CheckBox IsChecked="{Binding SyncCameraDateTime}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelSyncCameraDate}" />
+                                <CheckBox IsChecked="{Binding SyncCameraDateTimeUtc}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelSyncCameraDateUtc}" />
                             </StackPanel>
-                            <CheckBox IsChecked="{Binding LoadThumbsDownload}" Margin="4" Content="{T:TranslateExtension LabelLoadThumbDownload}"/>
+                            <CheckBox IsChecked="{Binding LoadThumbsDownload}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelLoadThumbDownload}"/>
                             <CheckBox IsChecked="{Binding SendUsageStatistics}" Margin="4" Content="{T:TranslateExtension LabelSendUsage}"/>
-                            <CheckBox IsChecked="{Binding LoadCanonTransferMode}" Margin="4" Content="{T:TranslateExtension LabelLoadCanonTransferMode}"/>
+                            <CheckBox IsChecked="{Binding LoadCanonTransferMode}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelLoadCanonTransferMode}"/>
                             <CheckBox IsChecked="{Binding HideTrayNotifications}" Margin="4" Content="{T:TranslateExtension LabelHideTrayNotifications}"/>
                             <CheckBox IsChecked="{Binding DisableHardwareAccelerationNew}" Margin="4" Content="{T:TranslateExtension LabelDisableHardwareAcceleratione}"/>
-                            <CheckBox IsChecked="{Binding WebcamSupport}" Margin="4" Content="{T:TranslateExtension LabelWebcameraSupport}"/>
-                            <CheckBox IsChecked="{Binding WiaDeviceSupport}" Margin="4" Content="{T:TranslateExtension LabelWiaDeviceSupport}" />
+                            <CheckBox IsChecked="{Binding WebcamSupport}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelWebcameraSupport}"/>
+                            <CheckBox IsChecked="{Binding WiaDeviceSupport}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelWiaDeviceSupport}" />
                             <Button Content="{T:TranslateExtension LabelClearCache}" Margin="4" Name="btn_clearcache" Click="btn_clearcache_Click" />
 
                         </StackPanel>
@@ -378,9 +387,9 @@
             </materialDesign:Card>
         </ScrollViewer>
 
-        <Button Content="{T:TranslateExtension ButtonOk}" IsDefault="True" Name="button1" Width="75" Margin="12,12,0,16" Grid.Row="1" HorizontalAlignment="Left" Click="button1_Click" />
-        <Button Content="{T:TranslateExtension ButtonCancel}" IsCancel="True" Name="button2" Width="75" Margin="0,12,12,16" Grid.Row="1" Click="button2_Click" HorizontalAlignment="Right" />
-        <Button Content="{T:TranslateExtension ButtonLocateLogFile}" Name="button3" Click="button3_Click" Grid.Row="1" Margin="115,12,0,16" HorizontalAlignment="Left" Width="125" />
-        <Button Content="{T:TranslateExtension ButtonResetSettings}" Grid.Row="1" Name="btn_reset" Click="btn_reset_Click" Margin="0,12,113,16" HorizontalAlignment="Right" Width="140" />
+        <Button Content="{T:TranslateExtension ButtonOk}" IsDefault="True" Name="button1" Width="75" Margin="12,12,0,16" Grid.Row="2" HorizontalAlignment="Left" Click="button1_Click" />
+        <Button Content="{T:TranslateExtension ButtonCancel}" IsCancel="True" Name="button2" Width="75" Margin="0,12,12,16" Grid.Row="2" Click="button2_Click" HorizontalAlignment="Right" />
+        <Button Content="{T:TranslateExtension ButtonLocateLogFile}" Name="button3" Click="button3_Click" Grid.Row="2" Margin="115,12,0,16" HorizontalAlignment="Left" Width="125" />
+        <Button Content="{T:TranslateExtension ButtonResetSettings}" Grid.Row="2" Name="btn_reset" Click="btn_reset_Click" Margin="0,12,113,16" HorizontalAlignment="Right" Width="140" />
     </Grid>
 </Window >

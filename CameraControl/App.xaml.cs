@@ -207,6 +207,8 @@ namespace CameraControl
 				ServiceProvider.WindowsManager.Add(new DownloadPhotosWnd());
 				ServiceProvider.WindowsManager.Add(new BulbWnd());
 				ServiceProvider.WindowsManager.Add(new AstroLiveViewWnd());
+				ServiceProvider.WindowsManager.Add(new UIButtonWnd());
+				ServiceProvider.WindowsManager.Add(new ExternalServicesWnd());
 				var scriptWnd = new ScriptWnd();
 
 				ServiceProvider.WindowsManager.Add(scriptWnd);

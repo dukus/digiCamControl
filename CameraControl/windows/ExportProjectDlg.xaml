@@ -1,0 +1,62 @@
+﻿<Window x:Class="CameraControl.windows.ExportProjectDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CameraControl.windows"
+        xmlns:T="clr-namespace:CameraControl.Core.Translation;assembly=CameraControl.Core"
+        mc:Ignorable="d"
+        Title="{T:TranslateExtension ExportProjectToolTip}"
+        ResizeMode="NoResize"
+        Height="600" Width="800"
+        MinHeight="600" MinWidth="800" MaxWidth="800"
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Topmost="True"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*" />
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TreeView ItemsSource="{Binding ItemsToSelect}" Margin="4" Grid.RowSpan="4">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:ExportProjectDlg_CCNode}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsSelected}" IsThreeState="{Binding IsThreeState}" IsEnabled="{Binding IsEnabled}"/>
+                        <TextBlock Text="{Binding Title}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+
+        <TextBlock Grid.Column="1" TextWrapping="Wrap" Margin="4">Select the sessions, camera properties and presets, services and devices to include the configuration of and the scripts file paths. All paths are stored relative to the location of the exported file.</TextBlock>
+
+        <CheckBox Name="cb_save_files" Grid.Row="1" Grid.Column="1" Margin="4" IsChecked="True">
+            <Label>Save scripts as part of the export</Label>
+        </CheckBox>
+        <CheckBox Name="cb_include_files" Grid.Row="2" Grid.Column="1" Margin="4" IsChecked="True">
+            <Label>Create as zip file and include related files</Label>
+        </CheckBox>
+
+        <StackPanel Grid.Row="3" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button Name="btn_export" Click="btn_export_Click" IsDefault="True" Margin="4">Export</Button>
+            <Button Name="btn_cancel" IsCancel="True" Margin="4">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

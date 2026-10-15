@@ -1,0 +1,39 @@
+﻿<Window x:Class="CameraControl.windows.UIButtonWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CameraControl.windows"
+        mc:Ignorable="d"
+        Title="Buttons" Height="576" Width="935" 
+        WindowStartupLocation="CenterScreen"
+        Closing="MetroWindow_Closing" SizeChanged="MetroWindow_Size"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Name="grid_buttons">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Menu Name="menu" Grid.ColumnSpan="100">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Related" HorizontalAlignment="Right">
+                    <MenuItem Header="Services and devices..." Click="mnu_services_Click" />
+                    <MenuItem Header="Scripts..." Click="mnu_scripts_Click" />
+                </MenuItem>
+            </Menu>
+        </Grid>
+    </ScrollViewer>
+</Window>

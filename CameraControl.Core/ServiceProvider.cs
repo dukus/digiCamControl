@@ -70,6 +70,7 @@ namespace CameraControl.Core
 		public static ScriptManager ScriptManager { get; set; }
 		public static FilenameTemplateManager FilenameTemplateManager { get; set; }
 		public static ExternalDeviceManager ExternalDeviceManager { get; set; }
+		public static DCCProject Project { get; set; }
 		public static Analytics Analytics { get; set; }
 		public static Database.Database Database { get; set; }
 		public static string LogFile;
@@ -138,6 +139,8 @@ namespace CameraControl.Core
 			Log.Debug("Init : ScriptManager");
 			PluginManager = new PluginManager();
 			Log.Debug("Init : PluginManager");
+			Project = new DCCProject();
+			Log.Debug("Init : CustomControlCollection");
 			FilenameTemplateManager = new FilenameTemplateManager();
 		}
 

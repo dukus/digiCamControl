@@ -15,7 +15,12 @@
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="{Binding FullScriptTitle}">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <avalonedit:TextEditor SyntaxHighlighting="Tcl" Background="White" Name="textEditor" ShowLineNumbers="True" FontSize="16" IsReadOnly="{Binding IsRunning}"/>
+                <CheckBox Grid.Row="1" Name="cb_buttons" Content="Show run/stop in buttons window" IsChecked="{Binding ShowInButtons}"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="Output">
