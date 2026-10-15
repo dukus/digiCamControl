@@ -126,7 +126,7 @@
   <string name="LabelFullscrenBack">Vollbild-Fensterhintergrund</string>
   <string name="LabelTriggers">Auslöser</string>
   <string name="LabelUseKeybordToTrigger">Benutze Tastatur zum Auslösen</string>
-  <string name="LabelWebserver">Webserver</string>
+  <string name="LabelWebserverAndPipeServer">Fernbedienung</string>
   <string name="LabelUseWebserver">Benutze Webserver</string>
   <string name="LabelFocusAndLiveview">Live-Ansicht</string>
   <string name="LabelSmallFocusSstep">Kleiner Fokusschritt</string>

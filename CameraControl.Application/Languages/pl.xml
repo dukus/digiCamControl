@@ -123,7 +123,7 @@
   <string name="LabelDontLoadThumbs">Nie ładuj miniturek</string>
   <string name="LabelTriggers">Wyzwalacze</string>
   <string name="LabelUseKeybordToTrigger">Użyj klawiatury, aby wyzwolić zdjęcie</string>
-  <string name="LabelWebserver">Webserwer</string>
+  <string name="LabelWebserverAndPipeServer">Zdalne sterowanie</string>
   <string name="LabelUseWebserver">Użyj web serwera</string>
   <string name="LabelFocusAndLiveview">Fokus i Podgląd na żywo</string>
   <string name="LabelSmallFocusSstep">Mały krok fokusa</string>

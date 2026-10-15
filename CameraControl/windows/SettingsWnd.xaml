@@ -167,9 +167,10 @@
                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
                     <Expander HorizontalAlignment="Stretch" IsExpanded="False"  >
                         <Expander.Header>
-                            <TextBlock Text="{T:TranslateExtension LabelWebserver}" FontWeight="Bold"/>
+                            <TextBlock Text="{T:TranslateExtension LabelWebserverAndPipeServer}" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel Orientation="Vertical" Margin="24,8,24,16">
+                            <CheckBox Content="{T:TranslateExtension LabelUsePipeServer}" IsChecked="{Binding UsePipeServer}" Margin="4"/>
                             <CheckBox Content="{T:TranslateExtension LabelUseWebserver}" IsChecked="{Binding UseWebserver}" Margin="4"/>
                             <TextBox Margin="4" Text="{Binding WebserverPort}"
                                      materialDesign:HintAssist.Hint="{T:TranslateExtension LabelWebserverPort}"

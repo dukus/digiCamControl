@@ -113,7 +113,7 @@
   <string name="LabelDontLoadThumbs">Nenahrávat malé náhledy</string>
   <string name="LabelTriggers">Spouště</string>
   <string name="LabelUseKeybordToTrigger">Použij klávesnici jako spoušť</string>
-  <string name="LabelWebserver">Webserver</string>
+  <string name="LabelWebserverAndPipeServer">Dálkové ovládání</string>
   <string name="LabelUseWebserver">Použít webserver</string>
   <string name="LabelFocusAndLiveview">Živý náhled</string>
   <string name="LabelSmallFocusSstep">Malý krok ostření</string>

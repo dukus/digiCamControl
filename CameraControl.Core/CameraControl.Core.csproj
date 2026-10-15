@@ -194,6 +194,7 @@
     <Compile Include="Classes\PluginSetting.cs" />
     <Compile Include="Classes\PrintSettings.cs" />
     <Compile Include="Classes\Queue\QueueItemFileItem.cs" />
+    <Compile Include="Classes\TclScriptIgnoreAttribute.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SourceEnum.cs" />
     <Compile Include="Classes\TagItem.cs" />
@@ -268,7 +269,7 @@
     <Compile Include="Scripting\ScriptManager.cs" />
     <Compile Include="Scripting\ScriptObject.cs" />
     <Compile Include="ServiceProvider.cs" />
-    <Compile Include="TclScripting\ConsoleRedirect.cs" />
+    <Compile Include="TclScripting\ThreadConsoleRedirect.cs" />
     <Compile Include="TclScripting\DccCommand.cs" />
     <Compile Include="TclScripting\EchoCommand.cs" />
     <Compile Include="TclScripting\TclScriptManager.cs" />

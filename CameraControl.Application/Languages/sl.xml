@@ -124,7 +124,7 @@
   <string name="LabelFullscrenBack">Ozadje FullScreen okna</string>
   <string name="LabelTriggers">Sprožilci</string>
   <string name="LabelUseKeybordToTrigger">Uporabi tipkovnico kot sprožilec</string>
-  <string name="LabelWebserver">Spletni strežnik</string>
+  <string name="LabelWebserverAndPipeServer">Daljinski upravljalnik</string>
   <string name="LabelUseWebserver">Uporabi spletni strežnik</string>
   <string name="LabelFocusAndLiveview">Pogled LiveView</string>
   <string name="LabelSmallFocusSstep">Kratek korak ostrenja</string>

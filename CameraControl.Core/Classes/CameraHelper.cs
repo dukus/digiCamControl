@@ -47,31 +47,37 @@ namespace CameraControl.Core.Classes
 		/// <param name="o">ICameraDevice</param>
 		public static void Capture (object o)
 		{
-			if (o != null)
+			if (o is ICameraDevice camera)
 			{
-				var camera = o as ICameraDevice;
-				if (camera != null)
+				if (PrepareCapture(camera, true))
 				{
-					ServiceProvider.DeviceManager.LastCapturedImage[camera] = "-";
-					CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
-					for (int i = 0; i < property.Delay; i++)
-					{
-						StaticHelper.Instance.SystemMessage = "Countig down " + (property.Delay - i);
-						Thread.Sleep(1000);
-					}
-					if (property.UseExternalShutter && property.SelectedConfig != null)
-					{
-						ServiceProvider.ExternalDeviceManager.AssertFocus(property.SelectedConfig);
-						Thread.Sleep(ServiceProvider.Settings.ExternalDeviceWaitForFocus);
-						ServiceProvider.ExternalDeviceManager.OpenShutter(property.SelectedConfig);
-						Thread.Sleep(ServiceProvider.Settings.ExternalDeviceWaitForCapture);
-						ServiceProvider.ExternalDeviceManager.CloseShutter(property.SelectedConfig);
-						return;
-					}
 					camera.CapturePhoto();
 					ServiceProvider.Analytics.CameraCapture(camera);
 				}
 			}
+		}
+		private static bool PrepareCapture (ICameraDevice camera, bool focus)
+		{
+			ServiceProvider.DeviceManager.LastCapturedImage[camera] = "-";
+			CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
+			for (int i = 0; i < property.Delay; i++)
+			{
+				StaticHelper.Instance.SystemMessage = "Counting down " + (property.Delay - i);
+				Thread.Sleep(1000);
+			}
+			if (property.UseExternalShutter && property.SelectedConfig != null)
+			{
+				if (focus)
+				{
+					ServiceProvider.ExternalDeviceManager.AssertFocus(property.SelectedConfig);
+					Thread.Sleep(ServiceProvider.Settings.ExternalDeviceWaitForFocus);
+				}
+				ServiceProvider.ExternalDeviceManager.OpenShutter(property.SelectedConfig);
+				Thread.Sleep(ServiceProvider.Settings.ExternalDeviceWaitForCapture);
+				ServiceProvider.ExternalDeviceManager.CloseShutter(property.SelectedConfig);
+				return false;
+			}
+			return true;
 		}
 
 		public static void Capture ()
@@ -138,20 +144,12 @@ namespace CameraControl.Core.Classes
 
 		public static void CaptureNoAf (object o)
 		{
-			if (o != null)
+			if (o is ICameraDevice camera)
 			{
-				var camera = o as ICameraDevice;
-				if (camera != null)
+				if (PrepareCapture(camera, false))
 				{
-					CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(camera);
-					if (property.UseExternalShutter && property.SelectedConfig != null)
-					{
-						ServiceProvider.ExternalDeviceManager.OpenShutter(property.SelectedConfig);
-						Thread.Sleep(200);
-						ServiceProvider.ExternalDeviceManager.CloseShutter(property.SelectedConfig);
-						return;
-					}
 					camera.CapturePhotoNoAf();
+					ServiceProvider.Analytics.CameraCapture(camera);
 				}
 			}
 		}
@@ -181,7 +179,10 @@ namespace CameraControl.Core.Classes
 		{
 			CameraProperty property = ServiceProvider.Settings.CameraProperties.Get(cameraDevice);
 			cameraDevice.DisplayName = property.DeviceName;
-			cameraDevice.AttachedPhotoSession = ServiceProvider.Settings.GetSession(property.PhotoSessionName);
+			if ((cameraDevice.AttachedPhotoSession as PhotoSession)?.Name != property.PhotoSessionName)
+			{
+				cameraDevice.AttachedPhotoSession = ServiceProvider.Settings.GetSession(property.PhotoSessionName);
+			}
 			//if (cameraDevice!=null && cameraDevice.GetCapability(CapabilityEnum.CaptureInRam))
 			//    cameraDevice.CaptureInSdRam = property.CaptureInSdRam;
 			return property;

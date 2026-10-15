@@ -122,7 +122,7 @@
   <string name="LabelFullscrenBack">Fönsterbakgrund helskärmsläge</string>
   <string name="LabelTriggers">Utlösare</string>
   <string name="LabelUseKeybordToTrigger">Används tangentbord för att ta bild</string>
-  <string name="LabelWebserver">Web-server</string>
+  <string name="LabelWebserverAndPipeServer">Fjärrkontroll</string>
   <string name="LabelUseWebserver">Använd web-server</string>
   <string name="LabelFocusAndLiveview">Live-visning</string>
   <string name="LabelSmallFocusSstep">Små fokuseringssteg</string>

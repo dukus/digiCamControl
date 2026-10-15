@@ -121,7 +121,8 @@
   <string name="LabelDontLoadThumbs">Geen miniaturen laden</string>
   <string name="LabelTriggers">Triggers</string>
   <string name="LabelUseKeybordToTrigger">Gebruik toetsenbord als trigger bij het maken van foto</string>
-  <string name="LabelWebserver">Webserver</string>
+  <string name="LabelWebserverAndPipeServer">Afstandsbediening</string>
+  <string name="LabelUsePipeServer">Gebruik named pipe</string>
   <string name="LabelUseWebserver">Gebruik webserver</string>
   <string name="LabelFocusAndLiveview">Scherpstellen en live beeld</string>
   <string name="LabelSmallFocusSstep">Kleine scherpstel stap</string>

@@ -131,7 +131,8 @@
     <string name="LabelFullscrenBack">Full screen window background : </string> 
     <string name="LabelTriggers">Triggers</string> 
     <string name="LabelUseKeybordToTrigger">Use keyboard to trigger take photo</string> 
-    <string name="LabelWebserver">Webserver</string> 
+    <string name="LabelWebserverAndPipeServer">Remote control</string> 
+    <string name="LabelUsePipeServer">Use named pipe</string>
     <string name="LabelUseWebserver">Use web server</string> 
     <string name="LabelFocusAndLiveview">Live view</string> 
     <string name="LabelSmallFocusSstep">Small focus step</string> 

@@ -106,7 +106,7 @@
   <string name="LabelDontLoadThumbs">Hent ikke miniature billeder</string>
   <string name="LabelTriggers">Triggere</string>
   <string name="LabelUseKeybordToTrigger">Brug tastatur til at tage billede</string>
-  <string name="LabelWebserver">Webserver</string>
+  <string name="LabelWebserverAndPipeServer">Fjernbetjening</string>
   <string name="LabelUseWebserver">Brug webserver</string>
   <string name="LabelFocusAndLiveview">Fokus og liveview</string>
   <string name="LabelSmallFocusSstep">Lille fokus skridt</string>

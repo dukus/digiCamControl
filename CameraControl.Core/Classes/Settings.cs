@@ -209,6 +209,18 @@ namespace CameraControl.Core.Classes
 
 		public DateTime LastUpdateCheckDate { get; set; }
 
+		private bool _usePipeServer;
+
+		public bool UsePipeServer
+		{
+			get { return _usePipeServer; }
+			set
+			{
+				_usePipeServer = value;
+				NotifyPropertyChanged(nameof(UsePipeServer));
+			}
+		}
+
 		private bool _useWebserver;
 
 		public bool UseWebserver

@@ -117,6 +117,7 @@ namespace CameraControl
 				ServiceProvider.PluginManager.CopyPlugins();
 				Dispatcher.Invoke(new Action(InitWindowManager));
 
+				ServiceProvider.StartPipeServer();
 
 				ServiceProvider.Trigger.Start();
 				ServiceProvider.Analytics.Start();
@@ -206,7 +207,9 @@ namespace CameraControl
 				ServiceProvider.WindowsManager.Add(new DownloadPhotosWnd());
 				ServiceProvider.WindowsManager.Add(new BulbWnd());
 				ServiceProvider.WindowsManager.Add(new AstroLiveViewWnd());
-				ServiceProvider.WindowsManager.Add(new ScriptWnd());
+				var scriptWnd = new ScriptWnd();
+
+				ServiceProvider.WindowsManager.Add(scriptWnd);
 
 				// initialize print interface only if print button is  visible
 				if (ServiceProvider.Branding.ShowPrintButtonMainWindow)
@@ -219,7 +222,7 @@ namespace CameraControl
 				ServiceProvider.WindowsManager.RegisterKnowCommands();
 				ServiceProvider.Settings.SyncActions(ServiceProvider.WindowsManager.WindowCommands);
 
-				ServiceProvider.PluginManager.ToolPlugins.Add(new ScriptWnd());
+				ServiceProvider.PluginManager.ToolPlugins.Add(scriptWnd);
 
 				foreach (IPlugin plugin in ServiceProvider.PluginManager.Plugins)
 				{

@@ -119,7 +119,7 @@
   <string name="LabelDontLoadThumbs">No cargar miniaturas</string>
   <string name="LabelTriggers">Accionadores</string>
   <string name="LabelUseKeybordToTrigger">Usar el teclado para accionar tomar foto</string>
-  <string name="LabelWebserver">Servidor de Web</string>
+  <string name="LabelWebserverAndPipeServer">Mando a distancia</string>
   <string name="LabelUseWebserver">Usar servidor Web</string>
   <string name="LabelFocusAndLiveview">Vista en vivo</string>
   <string name="LabelSmallFocusSstep">Paso de enfoque pequeño</string>

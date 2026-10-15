@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="CameraControl.windows.ScriptWndSingleCommand"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CameraControl.windows"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="673*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="225*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="TextBoxCmd" Margin="3" KeyDown="TextBoxCmd_KeyDown" IsEnabled="{Binding IsNotRunning}" />
+        <Button Grid.Row="0" Grid.Column="1" Content="?" Click="Help_Click" Margin="1" IsEnabled="{Binding IsNotRunning}" />
+        <Button Grid.Row="0" Grid.Column="2" Content="Execute" Click="Execute_Click" Margin="3" IsEnabled="{Binding IsNotRunning}"/>
+        <GroupBox Grid.Row="1" Grid.ColumnSpan="3" Header="Output">
+            <Grid>
+                <TextBox TextWrapping="Wrap" Text="" Name="TextBlockOutput" VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+        </GroupBox>
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter1"  Grid.ColumnSpan="3" />
+        <GroupBox Grid.Row="3" Grid.ColumnSpan="3" Header="History">
+            <Grid>
+                <ListBox Name="lst_cmd" MouseDoubleClick="lst_cmd_MouseDoubleClick"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

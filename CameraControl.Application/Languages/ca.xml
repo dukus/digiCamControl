@@ -127,7 +127,7 @@
   <string name="LabelFullscrenBack">Fons de pantalla completa</string>
   <string name="LabelTriggers">Disparadors</string>
   <string name="LabelUseKeybordToTrigger">Utilitzeu el teclat per activar i prendre la foto</string>
-  <string name="LabelWebserver">Servidor Web</string>
+  <string name="LabelWebserverAndPipeServer">Comandament a distància</string>
   <string name="LabelUseWebserver">Ús del servidor web </string>
   <string name="LabelFocusAndLiveview">Live view </string>
   <string name="LabelSmallFocusSstep">Pas de focus petit</string>

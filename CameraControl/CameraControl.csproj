@@ -370,6 +370,15 @@
     <Compile Include="windows\ScriptWnd.xaml.cs">
       <DependentUpon>ScriptWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\ScriptWndSingleCommand.xaml.cs">
+      <DependentUpon>ScriptWndSingleCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ScriptWndTclScript.xaml.cs">
+      <DependentUpon>ScriptWndTclScript.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ScriptWndXmlScript.xaml.cs">
+      <DependentUpon>ScriptWndXmlScript.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\SelectorWnd.xaml.cs">
       <DependentUpon>SelectorWnd.xaml</DependentUpon>
     </Compile>
@@ -603,6 +612,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\ScriptWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ScriptWndSingleCommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ScriptWndTclScript.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ScriptWndXmlScript.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

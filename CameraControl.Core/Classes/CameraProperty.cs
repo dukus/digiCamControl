@@ -28,250 +28,248 @@
 
 #region
 
-using System.Net.NetworkInformation;
-using System.Windows;
-using System.Xml.Serialization;
 using CameraControl.Devices.Classes;
 using Newtonsoft.Json;
+using System.Windows;
+using System.Xml.Serialization;
 
 #endregion
 
 namespace CameraControl.Core.Classes
 {
-    public class CameraProperty : BaseFieldClass
-    {
-        private string _serialNumber;
+	public class CameraProperty : BaseFieldClass
+	{
+		private string _serialNumber;
 
-        public string SerialNumber
-        {
-            get { return _serialNumber; }
-            set
-            {
-                _serialNumber = value;
-                NotifyPropertyChanged("SerialNumber");
-            }
-        }
+		public string SerialNumber
+		{
+			get { return _serialNumber; }
+			set
+			{
+				_serialNumber = value;
+				NotifyPropertyChanged("SerialNumber");
+			}
+		}
 
-        private string _deviceName;
+		private string _deviceName;
 
-        public string DeviceName
-        {
-            get { return _deviceName; }
-            set
-            {
-                _deviceName = value;
-                NotifyPropertyChanged("DeviceName");
-            }
-        }
+		public string DeviceName
+		{
+			get { return _deviceName; }
+			set
+			{
+				_deviceName = value;
+				NotifyPropertyChanged("DeviceName");
+			}
+		}
 
-        private string _profileNmae;
+		private string _profileNmae;
 
-        public string PhotoSessionName
-        {
-            get { return _profileNmae; }
-            set
-            {
-                _profileNmae = value;
-                NotifyPropertyChanged("PhotoSessionName");
-            }
-        }
+		[TclScriptIgnore]
+		public string PhotoSessionName
+		{
+			get { return _profileNmae; }
+			set
+			{
+				_profileNmae = value;
+				NotifyPropertyChanged("PhotoSessionName");
+			}
+		}
 
-        private string _defaultPresetName;
+		private string _defaultPresetName;
 
-        public string DefaultPresetName
-        {
-            get { return _defaultPresetName; }
-            set
-            {
-                _defaultPresetName = value;
-                NotifyPropertyChanged("PhotoSessionName");
-            }
-        }
+		public string DefaultPresetName
+		{
+			get { return _defaultPresetName; }
+			set
+			{
+				_defaultPresetName = value;
+				NotifyPropertyChanged("DefaultPresetName");
+			}
+		}
 
-        [XmlIgnore]
-        [JsonIgnore]
-        public PhotoSession PhotoSession { get; set; }
+		private bool _noDownload;
 
-        private bool _noDownload;
+		[TclScriptIgnore]
+		public bool NoDownload
+		{
+			get { return _noDownload; }
+			set
+			{
+				_noDownload = value;
+				NotifyPropertyChanged("NoDownload");
+			}
+		}
 
-        public bool NoDownload
-        {
-            get { return _noDownload; }
-            set
-            {
-                _noDownload = value;
-                NotifyPropertyChanged("NoDownload");
-            }
-        }
+		private int _counterInc;
 
-        private int _counterInc;
+		public int CounterInc
+		{
+			get
+			{
+				if (_counterInc < 1)
+					_counterInc = 1;
+				return _counterInc;
+			}
+			set
+			{
+				_counterInc = value;
+				NotifyPropertyChanged("CounterInc");
+			}
+		}
 
-        public int CounterInc
-        {
-            get
-            {
-                if (_counterInc < 1)
-                    _counterInc = 1;
-                return _counterInc;
-            }
-            set
-            {
-                _counterInc = value;
-                NotifyPropertyChanged("CounterInc");
-            }
-        }
+		private bool _captureInSdRam;
 
-        private bool _captureInSdRam;
+		[TclScriptIgnore]
+		public bool CaptureInSdRam
+		{
+			get { return _captureInSdRam; }
+			set
+			{
+				_captureInSdRam = value;
+				NotifyPropertyChanged("CaptureInSdRam");
+			}
+		}
 
-        public bool CaptureInSdRam
-        {
-            get { return _captureInSdRam; }
-            set
-            {
-                _captureInSdRam = value;
-                NotifyPropertyChanged("CaptureInSdRam");
-            }
-        }
+		private int _counter;
 
-        private int _counter;
+		public int Counter
+		{
+			get { return _counter; }
+			set
+			{
+				_counter = value;
+				NotifyPropertyChanged("Counter");
+			}
+		}
 
-        public int Counter
-        {
-            get { return _counter; }
-            set
-            {
-                _counter = value;
-                NotifyPropertyChanged("Counter");
-            }
-        }
+		private bool _useExternalShutter;
 
-        private bool _useExternalShutter;
+		public bool UseExternalShutter
+		{
+			get { return _useExternalShutter; }
+			set
+			{
+				_useExternalShutter = value;
+				NotifyPropertyChanged("UseExternalShutter");
+			}
+		}
 
-        public bool UseExternalShutter
-        {
-            get { return _useExternalShutter; }
-            set
-            {
-                _useExternalShutter = value;
-                NotifyPropertyChanged("UseExternalShutter");
-            }
-        }
+		private CustomConfig _selectedConfig;
 
-        private CustomConfig _selectedConfig;
+		[XmlIgnore]
+		[JsonIgnore]
+		public CustomConfig SelectedConfig
+		{
+			get
+			{
+				foreach (CustomConfig config in ServiceProvider.ExternalDeviceManager.ExternalShutters)
+				{
+					if (config.Name == SelectedConfigName)
+						_selectedConfig = config;
+				}
+				return _selectedConfig;
+			}
+			set
+			{
+				_selectedConfig = value;
+				SelectedConfigName = _selectedConfig == null ? "" : value.Name;
+				NotifyPropertyChanged("SelectedConfig");
+			}
+		}
 
-        [XmlIgnore]
-        [JsonIgnore]
-        public CustomConfig SelectedConfig
-        {
-            get
-            {
-                foreach (CustomConfig config in ServiceProvider.ExternalDeviceManager.ExternalShutters)
-                {
-                    if (config.Name == SelectedConfigName)
-                        _selectedConfig = config;
-                }
-                return _selectedConfig;
-            }
-            set
-            {
-                _selectedConfig = value;
-                SelectedConfigName = _selectedConfig == null ? "" : value.Name;
-                NotifyPropertyChanged("SelectedConfig");
-            }
-        }
+		private string _selectedConfigName;
 
-        private string _selectedConfigName;
+		public string SelectedConfigName
+		{
+			get { return _selectedConfigName; }
+			set
+			{
+				_selectedConfigName = value;
+				NotifyPropertyChanged("SelectedConfigName");
+			}
+		}
 
-        public string SelectedConfigName
-        {
-            get { return _selectedConfigName; }
-            set
-            {
-                _selectedConfigName = value;
-                NotifyPropertyChanged("SelectedConfigName");
-            }
-        }
+		private LiveviewSettings _liveviewSettings;
+		private int _sortOrder;
+		private WindowCommandItem _keyTrigger;
+		private WindowCommandItem _keyTriggerNoAF;
+		private int _delay;
+		private bool _liveViewInSecMonitor;
+		private bool _saveLiveViewWindow;
 
-        private LiveviewSettings _liveviewSettings;
-        private int _sortOrder;
-        private WindowCommandItem _keyTrigger;
-        private WindowCommandItem _keyTriggerNoAF;
-        private int _delay;
-        private bool _liveViewInSecMonitor;
-        private bool _saveLiveViewWindow;
+		public LiveviewSettings LiveviewSettings
+		{
+			get { return _liveviewSettings; }
+			set
+			{
+				_liveviewSettings = value;
+				NotifyPropertyChanged("LiveviewSettings");
+			}
+		}
 
-        public LiveviewSettings LiveviewSettings
-        {
-            get { return _liveviewSettings; }
-            set
-            {
-                _liveviewSettings = value;
-                NotifyPropertyChanged("LiveviewSettings");
-            }
-        }
+		public int SortOrder
+		{
+			get { return _sortOrder; }
+			set
+			{
+				_sortOrder = value;
+				NotifyPropertyChanged("SortOrder");
+			}
+		}
 
-        public int SortOrder
-        {
-            get { return _sortOrder; }
-            set
-            {
-                _sortOrder = value;
-                NotifyPropertyChanged("SortOrder");
-            }
-        }
+		public int Delay
+		{
+			get { return _delay; }
+			set
+			{
+				_delay = value;
+				NotifyPropertyChanged("Delay");
+			}
+		}
 
-        public int Delay
-        {
-            get { return _delay; }
-            set
-            {
-                _delay = value;
-                NotifyPropertyChanged("Delay");
-            }
-        }
+		public WindowCommandItem KeyTrigger
+		{
+			get { return _keyTrigger; }
+			set
+			{
+				_keyTrigger = value;
+				NotifyPropertyChanged("KeyTrigger");
+			}
+		}
 
-        public WindowCommandItem KeyTrigger
-        {
-            get { return _keyTrigger; }
-            set
-            {
-                _keyTrigger = value;
-                NotifyPropertyChanged("KeyTrigger");
-            }
-        }
+		public WindowCommandItem KeyTriggerNoAF
+		{
+			get { return _keyTriggerNoAF; }
+			set
+			{
+				_keyTriggerNoAF = value;
+				NotifyPropertyChanged("KeyTriggerNoAF");
+			}
+		}
 
-        public WindowCommandItem KeyTriggerNoAF
-        {
-          get { return _keyTriggerNoAF; }
-          set
-          {
-            _keyTriggerNoAF = value;
-            NotifyPropertyChanged("KeyTriggerNoAF");
-          }
-        }
-       
-        public bool SaveLiveViewWindow
-        {
-            get { return _saveLiveViewWindow; }
-            set
-            {
-                _saveLiveViewWindow = value;
-                NotifyPropertyChanged("SaveLiveViewWindow");
-            }
-        }
+		public bool SaveLiveViewWindow
+		{
+			get { return _saveLiveViewWindow; }
+			set
+			{
+				_saveLiveViewWindow = value;
+				NotifyPropertyChanged("SaveLiveViewWindow");
+			}
+		}
 
-        public Rect WindowRect { get; set; }
+		public Rect WindowRect { get; set; }
 
-        public CameraProperty()
-        {
-            NoDownload = false;
-            CaptureInSdRam = true;
-            Counter = 0;
-            LiveviewSettings = new LiveviewSettings();
-            KeyTrigger = new WindowCommandItem();
-            KeyTriggerNoAF = new WindowCommandItem();
-            SaveLiveViewWindow = true;
-            WindowRect = new Rect();
-        }
-    }
+		public CameraProperty ()
+		{
+			NoDownload = false;
+			CaptureInSdRam = true;
+			Counter = 0;
+			LiveviewSettings = new LiveviewSettings();
+			KeyTrigger = new WindowCommandItem();
+			KeyTriggerNoAF = new WindowCommandItem();
+			SaveLiveViewWindow = true;
+			WindowRect = new Rect();
+		}
+	}
 }

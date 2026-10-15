@@ -2505,7 +2505,7 @@ namespace CameraControl.Devices.Nikon
 										{
 											Log.Error("Error getting file name");
 										}
-										Log.Debug("File name" + filename);
+										Log.Debug("File name " + filename);
 										PhotoCapturedEventArgs args = new PhotoCapturedEventArgs
 										{
 											WiaImageItem = null,

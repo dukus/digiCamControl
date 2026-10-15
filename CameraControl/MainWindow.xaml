@@ -207,6 +207,7 @@
                     <MenuItem Header="{T:TranslateExtension LabelPrint}" Command="{Binding SendCommand}" CommandParameter="PrintWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs PrintWnd_Show}"/>
                     <MenuItem Header="{T:TranslateExtension LabelBarcode}" Command="{Binding SendCommand}" CommandParameter="BarcodeWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs BarcodeWnd_Show}"/>
                     <MenuItem Header="{T:TranslateExtension SelectTagsToolTip}" Command="{Binding SendCommand}" CommandParameter="TagSelectorWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs TagSelectorWnd_Show}"/>
+                    <MenuItem Header="Script execution" Command="{Binding SendCommand}" CommandParameter="ScriptWnd_Show" InputGestureText="{myClasess:CommandShortcutExtensioncs ScriptWnd_Show}"/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{T:TranslateExtension LabelEmailPublicWebAddress}" Click="MenuItem_Click" IsEnabled="{Binding Settings.PublicWebserver}"/>
@@ -448,7 +449,7 @@
                                             <Button  ToolTip="{T:TranslateExtension MenuPresetsLoad}" Margin="1" Padding="0" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding Path=SelectPresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
                                                   CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
                                                 <materialDesign:PackIcon Width="20" Height="20" Kind="Upload" />
-                                             </Button>
+                                            </Button>
                                             <Button  ToolTip="{T:TranslateExtension ButtonDeletePreset}" Margin="1" Padding="1" Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding Path=DeletePresetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}}" 
                                                     CommandParameter="{Binding ElementName=PresetListBox, Path=SelectedItem}">
                                                 <materialDesign:PackIcon Width="20" Height="20" Kind="Delete" />

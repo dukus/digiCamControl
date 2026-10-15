@@ -1,324 +1,347 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Eagle._Components.Public;
+﻿using Eagle._Components.Public;
 using Eagle._Interfaces.Public;
+using System;
+using System.Threading.Tasks;
 
 namespace CameraControl.Core.TclScripting
 {
-    public class TclScriptManager : IDisposable
-    {
-        public event OutputEventHandler Output;
-        public event OutputEventHandler Error;
+	public class TclScriptManager : IDisposable
+	{
+		public event OutputEventHandler Output;
+		public event OutputEventHandler Error;
+		public event EventHandler IsBusyChanged;
 
-        private Interpreter _interpreter = null;
 
-        #region Public Constructors
-        public TclScriptManager()
-        {
-        }
-        #endregion
+		private Interpreter _interpreter = null;
+		private DccCommand _dccCommand = null;
 
-        #region Private Interpreter Lifetime Management
-        private ReturnCode Initialize(ref Result error)
-        {
-            if (_interpreter != null) return ReturnCode.Ok;
+		#region Public Constructors
+		public TclScriptManager ()
+		{
+		}
+		#endregion
 
-            Interpreter localInterpreter;
-            Result result; /* REUSED */
-            long token; /* REUSED */
+		#region Private Interpreter Lifetime Management
+		private ReturnCode Initialize (ref Result error)
+		{
+			if (_interpreter != null) return ReturnCode.Ok;
 
-            result = null;
+			Interpreter localInterpreter;
+			Result result; /* REUSED */
+			long token; /* REUSED */
 
-            localInterpreter = Interpreter.Create(ref result);
+			result = null;
 
-            if (localInterpreter == null)
-            {
-                error = result;
-                return ReturnCode.Error;
-            }
+			localInterpreter = Interpreter.Create(ref result);
 
-            token = 0;
-            result = null;
+			if (localInterpreter == null)
+			{
+				error = result;
+				return ReturnCode.Error;
+			}
 
-            if (localInterpreter.AddCommand(new DccCommand(new CommandData(
-                    "dcc", null, null, null, typeof(DccCommand).FullName,
-                    CommandFlags.None, null, 0)), null, ref token,
-                    ref result) != ReturnCode.Ok)
-            {
-                localInterpreter.Dispose();
+			token = 0;
+			result = null;
 
-                error = result;
-                return ReturnCode.Error;
-            }
+			if (localInterpreter.AddCommand(
+					_dccCommand = new DccCommand(
+						new CommandData("dcc", null, null, null, typeof(DccCommand).FullName, CommandFlags.None, null, 0),
+						() =>
+						{
+							Result isCancelled = null;
+							return localInterpreter.IsCanceled(CancelFlags.NoLock | CancelFlags.Global, ref isCancelled) == ReturnCode.Error;
+						}
+					),
+					null,
+					ref token,
+					ref result) != ReturnCode.Ok)
+			{
+				localInterpreter.Dispose();
 
-            token = 0;
-            result = null;
+				error = result;
+				return ReturnCode.Error;
+			}
 
-            if (localInterpreter.AddCommand(new EchoCommand(new CommandData(
-                    "echo", null, null, null, typeof(EchoCommand).FullName,
-                    CommandFlags.None, null, 0)), null, ref token,
-                    ref result) != ReturnCode.Ok)
-            {
-                localInterpreter.Dispose();
+			token = 0;
+			result = null;
 
-                error = result;
-                return ReturnCode.Error;
-            }
+			if (localInterpreter.AddCommand(new EchoCommand(
+				new CommandData(
+						"echo", null, null, null, typeof(EchoCommand).FullName,
+						CommandFlags.None, null, 0
+					), (msg) => c_Output(msg, true)),
+					null, ref token, ref result) != ReturnCode.Ok)
+			{
+				localInterpreter.Dispose();
 
-            _interpreter = localInterpreter;
-            return ReturnCode.Ok;
-        }
-        #endregion
+				error = result;
+				return ReturnCode.Error;
+			}
 
-        public int ExecuteFile(string file)
-        {
-            CheckDisposed();
+			_interpreter = localInterpreter;
+			return ReturnCode.Ok;
+		}
+		#endregion
 
-            string commands = null;
-            Result error = null;
+		private bool _isBusy;
 
-            if (Engine.ReadScriptFile(
-                    _interpreter, file, ref commands,
-                    ref error) == ReturnCode.Ok)
-            {
-                return Execute(commands);
-            }
-            else
-            {
-                c_Error(Utility.FormatResult(
-                    ReturnCode.Error, error), true);
+		public bool IsBusy
+		{
+			get => _isBusy;
+			private set
+			{
+				if (_isBusy != value)
+				{
+					_isBusy = value;
+					IsBusyChanged?.Invoke(this, EventArgs.Empty);
+				}
+			}
+		}
 
-                return (int)ExitCode.Failure;
-            }
-        }
+		public int ExecuteFile (string file)
+		{
+			if (IsBusy)
+			{
+				return (int)ExitCode.Failure;
+			}
+			CheckDisposed();
 
-        public int Execute(string commands)
-        {
-            CheckDisposed();
+			string commands = null;
+			Result error = null;
 
-            return Execute(commands, true);
-        }
+			if (Engine.ReadScriptFile(
+					_interpreter, file, ref commands,
+					ref error) == ReturnCode.Ok)
+			{
+				return Execute(commands);
+			}
+			else
+			{
+				c_Error(Utility.FormatResult(
+					ReturnCode.Error, error), true);
 
-        public int Execute(string commands, bool asynchronous)
-        {
-            CheckDisposed();
+				return (int)ExitCode.Failure;
+			}
+		}
 
-            if (asynchronous)
-            {
-                Task.Factory.StartNew(() => ExecuteThread(commands));
-                return 0;
-            }
-            else
-            {
-                return ExecuteThread(commands);
-            }
-        }
+		public int Execute (string commands)
+		{
+			if (IsBusy)
+			{
+				return (int)ExitCode.Failure;
+			}
+			CheckDisposed();
 
-        #region Save / Restore Console Output
-        private void BeginRedirectedConsoleOutput(
-            out TextWriter savedOutput
-            )
-        {
-            savedOutput = Console.Out;
+			return Execute(commands, true);
+		}
 
-            ConsoleRedirect redirector = new ConsoleRedirect(c_Output);
-            Console.SetOut(redirector);
-        }
+		public int Execute (string commands, bool asynchronous)
+		{
+			if (IsBusy)
+			{
+				return (int)ExitCode.Failure;
+			}
+			CheckDisposed();
 
-        private void EndRedirectedConsoleOutput(
-            ref TextWriter savedOutput
-            )
-        {
-            ConsoleRedirect redirector = Console.Out as ConsoleRedirect;
-            Console.SetOut(savedOutput);
+			IsBusy = true;
+			if (asynchronous)
+			{
+				Task.Factory.StartNew(() => ExecuteThread(commands));
+				return 0;
+			}
+			else
+			{
+				return ExecuteThread(commands);
+			}
+		}
 
-            if (redirector != null)
-            {
-                redirector.Dispose();
-                redirector = null;
-            }
+		#region Private Script Evaluation Helpers
+		private bool HostWriteResult (
+			ReturnCode code,
+			Result result,
+			int errorLine,
+			bool newLine
+			)
+		{
+			if (_interpreter == null)
+			{
+				c_Error(Utility.FormatResult(
+					code, result, errorLine), newLine);
 
-            savedOutput = null;
-        }
-        #endregion
+				return false;
+			}
 
-        #region Private Script Evaluation Helpers
-        private bool HostWriteResult(
-            ReturnCode code,
-            Result result,
-            int errorLine,
-            bool newLine
-            )
-        {
-            if (_interpreter == null)
-            {
-                c_Error(Utility.FormatResult(
-                    code, result, errorLine), newLine);
+			IDebugHost host = _interpreter.Host;
 
-                return false;
-            }
+			if (host == null)
+			{
+				c_Error(Utility.FormatResult(
+					code, result, errorLine), newLine);
 
-            IDebugHost host = _interpreter.Host;
+				return false;
+			}
 
-            if (host == null)
-            {
-                c_Error(Utility.FormatResult(
-                    code, result, errorLine), newLine);
+			return host.WriteResult(
+				code, result, errorLine, newLine);
+		}
 
-                return false;
-            }
+		private ExitCode EvaluateScript (
+			string commands
+			)
+		{
+			if (_interpreter == null)
+			{
+				c_Error(Utility.FormatResult(ReturnCode.Error,
+					"cannot evaluate commands, no interpreter"), true);
 
-            return host.WriteResult(
-                code, result, errorLine, newLine);
-        }
+				return ExitCode.Failure;
+			}
 
-        private ExitCode EvaluateScript(
-            string commands
-            )
-        {
-            if (_interpreter == null)
-            {
-                c_Error(Utility.FormatResult(ReturnCode.Error,
-                    "cannot evaluate commands, no interpreter"), true);
+			try
+			{
+				ReturnCode code;
+				Result result = null;
+				int errorLine = 0;
 
-                return ExitCode.Failure;
-            }
+				code = _interpreter.EvaluateScript(
+					commands, ref result, ref errorLine);
 
-            ReturnCode code;
-            Result result = null;
-            int errorLine = 0;
+				HostWriteResult(code, result, errorLine, true);
 
-            code = _interpreter.EvaluateScript(
-                commands, ref result, ref errorLine);
+				return _interpreter.ExitCode;
+			}
+			finally
+			{
+				_dccCommand.ScriptExecutionCompleted();
+			}
+		}
 
-            HostWriteResult(code, result, errorLine, true);
+		private int ExecuteThread (string commands)
+		{
+			var redirected = ThreadConsoleRedirect.Start(c_Output);
 
-            return _interpreter.ExitCode;
-        }
+			try
+			{
+				ExitCode exitCode;
+				ReturnCode code;
+				Result result = null;
 
-        private int ExecuteThread(string commands)
-        {
-            TextWriter savedOutput;
+				code = Initialize(ref result);
 
-            BeginRedirectedConsoleOutput(out savedOutput);
+				if (code == ReturnCode.Ok)
+				{
+					exitCode = EvaluateScript(commands);
 
-            try
-            {
-                ExitCode exitCode;
-                ReturnCode code;
-                Result result = null;
+					if (exitCode != ExitCode.Success)
+					{
+						c_Error(Utility.FormatResult(
+							ReturnCode.Error, result), true);
+					}
+				}
+				else
+				{
+					c_Error(Utility.FormatResult(
+						code, result), true);
 
-                code = Initialize(ref result);
+					exitCode = ExitCode.Failure;
+				}
 
-                if (code == ReturnCode.Ok)
-                {
-                    exitCode = EvaluateScript(commands);
+				return (int)exitCode;
+			}
+			finally
+			{
+				ThreadConsoleRedirect.Stop(redirected);
+				IsBusy = false;
+			}
+		}
+		#endregion
 
-                    if (exitCode != ExitCode.Success)
-                    {
-                        c_Error(Utility.FormatResult(
-                            ReturnCode.Error, result), true);
-                    }
-                }
-                else
-                {
-                    c_Error(Utility.FormatResult(
-                        code, result), true);
+		public void Stop ()
+		{
+			if (!IsBusy)
+			{
+				return;
+			}
+			CheckDisposed();
 
-                    exitCode = ExitCode.Failure;
-                }
+			if (_interpreter != null)
+			{
+				c_Output("About to stop script execution", false);
+				Result result = null;
 
-                return (int)exitCode;
-            }
-            finally
-            {
-                EndRedirectedConsoleOutput(ref savedOutput);
-            }
-        }
-        #endregion
+				if (_interpreter.CancelAnyEvaluate(
+						null, CancelFlags.UnwindAndNotify,
+						ref result) != ReturnCode.Ok)
+				{
+					c_Error(Utility.FormatResult(
+						ReturnCode.Error, result), true);
+				}
+			}
+		}
 
-        public void Stop()
-        {
-            CheckDisposed();
+		#region Event Wrappers
+		private void c_Output (string message, bool newline)
+		{
+			if (Output != null)
+				Output(message, newline);
+		}
 
-            if (_interpreter != null)
-            {
-                Result result = null;
+		private void c_Error (string message, bool newline)
+		{
+			if (Error != null)
+				Error(message, newline);
+		}
+		#endregion
 
-                if (_interpreter.CancelAnyEvaluate(
-                        null, CancelFlags.UnwindAndNotify,
-                        ref result) != ReturnCode.Ok)
-                {
-                    c_Error(Utility.FormatResult(
-                        ReturnCode.Error, result), true);
-                }
-            }
-        }
+		#region IDisposable Members
+		public void Dispose ()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		#endregion
 
-        #region Event Wrappers
-        private void c_Output(string message, bool newline)
-        {
-            if (Output != null)
-                Output(message, newline);
-        }
+		#region IDisposable "Pattern" Members
+		private bool disposed;
+		private void CheckDisposed () /* throw */
+		{
+			if (disposed && Engine.IsThrowOnDisposed(_interpreter, false))
+			{
+				throw new ObjectDisposedException(
+					typeof(TclScriptManager).Name);
+			}
+		}
 
-        private void c_Error(string message, bool newline)
-        {
-            if (Error != null)
-                Error(message, newline);
-        }
-        #endregion
+		protected virtual void Dispose (
+			bool disposing
+			)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+					////////////////////////////////////
+					// dispose managed resources here...
+					////////////////////////////////////
 
-        #region IDisposable Members
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+					_interpreter.Dispose();
+					_interpreter = null;
+				}
 
-        #region IDisposable "Pattern" Members
-        private bool disposed;
-        private void CheckDisposed() /* throw */
-        {
-            if (disposed && Engine.IsThrowOnDisposed(_interpreter, false))
-            {
-                throw new ObjectDisposedException(
-                    typeof(TclScriptManager).Name);
-            }
-        }
+				//////////////////////////////////////
+				// release unmanaged resources here...
+				//////////////////////////////////////
 
-        protected virtual void Dispose(
-            bool disposing
-            )
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    ////////////////////////////////////
-                    // dispose managed resources here...
-                    ////////////////////////////////////
+				disposed = true;
+			}
+		}
+		#endregion
 
-                    _interpreter.Dispose();
-                    _interpreter = null;
-                }
-
-                //////////////////////////////////////
-                // release unmanaged resources here...
-                //////////////////////////////////////
-
-                disposed = true;
-            }
-        }
-        #endregion
-
-        #region Destructor
-        ~TclScriptManager()
-        {
-            Dispose(false);
-        }
-        #endregion
-    }
+		#region Destructor
+		~TclScriptManager ()
+		{
+			Dispose(false);
+		}
+		#endregion
+	}
 }

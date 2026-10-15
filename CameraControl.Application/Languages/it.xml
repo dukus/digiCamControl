@@ -127,7 +127,7 @@
   <string name="LabelFullscrenBack">Sfondo pieno schermo</string>
   <string name="LabelTriggers">Inneschi</string>
   <string name="LabelUseKeybordToTrigger">Usa la tastiera come innesco di scatto</string>
-  <string name="LabelWebserver">Server web</string>
+  <string name="LabelWebserverAndPipeServer">Telecomando</string>
   <string name="LabelUseWebserver">Usa il server web</string>
   <string name="LabelFocusAndLiveview">Live View</string>
   <string name="LabelSmallFocusSstep">Messa a fuoco ad incrementi piccoli</string>

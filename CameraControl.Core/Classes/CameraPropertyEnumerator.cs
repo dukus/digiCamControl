@@ -35,35 +35,38 @@ using CameraControl.Devices.Classes;
 
 namespace CameraControl.Core.Classes
 {
-    public class CameraPropertyEnumerator
-    {
-        public AsyncObservableCollection<CameraProperty> Items { get; set; }
+	public class CameraPropertyEnumerator
+	{
+		public AsyncObservableCollection<CameraProperty> Items { get; set; }
 
-        public CameraPropertyEnumerator()
-        {
-            Items = new AsyncObservableCollection<CameraProperty>();
-        }
+		public CameraPropertyEnumerator ()
+		{
+			Items = new AsyncObservableCollection<CameraProperty>();
+		}
 
-        public CameraProperty Get(ICameraDevice device)
-        {
-            if (device == null)
-                return new CameraProperty();
-            // there is a threading error, but too lazy to find it. 
-            try
-            {
-                foreach (CameraProperty cameraProperty in Items)
-                {
-                    if (cameraProperty.SerialNumber == device.SerialNumber)
-                        return cameraProperty;
-                }
-            }
-            catch (System.Exception ex)
-            {
-                Log.Error("CameraProperty error", ex);
-            }
-            var c = new CameraProperty() {SerialNumber = device.SerialNumber, DeviceName = device.DisplayName};
-            Items.Add(c);
-            return c;
-        }
-    }
+		public CameraProperty Get (ICameraDevice device)
+		{
+			if (device == null)
+				return new CameraProperty();
+			lock (Items)
+			{
+				// there is (still?) a threading error, but too lazy to find it. 
+				try
+				{
+					foreach (CameraProperty cameraProperty in Items)
+					{
+						if (cameraProperty.SerialNumber == device.SerialNumber)
+							return cameraProperty;
+					}
+				}
+				catch (System.Exception ex)
+				{
+					Log.Error("CameraProperty error", ex);
+				}
+				var c = new CameraProperty() { SerialNumber = device.SerialNumber, DeviceName = device.DisplayName };
+				Items.Add(c);
+				return c;
+			}
+		}
+	}
 }

@@ -125,7 +125,7 @@ une capture en plein écran</string>
   <string name="LabelFullscrenBack">Arrière plan en plein écran</string>
   <string name="LabelTriggers">Déclencheur</string>
   <string name="LabelUseKeybordToTrigger">Utiliser le clavier pour déclencher</string>
-  <string name="LabelWebserver">Serveur Web</string>
+  <string name="LabelWebserverAndPipeServer">Télécommande</string>
   <string name="LabelUseWebserver">Utiliser un serveur Web</string>
   <string name="LabelFocusAndLiveview">Mise au point Live View</string>
   <string name="LabelSmallFocusSstep">Petit incrément de mise au point</string>

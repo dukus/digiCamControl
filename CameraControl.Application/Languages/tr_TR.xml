@@ -126,7 +126,7 @@
   <string name="LabelFullscrenBack">Tam ekran penceresi arkaplanı</string>
   <string name="LabelTriggers">Deklanşörler</string>
   <string name="LabelUseKeybordToTrigger">Deklanşör olarak klavyeyi kullan</string>
-  <string name="LabelWebserver">Web Sunucusu</string>
+  <string name="LabelWebserverAndPipeServer">Uzaktan kumanda</string>
   <string name="LabelUseWebserver">Web Sunucusu kullan</string>
   <string name="LabelFocusAndLiveview">Ekran</string>
   <string name="LabelSmallFocusSstep">Küçük odaklama aşaması</string>
