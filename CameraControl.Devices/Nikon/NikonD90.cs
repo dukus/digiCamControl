@@ -28,106 +28,135 @@
 
 #region
 
-using System;
-using System.IO;
 using CameraControl.Devices.Classes;
 using PortableDeviceLib;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD90 : NikonBase
-    {
-        public override bool Init(DeviceDescriptor deviceDescriptor)
-        {
-            bool res = base.Init(deviceDescriptor);
-            Capabilities.Clear();
-            Capabilities.Add(CapabilityEnum.LiveView);
-            Capabilities.Add(CapabilityEnum.CaptureInRam);
-            Capabilities.Add(CapabilityEnum.CaptureNoAf);
-            return res;
-        }
+	public class NikonD90 : NikonBase
+	{
+		public override bool Init (DeviceDescriptor deviceDescriptor)
+		{
+			bool res = base.Init(deviceDescriptor);
+			Capabilities.Clear();
+			Capabilities.Add(CapabilityEnum.LiveView);
+			Capabilities.Add(CapabilityEnum.CaptureInRam);
+			Capabilities.Add(CapabilityEnum.CaptureNoAf);
+			return res;
+		}
 
-        public override LiveViewData GetLiveViewImage()
-        {
-            LiveViewData viewData = new LiveViewData();
-            viewData.HaveFocusData = true;
+		protected override bool SupportsAEBracketing
+			=> true;
 
-            const int headerSize = 128;
+		protected override IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+				yield return (4, "1+1/3 EV");
+				yield return (5, "1+1/2 EV");
+				yield return (6, "1+2/3 EV");
+				yield return (7, "2 EV");
+			}
+		}
 
-            var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
-            if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
-            {
-                _timer.Start();
-                viewData.IsLiveViewRunning = false;
-                viewData.ImageData = null;
-                return viewData;
-            }
-            if (result.Data == null || result.Data.Length <= headerSize)
-                return null;
-            int cbBytesRead = result.Data.Length;
-            GetAdditionalLiveViewData(viewData, result.Data);
+		protected override IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				yield return (0, 2, "-1..0");
+				yield return (1, 2, "0..+1");
+				yield return (2, 3, "-1..+1");
+			}
+		}
 
-            MemoryStream copy = new MemoryStream(cbBytesRead - headerSize);
-            copy.Write(result.Data, headerSize, cbBytesRead - headerSize);
-            copy.Close();
-            viewData.ImageData = copy.GetBuffer();
 
-            return viewData;
-        }
+		public override LiveViewData GetLiveViewImage ()
+		{
+			LiveViewData viewData = new LiveViewData();
+			viewData.HaveFocusData = true;
 
-        /// <summary>
-        /// Take picture with no autofocus
-        /// If live view runnig the live view is stoped after done restarted
-        /// </summary>
-        public override void CapturePhotoNoAf()
-        {
-            lock (Locker)
-            {
-                try
-                {
-                    IsBusy = true;
-                    MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus);
-                    ErrorCodes.GetException(response.ErrorCode);
-                    // test if live view is on 
-                    if (response.Data != null && response.Data.Length > 0 && response.Data[0] > 0)
-                    {
-                        if (CaptureInSdRam)
-                        {
-                            DeviceReady();
-                            ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF));
-                            return;
-                        }
-                        StopLiveView();
-                    }
-                    // the focus mode can be sett only in host mode
-                    LockCamera();
-                    byte oldval = 0;
-                    var val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect);
-                    if (val.Data != null && val.Data.Length > 0)
-                        oldval = val.Data[0];
+			const int headerSize = 128;
 
-                    SetProperty(CONST_CMD_SetDevicePropValue, new[] {(byte) 4}, CONST_PROP_AFModeSelect);
+			var result = StillImageDevice.ExecuteReadData(CONST_CMD_GetLiveViewImage);
+			if (result.ErrorCode == ErrorCodes.MTP_Not_LiveView)
+			{
+				_timer.Start();
+				viewData.IsLiveViewRunning = false;
+				viewData.ImageData = null;
+				return viewData;
+			}
+			if (result.Data == null || result.Data.Length <= headerSize)
+				return null;
+			int cbBytesRead = result.Data.Length;
+			GetAdditionalLiveViewData(viewData, result.Data);
 
-                    ErrorCodes.GetException(CaptureInSdRam
-                                                ? ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF)
-                                                : ExecuteWithNoData(CONST_CMD_InitiateCapture));
+			MemoryStream copy = new MemoryStream(cbBytesRead - headerSize);
+			copy.Write(result.Data, headerSize, cbBytesRead - headerSize);
+			copy.Close();
+			viewData.ImageData = copy.GetBuffer();
 
-                    if (val.Data != null && val.Data.Length > 0)
-                        SetProperty(CONST_CMD_SetDevicePropValue, new[] {oldval}, CONST_PROP_AFModeSelect);
+			return viewData;
+		}
 
-                    UnLockCamera();
-                }
-                catch (Exception)
-                {
-                    IsBusy = false;
-                    throw;
-                }
+		/// <summary>
+		/// Take picture with no autofocus If live view runnig the live view is stoped after done restarted
+		/// </summary>
+		public override void CapturePhotoNoAf ()
+		{
+			lock (Locker)
+			{
+				try
+				{
+					IsBusy = true;
+					MTPDataResponse response = ExecuteReadDataEx(CONST_CMD_GetDevicePropValue, CONST_PROP_LiveViewStatus);
+					ErrorCodes.GetException(response.ErrorCode);
+					// test if live view is on 
+					if (response.Data != null && response.Data.Length > 0 && response.Data[0] > 0)
+					{
+						if (CaptureInSdRam)
+						{
+							DeviceReady();
+							ErrorCodes.GetException(ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF));
+							return;
+						}
+						StopLiveView();
+					}
+					// the focus mode can be sett only in host mode
+					LockCamera();
+					byte oldval = 0;
+					var val = StillImageDevice.ExecuteReadData(CONST_CMD_GetDevicePropValue, CONST_PROP_AFModeSelect);
+					if (val.Data != null && val.Data.Length > 0)
+						oldval = val.Data[0];
 
-                //if (live != null && live.Length > 0 && live[0] == 1)
-                //  StartLiveView();
-            }
-        }
-    }
+					SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)4 }, CONST_PROP_AFModeSelect);
+
+					ErrorCodes.GetException(CaptureInSdRam
+												? ExecuteWithNoData(CONST_CMD_InitiateCaptureRecInSdram, 0xFFFFFFFF)
+												: ExecuteWithNoData(CONST_CMD_InitiateCapture));
+
+					if (val.Data != null && val.Data.Length > 0)
+						SetProperty(CONST_CMD_SetDevicePropValue, new[] { oldval }, CONST_PROP_AFModeSelect);
+
+					UnLockCamera();
+				}
+				catch (Exception)
+				{
+					IsBusy = false;
+					throw;
+				}
+
+				//if (live != null && live.Length > 0 && live[0] == 1)
+				//  StartLiveView();
+			}
+		}
+	}
 }

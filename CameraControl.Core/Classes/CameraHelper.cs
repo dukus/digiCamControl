@@ -284,5 +284,23 @@ namespace CameraControl.Core.Classes
 			res.AddRange(cameraDevice.AdvancedProperties);
 			return res;
 		}
+
+		public static DateTime SyncDateAndTime (ICameraDevice camera, bool useUtc)
+		{
+			var now = useUtc
+					? DateTime.UtcNow
+					: DateTime.Now;
+			if (now.Millisecond > 0)
+			{
+				Thread.Sleep(1000 - now.Millisecond);
+				now = useUtc
+					? DateTime.UtcNow
+					: DateTime.Now;
+			}
+			camera.DateTime = now;
+			return useUtc
+					? DateTime.UtcNow
+					: DateTime.Now;
+		}
 	}
 }

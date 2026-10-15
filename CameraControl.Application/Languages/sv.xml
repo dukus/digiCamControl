@@ -350,6 +350,7 @@ Vill du fortsätta?
   <string name="LabelSendTheLogFile">Skicka logfilen</string>
   <string name="LabelAskSendLogFile">Vill du skicka logfilen till utvecklarna?</string>
   <string name="LabelSyncCameraDate">Synkronisera kamerans tid och datum vid anslutning</string>
+  <string name="LabelSyncCameraDateUtc">UTC</string>
   <string name="LabelShowThumbUpDown">Visa knappar för tumme upp/ner</string>
   <string name="LabelSend">Skicka</string>
   <string name="LabelFullscreen">Helskärm</string>

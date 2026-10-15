@@ -733,6 +733,18 @@ namespace CameraControl.Core.Classes
 			}
 		}
 
+		private bool _syncCameraDateTimeUtc;
+
+		public bool SyncCameraDateTimeUtc
+		{
+			get { return _syncCameraDateTimeUtc; }
+			set
+			{
+				_syncCameraDateTimeUtc = value;
+				NotifyPropertyChanged("SyncCameraDateTimeUtc");
+			}
+		}
+
 		private bool _showThumbUpDown;
 
 		public bool ShowThumbUpDown
@@ -1120,6 +1132,7 @@ namespace CameraControl.Core.Classes
 
 			AddFakeCamera = false;
 			SyncCameraDateTime = false;
+			SyncCameraDateTimeUtc = false;
 			ShowThumbUpDown = false;
 			AutoPreviewJpgOnly = false;
 			ClientId = Guid.NewGuid().ToString();

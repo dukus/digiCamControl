@@ -368,7 +368,10 @@
                             <CheckBox IsChecked="{Binding ShowUntranslatedLabelId}" Margin="4" Content="{T:TranslateExtension LabelShowUnTranslatedStringIds}"/>
                             <CheckBox IsChecked="{Binding DisableNativeDrivers}" Margin="4" Content="{T:TranslateExtension LabelDisableDriver}" ToolTip="This option disable special handig of some cameras. Use this if you experience some problem" />
                             <CheckBox IsChecked="{Binding AddFakeCamera}" Margin="4" Content="{T:TranslateExtension LabelAddFakeCamera}"/>
-                            <CheckBox IsChecked="{Binding SyncCameraDateTime}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelSyncCameraDate}" />
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                <CheckBox IsChecked="{Binding SyncCameraDateTime}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelSyncCameraDate}" />
+                                <CheckBox IsChecked="{Binding SyncCameraDateTimeUtc}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelSyncCameraDateUtc}" />
+                            </StackPanel>
                             <CheckBox IsChecked="{Binding LoadThumbsDownload}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelLoadThumbDownload}"/>
                             <CheckBox IsChecked="{Binding SendUsageStatistics}" Margin="4" Content="{T:TranslateExtension LabelSendUsage}"/>
                             <CheckBox IsChecked="{Binding LoadCanonTransferMode}" Margin="4" Content="{T:TranslationExtensionWithProjectSuffix LabelLoadCanonTransferMode}"/>

@@ -29,38 +29,75 @@
 #region
 
 using CameraControl.Devices.Classes;
+using System.Collections.Generic;
+
 
 #endregion
 
 namespace CameraControl.Devices.Nikon
 {
-    public class NikonD5100 : NikonBase
-    {
-        public override bool Init(DeviceDescriptor deviceDescriptor)
-        {
-            bool res = base.Init(deviceDescriptor);
-            Capabilities.Clear();
-            Capabilities.Add(CapabilityEnum.LiveView);
-            Capabilities.Add(CapabilityEnum.RecordMovie);
-            Capabilities.Add(CapabilityEnum.CaptureInRam);
-            Capabilities.Add(CapabilityEnum.CaptureNoAf);
-            //Capabilities.Add(CapabilityEnum.Bulb);
-            return res;
-        }
+	public class NikonD5100 : NikonBase
+	{
+		public override bool Init (DeviceDescriptor deviceDescriptor)
+		{
+			bool res = base.Init(deviceDescriptor);
+			Capabilities.Clear();
+			Capabilities.Add(CapabilityEnum.LiveView);
+			Capabilities.Add(CapabilityEnum.RecordMovie);
+			Capabilities.Add(CapabilityEnum.CaptureInRam);
+			Capabilities.Add(CapabilityEnum.CaptureNoAf);
+			//Capabilities.Add(CapabilityEnum.Bulb);
+			return res;
+		}
 
-        //public override void StartLiveView()
-        //{
-        //  //SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)1 }, CONST_PROP_RecordingMedia, -1);
-        //  //DeviceReady();
-        //  base.StartLiveView();
-        //}
+		protected override bool SupportsAEBracketing
+			=> true;
 
-        //public override void StopLiveView()
-        //{
-        //  base.StopLiveView();
-        //  DeviceReady();
-        //  //SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)0 }, CONST_PROP_RecordingMedia, -1);
-        //  DeviceReady();
-        //}
-    }
+		protected override IEnumerable<(long, string)> SupportedExposureEVSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+			}
+		}
+
+		protected override IEnumerable<(long, string)> SupportedAEBracketingSteps
+		{
+			get
+			{
+				yield return (0, "1/3 EV");
+				yield return (1, "1/2 EV");
+				yield return (2, "2/3 EV");
+				yield return (3, "1 EV");
+				yield return (4, "1+1/3 EV");
+				yield return (5, "1+1/2 EV");
+				yield return (6, "1+2/3 EV");
+				yield return (7, "2 EV");
+			}
+		}
+
+		protected override IEnumerable<(long code, int count, string range)> SupportedAEBracketingPatterns
+		{
+			get
+			{
+				yield return (2, 3, "-1..+1");
+			}
+		}
+
+		//public override void StartLiveView()
+		//{
+		//  //SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)1 }, CONST_PROP_RecordingMedia, -1);
+		//  //DeviceReady();
+		//  base.StartLiveView();
+		//}
+
+		//public override void StopLiveView()
+		//{
+		//  base.StopLiveView();
+		//  DeviceReady();
+		//  //SetProperty(CONST_CMD_SetDevicePropValue, new[] { (byte)0 }, CONST_PROP_RecordingMedia, -1);
+		//  DeviceReady();
+		//}
+	}
 }

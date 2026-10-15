@@ -398,6 +398,7 @@ e la scheda di memoria non è inserita. Disabilitata senza una scheda di memoria
   <string name="LabelSendTheLogFile">Invia il file di registro degli eventi</string>
   <string name="LabelAskSendLogFile">Inviare il file di registro degli eventi agli sviluppatori?</string>
   <string name="LabelSyncCameraDate">Sincronizza data/ora fotocamera alla connessione</string>
+  <string name="LabelSyncCameraDateUtc">UTC</string>
   <string name="LabelShowThumbUpDown">Mostra i pulsanti di pollice su/giù</string>
   <string name="LabelSend">Invia</string>
   <string name="LabelLogMessage">Messaggio agli sviluppatori di digiCamControl</string>

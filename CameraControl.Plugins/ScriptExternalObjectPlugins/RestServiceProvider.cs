@@ -48,7 +48,8 @@ namespace CameraControl.Plugins.ScriptExternalObjectPlugins
 		{
 			new ScriptExternalObjectCreateParameter ("URL", ScriptExternalObjectCreateParameter.ValueType.String)
 			{
-				Description = "The URL of the web service, e.g., 'http://localhost:42042/labcontrol' or 'https://service.io/service/dcc/'."
+				Description = "The URL of the web service, e.g., 'http://localhost:42042/labcontrol' or 'https://service.io/service/dcc/'.",
+				IsConstant = false
 			},
 			ScriptExternalObjectCreateParameter.DelayActivation
 		};
