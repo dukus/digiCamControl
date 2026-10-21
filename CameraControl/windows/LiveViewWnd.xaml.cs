@@ -253,9 +253,10 @@ namespace CameraControl.windows
                     break;
                 case WindowsCmdConsts.LiveViewWnd_Message:
                     {
-                        Dispatcher.Invoke(new Action(delegate
+                        // async: the caller may hold LiveViewManager's lock (deadlock at the end of focus stacking)
+                        Dispatcher.BeginInvoke(new Action(delegate
                         {
-                            MessageBox.Show((string)param);
+                            MessageBox.Show(this, (string)param);
                         }));
                     }
                     break;
