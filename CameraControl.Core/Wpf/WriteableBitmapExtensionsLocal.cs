@@ -11,23 +11,31 @@ namespace CameraControl.Core.Wpf
         {
             if ((int)color.A == 0)
                 return;
+            if (source.Format.BitsPerPixel != 32)
+                source = BitmapFactory.ConvertToPbgra32Format(source);
             bool flag1 = source.Format == PixelFormats.Pbgra32 || source.Format == PixelFormats.Prgba64 || source.Format == PixelFormats.Prgba128Float;
             int num1 = (int)destRect.Width;
             int num2 = (int)destRect.Height;
-            using (BitmapContext bitmapContext1 = source.GetBitmapContext(ReadWriteMode.ReadWrite))
+            // Read the source pixels with CopyPixels instead of a BitmapContext. Since WriteableBitmapEx 1.6.7,
+            // BitmapContext calls WriteableBitmap.Lock() even in ReadOnly mode, which throws for frozen bitmaps
+            // (the live view overlay image is frozen), so the overlay was never blended.
+            int[] sourcePixels = new int[source.PixelWidth * source.PixelHeight];
+            if (sourcePixels.Length == 0)
+                return;
+            source.CopyPixels(sourcePixels, source.PixelWidth * 4, 0);
+            fixed (int* pixels1 = sourcePixels)
             {
                 using (BitmapContext bitmapContext2 = bmp.GetBitmapContext())
                 {
-                    int width1 = bitmapContext1.Width;
+                    int width1 = source.PixelWidth;
                     int width2 = bitmapContext2.Width;
                     int height = bitmapContext2.Height;
                     Rect rect = new Rect(0.0, 0.0, (double)width2, (double)height);
                     rect.Intersect(destRect);
                     if (rect.IsEmpty)
                         return;
-                    int* pixels1 = bitmapContext1.Pixels;
                     int* pixels2 = bitmapContext2.Pixels;
-                    int length = bitmapContext1.Length;
+                    int length = sourcePixels.Length;
                     int num3 = (int)destRect.X;
                     int num4 = (int)destRect.Y;
                     int num5 = 0;
@@ -67,7 +75,7 @@ namespace CameraControl.Core.Wpf
                                     num29 = num13;
                                 if (num29 > num1)
                                     num29 = num1;
-                                BitmapContext.BlockCopy(bitmapContext1, (num25 + num26) * 4, bitmapContext2, (index2 + num26) * 4, num29 * 4);
+                                BitmapContext.BlockCopy(sourcePixels, (num25 + num26) * 4, bitmapContext2, (index2 + num26) * 4, num29 * 4);
                             }
                             else
                             {
